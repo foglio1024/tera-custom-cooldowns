@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Gothos
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Tera.Game.Messages
+using TCC.TeraCommon.Game.Services;
+
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class SpawnNpcServerMessage : ParsedMessage
     {

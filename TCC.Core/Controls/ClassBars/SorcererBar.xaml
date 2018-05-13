@@ -1,21 +1,18 @@
-﻿<UserControl x:Class="TCC.Controls.SorcererBar"
+﻿<UserControl x:Class="TCC.Controls.ClassBars.SorcererBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" >
-    <UserControl.DataContext>
-        <viewModels:SorcererBarManager/>
-    </UserControl.DataContext>
-    <Grid Width="Auto" Margin="10" Name="root">
+             mc:Ignorable="d" d:DataContext="{d:DesignData SorcererBarManager}">
+    <Grid Width="Auto" Margin="10" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     CornerRadius="50"
                     Margin="-4"
                     VerticalAlignment="Stretch"/>
-            <local:BuffCooldownControl DataContext="{Binding Instance.ManaBoost}" Margin="-20" Padding="20"/>
+            <local:BuffCooldownControl DataContext="{Binding ManaBoost}" Margin="-20" Padding="20"/>
 
         </Grid>
     </Grid>

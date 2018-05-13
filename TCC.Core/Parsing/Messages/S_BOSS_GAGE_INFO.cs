@@ -1,14 +1,14 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_BOSS_GAGE_INFO : ParsedMessage
     {
-        ulong id, targetId;
-        int templateId, huntingZoneId, unk1;
-        float hpDiff, currHp, maxHp;
-        byte enrage, unk3;
+        private ulong id, targetId;
+        private int templateId, huntingZoneId;//, unk1;
+        private float /*hpDiff,*/ currHp, maxHp;
+        private byte enrage/*, unk3*/;
 
         public ulong EntityId { get => id; } 
         public int TemplateId { get => templateId; }
@@ -40,7 +40,6 @@ namespace TCC.Parsing.Messages
             //    maxHp = reader.ReadSingle();
             //}
 
-            //System.Console.WriteLine("[S_BOSS_GAGE_INFO] id:{0} name:{1}", EntityId, MonsterDatabase.GetName((uint)npc, (uint)type));
             //unk3 = reader.ReadByte();
         }
     }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Server;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     public class PlayerTracker : IEnumerable<Player>
     {
@@ -133,7 +134,7 @@ namespace Tera.Game
 
         public List<UserEntity> PartyList()
         {
-            List<UserEntity> list = new List<UserEntity>();
+            var list = new List<UserEntity>();
             _currentParty.ForEach(x =>
                 {
                     Player player;

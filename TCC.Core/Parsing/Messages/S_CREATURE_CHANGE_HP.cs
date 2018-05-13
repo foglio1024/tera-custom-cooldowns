@@ -1,14 +1,14 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing.Messages
 {
     public class S_CREATURE_CHANGE_HP : ParsedMessage
     {
-        long currentHP, maxHP, diff;
-        uint type;
-        ulong target, source;
-        byte crit;
+        private long currentHP, maxHP, diff;
+        private uint type;
+        private ulong target, source;
+        private byte crit;
 
         public long CurrentHP { get => currentHP; }
         public long MaxHP { get => maxHP; }

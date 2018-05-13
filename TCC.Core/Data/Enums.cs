@@ -1,4 +1,4 @@
-﻿namespace TCC
+﻿namespace TCC.Data
 {
     public enum DungeonTier
     {
@@ -88,12 +88,12 @@
         Sorcerer = 4,
         Archer = 5,
         Priest = 6,
-        Elementalist = 7,
-        Soulless = 8,
-        Engineer = 9,
-        Fighter = 10,
-        Assassin = 11,
-        Glaiver = 12,
+        Mystic = 7,
+        Reaper = 8,
+        Gunner = 9,
+        Brawler = 10,
+        Ninja = 11,
+        Valkyrie = 12,
         Common = 255,
         None = 256
     }
@@ -236,5 +236,23 @@
         Dps = 0,
         Tank = 1,
         Healer = 2
+    }
+
+    public enum MessageBoxType
+    {
+        ConfirmationWithYesNo = 0,
+        ConfirmationWithYesNoCancel,
+        Information,
+        Error,
+        Warning
+    }
+
+    public enum MessageBoxImage
+    {
+        Warning = 0,
+        Question,
+        Information,
+        Error,
+        None
     }
 }

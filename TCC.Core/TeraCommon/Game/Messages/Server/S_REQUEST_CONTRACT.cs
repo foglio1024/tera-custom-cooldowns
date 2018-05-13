@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
-namespace Tera.Game.Messages
+using TCC.TeraCommon.Game.Services;
+
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_REQUEST_CONTRACT : ParsedMessage
     {
@@ -7,7 +9,7 @@ namespace Tera.Game.Messages
         {
             //PrintRaw();
             reader.Skip(24);
-            short type = reader.ReadInt16();
+            var type = reader.ReadInt16();
             Type = (RequestType)type;
             reader.Skip(14);
             //int unk3 = reader.ReadInt32();

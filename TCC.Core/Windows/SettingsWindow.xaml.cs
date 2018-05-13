@@ -10,12 +10,14 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow
     {
         public SettingsWindow()
         {
             InitializeComponent();
         }
+
+        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -27,7 +29,7 @@ namespace TCC.Windows
             SettingsManager.SaveSettings();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
-            this.BeginAnimation(OpacityProperty, a);
+            BeginAnimation(OpacityProperty, a);
             WindowManager.IsTccVisible = false;
             WindowManager.IsTccVisible = true;
 
@@ -35,7 +37,7 @@ namespace TCC.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            FocusManager.settingsWindowHandle = new WindowInteropHelper(this).Handle;
+            //FocusManager.settingsWindowHandle = new WindowInteropHelper(this).Handle;
 
         }
 
@@ -51,14 +53,14 @@ namespace TCC.Windows
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ((FrameworkElement)this.Content).Focus();
+            ((FrameworkElement)Content).Focus();
         }
         public void ShowWindow()
         {
             Opacity = 0;
             Activate();
             Show();
-            BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+            BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
 
         }
 
@@ -80,6 +82,11 @@ namespace TCC.Windows
         private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Process.Start("https://paypal.me/foglio1024");
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
     }
 }

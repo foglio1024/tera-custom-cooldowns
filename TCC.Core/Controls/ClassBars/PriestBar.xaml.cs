@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per PriestBar.xaml
     /// </summary>
-    public partial class PriestBar : UserControl
+    public partial class PriestBar
     {
         public PriestBar()
         {

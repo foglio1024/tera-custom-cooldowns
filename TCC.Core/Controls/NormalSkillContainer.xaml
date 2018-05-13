@@ -11,7 +11,7 @@
             <controls:SkillIconControl />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Width="Auto" Name="root" Height="Auto">
+    <Grid Width="Auto" Name="Root" Height="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

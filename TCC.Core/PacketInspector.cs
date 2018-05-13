@@ -5,17 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using TCC.Parsing;
-using TCC.ViewModels;
-using Tera;
-using Tera.Game;
-using Tera.PacketLog;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC
 {
     public static class PacketInspector
     {
-        static bool running;
-        static Dictionary<string, MessageStats> Stats;
+        private static bool running;
+        private static Dictionary<string, MessageStats> Stats;
         public static void NewStat()
         {
             if (running) return;
@@ -29,7 +27,7 @@ namespace TCC
         }
         public static void Dump()
         {
-            List<string> lines = new List<string>();
+            var lines = new List<string>();
             foreach (var item in Stats)
             {
                 var sb = new StringBuilder();
@@ -49,7 +47,7 @@ namespace TCC
         }
         public static void InspectPacket(Message msg)
         {
-            List<string> exclusionList = new List<string>()
+            var exclusionList = new List<string>()
             {
                 "S_USER_LOCATION",
                 "S_SOCIAL",
@@ -132,7 +130,7 @@ namespace TCC
 
             };
             var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
-            TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+            var tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Factory, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
             //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
             Debug.WriteLine(opName + " " + msg.OpCode);
@@ -153,41 +151,41 @@ namespace TCC
             }
         }
 
-        public static void Analyze(Message msg)
-        {
-            return;
-            if (msg.Direction == MessageDirection.ClientToServer) return;
-            var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
-            Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
-            Debug.WriteLine(r.ReadUInt32());
-            Debug.WriteLine(r.ReadUInt32());
-            Debug.WriteLine(r.ReadUInt32());
-            Debug.WriteLine(r.ReadUInt32());
+        //public static void Analyze(Message msg)
+        //{
+        //    return;
+        //    if (msg.Direction == MessageDirection.ClientToServer) return;
+        //    var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+        //    Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
+        //    Debug.WriteLine(r.ReadUInt32());
+        //    Debug.WriteLine(r.ReadUInt32());
+        //    Debug.WriteLine(r.ReadUInt32());
+        //    Debug.WriteLine(r.ReadUInt32());
 
-            //try
-            //{
-            //    Debug.WriteLine("id: " + r.ReadUInt64());
-            //    Debug.WriteLine("unk1: " + r.ReadInt32());
-            //    Debug.WriteLine("skill: " + r.ReadUInt32());
-            //    Debug.WriteLine("x1: " + r.ReadSingle());
-            //    Debug.WriteLine("y1: " + r.ReadSingle());
-            //    Debug.WriteLine("z1: " + r.ReadSingle());
-            //    Debug.WriteLine("x2: " + r.ReadSingle());
-            //    Debug.WriteLine("y2: " + r.ReadSingle());
-            //    Debug.WriteLine("z2: " + r.ReadSingle());
-            //    Debug.WriteLine("unk2: " + r.ReadByte());
-            //    Debug.WriteLine("spd: " + r.ReadSingle());
-            //    Debug.WriteLine("src: " + r.ReadUInt64());
-            //    Debug.WriteLine("model: " + r.ReadUInt32());
-            //    Debug.WriteLine("unk4: " + r.ReadUInt32());
-            //    Debug.WriteLine("unk5: " + r.ReadUInt32());
-            //    Debug.WriteLine("");
-            //}
-            //catch (Exception e)
-            //{
-            //    //ignore
-            //}
-        }
+        //    //try
+        //    //{
+        //    //    Debug.WriteLine("id: " + r.ReadUInt64());
+        //    //    Debug.WriteLine("unk1: " + r.ReadInt32());
+        //    //    Debug.WriteLine("skill: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("x1: " + r.ReadSingle());
+        //    //    Debug.WriteLine("y1: " + r.ReadSingle());
+        //    //    Debug.WriteLine("z1: " + r.ReadSingle());
+        //    //    Debug.WriteLine("x2: " + r.ReadSingle());
+        //    //    Debug.WriteLine("y2: " + r.ReadSingle());
+        //    //    Debug.WriteLine("z2: " + r.ReadSingle());
+        //    //    Debug.WriteLine("unk2: " + r.ReadByte());
+        //    //    Debug.WriteLine("spd: " + r.ReadSingle());
+        //    //    Debug.WriteLine("src: " + r.ReadUInt64());
+        //    //    Debug.WriteLine("model: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("unk4: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("unk5: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("");
+        //    //}
+        //    //catch (Exception e)
+        //    //{
+        //    //    //ignore
+        //    //}
+        //}
         private static Dictionary<string, int> FixedSizePackets = new Dictionary<string, int>
         {
             { "S_RETURN_TO_LOBBY", 4 },

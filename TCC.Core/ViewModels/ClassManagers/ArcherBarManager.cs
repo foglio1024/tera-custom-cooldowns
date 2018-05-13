@@ -5,31 +5,58 @@ namespace TCC.ViewModels
 {
     public class ArcherBarManager : ClassManager
     {
-        private static ArcherBarManager _instance;
-        public static ArcherBarManager Instance => _instance ?? (_instance = new ArcherBarManager());
+        private ArcherFocusTracker _focus;
+        private StanceTracker<ArcherStance> _stance;
+        private FixedSkillCooldown _thunderbolt;
 
-        public ArcherFocusTracker Focus { get; set; }
-        public StanceTracker<ArcherStance> Stance { get; set; }
-        public FixedSkillCooldown Thunderbolt { get; set; }
-        public ArcherBarManager() : base()
+        public ArcherFocusTracker Focus
         {
-            _instance = this;
-            Focus = new ArcherFocusTracker();
-            Stance = new StanceTracker<ArcherStance>();
-            LoadSpecialSkills();
-            CurrentClassManager = this;
+            get => _focus;
+            set
+            {
+                if (_focus == value) return;
+                _focus = value;
+                NPC();
+            }
+        }
+        public StanceTracker<ArcherStance> Stance
+        {
+            get => _stance;
+            set
+            {
+                if(_stance== value) return;
+                _stance = value;
+                NPC();
+            }
+        }
+        public FixedSkillCooldown Thunderbolt
+        {
+            get => _thunderbolt;
+            set
+            {
+                if(_thunderbolt == value) return;
+                _thunderbolt = value;
+                NPC();
+            }
         }
 
-        protected override void LoadSpecialSkills()
+        public ArcherBarManager() : base()
         {
-            SkillsDatabase.TryGetSkill(290100, Class.Archer, out Skill tb);
-            Thunderbolt = new FixedSkillCooldown(tb, CooldownType.Skill, _dispatcher, true);
+            Focus = new ArcherFocusTracker();
+            Stance = new StanceTracker<ArcherStance>();
+            //CurrentClassManager = this;
+        }
+
+        public override void LoadSpecialSkills()
+        {
+            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
+            Thunderbolt = new FixedSkillCooldown(tb, _dispatcher, true);
 
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {
-            if(sk.Skill.IconName == Thunderbolt.Skill.IconName)
+            if (sk.Skill.IconName == Thunderbolt.Skill.IconName)
             {
                 Thunderbolt.Start(sk.Cooldown);
                 return true;

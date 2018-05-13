@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TCC.Controls
 {
@@ -22,10 +13,10 @@ namespace TCC.Controls
     /// </summary>
     public partial class SelectionSetting : UserControl
     {
-        ColorAnimation glow;
-        ColorAnimation unglow;
-        DoubleAnimation fadeIn;
-        DoubleAnimation fadeOut;
+        private ColorAnimation glow;
+        private ColorAnimation unglow;
+        private DoubleAnimation fadeIn;
+        private DoubleAnimation fadeOut;
 
         public string SettingName
         {
@@ -88,19 +79,19 @@ namespace TCC.Controls
             fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
             fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
-            mainGrid.Background = new SolidColorBrush(Colors.Transparent);
+            MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, glow);
-            img.BeginAnimation(OpacityProperty, fadeIn);
+            Img.BeginAnimation(OpacityProperty, fadeIn);
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
-            img.BeginAnimation(OpacityProperty, fadeOut);
+            Img.BeginAnimation(OpacityProperty, fadeOut);
 
         }
 
@@ -116,7 +107,7 @@ namespace TCC.Controls
 
         private void SelectionSetting_OnLoaded(object sender, RoutedEventArgs e)
         {
-            int i = 0;
+            var i = 0;
             if(Choices == null) return;
             foreach (var choice in Choices)
             {

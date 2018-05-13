@@ -4,7 +4,7 @@
 using System;
 using System.Text;
 
-namespace Tera.PacketLog
+namespace TCC.TeraCommon.PacketLog.Parsing
 {
     internal class LogHelper
     {

@@ -14,14 +14,14 @@ namespace TCC.Data
             {
                 if (stacks == value) return;
                 stacks = value;
-                NotifyPropertyChanged("Stacks");
+                NPC("Stacks");
             }
         }
 
         public ArcherFocusTracker()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            if (AbnormalityManager.CurrentDb.Abnormalities.TryGetValue(601400, out Abnormality ab))
+            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
             {
                 Icon = ab.IconName;
             }
@@ -30,23 +30,23 @@ namespace TCC.Data
         public void StartFocus()
         {
             Stacks = 1;
-            NotifyPropertyChanged("StartFocus");
+            NPC("StartFocus");
         }
         public void SetFocusStacks(int stacks)
         {
             Stacks = stacks;
-            NotifyPropertyChanged("Refresh");
+            NPC("Refresh");
         }
         public void StartFocusX()
         {
             Stacks = 10;
-            NotifyPropertyChanged("StartFocusX");
+            NPC("StartFocusX");
         }
         public void StopFocus()
         {
             //if (Stacks >= 9) return;
             Stacks = 0;
-            NotifyPropertyChanged("Ended");
+            NPC("Ended");
         }
     }
 }

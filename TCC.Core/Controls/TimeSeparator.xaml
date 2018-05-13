@@ -7,11 +7,11 @@
              mc:Ignorable="d" Background="#01000000"
              Margin="0,15,-0,-5"
              >
-    <Border BorderBrush="#3222" BorderThickness="{Binding Borders, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" 
+    <Border BorderBrush="#3aaa" BorderThickness="{Binding Borders, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" 
             
            >
-        <TextBlock x:Name="TimeTB" Opacity="1" VerticalAlignment="Bottom"  FontSize="11"
-                   IsHitTestVisible="False" Margin="-4,0,0,-13" Foreground="#8000"
+        <TextBlock x:Name="TimeTb" Opacity="1" VerticalAlignment="Bottom"  FontSize="11"
+                   IsHitTestVisible="False" Margin="-4,0,0,-13" Foreground="#3aaa"
                    Text="{Binding TimeText, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" />
     </Border>
 </UserControl>

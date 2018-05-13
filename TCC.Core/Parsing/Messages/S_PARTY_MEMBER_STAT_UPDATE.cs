@@ -1,16 +1,16 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_STAT_UPDATE : ParsedMessage
     {
         private uint serverId, playerId;
-        int curMP, maxMP;
-        long curHP, maxHP;
-        short level, combat, vitality;
-        bool alive;
-        int stamina, curRE, maxRE;
+        private int curMP, maxMP;
+        private long curHP, maxHP;
+        private short level, combat, vitality;
+        private bool alive;
+        private int stamina, curRE, maxRE;
 
         public uint ServerId { get { return serverId; } }
         public uint PlayerId { get { return playerId; } }

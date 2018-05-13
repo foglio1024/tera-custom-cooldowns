@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using TCC.ViewModels;
+﻿using System.Windows.Input;
 
 namespace TCC.Windows
 {
@@ -12,16 +10,10 @@ namespace TCC.Windows
         public BuffWindow()
         {
             InitializeComponent();
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            ButtonsRef = Buttons;
+            MainContentRef = content;
             InitWindow(SettingsManager.BuffWindowSettings, ignoreSize: true);
-
-            buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
-            debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
-            infBuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.InfBuffs;
         }
-
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;

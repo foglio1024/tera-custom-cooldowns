@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+             mc:Ignorable="d"  Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Style TargetType="local:Arc">
             <Setter Property="StrokeThickness" Value="5"/>
@@ -13,7 +12,7 @@
             <Setter Property="Width" Value="47"/>
             <Setter Property="Height" Value="47"/>
         </Style>
-        <Style TargetType="Border" x:Key="aura">
+        <Style TargetType="Border" x:Key="Aura">
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="Margin" Value="1,4"/>
             <Setter Property="Width" Value="8"/>
@@ -22,38 +21,21 @@
     </UserControl.Resources>
     <Grid>
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
-            <!--<local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
-        <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>-->
-            <Border Style="{StaticResource aura}" Background="#454545" Visibility="Visible"/>
-            <Border Style="{StaticResource aura}"  Background="#454545" Visibility="Visible"/>
+            <Border Style="{StaticResource Aura}" Background="#454545" Visibility="Visible"/>
+            <Border Style="{StaticResource Aura}"  Background="#454545" Visibility="Visible"/>
 
         </UniformGrid>
 
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
-            <!--<local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
-        <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>-->
-            <Border Style="{StaticResource aura}" x:Name="swift" Background="#7f9" Visibility="Hidden"/>
-            <Border Style="{StaticResource aura}" x:Name="critRes" Background="#f97" Visibility="Hidden"/>
-
+            <Border Style="{StaticResource Aura}" x:Name="Swift" Background="#f7f9" Visibility="Hidden"/>
+            <Border Style="{StaticResource Aura}" x:Name="CritRes" Background="#ff97" Visibility="Hidden"/>
         </UniformGrid>
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
-            <!--<local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
-        <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>-->
-            <Border Style="{StaticResource aura}" x:Name="crit" Background="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-            <Border Style="{StaticResource aura}" x:Name="mp" Background="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
-
+            <Border Style="{StaticResource Aura}" x:Name="Crit" Background="{StaticResource HpColor}" Visibility="Hidden"/>
+            <Border Style="{StaticResource Aura}" x:Name="Mp" Background="{StaticResource MpColor}" Visibility="Hidden"/>
         </UniformGrid>
-<Grid.Effect>
+<!--<Grid.Effect>
     <DropShadowEffect ShadowDepth="2" Opacity=".4"></DropShadowEffect>
-</Grid.Effect>
+</Grid.Effect>-->
     </Grid>
 </UserControl>

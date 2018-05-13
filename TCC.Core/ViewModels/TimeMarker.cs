@@ -33,8 +33,8 @@ namespace TCC.ViewModels
         private void T_Tick(object sender, EventArgs e)
         {
             _dateTime = DateTime.Now.AddHours(_hourOffset);
-            NotifyPropertyChanged(nameof(TimeString));
-            NotifyPropertyChanged(nameof(TimeFactor));
+            NPC(nameof(TimeString));
+            NPC(nameof(TimeFactor));
         }
     }
 }

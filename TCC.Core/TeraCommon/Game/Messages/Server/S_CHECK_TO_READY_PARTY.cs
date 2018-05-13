@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public struct ReadyPartyMembers
     {
@@ -39,13 +40,13 @@ namespace Tera.Game.Messages
             }
 
             Debug.WriteLine($"Count:{Count}");
-            foreach(ReadyPartyMembers menber in Party)
+            foreach(var menber in Party)
             {
                 Debug.WriteLine($"ServerId:{BitConverter.ToString(BitConverter.GetBytes(menber.ServerId))}, PlayerId:{BitConverter.ToString(BitConverter.GetBytes(menber.PlayerId))}, State:{menber.Status}");
             }
         }
 
-        public UInt16 Count { get; set; }
+        public ushort Count { get; set; }
 
         public List<ReadyPartyMembers> Party { get; } = new List<ReadyPartyMembers>();
     }

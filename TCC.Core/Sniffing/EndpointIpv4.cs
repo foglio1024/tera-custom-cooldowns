@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics.Contracts;
 using System.Net;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     internal struct EndpointIpv4 : IEquatable<EndpointIpv4>
     {

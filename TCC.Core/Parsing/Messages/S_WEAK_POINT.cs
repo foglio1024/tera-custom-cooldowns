@@ -1,6 +1,5 @@
-﻿using System;
-using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
@@ -32,7 +31,7 @@ namespace TCC.Parsing.Messages
 
         public override string ToString()
         {
-            return String.Format("T:{0} | total:{1} | moved:{2} | {3} | S:{4}", Target, TotalRunemarks, RemovedRunemarks, Type, SkillId);
+            return string.Format("T:{0} | total:{1} | moved:{2} | {3} | S:{4}", Target, TotalRunemarks, RemovedRunemarks, Type, SkillId);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TCC.ClassSpecific
         {
             if(p.CasterId == SessionManager.CurrentPlayer.EntityId && p.AbnormalityId == 10155130)
             {
-                ((ValkyrieBarManager)ClassManager.CurrentClassManager).Ragnarok.Buff.Start(p.Duration);
+                ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Start(p.Duration);
             }
         }
     }

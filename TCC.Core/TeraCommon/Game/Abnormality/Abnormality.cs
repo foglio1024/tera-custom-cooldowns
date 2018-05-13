@@ -1,6 +1,7 @@
 ﻿using System;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Abnormality
+namespace TCC.TeraCommon.Game.Abnormality
 {
     public class Abnormality
     {

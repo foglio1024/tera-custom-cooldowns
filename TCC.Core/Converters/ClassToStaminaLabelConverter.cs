@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Data;
 
 namespace TCC.Converters
 {
@@ -14,13 +15,13 @@ namespace TCC.Converters
                     return "RE";
                 case Class.Lancer:
                     return "RE";
-                case Class.Engineer:
+                case Class.Gunner:
                     return "WP";
-                case Class.Fighter:
+                case Class.Brawler:
                     return "RG";
-                case Class.Assassin:
+                case Class.Ninja:
                     return "CH";
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     return "RG";
                 default:
                     return "";

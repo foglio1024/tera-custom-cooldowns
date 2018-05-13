@@ -11,7 +11,7 @@ namespace TCC.TemplateSelectors
         public DataTemplate ApplyBody { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            ChatMessage m = item as ChatMessage;
+            var m = item as ChatMessage;
             if (m == null) return null;
 
             switch (m.Channel)

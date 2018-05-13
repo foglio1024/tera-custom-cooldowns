@@ -13,10 +13,11 @@ namespace TCC
         public List<FixedSkillCooldown> Main;
         public List<FixedSkillCooldown> Secondary;
         public List<FixedSkillCooldown> Hidden;
-        void ParseSkillConfig(string filename, Class c)
+
+        private void ParseSkillConfig(string filename, Class c)
         {
-            XDocument skillsDoc = XDocument.Load("resources/config/skills/" + filename);
-            foreach (XElement skillElement in skillsDoc.Descendants("Skills").Descendants())
+            var skillsDoc = XDocument.Load("resources/config/skills/" + filename);
+            foreach (var skillElement in skillsDoc.Descendants("Skills").Descendants())
             {
                 var type = CooldownType.Skill;
                 if (skillElement.Name == "Item") type = CooldownType.Item;
@@ -24,58 +25,66 @@ namespace TCC
 
                 var skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
                 var row = Convert.ToInt32(skillElement.Attribute("row").Value);
-                if (type == CooldownType.Skill)
+                switch (type)
                 {
-                    if (SkillsDatabase.TryGetSkill(skillId, c, out var sk))
+                    case CooldownType.Skill:
                     {
-                        switch (row)
+                        if (SessionManager.SkillsDatabase.TryGetSkill(skillId, c, out var sk))
                         {
-                            case 1:
-                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 2:
-                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 3:
-                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
+                            switch (row)
+                            {
+                                case 1:
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 2:
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 3:
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                            }
                         }
+                        break;
                     }
-                }
-                else if (type == CooldownType.Item)
-                {
-                    if (ItemSkillsDatabase.TryGetItemSkill(skillId, out var sk))
+                    case CooldownType.Item:
                     {
-                        switch (row)
+                        if (SessionManager.ItemsDatabase.TryGetItemSkill(skillId, out var sk))
                         {
-                            case 1:
-                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 2:
-                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 3:
-                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
+                            switch (row)
+                            {
+                                case 1:
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
+                                    break;
+                                case 2:
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
+                                    break;
+                                case 3:
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
+                                    break;
+                            }
                         }
+                        break;
                     }
-                }
-                else if (type == CooldownType.Passive)
-                {
-                    if (PassivityDatabase.TryGetPassivitySkill(skillId, out var sk))
+                    case CooldownType.Passive:
                     {
-                        switch (row)
+                        if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(skillId, out var ab))
                         {
-                            case 1:
-                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 2:
-                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 3:
-                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
+                            var sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) {IconName = ab.IconName};
+                            PassivityDatabase.Passivities.Add(ab.Id);
+                            switch (row)
+                            {
+                                case 1:
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
+                                    break;
+                                case 2:
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
+                                    break;
+                                case 3:
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
+                                    break;
+                            }
                         }
+                        break;
                     }
                 }
 
@@ -122,22 +131,22 @@ namespace TCC
                 case Class.Priest:
                     BuildDefaultPriestSkillConfig("priest-skills.xml");
                     break;
-                case Class.Elementalist:
+                case Class.Mystic:
                     BuildDefaultMysticSkillConfig("mystic-skills.xml");
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     BuildDefaultReaperSkillConfig("reaper-skills.xml");
                     break;
-                case Class.Engineer:
+                case Class.Gunner:
                     BuildDefaultGunnerSkillConfig("gunner-skills.xml");
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     BuildDefaultBrawlerSkillConfig("brawler-skills.xml");
                     break;
-                case Class.Assassin:
+                case Class.Ninja:
                     BuildDefaultNinjaSkillConfig("ninja-skills.xml");
                     break;
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     BuildDefaultValkyrieSkillConfig("valkyrie-skills.xml");
                     break;
                 default:
@@ -147,7 +156,7 @@ namespace TCC
 
         private static void BuildDefaultValkyrieSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 136100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 66230), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 35930), new XAttribute("row", 1)),
@@ -162,7 +171,7 @@ namespace TCC
         }
         private static void BuildDefaultNinjaSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 141100), new XAttribute("row", 1)), //DC
                 new XElement("Skill", new XAttribute("id", 121100), new XAttribute("row", 1)), //SF
                 new XElement("Skill", new XAttribute("id", 131000), new XAttribute("row", 1)), //CoS
@@ -174,7 +183,7 @@ namespace TCC
         }
         private static void BuildDefaultBrawlerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 71230), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 91130), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 81130), new XAttribute("row", 1)),
@@ -185,7 +194,7 @@ namespace TCC
         }
         private static void BuildDefaultGunnerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 70800), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 31100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 150900), new XAttribute("row", 1)),
@@ -197,7 +206,7 @@ namespace TCC
         }
         private static void BuildDefaultReaperSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 60231), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 30300), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 50330), new XAttribute("row", 1)),
@@ -211,7 +220,7 @@ namespace TCC
         }
         private static void BuildDefaultMysticSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 420100), new XAttribute("row", 1)), //boomerang pulse
                 new XElement("Skill", new XAttribute("id", 370200), new XAttribute("row", 1)), //totem
                 new XElement("Skill", new XAttribute("id", 241010), new XAttribute("row", 1)) //voc
@@ -222,7 +231,7 @@ namespace TCC
         }
         private static void BuildDefaultPriestSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 280100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 291100), new XAttribute("row", 1)),
                 //new XElement("Skill", new XAttribute("id", 390100), new XAttribute("row", 1)),
@@ -233,7 +242,7 @@ namespace TCC
         }
         private static void BuildDefaultArcherSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 30900), new XAttribute("row", 1)),   //RA
                 new XElement("Skill", new XAttribute("id", 41200), new XAttribute("row", 1)),   //PA
                 new XElement("Skill", new XAttribute("id", 50200), new XAttribute("row", 1)),   //RoA
@@ -246,7 +255,7 @@ namespace TCC
         }
         private static void BuildDefaultSorcererSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 270400), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 40900), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 60700), new XAttribute("row", 1)),
@@ -260,7 +269,7 @@ namespace TCC
         }
         private static void BuildDefaultBerserkerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 31000), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 101100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 150900), new XAttribute("row", 1)),
@@ -272,7 +281,7 @@ namespace TCC
         }
         private static void BuildDefaultSlayerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 21100), new XAttribute("row", 1)),
                 //new XElement("Skill", new XAttribute("id", 80930), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 120500), new XAttribute("row", 1)),
@@ -283,7 +292,7 @@ namespace TCC
         }
         private static void BuildDefaultWarriorSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 181100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 41100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 110800), new XAttribute("row", 1)),
@@ -311,7 +320,7 @@ namespace TCC
         }
         private static void BuildDefaultLancerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 50100), new XAttribute("row", 1)),   //shield bash
                 new XElement("Skill", new XAttribute("id", 30800), new XAttribute("row", 1)),   //onslaught
                 new XElement("Skill", new XAttribute("id", 181100), new XAttribute("row", 1)),  //shield barrage

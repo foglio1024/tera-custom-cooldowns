@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Threading;
+using TCC.ViewModels;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class EventGroup : TSPropertyChanged
     {

@@ -7,24 +7,24 @@ namespace TCC
 {
     public static class EntitiesManager
     {
-        public static MonsterDatabase CurrentDatabase;
         private static ulong currentEncounter;
+
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
         {
             if (IsWorldBoss(zoneId, templateId))
             {
-                CurrentDatabase.TryGetMonster(templateId, zoneId, out var monst);
+                SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
                 //TimeManager.Instance.SendWebhookMessage(monst.Name);
                 if (monst.IsBoss)
                 {
 
                     var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
-                    ChatWindowViewModel.Instance.AddChatMessage(msg);
+                    ChatWindowManager.Instance.AddChatMessage(msg);
                 }
             }
             if (!Filter(zoneId, templateId)) return;
 
-            if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
+            if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 if (m.IsBoss)
                 {
@@ -48,7 +48,7 @@ namespace TCC
                    (zoneId == 38 && templateId == 35);
         }
 
-        static bool Filter(uint zoneId, uint templateId)
+        private static bool Filter(uint zoneId, uint templateId)
         {
             if (zoneId == 950 && templateId == 1002) return false; //skip HHP4 lament warriors
 

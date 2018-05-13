@@ -1,6 +1,5 @@
-﻿using System;
-using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
@@ -11,7 +10,7 @@ namespace TCC.Parsing.Messages
         {
             var o = reader.ReadUInt16();
             reader.BaseStream.Position = o - 4;
-            if (UInt32.TryParse(reader.ReadTeraString().Substring("@dungeon:".Length), out uint msgId)) MessageId = msgId;
+            if (uint.TryParse(reader.ReadTeraString().Substring("@dungeon:".Length), out var msgId)) MessageId = msgId;
             else MessageId = 0;
             
         }

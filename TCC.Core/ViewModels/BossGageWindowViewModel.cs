@@ -50,7 +50,7 @@ namespace TCC.ViewModels
                 if (_currentHHphase == value) return;
                 _currentHHphase = value;
                 MessageFactory.Update();
-                NotifyPropertyChanged(nameof(CurrentHHphase));
+                NPC(nameof(CurrentHHphase));
             }
         }
         public ICollectionView Bams
@@ -96,7 +96,7 @@ namespace TCC.ViewModels
             {
                 if (_selectedDragon == value) return;
                 _selectedDragon = value;
-                NotifyPropertyChanged(nameof(SelectedDragon));
+                NPC(nameof(SelectedDragon));
             }
         }
         public Npc Vergos
@@ -106,7 +106,7 @@ namespace TCC.ViewModels
             {
                 if (_vergos == value) return;
                 _vergos = value;
-                NotifyPropertyChanged(nameof(Vergos));
+                NPC(nameof(Vergos));
             }
         }
         public SynchronizedObservableCollection<Npc> NpcList
@@ -133,7 +133,7 @@ namespace TCC.ViewModels
             GuildIds = new Dictionary<ulong, uint>();
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged(nameof(IsTeraOnTop));
+                NPC(nameof(IsTeraOnTop));
                 if (IsTeraOnTop)
                 {
                     WindowManager.BossWindow.RefreshTopmost();
@@ -224,7 +224,7 @@ namespace TCC.ViewModels
                 {
                     sb.Append(boss.Name);
                     sb.Append(": ");
-                    sb.Append(String.Format("{0:##0%}", boss.CurrentFactor));
+                    sb.Append(string.Format("{0:##0%}", boss.CurrentFactor));
                     sb.Append("\\");
                 }
             }
@@ -234,7 +234,7 @@ namespace TCC.ViewModels
             }
             catch 
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Failed to copy boss HP.");
+                ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
         public void ClearBosses()

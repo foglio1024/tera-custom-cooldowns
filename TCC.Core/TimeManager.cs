@@ -5,7 +5,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
 
@@ -21,7 +20,8 @@ namespace TCC
             {"TW", new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
             {"JP", new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
             {"THA", new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
-            {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
+            {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) },
+            {"KR-PTS", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
         };
 
         public const double SecondsInDay = 60 * 60 * 24;
@@ -55,7 +55,7 @@ namespace TCC
 
         private void CheckNewDay(object sender, EventArgs e)
         {
-            if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute== 0)
+            if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
                 InfoWindowViewModel.Instance.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
             if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
         }
@@ -65,7 +65,7 @@ namespace TCC
             if (string.IsNullOrEmpty(region)) return;
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
 
-            SettingsManager.LastRegion = CurrentRegion;
+            SettingsManager.LastRegion = region;
 
             var timezone = TimeZoneInfo.GetSystemTimeZones()
                 .FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
@@ -94,7 +94,7 @@ namespace TCC
         {
             if (CurrentRegion == null) return;
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
-            if(SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
+            if (SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in InfoWindowViewModel.Instance.Characters)
             {
                 foreach (var dg in ch.Dungeons)
@@ -107,7 +107,7 @@ namespace TCC
                     dg.Reset();
                 }
                 ch.DailiesDone = 0;
-
+                ch.GuardianPoints = 0;
                 if (DateTime.Now.DayOfWeek == _resetDay)
                 {
                     ch.WeekliesDone = 0;
@@ -118,10 +118,10 @@ namespace TCC
             SettingsManager.SaveSettings();
             if (DateTime.Now.DayOfWeek == _resetDay)
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Weekly data has been reset.");
+                ChatWindowManager.Instance.AddTccMessage("Weekly data has been reset.");
             }
 
-            ChatWindowViewModel.Instance.AddTccMessage("Daily data has been reset.");
+            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
         }
 
 
@@ -129,10 +129,12 @@ namespace TCC
         {
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
-            sb.Append(PacketProcessor.ServerId);
+            sb.Append(PacketProcessor.Server.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             var c = new WebClient();
+            c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
             try
             {
                 var data = await c.DownloadStringTaskAsync(sb.ToString());
@@ -141,7 +143,7 @@ namespace TCC
             }
             catch
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Failed to retrieve guild bam info.");
+                ChatWindowManager.Instance.AddTccMessage("Failed to retrieve guild bam info.");
                 return 0;
             }
         }
@@ -152,18 +154,20 @@ namespace TCC
             var time = (long)ts.TotalSeconds;
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
-            sb.Append(PacketProcessor.ServerId);
+            sb.Append(PacketProcessor.Server.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             sb.Append("&post");
             var c = new WebClient();
+            c.Headers.Set("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
             try
             {
                 c.UploadDataAsync(new Uri(sb.ToString()), new byte[] { });
             }
-            catch 
+            catch
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Failed to upload guild bam info.");   
+                ChatWindowManager.Instance.AddTccMessage("Failed to upload guild bam info.");
             }
 
         }
@@ -188,12 +192,12 @@ namespace TCC
 
         public void SendWebhookMessageOld()
         {
-            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            if (!string.IsNullOrEmpty(SettingsManager.Webhook))
             {
                 var sb = new StringBuilder("{");
-                sb.Append("\"");sb.Append("content");sb.Append("\"");
+                sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
-                sb.Append("\"");sb.Append(SettingsManager.WebhookMessage);sb.Append("\"");
+                sb.Append("\""); sb.Append(SettingsManager.WebhookMessage); sb.Append("\"");
                 sb.Append(",");
                 sb.Append("\""); sb.Append("username"); sb.Append("\"");
                 sb.Append(":");
@@ -206,21 +210,23 @@ namespace TCC
 
                 try
                 {
-                    using (WebClient client = new WebClient())
+                    using (var client = new WebClient())
                     {
-                        client.Headers.Add("Content-Type", "application/json");
+                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+                        client.Headers.Add( HttpRequestHeader.ContentType, "application/json");
+
                         var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
+                    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }
         public void SendWebhookMessage(string bamName)
         {
-            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            if (!string.IsNullOrEmpty(SettingsManager.Webhook))
             {
                 var msg = SettingsManager.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
                     ? SettingsManager.WebhookMessage.Replace("{npc_name}", bamName)
@@ -241,15 +247,17 @@ namespace TCC
 
                 try
                 {
-                    using (WebClient client = new WebClient())
+                    using (var client = new WebClient())
                     {
-                        client.Headers.Add("Content-Type", "application/json");
+                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
+                        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                         var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
+                    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }

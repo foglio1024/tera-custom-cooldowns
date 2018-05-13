@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
-namespace Tera.Game.Messages
+using TCC.TeraCommon.Game.Services;
+
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_UPDATE_NPCGUILD : ParsedMessage
     {
@@ -16,7 +18,7 @@ namespace Tera.Game.Messages
         {
             User=reader.ReadEntityId();
             reader.Skip(8);
-            int type = reader.ReadInt32();
+            var type = reader.ReadInt32();
             Type = (NpcGuildType)type;
             reader.Skip(8);
             Credits = reader.ReadInt32();

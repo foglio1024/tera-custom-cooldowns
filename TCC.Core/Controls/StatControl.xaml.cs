@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using TCC.ViewModels;
+using TCC.Data;
 
 namespace TCC.Controls
 {
@@ -52,7 +52,7 @@ namespace TCC.Controls
         public static readonly DependencyProperty StatusColorProperty = DependencyProperty.Register("StatusColor", typeof(SolidColorBrush), typeof(StatControl));
 
 
-        StatTracker _context;
+        private StatTracker _context;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,7 +65,7 @@ namespace TCC.Controls
             CurrentColor = Color;
         }
 
-        private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Factor")
             {

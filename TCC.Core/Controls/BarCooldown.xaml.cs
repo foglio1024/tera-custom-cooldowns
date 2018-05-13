@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,60 +10,59 @@ using TCC.Data;
 
 namespace TCC.Controls
 {
+    /// <inheritdoc cref="UserControl" />
     /// <summary>
     /// Logica di interazione per BarCooldown.xaml
     /// </summary>
-    public partial class BarCooldown : UserControl, INotifyPropertyChanged
+    public partial class BarCooldown : INotifyPropertyChanged
     {
         public BarCooldown()
         {
             InitializeComponent();
         }
-        DispatcherTimer _numberTimer;
 
-        FixedSkillCooldown _context;
-        private double currentCD;
-        public double CurrentCD
+        private DispatcherTimer _numberTimer;
+
+        private FixedSkillCooldown _context;
+        private double _currentCd;
+        public double CurrentCd
         {
-            get { return currentCD; }
+            get => _currentCd;
             set
             {
-                if (currentCD != value)
-                {
-                    currentCD = value;
-                    NotifyPropertyChanged("CurrentCD");
-                }
+                if (!(Math.Abs(_currentCd - value) > 0.01)) return;
+                _currentCd = value;
+                NPC(nameof(CurrentCd));
             }
         }
 
-        private bool isRunning = false;
+        private bool _isRunning;
         public bool IsRunning
         {
-            get { return isRunning; }
+            get => _isRunning;
             set
             {
-                if (isRunning == value) return;
-                isRunning = value;
-                NotifyPropertyChanged("IsRunning");
+                if (_isRunning == value) return;
+                _isRunning = value;
+                NPC(nameof(IsRunning));
             }
         }
-
-
 
         public SolidColorBrush Color
         {
-            get { return (SolidColorBrush)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (SolidColorBrush)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for Color.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColorProperty =
             DependencyProperty.Register("Color", typeof(SolidColorBrush), typeof(BarCooldown));
 
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string p)
+
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        private void NPC(string p)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
@@ -74,23 +74,21 @@ namespace TCC.Controls
                 _context = (FixedSkillCooldown)DataContext;
                 _context.PropertyChanged += _context_PropertyChanged;
             }
-            cdBar.RenderTransform = new ScaleTransform(0, 1, 0, .5);
-            circle.RenderTransform = new TranslateTransform(0, 0);
+            CdBar.RenderTransform = new ScaleTransform(0, 1, 0, .5);
+            Circle.RenderTransform = new TranslateTransform(0, 0);
             _numberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
             _numberTimer.Tick += (s, o) =>
             {
-                CurrentCD = CurrentCD - 1 > 0 ? CurrentCD - 1 : 0;
+                CurrentCd = CurrentCd - 1 > 0 ? CurrentCd - 1 : 0;
             };
         }
 
 
-        private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Start")
-            {
-                CurrentCD = (double)_context.Cooldown / 1000;
-                AnimateCooldown(_context.Cooldown);
-            }
+            if (e.PropertyName != "Start") return;
+            CurrentCd = (double)_context.Cooldown / 1000;
+            AnimateCooldown(_context.Cooldown);
         }
 
         private void AnimateCooldown(ulong cooldown)
@@ -104,10 +102,10 @@ namespace TCC.Controls
                 IsRunning = false;
                 _numberTimer.IsEnabled = false;
             };
-            cdBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
+            CdBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
 
             var an2 = new DoubleAnimation(ActualWidth, 0, TimeSpan.FromMilliseconds(cooldown));
-            circle.RenderTransform.BeginAnimation(TranslateTransform.XProperty, an2);
+            Circle.RenderTransform.BeginAnimation(TranslateTransform.XProperty, an2);
         }
     }
 }

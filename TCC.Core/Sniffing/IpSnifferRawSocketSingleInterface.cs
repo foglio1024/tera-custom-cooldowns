@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using PacketDotNet;
 using PacketDotNet.Utils;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     public class IpSnifferRawSocketSingleInterface : IpSniffer
     {
@@ -41,7 +41,7 @@ namespace NetworkSniffer
             Task.Run(()=>ReadAsync(_socket));
         }
 
-        async Task ReadAsync(Socket s)
+        private async Task ReadAsync(Socket s)
         {
             // Reusable SocketAsyncEventArgs and awaitable wrapper 
             var args = new SocketAsyncEventArgs();
@@ -50,7 +50,7 @@ namespace NetworkSniffer
             while (true)
             {
                 await s.ReceiveAsync(awaitable);
-                int bytesRead = args.BytesTransferred;
+                var bytesRead = args.BytesTransferred;
                 if (bytesRead <= 0) throw new Exception("Raw socket is disconnected");
                 var ipPacket = new IPv4Packet(new ByteArraySegment(args.Buffer, 0, bytesRead));
                 if (ipPacket.Version != IpVersion.IPv4 || ipPacket.Protocol!=IPProtocolType.TCP)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     internal struct ConnectionId : IEquatable<ConnectionId>
     {

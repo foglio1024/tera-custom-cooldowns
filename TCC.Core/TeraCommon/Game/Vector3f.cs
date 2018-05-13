@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     public struct Vector3f
     {

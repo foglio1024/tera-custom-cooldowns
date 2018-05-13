@@ -2,7 +2,7 @@
 
 namespace TCC.Parsing.Messages
 {
-    class C_CHECK_VERSION_CUSTOM
+    internal class C_CHECK_VERSION_CUSTOM
     {
         public C_CHECK_VERSION_CUSTOM(CustomReader reader)
         {

@@ -25,7 +25,7 @@ namespace TCC.Data
             {
                 if (_currentStance.CompareTo(value) == 0) return;
                 _currentStance = value;
-                NotifyPropertyChanged(nameof(CurrentStance));
+                NPC(nameof(CurrentStance));
             }
         }
         public StanceTracker()
@@ -42,7 +42,7 @@ namespace TCC.Data
             {
                 if (_crit == value) return;
                 _crit = value;
-                NotifyPropertyChanged("AuraChanged");
+                NPC("AuraChanged");
             }
         }
         public bool ManaAura
@@ -51,7 +51,7 @@ namespace TCC.Data
             {
                 if (_mp == value) return;
                 _mp = value;
-                NotifyPropertyChanged("AuraChanged");
+                NPC("AuraChanged");
             }
         }
         public bool CritResAura
@@ -60,7 +60,7 @@ namespace TCC.Data
             {
                 if (_res == value) return;
                 _res = value;
-                NotifyPropertyChanged("AuraChanged");
+                NPC("AuraChanged");
             }
         }
         public bool SwiftAura
@@ -69,7 +69,7 @@ namespace TCC.Data
             {
                 if (_swift == value) return;
                 _swift = value;
-                NotifyPropertyChanged("AuraChanged");
+                NPC("AuraChanged");
             }
         }
 

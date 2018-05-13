@@ -4,30 +4,31 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using TCC.Annotations;
+using TCC.Properties;
 using TCC.ViewModels;
 
 namespace TCC.Controls
 {
-    /// <summary>
+    /// <inheritdoc cref="UserControl" />
+    /// <summary>  
     /// Logica di interazione per LancerBuffCooldownControl.xaml
     /// </summary>
-    public partial class BuffCooldownControl : UserControl, INotifyPropertyChanged
+    public partial class BuffCooldownControl : INotifyPropertyChanged
     {
         public BuffCooldownControl()
         {
             InitializeComponent();
         }
 
-        DurationCooldownIndicator _context;
+        private DurationCooldownIndicator _context;
         private DoubleAnimation _anim;
         public string DurationLabel => _context == null? "": Utils.TimeFormatter(_context.Buff.Seconds);
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
-
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (DurationCooldownIndicator)DataContext;
+            cd.DataContext = _context.Cooldown;
             _context.Buff.PropertyChanged += Buff_PropertyChanged;
             _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
         }
@@ -41,13 +42,13 @@ namespace TCC.Controls
                 if (e.PropertyName == "Start")
                 {
                     _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
-                    externalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+                    ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
                     return;
                 }
                 if (e.PropertyName == "Refresh")
                 {
                     _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
-                    externalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+                    ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
                     return;
                 }
                 if (e.PropertyName == nameof(_context.Buff.Seconds))

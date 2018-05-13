@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              Loaded="UserControl_Loaded"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" d:DataContext="{d:DesignData Npc}">
     <Grid Margin="2" Height="Auto" 
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center"
@@ -31,8 +31,7 @@
                                TextAlignment="Center"/>
             <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource Converters.ShieldStatusToVisibility}}">
                 <local:Arc Stroke="{Binding Shield, Converter={StaticResource Converters.ShieldStatusColor}}" 
-                           Grid.Column="2" 
-                           x:Name="shieldArc"
+                           x:Name="ShieldArc"
                            Width="48" 
                            Height="48"
                            StrokeThickness="24"
@@ -44,7 +43,6 @@
                            Width="15" 
                            Height="15" 
                            Margin="0,1,0,0"
-                           Grid.Column="2" 
                            VerticalAlignment="Center"
                            Stretch="Uniform" 
                            Data="M237.263,60.498c-4.65,3.535-68.417,50.977-150.197,
@@ -61,7 +59,7 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                />
-            <Grid Grid.Row="1" VerticalAlignment="Center" x:Name="enrageLine">
+            <Grid Grid.Row="1" VerticalAlignment="Center" x:Name="EnrageLine">
                 <Path Data="M0,0 4,0 2,2 0,0" Stretch="Uniform" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red" RenderTransformOrigin="0.5,0.5">
                     <Path.RenderTransform>
                         <TranslateTransform X="0" Y="-28" />
@@ -73,7 +71,7 @@
                        Stroke="Red"
                        Visibility="{Binding Enraged, Converter={StaticResource Converters.BoolToVisibleHidden}}"
                        StrokeThickness="3"
-                       x:Name="enrageArc"
+                       x:Name="EnrageArc"
                        EndAngle="359.9"
                        Grid.Row="1"
                        VerticalAlignment="Center"

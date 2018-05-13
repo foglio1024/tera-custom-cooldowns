@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Threading;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -45,10 +44,15 @@ namespace TCC
         public static BuffWindow BuffWindow;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
-        public static ChatWindow ChatWindow;
+        //public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
+        public static SkillConfigWindow SkillConfigWindow;
+        public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
+        public static FlightDurationWindow FlightDurationWindow;
+        public static LfgListWindow LfgListWindow;
+
         public static ContextMenu ContextMenu;
 
         public static NotifyIcon TrayIcon;
@@ -149,7 +153,7 @@ namespace TCC
             ContextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
-            TrayIcon = new System.Windows.Forms.NotifyIcon()
+            TrayIcon = new NotifyIcon()
             {
                 Icon = DefaultIcon,
                 Visible = true
@@ -157,7 +161,7 @@ namespace TCC
             TrayIcon.MouseDown += NI_MouseDown;
             TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            TrayIcon.Text = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
+            TrayIcon.Text = string.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             var CloseButton = new MenuItem() { Header = "Close" };
 
             CloseButton.Click += (s, ev) => App.CloseApp();
@@ -165,12 +169,27 @@ namespace TCC
 
             _undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            FocusManager.FocusTimer = new System.Timers.Timer(1000);
+            FocusManager.FocusTimer = new Timer(1000);
             FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
+            Settings = new SettingsWindow();
 
-            //ClickThruChanged += (s, ev) => UpdateClickThru();
+            if (SettingsManager.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            TccWindow.RecreateWindow += TccWindow_RecreateWindow;
+
 
         }
+
+        private static void TccWindow_RecreateWindow(TccWindow obj)
+        {
+            if (obj is CooldownWindow) CooldownWindow = new CooldownWindow();
+            if (obj is GroupWindow) GroupWindow = new GroupWindow();
+            if (obj is BossWindow) BossWindow = new BossWindow();
+            if (obj is BuffWindow) BuffWindow = new BuffWindow();
+            if (obj is CharacterWindow) CharacterWindow = new CharacterWindow();
+            if (obj is ClassWindow) ClassWindow = new ClassWindow();
+            if (obj is ChatWindow) ChatWindowManager.Instance.InitWindows();
+        }
+
         public static void NotifyDimChanged()
         {
             TccDimChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccDim)));
@@ -201,21 +220,38 @@ namespace TCC
             try { BossWindow.CloseWindowSafe(); } catch { }
             try { BuffWindow.CloseWindowSafe(); } catch { }
             try { InfoWindow.Close(); } catch { }
-            try { ChatWindow.CloseWindowSafe(); } catch { }
+            //try { ChatWindow.CloseWindowSafe(); } catch { }
+            ChatWindowManager.Instance.CloseAllWindows();
             try { ClassWindow.CloseWindowSafe(); } catch { }
         }
 
         private static void LoadWindows()
         {
-            waiting = true;
-            foreach (var del in WindowLoadingDelegates)
-            {
-                waiting = true;
-                del.DynamicInvoke();
-                while (waiting) { }
-            }
-            Debug.WriteLine("Windows loaded");
-
+            //waiting = true;
+            //foreach (var del in WindowLoadingDelegates)
+            //{
+            //    waiting = true;
+            //    del.DynamicInvoke();
+            //    while (waiting) { }
+            //}
+            GroupWindow = new GroupWindow();
+            ChatWindowManager.Instance.InitWindows();
+            CooldownWindow = new CooldownWindow();
+            BossWindow = new BossWindow();
+            BuffWindow = new BuffWindow();
+            CharacterWindow = new CharacterWindow();
+            ClassWindow = new ClassWindow();
+            InfoWindow = new InfoWindow();
+            FlightDurationWindow = new FlightDurationWindow();
+            if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
+            SkillConfigWindow = new SkillConfigWindow();
+            GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
+            //GroupWindow.Show();
+            //CooldownWindow.Show();
+            //BossWindow.Show();
+            //BuffWindow.Show();
+            //CharacterWindow.Show();
+            //ClassWindow.Show();
         }
         private static void LoadCharWindow()
         {
@@ -223,7 +259,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
-                CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
+                //CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
 
                 CharacterWindow.Show();
                 waiting = false;
@@ -254,7 +290,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
+                //CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
 
                 CooldownWindow.Show();
                 waiting = false;
@@ -275,7 +311,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow();
 
-                BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
+                //BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
                 BossWindow.Show();
                 waiting = false;
 
@@ -328,9 +364,9 @@ namespace TCC
             var chatWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                ChatWindow = new ChatWindow();
-                ChatWindow.AllowsTransparency = SettingsManager.ChatWindowSettings.AllowTransparency;
-                ChatWindow.Show();
+                //ChatWindow = new ChatWindow();
+                //ChatWindow.AllowsTransparency = SettingsManager.ChatWindowSettings.AllowTransparency;
+                //ChatWindow.Show();
                 waiting = false;
 
                 Dispatcher.Run();
@@ -414,6 +450,35 @@ namespace TCC
             else if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 ContextMenu.IsOpen = false;
+            }
+        }
+
+        public static void TempShowAll()
+        {
+            CooldownWindow.TempShow();
+            CharacterWindow.TempShow();
+            BossWindow.TempShow();
+            BuffWindow.TempShow();
+            ClassWindow.TempShow();
+            GroupWindow.TempShow();
+            ChatWindowManager.Instance.TempShow();
+        }
+
+        public static  void SendString(string s)
+        {
+            var teraWindow = FocusManager.FindTeraWindow();
+            if (teraWindow == IntPtr.Zero) { return; }
+
+            PasteString(teraWindow, s);
+
+        }
+        private static void PasteString(IntPtr hWnd, string s)
+        {
+            Thread.Sleep(100);
+            foreach (var character in s)
+            {
+                if (!FocusManager.PostMessage(hWnd, FocusManager.WM_CHAR, character, 0)) { throw new Win32Exception(); }
+                Thread.Sleep(1);
             }
         }
     }

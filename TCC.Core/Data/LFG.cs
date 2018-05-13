@@ -6,21 +6,21 @@ namespace TCC.Data
 {
     public class LFG : TSPropertyChanged
     {
-        int _id;
-        string _name;
-        string _message;
-        bool _raid;
-        string _dungeonName;
-        ushort _membersCount;
-        Timer _removeTimer;
+        private uint _id;
+        private string _name;
+        private string _message;
+        private bool _raid;
+        private string _dungeonName;
+        private int _membersCount;
+        private Timer _removeTimer;
 
-        public int Id
+        public uint Id
         {
             get => _id; set
             {
                 if (_id == value) return;
                 _id = value;
-                NotifyPropertyChanged(nameof(Id));
+                NPC(nameof(Id));
             }
         }
         public string Name
@@ -29,7 +29,7 @@ namespace TCC.Data
             {
                 if (_name == value) return;
                 _name = value;
-                NotifyPropertyChanged(nameof(Name));
+                NPC(nameof(Name));
             }
         }
         public string Message
@@ -39,7 +39,7 @@ namespace TCC.Data
                 if (_message == value) return;
                 _message = value;
                 UpdateDungeonName();
-                NotifyPropertyChanged(nameof(Message));
+                NPC(nameof(Message));
             }
         }
         public bool Raid
@@ -48,7 +48,7 @@ namespace TCC.Data
             {
                 if (_raid == value) return;
                 _raid = value;
-                NotifyPropertyChanged(nameof(Raid));
+                NPC(nameof(Raid));
             }
         }
 
@@ -58,27 +58,27 @@ namespace TCC.Data
             {
                 if (_dungeonName == value) return;
                 _dungeonName = value;
-                NotifyPropertyChanged(nameof(DungeonName));
+                NPC(nameof(DungeonName));
             }
         }
 
-        public ushort MembersCount
+        public int MembersCount
         {
             get => _membersCount; set
             {
                 if (_membersCount == value) return;
                 _membersCount = value;
-                NotifyPropertyChanged(nameof(MembersCount));
-                NotifyPropertyChanged(nameof(MembersCountLabel));
+                NPC(nameof(MembersCount));
+                NPC(nameof(MembersCountLabel));
             }
         }
         public string MembersCountLabel
         {
             get { return MembersCount == 0 ? "" : MembersCount.ToString(); }
         }
-        public LFG(int id, string name, string msg, bool raid)
+        public LFG(uint id, string name, string msg, bool raid)
         {
-            _dispatcher = WindowManager.ChatWindow.Dispatcher;
+            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
 
             Id = id;
             Name = name;
@@ -95,7 +95,7 @@ namespace TCC.Data
 
         private void _removeTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            ChatWindowViewModel.Instance.RemoveLfg(this);
+            ChatWindowManager.Instance.RemoveLfg(this);
         }
         public void Refresh()
         {
@@ -103,7 +103,7 @@ namespace TCC.Data
             {
                 _removeTimer?.Stop();
                 _removeTimer?.Start();
-                NotifyPropertyChanged("Refresh");
+                NPC("Refresh");
             }
             catch (Exception) { }
         }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.Helpers
 {
     public abstract class BaseINPC : INotifyPropertyChanged
     {

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using TCC.ViewModels;
+using TCC.Data;
 
 namespace TCC.Controls
 {
@@ -14,7 +14,7 @@ namespace TCC.Controls
         public RunemarksControl()
         {
             InitializeComponent();
-            baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
+            BaseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
 
         }
 
@@ -27,7 +27,7 @@ namespace TCC.Controls
             else if (e.PropertyName == "Maxed")
             {
                 //baseBorder.Background = new SolidColorBrush(Color.FromRgb(0xff,0x98,0xbb));
-                maxBorder.Opacity = 1;
+                MaxBorder.Opacity = 1;
             }
         }
         private int _currentRunes = 0;
@@ -39,25 +39,25 @@ namespace TCC.Controls
             if (diff == 0) return;
             if (diff > 0)
             {
-                for (int i = 0; i < diff; i++)
+                for (var i = 0; i < diff; i++)
                 {
-                    dotsContainer.Children[_currentRunes + i].Opacity = 1;
+                    DotsContainer.Children[_currentRunes + i].Opacity = 1;
                 }
             }
             else
             {
                 //baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
-                maxBorder.Opacity = 0;
+                MaxBorder.Opacity = 0;
 
-                for (int i = dotsContainer.Children.Count - 1; i >= 0; i--)
+                for (var i = DotsContainer.Children.Count - 1; i >= 0; i--)
                 {
-                    dotsContainer.Children[i].Opacity = 0;
+                    DotsContainer.Children[i].Opacity = 0;
                 }
             }
             _currentRunes = newRunes;
         }
 
-        Counter _context;
+        private Counter _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

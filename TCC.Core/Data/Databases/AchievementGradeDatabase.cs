@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class AchievementGradeDatabase
+    public class AchievementGradeDatabase
     {
-        public static Dictionary<uint, string> Grades;
-        public static void Load()
+        public Dictionary<uint, string> Grades { get; }
+        public AchievementGradeDatabase(string lang)
         {
-            var f = File.OpenText("resources/data/achievement-grade-info.tsv");
+            var f = File.OpenText($"resources/data/achi_grade/achi_grade-{lang}.tsv");
             Grades = new Dictionary<uint, string>();
             while (true)
             {
                 var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
-                var id = UInt32.Parse(s[0]);
+                var id = uint.Parse(s[0]);
                 var name = s[1];
 
                 Grades.Add(id, name);

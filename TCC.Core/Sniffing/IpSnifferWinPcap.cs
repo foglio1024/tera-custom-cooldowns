@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-//using log4net;
 using PacketDotNet;
 using PacketDotNet.Utils;
 using SharpPcap;
 using SharpPcap.WinPcap;
+//using log4net;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     // Only works when WinPcap is installed
     public class IpSnifferWinPcap : IpSniffer

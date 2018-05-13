@@ -14,7 +14,7 @@ namespace TCC.Data
         public double Width { get; }
         public double Height { get; }
 
-        public Guard(uint gId, uint gNameId, string mapId, double left, double top, double width, double height )
+        public Guard(uint gId, uint gNameId, string mapId, double left = 0, double top = 0, double width = 0, double height = 0)
         {
             Sections = new Dictionary<uint, Section>();
             Id = gId;

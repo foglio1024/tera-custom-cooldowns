@@ -2,8 +2,9 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_GET_USER_GUILD_LOGO : ParsedMessage
     {

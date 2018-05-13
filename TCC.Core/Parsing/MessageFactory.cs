@@ -3,40 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Tera;
-using Tera.Game;
+using TCC.Data;
 using TCC.Parsing.Messages;
-using Tera.Game.Messages;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Client;
+using TCC.TeraCommon.Game.Services;
 using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
-using S_AVAILABLE_EVENT_MATCHING_LIST = TCC.Parsing.Messages.S_AVAILABLE_EVENT_MATCHING_LIST;
-using S_BAN_PARTY = TCC.Parsing.Messages.S_BAN_PARTY;
-using S_BAN_PARTY_MEMBER = TCC.Parsing.Messages.S_BAN_PARTY_MEMBER;
-using S_BOSS_GAGE_INFO = TCC.Parsing.Messages.S_BOSS_GAGE_INFO;
-using S_CHAT = TCC.Parsing.Messages.S_CHAT;
-using S_CHECK_TO_READY_PARTY = TCC.Parsing.Messages.S_CHECK_TO_READY_PARTY;
-using S_CREST_MESSAGE = TCC.Parsing.Messages.S_CREST_MESSAGE;
-using S_GET_USER_LIST = TCC.Parsing.Messages.S_GET_USER_LIST;
-using S_LEAVE_PARTY = TCC.Parsing.Messages.S_LEAVE_PARTY;
-using S_LEAVE_PARTY_MEMBER = TCC.Parsing.Messages.S_LEAVE_PARTY_MEMBER;
-using S_LOAD_TOPO = TCC.Parsing.Messages.S_LOAD_TOPO;
-using S_OTHER_USER_APPLY_PARTY = TCC.Parsing.Messages.S_OTHER_USER_APPLY_PARTY;
-using S_PARTY_MEMBER_LIST = TCC.Parsing.Messages.S_PARTY_MEMBER_LIST;
-using S_PARTY_MEMBER_STAT_UPDATE = TCC.Parsing.Messages.S_PARTY_MEMBER_STAT_UPDATE;
-using S_PLAYER_STAT_UPDATE = TCC.Parsing.Messages.S_PLAYER_STAT_UPDATE;
-using S_PRIVATE_CHAT = TCC.Parsing.Messages.S_PRIVATE_CHAT;
-using S_START_COOLTIME_SKILL = TCC.Parsing.Messages.S_START_COOLTIME_SKILL;
-using S_SYSTEM_MESSAGE = TCC.Parsing.Messages.S_SYSTEM_MESSAGE;
-using S_TRADE_BROKER_DEAL_SUGGESTED = TCC.Parsing.Messages.S_TRADE_BROKER_DEAL_SUGGESTED;
-using S_WHISPER = TCC.Parsing.Messages.S_WHISPER;
+//using Tera.Game.Messages;
+using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
+using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 
 namespace TCC.Parsing
 {
-    public static class MessageFactory
+    public class MessageFactory
     {
-        private static readonly Delegate UnknownMessageDelegate = Contructor<Func<TeraMessageReader, Tera.Game.Messages.UnknownMessage>>();
-        private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> { { 19900, Contructor<Func<TeraMessageReader, Tera.Game.Messages.C_CHECK_VERSION>>() } };
+        private static readonly Delegate UnknownMessageDelegate = Contructor<Func<TeraMessageReader, UnknownMessage>>();
+        private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> { { 19900, Contructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
         private static readonly Dictionary<string, Delegate> TeraMessages = new Dictionary<string, Delegate>
         {
+            {"C_LOGIN_ARBITER", Contructor<Func<TeraMessageReader,C_LOGIN_ARBITER>>()},
             { "S_LOGIN" , Contructor<Func<TeraMessageReader,S_LOGIN>>()},
             { "S_START_COOLTIME_SKILL" , Contructor<Func<TeraMessageReader,S_START_COOLTIME_SKILL>>()},
             { "S_DECREASE_COOLTIME_SKILL" , Contructor<Func<TeraMessageReader,S_DECREASE_COOLTIME_SKILL>>()},
@@ -114,6 +100,11 @@ namespace TCC.Parsing
             {"S_ABNORMALITY_DAMAGE_ABSORB", Contructor<Func<TeraMessageReader, S_ABNORMALITY_DAMAGE_ABSORB>>() },
             {"S_IMAGE_DATA", Contructor<Func<TeraMessageReader, S_IMAGE_DATA>>() },
             {"S_GET_USER_GUILD_LOGO", Contructor<Func<TeraMessageReader, S_GET_USER_GUILD_LOGO>>() },
+            {"S_FIELD_POINT_INFO", Contructor<Func<TeraMessageReader, S_FIELD_POINT_INFO>>() },
+            {"S_DUNGEON_CLEAR_COUNT_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_CLEAR_COUNT_LIST>>() },
+            {"S_SHOW_PARTY_MATCH_INFO", Contructor<Func<TeraMessageReader, S_SHOW_PARTY_MATCH_INFO>>() },
+            {"S_SHOW_CANDIDATE_LIST", Contructor<Func<TeraMessageReader, S_SHOW_CANDIDATE_LIST>>() },
+            //{"S_ACTION_STAGE", Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
             //{"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
 
         };
@@ -145,8 +136,12 @@ namespace TCC.Parsing
             {typeof(S_ABNORMALITY_DAMAGE_ABSORB), new Action<S_ABNORMALITY_DAMAGE_ABSORB>(x => PacketProcessor.HandleShieldDamageAbsorb(x)) },
             {typeof(S_IMAGE_DATA), new Action<S_IMAGE_DATA>(x => PacketProcessor.HandleImageData(x)) },
             {typeof(S_GET_USER_GUILD_LOGO), new Action<S_GET_USER_GUILD_LOGO>(x => PacketProcessor.HandleUserGuildLogo(x)) },
+            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
+            {typeof(S_SHOW_PARTY_MATCH_INFO), new Action<S_SHOW_PARTY_MATCH_INFO>(x => PacketProcessor.HandleLfgList(x)) },
+            {typeof(S_SHOW_CANDIDATE_LIST), new Action<S_SHOW_CANDIDATE_LIST>(x => PacketProcessor.HandleApplicantsList(x)) },
+            {typeof(C_LOGIN_ARBITER), Helpers.Contructor<Func<C_LOGIN_ARBITER, LoginArbiterMessage>>()},
+            //{typeof(S_ACTION_STAGE), new Action<S_ACTION_STAGE>(x => PacketProcessor.HandleActionStage(x)) }, //nvm
             //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
-
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
 
         };
@@ -215,7 +210,7 @@ namespace TCC.Parsing
             {typeof(S_ACCOMPLISH_ACHIEVEMENT), new Action<S_ACCOMPLISH_ACHIEVEMENT>(x => PacketProcessor.HandleAccomplishAchievement(x)) },
             {typeof(S_TRADE_BROKER_DEAL_SUGGESTED), new Action<S_TRADE_BROKER_DEAL_SUGGESTED>(x => PacketProcessor.HandleBrokerOffer(x)) },
             {typeof(S_UPDATE_FRIEND_INFO), new Action<S_UPDATE_FRIEND_INFO>(x => PacketProcessor.HandleFriendStatus(x)) },
-            //{typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
+            {typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
             {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
             {typeof(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA), new Action<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(x => PacketProcessor.HandleFriendIntoArea(x)) },
         };
@@ -229,7 +224,6 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> CharacterWindow = new Dictionary<Type, Delegate>
         {
-            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
 
         };
         private static readonly Dictionary<Type, Delegate> BossWindow = new Dictionary<Type, Delegate>
@@ -243,12 +237,33 @@ namespace TCC.Parsing
             {typeof(S_AVAILABLE_EVENT_MATCHING_LIST), new Action<S_AVAILABLE_EVENT_MATCHING_LIST>(x => PacketProcessor.HandleVanguardReceived(x)) },
             {typeof(S_DUNGEON_COOL_TIME_LIST), new Action<S_DUNGEON_COOL_TIME_LIST>(x => PacketProcessor.HandleDungeonCooltimeList(x)) },
             {typeof(S_ACCOUNT_PACKAGE_LIST), new Action<S_ACCOUNT_PACKAGE_LIST>(x => PacketProcessor.HandleAccountPackageList(x)) },
+            {typeof(S_FIELD_POINT_INFO), new Action<S_FIELD_POINT_INFO>(x => PacketProcessor.HandleGuardianInfo(x)) },
+            {typeof(S_DUNGEON_CLEAR_COUNT_LIST), new Action<S_DUNGEON_CLEAR_COUNT_LIST>(x => PacketProcessor.HandleDungeonClears(x)) },
         };
-        public static void Init()
+
+        private readonly OpCodeNamer _opCodeNamer;
+        private readonly OpCodeNamer _sysMsgNamer;
+        public string Region;
+        public uint Version;
+        public int ReleaseVersion { get; set; }
+
+
+        public MessageFactory()
         {
+            _opCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, "C_CHECK_VERSION" } });
+            Version = 0;
+            Region = "Unknown";
+        }
+        public MessageFactory(OpCodeNamer opCodeNamer, string region, uint version, bool chatEnabled = false, OpCodeNamer sysMsgNamer = null)
+        {
+            _opCodeNamer = opCodeNamer;
+            _sysMsgNamer = sysMsgNamer;
             OpcodeNameToType.Clear();
+            Version = version;
+            Region = region;
             TeraMessages.ToList().ForEach(x => OpcodeNameToType[PacketProcessor.OpCodeNamer.GetCode(x.Key)] = x.Value);
             Update();
+
         }
         public static void Update()
         {
@@ -258,7 +273,7 @@ namespace TCC.Parsing
 
             InfoWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
 
-            if (SettingsManager.ChatWindowSettings.Enabled)
+            if (SettingsManager.ChatEnabled)
             {
                 ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 if (SettingsManager.LfgOn)
@@ -275,19 +290,19 @@ namespace TCC.Parsing
                 if (!SettingsManager.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 if (!SettingsManager.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (SettingsManager.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
-        private static Tera.Game.Messages.ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
+        private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {
             Delegate type;
             if (!OpcodeNameToType.TryGetValue(opCode, out type))
                 type = UnknownMessageDelegate;
-            return (Tera.Game.Messages.ParsedMessage)type.DynamicInvoke(reader);
+            return (ParsedMessage)type.DynamicInvoke(reader);
         }
-        public static Tera.Game.Messages.ParsedMessage Create(Message message)
+        public ParsedMessage Create(Message message)
         {
-            var reader = new TeraMessageReader(message, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+            var reader = new TeraMessageReader(message, PacketProcessor.OpCodeNamer, this, PacketProcessor.SystemMessageNamer);
             return Instantiate(message.OpCode, reader);
         }
         public static TDelegate Contructor<TDelegate>() where TDelegate : class
@@ -304,7 +319,7 @@ namespace TCC.Parsing
             var parameters = ctrArgs.Select(Expression.Parameter).ToList();
             return Expression.Lambda(Expression.New(constructorInfo, parameters), parameters).Compile() as TDelegate;
         }
-        public static bool Process(Tera.Game.Messages.ParsedMessage message)
+        public bool Process(ParsedMessage message)
         {
             Delegate type;
             MainProcessor.TryGetValue(message.GetType(), out type);
@@ -312,5 +327,7 @@ namespace TCC.Parsing
             type.DynamicInvoke(message);
             return true;
         }
+
+        public void ReloadSysMsg() { _sysMsgNamer?.Reload(Version, ReleaseVersion); }
     }
 }

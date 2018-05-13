@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
+             MouseLeave="UserControl_MouseLeave"
              UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}" 
              ToolTipOpening="SkillIconControl_OnToolTipOpening"
              ToolTipClosing="SkillIconControl_OnToolTipClosing">
@@ -16,34 +17,45 @@
     </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <Grid>
-            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse Width="51" Height="{Binding ElementName=Icon, Path=ActualWidth}" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
-        <local:Arc x:Name="arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
-                   Stroke="#a000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <local:Arc x:Name="Arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
+                   Stroke="#a000" EndAngle="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        </local:Arc>        
+        <local:Arc x:Name="PreArc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
+                   Stroke="#9fa0" EndAngle="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </local:Arc>
 
         <Grid Width="Auto" MinWidth="12" 
-              Height="Auto" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
-            <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
+              Height="Auto" x:Name="G" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
+            <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" >
 
-            <TextBlock Foreground="#d000" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   TextAlignment="Center"
-                   FontSize="15" 
-                   x:Name="number" 
-                   FontFamily="{StaticResource ArialMonoBold}"
-                   Opacity="1" 
-                   Margin="0,0"
-                   Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
-                </TextBlock>
 
             </Border>
+            <TextBlock Foreground="#d000" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       TextAlignment="Center"
+                       FontSize="15" 
+                       x:Name="Number" 
+                       FontFamily="{StaticResource ArialMonoBold}"
+                       Opacity="1" 
+                       Margin="4,0"
+                       Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
+            </TextBlock>
+
         </Grid>
+        <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="Rectangle_MouseEnter" Fill="#01000000"></Rectangle>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Hide" Cursor="Hand" Visibility="Collapsed"  Name="HideButton"
+              MouseLeftButtonDown="HideButton_MouseLeftButtonDown">
+                <Ellipse Fill="DarkOrange" Effect="{StaticResource DropShadow}"></Ellipse>
+                <Path Data="{StaticResource SvgHide}" Fill="White" Stretch="Uniform" Margin="3"></Path>
+            </Grid>
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
         </Grid.CacheMode>-->

@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -65,7 +65,7 @@ namespace TCC.Controls
                 _secondsPassed = 0;
                 //CurrentCD = (double)_context.Cooldown / 1000;
                 NotifyPropertyChanged(nameof(CurrentCD));
-                double newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
+                var newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
                 if (_context.Cooldown == 0) newAngle = 0;
                 if (newAngle > 1) newAngle = 1;
 
@@ -108,12 +108,18 @@ namespace TCC.Controls
 
         }
 
-        void AnimateCooldown(double angle = 1)
+        private void AnimateCooldown(double angle = 1)
         {
             var an = new DoubleAnimation(angle*359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
-            int fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
-            arc.BeginAnimation(Arc.EndAngleProperty, an);
+            var fps = _context.Cooldown > 80000 ? 1 : 30;
+            Timeline.SetDesiredFrameRate(an, fps);
+            if(_context.Pre) PreArc.BeginAnimation(Arc.EndAngleProperty, an);
+            else
+            {
+                PreArc.BeginAnimation(Arc.EndAngleProperty, null);
+                PreArc.EndAngle = 0.01;
+                Arc.BeginAnimation(Arc.EndAngleProperty, an);
+            }
             NumberTimer.IsEnabled = true;
         }
 
@@ -136,6 +142,22 @@ namespace TCC.Controls
         private void SkillIconControl_OnToolTipClosing(object sender, ToolTipEventArgs e)
         {
             FocusManager.Running = true;
+        }
+
+        private void HideButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CooldownWindowViewModel.Instance.AddHiddenSkill(_context);
+            CloseTimer_Tick(null,null);
+        }
+
+        private void Rectangle_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideButton.Visibility = Visibility.Visible;
+        }
+
+        private void UserControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideButton.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -2,13 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
-             Loaded="ControlLoaded"
-             >
+             Loaded="ControlLoaded" d:DataContext="{d:DesignData DailyEvent}">
     <StackPanel Orientation="Horizontal" Margin="1,1,0,1" Opacity="1">
         <FrameworkElement Width="1000" >
             <FrameworkElement.LayoutTransform>
@@ -18,13 +16,13 @@
 
         <Border Height="14" 
                 MinWidth="14"
-                CornerRadius="6"
+                CornerRadius="7"
                 Background="{Binding Color, Converter={StaticResource Converters.StringToFill}}"
-                BorderBrush="White"
-                BorderThickness="2"
+                BorderBrush="#1fff"
+                BorderThickness="0"
                 HorizontalAlignment="Left"
                 ToolTip="{Binding ToolTip}"
-                Name="border"
+                Name="Border"
                 Padding="5,0,4,0"
                 RenderTransformOrigin=".5,.5"
                 ToolTipService.InitialShowDelay="0"
@@ -34,9 +32,9 @@
                     <ScaleTransform ScaleX="{Binding DurationFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
             </FrameworkElement>
-            <Border.Effect>
+            <!--<Border.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity=".6"></DropShadowEffect>
-            </Border.Effect>
+            </Border.Effect>-->
             <Border.RenderTransform>
                 <ScaleTransform />
             </Border.RenderTransform>

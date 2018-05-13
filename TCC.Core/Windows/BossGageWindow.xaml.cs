@@ -5,9 +5,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using TCC.ViewModels;
 
-namespace TCC.Converters
+namespace TCC.Windows
 {
-
     public class HarrowholdBossesVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -28,27 +27,17 @@ namespace TCC.Converters
         }
     }
 
-}
-
-namespace TCC.Windows
-{
-
     public partial class BossWindow : TccWindow
     {
 
         public BossWindow()
         {
             InitializeComponent();
-
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            ButtonsRef = Buttons;
+            MainContentRef = content;
             InitWindow(SettingsManager.BossWindowSettings, ignoreSize: true);
-        }
 
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ContextMenu.IsOpen = true;
+
         }
 
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -57,4 +46,3 @@ namespace TCC.Windows
         }
     }
 }
-

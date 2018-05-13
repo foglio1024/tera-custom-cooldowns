@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     // An object with an Id that can be spawned or deswpawned in the game world
     public class Entity : IEquatable<object>

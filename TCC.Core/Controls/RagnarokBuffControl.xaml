@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              Loaded="UserControl_Loaded"
              mc:Ignorable="d" >
-    <Grid Margin="0,0,0,0" Effect="{StaticResource dropShadow}">
+    <Grid Margin="0,0,0,0" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,25 +16,25 @@
                  Margin="2" 
                  Stroke="#ccc" 
                  StrokeThickness="1"
-                 x:Name="icon">
+                 x:Name="Icon">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
             </Ellipse.Fill>
             <Ellipse.Effect>
-                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="iconGlow" Opacity="0"></DropShadowEffect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="IconGlow" Opacity="0"></DropShadowEffect>
             </Ellipse.Effect>
         </Ellipse>
 
         <local:Arc StrokeThickness="21.5" 
                    Stroke="#6000" 
                    Width="43" Height="43" 
-                   x:Name="internalArc" 
+                   x:Name="InternalArc" 
                    EndAngle="0"/>
 
         <local:Arc StrokeThickness="5" 
                    Stroke="Orange" 
                    Width="49" Height="49"
-                   x:Name="externalArc" 
+                   x:Name="ExternalArc" 
                    EndAngle="0"/>
         
         <Grid Grid.Row="1">
@@ -56,7 +56,7 @@
                        TextAlignment="Center" 
                        VerticalAlignment="Center" />
         </Grid>
-            <Grid x:Name="secondaryGrid" 
+            <Grid x:Name="SecondaryGrid" 
               Width="43" 
               Height="18"  
               HorizontalAlignment="Center" 

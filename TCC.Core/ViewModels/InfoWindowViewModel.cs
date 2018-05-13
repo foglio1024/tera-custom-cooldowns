@@ -6,21 +6,19 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
-using TCC.Data.Databases;
-using TCC.Parsing;
 using TCC.Parsing.Messages;
+using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
     public class InfoWindowViewModel : TSPropertyChanged
     {
-        static InfoWindowViewModel _instance;
-        uint _selectedCharacterId;
+        private static InfoWindowViewModel _instance;
+        private uint _selectedCharacterId;
         public bool DiscardFirstVanguardPacket = true;
         public static InfoWindowViewModel Instance => _instance ?? (_instance = new InfoWindowViewModel());
         public SynchronizedObservableCollection<Character> Characters { get; set; }
@@ -42,8 +40,8 @@ namespace TCC.ViewModels
         {
             get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
         }
-
-
+        public bool SelectedCharacterExists => SelectedCharacter != null;
+        public bool ShowElleonMarks => TimeManager.Instance.CurrentRegion == "EU";
         public InfoWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -52,6 +50,8 @@ namespace TCC.ViewModels
             Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
             LoadCharDoc();
+            if (Characters.Count > 0) SelectCharacter(Characters[0]);
+            else SelectCharacter(new Character("", Class.None, 0, 0, _dispatcher));
         }
 
         public void LoadEvents(DayOfWeek today, string region)
@@ -59,7 +59,7 @@ namespace TCC.ViewModels
             ClearEvents();
             if (region == null)
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Unable to load events.");
+                ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }
             LoadEventFile(today, region);
@@ -71,7 +71,7 @@ namespace TCC.ViewModels
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))
             {
-                XElement root = new XElement("Events");
+                var root = new XElement("Events");
                 var eg = new XElement("EventGroup", new XAttribute("name", "Example event group"));
                 var ev = new XElement("Event",
                     new XAttribute("name", "Example Event"),
@@ -95,7 +95,7 @@ namespace TCC.ViewModels
 
             try
             {
-                XDocument d = XDocument.Load(path);
+                var d = XDocument.Load(path);
                 foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
                 {
                     var egName = egElement.Attribute("name").Value;
@@ -145,8 +145,8 @@ namespace TCC.ViewModels
 
                         var name = evElement.Attribute("name").Value;
                         var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
-                        TimeSpan parsedDuration = TimeSpan.Zero;
-                        DateTime parsedEnd = DateTime.Now;
+                        var parsedDuration = TimeSpan.Zero;
+                        var parsedEnd = DateTime.Now;
                         bool isDuration;
                         if (evElement.Attribute("duration") != null)
                         {
@@ -207,9 +207,9 @@ namespace TCC.ViewModels
             catch (Exception)
             {
 
-                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading events-{region}.xml. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
 
-                if (res == DialogResult.Cancel) File.Delete(path);
+                if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);
                 return;
             }
@@ -229,34 +229,34 @@ namespace TCC.ViewModels
                 if (ch.Id == c.Id) ch.IsSelected = true;
                 else ch.IsSelected = false;
             }
-            NotifyPropertyChanged(nameof(SelectedCharacter));
+            NPC(nameof(SelectedCharacter));
 
-            AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            Items = new CollectionViewSource { Source = SelectedCharacter.Gear }.View;
+            //AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //Items = new CollectionViewSource { Source = SelectedCharacter.Gear }.View;
 
-            AllDungeons.Filter = null;
-            Items.Filter = null;
-            SoloDungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
-            T2Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
-            T3Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
-            T4Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier4;
-            T5Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
+            //AllDungeons.Filter = null;
+            //Items.Filter = null;
+            //SoloDungs.Filter = d => DungeonDatabase.Instance.Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
+            //T2Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
+            //T3Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
+            //T4Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier4;
+            //T5Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
 
-            AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
-            Items.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
+            //AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
+            //Items.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
 
-            NotifyPropertyChanged(nameof(AllDungeons));
-            NotifyPropertyChanged(nameof(SoloDungs));
-            NotifyPropertyChanged(nameof(T2Dungs));
-            NotifyPropertyChanged(nameof(T3Dungs));
-            NotifyPropertyChanged(nameof(T4Dungs));
-            NotifyPropertyChanged(nameof(T5Dungs));
-            NotifyPropertyChanged(nameof(Items));
+            //NotifyPropertyChanged(nameof(AllDungeons));
+            //NotifyPropertyChanged(nameof(SoloDungs));
+            //NotifyPropertyChanged(nameof(T2Dungs));
+            //NotifyPropertyChanged(nameof(T3Dungs));
+            //NotifyPropertyChanged(nameof(T4Dungs));
+            //NotifyPropertyChanged(nameof(T5Dungs));
+            //NotifyPropertyChanged(nameof(Items));
             //_dispatcher.Invoke(() => WindowManager.InfoWindow.AnimateICitems());
         }
         public void ShowWindow()
@@ -264,6 +264,8 @@ namespace TCC.ViewModels
             if (!_dispatcher.Thread.IsAlive) return;
             LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
+            NPC(nameof(SelectedCharacterExists));
+            //SelectCharacter(SelectedCharacter);
         }
 
         public void SetVanguard(S_AVAILABLE_EVENT_MATCHING_LIST x)
@@ -291,7 +293,7 @@ namespace TCC.ViewModels
                 {
                     ch.IsLoggedIn = true;
                     DiscardFirstVanguardPacket = true;
-                    NotifyPropertyChanged(nameof(CurrentCharacter));
+                    NPC(nameof(CurrentCharacter));
                     SelectCharacter(CurrentCharacter);
                 }
                 else ch.IsLoggedIn = false;
@@ -309,35 +311,38 @@ namespace TCC.ViewModels
         }
         public void SaveToFile()
         {
-            XElement root = new XElement("Characters", new XAttribute("elite", SessionManager.IsElite));
+            var root = new XElement("Characters", new XAttribute("elite", SessionManager.IsElite));
 
             foreach (var c in Characters)
             {
-                XElement ce = new XElement("Character",
+                var ce = new XElement("Character",
                     new XAttribute("name", c.Name),
                     new XAttribute("id", c.Id),
                     new XAttribute("pos", c.Position),
                     new XAttribute("credits", c.Credits),
                     new XAttribute("weekly", c.WeekliesDone),
                     new XAttribute("daily", c.DailiesDone),
-                    new XAttribute("class", c.Class)
+                    new XAttribute("class", c.Class),
+                    new XAttribute("guardianPoints", c.GuardianPoints),
+                    new XAttribute("elleonMarks", c.ElleonMarks)
                     );
 
-                XElement dungs = new XElement("Dungeons");
+                var dungs = new XElement("Dungeons");
 
                 foreach (var d in c.Dungeons)
                 {
-                    XElement dg = new XElement("Dungeon",
+                    var dg = new XElement("Dungeon",
                         new XAttribute("id", d.Id),
-                        new XAttribute("entries", d.Entries));
+                        new XAttribute("entries", d.Entries),
+                        new XAttribute("total", d.Clears));
                     dungs.Add(dg);
                 }
 
-                XElement gear = new XElement("GearPieces");
+                var gear = new XElement("GearPieces");
 
                 foreach (var gearItem in c.Gear)
                 {
-                    XElement g = new XElement("Gear",
+                    var g = new XElement("Gear",
                         new XAttribute("id", gearItem.Id),
                         new XAttribute("piece", gearItem.Piece),
                         new XAttribute("tier", gearItem.Tier),
@@ -350,7 +355,7 @@ namespace TCC.ViewModels
                 root.Add(ce);
             }
 
-            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
+            var doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
             SaveCharDoc(doc);
         }
 
@@ -368,7 +373,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = System.Windows.MessageBox.Show("Could not write character data to characters.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var res = TccMessageBox.Show("TCC", "Could not write character data to characters.xml. File is being used by another process. Try again?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
             }
         }
@@ -381,8 +386,8 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading characters.xml. Try correcting the error and press Retry to try again, else press Cancel to delete current data.", "TCC", MessageBoxButtons.RetryCancel);
-                if (res == DialogResult.Retry) LoadCharDoc();
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters.xml. Manually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
+                if (res == MessageBoxResult.OK) LoadCharDoc();
                 else
                 {
                     File.Delete("resources/config/characters.xml");
@@ -393,8 +398,8 @@ namespace TCC.ViewModels
         private void LoadCharacters()
         {
             if (!File.Exists("resources/config/characters.xml")) return;
-            XDocument doc = XDocument.Load("resources/config/characters.xml");
-            SessionManager.IsElite = Boolean.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters").Attribute("elite").Value);
+            var doc = XDocument.Load("resources/config/characters.xml");
+            SessionManager.IsElite = bool.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters").Attribute("elite").Value);
             foreach (var c in doc.Descendants().Where(x => x.Name == "Character"))
             {
                 var name = c.Attribute("name").Value;
@@ -403,19 +408,36 @@ namespace TCC.ViewModels
                 var d = Convert.ToInt32(c.Attribute("daily").Value);
                 var id = Convert.ToUInt32(c.Attribute("id").Value);
                 var pos = Convert.ToInt32(c.Attribute("pos").Value);
-                var cl = (Class)Enum.Parse(typeof(Class), c.Attribute("class").Value);
+                var guard = c.Attribute("guardianPoints") != null ? Convert.ToUInt32(c.Attribute("guardianPoints").Value) : 0;
+                var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks").Value) : 0;
+                var classString = c.Attribute("class").Value;
+                if (!Enum.TryParse<Class>(classString, out var cl))
+                {
+                    //keep retrocompatibility
+                    if (classString == "Elementalist") classString = "Mystic";
+                    else if (classString == "Fighter") classString = "Brawler";
+                    else if (classString == "Engineer") classString = "Gunner";
+                    else if (classString == "Soulless") classString = "Reaper";
+                    else if (classString == "Glaiver") classString = "Valkyrie";
+                    else if (classString == "Assassin") classString = "Ninja";
+                }
+                cl = (Class)Enum.Parse(typeof(Class), classString);
 
                 var ch = new Character(name, cl, id, pos, _dispatcher)
                 {
                     Credits = cr,
                     WeekliesDone = w,
-                    DailiesDone = d
+                    DailiesDone = d,
+                    GuardianPoints = guard,
+                    ElleonMarks = marks
                 };
                 var dgDict = new Dictionary<uint, short>();
                 foreach (var dgEl in c.Descendants().Where(x => x.Name == "Dungeon"))
                 {
                     var dgId = Convert.ToUInt32(dgEl.Attribute("id").Value);
                     var dgEntries = Convert.ToInt16(dgEl.Attribute("entries").Value);
+                    var dgTotal = dgEl.Attribute("total") != null ? Convert.ToInt16(dgEl.Attribute("total").Value) : 0;
+                    ch.SetDungeonTotalRuns(dgId, dgTotal);
                     dgDict.Add(dgId, dgEntries);
                 }
                 ch.UpdateDungeons(dgDict);

@@ -6,7 +6,7 @@ namespace TCC.Data
 {
     public class Player : TSPropertyChanged
     {
-        string name;
+        private string name;
         public string Name
         {
             get => name;
@@ -15,12 +15,12 @@ namespace TCC.Data
                 if (name != value)
                 {
                     name = value;
-                    NotifyPropertyChanged("Name");
+                    NPC("Name");
                 }
             }
         }
 
-        ulong entityId;
+        private ulong entityId;
         public ulong EntityId
         {
             get => entityId;
@@ -29,14 +29,14 @@ namespace TCC.Data
                 if (entityId != value)
                 {
                     entityId = value;
-                    NotifyPropertyChanged("EntityId");
+                    NPC("EntityId");
                 }
             }
         }
         public uint PlayerId { get; internal set; }
         public uint ServerId { get; internal set; }
 
-        Class playerclass;
+        private Class playerclass;
         public Class Class
         {
             get => playerclass;
@@ -45,12 +45,12 @@ namespace TCC.Data
                 if (playerclass != value)
                 {
                     playerclass = value;
-                    NotifyPropertyChanged("Class");
+                    NPC("Class");
                 }
             }
         }
 
-        Laurel laurel;
+        private Laurel laurel;
         public Laurel Laurel
         {
             get => laurel;
@@ -59,12 +59,12 @@ namespace TCC.Data
                 if (laurel != value)
                 {
                     laurel = value;
-                    NotifyPropertyChanged("Laurel");
+                    NPC("Laurel");
                 }
             }
         }
 
-        int level;
+        private int level;
         public int Level
         {
             get => level;
@@ -73,7 +73,7 @@ namespace TCC.Data
                 if (level != value)
                 {
                     level = value;
-                    NotifyPropertyChanged("Level");
+                    NPC("Level");
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace TCC.Data
                 if (value != itemLevel)
                 {
                     itemLevel = value;
-                    NotifyPropertyChanged("ItemLevel");
+                    NPC("ItemLevel");
                 }
             }
         }
@@ -101,8 +101,8 @@ namespace TCC.Data
                 if (maxHP != value)
                 {
                     maxHP = value;
-                    NotifyPropertyChanged("MaxHP");
-                    NotifyPropertyChanged(nameof(HpFactor));
+                    NPC("MaxHP");
+                    NPC(nameof(HpFactor));
 
                 }
 
@@ -117,8 +117,8 @@ namespace TCC.Data
                 if (maxMP != value)
                 {
                     maxMP = value;
-                    NotifyPropertyChanged("MaxMP");
-                    NotifyPropertyChanged(nameof(MpFactor));
+                    NPC("MaxMP");
+                    NPC(nameof(MpFactor));
 
                 }
 
@@ -133,8 +133,8 @@ namespace TCC.Data
                 if (maxST != value)
                 {
                     maxST = value;
-                    NotifyPropertyChanged("MaxST");
-                    NotifyPropertyChanged(nameof(StFactor));
+                    NPC("MaxST");
+                    NPC(nameof(StFactor));
                 }
             }
         }
@@ -148,8 +148,8 @@ namespace TCC.Data
                 if (maxShield != value)
                 {
                     maxShield = value;
-                    NotifyPropertyChanged(nameof(MaxShield));
-                    NotifyPropertyChanged(nameof(ShieldFactor));
+                    NPC(nameof(MaxShield));
+                    NPC(nameof(ShieldFactor));
                 }
             }
         }
@@ -163,9 +163,9 @@ namespace TCC.Data
                 if (currentHP != value)
                 {
                     currentHP = value;
-                    NotifyPropertyChanged(nameof(CurrentHP));
-                    NotifyPropertyChanged(nameof(TotalHP));
-                    NotifyPropertyChanged(nameof(HpFactor));
+                    NPC(nameof(CurrentHP));
+                    NPC(nameof(TotalHP));
+                    NPC(nameof(HpFactor));
                 }
             }
         }
@@ -186,8 +186,8 @@ namespace TCC.Data
                 if (currentMP != value)
                 {
                     currentMP = value;
-                    NotifyPropertyChanged("CurrentMP");
-                    NotifyPropertyChanged(nameof(MpFactor));
+                    NPC("CurrentMP");
+                    NPC(nameof(MpFactor));
 
                 }
             }
@@ -201,8 +201,8 @@ namespace TCC.Data
                 if (currentST != value)
                 {
                     currentST = value;
-                    NotifyPropertyChanged("CurrentST");
-                    NotifyPropertyChanged(nameof(StFactor));
+                    NPC("CurrentST");
+                    NPC(nameof(StFactor));
 
                 }
             }
@@ -217,9 +217,9 @@ namespace TCC.Data
                 if(currentShield == value) return;
                 if(value < 0) return;
                 currentShield = value;
-                NotifyPropertyChanged(nameof(CurrentShield));
-                NotifyPropertyChanged(nameof(TotalHP));
-                NotifyPropertyChanged(nameof(ShieldFactor));
+                NPC(nameof(CurrentShield));
+                NPC(nameof(TotalHP));
+                NPC(nameof(ShieldFactor));
             }
         }
 
@@ -232,7 +232,7 @@ namespace TCC.Data
                 if (flightEnergy != value)
                 {
                     flightEnergy = value;
-                    NotifyPropertyChanged("FlightEnergy");
+                    NPC("FlightEnergy");
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace TCC.Data
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NotifyPropertyChanged("IsDebuffed");
+                NPC("IsDebuffed");
             }
         }
         internal void RemoveFromDebuffList(Abnormality ab)
@@ -252,12 +252,12 @@ namespace TCC.Data
             if (ab.IsBuff == false)
             {
                 _debuffList.Remove(ab.Id);
-                NotifyPropertyChanged("IsDebuffed");
+                NPC("IsDebuffed");
             }
         }
         public bool IsDebuffed => _debuffList.Count != 0;
 
-        bool isInCombat;
+        private bool isInCombat;
         public bool IsInCombat
         {
             get => isInCombat;
@@ -266,7 +266,7 @@ namespace TCC.Data
                 if (value != isInCombat)
                 {
                     isInCombat = value;
-                    NotifyPropertyChanged("IsInCombat");
+                    NPC("IsInCombat");
                 }
             }
         }

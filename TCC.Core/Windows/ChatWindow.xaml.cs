@@ -1,97 +1,120 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
+using Dragablz;
 using TCC.Controls.ChatControls;
-using TCC.Data;
-using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC.Windows
 {
 
-    public partial class ChatWindow : TccWindow
+    public partial class ChatWindow
     {
-        DispatcherTimer testTimer;
-        DoubleAnimation opacityUp;
-        DoubleAnimation opacityDown;
-        bool _bottom = true;
-        int _testCounter = 0;
-
-        public object CurrentSender { get; internal set; }
-
-        private void TccWindow_Loaded(object sender, RoutedEventArgs e)
+        private readonly DoubleAnimation _opacityUp;
+        private readonly DoubleAnimation _opacityDown;
+        private bool _bottom = true;
+        public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
+        public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
+        public ChatWindow(ChatWindowSettings ws)
         {
-            InitWindow(SettingsManager.ChatWindowSettings, false, true, false);
-            opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
-            opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
-            ChatWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
-            //_currentContent = itemsControl;
-            ChatWindowViewModel.Instance.LoadTabs(SettingsManager.ParseTabsSettings());
-
+            InitializeComponent();
+            //ButtonsRef = buttons;
+            MainContentRef = content;
+            InitWindow(ws, false, true, false);
+            _opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
+            _opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
+            ChatWindowManager.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
+            AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnDragCompleted));
+        }
+        public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
+        {
+            DataContext = vm;
+            UpdateSettings();
         }
 
-        private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+        private void OnDragCompleted(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
-            if (e.PropertyName == "NewItem")
+            if (e.NewValue) return;
+            var newOrder = TabControl.GetOrderedHeaders();
+            var old = new HeaderedItemViewModel[VM.TabVMs.Count];
+            VM.TabVMs.CopyTo(old, 0);
+            var same = true;
+            var items = newOrder.ToList();
+            for (var i = 0; i < items.Count; i++)
             {
-                if (_bottom)
+                if (old[i].Header != items.ToList()[i].Content)
                 {
-                    ScrollToBottom();
+                    same = false;
+                    break;
                 }
             }
-            else if (e.PropertyName == nameof(ChatWindowViewModel.Instance.IsChatVisible))
+            if (same) return;
+            VM.TabVMs.Clear();
+            foreach (var tab in items)
             {
-                AnimateChatVisibility(ChatWindowViewModel.Instance.IsChatVisible);
+                VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
         }
 
-        public void ScrollToBottom()
-        {
-            return; //TODO: find a way to reference the itemscontrol
-            var t = VisualTreeHelper.GetChild(tabControl.ItemContainerGenerator.ContainerFromIndex(tabControl.SelectedIndex), 0);
-            var g = (Grid)VisualTreeHelper.GetChild(t, 0);
-            var b = (Border)VisualTreeHelper.GetChild(g, 0);
-            var s = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
-
-            s.ScrollToTop();
-
-        }
-        private void AnimateChatVisibility(bool isChatVisible)
+        public void UpdateSettings()
         {
             Dispatcher.Invoke(() =>
             {
-                if (isChatVisible)
+
+                if (VM.TabVMs.Count == 0)
                 {
-                    root.BeginAnimation(OpacityProperty, opacityUp);
+                    foreach (var tab in TabControl.ItemsSource)
+                    {
+                        VM.TabVMs.Add(tab as HeaderedItemViewModel);
+                    }
                 }
-                else
+
+            ((ChatWindowSettings)WindowSettings).Tabs.Clear();
+                ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
+                ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
+                ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
+                ((ChatWindowSettings)WindowSettings).X = Left / SettingsManager.ScreenW;
+                ((ChatWindowSettings)WindowSettings).Y = Top / SettingsManager.ScreenH;
+                var v = SettingsManager.ChatWindowsSettings;
+                var s = v.FirstOrDefault(x => x == WindowSettings);
+                if (s == null) v.Add(WindowSettings as ChatWindowSettings);
+                else s = WindowSettings as ChatWindowSettings;
+
+                if (ChatTabClient.LastSource != this && ChatTabClient.LastSource != null)
                 {
-                    root.BeginAnimation(OpacityProperty, opacityDown);
+                    ChatTabClient.LastSource.UpdateSettings();
                 }
             });
         }
-
-        bool _locked;
-        internal void LockTooltip(bool locked)
+        private void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            _locked = locked;
+            if (e.PropertyName == nameof(ChatWindowManager.Instance.IsChatVisible))
+            {
+                AnimateChatVisibility(ChatWindowManager.Instance.IsChatVisible);
+            }
         }
-        private void SWPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+
+        private void AnimateChatVisibility(bool isChatVisible)
         {
-            ScrollViewer s = (ScrollViewer)sender;
+            Dispatcher.Invoke(() => { Root.BeginAnimation(OpacityProperty, isChatVisible ? _opacityUp : _opacityDown); });
+        }
+
+        private void SwPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var s = (ScrollViewer)sender;
             var offset = e.Delta > 0 ? -2 : 2;
             s.ScrollToVerticalOffset(s.VerticalOffset - offset);
             e.Handled = true;
             if (s.VerticalOffset == 0)
             {
                 _bottom = true;
-                ChatWindowViewModel.Instance.AddFromQueue(2);
-                if (ChatWindowViewModel.Instance.IsQueueEmpty) ChatWindowViewModel.Instance.Paused = false;
+                ChatWindowManager.Instance.AddFromQueue(2);
+                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
 
             }
             else
@@ -100,7 +123,7 @@ namespace TCC.Windows
                 _bottom = false;
             }
 
-            ChatWindowViewModel.Instance.Paused = !_bottom;
+            ChatWindowManager.Instance.SetPaused(!_bottom);
 
         }
         public void OpenTooltip()
@@ -108,68 +131,31 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 FocusManager.Running = false;
-                if (playerInfo.IsOpen) CloseTooltip();
-                ChatWindowViewModel.Instance.TooltipInfo.Refresh();
-                playerInfo.IsOpen = true;
-                ((PlayerTooltip)playerInfo.Child).AnimateOpening();
+                if (PlayerInfo.IsOpen) CloseTooltip();
+                ChatWindowManager.Instance.TooltipInfo.Refresh();
+                PlayerInfo.IsOpen = true;
+                ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
             });
         }
         public void CloseTooltip()
         {
             Dispatcher.Invoke(() =>
             {
-                if (_locked) return;
                 FocusManager.Running = true;
-
-                playerInfo.IsOpen = false;
+                PlayerInfo.IsOpen = false;
             });
-        }
-        public ChatWindow()
-        {
-            InitializeComponent();
-
-        }
-
-        private void playerInfo_MouseLeave(object sender, MouseEventArgs e)
-        {
-            CloseTooltip();
         }
 
         private void TabClicked(object sender, MouseButtonEventArgs e)
         {
-
-            var s = sender as FrameworkElement;
-            AnimateTabRect(s);
-            var t = s.DataContext as Tab;
-            if (t != null)
-            {
-                t.Attention = false;
-                ChatWindowViewModel.Instance.CurrentTab = t;
-            }
-            //_currentContent = tabControl.SelectedContent as ItemsControl;
-            //var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
-            //var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
-
-            //sw.ScrollToTop();
-        }
-        private void AnimateTabRect(FrameworkElement s)
-        {
-            var w = s.ActualWidth;
-            Point r = s.TranslatePoint(new Point(0, 0), (UIElement)s.Parent);
-            var sizeAn = new DoubleAnimation(w, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
-            var posAn = new DoubleAnimation(r.X, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
-
-            selectionRect.BeginAnimation(WidthProperty, sizeAn);
-            selectionRect.RenderTransform.BeginAnimation(TranslateTransform.XProperty, posAn);
-
+            if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel t)) return;
+            ((Tab)t.Content).Attention = false;
+            ((ChatViewModel)DataContext).CurrentTab = (Tab)t.Content;
         }
 
 
-        //ItemsControl _currentContent;
-        VirtualizingStackPanel _currentPanel;
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            return;
             //if (!_bottom) return;
             /*
                         _currentContent = tabControl.SelectedContent as ItemsControl;
@@ -210,65 +196,14 @@ namespace TCC.Windows
                         }
             */
         }
-        private List<FrameworkElement> GetVisibleItems(Rect svViewportBounds)
-        {
-            List<FrameworkElement> result = new List<FrameworkElement>();
-            if (_currentPanel.Children.Count > 2)
-            {
-                for (int i = 0; i < _currentPanel.Children.Count; i++)
-                {
-                    var container = (_currentPanel.Children[i] as FrameworkElement);
 
-                    if (container != null)
-                    {
-                        var offset = VisualTreeHelper.GetOffset(container);
-                        var bounds = new Rect(offset.X, offset.Y, container.ActualWidth, container.ActualHeight);
-
-                        if (svViewportBounds.Contains(bounds) || svViewportBounds.IntersectsWith(bounds))
-                        {
-                            result.Add(container);
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-        public int GetMessageRows(double height)
-        {
-            //Debug.WriteLine("Checking rows:{0}", height);
-            if (height < 28) return 1;
-            else if (height < 46) return 2;
-            else if (height < 64) return 3;
-            else if (height < 82) return 4;
-            else if (height < 100) return 5;
-            else return 6;
-        }
-        private VirtualizingStackPanel GetInnerStackPanel(FrameworkElement element)
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
-            {
-                var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
-
-                if (child == null) continue;
-
-
-                if (child is VirtualizingStackPanel) return child as VirtualizingStackPanel;
-
-                var panel = GetInnerStackPanel(child);
-
-                if (panel != null)
-                    return panel;
-            }
-
-            return null;
-
-        }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            //var res = TccMessageBox.Show("TCC", $"There was an error while reading events-EU.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
             //Proxy.ChatTest("test");
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "Moonfury", "<font size=\"50\" color=\"#e87d7d\"> M</font>" + "<font size=\"70\" color=\"#e8b07d\">E</font>" + "<font size=\"70\" color=\"#e8d77d\">M</font>" + "<font size=\"70\" color=\"#c6e87d\">E</font>" + "<font size=\"50\" color=\"#92e87d\">S</font>" + "<font size=\"50\" color=\"#7de89b\">L</font>" + "<font size=\"50\" color=\"#7de8ce\">A</font>" + "<font size=\"50\" color=\"#7dcee8\">S</font>" + "<font size=\"50\" color=\"#7d8ee8\">H</font>"));
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "PODEM CONFIAR", "<font size=\"25\" color=\"#ff0000\"><a href=\"asfunction:chatLinkAction\">I am a retard that runs random code from the internet, so my character has been sent to the DOOMZONE.</a></font>"));
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "PODEM CONFIAR", "<font size=\"32\" color=\"#ff0000\"><a href=\"asfunction:chatLinkAction\">Goodbye everyone!</a></font>"));
+            //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "Moonfury", "<font size=\"50\" color=\"#e87d7d\"> M</font>" + "<font size=\"70\" color=\"#e8b07d\">E</font>" + "<font size=\"70\" color=\"#e8d77d\">M</font>" + "<font size=\"70\" color=\"#c6e87d\">E</font>" + "<font size=\"50\" color=\"#92e87d\">S</font>" + "<font size=\"50\" color=\"#7de89b\">L</font>" + "<font size=\"50\" color=\"#7de8ce\">A</font>" + "<font size=\"50\" color=\"#7dcee8\">S</font>" + "<font size=\"50\" color=\"#7d8ee8\">H</font>"));
+            //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "PODEM CONFIAR", "<font size=\"25\" color=\"#ff0000\"><a href=\"asfunction:chatLinkAction\">I am a retard that runs random code from the internet, so my character has been sent to the DOOMZONE.</a></font>"));
+            //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "PODEM CONFIAR", "<font size=\"32\" color=\"#ff0000\"><a href=\"asfunction:chatLinkAction\">Goodbye everyone!</a></font>"));
 
             //GroupWindowViewModel.Instance.ClearAll();
             //for (int i = 0; i < 23; i++)
@@ -286,74 +221,72 @@ namespace TCC.Windows
             //{
             //    var name = "H" + i;
 
-            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Elementalist, ServerId = (uint)i + 300 });
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Mystic, ServerId = (uint)i + 300 });
             //}
-
         }
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChatWindowViewModel.Instance.RefreshTimer();
-
+            ChatWindowManager.Instance.RefreshTimer();
+            Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)));
+            if (e.LeftButton == MouseButtonState.Pressed) UpdateSettings();
         }
 
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
         {
-            ChatWindowViewModel.Instance.StopHideTimer();
+            ChatWindowManager.Instance.StopHideTimer();
+            Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
+        }
+
+        private void OpenTabSettings(object sender, MouseButtonEventArgs e)
+        {
+            if (!(sender is FrameworkElement s)) return;
+            if (!(s.DataContext is HeaderedItemViewModel dc)) return;
+            var t = (Tab)dc.Content;
+            var sw = new ChatSettingsWindow(t);
+            sw.Show();
+            sw.Activate();
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
+        }
+
+        private void SettingsPopup_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (SettingsPopup.IsMouseCaptured) return;
+            SettingsPopup.IsOpen = false;
+        }
+
+        private void SettingsPopup_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (sender as FrameworkElement)?.CaptureMouse();
+        }
+
+        private void SettingsPopup_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            (sender as FrameworkElement)?.ReleaseMouseCapture();
 
         }
 
-        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void ChatWindow_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            UpdateSettings();
+        }
+
+        private void ChatWindow_OnDragLeave(object sender, DragEventArgs e)
         {
 
         }
 
-        private void OpenChannelSettings(object sender, MouseButtonEventArgs e)
+        public void SetMgButtonVis()
         {
-            if (ChatSettingsPopup.IsOpen)
+
+            Dispatcher.Invoke(() =>
             {
-                FocusManager.MakeUnfocusable(_handle);
-                var anc = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-                anc.Completed += (s, ev) =>
-                {
-                    ChatSettingsPopup.IsOpen = false;
-                    SettingsManager.SaveSettings();
-
-                };
-                ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, anc);
-                return;
-
-            }
-            ChatSettingsPopup.IsOpen = true;
-            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
-            ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
-            FocusManager.UndoUnfocusable(_handle);
-            Activate();
-            ChatSettingsPopup.Focus();
-
-        }
-
-        private void CloseChannelSettings(object sender, MouseButtonEventArgs e)
-        {
-            FocusManager.MakeUnfocusable(_handle);
-            var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            an.Completed += (s, ev) =>
-            {
-                ChatSettingsPopup.IsOpen = false;
-                SettingsManager.SaveSettings();
-
-            };
-            ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
-
-        }
-
-        private void SettingsButtonEnter(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void AddChatTab(object sender, RoutedEventArgs e)
-        {
-            ChatWindowViewModel.Instance.Tabs.Add(new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { }));
+                ((PlayerTooltip)PlayerInfo.Child).SetMoongourdVisibility();
+            });
         }
     }
 

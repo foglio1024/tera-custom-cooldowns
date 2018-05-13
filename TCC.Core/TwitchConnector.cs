@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TCC.Data;
 using TCC.ViewModels;
 using TwitchLib;
 using TwitchLib.Models.Client;
@@ -21,8 +17,8 @@ namespace TCC
 
         private void Client_OnMessageReceived(object sender, TwitchLib.Events.Client.OnMessageReceivedArgs e)
         {
-            var msg = new TCC.Data.ChatMessage(ChatChannel.Twitch, e.ChatMessage.Username, "<FONT>" + e.ChatMessage.Message + "</FONT>");
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            var msg = new Data.ChatMessage(ChatChannel.Twitch, e.ChatMessage.Username, "<FONT>" + e.ChatMessage.Message + "</FONT>");
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
         public void Init()

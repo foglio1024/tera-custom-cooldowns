@@ -1,133 +1,102 @@
-﻿using System;
+﻿using Dragablz;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
+using TCC.Controls.ChatControls;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.Windows;
 
 namespace TCC.ViewModels
 {
-    public class ChatWindowViewModel : TccWindowViewModel
+    public class ChatWindowManager : TccWindowViewModel
     {
-        private DispatcherTimer hideTimer;
-        private static ChatWindowViewModel _instance;
+        private readonly DispatcherTimer _hideTimer;
+        private static ChatWindowManager _instance;
+        private bool _isChatVisible;
+        private readonly ConcurrentQueue<ChatMessage> _queue;
 
-        private bool isChatVisible;
-        private SynchronizedObservableCollection<ChatMessage> _chatMessages;
-        private ConcurrentQueue<ChatMessage> _queue;
+        public event Action<ChatMessage> NewMessage;
+
+        public void LockTooltip()
+        {
+            throw new NotImplementedException();
+        }
+        internal void CloseTooltip()
+        {
+            if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
+            ChatWindows[0].CloseTooltip();
+        }
+
         public List<SimpleUser> Friends;
         public List<string> BlockedUsers;
         public LFG LastClickedLfg;
-        private SynchronizedObservableCollection<LFG> _lfgs;
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
-        public Tab CurrentTab { get; set; }
-        private bool paused;
 
-        public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
-        public bool IsTeraOnTop
+        public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
+
+        internal void SetPaused(bool v, ChatMessage dc)
         {
-            get => WindowManager.IsTccVisible;
+            ChatWindows.ToList().ForEach(w =>
+            {
+                if (w.VM.CurrentTab.Messages.Contains(dc)) w.VM.Paused = v;
+            });
         }
+
         public bool IsChatVisible
         {
-            get => isChatVisible;
-            set
+            get => _isChatVisible;
+            private set
             {
-                if (isChatVisible == value) return;
-                isChatVisible = value;
-                NotifyPropertyChanged(nameof(IsChatVisible));
+                if (_isChatVisible == value) return;
+                _isChatVisible = value;
+                NPC(nameof(IsChatVisible));
             }
         }
-        public double ChatWindowOpacity => SettingsManager.ChatWindowOpacity;
 
-        public bool LfgOn
+        internal void SetPaused(bool v)
         {
-            get => SettingsManager.LfgOn;
-            set
+            ChatWindows.ToList().ForEach(w =>
             {
-                NotifyPropertyChanged(nameof(LfgOn));
-            }
+                w.VM.Paused = v;
+            });
         }
-        public int MessageCount
+
+        internal void ScrollToBottom()
         {
-            get => ChatMessages.Count;
+            //throw new NotImplementedException();
         }
-        public bool Paused
-        {
-            get { return paused; }
-            set
-            {
-                if (paused == value) return;
-                paused = value;
-                NotifyPropertyChanged(nameof(Paused));
-            }
-        }
-        public bool IsQueueEmpty
-        {
-            get
-            {
-                return _queue.Count == 0 ? true : false;
-            }
-        }
+
+        public int MessageCount => ChatMessages.Count;
+
+        public bool IsQueueEmpty => _queue.Count == 0;
         public TooltipInfo TooltipInfo { get; set; }
-        public SynchronizedObservableCollection<ChatMessage> ChatMessages
-        {
-            get => _chatMessages; set
-            {
-                if (_chatMessages == value) return;
-                _chatMessages = value;
-            }
-        }
-        public SynchronizedObservableCollection<LFG> LFGs
-        {
-            get => _lfgs;
-            set
-            {
-                if (_lfgs == value) return;
-                _lfgs = value;
-            }
-        }
+        public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; }
+        public SynchronizedObservableCollection<LFG> LFGs { get; }
+        public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; }
 
-        public SynchronizedObservableCollection<Tab> Tabs
-        {
-            get => _tabs;
-            set
-            {
-                if (_tabs == value) return;
-                _tabs = value;
-                NotifyPropertyChanged(nameof(Tabs));
-            }
-        }
 
-        public List<ChatChannelOnOff> VisibleChannels => SettingsManager.EnabledChatChannels;
+        private List<ChatChannelOnOff> VisibleChannels => SettingsManager.EnabledChatChannels;
+
         private readonly object _lock = new object();
-        private SynchronizedObservableCollection<Tab> _tabs;
 
-        public ChatWindowViewModel()
+        private ChatWindowManager()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _scale = SettingsManager.ChatWindowSettings.Scale;
-            _chatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
+            //_scale = SettingsManager.ChatWindowSettings.Scale; TODO
+            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
             _queue = new ConcurrentQueue<ChatMessage>();
-            _lfgs = new SynchronizedObservableCollection<LFG>(_dispatcher);
-            hideTimer = new DispatcherTimer();
-            hideTimer.Interval = TimeSpan.FromSeconds(15);
-            hideTimer.Tick += HideTimer_Tick;
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NotifyPropertyChanged("IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    WindowManager.ChatWindow.RefreshTopmost();
-                }
-            };
+            LFGs = new SynchronizedObservableCollection<LFG>(_dispatcher);
+            ChatWindows = new SynchronizedObservableCollection<ChatWindow>();
+            _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(15) };
+            _hideTimer.Tick += HideTimer_Tick;
 
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
@@ -139,7 +108,25 @@ namespace TCC.ViewModels
             Friends = new List<SimpleUser>();
             TooltipInfo = new TooltipInfo("", "", 1);
             PrivateChannels[7] = new PrivateChatChannel(uint.MaxValue - 1, "Proxy", 7);
+            ChatWindows.CollectionChanged += ChatWindows_CollectionChanged;
+            //TODO: create windows based on settings
 
+        }
+
+        private void ChatWindows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                if (e.OldItems.Count == 0) return;
+                SettingsManager.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow).WindowSettings as ChatWindowSettings);
+            }
+            //Console.WriteLine($"Chat windows list changed; count: {ChatWindows.Count}");
+
+
+            //ChatWindows.ToList().ForEach(x =>
+            //{
+            //    //Console.WriteLine($"\t - {x.VM.TabVMs.Count} tabs");
+            //});
         }
 
         public void RemoveDeadLfg()
@@ -152,10 +139,9 @@ namespace TCC.ViewModels
         }
         public void AddFromQueue(int itemsToAdd)
         {
-            for (int i = 0; i < itemsToAdd; i++)
+            for (var i = 0; i < itemsToAdd; i++)
             {
-                ChatMessage msg;
-                if (_queue.TryDequeue(out msg))
+                if (_queue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
                     if (ChatMessages.Count > SettingsManager.MaxMessages)
@@ -171,17 +157,17 @@ namespace TCC.ViewModels
             {
                 IsChatVisible = false;
             }
-            hideTimer.Stop();
+            _hideTimer.Stop();
         }
         private void ChatMessages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshTimer();
-            NotifyPropertyChanged("NewItem");
+            NPC($"NewItem");
             IsChatVisible = true;
         }
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            if (!SettingsManager.ChatWindowSettings.Enabled) return;
+            if (!SettingsManager.ChatEnabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
             var vch = VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel);
             if (vch == null)
@@ -204,12 +190,18 @@ namespace TCC.ViewModels
                     File.WriteAllText("chat-message-error.txt", sb.ToString());
                     var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
                     AddChatMessage(err);
-                } catch { }
+                }
+                catch
+                {
+                    // ignored
+                }
+
+                return;
             }
             if (!vch.Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
-                for (int i = 0; i < ChatMessages.Count - 1; i++)
+                for (var i = 0; i < ChatMessages.Count - 1; i++)
                 {
                     var m = ChatMessages[i];
                     if (!Pass(chatMessage, m)) return;
@@ -217,8 +209,7 @@ namespace TCC.ViewModels
             }
             else
             {
-
-                for (int i = 0; i < SettingsManager.SpamThreshold; i++)
+                for (var i = 0; i < SettingsManager.SpamThreshold; i++)
                 {
                     if (i > ChatMessages.Count - 1) continue;
 
@@ -229,31 +220,63 @@ namespace TCC.ViewModels
 
             ChatMessage.SplitSimplePieces(chatMessage);
 
-            if (CurrentTab != null && !CurrentTab.Filter(chatMessage))
+            if (ChatWindows.Any(x => !x.IsPaused))
             {
-                chatMessage.Animate = false; //set animate to false if the message is not going in the active tab
-                if (chatMessage.ContainsPlayerName || chatMessage.Channel == ChatChannel.ReceivedWhisper)
-                {
-                    var t = Tabs.FirstOrDefault(x => x.Channels.Contains(chatMessage.Channel));
-                    if (t != null)
-                    {
-                        t.Attention = true;
-                    }
-                    else
-                    {
-                        t = Tabs.FirstOrDefault(x => !x.ExcludedChannels.Contains(chatMessage.Channel));
-                        if (t != null) t.Attention = true;
-                    }
-                }
+                ChatMessages.Insert(0, chatMessage);
             }
-            if (!Paused) ChatMessages.Insert(0, chatMessage);
             else _queue.Enqueue(chatMessage);
 
+            NewMessage?.Invoke(chatMessage);
             if (ChatMessages.Count > SettingsManager.MaxMessages)
             {
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
-            NotifyPropertyChanged(nameof(MessageCount));
+            NPC(nameof(MessageCount));
+        }
+
+        internal void InitWindows()
+        {
+            ChatWindows.Clear();
+            SettingsManager.ChatWindowsSettings.ToList().ForEach(s =>
+            {
+                if (s.Tabs.Count == 0) return;
+                var w = new ChatWindow(s);
+                var m = new ChatViewModel();
+                w.DataContext = m;
+                ChatWindows.Add(w);
+                m.LoadTabs(s.Tabs);
+                m.LfgOn = s.LfgOn;
+                m.BackgroundOpacity = s.BackgroundOpacity;
+            });
+            if (ChatWindows.Count == 0)
+            {
+                var w = new ChatWindow(
+                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1,false, true)
+                    );
+                SettingsManager.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                var m = new ChatViewModel();
+                w.DataContext = m;
+                ChatWindows.Add(w);
+                m.LoadTabs();
+                w.Show();
+            }
+
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                if (WindowManager.IsTccVisible)
+                {
+                    ChatWindows.ToList().ForEach(w => w.RefreshTopmost());
+                }
+            };
+
+        }
+
+        internal void CloseAllWindows()
+        {
+            foreach (var w in ChatWindows)
+            {
+                w.CloseWindowSafe();
+            }
         }
 
         public void AddTccMessage(string message)
@@ -263,8 +286,7 @@ namespace TCC.ViewModels
         }
         public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
         {
-            LFG lfg;
-            if (TryGetLfg(x.Id, x.Message, x.Name, out lfg))
+            if (TryGetLfg(x.Id, x.Message, x.Name, out var lfg))
             {
                 lfg.Message = x.Message;
                 lfg.Refresh();
@@ -279,7 +301,7 @@ namespace TCC.ViewModels
             lfg.Dispose();
             LFGs.Remove(lfg);
         }
-        private bool TryGetLfg(int id, string msg, string name, out LFG lfg)
+        private bool TryGetLfg(uint id, string msg, string name, out LFG lfg)
         {
             lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Id == id);
             if (lfg == null)
@@ -294,7 +316,7 @@ namespace TCC.ViewModels
                     }
                     return true;
                 }
-                return false; ;
+                return false;
             }
             else
             {
@@ -303,52 +325,21 @@ namespace TCC.ViewModels
         }
         public void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
         {
-            LFG lfg;
-            if (TryGetLfg(p.Id, "", "", out lfg))
+            if (TryGetLfg(p.Id, "", "", out var lfg))
             {
-                lfg.MembersCount = p.MembersCount;
+                lfg.MembersCount = p.Members.Count;
             }
         }
         public void RefreshTimer()
         {
-            hideTimer.Stop();
-            hideTimer.Start();
+            _hideTimer.Stop();
+            _hideTimer.Start();
         }
         public void StopHideTimer()
         {
-            hideTimer.Stop();
+            _hideTimer.Stop();
             IsChatVisible = true;
 
-        }
-        public void ClearAll()
-        {
-            ChatMessages.Clear();
-            LFGs.Clear();
-        }
-
-        public void LoadTabs(IEnumerable<Tab> tabs)
-        {
-
-            Tabs = new SynchronizedObservableCollection<Tab>();
-            foreach (var chatTabsSetting in tabs)
-            {
-                Tabs.Add(chatTabsSetting);
-            }
-            if (Tabs.Count != 0) return;
-            Tabs.Add(new Tab("ALL", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { "System" }));
-            Tabs.Add(new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new ChatChannel[] { }, new string[] { }, new string[] { }));
-            Tabs.Add(new Tab("GROUP", new ChatChannel[]{ChatChannel.Party, ChatChannel.PartyNotice,
-                ChatChannel.RaidLeader, ChatChannel.RaidNotice,
-                ChatChannel.Raid, ChatChannel.Ress,ChatChannel.Death,
-                ChatChannel.Group, ChatChannel.GroupAlerts  }, new ChatChannel[] { }, new string[] { }, new string[] { }));
-            Tabs.Add(new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new ChatChannel[] { }, new string[] { }, new string[] { }));
-            Tabs.Add(new Tab("SYSTEM", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { "System" }, new string[] { }));
-            CurrentTab = Tabs[0];
-        }
-
-        public void ScrollToBottom()
-        {
-            WindowManager.ChatWindow.ScrollToBottom();
         }
 
         private bool Pass(ChatMessage current, ChatMessage old)
@@ -358,11 +349,21 @@ namespace TCC.ViewModels
             {
                 if (old.Author == current.Author)
                 {
-                    if (current.Channel == ChatChannel.Money) return true;
-                    if (current.Channel == ChatChannel.Loot) return true;
-                    if (current.Channel == ChatChannel.Bargain) return true;
-                    if (old.Channel == ChatChannel.SentWhisper && current.Channel == ChatChannel.ReceivedWhisper) return true;
-                    if (old.Channel == ChatChannel.ReceivedWhisper && current.Channel == ChatChannel.SentWhisper) return true;
+                    switch (current.Channel)
+                    {
+                        case ChatChannel.Money:
+                        case ChatChannel.Loot:
+                        case ChatChannel.Bargain:
+                            return true;
+                    }
+
+                    switch (old.Channel)
+                    {
+                        case ChatChannel.SentWhisper when current.Channel == ChatChannel.ReceivedWhisper:
+                        case ChatChannel.ReceivedWhisper when current.Channel == ChatChannel.SentWhisper:
+                            return true;
+                    }
+
                     return false;
                 }
                 return false;
@@ -371,124 +372,51 @@ namespace TCC.ViewModels
         }
         public void NotifyOpacityChange()
         {
-            NotifyPropertyChanged(nameof(ChatWindowOpacity));
+            ChatWindows.ToList().ForEach(x =>
+            {
+                //TODO: make this different per window
+                x.VM.NotifyOpacityChange();
+            });
+        }
+
+        internal void OpenTooltip()
+        {
+            ChatWindows[0].OpenTooltip();
+        }
+
+        public void TempShow()
+        {
+            foreach (var chatWindow in ChatWindows)
+            {
+                chatWindow.TempShow();
+            }
+        }
+
+        public void SetMgButtonVis()
+        {
+
+            ChatWindows[0].SetMgButtonVis();
+
         }
     }
 
-    public class Tab : TSPropertyChanged
+    public class ChatTabClient : IInterTabClient
     {
-        public List<ChatChannelOnOff> AllChannels => Utils.GetEnabledChannelsList();
-        private ICollectionView _messages;
-        private string _tabName;
-
-        public string TabName
+        public static ChatWindow LastSource;
+        public INewTabHost<Window> GetNewHost(IInterTabClient interTabClient, object partition, TabablzControl source)
         {
-            get => _tabName;
-            set
-            {
-                if (_tabName == value) return;
-                _tabName = value;
-                NotifyPropertyChanged(nameof(TabName));
-            }
-        }
-        private bool _attention;
-
-        public bool Attention
-        {
-            get => _attention;
-            set
-            {
-                if (_attention == value) return;
-                _attention = value;
-                NotifyPropertyChanged(nameof(Attention));
-            }
-        }
-
-        public SynchronizedObservableCollection<string> Authors { get; set; }
-        public SynchronizedObservableCollection<string> ExcludedAuthors { get; set; }
-        public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
-        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels { get; set; }
-        public ICollectionView Messages
-        {
-            get => _messages;
-            set
-            {
-                if (_messages == value) return;
-                _messages = value;
-                NotifyPropertyChanged(nameof(Messages));
-            }
-        }
-
-        public void Refresh()
-        {
-            Messages.Refresh();
-        }
-
-        public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa)
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            TabName = n;
-            Messages = new ListCollectionView(ChatWindowViewModel.Instance.ChatMessages);
-            Authors = new SynchronizedObservableCollection<string>(_dispatcher);
-            ExcludedAuthors = new SynchronizedObservableCollection<string>(_dispatcher);
-            Channels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
-            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
-            foreach (var auth in a)
-            {
-                Authors.Add(auth);
-            }
-            foreach (var auth in exa)
-            {
-                ExcludedAuthors.Add(auth);
-            }
-            foreach (var chan in ch)
-            {
-                Channels.Add(chan);
-            }
-            foreach (var chan in ex)
-            {
-                ExcludedChannels.Add(chan);
-            }
-            if (Channels.Count == 0 && Authors.Count == 0 && ExcludedChannels.Count == 0 && ExcludedAuthors.Count == 0)
-            {
-                Messages.Filter = null;
-                return;
-            }
-            ApplyFilter();
-        }
-
-        public bool Filter(ChatMessage m)
-        {
-            return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
-                   (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
-                   (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
-                   (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
+            LastSource = Window.GetWindow(source) as ChatWindow;
+            var model = new ChatViewModel();
+            var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
+                1, false, 1, false, true), model);
+            ChatWindowManager.Instance.ChatWindows.Add(view);
+            return new NewTabHost<Window>(view, view.TabControl);
 
         }
-        public void ApplyFilter()
+        public TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window)
         {
-            Messages.Filter = f =>
-            {
-                var m = f as ChatMessage;
-                return Filter(m);
-                //if (Authors.Count == 0 && Channels.Count != 0)
-                //{
-                //    if (ExcludedChannels.Count != 0)
-                //    {
-                //        return Channels.Contains(m.Channel) && !ExcludedChannels.Contains(m.Channel);
-                //    }
-                //    return Channels.Contains(m.Channel);
-                //}
-                //if (Channels.Count == 0 && Authors.Count != 0)
-                //{
-                //    if (ExcludedChannels.Count != 0)
-                //    {
-                //        return Authors.Contains(m.Author) && !ExcludedChannels.Contains(m.Channel);
-                //    }
-                //    return Authors.Contains(m.Author);
-                //}
-
-            };
+            ChatWindowManager.Instance.ChatWindows.Remove(window as ChatWindow);
+            return TabEmptiedResponse.CloseWindowOrLayoutBranch;
         }
     }
 }

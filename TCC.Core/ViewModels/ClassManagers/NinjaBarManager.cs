@@ -5,9 +5,7 @@ namespace TCC.ViewModels
 {
     public class NinjaBarManager : ClassManager
     {
-        private static NinjaBarManager _instance;
         private bool _focusOn;
-        public static NinjaBarManager Instance => _instance ?? (_instance = new NinjaBarManager());
 
         public FixedSkillCooldown BurningHeart { get; set; }
         public FixedSkillCooldown FireAvalanche { get; set; }
@@ -19,34 +17,31 @@ namespace TCC.ViewModels
             {
                 if (_focusOn == value) return;
                 _focusOn = value;
-                NotifyPropertyChanged(nameof(FocusOn));
+                NPC(nameof(FocusOn));
             }
 
         }
 
         public NinjaBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
-            LoadSpecialSkills();
-            ST.PropertyChanged += FlashOnMaxSt;
         }
 
         private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ST.Maxed))
+            if (e.PropertyName == nameof(StaminaTracker.Maxed))
             {
-                BurningHeart.FlashOnAvailable = ST.Maxed;
-                FireAvalanche.FlashOnAvailable = ST.Maxed;
+                BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;
+                FireAvalanche.FlashOnAvailable = StaminaTracker.Maxed;
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(150700, Class.Assassin, out Skill bh);
-            SkillsDatabase.TryGetSkill(80200, Class.Assassin, out Skill fa);
-            BurningHeart = new FixedSkillCooldown(bh, CooldownType.Skill, _dispatcher, false);
-            FireAvalanche = new FixedSkillCooldown(fa, CooldownType.Skill, _dispatcher, false);
+            SessionManager.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
+            SessionManager.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);
+            BurningHeart = new FixedSkillCooldown(bh, _dispatcher, false);
+            FireAvalanche = new FixedSkillCooldown(fa, _dispatcher, false);
+            StaminaTracker.PropertyChanged += FlashOnMaxSt;
 
         }
 

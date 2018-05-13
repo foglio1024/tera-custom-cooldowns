@@ -3,21 +3,23 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
+using System.Windows.Interop;
 
 namespace TCC
 {
-    public delegate void ForegroundWindowChangedEventHandler(bool visible);
 
     public static class FocusManager
     {
-        const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
-        const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
-        const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
-        const int GWL_EXSTYLE = (-20);           //set new exStyle
+        private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
+        private const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
+        private const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
+        private const int GWL_EXSTYLE = (-20);           //set new exStyle
         public const int WM_CHAR = 0x0102;
         private const int WM_KEYDOWN = 0x0100;
         private const int WM_KEYUP = 0x0101;
         private const int VK_RETURN = 0x0D;
+
+        public static event Action ForegroundChanged;
 
         public static System.Timers.Timer FocusTimer;
         public static bool Running { get; set; } = true;
@@ -29,10 +31,10 @@ namespace TCC
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         [DllImport("user32.dll")]
-        static extern uint GetWindowLong(IntPtr hwnd, int index);
+        private static extern uint GetWindowLong(IntPtr hwnd, int index);
 
         [DllImport("user32.dll")]
-        static extern uint SetWindowLong(IntPtr hwnd, int index, uint newStyle);
+        private static extern uint SetWindowLong(IntPtr hwnd, int index, uint newStyle);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
@@ -41,7 +43,7 @@ namespace TCC
         public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+        private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
 
         public static IntPtr FindTeraWindow()
         {
@@ -58,46 +60,49 @@ namespace TCC
             return result;
         }
 
-        public static IntPtr settingsWindowHandle = IntPtr.Zero;
-
+        private static bool _isActive;
         public static bool IsActive()
         {
-            var teraWindow = FindTeraWindow();
-            var meterWindow = FindMeterWindow();
-            var activeWindow = GetForegroundWindow();
-            return teraWindow != IntPtr.Zero && (teraWindow == activeWindow || settingsWindowHandle == activeWindow ) ||
-                   meterWindow != IntPtr.Zero && (meterWindow == activeWindow || settingsWindowHandle == activeWindow);
+                //TODO: add TCC windows here
+                var settingsWindowHandle = WindowManager.Settings.Handle;
+                return FindTeraWindow() != IntPtr.Zero &&
+                          (FindTeraWindow() == GetForegroundWindow() || settingsWindowHandle == GetForegroundWindow()) ||
+                           FindMeterWindow() != IntPtr.Zero && 
+                          (FindMeterWindow() == GetForegroundWindow() || settingsWindowHandle == GetForegroundWindow());
         }
 
         public static void MakeUnfocusable(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
         public static void UndoUnfocusable(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
         }
         public static void HideFromToolBar(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TOOLWINDOW);
         }
         public static void MakeTransparent(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
         public static void UndoTransparent(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_TRANSPARENT);
         }
         public static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
 
             WindowManager.IsFocused = IsActive();
+            if(IsActive() != _isActive) ForegroundChanged?.Invoke();
+            _isActive = IsActive();
+
         }
 
         public static void NewLine(IntPtr hWnd)
@@ -105,11 +110,10 @@ namespace TCC
             if (!PostMessage(hWnd, WM_KEYDOWN, VK_RETURN, 0)) { throw new Win32Exception(); }
             Thread.Sleep(1);
             if (!PostMessage(hWnd, WM_KEYUP, VK_RETURN, 0)) { throw new Win32Exception(); }
-            return;
-            Thread.Sleep(50);
-            if (!PostMessage(hWnd, WM_KEYDOWN, VK_RETURN, 0)) { throw new Win32Exception(); }
-            Thread.Sleep(1);
-            if (!PostMessage(hWnd, WM_KEYUP, VK_RETURN, 0)) { throw new Win32Exception(); }
+            //Thread.Sleep(50);
+            //if (!PostMessage(hWnd, WM_KEYDOWN, VK_RETURN, 0)) { throw new Win32Exception(); }
+            //Thread.Sleep(1);
+            //if (!PostMessage(hWnd, WM_KEYUP, VK_RETURN, 0)) { throw new Win32Exception(); }
         }
 
     }

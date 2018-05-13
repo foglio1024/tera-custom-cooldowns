@@ -201,8 +201,8 @@ namespace TCC.Controls
 
             // constrain the formatted text according to the available size
 
-            double w = availableSize.Width;
-            double h = availableSize.Height;
+            var w = availableSize.Width;
+            var h = availableSize.Height;
 
             // the Math.Min call is important - without this constraint (which seems arbitrary, but is the maximum allowable text width), things blow up when availableSize is infinite in both directions
             // the Math.Max call is to ensure we don't hit zero, which will cause MaxTextHeight to throw

@@ -1,9 +1,12 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Windows.Threading;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class StatTracker : TSPropertyChanged
     {
+
+        public event Action<uint> OnToZero;
         private int val = 0;
         public int Val
         {
@@ -13,10 +16,10 @@ namespace TCC.ViewModels
                 if (val == value) return;
                 val = value;
 
-                NotifyPropertyChanged("Val");
-                NotifyPropertyChanged("Factor");
+                NPC("Val");
+                NPC("Factor");
                 Maxed = Val == Max;
-                NotifyPropertyChanged(nameof(Maxed));
+                NPC(nameof(Maxed));
             }
         }
         public bool Maxed { get; set; }
@@ -29,8 +32,8 @@ namespace TCC.ViewModels
                 if (max == value) return;
                 max = value;
                 if (max == 0) max = 1;
-                NotifyPropertyChanged("Max");
-                NotifyPropertyChanged("Factor");
+                NPC("Max");
+                NPC("Factor");
             }
         }
 
@@ -44,13 +47,18 @@ namespace TCC.ViewModels
             {
                 if (status == value) return;
                 status = value;
-                NotifyPropertyChanged("Status");
+                NPC("Status");
             }
         }
 
         public StatTracker()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+        }
+
+        public void ToZero(uint pDuration)
+        {
+            OnToZero?.Invoke(pDuration);
         }
     }
 }

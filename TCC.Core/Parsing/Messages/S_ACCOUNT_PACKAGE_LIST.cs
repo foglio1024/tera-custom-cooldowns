@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using Tera.Game;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
-    class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
+    internal class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
     {
         public bool IsElite { get; }
-        List<uint> packageIDs;
+        private List<uint> packageIDs;
         public S_ACCOUNT_PACKAGE_LIST(TeraMessageReader reader) : base(reader)
         {
             packageIDs = new List<uint>();
 
             var count = reader.ReadUInt16();
             reader.Skip(2);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 reader.Skip(4);
                 packageIDs.Add(reader.ReadUInt32());

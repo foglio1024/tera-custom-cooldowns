@@ -8,7 +8,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool c = (bool)value;
+            var c = (bool)value;
 
             if (c)
             {

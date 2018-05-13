@@ -1,16 +1,17 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing.Messages
 {
     internal class S_LOAD_ACHIEVEMENT_LIST : ParsedMessage
     {
-        const int ACHIEVEMENT_LENGHT = 12;
-        short achiCount, achiOffset, historyCount, historyOffset;
-        long cid;
-        int unk1, achis, unk3, unk4;
+        private const int ACHIEVEMENT_LENGHT = 12;
+        private short achiCount, achiOffset, historyCount, historyOffset;
+        private long cid;
+        private int unk1, achis, unk3, unk4;
 
-        int laurel;
+        private int laurel;
         public Laurel Laurel
         {
             get
@@ -31,7 +32,6 @@ namespace TCC
             unk3 = reader.ReadInt32();
             unk4 = reader.ReadInt32();
             reader.Skip(ACHIEVEMENT_LENGHT * achiCount);
-            //System.Console.WriteLine("{0}-{1}-{2}", unk1, unk3, unk4);
 
 
         }

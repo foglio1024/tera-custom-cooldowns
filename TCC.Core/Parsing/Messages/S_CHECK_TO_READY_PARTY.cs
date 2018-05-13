@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Tera.Game;
-using Tera.Game.Messages;
+﻿using System.Collections.Generic;
+using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
@@ -39,7 +39,7 @@ namespace TCC.Parsing.Messages
             }
         }
 
-        public UInt16 Count { get; set; }
+        public ushort Count { get; set; }
 
         public List<ReadyPartyMember> Party { get; } = new List<ReadyPartyMember>();
     }

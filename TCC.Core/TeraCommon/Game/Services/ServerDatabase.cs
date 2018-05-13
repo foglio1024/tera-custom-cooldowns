@@ -1,24 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Tera.Game.Messages;
+using TCC.Parsing.Messages;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
-    public enum LangEnum
-    {
-        INT = 0,
-        KR = 1,
-        USA = 2,
-        JPN = 3,
-        GER = 4,
-        FR = 5,
-        EN = 6,
-        TW = 7,
-        RUS = 8,
-        CHN = 9,
-        THA = 10
-    }
     public class ServerDatabase
     {
         private readonly List<Server> _servers;

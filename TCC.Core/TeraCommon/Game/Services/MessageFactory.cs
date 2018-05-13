@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Client;
+using TCC.TeraCommon.Game.Messages.Server;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     // Creates a ParsedMessage from a Message
     // Contains a mapping from OpCodeNames to message types and knows how to instantiate those
@@ -12,6 +14,9 @@ namespace Tera.Game
     {
         private static readonly Delegate UnknownMessageDelegate = Helpers.Contructor<Func<TeraMessageReader, UnknownMessage>>();
         private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> {{ 19900, Helpers.Contructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
+
+        public int ReleaseVersion { get; set; }
+
         private static readonly Dictionary<string, Delegate> CoreServices = new Dictionary<string, Delegate>
         {
             {"C_CHECK_VERSION", Helpers.Contructor<Func<TeraMessageReader,C_CHECK_VERSION>>()},
@@ -131,10 +136,10 @@ namespace Tera.Game
             return (ParsedMessage) type.DynamicInvoke(reader);
         }
 
-        public ParsedMessage Create(Message message)
-        {
-            var reader = new TeraMessageReader(message, _opCodeNamer, Version, _sysMsgNamer);
-            return Instantiate(message.OpCode, reader);
-        }
+        //public parsedmessage create(message message)
+        //{
+        //    //var reader = new teramessagereader(message, _opcodenamer, this, _sysmsgnamer);
+        //    //return instantiate(message.opcode, reader);
+        //}
     }
 }

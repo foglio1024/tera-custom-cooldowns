@@ -5,17 +5,17 @@ using TCC.Data.Databases;
 
 namespace TCC.Converters
 {
-    class DungeonIdToNameConverter : IValueConverter
+    internal class DungeonIdToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var dgId = (uint)value;
-            if (parameter != null && Boolean.Parse((string)parameter))
+            if (parameter != null && bool.Parse((string)parameter))
             {
                 //use short names
-                if (DungeonDatabase.Instance.DungeonDefinitions.ContainsKey(dgId)) return DungeonDatabase.Instance.DungeonDefinitions[dgId].ShortName;
+                if (SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(dgId)) return SessionManager.DungeonDatabase.DungeonDefs[dgId].Name;//.DungeonDefinitions[dgId].ShortName;
             }
-            if (DungeonDatabase.Instance.DungeonNames.ContainsKey(dgId)) return DungeonDatabase.Instance.DungeonNames[dgId];
+            if (SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(dgId)) return SessionManager.DungeonDatabase.DungeonDefs[dgId].Name;
             else return "Dungeon "+ dgId.ToString(); ;
         }
 

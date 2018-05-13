@@ -2,7 +2,7 @@
 
 using System;
 
-namespace Tera.Sniffing.Crypt
+namespace TCC.TeraCommon.Sniffing.Crypt
 {
     public class Cryptor
     {

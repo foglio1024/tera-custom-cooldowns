@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Data;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -21,7 +22,6 @@ namespace TCC.ViewModels
         private readonly object _lock = new object();
         public event Action SettingsUpdated;
 
-
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
         public SynchronizedObservableCollection<User> Members { get; }
@@ -35,13 +35,16 @@ namespace TCC.ViewModels
             {
                 if (_raid == value) return;
                 _raid = value;
-                NotifyPropertyChanged(nameof(Raid));
+                NPC(nameof(Raid));
             }
         }
         public int Size => Members.Count;
-        public int ReadyCount => Members.ToSyncArray().Count(x => x.Ready == ReadyStatus.Ready);
-        public int AliveCount => Members.ToSyncArray().Count(x => x.Alive);
+        public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
+        public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
+        public bool ShowDetails => Formed && SettingsManager.ShowGroupWindowDetails;
+        public bool ShowLeaveButton => Formed && Proxy.IsConnected;
+        public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel()
@@ -51,7 +54,7 @@ namespace TCC.ViewModels
 
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged("IsTeraOnTop");
+                NPC("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
                     WindowManager.GroupWindow.RefreshTopmost();
@@ -61,33 +64,29 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = InitLiveView(o => ((User)o).Role == Role.Dps);
-            Tanks = InitLiveView(o => ((User)o).Role == Role.Tank);
-            Healers = InitLiveView(o => ((User)o).Role == Role.Healer);
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
 
-            ICollectionViewLiveShaping InitLiveView(Predicate<object> predicate)
-            {
-                var cv = new CollectionViewSource { Source = Members }.View;
-                cv.Filter = predicate;
-                var liveView = cv as ICollectionViewLiveShaping;
-                if (!liveView.CanChangeLiveFiltering) return null;
-                liveView.LiveFilteringProperties.Add(nameof(User.Role));
-                liveView.IsLiveFiltering = true;
-                return liveView;
-            }
         }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(Size)));
-            NotifyPropertyChanged(nameof(Formed));
-            NotifyPropertyChanged(nameof(AliveCount));
-            NotifyPropertyChanged(nameof(ReadyCount));
-
+            //Task.Delay(0).ContinueWith(t =>
+            //{
+            //});
+            NPC(nameof(Size));
+            NPC(nameof(Formed));
+            NPC(nameof(AmILeader));
+            NPC(nameof(ShowDetails));
+            NPC(nameof(AliveCount));
+            NPC(nameof(ReadyCount));
         }
         public void NotifySettingUpdated()
         {
             SettingsUpdated?.Invoke();
+
+            NPC(nameof(ShowDetails));
         }
         public bool Exists(ulong id)
         {
@@ -126,10 +125,8 @@ namespace TCC.ViewModels
         {
             return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
-        public bool AmILeader()
-        {
-            return IsLeader(SessionManager.CurrentPlayer.Name);
-        }
+        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name);
+
         public void SetAggro(ulong target)
         {
             if (target == 0)
@@ -224,6 +221,7 @@ namespace TCC.ViewModels
                 user.Online = p.Online;
                 user.EntityId = p.EntityId;
                 user.IsLeader = p.IsLeader;
+                user.Order = p.Order;
             }
         }
         private void SendAddMessage(string name)
@@ -241,7 +239,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out var m);
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private void SendLeaveMessage(string name)
@@ -258,7 +256,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }
@@ -319,6 +317,8 @@ namespace TCC.ViewModels
             {
                 m.IsLeader = m.Name == name;
             }
+
+            NPC(nameof(AmILeader));
         }
         public void StartRoll()
         {
@@ -373,7 +373,7 @@ namespace TCC.ViewModels
             var user = Members.ToSyncArray().FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
             if (user != null) user.Ready = p.Status;
             _firstCheck = false;
-            NotifyPropertyChanged(nameof(ReadyCount));
+            NPC(nameof(ReadyCount));
         }
         public void EndReadyCheck()
         {
@@ -418,13 +418,13 @@ namespace TCC.ViewModels
                 u.MaxMp = p.MaxMP;
                 u.Level = (uint)p.Level;
                 u.Alive = p.Alive;
-                NotifyPropertyChanged(nameof(AliveCount));
+                NPC(nameof(AliveCount));
                 if (!p.Alive) u.HasAggro = false;
             }
         }
         public void NotifyThresholdChanged()
         {
-            NotifyPropertyChanged(nameof(Size));
+            NPC(nameof(Size));
         }
         public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
         {
@@ -452,8 +452,83 @@ namespace TCC.ViewModels
             u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
-            u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
+            u.Location = SessionManager.MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
         }
 
+    }
+
+    public class DragBehavior
+    {
+        public readonly TranslateTransform Transform = new TranslateTransform();
+        private Point _elementStartPosition2;
+        private Point _mouseStartPosition2;
+        private static DragBehavior _instance = new DragBehavior();
+        public static DragBehavior Instance
+        {
+            get { return _instance; }
+            set { _instance = value; }
+        }
+
+        public static bool GetDrag(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsDragProperty);
+        }
+
+        public static void SetDrag(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsDragProperty, value);
+        }
+
+        public static readonly DependencyProperty IsDragProperty =
+          DependencyProperty.RegisterAttached("Drag",
+          typeof(bool), typeof(DragBehavior),
+          new PropertyMetadata(false, OnDragChanged));
+
+        private static void OnDragChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // ignoring error checking
+            var element = (UIElement)sender;
+            var isDrag = (bool)(e.NewValue);
+
+            Instance = new DragBehavior();
+            ((UIElement)sender).RenderTransform = Instance.Transform;
+
+            if (isDrag)
+            {
+                element.MouseLeftButtonDown += Instance.ElementOnMouseLeftButtonDown;
+                element.MouseLeftButtonUp += Instance.ElementOnMouseLeftButtonUp;
+                element.MouseMove += Instance.ElementOnMouseMove;
+            }
+            else
+            {
+                element.MouseLeftButtonDown -= Instance.ElementOnMouseLeftButtonDown;
+                element.MouseLeftButtonUp -= Instance.ElementOnMouseLeftButtonUp;
+                element.MouseMove -= Instance.ElementOnMouseMove;
+            }
+        }
+
+        private void ElementOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            var parent = Application.Current.MainWindow;
+            _mouseStartPosition2 = mouseButtonEventArgs.GetPosition(parent);
+            ((UIElement)sender).CaptureMouse();
+        }
+
+        private void ElementOnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            ((UIElement)sender).ReleaseMouseCapture();
+            _elementStartPosition2.X = Transform.X;
+            _elementStartPosition2.Y = Transform.Y;
+        }
+
+        private void ElementOnMouseMove(object sender, MouseEventArgs mouseEventArgs)
+        {
+            var parent = Application.Current.MainWindow;
+            var mousePos = mouseEventArgs.GetPosition(parent);
+            var diff = (mousePos - _mouseStartPosition2);
+            if (!((UIElement)sender).IsMouseCaptured) return;
+            Transform.X = _elementStartPosition2.X + diff.X;
+            Transform.Y = _elementStartPosition2.Y + diff.Y;
+        }
     }
 }

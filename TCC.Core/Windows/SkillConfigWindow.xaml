@@ -1,0 +1,223 @@
+﻿<Window x:Class="TCC.Windows.SkillConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:dd="urn:gong-wpf-dragdrop"
+        xmlns:databases="clr-namespace:TCC.Data.Databases"
+        xmlns:data="clr-namespace:TCC.Data"
+        mc:Ignorable="d"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Topmost="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="SkillConfigWindow" Height="Auto" Width="1000" d:DataContext="{d:DesignData CooldownWindowViewModel}">
+    <Window.Resources>
+        <DataTemplate x:Key="DragAdornerTemplate">
+            <Ellipse Width="55" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
+                     Stroke="#7fff"
+                     StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse.Fill>
+                    <ImageBrush
+                        ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                </Ellipse.Fill>
+                <Ellipse.RenderTransform>
+                    <TranslateTransform X="-30" Y="30"></TranslateTransform>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </DataTemplate>
+        <DataTemplate x:Key="HddenSkillDataTemplate" DataType="data:Skill">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Ellipse Width="30" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
+                         Stroke="#7fff"
+                         StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse.Fill>
+                        <ImageBrush
+                            ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding ShortName}"
+                           VerticalAlignment="Center" Margin="5 0" />
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Center" Click="RemoveHiddenSkill" Grid.Column="2">
+                    <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpColor}"></Path>
+                </Button>
+            </Grid>
+        </DataTemplate>
+
+</Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Background="{StaticResource BackgroundDarkColor}" Grid.RowSpan="3" CornerRadius="2"></Border>
+        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Border Background="{StaticResource BackgroundDarkColor}" CornerRadius="2 2 0 0"></Border>
+            <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}"
+                    VerticalAlignment="Stretch"
+                    Click="Close" VerticalContentAlignment="Center">
+                <Path Data="{StaticResource SvgClose}" Margin="10 0" />
+            </Button>
+            <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30"
+                   RenderOptions.BitmapScalingMode="HighQuality"
+                   VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3">
+            </Image>
+            <TextBlock Text="Cooldown bar settings" Style="{StaticResource Styles.DefaultText}"
+                       Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       FontSize="15" Foreground="#999" />
+        </Grid>
+        <UniformGrid Columns="3" Grid.Row="1">
+            <UniformGrid.Resources>
+                <Style TargetType="ListBox">
+                    <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplate}"></Setter>
+                    <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultListItemStyle}"></Setter>
+                    <Setter Property="Background" Value="#2000"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="MaxHeight" Value="500"></Setter>
+                    <Setter Property="Margin" Value="5 0 5 10"></Setter>
+
+                </Style>
+            </UniformGrid.Resources>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
+                           Opacity=".5" FontWeight="Thin" FontSize="16">
+                    Skills
+                </TextBlock>
+                <Grid Grid.Row="1">
+                    <Path Data="{StaticResource SvgSearch}" Margin="0 3 10 3" Height="15" VerticalAlignment="Center"
+                          HorizontalAlignment="Right">
+                    </Path>
+                    <TextBox Margin="5 0" BorderThickness="0"
+                             Foreground="#bfff" Background="#1fff" Padding="0 3"
+                             CaretBrush="#8fff" TextChanged="SkillSearch_OnTextChanged">
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="2"  Margin="0" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <ListBox
+                        ItemsSource="{Binding SkillsView}"
+                        Grid.Row="0" Height="300"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        dd:DragDrop.IsDragSource="True" ItemTemplate="{StaticResource SkillDataTemplate}"
+                        dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
+                        dd:DragDrop.IsDropTarget="True"
+                        dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
+                        </ListBox.Resources>
+
+                    </ListBox>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 0"
+                               Opacity=".5" FontWeight="Thin" FontSize="16" >
+                        Hidden skills
+                    </TextBlock>
+                    <Path Data="{StaticResource SvgInfo}" Margin="0 1 10 0" Height="14"
+                          VerticalAlignment="Top" Fill="#3fff"
+                          HorizontalAlignment="Right" ToolTip="Non-fixed skills (also items) hidden using the Hide button will be displayed here.">
+                    </Path>
+                    </StackPanel>
+                    <ListBox
+                        VerticalAlignment="Stretch"
+                        ItemsSource="{Binding HiddenSkills}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemTemplate="{StaticResource HddenSkillDataTemplate}"
+                        Grid.Row="2">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
+                        </ListBox.Resources>
+                    </ListBox>
+                </Grid>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
+                           Opacity=".5" FontWeight="Thin" FontSize="16">
+                    Items
+                </TextBlock>
+                <Grid Grid.Row="1">
+                    <Path Data="{StaticResource SvgSearch}" Margin="0 3 10 3" Height="15" VerticalAlignment="Center"
+                          HorizontalAlignment="Right">
+                    </Path>
+                    <TextBox Margin="5 0" BorderThickness="0"
+                             Foreground="#bfff" Background="#1fff" Padding="0 3"
+                             CaretBrush="#8fff" TextChanged="ItemSearch_OnTextChanged">
+                    </TextBox>
+                </Grid>
+                <ListBox ItemsSource="{Binding Instance.ItemsView}" Height="500"
+                         ItemTemplate="{StaticResource ItemDataTemplate}" dd:DragDrop.IsDragSource="True"
+                         dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
+                         dd:DragDrop.IsDropTarget="True"
+                         Grid.Row="2">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
+                           Opacity=".5" FontWeight="Thin" FontSize="16">
+                    Abnormalities
+                </TextBlock>
+
+                <Grid Grid.Row="1">
+                    <Path Data="{StaticResource SvgSearch}" Margin="0 3 10 3" Height="15" VerticalAlignment="Center"
+                          HorizontalAlignment="Right">
+                    </Path>
+                    <TextBox Margin="5 0" BorderThickness="0"
+                             Foreground="#bfff" Background="#1fff" Padding="0 3"
+                             CaretBrush="#8fff" TextChanged="PassivitySearch_OnTextChanged">
+                    </TextBox>
+                </Grid>
+                <ListBox Grid.Row="2" ItemsSource="{Binding Instance.AbnormalitiesView}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" dd:DragDrop.IsDragSource="True"
+                         Height="500" ItemTemplate="{StaticResource AbnormalityDataTemplate}"
+                         dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
+                         dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
+                         dd:DragDrop.IsDropTarget="True">
+
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </Grid>
+        </UniformGrid>
+        <TextBlock Grid.Row="2" Foreground="#3fff" HorizontalAlignment="Center" Margin="10 0 10 10"
+                   TextAlignment="Center">
+            Drag and drop a skill, item, abnormality to the cooldown bar
+        </TextBlock>
+    </Grid>
+</Window>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TCC.Data.Databases
 {
@@ -10,19 +6,19 @@ namespace TCC.Data.Databases
     {
         public static List<uint> Passivities = new List<uint>
         {
-             6001 , 6002, 6003, 6004 
+             6001, 6002, 6003, 6004 
         };
         public static bool TryGetPassivitySkill(uint id, out Skill sk)
         {
-            bool result = false;
+            var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
-            if (AbnormalityManager.CurrentDb.Abnormalities.ContainsKey(id))
+            if (SessionManager.AbnormalityDatabase.Abnormalities.ContainsKey(id))
             {
-                var ab = AbnormalityManager.CurrentDb.Abnormalities[id];
+                var ab = SessionManager.AbnormalityDatabase.Abnormalities[id];
                 result = true;
                 sk = new Skill(id, Class.Common, ab.Name, "");
-                sk.SetSkillIcon(ab.IconName);
+                sk.IconName = ab.IconName;
             }
             return result;
 

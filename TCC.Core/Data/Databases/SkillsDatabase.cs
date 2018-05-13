@@ -6,12 +6,12 @@ using System.Xml.Linq;
 
 namespace TCC.Data.Databases
 {
-    public static class SkillsDatabase
+    public class SkillsDatabase
     {
-        public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
-        static List<SkillConnection> SkillConnections;
+        public Dictionary<Class, Dictionary<uint, Skill>> Skills { get; }
+        private List<SkillConnection> SkillConnections { get; }
 
-        class SkillConnection
+        private class SkillConnection
         {
             public Class Class;
             public int Id;
@@ -29,13 +29,13 @@ namespace TCC.Data.Databases
             }
         }
 
-        public static void Load()
+        public SkillsDatabase(string lang)
         {
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/skills.tsv");
+            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/skills/skills-{lang}.tsv"));
 
             SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
-            for (int i = 0; i <= 12; i++)
+            for (var i = 0; i <= 12; i++)
             {
                 Skills.Add((Class)i, new Dictionary<uint, Skill>());
             }
@@ -49,38 +49,52 @@ namespace TCC.Data.Databases
                 if (line == null) break;
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);
-                Enum.TryParse(s[1], out Class c);
-                var name = s[2];
-                var tooltip = s[3];
-                var iconName = s[4];
+                var cString = s[3];
+                /*if (!*/
+                Enum.TryParse(s[3], out Class c);/*)*/
+                //{
+                    //if (cString == "Mystic") cString = "Mystic";
+                    //if (cString == "Reaper") cString = "Reaper";
+                    //if (cString == "Brawler") cString = "Brawler";
+                    //if (cString == "Ninja") cString = "Ninja";
+                    //if (cString == "Gunner") cString = "Gunner";
+                    //if (cString == "Valkyrie") cString = "Valkyrie";
+                //}
+                //Enum.TryParse(cString, out c);
+                var name = s[4];
+                //var tooltip = s[3];
+                var iconName = s[7];
 
-                var sk = new Skill(id, c, name, tooltip);
-                sk.SetSkillIcon(iconName);
+                var sk = new Skill(id, c, name, "");
+                sk.IconName = iconName;
+                if (Skills[c].ContainsKey(id)) continue;
                 Skills[c].Add(id, sk);
 
 
-                var skc = new SkillConnection((int)id, c);
-                for (int i = 5; i < s.Count(); i++)
-                {
-                    skc.AddConnectedSkill(Convert.ToInt32(s[i]));
-                }
-                if(skc.ConnectedSkills.Count > 0)
-                {
-                    SkillConnections.Add(skc);
-                }
+                //var skc = new SkillConnection((int)id, c);
+                //for (int i = 5; i < s.Count(); i++)
+                //{
+                //    skc.AddConnectedSkill(Convert.ToInt32(s[i]));
+                //}
+                //if(skc.ConnectedSkills.Count > 0)
+                //{
+                //    SkillConnections.Add(skc);
+                //}
             }
 
         }
-        static string FindSkillNameByIdClass(uint id, Class c)
+
+        private string FindSkillNameByIdClass(uint id, Class c)
         {
-            if (Skills[c].TryGetValue(id, out Skill sk))
+            if (Skills[c].TryGetValue(id, out var sk))
             {
                 return sk.Name;
             }
             else return "Not found";
 
         }
-        static int GetSkillIdByConnectedId(uint id, Class c)
+
+        private int GetSkillIdByConnectedId(uint id, Class c)
         {
             foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
             {
@@ -94,7 +108,7 @@ namespace TCC.Data.Databases
             }
             return -1;
         }
-        public static string SkillIdToName(uint id, Class c)
+        public string SkillIdToName(uint id, Class c)
         {
             var name = FindSkillNameByIdClass(id, c);
             var connSkill = GetSkillIdByConnectedId(id, c);
@@ -109,27 +123,18 @@ namespace TCC.Data.Databases
             }
             return name;
         }
-        public static bool TryGetSkill(uint id, Class c, out Skill sk)
+        public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
-            bool result = false;
-            var connSkills = GetSkillIdByConnectedId(id, c);
-            sk = new Skill(0, Class.None, string.Empty, string.Empty);
+            var result = false;
+            sk = new Skill(0, Class.None, String.Empty, String.Empty);
             if (Skills[c].TryGetValue(id, out sk))
             {
-                //sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
                 result = true;
-            }
-            else if (connSkills != -1)
-            {
-                if (Skills[c].TryGetValue((uint)connSkills, out sk))
-                {
-                    result = true;
-                }
             }
             return result;
 
         }
-        public static bool TryGetSkillByName(string name, Class c, out Skill sk)
+        public bool TryGetSkillByName(string name, Class c, out Skill sk)
         {
             var classSkills = Skills[c];
             sk = classSkills.FirstOrDefault(x => x.Value.Name.Contains(name) || x.Value.Name.Equals(name)).Value;
@@ -143,251 +148,147 @@ namespace TCC.Data.Databases
             }
         }
 
-
-    }
-
-    public static class SkillsDatabaseOld
-    {
-        public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
-
-        public static event Action<double> Progress;
-
-        static List<XDocument> StrSheet_UserSkillsDocs;
-        static List<XDocument> SkillIconData;
-        static XDocument ConnectedSkillsDoc;
-        static List<SkillConnection> SkillConnections;
-
-        class SkillConnection
+        //TODO do this better one day
+        public static IEnumerable<Skill> SkillsForClass
         {
-            public Class Class;
-            public int Id;
-            public List<int> ConnectedSkills;
-
-            public SkillConnection(int id, Class c)
+            get
             {
-                ConnectedSkills = new List<int>();
-                Id = id;
-                Class = c;
-            }
-            public void AddConnectedSkill(int id)
-            {
-                ConnectedSkills.Add(id);
-            }
-        }
-
-        static void LoadFiles()
-        {
-            foreach (var f in Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/StrSheet_UserSkill"))
-            {
-                var d = XDocument.Load(f);
-                StrSheet_UserSkillsDocs.Add(d);
-            }
-
-            foreach (var f in Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/SkillIconData"))
-            {
-                var d = XDocument.Load(f);
-                SkillIconData.Add(d);
-            }
-
-            ConnectedSkillsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/ConnectedSkills.xml");
-        }
-        static void ParseUserSkillDoc(XDocument doc)
-        {
-            foreach (var s in doc.Descendants().Where(x => x.Name == "String"))
-            {
-                var id = Convert.ToUInt32(s.Attribute("id").Value);
-                string name = string.Empty;
-                if(s.Attribute("name") != null)
+                var list = new SynchronizedObservableCollection<Skill>();
+                var c = SessionManager.CurrentPlayer.Class;
+                var skillsForClass = SessionManager.SkillsDatabase.Skills[c];
+                foreach (var skill in skillsForClass.Values)
                 {
-                    name = s.Attribute("name").Value;
-                }
-                Enum.TryParse(s.Attribute("class").Value, out Class c);
-                string toolTip = string.Empty;
-
-                if(s.Attribute("toolTip") != null)
-                {
-                    toolTip = s.Attribute("toolTip").Value;
-                }
-                if((s.Attribute("class").Value != "Common") && (!name.Contains("Summon: ") || name == "Summon: Party"))
-                {
-                    var skill = new Skill(id, c, name, toolTip);
-                    Skills[c].Add(id, skill);
-                }
-            }
-        }
-        static void ParseSkillIconDoc(XDocument doc)
-        {
-            foreach (var s in doc.Descendants().Where(x => x.Name == "Icon"))
-            {
-                var id = Convert.ToUInt32(s.Attribute("skillId").Value);
-                var iconName = s.Attribute("iconName").Value;
-                Enum.TryParse(s.Attribute("class").Value, out Class c);
-                if(Skills[c].TryGetValue(id, out Skill sk))
-                {
-                    sk.SetSkillIcon(iconName);
-                }
-            }
-        }
-        static void ParseConnectedSkills()
-        {
-            SkillConnections = new List<SkillConnection>();
-            foreach (var sk in ConnectedSkillsDoc.Descendants().Where(x => x.Name == "Skill"))
-            {
-                var id = Convert.ToInt32(sk.Attribute("id").Value);
-                Enum.TryParse(sk.Attribute("class").Value, out Class c);
-                var skc = new SkillConnection(id, c);
-                foreach (var conn in sk.Descendants())
-                {
-                    skc.AddConnectedSkill(Convert.ToInt32(conn.Attribute("id").Value));
-                }
-                SkillConnections.Add(skc);
-            }
-        }
-        static string FindSkillNameByIdClass(uint id, Class c)
-        {
-            if (Skills[c].TryGetValue(id, out Skill sk))
-            {
-                return sk.Name;
-            }
-            else return "Not found";
-
-        }
-        static int GetSkillIdByConnectedId(uint id, Class c)
-        {
-            foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
-            {
-                foreach (var connectedSkill in skillConnection.ConnectedSkills)
-                {
-                    if((int)id == connectedSkill)
+                    if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))
                     {
-                        return skillConnection.Id;                
+                        list.Add(skill);
                     }
                 }
+                return list;
             }
-            return -1;
+
         }
-        //static void AddConnectedSkills()
-        //{
-        //    foreach (var item in SkillConnections)
-        //    {
-        //        SetConnectedSkills(item);
-        //    }
-        //}
 
-
-        public static void Populate()
+        public static bool IsIgnoredSkill(Skill skill)
         {
-            StrSheet_UserSkillsDocs = new List<XDocument>();
-            SkillIconData = new List<XDocument>();
-
-            Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
-            for (int i = 0; i <= 12; i++)
-            {
-                Skills.Add((Class)i, new Dictionary<uint, Skill>());
-            }
-            Skills.Add(Class.Common, new Dictionary<uint, Skill>());
-
-            LoadFiles();
-            var n = SkillIconData.Count;
-            Progress?.Invoke(1*100 / (n - 1));
-            foreach (var doc in StrSheet_UserSkillsDocs)
-            {
-                ParseUserSkillDoc(doc);
-            }
-            Progress?.Invoke(2 * 100 / (n - 1));
-
-            foreach (var doc in SkillIconData)
-            {
-                ParseSkillIconDoc(doc);
-                Progress?.Invoke((SkillIconData.IndexOf(doc)+2) * 100 / (n +1));
-            }
-
-            //AddConnectedSkills();
-
-            var s = new Skill(60010, Class.Common, "Hurricane", "");
-            s.SetSkillIcon("Icon_Skills.Armorbreak_Tex");
-            Skills[Class.Common].Add(s.Id, s);
-
-            ParseConnectedSkills();
-
-            SkillIconData.Clear();
-            StrSheet_UserSkillsDocs.Clear();
-            
+            return IgnoredSkills[skill.Class].Any(x => x == skill.IconName);
         }
-        public static string SkillIdToName(uint id, Class c)
-        {
-            var name = FindSkillNameByIdClass(id, c);
-            var connSkill = GetSkillIdByConnectedId(id, c);
 
-            if (name != "Not found") //found skill
-            {
-                return name;
-            }
-            else if (connSkill != -1) //skill found in connected skills
-            {
-                name = FindSkillNameByIdClass(id, c);
-            }
-            return name;
-        }
-        public static bool TryGetSkillByName(string name, Class c, out Skill sk)
+        public static readonly Dictionary<Class, List<string>> IgnoredSkills = new Dictionary<Class, List<string>>()
         {
-            var classSkills = Skills[c];
-            sk = classSkills.FirstOrDefault(x => x.Value.Name.Contains(name) || x.Value.Name.Equals(name)).Value;
-            if(sk != null)
             {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public static bool TryGetSkill(uint id, Class c, out Skill sk)
-        {
-            bool result = false;
-            var connSkills = GetSkillIdByConnectedId(id, c);
-            sk = new Skill(0, Class.None, string.Empty, string.Empty);
-            if (Skills[c].TryGetValue(id, out sk))
-            {
-                //sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
-                result = true;
-            }
-            else if (connSkills != -1)
-            {
-                if (Skills[c].TryGetValue((uint)connSkills, out sk))
+                Class.Archer, new List<string>()
                 {
-                    result = true;
+                    "icon_skills.arrowshot_tex",
+                    "icon_skills.webtrap_tex",
+                    "icon_skills.focusstance_moveslow_tex"
                 }
-            }
+            },
+            {
+                Class.Berserker, new List<string>()
+                {
+                    "icon_skills.comboattack_tex",
+                    "icon_skills.weapondefence_tex",
+                }
+            },
+            {
+                Class.Brawler, new List<string>()
+                {
+                    "icon_skills.comboattack01_tex",
+                    "icon_skills.comboattack02_tex",
+                    "icon_skills.comboattack03_tex",
+                    "icon_skills.comboattack04_tex",
+                    "icon_skills.smashattack01_tex",
+                    "icon_skills.smashattack02_tex",
+                    "icon_skills.smashattack03_tex",
+                    "icon_skills.smashattack04_tex",
+                    "icon_skills.pet_mushroom_tex",
+                    "icon_skills.rampage_tex",
+                }
+            },
+            {
+                Class.Gunner, new List<string>()
+                {
+                    "icon_skills.cannonshot_tex",
+                    "icon_skills.gatlingshot_tex",
+                    "icon_skills.superrocketjump_tex",
+                    "icon_skills.command_electricballshot_tex",
+                }
+            },
+            {
+                Class.Lancer, new List<string>()
+                {
+                    "icon_skills.comboattack_tex",
+                    "icon_skills.defence_tex",
+                    "icon_skills.backstep_tex",
+                }
+            },
+            {
+                Class.Mystic, new List<string>()
+                {
+                    "icon_skills.elementalshot_tex",
+                    "icon_skills.mpsupplycharge_tex",
+                    "icon_skills.energiesofrestriction_tex",
+                    "icon_skills.energiesofquickness_tex",
+                    "icon_skills.energiesofwillpower_tex"
+                }
+            },
+             {
+                Class.Ninja, new List<string>()
+                {
+                    "icon_skills.c12_meleecombo",
+                }
+            },
+            {
+                Class.Priest, new List<string>()
+                {
+                    "icon_skills.magicshot_tex",
+                    "icon_skills.adventgoddess_tex"
+                }
+            },
+            {
+                Class.Reaper, new List<string>()
+                {
+                    "icon_skills.comboattack2_tex",
+                    "icon_skills.shieldattack_tex",
+                    "icon_skills.tornadoprison_tex"
+                }
+            },
+            {
+                Class.Slayer, new List<string>()
+                {
+                    "icon_skills.comboattack_tex",
+                }
+            },
+            {
+                Class.Sorcerer, new List<string>()
+                {
+                    "icon_skills.fireball_tex",
+                    "icon_skills.tornadoprison_tex",
+                    "icon_skills.contractofquickness_tex"
+                }
+            },
+            {
+                Class.Valkyrie, new List<string>()
+                {
+                    "icon_skills.combo_tex",
+
+                }
+            },
+            {
+                Class.Warrior, new List<string>()
+                {
+                    "icon_skills.comboattack_tex",
+                    "icon_skills.twinswordsdefence_tex",
+                }
+            },
+        };
+
+        public bool TryGetSkillByIconName(string iconName, Class c, out Skill sk)
+        {
+            var result = false;
+            sk = Skills[c].Values.ToList().FirstOrDefault(x => x.IconName == iconName);
+            if (sk != null) result = true;
             return result;
-
         }
-
-
-        //public static Skill GetSkill(uint id, Class c)
-        //{
-        //    if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
-        //    {
-        //        return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
-        //    }
-        //    else return new Skill(0, Class.None, string.Empty, string.Empty);
-
-        //}
-
-        //public static BitmapImage SkillIdToIcon(uint id, Class c)
-        //{
-        //    if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
-        //    {
-        //        return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First().Icon;
-        //    }
-        //    else return null;
-        //}
-
-
-        //static void SetConnectedSkills(SkillConnection skc)
-        //{
-        //    Skills.Where(x => x.Id == skc.Id).Where(x => x.Class == skc.Class).Single().ConnectedSkills = skc.ConnectedSkills;
-        //}
     }
-
 }

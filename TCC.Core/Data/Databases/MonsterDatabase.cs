@@ -7,9 +7,9 @@ namespace TCC.Data.Databases
 {
     public class MonsterDatabase
     {
-        XDocument MonstersDoc;
-        XDocument OverrideDoc;
-        Dictionary<uint, Zone> Zones;
+        private XDocument MonstersDoc;
+        private XDocument OverrideDoc;
+        private Dictionary<uint, Zone> Zones;
 
         public MonsterDatabase(string lang)
         {
@@ -20,31 +20,32 @@ namespace TCC.Data.Databases
             MonstersDoc = null;
         }
 
-        void LoadDoc(string region)
+        private void LoadDoc(string region)
         {
             MonstersDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
             OverrideDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-override.xml");
         }
-        void ParseDoc()
+
+        private void ParseDoc()
         {
             foreach (var zone in MonstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
                 var zoneId = Convert.ToUInt32(zone.Attribute("id").Value);
                 var zoneName = zone.Attribute("name").Value;
-                Zone z = new Zone(zoneId, zoneName);
+                var z = new Zone(zoneId, zoneName);
 
                 foreach (var monster in zone.Descendants().Where(x => x.Name == "Monster"))
                 {
                     var id = Convert.ToUInt32(monster.Attribute("id").Value);
                     var name = monster.Attribute("name").Value;
-                    bool isBoss = false;
+                    var isBoss = false;
                     if (monster.Attribute("isBoss").Value == "True")
                     {
                         isBoss = true;
                     }
                     var maxHP = Convert.ToUInt64(monster.Attribute("hp").Value);
 
-                    Monster m = new Monster(id, name, maxHP, isBoss);
+                    var m = new Monster(id, name, maxHP, isBoss);
                     z.AddMonster(m);
                 }
                 Zones.Add(zoneId, z);
@@ -57,9 +58,9 @@ namespace TCC.Data.Databases
                 foreach (var monst in zone.Descendants().Where(x => x.Name == "Monster"))
                 {
                     var mId = Convert.ToUInt32(monst.Attribute("id").Value);
-                    if (Zones.TryGetValue(zoneId, out Zone z))
+                    if (Zones.TryGetValue(zoneId, out var z))
                     {
-                        if (z.Monsters.TryGetValue(mId, out Monster m))
+                        if (z.Monsters.TryGetValue(mId, out var m))
                         {
                             if (monst.Attribute("isBoss") != null)
                             {
@@ -74,7 +75,7 @@ namespace TCC.Data.Databases
                         {
                             var name = monst.Attribute("name").Value;
                             var isBoss = bool.Parse(monst.Attribute("isBoss").Value);
-                            var maxHp = UInt64.Parse(monst.Attribute("hp").Value);
+                            var maxHp = ulong.Parse(monst.Attribute("hp").Value);
                             z.Monsters.Add(mId, new Monster(mId, name, maxHp, isBoss));
                         }
                     }
@@ -84,7 +85,7 @@ namespace TCC.Data.Databases
 
         public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
-            if (Zones.TryGetValue(zoneId, out Zone z))
+            if (Zones.TryGetValue(zoneId, out var z))
             {
                 if (z.Monsters.TryGetValue(templateId, out m))
                 {
@@ -96,7 +97,7 @@ namespace TCC.Data.Databases
         }
         public string GetZoneName(uint zoneId)
         {
-            Zones.TryGetValue(zoneId, out Zone z);
+            Zones.TryGetValue(zoneId, out var z);
             if (z != null) return z.Name;
 
             return "Unkown zone";
@@ -104,7 +105,7 @@ namespace TCC.Data.Databases
         }
         public string GetName(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out Monster m))
+            if (TryGetMonster(templateId, zoneId, out var m))
             {
                 return m.Name;
             }
@@ -112,7 +113,7 @@ namespace TCC.Data.Databases
         }
         public ulong GetMaxHP(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out Monster m))
+            if (TryGetMonster(templateId, zoneId, out var m))
             {
                 return m.MaxHP;
             }
@@ -120,7 +121,7 @@ namespace TCC.Data.Databases
         }
     }
 
-    class Zone
+    internal class Zone
     {
         public uint Id { get; private set; } //templateId / type
         public string Name { get; private set; }

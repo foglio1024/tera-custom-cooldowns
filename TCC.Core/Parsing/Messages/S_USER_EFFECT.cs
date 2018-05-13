@@ -1,11 +1,12 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_USER_EFFECT : ParsedMessage
     {
-        int circle, action;
+        private int circle, action;
         public ulong User { get; private set; }
         public ulong Source { get; private set; }
         public AggroAction Action

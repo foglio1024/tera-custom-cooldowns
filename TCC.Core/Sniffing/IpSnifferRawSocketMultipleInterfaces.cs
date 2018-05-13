@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     public class IpSnifferRawSocketMultipleInterfaces : IpSniffer
     {

@@ -4,66 +4,85 @@ namespace TCC.Data
 {
     public class FixedSkillCooldown : TSPropertyChanged
     {
-        CooldownType _type;
-        DispatcherTimer _secondsTimer;
-        DispatcherTimer _offsetTimer;
-        DispatcherTimer _shortTimer;
-        public Skill Skill { get; set; }
-        ulong cooldown;
+        //TODO: remove this NPC thing and use proper events
+
+        private readonly DispatcherTimer _secondsTimer;
+        private readonly DispatcherTimer _offsetTimer;
+        private readonly DispatcherTimer _shortTimer;
+        public Skill Skill { get; }
+        private ulong _cooldown;
         public ulong Cooldown
         {
-            get => cooldown; set
-            {
-                if (cooldown == value) return;
-                cooldown = value;
-            }
-        }
-        public ulong OriginalCooldown { get; set; }
-        bool isAvailable = true;
-        public bool IsAvailable
-        {
-            get => isAvailable;
+            get => _cooldown;
             private set
             {
-                if (isAvailable == value) return;
-                isAvailable = value;
-                NotifyPropertyChanged("IsAvailable");
+                if (_cooldown == value) return;
+                _cooldown = value;
+                NPC();
+            }
+        }
+        public ulong OriginalCooldown { get; private set; }
+        public ulong PreCooldown { get; private set; }
+        private bool _isAvailable = true;
+        public bool IsAvailable
+        {
+            get => _isAvailable;
+            private set
+            {
+                if (_isAvailable == value) return;
+                _isAvailable = value;
+                NPC();
             }
         }
 
-        ulong seconds = 0;
+        private bool _isPreRunning;
+        private CooldownType _cooldownType;
+
+        public CooldownType CooldownType
+        {
+            get => _cooldownType;
+            set
+            {
+                if(_cooldownType == value) return;
+                _cooldownType = value;
+                NPC();
+            }
+        }
+
+        private ulong _seconds;
         private bool _flashOnAvailable;
 
         public ulong Seconds
         {
-            get
+            get => _seconds;
+            private set
             {
-                return seconds;
-            }
-            set
-            {
-                if (seconds == value) return;
-                seconds = value;
-                NotifyPropertyChanged("Seconds");
+                if (_seconds == value) return;
+                _seconds = value;
+                NPC();
             }
         }
 
         public bool FlashOnAvailable
         {
-            get { return _flashOnAvailable; }
+            get => _flashOnAvailable;
             set
             {
                 if (_flashOnAvailable == value) return;
                 _flashOnAvailable = value;
-                NotifyPropertyChanged(nameof(FlashOnAvailable));
-                NotifyPropertyChanged(nameof(IsAvailable));
+                NPC(nameof(FlashOnAvailable));
+                NPC(nameof(IsAvailable));
             }
         }
-
-        public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d, bool flashOnAvailable)
+        public override string ToString()
+        {
+            return Skill.Name;
+        }
+        public FixedSkillCooldown(Skill sk, Dispatcher d, bool flashOnAvailable, CooldownType t = CooldownType.Skill)
         {
             _dispatcher = d;
 
+            _cooldownType = t;
             _shortTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _shortTimer.Tick += _shortTimer_Tick;
 
@@ -76,7 +95,6 @@ namespace TCC.Data
             _offsetTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _offsetTimer.Tick += _offsetTimer_Tick;
 
-            _type = t;
             Skill = sk;
 
             FlashOnAvailable = flashOnAvailable;
@@ -118,6 +136,7 @@ namespace TCC.Data
 
         public void Start(ulong cd)
         {
+            if (_isPreRunning) NPC("StopPre");
             if (cd > 1000)
             {
                 Cooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
@@ -136,10 +155,9 @@ namespace TCC.Data
                 Seconds = 0;
                 IsAvailable = false;
             }
-            NotifyPropertyChanged("Start");
-
+            NPC("Start");
         }
-        public void Refresh(uint cd)
+        public void Refresh(ulong cd)
         {
             _secondsTimer.Stop();
             if (cd == 0)
@@ -147,7 +165,7 @@ namespace TCC.Data
                 IsAvailable = true;
                 Cooldown = 0;
                 Seconds = 0;
-                NotifyPropertyChanged("Refresh");
+                NPC("Refresh");
                 return;
             }
             Cooldown = cd;
@@ -160,11 +178,37 @@ namespace TCC.Data
             }
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(Cooldown % 1000);
             _offsetTimer.Start();
-            NotifyPropertyChanged("Refresh");
+            NPC("Refresh");
         }
         public void ForceAvailable(bool available)
         {
             IsAvailable = available;
+        }
+
+        public void StartPre(ulong cd)
+        {
+            if (cd > 1000)
+            {
+                PreCooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
+                OriginalCooldown = Cooldown;
+                Seconds = 1 + (PreCooldown / 1000);
+                var offset = PreCooldown % 1000;
+                _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
+                _offsetTimer.Start();
+                IsAvailable = false;
+                _isPreRunning = true;
+            }
+            else
+            {
+                PreCooldown = cd;
+                _shortTimer.Interval = TimeSpan.FromMilliseconds(cd);
+                _shortTimer.Start();
+                Seconds = 0;
+                IsAvailable = false;
+                _isPreRunning = true;
+            }
+            NPC("StartPre");
+
         }
     }
 }

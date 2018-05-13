@@ -1,4 +1,4 @@
-﻿namespace Tera.Game
+﻿namespace TCC.TeraCommon.Game
 {
     public class GuildQuestItem
     {

@@ -1,11 +1,11 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing.Messages
 {
     public class S_PLAYER_CHANGE_STAMINA : ParsedMessage
     {
-        int currentStamina, maxStamina, unk1, unk2, unk3;
+        private int currentStamina, maxStamina, unk1, unk2, unk3;
 
         public int CurrentST { get => currentStamina; }
         public int MaxST { get => maxStamina; }

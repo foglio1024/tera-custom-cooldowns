@@ -8,17 +8,18 @@ using TCC.Data;
 
 namespace TCC.Controls
 {
+    /// <inheritdoc cref="UserControl" />
     /// <summary>
     /// Logica di interazione per ArcherFocusControl.xaml
     /// </summary>
-    public partial class ArcherFocusControl : UserControl
+    public partial class ArcherFocusControl
     {
         public ArcherFocusControl()
         {
             InitializeComponent();
         }
 
-        ArcherFocusTracker _context;
+        private ArcherFocusTracker _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -49,19 +50,16 @@ namespace TCC.Controls
 
         private void ResetArc()
         {
-            externalArc.Stroke = new SolidColorBrush(Colors.White);
-            externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(100)) {EasingFunction = new QuadraticEase() });
+            InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(100)) {EasingFunction = new QuadraticEase() });
         }
 
         private void AnimateArc()
         {
-            externalArc.Stroke = new SolidColorBrush(Color.FromRgb(0xff, 0xcc, 0x30));
-
-            externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9,0, TimeSpan.FromMilliseconds(_context.Duration)));
+            ExternalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9,0, TimeSpan.FromMilliseconds(_context.Duration)));
         }
         private void AnimateArcPartial(int newStacks)
         {
-            externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(newStacks*36, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
+            InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(newStacks*36, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
         }
     }
 }

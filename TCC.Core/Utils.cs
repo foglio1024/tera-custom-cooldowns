@@ -11,13 +11,14 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Runtime.CompilerServices;
 using TCC.Data;
 
 namespace TCC
 {
     public static class Utils
     {
-        static MemoryStream ms;
+        private static MemoryStream ms;
 
         public static BitmapImage BitmapToImageSource(System.Drawing.Bitmap bitmap)
         {
@@ -26,7 +27,7 @@ namespace TCC
             ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
             ms.Position = 0;
-            BitmapImage bitmapimage = new BitmapImage();
+            var bitmapimage = new BitmapImage();
             bitmapimage.BeginInit();
             bitmapimage.StreamSource = ms;
             bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
@@ -62,18 +63,20 @@ namespace TCC
                     return "Archer";
                 case Class.Priest:
                     return "Priest";
-                case Class.Elementalist:
+                case Class.Mystic:
                     return "Mystic";
-                case Class.Soulless:
+                case Class.Reaper:
                     return "Reaper";
-                case Class.Engineer:
+                case Class.Gunner:
                     return "Gunner";
-                case Class.Fighter:
+                case Class.Brawler:
                     return "Brawler";
-                case Class.Assassin:
+                case Class.Ninja:
                     return "Ninja";
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     return "Valkyrie";
+                case Class.Common:
+                    return "All classes";
                 default:
                     return "";
             }
@@ -81,14 +84,15 @@ namespace TCC
 
         public static string ReplaceFirstOccurrenceCaseInsensitive(string input, string search, string replacement)
         {
-            int pos = input.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
+            var pos = input.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
             if (pos < 0) return input;
             var result = input.Substring(0, pos) + replacement + input.Substring(pos + search.Length);
             return result;
         }
+
         public static string ReplaceCaseInsensitive(string input, string search, string replacement)
         {
-            string result = Regex.Replace(
+            var result = Regex.Replace(
                 input,
                 Regex.Escape(search),
                 replacement.Replace("$", "$$"),
@@ -101,6 +105,7 @@ namespace TCC
         {
             return zoneId == 950 && templateId >= 1100 && templateId <= 1103 ? true : false;
         }
+
         public static bool IsGuildTower(uint zoneId, uint templateId)
         {
             return zoneId == 152 && templateId == 5001 ? true : false;
@@ -114,6 +119,7 @@ namespace TCC
             {
                 result.Add(new ChatChannelOnOff(c));
             }
+
             return result;
         }
 
@@ -121,6 +127,7 @@ namespace TCC
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
+
         public static T FindVisualParent<T>(DependencyObject sender) where T : DependencyObject
         {
             if (sender == null)
@@ -133,14 +140,15 @@ namespace TCC
             }
             else
             {
-                DependencyObject parent = VisualTreeHelper.GetParent(sender);
+                var parent = VisualTreeHelper.GetParent(sender);
                 return (FindVisualParent<T>(parent));
             }
         }
+
         public static T GetChild<T>(DependencyObject obj) where T : DependencyObject
         {
             DependencyObject child = null;
-            for (Int32 i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child.GetType() == typeof(T))
@@ -156,36 +164,69 @@ namespace TCC
                     }
                 }
             }
+
             return child as T;
         }
+
         public static Color ParseColor(string col)
         {
-            return System.Windows.Media.Color.FromRgb(
-                                Convert.ToByte(col.Substring(0, 2), 16),
-                                Convert.ToByte(col.Substring(2, 2), 16),
-                                Convert.ToByte(col.Substring(4, 2), 16));
+            return Color.FromRgb(
+                Convert.ToByte(col.Substring(0, 2), 16),
+                Convert.ToByte(col.Substring(2, 2), 16),
+                Convert.ToByte(col.Substring(4, 2), 16));
         }
+
         public static double FactorCalc(double val, double max)
         {
-            return  max > 0 ? 
-                    val / max > 1 ?
-                        1 : val / max 
-                    : 1;
+            return max > 0
+                ? val / max > 1 ? 1 : val / max
+                : 1;
         }
+
         public static DateTime FromUnixTime(long unixTime)
         {
-            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return epoch.AddSeconds(unixTime);
         }
 
         public static string TimeFormatter(ulong seconds)
         {
-            if (seconds < 99) return seconds+"";
+            if (seconds < 99) return seconds + "";
             if (seconds < 99 * 60) return seconds / 60 + "m";
-            if (seconds < 99 * 60 * 60) return seconds / (60*60) + "h";
-            return seconds / (60 * 60 *24) + "d";
+            if (seconds < 99 * 60 * 60) return seconds / (60 * 60) + "h";
+            return seconds / (60 * 60 * 24) + "d";
         }
 
+        public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
+            string[] filters, string[] sortFilters)
+        {
+            var cv = new CollectionViewSource {Source = source}.View;
+            cv.Filter = predicate;
+            var liveView = cv as ICollectionViewLiveShaping;
+            if (!liveView.CanChangeLiveFiltering) return null;
+            if (filters.Count() > 0)
+            {
+                foreach (var filter in filters)
+                {
+                    liveView.LiveFilteringProperties.Add(filter);
+                }
+
+                liveView.IsLiveFiltering = true;
+            }
+
+            if (sortFilters.Count() > 0)
+            {
+                foreach (var filter in sortFilters)
+                {
+                    (liveView as ICollectionView).SortDescriptions.Add(new SortDescription(filter,
+                        ListSortDirection.Ascending));
+                }
+
+                liveView.IsLiveSorting = true;
+            }
+
+            return liveView;
+        }
     }
 
     public static class EventUtils
@@ -209,7 +250,7 @@ namespace TCC
 
         public DependencyPropertyWatcher(DependencyObject target, string propertyPath)
         {
-            this.Target = target;
+            Target = target;
             BindingOperations.SetBinding(
                 this,
                 ValueProperty,
@@ -220,12 +261,12 @@ namespace TCC
 
         public T Value
         {
-            get { return (T)this.GetValue(ValueProperty); }
+            get { return (T)GetValue(ValueProperty); }
         }
 
         public static void OnPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
-            DependencyPropertyWatcher<T> source = (DependencyPropertyWatcher<T>)sender;
+            var source = (DependencyPropertyWatcher<T>)sender;
 
             if (source.PropertyChanged != null)
             {
@@ -235,7 +276,7 @@ namespace TCC
 
         public void Dispose()
         {
-            this.ClearValue(ValueProperty);
+            ClearValue(ValueProperty);
         }
     }
     public static class DispatcherExtensions
@@ -260,7 +301,7 @@ namespace TCC
             _dispatcher = newDispatcher;
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged(string v)
+        protected void NPC([CallerMemberName] string v = null)
         {
             _dispatcher.InvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
@@ -273,111 +314,124 @@ namespace TCC
 
         public SynchronizedObservableCollection()
         {
-            this._dispatcher = Dispatcher.CurrentDispatcher;
-            this._lock = new ReaderWriterLockSlim();
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            _lock = new ReaderWriterLockSlim();
         }
         public SynchronizedObservableCollection(Dispatcher d)
         {
-            this._dispatcher = d;
-            this._lock = new ReaderWriterLockSlim();
+            _dispatcher = d;
+            _lock = new ReaderWriterLockSlim();
         }
         protected override void ClearItems()
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.ClearItems();
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void InsertItem(int index, T item)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                if (index > this.Count)
+                if (index > Count)
                     return;
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.InsertItem(index, item);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void MoveItem(int oldIndex, int newIndex)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                this._lock.EnterReadLock();
-                int count = this.Count;
-                this._lock.ExitReadLock();
+                _lock.EnterReadLock();
+                var count = Count;
+                _lock.ExitReadLock();
                 if (oldIndex >= count | newIndex >= count | oldIndex == newIndex)
                     return;
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.MoveItem(oldIndex, newIndex);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void RemoveItem(int index)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                if (index >= this.Count)
+                if (index >= Count)
                     return;
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.RemoveItem(index);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void SetItem(int index, T item)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.SetItem(index, item);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         public T[] ToSyncArray()
         {
-            this._lock.EnterReadLock();
+            _lock.EnterReadLock();
             try
             {
-                T[] array = new T[this.Count];
-                this.CopyTo(array, 0);
+                var array = new T[Count];
+                CopyTo(array, 0);
                 return array;
             }
             finally
             {
-                this._lock.ExitReadLock();
+                _lock.ExitReadLock();
             }
         }
+    }
+    public class ButtonExtensions
+    {
+        public static CornerRadius GetCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(CornerRadiusProperty);
+        }
+        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(CornerRadiusProperty, value);
+        }
+        public static readonly DependencyProperty CornerRadiusProperty =
+        DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ButtonExtensions), new PropertyMetadata(new CornerRadius(0)));
     }
 }

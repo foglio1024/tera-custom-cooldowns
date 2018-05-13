@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
@@ -12,7 +10,7 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per PartyMember.xaml
     /// </summary>
-    public partial class PartyMember : UserControl
+    public partial class PartyMember
     {
         public PartyMember()
         {
@@ -27,8 +25,8 @@ namespace TCC.Controls
         }
         private void UpdateSettings()
         {
-            SetMP();
-            SetHP();
+            SetMp();
+            SetHp();
             SetBuffs();
             SetDebuffs();
             SetLaurels();
@@ -43,8 +41,9 @@ namespace TCC.Controls
                     LaurelImage.Visibility = SettingsManager.ShowMembersLaurels ? Visibility.Visible : Visibility.Collapsed;
                 });
             }
-            catch (Exception)
+            catch
             {
+                // ignored
             }
         }
         private void SetBuffs()
@@ -54,14 +53,15 @@ namespace TCC.Controls
                 Dispatcher.Invoke(() =>
                 {
                     if(!(DataContext is User user))return;
-                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
+                    Buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
                     BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
             }
-            catch (Exception)
+            catch
             {
+                // ignored
             }
         }
         private void SetDebuffs()
@@ -71,33 +71,33 @@ namespace TCC.Controls
                 Dispatcher.Invoke(() =>
                 {
                     if(!(DataContext is User)) return;
-                    debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
+                    Debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
                     DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
             }
-            catch (Exception)
+            catch
             {
-
+                // ignored
             }
         }
-        private void SetMP()
+        private void SetMp()
         {
             Dispatcher.Invoke(() =>
             {
-                mpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
-        private void SetHP()
+        private void SetHp()
         {
             Dispatcher.Invoke(() =>
             {
-                hpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
 
-        public void AnimateIn()
+        private void AnimateIn()
         {
             var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500));
             BeginAnimation(OpacityProperty, an);

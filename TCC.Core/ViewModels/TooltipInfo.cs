@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Threading;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -12,10 +13,10 @@ namespace TCC.ViewModels
             {
                 if (name == value) return;
                 name = value;
-                NotifyPropertyChanged(nameof(Name));
-                NotifyPropertyChanged(nameof(BlockLabelText));
-                NotifyPropertyChanged(nameof(ShowAddFriend));
-                NotifyPropertyChanged(nameof(ShowWhisper));
+                NPC(nameof(Name));
+                NPC(nameof(BlockLabelText));
+                NPC(nameof(ShowAddFriend));
+                NPC(nameof(ShowWhisper));
             }
         }
         private string info;
@@ -24,7 +25,7 @@ namespace TCC.ViewModels
             get => info; set
             {
                 if (info == value) return; info = value;
-                NotifyPropertyChanged(nameof(Info));
+                NPC(nameof(Info));
             }
         }
         private int level;
@@ -32,7 +33,7 @@ namespace TCC.ViewModels
         {
             get => level; set
             {
-                if (level == value) return; level = value; NotifyPropertyChanged(nameof(Level));
+                if (level == value) return; level = value; NPC(nameof(Level));
             }
         }
         private Class charClass;
@@ -43,7 +44,7 @@ namespace TCC.ViewModels
             {
                 if (charClass == value) return;
                 charClass = value;
-                NotifyPropertyChanged(nameof(Class));
+                NPC(nameof(Class));
             }
         }
         private bool showPartyInvite;
@@ -54,7 +55,7 @@ namespace TCC.ViewModels
             {
                 if (showPartyInvite == value) return;
                 showPartyInvite = value;
-                NotifyPropertyChanged(nameof(ShowPartyInvite));
+                NPC(nameof(ShowPartyInvite));
             }
         }
         private bool showGuildInvite;
@@ -65,7 +66,7 @@ namespace TCC.ViewModels
             {
                 if (showGuildInvite == value) return;
                 showGuildInvite = value;
-                NotifyPropertyChanged(nameof(ShowGuildInvite));
+                NPC(nameof(ShowGuildInvite));
             }
         }
 
@@ -104,21 +105,22 @@ namespace TCC.ViewModels
 
         public bool ShowGrantPowers
         {
-            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+            get => GroupWindowViewModel.Instance.AmILeader && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         }
+        public bool ShowKick => GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool ShowDelegateLeader
         {
-            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+            get => GroupWindowViewModel.Instance.AmILeader && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         }
         public bool IsBlocked
         {
-            get => ChatWindowViewModel.Instance.BlockedUsers.Contains(name);
+            get => ChatWindowManager.Instance.BlockedUsers.Contains(name);
         }
         public bool IsFriend
         {
             get
             {
-                var f = ChatWindowViewModel.Instance.Friends.FirstOrDefault(x => x.Name == name);
+                var f = ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == name);
                 return f == null ? false : true;
             }
         }
@@ -133,17 +135,18 @@ namespace TCC.ViewModels
 
         public void Refresh()
         {
-            NotifyPropertyChanged(nameof(ShowPartyInvite));
-            NotifyPropertyChanged(nameof(ShowGuildInvite));
-            NotifyPropertyChanged(nameof(ShowAddFriend));
-            NotifyPropertyChanged(nameof(ShowWhisper));
-            NotifyPropertyChanged(nameof(BlockLabelText));
-            NotifyPropertyChanged(nameof(FriendLabelText));
-            NotifyPropertyChanged(nameof(IsBlocked));
-            NotifyPropertyChanged(nameof(IsFriend));
-            NotifyPropertyChanged(nameof(PowersLabelText));
-            NotifyPropertyChanged(nameof(ShowDelegateLeader));
-            NotifyPropertyChanged(nameof(ShowGrantPowers));
+            NPC(nameof(ShowPartyInvite));
+            NPC(nameof(ShowGuildInvite));
+            NPC(nameof(ShowAddFriend));
+            NPC(nameof(ShowKick));
+            NPC(nameof(ShowWhisper));
+            NPC(nameof(BlockLabelText));
+            NPC(nameof(FriendLabelText));
+            NPC(nameof(IsBlocked));
+            NPC(nameof(IsFriend));
+            NPC(nameof(PowersLabelText));
+            NPC(nameof(ShowDelegateLeader));
+            NPC(nameof(ShowGrantPowers));
         }
 
         public void SetInfo(uint model)

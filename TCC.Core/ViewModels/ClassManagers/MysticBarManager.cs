@@ -5,21 +5,25 @@ namespace TCC.ViewModels
 {
     internal class MysticBarManager : ClassManager
     {
-        private static MysticBarManager _instance;
-        public static MysticBarManager Instance => _instance ?? (_instance = new MysticBarManager());
-
+        private bool _elementalize;
         public AurasTracker Auras { get; private set; }
         public FixedSkillCooldown Contagion { get; private set; }
         public DurationCooldownIndicator Vow { get; private set; }
 
+        public bool Elementalize
+        {
+            get => _elementalize;
+            set
+            {
+                if(_elementalize == value) return;
+                _elementalize = value;
+                NPC();
+            }
+        }
+
         public MysticBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             Auras = new AurasTracker();
-
-            LoadSpecialSkills();
-            Vow.Buff.PropertyChanged += Vow_PropertyChanged;
         }
 
         private void Vow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -30,14 +34,19 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out Skill cont);
-            SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out Skill vow);
-            Contagion = new FixedSkillCooldown(cont, CooldownType.Skill, _dispatcher, true);
-            Vow = new DurationCooldownIndicator(_dispatcher);
-            Vow.Buff = new FixedSkillCooldown(vow, CooldownType.Skill, _dispatcher, false);
-            Vow.Cooldown = new FixedSkillCooldown(vow, CooldownType.Skill,_dispatcher,false);
+            SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
+            Contagion = new FixedSkillCooldown(cont, _dispatcher, true);
+            Vow = new DurationCooldownIndicator(_dispatcher)
+            {
+                Buff = new FixedSkillCooldown(vow, _dispatcher, false),
+                Cooldown = new FixedSkillCooldown(vow, _dispatcher, false)
+            };
+            Vow.Buff.PropertyChanged += Vow_PropertyChanged;
+
+
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

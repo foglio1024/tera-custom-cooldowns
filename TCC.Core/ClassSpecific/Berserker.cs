@@ -14,11 +14,11 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == BloodlustId)
                 {
-                    ((BerserkerBarManager)ClassManager.CurrentClassManager).Bloodlust.Buff.Start(p.Duration);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Bloodlust.Buff.Start(p.Duration);
                 }
                 if (p.AbnormalityId == FieryRageId)
                 {
-                    ((BerserkerBarManager)ClassManager.CurrentClassManager).FieryRage.Buff.Start(p.Duration);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Start(p.Duration);
                 }
             }
         }
@@ -28,11 +28,11 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == BloodlustId)
                 {
-                    ((BerserkerBarManager)ClassManager.CurrentClassManager).Bloodlust.Buff.Refresh(p.Duration);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Bloodlust.Buff.Refresh(p.Duration);
                 }
                 if (p.AbnormalityId == FieryRageId)
                 {
-                    ((BerserkerBarManager)ClassManager.CurrentClassManager).FieryRage.Buff.Refresh(p.Duration);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Refresh(p.Duration);
                 }
             }
         }
@@ -42,11 +42,11 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == BloodlustId)
                 {
-                    ((BerserkerBarManager)ClassManager.CurrentClassManager).Bloodlust.Buff.Refresh(0);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Bloodlust.Buff.Refresh(0);
                 }
                 if (p.AbnormalityId == FieryRageId)
                 {
-                    ((BerserkerBarManager)ClassManager.CurrentClassManager).FieryRage.Buff.Refresh(0);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Refresh(0);
                 }
             }
         }

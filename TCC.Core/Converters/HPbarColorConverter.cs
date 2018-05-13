@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 namespace TCC.Converters
@@ -10,11 +11,11 @@ namespace TCC.Converters
         {
             if ((bool)value)
             {
-                return ((SolidColorBrush)App.Current.FindResource("Colors.App.HP.Debuff"));
+                return ((SolidColorBrush)Application.Current.FindResource("HpDebuffColor"));
             }
             else
             {
-                return ((SolidColorBrush)App.Current.FindResource("Colors.App.HP"));
+                return ((SolidColorBrush)Application.Current.FindResource("HpColor"));
             }
         }
 

@@ -2,7 +2,7 @@
 using System.Timers;
 using System.Windows.Threading;
 
-namespace TCC
+namespace TCC.Data
 {
     public class SkillCooldown : TSPropertyChanged, IDisposable
     {
@@ -11,18 +11,14 @@ namespace TCC
         public ulong Cooldown { get; set; }
         public ulong OriginalCooldown { get; set; }
         public CooldownType Type { get; set; }
+        public bool Pre { get; set; }
         private Timer _timer;
 
-        public void SetDispatcher(Dispatcher d)
+        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d, bool autostart = true, bool pre = false)
         {
             _dispatcher = d;
-        }
-
-        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d)
-        {
-            _dispatcher = d;
-
-            var cooldown = cd > Int32.MaxValue ? Int32.MaxValue : cd;
+            Pre = pre;
+            var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
 
             Skill = sk;
             Cooldown = t==CooldownType.Skill ? cooldown : cooldown * 1000;
@@ -32,20 +28,25 @@ namespace TCC
             if (cooldown == 0) return;
             _timer = new Timer(Cooldown);
             _timer.Elapsed += _timer_Elapsed;
-            _timer.Start();
+            if(autostart) Start();
 
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            NotifyPropertyChanged("Ending");
+            NPC("Ending");
             _timer?.Stop();
         }
 
+        public void Start()
+        {
+            _timer.Start();
+        }
         public void Refresh(ulong cd)
         {
             Cooldown = cd;
-            NotifyPropertyChanged("Refresh");
+            Pre = false;
+            NPC("Refresh");
             if (_timer == null) return;
             _timer.Stop();
             _timer.Interval = Cooldown > 0 ? Cooldown : 1;

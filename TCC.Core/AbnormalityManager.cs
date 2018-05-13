@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System.Linq;
+using TCC.Data;
 using TCC.Data.Databases;
 using TCC.ViewModels;
 
@@ -6,11 +7,9 @@ namespace TCC
 {
     public static class AbnormalityManager
     {
-        public static AbnormalityDatabase CurrentDb;
-
         public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
                 if (target == SessionManager.CurrentPlayer.EntityId)
@@ -27,7 +26,7 @@ namespace TCC
         }
         public static void EndAbnormality(ulong target, uint id)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
@@ -66,19 +65,26 @@ namespace TCC
             {
                 BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks);
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
-                ClassManager.SetStatus(ab, true);
+                //ClassManager.SetStatus(ab, true);
             }
-            CheckPassivity(ab);
+            CheckPassivity(ab, duration);
             //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
-            //ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+            //ChatWindowManager.Instance.AddChatMessage(sysMsg);
 
         }
 
-        private static void CheckPassivity(Abnormality ab)
+        private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (PassivityDatabase.Passivities.Contains(ab.Id))
+            if (PassivityDatabase.Passivities.Contains(ab.Id) )
             {
                 SkillManager.AddPassivitySkill(ab.Id, 60);
+            }
+            else if (CooldownWindowViewModel.Instance.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id) ||
+                CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+
+            {
+                //TODO: can't do this correctly since we don't know passivity cooldown from database so we just add duration
+                SkillManager.AddPassivitySkill(ab.Id, duration/1000);
             }
         }
 
@@ -103,7 +109,7 @@ namespace TCC
             {
                 BuffBarWindowViewModel.Instance.Player.RemoveDebuff(ab);
                 CharacterWindowViewModel.Instance.Player.RemoveFromDebuffList(ab);
-                ClassManager.SetStatus(ab, false);
+                //ClassManager.SetStatus(ab, false);
             }
         }
 
@@ -125,7 +131,7 @@ namespace TCC
 
         public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
@@ -134,7 +140,7 @@ namespace TCC
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);

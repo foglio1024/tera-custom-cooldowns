@@ -1,12 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
-namespace TCC.Controls
+namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per ValkyrieBar.xaml
     /// </summary>
-    public partial class ValkyrieBar : UserControl
+    public partial class ValkyrieBar
     {
         public ValkyrieBar()
         {

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_GUILD_QUEST_LIST : ParsedMessage
     {
@@ -94,7 +95,7 @@ namespace Tera.Game.Messages
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
         }
@@ -174,7 +175,7 @@ namespace Tera.Game.Messages
                 // ";countUnk2:" + countUnk2 +
                 // ";offsetUnk2:" + offsetUnk2
                 // );
-                List<GuildQuestTarget> targets = new List<GuildQuestTarget>();
+                var targets = new List<GuildQuestTarget>();
                 reader.BaseStream.Position = offsetTargets - 4;
                 for (var j = 1; j <= countTargets; j++)
                 {
@@ -196,7 +197,7 @@ namespace Tera.Game.Messages
                     Debug.WriteLine("unk2:" + reader.ReadByte().ToString("X") + " ;" + j + "/" + countUnk2);
                 }
 
-                List<GuildQuestItem> rewards = new List<GuildQuestItem>();
+                var rewards = new List<GuildQuestItem>();
                 reader.BaseStream.Position = offsetRewards - 4;
                 for (var j = 1; j <= countRewards; j++)
                 {

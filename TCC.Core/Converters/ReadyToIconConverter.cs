@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Data;
+
 namespace TCC.Converters
 {
     public class ReadyToIconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ReadyStatus v = (ReadyStatus)value;
-            string img = "resources/images/Icon_Laurels/blank.png";
+            var v = (ReadyStatus)value;
+            var img = "resources/images/Icon_Laurels/blank.png";
             switch (v)
             {
                 case ReadyStatus.NotReady:

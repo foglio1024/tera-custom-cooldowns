@@ -1,7 +1,8 @@
 ﻿using System;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Server;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     public class SkillResult
     {

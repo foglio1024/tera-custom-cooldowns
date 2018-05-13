@@ -1,4 +1,4 @@
-﻿namespace Tera.Sniffing.Crypt
+﻿namespace TCC.TeraCommon.Sniffing.Crypt
 {
     internal class Sha
     {

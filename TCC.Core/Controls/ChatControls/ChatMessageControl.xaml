@@ -1,12 +1,8 @@
-﻿<UserControl x:Class="TCC.Controls.ChatMessageControl"
+﻿<UserControl x:Class="TCC.Controls.ChatControls.ChatMessageControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:ts="clr-namespace:TCC.TemplateSelectors"
-             xmlns:c="clr-namespace:TCC.Converters"
-             xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"  
              DataContextChanged="UserControl_Loaded">
     <UserControl.LayoutTransform>
@@ -15,7 +11,7 @@
             <RotateTransform Angle="180"></RotateTransform>
         </TransformGroup>
     </UserControl.LayoutTransform>
-    <Grid Margin="2,1" HorizontalAlignment="Left" Width="Auto" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top" 
+    <Grid Margin="2,1" HorizontalAlignment="Left" Width="Auto" Name="Root" Height="Auto" Background="#0f00" VerticalAlignment="Top" 
           >
         <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Background="Transparent" >
             <Grid.ColumnDefinitions>
@@ -23,14 +19,15 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--Header-->
-            <ContentControl Content="{Binding}" Name="header" MouseEnter="UserControl_MouseEnter"
+            <ContentControl Content="{Binding}" Name="Header" MouseEnter="UserControl_MouseEnter"
                             ContentTemplate="{StaticResource MessageHeaderTemplate}"/>
             <!--Message-->
-            <ContentControl Content="{Binding}" Name="body" Grid.Column="1" 
+            <ContentControl Content="{Binding}" x:Name="Body" Grid.Column="1" 
                             ContentTemplateSelector="{StaticResource BodyTemplateSelector}"  />
 
-            <Popup IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True" x:Name="popup" MouseLeave="popup_MouseLeave">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Padding="5" >
+            <Popup Grid.Column="0" IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True"
+                   x:Name="Popup" MouseLeave="Popup_MouseLeave">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Padding="5" >
                     <ContentControl Content="{Binding}" Width="650"
                             ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
                 </Border>
