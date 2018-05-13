@@ -280,13 +280,13 @@ namespace TCC.Windows
         private void CheckBounds()
         {
             if (Left < 0) Left = 0;
-            if ((Left + ActualWidth) > Screen.PrimaryScreen.WorkingArea.Width)
+            if ((Left + ActualWidth) > SettingsManager.ScreenW)
             {
-                Left = Screen.PrimaryScreen.Bounds.Width - ActualWidth;
+                Left = SettingsManager.ScreenW  - ActualWidth;
             }
-            if ((Top + ActualHeight) > Screen.PrimaryScreen.WorkingArea.Height)
+            if ((Top + ActualHeight) > SettingsManager.ScreenH)
             {
-                Top = Screen.PrimaryScreen.Bounds.Height - ActualHeight;
+                Top = SettingsManager.ScreenH - ActualHeight;
             }
         }
 
