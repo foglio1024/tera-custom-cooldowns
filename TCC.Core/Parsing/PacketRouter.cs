@@ -221,7 +221,7 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
-
+            ChatWindowManager.Instance.SetMgButtonVis();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
 

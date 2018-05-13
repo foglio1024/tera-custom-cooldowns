@@ -279,6 +279,15 @@ namespace TCC.Windows
         {
 
         }
+
+        public void SetMgButtonVis()
+        {
+
+            Dispatcher.Invoke(() =>
+            {
+                ((PlayerTooltip)PlayerInfo.Child).SetMoongourdVisibility();
+            });
+        }
     }
 
 }

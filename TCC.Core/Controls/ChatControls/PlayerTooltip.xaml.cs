@@ -143,7 +143,7 @@ namespace TCC.Controls.ChatControls
             {
                 KickText.Text = "Are you sure?";
                 var scaleTrans = (Ripple.RenderTransform as TransformGroup)?.Children[0];
-                ((TransformGroup) Ripple.RenderTransform).Children[1] = new TranslateTransform(Mouse.GetPosition(KickGrid).X - Ripple.Width / 2,
+                ((TransformGroup)Ripple.RenderTransform).Children[1] = new TranslateTransform(Mouse.GetPosition(KickGrid).X - Ripple.Width / 2,
                     Mouse.GetPosition(KickGrid).Y - Ripple.Height / 2);
                 Ripple.Opacity = 1;
                 scaleTrans?.BeginAnimation(ScaleTransform.ScaleYProperty, _rippleScale);
@@ -159,11 +159,14 @@ namespace TCC.Controls.ChatControls
             MgPopup.IsOpen = true;
         }
 
-        private void PlayerTooltip_OnLoaded(object sender, RoutedEventArgs e)
+        public void SetMoongourdVisibility()
         {
-            if (SettingsManager.LastRegion != "NA" &&
-                SettingsManager.LastRegion != "RU" &&
-                !SettingsManager.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+            Dispatcher.Invoke(() =>
+            {
+                if (SettingsManager.LastRegion!= "NA" &&
+                    SettingsManager.LastRegion != "RU" &&
+                    !SettingsManager.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+            }); 
 
         }
     }

@@ -391,6 +391,13 @@ namespace TCC.ViewModels
                 chatWindow.TempShow();
             }
         }
+
+        public void SetMgButtonVis()
+        {
+
+            ChatWindows[0].SetMgButtonVis();
+
+        }
     }
 
     public class ChatTabClient : IInterTabClient
