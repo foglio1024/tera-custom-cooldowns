@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Converters;
 using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls
@@ -156,6 +157,14 @@ namespace TCC.Controls.ChatControls
             var p = (MgPopup.Child as MoongourdPopup);
             p.SetInfo(ChatWindowManager.Instance.TooltipInfo.Name, SettingsManager.LastRegion);
             MgPopup.IsOpen = true;
+        }
+
+        private void PlayerTooltip_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (SettingsManager.LastRegion != "NA" &&
+                SettingsManager.LastRegion != "RU" &&
+                !SettingsManager.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+
         }
     }
 }

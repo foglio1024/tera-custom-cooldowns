@@ -47,7 +47,6 @@ namespace TCC.Controls.ChatControls
 
         private void MoongourdPopup_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
 
         public void SetInfo(string name, string region)
