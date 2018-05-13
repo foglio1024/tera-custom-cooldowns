@@ -172,9 +172,8 @@ namespace TCC
                             var v = Version.Parse(newVersionInfo);
                             if (v > Assembly.GetExecutingAssembly().GetName().Version)
                             {
-                                //TODO warn user
                                 ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
-                                WindowManager.FloatingButton.NotifyExtended("Update manager", "TCC v"+newVersionInfo+ " is available!");
+                                WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!");
                             }
                         }
                     }
