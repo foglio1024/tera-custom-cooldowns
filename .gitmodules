@@ -1,1 +1,4 @@
 
+[submodule "TCC.Core/resources/data"]
+	path = TCC.Core/resources/data
+	url = https://github.com/neowutran/TeraDpsMeterData
