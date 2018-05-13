@@ -38,8 +38,6 @@ namespace TCC.Data
             var matchesX = x < Top && x > Top - Height;
             if (matchesX & matchesY)
             {
-                Console.WriteLine($"  |  X:{x}\n  |  T:{Top} - B:{Top - Height}");
-                Console.WriteLine($"  |  Y:{y}\n  |  L:{Left} - R:{Left + Width}");
             }
             return matchesX && matchesY;
         }

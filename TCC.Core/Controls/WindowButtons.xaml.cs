@@ -68,13 +68,6 @@ namespace TCC.Controls
             //_dc = DataContext as WindowSettings;
         }
 
-        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (DataContext == null) {Console.WriteLine($"Data context is null"); return; }
-            var t = DataContext.GetType().Name;
-            //Console.WriteLine($"Data context is {t}");
-        }
-
         private void AutoDim(object sender, RoutedEventArgs e)
         {
             _dc.AutoDim = !_dc.AutoDim;

@@ -16,7 +16,6 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId == FocusId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((ArcherBarManager) ClassWindowViewModel.Instance.CurrentManager).Focus.StartFocus();
-                Console.WriteLine("[BEGIN] Focus " + p.Duration);
             }
         }
         public static void CheckFocus(S_ABNORMALITY_REFRESH p)
@@ -24,7 +23,6 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId == FocusId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.SetFocusStacks(p.Stacks);
-                Console.WriteLine("[REFRESH] Focus " + p.Duration);
             }
         }
         public static void CheckFocusX(S_ABNORMALITY_BEGIN p)
@@ -32,7 +30,6 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId == FocusXId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StartFocusX();
-                Console.WriteLine("[BEGIN] Focus X " + p.Duration);
             }
         }
         public static void CheckFocusX(S_ABNORMALITY_REFRESH p)
@@ -40,7 +37,6 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId == FocusXId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StartFocusX();
-                Console.WriteLine("[REFRESH] Focus X " + p.Duration);
             }
         }
         public static void CheckFocusEnd(S_ABNORMALITY_END p)
@@ -48,7 +44,6 @@ namespace TCC.ClassSpecific
             if ((p.AbnormalityId == FocusId || p.AbnormalityId == FocusXId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StopFocus();
-                Console.WriteLine("[END] Focus ");
             }
 
         }

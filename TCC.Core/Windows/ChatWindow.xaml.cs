@@ -59,7 +59,6 @@ namespace TCC.Windows
             {
                 VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
-            //Console.WriteLine("drag completed");
         }
 
         public void UpdateSettings()

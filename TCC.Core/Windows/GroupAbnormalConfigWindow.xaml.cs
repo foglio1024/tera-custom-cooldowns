@@ -165,7 +165,6 @@ namespace TCC.ViewModels
             {
                 if (_selected == value) return;
                 _selected = value;
-                if (_selected) Console.WriteLine($"[{Class}] {AbnormalityId} set to True");
                 NPC();
 
             }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using System.Threading;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -172,7 +173,8 @@ namespace TCC
                             if (v > Assembly.GetExecutingAssembly().GetName().Version)
                             {
                                 //TODO warn user
-                                
+                                ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
+                                WindowManager.FloatingButton.NotifyExtended("Update manager", "TCC v"+newVersionInfo+ " is available!");
                             }
                         }
                     }

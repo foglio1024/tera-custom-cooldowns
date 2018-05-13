@@ -269,7 +269,6 @@ namespace TCC.Windows
 
                 _settings.X = Left / SettingsManager.ScreenW;
                 _settings.Y = Top / SettingsManager.ScreenH;
-                Console.WriteLine($"Pos: {_settings.X}, {_settings.Y}");
                 SettingsManager.SaveSettings();
             }
             catch

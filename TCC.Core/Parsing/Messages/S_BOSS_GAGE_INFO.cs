@@ -40,7 +40,6 @@ namespace TCC.Parsing.Messages
             //    maxHp = reader.ReadSingle();
             //}
 
-            //System.Console.WriteLine("[S_BOSS_GAGE_INFO] id:{0} name:{1}", EntityId, MonsterDatabase.GetName((uint)npc, (uint)type));
             //unk3 = reader.ReadByte();
         }
     }

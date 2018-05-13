@@ -54,7 +54,6 @@ namespace TCC
                     try
                     {
                         var str = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(request.ToString()));
-                        Console.WriteLine(str);
                         var resp = c.UploadString(new Uri(RecentUploadsUrl), str);
                         LastResponse = null;
                         try
@@ -84,7 +83,6 @@ namespace TCC
 
         public void GetEncounters(string playerName, string region, string playerServer = "", int areaId = 0, int bossId = 0)
         {
-            Console.WriteLine($"GetEncounters: {playerName}");
             var req = BuildRequest(playerName, region, playerServer, areaId, bossId);
             //if (req.ToString() != LastRequest?.ToString()) DownloadEncountersJson(req);
             DownloadEncountersJson(req);

@@ -6,17 +6,22 @@
         mc:Ignorable="d" MouseEnter="Window_MouseEnter"
         MouseLeave="Window_MouseLeave"
         Loaded="FloatinButtonLoaded"
-        Title="FloatingButtonWindow" Height="Auto" Width="70"
+        Title="FloatingButtonWindow" Height="Auto" Width="Auto"
+        MinWidth="70"
         ResizeMode="NoResize" 
         WindowStyle="None"
-        SizeToContent="Height"
+        SizeToContent="WidthAndHeight"
         ShowInTaskbar="False"
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True">
-    <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="0,2,2,0"
-            x:Name="RootBorder" Margin="0,10" HorizontalAlignment="Left">
-        <Grid >
+    <Grid x:Name="RootGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="0,2,2,0" x:Name="RootBorder" Margin="0,10" HorizontalAlignment="Stretch">
             <StackPanel Width="35">
                 <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="Button_Click_2" ToolTip="LFG" Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
                     <Path Data="{StaticResource SvgUsers}" Fill="White" 
@@ -30,7 +35,9 @@
                     <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
                 </Button>
             </StackPanel>
-            <Border x:Name="NotificationBubble"
+        </Border>
+
+        <Border x:Name="NotificationBubble"
                     Width="20"
                     Height="20"
                     Background="{StaticResource HpColor}"
@@ -40,19 +47,44 @@
                     RenderTransformOrigin=".5,.5"
                     Visibility="Hidden"
                     ToolTip="There are events starting in 5 minutes.">
-                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="0,0,0,0" x:Name="EventAmountTb" >0</TextBlock>
-                <Border.Effect>
-                    <DropShadowEffect Opacity=".8" ShadowDepth="1" BlurRadius="3"></DropShadowEffect>
-                </Border.Effect>
-                <Border.RenderTransform>
-                    <ScaleTransform />
-                </Border.RenderTransform>
-                
-            </Border>
-        </Grid>
-        <Border.RenderTransform>
-            <TranslateTransform X="-32"></TranslateTransform>
-        </Border.RenderTransform>
+            <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="0,0,0,0" x:Name="EventAmountTb" >0</TextBlock>
+            <Border.Effect>
+                <DropShadowEffect Opacity=".8" ShadowDepth="1" BlurRadius="3"></DropShadowEffect>
+            </Border.Effect>
+            <Border.RenderTransform>
+                <ScaleTransform />
+            </Border.RenderTransform>
 
-    </Border>
+        </Border>
+        <Grid Grid.Column="1" Width="200" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer">
+
+            <Grid x:Name="NotificationContent" VerticalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Background="{StaticResource BackgroundDarkColor}" Margin="0" CornerRadius="3 3 0 0" Effect="{StaticResource DropShadow}"></Border>
+                <Border Background="{StaticResource Colors.Chat.Party}" CornerRadius="0 0 3 3" Effect="{StaticResource DropShadow}" 
+                         Grid.Row="1"></Border>
+                <Border x:Name="NotificationTime" Background="#1fff"  CornerRadius="3 0 0 3" Grid.Row="0" HorizontalAlignment="Left">
+                    <FrameworkElement x:Name="NotificationTimeGovernor" Width="{Binding ElementName=NotificationContainer, Path=ActualWidth}">
+                        <FrameworkElement.LayoutTransform>
+                            <ScaleTransform ScaleX="1"/>
+                        </FrameworkElement.LayoutTransform>
+                    </FrameworkElement>
+                </Border>
+
+                <TextBlock x:Name="NotificationTitle" Foreground="#6fff" Margin="10 3"  TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="NotificationText" Foreground="#9fff" Margin="20 10 10 10" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+            </Grid>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleY="0" ScaleX="1"></ScaleTransform>
+            </Grid.LayoutTransform>
+        </Grid>
+        <Grid.RenderTransform>
+            <TranslateTransform X="-32"></TranslateTransform>
+        </Grid.RenderTransform>
+
+    </Grid>
+
 </Window>

@@ -62,7 +62,6 @@ namespace TCC.Controls.ChatControls
             mg.Started += () => Dispatcher.Invoke(() => { EmptyInfo.Text = "Loading..."; });
             mg.Done += (list) => Dispatcher.Invoke(() =>
             {
-                Console.WriteLine($"Setting ItemSource");
                 EmptyInfo.Text = "No entries";
                 List.ItemsSource = list;
             });

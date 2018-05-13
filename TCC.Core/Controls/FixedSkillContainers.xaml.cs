@@ -202,12 +202,7 @@ namespace TCC.Controls
         private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _mainOrder = e.NewOrder;
-            foreach (var item in e.NewOrder)
-            {
-                Console.WriteLine(item);
-            }
 
-            Console.WriteLine($" -----");
             if (_mainOrder.Length < 2) return;
             if (!_isDragging)
             {

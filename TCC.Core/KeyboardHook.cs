@@ -144,7 +144,6 @@ namespace TCC
             // register the hot key.
             if (!RegisterHotKey(_window.Handle, _currentId, (uint)modifier, (uint)key))
             {
-                Console.WriteLine("Error");
             }
         }
 

@@ -32,7 +32,6 @@ namespace TCC.Parsing.Messages
             unk3 = reader.ReadInt32();
             unk4 = reader.ReadInt32();
             reader.Skip(ACHIEVEMENT_LENGHT * achiCount);
-            //System.Console.WriteLine("{0}-{1}-{2}", unk1, unk3, unk4);
 
 
         }
