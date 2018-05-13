@@ -26,13 +26,13 @@ namespace TCC.Parsing
             }
             try
             {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/protocol." + version + ".map", filename);
                 return;
             }
             catch { }
             try
             {
-                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/protocol." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
                 return;
             }
             catch { }
