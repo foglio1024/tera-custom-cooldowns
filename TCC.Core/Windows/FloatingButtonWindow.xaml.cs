@@ -33,7 +33,7 @@ namespace TCC.Windows
             var _ = m.M11;
             var dy = m.M22;
             Left = 0;
-            Top = screen.Bounds.Height * dy / 2 - ActualHeight / 2;
+            Top = SettingsManager.ScreenH / 2 - ActualHeight / 2;
 
             WindowManager.TccVisibilityChanged += WindowManager_TccVisibilityChanged;
             _t = new Timer {Interval = 2000};
