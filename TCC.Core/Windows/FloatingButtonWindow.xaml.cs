@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -21,9 +22,9 @@ namespace TCC.Windows
         }
 
         private Timer _t;
-        private Timer _n;
+        private DispatcherTimer _n;
         private DoubleAnimation _an;
-        private int _notificationDuration;
+        private int _notificationDuration = 4000;
         private void FloatinButtonLoaded(object sender, RoutedEventArgs e)
         {
             var handle = new WindowInteropHelper(this).Handle;
@@ -42,7 +43,7 @@ namespace TCC.Windows
             WindowManager.TccVisibilityChanged += WindowManager_TccVisibilityChanged;
             _t = new Timer { Interval = 2000 };
             _t.Tick += RepeatAnimation;
-            _n = new Timer { Interval = _notificationDuration };
+            _n = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(_notificationDuration) };
             _n.Tick += _n_Tick;
             _an = new DoubleAnimation(.75, 1, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
             _queue = new Queue<Tuple<string, string>>();
@@ -76,8 +77,6 @@ namespace TCC.Windows
 
         private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            NotifyExtended("Update manager", "TCC v1.1.0 is available!");
-            return;
             RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-32, -1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
         }
 
@@ -150,8 +149,8 @@ namespace TCC.Windows
                         EasingFunction = new QuadraticEase()
                     });
                 NotificationTimeGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(_notificationDuration)));
+                _n.Start();
             });
-            _n.Start();
         }
 
         private void _n_Tick(object sender, EventArgs e)
