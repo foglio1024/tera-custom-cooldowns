@@ -72,10 +72,10 @@ namespace TCC.Data
                     case Class.Priest:
                         Role = Role.Healer;
                         break;
-                    case Class.Elementalist:
+                    case Class.Mystic:
                         Role = Role.Healer;
                         break;
-                    case Class.Fighter:
+                    case Class.Brawler:
                         Role = Role.Tank;
                         break;
                     default:

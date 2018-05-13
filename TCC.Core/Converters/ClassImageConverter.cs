@@ -36,22 +36,22 @@ namespace TCC.Converters
                 case Class.Priest:
                     className = "priest";
                     break;
-                case Class.Elementalist:
+                case Class.Mystic:
                     className = "mystic";
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     className = "reaper";
                     break;
-                case Class.Engineer:
+                case Class.Gunner:
                     className = "gunner";
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     className = "brawler";
                     break;
-                case Class.Assassin:
+                case Class.Ninja:
                     className = "ninja";
                     break;
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     className = "glaiver";
                     break;
                 default:

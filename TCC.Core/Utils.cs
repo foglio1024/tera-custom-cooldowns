@@ -63,17 +63,17 @@ namespace TCC
                     return "Archer";
                 case Class.Priest:
                     return "Priest";
-                case Class.Elementalist:
+                case Class.Mystic:
                     return "Mystic";
-                case Class.Soulless:
+                case Class.Reaper:
                     return "Reaper";
-                case Class.Engineer:
+                case Class.Gunner:
                     return "Gunner";
-                case Class.Fighter:
+                case Class.Brawler:
                     return "Brawler";
-                case Class.Assassin:
+                case Class.Ninja:
                     return "Ninja";
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     return "Valkyrie";
                 case Class.Common:
                     return "All classes";

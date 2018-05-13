@@ -17,7 +17,7 @@ namespace TCC.ViewModels
         {
             //Ragnarok
             Ragnarok = new DurationCooldownIndicator(_dispatcher);
-            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Glaiver, out var rag);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
             Ragnarok.Cooldown = new FixedSkillCooldown(rag, _dispatcher, true);
             Ragnarok.Buff = new FixedSkillCooldown(rag, _dispatcher, false);
         }

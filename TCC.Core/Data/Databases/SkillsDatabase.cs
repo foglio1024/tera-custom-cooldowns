@@ -50,16 +50,17 @@ namespace TCC.Data.Databases
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);
                 var cString = s[3];
-                if (!Enum.TryParse(s[3], out Class c))
-                {
-                    if (cString == "Mystic") cString = "Elementalist";
-                    if (cString == "Reaper") cString = "Soulless";
-                    if (cString == "Brawler") cString = "Fighter";
-                    if (cString == "Ninja") cString = "Assassin";
-                    if (cString == "Gunner") cString = "Engineer";
-                    if (cString == "Valkyrie") cString = "Glaiver";
-                }
-                Enum.TryParse(cString, out c);
+                /*if (!*/
+                Enum.TryParse(s[3], out Class c);/*)*/
+                //{
+                    //if (cString == "Mystic") cString = "Mystic";
+                    //if (cString == "Reaper") cString = "Reaper";
+                    //if (cString == "Brawler") cString = "Brawler";
+                    //if (cString == "Ninja") cString = "Ninja";
+                    //if (cString == "Gunner") cString = "Gunner";
+                    //if (cString == "Valkyrie") cString = "Valkyrie";
+                //}
+                //Enum.TryParse(cString, out c);
                 var name = s[4];
                 //var tooltip = s[3];
                 var iconName = s[7];
@@ -190,7 +191,7 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Fighter, new List<string>()
+                Class.Brawler, new List<string>()
                 {
                     "icon_skills.comboattack01_tex",
                     "icon_skills.comboattack02_tex",
@@ -205,7 +206,7 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Engineer, new List<string>()
+                Class.Gunner, new List<string>()
                 {
                     "icon_skills.cannonshot_tex",
                     "icon_skills.gatlingshot_tex",
@@ -222,7 +223,7 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Elementalist, new List<string>()
+                Class.Mystic, new List<string>()
                 {
                     "icon_skills.elementalshot_tex",
                     "icon_skills.mpsupplycharge_tex",
@@ -232,7 +233,7 @@ namespace TCC.Data.Databases
                 }
             },
              {
-                Class.Assassin, new List<string>()
+                Class.Ninja, new List<string>()
                 {
                     "icon_skills.c12_meleecombo",
                 }
@@ -245,7 +246,7 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Soulless, new List<string>()
+                Class.Reaper, new List<string>()
                 {
                     "icon_skills.comboattack2_tex",
                     "icon_skills.shieldattack_tex",
@@ -267,7 +268,7 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Glaiver, new List<string>()
+                Class.Valkyrie, new List<string>()
                 {
                     "icon_skills.combo_tex",
 

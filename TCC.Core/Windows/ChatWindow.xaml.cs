@@ -218,7 +218,7 @@ namespace TCC.Windows
             //{
             //    var name = "H" + i;
 
-            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Elementalist, ServerId = (uint)i + 300 });
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Mystic, ServerId = (uint)i + 300 });
             //}
         }
 

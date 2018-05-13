@@ -207,7 +207,7 @@ namespace TCC.ViewModels
             catch (Exception)
             {
 
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.",  MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);
@@ -386,7 +386,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters.xml. Manually correct the error and press Ok to try again, else press Cancel to delete current data.",  MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters.xml. Manually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
                 if (res == MessageBoxResult.OK) LoadCharDoc();
                 else
                 {
@@ -408,9 +408,20 @@ namespace TCC.ViewModels
                 var d = Convert.ToInt32(c.Attribute("daily").Value);
                 var id = Convert.ToUInt32(c.Attribute("id").Value);
                 var pos = Convert.ToInt32(c.Attribute("pos").Value);
-                var guard = c.Attribute("guardianPoints") != null? Convert.ToUInt32(c.Attribute("guardianPoints").Value) : 0;
+                var guard = c.Attribute("guardianPoints") != null ? Convert.ToUInt32(c.Attribute("guardianPoints").Value) : 0;
                 var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks").Value) : 0;
-                var cl = (Class)Enum.Parse(typeof(Class), c.Attribute("class").Value);
+                var classString = c.Attribute("class").Value;
+                if (!Enum.TryParse<Class>(classString, out var cl))
+                {
+                    //keep retrocompatibility
+                    if (classString == "Elementalist") classString = "Mystic";
+                    else if (classString == "Fighter") classString = "Brawler";
+                    else if (classString == "Engineer") classString = "Gunner";
+                    else if (classString == "Soulless") classString = "Reaper";
+                    else if (classString == "Glaiver") classString = "Valkyrie";
+                    else if (classString == "Assassin") classString = "Ninja";
+                }
+                cl = (Class)Enum.Parse(typeof(Class), classString);
 
                 var ch = new Character(name, cl, id, pos, _dispatcher)
                 {
@@ -425,7 +436,7 @@ namespace TCC.ViewModels
                 {
                     var dgId = Convert.ToUInt32(dgEl.Attribute("id").Value);
                     var dgEntries = Convert.ToInt16(dgEl.Attribute("entries").Value);
-                    var dgTotal = dgEl.Attribute("total") != null  ? Convert.ToInt16(dgEl.Attribute("total").Value) : 0;
+                    var dgTotal = dgEl.Attribute("total") != null ? Convert.ToInt16(dgEl.Attribute("total").Value) : 0;
                     ch.SetDungeonTotalRuns(dgId, dgTotal);
                     dgDict.Add(dgId, dgEntries);
                 }

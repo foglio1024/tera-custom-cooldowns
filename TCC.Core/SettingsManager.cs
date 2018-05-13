@@ -405,7 +405,7 @@ namespace TCC
                     {
                         CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
                         PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
-                        MysticDefault.ForEach(x => GroupAbnormals[Class.Elementalist].Add(x));
+                        MysticDefault.ForEach(x => GroupAbnormals[Class.Mystic].Add(x));
                     }
                 }
             }
@@ -628,7 +628,7 @@ namespace TCC
             {
                 CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
                 PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
-                MysticDefault.ForEach(x => GroupAbnormals[Class.Elementalist].Add(x));
+                MysticDefault.ForEach(x => GroupAbnormals[Class.Mystic].Add(x));
             }
         }
         static List<uint> CommonDefault = new List<uint> { 4000, 4001, 4010, 4011, 4020, 4021, 4030, 4031, 4600, 4610, 4611, 4613, 5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015, 902, 910, 911, 912, 913, 916, 920, 921, 922, 999010000 };

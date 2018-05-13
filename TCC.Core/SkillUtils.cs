@@ -131,22 +131,22 @@ namespace TCC
                 case Class.Priest:
                     BuildDefaultPriestSkillConfig("priest-skills.xml");
                     break;
-                case Class.Elementalist:
+                case Class.Mystic:
                     BuildDefaultMysticSkillConfig("mystic-skills.xml");
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     BuildDefaultReaperSkillConfig("reaper-skills.xml");
                     break;
-                case Class.Engineer:
+                case Class.Gunner:
                     BuildDefaultGunnerSkillConfig("gunner-skills.xml");
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     BuildDefaultBrawlerSkillConfig("brawler-skills.xml");
                     break;
-                case Class.Assassin:
+                case Class.Ninja:
                     BuildDefaultNinjaSkillConfig("ninja-skills.xml");
                     break;
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     BuildDefaultValkyrieSkillConfig("valkyrie-skills.xml");
                     break;
                 default:

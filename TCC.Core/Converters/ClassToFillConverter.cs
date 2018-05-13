@@ -15,11 +15,11 @@ namespace TCC.Converters
             {
                 case Class.Lancer:
                     return Application.Current.FindResource("TankRoleColor");
-                case Class.Fighter:
+                case Class.Brawler:
                     return Application.Current.FindResource("TankRoleColor");
                 case Class.Priest:
                     return Application.Current.FindResource("HealerRoleColor");
-                case Class.Elementalist:
+                case Class.Mystic:
                     return Application.Current.FindResource("HealerRoleColor");
                 default:
                     return Application.Current.FindResource("DpsRoleColor");

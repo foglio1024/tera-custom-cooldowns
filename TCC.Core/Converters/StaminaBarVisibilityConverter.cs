@@ -16,13 +16,13 @@ namespace TCC.Converters
                     return Visibility.Visible;
                 case Class.Lancer:
                     return Visibility.Visible;
-                //case Class.Engineer:
+                //case Class.Gunner:
                 //    return Visibility.Visible;
-                //case Class.Fighter:
+                //case Class.Brawler:
                 //    return Visibility.Visible;
-                //case Class.Assassin:
+                //case Class.Ninja:
                 //    return Visibility.Visible;
-                //case Class.Glaiver:
+                //case Class.Valkyrie:
                 //    return Visibility.Visible;
                 default:
                     return Visibility.Collapsed;

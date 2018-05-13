@@ -36,8 +36,8 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out var cont);
-            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out var vow);
+            SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
             Contagion = new FixedSkillCooldown(cont, _dispatcher, true);
             Vow = new DurationCooldownIndicator(_dispatcher)
             {

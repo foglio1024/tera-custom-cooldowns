@@ -39,8 +39,8 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
 
-            SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Fighter, out var gf);
-            SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Fighter, out var c);
+            SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
             GrowingFury = new FixedSkillCooldown(gf, _dispatcher, false);
             Counter = new FixedSkillCooldown(c, _dispatcher, false);
         }

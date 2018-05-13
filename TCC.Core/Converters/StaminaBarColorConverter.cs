@@ -22,13 +22,13 @@ namespace TCC.Converters
                     return new SolidColorBrush(ResolveColor);
                 case Class.Lancer:
                     return new SolidColorBrush(ResolveColor);
-                case Class.Engineer:
+                case Class.Gunner:
                     return new SolidColorBrush(WillpowerColor);
-                case Class.Fighter:
+                case Class.Brawler:
                     return new SolidColorBrush(RageColor);
-                case Class.Assassin:
+                case Class.Ninja:
                     return new SolidColorBrush(ChiColor);
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     return new SolidColorBrush(RagnarokColor);
                 default:
                     return new SolidColorBrush(ResolveColor);

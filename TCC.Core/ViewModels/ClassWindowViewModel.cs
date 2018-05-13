@@ -43,7 +43,7 @@ namespace TCC.ViewModels
                         case Class.Warrior:
                             CurrentManager = new WarriorBarManager();
                             break;
-                        case Class.Glaiver:
+                        case Class.Valkyrie:
                             CurrentManager = new ValkyrieBarManager();
                             break;
                         case Class.Archer:
@@ -55,7 +55,7 @@ namespace TCC.ViewModels
                         case Class.Priest:
                             CurrentManager = new PriestBarManager();
                             break;
-                        case Class.Elementalist:
+                        case Class.Mystic:
                             CurrentManager = new MysticBarManager();
                             break;
                         case Class.Slayer:
@@ -67,16 +67,16 @@ namespace TCC.ViewModels
                         case Class.Sorcerer:
                             CurrentManager = new SorcererBarManager();
                             break;
-                        case Class.Soulless:
+                        case Class.Reaper:
                             CurrentManager = new ReaperBarManager();
                             break;
-                        case Class.Engineer:
+                        case Class.Gunner:
                             CurrentManager = new GunnerBarManager();
                             break;
-                        case Class.Fighter:
+                        case Class.Brawler:
                             CurrentManager = new BrawlerBarManager();
                             break;
-                        case Class.Assassin:
+                        case Class.Ninja:
                             CurrentManager = new NinjaBarManager();
                             break;
                         default:
@@ -188,17 +188,17 @@ namespace TCC.ViewModels
                         return Archer;
                     case Class.Priest:
                         return Priest;
-                    case Class.Elementalist:
+                    case Class.Mystic:
                         return Mystic;
-                    case Class.Soulless:
+                    case Class.Reaper:
                         return Reaper;
-                    case Class.Engineer:
+                    case Class.Gunner:
                         return Gunner;
-                    case Class.Fighter:
+                    case Class.Brawler:
                         return Brawler;
-                    case Class.Assassin:
+                    case Class.Ninja:
                         return Ninja;
-                    case Class.Glaiver:
+                    case Class.Valkyrie:
                         return Valkyrie;
                     default:
                         return None;
