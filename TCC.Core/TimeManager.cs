@@ -66,9 +66,16 @@ namespace TCC
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
 
             SettingsManager.LastRegion = region;
+            TimeZoneInfo timezone = null;
+            if (_serverTimezones.ContainsKey(region))
+            {
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
+            }
+            else
+            {
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones["EU"].Timezone);
+            }
 
-            var timezone = TimeZoneInfo.GetSystemTimeZones()
-                .FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
             _resetDay = _serverTimezones[CurrentRegion].ResetDay;
 
@@ -213,7 +220,7 @@ namespace TCC
                     using (var client = new WebClient())
                     {
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-                        client.Headers.Add( HttpRequestHeader.ContentType, "application/json");
+                        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
                         var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
                     }
