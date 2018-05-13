@@ -1246,33 +1246,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
+    <None Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-EU-GER.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-EU-GER.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-JP.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-JP.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-KR-PTS.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-KR-PTS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-KR.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-KR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-NA.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-NA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-RU.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-RU.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-THA.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-THA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\data\equip_exp\equip_exp-TW.xml">
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-TW.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
     <Content Include="resources\data\world_map\world_map-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
