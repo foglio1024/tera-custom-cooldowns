@@ -23,7 +23,7 @@ namespace TCC
         private bool _autoDim;
         private double _dimOpacity;
         private bool _showAlways;
-        private bool _allowTransparency;
+        //private bool _allowTransparency;
         private bool _enabled;
 
         public event Action NotifyEnableWindow;
@@ -129,15 +129,15 @@ namespace TCC
                 NPC(nameof(ShowAlways));
             }
         }
-        public bool AllowTransparency
-        {
-            get => _allowTransparency;
-            set
-            {
-                _allowTransparency = value;
-                NPC(nameof(AllowTransparency));
-            }
-        }
+        //public bool AllowTransparency
+        //{
+        //    get => _allowTransparency;
+        //    set
+        //    {
+        //        _allowTransparency = value;
+        //        NPC(nameof(AllowTransparency));
+        //    }
+        //}
         public bool Enabled
         {
             get => _enabled;
@@ -180,7 +180,7 @@ namespace TCC
             }
         }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool allowTransparency, bool enabled)
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _x = x;
@@ -193,7 +193,7 @@ namespace TCC
             _autoDim = autoDim;
             _dimOpacity = dimOpacity;
             _showAlways = showAlways;
-            _allowTransparency = allowTransparency;
+            //_allowTransparency = allowTransparency;
             _enabled = enabled;
         }
 
@@ -211,7 +211,7 @@ namespace TCC
             xe.Add(new XAttribute(nameof(AutoDim), AutoDim));
             xe.Add(new XAttribute(nameof(DimOpacity), DimOpacity));
             xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
-            xe.Add(new XAttribute(nameof(AllowTransparency), AllowTransparency));
+            //xe.Add(new XAttribute(nameof(AllowTransparency), AllowTransparency));
             xe.Add(new XAttribute(nameof(Enabled), Enabled));
             return xe;
         }
@@ -235,7 +235,7 @@ namespace TCC
             }
         }
 
-        public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool allowTransparency, bool enabled) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, allowTransparency, enabled)
+        public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways,  enabled)
         {
             Tabs = new List<Tab>();
         }

@@ -251,7 +251,7 @@ namespace TCC.ViewModels
             if (ChatWindows.Count == 0)
             {
                 var w = new ChatWindow(
-                    new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, true)
+                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1,false, true)
                     );
                 SettingsManager.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 var m = new ChatViewModel();
@@ -401,7 +401,7 @@ namespace TCC.ViewModels
             LastSource = Window.GetWindow(source) as ChatWindow;
             var model = new ChatViewModel();
             var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
-                1, false, 1, false, true, true), model);
+                1, false, 1, false, true), model);
             ChatWindowManager.Instance.ChatWindows.Add(view);
             return new NewTabHost<Window>(view, view.TabControl);
 

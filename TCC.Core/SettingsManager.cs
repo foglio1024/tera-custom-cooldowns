@@ -36,13 +36,13 @@ namespace TCC
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
         public static XDocument SettingsDoc;
 
-        public static WindowSettings GroupWindowSettings;
-        public static WindowSettings CooldownWindowSettings;
-        public static WindowSettings BossWindowSettings;
-        public static WindowSettings BuffWindowSettings;
-        public static WindowSettings CharacterWindowSettings;
-        public static WindowSettings ClassWindowSettings;
-        public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, true);
+        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
+        public static WindowSettings CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, false, .5, true, true);
+        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
+        public static WindowSettings BuffWindowSettings = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
+        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
+        public static WindowSettings ClassWindowSettings = new WindowSettings(.35, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
+        public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, 1, false, true);
 
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>();
 
@@ -153,17 +153,6 @@ namespace TCC
                     });
                 }
             }
-            else //settings file doesen't exist
-            {
-                GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .2, false, true, true);
-                CooldownWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
-                BossWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .2, false, true, true);
-                BuffWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
-                CharacterWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
-                ClassWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
-                FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, true);
-                //ChatWindowSettings = new WindowSettings(0, 0, 200, 600, true, ClickThruMode.Never, 1, false, 1, false, true, true);
-            }
         }
 
         private static ChatWindowSettings ParseChatWindowSettings(XElement s)
@@ -179,7 +168,7 @@ namespace TCC
             return new ChatWindowSettings(sett.X, sett.Y, sett.H, sett.W,
                                           sett.Visible, sett.ClickThruMode,
                                           sett.Scale, sett.AutoDim, sett.DimOpacity,
-                                          sett.ShowAlways, sett.AllowTransparency,
+                                          sett.ShowAlways, /*sett.AllowTransparency,*/
                                           sett.Enabled)
             {
                 Tabs = tabs,
@@ -592,17 +581,17 @@ namespace TCC
                 alwaysVis = bool.Parse(ws.Attribute("ShowAlways").Value);
             }
             catch (Exception) { }
-            try
-            {
-                //allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
-            }
-            catch (Exception) { }
+            //try
+            //{
+            //    allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
+            //}
+            //catch (Exception) { }
             try
             {
                 enabled = bool.Parse(ws.Attribute("Enabled").Value);
             }
             catch (Exception) { }
-            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, allowTrans, enabled);
+            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled);
         }
         private static void ParseChannelsSettings(XElement xElement)
         {

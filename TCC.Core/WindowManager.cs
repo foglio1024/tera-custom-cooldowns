@@ -259,7 +259,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
-                CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
+                //CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
 
                 CharacterWindow.Show();
                 waiting = false;
@@ -290,7 +290,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
+                //CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
 
                 CooldownWindow.Show();
                 waiting = false;
@@ -311,7 +311,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow();
 
-                BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
+                //BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
                 BossWindow.Show();
                 waiting = false;
 
