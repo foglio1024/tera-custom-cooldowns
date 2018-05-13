@@ -10,8 +10,8 @@ namespace TCC.Parsing.Messages
     {
         public LoginArbiterMessage(C_LOGIN_ARBITER message)
         {
-            if (OpcodeDownloader.DownloadSysmsg(PacketProcessor.Factory.Version, PacketProcessor.Factory.ReleaseVersion,
-                Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/")))
+            if (OpcodeDownloader.DownloadSysmsg(PacketProcessor.Factory.Version, 
+                Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/"), PacketProcessor.Factory.ReleaseVersion))
             {
                 PacketProcessor.Factory.ReloadSysMsg();
             };

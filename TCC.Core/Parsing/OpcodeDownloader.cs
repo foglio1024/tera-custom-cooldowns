@@ -7,6 +7,7 @@ namespace TCC.Parsing
         public static void DownloadIfNotExist(uint version, string directory)
         {
             DownloadOpcode(version, directory);
+            DownloadSysmsg(version, directory);
         }
 
         private static void DownloadOpcode(uint version, string directory)
@@ -43,7 +44,7 @@ namespace TCC.Parsing
             catch { }
         }
 
-        public static bool DownloadSysmsg(uint version,int revision, string directory)
+        public static bool DownloadSysmsg(uint version, string directory, int revision = 0)
         {
             Directory.CreateDirectory(directory);
 
@@ -53,11 +54,6 @@ namespace TCC.Parsing
                 return false;
             }
             filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
-            if (File.Exists(filename))
-            {
-                return false;
-            }
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
             if (File.Exists(filename))
             {
                 return false;
@@ -92,6 +88,11 @@ namespace TCC.Parsing
                 return true;
             }
             catch { }
+            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
+            if (File.Exists(filename))
+            {
+                return false;
+            }
             try
             {
                 Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + revision / 100 + ".map", filename);
