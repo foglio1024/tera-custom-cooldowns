@@ -634,6 +634,7 @@
                                                ToolTip="{StaticResource ClickThruModeSettingTooltip}"
                                                Choices="{Binding ClickThruModes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:FieldSetting SettingName="Region override" Value="{Binding RegionOverride, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"/>
 
                 </StackPanel>
 

@@ -67,7 +67,17 @@ namespace TCC
         public static bool LfgOn { get; set; } = true;
         public static double ChatWindowOpacity { get; set; } = 0.4;
         public static DateTime LastRun { get; set; } = DateTime.MinValue;
-        public static string LastRegion { get; set; } = "";
+
+        public static string LastRegion
+        {
+            get
+            {
+                if (RegionOverride != "") return RegionOverride;
+                return _lastRegion;
+            }
+            set => _lastRegion = value;
+        }
+
         public static string Webhook { get; set; } = "";
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
@@ -109,6 +119,7 @@ namespace TCC
         public static HotKey InfoWindowHotkey { get; set; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; set; } = new HotKey(Key.O, ModifierKeys.Control);
         public static HotKey ShowAllHotkey { get; set; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
+        public static string RegionOverride { get; set; } = "";
 
         public static void LoadWindowSettings()
         {
@@ -378,6 +389,11 @@ namespace TCC
                         ShowGroupWindowDetails = bool.Parse(b.Attribute(nameof(ShowGroupWindowDetails)).Value);
                     }
                     catch (Exception) { }
+                    try
+                    {
+                        RegionOverride = b.Attribute(nameof(RegionOverride)).Value;
+                    }
+                    catch (Exception) { }
                     try { UseHotkeys = bool.Parse(b.Attribute(nameof(UseHotkeys)).Value); }
                     catch (Exception) { }
                     //add settings here
@@ -497,7 +513,8 @@ namespace TCC
                 new XAttribute(nameof(ShowFlightEnergy), ShowFlightEnergy),
                 new XAttribute(nameof(LfgEnabled), LfgEnabled),
                 new XAttribute(nameof(ShowGroupWindowDetails), ShowGroupWindowDetails),
-                new XAttribute(nameof(UseHotkeys), UseHotkeys)
+                new XAttribute(nameof(UseHotkeys), UseHotkeys),
+                new XAttribute(nameof(RegionOverride), RegionOverride)
                 //add setting here
                 ),
                 BuildChannelsXElement(),
@@ -627,6 +644,8 @@ namespace TCC
         static List<uint> CommonDefault = new List<uint> { 4000, 4001, 4010, 4011, 4020, 4021, 4030, 4031, 4600, 4610, 4611, 4613, 5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015, 902, 910, 911, 912, 913, 916, 920, 921, 922, 999010000 };
         static List<uint> PriestDefault = new List<uint> { 201, 202, 805100, 805101, 805102, 98000109, 805600, 805601, 805602, 805603, 805604, 98000110, 800300, 800301, 800302, 800303, 800304, 801500, 801501, 801502, 801503, 98000107 };
         static List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
+        private static string _lastRegion = "";
+
         public static XElement BuildChatTabsXElement(List<Tab> tabList)
         {
             var result = new XElement("Tabs");

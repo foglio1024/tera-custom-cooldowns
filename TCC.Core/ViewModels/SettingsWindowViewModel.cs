@@ -1034,6 +1034,16 @@ namespace TCC.ViewModels
                 NPC(nameof(ChatFadeOut));
             }
         }
+        public string RegionOverride
+        {
+            get => SettingsManager.RegionOverride;
+            set
+            {
+                if (SettingsManager.RegionOverride == value) return;
+                SettingsManager.RegionOverride = value;
+                NPC(nameof(RegionOverride));
+            }
+        }
         public bool ClickThruWhenDim
         {
             get => SettingsManager.ClickThruWhenDim;
