@@ -14,9 +14,7 @@
              UseLayoutRounding="True"
              MouseEnter="GroupWindow_OnMouseEnter"
              MouseLeave="GroupWindow_OnMouseLeave">
-    <w:TccWindow.DataContext>
-        <wm:GroupWindowViewModel />
-    </w:TccWindow.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -84,6 +82,7 @@
                         Background="{StaticResource FadedDefaultBackgroundColor}" Width="46"
                         BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
                         Visibility="{Binding Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
                     <StackPanel >
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -16,6 +17,7 @@ namespace TCC.Windows
             ButtonsRef = Buttons;
             MainContentRef = content;
             InitWindow(SettingsManager.GroupWindowSettings, ignoreSize: false);
+            DataContext = GroupWindowViewModel.Instance;
         }
 
         private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
