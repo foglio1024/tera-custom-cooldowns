@@ -15,6 +15,13 @@ namespace TCC.Windows
         public SettingsWindow()
         {
             InitializeComponent();
+            Closing += SettingsWindow_Closing;
+        }
+
+        private void SettingsWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Image_MouseLeftButtonDown(null, null);
         }
 
         public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
