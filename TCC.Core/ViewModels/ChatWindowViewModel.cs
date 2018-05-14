@@ -258,7 +258,7 @@ namespace TCC.ViewModels
                 w.DataContext = m;
                 ChatWindows.Add(w);
                 m.LoadTabs();
-                w.Show();
+                if(SettingsManager.ChatEnabled) w.Show();
             }
 
             WindowManager.TccVisibilityChanged += (s, ev) =>

@@ -229,9 +229,11 @@ namespace TCC
             {
                 if (SettingsManager.ChatEnabled == value) return;
                 SettingsManager.ChatEnabled = value;
+                base.Enabled = value;
                 if(!value) ChatWindowManager.Instance.CloseAllWindows();
                 else ChatWindowManager.Instance.InitWindows();
                 NPC();
+                SettingsManager.SaveSettings();
             }
         }
 

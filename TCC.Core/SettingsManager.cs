@@ -400,6 +400,8 @@ namespace TCC
                     catch (Exception) { }
                     try { UseHotkeys = bool.Parse(b.Attribute(nameof(UseHotkeys)).Value); }
                     catch (Exception) { }
+                    try { ChatEnabled = bool.Parse(b.Attribute(nameof(ChatEnabled)).Value); }
+                    catch (Exception) { }
                     //add settings here
 
                     try
@@ -519,6 +521,7 @@ namespace TCC
                 new XAttribute(nameof(LfgEnabled), LfgEnabled),
                 new XAttribute(nameof(ShowGroupWindowDetails), ShowGroupWindowDetails),
                 new XAttribute(nameof(UseHotkeys), UseHotkeys),
+                new XAttribute(nameof(ChatEnabled), ChatEnabled),
                 new XAttribute(nameof(RegionOverride), RegionOverride)
                 //add setting here
                 ),
