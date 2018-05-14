@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -24,7 +25,12 @@ namespace TCC.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            _context = (ArcherFocusTracker)DataContext;
+            //lazy way of making sure that DataContext is not null
+            while (_context == null)
+            {
+                _context = (ArcherFocusTracker)DataContext;
+                Thread.Sleep(500);
+            }
             _context.PropertyChanged += _context_PropertyChanged;
         }
 
