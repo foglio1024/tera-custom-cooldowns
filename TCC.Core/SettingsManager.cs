@@ -153,6 +153,10 @@ namespace TCC
                     {
                         ClassWindowSettings = ParseWindowSettings(ws);
                     }
+                    else if (ws.Attribute("Name").Value == "FlightGaugeWindow")
+                    {
+                        FlightGaugeWindowSettings = ParseWindowSettings(ws);
+                    }
                     //add window here
                 }
 
@@ -471,7 +475,8 @@ namespace TCC
                     CooldownWindowSettings.ToXElement("CooldownWindow"),
                     GroupWindowSettings.ToXElement("GroupWindow"),
                     ClassWindowSettings.ToXElement("ClassWindow"),
-                    BuildChatWindowSettings("ChatWindows")
+                    BuildChatWindowSettings("ChatWindows"),
+                    FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow")
                     //ChatWindowSettings.ToXElement("ChatWindow")
                     //add window here
                     ),
