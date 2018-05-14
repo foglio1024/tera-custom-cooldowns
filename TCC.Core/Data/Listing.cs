@@ -121,7 +121,7 @@ namespace TCC.Data
 
         public Listing()
         {
-            _dispatcher = WindowManager.LfgListWindow.Dispatcher;
+            _dispatcher = App.BaseDispatcher; //TODO check this
             Players = new SynchronizedObservableCollection<User>(_dispatcher);
             Applicants = new SynchronizedObservableCollection<User>(_dispatcher);
             Apply = new ApplyCommand(this);
