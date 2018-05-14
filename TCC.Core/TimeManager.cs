@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using TCC.Parsing;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -67,15 +69,15 @@ namespace TCC
 
             SettingsManager.LastRegion = region;
             TimeZoneInfo timezone = null;
-            if (_serverTimezones.ContainsKey(region))
+            if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
+                CurrentRegion = "EU";
+                SettingsManager.LastRegion = "EU-EN";
+                TccMessageBox.Show("TCC",
+                    "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
+                    MessageBoxButton.OK);
             }
-            else
-            {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones["EU"].Timezone);
-            }
-
+            timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
             _resetDay = _serverTimezones[CurrentRegion].ResetDay;
 
