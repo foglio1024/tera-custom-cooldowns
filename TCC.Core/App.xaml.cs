@@ -36,7 +36,7 @@ namespace TCC
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            
+            TccMessageBox.Create(); //Create it here in STA thread
             InitSplashScreen();
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
@@ -53,7 +53,7 @@ namespace TCC
             SettingsManager.LoadSettings();
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases( string.IsNullOrEmpty(SettingsManager.LastRegion ) ? "EU-EN" : SettingsManager.LastRegion);
+            SessionManager.InitDatabases( string.IsNullOrEmpty(SettingsManager.LastRegion) ? "EU-EN" : SettingsManager.LastRegion == "EU" ? "EU-EN" : SettingsManager.LastRegion);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();

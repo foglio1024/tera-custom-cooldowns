@@ -171,5 +171,9 @@ namespace TCC.Windows
             DragMove();
         }
 
+        public static void Create()
+        {
+            _messageBox = new TccMessageBox();
+        }
     }
 }
