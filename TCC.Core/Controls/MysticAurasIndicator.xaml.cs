@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using TCC.Data;
 
@@ -19,7 +20,13 @@ namespace TCC.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            _context = (AurasTracker) DataContext;
+            //lazy way of making sure that DataContext is not null
+            //TODO: find a better way to do this tho
+            while (_context == null)
+            {
+                _context = (AurasTracker)DataContext;
+                Thread.Sleep(500);
+            }
             _context.PropertyChanged += _context_PropertyChanged;
         }
 
