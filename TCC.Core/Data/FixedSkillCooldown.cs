@@ -136,7 +136,11 @@ namespace TCC.Data
 
         public void Start(ulong cd)
         {
-            if (_isPreRunning) NPC("StopPre");
+            if (_isPreRunning)
+            {
+                StopTimers();
+                NPC("StopPre");
+            }
             if (cd > 1000)
             {
                 Cooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
@@ -209,6 +213,13 @@ namespace TCC.Data
             }
             NPC("StartPre");
 
+        }
+
+        private void StopTimers()
+        {
+            _shortTimer.Stop();
+            _offsetTimer.Stop();
+            _secondsTimer.Stop();
         }
     }
 }
