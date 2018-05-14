@@ -248,12 +248,6 @@ namespace TCC.Parsing
         public int ReleaseVersion { get; set; }
 
 
-        public MessageFactory()
-        {
-            _opCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, "C_CHECK_VERSION" } });
-            Version = 0;
-            Region = "Unknown";
-        }
         public MessageFactory(OpCodeNamer opCodeNamer, string region, uint version, bool chatEnabled = false, OpCodeNamer sysMsgNamer = null)
         {
             _opCodeNamer = opCodeNamer;
