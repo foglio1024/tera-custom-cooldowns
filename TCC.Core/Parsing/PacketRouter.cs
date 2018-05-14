@@ -249,6 +249,8 @@ namespace TCC.Parsing
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
         {
             if (!SettingsManager.LfgEnabled) return;
+            if (WindowManager.LfgListWindow == null) return;
+            if (WindowManager.LfgListWindow.VM == null) return;
             if (!x.IsLast) return;
             //WindowManager.LfgListWindow.VM.Listings.Clear();
             S_SHOW_PARTY_MATCH_INFO.Listings.ForEach(l =>
