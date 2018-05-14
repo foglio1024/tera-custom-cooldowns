@@ -6,7 +6,7 @@ namespace TCC.Data.Databases
     {
         public static List<uint> Passivities = new List<uint>
         {
-             6001, 6002, 6003, 6004 
+             6001, 6002, 6003, 6004, 6012, 6013 
         };
         public static bool TryGetPassivitySkill(uint id, out Skill sk)
         {
