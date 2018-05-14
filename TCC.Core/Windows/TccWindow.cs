@@ -85,7 +85,7 @@ namespace TCC.Windows
             MouseLeave += (s, ev) => _t.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
 
-            Show();
+            if(ws.Enabled) Show();
 
         }
 
