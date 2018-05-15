@@ -258,7 +258,7 @@ namespace TCC.Controls
                 {
                     if (CooldownWindowViewModel.Instance.MainSkills.Any(x =>
                         x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
-                    CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                    CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, false));
                 }
                 else if (_lastSender == AddButtonGrid2.Name)
                 {
@@ -266,7 +266,7 @@ namespace TCC.Controls
                         x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
                     CooldownWindowViewModel.Instance.SecondarySkills.Add(new FixedSkillCooldown(
                         s.SelectedItems[0] as Skill,
-                        CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                         false));
                 }
 
                 ChoiceListBox.ItemsSource = null;
@@ -290,7 +290,7 @@ namespace TCC.Controls
                 {
                     if (!target.Any(x => x.Skill.IconName == sk.IconName))
                     {
-                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data,  false));
                     }
                 }
                 else if (dropInfo.Data is Abnormality ab)
@@ -299,7 +299,7 @@ namespace TCC.Controls
                     {
                         target.Insert(dropInfo.InsertIndex,
                             new FixedSkillCooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
-                                CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
+                                false, CooldownType.Passive));
                     }
                 }
                 else if (dropInfo.Data is Item i)
@@ -307,7 +307,7 @@ namespace TCC.Controls
                     if (!target.Any(x => x.Skill.IconName == i.IconName))
                     {
                         SessionManager.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
-                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, false, CooldownType.Item));
                     }
                 }
                 var tmp = new List<FixedSkillCooldown>();

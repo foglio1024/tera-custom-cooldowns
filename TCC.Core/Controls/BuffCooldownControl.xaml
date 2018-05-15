@@ -41,7 +41,7 @@
                 Margin="0,-4,2,0"
                 Padding="4,0">
             <TextBlock Foreground="#d000" 
-                       Text="{Binding DurationLabel, RelativeSource={RelativeSource AncestorType=local:BuffCooldownControl}}"
+                       Text="{Binding Buff.Seconds}"
                        TextAlignment="Center"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"

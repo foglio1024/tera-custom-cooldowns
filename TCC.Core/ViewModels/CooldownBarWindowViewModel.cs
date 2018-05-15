@@ -292,14 +292,14 @@ namespace TCC.ViewModels
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                if (sk.Pre) skill.StartPre(sk.Cooldown);
+                if (sk.Pre) skill.Start(sk.Cooldown, CooldownMode.Pre);
                 else skill.Start(sk.Cooldown);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                if (sk.Pre) skill.StartPre(sk.Cooldown);
+                if (sk.Pre) skill.Start(sk.Cooldown, CooldownMode.Pre);
                 else skill.Start(sk.Cooldown);
                 return;
             }
@@ -450,49 +450,60 @@ namespace TCC.ViewModels
 
         public void LoadSkills(string filename, Class c)
         {
-            SkillConfigParser sp = null;
-            if (!File.Exists("resources/config/skills/" + filename))
-            {
-                SkillUtils.BuildDefaultSkillConfig(filename, c);
-            }
-            try
-            {
-                sp = new SkillConfigParser(filename, c);
-            }
-            catch (Exception)
-            {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
-
-                if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
-                LoadSkills(filename, c);
-                return;
-            }
-            foreach (var sk in sp.Main)
-            {
-                MainSkills.Add(sk);
-            }
-            foreach (var sk in sp.Secondary)
-            {
-                SecondarySkills.Add(sk);
-            }
-            foreach (var sk in sp.Hidden)
-            {
-                HiddenSkills.Add(sk.Skill);
-            }
-
             _dispatcher.Invoke(() =>
             {
-                SkillChoiceList.Clear();
-                foreach (var skill in SkillsDatabase.SkillsForClass)
+
+                SkillConfigParser sp = null;
+                if (!File.Exists("resources/config/skills/" + filename))
                 {
-                    SkillChoiceList.Add(skill);
+                    SkillUtils.BuildDefaultSkillConfig(filename, c);
                 }
-                SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
+
+                try
+                {
+                    sp = new SkillConfigParser(filename, c);
+                }
+                catch (Exception)
+                {
+                    var res = TccMessageBox.Show("TCC",
+                        $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
+                        MessageBoxButton.OKCancel);
+
+                    if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                    LoadSkills(filename, c);
+                    return;
+                }
+
+                foreach (var sk in sp.Main)
+                {
+                    MainSkills.Add(sk);
+                }
+
+                foreach (var sk in sp.Secondary)
+                {
+                    SecondarySkills.Add(sk);
+                }
+
+                foreach (var sk in sp.Hidden)
+                {
+                    HiddenSkills.Add(sk.Skill);
+                }
+
+                _dispatcher.Invoke(() =>
+                {
+                    SkillChoiceList.Clear();
+                    foreach (var skill in SkillsDatabase.SkillsForClass)
+                    {
+                        SkillChoiceList.Add(skill);
+                    }
+
+                    SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
+                });
+                NPC(nameof(SkillsView));
+                NPC(nameof(MainSkills));
+                NPC(nameof(SecondarySkills));
+                SkillsLoaded?.Invoke();
             });
-            NPC(nameof(SkillsView));
-            NPC(nameof(MainSkills));
-            NPC(nameof(SecondarySkills));
-            SkillsLoaded?.Invoke();
         }
 
         public CooldownBarMode Mode => SettingsManager.CooldownBarMode;

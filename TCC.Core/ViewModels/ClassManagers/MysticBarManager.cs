@@ -26,28 +26,24 @@ namespace TCC.ViewModels
             Auras = new AurasTracker();
         }
 
-        private void Vow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Vow.Buff.IsAvailable))
-            {
-                Vow.Cooldown.FlashOnAvailable = Vow.Buff.IsAvailable;
-            }
-        }
 
         public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
             SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
-            Contagion = new FixedSkillCooldown(cont, _dispatcher, true);
+            Contagion = new FixedSkillCooldown(cont, true);
             Vow = new DurationCooldownIndicator(_dispatcher)
             {
-                Buff = new FixedSkillCooldown(vow, _dispatcher, false),
-                Cooldown = new FixedSkillCooldown(vow, _dispatcher, false)
+                Buff = new FixedSkillCooldown(vow, false),
+                Cooldown = new FixedSkillCooldown(vow, false)
             };
-            Vow.Buff.PropertyChanged += Vow_PropertyChanged;
-
-
+            Vow.Buff.Ended += OnVowBuffEnded;
+            Vow.Buff.Started += OnVowBuffStarted;
         }
+
+        private void OnVowBuffStarted(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+        private void OnVowBuffEnded(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {

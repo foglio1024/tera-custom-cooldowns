@@ -17,7 +17,7 @@ namespace TCC.ViewModels
         {
             if (e.PropertyName == nameof(StaminaTracker.Maxed))
             {
-                BurstFire.Cooldown.ForceAvailable(StaminaTracker.Maxed);
+                if (StaminaTracker.Maxed) BurstFire.Cooldown.ForceEnded();
                 Balder.Cooldown.FlashOnAvailable = StaminaTracker.Maxed;
                 Bombardment.Cooldown.FlashOnAvailable = StaminaTracker.Maxed;
             }
@@ -33,12 +33,12 @@ namespace TCC.ViewModels
             Balder = new DurationCooldownIndicator(_dispatcher);
             Bombardment = new DurationCooldownIndicator(_dispatcher);
 
-            BurstFire.Buff = new FixedSkillCooldown(bfire, _dispatcher, false);
-            Balder.Buff = new FixedSkillCooldown(balder, _dispatcher, false);
-            Bombardment.Buff = new FixedSkillCooldown(bombard, _dispatcher, false);
-            BurstFire.Cooldown = new FixedSkillCooldown(bfire, _dispatcher, true);
-            Balder.Cooldown = new FixedSkillCooldown(balder, _dispatcher, false);
-            Bombardment.Cooldown = new FixedSkillCooldown(bombard, _dispatcher, false);
+            BurstFire.Buff = new FixedSkillCooldown(bfire, false);
+            Balder.Buff = new FixedSkillCooldown(balder, false);
+            Bombardment.Buff = new FixedSkillCooldown(bombard, false);
+            BurstFire.Cooldown = new FixedSkillCooldown(bfire, true);
+            Balder.Cooldown = new FixedSkillCooldown(balder, false);
+            Bombardment.Cooldown = new FixedSkillCooldown(bombard, false);
             StaminaTracker.PropertyChanged += FlashBfIfFullWp;
 
         }

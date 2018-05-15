@@ -26,29 +26,26 @@ namespace TCC.ViewModels
         {
         }
 
-        private void GracePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Grace.Buff.IsAvailable))
-            {
-                Grace.Cooldown.FlashOnAvailable = Grace.Buff.IsAvailable;
-            }
-        }
 
         public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
             EnergyStars = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
-            EnergyStars.Buff = new FixedSkillCooldown(es, _dispatcher, false);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es, _dispatcher, true);
+            EnergyStars.Buff = new FixedSkillCooldown(es,  false);
+            EnergyStars.Cooldown = new FixedSkillCooldown(es,  true);
 
             Grace = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
-            Grace.Buff = new FixedSkillCooldown(gr, _dispatcher, false);
-            Grace.Cooldown = new FixedSkillCooldown(gr, _dispatcher, false);
+            Grace.Buff = new FixedSkillCooldown(gr,  false);
+            Grace.Cooldown = new FixedSkillCooldown(gr,  false);
 
-            Grace.Buff.PropertyChanged += GracePropertyChanged;
+            Grace.Buff.Started += OnGraceBuffStarted;
+            Grace.Buff.Ended += OnGraceBuffEnded;
         }
+
+        private void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
+        private void OnGraceBuffStarted(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = false;
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {

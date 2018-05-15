@@ -50,7 +50,7 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
-            Thunderbolt = new FixedSkillCooldown(tb, _dispatcher, true);
+            Thunderbolt = new FixedSkillCooldown(tb, true);
 
         }
 

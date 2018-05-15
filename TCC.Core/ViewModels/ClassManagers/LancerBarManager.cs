@@ -33,8 +33,8 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator(Dispatcher d)
         {
             _dispatcher = d;
-            Cooldown = new FixedSkillCooldown(_dispatcher);
-            Buff = new FixedSkillCooldown(_dispatcher);
+            Cooldown = new FixedSkillCooldown();
+            Buff = new FixedSkillCooldown();
         }
     }
     internal class LancerBarManager : ClassManager
@@ -82,11 +82,11 @@ namespace TCC.ViewModels
             AdrenalineRush = new DurationCooldownIndicator(_dispatcher);
             Infuriate = new DurationCooldownIndicator(_dispatcher);
 
-            GuardianShout.Cooldown = new FixedSkillCooldown(gshout, _dispatcher, true);
-            GuardianShout.Buff = new FixedSkillCooldown(gshout, _dispatcher, false);
-            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush, _dispatcher, true);
-            AdrenalineRush.Buff = new FixedSkillCooldown(arush, _dispatcher, false);
-            Infuriate.Cooldown = new FixedSkillCooldown(infu, _dispatcher, true);
+            GuardianShout.Cooldown = new FixedSkillCooldown(gshout,  true);
+            GuardianShout.Buff = new FixedSkillCooldown(gshout,  false);
+            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush,  true);
+            AdrenalineRush.Buff = new FixedSkillCooldown(arush,  false);
+            Infuriate.Cooldown = new FixedSkillCooldown(infu,  true);
         }
     }
 }

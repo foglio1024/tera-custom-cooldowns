@@ -41,8 +41,8 @@ namespace TCC.ViewModels
 
             SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
             SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
-            GrowingFury = new FixedSkillCooldown(gf, _dispatcher, false);
-            Counter = new FixedSkillCooldown(c, _dispatcher, false);
+            GrowingFury = new FixedSkillCooldown(gf,  false);
+            Counter = new FixedSkillCooldown(c,  false);
         }
 
     }

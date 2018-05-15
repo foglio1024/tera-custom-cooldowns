@@ -58,6 +58,47 @@ namespace TCC.Controls
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
+
+            _context.Ended += OnCooldownEnded;
+            _context.Started += OnCooldownStarted;
+            _context.FlashingForced += OnFlashingStarted;
+        }
+
+        private void OnFlashingStarted()
+        {
+            if (_context.IsAvailable) AnimateAvailableSkill();
+            else StopWarning();
+        }
+
+        private void OnCooldownStarted(CooldownMode mode)
+        {
+            IsRunning = true;
+            StopWarning();
+            switch (mode)
+            {
+                case CooldownMode.Normal:
+                    var newVal = _context.Cooldown / (double) _context.OriginalCooldown;
+                    newVal = newVal > 1 ? 1 : newVal;
+                    AnimateArcAngle(newVal);
+                    break;
+                case CooldownMode.Pre:
+                    AnimatePreArcAngle();
+                    break;
+            }
+        }
+
+        private void OnCooldownEnded(CooldownMode mode)
+        {
+            IsRunning = false;
+            switch (mode)
+            {
+                case CooldownMode.Normal:
+                    AnimateAvailableSkill();
+                    break;
+                case CooldownMode.Pre:
+                    StopPreAnimation();
+                    break;
+            }
         }
 
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -66,42 +107,42 @@ namespace TCC.Controls
             {
                 switch (e.PropertyName)
                 {
-                    case "Refresh" when _context.Cooldown == _context.OriginalCooldown: return;
-                    case "Refresh":
-                        var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
-                        if (newVal > 1) newVal = 1;
-                        if (_context.Cooldown == 0)
-                        {
-                            IsRunning = false;
-                            AnimateAvailableSkill();
-                            return;
-                        }
+                    //case "Refresh" when _context.Cooldown == _context.OriginalCooldown: return;
+                    //case "Refresh":
+                    //    var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
+                    //    if (newVal > 1) newVal = 1;
+                    //    if (_context.Cooldown == 0)
+                    //    {
+                    //        IsRunning = false;
+                    //        AnimateAvailableSkill();
+                    //        return;
+                    //    }
 
-                        AnimateArcAngle(newVal);
-                        break;
-                    case "Start":
-                        IsRunning = true;
-                        AnimateArcAngle();
-                        break;
-                    case "IsAvailable" when _context.IsAvailable:
-                        IsRunning = false;
-                        AnimateAvailableSkill();
-                        break;
-                    case "IsAvailable":
-                        _warnTimer.Stop();
-                        break;
-                    case nameof(_context.Seconds):
-                        NPC(nameof(SecondsText));
-                        break;
-                    case "StartPre":
-                        IsRunning = true;
-                        AnimatePreArcAngle();
-                        break;
-                    case "StopPre":
-                        IsRunning = false;
-                        PreArc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
-                        PreArc.EndAngle = 0.01;
-                        break;
+                    //    AnimateArcAngle(newVal);
+                    //    break;
+                    //case "Start":
+                    //    IsRunning = true;
+                    //    AnimateArcAngle();
+                    //    break;
+                    //case "IsAvailable" when _context.IsAvailable:
+                    //    IsRunning = false;
+                    //    AnimateAvailableSkill();
+                    //    break;
+                    //case "IsAvailable":
+                    //    _warnTimer.Stop();
+                    //    break;
+                    //case nameof(_context.Seconds):
+                    //    NPC(nameof(SecondsText));
+                    //    break;
+                    //case "StartPre":
+                    //    IsRunning = true;
+                    //    AnimatePreArcAngle();
+                    //    break;
+                    //case "StopPre":
+                    //    IsRunning = false;
+                    //    PreArc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
+                    //    PreArc.EndAngle = 0.01;
+                    //    break;
                 }
             }, DispatcherPriority.DataBind);
         }
@@ -126,13 +167,12 @@ namespace TCC.Controls
         }
         private void AnimatePreArcAngle(double val = 1)
         {
-            _arcAnimation.Duration = TimeSpan.FromMilliseconds(_context.PreCooldown);
+            _arcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
             _arcAnimation.From = 359.9 * val;
-            var fps = _context.PreCooldown > 80000 ? 1 : 30;
+            var fps = _context.Cooldown > 80000 ? 1 : 30;
             Timeline.SetDesiredFrameRate(_arcAnimation, fps);
             PreArc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
         }
-
         private void AnimateAvailableSkill()
         {
             Arc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
@@ -146,9 +186,18 @@ namespace TCC.Controls
             StartWarning();
         }
 
+        private void StopPreAnimation()
+        {
+            PreArc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
+            PreArc.EndAngle = 0.01;
+        }
         private void StartWarning()
         {
             _warnTimer.Start();
+        }
+        private void StopWarning()
+        {
+            _warnTimer.Stop();
         }
 
         private void WarnAvailableSkill()

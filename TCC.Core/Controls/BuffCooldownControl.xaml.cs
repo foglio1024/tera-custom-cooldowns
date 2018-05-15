@@ -29,10 +29,16 @@ namespace TCC.Controls
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (DurationCooldownIndicator)DataContext;
             cd.DataContext = _context.Cooldown;
-            _context.Buff.PropertyChanged += Buff_PropertyChanged;
+            _context.Buff.Started += OnBuffStarted;
             _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
         }
 
+        private void OnBuffStarted(Data.CooldownMode obj)
+        {
+            _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
+            ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+
+        }
 
         private void Buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
