@@ -102,7 +102,9 @@ namespace TCC.Data
             _dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
         }
 
-        // public methods
+        // methods
+        private void ForceFlashing() => _dispatcher.Invoke(() => FlashingForced?.Invoke());
+
         public void Start(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
             //checks for running
