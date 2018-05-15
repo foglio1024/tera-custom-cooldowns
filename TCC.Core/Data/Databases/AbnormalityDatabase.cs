@@ -19,7 +19,7 @@ namespace TCC.Data.Databases
             {
                 var l = hd.ReadLine();
                 if (l == null) break;
-
+                if(l == "") continue;
                 var s = l.Split('\t');
                 var id = uint.Parse(s[0]);
                 var type = s[1];

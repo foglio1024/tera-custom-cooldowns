@@ -15,7 +15,7 @@ namespace TCC.Data.Databases
                 var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
-                var id = uint.Parse(s[0]);
+                if (!uint.TryParse(s[0], out var id)) continue;
                 var name = s[1];
 
                 Achievements.Add(id, name);
