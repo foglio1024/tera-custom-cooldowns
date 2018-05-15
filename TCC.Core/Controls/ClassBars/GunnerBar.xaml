@@ -38,11 +38,6 @@
             </Border>
             <Border Grid.Column="0" CornerRadius="36" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Grid>
-                    <local:BuffCooldownControl DataContext="{Binding BurstFire}" RenderTransformOrigin=".5,.5">
-                        <local:BuffCooldownControl.RenderTransform>
-                            <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
-                        </local:BuffCooldownControl.RenderTransform>
-                    </local:BuffCooldownControl>
                     <local:Arc EndAngle="0"
                                StrokeThickness="8" Stroke="Orange" HorizontalAlignment="Left" VerticalAlignment="Center"
                                Margin="0,0,0,0"
@@ -51,6 +46,11 @@
                             <ScaleTransform ScaleX="-1"></ScaleTransform>
                         </local:Arc.LayoutTransform>
                     </local:Arc>
+                    <local:BuffCooldownControl DataContext="{Binding BurstFire}" RenderTransformOrigin=".5,.5">
+                        <local:BuffCooldownControl.RenderTransform>
+                            <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+                        </local:BuffCooldownControl.RenderTransform>
+                    </local:BuffCooldownControl>
                 </Grid>
             </Border>
 
