@@ -25,14 +25,14 @@ namespace TCC.Controls.ChatControls
         private void CancelClick(object sender, RoutedEventArgs e)
         {
             _message = "Friend me?";
-            ChatWindowManager.Instance.LockTooltip();
+            //ChatWindowManager.Instance.LockTooltip();
             Close();
         }
 
         private void OkClick(object sender, RoutedEventArgs e)
         {
             Proxy.FriendRequest(ChatWindowManager.Instance.TooltipInfo.Name, _message);
-            ChatWindowManager.Instance.LockTooltip();
+            //ChatWindowManager.Instance.LockTooltip();
             Close();
             _message = "Friend me?";
             ChatWindowManager.Instance.CloseTooltip();

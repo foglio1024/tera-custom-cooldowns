@@ -25,10 +25,6 @@ namespace TCC.ViewModels
 
         public event Action<ChatMessage> NewMessage;
 
-        public void LockTooltip()
-        {
-            throw new NotImplementedException();
-        }
         internal void CloseTooltip()
         {
             if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
@@ -46,7 +42,7 @@ namespace TCC.ViewModels
         {
             ChatWindows.ToList().ForEach(w =>
             {
-                if (w.VM.CurrentTab.Messages.Contains(dc)) w.VM.Paused = v;
+                if (w.VM.CurrentTab.Messages.Contains(dc)) if(w.VM != null) w.VM.Paused = v;
             });
         }
 
@@ -394,9 +390,7 @@ namespace TCC.ViewModels
 
         public void SetMgButtonVis()
         {
-
-            ChatWindows[0].SetMgButtonVis();
-
+            if(ChatWindows.Count > 0) ChatWindows[0].SetMgButtonVis();
         }
     }
 
