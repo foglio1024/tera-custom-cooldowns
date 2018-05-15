@@ -48,8 +48,8 @@ namespace TCC.Windows
             _settings.NotifyWindowSafeClose += CloseWindowSafe;
             _settings.NotifyEnableWindow += EnableWindow;
             _settings.PropertyChanged += _settings_PropertyChanged;
-            Left = ws.X*SettingsManager.ScreenW;
-            Top = ws.Y*SettingsManager.ScreenH;
+            Left = ws.X * SettingsManager.ScreenW;
+            Top = ws.Y * SettingsManager.ScreenH;
             if (!ignoreSize)
             {
                 if (ws.H != 0) Height = ws.H;
@@ -85,7 +85,7 @@ namespace TCC.Windows
             MouseLeave += (s, ev) => _t.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
 
-            if(ws.Enabled) Show();
+            if (ws.Enabled) Show();
 
         }
 
@@ -279,23 +279,24 @@ namespace TCC.Windows
 
         private void CheckBounds()
         {
-            if (Left < 0) Left = 0;
             if ((Left + ActualWidth) > SettingsManager.ScreenW)
             {
-                Left = SettingsManager.ScreenW  - ActualWidth;
+                Left = SettingsManager.ScreenW - ActualWidth;
             }
             if ((Top + ActualHeight) > SettingsManager.ScreenH)
             {
                 Top = SettingsManager.ScreenH - ActualHeight;
             }
+            if (Left < 0) Left = 0;
+            if (Top < 0) Top = 0;
         }
 
         public void CloseWindowSafe()
         {
             if (Dispatcher.CheckAccess())
-                Close();
+                Hide();
             else
-                Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(Close));
+                Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(Hide));
         }
 
         private bool _isTempShow;
