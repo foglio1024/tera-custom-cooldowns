@@ -212,6 +212,7 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!SettingsManager.StatSent) App.SendUsageStat();
             SettingsManager.LastRegion = Language;
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
@@ -867,7 +868,7 @@ namespace TCC.Parsing
             if (Proxy.IsConnected)
             {
                 Proxy.RequestCandidates();
-                if(WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
+                if(WindowManager.LfgListWindow != null) if(WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
@@ -1062,6 +1063,7 @@ namespace TCC.Parsing
 
         public static void HandleApplicantsList(S_SHOW_CANDIDATE_LIST p)
         {
+            if (WindowManager.LfgListWindow.VM == null) return;
             if (WindowManager.LfgListWindow.VM.MyLfg == null) return;
             var dest = WindowManager.LfgListWindow.VM.MyLfg.Applicants;
             //TODO refactoring: method that does this "merge" thing
