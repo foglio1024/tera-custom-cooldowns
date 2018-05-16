@@ -31,8 +31,8 @@ namespace TCC.Data
                         sb.Append(n[i]);
                         sb.Append(" ");
                     }
-                    
-                    return sb.ToString().Substring(0,sb.Length-1);
+
+                    return sb.Length == 0 ? "" : sb.ToString().Substring(0,sb.Length-1);
                 }
                 return Name;
             }
