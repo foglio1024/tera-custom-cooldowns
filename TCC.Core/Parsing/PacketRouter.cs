@@ -576,7 +576,7 @@ namespace TCC.Parsing
 
         internal static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
-            ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x));
+            ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x)); //TODO: got NullRefEx here
             if (WindowManager.LfgListWindow.VM.MyLfg == null) return;
             var dest = WindowManager.LfgListWindow.VM.MyLfg.Applicants;
             if (dest.Any(u => u.PlayerId == x.PlayerId)) return;
