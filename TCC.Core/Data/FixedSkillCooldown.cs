@@ -13,6 +13,7 @@ namespace TCC.Data
         public event Action<CooldownMode> Started;
         public event Action<CooldownMode> Ended;
         public event Action FlashingForced;
+        public event Action SecondsUpdated;
 
         // fields
         private readonly DispatcherTimer _mainTimer;
@@ -42,6 +43,7 @@ namespace TCC.Data
             {
                 if (_seconds == value) return;
                 _seconds = value;
+                _dispatcher.Invoke(() => SecondsUpdated?.Invoke());
                 NPC();
             }
         }

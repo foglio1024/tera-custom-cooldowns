@@ -62,6 +62,12 @@ namespace TCC.Controls
             _context.Ended += OnCooldownEnded;
             _context.Started += OnCooldownStarted;
             _context.FlashingForced += OnFlashingStarted;
+            _context.SecondsUpdated += OnSecondsUpdated;
+        }
+
+        private void OnSecondsUpdated()
+        {
+            NPC(nameof(SecondsText));
         }
 
         private void OnFlashingStarted()
