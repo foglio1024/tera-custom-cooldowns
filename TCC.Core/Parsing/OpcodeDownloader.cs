@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Net;
 
 namespace TCC.Parsing
 {
@@ -105,6 +106,8 @@ namespace TCC.Parsing
 
         private static void Download(string remote, string local)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var client = new System.Net.WebClient())
             {
                 client.Headers.Add(System.Net.HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
