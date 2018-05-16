@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -29,7 +30,15 @@ namespace TCC.Windows
         {
             InitializeComponent();
             DataContext = CooldownWindowViewModel.Instance;
+            Closing += OnClosing;
         }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            ClosewWindow(null,null);
+        }
+
         public class GenericDragHandler : IDropTarget
         {
             public void DragOver(IDropInfo dropInfo)
@@ -43,7 +52,7 @@ namespace TCC.Windows
 
         public GenericDragHandler DragHandler => new GenericDragHandler();
 
-        private void Close(object sender, RoutedEventArgs e)
+        private void ClosewWindow(object sender, RoutedEventArgs e)
         {
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             an.Completed += (s, ev) => Hide();
