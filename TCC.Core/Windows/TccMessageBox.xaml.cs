@@ -144,8 +144,8 @@ namespace TCC.Windows
             {
                 Dispatcher.Invoke(() =>
                 {
-                    _messageBox.Close();
-                    _messageBox = null;
+                    _messageBox.Hide();
+                    //_messageBox = null;
                 });
             });
         }
