@@ -270,10 +270,7 @@ namespace TCC.Parsing
             if (SettingsManager.ChatEnabled)
             {
                 ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (SettingsManager.LfgOn)
-                {
-                    ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                }
+                ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
             if (SettingsManager.CooldownWindowSettings.Enabled || SettingsManager.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (SettingsManager.BossWindowSettings.Enabled || SettingsManager.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
