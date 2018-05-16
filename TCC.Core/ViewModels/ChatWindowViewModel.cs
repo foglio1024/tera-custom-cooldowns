@@ -42,7 +42,10 @@ namespace TCC.ViewModels
         {
             ChatWindows.ToList().ForEach(w =>
             {
-                if (w.VM.CurrentTab.Messages.Contains(dc)) if(w.VM != null) w.VM.Paused = v;
+                if (w.VM == null) return;
+                if (w.VM.CurrentTab == null) return;
+                if (w.VM.CurrentTab.Messages == null) return; //whatever
+                if (w.VM.CurrentTab.Messages.Contains(dc)) w.VM.Paused = v;
             });
         }
 
@@ -79,7 +82,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; }
 
 
-        private List<ChatChannelOnOff> VisibleChannels => SettingsManager.EnabledChatChannels;
+        //private List<ChatChannelOnOff> VisibleChannels => SettingsManager.EnabledChatChannels;
 
         private readonly object _lock = new object();
 
@@ -116,13 +119,6 @@ namespace TCC.ViewModels
                 if (e.OldItems.Count == 0) return;
                 SettingsManager.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow).WindowSettings as ChatWindowSettings);
             }
-            //Console.WriteLine($"Chat windows list changed; count: {ChatWindows.Count}");
-
-
-            //ChatWindows.ToList().ForEach(x =>
-            //{
-            //    //Console.WriteLine($"\t - {x.VM.TabVMs.Count} tabs");
-            //});
         }
 
         public void RemoveDeadLfg()
@@ -165,36 +161,36 @@ namespace TCC.ViewModels
         {
             if (!SettingsManager.ChatEnabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
-            var vch = VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel);
-            if (vch == null)
-            {
-                try
-                {
-                    var sb = new StringBuilder();
-                    sb.Append("TIME: ");
-                    sb.Append(DateTime.UtcNow);
-                    sb.Append("\n");
-                    sb.Append("FROM: ");
-                    sb.Append(chatMessage.Author);
-                    sb.Append("\n");
-                    sb.Append("CHANNEL: ");
-                    sb.Append(chatMessage.Channel);
-                    sb.Append("\n");
-                    sb.Append("TEXT: ");
-                    sb.Append(chatMessage.RawMessage);
+            //var vch = VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel);
+            //if (vch == null)
+            //{
+            //    try
+            //    {
+            //        var sb = new StringBuilder();
+            //        sb.Append("TIME: ");
+            //        sb.Append(DateTime.UtcNow);
+            //        sb.Append("\n");
+            //        sb.Append("FROM: ");
+            //        sb.Append(chatMessage.Author);
+            //        sb.Append("\n");
+            //        sb.Append("CHANNEL: ");
+            //        sb.Append(chatMessage.Channel);
+            //        sb.Append("\n");
+            //        sb.Append("TEXT: ");
+            //        sb.Append(chatMessage.RawMessage);
 
-                    File.WriteAllText("chat-message-error.txt", sb.ToString());
-                    var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
-                    AddChatMessage(err);
-                }
-                catch
-                {
-                    // ignored
-                }
+            //        File.WriteAllText("chat-message-error.txt", sb.ToString());
+            //        var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
+            //        AddChatMessage(err);
+            //    }
+            //    catch
+            //    {
+            //        // ignored
+            //    }
 
-                return;
-            }
-            if (!vch.Enabled) return;
+            //    return;
+            //}
+            //if (!vch.Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
                 for (var i = 0; i < ChatMessages.Count - 1; i++)
