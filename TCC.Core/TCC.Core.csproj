@@ -1417,36 +1417,36 @@
     <Content Include="resources\data\dungeons-def.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\data\items\items-EU-EN.tsv">
+    <None Include="resources\data\items\items-EU-EN.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-EU-FR.tsv">
+    </None>
+    <None Include="resources\data\items\items-EU-FR.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-EU-GER.tsv">
+    </None>
+    <None Include="resources\data\items\items-EU-GER.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-JP.tsv">
+    </None>
+    <None Include="resources\data\items\items-JP.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-NA.tsv">
+    </None>
+    <None Include="resources\data\items\items-NA.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-RU.tsv">
+    </None>
+    <None Include="resources\data\items\items-RU.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-TW.tsv">
+    </None>
+    <None Include="resources\data\items\items-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-KR.tsv">
+    </None>
+    <None Include="resources\data\items\items-KR.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-KR-PTS.tsv">
+    </None>
+    <None Include="resources\data\items\items-KR-PTS.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-THA.tsv">
+    </None>
+    <None Include="resources\data\items\items-THA.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="resources\data\guild_quests\guild_quests-EU-FR.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1693,12 +1693,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="resources\data\monsters\monsters-KR-PTS.xml">
+    <None Include="resources\data\monsters\monsters-KR-PTS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-THA.xml">
+    </None>
+    <None Include="resources\data\monsters\monsters-THA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />
     <Resource Include="resources\fonts\droidsans.ttf" />
@@ -1733,33 +1733,33 @@
     <Resource Include="resources\images\ic_close_white_24dp_2x.png" />
     <Resource Include="resources\images\Icon_Laurels\blank.png" />
     <Resource Include="resources\images\combat.png" />
-    <Content Include="resources\data\monsters\monsters-EU-EN.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-EU-FR.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-EU-GER.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-JP.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-KR.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-NA.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-override.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-RU.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-TW.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="resources\data\monsters\monsters-EU-EN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-EU-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-EU-GER.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-JP.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-NA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-override.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="resources\images\Icon_Classes\archer.png" />
     <Resource Include="resources\images\Icon_Classes\berserker.png" />
     <Resource Include="resources\images\Icon_Classes\brawler.png" />
