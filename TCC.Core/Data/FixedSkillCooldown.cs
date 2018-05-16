@@ -109,7 +109,7 @@ namespace TCC.Data
 
         public void Start(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
-            //checks for running
+            if (cd >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
                 if (_currentMode == CooldownMode.Pre)
@@ -138,11 +138,9 @@ namespace TCC.Data
         }
         public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
-            Console.WriteLine($"Refreshing to {cd}");
-            //_secondsTimer.Stop();
             _mainTimer.Stop();
 
-            if (cd == 0)
+            if (cd == 0 || cd >= Int32.MaxValue)
             {
                 Seconds = 0;
                 Cooldown = 0;
