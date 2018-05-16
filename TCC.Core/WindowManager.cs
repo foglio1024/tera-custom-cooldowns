@@ -243,7 +243,7 @@ namespace TCC
             ClassWindow = new ClassWindow();
             InfoWindow = new InfoWindow();
             FlightDurationWindow = new FlightDurationWindow();
-            if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
+            LfgListWindow = new LfgListWindow();
             SkillConfigWindow = new SkillConfigWindow();
             GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
             //GroupWindow.Show();
