@@ -579,35 +579,6 @@
                 </TabItem.Header>
                 <!-- Other settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
-                    <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" 
-                                           Value="{Binding Webhook, Mode=TwoWay}"></controls:FieldSetting>
-                    <controls:FieldSetting SettingName="Message" Value="{Binding WebhookMessage, Mode=TwoWay}"></controls:FieldSetting>
-                    <Button Style="{StaticResource ButtonMainStyle}" Click="SendWebhookTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
-                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
-                        <TextBlock Margin="0,5" Foreground="#f77" Text="Send test message"></TextBlock>
-                    </Button>
-                    <Separator />
-
-                    <controls:FieldSetting SettingName="Twitch username" Value="{Binding TwitchUsername, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png"></controls:FieldSetting>
-                    <controls:FieldSetting SettingName="Twitch token" Value="{Binding TwitchToken, Mode=TwoWay}">
-                        <controls:FieldSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                    <Run Text="Visit twitchapps.com/tmi/ to generate a token."/>
-                                    <LineBreak/>
-                                    <Run Text="Warning: keep this token secret (this text box won't hide it)." Foreground="DarkOrange"/>
-                                </TextBlock>
-                            </Grid>
-                        </controls:FieldSetting.ToolTip>
-
-                    </controls:FieldSetting>
-                    <controls:FieldSetting SettingName="Twitch channel name" Value="{Binding TwitchChannelName, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:FieldSetting>
-                    <Button Style="{StaticResource ButtonMainStyle}" Click="ConnectToTwitch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
-                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
-                        <TextBlock Margin="0,5" Foreground="{StaticResource TwitchColor}" Text="Connect"></TextBlock>
-                    </Button>
-                    <Separator></Separator>
                     <controls:BoolSetting SettingName="Use hotkeys" IsOn="{Binding UseHotkeys, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
@@ -628,6 +599,16 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Show flight gauge" IsOn="{Binding ShowFlightGauge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Enables/disables flight gauge."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
                     <controls:SelectionSetting SettingName="Flight gauge click through mode"
                                                SelectedItem="{Binding FlightWindowSettings.ClickThruMode, Mode=TwoWay}"
                                                ChoicesType="{x:Type data:ClickThruMode}"
@@ -635,6 +616,37 @@
                                                Choices="{Binding ClickThruModes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <controls:FieldSetting SettingName="Region override" Value="{Binding RegionOverride, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"/>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Discord connector</TextBlock>
+                    <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" 
+                                           Value="{Binding Webhook, Mode=TwoWay}"/>
+                    <controls:FieldSetting SettingName="Message" Value="{Binding WebhookMessage, Mode=TwoWay}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="SendWebhookTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
+                        <TextBlock Margin="0,5" Foreground="#f77" Text="Send test message"/>
+                    </Button>
+                    <Separator />
+
+                    <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Twitch connector</TextBlock>
+                    <controls:FieldSetting SettingName="Twitch username" Value="{Binding TwitchUsername, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png"></controls:FieldSetting>
+                    <controls:FieldSetting SettingName="Twitch token" Value="{Binding TwitchToken, Mode=TwoWay}">
+                        <controls:FieldSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Visit twitchapps.com/tmi/ to generate a token."/>
+                                    <LineBreak/>
+                                    <Run Text="Warning: keep this token secret (this text box won't hide it)." Foreground="DarkOrange"/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:FieldSetting.ToolTip>
+
+                    </controls:FieldSetting>
+                    <controls:FieldSetting SettingName="Twitch channel name" Value="{Binding TwitchChannelName, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:FieldSetting>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ConnectToTwitch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
+                        <TextBlock Margin="0,5" Foreground="{StaticResource TwitchColor}" Text="Connect"></TextBlock>
+                    </Button>
 
                 </StackPanel>
 
