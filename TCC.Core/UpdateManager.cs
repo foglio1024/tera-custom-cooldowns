@@ -18,10 +18,11 @@ namespace TCC
         private static string baseDatabaseDir = "tera-used-icons-master";
         public static void CheckDatabaseVersion()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
                 try
                 {
                     var st = c.OpenRead(databaseVersion);
@@ -69,6 +70,8 @@ namespace TCC
 
         private static void DownloadDatabase()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var c = new WebClient())
             {
                 var ready = false;
@@ -154,6 +157,8 @@ namespace TCC
 
         private static void CheckAppVersionPeriodic()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
@@ -188,6 +193,8 @@ namespace TCC
         }
         public static void CheckAppVersion()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
@@ -235,6 +242,7 @@ namespace TCC
 
         private static void Update(string url)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             using (var c = new WebClient())
             {

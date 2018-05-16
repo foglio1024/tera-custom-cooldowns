@@ -33,11 +33,13 @@ namespace TCC
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            BaseDispatcher = Dispatcher.CurrentDispatcher;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            TccMessageBox.Create(); //Create it here in STA thread
             InitSplashScreen();
+
+            BaseDispatcher = Dispatcher.CurrentDispatcher;
+            TccMessageBox.Create(); //Create it here in STA thread
+
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
             TryDeleteUpdater();
@@ -53,7 +55,7 @@ namespace TCC
             SettingsManager.LoadSettings();
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases( string.IsNullOrEmpty(SettingsManager.LastRegion) ? "EU-EN" : SettingsManager.LastRegion == "EU" ? "EU-EN" : SettingsManager.LastRegion);
+            SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsManager.LastRegion) ? "EU-EN" : SettingsManager.LastRegion == "EU" ? "EU-EN" : SettingsManager.LastRegion);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
@@ -78,14 +80,14 @@ namespace TCC
 
             UpdateManager.StartCheck();
 
-           //WindowManager.LfgListWindow.ShowWindow();
-           // var l = new Listing();
-           // l.LeaderId = 10;
-           // l.Message = "SJG exp only";
-           // l.LeaderName = "Foglio";
-           // l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 10, IsLeader = true, Online = true});
-           // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
-           // WindowManager.LfgListWindow.VM.Listings.Add(l);
+            //WindowManager.LfgListWindow.ShowWindow();
+            // var l = new Listing();
+            // l.LeaderId = 10;
+            // l.Message = "SJG exp only";
+            // l.LeaderName = "Foglio";
+            // l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 10, IsLeader = true, Online = true});
+            // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
+            // WindowManager.LfgListWindow.VM.Listings.Add(l);
             //var l = new List<User>();
             //var r = new Random();
             //for (uint i = 0; i < 30; i++)
@@ -161,33 +163,38 @@ namespace TCC
         private static void UploadCrashDump(UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            var c = new WebClient();
-            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-            var js = new JObject();
-            var full = ex.Message + "\r\n" +
-                       ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" +
-                       ex.InnerException +
-                       "\r\n" + ex.TargetSite;
-            js.Add("tcc_version", new JValue(_version));
-            js.Add("full_exception", new JValue(full.Replace(@"C:\Users\Vincenzo\Documents\Progetti VS\", "")));
-            js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined"));
-            js.Add("exception", new JValue(ex.Message));
-            js.Add("game_version", new JValue(PacketProcessor.Version));
-            if (PacketProcessor.Server != null)
-            {
-                js.Add("region", new JValue(PacketProcessor.Server.Region));
-                js.Add("server_id", new JValue(PacketProcessor.Server.ServerId));
-            }
-            else
-            {
-                js.Add("region", new JValue(""));
-                js.Add("server_id", new JValue(""));
-            }
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            c.Encoding = Encoding.UTF8;
-            c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"),
-                Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+            using (var c = new WebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                var js = new JObject();
+                var full = ex.Message + "\r\n" +
+                           ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" +
+                           ex.InnerException +
+                           "\r\n" + ex.TargetSite;
+                js.Add("tcc_version", new JValue(_version));
+                js.Add("full_exception", new JValue(full.Replace(@"C:\Users\Vincenzo\Documents\Progetti VS\", "")));
+                js.Add("inner_exception",
+                    new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined"));
+                js.Add("exception", new JValue(ex.Message));
+                js.Add("game_version", new JValue(PacketProcessor.Version));
+                if (PacketProcessor.Server != null)
+                {
+                    js.Add("region", new JValue(PacketProcessor.Server.Region));
+                    js.Add("server_id", new JValue(PacketProcessor.Server.ServerId));
+                }
+                else
+                {
+                    js.Add("region", new JValue(""));
+                    js.Add("server_id", new JValue(""));
+                }
+
+                c.Encoding = Encoding.UTF8;
+                c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"),
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+            }
         }
 
         private static void InitSplashScreen()
@@ -230,6 +237,8 @@ namespace TCC
 
         public static void SendUsageStat()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
