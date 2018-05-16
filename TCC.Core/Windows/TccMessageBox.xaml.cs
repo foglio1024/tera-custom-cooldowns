@@ -80,6 +80,11 @@ namespace TCC.Windows
         }
         private static void SetVisibilityOfButtons(MessageBoxButton button)
         {
+            _messageBox.BtnCancel.Visibility = Visibility.Visible;
+            _messageBox.BtnNo.Visibility = Visibility.Visible;
+            _messageBox.BtnYes.Visibility = Visibility.Visible;
+            _messageBox.BtnOk.Visibility = Visibility.Visible;
+
             switch (button)
             {
                 case MessageBoxButton.OK:
