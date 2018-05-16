@@ -71,8 +71,8 @@ namespace TCC.Windows
         (string caption, string text,
         MessageBoxButton button, MessageBoxImage image)
         {
-            _messageBox = new TccMessageBox
-            { TxtMsg = { Text = text }, MessageTitle = { Text = caption } };
+            _messageBox.TxtMsg.Text = text;
+            _messageBox.MessageTitle.Text = caption;
             SetVisibilityOfButtons(button);
             SetImageOfMessageBox(image);
             _messageBox.ShowDialog();
@@ -162,7 +162,7 @@ namespace TCC.Windows
         {
             if (((bool)e.NewValue) != true) return;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
-            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() {Oscillations = 1 } });
+            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
             RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
         }
 
