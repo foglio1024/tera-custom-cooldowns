@@ -64,7 +64,7 @@ namespace TCC.ViewModels
         {
             ChatWindows.ToList().ForEach(w =>
             {
-                w.VM.Paused = v;
+                if(w.VM != null) w.VM.Paused = v;
             });
         }
 
