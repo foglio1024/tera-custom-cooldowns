@@ -64,12 +64,12 @@ namespace TCC
         private static bool _isActive;
         public static bool IsActive()
         {
-                //TODO: add TCC windows here
-                var settingsWindowHandle = WindowManager.Settings.Handle;
-                return FindTeraWindow() != IntPtr.Zero &&
-                          (FindTeraWindow() == GetForegroundWindow() || settingsWindowHandle == GetForegroundWindow()) ||
-                           FindMeterWindow() != IntPtr.Zero && 
-                          (FindMeterWindow() == GetForegroundWindow() || settingsWindowHandle == GetForegroundWindow());
+            //TODO: add TCC windows here
+            if (GetForegroundWindow() == FindTeraWindow() && FindTeraWindow() != IntPtr.Zero) return true;
+            if (GetForegroundWindow() == FindMeterWindow() && FindMeterWindow() != IntPtr.Zero) return true;
+            if (GetForegroundWindow() == WindowManager.Settings.Handle && WindowManager.Settings.Handle != IntPtr.Zero) return true;
+            if (GetForegroundWindow() == WindowManager.SkillConfigWindow.Handle && WindowManager.SkillConfigWindow.Handle != IntPtr.Zero) return true;
+            return false;
         }
 
         public static void MakeUnfocusable(IntPtr hwnd)
