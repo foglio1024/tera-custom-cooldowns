@@ -213,6 +213,7 @@ namespace TCC.Windows
         }
         private void CheckBounds()
         {
+            if (_settings.AllowOffScreen) return;
             if ((Left + ActualWidth) > SettingsManager.ScreenW)
             {
                 Left = SettingsManager.ScreenW - ActualWidth;
