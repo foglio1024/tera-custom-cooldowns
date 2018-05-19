@@ -20,31 +20,6 @@
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
         </Style>
-        <Style x:Key="OpacityAnimatedContainer" TargetType="FrameworkElement">
-            <Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
 
         <converters:LaurelImageConverter x:Key="LaurelConv"/>
         <converters:CombatToColorConverter x:Key="CombatConv"/>
@@ -64,7 +39,7 @@
         </Grid.RowDefinitions>
         <Grid UseLayoutRounding="True" ClipToBounds="False" Grid.Row="1" Name="content">
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </Grid.LayoutTransform>
             <Grid.CacheMode>
                 <BitmapCache RenderAtScale="2"></BitmapCache>

@@ -92,7 +92,7 @@
         <ContentControl x:Name="content" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center"
                         ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}" Margin="5" Background="Transparent" Grid.Row="1">
         <ContentControl.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+            <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
         </ContentControl.LayoutTransform>
         <ContentControl.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>

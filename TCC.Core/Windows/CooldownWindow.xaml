@@ -25,8 +25,7 @@
                         Content="{Binding Instance}"
                         ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" >
             <ContentControl.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding Scale}" 
-                            ScaleY="{Binding Scale}"/>
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </ContentControl.LayoutTransform>
         </ContentControl>
         <c:WindowButtons WindowName="Cooldown bar" x:Name="Buttons" 

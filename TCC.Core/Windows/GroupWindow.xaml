@@ -32,7 +32,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </Grid.LayoutTransform>
 
             <!--Info border-->

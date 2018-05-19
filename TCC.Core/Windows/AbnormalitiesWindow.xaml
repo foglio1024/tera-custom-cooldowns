@@ -39,7 +39,7 @@
 
         <StackPanel Background="Transparent" Name="content" Grid.Row="1">
             <StackPanel.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </StackPanel.LayoutTransform>
             <ItemsControl Name="InfBuffs" ItemTemplate="{StaticResource AbTemplate}" ItemsSource="{Binding Instance.Player.InfBuffs}">
                 <ItemsControl.ItemsPanel>
