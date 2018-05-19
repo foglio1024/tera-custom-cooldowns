@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Dragablz;
+using TCC.Annotations;
 using TCC.Controls.ChatControls;
 using TCC.ViewModels;
 
@@ -17,14 +19,15 @@ namespace TCC.Windows
         private readonly DoubleAnimation _opacityUp;
         private readonly DoubleAnimation _opacityDown;
         private bool _bottom = true;
+        private bool _isChatEnabled;
         public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
         public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
         public ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
             //ButtonsRef = buttons;
-            MainContentRef = content;
-            InitWindow(ws, false, true, false);
+            MainContent= content;
+            Init(ws, false);
             _opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             _opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowManager.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
@@ -35,6 +38,7 @@ namespace TCC.Windows
             DataContext = vm;
             UpdateSettings();
         }
+
 
 
         private void OnDragCompleted(object sender, RoutedPropertyChangedEventArgs<bool> e)
@@ -152,7 +156,6 @@ namespace TCC.Windows
             ((Tab)t.Content).Attention = false;
             ((ChatViewModel)DataContext).CurrentTab = (Tab)t.Content;
         }
-
 
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -288,6 +291,14 @@ namespace TCC.Windows
                 ((PlayerTooltip)PlayerInfo.Child).SetMoongourdVisibility();
             });
         }
+
+        private new void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            base.OnLoaded(sender, e);
+            TabControl.SelectedIndex = 0;
+
+        }
+
     }
 
 }
