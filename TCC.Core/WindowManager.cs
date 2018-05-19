@@ -152,6 +152,8 @@ namespace TCC
         public static void Init()
         {
             ForegroundManager = new ForegroundManager();
+            FocusManager.FocusTimer = new Timer(1000);
+            FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
             LoadWindows();
             FloatingButton = new FloatingButtonWindow();
             FloatingButton.Show();
@@ -174,12 +176,11 @@ namespace TCC
 
             //_undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            FocusManager.FocusTimer = new Timer(1000);
-            FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
             Settings = new SettingsWindow();
 
             if (SettingsManager.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
+            FocusManager.FocusTimer.Start();
 
         }
 

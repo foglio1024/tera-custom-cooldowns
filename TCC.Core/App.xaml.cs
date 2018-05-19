@@ -59,7 +59,6 @@ namespace TCC
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
-            FocusManager.FocusTimer.Start();
 
             SplashScreen.SetText("Initializing Twitch connector...");
             TwitchConnector.Instance.Init();
