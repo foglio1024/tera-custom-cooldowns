@@ -10,7 +10,6 @@ using System.Windows.Threading;
 
 namespace TCC.Windows
 {
-    /// <inheritdoc cref="TccWindow" />
     /// <summary>
     /// Logica di interazione per SplashScreen.xaml
     /// </summary>
