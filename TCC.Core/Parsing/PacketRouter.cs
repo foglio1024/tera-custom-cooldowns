@@ -94,12 +94,10 @@ namespace TCC.Parsing
 
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
-            WindowManager.SkillsEnded = false;
             SkillManager.AddSkill(p.SkillId, p.Cooldown);
         }
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
-            WindowManager.SkillsEnded = false;
             SkillManager.AddItemSkill(p.ItemId, p.Cooldown);
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
@@ -366,7 +364,7 @@ namespace TCC.Parsing
             {
                 t.Stop();
                 SessionManager.LoadingScreen = false;
-                WindowManager.RefreshDim();
+                WindowManager.ForegroundManager.RefreshDim();
 
             };
             t.Enabled = true;
@@ -526,7 +524,8 @@ namespace TCC.Parsing
         {
             foreach (var dg in x.DungeonClears)
             {
-                InfoWindowViewModel.Instance.SelectedCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
+                if(InfoWindowViewModel.Instance.SelectedCharacter != null)
+                    InfoWindowViewModel.Instance.SelectedCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
             }
         }
 
