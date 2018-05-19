@@ -9,12 +9,12 @@ namespace TCC.Updater
 {
     internal class Program
     {
-        private static string SourcePath = AppDomain.CurrentDomain.BaseDirectory + "/tmp";
-        private static string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
+        private static readonly string SourcePath = AppDomain.CurrentDomain.BaseDirectory + "/tmp";
+        private static readonly string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
 
         private static void Main(string[] args)
         {
-            if (!args.Any(x => x == "update"))
+            if (args.All(x => x != "update"))
             {
                 MessageBox.Show("This is not meant to be launched manually!", "TCC Updater", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
