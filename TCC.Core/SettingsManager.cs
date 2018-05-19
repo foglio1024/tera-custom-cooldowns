@@ -25,13 +25,13 @@ namespace TCC
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
         private static XDocument _settingsDoc;
 
-        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
-        public static WindowSettings CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
-        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
-        public static WindowSettings BuffWindowSettings = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
-        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
-        public static WindowSettings ClassWindowSettings = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true);
-        public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, 1, false, true);
+        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings BuffWindowSettings = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings ClassWindowSettings = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
 
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>();
 
@@ -93,7 +93,17 @@ namespace TCC
         public static bool ShowItemsCooldown { get; set; } = true;
         public static bool ShowMembersLaurels { get; set; } = false;
         public static bool AnimateChatMessages { get; set; } = false;
-        public static bool ChatEnabled { get; set; } = true;
+
+        public static bool ChatEnabled
+        {
+            get => ChatWindowsSettings[0].Enabled;
+            set
+            {
+                if (ChatWindowsSettings[0].Enabled == value) return;
+                ChatWindowsSettings.ToList().ForEach(x => x.Enabled = value);
+            }
+        }
+
         public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool LfgEnabled { get; set; } = true;
@@ -158,7 +168,7 @@ namespace TCC
                                           sett.Visible, sett.ClickThruMode,
                                           sett.Scale, sett.AutoDim, sett.DimOpacity,
                                           sett.ShowAlways, /*sett.AllowTransparency,*/
-                                          sett.Enabled)
+                                          sett.Enabled, sett.AllowOffScreen)
             {
                 Tabs = tabs,
                 LfgOn = lfg != null ? bool.Parse(lfg.Value) : true,
@@ -178,18 +188,18 @@ namespace TCC
                 if (b == null) return;
                 b.Attributes().ToList().ForEach(attr =>
                 {
-                    if      (attr.Name == nameof(IgnoreMeInGroupWindow)) IgnoreMeInGroupWindow = bool.Parse(attr.Value);
+                    if (attr.Name == nameof(IgnoreMeInGroupWindow)) IgnoreMeInGroupWindow = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(IgnoreGroupBuffs)) IgnoreGroupBuffs = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(IgnoreGroupDebuffs)) IgnoreGroupDebuffs = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(BuffsDirection)) BuffsDirection= (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
+                    else if (attr.Name == nameof(BuffsDirection)) BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
                     else if (attr.Name == nameof(CooldownBarMode)) CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(CooldownBarMode)) CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(EnrageLabelMode)) EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
                     else if (attr.Name == nameof(MaxMessages)) MaxMessages = int.Parse(attr.Value);
-                    else if (attr.Name == nameof(SpamThreshold)) SpamThreshold= int.Parse(attr.Value);
-                    else if (attr.Name == nameof(FontSize)) FontSize= int.Parse(attr.Value);
-                    else if (attr.Name == nameof(ShowChannel)) ShowChannel= bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(ShowTimestamp)) ShowTimestamp= bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SpamThreshold)) SpamThreshold = int.Parse(attr.Value);
+                    else if (attr.Name == nameof(FontSize)) FontSize = int.Parse(attr.Value);
+                    else if (attr.Name == nameof(ShowChannel)) ShowChannel = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(ShowTimestamp)) ShowTimestamp = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowOnlyBosses)) ShowOnlyBosses = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(DisablePartyHP)) DisablePartyHP = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(DisablePartyMP)) DisablePartyMP = bool.Parse(attr.Value);
@@ -200,22 +210,22 @@ namespace TCC
                     else if (attr.Name == nameof(ShowMembersLaurels)) ShowMembersLaurels = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(AnimateChatMessages)) AnimateChatMessages = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(StatSent)) StatSent = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(ShowFlightEnergy)) ShowFlightEnergy= bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(LfgEnabled)) LfgEnabled= bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(ShowFlightEnergy)) ShowFlightEnergy = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(LfgEnabled)) LfgEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowGroupWindowDetails)) ShowGroupWindowDetails = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(UseHotkeys)) UseHotkeys= bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(ChatEnabled)) ChatEnabled= bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(RegionOverride)) RegionOverride= attr.Value;
-                    else if (attr.Name == nameof(LastRegion)) LastRegion= attr.Value;
+                    else if (attr.Name == nameof(UseHotkeys)) UseHotkeys = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(ChatEnabled)) ChatEnabled = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(RegionOverride)) RegionOverride = attr.Value;
+                    else if (attr.Name == nameof(LastRegion)) LastRegion = attr.Value;
                     else if (attr.Name == nameof(Webhook)) Webhook = attr.Value;
                     else if (attr.Name == nameof(WebhookMessage)) WebhookMessage = attr.Value;
                     else if (attr.Name == nameof(ChatWindowOpacity)) ChatWindowOpacity = double.Parse(attr.Value, CultureInfo.InvariantCulture);
-                    else if (attr.Name == nameof(LastRun)) LastRun= DateTime.Parse(attr.Value);
+                    else if (attr.Name == nameof(LastRun)) LastRun = DateTime.Parse(attr.Value);
                     else if (attr.Name == nameof(TwitchName)) TwitchName = attr.Value;
-                    else if (attr.Name == nameof(TwitchToken)) TwitchToken= attr.Value;
+                    else if (attr.Name == nameof(TwitchToken)) TwitchToken = attr.Value;
                     else if (attr.Name == nameof(TwitchChannelName)) TwitchChannelName = attr.Value;
                     else if (attr.Name == nameof(GroupSizeThreshold)) GroupSizeThreshold = uint.Parse(attr.Value);
-                //add settings here
+                    //add settings here
                 });
 
                 //try
@@ -355,11 +365,11 @@ namespace TCC
             }
 
         }
-        private static WindowSettings ParseWindowSettings(XElement ws)
+        private static WindowSettings ParseWindowSettings(XElement ws) //TODO: don't overwrite defaults
         {
             double x = 0, y = 0, w = 0, h = 0, scale = 1, dimOp = .3;
             var ctm = ClickThruMode.Never;
-            bool vis = true, enabled = true, autoDim = true, allowTrans = true, alwaysVis = false;
+            bool vis = true, enabled = true, autoDim = true, allowOffscreen = false, alwaysVis = false;
 
             try
             {
@@ -415,17 +425,17 @@ namespace TCC
                 alwaysVis = bool.Parse(ws.Attribute("ShowAlways").Value);
             }
             catch (Exception) { }
-            //try
-            //{
-            //    allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
-            //}
-            //catch (Exception) { }
+            try
+            {
+                allowOffscreen = Boolean.Parse(ws.Attribute("AllowOffScreen").Value);
+            }
+            catch (Exception) { }
             try
             {
                 enabled = bool.Parse(ws.Attribute("Enabled").Value);
             }
             catch (Exception) { }
-            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled);
+            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen);
         }
         //private static void ParseChannelsSettings(XElement xElement)
         //{
@@ -444,25 +454,25 @@ namespace TCC
 
             foreach (var abEl in el.Descendants().Where(x => x.Name == "Abnormals"))
             {
-                var c = abEl.Attribute("class").Value;
-                var cl = (Class)Enum.Parse(typeof(Class), c);
-                var abs = abEl.Value.Split(',');
-                var l = abs.Length == 1 && abs[0] == "" ? new List<uint>() : abs.Select(uint.Parse).ToList();
-                l.ForEach(ab => GroupAbnormals[cl].Add(ab));
+                var stringClass = abEl.Attribute("class").Value;
+                var parsedClass = (Class)Enum.Parse(typeof(Class), stringClass);
+                var abnormalities = abEl.Value.Split(',');
+                var list = abnormalities.Length == 1 && abnormalities[0] == "" ? new List<uint>() : abnormalities.Select(uint.Parse).ToList();
+                list.ForEach(abnormality => GroupAbnormals[parsedClass].Add(abnormality));
                 //GroupAbnormals.Add(cl, l);
             }
-            if (GroupAbnormals.Count == 0)
-            {
-                CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
-                PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
-                MysticDefault.ForEach(x => GroupAbnormals[Class.Mystic].Add(x));
-            }
+
+            if (GroupAbnormals.Count != 0) return;
+            CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
+            PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
+            MysticDefault.ForEach(x => GroupAbnormals[Class.Mystic].Add(x));
         }
 
         private static readonly List<uint> CommonDefault = new List<uint> { 4000, 4001, 4010, 4011, 4020, 4021, 4030, 4031, 4600, 4610, 4611, 4613, 5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015, 902, 910, 911, 912, 913, 916, 920, 921, 922, 999010000 };
         private static readonly List<uint> PriestDefault = new List<uint> { 201, 202, 805100, 805101, 805102, 98000109, 805600, 805601, 805602, 805603, 805604, 98000110, 800300, 800301, 800302, 800303, 800304, 801500, 801501, 801502, 801503, 98000107 };
         private static readonly List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
         private static string _lastRegion = "";
+        private static bool _chatEnabled = true;
 
         public static XElement BuildChatTabsXElement(List<Tab> tabList)
         {
