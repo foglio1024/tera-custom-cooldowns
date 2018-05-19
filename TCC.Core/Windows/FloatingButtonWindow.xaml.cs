@@ -40,7 +40,7 @@ namespace TCC.Windows
             Left = 0;
             Top = SettingsManager.ScreenH / 2 - ActualHeight / 2;
 
-            WindowManager.TccVisibilityChanged += WindowManager_TccVisibilityChanged;
+            WindowManager.ForegroundManager.VisibilityChanged += OnTccVisibilityChanged;
             _t = new Timer { Interval = 2000 };
             _t.Tick += RepeatAnimation;
             _n = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(_notificationDuration) };
@@ -69,10 +69,10 @@ namespace TCC.Windows
             }, System.Windows.Threading.DispatcherPriority.DataBind);
         }
 
-        private void WindowManager_TccVisibilityChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnTccVisibilityChanged()
         {
             RefreshTopmost();
-            AnimateContentOpacity(WindowManager.IsFocused ? 1 : 0);
+            AnimateContentOpacity(FocusManager.IsForeground ? 1 : 0);
         }
 
         private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

@@ -42,7 +42,7 @@
                     Height="20"
                     Background="{StaticResource HpColor}"
                     CornerRadius="10"
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
                     Margin="0,0,-12,0"
                     RenderTransformOrigin=".5,.5"
                     Visibility="Hidden"
