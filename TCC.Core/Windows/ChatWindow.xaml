@@ -1,4 +1,4 @@
-﻿<w:TccWindow x:Class="TCC.Windows.ChatWindow"
+﻿<w:TccWidget x:Class="TCC.Windows.ChatWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,16 +17,16 @@
              PreviewMouseUp="ChatWindow_OnPreviewMouseUp"
              Title="ChatWindow"
              MinWidth="350" MinHeight="110"
-             Loaded="TccWindow_Loaded"
              ResizeMode="CanResize"
-             SizeToContent="Manual">
+             SizeToContent="Manual"
+             Loaded="OnLoaded">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5,5,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
-    <w:TccWindow.DataContext>
+    <w:TccWidget.DataContext>
         <vm:ChatViewModel />
-    </w:TccWindow.DataContext>
-    <w:TccWindow.Resources>
+    </w:TccWidget.DataContext>
+    <w:TccWidget.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
             <chatcontrols:ChatMessageControl VerticalAlignment="Top">
                 <chatcontrols:ChatMessageControl.LayoutTransform>
@@ -106,7 +106,7 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </DataTemplate>
-    </w:TccWindow.Resources>
+    </w:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -436,11 +436,9 @@
                                     Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0.01" Max="1" />
                     <c:BoolSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}" />
                     <c:BoolSetting SettingName="Show always" Foreground="#9fff"
-                                   IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWindow}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
-                    <c:BoolSetting SettingName="Enabled" Foreground="#9fff"
-                                   IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWindow}}, Path=WindowSettings.Enabled, Mode=TwoWay}" />
+                                   IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWidget}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
                 </StackPanel>
             </Border>
         </Popup>
     </Grid>
-</w:TccWindow>
+</w:TccWidget>
