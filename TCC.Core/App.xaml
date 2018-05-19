@@ -10,7 +10,6 @@
              xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
-             xmlns:databases="clr-namespace:TCC.Data.Databases"
              x:Class="TCC.App"
              Startup="OnStartup">
     <Application.Resources>
