@@ -27,12 +27,9 @@ namespace TCC.Windows
             InitializeComponent();
             DataContext = new LfgListViewModel();
             VM.PropertyChanged += VM_PropertyChanged;
-            WindowManager.TccVisibilityChanged += (s, ev) =>
+            WindowManager.ForegroundManager.VisibilityChanged += () =>
             {
-                if (WindowManager.IsTccVisible)
-                {
-                    RefreshTopmost();
-                }
+                if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
             };
         }
 
