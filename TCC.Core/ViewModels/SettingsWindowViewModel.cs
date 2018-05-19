@@ -474,11 +474,11 @@ namespace TCC.ViewModels
 
         public bool ChatWindowEnabled
         {
-            get => SettingsManager.ChatWindowsSettings[0].Enabled;
+            get => SettingsManager.ChatEnabled;
             set
             {
-                if (SettingsManager.ChatWindowsSettings[0].Enabled == value) return;
-                SettingsManager.ChatWindowsSettings.ToList().ForEach(x => x.Enabled = value);
+                if (SettingsManager.ChatEnabled == value) return;
+                SettingsManager.ChatEnabled = value;
                 NPC();
             }
         }

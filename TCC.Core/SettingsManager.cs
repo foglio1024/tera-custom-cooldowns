@@ -24,7 +24,6 @@ namespace TCC
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
         private static XDocument _settingsDoc;
-
         public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
         public static WindowSettings CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
         public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
@@ -96,11 +95,22 @@ namespace TCC
 
         public static bool ChatEnabled
         {
-            get => ChatWindowsSettings[0].Enabled;
+            get
+            {
+                if (ChatWindowsSettings.Count > 0) return ChatWindowsSettings[0].Enabled;
+                return _chatEnabled;
+            }
             set
             {
-                if (ChatWindowsSettings[0].Enabled == value) return;
-                ChatWindowsSettings.ToList().ForEach(x => x.Enabled = value);
+                if (ChatWindowsSettings.Count > 0)
+                {
+                    if (ChatWindowsSettings[0].Enabled == value) return;
+                    ChatWindowsSettings.ToList().ForEach(x => x.Enabled = value);
+                }
+                else
+                {
+                    _chatEnabled = value;
+                } 
             }
         }
 
