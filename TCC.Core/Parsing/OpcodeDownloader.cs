@@ -33,7 +33,7 @@ namespace TCC.Parsing
             catch { }
             try
             {
-                //Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
                 return;
             }
             catch { }
