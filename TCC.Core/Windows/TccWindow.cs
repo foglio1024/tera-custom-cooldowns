@@ -73,6 +73,9 @@ namespace TCC.Windows
             OnVisibilityChanged();
             OnWindowVisibilityChanged();
 
+            FocusManager.MakeUnfocusable(Handle);
+
+
             if (ButtonsRef == null)
             {
                 MouseLeftButtonDown += Drag;
