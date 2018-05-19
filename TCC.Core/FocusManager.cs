@@ -23,6 +23,7 @@ namespace TCC
 
         public static System.Timers.Timer FocusTimer;
         public static bool Running { get; set; } = true;
+        public static bool IsForeground { get; set; }
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
@@ -86,12 +87,12 @@ namespace TCC
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TOOLWINDOW);
         }
-        public static void MakeTransparent(IntPtr hwnd)
+        public static void MakeClickThru(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
-        public static void UndoTransparent(IntPtr hwnd)
+        public static void UndoClickThru(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_TRANSPARENT);
@@ -99,9 +100,13 @@ namespace TCC
         public static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
 
-            WindowManager.IsFocused = IsActive();
-            if(IsActive() != _isActive) ForegroundChanged?.Invoke();
-            _isActive = IsActive();
+            //Console.WriteLine($"[Focus manager] IsActive() = {IsActive()}");
+            //WindowManager.IsFocused = IsActive();
+            if (IsForeground != IsActive())
+            {
+                IsForeground = IsActive();
+                ForegroundChanged?.Invoke();
+            }
 
         }
 
