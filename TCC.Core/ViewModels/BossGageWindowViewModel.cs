@@ -40,7 +40,7 @@ namespace TCC.ViewModels
 
         //public bool IsTeraOnTop => WindowManager.IsTccVisible;
 
-        public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible);
+        public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible && x.CurrentHP > 0);
 
         public HarrowholdPhase CurrentHHphase
         {
