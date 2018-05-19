@@ -19,20 +19,16 @@ namespace TCC.Windows
         public FlightDurationWindow()
         {
             InitializeComponent();
-            InitWindow(SettingsManager.FlightGaugeWindowSettings);
-            Hide();
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                if (WindowManager.IsTccVisible)
-                {
-                    RefreshTopmost();
-                }
-            };
 
             ButtonsRef = null;
-            MainContentRef = Content as UIElement;
+            MainContent = Content as UIElement;
+
+            Init(SettingsManager.FlightGaugeWindowSettings);
+
+            Opacity = 0;
+
             _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250));
-            _winHide.Completed += (s, ev) => Hide();
+            //_winHide.Completed += (s, ev) => Hide();
             _winShow = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250));
             _arcAn = new DoubleAnimation()
             {
@@ -44,7 +40,7 @@ namespace TCC.Windows
                 if (Arc.EndAngle >= 87 && _arcAn.From < _arcAn.To) HideWindow();
                 else
                 {
-                    if (!IsVisible) ShowWindow();
+                    if (Opacity == 0) ShowWindow();
                 }
             };
         }
@@ -54,21 +50,14 @@ namespace TCC.Windows
             if (!SettingsManager.ShowFlightEnergy) return;
             Dispatcher.Invoke(() =>
             {
-                if (!IsVisible) ShowWindow();
+                if (Opacity == 0) ShowWindow();
                 var c = new FactorToAngleConverter();
                 _arcAn.From = Arc.EndAngle;
-                // ReSharper disable once PossibleNullReferenceException
                 _arcAn.To = (double)c.Convert(val/1000, null, 4, null);
                 Arc.BeginAnimation(Arc.EndAngleProperty, _arcAn);
             });
         }
 
-        private new void TccWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            base.TccWindow_Loaded(sender, e);
-            if(_firstLoad) Top = Top + 100;
-            _firstLoad = false;
-        }
 
         private void HideWindow()
         {
@@ -77,9 +66,9 @@ namespace TCC.Windows
 
         private void ShowWindow()
         {
-            //FocusManager.MakeTransparent(Handle);
+            //FocusManager.MakeClickThru(Handle);
             Opacity = 0;
-            Show();
+            //Show();
             BeginAnimation(OpacityProperty, _winShow);
         }
     }
