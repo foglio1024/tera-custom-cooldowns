@@ -169,14 +169,15 @@ namespace TCC.Controls
         {
             _isDragging = true;
             FocusManager.FocusTimer.Enabled = false;
-            WindowManager.IsFocused = true;
+            WindowManager.ForegroundManager.ForceVisible = true;
+            WindowManager.ForegroundManager.ForceUndim = true;
         }
 
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
-            //var item = e.DragablzItem.DataContext;
             if (CooldownWindowViewModel.Instance.MainSkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
+                if (_mainOrder == null) return;
                 for (int j = 0; j < CooldownWindowViewModel.Instance.MainSkills.Count; j++)
                 {
                     var newIndex = _mainOrder.ToList().IndexOf(CooldownWindowViewModel.Instance.MainSkills[j]);
@@ -186,6 +187,7 @@ namespace TCC.Controls
             }
             else if (CooldownWindowViewModel.Instance.SecondarySkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
+                if (_secondaryOrder == null) return;
                 for (int i = 0; i < CooldownWindowViewModel.Instance.SecondarySkills.Count; i++)
                 {
                     var newIndex = _secondaryOrder.ToList().IndexOf(CooldownWindowViewModel.Instance.SecondarySkills[i]);
@@ -193,9 +195,10 @@ namespace TCC.Controls
                     CooldownWindowViewModel.Instance.SecondarySkills.Move(oldIndex, newIndex);
                 }
             }
-
             CooldownWindowViewModel.Instance.Save();
             FocusManager.FocusTimer.Enabled = true;
+            WindowManager.ForegroundManager.ForceVisible = false;
+            WindowManager.ForegroundManager.ForceUndim = false;
             _isDragging = false;
         }
 
@@ -290,7 +293,7 @@ namespace TCC.Controls
                 {
                     if (!target.Any(x => x.Skill.IconName == sk.IconName))
                     {
-                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data,  false));
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, false));
                     }
                 }
                 else if (dropInfo.Data is Abnormality ab)
