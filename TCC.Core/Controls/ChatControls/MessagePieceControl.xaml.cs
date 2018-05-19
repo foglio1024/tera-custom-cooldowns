@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using TCC.Data;
+using TCC.Windows;
 
 namespace TCC.Controls.ChatControls
 {
@@ -31,7 +33,14 @@ namespace TCC.Controls.ChatControls
                     Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Url:
-                    Process.Start(_context.Text);
+                    try
+                    {
+                        Process.Start(_context.Text);
+                    }
+                    catch 
+                    {
+                        TccMessageBox.Show("Unable to open URL.", MessageBoxType.Error);
+                    }
                     break;
                 case MessagePieceType.Point_of_interest:
                     Proxy.ChatLinkData(_context.RawLink);
