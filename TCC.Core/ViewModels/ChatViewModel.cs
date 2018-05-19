@@ -25,10 +25,10 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-        public bool IsTeraOnTop
-        {
-            get => WindowManager.IsTccVisible;
-        }
+        //public bool IsTeraOnTop
+        //{
+        //    get => WindowManager.IsTccVisible;
+        //}
         public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs
         {
             get => _tabVMs;
@@ -95,14 +95,14 @@ namespace TCC.ViewModels
         public ChatViewModel()
         {
             TabVMs = new SynchronizedObservableCollection<HeaderedItemViewModel>();
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC($"IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    //WindowManager.ChatWindow.RefreshTopmost(); //TODO: handle event in ChatWindow.xaml.cs
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+                //NPC($"IsTeraOnTop");
+                //if (IsTeraOnTop)
+                //{
+                    ////WindowManager.ChatWindow.RefreshTopmost(); //TODO: handle event in ChatWindow.xaml.cs
+                //}
+            //};
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             TabVMs.CollectionChanged += TabVMs_CollectionChanged;
             //LoadTabs(SettingsManager.ParseTabsSettings());

@@ -23,7 +23,7 @@ namespace TCC.ViewModels
         public event Action SettingsUpdated;
 
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
-        public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
+        //public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
         public SynchronizedObservableCollection<User> Members { get; }
         public ICollectionViewLiveShaping Dps { get; }
         public ICollectionViewLiveShaping Tanks { get; }
@@ -52,14 +52,14 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
             _scale = SettingsManager.GroupWindowSettings.Scale;
 
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC("IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    WindowManager.GroupWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+            //    NPC("IsTeraOnTop");
+            //    if (IsTeraOnTop)
+            //    {
+            //        WindowManager.GroupWindow.RefreshTopmost();
+            //    }
+            //};
 
             Members = new SynchronizedObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;

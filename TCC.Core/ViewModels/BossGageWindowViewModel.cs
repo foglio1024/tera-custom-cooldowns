@@ -38,7 +38,7 @@ namespace TCC.ViewModels
             _holdedDragons.Clear();
         }
 
-        public bool IsTeraOnTop => WindowManager.IsTccVisible;
+        //public bool IsTeraOnTop => WindowManager.IsTccVisible;
 
         public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible);
 
@@ -131,14 +131,14 @@ namespace TCC.ViewModels
             _npcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
 
             GuildIds = new Dictionary<ulong, uint>();
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC(nameof(IsTeraOnTop));
-                if (IsTeraOnTop)
-                {
-                    WindowManager.BossWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+                //NPC(nameof(IsTeraOnTop));
+                //if (IsTeraOnTop)
+                //{
+                    //WindowManager.BossWindow.RefreshTopmost();
+                //}
+            //};
 
         }
 

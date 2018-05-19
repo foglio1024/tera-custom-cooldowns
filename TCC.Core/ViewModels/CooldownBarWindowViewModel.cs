@@ -20,7 +20,7 @@ namespace TCC.ViewModels
     {
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
-        public bool IsTeraOnTop => WindowManager.IsTccVisible;
+        //public bool IsTeraOnTop => WindowManager.IsTccVisible;
         public bool ShowItems => SettingsManager.ShowItemsCooldown;
 
         public event Action SkillsLoaded;
@@ -530,14 +530,14 @@ namespace TCC.ViewModels
             ItemSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             SkillChoiceList = new SynchronizedObservableCollection<Skill>(_dispatcher);
 
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC("IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    WindowManager.CooldownWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+                //NPC("IsTeraOnTop");
+                //if (IsTeraOnTop)
+                //{
+                    //WindowManager.CooldownWindow.RefreshTopmost();
+                //}
+            //};
             SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
             ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new string[] { });
             AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new string[] { });

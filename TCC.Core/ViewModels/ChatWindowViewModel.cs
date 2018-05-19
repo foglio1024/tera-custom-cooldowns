@@ -243,7 +243,7 @@ namespace TCC.ViewModels
             if (ChatWindows.Count == 0)
             {
                 var w = new ChatWindow(
-                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1,false, true)
+                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1,false, true, false)
                     );
                 SettingsManager.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 var m = new ChatViewModel();
@@ -252,14 +252,14 @@ namespace TCC.ViewModels
                 m.LoadTabs();
                 if(SettingsManager.ChatEnabled) w.Show();
             }
-
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                if (WindowManager.IsTccVisible)
-                {
-                    ChatWindows.ToList().ForEach(w => w.RefreshTopmost());
-                }
-            };
+             
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+            //    if (WindowManager.IsTccVisible)
+            //    {
+            //        ChatWindows.ToList().ForEach(w => w.RefreshTopmost());
+            //    }
+            //};
 
         }
 
@@ -380,7 +380,7 @@ namespace TCC.ViewModels
         {
             foreach (var chatWindow in ChatWindows)
             {
-                chatWindow.TempShow();
+                //chatWindow.TempShow();
             }
         }
 
@@ -398,7 +398,7 @@ namespace TCC.ViewModels
             LastSource = Window.GetWindow(source) as ChatWindow;
             var model = new ChatViewModel();
             var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
-                1, false, 1, false, true), model);
+                1, false, 1, false, true, false), model);
             ChatWindowManager.Instance.ChatWindows.Add(view);
             return new NewTabHost<Window>(view, view.TabControl);
 

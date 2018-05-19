@@ -16,18 +16,18 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _scale = SettingsManager.ClassWindowSettings.Scale;
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC("IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    WindowManager.ClassWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+                //NPC("IsTeraOnTop");
+                //if (IsTeraOnTop)
+                //{
+                    //WindowManager.ClassWindow.RefreshTopmost();
+                //}
+            //};
 
             _dispatcher = Dispatcher.CurrentDispatcher;
         }
-        public bool IsTeraOnTop => WindowManager.IsTccVisible;
+        //public bool IsTeraOnTop => WindowManager.IsTccVisible;
         private Class _currentClass = Class.None;
         public Class CurrentClass
         {
