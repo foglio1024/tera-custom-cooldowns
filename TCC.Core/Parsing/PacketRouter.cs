@@ -210,6 +210,7 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!SettingsManager.StatSent) App.SendUsageStat();
             SettingsManager.LastRegion = Language;
@@ -219,7 +220,6 @@ namespace TCC.Parsing
             CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
-            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             ChatWindowManager.Instance.SetMgButtonVis();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
