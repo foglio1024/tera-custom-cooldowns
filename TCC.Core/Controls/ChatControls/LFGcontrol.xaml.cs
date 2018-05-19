@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -35,6 +37,13 @@ namespace TCC.Controls.ChatControls
 
         private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (SettingsManager.LfgEnabled)
+            {
+                Proxy.RequestLfgList();
+                Task.Delay(1000).ContinueWith(t => 
+                WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
+                    );
+            }
             Proxy.RequestPartyInfo(_dc.Id);
             ChatWindowManager.Instance.LastClickedLfg = _dc;
         }
