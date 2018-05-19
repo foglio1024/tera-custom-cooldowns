@@ -23,11 +23,12 @@ namespace TCC
         private bool _autoDim;
         private double _dimOpacity;
         private bool _showAlways;
-        //private bool _allowTransparency;
         private bool _enabled;
+        private bool _allowOffScreen;
 
-        public event Action NotifyEnableWindow;
-        public event Action NotifyWindowSafeClose;
+        public event Action EnabledChanged;
+        public event Action ClickThruModeChanged;
+        public event Action VisibilityChanged;
 
         public double X
         {
@@ -72,8 +73,8 @@ namespace TCC
             {
                 if (_visible == value) return;
                 _visible = value;
-                //Console.WriteLine($"Visible changed to {value}");
                 NPC(nameof(Visible));
+                VisibilityChanged?.Invoke();
             }
         }
         public ClickThruMode ClickThruMode
@@ -83,6 +84,7 @@ namespace TCC
             {
                 _clickThruMode = value;
                 NPC(nameof(ClickThruMode));
+                ClickThruModeChanged?.Invoke();
             }
         }
         public double Scale
@@ -102,6 +104,7 @@ namespace TCC
             {
                 _autoDim = value;
                 NPC(nameof(AutoDim));
+                WindowManager.ForegroundManager.RefreshDim();
             }
         }
         public double DimOpacity
@@ -111,13 +114,8 @@ namespace TCC
             {
                 if (_dimOpacity == value) return;
                 _dimOpacity = value;
-                //if (WindowManager.IsTccDim)
-                //{
-                //    WindowManager.SkillsEnded = false;
-                //    WindowManager.SkillsEnded = true;
-                //}
                 NPC(nameof(DimOpacity));
-                WindowManager.RefreshDim();
+                WindowManager.ForegroundManager.RefreshDim();
             }
         }
         public bool ShowAlways
@@ -129,15 +127,6 @@ namespace TCC
                 NPC(nameof(ShowAlways));
             }
         }
-        //public bool AllowTransparency
-        //{
-        //    get => _allowTransparency;
-        //    set
-        //    {
-        //        _allowTransparency = value;
-        //        NPC(nameof(AllowTransparency));
-        //    }
-        //}
         public bool Enabled
         {
             get => _enabled;
@@ -155,7 +144,7 @@ namespace TCC
                 //{
                 //    Visible = false;
                 //    _enabled = false;
-                //    NotifyWindowSafeClose?.Invoke();
+                //    SafeClosed?.Invoke();
                 //}
                 //else
                 //{
@@ -168,19 +157,25 @@ namespace TCC
                 _enabled = value;
                 if (_enabled)
                 {
-                    NotifyEnableWindow?.Invoke();
                     Visible = true;
                 }
-                else
-                {
-                    NotifyWindowSafeClose?.Invoke();
-                }
                 MessageFactory.Update();
+                EnabledChanged?.Invoke();
                 NPC(nameof(Enabled));
             }
         }
+        public bool AllowOffScreen
+        {
+            get => _allowOffScreen;
+            set
+            {
+                if(_allowOffScreen == value) return;
+                _allowOffScreen = value;
+                NPC();
+            }
+        }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled)
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _x = x;
@@ -193,8 +188,8 @@ namespace TCC
             _autoDim = autoDim;
             _dimOpacity = dimOpacity;
             _showAlways = showAlways;
-            //_allowTransparency = allowTransparency;
             _enabled = enabled;
+            _allowOffScreen = allowOffscreen;
         }
 
         public virtual XElement ToXElement(string name)
@@ -211,8 +206,8 @@ namespace TCC
             xe.Add(new XAttribute(nameof(AutoDim), AutoDim));
             xe.Add(new XAttribute(nameof(DimOpacity), DimOpacity));
             xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
-            //xe.Add(new XAttribute(nameof(AllowTransparency), AllowTransparency));
             xe.Add(new XAttribute(nameof(Enabled), Enabled));
+            xe.Add(new XAttribute(nameof(AllowOffScreen), AllowOffScreen));
             return xe;
         }
     }
@@ -222,22 +217,22 @@ namespace TCC
         public double BackgroundOpacity { get; set; } = .3;
         public List<Tab> Tabs { get; set; }
         public bool LfgOn { get; set; } = true;
-        public new bool Enabled
-        {
-            get => SettingsManager.ChatEnabled;
-            set
-            {
-                if (SettingsManager.ChatEnabled == value) return;
-                SettingsManager.ChatEnabled = value;
-                base.Enabled = value;
-                if(!value) ChatWindowManager.Instance.CloseAllWindows();
-                else ChatWindowManager.Instance.InitWindows();
-                NPC();
-                SettingsManager.SaveSettings();
-            }
-        }
+        //public new bool Enabled
+        //{
+        //    get => SettingsManager.ChatEnabled;
+        //    set
+        //    {
+        //        if (SettingsManager.ChatEnabled == value) return;
+        //        SettingsManager.ChatEnabled = value;
+        //        base.Enabled = value;
+        //        if(!value) ChatWindowManager.Instance.CloseAllWindows();
+        //        else ChatWindowManager.Instance.InitWindows();
+        //        NPC();
+        //        SettingsManager.SaveSettings();
+        //    }
+        //}
 
-        public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways,  enabled)
+        public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways,  enabled, allowOffscreen)
         {
             Tabs = new List<Tab>();
         }
