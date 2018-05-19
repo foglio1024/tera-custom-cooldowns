@@ -22,26 +22,20 @@ namespace TCC.Windows
 
         private static TccMessageBox _messageBox;
         private static MessageBoxResult _result = MessageBoxResult.No;
-        public static MessageBoxResult Show
-        (string caption, string msg, MessageBoxType type)
+        public static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
         {
             switch (type)
             {
                 case MessageBoxType.ConfirmationWithYesNo:
-                    return Show(caption, msg, MessageBoxButton.YesNo,
-                    MessageBoxImage.Question);
+                    return Show(caption, msg, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 case MessageBoxType.ConfirmationWithYesNoCancel:
-                    return Show(caption, msg, MessageBoxButton.YesNoCancel,
-                    MessageBoxImage.Question);
+                    return Show(caption, msg, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 case MessageBoxType.Information:
-                    return Show(caption, msg, MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Information);
                 case MessageBoxType.Error:
-                    return Show(caption, msg, MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Error);
                 case MessageBoxType.Warning:
-                    return Show(caption, msg, MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
+                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Warning);
                 default:
                     return MessageBoxResult.No;
             }
@@ -52,30 +46,27 @@ namespace TCC.Windows
         }
         public static MessageBoxResult Show(string msg)
         {
-            return Show(string.Empty, msg,
-            MessageBoxButton.OK, MessageBoxImage.None);
+            return Show(string.Empty, msg, MessageBoxButton.OK, MessageBoxImage.None);
         }
-        public static MessageBoxResult Show
-        (string caption, string text)
+        public static MessageBoxResult Show (string caption, string text)
         {
-            return Show(caption, text,
-            MessageBoxButton.OK, MessageBoxImage.None);
+            return Show(caption, text, MessageBoxButton.OK, MessageBoxImage.None);
         }
         public static MessageBoxResult Show
         (string caption, string text, MessageBoxButton button)
         {
-            return Show(caption, text, button,
-            MessageBoxImage.None);
+            return Show(caption, text, button, MessageBoxImage.None);
         }
-        public static MessageBoxResult Show
-        (string caption, string text,
-        MessageBoxButton button, MessageBoxImage image)
+        public static MessageBoxResult Show (string caption, string text, MessageBoxButton button, MessageBoxImage image)
         {
-            _messageBox.TxtMsg.Text = text;
-            _messageBox.MessageTitle.Text = caption;
-            SetVisibilityOfButtons(button);
-            SetImageOfMessageBox(image);
-            _messageBox.ShowDialog();
+            _messageBox.Dispatcher.Invoke(() =>
+            {
+                _messageBox.TxtMsg.Text = text;
+                _messageBox.MessageTitle.Text = caption;
+                SetVisibilityOfButtons(button);
+                SetImageOfMessageBox(image);
+                _messageBox.ShowDialog();
+            });
             return _result;
         }
         private static void SetVisibilityOfButtons(MessageBoxButton button)
