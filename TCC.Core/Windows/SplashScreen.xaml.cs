@@ -18,10 +18,13 @@ namespace TCC.Windows
         public SplashScreen()
         {
             InitializeComponent();
-            var r = new Random();
-
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
-            img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            try
+            {
+                var r = new Random();
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
+                img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            }
+            catch { }
         }
 
         public void SetText(string t)
