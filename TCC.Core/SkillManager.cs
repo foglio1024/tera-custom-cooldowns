@@ -7,6 +7,8 @@ namespace TCC
 {
     public static class SkillManager
     {
+        public static event Action SkillStarted;
+
         public const int LongSkillTreshold = 40000;
         public const int Ending = 120;
 
@@ -35,6 +37,7 @@ namespace TCC
             {
                 CooldownWindowViewModel.Instance.AddOrRefresh(skillCooldown);
             }
+            App.BaseDispatcher.Invoke(() => SkillStarted?.Invoke());
         }
 
 

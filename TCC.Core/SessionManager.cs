@@ -23,7 +23,9 @@ namespace TCC
             {
                 if (_loadingScreen == value) return;
                 _loadingScreen = value;
-                WindowManager.NotifyVisibilityChanged();
+                //WindowManager.NotifyVisibilityChanged();
+                App.BaseDispatcher.Invoke(() => LoadingScreenChanged?.Invoke());
+
             }
         }
         public static bool Encounter
@@ -33,11 +35,12 @@ namespace TCC
             {
                 if (_encounter == value) return;
                 _encounter = value;
-                if (!_encounter)
-                {
-                    WindowManager.SkillsEnded = true;
-                }
-                WindowManager.NotifyDimChanged();
+                //if (!_encounter)
+                //{
+                //    WindowManager.SkillsEnded = true;
+                //}
+                //WindowManager.NotifyDimChanged();
+                App.BaseDispatcher.Invoke(() => EncounterChanged?.Invoke());
             }
         }
         public static bool Logged
@@ -47,7 +50,8 @@ namespace TCC
             {
                 if (_logged == value) return;
                 _logged = value;
-                WindowManager.NotifyVisibilityChanged();
+                //WindowManager.NotifyVisibilityChanged();
+                App.BaseDispatcher.Invoke(() =>  LoggedChanged?.Invoke());
             }
         }
         public static bool IsElite { get; set; }
@@ -65,6 +69,10 @@ namespace TCC
         }
 
         public static event Action ChatModeChanged;
+        public static event Action EncounterChanged;
+        public static event Action LoadingScreenChanged;
+        public static event Action LoggedChanged;
+
         public static readonly Player CurrentPlayer = new Player();
 
         public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
