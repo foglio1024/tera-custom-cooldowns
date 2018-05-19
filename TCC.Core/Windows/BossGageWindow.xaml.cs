@@ -27,15 +27,15 @@ namespace TCC.Windows
         }
     }
 
-    public partial class BossWindow : TccWindow
+    public partial class BossWindow
     {
 
         public BossWindow()
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContentRef = content;
-            InitWindow(SettingsManager.BossWindowSettings, ignoreSize: true);
+            MainContent = content;
+            Init(SettingsManager.BossWindowSettings, ignoreSize: true);
 
 
         }

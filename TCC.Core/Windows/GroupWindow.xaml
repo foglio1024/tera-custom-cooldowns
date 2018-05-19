@@ -1,4 +1,4 @@
-﻿<w:TccWindow x:Class="TCC.Windows.GroupWindow"
+﻿<w:TccWidget x:Class="TCC.Windows.GroupWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,6 @@
              mc:Ignorable="d"
              Title="GroupWindow"
              Style="{StaticResource BaseWindowStyle}"
-             Loaded="TccWindow_Loaded"
              MouseLeftButtonDown="Drag"
              UseLayoutRounding="True"
              MouseEnter="GroupWindow_OnMouseEnter"
@@ -150,6 +149,6 @@
             </ItemsControl>
         </Grid>
         <c:WindowButtons WindowName="Group window" x:Name="Buttons" Grid.Row="1"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>
-</w:TccWindow>
+</w:TccWidget>

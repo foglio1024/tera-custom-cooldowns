@@ -1,4 +1,4 @@
-﻿<w:TccWindow x:Class="TCC.Windows.CharacterWindow"
+﻿<w:TccWidget x:Class="TCC.Windows.CharacterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
         Style="{StaticResource BaseWindowStyle}"
         MouseLeftButtonDown="Drag"
         >
-    <w:TccWindow.Resources>
+    <w:TccWidget.Resources>
         <Style x:Key="HpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource Styles.DefaultText}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -53,10 +53,10 @@
         <converters:StaminaBarColorConverter x:Key="StaminaColConv"/>
         <converters:FactorFromValuesConverter x:Key="FactorFromValConv"/>
         <converters:ClassToStaminaLabelConverter x:Key="StaminaLabelConv"/>
-    </w:TccWindow.Resources>
-    <w:TccWindow.DataContext>
+    </w:TccWidget.Resources>
+    <w:TccWidget.DataContext>
         <vm:CharacterWindowViewModel/>
-    </w:TccWindow.DataContext>
+    </w:TccWidget.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -240,6 +240,6 @@
                 </Border>
             </Grid>
         </Grid>
-        <c:WindowButtons WindowName="Character window" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />
+        <c:WindowButtons WindowName="Character window" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>
-</w:TccWindow>
+</w:TccWidget>

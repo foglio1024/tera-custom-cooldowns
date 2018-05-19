@@ -2,14 +2,14 @@
 
 namespace TCC.Windows
 {
-    public partial class CooldownWindow : TccWindow
+    public partial class CooldownWindow 
     {
         public CooldownWindow()
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContentRef = content;
-            InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
+            MainContent = content;
+            Init(SettingsManager.CooldownWindowSettings, ignoreSize: true);
 
         }
 

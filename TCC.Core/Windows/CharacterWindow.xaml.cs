@@ -6,14 +6,14 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per HPbar.xaml
     /// </summary>
-    public partial class CharacterWindow : TccWindow
+    public partial class CharacterWindow 
     {
         public CharacterWindow()
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContentRef = content;
-            InitWindow(SettingsManager.CharacterWindowSettings, ignoreSize: true);
+            MainContent = content;
+            Init(SettingsManager.CharacterWindowSettings, ignoreSize: true);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
