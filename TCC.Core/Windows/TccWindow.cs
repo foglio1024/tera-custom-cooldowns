@@ -67,6 +67,7 @@ namespace TCC.Windows
 
             WindowManager.ForegroundManager.VisibilityChanged += OnVisibilityChanged;
             WindowManager.ForegroundManager.DimChanged += OnDimChanged;
+            FocusManager.FocusTimer.Elapsed += OnFocusTick;
 
             if(_settings.Enabled) Show();
             OnClickThruModeChanged();
@@ -89,6 +90,11 @@ namespace TCC.Windows
             MouseEnter += (_, __) => ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
+        }
+
+        private void OnFocusTick(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if(WindowManager.ForegroundManager.Visible) RefreshTopmost();
         }
 
         private void OnWindowVisibilityChanged()
