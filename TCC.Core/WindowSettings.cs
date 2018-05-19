@@ -125,6 +125,7 @@ namespace TCC
             {
                 _showAlways = value;
                 NPC(nameof(ShowAlways));
+                WindowManager.ForegroundManager.RefreshVisible();
             }
         }
         public bool Enabled
