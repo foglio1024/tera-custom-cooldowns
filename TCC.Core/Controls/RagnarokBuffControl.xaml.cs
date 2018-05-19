@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -22,9 +23,21 @@ namespace TCC.Controls
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (DurationCooldownIndicator)DataContext;
-            _context.Buff.PropertyChanged += RagnarokBuff_PropertyChanged;
+            _context.Buff.Started += OnRagnarokStarted;
             ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.PropertyChanged += ST_PropertyChanged;
         }
+
+        private void OnRagnarokStarted(CooldownMode mode)
+        {
+            Running = true;
+            var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
+            an.Completed += (s, ev) =>
+            {
+                Running = false;
+            };
+            ExternalArc.BeginAnimation(Arc.EndAngleProperty, an);
+        }
+
         public string SecondsText
         {
             get => ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Val.ToString();
@@ -34,15 +47,8 @@ namespace TCC.Controls
         {
             if (e.PropertyName == "Val")
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SecondsText"));
-                if(ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Factor == 1)
-                {
-                    IconGlow.Opacity = 1;
-                }
-                else
-                {
-                    IconGlow.Opacity = 0;
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecondsText)));
+                IconGlow.Opacity = ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Factor == 1 ? 1 : 0;
                 if (Running) return;
                 var an = new DoubleAnimation((1-ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Factor) * 359.9, TimeSpan.FromMilliseconds(50));
                 InternalArc.BeginAnimation(Arc.EndAngleProperty, an);
@@ -72,21 +78,6 @@ namespace TCC.Controls
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RagnarokBuff_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Start")
-            {
-                Running = true;
-                var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
-                an.Completed += (s, ev) =>
-                {
-                    Running = false;
-                };
-                ExternalArc.BeginAnimation(Arc.EndAngleProperty, an);
-            }
-        }
-
 
     }
 }
