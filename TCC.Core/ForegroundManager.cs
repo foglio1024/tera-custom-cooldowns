@@ -43,6 +43,7 @@ namespace TCC
 
         private void OnSkillStarted()
         {
+            _dimTimer.Stop();
             _dimTimer.Start();
             NotifyDimChanged();
         }
