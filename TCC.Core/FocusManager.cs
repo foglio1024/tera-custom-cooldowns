@@ -69,6 +69,7 @@ namespace TCC
             if (GetForegroundWindow() == FindMeterWindow() && FindMeterWindow() != IntPtr.Zero) return true;
             if (GetForegroundWindow() == WindowManager.Settings.Handle && WindowManager.Settings.Handle != IntPtr.Zero) return true;
             if (GetForegroundWindow() == WindowManager.SkillConfigWindow.Handle && WindowManager.SkillConfigWindow.Handle != IntPtr.Zero) return true;
+            if (GetForegroundWindow() == WindowManager.LfgListWindow.Handle && WindowManager.LfgListWindow.Handle != IntPtr.Zero) return true;
             return false;
         }
 
