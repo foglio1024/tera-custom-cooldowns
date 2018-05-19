@@ -21,8 +21,8 @@ namespace TCC.Data
         private readonly DispatcherTimer _secondsTimer;
 
         private CooldownType _cooldownType;
-        private ulong _seconds;
         private CooldownMode _currentMode;
+        private ulong _seconds;
         private bool _flashOnAvailable;
 
         // properties
