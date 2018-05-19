@@ -50,7 +50,7 @@ namespace TCC.Controls
             }
         }
 
-        private Npc Npc => (Npc)DataContext;
+        private Npc Npc => DataContext as Npc;
         private float _maxHp;
         private float _currentHp;
         private bool _enraged;
@@ -235,9 +235,8 @@ namespace TCC.Controls
 
         private void AnimateHp()
         {
-            // ReSharper disable once IsExpressionAlwaysTrue
-            if (!(Npc is Npc)) return; //weird but could happen
-            _hpAnim.To = Npc.CurrentFactor;
+            if (Npc == null) return; //weird but could happen 
+            _hpAnim.To = Npc.CurrentFactor; //still crashing here ffs
             DotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             HpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
         }
