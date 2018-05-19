@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -26,6 +27,9 @@ namespace TCC.Windows
     /// </summary>
     public partial class SkillConfigWindow : Window
     {
+
+        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
+
         public SkillConfigWindow()
         {
             InitializeComponent();
