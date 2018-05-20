@@ -38,9 +38,9 @@
             <!--Info border-->
             <Grid Grid.Column="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -78,41 +78,39 @@
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1"
-                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="46"
+                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="Auto"
                         BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
                         Visibility="{Binding Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
-
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
-                    <StackPanel >
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
-                                ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="#fff" Margin="3 3" Width="15" Visibility="{Binding ShowLeaveButton}" />
-                        </Button>
-
+                    <StackPanel Orientation="Horizontal">
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="SettingsButton"
                                 ToolTip="Configure buffs" Click="ShowAbnormalSettings" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgSettings}" Fill="#fff" Margin="3 3" Width="15"  />
+                            <Path Data="{StaticResource SvgSettings}" Fill="#fff" Margin="3 3" Width="15" Height="15" />
                         </Button>
-
+                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
+                                ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpColor}" Margin="3 3" Width="15" Height="15" Visibility="{Binding ShowLeaveButton}" />
+                        </Button>
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="2"
-                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="46"
+                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="Auto"
                         BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
                         Visibility="{Binding ShowLeaderButtons, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         x:Name="GroupButtons" VerticalAlignment="Top">
-                    <StackPanel >
+                    <StackPanel Orientation="Horizontal">
+
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" Padding="10 0"
                             ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgGift}" Fill="#fff" Margin="3 6" Width="15" />
-                        </Button>
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="DisbandButton"
-                            ToolTip="Disband" Click="DisbandButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgDisband}" Fill="#fff" Margin="3 6" Width="15" />
+                            <Path Data="{StaticResource SvgGift}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
                         </Button>
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="ResetButton"
                             ToolTip="Reset instance" Click="ResetButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgReload}" Fill="#fff" Margin="3 6 3 6" Width="15" />
+                            <Path Data="{StaticResource SvgReload}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
+                        </Button>
+                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="DisbandButton"
+                                ToolTip="Disband" Click="DisbandButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                            <Path Data="{StaticResource SvgDisband}" Fill="{StaticResource HpColor}" Margin="3 3" Width="15" Height="15"/>
                         </Button>
                     </StackPanel>
                 </Border>

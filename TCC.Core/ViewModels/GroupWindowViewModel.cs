@@ -81,6 +81,7 @@ namespace TCC.ViewModels
             NPC(nameof(ShowDetails));
             NPC(nameof(AliveCount));
             NPC(nameof(ReadyCount));
+            NPC(nameof(ShowLeaderButtons));
         }
         public void NotifySettingUpdated()
         {
@@ -119,7 +120,7 @@ namespace TCC.ViewModels
 
         public bool IsLeader(string name)
         {
-            return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
+            return Members.FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
         }
         public bool HasPowers(string name)
         {
