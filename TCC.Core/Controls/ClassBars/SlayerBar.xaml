@@ -34,7 +34,7 @@
                     CornerRadius="45"
                     Margin="-4"
                     VerticalAlignment="Stretch"/>
-            <local:BuffCooldownControl DataContext="{Binding Instance.InColdBlood}" Padding="20" Margin="-20" />
+            <local:BuffCooldownControl DataContext="{Binding InColdBlood}" Padding="20" Margin="-20" />
             <!--HP/MP-->
             <!--<UniformGrid Columns="2" 
                          HorizontalAlignment="Stretch" 
