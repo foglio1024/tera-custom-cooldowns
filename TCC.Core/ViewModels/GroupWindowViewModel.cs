@@ -320,6 +320,7 @@ namespace TCC.ViewModels
             }
 
             NPC(nameof(AmILeader));
+            NPC(nameof(ShowLeaderButtons));
         }
         public void StartRoll()
         {
