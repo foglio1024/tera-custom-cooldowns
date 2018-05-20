@@ -57,7 +57,7 @@ namespace TCC.Data
             set
             {
                 if (_message == value) return;
-                _message = value;
+                _message = value.Replace("&gt;", ">").Replace("&lt;", "<");
                 NPC();
             }
         }
