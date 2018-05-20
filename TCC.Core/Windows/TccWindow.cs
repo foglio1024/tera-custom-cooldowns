@@ -29,7 +29,7 @@ namespace TCC.Windows
         protected UIElement MainContent;
 
         public WindowSettings WindowSettings => _settings;
-        public IntPtr Handle => new WindowInteropHelper(this).Handle; 
+        public IntPtr Handle => new WindowInteropHelper(this).Handle;
 
         public TccWidget()
         {
@@ -60,8 +60,8 @@ namespace TCC.Windows
             Loaded += OnLoaded;
             Closing += (_, args) =>
             {
-                args.Cancel = true;
-                Hide();
+                //args.Cancel = true;
+                //Hide();
             };
             SizeChanged += OnSizeChanged;
 
@@ -69,7 +69,7 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.DimChanged += OnDimChanged;
             FocusManager.FocusTimer.Elapsed += OnFocusTick;
 
-            if(_settings.Enabled) Show();
+            if (_settings.Enabled) Show();
             OnClickThruModeChanged();
             OnVisibilityChanged();
             OnWindowVisibilityChanged();
@@ -84,8 +84,8 @@ namespace TCC.Windows
             }
             _hideButtons = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000));
             _showButtons = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150));
-            _buttonsTimer = new DispatcherTimer{Interval = TimeSpan.FromSeconds(2)};
-            _buttonsTimer.Tick +=OnButtonsTimerTick;
+            _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            _buttonsTimer.Tick += OnButtonsTimerTick;
 
             MouseEnter += (_, __) => ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             MouseLeave += (_, __) => _buttonsTimer.Start();
@@ -94,7 +94,7 @@ namespace TCC.Windows
 
         private void OnFocusTick(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if(WindowManager.ForegroundManager.Visible) RefreshTopmost();
+            if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
         }
 
         private void OnWindowVisibilityChanged()
@@ -111,7 +111,7 @@ namespace TCC.Windows
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if(!_settings.AllowOffScreen) CheckBounds();
+            if (!_settings.AllowOffScreen) CheckBounds();
             if (_ignoreSize) return;
             _settings.W = ActualWidth;
             _settings.H = ActualHeight;
@@ -193,8 +193,12 @@ namespace TCC.Windows
         }
         private void OnEnabledChanged()
         {
-            if (_settings.Enabled) Show();
-            else Hide();
+            try
+            {
+                if (_settings.Enabled) Show();
+                else Hide();
+            }
+            catch { }
         }
 
         private void AnimateContentOpacity(double opacity)
