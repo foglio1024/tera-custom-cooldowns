@@ -145,7 +145,7 @@
                     <Grid ClipToBounds="True" x:Name="KickGrid" Visibility="{Binding TooltipInfo.ShowKick, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <Ellipse Fill="{StaticResource HpColor}" RenderTransformOrigin=".5 .5" Width="10" Height="10"
                                  
-                                     x:Name="Ripple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                     x:Name="KickRipple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Ellipse.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -153,22 +153,31 @@
                                 </TransformGroup>
                             </Ellipse.RenderTransform>
                         </Ellipse>
-                        <Button Click="KickClick" 
-                            >
+                        <Button Click="KickClick"  >
                             <StackPanel Orientation="Horizontal">
                                 <Path  Data="{StaticResource SvgRemoveUser}" Fill="{StaticResource HpColor}"/>
                                 <TextBlock Text="Kick" Margin="3" x:Name="KickText"/>
                             </StackPanel>
                         </Button>
                     </Grid>
-
-                    <Button Click="AddFriendClick" Visibility="{Binding TooltipInfo.ShowAddFriend, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                        <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource SvgStar}"/>
-                            <TextBlock Text="{Binding TooltipInfo.FriendLabelText}" Margin="3"></TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button MouseEnter="MoongourdButtonMouseEnter" Margin="-1 0 -1 0" x:Name="MgButton">
+                    <Grid ClipToBounds="True" x:Name="FriendGrid" Visibility="{Binding TooltipInfo.ShowAddFriend, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                        <Ellipse Fill="{StaticResource HpColor}" RenderTransformOrigin=".5 .5" Width="10" Height="10"
+                                 x:Name="UnfriendRipple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Button Click="AddFriendClick" >
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgStar}"/>
+                                <TextBlock Text="{Binding TooltipInfo.FriendLabelText}" Margin="3"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Button Click="MoongourdClick" Margin="-1 0 -1 0" x:Name="MgButton">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -181,16 +190,27 @@
                                 <Image Source="/TCC;component/resources/images/moongourd.png" Margin="4 6 3 6"></Image>
                                 <TextBlock Text="Moongourd info" Margin="3"></TextBlock>
                             </StackPanel>
-                                <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right" 
+                            <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right" 
                                       Opacity=".5" Margin="3 10 0 10" Height="Auto" Grid.Column="1"></Path>
                         </Grid>
                     </Button>
-                    <Button Click="BlockClick">
-                        <StackPanel Orientation="Horizontal">
-                            <Path  Fill="{StaticResource HpColor}" Data="{StaticResource SvgBlock}"/>
-                            <TextBlock Text="{Binding TooltipInfo.BlockLabelText}" Margin="3"></TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <Grid ClipToBounds="True" x:Name="BlockGrid">
+                        <Ellipse Fill="{StaticResource HpColor}" RenderTransformOrigin=".5 .5" Width="10" Height="10"
+                                 x:Name="BlockRipple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Button Click="BlockClick">
+                            <StackPanel Orientation="Horizontal">
+                                <Path  Fill="{StaticResource HpColor}" Data="{StaticResource SvgBlock}"/>
+                                <TextBlock Text="{Binding TooltipInfo.BlockLabelText}" Margin="3"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                 </StackPanel>
             </Grid>
             <Border.Effect>
