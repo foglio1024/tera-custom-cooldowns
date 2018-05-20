@@ -27,8 +27,11 @@ namespace TCC.ViewModels
 
         internal void CloseTooltip()
         {
-            if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
-            ChatWindows[0].CloseTooltip();
+            ChatWindows[0].Dispatcher.Invoke(() =>
+            {
+                if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
+                ChatWindows[0].CloseTooltip();
+            });
         }
 
         public List<SimpleUser> Friends;
@@ -406,7 +409,8 @@ namespace TCC.ViewModels
         public TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window)
         {
             ChatWindowManager.Instance.ChatWindows.Remove(window as ChatWindow);
-            return TabEmptiedResponse.CloseWindowOrLayoutBranch;
+            window.Close();
+            return TabEmptiedResponse.DoNothing;
         }
     }
 }
