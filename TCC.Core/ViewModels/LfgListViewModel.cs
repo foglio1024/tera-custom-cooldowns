@@ -40,17 +40,21 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-        public bool AmIinLfg => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
+        public bool AmIinLfg => _dispatcher.Invoke(() => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
                                                                      || listing.LeaderName == SessionManager.CurrentPlayer.Name
-                                                                     || listing.Players.ToSyncArray().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)));
+                                                                     || listing.Players.ToSyncArray().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
+                                                                     || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId))));
         public void NotifyMyLfg()
         {
             NPC(nameof(AmIinLfg));
             NPC(nameof(MyLfg));
+            MyLfg?.NotifyMyLfg();
         }
 
-        public Listing MyLfg => Listings.FirstOrDefault(x => x.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) ||
-                                                             x.LeaderId == SessionManager.CurrentPlayer.PlayerId);
+        public Listing MyLfg => _dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
+                                                                   || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
+                                                                   || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId)
+                                                             ));
         public LfgListViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;

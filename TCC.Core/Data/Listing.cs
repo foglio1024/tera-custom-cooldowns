@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
+using TCC.ViewModels;
 
 namespace TCC.Data
 {
@@ -82,8 +83,9 @@ namespace TCC.Data
             }
         }
 
-        public bool IsMyLfg => Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
-                               LeaderId == SessionManager.CurrentPlayer.PlayerId;
+        public bool IsMyLfg => _dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
+                               LeaderId == SessionManager.CurrentPlayer.PlayerId ||
+                                GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == LeaderId));
         public SynchronizedObservableCollection<User> Players
         {
             get => _players;
@@ -118,6 +120,10 @@ namespace TCC.Data
             }
         }
 
+        public void NotifyMyLfg()
+        {
+            NPC(nameof(IsMyLfg));
+        }
 
         public Listing()
         {
