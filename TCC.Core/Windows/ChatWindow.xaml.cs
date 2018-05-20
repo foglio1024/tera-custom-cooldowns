@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Shell;
 using Dragablz;
 using TCC.Annotations;
 using TCC.Controls.ChatControls;
@@ -43,7 +44,12 @@ namespace TCC.Windows
 
         private void OnDragCompleted(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
-            if (e.NewValue) return;
+            if (e.NewValue)
+            {
+                FocusManager.FocusTimer.Enabled = false;
+                return;
+            }
+
             var newOrder = TabControl.GetOrderedHeaders();
             var old = new HeaderedItemViewModel[VM.TabVMs.Count];
             VM.TabVMs.CopyTo(old, 0);
@@ -130,11 +136,12 @@ namespace TCC.Windows
             ChatWindowManager.Instance.SetPaused(!_bottom);
 
         }
+
         public void OpenTooltip()
         {
             Dispatcher.Invoke(() =>
             {
-                FocusManager.Running = false;
+                FocusManager.FocusTimer.Enabled = false;
                 if (PlayerInfo.IsOpen) CloseTooltip();
                 ChatWindowManager.Instance.TooltipInfo.Refresh();
                 PlayerInfo.IsOpen = true;
@@ -145,7 +152,7 @@ namespace TCC.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                FocusManager.Running = true;
+                FocusManager.FocusTimer.Enabled = true;
                 PlayerInfo.IsOpen = false;
             });
         }
@@ -275,7 +282,21 @@ namespace TCC.Windows
 
         private void ChatWindow_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
+            var ws = App.Current.Windows;
+
+            foreach (Window w in ws)
+            {
+                if (w is ChatWindow cw)
+                {
+                    if (cw.VM.TabVMs.Count == 0)
+                    {
+                        ChatWindowManager.Instance.ChatWindows.Remove(cw);
+                        cw.Close();
+                    }
+                }
+            }
             UpdateSettings();
+            if (!FocusManager.FocusTimer.Enabled) FocusManager.FocusTimer.Enabled = true;
         }
 
         private void ChatWindow_OnDragLeave(object sender, DragEventArgs e)
@@ -299,6 +320,11 @@ namespace TCC.Windows
 
         }
 
+        private new void Drag(object sender, MouseButtonEventArgs e)
+        {
+            //needed to keep windowchrome, no idea why
+            return;
+        }
     }
 
 }
