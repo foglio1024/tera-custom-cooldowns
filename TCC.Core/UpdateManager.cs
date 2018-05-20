@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using System.Threading;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC
@@ -145,11 +146,11 @@ namespace TCC
         {
             checkTimer = new System.Timers.Timer(60 * 10 * 1000);
             checkTimer.Elapsed += CheckTimer_Elapsed;
+            checkTimer.Start();
         }
 
         private static void CheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            //TODO check for update an warn via notification
             checkTimer.Stop();
             CheckAppVersionPeriodic();
             checkTimer.Start();
@@ -178,7 +179,7 @@ namespace TCC
                             if (v > Assembly.GetExecutingAssembly().GetName().Version)
                             {
                                 ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
-                                WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!");
+                                WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                             }
                         }
                     }
