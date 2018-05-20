@@ -152,8 +152,7 @@ namespace TCC
         public static void Init()
         {
             ForegroundManager = new ForegroundManager();
-            FocusManager.FocusTimer = new Timer(1000);
-            FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
+            FocusManager.Init();
             LoadWindows();
             FloatingButton = new FloatingButtonWindow();
             FloatingButton.Show();
@@ -467,24 +466,6 @@ namespace TCC
             //ClassWindow.TempShow();
             //GroupWindow.TempShow();
             //ChatWindowManager.Instance.TempShow();
-        }
-
-        public static  void SendString(string s)
-        {
-            var teraWindow = FocusManager.FindTeraWindow();
-            if (teraWindow == IntPtr.Zero) { return; }
-
-            PasteString(teraWindow, s);
-
-        }
-        private static void PasteString(IntPtr hWnd, string s)
-        {
-            Thread.Sleep(100);
-            foreach (var character in s)
-            {
-                if (!FocusManager.PostMessage(hWnd, FocusManager.WM_CHAR, character, 0)) { throw new Win32Exception(); }
-                Thread.Sleep(1);
-            }
         }
     }
 }

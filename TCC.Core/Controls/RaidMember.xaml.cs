@@ -121,12 +121,12 @@ namespace TCC.Controls
         }
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
         {
-            FocusManager.Running = false;
+            FocusManager.FocusTimer.Enabled = false;
         }
 
         private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
         {
-            FocusManager.Running = true;
+            FocusManager.FocusTimer.Enabled = true;
         }
 
     }

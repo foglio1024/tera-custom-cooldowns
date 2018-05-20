@@ -105,7 +105,7 @@ namespace TCC
         {
             WindowManager.FloatingButton.Dispatcher.Invoke(() =>
             {
-                SetHotkeys(!SessionManager.InGameChatOpen && FocusManager.IsActive());
+                SetHotkeys(!SessionManager.InGameChatOpen && FocusManager.IsActive);
             });
         }
 

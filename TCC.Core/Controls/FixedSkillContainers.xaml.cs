@@ -114,7 +114,7 @@ namespace TCC.Controls
 
         private void SelectionPopup_Opened(object sender, EventArgs e)
         {
-            FocusManager.Running = false;
+            FocusManager.FocusTimer.Enabled = false;
         }
 
         private void SelectionPopup_Closed(object sender, EventArgs e)
@@ -122,7 +122,7 @@ namespace TCC.Controls
             _mainButtonTimer.Start();
             _secButtonTimer.Start();
             ChoiceListBox.UnselectAll();
-            FocusManager.Running = true;
+            FocusManager.FocusTimer.Enabled = true;
         }
 
         private void SelectionPopup_MouseLeave(object sender, MouseEventArgs e)
