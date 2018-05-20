@@ -145,6 +145,7 @@ namespace TCC.Windows
             {
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 NewMessageTextBox.Focus();
+                VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
                 VM.Creating = true;
             }
             else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
@@ -152,13 +153,15 @@ namespace TCC.Windows
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 Proxy.RegisterLfg(VM.NewMessage, RaidSwitch.IsOn);
                 VM.Creating = false;
-                VM.NewMessage = "";
+                //VM.NewMessage = "";
+                VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
                 Task.Delay(200).ContinueWith(t => Proxy.RequestLfgList());
             }
             else
             {
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                VM.NewMessage = "";
+                //VM.NewMessage = "";
+                VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
                 VM.Creating = false;
             }
         }
