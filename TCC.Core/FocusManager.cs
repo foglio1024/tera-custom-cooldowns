@@ -34,7 +34,7 @@ namespace TCC
             get
             {
                 if (ForegroundWindow == TeraWindow && TeraWindow != IntPtr.Zero) return true;
-                if (ForegroundWindow == MeterWindow&& MeterWindow != IntPtr.Zero) return true;
+                if (ForegroundWindow == MeterWindow && MeterWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.Settings.Handle && WindowManager.Settings.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.SkillConfigWindow.Handle && WindowManager.SkillConfigWindow.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.LfgListWindow.Handle && WindowManager.LfgListWindow.Handle != IntPtr.Zero) return true;
