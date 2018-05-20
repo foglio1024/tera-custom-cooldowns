@@ -137,25 +137,25 @@ namespace TCC.Windows
 
         }
 
-        public void OpenTooltip()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                FocusManager.FocusTimer.Enabled = false;
-                if (PlayerInfo.IsOpen) CloseTooltip();
-                ChatWindowManager.Instance.TooltipInfo.Refresh();
-                PlayerInfo.IsOpen = true;
-                ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
-            });
-        }
-        public void CloseTooltip()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                FocusManager.FocusTimer.Enabled = true;
-                PlayerInfo.IsOpen = false;
-            });
-        }
+        //public void OpenTooltip()
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        FocusManager.FocusTimer.Enabled = false;
+        //        if (PlayerInfo.IsOpen) CloseTooltip();
+        //        WindowManager.FloatingButton.TooltipInfo.Refresh();
+        //        PlayerInfo.IsOpen = true;
+        //        ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
+        //    });
+        //}
+        //public void CloseTooltip()
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        FocusManager.FocusTimer.Enabled = true;
+        //        PlayerInfo.IsOpen = false;
+        //    });
+        //}
 
         private void TabClicked(object sender, MouseButtonEventArgs e)
         {
@@ -304,14 +304,7 @@ namespace TCC.Windows
 
         }
 
-        public void SetMgButtonVis()
-        {
 
-            Dispatcher.Invoke(() =>
-            {
-                ((PlayerTooltip)PlayerInfo.Child).SetMoongourdVisibility();
-            });
-        }
 
         private new void OnLoaded(object sender, RoutedEventArgs e)
         {

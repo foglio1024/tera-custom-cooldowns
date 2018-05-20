@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
 
@@ -72,6 +73,7 @@ namespace TCC
                 _client.Connect("127.0.0.50", 9550);
                 Debug.WriteLine("Connected");
                 ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
+                WindowManager.FloatingButton.NotifyExtended("Proxy", "Successfully connected to tera-proxy.", NotificationType.Success);
                 var t = new Thread(ReceiveData);
                 t.Start();
                 InitStub();
@@ -86,7 +88,7 @@ namespace TCC
                     {
                         Debug.WriteLine("Maximum retries exceeded...");
                         ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-
+                        if(SettingsManager.ChatEnabled) WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
                         _retries = 2;
                         return;
                     }

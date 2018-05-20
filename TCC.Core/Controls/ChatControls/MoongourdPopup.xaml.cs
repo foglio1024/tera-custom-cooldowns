@@ -31,7 +31,7 @@ namespace TCC.Controls.ChatControls
         {
             InitializeComponent();
             Loaded += MoongourdPopup_Loaded;
-            MouseLeave += (s, ev) => ChatWindowManager.Instance.CloseTooltip();
+            MouseLeave += (s, ev) => WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         public string PlayerName

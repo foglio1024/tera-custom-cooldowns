@@ -220,7 +220,7 @@ namespace TCC.Parsing
             CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
-            ChatWindowManager.Instance.SetMgButtonVis();
+            WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
 
@@ -650,22 +650,22 @@ namespace TCC.Parsing
         internal static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
             SessionManager.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
-            ChatWindowManager.Instance.TooltipInfo.Name = x.Name;
-            ChatWindowManager.Instance.TooltipInfo.Info = m.Name;
-            ChatWindowManager.Instance.TooltipInfo.Level = (int)x.Level;
-            ChatWindowManager.Instance.TooltipInfo.SetInfo(x.Model);
+            WindowManager.FloatingButton.TooltipInfo.Name = x.Name;
+            WindowManager.FloatingButton.TooltipInfo.Info = m.Name;
+            WindowManager.FloatingButton.TooltipInfo.Level = (int)x.Level;
+            WindowManager.FloatingButton.TooltipInfo.SetInfo(x.Model);
             if (x.Name == SessionManager.CurrentPlayer.Name)
             {
-                ChatWindowManager.Instance.TooltipInfo.ShowGuildInvite = false;
-                ChatWindowManager.Instance.TooltipInfo.ShowPartyInvite = false;
+                WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = false;
+                WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = false;
             }
             else
             {
-                ChatWindowManager.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
-                ChatWindowManager.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
+                WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
+                WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
             if (!Proxy.IsConnected) return;
-            ChatWindowManager.Instance.OpenTooltip();
+            WindowManager.FloatingButton.OpenPlayerMenu();
         }
 
         internal static void HandleCrestMessage(S_CREST_MESSAGE x)

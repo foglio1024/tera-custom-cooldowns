@@ -7,7 +7,10 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.Controls.ChatControls;
+using TCC.Data;
 using TCC.ViewModels;
+using Application = System.Windows.Application;
 
 namespace TCC.Windows
 {
@@ -19,6 +22,7 @@ namespace TCC.Windows
         public FloatingButtonWindow()
         {
             InitializeComponent();
+            TooltipInfo = new TooltipInfo("", "", 1);
         }
 
         private Timer _t;
@@ -46,8 +50,10 @@ namespace TCC.Windows
             _n = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(_notificationDuration) };
             _n.Tick += _n_Tick;
             _an = new DoubleAnimation(.75, 1, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
-            _queue = new Queue<Tuple<string, string>>();
+            _queue = new Queue<Tuple<string, string, NotificationType>>();
         }
+
+        public TooltipInfo TooltipInfo { get; set; }
 
 
         private void RepeatAnimation(object sender, EventArgs e)
@@ -124,12 +130,12 @@ namespace TCC.Windows
         }
 
         private bool _busy;
-        private Queue<Tuple<string, string>> _queue;
-        public void NotifyExtended(string title, string msg)
+        private Queue<Tuple<string, string, NotificationType>> _queue;
+        public void NotifyExtended(string title, string msg, NotificationType type)
         {
             if (_busy)
             {
-                _queue.Enqueue(new Tuple<string, string>(title, msg));
+                _queue.Enqueue(new Tuple<string, string, NotificationType>(title, msg, type));
                 return;
             }
 
@@ -138,6 +144,23 @@ namespace TCC.Windows
             {
                 NotificationText.Text = msg;
                 NotificationTitle.Text = title;
+                switch (type)
+                {
+                    case NotificationType.Normal:
+                        NotificationColorBorder.Background = App.Current.FindResource("Colors.Chat.Party") as SolidColorBrush;
+                        break;
+                    case NotificationType.Success:
+                        NotificationColorBorder.Background = App.Current.FindResource("GreenColor") as SolidColorBrush;
+                        break;
+                    case NotificationType.Warning:
+                        NotificationColorBorder.Background = App.Current.FindResource("Tier4DungeonColor") as SolidColorBrush;
+                        break;
+                    case NotificationType.Error:
+                        NotificationColorBorder.Background = App.Current.FindResource("HpColor") as SolidColorBrush;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(type), type, null);
+                }
                 NotificationContainer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
                     new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200))
                     {
@@ -172,8 +195,38 @@ namespace TCC.Windows
             _busy = false;
             if (_queue.Count <= 0) return;
             var tuple = _queue.Dequeue();
-            NotifyExtended(tuple.Item1, tuple.Item2);
+            NotifyExtended(tuple.Item1, tuple.Item2, tuple.Item3);
         }
 
+        public void OpenPlayerMenu()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                FocusManager.FocusTimer.Enabled = false;
+                this.RefreshTopmost();
+                if (PlayerInfo.IsOpen) ClosePlayerMenu();
+                TooltipInfo.Refresh();
+                PlayerInfo.IsOpen = true;
+                ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
+                
+            });
+        }
+        public void ClosePlayerMenu()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (((PlayerTooltip)PlayerInfo.Child).MgPopup.IsMouseOver) return;
+                FocusManager.FocusTimer.Enabled = true;
+                PlayerInfo.IsOpen = false;
+            });
+        }
+        public void SetMoongourdButtonVisibility()
+        {
+
+            Dispatcher.Invoke(() =>
+            {
+                ((PlayerTooltip)PlayerInfo.Child).SetMoongourdVisibility();
+            });
+        }
     }
 }

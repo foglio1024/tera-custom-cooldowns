@@ -25,14 +25,14 @@ namespace TCC.ViewModels
 
         public event Action<ChatMessage> NewMessage;
 
-        internal void CloseTooltip()
-        {
-            ChatWindows[0].Dispatcher.Invoke(() =>
-            {
-                if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
-                ChatWindows[0].CloseTooltip();
-            });
-        }
+        //internal void CloseTooltip()
+        //{
+        //    ChatWindows[0].Dispatcher.Invoke(() =>
+        //    {
+        //        if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
+        //        ChatWindows[0].CloseTooltip();
+        //    });
+        //}
 
         public List<SimpleUser> Friends;
         public List<string> BlockedUsers;
@@ -79,7 +79,6 @@ namespace TCC.ViewModels
         public int MessageCount => ChatMessages.Count;
 
         public bool IsQueueEmpty => _queue.Count == 0;
-        public TooltipInfo TooltipInfo { get; set; }
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; }
         public SynchronizedObservableCollection<LFG> LFGs { get; }
         public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; }
@@ -108,7 +107,6 @@ namespace TCC.ViewModels
             //
             BlockedUsers = new List<string>();
             Friends = new List<SimpleUser>();
-            TooltipInfo = new TooltipInfo("", "", 1);
             PrivateChannels[7] = new PrivateChatChannel(uint.MaxValue - 1, "Proxy", 7);
             ChatWindows.CollectionChanged += ChatWindows_CollectionChanged;
             //TODO: create windows based on settings
@@ -374,10 +372,10 @@ namespace TCC.ViewModels
             });
         }
 
-        internal void OpenTooltip()
-        {
-            ChatWindows[0].OpenTooltip();
-        }
+        //internal void OpenTooltip()
+        //{
+        //    ChatWindows[0].OpenTooltip();
+        //}
 
         public void TempShow()
         {
@@ -387,10 +385,10 @@ namespace TCC.ViewModels
             }
         }
 
-        public void SetMgButtonVis()
-        {
-            if(ChatWindows.Count > 0) ChatWindows[0].SetMgButtonVis();
-        }
+        //public void SetMgButtonVis()
+        //{
+        //    if(ChatWindows.Count > 0) ChatWindows[0].SetMgButtonVis();
+        //}
     }
 
     public class ChatTabClient : IInterTabClient

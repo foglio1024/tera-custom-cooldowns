@@ -59,6 +59,7 @@ namespace TCC.ViewModels
             ClearEvents();
             if (region == null)
             {
+                WindowManager.FloatingButton.NotifyExtended("Info window", "No region specified; cannot load events.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }

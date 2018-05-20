@@ -12,7 +12,7 @@ namespace TCC.Controls.ChatControls
         public FriendMessageDialog()
         {
             InitializeComponent();
-            TargetName = ChatWindowManager.Instance.TooltipInfo.Name;
+            TargetName = WindowManager.FloatingButton.TooltipInfo.Name;
         }
 
         private string _message = "Friend me?";
@@ -31,11 +31,11 @@ namespace TCC.Controls.ChatControls
 
         private void OkClick(object sender, RoutedEventArgs e)
         {
-            Proxy.FriendRequest(ChatWindowManager.Instance.TooltipInfo.Name, _message);
+            Proxy.FriendRequest(WindowManager.FloatingButton.TooltipInfo.Name, _message);
             //ChatWindowManager.Instance.LockTooltip();
             Close();
             _message = "Friend me?";
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
     }
 }

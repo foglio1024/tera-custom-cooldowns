@@ -109,13 +109,13 @@ namespace TCC
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
-            WindowManager.FloatingButton.NotifyExtended($"TCC", $"Connected to {srv.Name}");
+            WindowManager.FloatingButton.NotifyExtended($"TCC", $"Connected to {srv.Name}", NotificationType.Success);
         }
 
         private static void TeraSniffer_OnEndConnection()
         {
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
-            WindowManager.FloatingButton.NotifyExtended($"TCC", "Disconnected");
+            WindowManager.FloatingButton.NotifyExtended($"TCC", "Disconnected", NotificationType.Warning);
 
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();

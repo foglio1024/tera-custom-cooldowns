@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:TCC.ViewModels"
+             xmlns:w ="clr-namespace:TCC.Windows"
              xmlns:controls="clr-namespace:TCC.Controls"
              xmlns:chatControls="clr-namespace:TCC.Controls.ChatControls" 
-             mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding Source={x:Static vm:ChatWindowManager.Instance}}">
+             mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding RelativeSource={RelativeSource AncestorType=w:FloatingButtonWindow}}">
     <Grid>
         <Border CornerRadius="1" Background="#444" Grid.RowSpan="10" Margin="6" BorderBrush="#666" BorderThickness="0" Width="Auto" Name="RootBorder">
             <Grid Margin="5" Height="Auto">

@@ -37,42 +37,43 @@ namespace TCC.Controls.ChatControls
             _kicking = false;
             _blocking = false;
             _unfriending = false;
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         public void AnimateOpening()
         {
             RootBorder.BeginAnimation(OpacityProperty, _expandAnim);
+            
         }
 
         private void InspectClick(object sender, RoutedEventArgs e)
         {
-            Proxy.Inspect(ChatWindowManager.Instance.TooltipInfo.Name);
-            ChatWindowManager.Instance.CloseTooltip();
+            Proxy.Inspect(WindowManager.FloatingButton.TooltipInfo.Name);
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void PartyInviteClick(object sender, RoutedEventArgs e)
         {
-            Proxy.PartyInvite(ChatWindowManager.Instance.TooltipInfo.Name);
-            ChatWindowManager.Instance.CloseTooltip();
+            Proxy.PartyInvite(WindowManager.FloatingButton.TooltipInfo.Name);
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void GuildInviteClick(object sender, RoutedEventArgs e)
         {
-            Proxy.GuildInvite(ChatWindowManager.Instance.TooltipInfo.Name);
-            ChatWindowManager.Instance.CloseTooltip();
+            Proxy.GuildInvite(WindowManager.FloatingButton.TooltipInfo.Name);
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private bool _unfriending;
 
         private void AddFriendClick(object sender, RoutedEventArgs e)
         {
-            if (ChatWindowManager.Instance.TooltipInfo.IsFriend)
+            if (WindowManager.FloatingButton.TooltipInfo.IsFriend)
             {
                 if (_unfriending)
                 {
-                    Proxy.UnfriendUser(ChatWindowManager.Instance.TooltipInfo.Name);
-                    ChatWindowManager.Instance.CloseTooltip();
+                    Proxy.UnfriendUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                    WindowManager.FloatingButton.ClosePlayerMenu();
                     UnfriendRipple.Opacity = 0;
                     _unfriending = false;
                 }
@@ -87,19 +88,19 @@ namespace TCC.Controls.ChatControls
                 var friendDg = new FriendMessageDialog();
                 friendDg.Show();
             }
-            ChatWindowManager.Instance.TooltipInfo.Refresh();
+            WindowManager.FloatingButton.TooltipInfo.Refresh();
         }
         private void BlockClick(object sender, RoutedEventArgs e)
         {
-            if (!ChatWindowManager.Instance.TooltipInfo.IsBlocked)
+            if (!WindowManager.FloatingButton.TooltipInfo.IsBlocked)
             {
                 if (_blocking)
                 {
-                    Proxy.BlockUser(ChatWindowManager.Instance.TooltipInfo.Name);
-                    ChatWindowManager.Instance.BlockedUsers.Add(ChatWindowManager.Instance.TooltipInfo.Name);
+                    Proxy.BlockUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                    ChatWindowManager.Instance.BlockedUsers.Add(WindowManager.FloatingButton.TooltipInfo.Name);
                     try
                     {
-                        var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == ChatWindowManager.Instance.TooltipInfo.Name));
+                        var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == WindowManager.FloatingButton.TooltipInfo.Name));
                         ChatWindowManager.Instance.Friends.RemoveAt(i);
                     }
                     catch
@@ -107,7 +108,7 @@ namespace TCC.Controls.ChatControls
                         // ignored
                     }
 
-                    ChatWindowManager.Instance.CloseTooltip();
+                    WindowManager.FloatingButton.ClosePlayerMenu();
                     BlockRipple.Opacity = 0;
                     _blocking = false;
                 }
@@ -120,12 +121,12 @@ namespace TCC.Controls.ChatControls
             }
             else
             {
-                Proxy.UnblockUser(ChatWindowManager.Instance.TooltipInfo.Name);
-                ChatWindowManager.Instance.BlockedUsers.Remove(ChatWindowManager.Instance.TooltipInfo.Name);
-                ChatWindowManager.Instance.CloseTooltip();
+                Proxy.UnblockUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                ChatWindowManager.Instance.BlockedUsers.Remove(WindowManager.FloatingButton.TooltipInfo.Name);
+                WindowManager.FloatingButton.ClosePlayerMenu();
 
             }
-            ChatWindowManager.Instance.TooltipInfo.Refresh();
+            WindowManager.FloatingButton.TooltipInfo.Refresh();
         }
 
         private bool _blocking;
@@ -133,30 +134,30 @@ namespace TCC.Controls.ChatControls
 
         private void WhisperClick(object sender, RoutedEventArgs e)
         {
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
             if (SettingsManager.ChatEnabled && !SessionManager.InGameChatOpen) FocusManager.SendNewLine();
 
-            FocusManager.SendString("/w " + ChatWindowManager.Instance.TooltipInfo.Name + " ");
+            FocusManager.SendString("/w " + WindowManager.FloatingButton.TooltipInfo.Name + " ");
         }
 
         private void GrantInviteClick(object sender, RoutedEventArgs e)
         {
 
-            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+            if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
             }
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
-            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+            if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 Proxy.DelegateLeader(u.ServerId, u.PlayerId);
             }
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private bool _kicking;
@@ -164,11 +165,11 @@ namespace TCC.Controls.ChatControls
         {
             if (_kicking)
             {
-                ChatWindowManager.Instance.CloseTooltip();
+                WindowManager.FloatingButton.ClosePlayerMenu();
                 KickText.Text = "Kick";
                 KickRipple.Opacity = 0;
                 _kicking = false;
-                if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+                if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
                 {
                     Proxy.KickMember(u.ServerId, u.PlayerId);
                 }
@@ -194,7 +195,7 @@ namespace TCC.Controls.ChatControls
         private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var p = (MgPopup.Child as MoongourdPopup);
-            p.SetInfo(ChatWindowManager.Instance.TooltipInfo.Name, SettingsManager.LastRegion);
+            p.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, SettingsManager.LastRegion);
             MgPopup.IsOpen = true;
         }
 

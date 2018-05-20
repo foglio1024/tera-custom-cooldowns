@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:chatControls="clr-namespace:TCC.Controls.ChatControls"
         mc:Ignorable="d" MouseEnter="Window_MouseEnter"
         MouseLeave="Window_MouseLeave"
         Loaded="FloatinButtonLoaded"
@@ -56,17 +57,24 @@
             </Border.RenderTransform>
 
         </Border>
-        <Grid Grid.Column="1" Width="200" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer">
+        <Grid Grid.Column="1" Width="250" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer">
 
             <Grid x:Name="NotificationContent" VerticalAlignment="Center" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Background="{StaticResource BackgroundDarkColor}" Margin="0" CornerRadius="3 3 0 0" Effect="{StaticResource DropShadow}"></Border>
-                <Border Background="{StaticResource Colors.Chat.Party}" CornerRadius="0 0 3 3" Effect="{StaticResource DropShadow}" 
-                         Grid.Row="1"></Border>
-                <Border x:Name="NotificationTime" Background="#1fff"  CornerRadius="3 0 0 3" Grid.Row="0" HorizontalAlignment="Left">
+                <Border Background="{StaticResource BackgroundDarkColor}" Margin="0" Grid.Column="1" Grid.RowSpan="2" 
+                        CornerRadius="0 3 3 0" Effect="{StaticResource DropShadow}" HorizontalAlignment="Stretch"></Border>
+                <Border Background="{StaticResource DefaultBackgroundColor}" Margin="0" Grid.Column="1" 
+                        CornerRadius="0 3 0 0"  HorizontalAlignment="Stretch"></Border>
+                <Border CornerRadius="3 0 0 3"  x:Name="NotificationColorBorder"
+                         Grid.Column="0" Grid.RowSpan="2" Width="5" HorizontalAlignment="Left"></Border>
+                <Border x:Name="NotificationTime" Background="#1fff" Grid.RowSpan="2" Grid.Column="1" CornerRadius="0 3 3 0" Grid.Row="0" HorizontalAlignment="Left">
                     <FrameworkElement x:Name="NotificationTimeGovernor" Width="{Binding ElementName=NotificationContainer, Path=ActualWidth}">
                         <FrameworkElement.LayoutTransform>
                             <ScaleTransform ScaleX="1"/>
@@ -74,13 +82,20 @@
                     </FrameworkElement>
                 </Border>
 
-                <TextBlock x:Name="NotificationTitle" Foreground="#6fff" Margin="10 3"  TextWrapping="Wrap" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="NotificationText" Foreground="#9fff" Margin="20 10 10 10" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="NotificationTitle" Foreground="#6fff" Margin="10 3" Grid.Column="1" Text="Title" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="NotificationText" Foreground="#afff" Margin="10 10 10 10" Grid.Column="1" Text="Content" Grid.Row="1" 
+                           TextWrapping="Wrap" HorizontalAlignment="Center"/>
             </Grid>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="0" ScaleX="1"></ScaleTransform>
             </Grid.LayoutTransform>
         </Grid>
+        <Popup Grid.Row="0" Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
+               AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
+               VerticalAlignment="Center"
+               VerticalOffset="0">
+            <chatControls:PlayerTooltip />
+        </Popup>
         <Grid.RenderTransform>
             <TranslateTransform X="-32"></TranslateTransform>
         </Grid.RenderTransform>

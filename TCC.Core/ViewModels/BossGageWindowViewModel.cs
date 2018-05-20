@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -234,6 +235,7 @@ namespace TCC.ViewModels
             }
             catch 
             {
+                WindowManager.FloatingButton.NotifyExtended("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
