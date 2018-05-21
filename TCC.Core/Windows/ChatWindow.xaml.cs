@@ -313,11 +313,11 @@ namespace TCC.Windows
 
         }
 
-        private new void Drag(object sender, MouseButtonEventArgs e)
-        {
-            //needed to keep windowchrome, no idea why
-            return;
-        }
+        //private new void Drag(object sender, MouseButtonEventArgs e)
+        //{
+        //    //needed to keep windowchrome, no idea why
+        //    return;
+        //}
     }
 
 }

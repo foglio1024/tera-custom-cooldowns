@@ -116,7 +116,7 @@
                           DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />-->
         <!-- ReSharper disable once InconsistentNaming -->
         <dockablz:Layout Name="content" Grid.Row="1">
-            <Grid Margin="0" Width="Auto" Name="Root" MouseLeftButtonDown="Drag">
+            <Grid Margin="0" Width="Auto" Name="Root">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
