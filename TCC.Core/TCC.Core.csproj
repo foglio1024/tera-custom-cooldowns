@@ -731,6 +731,7 @@
     <Compile Include="ViewModels\ClassManagers\ClassManager.cs" />
     <Compile Include="ViewModels\ClassManagers\ArcherBarManager.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
+    <Compile Include="ViewModels\ClassManagers\NullClassManager.cs" />
     <Compile Include="ViewModels\ClassWindowViewModel.cs" />
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
