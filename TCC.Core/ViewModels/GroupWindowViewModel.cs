@@ -20,6 +20,7 @@ namespace TCC.ViewModels
         private ulong _aggroHolder;
         private bool _firstCheck = true;
         private readonly object _lock = new object();
+        private bool _leaderOverride;
         public event Action SettingsUpdated;
 
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
@@ -126,7 +127,7 @@ namespace TCC.ViewModels
         {
             return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
-        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name);
+        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name) || _leaderOverride;
 
         public void SetAggro(ulong target)
         {
@@ -318,7 +319,7 @@ namespace TCC.ViewModels
             {
                 m.IsLeader = m.Name == name;
             }
-
+            _leaderOverride = name == SessionManager.CurrentPlayer.Name;
             NPC(nameof(AmILeader));
             NPC(nameof(ShowLeaderButtons));
         }
