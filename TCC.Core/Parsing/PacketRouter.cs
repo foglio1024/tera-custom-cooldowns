@@ -518,6 +518,7 @@ namespace TCC.Parsing
 
         internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
         {
+            if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
             InfoWindowViewModel.Instance.CurrentCharacter.GuardianPoints = x.Points;
             InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianPoints = x.MaxPoints;
         }
