@@ -251,6 +251,13 @@ namespace TCC.Parsing
             if (WindowManager.LfgListWindow == null) return;
             if (WindowManager.LfgListWindow.VM == null) return;
             if (!x.IsLast) return;
+
+            if (S_SHOW_PARTY_MATCH_INFO.Listings.Count == 0)
+            {
+                WindowManager.LfgListWindow.VM.NotifyMyLfg();
+                WindowManager.LfgListWindow.ShowWindow();
+                return;
+            }
             //WindowManager.LfgListWindow.VM.Listings.Clear();
             S_SHOW_PARTY_MATCH_INFO.Listings.ForEach(l =>
             {
@@ -864,7 +871,7 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.IsConnected)
+            if (Proxy.IsConnected && SettingsManager.LfgEnabled)
             {
                 Proxy.RequestCandidates();
                 if(WindowManager.LfgListWindow != null) if(WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
