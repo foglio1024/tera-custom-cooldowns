@@ -32,10 +32,10 @@ namespace TCC.ViewModels
 
         private void AddSortedDragons()
         {
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1102));
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1100));
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1101));
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1103));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1102));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1100));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1101));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1103));
             _holdedDragons.Clear();
         }
 
@@ -173,7 +173,14 @@ namespace TCC.ViewModels
                         _holdedDragons.Add(boss);
                         if (_holdedDragons.Count == 4)
                         {
-                            AddSortedDragons();
+                            try
+                            {
+                                AddSortedDragons();
+                            }
+                            catch
+                            {
+                                //TODO: send error?
+                            }
                         }
                     }
                 }
