@@ -50,7 +50,7 @@ namespace TCC.Parsing.Messages
 
             }
 
-            if (page < pages) Proxy.RequestNextLfgPage(page + 1);
+            if (page < pages) if(SettingsManager.LfgEnabled) Proxy.RequestNextLfgPage(page + 1);
             if (page == pages) IsLast = true;
         }
     }
