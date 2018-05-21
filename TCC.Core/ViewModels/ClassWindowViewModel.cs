@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.ViewModels.ClassManagers;
 
 namespace TCC.ViewModels
 {
@@ -80,7 +81,7 @@ namespace TCC.ViewModels
                             CurrentManager = new NinjaBarManager();
                             break;
                         default:
-                            CurrentManager = null;
+                            CurrentManager = new NullClassManager();
                             break;
                     }
                 });
@@ -88,7 +89,7 @@ namespace TCC.ViewModels
             }
         }
 
-        private ClassManager _currentManager;
+        private ClassManager _currentManager = new NullClassManager();
         public ClassManager CurrentManager
         {
             get => _currentManager;
