@@ -15,6 +15,13 @@ namespace TCC.Windows
         public InfoWindow()
         {
             InitializeComponent();
+            Closing += OnClosing;
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            CloseWindow(null, null);
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
