@@ -45,12 +45,12 @@ namespace TCC.Controls
 
         private void MouseEntered(object sender, MouseEventArgs e)
         {
-            TimeTB.BeginAnimation(OpacityProperty, _fadeIn);
+            TimeTb.BeginAnimation(OpacityProperty, _fadeIn);
         }
 
         private void MouseLeft(object sender, MouseEventArgs e)
         {
-            TimeTB.BeginAnimation(OpacityProperty, _fadeOut);
+            TimeTb.BeginAnimation(OpacityProperty, _fadeOut);
 
         }
     }

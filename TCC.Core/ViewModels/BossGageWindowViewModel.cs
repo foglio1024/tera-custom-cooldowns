@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -31,16 +32,16 @@ namespace TCC.ViewModels
 
         private void AddSortedDragons()
         {
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1102));
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1100));
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1101));
-            _npcList.Add(_holdedDragons.First(x => x.TemplateId == 1103));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1102));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1100));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1101));
+            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1103));
             _holdedDragons.Clear();
         }
 
-        public bool IsTeraOnTop => WindowManager.IsTccVisible;
+        //public bool IsTeraOnTop => WindowManager.IsTccVisible;
 
-        public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible);
+        public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible && x.CurrentHP > 0);
 
         public HarrowholdPhase CurrentHHphase
         {
@@ -131,14 +132,14 @@ namespace TCC.ViewModels
             _npcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
 
             GuildIds = new Dictionary<ulong, uint>();
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC(nameof(IsTeraOnTop));
-                if (IsTeraOnTop)
-                {
-                    WindowManager.BossWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+                //NPC(nameof(IsTeraOnTop));
+                //if (IsTeraOnTop)
+                //{
+                    //WindowManager.BossWindow.RefreshTopmost();
+                //}
+            //};
 
         }
 
@@ -172,7 +173,14 @@ namespace TCC.ViewModels
                         _holdedDragons.Add(boss);
                         if (_holdedDragons.Count == 4)
                         {
-                            AddSortedDragons();
+                            try
+                            {
+                                AddSortedDragons();
+                            }
+                            catch
+                            {
+                                //TODO: send error?
+                            }
                         }
                     }
                 }
@@ -224,7 +232,7 @@ namespace TCC.ViewModels
                 {
                     sb.Append(boss.Name);
                     sb.Append(": ");
-                    sb.Append(String.Format("{0:##0%}", boss.CurrentFactor));
+                    sb.Append(string.Format("{0:##0%}", boss.CurrentFactor));
                     sb.Append("\\");
                 }
             }
@@ -234,6 +242,7 @@ namespace TCC.ViewModels
             }
             catch 
             {
+                WindowManager.FloatingButton.NotifyExtended("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }

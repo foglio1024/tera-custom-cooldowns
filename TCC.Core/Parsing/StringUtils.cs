@@ -2,17 +2,17 @@
 using System.IO;
 using System.Text;
 
-namespace TCC
+namespace TCC.Parsing
 {
     public static class StringUtils
     {
-        public static byte[] StringToByteArray(String hex)
+        public static byte[] StringToByteArray(string hex)
         {
-            int NumberChars = hex.Length / 2;
-            byte[] bytes = new byte[NumberChars];
+            var NumberChars = hex.Length / 2;
+            var bytes = new byte[NumberChars];
             using (var sr = new StringReader(hex))
             {
-                for (int i = 0; i < NumberChars; i++)
+                for (var i = 0; i < NumberChars; i++)
                     bytes[i] =
                       Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
@@ -20,8 +20,8 @@ namespace TCC
         }
         public static string ByteArrayToString(byte[] ba)
         {
-            StringBuilder hex = new StringBuilder(ba.Length * 2);
-            foreach (byte b in ba)
+            var hex = new StringBuilder(ba.Length * 2);
+            foreach (var b in ba)
                 hex.AppendFormat("{0:x2}", b);
             return hex.ToString();
         }
@@ -29,7 +29,7 @@ namespace TCC
         public static long Hex8BStringToInt(string hex)
         {
             var sb = new StringBuilder();
-            for (int i = 16 - 2; i >= 0; i -= 2)
+            for (var i = 16 - 2; i >= 0; i -= 2)
             {
                 sb.Append(hex[i]);
                 sb.Append(hex[i + 1]);
@@ -40,21 +40,21 @@ namespace TCC
         public static float Hex4BStringToFloat(string hex)
         {
             var sb = new StringBuilder();
-            for (int i = 8 - 2; i >= 0; i -= 2)
+            for (var i = 8 - 2; i >= 0; i -= 2)
             {
                 sb.Append(hex[i]);
                 sb.Append(hex[i + 1]);
             }
-            uint num = uint.Parse(sb.ToString(), System.Globalization.NumberStyles.AllowHexSpecifier);
-            byte[] floatVals = BitConverter.GetBytes(num);
-            float result = BitConverter.ToSingle(floatVals, 0);
+            var num = uint.Parse(sb.ToString(), System.Globalization.NumberStyles.AllowHexSpecifier);
+            var floatVals = BitConverter.GetBytes(num);
+            var result = BitConverter.ToSingle(floatVals, 0);
             return result;
         }
 
         public static int Hex4BStringToInt(string hex)
         {
             var sb = new StringBuilder();
-            for (int i = 8 - 2; i >= 0; i -= 2)
+            for (var i = 8 - 2; i >= 0; i -= 2)
             {
                 sb.Append(hex[i]);
                 sb.Append(hex[i + 1]);
@@ -65,7 +65,7 @@ namespace TCC
         public static int Hex2BStringToInt(string hex)
         {
             var sb = new StringBuilder();
-            for (int i = 4 - 2; i >= 0; i -= 2)
+            for (var i = 4 - 2; i >= 0; i -= 2)
             {
                 sb.Append(hex[i]);
                 sb.Append(hex[i + 1]);
@@ -83,13 +83,13 @@ namespace TCC
         }
         public static int GetStringEnd(string s, int startIndex, string terminator)
         {
-            int endIndex = startIndex;
-            bool zeroes = false;
+            var endIndex = startIndex;
+            var zeroes = false;
             while (!zeroes)
             {
                 if (endIndex + 3 <= s.Length)
                 {
-                    string test = s[endIndex + 0].ToString() +
+                    var test = s[endIndex + 0].ToString() +
                                   s[endIndex + 1].ToString() +
                                   s[endIndex + 2].ToString() +
                                   s[endIndex + 3].ToString();
@@ -111,8 +111,8 @@ namespace TCC
 
         public static string GetStringFromHex(string hex, int startIndex, string terminator)
         {
-            StringBuilder b = new StringBuilder();
-            for (int i = startIndex; i < GetStringEnd(hex, startIndex, terminator); i += 2)
+            var b = new StringBuilder();
+            for (var i = startIndex; i < GetStringEnd(hex, startIndex, terminator); i += 2)
             {
                 b.Append(hex[i].ToString() + hex[i + 1].ToString());
             }

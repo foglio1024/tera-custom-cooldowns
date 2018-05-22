@@ -1,16 +1,12 @@
-﻿<UserControl x:Class="TCC.Controls.LancerBar"
+﻿<UserControl x:Class="TCC.Controls.ClassBars.LancerBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" 
-             >
-    <UserControl.DataContext>
-        <viewModels:LancerBarManager/>
-    </UserControl.DataContext>
-    <Grid Width="Auto" Margin="10" Name="root">
+             mc:Ignorable="d" d:DataContext="{d:DesignData LancerBarManager}">
+    <Grid Width="Auto" Margin="10" Name="Root">
         <!--HP/MP-->
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
@@ -21,22 +17,17 @@
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="1"
-                    Grid.RowSpan="3"
                     CornerRadius="29"
                     Margin="4,2"
-                    VerticalAlignment="Stretch"
-                    Height="Auto"/>
+                    VerticalAlignment="Stretch" />
             <!--Arush + Gshout-->
-            <UniformGrid Grid.Column="0" 
-                         Grid.Row="1"
-                         Grid.ColumnSpan="1" 
+            <UniformGrid Grid.Column="0"
                          Grid.RowSpan="1"
                          Rows="1"
                          Margin="2,0">
-                <local:BuffCooldownControl DataContext="{Binding AdrenalineRush}" Grid.Column="0" Margin="0,0,0,0"/>
-                <local:BuffCooldownControl DataContext="{Binding GuardianShout}" Grid.Column="1" Margin="0,0,0,0"/>
-                <local:BuffCooldownControl DataContext="{Binding Infuriate}" Grid.Column="2" Margin="0,0,0,0"/>
+                <local:BuffCooldownControl DataContext="{Binding AdrenalineRush}" Margin="0,0,0,0"/>
+                <local:BuffCooldownControl DataContext="{Binding GuardianShout}" Margin="0,0,0,0"/>
+                <local:BuffCooldownControl DataContext="{Binding Infuriate}" Margin="0,0,0,0"/>
                 <Border  Style="{StaticResource Styles.DefaultBorder}"  Height="48" Effect="{x:Null}"
                          HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="48" 
                          CornerRadius="25" >
@@ -46,35 +37,35 @@
                                     Width="46" Height="46" Stroke="#2fff" StrokeThickness="5">
                         </local:Arc>
                         <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
-                                    Width="46" Height="46" Stroke="{StaticResource Colors.ClassWindow.AssaultStance}" StrokeThickness="5">
+                                    Width="46" Height="46" Stroke="{StaticResource AssaultStanceColor}" StrokeThickness="5">
                         </local:Arc>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="0"></RotateTransform>
+                                <RotateTransform Angle="0"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="36"></RotateTransform>
+                                <RotateTransform Angle="36"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="72"></RotateTransform>
+                                <RotateTransform Angle="72" />
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="108"></RotateTransform>
+                                <RotateTransform Angle="108"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="144"></RotateTransform>
+                                <RotateTransform Angle="144"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
                         <TextBlock Text="{Binding LH.Val}" Foreground="White" TextAlignment="Center" FontSize="22" Margin="-1,-1,0,0"
-                                   VerticalAlignment="Center"></TextBlock>
+                                   VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
 
@@ -83,4 +74,6 @@
 
     </Grid>
 </UserControl>
+
+
 

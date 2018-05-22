@@ -1,11 +1,17 @@
-﻿using System.Drawing;
-using System.Text;
+﻿using System.Text;
 
-namespace TCC
+namespace TCC.Data
 {
     public class Skill
     {
-        public string IconName { get; set; }
+
+        private string _iconName;
+        public string IconName
+        {
+            get => _iconName;
+            set => _iconName = value.ToLower();
+        }
+
         public uint Id { get; set; }
         public Class Class { get; set; }
         public string Name { get; set; }
@@ -20,13 +26,13 @@ namespace TCC
                 {
                     if (!(last.Contains("X") || last.Contains("I") || last.Contains("V"))) return Name;
                     var sb = new StringBuilder();
-                    for (int i = 0; i < n.Length-1; i++)
+                    for (var i = 0; i < n.Length-1; i++)
                     {
                         sb.Append(n[i]);
                         sb.Append(" ");
                     }
-                    
-                    return sb.ToString().Substring(0,sb.Length-1);
+
+                    return sb.Length == 0 ? "" : sb.ToString().Substring(0,sb.Length-1);
                 }
                 return Name;
             }
@@ -48,16 +54,16 @@ namespace TCC
             ToolTip = toolTip;
         }
 
-        public void SetSkillIcon(string iconName)
-        {
-            //if (!iconName.Contains("Icon_Skills.")) return;
-            this.IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
+        //public void SetSkillIcon(string iconName)
+        //{
+        //    //if (!iconName.Contains("Icon_Skills.")) return;
+        //    IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
 
-            //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
-            //{
-            //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
-            //}));
-        }
+        //    //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+        //    //{
+        //    //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
+        //    //}));
+        //}
 
     }
 }

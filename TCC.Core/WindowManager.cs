@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Threading;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -21,12 +20,13 @@ namespace TCC
     public static class WindowManager
     {
         private static bool clickThru;
-        private static bool isTccVisible;
-        private static bool isFocused;
-        private static bool skillsEnded = true;
-        private static int focusCount;
+        //private static bool isTccVisible;
+        //private static bool isFocused;
+        //private static bool skillsEnded = true;
+        //private static int focusCount;
         private static bool waiting;
-        private static Timer _undimTimer = new Timer(5000);
+        //private static Timer _undimTimer = new Timer(5000);
+
         private static List<Delegate> WindowLoadingDelegates = new List<Delegate>
         {
             new Action(LoadGroupWindow),
@@ -45,21 +45,26 @@ namespace TCC
         public static BuffWindow BuffWindow;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
-        //public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
+        public static SkillConfigWindow SkillConfigWindow;
+        public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
+        public static LfgListWindow LfgListWindow;
 
-        public static ContextMenu ContextMenu;
+        private static ContextMenu _contextMenu;
 
         public static NotifyIcon TrayIcon;
         public static Icon DefaultIcon;
         public static Icon ConnectedIcon;
 
+        public static ForegroundManager ForegroundManager { get; private set; }
+
         //public static event PropertyChangedEventHandler ClickThruChanged;
         public static event PropertyChangedEventHandler TccVisibilityChanged;
         public static event PropertyChangedEventHandler TccDimChanged;
+
 
         //public static bool ClickThru
         //{
@@ -73,85 +78,88 @@ namespace TCC
         //        }
         //    }
         //}
-        public static bool IsTccVisible
-        {
-            get
-            {
-                if (SessionManager.Logged && !SessionManager.LoadingScreen && IsFocused)
-                {
-                    isTccVisible = true;
-                    return isTccVisible;
-                }
-                else
-                {
-                    isTccVisible = false || App.Debug;
-                    return isTccVisible;
-                }
-            }
-            set
-            {
-                if (isTccVisible != value)
-                {
-                    isTccVisible = value;
-                    NotifyVisibilityChanged();
-                }
-            }
-        }
-        public static bool IsFocused
-        {
-            get => isFocused || App.Debug;
-            set
-            {
-                if (!FocusManager.Running) return;
-                //if (isFocused == value)
-                //{
-                //    //if(focusCount > 3)
-                //    //{
-                //    //    return;
-                //    //}
-                //    return;
-                //}
-                isFocused = value;
-                //if (isFocused)
-                //{
-                //    focusCount++;
-                //}
-                //else
-                //{
-                //    focusCount = 0;
-                //}
-                NotifyVisibilityChanged();
-            }
-        }
-        public static bool SkillsEnded
-        {
-            get => skillsEnded;
-            set
-            {
-                if (value == false)
-                {
-                    _undimTimer.Stop();
-                    _undimTimer.Start();
-                }
-                if (skillsEnded == value) return;
-                skillsEnded = value;
-                NotifyDimChanged();
-            }
-        }
-        public static bool IsTccDim
-        {
-            get => SkillsEnded && !SessionManager.Encounter; // add more conditions here if needed
-        }
+        //public static bool IsTccVisible
+        //{
+        //    get
+        //    {
+        //        if (SessionManager.Logged && !SessionManager.LoadingScreen && IsFocused)
+        //        {
+        //            isTccVisible = true;
+        //            return isTccVisible;
+        //        }
+        //        else
+        //        {
+        //            isTccVisible = false || App.Debug;
+        //            return isTccVisible;
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if (isTccVisible != value)
+        //        {
+        //            isTccVisible = value;
+        //            NotifyVisibilityChanged();
+        //        }
+        //    }
+        //}
+        //public static bool IsFocused
+        //{
+        //    get => isFocused;
+        //    set
+        //    {
+        //        if (!FocusManager.Running) return;
+        //        //if (isFocused == value)
+        //        //{
+        //        //    //if(focusCount > 3)
+        //        //    //{
+        //        //    //    return;
+        //        //    //}
+        //        //    return;
+        //        //}
+        //        isFocused = value;
+        //        //if (isFocused)
+        //        //{
+        //        //    focusCount++;
+        //        //}
+        //        //else
+        //        //{
+        //        //    focusCount = 0;
+        //        //}
+        //        NotifyVisibilityChanged();
+        //    }
+        //}
+        //public static bool SkillsEnded
+        //{
+        //    get => skillsEnded;
+        //    set
+        //    {
+        //        if (value == false)
+        //        {
+        //            _undimTimer.Stop();
+        //            _undimTimer.Start();
+        //        }
+        //        if (skillsEnded == value) return;
+        //        skillsEnded = value;
+        //        CombatChanged?.Invoke();
+        //        NotifyDimChanged();
+        //    }
+        //}
+        //public static bool IsTccDim
+        //{
+        //    get => SkillsEnded && !SessionManager.Encounter; // add more conditions here if needed
+        //}
 
         public static void Init()
         {
+            ForegroundManager = new ForegroundManager();
+            FocusManager.Init();
             LoadWindows();
             FloatingButton = new FloatingButtonWindow();
             FloatingButton.Show();
-            ContextMenu = new ContextMenu();
+            _contextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
-            TrayIcon = new System.Windows.Forms.NotifyIcon()
+            TrayIcon = new NotifyIcon()
             {
                 Icon = DefaultIcon,
                 Visible = true
@@ -159,33 +167,46 @@ namespace TCC
             TrayIcon.MouseDown += NI_MouseDown;
             TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            TrayIcon.Text = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
+            TrayIcon.Text = string.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             var CloseButton = new MenuItem() { Header = "Close" };
 
             CloseButton.Click += (s, ev) => App.CloseApp();
-            ContextMenu.Items.Add(CloseButton);
+            _contextMenu.Items.Add(CloseButton);
 
-            _undimTimer.Elapsed += _undimTimer_Elapsed;
+            //_undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            FocusManager.FocusTimer = new System.Timers.Timer(1000);
-            FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
+            Settings = new SettingsWindow();
 
-            //ClickThruChanged += (s, ev) => UpdateClickThru();
+            if (SettingsManager.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
+            FocusManager.FocusTimer.Start();
 
         }
-        public static void NotifyDimChanged()
-        {
-            TccDimChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccDim)));
-        }
-        public static void NotifyVisibilityChanged()
-        {
-            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccVisible)));
-        }
-        public static void RefreshDim()
-        {
-            SkillsEnded = false;
-            Task.Delay(100).ContinueWith(t => SkillsEnded = true);
-        }
+
+        //private static void TccWindow_RecreateWindow(TccWindow obj)
+        //{
+        //    if (obj is CooldownWindow) CooldownWindow = new CooldownWindow();
+        //    if (obj is GroupWindow) GroupWindow = new GroupWindow();
+        //    if (obj is BossWindow) BossWindow = new BossWindow();
+        //    if (obj is BuffWindow) BuffWindow = new BuffWindow();
+        //    if (obj is CharacterWindow) CharacterWindow = new CharacterWindow();
+        //    if (obj is ClassWindow) ClassWindow = new ClassWindow();
+        //    if (obj is ChatWindow) ChatWindowManager.Instance.InitWindows();
+        //}
+
+        //public static void NotifyDimChanged()
+        //{
+        //    TccDimChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccDim)));
+        //}
+        //public static void NotifyVisibilityChanged()
+        //{
+        //    TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccVisible)));
+        //}
+        //public static void RefreshDim()
+        //{
+        //    SkillsEnded = false;
+        //    Task.Delay(100).ContinueWith(t => SkillsEnded = true);
+        //}
         public static void Dispose()
         {
             FocusManager.FocusTimer.Stop();
@@ -218,7 +239,6 @@ namespace TCC
             //    while (waiting) { }
             //}
             GroupWindow = new GroupWindow();
-            //ChatWindow = new ChatWindow(); 
             ChatWindowManager.Instance.InitWindows();
             CooldownWindow = new CooldownWindow();
             BossWindow = new BossWindow();
@@ -227,15 +247,15 @@ namespace TCC
             ClassWindow = new ClassWindow();
             InfoWindow = new InfoWindow();
             FlightDurationWindow = new FlightDurationWindow();
-            GroupWindow.Show();     
-            //ChatWindow.Show();      
-            CooldownWindow.Show();  
-            BossWindow.Show();      
-            BuffWindow.Show();      
-            CharacterWindow.Show(); 
-            ClassWindow.Show();     
-            Debug.WriteLine("Windows loaded");
-
+            LfgListWindow = new LfgListWindow();
+            SkillConfigWindow = new SkillConfigWindow();
+            GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
+            //GroupWindow.Show();
+            //CooldownWindow.Show();
+            //BossWindow.Show();
+            //BuffWindow.Show();
+            //CharacterWindow.Show();
+            //ClassWindow.Show();
         }
         private static void LoadCharWindow()
         {
@@ -243,7 +263,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
-                CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
+                //CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
 
                 CharacterWindow.Show();
                 waiting = false;
@@ -274,7 +294,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
+                //CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
 
                 CooldownWindow.Show();
                 waiting = false;
@@ -295,7 +315,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow();
 
-                BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
+                //BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
                 BossWindow.Show();
                 waiting = false;
 
@@ -380,11 +400,11 @@ namespace TCC
 
 
         }
-        private static void _undimTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            SkillsEnded = true;
-            _undimTimer.Stop();
-        }
+        //private static void _undimTimer_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    SkillsEnded = true;
+        //    _undimTimer.Stop();
+        //}
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (Settings == null)
@@ -401,7 +421,7 @@ namespace TCC
         //    foreach (Window w in Application.Current.Windows)
         //    {
         //        if (w.GetType() == typeof(SettingsWindow)) continue;
-        //        FocusManager.MakeTransparent(new WindowInteropHelper(w).Handle);
+        //        FocusManager.MakeClickThru(new WindowInteropHelper(w).Handle);
         //    }
         //}
         //private static void UnsetClickThru()
@@ -409,7 +429,7 @@ namespace TCC
         //    foreach (Window w in Application.Current.Windows)
         //    {
         //        if (w.GetType() == typeof(SettingsWindow)) continue;
-        //        FocusManager.UndoTransparent(new WindowInteropHelper(w).Handle);
+        //        FocusManager.UndoClickThru(new WindowInteropHelper(w).Handle);
         //    }
 
         //}
@@ -429,12 +449,23 @@ namespace TCC
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                ContextMenu.IsOpen = true;
+                _contextMenu.IsOpen = true;
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                ContextMenu.IsOpen = false;
+                _contextMenu.IsOpen = false;
             }
+        }
+
+        public static void TempShowAll()
+        {
+            //CooldownWindow.TempShow();
+            //CharacterWindow.TempShow();
+            //BossWindow.TempShow();
+            //BuffWindow.TempShow();
+            //ClassWindow.TempShow();
+            //GroupWindow.TempShow();
+            //ChatWindowManager.Instance.TempShow();
         }
     }
 }

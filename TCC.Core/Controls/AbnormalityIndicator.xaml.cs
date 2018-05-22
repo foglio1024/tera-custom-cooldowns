@@ -5,9 +5,12 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Data;
 
 namespace TCC.Controls
 {
+// ReSharper disable PossibleNullReferenceException
+
     /// <summary>
     /// Logica di interazione per AbnormalityIndicator.xaml
     /// </summary>
@@ -36,8 +39,8 @@ namespace TCC.Controls
             if (_context == null) return;
 
             var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.DurationLeft));
-            int fps = _context.DurationLeft > 20000 ? 1 : 10;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
+            var fps = _context.DurationLeft > 20000 ? 1 : 10;
+            Timeline.SetDesiredFrameRate(an, fps);
             Arc.BeginAnimation(Arc.EndAngleProperty, an);
 
         }
@@ -75,35 +78,23 @@ namespace TCC.Controls
 
         public double Size
         {
-            get { return (double)GetValue(SizeProperty); }
-            set { SetValue(SizeProperty, value); }
+            get => (double)GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
-
-        private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
-        {
-            FocusManager.Running = false;
-        }
-
-        private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
-        {
-            FocusManager.Running = true;
-        }
     }
-}
-namespace TCC.Converters
-{
+
     public class DurationLabelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            uint seconds = (uint)value / 1000;
-            uint minutes = seconds / 60;
-            uint hours = minutes / 60;
-            uint days = hours / 24;
+            var seconds = (uint)value / 1000;
+            var minutes = seconds / 60;
+            var hours = minutes / 60;
+            var days = hours / 24;
 
             if (minutes < 3)
             {
@@ -137,7 +128,7 @@ namespace TCC.Converters
             switch (val)
             {
                 case AbnormalityType.Stun:
-                    return new SolidColorBrush(Colors.Red);
+                    return new SolidColorBrush(Colors.Red); //TODO: convert to resources
                 case AbnormalityType.DOT:
                     return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0xf4));
                 case AbnormalityType.Debuff:
@@ -158,7 +149,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int stacks = (int)value;
+            var stacks = (int)value;
             if (stacks > 1)
             {
                 return Visibility.Visible;
@@ -178,7 +169,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            uint duration = (uint)value;
+            var duration = (uint)value;
             if (duration == uint.MaxValue)
             {
                 return Visibility.Hidden;
@@ -198,7 +189,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double size = (double)value;
+            var size = (double)value;
             return size / 1.7;
         }
 
@@ -211,7 +202,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double size = (double)value;
+            var size = (double)value;
             return size / 1.9;
         }
 
@@ -224,7 +215,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double size = (double)value;
+            var size = (double)value;
             return new Thickness(0, 0, 0, -size * 1.25);
         }
 
@@ -233,5 +224,4 @@ namespace TCC.Converters
             throw new NotImplementedException();
         }
     }
-
 }

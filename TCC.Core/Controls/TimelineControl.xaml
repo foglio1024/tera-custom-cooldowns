@@ -64,7 +64,7 @@
                         Width="6"
                         MinHeight="6"
                         CornerRadius="2"
-                        Background="{StaticResource Colors.App.HP}"
+                        Background="{StaticResource HpColor}"
                         BorderBrush="White"
                         VerticalAlignment="Stretch"
                         BorderThickness="0"

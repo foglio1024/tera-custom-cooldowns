@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Media.Animation;
-using System.Windows.Threading;
-using TCC.Controls;
-using TCC.ViewModels;
-using TCC.Windows;
 
-namespace TCC
+namespace TCC.Windows
 {
-    public partial class CooldownWindow : TccWindow
+    public partial class CooldownWindow 
     {
         public CooldownWindow()
         {
             InitializeComponent();
-            _b = buttons;
-            _c = content;
-            InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
+            ButtonsRef = Buttons;
+            MainContent = content;
+            Init(SettingsManager.CooldownWindowSettings, ignoreSize: true);
 
         }
 

@@ -14,7 +14,7 @@ namespace TCC.TemplateSelectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            MessagePiece m = item as MessagePiece;
+            var m = item as MessagePiece;
             if (m == null) return null;
             switch (m.Type)
             {

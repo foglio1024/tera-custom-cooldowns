@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace TCC.Data
+namespace TCC.Data.Databases
 {
-    public static class SocialDatabase
+    public class SocialDatabase
     {
-        public static Dictionary<uint, string> Social;
-        public static void Load(string lang)
+        public Dictionary<uint, string> Social { get; }
+        public SocialDatabase(string lang)
         {
             var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/social/social-{lang}.tsv"));
             Social = new Dictionary<uint, string>();

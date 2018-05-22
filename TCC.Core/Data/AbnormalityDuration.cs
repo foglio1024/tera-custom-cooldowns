@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Timers;
-using System.Windows;
 using System.Windows.Threading;
-using TCC.Data;
 
-namespace TCC
+namespace TCC.Data
 {
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
     {
@@ -41,7 +39,7 @@ namespace TCC
                 NPC("Stacks");
             }
         }
-        private readonly System.Timers.Timer timer;
+        private readonly Timer timer;
         private uint _durationLeft;
         public uint DurationLeft
         {
@@ -66,7 +64,7 @@ namespace TCC
         //}
         //public double BackgroundEllipseSize { get; set; }
         //public Thickness IndicatorMargin { get; set; }
-        static int _count = 0;
+        private static int _count = 0;
         public bool Animated { get; private set; }
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
         {
@@ -86,13 +84,14 @@ namespace TCC
             DurationLeft = d;
             if (!Abnormality.Infinity)
             {
-                timer = new System.Timers.Timer(1000);
+                timer = new Timer(1000);
                 timer.Elapsed += DecreaseDuration;
                 timer.Disposed += SetDisposed;
                 timer.Start();
             }
         }
-        bool _isTimerDisposed;
+
+        private bool _isTimerDisposed;
         private void SetDisposed(object sender, EventArgs e)
         {
             _isTimerDisposed = true;

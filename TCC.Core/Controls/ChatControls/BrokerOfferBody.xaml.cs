@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -8,7 +7,7 @@ namespace TCC.Controls.ChatControls
     /// <summary>
     /// Interaction logic for BrokerOfferBody.xaml
     /// </summary>
-    public partial class BrokerOfferBody : UserControl
+    public partial class BrokerOfferBody
     {
         public BrokerOfferBody()
         {

@@ -7,7 +7,7 @@
              mc:Ignorable="d" Loaded="UserControl_Loaded">
     <Grid>
         <Border 
-            x:Name="rect"
+            x:Name="Rect"
             Width="4"  
             VerticalAlignment="Stretch" 
             HorizontalAlignment="Left"/>

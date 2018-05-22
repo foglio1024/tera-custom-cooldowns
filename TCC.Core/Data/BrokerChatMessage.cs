@@ -5,52 +5,53 @@ namespace TCC.Data
 {
     public class BrokerChatMessage : ChatMessage
     {
-        MessagePiece startingPrice;
+        private MessagePiece _startingPrice;
         public MessagePiece StartingPrice
         {
-            get => startingPrice;
+            get => _startingPrice;
             set
             {
-                startingPrice = value;
-                NPC(nameof(StartingPrice));
+                _startingPrice = value;
+                NPC();
             }
         }
 
-        MessagePiece offeredPrice;
+        private MessagePiece _offeredPrice;
         public MessagePiece OfferedPrice
         {
-            get => offeredPrice;
+            get => _offeredPrice;
             set
             {
-                offeredPrice = value;
-                NPC(nameof(OfferedPrice));
+                _offeredPrice = value;
+                NPC();
             }
         }
 
-        MessagePiece listing;
+        private MessagePiece _listing;
         public MessagePiece Listing
         {
-            get => listing;
+            get => _listing;
             set
             {
-                listing = value;
-                NPC(nameof(Listing));
+                _listing = value;
+                NPC();
             }
         }
 
-        MessagePiece amount;
+        private MessagePiece _amount;
         public MessagePiece Amount
         {
-            get => amount;
+            get => _amount;
             set
             {
-                amount = value;
-                NPC(nameof(Amount));
+                _amount = value;
+                NPC();
             }
         }
 
         public bool Handled = false;
-        public uint PlayerId, ListingId;
+        public readonly uint PlayerId;
+        public readonly uint ListingId;
 
         public BrokerChatMessage(S_TRADE_BROKER_DEAL_SUGGESTED p) : base()
         {
@@ -61,11 +62,11 @@ namespace TCC.Data
             PlayerId = p.PlayerId;
 
             Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
-            OfferedPrice = new MessagePiece(new Money(p.OfferedPrice), Channel);
-            StartingPrice = new MessagePiece(new Money(p.SellerPrice), Channel);
+            OfferedPrice = new MessagePiece(new Money(p.OfferedPrice));
+            StartingPrice = new MessagePiece(new Money(p.SellerPrice));
             Listing = new MessagePiece("");
             
-            ItemsDatabase.Instance.Items.TryGetValue((uint)p.Item, out Item i);
+            SessionManager.ItemsDatabase.Items.TryGetValue((uint)p.Item, out var i);
             if(i != null)
             {
                 Listing.Text = "<"+ i.Name + ">";

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCC.Data.Databases;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
-using TCC.Windows;
-using Tera.Game;
-using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
@@ -34,7 +31,7 @@ namespace TCC.Parsing.Messages
             reader.BaseStream.Position = invOffset - 4;
             try
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
 
                     var offset = reader.ReadUInt16();
@@ -58,7 +55,6 @@ namespace TCC.Parsing.Messages
                     reader.Skip(4 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 1 + 4 + 4 + 4 + 4 + 1 + 1);
                     var exp = reader.ReadUInt32();
                     Items.Add(new Tuple<uint, int, uint>(itemId, enchant, exp));
-                    //Console.WriteLine(itemId + " " + enchant + " [" + slot + "]");
                     reader.BaseStream.Position = next - 4;
                 }
 

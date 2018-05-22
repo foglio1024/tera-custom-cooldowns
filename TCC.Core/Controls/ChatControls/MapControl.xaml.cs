@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -11,7 +11,7 @@ namespace TCC.Controls.ChatControls
     /// <summary>
     /// Interaction logic for MapControl.xaml
     /// </summary>
-    public partial class MapControl : UserControl
+    public partial class MapControl
     {
         public MapControl()
         {
@@ -30,16 +30,16 @@ namespace TCC.Controls.ChatControls
             Animate();
         }
 
-        DoubleAnimation an;
-        DoubleAnimation opan;
-        DispatcherTimer loop;
+        private DoubleAnimation an;
+        private DoubleAnimation opan;
+        private DispatcherTimer loop;
         public void Animate()
         {
             Dispatcher.Invoke(() =>
             {
-                animatedPath.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
-                animatedPath.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, an);
-                animatedPath.BeginAnimation(OpacityProperty, opan);
+                AnimatedPath.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
+                AnimatedPath.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, an);
+                AnimatedPath.BeginAnimation(OpacityProperty, opan);
             });
         }
         public void StartAnimation()
@@ -54,20 +54,22 @@ namespace TCC.Controls.ChatControls
         internal void OnDataChanged()
         {           
             var c = (MessagePiece)DataContext;
-            var isDg = MapDatabase.GetDungeon(c.Location);
-            if (mapImg.Source == null) return;
-            var ratio = mapImg.Source.Width / mapImg.Source.Height;
+            var isDg = SessionManager.MapDatabase.GetDungeon(c.Location);
+            if (MapImg.Source == null) return;
+            var ratio = MapImg.Source.Width / MapImg.Source.Height;
 
             if(isDg && ratio != 1)
             {
-                mapImg.Height = mapImg.ActualWidth/ratio;
-                if (mapImg.Height == 0) mapImg.Height = (double)App.Current.FindResource("MapWidth") / ratio;
-                mapImg.Stretch = Stretch.Uniform;
+                MapImg.Height = MapImg.ActualWidth/ratio;
+                // ReSharper disable once PossibleNullReferenceException
+                if (MapImg.Height == 0) MapImg.Height = (double)Application.Current?.FindResource("MapWidth") / ratio;
+                MapImg.Stretch = Stretch.Uniform;
             }
             else if(ratio == 1 && !isDg)
             {
-                mapImg.Height = (double)App.Current.FindResource("MapHeight");
-                mapImg.Stretch = Stretch.UniformToFill;
+                // ReSharper disable once PossibleNullReferenceException
+                MapImg.Height = (double)Application.Current.FindResource("MapHeight");
+                MapImg.Stretch = Stretch.UniformToFill;
             }
         }
 

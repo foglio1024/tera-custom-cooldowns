@@ -1,24 +1,18 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using TCC.ViewModels;
+﻿using System.Windows.Input;
 
 namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
     /// </summary>
-    public partial class BuffWindow : TccWindow
+    public partial class BuffWindow
     {
         public BuffWindow()
         {
             InitializeComponent();
-            _b = buttons;
-            _c = content;
-            InitWindow(SettingsManager.BuffWindowSettings, ignoreSize: true);
-        }
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ContextMenu.IsOpen = true;
+            ButtonsRef = Buttons;
+            MainContent = content;
+            Init(SettingsManager.BuffWindowSettings, ignoreSize: true);
         }
     }
 }

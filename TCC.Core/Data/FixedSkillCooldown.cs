@@ -2,172 +2,175 @@
 using System.Windows.Threading;
 namespace TCC.Data
 {
+    public enum CooldownMode
+    {
+        Normal,
+        Pre
+    }
     public class FixedSkillCooldown : TSPropertyChanged
     {
-        CooldownType _type;
-        DispatcherTimer _secondsTimer;
-        DispatcherTimer _offsetTimer;
-        DispatcherTimer _shortTimer;
-        public Skill Skill { get; set; }
-        ulong cooldown;
-        public ulong Cooldown
-        {
-            get => cooldown; set
-            {
-                if (cooldown == value) return;
-                cooldown = value;
-            }
-        }
-        public ulong OriginalCooldown { get; set; }
-        bool isAvailable = true;
-        public bool IsAvailable
-        {
-            get => isAvailable;
-            private set
-            {
-                if (isAvailable == value) return;
-                isAvailable = value;
-                NPC("IsAvailable");
-            }
-        }
+        // events
+        public event Action<CooldownMode> Started;
+        public event Action<CooldownMode> Ended;
+        public event Action FlashingForced;
+        public event Action SecondsUpdated;
 
-        ulong seconds = 0;
+        // fields
+        private readonly DispatcherTimer _mainTimer;
+        private readonly DispatcherTimer _offsetTimer;
+        private readonly DispatcherTimer _secondsTimer;
+
+        private CooldownType _cooldownType;
+        private CooldownMode _currentMode;
+        private ulong _seconds;
         private bool _flashOnAvailable;
 
-        public ulong Seconds
+        // properties
+        public CooldownType CooldownType
         {
-            get
-            {
-                return seconds;
-            }
+            get => _cooldownType;
             set
             {
-                if (seconds == value) return;
-                seconds = value;
-                NPC("Seconds");
+                if (_cooldownType == value) return;
+                _cooldownType = value;
+                NPC();
             }
         }
-
+        public ulong Seconds
+        {
+            get => _seconds;
+            set
+            {
+                if (_seconds == value) return;
+                _seconds = value;
+                _dispatcher.Invoke(() => SecondsUpdated?.Invoke());
+                NPC();
+            }
+        }
+        public ulong OriginalCooldown { get; private set; }
+        public ulong Cooldown { get; private set; }
+        public Skill Skill { get; }
         public bool FlashOnAvailable
         {
-            get { return _flashOnAvailable; }
+            get => _flashOnAvailable;
             set
             {
                 if (_flashOnAvailable == value) return;
                 _flashOnAvailable = value;
-                NPC(nameof(FlashOnAvailable));
-                NPC(nameof(IsAvailable));
+                NPC();
+                ForceFlashing();
             }
         }
-        public override string ToString()
+        public bool IsAvailable => !_mainTimer.IsEnabled;
+
+        // ctors
+        public FixedSkillCooldown()
         {
-            return Skill.Name;
+            _dispatcher = App.BaseDispatcher;
+
+            _mainTimer = new DispatcherTimer();
+            _offsetTimer = new DispatcherTimer();
+            _secondsTimer = new DispatcherTimer();
+
+            _secondsTimer.Interval = TimeSpan.FromMilliseconds(1000);
+
+            _mainTimer.Tick += CooldownEnded;
+            _offsetTimer.Tick += StartSecondsTimer;
+            _secondsTimer.Tick += DecreaseSeconds;
         }
-        public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d, bool flashOnAvailable)
+        public FixedSkillCooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill) : this()
         {
-            _dispatcher = d;
-
-            _shortTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
-            _shortTimer.Tick += _shortTimer_Tick;
-
-            Seconds = 0;
-
-            _secondsTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
-            _secondsTimer.Interval = TimeSpan.FromSeconds(1);
-            _secondsTimer.Tick += _secondsTimer_Tick;
-
-            _offsetTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
-            _offsetTimer.Tick += _offsetTimer_Tick;
-
-            _type = t;
+            CooldownType = t;
             Skill = sk;
-
             FlashOnAvailable = flashOnAvailable;
         }
 
-        private void _shortTimer_Tick(object sender, EventArgs e)
+        // timers tick handlers
+        private void DecreaseSeconds(object sender, EventArgs e)
         {
-            _shortTimer.Stop();
-            IsAvailable = true;
+            if (Seconds > 0) Seconds = Seconds - 1;
+            else _secondsTimer.Stop();
         }
-
-        private void _offsetTimer_Tick(object sender, EventArgs e)
+        private void StartSecondsTimer(object sender, EventArgs e)
         {
             _offsetTimer.Stop();
-            Seconds--;
             _secondsTimer.Start();
-
         }
-
-        public FixedSkillCooldown(Dispatcher d)
+        private void CooldownEnded(object sender, EventArgs e)
         {
-            _dispatcher = d;
-        }
-        private void _secondsTimer_Tick(object sender, EventArgs e)
-        {
-            var s = Seconds;
-            if(Seconds == 1)
-            {
-                _secondsTimer.Stop();
-                IsAvailable = true;
-            }
-            Seconds--;
-            if (Seconds > s)
-            {
-                _secondsTimer.Stop();
-                IsAvailable = true;
-            }
-        }
-
-        public void Start(ulong cd)
-        {
-            if (cd > 1000)
-            {
-                Cooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
-                OriginalCooldown = Cooldown;
-                Seconds = 1 + (Cooldown / 1000);
-                var offset = Cooldown % 1000;
-                _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
-                _offsetTimer.Start();
-                IsAvailable = false;
-            }
-            else
-            {
-                Cooldown = cd;
-                _shortTimer.Interval = TimeSpan.FromMilliseconds(cd);
-                _shortTimer.Start();
-                Seconds = 0;
-                IsAvailable = false;
-            }
-            NPC("Start");
-
-        }
-        public void Refresh(uint cd)
-        {
+            _mainTimer.Stop();
             _secondsTimer.Stop();
-            if (cd == 0)
+            Seconds = 0;
+            _dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
+        }
+
+        // methods
+        private void ForceFlashing() => _dispatcher.Invoke(() => FlashingForced?.Invoke());
+
+        public void Start(ulong cd, CooldownMode mode = CooldownMode.Normal)
+        {
+            if (cd >= Int32.MaxValue) return;
+            if (_mainTimer.IsEnabled)
             {
-                IsAvailable = true;
-                Cooldown = 0;
+                if (_currentMode == CooldownMode.Pre)
+                {
+                    _mainTimer.Stop();
+                    _secondsTimer.Stop();
+                    _offsetTimer.Stop();
+
+                    _dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
+                }
+            }
+
+            _currentMode = mode;
+
+            Seconds =  cd / 1000;
+            Cooldown = cd;
+            OriginalCooldown = cd;
+
+            _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
+            _mainTimer.Start();
+
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
+            _offsetTimer.Start();
+
+            _dispatcher.Invoke(() => Started?.Invoke(_currentMode));
+        }
+        public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
+        {
+            _mainTimer.Stop();
+
+            if (cd == 0 || cd >= Int32.MaxValue)
+            {
                 Seconds = 0;
-                NPC("Refresh");
+                Cooldown = 0;
+                _dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
                 return;
             }
+
             Cooldown = cd;
             Seconds = Cooldown / 1000;
-            if(Seconds == 0)
-            {
-                _secondsTimer.Stop();
-                IsAvailable = true;
-                return;
-            }
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(Cooldown % 1000);
+
+            //if (Seconds == 0)
+            //{
+            //    _secondsTimer.Stop();
+            //    _dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
+            //    return;
+            //}
+
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
             _offsetTimer.Start();
-            NPC("Refresh");
+
+            _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
+            _mainTimer.Start();
+            _dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
+
         }
-        public void ForceAvailable(bool available)
+        public void ForceEnded() => CooldownEnded(null, null);
+
+        public override string ToString()
         {
-            IsAvailable = available;
+            return Skill.Name;
         }
     }
 }

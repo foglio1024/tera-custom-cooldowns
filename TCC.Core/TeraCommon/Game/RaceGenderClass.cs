@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     // Tera often uses a this tuple of Race, Gender and Class. For example for looking up skills
     public struct RaceGenderClass

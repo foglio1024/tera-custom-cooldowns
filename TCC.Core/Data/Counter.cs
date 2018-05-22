@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Threading;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class Counter : TSPropertyChanged
     {
+
+        //TODO use events here
         private int val = 0;
         public int Val
         {
@@ -22,10 +24,11 @@ namespace TCC.ViewModels
             }
         }
 
-        DispatcherTimer _expire;
-        int _max;
-        bool _autoexpire;
-        void RefreshTimer()
+        private DispatcherTimer _expire;
+        private int _max;
+        private bool _autoexpire;
+
+        private void RefreshTimer()
         {
             _expire.Stop();
             if (val == 0) return;

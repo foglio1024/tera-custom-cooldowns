@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO.Packaging;
 using System.Windows.Media.Imaging;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     public class IconsDatabase
     {

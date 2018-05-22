@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using TCC.Data;
 
 namespace TCC.Converters
 {
-    class ShieldStatusColorConverter : IValueConverter
+    internal class ShieldStatusColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch ((ShieldStatus)value)
             {
                 case ShieldStatus.On:
-                    return App.Current.FindResource("Colors.App.MP");
+                    return Application.Current.FindResource("MpColor");
                 case ShieldStatus.Broken:
-                    return App.Current.FindResource("Colors.App.Green");
+                    return Application.Current.FindResource("GreenColor");
                 case ShieldStatus.Failed:
                     return Brushes.Red;
                 default:

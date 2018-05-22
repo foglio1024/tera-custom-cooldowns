@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -15,13 +14,13 @@ namespace TCC.Controls
     /// </summary>
     public partial class VanguardInfoControl : UserControl
     {
-        TimeSpan growDuration;
-        DoubleAnimation scaleUp;
-        DoubleAnimation moveUp;
-        DoubleAnimation scaleDown;
-        DoubleAnimation moveDown;
-        DoubleAnimation scaleRipple;
-        DoubleAnimation fadeRipple;
+        private TimeSpan growDuration;
+        private DoubleAnimation scaleUp;
+        private DoubleAnimation moveUp;
+        private DoubleAnimation scaleDown;
+        private DoubleAnimation moveDown;
+        private DoubleAnimation scaleRipple;
+        private DoubleAnimation fadeRipple;
 
 
         public VanguardInfoControl()
@@ -33,7 +32,7 @@ namespace TCC.Controls
         {
             //rootBorder.RenderTransform.BeginAnimation(TranslateTransform.YProperty, scaleUp);
             //rootBorder.Effect.BeginAnimation(DropShadowEffect.BlurRadiusProperty, moveUp);
-            glow.BeginAnimation(OpacityProperty,
+            Glow.BeginAnimation(OpacityProperty,
                 new DoubleAnimation(1, TimeSpan.FromMilliseconds(50))
                 { EasingFunction = new QuadraticEase() });
         }
@@ -51,7 +50,7 @@ namespace TCC.Controls
             //    rootBorder.RenderTransform = new TranslateTransform(0, 0);
             //    (rootBorder.Effect as DropShadowEffect).BlurRadius = 3;
             //}
-            glow.BeginAnimation(OpacityProperty,
+            Glow.BeginAnimation(OpacityProperty,
                 new DoubleAnimation(0, TimeSpan.FromMilliseconds(250))
                 { EasingFunction = new QuadraticEase() });
         }
@@ -76,11 +75,12 @@ namespace TCC.Controls
             i.Click += RemoveCharacter;
             ContextMenu.Items.Add(i);
         }
-        void AnimateSel()
+
+        private void AnimateSel()
         {
-            if ((DataContext as Character).IsSelected) sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+            if ((DataContext as Character).IsSelected) Sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
             new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-            else sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+            else Sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
                  new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
 
         }
@@ -89,16 +89,16 @@ namespace TCC.Controls
             InfoWindowViewModel.Instance.Characters.Remove((Character)DataContext);
         }
 
-        bool _animDown = true;
+        private bool _animDown = true;
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //_animDown = false;
-            var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];
-            (ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(e.MouseDevice.GetPosition(this).X - ripple.Width / 2, e.MouseDevice.GetPosition(this).Y - ripple.Height / 2);
+            var scaleTrans = (Ripple.RenderTransform as TransformGroup).Children[0];
+            (Ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(e.MouseDevice.GetPosition(this).X - Ripple.Width / 2, e.MouseDevice.GetPosition(this).Y - Ripple.Height / 2);
 
             scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, scaleRipple);
             scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, scaleRipple);
-            ripple.BeginAnimation(OpacityProperty, fadeRipple);
+            Ripple.BeginAnimation(OpacityProperty, fadeRipple);
             //Point relativePoint = rootBorder.TransformToAncestor(WindowManager.InfoWindow)
             //                  .Transform(new Point(0, 0));
             //WindowManager.InfoWindow.ExpandCharacter(relativePoint, rootBorder.ActualWidth, this.ActualHeight);

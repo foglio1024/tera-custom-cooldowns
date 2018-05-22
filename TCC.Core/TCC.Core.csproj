@@ -35,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>tcc-logo.ico</ApplicationIcon>
@@ -85,6 +86,9 @@
   <ItemGroup>
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\gong-wpf-dragdrop.1.1.0\lib\net46\GongSolutions.Wpf.DragDrop.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -210,6 +214,9 @@
     <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
       <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChatControls\MoongourdPopup.xaml.cs">
+      <DependentUpon>MoongourdPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\TabSettingControl.xaml.cs">
       <DependentUpon>TabSettingControl.xaml</DependentUpon>
     </Compile>
@@ -249,6 +256,7 @@
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
+    <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
     <Compile Include="Converters\DungeonIdToImageConverter.cs" />
@@ -272,9 +280,6 @@
     <Compile Include="Controls\ChatControls\ChatMessageHeader.xaml.cs">
       <DependentUpon>ChatMessageHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\CustomMessageBody.xaml.cs">
-      <DependentUpon>CustomMessageBody.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ChatControls\FriendMessageDialog.xaml.cs">
       <DependentUpon>FriendMessageDialog.xaml</DependentUpon>
     </Compile>
@@ -287,16 +292,12 @@
     <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
       <DependentUpon>PlayerTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\testctrl.xaml.cs">
-      <DependentUpon>testctrl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DefaultEnemyWindowLayout.xaml.cs">
       <DependentUpon>DefaultEnemyWindowLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DragonControl.xaml.cs">
       <DependentUpon>DragonControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NonReloadingTabControl.cs" />
     <Compile Include="Controls\Phase1BossControl.xaml.cs">
       <DependentUpon>Phase1BossControl.xaml</DependentUpon>
     </Compile>
@@ -312,9 +313,11 @@
     <Compile Include="Controls\Phase4BossControl.xaml.cs">
       <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LfgVmToButtonLabelConverter.cs" />
     <Compile Include="Converters\LogoInfoToImageConverter.cs" />
     <Compile Include="Converters\NullToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\PieceToPathConverter.cs" />
+    <Compile Include="Converters\RaidToColorConverter.cs" />
     <Compile Include="Converters\ReadyToColorConverter.cs" />
     <Compile Include="Converters\ReadyToIconConverter.cs" />
     <Compile Include="Converters\ReadyToOpacityConverter.cs" />
@@ -347,10 +350,12 @@
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
     <Compile Include="Data\Databases\DungeonDatabase.cs" />
     <Compile Include="Data\Databases\GuildQuestDatabase.cs" />
+    <Compile Include="Data\Item.cs" />
     <Compile Include="Data\Databases\ItemsDatabase.cs" />
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\SystemMessage.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
     <Compile Include="Data\Friend.cs" />
@@ -358,15 +363,21 @@
     <Compile Include="Data\Guard.cs" />
     <Compile Include="Data\InventoryManager.cs" />
     <Compile Include="Data\LFG.cs" />
+    <Compile Include="Data\Listing.cs" />
     <Compile Include="Data\Location.cs" />
     <Compile Include="Data\Section.cs" />
     <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
+    <Compile Include="ForegroundManager.cs" />
+    <Compile Include="HotKey.cs" />
+    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="MoongourdManager.cs" />
     <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
     <Compile Include="Parsing\Messages\S_ACCOUNT_PACKAGE_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_ACTION_STAGE.cs" />
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
     <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
     <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
@@ -384,12 +395,15 @@
     <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INTERVAL_POS_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Parsing\Messages\S_SHOW_CANDIDATE_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_SHOW_PARTY_MATCH_INFO.cs" />
     <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
     <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
     <Compile Include="Parsing\OpcodeDownloader.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
@@ -408,9 +422,6 @@
     </Compile>
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ArcherStanceIndicator.xaml.cs">
-      <DependentUpon>ArcherStanceIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MysticAurasIndicator.xaml.cs">
       <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
@@ -465,8 +476,8 @@
     <Compile Include="Data\MessagePieceType.cs" />
     <Compile Include="Data\Money.cs" />
     <Compile Include="Data\PrivateChatChannel.cs" />
-    <Compile Include="Data\SocialDatabase.cs" />
-    <Compile Include="Data\Databases\SystemMessages.cs" />
+    <Compile Include="Data\Databases\SocialDatabase.cs" />
+    <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="EntitiesManager.cs" />
     <Compile Include="PacketInspector.cs" />
@@ -562,17 +573,8 @@
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
-    <Compile Include="Controls\CircularGauge.xaml.cs">
-      <DependentUpon>CircularGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DragonSmallGauge.xaml.cs">
-      <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
-      <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
@@ -720,6 +722,7 @@
     <Compile Include="TimeManager.cs" />
     <Compile Include="TwitchConnector.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
     <Compile Include="ViewModels\ChatWindowViewModel.cs" />
@@ -728,10 +731,12 @@
     <Compile Include="ViewModels\ClassManagers\ClassManager.cs" />
     <Compile Include="ViewModels\ClassManagers\ArcherBarManager.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
+    <Compile Include="ViewModels\ClassManagers\NullClassManager.cs" />
     <Compile Include="ViewModels\ClassWindowViewModel.cs" />
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
     <Compile Include="ViewModels\InfoWindowViewModel.cs" />
+    <Compile Include="ViewModels\LfgListViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
@@ -802,14 +807,14 @@
     <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DebugWindow.xaml.cs">
-      <DependentUpon>DebugWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FloatingButtonWindow.xaml.cs">
       <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\GroupAbnormalConfigWindow.xaml.cs">
+      <DependentUpon>GroupAbnormalConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
@@ -828,8 +833,8 @@
     <Compile Include="Windows\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\NewDungeonInfoControl.xaml.cs">
-      <DependentUpon>NewDungeonInfoControl.xaml</DependentUpon>
+    <Compile Include="Windows\LfgListWindow.xaml.cs">
+      <DependentUpon>LfgListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -855,7 +860,10 @@
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
-    <Compile Include="SplashScreen.xaml.cs">
+    <Compile Include="Windows\SkillConfigWindow.xaml.cs">
+      <DependentUpon>SkillConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TccMessageBox.xaml.cs">
@@ -896,10 +904,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\CustomMessageBody.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ChatControls\DefaultMessageBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -916,15 +920,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChatControls\MoongourdPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ChatControls\PlayerTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ChatControls\TabSettingControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ChatControls\testctrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -953,14 +957,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\BossGage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CircularGauge.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ArcherStanceIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1040,10 +1036,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DragonSmallGauge.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\FixedSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1053,10 +1045,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ClassBars\GunnerBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\HarrowholdBossesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1185,15 +1173,15 @@
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\DebugWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\FlightDurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\FloatingButtonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\GroupAbnormalConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1217,7 +1205,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\NewDungeonInfoControl.xaml">
+    <Page Include="Windows\LfgListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1233,7 +1221,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SplashScreen.xaml">
+    <Page Include="Windows\SkillConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1258,88 +1250,338 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-EU-GER.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-JP.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-KR-PTS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-NA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-THA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\equip_exp\equip_exp-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="resources\data\world_map\world_map-EU-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-EU-GER.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-JP.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-KR-PTS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-NA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-THA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\world_map\world_map-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\images\moongourd.png" />
+    <None Include="resources\data\acc_benefits\acc_benefits-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\equip_exp\equip_exp-EU-EN.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="resources\data\dungeons-def.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\data\items\items-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\items\items-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.329230.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.329686.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.329230.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.329686.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.329685.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="resources\data\opcodes\protocol.329268.map">
+    <None Include="resources\data\items\items-EU-EN.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\data\opcodes\protocol.329687.map">
+    <None Include="resources\data\items\items-EU-FR.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\data\opcodes\protocol.329688.map">
+    <None Include="resources\data\items\items-EU-GER.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="resources\data\opcodes\protocol.329689.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.329685.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="resources\data\opcodes\sysmsg.329268.map">
+    <None Include="resources\data\items\items-JP.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\data\opcodes\sysmsg.329687.map">
+    <None Include="resources\data\items\items-NA.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\data\opcodes\sysmsg.329688.map">
+    <None Include="resources\data\items\items-RU.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="resources\data\opcodes\sysmsg.329689.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="resources\data\opcodes\sysmsg.67.map">
+    <None Include="resources\data\items\items-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\data\opcodes\sysmsg.72.map">
+    <None Include="resources\data\items\items-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\items\items-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\items\items-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\world_map\world_map-EU-EN.xml">
@@ -1453,12 +1695,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="resources\data\monsters\monsters-KR-PTS.xml">
+    <None Include="resources\data\monsters\monsters-KR-PTS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-THA.xml">
+    </None>
+    <None Include="resources\data\monsters\monsters-THA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />
     <Resource Include="resources\fonts\droidsans.ttf" />
@@ -1493,33 +1735,33 @@
     <Resource Include="resources\images\ic_close_white_24dp_2x.png" />
     <Resource Include="resources\images\Icon_Laurels\blank.png" />
     <Resource Include="resources\images\combat.png" />
-    <Content Include="resources\data\monsters\monsters-EU-EN.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-EU-FR.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-EU-GER.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-JP.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-KR.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-NA.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-override.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-RU.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\monsters\monsters-TW.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="resources\data\monsters\monsters-EU-EN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-EU-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-EU-GER.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-JP.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-NA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-override.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="resources\images\Icon_Classes\archer.png" />
     <Resource Include="resources\images\Icon_Classes\berserker.png" />
     <Resource Include="resources\images\Icon_Classes\brawler.png" />
@@ -1546,6 +1788,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="resources\data\opcodes\" />
     <Folder Include="ViewModels\WindowManagers\" />
   </ItemGroup>
   <ItemGroup>

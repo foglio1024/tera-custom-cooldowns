@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls
 {
     /// <summary>
     /// Interaction logic for Phase3BossControl.xaml
     /// </summary>
-    public partial class Phase3BossControl : UserControl
+    public partial class Phase3BossControl
     {
         public Phase3BossControl()
         {

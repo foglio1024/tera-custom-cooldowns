@@ -1,4 +1,4 @@
-﻿<w:TccWindow x:Class="TCC.Windows.ClassWindow"
+﻿<w:TccWidget x:Class="TCC.Windows.ClassWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,100 +9,94 @@
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:tcc="clr-namespace:TCC"
              xmlns:c="clr-namespace:TCC.Controls"
+             xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
              Style="{StaticResource BaseWindowStyle}"
-             Loaded="TccWindow_Loaded"
              mc:Ignorable="d" 
              Title="WarriorBar" 
              UseLayoutRounding="True"
-             x:Name="win">
-    <w:TccWindow.DataContext>
+             x:Name="Win"
+             BorderBrush="Red"
+             BorderThickness="0">
+    <w:TccWidget.DataContext>
         <wm:ClassWindowViewModel />
-    </w:TccWindow.DataContext>
-    <w:TccWindow.Resources>
-        <DataTemplate x:Key="warrior">
-            <c:WarriorBar />
+    </w:TccWidget.DataContext>
+    <w:TccWidget.Resources>
+        <DataTemplate x:Key="Warrior">
+            <classBars:WarriorBar />
         </DataTemplate>
-        <DataTemplate x:Key="valkyrie">
-            <c:ValkyrieBar />
+        <DataTemplate x:Key="Valkyrie">
+            <classBars:ValkyrieBar />
         </DataTemplate>
-        <DataTemplate x:Key="archer">
-            <c:ArcherBar />
+        <DataTemplate x:Key="Archer">
+            <classBars:ArcherBar />
         </DataTemplate>
-        <DataTemplate x:Key="lancer">
-            <c:LancerBar/>
+        <DataTemplate x:Key="Lancer">
+            <classBars:LancerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="priest">
-            <c:PriestBar />
+        <DataTemplate x:Key="Priest">
+            <classBars:PriestBar />
         </DataTemplate>
-        <DataTemplate x:Key="mystic">
-            <c:MysticBar/>
+        <DataTemplate x:Key="Mystic">
+            <classBars:MysticBar/>
         </DataTemplate>
-        <DataTemplate x:Key="ninja">
-            <c:NinjaBar/>
+        <DataTemplate x:Key="Ninja">
+            <classBars:NinjaBar/>
         </DataTemplate>
-        <DataTemplate x:Key="gunner">
-            <c:GunnerBar/>
+        <DataTemplate x:Key="Gunner">
+            <classBars:GunnerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="brawler">
-            <c:BrawlerBar/>
+        <DataTemplate x:Key="Brawler">
+            <classBars:BrawlerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="reaper">
-            <c:ReaperBar/>
+        <DataTemplate x:Key="Reaper">
+            <classBars:ReaperBar/>
         </DataTemplate>
-        <DataTemplate x:Key="sorcerer">
-            <c:SorcererBar/>
+        <DataTemplate x:Key="Sorcerer">
+            <classBars:SorcererBar/>
         </DataTemplate>
-        <DataTemplate x:Key="berserker">
-            <c:BerserkerBar/>
+        <DataTemplate x:Key="Berserker">
+            <classBars:BerserkerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="slayer">
-            <c:SlayerBar/>
+        <DataTemplate x:Key="Slayer">
+            <classBars:SlayerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="emptyTemplate">
+        <DataTemplate x:Key="EmptyTemplate">
         </DataTemplate>
-        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
-            <Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <wm:ClassWindowTemplateSelector x:Key="ClassWindowTemplateSelector"
+                                        Warrior="{StaticResource Warrior}"
+                                        Valkyrie="{StaticResource Valkyrie}"
+                                        Archer="{StaticResource Archer}"
+                                        Lancer="{StaticResource Lancer}"
+                                        Priest="{StaticResource Priest}"
+                                        Mystic="{StaticResource Mystic}"
+                                        Ninja="{StaticResource Ninja}"
+                                        Gunner="{StaticResource Gunner}"
+                                        Brawler="{StaticResource Brawler}"
+                                        Reaper="{StaticResource Reaper}"
+                                        Sorcerer="{StaticResource Sorcerer}"
+                                        Berserker="{StaticResource Berserker}"
+                                        Slayer="{StaticResource Slayer}"
+                                        None="{StaticResource EmptyTemplate}"
+                                        />
 
-    </w:TccWindow.Resources>
+    </w:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="buttons"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" 
+        <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                          />
 
-        <ContentControl x:Name="content" Content="{Binding CurrentManager}" Margin="5" Background="Transparent" Grid.Row="1">
+        <ContentControl x:Name="content" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center"
+                        ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}" Margin="5" Background="Transparent" Grid.Row="1">
         <ContentControl.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+            <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
         </ContentControl.LayoutTransform>
         <ContentControl.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
         </ContentControl.CacheMode>
     </ContentControl>
     </Grid>
-</w:TccWindow>
+</w:TccWidget>

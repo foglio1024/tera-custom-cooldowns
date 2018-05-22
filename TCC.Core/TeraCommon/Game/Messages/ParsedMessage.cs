@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages
 {
     // Base class for parsed messages
     public abstract class ParsedMessage : Message

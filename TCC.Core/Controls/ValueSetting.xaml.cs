@@ -66,11 +66,10 @@ namespace TCC.Controls
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
 
 
-
-        ColorAnimation glow;
-        ColorAnimation unglow;
-        DoubleAnimation fadeIn;
-        DoubleAnimation fadeOut;
+        private ColorAnimation glow;
+        private ColorAnimation unglow;
+        private DoubleAnimation fadeIn;
+        private DoubleAnimation fadeOut;
 
 
 
@@ -82,7 +81,7 @@ namespace TCC.Controls
             fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
             fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
-            mainGrid.Background = new SolidColorBrush(Colors.Transparent);
+            MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
 
@@ -97,14 +96,14 @@ namespace TCC.Controls
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, glow);
-            img.BeginAnimation(OpacityProperty, fadeIn);
+            Img.BeginAnimation(OpacityProperty, fadeIn);
 
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
-            img.BeginAnimation(OpacityProperty, fadeOut);
+            Img.BeginAnimation(OpacityProperty, fadeOut);
 
         }
 
@@ -129,7 +128,7 @@ namespace TCC.Controls
             double result;
             try
             {
-                result = Double.Parse(tb.Text, CultureInfo.InvariantCulture);
+                result = double.Parse(tb.Text, CultureInfo.InvariantCulture);
                 if (result > Max) Value = Max;
                 else if (result < Min) Value = Min;
                 else Value = result;
@@ -144,7 +143,7 @@ namespace TCC.Controls
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = sender as TextBox;
-            if (Double.TryParse(tb.Text, out double result))
+            if (double.TryParse(tb.Text, out var result))
             {
                 Value = result;
             }

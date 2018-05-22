@@ -1,12 +1,12 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_CHANGE_HP : ParsedMessage
     {
-        uint serverId, playerId;
-        int currentHP, maxHP;
+        private uint serverId, playerId;
+        private int currentHP, maxHP;
         public uint ServerId { get { return serverId; } }
         public uint PlayerId { get { return playerId; } }
         public int CurrentHP { get { return currentHP; } }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
-using TCC.ViewModels;
 
 namespace TCC.Converters
 {
@@ -13,11 +13,11 @@ namespace TCC.Converters
 
             if(val > SettingsManager.GroupSizeThreshold)
             {
-                return App.Current.FindResource("raid");
+                return Application.Current.FindResource("RaidDataTemplate");
             }
             else
             {
-                return App.Current.FindResource("party");
+                return Application.Current.FindResource("PartyDataTemplate");
             }
         }
 

@@ -34,7 +34,7 @@ namespace TCC.Parsing
         }
         private static void HandleMaxEnchantSucceed(string x)
         {
-            ChatMessage sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
+            var sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
             ChatWindowManager.Instance.AddChatMessage(sysMsg);
         }
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
@@ -146,6 +146,7 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
+            if(SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.RemoveDeadLfg();
         }
 
         private static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)

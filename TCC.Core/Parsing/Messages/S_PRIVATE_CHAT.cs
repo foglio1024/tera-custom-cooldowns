@@ -1,15 +1,15 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_PRIVATE_CHAT : ParsedMessage
     {
-        ushort authorNameOffset, messageOffset;
-        uint ch;
-        ulong authorId;
-        string authorName;
-        string message;
+        private ushort authorNameOffset, messageOffset;
+        private uint ch;
+        private ulong authorId;
+        private string authorName;
+        private string message;
 
         public uint Channel { get => ch; }
         public ulong AuthorId { get => authorId; }

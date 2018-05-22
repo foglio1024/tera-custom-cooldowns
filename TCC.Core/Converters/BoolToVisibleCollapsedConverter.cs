@@ -12,7 +12,7 @@ namespace TCC.Converters
             var inv = false;
             if (parameter != null)
             {
-                if (Boolean.Parse(parameter.ToString()))
+                if (bool.Parse(parameter.ToString()))
                 {
                     inv = true;
                 }

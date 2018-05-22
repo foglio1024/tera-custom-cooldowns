@@ -1,46 +1,51 @@
-﻿using TCC.Data;
+﻿using System;
+using System.Threading;
+using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
     public class PriestBarManager : ClassManager
     {
-        private static PriestBarManager _instance;
-        public static PriestBarManager Instance => _instance ?? (_instance = new PriestBarManager());
+        private DurationCooldownIndicator _energyStars;
 
-        public DurationCooldownIndicator EnergyStars { get; private set; }
-        public DurationCooldownIndicator Grace { get; private set; }
-
-        public PriestBarManager() : base()
+        public DurationCooldownIndicator EnergyStars
         {
-            _instance = this;
-            CurrentClassManager = this;
-            LoadSpecialSkills();
-            Grace.Buff.PropertyChanged += GracePropertyChanged;
-        }
-
-        private void GracePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Grace.Buff.IsAvailable))
+            get => _energyStars;
+            set
             {
-                Grace.Cooldown.FlashOnAvailable = Grace.Buff.IsAvailable;
+                if(_energyStars == value) return;
+                _energyStars = value;
+                NPC();
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public DurationCooldownIndicator Grace { get; set; }
+
+        public PriestBarManager() : base()
+        {
+        }
+
+
+        public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
             EnergyStars = new DurationCooldownIndicator(_dispatcher);
-            SkillsDatabase.TryGetSkill(350410, Class.Priest, out Skill es);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, true);
-            EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, false);
+            SessionManager.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
+            EnergyStars.Buff = new FixedSkillCooldown(es,  false);
+            EnergyStars.Cooldown = new FixedSkillCooldown(es,  true);
 
             Grace = new DurationCooldownIndicator(_dispatcher);
-            SkillsDatabase.TryGetSkill(390100, Class.Priest, out Skill gr);
-            Grace.Cooldown = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
-            Grace.Buff = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
+            SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
+            Grace.Buff = new FixedSkillCooldown(gr,  false);
+            Grace.Cooldown = new FixedSkillCooldown(gr,  false);
 
+            Grace.Buff.Started += OnGraceBuffStarted;
+            Grace.Buff.Ended += OnGraceBuffEnded;
         }
+
+        private void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
+        private void OnGraceBuffStarted(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = false;
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {

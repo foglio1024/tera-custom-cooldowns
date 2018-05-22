@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Data;
+
 namespace TCC.Converters
 {
     public class ReadyToOpacityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ReadyStatus v = (ReadyStatus)value;
+            var v = (ReadyStatus)value;
             switch (v)
             {
                 case ReadyStatus.NotReady:

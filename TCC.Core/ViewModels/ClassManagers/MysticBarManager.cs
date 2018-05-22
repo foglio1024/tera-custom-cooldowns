@@ -5,40 +5,45 @@ namespace TCC.ViewModels
 {
     internal class MysticBarManager : ClassManager
     {
-        private static MysticBarManager _instance;
-        public static MysticBarManager Instance => _instance ?? (_instance = new MysticBarManager());
-
+        private bool _elementalize;
         public AurasTracker Auras { get; private set; }
         public FixedSkillCooldown Contagion { get; private set; }
         public DurationCooldownIndicator Vow { get; private set; }
 
-        public MysticBarManager() : base()
+        public bool Elementalize
         {
-            _instance = this;
-            CurrentClassManager = this;
-            Auras = new AurasTracker();
-
-            LoadSpecialSkills();
-            Vow.Buff.PropertyChanged += Vow_PropertyChanged;
-        }
-
-        private void Vow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Vow.Buff.IsAvailable))
+            get => _elementalize;
+            set
             {
-                Vow.Cooldown.FlashOnAvailable = Vow.Buff.IsAvailable;
+                if(_elementalize == value) return;
+                _elementalize = value;
+                NPC();
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public MysticBarManager() : base()
         {
-            SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out Skill cont);
-            SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out Skill vow);
-            Contagion = new FixedSkillCooldown(cont, CooldownType.Skill, _dispatcher, true);
-            Vow = new DurationCooldownIndicator(_dispatcher);
-            Vow.Buff = new FixedSkillCooldown(vow, CooldownType.Skill, _dispatcher, false);
-            Vow.Cooldown = new FixedSkillCooldown(vow, CooldownType.Skill,_dispatcher,false);
+            Auras = new AurasTracker();
         }
+
+
+        public override void LoadSpecialSkills()
+        {
+            SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
+            Contagion = new FixedSkillCooldown(cont, true);
+            Vow = new DurationCooldownIndicator(_dispatcher)
+            {
+                Buff = new FixedSkillCooldown(vow, false),
+                Cooldown = new FixedSkillCooldown(vow, false)
+            };
+            Vow.Buff.Ended += OnVowBuffEnded;
+            Vow.Buff.Started += OnVowBuffStarted;
+        }
+
+        private void OnVowBuffStarted(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+        private void OnVowBuffEnded(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {

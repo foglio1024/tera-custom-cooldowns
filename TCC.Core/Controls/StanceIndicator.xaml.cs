@@ -15,7 +15,8 @@ namespace TCC.Controls
         {
             InitializeComponent();
         }
-        StanceTracker<WarriorStance> _context;
+
+        private StanceTracker<WarriorStance> _context;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
@@ -32,13 +33,13 @@ namespace TCC.Controls
                     switch (_context.CurrentStance)
                     {
                         case WarriorStance.None:
-                            rect.Background = new SolidColorBrush(Colors.Transparent);
+                            Rect.Background = new SolidColorBrush(Colors.Transparent);
                             break;
                         case WarriorStance.Assault:
-                            rect.Background = TryFindResource("Colors.ClassWindow.AssaultStance") as SolidColorBrush;
+                            Rect.Background = TryFindResource("AssaultStanceColor") as SolidColorBrush;
                             break;
                         case WarriorStance.Defensive:
-                            rect.Background = TryFindResource("Colors.ClassWindow.DefensiveStance") as SolidColorBrush;
+                            Rect.Background = TryFindResource("DefensiveStanceColor") as SolidColorBrush;
                             break;
                     }
                 }

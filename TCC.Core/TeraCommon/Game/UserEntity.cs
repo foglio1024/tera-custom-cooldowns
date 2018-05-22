@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Gothos
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
 using System.Collections.Generic;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Server;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     // A player character, including your own
     public class UserEntity : Entity
@@ -45,7 +44,7 @@ namespace Tera.Game
             Name = "Unknown damage";
             GuildName = "";
             RaceGenderClass = new RaceGenderClass(Race.Common,Gender.Common, PlayerClass.Common);
-            PlayerId = UInt32.MaxValue;
+            PlayerId = uint.MaxValue;
             ServerId = serverid;
             Level = 0;
             OutOfRange = true;

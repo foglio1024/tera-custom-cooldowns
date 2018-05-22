@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per SlayerBar.xaml
     /// </summary>
-    public partial class SlayerBar : UserControl
+    public partial class SlayerBar
     {
         public SlayerBar()
         {

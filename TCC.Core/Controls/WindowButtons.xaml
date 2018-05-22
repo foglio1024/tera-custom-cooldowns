@@ -26,28 +26,29 @@
             </Style>
         </Grid.Resources>
         <Border Style="{StaticResource Styles.DefaultBorder}" 
-                CornerRadius="2" Grid.ColumnSpan="20" Opacity=".4"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                CornerRadius="2" Grid.ColumnSpan="20" Opacity=".5"
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                Effect="{x:Null}"/>
         <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 Click="Hide" ToolTip="Hide">
-            <Path Fill="White" Data="{StaticResource SVG.Hide}" Stretch="Uniform" Margin="2"/>
+            <Path Fill="White" Data="{StaticResource SvgHide}" Stretch="Uniform" Margin="2"/>
         </Button>
         <Button Click="Pin" Grid.Column="1" ToolTip="Show always">
-            <Path Fill="White" Data="{Binding ShowAlways, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SVG.Pin:SVG.Unpin}" 
+            <Path Fill="White" Data="{Binding ShowAlways, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SvgPin:SvgUnpin}" 
                   Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
         <Button Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 Click="AutoDim" Grid.Column="2" ToolTip="Auto dim">
-            <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SVG.BlurOn:SVG.BlurOff}" 
+            <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}" 
                    HorizontalAlignment="Center" Margin="2"/>
         </Button>
         <Button Click="Close" Grid.Column="3" ToolTip="Close">
-            <Path Fill="{StaticResource Colors.App.HP}" Data="{StaticResource SVG.Close}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+            <Path Fill="{StaticResource HpColor}" Data="{StaticResource SvgClose}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
 
-        <!--<Path Fill="#3fff" Data="{StaticResource SVG.Move}" Height="22" Width="22" Stretch="Uniform" Grid.Column="1" Margin="5 5 10 5" VerticalAlignment="Center"></Path>-->
+        <!--<Path Fill="#3fff" Data="{StaticResource SvgMove}" Height="22" Width="22" Stretch="Uniform" Grid.Column="1" Margin="5 5 10 5" VerticalAlignment="Center"></Path>-->
         <TextBlock Text="{Binding WindowName, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                   Grid.Column="10" Foreground="#2fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14"></TextBlock>
+                   Grid.Column="10" Foreground="#5fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14"></TextBlock>
 
     </Grid>
 </UserControl>

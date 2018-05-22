@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class QuestDatabase
+    public class QuestDatabase
     {
-        public static Dictionary<uint, string> Quests;
-        public static void Load(string lang)
+        public Dictionary<uint, string> Quests { get; }
+        public QuestDatabase(string lang)
         {
             var f = File.OpenText($"resources/data/quests/quests-{lang}.tsv");
             Quests = new Dictionary<uint, string>();
@@ -16,7 +15,7 @@ namespace TCC.Data.Databases
                 var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
-                var id = UInt32.Parse(s[0]);
+                if (!uint.TryParse(s[0], out var id)) continue;
                 var name = s[1];
 
                 Quests.Add(id, name);

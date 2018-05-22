@@ -1,8 +1,7 @@
-﻿using System;
-using TCC.Data;
+﻿using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
-using Tera.Game;
-using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {

@@ -2,10 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Tera.PacketLog;
-using Tera.Sniffing.Crypt;
+using TCC.TeraCommon.PacketLog.Parsing;
+using TCC.TeraCommon.Sniffing.Crypt;
 
-namespace Tera.Sniffing
+namespace TCC.TeraCommon.Sniffing
 {
     public class ConnectionDecrypter
     {

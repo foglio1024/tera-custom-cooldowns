@@ -4,21 +4,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Data.Databases;
 
-namespace TCC
+namespace TCC.Data
 {
     public class Character : TSPropertyChanged, IComparable
     {
-        string _name;
-        Class _class;
-        Laurel _laurel;
-        int _dailiesDone;
-        int _weekliesDone;
-        int _credits;
-        bool _isLoggedIn;
-        bool _isSelected;
+        private string _name;
+        private Class _class;
+        private Laurel _laurel;
+        private int _dailiesDone;
+        private int _weekliesDone;
+        private int _credits;
+        private bool _isLoggedIn;
+        private bool _isSelected;
         private uint _guardianPoints;
         private uint _maxGuardianPoints;
         private uint _elleonMarks;
@@ -68,7 +67,7 @@ namespace TCC
         {
             foreach (var keyVal in dungeonCooldowns)
             {
-                if (!DungeonDatabase.Instance.Dungeons.ContainsKey(keyVal.Key)) continue;
+                if (!SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(keyVal.Key)) continue;
                 var dg = Dungeons.FirstOrDefault(x => x.Id == keyVal.Key);
                 if (dg != null)
                 {
@@ -128,8 +127,8 @@ namespace TCC
                 NPC(nameof(IsSelected));
             }
         }
-        public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MAX_WEEKLY;
-        public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MAX_DAILY;
+        public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MaxWeekly;
+        public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MaxDaily;
         public double GuardianCompletion => (double)GuardianPoints / (double)MaxGuardianPoints;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
@@ -188,14 +187,14 @@ namespace TCC
             WeekliesDone = 0;
             Id = id;
             Position = pos;
-            MaxGuardianPoints = SessionManager.MAX_GUARDIAN_POINTS;
-            foreach (var dg in DungeonDatabase.Instance.Dungeons)
+            MaxGuardianPoints = SessionManager.MaxGuardianPoints;
+            foreach (var dg in SessionManager.DungeonDatabase.DungeonDefs)
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));
             }
             VisibleDungeons = new CollectionViewSource() { Source = Dungeons }.View;
-            VisibleDungeons.Filter = dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
-            DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show;
+            VisibleDungeons.Filter = dc => SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(((DungeonCooldown)dc).Id) &&
+                                           SessionManager.DungeonDatabase.DungeonDefs[((DungeonCooldown)dc).Id].Show;
             VisibleDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
 
             Jewels = new CollectionViewSource() { Source = Gear }.View;

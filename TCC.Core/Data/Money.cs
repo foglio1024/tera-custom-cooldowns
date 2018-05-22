@@ -56,7 +56,7 @@ namespace TCC.Data
             var silverString = Silver != 0 ? Silver.ToString() + "s " : "";
             var copperString = Copper != 0 ? Copper.ToString() + "c " : "";
 
-            return String.Format("{0}{1}{2}", goldString, silverString, copperString);
+            return string.Format("{0}{1}{2}", goldString, silverString, copperString);
         }
     }
 }

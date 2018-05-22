@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using TCC.Data;
-using Tera.Game;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_LIST : ParsedMessage
     {
-        bool im, raid;
-        uint leaderServerId;
-        uint leaderPlayerId;
+        private bool im, raid;
+        private uint leaderServerId;
+        private uint leaderPlayerId;
 
         public bool Im { get { return im; } }
         public bool Raid { get { return raid; } }
@@ -46,7 +46,7 @@ namespace TCC.Parsing.Messages
 
             Members = new List<User>();
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
 

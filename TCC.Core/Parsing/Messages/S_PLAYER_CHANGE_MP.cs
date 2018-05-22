@@ -1,13 +1,13 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing.Messages
 {
     public class S_PLAYER_CHANGE_MP : ParsedMessage
     {
-        int currentMP, maxMP, diff;
-        uint type;
-        ulong target, source;
+        private int currentMP, maxMP, diff;
+        private uint type;
+        private ulong target, source;
 
         public int CurrentMP { get => currentMP; }
         public int MaxMP { get => maxMP; }

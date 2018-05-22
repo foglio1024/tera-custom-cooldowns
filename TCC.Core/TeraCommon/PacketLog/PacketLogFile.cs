@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Tera.PacketLog
+namespace TCC.TeraCommon.PacketLog
 {
     public class PacketLogFile
     {

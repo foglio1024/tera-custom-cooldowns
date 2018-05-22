@@ -6,25 +6,41 @@ namespace TCC.ViewModels
 {
     public class DurationCooldownIndicator : TSPropertyChanged
     {
-        public FixedSkillCooldown Cooldown { get; set; }
-        public FixedSkillCooldown Buff { get; set; }
+        private FixedSkillCooldown _cooldown;
+        private FixedSkillCooldown _buff;
+
+        public FixedSkillCooldown Cooldown
+        {
+            get => _cooldown;
+            set
+            {
+                if(_cooldown == value) return;
+                _cooldown = value;
+                NPC();
+            }
+        }
+        public FixedSkillCooldown Buff
+        {
+            get => _buff;
+            set
+            {
+                if(_buff == value) return;
+                _buff = value;
+                NPC();
+            }
+        }
 
         public DurationCooldownIndicator(Dispatcher d)
         {
             _dispatcher = d;
-            Cooldown = new FixedSkillCooldown(_dispatcher);
-            Buff = new FixedSkillCooldown(_dispatcher);
+            Cooldown = new FixedSkillCooldown();
+            Buff = new FixedSkillCooldown();
         }
     }
     internal class LancerBarManager : ClassManager
     {
-        private static LancerBarManager _instance;
-        public static LancerBarManager Instance => _instance ?? (_instance = new LancerBarManager());
         public LancerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
-            LoadSpecialSkills();
             LH = new StatTracker()
             {
                 Max = 10
@@ -56,22 +72,21 @@ namespace TCC.ViewModels
             return false;
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
-
-            SkillsDatabase.TryGetSkill(70300, Class.Lancer, out Skill gshout);
-            SkillsDatabase.TryGetSkill(170200, Class.Lancer, out Skill arush);
-            SkillsDatabase.TryGetSkill(120100, Class.Lancer, out Skill infu);
+            SessionManager.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            SessionManager.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
             GuardianShout = new DurationCooldownIndicator(_dispatcher);
             AdrenalineRush = new DurationCooldownIndicator(_dispatcher);
             Infuriate = new DurationCooldownIndicator(_dispatcher);
 
-            GuardianShout.Cooldown = new FixedSkillCooldown(gshout, CooldownType.Skill, _dispatcher, true);
-            GuardianShout.Buff = new FixedSkillCooldown(gshout, CooldownType.Skill, _dispatcher, false);
-            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush, CooldownType.Skill, _dispatcher, true);
-            AdrenalineRush.Buff = new FixedSkillCooldown(arush, CooldownType.Skill, _dispatcher, false);
-            Infuriate.Cooldown = new FixedSkillCooldown(infu, CooldownType.Skill, _dispatcher, true);
+            GuardianShout.Cooldown = new FixedSkillCooldown(gshout,  true);
+            GuardianShout.Buff = new FixedSkillCooldown(gshout,  false);
+            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush,  true);
+            AdrenalineRush.Buff = new FixedSkillCooldown(arush,  false);
+            Infuriate.Cooldown = new FixedSkillCooldown(infu,  true);
         }
     }
 }

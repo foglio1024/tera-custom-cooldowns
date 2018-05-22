@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class WindowData
     {
@@ -120,7 +120,7 @@ namespace Data
             EnableChat = true;
             CopyInspect = true;
             ShowAfkEventsIngame = false;
-            DiscordInfoByGuild = new Dictionary<string, Data.DiscordInfoByGuild>();
+            DiscordInfoByGuild = new Dictionary<string, DiscordInfoByGuild>();
             DiscordLogin = "";
             DiscordPassword = "";
             DisablePartyEvent = false;
@@ -220,7 +220,7 @@ namespace Data
             var root = _xml.Root;
             var xml = root?.Element(xmlName);
             if (xml == null) return;
-            var setting = this.GetType().GetProperty(settingName);
+            var setting = GetType().GetProperty(settingName);
             setting.SetValue(this, (Color)ColorConverter.ConvertFromString(xml.Value), null);
         }
 
@@ -323,18 +323,18 @@ namespace Data
                     discordChannelGuildQuest = val;
                 }
 
-                string guildInfosText = ":dart: {guild_guildname}  :dart:\n\n{guild_master} - {guild_size}\n{gold_label}: {guild_gold}\n{xp_label} for next level: {guild_xp_to_next_level}\nCreation time: {guild_creationtime}\nQuest done status: {guild_number_quest_done}/{guild_total_number_quest}\n";
-                string questInfoText = ":dart: {quest_guildname} - {quest_type} - {quest_size} :dart:\n\nTime remaining: {quest_time_remaining}\nIs bam quest: {quest_is_bam_quest}\n{targets}\n{rewards}\n";
-                string questListInfoText = "{quest_type} - {targets}\n";
-                string questListHeaderText = "----NoActiveQuest----\n\n";
-                string rewardFooterText = "";
-                string rewardContentText = "{reward_name}: {reward_amount}\n";
-                string rewardHeaderText = "---------\n";
+                var guildInfosText = ":dart: {guild_guildname}  :dart:\n\n{guild_master} - {guild_size}\n{gold_label}: {guild_gold}\n{xp_label} for next level: {guild_xp_to_next_level}\nCreation time: {guild_creationtime}\nQuest done status: {guild_number_quest_done}/{guild_total_number_quest}\n";
+                var questInfoText = ":dart: {quest_guildname} - {quest_type} - {quest_size} :dart:\n\nTime remaining: {quest_time_remaining}\nIs bam quest: {quest_is_bam_quest}\n{targets}\n{rewards}\n";
+                var questListInfoText = "{quest_type} - {targets}\n";
+                var questListHeaderText = "----NoActiveQuest----\n\n";
+                var rewardFooterText = "";
+                var rewardContentText = "{reward_name}: {reward_amount}\n";
+                var rewardHeaderText = "---------\n";
 
-                string targetHeaderText = "";
-                string targetContentText = "{target_name}: {target_current_count}/{target_total_count}\n";
-                string targetFooterText = "";
-                string questNoActiveText = ":dart:   {guild_guildname}   :dart:\n\n{no_quest_text}\n\n{quest_list}\n";
+                var targetHeaderText = "";
+                var targetContentText = "{target_name}: {target_current_count}/{target_total_count}\n";
+                var targetFooterText = "";
+                var questNoActiveText = ":dart:   {guild_guildname}   :dart:\n\n{no_quest_text}\n\n{quest_list}\n";
 
                 var guildInfosTextElement = guild.Element("guild_infos_text");
                 if (guildInfosTextElement != null) guildInfosText = guildInfosTextElement.Value;
@@ -564,7 +564,7 @@ namespace Data
             var root = _xml.Root;
             var xml = root?.Element(xmlName);
             if (xml == null) return;
-            var setting = this.GetType().GetProperty(settingName);
+            var setting = GetType().GetProperty(settingName);
             if (setting.PropertyType == typeof(int))
             {
                 int value;

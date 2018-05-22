@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Tera.Game;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
@@ -15,7 +15,7 @@ namespace TCC.Parsing.Messages
             var count = reader.ReadUInt16();
             var offest = reader.ReadUInt16();
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 BlockedUsers.Add(ParseBlockedUser(reader));
             }

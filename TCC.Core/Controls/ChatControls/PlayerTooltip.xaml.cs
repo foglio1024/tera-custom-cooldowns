@@ -2,12 +2,14 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using TCC.Data;
+using System.Windows.Shapes;
+using TCC.Converters;
 using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls
@@ -15,138 +17,159 @@ namespace TCC.Controls.ChatControls
     /// <summary>
     /// Logica di interazione per PlayerTooltip.xaml
     /// </summary>
-    public partial class PlayerTooltip : UserControl
+    public partial class PlayerTooltip
     {
-        DoubleAnimation expandAnim, rippleScale, rippleFade;
+        private readonly DoubleAnimation _expandAnim;
+        private readonly DoubleAnimation _rippleScale;
+
         public PlayerTooltip()
         {
             InitializeComponent();
-            expandAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
-            rippleScale = new DoubleAnimation(1, 50, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
-            rippleFade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
+            _expandAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
+            _rippleScale = new DoubleAnimation(1, 50, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
         }
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             KickText.Text = "Kick";
-            ripple.Opacity = 0;
+            KickRipple.Opacity = 0;
+            UnfriendRipple.Opacity = 0;
+            BlockRipple.Opacity = 0;
             _kicking = false;
-            ChatWindowManager.Instance.CloseTooltip();
+            _blocking = false;
+            _unfriending = false;
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         public void AnimateOpening()
         {
-            rootBorder.BeginAnimation(OpacityProperty, expandAnim);
+            RootBorder.BeginAnimation(OpacityProperty, _expandAnim);
+            
         }
 
         private void InspectClick(object sender, RoutedEventArgs e)
         {
-            Proxy.Inspect(ChatWindowManager.Instance.TooltipInfo.Name);
-            ChatWindowManager.Instance.CloseTooltip();
+            Proxy.Inspect(WindowManager.FloatingButton.TooltipInfo.Name);
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void PartyInviteClick(object sender, RoutedEventArgs e)
         {
-            Proxy.PartyInvite(ChatWindowManager.Instance.TooltipInfo.Name);
-            ChatWindowManager.Instance.CloseTooltip();
+            Proxy.PartyInvite(WindowManager.FloatingButton.TooltipInfo.Name);
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void GuildInviteClick(object sender, RoutedEventArgs e)
         {
-            Proxy.GuildInvite(ChatWindowManager.Instance.TooltipInfo.Name);
-            ChatWindowManager.Instance.CloseTooltip();
+            Proxy.GuildInvite(WindowManager.FloatingButton.TooltipInfo.Name);
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
+
+        private bool _unfriending;
 
         private void AddFriendClick(object sender, RoutedEventArgs e)
         {
-            if (ChatWindowManager.Instance.TooltipInfo.IsFriend)
+            if (WindowManager.FloatingButton.TooltipInfo.IsFriend)
             {
-                Proxy.UnfriendUser(ChatWindowManager.Instance.TooltipInfo.Name);
-                ChatWindowManager.Instance.CloseTooltip();
+                if (_unfriending)
+                {
+                    Proxy.UnfriendUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                    WindowManager.FloatingButton.ClosePlayerMenu();
+                    UnfriendRipple.Opacity = 0;
+                    _unfriending = false;
+                }
+                else
+                {
+                    ExpandRedRipple(UnfriendRipple, FriendGrid);
+                    _unfriending = true;
+                }
             }
             else
             {
                 var friendDg = new FriendMessageDialog();
                 friendDg.Show();
             }
-            ChatWindowManager.Instance.TooltipInfo.Refresh();
+            WindowManager.FloatingButton.TooltipInfo.Refresh();
         }
         private void BlockClick(object sender, RoutedEventArgs e)
         {
-            if (!ChatWindowManager.Instance.TooltipInfo.IsBlocked)
+            if (!WindowManager.FloatingButton.TooltipInfo.IsBlocked)
             {
-                Proxy.BlockUser(ChatWindowManager.Instance.TooltipInfo.Name);
-                ChatWindowManager.Instance.BlockedUsers.Add(ChatWindowManager.Instance.TooltipInfo.Name);
-                try
+                if (_blocking)
                 {
-                    var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == ChatWindowManager.Instance.TooltipInfo.Name));
-                    ChatWindowManager.Instance.Friends.RemoveAt(i);
+                    Proxy.BlockUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                    ChatWindowManager.Instance.BlockedUsers.Add(WindowManager.FloatingButton.TooltipInfo.Name);
+                    try
+                    {
+                        var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == WindowManager.FloatingButton.TooltipInfo.Name));
+                        ChatWindowManager.Instance.Friends.RemoveAt(i);
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
+
+                    WindowManager.FloatingButton.ClosePlayerMenu();
+                    BlockRipple.Opacity = 0;
+                    _blocking = false;
                 }
-                catch (Exception) { }
+                else
+                {
+
+                    ExpandRedRipple(BlockRipple, BlockGrid);
+                    _blocking = true;
+                }
             }
             else
             {
-                Proxy.UnblockUser(ChatWindowManager.Instance.TooltipInfo.Name);
-                ChatWindowManager.Instance.BlockedUsers.Remove(ChatWindowManager.Instance.TooltipInfo.Name);
+                Proxy.UnblockUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                ChatWindowManager.Instance.BlockedUsers.Remove(WindowManager.FloatingButton.TooltipInfo.Name);
+                WindowManager.FloatingButton.ClosePlayerMenu();
 
             }
-            ChatWindowManager.Instance.TooltipInfo.Refresh();
-            ChatWindowManager.Instance.CloseTooltip();
-
+            WindowManager.FloatingButton.TooltipInfo.Refresh();
         }
-        void SendString(string s)
-        {
-            var teraWindow = FocusManager.FindTeraWindow();
-            if (teraWindow == IntPtr.Zero) { return; }
 
-            PasteString(teraWindow, s);
+        private bool _blocking;
 
-        }
-        private static void PasteString(IntPtr hWnd, string s)
-        {
-            Thread.Sleep(100);
-            foreach (var character in s)
-            {
-                if (!FocusManager.PostMessage(hWnd, FocusManager.WM_CHAR, character, 0)) { throw new Win32Exception(); }
-                Thread.Sleep(1);
-            }
-        }
 
         private void WhisperClick(object sender, RoutedEventArgs e)
         {
-            ChatWindowManager.Instance.CloseTooltip();
-            SendString("/w " + ChatWindowManager.Instance.TooltipInfo.Name + " ");
+            WindowManager.FloatingButton.ClosePlayerMenu();
+            if (SettingsManager.ChatEnabled && !SessionManager.InGameChatOpen) FocusManager.SendNewLine();
+
+            FocusManager.SendString("/w " + WindowManager.FloatingButton.TooltipInfo.Name + " ");
         }
 
         private void GrantInviteClick(object sender, RoutedEventArgs e)
         {
 
-            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+            if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
             }
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
-            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+            if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 Proxy.DelegateLeader(u.ServerId, u.PlayerId);
             }
-            ChatWindowManager.Instance.CloseTooltip();
+            WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
-        bool _kicking;
+        private bool _kicking;
         private void KickClick(object sender, RoutedEventArgs e)
         {
             if (_kicking)
             {
-                ChatWindowManager.Instance.CloseTooltip();
+                WindowManager.FloatingButton.ClosePlayerMenu();
                 KickText.Text = "Kick";
-                ripple.Opacity = 0;
+                KickRipple.Opacity = 0;
                 _kicking = false;
-                if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+                if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
                 {
                     Proxy.KickMember(u.ServerId, u.PlayerId);
                 }
@@ -154,14 +177,37 @@ namespace TCC.Controls.ChatControls
             else
             {
                 KickText.Text = "Are you sure?";
-                var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];
-                (ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(Mouse.GetPosition(kickGrid).X - ripple.Width / 2,
-                    Mouse.GetPosition(kickGrid).Y - ripple.Height / 2);
-                ripple.Opacity = 1;
-                scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, rippleScale);
-                scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, rippleScale);
+                ExpandRedRipple(KickRipple, KickGrid);
                 _kicking = true;
             }
+        }
+
+        private void ExpandRedRipple(Ellipse ripple, Grid container)
+        {
+            var scaleTrans = (ripple.RenderTransform as TransformGroup)?.Children[0];
+            ((TransformGroup)ripple.RenderTransform).Children[1] = new TranslateTransform(Mouse.GetPosition(container).X - ripple.Width / 2,
+                Mouse.GetPosition(container).Y - ripple.Height / 2);
+            ripple.Opacity = 1;
+            scaleTrans?.BeginAnimation(ScaleTransform.ScaleYProperty, _rippleScale);
+            scaleTrans?.BeginAnimation(ScaleTransform.ScaleXProperty, _rippleScale);
+
+        }
+        private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var p = (MgPopup.Child as MoongourdPopup);
+            p.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, SettingsManager.LastRegion);
+            MgPopup.IsOpen = true;
+        }
+
+        public void SetMoongourdVisibility()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (SettingsManager.LastRegion != "NA" &&
+                    SettingsManager.LastRegion != "RU" &&
+                    !SettingsManager.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+            });
+
         }
     }
 }

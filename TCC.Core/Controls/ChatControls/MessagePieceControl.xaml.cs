@@ -1,18 +1,19 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using TCC.Data;
+using TCC.Windows;
 
-namespace TCC.Controls
+namespace TCC.Controls.ChatControls
 {
     /// <summary>
     /// Logica di interazione per MessagePieceControl.xaml
     /// </summary>
-    public partial class MessagePieceControl : UserControl
+    public partial class MessagePieceControl
     {
-        MessagePiece _context;
+        private MessagePiece _context;
 
         public MessagePieceControl()
         {
@@ -32,7 +33,14 @@ namespace TCC.Controls
                     Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Url:
-                    Process.Start(_context.Text);
+                    try
+                    {
+                        Process.Start(_context.Text);
+                    }
+                    catch 
+                    {
+                        TccMessageBox.Show("Unable to open URL.", MessageBoxType.Error);
+                    }
                     break;
                 case MessagePieceType.Point_of_interest:
                     Proxy.ChatLinkData(_context.RawLink);
@@ -48,26 +56,23 @@ namespace TCC.Controls
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    bgBorder.Background = _context.Color;
+                    BgBorder.Background = _context.Color;
                     break;
                 case MessagePieceType.Url:
-                    bgBorder.Background = _context.Color;
+                    BgBorder.Background = _context.Color;
                     break;
                 case MessagePieceType.Point_of_interest:
-                    bgBorder.Background = _context.Color;
-                    //WindowManager.ChatWindow.OpenMap(_context);
+                    BgBorder.Background = _context.Color;
                     break;
                 case MessagePieceType.Quest:
-                    bgBorder.Background = _context.Color;
-                    break;
-                default:
+                    BgBorder.Background = _context.Color;
                     break;
             }
 
         }
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            bgBorder.Background = Brushes.Transparent;
+            BgBorder.Background = Brushes.Transparent;
         }
     }
 }

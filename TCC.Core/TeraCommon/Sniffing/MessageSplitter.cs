@@ -1,7 +1,7 @@
 ﻿using System;
-using Tera.PacketLog;
+using TCC.TeraCommon.PacketLog.Parsing;
 
-namespace Tera.Sniffing
+namespace TCC.TeraCommon.Sniffing
 {
     public class MessageSplitter
     {

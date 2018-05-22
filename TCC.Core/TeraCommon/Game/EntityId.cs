@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     // Identifies an entity
     // It might be a good idea to split this into two 32 bit words, since one of them seems to be the actual Id, the other consisting of flags.

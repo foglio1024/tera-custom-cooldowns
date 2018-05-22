@@ -1,52 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using TCC.Data;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per TccMessageBox.xaml
     /// </summary>
-    public partial class TccMessageBox : Window
+    public partial class TccMessageBox
     {
         private TccMessageBox()
         {
             InitializeComponent();
         }
-        static TccMessageBox _messageBox;
-        static MessageBoxResult _result = MessageBoxResult.No;
-        public static MessageBoxResult Show
-        (string caption, string msg, MessageBoxType type)
+
+        private static TccMessageBox _messageBox;
+        private static MessageBoxResult _result = MessageBoxResult.No;
+        public static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
         {
             switch (type)
             {
                 case MessageBoxType.ConfirmationWithYesNo:
-                    return Show(caption, msg, MessageBoxButton.YesNo,
-                    MessageBoxImage.Question);
+                    return Show(caption, msg, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 case MessageBoxType.ConfirmationWithYesNoCancel:
-                    return Show(caption, msg, MessageBoxButton.YesNoCancel,
-                    MessageBoxImage.Question);
+                    return Show(caption, msg, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 case MessageBoxType.Information:
-                    return Show(caption, msg, MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Information);
                 case MessageBoxType.Error:
-                    return Show(caption, msg, MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Error);
                 case MessageBoxType.Warning:
-                    return Show(caption, msg, MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
+                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Warning);
                 default:
                     return MessageBoxResult.No;
             }
@@ -57,57 +46,57 @@ namespace TCC.Windows
         }
         public static MessageBoxResult Show(string msg)
         {
-            return Show(string.Empty, msg,
-            MessageBoxButton.OK, MessageBoxImage.None);
+            return Show(string.Empty, msg, MessageBoxButton.OK, MessageBoxImage.None);
         }
-        public static MessageBoxResult Show
-        (string caption, string text)
+        public static MessageBoxResult Show (string caption, string text)
         {
-            return Show(caption, text,
-            MessageBoxButton.OK, MessageBoxImage.None);
+            return Show(caption, text, MessageBoxButton.OK, MessageBoxImage.None);
         }
         public static MessageBoxResult Show
         (string caption, string text, MessageBoxButton button)
         {
-            return Show(caption, text, button,
-            MessageBoxImage.None);
+            return Show(caption, text, button, MessageBoxImage.None);
         }
-        public static MessageBoxResult Show
-        (string caption, string text,
-        MessageBoxButton button, MessageBoxImage image)
+        public static MessageBoxResult Show (string caption, string text, MessageBoxButton button, MessageBoxImage image)
         {
-            _messageBox = new TccMessageBox
-            { txtMsg = { Text = text }, MessageTitle = { Text = caption } };
-            SetVisibilityOfButtons(button);
-            SetImageOfMessageBox(image);
-            _messageBox.ShowDialog();
+            _messageBox.Dispatcher.Invoke(() =>
+            {
+                _messageBox.TxtMsg.Text = text;
+                _messageBox.MessageTitle.Text = caption;
+                SetVisibilityOfButtons(button);
+                SetImageOfMessageBox(image);
+                _messageBox.ShowDialog();
+            });
             return _result;
         }
         private static void SetVisibilityOfButtons(MessageBoxButton button)
         {
+            _messageBox.BtnCancel.Visibility = Visibility.Visible;
+            _messageBox.BtnNo.Visibility = Visibility.Visible;
+            _messageBox.BtnYes.Visibility = Visibility.Visible;
+            _messageBox.BtnOk.Visibility = Visibility.Visible;
+
             switch (button)
             {
                 case MessageBoxButton.OK:
-                    _messageBox.btnCancel.Visibility = Visibility.Collapsed;
-                    _messageBox.btnNo.Visibility = Visibility.Collapsed;
-                    _messageBox.btnYes.Visibility = Visibility.Collapsed;
-                    _messageBox.btnOk.Focus();
+                    _messageBox.BtnCancel.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnNo.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnYes.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnOk.Focus();
                     break;
                 case MessageBoxButton.OKCancel:
-                    _messageBox.btnNo.Visibility = Visibility.Collapsed;
-                    _messageBox.btnYes.Visibility = Visibility.Collapsed;
-                    _messageBox.btnCancel.Focus();
+                    _messageBox.BtnNo.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnYes.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnCancel.Focus();
                     break;
                 case MessageBoxButton.YesNo:
-                    _messageBox.btnOk.Visibility = Visibility.Collapsed;
-                    _messageBox.btnCancel.Visibility = Visibility.Collapsed;
-                    _messageBox.btnNo.Focus();
+                    _messageBox.BtnOk.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnCancel.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnNo.Focus();
                     break;
                 case MessageBoxButton.YesNoCancel:
-                    _messageBox.btnOk.Visibility = Visibility.Collapsed;
-                    _messageBox.btnCancel.Focus();
-                    break;
-                default:
+                    _messageBox.BtnOk.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnCancel.Focus();
                     break;
             }
         }
@@ -122,27 +111,25 @@ namespace TCC.Windows
                     //_messageBox.SetImage("Question.png");
                     break;
                 case MessageBoxImage.Information:
-                    _messageBox.BG.Background = App.Current.FindResource("Colors.App.MP") as SolidColorBrush;
+                    _messageBox.Bg.Background = Application.Current.FindResource("MpColor") as SolidColorBrush;
                     //_messageBox.SetImage("Information.png");
                     break;
                 case MessageBoxImage.Error:
                     //_messageBox.SetImage("Error.png");
-                    _messageBox.BG.Background = App.Current.FindResource("Colors.App.HP") as SolidColorBrush;
-                    break;
-                default:
-                    //_messageBox.img.Visibility = Visibility.Collapsed;
+                    _messageBox.Bg.Background = Application.Current.FindResource("HpColor") as SolidColorBrush;
                     break;
             }
         }
+        [SuppressMessage("ReSharper", "PossibleUnintendedReferenceComparison")]
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (sender == btnOk)
+            if (sender == BtnOk)
                 _result = MessageBoxResult.OK;
-            else if (sender == btnYes)
+            else if (sender == BtnYes)
                 _result = MessageBoxResult.Yes;
-            else if (sender == btnNo)
+            else if (sender == BtnNo)
                 _result = MessageBoxResult.No;
-            else if (sender == btnCancel)
+            else if (sender == BtnCancel)
                 _result = MessageBoxResult.Cancel;
             else
                 _result = MessageBoxResult.None;
@@ -153,14 +140,16 @@ namespace TCC.Windows
             {
                 Dispatcher.Invoke(() =>
                 {
-                    _messageBox.Close();
-                    _messageBox = null;
+                    _messageBox.Hide();
+                    //_messageBox = null;
                 });
             });
         }
+        // ReSharper disable once UnusedMember.Local
         private void SetImage(string imageName)
         {
-            string uri = string.Format("/Resources/images/{0}", imageName);
+            var uri = $"/Resources/images/{imageName}";
+            // ReSharper disable once UnusedVariable
             var uriSource = new Uri(uri, UriKind.RelativeOrAbsolute);
             //img.Source = new BitmapImage(uriSource);
         }
@@ -169,7 +158,7 @@ namespace TCC.Windows
         {
             if (((bool)e.NewValue) != true) return;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
-            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() {Oscillations = 1 } });
+            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
             RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
         }
 
@@ -178,5 +167,9 @@ namespace TCC.Windows
             DragMove();
         }
 
+        public static void Create()
+        {
+            _messageBox = new TccMessageBox();
+        }
     }
 }

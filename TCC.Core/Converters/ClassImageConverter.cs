@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Data;
+
 namespace TCC.Converters
 {
     public class ClassImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Class c = (Class)value;
+            if (value == null) value = Class.Common;
+            var c = (Class)value;
             //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
-            string className = "common";
+            var className = "common";
             switch (c)
             {
                 case Class.Warrior:
@@ -33,22 +36,22 @@ namespace TCC.Converters
                 case Class.Priest:
                     className = "priest";
                     break;
-                case Class.Elementalist:
+                case Class.Mystic:
                     className = "mystic";
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     className = "reaper";
                     break;
-                case Class.Engineer:
+                case Class.Gunner:
                     className = "gunner";
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     className = "brawler";
                     break;
-                case Class.Assassin:
+                case Class.Ninja:
                     className = "ninja";
                     break;
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     className = "glaiver";
                     break;
                 default:
@@ -61,7 +64,7 @@ namespace TCC.Converters
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        static extern bool DeleteObject(IntPtr hObject);
+        private static extern bool DeleteObject(IntPtr hObject);
 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

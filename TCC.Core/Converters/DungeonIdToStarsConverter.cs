@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.Converters
 {
-    class DungeonIdToStarsConverter : IValueConverter
+    internal class DungeonIdToStarsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var id = (uint)value;
-            var t =  DungeonDatabase.Instance.Dungeons[id].Tier;
+            var t = SessionManager.DungeonDatabase.DungeonDefs[id].Tier;
             switch (t)
             {
                 case DungeonTier.Tier2:

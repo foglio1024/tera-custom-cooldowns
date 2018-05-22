@@ -1,4 +1,6 @@
-﻿namespace Tera.Game.Messages
+﻿using TCC.TeraCommon.Game.Services;
+
+namespace TCC.TeraCommon.Game.Messages.Client
 {
     public class C_PLAYER_LOCATION : ParsedMessage
     {

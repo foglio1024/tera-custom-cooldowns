@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using TCC.Parsing;
 
 namespace TCC.Data.Databases
 {
     public class DungeonDatabase
     {
-        static DungeonDatabase _instance;
-        public static DungeonDatabase Instance => _instance ?? (_instance = new DungeonDatabase(SettingsManager.LastRegion));
-        public Dictionary<uint, Dungeon> Dungeons;
+        public Dictionary<uint, Dungeon> DungeonDefs;
+        public Dictionary<uint, string> DungeonNames;
         //public Dictionary<uint, Dungeon> DungeonDefinitions;
         public DungeonDatabase(string lang)
         {
             if (string.IsNullOrEmpty(lang)) lang = "EU-EN";
             var f = File.OpenText($"resources/data/dungeons/dungeons-{lang}.tsv");
             //DungeonNames = new Dictionary<uint, string>();
-            Dungeons = new Dictionary<uint, Dungeon>();
+            DungeonDefs = new Dictionary<uint, Dungeon>();
+            DungeonNames = new Dictionary<uint, string>();
             //TODO
             var defs = new Dictionary<uint, Tuple<short, DungeonTier>>();
             var def = XDocument.Load("resources/data/dungeons-def.xml");
@@ -35,30 +34,25 @@ namespace TCC.Data.Databases
                 var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
-                var id = UInt32.Parse(s[0]);
+                var id = uint.Parse(s[0]);
                 var name = s[1];
                 //var t = (DungeonTier)Enum.Parse(typeof(DungeonTier), s[2]);
-
+                DungeonNames.Add(id, name);
                 if (defs.ContainsKey(id))
                 {
                     var dg = new Dungeon(id, name, defs[id].Item2, defs[id].Item1, true);
-                    Dungeons.Add(id, dg);
+                    DungeonDefs.Add(id, dg);
                 }
-                else
-                {
-                    //var dg = new Dungeon(id, name, t, 0, false);
-                }
+                //else
+                //{
+                //    //var dg = new Dungeon(id, name, t, 0, false);
+                //}
             }
-        }
-
-        internal static void Reload(string language)
-        {
-            _instance = new DungeonDatabase(language);
         }
 
         public string GetDungeonNameOrOpenWorld(uint continentId)
         {
-            return Dungeons.ContainsKey(continentId) ? Dungeons[continentId].Name : "Open world";
+            return DungeonDefs.ContainsKey(continentId) ? DungeonDefs[continentId].Name : "Open world";
         }
     }
 }

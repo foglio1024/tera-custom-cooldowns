@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per LancerBar.xaml
     /// </summary>
-    public partial class LancerBar : UserControl
+    public partial class LancerBar
     {
         public LancerBar()
         {

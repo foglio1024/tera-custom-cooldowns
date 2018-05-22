@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCC.Data;
-using Tera.Game;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
@@ -15,7 +15,7 @@ namespace TCC.Parsing.Messages
             var count = reader.ReadUInt16();
             reader.Skip(4);
             reader.ReadTeraString();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 try
                 {

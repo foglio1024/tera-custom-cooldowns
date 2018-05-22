@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Server;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     public class GuildQuest
     {

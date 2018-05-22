@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tera.Game;
-using Tera.Game.Messages;
+﻿using System.Collections.Generic;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
-    class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
+    internal class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
     {
         public Dictionary<uint, int> DungeonClears { get; set; }
         public S_DUNGEON_CLEAR_COUNT_LIST(TeraMessageReader reader) : base(reader)
@@ -17,7 +13,7 @@ namespace TCC.Parsing.Messages
             var offset = reader.ReadUInt16();
             var playerId = reader.ReadUInt32();
             DungeonClears = new Dictionary<uint, int>();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 //reader.BaseStream.Position = 8;
                 var current = reader.ReadUInt16();

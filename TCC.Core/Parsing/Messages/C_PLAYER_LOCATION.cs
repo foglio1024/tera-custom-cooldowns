@@ -1,8 +1,9 @@
-﻿using Tera.Game;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
-    public class C_PLAYER_LOCATION : Tera.Game.Messages.ParsedMessage
+    public class C_PLAYER_LOCATION : ParsedMessage
     {
         private float x;
         public float X

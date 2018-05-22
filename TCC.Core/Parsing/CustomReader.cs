@@ -1,23 +1,25 @@
 ﻿using System.IO;
 using System.Text;
-using Tera.Game;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing
 {
-    class CustomReader : BinaryReader
+    internal class CustomReader : BinaryReader
     {
-        public CustomReader(Tera.Message message)
+        public CustomReader(Message message)
         : base(GetStream(message), Encoding.Unicode)
         {
             Message = message;
         }
 
-        public Tera.Message Message { get; private set; }
+        public Message Message { get; private set; }
         public string OpCodeName { get; private set; }
         public uint Version { get; private set; }
         internal OpCodeNamer SysMsgNamer { get; private set; }
 
-        private static MemoryStream GetStream(Tera.Message message)
+        private static MemoryStream GetStream(Message message)
         {
             return new MemoryStream(message.Payload.Array, message.Payload.Offset, message.Payload.Count, false, true);
         }

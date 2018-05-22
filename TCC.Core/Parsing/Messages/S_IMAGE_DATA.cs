@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Tera.Game;
-using Tera.Game.Messages;
-using GuildId = System.UInt32;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_IMAGE_DATA : ParsedMessage
     {
-        private static Dictionary<GuildId, Bitmap> _database;
-        public static Dictionary<GuildId, Bitmap> Database => _database ?? (_database = new Dictionary<GuildId, Bitmap>());
+        private static Dictionary<uint, Bitmap> _database;
+        public static Dictionary<uint, Bitmap> Database => _database ?? (_database = new Dictionary<uint, Bitmap>());
 
 
         public S_IMAGE_DATA(TeraMessageReader reader) : base(reader)

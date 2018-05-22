@@ -3,89 +3,90 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows"
         xmlns:viewmodels="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls"
-        xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" Loaded="Window_Loaded" 
-        mc:Ignorable="d" 
-        Title="InfoWindow" 
+        xmlns:data="clr-namespace:TCC.Data"
+        Loaded="Window_Loaded"
+        mc:Ignorable="d"
+        Title="InfoWindow"
         Width="Auto" Height="Auto" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None"
-        SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True" 
-        Background="Transparent"
-        >
+        SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True"
+        Background="Transparent">
     <Window.DataContext>
-        <viewmodels:InfoWindowViewModel/>
+        <viewmodels:InfoWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate x:Key="vang">
-            <controls:VanguardInfoControl/>
+        <DataTemplate x:Key="Vang">
+            <controls:VanguardInfoControl />
         </DataTemplate>
-        <DataTemplate x:Key="dngs" >
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+        <DataTemplate x:Key="Dngs" DataType="data:DungeonCooldown">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Border Background="#6999" ToolTip="Total clears." 
-                        Width="Auto" Margin="0 .5 0 .5" CornerRadius="0 10 10 0" 
-                        Padding="3 2 4 2" Grid.ColumnSpan="2" 
+                <Border Background="#6999" ToolTip="Total clears."
+                        Width="Auto" Margin="0 .5 0 .5" CornerRadius="0 10 10 0"
+                        Padding="3 2 4 2"
                         HorizontalAlignment="Center" Grid.Column="2">
                     <Viewbox StretchDirection="DownOnly" Width="25">
                         <TextBlock Text="{Binding Clears}" Foreground="#b000"
-                                   HorizontalAlignment="Center" 
-                                   FontSize="13"/>
+                                   HorizontalAlignment="Center"
+                                   FontSize="13" />
                     </Viewbox>
                 </Border>
-                <Grid >
-                    <Border Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}" Opacity=".5"
-                            Margin="0 .5" CornerRadius="10 0 0 10"  />
+                <Grid>
+                    <Border Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}"
+                            Opacity=".5"
+                            Margin="0 .5" CornerRadius="10 0 0 10" />
                     <TextBlock Text="{Binding Id, Converter={StaticResource Converters.DungeonIdToName}}"
-                               Foreground="#c000" HorizontalAlignment="Stretch" FontSize="13" Margin="10 2"/>
+                               Foreground="#c000" HorizontalAlignment="Stretch" FontSize="13" Margin="10 2" />
                 </Grid>
                 <Grid HorizontalAlignment="Left" Grid.Column="1" ToolTip="Available runs.">
-                    <Border Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}" Opacity=".7"
-                            Margin="0 .5" CornerRadius="0 0 0 0"  HorizontalAlignment="Stretch" Grid.Column="1"/>
-                    <TextBlock Text="{Binding Entries}" Foreground="#b000" 
-                               HorizontalAlignment="Center" Margin="10 2 10 2" FontWeight="Bold" FontSize="13"/>
+                    <Border Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}"
+                            Opacity=".7"
+                            Margin="0 .5" CornerRadius="0 0 0 0" HorizontalAlignment="Stretch" />
+                    <TextBlock Text="{Binding Entries}" Foreground="#b000"
+                               HorizontalAlignment="Center" Margin="10 2 10 2" FontWeight="Bold" FontSize="13" />
                 </Grid>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="gear">
-            <controls:GearItemControl/>
+        <DataTemplate x:Key="Gear">
+            <controls:GearItemControl />
         </DataTemplate>
     </Window.Resources>
-    <WindowChrome.WindowChrome >
-        <WindowChrome  CaptionHeight="0"  ResizeBorderThickness="0" GlassFrameThickness="0" CornerRadius="0"/>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0" GlassFrameThickness="0" CornerRadius="0" />
     </WindowChrome.WindowChrome>
-    <Grid  Opacity="1" x:Name="rootGrid" MinHeight="0" Margin="10"
-          UseLayoutRounding="True" VerticalAlignment="Stretch"  >
+    <Grid Opacity="1" x:Name="RootGrid" MinHeight="0" Margin="10"
+          UseLayoutRounding="True" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.CacheMode>
-            <BitmapCache RenderAtScale="1"/>
+            <BitmapCache RenderAtScale="1" />
         </Grid.CacheMode>
-        <Border  Background="{StaticResource BackgroundDarkColor}" Grid.RowSpan="3" Opacity="1" x:Name="mainBorder" >
-        </Border>
+        <Border Background="{StaticResource BackgroundDarkColor}" Grid.RowSpan="3" Opacity="1" x:Name="MainBorder" />
 
         <!--Title bar-->
-        <Grid  MouseLeftButtonDown="DragWindow" Background="Transparent">
+        <Grid MouseLeftButtonDown="DragWindow" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Info window" VerticalAlignment="Center" Margin="10,4" Opacity=".4" FontSize="24" 
-                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd"/>
+            <TextBlock Text="Info window" VerticalAlignment="Center" Margin="10,4" Opacity=".4" FontSize="24"
+                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" />
 
-            <Button Style="{StaticResource ButtonMainStyle}" Grid.Column="2" 
-                    VerticalAlignment="Stretch" Width="40" Margin="0" Click="CloseWindow" VerticalContentAlignment="Center">
+            <Button Style="{StaticResource ButtonMainStyle}" Grid.Column="2"
+                    VerticalAlignment="Stretch" Width="40" Click="CloseWindow" VerticalContentAlignment="Center">
                 <Button.Content>
-                    <Path Fill="#2fff" Data="{StaticResource SVG.Close}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12"></Path>
+                    <Path Fill="#2fff" Data="{StaticResource SvgClose}" Stretch="UniformToFill"
+                          VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12" />
                 </Button.Content>
             </Button>
         </Grid>
@@ -93,128 +94,175 @@
         <!--Content-->
         <Grid Grid.Row="2" Margin="0,0,0,0" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!--Vangaurd-->
             <Grid Grid.Row="0" Margin="10" Grid.ColumnSpan="1" HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!--Title-->
                 <TextBlock FontSize="24" Opacity=".4" TextAlignment="Center" Margin="0 0 0 10" Foreground="#ccc"
-                           HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Thin" >Characters</TextBlock>
+                           HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Thin">
+                    Characters
+                </TextBlock>
 
                 <!--Content-->
-                <ScrollViewer Height="506" VerticalScrollBarVisibility="Visible" 
-                               HorizontalAlignment="Left" Grid.Row="2">
+                <ScrollViewer Height="506" VerticalScrollBarVisibility="Visible"
+                              HorizontalAlignment="Left" Grid.Row="2">
                     <ScrollViewer.Resources>
-                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
+                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}" />
                     </ScrollViewer.Resources>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.Characters}" HorizontalAlignment="Left"
-                              ItemTemplate="{StaticResource vang}" VerticalAlignment="Top"  >
+                    <ItemsControl ItemsSource="{Binding Instance.Characters}" HorizontalAlignment="Left"
+                                  ItemTemplate="{StaticResource Vang}" VerticalAlignment="Top">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel/>
+                                <StackPanel />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.CacheMode>
-                            <BitmapCache RenderAtScale="2"/>
+                            <BitmapCache RenderAtScale="2" />
                         </ItemsControl.CacheMode>
                     </ItemsControl>
                 </ScrollViewer>
             </Grid>
-            <Separator Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0" Background="#2555"></Separator>
-            <Separator Grid.Row="0" VerticalAlignment="Top" Grid.ColumnSpan="3" 
-                       Margin="0" Background="#2555"></Separator>
-
-            <!--Dungeons-->
-            <!--<Grid Grid.Row="2" Grid.Column="1" Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                -->
-            <!--Title-->
-            <!--
-                <TextBlock FontSize="24" Opacity=".4" HorizontalAlignment="Center" Margin="0,0,0,10" TextAlignment="Center"
-                       VerticalAlignment="Center" FontWeight="Thin" >Dungeon entries</TextBlock>
-                -->
+            <Separator Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0" Background="#2555" />
+            <Separator Grid.Row="0" VerticalAlignment="Top" Grid.ColumnSpan="3"
+                       Margin="0" Background="#2555" />
             <!--Dungeons-->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock FontSize="24" Opacity=".4" TextAlignment="Center" Margin="0 10 0 10" Foreground="#ccc"
-                           HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Thin" >Dungeons</TextBlock>
+                           HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Thin">
+                    Dungeons
+                </TextBlock>
 
-                <ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.VisibleDungeons}" 
-                              ItemTemplate="{StaticResource dngs}" Grid.Row="1" 
+                <ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.VisibleDungeons}"
+                              ItemTemplate="{StaticResource Dngs}" Grid.Row="1"
                               HorizontalAlignment="Stretch" Margin="30 8" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="1" VerticalAlignment="Stretch"/>
+                            <UniformGrid Columns="1" VerticalAlignment="Stretch" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
 
                 </ItemsControl>
             </Grid>
-            <Border BorderBrush="#1999" BorderThickness="1 0 1 0" Grid.Column="1"></Border>
-            <!--</Grid>-->
+            <Border BorderBrush="#1999" BorderThickness="1 0 1 0" Grid.Column="1" />
             <!--Timeline-->
             <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="3" Grid.Row="2"
-                                      HorizontalAlignment="Center" Margin="15,10,15,30"/>
+                                      HorizontalAlignment="Center" Margin="15,10,15,30" />
 
             <!--Gear-->
             <Grid Grid.Column="2" Margin="20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
-            <!--Title-->
-            
-                <TextBlock FontSize="24" Opacity=".4" Foreground="#ccc" HorizontalAlignment="Center" Margin="0,0,0,10" TextAlignment="Center"
-                           VerticalAlignment="Center" FontWeight="Thin" >Gear</TextBlock>
-                
-            <!--Content-->
-                <StackPanel Grid.Row="1" Visibility="{Binding SelectedCharacterExists, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                    <!--Weapon-->
-                    <ContentControl Content="{Binding Instance.SelectedCharacter.Weapon}" ContentTemplate="{StaticResource gear}"/>
-                    <ContentControl Content="{Binding Instance.SelectedCharacter.Chest}" ContentTemplate="{StaticResource gear}"/>
-                    <ContentControl Content="{Binding Instance.SelectedCharacter.Hands}" ContentTemplate="{StaticResource gear}"/>
-                    <ContentControl Content="{Binding Instance.SelectedCharacter.Feet}" ContentTemplate="{StaticResource gear}"/>
-                    <ContentControl Content="{Binding Instance.SelectedCharacter.Belt}" ContentTemplate="{StaticResource gear}"/>
-                    <ContentControl Content="{Binding Instance.SelectedCharacter.Circlet}" ContentTemplate="{StaticResource gear}"/>
-                    <ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.Jewels}" ItemTemplate="{StaticResource gear}"/>
-                </StackPanel>
 
-                <!--<ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.Gear}" ItemTemplate="{StaticResource gear}" Grid.Row="1" HorizontalAlignment="Center">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>-->
+                <!--Title-->
+                <TextBlock FontSize="24" Opacity=".4" Foreground="#ccc" HorizontalAlignment="Center" Margin="0,0,0,10"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center" FontWeight="Thin">
+                    Gear
+                </TextBlock>
+
+                <!--Content-->
+                <StackPanel Grid.Row="1"
+                            Visibility="{Binding SelectedCharacterExists, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                    <!--Weapon-->
+                    <ContentControl Content="{Binding Instance.SelectedCharacter.Weapon}"
+                                    ContentTemplate="{StaticResource Gear}" />
+                    <ContentControl Content="{Binding Instance.SelectedCharacter.Chest}"
+                                    ContentTemplate="{StaticResource Gear}" />
+                    <ContentControl Content="{Binding Instance.SelectedCharacter.Hands}"
+                                    ContentTemplate="{StaticResource Gear}" />
+                    <ContentControl Content="{Binding Instance.SelectedCharacter.Feet}"
+                                    ContentTemplate="{StaticResource Gear}" />
+                    <ContentControl Content="{Binding Instance.SelectedCharacter.Belt}"
+                                    ContentTemplate="{StaticResource Gear}" />
+                    <ContentControl Content="{Binding Instance.SelectedCharacter.Circlet}"
+                                    ContentTemplate="{StaticResource Gear}" />
+                    <ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.Jewels}"
+                                  ItemTemplate="{StaticResource Gear}" />
+                </StackPanel>
             </Grid>
         </Grid>
-
-        <!--<Grid.Effect>
-            <DropShadowEffect ShadowDepth="4" 
-                                  BlurRadius="10" Opacity=".4"></DropShadowEffect>
-        </Grid.Effect>-->
-
     </Grid>
-
-
 </Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

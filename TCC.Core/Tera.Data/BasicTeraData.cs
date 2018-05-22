@@ -5,13 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TCC.TeraCommon.Game;
+using TCC.TeraCommon.Game.Services;
 //using log4net;
 //using log4net.Config;
-using Tera.Game;
+
 //using DamageMeter.AutoUpdate;
 //using Lang;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class BasicTeraData
     {
@@ -20,7 +22,7 @@ namespace Data
         //private static readonly ILog _log = LogManager.GetLogger("ShinraMeter");
         private static int _errorCount = 10; //limit number of debug messages in one session
 
-        string defaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
+        private string defaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
 
         private BasicTeraData() : this(FindResourceDirectory())
         {

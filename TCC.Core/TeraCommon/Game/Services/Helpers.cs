@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     public static class Helpers
     {

@@ -4,8 +4,9 @@
 using System;
 using System.IO;
 using System.Linq;
+using TCC.TeraCommon.PacketLog.Parsing;
 
-namespace Tera.PacketLog
+namespace TCC.TeraCommon.PacketLog
 {
     public class PacketLogReader
     {

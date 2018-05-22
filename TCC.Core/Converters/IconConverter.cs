@@ -7,7 +7,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string iconName = "unknown";
+            var iconName = "unknown";
             if (value != null)
             {
                 if (value.ToString() != "")

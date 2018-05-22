@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace TCC.Windows
@@ -21,20 +13,27 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SplashScreen.xaml
     /// </summary>
-    public partial class SplashScreen : TccWindow
+    public partial class SplashScreen
     {
         public SplashScreen()
         {
             InitializeComponent();
+            try
+            {
+                var r = new Random();
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
+                img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            }
+            catch { }
         }
 
         public void SetText(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => txt.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Txt.Text = t));
         }
         public void SetVer(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => ver.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Ver.Text = t));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -54,8 +53,8 @@ namespace TCC.Windows
                 BeginAnimation(OpacityProperty, an);
             });
         }
-        private bool waiting = true;
-        private bool updateAnswer = false;
+        private bool _waiting = true;
+        private bool _updateAnswer;
         public bool AskUpdate(string updateText)
         {
             Dispatcher.Invoke(() =>
@@ -65,41 +64,41 @@ namespace TCC.Windows
             });
             SetText(updateText);
             Dispatcher.Invoke(() => ShowHideButton(true));
-            while (waiting)
+            while (_waiting)
             {
                 Thread.Sleep(1);
             }
-            waiting = true;
-            return updateAnswer;
+            _waiting = true;
+            return _updateAnswer;
         }
         private void ShowHideButton(bool show)
         {
             var scale = show ? 1 : 0;
-            Dispatcher.Invoke(() => buttonsGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+            Dispatcher.Invoke(() => ButtonsGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
                 new DoubleAnimation(scale, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() }));
         }
 
         private void NoClick(object sender, RoutedEventArgs e)
         {
             ShowHideButton(false);
-            updateAnswer = false;
-            waiting = false;
+            _updateAnswer = false;
+            _waiting = false;
         }
 
         private void OkClick(object sender, RoutedEventArgs e)
         {
             ShowHideButton(false);
 
-            updateAnswer = true;
-            waiting = false;
+            _updateAnswer = true;
+            _waiting = false;
         }
 
         internal void UpdateProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
-                bar.Value = e.ProgressPercentage;
-                if (bar.Value == 100) bar.Value = 0;
+                Bar.Value = e.ProgressPercentage;
+                if (Bar.Value == 100) Bar.Value = 0;
             });
         }
     }

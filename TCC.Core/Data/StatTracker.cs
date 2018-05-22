@@ -1,9 +1,12 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Windows.Threading;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class StatTracker : TSPropertyChanged
     {
+
+        public event Action<uint> OnToZero;
         private int val = 0;
         public int Val
         {
@@ -51,6 +54,11 @@ namespace TCC.ViewModels
         public StatTracker()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+        }
+
+        public void ToZero(uint pDuration)
+        {
+            OnToZero?.Invoke(pDuration);
         }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -23,10 +20,11 @@ namespace TCC.ViewModels
         private ulong _aggroHolder;
         private bool _firstCheck = true;
         private readonly object _lock = new object();
+        private bool _leaderOverride;
         public event Action SettingsUpdated;
 
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
-        public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
+        //public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
         public SynchronizedObservableCollection<User> Members { get; }
         public ICollectionViewLiveShaping Dps { get; }
         public ICollectionViewLiveShaping Tanks { get; }
@@ -42,9 +40,12 @@ namespace TCC.ViewModels
             }
         }
         public int Size => Members.Count;
-        public int ReadyCount => Members.ToSyncArray().Count(x => x.Ready == ReadyStatus.Ready);
-        public int AliveCount => Members.ToSyncArray().Count(x => x.Alive);
+        public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
+        public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
+        public bool ShowDetails => Formed && SettingsManager.ShowGroupWindowDetails;
+        public bool ShowLeaveButton => Formed && Proxy.IsConnected;
+        public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel()
@@ -52,35 +53,42 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
             _scale = SettingsManager.GroupWindowSettings.Scale;
 
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NPC("IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    WindowManager.GroupWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+            //    NPC("IsTeraOnTop");
+            //    if (IsTeraOnTop)
+            //    {
+            //        WindowManager.GroupWindow.RefreshTopmost();
+            //    }
+            //};
 
             Members = new SynchronizedObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { });
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
 
         }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(100).ContinueWith(t => NPC(nameof(Size)));
+            //Task.Delay(0).ContinueWith(t =>
+            //{
+            //});
+            NPC(nameof(Size));
             NPC(nameof(Formed));
+            NPC(nameof(AmILeader));
+            NPC(nameof(ShowDetails));
             NPC(nameof(AliveCount));
             NPC(nameof(ReadyCount));
-
+            NPC(nameof(ShowLeaderButtons));
         }
         public void NotifySettingUpdated()
         {
             SettingsUpdated?.Invoke();
+
+            NPC(nameof(ShowDetails));
         }
         public bool Exists(ulong id)
         {
@@ -113,13 +121,13 @@ namespace TCC.ViewModels
 
         public bool IsLeader(string name)
         {
-            return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
+            return Members.FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
         }
         public bool HasPowers(string name)
         {
             return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
-        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name);
+        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name) || _leaderOverride;
 
         public void SetAggro(ulong target)
         {
@@ -202,7 +210,11 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer) return;
+            if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer)
+            {
+                _leaderOverride = p.IsLeader;
+                return;
+            }
             lock (_lock)
             {
                 var user = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
@@ -215,6 +227,7 @@ namespace TCC.ViewModels
                 user.Online = p.Online;
                 user.EntityId = p.EntityId;
                 user.IsLeader = p.IsLeader;
+                user.Order = p.Order;
             }
         }
         private void SendAddMessage(string name)
@@ -232,7 +245,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out var m);
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private void SendLeaveMessage(string name)
@@ -249,7 +262,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }
@@ -310,6 +323,9 @@ namespace TCC.ViewModels
             {
                 m.IsLeader = m.Name == name;
             }
+            _leaderOverride = name == SessionManager.CurrentPlayer.Name;
+            NPC(nameof(AmILeader));
+            NPC(nameof(ShowLeaderButtons));
         }
         public void StartRoll()
         {
@@ -443,7 +459,7 @@ namespace TCC.ViewModels
             u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
-            u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
+            u.Location = SessionManager.MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
         }
 
     }
@@ -451,8 +467,8 @@ namespace TCC.ViewModels
     public class DragBehavior
     {
         public readonly TranslateTransform Transform = new TranslateTransform();
-        private System.Windows.Point _elementStartPosition2;
-        private System.Windows.Point _mouseStartPosition2;
+        private Point _elementStartPosition2;
+        private Point _mouseStartPosition2;
         private static DragBehavior _instance = new DragBehavior();
         public static DragBehavior Instance
         {

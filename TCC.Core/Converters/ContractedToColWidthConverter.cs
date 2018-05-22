@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    class ContractedToColWidthConverter : IValueConverter
+    internal class ContractedToColWidthConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

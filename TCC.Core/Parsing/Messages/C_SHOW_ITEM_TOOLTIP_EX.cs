@@ -1,19 +1,19 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class C_SHOW_ITEM_TOOLTIP_EX : ParsedMessage
     {
-        ushort nameOffset;
-        int unk1;
-        ulong uid;
-        int unk2;
-        int unk3;
-        int unk4;
-        int unk5;
-        int unk6;
-        string name;
+        private ushort nameOffset;
+        private int unk1;
+        private ulong uid;
+        private int unk2;
+        private int unk3;
+        private int unk4;
+        private int unk5;
+        private int unk6;
+        private string name;
         public C_SHOW_ITEM_TOOLTIP_EX(TeraMessageReader reader) : base(reader)
         {
             nameOffset = reader.ReadUInt16();

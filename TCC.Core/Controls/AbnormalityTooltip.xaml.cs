@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace TCC.Controls
 {
-    public partial class AbnormalityToolTipControl : UserControl
+    public partial class AbnormalityToolTipControl
     {
         public AbnormalityToolTipControl()
         {
@@ -16,86 +15,79 @@ namespace TCC.Controls
 
         public string AbnormalityName
         {
-            get { return (string)GetValue(AbnormalityNameProperty); }
-            set { SetValue(AbnormalityNameProperty, value); }
+            get => (string)GetValue(AbnormalityNameProperty);
+            set => SetValue(AbnormalityNameProperty, value);
         }
         public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityToolTipControl));
 
         public string AbnormalityToolTip
         {
-            get { return (string)GetValue(AbnormalityToolTipProperty); }
-            set { SetValue(AbnormalityToolTipProperty, value); }
+            get => (string)GetValue(AbnormalityToolTipProperty);
+            set => SetValue(AbnormalityToolTipProperty, value);
         }
         public static readonly DependencyProperty AbnormalityToolTipProperty = DependencyProperty.Register("AbnormalityToolTip", typeof(string), typeof(AbnormalityToolTipControl));
 
         public uint Id
         {
-            get { return (uint)GetValue(IdProperty); }
-            set { SetValue(IdProperty, value); }
+            get => (uint)GetValue(IdProperty);
+            set => SetValue(IdProperty, value);
         }
         public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(uint), typeof(AbnormalityToolTipControl));
 
 
+        private const string GoodStart = "$H_W_GOOD";
+        private const string BadStart = "$H_W_BAD";
+        private const string End = "$COLOR_END";
+        private const string Cr = "$BR";
+        private const string Cr2 = "<br>";
 
-        string goodStart = "$H_W_GOOD";
-        string badStart = "$H_W_BAD";
-        string end = "$COLOR_END";
-        string cr = "$BR";
-        string cr2 = "<br>";
-
-        void ParseToolTip(string t)
+        private void ParseToolTip(string t)
         {
-            t = t.Replace(cr, "\n");
-            t = t.Replace(cr2, "\n");
-            var s = t.Split(new string[] { end }, StringSplitOptions.None);
+            t = t.Replace(Cr, "\n");
+            t = t.Replace(Cr2, "\n");
+            var s = t.Split(new[] { End }, StringSplitOptions.None);
 
-            for (int i = 0; i < s.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
                 if(i != s.Length - 1)
                 {
-                    if (s[i].Contains(goodStart))
+                    if (s[i].Contains(GoodStart))
                     {
-                        var d = s[i].Split(new string[] { goodStart }, StringSplitOptions.None);
-                        toolTipTB.Inlines.Add(d[0]);
-                        Run r = new Run(d[1]);
-                        r.Foreground = new SolidColorBrush(Color.FromRgb(0x3f,0x9f,0xff));
-                        toolTipTB.Inlines.Add(r);
+                        var d = s[i].Split(new[] { GoodStart }, StringSplitOptions.None);
+                        ToolTipTb.Inlines.Add(d[0]);
+                        var r = new Run(d[1]) {Foreground = new SolidColorBrush(Color.FromRgb(0x3f, 0x9f, 0xff))};
+                        ToolTipTb.Inlines.Add(r);
                     }
-                    else if (s[i].Contains(badStart))
+                    else if (s[i].Contains(BadStart))
                     {
-                        var d = s[i].Split(new string[] { badStart }, StringSplitOptions.None);
-                        toolTipTB.Inlines.Add(d[0]);
-                        Run r = new Run(d[1]);
-                        r.Foreground = new SolidColorBrush(Colors.OrangeRed);
-                        toolTipTB.Inlines.Add(r);
+                        var d = s[i].Split(new[] { BadStart }, StringSplitOptions.None);
+                        ToolTipTb.Inlines.Add(d[0]);
+                        var r = new Run(d[1]) {Foreground = new SolidColorBrush(Colors.OrangeRed)};
+                        ToolTipTb.Inlines.Add(r);
                     }
                 }
                 else
                 {
-                    toolTipTB.Inlines.Add(s[i]);
+                    ToolTipTb.Inlines.Add(s[i]);
                 }
             }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            toolTipTB.Text = "";
-            toolTipTB.FontSize = 11;
+            ToolTipTb.Text = "";
+            ToolTipTb.FontSize = 11;
             try
             {
                 ParseToolTip(AbnormalityToolTip);
-                if(toolTipTB.Text == "")
-                {
-                    toolTipTB.Text = Id.ToString(); ;
-                    Debug.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
-                }
-
+                if (ToolTipTb.Text != "") return;
+                ToolTipTb.Text = Id.ToString();
+                Debug.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
             }
-            catch (Exception)
+            catch
             {
-
+                // ignored
             }
-            //toolTipTB.Text = ParseToolTip(AbnormalityToolTip);
         }
     }
 }

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
-using Tera.Game;
-using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
     public class S_GET_USER_LIST : ParsedMessage
     {
-        short count, offset;
-        byte unkh1;
-        int unkh2;//, unkh3;
-        int maxChar;
-        int unkh4;
-        short unkh5;
-        int unkh6;
-        int unkh7;
-        int unkh8;
+        private short count, offset;
+        private byte unkh1;
+        private int unkh2;//, unkh3;
+        private int maxChar;
+        private int unkh4;
+        private short unkh5;
+        private int unkh6;
+        private int unkh7;
+        private int unkh8;
 
         public List<Character> CharacterList;
         public List<RawChar> RawCharacters;
@@ -30,7 +30,7 @@ namespace TCC.Parsing.Messages
             RawCharacters = new List<RawChar>();
             count = reader.ReadInt16();
             offset = reader.ReadInt16();
-            short nextAddr = offset;
+            var nextAddr = offset;
             unkh1 = reader.ReadByte();
             unkh2 = reader.ReadInt32();
             maxChar = reader.ReadInt32();
@@ -40,7 +40,7 @@ namespace TCC.Parsing.Messages
             unkh7 = reader.ReadInt32();
             unkh8 = reader.ReadInt32();
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var c = new RawChar();
                 reader.BaseStream.Position = nextAddr - 4;
@@ -162,10 +162,6 @@ namespace TCC.Parsing.Messages
             CharacterList = CharacterList.OrderBy(ch => ch.Position).ToList();
         }
     }
-}
-namespace TCC.Data
-{
-
 
     public class RawChar
     {
@@ -212,11 +208,11 @@ namespace TCC.Data
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine(String.Format("Character [{0}] <", pos));
-            sb.AppendLine(String.Format("\tName: {0}", name));
-            sb.AppendLine(String.Format("\tLevel: {0}", level));
-            sb.AppendLine(String.Format("\tClass: {0}", (Class)charClass));
-            sb.AppendLine(String.Format("\tLaurel: {0}", (Laurel)laurel));
+            sb.AppendLine(string.Format("Character [{0}] <", pos));
+            sb.AppendLine(string.Format("\tName: {0}", name));
+            sb.AppendLine(string.Format("\tLevel: {0}", level));
+            sb.AppendLine(string.Format("\tClass: {0}", (Class)charClass));
+            sb.AppendLine(string.Format("\tLaurel: {0}", (Laurel)laurel));
             sb.AppendLine(">");
 
             return sb.ToString();

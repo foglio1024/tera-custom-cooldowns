@@ -1,36 +1,38 @@
 ﻿using System;
 using System.Net;
-using System.Windows;
 using System.IO.Compression;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using System.Threading;
+using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC
 {
     public static class UpdateManager
     {
-        static System.Timers.Timer checkTimer;
-        static string databasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
-        static string databaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
-        static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-        static string baseDatabaseDir = "tera-used-icons-master";
+        private static System.Timers.Timer checkTimer;
+        private static string databasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
+        private static string databaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
+        private static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+        private static string baseDatabaseDir = "tera-used-icons-master";
         public static void CheckDatabaseVersion()
         {
-            using (WebClient c = new WebClient())
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
                 try
                 {
                     var st = c.OpenRead(databaseVersion);
                     if (st != null)
                     {
-                        StreamReader sr = new StreamReader(st);
+                        var sr = new StreamReader(st);
 
-                        int newVersion = Convert.ToInt32(sr.ReadLine());
-                        int currentVersion = 0;
+                        var newVersion = Convert.ToInt32(sr.ReadLine());
+                        var currentVersion = 0;
                         if (File.Exists("resources/images/current_version"))
                         {
                             using (var str = File.OpenText("resources/images/current_version"))
@@ -66,11 +68,14 @@ namespace TCC
                 }
             }
         }
-        static void DownloadDatabase()
+
+        private static void DownloadDatabase()
         {
-            using (WebClient c = new WebClient())
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            using (var c = new WebClient())
             {
-                bool ready = false;
+                var ready = false;
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                 c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
@@ -94,7 +99,8 @@ namespace TCC
                 }
             }
         }
-        static void ExtractDatabase()
+
+        private static void ExtractDatabase()
         {
             if (Directory.Exists(baseDatabaseDir))
             {
@@ -123,7 +129,8 @@ namespace TCC
 
             //MessageBox.Show("Database updated.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        static void CleanTempDatabase()
+
+        private static void CleanTempDatabase()
         {
             try
             {
@@ -139,18 +146,21 @@ namespace TCC
         {
             checkTimer = new System.Timers.Timer(60 * 10 * 1000);
             checkTimer.Elapsed += CheckTimer_Elapsed;
+            checkTimer.Start();
         }
 
         private static void CheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            //TODO check for update an warn via notification
             checkTimer.Stop();
             CheckAppVersionPeriodic();
             checkTimer.Start();
         }
-        static void CheckAppVersionPeriodic()
+
+        private static void CheckAppVersionPeriodic()
         {
-            using (WebClient c = new WebClient())
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
@@ -159,17 +169,17 @@ namespace TCC
                     var st = c.OpenRead(appVersion);
                     if (st != null)
                     {
-                        StreamReader sr = new StreamReader(st);
-                        string newVersionInfo = sr.ReadLine();
-                        string newVersionUrl = sr.ReadLine();
+                        var sr = new StreamReader(st);
+                        var newVersionInfo = sr.ReadLine();
+                        var newVersionUrl = sr.ReadLine();
 
                         if (newVersionInfo != null)
                         {
                             var v = Version.Parse(newVersionInfo);
                             if (v > Assembly.GetExecutingAssembly().GetName().Version)
                             {
-                                //TODO warn user
-                                
+                                ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
+                                WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                             }
                         }
                     }
@@ -184,7 +194,9 @@ namespace TCC
         }
         public static void CheckAppVersion()
         {
-            using (WebClient c = new WebClient())
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
@@ -193,9 +205,9 @@ namespace TCC
                     var st = c.OpenRead(appVersion);
                     if (st != null)
                     {
-                        StreamReader sr = new StreamReader(st);
-                        string newVersionInfo = sr.ReadLine();
-                        string newVersionUrl = sr.ReadLine();
+                        var sr = new StreamReader(st);
+                        var newVersionInfo = sr.ReadLine();
+                        var newVersionUrl = sr.ReadLine();
 
                         if (newVersionInfo != null)
                         {
@@ -231,6 +243,7 @@ namespace TCC
 
         private static void Update(string url)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             using (var c = new WebClient())
             {
@@ -239,7 +252,7 @@ namespace TCC
                     c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                     App.SplashScreen.SetText("Downloading update...");
-                    bool ready = false;
+                    var ready = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                     c.DownloadFileCompleted += (s, ev) => ready = true;
                     App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(url), "update.zip"));

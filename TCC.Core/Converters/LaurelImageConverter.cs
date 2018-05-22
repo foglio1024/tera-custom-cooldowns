@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Data;
+
 namespace TCC.Converters
 {
     public class LaurelImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Laurel l = (Laurel)value;
+            var l = (Laurel)value;
             //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
-            string laurel = "";
+            var laurel = "";
             switch (l)
             {
                 case Laurel.None:
@@ -36,7 +38,7 @@ namespace TCC.Converters
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        static extern bool DeleteObject(IntPtr hObject);
+        private static extern bool DeleteObject(IntPtr hObject);
 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

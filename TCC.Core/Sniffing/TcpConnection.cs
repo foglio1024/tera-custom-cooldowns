@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Net;
-using Data;
+using TCC.Tera.Data;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     public class TcpConnection
     {
@@ -86,7 +86,7 @@ namespace NetworkSniffer
                             ).FirstOrDefault() ?? "unknown";
                 name = name + " CPU:" + ((from x in new ManagementObjectSearcher("SELECT * FROM Win32_Processor").Get().Cast<ManagementObject>()
                            select x.GetPropertyValue("Name")+" load:"+ x.GetPropertyValue("LoadPercentage")+"%").FirstOrDefault() ?? "processor unknown");
-                string debug = (BasicTeraData.Instance.WindowData.LowPriority ? "Low priority " : "Normal priority ") + SnifferType + " running on win "+name+
+                var debug = (BasicTeraData.Instance.WindowData.LowPriority ? "Low priority " : "Normal priority ") + SnifferType + " running on win "+name+
                     " Received: " + BytesReceived + "\r\n" + _bufferedPackets.First().Key + ": " + _bufferedPackets.First().Value.Length + "\r\nQueue length:" + _bufferedPackets.Count;
                 while (_bufferedPackets.Values.First().Length >= 500)
                 {

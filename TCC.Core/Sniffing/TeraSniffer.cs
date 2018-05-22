@@ -5,13 +5,12 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Data;
-using NetworkSniffer;
-using Tera;
-using Tera.Game;
-using Tera.Sniffing;
+using TCC.Tera.Data;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game;
+using TCC.TeraCommon.Sniffing;
 
-namespace DamageMeter.Sniffing
+namespace TCC.Sniffing
 {
     public class TeraSniffer : ITeraSniffer
     {

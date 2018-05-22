@@ -16,14 +16,14 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
             _scale = SettingsManager.BuffWindowSettings.Scale;
             Player = new Player();
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                //RaisePropertyChanged("IsTeraOnTop");
-                if (WindowManager.IsTccVisible)
-                {
-                    WindowManager.BuffWindow.RefreshTopmost();
-                }
-            };
+            //WindowManager.TccVisibilityChanged += (s, ev) =>
+            //{
+                ////RaisePropertyChanged("IsTeraOnTop");
+                //if (WindowManager.IsTccVisible)
+                //{
+                    //WindowManager.BuffWindow.RefreshTopmost();
+                //}
+            //};
         }
 
         public void NotifyDirectionChanged()

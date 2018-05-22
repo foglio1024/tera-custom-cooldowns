@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System;
+using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels
@@ -6,31 +7,27 @@ namespace TCC.ViewModels
 
     public class WarriorBarManager : ClassManager
     {
-        private static WarriorBarManager _instance;
-        public static WarriorBarManager Instance => _instance ?? (_instance = new WarriorBarManager());
 
         public DurationCooldownIndicator DeadlyGamble { get; set; }
-
         public Counter EdgeCounter { get; set; }
         public StanceTracker<WarriorStance> Stance { get; set; }
-
+        public StatTracker TraverseCut { get; set; }
+        public StatTracker TempestAura { get; set; }
         public WarriorBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             EdgeCounter = new Counter(10, true);
+            TraverseCut = new StatTracker {Max = 13, Val = 0};
+            TempestAura = new StatTracker {Max = 50, Val = 0};
             Stance = new StanceTracker<WarriorStance>();
-            //LoadSkills("warrior-skills.xml", Class.Warrior);
-            LoadSpecialSkills();
         }
 
-        protected override void LoadSpecialSkills()
+        public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
             DeadlyGamble = new DurationCooldownIndicator(_dispatcher);
-            SkillsDatabase.TryGetSkill(200200, Class.Warrior, out Skill dg);
-            DeadlyGamble.Buff = new FixedSkillCooldown(dg, CooldownType.Skill, _dispatcher, false);
-            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, CooldownType.Skill, _dispatcher, true);
+            SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            DeadlyGamble.Buff = new FixedSkillCooldown(dg, false);
+            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, true);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

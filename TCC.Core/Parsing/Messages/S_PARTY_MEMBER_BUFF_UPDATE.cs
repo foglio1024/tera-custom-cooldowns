@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Tera.Game;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
@@ -36,7 +36,7 @@ namespace TCC.Parsing.Messages
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
 
-            for (int i = 0; i < abnormalsCount; i++)
+            for (var i = 0; i < abnormalsCount; i++)
             {
                 reader.Skip(4);
                 var ab = new MemberAbnormal();
@@ -48,7 +48,7 @@ namespace TCC.Parsing.Messages
                 Abnormals.Add(ab);
             }
             return;
-            for (int i = 0; i < conditionsCount; i++)
+            for (var i = 0; i < conditionsCount; i++)
             {
                 reader.Skip(4);
                 var cond = new MemberCondition();

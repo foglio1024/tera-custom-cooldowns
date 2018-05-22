@@ -1,102 +1,161 @@
-﻿using Dragablz;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Dragablz;
+using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC.Controls
 {
     /// <summary>
-    /// Logica di interazione per FixedSkillContainers.xaml
+    ///     Logica di interazione per FixedSkillContainers.xaml
     /// </summary>
-    public partial class FixedSkillContainers : UserControl
+    public partial class FixedSkillContainers
     {
         private object[] _mainOrder;
         private object[] _secondaryOrder;
-        private DispatcherTimer mainButtonTimer;
-        private DispatcherTimer secButtonTimer;
-        private static Action EmptyDelegate = delegate () { };
-        private string lastSender = "";
+        private readonly DispatcherTimer _mainButtonTimer;
+        private readonly DispatcherTimer _secButtonTimer;
+        private readonly DoubleAnimation _opacityUp;
+        private readonly DoubleAnimation _opacityDown;
+        private static readonly Action EmptyDelegate = delegate { };
+        private string _lastSender = "";
 
         public FixedSkillContainers()
         {
             InitializeComponent();
             AddHandler(DragablzItem.DragStarted, new DragablzDragStartedEventHandler(ItemDragStarted), true);
             AddHandler(DragablzItem.DragCompleted, new DragablzDragCompletedEventHandler(ItemDragCompleted), true);
-            mainButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            secButtonTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
-            mainButtonTimer.Tick += MainButtonTimer_Tick;
-            secButtonTimer.Tick += SecButtonTimer_Tick;
+            _mainButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            _secButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            _mainButtonTimer.Tick += MainButtonTimer_Tick;
+            _secButtonTimer.Tick += SecButtonTimer_Tick;
+            _opacityUp = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
+            _opacityDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase(), BeginTime = TimeSpan.FromMilliseconds(1000) };
             SelectionPopup.Closed += SelectionPopup_Closed;
             SelectionPopup.Opened += SelectionPopup_Opened;
             CooldownWindowViewModel.Instance.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
-            CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged; ;
+            CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
+            CooldownWindowViewModel.Instance.SkillsLoaded += OnSkillsLoaded;
         }
 
-        private void MainSkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        //really absurd way of fixing order issue
+        private void OnSkillsLoaded()
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            Dispatcher.Invoke(() =>
             {
-                mainSkills.InvalidateMeasure();
-                mainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
-            }
+                ReorderSkillContainer(MainSkills, CooldownWindowViewModel.Instance.MainSkills);
+                ReorderSkillContainer(SecSkills, CooldownWindowViewModel.Instance.SecondarySkills);
+            });
         }
-        private void SecondarySkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+
+        //really absurd way of fixing order issue
+        public void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<FixedSkillCooldown> collection)
         {
-            if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            var positions = new Dictionary<int, double>(); //index, X
+            for (var i = 0; i < container.Items.Count; i++)
             {
-                secSkills.InvalidateMeasure();
-                secSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+                var curr = container.ItemContainerGenerator.ContainerFromIndex(i) as UIElement;
+                var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
+                positions.Add(i, p.X);
             }
-            if ((sender as SynchronizedObservableCollection<FixedSkillCooldown>).Count == 0) otherSkills.Margin = new Thickness(-60,0,0,0);
-            else otherSkills.Margin = new Thickness(0);
+
+            var needsReorder = false;
+            for (var j = 0; j < positions.Count; j++)
+            {
+                if (j + 1 == positions.Count) continue;
+                if (positions[j] > positions[j + 1])
+                {
+                    needsReorder = true;
+                    break;
+                }
+            }
+
+            if (!needsReorder) return;
+            container.ItemsSource = null;
+            container.ItemsSource = collection;
+        }
+
+        public SkillDropHandler DropHandler => new SkillDropHandler();
+
+        private void MainSkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action != NotifyCollectionChangedAction.Remove) return;
+            MainSkills.InvalidateMeasure();
+            MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            CooldownWindowViewModel.Instance.Save();
+        }
+
+        private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                SecSkills.InvalidateMeasure();
+                SecSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+                CooldownWindowViewModel.Instance.Save();
+            }
+
+            OtherSkills.Margin = ((SynchronizedObservableCollection<FixedSkillCooldown>)sender).Count == 0
+                ? new Thickness(-60, 0, 0, 0)
+                : new Thickness(0);
         }
 
         private void SelectionPopup_Opened(object sender, EventArgs e)
         {
-            FocusManager.Running = false;
+            FocusManager.FocusTimer.Enabled = false;
         }
+
         private void SelectionPopup_Closed(object sender, EventArgs e)
         {
-            mainButtonTimer.Start();
-            secButtonTimer.Start();
+            _mainButtonTimer.Start();
+            _secButtonTimer.Start();
             ChoiceListBox.UnselectAll();
-            FocusManager.Running = true;
+            FocusManager.FocusTimer.Enabled = true;
         }
-        private void SelectionPopup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+
+        private void SelectionPopup_MouseLeave(object sender, MouseEventArgs e)
         {
             SelectionPopup.IsOpen = false;
         }
 
         private void MainButtonTimer_Tick(object sender, EventArgs e)
         {
-            mainButtonTimer.Stop();
+            _mainButtonTimer.Stop();
             if (!MainSkillsGrid.IsMouseOver && !SelectionPopup.IsMouseOver)
             {
-                if (SelectionPopup.IsOpen == true) SelectionPopup.IsOpen = false;
-                AnimateAddButton(false, spacer, AddButtonGrid);
+                if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
+                AnimateAddButton(false, Spacer, AddButtonGrid);
             }
         }
+
         private void SecButtonTimer_Tick(object sender, EventArgs e)
         {
-            secButtonTimer.Stop();
+            _secButtonTimer.Stop();
             if (!SecSkillsGrid.IsMouseOver && !SelectionPopup.IsMouseOver)
             {
-                if (SelectionPopup.IsOpen == true) SelectionPopup.IsOpen = false;
-                AnimateAddButton(false, spacer2, AddButtonGrid2);
+                if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
+                AnimateAddButton(false, Spacer2, AddButtonGrid2);
             }
-
         }
 
         private void AnimateAddButton(bool open, Grid targetspacer, Grid addButtonGrid)
         {
-            if(open && (targetspacer.LayoutTransform as ScaleTransform).ScaleX == 1) return;
-            if(!open && (targetspacer.LayoutTransform as ScaleTransform).ScaleX == 0) return;
+            SettingsButton.BeginAnimation(OpacityProperty, open ? _opacityUp : _opacityDown);
+            return;
+            if (open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 1) return;
+            if (!open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 0) return;
             var to = open ? 1 : 0;
             //var from = open ? 0 : 1;
             targetspacer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
@@ -105,98 +164,217 @@ namespace TCC.Controls
                 new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
         }
 
+        private bool _isDragging;
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
-            var item = e.DragablzItem.DataContext;
+            _isDragging = true;
             FocusManager.FocusTimer.Enabled = false;
-            WindowManager.IsFocused = true;
-
-
+            WindowManager.ForegroundManager.ForceVisible = true;
+            WindowManager.ForegroundManager.ForceUndim = true;
         }
+
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
-            //var item = e.DragablzItem.DataContext;
             if (CooldownWindowViewModel.Instance.MainSkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
-                CooldownWindowViewModel.Instance.MainSkills.Clear();
-                foreach (var i in _mainOrder)
+                if (_mainOrder == null) return;
+                for (int j = 0; j < CooldownWindowViewModel.Instance.MainSkills.Count; j++)
                 {
-                    CooldownWindowViewModel.Instance.MainSkills.Add(i as FixedSkillCooldown);
+                    var newIndex = _mainOrder.ToList().IndexOf(CooldownWindowViewModel.Instance.MainSkills[j]);
+                    var oldIndex = j;
+                    CooldownWindowViewModel.Instance.MainSkills.Move(oldIndex, newIndex);
                 }
             }
             else if (CooldownWindowViewModel.Instance.SecondarySkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
-                CooldownWindowViewModel.Instance.SecondarySkills.Clear();
-
-                foreach (var i in _secondaryOrder)
+                if (_secondaryOrder == null) return;
+                for (int i = 0; i < CooldownWindowViewModel.Instance.SecondarySkills.Count; i++)
                 {
-                    CooldownWindowViewModel.Instance.SecondarySkills.Add(i as FixedSkillCooldown);
+                    var newIndex = _secondaryOrder.ToList().IndexOf(CooldownWindowViewModel.Instance.SecondarySkills[i]);
+                    var oldIndex = i;
+                    CooldownWindowViewModel.Instance.SecondarySkills.Move(oldIndex, newIndex);
                 }
             }
             CooldownWindowViewModel.Instance.Save();
             FocusManager.FocusTimer.Enabled = true;
+            WindowManager.ForegroundManager.ForceVisible = false;
+            WindowManager.ForegroundManager.ForceUndim = false;
+            _isDragging = false;
         }
 
         private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _mainOrder = e.NewOrder;
+
+            if (_mainOrder.Length < 2) return;
+            if (!_isDragging)
+            {
+                //force it here
+                //InstanceOnRefreshItemSourcesEvent();
+            }
         }
+
         private void SecondarySkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _secondaryOrder = e.NewOrder;
         }
 
-        private void UserControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
         }
 
-        private void AddButtonPressed(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AddButtonPressed(object sender, MouseButtonEventArgs e)
         {
             //CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(new Skill(181100, Class.Warrior, "", ""), CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true));
             SelectionPopup.IsOpen = true;
-            ChoiceListBox.ItemsSource = CooldownWindowViewModel.Instance.ChoiceList;
-            lastSender = (sender as Grid).Name;
+            ChoiceListBox.ItemsSource = CooldownWindowViewModel.Instance.SkillChoiceList;
+            _lastSender = (sender as Grid)?.Name;
         }
 
-        private void MainSkillsGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            AnimateAddButton(true, spacer, AddButtonGrid);
-            if(CooldownWindowViewModel.Instance.SecondarySkills.Count == 0) AnimateAddButton(true, spacer2, AddButtonGrid2);
-        }
-        private void MainSkillsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            mainButtonTimer.Start();
+            AnimateAddButton(true, Spacer, AddButtonGrid);
         }
 
-        private void SecondarySkillsGridMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            AnimateAddButton(true, spacer2, AddButtonGrid2);
+            //_mainButtonTimer.Start();
+            //AnimateAddButton(false, null, null);
+            OnSkillsLoaded();
         }
-        private void SecSkillsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            secButtonTimer.Start();
 
+        private void SecondarySkillsGridMouseEnter(object sender, MouseEventArgs e)
+        {
+            AnimateAddButton(true, Spacer2, AddButtonGrid2);
+        }
+
+        private void SecSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _secButtonTimer.Start();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var s = sender as ListBox;
-            if (s.SelectedItems.Count > 0)
+            if (sender is ListBox s && s.SelectedItems.Count > 0)
             {
-                if (lastSender == AddButtonGrid.Name)
+                if (_lastSender == AddButtonGrid.Name)
                 {
-                    if (CooldownWindowViewModel.Instance.MainSkills.Any(x => ((FixedSkillCooldown)x).Skill.IconName == (s.SelectedItems[0] as Skill).IconName)) return;
-                    CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                    if (CooldownWindowViewModel.Instance.MainSkills.Any(x =>
+                        x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
+                    CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, false));
                 }
-                else if (lastSender == AddButtonGrid2.Name)
+                else if (_lastSender == AddButtonGrid2.Name)
                 {
-                    if (CooldownWindowViewModel.Instance.SecondarySkills.Any(x => ((FixedSkillCooldown)x).Skill.IconName == (s.SelectedItems[0] as Skill).IconName)) return;
-                    CooldownWindowViewModel.Instance.SecondarySkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                    if (CooldownWindowViewModel.Instance.SecondarySkills.Any(x =>
+                        x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
+                    CooldownWindowViewModel.Instance.SecondarySkills.Add(new FixedSkillCooldown(
+                        s.SelectedItems[0] as Skill,
+                         false));
                 }
+
                 ChoiceListBox.ItemsSource = null;
             }
+
             SelectionPopup.IsOpen = false;
             CooldownWindowViewModel.Instance.Save();
+        }
+
+        public class SkillDropHandler : IDropTarget
+        {
+            public void DragOver(IDropInfo dropInfo)
+            {
+                dropInfo.Effects = DragDropEffects.Move;
+            }
+
+            public void Drop(IDropInfo dropInfo)
+            {
+                var target = ((SynchronizedObservableCollection<FixedSkillCooldown>)dropInfo.TargetCollection);
+                if (dropInfo.Data is Skill sk)
+                {
+                    if (!target.Any(x => x.Skill.IconName == sk.IconName))
+                    {
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, false));
+                    }
+                }
+                else if (dropInfo.Data is Abnormality ab)
+                {
+                    if (!target.Any(x => x.Skill.IconName == ab.IconName))
+                    {
+                        target.Insert(dropInfo.InsertIndex,
+                            new FixedSkillCooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
+                                false, CooldownType.Passive));
+                    }
+                }
+                else if (dropInfo.Data is Item i)
+                {
+                    if (!target.Any(x => x.Skill.IconName == i.IconName))
+                    {
+                        SessionManager.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, false, CooldownType.Item));
+                    }
+                }
+                var tmp = new List<FixedSkillCooldown>();
+
+                //force correct order as it's not preserved
+                foreach (var fixedSkillCooldown in target)
+                {
+                    tmp.Add(fixedSkillCooldown);
+                }
+                target.Clear();
+                tmp.ForEach(x =>
+                {
+                    target.Add(x);
+                });
+
+                ulong delay = 500;
+                //wait a bit and restart any running skill
+                Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(t =>
+                {
+                    CooldownWindowViewModel.Instance.MainSkills.ToList().ForEach(x =>
+                    {
+                        if (x.Seconds > 0)
+                        {
+                            x.Start((x.Seconds) * 1000 - delay);
+                        }
+                    });
+                    CooldownWindowViewModel.Instance.SecondarySkills.ToList().ForEach(x =>
+                    {
+                        if (x.Seconds > 0)
+                        {
+                            x.Start((x.Seconds) * 1000 - delay);
+                        }
+                    });
+                });
+
+                CooldownWindowViewModel.Instance.Save();
+            }
+        }
+
+        private void FixedSkillContainers_OnDragOver(object sender, DragEventArgs e)
+        {
+            if (SecSkills.ActualWidth == 0) SecSkills.MinWidth = 50;
+        }
+
+        private void FixedSkillContainers_OnDragLeave(object sender, DragEventArgs e)
+        {
+            SecSkills.MinWidth = 0;
+        }
+
+        private void OpenCooldownSettings(object sender, RoutedEventArgs e)
+        {
+            WindowManager.SkillConfigWindow.ShowWindow();
+        }
+
+        private void MainSkills_OnDrop(object sender, DragEventArgs e)
+        {
+            MainSkills.InvalidateArrange();
+            MainSkills.InvalidateMeasure();
+            MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        }
+
+        private void FixedSkillContainers_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            //CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 900000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
         }
     }
 }

@@ -5,15 +5,10 @@ namespace TCC.ViewModels
 {
     public class BrawlerBarManager : ClassManager
     {
-        private static BrawlerBarManager _instance;
         private bool _isGfOn;
         private bool _counterProc;
-        public static BrawlerBarManager Instance => _instance ?? (_instance = new BrawlerBarManager());
         public BrawlerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
-            LoadSpecialSkills();
         }
 
         public FixedSkillCooldown GrowingFury { get; set; }
@@ -41,13 +36,13 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
-            
-            SkillsDatabase.TryGetSkill(180100, Class.Fighter, out Skill gf);
-            SkillsDatabase.TryGetSkill(21200, Class.Fighter, out Skill c);
-            GrowingFury = new FixedSkillCooldown(gf, CooldownType.Skill, _dispatcher, false);
-            Counter = new FixedSkillCooldown(c, CooldownType.Skill, _dispatcher, false);
+
+            SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
+            GrowingFury = new FixedSkillCooldown(gf,  false);
+            Counter = new FixedSkillCooldown(c,  false);
         }
 
     }

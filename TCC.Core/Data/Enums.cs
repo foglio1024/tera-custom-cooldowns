@@ -1,5 +1,12 @@
-﻿namespace TCC
+﻿namespace TCC.Data
 {
+    public enum NotificationType
+    {
+        Normal = 0,
+        Success,
+        Warning,
+        Error
+    }
     public enum DungeonTier
     {
         Solo,
@@ -88,12 +95,12 @@
         Sorcerer = 4,
         Archer = 5,
         Priest = 6,
-        Elementalist = 7,
-        Soulless = 8,
-        Engineer = 9,
-        Fighter = 10,
-        Assassin = 11,
-        Glaiver = 12,
+        Mystic = 7,
+        Reaper = 8,
+        Gunner = 9,
+        Brawler = 10,
+        Ninja = 11,
+        Valkyrie = 12,
         Common = 255,
         None = 256
     }

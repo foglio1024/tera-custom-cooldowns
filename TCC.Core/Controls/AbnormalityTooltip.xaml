@@ -17,10 +17,18 @@
             <BitmapCache RenderAtScale="1"/>
         </Grid.CacheMode>
         <Border Grid.RowSpan="2" Style="{StaticResource Styles.DefaultBorder}" Effect="{x:Null}"/>
-        <TextBlock Text="{Binding AbnormalityName, RelativeSource={RelativeSource AncestorType=local:AbnormalityToolTipControl}}" 
-                   Foreground="White" Margin="10"></TextBlock>
-        <Border Grid.Row="1" BorderBrush="#20ffffff" BorderThickness="0,1,0,0" Margin="15,0"></Border>
-        <TextBlock x:Name="toolTipTB" Grid.Row="1" Foreground="#91ffffff" TextWrapping="Wrap" Margin="10,10,10,10"></TextBlock>
+        <TextBlock Grid.Row="0"
+                   Text="{Binding AbnormalityName, RelativeSource={RelativeSource AncestorType=local:AbnormalityToolTipControl}}" 
+                   Foreground="White" Margin="10" />
+        <Border Grid.Row="1" BorderBrush="#20ffffff" BorderThickness="0,1,0,0" Margin="15,0" />
+        <TextBlock x:Name="ToolTipTb" Grid.Row="1" Foreground="#91ffffff" TextWrapping="Wrap" Margin="10,10,10,10" />
     </Grid>
     
 </UserControl>
+
+
+
+
+
+
+

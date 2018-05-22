@@ -10,7 +10,7 @@
           MouseEnter="Grid_MouseEnter" 
           MouseLeave="Grid_MouseLeave" 
           Background="Transparent" 
-          Name="mainGrid">
+          Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" />
@@ -23,10 +23,10 @@
                HorizontalAlignment="Left" 
                Margin="17,0,0,0" 
                Opacity=".3"
-               x:Name="img"/>
+               x:Name="Img"/>
         <TextBlock Style="{StaticResource Styles.DefaultText}" 
                    Grid.Column="1" 
-                   Margin="10,0,14,0" 
+                   Margin="10,4,0,0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:BoolSetting}}" 
                    VerticalAlignment="Center" 
                    Padding="0" 
@@ -34,7 +34,7 @@
                    Opacity=".9"/>
         <local:MaterialSwitch Status="{Binding IsOn, RelativeSource={RelativeSource AncestorType=local:BoolSetting}, Mode=OneWay}" 
                               Grid.Column="2" 
-                              Margin="10,0" 
+                              Margin="10 0 5 0" 
                               MouseLeftButtonDown="ToggleSetting"/>
     </Grid>
 </UserControl>
