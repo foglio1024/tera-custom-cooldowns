@@ -78,7 +78,7 @@ namespace TCC.Windows
         private void OnTccVisibilityChanged()
         {
             RefreshTopmost();
-            AnimateContentOpacity(FocusManager.IsForeground ? 1 : 0);
+            AnimateContentOpacity(WindowManager.ForegroundManager.Visible ? 1 : 0);
         }
 
         private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
