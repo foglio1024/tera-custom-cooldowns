@@ -123,6 +123,7 @@ namespace TCC
         public static HotKey InfoWindowHotkey { get; set; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; set; } = new HotKey(Key.O, ModifierKeys.Control);
         public static HotKey ShowAllHotkey { get; set; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
+        public static HotKey LootSettingsHotkey { get; set; } = new HotKey(Key.L, ModifierKeys.Control);
         public static string RegionOverride { get; set; } = "";
 
         public static void LoadWindowSettings()
