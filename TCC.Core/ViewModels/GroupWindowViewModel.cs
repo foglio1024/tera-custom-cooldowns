@@ -210,7 +210,11 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer) return;
+            if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer)
+            {
+                _leaderOverride = p.IsLeader;
+                return;
+            }
             lock (_lock)
             {
                 var user = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
