@@ -22,16 +22,19 @@ namespace TCC.Windows
 
         private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
         {
+            if(!GroupWindowViewModel.Instance.AmILeader) return;
             Proxy.LootSettings();
         }
 
         private void DisbandButtonClicked(object sender, RoutedEventArgs e)
         {
+            if(!GroupWindowViewModel.Instance.AmILeader) return;
             Proxy.DisbandParty();
         }
 
         private void ResetButtonClicked(object sender, RoutedEventArgs e)
         {
+            if(!GroupWindowViewModel.Instance.AmILeader) return;
             Proxy.ResetInstance();
         }
 
