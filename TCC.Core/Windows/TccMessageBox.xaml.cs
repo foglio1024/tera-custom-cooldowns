@@ -59,6 +59,8 @@ namespace TCC.Windows
         }
         public static MessageBoxResult Show (string caption, string text, MessageBoxButton button, MessageBoxImage image)
         {
+            if (_messageBox == null) App.BaseDispatcher.Invoke(Create);
+
             _messageBox.Dispatcher.Invoke(() =>
             {
                 _messageBox.TxtMsg.Text = text;
