@@ -45,7 +45,7 @@ namespace TCC.Parsing.Messages
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
-                Listings.Add(l);
+                if(!(l.IsTrade && !SettingsManager.ShowTradeLfg)) Listings.Add(l);
                 if(next != 0) reader.BaseStream.Position = next - 4;
 
             }

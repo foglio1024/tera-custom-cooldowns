@@ -69,6 +69,7 @@ namespace TCC
         public static string TwitchToken { get; set; } = "";
         public static string TwitchChannelName { get; set; } = "";
         public static bool ChatFadeOut { get; set; } = true;
+        public static bool ShowTradeLfg { get; set; } = true;
 
         public static readonly Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>()
         {
@@ -226,6 +227,7 @@ namespace TCC
                     else if (attr.Name == nameof(ShowGroupWindowDetails)) ShowGroupWindowDetails = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(UseHotkeys)) UseHotkeys = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ChatEnabled)) ChatEnabled = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(ShowTradeLfg)) ShowTradeLfg = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(RegionOverride)) RegionOverride = attr.Value;
                     else if (attr.Name == nameof(LastRegion)) LastRegion = attr.Value;
                     else if (attr.Name == nameof(Webhook)) Webhook = attr.Value;
@@ -352,6 +354,7 @@ namespace TCC
                 new XAttribute(nameof(ShowGroupWindowDetails), ShowGroupWindowDetails),
                 new XAttribute(nameof(UseHotkeys), UseHotkeys),
                 new XAttribute(nameof(ChatEnabled), ChatEnabled),
+                new XAttribute(nameof(ShowTradeLfg), ShowTradeLfg),
                 new XAttribute(nameof(RegionOverride), RegionOverride)
                 //add setting here
                 ),

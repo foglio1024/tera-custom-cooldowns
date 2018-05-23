@@ -482,5 +482,15 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
+        public bool ShowTradeLfgs
+        {
+            get => SettingsManager.ShowTradeLfg;
+            set
+            {
+                if (SettingsManager.ShowTradeLfg == value) return;
+                SettingsManager.ShowTradeLfg = value;
+                NPC();
+            }
+        }
     }
 }

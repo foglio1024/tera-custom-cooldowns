@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
+using SuperSocket.ClientEngine;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -60,6 +61,8 @@ namespace TCC.Data
                 if (_message == value) return;
                 _message = value.Replace("&gt;", ">").Replace("&lt;", "<");
                 NPC();
+                NPC(nameof(IsTrade));
+                NPC(nameof(IsTwitch));
             }
         }
         public string LeaderName
@@ -86,6 +89,9 @@ namespace TCC.Data
         public bool IsMyLfg => _dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
                                LeaderId == SessionManager.CurrentPlayer.PlayerId ||
                                 GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == LeaderId));
+        public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
+                               _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
+                               _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
         public SynchronizedObservableCollection<User> Players
         {
             get => _players;
@@ -119,6 +125,22 @@ namespace TCC.Data
                 NPC();
             }
         }
+
+        public string TwitchLink
+        {
+            get
+            {
+                var username = "";
+                var split = _message.Split(' ').ToList();
+                var twLink = split.FirstOrDefault(x =>
+                    x.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1);
+                var splitLink = twLink.Split('/');
+                if (splitLink.Length >= 2) username = splitLink[1]; 
+                return $"https://www.twitch.tv/{username}";
+            }
+        }
+
+        public bool IsTwitch => _message.Contains("twitch.tv");
 
         public void NotifyMyLfg()
         {
