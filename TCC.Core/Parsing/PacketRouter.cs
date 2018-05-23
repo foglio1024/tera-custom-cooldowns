@@ -219,7 +219,8 @@ namespace TCC.Parsing
             SessionManager.InitDatabases(SettingsManager.LastRegion);
             CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
-            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
+            if(Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
+                CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
