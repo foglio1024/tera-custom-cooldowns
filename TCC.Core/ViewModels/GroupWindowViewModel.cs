@@ -51,7 +51,6 @@ namespace TCC.ViewModels
         public GroupWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _scale = SettingsManager.GroupWindowSettings.Scale;
 
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{
