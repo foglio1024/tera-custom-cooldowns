@@ -336,7 +336,6 @@ namespace TCC.Data
         }
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
         public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; }
-
         public bool Awakened { get; set; }
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)

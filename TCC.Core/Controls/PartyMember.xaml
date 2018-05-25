@@ -216,7 +216,6 @@
         </Grid>
 
         <!--Info grid-->
-
         <Grid Grid.Column="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0"
               UseLayoutRounding="True">
             <Grid.RowDefinitions>
@@ -228,7 +227,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
             <!--Name-->
             <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand" ToolTipService.ShowDuration="50000"
                        PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
