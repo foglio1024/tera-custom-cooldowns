@@ -191,7 +191,7 @@ namespace TCC.Windows
                     throw new ArgumentOutOfRangeException();
             }
         }
-        private void OnEnabledChanged()
+        protected void OnEnabledChanged()
         {
             try
             {
