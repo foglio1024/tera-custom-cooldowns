@@ -40,7 +40,14 @@ namespace TCC
             App.BaseDispatcher.Invoke(() => SkillStarted?.Invoke());
         }
 
-
+        public static void ResetSkill(uint id)
+        {
+            if (SessionManager.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            {
+                if (!Pass(skill)) return;
+                CooldownWindowViewModel.Instance.ResetSkill(skill);
+            }
+        }
 
         public static void AddSkill(uint id, ulong cd)
         {

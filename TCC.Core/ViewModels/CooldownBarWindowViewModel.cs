@@ -213,8 +213,6 @@ namespace TCC.ViewModels
         {
             HiddenSkills.Add(context.Skill);
         }
-
-
         internal void AddHiddenSkill(FixedSkillCooldown context)
         {
             HiddenSkills.Add(context.Skill);
@@ -546,6 +544,15 @@ namespace TCC.ViewModels
         public void NotifyItemsDisplay()
         {
             NPC(nameof(ShowItems));
+        }
+
+        public void ResetSkill(Skill skill)
+        {
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+            if (SettingsManager.CooldownBarMode == CooldownBarMode.Normal) return;
+
+            var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);
+            sk?.ProcReset();
         }
     }
 }

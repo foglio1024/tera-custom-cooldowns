@@ -679,7 +679,8 @@ namespace TCC.Parsing
 
         internal static void HandleCrestMessage(S_CREST_MESSAGE x)
         {
-
+            if (x.Type != 6) return;
+            SkillManager.ResetSkill(x.SkillId);
         }
 
         internal static void HandleSystemMessageLoot(S_SYSTEM_MESSAGE_LOOT_ITEM x)
