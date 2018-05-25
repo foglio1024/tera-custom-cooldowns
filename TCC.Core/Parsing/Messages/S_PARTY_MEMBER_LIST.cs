@@ -63,6 +63,8 @@ namespace TCC.Parsing.Messages
                 u.Order = reader.ReadInt32();
                 u.CanInvite = reader.ReadBoolean();
                 u.Laurel = (Laurel)reader.ReadUInt32();
+                u.Awakened = reader.ReadInt32() > 0 ? true : false; 
+                
                 reader.BaseStream.Position = nameOffset - 4;
                 u.Name = reader.ReadTeraString();
                 u.Alive = true;
