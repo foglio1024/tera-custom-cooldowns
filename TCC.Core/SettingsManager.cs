@@ -126,6 +126,7 @@ namespace TCC
         public static HotKey ShowAllHotkey { get; set; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
         public static HotKey LootSettingsHotkey { get; set; } = new HotKey(Key.L, ModifierKeys.Control);
         public static string RegionOverride { get; set; } = "";
+        public static bool ShowAwakenIcon { get; set; } = true;
 
         public static void LoadWindowSettings()
         {
@@ -228,6 +229,7 @@ namespace TCC
                     else if (attr.Name == nameof(UseHotkeys)) UseHotkeys = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ChatEnabled)) ChatEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowTradeLfg)) ShowTradeLfg = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(ShowAwakenIcon)) ShowAwakenIcon = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(RegionOverride)) RegionOverride = attr.Value;
                     else if (attr.Name == nameof(LastRegion)) LastRegion = attr.Value;
                     else if (attr.Name == nameof(Webhook)) Webhook = attr.Value;
@@ -355,6 +357,7 @@ namespace TCC
                 new XAttribute(nameof(UseHotkeys), UseHotkeys),
                 new XAttribute(nameof(ChatEnabled), ChatEnabled),
                 new XAttribute(nameof(ShowTradeLfg), ShowTradeLfg),
+                new XAttribute(nameof(ShowAwakenIcon), ShowAwakenIcon),
                 new XAttribute(nameof(RegionOverride), RegionOverride)
                 //add setting here
                 ),

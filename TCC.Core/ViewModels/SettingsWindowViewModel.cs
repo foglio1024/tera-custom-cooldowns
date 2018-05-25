@@ -204,6 +204,17 @@ namespace TCC.ViewModels
                 NPC(nameof(DisableHP));
             }
         }
+        public bool ShowAwakenIcon
+        {
+            get => SettingsManager.ShowAwakenIcon;
+            set
+            {
+                if (SettingsManager.ShowAwakenIcon == value) return;
+                SettingsManager.ShowAwakenIcon = value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                NPC();
+            }
+        }
 
         public bool ShowItemsCooldown
         {

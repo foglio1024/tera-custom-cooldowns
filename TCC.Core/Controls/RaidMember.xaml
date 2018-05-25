@@ -72,7 +72,7 @@
                 Background="{StaticResource FadedDefaultBackgroundColor}" BorderThickness="1" CornerRadius="5,5,0,5">
             <!--<Image x:Name="awakenedimage" Margin="0,0,0,0" Height="12" Width="12" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="15"  Visibility="{Binding Awakened, Converter={StaticResource BooleanToVisibilityConverter}}" Source="/TCC;component/resources/images/awakened.png"/>-->
         </Border>
-        <Path Data="{StaticResource SvgAwaken}" Visibility="{Binding Awakened, Converter={StaticResource BooleanToVisibilityConverter}}"
+        <Path Data="{StaticResource SvgAwaken}" Visibility="{Binding Awakened, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="AwakenIcon"
               Grid.Column="1" Width="12" Fill="{StaticResource IgnidraxColor}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="3"></Path>
 
         <Border BorderBrush="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}" BorderThickness="1" Height="Auto" 

@@ -465,7 +465,15 @@
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Enables party members' laurels." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                                <TextBlock Foreground="LightGray" Text="Enables party members info panel." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Show awaken icon" IsOn="{Binding ShowAwakenIcon, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Text="Enables party members awaken icon." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
