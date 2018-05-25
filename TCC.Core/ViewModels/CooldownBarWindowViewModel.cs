@@ -278,6 +278,7 @@ namespace TCC.ViewModels
             {
                 root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3), new XAttribute("name", sk.ShortName)));
             });
+            if (SessionManager.CurrentPlayer.Class > (Class)12) return;
             root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
         }
 
@@ -520,7 +521,6 @@ namespace TCC.ViewModels
         public CooldownWindowViewModel()
         {
             _dispatcher = App.BaseDispatcher;
-            _scale = SettingsManager.CooldownWindowSettings.Scale;
             ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             LongSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
