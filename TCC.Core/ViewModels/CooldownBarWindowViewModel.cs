@@ -445,6 +445,7 @@ namespace TCC.ViewModels
             SecondarySkills.Clear();
             OtherSkills.Clear();
             ItemSkills.Clear();
+            HiddenSkills.Clear();
         }
 
         public void LoadSkills(string filename, Class c)
