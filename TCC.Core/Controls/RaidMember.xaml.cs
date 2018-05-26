@@ -39,8 +39,10 @@ namespace TCC.Controls
 
         private void SetAwakenIcon()
         {
-            Dispatcher.Invoke(() =>
-                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? Visibility.Visible : Visibility.Collapsed);
+            Dispatcher.Invoke(() => {
+                if (!(DataContext is User user)) return;
+                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
+            });
         }
 
         private void SetLaurels()
