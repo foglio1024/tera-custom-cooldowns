@@ -47,7 +47,9 @@ namespace TCC.Parsing.Messages
                     UserClass = cls,
                     Level = level,
                     Location = SessionManager.MapDatabase.GetName(guardId, sectionId),
-                    Online = true
+                    Online = true,
+                    Name = name
+
                 });
                 if (next != 0) reader.BaseStream.Position = next - 4;
             }
