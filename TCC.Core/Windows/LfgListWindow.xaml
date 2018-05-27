@@ -392,6 +392,7 @@
                 <DataTrigger Binding="{Binding IsMyLfg}" Value="True">
                     <Setter Property="Visibility" TargetName="btn" Value="Hidden"></Setter>
                     <Setter Property="Visibility" TargetName="ApplicantsBtn" Value="Visible"></Setter>
+                    <Setter Property="IsHitTestVisible" TargetName="ApplicantsBtn" Value="True"></Setter>
                     <Setter Property="Visibility" TargetName="cdArc" Value="Collapsed"></Setter>
                     <Setter Property="Visibility" TargetName="applicants" Value="Visible"></Setter>
                     <!--<Setter Property="Fill" TargetName="Ell" Value="{StaticResource GoldColor}"></Setter>
