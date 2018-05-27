@@ -115,6 +115,8 @@ namespace TCC
             }
         }
 
+        public static bool ShowAllGroupAbnormalities { get; set; } = false;
+
         public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool LfgEnabled { get; set; } = true;
@@ -127,6 +129,28 @@ namespace TCC
         public static HotKey LootSettingsHotkey { get; set; } = new HotKey(Key.L, ModifierKeys.Control);
         public static string RegionOverride { get; set; } = "";
         public static bool ShowAwakenIcon { get; set; } = true;
+
+        public static ClickThruMode ChatClickThruMode
+        {
+            get
+            {
+                if (ChatWindowsSettings.Count > 0) return ChatWindowsSettings[0].ClickThruMode;
+                return _chatClickThruMode;
+            }
+
+            set
+            {
+                if (ChatWindowsSettings.Count > 0)
+                {
+                    if (ChatWindowsSettings[0].ClickThruMode == value) return;
+                    ChatWindowsSettings.ToList().ForEach(x => x.ClickThruMode = value);
+                }
+                else
+                {
+                    _chatClickThruMode = value;
+                }
+            }
+        }
 
         public static void LoadWindowSettings()
         {
@@ -208,6 +232,7 @@ namespace TCC
                     else if (attr.Name == nameof(CooldownBarMode)) CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(CooldownBarMode)) CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(EnrageLabelMode)) EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
+                    else if (attr.Name == nameof(ChatClickThruMode)) ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
                     else if (attr.Name == nameof(MaxMessages)) MaxMessages = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SpamThreshold)) SpamThreshold = int.Parse(attr.Value);
                     else if (attr.Name == nameof(FontSize)) FontSize = int.Parse(attr.Value);
@@ -230,6 +255,7 @@ namespace TCC
                     else if (attr.Name == nameof(ChatEnabled)) ChatEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowTradeLfg)) ShowTradeLfg = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowAwakenIcon)) ShowAwakenIcon = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(ShowAllGroupAbnormalities)) ShowAllGroupAbnormalities = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(RegionOverride)) RegionOverride = attr.Value;
                     else if (attr.Name == nameof(LastRegion)) LastRegion = attr.Value;
                     else if (attr.Name == nameof(Webhook)) Webhook = attr.Value;
@@ -358,7 +384,9 @@ namespace TCC
                 new XAttribute(nameof(ChatEnabled), ChatEnabled),
                 new XAttribute(nameof(ShowTradeLfg), ShowTradeLfg),
                 new XAttribute(nameof(ShowAwakenIcon), ShowAwakenIcon),
-                new XAttribute(nameof(RegionOverride), RegionOverride)
+                new XAttribute(nameof(RegionOverride), RegionOverride),
+                new XAttribute(nameof(ChatClickThruMode), ChatClickThruMode),
+                new XAttribute(nameof(ShowAllGroupAbnormalities), ShowAllGroupAbnormalities)
                 //add setting here
                 ),
                 //BuildChannelsXElement(),
@@ -371,8 +399,10 @@ namespace TCC
 
         private static void SaveSettingsDoc(XElement doc)
         {
+            if (!doc.HasElements) return;
             try
             {
+                File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml", AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml.bak", true);
                 doc.Save(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
             }
             catch (Exception)
@@ -490,6 +520,7 @@ namespace TCC
         private static readonly List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
         private static string _lastRegion = "";
         private static bool _chatEnabled = true;
+        private static ClickThruMode _chatClickThruMode;
 
         public static XElement BuildChatTabsXElement(List<Tab> tabList)
         {

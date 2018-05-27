@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:viewModels="clr-namespace:TCC.ViewModels"
+        xmlns:controls="clr-namespace:TCC.Controls"
         SizeToContent="Height"
         mc:Ignorable="d"
          Style="{StaticResource BaseWindowStyle}" DataContext="{Binding DC, RelativeSource={RelativeSource Self}}"
@@ -20,6 +21,7 @@
             <Setter Property="Margin" Value="5 0 5 0"></Setter>
 
         </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -42,10 +44,24 @@
             <TextBlock Text="Group members buffs settings" Style="{StaticResource Styles.DefaultText}"
                        Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        FontSize="15" Foreground="#999" />
+            <controls:BoolSetting HorizontalAlignment="Right" Margin="0 0 36 0" VerticalAlignment="Center" SettingName="Show all" IsOn="{Binding ShowAll, Mode=TwoWay}">
+                <controls:BoolSetting.ToolTip>
+                <ToolTip Background="Transparent" >
+                    <Grid Margin="5">
+                        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                            <Run Text="Ignores selected buffs and displays everything"/>
+                            <Run Text=" (not recommended as it may cause performance issues)" Foreground="{StaticResource HpColor}"/>
+                        </TextBlock>
+                    </Grid>
+                </ToolTip>
+                </controls:BoolSetting.ToolTip>
+
+            </controls:BoolSetting>
         </Grid>
 
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -106,7 +122,6 @@
 
                 </ItemsControl>
             </Grid>
-
             <Grid Grid.Row="2" Margin="0 0 0 5">
                 <Path Data="{StaticResource SvgSearch}" Margin="10 3 10 3" Height="15" VerticalAlignment="Center"
                       HorizontalAlignment="Right">
@@ -125,7 +140,9 @@
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
                 </ListBox.Resources>
             </ListBox>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleY="1"/>
+            </Grid.LayoutTransform>
         </Grid>
-
     </Grid>
 </Window>
