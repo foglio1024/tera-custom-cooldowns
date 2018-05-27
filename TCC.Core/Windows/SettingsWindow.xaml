@@ -97,6 +97,11 @@
                     <LineBreak/>
                     <Run Text="Always:" FontWeight="Bold" Foreground="White"/>
                     <Run Text=" click thru is always on"/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="GameDriven:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text=" click thru depends on ingame UI status;"/>
+                    <Run Text=" requires proxy and modded S1UI_Chat2.gpk" Foreground="{StaticResource HpColor}"/>
                 </TextBlock>
             </Grid>
         </ToolTip>
