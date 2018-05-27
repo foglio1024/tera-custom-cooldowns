@@ -30,7 +30,20 @@ namespace TCC.Controls
             _context = (DurationCooldownIndicator)DataContext;
             cd.DataContext = _context.Cooldown;
             _context.Buff.Started += OnBuffStarted;
+            _context.Buff.SecondsUpdated += OnSecondsUpdated;
+            _context.Buff.Ended += OnBuffEnded;
             _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
+        }
+
+        private void OnBuffEnded(Data.CooldownMode obj)
+        {
+            ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
+            ExternalArc.EndAngle = 0;
+        }
+
+        private void OnSecondsUpdated()
+        {
+            NPC(nameof(DurationLabel));
         }
 
         private void OnBuffStarted(Data.CooldownMode obj)
@@ -40,36 +53,36 @@ namespace TCC.Controls
 
         }
 
-        private void Buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Dispatcher.InvokeIfRequired(() =>
-            {
+        //private void Buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    Dispatcher.InvokeIfRequired(() =>
+        //    {
 
-                if (e.PropertyName == "Start")
-                {
-                    _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
-                    ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
-                    return;
-                }
-                if (e.PropertyName == "Refresh")
-                {
-                    _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
-                    ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
-                    return;
-                }
-                if (e.PropertyName == nameof(_context.Buff.Seconds))
-                {
-                    OnPropertyChanged(nameof(DurationLabel));
-                }
+        //        if (e.PropertyName == "Start")
+        //        {
+        //            _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
+        //            ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+        //            return;
+        //        }
+        //        if (e.PropertyName == "Refresh")
+        //        {
+        //            _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
+        //            ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+        //            return;
+        //        }
+        //        if (e.PropertyName == nameof(_context.Buff.Seconds))
+        //        {
+        //            NPC(nameof(DurationLabel));
+        //        }
 
-            }, System.Windows.Threading.DispatcherPriority.DataBind);
+        //    }, System.Windows.Threading.DispatcherPriority.DataBind);
 
-        }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void NPC([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
