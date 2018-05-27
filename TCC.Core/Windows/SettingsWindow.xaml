@@ -501,6 +501,8 @@
                 <!-- Chat window settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ChatClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ChatClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">

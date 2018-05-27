@@ -479,6 +479,7 @@ namespace TCC.ViewModels
         //}
 
         public List<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+        public List<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
         public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
@@ -493,6 +494,18 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
+
+        public ClickThruMode ChatClickThruMode
+        {
+            get => SettingsManager.ChatClickThruMode;
+            set
+            {
+                if (SettingsManager.ChatClickThruMode == value) return;
+                SettingsManager.ChatClickThruMode = value;
+                NPC();
+            }
+        }
+
         public bool ShowTradeLfgs
         {
             get => SettingsManager.ShowTradeLfg;

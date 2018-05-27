@@ -217,7 +217,8 @@
         Never = 0,
         Always = 1,
         WhenDim = 2,
-        WhenUndim = 3
+        WhenUndim = 3,
+        GameDriven = 4
     }
 
     public enum CooldownBarMode
