@@ -18,6 +18,13 @@ namespace TCC.Windows
         private TccMessageBox()
         {
             InitializeComponent();
+            Closing += OnClosing;
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
         }
 
         private static TccMessageBox _messageBox;
@@ -59,13 +66,15 @@ namespace TCC.Windows
         }
         public static MessageBoxResult Show (string caption, string text, MessageBoxButton button, MessageBoxImage image)
         {
+            if (_messageBox == null) App.BaseDispatcher.Invoke(Create);
+
             _messageBox.Dispatcher.Invoke(() =>
             {
                 _messageBox.TxtMsg.Text = text;
                 _messageBox.MessageTitle.Text = caption;
                 SetVisibilityOfButtons(button);
                 SetImageOfMessageBox(image);
-                _messageBox.ShowDialog();
+               _messageBox.ShowDialog();
             });
             return _result;
         }

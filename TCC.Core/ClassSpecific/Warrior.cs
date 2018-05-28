@@ -36,6 +36,8 @@ namespace TCC.ClassSpecific
             if (TraverseCutIDs.Contains(p.AbnormalityId))
             {
                 ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.Val = p.Stacks;
+                ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.ToZero(p.Duration);
+
                 return;
             }
             if (TempestAuraIDs.Contains(p.AbnormalityId))
@@ -78,6 +80,8 @@ namespace TCC.ClassSpecific
             if (TraverseCutIDs.Contains(p.AbnormalityId))
             {
                 ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.Val = p.Stacks;
+                ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.ToZero(p.Duration);
+
                 return;
             }
             if (TempestAuraIDs.Contains(p.AbnormalityId))

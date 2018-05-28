@@ -14,7 +14,6 @@ namespace TCC.ViewModels
         public BuffBarWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _scale = SettingsManager.BuffWindowSettings.Scale;
             Player = new Player();
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{

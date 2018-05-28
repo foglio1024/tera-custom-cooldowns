@@ -7,11 +7,11 @@
              mc:Ignorable="d" Loaded="Control_Loaded"
              ClipToBounds="False" Background="Transparent"
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData  FixedSkillCooldown}">
-    
+
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
-    
+
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
         <Grid ClipToBounds="False">
             <Ellipse Width="51" Height="{Binding ElementName=Icon, Path=ActualWidth}" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -34,7 +34,7 @@
                    Stroke="#a000" 
                    EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
-                   VerticalAlignment="Stretch" />        
+                   VerticalAlignment="Stretch" />
         <local:Arc x:Name="PreArc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
@@ -90,5 +90,11 @@
             <Ellipse Fill="{StaticResource HpColor}" Effect="{StaticResource DropShadow}"></Ellipse>
             <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
+        <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity="1" Margin="2" RenderTransformOrigin=".5 .5">
+<local:Arc.RenderTransform>
+    <ScaleTransform />
+</local:Arc.RenderTransform>
+        </local:Arc>
+
     </Grid>
 </UserControl>

@@ -14,6 +14,7 @@ namespace TCC.Data
         public event Action<CooldownMode> Ended;
         public event Action FlashingForced;
         public event Action SecondsUpdated;
+        public event Action Reset;
 
         // fields
         private readonly DispatcherTimer _mainTimer;
@@ -124,7 +125,7 @@ namespace TCC.Data
 
             _currentMode = mode;
 
-            Seconds =  cd / 1000;
+            Seconds = cd / 1000;
             Cooldown = cd;
             OriginalCooldown = cd;
 
@@ -168,6 +169,10 @@ namespace TCC.Data
         }
         public void ForceEnded() => CooldownEnded(null, null);
 
+        public void ProcReset()
+        {
+            _dispatcher.Invoke(() => Reset?.Invoke());
+        }
         public override string ToString()
         {
             return Skill.Name;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,6 +33,11 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.VisibilityChanged += () =>
             {
                 if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
+            };
+            Closing += (_, ev) =>
+            {
+                ev.Cancel = true;
+                CloseWindow();
             };
         }
 
@@ -210,6 +216,13 @@ namespace TCC.Windows
         private void ReloadLfgList(object sender, RoutedEventArgs e)
         {
             Proxy.RequestLfgList();
+        }
+
+        private void OnLfgMessageMouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var listing = (sender as FrameworkElement).DataContext as Listing;
+            if (!listing.IsTwitch) return;
+            Process.Start(listing.TwitchLink);
         }
     }
 }

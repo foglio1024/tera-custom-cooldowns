@@ -12,6 +12,7 @@ namespace TCC
             if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
+                if (duration == int.MaxValue) ab.Infinity = true;
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     BeginPlayerAbnormality(ab, stacks, duration);
@@ -48,6 +49,7 @@ namespace TCC
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
+
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)

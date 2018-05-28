@@ -78,11 +78,11 @@ namespace TCC.Controls
 
         private void AnimateSel()
         {
-            if ((DataContext as Character).IsSelected) Sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-            new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-            else Sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                 new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-
+            if (DataContext == null) return;
+            Sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+                ((Character) DataContext).IsSelected
+                    ? new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) {EasingFunction = new QuadraticEase()}
+                    : new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) {EasingFunction = new QuadraticEase()});
         }
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {

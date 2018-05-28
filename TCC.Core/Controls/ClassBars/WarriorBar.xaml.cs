@@ -1,12 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC.Controls.ClassBars
 {
@@ -22,6 +25,8 @@ namespace TCC.Controls.ClassBars
 
         private WarriorBarManager _dc;
         private DoubleAnimation _an;
+        private DoubleAnimation _tc;
+        private DoubleAnimation _tcCd;
         private DoubleAnimation _anCd;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -29,9 +34,30 @@ namespace TCC.Controls.ClassBars
             _dc.TraverseCut.PropertyChanged += AnimateTraverseCut;
             _dc.TempestAura.PropertyChanged += AnimateTempestAura;
             _dc.TempestAura.OnToZero += CooldownTempestAura;
+            _dc.TraverseCut.OnToZero += CooldownTraverseCut;
             _an = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
+            _tc = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
+            _tc.Completed += (_, __) => _tcAnimating = false;
+            _tcCd = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
             _anCd = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(0));
             _anCd.Completed += (o, args) => _cooldown = false;
+        }
+
+        private void CooldownTraverseCut(uint cd)
+        {
+            if (_tcAnimating)
+            {
+                Task.Delay(210).ContinueWith(t => CooldownTraverseCut(cd - 210));
+                return;
+            }
+            //if (!_dc.TraverseCut.Maxed) return;
+            Dispatcher.Invoke(() =>
+            {
+                _tcCd.From = _dc.TraverseCut.Factor;
+                _tcCd.Duration = TimeSpan.FromMilliseconds(cd);
+                TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _tcCd);
+            });
+
         }
 
         private bool _cooldown;
@@ -47,7 +73,7 @@ namespace TCC.Controls.ClassBars
 
         private void AnimateTempestAura(object sender, PropertyChangedEventArgs e)
         {
-            
+
             if (e.PropertyName == nameof(StatTracker.Factor))
             {
                 if (_cooldown) return;
@@ -56,12 +82,14 @@ namespace TCC.Controls.ClassBars
             }
         }
 
+        private bool _tcAnimating;
         private void AnimateTraverseCut(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(StatTracker.Factor))
             {
-                _an.To = _dc.TraverseCut.Factor;
-                TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
+                _tc.To = _dc.TraverseCut.Factor;
+                _tcAnimating = true;
+                TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _tc);
             }
         }
 

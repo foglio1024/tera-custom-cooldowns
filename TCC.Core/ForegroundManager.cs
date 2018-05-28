@@ -23,13 +23,16 @@ namespace TCC
         private bool _forceUndim;
         public event Action VisibilityChanged;
         public event Action DimChanged;
+        public event Action ClickThruChanged;
 
         public ForegroundManager()
         {
             SessionManager.LoadingScreenChanged += NotifyVisibilityChanged;
-            FocusManager.ForegroundChanged += NotifyVisibilityChanged;
             SessionManager.LoggedChanged += NotifyVisibilityChanged;
             SessionManager.EncounterChanged += NotifyDimChanged;
+            SessionManager.GameUiModeChanged += OnGameUiModeChanged;
+
+            FocusManager.ForegroundChanged += NotifyVisibilityChanged;
             SkillManager.SkillStarted += OnSkillStarted;
 
             _dimTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(3)};
@@ -40,6 +43,10 @@ namespace TCC
             };
         }
 
+        private void OnGameUiModeChanged()
+        {
+            App.BaseDispatcher.Invoke(() => ClickThruChanged?.Invoke());
+        }
 
         private void OnSkillStarted()
         {

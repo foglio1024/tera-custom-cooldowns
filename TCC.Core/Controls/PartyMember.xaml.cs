@@ -30,6 +30,15 @@ namespace TCC.Controls
             SetBuffs();
             SetDebuffs();
             SetLaurels();
+            SetAwakenIcon();
+        }
+
+        private void SetAwakenIcon()
+        {
+            Dispatcher.Invoke(() => {
+                if (!(DataContext is User user)) return;
+                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
+            });
         }
 
         private void SetLaurels()
@@ -52,7 +61,7 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    if(!(DataContext is User user))return;
+                    if (!(DataContext is User user)) return;
                     Buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
                     BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
                         ? Visibility.Collapsed
@@ -70,7 +79,7 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    if(!(DataContext is User)) return;
+                    if (!(DataContext is User)) return;
                     Debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
                     DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
                         ? Visibility.Collapsed

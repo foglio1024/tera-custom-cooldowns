@@ -145,24 +145,32 @@ namespace TCC.ViewModels
 
         private void CheckAttention(ChatMessage chatMessage)
         {
-            if (CurrentTab != null && !CurrentTab.Filter(chatMessage))
-            {
-                chatMessage.Animate = false; //set animate to false if the message is not going in the active tab
+                //chatMessage.Animate = false; //set animate to false if the message is not going in the active tab
                 if (chatMessage.ContainsPlayerName || chatMessage.Channel == ChatChannel.ReceivedWhisper)
                 {
-                    var t = TabVMs.FirstOrDefault(x => ((Tab)x.Content).Channels.Contains(chatMessage.Channel));
-                    if (t != null)
+                    var tabs = TabVMs.Where(x => ((Tab)x.Content).Channels.Contains(chatMessage.Channel)).ToList();
+                    tabs.ForEach(tab =>
                     {
-                        ((Tab)t.Content).Attention = true;
-                    }
-                    else
-                    {
-                        t = TabVMs.FirstOrDefault(x => !((Tab)x.Content).ExcludedChannels.Contains(chatMessage.Channel));
-                        if (t != null) ((Tab)t.Content).Attention = true;
-                    }
-                }
-            }
+                        ((Tab) tab.Content).Attention = true;
+                    });
+                    if (tabs.Count != 0) return;
 
+                    tabs = TabVMs.Where(x => !((Tab)x.Content).ExcludedChannels.Contains(chatMessage.Channel)).ToList();
+                    tabs.ForEach(tab =>
+                    {
+                        ((Tab)tab.Content).Attention = true;
+                    });
+                    //var t = TabVMs.FirstOrDefault(x => ((Tab)x.Content).Channels.Contains(chatMessage.Channel));
+                    //if (t != null)
+                    //{
+                    //    ((Tab)t.Content).Attention = true;
+                    //}
+                    //else
+                    //{
+                    //    t = TabVMs.FirstOrDefault(x => !((Tab)x.Content).ExcludedChannels.Contains(chatMessage.Channel));
+                    //    if (t != null) ((Tab)t.Content).Attention = true;
+                    //}
+                }
         }
 
         private void NPC([CallerMemberName] string prop = null)

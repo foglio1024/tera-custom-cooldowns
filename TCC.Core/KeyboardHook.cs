@@ -118,6 +118,7 @@ namespace TCC
             RegisterHotKey(SettingsManager.LfgHotkey.Modifier, SettingsManager.LfgHotkey.Key);
             RegisterHotKey(SettingsManager.InfoWindowHotkey.Modifier, SettingsManager.InfoWindowHotkey.Key);
             RegisterHotKey(SettingsManager.SettingsHotkey.Modifier, SettingsManager.SettingsHotkey.Key);
+            RegisterHotKey(SettingsManager.LootSettingsHotkey.Modifier, SettingsManager.LootSettingsHotkey.Key);
             //RegisterHotKey(SettingsManager.ShowAllHotkey.Modifier, SettingsManager.ShowAllHotkey.Key);
 
             _isRegistered = true;

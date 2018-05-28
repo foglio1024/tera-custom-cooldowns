@@ -34,7 +34,17 @@ namespace TCC.Controls
             SetBuffs();
             SetDebuffs();
             SetLaurels();
+            SetAwakenIcon();
         }
+
+        private void SetAwakenIcon()
+        {
+            Dispatcher.Invoke(() => {
+                if (!(DataContext is User user)) return;
+                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
+            });
+        }
+
         private void SetLaurels()
         {
             try

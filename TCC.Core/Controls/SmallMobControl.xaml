@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded"
-             Visibility="{Binding Visible}" IsHitTestVisible="False">
+             Visibility="{Binding Visible}" IsHitTestVisible="False" UseLayoutRounding="True">
 
 
     <Grid Margin="2" Width="100" MaxWidth="150" x:Name="RootGrid" >

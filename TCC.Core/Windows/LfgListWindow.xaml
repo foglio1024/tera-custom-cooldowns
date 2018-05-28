@@ -193,6 +193,7 @@
                          Width="11" Height="11" />
                 <TextBlock Text="{Binding Message}"
                            x:Name="MessageTb"
+                           PreviewMouseLeftButtonDown="OnLfgMessageMouseButtonDown"
                            FontSize="14"
                            FontWeight="Thin"
                            Style="{StaticResource Styles.DefaultText}"
@@ -376,9 +377,22 @@
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding IsTrade}" Value="True">
+                    <Setter TargetName="Ell" Property="Fill" Value="{StaticResource Colors.Chat.Trade}"/>
+                    <Setter TargetName="EllExt" Property="Fill" Value="{StaticResource Colors.Chat.Trade}" />
+                    <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource Colors.Chat.Trade}"></Setter>
+                    <Setter TargetName="LeaderNameTb" Property="Foreground" Value="{StaticResource Colors.Chat.Trade}"></Setter>
+                    <Setter Property="Opacity" Value="1"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsTwitch}" Value="True">
+                    <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource TwitchColor}"></Setter>
+                    <Setter TargetName="MessageTb" Property="Cursor" Value="Hand"></Setter>
+                </DataTrigger>
+
                 <DataTrigger Binding="{Binding IsMyLfg}" Value="True">
                     <Setter Property="Visibility" TargetName="btn" Value="Hidden"></Setter>
                     <Setter Property="Visibility" TargetName="ApplicantsBtn" Value="Visible"></Setter>
+                    <Setter Property="IsHitTestVisible" TargetName="ApplicantsBtn" Value="True"></Setter>
                     <Setter Property="Visibility" TargetName="cdArc" Value="Collapsed"></Setter>
                     <Setter Property="Visibility" TargetName="applicants" Value="Visible"></Setter>
                     <!--<Setter Property="Fill" TargetName="Ell" Value="{StaticResource GoldColor}"></Setter>
@@ -547,4 +561,6 @@
         </Grid>
     </Border>
 </Window>
+
+
 

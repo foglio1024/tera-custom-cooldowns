@@ -204,6 +204,17 @@ namespace TCC.ViewModels
                 NPC(nameof(DisableHP));
             }
         }
+        public bool ShowAwakenIcon
+        {
+            get => SettingsManager.ShowAwakenIcon;
+            set
+            {
+                if (SettingsManager.ShowAwakenIcon == value) return;
+                SettingsManager.ShowAwakenIcon = value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                NPC();
+            }
+        }
 
         public bool ShowItemsCooldown
         {
@@ -468,6 +479,7 @@ namespace TCC.ViewModels
         //}
 
         public List<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+        public List<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
         public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
@@ -479,6 +491,28 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ChatEnabled == value) return;
                 SettingsManager.ChatEnabled = value;
+                NPC();
+            }
+        }
+
+        public ClickThruMode ChatClickThruMode
+        {
+            get => SettingsManager.ChatClickThruMode;
+            set
+            {
+                if (SettingsManager.ChatClickThruMode == value) return;
+                SettingsManager.ChatClickThruMode = value;
+                NPC();
+            }
+        }
+
+        public bool ShowTradeLfgs
+        {
+            get => SettingsManager.ShowTradeLfg;
+            set
+            {
+                if (SettingsManager.ShowTradeLfg == value) return;
+                SettingsManager.ShowTradeLfg = value;
                 NPC();
             }
         }

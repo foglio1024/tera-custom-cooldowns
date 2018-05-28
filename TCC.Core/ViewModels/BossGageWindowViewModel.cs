@@ -128,7 +128,6 @@ namespace TCC.ViewModels
         public BossGageWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _scale = SettingsManager.BossWindowSettings.Scale;
             _npcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
 
             GuildIds = new Dictionary<ulong, uint>();

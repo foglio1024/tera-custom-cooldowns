@@ -16,6 +16,8 @@ namespace TCC
         
         private static bool _encounter;
         private static bool _inGameChatOpen;
+        private static bool _inGameUiOn;
+
         public static bool LoadingScreen
         {
             get => _loadingScreen;
@@ -55,7 +57,17 @@ namespace TCC
             }
         }
         public static bool IsElite { get; set; }
-        public static bool InGameUiOn { get; set; }
+
+        public static bool InGameUiOn
+        {
+            get => _inGameUiOn;
+            set
+            {
+                if (_inGameUiOn == value) return;
+                _inGameUiOn = value;
+                GameUiModeChanged?.Invoke();
+            }
+        }
 
         public static bool InGameChatOpen
         {
@@ -69,6 +81,7 @@ namespace TCC
         }
 
         public static event Action ChatModeChanged;
+        public static event Action GameUiModeChanged;
         public static event Action EncounterChanged;
         public static event Action LoadingScreenChanged;
         public static event Action LoggedChanged;

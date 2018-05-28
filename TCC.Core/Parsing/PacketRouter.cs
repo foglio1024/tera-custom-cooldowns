@@ -219,7 +219,8 @@ namespace TCC.Parsing
             SessionManager.InitDatabases(SettingsManager.LastRegion);
             CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
-            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
+            if(Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
+                CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -678,7 +679,8 @@ namespace TCC.Parsing
 
         internal static void HandleCrestMessage(S_CREST_MESSAGE x)
         {
-
+            if (x.Type != 6) return;
+            SkillManager.ResetSkill(x.SkillId);
         }
 
         internal static void HandleSystemMessageLoot(S_SYSTEM_MESSAGE_LOOT_ITEM x)
@@ -907,10 +909,14 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
+            if(SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+
         }
         internal static void HandleKicked(S_BAN_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
+            if (SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+
         }
 
         public static void HandleReadyCheck(S_CHECK_TO_READY_PARTY p)

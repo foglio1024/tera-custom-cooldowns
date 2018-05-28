@@ -6,8 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Dragablz;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -26,6 +28,15 @@ namespace TCC.Windows
         {
             InitializeComponent();
             Dispatcher.Invoke(() => DataContext = new GroupConfigVM());
+            DC.ShowAllChanged += OnShowAllChanged;
+            OnShowAllChanged();
+        }
+
+        private void OnShowAllChanged()
+        {
+            var an = new DoubleAnimation(DC.ShowAll? .2 : 1, TimeSpan.FromMilliseconds(200));
+            MainGrid.BeginAnimation(OpacityProperty, an);
+            MainGrid.IsHitTestVisible = !DC.ShowAll;
         }
 
         public void ShowWindow()
@@ -84,9 +95,9 @@ namespace TCC.Windows
             view.Refresh();
             foreach (var x in ClassesButtons.Items)
             {
-                var cp = (ContentPresenter) ClassesButtons.ItemContainerGenerator.ContainerFromItem(x);
+                var cp = (ContentPresenter)ClassesButtons.ItemContainerGenerator.ContainerFromItem(x);
                 var btn = cp.ContentTemplate.FindName("Btn", cp) as Button;
-                var dc = ((Class) btn.DataContext);
+                var dc = ((Class)btn.DataContext);
                 if (dc == _currentFilter) btn.Opacity = 1;
                 else btn.Opacity = .3;
             }
@@ -98,9 +109,25 @@ namespace TCC.ViewModels
 {
     public class GroupConfigVM : TSPropertyChanged
     {
+
+        public event Action ShowAllChanged;
+
         public SynchronizedObservableCollection<GroupAbnormalityVM> GroupAbnormals;
         public IEnumerable<Abnormality> Abnormalities => SessionManager.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
+
+        public bool ShowAll
+        {
+            get => SettingsManager.ShowAllGroupAbnormalities;
+            set
+            {
+                if (SettingsManager.ShowAllGroupAbnormalities == value) return;
+                SettingsManager.ShowAllGroupAbnormalities = value;
+                _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
+                SettingsManager.SaveSettings();
+                NPC();
+            }
+        }
         public List<Class> Classes
         {
             get

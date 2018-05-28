@@ -213,8 +213,6 @@ namespace TCC.ViewModels
         {
             HiddenSkills.Add(context.Skill);
         }
-
-
         internal void AddHiddenSkill(FixedSkillCooldown context)
         {
             HiddenSkills.Add(context.Skill);
@@ -278,6 +276,7 @@ namespace TCC.ViewModels
             {
                 root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3), new XAttribute("name", sk.ShortName)));
             });
+            if (SessionManager.CurrentPlayer.Class > (Class)12) return;
             root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
         }
 
@@ -446,6 +445,7 @@ namespace TCC.ViewModels
             SecondarySkills.Clear();
             OtherSkills.Clear();
             ItemSkills.Clear();
+            HiddenSkills.Clear();
         }
 
         public void LoadSkills(string filename, Class c)
@@ -520,7 +520,6 @@ namespace TCC.ViewModels
         public CooldownWindowViewModel()
         {
             _dispatcher = App.BaseDispatcher;
-            _scale = SettingsManager.CooldownWindowSettings.Scale;
             ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             LongSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
@@ -546,6 +545,15 @@ namespace TCC.ViewModels
         public void NotifyItemsDisplay()
         {
             NPC(nameof(ShowItems));
+        }
+
+        public void ResetSkill(Skill skill)
+        {
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+            if (SettingsManager.CooldownBarMode == CooldownBarMode.Normal) return;
+
+            var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);
+            sk?.ProcReset();
         }
     }
 }

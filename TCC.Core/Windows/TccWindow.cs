@@ -67,6 +67,7 @@ namespace TCC.Windows
 
             WindowManager.ForegroundManager.VisibilityChanged += OnVisibilityChanged;
             WindowManager.ForegroundManager.DimChanged += OnDimChanged;
+            WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
             FocusManager.FocusTimer.Elapsed += OnFocusTick;
 
             if (_settings.Enabled) Show();
@@ -91,6 +92,8 @@ namespace TCC.Windows
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
         }
+
+
 
         private void OnFocusTick(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -128,25 +131,12 @@ namespace TCC.Windows
         private void OnDimChanged()
         {
             if (!WindowManager.ForegroundManager.Visible) return;
+
             if (!_settings.AutoDim)
-            {
                 AnimateContentOpacity(1);
-            }
             else
-            {
                 AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
-            }
-            switch (_settings.ClickThruMode)
-            {
-                case ClickThruMode.WhenUndim:
-                    if (WindowManager.ForegroundManager.Dim) FocusManager.UndoClickThru(Handle);
-                    else FocusManager.MakeClickThru(Handle);
-                    break;
-                case ClickThruMode.WhenDim:
-                    if (!WindowManager.ForegroundManager.Dim) FocusManager.UndoClickThru(Handle);
-                    else FocusManager.MakeClickThru(Handle);
-                    break;
-            }
+
             OnClickThruModeChanged();
         }
         private void OnVisibilityChanged()
@@ -187,11 +177,15 @@ namespace TCC.Windows
                     if (WindowManager.ForegroundManager.Dim) FocusManager.UndoClickThru(Handle);
                     else FocusManager.MakeClickThru(Handle);
                     break;
+                case ClickThruMode.GameDriven:
+                    if (SessionManager.InGameUiOn) FocusManager.UndoClickThru(Handle);
+                    else FocusManager.MakeClickThru(Handle);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-        private void OnEnabledChanged()
+        protected void OnEnabledChanged()
         {
             try
             {

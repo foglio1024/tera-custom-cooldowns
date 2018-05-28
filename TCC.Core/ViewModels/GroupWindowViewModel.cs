@@ -51,7 +51,6 @@ namespace TCC.ViewModels
         public GroupWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _scale = SettingsManager.GroupWindowSettings.Scale;
 
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{
@@ -228,6 +227,7 @@ namespace TCC.ViewModels
                 user.EntityId = p.EntityId;
                 user.IsLeader = p.IsLeader;
                 user.Order = p.Order;
+                user.Awakened = p.Awakened;
             }
         }
         private void SendAddMessage(string name)

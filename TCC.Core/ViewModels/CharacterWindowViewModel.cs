@@ -19,7 +19,6 @@ namespace TCC.ViewModels
         public CharacterWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _scale = SettingsManager.CharacterWindowSettings.Scale;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
             // WindowManager.TccVisibilityChanged += (s, ev) =>

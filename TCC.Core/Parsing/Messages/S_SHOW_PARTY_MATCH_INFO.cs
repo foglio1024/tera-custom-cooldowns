@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TCC.Data;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
@@ -38,19 +39,27 @@ namespace TCC.Parsing.Messages
 
                 reader.BaseStream.Position = msgOffset - 4;
                 var msg = reader.ReadTeraString();
-                reader.BaseStream.Position = leaderNameOffset - 4;
+                try
+                {
+                    reader.BaseStream.Position = leaderNameOffset - 4;
+                }
+                catch
+                {
+                    if (next != 0) reader.BaseStream.Position = next - 4;
+                    continue;
+                }
                 var leaderName = reader.ReadTeraString();
                 l.LeaderName = leaderName;
                 l.LeaderId = leaderId;
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
-                Listings.Add(l);
-                if(next != 0) reader.BaseStream.Position = next - 4;
+                if (!(l.IsTrade && !SettingsManager.ShowTradeLfg)) Listings.Add(l);
+                if (next != 0) reader.BaseStream.Position = next - 4;
 
             }
 
-            if (page < pages) if(SettingsManager.LfgEnabled) Proxy.RequestNextLfgPage(page + 1);
+            if (page < pages) if (SettingsManager.LfgEnabled && Proxy.IsConnected) Proxy.RequestNextLfgPage(page + 1);
             if (page == pages) IsLast = true;
         }
     }

@@ -48,6 +48,10 @@ namespace TCC.ViewModels
         {
             NPC(nameof(AmIinLfg));
             NPC(nameof(MyLfg));
+            foreach (var listing in Listings.ToSyncArray())
+            {
+                listing?.NotifyMyLfg();
+            }
             MyLfg?.NotifyMyLfg();
         }
 
