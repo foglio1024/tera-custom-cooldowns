@@ -402,7 +402,7 @@ namespace TCC
             if (!doc.HasElements) return;
             try
             {
-                File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml", AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml.bak", true);
+                if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml", AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml.bak", true);
                 doc.Save(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
             }
             catch (Exception)
