@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Newtonsoft.Json.Linq;
@@ -35,6 +36,7 @@ namespace TCC
         {
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
+            //new Task(() => { if (new Firebase.Firebase().CheckService()) Console.WriteLine("Firebase ok");}).Start(); 
             InitSplashScreen();
 
             BaseDispatcher = Dispatcher.CurrentDispatcher;
@@ -61,7 +63,7 @@ namespace TCC
             WindowManager.Init();
 
             SplashScreen.SetText("Initializing Twitch connector...");
-            TwitchConnector.Instance.Init();
+            //TwitchConnector.Instance.Init();
 
             SplashScreen.SetText("Initializing packet processor...");
             PacketProcessor.Init();
@@ -174,7 +176,7 @@ namespace TCC
                            ex.InnerException +
                            "\r\n" + ex.TargetSite;
                 js.Add("tcc_version", new JValue(_version));
-                js.Add("full_exception", new JValue(full.Replace(@"C:\Users\Vincenzo\Documents\Progetti VS\", "")));
+                js.Add("full_exception", new JValue(full));
                 js.Add("inner_exception",
                     new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined"));
                 js.Add("exception", new JValue(ex.Message));
@@ -281,7 +283,7 @@ namespace TCC
 
         private void ToolTip_Opened(object sender, RoutedEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled= false;
+            FocusManager.FocusTimer.Enabled = false;
         }
 
         private void ToolTip_Closed(object sender, RoutedEventArgs e)

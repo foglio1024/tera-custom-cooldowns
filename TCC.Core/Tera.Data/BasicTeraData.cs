@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Game.Services;
@@ -41,7 +40,7 @@ namespace TCC.Tera.Data
             //handle overrides
             var serversOverridePath = Path.Combine(ResourceDirectory, "config/server-overrides.txt");
             if (!File.Exists(serversOverridePath))//create the default file if it doesn't exist
-                File.WriteAllText(serversOverridePath, defaultOverride );
+                File.WriteAllText(serversOverridePath, defaultOverride);
             var overriddenServers = GetServers(serversOverridePath).ToList();
             Servers.AddOverrides(overriddenServers);
 
@@ -92,37 +91,37 @@ namespace TCC.Tera.Data
             throw new InvalidOperationException("Could not find the resource directory");
         }
 
-            public static void LogError(string error, bool local = false, bool debug = false)
+        public static void LogError(string error, bool local = false, bool debug = false)
         {
-            if (debug && _errorCount-- <= 0) return;
-            Task.Run(() =>
-            {
-                try
-                {
-                    //error = $"##### (version={UpdateManager.Version}):\r\n" + (debug?"##### Debug: ":"") + error;
-                    //_log.Error(error);
-                    if (!Instance.WindowData.Debug || local)
-                    {
-                        return;
-                    }
+            //if (debug && _errorCount-- <= 0) return;
+            //Task.Run(() =>
+            //{
+            //    try
+            //    {
+            //        //error = $"##### (version={UpdateManager.Version}):\r\n" + (debug?"##### Debug: ":"") + error;
+            //        //_log.Error(error);
+            //        if (!Instance.WindowData.Debug || local)
+            //        {
+            //            return;
+            //        }
 
-                    using (var client = new HttpClient())
-                    {
-                        var formContent = new FormUrlEncodedContent(new[]
-                        {
-                            new KeyValuePair<string, string>("error", error)
-                        });
+            //        using (var client = new HttpClient())
+            //        {
+            //            var formContent = new FormUrlEncodedContent(new[]
+            //            {
+            //                new KeyValuePair<string, string>("error", error)
+            //            });
 
-                        var response = client.PostAsync("http://diclah.com/~yukikoo/debug/debug.php", formContent);
-                        var responseString = response.Result.Content.ReadAsStringAsync();
-                        Debug.WriteLine(responseString.Result);
-                    }
-                }
-                catch
-                {
-                    // Ignore
-                }
-            });
+            //            var response = client.PostAsync("http://diclah.com/~yukikoo/debug/debug.php", formContent);
+            //            var responseString = response.Result.Content.ReadAsStringAsync();
+            //            Debug.WriteLine(responseString.Result);
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        // Ignore
+            //    }
+            //});
         }
     }
 }

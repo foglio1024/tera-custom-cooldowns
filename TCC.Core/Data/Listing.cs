@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
-using SuperSocket.ClientEngine;
 using TCC.ViewModels;
 
 namespace TCC.Data
