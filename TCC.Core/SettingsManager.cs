@@ -24,11 +24,11 @@ namespace TCC
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
         private static XDocument _settingsDoc;
-        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false);
         public static WindowSettings CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
-        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false);
         public static WindowSettings BuffWindowSettings = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
-        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false);
         public static WindowSettings ClassWindowSettings = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
         public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
 
@@ -519,7 +519,7 @@ namespace TCC
         private static readonly List<uint> PriestDefault = new List<uint> { 201, 202, 805100, 805101, 805102, 98000109, 805600, 805601, 805602, 805603, 805604, 98000110, 800300, 800301, 800302, 800303, 800304, 801500, 801501, 801502, 801503, 98000107 };
         private static readonly List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
         private static string _lastRegion = "";
-        private static bool _chatEnabled = true;
+        private static bool _chatEnabled = false;
         private static ClickThruMode _chatClickThruMode;
 
         public static XElement BuildChatTabsXElement(List<Tab> tabList)
