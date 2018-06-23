@@ -423,12 +423,12 @@
                 <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
                 <Setter Property="Foreground" Value="#2fff" />
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Width" Value="8" />
+                <Setter Property="Width" Value="4" />
                 <Setter Property="Margin" Value="0,5"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid x:Name="GridRoot" Width="4" Background="{TemplateBinding Background}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.00001*" />
                                 </Grid.RowDefinitions>
@@ -468,7 +468,7 @@
                                         </Setter.Value>
                                     </Setter>
                                     <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="8" />
+                                    <Setter Property="Height" Value="4" />
                                     <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
                                     <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
                                     <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
@@ -482,12 +482,12 @@
                 <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
                 <Setter Property="Foreground" Value="#2fff" />
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Width" Value="8" />
+                <Setter Property="Width" Value="4" />
                 <Setter Property="Margin" Value="0,5"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid x:Name="GridRoot" Width="4" Background="{TemplateBinding Background}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.00001*" />
                                 </Grid.RowDefinitions>
@@ -524,7 +524,7 @@
                                         </Setter.Value>
                                     </Setter>
                                     <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="8" />
+                                    <Setter Property="Height" Value="4" />
                                     <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
                                     <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
                                     <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
@@ -663,18 +663,19 @@
 
             <Style x:Key="ChatDragableTabItemStyle"  TargetType="{x:Type dragablz:DragablzItem}" >
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="#9fff"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <!--<Setter Property="FontWeight" Value="Bold"/>-->
                 <Setter Property="Margin" Value="0 0"/>
                 <!--<Setter Property="ToolTip" Value="Right click to edit"/>-->
-                <Setter Property="Padding" Value="6 3"/>
+                <Setter Property="Padding" Value="15 5"/>
                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type dragablz:DragablzItem}">
-                            <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Margin="0 1 0 -1">
+                            <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Margin="0 1 0 -1" Background="#01000000">
                                 <Rectangle x:Name="hl" Fill="#1fff" Visibility="Collapsed"/>
                                 <Rectangle x:Name="sel" Fill="{StaticResource GreenColor}" Visibility="Visible" Height="3"
                                            VerticalAlignment="Top" RenderTransformOrigin=".5 .5">
@@ -683,23 +684,28 @@
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                                 <Grid x:Name="Trapezoid" 
-                                         Background="{TemplateBinding Background}"                                          
+                                         Background="Transparent"                                          
                                          Margin="0 0 0 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Center"
+                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
                                               Visibility="{Binding Content.Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                                                 Margin="0" Grid.Column="1">
                                         <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
                                         <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
                                     </Grid>
-                                    <Grid Grid.Column="0">
+                                    <Grid Grid.Column="0" Background="Transparent">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
+                                        <Border BorderThickness="1 1 1 0" Grid.ColumnSpan="2" Margin="0 0 0 0" CornerRadius="1 1 0 0" Background="#4445" BorderBrush="#8555" Opacity="1" x:Name="SelBorder" Visibility="Collapsed">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".5"></DropShadowEffect>
+                                            </Border.Effect>
+                                        </Border>
                                         <ContentPresenter Content="{Binding Content.TabName}" 
                                                       ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
                                                       ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
@@ -707,7 +713,24 @@
                                                       VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
                                                       SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
                                                   Margin="{TemplateBinding Control.Padding}"
-                                                  x:Name="contentPresenter"/>
+                                                  x:Name="contentPresenter"
+                                                          Opacity=".5"
+                                                          >
+                                            <ContentPresenter.Effect>
+                                                <DropShadowEffect x:Name="TxtEffect" Color="DodgerBlue" ShadowDepth="0" Opacity="0" BlurRadius="3"></DropShadowEffect>
+                                            </ContentPresenter.Effect>
+                                        </ContentPresenter>
+                                        <ContentPresenter Content="{Binding Content.TabName}" 
+                                                      ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
+                                                      ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
+                                                      HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
+                                                      VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
+                                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                                  Margin="{TemplateBinding Control.Padding}"
+                                                  x:Name="contentPresenter2"
+                                                          Opacity=".5"
+                                                          >
+                                        </ContentPresenter>
                                         <Thumb Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" 
                                                x:Name="PART_Thumb"
                                                Style="{StaticResource MaterialDesignInvisibleThumbStyle}" >
@@ -716,7 +739,7 @@
                                         <Button Grid.Column="1" x:Name="CloseButton" VerticalAlignment="Center"
                                                 Style="{StaticResource MaterialDesignCloseItemCommandButtonStyle}"  
                                                 Foreground="{StaticResource HpColor}" Background="Transparent"
-                                                
+                                                Margin="-2 0 2 0"
                                                 Command="{x:Static dragablz:TabablzControl.CloseItemCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                                             <Button.Visibility>
@@ -741,9 +764,17 @@
                                             Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.Header}" />
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <!--<Setter Property="Background" Value="#1fff" TargetName="Trapezoid"/>-->
+                                    <Setter Property="Effect" TargetName="contentPresenter">
+                                        <Setter.Value>
+                                            <DropShadowEffect Opacity="1" Color="#53c0ff" ShadowDepth="0" BlurRadius="3"></DropShadowEffect>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="contentPresenter" Property="Opacity" Value="1"/>
+                                    <Setter TargetName="contentPresenter2" Property="Opacity" Value="1"/>
+                                    <Setter TargetName="SelBorder" Property="Visibility" Value="Visible"/>
+
                                     <!--<Setter Property="LongBasePenBrush" Value="{StaticResource TabItem.Selected.Background}" TargetName="Trapezoid"/>-->
-                                    <Trigger.EnterActions>
+                                    <!--<Trigger.EnterActions>
                                         <BeginStoryboard>
                                             <Storyboard>
                                                 <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
@@ -766,10 +797,10 @@
                                                 </DoubleAnimation>
                                             </Storyboard>
                                         </BeginStoryboard>
-                                    </Trigger.ExitActions>
+                                    </Trigger.ExitActions>-->
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" TargetName="hl"/>
+                                    <!--<Setter Property="Visibility" Value="Visible" TargetName="hl"/>-->
                                     <!--<Setter Property="LongBasePenBrush" Value="{StaticResource TabItem.Selected.Background}" TargetName="Trapezoid"/>-->
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">

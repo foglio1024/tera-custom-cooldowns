@@ -5,9 +5,11 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shell;
 using Dragablz;
+using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Annotations;
 using TCC.Controls.ChatControls;
 using TCC.ViewModels;
@@ -162,7 +164,31 @@ namespace TCC.Windows
             if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel t)) return;
             ((Tab)t.Content).Attention = false;
             ((ChatViewModel)DataContext).CurrentTab = (Tab)t.Content;
+
+            var w = s.ActualWidth;
+            var left = s.TransformToAncestor(this).Transform(new Point()).X;
+            LeftLine.Width = left - 3;
+            RightLine.Margin = new Thickness(left + w - 3 ,0 ,0,0);
         }
+
+        private void TabLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is FrameworkElement s)) return;
+            var p = VisualTreeHelper.GetParent(s);
+            p = VisualTreeHelper.GetParent(p);
+            p = VisualTreeHelper.GetParent(p);
+            p = VisualTreeHelper.GetParent(p);
+            p = VisualTreeHelper.GetParent(p);
+            p = VisualTreeHelper.GetParent(p);
+            p = VisualTreeHelper.GetParent(p); //TODO: REFACTOR THIS
+            if ((p as ItemsControl).ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return; 
+            var w = s.ActualWidth;
+            var left = s.TransformToAncestor(this).Transform(new Point()).X;
+            LeftLine.Width = left - 3;
+            RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
+
+        }
+
 
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -318,6 +344,11 @@ namespace TCC.Windows
         //    //needed to keep windowchrome, no idea why
         //    return;
         //}
+        private void TabControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 
 }
