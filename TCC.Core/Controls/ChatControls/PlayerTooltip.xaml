@@ -9,7 +9,7 @@
              xmlns:chatControls="clr-namespace:TCC.Controls.ChatControls" 
              mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding RelativeSource={RelativeSource AncestorType=w:FloatingButtonWindow}}">
     <Grid>
-        <Border CornerRadius="1" Background="#444" Grid.RowSpan="10" Margin="6" BorderBrush="#666" BorderThickness="0" Width="Auto" Name="RootBorder">
+        <Border CornerRadius="1" Background="#9445" Grid.RowSpan="10" Margin="15" BorderBrush="#8666" BorderThickness="1" Width="Auto" Name="RootBorder">
             <Grid Margin="5" Height="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -30,11 +30,20 @@
                 <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Width="44" Height="44"
                        RenderOptions.BitmapScalingMode="HighQuality"
                        Source="{Binding TooltipInfo.Class, Converter={StaticResource Converters.ClassToImage}}" Margin="3" VerticalAlignment="Top"></Image>
-                <Border Background="{StaticResource MpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="0,0">
-                    <TextBlock  Text="{Binding TooltipInfo.Level}" Margin="0,0,0,0" TextAlignment="Center" FontSize="12" VerticalAlignment="Center"></TextBlock>
+                <Border Background="#99a" BorderThickness="1" BorderBrush="#ccd" Height="20" Width="20" CornerRadius="0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="-10" RenderTransformOrigin=".5 .5">
+                    <Border.RenderTransform>
+                        <RotateTransform Angle="45"></RotateTransform>
+                    </Border.RenderTransform>
+                    <TextBlock  Text="{Binding TooltipInfo.Level}" Margin="0,0,0,0" TextAlignment="Center"
+                                FontSize="12" VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="-45"></RotateTransform>
+                        </TextBlock.RenderTransform>
+
+                    </TextBlock>
                     <Border.Effect>
-                        <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity=".7"></DropShadowEffect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity=".3"></DropShadowEffect>
                     </Border.Effect>
                 </Border>
                 <TextBlock Text="{Binding TooltipInfo.Name}" FontWeight="DemiBold" FontSize="14"
