@@ -39,15 +39,16 @@ namespace TCC.Controls.ChatControls
         }
         private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (((ChatMessage)DataContext).IsContracted)
-            {
-                Popup.IsOpen = true;
-            }
+
+            //if (((ChatMessage)DataContext).IsContracted)
+            //{
+            //    Popup.IsOpen = true;
+            //}
         }
 
         private void Popup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Popup.IsOpen = false;
+            //Popup.IsOpen = false;
         }
 
         private void UserControl_Loaded(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)

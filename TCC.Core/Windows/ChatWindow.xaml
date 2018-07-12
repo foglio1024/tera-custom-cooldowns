@@ -9,6 +9,7 @@
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseDoubleClick="TccWindow_MouseDoubleClick"
@@ -62,7 +63,8 @@
             <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
             <Setter Property="Height" Value="Auto" />
-            <Setter Property="Padding" Value="-8 0 0 0" />
+
+            <Setter Property="Padding" Value="0 0 0 0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -75,9 +77,13 @@
                                           PreviewMouseWheel="SwPreviewMouseWheel"
                                           FlowDirection="RightToLeft" VerticalContentAlignment="Top"
                                           VerticalAlignment="Top" Height="Auto" 
-                                          CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged">
+                                          CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged"
+                                          Margin="0 0 0 0">
+                                <ScrollViewer.Resources>
+                                    <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">4</system:Double>
+                                </ScrollViewer.Resources>
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
-                                                FlowDirection="LeftToRight" Margin="-5 0 0 0"/>
+                                                FlowDirection="LeftToRight" Margin="2 0 2 0" />
                             </ScrollViewer>
                         </Border>
 
@@ -86,14 +92,36 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="TabContentTemplate">
-            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-            <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Background="#50ff8c00" BorderThickness="0 0 0 2" BorderBrush="DarkOrange"  Margin="1 3 2 0" Visibility="{Binding Content.PinnedMessage, Converter={StaticResource Converters.NullToVisibleCollapsed}}">
+
+                <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}" 
+                                Content="{Binding Content.PinnedMessage}"
+                                Margin="10 3 4 2">
+                    <ContentControl.LayoutTransform>
+                        <RotateTransform Angle="-180"></RotateTransform>
+                    </ContentControl.LayoutTransform>
+                    <ContentControl.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Unpin" Click="UnpinMessage"></MenuItem>
+                            </ContextMenu>
+                    </ContentControl.ContextMenu>
+                </ContentControl>
+                </Border>
+                <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
                           VerticalContentAlignment="Top"
-                          Margin="0 1 0 0"
+                          Margin="0 5 5 3"
                           Style="{StaticResource ChatItemsControl}"
                           ItemsSource="{Binding Content.Messages}"
                           ItemTemplate="{StaticResource ChatMessageTemplate}"
-                          Width="Auto">
+                          Width="Auto"
+                          Grid.Row="1"
+                              HorizontalAlignment="Stretch"
+                              >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Margin="0,0,0,0"
@@ -107,6 +135,9 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
+                
+            </Grid>
+            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         </DataTemplate>
     </w:TccWidget.Resources>
     <Grid>
@@ -131,14 +162,16 @@
                         <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".9" />
                     </Border.Effect>
                 </Border>
-                <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" Margin="0 0 0 0" HorizontalAlignment="Left" 
+                <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" 
+                        Margin="0 0 0 0" HorizontalAlignment="Left" 
                        VerticalAlignment="Top" Grid.Row="1"
                         x:Name="LeftLine">
                     <Border.RenderTransform>
                         <TranslateTransform Y="26"/>
                     </Border.RenderTransform>
                 </Border>                
-                <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" Margin="0 0 0 0" HorizontalAlignment="Stretch" 
+                <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" 
+                        Margin="0 0 0 0" HorizontalAlignment="Stretch" 
                        VerticalAlignment="Top" Grid.Row="1"
                         x:Name="RightLine">
                     <Border.RenderTransform>

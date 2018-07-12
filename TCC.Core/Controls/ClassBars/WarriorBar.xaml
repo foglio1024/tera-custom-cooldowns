@@ -31,7 +31,7 @@
                     CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0 35 28 0" 
                     />            
             <!--TA-->
-            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1"
+            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1" 
                     Style="{StaticResource Styles.DefaultBorder}"  Background="DodgerBlue" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
                     CornerRadius="{Binding ElementName=TaBackgroundBorder, Path=CornerRadius}" HorizontalAlignment="Left" Margin="{Binding ElementName=TaBackgroundBorder, Path=Margin}"
                     >
@@ -41,7 +41,7 @@
                     </FrameworkElement.LayoutTransform>
                 </FrameworkElement>
             </Border>
-            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity=".7"
+            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1"
                     Style="{StaticResource Styles.DefaultBorder}" Effect="{x:Null}" x:Name="TcBackgroundBorder"
                     CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0,25,25,0"
                     >
@@ -68,9 +68,12 @@
                     Height="30"
                     Margin="20,-10,15,0"
                     VerticalAlignment="Center"
-                    Effect="{x:Null}"
-                    Opacity=".9"
+                    Opacity="1"
+                    Visibility="Collapsed"
                     >
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="2" Opacity=".4"></DropShadowEffect>
+                </Border.Effect>
                 <Border.RenderTransform>
                     <SkewTransform AngleX="30"/>
                 </Border.RenderTransform>
@@ -88,7 +91,7 @@
                                Grid.Row="0" Grid.RowSpan="2"
                                Width="270"
                                Margin="-2,-10,10,0"
-                               VerticalAlignment="Center" />
+                               VerticalAlignment="Center" Visibility="Visible"/>
             <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ClipToBounds="False" 
                   
                   >

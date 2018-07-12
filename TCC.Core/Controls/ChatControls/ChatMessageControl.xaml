@@ -11,9 +11,8 @@
             <RotateTransform Angle="180"></RotateTransform>
         </TransformGroup>
     </UserControl.LayoutTransform>
-    <Grid Margin="2,1" HorizontalAlignment="Left" Width="Auto" Name="Root" Height="Auto" Background="#0f00" VerticalAlignment="Top" 
-          >
-        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Background="Transparent" >
+    <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="Auto" Name="Root" Height="Auto" Background="#0f00" VerticalAlignment="Top">
+        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*" />
@@ -23,7 +22,8 @@
                             ContentTemplate="{StaticResource MessageHeaderTemplate}"/>
             <!--Message-->
             <ContentControl Content="{Binding}" x:Name="Body" Grid.Column="1" 
-                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}"  />
+                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}" 
+                            />
 
             <Popup Grid.Column="0" IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True"
                    x:Name="Popup" MouseLeave="Popup_MouseLeave">

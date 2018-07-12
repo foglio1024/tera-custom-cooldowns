@@ -88,6 +88,8 @@ namespace TCC.ViewModels
             }
         }
 
+
+
         public void NotifyOpacityChange()
         {
             NPC(nameof(ChatWindowOpacity));

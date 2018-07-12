@@ -104,7 +104,7 @@ namespace TCC.Controls.ClassBars
                 switch (s)
                 {
                     default:
-                        return Application.Current.FindResource("DefaultBackgroundColor");
+                        return Brushes.Transparent;
                     case WarriorStance.Assault:
                         return Application.Current.FindResource("AssaultStanceColor");
                     case WarriorStance.Defensive:

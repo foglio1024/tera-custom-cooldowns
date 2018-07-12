@@ -34,7 +34,7 @@
             <SolidColorBrush x:Key="MarksColor" Color="#aad"/>
             <SolidColorBrush x:Key="GuardianColor" Color="#e5442b"/>
 
-            <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#202027" Opacity="1"/>
+            <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#222228" Opacity=".7"/>
             <SolidColorBrush x:Key="FadedBorderColor" Color="#aa303035" Opacity="1"/>
             <SolidColorBrush x:Key="FadedDefaultBackgroundColor" Color="#a0101017" Opacity="1"/>
             <SolidColorBrush x:Key="TooltipColor" Color="#404040" Opacity=".9"/>
@@ -129,10 +129,10 @@
                 <Setter Property="WindowStyle" Value="None"/>
             </Style>
             <Style x:Key="Styles.DefaultBorder" TargetType="{x:Type Border}">
-                <Setter Property="Background" Value="{StaticResource DefaultBackgroundColor}"/>
+                <Setter Property="Background" Value="#a223"/>
                 <Setter Property="CornerRadius" Value="0"/>
                 <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="BorderBrush" Value="#202026"/>
+                <Setter Property="BorderBrush" Value="#8555"/>
                 <Setter Property="Height" Value="Auto" />
                 <Setter Property="Width" Value="Auto"/>
                 <Setter Property="Effect" Value="{StaticResource DropShadow}" />
@@ -140,7 +140,7 @@
             </Style>
             <Style x:Key="Styles.DefaultText" TargetType="{x:Type TextBlock}">
                 <Setter Property="UseLayoutRounding" Value="True"/>
-                <Setter Property="Foreground" Value="#bbffffff"/>
+                <Setter Property="Foreground" Value="#ccffffff"/>
                 <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
             </Style>
             <Style TargetType="{x:Type Button}" x:Key="ButtonMainStyle">
@@ -319,6 +319,7 @@
             <PathGeometry x:Key="SvgOpenLink">M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z</PathGeometry>
             <PathGeometry x:Key="SvgWarning">M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z</PathGeometry>
             <PathGeometry x:Key="SvgAwaken">M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z</PathGeometry>
+            <PathGeometry x:Key="SvgCopy">M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z</PathGeometry>
             <PathGeometry x:Key="Svg"></PathGeometry>
             <!--Converters-->
             <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
@@ -421,18 +422,19 @@
             <!--ScrollBars-->
             <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
                 <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
-                <Setter Property="Foreground" Value="#2fff" />
+                <Setter Property="Foreground" Value="#444" />
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Width" Value="4" />
-                <Setter Property="Margin" Value="0,5"/>
+                <Setter Property="Width" Value="5" />
+                <Setter Property="Margin" Value="0 5 4 5"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="4" Background="{TemplateBinding Background}">
+                            <Grid x:Name="GridRoot" Width="5" Background="{TemplateBinding Background}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.00001*" />
                                 </Grid.RowDefinitions>
-
+                                <Border Background="#1fff"  HorizontalAlignment="Center" VerticalAlignment="Stretch"  Width="1"></Border>
                                 <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
                                     <Track.Thumb>
                                         <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}"
@@ -467,8 +469,8 @@
                                             <RotateTransform Angle="-90" />
                                         </Setter.Value>
                                     </Setter>
-                                    <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="4" />
+                                    <Setter Property="Width" Value="3" />
+                                    <Setter Property="Height" Value="Auto" />
                                     <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
                                     <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
                                     <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
@@ -717,7 +719,7 @@
                                                           Opacity=".5"
                                                           >
                                             <ContentPresenter.Effect>
-                                                <DropShadowEffect x:Name="TxtEffect" Color="DodgerBlue" ShadowDepth="0" Opacity="0" BlurRadius="3"></DropShadowEffect>
+                                                <DropShadowEffect Opacity="1" Color="Black" ShadowDepth="0" BlurRadius="3"></DropShadowEffect>
                                             </ContentPresenter.Effect>
                                         </ContentPresenter>
                                         <ContentPresenter Content="{Binding Content.TabName}" 
@@ -730,6 +732,7 @@
                                                   x:Name="contentPresenter2"
                                                           Opacity=".5"
                                                           >
+
                                         </ContentPresenter>
                                         <Thumb Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" 
                                                x:Name="PART_Thumb"
@@ -1030,7 +1033,7 @@
                 <chatcontrols:MessagePieceControl  />
             </DataTemplate>
             <DataTemplate x:Key="DefaultBody">
-                <chatcontrols:DefaultMessageBody />
+                <chatcontrols:DefaultMessageBody/>
             </DataTemplate>
             <DataTemplate x:Key="BrokerOfferBody">
                 <chatcontrols:BrokerOfferBody />

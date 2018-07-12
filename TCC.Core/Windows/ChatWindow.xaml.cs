@@ -12,6 +12,7 @@ using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Annotations;
 using TCC.Controls.ChatControls;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -29,7 +30,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             //ButtonsRef = buttons;
-            MainContent= content;
+            MainContent = content;
             Init(ws, false);
             _opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             _opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
@@ -168,7 +169,7 @@ namespace TCC.Windows
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
             LeftLine.Width = left - 3;
-            RightLine.Margin = new Thickness(left + w - 3 ,0 ,0,0);
+            RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
         }
 
         private void TabLoaded(object sender, RoutedEventArgs e)
@@ -181,7 +182,7 @@ namespace TCC.Windows
             p = VisualTreeHelper.GetParent(p);
             p = VisualTreeHelper.GetParent(p);
             p = VisualTreeHelper.GetParent(p); //TODO: REFACTOR THIS
-            if ((p as ItemsControl).ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return; 
+            if ((p as ItemsControl).ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
             LeftLine.Width = left - 3;
@@ -349,6 +350,29 @@ namespace TCC.Windows
 
         }
 
+        private void UnpinMessage(object sender, RoutedEventArgs e)
+        {
+            var currTabVm = TabControl.SelectedItem as HeaderedItemViewModel;
+            //var msg = (sender as FrameworkElement).DataContext as ChatMessage;
+            //var tabVm = VM.TabVMs.FirstOrDefault(x =>
+            //    ((Tab)x.Content).Messages.Contains(msg) && x == currTabVm);
+            if (currTabVm?.Content != null) ((Tab) currTabVm?.Content).PinnedMessage = null;
+
+            //var tab = VM.Tabs.FirstOrDefault(x => 
+                //x.PinnedMessage == (((sender as FrameworkElement)?.DataContext as HeaderedItemViewModel)?.Content as Tab)?.PinnedMessage
+                //);
+            //if (tab != null) tab.PinnedMessage = null;
+        }
+
+        private void PinnedMessageOnContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
+            FocusManager.FocusTimer.Enabled = true;
+        }
+
+        private void PinnedMessageOnContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            FocusManager.FocusTimer.Enabled = false;
+        }
     }
 
 }

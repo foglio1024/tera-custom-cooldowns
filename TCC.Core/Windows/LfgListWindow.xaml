@@ -402,7 +402,9 @@
             </DataTemplate.Triggers>
         </DataTemplate>
     </Window.Resources>
-    <Border Background="{StaticResource DefaultBackgroundColor}" CornerRadius="5" Effect="{StaticResource DropShadow}"
+    <Border Background="{StaticResource DefaultBackgroundColor}"
+            CornerRadius="1" Effect="{StaticResource DropShadow}"
+            BorderThickness="1" BorderBrush="#8555"
             Margin="6" Width="600" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
@@ -412,9 +414,9 @@
             </Grid.RowDefinitions>
             <!--Title-->
             <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7"
-                  VerticalAlignment="Center" Fill="#3fff">
+                  VerticalAlignment="Center" Fill="#9fff">
             </Path>
-            <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".4" FontSize="24"
+            <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".8" FontSize="24"
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0" />
             <Rectangle MouseLeftButtonDown="Border_MouseLeftButtonDown" Fill="Transparent"></Rectangle>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -437,22 +439,22 @@
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding SortCommand}" CommandParameter="Message" Padding="5 3 5 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="0"
-                        Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">
+                        Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Left">
                     Message
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="LeaderName" Padding="5 3 5 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="2"
-                        Margin="0 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">
+                        Margin="0 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Left">
                     Leader
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="PlayerCount" Padding="16 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="3"
-                        Margin="0 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">
+                        Margin="0 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Left">
                     Count
                 </Button>
             </Grid>
             <!--Main List-->
-            <ListBox Background="#3000"
+            <ListBox Background="#60000009"
                      Padding="-1 -1 -1 5"
                      ScrollViewer.CanContentScroll="False"
                      Height="600"
@@ -516,7 +518,7 @@
                         FontSize="15"
                         FontWeight="Thin"
                         Style="{StaticResource ButtonMainStyle}"
-                        Background="{StaticResource BackgroundDarkColor}">
+                        Background="#8556">
                     <Button.Content>
                         <MultiBinding Converter="{StaticResource Converters.LfgVmToButtonLabel}">
                             <Binding Path="Creating" />

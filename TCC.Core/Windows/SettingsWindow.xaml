@@ -126,7 +126,8 @@
     <Window.DataContext>
         <vm:SettingsWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="10" Width="550" Height="Auto" Focusable="True" MouseDown="Window_MouseDown">
+    <Grid Margin="10" Width="550" Height="Auto" Focusable="True"
+          MouseDown="Window_MouseDown">
         <Grid.RowDefinitions >
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -136,11 +137,14 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource Styles.DefaultBorder}"  Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95" CornerRadius="2"/>
+        <Border Style="{StaticResource Styles.DefaultBorder}"  
+                Grid.ColumnSpan="10" Grid.RowSpan="10"  
+                Background="{StaticResource DefaultBackgroundColor}"
+                Opacity="1" CornerRadius="2"/>
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#1fff" BorderThickness="0,0,0,0" Height="705"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="705"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -169,7 +173,7 @@
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Panel" Property="Background" Value="#1fff" />
+                                        <Setter TargetName="Panel" Property="Background" Value="#1999" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
                                         <Setter TargetName="Panel" Property="Background" Value="Transparent"/>
@@ -813,7 +817,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0"  CornerRadius="2 2 0 0">
+            <Border Grid.ColumnSpan="2" Background="#1000" BorderThickness="0"  CornerRadius="2 2 0 0">
                 <!--<Border.Effect>
                     <DropShadowEffect Direction="270" Opacity=".5" BlurRadius="4" ShadowDepth="3"/>
                 </Border.Effect>-->

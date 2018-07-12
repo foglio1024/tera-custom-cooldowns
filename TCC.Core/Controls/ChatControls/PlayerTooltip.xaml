@@ -30,7 +30,7 @@
                 <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Width="44" Height="44"
                        RenderOptions.BitmapScalingMode="HighQuality"
                        Source="{Binding TooltipInfo.Class, Converter={StaticResource Converters.ClassToImage}}" Margin="3" VerticalAlignment="Top"></Image>
-                <Border Background="#99a" BorderThickness="1" BorderBrush="#ccd" Height="20" Width="20" CornerRadius="0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                <Border Background="#667" BorderThickness="1" BorderBrush="#99a" Height="20" Width="20" CornerRadius="0" HorizontalAlignment="Left" VerticalAlignment="Top"
                         Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="-10" RenderTransformOrigin=".5 .5">
                     <Border.RenderTransform>
                         <RotateTransform Angle="45"></RotateTransform>

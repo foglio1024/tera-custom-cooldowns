@@ -213,7 +213,7 @@ namespace TCC.ViewModels
 
             ChatMessage.SplitSimplePieces(chatMessage);
 
-            if (ChatWindows.Any(x => !x.IsPaused))
+            if (ChatWindows.All(x => !x.IsPaused))
             {
                 ChatMessages.Insert(0, chatMessage);
             }
