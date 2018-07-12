@@ -1308,7 +1308,7 @@
     <None Include="resources\data\equip_exp\equip_exp-EU-EN.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="resources\data\dungeons-def.xml">
+    <Content Include="resources\data\dungeons-def-default.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="resources\data\items\items-EU-EN.tsv">
