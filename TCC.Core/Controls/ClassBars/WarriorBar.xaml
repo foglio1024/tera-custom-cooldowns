@@ -29,7 +29,7 @@
             <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0 0 0 0" BorderBrush="#9000" Opacity=".7" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
                     Style="{StaticResource Styles.DefaultBorder}" Effect="{x:Null}" x:Name="TaBackgroundBorder"
                     CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0 35 28 0" 
-                    />            
+                    />
             <!--TA-->
             <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1" 
                     Style="{StaticResource Styles.DefaultBorder}"  Background="DodgerBlue" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
@@ -69,7 +69,7 @@
                     Margin="20,-10,15,0"
                     VerticalAlignment="Center"
                     Opacity="1"
-                    Visibility="Collapsed"
+                    Visibility="Visible"
                     >
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="2" Opacity=".4"></DropShadowEffect>
@@ -79,11 +79,13 @@
                 </Border.RenderTransform>
             </Border>
             <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
-                    CornerRadius="50" Margin="-4" Opacity="1"  BorderThickness="4"
+                    CornerRadius="0" Margin="2" Opacity="1"  BorderThickness="4" RenderTransformOrigin=".5 .5"
                     BorderBrush="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"
                     >
+                <Border.RenderTransform>
+                    <RotateTransform Angle="45"/>
+                </Border.RenderTransform>
             </Border>
-
             <!--Edge-->
             <local:EdgeControl x:Name="EdgeBar"
                                DataContext="{Binding EdgeCounter}"
@@ -92,14 +94,35 @@
                                Width="270"
                                Margin="-2,-10,10,0"
                                VerticalAlignment="Center" Visibility="Visible"/>
-            <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ClipToBounds="False" 
-                  
-                  >
+            <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ClipToBounds="False">
                 <!--Gamble-->
                 <local:BuffCooldownControl DataContext="{Binding DeadlyGamble}" ClipToBounds="False"
                                            Margin="0" Padding="0"
                                            Grid.RowSpan="10" />
             </Grid>
+            <!--<Grid Grid.RowSpan="2" Margin="-5">
+                <Grid.Resources>
+                    <Style TargetType="local:Arc">
+                        <Setter Property="Width" Value="80"></Setter>
+                        <Setter Property="Height" Value="80"></Setter>
+                        <Setter Property="StrokeThickness" Value="5"></Setter>
+                        <Setter Property="EndAngle" Value="180"></Setter>
+                        <Setter Property="StartAngle" Value="00"></Setter>
+                        <Setter Property="Stroke" Value="{StaticResource HpColor}"></Setter>
+
+                    </Style>
+                </Grid.Resources>
+                <local:Arc Stroke="{StaticResource DefaultBackgroundColor}"  RenderTransformOrigin=".5 .5"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StartAngle="0"  EndAngle="180" Grid.RowSpan="2" >
+                </local:Arc>
+                <local:Arc    RenderTransformOrigin=".5 .5"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" >
+                    <local:Arc.RenderTransform>
+                        <RotateTransform Angle="0"/>
+                    </local:Arc.RenderTransform>
+                </local:Arc>
+                <Border Width="20" Height="20" Background="{StaticResource HpColor}" CornerRadius="10" VerticalAlignment="Bottom" Margin="-5"></Border>
+            </Grid>-->
         </Grid>
     </Grid>
 </UserControl>

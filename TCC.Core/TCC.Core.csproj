@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
+    <Compile Include="Converters\ClassSvgConverter.cs" />
     <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
@@ -1140,6 +1141,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\party_member_bar_bg.png" />
+    <Resource Include="resources\images\party_member_hp_bg.png" />
+    <Resource Include="resources\images\party_member_bg.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr.png" />
     <Resource Include="resources\images\awakened.png" />
     <None Include="packages.config" />
     <None Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
@@ -1169,6 +1178,9 @@
     <None Include="resources\data\equip_exp\equip_exp-TW.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="resources\data\dungeons-def-default.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\data\world_map\world_map-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1308,9 +1320,6 @@
     <None Include="resources\data\equip_exp\equip_exp-EU-EN.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="resources\data\dungeons-def.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="resources\data\items\items-EU-EN.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

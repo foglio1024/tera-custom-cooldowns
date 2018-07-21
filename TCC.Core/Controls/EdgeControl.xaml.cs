@@ -26,6 +26,10 @@ namespace TCC.Controls
             if (diff == 0) return;
             if (diff > 0)
             {
+                if (newEdge == 10)
+                {
+                    foreach(FrameworkElement child in EdgeContainer.Children){ child.Opacity = 1;}
+                }
                 for (var i = 0; i < diff; i++)
                 {
                     if (_currentEdge + i < EdgeContainer.Children.Count - 1) EdgeContainer.Children[_currentEdge + i].Opacity = 1;

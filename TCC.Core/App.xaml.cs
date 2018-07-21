@@ -80,7 +80,7 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
-
+            //ClassWindowViewModel.Instance.CurrentClass = Class.Warrior;
             //WindowManager.LfgListWindow.ShowWindow();
             // var l = new Listing();
             // l.LeaderId = 10;
@@ -91,18 +91,20 @@ namespace TCC
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
             //var l = new List<User>();
             //var r = new Random();
-            //for (uint i = 0; i < 30; i++)
+            //for (uint i = 0; i < 10; i++)
             //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher())
             //    {
             //        Name = i.ToString(),
             //        PlayerId = i,
             //        ServerId = i,
             //        EntityId = i,
+            //        Online = true,
+            //        Laurel = (Laurel)(i/2),
+            //        HasAggro = false,
             //        UserClass = (Class)r.Next(0, 12)
             //    });
             //GroupWindowViewModel.Instance.SetRaid(true);
             //GroupWindowViewModel.Instance.SetNewLeader(10, "player");
-
         }
 
         private static void TeraSniffer_OnNewConnection(Server srv)

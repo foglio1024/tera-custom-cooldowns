@@ -95,14 +95,14 @@ namespace TCC.Controls
         {
             Dispatcher.Invoke(() =>
             {
-                MpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpBar.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void SetHp()
         {
             Dispatcher.Invoke(() =>
             {
-                HpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpBar.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
 

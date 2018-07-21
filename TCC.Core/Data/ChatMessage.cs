@@ -91,7 +91,6 @@ namespace TCC.Data
             }
         }
 
-
         protected bool isContracted;
         public bool IsContracted
         {
@@ -823,9 +822,9 @@ namespace TCC.Data
         {
             var id = GetId(info, "dungeon");
             var txt = id.ToString();
-            if (SessionManager.DungeonDatabase.DungeonDefs.TryGetValue(id, out var dngName))
+            if (SessionManager.DungeonDatabase.DungeonNames.TryGetValue(id, out var dngName))
             {
-                txt = dngName.Name;
+                txt = dngName;
             }
             return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
