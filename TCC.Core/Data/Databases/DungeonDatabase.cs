@@ -20,6 +20,7 @@ namespace TCC.Data.Databases
             DungeonNames = new Dictionary<uint, string>();
             //TODO
             var defs = new Dictionary<uint, Tuple<short, DungeonTier>>();
+            if(!File.Exists("resources/data/dungeons-def.xml")) File.Copy("resources/data/dungeons-def-default.xml", "resources/data/dungeons-def.xml");
             var def = XDocument.Load("resources/data/dungeons-def.xml");
             foreach (var dg in def.Descendants().Where(x => x.Name == "Dungeon"))
             {

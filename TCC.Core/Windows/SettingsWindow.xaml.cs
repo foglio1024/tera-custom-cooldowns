@@ -82,7 +82,7 @@ namespace TCC.Windows
 
         private void ConnectToTwitch(object sender, RoutedEventArgs e)
         {
-            TwitchConnector.Instance.Init();
+            //TwitchConnector.Instance.Init();
         }
 
         private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
