@@ -233,6 +233,7 @@ namespace TCC
 
                     using (var client = new WebClient())
                     {
+                        client.Encoding = Encoding.UTF8;
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
