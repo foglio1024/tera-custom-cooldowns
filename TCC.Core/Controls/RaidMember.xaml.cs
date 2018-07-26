@@ -51,7 +51,7 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LaurelImage.Visibility = SettingsManager.ShowMembersLaurels ? Visibility.Visible : Visibility.Collapsed;
+                    LaurelImage.Visibility = SettingsManager.ShowMembersLaurels ? Visibility.Visible : Visibility.Hidden;
                 });
             }
             catch (Exception)
@@ -119,14 +119,14 @@ namespace TCC.Controls
         {
             Dispatcher.Invoke(() =>
             {
-                MpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpBar.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void SetHP()
         {
             Dispatcher.Invoke(() =>
             {
-                HpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpBar.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
