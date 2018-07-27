@@ -170,11 +170,21 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Rectangle Fill="{StaticResource HpColor}"
+                    <Rectangle 
                                Height="5" Width="Auto" 
                                Margin="0" HorizontalAlignment="Stretch"
                                Style="{StaticResource OnlineBoundVisibility}"
                                x:Name="HpBar">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="1 0">
+                                <GradientStop Offset=".2" Color="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}"></GradientStop>
+                                <GradientStop Offset="1" Color="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor2}}"></GradientStop>
+
+                                <!--<GradientStop Color="{StaticResource HpColor2Base}" Offset="0"></GradientStop>
+                            <GradientStop Color="{StaticResource HpColorBase}" Offset=".6"></GradientStop>-->
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <!--<SkewTransform AngleX="-45"></SkewTransform>-->
@@ -182,10 +192,17 @@
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Rectangle x:Name="MpBar" Fill="#66c6ff" 
+                    <Rectangle x:Name="MpBar" 
                                Grid.Row="1" Height="3" 
                                Margin="0 1 0 0" Width="Auto" HorizontalAlignment="Stretch" 
                                Style="{StaticResource OnlineBoundVisibility}">
+<Rectangle.Fill>
+    <LinearGradientBrush EndPoint="1 0">
+        <GradientStop Color="{StaticResource MpColor2Base}" Offset=".9"></GradientStop>
+        <GradientStop Color="{StaticResource MpColorBase}" Offset="0"></GradientStop>
+    </LinearGradientBrush>
+
+</Rectangle.Fill>
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <!--<SkewTransform AngleX="-45"></SkewTransform>-->
@@ -285,28 +302,26 @@
                     Margin="5"
                     />
             <Image  Opacity="1" x:Name="LaurelImage" 
-                    Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=true}" 
+                    Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr}" 
                     Margin="-4" 
                     RenderOptions.BitmapScalingMode="Linear" 
                     UseLayoutRounding="True" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Stretch"
                     Stretch="Uniform" >
-<Image.RenderTransform>
-    <TranslateTransform Y="2.2"></TranslateTransform>
-</Image.RenderTransform>
+                <Image.RenderTransform>
+                    <TranslateTransform Y="2.2"/>
+                </Image.RenderTransform>
             </Image>
-            <Path Fill="#cfff" Opacity="1"
-                  Margin="0 10"
+            <Path Fill="#eee" Opacity="1"
+                  Margin="0 12"
                   HorizontalAlignment="Center" VerticalAlignment="Stretch" Stretch="Uniform" 
                   Data="{Binding UserClass,Converter={StaticResource Converters.ClassToSvg}}"
+                  Effect="{StaticResource ClassIconGlow}" 
                   >
                 <Path.RenderTransform>
-                    <TranslateTransform Y="-2"></TranslateTransform>
+                    <TranslateTransform Y="0"></TranslateTransform>
                 </Path.RenderTransform>
-                <Path.Effect>
-                    <DropShadowEffect Color="#ff55ccff" BlurRadius="3" ShadowDepth="0"></DropShadowEffect>
-                </Path.Effect>
 
                 <Path.Style>
                     <Style>

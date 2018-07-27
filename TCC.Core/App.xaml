@@ -20,8 +20,15 @@
             </ResourceDictionary.MergedDictionaries>
             <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
             <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
+            <DropShadowEffect x:Key="ClassIconGlow" Color="#ff55ccff" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
 
             <Color x:Key="GreenColorBase">#00a561</Color>
+            <Color x:Key="HpColorBase">#e21224</Color>
+            <Color x:Key="HpColor2Base">#faa089</Color>
+            <Color x:Key="MpColorBase">#2347ee</Color>
+            <Color x:Key="MpColor2Base">#0ab8f6</Color>
+            <Color x:Key="HpDebuffColorBase">#9c04bd</Color>
+            <Color x:Key="HpDebuffColor2Base">#b24cc8</Color>
 
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
@@ -38,9 +45,12 @@
             <SolidColorBrush x:Key="FadedBorderColor" Color="#aa303035" Opacity="1"/>
             <SolidColorBrush x:Key="FadedDefaultBackgroundColor" Color="#a0101017" Opacity="1"/>
             <SolidColorBrush x:Key="TooltipColor" Color="#404040" Opacity=".9"/>
-            <SolidColorBrush x:Key="HpColor" Color="#ff5555"/>
-            <SolidColorBrush x:Key="MpColor" Color="#4499ff"/>
-            <SolidColorBrush x:Key="HpDebuffColor" Color="#b74be5"/>
+            <SolidColorBrush x:Key="HpColor" Color="{StaticResource HpColorBase}"/>
+            <SolidColorBrush x:Key="HpColor2" Color="{StaticResource HpColor2Base}"/>
+            <SolidColorBrush x:Key="MpColor" Color="{StaticResource MpColorBase}"/>
+            <SolidColorBrush x:Key="MpColor2" Color="{StaticResource MpColor2Base}"/>
+            <SolidColorBrush x:Key="HpDebuffColor" Color="{StaticResource HpDebuffColorBase}"/>
+            <SolidColorBrush x:Key="HpDebuffColor2" Color="{StaticResource HpDebuffColor2Base}"/>
 
             <SolidColorBrush x:Key="GoldColor" Color="#ffb033"/>
             <SolidColorBrush x:Key="SilverColor" Color="Silver"/>
@@ -115,6 +125,7 @@
 
             <RotateTransform x:Key="Rotate45" Angle="45"/>
             <SkewTransform x:Key="Skew45" AngleX="-45"/>
+            <SkewTransform x:Key="Skew45Inv" AngleX="45"/>
 
             <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
             <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
@@ -359,6 +370,7 @@
             <converters:MentionToColorConverter x:Key="Converters.MentionToColor"/>
             <converters:SentReceivedToAngleConverter x:Key="Converters.WhisperDirectionToAngle"/>
             <converters:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
+            <converters:HPbarColorConverter2 x:Key="Converters.DebuffStatusToHpColor2"/>
             <converters:ContractedToColWidthConverter x:Key="Converters.MessageContractedToColumnWidth"/>
             <converters:RowsToHeightConverter x:Key="Converters.RowsToHeight"/>
             <converters:CooldownWindowModeToTemplateConverter x:Key="Converters.CooldowWindowModeToTemplate"/>

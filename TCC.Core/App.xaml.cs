@@ -90,23 +90,23 @@ namespace TCC
             // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
             //var l = new List<User>();
-            var r = new Random();
-            for (uint i = 0; i < 3; i++)
-            {
-                var u = new User(GroupWindowViewModel.Instance.GetDispatcher())
-                {
-                    Name = i.ToString(),
-                    PlayerId = i,
-                    ServerId = i,
-                    EntityId = i,
-                    Online = true,
-                    Laurel = (Laurel)(r.Next(0,5)),
-                    HasAggro = i == 1,
-                    Alive = i != 0,
-                    UserClass = (Class)r.Next(0, 12)
-                };
-                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
-            }
+            //var r = new Random();
+            //for (uint i = 0; i < 3; i++)
+            //{
+            //    var u = new User(GroupWindowViewModel.Instance.GetDispatcher())
+            //    {
+            //        Name = i.ToString(),
+            //        PlayerId = i,
+            //        ServerId = i,
+            //        EntityId = i,
+            //        Online = true,
+            //        Laurel = (Laurel)(r.Next(0,5)),
+            //        HasAggro = i == 1,
+            //        Alive = i != 0,
+            //        UserClass = (Class)r.Next(0, 12)
+            //    };
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            //}
 
             //GroupWindowViewModel.Instance.SetRaid(true);
             //GroupWindowViewModel.Instance.SetNewLeader(10, "player");

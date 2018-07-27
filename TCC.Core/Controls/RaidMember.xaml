@@ -288,7 +288,7 @@
                     Margin="5"
                     />
             <Image  Opacity="1" x:Name="LaurelImage" 
-                    Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=true}" 
+                    Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr}" 
                     Margin="-4" 
                     RenderOptions.BitmapScalingMode="Linear" 
                     UseLayoutRounding="True" 

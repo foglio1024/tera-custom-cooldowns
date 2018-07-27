@@ -1141,6 +1141,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\kr_hpd_bar.png" />
+    <Resource Include="resources\images\kr_hp_bar.png" />
+    <Resource Include="resources\images\kr_mp_bar.png" />
+    <Resource Include="resources\images\char_window_bg.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr_big.png" />
     <Resource Include="resources\images\party_member_bar_bg.png" />
     <Resource Include="resources\images\party_member_hp_bg.png" />
     <Resource Include="resources\images\party_member_bg.png" />
