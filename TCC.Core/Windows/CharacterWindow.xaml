@@ -12,6 +12,9 @@
         Style="{StaticResource BaseWindowStyle}"
         MouseLeftButtonDown="Drag"
         >
+    <w:TccWidget.DataContext>
+        <vm:CharacterWindowViewModel/>
+    </w:TccWidget.DataContext>
     <w:TccWidget.Resources>
         <Style x:Key="HpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource Styles.DefaultText}">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -19,6 +22,14 @@
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush"                Value="{StaticResource KrBorderColor}"/>
+            <Setter Property="BorderThickness"            Value="2 1" />
+            <Setter Property="Height"                     Value="Auto"/>
+            <Setter Property="VerticalAlignment"          Value="Top"/>
+            <Setter Property="Background"                 Value="#b223"/>
+            <Setter Property="RenderTransformOrigin"      Value="0 0"/>
         </Style>
 
         <converters:LaurelImageConverter x:Key="LaurelConv"/>
@@ -29,7 +40,147 @@
         <converters:FactorFromValuesConverter x:Key="FactorFromValConv"/>
         <converters:ClassToStaminaLabelConverter x:Key="StaminaLabelConv"/>
     </w:TccWidget.Resources>
-    <w:TccWidget.DataContext>
+    <Grid>
+<Grid.RowDefinitions>
+    <RowDefinition></RowDefinition>
+    <RowDefinition></RowDefinition>
+</Grid.RowDefinitions>
+    <Grid Name="content" Grid.Row="1">
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
+                            ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
+        </Grid.LayoutTransform>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+                <!--HP-->
+            <Border RenderTransform="{StaticResource Skew45Inv}" Grid.Column="2"  Margin="-18 31 18 0" Padding="3 2">
+                <Grid x:Name="HpGrid">
+                    <Border VerticalAlignment="Top" BorderThickness="0"
+                        HorizontalAlignment="Right" Height="12" Margin="0">
+                        <FrameworkElement x:Name="HpGovernor" HorizontalAlignment="Stretch" Width="{Binding ElementName=HpGrid, Path=ActualWidth}">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="1"/>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
+
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1 0">
+                                <GradientStop Offset=".6" Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}"></GradientStop>
+                                <GradientStop Offset="1" Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor2}}"></GradientStop>
+
+                                <!--<GradientStop Color="{StaticResource HpColor2Base}" Offset="0"></GradientStop>
+                            <GradientStop Color="{StaticResource HpColorBase}" Offset=".6"></GradientStop>-->
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+            </Border>
+                <!--SH-->
+            <Border RenderTransform="{StaticResource Skew45Inv}" Grid.Column="2"  Margin="-33 16 33 0" Padding="3 2">
+                <Grid x:Name="ShGrid">
+                    <Border VerticalAlignment="Top" BorderThickness="0"
+                        HorizontalAlignment="Right" Height="8" Margin="0">
+                        <FrameworkElement x:Name="ShGovernor" HorizontalAlignment="Stretch" Width="{Binding ElementName=ShGrid, Path=ActualWidth}">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="1"/>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1 0">
+                                    <GradientStop Color="#00ff7f" Offset="0"></GradientStop>
+                                    <GradientStop Color="#16bf6a" Offset=".6"></GradientStop>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+            </Border>
+                <!--MP/RE-->
+            <Border Grid.Column="2" RenderTransform="{StaticResource Skew45}" Margin="0 50 0 0" Padding="3 2">
+                <Grid x:Name="MpReGrid">
+                    <StackPanel>
+                        <Border  VerticalAlignment="Top" BorderThickness="0"
+                        HorizontalAlignment="Left" Height="12" Margin="0"
+                                 BorderBrush="{StaticResource KrBorderColor}">
+                            <FrameworkElement x:Name="MpGovernor" HorizontalAlignment="Stretch" Width="{Binding ElementName=MpReGrid, Path=ActualWidth}">
+                                <FrameworkElement.LayoutTransform>
+                                    <ScaleTransform ScaleX="1"/>
+                                </FrameworkElement.LayoutTransform>
+                            </FrameworkElement>
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="1 0">
+                                    <GradientStop Color="{StaticResource MpColor2Base}" Offset=".9"></GradientStop>
+                                    <GradientStop Color="{StaticResource MpColorBase}" Offset="0"></GradientStop>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Border Background="#ddd" BorderBrush="#aaa" VerticalAlignment="Top" BorderThickness="0"
+                        HorizontalAlignment="Left" Height="3" Margin="0 3 0 0" 
+                                Visibility="{Binding Instance.Player.Class, Converter={StaticResource StaminaVisConv}}">
+                            <FrameworkElement x:Name="StGovernor" HorizontalAlignment="Stretch" Width="{Binding ElementName=MpReGrid, Path=ActualWidth}">
+                                <FrameworkElement.LayoutTransform>
+                                    <ScaleTransform ScaleX="{Binding Instance.Player.StFactor}"></ScaleTransform>
+                                </FrameworkElement.LayoutTransform>
+                            </FrameworkElement>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="-18 0 0 70" VerticalAlignment="Bottom">
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="Lv." Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Instance.Player.Name}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="16" FontFamily="{StaticResource Frutiger}"/>
+                </StackPanel>
+                <Grid Margin="0 0 0 51" Grid.Column="2" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.HpFactor, StringFormat=0.# %}" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="-50 0 0 0" HorizontalAlignment="Center" Grid.Column="1">
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.TotalHP}" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="2 0 2 0" Text="/" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.MaxHP}" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                </StackPanel>
+                    </Grid>
+                <StackPanel Orientation="Horizontal" Margin="-10 0 0 32" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2">
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.CurrentMP}" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="2 0 2 0" Text="/" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.MaxMP}" 
+                                         Fill="#ccc" StrokeThickness="3" Stroke="#5000" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                </StackPanel>
+            <Grid Grid.Column="1" UseLayoutRounding="False" Width="100" Height="100" Margin="0 0">
+                <Image Source="../resources/images/char_window_bg.png" Stretch="Uniform"/>
+                <Image Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr.big}"/>
+                <Path Data="{Binding Instance.Player.Class, Converter={StaticResource Converters.ClassToSvg}}" 
+                      HorizontalAlignment="Center" 
+                      Fill="#eee" 
+                      Margin="34" 
+                      Width="Auto"
+                      >
+                    <Path.Effect>
+                        <DropShadowEffect ShadowDepth="0" Color="{StaticResource MpColor2Base}"></DropShadowEffect>
+                    </Path.Effect>
+                    <Path.RenderTransform>
+                        <TranslateTransform Y="0"/>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Grid>
+    </Grid>
+        <c:WindowButtons WindowName="Character window" x:Name="Buttons" 
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
+    </Grid>
+    <!--<w:TccWidget.DataContext>
         <vm:CharacterWindowViewModel/>
     </w:TccWidget.DataContext>
     <Grid>
@@ -216,5 +367,5 @@
             </Grid>
         </Grid>
         <c:WindowButtons WindowName="Character window" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
-    </Grid>
+    </Grid>-->
 </w:TccWidget>
