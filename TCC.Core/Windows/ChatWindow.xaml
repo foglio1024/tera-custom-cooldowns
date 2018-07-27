@@ -22,7 +22,7 @@
              SizeToContent="Manual"
              Loaded="OnLoaded">
     <WindowChrome.WindowChrome>
-        <WindowChrome x:Name="chrome" CaptionHeight="0" ResizeBorderThickness="5,5,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
+        <WindowChrome x:Name="chrome" CaptionHeight="0" ResizeBorderThickness="5,10,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
     <w:TccWidget.DataContext>
         <vm:ChatViewModel />
