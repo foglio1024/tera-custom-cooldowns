@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -16,7 +18,7 @@ namespace TCC.Controls.ClassBars
     /// <summary>
     /// Logica di interazione per WarriorBar.xaml
     /// </summary>
-    public partial class WarriorBar
+    public partial class WarriorBar : INotifyPropertyChanged
     {
         public WarriorBar()
         {
@@ -28,6 +30,21 @@ namespace TCC.Controls.ClassBars
         private DoubleAnimation _tc;
         private DoubleAnimation _tcCd;
         private DoubleAnimation _anCd;
+
+
+
+        public bool WarningStance
+        {
+            get => _warningStance;
+            set
+            {
+                if (_warningStance == value) return;
+                _warningStance = value;
+                NPC();
+            }
+        }
+
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _dc = DataContext as WarriorBarManager;
@@ -41,6 +58,15 @@ namespace TCC.Controls.ClassBars
             _tcCd = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
             _anCd = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(0));
             _anCd.Completed += (o, args) => _cooldown = false;
+            SessionManager.CurrentPlayer.PropertyChanged += CheckStanceWarning;
+            _dc.Stance.PropertyChanged += CheckStanceWarning;
+        }
+
+        private void CheckStanceWarning(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != nameof(Player.IsInCombat) &&
+                e.PropertyName != nameof(StanceTracker<WarriorStance>.CurrentStance)) return;
+            WarningStance = _dc.Stance.CurrentStance == WarriorStance.None && SessionManager.CurrentPlayer.IsInCombat;
         }
 
         private void CooldownTraverseCut(uint cd)
@@ -63,26 +89,28 @@ namespace TCC.Controls.ClassBars
         private bool _cooldown;
         private void CooldownTempestAura(uint cd)
         {
-            Dispatcher.Invoke(() =>
-            {
-                _cooldown = true;
-                _anCd.Duration = TimeSpan.FromMilliseconds(cd);
-                TaGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _anCd);
-            });
+            //Dispatcher.Invoke(() =>
+            //{
+            //    _cooldown = true;
+            //    _anCd.Duration = TimeSpan.FromMilliseconds(cd);
+            //    TaGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _anCd);
+            //});
         }
 
         private void AnimateTempestAura(object sender, PropertyChangedEventArgs e)
         {
 
-            if (e.PropertyName == nameof(StatTracker.Factor))
-            {
-                if (_cooldown) return;
-                _an.To = _dc.TempestAura.Factor;
-                TaGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
-            }
+            //if (e.PropertyName == nameof(StatTracker.Factor))
+            //{
+            //    if (_cooldown) return;
+            //    _an.To = _dc.TempestAura.Factor;
+            //    TaGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
+            //}
         }
 
         private bool _tcAnimating;
+        private bool _warningStance;
+
         private void AnimateTraverseCut(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(StatTracker.Factor))
@@ -93,6 +121,13 @@ namespace TCC.Controls.ClassBars
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void NPC([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
     public class WarriorStanceToColorConverter : IValueConverter
     {

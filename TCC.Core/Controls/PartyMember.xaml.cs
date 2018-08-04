@@ -37,7 +37,10 @@ namespace TCC.Controls
         {
             Dispatcher.Invoke(() => {
                 if (!(DataContext is User user)) return;
-                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
+                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : 
+                    Visibility.Collapsed;
+                AwakenBorder.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : 
+                    Visibility.Collapsed;
             });
         }
 

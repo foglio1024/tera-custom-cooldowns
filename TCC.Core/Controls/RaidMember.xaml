@@ -340,7 +340,7 @@
             </Path>
         </Grid>
 
-        <!--Leader/Awaken icon -->
+        <!--Leader/Awaken icon    TODO: LAYOUT-->
         <StackPanel HorizontalAlignment="Right" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top"
                     Margin="0 5 0 0">
             <!--Leader icon -->

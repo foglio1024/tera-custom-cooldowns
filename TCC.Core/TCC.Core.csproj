@@ -99,6 +99,9 @@
     <Compile Include="ClassSpecific\Slayer.cs" />
     <Compile Include="ClassSpecific\Sorcerer.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\RhombBuffCooldownControl.xaml.cs">
+      <DependentUpon>RhombBuffCooldownControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\ChannelSetting.xaml.cs">
       <DependentUpon>ChannelSetting.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,9 @@
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OutlineText.cs" />
+    <Compile Include="Controls\RhombFixedSkillCooldown.xaml.cs">
+      <DependentUpon>RhombFixedSkillCooldown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Ripple.xaml.cs">
       <DependentUpon>Ripple.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,9 @@
     </Compile>
     <Compile Include="Controls\TimeSeparator.xaml.cs">
       <DependentUpon>TimeSeparator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
@@ -775,6 +784,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\RhombBuffCooldownControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ChatControls\ApplyBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -907,6 +920,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\RhombFixedSkillCooldown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Ripple.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -992,6 +1009,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimeSeparator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -317,6 +317,8 @@ namespace TCC.Data
         public event Action DeleteEvent;
         public void Delete()
         {
+            foreach (var buff in _buffs) buff.Dispose();
+
             DeleteEvent?.Invoke();
         }
     }

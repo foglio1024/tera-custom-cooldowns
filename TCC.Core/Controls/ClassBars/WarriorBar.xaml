@@ -9,8 +9,16 @@
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:WarriorBarManager}">
     <UserControl.Resources>
         <classBars:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
+        <QuadraticEase x:Key="QuadraticEase" />
+        <Storyboard x:Key="Pulse" RepeatBehavior="Forever" >
+            <DoubleAnimation  From=".9" To="1" Duration="0:0:0.15" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+            <DoubleAnimation  From=".9" To="1" Duration="0:0:0.15" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+            <DoubleAnimation  From="1" To=".9" Duration="0:0:0.55" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.15"/>
+            <DoubleAnimation  From="1" To=".9" Duration="0:0:0.55" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.15"/>
+        </Storyboard>
+
     </UserControl.Resources>
-    <Grid Width="Auto" Name="Root" ClipToBounds="False" Margin="5" >
+    <Grid Width="Auto" Name="Root" ClipToBounds="False" Margin="10" >
         <Grid HorizontalAlignment="Center" Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -26,14 +34,17 @@
                     Background="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"
                     >
             </Border>-->
-            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0 0 0 0" BorderBrush="#9000" Opacity=".7" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
+            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0 0 0 0" BorderBrush="#9000" 
+                    Opacity=".7" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
                     Style="{StaticResource Styles.DefaultBorder}" Effect="{x:Null}" x:Name="TaBackgroundBorder"
-                    CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0 35 28 0" 
+                    CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0 45 28 0" 
+                    Visibility="Collapsed"
                     />
             <!--TA-->
-            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1" 
+            <!--<Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1" 
                     Style="{StaticResource Styles.DefaultBorder}"  Background="DodgerBlue" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
                     CornerRadius="{Binding ElementName=TaBackgroundBorder, Path=CornerRadius}" HorizontalAlignment="Left" Margin="{Binding ElementName=TaBackgroundBorder, Path=Margin}"
+                    Visibility="Collapsed"
                     >
                 <FrameworkElement x:Name="TaGovernor" Width="{Binding ElementName=TaBackgroundBorder, Path=ActualWidth}" >
                     <FrameworkElement.LayoutTransform>
@@ -41,42 +52,59 @@
                     </FrameworkElement.LayoutTransform>
                 </FrameworkElement>
             </Border>
-            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1"
-                    Style="{StaticResource Styles.DefaultBorder}" Effect="{x:Null}" x:Name="TcBackgroundBorder"
-                    CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0,25,25,0"
+            <Border Grid.RowSpan="2" Grid.Column="1" Height="5" 
+                    BorderThickness="0" Opacity="1"
+                    Style="{StaticResource Styles.DefaultBorder}"
+                    Effect="{x:Null}" x:Name="TcBackgroundBorder"
+                    CornerRadius="0,0,0,0" 
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,35,25,0"
+                    Visibility="Collapsed"
                     >
                 <Border.RenderTransform>
                     <SkewTransform AngleX="-30"></SkewTransform>
                 </Border.RenderTransform>
-            </Border>
+            </Border>-->
             <!--TC-->
-            <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0" Opacity="1"
-                    Style="{StaticResource Styles.DefaultBorder}"  Background="#fa6c" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
-                    CornerRadius="{Binding ElementName=TcBackgroundBorder, Path=CornerRadius}" HorizontalAlignment="Left" Margin="{Binding ElementName=TcBackgroundBorder, Path=Margin}"
+            <!--<Border Grid.RowSpan="2" Grid.Column="1" Height="5" 
+                    BorderThickness="0" Opacity="1"
+                    Style="{StaticResource Styles.DefaultBorder}"
+                    Background="#fa6c" 
+                    RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
+                    CornerRadius="{Binding ElementName=TcBackgroundBorder, Path=CornerRadius}" HorizontalAlignment="Left" 
+                    Margin="{Binding ElementName=TcBackgroundBorder, Path=Margin}"
+                    Visibility="Collapsed"
                     >
                 <FrameworkElement x:Name="TcGovernor" Width="{Binding ElementName=TcBackgroundBorder, Path=ActualWidth}" >
                     <FrameworkElement.LayoutTransform>
                         <ScaleTransform ScaleX="0"/>
                     </FrameworkElement.LayoutTransform>
                 </FrameworkElement>
+            </Border>-->
+            <Border  Style="{StaticResource Styles.DefaultBorder}"
+                   Grid.Column="1"
+                   Grid.Row="1"
+                    Height="18"
+
+                    Margin="6 0 0 0"
+                BorderThickness="2 0 2 1"
+                RenderTransformOrigin=".5 .5"
+                    VerticalAlignment="Top"
+                    RenderTransform="{StaticResource Skew45}"
+                     Effect="{x:Null}"
+                     >
             </Border>
-            <Border Style="{StaticResource Styles.DefaultBorder}"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Grid.RowSpan="2"
-                    Height="30"
-                    Margin="20,-10,15,0"
-                    VerticalAlignment="Center"
-                    Opacity="1"
-                    Visibility="Visible"
-                    >
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="2" BlurRadius="2" Opacity=".4"></DropShadowEffect>
-                </Border.Effect>
-                <Border.RenderTransform>
-                    <SkewTransform AngleX="30"/>
-                </Border.RenderTransform>
+            <Border  Style="{StaticResource Styles.DefaultBorder}"
+                   Grid.Column="1"
+                   Grid.Row="0"
+                    Height="18"
+                    Margin="6 0 0 0"
+                BorderThickness="2 1 2 0"
+                RenderTransformOrigin=".5 .5"
+                    VerticalAlignment="Bottom"
+                     Effect="{x:Null}"
+
+                    RenderTransform="{StaticResource Skew45Inv}">
             </Border>
             <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
                     CornerRadius="0" Margin="2" Opacity="1"  BorderThickness="4" RenderTransformOrigin=".5 .5"
@@ -86,19 +114,120 @@
                     <RotateTransform Angle="45"/>
                 </Border.RenderTransform>
             </Border>
+            <Grid Grid.RowSpan="2" 
+                  Margin="2" Opacity="0"
+                  RenderTransformOrigin=".5 .5">
+                <Grid.RenderTransform >
+                    <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+                </Grid.RenderTransform>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=classBars:WarriorBar}, Path=WarningStance}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" 
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="0:0:0.2"/>
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="StartPulsing"/>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" 
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="0:0:0.2"/>
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </Grid.Style>
+                <Border  BorderThickness="4" RenderTransformOrigin=".5 .5"
+                    BorderBrush="White" Background="Transparent" ToolTip="Missing stance!">
+                    <Border.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10"></DropShadowEffect>
+                    </Border.Effect>
+                    <Border.RenderTransform>
+                        <RotateTransform Angle="45"/>
+                    </Border.RenderTransform>
+
+                </Border>
+            </Grid>
             <!--Edge-->
             <local:EdgeControl x:Name="EdgeBar"
                                DataContext="{Binding EdgeCounter}"
                                Grid.Column="1"
                                Grid.Row="0" Grid.RowSpan="2"
                                Width="270"
-                               Margin="-2,-10,10,0"
-                               VerticalAlignment="Center" Visibility="Visible"/>
+                               Margin="10 0 8 0"
+                               VerticalAlignment="Center" 
+                               Visibility="Visible"
+                               HorizontalAlignment="Left"/>
             <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ClipToBounds="False">
                 <!--Gamble-->
-                <local:BuffCooldownControl DataContext="{Binding DeadlyGamble}" ClipToBounds="False"
+                <local:RhombBuffCooldownControl DataContext="{Binding DeadlyGamble}" ClipToBounds="False"
                                            Margin="0" Padding="0"
                                            Grid.RowSpan="10" />
+            </Grid>
+            <Grid UseLayoutRounding="True"
+                Grid.Row="1"
+                Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid HorizontalAlignment="Left">
+                    <Grid.RenderTransform>
+                        <TranslateTransform X="-12" Y="20"></TranslateTransform>
+                    </Grid.RenderTransform>
+                    <Border BorderThickness="2 1" BorderBrush="{StaticResource KrBorderColor}"
+                        Background="{StaticResource KrBgColor}"
+                        RenderTransform="{StaticResource Skew45}"
+                         Grid.Column="0" RenderTransformOrigin=".5 .5" VerticalAlignment="Top"
+                        Height="15" Width="28" >
+                    </Border>
+                    <TextBlock Text="{Binding TraverseCut.Val}" FontWeight="Bold"
+                               FontStyle="Italic" TextAlignment="Center"
+                               VerticalAlignment="Top" 
+                               Foreground="#9fff" HorizontalAlignment="Center" Margin="0 -1 0 0"></TextBlock>
+                </Grid>
+                <Border BorderThickness="2 1 2 1" 
+                        BorderBrush="{StaticResource KrBorderColor}"
+                        Background="{StaticResource KrBgColor}"
+                        Height="8" Grid.Column="1"
+                        Margin="0 0 10 0" x:Name="TcBorder"
+                        Width="240"
+                        HorizontalAlignment="Left">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <StaticResource ResourceKey="Skew45"/>
+                            <TranslateTransform Y="6" X="-1"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <Border Height="6" 
+                    BorderThickness="0" Opacity="1"
+                    Style="{StaticResource Styles.DefaultBorder}"
+                    Background="#fa6c" HorizontalAlignment="Left" 
+
+                    >
+                <FrameworkElement x:Name="TcGovernor" Width="{Binding ElementName=TcBorder, Path=ActualWidth}" >
+                    <FrameworkElement.LayoutTransform>
+                        <ScaleTransform ScaleX="0"/>
+                    </FrameworkElement.LayoutTransform>
+                </FrameworkElement>
+            </Border>
+
+                </Border>
             </Grid>
             <!--<Grid Grid.RowSpan="2" Margin="-5">
                 <Grid.Resources>

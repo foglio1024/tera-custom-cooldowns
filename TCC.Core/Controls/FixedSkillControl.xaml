@@ -7,11 +7,9 @@
              mc:Ignorable="d" Loaded="Control_Loaded"
              ClipToBounds="False" Background="Transparent"
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData  FixedSkillCooldown}">
-
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
-
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
         <Grid ClipToBounds="False">
             <Ellipse Width="51" Height="51" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">

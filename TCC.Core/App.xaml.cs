@@ -80,7 +80,8 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
-            //ClassWindowViewModel.Instance.CurrentClass = Class.Warrior;
+            ClassWindowViewModel.Instance.CurrentClass = Class.Warrior;
+                //Task.Delay(1000).ContinueWith(t => (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Buff.Start(10000));
             //WindowManager.LfgListWindow.ShowWindow();
             // var l = new Listing();
             // l.LeaderId = 10;

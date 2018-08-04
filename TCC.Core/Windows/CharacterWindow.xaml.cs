@@ -63,6 +63,13 @@ namespace TCC.Windows
                 _st.To = (sender as Player).StFactor;
                 StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
             }
+            else if (e.PropertyName == nameof(Player.ShieldFactor))
+            {
+                var _sh = new DoubleAnimation {Duration = DefaultDuration, EasingFunction = DefaultEasing};
+                _sh.From = (ShGovernor.LayoutTransform as ScaleTransform).ScaleX;
+                _sh.To = (sender as Player).ShieldFactor;
+                ShGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _sh);
+            }
         }
     }
 }

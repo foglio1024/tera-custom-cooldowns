@@ -23,7 +23,7 @@
             <DropShadowEffect x:Key="ClassIconGlow" Color="#ff55ccff" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
 
             <Color x:Key="GreenColorBase">#00a561</Color>
-            <Color x:Key="HpColorBase">#e21224</Color>
+            <Color x:Key="HpColorBase">#ff3333</Color>
             <Color x:Key="HpColor2Base">#faa089</Color>
             <Color x:Key="MpColorBase">#2347ee</Color>
             <Color x:Key="MpColor2Base">#0ab8f6</Color>
@@ -41,7 +41,7 @@
             <SolidColorBrush x:Key="MarksColor" Color="#aad"/>
             <SolidColorBrush x:Key="GuardianColor" Color="#e5442b"/>
 
-            <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#222228" Opacity=".7"/>
+            <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#222228" Opacity=".9"/>
             <SolidColorBrush x:Key="FadedBorderColor" Color="#aa303035" Opacity="1"/>
             <SolidColorBrush x:Key="FadedDefaultBackgroundColor" Color="#a0101017" Opacity="1"/>
             <SolidColorBrush x:Key="TooltipColor" Color="#404040" Opacity=".9"/>
@@ -126,7 +126,10 @@
             <RotateTransform x:Key="Rotate45" Angle="45"/>
             <SkewTransform x:Key="Skew45" AngleX="-45"/>
             <SkewTransform x:Key="Skew45Inv" AngleX="45"/>
-
+            <QuadraticEase x:Key="QuadraticEase"/>
+            <RotateTransform x:Key="DefaultRotateTransform"/>
+            <TranslateTransform x:Key="DefaultTranslateTransform"/>
+            <ScaleTransform x:Key="DefaultScaleTransform"/>
             <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
             <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
             <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
@@ -726,12 +729,26 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
+                                    <Rectangle Fill="#aad5ff" 
+                                               Margin="1"
+                                               VerticalAlignment="Bottom"
+                                               Height="2"
+                                               Opacity="0"
+                                               RadiusX="1"
+                                               RadiusY="1"
+                                               x:Name="AttentionRect"
+                                               HorizontalAlignment="Stretch"
+                                               RenderTransformOrigin=".5 .5"
+                                               RenderTransform="{StaticResource DefaultScaleTransform}"
+
+                                               >
+                                    </Rectangle>
+
+                                    <!--<Grid HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
                                               Visibility="{Binding Content.Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                                                 Margin="0" Grid.Column="1">
                                         <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
-                                        <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
-                                    </Grid>
+                                    </Grid>-->
                                     <Grid Grid.Column="0" Background="Transparent">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -795,6 +812,28 @@
                                 </Grid>
                             </Grid>
                             <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Content.Attention}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard x:Name="WarnAttention">
+                                            <Storyboard RepeatBehavior="Forever" >
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 Storyboard.TargetName="AttentionRect"
+                                                                 From="1"
+                                                                 To="0"
+                                                                 EasingFunction="{StaticResource QuadraticEase}"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 Storyboard.TargetName="AttentionRect"
+                                                                 From="0"
+                                                                 To="1"
+                                                                 EasingFunction="{StaticResource QuadraticEase}"/>
+
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="WarnAttention"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
                                 <Trigger Property="dragablz:TabablzControl.IsWrappingTabItem" Value="True">
                                     <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                                     <Setter TargetName="contentPresenter" Property="Content"

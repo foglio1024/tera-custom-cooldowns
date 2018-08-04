@@ -387,8 +387,7 @@
                 <DropShadowEffect ShadowDepth="2" Opacity=".7"></DropShadowEffect>
             </Grid.Effect>
         </Grid>
-            <Grid  Width="14" Height="14" Margin="7 0 0 0"
-              Opacity="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}"
+        <Grid  Width="14" Height="14" Margin="7 0 0 0"
               HorizontalAlignment="Right" VerticalAlignment="Center"
               Grid.Column="1"
               >
@@ -396,7 +395,8 @@
             <Border Background="{StaticResource KrBgColor}" 
                     BorderBrush="{StaticResource KrBorderColor}"
                     BorderThickness="1"
-                    RenderTransformOrigin=".5 .5">
+                    RenderTransformOrigin=".5 .5"
+                    x:Name="AwakenBorder">
                 <Border.RenderTransform>
                     <RotateTransform Angle="45"/>
                 </Border.RenderTransform>
