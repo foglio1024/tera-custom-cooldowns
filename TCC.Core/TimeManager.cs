@@ -209,14 +209,16 @@ namespace TCC
             }
         }
 
-        public void SendWebhookMessageOld()
+        public void SendWebhookMessageOld(bool testMessage = false)
         {
             if (!string.IsNullOrEmpty(SettingsManager.Webhook))
             {
                 var sb = new StringBuilder("{");
                 sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
-                sb.Append("\""); sb.Append(SettingsManager.WebhookMessage); sb.Append("\"");
+                sb.Append("\""); sb.Append(SettingsManager.WebhookMessage);
+                if (testMessage) sb.Append(" (Test message)");
+                sb.Append("\"");
                 sb.Append(",");
                 sb.Append("\""); sb.Append("username"); sb.Append("\"");
                 sb.Append(":");
