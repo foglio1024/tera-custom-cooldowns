@@ -3,10 +3,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.TeraCommon;
 using TCC.ViewModels;
 
 namespace TCC
@@ -43,13 +45,35 @@ namespace TCC
                     var data = Encoding.UTF8.GetString(buffer.Take(size).ToArray());
                     if (data.Contains(":tcc"))
                     {
-                        PacketProcessor.HandleGpkData(data);
+                        PacketProcessor.HandleGpkData(data.Substring(data.IndexOf(":tcc")));
                     }
                     else
                     {
-                        var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
-                        msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
-                        PacketProcessor.HandleCommandOutput(msg);
+                        var split = data.Split(new[] { "\t::\t" }, StringSplitOptions.RemoveEmptyEntries);
+
+                        var type = split[0];
+                        if (type == "output")
+                        {
+                            Console.WriteLine($"[Proxy] received output: {split[3]}");
+                            var channel = uint.Parse(split[1]);
+                            var author = split[2];
+                            var message = split[3];
+
+                            PacketProcessor.HandleProxyOutput(author, channel, AddFontTagsIfMissing(message));
+
+                            ////TODO: parse author
+                            //var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
+                            //msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
+                            //PacketProcessor.HandleCommandOutput(msg);
+                        }
+                        else if (type == "packet")
+                        {
+                            Console.WriteLine($"[Proxy] received packet: {split[2]}");
+                            var dir = bool.Parse(split[1])
+                                ? MessageDirection.ServerToClient
+                                : MessageDirection.ClientToServer;
+                            PacketProcessor.EnqueueMessageFromProxy(dir, split[2]);
+                        }
                     }
                 }
             }
@@ -59,6 +83,28 @@ namespace TCC
             }
         }
 
+        private static string AddFontTagsIfMissing(string msg)
+        {
+            var sb = new StringBuilder();
+            if (msg.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase)) return msg;
+            if (msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase) > 0)
+            {
+                sb.Append("<font>");
+                sb.Append(msg.Substring(0, msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+                sb.Append("</font>");
+                sb.Append(msg.Substring(msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+            }
+            else
+            {
+                sb.Append("<font>");
+                sb.Append(msg);
+                sb.Append("</font>");
+            }
+            var openCount = Regex.Matches(msg, "<font").Count;
+            var closeCount = Regex.Matches(msg, "</font>").Count;
+            if (openCount > closeCount) sb.Append("</font>");
+            return sb.ToString();
+        }
         public static bool IsConnected => _client.Connected;
 
         public static void ConnectToProxy()
@@ -88,7 +134,7 @@ namespace TCC
                     {
                         Debug.WriteLine("Maximum retries exceeded...");
                         ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-                        if(SettingsManager.ChatEnabled) WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
+                        if (SettingsManager.ChatEnabled) WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
                         _retries = 2;
                         return;
                     }

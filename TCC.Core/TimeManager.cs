@@ -137,18 +137,18 @@ namespace TCC
 
         private async Task<long> DownloadGuildBamTimestamp()
         {
-            var sb = new StringBuilder(BaseUrl);
-            sb.Append("?srv=");
-            sb.Append(PacketProcessor.Server.ServerId);
-            sb.Append("&reg=");
-            sb.Append(CurrentRegion);
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            var c = new WebClient();
-            c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
             try
             {
+                var sb = new StringBuilder(BaseUrl);
+                sb.Append("?srv=");
+                sb.Append(PacketProcessor.Server.ServerId);
+                sb.Append("&reg=");
+                sb.Append(CurrentRegion);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                var c = new WebClient();
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 var data = await c.DownloadStringTaskAsync(sb.ToString());
                 return long.Parse(data);
 

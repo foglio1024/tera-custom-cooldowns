@@ -16,14 +16,21 @@ using TCC.Windows;
 
 namespace TCC.ViewModels
 {
+    public struct TempPrivateMessage
+    {
+        public uint Channel { get; set; }
+        public string Author { get; set; }
+        public string Message { get; set; }
+    }
     public class ChatWindowManager : TccWindowViewModel
     {
         private readonly DispatcherTimer _hideTimer;
         private static ChatWindowManager _instance;
         private bool _isChatVisible;
         private readonly ConcurrentQueue<ChatMessage> _queue;
-
+        private readonly List<TempPrivateMessage> _privateMessagesCache;
         public event Action<ChatMessage> NewMessage;
+        public event Action<int> PrivateChannelJoined;
 
         //internal void CloseTooltip()
         //{
@@ -67,7 +74,7 @@ namespace TCC.ViewModels
         {
             ChatWindows.ToList().ForEach(w =>
             {
-                if(w.VM != null) w.VM.Paused = v;
+                if (w.VM != null) w.VM.Paused = v;
             });
         }
 
@@ -94,6 +101,7 @@ namespace TCC.ViewModels
             //_scale = SettingsManager.ChatWindowSettings.Scale; TODO
             ChatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
             _queue = new ConcurrentQueue<ChatMessage>();
+            _privateMessagesCache = new List<TempPrivateMessage>();
             LFGs = new SynchronizedObservableCollection<LFG>(_dispatcher);
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>();
             _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(15) };
@@ -107,13 +115,30 @@ namespace TCC.ViewModels
             //
             BlockedUsers = new List<string>();
             Friends = new List<SimpleUser>();
-            PrivateChannels[7] = new PrivateChatChannel(uint.MaxValue - 1, "Proxy", 7);
+            //PrivateChannels[6] = new PrivateChatChannel(uint.MaxValue - 3, "Astral", 6);
+            //PrivateChannels[7] = new PrivateChatChannel(uint.MaxValue - 1, "Proxy", 7);
             ChatWindows.CollectionChanged += ChatWindows_CollectionChanged;
             //TODO: create windows based on settings
+            PrivateChannelJoined += OnPrivateChannelJoined;
 
         }
 
-        private void ChatWindows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OnPrivateChannelJoined(int index)
+        {
+            Console.WriteLine($"Joined channel {PrivateChannels[index].Name}");
+            var messagesToAdd = _privateMessagesCache.Where(x => x.Channel == PrivateChannels[index].Id).ToList();
+            messagesToAdd.ForEach(x =>
+            {
+                Console.WriteLine($"Flushing {x.Channel}|{x.Message} to main list");
+                AddChatMessage(new ChatMessage(
+                    (ChatChannel)index + 11, 
+                    x.Author == "undefined" ? "System" : x.Author,
+                    x.Message));
+            });
+            messagesToAdd.ForEach(x => _privateMessagesCache.Remove(x));
+        }
+
+        private void ChatWindows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
@@ -162,36 +187,6 @@ namespace TCC.ViewModels
         {
             if (!SettingsManager.ChatEnabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
-            //var vch = VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel);
-            //if (vch == null)
-            //{
-            //    try
-            //    {
-            //        var sb = new StringBuilder();
-            //        sb.Append("TIME: ");
-            //        sb.Append(DateTime.UtcNow);
-            //        sb.Append("\n");
-            //        sb.Append("FROM: ");
-            //        sb.Append(chatMessage.Author);
-            //        sb.Append("\n");
-            //        sb.Append("CHANNEL: ");
-            //        sb.Append(chatMessage.Channel);
-            //        sb.Append("\n");
-            //        sb.Append("TEXT: ");
-            //        sb.Append(chatMessage.RawMessage);
-
-            //        File.WriteAllText("chat-message-error.txt", sb.ToString());
-            //        var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
-            //        AddChatMessage(err);
-            //    }
-            //    catch
-            //    {
-            //        // ignored
-            //    }
-
-            //    return;
-            //}
-            //if (!vch.Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
                 for (var i = 0; i < ChatMessages.Count - 1; i++)
@@ -213,9 +208,12 @@ namespace TCC.ViewModels
 
             ChatMessage.SplitSimplePieces(chatMessage);
 
-            if (ChatWindows.Any(x => !x.IsPaused))
+            if (ChatWindows.All(x => !x.IsPaused))
             {
-                ChatMessages.Insert(0, chatMessage);
+
+                    Console.WriteLine($"Adding {chatMessage.Channel}|{chatMessage.RawMessage} to main list");
+                    ChatMessages.Insert(0, chatMessage);
+                
             }
             else _queue.Enqueue(chatMessage);
 
@@ -244,16 +242,16 @@ namespace TCC.ViewModels
             if (ChatWindows.Count == 0)
             {
                 var w = new ChatWindow(
-                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1,false, true, false)
+                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false)
                     );
                 SettingsManager.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 var m = new ChatViewModel();
                 w.DataContext = m;
                 ChatWindows.Add(w);
                 m.LoadTabs();
-                if(SettingsManager.ChatEnabled) w.Show();
+                if (SettingsManager.ChatEnabled) w.Show();
             }
-             
+
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{
             //    if (WindowManager.IsTccVisible)
@@ -335,6 +333,11 @@ namespace TCC.ViewModels
 
         }
 
+        public void JoinPrivateChannel(uint id, int index, string name)
+        {
+            ChatWindowManager.Instance.PrivateChannels[index] = new PrivateChatChannel(id, name, index);
+            PrivateChannelJoined?.Invoke(index);
+        }
         private bool Pass(ChatMessage current, ChatMessage old)
         {
             if (current.Author == SessionManager.CurrentPlayer.Name) return true;
@@ -372,11 +375,6 @@ namespace TCC.ViewModels
             });
         }
 
-        //internal void OpenTooltip()
-        //{
-        //    ChatWindows[0].OpenTooltip();
-        //}
-
         public void TempShow()
         {
             foreach (var chatWindow in ChatWindows)
@@ -385,10 +383,11 @@ namespace TCC.ViewModels
             }
         }
 
-        //public void SetMgButtonVis()
-        //{
-        //    if(ChatWindows.Count > 0) ChatWindows[0].SetMgButtonVis();
-        //}
+        internal void CachePrivateMessage(uint channel, string author, string message)
+        {
+            _privateMessagesCache.Add(new TempPrivateMessage(){Channel = channel, Author = author, Message = message});
+        }
+
     }
 
     public class ChatTabClient : IInterTabClient

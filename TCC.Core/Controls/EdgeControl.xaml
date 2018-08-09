@@ -8,9 +8,8 @@
              >
     <UserControl.Resources>
         <Style x:Key="Cont" TargetType="UniformGrid">
-            <Setter Property="Margin" Value="6,0"/>
+            <Setter Property="Margin" Value="0 0"/>
         </Style>
-        <SkewTransform AngleX="30" x:Key="Transform"></SkewTransform>
 
     </UserControl.Resources>
     <Grid Margin="0" x:Name="Root" Width="Auto">
@@ -20,18 +19,35 @@
                 CornerRadius="0,13,0,0" 
                 x:Name="BaseBorder" >
         </Border>
+        <Grid x:Name="MaxBorder" Margin="2 -2 -6 -2" Opacity="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
         <Border Width="Auto"
-                Height="16"
+                Height="Auto"
                 CornerRadius="0"
-                x:Name="MaxBorder"
                 Background="Red"
-                Margin="11 0"
-                Opacity="0"
-                RenderTransform="{StaticResource Transform}">
+                Opacity="1"
+                RenderTransform="{StaticResource Skew45Inv}"
+                RenderTransformOrigin=".5 .5">
             <Border.Effect>
                 <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="20" />
             </Border.Effect>
         </Border>
+        <Border Width="Auto"
+                Height="Auto"
+                Grid.Row="1"
+                CornerRadius="0"
+                Background="Red"
+                Opacity="1"
+                RenderTransform="{StaticResource Skew45}"
+                RenderTransformOrigin=".5 .5">
+            <Border.Effect>
+                <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="20" />
+            </Border.Effect>
+        </Border>
+        </Grid>
         <UniformGrid Width="Auto" 
                      Height="Auto" 
                      Rows="1" 
@@ -39,23 +55,28 @@
                      Opacity="1" 
                      Style="{StaticResource Cont}">
             <UniformGrid.Resources>
-                <Style TargetType="Rectangle">
-                    <Setter Property="Fill" Value="#1fff"></Setter>
-                    <Setter Property="Height" Value="16"></Setter>
-                    <Setter Property="Width" Value="16"></Setter>
-                    <Setter Property="RenderTransform" Value="{StaticResource Transform}"></Setter>
+                <Style TargetType="Path">
+                    <Setter Property="Fill" Value="{StaticResource KrBgColor}"></Setter>
+                    <Setter Property="Stroke" Value="{StaticResource KrBorderColor}"></Setter>
+                    <Setter Property="StrokeThickness" Value="1"></Setter>
+                    <Setter Property="Width" Value="32"></Setter>
+                    <Setter Property="Height" Value="Auto"></Setter>
+                    <Setter Property="Margin" Value="0 0 -9 0"></Setter>
+                    <Setter Property="Stretch" Value="UniformToFill"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="Data" Value="M0 0, 1 0, 1.5 .5, 1 1, 0 1, .5 .5, 0 0"></Setter>
                 </Style>
             </UniformGrid.Resources>
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
-            <Rectangle />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
+            <Path />
         </UniformGrid>
         <UniformGrid Width="Auto" 
                      Height="Auto" 
@@ -65,26 +86,60 @@
                      x:Name="EdgeContainer"
                      Style="{StaticResource Cont}">
             <UniformGrid.Resources>
-                <Style TargetType="Rectangle">
-                    <Setter Property="Fill" Value="#1fff"></Setter>
-                    <Setter Property="Height" Value="16"></Setter>
-                    <Setter Property="Width" Value="18"></Setter>
-                    <Setter Property="RenderTransform" Value="{StaticResource Transform}"></Setter>
+                <Style TargetType="Path">
                     <Setter Property="Opacity" Value="0"></Setter>
+                    <Setter Property="Fill" Value="#1fff"></Setter>
+                    <Setter Property="Stroke" Value="#2fff"></Setter>
+                    <Setter Property="StrokeThickness" Value="1"></Setter>
+                    <Setter Property="Width" Value="32"></Setter>
+                    <Setter Property="Margin" Value="0 0 -9 0"></Setter>
+                    <Setter Property="Height" Value="Auto"></Setter>
+                    <Setter Property="Stretch" Value="UniformToFill"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="Data" Value="M0 0, 1 0, 1.5 .5, 1 1, 0 1, .5 .5, 0 0"></Setter>
+
                 </Style>
             </UniformGrid.Resources>
-            <Rectangle Fill="White" />
-            <Rectangle Fill="White"/>
-            <Rectangle Fill="White"/>
-            <Rectangle Fill="Orange"/>
-            <Rectangle Fill="Orange"/>
-            <Rectangle Fill="Orange"/>
-            <Rectangle Fill="Orange"/>
-            <Rectangle Fill="White"/>
-            <Rectangle Fill="White"/>
-            <Rectangle Fill="White" />
+            <Path Fill="DarkOrange" />
+            <Path Fill="DarkOrange"/>
+            <Path Fill="DarkOrange"/>
+            <Path Fill="DarkOrange"/>
+            <Path Fill="DarkOrange"/>
+            <Path Fill="DarkOrange"/>
+            <Path Fill="DarkOrange"/>
+            <Path Fill="OrangeRed"/>
+            <Path Fill="DarkOrange"/>
+            <Path Fill="DarkOrange" />
+
+        </UniformGrid>
+        <UniformGrid Width="Auto" 
+                     Height="Auto" 
+                     Rows="1" 
+                     Columns="10" 
+                     Opacity="1" 
+                     Style="{StaticResource Cont}">
+            <UniformGrid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#fff"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                    <Setter Property="Margin" Value="9 0 -2 0"></Setter>
+
+                </Style>
+            </UniformGrid.Resources>
+            <TextBlock Text="1" />
+            <TextBlock Text="2"/>
+            <TextBlock Text="3"/>
+            <TextBlock Text="4"/>
+            <TextBlock Text="5"/>
+            <TextBlock Text="6"/>
+            <TextBlock Text="7"/>
+            <TextBlock Text="8"/>
+            <TextBlock Text="9"/>
+            <TextBlock Text="10" />
 
         </UniformGrid>
     </Grid>
 
 </UserControl>
+

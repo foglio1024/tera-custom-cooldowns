@@ -1,5 +1,12 @@
 ﻿namespace TCC.Data
 {
+    public enum HpChangeSource
+    {
+        CreatureChangeHp,
+        BossGage,
+        SkillResult
+    }
+
     public enum NotificationType
     {
         Normal = 0,

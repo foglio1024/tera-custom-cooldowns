@@ -24,7 +24,7 @@ namespace TCC.TemplateSelectors
                     return ItemTemplate;
                 case MessagePieceType.Quest:
                     return QuestTemplate;
-                case MessagePieceType.Point_of_interest:
+                case MessagePieceType.PointOfInterest:
                     return PointOfInterestTemplate;
                 case MessagePieceType.Money:
                     return MoneyTemplate;

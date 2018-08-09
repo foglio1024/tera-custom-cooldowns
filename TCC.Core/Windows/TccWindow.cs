@@ -41,7 +41,7 @@ namespace TCC.Windows
             _settings = settings;
             _ignoreSize = ignoreSize;
 
-            _opacityAnimation = new DoubleAnimation() { Duration = TimeSpan.FromMilliseconds(250) };
+            _opacityAnimation = new DoubleAnimation() { Duration = TimeSpan.FromMilliseconds(100) };
 
             Topmost = true;
             Left = settings.X * SettingsManager.ScreenW;

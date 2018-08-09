@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="TCC.Controls.RhombBuffCooldownControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             UseLayoutRounding="False"
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
+    <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
+        <Grid ClipToBounds="True" RenderTransform="{StaticResource Rotate45}" 
+              RenderTransformOrigin=".5 .5" Width="55" Height="55">
+            <local:Arc Width="80" 
+                       Height="80" 
+                       StrokeThickness="30" 
+                       Stroke="#ffbd3d" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       EndAngle="0"
+                       x:Name="ExternalArc"
+                       Margin="-20"
+                       RenderTransformOrigin=".5 .5">
+                <local:Arc.RenderTransform>
+                    <RotateTransform Angle="-45"></RotateTransform>
+                </local:Arc.RenderTransform>
+            </local:Arc>
+
+        </Grid>
+        <local:RhombFixedSkillControl HorizontalAlignment="Center" 
+                                           IsHitTestVisible="False"
+                                 VerticalAlignment="Center" Padding="00" Margin="0"
+                                 DataContext="{Binding Cooldown}" 
+                                    x:Name="cd"
+                                 >
+            <local:RhombFixedSkillControl.LayoutTransform>
+                <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+            </local:RhombFixedSkillControl.LayoutTransform>
+        </local:RhombFixedSkillControl>
+
+
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 -8 0 6" 
+              Opacity="{Binding Buff.Seconds}"
+              >
+
+        <Border BorderThickness="1"
+                Width="24"
+                Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"
+                Background="#ffbd3d"
+                BorderBrush="#995500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderTransform="{StaticResource Rotate45}"
+                RenderTransformOrigin=".5 .5">
+        </Border>
+            <TextBlock Foreground="#d222" 
+
+                       Text="{Binding Buff.Seconds}"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       FontFamily="{StaticResource ArialMonoBold}"
+                       Margin="0 0 0 0"/>
+        </Grid>
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>-->
+
+    </Grid>
+</UserControl>

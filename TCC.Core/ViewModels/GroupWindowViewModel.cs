@@ -340,7 +340,9 @@ namespace TCC.ViewModels
         {
             if (rollResult == int.MaxValue) rollResult = -1;
             var u = Members.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
-            if (u != null) u.RollResult = rollResult;
+            if (u == null) return;
+            u.RollResult = rollResult;
+            u.IsWinning = u.EntityId == GetWinningUser();
         }
         public void EndRoll()
         {
@@ -359,12 +361,9 @@ namespace TCC.ViewModels
             //u.RollResult = 0;
             //});
         }
-        private void FindHighestRoll()
+        private ulong GetWinningUser()
         {
-            foreach (var user in Members.ToSyncArray())
-            {
-                user.EntityId = Members.ToSyncArray().OrderByDescending(u => u.RollResult).First().EntityId;
-            }
+            return Members.ToSyncArray().OrderByDescending(u => u.RollResult).First().EntityId;
             //Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
         }
         public void SetReadyStatus(ReadyPartyMember p)

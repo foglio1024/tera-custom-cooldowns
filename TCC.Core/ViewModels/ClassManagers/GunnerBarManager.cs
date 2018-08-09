@@ -15,11 +15,10 @@ namespace TCC.ViewModels
 
         private void FlashBfIfFullWp(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(StaminaTracker.Maxed))
+            if (e.PropertyName == nameof(StaminaTracker.Val))
             {
-                if (StaminaTracker.Maxed) BurstFire.Cooldown.ForceEnded();
-                Balder.Cooldown.FlashOnAvailable = StaminaTracker.Maxed;
-                Bombardment.Cooldown.FlashOnAvailable = StaminaTracker.Maxed;
+                if (StaminaTracker.Factor > .8) BurstFire.Cooldown.ForceEnded();
+                else BurstFire.Cooldown.ForceStopFlashing();
             }
         }
 
@@ -40,6 +39,8 @@ namespace TCC.ViewModels
             Balder.Cooldown = new FixedSkillCooldown(balder, false);
             Bombardment.Cooldown = new FixedSkillCooldown(bombard, false);
             StaminaTracker.PropertyChanged += FlashBfIfFullWp;
+            Balder.Cooldown.FlashOnAvailable = true;
+            Bombardment.Cooldown.FlashOnAvailable = true;
 
         }
 

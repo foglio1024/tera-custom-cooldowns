@@ -11,11 +11,30 @@ namespace TCC.Converters
         {
             if ((bool)value)
             {
-                return ((SolidColorBrush)Application.Current.FindResource("HpDebuffColor"));
+                return (Application.Current.FindResource("HpDebuffColorBase"));
             }
             else
             {
-                return ((SolidColorBrush)Application.Current.FindResource("HpColor"));
+                return (Application.Current.FindResource("HpColorBase"));
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class HPbarColorConverter2 : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value)
+            {
+                return (Application.Current.FindResource("HpDebuffColor2Base"));
+            }
+            else
+            {
+                return (Application.Current.FindResource("HpColor2Base"));
             }
         }
 

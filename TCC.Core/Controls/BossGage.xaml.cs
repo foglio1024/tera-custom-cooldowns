@@ -201,7 +201,7 @@ namespace TCC.Controls
                     }
                     break;
                 case "Visible":
-                    AnimateAppear();
+                    //AnimateAppear();
                     break;
                 case nameof(Npc.ShieldFactor):
                     _shieldSizeAnim.To = Npc.ShieldFactor;
@@ -274,10 +274,10 @@ namespace TCC.Controls
                 BeginAnimation(OpacityProperty, fade);
 
             };
-            if (Npc.Visible == Visibility.Visible || true)
-            {
-                AnimateAppear();            
-            }
+            //if (Npc.Visible == Visibility.Visible || true)
+            //{
+            //    AnimateAppear();            
+            //}
 
         }
 

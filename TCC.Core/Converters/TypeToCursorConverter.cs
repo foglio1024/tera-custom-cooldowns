@@ -23,7 +23,7 @@ namespace TCC.Converters
                 case MessagePieceType.Quest:
                     c = Cursors.Hand;
                     break;
-                case MessagePieceType.Point_of_interest:
+                case MessagePieceType.PointOfInterest:
                     c = Cursors.Hand;
                     break;
                 case MessagePieceType.Money:

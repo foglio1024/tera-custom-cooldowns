@@ -105,7 +105,7 @@ namespace TCC.Parsing
             {"S_SHOW_PARTY_MATCH_INFO", Contructor<Func<TeraMessageReader, S_SHOW_PARTY_MATCH_INFO>>() },
             {"S_SHOW_CANDIDATE_LIST", Contructor<Func<TeraMessageReader, S_SHOW_CANDIDATE_LIST>>() },
             //{"S_ACTION_STAGE", Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
-            //{"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
+            {"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
 
         };
 
@@ -142,9 +142,13 @@ namespace TCC.Parsing
             {typeof(C_LOGIN_ARBITER), Helpers.Contructor<Func<C_LOGIN_ARBITER, LoginArbiterMessage>>()},
             {typeof(S_ANSWER_INTERACTIVE), new Action<S_ANSWER_INTERACTIVE>(x => PacketProcessor.HandleAnswerInteractive(x)) },
             //{typeof(S_ACTION_STAGE), new Action<S_ACTION_STAGE>(x => PacketProcessor.HandleActionStage(x)) }, //nvm
-            //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
 
+        };
+
+        private static readonly Dictionary<Type, Delegate> AccurateHp = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x))}
         };
         private static readonly Dictionary<Type, Delegate> CooldownWindow = new Dictionary<Type, Delegate>
         {
@@ -283,6 +287,7 @@ namespace TCC.Parsing
             }
             if (SettingsManager.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if(SettingsManager.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {

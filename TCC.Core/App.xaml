@@ -20,8 +20,15 @@
             </ResourceDictionary.MergedDictionaries>
             <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
             <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
+            <DropShadowEffect x:Key="ClassIconGlow" Color="#ff55ccff" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
 
             <Color x:Key="GreenColorBase">#00a561</Color>
+            <Color x:Key="HpColorBase">#ff3333</Color>
+            <Color x:Key="HpColor2Base">#faa089</Color>
+            <Color x:Key="MpColorBase">#3387ff</Color>
+            <Color x:Key="MpColor2Base">#0ab8f6</Color>
+            <Color x:Key="HpDebuffColorBase">#9c04bd</Color>
+            <Color x:Key="HpDebuffColor2Base">#b24cc8</Color>
 
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
@@ -34,13 +41,16 @@
             <SolidColorBrush x:Key="MarksColor" Color="#aad"/>
             <SolidColorBrush x:Key="GuardianColor" Color="#e5442b"/>
 
-            <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#202027" Opacity="1"/>
+            <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#222228" Opacity=".9"/>
             <SolidColorBrush x:Key="FadedBorderColor" Color="#aa303035" Opacity="1"/>
             <SolidColorBrush x:Key="FadedDefaultBackgroundColor" Color="#a0101017" Opacity="1"/>
             <SolidColorBrush x:Key="TooltipColor" Color="#404040" Opacity=".9"/>
-            <SolidColorBrush x:Key="HpColor" Color="#ff5555"/>
-            <SolidColorBrush x:Key="MpColor" Color="#4499ff"/>
-            <SolidColorBrush x:Key="HpDebuffColor" Color="#b74be5"/>
+            <SolidColorBrush x:Key="HpColor" Color="{StaticResource HpColorBase}"/>
+            <SolidColorBrush x:Key="HpColor2" Color="{StaticResource HpColor2Base}"/>
+            <SolidColorBrush x:Key="MpColor" Color="{StaticResource MpColorBase}"/>
+            <SolidColorBrush x:Key="MpColor2" Color="{StaticResource MpColor2Base}"/>
+            <SolidColorBrush x:Key="HpDebuffColor" Color="{StaticResource HpDebuffColorBase}"/>
+            <SolidColorBrush x:Key="HpDebuffColor2" Color="{StaticResource HpDebuffColor2Base}"/>
 
             <SolidColorBrush x:Key="GoldColor" Color="#ffb033"/>
             <SolidColorBrush x:Key="SilverColor" Color="Silver"/>
@@ -70,6 +80,20 @@
             <SolidColorBrush x:Key="MoongourdHeaderColor" Color="#3b5167"/>
             <SolidColorBrush x:Key="MoongourdAccentColor" Color="#26b99a"/>
             <SolidColorBrush x:Key="MoongourdFadedAccentColor" Color="#1b9190"/>
+
+            <SolidColorBrush x:Key="KrBgColor" Color="#2c313b"/>
+            <SolidColorBrush x:Key="KrBorderColor" Color="#515b65"/>
+
+            <VisualBrush x:Key="IconOpacityBrush" >
+                <VisualBrush.Visual>
+                    <Rectangle Fill="White" Width="60" Height="60">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="45"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </VisualBrush.Visual>
+            </VisualBrush>
+
 
             <system:Double x:Key="MapWidth">800</system:Double>
             <system:Double x:Key="MapHeight">600</system:Double>
@@ -110,6 +134,22 @@
             <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#FF84E1FB"/>
             <SolidColorBrush x:Key="Colors.Chat.System.WorldBoss" Color="#fffcb7ff"/>
 
+            <RotateTransform x:Key="Rotate45" Angle="45"/>
+            <SkewTransform x:Key="Skew45" AngleX="-45"/>
+            <SkewTransform x:Key="Skew45Inv" AngleX="45"/>
+            <QuadraticEase x:Key="QuadraticEase"/>
+            <RotateTransform x:Key="DefaultRotateTransform"/>
+            <TranslateTransform x:Key="DefaultTranslateTransform"/>
+            <ScaleTransform x:Key="DefaultScaleTransform"/>
+
+            <Storyboard x:Key="Pulse" RepeatBehavior="Forever" >
+                <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+                <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.6" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.2"/>
+                <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.6" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
+            </Storyboard>
+
+
             <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
             <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
             <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
@@ -129,10 +169,10 @@
                 <Setter Property="WindowStyle" Value="None"/>
             </Style>
             <Style x:Key="Styles.DefaultBorder" TargetType="{x:Type Border}">
-                <Setter Property="Background" Value="{StaticResource DefaultBackgroundColor}"/>
+                <Setter Property="Background" Value="#a223"/>
                 <Setter Property="CornerRadius" Value="0"/>
                 <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="BorderBrush" Value="#202026"/>
+                <Setter Property="BorderBrush" Value="#8555"/>
                 <Setter Property="Height" Value="Auto" />
                 <Setter Property="Width" Value="Auto"/>
                 <Setter Property="Effect" Value="{StaticResource DropShadow}" />
@@ -140,7 +180,7 @@
             </Style>
             <Style x:Key="Styles.DefaultText" TargetType="{x:Type TextBlock}">
                 <Setter Property="UseLayoutRounding" Value="True"/>
-                <Setter Property="Foreground" Value="#bbffffff"/>
+                <Setter Property="Foreground" Value="#ccffffff"/>
                 <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
             </Style>
             <Style TargetType="{x:Type Button}" x:Key="ButtonMainStyle">
@@ -319,6 +359,22 @@
             <PathGeometry x:Key="SvgOpenLink">M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z</PathGeometry>
             <PathGeometry x:Key="SvgWarning">M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z</PathGeometry>
             <PathGeometry x:Key="SvgAwaken">M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z</PathGeometry>
+            <PathGeometry x:Key="SvgCopy">M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z</PathGeometry>
+            <PathGeometry x:Key="SvgClassGunner">M2.269 3.378s1.807-2.33 4.664-2.357c2.856-.028 4.726 2.357 4.726 2.357h1.362S10.989 0 6.933 0C2.876 0 .895 3.378.895 3.378zm8.684.863c.797 1.6 1.234 2.061 2.9 2.061-.604-.699-1.108-1.446-1.198-2.395h-1.361c-1.692-2.34-4.361-2.193-4.361-2.193s-2.67-.147-4.362 2.193h-1.36C1.12 4.857.615 5.603.012 6.302c1.666 0 2.102-.46 2.899-2.06 1.38-2.229 4.02-2.124 4.02-2.124s2.641-.105 4.021 2.123zm-8.697 6.297s1.807 2.329 4.664 2.357c2.857.028 4.727-2.357 4.727-2.357h1.361s-2.031 3.378-6.088 3.378S.882 10.538.882 10.538zm8.685-.864c.796-1.6 1.233-2.06 2.899-2.06-.603.698-1.107 1.445-1.197 2.394H11.28c-1.692 2.34-4.361 2.193-4.361 2.193s-2.67.147-4.361-2.193H1.197C1.107 9.06.603 8.312 0 7.613c1.666 0 2.103.461 2.9 2.061 1.38 2.228 4.02 2.124 4.02 2.124s2.64.104 4.02-2.124zM8.937 6.313c.4-.348.637-.912.716-1.684.665.833.907 1.657.821 2.698a2.857 2.857 0 0 1-1.695.61c.288-.57.314-1.072.158-1.624zM4.903 7.584c-.394.353-.623.92-.69 1.694-.679-.824-.932-1.643-.862-2.686a2.857 2.857 0 0 1 1.686-.635c-.28.574-.298 1.077-.134 1.627zm3.553.827c.497.182 1.106.116 1.82-.19-.407.987-1.01 1.597-1.963 2.027A2.857 2.857 0 0 1 6.958 9.06c.637-.025 1.09-.245 1.498-.65zM5.388 5.5c-.5-.174-1.107-.1-1.816.216.392-.992.986-1.61 1.932-2.054.561.213 1.087.677 1.373 1.167-.638.033-1.087.26-1.489.67zm1.05 3.513c.095.52.459 1.013 1.082 1.475-1.056.146-1.888-.066-2.74-.672-.089-.594.056-1.28.342-1.77.343.54.761.819 1.316.967zm.968-4.118c-.102-.52-.473-1.006-1.103-1.46 1.054-.161 1.888.04 2.749.633a2.857 2.857 0 0 1-.316 1.773c-.35-.533-.773-.806-1.33-.946z</PathGeometry>
+            <PathGeometry x:Key="SvgClassBrawler">M5.182 11.933c-2.15-.3-3.653-.662-3.653-.662l-.483-1.151s2.033.539 3.898.77a21.81 21.81 0 0 0 3.496.1l.508-.242.507.242a21.81 21.81 0 0 0 3.497-.1c1.865-.231 3.997-.77 3.997-.77l-.565 1.077s-1.487.436-3.637.736-3.604.402-3.8.4c-.194 0-1.616-.1-3.765-.4zm3.59-9.8S6.65 3.05 5.606 3.342c-1.045.293-2.944.464-2.944.464s-.236 1.08-.892 2.284C1.114 7.294 0 8.39 0 8.39s3.263.29 5.427-.818c2.164-1.108.987-3.208.41-2.724-.338.283-.208.768-.281 1.037-.147.54-.291.752-.978.719-1.512-.072.173-2.928 2.118-2.327 1.753.541.999 2.165.464 2.698-.397.395-1.258 1.186-2.976 1.505-1.717.318-3.912.343-3.912.343l.12.509c.54.255 1.957.722 3.848.986 1.89.265 4.064.255 4.064.255l.468-.23zm.369.017s2.122.916 3.167 1.208c1.044.293 2.943.464 2.943.464s.237 1.079.892 2.284c.656 1.205 1.77 2.3 1.77 2.3s-3.262.29-5.427-.818c-2.164-1.108-.987-3.208-.41-2.724.338.283.208.768.281 1.037.147.54.292.752.978.719 1.512-.072-.172-2.928-2.117-2.327-1.754.541-1 2.165-.465 2.698.397.395 1.258 1.186 2.976 1.504 1.718.32 3.913.344 3.913.344l-.12.509c-.54.255-1.958.722-3.848.986-1.891.264-4.065.255-4.065.255l-.468-.23zm2.887 11.924c.027 1.876-.351 2.323-1.702 2.402-1.351.08-1.127-.832-1.139-2.118zm3.244-.38c-.026.035 0 .89-.18 1.382-.179.49-.837.786-1.42.875-.796.121-1.12-.426-1.126-.798-.01-.6-.008-1.142-.008-1.142zm-9.472.38c-.027 1.876.351 2.323 1.702 2.402 1.351.08 1.127-.832 1.139-2.118zm-.046-1.018l2.936.315-.016.737-2.93-.314zm-3.198.639s.063.738.356 1.38c.293.643.66.787 1.245.876.795.121 1.119-.426 1.125-.798.01-.6.008-1.142.008-1.142zm-.349-1.201l3.105.52-.016.746-2.797-.403zm9.905.562l-2.936.315.017.737 2.93-.314zm3.245-.348l-2.803.324.017.728 2.76-.314zm2.342-2.745l.562.87-.562 2.586-1.919 1.19.05-1.918.808-.386zM6.026 2.56c-1.396.472-2.954.646-2.954.646l.356-1.045s1.498-.412 2.704-.854C7.34.865 8.947 0 8.947 0s1.608.865 2.814 1.307c1.207.442 2.704.854 2.704.854l.357 1.045s-1.559-.174-2.955-.646c-1.395-.472-2.92-1.229-2.92-1.229s-1.525.757-2.92 1.229z</PathGeometry>
+            <PathGeometry x:Key="SvgClassBerserker">M17.278 7.858l.374-.809 1.237-.708-.364-3.408-2.985 1.684.143 1.419-.442.774zm-5.526 10.309c-.56 1.159.15 2.453-.399 3.023-.387.401-1.236.082-2.011-.329-.833-.44-1.63-.979-1.45-1.562.253-.821 1.552-.63 2.222-1.902.67-1.275-.008-2.923.509-3.332.517-.409 1.047.068 1.922.502.874.434 1.559.658 1.497 1.3-.064.672-1.692 1.062-2.29 2.3zm3.117-17.034C11.596-.552 9.262-.23 5.512 1.259 2.426 2.483 1.498 4.228 0 4.289c.927 1.233.438 3.108.812 5.914.378 2.831 1.754 6.004 5.43 7.978 0 0-.031-3.7 1.892-5.22 2.694-2.128 4.259-1.3 4.259-1.3.055.239.084.72-.211.983-.446.397-.891.173-.688.788.13.396 2.068 1.482 2.798 1.337.606-.12-.221-1.157.492-2.052.397-.093.825.163 1.115.438l.564 1.207 2.877-.194-1.404-2.394-1.4.244-1.045-.574 1.07-2.08c.417.072 1.017.396 1.232-.003.14-.26.057-.497-.335-.713-1.464-.81-1.547-.823-2.562-1.35-.644-.335-1.064-.33-1.204-.014-.154.35.735 1.011.735 1.011l-.944 1.83s-2.079-1.559-1.53-4.567c.55-3.008 2.916-4.426 2.916-4.426zM11.047 3.04l-.064.731s-.964.22-1.432.378c-.467.158-1.372.567-1.372.567l-.05-1.822s.844-.092 1.505-.067c.662.024 1.413.213 1.413.213zm-4.372.468l.188 1.622C5.39 5.838 5.11 6.28 4.816 6.615c-.045.35-.269.814-.112 2.89l-1.423.714c.001.036-.239-1.026-.288-2.392-.05-1.365.169-2.033.169-2.033s.485-.68 1.59-1.367c1.105-.687 1.923-.92 1.923-.92zm3.72 2.121c-.229 2.725 1.351 4.583 1.351 4.583-1.863.01-3.058.376-4.487 1.5-1.055-1.339-.86-3.587-.86-3.587l2.08 1.071.602.896c.785.033 1.734-.37 1.734-.37s-.127-.864-.696-1.604l-1.033-.025-2.048-1.054c1.369-1.473 3.357-1.41 3.357-1.41zm-6.62 5.862l1.522-.862s.038.708.29 1.441c.251.734.594 1.357.594 1.357l-.597.492s-.644-.532-1.046-1.138c-.403-.606-.764-1.29-.764-1.29z</PathGeometry>
+            <PathGeometry x:Key="SvgClassArcher">M11.678 17.711l-1.252-2.403v-2.29c0 .95.948 2.144 1.352 2.39.753.46 3.774 1.62 6.443-1.906 2.71-3.58.429-5.486.081-6.48-.738-2.108-.063-3.199.071-3.377.134-.18.797-.396.973.159.138.434-.03.472-.164 1.176-.094.499.697.86.96.198.205-.512.28-1.453-.194-2.13-.585-.839-1.916-.993-2.72.4-.598 1.038.298 4.799.298 4.799l-4.07-4.071v.567l-.296.295s1.813 1.77 4.477 4.477c.628 2.73-5.467 5.427-7.264 1.477L10.349.987l-.359.289-.358-.29-.024 10.006c-1.797 3.95-7.892 1.253-7.264-1.477 2.664-2.706 4.477-4.477 4.477-4.477l-.295-.295v-.567l-4.071 4.07s.896-3.76.297-4.798C1.95 2.055.618 2.21.032 3.048c-.473.677-.398 1.618-.194 2.13.263.662 1.055.3.96-.198-.132-.704-.302-.742-.163-1.176.176-.555.838-.338.973-.16.134.18.809 1.27.07 3.378-.347.994-2.629 2.9.082 6.48 2.669 3.525 5.69 2.366 6.442 1.907.405-.247 1.353-1.442 1.353-2.392v2.291l-1.252 2.403 1.687 3.777zM9.305 7.445L7.083 5.33l-2.999 5.4 3.523-3.286-.109 2.52zm-.063-4.946v4.275l-2.22-2.22V.16zm1.433 4.946l2.223-2.114 2.999 5.4-3.523-3.286.108 2.52zm.063-4.946v4.275l2.221-2.22V.16z</PathGeometry>
+            <PathGeometry x:Key="SvgClassWarrior">M16.296 5.83c.607.088.43.7.528 1.109.507 2.094 7.915-3.388 1.262-1.58l-.9-.9v-.89c.494.128.947.06 1.401 0l2.2-2.198V0H18.78L15.98 2.23c-.43 1.016-1.292 1.131-3.027-.573 1.616-3.228-3.602.395-1.463 1.176.626.23 1.475.3.941 1.105C9.636 7.04 5.933 9.23 2.966 11.02c1.64.718 3.232 1.726 4.71 2.864.738-.418 1.533-.96 2.4-1.657-.481-.38-.992-.838-1.468-1.25l5.694-4.591c.73-.031 1.386.094 1.994-.556zm-.735-1.289a1.023 1.023 0 1 1-2.045 0 1.023 1.023 0 0 1 2.045 0zm-4.877 11.996c.819.838 1.606 1.733 2.358 2.677 1.624.627 3.385.923 5.159.788a7.66 7.66 0 0 0-1.807-4.354c-.765.005-1.926-.49-3.261-1.3a32.149 32.149 0 0 0-2.45 2.189zm2.435-8.54l4.73 3.023c-3.803 1.665-7.192 4.577-10.076 8.194-1.624.627-3.385.923-5.159.788a7.66 7.66 0 0 1 1.806-4.354c1.569.01 4.799-2.08 7.787-4.672l-1.46-1.15zM.058 0v1.371L2.257 3.57c.454.058.907.127 1.4 0v.89l-.899.9c-6.653-1.81.755 3.673 1.262 1.579.099-.41-.08-1.02.528-1.109.608.65 1.11.576 1.77.614L7.67 7.471c.806-.59 1.621-1.183 2.373-1.882-.622-.624-1.52-1.262-1.803-1.886-.163-.596.506-.631 1.115-.87 2.12-.83-3.08-4.404-1.463-1.176-1.735 1.704-2.597 1.589-3.027.573L2.063 0zm6.248 3.518a1.023 1.023 0 1 1 0 2.046 1.023 1.023 0 0 1 0-2.046z</PathGeometry>
+            <PathGeometry x:Key="SvgClassValkyrie">M14.154.002C2.707-.194-3.46 14.062 2.035 21.632l4.149-2.334C3.884 12.832 2.82 4.765 14.154.002zm-4.43 17.256C8 18.724 4.795 21.676 1.178 22.61c-.474 1.23-.436 2.366-.317 3.488.343.47.749.892 1.264 1.408.516.515.939.922 1.408 1.264 1.122.12 2.259.157 3.488-.316.935-3.618 3.871-6.803 5.353-8.547-.46-.181-1.525-1.125-1.525-1.125s-.945-1.07-1.125-1.524zm-7.2 6.899c.753 1.302 1.592 2.198 2.958 2.958-1.72-.26-2.715-1.29-2.958-2.958zm10.222-4.653s1.782-2.42 1.602-4.221c-1.8-.18-4.225 1.607-4.225 1.607.13.418 1.073 1.576 1.073 1.576s1.127.907 1.55 1.038zM29.62 15.47c.197 11.447-14.06 17.616-21.63 12.12l2.335-4.15c6.466 2.3 14.532 3.365 19.295-7.97zM26.808 2.823C20.562 2.8 16.433 5.15 13.067 8.355c8.778-.163-7.909 8.805-.954-1.216-4.327.932-7.795 2.593-5.864 8.773.417-1.676.464-3.882 1.588-4.366-.4.748-.585 1.476-.033 2.138 2.141-.114 2.784.846 2.435 2.518.91-.472 2.413-1.674 4.484-1.294.38 2.071-.821 3.574-1.293 4.485 1.672-.35 2.632.293 2.518 2.435.661.551 1.39.367 2.137-.033-.484 1.124-2.69 1.17-4.366 1.587 6.18 1.931 7.841-1.536 8.774-5.863-10.022 6.954-1.053-9.732-1.217-.954 3.205-3.367 5.556-7.496 5.532-13.742zM23.932 5.7c.029 2.335-1.006 4.464-2.673 6.47-1.277-2.157-2.886-.702-4.226.429 1.13-1.34 2.586-2.95.428-4.226 2.007-1.667 4.135-2.703 6.47-2.673z</PathGeometry>
+            <PathGeometry x:Key="SvgClassSorcerer">M11.21 0l-.868 1.447c-1.97.173-3.77.93-5.232 2.095l-.006-.01-1.99-.076.254 1.877a9.741 9.741 0 0 0-1.913 5.003L0 11.207l1.454.86a9.747 9.747 0 0 0 2.143 5.292l-.076 1.987 1.888-.256a9.74 9.74 0 0 0 4.931 1.863l.867 1.447.856-1.446a9.74 9.74 0 0 0 4.973-1.886l1.877.255-.076-1.989a9.745 9.745 0 0 0 2.124-5.273l1.44-.852-1.44-.862a9.736 9.736 0 0 0-1.615-4.591l.01-.002.267-1.971-1.943.074a9.751 9.751 0 0 0-5.614-2.409zm-.82 2.773c-.4 1.61-1.054 3.04-1.965 4.232-.986-.636-1.898-1.365-2.643-2.302a8.425 8.425 0 0 1 4.608-1.93zm1.634 0a8.432 8.432 0 0 1 4.952 2.231c-.76.964-1.694 1.707-2.706 2.355-1.06-1.259-1.805-2.815-2.246-4.586zM4.755 5.721l.008.001c1.034.539 1.925 1.362 2.758 2.302-1.229 1.194-2.802 2.048-4.75 2.455a8.431 8.431 0 0 1 1.984-4.758zm13.185.347a8.427 8.427 0 0 1 1.702 4.411c-1.774-.37-3.24-1.11-4.416-2.14.821-.925 1.7-1.735 2.714-2.271zm-6.733 1.008a4.125 4.125 0 1 1 0 8.25 4.125 4.125 0 0 1 0-8.25zm-8.435 4.846c1.73.362 3.167 1.076 4.327 2.068-.645 1.007-1.384 1.938-2.34 2.695a8.431 8.431 0 0 1-1.987-4.763zm16.87 0a8.43 8.43 0 0 1-1.967 4.74c-.955-.756-1.694-1.686-2.338-2.69 1.157-.983 2.587-1.69 4.305-2.05zm-5.273 3.015c.93.827 1.744 1.711 2.278 2.736l.002.013a8.426 8.426 0 0 1-4.622 1.943c.455-1.82 1.232-3.414 2.342-4.692zm-6.303.023c1.099 1.274 1.87 2.86 2.321 4.669a8.424 8.424 0 0 1-4.601-1.927v-.005c.535-1.026 1.35-1.91 2.28-2.737zm3.141-7.026A3.267 3.267 0 0 0 7.94 11.2a3.267 3.267 0 0 0 3.267 3.267 3.267 3.267 0 0 0 3.267-3.267 3.267 3.267 0 0 0-3.267-3.267zm0 1.492a1.775 1.775 0 0 1 1.775 1.775 1.775 1.775 0 0 1-1.775 1.775 1.775 1.775 0 0 1-1.775-1.775 1.775 1.775 0 0 1 1.775-1.775z</PathGeometry>
+            <PathGeometry x:Key="SvgClassSlayer">M10.679 0c-.553 1.804-2.488 3.665-4.714 5.653 2.7 2.54 1.78 5.93-.74 8.999l1.965 1.04h1.547l1.33-1.346h.612zm1.161 18.698v2.07c1.248.747-1.018 2.69-1.018 2.69s-2.266-1.943-1.018-2.69v-2.07h1.018zm-9.056-7.71c.777.774 1.549 1.55 1.934 2.458-1.103 1.311-2.914 1.95-4.718 2.449 2.7.396 4.82 1.644 6.552 3.203 0 0 2.377-3.57 3.252-.656h2.036c.875-2.914 3.253.656 3.253.656 1.73-1.559 3.852-2.807 6.552-3.203-1.805-.5-3.615-1.138-4.718-2.45.385-.908 1.157-1.683 1.933-2.457H17.42l-2.065 1.508c.35.643.809 1.354 1.558 2.243l-2.328 1.287H12.74l-1.274-1.321h-1.29l-1.274 1.32H7.06L4.732 14.74c.75-.889 1.209-1.6 1.559-2.243l-2.065-1.508zm8.038 4.397a1.213 1.213 0 1 1 0 2.427 1.213 1.213 0 0 1 0-2.427zM10.965 0c.554 1.804 2.488 3.665 4.715 5.653-2.7 2.54-1.781 5.93.74 8.999l-1.965 1.04h-1.548l-1.33-1.346h-.612z</PathGeometry>
+            <PathGeometry x:Key="SvgClassReaper">M3.514 9.395c-.49-1-.696-1.587-.794-3.035L0 5.566zm6.54-5.026c-3.703-2.194-5.48-.29-5.086 2.502.35 2.466 3.022 5.918 5.085 7.868-2.812-1.269-5.574-2.547-8.54-4.698 1.314 2.675 3.822 5.518 6.151 8.115-.233-.968-.694-2.144-.734-3.536 2.177.224 3.473 1.51 3.648 2.416.187.97-.816 1.228-1.02.523-.174-.604.054-1.239.054-1.239-1.374.146-1.688 2.976-.093 3.342 1.176.27 2.217-.722 2.455-1.686.815-3.295-3.016-5.864-4.735-9.015-1.57-2.878-1.584-5.272 2.814-3.35zm0-1.62c-.982-.942-2.07-1.009-3.17-.968L7.035 0 4.82 2.903l-1.407-1.9C2.75 7.616 2.277 9.752 9.085 14.036c-7.048-6.19-5.2-13.589.968-10.115V2.75M21.4 9.395c.49-1 .696-1.587.794-3.035l2.72-.794zm-6.54-5.026c3.703-2.194 5.48-.29 5.086 2.502-.35 2.466-3.022 5.918-5.085 7.868 2.812-1.269 5.574-2.547 8.54-4.698-1.314 2.675-3.822 5.518-6.151 8.115.233-.968.694-2.144.734-3.536-2.177.224-3.473 1.51-3.648 2.416-.187.97.816 1.228 1.02.523.174-.604-.054-1.239-.054-1.239 1.374.146 1.688 2.976.093 3.342-1.176.27-2.217-.722-2.455-1.686-.815-3.295 3.016-5.864 4.735-9.015 1.57-2.878 1.584-5.272-2.814-3.35zm0-1.62c.982-.942 2.07-1.009 3.17-.968L17.878 0l2.214 2.903 1.407-1.9c.663 6.613 1.136 8.749-5.672 13.033 7.048-6.19 5.2-13.589-.968-10.115V2.75M10.307.733V6.06c.335.016.514.217.632.464-2.097 3.225-1.25 5.41.388 7.619-.179-1.705-.195-3.605 1.135-5.254 1.33 1.649 1.313 3.549 1.134 5.254 1.638-2.21 2.486-4.394.389-7.619.118-.247.297-.448.632-.464V.733l-2.155 3.622zm2.155 5.556a.427.427 0 0 1 .427.428.427.427 0 0 1-.427.427.427.427 0 0 1-.428-.427.427.427 0 0 1 .428-.428zm-.813 1.234c.264-.035.533.244.302.553-.841 1.123-1.183 1.694-1.334 2.697-.067-1.066.027-2.066.789-3.099a.36.36 0 0 1 .243-.15zm1.622 0a.36.36 0 0 1 .243.151c.762 1.033.856 2.033.789 3.1-.15-1.004-.493-1.575-1.333-2.698-.232-.309.037-.588.3-.553z</PathGeometry>
+            <PathGeometry x:Key="SvgClassPriest">M10.887 6.143a1.242 1.242 0 0 1-1.241 1.241 1.242 1.242 0 0 1-1.242-1.241A1.242 1.242 0 0 1 9.646 4.9a1.242 1.242 0 0 1 1.241 1.242zM5.28 0v1.8c5.46 2.061-3.103 6.592-3.675 0H0v8.71h1.604c.662-2.72 3.205-4.08 5.353-1.9.03 2.97.199 6.038-1.209 8.535.794 1.513 1.683 2.96 3.898 3.503 2.215-.543 3.104-1.99 3.897-3.503-1.408-2.497-1.24-5.566-1.208-8.535 2.148-2.18 4.69-.82 5.353 1.9h1.603V1.8h-1.603c-.572 6.592-9.136 2.061-3.676 0V0H9.646zm4.365 2.345c.241 0 .481.218.481.656.03.457-.017 1.286 0 1.72.775.255 1.423.692 1.886 1.422-.445.744-1.105 1.2-1.886 1.452v8.963c0 .935-.959.935-.959 0V7.595c-.78-.251-1.44-.708-1.885-1.452.462-.73 1.11-1.167 1.885-1.421.017-.435-.04-1.264-.01-1.721.005-.438.248-.656.488-.656z</PathGeometry>
+            <PathGeometry x:Key="SvgClassNinja">M16.414 0c-.773 2.104-1.951 3.69-3.98 4.098-.236 4.325-5.873 2.076-3.282.365-.433-.544-.939-.901-1.604-.273.56.696.373 1.308.016 1.853-.192-2.761-1.942-2.63-3.217-2.75.042-.668-.432-1.103-.921-1.3 4.864.276 6.317 2.324 6.342 3.685C11.162 2.371 3.511.218 0 .871c2.104.773 3.69 1.951 4.099 3.98 4.324.236 2.075 5.873.337 3.22-.571.37-.928.876-.3 1.541.657-.45 1.28-.32 1.852-.016-2.76.192-2.63 1.942-2.75 3.217-.668-.041-1.102.432-1.3.922.277-4.865 2.325-6.317 3.686-6.343C2.317 5.998.164 13.65.817 17.16c.773-2.104 1.951-3.69 3.98-4.099.236-4.324 5.873-2.075 3.288-.321.439.587.945.945 1.61.317-.449-.658-.286-1.282-.015-1.853.191 2.76 1.941 2.63 3.216 2.75-.041.668.432 1.102.922 1.3-4.865-.277-6.317-2.324-6.343-3.686-1.393 3.308 6.258 5.46 9.768 4.807-2.104-.773-3.69-1.95-4.099-3.98-4.324-.235-2.075-5.873-.343-3.262.565-.413.922-.92.294-1.585-.628.457-1.244.412-1.852.016 2.76-.192 2.63-1.942 2.75-3.217.668.041 1.102-.432 1.3-.921-.277 4.864-2.325 6.317-3.686 6.342 3.307 1.394 5.46-6.257 4.807-9.768zM8.64 7.517a1.055 1.055 0 1 1 0 2.11 1.055 1.055 0 0 1 0-2.11z</PathGeometry>
+            <PathGeometry x:Key="SvgClassMystic">M8.119.001a2.49 2.49 0 0 0-.386.02C5.578.29 5.24 2.584 5.566 3.442c.327.859 1.288.986 1.836.397s.232-1.588-.678-1.868c.505-.498 1.71-1.017 2.166.181.334.877-.48 1.97-1.62 3.076C6.13 6.335 3.604 8.221 2.21 7c-.955-.837.214-2.717 1.32-2.469-.323.71.041 1.554.513 1.786.472.232 1.563.3 1.885-.53.769-1.976-1.57-2.63-2.817-2.498C1.011 3.51.093 5.279.01 6.386c-.139 1.841 1.328 3.866 3.055 5.63l3.993 3.972c-1.69 1.234-2.265 1.806-3.677 2.292-1.432.494-3.46.136-3.362 1.473.118 1.6 2.491 1.172 4.346.091 1.855-1.08 3.699-2.827 3.699-2.827.244 0 .98 1.16.687 1.72 0 0-.784.06-1.003.338-.175.222-.27.613-.105.842.15.208.489.449 1.543.187 1.055-.261 1.31-1.029 1.31-1.029s.255.768 1.31 1.03c1.055.26 1.393.02 1.543-.188.166-.23.07-.62-.105-.842-.22-.278-1.003-.338-1.003-.338-.293-.56.443-1.72.687-1.72 0 0 1.845 1.747 3.7 2.827 1.854 1.081 4.227 1.508 4.345-.09.099-1.338-1.93-.98-3.362-1.474-1.412-.486-1.987-1.058-3.677-2.292l3.993-3.972c1.727-1.764 3.194-3.789 3.055-5.63-.083-1.107-1.002-2.876-3.102-3.098-1.248-.132-3.585.522-2.817 2.499.323.828 1.414.761 1.886.529.471-.232.835-1.076.512-1.786 1.106-.248 2.276 1.632 1.321 2.469-1.394 1.222-3.92-.664-5.06-1.77-1.14-1.105-1.955-2.2-1.62-3.076.456-1.198 1.66-.679 2.166-.181-.91.28-1.226 1.28-.678 1.868.548.589 1.509.462 1.835-.397.327-.858-.012-3.152-2.166-3.423-2.154-.27-2.763 2.266-2.763 2.266S9.961.056 8.12 0zm2.36 3.398c.465 1.586 1.74 1.407 1.414 3.453.83-.416 4.724.073 5.97 2.538.585 1.157-4.523 5.24-4.745 5.726-.401-.058-.672-.291-.782-.739 0 0 1.328-.242 1.571-.836.379-.925-.76-.94-.914-1.661 2.614-.273 2.464-2.387 4.12-2.935 0 0-1.87-2.701-4.893.141-.09.084-.578.238-.814.076-.235-.163-.03-.79-.03-.79.462-.076.782-.07.982-.108.2-.038.28-.117.261-.362-.077-1.002-1.77-.611-2.165.483-.343-1.126-2.049-1.472-2.114-.483-.032.49.333.3 1.256.45 0 0 .192.647-.043.81-.235.162-.724.008-.814-.076-3.023-2.842-4.892-.141-4.892-.141 1.656.548 1.505 2.662 4.12 2.935-.155.721-1.293.736-.914 1.66.243.595 1.57.837 1.57.837-.11.448-.38.68-.782.74-.221-.487-5.33-4.57-4.744-5.727 1.246-2.465 5.14-2.954 5.97-2.538-.327-2.046.95-1.867 1.413-3.453zm0 10.153c.47.913 1.088 1.618 1.672 2.37l-.399.335c-.414-.37-.792-.812-1.272-1.05-.48.238-.858.68-1.272 1.05l-.4-.334c.584-.753 1.202-1.458 1.672-2.371z</PathGeometry>
+            <PathGeometry x:Key="SvgClassLancer">M11.167 6.908c-1.192 0-3.215-.304-3.091-1.148.181.406 1.443.695 3.091.695 1.649 0 2.91-.289 3.092-.695.123.844-1.9 1.148-3.092 1.148zm0-6.867c-.832.642-2.205 1.977-2.079 2.173.245.381.755.432 1.3.473V4.41c-.825-.184-1.517-.952-2.186-1.996C5.563 4.29 3.052 6.711.005 7.187c.468.036 1.186.194 1.496.618 1.832 2.509 2.599 9.347 2.6 9.346l7.066 4.044 7.067-4.044c.001 0 .768-6.837 2.6-9.346.31-.424 1.027-.582 1.495-.618-3.047-.476-5.558-2.897-8.197-4.772-.668 1.044-1.36 1.812-2.185 1.996V2.687c.545-.041 1.055-.092 1.3-.473.125-.196-1.248-1.53-2.08-2.173zM7.898 4.043c.28.093.515.266.62.667-.815.264-1.394.712-1.813 1.286 4.84 4.63 2.812 8.76 1.766 10.09l2.696 2.281 2.697-2.28c-1.046-1.331-3.074-5.462 1.765-10.091-.418-.574-.997-1.022-1.812-1.286.105-.4.34-.574.62-.667 1.087.682 1.568 1.313 2.151 1.953-4.906 5.297-2.617 8.962-2.116 9.833 0 0 .338.366.771.129.434-.237.351-.725.351-.725-2.196-3.86.239-6.078 1.964-8.547.392-.183.56.08.69.42-.953.813-1.678 1.836-2.279 3.002.87-.615 1.756-1.48 2.466-1.517-.867 2.658-1.327 5.12-1.847 7.612l-5.42 2.924-5.421-2.924c-.52-2.491-.98-4.954-1.848-7.612.71.036 1.598.902 2.466 1.517-.6-1.166-1.326-2.189-2.279-3.002.13-.34.299-.603.69-.42 1.726 2.469 4.16 4.686 1.965 8.547 0 0-.083.488.35.725.434.237.772-.129.772-.129.5-.87 2.79-4.536-2.116-9.833.583-.64 1.063-1.271 2.151-1.953z</PathGeometry>
+            <PathGeometry x:Key="SvgClassNone"></PathGeometry>
+            <PathGeometry x:Key="SvgClassCommon"></PathGeometry>
             <PathGeometry x:Key="Svg"></PathGeometry>
             <!--Converters-->
             <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
@@ -330,12 +386,14 @@
             <converters:WinningToColorConverter x:Key="Converters.WinningToColor"/>
             <converters:IconConverter x:Key="Converters.IconNameToPath"/>
             <converters:ClassImageConverter x:Key="Converters.ClassToImage"/>
+            <converters:ClassSvgConverter x:Key="Converters.ClassToSvg"/>
             <converters:ChatChannelToColor x:Key="Converters.ChatChannelToColor"/>
             <converters:ChatChannelToName x:Key="Converters.ChatChannelToName"/>
             <converters:MessageTypeToCursor x:Key="Converters.MessageTypeToCursor"/>
             <converters:MentionToColorConverter x:Key="Converters.MentionToColor"/>
             <converters:SentReceivedToAngleConverter x:Key="Converters.WhisperDirectionToAngle"/>
             <converters:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
+            <converters:HPbarColorConverter2 x:Key="Converters.DebuffStatusToHpColor2"/>
             <converters:ContractedToColWidthConverter x:Key="Converters.MessageContractedToColumnWidth"/>
             <converters:RowsToHeightConverter x:Key="Converters.RowsToHeight"/>
             <converters:CooldownWindowModeToTemplateConverter x:Key="Converters.CooldowWindowModeToTemplate"/>
@@ -371,10 +429,10 @@
             <converters:RaidToColorConverter x:Key="Converters.RaidToColor"/>
 
             <DataTemplate x:Key="PartyAbnormality">
-                <controls:AbnormalityIndicator Size="28"/>
+                <controls:AbnormalityIndicator Size="28" DataContext="{Binding}"/>
             </DataTemplate>
             <DataTemplate x:Key="RaidAbnormality">
-                <controls:AbnormalityIndicator Size="24"/>
+                <controls:AbnormalityIndicator Size="20"/>
             </DataTemplate>
             <DataTemplate x:Key="BossAbnormality">
                 <controls:AbnormalityIndicator Size="30" Margin="2"/>
@@ -421,18 +479,19 @@
             <!--ScrollBars-->
             <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
                 <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
-                <Setter Property="Foreground" Value="#2fff" />
+                <Setter Property="Foreground" Value="#444" />
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Width" Value="8" />
-                <Setter Property="Margin" Value="0,5"/>
+                <Setter Property="Width" Value="5" />
+                <Setter Property="Margin" Value="0 5 4 5"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid x:Name="GridRoot" Width="5" Background="{TemplateBinding Background}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.00001*" />
                                 </Grid.RowDefinitions>
-
+                                <Border Background="#1fff"  HorizontalAlignment="Center" VerticalAlignment="Stretch"  Width="1"></Border>
                                 <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
                                     <Track.Thumb>
                                         <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}"
@@ -467,8 +526,8 @@
                                             <RotateTransform Angle="-90" />
                                         </Setter.Value>
                                     </Setter>
-                                    <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="8" />
+                                    <Setter Property="Width" Value="3" />
+                                    <Setter Property="Height" Value="Auto" />
                                     <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
                                     <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
                                     <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
@@ -482,12 +541,12 @@
                 <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
                 <Setter Property="Foreground" Value="#2fff" />
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Width" Value="8" />
+                <Setter Property="Width" Value="4" />
                 <Setter Property="Margin" Value="0,5"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid x:Name="GridRoot" Width="4" Background="{TemplateBinding Background}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.00001*" />
                                 </Grid.RowDefinitions>
@@ -524,7 +583,7 @@
                                         </Setter.Value>
                                     </Setter>
                                     <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="8" />
+                                    <Setter Property="Height" Value="4" />
                                     <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
                                     <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
                                     <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
@@ -663,18 +722,19 @@
 
             <Style x:Key="ChatDragableTabItemStyle"  TargetType="{x:Type dragablz:DragablzItem}" >
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="#9fff"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <!--<Setter Property="FontWeight" Value="Bold"/>-->
                 <Setter Property="Margin" Value="0 0"/>
                 <!--<Setter Property="ToolTip" Value="Right click to edit"/>-->
-                <Setter Property="Padding" Value="6 3"/>
+                <Setter Property="Padding" Value="15 5"/>
                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type dragablz:DragablzItem}">
-                            <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Margin="0 1 0 -1">
+                            <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Margin="0 1 0 -1" Background="#01000000">
                                 <Rectangle x:Name="hl" Fill="#1fff" Visibility="Collapsed"/>
                                 <Rectangle x:Name="sel" Fill="{StaticResource GreenColor}" Visibility="Visible" Height="3"
                                            VerticalAlignment="Top" RenderTransformOrigin=".5 .5">
@@ -683,23 +743,42 @@
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                                 <Grid x:Name="Trapezoid" 
-                                         Background="{TemplateBinding Background}"                                          
+                                         Background="Transparent"                                          
                                          Margin="0 0 0 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Center"
+                                    <Rectangle Fill="#aad5ff" 
+                                               Margin="1"
+                                               VerticalAlignment="Bottom"
+                                               Height="2"
+                                               Opacity="0"
+                                               RadiusX="1"
+                                               RadiusY="1"
+                                               x:Name="AttentionRect"
+                                               HorizontalAlignment="Stretch"
+                                               RenderTransformOrigin=".5 .5"
+                                               RenderTransform="{StaticResource DefaultScaleTransform}"
+
+                                               >
+                                    </Rectangle>
+
+                                    <!--<Grid HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
                                               Visibility="{Binding Content.Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                                                 Margin="0" Grid.Column="1">
                                         <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
-                                        <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
-                                    </Grid>
-                                    <Grid Grid.Column="0">
+                                    </Grid>-->
+                                    <Grid Grid.Column="0" Background="Transparent">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
+                                        <Border BorderThickness="1 1 1 0" Grid.ColumnSpan="2" Margin="0 0 0 0" CornerRadius="1 1 0 0" Background="#4445" BorderBrush="#8555" Opacity="1" x:Name="SelBorder" Visibility="Collapsed">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".5"></DropShadowEffect>
+                                            </Border.Effect>
+                                        </Border>
                                         <ContentPresenter Content="{Binding Content.TabName}" 
                                                       ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
                                                       ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
@@ -707,7 +786,25 @@
                                                       VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
                                                       SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
                                                   Margin="{TemplateBinding Control.Padding}"
-                                                  x:Name="contentPresenter"/>
+                                                  x:Name="contentPresenter"
+                                                          Opacity=".5"
+                                                          >
+                                            <ContentPresenter.Effect>
+                                                <DropShadowEffect Opacity="1" Color="Black" ShadowDepth="0" BlurRadius="3"></DropShadowEffect>
+                                            </ContentPresenter.Effect>
+                                        </ContentPresenter>
+                                        <ContentPresenter Content="{Binding Content.TabName}" 
+                                                      ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
+                                                      ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
+                                                      HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
+                                                      VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
+                                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                                  Margin="{TemplateBinding Control.Padding}"
+                                                  x:Name="contentPresenter2"
+                                                          Opacity=".5"
+                                                          >
+
+                                        </ContentPresenter>
                                         <Thumb Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" 
                                                x:Name="PART_Thumb"
                                                Style="{StaticResource MaterialDesignInvisibleThumbStyle}" >
@@ -716,7 +813,7 @@
                                         <Button Grid.Column="1" x:Name="CloseButton" VerticalAlignment="Center"
                                                 Style="{StaticResource MaterialDesignCloseItemCommandButtonStyle}"  
                                                 Foreground="{StaticResource HpColor}" Background="Transparent"
-                                                
+                                                Margin="-2 0 2 0"
                                                 Command="{x:Static dragablz:TabablzControl.CloseItemCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                                             <Button.Visibility>
@@ -735,15 +832,45 @@
                                 </Grid>
                             </Grid>
                             <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Content.Attention}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard x:Name="WarnAttention">
+                                            <Storyboard RepeatBehavior="Forever" >
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 Storyboard.TargetName="AttentionRect"
+                                                                 From="1"
+                                                                 To="0"
+                                                                 EasingFunction="{StaticResource QuadraticEase}"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 Storyboard.TargetName="AttentionRect"
+                                                                 From="0"
+                                                                 To="1"
+                                                                 EasingFunction="{StaticResource QuadraticEase}"/>
+
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="WarnAttention"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
                                 <Trigger Property="dragablz:TabablzControl.IsWrappingTabItem" Value="True">
                                     <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                                     <Setter TargetName="contentPresenter" Property="Content"
                                             Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.Header}" />
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <!--<Setter Property="Background" Value="#1fff" TargetName="Trapezoid"/>-->
+                                    <Setter Property="Effect" TargetName="contentPresenter">
+                                        <Setter.Value>
+                                            <DropShadowEffect Opacity="1" Color="#53c0ff" ShadowDepth="0" BlurRadius="3"></DropShadowEffect>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="contentPresenter" Property="Opacity" Value="1"/>
+                                    <Setter TargetName="contentPresenter2" Property="Opacity" Value="1"/>
+                                    <Setter TargetName="SelBorder" Property="Visibility" Value="Visible"/>
+
                                     <!--<Setter Property="LongBasePenBrush" Value="{StaticResource TabItem.Selected.Background}" TargetName="Trapezoid"/>-->
-                                    <Trigger.EnterActions>
+                                    <!--<Trigger.EnterActions>
                                         <BeginStoryboard>
                                             <Storyboard>
                                                 <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
@@ -766,10 +893,10 @@
                                                 </DoubleAnimation>
                                             </Storyboard>
                                         </BeginStoryboard>
-                                    </Trigger.ExitActions>
+                                    </Trigger.ExitActions>-->
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" TargetName="hl"/>
+                                    <!--<Setter Property="Visibility" Value="Visible" TargetName="hl"/>-->
                                     <!--<Setter Property="LongBasePenBrush" Value="{StaticResource TabItem.Selected.Background}" TargetName="Trapezoid"/>-->
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -999,7 +1126,7 @@
                 <chatcontrols:MessagePieceControl  />
             </DataTemplate>
             <DataTemplate x:Key="DefaultBody">
-                <chatcontrols:DefaultMessageBody />
+                <chatcontrols:DefaultMessageBody/>
             </DataTemplate>
             <DataTemplate x:Key="BrokerOfferBody">
                 <chatcontrols:BrokerOfferBody />

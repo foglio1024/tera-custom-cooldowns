@@ -7,7 +7,7 @@ namespace TCC
 {
     public static class EntitiesManager
     {
-        private static ulong currentEncounter;
+        private static ulong _currentEncounter;
 
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
         {
@@ -28,12 +28,12 @@ namespace TCC
             {
                 if (m.IsBoss)
                 {
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, v);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp , templateId, zoneId, v);
                 }
                 else
                 {
                     if (SettingsManager.ShowOnlyBosses) return;
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, Visibility.Collapsed);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, Visibility.Collapsed);
                 }
             }
         }
@@ -70,29 +70,29 @@ namespace TCC
         }
         public static void UpdateNPCbyGauge(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, maxHP, curHP, true, templateId, zoneId, Visibility.Visible);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
             if (maxHP > curHP)
             {
-                currentEncounter = entityId;
+                _currentEncounter = entityId;
                 SessionManager.Encounter = true;
             }
             else if (maxHP == curHP || curHP == 0)
             {
-                currentEncounter = 0;
+                _currentEncounter = 0;
                 SessionManager.Encounter = false;
             }
         }
         public static void UpdateNPCbyCreatureChangeHP(ulong target, long currentHP, long maxHP)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, 0, 0, Visibility.Visible);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, HpChangeSource.CreatureChangeHp);
             if (maxHP > currentHP)
             {
-                currentEncounter = target;
+                _currentEncounter = target;
                 SessionManager.Encounter = true;
             }
             else if (maxHP == currentHP || currentHP == 0)
             {
-                currentEncounter = 0;
+                _currentEncounter = 0;
                 SessionManager.Encounter = false;
             }
         }

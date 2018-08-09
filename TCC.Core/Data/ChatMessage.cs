@@ -86,11 +86,10 @@ namespace TCC.Data
             get => _animate && SettingsManager.AnimateChatMessages;
             set
             {
-                if(_animate == value) return;
+                if (_animate == value) return;
                 _animate = value;
             }
         }
-
 
         protected bool isContracted;
         public bool IsContracted
@@ -140,12 +139,12 @@ namespace TCC.Data
         #endregion
 
         #region Constructors
-        public ChatMessage()
+
+        protected ChatMessage()
         {
             _dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(_dispatcher);
             Timestamp = DateTime.Now.ToShortTimeString();
-            //WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += VM_PropChanged);
             SettingsWindowViewModel.ChatShowChannelChanged += () => NPC(nameof(ShowChannel));
             SettingsWindowViewModel.ChatShowTimestampChanged += () => NPC(nameof(ShowTimestamp));
             RawMessage = "";
@@ -223,7 +222,7 @@ namespace TCC.Data
                     {
                         string content;
                         string customColor;
-                        var fontSize = 18;
+                        var fontSize = SettingsManager.FontSize;
                         if (piece.StartsWith("<font"))
                         {
                             //formatted piece: get color and content
@@ -233,7 +232,7 @@ namespace TCC.Data
                                 piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) + 6;
 
                             var fEnd = fStart == -1 ? 0 : piece.IndexOf("\"", fStart, piece.Length, StringComparison.InvariantCultureIgnoreCase);
-                            fontSize = fStart == -1 ? fontSize : int.Parse(piece.Substring(fStart, fEnd - fStart));
+                            //fontSize = fStart == -1 ? fontSize : int.Parse(piece.Substring(fStart, fEnd - fStart));
                             var s = piece.IndexOf('>') + 1;
                             var e = piece.IndexOf('<', s);
                             content = piece.Substring(s, e - s);
@@ -275,48 +274,48 @@ namespace TCC.Data
 
                             if (inPiece.StartsWith("@item"))
                             {
-                                AddPiece(ParseSysMsgItem(BuildParametersDictionary(inPiece)));
+                                AddPiece(new MessagePieceBuilder(Channel).ParseSysMsgItem(BuildParametersDictionary(inPiece)));
                             }
                             else if (inPiece.StartsWith("@achievement"))
                             {
-                                var mp = ParseSysMsgAchi(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgAchi(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@GuildQuest"))
                             {
-                                var mp = ParseSysMsgGuildQuest(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgGuildQuest(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@dungeon"))
                             {
-                                var mp = ParseSysMsgDungeon(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgDungeon(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@accountBenefit"))
                             {
-                                var mp = ParseSysMsgAccBenefit(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgAccBenefit(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@AchievementGradeInfo"))
                             {
-                                var mp = ParseSysMsgAchiGrade(BuildParametersDictionary(inPiece));
-                                
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgAchiGrade(BuildParametersDictionary(inPiece));
+
                                 //mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@quest"))
                             {
-                                var mp = ParseSysMsgQuest(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgQuest(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@creature"))
                             {
-                                var mp = ParseSysMsgCreature(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgCreature(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
@@ -326,7 +325,7 @@ namespace TCC.Data
                             }
                             else if (inPiece.StartsWith("@zoneName"))
                             {
-                                var mp = ParseSysMsgZone(BuildParametersDictionary(inPiece));
+                                var mp = new MessagePieceBuilder(Channel).ParseSysMsgZone(BuildParametersDictionary(inPiece));
                                 mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
@@ -442,7 +441,7 @@ namespace TCC.Data
         }
         protected void ParseEmoteMessage(string msg)
         {
-            var header = "@social:";
+            const string header = "@social:";
             var start = msg.IndexOf(header, StringComparison.Ordinal);
             if (start == -1)
             {
@@ -457,6 +456,7 @@ namespace TCC.Data
         }
         protected void ParseFormattedMessage(string msg)
         {
+
             var piecesCount = Regex.Matches(msg, CTag, RegexOptions.IgnoreCase).Count;
             for (var i = 0; i < piecesCount; i++)
             {
@@ -470,6 +470,7 @@ namespace TCC.Data
                 }
             }
         }
+
         protected string ParsePiece(string msg)
         {
             var start = msg.IndexOf(OTag, StringComparison.InvariantCultureIgnoreCase) + OTag.Length;
@@ -478,56 +479,16 @@ namespace TCC.Data
                 //it's not formatted: just take the value and add it to pieces
                 start++;
                 var end = msg.IndexOf(CTag, start, StringComparison.InvariantCultureIgnoreCase);
-
                 //get the message text
                 var text = msg.Substring(start, end - start);
 
-                //check if player is mentioned
-                try
+                CheckMention(text);
+                CheckRedirect(text);
+                var content = GetPieceContent(text);
+                if (content != "")
                 {
-                    foreach (var item in InfoWindowViewModel.Instance.Characters)
-                    {
-                        if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) >= 0)
-                        {
-                            ContainsPlayerName = true;
-                            break;
-                        }
-                    }
-                }
-                catch
-                {
-                    // ignored
-                }
-
-                //redirect trading message if it's in global
-                if (text.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
-                if (text.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
-                if (text.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
-
-                var t2 = text.Replace(" ", " [[");
-                var split = t2.Split(new[] { "[[" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-                var content = new StringBuilder("");
-                foreach (var item in split)
-                {
-                    var rgxUrl = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
-                    if (rgxUrl.IsMatch(item) || item.StartsWith("discord.gg"))
-                    {
-                        if (content.ToString() != "")
-                        {
-                            AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
-                            content = new StringBuilder("");
-                        }
-                        AddPiece(new MessagePiece(ReplaceEscapes(item), MessagePieceType.Url, Channel, SettingsManager.FontSize, false, "7289da"));
-                    }
-                    else
-                    {
-                        content.Append(item);
-                    }
-                }
-                if (content.ToString() != "")
-                {
-                    AddPiece(new MessagePiece(ReplaceEscapes(content.ToString().Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", "")), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
+                    AddPiece(new MessagePiece(ReplaceEscapes(content.Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", "")),
+                                                MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
                 }
 
                 //cut message
@@ -536,25 +497,8 @@ namespace TCC.Data
             else
             {
                 //it's formatted: parse then add
-
-                //get custom color
-                var hasSpace = false;
-                var colorIndex = msg.IndexOf("COLOR=", StringComparison.InvariantCultureIgnoreCase);
-                if (colorIndex == -1)
-                {
-                    colorIndex = msg.IndexOf("COLOR =", StringComparison.InvariantCultureIgnoreCase);
-                    if (colorIndex != -1) hasSpace = true;
-                }
-                var offset = hasSpace ? 10 : 8;
-                var customColor = colorIndex == -1 ? "" : msg.Substring(colorIndex + offset, 6);
-
-                var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) > -1 ?
-                    msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6 :
-                    -1;
-                var sizeEnd = sizeIndex > -1 ? msg.IndexOf("\"", sizeIndex, StringComparison.Ordinal) : 0;
-                sizeEnd = sizeEnd > -1 ? sizeEnd : msg.IndexOf('\'', sizeIndex);
-                var fontSize = sizeIndex > -1 ? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
-
+                var customColor = GetCustomColor(msg);
+                var fontSize = GetPieceSize(msg);
                 //get link type
                 var linkIndex = msg.IndexOf("#####", StringComparison.Ordinal);
                 if (linkIndex > -1)
@@ -569,21 +513,19 @@ namespace TCC.Data
 
                     MessagePiece mp;
 
-                    if (type == 1)
+                    switch (type)
                     {
-                        mp = ParseItemLink(a);
-                    }
-                    else if (type == 2)
-                    {
-                        mp = ParseQuestLink(a);
-                    }
-                    else if (type == 3)
-                    {
-                        mp = ParseLocationLink(a);
-                    }
-                    else
-                    {
-                        throw new Exception();
+                        case 1:
+                            mp = ParseItemLink(a);
+                            break;
+                        case 2:
+                            mp = ParseQuestLink(a);
+                            break;
+                        case 3:
+                            mp = ParseLocationLink(a);
+                            break;
+                        default:
+                            throw new Exception();
                     }
 
                     mp.SetColor(customColor);
@@ -594,7 +536,10 @@ namespace TCC.Data
                 {
                     var s = msg.IndexOf(">", StringComparison.Ordinal);
                     var e = msg.IndexOf(CTag, StringComparison.InvariantCultureIgnoreCase);
-                    AddPiece(new MessagePiece(msg.Substring(s + 1, e - s - 1).Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", ""), MessagePieceType.Simple, Channel, fontSize, true, customColor));
+                    var pc = new MessagePiece(
+                        msg.Substring(s + 1, e - s - 1).Replace("<a href=\"asfunction:chatLinkAction\">", "")
+                            .Replace("</a>", ""), MessagePieceType.Simple, Channel, fontSize, true, customColor);
+                    AddPiece(pc);
                 }
 
                 //cut message
@@ -615,7 +560,7 @@ namespace TCC.Data
             linkData = linkData.Substring(0, linkData.IndexOf(">", StringComparison.Ordinal) - 1);
             var pars = ParseLinkedParameters(a);
             var id = uint.Parse(pars[0]);
-            var uid = int.Parse(pars[1]);
+            var uid = long.Parse(pars[1]);
             var owner = "";
             try { owner = pars[2]; }
             catch
@@ -635,11 +580,6 @@ namespace TCC.Data
                 OwnerName = owner,
                 Type = MessagePieceType.Item
             };
-            //ItemsDatabase.Items.TryGetValue(id, out Item i);
-            //if (i != null)
-            //{
-            //    result.BoundType = i.BoundType;
-            //}
             result.RawLink = linkData;
             return result;
         }
@@ -707,148 +647,93 @@ namespace TCC.Data
 
             var result = new MessagePiece(sb.ToString())
             {
-                Type = MessagePieceType.Point_of_interest,
+                Type = MessagePieceType.PointOfInterest,
                 Location = new Location(worldId, guardId, sectionId, x, y),
                 RawLink = linkData
             };
             // String.Format("{0}_{1}_{2}@{3}@{4},{5},{6}", worldId, guardId, sectionId, continent == 0 && worldId==1 && guardId ==24 && sectionId==183001? 7031 : continent, x.ToString(CultureInfo.InvariantCulture), y.ToString(CultureInfo.InvariantCulture), z.ToString(CultureInfo.InvariantCulture));
             return result;
         }
+
+        private void CheckMention(string text)
+        {
+            //check if player is mentioned
+            try
+            {
+                foreach (var item in InfoWindowViewModel.Instance.Characters)
+                {
+                    if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        ContainsPlayerName = true;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+        }
+        private void CheckRedirect(string text)
+        {
+            //redirect trading message if it's in global
+            if (text.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
+            if (text.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
+            if (text.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
+
+        }
+        private string GetCustomColor(string msg)
+        {
+            var hasSpace = false;
+            var colorIndex = msg.IndexOf("COLOR=", StringComparison.InvariantCultureIgnoreCase);
+            if (colorIndex == -1)
+            {
+                colorIndex = msg.IndexOf("COLOR =", StringComparison.InvariantCultureIgnoreCase);
+                if (colorIndex != -1) hasSpace = true;
+            }
+            var offset = hasSpace ? 10 : 8;
+            return colorIndex == -1 ? "" : msg.Substring(colorIndex + offset, 6);
+
+        }
+        private string GetPieceContent(string text)
+        {
+            var textToSplit = text.Replace(" ", " [[");
+            var split = textToSplit.Split(new[] { "[[" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var content = new StringBuilder("");
+            foreach (var token in split)
+            {
+                var rgxUrl = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
+                if (rgxUrl.IsMatch(token) || token.StartsWith("discord.gg"))
+                {
+                    //add it as url
+                    if (content.ToString() != "")
+                    {
+                        AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
+                        content = new StringBuilder("");
+                    }
+                    AddPiece(new MessagePiece(ReplaceEscapes(token), MessagePieceType.Url, Channel, SettingsManager.FontSize, false, "7289da"));
+                }
+                else
+                {
+                    //add it as string
+                    content.Append(token);
+                }
+            }
+            return content.ToString();
+        }
+        private int GetPieceSize(string msg)
+        {
+            var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) > -1 ?
+                msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6 : -1;
+            var sizeEnd = sizeIndex > -1 ? msg.IndexOf("\"", sizeIndex, StringComparison.Ordinal) : 0;
+            sizeEnd = sizeEnd > -1 ? sizeEnd : msg.IndexOf('\'', sizeIndex);
+            return SettingsManager.FontSize;//sizeIndex > -1 ? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
+
+        }
         #endregion
 
         #region System Methods
-        protected MessagePiece ParseSysMsgZone(Dictionary<string, string> dictionary)
-        {
-            var zoneId = uint.Parse(dictionary["zoneName"]);
-            var zoneName = SessionManager.MonsterDatabase.GetZoneName(zoneId);
-            var txt = zoneId.ToString();
-            if (zoneName != null) txt = zoneName;
-            var mp = new MessagePiece(txt)
-            {
-                Type = MessagePieceType.Simple
-            };
-            return mp;
-        }
-        protected MessagePiece ParseSysMsgCreature(Dictionary<string, string> dictionary)
-        {
-            var creatureId = dictionary["creature"];
-            var creatureSplit = creatureId.Split('#');
-            var zoneId = uint.Parse(creatureSplit[0]);
-            var templateId = uint.Parse(creatureSplit[1]);
-
-            var txt = creatureId;
-
-            if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
-            {
-                txt = m.Name;
-            }
-
-            var mp = new MessagePiece(txt)
-            {
-                Type = MessagePieceType.Simple
-            };
-            return mp;
-        }
-        protected static MessagePiece ParseSysMsgItem(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "item");
-            var uid = GetItemUid(info);
-
-            var rawLink = new StringBuilder("1#####");
-            rawLink.Append(id.ToString());
-            if (uid != 0)
-            {
-                rawLink.Append("@" + uid.ToString());
-            }
-
-            var username = SessionManager.CurrentPlayer.Name;
-            if (info.ContainsKey("UserName"))
-            {
-                username = info["UserName"];
-                rawLink.Append("@" + username);
-            }
-            var mp = new MessagePiece(id.ToString());
-            if (SessionManager.ItemsDatabase.Items.TryGetValue(id, out var i))
-            {
-                var txt = $"<{i.Name}>";
-                mp = new MessagePiece(txt)
-                {
-                    Type = MessagePieceType.Item,
-                    //BoundType = i.BoundType,
-                    ItemId = id,
-                    ItemUid = uid,
-                    OwnerName = username,
-                    RawLink = rawLink.ToString()
-                };
-                mp.SetColor(GetItemColor(i));
-            }
-            return mp;
-        }
-        protected MessagePiece ParseSysMsgAchi(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "achievement");
-            var achiName = id.ToString();
-            if (SessionManager.AchievementDatabase.Achievements.TryGetValue(id, out var g))
-            {
-                achiName = $"[{g}]";
-            }
-            return new MessagePiece(achiName, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
-        }
-        protected MessagePiece ParseSysMsgQuest(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "quest");
-            var txt = id.ToString();
-            if (SessionManager.QuestDatabase.Quests.TryGetValue(id, out var q))
-            {
-                txt = q;
-            }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
-        }
-        protected MessagePiece ParseSysMsgAchiGrade(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "AchievementGradeInfo");
-            var txt = id.ToString();
-            var col = "fcb06f";
-
-            if (SessionManager.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
-            {
-                txt = g;
-                if(id == 104) col = "38bde5";
-                if (id == 105) col = "ff264b";
-
-            }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false, col);
-        }
-        protected MessagePiece ParseSysMsgDungeon(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "dungeon");
-            var txt = id.ToString();
-            if (SessionManager.DungeonDatabase.DungeonDefs.TryGetValue(id, out var dngName))
-            {
-                txt = dngName.Name;
-            }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
-        }
-        protected MessagePiece ParseSysMsgAccBenefit(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "accountBenefit");
-            var txt = id.ToString();
-            if (SessionManager.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
-            {
-                txt = ab;
-            }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
-        }
-        protected MessagePiece ParseSysMsgGuildQuest(Dictionary<string, string> info)
-        {
-            var id = GetId(info, "GuildQuest");
-            var questName = id.ToString();
-            if (SessionManager.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
-            {
-                questName = q.Title;
-            }
-            return new MessagePiece(questName, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
-        }
         protected static Dictionary<string, string> SplitDirectives(string m)
         {
             var parameters = m.Split('\v');
@@ -963,36 +848,6 @@ namespace TCC.Data
             }
             return result;
         }
-        protected static string GetItemColor(Item i)
-        {
-            var CommonColor = "FFFFFF";
-            var UncommonColor = "4DCB30";
-            var RareColor = "009ED9";
-            var SuperiorColor = "EEBE00";
-
-            switch (i.RareGrade)
-            {
-                case RareGrade.Common:
-                    return CommonColor;
-                case RareGrade.Uncommon:
-                    return UncommonColor;
-                case RareGrade.Rare:
-                    return RareColor;
-                case RareGrade.Superior:
-                    return SuperiorColor;
-                default:
-                    return "";
-            }
-        }
-        protected static uint GetId(Dictionary<string, string> d, string paramName)
-        {
-            return uint.Parse(d[paramName]);
-        }
-        protected static long GetItemUid(Dictionary<string, string> d)
-        {
-            if (d.ContainsKey("dbid")) return long.Parse(d["dbid"]);
-            else return 0;
-        }
         #endregion
 
         #region Builders
@@ -1036,7 +891,7 @@ namespace TCC.Data
             txt = ReplaceParameters(txt, prm, true);
             txt = txt.Replace("{", "");
             txt = txt.Replace("}", "");
-            var mp = ParseSysMsgItem(BuildParametersDictionary(txt));
+            var mp = new MessagePieceBuilder(msg.Channel).ParseSysMsgItem(BuildParametersDictionary(txt));
 
             var sb = new StringBuilder();
             sb.Append("<");

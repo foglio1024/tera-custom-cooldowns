@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
+using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Windows;
@@ -17,7 +18,7 @@ namespace TCC.ViewModels
         public const int Ph1ShieldDuration = 16;
         private static BossGageWindowViewModel _instance;
         private HarrowholdPhase _currentHHphase;
-        private ICollectionView _bams;
+        private ICollectionViewLiveShaping _bams;
         private ICollectionView _mobs;
         private ICollectionView _dragons;
         private ICollectionView _guildTowers;
@@ -54,12 +55,14 @@ namespace TCC.ViewModels
                 NPC(nameof(CurrentHHphase));
             }
         }
-        public ICollectionView Bams
+        public ICollectionViewLiveShaping Bams
         {
             get
             {
-                _bams = new CollectionViewSource { Source = _npcList }.View;
-                _bams.Filter = p => ((Npc)p).IsBoss && !((Npc)p).IsTower;
+                _bams = Utils.InitLiveView(p => ((Npc)p).IsBoss && !((Npc)p).IsTower, _npcList, new string[] { },
+                    new[] { "Visible", "CurrentHP" });
+                //_bams = new CollectionViewSource { Source = _npcList }.View;
+                //_bams.Filter = p => ((Npc)p).IsBoss && !((Npc)p).IsTower;
                 return _bams;
             }
         }
@@ -133,17 +136,18 @@ namespace TCC.ViewModels
             GuildIds = new Dictionary<ulong, uint>();
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{
-                //NPC(nameof(IsTeraOnTop));
-                //if (IsTeraOnTop)
-                //{
-                    //WindowManager.BossWindow.RefreshTopmost();
-                //}
+            //NPC(nameof(IsTeraOnTop));
+            //if (IsTeraOnTop)
+            //{
+            //WindowManager.BossWindow.RefreshTopmost();
+            //}
             //};
 
         }
 
 
-        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
+
+        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
         {
             Npc boss = null;
             boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
@@ -192,14 +196,17 @@ namespace TCC.ViewModels
 
             }
             boss.MaxHP = maxHp;
-            boss.CurrentHP = curHp;
-            boss.Visible = v;
+            if (src == HpChangeSource.BossGage) boss.HasGage = true;
+            if (src == HpChangeSource.CreatureChangeHp)
+                boss.CurrentHP = curHp;
+            else if (boss.HasGage) boss.CurrentHP = curHp;
+            if (boss.Visible != v) boss.Visible = v;
         }
         public void RemoveBoss(ulong id, DespawnType type)
         {
             Npc boss = null;
 
-                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == id);
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
             if (type == DespawnType.OutOfView)
             {
@@ -239,7 +246,7 @@ namespace TCC.ViewModels
             {
                 Clipboard.SetText(sb.ToString());
             }
-            catch 
+            catch
             {
                 WindowManager.FloatingButton.NotifyExtended("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
@@ -252,7 +259,7 @@ namespace TCC.ViewModels
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
             Npc boss = null;
-                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.EndBuff(ab);
@@ -274,7 +281,7 @@ namespace TCC.ViewModels
         public void UnsetBossTarget(ulong entityId)
         {
             Npc boss = null;
-                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -284,7 +291,7 @@ namespace TCC.ViewModels
         public void SetBossAggro(ulong entityId, AggroCircle circle, ulong user)
         {
             Npc boss = null;
-                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -308,7 +315,7 @@ namespace TCC.ViewModels
         {
             if (!GuildIds.ContainsKey(towerId)) GuildIds.Add(towerId, guildId);
             Npc t = null;
-                t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
+            t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
             if (t != null) t.Name = guildName;
             if (_towerNames.ContainsKey(towerId)) return;
             _towerNames.Add(towerId, guildName);
@@ -317,7 +324,7 @@ namespace TCC.ViewModels
         public void UpdateShield(ulong target, uint damage)
         {
             Npc boss = null;
-                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.CurrentShield -= damage;
@@ -343,6 +350,16 @@ namespace TCC.ViewModels
                 };
                 dt.Start();
             });
+        }
+
+        public void UpdateBySkillResult(ulong target, ulong damage)
+        {
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            if (boss != null && !boss.HasGage)
+            {
+                if (boss.CurrentHP - damage < 0) boss.CurrentHP = 0;
+                else boss.CurrentHP -= damage;
+            }
         }
     }
 }

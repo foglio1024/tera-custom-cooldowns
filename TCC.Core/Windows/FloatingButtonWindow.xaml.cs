@@ -17,12 +17,15 @@ namespace TCC.Windows
     /// <summary>
     /// Interaction logic for FloatingButtonWindow.xaml
     /// </summary>
-    public partial class FloatingButtonWindow
+    public partial class FloatingButtonWindow : TccWidget
     {
         public FloatingButtonWindow()
         {
             InitializeComponent();
             TooltipInfo = new TooltipInfo("", "", 1);
+            MainContent = content;
+            ButtonsRef = null;
+            Init(SettingsManager.FloatingButtonSettings);
         }
 
         private Timer _t;
@@ -69,16 +72,16 @@ namespace TCC.Windows
 
         private void AnimateContentOpacity(double opacity)
         {
-            Dispatcher.InvokeIfRequired(() =>
-            {
-                ((FrameworkElement)Content).BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
-            }, System.Windows.Threading.DispatcherPriority.DataBind);
+            //Dispatcher.InvokeIfRequired(() =>
+            //{
+            //    ((FrameworkElement)Content).BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
+            //}, System.Windows.Threading.DispatcherPriority.DataBind);
         }
 
         private void OnTccVisibilityChanged()
         {
-            RefreshTopmost();
-            AnimateContentOpacity(WindowManager.ForegroundManager.Visible ? 1 : 0);
+            //RefreshTopmost();
+            //AnimateContentOpacity(WindowManager.ForegroundManager.Visible ? 1 : 0);
         }
 
         private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

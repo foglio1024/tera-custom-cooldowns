@@ -70,7 +70,9 @@
         <Grid.CacheMode>
             <BitmapCache RenderAtScale="1" />
         </Grid.CacheMode>
-        <Border Background="{StaticResource BackgroundDarkColor}" Grid.RowSpan="3" Opacity="1" x:Name="MainBorder" />
+        <Border Background="{StaticResource DefaultBackgroundColor}" 
+                Grid.RowSpan="3" Opacity="1" x:Name="MainBorder" 
+                BorderThickness="1" BorderBrush="#8555" Effect="{StaticResource DropShadow}"/>
 
         <!--Title bar-->
         <Grid MouseLeftButtonDown="DragWindow" Background="Transparent">

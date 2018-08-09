@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -26,6 +27,10 @@ namespace TCC.Controls
             if (diff == 0) return;
             if (diff > 0)
             {
+                if (newEdge == 10)
+                {
+                    foreach(FrameworkElement child in EdgeContainer.Children){ child.Opacity = 1;}
+                }
                 for (var i = 0; i < diff; i++)
                 {
                     if (_currentEdge + i < EdgeContainer.Children.Count - 1) EdgeContainer.Children[_currentEdge + i].Opacity = 1;
@@ -50,10 +55,12 @@ namespace TCC.Controls
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             //lazy way of making sure that DataContext is not null
+            var classMgr = (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager);
+            _context = classMgr.EdgeCounter;
             while (_context == null)
             {
                 _context = (Counter)DataContext;
-                Thread.Sleep(500);
+                Thread.Sleep(500);  
             }
             _context.PropertyChanged += _context_PropertyChanged;
         }

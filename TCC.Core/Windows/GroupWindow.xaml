@@ -47,9 +47,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0"
-                        Background="{StaticResource FadedDefaultBackgroundColor}"
-                        BorderBrush="{StaticResource FadedBorderColor}"
-                        Margin="0 0 0 2" CornerRadius="3"
+                        Background="{StaticResource KrBgColor}"
+                        BorderBrush="{StaticResource KrBorderColor}"
+                        Margin="10 0 0 2" CornerRadius="1"
                         VerticalAlignment="Top" HorizontalAlignment="Left"
                         Padding="5,1"
                         Width="46"
@@ -78,8 +78,10 @@
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1"
-                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="Auto"
-                        BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
+                        Background="{StaticResource KrBgColor}"
+                        BorderBrush="{StaticResource KrBorderColor}"
+                        Width="Auto"
+                        Margin="4 0 0 0" CornerRadius="1"
                         Visibility="{Binding Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
@@ -94,8 +96,10 @@
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="2"
-                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="Auto"
-                        BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
+                        Background="{StaticResource KrBgColor}" 
+                        BorderBrush="{StaticResource KrBorderColor}"
+                        Width="Auto"
+                        Margin="4 0 0 0" CornerRadius="1"
                         Visibility="{Binding ShowLeaderButtons, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         x:Name="GroupButtons" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">

@@ -150,6 +150,7 @@ namespace TCC.Data
                     maxShield = value;
                     NPC(nameof(MaxShield));
                     NPC(nameof(ShieldFactor));
+                    NPC(nameof(HasShield));
                 }
             }
         }
@@ -174,6 +175,8 @@ namespace TCC.Data
         public double MpFactor => MaxMP > 0 ? CurrentMP / MaxMP : 1;
         public double StFactor => MaxST > 0 ? CurrentST / MaxST : 1;
         public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
+
+        public bool HasShield => ShieldFactor > 0;
 
         public float TotalHP => CurrentHP + CurrentShield;
 
@@ -220,6 +223,7 @@ namespace TCC.Data
                 NPC(nameof(CurrentShield));
                 NPC(nameof(TotalHP));
                 NPC(nameof(ShieldFactor));
+                NPC(nameof(HasShield));
             }
         }
 
