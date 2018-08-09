@@ -22,7 +22,8 @@ namespace TCC.Data
                 NPC(nameof(Maxed));
             }
         }
-        public bool Maxed { get; set; }
+        public bool Maxed { get => Factor ==1; set { }
+        }
         private int max = 1;
         public int Max
         {

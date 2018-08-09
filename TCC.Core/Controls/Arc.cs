@@ -14,19 +14,14 @@ namespace TCC.Controls
             set => SetValue(StartAngleProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for StartAngle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty StartAngleProperty =
-            DependencyProperty.Register("StartAngle", typeof(double), typeof(Arc), new UIPropertyMetadata(0.0, UpdateArc));
+        public static readonly DependencyProperty StartAngleProperty = DependencyProperty.Register("StartAngle", typeof(double), typeof(Arc), new UIPropertyMetadata(0.0, UpdateArc));
 
         public double EndAngle
         {
             get => (double)GetValue(EndAngleProperty);
             set => SetValue(EndAngleProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for EndAngle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EndAngleProperty =
-            DependencyProperty.Register("EndAngle", typeof(double), typeof(Arc), new UIPropertyMetadata(90.0, UpdateArc));
+        public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register("EndAngle", typeof(double), typeof(Arc), new UIPropertyMetadata(90.0, UpdateArc));
 
         //This controls whether or not the progress bar goes clockwise or counterclockwise
         public SweepDirection Direction
@@ -34,10 +29,7 @@ namespace TCC.Controls
             get => (SweepDirection)GetValue(DirectionProperty);
             set => SetValue(DirectionProperty, value);
         }
-
-        public static readonly DependencyProperty DirectionProperty =
-            DependencyProperty.Register("Direction", typeof(SweepDirection), typeof(Arc),
-                new UIPropertyMetadata(SweepDirection.Clockwise));
+        public static readonly DependencyProperty DirectionProperty = DependencyProperty.Register("Direction", typeof(SweepDirection), typeof(Arc), new UIPropertyMetadata(SweepDirection.Clockwise));
 
         //rotate the start/endpoint of the arc a certain number of degree in the direction
         //ie. if you wanted it to be at 12:00 that would be 270 Clockwise or 90 counterclockwise
@@ -46,10 +38,7 @@ namespace TCC.Controls
             get => (double)GetValue(OriginRotationDegreesProperty);
             set => SetValue(OriginRotationDegreesProperty, value);
         }
-
-        public static readonly DependencyProperty OriginRotationDegreesProperty =
-            DependencyProperty.Register("OriginRotationDegrees", typeof(double), typeof(Arc),
-                new UIPropertyMetadata(270.0, UpdateArc));
+        public static readonly DependencyProperty OriginRotationDegreesProperty = DependencyProperty.Register("OriginRotationDegrees", typeof(double), typeof(Arc), new UIPropertyMetadata(270.0, UpdateArc));
 
         protected static void UpdateArc(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

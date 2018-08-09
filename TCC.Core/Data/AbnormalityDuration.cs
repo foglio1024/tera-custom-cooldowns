@@ -69,7 +69,6 @@ namespace TCC.Data
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
         {
             _count++;
-            Console.WriteLine($"Created {b.Name}: [{_count}]");
             _dispatcher = disp;
             Animated = animated;
             Abnormality = b;
@@ -115,7 +114,6 @@ namespace TCC.Data
         public void Dispose()
         {
             _count--;
-            Console.WriteLine($"Disposed {_abnormality.Name}: [{_count}]");
 
             if (timer == null) return;
             timer.Stop();

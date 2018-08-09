@@ -271,6 +271,16 @@
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <controls:SelectionSetting SettingName="Enrage label mode" SelectedItem="{Binding EnrageLabelMode, Mode=TwoWay}" ChoicesType="{x:Type data:EnrageLabelMode}" Choices="{Binding EnrageLabelModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Accurate HP detection" IsOn="{Binding AccurateHp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png" >
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Use more accurate enemy HP detection, allowing to detect HP changes to mobs not hit by the user. It requires more CPU power and may slow down TCC in crowded areas in which many people hit many mobs."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
 
                 </StackPanel>
             </TabItem>
@@ -296,6 +306,8 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Separator />
+                    <controls:BoolSetting SettingName="Compact mode" IsOn="{Binding CharacterWindowCompactMode, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
                     <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />-->
                 </StackPanel>
             </TabItem>
@@ -348,6 +360,14 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Separator/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Path Data="{StaticResource SvgClassWarrior}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
+                        <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Warrior</TextBlock>
+                    </StackPanel>
+                    <controls:BoolSetting SettingName="Show Edge bar" IsOn="{Binding WarriorShowEdge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
+
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -486,11 +506,9 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <Button Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" tcc:ButtonExtensions.CornerRadius="3" Margin="20 3"
-                            Click="ButtonBase_OnClick">
-                        <Border Background="{StaticResource MainColor}" HorizontalAlignment="Stretch" Padding="5" CornerRadius="3">
-                            <TextBlock HorizontalAlignment="Center">Open buff settings</TextBlock>
-                        </Border>
+                    <Button Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                            tcc:ButtonExtensions.CornerRadius="3" Margin="20 3" 
+                            Click="ButtonBase_OnClick" Content="Open buff settings" Foreground="{StaticResource MainColor}">
                     </Button>
                 </StackPanel>
             </TabItem>
@@ -510,7 +528,9 @@
                 <!-- Chat window settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ChatClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ChatClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ChatClickThruMode, Mode=TwoWay}" 
+                                               ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" 
+                                               Choices="{Binding ChatClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
 
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>
@@ -621,6 +641,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <Separator/>
                     <controls:BoolSetting SettingName="Use LFG window" IsOn="{Binding UseLfg, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
@@ -641,6 +662,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <Separator/>
                     <controls:BoolSetting SettingName="Show flight gauge" IsOn="{Binding ShowFlightGauge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
@@ -657,7 +679,19 @@
                                                ToolTip="{StaticResource ClickThruModeSettingTooltip}"
                                                Choices="{Binding ClickThruModes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:FieldSetting SettingName="Region override" Value="{Binding RegionOverride, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"/>
+                    <Separator/>
+                    <controls:BoolSetting SettingName="Show always floating button" IsOn="{Binding FloatingButtonSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+
+                    <controls:SelectionSetting SettingName="Floating button clickthru mode"
+                                               SelectedItem="{Binding FloatingButtonSettings.ClickThruMode, Mode=TwoWay}"
+                                               ChoicesType="{x:Type data:ClickThruMode}"
+                                               ToolTip="{StaticResource ClickThruModeSettingTooltip}"
+                                               Choices="{Binding ClickThruModes, Mode=OneWay}"
+                                               SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+
+                    <Separator/>
+                    <controls:FieldSetting SettingName="Region override" Value="{Binding RegionOverride, Mode=TwoWay}" 
+                                           SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"/>
                     <Separator/>
                     <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Discord connector</TextBlock>
                     <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" 

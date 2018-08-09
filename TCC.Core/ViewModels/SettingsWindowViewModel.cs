@@ -10,6 +10,7 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
+        private readonly bool _characterWindowExtendedMode;
         public static event Action ChatShowChannelChanged;
         public static event Action ChatShowTimestampChanged;
 
@@ -20,6 +21,7 @@ namespace TCC.ViewModels
         public WindowSettings CharacterWindowSettings => SettingsManager.CharacterWindowSettings;
         public WindowSettings BossWindowSettings => SettingsManager.BossWindowSettings;
         public WindowSettings FlightWindowSettings => SettingsManager.FlightGaugeWindowSettings;
+        public WindowSettings FloatingButtonSettings => SettingsManager.FloatingButtonSettings;
 
         public bool HideMe
         {
@@ -28,8 +30,8 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreMeInGroupWindow == value) return;
                 SettingsManager.IgnoreMeInGroupWindow = value;
-                if (value == true) GroupWindowViewModel.Instance.RemoveMe();
-                NPC("HideMe");
+                if (value) GroupWindowViewModel.Instance.RemoveMe();
+                NPC();
             }
         }
         public bool HideBuffs
@@ -63,7 +65,18 @@ namespace TCC.ViewModels
                 SettingsManager.DisablePartyAbnormals = value;
                 NPC(nameof(DisableAllPartyAbnormals));
                 MessageFactory.Update();
-                if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
+                if (value) GroupWindowViewModel.Instance.ClearAllAbnormalities();
+            }
+        }
+        public bool AccurateHp
+        {
+            get => SettingsManager.AccurateHp;
+            set
+            {
+                if (SettingsManager.AccurateHp == value) return;
+                SettingsManager.AccurateHp = value;
+                NPC(nameof(AccurateHp));
+                MessageFactory.Update();
             }
         }
 
@@ -133,7 +146,7 @@ namespace TCC.ViewModels
                     val = 20;
                 }
                 SettingsManager.MaxMessages = val;
-                NPC("MaxMessages");
+                NPC();
             }
         }
         public int SpamThreshold
@@ -143,7 +156,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.SpamThreshold == value) return;
                 SettingsManager.SpamThreshold = value;
-                NPC("SpamThreshold");
+                NPC();
             }
         }
         public bool ShowTimestamp
@@ -514,6 +527,45 @@ namespace TCC.ViewModels
                 if (SettingsManager.ShowTradeLfg == value) return;
                 SettingsManager.ShowTradeLfg = value;
                 NPC();
+            }
+        }
+
+        public bool CharacterWindowCompactMode
+        {
+            get { return SettingsManager.CharacterWindowCompactMode; }
+            set
+            {
+                if (SettingsManager.CharacterWindowCompactMode == value) return;
+                SettingsManager.CharacterWindowCompactMode = value;
+                NPC();
+                CharacterWindowViewModel.Instance.ExNPC(nameof(CharacterWindowViewModel.CompactMode));
+                WindowManager.CharacterWindow.Left = value? WindowManager.CharacterWindow.Left + 175 :
+                    WindowManager.CharacterWindow.Left - 175;
+                
+            }
+        }
+
+        public bool WarriorShowEdge
+        {
+            get => SettingsManager.WarriorShowEdge;
+            set
+            {
+                if (SettingsManager.WarriorShowEdge == value) return;
+                SettingsManager.WarriorShowEdge = value;
+                NPC();
+                if(ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowEdge));
+            }
+        }
+
+        public bool WarriorShowTraverseCut
+        {
+            get => SettingsManager.WarriorShowTraverseCut;
+            set
+            {
+                if (SettingsManager.WarriorShowTraverseCut == value) return;
+                SettingsManager.WarriorShowTraverseCut = value;
+                NPC();
+                if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowTraverseCut));
             }
         }
     }

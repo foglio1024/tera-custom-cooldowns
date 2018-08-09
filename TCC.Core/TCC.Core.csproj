@@ -246,6 +246,7 @@
     <Compile Include="Data\ApplyMessage.cs" />
     <Compile Include="Data\BrokerChatMessage.cs" />
     <Compile Include="Data\ChatChannelOnOff.cs" />
+    <Compile Include="Data\ChatUtils.cs" />
     <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
     <Compile Include="Data\Databases\AchievementDatabase.cs" />
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\MessagePieceBuilder.cs" />
     <Compile Include="Data\SystemMessage.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
@@ -707,6 +709,9 @@
     <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
@@ -1085,6 +1090,10 @@
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\FlightDurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1162,6 +1171,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\traverse_cut.png" />
+    <Resource Include="resources\images\kr_boss_icon_enrage.png" />
+    <Resource Include="resources\images\kr_boss_icon.png" />
     <Resource Include="resources\images\kr_hpd_bar.png" />
     <Resource Include="resources\images\kr_hp_bar.png" />
     <Resource Include="resources\images\kr_mp_bar.png" />

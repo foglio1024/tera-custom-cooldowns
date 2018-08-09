@@ -10,6 +10,8 @@ namespace TCC.ViewModels
 
         public Player Player => SessionManager.CurrentPlayer;
 
+        public bool CompactMode => SettingsManager.CharacterWindowCompactMode;
+
         //public bool IsTeraOnTop
         //{
         //    get => WindowManager.IsTccVisible;

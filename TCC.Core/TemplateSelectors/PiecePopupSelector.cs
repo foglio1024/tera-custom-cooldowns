@@ -10,7 +10,7 @@ namespace TCC.TemplateSelectors
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null) return null;
-            if(((MessagePiece)item).Type == MessagePieceType.Point_of_interest)
+            if(((MessagePiece)item).Type == MessagePieceType.PointOfInterest)
             {
                 return MapTemplate;
             }

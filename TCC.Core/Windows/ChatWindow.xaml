@@ -97,8 +97,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Border Background="#50ff8c00" BorderThickness="0 0 0 2" BorderBrush="DarkOrange"  Margin="1 3 2 0" Visibility="{Binding Content.PinnedMessage, Converter={StaticResource Converters.NullToVisibleCollapsed}}">
-
+                <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf"  Margin="1 3 2 0" 
+                        Visibility="{Binding Content.PinnedMessage, Converter={StaticResource Converters.NullToVisibleCollapsed}}">
                 <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}" 
                                 Content="{Binding Content.PinnedMessage}"
                                 Margin="10 3 4 2">

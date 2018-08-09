@@ -8,15 +8,6 @@
              ClipToBounds="False" Background="Transparent" 
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData FixedSkillCooldown}">
     <UserControl.Resources>
-        <VisualBrush x:Key="IconOpacityBrush" >
-            <VisualBrush.Visual>
-                <Rectangle Fill="White" Width="60" Height="60">
-                    <Rectangle.RenderTransform>
-                        <RotateTransform Angle="45"/>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-            </VisualBrush.Visual>
-        </VisualBrush>
         <ElasticEase x:Key="BounceEase" Oscillations="3" />
         <Storyboard x:Key="WarnShake" RepeatBehavior="Forever">
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
@@ -126,7 +117,7 @@
                    VerticalAlignment="Stretch" 
                    OpacityMask="{StaticResource IconOpacityBrush}">
         </local:Arc>
-        <Ellipse Fill="White" Name="Glow" Opacity="0"/>
+        <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Fill="White" Name="Glow" Opacity="0"/>
         <Grid Width="24" 
               Height="24" 
               x:Name="G" 

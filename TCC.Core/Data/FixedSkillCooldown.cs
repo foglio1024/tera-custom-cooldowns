@@ -13,6 +13,7 @@ namespace TCC.Data
         public event Action<CooldownMode> Started;
         public event Action<CooldownMode> Ended;
         public event Action FlashingForced;
+        public event Action FlashingStopForced;
         public event Action SecondsUpdated;
         public event Action Reset;
 
@@ -56,10 +57,10 @@ namespace TCC.Data
             get => _flashOnAvailable;
             set
             {
-                if (_flashOnAvailable == value) return;
                 _flashOnAvailable = value;
                 NPC();
-                ForceFlashing();
+                if(value) ForceFlashing();
+                else ForceStopFlashing();
             }
         }
         public bool IsAvailable => !_mainTimer.IsEnabled;
@@ -168,7 +169,7 @@ namespace TCC.Data
 
         }
         public void ForceEnded() => CooldownEnded(null, null);
-
+        public void ForceStopFlashing() => _dispatcher.Invoke(() => FlashingStopForced?.Invoke());
         public void ProcReset()
         {
             _dispatcher.Invoke(() => Reset?.Invoke());

@@ -19,8 +19,8 @@ namespace TCC
             }
         }
 
-        private bool _forceVisible = false;
-        private bool _forceUndim = false;
+        private bool _forceVisible = true;
+        private bool _forceUndim = true;
         public event Action VisibilityChanged;
         public event Action DimChanged;
         public event Action ClickThruChanged;

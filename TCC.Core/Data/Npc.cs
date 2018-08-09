@@ -10,6 +10,8 @@ namespace TCC.Data
 {
     public class Npc : TSPropertyChanged, IDisposable
     {
+        public bool HasGage { get; set; }
+
         public ulong EntityId { get; set; }
         protected string name;
         public string Name

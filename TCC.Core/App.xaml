@@ -25,7 +25,7 @@
             <Color x:Key="GreenColorBase">#00a561</Color>
             <Color x:Key="HpColorBase">#ff3333</Color>
             <Color x:Key="HpColor2Base">#faa089</Color>
-            <Color x:Key="MpColorBase">#2347ee</Color>
+            <Color x:Key="MpColorBase">#3387ff</Color>
             <Color x:Key="MpColor2Base">#0ab8f6</Color>
             <Color x:Key="HpDebuffColorBase">#9c04bd</Color>
             <Color x:Key="HpDebuffColor2Base">#b24cc8</Color>
@@ -84,6 +84,17 @@
             <SolidColorBrush x:Key="KrBgColor" Color="#2c313b"/>
             <SolidColorBrush x:Key="KrBorderColor" Color="#515b65"/>
 
+            <VisualBrush x:Key="IconOpacityBrush" >
+                <VisualBrush.Visual>
+                    <Rectangle Fill="White" Width="60" Height="60">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="45"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </VisualBrush.Visual>
+            </VisualBrush>
+
+
             <system:Double x:Key="MapWidth">800</system:Double>
             <system:Double x:Key="MapHeight">600</system:Double>
 
@@ -130,6 +141,15 @@
             <RotateTransform x:Key="DefaultRotateTransform"/>
             <TranslateTransform x:Key="DefaultTranslateTransform"/>
             <ScaleTransform x:Key="DefaultScaleTransform"/>
+
+            <Storyboard x:Key="Pulse" RepeatBehavior="Forever" >
+                <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+                <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.6" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.2"/>
+                <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.6" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
+            </Storyboard>
+
+
             <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
             <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
             <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
@@ -409,10 +429,10 @@
             <converters:RaidToColorConverter x:Key="Converters.RaidToColor"/>
 
             <DataTemplate x:Key="PartyAbnormality">
-                <controls:AbnormalityIndicator Size="28"/>
+                <controls:AbnormalityIndicator Size="28" DataContext="{Binding}"/>
             </DataTemplate>
             <DataTemplate x:Key="RaidAbnormality">
-                <controls:AbnormalityIndicator Size="24"/>
+                <controls:AbnormalityIndicator Size="20"/>
             </DataTemplate>
             <DataTemplate x:Key="BossAbnormality">
                 <controls:AbnormalityIndicator Size="30" Margin="2"/>

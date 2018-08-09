@@ -95,9 +95,9 @@
             <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                             ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
         </ContentControl.LayoutTransform>
-        <ContentControl.CacheMode>
+        <!--<ContentControl.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
-        </ContentControl.CacheMode>
+        </ContentControl.CacheMode>-->
     </ContentControl>
     </Grid>
 </w:TccWidget>

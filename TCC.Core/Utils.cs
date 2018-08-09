@@ -306,6 +306,11 @@ namespace TCC
             _dispatcher.InvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
+
+        public void ExNPC(string v)
+        {
+            NPC(v);
+        }
     }
     public class SynchronizedObservableCollection<T> : ObservableCollection<T>
     {

@@ -84,7 +84,7 @@ namespace TCC.Controls
 
         // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SizeProperty =
-            DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
+            DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator), new PropertyMetadata(18.0));
     }
 
     public class DurationLabelConverter : IValueConverter

@@ -74,6 +74,13 @@ namespace TCC.Parsing
             Packets.Enqueue(obj);
         }
 
+        public static void EnqueueMessageFromProxy(MessageDirection dir,  string data)
+        {
+            var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>( StringUtils.StringToByteArray(data.Substring(4))));
+            Console.WriteLine(msg.OpCode);
+            Packets.Enqueue(msg);
+        }
+
         private static int _processed;
         private static int _discarded;
         private static void PacketAnalysisLoop()
@@ -88,6 +95,7 @@ namespace TCC.Parsing
                 }
                 var message = Factory.Create(msg);
                 Factory.Process(message);
+                //App.DebugWindow.SetQueuedPackets(Packets.Count);
             }
             // ReSharper disable once FunctionNeverReturns
         }
@@ -420,8 +428,11 @@ namespace TCC.Parsing
             //if (sourceInParty && targetInParty) return;
             //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
             //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+            //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
+            //BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
+            if (x.Type != 1) return;
             if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-            BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
+            BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
         }
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
@@ -457,6 +468,25 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
         }
 
+        public static void HandleProxyOutput(string author, uint channel, string message)
+        {
+            if (message.IndexOf('[') != -1 && message.IndexOf(']') != -1)
+            {
+                author = message.Split(new []{ '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                message = message.Replace('[' + author + ']', "");
+            }
+            if (author == "undefined") author = "System";
+            if (!ChatWindowManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
+                ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
+            else
+                ChatWindowManager.Instance.AddChatMessage(
+                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x => 
+                    x.Id == channel && x.Joined).Index + 11), author, message));
+        }
+
+
+
+        
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
@@ -479,7 +509,7 @@ namespace TCC.Parsing
 
         public static void HandleJoinPrivateChat(S_JOIN_PRIVATE_CHANNEL x)
         {
-            ChatWindowManager.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
+            ChatWindowManager.Instance.JoinPrivateChannel(x.Id, x.Index, x.Name);
         }
 
         internal static void HandleGuildTowerInfo(S_GUILD_TOWER_INFO x)

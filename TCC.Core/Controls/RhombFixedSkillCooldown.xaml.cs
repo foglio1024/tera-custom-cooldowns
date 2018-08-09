@@ -77,7 +77,13 @@ namespace TCC.Controls
             _context.FlashingForced += OnFlashingStarted;
             _context.SecondsUpdated += OnSecondsUpdated;
             _context.Reset += OnReset;
+            _context.FlashingStopForced += OnFlashingForceStopped;
 
+        }
+
+        private void OnFlashingForceStopped()
+        {
+            StopWarning();
         }
 
         private void OnReset()
@@ -157,8 +163,8 @@ namespace TCC.Controls
                 var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
                 Glow.BeginAnimation(OpacityProperty, an);
             }
+               if(_context.FlashOnAvailable) StartWarning();
 
-            StartWarning();
         }
 
         private void StopPreAnimation()

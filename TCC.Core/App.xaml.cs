@@ -31,9 +31,14 @@ namespace TCC
         public const bool Debug = false;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
+        public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+//#if DEBUG
+//            DebugWindow = new DebugWindow();
+//            DebugWindow.Show();
+//#endif
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             //new Task(() => { if (new Firebase.Firebase().CheckService()) Console.WriteLine("Firebase ok");}).Start(); 
@@ -80,8 +85,15 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
-            ClassWindowViewModel.Instance.CurrentClass = Class.Warrior;
-                //Task.Delay(1000).ContinueWith(t => (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Buff.Start(10000));
+            //ClassWindowViewModel.Instance.CurrentClass = Class.Warrior;
+
+            //EntitiesManager.SpawnNPC(950,3000,10,Visibility.Visible);
+            //EntitiesManager.SpawnNPC(970,1000,11,Visibility.Visible);
+            //EntitiesManager.SpawnNPC(970,2000,12,Visibility.Visible);
+            //EntitiesManager.SpawnNPC(970,3000,13,Visibility.Visible);
+            //EntitiesManager.SetNPCStatus(10, true);
+
+            //Task.Delay(1000).ContinueWith(t => (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Buff.Start(10000));
             //WindowManager.LfgListWindow.ShowWindow();
             // var l = new Listing();
             // l.LeaderId = 10;
@@ -90,9 +102,10 @@ namespace TCC
             // l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 10, IsLeader = true, Online = true});
             // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
+
             //var l = new List<User>();
             //var r = new Random();
-            //for (uint i = 0; i < 3; i++)
+            //for (uint i = 0; i < 10; i++)
             //{
             //    var u = new User(GroupWindowViewModel.Instance.GetDispatcher())
             //    {
@@ -101,16 +114,17 @@ namespace TCC
             //        ServerId = i,
             //        EntityId = i,
             //        Online = true,
-            //        Laurel = (Laurel)(r.Next(0,5)),
+            //        Laurel = (Laurel)(r.Next(0, 5)),
             //        HasAggro = i == 1,
             //        Alive = i != 0,
-            //        UserClass = (Class)r.Next(0, 12)
+            //        UserClass = (Class)r.Next(0, 12),
+            //        Awakened = i < 5,
             //    };
             //    GroupWindowViewModel.Instance.AddOrUpdateMember(u);
             //}
 
-            //GroupWindowViewModel.Instance.SetRaid(true);
-            //GroupWindowViewModel.Instance.SetNewLeader(10, "player");
+            ////GroupWindowViewModel.Instance.SetRaid(true);
+            //GroupWindowViewModel.Instance.SetNewLeader(1, "1");
         }
 
         private static void TeraSniffer_OnNewConnection(Server srv)

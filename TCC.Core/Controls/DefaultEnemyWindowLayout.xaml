@@ -10,17 +10,17 @@
                 Orientation="Horizontal"
                 >
         <ItemsControl Name="Bosses" 
-                      ItemTemplate="{StaticResource BossDataTemplate}"
                       ItemsSource="{Binding Bams}" 
+                      
+                      ItemTemplate="{StaticResource BossDataTemplate}" 
                       Width="Auto" 
                       >
+                      <!--TODO: Medium sized datatemplate?-->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical"
-                               ItemHeight="Auto" 
-                               ItemWidth="Auto" 
-                               MaxHeight="270" 
-                               Width="Auto" 
+                    <WrapPanel Width="Auto"
+                               Orientation="Vertical"
+                               Height="270"
                                Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
