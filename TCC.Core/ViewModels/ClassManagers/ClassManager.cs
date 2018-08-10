@@ -16,7 +16,10 @@ namespace TCC.ViewModels
 
         public abstract void LoadSpecialSkills();
 
-
+        public virtual bool ChangeSpecialSkill(Skill skill, uint cd)
+        {
+            return false;
+        }
 
         //public StatTracker HP { get; set; }
         //public StatTracker MP { get; set; }

@@ -168,6 +168,7 @@ namespace TCC.ViewModels
         private void NormalMode_Change(Skill skill, uint cd)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+            if (_classManager.ChangeSpecialSkill(skill, cd)) return;
 
             SkillCooldown sk;
             try
@@ -309,6 +310,7 @@ namespace TCC.ViewModels
         private void FixedMode_Change(Skill sk, uint cd)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+            if (_classManager.ChangeSpecialSkill(sk, cd)) return;
 
             var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.IconName);
             if (hSkill != null) return;

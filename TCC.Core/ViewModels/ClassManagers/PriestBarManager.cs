@@ -21,6 +21,8 @@ namespace TCC.ViewModels
         }
 
         public DurationCooldownIndicator Grace { get; set; }
+        public DurationCooldownIndicator EdictOfJudgment { get; set; }
+        public DurationCooldownIndicator DivineCharge { get; set; }
 
         public PriestBarManager() : base()
         {
@@ -42,10 +44,28 @@ namespace TCC.ViewModels
 
             Grace.Buff.Started += OnGraceBuffStarted;
             Grace.Buff.Ended += OnGraceBuffEnded;
+
+            // Edict Of Judgment
+            EdictOfJudgment = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
+            EdictOfJudgment.Buff = new FixedSkillCooldown(ed, false);
+            EdictOfJudgment.Cooldown = new FixedSkillCooldown(ed, false);
+
+            EdictOfJudgment.Buff.Started += OnEdictBuffStarted;
+            EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
+
+            // Divine Charge
+            DivineCharge = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
+            DivineCharge.Buff = new FixedSkillCooldown(dc, false);
+            DivineCharge.Cooldown = new FixedSkillCooldown(dc, false);
         }
 
         private void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
         private void OnGraceBuffStarted(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = false;
+        
+        private void OnEdictBuffEnded(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = true;
+        private void OnEdictBuffStarted(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = false;
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {
@@ -57,6 +77,26 @@ namespace TCC.ViewModels
             if (sk.Skill.IconName == Grace.Cooldown.Skill.IconName)
             {
                 Grace.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
+            {
+                EdictOfJudgment.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == DivineCharge.Cooldown.Skill.IconName)
+            {
+                DivineCharge.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            return false;
+        }
+
+        public override bool ChangeSpecialSkill(Skill skill, uint cd)
+        {
+            if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
+            {
+                EdictOfJudgment.Cooldown.Refresh(cd);
                 return true;
             }
             return false;
