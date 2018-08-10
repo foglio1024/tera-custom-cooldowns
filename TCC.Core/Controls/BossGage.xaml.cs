@@ -379,7 +379,7 @@ namespace TCC.Controls
             // ReSharper disable once PossibleNullReferenceException
             return (ulong) value == SessionManager.CurrentPlayer.EntityId
                 ? SessionManager.CurrentPlayer.Name
-                : (GroupWindowViewModel.Instance.TryGetUser((ulong) value, out var p) ? p.Name : "");
+                : EntitiesManager.IsEntitySpawned((ulong)value) ? EntitiesManager.GetEntityName((ulong)value) /*(GroupWindowViewModel.Instance.TryGetUser((ulong) value, out var p) ? p.Name*/ : "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
