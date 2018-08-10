@@ -91,5 +91,15 @@ namespace TCC.ViewModels
             }
             return false;
         }
+
+        public override bool ChangeSpecialSkill(Skill skill, uint cd)
+        {
+            if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
+            {
+                EdictOfJudgment.Cooldown.Refresh(cd);
+                return true;
+            }
+            return false;
+        }
     }
 }
