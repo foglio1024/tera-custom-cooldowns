@@ -11,6 +11,7 @@ namespace TCC.TemplateSelectors
         public DataTemplate QuestTemplate { get; set; }
         public DataTemplate PointOfInterestTemplate { get; set; }
         public DataTemplate MoneyTemplate { get; set; }
+        public DataTemplate EmojiTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -24,8 +25,10 @@ namespace TCC.TemplateSelectors
                     return ItemTemplate;
                 case MessagePieceType.Quest:
                     return QuestTemplate;
-                case MessagePieceType.Point_of_interest:
+                case MessagePieceType.PointOfInterest:
                     return PointOfInterestTemplate;
+                case MessagePieceType.Emoji:
+                    return EmojiTemplate;
                 case MessagePieceType.Money:
                     return MoneyTemplate;
                 default:

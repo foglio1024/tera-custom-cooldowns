@@ -42,7 +42,7 @@ namespace TCC.Controls.ChatControls
                         TccMessageBox.Show("Unable to open URL.", MessageBoxType.Error);
                     }
                     break;
-                case MessagePieceType.Point_of_interest:
+                case MessagePieceType.PointOfInterest:
                     Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Quest:
@@ -61,7 +61,7 @@ namespace TCC.Controls.ChatControls
                 case MessagePieceType.Url:
                     BgBorder.Background = _context.Color;
                     break;
-                case MessagePieceType.Point_of_interest:
+                case MessagePieceType.PointOfInterest:
                     BgBorder.Background = _context.Color;
                     break;
                 case MessagePieceType.Quest:

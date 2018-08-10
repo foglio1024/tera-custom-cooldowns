@@ -12,6 +12,7 @@ namespace TCC.ViewModels
         public List<ChatChannelOnOff> AllChannels => Utils.GetEnabledChannelsList();
         private ICollectionView _messages;
         private string _tabName;
+        private ChatMessage _pinnedMessage;
 
         public string TabName
         {
@@ -50,7 +51,16 @@ namespace TCC.ViewModels
                 NPC(nameof(Messages));
             }
         }
-
+        public ChatMessage PinnedMessage
+        {
+            get => _pinnedMessage;
+            set
+            {
+                if (_pinnedMessage == value) return;
+                _pinnedMessage = value;
+                NPC();
+            }
+        }
         public void Refresh()
         {
             Messages.Refresh();

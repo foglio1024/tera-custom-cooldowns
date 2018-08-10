@@ -10,6 +10,8 @@ namespace TCC.Data
 {
     public class Npc : TSPropertyChanged, IDisposable
     {
+        public bool HasGage { get; set; }
+
         public ulong EntityId { get; set; }
         protected string name;
         public string Name
@@ -317,6 +319,8 @@ namespace TCC.Data
         public event Action DeleteEvent;
         public void Delete()
         {
+            foreach (var buff in _buffs) buff.Dispose();
+
             DeleteEvent?.Invoke();
         }
     }

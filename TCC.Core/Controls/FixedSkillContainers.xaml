@@ -15,14 +15,14 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:CooldownWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="DefaultSkillIndicator">
-            <local:SkillIconControl />
+            <local:SkillIconControl Margin="-2 0" />
         </DataTemplate>
         <ControlTemplate x:Key="DragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
             <ControlTemplate.Resources>
                 <SineEase x:Key="Ease" EasingMode="EaseInOut" />
             </ControlTemplate.Resources>
             <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}">
+            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}" Margin="-2 0">
                 <local:FixedSkillControl />
                 <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom" />
@@ -109,7 +109,7 @@
         </Grid.RowDefinitions>
 
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".4" Grid.Row="1" Margin="0" CornerRadius="29"
+        <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".5" Grid.Row="1" Margin="0 0" CornerRadius="29"
                 x:Name="MainBorder" Effect="{x:Null}"
                 HorizontalAlignment="Left" Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" />
         <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".3"  Margin="0" CornerRadius="29"

@@ -74,6 +74,13 @@ namespace TCC.Parsing
             Packets.Enqueue(obj);
         }
 
+        public static void EnqueueMessageFromProxy(MessageDirection dir,  string data)
+        {
+            var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>( StringUtils.StringToByteArray(data.Substring(4))));
+            Console.WriteLine(msg.OpCode);
+            Packets.Enqueue(msg);
+        }
+
         private static int _processed;
         private static int _discarded;
         private static void PacketAnalysisLoop()
@@ -88,6 +95,7 @@ namespace TCC.Parsing
                 }
                 var message = Factory.Create(msg);
                 Factory.Process(message);
+                //App.DebugWindow.SetQueuedPackets(Packets.Count);
             }
             // ReSharper disable once FunctionNeverReturns
         }
@@ -131,6 +139,14 @@ namespace TCC.Parsing
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
+            if (p.Target == SessionManager.CurrentPlayer.EntityId && p.Target != p.Source && p.Source != 0 && EntitiesManager.IsEntitySpawned(p.Source) && p.Diff < 0)
+            {
+                var srcName = EntitiesManager.GetEntityName(p.Source);
+                srcName = srcName != ""
+                    ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
+                    : "<font color=\"#cccccc\">.</font>";
+                 ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+            }
             SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
             if (p.Target == SessionManager.CurrentPlayer.EntityId)
             {
@@ -171,8 +187,13 @@ namespace TCC.Parsing
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
             var b = BossGageWindowViewModel.Instance.NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == p.EntityId);
-            if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
-            if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p.Target);
+            //if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
+            if (b != null /*&& b.IsBoss*/ && b.Visible == System.Windows.Visibility.Visible)
+            {
+                GroupWindowViewModel.Instance.SetAggro(p.Target);
+                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, AggroCircle.Main, p.Target);
+
+            }
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
@@ -384,6 +405,7 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
+            EntitiesManager.SpawnUser(p.EntityId, p.Name);
             if (!GroupWindowViewModel.Instance.Exists(p.EntityId)) return;
 
             GroupWindowViewModel.Instance.UpdateMemberGear(p);
@@ -420,8 +442,11 @@ namespace TCC.Parsing
             //if (sourceInParty && targetInParty) return;
             //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
             //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+            //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
+            //BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
+            if (x.Type != 1) return;
             if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-            BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
+            BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
         }
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
@@ -457,6 +482,25 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
         }
 
+        public static void HandleProxyOutput(string author, uint channel, string message)
+        {
+            if (message.IndexOf('[') != -1 && message.IndexOf(']') != -1)
+            {
+                author = message.Split(new []{ '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                message = message.Replace('[' + author + ']', "");
+            }
+            if (author == "undefined") author = "System";
+            if (!ChatWindowManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
+                ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
+            else
+                ChatWindowManager.Instance.AddChatMessage(
+                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x => 
+                    x.Id == channel && x.Joined).Index + 11), author, message));
+        }
+
+
+
+        
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
@@ -479,7 +523,7 @@ namespace TCC.Parsing
 
         public static void HandleJoinPrivateChat(S_JOIN_PRIVATE_CHANNEL x)
         {
-            ChatWindowManager.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
+            ChatWindowManager.Instance.JoinPrivateChannel(x.Id, x.Index, x.Name);
         }
 
         internal static void HandleGuildTowerInfo(S_GUILD_TOWER_INFO x)
@@ -713,6 +757,8 @@ namespace TCC.Parsing
 
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
+            EntitiesManager.DepawnUser(p.EntityId);
+
         }
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)

@@ -17,7 +17,6 @@ namespace TCC.TemplateSelectors
             switch (m.Channel)
             {
                 case ChatChannel.SentWhisper:
-                    return WhisperChannelDataTemplate;
                 case ChatChannel.ReceivedWhisper:
                     return WhisperChannelDataTemplate;
                 case ChatChannel.Megaphone:

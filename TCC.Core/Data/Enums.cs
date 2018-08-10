@@ -1,5 +1,12 @@
 ﻿namespace TCC.Data
 {
+    public enum HpChangeSource
+    {
+        CreatureChangeHp,
+        BossGage,
+        SkillResult
+    }
+
     public enum NotificationType
     {
         Normal = 0,
@@ -82,6 +89,7 @@
         Enchant9 = 315, //arbitrary
         WorldBoss = 316, //arb
         Laurel = 317,
+        Damage = 318,
         TCC = 1000,
         Twitch = 1001
     }

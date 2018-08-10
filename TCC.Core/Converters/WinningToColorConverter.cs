@@ -15,7 +15,7 @@ namespace TCC.Converters
             }
             else
             {
-                return new SolidColorBrush(Colors.White);
+                return App.Current.FindResource("KrBgColor");
             }
         }
 

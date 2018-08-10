@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Timers;
 using TCC.Data;
 using TCC.Data.Databases;
 
@@ -16,10 +18,20 @@ namespace TCC.ViewModels
         public WarriorBarManager() : base()
         {
             EdgeCounter = new Counter(10, true);
-            TraverseCut = new StatTracker {Max = 13, Val = 0};
-            TempestAura = new StatTracker {Max = 50, Val = 0};
+            TraverseCut = new StatTracker { Max = 13, Val = 0 };
+            TempestAura = new StatTracker { Max = 50, Val = 0 };
             Stance = new StanceTracker<WarriorStance>();
+
+            //Task.Delay(1000).ContinueWith(t =>
+            //{
+            //    var tm = new Timer(200);
+            //    tm.Elapsed += (_, __) => EdgeCounter.Val = EdgeCounter.Val == 10 ? 0 : EdgeCounter.Val + 1;
+            //    tm.Start();
+            //});
         }
+
+        public bool ShowEdge => SettingsManager.WarriorShowEdge;
+        public bool ShowTraverseCut => SettingsManager.WarriorShowTraverseCut;
 
         public sealed override void LoadSpecialSkills()
         {

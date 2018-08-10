@@ -101,6 +101,8 @@ namespace TCC.Converters
                     return "WB";
                 case ChatChannel.SystemDefault:
                     return "System";
+                case ChatChannel.Damage:
+                    return "Dmg";
                 default:
                     return ch.ToString();
             }

@@ -19,8 +19,8 @@ namespace TCC
             }
         }
 
-        private bool _forceVisible;
-        private bool _forceUndim;
+        private bool _forceVisible = false;
+        private bool _forceUndim = false;
         public event Action VisibilityChanged;
         public event Action DimChanged;
         public event Action ClickThruChanged;
@@ -64,7 +64,7 @@ namespace TCC
 
         private void NotifyDimChanged()
         {
-            Console.WriteLine($"[Foreground Manager] Notifying Dim = {Dim} (TimerEnabled:{_dimTimer.IsEnabled}, Encounter:{SessionManager.Encounter})");
+            //Console.WriteLine($"[Foreground Manager] Notifying Dim = {Dim} (TimerEnabled:{_dimTimer.IsEnabled}, Encounter:{SessionManager.Encounter})");
             App.BaseDispatcher?.Invoke(() =>
                 DimChanged?.Invoke());
         }

@@ -4,23 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" d:DataContext="{d:DesignData ChatMessage}">
-    <ItemsControl ItemsSource="{Binding Pieces}"
+    <UserControl.Resources>
+        <DataTemplate x:Key="MainDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ItemsControl ItemsSource="{Binding Pieces}"
                           ItemTemplate="{StaticResource MessageBodyTemplate}" 
                           Background="#0f00"  
                           Margin="3,0,0,0" 
                           VerticalAlignment="Center" >
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" 
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" 
                            PreviewMouseRightButtonDown="WrapPanel_PreviewMouseRightButtonDown" VerticalAlignment="Top">
-                    <WrapPanel.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Copy text" Click="I_Click"/>
-                        </ContextMenu>
-                    </WrapPanel.ContextMenu>
-                </WrapPanel>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-    </ItemsControl>
-
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="PinBtn" Visibility="Collapsed" ToolTip="Pin/Unpin"
+                        VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="PinBtn_OnClick">
+                    <Path Data="{StaticResource SvgPin}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+                </Button>
+                <Button Grid.Column="2" HorizontalAlignment="Right" x:Name="CopyBtn" Visibility="Collapsed" ToolTip="Copy text to clipboard"
+                        VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="CopyBtn_OnClick">
+                    <Path Data="{StaticResource SvgCopy}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+                </Button>
+            </Grid>
+            <DataTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="PinBtn" Property="Visibility" Value="Visible"></Setter>
+                    <Setter TargetName="CopyBtn" Property="Visibility" Value="Visible"></Setter>
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </UserControl.Resources>
+<ContentControl ContentTemplate="{StaticResource MainDataTemplate}" Content="{Binding}"/>
 </UserControl>

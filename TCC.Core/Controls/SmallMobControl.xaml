@@ -9,28 +9,50 @@
              Visibility="{Binding Visible}" IsHitTestVisible="False" UseLayoutRounding="True">
 
 
-    <Grid Margin="2" Width="100" MaxWidth="150" x:Name="RootGrid" >
+    <Grid Margin="2 2 6 2" Width="250" x:Name="RootGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
         </Grid.LayoutTransform>
-        <TextBlock Text="{Binding Name}" Grid.Column="1" Style="{StaticResource Styles.DefaultText}" TextTrimming="CharacterEllipsis"/>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Margin="0"  Grid.Row="1" Grid.Column="1">
-            <StackPanel>
-                <Grid Margin="3,0">
+        <!--<Border Style="{StaticResource Styles.DefaultBorder}"  Margin="0"  Grid.Row="1" Grid.Column="1">
+        </Border>-->
+            <StackPanel Grid.Row="1">
+                <Grid Margin="8 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}"  FontWeight="Bold" Text="{Binding CurrentFactor, StringFormat=##0 %, Mode=OneWay}"/>
-                    <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}" Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Grid.Column="2"/>
+                <TextBlock Text="{Binding Name}"  Style="{StaticResource Styles.DefaultText}" 
+                           TextTrimming="CharacterEllipsis" Margin="0 0 8 0"/>
+
+                <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}" 
+                           Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Grid.Column="1"/>
+                    <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}"  
+                               FontWeight="Bold" Text="{Binding CurrentFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2"/>
                 </Grid>
+            <Grid>
                 
-                <local:GenericGauge Height="4" 
+                <Border Background="{StaticResource KrBgColor}"
+                        BorderBrush="{StaticResource KrBorderColor}"
+                        RenderTransform="{StaticResource Skew45}"
+                        BorderThickness="2 1" Height="8"
+                        RenderTransformOrigin="1 1"></Border>
+            <Border RenderTransform="{StaticResource Skew45}" Height="4" RenderTransformOrigin="1 1"
+                       Background="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                       Margin="5 0 0 0" HorizontalAlignment="Left" >
+                    <FrameworkElement HorizontalAlignment="Stretch" Width="244">
+                        <FrameworkElement.LayoutTransform>
+                            <ScaleTransform ScaleX="{Binding CurrentFactor}"></ScaleTransform>
+                        </FrameworkElement.LayoutTransform>
+                    </FrameworkElement>
+            </Border>
+            </Grid>
+                <!--<local:GenericGauge Height="4" 
                                 Width="Auto"
                                 BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
                                 GaugeName=""
@@ -39,8 +61,22 @@
                                 ShowValues="False"
                                 CurrentVal="{Binding CurrentHP}"
                                 MaxVal="{Binding MaxHP}"
-                                x:Name="HPgauge"/>
+                                x:Name="HPgauge"/>-->
             </StackPanel>
-        </Border>
+        <ItemsControl ItemTemplate="{StaticResource RaidAbnormality}" Grid.Row="2" ItemsSource="{Binding Buffs}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" 
+                                Margin="6 0 0 0" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="-6,0,0,0" Property="ContentControl.Margin"></Setter>
+                </Style>
+
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+
     </Grid>
 </UserControl>

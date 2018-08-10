@@ -64,6 +64,8 @@ namespace TCC.ViewModels
                 return;
             }
             LoadEventFile(today, region);
+            if(SessionManager.Logged) TimeManager.Instance.SetGuildBamTime(false);
+
         }
         private void LoadEventFile(DayOfWeek today, string region)
         {
@@ -263,7 +265,7 @@ namespace TCC.ViewModels
         public void ShowWindow()
         {
             if (!_dispatcher.Thread.IsAlive) return;
-            LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
+            //LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
             NPC(nameof(SelectedCharacterExists));
             //SelectCharacter(SelectedCharacter);

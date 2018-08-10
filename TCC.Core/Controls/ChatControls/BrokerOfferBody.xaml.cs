@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -13,9 +14,10 @@ namespace TCC.Controls.ChatControls
         {
             InitializeComponent();
         }
+
         private void Accept(object sender, MouseButtonEventArgs e)
         {
-            var dc = (BrokerChatMessage)DataContext;
+            var dc = (BrokerChatMessage) DataContext;
             Proxy.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
             ChatWindowManager.Instance.SetPaused(false, dc);
             ChatWindowManager.Instance.ScrollToBottom();
@@ -24,7 +26,7 @@ namespace TCC.Controls.ChatControls
 
         private void Decline(object sender, MouseButtonEventArgs e)
         {
-            var dc = (BrokerChatMessage)DataContext;
+            var dc = (BrokerChatMessage) DataContext;
             if (dc.Handled) return;
             Proxy.DeclineBrokerOffer(dc.PlayerId, dc.ListingId);
             OnHandled();
@@ -35,7 +37,7 @@ namespace TCC.Controls.ChatControls
 
         private void OnHandled()
         {
-            var dc = (BrokerChatMessage)DataContext;
+            var dc = (BrokerChatMessage) DataContext;
             dc.Handled = true;
             //declineButton.Visibility = Visibility.Collapsed;
             //acceptButton.Visibility = Visibility.Collapsed;
@@ -43,16 +45,25 @@ namespace TCC.Controls.ChatControls
 
         private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            var dc = (BrokerChatMessage)DataContext;
+            var dc = (BrokerChatMessage) DataContext;
             ChatWindowManager.Instance.SetPaused(true, dc);
         }
 
         private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            var dc = (BrokerChatMessage)DataContext;
-
-            ChatWindowManager.Instance.SetPaused(false, dc);
-            ChatWindowManager.Instance.ScrollToBottom();
+            try
+            {
+                var dc = (BrokerChatMessage) DataContext;
+                ChatWindowManager.Instance.SetPaused(false, dc);
+            }
+            catch (Exception exception)
+            {
+                ChatWindowManager.Instance.SetPaused(false);
+            }
+            finally
+            {
+                ChatWindowManager.Instance.ScrollToBottom();
+            }
         }
     }
 }

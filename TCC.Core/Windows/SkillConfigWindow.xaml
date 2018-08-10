@@ -60,9 +60,11 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource BackgroundDarkColor}" Grid.RowSpan="3" CornerRadius="2"></Border>
+        <Border Background="{StaticResource DefaultBackgroundColor}" 
+                Grid.RowSpan="3" CornerRadius="1" BorderThickness="1"
+                BorderBrush="#8555"></Border>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <Border Background="{StaticResource BackgroundDarkColor}" CornerRadius="2 2 0 0"></Border>
+            <Border Background="#3000" CornerRadius="1 1 0 0"></Border>
             <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}"
                     VerticalAlignment="Stretch"
                     Click="ClosewWindow" VerticalContentAlignment="Center">
@@ -70,21 +72,22 @@
             </Button>
             <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30"
                    RenderOptions.BitmapScalingMode="HighQuality"
-                   VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3">
+                   VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".6" Margin="3 3">
             </Image>
             <TextBlock Text="Cooldown bar settings" Style="{StaticResource Styles.DefaultText}"
                        Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       FontSize="15" Foreground="#999" />
+                       FontSize="15" Foreground="#ccc" />
         </Grid>
         <UniformGrid Columns="3" Grid.Row="1">
             <UniformGrid.Resources>
                 <Style TargetType="ListBox">
                     <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplate}"></Setter>
                     <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultListItemStyle}"></Setter>
-                    <Setter Property="Background" Value="#2000"></Setter>
-                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="Background" Value="#3000"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
                     <Setter Property="MaxHeight" Value="500"></Setter>
                     <Setter Property="Margin" Value="5 0 5 10"></Setter>
+                    <Setter Property="BorderBrush" Value="#8555"></Setter>
 
                 </Style>
             </UniformGrid.Resources>
@@ -95,7 +98,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
-                           Opacity=".5" FontWeight="Thin" FontSize="16">
+                           Opacity=".8" FontWeight="Thin" FontSize="16">
                     Skills
                 </TextBlock>
                 <Grid Grid.Row="1">
@@ -129,7 +132,7 @@
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
 
                     <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 0"
-                               Opacity=".5" FontWeight="Thin" FontSize="16" >
+                               Opacity=".8" FontWeight="Thin" FontSize="16" >
                         Hidden skills
                     </TextBlock>
                     <Path Data="{StaticResource SvgInfo}" Margin="0 1 10 0" Height="14"
@@ -157,7 +160,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
-                           Opacity=".5" FontWeight="Thin" FontSize="16">
+                           Opacity=".8" FontWeight="Thin" FontSize="16">
                     Items
                 </TextBlock>
                 <Grid Grid.Row="1">
@@ -189,7 +192,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
-                           Opacity=".5" FontWeight="Thin" FontSize="16">
+                           Opacity=".8" FontWeight="Thin" FontSize="16">
                     Abnormalities
                 </TextBlock>
 
@@ -215,7 +218,7 @@
                 </ListBox>
             </Grid>
         </UniformGrid>
-        <TextBlock Grid.Row="2" Foreground="#3fff" HorizontalAlignment="Center" Margin="10 0 10 10"
+        <TextBlock Grid.Row="2" Foreground="#6fff" HorizontalAlignment="Center" Margin="10 0 10 10"
                    TextAlignment="Center">
             Drag and drop a skill, item, abnormality to the cooldown bar
         </TextBlock>

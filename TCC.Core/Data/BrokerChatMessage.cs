@@ -71,7 +71,7 @@ namespace TCC.Data
             {
                 Listing.Text = "<"+ i.Name + ">";
                 Listing.ItemId = i.Id;
-                Listing.SetColor(GetItemColor(i));
+                Listing.SetColor(ChatUtils.GetItemColor(i));
             }
             Listing.Type = MessagePieceType.Item;
         }

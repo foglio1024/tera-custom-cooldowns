@@ -10,6 +10,12 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var l = (Laurel)value;
+            bool kr = false, big = false;
+            if (parameter != null)
+            {
+                kr = parameter.ToString().Contains("kr");
+                big = parameter.ToString().Contains("big");
+            }
             //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
             var laurel = "";
             switch (l)
@@ -33,6 +39,9 @@ namespace TCC.Converters
                     laurel = "champion";
                     break;
             }
+
+            if (kr) laurel += "_kr";
+            if (big) laurel += "_big";
             // return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
             return "/resources/images/Icon_Laurels/" + laurel + ".png";
         }

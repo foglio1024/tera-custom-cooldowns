@@ -5,8 +5,9 @@
         Simple,
         Item,
         Quest,
-        Point_of_interest,
+        PointOfInterest,
         Money,
-        Url
+        Url,
+        Emoji,
     }
 }

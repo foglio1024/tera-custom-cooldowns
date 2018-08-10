@@ -24,13 +24,14 @@ namespace TCC
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
         private static XDocument _settingsDoc;
-        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false);
         public static WindowSettings CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
-        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false);
         public static WindowSettings BuffWindowSettings = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
-        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
+        public static WindowSettings CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false);
         public static WindowSettings ClassWindowSettings = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false);
         public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
+        public static WindowSettings FloatingButtonSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true);
 
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>();
 
@@ -122,6 +123,7 @@ namespace TCC
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowGroupWindowDetails { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
+        public static bool AccurateHp { get; set; } = true;
         public static HotKey LfgHotkey { get; set; } = new HotKey(Key.Y, ModifierKeys.Control);
         public static HotKey InfoWindowHotkey { get; set; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; set; } = new HotKey(Key.O, ModifierKeys.Control);
@@ -129,7 +131,7 @@ namespace TCC
         public static HotKey LootSettingsHotkey { get; set; } = new HotKey(Key.L, ModifierKeys.Control);
         public static string RegionOverride { get; set; } = "";
         public static bool ShowAwakenIcon { get; set; } = true;
-
+        public static bool CharacterWindowCompactMode { get; set; } = true;
         public static ClickThruMode ChatClickThruMode
         {
             get
@@ -152,6 +154,10 @@ namespace TCC
             }
         }
 
+        public static bool WarriorShowTraverseCut { get; set; } = true;
+        public static bool WarriorShowEdge { get; set; } = true;
+
+
         public static void LoadWindowSettings()
         {
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) return;
@@ -170,6 +176,7 @@ namespace TCC
                     else if (name == "GroupWindow") GroupWindowSettings = ParseWindowSettings(ws);
                     else if (name == "ClassWindow") ClassWindowSettings = ParseWindowSettings(ws);
                     else if (name == "FlightGaugeWindow") FlightGaugeWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "FloatingButton") FloatingButtonSettings = ParseWindowSettings(ws);
                     //add window here
                 }
 
@@ -213,6 +220,42 @@ namespace TCC
             };
         }
 
+        private static List<Tab> ParseTabsSettings(XElement elem)
+        {
+            var result = new List<Tab>();
+            if (elem != null)
+            {
+                foreach (var t in elem.Descendants().Where(x => x.Name == "Tab"))
+                {
+                    var tabName = t.Attribute("name").Value;
+                    var channels = new List<ChatChannel>();
+                    var exChannels = new List<ChatChannel>();
+                    var authors = new List<string>();
+                    var exAuthors = new List<string>();
+                    foreach (var chElement in t.Descendants().Where(x => x.Name == "Channel"))
+                    {
+                        channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
+                    }
+                    foreach (var chElement in t.Descendants().Where(x => x.Name == "ExcludedChannel"))
+                    {
+                        exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
+                    }
+                    foreach (var authElement in t.Descendants().Where(x => x.Name == "Author"))
+                    {
+                        authors.Add(authElement.Attribute("value").Value);
+                    }
+                    foreach (var authElement in t.Descendants().Where(x => x.Name == "ExcludedAuthor"))
+                    {
+                        exAuthors.Add(authElement.Attribute("value").Value);
+                    }
+
+                    result.Add(new Tab(tabName, channels.ToArray(), exChannels.ToArray(), authors.ToArray(), exAuthors.ToArray()));
+                }
+            }
+            return result;
+        }
+
+
         public static void LoadSettings()
         {
             try
@@ -255,6 +298,10 @@ namespace TCC
                     else if (attr.Name == nameof(ChatEnabled)) ChatEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowTradeLfg)) ShowTradeLfg = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowAwakenIcon)) ShowAwakenIcon = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(AccurateHp)) AccurateHp = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(WarriorShowEdge)) WarriorShowEdge = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(WarriorShowTraverseCut)) WarriorShowTraverseCut = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(CharacterWindowCompactMode)) CharacterWindowCompactMode = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowAllGroupAbnormalities)) ShowAllGroupAbnormalities = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(RegionOverride)) RegionOverride = attr.Value;
                     else if (attr.Name == nameof(LastRegion)) LastRegion = attr.Value;
@@ -295,42 +342,6 @@ namespace TCC
                 LoadSettings();
             }
         }
-
-        private static List<Tab> ParseTabsSettings(XElement elem)
-        {
-            var result = new List<Tab>();
-            if (elem != null)
-            {
-                foreach (var t in elem.Descendants().Where(x => x.Name == "Tab"))
-                {
-                    var tabName = t.Attribute("name").Value;
-                    var channels = new List<ChatChannel>();
-                    var exChannels = new List<ChatChannel>();
-                    var authors = new List<string>();
-                    var exAuthors = new List<string>();
-                    foreach (var chElement in t.Descendants().Where(x => x.Name == "Channel"))
-                    {
-                        channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
-                    }
-                    foreach (var chElement in t.Descendants().Where(x => x.Name == "ExcludedChannel"))
-                    {
-                        exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
-                    }
-                    foreach (var authElement in t.Descendants().Where(x => x.Name == "Author"))
-                    {
-                        authors.Add(authElement.Attribute("value").Value);
-                    }
-                    foreach (var authElement in t.Descendants().Where(x => x.Name == "ExcludedAuthor"))
-                    {
-                        exAuthors.Add(authElement.Attribute("value").Value);
-                    }
-
-                    result.Add(new Tab(tabName, channels.ToArray(), exChannels.ToArray(), authors.ToArray(), exAuthors.ToArray()));
-                }
-            }
-            return result;
-        }
-
         public static void SaveSettings()
         {
             var xSettings = new XElement("Settings",
@@ -342,7 +353,8 @@ namespace TCC
                     GroupWindowSettings.ToXElement("GroupWindow"),
                     ClassWindowSettings.ToXElement("ClassWindow"),
                     BuildChatWindowSettings("ChatWindows"),
-                    FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow")
+                    FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
+                    FloatingButtonSettings.ToXElement("FloatingButton")
                     //ChatWindowSettings.ToXElement("ChatWindow")
                     //add window here
                     ),
@@ -386,6 +398,10 @@ namespace TCC
                 new XAttribute(nameof(ShowAwakenIcon), ShowAwakenIcon),
                 new XAttribute(nameof(RegionOverride), RegionOverride),
                 new XAttribute(nameof(ChatClickThruMode), ChatClickThruMode),
+                new XAttribute(nameof(AccurateHp), AccurateHp),
+                new XAttribute(nameof(CharacterWindowCompactMode), CharacterWindowCompactMode),
+                new XAttribute(nameof(WarriorShowTraverseCut), WarriorShowTraverseCut),
+                new XAttribute(nameof(WarriorShowEdge), WarriorShowEdge),
                 new XAttribute(nameof(ShowAllGroupAbnormalities), ShowAllGroupAbnormalities)
                 //add setting here
                 ),
@@ -519,7 +535,7 @@ namespace TCC
         private static readonly List<uint> PriestDefault = new List<uint> { 201, 202, 805100, 805101, 805102, 98000109, 805600, 805601, 805602, 805603, 805604, 98000110, 800300, 800301, 800302, 800303, 800304, 801500, 801501, 801502, 801503, 98000107 };
         private static readonly List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
         private static string _lastRegion = "";
-        private static bool _chatEnabled = true;
+        private static bool _chatEnabled = false;
         private static ClickThruMode _chatClickThruMode;
 
         public static XElement BuildChatTabsXElement(List<Tab> tabList)

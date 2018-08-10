@@ -99,6 +99,13 @@
     <Compile Include="ClassSpecific\Slayer.cs" />
     <Compile Include="ClassSpecific\Sorcerer.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ChatControls\EmojiMessagePiece.xaml.cs">
+      <DependentUpon>EmojiMessagePiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\EmojiNameToImageConverter.cs" />
+    <Compile Include="Controls\RhombBuffCooldownControl.xaml.cs">
+      <DependentUpon>RhombBuffCooldownControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\ChannelSetting.xaml.cs">
       <DependentUpon>ChannelSetting.xaml</DependentUpon>
     </Compile>
@@ -127,6 +134,9 @@
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OutlineText.cs" />
+    <Compile Include="Controls\RhombFixedSkillCooldown.xaml.cs">
+      <DependentUpon>RhombFixedSkillCooldown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Ripple.xaml.cs">
       <DependentUpon>Ripple.xaml</DependentUpon>
     </Compile>
@@ -142,11 +152,15 @@
     <Compile Include="Controls\TimeSeparator.xaml.cs">
       <DependentUpon>TimeSeparator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
+    <Compile Include="Converters\ClassSvgConverter.cs" />
     <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
@@ -236,6 +250,7 @@
     <Compile Include="Data\ApplyMessage.cs" />
     <Compile Include="Data\BrokerChatMessage.cs" />
     <Compile Include="Data\ChatChannelOnOff.cs" />
+    <Compile Include="Data\ChatUtils.cs" />
     <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
     <Compile Include="Data\Databases\AchievementDatabase.cs" />
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
@@ -246,6 +261,7 @@
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\MessagePieceBuilder.cs" />
     <Compile Include="Data\SystemMessage.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
@@ -697,6 +713,9 @@
     <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
@@ -773,6 +792,14 @@
     <Page Include="Controls\AbnormalityTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\EmojiMessagePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RhombBuffCooldownControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ChatControls\ApplyBody.xaml">
       <SubType>Designer</SubType>
@@ -906,6 +933,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\RhombFixedSkillCooldown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Ripple.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -994,6 +1025,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ValueSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1063,6 +1098,10 @@
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\FlightDurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1140,6 +1179,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\char_window_fg.png" />
+    <Resource Include="resources\images\traverse_cut.png" />
+    <Resource Include="resources\images\kr_boss_icon_enrage.png" />
+    <Resource Include="resources\images\kr_boss_icon.png" />
+    <Resource Include="resources\images\kr_hpd_bar.png" />
+    <Resource Include="resources\images\kr_hp_bar.png" />
+    <Resource Include="resources\images\kr_mp_bar.png" />
+    <Resource Include="resources\images\char_window_bg.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr_big.png" />
+    <Resource Include="resources\images\party_member_bar_bg.png" />
+    <Resource Include="resources\images\party_member_hp_bg.png" />
+    <Resource Include="resources\images\party_member_bg.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr.png" />
     <Resource Include="resources\images\awakened.png" />
     <None Include="packages.config" />
     <None Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
@@ -1169,6 +1229,9 @@
     <None Include="resources\data\equip_exp\equip_exp-TW.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="resources\data\dungeons-def-default.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\data\world_map\world_map-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1690,6 +1753,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Discord.Net.Core, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Core.1.0.2\lib\net45\Discord.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Rest, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Rest.1.0.2\lib\net45\Discord.Net.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Rpc, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Rpc.1.0.2\lib\net45\Discord.Net.Rpc.dll</HintPath>
+    </Reference>
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
@@ -1709,10 +1781,17 @@
       <HintPath>..\packages\SharpPcap.4.4.0\lib\SharpPcap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />

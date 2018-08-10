@@ -26,7 +26,9 @@
                 <chatcontrols:ChannelSetting />
             </DataTemplate>
         </Grid.Resources>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Margin="5" Opacity="1" CornerRadius="2" BorderThickness="0">
+        <Border Style="{StaticResource Styles.DefaultBorder}" 
+                Margin="5" Opacity="1" CornerRadius="1" 
+                >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -35,7 +37,7 @@
 
                 <chatcontrols:TabSettingControl Grid.Row="1" />
                 <Grid  MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-                    <Border Background="{StaticResource BackgroundDarkColor}" CornerRadius="2 2 0 0"></Border>
+                    <Border Background="{StaticResource DefaultBackgroundColor}" CornerRadius="1 1 0 0"></Border>
                 <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Stretch"
                                Click="CloseChannelSettings" VerticalContentAlignment="Center">
                     <Path Data="{StaticResource SvgClose}" Margin="10 0" />

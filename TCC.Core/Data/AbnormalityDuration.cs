@@ -100,7 +100,7 @@ namespace TCC.Data
         private void DecreaseDuration(object sender, ElapsedEventArgs e)
         {
             DurationLeft = DurationLeft - 1000;
-            if (DurationLeft < 0) timer.Stop();
+            if(DurationLeft < DurationLeft - 1000) timer.Stop();
         }
 
         public void Refresh()

@@ -98,10 +98,12 @@
         </DataTemplate>
 
     </UserControl.Resources>
-    <Border Margin="0" Style="{StaticResource Styles.DefaultBorder}" UseLayoutRounding="True" Effect="{x:Null}"
-            ClipToBounds="False" CornerRadius="4" Background="Transparent" BorderThickness="0">
+    <Border Margin="0" Style="{StaticResource Styles.DefaultBorder}" 
+            UseLayoutRounding="True"
+            ClipToBounds="False" CornerRadius="0 0 1 1" 
+            BorderThickness="0">
         <StackPanel>
-            <Border Background="#09ffffff" CornerRadius="4,4,0,0">
+            <Border Background="#00ffffff" CornerRadius="4,4,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
