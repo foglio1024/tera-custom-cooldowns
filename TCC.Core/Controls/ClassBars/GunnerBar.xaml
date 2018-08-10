@@ -21,7 +21,6 @@
                     <Image.Effect>
                         <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
                     </Image.Effect>
-
                 </Image>
                 <Grid x:Name="MainReArcGrid">
                     <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
@@ -42,19 +41,22 @@
                         <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
                     </Grid.Effect>
                 </Grid>
-                <Border RenderTransform="{StaticResource Rotate45}"
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
+
+                <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3" ></Path>
+                <!--<Border RenderTransform="{StaticResource Rotate45}"
                         RenderTransformOrigin=".5 .5"
                         Background="{StaticResource KrBgColor}" Margin="13">
-                </Border>
-                <local:RhombBuffCooldownControl DataContext="{Binding BurstFire}" Opacity="1"
+                </Border>-->
+                <!--<local:RhombBuffCooldownControl DataContext="{Binding BurstFire}" Opacity="1"
                                                 RenderTransformOrigin=".5,.5">
-                    <!--<local:RhombBuffCooldownControl.RenderTransform>
+                    --><!--<local:RhombBuffCooldownControl.RenderTransform>
                             <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
-                        </local:RhombBuffCooldownControl.RenderTransform>-->
-                </local:RhombBuffCooldownControl>
+                        </local:RhombBuffCooldownControl.RenderTransform>--><!--
+                </local:RhombBuffCooldownControl>-->
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                    Background="{StaticResource KrBgColor}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+            <Border BorderBrush="#89a" BorderThickness="1" Margin="9" Background="{StaticResource KrBg}"
+                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -64,7 +66,7 @@
                 </FrameworkElement.RenderTransform>
             </Border>
             <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                    Background="{StaticResource KrBgColor}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -90,6 +92,7 @@
             <Polygon Fill="{StaticResource KrBgColor}"
                      Points="0 0 1 0 2 1 -1 1"
                      Stroke="#89a"
+                     Visibility="Collapsed"
                      StrokeThickness="1" Stretch="Uniform"
                      Effect="{StaticResource DropShadow}"
                      Opacity=".7">
@@ -97,10 +100,12 @@
                     <TranslateTransform X="0" Y="70" />
                 </FrameworkElement.RenderTransform>
             </Polygon>
-            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="14" 
-                           FontWeight="DemiBold" Foreground="#afff" Text="{Binding StaminaTracker.Val}" Width="45" VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" 
+                           FontWeight="DemiBold" Foreground="#afff" 
+                       Text="{Binding StaminaTracker.Val}" 
+                       Width="45" VerticalAlignment="Center">
                     <FrameworkElement.RenderTransform>
-                        <TranslateTransform X="0" Y="70" />
+                        <TranslateTransform X="0" Y="0" />
                     </FrameworkElement.RenderTransform>
 
             </TextBlock>
