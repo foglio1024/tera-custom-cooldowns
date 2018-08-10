@@ -8,6 +8,6 @@
         PointOfInterest,
         Money,
         Url,
-        AstralLink,
+        Emoji,
     }
 }

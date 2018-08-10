@@ -17,51 +17,32 @@ namespace TCC.TemplateSelectors
             switch (m.Channel)
             {
                 case ChatChannel.System:
-                    return SystemAuthorTemplate;
+                case ChatChannel.Damage:
                 case ChatChannel.Notify:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Event:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Error:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Group:
-                    return SystemAuthorTemplate;
                 case ChatChannel.GuildNotice:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Deathmatch:
-                    return SystemAuthorTemplate;
                 case ChatChannel.ContractAlert:
-                    return SystemAuthorTemplate;
                 case ChatChannel.GroupAlerts:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Loot:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Exp:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Money:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Emote:
-                    return SystemAuthorTemplate;
                 case ChatChannel.TCC:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Death:
-                    return SystemAuthorTemplate;
                 case ChatChannel.Ress:
+                case ChatChannel.Quest:
+                case ChatChannel.Friend:
+                case ChatChannel.SystemDefault:
+                case ChatChannel.WorldBoss:
+                case ChatChannel.Laurel:
                     return SystemAuthorTemplate;
                 case ChatChannel.Private7:
                 case ChatChannel.Private8:
                     if(m.Author == "System") return SystemAuthorTemplate;
                     return DefaultAuthorTemplate;
-                case ChatChannel.Quest:
-                    return SystemAuthorTemplate;
-                case ChatChannel.Friend:
-                    return SystemAuthorTemplate;
-                case ChatChannel.SystemDefault:
-                    return SystemAuthorTemplate;
-                case ChatChannel.WorldBoss:
-                    return SystemAuthorTemplate;
-                case ChatChannel.Laurel:
-                    return SystemAuthorTemplate;
                 default:
                     return DefaultAuthorTemplate;
             }

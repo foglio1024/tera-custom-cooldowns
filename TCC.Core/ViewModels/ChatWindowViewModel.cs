@@ -350,6 +350,7 @@ namespace TCC.ViewModels
                         case ChatChannel.Money:
                         case ChatChannel.Loot:
                         case ChatChannel.Bargain:
+                        case ChatChannel.Damage:
                             return true;
                     }
 

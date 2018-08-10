@@ -139,6 +139,14 @@ namespace TCC.Parsing
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
+            if (p.Target == SessionManager.CurrentPlayer.EntityId && p.Target != p.Source && p.Source != 0 && EntitiesManager.IsEntitySpawned(p.Source) && p.Diff < 0)
+            {
+                var srcName = EntitiesManager.GetEntityName(p.Source);
+                srcName = srcName != ""
+                    ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
+                    : "<font color=\"#cccccc\">.</font>";
+                 ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+            }
             SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
             if (p.Target == SessionManager.CurrentPlayer.EntityId)
             {
@@ -179,8 +187,13 @@ namespace TCC.Parsing
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
             var b = BossGageWindowViewModel.Instance.NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == p.EntityId);
-            if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
-            if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p.Target);
+            //if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
+            if (b != null /*&& b.IsBoss*/ && b.Visible == System.Windows.Visibility.Visible)
+            {
+                GroupWindowViewModel.Instance.SetAggro(p.Target);
+                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, AggroCircle.Main, p.Target);
+
+            }
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
@@ -392,6 +405,7 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
+            EntitiesManager.SpawnUser(p.EntityId, p.Name);
             if (!GroupWindowViewModel.Instance.Exists(p.EntityId)) return;
 
             GroupWindowViewModel.Instance.UpdateMemberGear(p);
@@ -743,6 +757,8 @@ namespace TCC.Parsing
 
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
+            EntitiesManager.DepawnUser(p.EntityId);
+
         }
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)

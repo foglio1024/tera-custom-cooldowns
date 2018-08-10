@@ -105,6 +105,7 @@ namespace TCC.Converters
                 case ChatChannel.Apply:
                     return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Megaphone");
                 case ChatChannel.Death:
+                case ChatChannel.Damage:
                     return (SolidColorBrush)Application.Current.FindResource("HpColor");
                 case ChatChannel.Ress:
                     return (SolidColorBrush)Application.Current.FindResource("LightGreenColor");
