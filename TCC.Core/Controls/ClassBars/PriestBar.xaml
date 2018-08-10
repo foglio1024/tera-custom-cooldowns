@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:PriestBarManager}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:PriestBarManager}" Height="187">
     <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -77,7 +77,25 @@
                     <TranslateTransform X="0" Y="70" />
                 </FrameworkElement.RenderTransform>
             </Polygon>
+            <Grid>
+                <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform X="0" Y="90"></TranslateTransform>
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <local:RhombBuffCooldownControl DataContext="{Binding DivineCharge }" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="0" Y="90" />
+                    </FrameworkElement.RenderTransform>
+                </local:RhombBuffCooldownControl>
 
+            </Grid>
         </Grid>
     </Grid>
     <!--<Grid Margin="5" Name="Root">
