@@ -89,6 +89,7 @@
         Enchant9 = 315, //arbitrary
         WorldBoss = 316, //arb
         Laurel = 317,
+        Damage = 318,
         TCC = 1000,
         Twitch = 1001
     }
