@@ -81,8 +81,24 @@
             <SolidColorBrush x:Key="MoongourdAccentColor" Color="#26b99a"/>
             <SolidColorBrush x:Key="MoongourdFadedAccentColor" Color="#1b9190"/>
 
-            <SolidColorBrush x:Key="KrBgColor" Color="#2c313b"/>
-            <SolidColorBrush x:Key="KrBorderColor" Color="#515b65"/>
+
+
+            <Color x:Key="KrBgColorBase" >#2c313b</Color>
+            <Color x:Key="KrBgColorDarkBase">#233147</Color>
+            <Color x:Key="KrBgColorDarkerBase" >#101216</Color>
+            <Color x:Key="KrBorderColorBase" >#515b65</Color>
+            <SolidColorBrush x:Key="KrBgColor" Color="{StaticResource KrBgColorBase}"/>
+            <SolidColorBrush x:Key="KrBgColorDark" Color="{StaticResource KrBgColorDarkBase}"/>
+            <SolidColorBrush x:Key="KrBgColorDarker" Color="{StaticResource KrBgColorDarkerBase}"/>
+            <SolidColorBrush x:Key="KrBorderColor" Color="{StaticResource KrBorderColorBase}"/>
+
+            <LinearGradientBrush x:Key="KrBg" EndPoint="1 1" StartPoint="0 0" >
+                <GradientStop Color="{StaticResource KrBgColorDarkBase}" Offset=".1"></GradientStop>
+                <GradientStop Color="{StaticResource KrBgColorDarkerBase}" Offset=".4"></GradientStop>
+                <GradientStop Color="{StaticResource KrBgColorDarkerBase}" Offset=".5"></GradientStop>
+                <GradientStop Color="{StaticResource KrBgColorDarkBase}" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+
 
             <VisualBrush x:Key="IconOpacityBrush" >
                 <VisualBrush.Visual>
@@ -1110,12 +1126,16 @@
             <DataTemplate x:Key="MoneyTemplate">
                 <chatcontrols:MoneyMessagePiece />
             </DataTemplate>
+            <DataTemplate x:Key="EmojiTemplate">
+                <chatcontrols:EmojiMessagePiece />
+            </DataTemplate>
             <templateselectors:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
                                                    SimpleTemplate="{StaticResource SimpleTemplate}"
                                                    MoneyTemplate="{StaticResource MoneyTemplate}"
                                                    QuestTemplate="{StaticResource SimpleTemplate}"
                                                    PointOfInterestTemplate="{StaticResource SimpleTemplate}"
                                                    ItemTemplate="{StaticResource SimpleTemplate}"
+                                                    EmojiTemplate="{StaticResource EmojiTemplate}"
                                                    />
 
 
