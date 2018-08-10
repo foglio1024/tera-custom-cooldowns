@@ -154,10 +154,15 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" Opacity="{Binding BackgroundOpacity}">
+                    <Border.Effect>
+                        <BlurEffect Radius="20"/>
+                    </Border.Effect>
+                </Border>
                 <Border Background="#3445" Opacity="1" x:Name="MainBorder"
                         CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1" 
                         BorderBrush="#8555"
-                        Margin="0 25 0 0" Grid.Row="0" VerticalAlignment="Stretch" >
+                        Margin="0 25 0 0" Grid.Row="0" VerticalAlignment="Stretch">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".9" />
                     </Border.Effect>
@@ -254,9 +259,9 @@
             <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="2" Margin="3">
                 <StackPanel Width="350" Margin="-30 0 0 0">
                     <c:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
-                                    Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0.01" Max="1" Visibility="Collapsed"/>
+                                    Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0" Max="1" Visibility="Visible"/>
                     <c:BoolSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}" />
-                    <c:BoolSetting SettingName="Can minimize" Foreground="#9fff" />
+                    <!--<c:BoolSetting SettingName="Can minimize" Foreground="#9fff" />-->
                     <c:BoolSetting SettingName="Show always" Foreground="#9fff"
                                    IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWidget}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
                 </StackPanel>
