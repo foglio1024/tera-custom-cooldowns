@@ -85,7 +85,7 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
-            //ClassWindowViewModel.Instance.CurrentClass = Class.Warrior;
+            //ClassWindowViewModel.Instance.CurrentClass = Class.Gunner;
 
             //EntitiesManager.SpawnNPC(950,3000,10,Visibility.Visible);
             //EntitiesManager.SpawnNPC(970,1000,11,Visibility.Visible);
