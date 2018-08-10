@@ -7,7 +7,80 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:PriestBarManager}">
-    <Grid Margin="5" Name="Root">
+    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <local:RhombBuffCooldownControl DataContext="{Binding EdictOfJudgment }" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                </local:RhombBuffCooldownControl>
+
+            </Grid>
+            <Border BorderBrush="#89a" BorderThickness="1" Margin="9" Background="{StaticResource KrBg}"
+                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="45" Y="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="-45" Y="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <local:RhombBuffCooldownControl DataContext="{Binding Grace}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+
+                    <TranslateTransform X="45" Y="45" />
+                </FrameworkElement.RenderTransform>
+            </local:RhombBuffCooldownControl>
+            <local:RhombBuffCooldownControl DataContext="{Binding EnergyStars }" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-45" Y="45" />
+                </FrameworkElement.RenderTransform>
+
+            </local:RhombBuffCooldownControl>
+            <Polygon Fill="{StaticResource KrBgColor}"
+                     Points="0 0 1 0 2 1 -1 1"
+                     Stroke="#89a"
+                     Visibility="Collapsed"
+                     StrokeThickness="1" Stretch="Uniform"
+                     Effect="{StaticResource DropShadow}"
+                     Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="70" />
+                </FrameworkElement.RenderTransform>
+            </Polygon>
+
+        </Grid>
+    </Grid>
+    <!--<Grid Margin="5" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
@@ -21,5 +94,5 @@
 
             </UniformGrid>
         </Grid>
-    </Grid>
+    </Grid>-->
 </UserControl>

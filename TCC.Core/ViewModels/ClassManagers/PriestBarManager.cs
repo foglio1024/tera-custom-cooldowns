@@ -21,6 +21,7 @@ namespace TCC.ViewModels
         }
 
         public DurationCooldownIndicator Grace { get; set; }
+        public DurationCooldownIndicator EdictOfJudgment { get; set; }
 
         public PriestBarManager() : base()
         {
@@ -42,10 +43,22 @@ namespace TCC.ViewModels
 
             Grace.Buff.Started += OnGraceBuffStarted;
             Grace.Buff.Ended += OnGraceBuffEnded;
+
+            // Edict Of Judgment
+            EdictOfJudgment = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
+            EdictOfJudgment.Buff = new FixedSkillCooldown(ed, false);
+            EdictOfJudgment.Cooldown = new FixedSkillCooldown(ed, false);
+
+            EdictOfJudgment.Buff.Started += OnEdictBuffStarted;
+            EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
         }
 
         private void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
         private void OnGraceBuffStarted(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = false;
+        
+        private void OnEdictBuffEnded(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = true;
+        private void OnEdictBuffStarted(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = false;
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {
@@ -57,6 +70,11 @@ namespace TCC.ViewModels
             if (sk.Skill.IconName == Grace.Cooldown.Skill.IconName)
             {
                 Grace.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
+            {
+                EdictOfJudgment.Cooldown.Start(sk.Cooldown);
                 return true;
             }
             return false;
