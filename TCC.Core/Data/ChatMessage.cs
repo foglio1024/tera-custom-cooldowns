@@ -396,27 +396,42 @@ namespace TCC.Data
                     onlySimple = false;
                 }
             }
-            if (onlySimple) return;
+            //if (onlySimple) return;
 
             for (var i = 0; i < simplePieces.Count; i++)
             {
                 simplePieces[i].Text = simplePieces[i].Text.Replace(" ", " [[");
                 var split = simplePieces[i].Text.Split(new[] { "[[" }, StringSplitOptions.RemoveEmptyEntries);
-
                 var index = chatMessage.Pieces.IndexOf(simplePieces[i]);
                 for (var j = 0; j < split.Length; j++)
                 {
-                    var mp = new MessagePiece(split[j])
-                    {
-                        Color = simplePieces[i].Color,
-                        Type = simplePieces[i].Type,
-                        ItemId = simplePieces[i].ItemId,
-                        ItemUid = simplePieces[i].ItemUid,
-                        BoundType = simplePieces[i].BoundType,
-                        OwnerName = simplePieces[i].OwnerName,
-                        RawLink = simplePieces[i].RawLink,
-                        Size = simplePieces[i].Size
-                    };
+
+                    var endsWithK = split[j].ToLower().EndsWith("k ", StringComparison.InvariantCultureIgnoreCase) ||
+                                    split[j].ToLower().EndsWith("k", StringComparison.InvariantCultureIgnoreCase);
+                    var isNumber = int.TryParse(split[j].ToLower().Replace("k " , "").Replace("k", ""), out var money);
+
+                    //var isEmoji = split[j].StartsWith(":") && (split[j].EndsWith(":") || split[j].EndsWith(": "));
+
+                    var mp = endsWithK && isNumber && (chatMessage.Channel == ChatChannel.Trade ||
+                                                        chatMessage.Channel == ChatChannel.TradeRedirect ||
+                                                        chatMessage.Channel == ChatChannel.Megaphone ||
+                                                        chatMessage.Channel == ChatChannel.Global)?
+                        new MessagePiece(new Money(money*1000, 0, 0)) 
+                        //: 
+                        //isEmoji?
+                        //new MessagePiece(split[j]) { Type = MessagePieceType.Emoji} 
+                        :
+                        new MessagePiece(split[j])
+                        {
+                            Color = simplePieces[i].Color,
+                            Type = simplePieces[i].Type,
+                            ItemId = simplePieces[i].ItemId,
+                            ItemUid = simplePieces[i].ItemUid,
+                            BoundType = simplePieces[i].BoundType,
+                            OwnerName = simplePieces[i].OwnerName,
+                            RawLink = simplePieces[i].RawLink,
+                            Size = simplePieces[i].Size
+                        };
                     chatMessage.InsertPiece(mp, index);
                     index = chatMessage.Pieces.IndexOf(mp) + 1;
                 }
