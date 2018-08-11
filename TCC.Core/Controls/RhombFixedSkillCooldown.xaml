@@ -28,6 +28,27 @@
 
     <Grid Width="65" Height="65" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
         <Grid ClipToBounds="False" >
+            <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
+                <Rectangle Stroke="{StaticResource KrBorderColor}"
+                           StrokeThickness="1" Margin="10">
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:RhombFixedSkillControl}, Path=Warning}"
+                                             Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource WarnShake}" x:Name="StartWarning"/>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="StartWarning"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+            </Grid>
+
             <Rectangle Width="61" Height="61" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
                        OpacityMask="{StaticResource IconOpacityBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
@@ -61,8 +82,6 @@
                         <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"/>
                     </Border.Effect>
                     <Border.RenderTransform>
-                        <!--<ScaleTransform ScaleX="0"
-                                    ScaleY="0"/>-->
                         <RotateTransform />
                     </Border.RenderTransform>
                     <Border.Style>
@@ -117,9 +136,11 @@
                    VerticalAlignment="Stretch" 
                    OpacityMask="{StaticResource IconOpacityBrush}">
         </local:Arc>
-        <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Fill="White" Name="Glow" Opacity="0"/>
-        <Grid Width="24" 
-              Height="24" 
+        <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
+                   Fill="#9fff" Name="Glow" Opacity="0"
+                   Margin="8"/>
+        <Grid Width="23" 
+              Height="23" 
               x:Name="G" 
               HorizontalAlignment="Center" 
               VerticalAlignment="Bottom"
@@ -129,10 +150,7 @@
             <Border Background="{StaticResource KrBgColor}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource KrBorderColor}"
                     BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"
-                    Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}">
-
-
-            </Border>
+                    Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"/>
             <TextBlock Foreground="#dfff" 
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 

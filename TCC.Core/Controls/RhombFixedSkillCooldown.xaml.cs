@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -80,6 +81,7 @@ namespace TCC.Controls
             _context.FlashingStopForced += OnFlashingForceStopped;
 
         }
+
 
         private void OnFlashingForceStopped()
         {
@@ -163,7 +165,7 @@ namespace TCC.Controls
                 var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
                 Glow.BeginAnimation(OpacityProperty, an);
             }
-               if(_context.FlashOnAvailable) StartWarning();
+            if (_context.FlashOnAvailable && SessionManager.Combat) StartWarning();
 
         }
 
