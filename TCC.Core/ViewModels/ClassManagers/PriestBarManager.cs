@@ -57,7 +57,6 @@ namespace TCC.ViewModels
             // Divine Charge
             DivineCharge = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
-            DivineCharge.Buff = new FixedSkillCooldown(dc, false);
             DivineCharge.Cooldown = new FixedSkillCooldown(dc, false);
         }
 
