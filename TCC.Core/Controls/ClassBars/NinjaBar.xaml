@@ -28,7 +28,7 @@
             <Border Grid.Column="0" CornerRadius="34" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1">
                 <Grid>
                     <local:Arc EndAngle="0" 
-                               StrokeThickness="8" Stroke="#c387ff" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               StrokeThickness="8" Stroke="{StaticResource NinjaColor}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,0,0,0" x:Name="MainReArc"
                                Width="68" Height="68">
                         <local:Arc.LayoutTransform>
