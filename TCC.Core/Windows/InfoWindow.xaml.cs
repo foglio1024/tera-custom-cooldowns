@@ -26,10 +26,7 @@ namespace TCC.Windows
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            InfoWindowViewModel.Instance.SaveToFile();
-            var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
-            BeginAnimation(OpacityProperty, a);
+            HideWindow();
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
@@ -57,6 +54,13 @@ namespace TCC.Windows
                 Activate();
                 BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
+        }
+
+        public void HideWindow()
+        {
+            var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
+            a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
+            BeginAnimation(OpacityProperty, a);
         }
     }
 }

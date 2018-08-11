@@ -34,6 +34,11 @@ namespace TCC.Windows
         private void Image_MouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
         {
             SettingsManager.SaveSettings();
+            HideWindow();
+        }
+
+        public void HideWindow()
+        {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
             BeginAnimation(OpacityProperty, a);
