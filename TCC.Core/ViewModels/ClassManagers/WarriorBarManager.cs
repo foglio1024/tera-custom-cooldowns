@@ -32,6 +32,7 @@ namespace TCC.ViewModels
 
         public bool ShowEdge => SettingsManager.WarriorShowEdge;
         public bool ShowTraverseCut => SettingsManager.WarriorShowTraverseCut;
+        public WarriorEdgeMode WarriorEdgeMode => SettingsManager.WarriorEdgeMode;
 
         public sealed override void LoadSpecialSkills()
         {
