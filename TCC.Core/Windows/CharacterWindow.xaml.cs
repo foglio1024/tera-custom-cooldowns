@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Controls;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -62,6 +63,7 @@ namespace TCC.Windows
                 _st.From = (StGovernor.LayoutTransform as ScaleTransform).ScaleX;
                 _st.To = (sender as Player).StFactor;
                 StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
+                ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(((sender as Player).StFactor)*(360-80) + 40, _st.Duration));
             }
             else if (e.PropertyName == nameof(Player.ShieldFactor))
             {
