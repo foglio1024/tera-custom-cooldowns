@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 75" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="30 0 120 30" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -52,7 +52,7 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <local:RhombBuffCooldownControl DataContext="{Binding Grace}" HorizontalAlignment="Center"
+            <local:RhombBuffCooldownControl DataContext="{Binding TripleNemesis}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
 
@@ -84,14 +84,31 @@
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="45"/>
-                            <TranslateTransform X="0" Y="90"></TranslateTransform>
+                            <TranslateTransform X="90" Y="0"></TranslateTransform>
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
                 <local:RhombBuffCooldownControl DataContext="{Binding DivineCharge }" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                     <FrameworkElement.RenderTransform>
-                        <TranslateTransform X="0" Y="90" />
+                        <TranslateTransform X="90" Y="0" />
+                    </FrameworkElement.RenderTransform>
+                </local:RhombBuffCooldownControl>
+
+                <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform X="135" Y="45"></TranslateTransform>
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <local:RhombBuffCooldownControl DataContext="{Binding Grace }" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="135" Y="45" />
                     </FrameworkElement.RenderTransform>
                 </local:RhombBuffCooldownControl>
 
