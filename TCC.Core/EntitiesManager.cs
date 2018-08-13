@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.ViewModels;
@@ -69,6 +70,7 @@ namespace TCC
                 SessionManager.Encounter = false;
                 GroupWindowViewModel.Instance.SetAggro(0);
             }
+            Archer.CheckVelikMark(target);
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {

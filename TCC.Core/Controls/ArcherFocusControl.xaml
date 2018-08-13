@@ -9,7 +9,11 @@
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
-    <Grid Margin="0,0,0,0" Width="55" Height="55">
+    <Grid>
+        
+    <Image Source="../resources/images/char_window_bg.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="90"/>
+    </Grid>
+    <!--<Grid Margin="0,0,0,0" Width="55" Height="55">
         <local:Arc StrokeThickness="5" Margin="-5"
                    EndAngle="0"
                    Stroke="#fc3" 
@@ -49,5 +53,5 @@
                        TextAlignment="Center" 
                        VerticalAlignment="Center" />
         </Grid>
-    </Grid>
+    </Grid>-->
 </UserControl>

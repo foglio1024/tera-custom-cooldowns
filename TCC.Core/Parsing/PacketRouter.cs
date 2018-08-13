@@ -781,6 +781,7 @@ namespace TCC.Parsing
                     Archer.CheckFocus(p);
                     Archer.CheckFocusX(p);
                     Archer.CheckSniperEye(p);
+                    Archer.CheckVelikMark(p);
                     break;
                 case Class.Lancer:
                     Lancer.CheckArush(p);
@@ -824,6 +825,7 @@ namespace TCC.Parsing
                     Archer.CheckFocus(p);
                     Archer.CheckFocusX(p);
                     Archer.CheckSniperEye(p);
+                    Archer.CheckVelikMark(p);
                     break;
                 case Class.Lancer:
                     Lancer.CheckLineHeld(p);
@@ -861,8 +863,10 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Archer:
-                    Archer.CheckFocusEnd(p);
+                    Archer.CheckFocusX(p);
+                    Archer.CheckFocus(p);
                     Archer.CheckSniperEyeEnd(p);
+                    Archer.CheckVelikMark(p);
                     break;
                 case Class.Warrior:
                     Warrior.CheckBuffEnd(p);

@@ -31,41 +31,40 @@ namespace TCC.Controls
                 _context = (ArcherFocusTracker)DataContext;
                 Thread.Sleep(500);
             }
-            _context.PropertyChanged += _context_PropertyChanged;
         }
 
-        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnFocusEnded()
         {
-            if(e.PropertyName == "Refresh")
-            {
-                AnimateArcPartial(_context.Stacks);
-            }
-            else if(e.PropertyName == "StartFocus")
-            {
-                AnimateArcPartial(_context.Stacks);
-            }
-            else if(e.PropertyName == "StartFocusX")
-            {
-                AnimateArc();
-            }
-            else if(e.PropertyName == "Ended")
-            {
-                ResetArc();
-            }
+            //ResetArc();
         }
 
-        private void ResetArc()
+        private void OnFocusXStarted()
         {
-            InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(100)) {EasingFunction = new QuadraticEase() });
+            //AnimateArc();
         }
 
-        private void AnimateArc()
+        private void OnFocusRefreshed()
         {
-            ExternalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9,0, TimeSpan.FromMilliseconds(_context.Duration)));
+            //AnimateArcPartial(_context.Stacks);
         }
-        private void AnimateArcPartial(int newStacks)
+
+        private void OnFocusStarted()
         {
-            InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(newStacks*36, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
+            //AnimateArcPartial(_context.Stacks);
         }
+
+        //private void ResetArc()
+        //{
+        //    InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
+        //}
+
+        //private void AnimateArc()
+        //{
+        //    ExternalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Duration)));
+        //}
+        //private void AnimateArcPartial(int newStacks)
+        //{
+        //    InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(newStacks * 36, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
+        //}
     }
 }

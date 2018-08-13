@@ -1,21 +1,39 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Linq;
+using System.Windows.Threading;
+using TCC.ClassSpecific;
 
 namespace TCC.Data
 {
     public class ArcherFocusTracker : TSPropertyChanged
     {
-        public string Icon { get; private set; }
+        public event Action<int> StacksChanged;
+        public event Action<long> FocusStarted;
+        public event Action<long> Refreshed;
+        public event Action<long> FocusXStarted;
+        public event Action FocusEnded;
+
+        public string Icon { get; }
         public readonly uint Duration = 10000;
-        private int stacks;
+        private int _stacks;
+        private static bool _isFocusXRunning;
+
         public int Stacks
         {
-            get => stacks;
+            get => _stacks;
             private set
             {
-                if (stacks == value) return;
-                stacks = value;
-                NPC("Stacks");
+                if (_stacks == value) return;
+                _stacks = value;
+                NPC(nameof(Stacks));
+                StacksChanged?.Invoke(Stacks);
             }
+        }
+
+        public static bool IsFocusXRunning
+        {
+            get { return _isFocusXRunning; }
+            set { _isFocusXRunning = value; }
         }
 
         public ArcherFocusTracker()
@@ -27,26 +45,34 @@ namespace TCC.Data
             }
         }
 
-        public void StartFocus()
+        public void StartFocus(long duration)
         {
             Stacks = 1;
-            NPC("StartFocus");
+            FocusStarted?.Invoke(duration);
         }
-        public void SetFocusStacks(int stacks)
+        public void SetFocusStacks(int stacks, long duration)
         {
             Stacks = stacks;
-            NPC("Refresh");
+            Refreshed?.Invoke(duration);
         }
-        public void StartFocusX()
+        public void StartFocusX(long duration)
         {
+            FocusXStarted?.Invoke(duration);
+            IsFocusXRunning = true;
             Stacks = 10;
-            NPC("StartFocusX");
         }
+        public void StopFocusX()
+        {
+            IsFocusXRunning = false;
+            Stacks = 0;
+            FocusEnded?.Invoke();
+        }
+
         public void StopFocus()
         {
-            //if (Stacks >= 9) return;
+            IsFocusXRunning = false;
             Stacks = 0;
-            NPC("Ended");
+            FocusEnded?.Invoke();
         }
     }
 }
