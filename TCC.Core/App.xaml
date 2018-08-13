@@ -29,6 +29,7 @@
             <Color x:Key="MpColor2Base">#0ab8f6</Color>
             <Color x:Key="HpDebuffColorBase">#9c04bd</Color>
             <Color x:Key="HpDebuffColor2Base">#b24cc8</Color>
+            <Color x:Key="RunemarkColorMaxBase">#ff98bb</Color>
 
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
@@ -82,6 +83,9 @@
             <SolidColorBrush x:Key="MoongourdAccentColor" Color="#26b99a"/>
             <SolidColorBrush x:Key="MoongourdFadedAccentColor" Color="#1b9190"/>
 
+            <SolidColorBrush x:Key="RunemarkColor" Color="#ffe3bd"/>
+            <SolidColorBrush x:Key="RunemarkColorMax" Color="{StaticResource RunemarkColorMaxBase}"/>
+
 
 
             <Color x:Key="KrBgColorBase" >#2c313b</Color>
@@ -90,7 +94,9 @@
             <Color x:Key="KrBorderColorBase" >#515b65</Color>
             <SolidColorBrush x:Key="KrBgColor" Color="{StaticResource KrBgColorBase}"/>
             <SolidColorBrush x:Key="KrBgColorDark" Color="{StaticResource KrBgColorDarkBase}"/>
+            <SolidColorBrush x:Key="KrBgColorDarkT70" Color="{StaticResource KrBgColorDarkBase}" Opacity=".7"/>
             <SolidColorBrush x:Key="KrBgColorDarker" Color="{StaticResource KrBgColorDarkerBase}"/>
+            <SolidColorBrush x:Key="KrBgColorDarkerT70" Color="{StaticResource KrBgColorDarkerBase}" Opacity=".7"/>
             <SolidColorBrush x:Key="KrBorderColor" Color="{StaticResource KrBorderColorBase}"/>
 
             <LinearGradientBrush x:Key="KrBg" EndPoint="1 1" StartPoint="0 0" >

@@ -113,6 +113,7 @@ namespace TCC.Data
         private void CooldownEnded(object sender, EventArgs e)
         {
             _mainTimer.Stop();
+            NPC(nameof(IsAvailable));
             _secondsTimer.Stop();
             Seconds = 0;
             _dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
@@ -128,7 +129,9 @@ namespace TCC.Data
             {
                 if (_currentMode == CooldownMode.Pre)
                 {
+
                     _mainTimer.Stop();
+                    NPC(nameof(IsAvailable));
                     _secondsTimer.Stop();
                     _offsetTimer.Stop();
 
@@ -144,6 +147,7 @@ namespace TCC.Data
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
             _mainTimer.Start();
+            NPC(nameof(IsAvailable));
 
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
             _offsetTimer.Start();
@@ -153,6 +157,7 @@ namespace TCC.Data
         public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
             _mainTimer.Stop();
+            NPC(nameof(IsAvailable));
 
             if (cd == 0 || cd >= Int32.MaxValue)
             {
@@ -177,6 +182,8 @@ namespace TCC.Data
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
             _mainTimer.Start();
+            NPC(nameof(IsAvailable));
+
             _dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
 
         }

@@ -20,7 +20,7 @@
                 <ItemsPanelTemplate>
                     <WrapPanel Width="Auto"
                                Orientation="Vertical"
-                               Height="270"
+                               Height="340"
                                Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

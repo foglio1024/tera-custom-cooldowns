@@ -641,6 +641,7 @@
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
     <Compile Include="ViewModels\ChatWindowViewModel.cs" />
+    <Compile Include="ViewModels\ClassManagers\DurationCooldownIndicator.cs" />
     <Compile Include="ViewModels\ClassManagers\GunnerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\LancerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\ClassManager.cs" />

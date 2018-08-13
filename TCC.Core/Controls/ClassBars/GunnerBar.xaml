@@ -5,55 +5,75 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" Loaded="GunnerBar_OnLoaded" d:DataContext="{d:DesignData GunnerBarManager}">
+             mc:Ignorable="d" Loaded="GunnerBar_OnLoaded" d:DataContext="{d:DesignInstance viewModels:GunnerBarManager}">
     <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <Grid>
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
-                    <Image.Effect>
-                        <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
-                    </Image.Effect>
+                    <Image.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+
                 </Image>
                 <Grid x:Name="MainReArcGrid">
                     <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
                           Margin="5" >
                         <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
-                                   StrokeThickness="30" Stroke="#00aaaa" HorizontalAlignment="Center"
+                                   StrokeThickness="30" Stroke="Aqua" HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    Margin="-20"
                                    Width="98" Height="98" x:Name="MainReArc">
                             <local:Arc.RenderTransform>
                                 <TransformGroup>
-                                    <RotateTransform Angle="135"></RotateTransform>
+                                    <RotateTransform Angle="135"/>
                                 </TransformGroup>
                             </local:Arc.RenderTransform>
+                            <local:Arc.Style>
+                                <Style TargetType="FrameworkElement">
+                                    <Setter Property="Opacity" Value=".7"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </local:Arc.Style>
                         </local:Arc>
                     </Grid>
-                    <Grid.Effect>
-                        <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
-                    </Grid.Effect>
+                    <Grid.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
-
-                <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3" ></Path>
-                <!--<Border RenderTransform="{StaticResource Rotate45}"
-                        RenderTransformOrigin=".5 .5"
-                        Background="{StaticResource KrBgColor}" Margin="13">
-                </Border>-->
-                <!--<local:RhombBuffCooldownControl DataContext="{Binding BurstFire}" Opacity="1"
-                                                RenderTransformOrigin=".5,.5">
-                    --><!--<local:RhombBuffCooldownControl.RenderTransform>
-                            <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
-                        </local:RhombBuffCooldownControl.RenderTransform>--><!--
-                </local:RhombBuffCooldownControl>-->
+                <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3"/>
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Margin="9" Background="{StaticResource KrBg}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
@@ -61,7 +81,7 @@
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="45"/>
-                    <TranslateTransform X="45" Y="45" />
+                        <TranslateTransform X="45" Y="45" />
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
@@ -71,14 +91,14 @@
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="45"/>
-                    <TranslateTransform X="-45" Y="45" />
+                        <TranslateTransform X="-45" Y="45" />
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
             <local:RhombBuffCooldownControl DataContext="{Binding Bombardment}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
-                    
+
                     <TranslateTransform X="45" Y="45" />
                 </FrameworkElement.RenderTransform>
             </local:RhombBuffCooldownControl>
@@ -107,9 +127,7 @@
                     <FrameworkElement.RenderTransform>
                         <TranslateTransform X="0" Y="0" />
                     </FrameworkElement.RenderTransform>
-
             </TextBlock>
-
         </Grid>
     </Grid>
 </UserControl>
