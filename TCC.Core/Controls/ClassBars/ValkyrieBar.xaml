@@ -5,13 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignData ValkyrieBarManager}">
-    <Grid Width="Auto" Margin="5" Name="Root">
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>-->
-
+             xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ValkyrieBarManager}">
+    <Grid Width="Auto" Margin="10 5" Name="Root">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -22,52 +18,152 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
-            <Border Style="{StaticResource Styles.DefaultBorder}"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="2"
-                    Height="30"
-                    CornerRadius="15"
-                    Margin="20,-14,0,0"
-                    VerticalAlignment="Stretch" />
-            <Border Style="{StaticResource Styles.DefaultBorder}"
-                    Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
-                    CornerRadius="50"
-                    Height="59"
-                    Width="59"
-                    Margin="0,-17,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            </Border>
-            <!--HP/MP-->
-            <!--<UniformGrid Columns="2" 
-                         HorizontalAlignment="Stretch" 
-                         Margin="1,0,2,0"
-                         Grid.RowSpan="1"
-                         Grid.Column="1"
-                         Grid.Row="1"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource HpColor}" StatusColor="{StaticResource MpColor}" Width="90" />
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource MpColor}" Width="90" />
-            </UniformGrid>-->
-
-            <!--Runemarks-->
             <local:RunemarksControl
-                DataContext="{Binding RunemarksCounter}"
-                x:Name="RunemarksBar"
-                Width="220"
-                Grid.Column="1"
-                Grid.Row="0" Grid.RowSpan="2"
-                VerticalAlignment="Center"
-                Margin="-5,-14,0,0" />
-            <local:RagnarokBuffControl DataContext="{Binding Ragnarok}"
-                                       Grid.Column="0"
-                                       Grid.Row="0" Grid.RowSpan="2"
-                                       Margin="5,3" />
+                    DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=classBars:ValkyrieBar}}"
+                    x:Name="RunemarksBar"
+                    Width="Auto"
+                    Grid.Column="1"
+                    Height="20"
+                    VerticalAlignment="Center"
+                    Margin="-6 27 0 0" />
+            <!--Runemarks-->
+            <Grid>
+                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                    <Image.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="DarkOrange" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Grid x:Name="MainReArcGrid">
+                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
+                          Margin="5" >
+                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
+                                   StrokeThickness="30" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="-20"
+                                   Width="98" Height="98" x:Name="MainReArc">
+                            <local:Arc.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="135"></RotateTransform>
+                                </TransformGroup>
+                            </local:Arc.RenderTransform>
+                            <local:Arc.Style>
+                                <Style TargetType="Shape">
+                                    <Setter Property="Opacity" Value=".7"/>
+                                    <Setter Property="Stroke" Value="White"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                            <Setter Property="Stroke" Value="DarkOrange"/>
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </local:Arc.Style>
+                        </local:Arc>
+                    </Grid>
+                    <Grid.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="DarkOrange" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                </Grid>
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
+                <Path Data="{StaticResource SvgClassValkyrie}" Margin="19" Opacity=".3"/>
+                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" FontSize="16" 
+                           FontWeight="DemiBold" Foreground="#afff" 
+                           Text="{Binding StaminaTracker.Val}" 
+                           Width="45" VerticalAlignment="Center">
+                </TextBlock>
+                <Grid>
+                    <Grid ClipToBounds="False" >
+                        <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
+                            <Rectangle Stroke="{StaticResource KrBorderColor}"
+                           StrokeThickness="1" Margin="12">
+                            </Rectangle>
+                        </Grid>
+
+                        <Rectangle Width="60" Height="60" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
+                       OpacityMask="{StaticResource IconOpacityBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Ragnarok.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+
+                    <local:OutlinedTextBlock Text="{Binding Ragnarok.Buff.Seconds}" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource DroidSansMono}"
+                               FontSize="19" Fill="White" StrokeThickness="3" Stroke="#5000" Margin="0 1 0 0">
+                    </local:OutlinedTextBlock>
+
+                    <FrameworkElement.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </FrameworkElement.Style>
+                </Grid>
+            </Grid>
+            <Grid Width="Auto" Height="Auto" VerticalAlignment="Center" Grid.RowSpan="2" Grid.Column="1"
+                  HorizontalAlignment="Left" Effect="{StaticResource DropShadow}">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="0" Y="-25"/>
+                </Grid.RenderTransform>
+                <Border  RenderTransform="{StaticResource Rotate45}" Opacity="1" 
+                        RenderTransformOrigin=".5 .5" Width="34" Height="34" BorderThickness="2"
+                        Background="{StaticResource KrBgColor}" >
+                    <Border.Style>
+                        <Style TargetType="Border" BasedOn="{StaticResource Styles.DefaultBorder}">
+                            <Setter Property="BorderBrush" Value="{StaticResource KrBorderColor}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RunemarksCounter.Val}" Value="7">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource RunemarkColorMaxBase}" BlurRadius="10" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="BorderBrush" Value="{StaticResource RunemarkColorMax}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
+                </Border>
+                <TextBlock Foreground="White" Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Text="{Binding RunemarksCounter.Val}" FontSize="24" FontFamily="{StaticResource Frutiger}">
+                </TextBlock>
+            </Grid>
+
         </Grid>
-        <!--Skills grids-->
-        <!--<local:FixedSkillContainers Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Center"/>-->
     </Grid>
 </UserControl>
