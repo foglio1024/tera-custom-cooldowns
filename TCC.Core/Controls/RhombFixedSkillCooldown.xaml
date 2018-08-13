@@ -26,7 +26,7 @@
         <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
 
-    <Grid Width="65" Height="65" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
+    <Grid Width="65" Height="65" Margin="2" HorizontalAlignment="Center" Name="MainGrid" ClipToBounds="False" VerticalAlignment="Center">
         <Grid ClipToBounds="False" >
             <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
                 <Rectangle Stroke="{StaticResource KrBorderColor}"
@@ -121,7 +121,6 @@
                 <local:Arc.RenderTransform>
                     <RotateTransform Angle="-45"/>
                 </local:Arc.RenderTransform>
-                <!--EndAngle="0.01"-->
             </local:Arc>
         </Grid>
         <local:Arc x:Name="PreArc" 
