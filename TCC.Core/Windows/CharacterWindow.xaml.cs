@@ -17,7 +17,7 @@ namespace TCC.Windows
         private DoubleAnimation _hp;
         private DoubleAnimation _mp;
         private DoubleAnimation _st;
-        private TimeSpan DefaultDuration = TimeSpan.FromMilliseconds(250);
+        private TimeSpan DefaultDuration = TimeSpan.FromMilliseconds(50);
         private QuadraticEase DefaultEasing = new QuadraticEase();
         public CharacterWindow()
         {

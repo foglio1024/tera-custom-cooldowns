@@ -114,7 +114,6 @@
                                         <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"/>
                                             <Setter Property="Height" Value="10"/>
-
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1 0">
