@@ -25,7 +25,7 @@ namespace TCC.Controls.ClassBars
         private void OnEdgePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(Counter.Val)) return;
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < _dc.EdgeCounter.MaxValue; i++)
             {
                 if (i < _dc.EdgeCounter.Val)
                 {
