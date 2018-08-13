@@ -15,7 +15,7 @@ namespace TCC.Data
             {
                 if (val == value) return;
                 val = value;
-                if (val == _max)
+                if (val == MaxValue)
                 {
                     NPC("Maxed");
                 }
@@ -25,7 +25,7 @@ namespace TCC.Data
         }
 
         private DispatcherTimer _expire;
-        private int _max;
+        public int MaxValue { get; }
         private bool _autoexpire;
 
         private void RefreshTimer()
@@ -38,7 +38,7 @@ namespace TCC.Data
         public Counter(int max, bool autoexpire)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _max = max;
+            MaxValue = max;
             _autoexpire = autoexpire;
             _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(9000) };
             _expire.Tick += (s, ev) => Val = 0;
