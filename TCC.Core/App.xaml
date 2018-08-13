@@ -40,6 +40,7 @@
             <SolidColorBrush x:Key="DailyColor" Color="#42b0f4"/>
             <SolidColorBrush x:Key="MarksColor" Color="#aad"/>
             <SolidColorBrush x:Key="GuardianColor" Color="#e5442b"/>
+            <SolidColorBrush x:Key="NinjaColor" Color="#c387ff"/>
 
             <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#222228" Opacity=".9"/>
             <SolidColorBrush x:Key="FadedBorderColor" Color="#aa303035" Opacity="1"/>

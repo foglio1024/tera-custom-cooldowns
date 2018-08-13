@@ -9,6 +9,14 @@
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:WarriorBarManager}">
     <UserControl.Resources>
         <classBars:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
+        <ControlTemplate x:Key="EdgeArrowLayout">
+            <classBars:EdgeArrowLayout/>
+        </ControlTemplate>
+        <ControlTemplate x:Key="EdgeBarLayout">
+            <classBars:EdgeBarLayout VerticalAlignment="Center"
+                                     Height="24"
+                                     Margin="-40 30 20 0"/>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid Width="Auto" Name="Root" ClipToBounds="False" Margin="0 0" >
         <Grid.ColumnDefinitions>
@@ -24,6 +32,7 @@
                     BorderBrush="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"
                     RenderTransform="{StaticResource Rotate45}">
             </Border>
+
             <!--Stance Warning-->
             <Grid Grid.RowSpan="2" Grid.Column="0"
                   Margin="2" Opacity="0"
@@ -79,71 +88,25 @@
             </Grid>
 
         </Grid>
-        
+
         <!--Edge-->
-        <Grid Grid.Column="1" Margin="0 20 0 20" Effect="{StaticResource DropShadow}"  x:Name="MainEdgeGrid"
-              Visibility="{Binding ShowEdge, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid.RenderTransform>
-                <TranslateTransform X="-36"/>
-            </Grid.RenderTransform>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="Border" x:Key="EdgeContainer">
-                    <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
-                    <Setter Property="Width" Value="30"/>
-                    <Setter Property="Background" Value="#a223"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource KrBorderColor}"/>
+        <ContentControl Grid.Column="1" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=classBars:WarriorBar}}"
+                        Visibility="{Binding ShowEdge, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Template" Value="{StaticResource EdgeBarLayout}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WarriorEdgeMode}" Value="1">
+                            <Setter Property="Template" Value="{StaticResource EdgeArrowLayout}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
-                <Style TargetType="Rectangle">
-                    <Setter Property="Fill" Value="#fff"/>
-                    <Setter Property="Margin" Value="2 1"/>
-                    <Setter Property="Height" Value="7"/>
-                    <Setter Property="Opacity" Value=".1"/>
+            </ContentControl.Style>
+        </ContentControl>
 
-                </Style>
-            </Grid.Resources>
-            <Border BorderThickness="2 1 2 0" Style="{StaticResource EdgeContainer}"
-                    RenderTransform="{StaticResource Skew45Inv}">
-                <StackPanel UseLayoutRounding="False" x:Name="Edge10to6">
-                    <Rectangle>
-                        <Rectangle.Effect>
-                            <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="20"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.Effect>
-                            <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="20"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.Effect>
-                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                </StackPanel>
-            </Border>
-            <Border Grid.Row="1" BorderThickness="2 0 2 1" Style="{StaticResource EdgeContainer}"
-                    RenderTransform="{StaticResource Skew45}">
-                <StackPanel UseLayoutRounding="False" x:Name="Edge5to1">
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <Grid Width="Auto" Height="Auto" VerticalAlignment="Top" Grid.RowSpan="2" Visibility="{Binding ShowEdge, Converter={StaticResource BooleanToVisibilityConverter}}"
-              Margin="0 0 0 0"  x:Name="Moving" HorizontalAlignment="Right" Effect="{StaticResource DropShadow}">
-            <Grid.RenderTransform>
-                <TranslateTransform X="20" Y="8"/>
-            </Grid.RenderTransform>
+        <Grid Width="Auto" Height="Auto" VerticalAlignment="Top" Grid.RowSpan="2" 
+              Visibility="{Binding ShowEdge, Converter={StaticResource BooleanToVisibilityConverter}}"
+              x:Name="Moving" HorizontalAlignment="Right" Effect="{StaticResource DropShadow}">
             <Border Style="{StaticResource Styles.DefaultBorder}" RenderTransform="{StaticResource Rotate45}" Opacity="1" 
                     RenderTransformOrigin=".5 .5" Width="34" Height="34" x:Name="EdgeCounterBorder" BorderThickness="2"
                     Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}">
@@ -154,6 +117,25 @@
             <TextBlock Foreground="White" Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                        Text="{Binding EdgeCounter.Val}" FontSize="24" FontFamily="{StaticResource Frutiger}">
             </TextBlock>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform X="1" Y="21"/>
+                                </Setter.Value>
+                            </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WarriorEdgeMode}" Value="1">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform X="20" Y="8"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+            </Grid.Style>
 
         </Grid>
         <!--TC-->
@@ -163,13 +145,13 @@
                          BorderBrush="{StaticResource KrBorderColor}"/>
             <Grid ClipToBounds="True" RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" Margin="1">
 
-                           <!--EndAngle="{Binding TraverseCut.Factor, Converter={StaticResource Converters.FactorToAngle}}"--> 
+                <!--EndAngle="{Binding TraverseCut.Factor, Converter={StaticResource Converters.FactorToAngle}}"-->
                 <local:Arc Width="50" Height="50" Margin="-10" Stroke="White" EndAngle="0" RenderTransformOrigin=".5 .5" StrokeThickness="20" 
                            x:Name="TcArc">
-    <local:Arc.RenderTransform>
-        <RotateTransform Angle="-45"></RotateTransform>
-    </local:Arc.RenderTransform>
-</local:Arc>
+                    <local:Arc.RenderTransform>
+                        <RotateTransform Angle="-45"></RotateTransform>
+                    </local:Arc.RenderTransform>
+                </local:Arc>
             </Grid>
             <Border Style="{StaticResource Styles.DefaultBorder}" RenderTransform="{StaticResource Rotate45}" Opacity="1" BorderThickness="0"
                     RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin=".5 .5" Width="24" Height="24" Effect="{x:Null}" BorderBrush="{StaticResource KrBorderColor}">
@@ -179,10 +161,10 @@
             </Border>
             <TextBlock Foreground="White" Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Text="{Binding TraverseCut.Val}" FontSize="16" FontFamily="{StaticResource Frutiger}">
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="2"></DropShadowEffect>
-                    </TextBlock.Effect>
-                </TextBlock>
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="2"></DropShadowEffect>
+                </TextBlock.Effect>
+            </TextBlock>
             <Grid.RenderTransform>
                 <TranslateTransform X="9" Y="-24"/>
             </Grid.RenderTransform>

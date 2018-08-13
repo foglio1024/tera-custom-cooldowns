@@ -103,6 +103,14 @@
       <DependentUpon>EmojiMessagePiece.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ChatControls\EmojiNameToImageConverter.cs" />
+    <Compile Include="Controls\ClassBars\ArcherStanceToColorConverter.cs" />
+    <Compile Include="Controls\ClassBars\EdgeArrowLayout.xaml.cs">
+      <DependentUpon>EdgeArrowLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\EdgeBarLayout.xaml.cs">
+      <DependentUpon>EdgeBarLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\WarriorStanceToColorConverter.cs" />
     <Compile Include="Controls\RhombBuffCooldownControl.xaml.cs">
       <DependentUpon>RhombBuffCooldownControl.xaml</DependentUpon>
     </Compile>
@@ -162,6 +170,7 @@
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
     <Compile Include="Converters\ClassSvgConverter.cs" />
     <Compile Include="Converters\ClassToNameConverter.cs" />
+    <Compile Include="Converters\ClassToReColorConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
     <Compile Include="Converters\DungeonIdToImageConverter.cs" />
@@ -797,6 +806,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ClassBars\EdgeArrowLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\EdgeBarLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\RhombBuffCooldownControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1179,6 +1196,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\kr_mob_icon.png" />
     <Resource Include="resources\images\char_window_fg.png" />
     <Resource Include="resources\images\traverse_cut.png" />
     <Resource Include="resources\images\kr_boss_icon_enrage.png" />

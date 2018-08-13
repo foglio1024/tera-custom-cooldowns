@@ -1,5 +1,11 @@
 ﻿namespace TCC.Data
 {
+    public enum WarriorEdgeMode
+    {
+        Bar,
+        Arrow
+    }
+
     public enum HpChangeSource
     {
         CreatureChangeHp,

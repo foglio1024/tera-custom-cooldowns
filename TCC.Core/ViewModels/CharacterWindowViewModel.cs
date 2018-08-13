@@ -12,6 +12,13 @@ namespace TCC.ViewModels
 
         public bool CompactMode => SettingsManager.CharacterWindowCompactMode;
 
+        public bool ShowRe =>(
+            !SettingsManager.ClassWindowSettings.Visible ||
+            !SettingsManager.ClassWindowSettings.Enabled) &&
+            (Player.Class == Class.Brawler  ||
+            Player.Class == Class.Gunner ||
+            Player.Class == Class.Ninja ||
+            Player.Class == Class.Valkyrie);
         //public bool IsTeraOnTop
         //{
         //    get => WindowManager.IsTccVisible;
@@ -23,19 +30,22 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
-            // WindowManager.TccVisibilityChanged += (s, ev) =>
-            //{
-            //    NPC("IsTeraOnTop");
-            //    if (IsTeraOnTop)
-            //    {
-            //        WindowManager.CharacterWindow.RefreshTopmost();
-            //    }
-            //};
+            SettingsManager.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
+            SettingsManager.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
+        }
+
+        private void ClassWindowSettings_EnabledChanged()
+        {
+            NPC(nameof(ShowRe));
         }
 
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             NPC(e.PropertyName);
+            if (e.PropertyName == nameof(Player.Class))
+            {
+                NPC(nameof(ShowRe));
+            }
         }
     }
 

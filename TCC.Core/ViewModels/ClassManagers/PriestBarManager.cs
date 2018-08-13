@@ -23,6 +23,7 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator Grace { get; set; }
         public DurationCooldownIndicator EdictOfJudgment { get; set; }
         public DurationCooldownIndicator DivineCharge { get; set; }
+        public DurationCooldownIndicator TripleNemesis { get; set; }
 
         public PriestBarManager() : base()
         {
@@ -40,7 +41,7 @@ namespace TCC.ViewModels
             Grace = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
             Grace.Buff = new FixedSkillCooldown(gr,  false);
-            Grace.Cooldown = new FixedSkillCooldown(gr,  false);
+            Grace.Cooldown = new FixedSkillCooldown(gr, true);
 
             Grace.Buff.Started += OnGraceBuffStarted;
             Grace.Buff.Ended += OnGraceBuffEnded;
@@ -49,7 +50,7 @@ namespace TCC.ViewModels
             EdictOfJudgment = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
             EdictOfJudgment.Buff = new FixedSkillCooldown(ed, false);
-            EdictOfJudgment.Cooldown = new FixedSkillCooldown(ed, false);
+            EdictOfJudgment.Cooldown = new FixedSkillCooldown(ed, true);
 
             EdictOfJudgment.Buff.Started += OnEdictBuffStarted;
             EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
@@ -57,8 +58,12 @@ namespace TCC.ViewModels
             // Divine Charge
             DivineCharge = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
-            DivineCharge.Buff = new FixedSkillCooldown(dc, false);
-            DivineCharge.Cooldown = new FixedSkillCooldown(dc, false);
+            DivineCharge.Cooldown = new FixedSkillCooldown(dc, true);
+
+            // Tripple Nenesis
+            TripleNemesis = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
+            TripleNemesis.Cooldown = new FixedSkillCooldown(tn, true);
         }
 
         private void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
@@ -87,6 +92,11 @@ namespace TCC.ViewModels
             if (sk.Skill.IconName == DivineCharge.Cooldown.Skill.IconName)
             {
                 DivineCharge.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == TripleNemesis.Cooldown.Skill.IconName)
+            {
+                TripleNemesis.Cooldown.Start(sk.Cooldown);
                 return true;
             }
             return false;

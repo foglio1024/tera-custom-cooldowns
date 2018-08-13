@@ -79,7 +79,7 @@ namespace TCC
             SplashScreen.SetText("Starting");
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
-            SessionManager.CurrentPlayer.PlayerId = 10;
+            SessionManager.CurrentPlayer.EntityId = 10;
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
             ChatWindowManager.Instance.AddTccMessage(_version);
             SplashScreen.CloseWindowSafe();

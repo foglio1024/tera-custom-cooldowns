@@ -54,11 +54,13 @@ namespace TCC
             }
             if (e.Key == SettingsManager.SettingsHotkey.Key && e.Modifier == SettingsManager.SettingsHotkey.Modifier)
             {
-                WindowManager.Settings.ShowWindow();
+                if (WindowManager.Settings.IsVisible) WindowManager.Settings.HideWindow();
+                else WindowManager.Settings.ShowWindow();
             }
             if (e.Key == SettingsManager.InfoWindowHotkey.Key && e.Modifier == SettingsManager.InfoWindowHotkey.Modifier)
             {
-                InfoWindowViewModel.Instance.ShowWindow();
+                if (WindowManager.InfoWindow.IsVisible) InfoWindowViewModel.Instance.ShowWindow();
+                else WindowManager.InfoWindow.HideWindow();
             }
             if (e.Key == SettingsManager.ShowAllHotkey.Key && e.Modifier == SettingsManager.ShowAllHotkey.Modifier)
             {

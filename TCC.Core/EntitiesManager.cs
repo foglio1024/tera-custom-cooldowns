@@ -105,6 +105,8 @@ namespace TCC
         public static void ClearNPC()
         {
             BossGageWindowViewModel.Instance.ClearBosses();
+            NearbyNPCs.Clear();
+            NearbyPlayers.Clear();
         }
         public static void CheckHarrowholdMode(ushort zoneId, uint templateId)
         {

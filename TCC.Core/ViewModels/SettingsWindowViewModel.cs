@@ -496,6 +496,7 @@ namespace TCC.ViewModels
         public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
+        public List<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
 
         public bool ChatWindowEnabled
         {
@@ -567,6 +568,19 @@ namespace TCC.ViewModels
                 NPC();
                 if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowTraverseCut));
             }
+        }
+
+        public WarriorEdgeMode WarriorEdgeMode
+        {
+            get => SettingsManager.WarriorEdgeMode;
+            set
+            {
+                if (SettingsManager.WarriorEdgeMode == value) return;
+                SettingsManager.WarriorEdgeMode = value;
+                NPC();
+                if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.WarriorEdgeMode));
+            }
+
         }
     }
 }

@@ -156,6 +156,7 @@ namespace TCC
 
         public static bool WarriorShowTraverseCut { get; set; } = true;
         public static bool WarriorShowEdge { get; set; } = true;
+        public static WarriorEdgeMode WarriorEdgeMode { get; set; } = WarriorEdgeMode.Bar;
 
 
         public static void LoadWindowSettings()
@@ -276,6 +277,7 @@ namespace TCC
                     else if (attr.Name == nameof(CooldownBarMode)) CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(EnrageLabelMode)) EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
                     else if (attr.Name == nameof(ChatClickThruMode)) ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
+                    else if (attr.Name == nameof(WarriorEdgeMode)) WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
                     else if (attr.Name == nameof(MaxMessages)) MaxMessages = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SpamThreshold)) SpamThreshold = int.Parse(attr.Value);
                     else if (attr.Name == nameof(FontSize)) FontSize = int.Parse(attr.Value);
@@ -402,6 +404,7 @@ namespace TCC
                 new XAttribute(nameof(CharacterWindowCompactMode), CharacterWindowCompactMode),
                 new XAttribute(nameof(WarriorShowTraverseCut), WarriorShowTraverseCut),
                 new XAttribute(nameof(WarriorShowEdge), WarriorShowEdge),
+                new XAttribute(nameof(WarriorEdgeMode), WarriorEdgeMode),
                 new XAttribute(nameof(ShowAllGroupAbnormalities), ShowAllGroupAbnormalities)
                 //add setting here
                 ),

@@ -408,15 +408,17 @@ namespace TCC.Data
 
                     var endsWithK = split[j].ToLower().EndsWith("k ", StringComparison.InvariantCultureIgnoreCase) ||
                                     split[j].ToLower().EndsWith("k", StringComparison.InvariantCultureIgnoreCase);
-                    var isNumber = int.TryParse(split[j].ToLower().Replace("k " , "").Replace("k", ""), out var money);
+                    var endsWithG = split[j].ToLower().EndsWith("g ", StringComparison.InvariantCultureIgnoreCase) ||
+                                    split[j].ToLower().EndsWith("g", StringComparison.InvariantCultureIgnoreCase);
+                    var isNumber = int.TryParse(split[j].ToLower().Replace("k ", "").Replace("k", "").Replace("g ", "").Replace("g", ""), out var money);
 
                     //var isEmoji = split[j].StartsWith(":") && (split[j].EndsWith(":") || split[j].EndsWith(": "));
 
-                    var mp = endsWithK && isNumber && (chatMessage.Channel == ChatChannel.Trade ||
+                    var mp = (endsWithK || endsWithG)&& isNumber && (chatMessage.Channel == ChatChannel.Trade ||
                                                         chatMessage.Channel == ChatChannel.TradeRedirect ||
                                                         chatMessage.Channel == ChatChannel.Megaphone ||
                                                         chatMessage.Channel == ChatChannel.Global)?
-                        new MessagePiece(new Money(money*1000, 0, 0)) 
+                        new MessagePiece(new Money(endsWithK ? money*1000 : money, 0, 0)) 
                         //: 
                         //isEmoji?
                         //new MessagePiece(split[j]) { Type = MessagePieceType.Emoji} 

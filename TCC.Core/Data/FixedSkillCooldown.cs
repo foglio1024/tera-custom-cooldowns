@@ -79,7 +79,19 @@ namespace TCC.Data
             _mainTimer.Tick += CooldownEnded;
             _offsetTimer.Tick += StartSecondsTimer;
             _secondsTimer.Tick += DecreaseSeconds;
+
+            SessionManager.CombatChanged += OnCombatStatusChanged;
+
         }
+
+        private void OnCombatStatusChanged()
+        {
+            if (SessionManager.Combat && FlashOnAvailable)
+                ForceFlashing();
+            else
+                ForceStopFlashing();
+        }
+
         public FixedSkillCooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill) : this()
         {
             CooldownType = t;

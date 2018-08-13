@@ -13,7 +13,7 @@ namespace TCC
         public const uint MaxGuardianPoints = 100000;
         private static bool _logged = false;
         private static bool _loadingScreen = true;
-        
+
         private static bool _encounter;
         private static bool _inGameChatOpen;
         private static bool _inGameUiOn;
@@ -37,13 +37,13 @@ namespace TCC
             {
                 if (_encounter == value) return;
                 _encounter = value;
-                //if (!_encounter)
-                //{
-                //    WindowManager.SkillsEnded = true;
-                //}
-                //WindowManager.NotifyDimChanged();
                 App.BaseDispatcher.Invoke(() => EncounterChanged?.Invoke());
             }
+        }
+
+        public static bool Combat
+        {
+            get => CurrentPlayer?.IsInCombat ?? false;
         }
         public static bool Logged
         {
@@ -52,8 +52,7 @@ namespace TCC
             {
                 if (_logged == value) return;
                 _logged = value;
-                //WindowManager.NotifyVisibilityChanged();
-                App.BaseDispatcher.Invoke(() =>  LoggedChanged?.Invoke());
+                App.BaseDispatcher.Invoke(() => LoggedChanged?.Invoke());
             }
         }
         public static bool IsElite { get; set; }
@@ -74,7 +73,7 @@ namespace TCC
             get => _inGameChatOpen;
             set
             {
-                if(_inGameChatOpen == value) return;
+                if (_inGameChatOpen == value) return;
                 _inGameChatOpen = value;
                 ChatModeChanged?.Invoke();
             }
@@ -83,6 +82,7 @@ namespace TCC
         public static event Action ChatModeChanged;
         public static event Action GameUiModeChanged;
         public static event Action EncounterChanged;
+        public static event Action CombatChanged;
         public static event Action LoadingScreenChanged;
         public static event Action LoggedChanged;
 
@@ -91,7 +91,7 @@ namespace TCC
         public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
         public static MonsterDatabase MonsterDatabase { get; private set; }
         public static ItemsDatabase ItemsDatabase { get; private set; }
-        public static SkillsDatabase SkillsDatabase { get;  private set; }
+        public static SkillsDatabase SkillsDatabase { get; private set; }
         public static SystemMessagesDatabase SystemMessagesDatabase { get; private set; }
         public static GuildQuestDatabase GuildQuestDatabase { get; private set; }
         public static AchievementDatabase AchievementDatabase { get; private set; }
@@ -116,9 +116,8 @@ namespace TCC
                     CurrentPlayer.IsInCombat = false;
                     CharacterWindowViewModel.Instance.Player.IsInCombat = false;
                 }
+                App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
             }
-
-
         }
         public static void SetPlayerHp(float hp)
         {
@@ -179,7 +178,7 @@ namespace TCC
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
             CharacterWindowViewModel.Instance.Player.MaxST = maxSt;
-            if(SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
@@ -202,15 +201,15 @@ namespace TCC
             ItemsDatabase = new ItemsDatabase(lang);
             SkillsDatabase = new SkillsDatabase(lang);
             AbnormalityDatabase = new AbnormalityDatabase(lang);
-            DungeonDatabase = new  DungeonDatabase(lang);
+            DungeonDatabase = new DungeonDatabase(lang);
             SocialDatabase = new SocialDatabase(lang);
             SkillsDatabase = new SkillsDatabase(lang);
             SystemMessagesDatabase = new SystemMessagesDatabase(lang);
             GuildQuestDatabase = new GuildQuestDatabase(lang);
             AchievementDatabase = new AchievementDatabase(lang);
-            AchievementGradeDatabase =new AchievementGradeDatabase(lang);
-            MapDatabase= new MapDatabase(lang);
-            QuestDatabase= new QuestDatabase(lang);
+            AchievementGradeDatabase = new AchievementGradeDatabase(lang);
+            MapDatabase = new MapDatabase(lang);
+            QuestDatabase = new QuestDatabase(lang);
         }
     }
 
