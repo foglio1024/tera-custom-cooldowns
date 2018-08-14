@@ -58,7 +58,6 @@ namespace TCC.ViewModels
             Focus = new ArcherFocusTracker();
             Stance = new StanceTracker<ArcherStance>();
             Archer.ClearMarkedTargets();
-            //CurrentClassManager = this;
         }
 
         public override void LoadSpecialSkills()
