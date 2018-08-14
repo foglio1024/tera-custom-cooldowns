@@ -43,7 +43,7 @@ namespace TCC.Controls.ClassBars
             }
             else
             {
-                Dispatcher.Invoke(() => MainReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
+                //Dispatcher.Invoke(() => MainReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
             }
         }
 

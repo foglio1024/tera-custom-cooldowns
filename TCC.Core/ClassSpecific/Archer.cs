@@ -50,8 +50,9 @@ namespace TCC.ClassSpecific
         }
         public static void CheckVelikMark(S_ABNORMALITY_END p)
         {
+            if(!VelikMarkIDs.Contains(p.AbnormalityId)) return;
             if (MarkedTargets.Contains(p.TargetId)) MarkedTargets.Remove(p.TargetId);
-            VelikMarkExpired?.Invoke();
+                if (MarkedTargets.Count == 0) VelikMarkExpired?.Invoke();
         }
 
         public static void CheckFocus(S_ABNORMALITY_BEGIN p)
