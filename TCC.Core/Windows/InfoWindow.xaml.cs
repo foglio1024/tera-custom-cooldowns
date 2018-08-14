@@ -51,7 +51,7 @@ namespace TCC.Windows
                 Topmost = false; Topmost = true;
                 Opacity = 0;
                 Show();
-                Activate();
+                //Activate();
                 BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
         }
