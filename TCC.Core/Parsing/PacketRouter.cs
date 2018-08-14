@@ -564,8 +564,8 @@ namespace TCC.Parsing
         internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
         {
             if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
-            InfoWindowViewModel.Instance.CurrentCharacter.GuardianPoints = x.Points;
-            InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianPoints = x.MaxPoints;
+            InfoWindowViewModel.Instance.CurrentCharacter.GuardianQuests = x.Claimed;
+            //InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianQuests = x.MaxPoints;
         }
 
         internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
@@ -758,7 +758,6 @@ namespace TCC.Parsing
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DepawnUser(p.EntityId);
-
         }
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)

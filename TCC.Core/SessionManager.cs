@@ -10,7 +10,7 @@ namespace TCC
     {
         public const int MaxWeekly = 16;
         public const int MaxDaily = 16;
-        public const uint MaxGuardianPoints = 100000;
+        public const int MaxGuardianQuests = 40;
         private static bool _logged = false;
         private static bool _loadingScreen = true;
 

@@ -80,11 +80,11 @@
                            />
                 </Grid>
                 <!--Guardian points-->
-                <Grid Margin="5 0" Background="Transparent" ToolTip="Guardian points."
+                <Grid Margin="5 0" Background="Transparent" ToolTip="Claimed Guardian quests."
                   HorizontalAlignment="Right" VerticalAlignment="Center" >
                     <Ellipse Fill="{StaticResource GuardianColor}" Opacity=".2" Margin="2"></Ellipse>
                     <Viewbox StretchDirection="DownOnly" Width="19">
-                        <TextBlock Text="{Binding GuardianPoints, Converter={StaticResource GuardianPointsStringConverter}}"
+                        <TextBlock Text="{Binding GuardianQuests}"
                                    Foreground="{StaticResource GuardianColor}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>

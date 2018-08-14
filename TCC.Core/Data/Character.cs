@@ -18,8 +18,8 @@ namespace TCC.Data
         private int _credits;
         private bool _isLoggedIn;
         private bool _isSelected;
-        private uint _guardianPoints;
-        private uint _maxGuardianPoints;
+        private int _guardianQuests;
+        private int _maxGuardianQuests = 40;
         private uint _elleonMarks;
 
         public uint Id { get; set; }
@@ -129,7 +129,7 @@ namespace TCC.Data
         }
         public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MaxWeekly;
         public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MaxDaily;
-        public double GuardianCompletion => (double)GuardianPoints / (double)MaxGuardianPoints;
+        public double GuardianCompletion => (double)GuardianQuests / (double)MaxGuardianQuests;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
         public ICollectionView VisibleDungeons { get; set; }
@@ -143,24 +143,24 @@ namespace TCC.Data
         public GearItem Circlet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
         public ICollectionView Jewels { get; set; }
 
-        public uint GuardianPoints
+        public int GuardianQuests
         {
-            get => _guardianPoints;
+            get => _guardianQuests;
             set
             {
-                if (_guardianPoints == value) return;
-                _guardianPoints = value;
-                NPC(nameof(GuardianPoints));
+                if (_guardianQuests == value) return;
+                _guardianQuests = value;
+                NPC(nameof(GuardianQuests));
                 NPC(nameof(GuardianCompletion));
             }
         }
-        public uint MaxGuardianPoints
+        public int MaxGuardianQuests
         {
-            get => _maxGuardianPoints; set
+            get => _maxGuardianQuests; set
             {
-                if (_maxGuardianPoints == value) return;
-                _maxGuardianPoints = value;
-                NPC(nameof(MaxGuardianPoints));
+                if (_maxGuardianQuests == value) return;
+                _maxGuardianQuests = value;
+                NPC(nameof(MaxGuardianQuests));
                 NPC(nameof(GuardianCompletion));
             }
         }
@@ -187,7 +187,7 @@ namespace TCC.Data
             WeekliesDone = 0;
             Id = id;
             Position = pos;
-            MaxGuardianPoints = SessionManager.MaxGuardianPoints;
+            MaxGuardianQuests = SessionManager.MaxGuardianQuests;
             foreach (var dg in SessionManager.DungeonDatabase.DungeonDefs)
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));
