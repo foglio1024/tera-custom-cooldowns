@@ -80,7 +80,6 @@ namespace TCC.ClassSpecific
         {
             if (p.AbnormalityId == FocusXId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                Console.WriteLine("Begin Focus X");
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StartFocusX(p.Duration);
             }
         }
@@ -88,8 +87,6 @@ namespace TCC.ClassSpecific
         {
             if (p.AbnormalityId == FocusXId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                Console.WriteLine("Refresh Focus X");
-
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StartFocusX(p.Duration);
             }
         }
@@ -97,8 +94,6 @@ namespace TCC.ClassSpecific
         {
             if (p.AbnormalityId == FocusXId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                Console.WriteLine("End Focus X");
-
                 ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StopFocusX();
             }
 
