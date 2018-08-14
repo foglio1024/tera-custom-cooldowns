@@ -31,7 +31,7 @@ namespace TCC.ClassSpecific
                 return;
             }
 
-            if (p.AbnormalityId == CounterGlyphId || p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
                 ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
