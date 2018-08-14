@@ -71,6 +71,7 @@ namespace TCC
                 GroupWindowViewModel.Instance.SetAggro(0);
             }
             Archer.CheckVelikMark(target);
+            Priest.CheckTripleNemesis(target);
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {
