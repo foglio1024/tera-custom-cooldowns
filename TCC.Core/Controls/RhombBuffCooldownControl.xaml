@@ -16,7 +16,8 @@
                        Stroke="#ffbd3d" 
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       EndAngle="0"
+                       StartAngle="40"
+                       EndAngle="40"
                        x:Name="ExternalArc"
                        Margin="-20"
                        RenderTransformOrigin=".5 .5">
@@ -38,11 +39,11 @@
         </local:RhombFixedSkillControl>
 
 
-        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 -8 0 6" 
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 -1 0 0" 
               Opacity="{Binding Buff.Seconds}"
               >
 
-        <Border BorderThickness="1"
+            <Border BorderThickness="1"
                 Width="24"
                 Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"
                 Background="#ffbd3d"
@@ -51,7 +52,7 @@
                 VerticalAlignment="Center"
                 RenderTransform="{StaticResource Rotate45}"
                 RenderTransformOrigin=".5 .5">
-        </Border>
+            </Border>
             <TextBlock Foreground="#d222" 
                        Text="{Binding DurationLabel, RelativeSource={RelativeSource AncestorType=local:RhombBuffCooldownControl}}"
 

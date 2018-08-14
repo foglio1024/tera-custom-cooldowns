@@ -13,6 +13,14 @@
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
         </Storyboard>
+        <Storyboard x:Key="WarnExp" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"  Duration="0:0:1"   From="1" To="1.5"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"  Duration="0:0:1"   From="1" To="1.5"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"                BeginTime="0:0:0.4" Duration="0:0:0.6" From="1" To="0"    EasingFunction="{StaticResource QuadraticEase}"/>
+        </Storyboard>
+        <Storyboard x:Key="WarnExpStroke" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="StrokeThickness"                            Duration="0:0:1"   From="3" To="0"    EasingFunction="{StaticResource QuadraticEase}" />
+        </Storyboard>
         <Storyboard x:Key="WarnGlow" RepeatBehavior="Forever">
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
@@ -138,6 +146,46 @@
         <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
                    Fill="#9fff" Name="Glow" Opacity="0"
                    Margin="8"/>
+        <!--<Grid Opacity="0">
+            <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
+                   Name="Exp"
+                   Margin="8">
+                <Rectangle.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:RhombFixedSkillControl}, Path=Warning}"
+                                     Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource WarnExpStroke}" x:Name="StartExpStroke"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="StartExpStroke"/>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Rectangle.Style>
+
+            </Rectangle>
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:RhombFixedSkillControl}, Path=Warning}"
+                                     Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource WarnExp}" x:Name="StartExp"/>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="StartExp"/>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+            </Grid.Style>
+        </Grid>-->
+
         <Grid Width="23" 
               Height="23" 
               x:Name="G" 
