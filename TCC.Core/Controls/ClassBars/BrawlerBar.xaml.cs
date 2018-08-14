@@ -42,18 +42,18 @@ namespace TCC.Controls.ClassBars
             _an.To = _dc.StaminaTracker.Factor*(359.99 - 80) + 40;
             MainReArc.BeginAnimation(Arc.EndAngleProperty,_an);
 
-            if (_dc.StaminaTracker.Factor == 1)
-            {
-                MainReArc.Stroke = Brushes.Orange;
-                ((DropShadowEffect)MainReArcGrid.Effect).Opacity = 1;
-                ((DropShadowEffect)BgImage.Effect).Opacity = 1;
-            }
-            else
-            {
-                MainReArc.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x99, 0x33));
-                ((DropShadowEffect)MainReArcGrid.Effect).Opacity = 0;
-                ((DropShadowEffect)BgImage.Effect).Opacity = 0;
-            }
+            //if (_dc.StaminaTracker.Factor == 1)
+            //{
+            //    MainReArc.Stroke = Brushes.Orange;
+            //    ((DropShadowEffect)MainReArcGrid.Effect).Opacity = 1;
+            //    ((DropShadowEffect)BgImage.Effect).Opacity = 1;
+            //}
+            //else
+            //{
+            //    MainReArc.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x99, 0x33));
+            //    ((DropShadowEffect)MainReArcGrid.Effect).Opacity = 0;
+            //    ((DropShadowEffect)BgImage.Effect).Opacity = 0;
+            //}
         }
 
         private void AnimateCounter(object sender, PropertyChangedEventArgs e)
