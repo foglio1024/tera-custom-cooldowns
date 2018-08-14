@@ -7,6 +7,7 @@ namespace TCC.ClassSpecific
     {
         private static readonly int GrowingFuryId = 10153040;
         private static readonly int CounterGlyphId = 31020;
+        
             
         public static void CheckBrawlerAbnormal(S_ABNORMALITY_BEGIN p)
         {
@@ -16,9 +17,11 @@ namespace TCC.ClassSpecific
                 return;
             }
 
-            if (p.AbnormalityId != CounterGlyphId || p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
+            if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
+                ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
+            }
         }
         public static void CheckBrawlerAbnormal(S_ABNORMALITY_REFRESH p)
         {
@@ -28,9 +31,11 @@ namespace TCC.ClassSpecific
                 return;
             }
 
-            if (p.AbnormalityId != CounterGlyphId || p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
+            if (p.AbnormalityId == CounterGlyphId || p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
+                ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
+            }
         }
         public static void CheckBrawlerAbnormalEnd(S_ABNORMALITY_END p)
         {
@@ -41,9 +46,9 @@ namespace TCC.ClassSpecific
             }
             if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = false;
                 ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Refresh(0);
-
+                ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = false;
+                return;
             }
         }
     }

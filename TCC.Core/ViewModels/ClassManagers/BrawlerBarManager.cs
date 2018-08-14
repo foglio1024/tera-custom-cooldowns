@@ -11,8 +11,11 @@ namespace TCC.ViewModels
         {
         }
 
-        public FixedSkillCooldown GrowingFury { get; set; }
+        public DurationCooldownIndicator GrowingFury { get; set; }
         public FixedSkillCooldown Counter { get; set; }
+        public DurationCooldownIndicator RhythmicBlows { get; set; }
+        public DurationCooldownIndicator Infuriate { get; set; }
+
 
         public bool IsGfOn
         {
@@ -38,12 +41,46 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-
+            // Growing Fury
+            GrowingFury = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            GrowingFury.Cooldown = new FixedSkillCooldown(gf,  true);
+            GrowingFury.Buff = new FixedSkillCooldown(gf, false);
+
+            // Counter 
+            //Counter = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
-            GrowingFury = new FixedSkillCooldown(gf,  false);
-            Counter = new FixedSkillCooldown(c,  false);
+            Counter = new FixedSkillCooldown(c, false);
+
+            // Rhythmic Blows
+            RhythmicBlows = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
+            RhythmicBlows.Cooldown = new FixedSkillCooldown(rb, true);
+
+            // Infuriate
+            Infuriate = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
+            Infuriate.Cooldown = new FixedSkillCooldown(infu, true);
         }
 
+        public override bool StartSpecialSkill(SkillCooldown sk)
+        {
+            if (sk.Skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
+            {
+                RhythmicBlows.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            return false;
+        }
+
+        public override bool ChangeSpecialSkill(Skill skill, uint cd)
+        {
+            if (skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
+            {
+                RhythmicBlows.Cooldown.Refresh(cd);
+                return true;
+            }
+            return false;
+        }
     }
 }
