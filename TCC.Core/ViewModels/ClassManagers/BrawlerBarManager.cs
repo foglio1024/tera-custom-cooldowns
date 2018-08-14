@@ -11,7 +11,7 @@ namespace TCC.ViewModels
         {
         }
 
-        public FixedSkillCooldown GrowingFury { get; set; }
+        public DurationCooldownIndicator GrowingFury { get; set; }
         public FixedSkillCooldown Counter { get; set; }
         public DurationCooldownIndicator RhythmicBlows { get; set; }
         public DurationCooldownIndicator Infuriate { get; set; }
@@ -42,8 +42,10 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             // Growing Fury
-            //SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
-            //GrowingFury = new FixedSkillCooldown(gf,  false);
+            GrowingFury = new DurationCooldownIndicator(_dispatcher);
+            SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            GrowingFury.Cooldown = new FixedSkillCooldown(gf,  true);
+            GrowingFury.Buff = new FixedSkillCooldown(gf, false);
 
             // Counter 
             //Counter = new DurationCooldownIndicator(_dispatcher);

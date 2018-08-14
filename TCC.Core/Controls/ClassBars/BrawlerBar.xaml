@@ -18,6 +18,106 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                    <Image.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GrowingFury.Buff.IsAvailable}" Value="False">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                    <Image.Effect>
+                        <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
+                    </Image.Effect>
+                </Image>
+                <Grid x:Name="MainReArcGrid">
+                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True" Margin="5">
+                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5" StrokeThickness="30"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin="-20" Width="98" Height="98" x:Name="MainReArc">
+                            <local:Arc.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="135" />
+                                </TransformGroup>
+                            </local:Arc.RenderTransform>
+                            <local:Arc.Style>
+                                <Style TargetType="Shape">
+                                    <Setter Property="Opacity" Value=".7" />
+                                    <Setter Property="Stroke" Value="White" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                            <Setter Property="Opacity" Value="1" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GrowingFury.Buff.IsAvailable}" Value="False">
+                                            <Setter Property="Stroke" Value="Orange" />
+                                            <Setter Property="Opacity" Value="1" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </local:Arc.Style>
+                        </local:Arc>
+                    </Grid>
+                    <Grid.Effect>
+                        <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
+                    </Grid.Effect>
+                    <Grid.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
+                <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" />
+                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" FontSize="16"
+                           FontWeight="DemiBold" Foreground="#afff"
+                           Text="{Binding StaminaTracker.Val}"
+                           Width="45" VerticalAlignment="Center">
+                </TextBlock>
+                <Grid>
+                    <Grid ClipToBounds="False">
+                        <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5">
+                            <Rectangle Stroke="{StaticResource KrBorderColor}"
+                                       StrokeThickness="1" Margin="12">
+                            </Rectangle>
+                        </Grid>
+                        <Rectangle Width="60" Height="60" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
+                                   OpacityMask="{StaticResource IconOpacityBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding GrowingFury.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                    <FrameworkElement.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GrowingFury.Buff.IsAvailable}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </FrameworkElement.Style>
+                </Grid>
+                <!--<Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                     <Image.Effect>
                         <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" Opacity="0"></DropShadowEffect>
                     </Image.Effect>
@@ -43,7 +143,7 @@
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
 
-                <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" ></Path>
+                <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" ></Path>-->
 
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
@@ -103,10 +203,11 @@
                     </FrameworkElement.RenderTransform>
 
             </TextBlock>
-            <Grid>
+            <Grid Visibility="{Binding CounterProc, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                         Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
+                        Opacity=".7"
+                        >
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="45" />
