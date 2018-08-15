@@ -15,6 +15,7 @@ namespace TCC.Parsing.Messages
             reader.Skip(4);
             Source = reader.ReadUInt64();
             var owner = reader.ReadUInt64();
+            if (owner != 0) Source = owner;
             Target = reader.ReadUInt64();
             var template = reader.ReadInt32();
             var skill = reader.ReadInt32();

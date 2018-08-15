@@ -6,41 +6,127 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignData ArcherBarManager}">
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ArcherBarManager}">
     <UserControl.Resources>
         <classBars:ArcherStanceToColorConverter x:Key="ArcherStanceToColor" />
     </UserControl.Resources>
-    <Grid Width="Auto" Margin="5" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <Grid HorizontalAlignment="Center" ClipToBounds="False">
-
-            <Border Grid.Row="0"
-                    Grid.Column="0"
-                    CornerRadius="29"
-                    Margin="0"
-                    VerticalAlignment="Stretch">
-                <UniformGrid Grid.Column="1" Rows="1" Margin="-8,-10,-9,-11" ClipToBounds="False">
-                    <local:ArcherFocusControl x:Name="FocusControl"
-                                              Margin="-5,-1,0,0" Padding="0,0"
-                                              DataContext="{Binding Focus}"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Center" />
-
-                    <local:RhombFixedSkillControl x:Name="Thunderbolt"
-                                                  DataContext="{Binding Thunderbolt}"
-                                                  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
-                                                  Padding="10" />
-                </UniformGrid>
-
+        <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                </Image>
+                <Grid x:Name="MainReArcGrid">
+                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
+                          Margin="5" >
+                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
+                                   StrokeThickness="30" Stroke="Orange" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="-20"
+                                   Width="98" Height="98" x:Name="MainReArc">
+                            <local:Arc.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="135"/>
+                                </TransformGroup>
+                            </local:Arc.RenderTransform>
+                            <local:Arc.Style>
+                                <Style TargetType="FrameworkElement">
+                                    <Setter Property="Opacity" Value="1"/>
+                                    <Style.Triggers>
+                                        <!--<DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>-->
+                                    </Style.Triggers>
+                                </Style>
+                            </local:Arc.Style>
+                        </local:Arc>
+                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
+                                   StrokeThickness="30" Stroke="White" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="-20" Opacity=".5"
+                                   Width="98" Height="98" x:Name="SecReArc">
+                            <local:Arc.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="135"/>
+                                </TransformGroup>
+                            </local:Arc.RenderTransform>
+                            <local:Arc.Style>
+                                <Style TargetType="FrameworkElement">
+                                    <Setter Property="Opacity" Value=".8"/>
+                                    <Style.Triggers>
+                                        <!--<DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>-->
+                                    </Style.Triggers>
+                                </Style>
+                            </local:Arc.Style>
+                        </local:Arc>
+                    </Grid>
+                    <Grid.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <!--<DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>-->
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
+                <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>
+            </Grid>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="52" Height="52" Background="{StaticResource KrBg}"
+                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="45" Y="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
             </Border>
-            <Border Background="{Binding Stance.CurrentStance, Converter={StaticResource ArcherStanceToColor}}"
-                    Height="30"
-                    Width="6" Margin="0,0,0,0"
-                    CornerRadius="3" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <Border BorderBrush="#89a" BorderThickness="1" Width="52" Height="52"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="-45" Y="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <local:RhombFixedSkillControl DataContext="{Binding Thunderbolt}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="45" Y="45" />
+                </FrameworkElement.RenderTransform>
+            </local:RhombFixedSkillControl>
+            <local:RhombBuffCooldownControl DataContext="{Binding VelikMark}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-45" Y="45" />
+                </FrameworkElement.RenderTransform>
+
+            </local:RhombBuffCooldownControl>
+            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
+                           FontWeight="DemiBold" Foreground="#afff" 
+                       Text="{Binding Focus.Stacks}" 
+                       Width="45" VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </FrameworkElement.RenderTransform>
+            </TextBlock>
         </Grid>
     </Grid>
 </UserControl>

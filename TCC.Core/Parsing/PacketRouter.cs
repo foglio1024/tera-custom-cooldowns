@@ -74,9 +74,9 @@ namespace TCC.Parsing
             Packets.Enqueue(obj);
         }
 
-        public static void EnqueueMessageFromProxy(MessageDirection dir,  string data)
+        public static void EnqueueMessageFromProxy(MessageDirection dir, string data)
         {
-            var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>( StringUtils.StringToByteArray(data.Substring(4))));
+            var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>(StringUtils.StringToByteArray(data.Substring(4))));
             Console.WriteLine(msg.OpCode);
             Packets.Enqueue(msg);
         }
@@ -145,7 +145,7 @@ namespace TCC.Parsing
                 srcName = srcName != ""
                     ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
                     : "<font color=\"#cccccc\">.</font>";
-                 ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
             }
             SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
             if (p.Target == SessionManager.CurrentPlayer.EntityId)
@@ -240,7 +240,7 @@ namespace TCC.Parsing
             SessionManager.InitDatabases(SettingsManager.LastRegion);
             CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
-            if(Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
+            if (Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
                 CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntitiesManager.ClearNPC();
@@ -486,7 +486,7 @@ namespace TCC.Parsing
         {
             if (message.IndexOf('[') != -1 && message.IndexOf(']') != -1)
             {
-                author = message.Split(new []{ '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                author = message.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
                 message = message.Replace('[' + author + ']', "");
             }
             if (author == "undefined") author = "System";
@@ -494,13 +494,13 @@ namespace TCC.Parsing
                 ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
             else
                 ChatWindowManager.Instance.AddChatMessage(
-                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x => 
+                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
                     x.Id == channel && x.Joined).Index + 11), author, message));
         }
 
 
 
-        
+
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
@@ -564,8 +564,8 @@ namespace TCC.Parsing
         internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
         {
             if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
-            InfoWindowViewModel.Instance.CurrentCharacter.GuardianPoints = x.Points;
-            InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianPoints = x.MaxPoints;
+            InfoWindowViewModel.Instance.CurrentCharacter.GuardianQuests = x.Claimed;
+            //InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianQuests = x.MaxPoints;
         }
 
         internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
@@ -577,7 +577,7 @@ namespace TCC.Parsing
         {
             foreach (var dg in x.DungeonClears)
             {
-                if(InfoWindowViewModel.Instance.SelectedCharacter != null)
+                if (InfoWindowViewModel.Instance.SelectedCharacter != null)
                     InfoWindowViewModel.Instance.SelectedCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
             }
         }
@@ -758,12 +758,15 @@ namespace TCC.Parsing
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DepawnUser(p.EntityId);
-
         }
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
+                FlyingGuardianDataProvider.HandleAbnormal(p);
+
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -781,6 +784,7 @@ namespace TCC.Parsing
                     Archer.CheckFocus(p);
                     Archer.CheckFocusX(p);
                     Archer.CheckSniperEye(p);
+                    Archer.CheckVelikMark(p);
                     break;
                 case Class.Lancer:
                     Lancer.CheckArush(p);
@@ -814,6 +818,10 @@ namespace TCC.Parsing
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
+                FlyingGuardianDataProvider.HandleAbnormal(p);
+
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -824,6 +832,7 @@ namespace TCC.Parsing
                     Archer.CheckFocus(p);
                     Archer.CheckFocusX(p);
                     Archer.CheckSniperEye(p);
+                    Archer.CheckVelikMark(p);
                     break;
                 case Class.Lancer:
                     Lancer.CheckLineHeld(p);
@@ -856,13 +865,19 @@ namespace TCC.Parsing
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
             AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId);
+
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
+                FlyingGuardianDataProvider.HandleAbnormal(p);
+
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
 
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Archer:
-                    Archer.CheckFocusEnd(p);
+                    Archer.CheckFocusX(p);
+                    Archer.CheckFocus(p);
                     Archer.CheckSniperEyeEnd(p);
+                    Archer.CheckVelikMark(p);
                     break;
                 case Class.Warrior:
                     Warrior.CheckBuffEnd(p);
@@ -923,7 +938,7 @@ namespace TCC.Parsing
             if (Proxy.IsConnected && SettingsManager.LfgEnabled)
             {
                 Proxy.RequestCandidates();
-                if(WindowManager.LfgListWindow != null) if(WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
+                if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
@@ -955,7 +970,7 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if(SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
         internal static void HandleKicked(S_BAN_PARTY x)

@@ -683,6 +683,10 @@
                                                ToolTip="{StaticResource ClickThruModeSettingTooltip}"
                                                Choices="{Binding ClickThruModes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Flight gauge rotation"
+                                           Min="0" Max="360" Value="{Binding FlightGaugeRotation, Mode=TwoWay}"/>
+                    <controls:BoolSetting SettingName="Flip flight gauge" 
+                                          IsOn="{Binding FlipFlightGauge, Mode=TwoWay}"/>
                     <Separator/>
                     <controls:BoolSetting SettingName="Show always floating button" IsOn="{Binding FloatingButtonSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
 
@@ -692,7 +696,6 @@
                                                ToolTip="{StaticResource ClickThruModeSettingTooltip}"
                                                Choices="{Binding ClickThruModes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-
                     <Separator/>
                     <controls:FieldSetting SettingName="Region override" Value="{Binding RegionOverride, Mode=TwoWay}" 
                                            SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"/>

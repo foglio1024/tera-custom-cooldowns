@@ -32,13 +32,13 @@ namespace TCC.Controls
             _context.Buff.Started += OnBuffStarted;
             _context.Buff.SecondsUpdated += OnSecondsUpdated;
             _context.Buff.Ended += OnBuffEnded;
-            _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
+            _anim = new DoubleAnimation(320, 40, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
         }
 
         private void OnBuffEnded(Data.CooldownMode obj)
         {
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
-            ExternalArc.EndAngle = 0;
+            ExternalArc.EndAngle = 40;
         }
 
         private void OnSecondsUpdated()

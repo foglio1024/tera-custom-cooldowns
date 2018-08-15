@@ -157,6 +157,8 @@ namespace TCC
         public static bool WarriorShowTraverseCut { get; set; } = true;
         public static bool WarriorShowEdge { get; set; } = true;
         public static WarriorEdgeMode WarriorEdgeMode { get; set; } = WarriorEdgeMode.Bar;
+        public static double FlightGaugeRotation { get; set; }
+        public static bool FlipFlightGauge { get; set; }
 
 
         public static void LoadWindowSettings()
@@ -302,6 +304,7 @@ namespace TCC
                     else if (attr.Name == nameof(ShowAwakenIcon)) ShowAwakenIcon = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(AccurateHp)) AccurateHp = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(WarriorShowEdge)) WarriorShowEdge = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(FlipFlightGauge)) FlipFlightGauge = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(WarriorShowTraverseCut)) WarriorShowTraverseCut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(CharacterWindowCompactMode)) CharacterWindowCompactMode = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(ShowAllGroupAbnormalities)) ShowAllGroupAbnormalities = bool.Parse(attr.Value);
@@ -310,6 +313,7 @@ namespace TCC
                     else if (attr.Name == nameof(Webhook)) Webhook = attr.Value;
                     else if (attr.Name == nameof(WebhookMessage)) WebhookMessage = attr.Value;
                     else if (attr.Name == nameof(ChatWindowOpacity)) ChatWindowOpacity = double.Parse(attr.Value, CultureInfo.InvariantCulture);
+                    else if (attr.Name == nameof(FlightGaugeRotation)) FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(LastRun)) LastRun = DateTime.Parse(attr.Value);
                     else if (attr.Name == nameof(TwitchName)) TwitchName = attr.Value;
                     else if (attr.Name == nameof(TwitchToken)) TwitchToken = attr.Value;
@@ -405,6 +409,8 @@ namespace TCC
                 new XAttribute(nameof(WarriorShowTraverseCut), WarriorShowTraverseCut),
                 new XAttribute(nameof(WarriorShowEdge), WarriorShowEdge),
                 new XAttribute(nameof(WarriorEdgeMode), WarriorEdgeMode),
+                new XAttribute(nameof(FlightGaugeRotation), FlightGaugeRotation),
+                new XAttribute(nameof(FlipFlightGauge), FlipFlightGauge),
                 new XAttribute(nameof(ShowAllGroupAbnormalities), ShowAllGroupAbnormalities)
                 //add setting here
                 ),

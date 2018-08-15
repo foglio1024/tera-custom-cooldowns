@@ -326,7 +326,7 @@ namespace TCC.ViewModels
                     new XAttribute("weekly", c.WeekliesDone),
                     new XAttribute("daily", c.DailiesDone),
                     new XAttribute("class", c.Class),
-                    new XAttribute("guardianPoints", c.GuardianPoints),
+                    new XAttribute("guardianQuests", c.GuardianQuests),
                     new XAttribute("elleonMarks", c.ElleonMarks)
                     );
 
@@ -411,7 +411,7 @@ namespace TCC.ViewModels
                 var d = Convert.ToInt32(c.Attribute("daily").Value);
                 var id = Convert.ToUInt32(c.Attribute("id").Value);
                 var pos = Convert.ToInt32(c.Attribute("pos").Value);
-                var guard = c.Attribute("guardianPoints") != null ? Convert.ToUInt32(c.Attribute("guardianPoints").Value) : 0;
+                var guard = c.Attribute("guardianQuests") != null ? Convert.ToInt32(c.Attribute("guardianQuests").Value) : 0;
                 var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks").Value) : 0;
                 var classString = c.Attribute("class").Value;
                 if (!Enum.TryParse<Class>(classString, out var cl))
@@ -431,7 +431,7 @@ namespace TCC.ViewModels
                     Credits = cr,
                     WeekliesDone = w,
                     DailiesDone = d,
-                    GuardianPoints = guard,
+                    GuardianQuests = guard,
                     ElleonMarks = marks
                 };
                 var dgDict = new Dictionary<uint, short>();

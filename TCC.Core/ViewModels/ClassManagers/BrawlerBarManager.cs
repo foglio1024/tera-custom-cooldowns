@@ -70,6 +70,11 @@ namespace TCC.ViewModels
                 RhythmicBlows.Cooldown.Start(sk.Cooldown);
                 return true;
             }
+            if (sk.Skill.IconName == Infuriate.Cooldown.Skill.IconName)
+            {
+                Infuriate.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
             return false;
         }
 

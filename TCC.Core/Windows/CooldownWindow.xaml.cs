@@ -9,7 +9,7 @@ namespace TCC.Windows
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = content;
-            Init(SettingsManager.CooldownWindowSettings, ignoreSize: true);
+            Init(SettingsManager.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
 
         }
 
