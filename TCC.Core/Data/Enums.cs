@@ -1,5 +1,11 @@
 ﻿namespace TCC.Data
 {
+    public enum FlightStackType
+    {
+        Air,
+        Fire,
+        Spark
+    }
     public enum WarriorEdgeMode
     {
         Bar,

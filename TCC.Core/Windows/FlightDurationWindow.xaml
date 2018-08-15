@@ -7,16 +7,79 @@
              xmlns:c="clr-namespace:TCC.Controls"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
-             Title="FlightDurationWindow" Height="300" Width="300" d:DataContext="{x:Type w:FlightDurationWindow}">
-    <Grid>
+             Title="FlightDurationWindow" Height="300" Width="300" 
+             d:DataContext="{x:Type w:FlightDurationWindow}">
+    <Grid RenderTransformOrigin=".5 .5">
+        <Grid.Style>
+            <Style TargetType="FrameworkElement">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <RotateTransform Angle="{Binding FlightGaugeRotation, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}"/>
+                        </TransformGroup>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding FlipFlightGauge, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="True">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1"/>
+                                    <RotateTransform Angle="{Binding FlightGaugeRotation, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}"/>
+                                </TransformGroup>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="6" EndAngle="90" Direction="Counterclockwise"
                StrokeStartLineCap="Round" Stroke="#5fff" x:Name="Arc" Height="300" Width="300"
                OriginRotationDegrees="-45">
         </c:Arc>
-
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
-               StrokeStartLineCap="Round" Stroke="#3fff" Height="288" Width="288" OriginRotationDegrees="-45">
+               StrokeStartLineCap="Round" Stroke="#9fff" Height="288" Width="288" OriginRotationDegrees="-45">
         </c:Arc>
+        <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <ScaleTransform ScaleY="-1"></ScaleTransform>
+            </Grid.RenderTransform>
+            <Grid.Resources>
+                <Style TargetType="c:Arc">
+                    <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
+                    <Setter Property="StrokeThickness" Value="6"/>
+                    <Setter Property="StrokeStartLineCap" Value="Round"/>
+                    <Setter Property="StrokeEndLineCap" Value="Round"/>
+                    <Setter Property="StartAngle" Value="0"/>
+                    <Setter Property="Opacity" Value="0.2"/>
+                    <Setter Property="EndAngle" Value="7"/>
+                    <Setter Property="Height" Value="280"/>
+                    <Setter Property="Width" Value="280"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Air">
+                            <Setter Property="Stroke" Value="{StaticResource MpColor2}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Fire">
+                            <Setter Property="Stroke" Value="{StaticResource HpColor}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Spark">
+                            <Setter Property="Stroke" Value="{StaticResource HpDebuffColor2}"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+            <c:Arc OriginRotationDegrees="-44"/>
+            <c:Arc OriginRotationDegrees="-35"/>
+            <c:Arc OriginRotationDegrees="-26"/>
+            <c:Arc OriginRotationDegrees="-17"/>
+            <c:Arc OriginRotationDegrees="-8"/>
+            <c:Arc OriginRotationDegrees="1"/>
+            <c:Arc OriginRotationDegrees="10"/>
+            <c:Arc OriginRotationDegrees="19"/>
+            <c:Arc OriginRotationDegrees="28"/>
+            <c:Arc OriginRotationDegrees="37"/>
 
+        </Grid>
     </Grid>
 </w:TccWidget>

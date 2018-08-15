@@ -20,6 +20,7 @@ namespace TCC.Windows
     {
         private WindowSettings _settings;
         private bool _ignoreSize;
+        private bool _undimOnFlyingGuardian;
         private DoubleAnimation _opacityAnimation;
         private DoubleAnimation _hideButtons;
         private DoubleAnimation _showButtons;
@@ -36,10 +37,11 @@ namespace TCC.Windows
 
         }
 
-        protected void Init(WindowSettings settings, bool ignoreSize = true)
+        protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true)
         {
             _settings = settings;
             _ignoreSize = ignoreSize;
+            _undimOnFlyingGuardian = undimOnFlyingGuardian;
 
             _opacityAnimation = new DoubleAnimation() { Duration = TimeSpan.FromMilliseconds(100) };
 
@@ -135,7 +137,10 @@ namespace TCC.Windows
             if (!_settings.AutoDim)
                 AnimateContentOpacity(1);
             else
-                AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
+            {
+                if(_undimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
+                else if(FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(_settings.DimOpacity);
+            }
 
             OnClickThruModeChanged();
         }

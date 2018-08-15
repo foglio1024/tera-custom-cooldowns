@@ -314,6 +314,17 @@ namespace TCC.ViewModels
                 NPC(nameof(HhOnlyAggro));
             }
         }
+        public double FlightGaugeRotation
+        {
+            get => SettingsManager.FlightGaugeRotation;
+            set
+            {
+                if (SettingsManager.FlightGaugeRotation == value) return;
+                SettingsManager.FlightGaugeRotation = value;
+                NPC(nameof(FlightGaugeRotation));
+                WindowManager.FlightDurationWindow.ExNPC(nameof(FlightGaugeRotation));
+            }
+        }
         //public bool LfgOn
         //{
         //    get => SettingsManager.LfgOn;
@@ -540,9 +551,9 @@ namespace TCC.ViewModels
                 SettingsManager.CharacterWindowCompactMode = value;
                 NPC();
                 CharacterWindowViewModel.Instance.ExNPC(nameof(CharacterWindowViewModel.CompactMode));
-                WindowManager.CharacterWindow.Left = value? WindowManager.CharacterWindow.Left + 175 :
+                WindowManager.CharacterWindow.Left = value ? WindowManager.CharacterWindow.Left + 175 :
                     WindowManager.CharacterWindow.Left - 175;
-                
+
             }
         }
 
@@ -554,7 +565,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.WarriorShowEdge == value) return;
                 SettingsManager.WarriorShowEdge = value;
                 NPC();
-                if(ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowEdge));
+                if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowEdge));
             }
         }
 
@@ -581,6 +592,18 @@ namespace TCC.ViewModels
                 if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.WarriorEdgeMode));
             }
 
+        }
+
+        public bool FlipFlightGauge
+        {
+            get => SettingsManager.FlipFlightGauge;
+            set
+            {
+                if (SettingsManager.FlipFlightGauge == value) return;
+                SettingsManager.FlipFlightGauge = value;
+                NPC();
+                WindowManager.FlightDurationWindow.ExNPC(nameof(FlipFlightGauge));
+            }
         }
     }
 }
