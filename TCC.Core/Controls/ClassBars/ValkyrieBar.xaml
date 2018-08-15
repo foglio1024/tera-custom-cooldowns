@@ -7,7 +7,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ValkyrieBarManager}">
-    <Grid Width="Auto" Margin="10 5" Name="Root">
+    <Grid Width="Auto" Margin="10 5 20 5" Name="Root">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
