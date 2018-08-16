@@ -5,29 +5,240 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" d:DataContext="{d:DesignData LancerBarManager}">
-    <Grid Width="Auto" Margin="10" Name="Root">
-        <!--HP/MP-->
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:LancerBarManager}">
+    <Grid Width="Auto" Margin="10 10 10 60" Name="Root" ClipToBounds="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                    <Image.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+
+                </Image>
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
+                <Path Data="{StaticResource SvgClassLancer}" Margin="19" Opacity=".3"/>
+                <Grid x:Name="LineHeldContainer" >
+                    <Grid.Resources>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Fill" Value="{StaticResource TankRoleColor}"></Setter>
+                            <Setter Property="Opacity" Value="0"></Setter>
+                            <Setter Property="RenderTransformOrigin" Value=".5 .5"></Setter>
+                        </Style>
+                        <Style TargetType="Polygon">
+                            <Setter Property="Fill" Value="{StaticResource TankRoleColor}"></Setter>
+                            <Setter Property="Opacity" Value="0"></Setter>
+                            <Setter Property="RenderTransformOrigin" Value=".5 .5"></Setter>
+                        </Style>
+
+                    </Grid.Resources>
+                    <!--1-->
+                    <Rectangle Width="14" Height="6" >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-24" Y="16"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <!--2-->
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-35" Y="4"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    <!--3-->
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-36" Y="4"/>
+                                <ScaleTransform ScaleY="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    <!--4-->
+                    <Rectangle Width="23" Height="6"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-21" Y="19"/>
+                                <ScaleTransform ScaleY="-1"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <!--5-->
+                    <Polygon  Points="-2 0, 9 0, 9 6, -8 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                                <StaticResource ResourceKey="Rotate45Inv"/>
+                                <TranslateTransform X="-5" Y="-35"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    <!--6-->
+                    <Polygon  Points="-2 0, 9 0, 9 6, -8 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                                <StaticResource ResourceKey="Rotate45Inv"/>
+                                <TranslateTransform X="-5" Y="-35"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    <!--7-->
+                    <Rectangle Width="23" Height="6"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-21" Y="19"/>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <!--8-->
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-36" Y="4"/>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    <!--9-->
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-35" Y="4"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    <!--10-->
+                    <Rectangle Width="14" Height="6"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-23" Y="16"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Grid>
+            </Grid>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource KrBg}"
+                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="43" Y="48" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="-43" Y="48" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <local:RhombBuffCooldownControl DataContext="{Binding GuardianShout}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="43" Y="48" />
+                </FrameworkElement.RenderTransform>
+            </local:RhombBuffCooldownControl>
+            <local:RhombBuffCooldownControl DataContext="{Binding AdrenalineRush}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-43" Y="48" />
+                </FrameworkElement.RenderTransform>
+
+            </local:RhombBuffCooldownControl>
+
+            <local:OutlinedTextBlock TextAlignment="Center" Margin="0,-1,0,0" FontSize="17" 
+                           FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
+                       Text="{Binding LH.Val}" 
+                       Width="45" VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </FrameworkElement.RenderTransform>
+            </local:OutlinedTextBlock>
+
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="0" Y="88" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <local:RhombFixedSkillControl DataContext="{Binding Infuriate}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="88" />
+                </FrameworkElement.RenderTransform>
+            </local:RhombFixedSkillControl>
+
+        </Grid>
+    </Grid>
+
+    <!--<Grid Width="Auto" Margin="10" Name="Root">
+        --><!--HP/MP--><!--
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource Styles.DefaultBorder}"
+            --><!--<Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
                     CornerRadius="29"
                     Margin="4,2"
-                    VerticalAlignment="Stretch" />
-            <!--Arush + Gshout-->
-            <UniformGrid Grid.Column="0"
+                    VerticalAlignment="Stretch" />-->
+            <!--Arush + Gshout--><!--
+            <StackPanel Grid.Column="0"
                          Grid.RowSpan="1"
-                         Rows="1"
-                         Margin="2,0">
-                <local:BuffCooldownControl DataContext="{Binding AdrenalineRush}" Margin="0,0,0,0"/>
-                <local:BuffCooldownControl DataContext="{Binding GuardianShout}" Margin="0,0,0,0"/>
-                <local:BuffCooldownControl DataContext="{Binding Infuriate}" Margin="0,0,0,0"/>
+                         Margin="2,0"
+                        Orientation="Horizontal">
+                <local:RhombBuffCooldownControl DataContext="{Binding AdrenalineRush}" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <local:RhombBuffCooldownControl DataContext="{Binding GuardianShout}" Margin="-39 34 0 0" VerticalAlignment="Top"/>
+                <local:RhombBuffCooldownControl DataContext="{Binding Infuriate}" Margin="-39,0,0,0" VerticalAlignment="Top"/>
                 <Border  Style="{StaticResource Styles.DefaultBorder}"  Height="48" Effect="{x:Null}"
                          HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="48" 
                          CornerRadius="25" >
@@ -69,10 +280,10 @@
                     </Grid>
                 </Border>
 
-            </UniformGrid>
+            </StackPanel>
         </Grid>
 
-    </Grid>
+    </Grid>-->
 </UserControl>
 
 

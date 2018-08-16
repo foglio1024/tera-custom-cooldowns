@@ -73,6 +73,7 @@ namespace TCC
             }
             Archer.CheckVelikMark(target);
             Priest.CheckTripleNemesis(target);
+            Mystic.CheckVoc(target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)

@@ -10,11 +10,13 @@
 
         <!--HP/MP-->
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Border Style="{StaticResource Styles.DefaultBorder}"
-                    CornerRadius="50"
-                    Margin="-5"
-                    VerticalAlignment="Stretch"/>
-            <local:BuffCooldownControl DataContext="{Binding ShadowReaping}" Margin="-20" Padding="20"/>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    RenderTransform="{StaticResource Rotate45}"
+                    Opacity=".7">
+            </Border>
+
+            <local:RhombBuffCooldownControl DataContext="{Binding ShadowReaping}" Margin="-20" Padding="20"/>
             
             <!--HP/MP-->
             <!--<UniformGrid Columns="2" 
