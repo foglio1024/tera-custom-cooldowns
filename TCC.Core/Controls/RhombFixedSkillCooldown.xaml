@@ -37,7 +37,7 @@
     <Grid Width="65" Height="65" Margin="2" HorizontalAlignment="Center" Name="MainGrid" ClipToBounds="False" VerticalAlignment="Center">
         <Grid ClipToBounds="False" >
             <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
-                <Rectangle Stroke="{StaticResource KrBorderColor}"
+                <Rectangle Stroke="#7fff"
                            StrokeThickness="1" Margin="10">
                     <Rectangle.Style>
                         <Style TargetType="Rectangle">
