@@ -165,7 +165,7 @@ namespace TCC.Controls
                 var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
                 Glow.BeginAnimation(OpacityProperty, an);
             }
-            if (_context.FlashOnAvailable && SessionManager.Combat) StartWarning();
+            if (_context.FlashOnAvailable && (SessionManager.Combat || SessionManager.Encounter)) StartWarning();
 
         }
 
