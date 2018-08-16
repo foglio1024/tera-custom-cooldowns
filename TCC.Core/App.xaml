@@ -30,6 +30,7 @@
             <Color x:Key="HpDebuffColorBase">#9c04bd</Color>
             <Color x:Key="HpDebuffColor2Base">#b24cc8</Color>
             <Color x:Key="RunemarkColorMaxBase">#ff98bb</Color>
+            <Color x:Key="NinjaColorBase">#c387ff</Color>
 
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
@@ -41,7 +42,7 @@
             <SolidColorBrush x:Key="DailyColor" Color="#42b0f4"/>
             <SolidColorBrush x:Key="MarksColor" Color="#aad"/>
             <SolidColorBrush x:Key="GuardianColor" Color="#e5442b"/>
-            <SolidColorBrush x:Key="NinjaColor" Color="#c387ff"/>
+            <SolidColorBrush x:Key="NinjaColor" Color="{StaticResource NinjaColorBase}"/>
 
             <SolidColorBrush x:Key="DefaultBackgroundColor" Color="#222228" Opacity=".9"/>
             <SolidColorBrush x:Key="FadedBorderColor" Color="#aa303035" Opacity="1"/>
@@ -158,6 +159,7 @@
             <SolidColorBrush x:Key="Colors.Chat.System.WorldBoss" Color="#fffcb7ff"/>
 
             <RotateTransform x:Key="Rotate45" Angle="45"/>
+            <RotateTransform x:Key="Rotate45Inv" Angle="-45"/>
             <SkewTransform x:Key="Skew45" AngleX="-45"/>
             <SkewTransform x:Key="Skew45Inv" AngleX="45"/>
             <QuadraticEase x:Key="QuadraticEase"/>
