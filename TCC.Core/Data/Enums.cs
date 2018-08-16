@@ -2,6 +2,7 @@
 {
     public enum FlightStackType
     {
+        None,
         Air,
         Fire,
         Spark
