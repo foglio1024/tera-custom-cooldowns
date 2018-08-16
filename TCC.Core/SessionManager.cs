@@ -106,6 +106,7 @@ namespace TCC
         {
             if (target == CurrentPlayer.EntityId)
             {
+                var old = CurrentPlayer.IsInCombat;
                 if (combat)
                 {
                     CurrentPlayer.IsInCombat = true;
@@ -116,7 +117,7 @@ namespace TCC
                     CurrentPlayer.IsInCombat = false;
                     CharacterWindowViewModel.Instance.Player.IsInCombat = false;
                 }
-                App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+                if(combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
             }
         }
         public static void SetPlayerHp(float hp)
