@@ -46,7 +46,9 @@ namespace TCC.ViewModels
 
         public BerserkerBarManager() : base()
         {
-            //CurrentClassManager = this;
+            SinisterTracker = new StatTracker();
+            DexterTracker = new StatTracker();
+            RampageTracker = new StatTracker();
         }
 
         public override void LoadSpecialSkills()
