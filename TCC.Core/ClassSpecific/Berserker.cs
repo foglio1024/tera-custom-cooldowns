@@ -7,7 +7,11 @@ namespace TCC.ClassSpecific
     {
         private static readonly int BloodlustId = 400701;
         private static readonly int FieryRageId = 400105;
+
         private static readonly int UnleashId = 401705;
+        private static readonly int Sinister = 401707;
+        private static readonly int Dexter = 401706;
+        private static readonly int Rampage = 401710;
 
         public static void CheckBuff(S_ABNORMALITY_BEGIN p)
         {
@@ -70,6 +74,51 @@ namespace TCC.ClassSpecific
             }
         }
 
+        public static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
+        {
+            if (p.AbnormalityId == Sinister && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+            }
+            if (p.AbnormalityId == Dexter && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+            }
+            if (p.AbnormalityId == Rampage && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+            }
+        }
+        public static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.AbnormalityId == Sinister && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+            }
+            if (p.AbnormalityId == Dexter && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+            }
+            if (p.AbnormalityId == Rampage && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+            }
+        }
+        public static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
+        {
+            if (p.AbnormalityId == Sinister && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = 0;
+            }
+            if (p.AbnormalityId == Dexter && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = 0;
+            }
+            if (p.AbnormalityId == Rampage && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = 0;
+            }
+        }
 
     }
 }

@@ -18,6 +18,10 @@ namespace TCC.ViewModels
         public FixedSkillCooldown Rampage { get; set; }
         public FixedSkillCooldown BeastFury { get; set; }
 
+        public StatTracker SinisterTracker { get; set; }
+        public StatTracker DexterTracker { get; set; }
+        public StatTracker RampageTracker { get; set; }
+
         public bool IsUnleashOn
         {
             get => _isUnleashOn;

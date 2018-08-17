@@ -813,6 +813,7 @@ namespace TCC.Parsing
                     break;
                 case Class.Berserker:
                     Berserker.CheckBuff(p);
+                    Berserker.CheckUnleashAbnormals(p);
                     break;
 
             }
@@ -856,6 +857,7 @@ namespace TCC.Parsing
                     break;
                 case Class.Berserker:
                     Berserker.CheckBuff(p);
+                    Berserker.CheckUnleashAbnormals(p);
                     break;
                 case Class.Brawler:
                     Brawler.CheckBrawlerAbnormal(p);
@@ -912,6 +914,7 @@ namespace TCC.Parsing
                     break;
                 case Class.Berserker:
                     Berserker.CheckBuffEnd(p);
+                    Berserker.CheckUnleashAbnormals(p);
                     break;
 
 
