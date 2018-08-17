@@ -388,6 +388,9 @@ namespace TCC.Parsing
         public static void HandleSpawnMe(S_SPAWN_ME p)
         {
             EntitiesManager.ClearNPC();
+            FlyingGuardianDataProvider.Stacks = 0;
+            FlyingGuardianDataProvider.StackType = FlightStackType.None;
+            FlyingGuardianDataProvider.InvokeProgressChanged();
             var t = new System.Timers.Timer(2000);
             t.Elapsed += (s, ev) =>
             {
@@ -771,11 +774,10 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Mystic:
-                    Mystic.CheckHurricane(p);
-                    Mystic.CheckBuff(p);
+                    Mystic.CheckAbnormal(p);
                     break;
                 case Class.Warrior:
-                    Warrior.CheckBuff(p);
+                    Warrior.CheckAbnormal(p);
                     break;
                 case Class.Valkyrie:
                     Valkyrie.CheckRagnarok(p);
@@ -826,7 +828,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    Warrior.CheckBuff(p);
+                    Warrior.CheckAbnormal(p);
                     break;
                 case Class.Archer:
                     Archer.CheckFocus(p);
@@ -841,7 +843,7 @@ namespace TCC.Parsing
                     Priest.CheckBuff(p);
                     break;
                 case Class.Mystic:
-                    Mystic.CheckBuff(p);
+                    Mystic.CheckAbnormal(p);
                     break;
                 case Class.Sorcerer:
                     Sorcerer.CheckBuff(p);
@@ -880,7 +882,7 @@ namespace TCC.Parsing
                     Archer.CheckVelikMark(p);
                     break;
                 case Class.Warrior:
-                    Warrior.CheckBuffEnd(p);
+                    Warrior.CheckAbnormal(p);
                     break;
                 case Class.Lancer:
                     Lancer.CheckLineHeldEnd(p);
@@ -888,7 +890,7 @@ namespace TCC.Parsing
                     Lancer.CheckGshoutEnd(p);
                     break;
                 case Class.Mystic:
-                    Mystic.CheckBuffEnd(p);
+                    Mystic.CheckAbnormal(p);
                     break;
                 case Class.Brawler:
                     Brawler.CheckBrawlerAbnormalEnd(p);

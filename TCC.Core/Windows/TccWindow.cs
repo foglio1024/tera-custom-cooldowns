@@ -139,7 +139,8 @@ namespace TCC.Windows
             else
             {
                 if(_undimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
-                else if(FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(_settings.DimOpacity);
+                else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(_settings.DimOpacity);
+                else AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
             }
 
             OnClickThruModeChanged();

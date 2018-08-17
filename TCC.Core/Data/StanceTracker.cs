@@ -42,7 +42,8 @@ namespace TCC.Data
             {
                 if (_crit == value) return;
                 _crit = value;
-                NPC("AuraChanged");
+                NPC();
+                AuraChanged?.Invoke();
             }
         }
         public bool ManaAura
@@ -51,7 +52,8 @@ namespace TCC.Data
             {
                 if (_mp == value) return;
                 _mp = value;
-                NPC("AuraChanged");
+                NPC();
+                AuraChanged?.Invoke();
             }
         }
         public bool CritResAura
@@ -60,7 +62,8 @@ namespace TCC.Data
             {
                 if (_res == value) return;
                 _res = value;
-                NPC("AuraChanged");
+                NPC();
+                AuraChanged?.Invoke();
             }
         }
         public bool SwiftAura
@@ -69,9 +72,14 @@ namespace TCC.Data
             {
                 if (_swift == value) return;
                 _swift = value;
-                NPC("AuraChanged");
+                NPC();
+                AuraChanged?.Invoke();
             }
         }
+
+        public bool AllMissing => !_crit && !_mp && !_res && !_swift;
+
+        public event Action AuraChanged;
 
         public AurasTracker()
         {

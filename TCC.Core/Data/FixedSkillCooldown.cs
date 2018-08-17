@@ -81,12 +81,13 @@ namespace TCC.Data
             _secondsTimer.Tick += DecreaseSeconds;
 
             SessionManager.CombatChanged += OnCombatStatusChanged;
+            SessionManager.EncounterChanged += OnCombatStatusChanged;
 
         }
 
         private void OnCombatStatusChanged()
         {
-            if (SessionManager.Combat && FlashOnAvailable)
+            if ((SessionManager.Encounter || SessionManager.Combat) && FlashOnAvailable)
                 ForceFlashing();
             else
                 ForceStopFlashing();

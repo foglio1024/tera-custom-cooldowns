@@ -15,7 +15,7 @@ namespace TCC.ClassSpecific
         private static readonly uint[] ShadowTempestIDs = { 103104, 103130 };
         private static readonly uint[] BladeWaltzIDs = { 104100 };
 
-        public static void CheckBuff(S_ABNORMALITY_BEGIN p)
+        public static void CheckAbnormal(S_ABNORMALITY_BEGIN p)
         {
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             if (GambleIDs.Contains(p.AbnormalityId))
@@ -59,7 +59,7 @@ namespace TCC.ClassSpecific
                 return;
             }
         }
-        public static void CheckBuff(S_ABNORMALITY_REFRESH p)
+        public static void CheckAbnormal(S_ABNORMALITY_REFRESH p)
         {
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             if (GambleIDs.Contains(p.AbnormalityId))
@@ -95,7 +95,7 @@ namespace TCC.ClassSpecific
                 return;
             }
         }
-        public static void CheckBuffEnd(S_ABNORMALITY_END p)
+        public static void CheckAbnormal(S_ABNORMALITY_END p)
         {
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             if (AstanceIDs.Contains(p.AbnormalityId))

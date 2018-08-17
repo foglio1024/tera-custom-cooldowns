@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -13,6 +12,13 @@ namespace TCC.ClassSpecific
         private const int HurricaneId = 60010;
         private const int HurricaneDuration = 120000;
         private static readonly int VowId = 700100;
+        private static readonly int VocId = 27160;
+
+        private static readonly List<ulong> MarkedTargets = new List<ulong>();
+        public static event Action<ulong> VocRefreshed;
+        public static event Action VocExpired;
+
+
 
         public static List<uint> CommonBuffs = new List<uint>
         {
@@ -36,10 +42,10 @@ namespace TCC.ClassSpecific
             if (msg.AbnormalityId != HurricaneId || msg.CasterId != SessionManager.CurrentPlayer.EntityId) return;
             SessionManager.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
             SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
-
         }
-        public static void CheckBuff(S_ABNORMALITY_BEGIN p)
+        public static void CheckAbnormal(S_ABNORMALITY_BEGIN p)
         {
+            CheckVoc(p);
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
@@ -67,8 +73,10 @@ namespace TCC.ClassSpecific
             }
 
         }
-        public static void CheckBuff(S_ABNORMALITY_REFRESH p)
+        public static void CheckAbnormal(S_ABNORMALITY_REFRESH p)
         {
+            CheckVoc(p);
+
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
@@ -96,8 +104,10 @@ namespace TCC.ClassSpecific
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Elementalize = true;
             }
         }
-        public static void CheckBuffEnd(S_ABNORMALITY_END p)
+        public static void CheckAbnormal(S_ABNORMALITY_END p)
         {
+            CheckVoc(p);
+
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
@@ -126,5 +136,46 @@ namespace TCC.ClassSpecific
             }
         }
 
+        public static void CheckVoc(ulong target)
+        {
+            if (MarkedTargets.Contains(target))
+            {
+                MarkedTargets.Remove(target);
+                if (MarkedTargets.Count == 0) VocExpired?.Invoke();
+            }
+        }
+
+        private static void CheckVoc(S_ABNORMALITY_BEGIN p)
+        {
+            if (VocId != p.AbnormalityId) return;
+            var target = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.TargetId);
+            if (target != null)
+            {
+                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
+                VocRefreshed?.Invoke(p.Duration);
+            }
+        }
+
+        private static void CheckVoc(S_ABNORMALITY_REFRESH p)
+        {
+            if (VocId != p.AbnormalityId) return;
+            var target = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.TargetId);
+            if (target != null)
+            {
+                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
+                VocRefreshed?.Invoke(p.Duration);
+            }
+        }
+
+        private static void CheckVoc(S_ABNORMALITY_END p)
+        {
+            if (VocId != p.AbnormalityId) return;
+            if (MarkedTargets.Contains(p.TargetId)) MarkedTargets.Remove(p.TargetId);
+            if (MarkedTargets.Count == 0) VocExpired?.Invoke();
+        }
+        public static void ClearMarkedTargets()
+        {
+            App.BaseDispatcher.Invoke(() => MarkedTargets.Clear());
+        }
     }
 }

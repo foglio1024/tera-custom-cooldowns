@@ -17,6 +17,7 @@ namespace TCC.Converters
                     inv = true;
                 }
             }
+            if (!(value is bool)) return Visibility.Visible;
             var val = (bool) value;
             if (inv) val = !val;
             return val ? Visibility.Visible : Visibility.Collapsed;
