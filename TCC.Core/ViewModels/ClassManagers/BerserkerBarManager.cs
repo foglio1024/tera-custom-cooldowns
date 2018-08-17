@@ -68,8 +68,8 @@ namespace TCC.ViewModels
             };
             Unleash = new DurationCooldownIndicator(_dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(ul, true),
-                Buff = new FixedSkillCooldown(ul, true)
+                Cooldown = new FixedSkillCooldown(ul, false),
+                Buff = new FixedSkillCooldown(ul, false)
             };
 
             SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
@@ -98,6 +98,22 @@ namespace TCC.ViewModels
             if (sk.Skill.IconName == Unleash.Cooldown.Skill.IconName)
             {
                 Unleash.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == BeastFury.Skill.IconName)
+            {
+                BeastFury.Start(sk.Cooldown);
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool ChangeSpecialSkill(Skill skill, uint cd)
+        {
+            if (skill.IconName == Unleash.Cooldown.Skill.IconName)
+            {
+                Unleash.Cooldown.Refresh(cd);
                 return true;
             }
             return false;
