@@ -58,13 +58,16 @@
                     <Setter Property="Width" Value="280"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Air">
-                            <Setter Property="Stroke" Value="{StaticResource MpColor2}"></Setter>
+                            <Setter Property="Stroke" Value="{StaticResource MpColor2}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Fire">
-                            <Setter Property="Stroke" Value="{StaticResource HpColor}"></Setter>
+                            <Setter Property="Stroke" Value="{StaticResource HpColor}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Spark">
-                            <Setter Property="Stroke" Value="{StaticResource HpDebuffColor2}"></Setter>
+                            <Setter Property="Stroke" Value="{StaticResource HpDebuffColor2}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="None">
+                            <Setter Property="Stroke" Value="White"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

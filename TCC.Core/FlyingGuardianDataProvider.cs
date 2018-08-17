@@ -36,9 +36,9 @@ namespace TCC
         public static FlightStackType StackType
         {
             get => _stackType;
-            private set
+            set
             {
-                _stackType = value;
+                if(_stackType == value) return;
                 _stackType = value;
                 StackTypeChanged?.Invoke(_stackType);
             }
@@ -48,7 +48,8 @@ namespace TCC
         {
             if (id == FireEssenceID) return FlightStackType.Fire;
             if (id == SparkEssenceID) return FlightStackType.Spark;
-            return FlightStackType.Air;
+            if (id == AirEssenceID) return FlightStackType.Air;
+            return FlightStackType.None;
         }
         private static bool IsEssence(uint id)
         {

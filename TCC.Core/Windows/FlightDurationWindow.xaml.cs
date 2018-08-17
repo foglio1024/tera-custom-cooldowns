@@ -39,13 +39,14 @@ namespace TCC.Windows
 
             FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
             FlyingGuardianDataProvider.StacksChanged += SetStacks;
-            FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged; 
+            FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
+            SessionManager.CombatChanged += OnCombatChanged;
 
             Init(SettingsManager.FlightGaugeWindowSettings);
             Opacity = 0;
 
-            _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250));
-            _winShow = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250));
+            _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
+            _winShow = new DoubleAnimation(1, TimeSpan.FromMilliseconds(100));
             _arcAn = new DoubleAnimation()
             {
                 Duration = TimeSpan.FromMilliseconds(250),
@@ -61,6 +62,11 @@ namespace TCC.Windows
                     if (Opacity == 0) ShowWindow();
                 }
             };
+        }
+
+        private void OnCombatChanged()
+        {
+            if(SessionManager.Combat) HideWindow();
         }
 
         private void OnFlyingGuardianInProgressChanged(bool obj)
