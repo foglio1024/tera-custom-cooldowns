@@ -7,6 +7,7 @@ namespace TCC.ClassSpecific
     {
         private static readonly int BloodlustId = 400701;
         private static readonly int FieryRageId = 400105;
+        private static readonly int UnleashId = 401705;
 
         public static void CheckBuff(S_ABNORMALITY_BEGIN p)
         {
@@ -19,6 +20,12 @@ namespace TCC.ClassSpecific
                 if (p.AbnormalityId == FieryRageId)
                 {
                     ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Start(p.Duration);
+                }
+                if (p.AbnormalityId == UnleashId)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Unleash.Buff.Start(p.Duration);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOn = true;
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOff = false;
                 }
             }
         }
@@ -34,6 +41,12 @@ namespace TCC.ClassSpecific
                 {
                     ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Refresh(p.Duration);
                 }
+                if (p.AbnormalityId == UnleashId)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Unleash.Buff.Refresh(p.Duration);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOn = true;
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOff = false;
+                }
             }
         }
         public static void CheckBuffEnd(S_ABNORMALITY_END p)
@@ -47,6 +60,12 @@ namespace TCC.ClassSpecific
                 if (p.AbnormalityId == FieryRageId)
                 {
                     ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Refresh(0);
+                }
+                if (p.AbnormalityId == UnleashId)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Unleash.Buff.Refresh(0);
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOn = false;
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOff = true;
                 }
             }
         }
