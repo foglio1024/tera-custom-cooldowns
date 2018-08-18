@@ -130,6 +130,7 @@
                             </Style>
                         </Grid.Style>
                     </Grid>
+
                     <Border Background="Red" Margin="0" CornerRadius="0" Opacity="0" RenderTransformOrigin=".5 .5"
                         Style="{StaticResource Styles.DefaultBorder}" x:Name="EnrageBorder" Grid.RowSpan="2"
                         Grid.Row="0" HorizontalAlignment="Stretch" 
@@ -145,12 +146,41 @@
 
                         </Border.RenderTransform>
                     </Border>
+
+                    <!--<Image Stretch="Uniform" VerticalAlignment="Center" Margin="-10" Width="56" RenderTransformOrigin=".5 .5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1"></ScaleTransform>
+                                <TranslateTransform Y="18" X="0"/>
+
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TemplateId}" Value="1000">
+                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/bronze_kr_big.png"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding TemplateId}" Value="2000">
+                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/silver_kr_big.png"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding TemplateId}" Value="3000">
+                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/gold_kr_big.png"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding TemplateId}" Value="4000">
+                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/diamond_kr_big.png"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>-->
                     <Image Grid.RowSpan="2" Grid.Row="0" Margin="-10" Stretch="Uniform" 
                        Width="50" 
                        Height="{Binding Source=Self, Path=ActualWidth}"
                        StretchDirection="DownOnly"
                        HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image.RenderTransform>
+
                             <TranslateTransform Y="20" X="0.5"/>
                         </Image.RenderTransform>
                         <Image.Style>
