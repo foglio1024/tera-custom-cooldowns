@@ -6,47 +6,48 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" d:DataContext="{d:DesignData SlayerBarManager}">
-    <Grid Width="Auto" Margin="5" Name="Root">
+    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-10,0,0,0" BorderThickness="0" CornerRadius="0,26,26,0"
-                VerticalAlignment="Center"
-                Background="#d21"
-        >
-            <Grid Grid.Column="1" Margin="10,-3,-3,-3">
-                <local:FixedSkillControl  HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" DataContext="{Binding OverhandStrike}" RenderTransformOrigin=".5,.5">
-                    <local:FixedSkillControl.RenderTransform>
-                        <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
-                    </local:FixedSkillControl.RenderTransform>
-                </local:FixedSkillControl>
+        <Grid HorizontalAlignment="Center" Margin="60 0 90 30" ClipToBounds="False" Width="Auto" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Opacity=".7" >
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <local:RhombFixedSkillControl DataContext="{Binding OverhandStrike}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </local:RhombFixedSkillControl>
+                <Grid>
+                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                            Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                            Opacity=".7" >
+                        <FrameworkElement.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="45" />
+                                <TranslateTransform X="45" Y="45" />
+                            </TransformGroup>
+                        </FrameworkElement.RenderTransform>
+                    </Border>
+                    <local:RhombBuffCooldownControl DataContext="{Binding InColdBlood}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <FrameworkElement.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="45" Y="45" />
+                            </TransformGroup>
+                        </FrameworkElement.RenderTransform>
+                    </local:RhombBuffCooldownControl>
+                </Grid>
             </Grid>
-        </Border>
-
-        <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,0">
-
-            <Border Style="{StaticResource Styles.DefaultBorder}"
-                    CornerRadius="45"
-                    Margin="-4"
-                    VerticalAlignment="Stretch"/>
-            <local:BuffCooldownControl DataContext="{Binding InColdBlood}" Padding="20" Margin="-20" />
-            <!--HP/MP-->
-            <!--<UniformGrid Columns="2" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center"
-                         Margin="5"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
-                         Grid.Row="0"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource HpColor}" StatusColor="{StaticResource MpColor}" Width="85" Margin="0,0,0,0"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource MpColor}" Width="85" Margin="0,0,0,0"/>
-            </UniformGrid>-->
         </Grid>
     </Grid>
 </UserControl>
