@@ -278,6 +278,7 @@ namespace TCC.ViewModels
             if (!SettingsManager.GroupWindowSettings.Enabled || !_dispatcher.Thread.IsAlive) return;
             Members.Clear();
             Raid = false;
+            _leaderOverride = false;
         }
         public void LogoutMember(uint playerId, uint serverId)
         {
