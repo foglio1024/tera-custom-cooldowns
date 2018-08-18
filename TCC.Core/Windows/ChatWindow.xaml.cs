@@ -188,8 +188,8 @@ namespace TCC.Windows
             if ((p as ItemsControl).ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
-            LeftLine.Width = left - 3;
-            RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
+            if (left - 3 >= 0) LeftLine.Width = left - 3;
+            if (left + w - 3 >= 0) RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
 
         }
 
