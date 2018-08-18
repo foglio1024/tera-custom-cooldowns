@@ -139,31 +139,31 @@ namespace TCC.ViewModels
                 Vow.Cooldown.Start(sk.Cooldown);
                 return true;
             }
-            if (sk.Skill.IconName == ThrallOfProtection.Skill.IconName)
-            {
-                ThrallOfProtection.Start(sk.Cooldown);
-                return true;
-            }
+            //if (sk.Skill.IconName == ThrallOfProtection.Skill.IconName)
+            //{
+            //    ThrallOfProtection.Start(sk.Cooldown);
+            //    return true;
+            //}
             if (sk.Skill.IconName == ThrallOfVengeance.Skill.IconName)
             {
                 ThrallOfVengeance.Start(sk.Cooldown);
                 return true;
             }
-            if (sk.Skill.IconName == ThrallOfLife.Skill.IconName)
-            {
-                ThrallOfLife.Start(sk.Cooldown);
-                return true;
-            }
+            //if (sk.Skill.IconName == ThrallOfLife.Skill.IconName)
+            //{
+            //    ThrallOfLife.Start(sk.Cooldown);
+            //    return true;
+            //}
             if (sk.Skill.IconName == ThrallOfWrath.Skill.IconName)
             {
                 ThrallOfWrath.Start(sk.Cooldown);
                 return true;
             }
-            if (sk.Skill.IconName == KingBlob.Skill.IconName)
-            {
-                KingBlob.Start(sk.Cooldown);
-                return true;
-            }
+            //if (sk.Skill.IconName == KingBlob.Skill.IconName)
+            //{
+            //    KingBlob.Start(sk.Cooldown);
+            //    return true;
+            //}
             return false;
         }
     }

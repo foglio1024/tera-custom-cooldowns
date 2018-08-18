@@ -9,7 +9,7 @@
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
         <Grid ClipToBounds="True" RenderTransform="{StaticResource Rotate45}" 
-              RenderTransformOrigin=".5 .5" Width="48" Height="48">
+              RenderTransformOrigin=".5 .5" Width="50" Height="50">
             <local:Arc Width="80" 
                        Height="80" 
                        StrokeThickness="30" 

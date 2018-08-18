@@ -168,8 +168,11 @@ namespace TCC.Windows
 
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
-            LeftLine.Width = left - 3;
-            RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
+            if (left - 3 > 0)
+            {
+                LeftLine.Width = left - 3;
+                RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
+            }
         }
 
         private void TabLoaded(object sender, RoutedEventArgs e)
@@ -185,8 +188,8 @@ namespace TCC.Windows
             if ((p as ItemsControl).ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
-            LeftLine.Width = left - 3;
-            RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
+            if (left - 3 >= 0) LeftLine.Width = left - 3;
+            if (left + w - 3 >= 0) RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
 
         }
 
@@ -356,11 +359,11 @@ namespace TCC.Windows
             //var msg = (sender as FrameworkElement).DataContext as ChatMessage;
             //var tabVm = VM.TabVMs.FirstOrDefault(x =>
             //    ((Tab)x.Content).Messages.Contains(msg) && x == currTabVm);
-            if (currTabVm?.Content != null) ((Tab) currTabVm?.Content).PinnedMessage = null;
+            if (currTabVm?.Content != null) ((Tab)currTabVm?.Content).PinnedMessage = null;
 
             //var tab = VM.Tabs.FirstOrDefault(x => 
-                //x.PinnedMessage == (((sender as FrameworkElement)?.DataContext as HeaderedItemViewModel)?.Content as Tab)?.PinnedMessage
-                //);
+            //x.PinnedMessage == (((sender as FrameworkElement)?.DataContext as HeaderedItemViewModel)?.Content as Tab)?.PinnedMessage
+            //);
             //if (tab != null) tab.PinnedMessage = null;
         }
 
