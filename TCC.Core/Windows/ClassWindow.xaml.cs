@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -21,7 +24,10 @@ namespace TCC.Windows
             if (ClassWindowViewModel.Instance.CurrentManager == null)
                 ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
 
+
         }
+
+
 
         private new void OnEnabledChanged() 
         {
@@ -29,5 +35,7 @@ namespace TCC.Windows
                 ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
             base.OnEnabledChanged();
         }
+
+        
     }
 }

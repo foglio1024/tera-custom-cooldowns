@@ -10,6 +10,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
@@ -466,6 +467,16 @@ namespace TCC
             //ClassWindow.TempShow();
             //GroupWindow.TempShow();
             //ChatWindowManager.Instance.TempShow();
+        }
+
+        public static void ReloadPositions(Class c)
+        {
+            CooldownWindow.ReloadPosition(c);
+            ClassWindow.ReloadPosition(c);
+            CharacterWindow.ReloadPosition(c);
+            GroupWindow.ReloadPosition(c);
+            BuffWindow.ReloadPosition(c);
+            BossWindow.ReloadPosition(c);
         }
     }
 }

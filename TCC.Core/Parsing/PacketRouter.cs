@@ -265,6 +265,7 @@ namespace TCC.Parsing
             CharacterWindowViewModel.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
+            WindowManager.ReloadPositions(p.CharacterClass);
         }
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)

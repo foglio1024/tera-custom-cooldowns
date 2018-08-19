@@ -15,6 +15,7 @@ using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
 using Key = System.Windows.Forms.Keys;
+using Point = System.Windows.Point;
 using Size = System.Drawing.Size;
 
 namespace TCC
@@ -89,6 +90,8 @@ namespace TCC
             {(Class)12, new List<uint>()},
             {(Class)255, new List<uint>()},
         };
+
+
         public static uint GroupSizeThreshold = 7;
         public static EnrageLabelMode EnrageLabelMode { get; set; } = EnrageLabelMode.Remaining;
         public static bool ShowItemsCooldown { get; set; } = true;
@@ -112,7 +115,7 @@ namespace TCC
                 else
                 {
                     _chatEnabled = value;
-                } 
+                }
             }
         }
 
@@ -201,6 +204,8 @@ namespace TCC
             }
         }
 
+
+
         private static ChatWindowSettings ParseChatWindowSettings(XContainer s)
         {
             var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
@@ -218,7 +223,7 @@ namespace TCC
                                           sett.Enabled, sett.AllowOffScreen)
             {
                 Tabs = tabs,
-                LfgOn = lfg != null ? bool.Parse(lfg.Value) : true,
+                LfgOn = lfg == null || bool.Parse(lfg.Value),
                 BackgroundOpacity = op != null ? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
             };
         }
@@ -322,6 +327,7 @@ namespace TCC
                     //add settings here
                 });
 
+
                 //try
                 //{
                 //    ParseChannelsSettings(_settingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(EnabledChatChannels)));
@@ -422,12 +428,13 @@ namespace TCC
         }
 
 
+
         private static void SaveSettingsDoc(XElement doc)
         {
             if (!doc.HasElements) return;
             try
             {
-                if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml", AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml.bak", true);
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml", AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml.bak", true);
                 doc.Save(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
             }
             catch (Exception)
@@ -442,6 +449,7 @@ namespace TCC
             double x = 0, y = 0, w = 0, h = 0, scale = 1, dimOp = .3;
             var ctm = ClickThruMode.Never;
             bool vis = true, enabled = true, autoDim = true, allowOffscreen = false, alwaysVis = false;
+            Dictionary<Class, Point> positions = null;
 
             try
             {
@@ -507,7 +515,24 @@ namespace TCC
                 enabled = bool.Parse(ws.Attribute("Enabled").Value);
             }
             catch (Exception) { }
-            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen);
+
+            try
+            {
+                var pss = ws.Descendants().FirstOrDefault(s => s.Name == "Positions");
+                if(pss != null) positions = new Dictionary<Class, Point>();
+                pss?.Descendants().Where(s => s.Name == "Position").ToList().ForEach(pos =>
+                {
+                    var cl = (Class)Enum.Parse(typeof(Class), pos.Attribute("class").Value);
+                    var px = double.Parse(pos.Attribute("X")?.Value, CultureInfo.InvariantCulture);
+                    var py = double.Parse(pos.Attribute("Y")?.Value, CultureInfo.InvariantCulture);
+                    positions.Add(cl, new Point(px, py));
+                });
+            }
+            catch (Exception)
+            {
+                positions = null;
+            }
+            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen, positions);
         }
         //private static void ParseChannelsSettings(XElement xElement)
         //{

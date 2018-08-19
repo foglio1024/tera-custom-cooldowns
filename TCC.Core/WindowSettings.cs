@@ -36,6 +36,9 @@ namespace TCC
             set
             {
                 _x = value;
+                var cc = SessionManager.CurrentPlayer != null ? SessionManager.CurrentPlayer.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class : Class.Common;
+                var old = Positions[cc];
+                Positions[cc] = new Point(value, old.Y);
                 NPC(nameof(X));
             }
         }
@@ -45,6 +48,10 @@ namespace TCC
             set
             {
                 _y = value;
+                var cc = SessionManager.CurrentPlayer != null ? SessionManager.CurrentPlayer.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class : Class.Common;
+                var old = Positions[cc];
+                Positions[cc] = new Point(old.X, value);
+
                 NPC(nameof(Y));
             }
         }
@@ -170,13 +177,15 @@ namespace TCC
             get => _allowOffScreen;
             set
             {
-                if(_allowOffScreen == value) return;
+                if (_allowOffScreen == value) return;
                 _allowOffScreen = value;
                 NPC();
             }
         }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen)
+        public Dictionary<Class, Point> Positions { get; set; }
+
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _x = x;
@@ -191,7 +200,26 @@ namespace TCC
             _showAlways = showAlways;
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
+            Positions = new Dictionary<Class, Point>
+            {
+                {(Class) 0,   positions == null ? new Point(x,y) : new Point(positions[(Class) 0].X, positions[(Class) 0].Y)},
+                {(Class) 1,   positions == null ? new Point(x,y) : new Point(positions[(Class) 1].X, positions[(Class) 1].Y)},
+                {(Class) 2,   positions == null ? new Point(x,y) : new Point(positions[(Class) 2].X, positions[(Class) 2].Y)},
+                {(Class) 3,   positions == null ? new Point(x,y) : new Point(positions[(Class) 3].X, positions[(Class) 3].Y)},
+                {(Class) 4,   positions == null ? new Point(x,y) : new Point(positions[(Class) 4].X, positions[(Class) 4].Y)},
+                {(Class) 5,   positions == null ? new Point(x,y) : new Point(positions[(Class) 5].X, positions[(Class) 5].Y)},
+                {(Class) 6,   positions == null ? new Point(x,y) : new Point(positions[(Class) 6].X, positions[(Class) 6].Y)},
+                {(Class) 7,   positions == null ? new Point(x,y) : new Point(positions[(Class) 7].X, positions[(Class) 7].Y)},
+                {(Class) 8,   positions == null ? new Point(x,y) : new Point(positions[(Class) 8].X, positions[(Class) 8].Y)},
+                {(Class) 9,   positions == null ? new Point(x,y) : new Point(positions[(Class) 9].X, positions[(Class) 9].Y)},
+                {(Class) 10,  positions == null ? new Point(x,y) : new Point(positions[(Class) 10].X, positions[(Class) 10].Y)},
+                {(Class) 11,  positions == null ? new Point(x,y) : new Point(positions[(Class) 11].X, positions[(Class) 11].Y)},
+                {(Class) 12,  positions == null ? new Point(x,y) : new Point(positions[(Class) 12].X, positions[(Class) 12].Y)},
+                {(Class) 255, positions == null ? new Point(x,y) : new Point(positions[(Class) 255].X, positions[(Class) 255].Y)}
+            };
         }
+
+
 
         public virtual XElement ToXElement(string name)
         {
@@ -209,8 +237,23 @@ namespace TCC
             xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
             xe.Add(new XAttribute(nameof(Enabled), Enabled));
             xe.Add(new XAttribute(nameof(AllowOffScreen), AllowOffScreen));
+            xe.Add(BuildClassWindowPositionsXElement());
             return xe;
         }
+        private XElement BuildClassWindowPositionsXElement()
+        {
+            var ret = new XElement(nameof(Positions));
+            foreach (var keyVal in Positions)
+            {
+                ret.Add(
+                    new XElement("Position", new XAttribute("class", keyVal.Key),
+                        new XAttribute("X", keyVal.Value.X),
+                        new XAttribute("Y", keyVal.Value.Y))
+                );
+            }
+            return ret;
+        }
+
     }
 
     public class ChatWindowSettings : WindowSettings
@@ -233,7 +276,7 @@ namespace TCC
         //    }
         //}
 
-        public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways,  enabled, allowOffscreen)
+        public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
             Tabs = new List<Tab>();
         }

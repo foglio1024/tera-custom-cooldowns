@@ -36,7 +36,14 @@ namespace TCC.Windows
         {
 
         }
-
+        public void ReloadPosition(Class c)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Left = _settings.Positions[c].X * SettingsManager.ScreenW;
+                Top = _settings.Positions[c].Y * SettingsManager.ScreenH;
+            });
+        }
         protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true)
         {
             _settings = settings;
