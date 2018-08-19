@@ -31,6 +31,7 @@
             <Color x:Key="HpDebuffColor2Base">#b24cc8</Color>
             <Color x:Key="RunemarkColorMaxBase">#ff98bb</Color>
             <Color x:Key="NinjaColorBase">#c387ff</Color>
+            <Color x:Key="TankRoleColorBase">#32b3e2</Color>
 
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
@@ -65,7 +66,7 @@
 
             <SolidColorBrush x:Key="HealerRoleColor" Color="#3bdb83" />
             <SolidColorBrush x:Key="DpsRoleColor" Color="#ff894a" />
-            <SolidColorBrush x:Key="TankRoleColor" Color="#32b3e2" />
+            <SolidColorBrush x:Key="TankRoleColor" Color="{StaticResource TankRoleColorBase}" />
 
             <SolidColorBrush x:Key="IgnidraxColor" Color="#ff894a"/>
             <SolidColorBrush x:Key="TerradraxColor" Color="#ffcb76"/>

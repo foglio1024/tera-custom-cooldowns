@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="60 0 90 30" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -26,8 +26,8 @@
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
-                <local:RhombFixedSkillControl DataContext="{Binding OverhandStrike}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                </local:RhombFixedSkillControl>
+                <local:RhombFixedSkillControl DataContext="{Binding OverhandStrike}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              IsHitTestVisible="False"/>
                 <Grid>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                             Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"

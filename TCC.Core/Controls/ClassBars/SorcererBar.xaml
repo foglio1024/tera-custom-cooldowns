@@ -5,15 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" d:DataContext="{d:DesignData SorcererBarManager}">
-    <Grid Width="Auto" Margin="10" Name="Root">
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Border Style="{StaticResource Styles.DefaultBorder}"
-                    CornerRadius="50"
-                    Margin="-4"
-                    VerticalAlignment="Stretch"/>
-            <local:BuffCooldownControl DataContext="{Binding ManaBoost}" Margin="-20" Padding="20"/>
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SorcererBarManager}">
+    <Grid Width="Auto" Margin="5" Name="Root">
 
+        <!--HP/MP-->
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    RenderTransform="{StaticResource Rotate45}"
+                    Opacity=".7">
+            </Border>
+
+            <local:RhombBuffCooldownControl DataContext="{Binding ManaBoost}" Margin="-20" Padding="20"/>
+
+            <!--HP/MP-->
+            <!--<UniformGrid Columns="2" 
+                         HorizontalAlignment="Stretch" 
+                         VerticalAlignment="Center"
+                         Margin="5"
+                         Grid.RowSpan="2"
+                         Grid.Column="2"
+                         Grid.Row="0"
+                         >
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource HpColor}" StatusColor="{StaticResource MpColor}" Width="85" Margin="0,0,3,0"/>
+                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource MpColor}" Width="85" Margin="0,0,0,0"/>
+            </UniformGrid>-->
         </Grid>
+
     </Grid>
+
 </UserControl>

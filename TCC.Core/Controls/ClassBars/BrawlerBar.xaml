@@ -121,7 +121,7 @@
                 </Grid>
 
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+            <Border BorderBrush="#89a" BorderThickness="1" Margin="11"
                     Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -138,7 +138,7 @@
                 </FrameworkElement.RenderTransform>
 
             </local:RhombBuffCooldownControl>
-            <Border BorderThickness="1" Margin="9" 
+            <Border BorderThickness="1" Margin="11" 
                      RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7" BorderBrush="{StaticResource KrBorderColor}" Background="{StaticResource KrBg}"
                     >

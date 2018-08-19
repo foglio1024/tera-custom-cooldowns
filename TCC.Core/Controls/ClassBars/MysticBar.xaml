@@ -31,7 +31,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid Margin="0 -20" Grid.Row="1" >
+        <Grid Margin="0 -15 0 -12" Grid.Row="1" >
 
             <Border BorderBrush="{StaticResource KrBorderColor}"
                         BorderThickness="1"

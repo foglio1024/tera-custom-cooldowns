@@ -86,7 +86,7 @@
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="52" Height="52" Background="{StaticResource KrBg}"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource KrBg}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -96,7 +96,7 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="52" Height="52"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
                     Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -109,13 +109,13 @@
             <local:RhombFixedSkillControl DataContext="{Binding Thunderbolt}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
-                    <TranslateTransform X="45" Y="45" />
+                    <TranslateTransform X="-45" Y="45" />
                 </FrameworkElement.RenderTransform>
             </local:RhombFixedSkillControl>
             <local:RhombBuffCooldownControl DataContext="{Binding VelikMark}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
-                    <TranslateTransform X="-45" Y="45" />
+                    <TranslateTransform X="45" Y="45" />
                 </FrameworkElement.RenderTransform>
 
             </local:RhombBuffCooldownControl>

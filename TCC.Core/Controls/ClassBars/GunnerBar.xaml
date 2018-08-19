@@ -75,7 +75,7 @@
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3"/>
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="50" Height="50" Background="{StaticResource KrBg}"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource KrBg}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -85,7 +85,7 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="50" Height="50"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
                     Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
