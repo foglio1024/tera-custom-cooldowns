@@ -1173,13 +1173,23 @@
             <!--Channel label templates-->
             <DataTemplate x:Key="WhisperChannelLabelTemplate" DataType="data:ChatMessage">
                 <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
-                    <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" Opacity=".7" 
+                    <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Opacity=".7" 
                       Stretch="Uniform" VerticalAlignment="Center">
                         <Path.LayoutTransform>
                             <TransformGroup>
                                 <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource Converters.WhisperDirectionToAngle}}"/>
                             </TransformGroup>
                         </Path.LayoutTransform>
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                        <Setter Property="Fill" Value="{StaticResource Colors.Chat.Whisper}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Channel}" Value="ReceivedWhisper">
+                                        <Setter Property="Fill" Value="Orange"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
                     </Path>
                 </Grid>
             </DataTemplate>
