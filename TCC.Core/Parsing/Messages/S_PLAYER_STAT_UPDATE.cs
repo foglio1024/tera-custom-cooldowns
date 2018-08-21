@@ -32,6 +32,7 @@ namespace TCC.Parsing.Messages
         public int Level { get => level; }
         public int Ilvl { get => ilvl; }
         public int Edge { get => edge; }
+        public float CritFactor { get => bonusCritRate; }
 
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
@@ -70,7 +71,8 @@ namespace TCC.Parsing.Messages
             //bonusMovSpeed = reader.ReadInt16();84
             //unk3 = reader.ReadInt16();86
             //bonusAtkSpeed = reader.ReadInt16();88
-            //bonusCritRate = reader.ReadSingle();92
+            reader.Skip(88);
+            bonusCritRate = reader.ReadSingle();//92
             //bonusCritResist = reader.ReadSingle();96
             //bonusCritPower = reader.ReadSingle();100
             //bonusAttack = reader.ReadInt32();104
@@ -81,7 +83,7 @@ namespace TCC.Parsing.Messages
             //bonusResistWeak = reader.ReadSingle();124
             //bonusResistPeriodic = reader.ReadSingle();128
             //bonusResistStun = reader.ReadSingle();132
-            reader.Skip(132);
+            reader.Skip(128-88);
 
             level = reader.ReadInt16();
             reader.Skip(2);
