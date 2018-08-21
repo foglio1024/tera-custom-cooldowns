@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using TCC.Data.Databases;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC.Data
 {

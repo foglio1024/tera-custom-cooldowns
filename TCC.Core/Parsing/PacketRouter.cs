@@ -471,6 +471,8 @@ namespace TCC.Parsing
 
         public static void HandleChat(S_CHAT x)
         {
+            if (x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName.Contains("Foglia") ||
+                x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") WindowManager.FloatingButton.NotifyExtended("TCC", "Foglio is watching you °L°", NotificationType.Warning);
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
 

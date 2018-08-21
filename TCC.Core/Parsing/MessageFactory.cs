@@ -111,6 +111,7 @@ namespace TCC.Parsing
         private static readonly Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
         private static readonly Dictionary<Type, Delegate> Base = new Dictionary<Type, Delegate>()
         {
+            {typeof(S_CHAT), new Action<S_CHAT>(PacketProcessor.HandleChat) },
             {typeof(S_LOGIN), new Action<S_LOGIN>(PacketProcessor.HandleLogin) },
             {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(PacketProcessor.HandleLoadTopo) },
             {typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(PacketProcessor.HandleCharList) },
@@ -202,7 +203,6 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> ChatWindow = new Dictionary<Type, Delegate>
         {
-            {typeof(S_CHAT), new Action<S_CHAT>(PacketProcessor.HandleChat) },
             {typeof(S_PRIVATE_CHAT), new Action<S_PRIVATE_CHAT>(PacketProcessor.HandlePrivateChat) },
             {typeof(S_WHISPER), new Action<S_WHISPER>(PacketProcessor.HandleWhisper) },
             {typeof(S_JOIN_PRIVATE_CHANNEL), new Action<S_JOIN_PRIVATE_CHANNEL>(PacketProcessor.HandleJoinPrivateChat) },
