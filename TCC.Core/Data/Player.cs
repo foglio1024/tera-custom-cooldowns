@@ -6,6 +6,7 @@ namespace TCC.Data
 {
     public class Player : TSPropertyChanged
     {
+        private float _critFactor;
         private string name;
         public string Name
         {
@@ -296,6 +297,7 @@ namespace TCC.Data
             }
         }
         private SynchronizedObservableCollection<AbnormalityDuration> _infBuffs;
+
         public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs
         {
             get => _infBuffs;
@@ -303,6 +305,17 @@ namespace TCC.Data
             {
                 if (_infBuffs == value) return;
                 _infBuffs = value;
+            }
+        }
+
+        public float CritFactor
+        {
+            get => _critFactor;
+            set
+            {
+                if(_critFactor == value) return;
+                _critFactor = value;
+                NPC();
             }
         }
 

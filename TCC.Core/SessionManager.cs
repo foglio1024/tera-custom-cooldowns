@@ -212,6 +212,12 @@ namespace TCC
             MapDatabase = new MapDatabase(lang);
             QuestDatabase = new QuestDatabase(lang);
         }
+
+        public static void SetPlayerCritFactor(float p)
+        {
+            CharacterWindowViewModel.Instance.Player.CritFactor = p;
+
+        }
     }
 
 }

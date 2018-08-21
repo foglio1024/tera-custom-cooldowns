@@ -335,8 +335,10 @@
                     <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Instance.Player.Name}" 
                                          Fill="#eee" StrokeThickness="3" Stroke="#7000"  FontSize="16" FontFamily="{StaticResource Frutiger}"/>
-                    <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee"></Path>
+                    <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level"></Path>
                     <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.ItemLevel}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <Path Data="{StaticResource SvgCrossedSwords}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Current crit factor"></Path>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.CritFactor}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel"  >
                             <Setter Property="Grid.Column" Value="2"/>
