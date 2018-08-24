@@ -177,7 +177,7 @@ namespace TCC.ViewModels
             }
             _hideTimer.Stop();
         }
-        private void ChatMessages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void ChatMessages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RefreshTimer();
             NPC($"NewItem");

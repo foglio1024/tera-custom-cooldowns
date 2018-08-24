@@ -322,6 +322,7 @@
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="ProxyPacketSplitter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />

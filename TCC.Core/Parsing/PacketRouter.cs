@@ -128,6 +128,8 @@ namespace TCC.Parsing
             SessionManager.SetPlayerMp(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
 
+            SessionManager.SetPlayerCritFactor(p.CritFactor);
+
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -265,6 +267,7 @@ namespace TCC.Parsing
             CharacterWindowViewModel.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
+            WindowManager.ReloadPositions(p.CharacterClass);
         }
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
@@ -468,6 +471,8 @@ namespace TCC.Parsing
 
         public static void HandleChat(S_CHAT x)
         {
+            if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
+                x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Foglio is watching you °L°", NotificationType.Warning);
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
 

@@ -16,6 +16,8 @@ namespace TCC
     public static class Proxy
     {
         private static TcpClient _client = new TcpClient();
+        private static ProxyPacketSplitter _splitter = new ProxyPacketSplitter();
+
         private static int _retries = 2;
 
         private static void SendData(string data)
@@ -34,6 +36,7 @@ namespace TCC
                 //ConnectToProxy();
             }
         }
+
         private static void ReceiveData()
         {
             var buffer = new byte[2048];
@@ -43,43 +46,60 @@ namespace TCC
                 {
                     var size = _client.GetStream().Read(buffer, 0, buffer.Length);
                     var data = Encoding.UTF8.GetString(buffer.Take(size).ToArray());
-                    if (data.Contains(":tcc"))
-                    {
-                        PacketProcessor.HandleGpkData(data.Substring(data.IndexOf(":tcc")));
-                    }
-                    else
-                    {
-                        var split = data.Split(new[] { "\t::\t" }, StringSplitOptions.RemoveEmptyEntries);
-
-                        var type = split[0];
-                        if (type == "output")
-                        {
-                            Console.WriteLine($"[Proxy] received output: {split[3]}");
-                            var channel = uint.Parse(split[1]);
-                            var author = split[2];
-                            var message = split[3];
-
-                            PacketProcessor.HandleProxyOutput(author, channel, AddFontTagsIfMissing(message));
-
-                            ////TODO: parse author
-                            //var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
-                            //msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
-                            //PacketProcessor.HandleCommandOutput(msg);
-                        }
-                        else if (type == "packet")
-                        {
-                            Console.WriteLine($"[Proxy] received packet: {split[2]}");
-                            var dir = bool.Parse(split[1])
-                                ? MessageDirection.ServerToClient
-                                : MessageDirection.ClientToServer;
-                            PacketProcessor.EnqueueMessageFromProxy(dir, split[2]);
-                        }
-                    }
+                    Console.WriteLine($"[Proxy] raw output: {data}");
+                    _splitter.Append(data);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+            }
+        }
+        private static void ProxyPacketAnalysisLoop()
+        {
+            while (true)
+            {
+                var successDequeue = _splitter.Packets.TryDequeue(out var data);
+                if (!successDequeue)
+                {
+                    Thread.Sleep(100);
+                    continue;
+                }
+
+                if (data.Contains(":tcc"))
+                {
+                    PacketProcessor.HandleGpkData(data.Substring(data.IndexOf(":tcc")));
+                }
+                else
+                {
+                    var split = data.Split(new[] { "\t::\t" }, StringSplitOptions.RemoveEmptyEntries);
+
+                    var type = split[0];
+                    if (type == "output")
+                    {
+                        Console.WriteLine($"[Proxy] received output: {split[3]}");
+                        var channel = uint.Parse(split[1]);
+                        var author = split[2];
+                        var message = split[3];
+
+                        PacketProcessor.HandleProxyOutput(author, channel, AddFontTagsIfMissing(message));
+
+                        ////TODO: parse author
+                        //var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
+                        //msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
+                        //PacketProcessor.HandleCommandOutput(msg);
+                    }
+                    else if (type == "packet")
+                    {
+                        Console.WriteLine($"[Proxy] received packet: {split[2]}");
+                        var dir = bool.Parse(split[1])
+                            ? MessageDirection.ServerToClient
+                            : MessageDirection.ClientToServer;
+                        PacketProcessor.EnqueueMessageFromProxy(dir, split[2]);
+                    }
+                }
+
+
             }
         }
 
@@ -121,7 +141,9 @@ namespace TCC
                 ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
                 WindowManager.FloatingButton.NotifyExtended("Proxy", "Successfully connected to tera-proxy.", NotificationType.Success);
                 var t = new Thread(ReceiveData);
+                var analysisThread = new Thread(ProxyPacketAnalysisLoop);
                 t.Start();
+                analysisThread.Start();
                 InitStub();
             }
             catch (Exception e)

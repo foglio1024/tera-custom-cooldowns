@@ -41,11 +41,31 @@
                             <Setter Property="Fill" Value="{StaticResource TankRoleColor}"></Setter>
                             <Setter Property="Opacity" Value="0"></Setter>
                             <Setter Property="RenderTransformOrigin" Value=".5 .5"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource TankRoleColorBase}" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+
                         </Style>
                         <Style TargetType="Polygon">
-                            <Setter Property="Fill" Value="{StaticResource TankRoleColor}"></Setter>
-                            <Setter Property="Opacity" Value="0"></Setter>
-                            <Setter Property="RenderTransformOrigin" Value=".5 .5"></Setter>
+                            <Setter Property="Fill" Value="{StaticResource TankRoleColor}"/>
+                            <Setter Property="Opacity" Value="0"/>
+                            <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource TankRoleColorBase}" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+
                         </Style>
 
                     </Grid.Resources>
@@ -143,7 +163,7 @@
                         </Shape.RenderTransform>
                     </Polygon>
                     <!--10-->
-                    <Rectangle Width="14" Height="6"  >
+                    <Rectangle Width="14" Height="6"  Fill="White">
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <StaticResource ResourceKey="Rotate45"/>
