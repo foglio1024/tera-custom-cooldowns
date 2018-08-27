@@ -83,8 +83,10 @@ namespace TCC.Parsing
 
         private static int _processed;
         private static int _discarded;
+        private static Stopwatch _sw;
         private static void PacketAnalysisLoop()
         {
+            _sw = new Stopwatch();
             while (true)
             {
                 var successDequeue = Packets.TryDequeue(out var msg);
@@ -93,8 +95,16 @@ namespace TCC.Parsing
                     Thread.Sleep(1);
                     continue;
                 }
+                //_sw.Start();
                 var message = Factory.Create(msg);
-                Factory.Process(message);
+                //_sw.Stop();
+                //Console.WriteLine($"Creating {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
+                //_sw.Restart();
+                if (Factory.Process(message)) _processed++;
+                //_sw.Stop();
+                // Console.WriteLine($"Processing {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
+                //_sw.Reset();
+                //if (Packets.Count != 0) Console.WriteLine($"Processed: {_processed} Queued: {Packets.Count}");
                 //App.DebugWindow.SetQueuedPackets(Packets.Count);
             }
             // ReSharper disable once FunctionNeverReturns
