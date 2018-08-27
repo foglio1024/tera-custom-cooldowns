@@ -239,8 +239,8 @@ namespace TCC
             //    del.DynamicInvoke();
             //    while (waiting) { }
             //}
-            GroupWindow = new GroupWindow();
             ChatWindowManager.Instance.InitWindows();
+            GroupWindow = new GroupWindow();
             CooldownWindow = new CooldownWindow();
             BossWindow = new BossWindow();
             BuffWindow = new BuffWindow();
