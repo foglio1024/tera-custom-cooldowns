@@ -219,6 +219,7 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 if (((PlayerTooltip)PlayerInfo.Child).MgPopup.IsMouseOver) return;
+                if (((PlayerTooltip)PlayerInfo.Child).FpsUtilsPopup.IsMouseOver) return;
                 FocusManager.FocusTimer.Enabled = true;
                 PlayerInfo.IsOpen = false;
             });

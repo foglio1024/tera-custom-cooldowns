@@ -43,7 +43,7 @@ namespace TCC.Controls.ChatControls
         public void AnimateOpening()
         {
             RootBorder.BeginAnimation(OpacityProperty, _expandAnim);
-            
+
         }
 
         private void InspectClick(object sender, RoutedEventArgs e)
@@ -198,6 +198,10 @@ namespace TCC.Controls.ChatControls
             p.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, SettingsManager.LastRegion);
             MgPopup.IsOpen = true;
         }
+        private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            FpsUtilsPopup.IsOpen = true;
+        }
 
         public void SetMoongourdVisibility()
         {
@@ -208,6 +212,22 @@ namespace TCC.Controls.ChatControls
                     !SettingsManager.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
             });
 
+        }
+
+        private void FpsUtilsHideClick(object sender, RoutedEventArgs e)
+        {
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable)
+            {
+                Proxy.SendCommand($"fps hide {WindowManager.FloatingButton.TooltipInfo.Name}");
+            }
+        }
+
+        private void FpsUtilsShowClick(object sender, RoutedEventArgs e)
+        {
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable)
+            {
+                Proxy.SendCommand($"fps show {WindowManager.FloatingButton.TooltipInfo.Name}");
+            }
         }
     }
 }

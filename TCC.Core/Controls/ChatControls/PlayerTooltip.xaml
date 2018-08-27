@@ -187,7 +187,7 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-                    <Button Click="MoongourdClick" Margin="-1 0 -1 0" x:Name="MgButton">
+                    <Button Click="MoongourdClick" Margin="-1 0 -1 0" x:Name="MgButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -199,6 +199,39 @@
                             <StackPanel Orientation="Horizontal" >
                                 <Image Source="/TCC;component/resources/images/moongourd.png" Margin="4 6 3 6"></Image>
                                 <TextBlock Text="Moongourd info" Margin="3"></TextBlock>
+                            </StackPanel>
+                            <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right" 
+                                      Opacity=".5" Margin="3 10 0 10" Height="Auto" Grid.Column="1"></Path>
+                        </Grid>
+                    </Button>
+                    <Button Click="FpsUtilsClick" Margin="-1 0 -1 0" x:Name="FpsUtilsButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                            Visibility="{Binding TooltipInfo.ShowFpsUtils, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Popup Placement="Right" HorizontalOffset="5" VerticalOffset="-5" x:Name="FpsUtilsPopup" AllowsTransparency="True">
+                                <Border CornerRadius="1" Background="#9445" Margin="0" BorderBrush="#8666" BorderThickness="1" Width="Auto">
+                                    <StackPanel Margin="0">
+                                        <Button Click="FpsUtilsHideClick">
+                                            <StackPanel Orientation="Horizontal" Margin="0">
+                                                <Path Data="{StaticResource SvgHide}"/>
+                                                <TextBlock Text="Hide player" Margin="3"></TextBlock>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Click="FpsUtilsShowClick">
+                                            <StackPanel Orientation="Horizontal" Margin="0">
+                                                <Path Data="{StaticResource SvgEye}"/>
+                                                <TextBlock Text="Show player" Margin="3"></TextBlock>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <StackPanel Orientation="Horizontal" >
+                                <Path Data="{StaticResource SvgSettings}" Margin="4 6 3 6"></Path>
+                                <TextBlock Text="fps-utils" Margin="3"></TextBlock>
                             </StackPanel>
                             <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right" 
                                       Opacity=".5" Margin="3 10 0 10" Height="Auto" Grid.Column="1"></Path>
