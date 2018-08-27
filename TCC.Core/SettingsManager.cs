@@ -367,7 +367,6 @@ namespace TCC
                     BuildChatWindowSettings("ChatWindows"),
                     FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
                     FloatingButtonSettings.ToXElement("FloatingButton")
-                    //ChatWindowSettings.ToXElement("ChatWindow")
                     //add window here
                     ),
                 new XElement("OtherSettings",
@@ -637,7 +636,7 @@ namespace TCC
             {
                 if (cw.VM.Tabs.Count == 0) return;
                 cw.UpdateSettings();
-                result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("Settings")));
+                result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("ChatWindow")));
             });
             return result;
         }
