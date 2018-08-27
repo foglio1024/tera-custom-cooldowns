@@ -125,9 +125,13 @@ namespace TCC.Windows
         {
             if (!_settings.AllowOffScreen) CheckBounds();
             if (_ignoreSize) return;
-            _settings.W = ActualWidth;
-            _settings.H = ActualHeight;
-            SettingsManager.SaveSettings();
+            if (_settings.W != ActualWidth ||
+                _settings.H != ActualHeight)
+            {
+                _settings.W = ActualWidth;
+                _settings.H = ActualHeight;
+                SettingsManager.SaveSettings();
+            }
         }
 
         protected void OnLoaded(object sender, RoutedEventArgs e)
@@ -145,7 +149,7 @@ namespace TCC.Windows
                 AnimateContentOpacity(1);
             else
             {
-                if(_undimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
+                if (_undimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
                 else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(_settings.DimOpacity);
                 else AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
             }
