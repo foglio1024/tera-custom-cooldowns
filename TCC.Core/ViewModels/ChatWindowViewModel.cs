@@ -125,11 +125,11 @@ namespace TCC.ViewModels
 
         private void OnPrivateChannelJoined(int index)
         {
-            Console.WriteLine($"Joined channel {PrivateChannels[index].Name}");
+            //Console.WriteLine($"Joined channel {PrivateChannels[index].Name}");
             var messagesToAdd = _privateMessagesCache.Where(x => x.Channel == PrivateChannels[index].Id).ToList();
             messagesToAdd.ForEach(x =>
             {
-                Console.WriteLine($"Flushing {x.Channel}|{x.Message} to main list");
+                //Console.WriteLine($"Flushing {x.Channel}|{x.Message} to main list");
                 AddChatMessage(new ChatMessage(
                     (ChatChannel)index + 11, 
                     x.Author == "undefined" ? "System" : x.Author,
@@ -211,7 +211,7 @@ namespace TCC.ViewModels
             if (ChatWindows.All(x => !x.IsPaused))
             {
 
-                    Console.WriteLine($"Adding {chatMessage.Channel}|{chatMessage.RawMessage} to main list");
+                    //Console.WriteLine($"Adding {chatMessage.Channel}|{chatMessage.RawMessage} to main list");
                     ChatMessages.Insert(0, chatMessage);
                 
             }
@@ -351,6 +351,14 @@ namespace TCC.ViewModels
                         case ChatChannel.Loot:
                         case ChatChannel.Bargain:
                         case ChatChannel.Damage:
+                        case ChatChannel.Private1:
+                        case ChatChannel.Private2:
+                        case ChatChannel.Private3:
+                        case ChatChannel.Private4:
+                        case ChatChannel.Private5:
+                        case ChatChannel.Private6:
+                        case ChatChannel.Private7:
+                        case ChatChannel.Private8:
                             return true;
                     }
 
