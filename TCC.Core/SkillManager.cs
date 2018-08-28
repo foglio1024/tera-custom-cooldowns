@@ -79,6 +79,7 @@ namespace TCC
         {
             if (SessionManager.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
+                if (id >= 260101 && id <= 260107) return; //not nice BH, not nice
                 CooldownWindowViewModel.Instance.Change(skill, cd);
             }
 
