@@ -320,6 +320,7 @@
     <Compile Include="Parsing\OpcodeDownloader.cs" />
     <Compile Include="Parsing\SkillId.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
+    <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ProxyPacketSplitter.cs" />
