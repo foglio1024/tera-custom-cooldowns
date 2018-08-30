@@ -12,6 +12,8 @@ namespace TCC.Windows
     /// </summary>
     public partial class InfoWindow
     {
+        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
+
         public InfoWindow()
         {
             InitializeComponent();
@@ -43,6 +45,7 @@ namespace TCC.Windows
         {
             var handle = new WindowInteropHelper(this).Handle;
             FocusManager.HideFromToolBar(handle);
+            FocusManager.MakeUnfocusable(handle);
         }
         internal void ShowWindow()
         {
