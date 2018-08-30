@@ -37,6 +37,8 @@ namespace TCC.Data
                 return Name;
             }
         }
+
+        public string Detail { get; set; }
         //public ImageBrush IconBrush { get
         //    {
 
