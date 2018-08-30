@@ -193,7 +193,8 @@ namespace TCC.ViewModels
                     if (_savedHp.ContainsKey(boss.EntityId)) boss.CurrentHP = _savedHp[boss.EntityId];
                     NpcList.Add(boss);
                 }
-
+                SetTimerPattern(boss);
+                SetEnragePattern(boss);
             }
             boss.MaxHP = maxHp;
             if (src == HpChangeSource.BossGage) boss.HasGage = true;
@@ -202,6 +203,20 @@ namespace TCC.ViewModels
             else if (boss.HasGage) boss.CurrentHP = curHp;
             if (boss.Visible != v) boss.Visible = v;
         }
+        private static void SetTimerPattern(Npc n)
+        {
+            if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern( 5 * 60, .5f);
+
+            n.TimerPattern.SetTarget(n);
+        }
+
+        private static void SetEnragePattern(Npc n)
+        {
+            if (n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(14, 50);
+        }
+
+
         public void RemoveBoss(ulong id, DespawnType type)
         {
             Npc boss = null;

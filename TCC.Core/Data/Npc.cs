@@ -156,7 +156,9 @@ namespace TCC.Data
         public uint ZoneId { get; protected set; }
         public uint TemplateId { get; protected set; }
 
-        public EnragePattern EnragePattern { get; private set; }
+        public EnragePattern EnragePattern { get; set; }
+        public TimerPattern TimerPattern { get; set; }
+
         public void AddorRefresh(Abnormality ab, uint duration, int stacks)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -233,7 +235,7 @@ namespace TCC.Data
         //    }
 
         //}
-        public Npc(ulong eId, uint zId, uint tId, bool boss, Visibility visible)
+        public Npc(ulong eId, uint zId, uint tId, bool boss, Visibility visible, EnragePattern ep = null, TimerPattern tp = null)
         {
             _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
@@ -247,15 +249,14 @@ namespace TCC.Data
             Visible = visible;
             Shield = ShieldStatus.Off;
             IsSelected = true;
-            EnragePattern = new EnragePattern(10, 36);
+            EnragePattern = ep ?? new EnragePattern(10, 36);
+            TimerPattern = tp;
+            TimerPattern?.SetTarget(this);
             if (IsPhase1Dragon)
             {
                 ShieldDuration = new Timer();
-                ShieldDuration.Interval = BossGageWindowViewModel.Ph1ShieldDuration*1000;
+                ShieldDuration.Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000;
                 ShieldDuration.Elapsed += ShieldFailed;
-
-                EnragePattern.Duration = 50;
-                EnragePattern.Percentage = 14;
             }
         }
         public Npc() { }
@@ -268,9 +269,13 @@ namespace TCC.Data
         {
             foreach (var buff in _buffs) buff.Dispose();
             ShieldDuration?.Dispose();
+            TimerPattern?.Dispose();
         }
 
-        ///////////////////////////////////////////
+        ///////////////////TIMER////////////////////////
+
+
+        //////////////////SHIELD////////////////////////
         private Timer ShieldDuration;
 
         private ShieldStatus _shield;
@@ -322,6 +327,72 @@ namespace TCC.Data
             foreach (var buff in _buffs) buff.Dispose();
 
             DeleteEvent?.Invoke();
+        }
+    }
+
+    public class TimerPattern : TSPropertyChanged, IDisposable
+    {
+        private Timer _timer;
+        public bool Running => _timer.Enabled;
+        protected Npc Target { get; set; }
+        public int Duration { get; set; }
+
+        public event Action Started;
+        public event Action Ended;
+        public event Action Reset;
+
+        public void Start()
+        {
+            _timer.Start();
+            Started?.Invoke();
+        }
+
+        public virtual void SetTarget(Npc target)
+        {
+            Target = target;
+        }
+
+        public TimerPattern(int duration)
+        {
+            Duration = duration;
+            _timer = new Timer(Duration*1000);
+            _timer.Elapsed += OnTimerElapsed;
+        }
+
+        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            Ended?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            _timer.Stop();
+            _timer.Dispose();
+        }
+    }
+
+    public class HpTriggeredTimerPattern : TimerPattern
+    {
+        public float StartAt { get; }
+        public HpTriggeredTimerPattern(int duration, float startAt) : base(duration)
+        {
+            StartAt = startAt;
+        }
+
+        public override void SetTarget(Npc target)
+        {
+            base.SetTarget(target);
+            Target.PropertyChanged += OnTargetPropertyChanged;
+        }
+
+        private void OnTargetPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (Running) return;
+            if (e.PropertyName == nameof(Npc.CurrentFactor))
+            {
+                if (Target.CurrentFactor < StartAt) Start();
+            }
         }
     }
 }
