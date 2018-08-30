@@ -164,8 +164,26 @@ namespace TCC.Windows
         {
             if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel t)) return;
             ((Tab)t.Content).Attention = false;
-            ((ChatViewModel)DataContext).CurrentTab = (Tab)t.Content;
+            if (((ChatViewModel)DataContext).CurrentTab != (Tab)t.Content)
+            {
+                ((ChatViewModel)DataContext).CurrentTab = (Tab)t.Content;
+            }
+            else
+            {
 
+                var n = ((Tab)t.Content).TabName;
+                TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+                {
+                    var sw = Utils.GetChild<ScrollViewer>(x);
+                    sw?.ScrollToVerticalOffset(0);
+                });
+                _bottom = true;
+                ChatWindowManager.Instance.AddFromQueue(2);
+                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
+                ChatWindowManager.Instance.SetPaused(!_bottom);
+
+
+            }
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
             if (left - 3 > 0)
@@ -375,6 +393,11 @@ namespace TCC.Windows
         private void PinnedMessageOnContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             FocusManager.FocusTimer.Enabled = false;
+        }
+
+        private void OnScrollToBottomRequested()
+        {
+
         }
     }
 

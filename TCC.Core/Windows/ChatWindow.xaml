@@ -91,7 +91,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <DataTemplate x:Key="TabContentTemplate">
+        <DataTemplate x:Key="TabContentTemplate" DataType="vm:Tab">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -99,43 +99,46 @@
                 </Grid.RowDefinitions>
                 <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf"  Margin="1 3 2 0" 
                         Visibility="{Binding Content.PinnedMessage, Converter={StaticResource Converters.NullToVisibleCollapsed}}">
-                <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}" 
+                    <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}" 
                                 Content="{Binding Content.PinnedMessage}"
                                 Margin="10 3 4 2">
-                    <ContentControl.LayoutTransform>
-                        <RotateTransform Angle="-180"></RotateTransform>
-                    </ContentControl.LayoutTransform>
-                    <ContentControl.ContextMenu>
+                        <ContentControl.LayoutTransform>
+                            <RotateTransform Angle="-180"></RotateTransform>
+                        </ContentControl.LayoutTransform>
+                        <ContentControl.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Unpin" Click="UnpinMessage"></MenuItem>
                             </ContextMenu>
-                    </ContentControl.ContextMenu>
-                </ContentControl>
+                        </ContentControl.ContextMenu>
+                    </ContentControl>
                 </Border>
                 <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
                           VerticalContentAlignment="Top"
                           Margin="0 5 5 3"
-                          Style="{StaticResource ChatItemsControl}"
                           ItemsSource="{Binding Content.Messages}"
                           ItemTemplate="{StaticResource ChatMessageTemplate}"
                           Width="Auto"
                           Grid.Row="1"
                               HorizontalAlignment="Stretch"
                               >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Margin="0,0,0,0"
+                    <ItemsControl.Style>
+                        <Style BasedOn="{StaticResource ChatItemsControl}" TargetType="ItemsControl">
+                        </Style>
+                    </ItemsControl.Style>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Margin="0,0,0,0"
                                                 VerticalAlignment="Stretch"
                                                 Background="#01000000"
                                                 VirtualizationMode="Standard">
-                            <VirtualizingStackPanel.LayoutTransform>
-                                <RotateTransform Angle="180"></RotateTransform>
-                            </VirtualizingStackPanel.LayoutTransform>
-                        </VirtualizingStackPanel>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-                
+                                <VirtualizingStackPanel.LayoutTransform>
+                                    <RotateTransform Angle="180"></RotateTransform>
+                                </VirtualizingStackPanel.LayoutTransform>
+                            </VirtualizingStackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
             </Grid>
             <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         </DataTemplate>
@@ -174,7 +177,7 @@
                     <Border.RenderTransform>
                         <TranslateTransform Y="26"/>
                     </Border.RenderTransform>
-                </Border>                
+                </Border>
                 <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" 
                         Margin="0 0 0 0" HorizontalAlignment="Stretch" 
                        VerticalAlignment="Top" Grid.Row="1"
