@@ -70,13 +70,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Background="{StaticResource BackgroundDarkColor}" Margin="0" Grid.Column="1" Grid.RowSpan="2" 
-                        CornerRadius="0 3 3 0" Effect="{StaticResource DropShadow}" HorizontalAlignment="Stretch"></Border>
-                <Border Background="{StaticResource DefaultBackgroundColor}" Margin="0" Grid.Column="1" 
-                        CornerRadius="0 3 0 0"  HorizontalAlignment="Stretch"></Border>
-                <Border CornerRadius="3 0 0 3"  x:Name="NotificationColorBorder"
+                <Border Background="{StaticResource KrBgColorDark}" Margin="0" BorderThickness="0 1 1 1" BorderBrush="{StaticResource KrBorderColor}" Grid.Column="1" Grid.RowSpan="2" Opacity=".5" 
+                        CornerRadius="0 0 0 0" Effect="{StaticResource DropShadow}" HorizontalAlignment="Stretch"></Border>
+                <Border Background="{StaticResource KrBgColor}" Margin="0" Grid.Column="1" BorderThickness="0 1 1 0" BorderBrush="{StaticResource KrBorderColor}" 
+                        CornerRadius="0 0 0 0"  HorizontalAlignment="Stretch" Opacity=".5"></Border>
+                <Border CornerRadius="0 0 0 0"  x:Name="NotificationColorBorder"
                          Grid.Column="0" Grid.RowSpan="2" Width="5" HorizontalAlignment="Left"></Border>
-                <Border x:Name="NotificationTime" Background="#1fff" Grid.RowSpan="2" Grid.Column="1" CornerRadius="0 3 3 0" Grid.Row="0" HorizontalAlignment="Left">
+                <Border x:Name="NotificationTime" Background="#1fff" Grid.RowSpan="2" Grid.Column="1" CornerRadius="0" Grid.Row="0" HorizontalAlignment="Left">
                     <FrameworkElement x:Name="NotificationTimeGovernor" Width="{Binding ElementName=NotificationContainer, Path=ActualWidth}">
                         <FrameworkElement.LayoutTransform>
                             <ScaleTransform ScaleX="1"/>
