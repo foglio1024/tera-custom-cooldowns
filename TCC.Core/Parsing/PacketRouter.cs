@@ -112,6 +112,7 @@ namespace TCC.Parsing
 
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
+            if (p.SkillId % 10 != 0) return;
             SkillManager.AddSkill(p.SkillId, p.Cooldown);
         }
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
@@ -120,6 +121,7 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
+            if (p.SkillId % 10 != 0) return;
             SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
         }
 
@@ -1172,6 +1174,11 @@ namespace TCC.Parsing
                 if (p.Candidates.All(x => x.PlayerId != user.PlayerId)) toRemove.Add(user);
             }
             toRemove.ForEach(r => dest.Remove(r));
+        }
+
+        public static void HandleShowHp(S_SHOW_HP x)
+        {
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(x.GameId, x.MaxHp, x.CurrentHp, false, HpChangeSource.CreatureChangeHp);
         }
     }
 }
