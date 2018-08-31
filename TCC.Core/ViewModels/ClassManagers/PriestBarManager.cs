@@ -1,8 +1,5 @@
-﻿using System;
-using System.Threading;
-using TCC.ClassSpecific;
+﻿using TCC.ClassSpecific;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
@@ -28,7 +25,7 @@ namespace TCC.ViewModels
 
         public PriestBarManager() : base()
         {
-            Priest.ClearMarkedTargets();
+            AbnormalityTracker = new PriestAbnormalityTracker();
         }
 
 
@@ -70,8 +67,8 @@ namespace TCC.ViewModels
                 Buff = new FixedSkillCooldown(tn, false)
             };
 
-            Priest.TripleNemesisExpired += OnTripleNemesisExpired;
-            Priest.TripleNemesisRefreshed += OnTripleNemesisRefreshed;
+            ClassAbnormalityTracker.MarkingExpired+= OnTripleNemesisExpired;
+            ClassAbnormalityTracker.MarkingRefreshed+= OnTripleNemesisRefreshed;
         }
 
         private void OnTripleNemesisRefreshed(ulong duration)

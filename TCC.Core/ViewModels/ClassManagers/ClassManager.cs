@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
+using TCC.ClassSpecific;
 using TCC.Data;
 
 namespace TCC.ViewModels
@@ -25,44 +25,46 @@ namespace TCC.ViewModels
         //public StatTracker MP { get; set; }
         public StatTracker StaminaTracker { get; set; }
 
+        public ClassAbnormalityTracker AbnormalityTracker { get; set; }
+
         //public static void SetMaxHP(int v)
         //{
-        //    if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
+        //    if (CurrentClassManager == null || !Settings.ClassWindowSettings.Enabled) return;
         //    CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Max = v; });
 
         //}
         //public static void SetMaxMP(int v)
         //{
-        //    if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
+        //    if (CurrentClassManager == null || !Settings.ClassWindowSettings.Enabled) return;
         //    CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.MP.Max = v; });
         //}
         public void SetMaxST(int v)
         {
-            if (!SettingsManager.ClassWindowSettings.Enabled) return;
+            if (!Settings.ClassWindowSettings.Enabled) return;
             StaminaTracker.Max = v;
         }
 
         //public static void SetHP(int hp)
         //{
-        //    if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
+        //    if (CurrentClassManager == null || !Settings.ClassWindowSettings.Enabled) return;
         //    CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Val = hp; });
 
         //}
         //public static void SetMP(int mp)
         //{
-        //    if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
+        //    if (CurrentClassManager == null || !Settings.ClassWindowSettings.Enabled) return;
         //    CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.MP.Val = mp; });
         //}
         public void SetST(int currentStamina)
         {
-            if (!SettingsManager.ClassWindowSettings.Enabled) return;
+            if (!Settings.ClassWindowSettings.Enabled) return;
             StaminaTracker.Val = currentStamina;
         }
 
         //private static List<uint> _debuffs;
         //public static void SetStatus(Abnormality ab, bool adding)
         //{
-        //    if (CurrentClassManager == null || ab.IsBuff || !SettingsManager.ClassWindowSettings.Enabled) return;
+        //    if (CurrentClassManager == null || ab.IsBuff || !Settings.ClassWindowSettings.Enabled) return;
 
         //    if (adding)
         //    {

@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -7,8 +7,9 @@ namespace TCC.ViewModels
     {
 
         public DurationCooldownIndicator ShadowReaping { get; set; }
-        public ReaperBarManager() : base()
+        public ReaperBarManager()
         {
+            AbnormalityTracker = new ReaperAbnormalityTracker();
         }
         public override void LoadSpecialSkills()
         {

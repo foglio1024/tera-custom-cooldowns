@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -9,6 +9,7 @@ namespace TCC.ViewModels
         private bool _counterProc;
         public BrawlerBarManager() : base()
         {
+            AbnormalityTracker = new BrawlerAbnormalityTracker();
         }
 
         public DurationCooldownIndicator GrowingFury { get; set; }

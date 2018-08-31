@@ -1,7 +1,5 @@
 ﻿using TCC.ClassSpecific;
-using TCC.Converters;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
@@ -57,7 +55,7 @@ namespace TCC.ViewModels
         {
             Focus = new ArcherFocusTracker();
             Stance = new StanceTracker<ArcherStance>();
-            Archer.ClearMarkedTargets();
+            AbnormalityTracker = new ArcherAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()
@@ -71,10 +69,8 @@ namespace TCC.ViewModels
                 Buff = new FixedSkillCooldown(vm, false)
             };
 
-
-            Archer.VelikMarkExpired += OnVelikMarkExpired;
-            Archer.VelikMarkRefreshed += OnVelikMarkRefreshed;
-
+            ClassAbnormalityTracker.MarkingExpired += OnVelikMarkExpired;
+            ClassAbnormalityTracker.MarkingRefreshed += OnVelikMarkRefreshed;
         }
 
         private void OnVelikMarkRefreshed(ulong duration)

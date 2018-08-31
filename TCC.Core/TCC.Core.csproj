@@ -89,16 +89,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
-    <Compile Include="ClassSpecific\Berserker.cs" />
-    <Compile Include="ClassSpecific\Archer.cs" />
-    <Compile Include="ClassSpecific\Brawler.cs" />
-    <Compile Include="ClassSpecific\Lancer.cs" />
-    <Compile Include="ClassSpecific\Ninja.cs" />
-    <Compile Include="ClassSpecific\Priest.cs" />
-    <Compile Include="ClassSpecific\Reaper.cs" />
-    <Compile Include="ClassSpecific\Slayer.cs" />
-    <Compile Include="ClassSpecific\Sorcerer.cs" />
-    <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\BrawlerAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\ClassAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\LancerAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\NinjaAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\PriestAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\ReaperAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\SlayerAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\SorcererAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\ValkyrieAbnormalityTracker.cs" />
     <Compile Include="Controls\ChatControls\EmojiMessagePiece.xaml.cs">
       <DependentUpon>EmojiMessagePiece.xaml</DependentUpon>
     </Compile>
@@ -324,6 +325,8 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ProxyPacketSplitter.cs" />
+    <Compile Include="SettingsReader.cs" />
+    <Compile Include="SettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
@@ -448,7 +451,7 @@
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
     <Compile Include="Proxy.cs" />
-    <Compile Include="SettingsManager.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
@@ -487,8 +490,8 @@
     <Compile Include="Controls\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClassSpecific\Mystic.cs" />
-    <Compile Include="ClassSpecific\Warrior.cs" />
+    <Compile Include="ClassSpecific\MysticAbnormalityTracker.cs" />
+    <Compile Include="ClassSpecific\WarriorAbnormalityTracker.cs" />
     <Compile Include="Data\Databases\MonsterDatabase.cs" />
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />

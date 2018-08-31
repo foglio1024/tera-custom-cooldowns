@@ -1,6 +1,5 @@
 ﻿using TCC.ClassSpecific;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
@@ -37,7 +36,7 @@ namespace TCC.ViewModels
         public MysticBarManager() : base()
         {
             Auras = new AurasTracker();
-            Mystic.ClearMarkedTargets();
+            AbnormalityTracker = new MysticAbnormalityTracker();
         }
 
 
@@ -84,8 +83,9 @@ namespace TCC.ViewModels
                 Buff = new FixedSkillCooldown(voc, false),
                 Cooldown = new FixedSkillCooldown(voc, false)
             };
-            Mystic.VocExpired += OnVocExpired;
-            Mystic.VocRefreshed += OnVocRefreshed;
+
+            ClassAbnormalityTracker.MarkingExpired += OnVocExpired;
+            ClassAbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
 
             SessionManager.CombatChanged += OnCombatChanged;
             SessionManager.EncounterChanged += OnCombatChanged;

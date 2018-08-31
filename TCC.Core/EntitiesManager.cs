@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using TCC.ClassSpecific;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.ViewModels;
 
 namespace TCC
@@ -37,7 +35,7 @@ namespace TCC
                 }
                 else
                 {
-                    if (SettingsManager.ShowOnlyBosses) return;
+                    if (Settings.ShowOnlyBosses) return;
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, Visibility.Collapsed);
                 }
             }
@@ -71,9 +69,7 @@ namespace TCC
                 SessionManager.Encounter = false;
                 GroupWindowViewModel.Instance.SetAggro(0);
             }
-            Archer.CheckVelikMark(target);
-            Priest.CheckTripleNemesis(target);
-            Mystic.CheckVoc(target);
+            ClassAbnormalityTracker.CheckMarkingOnDespawn(target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)

@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -12,6 +12,7 @@ namespace TCC.ViewModels
         
         public SlayerBarManager() : base()
         {
+            AbnormalityTracker  = new SlayerAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()

@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -49,6 +49,7 @@ namespace TCC.ViewModels
             SinisterTracker = new StatTracker();
             DexterTracker = new StatTracker();
             RampageTracker = new StatTracker();
+            AbnormalityTracker = new BerserkerAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()
@@ -73,12 +74,12 @@ namespace TCC.ViewModels
             };
 
             SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
-            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var si);
+            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
             SessionManager.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
             SessionManager.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
 
             Dexter = new FixedSkillCooldown(dx, false);
-            Sinister = new FixedSkillCooldown(si, false);
+            Sinister = new FixedSkillCooldown(sx, false);
             Rampage = new FixedSkillCooldown(rp, false);
             BeastFury = new FixedSkillCooldown(bf, false);
         }
@@ -105,7 +106,6 @@ namespace TCC.ViewModels
                 BeastFury.Start(sk.Cooldown);
                 return true;
             }
-
             return false;
         }
 
