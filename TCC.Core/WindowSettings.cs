@@ -6,8 +6,6 @@ using System.Xml.Linq;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
-using TCC.Windows;
-using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
@@ -261,20 +259,6 @@ namespace TCC
         public double BackgroundOpacity { get; set; } = .3;
         public List<Tab> Tabs { get; set; }
         public bool LfgOn { get; set; } = true;
-        //public new bool Enabled
-        //{
-        //    get => SettingsManager.ChatEnabled;
-        //    set
-        //    {
-        //        if (SettingsManager.ChatEnabled == value) return;
-        //        SettingsManager.ChatEnabled = value;
-        //        base.Enabled = value;
-        //        if(!value) ChatWindowManager.Instance.CloseAllWindows();
-        //        else ChatWindowManager.Instance.InitWindows();
-        //        NPC();
-        //        SettingsManager.SaveSettings();
-        //    }
-        //}
 
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
@@ -283,7 +267,7 @@ namespace TCC
         public override XElement ToXElement(string name)
         {
             var b = base.ToXElement(name);
-            b.Add(SettingsManager.BuildChatTabsXElement(Tabs));
+            b.Add(SettingsWriter.BuildChatTabsXElement(Tabs));
             b.Add(new XAttribute(nameof(LfgOn), LfgOn));
             b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
             return b;

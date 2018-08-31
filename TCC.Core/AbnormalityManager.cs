@@ -16,7 +16,7 @@ namespace TCC
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     BeginPlayerAbnormality(ab, stacks, duration);
-                    if (SettingsManager.DisablePartyAbnormals) return;
+                    if (Settings.DisablePartyAbnormals) return;
                     GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
                 else

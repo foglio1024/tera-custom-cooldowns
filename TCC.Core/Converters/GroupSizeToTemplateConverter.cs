@@ -11,7 +11,7 @@ namespace TCC.Converters
         {
             var val = (int)value;
 
-            if(val > SettingsManager.GroupSizeThreshold)
+            if(val > Settings.GroupSizeThreshold)
             {
                 return Application.Current.FindResource("RaidDataTemplate");
             }

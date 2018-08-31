@@ -35,7 +35,7 @@ namespace TCC.Windows
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = content;
-            Init(SettingsManager.BossWindowSettings, ignoreSize: true);
+            Init(Settings.BossWindowSettings, ignoreSize: true);
 
 
         }

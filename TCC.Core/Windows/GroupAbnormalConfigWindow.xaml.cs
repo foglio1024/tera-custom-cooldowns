@@ -6,10 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Dragablz;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -70,7 +68,7 @@ namespace TCC.Windows
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             an.Completed += (s, ev) => Hide();
             BeginAnimation(OpacityProperty, an);
-            SettingsManager.SaveSettings();
+            SettingsWriter.Save();
         }
 
         private void FilterByClass(object sender, RoutedEventArgs e)
@@ -118,13 +116,13 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => SettingsManager.ShowAllGroupAbnormalities;
+            get => Settings.ShowAllGroupAbnormalities;
             set
             {
-                if (SettingsManager.ShowAllGroupAbnormalities == value) return;
-                SettingsManager.ShowAllGroupAbnormalities = value;
+                if (Settings.ShowAllGroupAbnormalities == value) return;
+                Settings.ShowAllGroupAbnormalities = value;
                 _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
-                SettingsManager.SaveSettings();
+                SettingsWriter.Save();
                 NPC();
             }
         }
@@ -170,12 +168,12 @@ namespace TCC.ViewModels
             for (int i = 0; i < 13; i++)
             {
                 var ct = new ClassToggle((Class)i, ab.Id);
-                if (SettingsManager.GroupAbnormals.ContainsKey(ct.Class)) ct.Selected = SettingsManager.GroupAbnormals[ct.Class].Contains(ab.Id);
+                if (Settings.GroupAbnormals.ContainsKey(ct.Class)) ct.Selected = Settings.GroupAbnormals[ct.Class].Contains(ab.Id);
                 Classes.Add(ct);
             }
             Classes.Add(new ClassToggle(Class.Common, ab.Id)
             {
-                Selected = SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id)
+                Selected = Settings.GroupAbnormals[Class.Common].Contains(ab.Id)
             });
 
         }
@@ -219,8 +217,8 @@ namespace TCC.ViewModels
         public void Execute(object parameter)
         {
             _toggle.Selected = !_toggle.Selected;
-            if (_toggle.Selected) SettingsManager.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
-            else SettingsManager.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
+            if (_toggle.Selected) Settings.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
+            else Settings.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 
         public event EventHandler CanExecuteChanged;

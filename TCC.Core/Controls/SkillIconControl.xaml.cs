@@ -93,7 +93,7 @@ namespace TCC.Controls
         private void CloseTimer_Tick(object sender, EventArgs e)
         {
             Dispose();
-            //if (SettingsManager.ClassWindowOn && ViewModels.ClassWindowViewModel.ClassWindowExists())
+            //if (Settings.ClassWindowOn && ViewModels.ClassWindowViewModel.ClassWindowExists())
             //{
             //    WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             //    {

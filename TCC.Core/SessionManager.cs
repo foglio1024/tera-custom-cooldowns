@@ -140,7 +140,7 @@ namespace TCC
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentST = st;
             CharacterWindowViewModel.Instance.Player.CurrentST = st;
-            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
+            if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -179,7 +179,7 @@ namespace TCC
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
             CharacterWindowViewModel.Instance.Player.MaxST = maxSt;
-            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)

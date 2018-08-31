@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,7 +6,6 @@ using System.Windows.Media.Animation;
 using TCC.Annotations;
 using TCC.Converters;
 using TCC.Data;
-using TCC.Parsing.Messages;
 using Arc = TCC.Controls.Arc;
 
 namespace TCC.Windows
@@ -23,8 +21,8 @@ namespace TCC.Windows
         private bool _firstLoad = true;
 
         public FlightStackType Type => FlyingGuardianDataProvider.StackType;
-        public double FlightGaugeRotation => SettingsManager.FlightGaugeRotation;
-        public bool FlipFlightGauge => SettingsManager.FlipFlightGauge;
+        public double FlightGaugeRotation => Settings.FlightGaugeRotation;
+        public bool FlipFlightGauge => Settings.FlipFlightGauge;
 
 
         public FlightDurationWindow()
@@ -34,15 +32,15 @@ namespace TCC.Windows
             ButtonsRef = null;
             MainContent = Content as UIElement;
 
-            //SettingsManager.FlightGaugeWindowSettings.ShowAlways = true;
-            //SettingsManager.FloatingButtonSettings.AutoDim = false;
+            //Settings.FlightGaugeWindowSettings.ShowAlways = true;
+            //Settings.FloatingButtonSettings.AutoDim = false;
 
             FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
             FlyingGuardianDataProvider.StacksChanged += SetStacks;
             FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
             SessionManager.CombatChanged += OnCombatChanged;
 
-            Init(SettingsManager.FlightGaugeWindowSettings);
+            Init(Settings.FlightGaugeWindowSettings);
             Opacity = 0;
 
             _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
@@ -79,7 +77,7 @@ namespace TCC.Windows
 
         public void SetEnergy(double val)
         {
-            if (!SettingsManager.ShowFlightEnergy) return;
+            if (!Settings.ShowFlightEnergy) return;
             Dispatcher.Invoke(() =>
             {
                 if (Opacity == 0) ShowWindow();

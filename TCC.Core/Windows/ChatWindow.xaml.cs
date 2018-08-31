@@ -1,18 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Shell;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
-using TCC.Annotations;
-using TCC.Controls.ChatControls;
-using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -91,9 +86,9 @@ namespace TCC.Windows
                 ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
                 ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
                 ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
-                ((ChatWindowSettings)WindowSettings).X = Left / SettingsManager.ScreenW;
-                ((ChatWindowSettings)WindowSettings).Y = Top / SettingsManager.ScreenH;
-                var v = SettingsManager.ChatWindowsSettings;
+                ((ChatWindowSettings)WindowSettings).X = Left / TCC.Settings.ScreenW;
+                ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.ScreenH;
+                var v = TCC.Settings.ChatWindowsSettings;
                 var s = v.FirstOrDefault(x => x == WindowSettings);
                 if (s == null) v.Add(WindowSettings as ChatWindowSettings);
                 else s = WindowSettings as ChatWindowSettings;

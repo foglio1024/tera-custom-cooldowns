@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -168,7 +167,7 @@ namespace TCC
                     if (_retries <= 0)
                     {
                         ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-                        if (SettingsManager.ChatEnabled) WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
+                        if (Settings.ChatEnabled) WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
                         _retries = 2;
                         return;
                     }
@@ -194,7 +193,7 @@ namespace TCC
         {
             var sb = new StringBuilder("init_stub");
             sb.Append("&use_lfg=");
-            sb.Append(SettingsManager.LfgEnabled.ToString().ToLower());
+            sb.Append(Settings.LfgEnabled.ToString().ToLower());
 
             SendData(sb.ToString());
         }

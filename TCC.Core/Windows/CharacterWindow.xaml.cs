@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Controls;
@@ -24,7 +22,7 @@ namespace TCC.Windows
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = content;
-            Init(SettingsManager.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
+            Init(Settings.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
             _hp = new DoubleAnimation()
             {
                 Duration = DefaultDuration,

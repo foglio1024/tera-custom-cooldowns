@@ -108,7 +108,7 @@ namespace TCC.Controls
                 }
                 else
                 {
-                    switch (SettingsManager.EnrageLabelMode)
+                    switch (Settings.EnrageLabelMode)
                     {
                         case EnrageLabelMode.Next:
                             return $"{NextEnragePercentage:0.#}%";

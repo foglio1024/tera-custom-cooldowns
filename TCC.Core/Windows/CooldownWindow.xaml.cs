@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TCC.Windows
+﻿namespace TCC.Windows
 {
     public partial class CooldownWindow 
     {
@@ -9,7 +7,7 @@ namespace TCC.Windows
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = content;
-            Init(SettingsManager.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
+            Init(Settings.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
 
         }
 
@@ -18,7 +16,7 @@ namespace TCC.Windows
         //{
         //    Dispatcher.InvokeIfRequired(() =>
         //    {
-        //        if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
+        //        if (Settings.CooldownBarMode == CooldownBarMode.Fixed)
         //        {
         //            controlContainer.Content = new FixedSkillContainers();
         //        }

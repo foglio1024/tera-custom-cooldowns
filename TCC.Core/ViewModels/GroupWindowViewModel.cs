@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.Parsing;
 using TCC.Parsing.Messages;
 
@@ -43,7 +42,7 @@ namespace TCC.ViewModels
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && SettingsManager.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && Settings.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && Proxy.IsConnected;
         public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
@@ -175,7 +174,7 @@ namespace TCC.ViewModels
                 // -- show only aggro stacks if we are in HH -- //
                 if (BossGageWindowViewModel.Instance.CurrentHHphase >= HarrowholdPhase.Phase2)
                 {
-                    if (ab.Id != 950023 && SettingsManager.ShowOnlyAggroStacks) return;
+                    if (ab.Id != 950023 && Settings.ShowOnlyAggroStacks) return;
                 }
                 // -------------------------------------------- //
                 u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -209,7 +208,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (Settings.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 return;
@@ -275,7 +274,7 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            if (!SettingsManager.GroupWindowSettings.Enabled || !_dispatcher.Thread.IsAlive) return;
+            if (!Settings.GroupWindowSettings.Enabled || !_dispatcher.Thread.IsAlive) return;
             Members.Clear();
             Raid = false;
             _leaderOverride = false;

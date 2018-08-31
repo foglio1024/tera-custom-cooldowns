@@ -51,7 +51,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public Tab CurrentTab { get; set; }
-        public double ChatWindowOpacity => SettingsManager.ChatWindowOpacity;
+        public double ChatWindowOpacity => Settings.ChatWindowOpacity;
         public Func<HeaderedItemViewModel> AddNewTabCommand
         {
             get
@@ -107,7 +107,7 @@ namespace TCC.ViewModels
             //};
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             TabVMs.CollectionChanged += TabVMs_CollectionChanged;
-            //LoadTabs(SettingsManager.ParseTabsSettings());
+            //LoadTabs(Settings.ParseTabsSettings());
 
         }
         private void TabVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

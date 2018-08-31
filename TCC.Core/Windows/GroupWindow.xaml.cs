@@ -16,7 +16,7 @@ namespace TCC.Windows
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = content;
-            Init(SettingsManager.GroupWindowSettings, ignoreSize: false);
+            Init(Settings.GroupWindowSettings, ignoreSize: false);
             DataContext = GroupWindowViewModel.Instance;
         }
 

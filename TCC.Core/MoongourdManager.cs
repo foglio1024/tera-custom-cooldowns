@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,7 +162,7 @@ namespace TCC
 
         public void Execute(object parameter)
         {
-            var reg = SettingsManager.LastRegion.ToLower();
+            var reg = Settings.LastRegion.ToLower();
             reg = reg.StartsWith("eu") ? "eu" : reg;
             reg = reg == "na" ? "" : reg;
             reg = reg == "" ? reg : reg + "/";

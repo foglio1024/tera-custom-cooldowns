@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace TCC.Windows
+﻿namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
@@ -12,7 +10,7 @@ namespace TCC.Windows
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = content;
-            Init(SettingsManager.BuffWindowSettings, ignoreSize: true);
+            Init(Settings.BuffWindowSettings, ignoreSize: true);
         }
     }
 }

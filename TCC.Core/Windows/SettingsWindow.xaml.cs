@@ -33,7 +33,7 @@ namespace TCC.Windows
 
         private void Image_MouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
         {
-            SettingsManager.SaveSettings();
+            SettingsWriter.Save();
             HideWindow();
         }
 

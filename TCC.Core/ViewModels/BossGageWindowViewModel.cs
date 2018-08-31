@@ -6,10 +6,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data;
 using TCC.Parsing;
-using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -153,7 +151,7 @@ namespace TCC.ViewModels
             boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
-                if (SettingsManager.ShowOnlyBosses && !isBoss) return;
+                if (Settings.ShowOnlyBosses && !isBoss) return;
 
                 if (templateId == 0 || zoneId == 0) return;
 
@@ -207,8 +205,7 @@ namespace TCC.ViewModels
         {
             if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
             if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern( 5 * 60, .5f);
-
-            n.TimerPattern.SetTarget(n);
+            n.TimerPattern?.SetTarget(n);
         }
 
         private static void SetEnragePattern(Npc n)

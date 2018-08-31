@@ -5,8 +5,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -14,7 +12,6 @@ using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
-using Timer = System.Timers.Timer;
 
 namespace TCC
 {
@@ -178,7 +175,7 @@ namespace TCC
 
             Settings = new SettingsWindow();
 
-            if (SettingsManager.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            if (TCC.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
             FocusManager.FocusTimer.Start();
 
@@ -264,7 +261,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
-                //CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
+                //CharacterWindow.AllowsTransparency = Settings.CharacterWindowSettings.AllowTransparency;
 
                 CharacterWindow.Show();
                 waiting = false;
@@ -295,7 +292,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                //CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
+                //CooldownWindow.AllowsTransparency = Settings.CooldownWindowSettings.AllowTransparency;
 
                 CooldownWindow.Show();
                 waiting = false;
@@ -316,7 +313,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow();
 
-                //BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
+                //BossWindow.AllowsTransparency = Settings.BossWindowSettings.AllowTransparency;
                 BossWindow.Show();
                 waiting = false;
 
@@ -370,7 +367,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 //ChatWindow = new ChatWindow();
-                //ChatWindow.AllowsTransparency = SettingsManager.ChatWindowSettings.AllowTransparency;
+                //ChatWindow.AllowsTransparency = Settings.ChatWindowSettings.AllowTransparency;
                 //ChatWindow.Show();
                 waiting = false;
 

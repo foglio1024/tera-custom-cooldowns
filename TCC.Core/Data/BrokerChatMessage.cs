@@ -1,5 +1,4 @@
-﻿using TCC.Data.Databases;
-using TCC.Parsing.Messages;
+﻿using TCC.Parsing.Messages;
 
 namespace TCC.Data
 {
@@ -61,7 +60,7 @@ namespace TCC.Data
             ListingId = p.Listing;
             PlayerId = p.PlayerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
+            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel, Settings.FontSize, false);
             OfferedPrice = new MessagePiece(new Money(p.OfferedPrice));
             StartingPrice = new MessagePiece(new Money(p.SellerPrice));
             Listing = new MessagePiece("");
