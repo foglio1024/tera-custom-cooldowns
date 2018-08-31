@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
-using System.Windows.Interop;
+using System.Windows.Forms;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;
 
 namespace TCC
@@ -13,6 +15,8 @@ namespace TCC
 
     public static class FocusManager
     {
+
+
         // window styles
         private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
         private const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
@@ -89,6 +93,20 @@ namespace TCC
                 return result;
             }
         }
+
+        public static int TeraScreenIndex => Screen.AllScreens.ToList().IndexOf(TeraScreen);
+
+        public static Screen TeraScreen
+        {
+            get
+            {
+                var rect = new RECT();
+                GetWindowRect(TeraWindow, ref rect);
+                return Screen.AllScreens.FirstOrDefault(x => x.Bounds.IntersectsWith(new Rectangle(
+                    new Point(rect.Left, rect.Top),
+                    new Size(rect.Right - rect.Left, rect.Bottom - rect.Top))));
+            }
+        }
         private static IntPtr ForegroundWindow => GetForegroundWindow();
 
         public static void MakeUnfocusable(IntPtr hwnd)
@@ -143,6 +161,18 @@ namespace TCC
 
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
         private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
 
         public static void Init()
         {

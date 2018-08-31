@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -10,7 +10,6 @@ using System.Windows.Threading;
 using TCC.Controls.ChatControls;
 using TCC.Data;
 using TCC.ViewModels;
-using Application = System.Windows.Application;
 
 namespace TCC.Windows
 {
@@ -25,7 +24,7 @@ namespace TCC.Windows
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = content;
             ButtonsRef = null;
-            Init(SettingsManager.FloatingButtonSettings);
+            Init(Settings.FloatingButtonSettings);
         }
 
         private Timer _t;
@@ -38,14 +37,13 @@ namespace TCC.Windows
             FocusManager.MakeUnfocusable(handle);
             FocusManager.HideFromToolBar(handle);
 
-            var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
             var source = PresentationSource.FromVisual(this);
             if (source?.CompositionTarget == null) return;
             var m = source.CompositionTarget.TransformToDevice;
             var _ = m.M11;
             var dy = m.M22;
             Left = 0;
-            Top = SettingsManager.ScreenH / 2 - ActualHeight / 2;
+            Top = Screen.PrimaryScreen.Bounds.Height/ 2 - ActualHeight / 2;
 
             WindowManager.ForegroundManager.VisibilityChanged += OnTccVisibilityChanged;
             _t = new Timer { Interval = 2000 };
@@ -80,6 +78,12 @@ namespace TCC.Windows
 
         private void OnTccVisibilityChanged()
         {
+            //if(Screen.AllScreens.ToList().IndexOf(ScreenFromWindowCenter()) == FocusManager.TeraScreenIndex) return;
+
+            if (FocusManager.TeraScreen == null) return;
+            var teraScreenBounds = FocusManager.TeraScreen.Bounds;
+            Left = teraScreenBounds.X;
+            Top = teraScreenBounds.Y+ teraScreenBounds.Height/2;
             //RefreshTopmost();
             //AnimateContentOpacity(WindowManager.ForegroundManager.Visible ? 1 : 0);
         }
