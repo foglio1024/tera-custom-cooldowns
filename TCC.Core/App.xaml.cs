@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,10 +7,8 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Newtonsoft.Json.Linq;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Sniffing;
@@ -58,11 +56,12 @@ namespace TCC
             UpdateManager.CheckDatabaseVersion();
 
             SplashScreen.SetText("Loading settings...");
-            SettingsManager.LoadWindowSettings();
-            SettingsManager.LoadSettings();
+            var sr = new SettingsReader();
+            sr.LoadWindowSettings();
+            sr.LoadSettings();
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsManager.LastRegion) ? "EU-EN" : SettingsManager.LastRegion == "EU" ? "EU-EN" : SettingsManager.LastRegion);
+            SessionManager.InitDatabases(string.IsNullOrEmpty(Settings.LastRegion) ? "EU-EN" : Settings.LastRegion == "EU" ? "EU-EN" : Settings.LastRegion);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
@@ -80,13 +79,16 @@ namespace TCC
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
             SessionManager.CurrentPlayer.EntityId = 10;
-            TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
+            TimeManager.Instance.SetServerTimeZone(Settings.LastRegion);
             ChatWindowManager.Instance.AddTccMessage(_version);
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
-            //ClassWindowViewModel.Instance.CurrentClass = Class.Gunner;
 
+            //ClassWindowViewModel.Instance.CurrentClass = Class.Priest;
+            //EntitiesManager.SpawnNPC(920, 3000, 10, Visibility.Visible);
+            //Task.Delay(2000).ContinueWith(t => BossGageWindowViewModel.Instance.AddOrUpdateBoss(10,5250000000,3240000000,true, HpChangeSource.BossGage));
+            //Task.Delay(4000).ContinueWith(t => BossGageWindowViewModel.Instance.AddOrUpdateBoss(10,5250000000,2240000000,true, HpChangeSource.BossGage));
             //EntitiesManager.SpawnNPC(950,3000,10,Visibility.Visible);
             //EntitiesManager.SpawnNPC(970,1000,11,Visibility.Visible);
             //EntitiesManager.SpawnNPC(970,2000,12,Visibility.Visible);
@@ -253,7 +255,7 @@ namespace TCC
 
         public static void Restart()
         {
-            SettingsManager.SaveSettings();
+            SettingsWriter.Save();
             Process.Start("TCC.exe");
             CloseApp();
         }
@@ -285,15 +287,15 @@ namespace TCC
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                SettingsManager.StatSent = true;
-                SettingsManager.SaveSettings();
+                Settings.StatSent = true;
+                SettingsWriter.Save();
             }
         }
 
         public static void CloseApp()
         {
             TeraSniffer.Instance.Enabled = false;
-            SettingsManager.SaveSettings();
+            SettingsWriter.Save();
             WindowManager.Dispose();
             Proxy.CloseConnection();
             UpdateManager.StopTimer();
