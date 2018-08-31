@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.Converters
 {

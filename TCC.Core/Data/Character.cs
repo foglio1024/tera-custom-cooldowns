@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Data.Databases;
 
 namespace TCC.Data
 {

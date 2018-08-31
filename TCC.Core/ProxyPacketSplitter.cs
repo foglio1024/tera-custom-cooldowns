@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using TCC.Parsing;
-using TCC.TeraCommon;
-using Console = System.Console;
 
 namespace TCC
 {

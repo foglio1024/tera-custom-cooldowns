@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using System.Windows.Shapes;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.ViewModels;
-using TCC.Windows;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace TCC.Controls.ClassBars

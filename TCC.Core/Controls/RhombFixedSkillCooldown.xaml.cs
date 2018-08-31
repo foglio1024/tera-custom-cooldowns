@@ -3,12 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using TCC.Data;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.Controls

@@ -5,8 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -15,7 +13,6 @@ using Dragablz;
 using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC.Controls
 {
