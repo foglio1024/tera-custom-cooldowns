@@ -12,6 +12,11 @@ namespace TCC.ClassSpecific
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             CheckRagnarok(p);
         }
+        public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            CheckRagnarok(p);
+        }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
@@ -27,6 +32,11 @@ namespace TCC.ClassSpecific
         {
             if (p.AbnormalityId != RagnarokId) return;
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Refresh(0);
+        }
+        private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.AbnormalityId != RagnarokId) return;
+            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Refresh(p.Duration);
         }
     }
 }
