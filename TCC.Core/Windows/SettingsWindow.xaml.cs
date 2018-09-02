@@ -99,5 +99,15 @@ namespace TCC.Windows
         {
             WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
+
+        private void MakePositionsGlobal(object sender, RoutedEventArgs e)
+        {
+            WindowManager.MakeGlobal();
+        }
+
+        private void WindowPositionsReset(object sender, RoutedEventArgs e)
+        {
+            WindowManager.ResetToCenter();
+        }
     }
 }

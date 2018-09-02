@@ -241,6 +241,7 @@ namespace TCC
         private XElement BuildClassWindowPositionsXElement()
         {
             var ret = new XElement(nameof(Positions));
+
             foreach (var keyVal in Positions)
             {
                 ret.Add(
@@ -252,6 +253,17 @@ namespace TCC
             return ret;
         }
 
+        public void MakePositionsGlobal()
+        {
+            var currentPos = Positions[SessionManager.CurrentPlayer.Class];
+            for (int i = 0; i < 13; i++)
+            {
+                Positions[(Class) i] = currentPos;
+            }
+
+            X = currentPos.X;
+            Y = currentPos.Y;
+        }
     }
 
     public class ChatWindowSettings : WindowSettings

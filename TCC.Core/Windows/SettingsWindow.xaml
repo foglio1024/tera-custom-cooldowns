@@ -635,6 +635,33 @@
                 </TabItem.Header>
                 <!-- Other settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="MakePositionsGlobal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Copy current window positions to all classes"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Use current window positions for all classes"/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="WindowPositionsReset" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move all windows to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Move all windows positions to the center of the primary screen. Use only in case some windows are outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
+                    <Separator/>
                     <controls:BoolSetting SettingName="Use hotkeys" IsOn="{Binding UseHotkeys, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">

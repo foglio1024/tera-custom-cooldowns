@@ -38,6 +38,16 @@ namespace TCC.Windows
             {
                 Left = _settings.Positions[c].X * Settings.ScreenW;
                 Top = _settings.Positions[c].Y * Settings.ScreenH;
+                CheckBounds();
+            });
+        }
+        public void ResetToCenter()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Left = Screen.PrimaryScreen.Bounds.X + (Screen.PrimaryScreen.Bounds.Width / 2) - (ActualWidth / 2);
+                Top = Screen.PrimaryScreen.Bounds.Y + (Screen.PrimaryScreen.Bounds.Height / 2) - (ActualHeight / 2);
+                _settings.Positions[SessionManager.CurrentPlayer.Class] = new Point(Left / Settings.ScreenW, Top / Settings.ScreenH);
             });
         }
         protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true)
@@ -240,9 +250,12 @@ namespace TCC.Windows
             {
                 Top = Settings.ScreenH - ActualHeight;
             }
-            if (Left < 0) Left = 0;
-            if (Top < 0) Top = 0;
+            var myScreen = Screen.FromHandle(Handle);
+
+            //if (Left < myScreen.Bounds.X) Left = 0;
+            //if (Top < 0) Top = 0;
             CheckIndividualScreensBounds();
+            _settings.Positions[SessionManager.CurrentPlayer.Class] = new Point(Left / Settings.ScreenW, Top / Settings.ScreenH);
         }
 
         private void CheckIndividualScreensBounds()
@@ -250,9 +263,9 @@ namespace TCC.Windows
             if (IsWindowFullyVisible()) return;
             var nearestScreen = FindNearestScreen();
 
-            if      (Top + ActualHeight > nearestScreen.Bounds.Y + nearestScreen.Bounds.Height) Top = nearestScreen.Bounds.Y + nearestScreen.Bounds.Height - ActualHeight;
+            if (Top + ActualHeight > nearestScreen.Bounds.Y + nearestScreen.Bounds.Height) Top = nearestScreen.Bounds.Y + nearestScreen.Bounds.Height - ActualHeight;
             else if (Top < nearestScreen.Bounds.Y) Top = nearestScreen.Bounds.Y;
-            if      (Left + ActualWidth> nearestScreen.Bounds.X + nearestScreen.Bounds.Width) Left = nearestScreen.Bounds.X + nearestScreen.Bounds.Width - ActualWidth;
+            if (Left + ActualWidth > nearestScreen.Bounds.X + nearestScreen.Bounds.Width) Left = nearestScreen.Bounds.X + nearestScreen.Bounds.Width - ActualWidth;
             else if (Left < nearestScreen.Bounds.X) Left = nearestScreen.Bounds.X;
         }
 
