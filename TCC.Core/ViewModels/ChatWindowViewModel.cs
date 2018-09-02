@@ -356,6 +356,7 @@ namespace TCC.ViewModels
                         case ChatChannel.Private6:
                         case ChatChannel.Private7:
                         case ChatChannel.Private8:
+                        case ChatChannel.TCC:
                             return true;
                     }
 
