@@ -340,9 +340,6 @@
     <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
       <DependentUpon>ArcherBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ArcherFocusControl.xaml.cs">
-      <DependentUpon>ArcherFocusControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
     </Compile>
@@ -883,10 +880,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ClassBars\ArcherBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ArcherFocusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
