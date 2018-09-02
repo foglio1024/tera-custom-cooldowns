@@ -25,9 +25,13 @@ namespace TCC.ViewModels
         private Npc _vergos;
         private SynchronizedObservableCollection<Npc> _npcList;
 
+        private readonly DispatcherTimer _flushTimer;
+
         private readonly List<Npc> _holdedDragons = new List<Npc>();
         private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
         private readonly Dictionary<ulong, float> _savedHp = new Dictionary<ulong, float>();
+
+        private event Action NpcListChanged;
 
         private void AddSortedDragons()
         {
@@ -130,8 +134,12 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _npcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
-
+            _cache = new Dictionary<ulong, float>();
+            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
+            _flushTimer.Tick += FlushCache;
+            //_flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
+            NpcListChanged += OnNpcCollectionChanged;
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{
             //NPC(nameof(IsTeraOnTop));
@@ -143,79 +151,147 @@ namespace TCC.ViewModels
 
         }
 
+        private void OnNpcCollectionChanged()
+        {
+            var caching = IsCaching;
+            //var count = VisibleBossesCount;
+            //ChatWindowManager.Instance.AddTccMessage($"HP caching " + (caching ? "on" : "off") + $", visible NPCs: {count}");
+            if (caching && !_flushTimer.IsEnabled)
+            {
+                _flushTimer.Start();
+            }
+            else if (!caching && _flushTimer.IsEnabled)
+            {
 
+                _flushTimer.Stop();
+                FlushCache(null, null);
+            }
+        }
 
-        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
+        private void FlushCache(object sender, EventArgs e)
+        {
+            if (_cache.Count == 0) return;
+            //ChatWindowManager.Instance.AddTccMessage($"Flushing {_cache.Count} updates to UI");
+            foreach (var hpc in _cache.ToList())
+            {
+                SetHpFromCache(hpc.Key, hpc.Value);
+            }
+            _cache.Clear();
+        }
+
+        private void SetHpFromCache(ulong hpcEntityId, float hpcCurrentHp)
+        {
+            var npc = NpcList.FirstOrDefault(x => x.EntityId == hpcEntityId);
+            if (npc != null) npc.CurrentHP = hpcCurrentHp;
+        }
+
+        private bool IsCaching => VisibleBossesCount > 1;
+
+        private Npc AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, Visibility visibility)
+        {
+            if (Settings.ShowOnlyBosses && !isBoss) return null;
+            if (templateId == 0 || zoneId == 0) return null;
+            if (zoneId == 1023) return null;
+
+            var boss = new Npc(entityId, zoneId, templateId, isBoss, visibility);
+            boss.Visible = boss.IsTower ? Visibility.Visible : visibility;
+            if (boss.IsTower) HandleNewTower(boss, entityId);
+            else if (boss.IsPhase1Dragon) HandleNewPh1Dragon(boss, entityId);
+            else AddNormalNpc(boss);
+
+            SetTimerPattern(boss);
+            SetEnragePattern(boss);
+            NpcListChanged?.Invoke();
+            return boss;
+        }
+
+        private void SetVergos(Npc boss)
+        {
+            Vergos = boss.ZoneId == 950 && (boss.TemplateId == 1000 || boss.TemplateId == 2000 ||
+                                            boss.TemplateId == 3000 || boss.TemplateId == 4000)
+                ? boss
+                : null;
+        }
+        private void AddNormalNpc(Npc boss)
+        {
+            SetVergos(boss);
+            if (_savedHp.ContainsKey(boss.EntityId)) boss.CurrentHP = _savedHp[boss.EntityId];
+            NpcList.Add(boss);
+        }
+
+        private void HandleNewPh1Dragon(Npc boss, ulong entityId)
+        {
+            Npc d = null;
+            d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
+            if (d != null) return;
+            _holdedDragons.Add(boss);
+            if (_holdedDragons.Count != 4) return;
+            try
+            {
+                AddSortedDragons();
+            }
+            catch
+            {
+                //TODO: send error?
+            }
+        }
+
+        private void HandleNewTower(Npc boss, ulong entityId)
+        {
+            if (_towerNames.TryGetValue(entityId, out var towerName))
+            {
+                boss.Name = towerName;
+            }
+            boss.IsBoss = true;
+        }
+
+        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, Visibility visibility = Visibility.Visible)
         {
             Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
-            if (boss == null)
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
+            if (boss == null) return;
+            SetHp(boss, maxHp, curHp, src);
+            if (boss.Visible != visibility)
             {
-                if (Settings.ShowOnlyBosses && !isBoss) return;
-
-                if (templateId == 0 || zoneId == 0) return;
-
-                v = Utils.IsGuildTower(zoneId, templateId) ? Visibility.Visible : v;
-                boss = new Npc(entityId, zoneId, templateId, isBoss, v);
-                if (boss.IsTower)
-                {
-                    if (_towerNames.TryGetValue(entityId, out var towerName))
-                    {
-                        boss.Name = towerName;
-                    }
-                    boss.IsBoss = true;
-                }
-                if (boss.IsPhase1Dragon)
-                {
-                    Npc d = null;
-                    d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
-                    if (d == null)
-                    {
-                        _holdedDragons.Add(boss);
-                        if (_holdedDragons.Count == 4)
-                        {
-                            try
-                            {
-                                AddSortedDragons();
-                            }
-                            catch
-                            {
-                                //TODO: send error?
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (boss.ZoneId == 950 && (boss.TemplateId == 1000 || boss.TemplateId == 2000 || boss.TemplateId == 3000 || boss.TemplateId == 4000)) Vergos = boss;
-                    if (_savedHp.ContainsKey(boss.EntityId)) boss.CurrentHP = _savedHp[boss.EntityId];
-                    NpcList.Add(boss);
-                }
-                SetTimerPattern(boss);
-                SetEnragePattern(boss);
+                boss.Visible = visibility;
+                NpcListChanged?.Invoke();
             }
-            boss.MaxHP = maxHp;
-            if (src == HpChangeSource.BossGage) boss.HasGage = true;
-            if (src == HpChangeSource.CreatureChangeHp)
-                boss.CurrentHP = curHp;
-            else if (boss.HasGage) boss.CurrentHP = curHp;
-            if (boss.Visible != v) boss.Visible = v;
         }
+
+        private void SetHp(Npc boss, float maxHp, float curHp, HpChangeSource src)
+        {
+            boss.MaxHP = maxHp;
+
+            if (src == HpChangeSource.BossGage) boss.HasGage = true;
+            else if (src == HpChangeSource.CreatureChangeHp && boss.HasGage) return;
+
+            if (!IsCaching) boss.CurrentHP = curHp;
+            else AddToCache(boss.EntityId, curHp);
+
+        }
+
+        private readonly Dictionary<ulong, float> _cache;
+        private void AddToCache(ulong entityId, float curHp)
+        {
+            if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
+            else _cache[entityId] = curHp;
+        }
+
         private static void SetTimerPattern(Npc n)
         {
-            if (n.TemplateId == 4000  && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 3000  && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern( 5 * 60, .5f);
+            if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
 
-            if (n.TemplateId == 1000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 2000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 3000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 4000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 5000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 6000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 7000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 8000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 9000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 10000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 1000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 2000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 3000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 4000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 5000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 6000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 7000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 8000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 9000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 10000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
 
             n.TimerPattern?.SetTarget(n);
         }
@@ -249,6 +325,8 @@ namespace TCC.ViewModels
             {
                 boss.Delete();
             }
+            NpcListChanged?.Invoke();
+
             //_currentNPCs.Remove(boss);
             //boss.Dispose();
             if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
@@ -387,4 +465,6 @@ namespace TCC.ViewModels
             }
         }
     }
+
+
 }
