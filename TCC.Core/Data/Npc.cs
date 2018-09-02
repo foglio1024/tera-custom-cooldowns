@@ -389,10 +389,9 @@ namespace TCC.Data
         private void OnTargetPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (Running) return;
-            if (e.PropertyName == nameof(Npc.CurrentFactor))
-            {
-                if (Target.CurrentFactor < StartAt) Start();
-            }
+            if (e.PropertyName != nameof(Npc.CurrentFactor)) return;
+
+            if (Target.CurrentFactor < StartAt) Start();
         }
     }
 }
