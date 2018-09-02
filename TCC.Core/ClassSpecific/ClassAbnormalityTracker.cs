@@ -23,7 +23,7 @@ namespace TCC.ClassSpecific
             if (MarkedTargets.Count == 0) InvokeMarkingExpired();
         }
 
-        private static void ClearMarkedTargets()
+        public static void ClearMarkedTargets()
         {
             App.BaseDispatcher.Invoke(() => MarkedTargets.Clear());
         }
