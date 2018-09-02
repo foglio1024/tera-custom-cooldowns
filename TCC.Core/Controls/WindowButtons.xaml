@@ -14,6 +14,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
@@ -26,7 +27,9 @@
             </Style>
         </Grid.Resources>
         <Border Style="{StaticResource Styles.DefaultBorder}" 
-                CornerRadius="2" Grid.ColumnSpan="20" Opacity=".5"
+                Background="{StaticResource KrBgColor}"
+                BorderBrush="{StaticResource KrBorderColor}"
+                CornerRadius="0" Grid.ColumnSpan="20" Opacity=".5"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                 Effect="{x:Null}"/>
         <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
@@ -42,7 +45,10 @@
             <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}" 
                    HorizontalAlignment="Center" Margin="2"/>
         </Button>
-        <Button Click="Close" Grid.Column="3" ToolTip="Close">
+        <Button Click="MakeGlobal" Grid.Column="3" ToolTip="Apply current position to all classes">
+            <Path Fill="White" Data="{StaticResource SvgCheckAll}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+        </Button>
+        <Button Click="Close" Grid.Column="4" ToolTip="Close">
             <Path Fill="{StaticResource HpColor}" Data="{StaticResource SvgClose}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
 

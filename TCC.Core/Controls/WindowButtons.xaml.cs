@@ -71,5 +71,10 @@ namespace TCC.Controls
         {
             _dc.AutoDim = !_dc.AutoDim;
         }
+
+        private void MakeGlobal(object sender, RoutedEventArgs e)
+        {
+            _dc.MakePositionsGlobal();
+        }
     }
 }
