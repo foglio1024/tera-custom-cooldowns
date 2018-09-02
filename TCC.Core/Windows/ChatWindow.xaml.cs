@@ -394,6 +394,11 @@ namespace TCC.Windows
         {
 
         }
+
+        private void MakeGlobal(object sender, RoutedEventArgs e)
+        {
+            WindowSettings.MakePositionsGlobal();
+        }
     }
 
 }

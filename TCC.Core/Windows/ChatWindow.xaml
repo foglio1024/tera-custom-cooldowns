@@ -267,6 +267,10 @@
                     <!--<c:BoolSetting SettingName="Can minimize" Foreground="#9fff" />-->
                     <c:BoolSetting SettingName="Show always" Foreground="#9fff"
                                    IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWidget}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
+                    <Button Height="30" Style="{StaticResource ButtonContentOpacityStyle}" ToolTip="Use current position for all classes" 
+                            VerticalContentAlignment="Center" Click="MakeGlobal">
+                        <TextBlock Text="Make position global" Margin="50 0"></TextBlock>
+                    </Button>
                 </StackPanel>
             </Border>
         </Popup>
