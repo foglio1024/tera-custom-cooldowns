@@ -271,6 +271,16 @@ namespace TCC.ViewModels
                 NPC(nameof(UseHotkeys));
             }
         }
+        public bool HideHandles
+        {
+            get => Settings.HideHandles;
+            set
+            {
+                if (Settings.HideHandles == value) return;
+                Settings.HideHandles = value;
+                NPC(nameof(HideHandles));
+            }
+        }
         public bool ShowGroupWindowDetails
         {
             get => Settings.ShowGroupWindowDetails;

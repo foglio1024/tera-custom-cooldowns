@@ -224,6 +224,7 @@ namespace TCC
                     else if (attr.Name == nameof(Settings.LfgEnabled)) Settings.LfgEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowGroupWindowDetails)) Settings.ShowGroupWindowDetails = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.UseHotkeys)) Settings.UseHotkeys = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.HideHandles)) Settings.HideHandles = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ChatEnabled)) Settings.ChatEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowTradeLfg)) Settings.ShowTradeLfg = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowAwakenIcon)) Settings.ShowAwakenIcon = bool.Parse(attr.Value);

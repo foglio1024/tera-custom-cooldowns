@@ -130,6 +130,7 @@ namespace TCC
                 new XAttribute(nameof(Settings.ShowFlightEnergy), Settings.ShowFlightEnergy),
                 new XAttribute(nameof(Settings.LfgEnabled), Settings.LfgEnabled),
                 new XAttribute(nameof(Settings.UseHotkeys), Settings.UseHotkeys),
+                new XAttribute(nameof(Settings.HideHandles), Settings.HideHandles),
                 new XAttribute(nameof(Settings.ShowTradeLfg), Settings.ShowTradeLfg),
                 new XAttribute(nameof(Settings.RegionOverride), Settings.RegionOverride),
                 new XAttribute(nameof(Settings.FlightGaugeRotation), Settings.FlightGaugeRotation),

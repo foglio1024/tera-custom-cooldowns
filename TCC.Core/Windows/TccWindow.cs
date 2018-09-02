@@ -103,7 +103,10 @@ namespace TCC.Windows
             _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _buttonsTimer.Tick += OnButtonsTimerTick;
 
-            MouseEnter += (_, __) => ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
+            MouseEnter += (_, __) =>
+            {
+                if (!Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
+            };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
         }
