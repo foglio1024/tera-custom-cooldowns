@@ -103,6 +103,7 @@ namespace TCC.Parsing
             { "S_DUNGEON_CLEAR_COUNT_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_CLEAR_COUNT_LIST>>() },
             { "S_SHOW_PARTY_MATCH_INFO", Contructor<Func<TeraMessageReader, S_SHOW_PARTY_MATCH_INFO>>() },
             { "S_SHOW_CANDIDATE_LIST", Contructor<Func<TeraMessageReader, S_SHOW_CANDIDATE_LIST>>() },
+            { "S_SHOW_HP", Contructor<Func<TeraMessageReader, S_SHOW_HP>>() },
             //{"S_ACTION_STAGE", Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
             //{ "S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
 
