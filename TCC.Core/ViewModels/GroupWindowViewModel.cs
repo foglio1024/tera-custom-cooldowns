@@ -269,12 +269,14 @@ namespace TCC.ViewModels
         {
             var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
+            u.ClearAbnormalities();
             Members.Remove(u);
             if (!kick) SendLeaveMessage(u.Name);
         }
         public void ClearAll()
         {
             if (!Settings.GroupWindowSettings.Enabled || !_dispatcher.Thread.IsAlive) return;
+            Members.ToSyncArray().ToList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;
             _leaderOverride = false;
@@ -288,7 +290,9 @@ namespace TCC.ViewModels
         public void RemoveMe()
         {
             var me = Members.ToSyncArray().FirstOrDefault(x => x.IsPlayer);
-            if (me != null) Members.Remove(me);
+            if (me == null) return;
+            me.ClearAbnormalities();
+            Members.Remove(me);
         }
         public void ClearAllBuffs()
         {
