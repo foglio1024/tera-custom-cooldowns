@@ -19,8 +19,6 @@ using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUI
 
 namespace TCC.Parsing
 {
-
-
     public static class PacketProcessor
     {
         public static uint Version;
@@ -141,13 +139,8 @@ namespace TCC.Parsing
             SessionManager.SetPlayerCritFactor(p.CritFactor);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
-                    break;
-            }
-
+            if (SessionManager.CurrentPlayer.Class == Class.Warrior)
+                ((WarriorBarManager) ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
@@ -786,7 +779,7 @@ namespace TCC.Parsing
                 FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker.CheckAbnormality(p);
+            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
             //switch (SessionManager.CurrentPlayer.Class)
             //{
             //    case Class.Mystic:
@@ -837,7 +830,7 @@ namespace TCC.Parsing
                 FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker.CheckAbnormality(p);
+            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
             //switch (SessionManager.CurrentPlayer.Class)
             //{
             //    case Class.Warrior:
@@ -883,7 +876,7 @@ namespace TCC.Parsing
                 FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker.CheckAbnormality(p);
+            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
 
             //switch (SessionManager.CurrentPlayer.Class)
             //{
