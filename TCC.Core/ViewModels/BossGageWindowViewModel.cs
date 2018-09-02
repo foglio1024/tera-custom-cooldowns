@@ -203,8 +203,20 @@ namespace TCC.ViewModels
         }
         private static void SetTimerPattern(Npc n)
         {
-            if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
-            if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern( 5 * 60, .5f);
+            if (n.TemplateId == 4000  && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 3000  && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern( 5 * 60, .5f);
+
+            if (n.TemplateId == 1000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 2000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 3000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 4000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 5000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 6000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 7000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 8000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 9000  && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+            if (n.TemplateId == 10000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60,  1f);
+
             n.TimerPattern?.SetTarget(n);
         }
 
@@ -266,16 +278,17 @@ namespace TCC.ViewModels
         }
         public void ClearBosses()
         {
+            foreach (var npc in NpcList.ToSyncArray())
+            {
+                npc.Dispose();
+            }
             NpcList.Clear();
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
             Npc boss = null;
             boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
-            if (boss != null)
-            {
-                boss.EndBuff(ab);
-            }
+            boss?.EndBuff(ab);
         }
         public void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
