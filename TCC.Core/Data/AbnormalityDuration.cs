@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Timers;
 using System.Windows.Threading;
 
@@ -64,12 +68,35 @@ namespace TCC.Data
         //}
         //public double BackgroundEllipseSize { get; set; }
         //public Thickness IndicatorMargin { get; set; }
-        private static int _count = 0;
+
+        //private static int _count = 0;
         public bool Animated { get; private set; }
+
+        //private static Dictionary<string, int> _debugList = new Dictionary<string, int>();
+
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
         {
-            _count++;
-            Console.WriteLine($"+{_count}");
+            //_count++;
+            //// Get call stack
+            //var stackTrace = new StackTrace();
+
+            //// Get calling method name
+            //Console.WriteLine($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name} ({_count})");
+
+            //App.BaseDispatcher.Invoke(() =>
+            //{
+            //    if (_debugList.ContainsKey(
+            //        $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"))
+            //    {
+            //        _debugList[
+            //            $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"]++;
+            //    }
+            //    else
+            //    {
+            //        _debugList.Add($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}", 1);
+            //    }
+            //});
+
             _dispatcher = disp;
             Animated = animated;
             Abnormality = b;
@@ -114,15 +141,47 @@ namespace TCC.Data
 
         public void Dispose()
         {
-            _count--;
-            Console.WriteLine($"-{_count}");
+            //_count--;
+            //// Get call stack
+            //var stackTrace = new StackTrace();
 
+            //// Get calling method name
+            //Console.WriteLine($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name} ({_count})");
+
+            //App.BaseDispatcher.Invoke(() =>
+            //{
+            //    if (_debugList.ContainsKey(
+            //        $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"))
+            //    {
+            //        _debugList[
+            //            $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"]++;
+            //    }
+            //    else
+            //    {
+            //        _debugList.Add($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}", 1);
+            //    }
+            //});
             if (timer == null) return;
             timer.Stop();
             timer.Elapsed -= DecreaseDuration;
             timer.Dispose();
 
         }
+
+        //public static void Dump()
+        //{
+        //    var sb = new StringBuilder();
+
+        //    foreach (var d in _debugList)
+        //    {
+        //        sb.Append(d.Key);
+        //        sb.Append('\t');
+        //        sb.Append(d.Value);
+        //        sb.Append('\n');
+        //    }
+
+        //    File.WriteAllText("abnormalDebug.tsv", sb.ToString());
+        //}
     }
 
 
