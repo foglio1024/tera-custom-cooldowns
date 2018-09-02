@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Windows;
 using TCC.ClassSpecific;
 using TCC.Data;
@@ -109,6 +110,7 @@ namespace TCC
             BossGageWindowViewModel.Instance.ClearBosses();
             NearbyNPCs.Clear();
             NearbyPlayers.Clear();
+            ClassAbnormalityTracker.ClearMarkedTargets();
         }
         public static void CheckHarrowholdMode(ushort zoneId, uint templateId)
         {
