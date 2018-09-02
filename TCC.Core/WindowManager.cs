@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -12,6 +13,7 @@ using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
+using Point = System.Windows.Point;
 
 namespace TCC
 {
@@ -43,7 +45,7 @@ namespace TCC
         public static BuffWindow BuffWindow;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
-        public static SettingsWindow Settings;
+        public static SettingsWindow SettingsWindow;
         public static SkillConfigWindow SkillConfigWindow;
         public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
         public static InfoWindow InfoWindow;
@@ -173,7 +175,7 @@ namespace TCC
 
             //_undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            Settings = new SettingsWindow();
+            SettingsWindow = new SettingsWindow();
 
             if (TCC.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
@@ -366,9 +368,6 @@ namespace TCC
             var chatWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                //ChatWindow = new ChatWindow();
-                //ChatWindow.AllowsTransparency = Settings.ChatWindowSettings.AllowTransparency;
-                //ChatWindow.Show();
                 waiting = false;
 
                 Dispatcher.Run();
@@ -398,51 +397,17 @@ namespace TCC
 
 
         }
-        //private static void _undimTimer_Elapsed(object sender, ElapsedEventArgs e)
-        //{
-        //    SkillsEnded = true;
-        //    _undimTimer.Stop();
-        //}
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (Settings == null)
+            if (SettingsWindow == null)
             {
-                Settings = new SettingsWindow()
+                SettingsWindow = new SettingsWindow()
                 {
                     Name = "Settings"
                 };
             }
-            Settings.ShowWindow();
+            SettingsWindow.ShowWindow();
         }
-        //private static void SetClickThru()
-        //{
-        //    foreach (Window w in Application.Current.Windows)
-        //    {
-        //        if (w.GetType() == typeof(SettingsWindow)) continue;
-        //        FocusManager.MakeClickThru(new WindowInteropHelper(w).Handle);
-        //    }
-        //}
-        //private static void UnsetClickThru()
-        //{
-        //    foreach (Window w in Application.Current.Windows)
-        //    {
-        //        if (w.GetType() == typeof(SettingsWindow)) continue;
-        //        FocusManager.UndoClickThru(new WindowInteropHelper(w).Handle);
-        //    }
-
-        //}
-        //private static void UpdateClickThru()
-        //{
-        //    if (ClickThru)
-        //    {
-        //        SetClickThru();
-        //    }
-        //    else
-        //    {
-        //        UnsetClickThru();
-        //    }
-
-        //}
         private static void NI_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -455,17 +420,6 @@ namespace TCC
             }
         }
 
-        public static void TempShowAll()
-        {
-            //CooldownWindow.TempShow();
-            //CharacterWindow.TempShow();
-            //BossWindow.TempShow();
-            //BuffWindow.TempShow();
-            //ClassWindow.TempShow();
-            //GroupWindow.TempShow();
-            //ChatWindowManager.Instance.TempShow();
-        }
-
         public static void ReloadPositions(Class c)
         {
             CooldownWindow.ReloadPosition(c);
@@ -474,6 +428,29 @@ namespace TCC
             GroupWindow.ReloadPosition(c);
             BuffWindow.ReloadPosition(c);
             BossWindow.ReloadPosition(c);
+        }
+
+        public static void MakeGlobal()
+        {
+            Settings.CooldownWindowSettings.MakePositionsGlobal();
+            Settings.ClassWindowSettings.MakePositionsGlobal();
+            Settings.CharacterWindowSettings.MakePositionsGlobal();
+            Settings.GroupWindowSettings.MakePositionsGlobal();
+            Settings.BuffWindowSettings.MakePositionsGlobal();
+            Settings.BossWindowSettings.MakePositionsGlobal();
+
+            SettingsWriter.Save();
+        }
+
+        public static void ResetToCenter()
+        {
+            CooldownWindow.ResetToCenter();
+            ClassWindow.ResetToCenter();
+            CharacterWindow.ResetToCenter();
+            GroupWindow.ResetToCenter();
+            BuffWindow.ResetToCenter();
+            BossWindow.ResetToCenter();
+            FlightDurationWindow.ResetToCenter();
         }
     }
 }

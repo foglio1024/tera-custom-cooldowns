@@ -49,8 +49,8 @@ namespace TCC
             }
             if (e.Key == Settings.SettingsHotkey.Key && e.Modifier == Settings.SettingsHotkey.Modifier)
             {
-                if (WindowManager.Settings.IsVisible) WindowManager.Settings.HideWindow();
-                else WindowManager.Settings.ShowWindow();
+                if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
+                else WindowManager.SettingsWindow.ShowWindow();
             }
             if (e.Key == Settings.InfoWindowHotkey.Key && e.Modifier == Settings.InfoWindowHotkey.Modifier)
             {
@@ -59,7 +59,7 @@ namespace TCC
             }
             if (e.Key == Settings.ShowAllHotkey.Key && e.Modifier == Settings.ShowAllHotkey.Modifier)
             {
-                WindowManager.TempShowAll();
+
             }
             if (e.Key == Settings.LootSettingsHotkey.Key && e.Modifier == Settings.LootSettingsHotkey.Modifier)
             {

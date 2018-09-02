@@ -112,7 +112,7 @@ namespace TCC.Windows
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            WindowManager.Settings.ShowWindow();
+            WindowManager.SettingsWindow.ShowWindow();
         }
 
         private void RefreshTopmost()
