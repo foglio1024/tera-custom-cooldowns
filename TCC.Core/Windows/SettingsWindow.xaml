@@ -878,6 +878,24 @@
                 </StackPanel>
 
             </TabItem>
+            <TabItem Margin="-1,0,0,0">
+                <TabItem.Header>
+                    <!--Title-->
+                    <Grid Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6" Source="/TCC;component/resources/images/ic_videogame_asset_white_24dp_2x.png"/>
+                        <TextBlock Text="DS guide" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+
+                </TabItem.Header>
+                <!-- Other settings -->
+                <TextBlock Text="https://essentialmana.com/dreadspire-4/" Foreground="{StaticResource MpColor}" Padding="7" HorizontalAlignment="Center"
+                           VerticalAlignment="Top" Background="Transparent" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"></TextBlock>
+
+            </TabItem>
         </TabControl>
         <!--Title bar-->
         <Grid Grid.ColumnSpan="2"  MouseLeftButtonDown="Window_MouseLeftButtonDown" >

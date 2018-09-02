@@ -109,5 +109,10 @@ namespace TCC.Windows
         {
             WindowManager.ResetToCenter();
         }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://essentialmana.com/dreadspire-4/");
+        }
     }
 }
