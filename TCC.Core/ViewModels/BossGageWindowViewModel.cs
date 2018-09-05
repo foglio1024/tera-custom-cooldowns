@@ -243,6 +243,7 @@ namespace TCC.ViewModels
                 boss.Name = towerName;
             }
             boss.IsBoss = true;
+            NpcList.Add(boss);
         }
 
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, Visibility visibility = Visibility.Visible)
