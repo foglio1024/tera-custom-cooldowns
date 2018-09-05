@@ -144,7 +144,7 @@
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="705"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="735"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -997,24 +997,6 @@
                     </Grid>
 
                 </StackPanel>
-
-            </TabItem>
-            <TabItem Margin="-1,0,0,0">
-                <TabItem.Header>
-                    <!--Title-->
-                    <Grid Height="30">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6" Source="/TCC;component/resources/images/ic_videogame_asset_white_24dp_2x.png"/>
-                        <TextBlock Text="DS guide" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
-                    </Grid>
-
-                </TabItem.Header>
-                <!-- Other settings -->
-                <TextBlock Text="https://essentialmana.com/dreadspire-4/" Foreground="{StaticResource MpColor}" Padding="7" HorizontalAlignment="Center"
-                           VerticalAlignment="Top" Background="Transparent" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"></TextBlock>
 
             </TabItem>
         </TabControl>
