@@ -1129,12 +1129,12 @@ namespace TCC.Parsing
             if (data.StartsWith(chatModeCmd))
             {
                 var chatMode = data.Replace(chatModeCmd, "");
-                SessionManager.InGameChatOpen = chatMode == "1"; //too lazy
+                SessionManager.InGameChatOpen = chatMode == "1" || chatMode == "true"; //too lazy
             }
             else if (data.StartsWith(uiModeCmd))
             {
                 var uiMode = data.Replace(uiModeCmd, "");
-                SessionManager.InGameUiOn = uiMode == "1"; //too lazy
+                SessionManager.InGameUiOn = uiMode == "1" || uiMode == "true"; //too lazy
             }
         }
 
