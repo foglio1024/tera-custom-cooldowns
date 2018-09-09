@@ -218,10 +218,6 @@ namespace TCC
                                 {
                                     Update(newVersionUrl);
                                 }
-                                //if (MessageBox.Show($"TCC v{newVersionInfo} available. Download now?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                                //{
-                                //    Update(newVersionUrl);
-                                //}
                             }
                         }
                     }
