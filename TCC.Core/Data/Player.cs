@@ -249,7 +249,7 @@ namespace TCC.Data
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NPC("IsDebuffed");
+                NPC(nameof(IsDebuffed));
             }
         }
         internal void RemoveFromDebuffList(Abnormality ab)
@@ -257,7 +257,7 @@ namespace TCC.Data
             if (ab.IsBuff == false)
             {
                 _debuffList.Remove(ab.Id);
-                NPC("IsDebuffed");
+                NPC(nameof(IsDebuffed));
             }
         }
         public bool IsDebuffed => _debuffList.Count != 0;
@@ -397,7 +397,6 @@ namespace TCC.Data
             if (buff == null) return;
             Debuffs.Remove(buff);
             buff.Dispose();
-
         }
         public void RemoveInfBuff(Abnormality ab)
         {
@@ -425,6 +424,7 @@ namespace TCC.Data
             _debuffs.Clear();
             _infBuffs.Clear();
             _debuffList.Clear();
+            NPC(nameof(IsDebuffed));
         }
 
         public Player()

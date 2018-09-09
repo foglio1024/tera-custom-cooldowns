@@ -268,6 +268,7 @@ namespace TCC.Parsing
             CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
             CharacterWindowViewModel.Instance.Player.Name = p.Name;
             CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
             SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
             WindowManager.ReloadPositions(p.CharacterClass);
