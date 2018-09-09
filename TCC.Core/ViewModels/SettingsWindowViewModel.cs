@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
@@ -616,6 +619,17 @@ namespace TCC.ViewModels
                 WindowManager.FlightDurationWindow.ExNPC(nameof(FlipFlightGauge));
             }
         }
+        public bool ForceSoftwareRendering
+        {
+            get => Settings.ForceSoftwareRendering;
+            set
+            {
+                if (Settings.ForceSoftwareRendering == value) return;
+                Settings.ForceSoftwareRendering = value;
+                NPC();
+                RenderOptions.ProcessRenderMode = value ? RenderMode.SoftwareOnly : RenderMode.Default;
+            }
+        }
 
         public bool HighPriority
         {
@@ -625,9 +639,7 @@ namespace TCC.ViewModels
                 if (Settings.HighPriority == value) return;
                 Settings.HighPriority = value;
                 NPC();
-                if (TccMessageBox.Show("TCC",
-                    "This setting requires TCC to be restarted. Restart now?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) App.Restart();
+                Process.GetCurrentProcess().PriorityClass = value ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
             }
         }
     }
