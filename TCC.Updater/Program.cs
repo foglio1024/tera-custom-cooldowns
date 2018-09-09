@@ -19,7 +19,23 @@ namespace TCC.Updater
                 MessageBox.Show("This is not meant to be launched manually!", "TCC Updater", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Thread.Sleep(2000);
+
+            var tries = 0;
+            while (true)
+            {
+                Thread.Sleep(1000);
+                var pl = Process.GetProcesses();
+                if (pl.All(x => x.ProcessName != "TCC")) break;
+                if (tries > 10)
+                {
+                    Console.WriteLine("\nForce closing TCC...");
+                    var tcc = Process.GetProcesses().FirstOrDefault(x => x.ProcessName == "TCC");
+                    tcc?.Kill();
+                    break;
+                }
+                Console.Write($"\rWaiting for TCC to close... {10 - tries} ");
+                tries++;
+            }
             //Create all of the directories
             foreach (var dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
@@ -31,7 +47,7 @@ namespace TCC.Updater
             {
                 if (newPath.Contains(@"\config\")) continue;
                 File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
-                Console.WriteLine("Copied file {0}", Path.GetFileName(newPath));
+                Console.WriteLine($"Copied file {Path.GetFileName(newPath)}");
             }
 
             Directory.Delete(SourcePath, true);
