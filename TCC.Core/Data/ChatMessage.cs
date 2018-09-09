@@ -708,7 +708,14 @@ namespace TCC.Data
                 if (colorIndex != -1) hasSpace = true;
             }
             var offset = hasSpace ? 10 : 8;
-            return colorIndex == -1 ? "" : msg.Substring(colorIndex + offset, 6);
+            var colorEnd = msg.IndexOf("\"", colorIndex+offset+1);
+            if(colorIndex == -1) return "";
+            var col = msg.Substring(colorIndex + offset, colorEnd - colorIndex - offset);
+            while (col.Length < 6)
+            {
+                col = "0" + col;
+            }
+            return col;
 
         }
         private string GetPieceContent(string text)
