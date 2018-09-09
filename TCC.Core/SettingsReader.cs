@@ -234,6 +234,7 @@ namespace TCC
                     else if (attr.Name == nameof(Settings.WarriorShowTraverseCut)) Settings.WarriorShowTraverseCut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.CharacterWindowCompactMode)) Settings.CharacterWindowCompactMode = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowAllGroupAbnormalities)) Settings.ShowAllGroupAbnormalities = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.HighPriority)) Settings.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.RegionOverride)) Settings.RegionOverride = attr.Value;
                     else if (attr.Name == nameof(Settings.LastRegion)) Settings.LastRegion = attr.Value;
                     else if (attr.Name == nameof(Settings.Webhook)) Settings.Webhook = attr.Value;

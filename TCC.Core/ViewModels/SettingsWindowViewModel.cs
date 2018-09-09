@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
@@ -612,6 +614,20 @@ namespace TCC.ViewModels
                 Settings.FlipFlightGauge = value;
                 NPC();
                 WindowManager.FlightDurationWindow.ExNPC(nameof(FlipFlightGauge));
+            }
+        }
+
+        public bool HighPriority
+        {
+            get => Settings.HighPriority;
+            set
+            {
+                if (Settings.HighPriority == value) return;
+                Settings.HighPriority = value;
+                NPC();
+                if (TccMessageBox.Show("TCC",
+                    "This setting requires TCC to be restarted. Restart now?",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) App.Restart();
             }
         }
     }

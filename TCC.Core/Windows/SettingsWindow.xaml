@@ -759,6 +759,19 @@
                     </Button>
 
                     <Separator/>
+                    <controls:BoolSetting SettingName="High priority" IsOn="{Binding HighPriority, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Makes TCC run at High CPU priority. Turn this on if you're experiecing lag in crowded areas (eg. Harrowold)"/>
+                                    <LineBreak /> <LineBreak/>
+                                    <Run Text="Warning: " Foreground="DarkOrange"/>
+                                    <Run Text="turning this on may affect overall system performance." />
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
                     <controls:BoolSetting SettingName="Use hotkeys" IsOn="{Binding UseHotkeys, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">

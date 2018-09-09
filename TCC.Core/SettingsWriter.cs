@@ -119,6 +119,7 @@ namespace TCC
                 new XAttribute(nameof(Settings.ShowAwakenIcon), Settings.ShowAwakenIcon),
                 new XAttribute(nameof(Settings.ShowAllGroupAbnormalities), Settings.ShowAllGroupAbnormalities),
                 // Misc
+                new XAttribute(nameof(Settings.HighPriority), Settings.HighPriority),
                 new XAttribute(nameof(Settings.LastRun), DateTime.Now),
                 new XAttribute(nameof(Settings.LastRegion), Settings.LastRegion),
                 new XAttribute(nameof(Settings.Webhook), Settings.Webhook),

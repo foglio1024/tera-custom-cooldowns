@@ -144,6 +144,7 @@ namespace TCC
         public static double FlightGaugeRotation { get; set; }
         public static bool FlipFlightGauge { get; set; }
         public static bool HideHandles { get; set; }
+        public static bool HighPriority { get; set; }
 
         private static string _lastRegion = "";
         private static bool _chatEnabled = false;

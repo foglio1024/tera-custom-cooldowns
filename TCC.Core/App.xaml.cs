@@ -37,16 +37,16 @@ namespace TCC
 //            DebugWindow = new DebugWindow();
 //            DebugWindow.Show();
 //#endif
+
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            //new Task(() => { if (new Firebase.Firebase().CheckService()) Console.WriteLine("Firebase ok");}).Start(); 
             InitSplashScreen();
 
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             TccMessageBox.Create(); //Create it here in STA thread
-
+#if DEBUG
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
-            Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
+#endif
             TryDeleteUpdater();
 
             SplashScreen.SetText("Checking for application updates...");
@@ -59,6 +59,8 @@ namespace TCC
             var sr = new SettingsReader();
             sr.LoadWindowSettings();
             sr.LoadSettings();
+
+            Process.GetCurrentProcess().PriorityClass = Settings.HighPriority ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
 
             SplashScreen.SetText("Pre-loading databases...");
             SessionManager.InitDatabases(string.IsNullOrEmpty(Settings.LastRegion) ? "EU-EN" : Settings.LastRegion == "EU" ? "EU-EN" : Settings.LastRegion);
