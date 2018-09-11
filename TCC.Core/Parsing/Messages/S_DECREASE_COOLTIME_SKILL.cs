@@ -17,7 +17,7 @@ namespace TCC.Parsing.Messages
 
         public S_DECREASE_COOLTIME_SKILL(TeraMessageReader reader) : base(reader)
         {
-            SkillId = reader.ReadUInt32() - 0x04000000;
+            SkillId = reader.Factory.ReleaseVersion < 74 ? reader.ReadUInt32() - 0x04000000 : (uint)new SkillId(reader).Id;
             Cooldown = reader.ReadUInt32();
         }
 
