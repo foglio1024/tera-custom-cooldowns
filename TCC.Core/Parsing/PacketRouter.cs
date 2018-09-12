@@ -235,6 +235,7 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            WindowManager.ReloadPositions(p.CharacterClass);
             if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!Settings.StatSent) App.SendUsageStat();
@@ -270,7 +271,6 @@ namespace TCC.Parsing
             CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
             SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
-            WindowManager.ReloadPositions(p.CharacterClass);
         }
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
