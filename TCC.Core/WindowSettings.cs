@@ -235,10 +235,10 @@ namespace TCC
             xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
             xe.Add(new XAttribute(nameof(Enabled), Enabled));
             xe.Add(new XAttribute(nameof(AllowOffScreen), AllowOffScreen));
-            xe.Add(BuildClassWindowPositionsXElement());
+            xe.Add(BuildWindowPositionsXElement());
             return xe;
         }
-        private XElement BuildClassWindowPositionsXElement()
+        private XElement BuildWindowPositionsXElement()
         {
             var ret = new XElement(nameof(Positions));
 
