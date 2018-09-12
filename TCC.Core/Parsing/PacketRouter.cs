@@ -24,8 +24,8 @@ namespace TCC.Parsing
         public static uint Version;
         public static Server Server;
         private static string Language => new TeraData(Server.Region).GetLanguage(Server.Region);
-        public static OpCodeNamer OpCodeNamer;
-        public static OpCodeNamer SystemMessageNamer;
+        public static OpCodeNamer OpCodeNamer { get; set; }
+        public static OpCodeNamer SystemMessageNamer { get; set; }
         public static MessageFactory Factory;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         private static System.Timers.Timer _x;
@@ -51,8 +51,7 @@ namespace TCC.Parsing
                 var message = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
                 Version = message.Versions[0];
                 OpcodeDownloader.DownloadIfNotExist(Version, Path.Combine(BasicTeraData.Instance.ResourceDirectory, "data/opcodes/"));
-                if (!File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/protocol.{message.Versions[0]}.map"))
-                    || !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/sysmsg.{message.Versions[0]}.map")))
+                if (!File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/protocol.{message.Versions[0]}.map")))
                 {
                     {
                         TccMessageBox.Show("Unknown client version: " + message.Versions[0], MessageBoxType.Error);

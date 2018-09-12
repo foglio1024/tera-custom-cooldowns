@@ -54,53 +54,29 @@ namespace TCC.Parsing
             {
                 return false;
             }
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
+            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision/100 + ".map";
             if (File.Exists(filename))
             {
                 return false;
             }
-            try
-            {
-                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/sysmsg." + version + ".map", filename);
-                return true;
-            }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + version + ".map", filename);
-                return true;
-            }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + version + ".map", filename);
-                return true;
-            }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision/100 + ".map", filename);
-                return true;
-            }
-            catch { }
             try
             {
                 Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/sysmsg." + revision / 100 + ".map", filename);
                 return true;
             }
             catch { }
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
-            if (File.Exists(filename))
+            try
             {
-                return false;
+                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision / 100 + ".map", filename);
+                return true;
             }
+            catch { }
             try
             {
                 Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + revision / 100 + ".map", filename);
                 return true;
             }
             catch { }
-
             return false;
         }
 
