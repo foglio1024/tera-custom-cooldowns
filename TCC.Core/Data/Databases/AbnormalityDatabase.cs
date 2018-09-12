@@ -11,6 +11,7 @@ namespace TCC.Data.Databases
         public static readonly List<uint> NoctIds = new List<uint> { 902, 910, 911, 912, 913, 916, 917, 999010000 };
         public static List<uint> BlueNoctIds = new List<uint> { 920, 921, 922};
 
+        //TODO: maybe refactor this one day
         public AbnormalityDatabase(string lang)
         {
             Abnormalities = new Dictionary<uint, Abnormality>();
@@ -51,6 +52,8 @@ namespace TCC.Data.Databases
                             Abnormalities[id].Infinity = false;
                         }
                     }
+
+                    if (!isBuff) Abnormalities[id].IsBuff = false;
                     continue;
                 }
                 Abnormalities.Add(id, ab);
