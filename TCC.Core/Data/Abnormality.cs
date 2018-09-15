@@ -2,7 +2,6 @@
 {
     public class Abnormality
     {
-        //Bitmap iconBitmap;
         public string IconName { get; set; }
         public uint Id { get; set; }
         public string Name { get; set; }
@@ -20,6 +19,7 @@
             IsShow = isShow;
             Infinity = infinity;
             Type = prop;
+            if (!IsBuff && prop == AbnormalityType.Buff) Type = AbnormalityType.Debuff;
         }
 
         public void SetIcon(string iconName)
