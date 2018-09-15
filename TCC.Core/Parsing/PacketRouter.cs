@@ -139,7 +139,7 @@ namespace TCC.Parsing
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             if (SessionManager.CurrentPlayer.Class == Class.Warrior)
-                ((WarriorBarManager) ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
+                ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
@@ -237,6 +237,7 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
+            S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
             if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!Settings.StatSent) App.SendUsageStat();
@@ -371,6 +372,7 @@ namespace TCC.Parsing
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
+            if (x.Zone == 152) WindowManager.CivilUnrestWindow.VM.CuZone = true;
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -1116,8 +1118,15 @@ namespace TCC.Parsing
 
         public static void HandleUserGuildLogo(S_GET_USER_GUILD_LOGO sGetUserGuildLogo)
         {
-            if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId)) return;
+            if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId))
+            {
+                S_IMAGE_DATA.Database[sGetUserGuildLogo.GuildId] = sGetUserGuildLogo.GuildLogo;
+                return;
+            }
             S_IMAGE_DATA.Database.Add(sGetUserGuildLogo.GuildId, sGetUserGuildLogo.GuildLogo);
+            if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
+            sGetUserGuildLogo.GuildLogo.Save("resources/images/guilds/guildlogo_" + Server.ServerId + "_" + sGetUserGuildLogo.GuildId + "_" + 0 + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
         }
 
         public static void HandleGpkData(string data)
@@ -1160,6 +1169,21 @@ namespace TCC.Parsing
         public static void HandleShowHp(S_SHOW_HP x)
         {
             BossGageWindowViewModel.Instance.AddOrUpdateBoss(x.GameId, x.MaxHp, x.CurrentHp, false, HpChangeSource.CreatureChangeHp);
+        }
+
+        public static void HandleDestroyGuildTower(S_DESTROY_GUILD_TOWER p)
+        {
+            WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower(p.SourceGuildId);
+        }
+
+        public static void HandleCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO p)
+        {
+            p.Guilds.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.AddGuild(x));
+        }
+        public static void HandleCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL p)
+        {
+            p.GuildDetails.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.SetGuildName(x.Item1, x.Item2));
+
         }
     }
 }
