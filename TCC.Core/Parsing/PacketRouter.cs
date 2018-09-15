@@ -237,7 +237,7 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
-            S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
+            //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
             if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!Settings.StatSent) App.SendUsageStat();
