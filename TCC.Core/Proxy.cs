@@ -77,7 +77,7 @@ namespace TCC
                     var type = split[0];
                     if (type == "output")
                     {
-                        Console.WriteLine($"[Proxy] received output: {split[3]}");
+                        //Console.WriteLine($"[Proxy] received output: {split[3]}");
                         var channel = uint.Parse(split[1]);
                         var author = split[2];
                         var message = split[3];
@@ -91,7 +91,7 @@ namespace TCC
                     }
                     else if (type == "packet")
                     {
-                        Console.WriteLine($"[Proxy] received packet: {split[2]}");
+                        //Console.WriteLine($"[Proxy] received packet: {split[2]}");
                         var dir = bool.Parse(split[1])
                             ? MessageDirection.ServerToClient
                             : MessageDirection.ClientToServer;
@@ -102,7 +102,7 @@ namespace TCC
                         var propName = split[1];
                         var val = split[2];
                         SetProperty(propName, val);
-                        Console.WriteLine($"[Proxy] received setval: {split[1]} - {split[2]}");
+                        //Console.WriteLine($"[Proxy] received setval: {split[1]} - {split[2]}");
                     }
                 }
 

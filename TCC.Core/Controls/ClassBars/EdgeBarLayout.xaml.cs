@@ -18,7 +18,7 @@ namespace TCC.Controls.ClassBars
             {
                 _dc = DataContext as WarriorBarManager;
                 if (_dc != null) _dc.EdgeCounter.PropertyChanged += OnEdgePropertyChanged;
-                else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
+                //else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
             };
         }
 

@@ -39,10 +39,10 @@ namespace TCC.Parsing.Messages
                 u.Location = SessionManager.MapDatabase.GetName(gId, aId);
                 u.IsLeader = reader.ReadBoolean();
                 //u.Laurel = (Laurel)reader.ReadUInt32();
-                Console.WriteLine("---");
+                //Console.WriteLine("---");
                 u.Online = reader.ReadBoolean();
-                Console.WriteLine(reader.ReadByte());
-                Console.WriteLine(reader.ReadByte());
+                //Console.WriteLine(reader.ReadByte());
+                //Console.WriteLine(reader.ReadByte());
                 reader.BaseStream.Position = nameOffset - 4;
                 u.Name = reader.ReadTeraString();
                 //u.IsLeader = u.PlayerId == Id;

@@ -23,7 +23,7 @@ namespace TCC.Controls
             {
                 _dc = DataContext as ValkyrieBarManager;
                 if (_dc != null) _dc.RunemarksCounter.PropertyChanged += OnEdgePropertyChanged;
-                else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
+                //else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
             };
 
         }

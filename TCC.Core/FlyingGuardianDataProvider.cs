@@ -76,14 +76,14 @@ namespace TCC
                 _ignoreNextEnd = false;
                 return;
             }
-            Console.WriteLine($"{p.AbnormalityId} ended");
+            //Console.WriteLine($"{p.AbnormalityId} ended");
             Stacks = 0;
         }
 
         public static void HandleAbnormal(S_ABNORMALITY_REFRESH p)
         {
             if (!IsEssence(p.AbnormalityId)) return;
-            Console.WriteLine($"{p.AbnormalityId} refreshed to {p.Stacks}");
+            //Console.WriteLine($"{p.AbnormalityId} refreshed to {p.Stacks}");
             Stacks = p.Stacks;
             StackType = IdToStackType(p.AbnormalityId);
         }
@@ -91,7 +91,7 @@ namespace TCC
         public static void HandleAbnormal(S_ABNORMALITY_BEGIN p)
         {
             if (!IsEssence(p.AbnormalityId)) return;
-            Console.WriteLine($"{p.AbnormalityId} started at {p.Stacks}");
+            //Console.WriteLine($"{p.AbnormalityId} started at {p.Stacks}");
             if (IdToStackType(p.AbnormalityId) != StackType) _ignoreNextEnd = true;
             Stacks = p.Stacks;
             StackType = IdToStackType(p.AbnormalityId);
