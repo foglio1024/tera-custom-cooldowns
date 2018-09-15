@@ -63,9 +63,9 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
 
         }
 

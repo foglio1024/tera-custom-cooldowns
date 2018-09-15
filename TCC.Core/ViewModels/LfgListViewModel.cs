@@ -63,7 +63,7 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Listings = new SynchronizedObservableCollection<Listing>(_dispatcher);
-            ListingsView = Utils.InitLiveView<Listing>(null, Listings, new string[] { }, new string[] { });
+            ListingsView = Utils.InitLiveView<Listing>(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
         }

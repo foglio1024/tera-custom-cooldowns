@@ -496,7 +496,7 @@ namespace TCC.ViewModels
                         SkillChoiceList.Add(skill);
                     }
 
-                    SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
+                    SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
                 });
                 NPC(nameof(SkillsView));
                 NPC(nameof(MainSkills));
@@ -536,9 +536,9 @@ namespace TCC.ViewModels
                     //WindowManager.CooldownWindow.RefreshTopmost();
                 //}
             //};
-            SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
-            ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new string[] { });
-            AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new string[] { });
+            SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
+            ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
+            AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
         }
 
         public void NotifyItemsDisplay()

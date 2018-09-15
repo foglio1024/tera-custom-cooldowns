@@ -195,7 +195,7 @@ namespace TCC
         }
 
         public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
-            string[] filters, string[] sortFilters)
+            string[] filters, SortDescription[] sortFilters)
         {
             var cv = new CollectionViewSource { Source = source }.View;
             cv.Filter = predicate;
@@ -215,8 +215,7 @@ namespace TCC
             {
                 foreach (var filter in sortFilters)
                 {
-                    (liveView as ICollectionView).SortDescriptions.Add(new SortDescription(filter,
-                        ListSortDirection.Ascending));
+                    (liveView as ICollectionView).SortDescriptions.Add(filter);
                 }
 
                 liveView.IsLiveSorting = true;
@@ -225,6 +224,7 @@ namespace TCC
             return liveView;
         }
     }
+
 
     public static class EventUtils
     {
@@ -300,6 +300,7 @@ namespace TCC
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NPC([CallerMemberName] string v = null)
         {
+            if (_dispatcher == null) SetDispatcher(App.BaseDispatcher);
             _dispatcher.InvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
