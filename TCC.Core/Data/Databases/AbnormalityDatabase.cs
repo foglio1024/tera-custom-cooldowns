@@ -53,6 +53,8 @@ namespace TCC.Data.Databases
                         }
                     }
 
+                    if (Abnormalities[id].Type != AbnormalityType.Debuff && ab.Type == AbnormalityType.Debuff)
+                        Abnormalities[id].Type = AbnormalityType.Debuff;
                     if (!isBuff) Abnormalities[id].IsBuff = false;
                     continue;
                 }
