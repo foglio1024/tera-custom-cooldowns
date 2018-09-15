@@ -49,13 +49,11 @@ namespace TCC
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
-
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
                 {
                     BuffBarWindowViewModel.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks);
-
                 }
                 else
                 {
@@ -67,12 +65,8 @@ namespace TCC
             {
                 BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks);
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
-                //ClassManager.SetStatus(ab, true);
             }
             CheckPassivity(ab, duration);
-            //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
-            //ChatWindowManager.Instance.AddChatMessage(sysMsg);
-
         }
 
         private static void CheckPassivity(Abnormality ab, uint duration)
