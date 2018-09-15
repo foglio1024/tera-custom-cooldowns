@@ -1173,17 +1173,37 @@ namespace TCC.Parsing
 
         public static void HandleDestroyGuildTower(S_DESTROY_GUILD_TOWER p)
         {
-            WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower(p.SourceGuildId);
+            try
+            {
+                WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower(p.SourceGuildId);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         public static void HandleCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO p)
         {
-            p.Guilds.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.AddGuild(x));
+            try
+            {
+                p.Guilds.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.AddGuild(x));
+            }
+            catch (Exception e)
+            {
+
+            }
         }
         public static void HandleCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL p)
         {
-            p.GuildDetails.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.SetGuildName(x.Item1, x.Item2));
+            try
+            {
+                p.GuildDetails.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.SetGuildName(x.Item1, x.Item2));
+            }
+            catch (Exception e)
+            {
 
+            }
         }
     }
 }

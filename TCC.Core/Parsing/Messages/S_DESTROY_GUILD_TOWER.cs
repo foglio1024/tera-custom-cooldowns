@@ -19,12 +19,20 @@ namespace TCC.Parsing.Messages
 
         public S_DESTROY_GUILD_TOWER(TeraMessageReader reader) : base(reader)
         {
-            Location = reader.ReadVector3f();
-            SourceGuildId = reader.ReadUInt32();
-            TargetGuildId = reader.ReadUInt32();
-            SourceGuildName = reader.ReadTeraString();
-            PlayerName = reader.ReadTeraString();
-            TargetGuildName = reader.ReadTeraString();
+            try
+            {
+                reader.Skip(2 + 2 + 2);
+                Location = reader.ReadVector3f();
+                SourceGuildId = reader.ReadUInt32();
+                TargetGuildId = reader.ReadUInt32();
+                SourceGuildName = reader.ReadTeraString();
+                PlayerName = reader.ReadTeraString();
+                TargetGuildName = reader.ReadTeraString();
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }
