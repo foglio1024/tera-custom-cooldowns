@@ -170,13 +170,17 @@ namespace TCC.ViewModels
 
         private void FlushCache(object sender, EventArgs e)
         {
-            if (_cache.Count == 0) return;
-            //ChatWindowManager.Instance.AddTccMessage($"Flushing {_cache.Count} updates to UI");
-            foreach (var hpc in _cache.ToList())
+            _dispatcher.Invoke(() =>
             {
-                SetHpFromCache(hpc.Key, hpc.Value);
-            }
-            _cache.Clear();
+                if (_cache.Count == 0) return;
+                //ChatWindowManager.Instance.AddTccMessage($"Flushing {_cache.Count} updates to UI");
+                foreach (var hpc in _cache.ToList())
+                {
+                    SetHpFromCache(hpc.Key, hpc.Value);
+                }
+
+                _cache.Clear();
+            });
         }
 
         private void SetHpFromCache(ulong hpcEntityId, float hpcCurrentHp)
