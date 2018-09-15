@@ -372,7 +372,9 @@ namespace TCC.Parsing
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
+            if (!Settings.CivilUnrestWindowSettings.Enabled) return;
             if (x.Zone == 152) WindowManager.CivilUnrestWindow.VM.CuZone = true;
+            else WindowManager.CivilUnrestWindow.VM.CuZone = false;
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -776,7 +778,6 @@ namespace TCC.Parsing
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
-
             if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
                 FlyingGuardianDataProvider.HandleAbnormal(p);
 
