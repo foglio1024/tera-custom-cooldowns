@@ -158,5 +158,10 @@ namespace TCC.Windows
         {
             WindowManager.FlightDurationWindow.ResetToCenter();
         }
+
+        private void ResetCuWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.CivilUnrestWindow.ResetToCenter();
+        }
     }
 }

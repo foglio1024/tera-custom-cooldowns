@@ -26,6 +26,8 @@ namespace TCC.ViewModels
         public WindowSettings BossWindowSettings => Settings.BossWindowSettings;
         public WindowSettings FlightWindowSettings => Settings.FlightGaugeWindowSettings;
         public WindowSettings FloatingButtonSettings => Settings.FloatingButtonSettings;
+        public WindowSettings CuWindowSettings => Settings.CivilUnrestWindowSettings;
+
 
         public bool HideMe
         {
@@ -642,5 +644,6 @@ namespace TCC.ViewModels
                 Process.GetCurrentProcess().PriorityClass = value ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
             }
         }
+
     }
 }
