@@ -48,6 +48,7 @@ namespace TCC
         public static SettingsWindow SettingsWindow;
         public static SkillConfigWindow SkillConfigWindow;
         public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
+        public static CivilUnrestWindow CivilUnrestWindow;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
@@ -250,6 +251,7 @@ namespace TCC
             LfgListWindow = new LfgListWindow();
             SkillConfigWindow = new SkillConfigWindow();
             GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
+            CivilUnrestWindow = new CivilUnrestWindow();
             //GroupWindow.Show();
             //CooldownWindow.Show();
             //BossWindow.Show();

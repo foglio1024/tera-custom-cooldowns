@@ -89,6 +89,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\BrawlerAbnormalityTracker.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="HotKey.cs" />
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="MoongourdManager.cs" />
+    <Compile Include="Parsing\CityWarGuildInfo.cs" />
     <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
@@ -299,6 +301,7 @@
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
     <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
     <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_DESTROY_GUILD_TOWER.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_CLEAR_COUNT_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
@@ -312,6 +315,8 @@
     <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INTERVAL_POS_UPDATE.cs" />
+    <Compile Include="Parsing\Messages\S_REQUEST_CITY_WAR_MAP_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_REQUEST_CITY_WAR_MAP_INFO_DETAIL.cs" />
     <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
     <Compile Include="Parsing\Messages\S_SHOW_CANDIDATE_LIST.cs" />
     <Compile Include="Parsing\Messages\S_SHOW_PARTY_MATCH_INFO.cs" />
@@ -719,6 +724,9 @@
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ClassToFillConverter.cs" />
+    <Compile Include="Windows\CivilUnrestWindow.xaml.cs">
+      <DependentUpon>CivilUnrestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
@@ -1080,6 +1088,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CivilUnrestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

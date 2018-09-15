@@ -62,7 +62,8 @@ namespace TCC.ViewModels
             get
             {
                 _bams = Utils.InitLiveView(p => ((Npc)p).IsBoss && !((Npc)p).IsTower, _npcList, new string[] { },
-                    new[] { "Visible", "CurrentHP" });
+                    new[] { new SortDescription("Visible", ListSortDirection.Ascending),
+                        new SortDescription("CurrentHP", ListSortDirection.Ascending) });
                 //_bams = new CollectionViewSource { Source = _npcList }.View;
                 //_bams.Filter = p => ((Npc)p).IsBoss && !((Npc)p).IsTower;
                 return _bams;
@@ -245,9 +246,12 @@ namespace TCC.ViewModels
             if (_towerNames.TryGetValue(entityId, out var towerName))
             {
                 boss.Name = towerName;
+                WindowManager.CivilUnrestWindow.VM.SetGuildName(boss.GuildId, towerName); //TODO: check for enabled?
             }
             boss.IsBoss = true;
             NpcList.Add(boss);
+            if (_savedHp.ContainsKey(entityId)) boss.CurrentHP = _savedHp[entityId];
+
         }
 
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, Visibility visibility = Visibility.Visible)
@@ -424,7 +428,11 @@ namespace TCC.ViewModels
             if (!GuildIds.ContainsKey(towerId)) GuildIds.Add(towerId, guildId);
             Npc t = null;
             t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
-            if (t != null) t.Name = guildName;
+            if (t != null)
+            {
+                t.Name = guildName;
+                t.ExNPC(nameof(Npc.GuildId));
+            }
             if (_towerNames.ContainsKey(towerId)) return;
             _towerNames.Add(towerId, guildName);
         }
