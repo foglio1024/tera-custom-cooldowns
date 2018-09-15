@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
@@ -14,6 +15,14 @@ namespace TCC.Parsing.Messages
         private static Dictionary<uint, Bitmap> _database;
         public static Dictionary<uint, Bitmap> Database => _database ?? (_database = new Dictionary<uint, Bitmap>());
 
+        public static void LoadCachedImages()
+        {
+            if (!Directory.Exists("resources/images/guilds")) return;
+            foreach (var file in Directory.EnumerateFiles("resources/images/guilds"))
+            {
+                if(!Database.ContainsKey(Convert.ToUInt32(file.Split('_')[2]))) Database.Add(Convert.ToUInt32(file.Split('_')[2]), new Bitmap(file));
+            }
+        }
 
         public S_IMAGE_DATA(TeraMessageReader reader) : base(reader)
         {
@@ -23,7 +32,7 @@ namespace TCC.Parsing.Messages
 
             reader.BaseStream.Position = nameOffset - 4;
             var imageName = reader.ReadTeraString();
-            if(!imageName.StartsWith("guildlogo")) return;
+            if (!imageName.StartsWith("guildlogo")) return;
             reader.BaseStream.Position = imageOffset - 4;
             var imageBytes = reader.ReadBytes(imageLength);
             var width = BitConverter.ToInt32(imageBytes, 8);
@@ -63,6 +72,9 @@ namespace TCC.Parsing.Messages
             var id = Convert.ToUInt32(imageName.Split('_')[2]);
             if (Database.ContainsKey(id)) return;
             Database.Add(id, image);
+            if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
+            image.Save("resources/images/guilds/" + imageName + ".bmp", ImageFormat.Bmp);
+
         }
     }
 }
