@@ -79,6 +79,7 @@ namespace TCC.ViewModels
 
         public CivilUnrestViewModel()
         {
+            _dispatcher = App.BaseDispatcher;
             _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
         }
 
