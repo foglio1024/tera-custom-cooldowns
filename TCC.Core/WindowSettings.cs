@@ -27,6 +27,7 @@ namespace TCC
         public event Action VisibilityChanged;
 
         public string Name { get; }
+        public bool PerClassPosition { get; set; }
 
         public double X
         {
@@ -34,13 +35,15 @@ namespace TCC
             {
                 var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common :  SessionManager.CurrentPlayer.Class ;
                 //if (Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Getting X {X} for class {cc}");
-
+                cc = PerClassPosition ? cc : Class.Common;
                 return Positions[cc].X;
             }
             set
             {
                 var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
                 if (cc == Class.None) return;
+                cc = PerClassPosition ? cc : Class.Common;
+
                 var old = Positions[cc];
                 Positions[cc] = new Point(value, old.Y);
                 //if(Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Setting X to {value} for class {cc}");
@@ -53,11 +56,14 @@ namespace TCC
             get
             {
                 var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                cc = PerClassPosition ? cc : Class.Common;
+
                 return Positions[cc].Y;
             }
             set
             {
                 var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                cc = PerClassPosition ? cc : Class.Common;
                 if (cc == Class.None) return;
                 var old = Positions[cc];
                 Positions[cc] = new Point(old.X, value);
@@ -195,7 +201,7 @@ namespace TCC
 
         public Dictionary<Class, Point> Positions { get; set; }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null, string name = "")
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null, string name = "", bool perClassPosition = true)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
@@ -209,6 +215,7 @@ namespace TCC
             _showAlways = showAlways;
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
+            PerClassPosition = perClassPosition;
             Positions = new Dictionary<Class, Point>
             {
                 {(Class) 0,   positions == null ? new Point(x,y) : new Point(positions[(Class) 0].X, positions[(Class) 0].Y)},

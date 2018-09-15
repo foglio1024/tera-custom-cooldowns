@@ -40,7 +40,7 @@ namespace TCC.Windows
             FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
             SessionManager.CombatChanged += OnCombatChanged;
 
-            Init(Settings.FlightGaugeWindowSettings);
+            Init(Settings.FlightGaugeWindowSettings, perClassPosition: false);
             Opacity = 0;
 
             _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));

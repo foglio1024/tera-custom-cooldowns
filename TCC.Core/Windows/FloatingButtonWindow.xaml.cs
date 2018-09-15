@@ -24,7 +24,7 @@ namespace TCC.Windows
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = content;
             ButtonsRef = null;
-            Init(Settings.FloatingButtonSettings);
+            Init(Settings.FloatingButtonSettings, perClassPosition:false);
         }
 
         private Timer _t;

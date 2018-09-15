@@ -52,8 +52,9 @@ namespace TCC.Windows
                 _settings.Y = Top / Settings.ScreenH;
             });
         }
-        protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true)
+        protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true, bool perClassPosition = true)
         {
+            settings.PerClassPosition = perClassPosition;
             _settings = settings;
             _ignoreSize = ignoreSize;
             _undimOnFlyingGuardian = undimOnFlyingGuardian;
