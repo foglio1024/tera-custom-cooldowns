@@ -19,7 +19,6 @@
             IsShow = isShow;
             Infinity = infinity;
             Type = prop;
-            if (!IsBuff && prop == AbnormalityType.Buff) Type = AbnormalityType.Debuff;
         }
 
         public void SetIcon(string iconName)
