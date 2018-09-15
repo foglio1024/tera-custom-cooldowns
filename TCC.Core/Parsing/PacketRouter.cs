@@ -72,7 +72,7 @@ namespace TCC.Parsing
         public static void EnqueueMessageFromProxy(MessageDirection dir, string data)
         {
             var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>(StringUtils.StringToByteArray(data.Substring(4))));
-            Console.WriteLine(msg.OpCode);
+            //Console.WriteLine(msg.OpCode);
             Packets.Enqueue(msg);
         }
 
@@ -235,7 +235,8 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            WindowManager.ReloadPositions(p.CharacterClass);
+            SessionManager.CurrentPlayer.Class = p.CharacterClass;
+            WindowManager.ReloadPositions();
             if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!Settings.StatSent) App.SendUsageStat();
@@ -244,7 +245,6 @@ namespace TCC.Parsing
             TimeManager.Instance.SetGuildBamTime(false);
             SessionManager.InitDatabases(Settings.LastRegion);
             CooldownWindowViewModel.Instance.ClearSkills();
-            SessionManager.CurrentPlayer.Class = p.CharacterClass;
             if (Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
                 CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
@@ -322,12 +322,12 @@ namespace TCC.Parsing
         internal static void HandleActionStage(S_ACTION_STAGE x)
         {
             _st.Stop();
-            Console.WriteLine("- S_ACTION_STAGE -");
-            Console.WriteLine($"GameId: {x.GameId}");
-            Console.WriteLine($"Target: {x.Target}");
-            Console.WriteLine($"Id:     {x.Id}");
-            Console.WriteLine($"Speed:  {x.Speed * 1.1}");
-            Console.WriteLine($"Elaps:  {_st.ElapsedMilliseconds}");
+            //Console.WriteLine("- S_ACTION_STAGE -");
+            //Console.WriteLine($"GameId: {x.GameId}");
+            //Console.WriteLine($"Target: {x.Target}");
+            //Console.WriteLine($"Id:     {x.Id}");
+            //Console.WriteLine($"Speed:  {x.Speed * 1.1}");
+            //Console.WriteLine($"Elaps:  {_st.ElapsedMilliseconds}");
             _st.Restart();
         }
 
@@ -1040,7 +1040,7 @@ namespace TCC.Parsing
                 if (InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece))
                 {
                     var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
-                    Console.WriteLine($"Item: {i}");
+                    //Console.WriteLine($"Item: {i}");
                     InfoWindowViewModel.Instance.CurrentCharacter.Gear.Add(i);
                 }
             }

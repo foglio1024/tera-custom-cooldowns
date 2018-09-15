@@ -420,14 +420,14 @@ namespace TCC
             }
         }
 
-        public static void ReloadPositions(Class c)
+        public static void ReloadPositions()
         {
-            CooldownWindow.ReloadPosition(c);
-            ClassWindow.ReloadPosition(c);
-            CharacterWindow.ReloadPosition(c);
-            GroupWindow.ReloadPosition(c);
-            BuffWindow.ReloadPosition(c);
-            BossWindow.ReloadPosition(c);
+            CooldownWindow.ReloadPosition();
+            ClassWindow.ReloadPosition();
+            CharacterWindow.ReloadPosition();
+            GroupWindow.ReloadPosition();
+            BuffWindow.ReloadPosition();
+            BossWindow.ReloadPosition();
         }
 
         public static void MakeGlobal()

@@ -11,8 +11,6 @@ namespace TCC
 {
     public class WindowSettings : TSPropertyChanged
     {
-        private double _x;
-        private double _y;
         private double _w;
         private double _h;
         private bool _visible;
@@ -28,31 +26,45 @@ namespace TCC
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
 
+        public string Name { get; }
+
         public double X
         {
-            get => _x;
+            get
+            {
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common :  SessionManager.CurrentPlayer.Class ;
+                //if (Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Getting X {X} for class {cc}");
+
+                return Positions[cc].X;
+            }
             set
             {
-                _x = value;
-                var cc = SessionManager.CurrentPlayer != null ? SessionManager.CurrentPlayer.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class : Class.Common;
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                if (cc == Class.None) return;
                 var old = Positions[cc];
                 Positions[cc] = new Point(value, old.Y);
+                //if(Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Setting X to {value} for class {cc}");
                 NPC(nameof(X));
             }
         }
+
         public double Y
         {
-            get => _y;
+            get
+            {
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                return Positions[cc].Y;
+            }
             set
             {
-                _y = value;
-                var cc = SessionManager.CurrentPlayer != null ? SessionManager.CurrentPlayer.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class : Class.Common;
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                if (cc == Class.None) return;
                 var old = Positions[cc];
                 Positions[cc] = new Point(old.X, value);
-
                 NPC(nameof(Y));
             }
         }
+
         public double W
         {
             get => _w;
@@ -183,11 +195,10 @@ namespace TCC
 
         public Dictionary<Class, Point> Positions { get; set; }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null)
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null, string name = "")
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _x = x;
-            _y = y;
+            Name = name;
             _w = w;
             _h = h;
             _visible = visible;
@@ -217,14 +228,10 @@ namespace TCC
             };
         }
 
-
-
         public virtual XElement ToXElement(string name)
         {
             var xe = new XElement("WindowSetting");
             xe.Add(new XAttribute("Name", name));
-            xe.Add(new XAttribute(nameof(X), X));
-            xe.Add(new XAttribute(nameof(Y), Y));
             xe.Add(new XAttribute(nameof(W), W));
             xe.Add(new XAttribute(nameof(H), H));
             xe.Add(new XAttribute(nameof(Visible), Visible));
@@ -255,14 +262,11 @@ namespace TCC
 
         public void MakePositionsGlobal()
         {
-            var currentPos = Positions[SessionManager.CurrentPlayer.Class];
+            var currentPos = new Point(X, Y);
             for (int i = 0; i < 13; i++)
             {
-                Positions[(Class) i] = currentPos;
+                Positions[(Class)i] = currentPos;
             }
-
-            X = currentPos.X;
-            Y = currentPos.Y;
         }
     }
 

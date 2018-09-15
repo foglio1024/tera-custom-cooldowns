@@ -120,7 +120,7 @@ namespace TCC
 
             var positions = ParseWindowPositions(ws);
 
-            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen, positions);
+            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen, positions, ws.Attribute("Name").Value);
         }
         private static void ParseGroupAbnormalSettings(XElement el)
         {

@@ -32,12 +32,13 @@ namespace TCC.Windows
         {
 
         }
-        public void ReloadPosition(Class c)
+        public void ReloadPosition()
         {
             Dispatcher.Invoke(() =>
             {
-                Left = _settings.Positions[c].X * Settings.ScreenW;
-                Top = _settings.Positions[c].Y * Settings.ScreenH;
+                Left = _settings.X * Settings.ScreenW;
+                Top = _settings.Y * Settings.ScreenH;
+                //if(_settings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {_settings.Name}: {_settings.X}, {_settings.Y}");
                 CheckBounds();
             });
         }
@@ -47,7 +48,8 @@ namespace TCC.Windows
             {
                 Left = Screen.PrimaryScreen.Bounds.X + (Screen.PrimaryScreen.Bounds.Width / 2) - (ActualWidth / 2);
                 Top = Screen.PrimaryScreen.Bounds.Y + (Screen.PrimaryScreen.Bounds.Height / 2) - (ActualHeight / 2);
-                _settings.Positions[SessionManager.CurrentPlayer.Class] = new Point(Left / Settings.ScreenW, Top / Settings.ScreenH);
+                _settings.X = Left / Settings.ScreenW;
+                _settings.Y = Top / Settings.ScreenH;
             });
         }
         protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true)
