@@ -22,7 +22,7 @@ namespace TCC.Parsing.Messages
                 {
                     var current = reader.ReadUInt16();
                     var next = reader.ReadUInt16();
-
+                    reader.Skip(6);
                     var id = reader.ReadUInt32();
                     var name = reader.ReadTeraString();
                     var gm = reader.ReadTeraString();
