@@ -35,10 +35,10 @@ namespace TCC
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
-//#if DEBUG
-//            DebugWindow = new DebugWindow();
-//            DebugWindow.Show();
-//#endif
+            //#if DEBUG
+            //            DebugWindow = new DebugWindow();
+            //            DebugWindow.Show();
+            //#endif
 
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
@@ -88,6 +88,14 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
+            //var r = new Random();
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    WindowManager.CivilUnrestWindow.VM.AddGuild(new CityWarGuildInfo(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
+            //    WindowManager.CivilUnrestWindow.VM.SetGuildName((uint)i, "Guild " + i);
+            //    WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower((uint)r.Next(0, 29));
+
+            //}
 
             //ClassWindowViewModel.Instance.CurrentClass = Class.Priest;
             //EntitiesManager.SpawnNPC(920, 3000, 10, Visibility.Visible);
