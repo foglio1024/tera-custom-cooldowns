@@ -2,8 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
+using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
 {
@@ -61,8 +68,38 @@ namespace TCC.ViewModels
             get
             {
                 var ret = Utils.InitLiveView(p => p != null, _guilds, new string[] { },
-                    new[] { new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending) });
+                    new[]
+                    {
+                        new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
+                        new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending)
+                    });
                 return ret;
+            }
+        }
+        public void CopyToClipboard()
+        {
+            var sb = new StringBuilder("Civil Unrest temporary rank (top 5):\\");
+            var limit = 5;
+            limit = _guilds.Count > limit ? limit : _guilds.Count;
+            for (int i = 0; i < limit; i++)
+            {
+                var item =
+                    ((WindowManager.CivilUnrestWindow.GuildList.Items[i])) as CivilUnrestGuild;
+                sb.Append(item.Name);
+                sb.Append(" | ");
+                sb.Append($"HP: {item.TowerHp:##0%}");
+                sb.Append(" | ");
+                sb.Append($"Towers: {item.TowersDestroyed}");
+                sb.Append("\\");
+            }
+            try
+            {
+                Clipboard.SetText(sb.ToString());
+            }
+            catch
+            {
+                WindowManager.FloatingButton.NotifyExtended("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
+                ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
 
@@ -110,6 +147,7 @@ namespace TCC.ViewModels
 
         public void AddDestroyedGuildTower(uint id)
         {
+
             CivilUnrestGuild g = null;
             g = _guilds.FirstOrDefault(x => x.Id == id);
             if (g != null)
