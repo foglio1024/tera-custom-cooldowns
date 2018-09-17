@@ -29,11 +29,17 @@ namespace TCC.Windows
             this.DataContext = new CivilUnrestViewModel();
             Init(Settings.CivilUnrestWindowSettings, perClassPosition:false);
             VM.Teleported += OnTeleported;
+            ZoneBoundContent.Visibility = Visibility.Collapsed;
         }
 
         private void OnTeleported()
         {
             ZoneBoundContent.Visibility = VM.CuZone ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            VM.CopyToClipboard();
         }
     }
 }
