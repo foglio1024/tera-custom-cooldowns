@@ -10,49 +10,51 @@
         Title="CivilUnrestWindow" Height="Auto" 
         Style="{StaticResource BaseWindowStyle}"
         Loaded="OnLoaded"
-                 d:DataContext="{d:DesignInstance {x:Type vm:CivilUnrestViewModel}}" >
-<Grid x:Name="ZoneBoundContent">
+        d:DataContext="{d:DesignInstance {x:Type vm:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">
+    <Grid x:Name="ZoneBoundContent" >
 
-    <Grid Width="200" Margin="4" x:Name="content">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}"
+        <Grid Width="250" Margin="4" x:Name="content" Height="310
+          ">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}"
                 BorderThickness="1" Grid.RowSpan="2" Opacity=".5" >
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".7" />
                 </Border.Effect>
-        </Border>
-        <TextBlock Foreground="White" Effect="{StaticResource ClassIconGlow}" FontSize="16" Margin="6 3">Civil Unrest</TextBlock>
-        <ItemsControl ItemsSource="{Binding Guilds}" Grid.Row="1" Margin="5">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel>
-                    </StackPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="vm:CivilUnrestGuild">
-                    <Grid VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Height="26" Width="26" Margin="2" StrokeThickness="1" Stroke="#999">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding Id, Converter={StaticResource Converters.LogoInfoToImage}}" ></ImageBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="{Binding Name}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" Margin="5 0" TextTrimming="CharacterEllipsis"/>
-                        <TextBlock Text="{Binding TowerHp, StringFormat={}{0:0.#%}}" Foreground="#aaa" Grid.Column="3" VerticalAlignment="Center" Margin="6 0"/>
-                        <TextBlock Text="{Binding TowersDestroyed}" Foreground="White" Grid.Column="2" VerticalAlignment="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </Border>
+            <Rectangle Fill="#1000"></Rectangle>
+            <TextBlock Foreground="White" Effect="{StaticResource ClassIconGlow}" FontSize="16" Margin="11 7 0 7">Civil Unrest</TextBlock>
+            <ListBox x:Name="GuildList" ItemsSource="{Binding Guilds}" Grid.Row="1" Margin="0 0 0 5" Background="Transparent" 
+                     IsHitTestVisible="True" BorderThickness="0"
+                     ItemContainerStyle="{StaticResource DefaultListItemStyle}">
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
+                </ListBox.Resources>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="vm:CivilUnrestGuild">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Height="26" Width="26" Margin="2" StrokeThickness="1" Stroke="#999">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Id, Converter={StaticResource Converters.LogoInfoToImage}}" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock Text="{Binding Name}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" Margin="5 0" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{Binding TowerHp, StringFormat={}{0:0.#%}}" Foreground="#aaa" Grid.Column="2" VerticalAlignment="Center" Margin="0" TextAlignment="Right" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding TowersDestroyed}" Foreground="White" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right" Margin="6 0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
-</Grid>
 </local:TccWidget>
