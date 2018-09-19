@@ -70,7 +70,7 @@ namespace TCC
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
 
-            SplashScreen.SetText("Initializing Twitch connector...");
+            //SplashScreen.SetText("Initializing Twitch connector...");
             //TwitchConnector.Instance.Init();
 
             SplashScreen.SetText("Initializing packet processor...");
@@ -78,7 +78,7 @@ namespace TCC
             TeraSniffer.Instance.NewConnection += TeraSniffer_OnNewConnection;
             TeraSniffer.Instance.EndConnection += TeraSniffer_OnEndConnection;
             TeraSniffer.Instance.Enabled = true;
-
+            WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
             SplashScreen.SetText("Starting");
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
