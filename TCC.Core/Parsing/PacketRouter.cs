@@ -1206,5 +1206,25 @@ namespace TCC.Parsing
 
             }
         }
+
+        public static void HandleViewWareEx(S_VIEW_WARE_EX p)
+        {
+            foreach (var page in S_VIEW_WARE_EX.Pages)
+            {
+                if (page.Index + 1 == S_VIEW_WARE_EX.Pages.Count) break;
+                for (var i = page.Index+1; i < 8; i++)
+                {
+                    var pg = S_VIEW_WARE_EX.Pages[(int)i];
+                    foreach (var item in page.Items)
+                    {
+                        if (pg.Items.Any(x => x.Id == item.Id))
+                        {
+                            var name = SessionManager.ItemsDatabase.GetItemName((uint) item.Id);
+                            Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index+1}) in page {i+1}");
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -89,6 +89,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
@@ -1726,6 +1728,7 @@
     <Resource Include="resources\images\combat.png" />
     <None Include="resources\data\monsters\monsters-EU-EN.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="resources\data\monsters\monsters-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
