@@ -62,8 +62,8 @@ namespace TCC.ViewModels
             get
             {
                 _bams = Utils.InitLiveView(p => ((Npc)p).IsBoss && !((Npc)p).IsTower, _npcList, new string[] { },
-                    new[] { new SortDescription("Visible", ListSortDirection.Ascending),
-                        new SortDescription("CurrentHP", ListSortDirection.Ascending) });
+                    new[] { new SortDescription(nameof(Npc.Visible), ListSortDirection.Ascending),
+                        new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) });
                 //_bams = new CollectionViewSource { Source = _npcList }.View;
                 //_bams.Filter = p => ((Npc)p).IsBoss && !((Npc)p).IsTower;
                 return _bams;
@@ -174,12 +174,16 @@ namespace TCC.ViewModels
             _dispatcher.Invoke(() =>
             {
                 if (_cache.Count == 0) return;
-                //ChatWindowManager.Instance.AddTccMessage($"Flushing {_cache.Count} updates to UI");
-                foreach (var hpc in _cache.ToList())
+                try
                 {
-                    SetHpFromCache(hpc.Key, hpc.Value);
+                    foreach (var hpc in _cache.ToList())
+                    {
+                        SetHpFromCache(hpc.Key, hpc.Value);
+                    }
                 }
-
+                catch (Exception exception)
+                {
+                }
                 _cache.Clear();
             });
         }
@@ -308,6 +312,20 @@ namespace TCC.ViewModels
         private static void SetEnragePattern(Npc n)
         {
             if (n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(14, 50);
+            if (n.ZoneId == 950 && !n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(0, 0);
+            if (n.ZoneId == 450)
+            {
+                if (n.TemplateId == 1003) n.EnragePattern = new EnragePattern((long)n.MaxHP, 600000000, 112);
+            }
+
+            if (n.ZoneId == 620 && n.TemplateId == 1000) n.EnragePattern = new EnragePattern((long)n.MaxHP, 420000000, 36);
+            if (n.ZoneId == 622 && n.TemplateId == 1000) n.EnragePattern = new EnragePattern((long)n.MaxHP, 480000000, 36);
+            if (n.ZoneId == 628)
+            {
+                if (n.TemplateId == 1000) n.EnragePattern = new EnragePattern(0, 0);
+                if (n.TemplateId == 3000) n.EnragePattern = new EnragePattern(10, 36);
+                if (n.TemplateId == 3001) n.EnragePattern = new EnragePattern(10, 36);
+            }
         }
 
 

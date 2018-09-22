@@ -4,10 +4,20 @@
     {
         public double Percentage { get; set; }
         public int Duration { get; set; }
-        public EnragePattern(double p, int d)
+        public EnragePattern()
         {
-            Percentage = p;
-            Duration = d;
+            Percentage = 10;
+            Duration = 36;
+        }
+        public EnragePattern(double percentage, int duration)
+        {
+            Percentage = percentage;
+            Duration = duration;
+        }
+        public EnragePattern(long maxHp, long flatHp, int duration)
+        {
+            Duration = duration;
+            Percentage = (flatHp / (float)maxHp) * 100;
         }
     }
 }

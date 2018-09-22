@@ -448,7 +448,7 @@ namespace TCC.Controls
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // ReSharper disable once PossibleNullReferenceException
-            return (bool)value ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.DodgerBlue);
+            return (bool)value ? App.Current.FindResource("HpColor") : new SolidColorBrush(Colors.DodgerBlue);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
