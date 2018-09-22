@@ -31,6 +31,11 @@ namespace TCC.Data.Databases
                 var item = new Item(id, name, grad, expId, cd, icon);
                 Items.Add(id, item);
             }
+
+            // Manual fix for bugged EU HP pot from HH
+            var euBuggedReju = new Item(149644, "Harrowhold Rejuvenation Potion", 1, 0, 30, "icon_items.potion1_tex");
+            if (!Items.ContainsKey(euBuggedReju.Id)) Items.Add(euBuggedReju.Id, euBuggedReju);
+
             var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/equip_exp/equip_exp-{lang}.xml");
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
