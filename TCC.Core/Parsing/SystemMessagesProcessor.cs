@@ -15,7 +15,8 @@ namespace TCC.Parsing
             "SMT_ABANDON_DIVIDE_DICE_PARTYPLAYER",
             "SMT_JOIN_DIVIDE_DICE_PATYPLAYER",
             "SMT_ABANDON_DIVIDE_DICE",
-            "SMT_JOIN_DIVIDE_DICE"
+            "SMT_JOIN_DIVIDE_DICE",
+            "SMT_INCREASE_SKILL_PROF_MORE"
         };
 
         private static bool Filter(string opcodeName)
