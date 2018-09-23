@@ -185,7 +185,7 @@
 
                     </Image>
                 </Grid>
-                <Grid Grid.Row="0" Name="BossNameGrid" Grid.Column="1"  Margin="0 0 0 -11">
+                <Grid Grid.Row="0" Name="BossNameGrid" Grid.Column="1"  Margin="0 0 0 -11" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -197,7 +197,11 @@
                                VerticalAlignment="Center" 
                                FontSize="18" 
                                Text="{Binding Name}" 
-                               Grid.Row="0"/>
+                               Grid.Row="0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
                     <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}"
                              VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
                                  Grid.Column="1" RenderTransformOrigin=".5,.5">
@@ -212,7 +216,11 @@
                                FontStretch="Condensed" 
                                FontSize="13" 
                                Text="{Binding Target, Converter={StaticResource Converters.EntityIdToName}}" 
-                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
+                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
 
                 </Grid>
                 <Grid Margin="9 2 0 2" Name="TopInfoGrid"  Grid.Row="1" Grid.Column="1" UseLayoutRounding="True" >
@@ -328,9 +336,18 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
-                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" 
-                                Margin="-14,-2,0,-2" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" 
-                                VerticalAlignment="Top" Grid.Row="0" Visibility="Visible">
+                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity=".8" Name="NextEnrage" 
+                                Margin="-14,0,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" 
+                                VerticalAlignment="Center" Grid.Row="0"  UseLayoutRounding="True">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Enraged}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
                         <StackPanel.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -339,8 +356,7 @@
                                 <TranslateTransform X="0"/>
                             </TransformGroup>
                         </StackPanel.RenderTransform>
-                        <Border Background="White" Width="8" Height="8" CornerRadius="0" 
-                                Effect="{StaticResource DropShadow}" Margin="0,1,0,0"/>
+                        <Border Background="White" Width="2" Height="8" CornerRadius="0" Margin="0,0,0,0"/>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                         <FrameworkElement Width="{Binding ElementName=HpBarGrid, Path=ActualWidth}" Name="DotPusher">
