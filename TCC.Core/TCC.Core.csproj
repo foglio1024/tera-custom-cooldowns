@@ -776,7 +776,6 @@
     <Compile Include="Controls\Arc.cs" />
     <Compile Include="Data\Character.cs" />
     <Compile Include="Data\Enums.cs" />
-    <Compile Include="Data\Databases\ItemSkillsDatabase.cs" />
     <Compile Include="FocusManager.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />
