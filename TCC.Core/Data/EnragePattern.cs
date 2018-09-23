@@ -1,7 +1,11 @@
-﻿namespace TCC.Data
+﻿using System;
+
+namespace TCC.Data
 {
     public class EnragePattern
     {
+        private readonly float _flatHp;
+
         public double Percentage { get; set; }
         public int Duration { get; set; }
         public EnragePattern()
@@ -17,7 +21,14 @@
         public EnragePattern(long maxHp, long flatHp, int duration)
         {
             Duration = duration;
-            Percentage = (flatHp / (float)maxHp) * 100;
+            _flatHp = flatHp;
+            Update(maxHp);
+        }
+
+
+        internal void Update(float maxHp)
+        {
+            Percentage = (_flatHp / (float)maxHp) * 100;
         }
     }
 }

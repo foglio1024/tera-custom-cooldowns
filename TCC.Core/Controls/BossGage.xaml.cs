@@ -189,6 +189,7 @@ namespace TCC.Controls
                     break;
                 case "MaxHP":
                     _maxHp = ((Npc)sender).MaxHP;
+                    if(Npc.CurrentFactor == 1) NextEnragePercentage = 100 - Npc.EnragePattern.Percentage;
                     break;
                 case "Enraged":
                     var value = ((Npc)sender).Enraged;

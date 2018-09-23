@@ -61,6 +61,7 @@ namespace TCC.Data
                 if (_maxHP != value)
                 {
                     _maxHP = value;
+                    EnragePattern.Update(value);
                     NPC("MaxHP");
                 }
             }
