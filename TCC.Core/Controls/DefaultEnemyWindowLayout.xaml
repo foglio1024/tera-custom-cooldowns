@@ -30,7 +30,8 @@
                       ItemTemplate="{StaticResource MobDataTemplate}"
                       ItemsSource="{Binding Instance.Mobs}"
                       Width="Auto"
-                      HorizontalAlignment="Left">
+                      HorizontalAlignment="Left" 
+                      Margin="5 0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" 

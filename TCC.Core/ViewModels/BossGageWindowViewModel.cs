@@ -23,7 +23,6 @@ namespace TCC.ViewModels
 
         private Npc _selectedDragon;
         private Npc _vergos;
-        private SynchronizedObservableCollection<Npc> _npcList;
 
         private readonly DispatcherTimer _flushTimer;
 
@@ -31,20 +30,21 @@ namespace TCC.ViewModels
         private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
         private readonly Dictionary<ulong, float> _savedHp = new Dictionary<ulong, float>();
 
-        private event Action NpcListChanged;
+        public event Action NpcListChanged;
 
         private void AddSortedDragons()
         {
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1102));
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1100));
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1101));
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1103));
+            NpcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1102));
+            NpcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1100));
+            NpcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1101));
+            NpcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1103));
             _holdedDragons.Clear();
         }
 
         //public bool IsTeraOnTop => WindowManager.IsTccVisible;
 
         public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible && x.CurrentHP > 0);
+        public int VisibleMobsCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible && x.CurrentHP > 0 && !x.IsBoss);
 
         public HarrowholdPhase CurrentHHphase
         {
@@ -61,7 +61,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _bams = Utils.InitLiveView(p => ((Npc)p).IsBoss && !((Npc)p).IsTower, _npcList, new string[] { },
+                _bams = Utils.InitLiveView(p => ((Npc)p).IsBoss && !((Npc)p).IsTower, NpcList, new string[] { },
                     new[] { new SortDescription(nameof(Npc.Visible), ListSortDirection.Ascending),
                         new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) });
                 //_bams = new CollectionViewSource { Source = _npcList }.View;
@@ -73,7 +73,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _mobs = new CollectionViewSource { Source = _npcList }.View;
+                _mobs = new CollectionViewSource { Source = NpcList }.View;
                 _mobs.Filter = p => !((Npc)p).IsBoss && !((Npc)p).IsTower;
                 return _mobs;
             }
@@ -82,7 +82,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _guildTowers = new CollectionViewSource { Source = _npcList }.View;
+                _guildTowers = new CollectionViewSource { Source = NpcList }.View;
                 _guildTowers.Filter = p => ((Npc)p).IsTower;
                 return _guildTowers;
             }
@@ -91,7 +91,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _dragons = new CollectionViewSource { Source = _npcList }.View;
+                _dragons = new CollectionViewSource { Source = NpcList }.View;
                 _dragons.Filter = p => ((Npc)p).TemplateId > 1099 && ((Npc)p).TemplateId < 1104;
                 return _dragons;
             }
@@ -116,25 +116,15 @@ namespace TCC.ViewModels
                 NPC(nameof(Vergos));
             }
         }
-        public SynchronizedObservableCollection<Npc> NpcList
-        {
-            get
-            {
-                return _npcList;
-            }
-            set
-            {
-                if (_npcList == value) return;
-                _npcList = value;
-            }
-        }
+        public SynchronizedObservableCollection<Npc> NpcList { get; set; }
+
         public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
         public Dictionary<ulong, uint> GuildIds { get; private set; }
 
         public BossGageWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _npcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
+            NpcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
             _cache = new Dictionary<ulong, float>();
             _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
             _flushTimer.Tick += FlushCache;
@@ -155,15 +145,12 @@ namespace TCC.ViewModels
         private void OnNpcCollectionChanged()
         {
             var caching = IsCaching;
-            //var count = VisibleBossesCount;
-            //ChatWindowManager.Instance.AddTccMessage($"HP caching " + (caching ? "on" : "off") + $", visible NPCs: {count}");
             if (caching && !_flushTimer.IsEnabled)
             {
                 _flushTimer.Start();
             }
             else if (!caching && _flushTimer.IsEnabled)
             {
-
                 _flushTimer.Stop();
                 FlushCache(null, null);
             }
@@ -195,6 +182,7 @@ namespace TCC.ViewModels
         }
 
         private bool IsCaching => VisibleBossesCount > 1;
+        public bool IsCompact => VisibleMobsCount > 6;
 
         private Npc AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, Visibility visibility)
         {
