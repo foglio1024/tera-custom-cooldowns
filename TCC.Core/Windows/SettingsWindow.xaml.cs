@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.ViewModels;
 
@@ -41,7 +42,11 @@ namespace TCC.Windows
         public void HideWindow()
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
-            a.Completed += (s, ev) => Hide();
+            a.Completed += (s, ev) =>
+            {
+                Hide();
+                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            };
             BeginAnimation(OpacityProperty, a);
             WindowManager.ForegroundManager.RefreshVisible();
 
@@ -69,6 +74,8 @@ namespace TCC.Windows
         }
         public void ShowWindow()
         {
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+
             Opacity = 0;
             Activate();
             Show();

@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
@@ -32,13 +34,14 @@ namespace TCC.Windows
 
         private void OnShowAllChanged()
         {
-            var an = new DoubleAnimation(DC.ShowAll? .2 : 1, TimeSpan.FromMilliseconds(200));
+            var an = new DoubleAnimation(DC.ShowAll ? .2 : 1, TimeSpan.FromMilliseconds(200));
             MainGrid.BeginAnimation(OpacityProperty, an);
             MainGrid.IsHitTestVisible = !DC.ShowAll;
         }
 
         public void ShowWindow()
         {
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
@@ -66,7 +69,12 @@ namespace TCC.Windows
         private void Close(object sender, RoutedEventArgs e)
         {
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
-            an.Completed += (s, ev) => Hide();
+            an.Completed += (s, ev) =>
+            {
+                Hide();
+                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
+            };
             BeginAnimation(OpacityProperty, an);
             SettingsWriter.Save();
         }

@@ -106,13 +106,19 @@ namespace TCC.Windows
             Dispatcher.InvokeIfRequired(() =>
             {
                 var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-                a.Completed += (s, ev) => { Hide(); };
+                a.Completed += (s, ev) =>
+                {
+                    Hide();
+                    if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
+                };
                 BeginAnimation(OpacityProperty, a);
             }, DispatcherPriority.DataBind);
         }
 
         internal void ShowWindow()
         {
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));

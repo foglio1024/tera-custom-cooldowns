@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.ViewModels;
 
@@ -49,6 +50,8 @@ namespace TCC.Windows
         }
         internal void ShowWindow()
         {
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+
             Dispatcher.Invoke(() =>
             {
                 Topmost = false; Topmost = true;
@@ -62,7 +65,13 @@ namespace TCC.Windows
         public void HideWindow()
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
+            a.Completed += (s, ev) =>
+            {
+
+                Hide(); InfoWindowViewModel.Instance.SaveToFile();
+                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
+            };
             BeginAnimation(OpacityProperty, a);
         }
     }
