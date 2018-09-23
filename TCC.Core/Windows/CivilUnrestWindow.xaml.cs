@@ -34,7 +34,7 @@ namespace TCC.Windows
 
         private void OnTeleported()
         {
-            ZoneBoundContent.Visibility = VM.CuZone ? Visibility.Visible : Visibility.Collapsed;
+            ZoneBoundContent.Visibility = SessionManager.CivilUnrestZone ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

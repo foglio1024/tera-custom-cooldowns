@@ -103,17 +103,6 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool CuZone
-        {
-            get => _cuZone;
-            set
-            {
-                if (_cuZone == value) return;
-                _cuZone = value;
-                _dispatcher.Invoke(Teleported);
-            }
-        }
-
         public CivilUnrestViewModel()
         {
             _dispatcher = App.BaseDispatcher;
@@ -147,13 +136,17 @@ namespace TCC.ViewModels
 
         public void AddDestroyedGuildTower(uint id)
         {
-
             CivilUnrestGuild g = null;
             g = _guilds.FirstOrDefault(x => x.Id == id);
             if (g != null)
             {
                 g.TowersDestroyed++;
             }
+        }
+
+        public void NotifyTeleported()
+        {
+            _dispatcher.Invoke(Teleported);
         }
     }
 }

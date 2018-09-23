@@ -13,8 +13,7 @@
         d:DataContext="{d:DesignInstance {x:Type vm:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">
     <Grid x:Name="ZoneBoundContent" >
 
-        <Grid Width="250" Margin="4" x:Name="content" Height="310
-          ">
+        <Grid Width="250" Margin="4" x:Name="content" Height="310">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -28,7 +27,7 @@
             <Rectangle Fill="#1000"></Rectangle>
             <TextBlock Foreground="White" Effect="{StaticResource ClassIconGlow}" FontSize="16" Margin="11 7 0 7">Civil Unrest</TextBlock>
             <ListBox x:Name="GuildList" ItemsSource="{Binding Guilds}" Grid.Row="1" Margin="0 0 0 5" Background="Transparent" 
-                     IsHitTestVisible="True" BorderThickness="0"
+                     IsHitTestVisible="True" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ItemContainerStyle="{StaticResource DefaultListItemStyle}">
                 <ListBox.Resources>
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>

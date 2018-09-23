@@ -101,6 +101,7 @@ namespace TCC
         public static AbnormalityDatabase AbnormalityDatabase { get; private set; }
         public static DungeonDatabase DungeonDatabase { get; private set; }
         public static SocialDatabase SocialDatabase { get; private set; }
+        public static bool CivilUnrestZone { get; internal set; }
 
         public static void SetCombatStatus(ulong target, bool combat)
         {
