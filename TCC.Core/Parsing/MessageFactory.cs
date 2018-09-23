@@ -134,7 +134,6 @@ namespace TCC.Parsing
             {typeof(S_INVEN),                                  new Action<S_INVEN>(PacketProcessor.HandleInventory) },
             {typeof(S_SPAWN_USER),                             new Action<S_SPAWN_USER>(PacketProcessor.HandleSpawnUser) },
             {typeof(S_DESPAWN_USER),                           new Action<S_DESPAWN_USER>(PacketProcessor.HandleDespawnUser) },
-            {typeof(S_PARTY_MEMBER_INTERVAL_POS_UPDATE),       new Action<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(PacketProcessor.HandlePartyMemberIntervalPosUpdate) },
             {typeof(S_ABNORMALITY_DAMAGE_ABSORB),              new Action<S_ABNORMALITY_DAMAGE_ABSORB>(PacketProcessor.HandleShieldDamageAbsorb) },
             {typeof(S_IMAGE_DATA),                             new Action<S_IMAGE_DATA>(PacketProcessor.HandleImageData) },
             {typeof(S_GET_USER_GUILD_LOGO),                    new Action<S_GET_USER_GUILD_LOGO>(PacketProcessor.HandleUserGuildLogo) },
@@ -148,6 +147,11 @@ namespace TCC.Parsing
             {typeof(S_VIEW_WARE_EX),                           new Action<S_VIEW_WARE_EX>(PacketProcessor.HandleViewWareEx) },
           //{typeof(S_ACTION_STAGE),                           new Action<S_ACTION_STAGE>(x => PacketProcessor.HandleActionStage(x)) }, //nvm
           //{typeof(C_LOAD_TOPO_FIN),                          new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
+        };
+
+        private static readonly Dictionary<Type, Delegate> PartyMemberPosition = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_PARTY_MEMBER_INTERVAL_POS_UPDATE),       new Action<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(PacketProcessor.HandlePartyMemberIntervalPosUpdate)},
         };
         private static readonly Dictionary<Type, Delegate> AccurateHp = new Dictionary<Type, Delegate>
         {
@@ -280,6 +284,7 @@ namespace TCC.Parsing
             if (Settings.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (Settings.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (!SessionManager.CivilUnrestZone) PartyMemberPosition.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {

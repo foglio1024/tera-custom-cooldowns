@@ -95,7 +95,11 @@ namespace TCC.Parsing
                 //_sw.Stop();
                 //Console.WriteLine($"Creating {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
                 //_sw.Restart();
-                if (Factory.Process(message)) _processed++;
+                if (Factory.Process(message))
+                {
+                    //_processed++;
+                    Console.WriteLine($"Processed {message.OpCodeName}");
+                }
                 //_sw.Stop();
                 // Console.WriteLine($"Processing {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
                 //_sw.Reset();
@@ -372,13 +376,9 @@ namespace TCC.Parsing
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
-            if (!Settings.CivilUnrestWindowSettings.Enabled) return;
-            if (x.Zone == 152) WindowManager.CivilUnrestWindow.VM.CuZone = true;
-            else WindowManager.CivilUnrestWindow.VM.CuZone = false;
-        }
-        public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
-        {
-            //SessionManager.LoadingScreen = false;
+            SessionManager.CivilUnrestZone = x.Zone == 152;
+            if (Settings.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
+            //MessageFactory.Update(); already in CurrentHHphase set
         }
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
@@ -768,8 +768,6 @@ namespace TCC.Parsing
         {
             EntitiesManager.DespawnNPC(p.Target, p.Type);
         }
-
-
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DepawnUser(p.EntityId);
@@ -777,159 +775,33 @@ namespace TCC.Parsing
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (!AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks)) return;
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
-            //switch (SessionManager.CurrentPlayer.Class)
-            //{
-            //    case Class.Mystic:
-            //        Mystic.CheckAbnormality(p);
-            //        break;
-            //    case Class.Warrior:
-            //        Warrior.CheckAbnormality(p);
-            //        break;
-            //    case Class.Valkyrie:
-            //        Valkyrie.CheckAbnormality(p);
-            //        break;
-            //    case Class.Archer:
-            //        Archer.CheckAbnormality(p);
-            //        break;
-            //    case Class.Lancer:
-            //        LancerAbnormalityTracker.CheckAbnormality(p);
-            //        break;
-            //    case Class.Priest:
-            //        Priest.CheckAbnormality(p);
-            //        break;
-            //    case Class.Brawler:
-            //        Brawler.CheckAbnormality(p);
-            //        break;
-            //    case Class.Ninja:
-            //        Ninja.CheckAbnormality(p);
-            //        break;
-            //    case Class.Sorcerer:
-            //        Sorcerer.CheckBuff(p);
-            //        break;
-            //    case Class.Reaper:
-            //        Reaper.CheckBuff(p);
-            //        break;
-            //    case Class.Slayer:
-            //        Slayer.CheckBuff(p);
-            //        break;
-            //    case Class.Berserker:
-            //        Berserker.CheckBuff(p);
-            //        Berserker.CheckUnleashAbnormals(p);
-            //        break;
-
-            //}
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
-
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                FlyingGuardianDataProvider.HandleAbnormal(p);
+            if(!AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks)) return;
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
-            //switch (SessionManager.CurrentPlayer.Class)
-            //{
-            //    case Class.Warrior:
-            //        Warrior.CheckAbnormality(p);
-            //        break;
-            //    case Class.Archer:
-            //        Archer.CheckAbnormality(p);
-            //        break;
-            //    case Class.Lancer:
-            //        LancerAbnormalityTracker.CheckAbnormality(p);
-            //        break;
-            //    case Class.Priest:
-            //        Priest.CheckAbnormality(p);
-            //        break;
-            //    case Class.Mystic:
-            //        Mystic.CheckAbnormality(p);
-            //        break;
-            //    case Class.Sorcerer:
-            //        Sorcerer.CheckBuff(p);
-            //        break;
-            //    case Class.Reaper:
-            //        Reaper.CheckBuff(p);
-            //        break;
-            //    case Class.Slayer:
-            //        Slayer.CheckBuff(p);
-            //        break;
-            //    case Class.Berserker:
-            //        Berserker.CheckBuff(p);
-            //        Berserker.CheckUnleashAbnormals(p);
-            //        break;
-            //    case Class.Brawler:
-            //        Brawler.CheckAbnormality(p);
-            //        break;
-
-
-            //}
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId);
-
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                FlyingGuardianDataProvider.HandleAbnormal(p);
+            if(!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
-
-            //switch (SessionManager.CurrentPlayer.Class)
-            //{
-            //    case Class.Archer:
-            //        Archer.CheckAbnormality(p);
-            //        break;
-            //    case Class.Warrior: 
-            //        Warrior.CheckAbnormality(p);
-            //        break;
-            //    case Class.Lancer:
-            //        LancerAbnormalityTracker.CheckAbnormality(p);
-            //        break;
-            //    case Class.Mystic:
-            //        Mystic.CheckAbnormality(p);
-            //        break;
-            //    case Class.Brawler:
-            //        Brawler.CheckAbnormality(p);
-            //        break;
-            //    case Class.Ninja:
-            //        Ninja.CheckAbnormality(p);
-            //        break;
-            //    case Class.Priest:
-            //        Priest.CheckAbnormality(p);
-            //        break;
-            //    case Class.Sorcerer:
-            //        Sorcerer.CheckBuffEnd(p);
-            //        break;
-            //    case Class.Reaper:
-            //        Reaper.CheckBuffEnd(p);
-            //        break;
-            //    case Class.Slayer:
-            //        Slayer.CheckBuffEnd(p);
-            //        break;
-            //    case Class.Berserker:
-            //        Berserker.CheckBuffEnd(p);
-            //        Berserker.CheckUnleashAbnormals(p);
-            //        break;
-            //    case Class.Valkyrie:
-            //        Valkyrie.CheckAbnormality(p);
-            //        break;
-            //}
         }
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
-            if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1)
-            {
-                BossGageWindowViewModel.Instance.SelectDragon(EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y)));
-
-            }
+            if (BossGageWindowViewModel.Instance.CurrentHHphase != HarrowholdPhase.Phase1) return;
+            BossGageWindowViewModel.Instance.SelectDragon(EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y)));
         }
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
