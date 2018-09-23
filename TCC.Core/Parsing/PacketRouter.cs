@@ -95,11 +95,12 @@ namespace TCC.Parsing
                 //_sw.Stop();
                 //Console.WriteLine($"Creating {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
                 //_sw.Restart();
-                if (Factory.Process(message))
-                {
-                    //_processed++;
-                    Console.WriteLine($"Processed {message.OpCodeName}");
-                }
+                //if (
+                Factory.Process(message);
+                //)
+                //{
+                //Console.WriteLine($"Processed {message.OpCodeName}");
+                //}
                 //_sw.Stop();
                 // Console.WriteLine($"Processing {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
                 //_sw.Reset();
