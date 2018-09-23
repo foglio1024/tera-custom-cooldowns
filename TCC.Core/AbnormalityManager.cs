@@ -7,44 +7,39 @@ namespace TCC
 {
     public static class AbnormalityManager
     {
-        public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
+        public static bool BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
-            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
+            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (!Filter(ab)) return false;
+            if (duration == int.MaxValue) ab.Infinity = true;
+            if (target == SessionManager.CurrentPlayer.EntityId)
             {
-                if (!Filter(ab)) return;
-                if (duration == int.MaxValue) ab.Infinity = true;
-                if (target == SessionManager.CurrentPlayer.EntityId)
+                BeginPlayerAbnormality(ab, stacks, duration);
+                if (!Settings.DisablePartyAbnormals)
                 {
-                    BeginPlayerAbnormality(ab, stacks, duration);
-                    if (Settings.DisablePartyAbnormals) return;
-                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
-                }
-                else
-                {
-                    BeginNpcAbnormality(ab, stacks, duration, target);
+                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(
+                        ab,
+                        stacks,
+                        duration,
+                        SessionManager.CurrentPlayer.PlayerId,
+                        SessionManager.CurrentPlayer.ServerId
+                    );
                 }
             }
+            else
+            {
+                BeginNpcAbnormality(ab, stacks, duration, target);
+            }
+
+            return true;
         }
-        public static void EndAbnormality(ulong target, uint id)
+        public static bool EndAbnormality(ulong target, uint id)
         {
-            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
-            {
-                if (target == SessionManager.CurrentPlayer.EntityId)
-                {
-                    EndPlayerAbnormality(ab);
-                    GroupWindowViewModel.Instance.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (target == SessionManager.CurrentPlayer.EntityId) EndPlayerAbnormality(ab);
+            else BossGageWindowViewModel.Instance.EndNpcAbnormality(target, ab);
 
-                }
-                //else if (EntitiesManager.TryGetBossById(target, out Npc b))
-                //{
-                //    b.EndBuff(ab);
-                //}
-                else
-                {
-                    BossGageWindowViewModel.Instance.EndNpcAbnormality(target, ab);
-                }
-            }
-
+            return true;
         }
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
@@ -58,7 +53,7 @@ namespace TCC
                 else
                 {
                     BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks);
-                    if(ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
+                    if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
@@ -71,7 +66,7 @@ namespace TCC
 
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (PassivityDatabase.Passivities.Contains(ab.Id) )
+            if (PassivityDatabase.Passivities.Contains(ab.Id))
             {
                 SkillManager.AddPassivitySkill(ab.Id, 60);
             }
@@ -80,12 +75,14 @@ namespace TCC
 
             {
                 //TODO: can't do this correctly since we don't know passivity cooldown from database so we just add duration
-                SkillManager.AddPassivitySkill(ab.Id, duration/1000);
+                SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
             }
         }
 
         private static void EndPlayerAbnormality(Abnormality ab)
         {
+            GroupWindowViewModel.Instance.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
@@ -94,18 +91,18 @@ namespace TCC
                 }
                 else
                 {
-
                     BuffBarWindowViewModel.Instance.Player.RemoveBuff(ab);
-                    if (ab.IsShield) SessionManager.SetPlayerShield(0);
-                    if (ab.IsShield) SessionManager.SetPlayerMaxShield(0);
-
+                    if (ab.IsShield)
+                    {
+                        SessionManager.SetPlayerShield(0);
+                        SessionManager.SetPlayerMaxShield(0);
+                    }
                 }
             }
             else
             {
                 BuffBarWindowViewModel.Instance.Player.RemoveDebuff(ab);
                 CharacterWindowViewModel.Instance.Player.RemoveFromDebuffList(ab);
-                //ClassManager.SetStatus(ab, false);
             }
         }
 
@@ -120,27 +117,28 @@ namespace TCC
 
         private static bool Filter(Abnormality ab)
         {
-            if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return false;
-            if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return false;
-            return true;
+            return ab.IsShow &&
+                   !ab.Name.Contains("BTS") && 
+                   !ab.ToolTip.Contains("BTS") && 
+                   (
+                   !ab.Name.Contains("(Hidden)") && 
+                   !ab.Name.Equals("Unknown") && 
+                   !ab.Name.Equals(string.Empty)
+                   );
         }
 
         public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
-            {
-                if (!Filter(ab)) return;
-                GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
-            }
+            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!Filter(ab)) return;
+            GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
         }
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
-            {
-                if (!Filter(ab)) return;
-                GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);
-            }
+            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!Filter(ab)) return;
+            GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);
         }
     }
 }
