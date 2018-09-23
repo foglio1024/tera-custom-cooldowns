@@ -12,11 +12,13 @@ namespace TCC.Data
         {
             Percentage = 10;
             Duration = 36;
+            _flatHp = -1;
         }
         public EnragePattern(double percentage, int duration)
         {
             Percentage = percentage;
             Duration = duration;
+            _flatHp = -1;
         }
         public EnragePattern(long maxHp, long flatHp, int duration)
         {
@@ -28,6 +30,7 @@ namespace TCC.Data
 
         internal void Update(float maxHp)
         {
+            if (_flatHp == -1) return;
             Percentage = (_flatHp / (float)maxHp) * 100;
         }
     }
