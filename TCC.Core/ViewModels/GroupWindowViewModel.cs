@@ -294,17 +294,6 @@ namespace TCC.ViewModels
             me.ClearAbnormalities();
             Members.Remove(me);
         }
-        public void ClearAllBuffs()
-        {
-            foreach (var x in Members.ToSyncArray())
-            {
-                foreach (var b in x.Buffs.ToSyncArray())
-                {
-                    b.Dispose();
-                }
-                x.Buffs.Clear();
-            }
-        }
         internal void ClearAllAbnormalities()
         {
             foreach (var x in Members.ToSyncArray())
@@ -420,30 +409,28 @@ namespace TCC.ViewModels
         public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
             var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (u != null)
-            {
-                u.CurrentHp = p.CurrentHP;
-                u.CurrentMp = p.CurrentMP;
-                u.MaxHp = p.MaxHP;
-                u.MaxMp = p.MaxMP;
-                u.Level = (uint)p.Level;
-                u.Alive = p.Alive;
-                NPC(nameof(AliveCount));
-                if (!p.Alive) u.HasAggro = false;
-            }
+            if (u == null) return;
+            u.CurrentHp = p.CurrentHP;
+            u.CurrentMp = p.CurrentMP;
+            u.MaxHp = p.MaxHP;
+            u.MaxMp = p.MaxMP;
+            u.Level = (uint)p.Level;
+            u.Alive = p.Alive;
+            NPC(nameof(AliveCount));
+            if (!p.Alive) u.HasAggro = false;
         }
         public void NotifyThresholdChanged()
         {
             NPC(nameof(Size));
         }
-        public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
+        public void UpdateMemberGear(S_SPAWN_USER p)
         {
-            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == sSpawnUser.PlayerId && x.ServerId == sSpawnUser.ServerId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
-            u.Weapon = sSpawnUser.Weapon;
-            u.Armor = sSpawnUser.Armor;
-            u.Gloves = sSpawnUser.Gloves;
-            u.Boots = sSpawnUser.Boots;
+            u.Weapon = p.Weapon;
+            u.Armor = p.Armor;
+            u.Gloves = p.Gloves;
+            u.Boots = p.Boots;
         }
         public void UpdateMyGear()
         {
