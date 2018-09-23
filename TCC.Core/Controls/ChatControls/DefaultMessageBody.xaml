@@ -25,7 +25,7 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <Grid Grid.Column="1" Margin="-80 0 0 0">
+                <Grid Grid.Column="1" Margin="-80 0 0 0" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
