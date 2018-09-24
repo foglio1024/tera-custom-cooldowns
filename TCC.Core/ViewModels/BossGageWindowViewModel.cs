@@ -303,7 +303,7 @@ namespace TCC.ViewModels
             if (n.ZoneId == 950 && !n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(0, 0);
             if (n.ZoneId == 450)
             {
-                if (n.TemplateId == 1003) n.EnragePattern = new EnragePattern((long)n.MaxHP, 600000000, 112);
+                if (n.TemplateId == 1003) n.EnragePattern = new EnragePattern((long)n.MaxHP, 600000000, 72);
             }
 
             if (n.ZoneId == 620 && n.TemplateId == 1000) n.EnragePattern = new EnragePattern((long)n.MaxHP, 420000000, 36);
