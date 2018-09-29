@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Windows.Controls;
 using TCC.Controls;
 using TCC.Data;
 
@@ -112,6 +113,7 @@ namespace TCC.Windows
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
+            UpdateButtons();
         }
 
 
@@ -335,12 +337,35 @@ namespace TCC.Windows
             return Screen.AllScreens.FirstOrDefault(x =>
                 x.Bounds.Contains(Convert.ToInt32(WindowCenter.X), Convert.ToInt32(WindowCenter.Y)));
         }
+        private void UpdateButtons()
+        {
+            if (ButtonsRef != null)
+            {
+                double screen_middle = Settings.ScreenH / 2;
+                double middle = Top + Height / 2;
+                double deadzone = Settings.ScreenH / 15;
+                double distance = Math.Abs(screen_middle - middle);
+
+                if (distance > deadzone)
+                {
+                    if (middle >= screen_middle)
+                    {
+                        Grid.SetRow(ButtonsRef, 0);
+                    }
+                    else
+                    {
+                        Grid.SetRow(ButtonsRef, 2);
+                    }
+                }
+            }
+        }
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 if (!_ignoreSize) ResizeMode = ResizeMode.NoResize;
                 DragMove();
+                UpdateButtons();
                 CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
                 _settings.X = Left / Settings.ScreenW;

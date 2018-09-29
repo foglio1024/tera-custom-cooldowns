@@ -17,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Border Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}"
                 BorderThickness="1" Grid.RowSpan="2" Opacity=".5" >

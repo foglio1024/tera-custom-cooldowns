@@ -96,6 +96,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf"  Margin="1 3 2 0" 
                         Visibility="{Binding Content.PinnedMessage, Converter={StaticResource Converters.NullToVisibleCollapsed}}">
