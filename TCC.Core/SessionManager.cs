@@ -41,10 +41,8 @@ namespace TCC
             }
         }
 
-        public static bool Combat
-        {
-            get => CurrentPlayer?.IsInCombat ?? false;
-        }
+        public static bool Combat => CurrentPlayer?.IsInCombat ?? false;
+
         public static bool Logged
         {
             get => _logged;

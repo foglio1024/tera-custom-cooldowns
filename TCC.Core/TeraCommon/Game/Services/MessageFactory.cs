@@ -96,7 +96,7 @@ namespace TCC.TeraCommon.Game.Services
         public string Region;
         public uint Version;
         public bool ChatEnabled {
-            get { return _chatEnabled; }
+            get => _chatEnabled;
             set
             {
                 _chatEnabled = value;

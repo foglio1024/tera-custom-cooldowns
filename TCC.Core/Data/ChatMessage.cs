@@ -69,7 +69,7 @@ namespace TCC.Data
         protected bool containsPlayerName;
         public bool ContainsPlayerName
         {
-            get { return containsPlayerName; }
+            get => containsPlayerName;
             protected set
             {
                 if (containsPlayerName == value) return;
@@ -92,10 +92,7 @@ namespace TCC.Data
         protected bool isContracted;
         public bool IsContracted
         {
-            get
-            {
-                return isContracted;
-            }
+            get => isContracted;
             set
             {
                 if (isContracted == value) return;
@@ -107,7 +104,7 @@ namespace TCC.Data
         private int rows;
         public int Rows
         {
-            get { return rows; }
+            get => rows;
             set
             {
                 if (rows == value) return;
@@ -115,14 +112,9 @@ namespace TCC.Data
                 NPC(nameof(Rows));
             }
         }
-        public bool ShowTimestamp
-        {
-            get => Settings.ShowTimestamp;
-        }
-        public bool ShowChannel
-        {
-            get => Settings.ShowChannel;
-        }
+        public bool ShowTimestamp => Settings.ShowTimestamp;
+
+        public bool ShowChannel => Settings.ShowChannel;
         protected SynchronizedObservableCollection<MessagePiece> pieces;
         public SynchronizedObservableCollection<MessagePiece> Pieces
         {

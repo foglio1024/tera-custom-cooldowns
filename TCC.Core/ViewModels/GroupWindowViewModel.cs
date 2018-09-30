@@ -462,8 +462,8 @@ namespace TCC.ViewModels
         private static DragBehavior _instance = new DragBehavior();
         public static DragBehavior Instance
         {
-            get { return _instance; }
-            set { _instance = value; }
+            get => _instance;
+            set => _instance = value;
         }
 
         public static bool GetDrag(DependencyObject obj)

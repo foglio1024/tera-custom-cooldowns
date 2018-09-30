@@ -37,10 +37,7 @@ namespace TCC.Controls
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, an);
         }
 
-        public string SecondsText
-        {
-            get => ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Val.ToString();
-        }
+        public string SecondsText => ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Val.ToString();
 
         private void ST_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

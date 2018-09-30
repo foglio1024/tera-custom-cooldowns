@@ -10,12 +10,12 @@ namespace TCC.Parsing.Messages
         private ulong target, source;
         private byte crit;
 
-        public long CurrentHP { get => currentHP; }
-        public long MaxHP { get => maxHP; }
-        public long Diff { get => diff; }
-        public ulong Target { get => target; }
-        public ulong Source { get => source; }
-        public byte Crit { get => crit; }
+        public long CurrentHP => currentHP;
+        public long MaxHP => maxHP;
+        public long Diff => diff;
+        public ulong Target => target;
+        public ulong Source => source;
+        public byte Crit => crit;
 
         public S_CREATURE_CHANGE_HP(TeraMessageReader reader) : base(reader)
         {

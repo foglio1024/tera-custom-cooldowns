@@ -17,7 +17,7 @@ namespace TCC.Parsing.Messages
         public ulong Target { get; private set; }
         public uint TotalRunemarks { get; private set; }
         public uint RemovedRunemarks { get; private set; }
-        public RunemarksActionType Type { get => (RunemarksActionType)type; }
+        public RunemarksActionType Type => (RunemarksActionType)type;
         public uint SkillId { get; private set; }
 
         public S_WEAK_POINT(TeraMessageReader reader) : base(reader)

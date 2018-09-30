@@ -21,17 +21,17 @@ namespace TCC.Windows
 
         public int Last
         {
-            get { return last; }
+            get => last;
             set { last = value; NPC(); }
         }
         public int Max
         {
-            get { return max; }
+            get => max;
             set { max = value; NPC(); }
         }
         public int Sum
         {
-            get { return sum; }
+            get => sum;
             set { sum = value; NPC();}
         }
         public double Avg => count == 0 ? 0 : Sum / count;

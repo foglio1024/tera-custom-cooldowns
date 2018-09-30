@@ -6,7 +6,7 @@ namespace TCC.Data
 {
     public class SkillCooldown : TSPropertyChanged, IDisposable
     {
-        public Dispatcher Dispatcher { get => _dispatcher; }
+        public Dispatcher Dispatcher => _dispatcher;
         public Skill Skill { get; set; }
         public ulong Cooldown { get; set; }
         public ulong OriginalCooldown { get; set; }

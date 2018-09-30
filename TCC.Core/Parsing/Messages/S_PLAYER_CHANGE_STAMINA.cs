@@ -7,8 +7,8 @@ namespace TCC.Parsing.Messages
     {
         private int currentStamina, maxStamina, unk1, unk2, unk3;
 
-        public int CurrentST { get => currentStamina; }
-        public int MaxST { get => maxStamina; }
+        public int CurrentST => currentStamina;
+        public int MaxST => maxStamina;
 
         public S_PLAYER_CHANGE_STAMINA(TeraMessageReader reader) : base(reader)
         {

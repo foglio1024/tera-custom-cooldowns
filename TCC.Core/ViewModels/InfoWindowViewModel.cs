@@ -32,14 +32,9 @@ namespace TCC.ViewModels
         public ICollectionView T5Dungs { get; set; }
         public ICollectionView AllDungeons { get; set; }
         public ICollectionView Items { get; set; }
-        public Character CurrentCharacter
-        {
-            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
-        }
-        public Character SelectedCharacter
-        {
-            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
-        }
+        public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+
+        public Character SelectedCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
         public bool SelectedCharacterExists => SelectedCharacter != null;
         public bool ShowElleonMarks => TimeManager.Instance.CurrentRegion == "EU";
         public InfoWindowViewModel()

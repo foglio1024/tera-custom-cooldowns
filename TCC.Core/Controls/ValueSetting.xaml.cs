@@ -16,20 +16,20 @@ namespace TCC.Controls
 
         public string SettingName
         {
-            get { return (string)GetValue(SettingNameProperty); }
-            set { SetValue(SettingNameProperty, value); }
+            get => (string)GetValue(SettingNameProperty);
+            set => SetValue(SettingNameProperty, value);
         }
         public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
         public ImageSource SettingImage
         {
-            get { return (ImageSource)GetValue(SettingImageProperty); }
-            set { SetValue(SettingImageProperty, value); }
+            get => (ImageSource)GetValue(SettingImageProperty);
+            set => SetValue(SettingImageProperty, value);
         }
         public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(ValueSetting));
         public Visibility TextBoxVisibility
         {
-            get { return (Visibility)GetValue(TextBoxVisibilityProperty); }
-            set { SetValue(TextBoxVisibilityProperty, value); }
+            get => (Visibility)GetValue(TextBoxVisibilityProperty);
+            set => SetValue(TextBoxVisibilityProperty, value);
         }
         public static readonly DependencyProperty TextBoxVisibilityProperty = DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(ValueSetting));
 
@@ -37,8 +37,8 @@ namespace TCC.Controls
 
         public double Max
         {
-            get { return (double)GetValue(MaxProperty); }
-            set { SetValue(MaxProperty, value); }
+            get => (double)GetValue(MaxProperty);
+            set => SetValue(MaxProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Max.  This enables animation, styling, binding, etc...
@@ -49,8 +49,8 @@ namespace TCC.Controls
 
         public double Min
         {
-            get { return (double)GetValue(MinProperty); }
-            set { SetValue(MinProperty, value); }
+            get => (double)GetValue(MinProperty);
+            set => SetValue(MinProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Min.  This enables animation, styling, binding, etc...
@@ -60,8 +60,8 @@ namespace TCC.Controls
 
         public double Value
         {
-            get { return (double)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (double)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
 

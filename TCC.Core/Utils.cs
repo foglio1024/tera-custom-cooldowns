@@ -256,10 +256,7 @@ namespace TCC
 
         public DependencyObject Target { get; private set; }
 
-        public T Value
-        {
-            get { return (T)GetValue(ValueProperty); }
-        }
+        public T Value => (T)GetValue(ValueProperty);
 
         public static void OnPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
         {

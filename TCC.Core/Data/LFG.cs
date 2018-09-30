@@ -72,10 +72,8 @@ namespace TCC.Data
                 NPC(nameof(MembersCountLabel));
             }
         }
-        public string MembersCountLabel
-        {
-            get { return MembersCount == 0 ? "" : MembersCount.ToString(); }
-        }
+        public string MembersCountLabel => MembersCount == 0 ? "" : MembersCount.ToString();
+
         public LFG(uint id, string name, string msg, bool raid)
         {
             _dispatcher = ChatWindowManager.Instance.GetDispatcher();

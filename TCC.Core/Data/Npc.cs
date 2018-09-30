@@ -31,7 +31,7 @@ namespace TCC.Data
         protected SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
-            get { return _buffs; }
+            get => _buffs;
             set
             {
                 if (_buffs == value) return;
@@ -115,7 +115,7 @@ namespace TCC.Data
         protected Visibility visible;
         public Visibility Visible
         {
-            get { return visible; }
+            get => visible;
             set
             {
                 if (visible != value)
@@ -129,7 +129,7 @@ namespace TCC.Data
         protected ulong target;
         public ulong Target
         {
-            get { return target; }
+            get => target;
             set
             {
                 if (target != value)
@@ -143,7 +143,7 @@ namespace TCC.Data
         protected AggroCircle currentAggroType = AggroCircle.None;
         public AggroCircle CurrentAggroType
         {
-            get { return currentAggroType; }
+            get => currentAggroType;
             set
             {
                 if (currentAggroType != value)

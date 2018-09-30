@@ -125,7 +125,7 @@ namespace TCC.Sniffing
 
         public SocketAwaitable GetAwaiter() { return this; }
 
-        public bool IsCompleted { get { return m_wasCompleted; } }
+        public bool IsCompleted => m_wasCompleted;
 
         public void OnCompleted(Action continuation)
         {

@@ -14,8 +14,8 @@ namespace TCC.Controls
     {
         public string TimeText
         {
-            get { return (string)GetValue(TimeTextProperty); }
-            set { SetValue(TimeTextProperty, value); }
+            get => (string)GetValue(TimeTextProperty);
+            set => SetValue(TimeTextProperty, value);
         }
         public static readonly DependencyProperty TimeTextProperty = DependencyProperty.Register("TimeText", typeof(string), typeof(TimeSeparator));
 
@@ -23,8 +23,8 @@ namespace TCC.Controls
 
         public Thickness Borders
         {
-            get { return (Thickness)GetValue(BordersProperty); }
-            set { SetValue(BordersProperty, value); }
+            get => (Thickness)GetValue(BordersProperty);
+            set => SetValue(BordersProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Borders.  This enables animation, styling, binding, etc...

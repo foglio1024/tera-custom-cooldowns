@@ -11,10 +11,10 @@ namespace TCC.Parsing.Messages
         private uint leaderServerId;
         private uint leaderPlayerId;
 
-        public bool Im { get { return im; } }
-        public bool Raid { get { return raid; } }
-        public uint LeaderServerId { get { return leaderServerId; } }
-        public uint LeaderPlayerId { get { return leaderPlayerId; } }
+        public bool Im => im;
+        public bool Raid => raid;
+        public uint LeaderServerId => leaderServerId;
+        public uint LeaderPlayerId => leaderPlayerId;
 
         public List<User> Members { get; }
 

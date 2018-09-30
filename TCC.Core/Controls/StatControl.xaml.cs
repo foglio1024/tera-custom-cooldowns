@@ -38,15 +38,15 @@ namespace TCC.Controls
         }
         public SolidColorBrush Color
         {
-            get { return (SolidColorBrush)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (SolidColorBrush)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color", typeof(SolidColorBrush), typeof(StatControl));
 
         public SolidColorBrush StatusColor
         {
-            get { return (SolidColorBrush)GetValue(StatusColorProperty); }
-            set { SetValue(StatusColorProperty, value); }
+            get => (SolidColorBrush)GetValue(StatusColorProperty);
+            set => SetValue(StatusColorProperty, value);
         }
         public static readonly DependencyProperty StatusColorProperty = DependencyProperty.Register("StatusColor", typeof(SolidColorBrush), typeof(StatControl));
 

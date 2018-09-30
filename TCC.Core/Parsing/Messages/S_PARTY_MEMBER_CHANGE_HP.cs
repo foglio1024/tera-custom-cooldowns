@@ -7,10 +7,11 @@ namespace TCC.Parsing.Messages
     {
         private uint serverId, playerId;
         private int currentHP, maxHP;
-        public uint ServerId { get { return serverId; } }
-        public uint PlayerId { get { return playerId; } }
-        public int CurrentHP { get { return currentHP; } }
-        public int MaxHP { get { return maxHP; } }
+        public uint ServerId => serverId;
+        public uint PlayerId => playerId;
+        public int CurrentHP => currentHP;
+        public int MaxHP => maxHP;
+
         public S_PARTY_MEMBER_CHANGE_HP(TeraMessageReader reader) : base(reader)
         {
             serverId = reader.ReadUInt32();

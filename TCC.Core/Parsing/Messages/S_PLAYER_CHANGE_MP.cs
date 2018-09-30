@@ -9,12 +9,12 @@ namespace TCC.Parsing.Messages
         private uint type;
         private ulong target, source;
 
-        public int CurrentMP { get => currentMP; }
-        public int MaxMP { get => maxMP; }
-        public int Diff { get => diff; }
-        public uint Type { get => type; }
-        public ulong Target { get => target; }
-        public ulong Source { get => source; }
+        public int CurrentMP => currentMP;
+        public int MaxMP => maxMP;
+        public int Diff => diff;
+        public uint Type => type;
+        public ulong Target => target;
+        public ulong Source => source;
 
         public S_PLAYER_CHANGE_MP(TeraMessageReader reader) : base(reader)
         {

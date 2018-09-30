@@ -17,8 +17,8 @@ namespace TCC.Controls
 
         public string WindowName
         {
-            get { return (string)GetValue(WindowNameProperty); }
-            set { SetValue(WindowNameProperty, value); }
+            get => (string)GetValue(WindowNameProperty);
+            set => SetValue(WindowNameProperty, value);
         }
         public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName", typeof(string), typeof(WindowButtons));
 
@@ -26,8 +26,8 @@ namespace TCC.Controls
 
         public Visibility AutoDimButtonVisiblity
         {
-            get { return (Visibility)GetValue(AutoDimButtonVisiblityProperty); }
-            set { SetValue(AutoDimButtonVisiblityProperty, value); }
+            get => (Visibility)GetValue(AutoDimButtonVisiblityProperty);
+            set => SetValue(AutoDimButtonVisiblityProperty, value);
         }
         public static readonly DependencyProperty AutoDimButtonVisiblityProperty = DependencyProperty.Register("AutoDimButtonVisiblity", typeof(Visibility), typeof(WindowButtons));
 
@@ -35,8 +35,8 @@ namespace TCC.Controls
 
         public Visibility HideButtonVisibility
         {
-            get { return (Visibility)GetValue(HideButtonVisibilityProperty); }
-            set { SetValue(HideButtonVisibilityProperty, value); }
+            get => (Visibility)GetValue(HideButtonVisibilityProperty);
+            set => SetValue(HideButtonVisibilityProperty, value);
         }
         public static readonly DependencyProperty HideButtonVisibilityProperty = DependencyProperty.Register("HideButtonVisibility", typeof(Visibility), typeof(WindowButtons));
 

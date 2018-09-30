@@ -12,13 +12,8 @@ namespace TCC.Data
         public double Width { get; }
         public double Height { get; }
         public bool IsDungeon { get; }
-        public double Scale
-        {
-            get
-            {
-                return Width / (double)Application.Current.FindResource("MapWidth");
-            }
-        }
+        public double Scale => Width / (double)Application.Current.FindResource("MapWidth");
+
         public Section(uint sId, uint sNameId, string mapId, bool dg, double top = 0, double left = 0, double width = 0, double height = 0)
         {
             Id = sId;

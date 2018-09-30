@@ -12,13 +12,7 @@ namespace TCC.Parsing.Messages
         private int unk1, achis, unk3, unk4;
 
         private int laurel;
-        public Laurel Laurel
-        {
-            get
-            {
-                return (Laurel)laurel;
-            }
-        }
+        public Laurel Laurel => (Laurel)laurel;
 
         public S_LOAD_ACHIEVEMENT_LIST(TeraMessageReader reader) : base(reader)
         {

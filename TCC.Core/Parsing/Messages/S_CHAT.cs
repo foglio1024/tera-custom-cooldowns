@@ -13,10 +13,10 @@ namespace TCC.Parsing.Messages
         private string authorName;
         private string message;
 
-        public ChatChannel Channel { get => (ChatChannel)ch; }
-        public ulong AuthorId { get => authorId; }
-        public string AuthorName { get => authorName; }
-        public string Message { get => message; }
+        public ChatChannel Channel => (ChatChannel)ch;
+        public ulong AuthorId => authorId;
+        public string AuthorName => authorName;
+        public string Message => message;
 
         public S_CHAT(TeraMessageReader reader) : base(reader)
         {

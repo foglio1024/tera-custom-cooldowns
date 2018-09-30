@@ -8,8 +8,8 @@ namespace TCC.Parsing.Messages
         private ulong entityId;
         public ulong EntityId
         {
-            get { return entityId; }
-            set { entityId = value; }
+            get => entityId;
+            set => entityId = value;
         }
 
         public S_DESPAWN_USER(TeraMessageReader reader) : base(reader)

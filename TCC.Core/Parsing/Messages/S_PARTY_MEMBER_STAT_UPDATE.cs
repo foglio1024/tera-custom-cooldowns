@@ -12,18 +12,18 @@ namespace TCC.Parsing.Messages
         private bool alive;
         private int stamina, curRE, maxRE;
 
-        public uint ServerId { get { return serverId; } }
-        public uint PlayerId { get { return playerId; } }
-        public long CurrentHP { get { return curHP; } }
-        public int CurrentMP { get { return curMP; } }
-        public long MaxHP { get { return maxHP; } }
-        public int MaxMP { get { return maxMP; } }
-        public short Level { get { return level; } }
-        public short Combat { get { return combat; } }
-        public short Vitality { get { return vitality; } }
-        public bool Alive { get { return alive; } }
-        public int CurrentRE { get { return curRE; } }
-        public int MaxRE { get { return maxRE; } }
+        public uint ServerId => serverId;
+        public uint PlayerId => playerId;
+        public long CurrentHP => curHP;
+        public int CurrentMP => curMP;
+        public long MaxHP => maxHP;
+        public int MaxMP => maxMP;
+        public short Level => level;
+        public short Combat => combat;
+        public short Vitality => vitality;
+        public bool Alive => alive;
+        public int CurrentRE => curRE;
+        public int MaxRE => maxRE;
 
         public S_PARTY_MEMBER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {

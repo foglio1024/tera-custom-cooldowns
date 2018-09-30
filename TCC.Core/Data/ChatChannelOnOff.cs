@@ -9,7 +9,7 @@ namespace TCC.Data
 
         public bool Enabled
         {
-            get { return enabled; }
+            get => enabled;
             set
             {
                 if (enabled == value) return;
@@ -19,7 +19,7 @@ namespace TCC.Data
         }
         public ChatChannel Channel
         {
-            get { return channel; }
+            get => channel;
             set
             {
                 if (channel == value) return;

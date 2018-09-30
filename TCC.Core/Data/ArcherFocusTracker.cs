@@ -30,8 +30,8 @@ namespace TCC.Data
 
         public static bool IsFocusXRunning
         {
-            get { return _isFocusXRunning; }
-            set { _isFocusXRunning = value; }
+            get => _isFocusXRunning;
+            set => _isFocusXRunning = value;
         }
 
         public ArcherFocusTracker()

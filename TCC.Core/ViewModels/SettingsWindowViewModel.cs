@@ -570,7 +570,7 @@ namespace TCC.ViewModels
 
         public bool CharacterWindowCompactMode
         {
-            get { return Settings.CharacterWindowCompactMode; }
+            get => Settings.CharacterWindowCompactMode;
             set
             {
                 if (Settings.CharacterWindowCompactMode == value) return;

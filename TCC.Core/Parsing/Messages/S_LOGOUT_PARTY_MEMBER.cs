@@ -6,10 +6,10 @@ namespace TCC.Parsing.Messages
     public class S_LOGOUT_PARTY_MEMBER : ParsedMessage
     {
         private uint serverId;
-        public uint ServerId { get { return serverId; } }
+        public uint ServerId => serverId;
 
         private uint playerId;
-        public uint PlayerId { get { return playerId; } }
+        public uint PlayerId => playerId;
 
         public S_LOGOUT_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {

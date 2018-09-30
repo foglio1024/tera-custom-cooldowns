@@ -8,15 +8,15 @@ namespace TCC.Parsing.Messages
         private float x;
         public float X
         {
-            get { return x; }
-            set { x = value; }
+            get => x;
+            set => x = value;
         }
 
         private float y;
         public float Y
         {
-            get { return y; }
-            set { y = value; }
+            get => y;
+            set => y = value;
         }
 
         public C_PLAYER_LOCATION(TeraMessageReader reader) : base(reader)

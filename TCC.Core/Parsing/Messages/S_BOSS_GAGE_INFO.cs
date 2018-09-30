@@ -10,12 +10,12 @@ namespace TCC.Parsing.Messages
         private float /*hpDiff,*/ currHp, maxHp;
         private byte enrage/*, unk3*/;
 
-        public ulong EntityId { get => id; } 
-        public int TemplateId { get => templateId; }
-        public int HuntingZoneId { get => huntingZoneId; }
-        public float CurrentHP { get => currHp; }
-        public float MaxHP { get => maxHp; }
-        public ulong Target { get => targetId; }
+        public ulong EntityId => id;
+        public int TemplateId => templateId;
+        public int HuntingZoneId => huntingZoneId;
+        public float CurrentHP => currHp;
+        public float MaxHP => maxHp;
+        public ulong Target => targetId;
 
         public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
         {

@@ -10,7 +10,7 @@ namespace TCC.Data
         private int val;
         public int Val
         {
-            get { return val; }
+            get => val;
             set
             {
                 if (val == value) return;

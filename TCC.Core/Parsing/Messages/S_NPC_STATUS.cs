@@ -9,12 +9,10 @@ namespace TCC.Parsing.Messages
         private bool enraged;
         private int unk1, unk2;
 
-        public ulong EntityId { get => entityId; }
-        public ulong Target { get => targetId; }
-        public bool IsEnraged
-        {
-            get => enraged;
-        }
+        public ulong EntityId => entityId;
+        public ulong Target => targetId;
+
+        public bool IsEnraged => enraged;
 
         public S_NPC_STATUS(TeraMessageReader reader) : base(reader)
         {
