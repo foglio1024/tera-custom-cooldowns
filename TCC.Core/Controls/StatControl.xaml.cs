@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using TCC.Data;
 
@@ -9,7 +8,7 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per StatControl.xaml
     /// </summary>
-    public partial class StatControl : UserControl, INotifyPropertyChanged
+    public partial class StatControl : INotifyPropertyChanged
     {
         public StatControl()
         {
@@ -26,14 +25,14 @@ namespace TCC.Controls
 
             }
         }
-        private SolidColorBrush currentColor;
+        private SolidColorBrush _currentColor;
         public SolidColorBrush CurrentColor
         {
-            get => currentColor;
+            get => _currentColor;
             set
             {
-                if (currentColor == value) return;
-                currentColor = value;
+                if (_currentColor == value) return;
+                _currentColor = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentColor"));
             }
         }

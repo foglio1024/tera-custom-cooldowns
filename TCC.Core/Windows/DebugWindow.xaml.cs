@@ -36,7 +36,7 @@ namespace TCC.Windows
         }
         public double Avg => count == 0 ? 0 : Sum / count;
 
-        private int count = 0;
+        private int count;
         public void SetQueuedPackets(int val)
         {
             Last = val;

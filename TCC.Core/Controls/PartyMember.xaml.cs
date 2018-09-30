@@ -43,11 +43,6 @@ namespace TCC.Controls
             SetAwakenIcon();
         }
 
-        private void SetAbnormalityTemplate()
-        {
-            Buffs.ItemTemplate = Application.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
-            Debuffs.ItemTemplate = Application.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
-        }
 
         private void SetAwakenIcon()
         {

@@ -170,7 +170,7 @@ namespace TCC
 
             SettingsWindow = new SettingsWindow();
 
-            if (TCC.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            if (Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
             FocusManager.FocusTimer.Start();
 

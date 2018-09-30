@@ -1,12 +1,12 @@
 ﻿namespace TCC.Controls
 {
-    public partial class SquareAbnormalityIndicator
+    public partial class RoundAbnormalityIndicator
     {
-        public SquareAbnormalityIndicator()
+        public RoundAbnormalityIndicator()
         {
             InitializeComponent();
             DurationLabelRef = DurationLabel;
-            MainArcRef = MainArc;
+            MainArcRef = Arc;
         }
     }
 }

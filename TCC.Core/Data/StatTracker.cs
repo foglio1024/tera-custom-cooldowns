@@ -7,7 +7,7 @@ namespace TCC.Data
     {
 
         public event Action<uint> OnToZero;
-        private int val = 0;
+        private int val;
         public int Val
         {
             get { return val; }
@@ -40,7 +40,7 @@ namespace TCC.Data
 
         public double Factor => (double)val / max;
 
-        private bool status = false;
+        private bool status;
         public bool Status
         {
             get => status;

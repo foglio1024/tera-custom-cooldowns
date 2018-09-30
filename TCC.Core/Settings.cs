@@ -150,7 +150,7 @@ namespace TCC
         public static AbnormalityShape AbnormalityShape { get; set; }
 
         private static string _lastRegion = "";
-        private static bool _chatEnabled = false;
+        private static bool _chatEnabled;
         private static ClickThruMode _chatClickThruMode;
 
     }

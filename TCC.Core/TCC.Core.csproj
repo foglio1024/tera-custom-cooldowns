@@ -89,6 +89,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Converters\DurationLabelConverter.cs" />
+    <Compile Include="Converters\DurationToVisibilityConverter.cs" />
+    <Compile Include="Controls\RoundAbnormalityIndicator.cs" />
+    <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
+    <Compile Include="Converters\SizeToDurationLabelSizeConverter.cs" />
+    <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
     <Compile Include="Converters\AbnormalityTypeToColorConverter.cs" />
     <Compile Include="Controls\SquareAbnormalityIndicator.xaml.cs">
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
@@ -360,9 +366,6 @@
     </Compile>
     <Compile Include="Controls\RagnarokBuffControl.xaml.cs">
       <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\StanceIndicator.xaml.cs">
-      <DependentUpon>StanceIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FixedSkillContainers.xaml.cs">
       <DependentUpon>FixedSkillContainers.xaml</DependentUpon>
@@ -982,10 +985,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SquareAbnormalityIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\StanceIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

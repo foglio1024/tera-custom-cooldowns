@@ -332,7 +332,7 @@ namespace TCC.ViewModels
 
         public void JoinPrivateChannel(uint id, int index, string name)
         {
-            ChatWindowManager.Instance.PrivateChannels[index] = new PrivateChatChannel(id, name, index);
+            Instance.PrivateChannels[index] = new PrivateChatChannel(id, name, index);
             PrivateChannelJoined?.Invoke(index);
         }
         private bool Pass(ChatMessage current, ChatMessage old)

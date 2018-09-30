@@ -46,11 +46,9 @@ namespace TCC.Controls
             _warnTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000) };
             _warnTimer.Tick += WarnTimer_Tick;
             _arcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
-            _resetAnimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(500));
-            _expandWarn =
-                new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
-            _expandWarnInner =
-                new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
+            _resetAnimation = new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)) { EasingFunction = new QuadraticEase() };
+            _expandWarn = new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
+            _expandWarnInner = new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
             Timeline.SetDesiredFrameRate(_expandWarn, 30);
             Timeline.SetDesiredFrameRate(_expandWarnInner, 30);
         }
@@ -71,7 +69,7 @@ namespace TCC.Controls
         private void OnReset()
         {
             //ResetArc.Opacity = 1;
-            ResetArc.BeginAnimation(Arc.StrokeThicknessProperty, new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)){EasingFunction = new QuadraticEase()});
+            ResetArc.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
             //ResetArc.BeginAnimation(OpacityProperty, _resetAnimation);
         }
 
@@ -94,7 +92,7 @@ namespace TCC.Controls
             switch (mode)
             {
                 case CooldownMode.Normal:
-                    var newVal = _context.Cooldown / (double) _context.OriginalCooldown;
+                    var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
                     newVal = newVal > 1 ? 1 : newVal;
                     AnimateArcAngle(newVal);
                     break;

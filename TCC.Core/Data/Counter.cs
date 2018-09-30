@@ -7,7 +7,7 @@ namespace TCC.Data
     {
 
         //TODO use events here
-        private int val = 0;
+        private int val;
         public int Val
         {
             get => val;

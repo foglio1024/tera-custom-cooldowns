@@ -10,7 +10,7 @@ namespace TCC.ViewModels
         private readonly TimeSpan _realDuration;
         public double StartFactor => 60 * (Start.Hour * 60 + Start.Minute) / TimeManager.SecondsInDay;
         public double DurationFactor => Duration.TotalSeconds / TimeManager.SecondsInDay;
-        private bool _happened = false;
+        private bool _happened;
         public bool IsClose
         {
             get

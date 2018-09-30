@@ -37,7 +37,7 @@ namespace TCC.Data
         public uint PlayerId { get; internal set; }
         public uint ServerId { get; internal set; }
 
-        private Class playerclass = Data.Class.None;
+        private Class playerclass = Class.None;
         public Class Class
         {
             get => playerclass;

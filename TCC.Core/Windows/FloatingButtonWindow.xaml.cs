@@ -116,7 +116,7 @@ namespace TCC.Windows
 
         private void RefreshTopmost()
         {
-            Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, System.Windows.Threading.DispatcherPriority.DataBind);
+            Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, DispatcherPriority.DataBind);
         }
 
         public void StartNotifying(int closeEventsCount)
@@ -209,7 +209,7 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 FocusManager.FocusTimer.Enabled = false;
-                this.RefreshTopmost();
+                RefreshTopmost();
                 if (PlayerInfo.IsOpen) ClosePlayerMenu();
                 TooltipInfo.Refresh();
                 PlayerInfo.IsOpen = true;

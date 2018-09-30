@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
@@ -12,13 +11,13 @@ namespace TCC.Controls.ClassBars
     /// <summary>
     /// Logica di interazione per EdgeArrowLayout.xaml
     /// </summary>
-    public partial class EdgeArrowLayout : UserControl
+    public partial class EdgeArrowLayout
     {
         private WarriorBarManager _dc;
         public EdgeArrowLayout()
         {
             InitializeComponent();
-            this.Loaded += (_, __) =>
+            Loaded += (_, __) =>
             {
                 _dc = DataContext as WarriorBarManager;
                 if (_dc != null) _dc.EdgeCounter.PropertyChanged += OnEdgePropertyChanged;
@@ -31,11 +30,11 @@ namespace TCC.Controls.ClassBars
             var ret = new List<UIElement>();
             for (int i = 4; i >= 0; i--)
             {
-                ret.Add(Edge5to1.Children[i]);
+                ret.Add(Edge5To1.Children[i]);
             }
             for (int i = 4; i >= 0; i--)
             {
-                ret.Add(Edge10to6.Children[i]);
+                ret.Add(Edge10To6.Children[i]);
             }
             return ret;
         }
@@ -50,14 +49,14 @@ namespace TCC.Controls.ClassBars
                         if (i < _dc.EdgeCounter.Val)
                         {
                             rects[i].Opacity = 1;
-                            (rects[i] as Rectangle).Fill = i < 8 ? i == 7 ? Application.Current.FindResource("AquadraxColor") as SolidColorBrush :
+                            ((Rectangle) rects[i]).Fill = i < 8 ? i == 7 ? Application.Current.FindResource("AquadraxColor") as SolidColorBrush :
                                                                             Application.Current.FindResource("IgnidraxColor") as SolidColorBrush :
                                                                             Application.Current.FindResource("HpColor") as SolidColorBrush;
                         }
                         else
                         {
                             rects[i].Opacity = 0.1;
-                            (rects[i] as Rectangle).Fill = Brushes.White;
+                            ((Rectangle) rects[i]).Fill = Brushes.White;
                         }
                     }
                     if (_dc.EdgeCounter.Val == 8 || _dc.EdgeCounter.Val == 10)
