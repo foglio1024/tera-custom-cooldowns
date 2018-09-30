@@ -34,6 +34,8 @@ namespace TCC.Windows
             {
                 if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
             };
+            FocusManager.FocusTimer.Elapsed += (_, __) => { RefreshTopmost(); };
+
             Closing += (_, ev) =>
             {
                 ev.Cancel = true;
