@@ -88,7 +88,10 @@
             <Ellipse Fill="{StaticResource HpColor}" Effect="{StaticResource DropShadow}"></Ellipse>
             <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
-        <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity="1" Margin="2" RenderTransformOrigin=".5 .5">
+        <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity=".6" Margin="2" RenderTransformOrigin=".5 .5">
+            <local:Arc.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="15" Color="White"></DropShadowEffect>
+            </local:Arc.Effect>
 <local:Arc.RenderTransform>
     <ScaleTransform />
 </local:Arc.RenderTransform>
