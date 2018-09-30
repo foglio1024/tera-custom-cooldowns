@@ -59,11 +59,14 @@ namespace TCC.ViewModels
                 return
                     () =>
                     {
-                        var t = new HeaderedItemViewModel()
+                        var t = new HeaderedItemViewModel();
+                        var content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { },
+                            new string[] { });
+                        content.PropertyChanged += (_, __) =>
                         {
-                            Content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { })
+                            if (__.PropertyName == nameof(Tab.TabName)) t.Header = ((Tab)content).TabName;
                         };
-                        t.Header = ((Tab)t.Content).TabName;
+                        t.Content = content;
                         return t;
                     };
             }
