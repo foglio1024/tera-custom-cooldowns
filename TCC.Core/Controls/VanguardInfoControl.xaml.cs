@@ -89,7 +89,7 @@ namespace TCC.Controls
             InfoWindowViewModel.Instance.Characters.Remove((Character)DataContext);
         }
 
-        private bool _animDown = true;
+        //private bool _animDown = true;
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //_animDown = false;

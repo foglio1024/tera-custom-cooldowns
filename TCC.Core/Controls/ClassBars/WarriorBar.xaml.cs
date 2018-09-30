@@ -24,11 +24,8 @@ namespace TCC.Controls.ClassBars
         }
 
         private WarriorBarManager _dc;
-        private DoubleAnimation _an;
         private DoubleAnimation _tc;
         private DoubleAnimation _tcCd;
-        private DoubleAnimation _anCd;
-
 
 
         public bool WarningStance
@@ -50,12 +47,12 @@ namespace TCC.Controls.ClassBars
             _dc.TraverseCut.OnToZero += CooldownTraverseCut;
             _dc.EdgeCounter.PropertyChanged += EdgeCounter_PropertyChanged;
 
-            _an = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
+            new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
             _tc = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
             _tc.Completed += (_, __) => _tcAnimating = false;
             _tcCd = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
-            _anCd = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(0));
-            _anCd.Completed += (o, args) => _cooldown = false;
+            new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(0));
+            //_anCd.Completed += (o, args) => _cooldown = false;
             SessionManager.CurrentPlayer.PropertyChanged += CheckStanceWarning;
             _dc.Stance.PropertyChanged += CheckStanceWarning;
         }
@@ -113,28 +110,6 @@ namespace TCC.Controls.ClassBars
                 TcArc.BeginAnimation(Arc.EndAngleProperty, _tcCd);
             });
 
-        }
-
-        private bool _cooldown;
-        private void CooldownTempestAura(uint cd)
-        {
-            //Dispatcher.Invoke(() =>
-            //{
-            //    _cooldown = true;
-            //    _anCd.Duration = TimeSpan.FromMilliseconds(cd);
-            //    TaGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _anCd);
-            //});
-        }
-
-        private void AnimateTempestAura(object sender, PropertyChangedEventArgs e)
-        {
-
-            //if (e.PropertyName == nameof(StatTracker.Factor))
-            //{
-            //    if (_cooldown) return;
-            //    _an.To = _dc.TempestAura.Factor;
-            //    TaGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
-            //}
         }
 
         private bool _tcAnimating;

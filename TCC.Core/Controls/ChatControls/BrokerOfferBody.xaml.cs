@@ -56,7 +56,7 @@ namespace TCC.Controls.ChatControls
                 var dc = (BrokerChatMessage) DataContext;
                 ChatWindowManager.Instance.SetPaused(false, dc);
             }
-            catch (Exception exception)
+            catch 
             {
                 ChatWindowManager.Instance.SetPaused(false);
             }
