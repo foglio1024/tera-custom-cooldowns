@@ -89,7 +89,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
-    <Compile Include="Controls\AbnormalityTypeToColorConverter.cs" />
+    <Compile Include="Converters\AbnormalityTypeToColorConverter.cs" />
     <Compile Include="Controls\SquareAbnormalityIndicator.xaml.cs">
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
