@@ -397,9 +397,6 @@
     <Compile Include="Controls\ClassBars\SorcererBar.xaml.cs">
       <DependentUpon>SorcererBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StatControl.xaml.cs">
-      <DependentUpon>StatControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\ArcherFocusTracker.cs" />
@@ -1041,10 +1038,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ClassBars\SorcererBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\StatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
