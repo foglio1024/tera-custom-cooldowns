@@ -39,8 +39,23 @@ namespace TCC.Windows
             {
                 Left = _settings.X * Settings.ScreenW;
                 Top = _settings.Y * Settings.ScreenH;
+
                 //if(_settings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {_settings.Name}: {_settings.X}, {_settings.Y}");
                 CheckBounds();
+
+                if (ButtonsRef != null)
+                {
+                    switch (_settings.ButtonsPosition)
+                    {
+                        case ButtonsPosition.Above:
+                            Grid.SetRow(ButtonsRef, 0);
+                            break;
+                        case ButtonsPosition.Below:
+                            Grid.SetRow(ButtonsRef, 2);
+                            break;
+                    }
+                    UpdateButtons();
+                }
             });
         }
         public void ResetToCenter()
@@ -102,6 +117,7 @@ namespace TCC.Windows
                 MouseLeftButtonDown += Drag;
                 return;
             }
+
             _hideButtons = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000));
             _showButtons = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150));
             _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
@@ -113,10 +129,7 @@ namespace TCC.Windows
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
-            UpdateButtons();
         }
-
-
 
         private void OnFocusTick(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -263,7 +276,9 @@ namespace TCC.Windows
             //if (Left < myScreen.Bounds.X) Left = 0;
             //if (Top < 0) Top = 0;
             CheckIndividualScreensBounds();
-            _settings.Positions[SessionManager.CurrentPlayer.Class] = new Point(Left / Settings.ScreenW, Top / Settings.ScreenH);
+
+            _settings.X = Left / Settings.ScreenW;
+            _settings.Y = Top / Settings.ScreenH;
         }
 
         private void CheckIndividualScreensBounds()
@@ -350,10 +365,12 @@ namespace TCC.Windows
                 {
                     if (middle >= screen_middle)
                     {
+                        _settings.ButtonsPosition = ButtonsPosition.Above;
                         Grid.SetRow(ButtonsRef, 0);
                     }
                     else
                     {
+                        _settings.ButtonsPosition = ButtonsPosition.Below;
                         Grid.SetRow(ButtonsRef, 2);
                     }
                 }

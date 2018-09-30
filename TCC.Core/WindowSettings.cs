@@ -29,24 +29,26 @@ namespace TCC
         public string Name { get; }
         public bool PerClassPosition { get; set; }
 
+        private Class CurrentClass()
+        {
+            var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+            cc = PerClassPosition ? cc : Class.Common;
+            return cc;
+        }
+
         public double X
         {
             get
             {
-                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common :  SessionManager.CurrentPlayer.Class ;
-                //if (Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Getting X {X} for class {cc}");
-                cc = PerClassPosition ? cc : Class.Common;
-                return Positions[cc].X;
+                var cc = CurrentClass();
+                return Positions.Position(cc).X;
             }
             set
             {
-                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                var cc = CurrentClass();
                 if (cc == Class.None) return;
-                cc = PerClassPosition ? cc : Class.Common;
-
-                var old = Positions[cc];
-                Positions[cc] = new Point(value, old.Y);
-                //if(Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Setting X to {value} for class {cc}");
+                var old = Positions.Position(cc);
+                Positions.SetPosition(cc, new Point(value, old.Y));
                 NPC(nameof(X));
             }
         }
@@ -55,19 +57,32 @@ namespace TCC
         {
             get
             {
-                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
-                cc = PerClassPosition ? cc : Class.Common;
-
-                return Positions[cc].Y;
+                var cc = CurrentClass();
+                return Positions.Position(cc).Y;
             }
             set
             {
-                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
-                cc = PerClassPosition ? cc : Class.Common;
+                var cc = CurrentClass();
                 if (cc == Class.None) return;
-                var old = Positions[cc];
-                Positions[cc] = new Point(old.X, value);
+                var old = Positions.Position(cc);
+                Positions.SetPosition(cc, new Point(old.X, value));
                 NPC(nameof(Y));
+            }
+        }
+
+        public ButtonsPosition ButtonsPosition
+        {
+            get
+            {
+                var cc = CurrentClass();
+                return Positions.Buttons(cc);
+            }
+            set
+            {
+                var cc = CurrentClass();
+                if (cc == Class.None) return;
+                Positions.SetButtons(cc, value);
+                NPC(nameof(ButtonsPosition));
             }
         }
 
@@ -199,9 +214,9 @@ namespace TCC
             }
         }
 
-        public Dictionary<Class, Point> Positions { get; set; }
+        public ClassPositions Positions { get; set; }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null, string name = "", bool perClassPosition = true)
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
@@ -216,23 +231,13 @@ namespace TCC
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
             PerClassPosition = perClassPosition;
-            Positions = new Dictionary<Class, Point>
+            if (positions == null)
             {
-                {(Class) 0,   positions == null ? new Point(x,y) : new Point(positions[(Class) 0].X, positions[(Class) 0].Y)},
-                {(Class) 1,   positions == null ? new Point(x,y) : new Point(positions[(Class) 1].X, positions[(Class) 1].Y)},
-                {(Class) 2,   positions == null ? new Point(x,y) : new Point(positions[(Class) 2].X, positions[(Class) 2].Y)},
-                {(Class) 3,   positions == null ? new Point(x,y) : new Point(positions[(Class) 3].X, positions[(Class) 3].Y)},
-                {(Class) 4,   positions == null ? new Point(x,y) : new Point(positions[(Class) 4].X, positions[(Class) 4].Y)},
-                {(Class) 5,   positions == null ? new Point(x,y) : new Point(positions[(Class) 5].X, positions[(Class) 5].Y)},
-                {(Class) 6,   positions == null ? new Point(x,y) : new Point(positions[(Class) 6].X, positions[(Class) 6].Y)},
-                {(Class) 7,   positions == null ? new Point(x,y) : new Point(positions[(Class) 7].X, positions[(Class) 7].Y)},
-                {(Class) 8,   positions == null ? new Point(x,y) : new Point(positions[(Class) 8].X, positions[(Class) 8].Y)},
-                {(Class) 9,   positions == null ? new Point(x,y) : new Point(positions[(Class) 9].X, positions[(Class) 9].Y)},
-                {(Class) 10,  positions == null ? new Point(x,y) : new Point(positions[(Class) 10].X, positions[(Class) 10].Y)},
-                {(Class) 11,  positions == null ? new Point(x,y) : new Point(positions[(Class) 11].X, positions[(Class) 11].Y)},
-                {(Class) 12,  positions == null ? new Point(x,y) : new Point(positions[(Class) 12].X, positions[(Class) 12].Y)},
-                {(Class) 255, positions == null ? new Point(x,y) : new Point(positions[(Class) 255].X, positions[(Class) 255].Y)}
-            };
+                Positions = new ClassPositions(x, y, buttonsPosition);
+            } else
+            {
+                Positions = new ClassPositions(positions);
+            }
         }
 
         public virtual XElement ToXElement(string name)
@@ -256,24 +261,23 @@ namespace TCC
         {
             var ret = new XElement(nameof(Positions));
 
-            foreach (var keyVal in Positions)
+            foreach (Class cl in Class.GetValues(typeof(Class)))
             {
                 ret.Add(
-                    new XElement("Position", new XAttribute("class", keyVal.Key),
-                        new XAttribute("X", keyVal.Value.X),
-                        new XAttribute("Y", keyVal.Value.Y))
+                    new XElement("Position", new XAttribute("class", cl),
+                        new XAttribute("X", Positions.Position(cl).X),
+                        new XAttribute("Y", Positions.Position(cl).Y),
+                        new XAttribute("ButtonsPosition", Positions.Buttons(cl)))
                 );
             }
+
             return ret;
         }
 
         public void MakePositionsGlobal()
         {
             var currentPos = new Point(X, Y);
-            for (int i = 0; i < 13; i++)
-            {
-                Positions[(Class)i] = currentPos;
-            }
+            Positions.SetAllPositions(currentPos);
         }
     }
 

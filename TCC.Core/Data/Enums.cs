@@ -242,6 +242,12 @@
         GameDriven = 4
     }
 
+    public enum ButtonsPosition
+    {
+        Above = 0,
+        Below = 1,
+    }
+
     public enum CooldownBarMode
     {
         Normal = 0,

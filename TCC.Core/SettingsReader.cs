@@ -73,19 +73,25 @@ namespace TCC
                 BackgroundOpacity = op != null ? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
             };
         }
-        private Dictionary<Class, Point> ParseWindowPositions(XElement windowSettingXElement)
+        private ClassPositions ParseWindowPositions(XElement windowSettingXElement)
         {
-            Dictionary<Class, Point> positions = null;
+            ClassPositions positions = null;
             try
             {
                 var pss = windowSettingXElement.Descendants().FirstOrDefault(s => s.Name == "Positions");
-                if (pss != null) positions = new Dictionary<Class, Point>();
+                if (pss != null) positions = new ClassPositions();
                 pss?.Descendants().Where(s => s.Name == "Position").ToList().ForEach(pos =>
                 {
                     var cl = (Class)Enum.Parse(typeof(Class), pos.Attribute("class").Value);
                     var px = double.Parse(pos.Attribute("X")?.Value, CultureInfo.InvariantCulture);
                     var py = double.Parse(pos.Attribute("Y")?.Value, CultureInfo.InvariantCulture);
-                    positions.Add(cl, new Point(px, py));
+                    positions.SetPosition(cl, new Point(px, py));
+                    var bp = pos.Attribute("ButtonsPosition")?.Value;
+                    if (bp != null)
+                    {
+                        var ebp = (ButtonsPosition)Enum.Parse(typeof(ButtonsPosition), bp);
+                        positions.SetButtons(cl, (ButtonsPosition)ebp);
+                    }
                 });
             }
             catch (Exception)

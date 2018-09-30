@@ -90,6 +90,7 @@
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="Data\ClassPositions.cs" />
     <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
