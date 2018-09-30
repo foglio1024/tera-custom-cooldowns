@@ -7,7 +7,7 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per WindowButtons.xaml
     /// </summary>
-    public partial class WindowButtons : UserControl, INotifyPropertyChanged
+    public partial class WindowButtons : UserControl
     {
         private WindowSettings _dc => DataContext as WindowSettings;
         public WindowButtons()
@@ -43,7 +43,6 @@ namespace TCC.Controls
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void Hide(object sender, RoutedEventArgs e)
         {
@@ -53,7 +52,6 @@ namespace TCC.Controls
         private void Pin(object sender, RoutedEventArgs e)
         {
             _dc.ShowAlways = !_dc.ShowAlways;
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(_dc.ShowAlways)));
         }
 
 
