@@ -15,7 +15,7 @@ namespace TCC.Converters
             }
             else
             {
-                return App.Current.FindResource("KrBgColor");
+                return System.Windows.Application.Current.FindResource("KrBgColor");
             }
         }
 

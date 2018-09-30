@@ -50,9 +50,9 @@ namespace TCC.Controls.ClassBars
                         if (i < _dc.EdgeCounter.Val)
                         {
                             rects[i].Opacity = 1;
-                            (rects[i] as Rectangle).Fill = i < 8 ? i == 7 ? App.Current.FindResource("AquadraxColor") as SolidColorBrush :
-                                                                            App.Current.FindResource("IgnidraxColor") as SolidColorBrush :
-                                                                            App.Current.FindResource("HpColor") as SolidColorBrush;
+                            (rects[i] as Rectangle).Fill = i < 8 ? i == 7 ? Application.Current.FindResource("AquadraxColor") as SolidColorBrush :
+                                                                            Application.Current.FindResource("IgnidraxColor") as SolidColorBrush :
+                                                                            Application.Current.FindResource("HpColor") as SolidColorBrush;
                         }
                         else
                         {
@@ -70,7 +70,7 @@ namespace TCC.Controls.ClassBars
                     }
                     else
                     {
-                        MainEdgeGrid.Effect = App.Current.FindResource("DropShadow") as DropShadowEffect;
+                        MainEdgeGrid.Effect = Application.Current.FindResource("DropShadow") as DropShadowEffect;
                     }
                     break;
             }

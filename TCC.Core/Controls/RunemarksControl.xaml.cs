@@ -35,8 +35,8 @@ namespace TCC.Controls
                 {
                     RunemarkContainer.Children[i].Opacity = 1;
                     (RunemarkContainer.Children[i] as Shape).Fill = _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue ?
-                                    App.Current.FindResource("RunemarkColorMax") as SolidColorBrush :
-                                    App.Current.FindResource("RunemarkColor") as SolidColorBrush;
+                                    System.Windows.Application.Current.FindResource("RunemarkColorMax") as SolidColorBrush :
+                                    System.Windows.Application.Current.FindResource("RunemarkColor") as SolidColorBrush;
 
                 }
                 else
@@ -50,7 +50,7 @@ namespace TCC.Controls
             {
                 BlurRadius = 10,
                 ShadowDepth = 0,
-                Color= (App.Current.FindResource("RunemarkColorMax") as SolidColorBrush).Color
+                Color= (System.Windows.Application.Current.FindResource("RunemarkColorMax") as SolidColorBrush).Color
             } : null; 
         }
 

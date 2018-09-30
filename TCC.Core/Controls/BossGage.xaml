@@ -102,21 +102,20 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background" Value="{StaticResource KrBgColor}"></Setter>
                                     <Setter Property="BorderBrush" Value="{StaticResource KrBorderColor}"></Setter>
-                                    <Style.Triggers>
+                                    <!--<Style.Triggers>
                                         <DataTrigger Binding="{Binding Enraged}" Value="True">
                                             <DataTrigger.Setters>
-                                                <!--<Setter Property="Background" Value="DarkRed"/>-->
-                                                <!--<Setter Property="BorderBrush" Value="Red"/>-->
-                                                <!--<Setter Property="Effect">
+                                                <Setter Property="Background" Value="DarkRed"/>
+                                                <Setter Property="BorderBrush" Value="Red"/>
+                                                <Setter Property="Effect">
                                                     <Setter.Value>
                                                         <DropShadowEffect Color="Red" ShadowDepth="0"
                                                                           BlurRadius="10"></DropShadowEffect>
                                                     </Setter.Value>
-                                                </Setter>-->
+                                                </Setter>
                                             </DataTrigger.Setters>
-
                                         </DataTrigger>
-                                    </Style.Triggers>
+                                    </Style.Triggers>-->
                                 </Style>
 
                             </Border.Style>
@@ -137,7 +136,7 @@
                         </Grid.Style>-->
                     </Grid>
 
-                    <Border Background="Red" Margin="0" CornerRadius="0" Opacity="0" RenderTransformOrigin=".5 .5"
+                    <Border Background="Red" Margin="0" Opacity="0" RenderTransformOrigin=".5 .5"
                         Style="{StaticResource Styles.DefaultBorder}" x:Name="EnrageBorder" 
                         Grid.Row="0" HorizontalAlignment="Stretch" 
                         Width="{Binding ElementName=IconBaseBorder, Path=ActualWidth}"
@@ -161,9 +160,9 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <Image Grid.RowSpan="1" Grid.Row="0" Margin="-10" Stretch="Uniform" 
+                    <Image Grid.Row="0" Margin="-10" Stretch="Uniform" 
                        Width="50" 
-                       Height="{Binding Source=Self, Path=ActualWidth}"
+                       Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"
                        StretchDirection="DownOnly"
                        HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image.RenderTransform>

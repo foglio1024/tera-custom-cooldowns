@@ -42,18 +42,18 @@ namespace TCC.Controls
         private void OnAbnormalityShapeChanged()
         {
             Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
             Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
         private void SetAbnormalityTemplate()
         {
-            Buffs.ItemTemplate = App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square
+            Buffs.ItemTemplate = Application.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square
                 ? "SquarePartyAbnormality"
                 : "RoundPartyAbnormality") as DataTemplate;
 
-            Debuffs.ItemTemplate = App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square
+            Debuffs.ItemTemplate = Application.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square
                 ? "SquarePartyAbnormality"
                 : "RoundPartyAbnormality") as DataTemplate;
         }

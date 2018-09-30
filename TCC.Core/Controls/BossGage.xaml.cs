@@ -145,7 +145,7 @@ namespace TCC.Controls
         private void OnAbnormalityShapeChanged()
         {
             Abnormalities.ItemTemplateSelector = null;
-            Abnormalities.ItemTemplateSelector = App.Current.FindResource("BossAbnormalityTemplateSelector") as DataTemplateSelector;
+            Abnormalities.ItemTemplateSelector = Application.Current.FindResource("BossAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
 
@@ -244,6 +244,7 @@ namespace TCC.Controls
             }
         }
 
+/*
         private void AnimateAppear()
         {
             var sc = new ScaleTransform { ScaleY = 0 };
@@ -266,6 +267,7 @@ namespace TCC.Controls
             HpBarGrid.BeginAnimation(OpacityProperty, fade);
             TopInfoGrid.BeginAnimation(OpacityProperty, fade);
         }
+*/
 
         private void AnimateHp()
         {
@@ -315,16 +317,18 @@ namespace TCC.Controls
             };
         }
 
+/*
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(AbnormalityShape))
-                Abnormalities.ItemTemplate = App.Current.FindResource(
+                Abnormalities.ItemTemplate = Application.Current.FindResource(
                     Settings.AbnormalityShape == AbnormalityShape.Square
                         ? "SquareBossAbnormality"
                         : "RoundBossAbnormality") as DataTemplate;
 
 
         }
+*/
 
         private DispatcherTimer _t;
         private void _boss_DeleteEvent()
@@ -466,7 +470,7 @@ namespace TCC.Controls
         {
             // ReSharper disable once PossibleNullReferenceException
             if (value == null) return new SolidColorBrush(Colors.DodgerBlue);
-            return (bool)value ? App.Current.FindResource("HpColor") : new SolidColorBrush(Colors.DodgerBlue);
+            return (bool)value ? Application.Current.FindResource("HpColor") : new SolidColorBrush(Colors.DodgerBlue);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

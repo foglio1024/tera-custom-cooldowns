@@ -20,11 +20,11 @@ namespace TCC.Windows
         private void OnAbnormalityShapeChanged()
         {
             Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = App.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
             Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = App.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
             InfBuffs.ItemTemplateSelector = null;
-            InfBuffs.ItemTemplateSelector = App.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            InfBuffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
     }

@@ -22,16 +22,13 @@ using SplashScreen = TCC.Windows.SplashScreen;
 
 namespace TCC
 {
-    /// <summary>
-    ///     Logica di interazione per App.xaml
-    /// </summary>
     public partial class App
     {
         public const bool Debug = false;
         private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
-        public static DebugWindow DebugWindow;
+        //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
@@ -89,13 +86,12 @@ namespace TCC
 
             UpdateManager.StartCheck();
 
-            if (Debug) DebugStuff();
-
-
+            DebugStuff();
         }
 
-        private void DebugStuff()
+        private static void DebugStuff()
         {
+/*
             EntitiesManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
             var c = 0;
             while (c < 1000)
@@ -109,6 +105,7 @@ namespace TCC
                 Console.WriteLine("Removed " + c);
                 c++;
             }
+*/
             //AbnormalityManager.BeginAbnormality(1495, 10, 10000, 5);
             //AbnormalityManager.BeginAbnormality(2066, 10, 100000, 10);
             //AbnormalityManager.BeginAbnormality(2074, 10, 10000000, 20);
@@ -171,13 +168,13 @@ namespace TCC
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
-            WindowManager.FloatingButton.NotifyExtended($"TCC", $"Connected to {srv.Name}", NotificationType.Success);
+            WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
         }
 
         private static void TeraSniffer_OnEndConnection()
         {
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
-            WindowManager.FloatingButton.NotifyExtended($"TCC", "Disconnected", NotificationType.Warning);
+            WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
 
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             SessionManager.CurrentPlayer.ClearAbnormalities();

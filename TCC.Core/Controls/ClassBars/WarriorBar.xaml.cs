@@ -68,8 +68,8 @@ namespace TCC.Controls.ClassBars
             }
             else
             {
-                EdgeCounterBorder.Background = App.Current.FindResource("KrBgColor") as SolidColorBrush;
-                EdgeCounterBorder.BorderBrush = App.Current.FindResource("KrBorderColor") as SolidColorBrush;
+                EdgeCounterBorder.Background = Application.Current.FindResource("KrBgColor") as SolidColorBrush;
+                EdgeCounterBorder.BorderBrush = Application.Current.FindResource("KrBorderColor") as SolidColorBrush;
                 (EdgeCounterBorder.Effect as DropShadowEffect).Opacity = 0;
             }
         }

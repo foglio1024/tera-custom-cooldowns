@@ -21,7 +21,7 @@ namespace TCC.Converters
                         col = Colors.Orange;
                         break;
                     case Class.Ninja:
-                        col = (App.Current.FindResource("NinjaColor") as SolidColorBrush).Color;
+                        col = (System.Windows.Application.Current.FindResource("NinjaColor") as SolidColorBrush).Color;
                         break;
                     case Class.Valkyrie:
                         col = Colors.White;

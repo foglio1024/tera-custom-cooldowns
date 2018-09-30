@@ -325,7 +325,7 @@ namespace TCC.Windows
 
         private void ChatWindow_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            var ws = App.Current.Windows;
+            var ws = Application.Current.Windows;
 
             foreach (Window w in ws)
             {

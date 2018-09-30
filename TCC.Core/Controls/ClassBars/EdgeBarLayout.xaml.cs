@@ -29,9 +29,9 @@ namespace TCC.Controls.ClassBars
                 if (i < _dc.EdgeCounter.Val)
                 {
                     EdgeContainer.Children[i].Opacity = 1;
-                    (EdgeContainer.Children[i] as Shape).Fill = i < 8 ? i == 7 ? App.Current.FindResource("AquadraxColor") as SolidColorBrush :
-                                                                                 App.Current.FindResource("IgnidraxColor") as SolidColorBrush :
-                                                                                 App.Current.FindResource("HpColor") as SolidColorBrush;
+                    (EdgeContainer.Children[i] as Shape).Fill = i < 8 ? i == 7 ? System.Windows.Application.Current.FindResource("AquadraxColor") as SolidColorBrush :
+                                                                                 System.Windows.Application.Current.FindResource("IgnidraxColor") as SolidColorBrush :
+                                                                                 System.Windows.Application.Current.FindResource("HpColor") as SolidColorBrush;
 
                 }
                 else

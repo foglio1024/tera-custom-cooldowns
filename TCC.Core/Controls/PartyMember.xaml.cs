@@ -27,9 +27,9 @@ namespace TCC.Controls
         private void OnAbnormalityShapeChanged()
         {
             Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
             Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
             
         }
 
@@ -45,8 +45,8 @@ namespace TCC.Controls
 
         private void SetAbnormalityTemplate()
         {
-            Buffs.ItemTemplate =  App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
-            Debuffs.ItemTemplate =  App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
+            Buffs.ItemTemplate = Application.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
+            Debuffs.ItemTemplate = Application.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
         }
 
         private void SetAwakenIcon()

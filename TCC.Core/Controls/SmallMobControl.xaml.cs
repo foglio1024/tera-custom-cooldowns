@@ -46,7 +46,7 @@ namespace TCC.Controls
         private void OnViewModelPropertyChanged()
         {
             Abnormalities.ItemTemplateSelector = null;
-            Abnormalities.ItemTemplateSelector = App.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
+            Abnormalities.ItemTemplateSelector = Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
         }
 
         private void OnDcPropertyChanged(object sender, PropertyChangedEventArgs e)
