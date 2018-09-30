@@ -11,11 +11,12 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per RaidMember.xaml
     /// </summary>
-    public partial class RaidMember : UserControl
+    public partial class RaidMember : UserControl //TODO: make base class for this when???
     {
         public RaidMember()
         {
             InitializeComponent();
+            Unloaded += (_, __) => { SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged; };
         }
 
         private User dc;
@@ -26,6 +27,7 @@ namespace TCC.Controls
 
             AnimateIn();
             GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
         private void UpdateSettings()
         {
@@ -35,6 +37,25 @@ namespace TCC.Controls
             SetDebuffs();
             SetLaurels();
             SetAwakenIcon();
+
+        }
+        private void OnAbnormalityShapeChanged()
+        {
+            Buffs.ItemTemplateSelector = null;
+            Buffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = null;
+            Debuffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+
+        }
+        private void SetAbnormalityTemplate()
+        {
+            Buffs.ItemTemplate = App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square
+                ? "SquarePartyAbnormality"
+                : "RoundPartyAbnormality") as DataTemplate;
+
+            Debuffs.ItemTemplate = App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square
+                ? "SquarePartyAbnormality"
+                : "RoundPartyAbnormality") as DataTemplate;
         }
 
         private void SetAwakenIcon()

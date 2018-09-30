@@ -35,11 +35,18 @@ namespace TCC.Controls
             t.Tick += (s, ev) => RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)));
             RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             BossGageWindowViewModel.Instance.NpcListChanged += OnNpcListChanged;
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnViewModelPropertyChanged;
             _hpAnim = new DoubleAnimation
             {
                 Duration = TimeSpan.FromMilliseconds(250),
                 EasingFunction = new QuadraticEase()
             };
+        }
+
+        private void OnViewModelPropertyChanged()
+        {
+            Abnormalities.ItemTemplateSelector = null;
+            Abnormalities.ItemTemplateSelector = App.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
         }
 
         private void OnDcPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -67,6 +74,7 @@ namespace TCC.Controls
             t.Start();
             try
             {
+                SettingsWindowViewModel.AbnormalityShapeChanged -= OnViewModelPropertyChanged;
                 BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext);
             }
             catch { }

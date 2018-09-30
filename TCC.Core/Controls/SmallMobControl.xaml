@@ -139,7 +139,7 @@
                                 MaxVal="{Binding MaxHP}"
                                 x:Name="HPgauge"/>-->
         </StackPanel>
-        <ItemsControl ItemTemplate="{StaticResource RaidAbnormality}" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
+        <ItemsControl x:Name="Abnormalities" ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" 

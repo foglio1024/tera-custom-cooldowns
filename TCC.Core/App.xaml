@@ -32,6 +32,11 @@
             <Color x:Key="NinjaColorBase">#c387ff</Color>
             <Color x:Key="TankRoleColorBase">#32b3e2</Color>
 
+            <Color x:Key="AbnormalityBuffColor">#3f9fff</Color>
+            <Color x:Key="AbnormalityStunColor">#ff0000</Color>
+            <Color x:Key="AbnormalityDebuffColor">#8ff442</Color>
+            <Color x:Key="AbnormalityDotColor">#9842f4</Color>
+
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
             <SolidColorBrush x:Key="LightGreenColor" Color="#55ff77"/>
@@ -429,13 +434,13 @@
             <converters:LogoInfoToImageConverter x:Key="Converters.LogoInfoToImage"/>
             <converters:DirectionToHorAlignConveter x:Key="Converters.DirectionToHorAlignConveter"/>
             <!--AbnormalityIndicator resources-->
-            <controls:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
-            <controls:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
-            <controls:StacksToVisibilityConverter x:Key="Converters.StacksToLabelVisibility"/>
-            <controls:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
-            <controls:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
-            <controls:SizeToDurationLabelSizeConverter x:Key="Converters.MainSizeToDurationLabelSize"/>
-            <controls:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
+            <converters:AbnormalityTypeToColorConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
+            <converters:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
+            <!--<converters:StacksToVisibilityConverter x:Key="Converters.StacksToLabelVisibility"/>-->
+            <converters:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
+            <converters:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
+            <converters:SizeToDurationLabelSizeConverter x:Key="Converters.MainSizeToDurationLabelSize"/>
+            <converters:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
 
             <!--BossGage resources-->
             <controls:EntityIdToNameConverter x:Key="Converters.EntityIdToName"/>
@@ -453,15 +458,7 @@
             <converters:GroupSizeToTemplateConverter x:Key="Converters.GroupSizeToTemplate"/>
             <converters:RaidToColorConverter x:Key="Converters.RaidToColor"/>
 
-            <DataTemplate x:Key="PartyAbnormality">
-                <controls:AbnormalityIndicator Size="28" DataContext="{Binding}"/>
-            </DataTemplate>
-            <DataTemplate x:Key="RaidAbnormality">
-                <controls:AbnormalityIndicator Size="20"/>
-            </DataTemplate>
-            <DataTemplate x:Key="BossAbnormality">
-                <controls:AbnormalityIndicator Size="30" Margin="2"/>
-            </DataTemplate>
+
             <converters:LocationToMapConverter x:Key="Converters.LocationToMap"/>
             <converters:LocationToMarkerPositionConverter x:Key="Converters.LocationToMarkerPosition"/>
             <converters:LocationToStretchConverter x:Key="Converters.LocationToStretch"/>
@@ -983,6 +980,58 @@
                 </Setter>
             </Style>
 
+            <DataTemplate x:Key="SquareAbnormality">
+                <controls:SquareAbnormalityIndicator HorizontalAlignment="Right" Size="32">
+                    <controls:SquareAbnormalityIndicator.Resources>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="FlowDirection" Value="RightToLeft"/>
+                        </Style>
+                    </controls:SquareAbnormalityIndicator.Resources>
+                </controls:SquareAbnormalityIndicator>
+            </DataTemplate>
+            <DataTemplate x:Key="RoundAbnormality">
+                <controls:RoundAbnormalityIndicator HorizontalAlignment="Right" Size="32">
+                    <controls:RoundAbnormalityIndicator.Resources>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="FlowDirection" Value="RightToLeft"/>
+                        </Style>
+                    </controls:RoundAbnormalityIndicator.Resources>
+                </controls:RoundAbnormalityIndicator>
+            </DataTemplate>
+            <DataTemplate x:Key="RoundPartyAbnormality">
+                <controls:RoundAbnormalityIndicator Size="28" DataContext="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="SquarePartyAbnormality">
+                <controls:SquareAbnormalityIndicator Size="28" DataContext="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="RoundRaidAbnormality">
+                <controls:RoundAbnormalityIndicator Size="20"/>
+            </DataTemplate>
+            <DataTemplate x:Key="SquareRaidAbnormality">
+                <controls:SquareAbnormalityIndicator Size="20"/>
+            </DataTemplate>
+            <DataTemplate x:Key="RoundBossAbnormality">
+                <controls:RoundAbnormalityIndicator Size="30" Margin="2"/>
+            </DataTemplate>
+            <DataTemplate x:Key="SquareBossAbnormality">
+                <controls:SquareAbnormalityIndicator Size="30" Margin="2"/>
+            </DataTemplate>
+            <templateselectors:AbnormalityTemplateSelector x:Key="PlayerAbnormalityTemplateSelector"
+                              RoundTemplate="{StaticResource RoundAbnormality}"
+                              SquareTemplate="{StaticResource SquareAbnormality}"
+                                                                 />
+            <templateselectors:AbnormalityTemplateSelector x:Key="BossAbnormalityTemplateSelector"
+                              RoundTemplate="{StaticResource  RoundBossAbnormality}"
+                              SquareTemplate="{StaticResource SquareBossAbnormality}"
+                                                                 />
+            <templateselectors:AbnormalityTemplateSelector x:Key="PartyAbnormalityTemplateSelector"
+                              RoundTemplate="{StaticResource  RoundPartyAbnormality}"
+                              SquareTemplate="{StaticResource SquarePartyAbnormality}"
+                                                                 />
+            <templateselectors:AbnormalityTemplateSelector x:Key="RaidAbnormalityTemplateSelector"
+                              RoundTemplate="{StaticResource  RoundRaidAbnormality}"
+                              SquareTemplate="{StaticResource SquareRaidAbnormality}"
+                                                                 />
             <DataTemplate x:Key="SkillDataTemplate" DataType="data:Skill">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1181,7 +1230,7 @@
                         </Path.LayoutTransform>
                         <Path.Style>
                             <Style TargetType="Path">
-                                        <Setter Property="Fill" Value="{StaticResource Colors.Chat.Whisper}"/>
+                                <Setter Property="Fill" Value="{StaticResource Colors.Chat.Whisper}"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Channel}" Value="ReceivedWhisper">
                                         <Setter Property="Fill" Value="Orange"/>

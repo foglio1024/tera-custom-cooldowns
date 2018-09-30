@@ -89,8 +89,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Controls\AbnormalityTypeToColorConverter.cs" />
+    <Compile Include="Controls\SquareAbnormalityIndicator.xaml.cs">
+      <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
+    <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
@@ -482,8 +487,8 @@
     <Compile Include="Tera.Data\TeraData.cs" />
     <Compile Include="Tera.Data\WindowData.cs" />
     <Compile Include="Data\AbnormalityDuration.cs" />
-    <Compile Include="Controls\AbnormalityIndicator.xaml.cs">
-      <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
+    <Compile Include="Controls\RoundAbnormalityIndicator.xaml.cs">
+      <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
@@ -808,7 +813,7 @@
     <Compile Include="Controls\WindowButtons.xaml.cs">
       <DependentUpon>WindowButtons.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\AbnormalityIndicator.xaml">
+    <Page Include="Controls\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -973,6 +978,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SmallMobControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SquareAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

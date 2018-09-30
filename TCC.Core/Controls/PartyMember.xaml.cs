@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TCC.Data;
@@ -7,14 +8,12 @@ using TCC.ViewModels;
 
 namespace TCC.Controls
 {
-    /// <summary>
-    /// Logica di interazione per PartyMember.xaml
-    /// </summary>
-    public partial class PartyMember
+    public partial class PartyMember //TODO: make base class for this when???
     {
         public PartyMember()
         {
             InitializeComponent();
+            Unloaded += (_, __) => { SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged; };
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -22,7 +21,18 @@ namespace TCC.Controls
             UpdateSettings();
             AnimateIn();
             GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
+
+        private void OnAbnormalityShapeChanged()
+        {
+            Buffs.ItemTemplateSelector = null;
+            Buffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = null;
+            Debuffs.ItemTemplateSelector = App.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            
+        }
+
         private void UpdateSettings()
         {
             SetMp();
@@ -31,6 +41,12 @@ namespace TCC.Controls
             SetDebuffs();
             SetLaurels();
             SetAwakenIcon();
+        }
+
+        private void SetAbnormalityTemplate()
+        {
+            Buffs.ItemTemplate =  App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
+            Debuffs.ItemTemplate =  App.Current.FindResource(Settings.AbnormalityShape == AbnormalityShape.Square ? "SquarePartyAbnormality" : "RoundPartyAbnormality") as DataTemplate;
         }
 
         private void SetAwakenIcon()

@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:data="clr-namespace:TCC.Data"
+             xmlns:controls="clr-namespace:TCC.Controls"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
@@ -49,7 +50,8 @@
         <!--Abnormalities grids-->
         <Grid Name="BuffGrid" Grid.Row="1" Grid.ColumnSpan="2" >
             <ItemsControl Name="Buffs" ItemsSource="{Binding Buffs}" 
-                          Grid.ColumnSpan="2" ItemTemplate="{StaticResource PartyAbnormality}" Margin="0,0,0,0"
+                          ItemTemplateSelector="{StaticResource PartyAbnormalityTemplateSelector}" 
+                          Grid.ColumnSpan="2" Margin="0,0,0,0"
                           ClipToBounds="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -71,7 +73,8 @@
         </Grid>
         <Grid Name="DebuffGrid" Grid.Row="2" Grid.ColumnSpan="2">
             <ItemsControl Name="Debuffs" ItemsSource="{Binding Debuffs}" Grid.ColumnSpan="2"
-                          ItemTemplate="{StaticResource PartyAbnormality}" Margin="0,0,0,0" 
+                          ItemTemplateSelector="{StaticResource PartyAbnormalityTemplateSelector}" 
+                         Margin="0,0,0,0" 
                       ClipToBounds="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

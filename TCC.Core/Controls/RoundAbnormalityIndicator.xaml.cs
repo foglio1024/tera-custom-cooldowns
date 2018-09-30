@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -9,83 +10,75 @@ using TCC.Data;
 
 namespace TCC.Controls
 {
-// ReSharper disable PossibleNullReferenceException
-
-    /// <summary>
-    /// Logica di interazione per AbnormalityIndicator.xaml
-    /// </summary>
-    public partial class AbnormalityIndicator
+    public partial class RoundAbnormalityIndicator : AbnormalityIndicatorBase
     {
-        public AbnormalityIndicator()
+        public RoundAbnormalityIndicator()
         {
             InitializeComponent();
+            _durationLabel = DurationLabel;
+            _mainArc = Arc;
         }
+    }
+    public class AbnormalityIndicatorBase : UserControl
+    {
+        protected readonly DoubleAnimation _an;
+        protected AbnormalityDuration _context;
+        protected FrameworkElement _durationLabel;
+        protected FrameworkElement _mainArc;
 
-        private AbnormalityDuration _context;
-        private void buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public AbnormalityIndicatorBase()
         {
-            if (_context == null) return;
-
-            if (e.PropertyName == "Refresh")
-            {
-                if (_context.Duration == uint.MaxValue) return;
-                if (!_context.Animated) return;
-                AnimateCooldown();
-            }
-
-        }
-        void AnimateCooldown()
-        {
-            if (_context == null) return;
-
-            var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.DurationLeft));
-            var fps = _context.DurationLeft > 20000 ? 1 : 10;
-            Timeline.SetDesiredFrameRate(an, fps);
-            Arc.BeginAnimation(Arc.EndAngleProperty, an);
-
+            _an = new DoubleAnimation(0, 359.9, TimeSpan.Zero);
+            Loaded += UserControl_Loaded;
+            Unloaded += UserControl_Unloaded;
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            try
-            {
-                _context = (AbnormalityDuration)DataContext;
-            }
-            catch
-            {
-                return;
-            }
-
-            _context.PropertyChanged += buff_PropertyChanged;
-            RenderTransform = new ScaleTransform(1, 1, .5, .5);
-            BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
-            if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) DurationLabel.Visibility = Visibility.Hidden;
-
-            if (_context.Duration != uint.MaxValue && _context.Animated)
-            {
-                AnimateCooldown();
-            }
+            if (!(DataContext is AbnormalityDuration ab)) return;
+            _context = ab;
+            _context.Refreshed += OnRefreshed;
+            if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) _durationLabel.Visibility = Visibility.Hidden;
+            if (_context.Duration != uint.MaxValue && _context.Animated) AnimateCooldown();
+            this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100)));
 
         }
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             if (_context == null) return;
-            _context.PropertyChanged -= buff_PropertyChanged;
+            _context.Refreshed -= OnRefreshed;
             _context = null;
         }
+        private void OnRefreshed()
+        {
+            if (_context == null) return;
+            if (_context.Duration == uint.MaxValue) return;
+            if (!_context.Animated) return;
+            Dispatcher.Invoke(AnimateCooldown);
+        }
+        private void AnimateCooldown()
+        {
+            if (_context == null) return;
+            _an.Duration = TimeSpan.FromMilliseconds(_context.DurationLeft);
+            var fps = _context.DurationLeft > 20000 ? 1 : 60;
+            Timeline.SetDesiredFrameRate(_an, fps);
+            _mainArc.BeginAnimation(Arc.EndAngleProperty, _an);
 
-
-
+        }
         public double Size
         {
             get => (double)GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SizeProperty =
-            DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator), new PropertyMetadata(18.0));
+        public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size",
+                                                                                             typeof(double),
+                                                                                             typeof(RoundAbnormalityIndicator),
+                                                                                             new PropertyMetadata(18.0));
     }
+}
+
+namespace TCC.Converters
+{
 
     public class DurationLabelConverter : IValueConverter
     {
@@ -96,22 +89,10 @@ namespace TCC.Controls
             var hours = minutes / 60;
             var days = hours / 24;
 
-            if (minutes < 3)
-            {
-                return seconds.ToString();
-            }
-            else if (hours < 3)
-            {
-                return minutes + "m";
-            }
-            else if (days < 1)
-            {
-                return hours + "h";
-            }
-            else
-            {
-                return days + "d";
-            }
+            if (minutes < 3) return seconds.ToString();
+            if (hours < 3) return minutes + "m";
+            if (days < 1) return hours + "h";
+            return days + "d";
 
         }
 
@@ -120,31 +101,7 @@ namespace TCC.Controls
             throw new NotImplementedException();
         }
     }
-    public class AbnormalityStrokeConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = (AbnormalityType)value;
-            switch (val)
-            {
-                case AbnormalityType.Stun:
-                    return new SolidColorBrush(Colors.Red); //TODO: convert to resources
-                case AbnormalityType.DOT:
-                    return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0xf4));
-                case AbnormalityType.Debuff:
-                    return new SolidColorBrush(Color.FromRgb(0x8f, 0xf4, 0x42));
-                case AbnormalityType.Buff:
-                    return new SolidColorBrush(Color.FromRgb(0x3f, 0x9f, 0xff));
-                default:
-                    return new SolidColorBrush(Colors.White);
-            }
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
     public class StacksToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -224,4 +181,5 @@ namespace TCC.Controls
             throw new NotImplementedException();
         }
     }
+
 }

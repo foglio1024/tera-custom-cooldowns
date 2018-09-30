@@ -1,5 +1,10 @@
 ﻿namespace TCC.Data
 {
+    public enum AbnormalityShape
+    {
+        Round = 0,
+        Square = 1
+    }
     public enum FlightStackType
     {
         None,

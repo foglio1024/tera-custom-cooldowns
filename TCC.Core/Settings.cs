@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
+using TCC.ViewModels;
 using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
 using Key = System.Windows.Forms.Keys;
 
@@ -147,6 +148,7 @@ namespace TCC
         public static bool HideHandles { get; set; }
         public static bool HighPriority { get; set; }
         public static bool ForceSoftwareRendering { get; set; }
+        public static AbnormalityShape AbnormalityShape { get; set; }
 
         private static string _lastRegion = "";
         private static bool _chatEnabled = false;

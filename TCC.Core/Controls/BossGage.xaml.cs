@@ -138,6 +138,15 @@ namespace TCC.Controls
             Timeline.SetDesiredFrameRate(_flash, 30);
             Timeline.SetDesiredFrameRate(_hpAnim, 30);
 
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
+
+        }
+
+        private void OnAbnormalityShapeChanged()
+        {
+            Abnormalities.ItemTemplateSelector = null;
+            Abnormalities.ItemTemplateSelector = App.Current.FindResource("BossAbnormalityTemplateSelector") as DataTemplateSelector;
+
         }
 
         private void TimerPattern_Ended()
@@ -157,9 +166,9 @@ namespace TCC.Controls
                 TimerDot.Visibility = Visibility.Visible;
                 var fr = Npc.TimerPattern is HpTriggeredTimerPattern hptp ? hptp.StartAt : 1;
                 TimerDotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
-                    new DoubleAnimation(fr, 0, TimeSpan.FromMilliseconds(Npc.TimerPattern.Duration*1000)));
+                    new DoubleAnimation(fr, 0, TimeSpan.FromMilliseconds(Npc.TimerPattern.Duration * 1000)));
                 TimerBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
-                    new DoubleAnimation(fr, 0, TimeSpan.FromMilliseconds(Npc.TimerPattern.Duration*1000)));
+                    new DoubleAnimation(fr, 0, TimeSpan.FromMilliseconds(Npc.TimerPattern.Duration * 1000)));
             });
         }
 
@@ -189,7 +198,7 @@ namespace TCC.Controls
                     break;
                 case "MaxHP":
                     _maxHp = ((Npc)sender).MaxHP;
-                    if(Npc.CurrentFactor == 1) NextEnragePercentage = 100 - Npc.EnragePattern.Percentage;
+                    if (Npc.CurrentFactor == 1) NextEnragePercentage = 100 - Npc.EnragePattern.Percentage;
                     break;
                 case "Enraged":
                     var value = ((Npc)sender).Enraged;
@@ -304,10 +313,16 @@ namespace TCC.Controls
                 BeginAnimation(OpacityProperty, fade);
 
             };
-            //if (Npc.Visible == Visibility.Visible || true)
-            //{
-            //    AnimateAppear();            
-            //}
+        }
+
+        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(AbnormalityShape))
+                Abnormalities.ItemTemplate = App.Current.FindResource(
+                    Settings.AbnormalityShape == AbnormalityShape.Square
+                        ? "SquareBossAbnormality"
+                        : "RoundBossAbnormality") as DataTemplate;
+
 
         }
 
@@ -319,6 +334,7 @@ namespace TCC.Controls
             _t.Start();
             try
             {
+                SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
                 Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc));
             }
             catch

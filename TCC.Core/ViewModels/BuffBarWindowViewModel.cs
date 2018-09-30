@@ -10,34 +10,15 @@ namespace TCC.ViewModels
         public static BuffBarWindowViewModel Instance => _instance ?? (_instance = new BuffBarWindowViewModel());
 
         public FlowDirection Direction => Settings.BuffsDirection;
-        
+        public AbnormalityShape Shape => Settings.AbnormalityShape;
         public BuffBarWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Player = new Player();
-            //WindowManager.TccVisibilityChanged += (s, ev) =>
-            //{
-                ////RaisePropertyChanged("IsTeraOnTop");
-                //if (WindowManager.IsTccVisible)
-                //{
-                    //WindowManager.BuffWindow.RefreshTopmost();
-                //}
-            //};
         }
 
-        public void NotifyDirectionChanged()
-        {
-            NPC(nameof(Direction));
-        }
-        private Player _player;
-        public Player Player
-        {
-            get { return _player; }
-            set
-            {
-                if (_player == value) return;
-                _player = value;
-            }
-        }
+        public Player Player { get; set; }
     }
+
+
 }

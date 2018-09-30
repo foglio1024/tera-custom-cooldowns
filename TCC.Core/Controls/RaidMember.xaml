@@ -52,7 +52,7 @@
         <!--Abnormalities grids-->
         <Grid Name="DebuffGrid" Grid.Row="2" Grid.ColumnSpan="2">
             <ItemsControl Name="Debuffs" ItemsSource="{Binding Debuffs}" Grid.ColumnSpan="2"
-                          ItemTemplate="{StaticResource RaidAbnormality}" Margin="0,-10,0,0" 
+                          ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" Margin="0,-10,0,0" 
                       ClipToBounds="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -74,7 +74,8 @@
         </Grid>
         <Grid Name="BuffGrid" Grid.Row="1" Grid.ColumnSpan="2" >
             <ItemsControl Name="Buffs" ItemsSource="{Binding Buffs}" 
-                          Grid.ColumnSpan="2" ItemTemplate="{StaticResource RaidAbnormality}" Margin="0,-10,0,0"
+                          ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" 
+                          Grid.ColumnSpan="2" Margin="0,-10,0,0"
                           ClipToBounds="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

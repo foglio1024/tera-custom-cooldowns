@@ -42,9 +42,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Visibility="Visible" Grid.Row="1" Grid.Column="0" Height="Auto" Margin="34,-10,0,0" HorizontalAlignment="Left">
-            <ItemsControl 
-            ItemTemplate="{StaticResource BossAbnormality}"
+        <Grid Visibility="Visible" Grid.Row="1" Grid.Column="0" Height="Auto" Margin="40,-10,0,0" HorizontalAlignment="Left">
+            <ItemsControl x:Name="Abnormalities"
+            ItemTemplateSelector="{StaticResource BossAbnormalityTemplateSelector}"
                 ItemsSource="{Binding Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

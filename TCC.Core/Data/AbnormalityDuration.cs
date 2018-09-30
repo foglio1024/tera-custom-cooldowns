@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
 using System.Timers;
 using System.Windows.Threading;
 
@@ -10,93 +6,51 @@ namespace TCC.Data
 {
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
     {
+        public event Action Refreshed;
+
         public ulong Target { get; set; }
-        private Abnormality _abnormality;
-        public Abnormality Abnormality
-        {
-            get { return _abnormality; }
-            set
-            {
-                if (_abnormality == value) return;
-                _abnormality = value;
-            }
-        }
+        public Abnormality Abnormality { get; set; }
+
+        private readonly Timer _timer;
         private uint _duration;
+        private int _stacks;
+        private uint _durationLeft;
+        private bool _isTimerDisposed;
+
         public uint Duration
         {
-            get { return _duration; }
+            get => _duration;
             set
             {
                 if (value == _duration) return;
                 _duration = value;
-                NPC("Duration");
+                NPC();
             }
         }
-        private int _stacks;
         public int Stacks
         {
-            get { return _stacks; }
+            get => _stacks;
             set
             {
                 if (value == _stacks) return;
                 _stacks = value;
-                NPC("Stacks");
+                NPC();
             }
         }
-        private readonly Timer timer;
-        private uint _durationLeft;
         public uint DurationLeft
         {
-            get { return _durationLeft; }
+            get => _durationLeft;
             set
             {
                 if (value == _durationLeft) return;
                 _durationLeft = value;
-                NPC("DurationLeft");
+                NPC();
             }
         }
-
-        //private double _iconSize;
-        //public double IconSize
-        //{
-        //    get { return _iconSize; }
-        //    set
-        //    {
-        //        if (_iconSize == value) return;
-        //        _iconSize = value;
-        //    }
-        //}
-        //public double BackgroundEllipseSize { get; set; }
-        //public Thickness IndicatorMargin { get; set; }
-
-        //private static int _count = 0;
         public bool Animated { get; private set; }
 
-        //private static Dictionary<string, int> _debugList = new Dictionary<string, int>();
-
-        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
+        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated)
         {
-            //_count++;
-            //// Get call stack
-            //var stackTrace = new StackTrace();
-
-            //// Get calling method name
-            //Console.WriteLine($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name} ({_count})");
-
-            //App.BaseDispatcher.Invoke(() =>
-            //{
-            //    if (_debugList.ContainsKey(
-            //        $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"))
-            //    {
-            //        _debugList[
-            //            $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"]++;
-            //    }
-            //    else
-            //    {
-            //        _debugList.Add($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}", 1);
-            //    }
-            //});
-
             _dispatcher = disp;
             Animated = animated;
             Abnormality = b;
@@ -105,84 +59,35 @@ namespace TCC.Data
             Target = t;
             _isTimerDisposed = false;
 
-            //IconSize = iconSize;
-            //BackgroundEllipseSize = bgEllSize;
-            //IndicatorMargin = margin;
-
             DurationLeft = d;
             if (!Abnormality.Infinity)
             {
-                timer = new Timer(1000);
-                timer.Elapsed += DecreaseDuration;
-                timer.Disposed += SetDisposed;
-                timer.Start();
+                _timer = new Timer(1000);
+                _timer.Elapsed += DecreaseDuration;
+                _timer.Start();
             }
-        }
-
-        private bool _isTimerDisposed;
-        private void SetDisposed(object sender, EventArgs e)
-        {
-            _isTimerDisposed = true;
         }
 
         private void DecreaseDuration(object sender, ElapsedEventArgs e)
         {
             DurationLeft = DurationLeft - 1000;
-            if(DurationLeft < DurationLeft - 1000) timer.Stop();
+            if(DurationLeft < DurationLeft - 1000) _timer.Stop();
         }
-
         public void Refresh()
         {
-            if(timer == null || _isTimerDisposed) return;
-            timer?.Stop();
-            if (Duration != 0) timer?.Start();
-            NPC("Refresh");
+            if(_timer == null || _isTimerDisposed) return;
+            _timer?.Stop();
+            if (Duration != 0) _timer?.Start();
+            Refreshed?.Invoke();
         }
-
         public void Dispose()
         {
-            //_count--;
-            //// Get call stack
-            //var stackTrace = new StackTrace();
-
-            //// Get calling method name
-            //Console.WriteLine($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name} ({_count})");
-
-            //App.BaseDispatcher.Invoke(() =>
-            //{
-            //    if (_debugList.ContainsKey(
-            //        $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"))
-            //    {
-            //        _debugList[
-            //            $"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}"]++;
-            //    }
-            //    else
-            //    {
-            //        _debugList.Add($"{stackTrace.GetFrame(1).GetMethod().Name}.{stackTrace.GetFrame(2).GetMethod().Name}", 1);
-            //    }
-            //});
-            if (timer == null) return;
-            timer.Stop();
-            timer.Elapsed -= DecreaseDuration;
-            timer.Dispose();
+            if (_timer == null) return;
+            _timer.Stop();
+            _timer.Elapsed -= DecreaseDuration;
+            _timer.Dispose();
+            _isTimerDisposed = true;
 
         }
-
-        //public static void Dump()
-        //{
-        //    var sb = new StringBuilder();
-
-        //    foreach (var d in _debugList)
-        //    {
-        //        sb.Append(d.Key);
-        //        sb.Append('\t');
-        //        sb.Append(d.Value);
-        //        sb.Append('\n');
-        //    }
-
-        //    File.WriteAllText("abnormalDebug.tsv", sb.ToString());
-        //}
     }
-
-
 }

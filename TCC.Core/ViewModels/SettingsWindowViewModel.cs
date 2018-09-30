@@ -14,9 +14,9 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
-        private readonly bool _characterWindowExtendedMode;
         public static event Action ChatShowChannelChanged;
         public static event Action ChatShowTimestampChanged;
+        public static event Action AbnormalityShapeChanged;
 
         public WindowSettings CooldownWindowSettings => Settings.CooldownWindowSettings;
         public WindowSettings ClassWindowSettings => Settings.ClassWindowSettings;
@@ -93,8 +93,19 @@ namespace TCC.ViewModels
             {
                 if (Settings.BuffsDirection == value) return;
                 Settings.BuffsDirection = value;
-                BuffBarWindowViewModel.Instance.NotifyDirectionChanged();
+                BuffBarWindowViewModel.Instance.ExNPC(nameof(BuffBarWindowViewModel.Direction));
                 NPC(nameof(BuffsDirection));
+            }
+        }
+        public AbnormalityShape AbnormalityShape
+        {
+            get => Settings.AbnormalityShape;
+            set
+            {
+                if (Settings.AbnormalityShape == value) return;
+                Settings.AbnormalityShape = value;
+                AbnormalityShapeChanged?.Invoke();
+                NPC(nameof(AbnormalityShape));
             }
         }
         public CooldownBarMode CooldownBarMode
@@ -524,6 +535,7 @@ namespace TCC.ViewModels
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
         public List<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
+        public List<AbnormalityShape> AbnormalityShapes => Utils.ListFromEnum<AbnormalityShape>();
 
         public bool ChatWindowEnabled
         {
