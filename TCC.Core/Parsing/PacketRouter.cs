@@ -129,8 +129,8 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
-            CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
-            CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            //CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
+            //CharacterWindowViewModel.Instance.Player.Level = p.Level;
 
             SessionManager.SetPlayerMaxHp(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMp(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
@@ -140,7 +140,7 @@ namespace TCC.Parsing
             SessionManager.SetPlayerMp(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
 
-            SessionManager.SetPlayerCritFactor(p.CritFactor);
+            SessionManager.SetPlayerCritFactor(p.BonusCritFactor);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             if (SessionManager.CurrentPlayer.Class == Class.Warrior)
@@ -216,7 +216,7 @@ namespace TCC.Parsing
             /*- Moved from HandleReturnToLobby -*/
             SessionManager.Logged = false;
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -257,7 +257,8 @@ namespace TCC.Parsing
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
 
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
             SkillManager.Clear();
 
             SessionManager.LoadingScreen = true;
@@ -271,11 +272,11 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
 
-            CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
-            CharacterWindowViewModel.Instance.Player.Name = p.Name;
-            CharacterWindowViewModel.Instance.Player.Level = p.Level;
-            CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
-            SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
+            //CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
+            //CharacterWindowViewModel.Instance.Player.Name = p.Name;
+            //CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            //CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
+            //SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
         }
 
@@ -360,7 +361,7 @@ namespace TCC.Parsing
         {
             SessionManager.Logged = false;
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -374,7 +375,8 @@ namespace TCC.Parsing
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             GroupWindowViewModel.Instance.SetAggro(0);
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
             SessionManager.CivilUnrestZone = x.Zone == 152;

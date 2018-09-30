@@ -38,7 +38,8 @@ namespace TCC.Windows
                 Duration = DefaultDuration,
                 EasingFunction = DefaultEasing
             };
-            (DataContext as CharacterWindowViewModel).Player.PropertyChanged += Player_PropertyChanged;
+            //(DataContext as CharacterWindowViewModel).Player.PropertyChanged += Player_PropertyChanged;
+            SessionManager.CurrentPlayer.PropertyChanged += Player_PropertyChanged;
         }
 
         private void Player_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -18,7 +18,7 @@ namespace TCC.Parsing.Messages
         public S_INVEN(TeraMessageReader reader) : base(reader)
         {
             //TODO
-            if (BuffBarWindowViewModel.Instance.Player.InfBuffs.Any(x => AbnormalityDatabase.NoctIds.Contains(x.Abnormality.Id))) return;
+            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => AbnormalityDatabase.NoctIds.Contains(x.Abnormality.Id))) return;
             var count = reader.ReadUInt16();
             var invOffset = reader.ReadUInt16();
             reader.Skip(8 + 8);

@@ -14,10 +14,17 @@ namespace TCC.ViewModels
         public BuffBarWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            Player = new Player();
+            SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
+            //Player = new Player();
         }
 
-        public Player Player { get; set; }
+        private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            NPC(e.PropertyName);
+        }
+
+        public Player Player => SessionManager.CurrentPlayer;
+        //public Player Player { get; set; }
     }
 
 
