@@ -136,7 +136,8 @@ namespace TCC
                 new XAttribute(nameof(Settings.ShowTradeLfg), Settings.ShowTradeLfg),
                 new XAttribute(nameof(Settings.RegionOverride), Settings.RegionOverride),
                 new XAttribute(nameof(Settings.FlightGaugeRotation), Settings.FlightGaugeRotation),
-                new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge)
+                new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge),
+                new XAttribute(nameof(Settings.AbnormalityShape), Settings.AbnormalityShape)
             );
         }
         private static XElement BuildGroupAbnormalsXElement()
