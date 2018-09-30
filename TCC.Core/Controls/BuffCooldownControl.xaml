@@ -21,7 +21,7 @@
                                            IsHitTestVisible="False"
                                  VerticalAlignment="Center" Padding="25" Margin="-25"
                                  DataContext="{Binding Cooldown}" 
-                                    x:Name="cd"
+                                    x:Name="FixedSkillControl"
                                  >
             <local:FixedSkillControl.LayoutTransform>
                 <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>

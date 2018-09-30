@@ -28,7 +28,7 @@ namespace TCC.Controls
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (DurationCooldownIndicator)DataContext;
-            cd.DataContext = _context.Cooldown;
+            FixedSkillControl.DataContext = _context.Cooldown;
             _context.Buff.Started += OnBuffStarted;
             _context.Buff.SecondsUpdated += OnSecondsUpdated;
             _context.Buff.Ended += OnBuffEnded;
