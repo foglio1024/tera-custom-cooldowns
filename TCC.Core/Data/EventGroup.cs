@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -15,7 +16,7 @@ namespace TCC.Data
             get
             {
                 if(_start == DateTime.MinValue && _end == DateTime.MaxValue) return $"{Name} (permanent)";
-                var startTime = _start.Hour == 0 &&_start.Minute == 0? _start.ToShortDateString() : _start.ToString();
+                var startTime = _start.Hour == 0 &&_start.Minute == 0? _start.ToShortDateString() : _start.ToString(CultureInfo.InvariantCulture);
                 var endTime = _end.Hour == 0 && _end.Minute == 0 ? _end.ToShortDateString() : $"{_end}";
                 return $"{Name}: from {startTime} to {endTime}";
             }

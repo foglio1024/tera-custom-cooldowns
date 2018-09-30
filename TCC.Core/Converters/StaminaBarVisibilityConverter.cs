@@ -10,20 +10,13 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((Class)value)
+            //TODO: trigger
+            switch ((Class?)value)
             {
                 case Class.Warrior:
                     return Visibility.Visible;
                 case Class.Lancer:
                     return Visibility.Visible;
-                //case Class.Gunner:
-                //    return Visibility.Visible;
-                //case Class.Brawler:
-                //    return Visibility.Visible;
-                //case Class.Ninja:
-                //    return Visibility.Visible;
-                //case Class.Valkyrie:
-                //    return Visibility.Visible;
                 default:
                     return Visibility.Collapsed;
             }

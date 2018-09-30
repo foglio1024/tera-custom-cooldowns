@@ -222,6 +222,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="dragablz:TabablzControl.IsWrappingTabItem" Value="True">
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                             <Setter TargetName="contentPresenter" Property="Content" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.Header}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
@@ -323,6 +324,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="dragablz:TabablzControl.IsWrappingTabItem" Value="True">
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                             <Setter TargetName="contentPresenter" Property="Content" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.Header}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
@@ -451,8 +453,7 @@
                                                           />
                                         <Thumb HorizontalAlignment="Left" VerticalContentAlignment="Stretch" x:Name="PART_Thumb"
                                                Style="{StaticResource InvisibleThumbStyle}" Width="30" Height="30"
-                                               Margin="6 2 0 0" VerticalAlignment="Top" Background="Transparent"
-                                        />
+                                               Margin="6 2 0 0" VerticalAlignment="Top" />
                                     </Grid>
                             </Border>
                         </Grid>

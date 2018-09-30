@@ -64,7 +64,8 @@
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
               ClipToBounds="False"
-              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+              >
             <Border Background="#fff" CornerRadius="5" Effect="{StaticResource FadedDropShadow}" BorderBrush="#404047" BorderThickness="1" Padding="4,0">
                 <TextBlock Foreground="#d000" 
                            HorizontalAlignment="Center" 
@@ -92,9 +93,9 @@
             <local:Arc.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="15" Color="White"></DropShadowEffect>
             </local:Arc.Effect>
-<local:Arc.RenderTransform>
-    <ScaleTransform />
-</local:Arc.RenderTransform>
+            <local:Arc.RenderTransform>
+                <ScaleTransform />
+            </local:Arc.RenderTransform>
         </local:Arc>
 
     </Grid>

@@ -185,7 +185,7 @@
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Margin="0 0 0 6"
-              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:RhombFixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:RhombFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border Background="{StaticResource KrBgColor}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource KrBorderColor}"
                     BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"

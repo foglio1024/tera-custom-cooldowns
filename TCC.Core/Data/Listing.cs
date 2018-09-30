@@ -133,8 +133,8 @@ namespace TCC.Data
                 var split = _message.Split(' ').ToList();
                 var twLink = split.FirstOrDefault(x =>
                     x.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1);
-                var splitLink = twLink.Split('/');
-                if (splitLink.Length >= 2) username = splitLink[1]; 
+                var splitLink = twLink?.Split('/');
+                if (splitLink != null && splitLink.Length >= 2) username = splitLink[1]; 
                 return $"https://www.twitch.tv/{username}";
             }
         }

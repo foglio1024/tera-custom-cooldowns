@@ -10,9 +10,9 @@ namespace TCC.Parsing.Messages
     public class S_INVEN : ParsedMessage
     {
         public static List<Tuple<uint, int, uint>> Items { get; private set; }
-        public bool More { get; private set; }
-        public bool First { get; private set; }
-        public bool IsOpen { get; private set; }
+        public bool More { get; }
+        public bool First { get; }
+        public bool IsOpen { get; }
         public static uint ElleonMarks { get; set; }
         public S_INVEN(TeraMessageReader reader) : base(reader)
         {
@@ -33,7 +33,7 @@ namespace TCC.Parsing.Messages
                 for (var i = 0; i < count; i++)
                 {
 
-                    var offset = reader.ReadUInt16();
+                    reader.Skip(2); //var offset = reader.ReadUInt16();
                     var next = reader.ReadUInt16();
                     reader.Skip(6);
                     var itemId = reader.ReadUInt32();
@@ -58,8 +58,10 @@ namespace TCC.Parsing.Messages
                 }
 
             }
-            catch { }
-
+            catch
+            {
+                // ignored
+            }
         }
     }
 }

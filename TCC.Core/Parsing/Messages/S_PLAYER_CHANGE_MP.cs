@@ -29,7 +29,7 @@ namespace TCC.Parsing.Messages
         }
         public override string ToString()
         {
-            return string.Format("Current:{0} Max:{1} Diff:{2} Type:{3} Target:{4} Source:{5}", currentMP, maxMP, diff, type, target, source);
+            return $"Current:{currentMP} Max:{maxMP} Diff:{diff} Type:{type} Target:{target} Source:{source}";
         }
     }
 }

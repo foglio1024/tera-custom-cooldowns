@@ -5,21 +5,16 @@ namespace TCC.Parsing.Messages
 {
     public class S_NPC_STATUS : ParsedMessage
     {
-        private ulong entityId, targetId;
-        private bool enraged;
-        private int unk1, unk2;
-
-        public ulong EntityId => entityId;
-        public ulong Target => targetId;
-
-        public bool IsEnraged => enraged;
+        public ulong EntityId { get; }
+        public ulong Target { get; }
+        public bool IsEnraged { get; }
 
         public S_NPC_STATUS(TeraMessageReader reader) : base(reader)
         {
-            entityId = reader.ReadUInt64();
-            enraged = reader.ReadBoolean();
+            EntityId = reader.ReadUInt64();
+            IsEnraged = reader.ReadBoolean();
             reader.Skip(4); //unk1 = reader.ReadInt32();
-            targetId = reader.ReadUInt64();
+            Target = reader.ReadUInt64();
             reader.Skip(4); //unk2 = reader.ReadInt32();
 
             //string npcName = entityId.ToString();

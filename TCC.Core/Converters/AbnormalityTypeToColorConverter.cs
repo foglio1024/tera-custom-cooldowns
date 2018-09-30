@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
@@ -10,20 +11,30 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (AbnormalityType)value;
+            var val = (AbnormalityType?)value ?? AbnormalityType.Buff;
+            string resName;
             switch (val)
             {
                 case AbnormalityType.Stun:
-                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityBuffColor"));
+                    resName = "Stun";
+                    break;
                 case AbnormalityType.DOT:
-                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityDotColor"));
+                    resName = "Dot";
+                    break;
                 case AbnormalityType.Debuff:
-                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityDebuffColor"));
+                    resName = "Debuff";
+                    break;
                 case AbnormalityType.Buff:
-                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityBuffColor"));
+                    resName = "Buff";
+                    break;
                 default:
                     return new SolidColorBrush(Colors.White);
             }
+
+            // ReSharper disable once PossibleNullReferenceException
+            var color = (Color)Application.Current.FindResource($"Abnormality{resName}Color");
+            return new SolidColorBrush(color);
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

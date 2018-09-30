@@ -8,7 +8,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var size = (double)value;
+            var size = (double?)value;
             return size / 1.9;
         }
 

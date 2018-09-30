@@ -126,9 +126,9 @@ namespace TCC.Data
                 NPC(nameof(IsSelected));
             }
         }
-        public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MaxWeekly;
-        public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MaxDaily;
-        public double GuardianCompletion => (double)GuardianQuests / (double)MaxGuardianQuests;
+        public double VanguardWeeklyCompletion => WeekliesDone / (double)SessionManager.MaxWeekly;
+        public double VanguardDailyCompletion => DailiesDone / (double)SessionManager.MaxDaily;
+        public double GuardianCompletion => GuardianQuests / (double)MaxGuardianQuests;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
         public ICollectionView VisibleDungeons { get; set; }

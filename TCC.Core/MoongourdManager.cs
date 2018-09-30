@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
-using TCC.Data;
 
 namespace TCC
 {
@@ -14,7 +13,6 @@ namespace TCC
     {
         private const string RecentUploadsUrl = "https://moongourd.com/api/bot/recent_uploads_tcc\r\n";
         private bool _asking;
-        private static JObject LastRequest { get; set; }
         private static JArray LastResponse { get; set; } = new JArray();
         public event Action<List<MoongourdEncounter>> Done;
         public event Action Started;
@@ -51,6 +49,7 @@ namespace TCC
                     try
                     {
                         var str = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(request.ToString()));
+                        // ReSharper disable once AccessToDisposedClosure
                         var resp = c.UploadString(new Uri(RecentUploadsUrl), str);
                         LastResponse = null;
                         try
@@ -66,12 +65,16 @@ namespace TCC
                             }
                             Done?.Invoke(ret);
                         }
-                        catch (Exception e)
+                        catch
                         {
                             LastResponse = null;
                         }
                     }
-                    catch (Exception e) { }
+                    catch
+                    {
+                        // ignored
+                    }
+
                     _asking = false;
                 }).Start();
             }
@@ -96,65 +99,9 @@ namespace TCC
 
     }
 
-    public class MoongourdEncounter
-    {
-        public string PlayerName { get; }
-        public Class PlayerClass { get; }
-        public string PlayerServer { get; }
-        public string LogId { get; set; }
-        public int Timestamp { get; set; }
-        public int PlayerDps { get; set; }
-        public int PartyDps { get; set; }
-        public int PlayerDeaths { get; set; }
-        public int AreaId { get; set; }
-        public int BossId { get; set; }
-        public string DungeonName { get; set; }
-        public string BossName { get; set; }
-        public BrowseCommand Browse { get; set; }
-        public MoongourdEncounter(JObject jEncounter)
-        {
-            Browse = new BrowseCommand(this);
-            PlayerName = jEncounter["playerName"].Value<string>();
-            Enum.TryParse<Class>(jEncounter["playerClass"].Value<string>(), out var cl);
-            PlayerClass = cl;
-            PlayerServer = jEncounter["playerServer"].Value<string>();
-            LogId = jEncounter["logId"].Value<string>();
-            Timestamp = jEncounter["timestamp"].Value<int>();
-            PlayerDps = jEncounter["playerDps"].Value<int>();
-            PartyDps = jEncounter["partyDps"].Value<int>();
-            try
-            {
-                PlayerDeaths = jEncounter["playerDeaths"].Value<int>();
-            }
-            catch (Exception)
-            {
-                PlayerDeaths = -1;
-            }
-
-            DungeonName = jEncounter["dungeonName"].Value<string>();
-            BossName = jEncounter["bossName"].Value<string>();
-            BossId = jEncounter["bossId"].Value<int>();
-            AreaId = jEncounter["areaId"].Value<int>();
-        }
-
-        public MoongourdEncounter()
-        {
-            var r = new Random();
-            PlayerName = "Player";
-            PlayerClass = Class.Warrior;
-            PlayerServer = "Mystel";
-            LogId = "123456789123";
-            Timestamp = 1234567891;
-            PlayerDps = r.Next(100000, 10000000);
-            PlayerDeaths = r.Next(0, 10);
-            PartyDps = 10000000;
-            DungeonName = "Sirjuka Gallery";
-            BossName = "Barkud";
-        }
-    }
     public class BrowseCommand : ICommand
     {
-        private MoongourdEncounter _encounter;
+        private readonly MoongourdEncounter _encounter;
         public bool CanExecute(object parameter)
         {
             return true;

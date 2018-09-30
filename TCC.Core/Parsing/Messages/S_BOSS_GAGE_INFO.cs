@@ -1,34 +1,36 @@
-﻿using TCC.TeraCommon.Game.Messages;
+﻿using TCC.Annotations;
+using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_BOSS_GAGE_INFO : ParsedMessage
     {
-        private ulong id, targetId;
-        private int templateId, huntingZoneId;//, unk1;
-        private float /*hpDiff,*/ currHp, maxHp;
-        private byte enrage/*, unk3*/;
+        //private ulong id, targetId;
+        //private int templateId, huntingZoneId;//, unk1;
+        //private float /*hpDiff,*/ currHp, maxHp;
+        //private byte enrage/*, unk3*/;
 
-        public ulong EntityId => id;
-        public int TemplateId => templateId;
-        public int HuntingZoneId => huntingZoneId;
-        public float CurrentHP => currHp;
-        public float MaxHP => maxHp;
-        public ulong Target => targetId;
+        public ulong EntityId { get; }
+        public int TemplateId { get; }
+        public int HuntingZoneId { get; }
+        public float CurrentHP { get; }
+        public float MaxHP { get; }
+        public ulong Target { [UsedImplicitly] get; }
+        public bool Enrage { [UsedImplicitly] get; }
 
         public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
         {
-            id = reader.ReadUInt64();
-            huntingZoneId = reader.ReadInt32();
-            templateId = reader.ReadInt32();
-            targetId = reader.ReadUInt64();
+            EntityId = reader.ReadUInt64();
+            HuntingZoneId = reader.ReadInt32();
+            TemplateId = reader.ReadInt32();
+            Target = reader.ReadUInt64();
             reader.Skip(4); //unk1 = reader.ReadInt32();
-            //if (reader.Version < 321550 || reader.Version > 321600)
-            //{
-                enrage = reader.ReadByte();
-                currHp = reader.ReadInt64();
-                maxHp = reader.ReadInt64();
+                            //if (reader.Version < 321550 || reader.Version > 321600)
+                            //{
+            Enrage = reader.ReadBoolean();
+            CurrentHP= reader.ReadInt64();
+            MaxHP = reader.ReadInt64();
 
             //}
             //else

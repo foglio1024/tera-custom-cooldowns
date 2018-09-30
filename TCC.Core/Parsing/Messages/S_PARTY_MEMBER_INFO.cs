@@ -9,7 +9,7 @@ namespace TCC.Parsing.Messages
     public class S_PARTY_MEMBER_INFO : ParsedMessage
     {
 
-        public uint Id { get; private set; }
+        public uint Id { get; }
         public List<User> Members { get; }
 
         public S_PARTY_MEMBER_INFO(TeraMessageReader reader) : base(reader)
@@ -24,7 +24,7 @@ namespace TCC.Parsing.Messages
             for (var i = 0; i < count; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
-                var current = reader.ReadUInt16();
+                reader.Skip(2); // var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.PlayerId = reader.ReadUInt32();

@@ -241,20 +241,16 @@ namespace TCC.Parsing
             {typeof(S_DUNGEON_CLEAR_COUNT_LIST),               new Action<S_DUNGEON_CLEAR_COUNT_LIST>(PacketProcessor.HandleDungeonClears) },
         };
 
-        private readonly OpCodeNamer _opCodeNamer;
         private readonly OpCodeNamer _sysMsgNamer;
-        public string Region;
-        public uint Version;
+        public readonly uint Version;
         public int ReleaseVersion { get; set; }
 
 
-        public MessageFactory(OpCodeNamer opCodeNamer, string region, uint version, bool chatEnabled = false, OpCodeNamer sysMsgNamer = null)
+        public MessageFactory(uint version, OpCodeNamer sysMsgNamer = null)
         {
-            _opCodeNamer = opCodeNamer;
             _sysMsgNamer = sysMsgNamer;
             OpcodeNameToType.Clear();
             Version = version;
-            Region = region;
             TeraMessages.ToList().ForEach(x => OpcodeNameToType[PacketProcessor.OpCodeNamer.GetCode(x.Key)] = x.Value);
             Update();
 
@@ -288,8 +284,7 @@ namespace TCC.Parsing
         }
         private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {
-            Delegate type;
-            if (!OpcodeNameToType.TryGetValue(opCode, out type))
+            if (!OpcodeNameToType.TryGetValue(opCode, out var type))
                 type = UnknownMessageDelegate;
             return (ParsedMessage)type.DynamicInvoke(reader);
         }
@@ -314,8 +309,7 @@ namespace TCC.Parsing
         }
         public bool Process(ParsedMessage message)
         {
-            Delegate type;
-            MainProcessor.TryGetValue(message.GetType(), out type);
+            MainProcessor.TryGetValue(message.GetType(), out var type);
             if (type == null) return false;
             type.DynamicInvoke(message);
             return true;

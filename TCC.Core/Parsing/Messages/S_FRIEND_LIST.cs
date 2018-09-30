@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TCC.Data;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
@@ -22,9 +21,9 @@ namespace TCC.Parsing.Messages
                     Friends.Add(ParseFriend(reader));
 
                 }
-                catch (Exception)
+                catch
                 {
-
+                    // ignored
                 }
             }
         }

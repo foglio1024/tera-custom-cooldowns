@@ -403,7 +403,7 @@ namespace TCC.Data
             if (!ab.IsBuff)
             {
                 _debuffList.Remove(ab.Id);
-                NPC("IsDebuffed");
+                NPC(nameof(IsDebuffed));
             }
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;

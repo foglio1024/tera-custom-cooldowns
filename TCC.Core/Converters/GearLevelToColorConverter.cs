@@ -10,7 +10,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (GearTier) value;
+            var val = (GearTier? ) value ?? GearTier.Low;
             switch (val)
             {
                 case GearTier.Low:

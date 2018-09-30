@@ -9,7 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var size = (double)value;
+            var size = (double?)value ?? 0;
             return new Thickness(0, 0, 0, -size * 1.25);
         }
 

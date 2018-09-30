@@ -9,8 +9,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value) return Visibility.Visible;
-            else return Visibility.Hidden;
+            if (value != null && (bool)value) return Visibility.Visible;
+            return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

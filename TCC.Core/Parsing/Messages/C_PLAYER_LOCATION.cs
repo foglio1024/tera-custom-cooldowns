@@ -5,24 +5,13 @@ namespace TCC.Parsing.Messages
 {
     public class C_PLAYER_LOCATION : ParsedMessage
     {
-        private float x;
-        public float X
-        {
-            get => x;
-            set => x = value;
-        }
-
-        private float y;
-        public float Y
-        {
-            get => y;
-            set => y = value;
-        }
+        public float X { get; }
+        public float Y { get; }
 
         public C_PLAYER_LOCATION(TeraMessageReader reader) : base(reader)
         {
-            x = reader.ReadSingle();
-            y = reader.ReadSingle();
+            X = reader.ReadSingle();
+            Y = reader.ReadSingle();
         }
     }
 }

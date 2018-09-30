@@ -1,29 +1,25 @@
-﻿using TCC.TeraCommon.Game.Messages;
+﻿using TCC.Annotations;
+using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
     public class S_CREATURE_CHANGE_HP : ParsedMessage
     {
-        private long currentHP, maxHP, diff;
-        private uint type;
-        private ulong target, source;
-        private byte crit;
-
-        public long CurrentHP => currentHP;
-        public long MaxHP => maxHP;
-        public long Diff => diff;
-        public ulong Target => target;
-        public ulong Source => source;
-        public byte Crit => crit;
+        public long CurrentHP { get; }
+        public long MaxHP { get; }
+        public long Diff { get; }
+        public ulong Target { get; }
+        public ulong Source { get; }
+        public byte Crit { [UsedImplicitly] get; }
 
         public S_CREATURE_CHANGE_HP(TeraMessageReader reader) : base(reader)
         {
             //if (reader.Version < 321550 || reader.Version > 321600)
             //{
-                currentHP = reader.ReadInt64();
-                maxHP = reader.ReadInt64();
-                diff = reader.ReadInt64();
+            CurrentHP = reader.ReadInt64();
+            MaxHP = reader.ReadInt64();
+            Diff = reader.ReadInt64();
 
             //}
             //else
@@ -32,10 +28,11 @@ namespace TCC.Parsing.Messages
             //    maxHP = reader.ReadInt32();
             //    diff = reader.ReadInt32();
             //}
-            type = reader.ReadUInt32();
-            target = reader.ReadUInt64();
-            source = reader.ReadUInt64();
-            crit = reader.ReadByte();
+            //type = reader.ReadUInt32();
+            reader.Skip(4);
+            Target = reader.ReadUInt64();
+            Source = reader.ReadUInt64();
+            Crit = reader.ReadByte();
         }
     }
 }

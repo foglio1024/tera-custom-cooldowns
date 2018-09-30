@@ -355,7 +355,7 @@ namespace TCC.ViewModels
                 {
                     sb.Append(boss.Name);
                     sb.Append(": ");
-                    sb.Append(string.Format("{0:##0%}", boss.CurrentFactor));
+                    sb.Append($"{boss.CurrentFactor:##0%}");
                     sb.Append("\\");
                 }
             }

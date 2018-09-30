@@ -8,7 +8,6 @@ namespace TCC
 {
     public sealed class KeyboardHook : IDisposable
     {
-        public delegate void TopmostSwitch();
 
         private static KeyboardHook _instance;
         private readonly Window _window = new Window();
@@ -24,18 +23,17 @@ namespace TCC
 
 
         public static KeyboardHook Instance => _instance ?? (_instance = new KeyboardHook());
-        public event TopmostSwitch SwitchTopMost;
 
-        public bool SetHotkeys(bool value)
+        private void SetHotkeys(bool value)
         {
             if (value && !_isRegistered)
             {
                 Register();
-                return true;
-
+                return;
             }
-            if (!value && _isRegistered) { ClearHotkeys(); return true; }
-            return false;
+
+            if (value || !_isRegistered) return;
+            ClearHotkeys();
         }
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e)
@@ -71,11 +69,13 @@ namespace TCC
         }
 
 
+/*
         public void Update()
         {
             ClearHotkeys();
             Register();
         }
+*/
 
         public void RegisterKeyboardHook()
         {
@@ -134,7 +134,7 @@ namespace TCC
         /// </summary>
         /// <param name="modifier">The modifiers that are associated with the hot key.</param>
         /// <param name="key">The key itself that is associated with the hot key.</param>
-        public void RegisterHotKey(HotkeysData.ModifierKeys modifier, Keys key)
+        private void RegisterHotKey(HotkeysData.ModifierKeys modifier, Keys key)
         {
             if (key == Keys.None)
             {
@@ -212,7 +212,7 @@ namespace TCC
 
         private void ClearHotkeys()
         {
-            for (var i = _currentId; i > 0; i--) { var v = UnregisterHotKey(_window.Handle, i); }
+            for (var i = _currentId; i > 0; i--) { UnregisterHotKey(_window.Handle, i); }
             _currentId = 0;
             _isRegistered = false;
         }

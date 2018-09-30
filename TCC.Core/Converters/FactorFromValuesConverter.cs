@@ -9,14 +9,7 @@ namespace TCC.Converters
         {
             var v = System.Convert.ToSingle(values[0]);
             var m = System.Convert.ToInt32(values[1]);
-            if (m == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return (double)v/(double)m;
-            }
+            return m == 0 ? 1 : v / (double) m;
         }
 
 

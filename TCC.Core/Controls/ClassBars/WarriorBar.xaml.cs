@@ -46,7 +46,7 @@ namespace TCC.Controls.ClassBars
             if (_dc != null)
             {
                 _dc.TraverseCut.PropertyChanged += AnimateTraverseCut;
-                _dc.TraverseCut.OnToZero += CooldownTraverseCut;
+                _dc.TraverseCut.ToZero += CooldownTraverseCut;
                 _dc.EdgeCounter.PropertyChanged += EdgeCounter_PropertyChanged;
                 _tc = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) {EasingFunction = new QuadraticEase()};
                 _tc.Completed += (_, __) => _tcAnimating = false;

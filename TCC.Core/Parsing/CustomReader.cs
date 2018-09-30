@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game;
-using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing
 {
@@ -11,17 +11,12 @@ namespace TCC.Parsing
         public CustomReader(Message message)
         : base(GetStream(message), Encoding.Unicode)
         {
-            Message = message;
         }
-
-        public Message Message { get; private set; }
-        public string OpCodeName { get; private set; }
-        public uint Version { get; private set; }
-        internal OpCodeNamer SysMsgNamer { get; private set; }
 
         private static MemoryStream GetStream(Message message)
         {
-            return new MemoryStream(message.Payload.Array, message.Payload.Offset, message.Payload.Count, false, true);
+            return new MemoryStream(message.Payload.Array ?? throw new InvalidOperationException(), 
+                message.Payload.Offset, message.Payload.Count, false, true);
         }
 
         public EntityId ReadEntityId()
@@ -30,7 +25,7 @@ namespace TCC.Parsing
             return new EntityId(id);
         }
 
-        public Vector3f ReadVector3f()
+        public Vector3f ReadVector3F()
         {
             Vector3f result;
             result.X = ReadSingle();

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Timers;
+﻿using System.Timers;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -101,9 +100,12 @@ namespace TCC.Data
             {
                 _removeTimer?.Stop();
                 _removeTimer?.Start();
-                NPC("Refresh");
+                NPC();
             }
-            catch (Exception) { }
+            catch
+            {
+                // ignored
+            }
         }
         private void UpdateDungeonName()
         {
@@ -124,7 +126,7 @@ namespace TCC.Data
         }
         public override string ToString()
         {
-            return string.Format("[{0}] {1}: {2}", Id, Name, Message);
+            return $"[{Id}] {Name}: {Message}";
         }
     }
 }

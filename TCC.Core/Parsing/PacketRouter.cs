@@ -61,7 +61,7 @@ namespace TCC.Parsing
                 }
                 OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt"));
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt"));
-                Factory = new MessageFactory(OpCodeNamer, Server.Region, message.Versions[0], sysMsgNamer: SystemMessageNamer);
+                Factory = new MessageFactory(message.Versions[0], sysMsgNamer: SystemMessageNamer);
                 TeraSniffer.Instance.Connected = true;
                 Proxy.ConnectToProxy();
                 return;
@@ -163,7 +163,7 @@ namespace TCC.Parsing
             }
             else
             {
-                EntitiesManager.UpdateNPCbyCreatureChangeHP(p.Target, p.CurrentHP, p.MaxHP);
+                EntitiesManager.UpdateNPC(p.Target, p.CurrentHP, p.MaxHP);
             }
         }
         public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
@@ -186,7 +186,7 @@ namespace TCC.Parsing
 
         public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
-            EntitiesManager.UpdateNPCbyGauge(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
+            EntitiesManager.UpdateNPC(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
         }
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
@@ -265,7 +265,7 @@ namespace TCC.Parsing
             SessionManager.Logged = true;
             SessionManager.Encounter = false;
             MessageFactory.Update();
-            SessionManager.CurrentPlayer.EntityId = p.entityId;
+            SessionManager.CurrentPlayer.EntityId = p.EntityId;
             SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
             SessionManager.CurrentPlayer.ServerId = p.ServerId;
             SessionManager.CurrentPlayer.Name = p.Name;
@@ -593,6 +593,7 @@ namespace TCC.Parsing
 
         internal static void HandleDungeonClears(S_DUNGEON_CLEAR_COUNT_LIST x)
         {
+            if (x.PlayerId != SessionManager.CurrentPlayer.PlayerId) return;
             foreach (var dg in x.DungeonClears)
             {
                 if (InfoWindowViewModel.Instance.SelectedCharacter != null)

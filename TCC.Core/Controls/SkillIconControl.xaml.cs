@@ -37,7 +37,7 @@ namespace TCC.Controls
             if(DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (SkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
-
+            _context.Ending += OnEnding;
             //LayoutTransform = new ScaleTransform(.9, .9, .5, .5);
 
             //CurrentCD = (double)_context.Cooldown / 1000;
@@ -53,6 +53,25 @@ namespace TCC.Controls
                 NotifyPropertyChanged(nameof(CurrentCD));
             };
             AnimateCooldown();
+        }
+
+        private void OnEnding()
+        {
+            //var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(SkillManager.Ending))
+            //{
+            //EasingFunction = new QuadraticEase()
+            //};
+            //var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(SkillManager.Ending))
+            //{
+            //EasingFunction = new QuadraticEase()
+            //};
+            //_context.Dispatcher.Invoke(() =>
+            //{
+            //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
+            //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
+            //});
+            _closeTimer.IsEnabled = true;
+
         }
 
         private ulong _secondsPassed;
@@ -71,23 +90,6 @@ namespace TCC.Controls
                 if (newAngle > 1) newAngle = 1;
 
                 AnimateCooldown(newAngle);
-            }
-            else if(e.PropertyName == "Ending")
-            {
-                //var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(SkillManager.Ending))
-                //{
-                    //EasingFunction = new QuadraticEase()
-                //};
-                //var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(SkillManager.Ending))
-                //{
-                    //EasingFunction = new QuadraticEase()
-                //};
-                //_context.Dispatcher.Invoke(() =>
-                //{
-                //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
-                //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
-                //});
-                _closeTimer.IsEnabled = true;
             }
         }
 

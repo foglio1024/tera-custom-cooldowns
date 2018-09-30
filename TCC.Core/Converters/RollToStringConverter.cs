@@ -8,17 +8,14 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if((int)value == -1)
+            switch ((int?)value)
             {
-                return "x";
-            }
-            else if((int)value == 0)
-            {
-                return "-";
-            }
-            else
-            {
-                return ((int)value).ToString();
+                case -1:
+                    return "x";
+                case 0:
+                    return "-";
+                default:
+                    return ((int?)value).ToString();
             }
         }
 

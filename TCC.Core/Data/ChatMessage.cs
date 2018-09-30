@@ -18,111 +18,76 @@ namespace TCC.Data
         #endregion
 
         #region Properties
-        protected ChatChannel channel;
+
+        private ChatChannel _channel;
         public ChatChannel Channel
         {
-            get => channel;
+            get => _channel;
             protected set
             {
-                if (channel == value) return;
-                channel = value;
+                if (_channel == value) return;
+                _channel = value;
                 NPC(nameof(Channel));
             }
         }
 
-        protected string timestamp;
+        private string _timestamp;
         public string Timestamp
         {
-            get => timestamp;
+            get => _timestamp;
             protected set
             {
-                if (timestamp == value) return;
-                timestamp = value;
-                NPC(nameof(timestamp));
+                if (_timestamp == value) return;
+                _timestamp = value;
+                NPC(nameof(_timestamp));
             }
         }
 
-        protected string rawMessage;
+        private string _rawMessage;
         public string RawMessage
         {
-            get => rawMessage;
-            protected set
+            get => _rawMessage;
+            private set
             {
-                if (rawMessage == value) return;
-                rawMessage = value;
+                if (_rawMessage == value) return;
+                _rawMessage = value;
                 NPC(nameof(RawMessage));
             }
         }
 
-        protected string author;
+        private string _author;
         public string Author
         {
-            get => author;
+            get => _author;
             set
             {
-                if (author == value) return;
-                author = value;
+                if (_author == value) return;
+                _author = value;
                 NPC(nameof(Author));
             }
         }
 
-        protected bool containsPlayerName;
-        public bool ContainsPlayerName
-        {
-            get => containsPlayerName;
-            protected set
-            {
-                if (containsPlayerName == value) return;
-                containsPlayerName = value;
-            }
-        }
+        public bool ContainsPlayerName { get; protected set; }
 
-        protected bool _animate = true;
+        private bool _animate = true;
 
         public bool Animate
         {
             get => _animate && Settings.AnimateChatMessages;
-            set
-            {
-                if (_animate == value) return;
-                _animate = value;
-            }
+            set => _animate = value;
         }
 
-        protected bool isContracted;
-        public bool IsContracted
-        {
-            get => isContracted;
-            set
-            {
-                if (isContracted == value) return;
-                isContracted = value;
-                NPC(nameof(IsContracted));
-            }
-        }
-
-        private int rows;
-        public int Rows
-        {
-            get => rows;
-            set
-            {
-                if (rows == value) return;
-                rows = value;
-                NPC(nameof(Rows));
-            }
-        }
         public bool ShowTimestamp => Settings.ShowTimestamp;
-
         public bool ShowChannel => Settings.ShowChannel;
-        protected SynchronizedObservableCollection<MessagePiece> pieces;
+
+        private SynchronizedObservableCollection<MessagePiece> _pieces;
         public SynchronizedObservableCollection<MessagePiece> Pieces
         {
-            get => pieces;
+            get => _pieces;
             protected set
             {
-                if (pieces == value) return;
-                pieces = value;
+                if (_pieces == value) return;
+                _pieces = value;
                 NPC(nameof(Pieces));
             }
         }
@@ -217,11 +182,11 @@ namespace TCC.Data
                         {
                             //formatted piece: get color and content
                             customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
-                            var fStart = piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) == -1 ?
-                                piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) :
-                                piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) + 6;
+                            //var fStart = piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) == -1 ?
+                                //piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) :
+                                //piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) + 6;
 
-                            var fEnd = fStart == -1 ? 0 : piece.IndexOf("\"", fStart, piece.Length, StringComparison.InvariantCultureIgnoreCase);
+                            //var fEnd = fStart == -1 ? 0 : piece.IndexOf("\"", fStart, piece.Length, StringComparison.InvariantCultureIgnoreCase);
                             //fontSize = fStart == -1 ? fontSize : int.Parse(piece.Substring(fStart, fEnd - fStart));
                             var s = piece.IndexOf('>') + 1;
                             var e = piece.IndexOf('<', s);
@@ -501,7 +466,7 @@ namespace TCC.Data
             {
                 //it's formatted: parse then add
                 var customColor = GetCustomColor(msg);
-                var fontSize = GetPieceSize(msg);
+                var fontSize = GetPieceSize(); //msg);
                 //get link type
                 var linkIndex = msg.IndexOf("#####", StringComparison.Ordinal);
                 if (linkIndex > -1)
@@ -617,17 +582,17 @@ namespace TCC.Data
             var guardId = uint.Parse(locTree[1]);
             var sectionId = uint.Parse(locTree[2]);
             if (worldId == 1 && guardId == 2 && sectionId == 9) sectionId = 7;
-            var continent = uint.Parse(pars[1]);
-            continent = continent == 0 && worldId == 1 && guardId == 24 && sectionId == 183001 ? 7031 : continent;
+            //var continent = uint.Parse(pars[1]);
+            //continent = continent == 0 && worldId == 1 && guardId == 24 && sectionId == 183001 ? 7031 : continent;
             var coords = pars[2].Split(',');
             var x = double.Parse(coords[0], CultureInfo.InvariantCulture);
             var y = double.Parse(coords[1], CultureInfo.InvariantCulture);
-            var z = double.Parse(coords[2], CultureInfo.InvariantCulture);
+            //var z = double.Parse(coords[2], CultureInfo.InvariantCulture);
 
-            var textStart = a.IndexOf('>', a.IndexOf("#####", StringComparison.Ordinal)) + 1;
-            var textEnd = a.IndexOf('<', textStart);
-            var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
-            text = ReplaceEscapes(text);
+            //var textStart = a.IndexOf('>', a.IndexOf("#####", StringComparison.Ordinal)) + 1;
+            //var textEnd = a.IndexOf('<', textStart);
+            //var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
+            //text = ReplaceEscapes(text);
 
             var world = SessionManager.MapDatabase.Worlds[worldId];
             var guard = world.Guards[guardId];
@@ -696,7 +661,7 @@ namespace TCC.Data
                 if (colorIndex != -1) hasSpace = true;
             }
             var offset = hasSpace ? 10 : 8;
-            var colorEnd = msg.IndexOf("\"", colorIndex+offset+1);
+            var colorEnd = msg.IndexOf("\"", colorIndex+offset+1, StringComparison.Ordinal);
             if(colorIndex == -1) return "";
             var col = msg.Substring(colorIndex + offset, colorEnd - colorIndex - offset);
             while (col.Length < 6)
@@ -732,14 +697,18 @@ namespace TCC.Data
             }
             return content.ToString();
         }
-        private int GetPieceSize(string msg)
-        {
-            var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) > -1 ?
-                msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6 : -1;
-            var sizeEnd = sizeIndex > -1 ? msg.IndexOf("\"", sizeIndex, StringComparison.Ordinal) : 0;
-            sizeEnd = sizeEnd > -1 ? sizeEnd : msg.IndexOf('\'', sizeIndex);
-            return Settings.FontSize;//sizeIndex > -1 ? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
+        //private int GetPieceSize(string msg)
+        //{
+        //    //var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) > -1 ?
+        //    //    msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6 : -1;
+        //    //var sizeEnd = sizeIndex > -1 ? msg.IndexOf("\"", sizeIndex, StringComparison.Ordinal) : 0;
+        //    //sizeEnd = sizeEnd > -1 ? sizeEnd : msg.IndexOf('\'', sizeIndex);
+        //    return Settings.FontSize;//sizeIndex > -1 ? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
 
+        //}
+        private static int GetPieceSize()
+        {
+            return Settings.FontSize;
         }
         #endregion
 

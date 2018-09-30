@@ -8,9 +8,8 @@ namespace TCC
 {
     public static class EntitiesManager
     {
-        private static ulong _currentEncounter;
-        private static Dictionary<ulong, string> NearbyNPCs = new Dictionary<ulong, string>();
-        private static Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
+        private static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
+        private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
         {
             if (IsWorldBoss(zoneId, templateId))
@@ -27,7 +26,7 @@ namespace TCC
 
             if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
-                if (!NearbyNPCs.ContainsKey(entityId)) NearbyNPCs.Add(entityId, m.Name);
+                if (!NearbyNPC.ContainsKey(entityId)) NearbyNPC.Add(entityId, m.Name);
                 FlyingGuardianDataProvider.InvokeProgressChanged();
                 if (m.IsBoss)
                 {
@@ -61,7 +60,7 @@ namespace TCC
 
         public static void DespawnNPC(ulong target, DespawnType type)
         {
-            if(NearbyNPCs.ContainsKey(target)) NearbyNPCs.Remove(target);
+            if(NearbyNPC.ContainsKey(target)) NearbyNPC.Remove(target);
 
             BossGageWindowViewModel.Instance.RemoveBoss(target, type);
             if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0)
@@ -76,38 +75,31 @@ namespace TCC
         {
             BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
         }
-        public static void UpdateNPCbyGauge(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
+        public static void UpdateNPC(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
             BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
+            SetEncounter(curHP, maxHP);
+        }
+        public static void UpdateNPC(ulong target, long currentHP, long maxHP)
+        {
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, HpChangeSource.CreatureChangeHp);
+            SetEncounter(currentHP, maxHP);
+        }
+        private static void SetEncounter(float curHP, float maxHP)
+        {
             if (maxHP > curHP)
             {
-                _currentEncounter = entityId;
                 SessionManager.Encounter = true;
             }
             else if (maxHP == curHP || curHP == 0)
             {
-                _currentEncounter = 0;
-                SessionManager.Encounter = false;
-            }
-        }
-        public static void UpdateNPCbyCreatureChangeHP(ulong target, long currentHP, long maxHP)
-        {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, HpChangeSource.CreatureChangeHp);
-            if (maxHP > currentHP)
-            {
-                _currentEncounter = target;
-                SessionManager.Encounter = true;
-            }
-            else if (maxHP == currentHP || currentHP == 0)
-            {
-                _currentEncounter = 0;
                 SessionManager.Encounter = false;
             }
         }
         public static void ClearNPC()
         {
             BossGageWindowViewModel.Instance.ClearBosses();
-            NearbyNPCs.Clear();
+            NearbyNPC.Clear();
             NearbyPlayers.Clear();
             ClassAbnormalityTracker.ClearMarkedTargets();
         }
@@ -141,38 +133,19 @@ namespace TCC
 
             Dragon d;
             if (rel.Y > .8 * rel.X - 78)
-            {
-                if (rel.Y > -1.3 * rel.X - 94)
-                {
-                    d = Dragon.Aquadrax;
+                 d = rel.Y > -1.3 * rel.X - 94 ? Dragon.Aquadrax : Dragon.Umbradrax;
+            else d = rel.Y > -1.3 * rel.X - 94 ? Dragon.Terradrax : Dragon.Ignidrax;
 
-                }
-                else
-                {
-                    d = Dragon.Umbradrax;
-                }
-            }
-            else
-            {
-                if (rel.Y > -1.3 * rel.X - 94)
-                {
-                    d = Dragon.Terradrax;
-                }
-                else
-                {
-                    d = Dragon.Ignidrax;
-                }
-            }
             return d;
         }
 
         public static string GetNpcName(ulong eid)
         {
-            return NearbyNPCs.ContainsKey(eid) ? NearbyNPCs[eid] : "unknown";
+            return NearbyNPC.ContainsKey(eid) ? NearbyNPC[eid] : "unknown";
         }
         public static string GetUserName(ulong eid)
         {
-            return NearbyPlayers.ContainsKey(eid) ? NearbyNPCs[eid] : "unknown";
+            return NearbyPlayers.ContainsKey(eid) ? NearbyNPC[eid] : "unknown";
         }
 
         internal static void DepawnUser(ulong entityId)
@@ -187,19 +160,19 @@ namespace TCC
 
         public static bool IsEntitySpawned(ulong pSource)
         {
-            return NearbyNPCs.ContainsKey(pSource) || NearbyPlayers.ContainsKey(pSource);
+            return NearbyNPC.ContainsKey(pSource) || NearbyPlayers.ContainsKey(pSource);
         }
 
         public static bool IsEntitySpawned(uint zoneId, uint templateId)
         {
             var name = SessionManager.MonsterDatabase.GetName(templateId, zoneId);
-            return name != "Unknown" && NearbyNPCs.ContainsValue(name);
+            return name != "Unknown" && NearbyNPC.ContainsValue(name);
         }
 
         public static string GetEntityName(ulong pSource)
         {
-            return NearbyNPCs.ContainsKey(pSource)
-                ? NearbyNPCs[pSource]
+            return NearbyNPC.ContainsKey(pSource)
+                ? NearbyNPC[pSource]
                 : NearbyPlayers.ContainsKey(pSource)
                     ? NearbyPlayers[pSource]
                     : "unknown";

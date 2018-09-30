@@ -387,7 +387,7 @@
             </Path>
         </Grid>
         <Grid  Width="14" Height="14" 
-               Opacity="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}"
+               Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Grid.Column="0"
                Margin="0"

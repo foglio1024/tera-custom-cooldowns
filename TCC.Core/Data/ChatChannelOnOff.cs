@@ -4,26 +4,26 @@ namespace TCC.Data
 {
     public class ChatChannelOnOff : TSPropertyChanged
     {
-        private bool enabled;
-        private ChatChannel channel;
+        private bool _enabled;
+        private ChatChannel _channel;
 
         public bool Enabled
         {
-            get => enabled;
+            get => _enabled;
             set
             {
-                if (enabled == value) return;
-                enabled = value;
+                if (_enabled == value) return;
+                _enabled = value;
                 NPC(nameof(Enabled));
             }
         }
         public ChatChannel Channel
         {
-            get => channel;
+            get => _channel;
             set
             {
-                if (channel == value) return;
-                channel = value;
+                if (_channel == value) return;
+                _channel = value;
                 NPC(nameof(Channel));
             }
         }

@@ -12,23 +12,23 @@ namespace TCC.Data
     {
         public bool HasGage { get; set; }
 
-        public ulong EntityId { get; set; }
-        protected string name;
+        public ulong EntityId { get; }
+        private string _name;
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                if (name != value)
+                if (_name != value)
                 {
-                    name = value;
+                    _name = value;
                     NPC(nameof(Name));
                 }
             }
         }
 
         public bool IsBoss { get; set; }
-        protected SynchronizedObservableCollection<AbnormalityDuration> _buffs;
+        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
             get => _buffs;
@@ -36,23 +36,23 @@ namespace TCC.Data
             {
                 if (_buffs == value) return;
                 _buffs = value;
-                NPC("Buffs");
+                NPC();
             }
         }
 
-        protected bool enraged;
+        private bool _enraged;
         public bool Enraged
         {
-            get => enraged;
+            get => _enraged;
             set
             {
-                if (enraged == value) return;
-                enraged = value;
-                NPC(nameof(Enraged));
+                if (_enraged == value) return;
+                _enraged = value;
+                NPC();
             }
         }
 
-        protected float _maxHP;
+        private float _maxHP;
         public float MaxHP
         {
             get => _maxHP;
@@ -62,11 +62,12 @@ namespace TCC.Data
                 {
                     _maxHP = value;
                     EnragePattern?.Update(value);
-                    NPC("MaxHP");
+                    NPC();
                 }
             }
         }
-        protected float _currentHP;
+
+        private float _currentHP;
         public float CurrentHP
         {
             get => _currentHP;
@@ -81,28 +82,28 @@ namespace TCC.Data
                 }
             }
         }
-        private uint maxShield;
+        private uint _maxShield;
         public uint MaxShield
         {
-            get => maxShield;
+            get => _maxShield;
             set
             {
-                if (maxShield != value)
+                if (_maxShield != value)
                 {
-                    maxShield = value;
+                    _maxShield = value;
                     NPC(nameof(MaxShield));
                     NPC(nameof(ShieldFactor));
                 }
             }
         }
-        private float currentShield;
+        private float _currentShield;
         public float CurrentShield
         {
-            get => currentShield;
+            get => _currentShield;
             set
             {
-                if (currentShield == value) return;
-                currentShield = value;
+                if (_currentShield == value) return;
+                _currentShield = value;
                 NPC(nameof(CurrentShield));
                 NPC(nameof(ShieldFactor));
             }
@@ -112,50 +113,44 @@ namespace TCC.Data
 
         public float CurrentFactor => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
         public float CurrentPercentage => CurrentFactor * 100;
-        protected Visibility visible;
+        private Visibility _visible;
         public Visibility Visible
         {
-            get => visible;
+            get => _visible;
             set
             {
-                if (visible != value)
-                {
-                    visible = value;
-                    NPC("Visible");
-                }
+                if (_visible == value) return;
+                _visible = value;
+                NPC();
             }
         }
 
-        protected ulong target;
+        private ulong _target;
         public ulong Target
         {
-            get => target;
+            get => _target;
             set
             {
-                if (target != value)
-                {
-                    target = value;
-                    NPC("Target");
-                }
+                if (_target == value) return;
+                _target = value;
+                NPC();
             }
         }
 
-        protected AggroCircle currentAggroType = AggroCircle.None;
+        private AggroCircle _currentAggroType = AggroCircle.None;
         public AggroCircle CurrentAggroType
         {
-            get => currentAggroType;
+            get => _currentAggroType;
             set
             {
-                if (currentAggroType != value)
-                {
-                    currentAggroType = value;
-                    NPC("CurrentAggroType");
-                }
+                if (_currentAggroType == value) return;
+                _currentAggroType = value;
+                NPC();
             }
         }
 
-        public uint ZoneId { get; protected set; }
-        public uint TemplateId { get; protected set; }
+        public uint ZoneId { get; }
+        public uint TemplateId { get; }
 
         public EnragePattern EnragePattern { get; set; }
         public TimerPattern TimerPattern { get; set; }
@@ -165,7 +160,7 @@ namespace TCC.Data
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, _target, _dispatcher, true);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
                 if (ab.IsShield)
@@ -190,15 +185,14 @@ namespace TCC.Data
 
                 Buffs.Remove(buff);
                 buff.Dispose();
-                if (ab.IsShield)
-                {
-                    CurrentShield = 0;
-                    MaxShield = 0;
-                }
 
+                if (!ab.IsShield) return;
+                CurrentShield = 0;
+                MaxShield = 0;
             }
-            catch (Exception)
+            catch
             {
+                // ignored
             }
         }
 
@@ -255,21 +249,20 @@ namespace TCC.Data
             TimerPattern?.SetTarget(this);
             if (IsPhase1Dragon)
             {
-                ShieldDuration = new Timer();
-                ShieldDuration.Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000;
-                ShieldDuration.Elapsed += ShieldFailed;
+                _shieldDuration = new Timer {Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000};
+                _shieldDuration.Elapsed += ShieldFailed;
             }
         }
-        public Npc() { }
+
         public override string ToString()
         {
-            return string.Format("{0} - {1}", EntityId, Name);
+            return $"{EntityId} - {Name}";
         }
 
         public void Dispose()
         {
             foreach (var buff in _buffs) buff.Dispose();
-            ShieldDuration?.Dispose();
+            _shieldDuration?.Dispose();
             TimerPattern?.Dispose();
         }
 
@@ -277,7 +270,8 @@ namespace TCC.Data
 
 
         //////////////////SHIELD////////////////////////
-        private Timer ShieldDuration;
+        //TODO: make this a separate class
+        private readonly Timer _shieldDuration;
 
         private ShieldStatus _shield;
         public ShieldStatus Shield
@@ -291,25 +285,25 @@ namespace TCC.Data
             }
         }
 
-        private bool isSelected;
+        private bool _isSelected;
         public bool IsSelected
         {
-            get => isSelected;
+            get => _isSelected;
             set
             {
-                if (isSelected == value) return;
-                isSelected = value;
-                NPC(nameof(IsSelected));
+                if (_isSelected == value) return;
+                _isSelected = value;
+                NPC();
             }
         }
         private void ShieldFailed(object sender, EventArgs e)
         {
-            ShieldDuration.Stop();
+            _shieldDuration.Stop();
             Shield = ShieldStatus.Failed;
         }
         public void BreakShield()
         {
-            ShieldDuration.Stop();
+            _shieldDuration.Stop();
             Shield = ShieldStatus.Broken;
             Task.Delay(5000).ContinueWith(t =>
             {
@@ -318,7 +312,7 @@ namespace TCC.Data
         }
         public void StartShield()
         {
-            ShieldDuration.Start();
+            _shieldDuration.Start();
             Shield = ShieldStatus.On;
         }
 
@@ -333,14 +327,14 @@ namespace TCC.Data
 
     public class TimerPattern : TSPropertyChanged, IDisposable
     {
-        private Timer _timer;
-        public bool Running => _timer.Enabled;
+        private readonly Timer _timer;
+        protected bool Running => _timer.Enabled;
         protected Npc Target { get; set; }
-        public int Duration { get; set; }
+        public int Duration { get; }
 
         public event Action Started;
         public event Action Ended;
-        public event Action Reset;
+        //public event Action Reset;
 
         public void Start()
         {

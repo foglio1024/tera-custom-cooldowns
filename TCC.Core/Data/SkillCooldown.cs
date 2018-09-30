@@ -6,6 +6,10 @@ namespace TCC.Data
 {
     public class SkillCooldown : TSPropertyChanged, IDisposable
     {
+        //TODO: use events
+
+        public event Action Ending;
+
         public Dispatcher Dispatcher => _dispatcher;
         public Skill Skill { get; set; }
         public ulong Cooldown { get; set; }
@@ -34,7 +38,7 @@ namespace TCC.Data
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            NPC("Ending");
+            Ending?.Invoke();
             _timer?.Stop();
         }
 
@@ -46,7 +50,7 @@ namespace TCC.Data
         {
             Cooldown = cd;
             Pre = false;
-            NPC("Refresh");
+            NPC();
             if (_timer == null) return;
             _timer.Stop();
             _timer.Interval = Cooldown > 0 ? Cooldown : 1;

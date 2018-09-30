@@ -5,16 +5,11 @@ namespace TCC.Parsing.Messages
 {
     public class S_DESPAWN_USER : ParsedMessage
     {
-        private ulong entityId;
-        public ulong EntityId
-        {
-            get => entityId;
-            set => entityId = value;
-        }
+        public ulong EntityId { get; }
 
         public S_DESPAWN_USER(TeraMessageReader reader) : base(reader)
         {
-            entityId = reader.ReadUInt64();
+            EntityId = reader.ReadUInt64();
         }
     }
 }

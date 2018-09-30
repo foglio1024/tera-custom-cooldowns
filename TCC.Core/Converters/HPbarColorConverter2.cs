@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace TCC.Converters
 {
-    internal class BoolToBrushConverter : IValueConverter
+    public class HPbarColorConverter2 : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-            {
-                return new SolidColorBrush(Color.FromArgb(0x55, 0x0, 0xa5, 0x61));
-            }
-            else
-            {
-                return Brushes.Transparent;
-            }
+            return (bool?) value ?? false
+                ? Application.Current.FindResource("HpDebuffColor2Base")
+                : Application.Current.FindResource("HpColor2Base");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

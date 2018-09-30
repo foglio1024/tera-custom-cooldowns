@@ -52,7 +52,7 @@ namespace TCC.Data
         public readonly uint PlayerId;
         public readonly uint ListingId;
 
-        public BrokerChatMessage(S_TRADE_BROKER_DEAL_SUGGESTED p) : base()
+        public BrokerChatMessage(S_TRADE_BROKER_DEAL_SUGGESTED p)
         {
             ContainsPlayerName = true;
             Channel = ChatChannel.Bargain;

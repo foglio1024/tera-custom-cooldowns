@@ -29,7 +29,7 @@
         internal void Update(float maxHp)
         {
             if (_flatHp == -1) return;
-            Percentage = (_flatHp / (float)maxHp) * 100;
+            Percentage = (_flatHp / maxHp) * 100;
         }
     }
 }

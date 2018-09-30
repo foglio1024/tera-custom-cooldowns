@@ -1,14 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace TCC.Controls
 {
     /// <summary>
     /// Logica di interazione per WindowButtons.xaml
     /// </summary>
-    public partial class WindowButtons : UserControl
+    public partial class WindowButtons
     {
-        private WindowSettings _dc => DataContext as WindowSettings;
+        private WindowSettings Dc => DataContext as WindowSettings;
         public WindowButtons()
         {
             InitializeComponent();
@@ -45,18 +44,18 @@ namespace TCC.Controls
 
         private void Hide(object sender, RoutedEventArgs e)
         {
-            _dc.Visible = false;
+            Dc.Visible = false;
         }
 
         private void Pin(object sender, RoutedEventArgs e)
         {
-            _dc.ShowAlways = !_dc.ShowAlways;
+            Dc.ShowAlways = !Dc.ShowAlways;
         }
 
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            _dc.Enabled = false;
+            Dc.Enabled = false;
         }
 
         private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
@@ -66,12 +65,12 @@ namespace TCC.Controls
 
         private void AutoDim(object sender, RoutedEventArgs e)
         {
-            _dc.AutoDim = !_dc.AutoDim;
+            Dc.AutoDim = !Dc.AutoDim;
         }
 
         private void MakeGlobal(object sender, RoutedEventArgs e)
         {
-            _dc.MakePositionsGlobal();
+            Dc.MakePositionsGlobal();
         }
     }
 }
