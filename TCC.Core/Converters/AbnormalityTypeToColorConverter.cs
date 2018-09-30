@@ -14,13 +14,13 @@ namespace TCC.Converters
             switch (val)
             {
                 case AbnormalityType.Stun:
-                    return new SolidColorBrush((Color)App.Current.FindResource("AbnormalityBuffColor"));
+                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityBuffColor"));
                 case AbnormalityType.DOT:
-                    return new SolidColorBrush((Color)App.Current.FindResource("AbnormalityDotColor"));
+                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityDotColor"));
                 case AbnormalityType.Debuff:
-                    return new SolidColorBrush((Color)App.Current.FindResource("AbnormalityDebuffColor"));
+                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityDebuffColor"));
                 case AbnormalityType.Buff:
-                    return new SolidColorBrush((Color)App.Current.FindResource("AbnormalityBuffColor"));
+                    return new SolidColorBrush((Color)System.Windows.Application.Current.FindResource("AbnormalityBuffColor"));
                 default:
                     return new SolidColorBrush(Colors.White);
             }
