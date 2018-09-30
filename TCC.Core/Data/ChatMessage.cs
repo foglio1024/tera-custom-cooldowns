@@ -377,7 +377,7 @@ namespace TCC.Data
         internal static void SplitSimplePieces(ChatMessage chatMessage)
         {
             var simplePieces = new List<MessagePiece>();
-            var onlySimple = true;
+            //var onlySimple = true;
             foreach (var item in chatMessage.Pieces)
             {
                 if (item.Type == MessagePieceType.Simple)
@@ -387,11 +387,7 @@ namespace TCC.Data
                 else if (item.Type == MessagePieceType.Item)
                 {
                     simplePieces.Add(item);
-                    onlySimple = false;
-                }
-                else
-                {
-                    onlySimple = false;
+                    //onlySimple = false;
                 }
             }
             //if (onlySimple) return;
