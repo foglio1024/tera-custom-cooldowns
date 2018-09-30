@@ -5,47 +5,36 @@ namespace TCC.Parsing.Messages
 {
     public class S_PLAYER_STAT_UPDATE : ParsedMessage
     {
-        private int currHp, currMp, unk1, maxHp, maxMp, basePower, baseEndu, baseImpactFactor, baseBalanceFactor;
-        private short baseMovSpeed, unk2, baseAtkSpeed;
-        private float baseCritRate, baseCritResist, baseCritPower;
-        private int baseAttack, baseAttack2, baseDefense, baseImpact, baseBalance;
-        private float baseResistWeak, baseResistPeriodic, baseResistStun;
-        private int bonusPower, bonusEndu, bonusImpactFac, bonusBalanceFac;
-        private short bonusMovSpeed, unk3, bonusAtkSpeed;
-        private float bonusCritRate, bonusCritResist, bonusCritPower;
-        private int bonusAttack, bonusAttack2, bonusDefense, bonusImpact, bonusBalance;
-        private float bonusResistWeak, bonusResistPeriodic, bonusResistStun;
-        private int level;
-        private byte status;
-        private short vitality;
-        private int bonusHp, bonusMp, currStamina, maxStamina, currRe, maxRe, bonusRe, unk6, ilvlInven, ilvl, edge, unk8, unk9, unk10, unk11;
-
-        public int CurrentHP { get => currHp; }
-        public int CurrentMP { get => currMp; }
-        public int CurrentST { get => currRe; }
-        public int MaxHP { get => maxHp; }
-        public int MaxMP { get => maxMp; }
-        public int MaxST { get => maxRe; }
-        public int BonusHP { get => bonusHp; }
-        public int BonusMP { get => bonusMp; }
-        public int BonusST { get => bonusRe; }
-        public int Level { get => level; }
-        public int Ilvl { get => ilvl; }
-        public int Edge { get => edge; }
-        public float CritFactor { get => bonusCritRate; }
+        public int CurrentHP { get; }
+        public int CurrentMP { get; }
+        public int CurrentST { get; }
+        public int MaxHP { get; }
+        public int MaxMP { get; }
+        public int BonusHP { get; }
+        public int BonusMP { get; }
+        public int MaxST { get; }
+        public int BonusST { get; }
+        public int Level { get; }
+        public int Ilvl { get; }
+        public int Edge { get; }
+        public float BonusCritFactor { get; }
+        public bool Status { get; set; }
 
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
-            currHp = reader.ReadInt32();
-            /*if (reader.Version < 321550 || reader.Version > 321600)*/ reader.Skip(4);
-            currMp = reader.ReadInt32();
-            /*if (reader.Version < 321550 || reader.Version > 321600)*/ reader.Skip(4);
+            CurrentHP = reader.ReadInt32();
+            /*if (reader.Version < 321550 || reader.Version > 321600)*/
+            reader.Skip(4);
+            CurrentMP = reader.ReadInt32();
+            /*if (reader.Version < 321550 || reader.Version > 321600)*/
+            reader.Skip(4);
             //unk1 = reader.ReadInt32();
             reader.Skip(4);
 
-            maxHp = reader.ReadInt32();
-            /*if (reader.Version < 321550 || reader.Version > 321600)*/ reader.Skip(4);
-            maxMp = reader.ReadInt32();
+            MaxHP = reader.ReadInt32();
+            /*if (reader.Version < 321550 || reader.Version > 321600)*/
+            reader.Skip(4);
+            MaxMP = reader.ReadInt32();
             //basePower = reader.ReadInt32();4
             //baseEndu = reader.ReadInt32();8
             //baseImpactFactor = reader.ReadInt32();12
@@ -72,7 +61,7 @@ namespace TCC.Parsing.Messages
             //unk3 = reader.ReadInt16();86
             //bonusAtkSpeed = reader.ReadInt16();88
             reader.Skip(88);
-            bonusCritRate = reader.ReadSingle();//92
+            BonusCritFactor = reader.ReadSingle();//92
             //bonusCritResist = reader.ReadSingle();96
             //bonusCritPower = reader.ReadSingle();100
             //bonusAttack = reader.ReadInt32();104
@@ -83,31 +72,32 @@ namespace TCC.Parsing.Messages
             //bonusResistWeak = reader.ReadSingle();124
             //bonusResistPeriodic = reader.ReadSingle();128
             //bonusResistStun = reader.ReadSingle();132
-            reader.Skip(128-88);
+            reader.Skip(128 - 88);
 
-            level = reader.ReadInt16();
+            Level = reader.ReadInt16();
             reader.Skip(2);
             //vitality = reader.ReadInt16();
             reader.Skip(2);
 
-            status = reader.ReadByte();
-            bonusHp = reader.ReadInt32();
-            bonusMp = reader.ReadInt32();
+            Status = reader.ReadBoolean();
+            BonusHP = reader.ReadInt32();
+            BonusMP = reader.ReadInt32();
 
             //currStamina = reader.ReadInt32();
             //maxStamina = reader.ReadInt32();
             reader.Skip(8);
 
-            currRe = reader.ReadInt32();
-            maxRe = reader.ReadInt32();
-            bonusRe = reader.ReadInt32();
+            CurrentST = reader.ReadInt32();
+            MaxST = reader.ReadInt32();
+            BonusST = reader.ReadInt32();
 
             //unk6 = reader.ReadInt32();
             reader.Skip(4);
 
-            ilvlInven = reader.ReadInt32();
-            ilvl = reader.ReadInt32();
-            edge = reader.ReadInt32();
+            //ilvlInven = reader.ReadInt32();
+            reader.Skip(4);
+            Ilvl = reader.ReadInt32();
+            Edge = reader.ReadInt32();
 
             //unk8 = reader.ReadInt32();
             //unk9 = reader.ReadInt32();
@@ -115,5 +105,6 @@ namespace TCC.Parsing.Messages
             //unk11 = reader.ReadInt32();
             reader.Skip(16);
         }
+
     }
 }
