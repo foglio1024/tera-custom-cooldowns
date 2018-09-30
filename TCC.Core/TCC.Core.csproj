@@ -175,9 +175,6 @@
     <Compile Include="Controls\TimeSeparator.xaml.cs">
       <DependentUpon>TimeSeparator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
@@ -1050,10 +1047,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimeSeparator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
