@@ -274,6 +274,9 @@ namespace TCC
             {
                 Positions[(Class)i] = currentPos;
             }
+
+            Positions[Class.Common] = currentPos;
+            SettingsWriter.Save();
         }
     }
 
