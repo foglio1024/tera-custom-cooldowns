@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
-using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
-using Point = System.Windows.Point;
 
 namespace TCC
 {

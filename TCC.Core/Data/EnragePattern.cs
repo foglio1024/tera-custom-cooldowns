@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TCC.Data
+﻿namespace TCC.Data
 {
     public class EnragePattern
     {

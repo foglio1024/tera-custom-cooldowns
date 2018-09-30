@@ -7,8 +7,6 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
-using TCC.Windows;
-using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {

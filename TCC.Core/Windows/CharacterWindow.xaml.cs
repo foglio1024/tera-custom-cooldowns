@@ -3,7 +3,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Controls;
 using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC.Windows
 {

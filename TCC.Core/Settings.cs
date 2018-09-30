@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
-using TCC.ViewModels;
 using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
 using Key = System.Windows.Forms.Keys;
 

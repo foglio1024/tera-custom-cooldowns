@@ -4,7 +4,6 @@ using System.Linq;
 using TCC.Data.Databases;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
-using TCC.ViewModels;
 
 namespace TCC.Parsing.Messages
 {
