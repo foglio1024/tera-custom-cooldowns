@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -27,8 +28,8 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        private static string _version;
         public const bool Debug = false;
+        private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
         public static DebugWindow DebugWindow;
@@ -88,6 +89,30 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
+
+            if (Debug) DebugStuff();
+
+
+        }
+
+        private void DebugStuff()
+        {
+            EntitiesManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
+            var c = 0;
+            while (c < 1000)
+            {
+                AbnormalityManager.BeginAbnormality(2, 10, 500, 1);
+                AbnormalityManager.BeginAbnormality(2, 11, 500, 1);
+                Console.WriteLine("Added " + c);
+                Thread.Sleep(100);
+                AbnormalityManager.EndAbnormality(2, 10);
+                AbnormalityManager.EndAbnormality(2, 11);
+                Console.WriteLine("Removed " + c);
+                c++;
+            }
+            //AbnormalityManager.BeginAbnormality(1495, 10, 10000, 5);
+            //AbnormalityManager.BeginAbnormality(2066, 10, 100000, 10);
+            //AbnormalityManager.BeginAbnormality(2074, 10, 10000000, 20);
             //var r = new Random();
             //for (int i = 0; i < 30; i++)
             //{
@@ -156,7 +181,8 @@ namespace TCC
             WindowManager.FloatingButton.NotifyExtended($"TCC", "Disconnected", NotificationType.Warning);
 
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             EntitiesManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
