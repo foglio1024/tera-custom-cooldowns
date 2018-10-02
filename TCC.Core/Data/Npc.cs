@@ -160,7 +160,7 @@ namespace TCC.Data
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, _target, _dispatcher, true);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, _target, Dispatcher, true);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
                 if (ab.IsShield)
@@ -232,7 +232,7 @@ namespace TCC.Data
         //}
         public Npc(ulong eId, uint zId, uint tId, bool boss, Visibility visible, EnragePattern ep = null, TimerPattern tp = null)
         {
-            _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
+            Dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
             Name = SessionManager.MonsterDatabase.GetName(tId, zId);
             MaxHP = SessionManager.MonsterDatabase.GetMaxHP(tId, zId);
@@ -240,7 +240,7 @@ namespace TCC.Data
             IsBoss = boss;
             TemplateId = tId;
             CurrentHP = MaxHP;
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             Visible = visible;
             Shield = ShieldStatus.Off;
             IsSelected = true;

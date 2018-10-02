@@ -10,7 +10,7 @@ namespace TCC.Data
 
         public event Action Ending;
 
-        public Dispatcher Dispatcher => _dispatcher;
+        public new Dispatcher Dispatcher => base.Dispatcher;
         public Skill Skill { get; set; }
         public ulong Cooldown { get; set; }
         public ulong OriginalCooldown { get; set; }
@@ -20,7 +20,7 @@ namespace TCC.Data
 
         public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d, bool autostart = true, bool pre = false)
         {
-            _dispatcher = d;
+            base.Dispatcher = d;
             Pre = pre;
             var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
 

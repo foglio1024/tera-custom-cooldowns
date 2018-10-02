@@ -405,7 +405,7 @@ namespace TCC.Controls
         public double Duration => Start - End;
         public EnragePeriodItem(double start)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Start = start;
 
         }

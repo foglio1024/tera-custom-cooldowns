@@ -15,6 +15,7 @@ namespace TCC.ViewModels
         public static event Action ChatShowChannelChanged;
         public static event Action ChatShowTimestampChanged;
         public static event Action AbnormalityShapeChanged;
+        public static event Action FontSizeChanged;
 
         public WindowSettings CooldownWindowSettings => Settings.CooldownWindowSettings;
         public WindowSettings ClassWindowSettings => Settings.ClassWindowSettings;
@@ -445,12 +446,13 @@ namespace TCC.ViewModels
                 var val = value;
                 if (val < 10) val = 10;
                 Settings.FontSize = val;
+                FontSizeChanged?.Invoke();
                 NPC(nameof(FontSize));
             }
         }
         public SettingsWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             //if (Settings.CooldownWindowSettings.Enabled) WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
             //if (Settings.CharacterWindowSettings.Enabled) WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
             //if (Settings.BossWindowSettings.Enabled) WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;

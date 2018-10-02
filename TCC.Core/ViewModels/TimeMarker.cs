@@ -15,7 +15,7 @@ namespace TCC.ViewModels
         public string Color { get; }
         public TimeMarker(int hourOffset, string name, string color = "ffffff")
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
             Color = color;
             _hourOffset = hourOffset;

@@ -69,7 +69,7 @@ namespace TCC.Sniffing
                 {
                     device.Open(DeviceMode.Normal, 100);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //Logger.Warn($"Failed to open device {device.Name}. {e.Message}");
                     continue;
@@ -81,7 +81,7 @@ namespace TCC.Sniffing
                     {
                         device.KernelBufferSize = (uint) BufferSize.Value;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         //Logger.Warn(
                         //    $"Failed to set KernelBufferSize to {BufferSize.Value} on {device.Name}. {e.Message}");

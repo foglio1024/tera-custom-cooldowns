@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image x:Name="img" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".5"/>
+        <Image x:Name="Img" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".5"/>
 
         <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".7" />
         <Border Grid.Row="1" Grid.RowSpan="2" Background="#333"/>
@@ -26,12 +26,12 @@
         <TextBlock Name="Ver" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Foreground="#90ffffff" Margin="3,2"/>
         <UniformGrid Grid.Row="2"  Rows="1" Name="ButtonsGrid" Margin="0">
-            <Button Height="20" Margin="0" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
+            <Button Height="20" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="OkClick">
                 <!--<Path Data="{StaticResource SvgConfirm}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
                 <TextBlock Foreground="#90ffffff" FontWeight="Bold">YES</TextBlock>
             </Button>
-            <Button Height="20" Margin="0" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
+            <Button Height="20" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="NoClick">
                 <!--<Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
                 <TextBlock Foreground="#90ffffff" FontWeight="Bold">NO</TextBlock>

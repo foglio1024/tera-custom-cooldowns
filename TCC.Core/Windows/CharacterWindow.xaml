@@ -17,13 +17,6 @@
     </w:TccWidget.DataContext>
     <w:TccWidget.Resources>
         <converters:ClassToReColorConverter x:Key="ReColorConverter"></converters:ClassToReColorConverter>
-        <Style x:Key="HpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource Styles.DefaultText}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="TextAlignment" Value="Right"/>
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="Margin" Value="5,0,5,0"/>
-        </Style>
         <Style TargetType="Border">
             <Setter Property="BorderBrush"                Value="{StaticResource KrBorderColor}"/>
             <Setter Property="BorderThickness"            Value="2 1" />
@@ -32,21 +25,14 @@
             <Setter Property="Background"                 Value="#b223"/>
             <Setter Property="RenderTransformOrigin"      Value="0 0"/>
         </Style>
-
-        <converters:LaurelImageConverter x:Key="LaurelConv"/>
-        <converters:CombatToColorConverter x:Key="CombatConv"/>
-        <converters:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
         <converters:StaminaBarVisibilityConverter x:Key="StaminaVisConv"/>
-        <converters:StaminaBarColorConverter x:Key="StaminaColConv"/>
-        <converters:FactorFromValuesConverter x:Key="FactorFromValConv"/>
-        <converters:ClassToStaminaLabelConverter x:Key="StaminaLabelConv"/>
     </w:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Name="content" Grid.Row="1">
+        <Grid Name="WindowContent" Grid.Row="1">
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                             ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>

@@ -9,21 +9,21 @@ namespace TCC
         private const string StartToken = "\v:start:\v";
         private const string EndToken   = "\v:end:\v";
 
-        private StringBuilder sb;
+        private StringBuilder _sb;
 
         public ConcurrentQueue<string> Packets { get; }
         public ProxyPacketSplitter()
         {
-            sb = new StringBuilder();
+            _sb = new StringBuilder();
             Packets = new ConcurrentQueue<string>();
         }
         
         public void Append(string data)
         {
-            sb.Append(data);
+            _sb.Append(data);
             //Console.WriteLine($"Appending {data}");
             //Console.WriteLine($"StringBuilder: {sb}");
-            var bufferSplit = sb.ToString().Split(new[] {"\v:start:\v"}, StringSplitOptions.RemoveEmptyEntries);
+            var bufferSplit = _sb.ToString().Split(new[] {"\v:start:\v"}, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var b in bufferSplit)
             {
@@ -33,7 +33,7 @@ namespace TCC
                     continue;
                 }
                 Packets.Enqueue(b.Replace(EndToken, ""));
-                sb = sb.Replace(StartToken + b, "");
+                _sb = _sb.Replace(StartToken + b, "");
             }
 
             //Console.WriteLine($"Left: {sb}");

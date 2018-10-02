@@ -20,7 +20,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContent = content;
+            MainContent = WindowContent;
             Init(Settings.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
             _hp = new DoubleAnimation()
             {
@@ -45,63 +45,67 @@ namespace TCC.Windows
         {
             if (e.PropertyName == nameof(Player.HpFactor))
             {
-                _hp.From = (HpGovernor.LayoutTransform as ScaleTransform).ScaleX;
-                _hp.To = (sender as Player).HpFactor;
+                _hp.From = (HpGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
+                _hp.To = (sender as Player)?.HpFactor;
 
                 if (_hp.From > _hp.To)
                 {
                     //taking damage
-                    HpGovernor.LayoutTransform = new ScaleTransform((sender as Player).HpFactor, 1);
+                    HpGovernor.LayoutTransform = new ScaleTransform(((Player) sender).HpFactor, 1);
                     HpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hp);
                 }
                 else
                 {
                     //healing
-                    HpGovernorWhite.LayoutTransform = new ScaleTransform((sender as Player).HpFactor, 1);
+                    HpGovernorWhite.LayoutTransform = new ScaleTransform(((Player) sender).HpFactor, 1);
                     HpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hp);
                 }
             }
             else if (e.PropertyName == nameof(Player.MpFactor))
             {
-                _mp.From = (MpGovernor.LayoutTransform as ScaleTransform).ScaleX;
-                _mp.To = (sender as Player).MpFactor;
+                _mp.From = ((ScaleTransform) MpGovernor.LayoutTransform).ScaleX;
+                _mp.To = ((Player) sender).MpFactor;
                 if (_mp.From > _mp.To)
                 {
                     //taking damage
-                    MpGovernor.LayoutTransform = new ScaleTransform((sender as Player).MpFactor, 1);
+                    MpGovernor.LayoutTransform = new ScaleTransform(((Player) sender).MpFactor, 1);
                     MpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mp);
                 }
                 else
                 {
                     //healing
-                    MpGovernorWhite.LayoutTransform = new ScaleTransform((sender as Player).MpFactor, 1);
+                    MpGovernorWhite.LayoutTransform = new ScaleTransform(((Player) sender).MpFactor, 1);
                     MpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mp);
                 }
             }
             else if (e.PropertyName == nameof(Player.StFactor))
             {
-                _st.From = (StGovernor.LayoutTransform as ScaleTransform).ScaleX;
-                _st.To = (sender as Player).StFactor;
+                _st.From = ((ScaleTransform) StGovernor.LayoutTransform).ScaleX;
+                _st.To = (sender as Player)?.StFactor;
                 if (_st.From > _st.To)
                 {
                     //taking damage
-                    StGovernor.LayoutTransform = new ScaleTransform((sender as Player).StFactor, 1);
+                    StGovernor.LayoutTransform = new ScaleTransform(((Player) sender).StFactor, 1);
                     StGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
                 }
                 else
                 {
                     //healing
-                    StGovernorWhite.LayoutTransform = new ScaleTransform((sender as Player).StFactor, 1);
+                    StGovernorWhite.LayoutTransform = new ScaleTransform(((Player) sender).StFactor, 1);
                     StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
                 }
-                ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(((sender as Player).StFactor)*(360-80) + 40, _st.Duration));
+                ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation((((Player) sender).StFactor)*(360-80) + 40, _st.Duration));
             }
             else if (e.PropertyName == nameof(Player.ShieldFactor))
             {
-                var _sh = new DoubleAnimation {Duration = DefaultDuration, EasingFunction = DefaultEasing};
-                _sh.From = (ShGovernor.LayoutTransform as ScaleTransform).ScaleX;
-                _sh.To = (sender as Player).ShieldFactor;
-                ShGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _sh);
+                var sh = new DoubleAnimation
+                {
+                    Duration = DefaultDuration,
+                    EasingFunction = DefaultEasing,
+                    From = (ShGovernor.LayoutTransform as ScaleTransform)?.ScaleX,
+                    To = (sender as Player)?.ShieldFactor
+                };
+                ShGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, sh);
             }
         }
     }

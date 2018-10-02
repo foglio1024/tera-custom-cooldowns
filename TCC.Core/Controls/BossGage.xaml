@@ -162,25 +162,25 @@
                     </Image>
                     <Image Grid.Row="0" Margin="-10" Stretch="Uniform" 
                        Width="50" 
-                       Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"
+                       Height="50"
                        StretchDirection="DownOnly"
-                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Source="../resources/images/kr_boss_icon.png">
                         <Image.RenderTransform>
-
                             <TranslateTransform Y="20" X="0.5"/>
                         </Image.RenderTransform>
-                        <Image.Style>
+                        <!--<Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Source" Value="../resources/images/kr_boss_icon.png"></Setter>
-                                <!--<Style.Triggers>
+                                <Style.Triggers>
                                     <DataTrigger Binding="{Binding Enraged}" Value="True">
                                         <DataTrigger.Setters>
                                             <Setter Property="Source" Value="../resources/images/kr_boss_icon_enrage.png"/>
                                         </DataTrigger.Setters>
                                     </DataTrigger>
-                                </Style.Triggers>-->
+                                </Style.Triggers>
                             </Style>
-                        </Image.Style>
+                        </Image.Style>-->
 
                     </Image>
                 </Grid>

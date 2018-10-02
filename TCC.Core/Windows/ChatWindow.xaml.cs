@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Dragablz;
+using GongSolutions.Wpf.DragDrop.Utilities;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Dragablz;
-using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -18,7 +17,6 @@ namespace TCC.Windows
         private readonly DoubleAnimation _opacityUp;
         private readonly DoubleAnimation _opacityDown;
         private bool _bottom = true;
-        private bool _isChatEnabled;
         public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
         public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
         public ChatWindow(ChatWindowSettings ws)
@@ -90,10 +88,9 @@ namespace TCC.Windows
                 ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.ScreenH;
                 var v = TCC.Settings.ChatWindowsSettings;
                 var s = v.FirstOrDefault(x => x == WindowSettings);
-                if (s == null) v.Add(WindowSettings as ChatWindowSettings);
-                else s = WindowSettings as ChatWindowSettings;
+                if (s == null) v.Add((ChatWindowSettings) WindowSettings);
 
-                if (ChatTabClient.LastSource != this && ChatTabClient.LastSource != null)
+                if (!Equals(ChatTabClient.LastSource, this) && ChatTabClient.LastSource != null)
                 {
                     ChatTabClient.LastSource.UpdateSettings();
                 }
@@ -165,8 +162,6 @@ namespace TCC.Windows
             }
             else
             {
-
-                var n = ((Tab)t.Content).TabName;
                 TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
                 {
                     var sw = Utils.GetChild<ScrollViewer>(x);
@@ -191,14 +186,8 @@ namespace TCC.Windows
         private void TabLoaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is FrameworkElement s)) return;
-            var p = VisualTreeHelper.GetParent(s);
-            p = VisualTreeHelper.GetParent(p);
-            p = VisualTreeHelper.GetParent(p);
-            p = VisualTreeHelper.GetParent(p);
-            p = VisualTreeHelper.GetParent(p);
-            p = VisualTreeHelper.GetParent(p);
-            p = VisualTreeHelper.GetParent(p); //TODO: REFACTOR THIS
-            if ((p as ItemsControl).ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
+            var p = Utils.FindVisualParent<DragablzItemsControl>(s);
+            if (p.ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
             if (left - 3 >= 0) LeftLine.Width = left - 3;
@@ -342,12 +331,6 @@ namespace TCC.Windows
             if (!FocusManager.FocusTimer.Enabled) FocusManager.FocusTimer.Enabled = true;
         }
 
-        private void ChatWindow_OnDragLeave(object sender, DragEventArgs e)
-        {
-
-        }
-
-
 
         private new void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -372,27 +355,12 @@ namespace TCC.Windows
             //var msg = (sender as FrameworkElement).DataContext as ChatMessage;
             //var tabVm = VM.TabVMs.FirstOrDefault(x =>
             //    ((Tab)x.Content).Messages.Contains(msg) && x == currTabVm);
-            if (currTabVm?.Content != null) ((Tab)currTabVm?.Content).PinnedMessage = null;
+            if (currTabVm?.Content != null) ((Tab)currTabVm.Content).PinnedMessage = null;
 
             //var tab = VM.Tabs.FirstOrDefault(x => 
             //x.PinnedMessage == (((sender as FrameworkElement)?.DataContext as HeaderedItemViewModel)?.Content as Tab)?.PinnedMessage
             //);
             //if (tab != null) tab.PinnedMessage = null;
-        }
-
-        private void PinnedMessageOnContextMenuClosing(object sender, ContextMenuEventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = true;
-        }
-
-        private void PinnedMessageOnContextMenuOpening(object sender, ContextMenuEventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = false;
-        }
-
-        private void OnScrollToBottomRequested()
-        {
-
         }
 
         private void MakeGlobal(object sender, RoutedEventArgs e)

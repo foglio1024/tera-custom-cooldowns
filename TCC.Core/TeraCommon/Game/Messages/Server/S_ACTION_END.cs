@@ -12,13 +12,13 @@ namespace TCC.TeraCommon.Game.Messages.Server
             Heading = reader.ReadAngle();
             Model = reader.ReadUInt32();
             SkillId = reader.ReadInt32() & 0x3FFFFFF;
-            unk = reader.ReadInt32();
+            Unk = reader.ReadInt32();
             Id = reader.ReadUInt32();
 //            Debug.WriteLine($"{Time.Ticks} {BitConverter.ToString(BitConverter.GetBytes(Entity.Id))}: {Start} {Heading} -> {Finish}, S:{Speed} ,{Ltype} {unk1} {unk2}" );
         }
 
         public uint Id { get; set; }
-        public int unk { get; set; }
+        public int Unk { get; set; }
         public int SkillId { get; set; }
         public uint Model { get; set; }
         public EntityId Entity { get; }

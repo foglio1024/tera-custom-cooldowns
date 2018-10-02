@@ -50,7 +50,7 @@ namespace TCC.Sniffing
             var servers = BasicTeraData.Instance.Servers;
             _serversByIp = servers.GetServersByIp();
 
-            if (BasicTeraData.Instance.WindowData.Winpcap)
+            if (Settings.Winpcap)
             {
                 var netmasks = _serversByIp.Keys.Select(s => string.Join(".", s.Split('.').Take(3)) + ".0/24").Distinct().ToArray();
 
@@ -150,8 +150,7 @@ namespace TCC.Sniffing
                 {
                     if (_serversByIp.ContainsKey(connection.Source.Address.ToString()) && data.Take(4).SequenceEqual(new byte[] { 1, 0, 0, 0 }))
                     {
-                        byte q;
-                        _isNew.TryRemove(connection, out q);
+                        _isNew.TryRemove(connection, out _);
                         var server = _serversByIp[connection.Source.Address.ToString()];
                         _serverToClient = connection;
                         _clientToServer = null;
@@ -169,8 +168,7 @@ namespace TCC.Sniffing
                         _serverToClient.Source.Equals(connection.Destination))
                     {
                         ClientProxyOverhead = (int)connection.BytesReceived;
-                        byte q;
-                        _isNew.TryRemove(connection, out q);
+                        _isNew.TryRemove(connection, out _);
                         _clientToServer = connection;
                         var server = _serversByIp[connection.Destination.Address.ToString()];
                         _isNew.Clear();
@@ -178,8 +176,7 @@ namespace TCC.Sniffing
                     }
                     if (connection.BytesReceived > 0x10000) //if received more bytes but still not recognized - not interesting.
                     {
-                        byte q;
-                        _isNew.TryRemove(connection, out q);
+                        _isNew.TryRemove(connection, out _);
                         connection.DataReceived -= HandleTcpDataReceived;
                         connection.RemoveCallback();
                     }

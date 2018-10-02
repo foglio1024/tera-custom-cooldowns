@@ -45,7 +45,7 @@ namespace TCC.Data
             {
                 if (_seconds == value) return;
                 _seconds = value;
-                _dispatcher.Invoke(() => SecondsUpdated?.Invoke());
+                Dispatcher.Invoke(() => SecondsUpdated?.Invoke());
                 NPC();
             }
         }
@@ -68,7 +68,7 @@ namespace TCC.Data
         // ctors
         public FixedSkillCooldown()
         {
-            _dispatcher = App.BaseDispatcher;
+            Dispatcher = App.BaseDispatcher;
 
             _mainTimer = new DispatcherTimer();
             _offsetTimer = new DispatcherTimer();
@@ -117,11 +117,11 @@ namespace TCC.Data
             NPC(nameof(IsAvailable));
             _secondsTimer.Stop();
             Seconds = 0;
-            _dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
+            Dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
         }
 
         // methods
-        private void ForceFlashing() => _dispatcher.Invoke(() => FlashingForced?.Invoke());
+        private void ForceFlashing() => Dispatcher.Invoke(() => FlashingForced?.Invoke());
 
         public void Start(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
@@ -136,7 +136,7 @@ namespace TCC.Data
                     _secondsTimer.Stop();
                     _offsetTimer.Stop();
 
-                    _dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
+                    Dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
                 }
             }
 
@@ -153,7 +153,7 @@ namespace TCC.Data
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
             _offsetTimer.Start();
 
-            _dispatcher.Invoke(() => Started?.Invoke(_currentMode));
+            Dispatcher.Invoke(() => Started?.Invoke(_currentMode));
         }
         public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
@@ -164,7 +164,7 @@ namespace TCC.Data
             {
                 Seconds = 0;
                 Cooldown = 0;
-                _dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
+                Dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
                 return;
             }
 
@@ -185,14 +185,14 @@ namespace TCC.Data
             _mainTimer.Start();
             NPC(nameof(IsAvailable));
 
-            _dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
+            Dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
 
         }
         public void ForceEnded() => CooldownEnded(null, null);
-        public void ForceStopFlashing() => _dispatcher.Invoke(() => FlashingStopForced?.Invoke());
+        public void ForceStopFlashing() => Dispatcher.Invoke(() => FlashingStopForced?.Invoke());
         public void ProcReset()
         {
-            _dispatcher.Invoke(() => Reset?.Invoke());
+            Dispatcher.Invoke(() => Reset?.Invoke());
         }
         public override string ToString()
         {

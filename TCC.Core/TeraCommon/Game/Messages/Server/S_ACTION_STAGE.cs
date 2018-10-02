@@ -15,11 +15,11 @@ namespace TCC.TeraCommon.Game.Messages.Server
             Stage = reader.ReadUInt32();
             Speed = reader.ReadSingle();
             Id = reader.ReadUInt32();
-            unk = reader.ReadSingle();
+            Unk = reader.ReadSingle();
 //            Debug.WriteLine($"{Time.Ticks} {BitConverter.ToString(BitConverter.GetBytes(Entity.Id))}: {Start} {Heading}, S:{Speed}, {SkillId} {Stage} {Model} {unk} {Id}" );
         }
 
-        public float unk { get; set; }
+        public float Unk { get; set; }
         public uint Id { get; set; }
         public uint Stage { get; set; }
         public int SkillId { get; set; }

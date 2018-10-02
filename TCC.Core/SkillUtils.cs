@@ -22,8 +22,8 @@ namespace TCC
                 if (skillElement.Name == "Item") type = CooldownType.Item;
                 if (skillElement.Name == "Passive") type = CooldownType.Passive;
 
-                var skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
-                var row = Convert.ToInt32(skillElement.Attribute("row").Value);
+                var skillId = Convert.ToUInt32(skillElement.Attribute("id")?.Value);
+                var row = Convert.ToInt32(skillElement.Attribute("row")?.Value);
                 switch (type)
                 {
                     case CooldownType.Skill:
@@ -147,8 +147,6 @@ namespace TCC
                     break;
                 case Class.Valkyrie:
                     BuildDefaultValkyrieSkillConfig("valkyrie-skills.xml");
-                    break;
-                default:
                     break;
             }
         }

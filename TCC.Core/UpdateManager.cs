@@ -12,11 +12,12 @@ namespace TCC
 {
     public static class UpdateManager
     {
-        private static System.Timers.Timer checkTimer;
-        private static string databasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
-        private static string databaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
-        private static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-        private static string baseDatabaseDir = "tera-used-icons-master";
+        private static System.Timers.Timer _checkTimer;
+        private const string DatabasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
+        private const string DatabaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
+        private const string AppVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+        private const string BaseDatabaseDir = "tera-used-icons-master";
+
         public static void CheckDatabaseVersion()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -26,7 +27,7 @@ namespace TCC
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                 try
                 {
-                    var st = c.OpenRead(databaseVersion);
+                    var st = c.OpenRead(DatabaseVersion);
                     if (st != null)
                     {
                         var sr = new StreamReader(st);
@@ -83,7 +84,8 @@ namespace TCC
                 try
                 {
                     App.SplashScreen.SetText("Downloading database...");
-                    App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(databasePath), "icons.zip"));
+                    // ReSharper disable once AccessToDisposedClosure
+                    App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(DatabasePath), "icons.zip"));
                     while (!ready) Thread.Sleep(1);
                     App.SplashScreen.SetText("Downloading database... Done.");
 
@@ -102,24 +104,24 @@ namespace TCC
 
         private static void ExtractDatabase()
         {
-            if (Directory.Exists(baseDatabaseDir))
+            if (Directory.Exists(BaseDatabaseDir))
             {
-                Directory.Delete(baseDatabaseDir, true);
+                Directory.Delete(BaseDatabaseDir, true);
             }
             App.SplashScreen.SetText("Extracting database...");
 
             ZipFile.ExtractToDirectory("icons.zip", AppDomain.CurrentDomain.BaseDirectory);
             App.SplashScreen.SetText("Extracting database... Done.");
 
-            foreach (var dirPath in Directory.GetDirectories(baseDatabaseDir, "*", SearchOption.AllDirectories))
+            foreach (var dirPath in Directory.GetDirectories(BaseDatabaseDir, "*", SearchOption.AllDirectories))
             {
-                Directory.CreateDirectory(dirPath.Replace(baseDatabaseDir, "resources/images"));
+                Directory.CreateDirectory(dirPath.Replace(BaseDatabaseDir, "resources/images"));
             }
             App.SplashScreen.SetText("Copying files...");
 
-            foreach (var newPath in Directory.GetFiles(baseDatabaseDir, "*.*", SearchOption.AllDirectories))
+            foreach (var newPath in Directory.GetFiles(BaseDatabaseDir, "*.*", SearchOption.AllDirectories))
             {
-                File.Copy(newPath, newPath.Replace(baseDatabaseDir, "resources/images"), true);
+                File.Copy(newPath, newPath.Replace(BaseDatabaseDir, "resources/images"), true);
             }
             App.SplashScreen.SetText("Copying files... Done.");
 
@@ -134,7 +136,7 @@ namespace TCC
         {
             try
             {
-                Directory.Delete(baseDatabaseDir, true);
+                Directory.Delete(BaseDatabaseDir, true);
                 File.Delete("icons.zip");
             }
             catch (Exception)
@@ -144,16 +146,16 @@ namespace TCC
         }
         public static void StartCheck()
         {
-            checkTimer = new System.Timers.Timer(60 * 10 * 1000);
-            checkTimer.Elapsed += CheckTimer_Elapsed;
-            checkTimer.Start();
+            _checkTimer = new System.Timers.Timer(60 * 10 * 1000);
+            _checkTimer.Elapsed += CheckTimer_Elapsed;
+            _checkTimer.Start();
         }
 
         private static void CheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            checkTimer.Stop();
+            _checkTimer.Stop();
             CheckAppVersionPeriodic();
-            checkTimer.Start();
+            _checkTimer.Start();
         }
 
         private static void CheckAppVersionPeriodic()
@@ -166,23 +168,16 @@ namespace TCC
 
                 try
                 {
-                    var st = c.OpenRead(appVersion);
-                    if (st != null)
-                    {
-                        var sr = new StreamReader(st);
-                        var newVersionInfo = sr.ReadLine();
-                        var newVersionUrl = sr.ReadLine();
+                    var st = c.OpenRead(AppVersion);
+                    if (st == null) return;
+                    var sr = new StreamReader(st);
+                    var newVersionInfo = sr.ReadLine();
 
-                        if (newVersionInfo != null)
-                        {
-                            var v = Version.Parse(newVersionInfo);
-                            if (v > Assembly.GetExecutingAssembly().GetName().Version)
-                            {
-                                ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
-                                WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
-                            }
-                        }
-                    }
+                    if (newVersionInfo == null) return;
+                    var v = Version.Parse(newVersionInfo);
+                    if (v <= Assembly.GetExecutingAssembly().GetName().Version) return;
+                    ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
+                    WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                 }
                 catch (Exception ex)
                 {
@@ -202,7 +197,7 @@ namespace TCC
 
                 try
                 {
-                    var st = c.OpenRead(appVersion);
+                    var st = c.OpenRead(AppVersion);
                     if (st != null)
                     {
                         var sr = new StreamReader(st);
@@ -251,6 +246,7 @@ namespace TCC
                     var ready = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                     c.DownloadFileCompleted += (s, ev) => ready = true;
+                    // ReSharper disable once AccessToDisposedClosure
                     App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(url), "update.zip"));
 
                     while (!ready) Thread.Sleep(1);
@@ -286,7 +282,7 @@ namespace TCC
 
         internal static void StopTimer()
         {
-            checkTimer?.Stop();
+            _checkTimer?.Stop();
         }
     }
 }

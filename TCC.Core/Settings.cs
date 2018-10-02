@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
-using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
+using TCC.Parsing;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC
@@ -29,18 +29,18 @@ namespace TCC
         public static bool IgnoreMeInGroupWindow { get; set; }
         public static bool IgnoreGroupBuffs { get; set; }
         public static bool IgnoreGroupDebuffs { get; set; }
-        public static bool DisablePartyMP { get; set; } = false;
-        public static bool DisablePartyHP { get; set; } = false;
-        public static bool DisablePartyAbnormals { get; set; } = false;
+        public static bool DisablePartyMP { get; set; }
+        public static bool DisablePartyHP { get; set; }
+        public static bool DisablePartyAbnormals { get; set; } 
         public static bool ShowOnlyAggroStacks { get; set; } = true;
         public static uint GroupSizeThreshold { get; set; } = 7;
-        public static bool ShowMembersLaurels { get; set; } = false;
-        public static bool ShowAllGroupAbnormalities { get; set; } = false;
+        public static bool ShowMembersLaurels { get; set; }
+        public static bool ShowAllGroupAbnormalities { get; set; }
         public static bool ShowGroupWindowDetails { get; set; } = true;
         public static bool ShowAwakenIcon { get; set; } = true;
-        public static Dictionary<Class, List<uint>> GroupAbnormals { get; set; } = new Dictionary<Class, List<uint>>()
+        public static Dictionary<Class, List<uint>> GroupAbnormals { get; } = new Dictionary<Class, List<uint>>()
         {
-            {(Class)0, new List<uint>()},
+            {0, new List<uint>()},
             {(Class)1, new List<uint>()},
             {(Class)2, new List<uint>()},
             {(Class)3, new List<uint>()},
@@ -62,7 +62,7 @@ namespace TCC
         public static bool ShowItemsCooldown { get; set; } = true;
 
         // Boss window
-        public static bool ShowOnlyBosses { get; set; } = false;
+        public static bool ShowOnlyBosses { get; set; }
         public static EnrageLabelMode EnrageLabelMode { get; set; } = EnrageLabelMode.Remaining;
         public static bool AccurateHp { get; set; } = true;
 
@@ -90,7 +90,7 @@ namespace TCC
         public static double ChatWindowOpacity { get; set; } = 0.4;
         public static int FontSize { get; set; } = 15;
         public static bool ChatFadeOut { get; set; } = true;
-        public static bool AnimateChatMessages { get; set; } = false;
+        public static bool AnimateChatMessages { get; set; }
         public static ClickThruMode ChatClickThruMode
         {
             get
@@ -133,14 +133,14 @@ namespace TCC
         public static string TwitchChannelName { get; set; } = "";
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowTradeLfg { get; set; } = true;
-        public static bool StatSent { get; set; } = false;
+        public static bool StatSent { get; set; }
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
-        public static HotKey LfgHotkey { get; set; } = new HotKey(Key.Y, ModifierKeys.Control);
-        public static HotKey InfoWindowHotkey { get; set; } = new HotKey(Key.I, ModifierKeys.Control);
-        public static HotKey SettingsHotkey { get; set; } = new HotKey(Key.O, ModifierKeys.Control);
-        public static HotKey ShowAllHotkey { get; set; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
-        public static HotKey LootSettingsHotkey { get; set; } = new HotKey(Key.L, ModifierKeys.Control);
+        public static HotKey LfgHotkey { get; } = new HotKey(Key.Y, ModifierKeys.Control);
+        public static HotKey InfoWindowHotkey { get; } = new HotKey(Key.I, ModifierKeys.Control);
+        public static HotKey SettingsHotkey { get; } = new HotKey(Key.O, ModifierKeys.Control);
+        public static HotKey ShowAllHotkey { get; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
+        public static HotKey LootSettingsHotkey { get; } = new HotKey(Key.L, ModifierKeys.Control);
         public static string RegionOverride { get; set; } = "";
         public static double FlightGaugeRotation { get; set; }
         public static bool FlipFlightGauge { get; set; }
@@ -148,6 +148,7 @@ namespace TCC
         public static bool HighPriority { get; set; }
         public static bool ForceSoftwareRendering { get; set; }
         public static AbnormalityShape AbnormalityShape { get; set; }
+        public static bool Winpcap { get; set; } = true;
 
         private static string _lastRegion = "";
         private static bool _chatEnabled;

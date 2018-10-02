@@ -1,10 +1,11 @@
 ﻿using System.Windows.Forms;
+using TCC.Parsing;
 
 namespace TCC.Tera.Data
 {
     public class CopyKey
     {
-        public CopyKey(string header, string footer, string content, HotkeysData.ModifierKeys modifier, Keys key,
+        public CopyKey(string header, string footer, string content, ModifierKeys modifier, Keys key,
             string orderBy, string order, string lowDpsContent, int lowDpsThreshold)
         {
             Content = content;
@@ -28,6 +29,6 @@ namespace TCC.Tera.Data
         public string Content { get; }
         public string LowDpsContent { get; }
         public int LowDpsThreshold { get; }
-        public HotkeysData.ModifierKeys Modifier { get; }
+        public ModifierKeys Modifier { get; }
     }
 }

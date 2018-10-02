@@ -30,7 +30,7 @@ namespace TCC.Data
 
         public ChatChannelOnOff()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
         public ChatChannelOnOff(ChatChannel ch, bool en = true) : this()
         {

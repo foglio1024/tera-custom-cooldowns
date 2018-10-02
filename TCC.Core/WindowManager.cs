@@ -147,11 +147,11 @@ namespace TCC
             ForegroundManager = new ForegroundManager();
             FocusManager.Init();
             LoadWindows();
-            FloatingButton = new FloatingButtonWindow();
-            FloatingButton.Show();
             _contextMenu = new ContextMenu();
-            DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
-            ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
+            // ReSharper disable AssignNullToNotNullAttribute
+            DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative))?.Stream);
+            ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative))?.Stream);
+            // ReSharper restore AssignNullToNotNullAttribute
             TrayIcon = new NotifyIcon()
             {
                 Icon = DefaultIcon,
@@ -161,10 +161,10 @@ namespace TCC
             TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             TrayIcon.Text = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            var CloseButton = new MenuItem() { Header = "Close" };
+            var closeButton = new MenuItem() { Header = "Close" };
 
-            CloseButton.Click += (s, ev) => App.CloseApp();
-            _contextMenu.Items.Add(CloseButton);
+            closeButton.Click += (s, ev) => App.CloseApp();
+            _contextMenu.Items.Add(closeButton);
 
             //_undimTimer.Elapsed += _undimTimer_Elapsed;
 
@@ -231,7 +231,6 @@ namespace TCC
             //    del.DynamicInvoke();
             //    while (waiting) { }
             //}
-            ChatWindowManager.Instance.InitWindows();
             GroupWindow = new GroupWindow();
             CooldownWindow = new CooldownWindow();
             BossWindow = new BossWindow();
@@ -244,6 +243,8 @@ namespace TCC
             SkillConfigWindow = new SkillConfigWindow();
             GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
             CivilUnrestWindow = new CivilUnrestWindow();
+            FloatingButton = new FloatingButtonWindow();
+            ChatWindowManager.Instance.InitWindows();
             //GroupWindow.Show();
             //CooldownWindow.Show();
             //BossWindow.Show();

@@ -64,7 +64,7 @@ namespace TCC.ViewModels
                             new string[] { });
                         content.PropertyChanged += (_, __) =>
                         {
-                            if (__.PropertyName == nameof(Tab.TabName)) t.Header = ((Tab)content).TabName;
+                            if (__.PropertyName == nameof(Tab.TabName)) t.Header = content.TabName;
                         };
                         t.Content = content;
                         return t;

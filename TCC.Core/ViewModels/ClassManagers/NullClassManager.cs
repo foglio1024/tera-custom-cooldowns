@@ -1,4 +1,4 @@
-﻿namespace TCC.ViewModels.ClassManagers
+﻿namespace TCC.ViewModels
 {
     class NullClassManager : ClassManager
     {

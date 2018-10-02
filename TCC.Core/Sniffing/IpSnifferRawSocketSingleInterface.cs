@@ -99,39 +99,37 @@ namespace TCC.Sniffing
 
     public sealed class SocketAwaitable : INotifyCompletion
     {
-        private readonly static Action SENTINEL = () => { };
+        private static readonly Action Sentinel = () => { };
 
-        internal bool m_wasCompleted;
-        internal Action m_continuation;
-        internal SocketAsyncEventArgs m_eventArgs;
+        internal bool MWasCompleted;
+        private Action _mContinuation;
+        internal readonly SocketAsyncEventArgs MEventArgs;
 
         public SocketAwaitable(SocketAsyncEventArgs eventArgs)
         {
-            if (eventArgs == null) throw new ArgumentNullException("eventArgs");
-            m_eventArgs = eventArgs;
+            MEventArgs = eventArgs ?? throw new ArgumentNullException("eventArgs");
             eventArgs.Completed += delegate
             {
-                var prev = m_continuation ?? Interlocked.CompareExchange(
-                    ref m_continuation, SENTINEL, null);
-                if (prev != null) prev();
+                (_mContinuation ?? Interlocked.CompareExchange(
+                    ref _mContinuation, Sentinel, null))?.Invoke();
             };
         }
 
         internal void Reset()
         {
-            m_wasCompleted = false;
-            m_continuation = null;
+            MWasCompleted = false;
+            _mContinuation = null;
         }
 
         public SocketAwaitable GetAwaiter() { return this; }
 
-        public bool IsCompleted => m_wasCompleted;
+        public bool IsCompleted => MWasCompleted;
 
         public void OnCompleted(Action continuation)
         {
-            if (m_continuation == SENTINEL ||
+            if (_mContinuation == Sentinel ||
                 Interlocked.CompareExchange(
-                    ref m_continuation, continuation, null) == SENTINEL)
+                    ref _mContinuation, continuation, null) == Sentinel)
             {
                 Task.Run(continuation);
             }
@@ -139,8 +137,8 @@ namespace TCC.Sniffing
 
         public void GetResult()
         {
-            if (m_eventArgs.SocketError != SocketError.Success)
-                throw new SocketException((int)m_eventArgs.SocketError);
+            if (MEventArgs.SocketError != SocketError.Success)
+                throw new SocketException((int)MEventArgs.SocketError);
         }
     }
     public static class SocketExtensions
@@ -149,8 +147,8 @@ namespace TCC.Sniffing
             SocketAwaitable awaitable)
         {
             awaitable.Reset();
-            if (!socket.ReceiveAsync(awaitable.m_eventArgs))
-                awaitable.m_wasCompleted = true;
+            if (!socket.ReceiveAsync(awaitable.MEventArgs))
+                awaitable.MWasCompleted = true;
             return awaitable;
         }
     }

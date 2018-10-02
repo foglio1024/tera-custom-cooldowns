@@ -28,7 +28,7 @@ namespace TCC.Parsing.Messages
             for (var i = 0; i < count; i++)
             {
                 var l = new Listing();
-                var curr = reader.ReadUInt16();
+                reader.Skip(2); // var curr = reader.ReadUInt16();
                 var next = reader.ReadUInt16();
                 var msgOffset = reader.ReadUInt16();
                 var leaderNameOffset = reader.ReadUInt16();

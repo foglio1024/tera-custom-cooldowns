@@ -51,7 +51,7 @@ namespace TCC.Data
 
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated)
         {
-            _dispatcher = disp;
+            Dispatcher = disp;
             Animated = animated;
             Abnormality = b;
             Duration = d;

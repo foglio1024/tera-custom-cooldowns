@@ -2,6 +2,7 @@
 
 namespace TCC.TeraCommon.Game
 {
+    // ReSharper disable once InconsistentNaming
     public struct Vector3f
     {
         public float X;

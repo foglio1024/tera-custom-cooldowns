@@ -12,16 +12,13 @@ using TCC.ViewModels;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Interaction logic for FloatingButtonWindow.xaml
-    /// </summary>
-    public partial class FloatingButtonWindow : TccWidget
+    public partial class FloatingButtonWindow
     {
         public FloatingButtonWindow()
         {
             InitializeComponent();
             TooltipInfo = new TooltipInfo("", "", 1);
-            MainContent = content;
+            MainContent = WindowContent;
             ButtonsRef = null;
             Init(Settings.FloatingButtonSettings, perClassPosition:false);
         }
@@ -29,7 +26,7 @@ namespace TCC.Windows
         private Timer _t;
         private DispatcherTimer _n;
         private DoubleAnimation _an;
-        private int _notificationDuration = 4000;
+        private readonly int _notificationDuration = 4000;
         private void FloatinButtonLoaded(object sender, RoutedEventArgs e)
         {
             var handle = new WindowInteropHelper(this).Handle;
@@ -40,7 +37,6 @@ namespace TCC.Windows
             if (source?.CompositionTarget == null) return;
             var m = source.CompositionTarget.TransformToDevice;
             var _ = m.M11;
-            var dy = m.M22;
             Left = 0;
             Top = Screen.PrimaryScreen.Bounds.Height/ 2 - ActualHeight / 2;
 
@@ -65,14 +61,6 @@ namespace TCC.Windows
         {
             NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
             NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _an);
-        }
-
-        private void AnimateContentOpacity(double opacity)
-        {
-            //Dispatcher.InvokeIfRequired(() =>
-            //{
-            //    ((FrameworkElement)Content).BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
-            //}, System.Windows.Threading.DispatcherPriority.DataBind);
         }
 
         private void OnTccVisibilityChanged()

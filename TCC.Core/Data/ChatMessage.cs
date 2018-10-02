@@ -81,6 +81,8 @@ namespace TCC.Data
         public bool ShowChannel => Settings.ShowChannel;
 
         private SynchronizedObservableCollection<MessagePiece> _pieces;
+        private bool _isVisible;
+
         public SynchronizedObservableCollection<MessagePiece> Pieces
         {
             get => _pieces;
@@ -91,14 +93,27 @@ namespace TCC.Data
                 NPC(nameof(Pieces));
             }
         }
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible == value) return;
+                Pieces.ToList().ForEach(p => p.IsVisible = value);
+                _isVisible = value;
+                NPC();
+            }
+        }
+
         #endregion
 
         #region Constructors
 
         protected ChatMessage()
         {
-            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
-            Pieces = new SynchronizedObservableCollection<MessagePiece>(_dispatcher);
+            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
             Timestamp = DateTime.Now.ToShortTimeString();
             SettingsWindowViewModel.ChatShowChannelChanged += () => NPC(nameof(ShowChannel));
             SettingsWindowViewModel.ChatShowTimestampChanged += () => NPC(nameof(ShowTimestamp));
@@ -309,15 +324,15 @@ namespace TCC.Data
         #region Generic Methods
         protected void AddPiece(MessagePiece mp)
         {
-            _dispatcher.Invoke(() => Pieces.Add(mp));
+            Dispatcher.Invoke(() => Pieces.Add(mp));
         }
         protected void InsertPiece(MessagePiece mp, int index)
         {
-            _dispatcher.Invoke(() => Pieces.Insert(index, mp));
+            Dispatcher.Invoke(() => Pieces.Insert(index, mp));
         }
         protected void RemovePiece(MessagePiece mp)
         {
-            _dispatcher.Invoke(() => Pieces.Remove(mp));
+            Dispatcher.Invoke(() => Pieces.Remove(mp));
         }
         public static string ReplaceEscapes(string msg, string left = "<", string right = ">")
         {

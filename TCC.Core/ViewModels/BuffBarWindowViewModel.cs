@@ -13,7 +13,7 @@ namespace TCC.ViewModels
         public AbnormalityShape Shape => Settings.AbnormalityShape;
         public BuffBarWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
             //Player = new Player();
         }

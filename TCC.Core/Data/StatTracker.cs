@@ -50,7 +50,7 @@ namespace TCC.Data
 
         public StatTracker()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         public void InvokeToZero(uint pDuration)

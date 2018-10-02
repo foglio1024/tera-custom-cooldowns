@@ -46,16 +46,11 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-
-        public CivilUnrestGuild()
-        {
-        }
     }
     public class CivilUnrestViewModel : TccWindowViewModel
     {
         public event Action Teleported;
-        private SynchronizedObservableCollection<CivilUnrestGuild> _guilds;
-        private bool _cuZone;
+        private readonly SynchronizedObservableCollection<CivilUnrestGuild> _guilds;
 
         public ICollectionViewLiveShaping Guilds
         {
@@ -79,11 +74,11 @@ namespace TCC.ViewModels
             {
                 var item =
                     ((WindowManager.CivilUnrestWindow.GuildList.Items[i])) as CivilUnrestGuild;
-                sb.Append(item.Name);
+                sb.Append(item?.Name);
                 sb.Append(" | ");
-                sb.Append($"HP: {item.TowerHp:##0%}");
+                sb.Append($"HP: {item?.TowerHp:##0%}");
                 sb.Append(" | ");
-                sb.Append($"Towers: {item.TowersDestroyed}");
+                sb.Append($"Towers: {item?.TowersDestroyed}");
                 sb.Append("\\");
             }
             try
@@ -99,14 +94,13 @@ namespace TCC.ViewModels
 
         public CivilUnrestViewModel()
         {
-            _dispatcher = App.BaseDispatcher;
+            Dispatcher = App.BaseDispatcher;
             _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
         }
 
         public void AddGuild(CityWarGuildInfo guildInfo)
         {
-            CivilUnrestGuild g = null;
-            g = _guilds.FirstOrDefault(x => x.Id == guildInfo.Id);
+            var g = _guilds.FirstOrDefault(x => x.Id == guildInfo.Id);
             if (g != null)
             {
                 g.TowerHp = guildInfo.TowerHp;
@@ -120,8 +114,7 @@ namespace TCC.ViewModels
 
         public void SetGuildName(uint id, string name)
         {
-            CivilUnrestGuild g = null;
-            g = _guilds.FirstOrDefault(x => x.Id == id);
+            var g = _guilds.FirstOrDefault(x => x.Id == id);
             if (g != null)
             {
                 g.Name = name;
@@ -130,8 +123,7 @@ namespace TCC.ViewModels
 
         public void AddDestroyedGuildTower(uint id)
         {
-            CivilUnrestGuild g = null;
-            g = _guilds.FirstOrDefault(x => x.Id == id);
+            var g = _guilds.FirstOrDefault(x => x.Id == id);
             if (g != null)
             {
                 g.TowersDestroyed++;
@@ -140,7 +132,7 @@ namespace TCC.ViewModels
 
         public void NotifyTeleported()
         {
-            _dispatcher.Invoke(Teleported);
+            Dispatcher.Invoke(Teleported);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public BerserkerBarManager() : base()
+        public BerserkerBarManager()
         {
             SinisterTracker = new StatTracker();
             DexterTracker = new StatTracker();
@@ -57,17 +57,17 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
             SessionManager.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
             SessionManager.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
-            FieryRage = new DurationCooldownIndicator(_dispatcher)
+            FieryRage = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(fr,  true),
                 Buff = new FixedSkillCooldown(fr,  true)
             };
-            Bloodlust = new DurationCooldownIndicator(_dispatcher)
+            Bloodlust = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(bl,  true),
                 Buff = new FixedSkillCooldown(bl,  true)
             };
-            Unleash = new DurationCooldownIndicator(_dispatcher)
+            Unleash = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(ul, false),
                 Buff = new FixedSkillCooldown(ul, false)

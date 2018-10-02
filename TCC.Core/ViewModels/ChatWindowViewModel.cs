@@ -94,12 +94,12 @@ namespace TCC.ViewModels
 
         private ChatWindowManager()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             //_scale = Settings.ChatWindowSettings.Scale; TODO
-            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
+            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
             _queue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
-            LFGs = new SynchronizedObservableCollection<LFG>(_dispatcher);
+            LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>();
             _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(15) };
             _hideTimer.Tick += HideTimer_Tick;
@@ -140,7 +140,7 @@ namespace TCC.ViewModels
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 if (e.OldItems.Count == 0) return;
-                Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow).WindowSettings as ChatWindowSettings);
+                Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
             }
         }
 
@@ -380,14 +380,6 @@ namespace TCC.ViewModels
                 //TODO: make this different per window
                 x.VM.NotifyOpacityChange();
             });
-        }
-
-        public void TempShow()
-        {
-            foreach (var chatWindow in ChatWindows)
-            {
-                //chatWindow.TempShow();
-            }
         }
 
         internal void CachePrivateMessage(uint channel, string author, string message)

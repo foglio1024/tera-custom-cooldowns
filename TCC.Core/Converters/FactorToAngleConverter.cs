@@ -12,7 +12,7 @@ namespace TCC.Converters
             double mult = 1;
             if (parameter != null && parameter.ToString() != "") mult = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
 
-            return val * (359.99/mult);
+            return Utils.FactorToAngle(val, mult);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -20,4 +20,6 @@ namespace TCC.Converters
             throw new NotImplementedException();
         }
     }
+
+    
 }

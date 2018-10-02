@@ -27,7 +27,7 @@ namespace TCC.ViewModels
 
         public CharacterWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
             Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;

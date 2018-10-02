@@ -75,7 +75,7 @@ namespace TCC.Data
 
         public LFG(uint id, string name, string msg, bool raid)
         {
-            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
 
             Id = id;
             Name = name;

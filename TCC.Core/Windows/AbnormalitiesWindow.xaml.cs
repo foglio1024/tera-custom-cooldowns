@@ -12,8 +12,8 @@ namespace TCC.Windows
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContent = content;
-            Init(Settings.BuffWindowSettings, ignoreSize: true);
+            MainContent = WindowContent;
+            Init(Settings.BuffWindowSettings);
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
 

@@ -85,7 +85,7 @@ namespace TCC.Data
             }
         }
 
-        public bool IsMyLfg => _dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
+        public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
                                LeaderId == SessionManager.CurrentPlayer.PlayerId ||
                                 GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == LeaderId));
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
@@ -148,9 +148,9 @@ namespace TCC.Data
 
         public Listing()
         {
-            _dispatcher = App.BaseDispatcher; //TODO check this
-            Players = new SynchronizedObservableCollection<User>(_dispatcher);
-            Applicants = new SynchronizedObservableCollection<User>(_dispatcher);
+            Dispatcher = App.BaseDispatcher; //TODO check this
+            Players = new SynchronizedObservableCollection<User>(Dispatcher);
+            Applicants = new SynchronizedObservableCollection<User>(Dispatcher);
             Apply = new ApplyCommand(this);
             RefreshApplicants = new RefreshApplicantsCommand(this);
         }

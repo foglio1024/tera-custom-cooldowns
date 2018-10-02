@@ -91,7 +91,7 @@ namespace TCC.ViewModels
         public bool ShowFpsUtils => Proxy.IsConnected && Proxy.IsFpsUtilsAvailable;
         public TooltipInfo(string n, string i, int l)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Name = n;
             Info = i;
             Level = l;

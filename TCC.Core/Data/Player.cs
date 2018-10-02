@@ -290,7 +290,7 @@ namespace TCC.Data
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Buffs.Add(newAb);
                 if (ab.IsShield)
@@ -313,7 +313,7 @@ namespace TCC.Data
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -328,7 +328,7 @@ namespace TCC.Data
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 InfBuffs.Add(newAb);
                 return;
@@ -394,18 +394,18 @@ namespace TCC.Data
 
         public Player()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             _debuffList = new List<uint>();
         }
         public Player(ulong id, string name)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             _debuffList = new List<uint>();
             _entityId = id;
             _name = name;

@@ -360,7 +360,7 @@ namespace TCC.Data
             if (existing == null)
             {
 
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false);
                 if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
@@ -381,7 +381,7 @@ namespace TCC.Data
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -427,7 +427,7 @@ namespace TCC.Data
 
         public User(Dispatcher d)
         {
-            _dispatcher = d;
+            Dispatcher = d;
             Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
             Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
         }

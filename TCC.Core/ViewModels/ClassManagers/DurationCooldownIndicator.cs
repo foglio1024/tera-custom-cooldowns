@@ -31,7 +31,7 @@ namespace TCC.ViewModels
 
         public DurationCooldownIndicator(Dispatcher d)
         {
-            _dispatcher = d;
+            Dispatcher = d;
             Cooldown = new FixedSkillCooldown();
             Buff = new FixedSkillCooldown();
         }

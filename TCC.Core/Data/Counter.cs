@@ -26,7 +26,7 @@ namespace TCC.Data
         public int MaxValue { get; }
         public Counter(int max, bool autoexpire)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             MaxValue = max;
             _autoexpire = autoexpire;
             _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(9000) };

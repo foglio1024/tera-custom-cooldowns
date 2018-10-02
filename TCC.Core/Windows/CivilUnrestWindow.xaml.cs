@@ -14,7 +14,7 @@ namespace TCC.Windows
         public CivilUnrestWindow()
         {
             InitializeComponent();
-            MainContent = content;
+            MainContent = WindowContent;
             DataContext = new CivilUnrestViewModel();
             Init(Settings.CivilUnrestWindowSettings, perClassPosition:false);
             VM.Teleported += OnTeleported;

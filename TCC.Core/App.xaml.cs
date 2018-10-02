@@ -91,21 +91,25 @@ namespace TCC
 
         private static void DebugStuff()
         {
-/*
-            EntitiesManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
-            var c = 0;
-            while (c < 1000)
-            {
-                AbnormalityManager.BeginAbnormality(2, 10, 500, 1);
-                AbnormalityManager.BeginAbnormality(2, 11, 500, 1);
-                Console.WriteLine("Added " + c);
-                Thread.Sleep(100);
-                AbnormalityManager.EndAbnormality(2, 10);
-                AbnormalityManager.EndAbnormality(2, 11);
-                Console.WriteLine("Removed " + c);
-                c++;
-            }
-*/
+            //for (int i = 0; i < 2000; i++)
+            //{
+            //    ChatWindowManager.Instance.AddTccMessage($"Test {i}");
+            //}
+            /*
+                        EntitiesManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
+                        var c = 0;
+                        while (c < 1000)
+                        {
+                            AbnormalityManager.BeginAbnormality(2, 10, 500, 1);
+                            AbnormalityManager.BeginAbnormality(2, 11, 500, 1);
+                            Console.WriteLine("Added " + c);
+                            Thread.Sleep(100);
+                            AbnormalityManager.EndAbnormality(2, 10);
+                            AbnormalityManager.EndAbnormality(2, 11);
+                            Console.WriteLine("Removed " + c);
+                            c++;
+                        }
+            */
             //AbnormalityManager.BeginAbnormality(1495, 10, 10000, 5);
             //AbnormalityManager.BeginAbnormality(2066, 10, 100000, 10);
             //AbnormalityManager.BeginAbnormality(2074, 10, 10000000, 20);

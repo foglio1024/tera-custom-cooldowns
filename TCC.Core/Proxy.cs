@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.TeraCommon;
@@ -68,7 +69,7 @@ namespace TCC
 
                 if (data.Contains(":tcc"))
                 {
-                    PacketProcessor.HandleGpkData(data.Substring(data.IndexOf(":tcc")));
+                    PacketProcessor.HandleGpkData(data.Substring(data.IndexOf(":tcc", StringComparison.Ordinal)));
                 }
                 else
                 {
@@ -108,12 +109,13 @@ namespace TCC
 
 
             }
+            // ReSharper disable once FunctionNeverReturns
         }
 
         private static void SetProperty(string propName, string val)
         {
             var pi = typeof(Proxy).GetProperty(propName);
-            pi.SetValue(null, Convert.ChangeType(val, pi.PropertyType));
+            pi?.SetValue(null, Convert.ChangeType(val, pi.PropertyType));
         }
 
         private static string AddFontTagsIfMissing(string msg)
@@ -139,7 +141,7 @@ namespace TCC
             return sb.ToString();
         }
         public static bool IsConnected => _client.Connected;
-        public static bool IsFpsUtilsAvailable { get; set; }
+        public static bool IsFpsUtilsAvailable { get; [UsedImplicitly] set; }
 
         public static void ConnectToProxy()
         {
@@ -189,7 +191,7 @@ namespace TCC
             }
         }
 
-        public static void InitStub()
+        private static void InitStub()
         {
             var sb = new StringBuilder("init_stub");
             sb.Append("&use_lfg=");

@@ -10,7 +10,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
     {
         internal S_GET_USER_GUILD_LOGO(TeraMessageReader reader) : base(reader)
         {
-            var offset = reader.ReadUInt16();
+            reader.ReadUInt16();
             var size = reader.ReadUInt16();
             PlayerId = reader.ReadUInt32();
             GuildId = reader.ReadUInt32();

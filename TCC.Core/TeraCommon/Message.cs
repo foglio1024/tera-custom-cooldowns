@@ -15,7 +15,9 @@ namespace TCC.TeraCommon
         public MessageDirection Direction { get; private set; }
         public ArraySegment<byte> Data { get; }
 
+        // ReSharper disable once PossibleNullReferenceException
         public ushort OpCode => (ushort) (Data.Array[Data.Offset] | Data.Array[Data.Offset + 1] << 8);
+        // ReSharper disable once AssignNullToNotNullAttribute
         public ArraySegment<byte> Payload => new ArraySegment<byte>(Data.Array, Data.Offset + 2, Data.Count - 2);
     }
 }

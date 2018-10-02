@@ -13,7 +13,7 @@ namespace TCC.ViewModels
         }
         public override void LoadSpecialSkills()
         {
-            ShadowReaping = new DurationCooldownIndicator(_dispatcher);
+            ShadowReaping = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
             ShadowReaping.Cooldown = new FixedSkillCooldown(sr, true);
             ShadowReaping.Buff= new FixedSkillCooldown(sr, true);

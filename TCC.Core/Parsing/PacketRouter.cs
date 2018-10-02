@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using TCC.Data;
 using TCC.Parsing.Messages;
@@ -23,9 +22,9 @@ namespace TCC.Parsing
     {
         public static uint Version;
         public static Server Server;
-        private static string Language => new TeraData(Server.Region).GetLanguage(Server.Region);
-        public static OpCodeNamer OpCodeNamer { get; set; }
-        public static OpCodeNamer SystemMessageNamer { get; set; }
+        private static string Language => Server.Region == "EU" ? "EU-EN" : Server.Region;
+        public static OpCodeNamer OpCodeNamer { get; private set; }
+        public static OpCodeNamer SystemMessageNamer { get; private set; }
         public static MessageFactory Factory;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         private static System.Timers.Timer _x;
@@ -78,10 +77,9 @@ namespace TCC.Parsing
 
         private static int _processed;
         private static int _discarded;
-        private static Stopwatch _sw;
+
         private static void PacketAnalysisLoop()
         {
-            _sw = new Stopwatch();
             while (true)
             {
                 var successDequeue = Packets.TryDequeue(out var msg);
@@ -90,22 +88,8 @@ namespace TCC.Parsing
                     Thread.Sleep(1);
                     continue;
                 }
-                //_sw.Start();
                 var message = Factory.Create(msg);
-                //_sw.Stop();
-                //Console.WriteLine($"Creating {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
-                //_sw.Restart();
-                //if (
                 Factory.Process(message);
-                //)
-                //{
-                //Console.WriteLine($"Processed {message.OpCodeName}");
-                //}
-                //_sw.Stop();
-                // Console.WriteLine($"Processing {OpCodeNamer.GetName(msg.OpCode)} took {_sw.ElapsedTicks}");
-                //_sw.Reset();
-                //if (Packets.Count != 0) Console.WriteLine($"Processed: {_processed} Queued: {Packets.Count}");
-                //App.DebugWindow.SetQueuedPackets(Packets.Count);
             }
             // ReSharper disable once FunctionNeverReturns
         }
@@ -200,14 +184,14 @@ namespace TCC.Parsing
             if (b != null /*&& b.IsBoss*/ && b.Visible == System.Windows.Visibility.Visible)
             {
                 GroupWindowViewModel.Instance.SetAggro(p.Target);
-                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, AggroCircle.Main, p.Target);
+                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, p.Target);
 
             }
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
-            BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.Circle, p.User);
+            BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.User);
             GroupWindowViewModel.Instance.SetAggroCircle(p);
         }
 
@@ -325,19 +309,7 @@ namespace TCC.Parsing
             WindowManager.LfgListWindow.ShowWindow();
         }
 
-        private static Stopwatch _st;
-        internal static void HandleActionStage(S_ACTION_STAGE x)
-        {
-            _st.Stop();
-            //Console.WriteLine("- S_ACTION_STAGE -");
-            //Console.WriteLine($"GameId: {x.GameId}");
-            //Console.WriteLine($"Target: {x.Target}");
-            //Console.WriteLine($"Id:     {x.Id}");
-            //Console.WriteLine($"Speed:  {x.Speed * 1.1}");
-            //Console.WriteLine($"Elaps:  {_st.ElapsedMilliseconds}");
-            _st.Restart();
-        }
-
+/*
         public static void SendTestMessage()
         {
             //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
@@ -357,6 +329,7 @@ namespace TCC.Parsing
             HandleSystemMessage(sysMsg);
 
         }
+*/
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
@@ -450,6 +423,7 @@ namespace TCC.Parsing
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
+/*
         public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
         {
             //bool sourceInParty = GroupWindowViewModel.Instance.UserExists(x.Source);
@@ -464,6 +438,7 @@ namespace TCC.Parsing
             if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
             BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
         }
+*/
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
@@ -492,12 +467,6 @@ namespace TCC.Parsing
             var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[i].Index + 11);
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, x.AuthorName, x.Message));
-        }
-        public static void HandleCommandOutput(string msg)
-        {
-            var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[7].Index + 11);
-
-            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
         }
 
         public static void HandleProxyOutput(string author, uint channel, string message)
@@ -902,7 +871,7 @@ namespace TCC.Parsing
             lfg.LeaderId = packet.Id;
             var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
             if (leader != null) lfg.LeaderName = leader.Name;
-            if (WindowManager.LfgListWindow.VM._lastClicked != null && WindowManager.LfgListWindow.VM._lastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
+            if (WindowManager.LfgListWindow.VM.LastClicked != null && WindowManager.LfgListWindow.VM.LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
             lfg.PlayerCount = packet.Members.Count;
             WindowManager.LfgListWindow.VM.NotifyMyLfg();
         }
@@ -1054,9 +1023,9 @@ namespace TCC.Parsing
             {
                 WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower(p.SourceGuildId);
             }
-            catch (Exception e)
+            catch
             {
-
+                // ignored
             }
         }
 
@@ -1066,9 +1035,9 @@ namespace TCC.Parsing
             {
                 p.Guilds.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.AddGuild(x));
             }
-            catch (Exception e)
+            catch
             {
-
+                // ignored
             }
         }
         public static void HandleCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL p)
@@ -1077,9 +1046,9 @@ namespace TCC.Parsing
             {
                 p.GuildDetails.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.SetGuildName(x.Item1, x.Item2));
             }
-            catch (Exception e)
+            catch
             {
-
+                // ignored
             }
         }
 
@@ -1093,11 +1062,9 @@ namespace TCC.Parsing
                     var pg = S_VIEW_WARE_EX.Pages[(int)i];
                     foreach (var item in page.Items)
                     {
-                        if (pg.Items.Any(x => x.Id == item.Id))
-                        {
-                            var name = SessionManager.ItemsDatabase.GetItemName((uint) item.Id);
-                            Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index+1}) in page {i+1}");
-                        }
+                        if (pg.Items.All(x => x.Id != item.Id)) continue;
+                        var name = SessionManager.ItemsDatabase.GetItemName((uint) item.Id);
+                        Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index+1}) in page {i+1}");
                     }
                 }
             }

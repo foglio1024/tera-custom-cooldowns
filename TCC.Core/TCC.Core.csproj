@@ -332,7 +332,7 @@
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="ProxyPacketSplitter.cs" />
     <Compile Include="SettingsReader.cs" />
     <Compile Include="SettingsWriter.cs" />
@@ -668,7 +668,6 @@
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="ViewModels\Helpers\BaseINPC.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
@@ -737,6 +736,8 @@
     <Compile Include="Windows\GroupAbnormalConfigWindow.xaml.cs">
       <DependentUpon>GroupAbnormalConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GroupConfigVM.cs" />
+    <Compile Include="ViewModels\GroupAbnormalityVM.cs" />
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
@@ -1752,6 +1753,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\data\opcodes\" />
+    <Folder Include="ViewModels\Helpers\" />
     <Folder Include="ViewModels\WindowManagers\" />
   </ItemGroup>
   <ItemGroup>

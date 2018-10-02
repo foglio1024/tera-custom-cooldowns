@@ -51,7 +51,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public ArcherBarManager() : base()
+        public ArcherBarManager()
         {
             Focus = new ArcherFocusTracker();
             Stance = new StanceTracker<ArcherStance>();
@@ -63,7 +63,7 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
             SessionManager.SkillsDatabase.TryGetSkill(120500, Class.Archer, out var vm);
             Thunderbolt = new FixedSkillCooldown(tb, true);
-            VelikMark = new DurationCooldownIndicator(_dispatcher)
+            VelikMark = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(vm, false),
                 Buff = new FixedSkillCooldown(vm, false)

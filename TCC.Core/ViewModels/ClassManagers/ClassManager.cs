@@ -83,7 +83,7 @@ namespace TCC.ViewModels
         //}
         public ClassManager()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             //HP = new StatTracker();
             //MP = new StatTracker();
             StaminaTracker = new StatTracker();

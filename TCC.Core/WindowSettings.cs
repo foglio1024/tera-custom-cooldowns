@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
@@ -26,7 +27,7 @@ namespace TCC
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
 
-        public string Name { get; }
+        public string Name { [UsedImplicitly] get; }
         public bool PerClassPosition { get; set; }
 
         public double X
@@ -203,7 +204,7 @@ namespace TCC
 
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null, string name = "", bool perClassPosition = true)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
             _w = w;
             _h = h;
@@ -216,23 +217,20 @@ namespace TCC
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
             PerClassPosition = perClassPosition;
-            Positions = new Dictionary<Class, Point>
+            Positions = new Dictionary<Class, Point>();
+            for (var i = 0; i <= 12; i++)
             {
-                {(Class) 0,   positions == null ? new Point(x,y) : new Point(positions[(Class) 0].X, positions[(Class) 0].Y)},
-                {(Class) 1,   positions == null ? new Point(x,y) : new Point(positions[(Class) 1].X, positions[(Class) 1].Y)},
-                {(Class) 2,   positions == null ? new Point(x,y) : new Point(positions[(Class) 2].X, positions[(Class) 2].Y)},
-                {(Class) 3,   positions == null ? new Point(x,y) : new Point(positions[(Class) 3].X, positions[(Class) 3].Y)},
-                {(Class) 4,   positions == null ? new Point(x,y) : new Point(positions[(Class) 4].X, positions[(Class) 4].Y)},
-                {(Class) 5,   positions == null ? new Point(x,y) : new Point(positions[(Class) 5].X, positions[(Class) 5].Y)},
-                {(Class) 6,   positions == null ? new Point(x,y) : new Point(positions[(Class) 6].X, positions[(Class) 6].Y)},
-                {(Class) 7,   positions == null ? new Point(x,y) : new Point(positions[(Class) 7].X, positions[(Class) 7].Y)},
-                {(Class) 8,   positions == null ? new Point(x,y) : new Point(positions[(Class) 8].X, positions[(Class) 8].Y)},
-                {(Class) 9,   positions == null ? new Point(x,y) : new Point(positions[(Class) 9].X, positions[(Class) 9].Y)},
-                {(Class) 10,  positions == null ? new Point(x,y) : new Point(positions[(Class) 10].X, positions[(Class) 10].Y)},
-                {(Class) 11,  positions == null ? new Point(x,y) : new Point(positions[(Class) 11].X, positions[(Class) 11].Y)},
-                {(Class) 12,  positions == null ? new Point(x,y) : new Point(positions[(Class) 12].X, positions[(Class) 12].Y)},
-                {(Class) 255, positions == null ? new Point(x,y) : new Point(positions[(Class) 255].X, positions[(Class) 255].Y)}
-            };
+                Positions[(Class) i] = positions == null
+                    ? new Point(x, y)
+                    : new Point(positions[(Class) i].X,
+                                positions[(Class) i].Y
+                    );
+
+            }
+            Positions[Class.Common] = positions == null
+                ? new Point(x, y)
+                : new Point(positions[Class.Common].X,
+                            positions[Class.Common].Y);
         }
 
         public virtual XElement ToXElement(string name)

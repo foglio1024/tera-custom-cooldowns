@@ -142,7 +142,7 @@ namespace TCC.Windows
             else
             {
                 var id = l.LeaderId;
-                VM._lastClicked = l;
+                VM.LastClicked = l;
                 Proxy.RequestPartyInfo(id);
             }
         }
@@ -204,20 +204,17 @@ namespace TCC.Windows
 
         private void AcceptApply(object sender, RoutedEventArgs e)
         {
-            var user = (sender as FrameworkElement).DataContext as User;
-            Proxy.PartyInvite(user.Name);
+            if (((FrameworkElement) sender).DataContext is User user) Proxy.PartyInvite(user.Name);
         }
 
         private void InspectApplicant(object sender, RoutedEventArgs e)
         {
-            var user = (sender as FrameworkElement).DataContext as User;
-            Proxy.Inspect(user.Name);
+            if (((FrameworkElement) sender).DataContext is User user) Proxy.Inspect(user.Name);
         }
 
         private void RefuseApplicant(object sender, RoutedEventArgs e)
         {
-            var user = (sender as FrameworkElement).DataContext as User;
-            Proxy.DeclineApply(user.PlayerId);
+            if (((FrameworkElement) sender).DataContext is User user) Proxy.DeclineApply(user.PlayerId);
             Proxy.RequestCandidates();
         }
 
@@ -228,7 +225,7 @@ namespace TCC.Windows
 
         private void OnLfgMessageMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var listing = (sender as FrameworkElement).DataContext as Listing;
+            if(!(((FrameworkElement) sender).DataContext is Listing listing)) return;
             if (!listing.IsTwitch) return;
             Process.Start(listing.TwitchLink);
         }

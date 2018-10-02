@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using TCC.Tera.Data;
+using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC
@@ -134,7 +134,7 @@ namespace TCC
         /// </summary>
         /// <param name="modifier">The modifiers that are associated with the hot key.</param>
         /// <param name="key">The key itself that is associated with the hot key.</param>
-        private void RegisterHotKey(HotkeysData.ModifierKeys modifier, Keys key)
+        private void RegisterHotKey(ModifierKeys modifier, Keys key)
         {
             if (key == Keys.None)
             {
@@ -189,7 +189,7 @@ namespace TCC
                 {
                     // get the keys.
                     var key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
-                    var modifier = (HotkeysData.ModifierKeys)((int)m.LParam & 0xFFFF);
+                    var modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
 
                     // invoke the event to notify the parent.
                     KeyPressed?.Invoke(this, new KeyPressedEventArgs(modifier, key));
@@ -225,13 +225,13 @@ namespace TCC
     /// </summary>
     public class KeyPressedEventArgs : EventArgs
     {
-        internal KeyPressedEventArgs(HotkeysData.ModifierKeys modifier, Keys key)
+        internal KeyPressedEventArgs(ModifierKeys modifier, Keys key)
         {
             Modifier = modifier;
             Key = key;
         }
 
-        public HotkeysData.ModifierKeys Modifier { get; }
+        public ModifierKeys Modifier { get; }
 
         public Keys Key { get; }
     }

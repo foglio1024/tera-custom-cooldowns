@@ -51,7 +51,7 @@ namespace TCC.Parsing.Messages
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
 
                 reader.BaseStream.Position = offset - 4;
-                var pointer = reader.ReadUInt16();
+                reader.Skip(2); // var pointer = reader.ReadUInt16();
                 var nextOffset = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.ServerId = reader.ReadUInt32();

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using TCC.Parsing;
-using TCC.Parsing.Messages;
 
 namespace TCC.TeraCommon.Game.Services
 {

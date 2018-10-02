@@ -24,8 +24,8 @@ namespace TCC.Data
 
         public EventGroup(string name, DateTime start, DateTime end, bool rc)
         {
-            _dispatcher = InfoWindowViewModel.Instance.GetDispatcher();
-            Events = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
+            Dispatcher = InfoWindowViewModel.Instance.GetDispatcher();
+            Events = new SynchronizedObservableCollection<DailyEvent>(Dispatcher);
             Name = name;
             RemoteCheck = rc;
             _start = start;
@@ -33,7 +33,7 @@ namespace TCC.Data
         }
         public void AddEvent(DailyEvent ev)
         {
-            _dispatcher.Invoke(() => Events.Add(ev));
+            Dispatcher.Invoke(() => Events.Add(ev));
             //Events.Insert(0, ev);
         }
     }

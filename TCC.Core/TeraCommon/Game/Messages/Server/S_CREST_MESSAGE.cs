@@ -8,7 +8,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
         {
             
             //PrintRaw();
-            var unknow = reader.ReadUInt32();
+            reader.ReadUInt32();
 
             //Type? 6 = reset? 
             var typeId = reader.ReadUInt32();
