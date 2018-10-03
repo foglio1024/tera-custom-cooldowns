@@ -9,6 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null) return null;
             var loc = (Location)value;
             return AppDomain.CurrentDomain.BaseDirectory + "/resources/images/maps/" + SessionManager.MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg";
         }

@@ -11,7 +11,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContent = content;
+            MainContent = WindowContent;
             Init(Settings.ClassWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
             Settings.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
 

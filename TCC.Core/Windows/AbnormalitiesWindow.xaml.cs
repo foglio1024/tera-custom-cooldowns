@@ -1,4 +1,7 @@
-﻿namespace TCC.Windows
+﻿using System.Windows.Controls;
+using TCC.ViewModels;
+
+namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
@@ -9,8 +12,20 @@
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContent = content;
-            Init(Settings.BuffWindowSettings, ignoreSize: true);
+            MainContent = WindowContent;
+            Init(Settings.BuffWindowSettings);
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
+        }
+
+        private void OnAbnormalityShapeChanged()
+        {
+            Buffs.ItemTemplateSelector = null;
+            Buffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = null;
+            Debuffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            InfBuffs.ItemTemplateSelector = null;
+            InfBuffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+
         }
     }
 }

@@ -12,13 +12,13 @@ namespace TCC.Controls.ClassBars
         public LancerBar()
         {
             InitializeComponent();
-            this.Loaded += OnLoaded;
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
             _dc = DataContext as LancerBarManager;
-            _dc.LH.PropertyChanged += OnLineHeldPropertyChanged;
+            if (_dc != null) _dc.LH.PropertyChanged += OnLineHeldPropertyChanged;
         }
 
         private void OnLineHeldPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -26,7 +26,7 @@ namespace TCC.Controls.ClassBars
             if (e.PropertyName != nameof(_dc.LH.Val)) return;
             Dispatcher.Invoke(() =>
             {
-                for (int i = 0; i < _dc.LH.Max; i++)
+                for (var i = 0; i < _dc.LH.Max; i++)
                 {
                     LineHeldContainer.Children[i].Opacity = i <= _dc.LH.Val - 1 ? 1 : 0;
                 }

@@ -40,8 +40,7 @@ namespace TCC.Parsing
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
         {
             var sysmsg = "@0\vUserName\v" + friendName;
-            var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend);
-            msg.Author = friendName;
+            var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend) {Author = friendName};
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
@@ -132,8 +131,8 @@ namespace TCC.Parsing
         private static void HandleFriendInAreaMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Friend);
-            var start = srvMsg.IndexOf("UserName\v") + "UserName\v".Length;
-            var end = srvMsg.IndexOf("\v", start);
+            var start = srvMsg.IndexOf("UserName\v", StringComparison.InvariantCultureIgnoreCase) + "UserName\v".Length;
+            var end = srvMsg.IndexOf("\v", start, StringComparison.InvariantCultureIgnoreCase);
             var friendName = srvMsg.Substring(start, end - start);
             msg.Author = friendName;
             ChatWindowManager.Instance.AddChatMessage(msg);
@@ -162,8 +161,7 @@ namespace TCC.Parsing
 
         private static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)
         {
-            Delegate type;
-            Processor.TryGetValue(opcodeName, out type);
+            Processor.TryGetValue(opcodeName, out var type);
             if (type == null) return false;
             type.DynamicInvoke(serverMsg, sysMsg);
             return true;

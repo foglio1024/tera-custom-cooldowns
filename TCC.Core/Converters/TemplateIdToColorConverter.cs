@@ -10,7 +10,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var id = (uint)value;
+            //TODO:TRIGGERS?
+            var id = (uint?)value;
             if (id == 1100) return Application.Current.FindResource("IgnidraxColor");
             else if (id == 1101) return Application.Current.FindResource("TerradraxColor");
             else if (id == 1102) return Application.Current.FindResource("UmbradraxColor");

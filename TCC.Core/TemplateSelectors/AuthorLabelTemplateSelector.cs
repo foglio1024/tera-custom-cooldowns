@@ -12,7 +12,7 @@ namespace TCC.TemplateSelectors
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if(item == null) return null;
-            var m = item as ChatMessage;
+            var m = (ChatMessage) item;
 
             switch (m.Channel)
             {

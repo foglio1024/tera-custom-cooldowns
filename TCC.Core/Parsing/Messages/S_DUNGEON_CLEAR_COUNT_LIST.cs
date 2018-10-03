@@ -6,17 +6,18 @@ namespace TCC.Parsing.Messages
 {
     internal class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
     {
-        public Dictionary<uint, int> DungeonClears { get; set; }
+        public Dictionary<uint, int> DungeonClears { get;}
+        public uint PlayerId { get; }
         public S_DUNGEON_CLEAR_COUNT_LIST(TeraMessageReader reader) : base(reader)
         {
             var count = reader.ReadUInt16();
-            var offset = reader.ReadUInt16();
-            var playerId = reader.ReadUInt32();
+            reader.Skip(2); //var offset = reader.ReadUInt16();
+            PlayerId = reader.ReadUInt32();
             DungeonClears = new Dictionary<uint, int>();
             for (var i = 0; i < count; i++)
             {
                 //reader.BaseStream.Position = 8;
-                var current = reader.ReadUInt16();
+                reader.Skip(2); //var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();
                 var id = reader.ReadUInt32();
                 var clears = reader.ReadInt32();

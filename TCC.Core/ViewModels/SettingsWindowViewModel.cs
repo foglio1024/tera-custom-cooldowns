@@ -7,16 +7,15 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
-using TCC.Windows;
-using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
-        private readonly bool _characterWindowExtendedMode;
         public static event Action ChatShowChannelChanged;
         public static event Action ChatShowTimestampChanged;
+        public static event Action AbnormalityShapeChanged;
+        public static event Action FontSizeChanged;
 
         public WindowSettings CooldownWindowSettings => Settings.CooldownWindowSettings;
         public WindowSettings ClassWindowSettings => Settings.ClassWindowSettings;
@@ -93,8 +92,19 @@ namespace TCC.ViewModels
             {
                 if (Settings.BuffsDirection == value) return;
                 Settings.BuffsDirection = value;
-                BuffBarWindowViewModel.Instance.NotifyDirectionChanged();
+                BuffBarWindowViewModel.Instance.ExNPC(nameof(BuffBarWindowViewModel.Direction));
                 NPC(nameof(BuffsDirection));
+            }
+        }
+        public AbnormalityShape AbnormalityShape
+        {
+            get => Settings.AbnormalityShape;
+            set
+            {
+                if (Settings.AbnormalityShape == value) return;
+                Settings.AbnormalityShape = value;
+                AbnormalityShapeChanged?.Invoke();
+                NPC(nameof(AbnormalityShape));
             }
         }
         public CooldownBarMode CooldownBarMode
@@ -436,12 +446,13 @@ namespace TCC.ViewModels
                 var val = value;
                 if (val < 10) val = 10;
                 Settings.FontSize = val;
+                FontSizeChanged?.Invoke();
                 NPC(nameof(FontSize));
             }
         }
         public SettingsWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             //if (Settings.CooldownWindowSettings.Enabled) WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
             //if (Settings.CharacterWindowSettings.Enabled) WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
             //if (Settings.BossWindowSettings.Enabled) WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
@@ -524,6 +535,7 @@ namespace TCC.ViewModels
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
         public List<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
+        public List<AbnormalityShape> AbnormalityShapes => Utils.ListFromEnum<AbnormalityShape>();
 
         public bool ChatWindowEnabled
         {
@@ -560,7 +572,7 @@ namespace TCC.ViewModels
 
         public bool CharacterWindowCompactMode
         {
-            get { return Settings.CharacterWindowCompactMode; }
+            get => Settings.CharacterWindowCompactMode;
             set
             {
                 if (Settings.CharacterWindowCompactMode == value) return;

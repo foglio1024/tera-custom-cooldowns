@@ -8,19 +8,14 @@ namespace TCC.ViewModels
         private readonly DispatcherTimer _t = new DispatcherTimer();
         private DateTime _dateTime;
         private readonly int _hourOffset;
-        public string TimeString
-        {
-            get => _dateTime.ToShortTimeString();
-        }
-        public double TimeFactor
-        {
-            get => ((_dateTime.Hour * 60 + _dateTime.Minute) * 60) / TimeManager.SecondsInDay;
-        }
+        public string TimeString => _dateTime.ToShortTimeString();
+
+        public double TimeFactor => ((_dateTime.Hour * 60 + _dateTime.Minute) * 60) / TimeManager.SecondsInDay;
         public string Name { get; }
         public string Color { get; }
         public TimeMarker(int hourOffset, string name, string color = "ffffff")
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
             Color = color;
             _hourOffset = hourOffset;

@@ -11,7 +11,7 @@ namespace TCC.Data
 
         public Money(long money)
         {
-            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
 
             Gold = Convert.ToInt64(money / 10000);
             Silver = Convert.ToInt64(money / 100) - Gold * 100;
@@ -19,7 +19,7 @@ namespace TCC.Data
         }
         public Money(int g, int s, int c)
         {
-            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
 
             Gold = g;
             Silver = s;
@@ -29,7 +29,7 @@ namespace TCC.Data
         {
             long gold = 0;
             long silver = 0;
-            long copper = 0;
+            long copper;
             if (money.Length >= 5)
             {
                 copper = long.Parse(money.Substring(money.Length - 2));
@@ -56,7 +56,7 @@ namespace TCC.Data
             var silverString = Silver != 0 ? Silver.ToString() + "s " : "";
             var copperString = Copper != 0 ? Copper.ToString() + "c " : "";
 
-            return string.Format("{0}{1}{2}", goldString, silverString, copperString);
+            return $"{goldString}{silverString}{copperString}";
         }
     }
 }

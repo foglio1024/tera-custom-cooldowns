@@ -2,24 +2,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Game.Services;
-//using log4net;
-//using log4net.Config;
-
-//using DamageMeter.AutoUpdate;
-//using Lang;
 
 namespace TCC.Tera.Data
 {
     public class BasicTeraData
     {
         private static BasicTeraData _instance;
-        private readonly Func<string, TeraData> _dataForRegion;
+        //private readonly Func<string, TeraData> _dataForRegion;
         //private static readonly ILog _log = LogManager.GetLogger("ShinraMeter");
-        private static int _errorCount = 10; //limit number of debug messages in one session
 
-        private string defaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
+        private const string DefaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
 
         private BasicTeraData() : this(FindResourceDirectory())
         {
@@ -30,15 +25,15 @@ namespace TCC.Tera.Data
             ResourceDirectory = resourceDirectory;
             Directory.CreateDirectory(Path.Combine(resourceDirectory, "config")); //ensure config dir is created
             //XmlConfigurator.Configure(new Uri(Path.Combine(ResourceDirectory, "log4net.xml")));
-            HotkeysData = new HotkeysData(this);
-            WindowData = new WindowData(this);
+            //HotkeysData = new HotkeysData(this);
+            //WindowData = new WindowData(this);
             //EventsData = new EventsData(this);
-            _dataForRegion = Helpers.Memoize<string, TeraData>(region => new TeraData(region));
+            //_dataForRegion = Helpers.Memoize<string, TeraData>(region => new TeraData());
             Servers = new ServerDatabase(Path.Combine(ResourceDirectory, "data"));
             //handle overrides
             var serversOverridePath = Path.Combine(ResourceDirectory, "config/server-overrides.txt");
             if (!File.Exists(serversOverridePath))//create the default file if it doesn't exist
-                File.WriteAllText(serversOverridePath, defaultOverride);
+                File.WriteAllText(serversOverridePath, DefaultOverride);
             var overriddenServers = GetServers(serversOverridePath).ToList();
             Servers.AddOverrides(overriddenServers);
 
@@ -57,24 +52,24 @@ namespace TCC.Tera.Data
 
 
 
-        public QuestInfoDatabase QuestInfoDatabase { get; set; }
-        public HotDotDatabase HotDotDatabase { get; set; }
+        //public QuestInfoDatabase QuestInfoDatabase { get; set; }
+        //public HotDotDatabase HotDotDatabase { get; set; }
         public static BasicTeraData Instance => _instance ?? (_instance = new BasicTeraData());
-        public PetSkillDatabase PetSkillDatabase { get; set; }
-        public SkillDatabase SkillDatabase { get; set; }
-        public ImageDatabase ImageDatabase { get; private set; }
-        public NpcDatabase MonsterDatabase { get; set; }
-        public WindowData WindowData { get; }
+        //public PetSkillDatabase PetSkillDatabase { get; set; }
+        //public SkillDatabase SkillDatabase { get; set; }
+        //public ImageDatabase ImageDatabase { get; [UsedImplicitly] private set; }
+        //public NpcDatabase MonsterDatabase { get; set; }
+        //public WindowData WindowData { get; }
         //public EventsData EventsData { get; }
-        public HotkeysData HotkeysData { get; private set; }
+        //public HotkeysData HotkeysData { [UsedImplicitly] get; private set; }
         public string ResourceDirectory { get; }
         public ServerDatabase Servers { get; private set; }
-        public IconsDatabase Icons { get; set; }
+        //public IconsDatabase Icons { get; set; }
 
-        public TeraData DataForRegion(string region)
-        {
-            return _dataForRegion(region);
-        }
+        //public TeraData DataForRegion(string region)
+        //{
+        //    return _dataForRegion(region);
+        //}
 
         private static string FindResourceDirectory()
         {

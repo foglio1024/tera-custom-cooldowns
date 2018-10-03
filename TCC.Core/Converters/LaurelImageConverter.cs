@@ -9,7 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var l = (Laurel)value;
+            var l = (Laurel?)value ?? Laurel.None;
             bool kr = false, big = false;
             if (parameter != null)
             {
@@ -42,13 +42,8 @@ namespace TCC.Converters
 
             if (kr) laurel += "_kr";
             if (big) laurel += "_big";
-            // return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
             return "/resources/images/Icon_Laurels/" + laurel + ".png";
         }
-
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        private static extern bool DeleteObject(IntPtr hObject);
-
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

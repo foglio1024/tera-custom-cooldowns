@@ -10,7 +10,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var c = (Class)value;
+            var c = (Class?)value ?? Class.Common;
             switch (c)
             {
                 case Class.Lancer:

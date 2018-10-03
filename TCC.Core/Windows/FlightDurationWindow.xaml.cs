@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Animation;
 using TCC.Annotations;
-using TCC.Converters;
 using TCC.Data;
 using Arc = TCC.Controls.Arc;
 
@@ -18,7 +17,6 @@ namespace TCC.Windows
         private readonly DoubleAnimation _arcAn;
         private readonly DoubleAnimation _winShow;
         private readonly DoubleAnimation _winHide;
-        private bool _firstLoad = true;
 
         public FlightStackType Type => FlyingGuardianDataProvider.StackType;
         public double FlightGaugeRotation => Settings.FlightGaugeRotation;
@@ -52,8 +50,8 @@ namespace TCC.Windows
             };
             _arcAn.Completed += (s, ev) =>
             {
-                if (Arc.EndAngle >= 87 && 
-                _arcAn.From < _arcAn.To && 
+                if (Arc.EndAngle >= 87 &&
+                _arcAn.From < _arcAn.To &&
                 !FlyingGuardianDataProvider.IsInProgress) HideWindow();
                 else
                 {
@@ -64,7 +62,7 @@ namespace TCC.Windows
 
         private void OnCombatChanged()
         {
-            if(SessionManager.Combat) HideWindow();
+            if (SessionManager.Combat) HideWindow();
         }
 
         private void OnFlyingGuardianInProgressChanged(bool obj)
@@ -81,21 +79,20 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 if (Opacity == 0) ShowWindow();
-                var c = new FactorToAngleConverter();
                 _arcAn.From = Arc.EndAngle;
-                _arcAn.To = (double)c.Convert(val / 1000, null, 4, null);
+                _arcAn.To = Utils.FactorToAngle(val / 1000, 4);
                 Arc.BeginAnimation(Arc.EndAngleProperty, _arcAn);
             });
         }
 
 
-        public void SetStacks(int stacks)
+        private void SetStacks(int stacks)
         {
             Dispatcher.Invoke(() =>
             {
-                for (int i = 9; i >= 0; i--)
+                for (var i = 9; i >= 0; i--)
                 {
-                    (StacksContainer.Children[i] as FrameworkElement).Opacity = i + 1 <= stacks ? 1 : 0.2;
+                    ((FrameworkElement) StacksContainer.Children[i]).Opacity = i + 1 <= stacks ? 1 : 0.2;
                 }
             });
         }

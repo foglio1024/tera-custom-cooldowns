@@ -27,7 +27,7 @@ namespace TCC.ViewModels
 
         public CharacterWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
             Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
@@ -42,7 +42,7 @@ namespace TCC.ViewModels
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             NPC(e.PropertyName);
-            if (e.PropertyName == nameof(Player.Class))
+            if (e.PropertyName == nameof(Data.Player.Class))
             {
                 NPC(nameof(ShowRe));
             }

@@ -11,7 +11,7 @@ namespace TCC
         private static uint FireEssenceID = 630500;
         private static uint SparkEssenceID = 631001;
 
-        private static int _stacks = 0;
+        private static int _stacks;
         private static FlightStackType _stackType;
 
         public static event Action<int> StacksChanged;

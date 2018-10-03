@@ -8,30 +8,30 @@ namespace TCC.Converters
 {
     public class StaminaBarColorConverter : IValueConverter
     {
-        private Color ResolveColor = Color.FromRgb(0x66, 0xbb, 0xff);
-        private Color RageColor = Colors.OrangeRed;
-        private Color WillpowerColor = Colors.Orange;
-        private Color ChiColor = Color.FromRgb(208, 165, 255);
-        private Color RagnarokColor = Color.FromRgb(194, 214, 255);
+        private readonly Color _resolveColor = Color.FromRgb(0x66, 0xbb, 0xff);
+        private readonly Color _rageColor = Colors.OrangeRed;
+        private readonly Color _willpowerColor = Colors.Orange;
+        private readonly Color _chiColor = Color.FromRgb(208, 165, 255);
+        private readonly Color _ragnarokColor = Color.FromRgb(194, 214, 255);
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((Class)value)
+            switch ((Class?)value)
             {
                 case Class.Warrior:
-                    return new SolidColorBrush(ResolveColor);
+                    return new SolidColorBrush(_resolveColor);
                 case Class.Lancer:
-                    return new SolidColorBrush(ResolveColor);
+                    return new SolidColorBrush(_resolveColor);
                 case Class.Gunner:
-                    return new SolidColorBrush(WillpowerColor);
+                    return new SolidColorBrush(_willpowerColor);
                 case Class.Brawler:
-                    return new SolidColorBrush(RageColor);
+                    return new SolidColorBrush(_rageColor);
                 case Class.Ninja:
-                    return new SolidColorBrush(ChiColor);
+                    return new SolidColorBrush(_chiColor);
                 case Class.Valkyrie:
-                    return new SolidColorBrush(RagnarokColor);
+                    return new SolidColorBrush(_ragnarokColor);
                 default:
-                    return new SolidColorBrush(ResolveColor);
+                    return new SolidColorBrush(_resolveColor);
             }
 
         }

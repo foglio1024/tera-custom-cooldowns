@@ -10,7 +10,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (MessagePieceType)value;
+            var val = (MessagePieceType?)value;
             var c = Cursors.Arrow;
             switch (val)
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -56,7 +55,7 @@ namespace TCC.Controls.ChatControls
                 var dc = (BrokerChatMessage) DataContext;
                 ChatWindowManager.Instance.SetPaused(false, dc);
             }
-            catch (Exception exception)
+            catch 
             {
                 ChatWindowManager.Instance.SetPaused(false);
             }

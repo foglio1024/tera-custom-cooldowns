@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
 using TCC.Parsing;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game.Services;
@@ -12,39 +9,45 @@ namespace TCC
 {
     public static class PacketInspector
     {
-        private static bool running;
-        private static Dictionary<string, MessageStats> Stats;
-        public static void NewStat()
-        {
-            if (running) return;
-            Stats = new Dictionary<string, MessageStats>();
-            running = true;
-        }
-        public static void Stop()
-        {
-            running = false;
-            Dump();
-        }
-        public static void Dump()
-        {
-            var lines = new List<string>();
-            foreach (var item in Stats)
-            {
-                var sb = new StringBuilder();
-                sb.Append(item.Key);
-                sb.Append("\t");
-                sb.Append(item.Value.Count);
-                sb.Append("\t");
-                sb.Append(item.Value.TotalSize);
+        private static bool _running;
+        private static Dictionary<string, MessageStats> _stats;
+        /*
+                public static void NewStat()
+                {
+                    if (_running) return;
+                    _stats = new Dictionary<string, MessageStats>();
+                    _running = true;
+                }
+        */
+        /*
+                public static void Stop()
+                {
+                    _running = false;
+                    Dump();
+                }
+        */
+        /*
+                public static void Dump()
+                {
+                    var lines = new List<string>();
+                    foreach (var item in _stats)
+                    {
+                        var sb = new StringBuilder();
+                        sb.Append(item.Key);
+                        sb.Append("\t");
+                        sb.Append(item.Value.Count);
+                        sb.Append("\t");
+                        sb.Append(item.Value.TotalSize);
 
-                lines.Add(sb.ToString());
-            }
-            var now = DateTime.Now.ToString();
-            now = now.Replace("/", "-");
-            now = now.Replace(":", "-");
-            var path = "packets-log_" + now + ".log";
-            File.WriteAllLines(path, lines);
-        }
+                        lines.Add(sb.ToString());
+                    }
+                    var now = DateTime.Now.ToString();
+                    now = now.Replace("/", "-");
+                    now = now.Replace(":", "-");
+                    var path = "packets-log_" + now + ".log";
+                    File.WriteAllLines(path, lines);
+                }
+        */
         public static void InspectPacket(Message msg)
         {
             var exclusionList = new List<string>()
@@ -132,60 +135,60 @@ namespace TCC
             var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
             var tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Factory, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
-            //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
-            Debug.WriteLine(opName + " " + msg.OpCode);
+            if (opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN") || opName.Equals("S_SPAWN_ME"))
+                Debug.WriteLine(opName + " " + msg.OpCode);
         }
         public static void AddToStats(Message msg)
         {
-            if (!running) return;
+            if (!_running) return;
             var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
 
-            if (Stats.ContainsKey(opName))
+            if (_stats.ContainsKey(opName))
             {
-                Stats[opName].TotalSize += msg.Data.Count;
-                Stats[opName].Count++;
+                _stats[opName].TotalSize += msg.Data.Count;
+                _stats[opName].Count++;
             }
             else
             {
-                Stats.Add(opName, new MessageStats(opName, msg.Data.Count));
+                _stats.Add(opName, new MessageStats(opName, msg.Data.Count));
             }
         }
 
-        //public static void Analyze(Message msg)
-        //{
-        //    return;
-        //    if (msg.Direction == MessageDirection.ClientToServer) return;
-        //    var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
-        //    Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
-        //    Debug.WriteLine(r.ReadUInt32());
-        //    Debug.WriteLine(r.ReadUInt32());
-        //    Debug.WriteLine(r.ReadUInt32());
-        //    Debug.WriteLine(r.ReadUInt32());
+        public static void Analyze(Message msg)
+        {
+            //return;
+            //if (msg.Direction == MessageDirection.ClientToServer) return;
+            //var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+            //Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
+            //Debug.WriteLine(r.ReadUInt32());
+            //Debug.WriteLine(r.ReadUInt32());
+            //Debug.WriteLine(r.ReadUInt32());
+            //Debug.WriteLine(r.ReadUInt32());
 
-        //    //try
-        //    //{
-        //    //    Debug.WriteLine("id: " + r.ReadUInt64());
-        //    //    Debug.WriteLine("unk1: " + r.ReadInt32());
-        //    //    Debug.WriteLine("skill: " + r.ReadUInt32());
-        //    //    Debug.WriteLine("x1: " + r.ReadSingle());
-        //    //    Debug.WriteLine("y1: " + r.ReadSingle());
-        //    //    Debug.WriteLine("z1: " + r.ReadSingle());
-        //    //    Debug.WriteLine("x2: " + r.ReadSingle());
-        //    //    Debug.WriteLine("y2: " + r.ReadSingle());
-        //    //    Debug.WriteLine("z2: " + r.ReadSingle());
-        //    //    Debug.WriteLine("unk2: " + r.ReadByte());
-        //    //    Debug.WriteLine("spd: " + r.ReadSingle());
-        //    //    Debug.WriteLine("src: " + r.ReadUInt64());
-        //    //    Debug.WriteLine("model: " + r.ReadUInt32());
-        //    //    Debug.WriteLine("unk4: " + r.ReadUInt32());
-        //    //    Debug.WriteLine("unk5: " + r.ReadUInt32());
-        //    //    Debug.WriteLine("");
-        //    //}
-        //    //catch (Exception e)
-        //    //{
-        //    //    //ignore
-        //    //}
-        //}
+            //try
+            //{
+            //    Debug.WriteLine("id: " + r.ReadUInt64());
+            //    Debug.WriteLine("unk1: " + r.ReadInt32());
+            //    Debug.WriteLine("skill: " + r.ReadUInt32());
+            //    Debug.WriteLine("x1: " + r.ReadSingle());
+            //    Debug.WriteLine("y1: " + r.ReadSingle());
+            //    Debug.WriteLine("z1: " + r.ReadSingle());
+            //    Debug.WriteLine("x2: " + r.ReadSingle());
+            //    Debug.WriteLine("y2: " + r.ReadSingle());
+            //    Debug.WriteLine("z2: " + r.ReadSingle());
+            //    Debug.WriteLine("unk2: " + r.ReadByte());
+            //    Debug.WriteLine("spd: " + r.ReadSingle());
+            //    Debug.WriteLine("src: " + r.ReadUInt64());
+            //    Debug.WriteLine("model: " + r.ReadUInt32());
+            //    Debug.WriteLine("unk4: " + r.ReadUInt32());
+            //    Debug.WriteLine("unk5: " + r.ReadUInt32());
+            //    Debug.WriteLine("");
+            //}
+            //catch (Exception e)
+            //{
+            //    //ignore
+            //}
+        }
         private static Dictionary<string, int> FixedSizePackets = new Dictionary<string, int>
         {
             { "S_RETURN_TO_LOBBY", 4 },

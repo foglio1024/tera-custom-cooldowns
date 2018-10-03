@@ -1,15 +1,12 @@
 ﻿<w:TccWidget x:Class="TCC.Windows.ClassWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:TCC.Windows"
-             xmlns:wm="clr-namespace:TCC.ViewModels"
-             xmlns:w="clr-namespace:TCC.Windows"
-             xmlns:data="clr-namespace:TCC.Data"
-             xmlns:tcc="clr-namespace:TCC"
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
+             xmlns:wm="clr-namespace:TCC.ViewModels"
+             xmlns:w="clr-namespace:TCC.Windows"
              Style="{StaticResource BaseWindowStyle}"
              mc:Ignorable="d" 
              Title="WarriorBar" 
@@ -89,7 +86,7 @@
         <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                          />
-        <ContentControl x:Name="content" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center" 
+        <ContentControl x:Name="WindowContent" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center" 
                         ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}" Margin="15" Grid.Row="1">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 

@@ -30,7 +30,7 @@ namespace TCC.Data
         }
         public StanceTracker()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
     }
     public class AurasTracker : TSPropertyChanged
@@ -83,7 +83,7 @@ namespace TCC.Data
 
         public AurasTracker()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
     }
 }

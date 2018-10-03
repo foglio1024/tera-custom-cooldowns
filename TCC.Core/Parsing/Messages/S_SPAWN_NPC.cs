@@ -9,9 +9,9 @@ namespace TCC.Parsing.Messages
         private uint templateId;
         private ushort huntingZoneId;
 
-        public ulong EntityId { get => id; }
-        public uint TemplateId { get => templateId; }
-        public ushort HuntingZoneId { get => huntingZoneId; }
+        public ulong EntityId => id;
+        public uint TemplateId => templateId;
+        public ushort HuntingZoneId => huntingZoneId;
 
         public S_SPAWN_NPC(TeraMessageReader reader) : base(reader)
         {

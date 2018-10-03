@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TCC.Annotations;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
@@ -10,12 +7,12 @@ namespace TCC.Parsing.Messages
 {
     public class S_DESTROY_GUILD_TOWER : ParsedMessage
     {
-        public Vector3f Location { get; }
+        public Vector3f Location { [UsedImplicitly] get; }
         public uint SourceGuildId { get; }
-        public uint TargetGuildId { get; }
-        public string SourceGuildName { get; }
-        public string PlayerName { get; }
-        public string TargetGuildName { get; }
+        public uint TargetGuildId { [UsedImplicitly] get; }
+        public string SourceGuildName { [UsedImplicitly] get; }
+        public string PlayerName { [UsedImplicitly] get; }
+        public string TargetGuildName { [UsedImplicitly] get; }
 
         public S_DESTROY_GUILD_TOWER(TeraMessageReader reader) : base(reader)
         {
@@ -29,9 +26,9 @@ namespace TCC.Parsing.Messages
                 PlayerName = reader.ReadTeraString();
                 TargetGuildName = reader.ReadTeraString();
             }
-            catch (Exception e)
+            catch
             {
-
+                // ignored
             }
         }
     }

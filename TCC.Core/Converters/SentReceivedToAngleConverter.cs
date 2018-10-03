@@ -12,7 +12,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var c = (ChatChannel)value;
+            //TODO: do via triggers
+            var c = (ChatChannel?)value;
 
             switch (c)
             {

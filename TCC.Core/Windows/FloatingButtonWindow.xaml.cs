@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -13,16 +12,13 @@ using TCC.ViewModels;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Interaction logic for FloatingButtonWindow.xaml
-    /// </summary>
-    public partial class FloatingButtonWindow : TccWidget
+    public partial class FloatingButtonWindow
     {
         public FloatingButtonWindow()
         {
             InitializeComponent();
             TooltipInfo = new TooltipInfo("", "", 1);
-            MainContent = content;
+            MainContent = WindowContent;
             ButtonsRef = null;
             Init(Settings.FloatingButtonSettings, perClassPosition:false);
         }
@@ -30,7 +26,7 @@ namespace TCC.Windows
         private Timer _t;
         private DispatcherTimer _n;
         private DoubleAnimation _an;
-        private int _notificationDuration = 4000;
+        private readonly int _notificationDuration = 4000;
         private void FloatinButtonLoaded(object sender, RoutedEventArgs e)
         {
             var handle = new WindowInteropHelper(this).Handle;
@@ -41,7 +37,6 @@ namespace TCC.Windows
             if (source?.CompositionTarget == null) return;
             var m = source.CompositionTarget.TransformToDevice;
             var _ = m.M11;
-            var dy = m.M22;
             Left = 0;
             Top = Screen.PrimaryScreen.Bounds.Height/ 2 - ActualHeight / 2;
 
@@ -66,14 +61,6 @@ namespace TCC.Windows
         {
             NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
             NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _an);
-        }
-
-        private void AnimateContentOpacity(double opacity)
-        {
-            //Dispatcher.InvokeIfRequired(() =>
-            //{
-            //    ((FrameworkElement)Content).BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
-            //}, System.Windows.Threading.DispatcherPriority.DataBind);
         }
 
         private void OnTccVisibilityChanged()
@@ -117,7 +104,7 @@ namespace TCC.Windows
 
         private void RefreshTopmost()
         {
-            Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, System.Windows.Threading.DispatcherPriority.DataBind);
+            Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, DispatcherPriority.DataBind);
         }
 
         public void StartNotifying(int closeEventsCount)
@@ -154,16 +141,16 @@ namespace TCC.Windows
                 switch (type)
                 {
                     case NotificationType.Normal:
-                        NotificationColorBorder.Background = App.Current.FindResource("Colors.Chat.Party") as SolidColorBrush;
+                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("Colors.Chat.Party") as SolidColorBrush;
                         break;
                     case NotificationType.Success:
-                        NotificationColorBorder.Background = App.Current.FindResource("GreenColor") as SolidColorBrush;
+                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("GreenColor") as SolidColorBrush;
                         break;
                     case NotificationType.Warning:
-                        NotificationColorBorder.Background = App.Current.FindResource("Tier4DungeonColor") as SolidColorBrush;
+                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("Tier4DungeonColor") as SolidColorBrush;
                         break;
                     case NotificationType.Error:
-                        NotificationColorBorder.Background = App.Current.FindResource("HpColor") as SolidColorBrush;
+                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("HpColor") as SolidColorBrush;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -210,7 +197,7 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 FocusManager.FocusTimer.Enabled = false;
-                this.RefreshTopmost();
+                RefreshTopmost();
                 if (PlayerInfo.IsOpen) ClosePlayerMenu();
                 TooltipInfo.Refresh();
                 PlayerInfo.IsOpen = true;

@@ -6,11 +6,11 @@ namespace TCC.Parsing.Messages
 {
     internal class S_DUNGEON_COOL_TIME_LIST : ParsedMessage
     {
-        public Dictionary<uint, short> DungeonCooldowns;
+        public readonly Dictionary<uint, short> DungeonCooldowns;
         public S_DUNGEON_COOL_TIME_LIST(TeraMessageReader reader) : base(reader)
         {
             var count = reader.ReadUInt16();
-            var offset = reader.ReadUInt16();
+            reader.Skip(2); //var offset = reader.ReadUInt16();
             reader.Skip(4);
             DungeonCooldowns = new Dictionary<uint, short>();
             for (var i = 0; i < count; i++)

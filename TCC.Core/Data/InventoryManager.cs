@@ -62,20 +62,16 @@ namespace TCC.Data
                 }
                 return false;
             }
-            else //88412, offset = 139
-            {
-                tier = (offset - TotalTierItems * 4) / TotalJewels; // tier = 1 (Mid)
-                tierOffset = tier * TotalJewels; //7
-                tierIndex = StartId + tierOffset + TotalTierItems * 4; //88412
-                itemOffsetInTier = id - tierIndex; //0
 
-                parsedGear = new Tuple<GearTier, GearPiece>((GearTier)tier, (GearPiece)(itemOffsetInTier + 5));
-                return true;
-            }
-            return false;
+            //88412, offset = 139
+            tier = (offset - TotalTierItems * 4) / TotalJewels; // tier = 1 (Mid)
+            tierOffset = tier * TotalJewels; //7
+            tierIndex = StartId + tierOffset + TotalTierItems * 4; //88412
+            itemOffsetInTier = id - tierIndex; //0
+
+            parsedGear = new Tuple<GearTier, GearPiece>((GearTier)tier, (GearPiece)(itemOffsetInTier + 5));
+            return true;
         }
-
     }
-
 }
 

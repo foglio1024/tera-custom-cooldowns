@@ -9,7 +9,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var v = (ReadyStatus)value;
+            //TODO: use triggers and visibility
+            var v = (ReadyStatus?)value ?? ReadyStatus.None;
             switch (v)
             {
                 case ReadyStatus.NotReady:

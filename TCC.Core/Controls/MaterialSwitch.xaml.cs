@@ -17,14 +17,14 @@ namespace TCC.Controls
         private readonly ColorAnimation _fillOff;
         private readonly ColorAnimation _backFillOff;
 
-        private readonly Color _onColor = Color.FromRgb(255, 56, 34);
+        private readonly Color _onColor = Color.FromRgb(255, 56, 34); //TODO: resource
         private readonly Color _offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
         private readonly Color _backOffColor = Colors.Black;
 
         private readonly TimeSpan _animationDuration = TimeSpan.FromMilliseconds(150);
 
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly DependencyPropertyWatcher<bool> _dpw;
-
         public MaterialSwitch()
         {
             InitializeComponent();
@@ -32,14 +32,14 @@ namespace TCC.Controls
             _on = new DoubleAnimation(20, _animationDuration) { EasingFunction = new QuadraticEase() };
             _off = new DoubleAnimation(0, _animationDuration) { EasingFunction = new QuadraticEase() };
 
-            _fillOn = new ColorAnimation(_onColor, _animationDuration) {EasingFunction = new QuadraticEase() };
+            _fillOn = new ColorAnimation(_onColor, _animationDuration) { EasingFunction = new QuadraticEase() };
             _fillOff = new ColorAnimation(_offColor, _animationDuration) { EasingFunction = new QuadraticEase() };
             _backFillOff = new ColorAnimation(_backOffColor, _animationDuration) { EasingFunction = new QuadraticEase() };
             SwitchHead.RenderTransform = new TranslateTransform(0, 0);
             SwitchHead.Fill = new SolidColorBrush(_offColor);
             SwitchBack.Fill = new SolidColorBrush(_backOffColor);
 
-            _dpw= new DependencyPropertyWatcher<bool>(this, "Status");
+            _dpw = new DependencyPropertyWatcher<bool>(this, "Status");
             _dpw.PropertyChanged += StatusWatcher_PropertyChanged;
         }
 

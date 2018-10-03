@@ -30,13 +30,13 @@ namespace TCC.Data
 
         public static bool IsFocusXRunning
         {
-            get { return _isFocusXRunning; }
-            set { _isFocusXRunning = value; }
+            get => _isFocusXRunning;
+            set => _isFocusXRunning = value;
         }
 
         public ArcherFocusTracker()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
             {
                 Icon = ab.IconName;

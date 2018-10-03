@@ -26,26 +26,30 @@ namespace TCC
             if (elem == null) return result;
             foreach (var t in elem.Descendants().Where(x => x.Name == "Tab"))
             {
-                var tabName = t.Attribute("name").Value;
                 var channels = new List<ChatChannel>();
                 var exChannels = new List<ChatChannel>();
                 var authors = new List<string>();
                 var exAuthors = new List<string>();
+                var tabName = t.Attribute("name")?.Value;
                 foreach (var chElement in t.Descendants().Where(x => x.Name == "Channel"))
                 {
-                    channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
+                    var value = chElement.Attribute("value");
+                    if (value != null) channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), value.Value));
                 }
                 foreach (var chElement in t.Descendants().Where(x => x.Name == "ExcludedChannel"))
                 {
-                    exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
+                    var value = chElement.Attribute("value");
+                    if (value != null) exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), value.Value));
                 }
                 foreach (var authElement in t.Descendants().Where(x => x.Name == "Author"))
                 {
-                    authors.Add(authElement.Attribute("value").Value);
+                    var value = authElement.Attribute("value");
+                    if (value != null) authors.Add(value.Value);
                 }
                 foreach (var authElement in t.Descendants().Where(x => x.Name == "ExcludedAuthor"))
                 {
-                    exAuthors.Add(authElement.Attribute("value").Value);
+                    var value = authElement.Attribute("value");
+                    if (value != null) exAuthors.Add(value.Value);
                 }
 
                 result.Add(new Tab(tabName, channels.ToArray(), exChannels.ToArray(), authors.ToArray(), exAuthors.ToArray()));
@@ -56,8 +60,8 @@ namespace TCC
         {
             var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
             var ts = s.Descendants().FirstOrDefault(x => x.Name == "Tabs");
-            var lfg = ws.Attribute(nameof(ChatWindowSettings.LfgOn));
-            var op = ws.Attribute(nameof(ChatWindowSettings.BackgroundOpacity));
+            var lfg = ws?.Attribute(nameof(ChatWindowSettings.LfgOn));
+            var op = ws?.Attribute(nameof(ChatWindowSettings.BackgroundOpacity));
 
             var sett = ParseWindowSettings(ws);
             var tabs = ParseTabsSettings(ts);
@@ -82,15 +86,19 @@ namespace TCC
                 if (pss != null) positions = new ClassPositions();
                 pss?.Descendants().Where(s => s.Name == "Position").ToList().ForEach(pos =>
                 {
-                    var cl = (Class)Enum.Parse(typeof(Class), pos.Attribute("class").Value);
-                    var px = double.Parse(pos.Attribute("X")?.Value, CultureInfo.InvariantCulture);
-                    var py = double.Parse(pos.Attribute("Y")?.Value, CultureInfo.InvariantCulture);
+                    var clAttr = pos.Attribute("class");
+                    var pxAttr = pos.Attribute("X");
+                    var pyAttr = pos.Attribute("Y");
+                    if (clAttr == null || pxAttr == null || pyAttr == null) return;
+                    var cl = (Class)Enum.Parse(typeof(Class), clAttr.Value);
+                    var px = double.Parse(pxAttr.Value, CultureInfo.InvariantCulture);
+                    var py = double.Parse(pyAttr.Value, CultureInfo.InvariantCulture);
                     positions.SetPosition(cl, new Point(px, py));
-                    var bp = pos.Attribute("ButtonsPosition")?.Value;
-                    if (bp != null)
+                    var bpAttr = pos.Attribute("ButtonsPosition");
+                    if (bpAttr != null)
                     {
-                        var ebp = (ButtonsPosition)Enum.Parse(typeof(ButtonsPosition), bp);
-                        positions.SetButtons(cl, (ButtonsPosition)ebp);
+                        var bp = (ButtonsPosition)Enum.Parse(typeof(ButtonsPosition), bpAttr.Value);
+                        positions.SetButtons(cl, (ButtonsPosition)bp);
                     }
                 });
             }
@@ -126,7 +134,7 @@ namespace TCC
 
             var positions = ParseWindowPositions(ws);
 
-            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen, positions, ws.Attribute("Name").Value);
+            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, enabled, allowOffscreen, positions, ws.Attribute("Name")?.Value);
         }
         private static void ParseGroupAbnormalSettings(XElement el)
         {
@@ -137,12 +145,12 @@ namespace TCC
 
             foreach (var abEl in el.Descendants().Where(x => x.Name == "Abnormals"))
             {
-                var stringClass = abEl.Attribute("class").Value;
+                var stringClass = abEl.Attribute("class")?.Value;
+                if(stringClass == null) continue;
                 var parsedClass = (Class)Enum.Parse(typeof(Class), stringClass);
                 var abnormalities = abEl.Value.Split(',');
                 var list = abnormalities.Length == 1 && abnormalities[0] == "" ? new List<uint>() : abnormalities.Select(uint.Parse).ToList();
                 list.ForEach(abnormality => Settings.GroupAbnormals[parsedClass].Add(abnormality));
-                //GroupAbnormals.Add(cl, l);
             }
 
             if (Settings.GroupAbnormals.Count != 0) return;
@@ -170,6 +178,7 @@ namespace TCC
                     else if (name == "ClassWindow") Settings.ClassWindowSettings = ParseWindowSettings(ws);
                     else if (name == "FlightGaugeWindow") Settings.FlightGaugeWindowSettings = ParseWindowSettings(ws);
                     else if (name == "FloatingButton") Settings.FloatingButtonSettings = ParseWindowSettings(ws);
+                    else if (name == "CivilUnrestWindow") Settings.CivilUnrestWindowSettings = ParseWindowSettings(ws);
                     //add window here
                 }
 
@@ -197,7 +206,6 @@ namespace TCC
                 if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) return;
                 _settingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
 
-                //TODO: iterate thru attributes and just check names (like parsewindowsettings)
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
                 b.Attributes().ToList().ForEach(attr =>
@@ -211,6 +219,7 @@ namespace TCC
                     else if (attr.Name == nameof(Settings.EnrageLabelMode)) Settings.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
                     else if (attr.Name == nameof(Settings.ChatClickThruMode)) Settings.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
                     else if (attr.Name == nameof(Settings.WarriorEdgeMode)) Settings.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
+                    else if (attr.Name == nameof(Settings.AbnormalityShape)) Settings.AbnormalityShape = (AbnormalityShape)Enum.Parse(typeof(AbnormalityShape), attr.Value);
                     else if (attr.Name == nameof(Settings.MaxMessages)) Settings.MaxMessages = int.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.SpamThreshold)) Settings.SpamThreshold = int.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.FontSize)) Settings.FontSize = int.Parse(attr.Value);
@@ -242,6 +251,7 @@ namespace TCC
                     else if (attr.Name == nameof(Settings.ShowAllGroupAbnormalities)) Settings.ShowAllGroupAbnormalities = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.HighPriority)) Settings.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ForceSoftwareRendering)) Settings.ForceSoftwareRendering = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.Winpcap)) Settings.Winpcap = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.RegionOverride)) Settings.RegionOverride = attr.Value;
                     else if (attr.Name == nameof(Settings.LastRegion)) Settings.LastRegion = attr.Value;
                     else if (attr.Name == nameof(Settings.Webhook)) Settings.Webhook = attr.Value;

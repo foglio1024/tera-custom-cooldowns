@@ -13,7 +13,7 @@ namespace TCC.Parsing.Messages
             BlockedUsers = new List<string>();
 
             var count = reader.ReadUInt16();
-            var offest = reader.ReadUInt16();
+            reader.Skip(2); //var offset = reader.ReadUInt16();
 
             for (var i = 0; i < count; i++)
             {
@@ -25,7 +25,7 @@ namespace TCC.Parsing.Messages
         {
             reader.Skip(4);
             var nameOffset = reader.ReadUInt16();
-            reader.BaseStream.Position = nameOffset - 4;
+            reader.RepositionAt(nameOffset);
             var name = reader.ReadTeraString();
             reader.ReadTeraString(); //skips notes
             return name;

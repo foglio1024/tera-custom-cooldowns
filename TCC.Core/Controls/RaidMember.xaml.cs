@@ -11,21 +11,23 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per RaidMember.xaml
     /// </summary>
-    public partial class RaidMember : UserControl
+    public partial class RaidMember //TODO: make base class for this when???
     {
         public RaidMember()
         {
             InitializeComponent();
+            Unloaded += (_, __) => { SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged; };
         }
 
-        private User dc;
+        private User _dc;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dc = (User)DataContext;
+            _dc = (User)DataContext;
             UpdateSettings();
 
             AnimateIn();
             GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
         private void UpdateSettings()
         {
@@ -35,6 +37,15 @@ namespace TCC.Controls
             SetDebuffs();
             SetLaurels();
             SetAwakenIcon();
+
+        }
+        private void OnAbnormalityShapeChanged()
+        {
+            Buffs.ItemTemplateSelector = null;
+            Buffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = null;
+            Debuffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+
         }
 
         private void SetAwakenIcon()
@@ -54,8 +65,9 @@ namespace TCC.Controls
                     LaurelImage.Visibility = Settings.ShowMembersLaurels ? Visibility.Visible : Visibility.Hidden;
                 });
             }
-            catch (Exception)
+            catch
             {
+                // ignored
             }
         }
         private void SetBuffs()
@@ -74,9 +86,9 @@ namespace TCC.Controls
                 });
 
             }
-            catch (Exception)
+            catch
             {
-
+                // ignored
             }
         }
         private void SetDebuffs()
@@ -85,17 +97,18 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    if(!(dc is User)) return;
-                    Debuffs.ItemsSource = Settings.IgnoreGroupDebuffs ? null : dc.Debuffs;
+                    // ReSharper disable once IsExpressionAlwaysTrue
+                    if(!(_dc is User)) return;
+                    Debuffs.ItemsSource = Settings.IgnoreGroupDebuffs ? null : _dc.Debuffs;
                     DebuffGrid.Visibility = Settings.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
 
             }
-            catch (Exception)
+            catch
             {
-
+                // ignored
             }
         }
 

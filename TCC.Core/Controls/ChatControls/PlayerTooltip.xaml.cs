@@ -191,7 +191,7 @@ namespace TCC.Controls.ChatControls
         private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var p = (MgPopup.Child as MoongourdPopup);
-            p.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, Settings.LastRegion);
+            p?.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, Settings.LastRegion);
             MgPopup.IsOpen = true;
         }
         private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)

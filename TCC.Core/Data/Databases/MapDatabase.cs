@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Xml.Linq;
 
 namespace TCC.Data.Databases
@@ -88,12 +87,12 @@ namespace TCC.Data.Databases
             if (loc.World == 9999) return true;
             return Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section].IsDungeon;
         }
-        public Point GetMarkerPosition(Location loc)
-        {
-            var section = Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section];
-            var offset = new Point(section.Left, section.Top);
-            return new Point((offset.Y - loc.Position.X) / section.Scale, (-offset.X + loc.Position.Y) / section.Scale);
-        }
+        //public Point GetMarkerPosition(Location loc)
+        //{
+        //    var section = Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section];
+        //    var offset = new Point(section.Left, section.Top);
+        //    return new Point((offset.Y - loc.Position.X) / section.Scale, (-offset.X + loc.Position.Y) / section.Scale);
+        //}
         private void LoadNames(string lang)
         {
             var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/regions/regions-{lang}.tsv");

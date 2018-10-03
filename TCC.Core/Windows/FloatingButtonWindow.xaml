@@ -22,7 +22,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid x:Name="content">
+        <Grid x:Name="WindowContent">
             <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="0,2,2,0" x:Name="RootBorder" Margin="0,10"
                 HorizontalAlignment="Stretch">
                 <StackPanel Width="35">

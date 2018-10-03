@@ -153,10 +153,5 @@ namespace TCC.ClassSpecific
             if (MarkedTargets.Contains(p.TargetId)) MarkedTargets.Remove(p.TargetId);
             if (MarkedTargets.Count == 0) InvokeMarkingExpired();
         }
-
-        public static void ClearMarkedTargets()
-        {
-            App.BaseDispatcher.Invoke(() => MarkedTargets.Clear());
-        }
     }
 }

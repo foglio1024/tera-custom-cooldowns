@@ -78,7 +78,9 @@ namespace TCC.TeraCommon.Game
 
         public override int GetHashCode()
         {
+            // ReSharper disable NonReadonlyMemberInGetHashCode
             return (int) Race << 16 | (int) Gender << 8 | (int) Class;
+            // ReSharper restore NonReadonlyMemberInGetHashCode
         }
 
         public override string ToString()

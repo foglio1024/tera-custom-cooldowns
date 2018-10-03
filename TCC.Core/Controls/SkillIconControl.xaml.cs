@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
@@ -9,16 +10,16 @@ using TCC.ViewModels;
 
 namespace TCC.Controls
 {
-    public partial class SkillIconControl : UserControl, INotifyPropertyChanged, IDisposable
+    public partial class SkillIconControl : INotifyPropertyChanged, IDisposable
     {
-        private DispatcherTimer NumberTimer;
-        private DispatcherTimer CloseTimer;
-        private int ending = SkillManager.Ending;
+        private DispatcherTimer _numberTimer;
+        private DispatcherTimer _closeTimer;
 
         private SkillCooldown _context;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string p)
+
+        private void NotifyPropertyChanged(string p)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
@@ -36,17 +37,17 @@ namespace TCC.Controls
             if(DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (SkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
-
+            _context.Ending += OnEnding;
             //LayoutTransform = new ScaleTransform(.9, .9, .5, .5);
 
             //CurrentCD = (double)_context.Cooldown / 1000;
             NotifyPropertyChanged(nameof(CurrentCD));
 
-            NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-            CloseTimer = new  DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
+            _numberTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000) };
+            _closeTimer = new  DispatcherTimer { Interval = TimeSpan.FromMilliseconds(SkillManager.Ending) };
 
-            CloseTimer.Tick += CloseTimer_Tick;
-            NumberTimer.Tick += (s, o) =>
+            _closeTimer.Tick += CloseTimer_Tick;
+            _numberTimer.Tick += (s, o) =>
             {
                 _secondsPassed+=1000;
                 NotifyPropertyChanged(nameof(CurrentCD));
@@ -54,39 +55,41 @@ namespace TCC.Controls
             AnimateCooldown();
         }
 
-        private ulong _secondsPassed = 0;
+        private void OnEnding()
+        {
+            //var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(SkillManager.Ending))
+            //{
+            //EasingFunction = new QuadraticEase()
+            //};
+            //var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(SkillManager.Ending))
+            //{
+            //EasingFunction = new QuadraticEase()
+            //};
+            //_context.Dispatcher.Invoke(() =>
+            //{
+            //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
+            //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
+            //});
+            _closeTimer.IsEnabled = true;
+
+        }
+
+        private ulong _secondsPassed;
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Refresh")
             {
                 if (_context.Cooldown == _context.OriginalCooldown) return;
-                NumberTimer.Stop();
-                NumberTimer.IsEnabled = true;
+                _numberTimer.Stop();
+                _numberTimer.IsEnabled = true;
                 _secondsPassed = 0;
                 //CurrentCD = (double)_context.Cooldown / 1000;
                 NotifyPropertyChanged(nameof(CurrentCD));
-                var newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
+                var newAngle = _context.Cooldown / (double)_context.OriginalCooldown;
                 if (_context.Cooldown == 0) newAngle = 0;
                 if (newAngle > 1) newAngle = 1;
 
                 AnimateCooldown(newAngle);
-            }
-            else if(e.PropertyName == "Ending")
-            {
-                var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
-                var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
-                //_context.Dispatcher.Invoke(() =>
-                //{
-                //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
-                //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
-                //});
-                CloseTimer.IsEnabled = true;
             }
         }
 
@@ -120,7 +123,7 @@ namespace TCC.Controls
                 PreArc.EndAngle = 0.01;
                 Arc.BeginAnimation(Arc.EndAngleProperty, an);
             }
-            NumberTimer.IsEnabled = true;
+            _numberTimer.IsEnabled = true;
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
@@ -130,8 +133,8 @@ namespace TCC.Controls
 
         public void Dispose()
         {
-            NumberTimer.Stop();
-            CloseTimer.Stop();
+            _numberTimer.Stop();
+            _closeTimer.Stop();
         }
 
         private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)
@@ -144,18 +147,18 @@ namespace TCC.Controls
             FocusManager.FocusTimer.Enabled = true;
         }
 
-        private void HideButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void HideButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             CooldownWindowViewModel.Instance.AddHiddenSkill(_context);
             CloseTimer_Tick(null,null);
         }
 
-        private void Rectangle_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
         {
             HideButton.Visibility = Visibility.Visible;
         }
 
-        private void UserControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             HideButton.Visibility = Visibility.Collapsed;
         }

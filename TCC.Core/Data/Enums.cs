@@ -1,5 +1,38 @@
-﻿namespace TCC.Data
+﻿using System;
+
+namespace TCC.Parsing
 {
+    [Flags]
+    public enum ModifierKeys : uint
+    {
+        Alt = 1,
+        Control = 2,
+        Shift = 4,
+        Win = 8,
+        None = 0
+    }
+    public enum LangEnum : uint
+    {
+        INT = 0,
+        KR = 1,
+        USA = 2,
+        JPN = 3,
+        GER = 4,
+        FR = 5,
+        EN = 6,
+        TW = 7,
+        RUS = 8,
+        CHN = 9,
+        THA = 10
+    }
+}
+namespace TCC.Data
+{
+    public enum AbnormalityShape
+    {
+        Round = 0,
+        Square = 1
+    }
     public enum FlightStackType
     {
         None,

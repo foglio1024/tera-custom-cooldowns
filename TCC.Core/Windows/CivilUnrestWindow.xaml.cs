@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -25,8 +14,8 @@ namespace TCC.Windows
         public CivilUnrestWindow()
         {
             InitializeComponent();
-            MainContent = content;
-            this.DataContext = new CivilUnrestViewModel();
+            MainContent = WindowContent;
+            DataContext = new CivilUnrestViewModel();
             Init(Settings.CivilUnrestWindowSettings, perClassPosition:false);
             VM.Teleported += OnTeleported;
             ZoneBoundContent.Visibility = Visibility.Collapsed;

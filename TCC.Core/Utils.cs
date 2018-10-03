@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.CompilerServices;
+using TCC.Annotations;
 using TCC.Data;
 
 namespace TCC
@@ -100,12 +101,12 @@ namespace TCC
 
         public static bool IsPhase1Dragon(uint zoneId, uint templateId)
         {
-            return zoneId == 950 && templateId >= 1100 && templateId <= 1103 ? true : false;
+            return zoneId == 950 && templateId >= 1100 && templateId <= 1103;
         }
 
         public static bool IsGuildTower(uint zoneId, uint templateId)
         {
-            return zoneId == 152 && templateId == 5001 ? true : false;
+            return zoneId == 152 && templateId == 5001;
         }
 
         public static List<ChatChannelOnOff> GetEnabledChannelsList()
@@ -123,6 +124,11 @@ namespace TCC
         public static List<T> ListFromEnum<T>()
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();
+        }
+
+        public static double FactorToAngle(double value, double multiplier = 1)
+        {
+            return value * (359.9 / multiplier);
         }
 
         public static T FindVisualParent<T>(DependencyObject sender) where T : DependencyObject
@@ -148,11 +154,11 @@ namespace TCC
             for (var i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child.GetType() == typeof(T))
+                if (child.GetType() == typeof(T))
                 {
                     break;
                 }
-                else if (child != null)
+                else
                 {
                     child = GetChild<T>(child);
                     if (child != null && child.GetType() == typeof(T))
@@ -200,25 +206,25 @@ namespace TCC
             var cv = new CollectionViewSource { Source = source }.View;
             cv.Filter = predicate;
             var liveView = cv as ICollectionViewLiveShaping;
-            if (!liveView.CanChangeLiveFiltering) return null;
-            if (filters.Count() > 0)
+            if (liveView != null && !liveView.CanChangeLiveFiltering) return null;
+            if (filters.Length > 0)
             {
                 foreach (var filter in filters)
                 {
-                    liveView.LiveFilteringProperties.Add(filter);
+                    liveView?.LiveFilteringProperties.Add(filter);
                 }
 
-                liveView.IsLiveFiltering = true;
+                if (liveView != null) liveView.IsLiveFiltering = true;
             }
 
-            if (sortFilters.Count() > 0)
+            if (sortFilters.Length > 0)
             {
                 foreach (var filter in sortFilters)
                 {
-                    (liveView as ICollectionView).SortDescriptions.Add(filter);
+                    (liveView as ICollectionView)?.SortDescriptions.Add(filter);
                 }
 
-                liveView.IsLiveSorting = true;
+                if (liveView != null) liveView.IsLiveSorting = true;
             }
 
             return liveView;
@@ -254,21 +260,15 @@ namespace TCC
                 new Binding() { Source = target, Path = new PropertyPath(propertyPath), Mode = BindingMode.OneWay });
         }
 
-        public DependencyObject Target { get; private set; }
+        public DependencyObject Target { [UsedImplicitly] get; private set; }
 
-        public T Value
-        {
-            get { return (T)GetValue(ValueProperty); }
-        }
+        public T Value => (T)GetValue(ValueProperty);
 
         public static void OnPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
             var source = (DependencyPropertyWatcher<T>)sender;
 
-            if (source.PropertyChanged != null)
-            {
-                source.PropertyChanged(source, EventArgs.Empty);
-            }
+            source.PropertyChanged?.Invoke(source, EventArgs.Empty);
         }
 
         public void Dispose()
@@ -281,27 +281,27 @@ namespace TCC
         public static void InvokeIfRequired(this Dispatcher disp, Action dotIt, DispatcherPriority priority)
         {
             if (disp.Thread != Thread.CurrentThread)
-                disp.Invoke(priority, (Delegate)dotIt);
+                disp.Invoke(priority, dotIt);
             else
                 dotIt();
         }
     }
     public class TSPropertyChanged : INotifyPropertyChanged
     {
-        protected Dispatcher _dispatcher;
+        protected Dispatcher Dispatcher;
         public Dispatcher GetDispatcher()
         {
-            return _dispatcher;
+            return Dispatcher;
         }
         public void SetDispatcher(Dispatcher newDispatcher)
         {
-            _dispatcher = newDispatcher;
+            Dispatcher = newDispatcher;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NPC([CallerMemberName] string v = null)
         {
-            if (_dispatcher == null) SetDispatcher(App.BaseDispatcher);
-            _dispatcher.InvokeIfRequired(() =>
+            if (Dispatcher == null) SetDispatcher(App.BaseDispatcher);
+            Dispatcher.InvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
 
@@ -327,7 +327,7 @@ namespace TCC
         }
         protected override void ClearItems()
         {
-            _dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired(() =>
             {
                 _lock.EnterWriteLock();
                 try
@@ -338,11 +338,11 @@ namespace TCC
                 {
                     _lock.ExitWriteLock();
                 }
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         protected override void InsertItem(int index, T item)
         {
-            _dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired(() =>
             {
                 if (index > Count)
                     return;
@@ -355,11 +355,11 @@ namespace TCC
                 {
                     _lock.ExitWriteLock();
                 }
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         protected override void MoveItem(int oldIndex, int newIndex)
         {
-            _dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired(() =>
             {
                 _lock.EnterReadLock();
                 var count = Count;
@@ -375,11 +375,11 @@ namespace TCC
                 {
                     _lock.ExitWriteLock();
                 }
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         protected override void RemoveItem(int index)
         {
-            _dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired(() =>
             {
                 if (index >= Count)
                     return;
@@ -392,11 +392,11 @@ namespace TCC
                 {
                     _lock.ExitWriteLock();
                 }
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         protected override void SetItem(int index, T item)
         {
-            _dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired(() =>
             {
                 _lock.EnterWriteLock();
                 try
@@ -407,7 +407,7 @@ namespace TCC
                 {
                     _lock.ExitWriteLock();
                 }
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         public T[] ToSyncArray()
         {

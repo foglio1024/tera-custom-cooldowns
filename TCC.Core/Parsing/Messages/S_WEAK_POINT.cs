@@ -17,7 +17,7 @@ namespace TCC.Parsing.Messages
         public ulong Target { get; private set; }
         public uint TotalRunemarks { get; private set; }
         public uint RemovedRunemarks { get; private set; }
-        public RunemarksActionType Type { get => (RunemarksActionType)type; }
+        public RunemarksActionType Type => (RunemarksActionType)type;
         public uint SkillId { get; private set; }
 
         public S_WEAK_POINT(TeraMessageReader reader) : base(reader)
@@ -31,7 +31,7 @@ namespace TCC.Parsing.Messages
 
         public override string ToString()
         {
-            return string.Format("T:{0} | total:{1} | moved:{2} | {3} | S:{4}", Target, TotalRunemarks, RemovedRunemarks, Type, SkillId);
+            return $"T:{Target} | total:{TotalRunemarks} | moved:{RemovedRunemarks} | {Type} | S:{SkillId}";
         }
     }
 }

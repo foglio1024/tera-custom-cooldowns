@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
@@ -26,7 +27,7 @@ namespace TCC
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
 
-        public string Name { get; }
+        public string Name { [UsedImplicitly] get; }
         public bool PerClassPosition { get; set; }
 
         private Class CurrentClass()
@@ -218,7 +219,7 @@ namespace TCC
 
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
             _w = w;
             _h = h;
@@ -278,6 +279,7 @@ namespace TCC
         {
             var currentPos = new Point(X, Y);
             Positions.SetAllPositions(currentPos);
+            SettingsWriter.Save();
         }
     }
 

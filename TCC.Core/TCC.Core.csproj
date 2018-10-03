@@ -89,9 +89,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Converters\DurationLabelConverter.cs" />
+    <Compile Include="Converters\DurationToVisibilityConverter.cs" />
+    <Compile Include="Controls\RoundAbnormalityIndicator.cs" />
+    <Compile Include="Converters\HPbarColorConverter2.cs" />
+    <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
+    <Compile Include="Converters\SizeToDurationLabelSizeConverter.cs" />
+    <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
+    <Compile Include="Converters\AbnormalityTypeToColorConverter.cs" />
+    <Compile Include="Controls\SquareAbnormalityIndicator.xaml.cs">
+      <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Data\ClassPositions.cs" />
+    <Compile Include="MoongourdEncounter.cs" />
+    <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
+    <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
     <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
+    <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
@@ -165,28 +180,21 @@
     <Compile Include="Controls\TimeSeparator.xaml.cs">
       <DependentUpon>TimeSeparator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
     <Compile Include="Converters\ClassSvgConverter.cs" />
     <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\ClassToReColorConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
-    <Compile Include="Converters\DungeonIdToImageConverter.cs" />
     <Compile Include="Converters\DungeonIdToNameConverter.cs" />
     <Compile Include="Converters\DungeonIdToTierColorConverter.cs" />
     <Compile Include="Converters\GearLevelToColorConverter.cs" />
     <Compile Include="Converters\GearLevelToFactorConverter.cs" />
     <Compile Include="Converters\GuardianPointsStringConverter.cs" />
     <Compile Include="Converters\IconConverter.cs" />
-    <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
-    <Compile Include="Converters\BoolToOpacityConverter.cs" />
     <Compile Include="Controls\ChatControls\ApplyBody.xaml.cs">
       <DependentUpon>ApplyBody.xaml</DependentUpon>
     </Compile>
@@ -204,9 +212,6 @@
     </Compile>
     <Compile Include="Controls\ChatControls\LFGcontrol.xaml.cs">
       <DependentUpon>LFGcontrol.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ChatControls\MapControl.xaml.cs">
-      <DependentUpon>MapControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
       <DependentUpon>PlayerTooltip.xaml</DependentUpon>
@@ -247,12 +252,10 @@
     <Compile Include="Converters\BoolToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\BoolToVisibleHidden.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
-    <Compile Include="Converters\DragonSelectedToOpacityConverter.cs" />
     <Compile Include="Converters\FactorToAngleConverter.cs" />
     <Compile Include="Converters\GroupSizeToTemplateConverter.cs" />
     <Compile Include="Converters\HHphaseToEnemyWindowTemplate.cs" />
     <Compile Include="Converters\LocationToMapConverter.cs" />
-    <Compile Include="Converters\LocationToMarkerPositionConverter.cs" />
     <Compile Include="Converters\LocationToStretchConverter.cs" />
     <Compile Include="Converters\RowsToHeightConverter.cs" />
     <Compile Include="Converters\ShieldBrokenColorConverter.cs" />
@@ -310,7 +313,6 @@
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_FIELD_POINT_INFO.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
-    <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />
     <Compile Include="Parsing\Messages\S_IMAGE_DATA.cs" />
     <Compile Include="Parsing\Messages\S_INVEN.cs" />
@@ -331,7 +333,7 @@
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="ProxyPacketSplitter.cs" />
     <Compile Include="SettingsReader.cs" />
     <Compile Include="SettingsWriter.cs" />
@@ -348,17 +350,11 @@
     <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
       <DependentUpon>ArcherBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BarCooldown.xaml.cs">
-      <DependentUpon>BarCooldown.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MysticAurasIndicator.xaml.cs">
       <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RagnarokBuffControl.xaml.cs">
       <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\StanceIndicator.xaml.cs">
-      <DependentUpon>StanceIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FixedSkillContainers.xaml.cs">
       <DependentUpon>FixedSkillContainers.xaml</DependentUpon>
@@ -390,9 +386,6 @@
     <Compile Include="Controls\ClassBars\SorcererBar.xaml.cs">
       <DependentUpon>SorcererBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StatControl.xaml.cs">
-      <DependentUpon>StatControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\ArcherFocusTracker.cs" />
@@ -408,12 +401,8 @@
     <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="EntitiesManager.cs" />
-    <Compile Include="PacketInspector.cs" />
     <Compile Include="Parsing\MessageFactory.cs" />
-    <Compile Include="Parsing\Messages\C_LOAD_TOPO_FIN.cs" />
     <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
-    <Compile Include="Parsing\Messages\C_REQUEST_NONDB_ITEM_INFO.cs" />
-    <Compile Include="Parsing\Messages\C_SHOW_ITEM_TOOLTIP_EX.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
     <Compile Include="Parsing\Messages\S_ASK_BIDDING_RARE_ITEM.cs" />
@@ -483,8 +472,8 @@
     <Compile Include="Tera.Data\TeraData.cs" />
     <Compile Include="Tera.Data\WindowData.cs" />
     <Compile Include="Data\AbnormalityDuration.cs" />
-    <Compile Include="Controls\AbnormalityIndicator.xaml.cs">
-      <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
+    <Compile Include="Controls\RoundAbnormalityIndicator.xaml.cs">
+      <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
@@ -680,7 +669,6 @@
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="ViewModels\Helpers\BaseINPC.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
@@ -698,7 +686,6 @@
       <DependentUpon>CharacterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parsing\Messages\S_CREATURE_CHANGE_HP.cs" />
-    <Compile Include="Parsing\Messages\S_LOAD_ACHIEVEMENT_LIST.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_MP.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_STAMINA.cs" />
     <Compile Include="Parsing\PacketRouter.cs" />
@@ -750,6 +737,8 @@
     <Compile Include="Windows\GroupAbnormalConfigWindow.xaml.cs">
       <DependentUpon>GroupAbnormalConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GroupConfigVM.cs" />
+    <Compile Include="ViewModels\GroupAbnormalityVM.cs" />
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
@@ -809,7 +798,7 @@
     <Compile Include="Controls\WindowButtons.xaml.cs">
       <DependentUpon>WindowButtons.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\AbnormalityIndicator.xaml">
+    <Page Include="Controls\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -865,10 +854,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\MapControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ChatControls\MoongourdPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -890,10 +875,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ClassBars\ArcherBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\BarCooldown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -977,7 +958,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StanceIndicator.xaml">
+    <Page Include="Controls\SquareAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1037,10 +1018,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StatControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\TimelineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1050,10 +1027,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimeSeparator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1781,6 +1754,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\data\opcodes\" />
+    <Folder Include="ViewModels\Helpers\" />
     <Folder Include="ViewModels\WindowManagers\" />
   </ItemGroup>
   <ItemGroup>

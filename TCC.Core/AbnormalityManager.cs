@@ -48,18 +48,18 @@ namespace TCC
             {
                 if (ab.Infinity)
                 {
-                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks);
+                    SessionManager.CurrentPlayer.AddOrRefreshInfBuff(ab, duration, stacks);
                 }
                 else
                 {
-                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks);
+                    SessionManager.CurrentPlayer.AddOrRefreshBuff(ab, duration, stacks);
                     if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
             {
-                BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks);
-                CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
+                SessionManager.CurrentPlayer.AddOrRefreshDebuff(ab, duration, stacks);
+                SessionManager.CurrentPlayer.AddToDebuffList(ab);
             }
             CheckPassivity(ab, duration);
         }
@@ -87,11 +87,11 @@ namespace TCC
             {
                 if (ab.Infinity)
                 {
-                    BuffBarWindowViewModel.Instance.Player.RemoveInfBuff(ab);
+                    SessionManager.CurrentPlayer.RemoveInfBuff(ab);
                 }
                 else
                 {
-                    BuffBarWindowViewModel.Instance.Player.RemoveBuff(ab);
+                    SessionManager.CurrentPlayer.RemoveBuff(ab);
                     if (ab.IsShield)
                     {
                         SessionManager.SetPlayerShield(0);
@@ -101,8 +101,8 @@ namespace TCC
             }
             else
             {
-                BuffBarWindowViewModel.Instance.Player.RemoveDebuff(ab);
-                CharacterWindowViewModel.Instance.Player.RemoveFromDebuffList(ab);
+                SessionManager.CurrentPlayer.RemoveDebuff(ab);
+                SessionManager.CurrentPlayer.RemoveFromDebuffList(ab);
             }
         }
 

@@ -5,61 +5,57 @@ namespace TCC.Data
 {
     public class StatTracker : TSPropertyChanged
     {
+        private int _max = 1;
+        private int _val;
+        private bool _status;
 
-        public event Action<uint> OnToZero;
-        private int val = 0;
+        public event Action<uint> ToZero;
         public int Val
         {
-            get { return val; }
+            get => _val;
             set
             {
-                if (val == value) return;
-                val = value;
+                if (_val == value) return;
+                _val = value;
 
-                NPC("Val");
-                NPC("Factor");
-                Maxed = Val == Max;
+                NPC();
+                NPC(nameof(Factor));
                 NPC(nameof(Maxed));
             }
         }
-        public bool Maxed { get => Factor ==1; set { }
-        }
-        private int max = 1;
         public int Max
         {
-            get => max;
+            get => _max;
             set
             {
-                if (max == value) return;
-                max = value;
-                if (max == 0) max = 1;
-                NPC("Max");
-                NPC("Factor");
+                if (_max == value) return;
+                _max = value;
+                if (_max == 0) _max = 1;
+                NPC();
+                NPC(nameof(Factor));
             }
         }
-
-        public double Factor => (double)val / max;
-
-        private bool status = false;
+        public bool Maxed => Factor == 1;
+        public double Factor => (double)_val / _max;
         public bool Status
         {
-            get => status;
+            get => _status;
             set
             {
-                if (status == value) return;
-                status = value;
-                NPC("Status");
+                if (_status == value) return;
+                _status = value;
+                NPC();
             }
         }
 
         public StatTracker()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
 
-        public void ToZero(uint pDuration)
+        public void InvokeToZero(uint pDuration)
         {
-            OnToZero?.Invoke(pDuration);
+            ToZero?.Invoke(pDuration);
         }
     }
 }

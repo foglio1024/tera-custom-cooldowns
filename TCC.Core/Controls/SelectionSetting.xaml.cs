@@ -11,61 +11,49 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per SelectionSetting.xaml
     /// </summary>
-    public partial class SelectionSetting : UserControl
+    public partial class SelectionSetting
     {
-        private ColorAnimation glow;
-        private ColorAnimation unglow;
-        private DoubleAnimation fadeIn;
-        private DoubleAnimation fadeOut;
+        private readonly ColorAnimation _glow;
+        private readonly ColorAnimation _unglow;
+        private readonly DoubleAnimation _fadeIn;
+        private readonly DoubleAnimation _fadeOut;
 
         public string SettingName
         {
-            get { return (string)GetValue(SettingNameProperty); }
-            set { SetValue(SettingNameProperty, value); }
+            get => (string)GetValue(SettingNameProperty);
+            set => SetValue(SettingNameProperty, value);
         }
         public static readonly DependencyProperty SettingNameProperty =
             DependencyProperty.Register("SettingName", typeof(string), typeof(SelectionSetting));
         public ImageSource SettingImage
         {
-            get { return (ImageSource)GetValue(SettingImageProperty); }
-            set { SetValue(SettingImageProperty, value); }
+            get => (ImageSource)GetValue(SettingImageProperty);
+            set => SetValue(SettingImageProperty, value);
         }
         public static readonly DependencyProperty SettingImageProperty =
             DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(SelectionSetting));
 
-
-
         public IEnumerable Choices
         {
-            get { return (IEnumerable)GetValue(ChoicesProperty); }
-            set { SetValue(ChoicesProperty, value); }
+            get => (IEnumerable)GetValue(ChoicesProperty);
+            set => SetValue(ChoicesProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for Choices.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ChoicesProperty =
             DependencyProperty.Register("Choices", typeof(IEnumerable), typeof(SelectionSetting));
 
-
-
         public string SelectedItem
         {
-            get { return (string)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => (string)GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(string), typeof(SelectionSetting));
 
-
-
         public Type ChoicesType
         {
-            get { return (Type)GetValue(ChoicesTypeProperty); }
-            set { SetValue(ChoicesTypeProperty, value); }
+            get => (Type)GetValue(ChoicesTypeProperty);
+            set => SetValue(ChoicesTypeProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for ChoicesType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ChoicesTypeProperty =
             DependencyProperty.Register("ChoicesType", typeof(Type), typeof(SelectionSetting));
 
@@ -74,24 +62,24 @@ namespace TCC.Controls
         public SelectionSetting()
         {
             InitializeComponent();
-            glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
-            unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
-            fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
-            fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
+            _glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
+            _unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
+            _fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
+            _fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
             MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
-            (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, glow);
-            Img.BeginAnimation(OpacityProperty, fadeIn);
+            ((Grid) sender).Background.BeginAnimation(SolidColorBrush.ColorProperty, _glow);
+            Img.BeginAnimation(OpacityProperty, _fadeIn);
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
-            (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
-            Img.BeginAnimation(OpacityProperty, fadeOut);
+            ((Grid) sender).Background.BeginAnimation(SolidColorBrush.ColorProperty, _unglow);
+            Img.BeginAnimation(OpacityProperty, _fadeOut);
 
         }
 

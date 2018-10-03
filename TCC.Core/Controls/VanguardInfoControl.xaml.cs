@@ -12,15 +12,10 @@ namespace TCC.Controls
     /// <summary>
     /// Interaction logic for VanguardInfoControl.xaml
     /// </summary>
-    public partial class VanguardInfoControl : UserControl
+    public partial class VanguardInfoControl
     {
-        private TimeSpan growDuration;
-        private DoubleAnimation scaleUp;
-        private DoubleAnimation moveUp;
-        private DoubleAnimation scaleDown;
-        private DoubleAnimation moveDown;
-        private DoubleAnimation scaleRipple;
-        private DoubleAnimation fadeRipple;
+        private DoubleAnimation _scaleRipple;
+        private DoubleAnimation _fadeRipple;
 
 
         public VanguardInfoControl()
@@ -57,13 +52,8 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            growDuration = TimeSpan.FromMilliseconds(150);
-            scaleUp = new DoubleAnimation(-3, growDuration) { EasingFunction = new QuadraticEase() };
-            moveUp = new DoubleAnimation(8, growDuration) { EasingFunction = new QuadraticEase() };
-            scaleDown = new DoubleAnimation(0, growDuration) { EasingFunction = new QuadraticEase() };
-            moveDown = new DoubleAnimation(3, growDuration) { EasingFunction = new QuadraticEase() };
-            scaleRipple = new DoubleAnimation(0, 80, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
-            fadeRipple = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650));
+            _scaleRipple = new DoubleAnimation(0, 80, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
+            _fadeRipple = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650));
             ContextMenu = new ContextMenu();
             ((Character)DataContext).PropertyChanged += (s, ev) =>
             {
@@ -73,7 +63,7 @@ namespace TCC.Controls
             AnimateSel();
             var i = new MenuItem { Header = "Remove" };
             i.Click += RemoveCharacter;
-            ContextMenu.Items.Add(i);
+            ContextMenu?.Items.Add(i);
         }
 
         private void AnimateSel()
@@ -89,16 +79,16 @@ namespace TCC.Controls
             InfoWindowViewModel.Instance.Characters.Remove((Character)DataContext);
         }
 
-        private bool _animDown = true;
+        //private bool _animDown = true;
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //_animDown = false;
-            var scaleTrans = (Ripple.RenderTransform as TransformGroup).Children[0];
-            (Ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(e.MouseDevice.GetPosition(this).X - Ripple.Width / 2, e.MouseDevice.GetPosition(this).Y - Ripple.Height / 2);
+            var scaleTrans = ((TransformGroup) Ripple.RenderTransform).Children[0];
+            ((TransformGroup) Ripple.RenderTransform).Children[1] = new TranslateTransform(e.MouseDevice.GetPosition(this).X - Ripple.Width / 2, e.MouseDevice.GetPosition(this).Y - Ripple.Height / 2);
 
-            scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, scaleRipple);
-            scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, scaleRipple);
-            Ripple.BeginAnimation(OpacityProperty, fadeRipple);
+            scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, _scaleRipple);
+            scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, _scaleRipple);
+            Ripple.BeginAnimation(OpacityProperty, _fadeRipple);
             //Point relativePoint = rootBorder.TransformToAncestor(WindowManager.InfoWindow)
             //                  .Transform(new Point(0, 0));
             //WindowManager.InfoWindow.ExpandCharacter(relativePoint, rootBorder.ActualWidth, this.ActualHeight);

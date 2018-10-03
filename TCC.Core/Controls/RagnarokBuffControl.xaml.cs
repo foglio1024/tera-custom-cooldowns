@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
@@ -11,7 +10,7 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per RagnarokBuffControl.xaml
     /// </summary>
-    public partial class RagnarokBuffControl : UserControl, INotifyPropertyChanged
+    public partial class RagnarokBuffControl : INotifyPropertyChanged
     {
         public RagnarokBuffControl()
         {
@@ -38,10 +37,7 @@ namespace TCC.Controls
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, an);
         }
 
-        public string SecondsText
-        {
-            get => ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Val.ToString();
-        }
+        public string SecondsText => ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Val.ToString();
 
         private void ST_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -56,7 +52,7 @@ namespace TCC.Controls
             }
         }
 
-        private bool _running = false;
+        private bool _running;
         public bool Running
         {
             get => _running;

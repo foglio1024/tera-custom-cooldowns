@@ -42,7 +42,7 @@ namespace TCC
 
         private TimeManager()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             var s = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             s.Tick += CheckNewDay;
             s.Start();
@@ -69,7 +69,6 @@ namespace TCC
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
 
             Settings.LastRegion = region;
-            TimeZoneInfo timezone = null;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
                 CurrentRegion = "EU";
@@ -78,7 +77,7 @@ namespace TCC
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK);
             }
-            timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
+            var timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
             _resetDay = _serverTimezones[CurrentRegion].ResetDay;
 
@@ -165,8 +164,6 @@ namespace TCC
 
         public void UploadGuildBamTimestamp()
         {
-            var ts = CurrentServerTime - new DateTime(1970, 1, 1);
-            var time = (long)ts.TotalSeconds;
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
             sb.Append(PacketProcessor.Server.ServerId);
@@ -239,7 +236,7 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-                        var resp = client.UploadString(Settings.Webhook, "POST", sb.ToString());
+                        client.UploadString(Settings.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)
@@ -279,7 +276,7 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                        var resp = client.UploadString(Settings.Webhook, "POST", sb.ToString());
+                        client.UploadString(Settings.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)

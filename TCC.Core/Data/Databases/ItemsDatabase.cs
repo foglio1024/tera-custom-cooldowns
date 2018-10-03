@@ -40,14 +40,15 @@ namespace TCC.Data.Databases
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
             {
-                var id = Convert.ToUInt32(xElement.Attribute("id").Value);
+                var id = Convert.ToUInt32(xElement.Attribute("id")?.Value);
                 var d = new Dictionary<int, int>();
                 foreach (var element in xElement.Descendants().Where(x => x.Name == "Exp"))
                 {
-                    var step = Convert.ToInt32(element.Attribute("enchantStep").Value);
-                    var max = Convert.ToInt32(element.Attribute("maxExp").Value);
+                    var step = Convert.ToInt32(element.Attribute("enchantStep")?.Value);
+                    var max = Convert.ToInt32(element.Attribute("maxExp")?.Value);
                     d.Add(step, max);
                 }
+
                 ExpData.Add(id, d);
             }
         }
@@ -70,8 +71,7 @@ namespace TCC.Data.Databases
             {
                 var item = Items[itemId];
                 result = true;
-                sk = new Skill(itemId, Class.Common, item.Name, "");
-                sk.IconName = item.IconName;
+                sk = new Skill(itemId, Class.Common, item.Name, "") {IconName = item.IconName};
             }
             return result;
 
@@ -81,7 +81,7 @@ namespace TCC.Data.Databases
         {
             get
             {
-                var ret = new List<Item>();
+                //var ret = new List<Item>();
                 //foreach (var item in Items.Values)
                 //{
                 //    var iconName = "unknown";

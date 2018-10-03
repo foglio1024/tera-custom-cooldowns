@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TCC.Data;
+﻿using System.Collections.Generic;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
-using Type = System.Type;
 
 namespace TCC.Parsing.Messages
 {
@@ -36,11 +30,11 @@ namespace TCC.Parsing.Messages
             Pages[index / 72].Items.Clear();
             reader.Skip(4);
             reader.Skip(8);
-            var tabsCount = reader.ReadInt16();
+            reader.Skip(2); // var tabsCount = reader.ReadInt16();
             reader.BaseStream.Position = itemsArrayOffset - 4;
             for (int i = 0; i < itemsArrayCount; i++)
             {
-                var current = reader.ReadUInt16();
+                reader.Skip(2); // var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();
                 reader.Skip(4); //crystals array count and offset
                 var id = reader.ReadInt32();

@@ -15,10 +15,10 @@
             </Grid.ColumnDefinitions>
             <Border  CornerRadius="13,2,2,2" Height="80" Opacity="1"  >
 
-                <Border.Background>
+                <!--<Border.Background>
                     <ImageBrush ImageSource="{Binding Id, Converter={StaticResource Converters.DungeonIdToImage}}" 
                                         Stretch="UniformToFill"/>
-                </Border.Background>
+                </Border.Background>-->
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" BlurRadius="4" Opacity=".3"/>
                 </Border.Effect>

@@ -93,10 +93,12 @@ namespace TCC.Windows
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/resources/config");
         }
 
+/*
         private void ConnectToTwitch(object sender, RoutedEventArgs e)
         {
             //TwitchConnector.Instance.Init();
         }
+*/
 
         private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -116,11 +118,6 @@ namespace TCC.Windows
         private void WindowPositionsReset(object sender, RoutedEventArgs e)
         {
             WindowManager.ResetToCenter();
-        }
-
-        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("https://essentialmana.com/dreadspire-4/");
         }
 
         private void ResetCharacterWindowPosition(object sender, RoutedEventArgs e)

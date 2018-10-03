@@ -11,10 +11,10 @@ namespace TCC.Parsing.Messages
         private uint leaderServerId;
         private uint leaderPlayerId;
 
-        public bool Im { get { return im; } }
-        public bool Raid { get { return raid; } }
-        public uint LeaderServerId { get { return leaderServerId; } }
-        public uint LeaderPlayerId { get { return leaderPlayerId; } }
+        public bool Im => im;
+        public bool Raid => raid;
+        public uint LeaderServerId => leaderServerId;
+        public uint LeaderPlayerId => leaderPlayerId;
 
         public List<User> Members { get; }
 
@@ -51,7 +51,7 @@ namespace TCC.Parsing.Messages
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
 
                 reader.BaseStream.Position = offset - 4;
-                var pointer = reader.ReadUInt16();
+                reader.Skip(2); // var pointer = reader.ReadUInt16();
                 var nextOffset = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.ServerId = reader.ReadUInt32();

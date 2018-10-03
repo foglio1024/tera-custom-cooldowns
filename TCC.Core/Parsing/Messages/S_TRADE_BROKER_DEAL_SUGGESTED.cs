@@ -22,6 +22,7 @@ namespace TCC.Parsing.Messages
             Amount = reader.ReadInt64();
             SellerPrice= reader.ReadInt64();
             OfferedPrice = reader.ReadInt64();
+            reader.RepositionAt(nameOffset);
             Name = reader.ReadTeraString();
         }
     }

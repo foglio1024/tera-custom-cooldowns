@@ -68,7 +68,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
 
         public GuildQuest ActiveQuest()
         {
-            return GuildQuests.Where(x => x.Active == true).FirstOrDefault();
+            return GuildQuests.FirstOrDefault(x => x.Active);
         }
 
         public List<GuildQuest> ActiveQuests()
@@ -106,11 +106,11 @@ namespace TCC.TeraCommon.Game.Messages.Server
             GuildQuests = new List<GuildQuest>();
             var counter = reader.ReadUInt16();
             var questOffset = reader.ReadUInt16();
-            var guildNameOffset = reader.ReadUInt16();
-            var guildMasterOffset = reader.ReadUInt16();
+            /*var guildNameOffset = */reader.ReadUInt16();
+            /*var guildMasterOffset = */reader.ReadUInt16();
 
-            var guildId = reader.ReadUInt32();
-            var guildMasterId = reader.ReadInt32();
+            /*var guildId = */reader.ReadUInt32();
+            /*var guildMasterId = */reader.ReadInt32();
 
             GuildLevel = reader.ReadUInt32();
             GuildXpCurrent = reader.ReadUInt64();
@@ -141,27 +141,27 @@ namespace TCC.TeraCommon.Game.Messages.Server
                 var countRewards = reader.ReadUInt16();
                 var offsetRewards = reader.ReadUInt16();
 
-                var offsetName = reader.ReadUInt16();
-                var offsetDescription = reader.ReadUInt16();
-                var offsetGuildName = reader.ReadUInt16();
+                /*var offsetName = */reader.ReadUInt16();
+                /*var offsetDescription = */reader.ReadUInt16();
+                /*var offsetGuildName = */reader.ReadUInt16();
 
-                var id = reader.ReadUInt32();
+                /*var id = */reader.ReadUInt32();
                 var questType2 = (GuildQuestType2)reader.ReadUInt32();
                 var questSize = (QuestSizeType)reader.ReadUInt32();
-                var unk3 = reader.ReadByte();
-                var unk4 = reader.ReadUInt32();
+                /*var unk3 = */reader.ReadByte();
+                /*var unk4 = */reader.ReadUInt32();
                 var active = reader.ReadByte();
                 //Debug.WriteLine(active.ToString("X"));
                 var activeBool = active == 1;
-                var unk7 = reader.ReadBytes(3);
+                /*var unk7 = */reader.ReadBytes(3);
                 
                 //in seconds
                 var timeRemaining = reader.ReadUInt32();
 
 
                 var guildQuestType = (GuildQuestType) reader.ReadUInt32();
-                var unk5 = reader.ReadByte();
-                var unk6 = reader.ReadInt32();
+                /*var unk5 = */reader.ReadByte();
+                /*var unk6 = */reader.ReadInt32();
                
                 var guildQuestDescriptionLabel = reader.ReadTeraString();
                 var guildQuestTitleLabel = reader.ReadTeraString();
@@ -179,8 +179,8 @@ namespace TCC.TeraCommon.Game.Messages.Server
                 reader.BaseStream.Position = offsetTargets - 4;
                 for (var j = 1; j <= countTargets; j++)
                 {
-                    var currentPosition = reader.ReadUInt16();
-                    var nextTargetOffset = reader.ReadUInt16();
+                    /*var currentPosition = */reader.ReadUInt16();
+                    /*var nextTargetOffset = */reader.ReadUInt16();
                     var zoneId = reader.ReadUInt32();
                     var targetId = reader.ReadUInt32();
                     var countQuest = reader.ReadUInt32();
@@ -192,7 +192,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
                 for (var j = 1; j <= countUnk2; j++)
                 {
                     reader.BaseStream.Position = nextUnk2Offset - 4;
-                    var currentPosition = reader.ReadUInt16();
+                    /*var currentPosition = */reader.ReadUInt16();
                     nextUnk2Offset = reader.ReadUInt16();
                     Debug.WriteLine("unk2:" + reader.ReadByte().ToString("X") + " ;" + j + "/" + countUnk2);
                 }
@@ -201,8 +201,8 @@ namespace TCC.TeraCommon.Game.Messages.Server
                 reader.BaseStream.Position = offsetRewards - 4;
                 for (var j = 1; j <= countRewards; j++)
                 {
-                    var currentPosition = reader.ReadUInt16();
-                    var nextRewardOffset = reader.ReadUInt16();
+                    /*var currentPosition = */reader.ReadUInt16();
+                    /*var nextRewardOffset = */reader.ReadUInt16();
                     var item = reader.ReadUInt32();
                     var amount = reader.ReadUInt64();
 

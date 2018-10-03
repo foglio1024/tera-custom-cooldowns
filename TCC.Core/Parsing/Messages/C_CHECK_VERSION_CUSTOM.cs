@@ -11,11 +11,12 @@ namespace TCC.Parsing.Messages
             for (var i = 1; i <= count; i++)
             {
                 reader.BaseStream.Position = offset - 4;
-                var pointer = reader.ReadUInt16();
+                //var pointer = reader.ReadUInt16();
+                reader.Skip(2);
                 var nextOffset = reader.ReadUInt16();
-                var VersionKey = reader.ReadUInt32();
-                var VersionValue = reader.ReadUInt32();
-                Versions.Add(VersionKey, VersionValue);
+                var versionKey = reader.ReadUInt32();
+                var versionValue = reader.ReadUInt32();
+                Versions.Add(versionKey, versionValue);
                 offset = nextOffset;
             }
         }

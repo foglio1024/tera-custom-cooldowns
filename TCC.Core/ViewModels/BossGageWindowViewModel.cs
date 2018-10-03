@@ -123,8 +123,8 @@ namespace TCC.ViewModels
 
         public BossGageWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            NpcList = new SynchronizedObservableCollection<Npc>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            NpcList = new SynchronizedObservableCollection<Npc>(Dispatcher);
             _cache = new Dictionary<ulong, float>();
             _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
             _flushTimer.Tick += FlushCache;
@@ -158,7 +158,7 @@ namespace TCC.ViewModels
 
         private void FlushCache(object sender, EventArgs e)
         {
-            _dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
                 if (_cache.Count == 0) return;
                 try
@@ -168,9 +168,11 @@ namespace TCC.ViewModels
                         SetHpFromCache(hpc.Key, hpc.Value);
                     }
                 }
-                catch (Exception exception)
+                catch
                 {
+                    // ignored
                 }
+
                 _cache.Clear();
             });
         }
@@ -218,8 +220,7 @@ namespace TCC.ViewModels
 
         private void HandleNewPh1Dragon(Npc boss, ulong entityId)
         {
-            Npc d = null;
-            d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
+            var d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
             if (d != null) return;
             _holdedDragons.Add(boss);
             if (_holdedDragons.Count != 4) return;
@@ -248,8 +249,7 @@ namespace TCC.ViewModels
 
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, Visibility visibility = Visibility.Visible)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
             if (boss == null) return;
             SetHp(boss, maxHp, curHp, src);
             if (boss.Visible != visibility)
@@ -319,9 +319,7 @@ namespace TCC.ViewModels
 
         public void RemoveBoss(ulong id, DespawnType type)
         {
-            Npc boss = null;
-
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == id);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
             if (type == DespawnType.OutOfView)
             {
@@ -351,13 +349,11 @@ namespace TCC.ViewModels
             var sb = new StringBuilder();
             foreach (var boss in NpcList.ToSyncArray())
             {
-                if (boss.Visible == Visibility.Visible)
-                {
-                    sb.Append(boss.Name);
-                    sb.Append(": ");
-                    sb.Append(string.Format("{0:##0%}", boss.CurrentFactor));
-                    sb.Append("\\");
-                }
+                if (boss.Visible != Visibility.Visible) continue;
+                sb.Append(boss.Name);
+                sb.Append(": ");
+                sb.Append($"{boss.CurrentFactor:##0%}");
+                sb.Append("\\");
             }
             try
             {
@@ -379,37 +375,32 @@ namespace TCC.ViewModels
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             boss?.EndBuff(ab);
         }
         public void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             boss?.AddorRefresh(ab, duration, stacks);
         }
         public void SetBossEnrage(ulong entityId, bool enraged)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null) return;
             boss.Enraged = enraged;
         }
         public void UnsetBossTarget(ulong entityId)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
             }
             boss.Target = 0;
         }
-        public void SetBossAggro(ulong entityId, AggroCircle circle, ulong user)
+        public void SetBossAggro(ulong entityId, ulong user)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -432,8 +423,7 @@ namespace TCC.ViewModels
         public void AddGuildTower(ulong towerId, string guildName, uint guildId)
         {
             if (!GuildIds.ContainsKey(towerId)) GuildIds.Add(towerId, guildId);
-            Npc t = null;
-            t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
+            var t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
             if (t != null)
             {
                 t.Name = guildName;
@@ -445,8 +435,7 @@ namespace TCC.ViewModels
 
         public void UpdateShield(ulong target, uint damage)
         {
-            Npc boss = null;
-            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.CurrentShield -= damage;
@@ -455,12 +444,12 @@ namespace TCC.ViewModels
 
         public void RemoveMe(Npc npc)
         {
-            _dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
                 var b = NpcList.ToSyncArray().FirstOrDefault(x => x == npc);
                 if (b == null) return;
                 b.Buffs.Clear();
-                var dt = new DispatcherTimer(DispatcherPriority.Background, _dispatcher)
+                var dt = new DispatcherTimer(DispatcherPriority.Background, Dispatcher)
                 {
                     Interval = TimeSpan.FromMilliseconds(5500)
                 };
@@ -474,6 +463,7 @@ namespace TCC.ViewModels
             });
         }
 
+/*
         public void UpdateBySkillResult(ulong target, ulong damage)
         {
             var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
@@ -483,6 +473,7 @@ namespace TCC.ViewModels
                 else boss.CurrentHP -= damage;
             }
         }
+*/
     }
 
 

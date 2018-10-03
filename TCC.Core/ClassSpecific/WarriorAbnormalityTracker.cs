@@ -101,13 +101,13 @@ namespace TCC.ClassSpecific
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
             ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.Val = p.Stacks;
-            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.ToZero(p.Duration);
+            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.InvokeToZero(p.Duration);
         }
         private static void CheckTraverseCut(S_ABNORMALITY_REFRESH p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
             ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.Val = p.Stacks;
-            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.ToZero(p.Duration);
+            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).TraverseCut.InvokeToZero(p.Duration);
         }
         private static void CheckTraverseCut(S_ABNORMALITY_END p)
         {

@@ -30,12 +30,11 @@ namespace TCC.Controls.ChatControls
                 if (!w.IsMouseOver) continue;
                 var currTabVm = w.TabControl.SelectedItem;
                 var tabVm = w.VM.TabVMs.FirstOrDefault(x =>
-                    ((Tab)x.Content).Messages.Contains(this.DataContext as ChatMessage) && x == currTabVm);
-                if (((Tab)tabVm.Content).PinnedMessage == this.DataContext)
-                {
-                    ((Tab)tabVm?.Content).PinnedMessage = null;
-                }
-                else ((Tab)tabVm?.Content).PinnedMessage = this.DataContext as ChatMessage;
+                    ((Tab)x.Content).Messages.Contains(DataContext as ChatMessage) && x == currTabVm);
+
+                if (tabVm?.Content == null) return;
+                if (((Tab) tabVm.Content)?.PinnedMessage == DataContext) ((Tab) tabVm.Content).PinnedMessage = null;
+                else ((Tab) tabVm.Content).PinnedMessage = DataContext as ChatMessage;
             }
         }
 

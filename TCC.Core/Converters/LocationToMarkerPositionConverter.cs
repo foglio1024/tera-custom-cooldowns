@@ -12,7 +12,7 @@ namespace TCC.Converters
         {
             var loc = (Location)value;
             var point = SessionManager.MapDatabase.GetMarkerPosition(loc);
-            return new Thickness(point.Y,point.X, 0, 0);
+            return new Thickness(point.Y, point.X, 0, 0);
 
         }
 

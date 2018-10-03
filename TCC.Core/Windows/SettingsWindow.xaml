@@ -840,6 +840,13 @@
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <Separator/>
+                    <controls:SelectionSetting SettingName="Abnormalities shape"
+                                               SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
+                                               ChoicesType="{x:Type data:AbnormalityShape}"
+                                               Choices="{Binding AbnormalityShapes, Mode=OneWay}"
+                                               SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+
+                    <Separator/>
                     <controls:BoolSetting SettingName="Use LFG window" IsOn="{Binding UseLfg, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">

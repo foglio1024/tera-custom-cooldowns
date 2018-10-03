@@ -12,7 +12,7 @@ namespace TCC.Controls.ClassBars
         public MysticBar()
         {
             InitializeComponent();
-            this.Loaded += OnLoaded;
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)

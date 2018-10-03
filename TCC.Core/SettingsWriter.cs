@@ -23,9 +23,10 @@ namespace TCC
                     Settings.CooldownWindowSettings.ToXElement("CooldownWindow"),
                     Settings.GroupWindowSettings.ToXElement("GroupWindow"),
                     Settings.ClassWindowSettings.ToXElement("ClassWindow"),
-                    BuildChatWindowSettings("ChatWindows"),
+                    BuildChatWindowSettings(),
                     Settings.FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
-                    Settings.FloatingButtonSettings.ToXElement("FloatingButton")
+                    Settings.FloatingButtonSettings.ToXElement("FloatingButton"),
+                    Settings.CivilUnrestWindowSettings.ToXElement("CivilUnrestWindow")
                     //add window here
                 ),
                 BuildOtherSettingsXElement(),
@@ -136,7 +137,9 @@ namespace TCC
                 new XAttribute(nameof(Settings.ShowTradeLfg), Settings.ShowTradeLfg),
                 new XAttribute(nameof(Settings.RegionOverride), Settings.RegionOverride),
                 new XAttribute(nameof(Settings.FlightGaugeRotation), Settings.FlightGaugeRotation),
-                new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge)
+                new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge),
+                new XAttribute(nameof(Settings.AbnormalityShape), Settings.AbnormalityShape),
+                new XAttribute(nameof(Settings.Winpcap), Settings.Winpcap)
             );
         }
         private static XElement BuildGroupAbnormalsXElement()
@@ -157,7 +160,7 @@ namespace TCC
             }
             return result;
         }
-        private static XElement BuildChatWindowSettings(string v)
+        private static XElement BuildChatWindowSettings()
         {
             var result = new XElement("ChatWindows");
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>

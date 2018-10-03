@@ -8,9 +8,6 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator BurstFire { get; set; }
         public DurationCooldownIndicator Balder { get; set; }
         public DurationCooldownIndicator Bombardment { get; set; }
-        public GunnerBarManager() : base()
-        {
-        }
 
         private void FlashBfIfFullWp(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -27,9 +24,9 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
             SessionManager.SkillsDatabase.TryGetSkill(20700, Class.Gunner, out var bombard);
 
-            BurstFire = new DurationCooldownIndicator(_dispatcher);
-            Balder = new DurationCooldownIndicator(_dispatcher);
-            Bombardment = new DurationCooldownIndicator(_dispatcher);
+            BurstFire = new DurationCooldownIndicator(Dispatcher);
+            Balder = new DurationCooldownIndicator(Dispatcher);
+            Bombardment = new DurationCooldownIndicator(Dispatcher);
 
             BurstFire.Buff = new FixedSkillCooldown(bfire, false);
             Balder.Buff = new FixedSkillCooldown(balder, false);

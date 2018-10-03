@@ -4,18 +4,12 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    public class DragonSelectedToOpacityConverter : IValueConverter
+    public class SizeToStackLabelSizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-            {
-                return 1;
-            }
-            else
-            {
-                return .5; 
-            }
+            var size = (double?)value;
+            return size / 1.7;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -23,4 +17,5 @@ namespace TCC.Converters
             throw new NotImplementedException();
         }
     }
+
 }

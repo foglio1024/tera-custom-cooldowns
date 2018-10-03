@@ -11,7 +11,7 @@ namespace TCC.Converters
         {
             if (value == null) value = Class.Common;
             var c = (Class)value;
-            return App.Current.FindResource("SvgClass" + c.ToString());
+            return System.Windows.Application.Current.FindResource("SvgClass" + c.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

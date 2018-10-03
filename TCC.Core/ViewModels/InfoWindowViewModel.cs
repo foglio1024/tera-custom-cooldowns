@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -22,36 +21,25 @@ namespace TCC.ViewModels
         public bool DiscardFirstVanguardPacket = true;
         public static InfoWindowViewModel Instance => _instance ?? (_instance = new InfoWindowViewModel());
         public SynchronizedObservableCollection<Character> Characters { get; set; }
-        public SynchronizedObservableCollection<EventGroup> EventGroups { get; set; }
-        public SynchronizedObservableCollection<TimeMarker> Markers { get; set; }
-        public SynchronizedObservableCollection<DailyEvent> SpecialEvents { get; set; }
-        public ICollectionView SoloDungs { get; set; }
-        public ICollectionView T2Dungs { get; set; }
-        public ICollectionView T3Dungs { get; set; }
-        public ICollectionView T4Dungs { get; set; }
-        public ICollectionView T5Dungs { get; set; }
-        public ICollectionView AllDungeons { get; set; }
-        public ICollectionView Items { get; set; }
-        public Character CurrentCharacter
-        {
-            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
-        }
-        public Character SelectedCharacter
-        {
-            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
-        }
+        public SynchronizedObservableCollection<EventGroup> EventGroups { get; }
+        public SynchronizedObservableCollection<TimeMarker> Markers { get; }
+        // ReSharper disable once CollectionNeverQueried.Global
+        public SynchronizedObservableCollection<DailyEvent> SpecialEvents { get; }
+        public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+
+        public Character SelectedCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
         public bool SelectedCharacterExists => SelectedCharacter != null;
         public bool ShowElleonMarks => TimeManager.Instance.CurrentRegion == "EU";
         public InfoWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Characters = new SynchronizedObservableCollection<Character>(_dispatcher);
-            EventGroups = new SynchronizedObservableCollection<EventGroup>(_dispatcher);
-            Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
-            SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Characters = new SynchronizedObservableCollection<Character>(Dispatcher);
+            EventGroups = new SynchronizedObservableCollection<EventGroup>(Dispatcher);
+            Markers = new SynchronizedObservableCollection<TimeMarker>(Dispatcher);
+            SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(Dispatcher);
             LoadCharDoc();
             if (Characters.Count > 0) SelectCharacter(Characters[0]);
-            else SelectCharacter(new Character("", Class.None, 0, 0, _dispatcher));
+            else SelectCharacter(new Character("", Class.None, 0, 0, Dispatcher));
         }
 
         public void LoadEvents(DayOfWeek today, string region)
@@ -183,7 +171,6 @@ namespace TCC.ViewModels
                             {
                                 var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0, color, false);
                                 end = start + end - 24;
-                                start = 0;
                                 var e2 = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
                                 if (isToday) eg.AddEvent(e1);
                                 eg.AddEvent(e2);
@@ -209,12 +196,10 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-
                 var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);
-                return;
             }
         }
 
@@ -264,7 +249,7 @@ namespace TCC.ViewModels
         }
         public void ShowWindow()
         {
-            if (!_dispatcher.Thread.IsAlive) return;
+            if (!Dispatcher.Thread.IsAlive) return;
             //LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
             NPC(nameof(SelectedCharacterExists));
@@ -402,18 +387,19 @@ namespace TCC.ViewModels
         {
             if (!File.Exists("resources/config/characters.xml")) return;
             var doc = XDocument.Load("resources/config/characters.xml");
-            SessionManager.IsElite = bool.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters").Attribute("elite").Value);
+            // ReSharper disable AssignNullToNotNullAttribute
+            SessionManager.IsElite = bool.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters")?.Attribute("elite")?.Value);
             foreach (var c in doc.Descendants().Where(x => x.Name == "Character"))
             {
-                var name = c.Attribute("name").Value;
-                var cr = Convert.ToInt32(c.Attribute("credits").Value);
-                var w = Convert.ToInt32(c.Attribute("weekly").Value);
-                var d = Convert.ToInt32(c.Attribute("daily").Value);
-                var id = Convert.ToUInt32(c.Attribute("id").Value);
-                var pos = Convert.ToInt32(c.Attribute("pos").Value);
-                var guard = c.Attribute("guardianQuests") != null ? Convert.ToInt32(c.Attribute("guardianQuests").Value) : 0;
-                var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks").Value) : 0;
-                var classString = c.Attribute("class").Value;
+                var name = c.Attribute("name")?.Value;
+                var cr = Convert.ToInt32(c.Attribute("credits")?.Value);
+                var w = Convert.ToInt32(c.Attribute("weekly")?.Value);
+                var d = Convert.ToInt32(c.Attribute("daily")?.Value);
+                var id = Convert.ToUInt32(c.Attribute("id")?.Value);
+                var pos = Convert.ToInt32(c.Attribute("pos")?.Value);
+                var guard = c.Attribute("guardianQuests") != null ? Convert.ToInt32(c.Attribute("guardianQuests")?.Value) : 0;
+                var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks")?.Value) : 0;
+                var classString = c.Attribute("class")?.Value;
                 if (!Enum.TryParse<Class>(classString, out var cl))
                 {
                     //keep retrocompatibility
@@ -426,7 +412,7 @@ namespace TCC.ViewModels
                 }
                 cl = (Class)Enum.Parse(typeof(Class), classString);
 
-                var ch = new Character(name, cl, id, pos, _dispatcher)
+                var ch = new Character(name, cl, id, pos, Dispatcher)
                 {
                     Credits = cr,
                     WeekliesDone = w,
@@ -437,9 +423,9 @@ namespace TCC.ViewModels
                 var dgDict = new Dictionary<uint, short>();
                 foreach (var dgEl in c.Descendants().Where(x => x.Name == "Dungeon"))
                 {
-                    var dgId = Convert.ToUInt32(dgEl.Attribute("id").Value);
-                    var dgEntries = Convert.ToInt16(dgEl.Attribute("entries").Value);
-                    var dgTotal = dgEl.Attribute("total") != null ? Convert.ToInt16(dgEl.Attribute("total").Value) : 0;
+                    var dgId = Convert.ToUInt32(dgEl.Attribute("id")?.Value);
+                    var dgEntries = Convert.ToInt16(dgEl.Attribute("entries")?.Value);
+                    var dgTotal = dgEl.Attribute("total") != null ? Convert.ToInt16(dgEl.Attribute("total")?.Value) : 0;
                     ch.SetDungeonTotalRuns(dgId, dgTotal);
                     dgDict.Add(dgId, dgEntries);
                 }
@@ -447,16 +433,17 @@ namespace TCC.ViewModels
                 var gear = new List<GearItem>();
                 foreach (var gearEl in c.Descendants().Where(x => x.Name == "Gear"))
                 {
-                    var pieceId = Convert.ToUInt32(gearEl.Attribute("id").Value);
-                    var pieceType = (GearPiece)Enum.Parse(typeof(GearPiece), gearEl.Attribute("piece").Value);
-                    var pieceTier = (GearTier)Enum.Parse(typeof(GearTier), gearEl.Attribute("tier").Value);
-                    var pieceEnchant = Convert.ToInt32(gearEl.Attribute("enchant").Value);
-                    var exp = Convert.ToUInt32(gearEl.Attribute("exp").Value);
+                    var pieceId = Convert.ToUInt32(gearEl.Attribute("id")?.Value);
+                    var pieceType = (GearPiece)Enum.Parse(typeof(GearPiece), gearEl.Attribute("piece")?.Value);
+                    var pieceTier = (GearTier)Enum.Parse(typeof(GearTier), gearEl.Attribute("tier")?.Value);
+                    var pieceEnchant = Convert.ToInt32(gearEl.Attribute("enchant")?.Value);
+                    var exp = Convert.ToUInt32(gearEl.Attribute("exp")?.Value);
                     gear.Add(new GearItem(pieceId, pieceTier, pieceType, pieceEnchant, exp));
                 }
                 ch.UpdateGear(gear);
                 Characters.Add(ch);
             }
+            // ReSharper restore AssignNullToNotNullAttribute
         }
 
         public void AddEventGroup(EventGroup eg)

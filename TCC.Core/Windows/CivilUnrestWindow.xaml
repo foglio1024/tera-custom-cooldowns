@@ -1,19 +1,18 @@
 ﻿<local:TccWidget x:Class="TCC.Windows.CivilUnrestWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows"
-        xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        mc:Ignorable="d"
-        Title="CivilUnrestWindow" Height="Auto" 
-        Style="{StaticResource BaseWindowStyle}"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="clr-namespace:TCC.ViewModels"
+                 xmlns:local="clr-namespace:TCC.Windows"
+                 mc:Ignorable="d"
+        Title="CivilUnrestWindow"
+                 Style="{StaticResource BaseWindowStyle}"
         Loaded="OnLoaded"
         d:DataContext="{d:DesignInstance {x:Type vm:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">
     <Grid x:Name="ZoneBoundContent" >
 
-        <Grid Width="250" Margin="4" x:Name="content" Height="310">
+        <Grid Width="250" Margin="4" x:Name="WindowContent" Height="310">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

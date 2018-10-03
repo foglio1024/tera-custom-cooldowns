@@ -28,7 +28,7 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
-            DeadlyGamble = new DurationCooldownIndicator(_dispatcher);
+            DeadlyGamble = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
             DeadlyGamble.Buff = new FixedSkillCooldown(dg, false);
             DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, true);

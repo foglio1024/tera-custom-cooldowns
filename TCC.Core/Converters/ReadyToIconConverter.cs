@@ -9,7 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var v = (ReadyStatus)value;
+            var v = (ReadyStatus?)value ?? ReadyStatus.None;
             var img = "resources/images/Icon_Laurels/blank.png";
             switch (v)
             {
@@ -21,8 +21,6 @@ namespace TCC.Converters
                     break;
                 case ReadyStatus.Undefined:
                     img = "resources/images/ic_remove_white_24dp_2x.png";
-                    break;
-                default:
                     break;
             }
             return img;

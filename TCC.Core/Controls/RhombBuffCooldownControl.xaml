@@ -31,7 +31,7 @@
                                            IsHitTestVisible="False"
                                  VerticalAlignment="Center" Padding="00" Margin="0"
                                  DataContext="{Binding Cooldown}" 
-                                    x:Name="cd"
+                                    x:Name="RhombFixedSkillControl"
                                  >
         </local:RhombFixedSkillControl>
 

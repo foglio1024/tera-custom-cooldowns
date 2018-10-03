@@ -8,7 +8,8 @@
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls" Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
-        Title="LfgListWindow" Height="800">
+        Title="LfgListWindow" Height="800"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="ListBoxItem" x:Key="PlayerListItemStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>

@@ -1,4 +1,5 @@
-﻿using TCC.TeraCommon.Game.Services;
+﻿using TCC.Annotations;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.TeraCommon.Game.Messages.Server
 {
@@ -25,7 +26,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
         public uint PlayerId { get; private set; }
         public int Level { get; private set; }
         public string Name { get; private set; }
-        public string GuildName { get; private set; }
+        public string GuildName { get; [UsedImplicitly] private set; }
         public RaceGenderClass RaceGenderClass { get; }
     }
 }

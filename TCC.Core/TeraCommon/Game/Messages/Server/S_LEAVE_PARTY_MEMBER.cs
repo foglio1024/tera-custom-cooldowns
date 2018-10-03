@@ -6,7 +6,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
     {
         internal S_LEAVE_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {
-            var nameoffset = reader.ReadUInt16();
+            /*var nameoffset = */reader.ReadUInt16();
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
             Name = reader.ReadTeraString();

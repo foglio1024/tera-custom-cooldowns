@@ -29,10 +29,6 @@ namespace TCC.Windows
         public WindowSettings WindowSettings => _settings;
         public IntPtr Handle => new WindowInteropHelper(this).Handle;
 
-        public TccWidget()
-        {
-
-        }
         public void ReloadPosition()
         {
             Dispatcher.Invoke(() =>
@@ -271,10 +267,6 @@ namespace TCC.Windows
             {
                 Top = Settings.ScreenH - ActualHeight;
             }
-            var myScreen = Screen.FromHandle(Handle);
-
-            //if (Left < myScreen.Bounds.X) Left = 0;
-            //if (Top < 0) Top = 0;
             CheckIndividualScreensBounds();
 
             _settings.X = Left / Settings.ScreenW;

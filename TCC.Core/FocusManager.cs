@@ -15,9 +15,8 @@ namespace TCC
 
     public static class FocusManager
     {
-
-
         // window styles
+        // ReSharper disable InconsistentNaming
         private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
         private const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
         private const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
@@ -26,6 +25,7 @@ namespace TCC
         private const int WM_KEYDOWN = 0x0100;
         private const int WM_KEYUP = 0x0101;
         private const int VK_RETURN = 0x0D;
+        // ReSharper restore InconsistentNaming
 
         // events
         public static event Action ForegroundChanged;
@@ -94,7 +94,9 @@ namespace TCC
             }
         }
 
+/*
         public static int TeraScreenIndex => Screen.AllScreens.ToList().IndexOf(TeraScreen);
+*/
 
         public static Screen TeraScreen
         {
@@ -114,11 +116,13 @@ namespace TCC
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
+/*
         public static void UndoUnfocusable(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
         }
+*/
         public static void HideFromToolBar(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
@@ -159,19 +163,21 @@ namespace TCC
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
+/*
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
         private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+*/
 
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+        private static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
         [StructLayout(LayoutKind.Sequential)]
         private struct RECT
         {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
+            public readonly int Left;
+            public readonly int Top;
+            public readonly int Right;
+            public readonly int Bottom;
         }
 
         public static void Init()

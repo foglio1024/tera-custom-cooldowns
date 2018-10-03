@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace TCC.Converters
 {
-    internal class BoolToBrushConverter : IValueConverter
+    public class SizeToDurationLabelMarginConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-            {
-                return new SolidColorBrush(Color.FromArgb(0x55, 0x0, 0xa5, 0x61));
-            }
-            else
-            {
-                return Brushes.Transparent;
-            }
+            var size = (double?)value ?? 0;
+            return new Thickness(0, 0, 0, -size * 1.25);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -24,4 +18,5 @@ namespace TCC.Converters
             throw new NotImplementedException();
         }
     }
+
 }

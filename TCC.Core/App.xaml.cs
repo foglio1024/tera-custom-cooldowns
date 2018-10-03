@@ -22,16 +22,13 @@ using SplashScreen = TCC.Windows.SplashScreen;
 
 namespace TCC
 {
-    /// <summary>
-    ///     Logica di interazione per App.xaml
-    /// </summary>
     public partial class App
     {
-        private static string _version;
         public const bool Debug = false;
+        private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
-        public static DebugWindow DebugWindow;
+        //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
@@ -88,6 +85,34 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
+
+            DebugStuff();
+        }
+
+        private static void DebugStuff()
+        {
+            //for (int i = 0; i < 2000; i++)
+            //{
+            //    ChatWindowManager.Instance.AddTccMessage($"Test {i}");
+            //}
+            /*
+                        EntitiesManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
+                        var c = 0;
+                        while (c < 1000)
+                        {
+                            AbnormalityManager.BeginAbnormality(2, 10, 500, 1);
+                            AbnormalityManager.BeginAbnormality(2, 11, 500, 1);
+                            Console.WriteLine("Added " + c);
+                            Thread.Sleep(100);
+                            AbnormalityManager.EndAbnormality(2, 10);
+                            AbnormalityManager.EndAbnormality(2, 11);
+                            Console.WriteLine("Removed " + c);
+                            c++;
+                        }
+            */
+            //AbnormalityManager.BeginAbnormality(1495, 10, 10000, 5);
+            //AbnormalityManager.BeginAbnormality(2066, 10, 100000, 10);
+            //AbnormalityManager.BeginAbnormality(2074, 10, 10000000, 20);
             //var r = new Random();
             //for (int i = 0; i < 30; i++)
             //{
@@ -147,16 +172,17 @@ namespace TCC
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
-            WindowManager.FloatingButton.NotifyExtended($"TCC", $"Connected to {srv.Name}", NotificationType.Success);
+            WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
         }
 
         private static void TeraSniffer_OnEndConnection()
         {
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
-            WindowManager.FloatingButton.NotifyExtended($"TCC", "Disconnected", NotificationType.Warning);
+            WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
 
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             EntitiesManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;

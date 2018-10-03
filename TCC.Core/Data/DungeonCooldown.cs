@@ -33,7 +33,7 @@ namespace TCC.Data
 
         public DungeonCooldown(uint id, Dispatcher d)
         {
-            _dispatcher = d;
+            Dispatcher = d;
             Id = id;
             Entries = (short)GetRuns();
         }

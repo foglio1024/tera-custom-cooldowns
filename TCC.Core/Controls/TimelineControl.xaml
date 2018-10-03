@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:data="clr-namespace:TCC.Data"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Width="1000" d:DataContext="{d:DesignData InfoWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="TimeMarkerTemplate">
@@ -12,7 +14,7 @@
         <DataTemplate x:Key="EventTemplate">
             <local:EventControl />
         </DataTemplate>
-        <DataTemplate x:Key="EventGroupTemplate">
+        <DataTemplate x:Key="EventGroupTemplate" DataType="data:EventGroup">
             <Grid Margin="0">
                 <Rectangle Height="6" 
                    Width="1000" 
@@ -51,7 +53,7 @@
                 </ItemsControl>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="SpecialEventTemplate">
+        <DataTemplate x:Key="SpecialEventTemplate" DataType="viewModels:DailyEvent">
             <Grid VerticalAlignment="Stretch">
                 <StackPanel Orientation="Horizontal" Margin="-4,0,0,0" VerticalAlignment="Stretch">
                     <FrameworkElement Width="1000" >
@@ -86,7 +88,7 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Grid.ColumnSpan="2" HorizontalAlignment="Stretch" 
+    <Grid HorizontalAlignment="Stretch" 
           Margin="0,0,0,0" VerticalAlignment="Stretch">
 
         <UniformGrid Columns="24" Opacity="1">

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -18,7 +15,7 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per GroupAbnormalConfigWindow.xaml
     /// </summary>
-    public partial class GroupAbnormalConfigWindow : Window
+    public partial class GroupAbnormalConfigWindow
     {
         private Class _currentFilter;
 
@@ -81,7 +78,7 @@ namespace TCC.Windows
 
         private void FilterByClass(object sender, RoutedEventArgs e)
         {
-            var c = (Class)(sender as FrameworkElement).DataContext;
+            var c = (Class)((FrameworkElement) sender).DataContext;
             var view = DC.AbnormalitiesView;
             if (SearchBox.Text.Length > 0)
             {
@@ -103,7 +100,8 @@ namespace TCC.Windows
             {
                 var cp = (ContentPresenter)ClassesButtons.ItemContainerGenerator.ContainerFromItem(x);
                 var btn = cp.ContentTemplate.FindName("Btn", cp) as Button;
-                var dc = ((Class)btn.DataContext);
+                if (btn?.DataContext == null) continue;
+                var dc = (Class)btn.DataContext;
                 if (dc == _currentFilter) btn.Opacity = 1;
                 else btn.Opacity = .3;
             }
@@ -113,80 +111,6 @@ namespace TCC.Windows
 
 namespace TCC.ViewModels
 {
-    public class GroupConfigVM : TSPropertyChanged
-    {
-
-        public event Action ShowAllChanged;
-
-        public SynchronizedObservableCollection<GroupAbnormalityVM> GroupAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => SessionManager.AbnormalityDatabase.Abnormalities.Values.ToList();
-        public ICollectionView AbnormalitiesView { get; set; }
-
-        public bool ShowAll
-        {
-            get => Settings.ShowAllGroupAbnormalities;
-            set
-            {
-                if (Settings.ShowAllGroupAbnormalities == value) return;
-                Settings.ShowAllGroupAbnormalities = value;
-                _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
-                SettingsWriter.Save();
-                NPC();
-            }
-        }
-        public List<Class> Classes
-        {
-            get
-            {
-                var l = Utils.ListFromEnum<Class>();
-                l.Remove(Class.None);
-                return l;
-            }
-        }
-        public GroupConfigVM()
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            GroupAbnormals = new SynchronizedObservableCollection<GroupAbnormalityVM>(_dispatcher);
-            foreach (var abnormality in Abnormalities)
-            {
-                var abVM = new GroupAbnormalityVM(abnormality);
-
-                GroupAbnormals.Add(abVM);
-            }
-            AbnormalitiesView = new CollectionViewSource { Source = GroupAbnormals }.View;
-            AbnormalitiesView.CurrentChanged += OnAbnormalitiesViewOnCurrentChanged;
-            AbnormalitiesView.Filter = null;
-        }
-        //to keep view referenced
-        private void OnAbnormalitiesViewOnCurrentChanged(object s, EventArgs ev)
-        {
-        }
-    }
-
-    public class GroupAbnormalityVM : TSPropertyChanged
-    {
-        public Abnormality Abnormality { get; }
-        public SynchronizedObservableCollection<ClassToggle> Classes { get; }
-
-        public GroupAbnormalityVM(Abnormality ab)
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Abnormality = ab;
-            Classes = new SynchronizedObservableCollection<ClassToggle>(_dispatcher);
-            for (int i = 0; i < 13; i++)
-            {
-                var ct = new ClassToggle((Class)i, ab.Id);
-                if (Settings.GroupAbnormals.ContainsKey(ct.Class)) ct.Selected = Settings.GroupAbnormals[ct.Class].Contains(ab.Id);
-                Classes.Add(ct);
-            }
-            Classes.Add(new ClassToggle(Class.Common, ab.Id)
-            {
-                Selected = Settings.GroupAbnormals[Class.Common].Contains(ab.Id)
-            });
-
-        }
-    }
-
     public class ClassToggle : TSPropertyChanged
     {
         private bool _selected;
@@ -207,7 +131,7 @@ namespace TCC.ViewModels
         public uint AbnormalityId { get; }
         public ClassToggle(Class c, uint abId)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Class = c;
             AbnormalityId = abId;
             ToggleCommand = new ToggleCommand(this);
@@ -216,7 +140,7 @@ namespace TCC.ViewModels
 
     public class ToggleCommand : ICommand
     {
-        private ClassToggle _toggle;
+        private readonly ClassToggle _toggle;
         public bool CanExecute(object parameter)
         {
             return true;

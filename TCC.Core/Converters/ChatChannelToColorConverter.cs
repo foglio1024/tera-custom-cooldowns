@@ -11,7 +11,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var ch = (ChatChannel)value;
+            var ch =  (ChatChannel?) value ?? ChatChannel.Say;
             switch (ch)
             {
                 case ChatChannel.Say:
@@ -87,14 +87,12 @@ namespace TCC.Converters
                 case ChatChannel.TradeRedirect:
                     return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Trade");
                 case ChatChannel.Enchant12:
-                    return Brushes.Orange;
-                case ChatChannel.Enchant15:
-                    return Brushes.OrangeRed;
                 case ChatChannel.Enchant7:
-                    return Brushes.Orange;
                 case ChatChannel.Enchant8:
                     return Brushes.Orange;
                 case ChatChannel.Enchant9:
+                case ChatChannel.Laurel:
+                case ChatChannel.Enchant15:
                     return Brushes.OrangeRed;
                 case ChatChannel.RaidLeader:
                     return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.RaidNotice");
@@ -117,8 +115,6 @@ namespace TCC.Converters
                     return (SolidColorBrush)Application.Current.FindResource("TwitchColor");
                 case ChatChannel.WorldBoss:
                     return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.WorldBoss");
-                case ChatChannel.Laurel:
-                    return Brushes.OrangeRed;
                 default:
                     return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Generic");
             }

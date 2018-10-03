@@ -1,5 +1,4 @@
-﻿using System;
-using System.Timers;
+﻿using System.Timers;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -72,13 +71,11 @@ namespace TCC.Data
                 NPC(nameof(MembersCountLabel));
             }
         }
-        public string MembersCountLabel
-        {
-            get { return MembersCount == 0 ? "" : MembersCount.ToString(); }
-        }
+        public string MembersCountLabel => MembersCount == 0 ? "" : MembersCount.ToString();
+
         public LFG(uint id, string name, string msg, bool raid)
         {
-            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
 
             Id = id;
             Name = name;
@@ -103,9 +100,12 @@ namespace TCC.Data
             {
                 _removeTimer?.Stop();
                 _removeTimer?.Start();
-                NPC("Refresh");
+                NPC();
             }
-            catch (Exception) { }
+            catch
+            {
+                // ignored
+            }
         }
         private void UpdateDungeonName()
         {
@@ -126,7 +126,7 @@ namespace TCC.Data
         }
         public override string ToString()
         {
-            return string.Format("[{0}] {1}: {2}", Id, Name, Message);
+            return $"[{Id}] {Name}: {Message}";
         }
     }
 }

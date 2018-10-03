@@ -9,15 +9,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var b = (bool)value;
-            if (!b)
-            {
-                return new GridLength(1, GridUnitType.Star);
-            }
-            else
-            {
-                return new GridLength(1, GridUnitType.Auto);
-            }
+            var b = (bool?)value ?? false;
+            return !b ? new GridLength(1, GridUnitType.Star) : new GridLength(1, GridUnitType.Auto);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -29,7 +29,8 @@ namespace TCC.Windows
 
         private static TccMessageBox _messageBox;
         private static MessageBoxResult _result = MessageBoxResult.No;
-        public static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
+
+        private static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
         {
             switch (type)
             {
@@ -68,7 +69,7 @@ namespace TCC.Windows
         {
             if (_messageBox == null) App.BaseDispatcher.Invoke(Create);
 
-            _messageBox.Dispatcher.Invoke(() =>
+            _messageBox?.Dispatcher.Invoke(() =>
             {
                 _messageBox.TxtMsg.Text = text;
                 _messageBox.MessageTitle.Text = caption;
