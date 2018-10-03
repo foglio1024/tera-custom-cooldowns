@@ -9,7 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((Class)value)
+            switch ((Class?)value)
             {
                 case Class.Warrior:
                     return "RE";
@@ -18,11 +18,10 @@ namespace TCC.Converters
                 case Class.Gunner:
                     return "WP";
                 case Class.Brawler:
+                case Class.Valkyrie:
                     return "RG";
                 case Class.Ninja:
                     return "CH";
-                case Class.Valkyrie:
-                    return "RG";
                 default:
                     return "";
             }

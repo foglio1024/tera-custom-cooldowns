@@ -28,7 +28,7 @@ namespace TCC.TeraCommon.Game
 
         public UserEntity User
         {
-            get { return _user; }
+            get => _user;
             set
             {
                 if (_user.ServerId != value.ServerId || _user.PlayerId != value.PlayerId)

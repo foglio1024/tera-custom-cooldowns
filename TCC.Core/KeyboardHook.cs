@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using TCC.Tera.Data;
+using TCC.Parsing;
 using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC
 {
     public sealed class KeyboardHook : IDisposable
     {
-        public delegate void TopmostSwitch();
 
         private static KeyboardHook _instance;
         private readonly Window _window = new Window();
@@ -29,44 +23,43 @@ namespace TCC
 
 
         public static KeyboardHook Instance => _instance ?? (_instance = new KeyboardHook());
-        public event TopmostSwitch SwitchTopMost;
 
-        public bool SetHotkeys(bool value)
+        private void SetHotkeys(bool value)
         {
             if (value && !_isRegistered)
             {
                 Register();
-                return true;
-
+                return;
             }
-            if (!value && _isRegistered) { ClearHotkeys(); return true; }
-            return false;
+
+            if (value || !_isRegistered) return;
+            ClearHotkeys();
         }
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (e.Key == SettingsManager.LfgHotkey.Key && e.Modifier == SettingsManager.LfgHotkey.Modifier)
+            if (e.Key == Settings.LfgHotkey.Key && e.Modifier == Settings.LfgHotkey.Modifier)
             {
                 if (!Proxy.IsConnected) return;
 
                 if (!WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
                 else WindowManager.LfgListWindow.CloseWindow();
             }
-            if (e.Key == SettingsManager.SettingsHotkey.Key && e.Modifier == SettingsManager.SettingsHotkey.Modifier)
+            if (e.Key == Settings.SettingsHotkey.Key && e.Modifier == Settings.SettingsHotkey.Modifier)
             {
-                if (WindowManager.Settings.IsVisible) WindowManager.Settings.HideWindow();
-                else WindowManager.Settings.ShowWindow();
+                if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
+                else WindowManager.SettingsWindow.ShowWindow();
             }
-            if (e.Key == SettingsManager.InfoWindowHotkey.Key && e.Modifier == SettingsManager.InfoWindowHotkey.Modifier)
+            if (e.Key == Settings.InfoWindowHotkey.Key && e.Modifier == Settings.InfoWindowHotkey.Modifier)
             {
                 if (WindowManager.InfoWindow.IsVisible) WindowManager.InfoWindow.HideWindow();
                 else InfoWindowViewModel.Instance.ShowWindow();
             }
-            if (e.Key == SettingsManager.ShowAllHotkey.Key && e.Modifier == SettingsManager.ShowAllHotkey.Modifier)
+            if (e.Key == Settings.ShowAllHotkey.Key && e.Modifier == Settings.ShowAllHotkey.Modifier)
             {
-                WindowManager.TempShowAll();
+
             }
-            if (e.Key == SettingsManager.LootSettingsHotkey.Key && e.Modifier == SettingsManager.LootSettingsHotkey.Modifier)
+            if (e.Key == Settings.LootSettingsHotkey.Key && e.Modifier == Settings.LootSettingsHotkey.Modifier)
             {
                 if (!GroupWindowViewModel.Instance.AmILeader) return;
                 if (!Proxy.IsConnected) return;
@@ -76,11 +69,13 @@ namespace TCC
         }
 
 
+/*
         public void Update()
         {
             ClearHotkeys();
             Register();
         }
+*/
 
         public void RegisterKeyboardHook()
         {
@@ -117,11 +112,11 @@ namespace TCC
 
         private void Register()
         {
-            RegisterHotKey(SettingsManager.LfgHotkey.Modifier, SettingsManager.LfgHotkey.Key);
-            RegisterHotKey(SettingsManager.InfoWindowHotkey.Modifier, SettingsManager.InfoWindowHotkey.Key);
-            RegisterHotKey(SettingsManager.SettingsHotkey.Modifier, SettingsManager.SettingsHotkey.Key);
-            RegisterHotKey(SettingsManager.LootSettingsHotkey.Modifier, SettingsManager.LootSettingsHotkey.Key);
-            //RegisterHotKey(SettingsManager.ShowAllHotkey.Modifier, SettingsManager.ShowAllHotkey.Key);
+            RegisterHotKey(Settings.LfgHotkey.Modifier, Settings.LfgHotkey.Key);
+            RegisterHotKey(Settings.InfoWindowHotkey.Modifier, Settings.InfoWindowHotkey.Key);
+            RegisterHotKey(Settings.SettingsHotkey.Modifier, Settings.SettingsHotkey.Key);
+            RegisterHotKey(Settings.LootSettingsHotkey.Modifier, Settings.LootSettingsHotkey.Key);
+            //RegisterHotKey(Settings.ShowAllHotkey.Modifier, Settings.ShowAllHotkey.Key);
 
             _isRegistered = true;
         }
@@ -139,7 +134,7 @@ namespace TCC
         /// </summary>
         /// <param name="modifier">The modifiers that are associated with the hot key.</param>
         /// <param name="key">The key itself that is associated with the hot key.</param>
-        public void RegisterHotKey(HotkeysData.ModifierKeys modifier, Keys key)
+        private void RegisterHotKey(ModifierKeys modifier, Keys key)
         {
             if (key == Keys.None)
             {
@@ -194,7 +189,7 @@ namespace TCC
                 {
                     // get the keys.
                     var key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
-                    var modifier = (HotkeysData.ModifierKeys)((int)m.LParam & 0xFFFF);
+                    var modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
 
                     // invoke the event to notify the parent.
                     KeyPressed?.Invoke(this, new KeyPressedEventArgs(modifier, key));
@@ -217,7 +212,7 @@ namespace TCC
 
         private void ClearHotkeys()
         {
-            for (var i = _currentId; i > 0; i--) { var v = UnregisterHotKey(_window.Handle, i); }
+            for (var i = _currentId; i > 0; i--) { UnregisterHotKey(_window.Handle, i); }
             _currentId = 0;
             _isRegistered = false;
         }
@@ -230,13 +225,13 @@ namespace TCC
     /// </summary>
     public class KeyPressedEventArgs : EventArgs
     {
-        internal KeyPressedEventArgs(HotkeysData.ModifierKeys modifier, Keys key)
+        internal KeyPressedEventArgs(ModifierKeys modifier, Keys key)
         {
             Modifier = modifier;
             Key = key;
         }
 
-        public HotkeysData.ModifierKeys Modifier { get; }
+        public ModifierKeys Modifier { get; }
 
         public Keys Key { get; }
     }

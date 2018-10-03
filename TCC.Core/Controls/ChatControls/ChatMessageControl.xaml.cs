@@ -12,14 +12,29 @@ namespace TCC.Controls.ChatControls
     public partial class ChatMessageControl
     {
         private readonly DoubleAnimation _anim;
-
+        private ChatMessage _dc;
         public ChatMessageControl()
         {
             InitializeComponent();
             _anim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(250)){EasingFunction = new QuadraticEase()};
             _anim.Completed += AnimCompleted;
             Timeline.SetDesiredFrameRate(_anim, 30);
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(_dc.RawMessage + " LOADED");
+            _dc.IsVisible = true;
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(_dc.RawMessage + " UNLOADED");
+            _dc.IsVisible = false;
+        }
+
         private void AnimCompleted(object sender, EventArgs e)
         {
             SetAnimated();
@@ -27,23 +42,13 @@ namespace TCC.Controls.ChatControls
 
         private void SetAnimated()
         {
-            if (!(DataContext is ChatMessage))
-            {
-                //Debug.WriteLine("DataContext is not a ChatMessage");
-                return;
-            }
-            var dc = ((ChatMessage)DataContext);
-            dc.Animate = false;
-            //Debug.WriteLine($"{dc.RawMessage} -- set animated");
+            _dc = ((ChatMessage)DataContext);
+            _dc.Animate = false;
 
         }
         private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
 
-            //if (((ChatMessage)DataContext).IsContracted)
-            //{
-            //    Popup.IsOpen = true;
-            //}
         }
 
         private void Popup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -51,13 +56,13 @@ namespace TCC.Controls.ChatControls
             //Popup.IsOpen = false;
         }
 
-        private void UserControl_Loaded(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             if(!(DataContext is ChatMessage)) return;
-            var dc = ((ChatMessage) DataContext);
+            _dc = ((ChatMessage) DataContext);
             var tg = (TransformGroup) LayoutTransform;
             var sc = tg.Children[0];
-            if (!dc.Animate)
+            if (!_dc.Animate)
             {
                 var sc2 = new ScaleTransform(1,1);
                 tg.Children[0] = sc2;
@@ -65,6 +70,5 @@ namespace TCC.Controls.ChatControls
             }
             sc.BeginAnimation(ScaleTransform.ScaleYProperty, _anim);
         }
-
     }
 }

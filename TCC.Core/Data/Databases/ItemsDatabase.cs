@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -32,18 +31,24 @@ namespace TCC.Data.Databases
                 var item = new Item(id, name, grad, expId, cd, icon);
                 Items.Add(id, item);
             }
+
+            // Manual fix for bugged EU HP pot from HH
+            var euBuggedReju = new Item(149644, "Harrowhold Rejuvenation Potion", 1, 0, 30, "icon_items.potion1_tex");
+            if (!Items.ContainsKey(euBuggedReju.Id)) Items.Add(euBuggedReju.Id, euBuggedReju);
+
             var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/equip_exp/equip_exp-{lang}.xml");
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
             {
-                var id = Convert.ToUInt32(xElement.Attribute("id").Value);
+                var id = Convert.ToUInt32(xElement.Attribute("id")?.Value);
                 var d = new Dictionary<int, int>();
                 foreach (var element in xElement.Descendants().Where(x => x.Name == "Exp"))
                 {
-                    var step = Convert.ToInt32(element.Attribute("enchantStep").Value);
-                    var max = Convert.ToInt32(element.Attribute("maxExp").Value);
+                    var step = Convert.ToInt32(element.Attribute("enchantStep")?.Value);
+                    var max = Convert.ToInt32(element.Attribute("maxExp")?.Value);
                     d.Add(step, max);
                 }
+
                 ExpData.Add(id, d);
             }
         }
@@ -66,8 +71,7 @@ namespace TCC.Data.Databases
             {
                 var item = Items[itemId];
                 result = true;
-                sk = new Skill(itemId, Class.Common, item.Name, "");
-                sk.IconName = item.IconName;
+                sk = new Skill(itemId, Class.Common, item.Name, "") {IconName = item.IconName};
             }
             return result;
 
@@ -77,7 +81,7 @@ namespace TCC.Data.Databases
         {
             get
             {
-                var ret = new List<Item>();
+                //var ret = new List<Item>();
                 //foreach (var item in Items.Values)
                 //{
                 //    var iconName = "unknown";

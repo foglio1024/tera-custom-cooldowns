@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Timers;
 using System.Windows.Threading;
 
 namespace TCC
@@ -19,8 +18,8 @@ namespace TCC
             }
         }
 
-        private bool _forceVisible = false;
-        private bool _forceUndim = false;
+        private bool _forceVisible = App.Debug;
+        private bool _forceUndim = App.Debug;
         public event Action VisibilityChanged;
         public event Action DimChanged;
         public event Action ClickThruChanged;

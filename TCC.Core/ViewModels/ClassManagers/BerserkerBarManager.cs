@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -44,11 +44,12 @@ namespace TCC.ViewModels
             }
         }
 
-        public BerserkerBarManager() : base()
+        public BerserkerBarManager()
         {
             SinisterTracker = new StatTracker();
             DexterTracker = new StatTracker();
             RampageTracker = new StatTracker();
+            AbnormalityTracker = new BerserkerAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()
@@ -56,29 +57,29 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
             SessionManager.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
             SessionManager.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
-            FieryRage = new DurationCooldownIndicator(_dispatcher)
+            FieryRage = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(fr,  true),
                 Buff = new FixedSkillCooldown(fr,  true)
             };
-            Bloodlust = new DurationCooldownIndicator(_dispatcher)
+            Bloodlust = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(bl,  true),
                 Buff = new FixedSkillCooldown(bl,  true)
             };
-            Unleash = new DurationCooldownIndicator(_dispatcher)
+            Unleash = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(ul, false),
                 Buff = new FixedSkillCooldown(ul, false)
             };
 
             SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
-            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var si);
+            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
             SessionManager.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
             SessionManager.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
 
             Dexter = new FixedSkillCooldown(dx, false);
-            Sinister = new FixedSkillCooldown(si, false);
+            Sinister = new FixedSkillCooldown(sx, false);
             Rampage = new FixedSkillCooldown(rp, false);
             BeastFury = new FixedSkillCooldown(bf, false);
         }
@@ -105,7 +106,6 @@ namespace TCC.ViewModels
                 BeastFury.Start(sk.Cooldown);
                 return true;
             }
-
             return false;
         }
 

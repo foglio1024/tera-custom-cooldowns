@@ -128,7 +128,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Height="Auto" Margin="6,0,6,0" HorizontalAlignment="Left" Name="AbnormalitiesGrid">
-            <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossAbnormality}" ItemsSource="{Binding Buffs}">
+            <ItemsControl Name="Abnormalities" ItemTemplateSelector="{StaticResource BossAbnormalityTemplateSelector}" ItemsSource="{Binding Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=MainBorder, Path=ActualWidth}"/>

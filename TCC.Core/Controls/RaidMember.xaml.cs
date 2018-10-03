@@ -11,21 +11,23 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per RaidMember.xaml
     /// </summary>
-    public partial class RaidMember : UserControl
+    public partial class RaidMember //TODO: make base class for this when???
     {
         public RaidMember()
         {
             InitializeComponent();
+            Unloaded += (_, __) => { SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged; };
         }
 
-        private User dc;
+        private User _dc;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dc = (User)DataContext;
+            _dc = (User)DataContext;
             UpdateSettings();
 
             AnimateIn();
             GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
         private void UpdateSettings()
         {
@@ -35,13 +37,22 @@ namespace TCC.Controls
             SetDebuffs();
             SetLaurels();
             SetAwakenIcon();
+
+        }
+        private void OnAbnormalityShapeChanged()
+        {
+            Buffs.ItemTemplateSelector = null;
+            Buffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = null;
+            Debuffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+
         }
 
         private void SetAwakenIcon()
         {
             Dispatcher.Invoke(() => {
                 if (!(DataContext is User user)) return;
-                AwakenIcon.Visibility = SettingsManager.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
+                AwakenIcon.Visibility = Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
             });
         }
 
@@ -51,11 +62,12 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LaurelImage.Visibility = SettingsManager.ShowMembersLaurels ? Visibility.Visible : Visibility.Hidden;
+                    LaurelImage.Visibility = Settings.ShowMembersLaurels ? Visibility.Visible : Visibility.Hidden;
                 });
             }
-            catch (Exception)
+            catch
             {
+                // ignored
             }
         }
         private void SetBuffs()
@@ -66,17 +78,17 @@ namespace TCC.Controls
                 {
                     if (!(DataContext is User user)) return;
 
-                    Buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
-                    BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
+                    Buffs.ItemsSource = Settings.IgnoreGroupBuffs ? null : user.Buffs;
+                    BuffGrid.Visibility = Settings.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
 
                 });
 
             }
-            catch (Exception)
+            catch
             {
-
+                // ignored
             }
         }
         private void SetDebuffs()
@@ -85,17 +97,18 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    if(!(dc is User)) return;
-                    Debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : dc.Debuffs;
-                    DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
+                    // ReSharper disable once IsExpressionAlwaysTrue
+                    if(!(_dc is User)) return;
+                    Debuffs.ItemsSource = Settings.IgnoreGroupDebuffs ? null : _dc.Debuffs;
+                    DebuffGrid.Visibility = Settings.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
 
             }
-            catch (Exception)
+            catch
             {
-
+                // ignored
             }
         }
 
@@ -119,14 +132,14 @@ namespace TCC.Controls
         {
             Dispatcher.Invoke(() =>
             {
-                MpBar.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpBar.Visibility = !Settings.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void SetHP()
         {
             Dispatcher.Invoke(() =>
             {
-                HpBar.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpBar.Visibility = !Settings.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)

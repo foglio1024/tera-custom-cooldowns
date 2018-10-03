@@ -8,13 +8,14 @@ namespace TCC.Parsing.Messages
         private uint serverId, playerId;
         private string name;
 
-        public uint ServerId { get { return serverId; } }
-        public uint PlayerId { get { return playerId; } }
-        public string Name { get { return name; } }
+        public uint ServerId => serverId;
+        public uint PlayerId => playerId;
+        public string Name => name;
 
         public S_BAN_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {
-            var nameOffset = reader.ReadUInt16();
+            //var nameOffset = reader.ReadUInt16();
+            reader.Skip(2);
             serverId = reader.ReadUInt32();
             playerId = reader.ReadUInt32();
             reader.Skip(4); //0xFFFFFFFF

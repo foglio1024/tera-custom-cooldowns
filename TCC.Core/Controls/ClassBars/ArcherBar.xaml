@@ -1,15 +1,11 @@
 ﻿<UserControl x:Class="TCC.Controls.ClassBars.ArcherBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ArcherBarManager}">
-    <UserControl.Resources>
-        <classBars:ArcherStanceToColorConverter x:Key="ArcherStanceToColor" />
-    </UserControl.Resources>
     <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -39,11 +35,11 @@
                             <local:Arc.Style>
                                 <Style TargetType="FrameworkElement">
                                     <Setter Property="Opacity" Value="1"/>
-                                    <Style.Triggers>
-                                        <!--<DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <!--<Style.Triggers>
+                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                             <Setter Property="Opacity" Value="1"/>
-                                        </DataTrigger>-->
-                                    </Style.Triggers>
+                                        </DataTrigger>
+                                    </Style.Triggers>-->
                                 </Style>
                             </local:Arc.Style>
                         </local:Arc>
@@ -60,28 +56,28 @@
                             <local:Arc.Style>
                                 <Style TargetType="FrameworkElement">
                                     <Setter Property="Opacity" Value=".8"/>
-                                    <Style.Triggers>
-                                        <!--<DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <!--<Style.Triggers>
+                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                             <Setter Property="Opacity" Value="1"/>
-                                        </DataTrigger>-->
-                                    </Style.Triggers>
+                                        </DataTrigger>
+                                    </Style.Triggers>-->
                                 </Style>
                             </local:Arc.Style>
                         </local:Arc>
                     </Grid>
-                    <Grid.Style>
+                    <!--<Grid.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
-                                <!--<DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
                                             <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
-                                </DataTrigger>-->
+                                </DataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </Grid.Style>
+                    </Grid.Style>-->
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>

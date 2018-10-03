@@ -51,7 +51,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public Tab CurrentTab { get; set; }
-        public double ChatWindowOpacity => SettingsManager.ChatWindowOpacity;
+        public double ChatWindowOpacity => Settings.ChatWindowOpacity;
         public Func<HeaderedItemViewModel> AddNewTabCommand
         {
             get
@@ -59,11 +59,14 @@ namespace TCC.ViewModels
                 return
                     () =>
                     {
-                        var t = new HeaderedItemViewModel()
+                        var t = new HeaderedItemViewModel();
+                        var content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { },
+                            new string[] { });
+                        content.PropertyChanged += (_, __) =>
                         {
-                            Content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { })
+                            if (__.PropertyName == nameof(Tab.TabName)) t.Header = content.TabName;
                         };
-                        t.Header = ((Tab)t.Content).TabName;
+                        t.Content = content;
                         return t;
                     };
             }
@@ -107,7 +110,7 @@ namespace TCC.ViewModels
             //};
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             TabVMs.CollectionChanged += TabVMs_CollectionChanged;
-            //LoadTabs(SettingsManager.ParseTabsSettings());
+            //LoadTabs(Settings.ParseTabsSettings());
 
         }
         private void TabVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

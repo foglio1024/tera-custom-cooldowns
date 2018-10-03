@@ -1,11 +1,10 @@
 ﻿<UserControl x:Class="TCC.Controls.TimeMarkerControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
-             Loaded="TimeMarkerControl_OnLoaded">
+             Loaded="TimeMarkerControl_OnLoaded" d:DataContext="{d:DesignData TimeMarker}">
     <Grid  ClipToBounds="False"  ToolTip="{Binding Name}" Margin="0,-8,0,0" VerticalAlignment="Stretch">
         <Grid.Effect>
             <DropShadowEffect ShadowDepth="0" Opacity=".2"></DropShadowEffect>
@@ -28,7 +27,7 @@
         <Ellipse Width="8" Height="8" Fill="#ccc" Margin="-5 4 0 0" ></Ellipse>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <FrameworkElement Width="960" Grid.Row="0">
+            <FrameworkElement Width="960">
                 <FrameworkElement.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
@@ -37,7 +36,7 @@
                         HorizontalAlignment="Right" VerticalAlignment="Top" 
                         Padding="4,1" CornerRadius="3,3,3,3" MinWidth="10"
                     BorderThickness="1" BorderBrush="#aaa"
-                        Margin="-1" Name="TextBorder" Grid.Row="0">
+                        Margin="-1" Name="TextBorder">
                 <TextBlock Foreground="#ccc" FontSize="15" FontWeight="Normal" Width="Auto" Text="{Binding TimeString}" Name="TimeTextBlock"/>
                 <Border.LayoutTransform>
                     <TranslateTransform X="0"></TranslateTransform>

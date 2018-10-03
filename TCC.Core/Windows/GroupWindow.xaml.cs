@@ -15,8 +15,8 @@ namespace TCC.Windows
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContent = content;
-            Init(SettingsManager.GroupWindowSettings, ignoreSize: false);
+            MainContent = WindowContent;
+            Init(Settings.GroupWindowSettings, ignoreSize: false);
             DataContext = GroupWindowViewModel.Instance;
         }
 
@@ -46,8 +46,8 @@ namespace TCC.Windows
 
         private void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)){BeginTime = TimeSpan.FromMilliseconds(500)});
-            GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)){BeginTime = TimeSpan.FromMilliseconds(500)});
+            GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
+            GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
         }
 
         private void LeaveParty(object sender, RoutedEventArgs e)

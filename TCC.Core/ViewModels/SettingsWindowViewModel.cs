@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
@@ -10,59 +12,62 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
-        private readonly bool _characterWindowExtendedMode;
         public static event Action ChatShowChannelChanged;
         public static event Action ChatShowTimestampChanged;
+        public static event Action AbnormalityShapeChanged;
+        public static event Action FontSizeChanged;
 
-        public WindowSettings CooldownWindowSettings => SettingsManager.CooldownWindowSettings;
-        public WindowSettings ClassWindowSettings => SettingsManager.ClassWindowSettings;
-        public WindowSettings GroupWindowSettings => SettingsManager.GroupWindowSettings;
-        public WindowSettings BuffWindowSettings => SettingsManager.BuffWindowSettings;
-        public WindowSettings CharacterWindowSettings => SettingsManager.CharacterWindowSettings;
-        public WindowSettings BossWindowSettings => SettingsManager.BossWindowSettings;
-        public WindowSettings FlightWindowSettings => SettingsManager.FlightGaugeWindowSettings;
-        public WindowSettings FloatingButtonSettings => SettingsManager.FloatingButtonSettings;
+        public WindowSettings CooldownWindowSettings => Settings.CooldownWindowSettings;
+        public WindowSettings ClassWindowSettings => Settings.ClassWindowSettings;
+        public WindowSettings GroupWindowSettings => Settings.GroupWindowSettings;
+        public WindowSettings BuffWindowSettings => Settings.BuffWindowSettings;
+        public WindowSettings CharacterWindowSettings => Settings.CharacterWindowSettings;
+        public WindowSettings BossWindowSettings => Settings.BossWindowSettings;
+        public WindowSettings FlightWindowSettings => Settings.FlightGaugeWindowSettings;
+        public WindowSettings FloatingButtonSettings => Settings.FloatingButtonSettings;
+        public WindowSettings CuWindowSettings => Settings.CivilUnrestWindowSettings;
+
 
         public bool HideMe
         {
-            get => SettingsManager.IgnoreMeInGroupWindow;
+            get => Settings.IgnoreMeInGroupWindow;
             set
             {
-                if (SettingsManager.IgnoreMeInGroupWindow == value) return;
-                SettingsManager.IgnoreMeInGroupWindow = value;
+                if (Settings.IgnoreMeInGroupWindow == value) return;
+                Settings.IgnoreMeInGroupWindow = value;
                 if (value) GroupWindowViewModel.Instance.RemoveMe();
                 NPC();
             }
         }
         public bool HideBuffs
         {
-            get => SettingsManager.IgnoreGroupBuffs;
+            get => Settings.IgnoreGroupBuffs;
             set
             {
-                if (SettingsManager.IgnoreGroupBuffs == value) return;
-                SettingsManager.IgnoreGroupBuffs = value;
+                if (Settings.IgnoreGroupBuffs == value) return;
+                Settings.IgnoreGroupBuffs = value;
                 NPC(nameof(HideBuffs));
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
             }
         }
         public bool HideDebuffs
         {
-            get => SettingsManager.IgnoreGroupDebuffs;
+            get => Settings.IgnoreGroupDebuffs;
             set
             {
-                if (SettingsManager.IgnoreGroupDebuffs == value) return;
-                SettingsManager.IgnoreGroupDebuffs = value;
+                if (Settings.IgnoreGroupDebuffs == value) return;
+                Settings.IgnoreGroupDebuffs = value;
                 NPC(nameof(HideDebuffs));
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
             }
         }
         public bool DisableAllPartyAbnormals
         {
-            get => SettingsManager.DisablePartyAbnormals;
+            get => Settings.DisablePartyAbnormals;
             set
             {
-                if (SettingsManager.DisablePartyAbnormals == value) return;
-                SettingsManager.DisablePartyAbnormals = value;
+                if (Settings.DisablePartyAbnormals == value) return;
+                Settings.DisablePartyAbnormals = value;
                 NPC(nameof(DisableAllPartyAbnormals));
                 MessageFactory.Update();
                 if (value) GroupWindowViewModel.Instance.ClearAllAbnormalities();
@@ -70,11 +75,11 @@ namespace TCC.ViewModels
         }
         public bool AccurateHp
         {
-            get => SettingsManager.AccurateHp;
+            get => Settings.AccurateHp;
             set
             {
-                if (SettingsManager.AccurateHp == value) return;
-                SettingsManager.AccurateHp = value;
+                if (Settings.AccurateHp == value) return;
+                Settings.AccurateHp = value;
                 NPC(nameof(AccurateHp));
                 MessageFactory.Update();
             }
@@ -82,90 +87,101 @@ namespace TCC.ViewModels
 
         public FlowDirection BuffsDirection
         {
-            get => SettingsManager.BuffsDirection;
+            get => Settings.BuffsDirection;
             set
             {
-                if (SettingsManager.BuffsDirection == value) return;
-                SettingsManager.BuffsDirection = value;
-                BuffBarWindowViewModel.Instance.NotifyDirectionChanged();
+                if (Settings.BuffsDirection == value) return;
+                Settings.BuffsDirection = value;
+                BuffBarWindowViewModel.Instance.ExNPC(nameof(BuffBarWindowViewModel.Direction));
                 NPC(nameof(BuffsDirection));
+            }
+        }
+        public AbnormalityShape AbnormalityShape
+        {
+            get => Settings.AbnormalityShape;
+            set
+            {
+                if (Settings.AbnormalityShape == value) return;
+                Settings.AbnormalityShape = value;
+                AbnormalityShapeChanged?.Invoke();
+                NPC(nameof(AbnormalityShape));
             }
         }
         public CooldownBarMode CooldownBarMode
         {
-            get => SettingsManager.CooldownBarMode;
+            get => Settings.CooldownBarMode;
             set
             {
-                if (SettingsManager.CooldownBarMode == value) return;
-                SettingsManager.CooldownBarMode = value;
+                if (Settings.CooldownBarMode == value) return;
+                Settings.CooldownBarMode = value;
                 CooldownWindowViewModel.Instance.NotifyModeChanged();
                 NPC(nameof(CooldownBarMode));
             }
         }
         public EnrageLabelMode EnrageLabelMode
         {
-            get => SettingsManager.EnrageLabelMode;
+            get => Settings.EnrageLabelMode;
             set
             {
-                if (SettingsManager.EnrageLabelMode == value) return;
-                SettingsManager.EnrageLabelMode = value;
+                if (Settings.EnrageLabelMode == value) return;
+                Settings.EnrageLabelMode = value;
                 NPC(nameof(EnrageLabelMode));
             }
         }
 
         public bool ChatFadeOut
         {
-            get => SettingsManager.ChatFadeOut;
+            get => Settings.ChatFadeOut;
             set
             {
-                if (SettingsManager.ChatFadeOut == value) return;
-                SettingsManager.ChatFadeOut = value;
+                if (Settings.ChatFadeOut == value) return;
+                Settings.ChatFadeOut = value;
                 if (value) ChatWindowManager.Instance.RefreshTimer();
                 NPC(nameof(ChatFadeOut));
             }
         }
         public string RegionOverride
         {
-            get => SettingsManager.RegionOverride;
+            get => Settings.RegionOverride;
             set
             {
-                if (SettingsManager.RegionOverride == value) return;
-                SettingsManager.RegionOverride = value;
+                if (Settings.RegionOverride == value) return;
+                Settings.RegionOverride = value;
                 NPC(nameof(RegionOverride));
             }
         }
         public int MaxMessages
         {
-            get => SettingsManager.MaxMessages;
+            get => Settings.MaxMessages;
             set
             {
-                if (SettingsManager.MaxMessages == value) return;
+                if (Settings.MaxMessages == value) return;
                 var val = value;
                 if (val < 20)
                 {
                     val = 20;
                 }
-                SettingsManager.MaxMessages = val;
+                Settings.MaxMessages = val;
                 NPC();
             }
         }
         public int SpamThreshold
         {
-            get => SettingsManager.SpamThreshold;
+            get => Settings.SpamThreshold;
             set
             {
-                if (SettingsManager.SpamThreshold == value) return;
-                SettingsManager.SpamThreshold = value;
+                if (Settings.SpamThreshold == value) return;
+                Settings.SpamThreshold = value;
                 NPC();
             }
         }
         public bool ShowTimestamp
         {
-            get => SettingsManager.ShowTimestamp;
+            get => Settings.ShowTimestamp;
             set
             {
-                if (SettingsManager.ShowTimestamp == value) return;
-                SettingsManager.ShowTimestamp = value;
+                if (Settings.ShowTimestamp == value) return;
+                Settings.ShowTimestamp = value;
                 NPC(nameof(ShowTimestamp));
                 ChatShowTimestampChanged?.Invoke();
             }
@@ -173,11 +189,11 @@ namespace TCC.ViewModels
         }
         public bool ShowChannel
         {
-            get => SettingsManager.ShowChannel;
+            get => Settings.ShowChannel;
             set
             {
-                if (SettingsManager.ShowChannel == value) return;
-                SettingsManager.ShowChannel = value;
+                if (Settings.ShowChannel == value) return;
+                Settings.ShowChannel = value;
                 ChatShowChannelChanged?.Invoke();
                 NPC(nameof(ShowChannel));
             }
@@ -185,21 +201,21 @@ namespace TCC.ViewModels
         }
         public bool ShowOnlyBosses
         {
-            get => SettingsManager.ShowOnlyBosses;
+            get => Settings.ShowOnlyBosses;
             set
             {
-                if (SettingsManager.ShowOnlyBosses == value) return;
-                SettingsManager.ShowOnlyBosses = value;
+                if (Settings.ShowOnlyBosses == value) return;
+                Settings.ShowOnlyBosses = value;
                 NPC(nameof(ShowOnlyBosses));
             }
         }
         public bool DisableMP
         {
-            get => SettingsManager.DisablePartyMP;
+            get => Settings.DisablePartyMP;
             set
             {
-                if (SettingsManager.DisablePartyMP == value) return;
-                SettingsManager.DisablePartyMP = value;
+                if (Settings.DisablePartyMP == value) return;
+                Settings.DisablePartyMP = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 MessageFactory.Update();
                 NPC(nameof(DisableMP));
@@ -207,11 +223,11 @@ namespace TCC.ViewModels
         }
         public bool DisableHP
         {
-            get => SettingsManager.DisablePartyHP;
+            get => Settings.DisablePartyHP;
             set
             {
-                if (SettingsManager.DisablePartyHP == value) return;
-                SettingsManager.DisablePartyHP = value;
+                if (Settings.DisablePartyHP == value) return;
+                Settings.DisablePartyHP = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 MessageFactory.Update();
                 NPC(nameof(DisableHP));
@@ -219,11 +235,11 @@ namespace TCC.ViewModels
         }
         public bool ShowAwakenIcon
         {
-            get => SettingsManager.ShowAwakenIcon;
+            get => Settings.ShowAwakenIcon;
             set
             {
-                if (SettingsManager.ShowAwakenIcon == value) return;
-                SettingsManager.ShowAwakenIcon = value;
+                if (Settings.ShowAwakenIcon == value) return;
+                Settings.ShowAwakenIcon = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 NPC();
             }
@@ -231,107 +247,117 @@ namespace TCC.ViewModels
 
         public bool ShowItemsCooldown
         {
-            get => SettingsManager.ShowItemsCooldown;
+            get => Settings.ShowItemsCooldown;
             set
             {
-                if (SettingsManager.ShowItemsCooldown == value) return;
-                SettingsManager.ShowItemsCooldown = value;
+                if (Settings.ShowItemsCooldown == value) return;
+                Settings.ShowItemsCooldown = value;
                 CooldownWindowViewModel.Instance.NotifyItemsDisplay();
                 NPC(nameof(ShowItemsCooldown));
             }
         }
         public bool UseLfg
         {
-            get => SettingsManager.LfgEnabled;
+            get => Settings.LfgEnabled;
             set
             {
-                if (SettingsManager.LfgEnabled == value) return;
-                SettingsManager.LfgEnabled = value;
+                if (Settings.LfgEnabled == value) return;
+                Settings.LfgEnabled = value;
                 NPC();
             }
         }
         public bool ShowFlightGauge
         {
-            get => SettingsManager.ShowFlightEnergy;
+            get => Settings.ShowFlightEnergy;
             set
             {
-                if (SettingsManager.ShowFlightEnergy == value) return;
-                SettingsManager.ShowFlightEnergy = value;
+                if (Settings.ShowFlightEnergy == value) return;
+                Settings.ShowFlightEnergy = value;
                 NPC();
             }
         }
         public bool UseHotkeys
         {
-            get => SettingsManager.UseHotkeys;
+            get => Settings.UseHotkeys;
             set
             {
-                if (SettingsManager.UseHotkeys == value) return;
-                SettingsManager.UseHotkeys = value;
+                if (Settings.UseHotkeys == value) return;
+                Settings.UseHotkeys = value;
                 if (value) KeyboardHook.Instance.RegisterKeyboardHook();
                 else KeyboardHook.Instance.UnRegisterKeyboardHook();
                 NPC(nameof(UseHotkeys));
             }
         }
-        public bool ShowGroupWindowDetails
+        public bool HideHandles
         {
-            get => SettingsManager.ShowGroupWindowDetails;
+            get => Settings.HideHandles;
             set
             {
-                if (SettingsManager.ShowGroupWindowDetails == value) return;
-                SettingsManager.ShowGroupWindowDetails = value;
+                if (Settings.HideHandles == value) return;
+                Settings.HideHandles = value;
+                NPC(nameof(HideHandles));
+            }
+        }
+        public bool ShowGroupWindowDetails
+        {
+            get => Settings.ShowGroupWindowDetails;
+            set
+            {
+                if (Settings.ShowGroupWindowDetails == value) return;
+                Settings.ShowGroupWindowDetails = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 NPC(nameof(ShowGroupWindowDetails));
             }
         }
         public bool ShowMembersLaurels
         {
-            get => SettingsManager.ShowMembersLaurels;
+            get => Settings.ShowMembersLaurels;
             set
             {
-                if (SettingsManager.ShowMembersLaurels == value) return;
-                SettingsManager.ShowMembersLaurels = value;
+                if (Settings.ShowMembersLaurels == value) return;
+                Settings.ShowMembersLaurels = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 NPC(nameof(ShowMembersLaurels));
             }
         }
         public bool AnimateChatMessages
         {
-            get => SettingsManager.AnimateChatMessages;
+            get => Settings.AnimateChatMessages;
             set
             {
-                if (SettingsManager.AnimateChatMessages == value) return;
-                SettingsManager.AnimateChatMessages = value;
+                if (Settings.AnimateChatMessages == value) return;
+                Settings.AnimateChatMessages = value;
                 NPC(nameof(AnimateChatMessages));
             }
         }
         public bool HhOnlyAggro
         {
-            get => SettingsManager.ShowOnlyAggroStacks;
+            get => Settings.ShowOnlyAggroStacks;
             set
             {
-                if (SettingsManager.ShowOnlyAggroStacks == value) return;
-                SettingsManager.ShowOnlyAggroStacks = value;
+                if (Settings.ShowOnlyAggroStacks == value) return;
+                Settings.ShowOnlyAggroStacks = value;
                 NPC(nameof(HhOnlyAggro));
             }
         }
         public double FlightGaugeRotation
         {
-            get => SettingsManager.FlightGaugeRotation;
+            get => Settings.FlightGaugeRotation;
             set
             {
-                if (SettingsManager.FlightGaugeRotation == value) return;
-                SettingsManager.FlightGaugeRotation = value;
+                if (Settings.FlightGaugeRotation == value) return;
+                Settings.FlightGaugeRotation = value;
                 NPC(nameof(FlightGaugeRotation));
                 WindowManager.FlightDurationWindow.ExNPC(nameof(FlightGaugeRotation));
             }
         }
         //public bool LfgOn
         //{
-        //    get => SettingsManager.LfgOn;
+        //    get => Settings.LfgOn;
         //    set
         //    {
-        //        if (SettingsManager.LfgOn == value) return;
-        //        SettingsManager.LfgOn = value;
+        //        if (Settings.LfgOn == value) return;
+        //        Settings.LfgOn = value;
         //        ChatWindowManager.Instance.LfgOn = value;
         //        MessageFactory.Update();
         //        NotifyPropertyChanged(nameof(LfgOn));
@@ -340,61 +366,61 @@ namespace TCC.ViewModels
         //}
         public string Webhook
         {
-            get => SettingsManager.Webhook;
+            get => Settings.Webhook;
             set
             {
-                if (value == SettingsManager.Webhook) return;
-                SettingsManager.Webhook = value;
+                if (value == Settings.Webhook) return;
+                Settings.Webhook = value;
                 NPC(nameof(Webhook));
             }
         }
         public string WebhookMessage
         {
-            get => SettingsManager.WebhookMessage;
+            get => Settings.WebhookMessage;
             set
             {
-                if (value == SettingsManager.WebhookMessage) return;
-                SettingsManager.WebhookMessage = value;
+                if (value == Settings.WebhookMessage) return;
+                Settings.WebhookMessage = value;
                 NPC(nameof(WebhookMessage));
             }
         }
         public string TwitchUsername
         {
-            get => SettingsManager.TwitchName;
+            get => Settings.TwitchName;
             set
             {
-                if (value == SettingsManager.TwitchName) return;
-                SettingsManager.TwitchName = value;
+                if (value == Settings.TwitchName) return;
+                Settings.TwitchName = value;
                 NPC(nameof(TwitchUsername));
             }
         }
         public string TwitchToken
         {
-            get => SettingsManager.TwitchToken;
+            get => Settings.TwitchToken;
             set
             {
-                if (value == SettingsManager.TwitchToken) return;
-                SettingsManager.TwitchToken = value;
+                if (value == Settings.TwitchToken) return;
+                Settings.TwitchToken = value;
                 NPC(nameof(TwitchToken));
             }
         }
         public string TwitchChannelName
         {
-            get => SettingsManager.TwitchChannelName;
+            get => Settings.TwitchChannelName;
             set
             {
-                if (value == SettingsManager.TwitchChannelName) return;
-                SettingsManager.TwitchChannelName = value;
+                if (value == Settings.TwitchChannelName) return;
+                Settings.TwitchChannelName = value;
                 NPC(nameof(TwitchChannelName));
             }
         }
         public uint GroupSizeThreshold
         {
-            get => SettingsManager.GroupSizeThreshold;
+            get => Settings.GroupSizeThreshold;
             set
             {
-                if (SettingsManager.GroupSizeThreshold == value) return;
-                SettingsManager.GroupSizeThreshold = value;
+                if (Settings.GroupSizeThreshold == value) return;
+                Settings.GroupSizeThreshold = value;
                 GroupWindowViewModel.Instance.NotifyThresholdChanged();
                 NPC(nameof(GroupSizeThreshold));
             }
@@ -402,36 +428,37 @@ namespace TCC.ViewModels
 
         public double ChatWindowOpacity
         {
-            get => SettingsManager.ChatWindowOpacity;
+            get => Settings.ChatWindowOpacity;
             set
             {
-                if (SettingsManager.ChatWindowOpacity == value) return;
-                SettingsManager.ChatWindowOpacity = value;
+                if (Settings.ChatWindowOpacity == value) return;
+                Settings.ChatWindowOpacity = value;
                 ChatWindowManager.Instance.NotifyOpacityChange();
                 NPC(nameof(ChatWindowOpacity));
             }
         }
         public int FontSize
         {
-            get => SettingsManager.FontSize;
+            get => Settings.FontSize;
             set
             {
-                if (SettingsManager.FontSize == value) return;
+                if (Settings.FontSize == value) return;
                 var val = value;
                 if (val < 10) val = 10;
-                SettingsManager.FontSize = val;
+                Settings.FontSize = val;
+                FontSizeChanged?.Invoke();
                 NPC(nameof(FontSize));
             }
         }
         public SettingsWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            //if (SettingsManager.CooldownWindowSettings.Enabled) WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
-            //if (SettingsManager.CharacterWindowSettings.Enabled) WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
-            //if (SettingsManager.BossWindowSettings.Enabled) WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
-            //if (SettingsManager.BuffWindowSettings.Enabled) WindowManager.BuffWindow.PropertyChanged += BuffBar_PropertyChanged;
-            //if (SettingsManager.GroupWindowSettings.Enabled) WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
-            //if (SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            //if (Settings.CooldownWindowSettings.Enabled) WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
+            //if (Settings.CharacterWindowSettings.Enabled) WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
+            //if (Settings.BossWindowSettings.Enabled) WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
+            //if (Settings.BuffWindowSettings.Enabled) WindowManager.BuffWindow.PropertyChanged += BuffBar_PropertyChanged;
+            //if (Settings.GroupWindowSettings.Enabled) WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
+            //if (Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
         }
 
         //private void ClassWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -508,47 +535,48 @@ namespace TCC.ViewModels
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
         public List<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
+        public List<AbnormalityShape> AbnormalityShapes => Utils.ListFromEnum<AbnormalityShape>();
 
         public bool ChatWindowEnabled
         {
-            get => SettingsManager.ChatEnabled;
+            get => Settings.ChatEnabled;
             set
             {
-                if (SettingsManager.ChatEnabled == value) return;
-                SettingsManager.ChatEnabled = value;
+                if (Settings.ChatEnabled == value) return;
+                Settings.ChatEnabled = value;
                 NPC();
             }
         }
 
         public ClickThruMode ChatClickThruMode
         {
-            get => SettingsManager.ChatClickThruMode;
+            get => Settings.ChatClickThruMode;
             set
             {
-                if (SettingsManager.ChatClickThruMode == value) return;
-                SettingsManager.ChatClickThruMode = value;
+                if (Settings.ChatClickThruMode == value) return;
+                Settings.ChatClickThruMode = value;
                 NPC();
             }
         }
 
         public bool ShowTradeLfgs
         {
-            get => SettingsManager.ShowTradeLfg;
+            get => Settings.ShowTradeLfg;
             set
             {
-                if (SettingsManager.ShowTradeLfg == value) return;
-                SettingsManager.ShowTradeLfg = value;
+                if (Settings.ShowTradeLfg == value) return;
+                Settings.ShowTradeLfg = value;
                 NPC();
             }
         }
 
         public bool CharacterWindowCompactMode
         {
-            get { return SettingsManager.CharacterWindowCompactMode; }
+            get => Settings.CharacterWindowCompactMode;
             set
             {
-                if (SettingsManager.CharacterWindowCompactMode == value) return;
-                SettingsManager.CharacterWindowCompactMode = value;
+                if (Settings.CharacterWindowCompactMode == value) return;
+                Settings.CharacterWindowCompactMode = value;
                 NPC();
                 CharacterWindowViewModel.Instance.ExNPC(nameof(CharacterWindowViewModel.CompactMode));
                 WindowManager.CharacterWindow.Left = value ? WindowManager.CharacterWindow.Left + 175 :
@@ -559,11 +587,11 @@ namespace TCC.ViewModels
 
         public bool WarriorShowEdge
         {
-            get => SettingsManager.WarriorShowEdge;
+            get => Settings.WarriorShowEdge;
             set
             {
-                if (SettingsManager.WarriorShowEdge == value) return;
-                SettingsManager.WarriorShowEdge = value;
+                if (Settings.WarriorShowEdge == value) return;
+                Settings.WarriorShowEdge = value;
                 NPC();
                 if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowEdge));
             }
@@ -571,11 +599,11 @@ namespace TCC.ViewModels
 
         public bool WarriorShowTraverseCut
         {
-            get => SettingsManager.WarriorShowTraverseCut;
+            get => Settings.WarriorShowTraverseCut;
             set
             {
-                if (SettingsManager.WarriorShowTraverseCut == value) return;
-                SettingsManager.WarriorShowTraverseCut = value;
+                if (Settings.WarriorShowTraverseCut == value) return;
+                Settings.WarriorShowTraverseCut = value;
                 NPC();
                 if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowTraverseCut));
             }
@@ -583,11 +611,11 @@ namespace TCC.ViewModels
 
         public WarriorEdgeMode WarriorEdgeMode
         {
-            get => SettingsManager.WarriorEdgeMode;
+            get => Settings.WarriorEdgeMode;
             set
             {
-                if (SettingsManager.WarriorEdgeMode == value) return;
-                SettingsManager.WarriorEdgeMode = value;
+                if (Settings.WarriorEdgeMode == value) return;
+                Settings.WarriorEdgeMode = value;
                 NPC();
                 if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.WarriorEdgeMode));
             }
@@ -596,14 +624,38 @@ namespace TCC.ViewModels
 
         public bool FlipFlightGauge
         {
-            get => SettingsManager.FlipFlightGauge;
+            get => Settings.FlipFlightGauge;
             set
             {
-                if (SettingsManager.FlipFlightGauge == value) return;
-                SettingsManager.FlipFlightGauge = value;
+                if (Settings.FlipFlightGauge == value) return;
+                Settings.FlipFlightGauge = value;
                 NPC();
                 WindowManager.FlightDurationWindow.ExNPC(nameof(FlipFlightGauge));
             }
         }
+        public bool ForceSoftwareRendering
+        {
+            get => Settings.ForceSoftwareRendering;
+            set
+            {
+                if (Settings.ForceSoftwareRendering == value) return;
+                Settings.ForceSoftwareRendering = value;
+                NPC();
+                RenderOptions.ProcessRenderMode = value ? RenderMode.SoftwareOnly : RenderMode.Default;
+            }
+        }
+
+        public bool HighPriority
+        {
+            get => Settings.HighPriority;
+            set
+            {
+                if (Settings.HighPriority == value) return;
+                Settings.HighPriority = value;
+                NPC();
+                Process.GetCurrentProcess().PriorityClass = value ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
+            }
+        }
+
     }
 }

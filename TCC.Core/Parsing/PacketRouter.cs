@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using TCC.ClassSpecific;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.Sniffing;
 using TCC.Tera.Data;
@@ -21,15 +18,13 @@ using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUI
 
 namespace TCC.Parsing
 {
-
-
     public static class PacketProcessor
     {
         public static uint Version;
         public static Server Server;
-        private static string Language => new TeraData(Server.Region).GetLanguage(Server.Region);
-        public static OpCodeNamer OpCodeNamer;
-        public static OpCodeNamer SystemMessageNamer;
+        private static string Language => Server.Region == "EU" ? "EU-EN" : Server.Region;
+        public static OpCodeNamer OpCodeNamer { get; private set; }
+        public static OpCodeNamer SystemMessageNamer { get; private set; }
         public static MessageFactory Factory;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         private static System.Timers.Timer _x;
@@ -55,8 +50,7 @@ namespace TCC.Parsing
                 var message = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
                 Version = message.Versions[0];
                 OpcodeDownloader.DownloadIfNotExist(Version, Path.Combine(BasicTeraData.Instance.ResourceDirectory, "data/opcodes/"));
-                if (!File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/protocol.{message.Versions[0]}.map"))
-                    || !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/sysmsg.{message.Versions[0]}.map")))
+                if (!File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/protocol.{message.Versions[0]}.map")))
                 {
                     {
                         TccMessageBox.Show("Unknown client version: " + message.Versions[0], MessageBoxType.Error);
@@ -66,7 +60,7 @@ namespace TCC.Parsing
                 }
                 OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt"));
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt"));
-                Factory = new MessageFactory(OpCodeNamer, Server.Region, message.Versions[0], sysMsgNamer: SystemMessageNamer);
+                Factory = new MessageFactory(message.Versions[0], sysMsgNamer: SystemMessageNamer);
                 TeraSniffer.Instance.Connected = true;
                 Proxy.ConnectToProxy();
                 return;
@@ -77,12 +71,13 @@ namespace TCC.Parsing
         public static void EnqueueMessageFromProxy(MessageDirection dir, string data)
         {
             var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>(StringUtils.StringToByteArray(data.Substring(4))));
-            Console.WriteLine(msg.OpCode);
+            //Console.WriteLine(msg.OpCode);
             Packets.Enqueue(msg);
         }
 
         private static int _processed;
         private static int _discarded;
+
         private static void PacketAnalysisLoop()
         {
             while (true)
@@ -95,13 +90,13 @@ namespace TCC.Parsing
                 }
                 var message = Factory.Create(msg);
                 Factory.Process(message);
-                //App.DebugWindow.SetQueuedPackets(Packets.Count);
             }
             // ReSharper disable once FunctionNeverReturns
         }
 
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
+            if (p.SkillId % 10 != 0) return;
             SkillManager.AddSkill(p.SkillId, p.Cooldown);
         }
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
@@ -110,6 +105,7 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
+            if (p.SkillId % 10 != 0) return;
             SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
         }
 
@@ -117,8 +113,8 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
-            CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
-            CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            //CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
+            //CharacterWindowViewModel.Instance.Player.Level = p.Level;
 
             SessionManager.SetPlayerMaxHp(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMp(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
@@ -128,16 +124,11 @@ namespace TCC.Parsing
             SessionManager.SetPlayerMp(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
 
-            SessionManager.SetPlayerCritFactor(p.CritFactor);
+            SessionManager.SetPlayerCritFactor(p.BonusCritFactor);
 
-            if (!SettingsManager.ClassWindowSettings.Enabled) return;
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
-                    break;
-            }
-
+            if (!Settings.ClassWindowSettings.Enabled) return;
+            if (SessionManager.CurrentPlayer.Class == Class.Warrior)
+                ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
@@ -156,7 +147,7 @@ namespace TCC.Parsing
             }
             else
             {
-                EntitiesManager.UpdateNPCbyCreatureChangeHP(p.Target, p.CurrentHP, p.MaxHP);
+                EntitiesManager.UpdateNPC(p.Target, p.CurrentHP, p.MaxHP);
             }
         }
         public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
@@ -179,7 +170,7 @@ namespace TCC.Parsing
 
         public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
-            EntitiesManager.UpdateNPCbyGauge(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
+            EntitiesManager.UpdateNPC(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
         }
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
@@ -193,14 +184,14 @@ namespace TCC.Parsing
             if (b != null /*&& b.IsBoss*/ && b.Visible == System.Windows.Visibility.Visible)
             {
                 GroupWindowViewModel.Instance.SetAggro(p.Target);
-                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, AggroCircle.Main, p.Target);
+                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, p.Target);
 
             }
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
-            BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.Circle, p.User);
+            BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.User);
             GroupWindowViewModel.Instance.SetAggroCircle(p);
         }
 
@@ -209,7 +200,7 @@ namespace TCC.Parsing
             /*- Moved from HandleReturnToLobby -*/
             SessionManager.Logged = false;
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -233,46 +224,49 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
-            Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
-            if (!SettingsManager.StatSent) App.SendUsageStat();
-            SettingsManager.LastRegion = Language;
-            TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
-            TimeManager.Instance.SetGuildBamTime(false);
-            SessionManager.InitDatabases(SettingsManager.LastRegion);
-            CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
+            WindowManager.ReloadPositions();
+            //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
+            if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
+            Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
+            if (!Settings.StatSent) App.SendUsageStat();
+            Settings.LastRegion = Language;
+            TimeManager.Instance.SetServerTimeZone(Settings.LastRegion);
+            TimeManager.Instance.SetGuildBamTime(false);
+            SessionManager.InitDatabases(Settings.LastRegion);
+            CooldownWindowViewModel.Instance.ClearSkills();
             if (Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
                 CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
 
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
             SkillManager.Clear();
 
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.Encounter = false;
             MessageFactory.Update();
-            SessionManager.CurrentPlayer.EntityId = p.entityId;
+            SessionManager.CurrentPlayer.EntityId = p.EntityId;
             SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
             SessionManager.CurrentPlayer.ServerId = p.ServerId;
             SessionManager.CurrentPlayer.Name = p.Name;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
 
-            CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
-            CharacterWindowViewModel.Instance.Player.Name = p.Name;
-            CharacterWindowViewModel.Instance.Player.Level = p.Level;
-            SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
+            //CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
+            //CharacterWindowViewModel.Instance.Player.Name = p.Name;
+            //CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            //CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
+            //SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
-            WindowManager.ReloadPositions(p.CharacterClass);
         }
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
         {
-            if (!SettingsManager.LfgEnabled) return;
+            if (!Settings.LfgEnabled) return;
             if (WindowManager.LfgListWindow == null) return;
             if (WindowManager.LfgListWindow.VM == null) return;
             if (!x.IsLast) return;
@@ -315,19 +309,7 @@ namespace TCC.Parsing
             WindowManager.LfgListWindow.ShowWindow();
         }
 
-        private static Stopwatch _st;
-        internal static void HandleActionStage(S_ACTION_STAGE x)
-        {
-            _st.Stop();
-            Console.WriteLine("- S_ACTION_STAGE -");
-            Console.WriteLine($"GameId: {x.GameId}");
-            Console.WriteLine($"Target: {x.Target}");
-            Console.WriteLine($"Id:     {x.Id}");
-            Console.WriteLine($"Speed:  {x.Speed * 1.1}");
-            Console.WriteLine($"Elaps:  {_st.ElapsedMilliseconds}");
-            _st.Restart();
-        }
-
+/*
         public static void SendTestMessage()
         {
             //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
@@ -347,11 +329,12 @@ namespace TCC.Parsing
             HandleSystemMessage(sysMsg);
 
         }
+*/
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -365,13 +348,13 @@ namespace TCC.Parsing
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             GroupWindowViewModel.Instance.SetAggro(0);
-            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
-        }
-        public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
-        {
-            //SessionManager.LoadingScreen = false;
+            SessionManager.CivilUnrestZone = x.Zone == 152;
+            if (Settings.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
+            //MessageFactory.Update(); already in CurrentHHphase set
         }
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
@@ -440,6 +423,7 @@ namespace TCC.Parsing
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
+/*
         public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
         {
             //bool sourceInParty = GroupWindowViewModel.Instance.UserExists(x.Source);
@@ -454,6 +438,7 @@ namespace TCC.Parsing
             if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
             BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
         }
+*/
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
@@ -482,12 +467,6 @@ namespace TCC.Parsing
             var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[i].Index + 11);
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, x.AuthorName, x.Message));
-        }
-        public static void HandleCommandOutput(string msg)
-        {
-            var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[7].Index + 11);
-
-            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
         }
 
         public static void HandleProxyOutput(string author, uint channel, string message)
@@ -583,6 +562,7 @@ namespace TCC.Parsing
 
         internal static void HandleDungeonClears(S_DUNGEON_CLEAR_COUNT_LIST x)
         {
+            if (x.PlayerId != SessionManager.CurrentPlayer.PlayerId) return;
             foreach (var dg in x.DungeonClears)
             {
                 if (InfoWindowViewModel.Instance.SelectedCharacter != null)
@@ -761,8 +741,6 @@ namespace TCC.Parsing
         {
             EntitiesManager.DespawnNPC(p.Target, p.Type);
         }
-
-
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DepawnUser(p.EntityId);
@@ -771,169 +749,32 @@ namespace TCC.Parsing
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                FlyingGuardianDataProvider.HandleAbnormal(p);
-
-            if (!SettingsManager.ClassWindowSettings.Enabled) return;
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Mystic:
-                    Mystic.CheckAbnormal(p);
-                    break;
-                case Class.Warrior:
-                    Warrior.CheckAbnormal(p);
-                    break;
-                case Class.Valkyrie:
-                    Valkyrie.CheckRagnarok(p);
-                    break;
-                case Class.Archer:
-                    Archer.CheckFocus(p);
-                    Archer.CheckFocusX(p);
-                    Archer.CheckSniperEye(p);
-                    Archer.CheckVelikMark(p);
-                    break;
-                case Class.Lancer:
-                    Lancer.CheckArush(p);
-                    Lancer.CheckGshout(p);
-                    Lancer.CheckLineHeld(p);
-                    break;
-                case Class.Priest:
-                    Priest.CheckBuff(p);
-                    break;
-                case Class.Brawler:
-                    Brawler.CheckBrawlerAbnormal(p);
-                    break;
-                case Class.Ninja:
-                    Ninja.CheckFocus(p);
-                    break;
-                case Class.Sorcerer:
-                    Sorcerer.CheckBuff(p);
-                    break;
-                case Class.Reaper:
-                    Reaper.CheckBuff(p);
-                    break;
-                case Class.Slayer:
-                    Slayer.CheckBuff(p);
-                    break;
-                case Class.Berserker:
-                    Berserker.CheckBuff(p);
-                    Berserker.CheckUnleashAbnormals(p);
-                    break;
-
-            }
+            if (!Settings.ClassWindowSettings.Enabled) return;
+            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                FlyingGuardianDataProvider.HandleAbnormal(p);
-
-            if (!SettingsManager.ClassWindowSettings.Enabled) return;
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    Warrior.CheckAbnormal(p);
-                    break;
-                case Class.Archer:
-                    Archer.CheckFocus(p);
-                    Archer.CheckFocusX(p);
-                    Archer.CheckSniperEye(p);
-                    Archer.CheckVelikMark(p);
-                    break;
-                case Class.Lancer:
-                    Lancer.CheckLineHeld(p);
-                    break;
-                case Class.Priest:
-                    Priest.CheckBuff(p);
-                    break;
-                case Class.Mystic:
-                    Mystic.CheckAbnormal(p);
-                    break;
-                case Class.Sorcerer:
-                    Sorcerer.CheckBuff(p);
-                    break;
-                case Class.Reaper:
-                    Reaper.CheckBuff(p);
-                    break;
-                case Class.Slayer:
-                    Slayer.CheckBuff(p);
-                    break;
-                case Class.Berserker:
-                    Berserker.CheckBuff(p);
-                    Berserker.CheckUnleashAbnormals(p);
-                    break;
-                case Class.Brawler:
-                    Brawler.CheckBrawlerAbnormal(p);
-                    break;
-
-
-            }
+            if (!Settings.ClassWindowSettings.Enabled) return;
+            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId);
+            if(!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
+            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                FlyingGuardianDataProvider.HandleAbnormal(p);
-
-            if (!SettingsManager.ClassWindowSettings.Enabled) return;
-
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Archer:
-                    Archer.CheckFocusX(p);
-                    Archer.CheckFocus(p);
-                    Archer.CheckSniperEyeEnd(p);
-                    Archer.CheckVelikMark(p);
-                    break;
-                case Class.Warrior:
-                    Warrior.CheckAbnormal(p);
-                    break;
-                case Class.Lancer:
-                    Lancer.CheckLineHeldEnd(p);
-                    Lancer.CheckArushEnd(p);
-                    Lancer.CheckGshoutEnd(p);
-                    break;
-                case Class.Mystic:
-                    Mystic.CheckAbnormal(p);
-                    break;
-                case Class.Brawler:
-                    Brawler.CheckBrawlerAbnormalEnd(p);
-                    break;
-                case Class.Ninja:
-                    Ninja.CheckFocusEnd(p);
-                    break;
-                case Class.Priest:
-                    Priest.CheckBuffEnd(p);
-                    break;
-                case Class.Sorcerer:
-                    Sorcerer.CheckBuffEnd(p);
-                    break;
-                case Class.Reaper:
-                    Reaper.CheckBuffEnd(p);
-                    break;
-                case Class.Slayer:
-                    Slayer.CheckBuffEnd(p);
-                    break;
-                case Class.Berserker:
-                    Berserker.CheckBuffEnd(p);
-                    Berserker.CheckUnleashAbnormals(p);
-                    break;
-
-
-
-            }
+            if (!Settings.ClassWindowSettings.Enabled) return;
+            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
         }
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
-            if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1)
-            {
-                BossGageWindowViewModel.Instance.SelectDragon(EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y)));
-
-            }
+            if (BossGageWindowViewModel.Instance.CurrentHHphase != HarrowholdPhase.Phase1) return;
+            BossGageWindowViewModel.Instance.SelectDragon(EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y)));
         }
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
@@ -945,7 +786,7 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.IsConnected && SettingsManager.LfgEnabled)
+            if (Proxy.IsConnected && Settings.LfgEnabled)
             {
                 Proxy.RequestCandidates();
                 if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
@@ -980,13 +821,13 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Settings.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
         internal static void HandleKicked(S_BAN_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (SettingsManager.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Settings.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
 
@@ -1005,7 +846,7 @@ namespace TCC.Parsing
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
         {
             ChatWindowManager.Instance.UpdateLfgMembers(packet);
-            if (!SettingsManager.LfgEnabled) return;
+            if (!Settings.LfgEnabled) return;
 
             var lfg = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
             if (lfg == null) return;
@@ -1030,7 +871,7 @@ namespace TCC.Parsing
             lfg.LeaderId = packet.Id;
             var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
             if (leader != null) lfg.LeaderName = leader.Name;
-            if (WindowManager.LfgListWindow.VM._lastClicked != null && WindowManager.LfgListWindow.VM._lastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
+            if (WindowManager.LfgListWindow.VM.LastClicked != null && WindowManager.LfgListWindow.VM.LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
             lfg.PlayerCount = packet.Members.Count;
             WindowManager.LfgListWindow.VM.NotifyMyLfg();
         }
@@ -1047,7 +888,7 @@ namespace TCC.Parsing
                 if (InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece))
                 {
                     var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
-                    Console.WriteLine($"Item: {i}");
+                    //Console.WriteLine($"Item: {i}");
                     InfoWindowViewModel.Instance.CurrentCharacter.Gear.Add(i);
                 }
             }
@@ -1123,8 +964,15 @@ namespace TCC.Parsing
 
         public static void HandleUserGuildLogo(S_GET_USER_GUILD_LOGO sGetUserGuildLogo)
         {
-            if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId)) return;
+            if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId))
+            {
+                S_IMAGE_DATA.Database[sGetUserGuildLogo.GuildId] = sGetUserGuildLogo.GuildLogo;
+                return;
+            }
             S_IMAGE_DATA.Database.Add(sGetUserGuildLogo.GuildId, sGetUserGuildLogo.GuildLogo);
+            if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
+            sGetUserGuildLogo.GuildLogo.Save("resources/images/guilds/guildlogo_" + Server.ServerId + "_" + sGetUserGuildLogo.GuildId + "_" + 0 + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
         }
 
         public static void HandleGpkData(string data)
@@ -1136,12 +984,12 @@ namespace TCC.Parsing
             if (data.StartsWith(chatModeCmd))
             {
                 var chatMode = data.Replace(chatModeCmd, "");
-                SessionManager.InGameChatOpen = chatMode == "1"; //too lazy
+                SessionManager.InGameChatOpen = chatMode == "1" || chatMode == "true"; //too lazy
             }
             else if (data.StartsWith(uiModeCmd))
             {
                 var uiMode = data.Replace(uiModeCmd, "");
-                SessionManager.InGameUiOn = uiMode == "1"; //too lazy
+                SessionManager.InGameUiOn = uiMode == "1" || uiMode == "true"; //too lazy
             }
         }
 
@@ -1162,6 +1010,64 @@ namespace TCC.Parsing
                 if (p.Candidates.All(x => x.PlayerId != user.PlayerId)) toRemove.Add(user);
             }
             toRemove.ForEach(r => dest.Remove(r));
+        }
+
+        public static void HandleShowHp(S_SHOW_HP x)
+        {
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(x.GameId, x.MaxHp, x.CurrentHp, false, HpChangeSource.CreatureChangeHp);
+        }
+
+        public static void HandleDestroyGuildTower(S_DESTROY_GUILD_TOWER p)
+        {
+            try
+            {
+                WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower(p.SourceGuildId);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        public static void HandleCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO p)
+        {
+            try
+            {
+                p.Guilds.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.AddGuild(x));
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        public static void HandleCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL p)
+        {
+            try
+            {
+                p.GuildDetails.ToList().ForEach(x => WindowManager.CivilUnrestWindow.VM.SetGuildName(x.Item1, x.Item2));
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        public static void HandleViewWareEx(S_VIEW_WARE_EX p)
+        {
+            foreach (var page in S_VIEW_WARE_EX.Pages)
+            {
+                if (page.Index + 1 == S_VIEW_WARE_EX.Pages.Count) break;
+                for (var i = page.Index+1; i < 8; i++)
+                {
+                    var pg = S_VIEW_WARE_EX.Pages[(int)i];
+                    foreach (var item in page.Items)
+                    {
+                        if (pg.Items.All(x => x.Id != item.Id)) continue;
+                        var name = SessionManager.ItemsDatabase.GetItemName((uint) item.Id);
+                        Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index+1}) in page {i+1}");
+                    }
+                }
+            }
         }
     }
 }

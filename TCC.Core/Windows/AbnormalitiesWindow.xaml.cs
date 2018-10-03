@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows.Controls;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -11,8 +12,20 @@ namespace TCC.Windows
         {
             InitializeComponent();
             ButtonsRef = Buttons;
-            MainContent = content;
-            Init(SettingsManager.BuffWindowSettings, ignoreSize: true);
+            MainContent = WindowContent;
+            Init(Settings.BuffWindowSettings);
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
+        }
+
+        private void OnAbnormalityShapeChanged()
+        {
+            Buffs.ItemTemplateSelector = null;
+            Buffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = null;
+            Debuffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+            InfBuffs.ItemTemplateSelector = null;
+            InfBuffs.ItemTemplateSelector = System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
+
         }
     }
 }

@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:dd="urn:gong-wpf-dragdrop"
-        xmlns:databases="clr-namespace:TCC.Data.Databases"
         xmlns:data="clr-namespace:TCC.Data"
         mc:Ignorable="d"
         SizeToContent="Height"
@@ -17,7 +16,7 @@
         WindowStartupLocation="CenterScreen"
         Title="TCC" Height="Auto" Width="1000" d:DataContext="{d:DesignData CooldownWindowViewModel}">
     <Window.Resources>
-        <DataTemplate x:Key="DragAdornerTemplate">
+        <DataTemplate x:Key="DragAdornerTemplate" DataType="data:Skill">
             <Ellipse Width="55" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
                      Stroke="#7fff"
                      StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -65,7 +64,7 @@
                 BorderBrush="#8555"></Border>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Border Background="#3000" CornerRadius="1 1 0 0"></Border>
-            <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button HorizontalAlignment="Right" Style="{StaticResource ButtonContentOpacityStyle}"
                     VerticalAlignment="Stretch"
                     Click="ClosewWindow" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />

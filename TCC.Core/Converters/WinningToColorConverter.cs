@@ -9,14 +9,10 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-            {
-                return new SolidColorBrush(Color.FromRgb(0xff, 0xcc, 0x00));
-            }
-            else
-            {
-                return App.Current.FindResource("KrBgColor");
-            }
+            //TODO: to triggers btw
+            return (bool?) value ?? false
+                ? new SolidColorBrush(Color.FromRgb(0xff, 0xcc, 0x00)) //TODO: to resource
+                : System.Windows.Application.Current.FindResource("IgnidraxColor"); //TODO: check color
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

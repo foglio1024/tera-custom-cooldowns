@@ -1,4 +1,0 @@
-﻿namespace TCC.Data.Databases
-{
-
-}

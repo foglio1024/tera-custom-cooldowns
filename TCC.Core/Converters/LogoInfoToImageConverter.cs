@@ -14,7 +14,7 @@ namespace TCC.Converters
         private static extern int DeleteObject(IntPtr o);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var guildId = (uint) value;
+            var guildId = (uint?) value ?? 0;
             if (!S_IMAGE_DATA.Database.ContainsKey(guildId))
             {
                 return Application.Current.FindResource("DefaultGuildLogo");
@@ -22,7 +22,7 @@ namespace TCC.Converters
             }
 
             var ip = S_IMAGE_DATA.Database[guildId].GetHbitmap();
-            BitmapSource bs = null;
+            BitmapSource bs;
             try
             {
                 bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(ip,

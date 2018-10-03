@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Management;
 using System.Net;
-using TCC.Tera.Data;
+using TCC.Annotations;
 
 namespace TCC.Sniffing
 {
@@ -42,7 +41,7 @@ namespace TCC.Sniffing
 
         public uint CurrentSequenceNumber => unchecked((uint) (InitialSequenceNumber + 1 + BytesReceived));
 
-        public static uint NextSequenceNumber { get; private set; }
+        private static uint NextSequenceNumber { [UsedImplicitly] get; set; }
 
         public event Action<TcpConnection, byte[], int> DataReceived;
 
@@ -79,15 +78,15 @@ namespace TCC.Sniffing
 
             if (_bufferedPackets.Count > 500)
             {
-                var name = (from x in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
-                            select x.GetPropertyValue("Version")+ " Memory Total:" + x.GetPropertyValue("TotalVisibleMemorySize")
-                                       + " Virtual:" + x.GetPropertyValue("TotalVirtualMemorySize") + " PhFree:" + x.GetPropertyValue("FreePhysicalMemory")
-                                       + " VFree:" + x.GetPropertyValue("FreeVirtualMemory")
-                            ).FirstOrDefault() ?? "unknown";
-                name = name + " CPU:" + ((from x in new ManagementObjectSearcher("SELECT * FROM Win32_Processor").Get().Cast<ManagementObject>()
-                           select x.GetPropertyValue("Name")+" load:"+ x.GetPropertyValue("LoadPercentage")+"%").FirstOrDefault() ?? "processor unknown");
-                var debug = (BasicTeraData.Instance.WindowData.LowPriority ? "Low priority " : "Normal priority ") + SnifferType + " running on win "+name+
-                    " Received: " + BytesReceived + "\r\n" + _bufferedPackets.First().Key + ": " + _bufferedPackets.First().Value.Length + "\r\nQueue length:" + _bufferedPackets.Count;
+                //var name = (from x in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
+                //            select x.GetPropertyValue("Version")+ " Memory Total:" + x.GetPropertyValue("TotalVisibleMemorySize")
+                //                       + " Virtual:" + x.GetPropertyValue("TotalVirtualMemorySize") + " PhFree:" + x.GetPropertyValue("FreePhysicalMemory")
+                //                       + " VFree:" + x.GetPropertyValue("FreeVirtualMemory")
+                //            ).FirstOrDefault() ?? "unknown";
+                //name = name + " CPU:" + ((from x in new ManagementObjectSearcher("SELECT * FROM Win32_Processor").Get().Cast<ManagementObject>()
+                //           select x.GetPropertyValue("Name")+" load:"+ x.GetPropertyValue("LoadPercentage")+"%").FirstOrDefault() ?? "processor unknown");
+                //var debug = (BasicTeraData.Instance.WindowData.LowPriority ? "Low priority " : "Normal priority ") + SnifferType + " running on win "+name+
+                //    " Received: " + BytesReceived + "\r\n" + _bufferedPackets.First().Key + ": " + _bufferedPackets.First().Value.Length + "\r\nQueue length:" + _bufferedPackets.Count;
                 while (_bufferedPackets.Values.First().Length >= 500)
                 {
                     _bufferedPackets.Remove(_bufferedPackets.Keys.First());
@@ -99,7 +98,7 @@ namespace TCC.Sniffing
                 //and even after skipping long fragments we don't know, whether small fragment after big is a new short message or a big message tail - skip small one too.
                 needToSkip = _bufferedPackets.Keys.First() - BytesReceived;
                 BytesReceived = _bufferedPackets.Keys.First();
-                BasicTeraData.LogError(debug + "\r\nNew Queue length:" + _bufferedPackets.Count+"\r\nSkipping bytes:"+needToSkip, false, true);
+                //BasicTeraData.LogError(debug + "\r\nNew Queue length:" + _bufferedPackets.Count+"\r\nSkipping bytes:"+needToSkip, false, true);
             }
             long firstBufferedPosition;
             while (_bufferedPackets.Any() && ((firstBufferedPosition = _bufferedPackets.Keys.First()) <= BytesReceived))

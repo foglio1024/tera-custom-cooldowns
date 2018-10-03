@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
-using Brushes = System.Drawing.Brushes;
 
 namespace TCC.Converters
 {
@@ -26,7 +22,8 @@ namespace TCC.Converters
                         col = Colors.Orange;
                         break;
                     case Class.Ninja:
-                        col = (App.Current.FindResource("NinjaColor") as SolidColorBrush).Color;
+                        // ReSharper disable once PossibleNullReferenceException
+                        col = ((SolidColorBrush) Application.Current.FindResource("NinjaColor")).Color;
                         break;
                     case Class.Valkyrie:
                         col = Colors.White;

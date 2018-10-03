@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"  
-             DataContextChanged="UserControl_Loaded">
+             DataContextChanged="UserControl_DataContextChanged">
     <UserControl.LayoutTransform>
         <TransformGroup>
             <ScaleTransform ScaleY="1"></ScaleTransform>
             <RotateTransform Angle="180"></RotateTransform>
         </TransformGroup>
     </UserControl.LayoutTransform>
-    <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="Auto" Name="Root" Height="Auto" Background="#0f00" VerticalAlignment="Top">
+    <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="Auto" x:Name="Root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
+          >
         <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -24,7 +25,6 @@
             <ContentControl Content="{Binding}" x:Name="Body" Grid.Column="1" 
                             ContentTemplateSelector="{StaticResource BodyTemplateSelector}" 
                             />
-
             <Popup Grid.Column="0" IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True"
                    x:Name="Popup" MouseLeave="Popup_MouseLeave">
                 <Border Style="{StaticResource Styles.DefaultBorder}" Padding="5" >

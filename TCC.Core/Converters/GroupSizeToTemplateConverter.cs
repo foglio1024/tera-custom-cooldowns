@@ -9,16 +9,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (int)value;
-
-            if(val > SettingsManager.GroupSizeThreshold)
-            {
-                return Application.Current.FindResource("RaidDataTemplate");
-            }
-            else
-            {
-                return Application.Current.FindResource("PartyDataTemplate");
-            }
+            var val = (int?)value ?? 0;
+            return Application.Current.FindResource(val > Settings.GroupSizeThreshold ? "RaidDataTemplate" : "PartyDataTemplate");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

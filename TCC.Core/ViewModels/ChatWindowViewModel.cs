@@ -3,13 +3,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Controls.ChatControls;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.Windows;
@@ -91,18 +88,18 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; }
 
 
-        //private List<ChatChannelOnOff> VisibleChannels => SettingsManager.EnabledChatChannels;
+        //private List<ChatChannelOnOff> VisibleChannels => Settings.EnabledChatChannels;
 
         private readonly object _lock = new object();
 
         private ChatWindowManager()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            //_scale = SettingsManager.ChatWindowSettings.Scale; TODO
-            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            //_scale = Settings.ChatWindowSettings.Scale; TODO
+            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
             _queue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
-            LFGs = new SynchronizedObservableCollection<LFG>(_dispatcher);
+            LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>();
             _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(15) };
             _hideTimer.Tick += HideTimer_Tick;
@@ -125,11 +122,11 @@ namespace TCC.ViewModels
 
         private void OnPrivateChannelJoined(int index)
         {
-            Console.WriteLine($"Joined channel {PrivateChannels[index].Name}");
+            //Console.WriteLine($"Joined channel {PrivateChannels[index].Name}");
             var messagesToAdd = _privateMessagesCache.Where(x => x.Channel == PrivateChannels[index].Id).ToList();
             messagesToAdd.ForEach(x =>
             {
-                Console.WriteLine($"Flushing {x.Channel}|{x.Message} to main list");
+                //Console.WriteLine($"Flushing {x.Channel}|{x.Message} to main list");
                 AddChatMessage(new ChatMessage(
                     (ChatChannel)index + 11, 
                     x.Author == "undefined" ? "System" : x.Author,
@@ -143,7 +140,7 @@ namespace TCC.ViewModels
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 if (e.OldItems.Count == 0) return;
-                SettingsManager.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow).WindowSettings as ChatWindowSettings);
+                Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
             }
         }
 
@@ -162,7 +159,7 @@ namespace TCC.ViewModels
                 if (_queue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
-                    if (ChatMessages.Count > SettingsManager.MaxMessages)
+                    if (ChatMessages.Count > Settings.MaxMessages)
                     {
                         ChatMessages.RemoveAt(ChatMessages.Count - 1);
                     }
@@ -171,7 +168,7 @@ namespace TCC.ViewModels
         }
         private void HideTimer_Tick(object sender, EventArgs e)
         {
-            if (SettingsManager.ChatFadeOut)
+            if (Settings.ChatFadeOut)
             {
                 IsChatVisible = false;
             }
@@ -185,9 +182,9 @@ namespace TCC.ViewModels
         }
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            if (!SettingsManager.ChatEnabled) return;
+            if (!Settings.ChatEnabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
-            if (ChatMessages.Count < SettingsManager.SpamThreshold)
+            if (ChatMessages.Count < Settings.SpamThreshold)
             {
                 for (var i = 0; i < ChatMessages.Count - 1; i++)
                 {
@@ -197,7 +194,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                for (var i = 0; i < SettingsManager.SpamThreshold; i++)
+                for (var i = 0; i < Settings.SpamThreshold; i++)
                 {
                     if (i > ChatMessages.Count - 1) continue;
 
@@ -211,14 +208,14 @@ namespace TCC.ViewModels
             if (ChatWindows.All(x => !x.IsPaused))
             {
 
-                    Console.WriteLine($"Adding {chatMessage.Channel}|{chatMessage.RawMessage} to main list");
+                    //Console.WriteLine($"Adding {chatMessage.Channel}|{chatMessage.RawMessage} to main list");
                     ChatMessages.Insert(0, chatMessage);
                 
             }
             else _queue.Enqueue(chatMessage);
 
             NewMessage?.Invoke(chatMessage);
-            if (ChatMessages.Count > SettingsManager.MaxMessages)
+            if (ChatMessages.Count > Settings.MaxMessages)
             {
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
@@ -228,7 +225,7 @@ namespace TCC.ViewModels
         internal void InitWindows()
         {
             ChatWindows.Clear();
-            SettingsManager.ChatWindowsSettings.ToList().ForEach(s =>
+            Settings.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
                 var w = new ChatWindow(s);
@@ -244,12 +241,12 @@ namespace TCC.ViewModels
                 var w = new ChatWindow(
                     new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false)
                     );
-                SettingsManager.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 var m = new ChatViewModel();
                 w.DataContext = m;
                 ChatWindows.Add(w);
                 m.LoadTabs();
-                if (SettingsManager.ChatEnabled) w.Show();
+                if (Settings.ChatEnabled) w.Show();
             }
 
             //WindowManager.TccVisibilityChanged += (s, ev) =>
@@ -335,7 +332,7 @@ namespace TCC.ViewModels
 
         public void JoinPrivateChannel(uint id, int index, string name)
         {
-            ChatWindowManager.Instance.PrivateChannels[index] = new PrivateChatChannel(id, name, index);
+            Instance.PrivateChannels[index] = new PrivateChatChannel(id, name, index);
             PrivateChannelJoined?.Invoke(index);
         }
         private bool Pass(ChatMessage current, ChatMessage old)
@@ -351,6 +348,15 @@ namespace TCC.ViewModels
                         case ChatChannel.Loot:
                         case ChatChannel.Bargain:
                         case ChatChannel.Damage:
+                        case ChatChannel.Private1:
+                        case ChatChannel.Private2:
+                        case ChatChannel.Private3:
+                        case ChatChannel.Private4:
+                        case ChatChannel.Private5:
+                        case ChatChannel.Private6:
+                        case ChatChannel.Private7:
+                        case ChatChannel.Private8:
+                        case ChatChannel.TCC:
                             return true;
                     }
 
@@ -374,14 +380,6 @@ namespace TCC.ViewModels
                 //TODO: make this different per window
                 x.VM.NotifyOpacityChange();
             });
-        }
-
-        public void TempShow()
-        {
-            foreach (var chatWindow in ChatWindows)
-            {
-                //chatWindow.TempShow();
-            }
         }
 
         internal void CachePrivateMessage(uint channel, string author, string message)

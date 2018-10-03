@@ -1,8 +1,5 @@
-﻿using System;
-using System.Threading;
-using TCC.ClassSpecific;
+﻿using TCC.ClassSpecific;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
@@ -26,21 +23,21 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator DivineCharge { get; set; }
         public DurationCooldownIndicator TripleNemesis { get; set; }
 
-        public PriestBarManager() : base()
+        public PriestBarManager()
         {
-            Priest.ClearMarkedTargets();
+            AbnormalityTracker = new PriestAbnormalityTracker();
         }
 
 
         public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
-            EnergyStars = new DurationCooldownIndicator(_dispatcher);
+            EnergyStars = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
             EnergyStars.Buff = new FixedSkillCooldown(es,  false);
             EnergyStars.Cooldown = new FixedSkillCooldown(es,  true);
 
-            Grace = new DurationCooldownIndicator(_dispatcher);
+            Grace = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
             Grace.Buff = new FixedSkillCooldown(gr,  false);
             Grace.Cooldown = new FixedSkillCooldown(gr, true);
@@ -49,7 +46,7 @@ namespace TCC.ViewModels
             Grace.Buff.Ended += OnGraceBuffEnded;
 
             // Edict Of Judgment
-            EdictOfJudgment = new DurationCooldownIndicator(_dispatcher);
+            EdictOfJudgment = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
             EdictOfJudgment.Buff = new FixedSkillCooldown(ed, false);
             EdictOfJudgment.Cooldown = new FixedSkillCooldown(ed, true);
@@ -58,20 +55,20 @@ namespace TCC.ViewModels
             EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
 
             // Divine Charge
-            DivineCharge = new DurationCooldownIndicator(_dispatcher);
+            DivineCharge = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
             DivineCharge.Cooldown = new FixedSkillCooldown(dc, true);
 
             // Tripple Nenesis
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
-            TripleNemesis = new DurationCooldownIndicator(_dispatcher)
+            TripleNemesis = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(tn, false),
                 Buff = new FixedSkillCooldown(tn, false)
             };
 
-            Priest.TripleNemesisExpired += OnTripleNemesisExpired;
-            Priest.TripleNemesisRefreshed += OnTripleNemesisRefreshed;
+            ClassAbnormalityTracker.MarkingExpired+= OnTripleNemesisExpired;
+            ClassAbnormalityTracker.MarkingRefreshed+= OnTripleNemesisRefreshed;
         }
 
         private void OnTripleNemesisRefreshed(ulong duration)

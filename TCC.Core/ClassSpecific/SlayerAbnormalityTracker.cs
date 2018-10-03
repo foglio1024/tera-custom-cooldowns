@@ -1,0 +1,43 @@
+﻿using System.Linq;
+using TCC.Parsing.Messages;
+using TCC.ViewModels;
+
+namespace TCC.ClassSpecific
+{
+    public class SlayerAbnormalityTracker : ClassAbnormalityTracker
+    {
+        private static readonly uint[] IcbIds = { 300800, 300801, 300805 };
+
+        public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
+        {
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            CheckInColdBlood(p);
+        }
+        public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            CheckInColdBlood(p);
+        }
+        public override void CheckAbnormality(S_ABNORMALITY_END p)
+        {
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            CheckInColdBlood(p);
+        }
+
+        private static void CheckInColdBlood(S_ABNORMALITY_BEGIN p)
+        {
+            if (!IcbIds.Contains(p.AbnormalityId)) return;
+            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Start(p.Duration);
+        }
+        private static void CheckInColdBlood(S_ABNORMALITY_REFRESH p)
+        {
+            if (!IcbIds.Contains(p.AbnormalityId)) return;
+            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Start(p.Duration);
+        }
+        private static void CheckInColdBlood(S_ABNORMALITY_END p)
+        {
+            if (!IcbIds.Contains(p.AbnormalityId)) return;
+            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Refresh(0);
+        }
+    }
+}

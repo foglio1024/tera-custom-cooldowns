@@ -3,12 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using TCC.Data;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -19,10 +16,7 @@ namespace TCC.Controls
     public partial class RhombFixedSkillControl : INotifyPropertyChanged
     {
         private FixedSkillCooldown _context;
-        private readonly DoubleAnimation _expandWarn;
-        private readonly DoubleAnimation _expandWarnInner;
         private readonly DoubleAnimation _arcAnimation;
-        private readonly DoubleAnimation _resetAnimation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _isRunning;
@@ -59,13 +53,6 @@ namespace TCC.Controls
         {
             InitializeComponent();
             _arcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
-            _resetAnimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(500));
-            _expandWarn =
-                new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
-            _expandWarnInner =
-                new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
-            Timeline.SetDesiredFrameRate(_expandWarn, 30);
-            Timeline.SetDesiredFrameRate(_expandWarnInner, 30);
         }
 
         private void Control_Loaded(object sender, RoutedEventArgs e)
@@ -91,7 +78,7 @@ namespace TCC.Controls
         private void OnReset()
         {
             ResetArc.Opacity = 1;
-            ResetArc.BeginAnimation(Arc.StrokeThicknessProperty, new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+            ResetArc.BeginAnimation(Shape.StrokeThicknessProperty, new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
         }
 
         private void OnSecondsUpdated()

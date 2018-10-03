@@ -2,7 +2,6 @@
 {
     public class Abnormality
     {
-        //Bitmap iconBitmap;
         public string IconName { get; set; }
         public uint Id { get; set; }
         public string Name { get; set; }

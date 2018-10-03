@@ -3,7 +3,7 @@ using System.Net;
 
 namespace TCC.Parsing
 {
-    public class OpcodeDownloader
+    public static class OpcodeDownloader
     {
         public static void DownloadIfNotExist(uint version, string directory)
         {
@@ -16,33 +16,20 @@ namespace TCC.Parsing
             Directory.CreateDirectory(directory);
 
             var filename = directory + Path.DirectorySeparatorChar + version + ".txt";
-            if (File.Exists(filename))
-            {
-                return;
-            }
+            if (File.Exists(filename)) return;
             filename = directory + Path.DirectorySeparatorChar + "protocol." + version + ".map";
-            if (File.Exists(filename))
-            {
-                return;
-            }
+            if (File.Exists(filename)) return;
             try
             {
-                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/protocol." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/protocol." + version + ".map", filename);
                 return;
             }
-            catch { }
+            catch { /* ignored*/ }
             try
             {
                 Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
-                return;
             }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/protocol." + version + ".map", filename);
-                return;
-            }
-            catch { }
+            catch { /* ignored*/ }
         }
 
         public static bool DownloadSysmsg(uint version, string directory, int revision = 0)
@@ -50,57 +37,21 @@ namespace TCC.Parsing
             Directory.CreateDirectory(directory);
 
             var filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
-            if (File.Exists(filename))
-            {
-                return false;
-            }
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
-            if (File.Exists(filename))
-            {
-                return false;
-            }
+            if (File.Exists(filename)) return false;
+            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision/100 + ".map";
+            if (File.Exists(filename)) return false;
             try
             {
-                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/sysmsg." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/sysmsg." + revision / 100 + ".map", filename);
                 return true;
             }
-            catch { }
+            catch { /* ignored*/ }
             try
             {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision / 100 + ".map", filename);
                 return true;
             }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + version + ".map", filename);
-                return true;
-            }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision/100 + ".map", filename);
-                return true;
-            }
-            catch { }
-            try
-            {
-                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/sysmsg." + revision / 100 + ".map", filename);
-                return true;
-            }
-            catch { }
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
-            if (File.Exists(filename))
-            {
-                return false;
-            }
-            try
-            {
-                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + revision / 100 + ".map", filename);
-                return true;
-            }
-            catch { }
-
+            catch { /* ignored*/ }
             return false;
         }
 
@@ -108,9 +59,9 @@ namespace TCC.Parsing
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            using (var client = new System.Net.WebClient())
+            using (var client = new WebClient())
             {
-                client.Headers.Add(System.Net.HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+                client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                 client.DownloadFile(remote, local);
             }
         }

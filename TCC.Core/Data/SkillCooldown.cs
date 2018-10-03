@@ -6,7 +6,11 @@ namespace TCC.Data
 {
     public class SkillCooldown : TSPropertyChanged, IDisposable
     {
-        public Dispatcher Dispatcher { get => _dispatcher; }
+        //TODO: use events
+
+        public event Action Ending;
+
+        public new Dispatcher Dispatcher => base.Dispatcher;
         public Skill Skill { get; set; }
         public ulong Cooldown { get; set; }
         public ulong OriginalCooldown { get; set; }
@@ -16,7 +20,7 @@ namespace TCC.Data
 
         public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d, bool autostart = true, bool pre = false)
         {
-            _dispatcher = d;
+            base.Dispatcher = d;
             Pre = pre;
             var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
 
@@ -34,7 +38,7 @@ namespace TCC.Data
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            NPC("Ending");
+            Ending?.Invoke();
             _timer?.Stop();
         }
 
@@ -46,7 +50,7 @@ namespace TCC.Data
         {
             Cooldown = cd;
             Pre = false;
-            NPC("Refresh");
+            NPC();
             if (_timer == null) return;
             _timer.Stop();
             _timer.Interval = Cooldown > 0 ? Cooldown : 1;

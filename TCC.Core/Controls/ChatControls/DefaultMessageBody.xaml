@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d" d:DataContext="{d:DesignData ChatMessage}">
     <UserControl.Resources>
-        <DataTemplate x:Key="MainDataTemplate">
+        <DataTemplate x:Key="MainDataTemplate" DataType="data:ChatMessage">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -25,14 +26,35 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="PinBtn" Visibility="Collapsed" ToolTip="Pin/Unpin"
+                <Grid Grid.Column="1" Margin="-80 0 0 0" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" HorizontalAlignment="Right" x:Name="PinBtn" Visibility="Collapsed" ToolTip="Pin/Unpin"
                         VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="PinBtn_OnClick">
-                    <Path Data="{StaticResource SvgPin}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+                        <Grid Margin="3 0">
+                            <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource KrBgColorDark}"  Margin="-6" Opacity=".8"
+                                 Height="18" Width="18"
+                                 >
+                        </Ellipse>
+
+<Path Data="{StaticResource SvgPin}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+                    </Grid>
                 </Button>
-                <Button Grid.Column="2" HorizontalAlignment="Right" x:Name="CopyBtn" Visibility="Collapsed" ToolTip="Copy text to clipboard"
+                <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="CopyBtn" Visibility="Collapsed" ToolTip="Copy text to clipboard"
                         VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="CopyBtn_OnClick">
-                    <Path Data="{StaticResource SvgCopy}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+                        <Grid Margin="3 0">
+                            <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource KrBgColorDark}" Margin="-6" Opacity=".8"
+             Height="18" Width="18"
+    >
+    </Ellipse>
+                            <Path Data="{StaticResource SvgCopy}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+</Grid>
                 </Button>
+                </Grid>
+
             </Grid>
             <DataTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">

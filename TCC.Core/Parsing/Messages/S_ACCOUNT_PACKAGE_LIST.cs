@@ -7,10 +7,10 @@ namespace TCC.Parsing.Messages
     internal class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
     {
         public bool IsElite { get; }
-        private List<uint> packageIDs;
+
         public S_ACCOUNT_PACKAGE_LIST(TeraMessageReader reader) : base(reader)
         {
-            packageIDs = new List<uint>();
+            var packageIDs = new List<uint>();
 
             var count = reader.ReadUInt16();
             reader.Skip(2);

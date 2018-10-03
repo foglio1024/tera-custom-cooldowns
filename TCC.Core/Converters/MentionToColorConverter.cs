@@ -12,14 +12,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-            {
-                return Brushes.Orange; 
-            }
-            else
-            {
-                return Brushes.Black;
-            }
+            return (bool?) value ?? false ? Brushes.Orange : Brushes.Black; //TODO: use trigger
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

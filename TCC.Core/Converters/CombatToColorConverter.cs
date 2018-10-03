@@ -8,16 +8,9 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var c = (bool)value;
+            var c = (bool?)value ?? false;
 
-            if (c)
-            {
-                return new SolidColorBrush(Colors.Red);
-            }
-            else
-            {
-                return new SolidColorBrush(Colors.Black);
-            }
+            return c ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Black);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

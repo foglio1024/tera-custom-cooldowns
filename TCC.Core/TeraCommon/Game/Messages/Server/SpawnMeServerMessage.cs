@@ -11,10 +11,10 @@ namespace TCC.TeraCommon.Game.Messages.Server
             Position = reader.ReadVector3f();
             Heading = reader.ReadAngle();
             Dead = (reader.ReadByte() & 1) == 0;
-            unk1 = reader.ReadByte();
+            Unk1 = reader.ReadByte();
         }
 
-        public byte unk1 { get; set; }
+        public byte Unk1 { get; set; }
         public bool Dead { get; set; }
         public Angle Heading { get; set; }
         public Vector3f Position { get; set; }

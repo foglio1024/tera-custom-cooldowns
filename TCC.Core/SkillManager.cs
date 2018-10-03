@@ -10,16 +10,12 @@ namespace TCC
         public static event Action SkillStarted;
 
         public const int LongSkillTreshold = 40000;
-        public const int Ending = 120;
+        public const int Ending = 1; //TODO: this stuff should be removed btw
 
-        private static bool Pass(Skill  sk)
+        private static bool Pass(Skill sk)
         {
-            //if (sk != "Unknown" &&
-                //!name.Contains("Summon:") &&
-                //!name.Contains("Flight:") &&
-                //!name.Contains("Super Rocket Jump") &&
-                //!name.Contains("greeting") ||
-                //name == "Summon: Party") return true;
+            //if (sk.Class == Class.Sorcerer && sk.Id == 280150) return false; //another stupid fix
+            if (sk.Detail == "off") return false;
             return sk.Class != Class.Common && sk.Class != Class.None;
         }
         public static void AddSkillDirectly(Skill sk, uint cd)
@@ -79,6 +75,7 @@ namespace TCC
         {
             if (SessionManager.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
+                if (!Pass(skill)) return;
                 CooldownWindowViewModel.Instance.Change(skill, cd);
             }
 
@@ -98,7 +95,7 @@ namespace TCC
         {
             if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
             {
-                RouteSkill(new SkillCooldown(skill, cd*1000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+                RouteSkill(new SkillCooldown(skill, cd * 1000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
             }
 
         }

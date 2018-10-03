@@ -144,7 +144,7 @@
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="705"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="735"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -210,6 +210,20 @@
                     <controls:ValueSetting SettingName="Scale"  Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Auto dim"  IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png"  ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetCooldownWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>-->
                     <Separator/>
                     <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type data:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
@@ -256,6 +270,20 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1"  Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetBossWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding BossWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />-->
                     <Separator />
                     <controls:BoolSetting SettingName="Hide adds"  IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" >
@@ -306,6 +334,20 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetCharacterWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <Separator />
                     <controls:BoolSetting SettingName="Compact mode" IsOn="{Binding CharacterWindowCompactMode, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
                     <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />-->
@@ -334,6 +376,20 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BuffWindowSettings.AutoDim, Mode=TwoWay}" ToolTip="{StaticResource AutoDimSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetBuffWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <Separator />
                     <controls:SelectionSetting SettingName="Direction" ChoicesType="{x:Type FlowDirection}" Choices="{Binding FlowDirections, Mode=OneWay}" SelectedItem="{Binding BuffsDirection, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
                 </StackPanel>
@@ -360,6 +416,20 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetClassWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <Separator/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Path Data="{StaticResource SvgClassWarrior}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
@@ -397,6 +467,20 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}" ToolTip="{StaticResource AutoDimSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}" ToolTip="{StaticResource DimOpacitySettingTooltip}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetGroupWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <Separator />
                     <controls:BoolSetting SettingName="Hide me" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
@@ -535,7 +619,20 @@
                     <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ChatClickThruMode, Mode=TwoWay}" 
                                                ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" 
                                                Choices="{Binding ChatClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetChatWindowsPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
 
+                    </Button>
+                    <Separator/>
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
@@ -621,6 +718,43 @@
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
+                    <!--Title-->
+                    <Grid Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                        <TextBlock Text="Civil Unreset window" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+                </TabItem.Header>
+                <!-- Character window settings -->
+                <StackPanel Name="CivilUnrestSettingsGrid" Style="{StaticResource SettingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding CuWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting  SettingName="Visibility" IsOn="{Binding CuWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CuWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Allow offscreen" IsOn="{Binding CuWindowSettings.AllowOffScreen, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" ToolTip="{StaticResource AllowOffscreenTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding CuWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding CuWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding CuWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CuWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetCuWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Margin="-1,0,0,0">
+                <TabItem.Header>
 
                     <!--Title-->
                     <Grid Height="30">
@@ -635,6 +769,56 @@
                 </TabItem.Header>
                 <!-- Other settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="MakePositionsGlobal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Copy current window positions to all classes"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Use current window positions for all classes"/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="WindowPositionsReset" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move all windows to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Move all windows to the center of the primary screen. Use only in case some windows are outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
+                    <Separator/>
+                    <controls:BoolSetting SettingName="High priority" IsOn="{Binding HighPriority, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Makes TCC run at High CPU priority. Turn this on if you're experiecing lag in crowded areas (eg. Harrowold)"/>
+                                    <LineBreak /> <LineBreak/>
+                                    <Run Text="Warning: " Foreground="DarkOrange"/>
+                                    <Run Text="turning this on may affect overall system performance." />
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Force software rendering" IsOn="{Binding ForceSoftwareRendering, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Forces software (CPU) rendering. Turning this on should make TCC run smoother on single-GPU systems at the cost of CPU usage."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
                     <controls:BoolSetting SettingName="Use hotkeys" IsOn="{Binding UseHotkeys, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
@@ -645,6 +829,23 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Hide handles" IsOn="{Binding HideHandles, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Hides windows' handles."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <Separator/>
+                    <controls:SelectionSetting SettingName="Abnormalities shape"
+                                               SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
+                                               ChoicesType="{x:Type data:AbnormalityShape}"
+                                               Choices="{Binding AbnormalityShapes, Mode=OneWay}"
+                                               SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+
                     <Separator/>
                     <controls:BoolSetting SettingName="Use LFG window" IsOn="{Binding UseLfg, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
@@ -687,6 +888,20 @@
                                            Min="0" Max="360" Value="{Binding FlightGaugeRotation, Mode=TwoWay}"/>
                     <controls:BoolSetting SettingName="Flip flight gauge" 
                                           IsOn="{Binding FlipFlightGauge, Mode=TwoWay}"/>
+                    <Button Style="{StaticResource ButtonMainStyle}" Click="ResetFlightGaugePosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move flight gauge to center screen"/>
+                        <Button.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
+                                </TextBlock>
+                            </Grid>
+                        </Button.ToolTip>
+
+                    </Button>
+
                     <Separator/>
                     <controls:BoolSetting SettingName="Show always floating button" IsOn="{Binding FloatingButtonSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
 
@@ -708,7 +923,7 @@
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                         <TextBlock Margin="0,5" Foreground="#f77" Text="Send test message"/>
                     </Button>
-                    <Separator />
+                    <!--<Separator />
 
                     <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Twitch connector</TextBlock>
                     <controls:FieldSetting SettingName="Twitch username" Value="{Binding TwitchUsername, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png"></controls:FieldSetting>
@@ -729,7 +944,7 @@
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ConnectToTwitch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                         <TextBlock Margin="0,5" Foreground="{StaticResource TwitchColor}" Text="Connect"></TextBlock>
-                    </Button>
+                    </Button>-->
 
                 </StackPanel>
 

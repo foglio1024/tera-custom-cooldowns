@@ -121,7 +121,7 @@
                    Padding="0" 
                    TextAlignment="Left" 
                    Opacity=".9"/>
-        <Grid Grid.Column="3" Width="Auto">
+        <Grid Grid.Column="2" Width="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*" />

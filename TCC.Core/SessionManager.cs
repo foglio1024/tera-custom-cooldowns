@@ -11,7 +11,7 @@ namespace TCC
         public const int MaxWeekly = 16;
         public const int MaxDaily = 16;
         public const int MaxGuardianQuests = 40;
-        private static bool _logged = false;
+        private static bool _logged;
         private static bool _loadingScreen = true;
 
         private static bool _encounter;
@@ -41,10 +41,8 @@ namespace TCC
             }
         }
 
-        public static bool Combat
-        {
-            get => CurrentPlayer?.IsInCombat ?? false;
-        }
+        public static bool Combat => CurrentPlayer?.IsInCombat ?? false;
+
         public static bool Logged
         {
             get => _logged;
@@ -101,6 +99,7 @@ namespace TCC
         public static AbnormalityDatabase AbnormalityDatabase { get; private set; }
         public static DungeonDatabase DungeonDatabase { get; private set; }
         public static SocialDatabase SocialDatabase { get; private set; }
+        public static bool CivilUnrestZone { get; internal set; }
 
         public static void SetCombatStatus(ulong target, bool combat)
         {
@@ -110,12 +109,10 @@ namespace TCC
                 if (combat)
                 {
                     CurrentPlayer.IsInCombat = true;
-                    CharacterWindowViewModel.Instance.Player.IsInCombat = true;
                 }
                 else
                 {
                     CurrentPlayer.IsInCombat = false;
-                    CharacterWindowViewModel.Instance.Player.IsInCombat = false;
                 }
                 if(combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
             }
@@ -123,29 +120,21 @@ namespace TCC
         public static void SetPlayerHp(float hp)
         {
             CurrentPlayer.CurrentHP = hp;
-            CharacterWindowViewModel.Instance.Player.CurrentHP = hp;
-            //ClassManager.SetHP(Convert.ToInt32(hp));
-
-
         }
         public static void SetPlayerMp(ulong target, float mp)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentMP = mp;
-            CharacterWindowViewModel.Instance.Player.CurrentMP = mp;
-            //ClassManager.SetMP(Convert.ToInt32(mp));
         }
         public static void SetPlayerSt(ulong target, float st)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentST = st;
-            CharacterWindowViewModel.Instance.Player.CurrentST = st;
-            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
+            if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
             CurrentPlayer.FlightEnergy = en;
-            CharacterWindowViewModel.Instance.Player.FlightEnergy = en;
             WindowManager.FlightDurationWindow.SetEnergy(en);
         }
         public static void SetPlayerLaurel(Player p)
@@ -164,34 +153,30 @@ namespace TCC
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxHP = maxHp;
-            CharacterWindowViewModel.Instance.Player.MaxHP = maxHp;
             //ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
         }
         public static void SetPlayerMaxMp(ulong target, int maxMp)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxMP = maxMp;
-            CharacterWindowViewModel.Instance.Player.MaxMP = maxMp;
             //ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
         }
         public static void SetPlayerMaxSt(ulong target, int maxSt)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
-            CharacterWindowViewModel.Instance.Player.MaxST = maxSt;
-            if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
         {
-            if (CharacterWindowViewModel.Instance.Player.CurrentShield < 0) return;
-            CharacterWindowViewModel.Instance.Player.CurrentShield -= damage;
+            if (CurrentPlayer.CurrentShield < 0) return;
+            CurrentPlayer.CurrentShield -= damage;
         }
         public static void SetPlayerMaxShield(uint shield)
         {
             CurrentPlayer.MaxShield = shield;
-            CharacterWindowViewModel.Instance.Player.MaxShield = shield;
-            CharacterWindowViewModel.Instance.Player.CurrentShield = shield;
+            CurrentPlayer.CurrentShield = shield;
 
         }
 
@@ -215,7 +200,7 @@ namespace TCC
 
         public static void SetPlayerCritFactor(float p)
         {
-            CharacterWindowViewModel.Instance.Player.CritFactor = p;
+            CurrentPlayer.CritFactor = p;
 
         }
     }

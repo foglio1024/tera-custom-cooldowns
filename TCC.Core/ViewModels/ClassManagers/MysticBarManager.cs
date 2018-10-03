@@ -1,6 +1,5 @@
 ﻿using TCC.ClassSpecific;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
@@ -34,10 +33,10 @@ namespace TCC.ViewModels
         }
         public bool ElementalizeWarning => !Elementalize && (SessionManager.Combat || SessionManager.Encounter);
 
-        public MysticBarManager() : base()
+        public MysticBarManager()
         {
             Auras = new AurasTracker();
-            Mystic.ClearMarkedTargets();
+            AbnormalityTracker = new MysticAbnormalityTracker();
         }
 
 
@@ -71,7 +70,7 @@ namespace TCC.ViewModels
 
             Contagion = new FixedSkillCooldown(cont, true);
 
-            Vow = new DurationCooldownIndicator(_dispatcher)
+            Vow = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new FixedSkillCooldown(vow, false),
                 Cooldown = new FixedSkillCooldown(vow, false)
@@ -79,13 +78,14 @@ namespace TCC.ViewModels
             Vow.Buff.Ended += OnVowBuffEnded;
             Vow.Buff.Started += OnVowBuffStarted;
 
-            VolleyOfCurse = new DurationCooldownIndicator(_dispatcher)
+            VolleyOfCurse = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new FixedSkillCooldown(voc, false),
                 Cooldown = new FixedSkillCooldown(voc, false)
             };
-            Mystic.VocExpired += OnVocExpired;
-            Mystic.VocRefreshed += OnVocRefreshed;
+
+            ClassAbnormalityTracker.MarkingExpired += OnVocExpired;
+            ClassAbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
 
             SessionManager.CombatChanged += OnCombatChanged;
             SessionManager.EncounterChanged += OnCombatChanged;
@@ -94,8 +94,6 @@ namespace TCC.ViewModels
 
         private void CheckAurasWarning()
         {
-            var warn = SessionManager.Combat || SessionManager.Encounter;
-
             AuraMerciless.FlashOnAvailable = !Auras.CritAura && !Auras.SwiftAura;
             AuraSwift.FlashOnAvailable = !Auras.CritAura && !Auras.SwiftAura;
             AuraTenacious.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;

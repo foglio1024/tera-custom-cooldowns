@@ -7,148 +7,144 @@ namespace TCC.Data
     public class Player : TSPropertyChanged
     {
         private float _critFactor;
-        private string name;
+        private string _name;
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                if (name != value)
-                {
-                    name = value;
-                    NPC("Name");
-                }
+                if (_name == value) return;
+                _name = value;
+                NPC();
             }
         }
 
-        private ulong entityId;
+        private ulong _entityId;
         public ulong EntityId
         {
-            get => entityId;
+            get => _entityId;
             set
             {
-                if (entityId != value)
+                if (_entityId != value)
                 {
-                    entityId = value;
-                    NPC("EntityId");
+                    _entityId = value;
+                    NPC();
                 }
             }
         }
         public uint PlayerId { get; internal set; }
         public uint ServerId { get; internal set; }
 
-        private Class playerclass;
+        private Class _playerclass = Class.None;
         public Class Class
         {
-            get => playerclass;
+            get => _playerclass;
             set
             {
-                if (playerclass != value)
+                if (_playerclass != value)
                 {
-                    playerclass = value;
-                    NPC("Class");
+                    _playerclass = value;
+                    NPC();
                 }
             }
         }
 
-        private Laurel laurel;
+        private Laurel _laurel;
         public Laurel Laurel
         {
-            get => laurel;
+            get => _laurel;
             set
             {
-                if (laurel != value)
+                if (_laurel != value)
                 {
-                    laurel = value;
-                    NPC("Laurel");
+                    _laurel = value;
+                    NPC();
                 }
             }
         }
 
-        private int level;
+        private int _level;
         public int Level
         {
-            get => level;
+            get => _level;
             set
             {
-                if (level != value)
+                if (_level != value)
                 {
-                    level = value;
-                    NPC("Level");
+                    _level = value;
+                    NPC();
                 }
             }
         }
 
-        private int itemLevel;
+        private int _itemLevel;
         public int ItemLevel
         {
-            get => itemLevel;
+            get => _itemLevel;
             set
             {
-                if (value != itemLevel)
+                if (value != _itemLevel)
                 {
-                    itemLevel = value;
-                    NPC("ItemLevel");
+                    _itemLevel = value;
+                    NPC();
                 }
             }
         }
 
-        private long maxHP;
+        private long _maxHP;
         public long MaxHP
         {
-            get => maxHP;
+            get => _maxHP;
             set
             {
-                if (maxHP != value)
+                if (_maxHP != value)
                 {
-                    maxHP = value;
-                    NPC("MaxHP");
+                    _maxHP = value;
+                    NPC();
                     NPC(nameof(HpFactor));
 
                 }
 
             }
         }
-        private int maxMP;
+        private int _maxMP;
         public int MaxMP
         {
-            get => maxMP;
+            get => _maxMP;
             set
             {
-                if (maxMP != value)
+                if (_maxMP != value)
                 {
-                    maxMP = value;
-                    NPC("MaxMP");
+                    _maxMP = value;
+                    NPC();
                     NPC(nameof(MpFactor));
 
                 }
 
             }
         }
-        private int maxST;
+        private int _maxST;
         public int MaxST
         {
-            get => maxST;
+            get => _maxST;
             set
             {
-                if (maxST != value)
-                {
-                    maxST = value;
-                    NPC("MaxST");
-                    NPC(nameof(StFactor));
-                }
+                if (_maxST == value) return;
+                _maxST = value;
+                NPC();
+                NPC(nameof(StFactor));
             }
         }
 
-        private uint maxShield;
+        private uint _maxShield;
         public uint MaxShield
         {
-            get => maxShield;
+            get => _maxShield;
             set
             {
-                if (maxShield != value)
+                if (_maxShield != value)
                 {
-                    maxShield = value;
+                    _maxShield = value;
                     NPC(nameof(MaxShield));
                     NPC(nameof(ShieldFactor));
                     NPC(nameof(HasShield));
@@ -156,19 +152,17 @@ namespace TCC.Data
             }
         }
 
-        private float currentHP;
+        private float _currentHP;
         public float CurrentHP
         {
-            get => currentHP;
+            get => _currentHP;
             set
             {
-                if (currentHP != value)
-                {
-                    currentHP = value;
-                    NPC(nameof(CurrentHP));
-                    NPC(nameof(TotalHP));
-                    NPC(nameof(HpFactor));
-                }
+                if (_currentHP == value) return;
+                _currentHP = value;
+                NPC(nameof(CurrentHP));
+                NPC(nameof(TotalHP));
+                NPC(nameof(HpFactor));
             }
         }
 
@@ -181,46 +175,46 @@ namespace TCC.Data
 
         public float TotalHP => CurrentHP + CurrentShield;
 
-        private float currentMP;
+        private float _currentMP;
         public float CurrentMP
         {
-            get => currentMP;
+            get => _currentMP;
             set
             {
-                if (currentMP != value)
+                if (_currentMP != value)
                 {
-                    currentMP = value;
-                    NPC("CurrentMP");
+                    _currentMP = value;
+                    NPC();
                     NPC(nameof(MpFactor));
 
                 }
             }
         }
-        private float currentST;
+        private float _currentST;
         public float CurrentST
         {
-            get => currentST;
+            get => _currentST;
             set
             {
-                if (currentST != value)
+                if (_currentST != value)
                 {
-                    currentST = value;
-                    NPC("CurrentST");
+                    _currentST = value;
+                    NPC();
                     NPC(nameof(StFactor));
 
                 }
             }
         }
 
-        private float currentShield;
+        private float _currentShield;
         public float CurrentShield
         {
-            get => currentShield;
+            get => _currentShield;
             set
             {
-                if(currentShield == value) return;
+                if(_currentShield == value) return;
                 if(value < 0) return;
-                currentShield = value;
+                _currentShield = value;
                 NPC(nameof(CurrentShield));
                 NPC(nameof(TotalHP));
                 NPC(nameof(ShieldFactor));
@@ -228,20 +222,17 @@ namespace TCC.Data
             }
         }
 
-        private float flightEnergy;
+        private float _flightEnergy;
         public float FlightEnergy
         {
-            get => flightEnergy;
+            get => _flightEnergy;
             set
             {
-                if (flightEnergy != value)
-                {
-                    flightEnergy = value;
-                    NPC("FlightEnergy");
-                }
+                if (_flightEnergy == value) return;
+                _flightEnergy = value;
+                NPC();
             }
         }
-        public float MaxFlightEnergy { get; } = 1000;
 
         private readonly List<uint> _debuffList;
         internal void AddToDebuffList(Abnormality ab)
@@ -249,7 +240,7 @@ namespace TCC.Data
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NPC("IsDebuffed");
+                NPC(nameof(IsDebuffed));
             }
         }
         internal void RemoveFromDebuffList(Abnormality ab)
@@ -257,56 +248,30 @@ namespace TCC.Data
             if (ab.IsBuff == false)
             {
                 _debuffList.Remove(ab.Id);
-                NPC("IsDebuffed");
+                NPC(nameof(IsDebuffed));
             }
         }
         public bool IsDebuffed => _debuffList.Count != 0;
 
-        private bool isInCombat;
+        private bool _isInCombat;
         public bool IsInCombat
         {
-            get => isInCombat;
+            get => _isInCombat;
             set
             {
-                if (value != isInCombat)
+                if (value != _isInCombat)
                 {
-                    isInCombat = value;
-                    NPC("IsInCombat");
+                    _isInCombat = value;
+                    NPC();
                 }
             }
         }
 
-        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
-        {
-            get => _buffs;
-            set
-            {
-                if (_buffs == value) return;
-                _buffs = value;
-            }
-        }
-        private SynchronizedObservableCollection<AbnormalityDuration> _debuffs;
-        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs
-        {
-            get => _debuffs;
-            set
-            {
-                if (_debuffs == value) return;
-                _debuffs = value;
-            }
-        }
-        private SynchronizedObservableCollection<AbnormalityDuration> _infBuffs;
+        public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; set; }
 
-        public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs
-        {
-            get => _infBuffs;
-            set
-            {
-                if (_infBuffs == value) return;
-                _infBuffs = value;
-            }
-        }
+        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; set; }
+
+        public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
 
         public float CritFactor
         {
@@ -325,7 +290,7 @@ namespace TCC.Data
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Buffs.Add(newAb);
                 if (ab.IsShield)
@@ -348,7 +313,7 @@ namespace TCC.Data
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -363,7 +328,7 @@ namespace TCC.Data
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 InfBuffs.Add(newAb);
                 return;
@@ -397,7 +362,6 @@ namespace TCC.Data
             if (buff == null) return;
             Debuffs.Remove(buff);
             buff.Dispose();
-
         }
         public void RemoveInfBuff(Abnormality ab)
         {
@@ -409,41 +373,42 @@ namespace TCC.Data
 
         public void ClearAbnormalities()
         {
-            foreach (var item in _buffs)
+            foreach (var item in Buffs)
             {
                 item.Dispose();
             }
-            foreach (var item in _debuffs)
+            foreach (var item in Debuffs)
             {
                 item.Dispose();
             }
-            foreach (var item in _infBuffs)
+            foreach (var item in InfBuffs)
             {
                 item.Dispose();
             }
-            _buffs.Clear();
-            _debuffs.Clear();
-            _infBuffs.Clear();
+            Buffs.Clear();
+            Debuffs.Clear();
+            InfBuffs.Clear();
             _debuffList.Clear();
+            NPC(nameof(IsDebuffed));
         }
 
         public Player()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            _infBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             _debuffList = new List<uint>();
         }
         public Player(ulong id, string name)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            _infBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             _debuffList = new List<uint>();
-            entityId = id;
-            this.name = name;
+            _entityId = id;
+            _name = name;
         }
     }
 }

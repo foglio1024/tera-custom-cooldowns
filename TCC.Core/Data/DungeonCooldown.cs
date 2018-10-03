@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Threading;
-using TCC.Data.Databases;
 
 namespace TCC.Data
 {
@@ -34,7 +33,7 @@ namespace TCC.Data
 
         public DungeonCooldown(uint id, Dispatcher d)
         {
-            _dispatcher = d;
+            Dispatcher = d;
             Id = id;
             Entries = (short)GetRuns();
         }

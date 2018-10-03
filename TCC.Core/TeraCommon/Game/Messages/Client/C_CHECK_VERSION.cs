@@ -16,13 +16,15 @@ namespace TCC.TeraCommon.Game.Messages.Client
                 var pointer = reader.ReadUInt16();
                 Debug.Assert(pointer==offset);//should be the same
                 var nextOffset = reader.ReadUInt16();
-                var VersionKey = reader.ReadUInt32();
-                var VersionValue = reader.ReadUInt32();
-                Versions.Add(VersionKey,VersionValue);
+                var versionKey = reader.ReadUInt32();
+                var versionValue = reader.ReadUInt32();
+                Versions.Add(versionKey,versionValue);
                 offset = nextOffset;
             }
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once CollectionNeverQueried.Global
         public Dictionary<uint,uint> Versions { get; } = new Dictionary<uint, uint>();
     }
 }

@@ -28,7 +28,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl ItemTemplate="{StaticResource BossAbnormality}" 
+        <ItemsControl ItemTemplateSelector="{StaticResource BossAbnormalityTemplateSelector}" 
                       ItemsSource="{Binding SelectedDragon.Buffs}"
                       VerticalAlignment="Center"
                       HorizontalAlignment="Left"

@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -7,8 +7,9 @@ namespace TCC.ViewModels
     {
         private bool _isGfOn;
         private bool _counterProc;
-        public BrawlerBarManager() : base()
+        public BrawlerBarManager()
         {
+            AbnormalityTracker = new BrawlerAbnormalityTracker();
         }
 
         public DurationCooldownIndicator GrowingFury { get; set; }
@@ -42,7 +43,7 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             // Growing Fury
-            GrowingFury = new DurationCooldownIndicator(_dispatcher);
+            GrowingFury = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
             GrowingFury.Cooldown = new FixedSkillCooldown(gf,  true);
             GrowingFury.Buff = new FixedSkillCooldown(gf, false);
@@ -53,12 +54,12 @@ namespace TCC.ViewModels
             Counter = new FixedSkillCooldown(c, false);
 
             // Rhythmic Blows
-            RhythmicBlows = new DurationCooldownIndicator(_dispatcher);
+            RhythmicBlows = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
             RhythmicBlows.Cooldown = new FixedSkillCooldown(rb, true);
 
             // Infuriate
-            Infuriate = new DurationCooldownIndicator(_dispatcher);
+            Infuriate = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
             Infuriate.Cooldown = new FixedSkillCooldown(infu, true);
         }

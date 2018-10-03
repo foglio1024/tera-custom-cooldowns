@@ -8,28 +8,25 @@ using System.Windows.Media.Animation;
 
 namespace TCC.Controls
 {
-    /// <summary>
-    /// Logica di interazione per ValueSetting.xaml
-    /// </summary>
-    public partial class ValueSetting : UserControl
+    public partial class ValueSetting
     {
 
         public string SettingName
         {
-            get { return (string)GetValue(SettingNameProperty); }
-            set { SetValue(SettingNameProperty, value); }
+            get => (string)GetValue(SettingNameProperty);
+            set => SetValue(SettingNameProperty, value);
         }
         public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
         public ImageSource SettingImage
         {
-            get { return (ImageSource)GetValue(SettingImageProperty); }
-            set { SetValue(SettingImageProperty, value); }
+            get => (ImageSource)GetValue(SettingImageProperty);
+            set => SetValue(SettingImageProperty, value);
         }
         public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(ValueSetting));
         public Visibility TextBoxVisibility
         {
-            get { return (Visibility)GetValue(TextBoxVisibilityProperty); }
-            set { SetValue(TextBoxVisibilityProperty, value); }
+            get => (Visibility)GetValue(TextBoxVisibilityProperty);
+            set => SetValue(TextBoxVisibilityProperty, value);
         }
         public static readonly DependencyProperty TextBoxVisibilityProperty = DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(ValueSetting));
 
@@ -37,8 +34,8 @@ namespace TCC.Controls
 
         public double Max
         {
-            get { return (double)GetValue(MaxProperty); }
-            set { SetValue(MaxProperty, value); }
+            get => (double)GetValue(MaxProperty);
+            set => SetValue(MaxProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Max.  This enables animation, styling, binding, etc...
@@ -49,8 +46,8 @@ namespace TCC.Controls
 
         public double Min
         {
-            get { return (double)GetValue(MinProperty); }
-            set { SetValue(MinProperty, value); }
+            get => (double)GetValue(MinProperty);
+            set => SetValue(MinProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Min.  This enables animation, styling, binding, etc...
@@ -60,26 +57,26 @@ namespace TCC.Controls
 
         public double Value
         {
-            get { return (double)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (double)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
 
 
-        private ColorAnimation glow;
-        private ColorAnimation unglow;
-        private DoubleAnimation fadeIn;
-        private DoubleAnimation fadeOut;
+        private readonly ColorAnimation _glow;
+        private readonly ColorAnimation _unglow;
+        private readonly DoubleAnimation _fadeIn;
+        private readonly DoubleAnimation _fadeOut;
 
 
 
         public ValueSetting()
         {
             InitializeComponent();
-            glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
-            unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
-            fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
-            fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
+            _glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
+            _unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
+            _fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
+            _fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
             MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
@@ -95,26 +92,26 @@ namespace TCC.Controls
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
-            (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, glow);
-            Img.BeginAnimation(OpacityProperty, fadeIn);
+            ((Grid)sender).Background.BeginAnimation(SolidColorBrush.ColorProperty, _glow);
+            Img.BeginAnimation(OpacityProperty, _fadeIn);
 
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
-            (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
-            Img.BeginAnimation(OpacityProperty, fadeOut);
+            ((Grid)sender).Background.BeginAnimation(SolidColorBrush.ColorProperty, _unglow);
+            Img.BeginAnimation(OpacityProperty, _fadeOut);
 
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                var s = sender as Slider;
-                if (!s.IsMouseOver) return;
-                Value = Math.Round(s.Value, 2);
-            }
+            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+
+            var s = (Slider)sender;
+            if (!s.IsMouseOver) return;
+
+            Value = Math.Round(s.Value, 2);
         }
 
         private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -124,22 +121,22 @@ namespace TCC.Controls
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var tb = sender as TextBox;
-            double result;
+            var tb = (TextBox) sender;
             try
             {
-                result = double.Parse(tb.Text, CultureInfo.InvariantCulture);
+                var result = double.Parse(tb.Text, CultureInfo.InvariantCulture);
                 if (result > Max) Value = Max;
                 else if (result < Min) Value = Min;
                 else Value = result;
             }
             catch (Exception)
             {
-                tb.Text = Value.ToString();
+                tb.Text = Value.ToString(CultureInfo.InvariantCulture);
 
             }
         }
 
+/*
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = sender as TextBox;
@@ -152,10 +149,11 @@ namespace TCC.Controls
                 tb.Text = Value.ToString();
             }
         }
+*/
 
         private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }

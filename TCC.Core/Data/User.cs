@@ -340,15 +340,15 @@ namespace TCC.Data
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!SettingsManager.ShowAllGroupAbnormalities)
+            if (!Settings.ShowAllGroupAbnormalities)
             {
-                if (SettingsManager.GroupAbnormals.ContainsKey(Class.Common))
+                if (Settings.GroupAbnormals.ContainsKey(Class.Common))
                 {
-                    if (!SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id))
+                    if (!Settings.GroupAbnormals[Class.Common].Contains(ab.Id))
                     {
-                        if (SettingsManager.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (Settings.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
                         {
-                            if (!SettingsManager.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                            if (!Settings.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
                         }
                         else return;
                     }
@@ -360,7 +360,7 @@ namespace TCC.Data
             if (existing == null)
             {
 
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false);
                 if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
@@ -381,7 +381,7 @@ namespace TCC.Data
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -403,7 +403,7 @@ namespace TCC.Data
             if (!ab.IsBuff)
             {
                 _debuffList.Remove(ab.Id);
-                NPC("IsDebuffed");
+                NPC(nameof(IsDebuffed));
             }
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
@@ -427,7 +427,7 @@ namespace TCC.Data
 
         public User(Dispatcher d)
         {
-            _dispatcher = d;
+            Dispatcher = d;
             Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
             Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
         }

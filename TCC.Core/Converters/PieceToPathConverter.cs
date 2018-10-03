@@ -10,7 +10,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var p = (GearPiece) value;
+            var p = (GearPiece?) value ?? 0;
             switch (p)
             {
                 case GearPiece.Weapon:

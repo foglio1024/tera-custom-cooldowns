@@ -68,13 +68,13 @@ namespace TCC.ViewModels
 
         public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             TabName = n;
             Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
-            Authors = new SynchronizedObservableCollection<string>(_dispatcher);
-            ExcludedAuthors = new SynchronizedObservableCollection<string>(_dispatcher);
-            Channels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
-            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
+            Authors = new SynchronizedObservableCollection<string>(Dispatcher);
+            ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
+            Channels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
+            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
             foreach (var auth in a)
             {
                 Authors.Add(auth);

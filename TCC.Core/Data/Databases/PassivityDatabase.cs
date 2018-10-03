@@ -6,7 +6,7 @@ namespace TCC.Data.Databases
     {
         public static List<uint> Passivities = new List<uint>
         {
-             6001, 6002, 6003, 6004, 6012, 6013 
+             6001, 6002, 6003, 6004, 6012, 6013, 6017, 6018
         };
         public static bool TryGetPassivitySkill(uint id, out Skill sk)
         {
@@ -17,8 +17,7 @@ namespace TCC.Data.Databases
             {
                 var ab = SessionManager.AbnormalityDatabase.Abnormalities[id];
                 result = true;
-                sk = new Skill(id, Class.Common, ab.Name, "");
-                sk.IconName = ab.IconName;
+                sk = new Skill(id, Class.Common, ab.Name, "") {IconName = ab.IconName};
             }
             return result;
 

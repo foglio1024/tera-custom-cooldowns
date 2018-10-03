@@ -16,13 +16,13 @@ namespace TCC.Converters
                 case HarrowholdPhase.Phase1:
                     return Application.Current.FindResource("Phase1EnemyWindowLayout");
                 case HarrowholdPhase.Phase2:
-                    return Application.Current.FindResource("Phase2EnemyWindowLayout");
+                    return Application.Current.FindResource("DefaultEnemyWindowLayout");
                 case HarrowholdPhase.Phase3:
-                    return Application.Current.FindResource("Phase3EnemyWindowLayout");
+                    return Application.Current.FindResource("DefaultEnemyWindowLayout");
                 case HarrowholdPhase.Phase4:
-                    return Application.Current.FindResource("Phase4EnemyWindowLayout");
+                    return Application.Current.FindResource("DefaultEnemyWindowLayout");
                 case HarrowholdPhase.Balistas:
-                    return Application.Current.FindResource("Phase2BEnemyWindowLayout");
+                    return Application.Current.FindResource("DefaultEnemyWindowLayout");
                 default:
                     return Application.Current.FindResource("DefaultEnemyWindowLayout");
             }

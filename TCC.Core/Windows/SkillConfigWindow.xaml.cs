@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.ViewModels;
@@ -25,7 +15,7 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SkillConfigWindow.xaml
     /// </summary>
-    public partial class SkillConfigWindow : Window
+    public partial class SkillConfigWindow
     {
 
         public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
@@ -59,13 +49,19 @@ namespace TCC.Windows
         private void ClosewWindow(object sender, RoutedEventArgs e)
         {
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
-            an.Completed += (s, ev) => Hide();
+            an.Completed += (s, ev) =>
+            {
+                Hide();
+                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            };
             BeginAnimation(OpacityProperty, an);
             CooldownWindowViewModel.Instance.Save();
         }
 
         internal void ShowWindow()
         {
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
@@ -85,7 +81,7 @@ namespace TCC.Windows
         private void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var view = ((ICollectionView)CooldownWindowViewModel.Instance.SkillsView);
-            view.Filter = o =>  ((Skill)o).ShortName.IndexOf((sender as TextBox).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
+            view.Filter = o =>  ((Skill)o).ShortName.IndexOf(((TextBox) sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
 
@@ -104,7 +100,7 @@ namespace TCC.Windows
 
         private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
         {
-            CooldownWindowViewModel.Instance.HiddenSkills.Remove((sender as Button).DataContext as Skill);
+            CooldownWindowViewModel.Instance.HiddenSkills.Remove(((Button) sender).DataContext as Skill);
         }
     }
 }

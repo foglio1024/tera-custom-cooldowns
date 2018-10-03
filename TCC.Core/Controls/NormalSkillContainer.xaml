@@ -1,16 +1,10 @@
 ﻿<UserControl x:Class="TCC.Controls.NormalSkillContainer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:CooldownWindowViewModel}">
-    <UserControl.Resources>
-        <DataTemplate x:Key="SkillDataTemplate">
-            <controls:SkillIconControl />
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid Width="Auto" Name="Root" Height="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

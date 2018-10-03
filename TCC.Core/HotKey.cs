@@ -1,17 +1,17 @@
 ﻿using System.Windows.Forms;
-using TCC.Tera.Data;
+using TCC.Parsing;
 
 namespace TCC
 {
     public struct HotKey
     {
-        public HotKey(Keys k, HotkeysData.ModifierKeys m) : this()
+        public HotKey(Keys k, ModifierKeys m) : this()
         {
             Key = k;
             Modifier = m;
         }
 
         public Keys Key { get; }
-        public HotkeysData.ModifierKeys Modifier { get; }
+        public ModifierKeys Modifier { get; }
     }
 }

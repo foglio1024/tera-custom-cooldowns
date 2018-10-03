@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using TCC.Annotations;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.Parsing;
 using TCC.Parsing.Messages;
 
@@ -17,18 +17,18 @@ namespace TCC.ViewModels
     {
         private static GroupWindowViewModel _instance;
         private bool _raid;
-        private ulong _aggroHolder;
         private bool _firstCheck = true;
         private readonly object _lock = new object();
         private bool _leaderOverride;
+        private ulong _aggroHolder;
         public event Action SettingsUpdated;
 
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         //public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
         public SynchronizedObservableCollection<User> Members { get; }
-        public ICollectionViewLiveShaping Dps { get; }
-        public ICollectionViewLiveShaping Tanks { get; }
-        public ICollectionViewLiveShaping Healers { get; }
+        public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
+        public ICollectionViewLiveShaping Tanks { [UsedImplicitly] get; }
+        public ICollectionViewLiveShaping Healers { [UsedImplicitly] get; }
         public bool Raid
         {
             get => _raid;
@@ -36,21 +36,21 @@ namespace TCC.ViewModels
             {
                 if (_raid == value) return;
                 _raid = value;
-                NPC(nameof(Raid));
+                NPC();
             }
         }
         public int Size => Members.Count;
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && SettingsManager.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && Settings.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && Proxy.IsConnected;
         public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
 
             //WindowManager.TccVisibilityChanged += (s, ev) =>
             //{
@@ -61,12 +61,12 @@ namespace TCC.ViewModels
             //    }
             //};
 
-            Members = new SynchronizedObservableCollection<User>(_dispatcher);
+            Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
 
         }
 
@@ -132,15 +132,15 @@ namespace TCC.ViewModels
         {
             if (target == 0)
             {
-                //Members.ToList().ForEach(user => user.HasAggro = false);
                 foreach (var item in Members.ToSyncArray())
                 {
                     item.HasAggro = false;
                 }
                 return;
             }
+
             if (_aggroHolder == target) return;
-            //Members.ToList().ForEach(user => user.HasAggro = user.EntityId == target);
+            _aggroHolder = target;
             foreach (var item in Members.ToSyncArray())
             {
                 item.HasAggro = item.EntityId == target;
@@ -175,7 +175,7 @@ namespace TCC.ViewModels
                 // -- show only aggro stacks if we are in HH -- //
                 if (BossGageWindowViewModel.Instance.CurrentHHphase >= HarrowholdPhase.Phase2)
                 {
-                    if (ab.Id != 950023 && SettingsManager.ShowOnlyAggroStacks) return;
+                    if (ab.Id != 950023 && Settings.ShowOnlyAggroStacks) return;
                 }
                 // -------------------------------------------- //
                 u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -183,8 +183,7 @@ namespace TCC.ViewModels
         }
         public void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
-            User u = null;
-            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
 
             if (ab.Type == AbnormalityType.Buff)
@@ -209,7 +208,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (Settings.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 return;
@@ -232,7 +231,6 @@ namespace TCC.ViewModels
         }
         private void SendAddMessage(string name)
         {
-            if (App.Debug) return;
             string msg;
             string opcode;
             if (Raid)
@@ -270,12 +268,14 @@ namespace TCC.ViewModels
         {
             var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
+            u.ClearAbnormalities();
             Members.Remove(u);
             if (!kick) SendLeaveMessage(u.Name);
         }
         public void ClearAll()
         {
-            if (!SettingsManager.GroupWindowSettings.Enabled || !_dispatcher.Thread.IsAlive) return;
+            if (!Settings.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            Members.ToSyncArray().ToList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;
             _leaderOverride = false;
@@ -289,18 +289,9 @@ namespace TCC.ViewModels
         public void RemoveMe()
         {
             var me = Members.ToSyncArray().FirstOrDefault(x => x.IsPlayer);
-            if (me != null) Members.Remove(me);
-        }
-        public void ClearAllBuffs()
-        {
-            foreach (var x in Members.ToSyncArray())
-            {
-                foreach (var b in x.Buffs.ToSyncArray())
-                {
-                    b.Dispose();
-                }
-                x.Buffs.Clear();
-            }
+            if (me == null) return;
+            me.ClearAbnormalities();
+            Members.Remove(me);
         }
         internal void ClearAllAbnormalities()
         {
@@ -396,51 +387,47 @@ namespace TCC.ViewModels
         }
         public void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
-            User u = null;
-            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             u.CurrentHp = curHp;
             u.MaxHp = maxHp;
         }
         public void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
-            User u = null;
-            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             u.CurrentMp = curMp;
             u.MaxMp = maxMp;
         }
         public void SetRaid(bool raid)
         {
-            _dispatcher.Invoke(() => Raid = raid);
+            Dispatcher.Invoke(() => Raid = raid);
         }
         public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
             var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (u != null)
-            {
-                u.CurrentHp = p.CurrentHP;
-                u.CurrentMp = p.CurrentMP;
-                u.MaxHp = p.MaxHP;
-                u.MaxMp = p.MaxMP;
-                u.Level = (uint)p.Level;
-                u.Alive = p.Alive;
-                NPC(nameof(AliveCount));
-                if (!p.Alive) u.HasAggro = false;
-            }
+            if (u == null) return;
+            u.CurrentHp = p.CurrentHP;
+            u.CurrentMp = p.CurrentMP;
+            u.MaxHp = p.MaxHP;
+            u.MaxMp = p.MaxMP;
+            u.Level = (uint)p.Level;
+            u.Alive = p.Alive;
+            NPC(nameof(AliveCount));
+            if (!p.Alive) u.HasAggro = false;
         }
         public void NotifyThresholdChanged()
         {
             NPC(nameof(Size));
         }
-        public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
+        public void UpdateMemberGear(S_SPAWN_USER p)
         {
-            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == sSpawnUser.PlayerId && x.ServerId == sSpawnUser.ServerId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
-            u.Weapon = sSpawnUser.Weapon;
-            u.Armor = sSpawnUser.Armor;
-            u.Gloves = sSpawnUser.Gloves;
-            u.Boots = sSpawnUser.Boots;
+            u.Weapon = p.Weapon;
+            u.Armor = p.Armor;
+            u.Gloves = p.Gloves;
+            u.Boots = p.Boots;
         }
         public void UpdateMyGear()
         {
@@ -455,8 +442,7 @@ namespace TCC.ViewModels
         }
         public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
         {
-            User u = null;
-            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
             u.Location = SessionManager.MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
@@ -472,8 +458,8 @@ namespace TCC.ViewModels
         private static DragBehavior _instance = new DragBehavior();
         public static DragBehavior Instance
         {
-            get { return _instance; }
-            set { _instance = value; }
+            get => _instance;
+            set => _instance = value;
         }
 
         public static bool GetDrag(DependencyObject obj)

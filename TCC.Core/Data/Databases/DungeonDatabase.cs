@@ -8,8 +8,8 @@ namespace TCC.Data.Databases
 {
     public class DungeonDatabase
     {
-        public Dictionary<uint, Dungeon> DungeonDefs;
-        public Dictionary<uint, string> DungeonNames;
+        public readonly Dictionary<uint, Dungeon> DungeonDefs;
+        public readonly Dictionary<uint, string> DungeonNames;
         //public Dictionary<uint, Dungeon> DungeonDefinitions;
         public DungeonDatabase(string lang)
         {
@@ -20,15 +20,22 @@ namespace TCC.Data.Databases
             DungeonNames = new Dictionary<uint, string>();
             //TODO
             var defs = new Dictionary<uint, Tuple<short, DungeonTier>>();
-            if(!File.Exists("resources/data/dungeons-def.xml")) File.Copy("resources/data/dungeons-def-default.xml", "resources/data/dungeons-def.xml");
+            if (!File.Exists("resources/data/dungeons-def.xml")) File.Copy("resources/data/dungeons-def-default.xml", "resources/data/dungeons-def.xml");
             var def = XDocument.Load("resources/data/dungeons-def.xml");
             foreach (var dg in def.Descendants().Where(x => x.Name == "Dungeon"))
             {
-                var id = Convert.ToUInt32(dg.Attribute("Id").Value);
-                var r = Convert.ToInt16(dg.Attribute("MaxBaseRuns").Value);
-                //var n = dg.Attribute("ShortName").Value;
-                var t = (DungeonTier)Enum.Parse(typeof(DungeonTier), dg.Attribute("Tier").Value);
-                defs.Add(id, new Tuple<short, DungeonTier>(r, t));
+                uint id = 0;
+                short r = 0;
+                DungeonTier t = 0;
+                dg.Attributes().ToList().ForEach(a =>
+                {
+                    if (a.Name == "Id") id = Convert.ToUInt32(dg.Attribute("Id")?.Value);
+                    if (a.Name == "MaxBaseRuns") r = Convert.ToInt16(dg.Attribute("MaxBaseRuns")?.Value);
+                    if (a.Name != "Tier") return;
+                    var value = dg.Attribute("Tier")?.Value;
+                    if (value != null) t = (DungeonTier) Enum.Parse(typeof(DungeonTier), value);
+                });
+                if (id != 0) defs.Add(id, new Tuple<short, DungeonTier>(r, t));
             }
             while (true)
             {

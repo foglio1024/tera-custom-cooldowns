@@ -46,11 +46,9 @@ namespace TCC.Controls
             _warnTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000) };
             _warnTimer.Tick += WarnTimer_Tick;
             _arcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
-            _resetAnimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(500));
-            _expandWarn =
-                new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
-            _expandWarnInner =
-                new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
+            _resetAnimation = new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)) { EasingFunction = new QuadraticEase() };
+            _expandWarn = new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
+            _expandWarnInner = new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
             Timeline.SetDesiredFrameRate(_expandWarn, 30);
             Timeline.SetDesiredFrameRate(_expandWarnInner, 30);
         }
@@ -59,7 +57,7 @@ namespace TCC.Controls
         {
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (FixedSkillCooldown)DataContext;
-            _context.PropertyChanged += _context_PropertyChanged;
+            //_context.PropertyChanged += _context_PropertyChanged;
 
             _context.Ended += OnCooldownEnded;
             _context.Started += OnCooldownStarted;
@@ -70,8 +68,8 @@ namespace TCC.Controls
 
         private void OnReset()
         {
-            ResetArc.Opacity = 1;
-            ResetArc.BeginAnimation(Arc.StrokeThicknessProperty, new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(250)){EasingFunction = new QuadraticEase()});
+            //ResetArc.Opacity = 1;
+            ResetArc.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
             //ResetArc.BeginAnimation(OpacityProperty, _resetAnimation);
         }
 
@@ -94,7 +92,7 @@ namespace TCC.Controls
             switch (mode)
             {
                 case CooldownMode.Normal:
-                    var newVal = _context.Cooldown / (double) _context.OriginalCooldown;
+                    var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
                     newVal = newVal > 1 ? 1 : newVal;
                     AnimateArcAngle(newVal);
                     break;
@@ -118,51 +116,51 @@ namespace TCC.Controls
             }
         }
 
-        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Dispatcher.InvokeIfRequired(() =>
-            {
-                switch (e.PropertyName)
-                {
-                    //case "Refresh" when _context.Cooldown == _context.OriginalCooldown: return;
-                    //case "Refresh":
-                    //    var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
-                    //    if (newVal > 1) newVal = 1;
-                    //    if (_context.Cooldown == 0)
-                    //    {
-                    //        IsRunning = false;
-                    //        AnimateAvailableSkill();
-                    //        return;
-                    //    }
+        //private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    //Dispatcher.InvokeIfRequired(() =>
+        //    //{
+        //    //    switch (e.PropertyName)
+        //    //    {
+        //    //        //case "Refresh" when _context.Cooldown == _context.OriginalCooldown: return;
+        //    //        //case "Refresh":
+        //    //        //    var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
+        //    //        //    if (newVal > 1) newVal = 1;
+        //    //        //    if (_context.Cooldown == 0)
+        //    //        //    {
+        //    //        //        IsRunning = false;
+        //    //        //        AnimateAvailableSkill();
+        //    //        //        return;
+        //    //        //    }
 
-                    //    AnimateArcAngle(newVal);
-                    //    break;
-                    //case "Start":
-                    //    IsRunning = true;
-                    //    AnimateArcAngle();
-                    //    break;
-                    //case "IsAvailable" when _context.IsAvailable:
-                    //    IsRunning = false;
-                    //    AnimateAvailableSkill();
-                    //    break;
-                    //case "IsAvailable":
-                    //    _warnTimer.Stop();
-                    //    break;
-                    //case nameof(_context.Seconds):
-                    //    NPC(nameof(SecondsText));
-                    //    break;
-                    //case "StartPre":
-                    //    IsRunning = true;
-                    //    AnimatePreArcAngle();
-                    //    break;
-                    //case "StopPre":
-                    //    IsRunning = false;
-                    //    PreArc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
-                    //    PreArc.EndAngle = 0.01;
-                    //    break;
-                }
-            }, DispatcherPriority.DataBind);
-        }
+        //    //        //    AnimateArcAngle(newVal);
+        //    //        //    break;
+        //    //        //case "Start":
+        //    //        //    IsRunning = true;
+        //    //        //    AnimateArcAngle();
+        //    //        //    break;
+        //    //        //case "IsAvailable" when _context.IsAvailable:
+        //    //        //    IsRunning = false;
+        //    //        //    AnimateAvailableSkill();
+        //    //        //    break;
+        //    //        //case "IsAvailable":
+        //    //        //    _warnTimer.Stop();
+        //    //        //    break;
+        //    //        //case nameof(_context.Seconds):
+        //    //        //    NPC(nameof(SecondsText));
+        //    //        //    break;
+        //    //        //case "StartPre":
+        //    //        //    IsRunning = true;
+        //    //        //    AnimatePreArcAngle();
+        //    //        //    break;
+        //    //        //case "StopPre":
+        //    //        //    IsRunning = false;
+        //    //        //    PreArc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
+        //    //        //    PreArc.EndAngle = 0.01;
+        //    //        //    break;
+        //    //    }
+        //    //}, DispatcherPriority.DataBind);
+        //}
 
         private void NPC([CallerMemberName] string p = null)
         {

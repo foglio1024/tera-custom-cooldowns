@@ -13,8 +13,7 @@ namespace TCC.Parsing.Messages
 
         public S_ANSWER_INTERACTIVE(TeraMessageReader reader) : base(reader)
         {
-            var nameOffset = reader.ReadUInt16();
-            reader.Skip(4);
+            reader.Skip(2+4);
             Model = reader.ReadUInt32();
             Level = reader.ReadUInt32();
             HasParty = reader.ReadBoolean();

@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -7,13 +7,13 @@ namespace TCC.ViewModels
     {
         public DurationCooldownIndicator ManaBoost { get; set; }
 
-        public SorcererBarManager() : base()
+        public SorcererBarManager()
         {
-
+            AbnormalityTracker = new SorcererAbnormalityTracker();
         }
         public override void LoadSpecialSkills()
         {
-            ManaBoost = new DurationCooldownIndicator(_dispatcher);
+            ManaBoost = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
             ManaBoost.Cooldown = new FixedSkillCooldown(mb,  true);
             ManaBoost.Buff = new FixedSkillCooldown(mb, false);

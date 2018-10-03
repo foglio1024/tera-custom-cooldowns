@@ -5,43 +5,39 @@ namespace TCC.Data
 {
     public class Counter : TSPropertyChanged
     {
-
         //TODO use events here
-        private int val = 0;
+        private int _val;
+        private readonly DispatcherTimer _expire;
+        private readonly bool _autoexpire;
+        public event Action Maxed;
+
         public int Val
         {
-            get => val;
+            get => _val;
             set
             {
-                if (val == value) return;
-                val = value;
-                if (val == MaxValue)
-                {
-                    NPC("Maxed");
-                }
+                if (_val == value) return;
+                _val = value;
+                Maxed?.Invoke();
                 RefreshTimer();
-                NPC("Val");
+                NPC();
             }
         }
-
-        private DispatcherTimer _expire;
         public int MaxValue { get; }
-        private bool _autoexpire;
-
-        private void RefreshTimer()
-        {
-            _expire.Stop();
-            if (val == 0) return;
-            if (!_autoexpire) return;
-            _expire.Start();
-        }
         public Counter(int max, bool autoexpire)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             MaxValue = max;
             _autoexpire = autoexpire;
             _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(9000) };
             _expire.Tick += (s, ev) => Val = 0;
+        }
+        private void RefreshTimer()
+        {
+            _expire.Stop();
+            if (_val == 0) return;
+            if (!_autoexpire) return;
+            _expire.Start();
         }
     }
 }

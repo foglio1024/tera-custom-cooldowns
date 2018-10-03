@@ -9,20 +9,9 @@ namespace TCC.Parsing.Messages
         private int circle, action;
         public ulong User { get; private set; }
         public ulong Source { get; private set; }
-        public AggroAction Action
-        {
-            get
-            {
-                return (AggroAction)action;
-            }
-        }
-        public AggroCircle Circle
-        {
-            get
-            {
-                return (AggroCircle)circle;
-            }
-        }
+        public AggroAction Action => (AggroAction)action;
+
+        public AggroCircle Circle => (AggroCircle)circle;
 
         public S_USER_EFFECT(TeraMessageReader reader) : base(reader)
         {

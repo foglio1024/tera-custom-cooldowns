@@ -6,7 +6,7 @@ namespace TCC.TeraCommon.Game.Messages.Server
     {
         internal S_BAN_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {
-            var nameoffset = reader.ReadUInt16();
+            reader.ReadUInt16();
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
             reader.Skip(4); //unknown ffffffff

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -9,7 +8,7 @@ namespace TCC.Controls
     /// <summary>
     /// Interaction logic for Ripple.xaml
     /// </summary>
-    public partial class Ripple : UserControl
+    public partial class Ripple
     {
         private const int AnimTime = 650;
 

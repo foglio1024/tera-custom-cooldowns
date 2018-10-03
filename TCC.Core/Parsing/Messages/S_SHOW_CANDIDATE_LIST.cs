@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TCC.Data;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
@@ -24,7 +20,7 @@ namespace TCC.Parsing.Messages
             reader.BaseStream.Position = offset - 4;
             for (int i = 0; i < count; i++)
             {
-                var current = reader.ReadUInt16();
+                reader.Skip(2); //var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();
 
                 var nameOffset = reader.ReadUInt16();
@@ -33,7 +29,7 @@ namespace TCC.Parsing.Messages
                 var cls = (Class)reader.ReadUInt16();
                 reader.Skip(2 + 2);
                 var level = reader.ReadUInt16();
-                var worldId = reader.ReadUInt32();
+                reader.Skip(4); // var worldId = reader.ReadUInt32();
                 var guardId = reader.ReadUInt32();
                 var sectionId = reader.ReadUInt32();
 

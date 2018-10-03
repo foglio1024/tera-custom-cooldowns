@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using TCC.TeraCommon.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
@@ -17,6 +16,7 @@ namespace TCC.Parsing.Messages
             var owner = reader.ReadUInt64();
             if (owner != 0) Source = owner;
             Target = reader.ReadUInt64();
+            // ReSharper disable UnusedVariable
             var template = reader.ReadInt32();
             var skill = reader.ReadInt32();
             var stage = reader.ReadInt32();
@@ -24,6 +24,7 @@ namespace TCC.Parsing.Messages
             var area = reader.ReadInt16();
             var id = reader.ReadUInt32();
             var time = reader.ReadInt32();
+            // ReSharper restore UnusedVariable
             Damage = reader.ReadUInt64();
             Type = reader.ReadUInt16();
         }

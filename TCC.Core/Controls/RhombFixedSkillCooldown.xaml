@@ -13,14 +13,6 @@
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
         </Storyboard>
-        <Storyboard x:Key="WarnExp" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"  Duration="0:0:1"   From="1" To="1.5"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"  Duration="0:0:1"   From="1" To="1.5"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"                BeginTime="0:0:0.4" Duration="0:0:0.6" From="1" To="0"    EasingFunction="{StaticResource QuadraticEase}"/>
-        </Storyboard>
-        <Storyboard x:Key="WarnExpStroke" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetProperty="StrokeThickness"                            Duration="0:0:1"   From="3" To="0"    EasingFunction="{StaticResource QuadraticEase}" />
-        </Storyboard>
         <Storyboard x:Key="WarnGlow" RepeatBehavior="Forever">
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
@@ -193,7 +185,7 @@
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Margin="0 0 0 6"
-              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:RhombFixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:RhombFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border Background="{StaticResource KrBgColor}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource KrBorderColor}"
                     BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"

@@ -1,6 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
@@ -9,21 +8,18 @@ using TCC.ViewModels;
 
 namespace TCC.Controls
 {
-    /// <summary>
-    /// Logica di interazione per RunemarksControl.xaml
-    /// </summary>
-    public partial class RunemarksControl : UserControl
+    public partial class RunemarksControl
     {
         private ValkyrieBarManager _dc;
 
         public RunemarksControl()
         {
             InitializeComponent();
-            this.Loaded += (_, __) =>
+            Loaded += (_, __) =>
             {
                 _dc = DataContext as ValkyrieBarManager;
                 if (_dc != null) _dc.RunemarksCounter.PropertyChanged += OnEdgePropertyChanged;
-                else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
+                //else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
             };
 
         }
@@ -35,23 +31,24 @@ namespace TCC.Controls
                 if (i < _dc.RunemarksCounter.Val)
                 {
                     RunemarkContainer.Children[i].Opacity = 1;
-                    (RunemarkContainer.Children[i] as Shape).Fill = _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue ?
-                                    App.Current.FindResource("RunemarkColorMax") as SolidColorBrush :
-                                    App.Current.FindResource("RunemarkColor") as SolidColorBrush;
+                    ((Shape) RunemarkContainer.Children[i]).Fill = _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue ?
+                                   Application.Current.FindResource("RunemarkColorMax") as SolidColorBrush :
+                                   Application.Current.FindResource("RunemarkColor") as SolidColorBrush;
 
                 }
                 else
                 {
                     RunemarkContainer.Children[i].Opacity = .1;
-                    (RunemarkContainer.Children[i] as Shape).Fill = Brushes.White;
+                    ((Shape) RunemarkContainer.Children[i]).Fill = Brushes.White;
                 }
             }
-            
-            this.Effect = _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue ? new DropShadowEffect
+
+            Effect = _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue ? new DropShadowEffect
             {
                 BlurRadius = 10,
                 ShadowDepth = 0,
-                Color= (App.Current.FindResource("RunemarkColorMax") as SolidColorBrush).Color
+                // ReSharper disable once PossibleNullReferenceException
+                Color= (Application.Current.FindResource("RunemarkColorMax") as SolidColorBrush).Color
             } : null; 
         }
 

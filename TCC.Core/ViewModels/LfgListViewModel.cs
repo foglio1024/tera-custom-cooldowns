@@ -13,7 +13,7 @@ namespace TCC.ViewModels
     public class LfgListViewModel : TSPropertyChanged
     {
         private bool _creating;
-        public Listing _lastClicked;
+        public Listing LastClicked;
         private string _newMessage;
 
 
@@ -40,7 +40,7 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-        public bool AmIinLfg => _dispatcher.Invoke(() => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
+        public bool AmIinLfg => Dispatcher.Invoke(() => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
                                                                      || listing.LeaderName == SessionManager.CurrentPlayer.Name
                                                                      || listing.Players.ToSyncArray().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
                                                                      || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId))));
@@ -55,15 +55,15 @@ namespace TCC.ViewModels
             MyLfg?.NotifyMyLfg();
         }
 
-        public Listing MyLfg => _dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
+        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
                                                                    || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
                                                                    || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
         public LfgListViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Listings = new SynchronizedObservableCollection<Listing>(_dispatcher);
-            ListingsView = Utils.InitLiveView<Listing>(null, Listings, new string[] { }, new string[] { });
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
+            ListingsView = Utils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
         }
@@ -71,20 +71,20 @@ namespace TCC.ViewModels
         private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             //NotifyMyLfg();
-            Task.Delay(500).ContinueWith(t => { _dispatcher.Invoke(NotifyMyLfg); });
+            Task.Delay(500).ContinueWith(t => { Dispatcher.Invoke(NotifyMyLfg); });
 
         }
 
         internal void RemoveDeadLfg()
         {
-            Listings.Remove(_lastClicked);
+            Listings.Remove(LastClicked);
         }
 
     }
 
     public class SortCommand : ICommand
     {
-        private ICollectionViewLiveShaping _view;
+        private readonly ICollectionViewLiveShaping _view;
         private ListSortDirection _direction = ListSortDirection.Ascending;
         public event EventHandler CanExecuteChanged;
 

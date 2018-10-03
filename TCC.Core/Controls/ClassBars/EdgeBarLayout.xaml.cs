@@ -1,5 +1,5 @@
-using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using TCC.Data;
@@ -14,11 +14,11 @@ namespace TCC.Controls.ClassBars
         public EdgeBarLayout()
         {
             InitializeComponent();
-            this.Loaded += (_, __) =>
+            Loaded += (_, __) =>
             {
                 _dc = DataContext as WarriorBarManager;
                 if (_dc != null) _dc.EdgeCounter.PropertyChanged += OnEdgePropertyChanged;
-                else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
+                //else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
             };
         }
 
@@ -30,15 +30,15 @@ namespace TCC.Controls.ClassBars
                 if (i < _dc.EdgeCounter.Val)
                 {
                     EdgeContainer.Children[i].Opacity = 1;
-                    (EdgeContainer.Children[i] as Shape).Fill = i < 8 ? i == 7 ? App.Current.FindResource("AquadraxColor") as SolidColorBrush :
-                                                                                 App.Current.FindResource("IgnidraxColor") as SolidColorBrush :
-                                                                                 App.Current.FindResource("HpColor") as SolidColorBrush;
+                    ((Shape) EdgeContainer.Children[i]).Fill = i < 8 ? i == 7 ?  Application.Current.FindResource("AquadraxColor") as SolidColorBrush :
+                                                                                 Application.Current.FindResource("IgnidraxColor") as SolidColorBrush :
+                                                                                 Application.Current.FindResource("HpColor") as SolidColorBrush;
 
                 }
                 else
                 {
                     EdgeContainer.Children[i].Opacity = .1;
-                    (EdgeContainer.Children[i] as Shape).Fill = Brushes.White;
+                    ((Shape) EdgeContainer.Children[i]).Fill = Brushes.White;
                 }
             }
         }

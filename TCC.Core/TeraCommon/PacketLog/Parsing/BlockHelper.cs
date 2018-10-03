@@ -23,6 +23,7 @@ namespace TCC.TeraCommon.PacketLog.Parsing
             header[0] = unchecked((byte) size);
             header[1] = (byte) (size >> 8);
             stream.Write(header, 0, header.Length);
+            // ReSharper disable once AssignNullToNotNullAttribute
             stream.Write(data.Array, data.Offset, data.Count);
         }
 

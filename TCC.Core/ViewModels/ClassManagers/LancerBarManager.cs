@@ -1,16 +1,17 @@
-﻿using TCC.Data;
-using TCC.Data.Databases;
+﻿using TCC.ClassSpecific;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
     internal class LancerBarManager : ClassManager
     {
-        public LancerBarManager() : base()
+        public LancerBarManager()
         {
             LH = new StatTracker()
             {
                 Max = 10
             };
+            AbnormalityTracker = new LancerAbnormalityTracker();
         }
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }
@@ -44,8 +45,8 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
             SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
-            GuardianShout = new DurationCooldownIndicator(_dispatcher);
-            AdrenalineRush = new DurationCooldownIndicator(_dispatcher);
+            GuardianShout = new DurationCooldownIndicator(Dispatcher);
+            AdrenalineRush = new DurationCooldownIndicator(Dispatcher);
 
             GuardianShout.Cooldown = new FixedSkillCooldown(gshout,  true);
             GuardianShout.Buff = new FixedSkillCooldown(gshout,  false);

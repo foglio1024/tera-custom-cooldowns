@@ -1,27 +1,20 @@
-﻿using System;
+﻿using Dragablz;
+using GongSolutions.Wpf.DragDrop;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Dragablz;
-using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC.Controls
 {
-    /// <summary>
-    ///     Logica di interazione per FixedSkillContainers.xaml
-    /// </summary>
     public partial class FixedSkillContainers
     {
         private object[] _mainOrder;
@@ -62,12 +55,12 @@ namespace TCC.Controls
         }
 
         //really absurd way of fixing order issue
-        public void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<FixedSkillCooldown> collection)
+        private void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<FixedSkillCooldown> collection)
         {
             var positions = new Dictionary<int, double>(); //index, X
             for (var i = 0; i < container.Items.Count; i++)
             {
-                var curr = container.ItemContainerGenerator.ContainerFromIndex(i) as UIElement;
+                if (!(container.ItemContainerGenerator.ContainerFromIndex(i) is UIElement curr)) continue;
                 var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
                 positions.Add(i, p.X);
             }
@@ -136,24 +129,22 @@ namespace TCC.Controls
             if (!MainSkillsGrid.IsMouseOver && !SelectionPopup.IsMouseOver)
             {
                 if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
-                AnimateAddButton(false, Spacer, AddButtonGrid);
+                AnimateAddButton(false/*, Spacer, AddButtonGrid*/);
             }
         }
 
         private void SecButtonTimer_Tick(object sender, EventArgs e)
         {
             _secButtonTimer.Stop();
-            if (!SecSkillsGrid.IsMouseOver && !SelectionPopup.IsMouseOver)
-            {
-                if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
-                AnimateAddButton(false, Spacer2, AddButtonGrid2);
-            }
+            if (SecSkillsGrid.IsMouseOver || SelectionPopup.IsMouseOver) return;
+            if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
+            AnimateAddButton(false/*, Spacer2, AddButtonGrid2*/);
         }
 
-        private void AnimateAddButton(bool open, Grid targetspacer, Grid addButtonGrid)
+        private void AnimateAddButton(bool open/*, Grid targetspacer, Grid addButtonGrid*/)
         {
             SettingsButton.BeginAnimation(OpacityProperty, open ? _opacityUp : _opacityDown);
-            return;
+/*
             if (open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 1) return;
             if (!open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 0) return;
             var to = open ? 1 : 0;
@@ -162,6 +153,7 @@ namespace TCC.Controls
                 new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
             addButtonGrid.BeginAnimation(OpacityProperty,
                 new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+*/
         }
 
         private bool _isDragging;
@@ -233,7 +225,7 @@ namespace TCC.Controls
 
         private void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            AnimateAddButton(true, Spacer, AddButtonGrid);
+            AnimateAddButton(true/*, Spacer, AddButtonGrid*/);
         }
 
         private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
@@ -243,15 +235,17 @@ namespace TCC.Controls
             OnSkillsLoaded();
         }
 
-        private void SecondarySkillsGridMouseEnter(object sender, MouseEventArgs e)
-        {
-            AnimateAddButton(true, Spacer2, AddButtonGrid2);
-        }
+//        private void SecondarySkillsGridMouseEnter(object sender, MouseEventArgs e)
+//        {
+//            AnimateAddButton(true/*, Spacer2, AddButtonGrid2*/);
+//        }
 
+/*
         private void SecSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             _secButtonTimer.Start();
         }
+*/
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -289,29 +283,30 @@ namespace TCC.Controls
             public void Drop(IDropInfo dropInfo)
             {
                 var target = ((SynchronizedObservableCollection<FixedSkillCooldown>)dropInfo.TargetCollection);
-                if (dropInfo.Data is Skill sk)
+                switch (dropInfo.Data)
                 {
-                    if (!target.Any(x => x.Skill.IconName == sk.IconName))
-                    {
-                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, false));
-                    }
-                }
-                else if (dropInfo.Data is Abnormality ab)
-                {
-                    if (!target.Any(x => x.Skill.IconName == ab.IconName))
-                    {
-                        target.Insert(dropInfo.InsertIndex,
-                            new FixedSkillCooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
-                                false, CooldownType.Passive));
-                    }
-                }
-                else if (dropInfo.Data is Item i)
-                {
-                    if (!target.Any(x => x.Skill.IconName == i.IconName))
-                    {
-                        SessionManager.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
-                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, false, CooldownType.Item));
-                    }
+                    case Skill sk:
+                        if (target.All(x => x.Skill.IconName != sk.IconName))
+                        {
+                            target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, false));
+                        }
+                        break;
+                    case Abnormality ab:
+                        if (target.All(x => x.Skill.IconName != ab.IconName))
+                        {
+                            target.Insert(dropInfo.InsertIndex,
+                                new FixedSkillCooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
+                                    false, CooldownType.Passive));
+                        }
+                        break;
+                    case Item i:
+                        if (target.All(x => x.Skill.IconName != i.IconName))
+                        {
+                            SessionManager.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
+                            target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, false, CooldownType.Item));
+                        }
+
+                        break;
                 }
                 var tmp = new List<FixedSkillCooldown>();
 
@@ -326,7 +321,7 @@ namespace TCC.Controls
                     target.Add(x);
                 });
 
-                ulong delay = 500;
+                const ulong delay = 500;
                 //wait a bit and restart any running skill
                 Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(t =>
                 {

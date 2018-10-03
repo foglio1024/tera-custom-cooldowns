@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls
 {

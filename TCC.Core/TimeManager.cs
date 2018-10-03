@@ -42,7 +42,7 @@ namespace TCC
 
         private TimeManager()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             var s = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             s.Tick += CheckNewDay;
             s.Start();
@@ -68,17 +68,16 @@ namespace TCC
             if (string.IsNullOrEmpty(region)) return;
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
 
-            SettingsManager.LastRegion = region;
-            TimeZoneInfo timezone = null;
+            Settings.LastRegion = region;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
                 CurrentRegion = "EU";
-                SettingsManager.LastRegion = "EU-EN";
+                Settings.LastRegion = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK);
             }
-            timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
+            var timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
             _resetDay = _serverTimezones[CurrentRegion].ResetDay;
 
@@ -104,7 +103,7 @@ namespace TCC
         {
             if (CurrentRegion == null) return;
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
-            if (SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
+            if (Settings.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in InfoWindowViewModel.Instance.Characters)
             {
                 foreach (var dg in ch.Dungeons)
@@ -123,9 +122,9 @@ namespace TCC
                     ch.WeekliesDone = 0;
                 }
             }
-            SettingsManager.LastRun = DateTime.Now;
+            Settings.LastRun = DateTime.Now;
             InfoWindowViewModel.Instance.SaveToFile();
-            SettingsManager.SaveSettings();
+            SettingsWriter.Save();
             if (DateTime.Now.DayOfWeek == _resetDay)
             {
                 ChatWindowManager.Instance.AddTccMessage("Weekly data has been reset.");
@@ -165,8 +164,6 @@ namespace TCC
 
         public void UploadGuildBamTimestamp()
         {
-            var ts = CurrentServerTime - new DateTime(1970, 1, 1);
-            var time = (long)ts.TotalSeconds;
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
             sb.Append(PacketProcessor.Server.ServerId);
@@ -211,12 +208,12 @@ namespace TCC
 
         public void SendWebhookMessageOld(bool testMessage = false)
         {
-            if (!string.IsNullOrEmpty(SettingsManager.Webhook))
+            if (!string.IsNullOrEmpty(Settings.Webhook))
             {
                 var sb = new StringBuilder("{");
                 sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
-                sb.Append("\""); sb.Append(SettingsManager.WebhookMessage);
+                sb.Append("\""); sb.Append(Settings.WebhookMessage);
                 if (testMessage) sb.Append(" (Test message)");
                 sb.Append("\"");
                 sb.Append(",");
@@ -239,7 +236,7 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-                        var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
+                        client.UploadString(Settings.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)
@@ -251,11 +248,11 @@ namespace TCC
         }
         public void SendWebhookMessage(string bamName)
         {
-            if (!string.IsNullOrEmpty(SettingsManager.Webhook))
+            if (!string.IsNullOrEmpty(Settings.Webhook))
             {
-                var msg = SettingsManager.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
-                    ? SettingsManager.WebhookMessage.Replace("{npc_name}", bamName)
-                    : SettingsManager.WebhookMessage;
+                var msg = Settings.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
+                    ? Settings.WebhookMessage.Replace("{npc_name}", bamName)
+                    : Settings.WebhookMessage;
                 var sb = new StringBuilder("{");
                 sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
@@ -279,7 +276,7 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                        var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
+                        client.UploadString(Settings.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)

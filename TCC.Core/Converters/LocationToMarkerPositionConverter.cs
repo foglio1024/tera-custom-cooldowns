@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.Converters
 {
@@ -13,7 +12,7 @@ namespace TCC.Converters
         {
             var loc = (Location)value;
             var point = SessionManager.MapDatabase.GetMarkerPosition(loc);
-            return new Thickness(point.Y,point.X, 0, 0);
+            return new Thickness(point.Y, point.X, 0, 0);
 
         }
 

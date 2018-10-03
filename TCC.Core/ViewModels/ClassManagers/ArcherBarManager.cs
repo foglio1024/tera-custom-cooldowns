@@ -1,7 +1,5 @@
 ﻿using TCC.ClassSpecific;
-using TCC.Converters;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
@@ -53,11 +51,11 @@ namespace TCC.ViewModels
             }
         }
 
-        public ArcherBarManager() : base()
+        public ArcherBarManager()
         {
             Focus = new ArcherFocusTracker();
             Stance = new StanceTracker<ArcherStance>();
-            Archer.ClearMarkedTargets();
+            AbnormalityTracker = new ArcherAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()
@@ -65,16 +63,14 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
             SessionManager.SkillsDatabase.TryGetSkill(120500, Class.Archer, out var vm);
             Thunderbolt = new FixedSkillCooldown(tb, true);
-            VelikMark = new DurationCooldownIndicator(_dispatcher)
+            VelikMark = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(vm, false),
                 Buff = new FixedSkillCooldown(vm, false)
             };
 
-
-            Archer.VelikMarkExpired += OnVelikMarkExpired;
-            Archer.VelikMarkRefreshed += OnVelikMarkRefreshed;
-
+            ClassAbnormalityTracker.MarkingExpired += OnVelikMarkExpired;
+            ClassAbnormalityTracker.MarkingRefreshed += OnVelikMarkRefreshed;
         }
 
         private void OnVelikMarkRefreshed(ulong duration)

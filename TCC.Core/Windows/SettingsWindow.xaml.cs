@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -33,14 +35,18 @@ namespace TCC.Windows
 
         private void Image_MouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
         {
-            SettingsManager.SaveSettings();
+            SettingsWriter.Save();
             HideWindow();
         }
 
         public void HideWindow()
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
-            a.Completed += (s, ev) => Hide();
+            a.Completed += (s, ev) =>
+            {
+                Hide();
+                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            };
             BeginAnimation(OpacityProperty, a);
             WindowManager.ForegroundManager.RefreshVisible();
 
@@ -68,6 +74,8 @@ namespace TCC.Windows
         }
         public void ShowWindow()
         {
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+
             Opacity = 0;
             Activate();
             Show();
@@ -85,10 +93,12 @@ namespace TCC.Windows
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/resources/config");
         }
 
+/*
         private void ConnectToTwitch(object sender, RoutedEventArgs e)
         {
             //TwitchConnector.Instance.Init();
         }
+*/
 
         private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -98,6 +108,64 @@ namespace TCC.Windows
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             WindowManager.GroupAbnormalConfigWindow.ShowWindow();
+        }
+
+        private void MakePositionsGlobal(object sender, RoutedEventArgs e)
+        {
+            WindowManager.MakeGlobal();
+        }
+
+        private void WindowPositionsReset(object sender, RoutedEventArgs e)
+        {
+            WindowManager.ResetToCenter();
+        }
+
+        private void ResetCharacterWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.CharacterWindow.ResetToCenter();
+        }
+
+        private void ResetBossWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.BossWindow.ResetToCenter();
+        }
+
+        private void ResetCooldownWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.CooldownWindow.ResetToCenter();
+        }
+
+        private void ResetChatWindowsPosition(object sender, RoutedEventArgs e)
+        {
+            foreach (var cw in ChatWindowManager.Instance.ChatWindows)
+            {
+                cw.ResetToCenter();
+            }
+        }
+
+        private void ResetBuffWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.BuffWindow.ResetToCenter();
+        }
+
+        private void ResetClassWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.ClassWindow.ResetToCenter();
+        }
+
+        private void ResetGroupWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.GroupWindow.ResetToCenter();
+        }
+
+        private void ResetFlightGaugePosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.FlightDurationWindow.ResetToCenter();
+        }
+
+        private void ResetCuWindowPosition(object sender, RoutedEventArgs e)
+        {
+            WindowManager.CivilUnrestWindow.ResetToCenter();
         }
     }
 }

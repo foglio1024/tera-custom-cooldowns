@@ -11,8 +11,7 @@ namespace TCC.Converters
         {
             if (value == null) value = Class.Common;
             var c = (Class)value;
-            //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
-            var className = "common";
+            string className;
             switch (c)
             {
                 case Class.Warrior:
@@ -59,13 +58,8 @@ namespace TCC.Converters
                     break;
 
             }
-            //return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
             return "/resources/images/Icon_Classes/" + className + ".png";
         }
-
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        private static extern bool DeleteObject(IntPtr hObject);
-
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

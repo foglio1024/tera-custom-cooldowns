@@ -10,7 +10,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((ShieldStatus)value)
+            switch ((ShieldStatus?)value) //TODO: triggers?
             {
                 case ShieldStatus.Off:
                     return Visibility.Collapsed;

@@ -1,6 +1,4 @@
-﻿using TCC.Data.Databases;
-
-namespace TCC.Data
+﻿namespace TCC.Data
 {
     public class GearItem
     {

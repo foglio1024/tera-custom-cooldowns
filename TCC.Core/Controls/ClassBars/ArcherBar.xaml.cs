@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Animation;
-using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.ViewModels;
 

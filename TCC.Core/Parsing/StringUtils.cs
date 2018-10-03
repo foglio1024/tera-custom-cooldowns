@@ -8,13 +8,13 @@ namespace TCC.Parsing
     {
         public static byte[] StringToByteArray(string hex)
         {
-            var NumberChars = hex.Length / 2;
-            var bytes = new byte[NumberChars];
+            var numberChars = hex.Length / 2;
+            var bytes = new byte[numberChars];
             using (var sr = new StringReader(hex))
             {
-                for (var i = 0; i < NumberChars; i++)
+                for (var i = 0; i < numberChars; i++)
                     bytes[i] =
-                      Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
+                      Convert.ToByte(new string(new[] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
             return bytes;
         }
@@ -100,7 +100,6 @@ namespace TCC.Parsing
                     }
                     else
                     {
-                        zeroes = false;
                         endIndex += 4;
                     }
                 }
@@ -111,14 +110,14 @@ namespace TCC.Parsing
 
         public static string GetStringFromHex(string hex, int startIndex, string terminator)
         {
-            var b = new StringBuilder();
+            var builder = new StringBuilder();
             for (var i = startIndex; i < GetStringEnd(hex, startIndex, terminator); i += 2)
             {
-                b.Append(hex[i].ToString() + hex[i + 1].ToString());
+                builder.Append(hex[i].ToString() + hex[i + 1].ToString());
             }
-            b.Replace("00", "");
-            var B = StringToByteArray(b.ToString());
-            return Encoding.UTF7.GetString(B);
+            builder.Replace("00", "");
+            var b = StringToByteArray(builder.ToString());
+            return Encoding.UTF7.GetString(b);
         }
 
     }

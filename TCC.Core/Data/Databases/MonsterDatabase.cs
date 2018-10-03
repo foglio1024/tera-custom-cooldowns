@@ -7,77 +7,65 @@ namespace TCC.Data.Databases
 {
     public class MonsterDatabase
     {
-        private XDocument MonstersDoc;
-        private XDocument OverrideDoc;
-        private Dictionary<uint, Zone> Zones;
+        private XDocument _monstersDoc;
+        private XDocument _overrideDoc;
+        private readonly Dictionary<uint, Zone> _zones;
 
         public MonsterDatabase(string lang)
         {
-            Zones = new Dictionary<uint, Zone>();
+            _zones = new Dictionary<uint, Zone>();
 
             LoadDoc(lang);
             ParseDoc();
-            MonstersDoc = null;
+            _monstersDoc = null;
         }
 
         private void LoadDoc(string region)
         {
-            MonstersDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
-            OverrideDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-override.xml");
+            _monstersDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
+            _overrideDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-override.xml");
         }
 
         private void ParseDoc()
         {
-            foreach (var zone in MonstersDoc.Descendants().Where(x => x.Name == "Zone"))
+            foreach (var zone in _monstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
-                var zoneId = Convert.ToUInt32(zone.Attribute("id").Value);
-                var zoneName = zone.Attribute("name").Value;
-                var z = new Zone(zoneId, zoneName);
+                var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
+                var zoneName = zone.Attribute("name")?.Value;
+                var z = new Zone(zoneName);
 
                 foreach (var monster in zone.Descendants().Where(x => x.Name == "Monster"))
                 {
-                    var id = Convert.ToUInt32(monster.Attribute("id").Value);
-                    var name = monster.Attribute("name").Value;
-                    var isBoss = false;
-                    if (monster.Attribute("isBoss").Value == "True")
-                    {
-                        isBoss = true;
-                    }
-                    var maxHP = Convert.ToUInt64(monster.Attribute("hp").Value);
+                    var id = Convert.ToUInt32(monster.Attribute("id")?.Value);
+                    var name = monster.Attribute("name")?.Value;
+                    var isBoss = monster.Attribute("isBoss")?.Value == "True";
+                    var maxHP = Convert.ToUInt64(monster.Attribute("hp")?.Value);
 
                     var m = new Monster(id, name, maxHP, isBoss);
                     z.AddMonster(m);
                 }
-                Zones.Add(zoneId, z);
+                _zones.Add(zoneId, z);
             }
 
-            foreach (var zone in OverrideDoc.Descendants().Where(x => x.Name == "Zone"))
+            foreach (var zone in _overrideDoc.Descendants().Where(x => x.Name == "Zone"))
             {
-                var zoneId = Convert.ToUInt32(zone.Attribute("id").Value);
+                var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
 
                 foreach (var monst in zone.Descendants().Where(x => x.Name == "Monster"))
                 {
-                    var mId = Convert.ToUInt32(monst.Attribute("id").Value);
-                    if (Zones.TryGetValue(zoneId, out var z))
+                    var mId = Convert.ToUInt32(monst.Attribute("id")?.Value);
+                    if (!_zones.TryGetValue(zoneId, out var z)) continue;
+                    if (z.Monsters.TryGetValue(mId, out var m))
                     {
-                        if (z.Monsters.TryGetValue(mId, out var m))
-                        {
-                            if (monst.Attribute("isBoss") != null)
-                            {
-                                m.IsBoss = bool.Parse(monst.Attribute("isBoss").Value);
-                            }
-                            if (monst.Attribute("name") != null)
-                            {
-                                m.Name = monst.Attribute("name").Value;
-                            }
-                        }
-                        else
-                        {
-                            var name = monst.Attribute("name").Value;
-                            var isBoss = bool.Parse(monst.Attribute("isBoss").Value);
-                            var maxHp = ulong.Parse(monst.Attribute("hp").Value);
-                            z.Monsters.Add(mId, new Monster(mId, name, maxHp, isBoss));
-                        }
+                        if (monst.Attribute("isBoss") != null) m.IsBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
+                        if (monst.Attribute("name") != null) m.Name = monst.Attribute("name")?.Value;
+                    }
+                    else
+                    {
+                        var name = monst.Attribute("name")?.Value;
+                        var isBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
+                        var maxHp = ulong.Parse(monst.Attribute("hp")?.Value ?? "0");
+                        z.Monsters.Add(mId, new Monster(mId, name, maxHp, isBoss));
                     }
                 }
             }
@@ -85,7 +73,7 @@ namespace TCC.Data.Databases
 
         public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
-            if (Zones.TryGetValue(zoneId, out var z))
+            if (_zones.TryGetValue(zoneId, out var z))
             {
                 if (z.Monsters.TryGetValue(templateId, out m))
                 {
@@ -97,11 +85,8 @@ namespace TCC.Data.Databases
         }
         public string GetZoneName(uint zoneId)
         {
-            Zones.TryGetValue(zoneId, out var z);
-            if (z != null) return z.Name;
-
-            return "Unkown zone";
-
+            _zones.TryGetValue(zoneId, out var z);
+            return z != null ? z.Name : "Unkown zone";
         }
         public string GetName(uint templateId, uint zoneId)
         {
@@ -123,27 +108,25 @@ namespace TCC.Data.Databases
 
     internal class Zone
     {
-        public uint Id { get; private set; } //templateId / type
-        public string Name { get; private set; }
-        public Dictionary<uint, Monster> Monsters { get; private set; }
+        public string Name { get; }
+        public Dictionary<uint, Monster> Monsters { get; }
 
         public void AddMonster(Monster m)
         {
             Monsters.Add(m.Id, m);
         }
 
-        public Zone(uint id, string name)
+        public Zone(string name)
         {
             Monsters = new Dictionary<uint, Monster>();
-            Id = id;
             Name = name;
         }
     }
     public class Monster
     {
-        public uint Id { get; private set; } //npc
+        public uint Id { get; } //npc
         public string Name { get; set; }
-        public ulong MaxHP { get; set; }
+        public ulong MaxHP { get; }
         public bool IsBoss { get; set; }
 
         public Monster(uint npc, string name, ulong maxHp, bool isBoss)

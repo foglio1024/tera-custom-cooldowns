@@ -30,16 +30,30 @@ namespace TCC.Data
 
         private int _size = 18;
         private bool _customSize;
+        private bool _isVisible;
 
         public int Size
         {
-            get => _customSize ? _size : SettingsManager.FontSize;
+            get => _customSize ? _size : Settings.FontSize;
             set
             {
                 if (_size == value) return;
                 _size = value;
-                _customSize = value != SettingsManager.FontSize;
+                _customSize = value != Settings.FontSize;
                 NPC(nameof(Size));
+            }
+        }
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible == value) return;
+                _isVisible = value;
+                if (_isVisible) SettingsWindowViewModel.FontSizeChanged += OnFontSizeChanged;
+                else SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
+                NPC();
             }
         }
 
@@ -63,7 +77,7 @@ namespace TCC.Data
         }
         public void SetColor(string color = "")
         {
-            _dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
                 if (color == "")
                 {
@@ -98,21 +112,16 @@ namespace TCC.Data
         }
         public MessagePiece(string text)
         {
-            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
-            WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += MessagePiece_PropertyChanged);
-
+            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Text = text;
             Spaces = SetThickness(text);
             _customSize = false;
 
         }
 
-        private void MessagePiece_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnFontSizeChanged()
         {
-            if (e.PropertyName == "FontSize")
-            {
-                NPC(nameof(Size));
-            }
+            NPC(nameof(Size));
         }
 
         public MessagePiece(Money money) : this(text: "")

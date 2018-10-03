@@ -1,15 +1,26 @@
 ﻿<UserControl x:Class="TCC.Controls.SmallMobControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded"
-             Visibility="{Binding Visible}" IsHitTestVisible="False" UseLayoutRounding="True">
+             Visibility="{Binding Visible}" IsHitTestVisible="False" UseLayoutRounding="True"
+             d:DataContext="{d:DesignData Npc}">
 
 
-    <Grid Margin="2 2 6 2" Width="250" x:Name="RootGrid" >
+    <Grid Margin="2 2 6 2" x:Name="RootGrid" >
+        <Grid.Style>
+            <Style TargetType="FrameworkElement">
+                <Setter Property="Width" Value="250"></Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type local:SmallMobControl}}}"
+                                 Value="True">
+                        <Setter Property="Width" Value="Auto"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -22,6 +33,43 @@
             <ScaleTransform ScaleX="1" ScaleY="1"/>
         </Grid.LayoutTransform>
 
+        <Grid ClipToBounds="True" 
+              RenderTransformOrigin=".5 .5" Width="26" Height="26" Margin="-20">
+            <local:Arc Width="80" 
+                       Height="80" 
+                       StrokeThickness="30" 
+                       Stroke="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       StartAngle="0"
+                       EndAngle="359.9"
+                       x:Name="ExternalArc"
+                       Margin="-20"
+                       RenderTransformOrigin=".5 .5">
+                <local:Arc.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="-45"/>
+                    </TransformGroup>
+                </local:Arc.RenderTransform>
+            </local:Arc>
+            <Grid.Style>
+                <Style TargetType="FrameworkElement">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type local:SmallMobControl}}}"
+                                     Value="True">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="45"/>
+                    <TranslateTransform X="4" Y="-2"></TranslateTransform>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
         <Image Source="../resources/images/kr_mob_icon.png" Stretch="Uniform"
                Margin="0 -4 -8 0"  
                Grid.RowSpan="2" VerticalAlignment="Top"
@@ -41,6 +89,16 @@
                            Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Grid.Column="1"/>
                 <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}"  
                                FontWeight="Bold" Text="{Binding CurrentFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2"/>
+                <Grid.Style>
+                    <Style TargetType="FrameworkElement">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type local:SmallMobControl}}}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
             </Grid>
             <Grid>
 
@@ -52,12 +110,22 @@
                 <Border RenderTransform="{StaticResource Skew45}" Height="4" RenderTransformOrigin="1 1"
                        Background="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
                        Margin="5 0 0 0" HorizontalAlignment="Left" >
-                    <FrameworkElement HorizontalAlignment="Stretch" Width="218">
+                    <FrameworkElement HorizontalAlignment="Stretch" Width="218" x:Name="HpBarGovernor">
                         <FrameworkElement.LayoutTransform>
-                            <ScaleTransform ScaleX="{Binding CurrentFactor}"></ScaleTransform>
+                            <ScaleTransform ScaleX="1"></ScaleTransform>
                         </FrameworkElement.LayoutTransform>
                     </FrameworkElement>
                 </Border>
+                <Grid.Style>
+                    <Style TargetType="FrameworkElement">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type local:SmallMobControl}}}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
             </Grid>
             <!--<local:GenericGauge Height="4" 
                                 Width="Auto"
@@ -70,8 +138,7 @@
                                 MaxVal="{Binding MaxHP}"
                                 x:Name="HPgauge"/>-->
         </StackPanel>
-        <ItemsControl ItemTemplate="{StaticResource RaidAbnormality}" 
-                      Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
+        <ItemsControl x:Name="Abnormalities" ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" 
@@ -82,8 +149,17 @@
                 <Style>
                     <Setter Value="-6,0,0,0" Property="ContentControl.Margin"></Setter>
                 </Style>
-
             </ItemsControl.ItemContainerStyle>
+            <ItemsControl.Style>
+                <Style TargetType="FrameworkElement">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type local:SmallMobControl}}}"
+                                     Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
         </ItemsControl>
 
     </Grid>

@@ -53,9 +53,8 @@ namespace TCC.Sniffing
 
         internal void RemoveConnection(TcpConnection connection)
         {
-            TcpConnection temp;
             if (_connections.ContainsKey(connection.ConnectionId))
-                _connections.TryRemove(connection.ConnectionId, out temp);
+                _connections.TryRemove(connection.ConnectionId, out _);
         }
 
         //private void ParsePacketsLoop()

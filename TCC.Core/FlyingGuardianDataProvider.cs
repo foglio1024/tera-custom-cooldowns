@@ -1,9 +1,5 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Parsing.Messages;
 
@@ -15,7 +11,7 @@ namespace TCC
         private static uint FireEssenceID = 630500;
         private static uint SparkEssenceID = 631001;
 
-        private static int _stacks = 0;
+        private static int _stacks;
         private static FlightStackType _stackType;
 
         public static event Action<int> StacksChanged;
@@ -80,14 +76,12 @@ namespace TCC
                 _ignoreNextEnd = false;
                 return;
             }
-            Console.WriteLine($"{p.AbnormalityId} ended");
             Stacks = 0;
         }
 
         public static void HandleAbnormal(S_ABNORMALITY_REFRESH p)
         {
             if (!IsEssence(p.AbnormalityId)) return;
-            Console.WriteLine($"{p.AbnormalityId} refreshed to {p.Stacks}");
             Stacks = p.Stacks;
             StackType = IdToStackType(p.AbnormalityId);
         }
@@ -95,7 +89,6 @@ namespace TCC
         public static void HandleAbnormal(S_ABNORMALITY_BEGIN p)
         {
             if (!IsEssence(p.AbnormalityId)) return;
-            Console.WriteLine($"{p.AbnormalityId} started at {p.Stacks}");
             if (IdToStackType(p.AbnormalityId) != StackType) _ignoreNextEnd = true;
             Stacks = p.Stacks;
             StackType = IdToStackType(p.AbnormalityId);

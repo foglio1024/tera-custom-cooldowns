@@ -1,0 +1,126 @@
+﻿<controls:AbnormalityIndicatorBase x:Class="TCC.Controls.RoundAbnormalityIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:data="clr-namespace:TCC.Data"
+             mc:Ignorable="d" 
+             FlowDirection="LeftToRight" Width="Auto" Height="Auto" 
+             d:DataContext="{d:DesignInstance data:AbnormalityDuration}">
+    <Grid Margin="0" Name="RootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ToolTip>
+            <ToolTip Background="Transparent" BorderBrush="Transparent">
+                <Grid>
+                    <controls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
+                                                        AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                        Id="{Binding Abnormality.Id}"/>
+                </Grid>
+            </ToolTip>
+        </Grid.ToolTip>
+        <!-- Icon -->
+        <Grid>
+            <Ellipse Name="BgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}"  
+                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:RoundAbnormalityIndicator}}" 
+                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:RoundAbnormalityIndicator}}"
+                     RenderTransformOrigin=".5 .5">
+                <Ellipse.RenderTransform>
+                <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+            </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse Name="AbnormalityIcon" Margin="0,0" UseLayoutRounding="False"
+                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:RoundAbnormalityIndicator}}" 
+                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:RoundAbnormalityIndicator}}" 
+                     RenderTransformOrigin=".5 .5">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
+                </Ellipse.Fill>
+                <Ellipse.RenderTransform>
+                    <ScaleTransform ScaleX=".95" ScaleY=".95"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </Grid>
+        <!-- Arc -->
+        <controls:Arc Grid.Row="0" x:Name="Arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                      MaxHeight="80" MaxWidth="80"
+                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:RoundAbnormalityIndicator}}" 
+                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:RoundAbnormalityIndicator}}"
+                      >
+            <controls:Arc.LayoutTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </controls:Arc.LayoutTransform>
+        </controls:Arc>
+        <!-- Duration -->
+        <Grid x:Name="DurationLabel"  Width="Auto" 
+              MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
+              MaxHeight="18"
+              HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1"
+              Margin="0 -4 0 0">
+            <Border x:Name="Fill" Background="#eee"  Width="Auto" 
+                    Opacity=".9" CornerRadius="4" 
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                    BorderBrush="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}" 
+                    BorderThickness="1.5"/>
+
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0" >
+                <TextBlock Foreground="#d9000000" 
+                   HorizontalAlignment="Stretch" 
+                   VerticalAlignment="Center" 
+                   TextAlignment="Center"
+                   FontWeight="SemiBold" 
+                   FontSize="16" 
+                   x:Name="Number" 
+                   FontFamily="Roboto Mono" 
+                   FontStyle="Normal"
+                   Opacity="1" 
+                   Margin="6,3"
+                   Text="{Binding DurationLeft, Converter={StaticResource Converters.DurationToTimeFormat}}"/>
+            </Viewbox>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleY="1" ScaleX="1"/>
+            </Grid.LayoutTransform>
+        </Grid>
+        <!-- Stacks -->
+        <Grid Grid.Row="0"
+              x:Name="StacksLabel" 
+              HorizontalAlignment="Right" 
+              VerticalAlignment="Top" 
+              Margin="0,0,0,0" >
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX=".85" ScaleY=".85"></ScaleTransform>
+            </Grid.LayoutTransform>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Stacks}" Value="1">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff" StrokeThickness="1.5"
+                     Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+            </Ellipse>
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                <TextBlock Foreground="#d9ffffff" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   TextAlignment="Center"
+                   FontWeight="Normal" 
+                   FontSize="14" 
+                   x:Name="Stacksnumber" 
+                   FontFamily="Roboto Mono" 
+                   FontStyle="Normal"
+                   Opacity="1" 
+                   Margin="2.5"
+                   Text="{Binding Stacks}">
+                </TextBlock>
+            </Viewbox>
+        </Grid>
+    </Grid>
+</controls:AbnormalityIndicatorBase>

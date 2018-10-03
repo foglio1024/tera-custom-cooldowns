@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
-using System.Windows.Interop;
+using System.Windows.Forms;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;
 
 namespace TCC
@@ -14,6 +16,7 @@ namespace TCC
     public static class FocusManager
     {
         // window styles
+        // ReSharper disable InconsistentNaming
         private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
         private const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
         private const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
@@ -22,6 +25,7 @@ namespace TCC
         private const int WM_KEYDOWN = 0x0100;
         private const int WM_KEYUP = 0x0101;
         private const int VK_RETURN = 0x0D;
+        // ReSharper restore InconsistentNaming
 
         // events
         public static event Action ForegroundChanged;
@@ -35,9 +39,10 @@ namespace TCC
             {
                 if (ForegroundWindow == TeraWindow && TeraWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == MeterWindow && MeterWindow != IntPtr.Zero) return true;
-                if (ForegroundWindow == WindowManager.Settings.Handle && WindowManager.Settings.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.SettingsWindow.Handle && WindowManager.SettingsWindow.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.SkillConfigWindow.Handle && WindowManager.SkillConfigWindow.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.LfgListWindow.Handle && WindowManager.LfgListWindow.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.InfoWindow.Handle && WindowManager.InfoWindow.Handle != IntPtr.Zero) return true;
                 return false;
             }
         }
@@ -88,6 +93,22 @@ namespace TCC
                 return result;
             }
         }
+
+/*
+        public static int TeraScreenIndex => Screen.AllScreens.ToList().IndexOf(TeraScreen);
+*/
+
+        public static Screen TeraScreen
+        {
+            get
+            {
+                var rect = new RECT();
+                GetWindowRect(TeraWindow, ref rect);
+                return Screen.AllScreens.FirstOrDefault(x => x.Bounds.IntersectsWith(new Rectangle(
+                    new Point(rect.Left, rect.Top),
+                    new Size(rect.Right - rect.Left, rect.Bottom - rect.Top))));
+            }
+        }
         private static IntPtr ForegroundWindow => GetForegroundWindow();
 
         public static void MakeUnfocusable(IntPtr hwnd)
@@ -95,11 +116,13 @@ namespace TCC
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
+/*
         public static void UndoUnfocusable(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
         }
+*/
         public static void HideFromToolBar(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
@@ -140,8 +163,22 @@ namespace TCC
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
+/*
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
         private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+*/
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public readonly int Left;
+            public readonly int Top;
+            public readonly int Right;
+            public readonly int Bottom;
+        }
 
         public static void Init()
         {

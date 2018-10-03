@@ -22,7 +22,7 @@ namespace TCC.Windows
             {
                 var r = new Random();
                 var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
-                img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+                Img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
             }
             catch { }
         }

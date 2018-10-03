@@ -6,10 +6,7 @@ using TCC.ViewModels;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Logica di interazione per ChatSettingsWindow.xaml
-    /// </summary>
-    public partial class ChatSettingsWindow : Window
+    public partial class ChatSettingsWindow
     {
         public ChatSettingsWindow(Tab dataContext)
         {

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using TCC.Converters;
 using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls
@@ -43,7 +39,7 @@ namespace TCC.Controls.ChatControls
         public void AnimateOpening()
         {
             RootBorder.BeginAnimation(OpacityProperty, _expandAnim);
-            
+
         }
 
         private void InspectClick(object sender, RoutedEventArgs e)
@@ -135,7 +131,7 @@ namespace TCC.Controls.ChatControls
         private void WhisperClick(object sender, RoutedEventArgs e)
         {
             WindowManager.FloatingButton.ClosePlayerMenu();
-            if (/*SettingsManager.ChatEnabled &&*/ !SessionManager.InGameChatOpen) FocusManager.SendNewLine();
+            if (/*Settings.ChatEnabled &&*/ !SessionManager.InGameChatOpen) FocusManager.SendNewLine();
 
             FocusManager.SendString("/w " + WindowManager.FloatingButton.TooltipInfo.Name + " ");
         }
@@ -195,19 +191,39 @@ namespace TCC.Controls.ChatControls
         private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var p = (MgPopup.Child as MoongourdPopup);
-            p.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, SettingsManager.LastRegion);
+            p?.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, Settings.LastRegion);
             MgPopup.IsOpen = true;
+        }
+        private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            FpsUtilsPopup.IsOpen = true;
         }
 
         public void SetMoongourdVisibility()
         {
             Dispatcher.Invoke(() =>
             {
-                if (SettingsManager.LastRegion != "NA" &&
-                    SettingsManager.LastRegion != "RU" &&
-                    !SettingsManager.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+                if (Settings.LastRegion != "NA" &&
+                    Settings.LastRegion != "RU" &&
+                    !Settings.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
             });
 
+        }
+
+        private void FpsUtilsHideClick(object sender, RoutedEventArgs e)
+        {
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable)
+            {
+                Proxy.SendCommand($"fps hide {WindowManager.FloatingButton.TooltipInfo.Name}");
+            }
+        }
+
+        private void FpsUtilsShowClick(object sender, RoutedEventArgs e)
+        {
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable)
+            {
+                Proxy.SendCommand($"fps show {WindowManager.FloatingButton.TooltipInfo.Name}");
+            }
         }
     }
 }

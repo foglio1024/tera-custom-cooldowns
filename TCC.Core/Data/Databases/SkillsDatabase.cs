@@ -2,38 +2,36 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace TCC.Data.Databases
 {
     public class SkillsDatabase
     {
-        public Dictionary<Class, Dictionary<uint, Skill>> Skills { get; }
-        private List<SkillConnection> SkillConnections { get; }
+        private Dictionary<Class, Dictionary<uint, Skill>> Skills { get; }
+        //private List<SkillConnection> SkillConnections { get; }
 
-        private class SkillConnection
-        {
-            public Class Class;
-            public int Id;
-            public List<int> ConnectedSkills;
+        //private class SkillConnection
+        //{
+        //    public Class Class;
+        //    public int Id;
+        //    public List<int> ConnectedSkills;
 
-            public SkillConnection(int id, Class c)
-            {
-                ConnectedSkills = new List<int>();
-                Id = id;
-                Class = c;
-            }
-            public void AddConnectedSkill(int id)
-            {
-                ConnectedSkills.Add(id);
-            }
-        }
+        //    public SkillConnection(int id, Class c)
+        //    {
+        //        ConnectedSkills = new List<int>();
+        //        Id = id;
+        //        Class = c;
+        //    }
+        //    public void AddConnectedSkill(int id)
+        //    {
+        //        ConnectedSkills.Add(id);
+        //    }
+        //}
 
         public SkillsDatabase(string lang)
         {
             var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/skills/skills-{lang}.tsv"));
 
-            SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
             for (var i = 0; i <= 12; i++)
             {
@@ -49,7 +47,6 @@ namespace TCC.Data.Databases
                 if (line == null) break;
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);
-                var cString = s[3];
                 /*if (!*/
                 Enum.TryParse(s[3], out Class c);/*)*/
                 //{
@@ -63,10 +60,14 @@ namespace TCC.Data.Databases
                 //Enum.TryParse(cString, out c);
                 var name = s[4];
                 //var tooltip = s[3];
+                var detail = s[6];
                 var iconName = s[7];
 
-                var sk = new Skill(id, c, name, "");
-                sk.IconName = iconName;
+                var sk = new Skill(id, c, name, "")
+                {
+                    IconName = iconName,
+                    Detail = detail.ToLowerInvariant()
+                };
                 if (Skills[c].ContainsKey(id)) continue;
                 Skills[c].Add(id, sk);
 
@@ -84,6 +85,7 @@ namespace TCC.Data.Databases
 
         }
 
+/*
         private string FindSkillNameByIdClass(uint id, Class c)
         {
             if (Skills[c].TryGetValue(id, out var sk))
@@ -93,7 +95,9 @@ namespace TCC.Data.Databases
             else return "Not found";
 
         }
+*/
 
+/*
         private int GetSkillIdByConnectedId(uint id, Class c)
         {
             foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
@@ -108,6 +112,8 @@ namespace TCC.Data.Databases
             }
             return -1;
         }
+*/
+/*
         public string SkillIdToName(uint id, Class c)
         {
             var name = FindSkillNameByIdClass(id, c);
@@ -123,6 +129,7 @@ namespace TCC.Data.Databases
             }
             return name;
         }
+*/
         public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             var result = false;

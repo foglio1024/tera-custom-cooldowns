@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
-using TCC.Windows;
-using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
     public class WindowSettings : TSPropertyChanged
     {
-        private double _x;
-        private double _y;
         private double _w;
         private double _h;
         private bool _visible;
@@ -30,31 +27,51 @@ namespace TCC
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
 
+        public string Name { [UsedImplicitly] get; }
+        public bool PerClassPosition { get; set; }
+
         public double X
         {
-            get => _x;
+            get
+            {
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common :  SessionManager.CurrentPlayer.Class ;
+                //if (Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Getting X {X} for class {cc}");
+                cc = PerClassPosition ? cc : Class.Common;
+                return Positions[cc].X;
+            }
             set
             {
-                _x = value;
-                var cc = SessionManager.CurrentPlayer != null ? SessionManager.CurrentPlayer.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class : Class.Common;
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                if (cc == Class.None) return;
+                cc = PerClassPosition ? cc : Class.Common;
+
                 var old = Positions[cc];
                 Positions[cc] = new Point(value, old.Y);
+                //if(Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Setting X to {value} for class {cc}");
                 NPC(nameof(X));
             }
         }
+
         public double Y
         {
-            get => _y;
+            get
+            {
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                cc = PerClassPosition ? cc : Class.Common;
+
+                return Positions[cc].Y;
+            }
             set
             {
-                _y = value;
-                var cc = SessionManager.CurrentPlayer != null ? SessionManager.CurrentPlayer.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class : Class.Common;
+                var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+                cc = PerClassPosition ? cc : Class.Common;
+                if (cc == Class.None) return;
                 var old = Positions[cc];
                 Positions[cc] = new Point(old.X, value);
-
                 NPC(nameof(Y));
             }
         }
+
         public double W
         {
             get => _w;
@@ -185,11 +202,10 @@ namespace TCC
 
         public Dictionary<Class, Point> Positions { get; set; }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null)
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, Dictionary<Class, Point> positions = null, string name = "", bool perClassPosition = true)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            _x = x;
-            _y = y;
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Name = name;
             _w = w;
             _h = h;
             _visible = visible;
@@ -200,33 +216,27 @@ namespace TCC
             _showAlways = showAlways;
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
-            Positions = new Dictionary<Class, Point>
+            PerClassPosition = perClassPosition;
+            Positions = new Dictionary<Class, Point>();
+            for (var i = 0; i <= 12; i++)
             {
-                {(Class) 0,   positions == null ? new Point(x,y) : new Point(positions[(Class) 0].X, positions[(Class) 0].Y)},
-                {(Class) 1,   positions == null ? new Point(x,y) : new Point(positions[(Class) 1].X, positions[(Class) 1].Y)},
-                {(Class) 2,   positions == null ? new Point(x,y) : new Point(positions[(Class) 2].X, positions[(Class) 2].Y)},
-                {(Class) 3,   positions == null ? new Point(x,y) : new Point(positions[(Class) 3].X, positions[(Class) 3].Y)},
-                {(Class) 4,   positions == null ? new Point(x,y) : new Point(positions[(Class) 4].X, positions[(Class) 4].Y)},
-                {(Class) 5,   positions == null ? new Point(x,y) : new Point(positions[(Class) 5].X, positions[(Class) 5].Y)},
-                {(Class) 6,   positions == null ? new Point(x,y) : new Point(positions[(Class) 6].X, positions[(Class) 6].Y)},
-                {(Class) 7,   positions == null ? new Point(x,y) : new Point(positions[(Class) 7].X, positions[(Class) 7].Y)},
-                {(Class) 8,   positions == null ? new Point(x,y) : new Point(positions[(Class) 8].X, positions[(Class) 8].Y)},
-                {(Class) 9,   positions == null ? new Point(x,y) : new Point(positions[(Class) 9].X, positions[(Class) 9].Y)},
-                {(Class) 10,  positions == null ? new Point(x,y) : new Point(positions[(Class) 10].X, positions[(Class) 10].Y)},
-                {(Class) 11,  positions == null ? new Point(x,y) : new Point(positions[(Class) 11].X, positions[(Class) 11].Y)},
-                {(Class) 12,  positions == null ? new Point(x,y) : new Point(positions[(Class) 12].X, positions[(Class) 12].Y)},
-                {(Class) 255, positions == null ? new Point(x,y) : new Point(positions[(Class) 255].X, positions[(Class) 255].Y)}
-            };
+                Positions[(Class) i] = positions == null
+                    ? new Point(x, y)
+                    : new Point(positions[(Class) i].X,
+                                positions[(Class) i].Y
+                    );
+
+            }
+            Positions[Class.Common] = positions == null
+                ? new Point(x, y)
+                : new Point(positions[Class.Common].X,
+                            positions[Class.Common].Y);
         }
-
-
 
         public virtual XElement ToXElement(string name)
         {
             var xe = new XElement("WindowSetting");
             xe.Add(new XAttribute("Name", name));
-            xe.Add(new XAttribute(nameof(X), X));
-            xe.Add(new XAttribute(nameof(Y), Y));
             xe.Add(new XAttribute(nameof(W), W));
             xe.Add(new XAttribute(nameof(H), H));
             xe.Add(new XAttribute(nameof(Visible), Visible));
@@ -237,12 +247,13 @@ namespace TCC
             xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
             xe.Add(new XAttribute(nameof(Enabled), Enabled));
             xe.Add(new XAttribute(nameof(AllowOffScreen), AllowOffScreen));
-            xe.Add(BuildClassWindowPositionsXElement());
+            xe.Add(BuildWindowPositionsXElement());
             return xe;
         }
-        private XElement BuildClassWindowPositionsXElement()
+        private XElement BuildWindowPositionsXElement()
         {
             var ret = new XElement(nameof(Positions));
+
             foreach (var keyVal in Positions)
             {
                 ret.Add(
@@ -254,6 +265,17 @@ namespace TCC
             return ret;
         }
 
+        public void MakePositionsGlobal()
+        {
+            var currentPos = new Point(X, Y);
+            for (int i = 0; i < 13; i++)
+            {
+                Positions[(Class)i] = currentPos;
+            }
+
+            Positions[Class.Common] = currentPos;
+            SettingsWriter.Save();
+        }
     }
 
     public class ChatWindowSettings : WindowSettings
@@ -261,20 +283,6 @@ namespace TCC
         public double BackgroundOpacity { get; set; } = .3;
         public List<Tab> Tabs { get; set; }
         public bool LfgOn { get; set; } = true;
-        //public new bool Enabled
-        //{
-        //    get => SettingsManager.ChatEnabled;
-        //    set
-        //    {
-        //        if (SettingsManager.ChatEnabled == value) return;
-        //        SettingsManager.ChatEnabled = value;
-        //        base.Enabled = value;
-        //        if(!value) ChatWindowManager.Instance.CloseAllWindows();
-        //        else ChatWindowManager.Instance.InitWindows();
-        //        NPC();
-        //        SettingsManager.SaveSettings();
-        //    }
-        //}
 
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
@@ -283,7 +291,7 @@ namespace TCC
         public override XElement ToXElement(string name)
         {
             var b = base.ToXElement(name);
-            b.Add(SettingsManager.BuildChatTabsXElement(Tabs));
+            b.Add(SettingsWriter.BuildChatTabsXElement(Tabs));
             b.Add(new XAttribute(nameof(LfgOn), LfgOn));
             b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
             return b;

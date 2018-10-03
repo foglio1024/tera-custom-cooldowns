@@ -1,10 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.ViewModels.ClassManagers;
 
 namespace TCC.ViewModels
 {
@@ -15,7 +12,7 @@ namespace TCC.ViewModels
 
         public ClassWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
         //public bool IsTeraOnTop => WindowManager.IsTccVisible;
         private Class _currentClass = Class.None;
@@ -26,7 +23,7 @@ namespace TCC.ViewModels
             {
                 if (_currentClass == value) return;
                 _currentClass = value;
-                _dispatcher.Invoke(() =>
+                Dispatcher.Invoke(() =>
                 {
                     switch (_currentClass)
                     {

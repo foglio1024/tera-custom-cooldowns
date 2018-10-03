@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Windows.Data;
 using TCC.Data;
-using TCC.Data.Databases;
 
 namespace TCC.Converters
 {
@@ -10,7 +9,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var id = (uint)value;
+            var id = (uint?)value ?? 0;
+            if (!SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(id)) return "-";
             var t = SessionManager.DungeonDatabase.DungeonDefs[id].Tier;
             switch (t)
             {

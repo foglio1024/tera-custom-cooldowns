@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
@@ -14,20 +16,22 @@
              Visibility="{Binding Visible}" d:DataContext="{d:DesignInstance data:Npc}">
 
     <UserControl.Resources>
+        <system:Double x:Key="GageWidth">520</system:Double>
         <DataTemplate x:Key="EnrageHistoryItem" DataType="controls:EnragePeriodItem">
-            <StackPanel Orientation="Horizontal" Width="546">
-                <Rectangle Fill="Transparent" Width="546">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                <Rectangle Fill="Transparent" Width="{StaticResource GageWidth}">
                     <Rectangle.LayoutTransform>
-                        <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
+                        <ScaleTransform ScaleX="{Binding StartFactor}"/>
                     </Rectangle.LayoutTransform>
                 </Rectangle>
-                <Rectangle Width="546" Fill="#7f55">
+                <Rectangle Width="{StaticResource GageWidth}" Fill="#7f55">
                     <Rectangle.RenderTransform>
                         <ScaleTransform ScaleX="{Binding Factor}"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>
             </StackPanel>
         </DataTemplate>
+        <converters:BossToLaurelConverter x:Key="LaurelConverter"/>
     </UserControl.Resources>
     <Grid Width="Auto" Margin="0">
         <Grid.RowDefinitions>
@@ -38,8 +42,10 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Visibility="Visible" Grid.Row="1" Grid.Column="0" Height="Auto" Margin="34,-10,0,0" HorizontalAlignment="Left">
-            <ItemsControl ItemTemplate="{StaticResource BossAbnormality}" ItemsSource="{Binding Buffs}">
+        <Grid Visibility="Visible" Grid.Row="1" Grid.Column="0" Height="Auto" Margin="40,-10,0,0" HorizontalAlignment="Left">
+            <ItemsControl x:Name="Abnormalities"
+            ItemTemplateSelector="{StaticResource BossAbnormalityTemplateSelector}"
+                ItemsSource="{Binding Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
@@ -96,7 +102,7 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background" Value="{StaticResource KrBgColor}"></Setter>
                                     <Setter Property="BorderBrush" Value="{StaticResource KrBorderColor}"></Setter>
-                                    <Style.Triggers>
+                                    <!--<Style.Triggers>
                                         <DataTrigger Binding="{Binding Enraged}" Value="True">
                                             <DataTrigger.Setters>
                                                 <Setter Property="Background" Value="DarkRed"/>
@@ -108,14 +114,13 @@
                                                     </Setter.Value>
                                                 </Setter>
                                             </DataTrigger.Setters>
-
                                         </DataTrigger>
-                                    </Style.Triggers>
+                                    </Style.Triggers>-->
                                 </Style>
 
                             </Border.Style>
                         </Border>
-                        <Grid.Style>
+                        <!--<Grid.Style>
                             <Style>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Enraged}" Value="True">
@@ -128,11 +133,11 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Grid.Style>
+                        </Grid.Style>-->
                     </Grid>
 
-                    <Border Background="Red" Margin="0" CornerRadius="0" Opacity="0" RenderTransformOrigin=".5 .5"
-                        Style="{StaticResource Styles.DefaultBorder}" x:Name="EnrageBorder" Grid.RowSpan="2"
+                    <Border Background="Red" Margin="0" Opacity="0" RenderTransformOrigin=".5 .5"
+                        Style="{StaticResource Styles.DefaultBorder}" x:Name="EnrageBorder" 
                         Grid.Row="0" HorizontalAlignment="Stretch" 
                         Width="{Binding ElementName=IconBaseBorder, Path=ActualWidth}"
                         Height="{Binding ElementName=IconBaseBorder, Path=ActualWidth}"
@@ -143,47 +148,28 @@
                                 <StaticResource ResourceKey="Rotate45"/>
                                 <TranslateTransform Y="19" />
                             </TransformGroup>
-
                         </Border.RenderTransform>
                     </Border>
 
-                    <!--<Image Stretch="Uniform" VerticalAlignment="Center" Margin="-10" Width="56" RenderTransformOrigin=".5 .5">
+                    <Image Stretch="Uniform" VerticalAlignment="Center" Margin="-10" Width="56" RenderTransformOrigin=".5 .5"
+                           Source="{Binding Converter={StaticResource LaurelConverter}}">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1"></ScaleTransform>
                                 <TranslateTransform Y="18" X="0"/>
-
                             </TransformGroup>
                         </Image.RenderTransform>
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding TemplateId}" Value="1000">
-                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/bronze_kr_big.png"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding TemplateId}" Value="2000">
-                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/silver_kr_big.png"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding TemplateId}" Value="3000">
-                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/gold_kr_big.png"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding TemplateId}" Value="4000">
-                                        <Setter Property="Source" Value="../resources/images/Icon_Laurels/diamond_kr_big.png"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>-->
-                    <Image Grid.RowSpan="2" Grid.Row="0" Margin="-10" Stretch="Uniform" 
+                    </Image>
+                    <Image Grid.Row="0" Margin="-10" Stretch="Uniform" 
                        Width="50" 
-                       Height="{Binding Source=Self, Path=ActualWidth}"
+                       Height="50"
                        StretchDirection="DownOnly"
-                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Source="../resources/images/kr_boss_icon.png">
                         <Image.RenderTransform>
-
                             <TranslateTransform Y="20" X="0.5"/>
                         </Image.RenderTransform>
-                        <Image.Style>
+                        <!--<Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Source" Value="../resources/images/kr_boss_icon.png"></Setter>
                                 <Style.Triggers>
@@ -194,11 +180,11 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Image.Style>
+                        </Image.Style>-->
 
                     </Image>
                 </Grid>
-                <Grid Grid.Row="0" Name="BossNameGrid" Grid.Column="1"  Margin="0 0 0 -11">
+                <Grid Grid.Row="0" Name="BossNameGrid" Grid.Column="1"  Margin="0 0 0 -11" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -210,7 +196,11 @@
                                VerticalAlignment="Center" 
                                FontSize="18" 
                                Text="{Binding Name}" 
-                               Grid.Row="0"/>
+                               Grid.Row="0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
                     <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}"
                              VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
                                  Grid.Column="1" RenderTransformOrigin=".5,.5">
@@ -225,7 +215,11 @@
                                FontStretch="Condensed" 
                                FontSize="13" 
                                Text="{Binding Target, Converter={StaticResource Converters.EntityIdToName}}" 
-                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
+                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
 
                 </Grid>
                 <Grid Margin="9 2 0 2" Name="TopInfoGrid"  Grid.Row="1" Grid.Column="1" UseLayoutRounding="True" >
@@ -272,6 +266,15 @@
                     </TextBlock>
                     <Grid Height="Auto" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0" Grid.Column="2">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EnragePattern.Duration}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    </Style>
+                            </StackPanel.Style>
                             <TextBlock Width="55" FontSize="16" FontWeight="DemiBold" Style="{StaticResource Styles.DefaultText}"  
                                TextAlignment="Right" VerticalAlignment="Bottom" Margin="3,2,15,-1"  Foreground="#afff"
                                Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=controls:BossGage}}">
@@ -291,7 +294,7 @@
                                     </Rectangle.LayoutTransform>
                                 </Rectangle>
                                 <Grid HorizontalAlignment="Left" Margin="3 2" >
-                                    <Rectangle Fill="Red" x:Name="EnrageBar" Width="90"  
+                                    <Rectangle Fill="{StaticResource HpColor}" x:Name="EnrageBar" Width="90"  
                                            Visibility="{Binding Enraged, Converter={StaticResource Converters.BoolToVisibleHidden}}">
                                         <Rectangle.RenderTransform>
                                             <ScaleTransform ScaleX="1"/>
@@ -302,16 +305,15 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="2" Grid.Column="1" Margin="5 0" Name="HpBarGrid" Width="546" 
+                <Grid Grid.Row="2" Grid.Column="1" Margin="5 0" Name="HpBarGrid" Width="{StaticResource GageWidth}" 
                       VerticalAlignment="Bottom" ClipToBounds="False" Background="#5000"
                       RenderTransform="{StaticResource Skew45}" RenderTransformOrigin=".5 .5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Border 
-                            Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}"
-                            BorderThickness="2 1" Height="14" Margin="-4 0"></Border>
+                    <Border Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}"
+                            BorderThickness="2 1" Height="14" Margin="-4 0"/>
                     <Rectangle HorizontalAlignment="Stretch"
                                Width="Auto"
                                Height="8"
@@ -333,9 +335,18 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
-                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" 
-                                Margin="-14,-2,0,-2" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" 
-                                VerticalAlignment="Top" Grid.Row="0" Visibility="Hidden">
+                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity=".8" Name="NextEnrage" 
+                                Margin="-14,0,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" 
+                                VerticalAlignment="Center" Grid.Row="0"  UseLayoutRounding="True">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Enraged}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
                         <StackPanel.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -344,8 +355,7 @@
                                 <TranslateTransform X="0"/>
                             </TransformGroup>
                         </StackPanel.RenderTransform>
-                        <Border Background="White" Width="8" Height="8" CornerRadius="0" 
-                                Effect="{StaticResource DropShadow}" Margin="0,1,0,0"/>
+                        <Border Background="White" Width="2" Height="8" CornerRadius="0" Margin="0,0,0,0"/>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                         <FrameworkElement Width="{Binding ElementName=HpBarGrid, Path=ActualWidth}" Name="DotPusher">
@@ -356,11 +366,41 @@
                         <Rectangle
                             Height="8"
                                  Width="2"
-                                 
                                  Fill="#dfff"
                                  HorizontalAlignment="Left"
                                  Margin="-2,-1,-50,-1"
                                  Opacity="{Binding CurrentHP}"/>
+                    </StackPanel>
+                    <Border HorizontalAlignment="Stretch"
+                               Width="Auto"
+                               VerticalAlignment="Bottom"
+                               Height="5"
+                               Margin="0 0 0 3"
+                               BorderThickness="0 1 0 0"
+                               BorderBrush="#5000"
+                               Name="TimerBar"
+                               Background="DarkOrange"
+                            Visibility="Collapsed"
+                               >
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="1"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <FrameworkElement Width="{Binding ElementName=HpBarGrid, Path=ActualWidth}" Name="TimerDotPusher">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="1"/>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
+                        <Rectangle
+                            Height="5"
+                                 Width="3"
+                                 x:Name="TimerDot"
+                                 Fill="#cfff"
+                                 HorizontalAlignment="Left"
+                                 Margin="-2,-1,-50,3"
+                            VerticalAlignment="Bottom"
+                                 Visibility="Collapsed"/>
                     </StackPanel>
 
                 </Grid>

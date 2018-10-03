@@ -14,20 +14,6 @@
     <w:TccWidget.DataContext>
         <vm:BuffBarWindowViewModel />
     </w:TccWidget.DataContext>
-    <w:TccWidget.Resources>
-        <DataTemplate x:Key="AbTemplate">
-            <controls:AbnormalityIndicator HorizontalAlignment="Right" Size="32">
-                <controls:AbnormalityIndicator.Resources>
-                    <Style TargetType="{x:Type Path}">
-                        <Setter Property="FlowDirection" Value="RightToLeft"/>
-                    </Style>
-                </controls:AbnormalityIndicator.Resources>
-            </controls:AbnormalityIndicator>
-        </DataTemplate>
-        <Style x:Key="FlowPanel" TargetType="FrameworkElement">
-            <Setter Property="FlowDirection" Value="{Binding Instance.Direction}"/>
-        </Style>
-    </w:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -37,11 +23,11 @@
         <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource Converters.DirectionToHorAlignConveter}}"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
 
-        <StackPanel Background="Transparent" Name="content" Grid.Row="1">
+        <StackPanel Background="Transparent" Name="WindowContent" Grid.Row="1">
             <StackPanel.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </StackPanel.LayoutTransform>
-            <ItemsControl Name="InfBuffs" ItemTemplate="{StaticResource AbTemplate}" ItemsSource="{Binding Instance.Player.InfBuffs}">
+            <ItemsControl Name="InfBuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Instance.Player.InfBuffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" 
@@ -55,7 +41,7 @@
                 </ItemsControl.ItemContainerStyle>
 
             </ItemsControl>
-            <ItemsControl Name="Buffs" ItemTemplate="{StaticResource AbTemplate}" ItemsSource="{Binding Instance.Player.Buffs}">
+            <ItemsControl Name="Buffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Instance.Player.Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
@@ -68,7 +54,7 @@
                 </ItemsControl.ItemContainerStyle>
 
             </ItemsControl>
-            <ItemsControl Name="Debuffs" ItemTemplate="{StaticResource AbTemplate}" Background="#00000000"
+            <ItemsControl Name="Debuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" Background="#00000000"
                       ItemsSource="{Binding Instance.Player.Debuffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
