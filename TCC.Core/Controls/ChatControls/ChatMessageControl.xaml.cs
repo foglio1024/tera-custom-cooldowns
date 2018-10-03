@@ -25,14 +25,15 @@ namespace TCC.Controls.ChatControls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(_dc.RawMessage + " LOADED");
+            //Console.WriteLine(_dc.RawMessage + " LOADED");
             _dc.IsVisible = true;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(_dc.RawMessage + " UNLOADED");
+            //Console.WriteLine(_dc.RawMessage + " UNLOADED");
             _dc.IsVisible = false;
+            _dc = null;
         }
 
         private void AnimCompleted(object sender, EventArgs e)
@@ -42,7 +43,6 @@ namespace TCC.Controls.ChatControls
 
         private void SetAnimated()
         {
-            _dc = ((ChatMessage)DataContext);
             _dc.Animate = false;
 
         }

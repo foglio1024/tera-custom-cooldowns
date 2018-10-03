@@ -89,7 +89,7 @@
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
                 <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" />
-                <!--<TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" FontSize="16"
+                <!--<TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" FontSize="16"
                            FontWeight="DemiBold" Foreground="#afff"
                            Text="{Binding StaminaTracker.Val}"
                            Width="45" VerticalAlignment="Center">
@@ -97,12 +97,12 @@
                 <Grid>
                     <Grid ClipToBounds="False">
                         <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5">
-                            <Rectangle Stroke="{StaticResource KrBorderColor}"
+                            <Rectangle Stroke="{StaticResource RevampBorderBrush}"
                                        StrokeThickness="1" Margin="12">
                             </Rectangle>
                         </Grid>
                         <Rectangle Width="60" Height="60" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
-                                   OpacityMask="{StaticResource IconOpacityBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                   OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding GrowingFury.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
                             </Rectangle.Fill>
@@ -121,7 +121,7 @@
 
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Margin="11"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -139,7 +139,7 @@
             </local:RhombBuffCooldownControl>
             <Border BorderThickness="1" Margin="11" 
                      RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                    Opacity=".7" BorderBrush="{StaticResource KrBorderColor}" Background="{StaticResource KrBg}"
+                    Opacity=".7" BorderBrush="{StaticResource RevampBorderBrush}" Background="{StaticResource RevampBackgroundGradientBrush}"
                     >
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -156,7 +156,7 @@
 
             </local:RhombBuffCooldownControl>
 
-            <Polygon Fill="{StaticResource KrBgColor}"
+            <Polygon Fill="{StaticResource RevampBackgroundBrush}"
                      Points="0 0 1 0 2 1 -1 1"
                      Stroke="#89a"
                      Visibility="Collapsed"
@@ -186,7 +186,7 @@
             </local:OutlinedTextBlock>
             <Grid Visibility="{Binding CounterProc, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"
                         >
                     <FrameworkElement.RenderTransform>

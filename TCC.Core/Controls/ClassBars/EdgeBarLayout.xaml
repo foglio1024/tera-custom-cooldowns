@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border RenderTransform="{StaticResource Skew45}" 
             Background="#a223" 
-            BorderBrush="{StaticResource KrBorderColor}"
+            BorderBrush="{StaticResource RevampBorderBrush}"
             BorderThickness="2 1"
                 RenderTransformOrigin=".5 1"
             Padding="1 0">

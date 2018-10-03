@@ -113,7 +113,7 @@
                Margin="17,0,0,0" 
                Opacity=".3"
                x:Name="Img"/>
-        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+        <TextBlock Style="{StaticResource DefaultTextStyle}" 
                    Grid.Column="1" 
                    Margin="10,0,14,0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
@@ -145,11 +145,11 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition  Width="12"/>
             </Grid.ColumnDefinitions>
-            <TextBlock TextAlignment="Right" Grid.RowSpan="2" Grid.Column="0" Margin="10,0" HorizontalAlignment="Right" Style="{StaticResource Styles.DefaultText}" VerticalAlignment="Center" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBlock>
+            <TextBlock TextAlignment="Right" Grid.RowSpan="2" Grid.Column="0" Margin="10,0" HorizontalAlignment="Right" Style="{StaticResource DefaultTextStyle}" VerticalAlignment="Center" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBlock>
             <Border Grid.Row="0" Grid.Column="1" Width="11" Height="11" Margin="0" Background="#2fff" CornerRadius="2" Cursor="Hand" MouseLeftButtonDown="AddValue"></Border>
             <Border Grid.Row="1" Grid.Column="1" Width="11" Height="11" Margin="0" Background="#2fff" CornerRadius="2" Cursor="Hand" MouseLeftButtonDown="SubtractValue"></Border>
-            <TextBlock IsHitTestVisible="False" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,-2,0,0" Width="9" Style="{StaticResource Styles.DefaultText}" Padding="0,0,0,0">+</TextBlock>
-            <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,-3,0,0" Width="6" Style="{StaticResource Styles.DefaultText}" Padding="0,0,0,0">-</TextBlock>
+            <TextBlock IsHitTestVisible="False" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,-2,0,0" Width="9" Style="{StaticResource DefaultTextStyle}" Padding="0,0,0,0">+</TextBlock>
+            <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,-3,0,0" Width="6" Style="{StaticResource DefaultTextStyle}" Padding="0,0,0,0">-</TextBlock>
 
         </Grid>
     </Grid>

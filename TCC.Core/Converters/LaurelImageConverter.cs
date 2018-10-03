@@ -21,8 +21,7 @@ namespace TCC.Converters
             switch (l)
             {
                 case Laurel.None:
-                    laurel = "blank";
-                    break;
+                    return null;
                 case Laurel.Bronze:
                     laurel = "bronze";
                     break;

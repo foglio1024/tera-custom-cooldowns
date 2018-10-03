@@ -24,7 +24,7 @@ namespace TCC
 {
     public partial class App
     {
-        public const bool Debug = false;
+        public const bool Debug = true;
         private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
@@ -88,6 +88,7 @@ namespace TCC
 
             DebugStuff();
         }
+        
 
         private static void DebugStuff()
         {
@@ -341,16 +342,5 @@ namespace TCC
             Environment.Exit(0);
         }
 
-        // ------------------------------ Handlers for controls defined in App.xaml ------------------------------ //
-
-        private void ToolTip_Opened(object sender, RoutedEventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = false;
-        }
-
-        private void ToolTip_Closed(object sender, RoutedEventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = true;
-        }
     }
 }

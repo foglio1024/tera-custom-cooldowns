@@ -89,6 +89,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Converters\BossHPbarColorConverter.cs" />
+    <Compile Include="Converters\AggroTypeToFillConverter.cs" />
+    <Compile Include="Converters\EntityIdToNameConverter.cs" />
     <Compile Include="Converters\DurationLabelConverter.cs" />
     <Compile Include="Converters\DurationToVisibilityConverter.cs" />
     <Compile Include="Controls\RoundAbnormalityIndicator.cs" />
@@ -105,6 +108,9 @@
     <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
     <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
     <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
+    <Compile Include="ResourceDictionaries\Styles.xaml.cs">
+      <DependentUpon>Styles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
@@ -1037,13 +1043,45 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dragablz.xaml">
+    <Page Include="ResourceDictionaries\Brushes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DragablzMaterialDesign.xaml">
+    <Page Include="ResourceDictionaries\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\Dragablz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\DragablzMaterialDesign.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceDictionaries\MiscResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\SVG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\TemplateSelectors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>

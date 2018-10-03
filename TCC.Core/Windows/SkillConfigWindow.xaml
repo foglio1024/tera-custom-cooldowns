@@ -47,7 +47,7 @@
                 <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding ShortName}"
                            VerticalAlignment="Center" Margin="5 0" />
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Center" Click="RemoveHiddenSkill" Grid.Column="2">
-                    <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpColor}"></Path>
+                    <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpBrush}"></Path>
                 </Button>
             </Grid>
         </DataTemplate>
@@ -59,7 +59,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource DefaultBackgroundColor}" 
+        <Border Background="{StaticResource DefaultBackgroundBrush}" 
                 Grid.RowSpan="3" CornerRadius="1" BorderThickness="1"
                 BorderBrush="#8555"></Border>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
@@ -73,7 +73,7 @@
                    RenderOptions.BitmapScalingMode="HighQuality"
                    VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".6" Margin="3 3">
             </Image>
-            <TextBlock Text="Cooldown bar settings" Style="{StaticResource Styles.DefaultText}"
+            <TextBlock Text="Cooldown bar settings" Style="{StaticResource DefaultTextStyle}"
                        Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        FontSize="15" Foreground="#ccc" />
         </Grid>
@@ -96,7 +96,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
+                <TextBlock Style="{StaticResource DefaultTextStyle}" Margin="10 5"
                            Opacity=".8" FontWeight="Thin" FontSize="16">
                     Skills
                 </TextBlock>
@@ -130,7 +130,7 @@
                     </ListBox>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 0"
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" Margin="10 0"
                                Opacity=".8" FontWeight="Thin" FontSize="16" >
                         Hidden skills
                     </TextBlock>
@@ -158,7 +158,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
+                <TextBlock Style="{StaticResource DefaultTextStyle}" Margin="10 5"
                            Opacity=".8" FontWeight="Thin" FontSize="16">
                     Items
                 </TextBlock>
@@ -190,7 +190,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource Styles.DefaultText}" Margin="10 5"
+                <TextBlock Style="{StaticResource DefaultTextStyle}" Margin="10 5"
                            Opacity=".8" FontWeight="Thin" FontSize="16">
                     Abnormalities
                 </TextBlock>

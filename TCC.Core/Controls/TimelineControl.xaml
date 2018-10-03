@@ -66,7 +66,7 @@
                         Width="6"
                         MinHeight="6"
                         CornerRadius="2"
-                        Background="{StaticResource HpColor}"
+                        Background="{StaticResource HpBrush}"
                         BorderBrush="White"
                         VerticalAlignment="Stretch"
                         BorderThickness="0"

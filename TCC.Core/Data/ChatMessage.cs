@@ -99,13 +99,37 @@ namespace TCC.Data
             get => _isVisible;
             set
             {
-                if (_isVisible == value) return;
                 Pieces.ToList().ForEach(p => p.IsVisible = value);
+                if (value)
+                {
+                    SettingsWindowViewModel.ChatShowChannelChanged += ShowChannelNPC;
+                    SettingsWindowViewModel.ChatShowTimestampChanged += ShowTimestampNPC;
+                    _subs++;
+                }
+                else
+                {
+                    SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
+                    SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
+                    _subs--;
+                }
+
+                Console.WriteLine("Subs: "+_subs);
+                if (_isVisible == value) return;
                 _isVisible = value;
                 NPC();
             }
         }
 
+        private static int _subs;
+        private void ShowChannelNPC()
+        {
+            NPC(nameof(ShowChannel));
+        }
+
+        private void ShowTimestampNPC()
+        {
+            NPC(nameof(ShowTimestamp));
+        }
         #endregion
 
         #region Constructors
@@ -115,8 +139,6 @@ namespace TCC.Data
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
             Timestamp = DateTime.Now.ToShortTimeString();
-            SettingsWindowViewModel.ChatShowChannelChanged += () => NPC(nameof(ShowChannel));
-            SettingsWindowViewModel.ChatShowTimestampChanged += () => NPC(nameof(ShowTimestamp));
             RawMessage = "";
         }
         public ChatMessage(ChatChannel ch, string auth, string msg) : this()

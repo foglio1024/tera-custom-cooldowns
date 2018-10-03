@@ -230,7 +230,7 @@
                   Margin="4"
                   Opacity=".4"
                   />
-                <Border Background="{StaticResource DefaultBackgroundColor}" Width="Auto"
+                <Border Background="{StaticResource DefaultBackgroundBrush}" Width="Auto"
                         Grid.Column="0" Grid.Row="0" Opacity="0"
                         Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
                 <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
@@ -260,7 +260,7 @@
                MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=Settings}" StaysOpen="True"
                PopupAnimation="Slide">
-            <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="2" Margin="3">
+            <Border Style="{StaticResource DefaultBorderStyle}" CornerRadius="2" Margin="3">
                 <StackPanel Width="350" Margin="-30 0 0 0">
                     <c:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
                                     Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0" Max="1" Visibility="Visible"/>

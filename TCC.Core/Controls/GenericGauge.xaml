@@ -8,7 +8,7 @@
              Loaded="UserControl_Loaded" >
     <UserControl.Resources>
         <DropShadowEffect x:Key="TextShadow" BlurRadius="2" ShadowDepth="1" Opacity="1" RenderingBias="Performance"/>
-        <Style TargetType="TextBlock" x:Key="Text" BasedOn="{StaticResource Styles.DefaultText}">
+        <Style TargetType="TextBlock" x:Key="Text" BasedOn="{StaticResource DefaultTextStyle}">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Effect" Value="{StaticResource TextShadow}"/>
             <Setter Property="Margin" Value="0,0,0,0"/>

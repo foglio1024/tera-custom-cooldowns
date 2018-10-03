@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="2" Margin="0 -16 0 0">
-            <Polygon Stroke="{StaticResource KrBorderColor}" Fill="{StaticResource KrBgColorDarkerT70}"
+            <Polygon Stroke="{StaticResource RevampBorderBrush}" Fill="{StaticResource RevampDarkerBackground70Brush}"
                      StrokeThickness="1"
                      RenderTransformOrigin=".5 .5" Margin="-29 -15 0 15"
                      Points="30 68.5, 67.5 30, 102.5 65,137.5 30, 175 68.5, 137.5 106, 102.5 72, 67.5 106">
@@ -33,11 +33,11 @@
         </Grid>
         <Grid Margin="0 -15 0 -12" Grid.Row="1" >
 
-            <Border BorderBrush="{StaticResource KrBorderColor}"
+            <Border BorderBrush="{StaticResource RevampBorderBrush}"
                         BorderThickness="1"
                         RenderTransform="{StaticResource Rotate45}"
                         RenderTransformOrigin=".5 .5"
-                        Background="{StaticResource KrBgColorDarkerT70}"
+                        Background="{StaticResource RevampDarkerBackground70Brush}"
                         Width="55" Height="55" Margin="0 4 0 0">
             </Border>
             <Grid Grid.RowSpan="2" Grid.Column="0"
@@ -116,14 +116,14 @@
                 <local:RhombFixedSkillControl Margin="-25" HorizontalAlignment="Center" DataContext="{Binding AuraUnyielding}" x:Name="CritResAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
             </UniformGrid>
             <Border Width="55" Height="55" BorderThickness="3" Grid.Row="0" Visibility="{Binding Elementalize, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" RenderTransformOrigin=".5 .5"
-                BorderBrush="{StaticResource GreenColor}" Background="Transparent" Margin="0 4 0 0">
+                BorderBrush="{StaticResource GreenBrush}" Background="Transparent" Margin="0 4 0 0">
                 <Border.RenderTransform>
                     <RotateTransform Angle="45"/>
                 </Border.RenderTransform>
             </Border>
         </Grid>
         <Grid Grid.Row="0" Margin="0 0 0 0" HorizontalAlignment="Center">
-            <Polygon Stroke="{StaticResource KrBorderColor}" Fill="{StaticResource KrBgColorDarkerT70}"
+            <Polygon Stroke="{StaticResource RevampBorderBrush}" Fill="{StaticResource RevampDarkerBackground70Brush}"
                      StrokeThickness="1"
                      RenderTransformOrigin=".5 .5" Margin="-29 3 0 -3" IsHitTestVisible="False"
                      Points="30 68.5, 102.5 -4, 175 68.5, 137.5 106, 102.5 72, 67.5 106">
@@ -182,7 +182,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.Resources>
-                <Style TargetType="Border" BasedOn="{StaticResource Styles.DefaultBorder}" x:Key="MysticBorder">
+                <Style TargetType="Border" BasedOn="{StaticResource DefaultBorderStyle}" x:Key="MysticBorder">
                     <Setter Property="Effect" Value="{x:Null}"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Elementalize}" Value="True">
@@ -190,7 +190,7 @@
                             <Setter Property="BorderThickness" Value="2"></Setter>
                             <Setter Property="Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="0" Color="{StaticResource GreenColorBase}" BlurRadius="10"></DropShadowEffect>
+                                    <DropShadowEffect ShadowDepth="0" Color="{StaticResource GreenColor}" BlurRadius="10"></DropShadowEffect>
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>

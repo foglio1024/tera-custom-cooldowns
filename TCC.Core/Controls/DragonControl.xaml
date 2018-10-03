@@ -6,6 +6,16 @@
              xmlns:local="clr-namespace:TCC.Controls"
              Loaded="UserControl_Loaded"
              mc:Ignorable="d" d:DataContext="{d:DesignData Npc}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Grid}" x:Key="Style.DragonSelectionGrid">
+            <Setter Property="Opacity" Value=".45"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="2" Height="Auto" 
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center"
