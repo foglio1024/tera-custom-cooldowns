@@ -276,7 +276,7 @@
                                     </Style>
                             </StackPanel.Style>
                             <TextBlock Width="55" FontSize="16" FontWeight="DemiBold" Style="{StaticResource DefaultTextStyle}"  
-                               TextAlignment="Right" VerticalAlignment="Bottom" Margin="3,2,15,-1"  Foreground="#afff"
+                               TextAlignment="Right" VerticalAlignment="Top" Margin="3 0 15 0"  Foreground="#afff"
                                Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=controls:BossGage}}">
                                 <TextBlock.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
