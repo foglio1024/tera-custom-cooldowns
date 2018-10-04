@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Windows.Controls;
 using TCC.Controls;
 using TCC.Data;
 
@@ -34,8 +35,23 @@ namespace TCC.Windows
             {
                 Left = _settings.X * Settings.ScreenW;
                 Top = _settings.Y * Settings.ScreenH;
+
                 //if(_settings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {_settings.Name}: {_settings.X}, {_settings.Y}");
                 CheckBounds();
+
+                if (ButtonsRef != null)
+                {
+                    switch (_settings.ButtonsPosition)
+                    {
+                        case ButtonsPosition.Above:
+                            Grid.SetRow(ButtonsRef, 0);
+                            break;
+                        case ButtonsPosition.Below:
+                            Grid.SetRow(ButtonsRef, 2);
+                            break;
+                    }
+                    UpdateButtons();
+                }
             });
         }
         public void ResetToCenter()
@@ -97,6 +113,7 @@ namespace TCC.Windows
                 MouseLeftButtonDown += Drag;
                 return;
             }
+
             _hideButtons = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000));
             _showButtons = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150));
             _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
@@ -109,8 +126,6 @@ namespace TCC.Windows
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
         }
-
-
 
         private void OnFocusTick(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -253,7 +268,9 @@ namespace TCC.Windows
                 Top = Settings.ScreenH - ActualHeight;
             }
             CheckIndividualScreensBounds();
-            _settings.Positions[SessionManager.CurrentPlayer.Class] = new Point(Left / Settings.ScreenW, Top / Settings.ScreenH);
+
+            _settings.X = Left / Settings.ScreenW;
+            _settings.Y = Top / Settings.ScreenH;
         }
 
         private void CheckIndividualScreensBounds()
@@ -327,12 +344,37 @@ namespace TCC.Windows
             return Screen.AllScreens.FirstOrDefault(x =>
                 x.Bounds.Contains(Convert.ToInt32(WindowCenter.X), Convert.ToInt32(WindowCenter.Y)));
         }
+        private void UpdateButtons()
+        {
+            if (ButtonsRef != null)
+            {
+                double screen_middle = Settings.ScreenH / 2;
+                double middle = Top + Height / 2;
+                double deadzone = Settings.ScreenH / 15;
+                double distance = Math.Abs(screen_middle - middle);
+
+                if (distance > deadzone)
+                {
+                    if (middle >= screen_middle)
+                    {
+                        _settings.ButtonsPosition = ButtonsPosition.Above;
+                        Grid.SetRow(ButtonsRef, 0);
+                    }
+                    else
+                    {
+                        _settings.ButtonsPosition = ButtonsPosition.Below;
+                        Grid.SetRow(ButtonsRef, 2);
+                    }
+                }
+            }
+        }
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 if (!_ignoreSize) ResizeMode = ResizeMode.NoResize;
                 DragMove();
+                UpdateButtons();
                 CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
                 _settings.X = Left / Settings.ScreenW;

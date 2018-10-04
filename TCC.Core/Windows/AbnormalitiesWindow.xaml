@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <FrameworkElement FlowDirection="{Binding Instance.Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top"/>
         <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource Converters.DirectionToHorAlignConveter}}"

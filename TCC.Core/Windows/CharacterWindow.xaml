@@ -31,6 +31,7 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Name="WindowContent" Grid.Row="1">
             <Grid.LayoutTransform>
