@@ -72,7 +72,7 @@
     <Style TargetType="{x:Type TextBlock}" x:Key="DefaultTextStyle" >
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="Foreground" Value="#ccffffff"/>
-        <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+        <!--<Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>-->
     </Style>
     <Style TargetType="{x:Type Button}" x:Key="ButtonMainStyle">
         <Setter Property="OverridesDefaultStyle" Value="True" />
