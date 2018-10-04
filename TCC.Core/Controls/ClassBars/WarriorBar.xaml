@@ -27,7 +27,7 @@
         <!--Stance + Gamble-->
         <Grid HorizontalAlignment="Center" Margin="40 30 30 30">
             <!--Stance-->
-            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Grid.Column="0"
+            <Border Style="{StaticResource DefaultBorderStyle}" Grid.Row="0" Grid.Column="0"
                     Margin="2" Opacity="1"  BorderThickness="4" RenderTransformOrigin=".5 .5"
                     BorderBrush="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"
                     RenderTransform="{StaticResource Rotate45}">
@@ -107,9 +107,9 @@
         <Grid Width="Auto" Height="Auto" VerticalAlignment="Top" Grid.RowSpan="2" 
               Visibility="{Binding ShowEdge, Converter={StaticResource BooleanToVisibilityConverter}}"
               x:Name="Moving" HorizontalAlignment="Right" Effect="{StaticResource DropShadow}">
-            <Border Style="{StaticResource Styles.DefaultBorder}" RenderTransform="{StaticResource Rotate45}" Opacity="1" 
+            <Border Style="{StaticResource DefaultBorderStyle}" RenderTransform="{StaticResource Rotate45}" Opacity="1" 
                     RenderTransformOrigin=".5 .5" Width="34" Height="34" x:Name="EdgeCounterBorder" BorderThickness="2"
-                    Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}">
+                    Background="{StaticResource RevampBackgroundBrush}" BorderBrush="{StaticResource RevampBorderBrush}">
                 <Border.Effect>
                     <DropShadowEffect Color="White" BlurRadius="10" ShadowDepth="0" Opacity="0"/>
                 </Border.Effect>
@@ -140,9 +140,9 @@
         </Grid>
         <!--TC-->
         <Grid HorizontalAlignment="Left" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 0 0" Effect="{StaticResource DropShadow}" Visibility="{Binding ShowTraverseCut, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Border Style="{StaticResource Styles.DefaultBorder}" RenderTransform="{StaticResource Rotate45}" Opacity="1" 
+            <Border Style="{StaticResource DefaultBorderStyle}" RenderTransform="{StaticResource Rotate45}" Opacity="1" 
                         RenderTransformOrigin=".5 .5" Width="32" Height="32" Effect="{x:Null}"
-                         BorderBrush="{StaticResource KrBorderColor}"/>
+                         BorderBrush="{StaticResource RevampBorderBrush}"/>
             <Grid ClipToBounds="True" RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" Margin="1">
 
                 <!--EndAngle="{Binding TraverseCut.Factor, Converter={StaticResource Converters.FactorToAngle}}"-->
@@ -153,8 +153,8 @@
                     </local:Arc.RenderTransform>
                 </local:Arc>
             </Grid>
-            <Border Style="{StaticResource Styles.DefaultBorder}" RenderTransform="{StaticResource Rotate45}" Opacity="1" BorderThickness="0"
-                    RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin=".5 .5" Width="24" Height="24" Effect="{x:Null}" BorderBrush="{StaticResource KrBorderColor}">
+            <Border Style="{StaticResource DefaultBorderStyle}" RenderTransform="{StaticResource Rotate45}" Opacity="1" BorderThickness="0"
+                    RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin=".5 .5" Width="24" Height="24" Effect="{x:Null}" BorderBrush="{StaticResource RevampBorderBrush}">
                 <Border.Background>
                     <ImageBrush ImageSource="/resources/images/traverse_cut.png"  />
                 </Border.Background>
@@ -203,11 +203,11 @@
             </Grid.RowDefinitions>
             <Border Grid.RowSpan="2" Grid.Column="1" Height="5"  BorderThickness="0 0 0 0" BorderBrush="#9000" 
                     Opacity=".7" RenderTransform="{Binding ElementName=TcBackgroundBorder, Path=RenderTransform}"
-                    Style="{StaticResource Styles.DefaultBorder}" Effect="{x:Null}" x:Name="TaBackgroundBorder"
+                    Style="{StaticResource DefaultBorderStyle}" Effect="{x:Null}" x:Name="TaBackgroundBorder"
                     CornerRadius="0,0,0,0" HorizontalAlignment="Stretch" Margin="0 45 28 0" 
                     Visibility="Collapsed"
                     />
-            <Border  Style="{StaticResource Styles.DefaultBorder}"
+            <Border  Style="{StaticResource DefaultBorderStyle}"
                    Grid.Column="1"
                    Grid.Row="1"
                     Height="18"
@@ -220,7 +220,7 @@
                      Effect="{x:Null}"
                      >
             </Border>
-            <Border  Style="{StaticResource Styles.DefaultBorder}"
+            <Border  Style="{StaticResource DefaultBorderStyle}"
                    Grid.Column="1"
                    Grid.Row="0"
                     Height="18"
@@ -232,7 +232,7 @@
 
                     RenderTransform="{StaticResource Skew45Inv}">
             </Border>
-            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+            <Border Style="{StaticResource DefaultBorderStyle}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
                     CornerRadius="0" Margin="2" Opacity="1"  BorderThickness="4" RenderTransformOrigin=".5 .5"
                     BorderBrush="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"
                     >
@@ -320,8 +320,8 @@
                     <Grid.RenderTransform>
                         <TranslateTransform X="-12" Y="20"></TranslateTransform>
                     </Grid.RenderTransform>
-                    <Border BorderThickness="2 1" BorderBrush="{StaticResource KrBorderColor}"
-                        Background="{StaticResource KrBgColor}"
+                    <Border BorderThickness="2 1" BorderBrush="{StaticResource RevampBorderBrush}"
+                        Background="{StaticResource RevampBackgroundBrush}"
                         RenderTransform="{StaticResource Skew45}"
                          Grid.Column="0" RenderTransformOrigin=".5 .5" VerticalAlignment="Top"
                         Height="15" Width="28" >
@@ -332,8 +332,8 @@
                                Foreground="#9fff" HorizontalAlignment="Center" Margin="0 -1 0 0"></TextBlock>
                 </Grid>
                 <Border BorderThickness="2 1 2 1" 
-                        BorderBrush="{StaticResource KrBorderColor}"
-                        Background="{StaticResource KrBgColor}"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
+                        Background="{StaticResource RevampBackgroundBrush}"
                         Height="8" Grid.Column="1"
                         Margin="0 0 10 0" x:Name="TcBorder"
                         Width="240"
@@ -346,7 +346,7 @@
                     </Border.RenderTransform>
                     <Border Height="6" 
                     BorderThickness="0" Opacity="1"
-                    Style="{StaticResource Styles.DefaultBorder}"
+                    Style="{StaticResource DefaultBorderStyle}"
                     Background="#fa6c" HorizontalAlignment="Left" 
 
                     >

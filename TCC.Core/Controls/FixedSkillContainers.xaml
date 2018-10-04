@@ -107,11 +107,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".5" Grid.Row="1" Margin="0 0" CornerRadius="29"
+        <!--Main DefaultBorderStyle-->
+        <Border Style="{StaticResource DefaultBorderStyle}" Opacity=".5" Grid.Row="1" Margin="0 0" CornerRadius="29"
                 x:Name="MainBorder" Effect="{x:Null}"
                 HorizontalAlignment="Left" Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" />
-        <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".3"  Margin="0" CornerRadius="29"
+        <Border Style="{StaticResource DefaultBorderStyle}" Opacity=".3"  Margin="0" CornerRadius="29"
                 PreviewDragLeave="FixedSkillContainers_OnDragLeave" Grid.RowSpan="2" Grid.Row="1" Effect="{x:Null}"  
                 x:Name="MainBorderSec" HorizontalAlignment="Left"  Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" />
         <Button Style="{StaticResource ButtonContentOpacityStyle}" Click="OpenCooldownSettings" ToolTip="Configure skills" VerticalAlignment="Bottom" x:Name="SettingsButton" Opacity="0">
@@ -137,7 +137,7 @@
                 </Popup.Resources>
                 <ListBox SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single" Padding="5"
                          ScrollViewer.CanContentScroll="True"
-                         Background="{StaticResource DefaultBackgroundColor}" BorderThickness="0"
+                         Background="{StaticResource DefaultBackgroundBrush}" BorderThickness="0"
                          Effect="{StaticResource DropShadow}" Margin="15" x:Name="ChoiceListBox"
                          ItemTemplate="{StaticResource SkillDataTemplate}">
                 </ListBox>

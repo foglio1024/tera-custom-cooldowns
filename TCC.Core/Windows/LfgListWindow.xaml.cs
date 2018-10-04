@@ -62,12 +62,12 @@ namespace TCC.Windows
                     if (VM.Creating)
                     {
                         _colAn.To = string.IsNullOrEmpty(VM.NewMessage)
-                            ? ((SolidColorBrush)Application.Current.FindResource("HpColor")).Color
-                            : ((SolidColorBrush)Application.Current.FindResource("GreenColor")).Color;
+                            ? (Color)Application.Current.FindResource("HpColor")
+                            : (Color)Application.Current.FindResource("GreenColor");
                     }
                     else
                     {
-                        _colAn.To = (Application.Current.FindResource("BackgroundDarkColor") as SolidColorBrush).Color;
+                        _colAn.To = (Color) Application.Current.FindResource("BackgroundDarkBrush");
                     }
                     var currBg = CreateMessageBtn.Background as SolidColorBrush;
                     var currCol = currBg.Color;

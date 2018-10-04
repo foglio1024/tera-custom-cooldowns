@@ -82,12 +82,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Name}"  Style="{StaticResource Styles.DefaultText}" 
+                <TextBlock Text="{Binding Name}"  Style="{StaticResource DefaultTextStyle}" 
                            TextTrimming="CharacterEllipsis" Margin="0 0 8 0"/>
 
-                <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}" 
+                <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}" 
                            Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Grid.Column="1"/>
-                <TextBlock FontSize="11" Style="{StaticResource Styles.DefaultText}"  
+                <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}"  
                                FontWeight="Bold" Text="{Binding CurrentFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2"/>
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
@@ -102,8 +102,8 @@
             </Grid>
             <Grid>
 
-                <Border Background="{StaticResource KrBgColor}"
-                        BorderBrush="{StaticResource KrBorderColor}"
+                <Border Background="{StaticResource RevampBackgroundBrush}"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
                         RenderTransform="{StaticResource Skew45}"
                         BorderThickness="2 1" Height="8"
                         RenderTransformOrigin="1 1"></Border>

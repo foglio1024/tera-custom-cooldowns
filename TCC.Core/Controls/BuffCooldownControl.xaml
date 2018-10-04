@@ -30,7 +30,7 @@
 
 
 
-        <Border Style="{StaticResource Styles.DefaultBorder}" 
+        <Border Style="{StaticResource DefaultBorderStyle}" 
                 Opacity="{Binding Buff.Seconds}"
                 BorderThickness="0"
                 Background="#ffbd3d"

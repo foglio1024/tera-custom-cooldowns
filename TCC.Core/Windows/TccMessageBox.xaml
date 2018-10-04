@@ -15,8 +15,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Foreground="#6fff" FontSize="16" x:Name="MessageTitle" Grid.Row="0" Margin="5"></TextBlock>
-        <Border Background="{StaticResource MainColor}" Grid.RowSpan="3" Margin="0 0 0 3" CornerRadius="2" x:Name="Bg" MouseLeftButtonDown="BG_MouseLeftButtonDown"></Border>
-        <Border Background="{StaticResource CardDarkColor}" Grid.Row="2" CornerRadius="0 0 2 2"/>
+        <Border Background="{StaticResource MainBrush}" Grid.RowSpan="3" Margin="0 0 0 3" CornerRadius="2" x:Name="Bg" MouseLeftButtonDown="BG_MouseLeftButtonDown"></Border>
+        <Border Background="{StaticResource CardDarkBrush}" Grid.Row="2" CornerRadius="0 0 2 2"/>
         <!--<Path Data="{StaticResource SvgInfo}" Fill="#4fff" VerticalAlignment="Center" Grid.Row="1" Height="50" HorizontalAlignment="Left" Margin="10"/>-->
         <TextBlock Foreground="#bfff" x:Name="TxtMsg" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Margin="10 10" TextWrapping="WrapWithOverflow" IsHitTestVisible="False"/>
         <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

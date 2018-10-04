@@ -28,10 +28,13 @@ namespace TCC
         private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
+
+        public static bool Loading { get; set; }
         //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Loading = true;
             //#if DEBUG
             //            DebugWindow = new DebugWindow();
             //            DebugWindow.Show();
@@ -87,7 +90,9 @@ namespace TCC
             UpdateManager.StartCheck();
 
             DebugStuff();
+            Loading = false;
         }
+        
 
         private static void DebugStuff()
         {
@@ -341,16 +346,5 @@ namespace TCC
             Environment.Exit(0);
         }
 
-        // ------------------------------ Handlers for controls defined in App.xaml ------------------------------ //
-
-        private void ToolTip_Opened(object sender, RoutedEventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = false;
-        }
-
-        private void ToolTip_Closed(object sender, RoutedEventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = true;
-        }
     }
 }

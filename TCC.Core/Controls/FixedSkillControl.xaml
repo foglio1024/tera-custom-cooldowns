@@ -86,7 +86,7 @@
         <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="UserControl_MouseEnter" Fill="#01000000"></Rectangle>
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="DeleteButton"
               MouseLeftButtonDown="DeleteButton_MouseLeftButtonDown">
-            <Ellipse Fill="{StaticResource HpColor}" Effect="{StaticResource DropShadow}"></Ellipse>
+            <Ellipse Fill="{StaticResource HpBrush}" Effect="{StaticResource DropShadow}"></Ellipse>
             <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
         <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity=".6" Margin="2" RenderTransformOrigin=".5 .5">

@@ -29,7 +29,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Margin="0,0,0,0" Style="{StaticResource Styles.DefaultBorder}" x:Name="MainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Border Margin="0,0,0,0" Style="{StaticResource DefaultBorderStyle}" x:Name="MainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="BossNameTb" Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock Name="BossNameTb" Style="{StaticResource DefaultTextStyle}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="15" 
@@ -50,7 +50,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock  Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock  Style="{StaticResource DefaultTextStyle}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="11"
@@ -60,7 +60,7 @@
                         <Run Text=" / " Foreground="#5fff"/>
                         <Run Text="{Binding MaxHP, StringFormat={}{0:N0}}" Foreground="#5fff"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock Style="{StaticResource DefaultTextStyle}"
                                HorizontalAlignment="Center" 
                                FontWeight="DemiBold" 
                                VerticalAlignment="Center" 

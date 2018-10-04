@@ -29,7 +29,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -40,7 +40,7 @@
                     <local:RhombBuffCooldownControl DataContext="{Binding Unleash}" HorizontalAlignment="Center" VerticalAlignment="Center">
                     </local:RhombBuffCooldownControl>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -58,7 +58,7 @@
                         </FrameworkElement.RenderTransform>
                     </local:RhombBuffCooldownControl>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -87,7 +87,7 @@
                 <Grid>
 
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                            Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                            Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -100,7 +100,7 @@
                     </local:RhombFixedSkillControl>
                     
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -125,7 +125,7 @@
                         </FrameworkElement.RenderTransform>
                     </local:OutlinedTextBlock>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -150,7 +150,7 @@
                         </FrameworkElement.RenderTransform>
                     </local:OutlinedTextBlock>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
@@ -175,7 +175,7 @@
                         </FrameworkElement.RenderTransform>
                     </local:OutlinedTextBlock>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
