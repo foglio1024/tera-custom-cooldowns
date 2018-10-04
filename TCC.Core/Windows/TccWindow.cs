@@ -138,7 +138,7 @@ namespace TCC.Windows
             {
                 _settings.W = ActualWidth;
                 _settings.H = ActualHeight;
-                SettingsWriter.Save();
+                if(!App.Loading) SettingsWriter.Save();
             }
         }
 

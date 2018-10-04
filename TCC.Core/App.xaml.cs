@@ -24,14 +24,17 @@ namespace TCC
 {
     public partial class App
     {
-        public const bool Debug = true;
+        public const bool Debug = false;
         private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
+
+        public static bool Loading { get; set; }
         //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Loading = true;
             //#if DEBUG
             //            DebugWindow = new DebugWindow();
             //            DebugWindow.Show();
@@ -87,6 +90,7 @@ namespace TCC
             UpdateManager.StartCheck();
 
             DebugStuff();
+            Loading = false;
         }
         
 
