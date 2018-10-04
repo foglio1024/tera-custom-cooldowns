@@ -35,7 +35,6 @@ namespace TCC
             get
             {
                 var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common :  SessionManager.CurrentPlayer.Class ;
-                //if (Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Getting X {X} for class {cc}");
                 cc = PerClassPosition ? cc : Class.Common;
                 return Positions[cc].X;
             }
@@ -47,7 +46,6 @@ namespace TCC
 
                 var old = Positions[cc];
                 Positions[cc] = new Point(value, old.Y);
-                //if(Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Setting X to {value} for class {cc}");
                 NPC(nameof(X));
             }
         }
