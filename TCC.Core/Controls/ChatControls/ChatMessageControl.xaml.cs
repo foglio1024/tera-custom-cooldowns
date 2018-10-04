@@ -26,12 +26,14 @@ namespace TCC.Controls.ChatControls
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             //Console.WriteLine(_dc.RawMessage + " LOADED");
+            if (_dc == null) return;
             _dc.IsVisible = true;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             //Console.WriteLine(_dc.RawMessage + " UNLOADED");
+            if(_dc == null) return;
             _dc.IsVisible = false;
             _dc = null;
         }
