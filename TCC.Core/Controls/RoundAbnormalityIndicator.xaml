@@ -57,7 +57,7 @@
         <!-- Duration -->
         <Grid x:Name="DurationLabel"  Width="Auto" 
               MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
-              MaxHeight="18"
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication},ConverterParameter=0.55}"
               HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1"
               Margin="0 -4 0 0">
             <Border x:Name="Fill" Background="#eee"  Width="Auto" 

@@ -30,7 +30,7 @@
     <c:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
     <c:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
     <c:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
-    <c:SizeToDurationLabelSizeConverter x:Key="Converters.MainSizeToDurationLabelSize"/>
+    <c:MathMultiplicationConverter x:Key="Math.Multiplication"/>
     <c:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
 
     <!--BossGage resources-->

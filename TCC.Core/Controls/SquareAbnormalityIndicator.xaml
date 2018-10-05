@@ -44,7 +44,8 @@
             </local:Arc>
         </Grid>
         <!-- Duration -->
-        <Grid x:Name="DurationLabel"  Width="Auto" MaxHeight="17"
+        <Grid x:Name="DurationLabel"  Width="Auto" 
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=local:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.55}"
               MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
               HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1"
               Margin="0 -4 0 0">
