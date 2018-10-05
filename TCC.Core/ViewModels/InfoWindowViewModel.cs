@@ -351,7 +351,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                var fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                var fs = new FileStream(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                 fs.SetLength(0);
                 using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
                 {

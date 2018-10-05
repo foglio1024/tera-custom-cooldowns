@@ -161,10 +161,10 @@ namespace TCC
 
         public void LoadWindowSettings()
         {
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) return;
+            if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) return;
             try
             {
-                _settingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
 
                 foreach (var ws in _settingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
                 {
@@ -195,7 +195,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
                 LoadWindowSettings();
             }
         }
@@ -203,8 +203,8 @@ namespace TCC
         {
             try
             {
-                if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) return;
-                _settingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) return;
+                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
 
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -282,7 +282,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
                 LoadSettings();
             }
         }

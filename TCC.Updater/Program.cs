@@ -9,7 +9,7 @@ namespace TCC.Updater
 {
     internal class Program
     {
-        private static readonly string SourcePath = AppDomain.CurrentDomain.BaseDirectory + "/tmp";
+        private static readonly string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
         private static readonly string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
 
         private static void Main(string[] args)
@@ -52,7 +52,7 @@ namespace TCC.Updater
 
             Directory.Delete(SourcePath, true);
             Process.Start("explorer.exe", "https://github.com/Foglio1024/Tera-custom-cooldowns/releases");
-            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCC.exe");
+            Process.Start(Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/TCC.exe");
             Environment.Exit(0);
         }
     }

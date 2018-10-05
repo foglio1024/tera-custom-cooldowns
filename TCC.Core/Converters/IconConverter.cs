@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Windows.Data;
 namespace TCC.Converters
 {
@@ -16,7 +17,7 @@ namespace TCC.Converters
                     iconName = iconName.Replace(".", "/");
                 }
             }
-            return AppDomain.CurrentDomain.BaseDirectory + "/resources/images/" + iconName + ".png";
+            return Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/images/" + iconName + ".png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
