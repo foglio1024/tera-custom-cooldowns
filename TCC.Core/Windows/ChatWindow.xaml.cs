@@ -24,7 +24,7 @@ namespace TCC.Windows
             InitializeComponent();
             //ButtonsRef = buttons;
             MainContent = content;
-            Init(ws, false);
+            Init(ws, false, true, false);
             _opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             _opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowManager.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
