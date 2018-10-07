@@ -49,7 +49,7 @@ namespace TCC.Windows
                 if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, a);
-            WindowManager.ForegroundManager.RefreshVisible();
+            //WindowManager.ForegroundManager.RefreshVisible();
 
         }
 
