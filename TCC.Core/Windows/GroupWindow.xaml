@@ -91,7 +91,7 @@
                         </Button>
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
                                 ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15" Visibility="{Binding ShowLeaveButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15" Visibility="{Binding Instance.ShowLeaveButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </Button>
                     </StackPanel>
                 </Border>
