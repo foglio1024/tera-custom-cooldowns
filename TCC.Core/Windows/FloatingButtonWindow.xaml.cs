@@ -26,7 +26,6 @@ namespace TCC.Windows
         private Timer _t;
         private DispatcherTimer _n;
         private DoubleAnimation _an;
-        private readonly int _notificationDuration = 4000;
         private void FloatinButtonLoaded(object sender, RoutedEventArgs e)
         {
             var handle = new WindowInteropHelper(this).Handle;
@@ -43,10 +42,10 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.VisibilityChanged += OnTccVisibilityChanged;
             _t = new Timer { Interval = 2000 };
             _t.Tick += RepeatAnimation;
-            _n = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(_notificationDuration) };
+            _n = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(4000) };
             _n.Tick += _n_Tick;
             _an = new DoubleAnimation(.75, 1, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
-            _queue = new Queue<Tuple<string, string, NotificationType>>();
+            _queue = new Queue<Tuple<string, string, NotificationType, uint>>();
         }
 
         public TooltipInfo TooltipInfo { get; set; }
@@ -126,12 +125,12 @@ namespace TCC.Windows
         }
 
         private bool _busy;
-        private Queue<Tuple<string, string, NotificationType>> _queue;
-        public void NotifyExtended(string title, string msg, NotificationType type)
+        private Queue<Tuple<string, string, NotificationType, uint>> _queue;
+        public void NotifyExtended(string title, string msg, NotificationType type, uint timeMs = 4000)
         {
             if (_busy)
             {
-                _queue.Enqueue(new Tuple<string, string, NotificationType>(title, msg, type));
+                _queue.Enqueue(new Tuple<string, string, NotificationType, uint>(title, msg, type,timeMs));
                 return;
             }
 
@@ -167,7 +166,8 @@ namespace TCC.Windows
                     {
                         EasingFunction = new QuadraticEase()
                     });
-                NotificationTimeGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(_notificationDuration)));
+                NotificationTimeGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(timeMs)));
+                _n.Interval = TimeSpan.FromMilliseconds(timeMs);
                 _n.Start();
             });
         }
@@ -191,7 +191,7 @@ namespace TCC.Windows
             _busy = false;
             if (_queue.Count <= 0) return;
             var tuple = _queue.Dequeue();
-            NotifyExtended(tuple.Item1, tuple.Item2, tuple.Item3);
+            NotifyExtended(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
         }
 
         public void OpenPlayerMenu()
