@@ -69,7 +69,7 @@ namespace TCC.Windows
                     }
                     else
                     {
-                        _colAn.To = (Color) Application.Current.FindResource("BackgroundDarkBrush");
+                        _colAn.To = (Color) Application.Current.FindResource("BackgroundDarkColor");
                     }
                     var currBg = CreateMessageBtn.Background as SolidColorBrush;
                     var currCol = currBg.Color;
