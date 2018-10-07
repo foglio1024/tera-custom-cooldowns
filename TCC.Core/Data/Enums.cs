@@ -117,27 +117,30 @@ namespace TCC.Data
         Money = 211,
         Megaphone = 213,
         GuildAdvertising = 214,
-        SentWhisper = 300, //arbitrary
-        ReceivedWhisper = 301, //arbitrary
-        System = 302, //arbitrary (missing in database)
-        TradeRedirect = 303, //arbitrary
-        Enchant12 = 304, //arbitrary
-        Enchant15 = 305, //arbitrary
-        RaidLeader = 306, //arbitrary
-        Bargain = 307, //arbitrary
-        Apply = 308, //arb
-        Death = 309, //arb
-        Ress = 310, //arb
-        Quest = 311, //arb
-        Friend = 312,//arb
-        Enchant7 = 313, //arbitrary
-        Enchant8 = 314, //arbitrary
-        Enchant9 = 315, //arbitrary
-        WorldBoss = 316, //arb
+        //  custom--
+        SentWhisper = 300,
+        ReceivedWhisper = 301,
+        System = 302, //missing in db
+        TradeRedirect = 303, 
+        Enchant12 = 304,
+        Enchant15 = 305,
+        RaidLeader = 306,
+        Bargain = 307, 
+        Apply = 308, 
+        Death = 309,     
+        Ress = 310,      
+        Quest = 311,     
+        Friend = 312,    
+        Enchant7 = 313,  
+        Enchant8 = 314,  
+        Enchant9 = 315,  
+        WorldBoss = 316, 
         Laurel = 317,
         Damage = 318,
+        Guardian = 319,
         TCC = 1000,
         Twitch = 1001
+        // --custom
     }
 
     public enum Class

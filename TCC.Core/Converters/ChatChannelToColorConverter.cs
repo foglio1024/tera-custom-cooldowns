@@ -83,11 +83,11 @@ namespace TCC.Converters
                 case ChatChannel.Enchant12:
                 case ChatChannel.Enchant7:
                 case ChatChannel.Enchant8:
-                    resName = "GoldBrush"; break;
+                    resName = "EnchantLowBrush"; break;
                 case ChatChannel.Enchant9:
                 case ChatChannel.Laurel:
                 case ChatChannel.Enchant15:
-                    resName = "GuardianBrush"; break;
+                    resName = "EnchantHighBrush"; break;
                 case ChatChannel.RaidLeader:
                     resName = "ChatRaidNoticeBrush"; break;
                 case ChatChannel.TCC:
@@ -109,6 +109,8 @@ namespace TCC.Converters
                     resName = "TwitchBrush"; break;
                 case ChatChannel.WorldBoss:
                     resName = "ChatSystemWorldBossBrush"; break;
+                case ChatChannel.Guardian:
+                    resName = "GuardianBrush"; break;
                 default:
                     resName = "ChatSystemGenericBrush"; break;
             }
