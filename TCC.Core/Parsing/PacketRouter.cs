@@ -214,6 +214,7 @@ namespace TCC.Parsing
                     ch.Name = item.Name;
                     ch.Laurel = item.Laurel;
                     ch.Position = item.Position;
+                    ch.GuildName = item.GuildName;
                 }
                 else
                 {
