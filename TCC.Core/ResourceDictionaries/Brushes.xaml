@@ -9,6 +9,8 @@
     <SolidColorBrush x:Key="DailyBrush"                     Color="{StaticResource DailyColor}"                                />
     <SolidColorBrush x:Key="MarksBrush"                     Color="{StaticResource MarksColor}"                                />
     <SolidColorBrush x:Key="GuardianBrush"                  Color="{StaticResource GuardianColor}"                             />
+    <SolidColorBrush x:Key="EnchantLowBrush"                Color="{StaticResource EnchantLowColor}"                           />
+    <SolidColorBrush x:Key="EnchantHighBrush"               Color="{StaticResource EnchantHighColor}"                          />
     <SolidColorBrush x:Key="NinjaBrush"                     Color="{StaticResource NinjaColor}"                                />
                                                                                                                                
     <SolidColorBrush x:Key="DefaultBackgroundBrush"         Color="{StaticResource DefaultBackgroundColor}"      Opacity=".9"  />
