@@ -915,6 +915,7 @@ namespace TCC.Data
             sb.Append(mw);
             sb.Append(mp.Text.Substring(1));
             mp.Text = sb.ToString();
+            msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, msg.Channel, Settings.FontSize, false, "cccccc"));
             msg.AddPiece(mp);
 
             return msg;
