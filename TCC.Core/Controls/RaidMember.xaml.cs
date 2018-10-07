@@ -42,9 +42,9 @@ namespace TCC.Controls
         private void OnAbnormalityShapeChanged()
         {
             Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.ItemTemplateSelector = Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
             Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
 
@@ -144,12 +144,12 @@ namespace TCC.Controls
         }
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled = false;
+            FocusManager.PauseTopmost = true;
         }
 
         private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled = true;
+            FocusManager.PauseTopmost = false;
         }
 
     }

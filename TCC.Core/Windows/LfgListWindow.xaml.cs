@@ -34,7 +34,7 @@ namespace TCC.Windows
             {
                 if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
             };
-            FocusManager.FocusTimer.Elapsed += (_, __) => { RefreshTopmost(); };
+            FocusManager.FocusTick+= RefreshTopmost;
 
             Closing += (_, ev) =>
             {
@@ -45,6 +45,8 @@ namespace TCC.Windows
 
         private void RefreshTopmost()
         {
+            if (FocusManager.PauseTopmost) return;
+
             Dispatcher.Invoke(() =>
             {
                 Topmost = false;

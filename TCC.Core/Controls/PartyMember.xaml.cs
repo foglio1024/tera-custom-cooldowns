@@ -144,12 +144,12 @@ namespace TCC.Controls
 
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled = false;
+            FocusManager.PauseTopmost = true;
         }
 
         private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled = true;
+            FocusManager.PauseTopmost = false;
         }
     }
 }

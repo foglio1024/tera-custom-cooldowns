@@ -42,7 +42,7 @@ namespace TCC.Windows
         {
             if (e.NewValue)
             {
-                FocusManager.FocusTimer.Enabled = false;
+                FocusManager.ForceFocused = true; //FocusTimer.Enabled = false;
                 return;
             }
 
@@ -65,6 +65,8 @@ namespace TCC.Windows
             {
                 VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
+            FocusManager.ForceFocused = false; 
+
         }
 
         public void UpdateSettings()
@@ -328,7 +330,7 @@ namespace TCC.Windows
                 }
             }
             UpdateSettings();
-            if (!FocusManager.FocusTimer.Enabled) FocusManager.FocusTimer.Enabled = true;
+            if (!FocusManager.ForceFocused == true) FocusManager.ForceFocused = false; //FocusTimer.Enabled = true;
         }
 
 

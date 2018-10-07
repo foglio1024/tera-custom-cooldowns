@@ -72,7 +72,7 @@ namespace TCC
                             !SessionManager.Encounter &&
                             !ForceUndim;
 
-        public bool Visible => SessionManager.Logged &&
+        public bool Visible => SessionManager .Logged &&
                                !SessionManager.LoadingScreen &&
                                 FocusManager  .IsForeground ||
                                 _forceVisible;

@@ -104,6 +104,8 @@ namespace TCC.Windows
 
         private void RefreshTopmost()
         {
+            if (FocusManager.PauseTopmost) return;
+
             Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, DispatcherPriority.DataBind);
         }
 
@@ -196,7 +198,7 @@ namespace TCC.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                FocusManager.FocusTimer.Enabled = false;
+                FocusManager.PauseTopmost= true;//FocusTimer.Enabled = false;
                 RefreshTopmost();
                 if (PlayerInfo.IsOpen) ClosePlayerMenu();
                 TooltipInfo.Refresh();
@@ -211,7 +213,7 @@ namespace TCC.Windows
             {
                 if (((PlayerTooltip)PlayerInfo.Child).MgPopup.IsMouseOver) return;
                 if (((PlayerTooltip)PlayerInfo.Child).FpsUtilsPopup.IsMouseOver) return;
-                FocusManager.FocusTimer.Enabled = true;
+                FocusManager.PauseTopmost = false; //.FocusTimer.Enabled = true;
                 PlayerInfo.IsOpen = false;
             });
         }

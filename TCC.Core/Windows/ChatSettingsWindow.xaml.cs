@@ -17,6 +17,8 @@ namespace TCC.Windows
 
         private void CloseChannelSettings(object sender, RoutedEventArgs e)
         {
+            FocusManager.ForceFocused = false;
+
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             an.Completed += (s,ev) => Close();
             BeginAnimation(OpacityProperty, an);
@@ -29,6 +31,8 @@ namespace TCC.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            FocusManager.ForceFocused = true;
+
             BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(500)));
         }
     }

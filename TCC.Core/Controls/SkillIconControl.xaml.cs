@@ -139,12 +139,12 @@ namespace TCC.Controls
 
         private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled = false;
+            FocusManager.PauseTopmost = true;
         }
 
         private void SkillIconControl_OnToolTipClosing(object sender, ToolTipEventArgs e)
         {
-            FocusManager.FocusTimer.Enabled = true;
+            FocusManager.PauseTopmost = false;
         }
 
         private void HideButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

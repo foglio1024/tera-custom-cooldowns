@@ -98,7 +98,7 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.VisibilityChanged += OnVisibilityChanged;
             WindowManager.ForegroundManager.DimChanged += OnDimChanged;
             WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
-            FocusManager.FocusTimer.Elapsed += OnFocusTick;
+            FocusManager.FocusTick += OnFocusTick;
 
             if (_settings.Enabled) Show();
             OnClickThruModeChanged();
@@ -127,7 +127,7 @@ namespace TCC.Windows
             ButtonsRef.MouseLeftButtonDown += Drag;
         }
 
-        private void OnFocusTick(object sender, System.Timers.ElapsedEventArgs e)
+        private void OnFocusTick()
         {
             if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
         }
@@ -242,6 +242,7 @@ namespace TCC.Windows
         }
         private void RefreshTopmost()
         {
+            if (FocusManager.PauseTopmost) return;
             Dispatcher.InvokeIfRequired(() =>
             {
                 Topmost = false; Topmost = true;

@@ -49,6 +49,9 @@ namespace TCC.Windows
         private void ClosewWindow(object sender, RoutedEventArgs e)
         {
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
+            FocusManager.ForceFocused = false;
+            WindowManager.ForegroundManager.ForceUndim = false;
+
             an.Completed += (s, ev) =>
             {
                 Hide();
@@ -61,7 +64,8 @@ namespace TCC.Windows
         internal void ShowWindow()
         {
             if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
-
+            FocusManager.ForceFocused = true;
+            WindowManager.ForegroundManager.ForceUndim = true;
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
