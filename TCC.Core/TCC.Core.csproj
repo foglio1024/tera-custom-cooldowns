@@ -108,6 +108,8 @@
     <Compile Include="MoongourdEncounter.cs" />
     <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
     <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
+    <Compile Include="Parsing\Messages\S_CHANGE_GUILD_CHIEF.cs" />
+    <Compile Include="Parsing\Messages\S_FIELD_EVENT_ON_ENTER.cs" />
     <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
     <Compile Include="ResourceDictionaries\Styles.xaml.cs">
       <DependentUpon>Styles.xaml</DependentUpon>
