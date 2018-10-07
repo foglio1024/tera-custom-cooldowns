@@ -71,8 +71,9 @@ namespace TCC.Windows
             _ignoreSize = ignoreSize;
             _undimOnFlyingGuardian = undimOnFlyingGuardian;
 
-            _opacityAnimation = new DoubleAnimation() { Duration = TimeSpan.FromMilliseconds(100) };
+            _opacityAnimation = new DoubleAnimation { Duration = TimeSpan.FromMilliseconds(100) };
 
+            MainContent.Opacity = 0;
             Topmost = true;
             Left = settings.X * Settings.ScreenW;
             Top = settings.Y * Settings.ScreenH;
@@ -88,11 +89,6 @@ namespace TCC.Windows
             _settings.VisibilityChanged += OnWindowVisibilityChanged;
 
             Loaded += OnLoaded;
-            Closing += (_, args) =>
-            {
-                //args.Cancel = true;
-                //Hide();
-            };
             SizeChanged += OnSizeChanged;
 
             WindowManager.ForegroundManager.VisibilityChanged += OnVisibilityChanged;
