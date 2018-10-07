@@ -31,16 +31,16 @@
         <ctrl:SquareAbnormalityIndicator Size="28" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="RoundRaidAbnormality">
-        <ctrl:RoundAbnormalityIndicator Size="20"/>
+        <ctrl:RoundAbnormalityIndicator Size="20" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SquareRaidAbnormality">
-        <ctrl:SquareAbnormalityIndicator Size="20"/>
+        <ctrl:SquareAbnormalityIndicator Size="20" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="RoundBossAbnormality">
-        <ctrl:RoundAbnormalityIndicator Size="30" Margin="2"/>
+        <ctrl:RoundAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SquareBossAbnormality">
-        <ctrl:SquareAbnormalityIndicator Size="30" Margin="2"/>
+        <ctrl:SquareAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SkillDataTemplate" DataType="data:Skill">
         <Grid>
@@ -254,11 +254,11 @@
                         VerticalAlignment="Top"
                         TextAlignment="Center"
                         Visibility="Visible"
-                        TextTrimming="CharacterEllipsis"
                         MinWidth="33"
                         Margin="0,-3,0,0"
                         Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
             />
+                        <!--TextTrimming="CharacterEllipsis"-->
 
     </DataTemplate>
     <DataTemplate x:Key="EnchantChannelLabelTemplate" DataType="data:ChatMessage">
