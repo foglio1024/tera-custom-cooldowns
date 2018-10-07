@@ -13,13 +13,15 @@
     <Color x:Key="ClassGlowColor">               #55ccff </Color>
 
     <Color x:Key="GreenColor">                   #00A561 </Color>
-    <Color x:Key="MainColor">                    #ff3822 </Color>
+    <Color x:Key="MainColor">                    #a1c8dd </Color>
     <Color x:Key="LightGreenColor">              #55ff77 </Color>
     <Color x:Key="TwitchColor">                  #975eff </Color>
     <Color x:Key="WeeklyColor">                  #2f9952 </Color>
     <Color x:Key="DailyColor">                   #42b0f4 </Color>
     <Color x:Key="MarksColor">                   #aaaadd </Color>
-    <Color x:Key="GuardianColor">                #e5442b </Color>
+    <Color x:Key="GuardianColor">                #ffc896 </Color>
+    <Color x:Key="EnchantLowColor">              #ff713c </Color>
+    <Color x:Key="EnchantHighColor">             #ff4500 </Color>
 
     <Color x:Key="HpColor">                      #FF3333 </Color>
     <Color x:Key="HpColorLight">                 #FAA089 </Color>
@@ -50,7 +52,6 @@
     <Color x:Key="TerradraxColor">               #FFCB76 </Color>
     <Color x:Key="AquadraxColor">                #DFF7FF </Color>
     <Color x:Key="UmbradraxColor">               #AA1E1E </Color>
-
 
     <Color x:Key="TierSoloDungeonColor">         #88d9f7 </Color>
     <Color x:Key="Tier2DungeonColor">            #3bdb83 </Color>
