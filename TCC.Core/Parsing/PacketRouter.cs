@@ -138,7 +138,7 @@ namespace TCC.Parsing
                 srcName = srcName != ""
                     ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
                     : "<font color=\"#cccccc\">.</font>";
-                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> (</font><font>{-p.Diff/(double)p.MaxHP:P}</font><font color=\"#cccccc\">)</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
             }
             SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
             if (p.Target == SessionManager.CurrentPlayer.EntityId)
@@ -551,7 +551,8 @@ namespace TCC.Parsing
         internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
         {
             if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
-            InfoWindowViewModel.Instance.CurrentCharacter.GuardianQuests = x.Claimed;
+            InfoWindowViewModel.Instance.CurrentCharacter.ClaimedGuardianQuests = x.Claimed;
+            InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests = x.Cleared;
             //InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianQuests = x.MaxPoints;
         }
 
@@ -1068,6 +1069,21 @@ namespace TCC.Parsing
                     }
                 }
             }
+        }
+
+        public static void HandleGuardianOnEnter(S_FIELD_EVENT_ON_ENTER obj)
+        {
+            const string opcode = "SMT_FIELD_EVENT_ENTER";
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
+
+        }
+
+        public static void HandleGuardianOnLeave(S_FIELD_EVENT_ON_LEAVE obj)
+        {
+            const string opcode = "SMT_FIELD_EVENT_LEAVE";
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
         }
     }
 }
