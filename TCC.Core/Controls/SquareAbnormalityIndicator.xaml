@@ -78,6 +78,8 @@
               x:Name="StacksLabel" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Top" 
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=local:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.6}"
+
               Margin="-1" >
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX=".85" ScaleY=".85"></ScaleTransform>
