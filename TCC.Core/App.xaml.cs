@@ -46,7 +46,7 @@ namespace TCC
 
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             TccMessageBox.Create(); //Create it here in STA thread
-#if DEBUG
+#if !DEBUG
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
 #endif
             TryDeleteUpdater();
@@ -64,6 +64,7 @@ namespace TCC
 
             Process.GetCurrentProcess().PriorityClass = Settings.HighPriority ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
             if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
             SplashScreen.SetText("Pre-loading databases...");
             SessionManager.InitDatabases(string.IsNullOrEmpty(Settings.LastRegion) ? "EU-EN" : Settings.LastRegion == "EU" ? "EU-EN" : Settings.LastRegion);
 
@@ -80,6 +81,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = true;
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
             SplashScreen.SetText("Starting");
+
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
             SessionManager.CurrentPlayer.EntityId = 10;
@@ -89,13 +91,33 @@ namespace TCC
 
             UpdateManager.StartCheck();
 
-            DebugStuff();
+            if(Debug) DebugStuff();
             Loading = false;
         }
         
 
         private static void DebugStuff()
         {
+            GroupWindowViewModel.Instance.AddOrUpdateMember(new User(BaseDispatcher)
+            {
+                Alive = true,
+                Awakened = true,
+                CurrentHp = 1000,
+                MaxHp = 1000,
+                EntityId = 1,
+                ServerId = 1,
+                PlayerId = 1,
+                UserClass = Class.Archer,
+                Online = true
+            });
+            EntitiesManager.SpawnNPC(920, 3000, 11, Visibility.Visible);
+            EntitiesManager.SpawnNPC(15, 1, 12, Visibility.Visible);
+            EntitiesManager.UpdateNPC(12,1000,1000);
+            AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(1,1, 1495, 200000,1);
+            AbnormalityManager.BeginAbnormality(1495,10,200000,1);
+            AbnormalityManager.BeginAbnormality(1495,11,200000,1);
+            AbnormalityManager.BeginAbnormality(1495,12,200000,1);
+
             //for (int i = 0; i < 2000; i++)
             //{
             //    ChatWindowManager.Instance.AddTccMessage($"Test {i}");
@@ -197,7 +219,7 @@ namespace TCC
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/error.txt",
+            File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/error.txt",
                 "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                 "\r\n" + ex.TargetSite);
@@ -288,7 +310,7 @@ namespace TCC
         {
             try
             {
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
+                File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/TCCupdater.exe");
             }
             catch
             {
