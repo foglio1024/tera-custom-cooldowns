@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using System.Threading;
+using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.Sniffing;
@@ -263,6 +265,10 @@ namespace TCC.Parsing
             //CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
             //SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
+
+            if(Settings.LastRegion == "NA")
+                 Task.Delay(20000).ContinueWith(t =>  ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
+
         }
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)

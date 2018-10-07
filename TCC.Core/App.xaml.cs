@@ -29,6 +29,8 @@ namespace TCC
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
 
+        public const string ThankYou_mEME =
+            "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
         public static bool Loading { get; set; }
         //public static DebugWindow DebugWindow;
 
@@ -90,6 +92,9 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
+
+            if(Settings.LastRegion == "NA" || Settings.LastRegion == "")
+                WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
 
             if(Debug) DebugStuff();
             Loading = false;
