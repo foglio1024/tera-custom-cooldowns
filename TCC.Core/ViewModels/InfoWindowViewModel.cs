@@ -311,7 +311,7 @@ namespace TCC.ViewModels
                     new XAttribute("weekly", c.WeekliesDone),
                     new XAttribute("daily", c.DailiesDone),
                     new XAttribute("class", c.Class),
-                    new XAttribute("guardianQuests", c.GuardianQuests),
+                    new XAttribute("guardianQuests", c.ClaimedGuardianQuests),
                     new XAttribute("elleonMarks", c.ElleonMarks)
                     );
 
@@ -417,7 +417,7 @@ namespace TCC.ViewModels
                     Credits = cr,
                     WeekliesDone = w,
                     DailiesDone = d,
-                    GuardianQuests = guard,
+                    ClaimedGuardianQuests = guard,
                     ElleonMarks = marks
                 };
                 var dgDict = new Dictionary<uint, short>();
