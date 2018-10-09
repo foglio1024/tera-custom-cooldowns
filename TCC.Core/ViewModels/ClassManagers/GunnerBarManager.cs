@@ -22,7 +22,7 @@ namespace TCC.ViewModels
         {
             SessionManager.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
             SessionManager.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
-            SessionManager.SkillsDatabase.TryGetSkill(20700, Class.Gunner, out var bombard);
+            SessionManager.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
 
             BurstFire = new DurationCooldownIndicator(Dispatcher);
             Balder = new DurationCooldownIndicator(Dispatcher);
@@ -42,12 +42,12 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {
-            if (sk.Skill.IconName == Balder.Cooldown.Skill.IconName)
+            if (Balder.Cooldown.Skill != null && sk.Skill.IconName == Balder.Cooldown.Skill.IconName)
             {
                 Balder.Cooldown.Start(sk.Cooldown);
                 return true;
             }
-            if (sk.Skill.IconName == Bombardment.Cooldown.Skill.IconName)
+            if (Bombardment.Cooldown.Skill != null && sk.Skill.IconName == Bombardment.Cooldown.Skill.IconName)
             {
                 Bombardment.Cooldown.Start(sk.Cooldown);
                 return true;
