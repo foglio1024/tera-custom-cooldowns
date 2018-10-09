@@ -337,7 +337,7 @@ namespace TCC.Controls
             try
             {
                 SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
-                Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc));
+                Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc, 5500));
             }
             catch
             {
