@@ -36,6 +36,11 @@ namespace TCC.Controls
         {
             if(DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (SkillCooldown)DataContext;
+            if (_context.OriginalCooldown == 0)
+            {
+                CloseTimer_Tick(null,null);
+                return;
+            }
             _context.PropertyChanged += _context_PropertyChanged;
             _context.Ending += OnEnding;
             //LayoutTransform = new ScaleTransform(.9, .9, .5, .5);
@@ -133,8 +138,8 @@ namespace TCC.Controls
 
         public void Dispose()
         {
-            _numberTimer.Stop();
-            _closeTimer.Stop();
+            _numberTimer?.Stop();
+            _closeTimer?.Stop();
         }
 
         private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)

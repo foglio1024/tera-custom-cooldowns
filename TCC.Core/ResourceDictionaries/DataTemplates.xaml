@@ -157,6 +157,9 @@
                                VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
         </Grid>
     </DataTemplate>
+    <DataTemplate x:Key="NormalSkillDataTemplate" DataType="data:SkillCooldown">
+        <ctrl:SkillIconControl/>
+    </DataTemplate>
     <DataTemplate x:Key="FixedSkillDataTemplate" DataType="data:FixedSkillCooldown">
         <Grid>
             <Grid.ColumnDefinitions>
