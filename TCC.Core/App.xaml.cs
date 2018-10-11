@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -31,7 +33,7 @@ namespace TCC
 
         public const string ThankYou_mEME =
             "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
-        public static bool Loading { get; set; }
+        public static bool Loading { get; private set; }
         //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
@@ -93,35 +95,70 @@ namespace TCC
 
             UpdateManager.StartCheck();
 
-            if(Settings.LastRegion == "NA" || Settings.LastRegion == "")
+            if (Settings.LastRegion == "NA" || Settings.LastRegion == "")
                 WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
-
-            if(Debug) DebugStuff();
+            DebugStuff();
             Loading = false;
         }
-        
+
 
         private static void DebugStuff()
         {
-            GroupWindowViewModel.Instance.AddOrUpdateMember(new User(BaseDispatcher)
-            {
-                Alive = true,
-                Awakened = true,
-                CurrentHp = 1000,
-                MaxHp = 1000,
-                EntityId = 1,
-                ServerId = 1,
-                PlayerId = 1,
-                UserClass = Class.Archer,
-                Online = true
-            });
-            EntitiesManager.SpawnNPC(920, 3000, 11, Visibility.Visible);
-            EntitiesManager.SpawnNPC(15, 1, 12, Visibility.Visible);
-            EntitiesManager.UpdateNPC(12,1000,1000);
-            AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(1,1, 1495, 200000,1);
-            AbnormalityManager.BeginAbnormality(1495,10,200000,1);
-            AbnormalityManager.BeginAbnormality(1495,11,200000,1);
-            AbnormalityManager.BeginAbnormality(1495,12,200000,1);
+
+
+            //var i = 0;
+            //while (i < 20000)
+            //{
+            //    ChatWindowManager.Instance.AddTccMessage($"Test {i++}");
+            //}
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
+            //GroupWindowViewModel.Instance.AddOrUpdateMember(new User(BaseDispatcher)
+            //{
+            //    Alive = true,
+            //    Awakened = true,
+            //    CurrentHp = 1000,
+            //    MaxHp = 1000,
+            //    EntityId = 1,
+            //    ServerId = 1,
+            //    PlayerId = 1,
+            //    UserClass = Class.Archer,
+            //    Online = true
+            //});
+            //bool up = true;
+            //bool inv = false;
+            //ulong i = 0;
+            //while (true)
+            //{
+            //    if (i > 1000)
+            //    {
+            //        up = false;
+            //        if(!inv) Thread.Sleep(10000);
+            //        inv = true;
+            //    }
+
+            //    if (up)
+            //    {
+
+            //        Console.WriteLine($"[{i}] Spawning NPCs");
+            //        EntitiesManager.SpawnNPC(15, 1, i, Visibility.Visible);
+            //        i++;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine($"[{i}] Despawning NPCs");
+            //        EntitiesManager.DespawnNPC(i, DespawnType.OutOfView);
+            //        i--;
+            //    }
+            //    Thread.Sleep(2);
+            //    if (i == 0) {break;}
+            //}
+            //EntitiesManager.SpawnNPC(920, 3000, 11, Visibility.Visible);
+            //EntitiesManager.UpdateNPC(12, 1000, 1000);
+            //AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(1, 1, 1495, 200000, 1);
+            //AbnormalityManager.BeginAbnormality(1495, 10, 200000, 1);
+            //AbnormalityManager.BeginAbnormality(1495, 11, 200000, 1);
+            //AbnormalityManager.BeginAbnormality(1495, 12, 200000, 1);
 
             //for (int i = 0; i < 2000; i++)
             //{
@@ -176,7 +213,7 @@ namespace TCC
 
             //var l = new List<User>();
             //var r = new Random();
-            //for (uint i = 0; i < 10; i++)
+            //for (uint i = 0; i <= 10; i++)
             //{
             //    var u = new User(GroupWindowViewModel.Instance.GetDispatcher())
             //    {
@@ -185,9 +222,9 @@ namespace TCC
             //        ServerId = i,
             //        EntityId = i,
             //        Online = true,
-            //        Laurel = (Laurel)(r.Next(0, 5)),
+            //        Laurel = (Laurel)(r.Next(0, 6)),
             //        HasAggro = i == 1,
-            //        Alive = i != 0,
+            //        Alive = true, //i != 0,
             //        UserClass = (Class)r.Next(0, 12),
             //        Awakened = i < 5,
             //    };
@@ -201,7 +238,6 @@ namespace TCC
         private static void TeraSniffer_OnNewConnection(Server srv)
         {
             PacketProcessor.Server = srv;
-            SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
@@ -224,7 +260,7 @@ namespace TCC
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/error.txt",
+            File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/error.txt",
                 "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                 "\r\n" + ex.TargetSite);
@@ -315,7 +351,7 @@ namespace TCC
         {
             try
             {
-                File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/TCCupdater.exe");
+                File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe");
             }
             catch
             {
