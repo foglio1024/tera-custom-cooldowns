@@ -493,6 +493,7 @@ namespace TCC.ViewModels
         {
             if (!Settings.CooldownWindowSettings.Enabled) return;
             if (Settings.CooldownBarMode == CooldownBarMode.Normal) return;
+            if (ClassManager.ResetSpecialSkill(skill)) return;
 
             var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);
             sk?.ProcReset();

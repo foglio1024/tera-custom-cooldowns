@@ -108,7 +108,7 @@
                     <TranslateTransform X="-45" Y="45" />
                 </FrameworkElement.RenderTransform>
             </local:RhombFixedSkillControl>
-            <local:RhombBuffCooldownControl DataContext="{Binding VelikMark}" HorizontalAlignment="Center"
+            <local:RhombBuffCooldownControl DataContext="{Binding Windsong}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="45" Y="45" />
@@ -123,6 +123,29 @@
                         <TranslateTransform X="0" Y="0" />
                     </FrameworkElement.RenderTransform>
             </TextBlock>
+            <Grid Visibility="{Binding WindWalkProc, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Opacity=".7"
+                        >
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45" />
+                            <TranslateTransform X="0" Y="105" />
+                            <ScaleTransform ScaleX=".7" ScaleY=".7"/>
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <local:RhombFixedSkillControl DataContext="{Binding WindWalk}" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" >
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="16" Y="121" />
+                            <ScaleTransform ScaleX=".7" ScaleY=".7" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </local:RhombFixedSkillControl>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

@@ -5,10 +5,13 @@ namespace TCC.ViewModels
 {
     public class ArcherBarManager : ClassManager
     {
+        private bool _windWalkProc;
+
         private ArcherFocusTracker _focus;
         private StanceTracker<ArcherStance> _stance;
         private FixedSkillCooldown _thunderbolt;
-        private DurationCooldownIndicator _velikMark;
+        private DurationCooldownIndicator _windsong;
+        private FixedSkillCooldown _windWalk;
 
         public ArcherFocusTracker Focus
         {
@@ -40,14 +43,34 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-        public DurationCooldownIndicator VelikMark
+        public DurationCooldownIndicator Windsong
         {
-            get => _velikMark;
+            get => _windsong;
             set
             {
-                if(_velikMark == value) return;
-                _velikMark = value;
+                if (_windsong == value) return;
+                _windsong = value;
                 NPC();
+            }
+        }
+        public FixedSkillCooldown WindWalk
+        {
+            get => _windWalk;
+            set
+            {
+                if (_windWalk == value) return;
+                _windWalk = value;
+                NPC();
+            }
+        }
+        public bool WindWalkProc
+        {
+            get => _windWalkProc;
+            set
+            {
+                if (_windWalkProc == value) return;
+                _windWalkProc = value;
+                NPC(nameof(WindWalkProc));
             }
         }
 
@@ -60,30 +83,16 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
-            SessionManager.SkillsDatabase.TryGetSkill(120500, Class.Archer, out var vm);
+            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
+            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
+            SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
             Thunderbolt = new FixedSkillCooldown(tb, true);
-            VelikMark = new DurationCooldownIndicator(Dispatcher)
+            Windsong = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(vm, false),
-                Buff = new FixedSkillCooldown(vm, false)
+                Cooldown = new FixedSkillCooldown(ws, false),
+                Buff = new FixedSkillCooldown(ws, false)
             };
-
-            ClassAbnormalityTracker.MarkingExpired += OnVelikMarkExpired;
-            ClassAbnormalityTracker.MarkingRefreshed += OnVelikMarkRefreshed;
-        }
-
-        private void OnVelikMarkRefreshed(ulong duration)
-        {
-            VelikMark.Buff.Refresh(duration);
-            VelikMark.Cooldown.FlashOnAvailable = false;
-
-        }
-
-        private void OnVelikMarkExpired()
-        {
-            VelikMark.Buff.Refresh(0);
-            VelikMark.Cooldown.FlashOnAvailable = true;
+            WindWalk = new FixedSkillCooldown(ww, false);
         }
 
 
@@ -94,9 +103,19 @@ namespace TCC.ViewModels
                 Thunderbolt.Start(sk.Cooldown);
                 return true;
             }
-            if (sk.Skill.IconName == VelikMark.Cooldown.Skill.IconName)
+            if (sk.Skill.IconName == Windsong.Cooldown.Skill.IconName)
             {
-                VelikMark.Cooldown.Start(sk.Cooldown);
+                Windsong.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            return false;
+        }
+
+        public override bool ResetSpecialSkill(Skill skill)
+        {
+            if (skill.IconName == Thunderbolt.Skill.IconName)
+            {
+                Thunderbolt.ProcReset();
                 return true;
             }
             return false;

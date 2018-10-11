@@ -8,32 +8,67 @@ namespace TCC.ClassSpecific
     {
         private static readonly uint FocusId = 601400;
         private static readonly uint FocusXId = 601450;
-        private static readonly uint[] SniperEyeIDs = { 601100, 601101 };
-        private static readonly uint[] VelikMarkIDs = { 600500, 600501, 600502 };
+        private static readonly uint[] WindsongIds = { 602101, 602107, 602108 };
+        private static readonly uint[] WindWalkIds = { 602102, 602103 };
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            CheckVelikMark(p);
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             CheckFocus(p);
             CheckFocusX(p);
-            CheckSniperEye(p);
+            CheckWindsong(p);
+            CheckGaleSteps(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            CheckVelikMark(p);
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             CheckFocus(p);
             CheckFocusX(p);
-            CheckSniperEye(p);
+            CheckWindsong(p);
+            CheckWindWalk(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            CheckVelikMark(p);
             if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
             CheckFocus(p);
             CheckFocusX(p);
-            CheckSniperEye(p);
+            CheckWindsong(p);
+            CheckGaleSteps(p);
+        }
+
+        private static void CheckWindsong(S_ABNORMALITY_BEGIN p)
+        {
+            if (!WindsongIds.Contains(p.AbnormalityId)) return;
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Start(p.Duration);
+        }
+        private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
+        {
+            if (!WindsongIds.Contains(p.AbnormalityId)) return;
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Refresh(p.Duration);
+        }
+        private static void CheckWindsong(S_ABNORMALITY_END p)
+        {
+            if (!WindsongIds.Contains(p.AbnormalityId)) return;
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Refresh(0);
+        }
+
+        private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
+        {
+            if (!WindWalkIds.Contains(p.AbnormalityId)) return;
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Start(p.Duration);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalkProc = true;
+        }
+        private static void CheckWindWalk(S_ABNORMALITY_REFRESH p)
+        {
+            if (!WindWalkIds.Contains(p.AbnormalityId)) return;
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Refresh(p.Duration);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalkProc = true;
+        }
+        private static void CheckGaleSteps(S_ABNORMALITY_END p)
+        {
+            if (!WindWalkIds.Contains(p.AbnormalityId)) return;
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Refresh(0);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalkProc = false;
         }
 
         private static void CheckFocus(S_ABNORMALITY_BEGIN p)
@@ -67,49 +102,5 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId != FocusXId) return;
             ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Focus.StopFocusX();
         }
-
-        private static void CheckSniperEye(S_ABNORMALITY_BEGIN p)
-        {
-            if (!SniperEyeIDs.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = Data.ArcherStance.SniperEye;
-        }
-        private static void CheckSniperEye(S_ABNORMALITY_REFRESH p)
-        {
-            if (!SniperEyeIDs.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = Data.ArcherStance.SniperEye;
-        }
-        private static void CheckSniperEye(S_ABNORMALITY_END p)
-        {
-            if (!SniperEyeIDs.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = Data.ArcherStance.None;
-        }
-
-        private static void CheckVelikMark(S_ABNORMALITY_BEGIN p)
-        {
-            if (!VelikMarkIDs.Contains(p.AbnormalityId)) return;
-            var target = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.TargetId);
-            if (target != null)
-            {
-                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
-                InvokeMarkingRefreshed(p.Duration);
-            }
-        }
-        private static void CheckVelikMark(S_ABNORMALITY_REFRESH p)
-        {
-            if (!VelikMarkIDs.Contains(p.AbnormalityId)) return;
-            var target = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.TargetId);
-            if (target != null)
-            {
-                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
-                InvokeMarkingRefreshed(p.Duration);
-            }
-        }
-        private static void CheckVelikMark(S_ABNORMALITY_END p)
-        {
-            if (!VelikMarkIDs.Contains(p.AbnormalityId)) return;
-            if (MarkedTargets.Contains(p.TargetId)) MarkedTargets.Remove(p.TargetId);
-            if (MarkedTargets.Count == 0) InvokeMarkingExpired();
-        }
-
     }
 }

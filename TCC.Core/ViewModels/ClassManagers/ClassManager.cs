@@ -21,6 +21,11 @@ namespace TCC.ViewModels
             return false;
         }
 
+        public virtual bool ResetSpecialSkill(Skill skill)
+        {
+            return false;
+        }
+
         //public StatTracker HP { get; set; }
         //public StatTracker MP { get; set; }
         public StatTracker StaminaTracker { get; set; }
