@@ -27,8 +27,8 @@
         </ItemsControl>
 
         <ItemsControl Name="Mobs" 
+                      ItemsSource="{Binding Mobs}"
                       ItemTemplate="{StaticResource MobDataTemplate}"
-                      ItemsSource="{Binding Instance.Mobs}"
                       Width="Auto"
                       HorizontalAlignment="Left" 
                       Margin="5 0">
