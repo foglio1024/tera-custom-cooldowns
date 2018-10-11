@@ -125,7 +125,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
             {
-                EdictOfJudgment.Cooldown.Refresh(cd);
+                EdictOfJudgment.Cooldown.Refresh(skill.Id, cd);
                 return true;
             }
             return false;

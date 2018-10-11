@@ -64,7 +64,7 @@ namespace TCC.ViewModels
                 list.Add(sk);
                 return;
             }
-            existing.Refresh(sk.Cooldown);
+            existing.Refresh(sk);
         }
 
         private void NormalMode_Update(SkillCooldown sk)
@@ -95,11 +95,11 @@ namespace TCC.ViewModels
                         }
                         else
                         {
-                            existing.Refresh(sk.Cooldown);
+                            existing.Refresh(sk);
                         }
                         return;
                     }
-                    existing.Refresh(sk.Cooldown);
+                    existing.Refresh(sk);
                 }
             }
             catch {/* ignored*/}
@@ -109,7 +109,7 @@ namespace TCC.ViewModels
             if (!Settings.CooldownWindowSettings.Enabled) return;
             if (ClassManager.ChangeSpecialSkill(skill, cd)) return;
 
-            SkillCooldown sk;
+            var sk = new SkillCooldown(skill, cd, CooldownType.Skill, Dispatcher);
             try
             {
                 if (cd < SkillManager.LongSkillTreshold)
@@ -117,11 +117,10 @@ namespace TCC.ViewModels
                     var existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                     if (existing == null)
                     {
-                        sk = new SkillCooldown(skill, cd, CooldownType.Skill, Dispatcher);
                         ShortSkills.Add(sk);
                         return;
                     }
-                    existing.Refresh(cd);
+                    existing.Refresh(sk);
                 }
                 else
                 {
@@ -131,16 +130,15 @@ namespace TCC.ViewModels
                         existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                         if (existing == null)
                         {
-                            sk = new SkillCooldown(skill, cd, CooldownType.Skill, Dispatcher);
                             LongSkills.Add(sk);
                         }
                         else
                         {
-                            existing.Refresh(cd);
+                            existing.Refresh(sk);
                         }
                         return;
                     }
-                    existing.Refresh(cd);
+                    existing.Refresh(sk);
                 }
             }
             catch
@@ -258,20 +256,20 @@ namespace TCC.ViewModels
             var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(cd);
+                skill.Refresh(sk.Id,cd);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(cd);
+                skill.Refresh(sk.Id,cd);
                 return;
             }
             try
             {
                 var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 //OtherSkills.Remove(otherSkill);
-                otherSkill?.Refresh(cd);
+                otherSkill?.Refresh(new SkillCooldown(sk, cd, CooldownType.Skill, Dispatcher));
             }
             catch
             {
@@ -286,13 +284,13 @@ namespace TCC.ViewModels
             var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(0);
+                skill.Refresh(sk.Id,0);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(0);
+                skill.Refresh(sk.Id,0);
                 return;
             }
 
@@ -303,7 +301,6 @@ namespace TCC.ViewModels
                 ItemSkills.Remove(item);
                 item.Dispose();
                 return;
-
             }
 
             try
@@ -311,7 +308,6 @@ namespace TCC.ViewModels
                 var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (otherSkill != null)
                 {
-
                     OtherSkills.Remove(otherSkill);
                     otherSkill.Dispose();
                 }

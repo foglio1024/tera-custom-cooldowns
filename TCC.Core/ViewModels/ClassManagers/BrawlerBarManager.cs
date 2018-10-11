@@ -83,7 +83,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
             {
-                RhythmicBlows.Cooldown.Refresh(cd);
+                RhythmicBlows.Cooldown.Refresh(skill.Id, cd);
                 return true;
             }
             if (skill.IconName == Infuriate.Cooldown.Skill.IconName)

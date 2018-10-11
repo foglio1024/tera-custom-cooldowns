@@ -73,7 +73,6 @@ namespace TCC.Parsing
         public static void EnqueueMessageFromProxy(MessageDirection dir, string data)
         {
             var msg = new Message(DateTime.UtcNow, dir, new ArraySegment<byte>(StringUtils.StringToByteArray(data.Substring(4))));
-            //Console.WriteLine(msg.OpCode);
             Packets.Enqueue(msg);
         }
 
@@ -84,21 +83,18 @@ namespace TCC.Parsing
         {
             while (true)
             {
-                var successDequeue = Packets.TryDequeue(out var msg);
-                if (!successDequeue)
+                if (!Packets.TryDequeue(out var msg))
                 {
                     Thread.Sleep(1);
                     continue;
                 }
-                var message = Factory.Create(msg);
-                Factory.Process(message);
+                Factory.Process(Factory.Create(msg));
             }
             // ReSharper disable once FunctionNeverReturns
         }
 
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
-            if (p.SkillId % 10 != 0) return;
             SkillManager.AddSkill(p.SkillId, p.Cooldown);
         }
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
@@ -107,7 +103,19 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
-            if (p.SkillId % 10 != 0) return;
+            //if (p.SkillId % 10 != 0) return;
+            //if (p.SkillId / 1000 == 260)
+            //{
+            Log.CW($"[DECREASE_COOLTIME_SKILL] {p.SkillId} duration = {p.Cooldown}ms");
+            //    if (p.SkillId % 10 == 0)
+            //    {
+            //        SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
+            //    }
+            //    else
+            //    {
+            //        SkillManager.ChangeSkillCooldown(10100, p.Cooldown);
+            //    }
+            //}
             SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
         }
 
@@ -134,16 +142,8 @@ namespace TCC.Parsing
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
-            if (p.Target == SessionManager.CurrentPlayer.EntityId && p.Target != p.Source && p.Source != 0 && EntitiesManager.IsEntitySpawned(p.Source) && p.Diff < 0)
-            {
-                var srcName = EntitiesManager.GetEntityName(p.Source);
-                srcName = srcName != ""
-                    ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
-                    : "<font color=\"#cccccc\">.</font>";
-                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> (</font><font>{-p.Diff/(double)p.MaxHP:P}</font><font color=\"#cccccc\">)</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
-            }
             SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
-            if (p.Target == SessionManager.CurrentPlayer.EntityId)
+            if (p.Target.IsMe())
             {
                 SessionManager.SetPlayerHp(p.CurrentHP);
             }
@@ -151,6 +151,7 @@ namespace TCC.Parsing
             {
                 EntitiesManager.UpdateNPC(p.Target, p.CurrentHP, p.MaxHP);
             }
+            ChatWindowManager.Instance.AddDamageReceivedMessage(p.Source, p.Target, p.Diff, p.MaxHP);
         }
         public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
         {
@@ -237,7 +238,7 @@ namespace TCC.Parsing
             TimeManager.Instance.SetServerTimeZone(Settings.LastRegion);
             TimeManager.Instance.SetGuildBamTime(false);
             SessionManager.InitDatabases(Settings.LastRegion);
-            CooldownWindowViewModel.Instance.ClearSkills();
+            SkillManager.Clear();
             if (Utils.ClassEnumToString(p.CharacterClass).ToLower() != "") //why????
                 CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
@@ -246,7 +247,6 @@ namespace TCC.Parsing
 
             //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            SkillManager.Clear();
 
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
@@ -266,8 +266,8 @@ namespace TCC.Parsing
             //SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
 
-            if(Settings.LastRegion == "NA")
-                 Task.Delay(20000).ContinueWith(t =>  ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
+            if (Settings.LastRegion == "NA")
+                Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
 
         }
 
@@ -316,27 +316,27 @@ namespace TCC.Parsing
             WindowManager.LfgListWindow.ShowWindow();
         }
 
-/*
-        public static void SendTestMessage()
-        {
-            //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
-            //var str = "@3789cityname@cityWar:20guildFated";
-            //var str = "@1773ItemName@item:152141ItemName1@item:447ItemCount5";
-            const string str = "@3821userNametestNameguildQuestName@GuildQuest:31007001value1targetValue3";
-            var toBytes = Encoding.Unicode.GetBytes(str);
-            var arr = new byte[toBytes.Length + 2 + 4];
-            for (var i = 0; i < toBytes.Length - 1; i++)
-            {
-                arr[i + 4] = toBytes[i];
-            }
+        /*
+                public static void SendTestMessage()
+                {
+                    //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
+                    //var str = "@3789cityname@cityWar:20guildFated";
+                    //var str = "@1773ItemName@item:152141ItemName1@item:447ItemCount5";
+                    const string str = "@3821userNametestNameguildQuestName@GuildQuest:31007001value1targetValue3";
+                    var toBytes = Encoding.Unicode.GetBytes(str);
+                    var arr = new byte[toBytes.Length + 2 + 4];
+                    for (var i = 0; i < toBytes.Length - 1; i++)
+                    {
+                        arr[i + 4] = toBytes[i];
+                    }
 
-            var seg = new ArraySegment<byte>(arr);
+                    var seg = new ArraySegment<byte>(arr);
 
-            var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Message(DateTime.Now, MessageDirection.ServerToClient, seg), OpCodeNamer, Factory, SystemMessageNamer));
-            HandleSystemMessage(sysMsg);
+                    var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Message(DateTime.Now, MessageDirection.ServerToClient, seg), OpCodeNamer, Factory, SystemMessageNamer));
+                    HandleSystemMessage(sysMsg);
 
-        }
-*/
+                }
+        */
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
@@ -362,6 +362,9 @@ namespace TCC.Parsing
             SessionManager.CivilUnrestZone = x.Zone == 152;
             if (Settings.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
             //MessageFactory.Update(); already in CurrentHHphase set
+
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
         }
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
@@ -430,22 +433,22 @@ namespace TCC.Parsing
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
-/*
-        public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
-        {
-            //bool sourceInParty = GroupWindowViewModel.Instance.UserExists(x.Source);
-            //bool targetInParty = GroupWindowViewModel.Instance.UserExists(x.Target);
-            //if (x.Target == x.Source) return;
-            //if (sourceInParty && targetInParty) return;
-            //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
-            //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
-            //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-            //BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
-            if (x.Type != 1) return;
-            if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-            BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
-        }
-*/
+        /*
+                public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
+                {
+                    //bool sourceInParty = GroupWindowViewModel.Instance.UserExists(x.Source);
+                    //bool targetInParty = GroupWindowViewModel.Instance.UserExists(x.Target);
+                    //if (x.Target == x.Source) return;
+                    //if (sourceInParty && targetInParty) return;
+                    //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
+                    //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+                    //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
+                    //BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
+                    if (x.Type != 1) return;
+                    if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
+                    BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
+                }
+        */
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
@@ -757,7 +760,7 @@ namespace TCC.Parsing
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
@@ -765,15 +768,15 @@ namespace TCC.Parsing
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            if(!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
-            if (p.TargetId == SessionManager.CurrentPlayer.EntityId) FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
+            if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
             ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
@@ -950,18 +953,12 @@ namespace TCC.Parsing
             GroupWindowViewModel.Instance.UpdateMemberLocation(sPartyMemberIntervalPosUpdate);
         }
 
-        public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB sAbnormalityDamageAbsorb)
+        public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
         {
-            if (sAbnormalityDamageAbsorb.Target == SessionManager.CurrentPlayer.EntityId)
-            {
-                SessionManager.SetPlayerShield(sAbnormalityDamageAbsorb.Damage);
-                return;
-            }
-            if (BossGageWindowViewModel.Instance.NpcList.Any(x => x.EntityId == sAbnormalityDamageAbsorb.Target))
-            {
-                BossGageWindowViewModel.Instance.UpdateShield(sAbnormalityDamageAbsorb.Target,
-                    sAbnormalityDamageAbsorb.Damage);
-            }
+            if (p.Target.IsMe())
+                SessionManager.SetPlayerShield(p.Damage);
+            else if (BossGageWindowViewModel.Instance.NpcList.Any(x => x.EntityId == p.Target))
+                BossGageWindowViewModel.Instance.UpdateShield(p.Target, p.Damage);
         }
 
         public static void HandleImageData(S_IMAGE_DATA sImageData)
@@ -1065,14 +1062,14 @@ namespace TCC.Parsing
             foreach (var page in S_VIEW_WARE_EX.Pages)
             {
                 if (page.Index + 1 == S_VIEW_WARE_EX.Pages.Count) break;
-                for (var i = page.Index+1; i < 8; i++)
+                for (var i = page.Index + 1; i < 8; i++)
                 {
                     var pg = S_VIEW_WARE_EX.Pages[(int)i];
                     foreach (var item in page.Items)
                     {
                         if (pg.Items.All(x => x.Id != item.Id)) continue;
-                        var name = SessionManager.ItemsDatabase.GetItemName((uint) item.Id);
-                        Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index+1}) in page {i+1}");
+                        var name = SessionManager.ItemsDatabase.GetItemName((uint)item.Id);
+                        Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index + 1}) in page {i + 1}");
                     }
                 }
             }

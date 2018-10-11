@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using System.Timers;
 using System.Windows.Threading;
 
@@ -62,6 +63,18 @@ namespace TCC.Data
             _timer?.Stop();
             if(_timer != null) _timer.Elapsed -= _timer_Elapsed;
             _timer?.Dispose();
+        }
+
+        public void Refresh(SkillCooldown sk)
+        {
+            if (Skill.Id % 10 == 0 && sk.Skill.Id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
+            Cooldown = sk.Cooldown;
+            Pre = false;
+            NPC();
+            if (_timer == null) return;
+            _timer.Stop();
+            _timer.Interval = Cooldown > 0 ? Cooldown : 1;
+            _timer.Start();
         }
     }
 }
