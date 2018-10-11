@@ -15,7 +15,7 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckAssaultStance(p);
             CheckDefensiveStance(p);
             CheckDeadlyGamble(p);
@@ -24,7 +24,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckAssaultStance(p);
             CheckDefensiveStance(p);
             CheckDeadlyGamble(p);
@@ -33,7 +33,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckTraverseCut(p);
             CheckDefensiveStance(p);
             CheckAssaultStance(p);

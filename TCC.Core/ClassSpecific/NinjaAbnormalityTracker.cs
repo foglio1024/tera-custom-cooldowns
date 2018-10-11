@@ -9,13 +9,13 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckFocus(p);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckFocus(p);
         }
 

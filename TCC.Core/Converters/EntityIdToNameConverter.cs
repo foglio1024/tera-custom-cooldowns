@@ -9,7 +9,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // ReSharper disable once PossibleNullReferenceException
-            return (ulong)value == SessionManager.CurrentPlayer.EntityId
+            return ((ulong)value).IsMe()
                 ? SessionManager.CurrentPlayer.Name
                 : EntitiesManager.IsEntitySpawned((ulong)value) ? EntitiesManager.GetEntityName((ulong)value) /*(GroupWindowViewModel.Instance.TryGetUser((ulong) value, out var p) ? p.Name*/ : "";
         }

@@ -14,7 +14,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             CheckVelikMark(p);
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckFocus(p);
             CheckFocusX(p);
             CheckSniperEye(p);
@@ -22,7 +22,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
             CheckVelikMark(p);
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckFocus(p);
             CheckFocusX(p);
             CheckSniperEye(p);
@@ -30,7 +30,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             CheckVelikMark(p);
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckFocus(p);
             CheckFocusX(p);
             CheckSniperEye(p);
