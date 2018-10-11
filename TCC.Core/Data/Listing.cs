@@ -20,10 +20,13 @@ namespace TCC.Data
 
         public uint LeaderId
         {
-            get => Players.ToSyncArray().Length == 0
-                ? _playerId
-                // ReSharper disable once PossibleNullReferenceException
-                : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader).PlayerId;
+            get
+            {
+                return Players.ToSyncArray().Length == 0
+                    ? _playerId
+                    // ReSharper disable once PossibleNullReferenceException
+                    : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
+            }
             set
             {
                 if (_playerId == value) return;
@@ -31,6 +34,7 @@ namespace TCC.Data
                 NPC();
             }
         }
+
         public bool IsRaid
         {
             get => _isRaid;

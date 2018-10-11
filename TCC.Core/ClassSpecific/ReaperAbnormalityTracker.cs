@@ -12,7 +12,7 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckShadowReaping(p);
             CheckShadowStep(p);
             CheckDeathSpiral(p);
@@ -34,12 +34,12 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckShadowReaping(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (!p.TargetId.IsMe()) return;
             CheckShadowReaping(p);
         }
 

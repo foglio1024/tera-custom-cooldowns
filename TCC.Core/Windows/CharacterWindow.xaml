@@ -567,8 +567,9 @@
                     </Grid>
 
                     <Image Source="../resources/images/char_window_fg.png" Stretch="Uniform"/>
-                    <Image Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr.big}"
-                           Margin="0 0 0 0"/>
+                    <Image Opacity="1"
+                        Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr.big}"
+                           Margin="-3 -2 -3 -4"/>
                     <Path Data="{Binding Instance.Player.Class, Converter={StaticResource Converters.ClassToSvg}}" 
                       HorizontalAlignment="Center" 
                       Fill="#eee" 

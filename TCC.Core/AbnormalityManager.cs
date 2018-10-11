@@ -12,7 +12,7 @@ namespace TCC
             if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (!Filter(ab)) return false;
             if (duration == int.MaxValue) ab.Infinity = true;
-            if (target == SessionManager.CurrentPlayer.EntityId)
+            if (target.IsMe())
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!Settings.DisablePartyAbnormals)
@@ -36,7 +36,7 @@ namespace TCC
         public static bool EndAbnormality(ulong target, uint id)
         {
             if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
-            if (target == SessionManager.CurrentPlayer.EntityId) EndPlayerAbnormality(ab);
+            if (target.IsMe()) EndPlayerAbnormality(ab);
             else BossGageWindowViewModel.Instance.EndNpcAbnormality(target, ab);
 
             return true;

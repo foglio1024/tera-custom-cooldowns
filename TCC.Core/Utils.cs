@@ -232,7 +232,13 @@ namespace TCC
         }
     }
 
-
+    public static class UInt64Extensions
+    {
+        public static bool IsMe(this ulong val)
+        {
+            return val == SessionManager.CurrentPlayer.EntityId;
+        }
+    }
     public static class EventUtils
     {
         public static bool EndsToday(double start, double ed, bool d)

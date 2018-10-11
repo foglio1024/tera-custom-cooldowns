@@ -104,23 +104,19 @@ namespace TCC.Data
                 {
                     SettingsWindowViewModel.ChatShowChannelChanged += ShowChannelNPC;
                     SettingsWindowViewModel.ChatShowTimestampChanged += ShowTimestampNPC;
-                    _subs++;
                 }
                 else
                 {
                     SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
                     SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
-                    _subs--;
                 }
 
-                Console.WriteLine("Subs: "+_subs);
                 if (_isVisible == value) return;
                 _isVisible = value;
                 NPC();
             }
         }
 
-        private static int _subs;
         private void ShowChannelNPC()
         {
             NPC(nameof(ShowChannel));

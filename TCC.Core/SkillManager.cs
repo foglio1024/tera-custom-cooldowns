@@ -14,7 +14,6 @@ namespace TCC
 
         private static bool Pass(Skill sk)
         {
-            //if (sk.Class == Class.Sorcerer && sk.Id == 280150) return false; //another stupid fix
             if (sk.Detail == "off") return false;
             return sk.Class != Class.Common && sk.Class != Class.None;
         }

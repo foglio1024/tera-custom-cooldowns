@@ -18,6 +18,7 @@ namespace TCC.Controls
     /// </summary>
     public partial class BossGage : INotifyPropertyChanged
     {
+        private const uint Delay = 5000;
         public SynchronizedObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
 
         public string MainPercInt => (Convert.ToInt32(Math.Floor(Npc.CurrentFactor * 100))).ToString();
@@ -242,30 +243,30 @@ namespace TCC.Controls
             }
         }
 
-/*
-        private void AnimateAppear()
-        {
-            var sc = new ScaleTransform { ScaleY = 0 };
-            LayoutTransform = sc;
-            BossNameGrid.Opacity = 0;
-            HpBarGrid.Opacity = 0;
-            TopInfoGrid.Opacity = 0;
-            Visibility = Npc.Visible;
-            var expand = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
-            Timeline.SetDesiredFrameRate(expand, 30);
-            LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
-            var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300))
-            {
-                BeginTime = TimeSpan.FromMilliseconds(300)
-            };
-            Timeline.SetDesiredFrameRate(fade, 30);
-            //mainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, expand);
-            MainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
-            BossNameGrid.BeginAnimation(OpacityProperty, fade);
-            HpBarGrid.BeginAnimation(OpacityProperty, fade);
-            TopInfoGrid.BeginAnimation(OpacityProperty, fade);
-        }
-*/
+        /*
+                private void AnimateAppear()
+                {
+                    var sc = new ScaleTransform { ScaleY = 0 };
+                    LayoutTransform = sc;
+                    BossNameGrid.Opacity = 0;
+                    HpBarGrid.Opacity = 0;
+                    TopInfoGrid.Opacity = 0;
+                    Visibility = Npc.Visible;
+                    var expand = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
+                    Timeline.SetDesiredFrameRate(expand, 30);
+                    LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
+                    var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300))
+                    {
+                        BeginTime = TimeSpan.FromMilliseconds(300)
+                    };
+                    Timeline.SetDesiredFrameRate(fade, 30);
+                    //mainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, expand);
+                    MainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
+                    BossNameGrid.BeginAnimation(OpacityProperty, fade);
+                    HpBarGrid.BeginAnimation(OpacityProperty, fade);
+                    TopInfoGrid.BeginAnimation(OpacityProperty, fade);
+                }
+        */
 
         private void AnimateHp()
         {
@@ -296,7 +297,7 @@ namespace TCC.Controls
             Timeline.SetDesiredFrameRate(_enrageArcAnimation, 30);
             _enrageArcAnimation.Completed += _enrageArcAnimation_Completed;
             EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>(Dispatcher);
-            _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
+            _t = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(Delay) };
             _t.Tick += (s, ev) =>
             {
                 _t.Stop();
@@ -315,18 +316,18 @@ namespace TCC.Controls
             };
         }
 
-/*
-        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(AbnormalityShape))
-                Abnormalities.ItemTemplate = Application.Current.FindResource(
-                    Settings.AbnormalityShape == AbnormalityShape.Square
-                        ? "SquareBossAbnormality"
-                        : "RoundBossAbnormality") as DataTemplate;
+        /*
+                private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+                {
+                    if (e.PropertyName == nameof(AbnormalityShape))
+                        Abnormalities.ItemTemplate = Application.Current.FindResource(
+                            Settings.AbnormalityShape == AbnormalityShape.Square
+                                ? "SquareBossAbnormality"
+                                : "RoundBossAbnormality") as DataTemplate;
 
 
-        }
-*/
+                }
+        */
 
         private DispatcherTimer _t;
         private void _boss_DeleteEvent()
@@ -337,7 +338,8 @@ namespace TCC.Controls
             try
             {
                 SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
-                Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc, 5500));
+
+                Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc, Delay + 250));
             }
             catch
             {

@@ -45,6 +45,7 @@ namespace TCC.Controls.ChatControls
 
         private void SetAnimated()
         {
+            if (_dc == null) return;
             _dc.Animate = false;
 
         }

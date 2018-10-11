@@ -249,7 +249,7 @@ namespace TCC.Data
             TimerPattern?.SetTarget(this);
             if (IsPhase1Dragon)
             {
-                _shieldDuration = new Timer {Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000};
+                _shieldDuration = new Timer { Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000 };
                 _shieldDuration.Elapsed += ShieldFailed;
             }
         }
@@ -262,8 +262,11 @@ namespace TCC.Data
         public void Dispose()
         {
             foreach (var buff in _buffs) buff.Dispose();
+            if (_shieldDuration != null) _shieldDuration.Elapsed -= ShieldFailed;
+
             _shieldDuration?.Dispose();
             TimerPattern?.Dispose();
+            DeleteEvent?.Invoke();
         }
 
         ///////////////////TIMER////////////////////////
@@ -350,7 +353,7 @@ namespace TCC.Data
         public TimerPattern(int duration)
         {
             Duration = duration;
-            _timer = new Timer(Duration*1000);
+            _timer = new Timer(Duration * 1000);
             _timer.Elapsed += OnTimerElapsed;
         }
 
