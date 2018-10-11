@@ -89,7 +89,7 @@ namespace TCC.ViewModels
             Thunderbolt = new FixedSkillCooldown(tb, true);
             Windsong = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(ws, false),
+                Cooldown = new FixedSkillCooldown(ws, true),
                 Buff = new FixedSkillCooldown(ws, false)
             };
             WindWalk = new FixedSkillCooldown(ww, false);
