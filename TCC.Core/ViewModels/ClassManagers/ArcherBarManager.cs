@@ -115,7 +115,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == Thunderbolt.Skill.IconName)
             {
-                Thunderbolt.ProcReset();
+                Thunderbolt.Refresh(0);
                 return true;
             }
             return false;

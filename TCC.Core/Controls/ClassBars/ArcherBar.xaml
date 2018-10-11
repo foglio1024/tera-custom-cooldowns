@@ -125,7 +125,7 @@
             </TextBlock>
             <Grid Visibility="{Binding WindWalkProc, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"
                         >
                     <FrameworkElement.RenderTransform>
