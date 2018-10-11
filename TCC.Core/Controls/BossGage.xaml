@@ -151,12 +151,13 @@
                         </Border.RenderTransform>
                     </Border>
 
-                    <Image Stretch="Uniform" VerticalAlignment="Center" Margin="-10" Width="56" RenderTransformOrigin=".5 .5"
-                           Source="{Binding Converter={StaticResource LaurelConverter}}">
+                    <Image Stretch="Uniform" VerticalAlignment="Center" Margin="-14" Width="60" RenderTransformOrigin=".5 .5"
+                           Source="{Binding Converter={StaticResource LaurelConverter}}"
+                           >
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1"></ScaleTransform>
-                                <TranslateTransform Y="18" X="0"/>
+                                <TranslateTransform Y="18.5" X="0"/>
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>

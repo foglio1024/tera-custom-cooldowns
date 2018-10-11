@@ -49,11 +49,12 @@ namespace TCC.Converters
                     if (npc.TemplateId == 1000 || npc.TemplateId == 1001) laurel = "bronze";
                     else if (npc.TemplateId == 2000 || npc.TemplateId == 1002) laurel = "silver";
                     else if (npc.TemplateId == 3000 || npc.TemplateId == 1003) laurel = "gold";
+                    else if (npc.TemplateId == 4000) laurel = "diamond";
                     break;
             }
 
 
-
+            if (laurel == "") return null;
             return "../resources/images/Icon_Laurels/" + laurel + "_kr_big.png";
 
 

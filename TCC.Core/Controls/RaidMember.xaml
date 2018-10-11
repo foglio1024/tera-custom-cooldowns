@@ -299,15 +299,15 @@
 
 
             <Image  Opacity="1" x:Name="LaurelImage" 
+                    Margin="-3" 
                     Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr}" 
-                    Margin="-4" 
                     RenderOptions.BitmapScalingMode="Linear" 
                     UseLayoutRounding="True" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Stretch"
                     Stretch="Uniform" >
                 <Image.RenderTransform>
-                    <TranslateTransform Y="2.2"/>
+                    <TranslateTransform Y="1" X="-.5"/>
                 </Image.RenderTransform>
             </Image>
             <Grid  Width="13" Height="13" Margin="0 0 0 0"
@@ -352,7 +352,6 @@
                   Effect="{StaticResource ClassIconGlow}" 
                   UseLayoutRounding="True"
                     RenderOptions.BitmapScalingMode="HighQuality" 
-                  
             >
                 <Path.RenderTransform>
                     <TranslateTransform Y="0"></TranslateTransform>

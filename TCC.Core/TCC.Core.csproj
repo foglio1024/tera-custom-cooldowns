@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Data\ClassPositions.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="MoongourdEncounter.cs" />
     <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
     <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
