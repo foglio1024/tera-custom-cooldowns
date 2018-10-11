@@ -4,12 +4,14 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    public class SizeToDurationLabelSizeConverter : IValueConverter
+    public class MathMultiplicationConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var size = (double?)value;
-            return size / 1.9;
+            var val = (double?)value;
+            var fac = 1D;
+            if (parameter != null) fac = double.Parse(parameter.ToString(), CultureInfo.InvariantCulture);
+            return val * fac;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

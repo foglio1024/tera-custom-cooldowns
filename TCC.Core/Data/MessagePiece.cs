@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using TCC.Annotations;
 using TCC.ViewModels;
 
 namespace TCC.Data
 {
     public class MessagePiece : TSPropertyChanged
     {
-        public ChatChannel Channel;
+        public readonly ChatChannel Channel;
 
         public long ItemUid { get; set; }
         public uint ItemId { get; set; }
-        public Location Location { get; set; }
+        public Location Location { [UsedImplicitly] get; set; }
         public string RawLink { get; set; }
         public Money Money { get; set; }
 
@@ -49,10 +50,11 @@ namespace TCC.Data
             get => _isVisible;
             set
             {
+                if (value) SettingsWindowViewModel.FontSizeChanged += OnFontSizeChanged;
+                else       SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
+
                 if (_isVisible == value) return;
                 _isVisible = value;
-                if (_isVisible) SettingsWindowViewModel.FontSizeChanged += OnFontSizeChanged;
-                else SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
                 NPC();
             }
         }

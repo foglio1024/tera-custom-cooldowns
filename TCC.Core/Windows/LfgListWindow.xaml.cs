@@ -34,7 +34,7 @@ namespace TCC.Windows
             {
                 if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
             };
-            FocusManager.FocusTimer.Elapsed += (_, __) => { RefreshTopmost(); };
+            FocusManager.FocusTick+= RefreshTopmost;
 
             Closing += (_, ev) =>
             {
@@ -45,6 +45,8 @@ namespace TCC.Windows
 
         private void RefreshTopmost()
         {
+            if (FocusManager.PauseTopmost) return;
+
             Dispatcher.Invoke(() =>
             {
                 Topmost = false;
@@ -62,12 +64,12 @@ namespace TCC.Windows
                     if (VM.Creating)
                     {
                         _colAn.To = string.IsNullOrEmpty(VM.NewMessage)
-                            ? ((SolidColorBrush)Application.Current.FindResource("HpColor")).Color
-                            : ((SolidColorBrush)Application.Current.FindResource("GreenColor")).Color;
+                            ? (Color)Application.Current.FindResource("HpColor")
+                            : (Color)Application.Current.FindResource("GreenColor");
                     }
                     else
                     {
-                        _colAn.To = (Application.Current.FindResource("BackgroundDarkColor") as SolidColorBrush).Color;
+                        _colAn.To = (Color) Application.Current.FindResource("BackgroundDarkColor");
                     }
                     var currBg = CreateMessageBtn.Background as SolidColorBrush;
                     var currCol = currBg.Color;

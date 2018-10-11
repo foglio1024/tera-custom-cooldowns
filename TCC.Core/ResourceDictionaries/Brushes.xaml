@@ -1,0 +1,110 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MainBrush"                      Color="{StaticResource MainColor}"                                 />
+    <SolidColorBrush x:Key="GreenBrush"                     Color="{StaticResource GreenColor}"                                />
+    <SolidColorBrush x:Key="LightGreenBrush"                Color="{StaticResource LightGreenColor}"                           />
+    <SolidColorBrush x:Key="TwitchBrush"                    Color="{StaticResource TwitchColor}"                               />
+    <SolidColorBrush x:Key="WeeklyBrush"                    Color="{StaticResource WeeklyColor}"                               />
+    <SolidColorBrush x:Key="DailyBrush"                     Color="{StaticResource DailyColor}"                                />
+    <SolidColorBrush x:Key="MarksBrush"                     Color="{StaticResource MarksColor}"                                />
+    <SolidColorBrush x:Key="GuardianBrush"                  Color="{StaticResource GuardianColor}"                             />
+    <SolidColorBrush x:Key="EnchantLowBrush"                Color="{StaticResource EnchantLowColor}"                           />
+    <SolidColorBrush x:Key="EnchantHighBrush"               Color="{StaticResource EnchantHighColor}"                          />
+    <SolidColorBrush x:Key="NinjaBrush"                     Color="{StaticResource NinjaColor}"                                />
+                                                                                                                               
+    <SolidColorBrush x:Key="DefaultBackgroundBrush"         Color="{StaticResource DefaultBackgroundColor}"      Opacity=".9"  />
+    <SolidColorBrush x:Key="BackgroundDarkBrush"            Color="{StaticResource BackgroundDarkColor}"                       />
+    <SolidColorBrush x:Key="CardDarkBrush"                  Color="{StaticResource CardDarkColor}"                             />
+    <SolidColorBrush x:Key="TooltipBrush"                   Color="{StaticResource TooltipColor}"                Opacity=".9"  />
+    <SolidColorBrush x:Key="RevampBackgroundBrush"          Color="{StaticResource RevampBackgroundColor}"                     />
+    <SolidColorBrush x:Key="RevampDarkBackgroundBrush"      Color="{StaticResource RevampDarkBackgroundColor}"                 />
+    <SolidColorBrush x:Key="RevampDarkBackground70Brush"    Color="{StaticResource RevampDarkBackgroundColor}"   Opacity=".7"  />
+    <SolidColorBrush x:Key="RevampDarkerBackgroundBrush"    Color="{StaticResource RevampDarkerBackgroundColor}"               />
+    <SolidColorBrush x:Key="RevampDarkerBackground70Brush"  Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".7"  />
+    <SolidColorBrush x:Key="RevampBorderBrush"              Color="{StaticResource RevampBorderColor}"                         />
+
+    <SolidColorBrush x:Key="SelectionBackgroundBrush"       Color="White"                                        Opacity=".04" />
+    <SolidColorBrush x:Key="SelectionBackgroundLightBrush"  Color="White"                                        Opacity=".08" />
+    <SolidColorBrush x:Key="SelectionBorderBrush"           Color="Transparent"                                                />
+
+    <SolidColorBrush x:Key="HpBrush"                        Color="{StaticResource HpColor}"                                   />
+    <SolidColorBrush x:Key="HpBrushLight"                   Color="{StaticResource HpColorLight}"                              />
+    <SolidColorBrush x:Key="MpBrush"                        Color="{StaticResource MpColor}"                                   />
+    <SolidColorBrush x:Key="MpBrushLight"                   Color="{StaticResource MpColorLight}"                              />
+    <SolidColorBrush x:Key="HpDebuffBrush"                  Color="{StaticResource HpDebuffColor}"                             />
+    <SolidColorBrush x:Key="HpDebuffBrushLight"             Color="{StaticResource HpDebuffColorLight}"                        />
+                                                                                                                               
+    <SolidColorBrush x:Key="GoldBrush"                      Color="{StaticResource GoldColor}"                                 />
+    <SolidColorBrush x:Key="SilverBrush"                    Color="{StaticResource SilverColor}"                               />
+    <SolidColorBrush x:Key="CopperBrush"                    Color="{StaticResource CopperColor}"                               />
+                                                                                                                               
+    <SolidColorBrush x:Key="AssaultStanceBrush"             Color="{StaticResource AssaultStanceColor}"                        />
+    <SolidColorBrush x:Key="DefensiveStanceBrush"           Color="{StaticResource DefensiveStanceColor}"                      />
+    <SolidColorBrush x:Key="SniperEyeBrush"                 Color="{StaticResource SniperEyeColor}"                            />
+                                                                                                                               
+    <SolidColorBrush x:Key="DpsRoleBrush"                   Color="{StaticResource DpsRoleColor}"                              />
+    <SolidColorBrush x:Key="HealerRoleBrush"                Color="{StaticResource HealerRoleColor}"                           />
+    <SolidColorBrush x:Key="TankRoleBrush"                  Color="{StaticResource TankRoleColor}"                             />
+                                                                                                                               
+    <SolidColorBrush x:Key="IgnidraxBrush"                  Color="{StaticResource IgnidraxColor}"                             />
+    <SolidColorBrush x:Key="TerradraxBrush"                 Color="{StaticResource TerradraxColor}"                            />
+    <SolidColorBrush x:Key="AquadraxBrush"                  Color="{StaticResource AquadraxColor}"                             />
+    <SolidColorBrush x:Key="UmbradraxBrush"                 Color="{StaticResource UmbradraxColor}"                            />
+                                                                                                                               
+    <SolidColorBrush x:Key="TierSoloDungeonBrush"           Color="{StaticResource TierSoloDungeonColor}"                      />
+    <SolidColorBrush x:Key="Tier2DungeonBrush"              Color="{StaticResource Tier2DungeonColor}"                         />
+    <SolidColorBrush x:Key="Tier3DungeonBrush"              Color="{StaticResource Tier3DungeonColor}"                         />
+    <SolidColorBrush x:Key="Tier4DungeonBrush"              Color="{StaticResource Tier4DungeonColor}"                         />
+    <SolidColorBrush x:Key="Tier5DungeonBrush"              Color="{StaticResource Tier5DungeonColor}"                         />
+                                                                                                                               
+    <SolidColorBrush x:Key="MoongourdBackgroundBrush"       Color="{StaticResource MoongourdBackgroundColor}"                  />
+    <SolidColorBrush x:Key="MoongourdDarkBackgroundBrush"   Color="{StaticResource MoongourdDarkBackgroundColor}"              />
+    <SolidColorBrush x:Key="MoongourdHeaderBrush"           Color="{StaticResource MoongourdHeaderColor}"                      />
+    <SolidColorBrush x:Key="MoongourdAccentBrush"           Color="{StaticResource MoongourdAccentColor}"                      />
+    <SolidColorBrush x:Key="MoongourdFadedAccentBrush"      Color="{StaticResource MoongourdFadedAccentColor}"                 />
+                                                                                                                               
+    <SolidColorBrush x:Key="RunemarkBrush"                  Color="{StaticResource RunemarkColor}"                             />
+    <SolidColorBrush x:Key="MaxRunemarkBrush"               Color="{StaticResource MaxRunemarkColor}"                          />
+                                                                                                                               
+    <SolidColorBrush x:Key="ChatSayBrush"                   Color="{StaticResource ChatSayColor}"                              />
+    <SolidColorBrush x:Key="ChatPartyBrush"                 Color="{StaticResource ChatPartyColor}"                            />
+    <SolidColorBrush x:Key="ChatGuildBrush"                 Color="{StaticResource ChatGuildColor}"                            />
+    <SolidColorBrush x:Key="ChatAreaBrush"                  Color="{StaticResource ChatAreaColor}"                             />
+    <SolidColorBrush x:Key="ChatTradeBrush"                 Color="{StaticResource ChatTradeColor}"                            />
+    <SolidColorBrush x:Key="ChatGreetBrush"                 Color="{StaticResource ChatGreetColor}"                            />
+    <SolidColorBrush x:Key="ChatPartyNoticeBrush"           Color="{StaticResource ChatPartyNoticeColor}"                      />
+    <SolidColorBrush x:Key="ChatRaidNoticeBrush"            Color="{StaticResource ChatRaidNoticeColor}"                       />
+    <SolidColorBrush x:Key="ChatEmoteBrush"                 Color="{StaticResource ChatEmoteColor}"                            />
+    <SolidColorBrush x:Key="ChatGlobalBrush"                Color="{StaticResource ChatGlobalColor}"                           />
+    <SolidColorBrush x:Key="ChatRaidBrush"                  Color="{StaticResource ChatRaidColor}"                             />
+    <SolidColorBrush x:Key="ChatMegaphoneBrush"             Color="{StaticResource ChatMegaphoneColor}"                        />
+    <SolidColorBrush x:Key="ChatGuildAdBrush"               Color="{StaticResource ChatGuildAdColor}"                          />
+    <SolidColorBrush x:Key="ChatPrivateBrush"               Color="{StaticResource ChatPrivateColor}"                          />
+    <SolidColorBrush x:Key="ChatProxyBrush"                 Color="{StaticResource ChatProxyColor}"                            />
+    <SolidColorBrush x:Key="ChatWhisperBrush"               Color="{StaticResource ChatWhisperColor}"                          />
+    <SolidColorBrush x:Key="ChatSystemGenericBrush"         Color="{StaticResource ChatSystemGenericColor}"                    />
+    <SolidColorBrush x:Key="ChatSystemNotifyBrush"          Color="{StaticResource ChatSystemNotifyColor}"                     />
+    <SolidColorBrush x:Key="ChatSystemEventBrush"           Color="{StaticResource ChatSystemEventColor}"                      />
+    <SolidColorBrush x:Key="ChatSystemErrorBrush"           Color="{StaticResource ChatSystemErrorColor}"                      />
+    <SolidColorBrush x:Key="ChatSystemGroupBrush"           Color="{StaticResource ChatSystemGroupColor}"                      />
+    <SolidColorBrush x:Key="ChatSystemDeathmatchBrush"      Color="{StaticResource ChatSystemDeathmatchColor}"                 />
+    <SolidColorBrush x:Key="ChatSystemContractAlertBrush"   Color="{StaticResource ChatSystemContractAlertColor}"              />
+    <SolidColorBrush x:Key="ChatSystemGroupAlertBrush"      Color="{StaticResource ChatSystemGroupAlertColor}"                 />
+    <SolidColorBrush x:Key="ChatSystemLootBrush"            Color="{StaticResource ChatSystemLootColor}"                       />
+    <SolidColorBrush x:Key="ChatSystemExpBrush"             Color="{StaticResource ChatSystemExpColor}"                        />
+    <SolidColorBrush x:Key="ChatSystemMoneyBrush"           Color="{StaticResource ChatSystemMoneyColor}"                      />
+    <SolidColorBrush x:Key="ChatSystemBargainBrush"         Color="{StaticResource ChatSystemBargainColor}"                    />
+    <SolidColorBrush x:Key="ChatSystemQuestBrush"           Color="{StaticResource ChatSystemQuestColor}"                      />
+    <SolidColorBrush x:Key="ChatSystemFriendBrush"          Color="{StaticResource ChatSystemFriendColor}"                     />
+    <SolidColorBrush x:Key="ChatSystemWorldBossBrush"       Color="{StaticResource ChatSystemWorldBossColor}"                  />
+                                                                                                                               
+                                                                                                                               
+    <LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
+        <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="0.1"/>                                      
+        <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.4"/>                                      
+        <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.5"/>                                      
+        <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="1.0"/>                                      
+    </LinearGradientBrush>                                                                                                     
+
+</ResourceDictionary>

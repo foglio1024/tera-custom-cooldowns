@@ -38,6 +38,7 @@ namespace TCC.TemplateSelectors
                 case ChatChannel.SystemDefault:
                 case ChatChannel.WorldBoss:
                 case ChatChannel.Laurel:
+                case ChatChannel.Guardian:
                     return SystemAuthorTemplate;
                 case ChatChannel.Private7:
                 case ChatChannel.Private8:

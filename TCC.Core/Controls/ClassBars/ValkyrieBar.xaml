@@ -97,7 +97,7 @@
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassValkyrie}" Margin="19" Opacity=".3"/>
-                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" FontSize="16" 
+                <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" FontSize="16" 
                            FontWeight="DemiBold" Foreground="#afff" 
                            Text="{Binding StaminaTracker.Val}" 
                            Width="45" VerticalAlignment="Center">
@@ -105,13 +105,13 @@
                 <Grid>
                     <Grid ClipToBounds="False" >
                         <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
-                            <Rectangle Stroke="{StaticResource KrBorderColor}"
+                            <Rectangle Stroke="{StaticResource RevampBorderBrush}"
                            StrokeThickness="1" Margin="12">
                             </Rectangle>
                         </Grid>
 
                         <Rectangle Width="60" Height="60" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
-                       OpacityMask="{StaticResource IconOpacityBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                       OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding Ragnarok.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                             </Rectangle.Fill>
@@ -141,18 +141,18 @@
                 </Grid.RenderTransform>
                 <Border  RenderTransform="{StaticResource Rotate45}" Opacity="1" 
                         RenderTransformOrigin=".5 .5" Width="34" Height="34" BorderThickness="2"
-                        Background="{StaticResource KrBgColor}" >
+                        Background="{StaticResource RevampBackgroundBrush}" >
                     <Border.Style>
-                        <Style TargetType="Border" BasedOn="{StaticResource Styles.DefaultBorder}">
-                            <Setter Property="BorderBrush" Value="{StaticResource KrBorderColor}"/>
+                        <Style TargetType="Border" BasedOn="{StaticResource DefaultBorderStyle}">
+                            <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding RunemarksCounter.Val}" Value="7">
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect Color="{StaticResource RunemarkColorMaxBase}" BlurRadius="10" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource MaxRunemarkColor}" BlurRadius="10" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
-                                    <Setter Property="BorderBrush" Value="{StaticResource RunemarkColorMax}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource MaxRunemarkBrush}"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

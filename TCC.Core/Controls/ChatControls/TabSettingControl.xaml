@@ -16,7 +16,7 @@
 
                 <Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource Converters.ChatChannelToColor}}" 
                  Height="15" Width="15"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" ToolTip="{Binding}"
+                <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" ToolTip="{Binding}"
                    Text="{Binding Converter={StaticResource Converters.ChatChannelToName}}" FontWeight="Normal"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
@@ -39,7 +39,7 @@
 
                 <Ellipse ToolTip="{Binding}" Fill="#6fff" 
                          Height="15" Width="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" 
+                <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" 
                            Text="{Binding}" FontWeight="Normal"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
@@ -61,7 +61,7 @@
 
                 <Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource Converters.ChatChannelToColor}}" 
                          Height="15" Width="15"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" ToolTip="{Binding}"
+                <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" ToolTip="{Binding}"
                            Text="{Binding Converter={StaticResource Converters.ChatChannelToName}}" FontWeight="Normal"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
@@ -84,7 +84,7 @@
 
                 <Ellipse ToolTip="{Binding}" Fill="#6fff" 
                          Height="15" Width="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" 
+                <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" 
                            Text="{Binding}" FontWeight="Normal"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
@@ -98,7 +98,7 @@
         </DataTemplate>
 
     </UserControl.Resources>
-    <Border Margin="0" Style="{StaticResource Styles.DefaultBorder}" 
+    <Border Margin="0" Style="{StaticResource DefaultBorderStyle}" 
             UseLayoutRounding="True"
             ClipToBounds="False" CornerRadius="0 0 1 1" 
             BorderThickness="0">
@@ -113,7 +113,7 @@
                     <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="0" Margin="10 5" Height="15" IsHitTestVisible="False" Opacity=".3"/>
                     <!--<Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="15" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
                     HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveTab">
-                        <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpColor}"/>
+                        <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpBrush}"/>
                     </Button>-->
                 </Grid>
 
@@ -125,7 +125,7 @@
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Displayed channels" Padding="10,5"
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed channels" Padding="10,5"
                                VerticalAlignment="Center" Foreground="#9fff" />
                     <ComboBox Name="NewChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
                               ItemTemplate="{StaticResource SimpleChatChannelTemplate}" 
@@ -142,7 +142,7 @@
                             VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddChannel">
-                        <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center"
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center"
                                    VerticalAlignment="Center">
                             +
                         </TextBlock>
@@ -165,7 +165,7 @@
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Displayed authors" Padding="10,5"
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed authors" Padding="10,5"
                                VerticalAlignment="Center" Foreground="#9fff"/>
                     <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1" PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
                              VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0" LostFocus="NewAuthorTextBox_LostFocus"
@@ -175,7 +175,7 @@
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddAuthor">
-                        <TextBlock ToolTip="Add author" Style="{StaticResource Styles.DefaultText}"
+                        <TextBlock ToolTip="Add author" Style="{StaticResource DefaultTextStyle}"
                                    TextAlignment="Center" VerticalAlignment="Center">
                             +
                         </TextBlock>
@@ -199,7 +199,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Hidden channels" Padding="10,5" ToolTip="Channels to hide from this tab"
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden channels" Padding="10,5" ToolTip="Channels to hide from this tab"
                                VerticalAlignment="Center" Foreground="#9faa" />
                     <ComboBox Name="NewExChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
                               ItemTemplate="{StaticResource SimpleChatChannelTemplate}"
@@ -216,7 +216,7 @@
                             VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExChannel">
-                        <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center"
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center"
                                    VerticalAlignment="Center">
                             +
                         </TextBlock>
@@ -239,7 +239,7 @@
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Hidden authors" Padding="10,5" ToolTip="Authors to hide from this tab"
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden authors" Padding="10,5" ToolTip="Authors to hide from this tab"
                                VerticalAlignment="Center" Foreground="#9faa" />
                     <TextBox Padding="0" Name="NewExAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
                              VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
@@ -250,7 +250,7 @@
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExAuthor">
-                        <TextBlock ToolTip="Add author" Style="{StaticResource Styles.DefaultText}"
+                        <TextBlock ToolTip="Add author" Style="{StaticResource DefaultTextStyle}"
                                    TextAlignment="Center" VerticalAlignment="Center">
                             +
                         </TextBlock>

@@ -13,7 +13,7 @@
 
     </UserControl.Resources>
     <Grid Margin="0" x:Name="Root" Width="Auto">
-        <Border Style="{StaticResource Styles.DefaultBorder}"
+        <Border Style="{StaticResource DefaultBorderStyle}"
                 Height="26" 
                 Visibility="Hidden"
                 CornerRadius="0,13,0,0" 
@@ -56,8 +56,8 @@
                      Style="{StaticResource Cont}">
             <UniformGrid.Resources>
                 <Style TargetType="Path">
-                    <Setter Property="Fill" Value="{StaticResource KrBgColor}"></Setter>
-                    <Setter Property="Stroke" Value="{StaticResource KrBorderColor}"></Setter>
+                    <Setter Property="Fill" Value="{StaticResource RevampBackgroundBrush}"></Setter>
+                    <Setter Property="Stroke" Value="{StaticResource RevampBorderBrush}"></Setter>
                     <Setter Property="StrokeThickness" Value="1"></Setter>
                     <Setter Property="Width" Value="32"></Setter>
                     <Setter Property="Height" Value="Auto"></Setter>

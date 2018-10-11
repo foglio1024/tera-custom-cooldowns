@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:TCC.Converters">
+
+    <c:BoolToSvgSwitchConverter x:Key="Converters.BoolToSvgSwitchConverter"/>
+    <c:BoolToVisibleCollapsedConverter x:Key="Converters.BoolToVisibleCollapsed" />
+    <c:BoolToVisibleHidden x:Key="Converters.BoolToVisibleHidden" />
+    <c:RollToStringConverter x:Key="Converters.RollToString"/>
+    <c:WinningToColorConverter x:Key="Converters.WinningToColor"/>
+    <c:IconConverter x:Key="Converters.IconNameToPath"/>
+    <c:ClassImageConverter x:Key="Converters.ClassToImage"/>
+    <c:ClassSvgConverter x:Key="Converters.ClassToSvg"/>
+    <c:ChatChannelToColor x:Key="Converters.ChatChannelToColor"/>
+    <c:ChatChannelToName x:Key="Converters.ChatChannelToName"/>
+    <c:MessageTypeToCursor x:Key="Converters.MessageTypeToCursor"/>
+    <c:MentionToColorConverter x:Key="Converters.MentionToColor"/>
+    <c:SentReceivedToAngleConverter x:Key="Converters.WhisperDirectionToAngle"/>
+    <c:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
+    <c:HPbarColorConverter2 x:Key="Converters.DebuffStatusToHpColor2"/>
+    <c:ContractedToColWidthConverter x:Key="Converters.MessageContractedToColumnWidth"/>
+    <c:RowsToHeightConverter x:Key="Converters.RowsToHeight"/>
+    <c:CooldownWindowModeToTemplateConverter x:Key="Converters.CooldowWindowModeToTemplate"/>
+    <c:PieceToPathConverter x:Key="Converters.PieceToPath"/>
+    <c:GearLevelToFactorConverter x:Key="Converters.GearLevelToFactor"/>
+    <c:GearLevelToColorConverter x:Key="Converters.GearLevelToColor"/>
+    <c:NullToVisibleCollapsedConverter x:Key="Converters.NullToVisibleCollapsed"/>
+    <c:LogoInfoToImageConverter x:Key="Converters.LogoInfoToImage"/>
+    <c:DirectionToHorAlignConveter x:Key="Converters.DirectionToHorAlignConveter"/>
+    <c:AbnormalityTypeToColorConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
+    <c:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
+    <c:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
+    <c:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
+    <c:MathMultiplicationConverter x:Key="Math.Multiplication"/>
+    <c:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
+
+    <!--BossGage resources-->
+    <c:EntityIdToNameConverter x:Key="Converters.EntityIdToName"/>
+    <c:AggroTypeToFillConverter x:Key="Converters.AggroTypeToFill"/>
+    <c:BossHPbarColorConverter x:Key="Converters.EnrageToHpColor"/>
+    <c:DragonIdToColorConverter x:Key="Converters.DragonIdToColor"/>
+    <c:HHphaseToEnemyWindowTemplate x:Key="Converters.HarrowholdPhaseToLayout"/>
+
+    <!--Party/raid member resources-->
+    <c:LaurelImageConverter x:Key="Converters.LaurelToImage"/>
+    <c:ClassToFillConverter x:Key="Converters.ClassToFill"/>
+    <c:ReadyToOpacityConverter x:Key="ReadyToOpacityConv"/>
+    <c:ReadyToIconConverter x:Key="Converters.ReadyToIcon"/>
+    <c:ReadyToColorConverter x:Key="Converters.ReadyToColor"/>
+    <c:GroupSizeToTemplateConverter x:Key="Converters.GroupSizeToTemplate"/>
+    <c:RaidToColorConverter x:Key="Converters.RaidToColor"/>
+
+    <c:LocationToMapConverter x:Key="Converters.LocationToMap"/>
+    <c:LocationToStretchConverter x:Key="Converters.LocationToStretch"/>
+    <c:ShieldStatusColorConverter x:Key="Converters.ShieldStatusColor"/>
+    <c:ShieldStatusToVisibilityConverter x:Key="Converters.ShieldStatusToVisibility"/>
+    <c:FactorToAngleConverter x:Key="Converters.FactorToAngle"/>
+    <c:ValueToFactorConverter x:Key="Converters.ValueToFactor"/>
+    <c:DungeonIdToNameConverter x:Key="Converters.DungeonIdToName"/>
+    <c:DungeonIdToStarsConverter x:Key="Converters.DungeonIdToStars"/>
+    <c:DungeonIdToTierColorConverter x:Key="Converters.DungeonIdToTierColor"/>
+    <c:StringToFillConverter x:Key="Converters.StringToFill"/>
+    <c:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
+    <c:LfgVmToButtonLabelConverter x:Key="Converters.LfgVmToButtonLabel"/>
+    <c:ClassToNameConverter x:Key="Converters.ClassToName" />
+
+</ResourceDictionary>

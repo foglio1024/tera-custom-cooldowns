@@ -106,6 +106,8 @@ namespace TCC.Parsing
             { nameof(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL),      Contructor<Func<TeraMessageReader, S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>>() },
             { nameof(S_DESTROY_GUILD_TOWER),                   Contructor<Func<TeraMessageReader, S_DESTROY_GUILD_TOWER>>() },
             { nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
+            { nameof(S_FIELD_EVENT_ON_ENTER),                  Contructor<Func<TeraMessageReader, S_FIELD_EVENT_ON_ENTER>>() },
+            { nameof(S_FIELD_EVENT_ON_LEAVE),                  Contructor<Func<TeraMessageReader, S_FIELD_EVENT_ON_LEAVE>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
         };
@@ -217,6 +219,8 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MEMBER_INFO),                      new Action<S_PARTY_MEMBER_INFO>(PacketProcessor.HandlePartyMemberInfo) },
             {typeof(S_OTHER_USER_APPLY_PARTY),                 new Action<S_OTHER_USER_APPLY_PARTY>(PacketProcessor.HandleUserApplyToParty) },
             {typeof(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA),  new Action<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(PacketProcessor.HandleFriendIntoArea) },
+            {typeof(S_FIELD_EVENT_ON_ENTER),                   new Action<S_FIELD_EVENT_ON_ENTER>(PacketProcessor.HandleGuardianOnEnter) },
+            {typeof(S_FIELD_EVENT_ON_LEAVE),                   new Action<S_FIELD_EVENT_ON_LEAVE>(PacketProcessor.HandleGuardianOnLeave) },
         };
         private static readonly Dictionary<Type, Delegate> ChatWindowLfg = new Dictionary<Type, Delegate>
         {

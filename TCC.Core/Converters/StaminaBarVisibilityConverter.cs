@@ -14,8 +14,8 @@ namespace TCC.Converters
             switch ((Class?)value)
             {
                 case Class.Warrior:
-                    return Visibility.Visible;
                 case Class.Lancer:
+                case Class.Archer:
                     return Visibility.Visible;
                 default:
                     return Visibility.Collapsed;

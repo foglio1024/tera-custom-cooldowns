@@ -16,7 +16,7 @@
                     <Setter.Value>
                         <TransformGroup>
                             <ScaleTransform ScaleX="1"/>
-                            <RotateTransform Angle="{Binding FlightGaugeRotation, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}"/>
+                            <RotateTransform Angle="{Binding RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}, Path=FlightGaugeRotation}"/>
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>
@@ -58,13 +58,13 @@
                     <Setter Property="Width" Value="280"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Air">
-                            <Setter Property="Stroke" Value="{StaticResource MpColor2}"/>
+                            <Setter Property="Stroke" Value="{StaticResource MpBrushLight}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Fire">
-                            <Setter Property="Stroke" Value="{StaticResource HpColor}"/>
+                            <Setter Property="Stroke" Value="{StaticResource HpBrush}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="Spark">
-                            <Setter Property="Stroke" Value="{StaticResource HpDebuffColor2}"/>
+                            <Setter Property="Stroke" Value="{StaticResource HpDebuffBrushLight}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=w:FlightDurationWindow}}" Value="None">
                             <Setter Property="Stroke" Value="White"/>

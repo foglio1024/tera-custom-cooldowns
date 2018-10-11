@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -22,8 +23,8 @@ namespace TCC.Data.Databases
 
         private void LoadDoc(string region)
         {
-            _monstersDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
-            _overrideDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-override.xml");
+            _monstersDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/resources/data/monsters/monsters-" + region + ".xml");
+            _overrideDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/resources/data/monsters/monsters-override.xml");
         }
 
         private void ParseDoc()

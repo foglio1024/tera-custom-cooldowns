@@ -19,7 +19,7 @@ namespace TCC.Controls.ClassBars
                     default:
                         return Brushes.DimGray;
                     case ArcherStance.SniperEye:
-                        return Application.Current.FindResource("SniperEyeColor");
+                        return Application.Current.FindResource("SniperEyeBrush");
                 }
             }
             else return Brushes.Transparent;

@@ -25,9 +25,9 @@
                 <Setter Property="Margin" Value="5 2"/>
             </Style>
         </Grid.Resources>
-        <Border Style="{StaticResource Styles.DefaultBorder}" 
-                Background="{StaticResource KrBgColor}"
-                BorderBrush="{StaticResource KrBorderColor}"
+        <Border Style="{StaticResource DefaultBorderStyle}" 
+                Background="{StaticResource RevampBackgroundBrush}"
+                BorderBrush="{StaticResource RevampBorderBrush}"
                 Grid.ColumnSpan="20" Opacity=".5"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                 Effect="{x:Null}"/>
@@ -48,7 +48,7 @@
             <Path Fill="White" Data="{StaticResource SvgCheckAll}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
         <Button Click="Close" Grid.Column="4" ToolTip="Close">
-            <Path Fill="{StaticResource HpColor}" Data="{StaticResource SvgClose}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+            <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
 
         <!--<Path Fill="#3fff" Data="{StaticResource SvgMove}" Height="22" Width="22" Stretch="Uniform" Grid.Column="1" Margin="5 5 10 5" VerticalAlignment="Center"></Path>-->

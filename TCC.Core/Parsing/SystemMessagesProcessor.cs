@@ -40,7 +40,7 @@ namespace TCC.Parsing
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
         {
             var sysmsg = "@0\vUserName\v" + friendName;
-            var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend) {Author = friendName};
+            var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend) { Author = friendName };
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
@@ -78,15 +78,39 @@ namespace TCC.Parsing
 
             { "SMT_PARTY_LOOT_ITEM_PARTYPLAYER", new Action<string, SystemMessage>(HandleGroupMemberLoot) },
 
-            { "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED", new Action<string, SystemMessage>(HandleNewGuildMasterMEssage) },
+            { "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED", new Action<string, SystemMessage>(HandleNewGuildMasterMessage) },
 
             { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_ALL", new Action<string, SystemMessage>(HandleLaurelMessage) },
             { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_GUILD", new Action<string, SystemMessage>(DoNothing) },
             { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_PARTY", new Action<string, SystemMessage>(DoNothing) },
 
+            { "SMT_FIELD_EVENT_ENTER", new Action<string, SystemMessage>(RedirectGuardianMessage) },
+            { "SMT_FIELD_EVENT_LEAVE", new Action<string, SystemMessage>(RedirectGuardianMessage) },
+            { "SMT_FIELD_EVENT_COMPLETE", new Action<string, SystemMessage>(RedirectGuardianMessage) },
+            { "SMT_FIELD_EVENT_FAIL_OVERTIME", new Action<string, SystemMessage>(RedirectGuardianMessage) },
+            { "SMT_FIELD_EVENT_REWARD_AVAILABLE", new Action<string, SystemMessage>(HandleClearedGuardianQuestsMessage) },
+            { "SMT_FIELD_EVENT_CLEAR_REWARD_SENT", new Action<string, SystemMessage>(RedirectGuardianMessage) },
+            { "SMT_FIELD_EVENT_WORLD_ANNOUNCE", new Action<string, SystemMessage>(RedirectGuardianMessage) },
         };
 
-        private static void HandleNewGuildMasterMEssage(string srvMsg, SystemMessage sysMsg)
+        private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            var standardCountString = $"<font color =\"#cccccc\">({InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1}/40)</font>";
+            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1}</font><font color=\"#cccccc\">/40)</font>";
+            var newMsg = new SystemMessage($"{sysMsg.Message} {(InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1 == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
+            var msg = new ChatMessage(srvMsg, newMsg, ChatChannel.Guardian);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+
+        }
+
+        private static void RedirectGuardianMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Guardian);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+        }
+
+        //TODO: not working, it's probably sent with another packet
+        private static void HandleNewGuildMasterMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.GuildNotice);
             ChatWindowManager.Instance.AddChatMessage(msg);

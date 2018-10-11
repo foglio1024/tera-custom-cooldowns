@@ -42,7 +42,7 @@
         </Style>
         <ToolTip x:Key="EnabledSettingTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                 <Run Text="Completely disables this window, turning off related packet processors if possible."/>
                 <LineBreak/>
@@ -54,7 +54,7 @@
         </ToolTip>
         <ToolTip x:Key="VisibilitySettingTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Hides this window without closing it."/>
                 </TextBlock>
@@ -62,7 +62,7 @@
         </ToolTip>
         <ToolTip x:Key="ShowAlwaysSettingTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Keep this window visible regardless of loading screens and tabbing out of TERA. Auto dim will still apply."/>
                 </TextBlock>
@@ -70,7 +70,7 @@
         </ToolTip>
         <ToolTip x:Key="AllowOffscreenTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Disable screen boundaries check for this window, allowing it to be pushed out of screen boundaries."/>
                 </TextBlock>
@@ -78,7 +78,7 @@
         </ToolTip>
         <ToolTip x:Key="ClickThruModeSettingTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Decides how to apply click thru on this window:"/>
                     <LineBreak/>
@@ -101,13 +101,13 @@
                     <LineBreak/>
                     <Run Text="GameDriven:" FontWeight="Bold" Foreground="White"/>
                     <Run Text=" click thru depends on ingame UI status;"/>
-                    <Run Text=" requires proxy and modded S1UI_Chat2.gpk" Foreground="{StaticResource HpColor}"/>
+                    <Run Text=" requires proxy and modded S1UI_Chat2.gpk" Foreground="{StaticResource HpBrush}"/>
                 </TextBlock>
             </Grid>
         </ToolTip>
         <ToolTip x:Key="AutoDimSettingTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Choose if this window will have its opacity and clickthru settings automatically adjusted when not in combat."/>
                 </TextBlock>
@@ -115,7 +115,7 @@
         </ToolTip>
         <ToolTip x:Key="DimOpacitySettingTooltip">
             <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Sets the window opacity to this when TCC is dimmed."/>
                 </TextBlock>
@@ -137,9 +137,9 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource Styles.DefaultBorder}"  
+        <Border Style="{StaticResource DefaultBorderStyle}"  
                 Grid.ColumnSpan="10" Grid.RowSpan="10"  
-                Background="{StaticResource DefaultBackgroundColor}"
+                Background="{StaticResource DefaultBackgroundBrush}"
                 Opacity="1" CornerRadius="2"/>
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
@@ -195,7 +195,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Cooldown window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Cooldown window settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Cooldown window settings -->
@@ -212,10 +212,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetCooldownWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -229,12 +229,12 @@
                     <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type data:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
                         <controls:SelectionSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Switch between"/>
-                                    <Run Text="normal" FontWeight="Bold" Foreground="{StaticResource HpColor}"/>
+                                    <Run Text="normal" FontWeight="Bold" Foreground="{StaticResource HpBrush}"/>
                                     <Run Text="layout (skills only visible when in cooldown) and"/>
-                                    <Run Text="fixed" FontWeight="Bold" Foreground="{StaticResource MpColor}"/>
+                                    <Run Text="fixed" FontWeight="Bold" Foreground="{StaticResource MpBrush}"/>
                                     <Run Text="layout (configurable via xml file, check wiki for more info)"/>
                                     <LineBreak/>
                                     <LineBreak/>
@@ -257,7 +257,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/combat_white.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Boss window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Boss window settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Boss window settings-->
@@ -272,10 +272,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1"  Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetBossWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -290,7 +290,7 @@
                         <controls:BoolSetting.ToolTip>
                             <ToolTip>
                                 <Grid Margin="5">
-                                    <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                    <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                     <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                         <Run Text="Hides the adds column which shows all the mobs not marked as bosses and having small bar indicator."/>
                                     </TextBlock>
@@ -302,7 +302,7 @@
                     <controls:BoolSetting SettingName="Accurate HP detection" IsOn="{Binding AccurateHp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Use more accurate enemy HP detection, allowing to detect HP changes to mobs not hit by the user. It requires more CPU power and may slow down TCC in crowded areas in which many people hit many mobs."/>
                                 </TextBlock>
@@ -321,7 +321,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Character window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Character window settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Character window settings -->
@@ -336,10 +336,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetCharacterWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -362,7 +362,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Buffs window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Buffs window settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
@@ -378,10 +378,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetBuffWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -403,7 +403,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_videogame_asset_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Class window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Class window settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Class window settings -->
@@ -418,10 +418,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetClassWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -453,7 +453,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_people_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Group window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Group window settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
@@ -469,10 +469,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}" ToolTip="{StaticResource DimOpacitySettingTooltip}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetGroupWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -485,7 +485,7 @@
                     <controls:BoolSetting SettingName="Hide me" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Hides current player from group window."/>
                                     <LineBreak /> <LineBreak/>
@@ -498,7 +498,7 @@
                     <controls:BoolSetting SettingName="Hide buffs" IsOn="{Binding HideBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png"  >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Hides buffs row. Tracking will still be active and current buffs will be showed if turned back off."/>
                                 </TextBlock>
@@ -508,7 +508,7 @@
                     <controls:BoolSetting SettingName="Hide debuffs" Grid.Row="8" IsOn="{Binding HideDebuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Hides debuffs row. Tracking will still be active and current debuffs will be showed if turned back off."/>
                                 </TextBlock>
@@ -518,7 +518,7 @@
                     <controls:BoolSetting SettingName="Disable all buffs and debuffs" Grid.Row="8" IsOn="{Binding DisableAllPartyAbnormals, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" />
+                                <Border Style="{StaticResource DefaultBorderStyle}" />
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Completely disables party members' abnormalities tracking to save performance."/>
                                     <LineBreak /> <LineBreak/>
@@ -537,7 +537,7 @@
                     <controls:BoolSetting SettingName="Show only aggro debuff in HH" IsOn="{Binding HhOnlyAggro, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                 <Run Text="Hide all buffs and debuffs except aggro stacks during HH phase 2, 3, and 4."/>
                                 <LineBreak/>
@@ -549,7 +549,7 @@
                     <controls:BoolSetting SettingName="Disable HP" IsOn="{Binding DisableHP, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -557,7 +557,7 @@
                     <controls:BoolSetting SettingName="Disable MP" IsOn="{Binding DisableMP, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Disable party members' MP tracking to save performance (recommended). MP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -565,7 +565,7 @@
                     <controls:ValueSetting SettingName="Raid threshold" Min="1" Max="30" Grid.Row="4" Value="{Binding GroupSizeThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png">
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" />
+                                <Border Style="{StaticResource DefaultBorderStyle}" />
                                 <TextBlock Foreground="LightGray" Text="Set the max group size for using big party members indicators (1 to always show raid indicators; 30 to always show party indicators)." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:ValueSetting.ToolTip>
@@ -573,7 +573,7 @@
                     <controls:BoolSetting SettingName="Show group members' laurels" IsOn="{Binding ShowMembersLaurels, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Enables party members' laurels." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -581,7 +581,7 @@
                     <controls:BoolSetting SettingName="Show group info" IsOn="{Binding ShowGroupWindowDetails, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Enables party members info panel." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -589,14 +589,14 @@
                     <controls:BoolSetting SettingName="Show awaken icon" IsOn="{Binding ShowAwakenIcon, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Enables party members awaken icon." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <Button Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                             tcc:ButtonExtensions.CornerRadius="3" Margin="20 3" 
-                            Click="ButtonBase_OnClick" Content="Open buff settings" Foreground="{StaticResource MainColor}">
+                            Click="ButtonBase_OnClick" Content="Open buff settings" Foreground="{StaticResource MainBrush}">
                     </Button>
                 </StackPanel>
             </TabItem>
@@ -609,7 +609,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/chat.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Chat windows settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Chat windows settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
@@ -621,10 +621,10 @@
                                                Choices="{Binding ChatClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetChatWindowsPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -636,7 +636,7 @@
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Maximum amount of messages to store. When this amount is reached, oldest messages will start to be deleted."/>
                                 </TextBlock>
@@ -646,7 +646,7 @@
                     <controls:ValueSetting SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_filter_list_white_24dp_2x.png">
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Amount of most recent messages to compare. If a new message's author and content match one of these, it will be considered as spam and discarded (0 = spam filter off)."/>
                                 </TextBlock>
@@ -656,7 +656,7 @@
                     <controls:ValueSetting SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png">
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Sets the opacity of the black panel containing chat."/>
                                 </TextBlock>
@@ -666,7 +666,7 @@
                     <controls:ValueSetting SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" SettingImage="/TCC;component/resources/images/ic_format_size_white_24dp_2x.png">
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Sets the font size of the messages (15 = default)."/>
                                 </TextBlock>
@@ -676,7 +676,7 @@
                     <controls:BoolSetting SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Turns messages' timestamp on/off."/>
                                 </TextBlock>
@@ -686,7 +686,7 @@
                     <controls:BoolSetting SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Turns messages' channel label on/off."/>
                                 </TextBlock>
@@ -696,7 +696,7 @@
                     <controls:BoolSetting SettingName="Fade out" IsOn="{Binding ChatFadeOut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Hide chat after few seconds if no new messages appear."/>
                                 </TextBlock>
@@ -706,7 +706,7 @@
                     <controls:BoolSetting SettingName="Animate chat messages" IsOn="{Binding AnimateChatMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Set chat messages animation on/off."/>
                                 </TextBlock>
@@ -725,7 +725,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Civil Unreset window" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Civil Unreset window" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Character window settings -->
@@ -740,10 +740,10 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CuWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetCuWindowPosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move window to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move window to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -763,7 +763,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6" Source="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"/>
-                        <TextBlock Text="Misc settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Misc settings" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
@@ -771,10 +771,10 @@
                 <StackPanel Style="{StaticResource SettingsGrid}">
                     <Button Style="{StaticResource ButtonMainStyle}" Click="MakePositionsGlobal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Copy current window positions to all classes"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Copy current window positions to all classes"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Use current window positions for all classes"/>
                                 </TextBlock>
@@ -783,10 +783,10 @@
                     </Button>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="WindowPositionsReset" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move all windows to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move all windows to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Move all windows to the center of the primary screen. Use only in case some windows are outside the screen."/>
                                 </TextBlock>
@@ -799,7 +799,7 @@
                     <controls:BoolSetting SettingName="High priority" IsOn="{Binding HighPriority, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Makes TCC run at High CPU priority. Turn this on if you're experiecing lag in crowded areas (eg. Harrowold)"/>
                                     <LineBreak /> <LineBreak/>
@@ -812,7 +812,7 @@
                     <controls:BoolSetting SettingName="Force software rendering" IsOn="{Binding ForceSoftwareRendering, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Forces software (CPU) rendering. Turning this on should make TCC run smoother on single-GPU systems at the cost of CPU usage."/>
                                 </TextBlock>
@@ -822,7 +822,7 @@
                     <controls:BoolSetting SettingName="Use hotkeys" IsOn="{Binding UseHotkeys, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Enables/disables keyboard hook."/>
                                 </TextBlock>
@@ -832,7 +832,7 @@
                     <controls:BoolSetting SettingName="Hide handles" IsOn="{Binding HideHandles, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Hides windows' handles."/>
                                 </TextBlock>
@@ -850,7 +850,7 @@
                     <controls:BoolSetting SettingName="Use LFG window" IsOn="{Binding UseLfg, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Enables/disables TCC LFG window."/>
                                 </TextBlock>
@@ -860,7 +860,7 @@
                     <controls:BoolSetting SettingName="Show trade LFG" IsOn="{Binding ShowTradeLfgs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Hides/shows trade LFGs."/>
                                 </TextBlock>
@@ -871,7 +871,7 @@
                     <controls:BoolSetting SettingName="Show flight gauge" IsOn="{Binding ShowFlightGauge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Enables/disables flight gauge."/>
                                 </TextBlock>
@@ -890,10 +890,10 @@
                                           IsOn="{Binding FlipFlightGauge, Mode=TwoWay}"/>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ResetFlightGaugePosition" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <TextBlock Margin="0,5" Foreground="{StaticResource HpColor2}" Text="Move flight gauge to center screen"/>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource HpBrushLight}" Text="Move flight gauge to center screen"/>
                         <Button.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen."/>
                                 </TextBlock>
@@ -930,7 +930,7 @@
                     <controls:FieldSetting SettingName="Twitch token" Value="{Binding TwitchToken, Mode=TwoWay}">
                         <controls:FieldSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Visit twitchapps.com/tmi/ to generate a token."/>
                                     <LineBreak/>
@@ -943,7 +943,7 @@
                     <controls:FieldSetting SettingName="Twitch channel name" Value="{Binding TwitchChannelName, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:FieldSetting>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ConnectToTwitch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
-                        <TextBlock Margin="0,5" Foreground="{StaticResource TwitchColor}" Text="Connect"></TextBlock>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource TwitchBrush}" Text="Connect"></TextBlock>
                     </Button>-->
 
                 </StackPanel>
@@ -958,7 +958,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6" Source="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png"/>
-                        <TextBlock Text="Links" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Links" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
@@ -978,7 +978,7 @@
                                 </Path.LayoutTransform>
                             </Path>
                         </Grid>
-                        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" 
                                Grid.Column="1" 
                                Margin="10,0,14,0" 
                                Text="Releases" 
@@ -1009,7 +1009,7 @@
                         <Grid Width="22" Height="22" Margin="17,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
 
                         </Grid>
-                        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" 
                                Grid.Column="1" 
                                Margin="10,0,14,0" 
                                Text="Tera DPS" 
@@ -1040,7 +1040,7 @@
                         <Grid Width="22" Height="22" Margin="17,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
 
                         </Grid>
-                        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" 
                                    Grid.Column="1" 
                                    Margin="10,0,14,0" 
                                    Text="Donate" 
@@ -1080,7 +1080,7 @@
             </Border>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Height="Auto" Margin="0,0">
                 <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".4" Width="Auto" Height="32" Margin="2" RenderOptions.BitmapScalingMode="HighQuality"/>
-                <TextBlock Foreground="#999" Style="{StaticResource Styles.DefaultText}"  Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}"
+                <TextBlock Foreground="#999" Style="{StaticResource DefaultTextStyle}"  Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}"
                            VerticalAlignment="Center"  FontSize="16"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -1089,7 +1089,7 @@
                     <Path Data="{StaticResource SvgFolder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
                     <Button.ToolTip>
                         <Grid Margin="5">
-                            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                            <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
                             <TextBlock Foreground="LightGray" Text="Open config folder" Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                         </Grid>
                     </Button.ToolTip>

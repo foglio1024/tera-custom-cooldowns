@@ -75,7 +75,7 @@
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3"/>
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource KrBg}"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -86,7 +86,7 @@
                 </FrameworkElement.RenderTransform>
             </Border>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -108,7 +108,7 @@
                 </FrameworkElement.RenderTransform>
 
             </local:RhombBuffCooldownControl>
-            <Polygon Fill="{StaticResource KrBgColor}"
+            <Polygon Fill="{StaticResource RevampBackgroundBrush}"
                      Points="0 0 1 0 2 1 -1 1"
                      Stroke="#89a"
                      Visibility="Collapsed"
@@ -119,7 +119,7 @@
                     <TranslateTransform X="0" Y="70" />
                 </FrameworkElement.RenderTransform>
             </Polygon>
-            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" 
+            <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" 
                            FontWeight="DemiBold" Foreground="#afff" 
                        Text="{Binding StaminaTracker.Val}" 
                        Width="45" VerticalAlignment="Center">

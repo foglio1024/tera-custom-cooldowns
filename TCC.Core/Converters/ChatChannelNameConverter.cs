@@ -61,11 +61,13 @@ namespace TCC.Converters
                 case ChatChannel.Bargain:
                     return "Offer";
                 case ChatChannel.WorldBoss:
-                    return "WB";
+                    return "W.B.";
                 case ChatChannel.SystemDefault:
                     return "System";
                 case ChatChannel.Damage:
                     return "Dmg";
+                case ChatChannel.Guardian:
+                    return "G.L.";
                 default:
                     return ch.ToString();
             }

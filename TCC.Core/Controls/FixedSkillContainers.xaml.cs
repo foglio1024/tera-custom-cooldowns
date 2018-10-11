@@ -37,8 +37,8 @@ namespace TCC.Controls
             _secButtonTimer.Tick += SecButtonTimer_Tick;
             _opacityUp = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
             _opacityDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase(), BeginTime = TimeSpan.FromMilliseconds(1000) };
-            SelectionPopup.Closed += SelectionPopup_Closed;
-            SelectionPopup.Opened += SelectionPopup_Opened;
+            //SelectionPopup.Closed += SelectionPopup_Closed;
+            //SelectionPopup.Opened += SelectionPopup_Opened;
             CooldownWindowViewModel.Instance.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
             CooldownWindowViewModel.Instance.SkillsLoaded += OnSkillsLoaded;
@@ -105,18 +105,18 @@ namespace TCC.Controls
                 : new Thickness(0);
         }
 
-        private void SelectionPopup_Opened(object sender, EventArgs e)
-        {
-            FocusManager.FocusTimer.Enabled = false;
-        }
+        //private void SelectionPopup_Opened(object sender, EventArgs e)
+        //{
+        //    FocusManager.ForceVisible = true;
+        //}
 
-        private void SelectionPopup_Closed(object sender, EventArgs e)
-        {
-            _mainButtonTimer.Start();
-            _secButtonTimer.Start();
-            ChoiceListBox.UnselectAll();
-            FocusManager.FocusTimer.Enabled = true;
-        }
+        //private void SelectionPopup_Closed(object sender, EventArgs e)
+        //{
+        //    _mainButtonTimer.Start();
+        //    _secButtonTimer.Start();
+        //    ChoiceListBox.UnselectAll();
+        //    FocusManager.ForceVisible = false;
+        //}
 
         private void SelectionPopup_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -160,9 +160,8 @@ namespace TCC.Controls
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
             _isDragging = true;
-            FocusManager.FocusTimer.Enabled = false;
-            WindowManager.ForegroundManager.ForceVisible = true;
-            WindowManager.ForegroundManager.ForceUndim = true;
+            //FocusManager.ForceVisible = true; // FocusTimer.Enabled = false;
+            //WindowManager.ForegroundManager.ForceUndim = true;
         }
 
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
@@ -188,9 +187,9 @@ namespace TCC.Controls
                 }
             }
             CooldownWindowViewModel.Instance.Save();
-            FocusManager.FocusTimer.Enabled = true;
-            WindowManager.ForegroundManager.ForceVisible = false;
-            WindowManager.ForegroundManager.ForceUndim = false;
+            //FocusManager.ForceVisible = false; // FocusTimer.Enabled = true;
+            //WindowManager.ForegroundManager.ForceVisible = false;
+            //WindowManager.ForegroundManager.ForceUndim = false;
             _isDragging = false;
         }
 

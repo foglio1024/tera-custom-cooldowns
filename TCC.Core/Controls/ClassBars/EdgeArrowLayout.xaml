@@ -18,7 +18,7 @@
                     <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
                     <Setter Property="Width" Value="30"/>
                     <Setter Property="Background" Value="#a223"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource KrBorderColor}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}"/>
                 </Style>
                 <Style TargetType="Rectangle">
                     <Setter Property="Fill" Value="#fff"/>

@@ -16,11 +16,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Name="WindowContent" Margin="4,15,0,0" Width="Auto" ClipToBounds="False">
+        <Grid Name="WindowContent" Margin="4,15,0,15" Width="Auto" ClipToBounds="False" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -46,9 +47,9 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0"
-                        Background="{StaticResource KrBgColor}"
-                        BorderBrush="{StaticResource KrBorderColor}"
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.Row="0"
+                        Background="{StaticResource RevampBackgroundBrush}"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
                         Margin="10 0 0 2" CornerRadius="1"
                         VerticalAlignment="Top" HorizontalAlignment="Left"
                         Padding="5,1"
@@ -57,29 +58,29 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Total members">
                             <Path Data="{StaticResource SvgUsers}"
-                                  Fill="{StaticResource SilverColor}" Stretch="Uniform" Width="15" Margin="0" />
+                                  Fill="{StaticResource SilverBrush}" Stretch="Uniform" Width="15" Margin="0" />
                             <TextBlock Text="{Binding Instance.Size, Mode=OneWay}" FontWeight="DemiBold"
                                        Margin="6,0,0,0" Foreground="#afff" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Alive members">
                             <Path Data="{StaticResource SvgHeart}"
-                                  Fill="{StaticResource HpColor}" Stretch="Uniform" Width="15" Margin="0" />
+                                  Fill="{StaticResource HpBrush}" Stretch="Uniform" Width="15" Margin="0" />
                             <TextBlock Text="{Binding Instance.AliveCount, Mode=OneWay}" FontWeight="DemiBold"
                                        Margin="6,0,0,0" Foreground="#afff" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Ready members"
                                     Visibility="{Binding Instance.Raid,Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                             <Path Data="{StaticResource SvgCheckCircle}"
-                                  Fill="{StaticResource LightGreenColor}" Stretch="Uniform" Width="15" Margin="0" />
+                                  Fill="{StaticResource LightGreenBrush}" Stretch="Uniform" Width="15" Margin="0" />
                             <TextBlock Text="{Binding Instance.ReadyCount, Mode=OneWay}" FontWeight="DemiBold"
                                        Margin="6,0,0,0" Foreground="#afff" />
                         </StackPanel>
 
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1"
-                        Background="{StaticResource KrBgColor}"
-                        BorderBrush="{StaticResource KrBorderColor}"
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.Column="1"
+                        Background="{StaticResource RevampBackgroundBrush}"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
                         Margin="4 0 0 0" CornerRadius="1"
                         Visibility="{Binding Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
@@ -90,13 +91,13 @@
                         </Button>
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
                                 ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpColor}" Margin="3 3" Width="15" Height="15" Visibility="{Binding ShowLeaveButton}" />
+                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15" Visibility="{Binding Instance.ShowLeaveButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </Button>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="2"
-                        Background="{StaticResource KrBgColor}" 
-                        BorderBrush="{StaticResource KrBorderColor}"
+                <Border Style="{StaticResource DefaultBorderStyle}" Grid.Column="2"
+                        Background="{StaticResource RevampBackgroundBrush}" 
+                        BorderBrush="{StaticResource RevampBorderBrush}"
                         Margin="4 0 0 0" CornerRadius="1"
                         Visibility="{Binding ShowLeaderButtons, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         x:Name="GroupButtons" VerticalAlignment="Top">
@@ -112,7 +113,7 @@
                         </Button>
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="DisbandButton"
                                 ToolTip="Disband" Click="DisbandButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgDisband}" Fill="{StaticResource HpColor}" Margin="3 3" Width="15" Height="15"/>
+                            <Path Data="{StaticResource SvgDisband}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15"/>
                         </Button>
                     </StackPanel>
                 </Border>
@@ -148,7 +149,7 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </Grid>
-        <c:WindowButtons WindowName="Group window" x:Name="Buttons" Grid.Row="1"
+        <c:WindowButtons WindowName="Group window" x:Name="Buttons" Grid.Row="2"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>
 </w:TccWidget>

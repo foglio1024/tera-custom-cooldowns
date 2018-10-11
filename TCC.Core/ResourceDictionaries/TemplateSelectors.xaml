@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ts="clr-namespace:TCC.TemplateSelectors">
+
+    <ts:AbnormalityTemplateSelector x:Key="PlayerAbnormalityTemplateSelector"
+                                    RoundTemplate="{StaticResource RoundAbnormality}"
+                                    SquareTemplate="{StaticResource SquareAbnormality}"
+                                    />
+    <ts:AbnormalityTemplateSelector x:Key="BossAbnormalityTemplateSelector"
+                                    RoundTemplate="{StaticResource  RoundBossAbnormality}"
+                                    SquareTemplate="{StaticResource SquareBossAbnormality}"
+                                    />
+    <ts:AbnormalityTemplateSelector x:Key="PartyAbnormalityTemplateSelector"
+                                    RoundTemplate="{StaticResource  RoundPartyAbnormality}"
+                                    SquareTemplate="{StaticResource SquarePartyAbnormality}"
+                                    />
+    <ts:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
+                                    SimpleTemplate="{StaticResource SimpleTemplate}"
+                                    MoneyTemplate="{StaticResource MoneyTemplate}"
+                                    QuestTemplate="{StaticResource SimpleTemplate}"
+                                    PointOfInterestTemplate="{StaticResource SimpleTemplate}"
+                                    ItemTemplate="{StaticResource SimpleTemplate}"
+                                    EmojiTemplate="{StaticResource EmojiTemplate}"
+                                    />
+    <ts:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
+                                    NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
+                                    WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}" 
+                                    MegaphoneChannelDataTemplate="{StaticResource MegaphoneChannelLabelTemplate}"
+                                    EnchantChannelDataTemplate="{StaticResource EnchantChannelLabelTemplate}"
+                                    />
+    <ts:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
+                                    DefaultAuthorTemplate="{StaticResource DefaultAuthorTemplate}"
+                                    SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}"
+                                    />
+    <ts:EnemyTemplateSelector x:Key="EnemyTemplateSelector" 
+                                    BossDataTemplate="{StaticResource BossDataTemplate}"
+                                    MobDataTemplate="{StaticResource MobDataTemplate}"
+                                    />
+    <ts:MessageBodyDataTemplateSelector x:Key="BodyTemplateSelector"
+                                    BrokerBody="{StaticResource BrokerOfferBody}"
+                                    DefaultBody="{StaticResource DefaultBody}" 
+                                    ApplyBody="{StaticResource ApplyBody}"
+                                    />
+    <ts:AbnormalityTemplateSelector x:Key="RaidAbnormalityTemplateSelector"
+                                    RoundTemplate="{StaticResource  RoundRaidAbnormality}"
+                                    SquareTemplate="{StaticResource SquareRaidAbnormality}"
+                                    />
+
+</ResourceDictionary>

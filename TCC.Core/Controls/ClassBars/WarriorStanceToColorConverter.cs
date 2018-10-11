@@ -17,11 +17,11 @@ namespace TCC.Controls.ClassBars
                 switch (s)
                 {
                     default:
-                        return Application.Current.FindResource("KrBorderColor");
+                        return Application.Current.FindResource("RevampBorderBrush");
                     case WarriorStance.Assault:
-                        return Application.Current.FindResource("AssaultStanceColor");
+                        return Application.Current.FindResource("AssaultStanceBrush");
                     case WarriorStance.Defensive:
-                        return Application.Current.FindResource("DefensiveStanceColor");
+                        return Application.Current.FindResource("DefensiveStanceBrush");
                 }
             }
             else return Brushes.Transparent;

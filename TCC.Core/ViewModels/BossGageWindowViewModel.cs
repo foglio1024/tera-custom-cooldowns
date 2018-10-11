@@ -442,38 +442,51 @@ namespace TCC.ViewModels
             }
         }
 
-        public void RemoveMe(Npc npc)
+        public void RemoveMe(Npc npc, uint delay)
         {
             Dispatcher.Invoke(() =>
             {
                 var b = NpcList.ToSyncArray().FirstOrDefault(x => x == npc);
                 if (b == null) return;
                 b.Buffs.Clear();
-                var dt = new DispatcherTimer(DispatcherPriority.Background, Dispatcher)
+                if (delay != 0)
                 {
-                    Interval = TimeSpan.FromMilliseconds(5500)
-                };
-                dt.Tick += (s, ev) =>
+
+                    var dt = new DispatcherTimer(DispatcherPriority.Background, Dispatcher)
+                    {
+                        Interval = TimeSpan.FromMilliseconds(delay)
+                    };
+                    dt.Tick += (s, ev) =>
+                    {
+                        dt.Stop();
+                        RemoveAndDisposeNPC(b);
+                    };
+                    dt.Start();
+                }
+                else
                 {
-                    dt.Stop();
-                    NpcList.Remove(b);
-                    b.Dispose();
-                };
-                dt.Start();
+                    RemoveAndDisposeNPC(b);
+                }
             });
         }
 
-/*
-        public void UpdateBySkillResult(ulong target, ulong damage)
+        private void RemoveAndDisposeNPC(Npc b)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
-            if (boss != null && !boss.HasGage)
-            {
-                if (boss.CurrentHP - damage < 0) boss.CurrentHP = 0;
-                else boss.CurrentHP -= damage;
-            }
+            NpcList.Remove(b);
+            b.Dispose();
         }
-*/
+
+        /*
+                public void UpdateBySkillResult(ulong target, ulong damage)
+                {
+                    var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+                    if (boss != null && !boss.HasGage)
+                    {
+                        if (boss.CurrentHP - damage < 0) boss.CurrentHP = 0;
+                        else boss.CurrentHP -= damage;
+                    }
+                }
+        */
     }
 
 

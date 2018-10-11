@@ -46,8 +46,8 @@
         <!--Channel-->
         <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}" 
                         Content="{Binding}"
-                        Width="36"   
-                        Margin="2,4,0,0"
+                        Width="38"   
+                        Margin="0,5,0,0"
                         Grid.Column="1"
                         Visibility="{Binding ShowChannel, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         />

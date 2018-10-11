@@ -15,6 +15,9 @@ namespace TCC
 
     public static class FocusManager
     {
+        private static bool _isForeground;
+        private static bool _forceFocused;
+
         // window styles
         // ReSharper disable InconsistentNaming
         private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
@@ -29,11 +32,29 @@ namespace TCC
 
         // events
         public static event Action ForegroundChanged;
+        public static event Action FocusTick;
 
         // properties
-        public static Timer FocusTimer { get; private set; }
-        public static bool IsForeground { get; private set; }
-        public static bool IsActive
+        private static Timer FocusTimer { get; set; }
+
+        public static bool ForceFocused
+        {
+            get => _forceFocused;
+            set
+            {
+                if(_forceFocused == value) return;
+                _forceFocused = value;
+                ForegroundChanged?.Invoke();
+            }
+        }
+
+        public static bool IsForeground
+        {
+            get => _isForeground || ForceFocused;
+            private set => _isForeground = value;
+        }
+
+        private static bool IsActive
         {
             get
             {
@@ -110,6 +131,7 @@ namespace TCC
             }
         }
         private static IntPtr ForegroundWindow => GetForegroundWindow();
+        public static bool PauseTopmost { get; set; }
 
         public static void MakeUnfocusable(IntPtr hwnd)
         {
@@ -141,6 +163,7 @@ namespace TCC
 
         private static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
+            FocusTick?.Invoke();
             if (IsForeground == IsActive) return;
             IsForeground = IsActive;
             ForegroundChanged?.Invoke();
@@ -184,6 +207,12 @@ namespace TCC
         {
             FocusTimer = new Timer(1000);
             FocusTimer.Elapsed += CheckForegroundWindow;
+            FocusTimer.Start();
+        }
+
+        public static void Dispose()
+        {
+            FocusTimer.Stop();
         }
     }
 }

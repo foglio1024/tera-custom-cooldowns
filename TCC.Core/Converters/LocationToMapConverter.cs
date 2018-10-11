@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Windows.Data;
 using TCC.Data;
 
@@ -11,7 +12,7 @@ namespace TCC.Converters
         {
             if (value == null) return null;
             var loc = (Location)value;
-            return AppDomain.CurrentDomain.BaseDirectory + "/resources/images/maps/" + SessionManager.MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg";
+            return Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/images/maps/" + SessionManager.MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

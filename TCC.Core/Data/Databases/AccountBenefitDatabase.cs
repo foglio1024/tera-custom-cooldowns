@@ -15,7 +15,7 @@ namespace TCC.Data.Databases
         public void Load(string lang)
         {
             Benefits = new Dictionary<uint, string>();
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/acc_benefits/acc_benefits-{lang}.tsv");
+            var f = File.OpenText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ $"/resources/data/acc_benefits/acc_benefits-{lang}.tsv");
             while (true)
             {
                 var line = f.ReadLine();

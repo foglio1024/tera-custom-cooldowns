@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
         mc:Ignorable="d"
-        Title="DebugWindow" Height="450" Width="800" Background="{StaticResource KrBgColor}">
+        Title="DebugWindow" Height="450" Width="800" Background="{StaticResource RevampBackgroundBrush}">
     <Grid>
         <StackPanel Orientation="Horizontal" >
             <TextBlock Text="Queued Packets:" Foreground="White" Opacity=".7"/>

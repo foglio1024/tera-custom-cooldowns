@@ -173,6 +173,7 @@ namespace TCC
 
         public static Color ParseColor(string col)
         {
+            if (col.StartsWith("#")) col = col.Substring(1);
             return Color.FromRgb(
                 Convert.ToByte(col.Substring(0, 2), 16),
                 Convert.ToByte(col.Substring(2, 2), 16),

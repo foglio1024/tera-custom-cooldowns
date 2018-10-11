@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TCC.Data;
@@ -39,7 +40,7 @@ namespace TCC.Parsing.Messages
                 reader.Skip(2); //c.detailsCount = reader.ReadInt16();
                 reader.Skip(2); //c.details2offset = reader.ReadInt16();
                 reader.Skip(2); //c.details2count = reader.ReadInt16();
-                reader.Skip(2); //c.guildOffset = reader.ReadInt16();
+                var guildOffset = reader.ReadInt16();
                 c.Id = reader.ReadUInt32();
                 reader.Skip(4); //c.gender = reader.ReadInt32();
                 reader.Skip(4); //c.race = reader.ReadInt32();
@@ -128,6 +129,16 @@ namespace TCC.Parsing.Messages
 
                 reader.BaseStream.Position = nameOffset - 4;
                 c.Name = reader.ReadTeraString();
+                try
+                {
+                reader.BaseStream.Position = guildOffset - 4;
+                    c.GuildName = reader.ReadTeraString();
+                }
+                catch (Exception e)
+                {
+                    
+
+                }
 
                 //c.details = new byte[c.detailsCount];
                 //for (int j = 0; j < c.detailsCount; j++)
@@ -143,7 +154,7 @@ namespace TCC.Parsing.Messages
 
                 //c.guild = reader.ReadTeraString();
 
-                CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos, InfoWindowViewModel.Instance.GetDispatcher(), (Laurel)c.Laurel));
+                CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos, InfoWindowViewModel.Instance.GetDispatcher(), (Laurel)c.Laurel){GuildName =  c.GuildName});
 
             }
             CharacterList = CharacterList.OrderBy(ch => ch.Position).ToList();
@@ -157,6 +168,7 @@ namespace TCC.Parsing.Messages
         public string Name;
         internal int Pos;
         internal int Laurel;
+        public string GuildName = "";
 
         public override string ToString()
         {
