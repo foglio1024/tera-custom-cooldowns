@@ -82,7 +82,7 @@
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource KrBg}"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -93,7 +93,7 @@
                 </FrameworkElement.RenderTransform>
             </Border>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -115,7 +115,7 @@
                 </FrameworkElement.RenderTransform>
 
             </local:RhombBuffCooldownControl>
-            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
+            <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
                            FontWeight="DemiBold" Foreground="#afff" 
                        Text="{Binding Focus.Stacks}" 
                        Width="45" VerticalAlignment="Center">

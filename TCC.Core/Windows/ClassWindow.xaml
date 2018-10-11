@@ -81,6 +81,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 

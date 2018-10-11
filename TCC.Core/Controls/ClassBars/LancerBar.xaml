@@ -38,14 +38,14 @@
                 <Grid x:Name="LineHeldContainer" >
                     <Grid.Resources>
                         <Style TargetType="Rectangle">
-                            <Setter Property="Fill" Value="{StaticResource TankRoleColor}"></Setter>
+                            <Setter Property="Fill" Value="{StaticResource TankRoleBrush}"></Setter>
                             <Setter Property="Opacity" Value="0"></Setter>
                             <Setter Property="RenderTransformOrigin" Value=".5 .5"></Setter>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding LH.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="{StaticResource TankRoleColorBase}" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource TankRoleColor}" BlurRadius="15" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
@@ -53,14 +53,14 @@
 
                         </Style>
                         <Style TargetType="Polygon">
-                            <Setter Property="Fill" Value="{StaticResource TankRoleColor}"/>
+                            <Setter Property="Fill" Value="{StaticResource TankRoleBrush}"/>
                             <Setter Property="Opacity" Value="0"/>
                             <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding LH.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="{StaticResource TankRoleColorBase}" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource TankRoleColor}" BlurRadius="15" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
@@ -174,7 +174,7 @@
                     </Rectangle>
                 </Grid>
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource KrBg}"
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -185,7 +185,7 @@
                 </FrameworkElement.RenderTransform>
             </Border>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -218,7 +218,7 @@
             </local:OutlinedTextBlock>
 
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -245,7 +245,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            --><!--<Border Style="{StaticResource Styles.DefaultBorder}"
+            --><!--<Border Style="{StaticResource DefaultBorderStyle}"
                     Grid.Row="0"
                     Grid.Column="0"
                     CornerRadius="29"
@@ -259,7 +259,7 @@
                 <local:RhombBuffCooldownControl DataContext="{Binding AdrenalineRush}" Margin="0,0,0,0" VerticalAlignment="Top"/>
                 <local:RhombBuffCooldownControl DataContext="{Binding GuardianShout}" Margin="-39 34 0 0" VerticalAlignment="Top"/>
                 <local:RhombBuffCooldownControl DataContext="{Binding Infuriate}" Margin="-39,0,0,0" VerticalAlignment="Top"/>
-                <Border  Style="{StaticResource Styles.DefaultBorder}"  Height="48" Effect="{x:Null}"
+                <Border  Style="{StaticResource DefaultBorderStyle}"  Height="48" Effect="{x:Null}"
                          HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="48" 
                          CornerRadius="25" >
                     
@@ -268,29 +268,29 @@
                                     Width="46" Height="46" Stroke="#2fff" StrokeThickness="5">
                         </local:Arc>
                         <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
-                                    Width="46" Height="46" Stroke="{StaticResource AssaultStanceColor}" StrokeThickness="5">
+                                    Width="46" Height="46" Stroke="{StaticResource AssaultStanceBrush}" StrokeThickness="5">
                         </local:Arc>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="0"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="36"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="72" />
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="108"/>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="144"/>
                             </Rectangle.LayoutTransform>

@@ -49,9 +49,9 @@ namespace TCC.Controls.ClassBars
                         if (i < _dc.EdgeCounter.Val)
                         {
                             rects[i].Opacity = 1;
-                            ((Rectangle) rects[i]).Fill = i < 8 ? i == 7 ? Application.Current.FindResource("AquadraxColor") as SolidColorBrush :
-                                                                            Application.Current.FindResource("IgnidraxColor") as SolidColorBrush :
-                                                                            Application.Current.FindResource("HpColor") as SolidColorBrush;
+                            ((Rectangle) rects[i]).Fill = i < 8 ? i == 7 ? Application.Current.FindResource("AquadraxBrush") as SolidColorBrush :
+                                                                            Application.Current.FindResource("IgnidraxBrush") as SolidColorBrush :
+                                                                            Application.Current.FindResource("HpBrush") as SolidColorBrush;
                         }
                         else
                         {

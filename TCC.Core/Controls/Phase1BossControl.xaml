@@ -13,7 +13,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Style="{StaticResource Styles.DefaultBorder}" 
+        <Border Style="{StaticResource DefaultBorderStyle}" 
                 CornerRadius="3"
                 Grid.RowSpan="1"/>
         <ItemsControl ItemTemplate="{StaticResource DragonIndicator}" 

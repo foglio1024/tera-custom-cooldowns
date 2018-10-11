@@ -19,7 +19,7 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
@@ -32,7 +32,7 @@
                 </local:RhombBuffCooldownControl>
 
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Margin="9" Background="{StaticResource KrBg}"
+            <Border BorderBrush="#89a" BorderThickness="1" Margin="9" Background="{StaticResource RevampBackgroundGradientBrush}"
                     RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
@@ -43,7 +43,7 @@
                 </FrameworkElement.RenderTransform>
             </Border>
             <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -66,7 +66,7 @@
                 </FrameworkElement.RenderTransform>
 
             </local:RhombBuffCooldownControl>
-            <Polygon Fill="{StaticResource KrBgColor}"
+            <Polygon Fill="{StaticResource RevampBackgroundBrush}"
                      Points="0 0 1 0 2 1 -1 1"
                      Stroke="#89a"
                      Visibility="Collapsed"
@@ -79,7 +79,7 @@
             </Polygon>
             <Grid>
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
@@ -96,7 +96,7 @@
                 </local:RhombBuffCooldownControl>
 
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                    Background="{StaticResource KrBg}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
@@ -117,7 +117,7 @@
     </Grid>
     <!--<Grid Margin="5" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
-            <Border Style="{StaticResource Styles.DefaultBorder}"
+            <Border Style="{StaticResource DefaultBorderStyle}"
                     Grid.Row="0"
                     Grid.Column="0"
                     CornerRadius="29"

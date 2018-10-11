@@ -181,7 +181,7 @@ namespace TCC
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                    File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                              ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                              "\r\n" + ex.TargetSite);
                 }
@@ -219,7 +219,7 @@ namespace TCC
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                    File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                              ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                              "\r\n" + ex.TargetSite);
                     //MessageBox.Show("Error while checking updates. More info in update-check-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -252,19 +252,19 @@ namespace TCC
                     while (!ready) Thread.Sleep(1);
 
                     App.SplashScreen.SetText("Extracting zip...");
-                    if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "/tmp")) Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "/tmp", true);
-                    ZipFile.ExtractToDirectory("update.zip", AppDomain.CurrentDomain.BaseDirectory + "/tmp");
+                    if (Directory.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/tmp")) Directory.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/tmp", true);
+                    ZipFile.ExtractToDirectory("update.zip", Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/tmp");
                     App.SplashScreen.SetText("Moving files...");
 
-                    File.Move(AppDomain.CurrentDomain.BaseDirectory + "/tmp/TCCupdater.exe", AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
+                    File.Move(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/tmp/TCCupdater.exe", Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/TCCupdater.exe");
                     App.SplashScreen.SetText("Starting updater...");
 
-                    Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe", "update");
+                    Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/TCCupdater.exe", "update");
                     Environment.Exit(0);
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/update-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                    File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/update-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
          ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
          "\r\n" + ex.TargetSite);
                     //           MessageBox.Show("Error while checking updates. More info in update-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);

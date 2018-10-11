@@ -24,7 +24,7 @@
                Margin="17,0,0,0" 
                Opacity=".3"
                x:Name="Img"/>
-        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+        <TextBlock Style="{StaticResource DefaultTextStyle}" 
                    Grid.Column="1" 
                    Margin="10,0,14,0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}" 

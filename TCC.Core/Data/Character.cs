@@ -17,9 +17,10 @@ namespace TCC.Data
         private int _credits;
         private bool _isLoggedIn;
         private bool _isSelected;
-        private int _guardianQuests;
+        private int _claimedGuardianQuests;
         private int _maxGuardianQuests = 40;
         private uint _elleonMarks;
+        private int _clearedGuardianQuests;
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -62,6 +63,7 @@ namespace TCC.Data
             }
         }
 
+        public string GuildName { get; set; } = "";
         public void UpdateDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
             foreach (var keyVal in dungeonCooldowns)
@@ -128,7 +130,7 @@ namespace TCC.Data
         }
         public double VanguardWeeklyCompletion => WeekliesDone / (double)SessionManager.MaxWeekly;
         public double VanguardDailyCompletion => DailiesDone / (double)SessionManager.MaxDaily;
-        public double GuardianCompletion => GuardianQuests / (double)MaxGuardianQuests;
+        public double GuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
         public ICollectionView VisibleDungeons { get; set; }
@@ -142,14 +144,14 @@ namespace TCC.Data
         public GearItem Circlet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
         public ICollectionView Jewels { get; set; }
 
-        public int GuardianQuests
+        public int ClaimedGuardianQuests
         {
-            get => _guardianQuests;
+            get => _claimedGuardianQuests;
             set
             {
-                if (_guardianQuests == value) return;
-                _guardianQuests = value;
-                NPC(nameof(GuardianQuests));
+                if (_claimedGuardianQuests == value) return;
+                _claimedGuardianQuests = value;
+                NPC();
                 NPC(nameof(GuardianCompletion));
             }
         }
@@ -159,7 +161,7 @@ namespace TCC.Data
             {
                 if (_maxGuardianQuests == value) return;
                 _maxGuardianQuests = value;
-                NPC(nameof(MaxGuardianQuests));
+                NPC();
                 NPC(nameof(GuardianCompletion));
             }
         }
@@ -172,6 +174,18 @@ namespace TCC.Data
                 _elleonMarks = value;
                 NPC(nameof(ElleonMarks));
             }
+        }
+
+        public int ClearedGuardianQuests
+        {
+            get => _clearedGuardianQuests;
+            set
+            {
+                if (_clearedGuardianQuests == value) return;
+                _clearedGuardianQuests = value;
+                NPC();
+            }
+
         }
 
         public Character(string name, Class c, uint id, int pos, Dispatcher d, Laurel l = Laurel.None)

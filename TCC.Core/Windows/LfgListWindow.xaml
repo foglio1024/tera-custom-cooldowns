@@ -49,19 +49,19 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
 
-                    <TextBlock Foreground="#6fff" Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0"
+                    <TextBlock Foreground="#6fff" Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0"
                                VerticalAlignment="Center">
                         <Run Text="lv." Foreground="#5999" FontSize="10" />
                         <Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10" />
                         <Run Text="{Binding Name, Mode=OneWay}" />
                     </TextBlock>
-                    <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
+                    <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldBrush}" Height="8"
                           Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
                           HorizontalAlignment="Right" Margin="5 0 5 1" />
                 </StackPanel>
 
                 <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
-                           Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0" VerticalAlignment="Center">
+                           Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0" VerticalAlignment="Center">
                 </TextBlock>
             </Grid>
             <DataTemplate.Triggers>
@@ -115,19 +115,19 @@
                                 ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Foreground="{StaticResource GoldColor}" Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0"
+                    <TextBlock Foreground="{StaticResource GoldBrush}" Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0"
                                VerticalAlignment="Center">
                         <Run Text="lv." Foreground="#5999" FontSize="10" />
                         <Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10" />
                         <Run Text="{Binding Name, Mode=OneWay}" />
                     </TextBlock>
-                    <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
+                    <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldBrush}" Height="8"
                           Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
                           HorizontalAlignment="Right" Margin="5 0 5 1" />
                 </StackPanel>
 
                 <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
-                           Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0" VerticalAlignment="Center">
+                           Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0" VerticalAlignment="Center">
                 </TextBlock>
                 <UniformGrid Grid.Column="3" Rows="1">
                     <UniformGrid.Resources>
@@ -138,13 +138,13 @@
                             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                         </Style>
                     </UniformGrid.Resources>
-                    <Button Background="{StaticResource GreenColor}" Click="AcceptApply" >
+                    <Button Background="{StaticResource GreenBrush}" Click="AcceptApply" >
                         <Path Data="{StaticResource SvgCheckCircle}"/>
                     </Button>
-                    <Button Background="{StaticResource Colors.Chat.Party}" Click="InspectApplicant">
+                    <Button Background="{StaticResource ChatPartyBrush}" Click="InspectApplicant">
                         <Path Data="{StaticResource SvgEye}" />
                     </Button>
-                    <Button Background="{StaticResource HpColor}" Click="RefuseApplicant">
+                    <Button Background="{StaticResource HpBrush}" Click="RefuseApplicant">
                         <Path Data="{StaticResource SvgClose}"/>
                     </Button>
                 </UniformGrid>
@@ -197,18 +197,18 @@
                            PreviewMouseLeftButtonDown="OnLfgMessageMouseButtonDown"
                            FontSize="14"
                            FontWeight="Thin"
-                           Style="{StaticResource Styles.DefaultText}"
+                           Style="{StaticResource DefaultTextStyle}"
                            HorizontalAlignment="Left"
                            Margin="6 0 0 0"
                            VerticalAlignment="Center"
                            Grid.Column="1" />
                 <TextBlock Text="{Binding LeaderName}"
-                           Style="{StaticResource Styles.DefaultText}"
+                           Style="{StaticResource DefaultTextStyle}"
                            Grid.Column="2"
                            x:Name="LeaderNameTb"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left" />
-                <TextBlock Style="{StaticResource Styles.DefaultText}"
+                <TextBlock Style="{StaticResource DefaultTextStyle}"
                            Grid.Column="3"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center">
@@ -270,7 +270,7 @@
                     </ListBox.LayoutTransform>
                 </ListBox>
                 <controls:Arc StrokeThickness="10"
-                              Stroke="{StaticResource Tier5DungeonColor}"
+                              Stroke="{StaticResource Tier5DungeonBrush}"
                               Grid.Column="4"
                               Width="22"
                               Height="22"
@@ -379,14 +379,14 @@
                     </DataTrigger.ExitActions>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsTrade}" Value="True">
-                    <Setter TargetName="Ell" Property="Fill" Value="{StaticResource Colors.Chat.Trade}"/>
-                    <Setter TargetName="EllExt" Property="Fill" Value="{StaticResource Colors.Chat.Trade}" />
-                    <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource Colors.Chat.Trade}"></Setter>
-                    <Setter TargetName="LeaderNameTb" Property="Foreground" Value="{StaticResource Colors.Chat.Trade}"></Setter>
+                    <Setter TargetName="Ell" Property="Fill" Value="{StaticResource ChatTradeBrush}"/>
+                    <Setter TargetName="EllExt" Property="Fill" Value="{StaticResource ChatTradeBrush}" />
+                    <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource ChatTradeBrush}"></Setter>
+                    <Setter TargetName="LeaderNameTb" Property="Foreground" Value="{StaticResource ChatTradeBrush}"></Setter>
                     <Setter Property="Opacity" Value="1"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsTwitch}" Value="True">
-                    <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource TwitchColor}"></Setter>
+                    <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource TwitchBrush}"></Setter>
                     <Setter TargetName="MessageTb" Property="Cursor" Value="Hand"></Setter>
                 </DataTrigger>
 
@@ -396,14 +396,14 @@
                     <Setter Property="IsHitTestVisible" TargetName="ApplicantsBtn" Value="True"></Setter>
                     <Setter Property="Visibility" TargetName="cdArc" Value="Collapsed"></Setter>
                     <Setter Property="Visibility" TargetName="applicants" Value="Visible"></Setter>
-                    <!--<Setter Property="Fill" TargetName="Ell" Value="{StaticResource GoldColor}"></Setter>
-                    <Setter Property="Fill" TargetName="EllExt" Value="{StaticResource GoldColor}"></Setter>-->
-                    <Setter Property="Foreground" TargetName="MessageTb" Value="{StaticResource GoldColor}"></Setter>
+                    <!--<Setter Property="Fill" TargetName="Ell" Value="{StaticResource GoldBrush}"></Setter>
+                    <Setter Property="Fill" TargetName="EllExt" Value="{StaticResource GoldBrush}"></Setter>-->
+                    <Setter Property="Foreground" TargetName="MessageTb" Value="{StaticResource GoldBrush}"></Setter>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
     </Window.Resources>
-    <Border Background="{StaticResource DefaultBackgroundColor}"
+    <Border Background="{StaticResource DefaultBackgroundBrush}"
             CornerRadius="1" Effect="{StaticResource DropShadow}"
             BorderThickness="1" BorderBrush="#8555"
             Margin="6" Width="600" HorizontalAlignment="Stretch">
@@ -483,7 +483,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid ClipToBounds="True" Background="{StaticResource DefaultBackgroundColor}" x:Name="NewMessageGrid"
+                <Grid ClipToBounds="True" Background="{StaticResource DefaultBackgroundBrush}" x:Name="NewMessageGrid"
                       Margin="5 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -533,17 +533,17 @@
                 <UniformGrid Grid.Row="2" Rows="1" x:Name="LfgMgmtBtn">
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton"
                             Click="RemoveMessageButton_Click"
-                            Margin="5" Background="{StaticResource HpColor}"
+                            Margin="5" Background="{StaticResource HpBrush}"
                             tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="EditMessageButton"
                             Click="CreateMessageBtn_Click"
-                            Margin="5" Background="{StaticResource  IgnidraxColor}"
+                            Margin="5" Background="{StaticResource  IgnidraxBrush}"
                             tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Edit message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Grid Margin="5">
                         <Button Style="{StaticResource ButtonMainStyle}"
-                                Background="{StaticResource GreenColor}" FontSize="15" FontWeight="Thin"
+                                Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
                                 tcc:ButtonExtensions.CornerRadius="3" Padding="0 4" Click="PublicizeBtn_Click"
                                 Content="Publicize" HorizontalContentAlignment="Center" x:Name="PublicizeBtn" />
                         <Border Background="#6fff" CornerRadius="3" HorizontalAlignment="Left" Margin=" 0"

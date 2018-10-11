@@ -15,7 +15,7 @@ namespace TCC.Data.Databases
         public AbnormalityDatabase(string lang)
         {
             Abnormalities = new Dictionary<uint, Abnormality>();
-            var hd = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/hotdot/hotdot-" + lang +".tsv");
+            var hd = File.OpenText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/resources/data/hotdot/hotdot-" + lang +".tsv");
             while (true)
             {
                 var l = hd.ReadLine();

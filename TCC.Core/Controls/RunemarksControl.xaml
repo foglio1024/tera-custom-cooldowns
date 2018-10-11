@@ -6,7 +6,7 @@
              mc:Ignorable="d"  >
     <Border RenderTransform="{StaticResource Skew45}" 
             Background="#a223" 
-            BorderBrush="{StaticResource KrBorderColor}"
+            BorderBrush="{StaticResource RevampBorderBrush}"
             BorderThickness="2 1"
             RenderTransformOrigin=".5 1"
             Padding="2 1">
@@ -46,7 +46,7 @@
 
     </UserControl.Resources>
     <Grid Margin="0" x:Name="Root" >
-        <Border Style="{StaticResource Styles.DefaultBorder}" 
+        <Border Style="{StaticResource DefaultBorderStyle}" 
                 Opacity="1" 
                 Height="26" 
                 CornerRadius="0" 

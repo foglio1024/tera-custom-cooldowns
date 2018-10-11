@@ -172,7 +172,6 @@ namespace TCC
 
             if (Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
-            FocusManager.FocusTimer.Start();
 
         }
 
@@ -202,7 +201,7 @@ namespace TCC
         //}
         public static void Dispose()
         {
-            FocusManager.FocusTimer.Stop();
+            FocusManager.Dispose();
             TrayIcon?.Dispose();
 
 

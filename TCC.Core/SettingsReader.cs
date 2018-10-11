@@ -77,13 +77,13 @@ namespace TCC
                 BackgroundOpacity = op != null ? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
             };
         }
-        private Dictionary<Class, Point> ParseWindowPositions(XElement windowSettingXElement)
+        private ClassPositions ParseWindowPositions(XElement windowSettingXElement)
         {
-            Dictionary<Class, Point> positions = null;
+            ClassPositions positions = null;
             try
             {
                 var pss = windowSettingXElement.Descendants().FirstOrDefault(s => s.Name == "Positions");
-                if (pss != null) positions = new Dictionary<Class, Point>();
+                if (pss != null) positions = new ClassPositions();
                 pss?.Descendants().Where(s => s.Name == "Position").ToList().ForEach(pos =>
                 {
                     var clAttr = pos.Attribute("class");
@@ -93,7 +93,13 @@ namespace TCC
                     var cl = (Class)Enum.Parse(typeof(Class), clAttr.Value);
                     var px = double.Parse(pxAttr.Value, CultureInfo.InvariantCulture);
                     var py = double.Parse(pyAttr.Value, CultureInfo.InvariantCulture);
-                    positions.Add(cl, new Point(px, py));
+                    positions.SetPosition(cl, new Point(px, py));
+                    var bpAttr = pos.Attribute("ButtonsPosition");
+                    if (bpAttr != null)
+                    {
+                        var bp = (ButtonsPosition)Enum.Parse(typeof(ButtonsPosition), bpAttr.Value);
+                        positions.SetButtons(cl, (ButtonsPosition)bp);
+                    }
                 });
             }
             catch (Exception)
@@ -155,10 +161,10 @@ namespace TCC
 
         public void LoadWindowSettings()
         {
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) return;
+            if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) return;
             try
             {
-                _settingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
 
                 foreach (var ws in _settingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
                 {
@@ -189,7 +195,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
                 LoadWindowSettings();
             }
         }
@@ -197,8 +203,8 @@ namespace TCC
         {
             try
             {
-                if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) return;
-                _settingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) return;
+                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
 
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -276,7 +282,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
                 LoadSettings();
             }
         }

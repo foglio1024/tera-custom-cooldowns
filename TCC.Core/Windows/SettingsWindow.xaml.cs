@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -48,7 +49,7 @@ namespace TCC.Windows
                 if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, a);
-            WindowManager.ForegroundManager.RefreshVisible();
+            //WindowManager.ForegroundManager.RefreshVisible();
 
         }
 
@@ -90,7 +91,7 @@ namespace TCC.Windows
 
         private void OpenSettingsFolder(object sender, RoutedEventArgs e)
         {
-            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/resources/config");
+            Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/config");
         }
 
 /*

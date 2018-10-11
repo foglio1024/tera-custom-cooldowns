@@ -31,8 +31,8 @@
             <Border Style="{StaticResource Aura}" x:Name="CritRes" Background="#ff97" Visibility="Hidden"/>
         </UniformGrid>
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
-            <Border Style="{StaticResource Aura}" x:Name="Crit" Background="{StaticResource HpColor}" Visibility="Hidden"/>
-            <Border Style="{StaticResource Aura}" x:Name="Mp" Background="{StaticResource MpColor}" Visibility="Hidden"/>
+            <Border Style="{StaticResource Aura}" x:Name="Crit" Background="{StaticResource HpBrush}" Visibility="Hidden"/>
+            <Border Style="{StaticResource Aura}" x:Name="Mp" Background="{StaticResource MpBrush}" Visibility="Hidden"/>
         </UniformGrid>
 <!--<Grid.Effect>
     <DropShadowEffect ShadowDepth="2" Opacity=".4"></DropShadowEffect>

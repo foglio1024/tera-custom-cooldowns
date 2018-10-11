@@ -11,113 +11,111 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var ch =  (ChatChannel?) value ?? ChatChannel.Say;
+            var ch = (ChatChannel?)value ?? ChatChannel.Say;
+            string resName;
             switch (ch)
             {
                 case ChatChannel.Say:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Say");
+                    resName = "ChatSayBrush"; break;
                 case ChatChannel.Party:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Party");
+                    resName = "ChatPartyBrush"; break;
                 case ChatChannel.Guild:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Guild");
+                    resName = "ChatGuildBrush"; break;
                 case ChatChannel.Area:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Area");
+                    resName = "ChatAreaBrush"; break;
                 case ChatChannel.Trade:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Trade");
+                    resName = "ChatTradeBrush"; break;
                 case ChatChannel.Greet:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Greet");
+                    resName = "ChatGreetBrush"; break;
                 case ChatChannel.PartyNotice:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.PartyNotice");
+                    resName = "ChatPartyNoticeBrush"; break;
                 case ChatChannel.RaidNotice:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.RaidNotice");
+                    resName = "ChatRaidNoticeBrush"; break;
                 case ChatChannel.Emote:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Emote");
+                    resName = "ChatEmoteBrush"; break;
                 case ChatChannel.Global:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Global");
+                    resName = "ChatGlobalBrush"; break;
                 case ChatChannel.Raid:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Raid");
+                    resName = "ChatRaidBrush"; break;
                 case ChatChannel.Megaphone:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Megaphone");
+                    resName = "ChatMegaphoneBrush"; break;
                 case ChatChannel.GuildAdvertising:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.GuildAd");
+                    resName = "ChatGuildAdBrush"; break;
                 case ChatChannel.Private1:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Private");
                 case ChatChannel.Private2:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Private");
                 case ChatChannel.Private3:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Private");
                 case ChatChannel.Private4:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Private");
                 case ChatChannel.Private5:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Private");
                 case ChatChannel.Private6:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Private");
+                    resName = "ChatPrivateBrush"; break;
                 case ChatChannel.Private7:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Proxy");
                 case ChatChannel.Private8:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Proxy");
+                    resName = "ChatProxyBrush"; break;
                 case ChatChannel.SentWhisper:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Whisper");
                 case ChatChannel.ReceivedWhisper:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Whisper");
+                    resName = "ChatWhisperBrush"; break;
                 case ChatChannel.System:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Generic");
+                    resName = "ChatSystemGenericBrush"; break;
                 case ChatChannel.Notify:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Notify");
+                    resName = "ChatSystemNotifyBrush"; break;
                 case ChatChannel.Event:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Event");
+                    resName = "ChatSystemEventBrush"; break;
                 case ChatChannel.Error:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Error");
+                    resName = "ChatSystemErrorBrush"; break;
                 case ChatChannel.Group:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Group");
+                    resName = "ChatSystemGroupBrush"; break;
                 case ChatChannel.GuildNotice:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Guild");
+                    resName = "ChatGuildBrush"; break;
                 case ChatChannel.Deathmatch:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Deathmatch");
+                    resName = "ChatSystemDeathmatchBrush"; break;
                 case ChatChannel.ContractAlert:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.ContractAlert");
+                    resName = "ChatSystemContractAlertBrush"; break;
                 case ChatChannel.GroupAlerts:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.GroupAlert");
+                    resName = "ChatSystemGroupAlertBrush"; break;
                 case ChatChannel.Loot:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Loot");
+                    resName = "ChatSystemLootBrush"; break;
                 case ChatChannel.Exp:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Exp");
+                    resName = "ChatSystemExpBrush"; break;
                 case ChatChannel.Money:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Money");
+                    resName = "ChatSystemMoneyBrush"; break;
                 case ChatChannel.TradeRedirect:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Trade");
+                    resName = "ChatTradeBrush"; break;
                 case ChatChannel.Enchant12:
                 case ChatChannel.Enchant7:
                 case ChatChannel.Enchant8:
-                    return Brushes.Orange;
+                    resName = "EnchantLowBrush"; break;
                 case ChatChannel.Enchant9:
                 case ChatChannel.Laurel:
                 case ChatChannel.Enchant15:
-                    return Brushes.OrangeRed;
+                    resName = "EnchantHighBrush"; break;
                 case ChatChannel.RaidLeader:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.RaidNotice");
+                    resName = "ChatRaidNoticeBrush"; break;
                 case ChatChannel.TCC:
-                    return (SolidColorBrush)Application.Current.FindResource("MainColor");
+                    resName = "MainBrush"; break;
                 case ChatChannel.Bargain:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Bargain");
+                    resName = "ChatSystemBargainBrush"; break;
                 case ChatChannel.Apply:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.Megaphone");
+                    resName = "ChatMegaphoneBrush"; break;
                 case ChatChannel.Death:
                 case ChatChannel.Damage:
-                    return (SolidColorBrush)Application.Current.FindResource("HpColor");
+                    resName = "HpBrush"; break;
                 case ChatChannel.Ress:
-                    return (SolidColorBrush)Application.Current.FindResource("LightGreenColor");
+                    resName = "LightGreenBrush"; break;
                 case ChatChannel.Quest:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Quest");
+                    resName = "ChatSystemQuestBrush"; break;
                 case ChatChannel.Friend:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Friend");
+                    resName = "ChatSystemFriendBrush"; break;
                 case ChatChannel.Twitch:
-                    return (SolidColorBrush)Application.Current.FindResource("TwitchColor");
+                    resName = "TwitchBrush"; break;
                 case ChatChannel.WorldBoss:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.WorldBoss");
+                    resName = "ChatSystemWorldBossBrush"; break;
+                case ChatChannel.Guardian:
+                    resName = "GuardianBrush"; break;
                 default:
-                    return (SolidColorBrush)Application.Current.FindResource("Colors.Chat.System.Generic");
+                    resName = "ChatSystemGenericBrush"; break;
             }
+            return (SolidColorBrush)Application.Current.FindResource(resName);
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

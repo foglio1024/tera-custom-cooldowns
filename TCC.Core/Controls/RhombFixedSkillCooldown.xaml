@@ -50,7 +50,7 @@
             </Grid>
 
             <Rectangle Width="61" Height="61" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
-                       OpacityMask="{StaticResource IconOpacityBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                       OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Rectangle.Fill>
@@ -133,7 +133,7 @@
                    EndAngle=".01" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" 
-                   OpacityMask="{StaticResource IconOpacityBrush}">
+                   OpacityMask="{StaticResource RhombOpacityMask}">
         </local:Arc>
         <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
                    Fill="#9fff" Name="Glow" Opacity="0"
@@ -186,8 +186,8 @@
               ClipToBounds="False"
               Margin="0 0 0 6"
               Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:RhombFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Border Background="{StaticResource KrBgColor}" CornerRadius="0" RenderTransformOrigin=".5 .5"
-                    Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource KrBorderColor}"
+            <Border Background="{StaticResource RevampBackgroundBrush}" CornerRadius="0" RenderTransformOrigin=".5 .5"
+                    Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource RevampBorderBrush}"
                     BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"
                     Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"/>
             <TextBlock Foreground="#dfff" 
@@ -204,7 +204,7 @@
         <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="UserControl_MouseEnter" Fill="#01000000"/>
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="DeleteButton"
               MouseLeftButtonDown="DeleteButton_MouseLeftButtonDown">
-            <Ellipse Fill="{StaticResource HpColor}" Effect="{StaticResource DropShadow}"></Ellipse>
+            <Ellipse Fill="{StaticResource HpBrush}" Effect="{StaticResource DropShadow}"></Ellipse>
             <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
         <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity="1" Margin="2" RenderTransformOrigin=".5 .5">

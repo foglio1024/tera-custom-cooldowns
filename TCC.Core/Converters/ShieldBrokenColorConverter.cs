@@ -14,9 +14,9 @@ namespace TCC.Converters
             switch ((ShieldStatus?)value) //TODO: triggers
             {
                 case ShieldStatus.On:
-                    return Application.Current.FindResource("MpColor");
+                    return Application.Current.FindResource("MpBrush");
                 case ShieldStatus.Broken:
-                    return Application.Current.FindResource("GreenColor");
+                    return Application.Current.FindResource("GreenBrush");
                 case ShieldStatus.Failed:
                     return Brushes.Red;
                 default:

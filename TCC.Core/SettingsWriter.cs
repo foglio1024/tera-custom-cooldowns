@@ -39,8 +39,8 @@ namespace TCC
             if (!doc.HasElements) return;
             try
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml")) File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml", AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml.bak", true);
-                doc.Save(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) File.Copy(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml", Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml.bak", true);
+                doc.Save(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
             }
             catch (Exception)
             {
@@ -163,6 +163,7 @@ namespace TCC
         private static XElement BuildChatWindowSettings()
         {
             var result = new XElement("ChatWindows");
+            if (ChatWindowManager.Instance.ChatWindows.Count == 0) return result;
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
                 if (cw.VM.Tabs.Count == 0) return;

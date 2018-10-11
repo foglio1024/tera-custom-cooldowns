@@ -24,7 +24,7 @@ namespace TCC.Windows
             InitializeComponent();
             //ButtonsRef = buttons;
             MainContent = content;
-            Init(ws, false);
+            Init(ws, false, true, false);
             _opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             _opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowManager.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
@@ -42,7 +42,7 @@ namespace TCC.Windows
         {
             if (e.NewValue)
             {
-                FocusManager.FocusTimer.Enabled = false;
+                FocusManager.ForceFocused = true; //FocusTimer.Enabled = false;
                 return;
             }
 
@@ -65,6 +65,8 @@ namespace TCC.Windows
             {
                 VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
+            FocusManager.ForceFocused = false; 
+
         }
 
         public void UpdateSettings()
@@ -328,7 +330,7 @@ namespace TCC.Windows
                 }
             }
             UpdateSettings();
-            if (!FocusManager.FocusTimer.Enabled) FocusManager.FocusTimer.Enabled = true;
+            if (!FocusManager.ForceFocused == true) FocusManager.ForceFocused = false; //FocusTimer.Enabled = true;
         }
 
 

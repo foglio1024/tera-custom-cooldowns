@@ -17,7 +17,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Background="{StaticResource KrBgColor}" BorderBrush="{StaticResource KrBorderColor}"
+            <Border Background="{StaticResource RevampBackgroundBrush}" BorderBrush="{StaticResource RevampBorderBrush}"
                 BorderThickness="1" Grid.RowSpan="2" Opacity=".5" >
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".7" />

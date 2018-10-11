@@ -79,6 +79,7 @@ namespace TCC.ViewModels
             NPC(nameof(Formed));
             NPC(nameof(AmILeader));
             NPC(nameof(ShowDetails));
+            NPC(nameof(ShowLeaveButton));
             NPC(nameof(AliveCount));
             NPC(nameof(ReadyCount));
             NPC(nameof(ShowLeaderButtons));

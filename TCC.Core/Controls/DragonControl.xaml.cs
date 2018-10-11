@@ -36,7 +36,7 @@ namespace TCC.Controls
         {
             try
             {
-                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext);
+                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext, 0);
             }
             catch
             {

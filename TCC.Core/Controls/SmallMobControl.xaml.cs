@@ -75,7 +75,7 @@ namespace TCC.Controls
             try
             {
                 SettingsWindowViewModel.AbnormalityShapeChanged -= OnViewModelPropertyChanged;
-                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext);
+                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext, 0);
             }
             catch
             {

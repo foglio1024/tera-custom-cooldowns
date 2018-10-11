@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using System.Threading;
+using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.Sniffing;
@@ -138,7 +140,7 @@ namespace TCC.Parsing
                 srcName = srcName != ""
                     ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
                     : "<font color=\"#cccccc\">.</font>";
-                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", $"<font color=\"#cccccc\">Received </font> <font>{-p.Diff}</font> <font color=\"#cccccc\"> (</font><font>{-p.Diff/(double)p.MaxHP:P}</font><font color=\"#cccccc\">)</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
             }
             SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
             if (p.Target == SessionManager.CurrentPlayer.EntityId)
@@ -214,6 +216,7 @@ namespace TCC.Parsing
                     ch.Name = item.Name;
                     ch.Laurel = item.Laurel;
                     ch.Position = item.Position;
+                    ch.GuildName = item.GuildName;
                 }
                 else
                 {
@@ -262,6 +265,10 @@ namespace TCC.Parsing
             //CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
             //SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
+
+            if(Settings.LastRegion == "NA")
+                 Task.Delay(20000).ContinueWith(t =>  ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
+
         }
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
@@ -551,7 +558,8 @@ namespace TCC.Parsing
         internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
         {
             if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
-            InfoWindowViewModel.Instance.CurrentCharacter.GuardianQuests = x.Claimed;
+            InfoWindowViewModel.Instance.CurrentCharacter.ClaimedGuardianQuests = x.Claimed;
+            InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests = x.Cleared;
             //InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianQuests = x.MaxPoints;
         }
 
@@ -1068,6 +1076,21 @@ namespace TCC.Parsing
                     }
                 }
             }
+        }
+
+        public static void HandleGuardianOnEnter(S_FIELD_EVENT_ON_ENTER obj)
+        {
+            const string opcode = "SMT_FIELD_EVENT_ENTER";
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
+
+        }
+
+        public static void HandleGuardianOnLeave(S_FIELD_EVENT_ON_LEAVE obj)
+        {
+            const string opcode = "SMT_FIELD_EVENT_LEAVE";
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
         }
     }
 }

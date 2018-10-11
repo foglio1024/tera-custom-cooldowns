@@ -18,7 +18,7 @@ namespace TCC.Controls
         private readonly ColorAnimation _backFillOff;
 
         private readonly Color _onColor = Color.FromRgb(255, 56, 34); //TODO: resource
-        private readonly Color _offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
+        private readonly Color _offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundBrush"]).Color;
         private readonly Color _backOffColor = Colors.Black;
 
         private readonly TimeSpan _animationDuration = TimeSpan.FromMilliseconds(150);

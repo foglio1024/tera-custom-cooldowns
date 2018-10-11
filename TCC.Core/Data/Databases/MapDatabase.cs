@@ -95,7 +95,7 @@ namespace TCC.Data.Databases
         //}
         private void LoadNames(string lang)
         {
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/regions/regions-{lang}.tsv");
+            var f = File.OpenText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ $"/resources/data/regions/regions-{lang}.tsv");
             while (true)
             {
                 var line = f.ReadLine();

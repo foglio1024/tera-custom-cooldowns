@@ -10,7 +10,7 @@ namespace TCC.Data.Databases
         public GuildQuestDatabase(string lang)
         {
             GuildQuests = new Dictionary<uint, GuildQuest>();
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/guild_quests/guild_quests-{lang}.tsv");
+            var f = File.OpenText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ $"/resources/data/guild_quests/guild_quests-{lang}.tsv");
             while (true)
             {
                 var line = f.ReadLine();

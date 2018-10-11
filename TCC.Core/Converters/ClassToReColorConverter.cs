@@ -23,7 +23,7 @@ namespace TCC.Converters
                         break;
                     case Class.Ninja:
                         // ReSharper disable once PossibleNullReferenceException
-                        col = ((SolidColorBrush) Application.Current.FindResource("NinjaColor")).Color;
+                        col = (Color) Application.Current.FindResource("NinjaColor");
                         break;
                     case Class.Valkyrie:
                         col = Colors.White;
