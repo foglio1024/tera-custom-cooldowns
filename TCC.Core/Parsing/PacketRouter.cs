@@ -106,7 +106,6 @@ namespace TCC.Parsing
             //if (p.SkillId % 10 != 0) return;
             //if (p.SkillId / 1000 == 260)
             //{
-            Log.CW($"[DECREASE_COOLTIME_SKILL] {p.SkillId} duration = {p.Cooldown}ms");
             //    if (p.SkillId % 10 == 0)
             //    {
             //        SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
