@@ -86,6 +86,11 @@ namespace TCC.ViewModels
                 RhythmicBlows.Cooldown.Refresh(cd);
                 return true;
             }
+            if (skill.IconName == Infuriate.Cooldown.Skill.IconName)
+            {
+                Infuriate.Cooldown.Refresh(cd);
+                return true;
+            }
             return false;
         }
     }
