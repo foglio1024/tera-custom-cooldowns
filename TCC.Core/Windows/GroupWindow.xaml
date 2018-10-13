@@ -103,7 +103,7 @@
                         x:Name="GroupButtons" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
 
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" Padding="10 0"
+                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" Padding="10 0" Visibility="Collapsed"
                             ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgGift}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
                         </Button>
