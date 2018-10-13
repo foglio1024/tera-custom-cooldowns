@@ -21,11 +21,10 @@ namespace TCC.ClassSpecific
         {
             if (p.AbnormalityId != DashingReloadId) return;
             //TODO: choose icon based on gunner's status?
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.airdash_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.ambushrolling_tex", SessionManager.CurrentPlayer.Class, out var sk1)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk1, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
+            StartPrecooldown("icon_skills.airdash_tex", p.Duration);
+            StartPrecooldown("icon_skills.ambushrolling_tex", p.Duration);
         }
+
 
         private static void CheckLaserTargeting(S_ABNORMALITY_BEGIN p)
         {

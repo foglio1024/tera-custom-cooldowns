@@ -49,21 +49,17 @@ namespace TCC.ClassSpecific
         private static void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
         {
             if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
-            Log.CW($"[CheckTwilightWaltz] {p.AbnormalityId} ({p.Duration} ms)");
+            StartPrecooldown("icon_skills.rageslash_tex", p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (!GodsfallIds.Contains(p.AbnormalityId)) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
+            StartPrecooldown("icon_skills.warbegin_tex", p.Duration);
         }
         private static void CheckGrugnirsBite(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GrugnirsBiteId) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
+            StartPrecooldown("icon_skills.halfmoon_tex", p.Duration);
         }
     }
 }

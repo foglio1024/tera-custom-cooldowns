@@ -92,9 +92,7 @@ namespace TCC.ClassSpecific
         private static void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
         {
             if (!BladeWaltzIDs.Contains(p.AbnormalityId)) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(),true, true));
-
+            StartPrecooldown("icon_skills.doublesworddance_tex", p.Duration);
         }
 
         private static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)

@@ -21,15 +21,13 @@ namespace TCC.ClassSpecific
         private void CheckDeathSpiral(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != DeathSpiralId) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
+            StartPrecooldown("icon_skills.chainbrandish_tex", p.Duration);
         }
 
         private void CheckShadowStep(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != ShadowStepId) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
+            StartPrecooldown("icon_skills.instantleap_tex", p.Duration);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
