@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -8,7 +7,7 @@ namespace TCC.ViewModels
         private bool _windWalkProc;
 
         private ArcherFocusTracker _focus;
-        private StanceTracker<ArcherStance> _stance;
+        //private StanceTracker<ArcherStance> _stance;
         private FixedSkillCooldown _thunderbolt;
         private DurationCooldownIndicator _windsong;
         private FixedSkillCooldown _windWalk;
