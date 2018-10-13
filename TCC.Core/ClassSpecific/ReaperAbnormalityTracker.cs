@@ -10,6 +10,15 @@ namespace TCC.ClassSpecific
         private const int ShadowStepId = 10151000;
         private const int DeathSpiralId = 10151131;
 
+        private Skill _shadowStep;
+        private Skill _deathSpiral;
+
+        public ReaperAbnormalityTracker()
+        {
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", SessionManager.CurrentPlayer.Class, out _deathSpiral);
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", SessionManager.CurrentPlayer.Class, out _shadowStep);
+
+        }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!p.TargetId.IsMe()) return;
@@ -21,13 +30,13 @@ namespace TCC.ClassSpecific
         private void CheckDeathSpiral(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != DeathSpiralId) return;
-            StartPrecooldown("icon_skills.chainbrandish_tex", p.Duration);
+            StartPrecooldown(_deathSpiral, p.Duration);
         }
 
         private void CheckShadowStep(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != ShadowStepId) return;
-            StartPrecooldown("icon_skills.instantleap_tex", p.Duration);
+            StartPrecooldown(_shadowStep, p.Duration);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)

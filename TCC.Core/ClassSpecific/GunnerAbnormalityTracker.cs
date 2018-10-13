@@ -8,8 +8,15 @@ namespace TCC.ClassSpecific
     public class GunnerAbnormalityTracker : ClassAbnormalityTracker
     {
         private static readonly uint DashingReloadId = 10152354;
-        private static readonly List<uint> LaserTargetingIDs = new List<uint> { 10152340, 10152342,10152345 };
+        private static readonly List<uint> LaserTargetingIDs = new List<uint> { 10152340, 10152342, 10152345 };
+        private static Skill _dashingReload;
+        private static Skill _rollingReload;
+        public GunnerAbnormalityTracker()
+        {
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.airdash_tex", SessionManager.CurrentPlayer.Class, out _dashingReload);
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.ambushrolling_tex", SessionManager.CurrentPlayer.Class, out _rollingReload);
 
+        }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!p.TargetId.IsMe()) return;
@@ -21,10 +28,20 @@ namespace TCC.ClassSpecific
         {
             if (p.AbnormalityId != DashingReloadId) return;
             //TODO: choose icon based on gunner's status?
-            StartPrecooldown("icon_skills.airdash_tex", p.Duration);
-            StartPrecooldown("icon_skills.ambushrolling_tex", p.Duration);
+            StartPrecooldown(_dashingReload, p.Duration);
+            StartPrecooldown(_rollingReload, p.Duration);
         }
 
+        public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
+        {
+            if (!p.TargetId.IsMe()) return;
+            CheckLaserTargeting(p);
+        }
+        public override void CheckAbnormality(S_ABNORMALITY_END p)
+        {
+            if (!p.TargetId.IsMe()) return;
+            CheckLaserTargeting(p);
+        }
 
         private static void CheckLaserTargeting(S_ABNORMALITY_BEGIN p)
         {

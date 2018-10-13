@@ -29,9 +29,8 @@ namespace TCC.ClassSpecific
         {
             App.BaseDispatcher.Invoke(() => MarkedTargets.Clear());
         }
-        protected static void StartPrecooldown(string skillIconName, uint duration)
+        protected static void StartPrecooldown(Skill sk, uint duration)
         {
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName(skillIconName, SessionManager.CurrentPlayer.Class, out var sk)) return;
             CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
         }
         protected ClassAbnormalityTracker()

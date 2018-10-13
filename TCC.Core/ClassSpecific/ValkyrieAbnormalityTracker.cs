@@ -12,6 +12,10 @@ namespace TCC.ClassSpecific
         private static readonly List<uint> GodsfallIds = new List<uint> { 10155510, 10155512 };
         private static readonly List<uint> TwilightWaltzIds = new List<uint> { 10155540, 10155541, 10155542 };
 
+        private Skill _godsfall;
+        private Skill _twilightWaltz;
+        private Skill _grugnirsBite;
+
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!p.TargetId.IsMe()) return;
@@ -46,20 +50,28 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId != RagnarokId) return;
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Refresh(p.Duration);
         }
-        private static void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
+        private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
         {
             if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
-            StartPrecooldown("icon_skills.rageslash_tex", p.Duration);
+            StartPrecooldown(_twilightWaltz, p.Duration);
         }
-        private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
+        private void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (!GodsfallIds.Contains(p.AbnormalityId)) return;
-            StartPrecooldown("icon_skills.warbegin_tex", p.Duration);
+            StartPrecooldown(_godsfall, p.Duration);
         }
-        private static void CheckGrugnirsBite(S_ABNORMALITY_BEGIN p)
+        private void CheckGrugnirsBite(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GrugnirsBiteId) return;
-            StartPrecooldown("icon_skills.halfmoon_tex", p.Duration);
+            StartPrecooldown(_grugnirsBite, p.Duration);
+        }
+
+        public ValkyrieAbnormalityTracker()
+        {
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out _twilightWaltz);
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out _godsfall);
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out _grugnirsBite);
+
         }
     }
 }
