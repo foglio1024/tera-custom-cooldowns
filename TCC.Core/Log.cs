@@ -10,7 +10,9 @@ namespace TCC
     {
         public static void CW(string line)
         {
+#if DEBUG
             Console.WriteLine(line);
+#endif
         }
     }
 }
