@@ -103,7 +103,11 @@ namespace TCC.Parsing.Messages
             //unk9 = reader.ReadInt32();
             //unk10 = reader.ReadInt32();
             //unk11 = reader.ReadInt32();
-            reader.Skip(16);
+            reader.Skip(2+2+4+4+4+4+4+4);
+            var fire = reader.ReadUInt32();
+            var ice = reader.ReadUInt32();
+            var arcane = reader.ReadUInt32();
+            Log.CW($"F/I/A {fire}/{ice}/{arcane}");
         }
 
     }
