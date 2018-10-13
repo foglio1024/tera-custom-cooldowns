@@ -100,7 +100,6 @@ namespace TCC
             Loading = false;
         }
 
-
         private static void DebugStuff()
         {
 
@@ -155,7 +154,7 @@ namespace TCC
             //EntitiesManager.SpawnNPC(920, 3000, 11, Visibility.Visible);
             //EntitiesManager.UpdateNPC(12, 1000, 1000);
             //AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(1, 1, 1495, 200000, 1);
-            //AbnormalityManager.BeginAbnormality(1495, 10, 200000, 1);
+            AbnormalityManager.BeginAbnormality(1495, 10, 200000, 1);
             //AbnormalityManager.BeginAbnormality(1495, 11, 200000, 1);
             //AbnormalityManager.BeginAbnormality(1495, 12, 200000, 1);
 
