@@ -39,6 +39,7 @@ namespace TCC.Controls
             set => SetValue(OriginRotationDegreesProperty, value);
         }
         public static readonly DependencyProperty OriginRotationDegreesProperty = DependencyProperty.Register("OriginRotationDegrees", typeof(double), typeof(Arc), new UIPropertyMetadata(270.0, UpdateArc));
+        private bool _round = true;
 
         protected static void UpdateArc(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -55,6 +56,10 @@ namespace TCC.Controls
 
         private Geometry GetArcGeometry()
         {
+            var topPoint = PointAtAngle(0, Direction);
+            var rightPoint = PointAtAngle(90, Direction);
+            var bottomPoint = PointAtAngle(180, Direction);
+            var leftPoint = PointAtAngle(270, Direction);
             var startPoint = PointAtAngle(Math.Min(StartAngle, EndAngle), Direction);
             var endPoint = PointAtAngle(Math.Max(StartAngle, EndAngle), Direction);
 
@@ -65,8 +70,19 @@ namespace TCC.Controls
             var geom = new StreamGeometry();
             using (var context = geom.Open())
             {
-                context.BeginFigure(startPoint, false, false);
-                context.ArcTo(endPoint, arcSize, 0, isLargeArc, Direction, true, false);
+                if (_round)
+                {
+                    context.BeginFigure(startPoint, false, false);
+                    context.ArcTo(endPoint, arcSize, 0, isLargeArc, Direction, true, false);
+                }
+                else
+                {
+                    context.BeginFigure(topPoint, false, false);
+                    context.LineTo(rightPoint, true, false);
+                    context.LineTo(bottomPoint, true, false);
+                    context.LineTo(leftPoint, true, false);
+                    context.LineTo(endPoint, true, false);
+                }
             }
             geom.Transform = new TranslateTransform(StrokeThickness / 2, StrokeThickness / 2);
             return geom;
@@ -93,5 +109,21 @@ namespace TCC.Controls
 
             return new Point(x, y);
         }
+
+        private Point PointOnChord(double angle, SweepDirection sweep)
+        {
+            var sideLength = ((RenderSize.Width - StrokeThickness) / 2) / Math.Sqrt(2);
+            return new Point(0, 0);
+        }
+
+        private double PointOnLine(double x, Point p1, Point p2)
+        {
+            var m = (p2.Y - p1.Y) / (p2.X + p1.X);
+            var q = p1.Y - (m * p1.X);
+
+            return m * x + q;
+        }
+        //x-x1 / x2-x1 = y-y1 / y2-y1
+
     }
 }
