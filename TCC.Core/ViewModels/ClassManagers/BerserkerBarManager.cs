@@ -49,7 +49,6 @@ namespace TCC.ViewModels
             SinisterTracker = new StatTracker();
             DexterTracker = new StatTracker();
             RampageTracker = new StatTracker();
-            AbnormalityTracker = new BerserkerAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()

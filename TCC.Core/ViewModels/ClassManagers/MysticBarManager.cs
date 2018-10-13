@@ -36,7 +36,6 @@ namespace TCC.ViewModels
         public MysticBarManager()
         {
             Auras = new AurasTracker();
-            AbnormalityTracker = new MysticAbnormalityTracker();
         }
 
 

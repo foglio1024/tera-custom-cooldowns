@@ -11,7 +11,6 @@ namespace TCC.ViewModels
         public ValkyrieBarManager()
         {
             RunemarksCounter = new Counter(7, false);
-            AbnormalityTracker = new ValkyrieAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()

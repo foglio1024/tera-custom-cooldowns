@@ -23,16 +23,16 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-        public StanceTracker<ArcherStance> Stance
-        {
-            get => _stance;
-            set
-            {
-                if(_stance== value) return;
-                _stance = value;
-                NPC();
-            }
-        }
+        //public StanceTracker<ArcherStance> Stance
+        //{
+        //    get => _stance;
+        //    set
+        //    {
+        //        if(_stance== value) return;
+        //        _stance = value;
+        //        NPC();
+        //    }
+        //}
         public FixedSkillCooldown Thunderbolt
         {
             get => _thunderbolt;
@@ -77,8 +77,7 @@ namespace TCC.ViewModels
         public ArcherBarManager()
         {
             Focus = new ArcherFocusTracker();
-            Stance = new StanceTracker<ArcherStance>();
-            AbnormalityTracker = new ArcherAbnormalityTracker();
+            //Stance = new StanceTracker<ArcherStance>();
         }
 
         public override void LoadSpecialSkills()

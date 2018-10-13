@@ -9,7 +9,6 @@ namespace TCC.ViewModels
 
         public SorcererBarManager()
         {
-            AbnormalityTracker = new SorcererAbnormalityTracker();
         }
         public override void LoadSpecialSkills()
         {

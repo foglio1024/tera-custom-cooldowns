@@ -12,7 +12,6 @@ namespace TCC.ViewModels
         
         public SlayerBarManager()
         {
-            AbnormalityTracker  = new SlayerAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()

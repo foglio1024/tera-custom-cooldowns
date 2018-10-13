@@ -18,7 +18,6 @@ namespace TCC.ViewModels
             TraverseCut = new StatTracker { Max = 13, Val = 0 };
             //TempestAura = new StatTracker { Max = 50, Val = 0 };
             Stance = new StanceTracker<WarriorStance>();
-            AbnormalityTracker = new WarriorAbnormalityTracker();
         }
 
         public bool ShowEdge => Settings.WarriorShowEdge;

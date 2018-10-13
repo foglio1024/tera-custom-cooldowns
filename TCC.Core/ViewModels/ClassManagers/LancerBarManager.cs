@@ -11,7 +11,6 @@ namespace TCC.ViewModels
             {
                 Max = 10
             };
-            AbnormalityTracker = new LancerAbnormalityTracker();
         }
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }

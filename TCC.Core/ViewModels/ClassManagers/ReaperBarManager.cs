@@ -9,7 +9,6 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator ShadowReaping { get; set; }
         public ReaperBarManager()
         {
-            AbnormalityTracker = new ReaperAbnormalityTracker();
         }
         public override void LoadSpecialSkills()
         {

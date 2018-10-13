@@ -25,7 +25,6 @@ namespace TCC.ViewModels
 
         public NinjaBarManager()
         {
-            AbnormalityTracker = new NinjaAbnormalityTracker();
         }
 
         private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -25,7 +25,6 @@ namespace TCC.ViewModels
 
         public PriestBarManager()
         {
-            AbnormalityTracker = new PriestAbnormalityTracker();
         }
 
 

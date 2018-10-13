@@ -9,7 +9,6 @@ namespace TCC.ViewModels
         private bool _counterProc;
         public BrawlerBarManager()
         {
-            AbnormalityTracker = new BrawlerAbnormalityTracker();
         }
 
         public DurationCooldownIndicator GrowingFury { get; set; }
