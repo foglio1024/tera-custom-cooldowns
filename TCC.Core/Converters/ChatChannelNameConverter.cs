@@ -46,16 +46,16 @@ namespace TCC.Converters
                     return "Group";
                 case ChatChannel.TradeRedirect:
                     return "Global";
-                case ChatChannel.Enchant12:
-                    return "+12";
-                case ChatChannel.Enchant15:
-                    return "+15";
-                case ChatChannel.Enchant7:
-                    return "+7";
-                case ChatChannel.Enchant8:
-                    return "+8";
-                case ChatChannel.Enchant9:
-                    return "+9";
+                //case ChatChannel.Enchant12:
+                //    return "+12";
+                //case ChatChannel.Enchant15:
+                //    return "+15";
+                case ChatChannel.Enchant:
+                    return "Gear";
+                //case ChatChannel.Enchant8:
+                //    return "+8";
+                //case ChatChannel.Enchant9:
+                //    return "+9";
                 case ChatChannel.RaidLeader:
                     return "Leader";
                 case ChatChannel.Bargain:

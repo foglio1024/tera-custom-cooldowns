@@ -866,36 +866,44 @@ namespace TCC.Data
         public static ChatMessage BuildEnchantSystemMessage(string systemMessage)
         {
             var msg = new ChatMessage();
-            var mw = " Masterwork ";
-            var e = "+12";
-            if (systemMessage.Contains("Added12"))
+            var mw = "";
+            var e = "";
+            //if (systemMessage.Contains("Added12"))
+            //{
+            //    msg.Channel = ChatChannel.Enchant12;
+            //}
+            //else if (systemMessage.Contains("Added15"))
+            //{
+            //    msg.Channel = ChatChannel.Enchant15;
+            //    mw = " Awakened ";
+            //    e = "+15";
+            //}
+            if (systemMessage.Contains("enchantCount:"))
             {
-                msg.Channel = ChatChannel.Enchant12;
-            }
-            else if (systemMessage.Contains("Added15"))
-            {
-                msg.Channel = ChatChannel.Enchant15;
-                mw = " Awakened ";
-                e = "+15";
-            }
-            else if (systemMessage.Contains("enchantCount:7"))
-            {
-                msg.Channel = ChatChannel.Enchant7;
+                var s = systemMessage.IndexOf("enchantCount:", StringComparison.InvariantCultureIgnoreCase);
+                var ench = systemMessage.Substring(s+"enchantCount:".Length, 1);
+                msg.Channel = ChatChannel.Enchant;
                 mw = "";
-                e = "+7 ";
+                e = $"+{ench} ";
             }
-            else if (systemMessage.Contains("enchantCount:8"))
-            {
-                msg.Channel = ChatChannel.Enchant8;
-                mw = "";
-                e = "+8 ";
-            }
-            else if (systemMessage.Contains("enchantCount:9"))
-            {
-                msg.Channel = ChatChannel.Enchant9;
-                mw = "";
-                e = "+9 ";
-            }
+            //else if (systemMessage.Contains("enchantCount:7"))
+            //{
+            //    msg.Channel = ChatChannel.Enchant;
+            //    mw = "";
+            //    e = "+7 ";
+            //}
+            //else if (systemMessage.Contains("enchantCount:8"))
+            //{
+            //    msg.Channel = ChatChannel.Enchant;
+            //    mw = "";
+            //    e = "+8 ";
+            //}
+            //else if (systemMessage.Contains("enchantCount:9"))
+            //{
+            //    msg.Channel = ChatChannel.Enchant;
+            //    mw = "";
+            //    e = "+9 ";
+            //}
             var prm = SplitDirectives(systemMessage);
 
             msg.Author = prm["UserName"];
