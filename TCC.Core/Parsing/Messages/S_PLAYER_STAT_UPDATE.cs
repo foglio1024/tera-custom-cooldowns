@@ -104,7 +104,7 @@ namespace TCC.Parsing.Messages
             //unk10 = reader.ReadInt32();
             //unk11 = reader.ReadInt32();
             reader.Skip(2+2+4+4+4+4+4+4);
-            if (reader.Factory.ReleaseVersion < 75) return;
+            if (reader.Factory.ReleaseVersion/100 < 75) return;
             var fire = reader.ReadUInt32();
             var ice = reader.ReadUInt32();
             var arcane = reader.ReadUInt32();
