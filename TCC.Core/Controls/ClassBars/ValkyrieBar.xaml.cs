@@ -23,7 +23,7 @@ namespace TCC.Controls.ClassBars
         {
             _dc = (ValkyrieBarManager)DataContext;
             _an = new DoubleAnimation(_dc.StaminaTracker.Factor * 359.99 + 40, TimeSpan.FromMilliseconds(150));
-            _rag = new DoubleAnimation(320, 40, TimeSpan.FromMilliseconds(0));
+            _rag = new DoubleAnimation(318, 42, TimeSpan.FromMilliseconds(0));
             _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
             _dc.Ragnarok.Buff.Started += OnRagnarokStarted;
         }
@@ -31,14 +31,14 @@ namespace TCC.Controls.ClassBars
         private void OnRagnarokStarted(Data.CooldownMode obj)
         {
             _rag.Duration = TimeSpan.FromMilliseconds(_dc.Ragnarok.Buff.OriginalCooldown);
-            MainReArc.BeginAnimation(Arc.EndAngleProperty, _rag);
+            RagArc.BeginAnimation(Arc.EndAngleProperty, _rag);
         }
 
         private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
             if (!_dc.Ragnarok.Buff.IsAvailable) return;
-            _an.To = _dc.StaminaTracker.Factor * (359.99 - 80) + 40;
+            _an.To = _dc.StaminaTracker.Factor * (359.99 - MainReArc.StartAngle*2) + MainReArc.StartAngle;
             MainReArc.BeginAnimation(Arc.EndAngleProperty, _an);
         }
     }
