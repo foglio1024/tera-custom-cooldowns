@@ -231,6 +231,7 @@ namespace TCC.Parsing
             WindowManager.ReloadPositions();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
             if (Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
+            AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!Settings.StatSent) App.SendUsageStat();
             Settings.LastRegion = Language;
@@ -244,7 +245,6 @@ namespace TCC.Parsing
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
 
-            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SessionManager.CurrentPlayer.ClearAbnormalities();
 
             SessionManager.LoadingScreen = true;
@@ -257,12 +257,6 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Name = p.Name;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
-
-            //CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
-            //CharacterWindowViewModel.Instance.Player.Name = p.Name;
-            //CharacterWindowViewModel.Instance.Player.Level = p.Level;
-            //CharacterWindowViewModel.Instance.Player.ClearAbnormalities();
-            //SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
 
             if (Settings.LastRegion == "NA")
@@ -762,7 +756,7 @@ namespace TCC.Parsing
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
+            AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
@@ -770,7 +764,7 @@ namespace TCC.Parsing
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
+            AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
@@ -778,7 +772,7 @@ namespace TCC.Parsing
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
-            ClassWindowViewModel.Instance.CurrentManager.AbnormalityTracker?.CheckAbnormality(p);
+            AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
