@@ -39,33 +39,33 @@
                     </Image.Style>
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True" Margin="5">
-                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5" StrokeThickness="30"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Margin="-20" Width="98" Height="98" x:Name="MainReArc">
-                            <local:Arc.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="135" />
-                                </TransformGroup>
-                            </local:Arc.RenderTransform>
-                            <local:Arc.Style>
-                                <Style TargetType="Shape">
-                                    <Setter Property="Opacity" Value=".8" />
-                                    <Setter Property="Stroke" Value="Orange" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
-                                            <Setter Property="Opacity" Value="1" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsGfOn}" Value="True">
-                                            <Setter Property="Stroke" Value="Orange" />
-                                            <Setter Property="Opacity" Value="1" />
-                                        </DataTrigger>
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="3"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Margin="-20" Width="83" Height="83" x:Name="MainReArc"
+                               Rhomb="True">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180" />
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <local:Arc.Style>
+                            <Style TargetType="Shape">
+                                <Setter Property="Opacity" Value=".8" />
+                                <Setter Property="Stroke" Value="Orange" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                        <Setter Property="Opacity" Value="1" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsGfOn}" Value="True">
+                                        <Setter Property="Stroke" Value="Orange" />
+                                        <Setter Property="Opacity" Value="1" />
+                                    </DataTrigger>
 
-                                    </Style.Triggers>
-                                </Style>
-                            </local:Arc.Style>
-                        </local:Arc>
-                    </Grid>
+                                </Style.Triggers>
+                            </Style>
+                        </local:Arc.Style>
+                    </local:Arc>
+
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>

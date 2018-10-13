@@ -94,7 +94,7 @@ namespace TCC.Windows
                     StGovernorWhite.LayoutTransform = new ScaleTransform(((Player) sender).StFactor, 1);
                     StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
                 }
-                ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation((((Player) sender).StFactor)*(360-80) + 40, _st.Duration));
+                ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation((((Player) sender).StFactor)*(360-2*ReArc.StartAngle) + ReArc.StartAngle, _st.Duration));
             }
             else if (e.PropertyName == nameof(Player.ShieldFactor))
             {
