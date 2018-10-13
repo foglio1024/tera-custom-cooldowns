@@ -33,13 +33,21 @@ namespace TCC
                 var tabName = t.Attribute("name")?.Value;
                 foreach (var chElement in t.Descendants().Where(x => x.Name == "Channel"))
                 {
-                    var value = chElement.Attribute("value");
-                    if (value != null) channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), value.Value));
+                    try
+                    {
+                        var value = chElement.Attribute("value");
+                        if (value != null) channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), value.Value));
+                    }
+                    catch (Exception) { }
                 }
                 foreach (var chElement in t.Descendants().Where(x => x.Name == "ExcludedChannel"))
                 {
-                    var value = chElement.Attribute("value");
-                    if (value != null) exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), value.Value));
+                    try
+                    {
+                        var value = chElement.Attribute("value");
+                        if (value != null) exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), value.Value));
+                    }
+                    catch (Exception) { }
                 }
                 foreach (var authElement in t.Descendants().Where(x => x.Name == "Author"))
                 {
@@ -146,7 +154,7 @@ namespace TCC
             foreach (var abEl in el.Descendants().Where(x => x.Name == "Abnormals"))
             {
                 var stringClass = abEl.Attribute("class")?.Value;
-                if(stringClass == null) continue;
+                if (stringClass == null) continue;
                 var parsedClass = (Class)Enum.Parse(typeof(Class), stringClass);
                 var abnormalities = abEl.Value.Split(',');
                 var list = abnormalities.Length == 1 && abnormalities[0] == "" ? new List<uint>() : abnormalities.Select(uint.Parse).ToList();
@@ -161,10 +169,10 @@ namespace TCC
 
         public void LoadWindowSettings()
         {
-            if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) return;
+            if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml")) return;
             try
             {
-                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
+                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
 
                 foreach (var ws in _settingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
                 {
@@ -195,7 +203,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
                 LoadWindowSettings();
             }
         }
@@ -203,8 +211,8 @@ namespace TCC
         {
             try
             {
-                if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) return;
-                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
+                if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml")) return;
+                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
 
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -282,7 +290,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
                 LoadSettings();
             }
         }
