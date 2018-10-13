@@ -96,7 +96,7 @@ namespace TCC
 
             if (Settings.LastRegion == "NA" || Settings.LastRegion == "")
                 WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
-            DebugStuff();
+            if(Debug) DebugStuff();
             Loading = false;
         }
 
