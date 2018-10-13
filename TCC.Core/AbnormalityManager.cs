@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -53,8 +52,6 @@ namespace TCC
                     break;
                 case Class.Valkyrie:
                     CurrentAbnormalityTracker = new ValkyrieAbnormalityTracker();
-                    break;
-                default:
                     break;
             }
         }

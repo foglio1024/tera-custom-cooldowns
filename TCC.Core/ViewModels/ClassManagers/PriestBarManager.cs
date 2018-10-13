@@ -23,10 +23,6 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator DivineCharge { get; set; }
         public DurationCooldownIndicator TripleNemesis { get; set; }
 
-        public PriestBarManager()
-        {
-        }
-
 
         public sealed override void LoadSpecialSkills()
         {

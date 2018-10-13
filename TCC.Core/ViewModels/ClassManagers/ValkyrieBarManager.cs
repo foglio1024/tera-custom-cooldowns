@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {

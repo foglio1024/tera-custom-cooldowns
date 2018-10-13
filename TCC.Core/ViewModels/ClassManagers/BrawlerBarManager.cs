@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -7,9 +6,6 @@ namespace TCC.ViewModels
     {
         private bool _isGfOn;
         private bool _counterProc;
-        public BrawlerBarManager()
-        {
-        }
 
         public DurationCooldownIndicator GrowingFury { get; set; }
         public FixedSkillCooldown Counter { get; set; }

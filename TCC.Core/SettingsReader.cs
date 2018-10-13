@@ -98,7 +98,7 @@ namespace TCC
                     if (bpAttr != null)
                     {
                         var bp = (ButtonsPosition)Enum.Parse(typeof(ButtonsPosition), bpAttr.Value);
-                        positions.SetButtons(cl, (ButtonsPosition)bp);
+                        positions.SetButtons(cl, bp);
                     }
                 });
             }

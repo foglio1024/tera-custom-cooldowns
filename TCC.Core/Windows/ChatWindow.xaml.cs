@@ -330,7 +330,7 @@ namespace TCC.Windows
                 }
             }
             UpdateSettings();
-            if (!FocusManager.ForceFocused == true) FocusManager.ForceFocused = false; //FocusTimer.Enabled = true;
+            if (!FocusManager.ForceFocused) FocusManager.ForceFocused = false; //FocusTimer.Enabled = true;
         }
 
 

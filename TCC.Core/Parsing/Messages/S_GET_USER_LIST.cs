@@ -131,14 +131,10 @@ namespace TCC.Parsing.Messages
                 c.Name = reader.ReadTeraString();
                 try
                 {
-                reader.BaseStream.Position = guildOffset - 4;
+                    reader.BaseStream.Position = guildOffset - 4;
                     c.GuildName = reader.ReadTeraString();
                 }
-                catch (Exception e)
-                {
-                    
-
-                }
+                catch (Exception) { }
 
                 //c.details = new byte[c.detailsCount];
                 //for (int j = 0; j < c.detailsCount; j++)
@@ -154,7 +150,7 @@ namespace TCC.Parsing.Messages
 
                 //c.guild = reader.ReadTeraString();
 
-                CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos, InfoWindowViewModel.Instance.GetDispatcher(), (Laurel)c.Laurel){GuildName =  c.GuildName});
+                CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos, InfoWindowViewModel.Instance.GetDispatcher(), (Laurel)c.Laurel) { GuildName = c.GuildName });
 
             }
             CharacterList = CharacterList.OrderBy(ch => ch.Position).ToList();
@@ -177,8 +173,8 @@ namespace TCC.Parsing.Messages
             sb.AppendLine($"Character [{Pos}] <");
             sb.AppendLine($"\tName: {Name}");
             sb.AppendLine($"\tLevel: {Level}");
-            sb.AppendLine($"\tClass: {(Class) CharClass}");
-            sb.AppendLine($"\tLaurel: {(Laurel) Laurel}");
+            sb.AppendLine($"\tClass: {(Class)CharClass}");
+            sb.AppendLine($"\tLaurel: {(Laurel)Laurel}");
             sb.AppendLine(">");
 
             return sb.ToString();

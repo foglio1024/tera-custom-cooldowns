@@ -294,7 +294,7 @@ namespace TCC.Windows
                 distances.Add(dist);
             }
 
-            Vector min = new Vector(double.MaxValue, double.MaxValue);
+            var min = new Vector(double.MaxValue, double.MaxValue);
             foreach (var distance in distances)
             {
                 if (distance.Length < min.Length) min = distance;
@@ -343,26 +343,23 @@ namespace TCC.Windows
         }
         private void UpdateButtons()
         {
-            if (ButtonsRef != null)
-            {
-                double screen_middle = Settings.ScreenH / 2;
-                double middle = Top + Height / 2;
-                double deadzone = Settings.ScreenH / 15;
-                double distance = Math.Abs(screen_middle - middle);
+            if (ButtonsRef == null) return;
 
-                if (distance > deadzone)
-                {
-                    if (middle >= screen_middle)
-                    {
-                        _settings.ButtonsPosition = ButtonsPosition.Above;
-                        Grid.SetRow(ButtonsRef, 0);
-                    }
-                    else
-                    {
-                        _settings.ButtonsPosition = ButtonsPosition.Below;
-                        Grid.SetRow(ButtonsRef, 2);
-                    }
-                }
+            var screenMiddle = Settings.ScreenH / 2;
+            var middle = Top + Height / 2;
+            var deadzone = Settings.ScreenH / 15;
+            var distance = Math.Abs(screenMiddle - middle);
+
+            if (!(distance > deadzone)) return;
+            if (middle >= screenMiddle)
+            {
+                _settings.ButtonsPosition = ButtonsPosition.Above;
+                Grid.SetRow(ButtonsRef, 0);
+            }
+            else
+            {
+                _settings.ButtonsPosition = ButtonsPosition.Below;
+                Grid.SetRow(ButtonsRef, 2);
             }
         }
         protected void Drag(object sender, MouseButtonEventArgs e)

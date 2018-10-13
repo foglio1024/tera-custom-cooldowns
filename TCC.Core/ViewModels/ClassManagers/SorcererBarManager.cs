@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -7,9 +6,6 @@ namespace TCC.ViewModels
     {
         public DurationCooldownIndicator ManaBoost { get; set; }
 
-        public SorcererBarManager()
-        {
-        }
         public override void LoadSpecialSkills()
         {
             ManaBoost = new DurationCooldownIndicator(Dispatcher);

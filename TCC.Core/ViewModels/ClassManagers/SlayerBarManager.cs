@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -10,9 +9,7 @@ namespace TCC.ViewModels
         
         public FixedSkillCooldown OverhandStrike { get; set; }
         
-        public SlayerBarManager()
-        {
-        }
+
 
         public override void LoadSpecialSkills()
         {

@@ -232,13 +232,9 @@ namespace TCC
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
             PerClassPosition = perClassPosition;
-            if (positions == null)
-            {
-                Positions = new ClassPositions(x, y, buttonsPosition);
-            } else
-            {
-                Positions = new ClassPositions(positions);
-            }
+            Positions = positions == null ? 
+                new ClassPositions(x, y, buttonsPosition) : 
+                new ClassPositions(positions);
         }
 
         public virtual XElement ToXElement(string name)
@@ -262,7 +258,7 @@ namespace TCC
         {
             var ret = new XElement(nameof(Positions));
 
-            foreach (Class cl in Class.GetValues(typeof(Class)))
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
                 ret.Add(
                     new XElement("Position", new XAttribute("class", cl),
