@@ -199,6 +199,7 @@ namespace TCC.ViewModels
 
         internal void Save()
         {
+            if(MainSkills.Count == 0 && SecondarySkills.Count == 0 && HiddenSkills.Count == 0) return;
             var root = new XElement("Skills");
             MainSkills.ToList().ForEach(mainSkill =>
             {
