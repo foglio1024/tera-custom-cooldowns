@@ -80,13 +80,14 @@ namespace TCC.Converters
                     resName = "ChatSystemMoneyBrush"; break;
                 case ChatChannel.TradeRedirect:
                     resName = "ChatTradeBrush"; break;
-                case ChatChannel.Enchant12:
-                case ChatChannel.Enchant7:
-                case ChatChannel.Enchant8:
+                //case ChatChannel.Enchant12:
+                //case ChatChannel.Enchant7:
+                //case ChatChannel.Enchant8:
+                case ChatChannel.Enchant:
                     resName = "EnchantLowBrush"; break;
-                case ChatChannel.Enchant9:
+                //case ChatChannel.Enchant9:
                 case ChatChannel.Laurel:
-                case ChatChannel.Enchant15:
+                //case ChatChannel.Enchant15:
                     resName = "EnchantHighBrush"; break;
                 case ChatChannel.RaidLeader:
                     resName = "ChatRaidNoticeBrush"; break;

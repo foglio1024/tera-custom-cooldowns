@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -49,7 +48,6 @@ namespace TCC.ViewModels
             SinisterTracker = new StatTracker();
             DexterTracker = new StatTracker();
             RampageTracker = new StatTracker();
-            AbnormalityTracker = new BerserkerAbnormalityTracker();
         }
 
         public override void LoadSpecialSkills()
@@ -113,7 +111,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == Unleash.Cooldown.Skill.IconName)
             {
-                Unleash.Cooldown.Refresh(cd);
+                Unleash.Cooldown.Refresh(skill.Id, cd);
                 return true;
             }
             return false;

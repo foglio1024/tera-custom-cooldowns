@@ -28,7 +28,7 @@ namespace TCC.Controls.ClassBars
         private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
-            _an.To = _dc.StaminaTracker.Factor*(359.99 - 80) + 40;
+            _an.To = _dc.StaminaTracker.Factor*(359.99 - MainReArc.StartAngle*2) + MainReArc.StartAngle;
             MainReArc.BeginAnimation(Arc.EndAngleProperty, _an);
         }
     }

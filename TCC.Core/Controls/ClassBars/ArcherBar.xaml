@@ -19,66 +19,53 @@
             <Grid>
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                 </Image>
-                <Grid x:Name="MainReArcGrid">
-                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
-                          Margin="5" >
-                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
-                                   StrokeThickness="30" Stroke="Orange" HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="-20"
-                                   Width="98" Height="98" x:Name="MainReArc">
-                            <local:Arc.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="135"/>
-                                </TransformGroup>
-                            </local:Arc.RenderTransform>
-                            <local:Arc.Style>
-                                <Style TargetType="FrameworkElement">
-                                    <Setter Property="Opacity" Value="1"/>
-                                    <!--<Style.Triggers>
+                <Grid x:Name="MainReArcGrid" >
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="3" Stroke="Orange" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20"
+                               Width="87" Height="87" x:Name="MainReArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <local:Arc.Style>
+                            <Style TargetType="FrameworkElement">
+                                <Setter Property="Opacity" Value="1"/>
+                                <!--<Style.Triggers>
                                         <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                             <Setter Property="Opacity" Value="1"/>
                                         </DataTrigger>
                                     </Style.Triggers>-->
-                                </Style>
-                            </local:Arc.Style>
-                        </local:Arc>
-                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
-                                   StrokeThickness="30" Stroke="White" HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="-20" Opacity=".5"
-                                   Width="98" Height="98" x:Name="SecReArc">
-                            <local:Arc.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="135"/>
-                                </TransformGroup>
-                            </local:Arc.RenderTransform>
-                            <local:Arc.Style>
-                                <Style TargetType="FrameworkElement">
-                                    <Setter Property="Opacity" Value=".8"/>
-                                    <!--<Style.Triggers>
+                            </Style>
+                        </local:Arc.Style>
+                    </local:Arc>
+
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="3" Stroke="White" HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="-20" Opacity=".5" Rhomb="True"
+                               Width="77" Height="77" x:Name="SecReArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <local:Arc.Style>
+                            <Style TargetType="FrameworkElement">
+                                <Setter Property="Opacity" Value=".8"/>
+                                <!--<Style.Triggers>
                                         <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                             <Setter Property="Opacity" Value="1"/>
                                         </DataTrigger>
                                     </Style.Triggers>-->
-                                </Style>
-                            </local:Arc.Style>
-                        </local:Arc>
-                    </Grid>
-                    <!--<Grid.Style>
-                        <Style TargetType="FrameworkElement">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
-                                    <Setter Property="Effect" >
-                                        <Setter.Value>
-                                            <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Grid.Style>-->
+                            </Style>
+                        </local:Arc.Style>
+                    </local:Arc>
+
                 </Grid>
+
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>
             </Grid>

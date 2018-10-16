@@ -17,6 +17,7 @@ namespace TCC.Controls
     /// </summary>
     public partial class SmallMobControl : INotifyPropertyChanged
     {
+        private const uint DeleteDelay = 0;
         private DispatcherTimer _t;
         private DoubleAnimation _hpAnim;
         private Npc _dc;
@@ -31,11 +32,19 @@ namespace TCC.Controls
             _dc = (Npc)DataContext;
             _dc.DeleteEvent += Dc_DeleteEvent;
             _dc.PropertyChanged += OnDcPropertyChanged;
-            _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(4700) };
-            _t.Tick += (s, ev) => RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)));
+            _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(DeleteDelay) };
+            _t.Tick += (s, ev) =>
+            {
+                RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+                        new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)));
+                _t.Stop();
+                _dc = null;
+                _t = null;
+            };
             RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             BossGageWindowViewModel.Instance.NpcListChanged += OnNpcListChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged += OnViewModelPropertyChanged;
+
             _hpAnim = new DoubleAnimation
             {
                 Duration = TimeSpan.FromMilliseconds(250),
@@ -69,19 +78,27 @@ namespace TCC.Controls
             NPC(nameof(Compact));
         }
 
-        private void Dc_DeleteEvent() => Dispatcher.Invoke(() =>
+        private void Dc_DeleteEvent()
         {
-            _t.Start();
-            try
+            SettingsWindowViewModel.AbnormalityShapeChanged -= OnViewModelPropertyChanged;
+            BossGageWindowViewModel.Instance.NpcListChanged -= OnNpcListChanged;
+            _dc.DeleteEvent -= Dc_DeleteEvent;
+            _dc.PropertyChanged -= OnDcPropertyChanged;
+
+            Dispatcher.Invoke(() =>
             {
-                SettingsWindowViewModel.AbnormalityShapeChanged -= OnViewModelPropertyChanged;
-                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext, 0);
-            }
-            catch
-            {
-                // ignored
-            }
-        });
+                _t.Start();
+
+                try
+                {
+                    BossGageWindowViewModel.Instance.RemoveMe(_dc, DeleteDelay);
+                }
+                catch
+                {
+                    // ignored
+                }
+            });
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

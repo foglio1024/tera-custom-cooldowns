@@ -35,6 +35,7 @@
     <Color x:Key="RunemarkColor">                #FFE3BD </Color>
     <Color x:Key="MaxRunemarkColor">             #FF98BB </Color>
     <Color x:Key="NinjaColor">                   #C387FF </Color>
+    <Color x:Key="GunnerColor">                  #6AB8FF </Color>
 
     <Color x:Key="GoldColor">                    #FFB033 </Color>
     <Color x:Key="SilverColor">                  Silver  </Color>

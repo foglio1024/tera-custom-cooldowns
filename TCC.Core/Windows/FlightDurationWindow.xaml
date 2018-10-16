@@ -35,11 +35,11 @@
             </Style>
         </Grid.Style>
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="6" EndAngle="90" Direction="Counterclockwise"
-               StrokeStartLineCap="Round" Stroke="#5fff" x:Name="Arc" Height="300" Width="300"
+               StrokeStartLineCap="Flat" Stroke="#5fff" x:Name="Arc" Height="300" Width="300"
                OriginRotationDegrees="-45">
         </c:Arc>
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
-               StrokeStartLineCap="Round" Stroke="#9fff" Height="288" Width="288" OriginRotationDegrees="-45">
+               StrokeStartLineCap="Flat" Stroke="#9fff" Height="288" Width="288" OriginRotationDegrees="-45">
         </c:Arc>
         <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="Collapsed">
             <Grid.RenderTransform>

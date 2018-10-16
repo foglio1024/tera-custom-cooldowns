@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using System;
 using System.Collections.Generic;
-using TCC.Data;
+using System.Windows;
 
 namespace TCC.Data
 {
@@ -29,7 +29,7 @@ namespace TCC.Data
         public ClassPositions()
         {
             _classes = new Dictionary<Class, ClassPositionsData>();
-            foreach (Class cl in Class.GetValues(typeof(Class)))
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
                 _classes.Add(cl, new ClassPositionsData(0, 0, ButtonsPosition.Above));
             }
@@ -38,7 +38,7 @@ namespace TCC.Data
         public ClassPositions(ClassPositions origin)
         {
             _classes = new Dictionary<Class, ClassPositionsData>();
-            foreach (Class cl in Class.GetValues(typeof(Class)))
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
                 _classes.Add(cl, new ClassPositionsData(origin._classes[cl]));
             }
@@ -47,7 +47,7 @@ namespace TCC.Data
         public ClassPositions(double x, double y, ButtonsPosition buttons)
         {
             _classes = new Dictionary<Class, ClassPositionsData>();
-            foreach (Class cl in Class.GetValues(typeof(Class)))
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
                 _classes.Add(cl, new ClassPositionsData(x, y, buttons));
             }
@@ -60,7 +60,7 @@ namespace TCC.Data
 
         public void SetAllPositions(Point position)
         {
-            foreach (Class cl in Class.GetValues(typeof(Class)))
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
                 _classes[cl].Position = position;
             }

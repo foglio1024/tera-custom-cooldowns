@@ -21,10 +21,10 @@ namespace TCC.TemplateSelectors
                     return WhisperChannelDataTemplate;
                 case ChatChannel.Megaphone:
                     return MegaphoneChannelDataTemplate;
-                case ChatChannel.Enchant12:
-                    return EnchantChannelDataTemplate;
-                case ChatChannel.Enchant15:
-                    return EnchantChannelDataTemplate;
+                //case ChatChannel.Enchant12:
+                //    return EnchantChannelDataTemplate;
+                //case ChatChannel.Enchant15:
+                //    return EnchantChannelDataTemplate;
                 default:
                     return NormalChannelDataTemplate;
             }

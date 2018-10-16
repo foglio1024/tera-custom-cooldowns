@@ -79,8 +79,9 @@
                         <Border VerticalAlignment="Top" BorderThickness="0"  Margin="0" Opacity=".65">
                             <Border.Background>
                                 <SolidColorBrush Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}">
-                               
-                            </SolidColorBrush></Border.Background>
+
+                                </SolidColorBrush>
+                            </Border.Background>
                             <FrameworkElement x:Name="HpGovernorWhite" HorizontalAlignment="Stretch" 
                                               Width="{Binding ElementName=HpGrid, Path=ActualWidth}">
                                 <FrameworkElement.LayoutTransform>
@@ -533,17 +534,17 @@
                     </Grid.Style>
 
                     <Image Source="../resources/images/char_window_bg.png" Stretch="Uniform"/>
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="True"  RenderTransformOrigin=".5 .5" 
-                          RenderTransform="{StaticResource Rotate45}">
-                        <c:Arc StrokeThickness="30" Stroke="{Binding Instance.Player.Class, Converter={StaticResource ReColorConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="ReArc"
-                               Width="100" Height="100" StartAngle="40" EndAngle="320"  RenderTransformOrigin=".5 .5" Margin="-18">
-                            <c:Arc.RenderTransform>
-                                <RotateTransform Angle="135"/>
-                            </c:Arc.RenderTransform>
-
-                        </c:Arc>
-                        <Grid.Style>
-                            <Style TargetType="Grid">
+                    <Image Source="../resources/images/char_window_fg.png" Stretch="Uniform"/>
+                    <c:Arc StrokeThickness="4" StrokeEndLineCap="Flat"
+                               Stroke="{Binding Instance.Player.Class, Converter={StaticResource ReColorConverter}}"
+                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ReArc"
+                               Width="82" Height="82" StartAngle="42" EndAngle="318"  RenderTransformOrigin=".5 .5" Margin="0" 
+                               Rhomb="True">
+                        <c:Arc.RenderTransform>
+                            <RotateTransform Angle="180"/>
+                        </c:Arc.RenderTransform>
+                        <c:Arc.Style>
+                            <Style TargetType="c:Arc">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Setter Property="Opacity" Value=".8"/>
                                 <Style.Triggers>
@@ -555,18 +556,21 @@
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect ShadowDepth="0" 
-                                                                  Color="{Binding Instance.Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
-                                                                  BlurRadius="10"/>
+                                          Color="{Binding Instance.Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
+                                          BlurRadius="10"/>
                                             </Setter.Value>
                                         </Setter>
 
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Grid.Style>
-                    </Grid>
 
-                    <Image Source="../resources/images/char_window_fg.png" Stretch="Uniform"/>
+                        </c:Arc.Style>
+                    </c:Arc>
+
+
+
+
                     <Image Opacity="1"
                         Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr.big}"
                            Margin="-3 -2 -3 -4"/>

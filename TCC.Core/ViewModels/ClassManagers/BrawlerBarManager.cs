@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -7,10 +6,6 @@ namespace TCC.ViewModels
     {
         private bool _isGfOn;
         private bool _counterProc;
-        public BrawlerBarManager()
-        {
-            AbnormalityTracker = new BrawlerAbnormalityTracker();
-        }
 
         public DurationCooldownIndicator GrowingFury { get; set; }
         public FixedSkillCooldown Counter { get; set; }
@@ -83,7 +78,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
             {
-                RhythmicBlows.Cooldown.Refresh(cd);
+                RhythmicBlows.Cooldown.Refresh(skill.Id, cd);
                 return true;
             }
             if (skill.IconName == Infuriate.Cooldown.Skill.IconName)

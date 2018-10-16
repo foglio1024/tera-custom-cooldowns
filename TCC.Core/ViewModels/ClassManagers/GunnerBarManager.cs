@@ -8,6 +8,7 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator BurstFire { get; set; }
         public DurationCooldownIndicator Balder { get; set; }
         public DurationCooldownIndicator Bombardment { get; set; }
+        public DurationCooldownIndicator ModularSystem { get; set; }
 
         private void FlashBfIfFullWp(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -23,21 +24,34 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
             SessionManager.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
             SessionManager.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
+            SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
 
-            BurstFire = new DurationCooldownIndicator(Dispatcher);
-            Balder = new DurationCooldownIndicator(Dispatcher);
-            Bombardment = new DurationCooldownIndicator(Dispatcher);
 
-            BurstFire.Buff = new FixedSkillCooldown(bfire, false);
-            Balder.Buff = new FixedSkillCooldown(balder, false);
-            Bombardment.Buff = new FixedSkillCooldown(bombard, false);
-            BurstFire.Cooldown = new FixedSkillCooldown(bfire, true);
-            Balder.Cooldown = new FixedSkillCooldown(balder, false);
-            Bombardment.Cooldown = new FixedSkillCooldown(bombard, false);
-            StaminaTracker.PropertyChanged += FlashBfIfFullWp;
+            BurstFire = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new FixedSkillCooldown(bfire, false),
+                Cooldown = new FixedSkillCooldown(bfire, true)
+            };
+            Bombardment = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new FixedSkillCooldown(bombard, false),
+                Cooldown = new FixedSkillCooldown(bombard, false)
+            };
+            Balder = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new FixedSkillCooldown(balder, false),
+                Cooldown = new FixedSkillCooldown(balder, false)
+            };
+            ModularSystem = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new FixedSkillCooldown(modSys, false),
+                Cooldown = new FixedSkillCooldown(modSys, true)
+            };
             Balder.Cooldown.FlashOnAvailable = true;
             Bombardment.Cooldown.FlashOnAvailable = true;
+            ModularSystem.Cooldown.FlashOnAvailable = true;
 
+            StaminaTracker.PropertyChanged += FlashBfIfFullWp;
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
@@ -50,6 +64,11 @@ namespace TCC.ViewModels
             if (Bombardment.Cooldown.Skill != null && sk.Skill.IconName == Bombardment.Cooldown.Skill.IconName)
             {
                 Bombardment.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (ModularSystem.Cooldown.Skill != null && sk.Skill.IconName == ModularSystem.Cooldown.Skill.IconName)
+            {
+                ModularSystem.Cooldown.Start(sk.Cooldown);
                 return true;
             }
             return false;

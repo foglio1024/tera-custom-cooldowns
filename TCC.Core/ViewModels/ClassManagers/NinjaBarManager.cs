@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -21,11 +20,6 @@ namespace TCC.ViewModels
                 NPC(nameof(FocusOn));
             }
 
-        }
-
-        public NinjaBarManager()
-        {
-            AbnormalityTracker = new NinjaAbnormalityTracker();
         }
 
         private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)

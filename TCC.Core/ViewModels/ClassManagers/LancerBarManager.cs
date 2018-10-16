@@ -1,5 +1,4 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -11,7 +10,6 @@ namespace TCC.ViewModels
             {
                 Max = 10
             };
-            AbnormalityTracker = new LancerAbnormalityTracker();
         }
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }

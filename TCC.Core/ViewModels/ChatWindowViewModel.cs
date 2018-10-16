@@ -222,6 +222,18 @@ namespace TCC.ViewModels
             NPC(nameof(MessageCount));
         }
 
+        internal void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
+        {
+            if (!target.IsMe() || diff > 0 || target == source || source == 0 ||
+                !EntitiesManager.IsEntitySpawned(source)) return;
+            var srcName = EntitiesManager.GetEntityName(source);
+            srcName = srcName != ""
+                ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
+                : "<font color=\"#cccccc\">.</font>";
+            AddChatMessage(new ChatMessage(ChatChannel.Damage, "System", 
+                $"<font color=\"#cccccc\">Received </font> <font>{-diff}</font> <font color=\"#cccccc\"> (</font><font>{-diff / (double)maxHP:P}</font><font color=\"#cccccc\">)</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+        }
+
         internal void InitWindows()
         {
             ChatWindows.Clear();
@@ -272,6 +284,7 @@ namespace TCC.ViewModels
             var msg = new ChatMessage(ChatChannel.TCC, "System", "<FONT>" + message + "</FONT>");
             AddChatMessage(msg);
         }
+
         public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
         {
             if (TryGetLfg(x.Id, x.Message, x.Name, out var lfg))

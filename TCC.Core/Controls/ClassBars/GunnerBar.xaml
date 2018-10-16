@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="30 0 30 60" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -34,30 +34,28 @@
 
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
-                          Margin="5" >
-                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
-                                   StrokeThickness="30" Stroke="Aqua" HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="-20"
-                                   Width="98" Height="98" x:Name="MainReArc">
-                            <local:Arc.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="135"/>
-                                </TransformGroup>
-                            </local:Arc.RenderTransform>
-                            <local:Arc.Style>
-                                <Style TargetType="FrameworkElement">
-                                    <Setter Property="Opacity" Value=".7"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
-                                            <Setter Property="Opacity" Value="1"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </local:Arc.Style>
-                        </local:Arc>
-                    </Grid>
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="4" Stroke="Aqua" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20"
+                               Width="83" Height="83" x:Name="MainReArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <local:Arc.Style>
+                            <Style TargetType="FrameworkElement">
+                                <Setter Property="Opacity" Value=".7"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </local:Arc.Style>
+                    </local:Arc>
+
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
@@ -95,6 +93,16 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="0" Y="88" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
             <local:RhombBuffCooldownControl DataContext="{Binding Bombardment}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
@@ -107,6 +115,12 @@
                     <TranslateTransform X="-45" Y="45" />
                 </FrameworkElement.RenderTransform>
 
+            </local:RhombBuffCooldownControl>
+            <local:RhombBuffCooldownControl DataContext="{Binding ModularSystem}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="88" />
+                </FrameworkElement.RenderTransform>
             </local:RhombBuffCooldownControl>
             <Polygon Fill="{StaticResource RevampBackgroundBrush}"
                      Points="0 0 1 0 2 1 -1 1"

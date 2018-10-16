@@ -155,7 +155,7 @@ namespace TCC.Data
 
             Dispatcher.Invoke(() => Started?.Invoke(_currentMode));
         }
-        public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
+        public void Refresh(ulong cd)
         {
             _mainTimer.Stop();
             NPC(nameof(IsAvailable));
@@ -188,6 +188,34 @@ namespace TCC.Data
             Dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
 
         }
+        public void Refresh(ulong id, ulong cd)
+        {
+            if (Skill.Id % 10 == 0 && id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
+            _mainTimer.Stop();
+            NPC(nameof(IsAvailable));
+
+            if (cd == 0 || cd >= Int32.MaxValue)
+            {
+                Seconds = 0;
+                Cooldown = 0;
+                Dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
+                return;
+            }
+
+            Cooldown = cd;
+            Seconds = Cooldown / 1000;
+
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
+            _offsetTimer.Start();
+
+            _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
+            _mainTimer.Start();
+            NPC(nameof(IsAvailable));
+
+            Dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
+
+        }
+
         public void ForceEnded() => CooldownEnded(null, null);
         public void ForceStopFlashing() => Dispatcher.Invoke(() => FlashingStopForced?.Invoke());
         public void ProcReset()

@@ -23,11 +23,6 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator DivineCharge { get; set; }
         public DurationCooldownIndicator TripleNemesis { get; set; }
 
-        public PriestBarManager()
-        {
-            AbnormalityTracker = new PriestAbnormalityTracker();
-        }
-
 
         public sealed override void LoadSpecialSkills()
         {
@@ -125,7 +120,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
             {
-                EdictOfJudgment.Cooldown.Refresh(cd);
+                EdictOfJudgment.Cooldown.Refresh(skill.Id, cd);
                 return true;
             }
             return false;

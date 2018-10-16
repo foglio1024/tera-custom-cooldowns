@@ -12,37 +12,7 @@ namespace TCC
         public const int LongSkillTreshold = 40000;
         public const int Ending = 1; //TODO: this stuff should be removed btw
 
-        private static bool Pass(Skill sk)
-        {
-            if (sk.Detail == "off") return false;
-            return sk.Class != Class.Common && sk.Class != Class.None;
-        }
-        public static void AddSkillDirectly(Skill sk, uint cd)
-        {
-            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
-        }
 
-        private static void RouteSkill(SkillCooldown skillCooldown)
-        {
-            if (skillCooldown.Cooldown == 0)
-            {
-                CooldownWindowViewModel.Instance.Remove(skillCooldown.Skill);
-            }
-            else
-            {
-                CooldownWindowViewModel.Instance.AddOrRefresh(skillCooldown);
-            }
-            App.BaseDispatcher.Invoke(() => SkillStarted?.Invoke());
-        }
-
-        public static void ResetSkill(uint id)
-        {
-            if (SessionManager.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
-            {
-                if (!Pass(skill)) return;
-                CooldownWindowViewModel.Instance.ResetSkill(skill);
-            }
-        }
 
         public static void AddSkill(uint id, ulong cd)
         {
@@ -69,6 +39,18 @@ namespace TCC
             }
 
         }
+        public static void AddPassivitySkill(uint abId, uint cd)
+        {
+            if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
+            {
+                RouteSkill(new SkillCooldown(skill, cd * 1000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+            }
+
+        }
+        public static void AddSkillDirectly(Skill sk, uint cd)
+        {
+            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+        }
 
         public static void ChangeSkillCooldown(uint id, uint cd)
         {
@@ -79,24 +61,35 @@ namespace TCC
             }
 
         }
-
+        public static void ResetSkill(uint id)
+        {
+            if (SessionManager.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            {
+                if (!Pass(skill)) return;
+                CooldownWindowViewModel.Instance.ResetSkill(skill);
+            }
+        }
         public static void Clear()
         {
-            CooldownWindowViewModel.Instance.ShortSkills.Clear();
-            CooldownWindowViewModel.Instance.LongSkills.Clear();
-
-            //SessionManager.CurrentPlayer.Class = Class.None;
-            SessionManager.CurrentPlayer.EntityId = 0;
-            SessionManager.Logged = false;
+            CooldownWindowViewModel.Instance.ClearSkills();
         }
 
-        public static void AddPassivitySkill(uint abId, uint cd)
+        private static void RouteSkill(SkillCooldown skillCooldown)
         {
-            if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
+            if (skillCooldown.Cooldown == 0)
             {
-                RouteSkill(new SkillCooldown(skill, cd * 1000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+                CooldownWindowViewModel.Instance.Remove(skillCooldown.Skill);
             }
-
+            else
+            {
+                CooldownWindowViewModel.Instance.AddOrRefresh(skillCooldown);
+            }
+            App.BaseDispatcher.Invoke(() => SkillStarted?.Invoke());
+        }
+        private static bool Pass(Skill sk)
+        {
+            if (sk.Detail == "off") return false;
+            return sk.Class != Class.Common && sk.Class != Class.None;
         }
     }
 }

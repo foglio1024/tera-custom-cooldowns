@@ -44,36 +44,56 @@
                     </Image.Style>
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
-                          Margin="5" >
-                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
-                                   StrokeThickness="30" HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="-20"
-                                   Width="98" Height="98" x:Name="MainReArc">
-                            <local:Arc.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="135"></RotateTransform>
-                                </TransformGroup>
-                            </local:Arc.RenderTransform>
-                            <local:Arc.Style>
-                                <Style TargetType="Shape">
-                                    <Setter Property="Opacity" Value=".7"/>
-                                    <Setter Property="Stroke" Value="White"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
-                                            <Setter Property="Opacity" Value="1"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
-                                            <Setter Property="Stroke" Value="DarkOrange"/>
-                                            <Setter Property="Opacity" Value="1"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </local:Arc.Style>
-                        </local:Arc>
-                    </Grid>
-                    <Grid.Style>
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="3" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20" 
+                               Width="78" Height="78" x:Name="MainReArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <local:Arc.Style>
+                            <Style TargetType="Shape">
+                                <Setter Property="Opacity" Value=".7"/>
+                                <Setter Property="Stroke" Value="White"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </DataTrigger>
+                                    <!--<DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                        <Setter Property="Opacity" Value="0"/>
+                                    </DataTrigger>-->
+                                </Style.Triggers>
+                            </Style>
+                        </local:Arc.Style>
+                    </local:Arc>
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="3" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20"
+                               Width="78" Height="78" x:Name="RagArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <local:Arc.Style>
+                            <Style TargetType="Shape">
+                                <Setter Property="Opacity" Value="0"/>
+                                <Setter Property="Stroke" Value="DarkOrange"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                        <Setter Property="Stroke" Value="DarkOrange"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </local:Arc.Style>
+                    </local:Arc>
+
+                    <!--<Grid.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
@@ -92,8 +112,7 @@
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </Grid.Style>
-
+                    </Grid.Style>-->
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassValkyrie}" Margin="19" Opacity=".3"/>

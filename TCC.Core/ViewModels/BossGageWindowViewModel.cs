@@ -446,9 +446,8 @@ namespace TCC.ViewModels
         {
             Dispatcher.Invoke(() =>
             {
-                var b = NpcList.ToSyncArray().FirstOrDefault(x => x == npc);
-                if (b == null) return;
-                b.Buffs.Clear();
+                if (NpcList.ToSyncArray().All(x => x != npc)) return;
+                npc.Buffs.Clear();
                 if (delay != 0)
                 {
 
@@ -459,21 +458,21 @@ namespace TCC.ViewModels
                     dt.Tick += (s, ev) =>
                     {
                         dt.Stop();
-                        RemoveAndDisposeNPC(b);
+                        RemoveAndDisposeNPC(npc);
                     };
                     dt.Start();
                 }
                 else
                 {
-                    RemoveAndDisposeNPC(b);
+                    RemoveAndDisposeNPC(npc);
                 }
             });
         }
 
         private void RemoveAndDisposeNPC(Npc b)
         {
-            NpcList.Remove(b);
             b.Dispose();
+            NpcList.Remove(b);
         }
 
         /*

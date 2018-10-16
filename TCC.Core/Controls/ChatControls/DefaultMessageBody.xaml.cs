@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using Dragablz;
 using System.Windows;
 using System.Windows.Input;
-using Dragablz;
 using TCC.Data;
 using TCC.ViewModels;
 

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.ViewModels;
@@ -7,6 +8,53 @@ namespace TCC
 {
     public static class AbnormalityManager
     {
+        public static ClassAbnormalityTracker CurrentAbnormalityTracker { get; set; }
+
+        public static void SetAbnormalityTracker(Class c)
+        {
+            switch (c)
+            {
+                case Class.Warrior:
+                    CurrentAbnormalityTracker = new WarriorAbnormalityTracker();
+                    break;
+                case Class.Lancer:
+                    CurrentAbnormalityTracker = new LancerAbnormalityTracker();
+                    break;
+                case Class.Slayer:
+                    CurrentAbnormalityTracker = new SlayerAbnormalityTracker();
+                    break;
+                case Class.Berserker:
+                    CurrentAbnormalityTracker = new BerserkerAbnormalityTracker();
+                    break;
+                case Class.Sorcerer:
+                    CurrentAbnormalityTracker = new SorcererAbnormalityTracker();
+                    break;
+                case Class.Archer:
+                    CurrentAbnormalityTracker = new ArcherAbnormalityTracker();
+                    break;
+                case Class.Priest:
+                    CurrentAbnormalityTracker = new PriestAbnormalityTracker();
+                    break;
+                case Class.Mystic:
+                    CurrentAbnormalityTracker = new MysticAbnormalityTracker();
+                    break;
+                case Class.Reaper:
+                    CurrentAbnormalityTracker = new ReaperAbnormalityTracker();
+                    break;
+                case Class.Gunner:
+                    CurrentAbnormalityTracker = new GunnerAbnormalityTracker();
+                    break;
+                case Class.Brawler:
+                    CurrentAbnormalityTracker = new BrawlerAbnormalityTracker();
+                    break;
+                case Class.Ninja:
+                    CurrentAbnormalityTracker = new NinjaAbnormalityTracker();
+                    break;
+                case Class.Valkyrie:
+                    CurrentAbnormalityTracker = new ValkyrieAbnormalityTracker();
+                    break;
+            }
+        }
         public static bool BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
             if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
@@ -44,6 +92,7 @@ namespace TCC
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
+            Log.CW($"[BeginPlayerAbnormality] {ab.Name} ({ab.Id})");
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)

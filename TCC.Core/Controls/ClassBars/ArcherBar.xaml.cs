@@ -33,7 +33,7 @@ namespace TCC.Controls.ClassBars
 
         private void OnStacksChanged(int stacks)
         {
-            Dispatcher.Invoke(() => _an2.To = ((stacks / 10D) * 280) + 40);
+            Dispatcher.Invoke(() => _an2.To = ((stacks / 10D) * 280) + 42);
             Dispatcher.Invoke(() => _an2.Duration = TimeSpan.FromMilliseconds(150));
                 
                 Dispatcher.Invoke(() => SecReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
@@ -50,8 +50,8 @@ namespace TCC.Controls.ClassBars
         {
             Dispatcher.Invoke(() =>
             {
-                _an.From = 320;
-                _an.To = 40;
+                _an.From = 318;
+                _an.To = 42;
                 _an.Duration = TimeSpan.FromMilliseconds(duration);
                 MainReArc.BeginAnimation(Arc.EndAngleProperty, _an);
             });
