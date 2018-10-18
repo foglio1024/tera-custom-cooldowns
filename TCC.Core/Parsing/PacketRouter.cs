@@ -121,8 +121,7 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
-            //CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
-            //CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            SessionManager.CurrentPlayer.CritFactor = p.BonusCritFactor;
 
             SessionManager.SetPlayerMaxHp(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMp(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
@@ -132,11 +131,17 @@ namespace TCC.Parsing
             SessionManager.SetPlayerMp(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
 
-            SessionManager.SetPlayerCritFactor(p.BonusCritFactor);
+            switch (SessionManager.CurrentPlayer.Class)
+            {
+                case Class.Warrior:
+                    if (Settings.ClassWindowSettings.Enabled)
+                        ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
+                    break;
+                case Class.Sorcerer:
+                    SessionManager.SetSorcererElements(p.Fire, p.Ice, p.Arcane);
+                    break;
+            }
 
-            if (!Settings.ClassWindowSettings.Enabled) return;
-            if (SessionManager.CurrentPlayer.Class == Class.Warrior)
-                ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
@@ -460,6 +465,7 @@ namespace TCC.Parsing
         {
             if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
                 x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Foglio is watching you °L°", NotificationType.Warning);
+            Log.CW(x.Message);
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
 
