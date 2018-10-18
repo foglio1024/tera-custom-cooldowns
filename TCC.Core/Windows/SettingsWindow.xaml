@@ -725,7 +725,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Civil Unreset window" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Civil Unrest window" Style="{StaticResource DefaultTextStyle}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Character window settings -->
