@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -96,14 +97,28 @@ namespace TCC
 
             if (Settings.LastRegion == "NA" || Settings.LastRegion == "")
                 WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
-            if(Debug) DebugStuff();
+            if (Debug) DebugStuff();
             Loading = false;
         }
 
+        private static System.Timers.Timer _t;
         private static void DebugStuff()
         {
+            SessionManager.Logged = true;
+            SessionManager.LoadingScreen = false;
+            _t = new System.Timers.Timer { Interval = 1000 };
+            _t.Elapsed += (_, __) =>
+            {
+                SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
+                    0 : SessionManager.CurrentPlayer.CurrentST + 100);
+            };
+            SessionManager.CurrentPlayer.Class = Class.Brawler;
+            ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            SessionManager.SetSorcererElements(true, true, true);
+            SessionManager.SetPlayerMaxSt(10, 1000);
+            //SessionManager.SetPlayerSt(10, 1000);
 
-
+            _t.Start();
             //var i = 0;
             //while (i < 20000)
             //{
