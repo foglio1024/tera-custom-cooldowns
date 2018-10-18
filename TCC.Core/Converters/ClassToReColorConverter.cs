@@ -12,24 +12,27 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Color col = Colors.Transparent;
+            var parLight = parameter != null && parameter.ToString().Contains("light") ? "Light" : "";
             if (value != null)
                 switch ((Class)value)
                 {
                     case Class.Gunner:
-                        col = Colors.Aqua;
+                        // ReSharper disable once PossibleNullReferenceException
+                        col = (Color) Application.Current.FindResource("WillpowerColor"+parLight);
                         break;
                     case Class.Brawler:
-                        col = Colors.Orange;
+                        // ReSharper disable once PossibleNullReferenceException
+                        col = (Color)Application.Current.FindResource("RageColor" + parLight);
                         break;
                     case Class.Ninja:
                         // ReSharper disable once PossibleNullReferenceException
-                        col = (Color) Application.Current.FindResource("NinjaColor");
+                        col = (Color) Application.Current.FindResource("ArcaneColor"+parLight);
                         break;
                     case Class.Valkyrie:
                         col = Colors.White;
                         break;
                 }
-            return parameter != null && parameter.ToString() == "color" ? (object)col : new SolidColorBrush(col);
+            return parameter != null && parameter.ToString().Contains("color") ? (object)col : new SolidColorBrush(col);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
