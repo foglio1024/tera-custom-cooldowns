@@ -114,7 +114,7 @@ namespace TCC
                 {
                     CurrentPlayer.IsInCombat = false;
                 }
-                if(combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+                if (combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
             }
         }
         public static void SetPlayerHp(float hp)
@@ -177,7 +177,6 @@ namespace TCC
         {
             CurrentPlayer.MaxShield = shield;
             CurrentPlayer.CurrentShield = shield;
-
         }
 
         public static void InitDatabases(string lang)
@@ -198,11 +197,17 @@ namespace TCC
             QuestDatabase = new QuestDatabase(lang);
         }
 
-        public static void SetPlayerCritFactor(float p)
+        public static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
         {
-            CurrentPlayer.CritFactor = p;
+            CurrentPlayer.Fire = pFire;
+            CurrentPlayer.Ice = pIce;
+            CurrentPlayer.Arcane = pArcane;
+            
+            if (Settings.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            {
+                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotiftElementChanged();
+            }
 
         }
     }
-
 }

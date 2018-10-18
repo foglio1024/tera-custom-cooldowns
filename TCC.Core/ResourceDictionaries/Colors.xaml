@@ -34,8 +34,17 @@
 
     <Color x:Key="RunemarkColor">                #FFE3BD </Color>
     <Color x:Key="MaxRunemarkColor">             #FF98BB </Color>
-    <Color x:Key="NinjaColor">                   #C387FF </Color>
-    <Color x:Key="GunnerColor">                  #6AB8FF </Color>
+
+    <Color x:Key="FireColor">                    #ff695a </Color>
+    <Color x:Key="FireColorLight">               #ffb2a5 </Color>
+    <Color x:Key="IceColor">                     #73d6fe </Color>
+    <Color x:Key="IceColorLight">                #ade7ff </Color>
+    <Color x:Key="ArcaneColor">                  #d68aff </Color>
+    <Color x:Key="ArcaneColorLight">             #e7d7ff </Color>
+    <Color x:Key="RageColor">                    #e0713b </Color>
+    <Color x:Key="RageColorLight">               #efe3c6 </Color>
+    <Color x:Key="WillpowerColor">               #49d0e7 </Color>
+    <Color x:Key="WillpowerColorLight">          #c5faf6 </Color>
 
     <Color x:Key="GoldColor">                    #FFB033 </Color>
     <Color x:Key="SilverColor">                  Silver  </Color>

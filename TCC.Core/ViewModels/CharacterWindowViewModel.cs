@@ -19,10 +19,10 @@ namespace TCC.ViewModels
             Player.Class == Class.Gunner ||
             Player.Class == Class.Ninja ||
             Player.Class == Class.Valkyrie);
-        //public bool IsTeraOnTop
-        //{
-        //    get => WindowManager.IsTccVisible;
-        //}
+        public bool ShowElements =>(
+            !Settings.ClassWindowSettings.Visible ||
+            !Settings.ClassWindowSettings.Enabled) &&
+            (Player.Class == Class.Sorcerer);
 
 
         public CharacterWindowViewModel()
@@ -37,6 +37,7 @@ namespace TCC.ViewModels
         private void ClassWindowSettings_EnabledChanged()
         {
             NPC(nameof(ShowRe));
+            NPC(nameof(ShowElements));
         }
 
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -45,6 +46,7 @@ namespace TCC.ViewModels
             if (e.PropertyName == nameof(Data.Player.Class))
             {
                 NPC(nameof(ShowRe));
+                NPC(nameof(ShowElements));
             }
         }
     }

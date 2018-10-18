@@ -1226,6 +1226,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\char_window_bg_sorc.png" />
     <Resource Include="resources\images\kr_mob_icon.png" />
     <Resource Include="resources\images\char_window_fg.png" />
     <Resource Include="resources\images\traverse_cut.png" />

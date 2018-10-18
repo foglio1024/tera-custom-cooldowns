@@ -4,7 +4,13 @@ namespace TCC.ViewModels
 {
     public class SorcererBarManager : ClassManager
     {
+
+
         public DurationCooldownIndicator ManaBoost { get; set; }
+
+        public bool Fire => SessionManager.CurrentPlayer.Fire;
+        public bool Ice => SessionManager.CurrentPlayer.Ice;
+        public bool Arcane => SessionManager.CurrentPlayer.Arcane;
 
         public override void LoadSpecialSkills()
         {
@@ -22,6 +28,13 @@ namespace TCC.ViewModels
                 return true;
             }
             return false;
+        }
+
+        public void NotiftElementChanged()
+        {
+            NPC(nameof(Fire));
+            NPC(nameof(Ice));
+            NPC(nameof(Arcane));
         }
     }
 }
