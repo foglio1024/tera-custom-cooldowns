@@ -10,6 +10,7 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.TeraCommon;
+using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
 
 namespace TCC
@@ -436,6 +437,19 @@ namespace TCC
         {
             var sb = new StringBuilder("request_candidates");
             SendData(sb.ToString());
+        }
+
+        public static void ForceSystemMessage(string msg, string opcode)
+        {
+            var opc = PacketProcessor.SystemMessageNamer.GetCode(opcode);
+            var badOpc = msg.Split('\v')[0];
+            if(badOpc == "@0") msg = msg.Replace(badOpc, "@" + opc);
+            var sb = new StringBuilder("force_sysmsg");
+            sb.Append("&msg=");
+            sb.Append(msg);
+
+            SendData(sb.ToString());
+
         }
         public static void SendCommand(string command)
         {
