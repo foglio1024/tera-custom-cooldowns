@@ -59,13 +59,17 @@ namespace TCC.Windows
                     break;
                 }
             }
-            if (same) return;
+            if (same)
+            {
+                FocusManager.ForceFocused = false;
+                return;
+            }
             VM.TabVMs.Clear();
             foreach (var tab in items)
             {
                 VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
-            FocusManager.ForceFocused = false; 
+                FocusManager.ForceFocused = false;
 
         }
 
@@ -330,7 +334,7 @@ namespace TCC.Windows
                 }
             }
             UpdateSettings();
-            if (!FocusManager.ForceFocused) FocusManager.ForceFocused = false; //FocusTimer.Enabled = true;
+            if (FocusManager.ForceFocused) FocusManager.ForceFocused = false; //FocusTimer.Enabled = true;
         }
 
 
