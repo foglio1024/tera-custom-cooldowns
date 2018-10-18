@@ -9,12 +9,13 @@ namespace TCC.ClassSpecific
     {
         private const uint RagnarokId = 10155130;
         private const uint GrugnirsBiteId = 10155530;
-        private static readonly List<uint> GodsfallIds = new List<uint> { 10155510, 10155512 };
+        private const uint GodsfallId = 10155512;
+        private static readonly List<uint> GodsfallPreCdIds = new List<uint> { 10155510, 10155512 };
         private static readonly List<uint> TwilightWaltzIds = new List<uint> { 10155540, 10155541, 10155542 };
 
-        private Skill _godsfall;
-        private Skill _twilightWaltz;
-        private Skill _grugnirsBite;
+        private readonly Skill _godsfall;
+        private readonly Skill _twilightWaltz;
+        private readonly Skill _grugnirsBite;
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
@@ -22,17 +23,20 @@ namespace TCC.ClassSpecific
             CheckGrugnirsBite(p);
             CheckTwilightWaltz(p);
             CheckRagnarok(p);
+            CheckGodsfallPrecd(p);
             CheckGodsfall(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
             if (!p.TargetId.IsMe()) return;
             CheckRagnarok(p);
+            CheckGodsfall(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             if (!p.TargetId.IsMe()) return;
             CheckRagnarok(p);
+            CheckGodsfall(p);
         }
 
         private static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
@@ -50,14 +54,31 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId != RagnarokId) return;
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Refresh(p.Duration);
         }
+
+        private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
+        {
+            if (p.AbnormalityId != GodsfallId) return;
+            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Godsfall.Buff.Start(p.Duration);
+        }
+        private static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.AbnormalityId != GodsfallId) return;
+            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Godsfall.Buff.Refresh(p.Duration);
+        }
+        private static void CheckGodsfall(S_ABNORMALITY_END p)
+        {
+            if (p.AbnormalityId != GodsfallId) return;
+            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Godsfall.Buff.Refresh(0);
+        }
+
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
         {
             if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
             StartPrecooldown(_twilightWaltz, p.Duration);
         }
-        private void CheckGodsfall(S_ABNORMALITY_BEGIN p)
+        private void CheckGodsfallPrecd(S_ABNORMALITY_BEGIN p)
         {
-            if (!GodsfallIds.Contains(p.AbnormalityId)) return;
+            if (!GodsfallPreCdIds.Contains(p.AbnormalityId)) return;
             StartPrecooldown(_godsfall, p.Duration);
         }
         private void CheckGrugnirsBite(S_ABNORMALITY_BEGIN p)
