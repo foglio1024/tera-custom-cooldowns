@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ArcherBarManager}">
-    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 20 50 50" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -20,7 +20,7 @@
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                 </Image>
                 <Grid x:Name="MainReArcGrid" >
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="3" Stroke="Orange" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-20"
@@ -42,7 +42,7 @@
                         </local:Arc.Style>
                     </local:Arc>
 
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="3" Stroke="White" HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="-20" Opacity=".5" Rhomb="True"

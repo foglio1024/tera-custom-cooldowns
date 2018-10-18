@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Loaded="NinjaBar_OnLoaded" d:DataContext="{d:DesignInstance viewModels:NinjaBarManager}">
-    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 10 50 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 60" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -24,7 +24,7 @@
                                 <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="{StaticResource NinjaColor}" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource ArcaneColor}" BlurRadius="35" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
@@ -34,22 +34,25 @@
 
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" ClipToBounds="True"
-                Margin="5" >
                         <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
-                       StrokeThickness="30" Stroke="{StaticResource NinjaBrush}" HorizontalAlignment="Center"
+                       StrokeThickness="4" Stroke="{StaticResource ArcaneBrushLight}" HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Margin="-20"
-                       Width="98" Height="98" x:Name="MainReArc">
+                       Margin="-20" Rhomb="True"
+                       Width="83" Height="83" x:Name="MainReArc">
                             <local:Arc.RenderTransform>
                                 <TransformGroup>
-                                    <RotateTransform Angle="135"/>
+                                    <RotateTransform Angle="180"/>
                                 </TransformGroup>
                             </local:Arc.RenderTransform>
                             <local:Arc.Style>
                                 <Style TargetType="FrameworkElement">
                                     <Setter Property="Opacity" Value=".7"/>
-                                    <Style.Triggers>
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource ArcaneColor}" BlurRadius="10" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                <Style.Triggers>
                                         <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                             <Setter Property="Opacity" Value="1"/>
                                         </DataTrigger>
@@ -57,22 +60,20 @@
                                 </Style>
                             </local:Arc.Style>
                         </local:Arc>
-                    </Grid>
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="{StaticResource NinjaColor}" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource ArcaneColor}" BlurRadius="15" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Grid.Style>
                 </Grid>
-                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassNinja}" Margin="19" Opacity=".3"/>
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"

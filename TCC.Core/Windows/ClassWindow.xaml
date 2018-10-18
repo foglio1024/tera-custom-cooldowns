@@ -87,7 +87,7 @@
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                          />
         <ContentControl x:Name="WindowContent" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center" 
-                        ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}" Margin="15" Grid.Row="1">
+                        ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}"  Grid.Row="1" >
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                             ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>

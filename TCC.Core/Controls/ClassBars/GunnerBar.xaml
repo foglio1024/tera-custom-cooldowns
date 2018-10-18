@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Loaded="GunnerBar_OnLoaded" d:DataContext="{d:DesignInstance viewModels:GunnerBarManager}">
-    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 20 50 90" Name="Root" ClipToBounds="False" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 60" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0 0 0 0" ClipToBounds="False" Width="Auto" Height="Auto" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -24,7 +24,7 @@
                                 <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource WillpowerColor}" BlurRadius="35" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
@@ -35,7 +35,7 @@
                 </Image>
                 <Grid x:Name="MainReArcGrid">
                     <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
-                               StrokeThickness="4" Stroke="Aqua" HorizontalAlignment="Center"
+                               StrokeThickness="4" Stroke="{StaticResource WillpowerBrushLight}" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-20"
                                Width="83" Height="83" x:Name="MainReArc">
@@ -47,6 +47,11 @@
                         <local:Arc.Style>
                             <Style TargetType="FrameworkElement">
                                 <Setter Property="Opacity" Value=".7"/>
+                                <Setter Property="Effect" >
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="{StaticResource WillpowerColor}" BlurRadius="10" ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                         <Setter Property="Opacity" Value="1"/>
@@ -58,13 +63,13 @@
 
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="Aqua" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource WillpowerColor}" BlurRadius="35" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
