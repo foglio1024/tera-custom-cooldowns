@@ -284,6 +284,43 @@ namespace TCC.Data
             }
         }
 
+        private bool _fire;
+        private bool _ice;
+        private bool _arcane;
+
+        public bool Fire
+        {
+            get => _fire;
+            set
+            {
+                if (_fire == value) return;
+                _fire = value;
+                NPC();
+            }
+        }
+        public bool Ice
+        {
+            get => _ice;
+            set
+            {
+                if (_ice == value) return;
+                _ice = value;
+                NPC();
+            }
+        }
+        public bool Arcane
+        {
+            get => _arcane;
+            set
+            {
+                if (_arcane == value) return;
+                _arcane = value;
+                NPC();
+            }
+        }
+
+
+
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
