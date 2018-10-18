@@ -82,6 +82,7 @@ namespace TCC.Controls
         {
             SettingsWindowViewModel.AbnormalityShapeChanged -= OnViewModelPropertyChanged;
             BossGageWindowViewModel.Instance.NpcListChanged -= OnNpcListChanged;
+            if (_dc == null) return;
             _dc.DeleteEvent -= Dc_DeleteEvent;
             _dc.PropertyChanged -= OnDcPropertyChanged;
 
