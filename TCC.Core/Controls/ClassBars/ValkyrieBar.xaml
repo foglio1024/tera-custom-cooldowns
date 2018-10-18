@@ -7,8 +7,8 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ValkyrieBarManager}">
-    <Grid Width="Auto" Margin="20 15 20 15" Name="Root" >
-        <Grid HorizontalAlignment="Center" UseLayoutRounding="True">
+    <Grid Width="Auto" Margin="50 20" Name="Root" >
+        <Grid HorizontalAlignment="Center" UseLayoutRounding="True" Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -25,7 +25,12 @@
                     Grid.Column="1"
                     Height="20"
                     VerticalAlignment="Center"
-                    Margin="-6 27 0 0" />
+                    Margin="0" >
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-10" Y="15"/>
+                </FrameworkElement.RenderTransform>
+
+            </local:RunemarksControl>
             <!--Runemarks-->
             <Grid>
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
@@ -45,15 +50,16 @@
                 </Image>
                 <Grid x:Name="MainReArcGrid">
                     <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
-                               StrokeThickness="3" HorizontalAlignment="Center"
+                               StrokeThickness="4" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
-                               Margin="-20" 
-                               Width="78" Height="78" x:Name="MainReArc">
-                        <local:Arc.RenderTransform>
-                            <TransformGroup>
+                               Margin="-18" 
+                               Width="80" Height="80" x:Name="MainReArc">
+                        <local:Arc.LayoutTransform>
                                 <RotateTransform Angle="180"/>
-                            </TransformGroup>
-                        </local:Arc.RenderTransform>
+                        </local:Arc.LayoutTransform>
+                        <FrameworkElement.RenderTransform>
+                            <TranslateTransform X="1"></TranslateTransform>
+                        </FrameworkElement.RenderTransform>
                         <local:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value=".7"/>
@@ -70,15 +76,16 @@
                         </local:Arc.Style>
                     </local:Arc>
                     <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
-                               StrokeThickness="3" HorizontalAlignment="Center"
+                               StrokeThickness="4" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
-                               Margin="-20"
-                               Width="78" Height="78" x:Name="RagArc">
-                        <local:Arc.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="180"/>
-                            </TransformGroup>
-                        </local:Arc.RenderTransform>
+                               Margin="-18" 
+                               Width="80" Height="80" x:Name="RagArc">
+                        <local:Arc.LayoutTransform>
+                            <RotateTransform Angle="180"/>
+                        </local:Arc.LayoutTransform>
+                        <FrameworkElement.RenderTransform>
+                            <TranslateTransform X="1"></TranslateTransform>
+                        </FrameworkElement.RenderTransform>
                         <local:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value="0"/>
@@ -123,17 +130,21 @@
                 </TextBlock>
                 <Grid>
                     <Grid ClipToBounds="False" >
-                        <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
-                            <Rectangle Stroke="{StaticResource RevampBorderBrush}"
-                           StrokeThickness="1" Margin="12">
-                            </Rectangle>
-                        </Grid>
+                        <!--<Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
+                            --><!--<Rectangle Stroke="{StaticResource RevampBorderBrush}"
+                           StrokeThickness="1" Margin="11">
+                            </Rectangle>--><!--
+                        </Grid>-->
 
                         <Rectangle Width="60" Height="60" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
                        OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding Ragnarok.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                             </Rectangle.Fill>
+                            <FrameworkElement.RenderTransform>
+                                <TranslateTransform X="1"></TranslateTransform>
+                            </FrameworkElement.RenderTransform>
+
                         </Rectangle>
                     </Grid>
 
@@ -153,12 +164,12 @@
                     </FrameworkElement.Style>
                 </Grid>
             </Grid>
-            <Grid Width="Auto" Height="Auto" VerticalAlignment="Center" Grid.RowSpan="2" Grid.Column="1"
-                  HorizontalAlignment="Left" Effect="{StaticResource DropShadow}">
+            <Grid Width="Auto" Height="Auto" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Column="1"
+                  HorizontalAlignment="Left" >
                 <Grid.RenderTransform>
-                    <TranslateTransform X="0" Y="-25"/>
+                    <TranslateTransform X="-5" Y="-10"/>
                 </Grid.RenderTransform>
-                <Border  RenderTransform="{StaticResource Rotate45}" Opacity="1" 
+                <Border  RenderTransform="{StaticResource Rotate45}" Opacity="1"
                         RenderTransformOrigin=".5 .5" Width="34" Height="34" BorderThickness="2"
                         Background="{StaticResource RevampBackgroundBrush}" >
                     <Border.Style>
@@ -182,7 +193,29 @@
                            Text="{Binding RunemarksCounter.Val}" FontSize="24" FontFamily="{StaticResource Frutiger}">
                 </TextBlock>
             </Grid>
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+                <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
+                        Effect="{StaticResource DropShadow}"
+                        Opacity=".7">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform X="-45" Y="0" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
 
+                <local:RhombBuffCooldownControl DataContext="{Binding Godsfall}" >
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="-45"></TranslateTransform>
+                    </FrameworkElement.RenderTransform>
+                </local:RhombBuffCooldownControl>
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform Y="-30"></TranslateTransform>
+                </FrameworkElement.RenderTransform>
+
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
