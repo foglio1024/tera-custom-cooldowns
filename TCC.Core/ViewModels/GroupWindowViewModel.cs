@@ -51,16 +51,6 @@ namespace TCC.ViewModels
         public GroupWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-
-            //WindowManager.TccVisibilityChanged += (s, ev) =>
-            //{
-            //    NPC("IsTeraOnTop");
-            //    if (IsTeraOnTop)
-            //    {
-            //        WindowManager.GroupWindow.RefreshTopmost();
-            //    }
-            //};
-
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
@@ -247,6 +237,24 @@ namespace TCC.ViewModels
             SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
+        private void SendDeathMessage(string name)
+        {
+            string msg;
+            string opcode;
+            if (Raid)
+            {
+                msg = "@0\vPartyPlayerName\v" + name;
+                opcode = "SMT_BATTLE_PARTY_DIE";
+            }
+            else
+            {
+                opcode = "SMT_BATTLE_PARTY_DIE";
+                msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
+            }
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+            if(Proxy.IsConnected) Proxy.ForceSystemMessage(msg, opcode);
+        }
         private void SendLeaveMessage(string name)
         {
             string msg;
@@ -413,6 +421,7 @@ namespace TCC.ViewModels
             u.MaxHp = p.MaxHP;
             u.MaxMp = p.MaxMP;
             u.Level = (uint)p.Level;
+            if(u.Alive && !p.Alive) SendDeathMessage(u.Name);
             u.Alive = p.Alive;
             NPC(nameof(AliveCount));
             if (!p.Alive) u.HasAggro = false;
