@@ -4,11 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
-        mc:Ignorable="d"
-        Title="DebugWindow" Height="450" Width="800" Background="{StaticResource RevampBackgroundBrush}">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
+        Title="DebugWindow" Background="{StaticResource RevampBackgroundBrush}">
     <Grid>
-        <StackPanel Orientation="Horizontal" >
-            <TextBlock Text="Queued Packets:" Foreground="White" Opacity=".7"/>
+        <StackPanel Orientation="Vertical"  VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                    
+                </Style>
+            </StackPanel.Resources>
+            <Button Click="SwitchClass">Reaper</Button>
+            <Button Click="SwitchClass">Gunner</Button>
+            <Button Click="SwitchClass">Valkyrie</Button>
+            <Button Click="SwitchClass">Warrior</Button>
+            <Button Click="SwitchClass">Ninja</Button>
+            <Button Click="SwitchClass">Sorcerer</Button>
+            <Button Click="SwitchClass">Berserker</Button>
+            <Button Click="SwitchClass">Slayer</Button>
+            <Button Click="SwitchClass">Mystic</Button>
+            <Button Click="SwitchClass">Priest</Button>
+            <Button Click="SwitchClass">Lancer</Button>
+            <!--<TextBlock Text="Queued Packets:" Foreground="White" Opacity=".7"/>
             <TextBlock x:Name="QueuedPacketsTb" Foreground="White"  Margin="5 0">
                 <Run>L:</Run>
                 <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Last, Mode=OneWay}"></Run>
@@ -16,7 +32,7 @@
                 <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Max, Mode=OneWay}"></Run>
                 <Run>A:</Run>
                 <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Avg, Mode=OneWay}"></Run>
-            </TextBlock>
+            </TextBlock>-->
         </StackPanel>
     </Grid>
 </Window>

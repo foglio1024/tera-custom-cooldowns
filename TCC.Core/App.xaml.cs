@@ -104,6 +104,7 @@ namespace TCC
         private static System.Timers.Timer _t;
         private static void DebugStuff()
         {
+            new DebugWindow().Show();
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
             _t = new System.Timers.Timer { Interval = 1000 };
@@ -112,13 +113,13 @@ namespace TCC
                 SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
                     0 : SessionManager.CurrentPlayer.CurrentST + 100);
             };
-            SessionManager.CurrentPlayer.Class = Class.Brawler;
+            SessionManager.CurrentPlayer.Class = Class.Reaper;
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
             SessionManager.SetSorcererElements(true, true, true);
             SessionManager.SetPlayerMaxSt(10, 1000);
-            //SessionManager.SetPlayerSt(10, 1000);
+            SessionManager.SetPlayerSt(10, 1000);
 
-            _t.Start();
+            //_t.Start();
             //var i = 0;
             //while (i < 20000)
             //{
