@@ -21,7 +21,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Image Source="../../resources/images/char_window_bg_sorc.png" Stretch="Uniform" Width="90" Height="88"/>
+            <Image Source="../../resources/images/char_window_bg_sorc.png" Stretch="Uniform" Width="90" Height="Auto"/>
             <Path Data="{StaticResource SvgClassSorcerer}" Width="30" Stretch="Uniform" Opacity=".5" />
 
             <local:Arc StartAngle="219" EndAngle="302" Visibility="{Binding Ice, Converter={StaticResource BooleanToVisibilityConverter}}">

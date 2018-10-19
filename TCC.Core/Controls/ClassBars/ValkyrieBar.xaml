@@ -12,7 +12,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -60,6 +59,10 @@
                         <FrameworkElement.RenderTransform>
                             <TranslateTransform X="1"></TranslateTransform>
                         </FrameworkElement.RenderTransform>
+                        <Shape.Effect>
+                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+                        </Shape.Effect>
+
                         <local:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value=".7"/>
