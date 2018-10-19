@@ -104,11 +104,13 @@ namespace TCC.Data
                 {
                     SettingsWindowViewModel.ChatShowChannelChanged += ShowChannelNPC;
                     SettingsWindowViewModel.ChatShowTimestampChanged += ShowTimestampNPC;
+                    SettingsWindowViewModel.FontSizeChanged += FontSizeNPC;
                 }
                 else
                 {
                     SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
                     SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
+                    SettingsWindowViewModel.FontSizeChanged -= FontSizeNPC;
                 }
 
                 if (_isVisible == value) return;
@@ -117,6 +119,7 @@ namespace TCC.Data
             }
         }
 
+        public int Size => Settings.FontSize;
         private void ShowChannelNPC()
         {
             NPC(nameof(ShowChannel));
@@ -125,6 +128,10 @@ namespace TCC.Data
         private void ShowTimestampNPC()
         {
             NPC(nameof(ShowTimestamp));
+        }
+        private void FontSizeNPC()
+        {
+            NPC(nameof(Size));
         }
         #endregion
 

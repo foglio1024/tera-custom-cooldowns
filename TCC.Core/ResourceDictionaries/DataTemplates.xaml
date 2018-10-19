@@ -296,7 +296,7 @@
     <DataTemplate x:Key="DefaultAuthorTemplate" DataType="data:ChatMessage">
         <ctrl:OutlinedTextBlock  Margin="3,0,3,0" 
                         Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
-                        FontSize="14"
+                        FontSize="{Binding Size}"
                         HorizontalAlignment="Stretch"
                         TextAlignment="Left"
                         FontWeight="DemiBold"
