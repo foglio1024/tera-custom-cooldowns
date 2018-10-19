@@ -21,11 +21,11 @@
         <controls:OutlinedTextBlock VerticalAlignment="Center" Text="Starting price" Grid.Row="1"
                                     Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"
                                     FontSize="14" StrokeThickness="3" Stroke="#9000" Margin="5,0,5,0"
-                                    FontFamily="{StaticResource Frutiger}" />
+                                    FontFamily="{StaticResource NotoSansMed}" />
         <controls:OutlinedTextBlock VerticalAlignment="Center" Text="Offered price " Grid.Row="2" Grid.Column="0"
                                     Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"
                                     FontSize="14" StrokeThickness="3" Stroke="#9000" Margin="5,0,5,0"
-                                    FontFamily="{StaticResource Frutiger}" />
+                                    FontFamily="{StaticResource NotoSansMed}" />
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="5" Grid.Column="0" Margin="0,0,0,2">
             <ContentControl x:Name="ItemAmount" Content="{Binding Amount}" ContentTemplate="{StaticResource SimpleTemplate}"/>
             <ContentControl x:Name="ItemName" Content="{Binding Listing}" ContentTemplate="{StaticResource MessageBodyTemplate}"/>
