@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -34,16 +35,10 @@ namespace TCC
         public const string ThankYou_mEME =
             "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
         public static bool Loading { get; private set; }
-        //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
             Loading = true;
-            //#if DEBUG
-            //            DebugWindow = new DebugWindow();
-            //            DebugWindow.Show();
-            //#endif
-
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSplashScreen();
@@ -274,10 +269,22 @@ namespace TCC
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/error.txt",
-                "##### CRASH #####\r\n" + ex.Message + "\r\n" +
-                ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                "\r\n" + ex.TargetSite);
+            var sb = new StringBuilder("\r\n\r\n");
+            sb.AppendLine($"##### {_version} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} #####");
+            sb.AppendLine($"Version: {PacketProcessor.Version}");
+            if (PacketProcessor.Server != null)
+            {
+                sb.Append($" - Region: {PacketProcessor.Server.Region}");
+                sb.Append($" - Server:{PacketProcessor.Server.ServerId}");
+            }
+
+            sb.AppendLine($"{ex.Message}");
+            sb.AppendLine($"{ex.StackTrace}");
+            sb.AppendLine($"Source: {ex.Source}");
+            sb.AppendLine($"Data: {ex.Data}");
+            if(ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
+            sb.AppendLine($"TargetSite: {ex.TargetSite}");
+            File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/error.txt", sb.ToString());
             try
             {
                 var t = new Thread(() => UploadCrashDump(e));
@@ -288,7 +295,7 @@ namespace TCC
                 // ignored
             }
 
-            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Check error.txt for more info.",
+            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching error.txt from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
             if (Proxy.IsConnected) Proxy.CloseConnection();
