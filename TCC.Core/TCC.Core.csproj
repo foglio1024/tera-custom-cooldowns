@@ -1252,6 +1252,18 @@
     <Resource Include="resources\images\Icon_Laurels\silver_kr.png" />
     <Resource Include="resources\images\awakened.png" />
     <None Include="packages.config" />
+    <None Include="resources\data\acc_benefits\acc_benefits-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1282,6 +1294,12 @@
     <Content Include="resources\data\dungeons-def-default.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="resources\data\equip_exp\equip_exp-SE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\monsters\monsters-SE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="resources\data\world_map\world_map-EU-FR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1303,6 +1321,9 @@
     <Content Include="resources\data\world_map\world_map-RU.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="resources\data\world_map\world_map-SE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="resources\data\world_map\world_map-THA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1424,6 +1445,12 @@
     <Content Include="resources\data\dungeons-def-default.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="resources\data\guild_quests\guild_quests-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\items\items-EU-EN.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1440,6 +1467,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\items\items-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\items\items-SE.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\items\items-TW.tsv">
@@ -1502,6 +1532,9 @@
     <None Include="resources\data\quests\quests-RU.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\data\quests\quests-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\quests\quests-THA.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1529,10 +1562,16 @@
     <None Include="resources\data\regions\regions-RU.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\data\regions\regions-SE.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\regions\regions-THA.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\regions\regions-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-SE.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\social\social-EU-FR.tsv">
@@ -1554,6 +1593,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\social\social-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-SE.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\social\social-THA.tsv">
@@ -1581,6 +1623,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\sys_msg\sys_msg-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-SE.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\data\sys_msg\sys_msg-THA.tsv">
