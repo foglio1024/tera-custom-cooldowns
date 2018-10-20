@@ -24,13 +24,32 @@ namespace TCC.TeraCommon.Game.Services
         }
 
         public string Region { get; set; }
-        public LangEnum Language { get; set; }
-
+        private LangEnum _language;
+        public LangEnum Language
+        {
+            get => _language;
+            set
+            {
+                _language = value;
+                switch (_language)
+                {
+                    case LangEnum.EN:
+                    case LangEnum.GER:
+                    case LangEnum.FR:
+                        Region = "EU"; break;
+                    case LangEnum.THA:
+                    case LangEnum.SE:
+                        Region = "THA"; break;
+                    default:
+                        Region = _language.ToString(); break;
+                }
+            }
+        }
         public string GetServerName(uint serverId, Server oldServer = null)
         {
             var servers = _servers.Where(x => x.ServerId == serverId).ToList();
             if (!servers.Any()) return oldServer?.Name ?? $"{serverId}";
-            return servers.FirstOrDefault(x => x.Region == Language.ToString())?.Name ?? servers.First().Name;
+            return servers.FirstOrDefault(x => x.Region == Region)?.Name ?? servers.First().Name;
         }
 
         public Dictionary<string, Server> GetServersByIp()
@@ -47,7 +66,7 @@ namespace TCC.TeraCommon.Game.Services
         {
             var servers = _servers.Where(x => x.ServerId == serverId).ToList();
             if (!servers.Any()) return oldServer;
-            return servers.FirstOrDefault(x => x.Region == Language.ToString()) ?? servers.First();
+            return servers.FirstOrDefault(x => x.Region == Region) ?? servers.First();
         }
     }
 }

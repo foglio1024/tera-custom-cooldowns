@@ -23,7 +23,8 @@ namespace TCC.Parsing
         TW = 7,
         RUS = 8,
         CHN = 9,
-        THA = 10
+        THA = 10,
+        SE = 11
     }
 }
 namespace TCC.Data
