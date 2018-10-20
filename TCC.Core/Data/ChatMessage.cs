@@ -581,7 +581,7 @@ namespace TCC.Data
 
             var text = a.Substring(textStart, textEnd - textStart);
 
-            var result = new MessagePiece(ReplaceEscapes(text, "",""))
+            var result = new MessagePiece(ReplaceEscapes(text))
             {
                 ItemId = id,
                 ItemUid = uid,
