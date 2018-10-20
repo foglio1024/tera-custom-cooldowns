@@ -11,7 +11,7 @@ namespace TCC.Controls
     /// <summary>
     /// Interaction logic for DragonControl.xaml
     /// </summary>
-    public partial class DragonControl 
+    public partial class DragonControl
     {
         private Npc _dc;
         private DoubleAnimation _shieldArcAn;
@@ -32,21 +32,29 @@ namespace TCC.Controls
 
         }
 
-        private void Dc_DeleteEvent() => Dispatcher.Invoke(() =>
+        private void Dc_DeleteEvent()
         {
-            try
+            if (_dc == null) return;
+            _dc.DeleteEvent -= Dc_DeleteEvent;
+            _dc.PropertyChanged -= Dc_PropertyChanged;
+
+            Dispatcher.Invoke(() =>
             {
-                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext, 0);
-            }
-            catch
-            {
-                // ignored
-            }
-        });
+
+                try
+                {
+                    BossGageWindowViewModel.Instance.RemoveMe(_dc, 0);
+                }
+                catch
+                {
+                    // ignored
+                }
+            });
+        }
 
         private void Dc_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == nameof(_dc.Shield))
+            if (e.PropertyName == nameof(_dc.Shield))
             {
                 if (_dc.Shield == ShieldStatus.On)
                 {
@@ -59,7 +67,7 @@ namespace TCC.Controls
                     ShieldArc.BeginAnimation(Arc.EndAngleProperty, _shieldArcAn);
                 }
             }
-            else if(e.PropertyName == nameof(_dc.Enraged))
+            else if (e.PropertyName == nameof(_dc.Enraged))
             {
                 if (_dc.Enraged)
                 {
@@ -70,7 +78,7 @@ namespace TCC.Controls
                     EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
                 }
             }
-            else if(e.PropertyName == nameof(_dc.CurrentHP))
+            else if (e.PropertyName == nameof(_dc.CurrentHP))
             {
                 if (_dc.Enraged)
                 {
