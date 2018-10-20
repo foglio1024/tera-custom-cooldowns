@@ -86,7 +86,7 @@
     <Color x:Key="ChatPartyColor">               #33B7FA </Color>
     <Color x:Key="ChatGuildColor">               #00E974 </Color>
     <Color x:Key="ChatAreaColor">                #A1A1E6 </Color>
-    <Color x:Key="ChatTradeColor">               #F97CA6 </Color>
+    <Color x:Key="ChatTradeColor">               #C07A81 </Color>
     <Color x:Key="ChatGreetColor">               #999999 </Color>
     <Color x:Key="ChatPartyNoticeColor">         #8EFFFF </Color>
     <Color x:Key="ChatRaidNoticeColor">          #F28730 </Color>
