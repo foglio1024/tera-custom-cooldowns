@@ -13,6 +13,8 @@ namespace TCC.ClassSpecific
         private static readonly uint[] TraverseCutIDs = { 101300/*, 101301*/ };
         private static readonly uint[] BladeWaltzIDs = { 104100 };
 
+        private Skill _bladeWaltz;
+
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!p.TargetId.IsMe()) return;
@@ -89,14 +91,17 @@ namespace TCC.ClassSpecific
             ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).DeadlyGamble.Buff.Refresh(0);
         }
 
-        private static void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
+        private void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
         {
             if (!BladeWaltzIDs.Contains(p.AbnormalityId)) return;
-            if (!SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out var sk)) return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, p.Duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(),true, true));
-
+            StartPrecooldown(_bladeWaltz, p.Duration);
         }
 
+        public WarriorAbnormalityTracker()
+        {
+            SessionManager.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out _bladeWaltz);
+
+        }
         private static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;

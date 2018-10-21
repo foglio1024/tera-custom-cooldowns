@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -33,16 +35,10 @@ namespace TCC
         public const string ThankYou_mEME =
             "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
         public static bool Loading { get; private set; }
-        //public static DebugWindow DebugWindow;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
             Loading = true;
-            //#if DEBUG
-            //            DebugWindow = new DebugWindow();
-            //            DebugWindow.Show();
-            //#endif
-
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSplashScreen();
@@ -96,14 +92,29 @@ namespace TCC
 
             if (Settings.LastRegion == "NA" || Settings.LastRegion == "")
                 WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
-            if(Debug) DebugStuff();
+            if (Debug) DebugStuff();
             Loading = false;
         }
 
+        private static System.Timers.Timer _t;
         private static void DebugStuff()
         {
+            new DebugWindow().Show();
+            SessionManager.Logged = true;
+            SessionManager.LoadingScreen = false;
+            _t = new System.Timers.Timer { Interval = 1000 };
+            _t.Elapsed += (_, __) =>
+            {
+                SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
+                    0 : SessionManager.CurrentPlayer.CurrentST + 100);
+            };
+            SessionManager.CurrentPlayer.Class = Class.Reaper;
+            ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            SessionManager.SetSorcererElements(true, true, true);
+            SessionManager.SetPlayerMaxSt(10, 1000);
+            SessionManager.SetPlayerSt(10, 1000);
 
-
+            //_t.Start();
             //var i = 0;
             //while (i < 20000)
             //{
@@ -258,10 +269,22 @@ namespace TCC
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            File.WriteAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/error.txt",
-                "##### CRASH #####\r\n" + ex.Message + "\r\n" +
-                ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                "\r\n" + ex.TargetSite);
+            var sb = new StringBuilder("\r\n\r\n");
+            sb.AppendLine($"##### {_version} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} #####");
+            sb.AppendLine($"Version: {PacketProcessor.Version}");
+            if (PacketProcessor.Server != null)
+            {
+                sb.Append($" - Region: {PacketProcessor.Server.Region}");
+                sb.Append($" - Server:{PacketProcessor.Server.ServerId}");
+            }
+
+            sb.AppendLine($"{ex.Message}");
+            sb.AppendLine($"{ex.StackTrace}");
+            sb.AppendLine($"Source: {ex.Source}");
+            sb.AppendLine($"Data: {ex.Data}");
+            if(ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
+            sb.AppendLine($"TargetSite: {ex.TargetSite}");
+            File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/error.txt", sb.ToString());
             try
             {
                 var t = new Thread(() => UploadCrashDump(e));
@@ -272,7 +295,7 @@ namespace TCC
                 // ignored
             }
 
-            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Check error.txt for more info.",
+            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching error.txt from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
             if (Proxy.IsConnected) Proxy.CloseConnection();

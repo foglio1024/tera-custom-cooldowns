@@ -1,6 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 using TCC.Annotations;
+using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -58,6 +63,12 @@ namespace TCC.Windows
         private void NPC([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SwitchClass(object sender, RoutedEventArgs e)
+        {
+            SessionManager.CurrentPlayer.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
+            ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
         }
     }
 }

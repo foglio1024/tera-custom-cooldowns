@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using TCC.Data;
 using TCC.Parsing.Messages;
+using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
 {
@@ -27,7 +29,10 @@ namespace TCC.ClassSpecific
         {
             App.BaseDispatcher.Invoke(() => MarkedTargets.Clear());
         }
-
+        protected static void StartPrecooldown(Skill sk, uint duration)
+        {
+            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(sk, duration, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true, true));
+        }
         protected ClassAbnormalityTracker()
         {
             ClearMarkedTargets();

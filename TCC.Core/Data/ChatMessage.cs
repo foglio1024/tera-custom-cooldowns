@@ -39,7 +39,7 @@ namespace TCC.Data
             {
                 if (_timestamp == value) return;
                 _timestamp = value;
-                NPC(nameof(_timestamp));
+                NPC(nameof(Timestamp));
             }
         }
 
@@ -104,11 +104,13 @@ namespace TCC.Data
                 {
                     SettingsWindowViewModel.ChatShowChannelChanged += ShowChannelNPC;
                     SettingsWindowViewModel.ChatShowTimestampChanged += ShowTimestampNPC;
+                    SettingsWindowViewModel.FontSizeChanged += FontSizeNPC;
                 }
                 else
                 {
                     SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
                     SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
+                    SettingsWindowViewModel.FontSizeChanged -= FontSizeNPC;
                 }
 
                 if (_isVisible == value) return;
@@ -117,6 +119,7 @@ namespace TCC.Data
             }
         }
 
+        public int Size => Settings.FontSize;
         private void ShowChannelNPC()
         {
             NPC(nameof(ShowChannel));
@@ -125,6 +128,10 @@ namespace TCC.Data
         private void ShowTimestampNPC()
         {
             NPC(nameof(ShowTimestamp));
+        }
+        private void FontSizeNPC()
+        {
+            NPC(nameof(Size));
         }
         #endregion
 
@@ -695,6 +702,7 @@ namespace TCC.Data
             }
             var offset = hasSpace ? 10 : 8;
             var colorEnd = msg.IndexOf("\"", colorIndex+offset+1, StringComparison.Ordinal);
+            if(colorEnd == -1) colorEnd = msg.IndexOf("\'", colorIndex + offset + 1, StringComparison.Ordinal); ;
             if(colorIndex == -1) return "";
             var col = msg.Substring(colorIndex + offset, colorEnd - colorIndex - offset);
             while (col.Length < 6)

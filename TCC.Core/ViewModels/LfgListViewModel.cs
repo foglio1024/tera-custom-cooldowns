@@ -15,7 +15,12 @@ namespace TCC.ViewModels
         private bool _creating;
         public Listing LastClicked;
         private string _newMessage;
+        public string LastSortDescr { get; set; }= "Message";
 
+        public void RefreshSorting()
+        {
+            SortCommand.Refresh(LastSortDescr);
+        }
 
         public SynchronizedObservableCollection<Listing> Listings { get; }
         public SortCommand SortCommand { get; }
@@ -85,6 +90,7 @@ namespace TCC.ViewModels
     public class SortCommand : ICommand
     {
         private readonly ICollectionViewLiveShaping _view;
+        private bool _refreshing;
         private ListSortDirection _direction = ListSortDirection.Ascending;
         public event EventHandler CanExecuteChanged;
 
@@ -96,13 +102,21 @@ namespace TCC.ViewModels
         public void Execute(object parameter)
         {
             var f = (string)parameter;
-            _direction = _direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            if(!_refreshing) _direction = _direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             ((CollectionView)_view).SortDescriptions.Clear();
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(f, _direction));
+            WindowManager.LfgListWindow.VM.LastSortDescr = parameter.ToString();
         }
         public SortCommand(ICollectionViewLiveShaping view)
         {
             _view = view;
+        }
+
+        public void Refresh(string lastSortDescr)
+        {
+            _refreshing = true;
+            Execute(lastSortDescr);
+            _refreshing = false;
         }
     }
 

@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:LancerBarManager}">
-    <Grid Width="Auto" Margin="10 10 10 60" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="45 10 45 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 30" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>

@@ -5,12 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" Loaded="BrawlerBar_OnLoaded" d:DataContext="{d:DesignData BrawlerBarManager}">
-    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 20 55 65" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 35 45" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -39,7 +39,7 @@
                     </Image.Style>
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="3"
+                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="4"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="-20" Width="83" Height="83" x:Name="MainReArc"
                                Rhomb="True">
@@ -51,13 +51,18 @@
                         <local:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value=".8" />
-                                <Setter Property="Stroke" Value="Orange" />
+                                <Setter Property="Stroke" Value="{StaticResource RageBrushLight}" />
+                                <Setter Property="Effect" >
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="{StaticResource RageColor}" BlurRadius="10" ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                         <Setter Property="Opacity" Value="1" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsGfOn}" Value="True">
-                                        <Setter Property="Stroke" Value="Orange" />
+                                        <Setter Property="Stroke" Value="{StaticResource RageBrush}" />
                                         <Setter Property="Opacity" Value="1" />
                                     </DataTrigger>
 
@@ -72,14 +77,14 @@
                                 <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" />
+                                            <DropShadowEffect Color="{StaticResource RageColor}" BlurRadius="35" ShadowDepth="0" />
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsGfOn}" Value="True">
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect Color="Orange" BlurRadius="15" ShadowDepth="0" />
+                                            <DropShadowEffect Color="{StaticResource RageColor}" BlurRadius="35" ShadowDepth="0" />
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
@@ -89,23 +94,17 @@
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
                 <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" />
-                <!--<TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" FontSize="16"
-                           FontWeight="DemiBold" Foreground="#afff"
-                           Text="{Binding StaminaTracker.Val}"
-                           Width="45" VerticalAlignment="Center">
-                </TextBlock>-->
+
                 <Grid>
                     <Grid ClipToBounds="False">
-                        <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5">
-                            <Rectangle Stroke="{StaticResource RevampBorderBrush}"
-                                       StrokeThickness="1" Margin="12">
-                            </Rectangle>
-                        </Grid>
-                        <Rectangle Width="60" Height="60" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
+                        <Rectangle Width="63" Height="63" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
                                    OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding GrowingFury.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
                             </Rectangle.Fill>
+                            <FrameworkElement.RenderTransform>
+                                <TranslateTransform X="0"></TranslateTransform>
+                            </FrameworkElement.RenderTransform>
                         </Rectangle>
                     </Grid>
                     <FrameworkElement.Style>

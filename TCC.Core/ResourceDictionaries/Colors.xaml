@@ -34,8 +34,17 @@
 
     <Color x:Key="RunemarkColor">                #FFE3BD </Color>
     <Color x:Key="MaxRunemarkColor">             #FF98BB </Color>
-    <Color x:Key="NinjaColor">                   #C387FF </Color>
-    <Color x:Key="GunnerColor">                  #6AB8FF </Color>
+
+    <Color x:Key="FireColor">                    #ff695a </Color>
+    <Color x:Key="FireColorLight">               #ffb2a5 </Color>
+    <Color x:Key="IceColor">                     #73d6fe </Color>
+    <Color x:Key="IceColorLight">                #ade7ff </Color>
+    <Color x:Key="ArcaneColor">                  #d68aff </Color>
+    <Color x:Key="ArcaneColorLight">             #e7d7ff </Color>
+    <Color x:Key="RageColor">                    #e0713b </Color>
+    <Color x:Key="RageColorLight">               #efe3c6 </Color>
+    <Color x:Key="WillpowerColor">               #49d0e7 </Color>
+    <Color x:Key="WillpowerColorLight">          #c5faf6 </Color>
 
     <Color x:Key="GoldColor">                    #FFB033 </Color>
     <Color x:Key="SilverColor">                  Silver  </Color>
@@ -74,9 +83,9 @@
 
     <!--Chat colors-->
     <Color x:Key="ChatSayColor">                 #FFFFFF </Color>
-    <Color x:Key="ChatPartyColor">               #0071BB </Color>
-    <Color x:Key="ChatGuildColor">               #40FB40 </Color>
-    <Color x:Key="ChatAreaColor">                #BA82F2 </Color>
+    <Color x:Key="ChatPartyColor">               #33B7FA </Color>
+    <Color x:Key="ChatGuildColor">               #00E974 </Color>
+    <Color x:Key="ChatAreaColor">                #A1A1E6 </Color>
     <Color x:Key="ChatTradeColor">               #C07A81 </Color>
     <Color x:Key="ChatGreetColor">               #999999 </Color>
     <Color x:Key="ChatPartyNoticeColor">         #8EFFFF </Color>
@@ -88,11 +97,11 @@
     <Color x:Key="ChatGuildAdColor">             #70C401 </Color>
     <Color x:Key="ChatPrivateColor">             #FF5F38 </Color>
     <Color x:Key="ChatProxyColor">               #FFBAF2 </Color>
-    <Color x:Key="ChatWhisperColor">             #F479F4 </Color>
+    <Color x:Key="ChatWhisperColor">             #E996FA </Color>
     <Color x:Key="ChatSystemGenericColor">       #C8C8b6 </Color>
     <Color x:Key="ChatSystemNotifyColor">        #C8C8b6 </Color>
     <Color x:Key="ChatSystemEventColor">         #C8C8b6 </Color>
-    <Color x:Key="ChatSystemErrorColor">         #FF0000 </Color>
+    <Color x:Key="ChatSystemErrorColor">         #FF5555 </Color>
     <Color x:Key="ChatSystemGroupColor">         #D9D9D9 </Color>
     <Color x:Key="ChatSystemDeathmatchColor">    #D9D9D9 </Color>
     <Color x:Key="ChatSystemContractAlertColor"> #D9D9D9 </Color>

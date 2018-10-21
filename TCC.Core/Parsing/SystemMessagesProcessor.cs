@@ -170,6 +170,8 @@ namespace TCC.Parsing
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
+            if (Proxy.IsConnected) Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
+
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)
         {

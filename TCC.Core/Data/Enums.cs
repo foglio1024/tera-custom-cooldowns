@@ -15,15 +15,16 @@ namespace TCC.Parsing
     {
         INT = 0,
         KR = 1,
-        USA = 2,
-        JPN = 3,
+        NA = 2,
+        JP = 3,
         GER = 4,
         FR = 5,
         EN = 6,
         TW = 7,
-        RUS = 8,
-        CHN = 9,
-        THA = 10
+        RU = 8,
+        CH = 9,
+        THA = 10,
+        SE = 11
     }
 }
 namespace TCC.Data

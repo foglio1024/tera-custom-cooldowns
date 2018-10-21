@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:TCC.Controls"
              UseLayoutRounding="True"
              mc:Ignorable="d" d:DataContext="{d:DesignData BerserkerBarManager}">
-    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 20 50 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid HorizontalAlignment="Center" Margin="30 0 30 75" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center"  ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />

@@ -59,6 +59,11 @@ namespace TCC
             {
 
             }
+            if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
+            {
+                if (WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
+                else WindowManager.SkillConfigWindow.ShowWindow();
+            }
             if (e.Key == Settings.LootSettingsHotkey.Key && e.Modifier == Settings.LootSettingsHotkey.Modifier)
             {
                 if (!GroupWindowViewModel.Instance.AmILeader) return;
@@ -116,6 +121,7 @@ namespace TCC
             RegisterHotKey(Settings.InfoWindowHotkey.Modifier, Settings.InfoWindowHotkey.Key);
             RegisterHotKey(Settings.SettingsHotkey.Modifier, Settings.SettingsHotkey.Key);
             RegisterHotKey(Settings.LootSettingsHotkey.Modifier, Settings.LootSettingsHotkey.Key);
+            RegisterHotKey(ModifierKeys.Control, Keys.K);
             //RegisterHotKey(Settings.ShowAllHotkey.Modifier, Settings.ShowAllHotkey.Key);
 
             _isRegistered = true;

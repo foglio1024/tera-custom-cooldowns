@@ -7,12 +7,12 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:PriestBarManager}" >
-    <Grid Width="Auto" Margin="20" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 20 140 50" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="30 0 120 30" ClipToBounds="False" Width="Auto" Height="Auto">
+        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>

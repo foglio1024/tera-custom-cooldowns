@@ -34,7 +34,7 @@ namespace TCC.Windows
             {
                 if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
             };
-            FocusManager.FocusTick+= RefreshTopmost;
+            FocusManager.FocusTick += RefreshTopmost;
 
             Closing += (_, ev) =>
             {
@@ -69,7 +69,7 @@ namespace TCC.Windows
                     }
                     else
                     {
-                        _colAn.To = (Color) Application.Current.FindResource("BackgroundDarkColor");
+                        _colAn.To = (Color)Application.Current.FindResource("BackgroundDarkColor");
                     }
                     var currBg = CreateMessageBtn.Background as SolidColorBrush;
                     var currCol = currBg.Color;
@@ -125,6 +125,7 @@ namespace TCC.Windows
             if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
+                VM.RefreshSorting();
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 if (IsVisible) return;
                 Opacity = 0;
@@ -206,17 +207,17 @@ namespace TCC.Windows
 
         private void AcceptApply(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement) sender).DataContext is User user) Proxy.PartyInvite(user.Name);
+            if (((FrameworkElement)sender).DataContext is User user) Proxy.PartyInvite(user.Name);
         }
 
         private void InspectApplicant(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement) sender).DataContext is User user) Proxy.Inspect(user.Name);
+            if (((FrameworkElement)sender).DataContext is User user) Proxy.Inspect(user.Name);
         }
 
         private void RefuseApplicant(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement) sender).DataContext is User user) Proxy.DeclineApply(user.PlayerId);
+            if (((FrameworkElement)sender).DataContext is User user) Proxy.DeclineApply(user.PlayerId);
             Proxy.RequestCandidates();
         }
 
@@ -227,7 +228,7 @@ namespace TCC.Windows
 
         private void OnLfgMessageMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(!(((FrameworkElement) sender).DataContext is Listing listing)) return;
+            if (!(((FrameworkElement)sender).DataContext is Listing listing)) return;
             if (!listing.IsTwitch) return;
             Process.Start(listing.TwitchLink);
         }

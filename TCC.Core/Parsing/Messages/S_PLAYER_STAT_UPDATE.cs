@@ -19,7 +19,9 @@ namespace TCC.Parsing.Messages
         public int Edge { get; }
         public float BonusCritFactor { get; }
         public bool Status { get; set; }
-
+        public bool Fire { get; set; }
+        public bool Ice { get; set; }
+        public bool Arcane { get; set; }
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
             CurrentHP = reader.ReadInt32();
@@ -105,10 +107,10 @@ namespace TCC.Parsing.Messages
             //unk11 = reader.ReadInt32();
             reader.Skip(2+2+4+4+4+4+4+4);
             if (reader.Factory.ReleaseVersion/100 < 75) return;
-            var fire = reader.ReadUInt32();
-            var ice = reader.ReadUInt32();
-            var arcane = reader.ReadUInt32();
-            Log.CW($"F/I/A {fire}/{ice}/{arcane}");
+            Fire = reader.ReadUInt32() == 4;
+            Ice = reader.ReadUInt32() == 4;
+            Arcane = reader.ReadUInt32() == 4;
+            //Log.CW($"F/I/A {fire}/{ice}/{arcane}");
         }
 
     }

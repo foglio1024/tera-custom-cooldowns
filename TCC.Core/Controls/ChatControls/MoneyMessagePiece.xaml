@@ -20,7 +20,7 @@
             <Style TargetType="{x:Type controls:OutlinedTextBlock}">
                 <Setter Property="StrokeThickness" Value="3"/>
                 <Setter Property="Stroke" Value="#9000"/>
-                <Setter Property="FontFamily" Value="{StaticResource Frutiger}"/>
+                <Setter Property="FontFamily" Value="{StaticResource NotoSansMed}"/>
             </Style>
             <chatControls:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
         </Grid.Resources>

@@ -11,8 +11,18 @@
     <SolidColorBrush x:Key="GuardianBrush"                  Color="{StaticResource GuardianColor}"                             />
     <SolidColorBrush x:Key="EnchantLowBrush"                Color="{StaticResource EnchantLowColor}"                           />
     <SolidColorBrush x:Key="EnchantHighBrush"               Color="{StaticResource EnchantHighColor}"                          />
-    <SolidColorBrush x:Key="NinjaBrush"                     Color="{StaticResource NinjaColor}"                                />
-                                                                                                                               
+
+    <SolidColorBrush x:Key="FireBrush"                      Color="{StaticResource FireColor}"                                 />
+    <SolidColorBrush x:Key="FireBrushLight"                 Color="{StaticResource FireColorLight}"                            />
+    <SolidColorBrush x:Key="IceBrush"                       Color="{StaticResource IceColor}"                                  />
+    <SolidColorBrush x:Key="IceBrushLight"                  Color="{StaticResource IceColorLight}"                             />
+    <SolidColorBrush x:Key="ArcaneBrush"                    Color="{StaticResource ArcaneColor}"                               />
+    <SolidColorBrush x:Key="ArcaneBrushLight"               Color="{StaticResource ArcaneColorLight}"                          />
+    <SolidColorBrush x:Key="RageBrush"                      Color="{StaticResource RageColor}"                                 />
+    <SolidColorBrush x:Key="RageBrushLight"                 Color="{StaticResource RageColorLight}"                            />
+    <SolidColorBrush x:Key="WillpowerBrush"                 Color="{StaticResource WillpowerColor}"                            />
+    <SolidColorBrush x:Key="WillpowerBrushLight"            Color="{StaticResource WillpowerColorLight}"                       />
+
     <SolidColorBrush x:Key="DefaultBackgroundBrush"         Color="{StaticResource DefaultBackgroundColor}"      Opacity=".9"  />
     <SolidColorBrush x:Key="BackgroundDarkBrush"            Color="{StaticResource BackgroundDarkColor}"                       />
     <SolidColorBrush x:Key="CardDarkBrush"                  Color="{StaticResource CardDarkColor}"                             />
