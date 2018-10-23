@@ -795,7 +795,7 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.IsConnected && Settings.LfgEnabled)
+            if (Proxy.IsConnected && Settings.LfgEnabled && SessionManager.InGameUiOn)
             {
                 Proxy.RequestCandidates();
                 if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();

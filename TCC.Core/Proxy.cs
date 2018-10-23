@@ -438,7 +438,6 @@ namespace TCC
             var sb = new StringBuilder("request_candidates");
             SendData(sb.ToString());
         }
-
         public static void ForceSystemMessage(string msg, string opcode)
         {
             var opc = PacketProcessor.SystemMessageNamer.GetCode(opcode);
