@@ -281,6 +281,7 @@ namespace TCC.ViewModels
         private static void SetTimerPattern(Npc n)
         {
             if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (n.TemplateId == 3000 && n.ZoneId == 982) n.TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
             if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
 
             if (n.TemplateId == 1000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
