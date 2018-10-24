@@ -757,7 +757,7 @@ namespace TCC.Parsing
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;
@@ -765,7 +765,7 @@ namespace TCC.Parsing
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!Settings.ClassWindowSettings.Enabled) return;

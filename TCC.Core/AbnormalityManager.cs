@@ -55,7 +55,7 @@ namespace TCC
                     break;
             }
         }
-        public static bool BeginAbnormality(uint id, ulong target, uint duration, int stacks)
+        public static bool BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
             if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (!Filter(ab)) return false;
@@ -78,6 +78,7 @@ namespace TCC
             {
                 BeginNpcAbnormality(ab, stacks, duration, target);
             }
+            if(source.IsMe() || target.IsMe()) CheckPassivity(ab, duration);
 
             return true;
         }
@@ -110,7 +111,6 @@ namespace TCC
                 SessionManager.CurrentPlayer.AddOrRefreshDebuff(ab, duration, stacks);
                 SessionManager.CurrentPlayer.AddToDebuffList(ab);
             }
-            CheckPassivity(ab, duration);
         }
 
         private static void CheckPassivity(Abnormality ab, uint duration)
