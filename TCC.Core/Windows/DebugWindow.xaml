@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TCC.Windows"
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
         Title="DebugWindow" Background="{StaticResource RevampBackgroundBrush}">
-    <Grid>
+    <StackPanel Orientation="Horizontal">
         <StackPanel Orientation="Vertical"  VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
@@ -34,5 +34,27 @@
                 <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Avg, Mode=OneWay}"></Run>
             </TextBlock>-->
         </StackPanel>
-    </Grid>
+        <StackPanel Orientation="Vertical"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                    
+                </Style>
+            </StackPanel.Resources>
+            <Button Click="SetSorcElement">Fire</Button>
+            <Button Click="SetSorcElement">Ice</Button>
+            <Button Click="SetSorcElement">Arcane</Button>
+            <Button Click="SetSorcElementBoost">Fire Boost</Button>
+            <Button Click="SetSorcElementBoost">Ice Boost</Button>
+            <Button Click="SetSorcElementBoost">Arcane Boost</Button>
+            <!--<TextBlock Text="Queued Packets:" Foreground="White" Opacity=".7"/>
+            <TextBlock x:Name="QueuedPacketsTb" Foreground="White"  Margin="5 0">
+                <Run>L:</Run>
+                <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Last, Mode=OneWay}"></Run>
+                <Run>M:</Run>
+                <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Max, Mode=OneWay}"></Run>
+                <Run>A:</Run>
+                <Run Text="{Binding RelativeSource={RelativeSource AncestorType=local:DebugWindow}, Path=Avg, Mode=OneWay}"></Run>
+            </TextBlock>-->
+        </StackPanel>
+    </StackPanel>
 </Window>

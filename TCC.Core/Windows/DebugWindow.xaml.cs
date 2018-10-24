@@ -37,7 +37,7 @@ namespace TCC.Windows
         private int Sum
         {
             get => _sum;
-            set { _sum = value; NPC();}
+            set { _sum = value; NPC(); }
         }
         public double Avg => _count == 0 ? 0 : Sum / _count;
 
@@ -69,6 +69,42 @@ namespace TCC.Windows
         {
             SessionManager.CurrentPlayer.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+        }
+
+        private void SetSorcElement(object sender, RoutedEventArgs e)
+        {
+            var el = (sender as Button).Content.ToString();
+
+            var fire = el == "Fire";
+            var ice = el == "Ice";
+            var arc = el == "Arcane";
+
+            var currFire = SessionManager.CurrentPlayer.Fire;
+            var currIce = SessionManager.CurrentPlayer.Ice;
+            var currArc = SessionManager.CurrentPlayer.Arcane;
+
+            if (fire) SessionManager.SetSorcererElements(!currFire, currIce, currArc);
+            if (ice) SessionManager.SetSorcererElements(currFire, !currIce, currArc);
+            if (arc) SessionManager.SetSorcererElements(currFire, currIce, !currArc);
+        }
+
+        private void SetSorcElementBoost(object sender, RoutedEventArgs e)
+        {
+            var el = (sender as Button).Content.ToString().Split(' ')[0];
+
+            var fire = el == "Fire";
+            var ice = el == "Ice";
+            var arc = el == "Arcane";
+
+            var currFire = SessionManager.CurrentPlayer.FireBoost;
+            var currIce = SessionManager.CurrentPlayer.IceBoost;
+            var currArc = SessionManager.CurrentPlayer.ArcaneBoost;
+
+            if (fire) SessionManager.SetSorcererElementsBoost(!currFire, currIce, currArc);
+            if (ice) SessionManager.SetSorcererElementsBoost(currFire, !currIce, currArc);
+            if (arc) SessionManager.SetSorcererElementsBoost(currFire, currIce, !currArc);
+
+
         }
     }
 }
