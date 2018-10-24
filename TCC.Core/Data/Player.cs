@@ -284,6 +284,42 @@ namespace TCC.Data
             }
         }
 
+        private bool _fireBoost;
+        private bool _iceBoost;
+        private bool _arcaneBoost;
+
+        public bool FireBoost
+        {
+            get => _fireBoost;
+            set
+            {
+                if (_fireBoost == value) return;
+                _fireBoost = value;
+                NPC();
+            }
+        }
+        public bool IceBoost
+        {
+            get => _iceBoost;
+            set
+            {
+                if (_iceBoost == value) return;
+                _iceBoost = value;
+                NPC();
+            }
+        }
+        public bool ArcaneBoost
+        {
+            get => _arcaneBoost;
+            set
+            {
+                if (_arcaneBoost == value) return;
+                _arcaneBoost = value;
+                NPC();
+            }
+        }
+
+
         private bool _fire;
         private bool _ice;
         private bool _arcane;
@@ -318,7 +354,6 @@ namespace TCC.Data
                 NPC();
             }
         }
-
 
 
 

@@ -33,15 +33,15 @@ namespace TCC.ClassSpecific
         {
             if (FlameFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostFire = true;
+                SessionManager.SetSorcererElementsBoost(true, false,false);
             }
             else if (FrostFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostFrost = true;
+                SessionManager.SetSorcererElementsBoost(false, true, false);
             }
             else if (ArcaneFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostArcane = true;
+                SessionManager.SetSorcererElementsBoost(false, false, true);
             }
         }
 
@@ -49,31 +49,23 @@ namespace TCC.ClassSpecific
         {
             if (FlameFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostFire = true;
+                SessionManager.SetSorcererElementsBoost(true, false, false);
             }
             else if (FrostFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostFrost = true;
+                SessionManager.SetSorcererElementsBoost(false, true, false);
             }
             else if (ArcaneFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostArcane = true;
+                SessionManager.SetSorcererElementsBoost(false, false, true);
             }
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_END p)
         {
-            if (FlameFusionIncreaseId == p.AbnormalityId)
+            if (FlameFusionIncreaseId == p.AbnormalityId || FrostFusionIncreaseId == p.AbnormalityId||ArcaneFusionIncreaseId == p.AbnormalityId)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostFire = false;
-            }
-            else if (FrostFusionIncreaseId == p.AbnormalityId)
-            {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostFrost = false;
-            }
-            else if (ArcaneFusionIncreaseId == p.AbnormalityId)
-            {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).IsBoostArcane = false;
+                SessionManager.SetSorcererElementsBoost(false, false, false);
             }
         }
 

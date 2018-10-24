@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System.Windows;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -15,38 +16,9 @@ namespace TCC.ViewModels
         public bool Ice => SessionManager.CurrentPlayer.Ice;
         public bool Arcane => SessionManager.CurrentPlayer.Arcane;
 
-
-
-        public bool IsBoostFire
-        {
-            get => _isBoostFire;
-            set
-            {
-                if (_isBoostFire == value) return;
-                _isBoostFire = value;
-                NPC(nameof(IsBoostFire));
-            }
-        }
-        public bool IsBoostFrost
-        {
-            get => _isBoostFrost;
-            set
-            {
-                if (_isBoostFrost == value) return;
-                _isBoostFrost = value;
-                NPC(nameof(IsBoostFrost));
-            }
-        }
-        public bool IsBoostArcane
-        {
-            get => _isBoostArcane;
-            set
-            {
-                if (_isBoostArcane == value) return;
-                _isBoostArcane = value;
-                NPC(nameof(IsBoostArcane));
-            }
-        }
+        public bool IsBoostFire => SessionManager.CurrentPlayer.FireBoost;
+        public bool IsBoostFrost => SessionManager.CurrentPlayer.IceBoost;
+        public bool IsBoostArcane => SessionManager.CurrentPlayer.ArcaneBoost;
 
         public override void LoadSpecialSkills()
         {
@@ -66,11 +38,18 @@ namespace TCC.ViewModels
             return false;
         }
 
-        public void NotiftElementChanged()
+        public void NotifyElementChanged()
         {
             NPC(nameof(Fire));
             NPC(nameof(Ice));
             NPC(nameof(Arcane));
+        }
+
+        public void NotifyElementBoostChanged()
+        {
+            NPC(nameof(IsBoostFire));
+            NPC(nameof(IsBoostFrost));
+            NPC(nameof(IsBoostArcane));
         }
     }
 }

@@ -205,8 +205,22 @@ namespace TCC
             
             if (Settings.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotiftElementChanged();
+                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementChanged();
             }
+
+        }
+
+        public static void SetSorcererElementsBoost(bool f, bool i, bool a)
+        {
+            CurrentPlayer.FireBoost = f;
+            CurrentPlayer.IceBoost = i;
+            CurrentPlayer.ArcaneBoost = a;
+
+            if (Settings.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            {
+                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementBoostChanged();
+            }
+
 
         }
     }
