@@ -115,9 +115,9 @@ namespace TCC
 
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (PassivityDatabase.Passivities.Contains(ab.Id))
+            if (PassivityDatabase.Passivities.ContainsKey(ab.Id))
             {
-                SkillManager.AddPassivitySkill(ab.Id, 60);
+                SkillManager.AddPassivitySkill(ab.Id, PassivityDatabase.Passivities[ab.Id]);
             }
             else if (CooldownWindowViewModel.Instance.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id) ||
                 CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
