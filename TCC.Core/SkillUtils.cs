@@ -69,7 +69,7 @@ namespace TCC
                             if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(skillId, out var ab))
                             {
                                 var sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName };
-                                PassivityDatabase.Passivities.Add(ab.Id);
+                                //PassivityDatabase.Passivities.Add(ab.Id);
                                 switch (row)
                                 {
                                     case 1:
