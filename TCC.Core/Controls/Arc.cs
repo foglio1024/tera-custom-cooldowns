@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -33,8 +34,7 @@ namespace TCC.Controls
             set => SetValue(DirectionProperty, value);
         }
 
-        public static readonly DependencyProperty DirectionProperty = DependencyProperty.Register("Direction",
-            typeof(SweepDirection), typeof(Arc), new UIPropertyMetadata(SweepDirection.Clockwise));
+        public static readonly DependencyProperty DirectionProperty = DependencyProperty.Register("Direction", typeof(SweepDirection), typeof(Arc), new UIPropertyMetadata(SweepDirection.Clockwise));
 
         //rotate the start/endpoint of the arc a certain number of degree in the direction
         //ie. if you wanted it to be at 12:00 that would be 270 Clockwise or 90 counterclockwise
@@ -44,22 +44,36 @@ namespace TCC.Controls
             set => SetValue(OriginRotationDegreesProperty, value);
         }
 
-        public static readonly DependencyProperty OriginRotationDegreesProperty =
-            DependencyProperty.Register("OriginRotationDegrees", typeof(double), typeof(Arc),
-                new UIPropertyMetadata(270.0, UpdateArc));
+        public static readonly DependencyProperty OriginRotationDegreesProperty = DependencyProperty.Register("OriginRotationDegrees", typeof(double), typeof(Arc), new UIPropertyMetadata(270.0, UpdateArc));
 
         public bool Rhomb
         {
             get { return (bool)GetValue(RhombProperty); }
             set { SetValue(RhombProperty, value); }
         }
-        public static readonly DependencyProperty RhombProperty =
-            DependencyProperty.Register("Rhomb", typeof(bool), typeof(Arc), new PropertyMetadata(false));
+        public static readonly DependencyProperty RhombProperty = DependencyProperty.Register("Rhomb", typeof(bool), typeof(Arc), new PropertyMetadata(false));
 
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            base.OnMouseEnter(e);
+            InvalidateMeasure();
+        }
+
+        protected override Size MeasureOverride(Size constraint)
+        {
+            var ret = base.MeasureOverride(constraint);
+            if (ret.Height > this.DesiredSize.Height || ret.Width > this.DesiredSize.Width)
+            {
+                if (this.DesiredSize.Height == 0 && this.DesiredSize.Width == 0) return ret;
+                return constraint;
+            }
+            return ret;
+        }
 
         protected static void UpdateArc(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var arc = d as Arc;
+            arc?.InvalidateMeasure();
             arc?.InvalidateVisual();
         }
 
