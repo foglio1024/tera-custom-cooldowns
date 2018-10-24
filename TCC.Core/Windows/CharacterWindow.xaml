@@ -580,8 +580,32 @@
 
                         </c:Arc.Style>
                     </c:Arc>
-
-                    <Grid>
+                    <c:SorcererElementsControl Fire="{Binding Instance.Player.Fire}"
+                                               Ice="{Binding Instance.Player.Ice}"
+                                               Arcane="{Binding Instance.Player.Arcane}"
+                                               FireBoosted="{Binding Instance.Player.FireBoost}"
+                                               IceBoosted="{Binding Instance.Player.IceBoost}"
+                                               ArcaneBoosted="{Binding Instance.Player.ArcaneBoost}"
+                                               IndicatorsWidth="86"
+                                               IndicatorsHeight="86"
+                                               FireIceBoostWidth="28"
+                                               FireBoostMargin="-6 1 0 0"
+                                               IceBoostMargin="0 1 -4 0"
+                                               ArcaneBoostWidth="38"
+                                               ArcaneBoostMargin="0 -3 0 0"
+                                               >
+                        <FrameworkElement.Style>
+                            <Style TargetType="FrameworkElement">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Instance.ShowElements}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </FrameworkElement.Style>
+                    </c:SorcererElementsControl>
+                    <!--<Grid>
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -642,7 +666,7 @@
                         </c:Arc>
 
 
-                    </Grid>
+                    </Grid>-->
 
                     <Image Opacity="1"
                         Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr.big}"

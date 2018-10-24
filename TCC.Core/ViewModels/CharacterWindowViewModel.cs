@@ -10,6 +10,7 @@ namespace TCC.ViewModels
 
         public Player Player => SessionManager.CurrentPlayer;
 
+
         public bool CompactMode => Settings.CharacterWindowCompactMode;
 
         public bool ShowRe =>(
@@ -19,10 +20,8 @@ namespace TCC.ViewModels
             Player.Class == Class.Gunner ||
             Player.Class == Class.Ninja ||
             Player.Class == Class.Valkyrie);
-        public bool ShowElements =>(
-            !Settings.ClassWindowSettings.Visible ||
-            !Settings.ClassWindowSettings.Enabled) &&
-            (Player.Class == Class.Sorcerer);
+        public bool ShowElements => Player.Class == Class.Sorcerer &&
+            ((!Settings.ClassWindowSettings.Visible || !Settings.ClassWindowSettings.Enabled) || (!Settings.SorcererReplacesElementsInCharWindow));
 
 
         public CharacterWindowViewModel()

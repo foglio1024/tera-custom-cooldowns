@@ -6,15 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SorcererBarManager}">
-    <UserControl.Resources>
-        <Style TargetType="local:Arc" >
-            <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
-            <Setter Property="StrokeThickness" Value="8"/>
-            <Setter Property="Width" Value="78"/>
-            <Setter Property="Height" Value="78"/>
-            <Setter Property="Rhomb" Value="True"/>
-        </Style>
-    </UserControl.Resources>
+
     <Grid Width="Auto" Margin="20" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
             <Grid.RowDefinitions>
@@ -24,46 +16,20 @@
             <Image Source="../../resources/images/char_window_bg_sorc.png" Stretch="Uniform" Width="90" Height="Auto"/>
             <Path Data="{StaticResource SvgClassSorcerer}" Width="30" Stretch="Uniform" Opacity=".5" />
 
-            <local:Arc StartAngle="219" EndAngle="302" Visibility="{Binding Ice, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <FrameworkElement.RenderTransform>
-                    <ScaleTransform ScaleX="-1"></ScaleTransform>
-                </FrameworkElement.RenderTransform>
-                <Shape.Stroke>
-                    <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
-                        <GradientStop Color="{StaticResource IceColor}"></GradientStop>
-                        <GradientStop Color="{StaticResource IceColorLight}" Offset=".1"></GradientStop>
-                    </RadialGradientBrush>
-                </Shape.Stroke>
-                <Shape.Effect>
-                    <DropShadowEffect Color="{StaticResource IceColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
-                </Shape.Effect>
-            </local:Arc>
-            <local:Arc StartAngle="219" EndAngle="302" Visibility="{Binding Fire, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Shape.Stroke>
-                    <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
-                        <GradientStop Color="{StaticResource FireColor}"></GradientStop>
-                        <GradientStop Color="{StaticResource FireColorLight}" Offset=".1"></GradientStop>
-                    </RadialGradientBrush>
-                </Shape.Stroke>
-                <Shape.Effect>
-                    <DropShadowEffect Color="{StaticResource FireColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
-                </Shape.Effect>
-            </local:Arc>
-            <local:Arc StartAngle="38" EndAngle="142" Visibility="{Binding Arcane, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Shape.Stroke>
-                    <RadialGradientBrush GradientOrigin=".2 .7" RadiusX="10" RadiusY="10">
-                        <GradientStop Color="{StaticResource ArcaneColor}"></GradientStop>
-                        <GradientStop Color="{StaticResource ArcaneColorLight}" Offset=".1"></GradientStop>
-                    </RadialGradientBrush>
-                </Shape.Stroke>
-                <Shape.Effect>
-                    <DropShadowEffect Color="{StaticResource ArcaneColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
-                </Shape.Effect>
-                <Shape.RenderTransform>
-                    <RotateTransform Angle="-90"/>
-                </Shape.RenderTransform>
-            </local:Arc>
-
+            <local:SorcererElementsControl Fire="{Binding Fire}" 
+                                           Ice="{Binding Ice}" 
+                                           Arcane="{Binding Arcane}"
+                                           FireBoosted="{Binding IsBoostFire}"
+                                           IceBoosted="{Binding IsBoostFrost}"
+                                           ArcaneBoosted="{Binding IsBoostArcane}"
+                                           IndicatorsHeight="78"
+                                           IndicatorsWidth="78"
+                                           ArcaneBoostWidth="34"
+                                           ArcaneBoostMargin="0 -5 0 0"
+                                           FireIceBoostWidth="25"
+                                           FireBoostMargin="0"
+                                           IceBoostMargin="0"
+                                           />
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
                     Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     RenderTransform="{StaticResource Rotate45}"
