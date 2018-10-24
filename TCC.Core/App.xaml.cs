@@ -108,9 +108,9 @@ namespace TCC
                 SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
                     0 : SessionManager.CurrentPlayer.CurrentST + 100);
             };
-            SessionManager.CurrentPlayer.Class = Class.Reaper;
+            SessionManager.CurrentPlayer.Class = Class.Sorcerer;
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
-            SessionManager.SetSorcererElements(true, true, true);
+            //SessionManager.SetSorcererElements(true, true, true);
             SessionManager.SetPlayerMaxSt(10, 1000);
             SessionManager.SetPlayerSt(10, 1000);
 
