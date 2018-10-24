@@ -253,6 +253,7 @@ namespace TCC
                     else if (attr.Name == nameof(Settings.ShowAwakenIcon)) Settings.ShowAwakenIcon = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.AccurateHp)) Settings.AccurateHp = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.WarriorShowEdge)) Settings.WarriorShowEdge = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.SorcererReplacesElementsInCharWindow)) Settings.SorcererReplacesElementsInCharWindow = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.FlipFlightGauge)) Settings.FlipFlightGauge = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.WarriorShowTraverseCut)) Settings.WarriorShowTraverseCut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.CharacterWindowCompactMode)) Settings.CharacterWindowCompactMode = bool.Parse(attr.Value);

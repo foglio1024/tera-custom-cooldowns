@@ -442,6 +442,22 @@
                         <Path Data="{StaticResource SvgClassPriest}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
                         <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Priest</TextBlock>
                     </StackPanel>-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Path Data="{StaticResource SvgClassSorcerer}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
+                        <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Sorcerer</TextBlock>
+
+                    </StackPanel>
+                    <controls:BoolSetting SettingName="Replaces char window elements" IsOn="{Binding SorcererReplacesElementsInCharWindow, Mode=TwoWay}" 
+                                          SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
+                        <FrameworkElement.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Hides element indicators from character window when class window is enabled."/>
+                                </TextBlock>
+                            </Grid>
+                        </FrameworkElement.ToolTip>
+                    </controls:BoolSetting>
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">

@@ -118,6 +118,8 @@ namespace TCC
         public static bool WarriorShowTraverseCut { get; set; } = true;
         public static bool WarriorShowEdge { get; set; } = true;
         public static WarriorEdgeMode WarriorEdgeMode { get; set; } = WarriorEdgeMode.Bar;
+        public static bool SorcererReplacesElementsInCharWindow { get; set; } = true;
+
 
         // Misc
         public static DateTime LastRun { get; set; } = DateTime.MinValue;

@@ -95,6 +95,7 @@ namespace TCC
                 new XAttribute(nameof(Settings.WarriorShowTraverseCut), Settings.WarriorShowTraverseCut),
                 new XAttribute(nameof(Settings.WarriorShowEdge), Settings.WarriorShowEdge),
                 new XAttribute(nameof(Settings.WarriorEdgeMode), Settings.WarriorEdgeMode),
+                new XAttribute(nameof(Settings.SorcererReplacesElementsInCharWindow), Settings.SorcererReplacesElementsInCharWindow),
                 // Chat
                 new XAttribute(nameof(Settings.MaxMessages), Settings.MaxMessages),
                 new XAttribute(nameof(Settings.SpamThreshold), Settings.SpamThreshold),

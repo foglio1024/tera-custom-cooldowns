@@ -596,6 +596,17 @@ namespace TCC.ViewModels
                 if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExNPC(nameof(WarriorBarManager.ShowEdge));
             }
         }
+        public bool SorcererReplacesElementsInCharWindow
+        {
+            get => Settings.SorcererReplacesElementsInCharWindow;
+            set
+            {
+                if (Settings.SorcererReplacesElementsInCharWindow == value) return;
+                Settings.SorcererReplacesElementsInCharWindow = value;
+                NPC();
+                CharacterWindowViewModel.Instance.ExNPC(nameof(CharacterWindowViewModel.ShowElements));
+            }
+        }
 
         public bool WarriorShowTraverseCut
         {
