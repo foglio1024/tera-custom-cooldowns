@@ -14,21 +14,21 @@
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="1" ScaleY="1"/>
         </Grid.LayoutTransform>
-        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource NormalSkillDataTemplate}" Width="Auto" HorizontalAlignment="Stretch" ItemsSource="{Binding ShortSkills}">
+        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource RoundNormalSkill}" Width="Auto" HorizontalAlignment="Stretch" ItemsSource="{Binding ShortSkills}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource NormalSkillDataTemplate}" Width="Auto" ItemsSource="{Binding LongSkills}">
+        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource RoundNormalSkill}" Width="Auto" ItemsSource="{Binding LongSkills}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="ItemSkillsPanel" Grid.Row="2" ItemTemplate="{StaticResource NormalSkillDataTemplate}" Width="Auto" ItemsSource="{Binding ItemSkills}"
+        <ItemsControl x:Name="ItemSkillsPanel" Grid.Row="2" ItemTemplate="{StaticResource RoundNormalSkill}" Width="Auto" ItemsSource="{Binding ItemSkills}"
                       Visibility="{Binding Instance.ShowItems, Converter={StaticResource Converters.BoolToVisibleHidden}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

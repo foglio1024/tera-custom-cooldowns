@@ -10,7 +10,7 @@
         Title="TCC" Width="950" d:DataContext="{d:DesignData GroupConfigVM}">
     <Window.Resources>
         <Style TargetType="ListBox">
-            <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplate}"></Setter>
+            <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplateForConfig}"></Setter>
             <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultListItemStyle}"></Setter>
             <Setter Property="Background" Value="#2000"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>

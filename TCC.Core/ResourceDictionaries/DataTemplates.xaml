@@ -5,7 +5,18 @@
                     xmlns:vm="clr-namespace:TCC.ViewModels"
                     xmlns:chatCtrl="clr-namespace:TCC.Controls.ChatControls"
                     xmlns:tcc="clr-namespace:TCC">
-
+    <DataTemplate x:Key="RoundNormalSkill">
+        <ctrl:SkillIconControl />
+    </DataTemplate>
+    <DataTemplate x:Key="SquareNormalSkill">
+        <ctrl:SquareSkillIconControl Margin="-2 -2 -2 0"/>
+    </DataTemplate>
+    <DataTemplate x:Key="RoundFixedSkill">
+        <ctrl:FixedSkillControl/>
+    </DataTemplate>
+    <DataTemplate x:Key="SquareFixedSkill">
+        <ctrl:SquareFixedSkillControl/>
+    </DataTemplate>
     <DataTemplate x:Key="SquareAbnormality">
         <ctrl:SquareAbnormalityIndicator HorizontalAlignment="Right" Size="32">
             <ctrl:SquareAbnormalityIndicator.Resources>
@@ -157,10 +168,8 @@
                                VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="NormalSkillDataTemplate" DataType="data:SkillCooldown">
-        <ctrl:SkillIconControl/>
-    </DataTemplate>
-    <DataTemplate x:Key="FixedSkillDataTemplate" DataType="data:FixedSkillCooldown">
+
+    <DataTemplate x:Key="FixedSkillDataTemplateForConfig" DataType="data:FixedSkillCooldown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -178,7 +187,6 @@
                                VerticalAlignment="Center" Margin="5 0" />
         </Grid>
     </DataTemplate>
-
     <DataTemplate x:Key="SimpleTemplate" DataType="data:MessagePiece">
         <ctrl:OutlinedTextBlock Fill="{Binding Color}"
                                         Text="{Binding Text}" 
@@ -262,7 +270,7 @@
                         Margin="0,-3,0,0"
                         Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
             />
-                        <!--TextTrimming="CharacterEllipsis"-->
+        <!--TextTrimming="CharacterEllipsis"-->
 
     </DataTemplate>
     <DataTemplate x:Key="EnchantChannelLabelTemplate" DataType="data:ChatMessage">

@@ -80,7 +80,7 @@
         <UniformGrid Columns="3" Grid.Row="1">
             <UniformGrid.Resources>
                 <Style TargetType="ListBox">
-                    <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplate}"></Setter>
+                    <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplateForConfig}"></Setter>
                     <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultListItemStyle}"></Setter>
                     <Setter Property="Background" Value="#3000"></Setter>
                     <Setter Property="BorderThickness" Value="1"></Setter>
