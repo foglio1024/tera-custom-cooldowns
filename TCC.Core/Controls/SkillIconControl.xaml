@@ -31,11 +31,11 @@
 
         <Grid Width="Auto" MinWidth="12" 
               Height="Auto" x:Name="G" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
-            <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" >
+            <Border Background="{StaticResource RevampBackgroundBrush}" CornerRadius="5"  BorderBrush="{StaticResource RevampBorderBrush}" BorderThickness="1"  Padding="4,0" >
 
 
             </Border>
-            <TextBlock Foreground="#d000" 
+            <TextBlock Foreground="#dfff" 
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 
                        TextAlignment="Center"
