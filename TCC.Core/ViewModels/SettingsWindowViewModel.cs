@@ -15,6 +15,7 @@ namespace TCC.ViewModels
         public static event Action ChatShowChannelChanged;
         public static event Action ChatShowTimestampChanged;
         public static event Action AbnormalityShapeChanged;
+        public static event Action SkillShapeChanged;
         public static event Action FontSizeChanged;
 
         public WindowSettings CooldownWindowSettings => Settings.CooldownWindowSettings;
@@ -96,7 +97,7 @@ namespace TCC.ViewModels
                 NPC(nameof(BuffsDirection));
             }
         }
-        public AbnormalityShape AbnormalityShape
+        public ControlShape AbnormalityShape
         {
             get => Settings.AbnormalityShape;
             set
@@ -104,7 +105,18 @@ namespace TCC.ViewModels
                 if (Settings.AbnormalityShape == value) return;
                 Settings.AbnormalityShape = value;
                 AbnormalityShapeChanged?.Invoke();
-                NPC(nameof(AbnormalityShape));
+                NPC();
+            }
+        }
+        public ControlShape SkillShape
+        {
+            get => Settings.SkillShape;
+            set
+            {
+                if (Settings.SkillShape == value) return;
+                Settings.SkillShape = value;
+                SkillShapeChanged?.Invoke();
+                NPC();
             }
         }
         public CooldownBarMode CooldownBarMode
@@ -535,7 +547,7 @@ namespace TCC.ViewModels
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
         public List<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
-        public List<AbnormalityShape> AbnormalityShapes => Utils.ListFromEnum<AbnormalityShape>();
+        public List<ControlShape> ControlShapes => Utils.ListFromEnum<ControlShape>();
 
         public bool ChatWindowEnabled
         {
