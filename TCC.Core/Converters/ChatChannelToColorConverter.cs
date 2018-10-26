@@ -101,7 +101,7 @@ namespace TCC.Converters
                 case ChatChannel.Damage:
                     resName = "HpBrush"; break;
                 case ChatChannel.Ress:
-                    resName = "LightGreenBrush"; break;
+                    resName = "GreenBrush"; break;
                 case ChatChannel.Quest:
                     resName = "ChatSystemQuestBrush"; break;
                 case ChatChannel.Friend:
