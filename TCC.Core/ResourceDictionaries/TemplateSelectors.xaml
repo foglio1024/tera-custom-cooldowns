@@ -45,5 +45,11 @@
                                     RoundTemplate="{StaticResource  RoundRaidAbnormality}"
                                     SquareTemplate="{StaticResource SquareRaidAbnormality}"
                                     />
+    <ts:SkillTemplateSelector x:Key="NormalSkillTemplateSelector"
+                                    RoundTemplate="{StaticResource RoundNormalSkill}"
+                                    SquareTemplate="{StaticResource SquareNormalSkill}"/>
+    <ts:SkillTemplateSelector x:Key="FixedSkillTemplateSelector"
+                                    RoundTemplate="{StaticResource RoundFixedSkill}"
+                                    SquareTemplate="{StaticResource SquareFixedSkill}"/>
 
 </ResourceDictionary>
