@@ -8,32 +8,29 @@
              UseLayoutRounding="False"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
-        <Grid ClipToBounds="True" RenderTransform="{StaticResource Rotate45}" 
-              RenderTransformOrigin=".5 .5" Width="50" Height="50">
-            <local:Arc Width="80" 
-                       Height="80" 
-                       StrokeThickness="30" 
+        <local:RhombFixedSkillControl HorizontalAlignment="Center" 
+                                      IsHitTestVisible="False"
+                                      VerticalAlignment="Center"
+                                      DataContext="{Binding Cooldown}" 
+                                      x:Name="RhombFixedSkillControl"
+        />
+
+            <local:Arc Width="71" 
+                       Height="71" 
+                       StrokeThickness="3" 
                        Stroke="#ffbd3d" 
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       StartAngle="40"
-                       EndAngle="40"
+                       StartAngle="32"
+                       EndAngle="32"
+                       Rhomb="True"
                        x:Name="ExternalArc"
-                       Margin="-20"
+                       Margin="-0"
                        RenderTransformOrigin=".5 .5">
-                <local:Arc.RenderTransform>
-                    <RotateTransform Angle="-45"></RotateTransform>
-                </local:Arc.RenderTransform>
+                <local:Arc.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#ffffaa"/>
+                </local:Arc.Effect>
             </local:Arc>
-
-        </Grid>
-        <local:RhombFixedSkillControl HorizontalAlignment="Center" 
-                                           IsHitTestVisible="False"
-                                 VerticalAlignment="Center" Padding="00" Margin="0"
-                                 DataContext="{Binding Cooldown}" 
-                                    x:Name="RhombFixedSkillControl"
-                                 >
-        </local:RhombFixedSkillControl>
 
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 -1 0 0" 
@@ -44,7 +41,7 @@
                 Width="24"
                 Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"
                 Background="#ffbd3d"
-                BorderBrush="#995500"
+                BorderBrush="#aa995500"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 RenderTransform="{StaticResource Rotate45}"
