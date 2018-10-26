@@ -64,6 +64,11 @@ namespace TCC.Controls
             _context.FlashingForced += OnFlashingStarted;
             _context.SecondsUpdated += OnSecondsUpdated;
             _context.Reset += OnReset;
+
+            if (!_context.IsAvailable)
+            {
+                OnCooldownStarted(_context.CurrentMode);
+            }
         }
 
         private void OnReset()
