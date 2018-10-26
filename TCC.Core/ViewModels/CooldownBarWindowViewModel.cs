@@ -150,10 +150,12 @@ namespace TCC.ViewModels
         internal void AddHiddenSkill(SkillCooldown context)
         {
             HiddenSkills.Add(context.Skill);
+            Save();
         }
         internal void AddHiddenSkill(FixedSkillCooldown context)
         {
             HiddenSkills.Add(context.Skill);
+            Save();
         }
 
         internal void DeleteFixedSkill(FixedSkillCooldown context)
