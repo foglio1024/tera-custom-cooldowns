@@ -126,7 +126,6 @@
       <DependentUpon>Styles.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\SkillControlTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\SkillTemplateSelector.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
