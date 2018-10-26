@@ -108,8 +108,9 @@ namespace TCC
                 SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
                     0 : SessionManager.CurrentPlayer.CurrentST + 100);
             };
-            SessionManager.CurrentPlayer.Class = Class.Sorcerer;
+            SessionManager.CurrentPlayer.Class = Class.Warrior;
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower() + "-skills.xml", SessionManager.CurrentPlayer.Class);
             //SessionManager.SetSorcererElements(true, true, true);
             SessionManager.SetPlayerMaxSt(10, 1000);
             SessionManager.SetPlayerSt(10, 1000);
@@ -264,6 +265,8 @@ namespace TCC
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
             Proxy.CloseConnection();
+            SessionManager.Logged = false;
+            SessionManager.LoadingScreen = true;
         }
 
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
