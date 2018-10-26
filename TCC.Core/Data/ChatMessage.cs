@@ -67,7 +67,7 @@ namespace TCC.Data
             }
         }
 
-        public bool ContainsPlayerName { get; protected set; }
+        public bool ContainsPlayerName { get; set; }
 
         private bool _animate = true;
 
