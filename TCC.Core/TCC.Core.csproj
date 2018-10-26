@@ -93,6 +93,12 @@
     <Compile Include="Controls\SorcererElementsControl.xaml.cs">
       <DependentUpon>SorcererElementsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SquareFixedSkillControl.xaml.cs">
+      <DependentUpon>SquareFixedSkillControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SquareSkillIconControl.xaml.cs">
+      <DependentUpon>SquareSkillIconControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BossHPbarColorConverter.cs" />
     <Compile Include="Converters\AggroTypeToFillConverter.cs" />
     <Compile Include="Converters\EntityIdToNameConverter.cs" />
@@ -120,6 +126,8 @@
       <DependentUpon>Styles.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\SkillControlTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\SkillTemplateSelector.cs" />
     <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
@@ -1032,6 +1040,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ClassBars\SorcererBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SquareFixedSkillControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SquareSkillIconControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
