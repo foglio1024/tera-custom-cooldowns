@@ -99,6 +99,7 @@ namespace TCC.Parsing
             var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1}</font><font color=\"#cccccc\">/40)</font>";
             var newMsg = new SystemMessage($"{sysMsg.Message} {(InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1 == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
             var msg = new ChatMessage(srvMsg, newMsg, ChatChannel.Guardian);
+            if (InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1 == 40) msg.ContainsPlayerName = true;
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
@@ -168,14 +169,16 @@ namespace TCC.Parsing
         }
         private static void HandleRessMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Ress);
+            var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
+            var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
             if (Proxy.IsConnected) Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Death);
+            var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Death);
+            var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Death);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleInvalidLink(string srvMsg, SystemMessage sysMsg)
