@@ -42,6 +42,8 @@ namespace TCC.Controls
             CooldownWindowViewModel.Instance.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
             CooldownWindowViewModel.Instance.SkillsLoaded += OnSkillsLoaded;
+            Unloaded += (_, __) => { SettingsWindowViewModel.AbnormalityShapeChanged -= OnSkillShapeChanged; };
+
         }
 
         //really absurd way of fixing order issue
@@ -368,7 +370,20 @@ namespace TCC.Controls
 
         private void FixedSkillContainers_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 900000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+            OnSkillShapeChanged();
+            SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
+        }
+
+        private void OnSkillShapeChanged()
+        {
+            MainSkills.ItemContainerStyle =
+                FindResource(Settings.SkillShape == ControlShape.Round
+                    ? "RoundDragableStyle"
+                    : "SquareDragableStyle") as Style;
+            SecSkills.ItemContainerStyle =
+                FindResource(Settings.SkillShape == ControlShape.Round
+                    ? "RoundDragableStyle"
+                    : "SquareDragableStyle") as Style;
         }
     }
 }

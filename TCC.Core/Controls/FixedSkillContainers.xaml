@@ -7,22 +7,20 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:templateSelectors="clr-namespace:TCC.TemplateSelectors"
              Loaded="FixedSkillContainers_OnLoaded"
              PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
              PreviewDragEnter="FixedSkillContainers_OnDragOver" MouseEnter="MainSkillsGrid_MouseEnter"
              MouseLeave="MainSkillsGrid_MouseLeave"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:CooldownWindowViewModel}">
     <UserControl.Resources>
-        <DataTemplate x:Key="DefaultSkillIndicator">
-            <local:SkillIconControl Margin="-2 0" />
-        </DataTemplate>
-        <ControlTemplate x:Key="DragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
+        <ControlTemplate x:Key="SquareDragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
             <ControlTemplate.Resources>
                 <SineEase x:Key="Ease" EasingMode="EaseInOut" />
             </ControlTemplate.Resources>
             <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
             <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}" Margin="-2 0">
-                <local:FixedSkillControl />
+                <local:SquareFixedSkillControl />
                 <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom" />
                 <Thumb x:Name="Thumb" Visibility="Collapsed" dragablz:DragablzItem.IsCustomThumb="True" Cursor="None"
@@ -50,9 +48,7 @@
                 <Grid.RenderTransform>
                     <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
                 </Grid.RenderTransform>
-
             </Grid>
-
             <ControlTemplate.Triggers>
                 <Trigger Property="IsDragging" Value="True">
                     <Trigger.EnterActions>
@@ -96,9 +92,96 @@
                 </Trigger>
 
             </ControlTemplate.Triggers>
-
         </ControlTemplate>
+        <ControlTemplate x:Key="RoundDragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
+            <ControlTemplate.Resources>
+                <SineEase x:Key="Ease" EasingMode="EaseInOut" />
+            </ControlTemplate.Resources>
+            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}" Margin="-2 0">
+                <local:FixedSkillControl />
+                <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch"
+                           VerticalAlignment="Bottom" />
+                <Thumb x:Name="Thumb" Visibility="Collapsed" dragablz:DragablzItem.IsCustomThumb="True" Cursor="None"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" Margin="0 0 0 0">
+                    <Thumb.Template>
+                        <ControlTemplate>
+                            <Grid Width="40" Height="20" Margin="0 0 0 0" VerticalAlignment="Center" Cursor="SizeWE"
+                                  HorizontalAlignment="Stretch" Background="#01000000">
+                                <!--<Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="20"/>
+                                                            <ColumnDefinition Width="15"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                        </Grid.ColumnDefinitions>-->
+                                <!--<Rectangle RadiusX="10" RadiusY="10" Fill="White"  Margin="0" Effect="{StaticResource dropShadow}" Grid.Column="0"></Rectangle>
+                                                        <Rectangle RadiusX="10" RadiusY="10" Fill="White"  Margin="0" Effect="{StaticResource dropShadow}" Grid.Column="2"></Rectangle>-->
+                                <!--<Rectangle RadiusX="2" RadiusY="2" Fill="#01000000"  Grid.ColumnSpan="3"></Rectangle>-->
+                                <!--<Path Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" Fill="White"  Stretch="Uniform" Effect="{StaticResource dropShadow}" Margin="0 3 4 3" HorizontalAlignment="Left" Grid.Column="0"></Path>
+                                                        <Path Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" Fill="White" Stretch="Uniform" Effect="{StaticResource dropShadow}" Margin="4 3 0 3" HorizontalAlignment="Right" Grid.Column="2"></Path>-->
+                            </Grid>
+                        </ControlTemplate>
+                    </Thumb.Template>
 
+                </Thumb>
+                <Grid.RenderTransform>
+                    <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
+                </Grid.RenderTransform>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDragging" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleX">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.12"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleY">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.12"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleX">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleY">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+                <Trigger SourceName="Activator" Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Thumb" Property="Visibility" Value="Visible" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True" SourceName="Thumb">
+                    <Setter TargetName="Thumb" Property="Visibility" Value="Visible" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="RoundDragableStyle" TargetType="dragablz:DragablzItem">
+            <Setter Property="Padding" Value="0 4 0 4" />
+            <Setter Property="Margin" Value="0 0 0 0" />
+            <Setter Property="Template" Value="{StaticResource RoundDragableSkill}" />
+        </Style>
+        <Style x:Key="SquareDragableStyle" TargetType="dragablz:DragablzItem">
+            <Setter Property="Padding" Value="0 4 0 4" />
+            <Setter Property="Margin" Value="0 0 0 0" />
+            <Setter Property="Template" Value="{StaticResource SquareDragableSkill}" />
+        </Style>
     </UserControl.Resources>
     <Grid Margin="4" UseLayoutRounding="True" HorizontalAlignment="Left">
         <Grid.RowDefinitions>
@@ -155,7 +238,6 @@
                     <Style TargetType="dragablz:DragablzItem">
                         <Setter Property="Padding" Value="0 4 0 4" />
                         <Setter Property="Margin" Value="0 0 0 0" />
-                        <Setter Property="Template" Value="{StaticResource DragableSkill}" />
                     </Style>
                 </dragablz:DragablzItemsControl.ItemContainerStyle>
                 <dragablz:DragablzItemsControl.ItemsOrganiser>
@@ -211,8 +293,6 @@
                     <Style TargetType="dragablz:DragablzItem">
                         <Setter Property="Padding" Value="0 4 0 4" />
                         <Setter Property="Margin" Value="0 0 0 0" />
-
-                        <Setter Property="Template" Value="{StaticResource DragableSkill}" />
                     </Style>
                 </dragablz:DragablzItemsControl.ItemContainerStyle>
                 <dragablz:DragablzItemsControl.ItemsOrganiser>
@@ -235,7 +315,7 @@
             </Grid>
 
             <!--Other skills-->
-            <ItemsControl Name="OtherSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"
+            <ItemsControl Name="OtherSkills" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto"
                           VerticalAlignment="Stretch"
                           Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding Instance.OtherSkills}"
                           BorderBrush="Green" BorderThickness="0">
@@ -251,7 +331,7 @@
         </Grid>
         <!--Item skills grid-->
         <Grid Grid.Row="0" UseLayoutRounding="True" >
-            <ItemsControl Name="ItemSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"
+            <ItemsControl Name="ItemSkills" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto"
                           Height="50" VerticalAlignment="Stretch"
                           HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red"
                           BorderThickness="00" Grid.Row="0"
