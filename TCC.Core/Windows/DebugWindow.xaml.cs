@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.ViewModels;
@@ -105,6 +107,17 @@ namespace TCC.Windows
             if (arc) SessionManager.SetSorcererElementsBoost(currFire, currIce, !currArc);
 
 
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            //((SorcererBarManager) ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Start(20000);
+
+            SkillManager.AddSkill(100700, 20000);
+            SkillManager.AddSkill(400120, 20000);
+            SkillManager.AddItemSkill(6298, 10);
+            SkillManager.ResetSkill(400120);
+            //CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(100700, Class.Warrior, "dfa", ""),20000, CooldownType.Skill, Dispatcher.CurrentDispatcher, true, true));
         }
     }
 }
