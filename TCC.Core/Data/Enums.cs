@@ -29,7 +29,7 @@ namespace TCC.Parsing
 }
 namespace TCC.Data
 {
-    public enum AbnormalityShape
+    public enum ControlShape
     {
         Round = 0,
         Square = 1
