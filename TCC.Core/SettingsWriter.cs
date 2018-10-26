@@ -87,6 +87,7 @@ namespace TCC
                 // Cooldown
                 new XAttribute(nameof(Settings.CooldownBarMode), Settings.CooldownBarMode),
                 new XAttribute(nameof(Settings.ShowItemsCooldown), Settings.ShowItemsCooldown),
+                new XAttribute(nameof(Settings.SkillShape), Settings.SkillShape),
                 // Boss
                 new XAttribute(nameof(Settings.ShowOnlyBosses), Settings.ShowOnlyBosses),
                 new XAttribute(nameof(Settings.EnrageLabelMode), Settings.EnrageLabelMode),

@@ -227,7 +227,8 @@ namespace TCC
                     else if (attr.Name == nameof(Settings.EnrageLabelMode)) Settings.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
                     else if (attr.Name == nameof(Settings.ChatClickThruMode)) Settings.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
                     else if (attr.Name == nameof(Settings.WarriorEdgeMode)) Settings.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
-                    else if (attr.Name == nameof(Settings.AbnormalityShape)) Settings.AbnormalityShape = (AbnormalityShape)Enum.Parse(typeof(AbnormalityShape), attr.Value);
+                    else if (attr.Name == nameof(Settings.AbnormalityShape)) Settings.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
+                    else if (attr.Name == nameof(Settings.SkillShape)) Settings.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
                     else if (attr.Name == nameof(Settings.MaxMessages)) Settings.MaxMessages = int.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.SpamThreshold)) Settings.SpamThreshold = int.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.FontSize)) Settings.FontSize = int.Parse(attr.Value);

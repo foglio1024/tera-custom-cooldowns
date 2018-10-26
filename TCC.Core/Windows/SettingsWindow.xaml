@@ -245,6 +245,11 @@
                         </controls:SelectionSetting.ToolTip>
                     </controls:SelectionSetting>
                     <controls:BoolSetting SettingName="Show items cooldown" IsOn="{Binding ShowItemsCooldown, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Skills shape"
+                                               SelectedItem="{Binding SkillShape, Mode=TwoWay}"
+                                               ChoicesType="{x:Type data:ControlShape}"
+                                               Choices="{Binding ControlShapes, Mode=OneWay}"
+                                               SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
 
                 </StackPanel>
             </TabItem>
@@ -857,8 +862,8 @@
                     </controls:BoolSetting>
                     <Separator/>
                     <controls:SelectionSetting SettingName="Abnormalities shape"
-                                               SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
-                                               ChoicesType="{x:Type data:AbnormalityShape}"
+                                               SelectedItem="{Binding ControlShape, Mode=TwoWay}"
+                                               ChoicesType="{x:Type data:ControlShape}"
                                                Choices="{Binding AbnormalityShapes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
 

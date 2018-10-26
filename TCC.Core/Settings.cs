@@ -149,7 +149,8 @@ namespace TCC
         public static bool HideHandles { get; set; }
         public static bool HighPriority { get; set; }
         public static bool ForceSoftwareRendering { get; set; }
-        public static AbnormalityShape AbnormalityShape { get; set; }
+        public static ControlShape AbnormalityShape { get; set; }
+        public static ControlShape SkillShape { get; set; }
         public static bool Winpcap { get; set; } = true;
 
         private static string _lastRegion = "";
