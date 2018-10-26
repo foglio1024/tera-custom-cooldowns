@@ -23,7 +23,7 @@ namespace TCC.Data
         private readonly DispatcherTimer _secondsTimer;
 
         private CooldownType _cooldownType;
-        private CooldownMode _currentMode;
+        public CooldownMode CurrentMode { get; private set; }
         private ulong _seconds;
         private bool _flashOnAvailable;
 
@@ -38,6 +38,7 @@ namespace TCC.Data
                 NPC();
             }
         }
+
         public ulong Seconds
         {
             get => _seconds;
@@ -117,7 +118,7 @@ namespace TCC.Data
             NPC(nameof(IsAvailable));
             _secondsTimer.Stop();
             Seconds = 0;
-            Dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
+            Dispatcher.Invoke(() => Ended?.Invoke(CurrentMode));
         }
 
         // methods
@@ -128,7 +129,7 @@ namespace TCC.Data
             if (cd >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
-                if (_currentMode == CooldownMode.Pre)
+                if (CurrentMode == CooldownMode.Pre)
                 {
 
                     _mainTimer.Stop();
@@ -136,11 +137,11 @@ namespace TCC.Data
                     _secondsTimer.Stop();
                     _offsetTimer.Stop();
 
-                    Dispatcher.Invoke(() => Ended?.Invoke(_currentMode));
+                    Dispatcher.Invoke(() => Ended?.Invoke(CurrentMode));
                 }
             }
 
-            _currentMode = mode;
+            CurrentMode = mode;
 
             Seconds = cd / 1000;
             Cooldown = cd;
@@ -153,7 +154,7 @@ namespace TCC.Data
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
             _offsetTimer.Start();
 
-            Dispatcher.Invoke(() => Started?.Invoke(_currentMode));
+            Dispatcher.Invoke(() => Started?.Invoke(CurrentMode));
         }
         public void Refresh(ulong cd)
         {
@@ -164,7 +165,7 @@ namespace TCC.Data
             {
                 Seconds = 0;
                 Cooldown = 0;
-                Dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
+                Dispatcher?.Invoke(() => Ended?.Invoke(CurrentMode));
                 return;
             }
 
@@ -185,7 +186,7 @@ namespace TCC.Data
             _mainTimer.Start();
             NPC(nameof(IsAvailable));
 
-            Dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
+            Dispatcher?.Invoke(() => Started?.Invoke(CurrentMode));
 
         }
         public void Refresh(ulong id, ulong cd)
@@ -198,7 +199,7 @@ namespace TCC.Data
             {
                 Seconds = 0;
                 Cooldown = 0;
-                Dispatcher?.Invoke(() => Ended?.Invoke(_currentMode));
+                Dispatcher?.Invoke(() => Ended?.Invoke(CurrentMode));
                 return;
             }
 
@@ -212,7 +213,7 @@ namespace TCC.Data
             _mainTimer.Start();
             NPC(nameof(IsAvailable));
 
-            Dispatcher?.Invoke(() => Started?.Invoke(_currentMode));
+            Dispatcher?.Invoke(() => Started?.Invoke(CurrentMode));
 
         }
 
