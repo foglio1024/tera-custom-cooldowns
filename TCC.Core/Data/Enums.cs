@@ -29,6 +29,11 @@ namespace TCC.Parsing
 }
 namespace TCC.Data
 {
+    public enum CooldownMode
+    {
+        Normal,
+        Pre
+    }
     public enum ControlShape
     {
         Round = 0,
