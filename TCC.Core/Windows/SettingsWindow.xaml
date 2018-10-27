@@ -314,7 +314,16 @@
                             </Grid>
                         </settings:BoolSetting.ToolTip>
                     </settings:BoolSetting>
-
+                    <settings:BoolSetting SettingName="Nightmare Kylos helper" IsOn="{Binding KylosHelper, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png" >
+                        <settings:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource DefaultBorderStyle}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Shows Nightmare Kylos awaken stage and Empowered stacks. It also shows timer for next stack."/>
+                                </TextBlock>
+                            </Grid>
+                        </settings:BoolSetting.ToolTip>
+                    </settings:BoolSetting>
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">

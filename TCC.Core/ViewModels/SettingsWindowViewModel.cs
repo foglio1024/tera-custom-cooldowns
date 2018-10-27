@@ -29,7 +29,35 @@ namespace TCC.ViewModels
         public WindowSettings FloatingButtonSettings => Settings.Settings.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => Settings.Settings.CivilUnrestWindowSettings;
 
+        private int khCount = 0;
+        private bool _kh;
+        public bool KylosHelper
+        {
+            get => _kh;
+            set
+            {
+                _kh = true;
+                switch (khCount)
+                {
+                    case 0:
+                        WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning, 4000);
+                        break;
+                    case 1:
+                        WindowManager.FloatingButton.NotifyExtended(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
+                        break;
+                    case 2:
+                        WindowManager.FloatingButton.NotifyExtended("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
+                        Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                        break;
+                }
+                NPC();
 
+                khCount++;
+                if (khCount > 2) khCount = 0;
+                _kh = false;
+                NPC();
+            }
+        }
         public bool HideMe
         {
             get => Settings.Settings.IgnoreMeInGroupWindow;
