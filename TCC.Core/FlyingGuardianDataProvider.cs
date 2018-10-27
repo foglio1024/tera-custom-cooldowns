@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using TCC.Data;
 using TCC.Parsing.Messages;
 
@@ -7,12 +6,13 @@ namespace TCC
 {
     public static class FlyingGuardianDataProvider
     {
-        private static uint AirEssenceID = 630400;
-        private static uint FireEssenceID = 630500;
-        private static uint SparkEssenceID = 631001;
+        private const uint AirEssenceId = 630400;
+        private const uint FireEssenceId = 630500;
+        private const uint SparkEssenceId = 631001;
 
         private static int _stacks;
         private static FlightStackType _stackType;
+        private static bool _ignoreNextEnd;
 
         public static event Action<int> StacksChanged;
         public static event Action<FlightStackType> StackTypeChanged;
@@ -42,26 +42,26 @@ namespace TCC
 
         private static FlightStackType IdToStackType(uint id)
         {
-            if (id == FireEssenceID) return FlightStackType.Fire;
-            if (id == SparkEssenceID) return FlightStackType.Spark;
-            if (id == AirEssenceID) return FlightStackType.Air;
+            if (id == FireEssenceId) return FlightStackType.Fire;
+            if (id == SparkEssenceId) return FlightStackType.Spark;
+            if (id == AirEssenceId) return FlightStackType.Air;
             return FlightStackType.None;
         }
         private static bool IsEssence(uint id)
         {
-            return id == AirEssenceID || id == FireEssenceID || id == SparkEssenceID;
+            return id == AirEssenceId || id == FireEssenceId || id == SparkEssenceId;
         }
 
-        public static bool IsInProgress => EntitiesManager.IsEntitySpawned(630, 9998) ||
-                                           EntitiesManager.IsEntitySpawned(630, 2100) ||
-                                           EntitiesManager.IsEntitySpawned(630, 2101) ||
-                                           EntitiesManager.IsEntitySpawned(630, 2102) ||
-                                           EntitiesManager.IsEntitySpawned(630, 2103) ||
-                                           EntitiesManager.IsEntitySpawned(630, 2104) ||
-                                           EntitiesManager.IsEntitySpawned(631, 1001) ||
-                                           EntitiesManager.IsEntitySpawned(631, 1002) ||
-                                           EntitiesManager.IsEntitySpawned(631, 3001) ||
-                                           EntitiesManager.IsEntitySpawned(631, 9998);
+        public static bool IsInProgress => EntityManager.IsEntitySpawned(630, 9998) ||
+                                           EntityManager.IsEntitySpawned(630, 2100) ||
+                                           EntityManager.IsEntitySpawned(630, 2101) ||
+                                           EntityManager.IsEntitySpawned(630, 2102) ||
+                                           EntityManager.IsEntitySpawned(630, 2103) ||
+                                           EntityManager.IsEntitySpawned(630, 2104) ||
+                                           EntityManager.IsEntitySpawned(631, 1001) ||
+                                           EntityManager.IsEntitySpawned(631, 1002) ||
+                                           EntityManager.IsEntitySpawned(631, 3001) ||
+                                           EntityManager.IsEntitySpawned(631, 9998);
 
         public static void InvokeProgressChanged()
         {
@@ -94,6 +94,5 @@ namespace TCC
             StackType = IdToStackType(p.AbnormalityId);
         }
 
-        private static bool _ignoreNextEnd;
     }
 }
