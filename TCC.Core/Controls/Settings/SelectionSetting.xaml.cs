@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace TCC.Controls
+namespace TCC.Controls.Settings
 {
     /// <summary>
     /// Logica di interazione per SelectionSetting.xaml

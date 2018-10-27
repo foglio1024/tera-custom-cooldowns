@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="TCC.Controls.BoolSetting"
+﻿<UserControl x:Class="TCC.Controls.Settings.SelectionSetting"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:local="clr-namespace:TCC.Controls.Settings"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="SelectionSetting_OnLoaded">
     <Grid Height="35" 
           MouseEnter="Grid_MouseEnter" 
           MouseLeave="Grid_MouseLeave" 
@@ -13,10 +13,10 @@
           Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="{Binding SettingImage, RelativeSource={RelativeSource AncestorType=local:BoolSetting}}" 
+        <Image Source="{Binding SettingImage, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
                Width="22" 
                Height="22" 
                RenderOptions.BitmapScalingMode="Fant" 
@@ -26,15 +26,17 @@
                x:Name="Img"/>
         <TextBlock Style="{StaticResource DefaultTextStyle}" 
                    Grid.Column="1" 
-                   Margin="10,4,0,0" 
-                   Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:BoolSetting}}" 
+                   Margin="10,0,14,0" 
+                   Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
                    VerticalAlignment="Center" 
                    Padding="0" 
                    TextAlignment="Left" 
                    Opacity=".9"/>
-        <local:MaterialSwitch Status="{Binding IsOn, RelativeSource={RelativeSource AncestorType=local:BoolSetting}, Mode=OneWay}" 
-                              Grid.Column="2" 
-                              Margin="10 0 5 0" 
-                              MouseLeftButtonDown="ToggleSetting"/>
+        <ComboBox Grid.Column="2" ItemsSource="{Binding Choices, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
+                  SelectionChanged="Selector_OnSelectionChanged" Foreground="White"  VerticalAlignment="Stretch" BorderThickness="0"
+                  VerticalContentAlignment="Center" Margin="0,0,15,0" DropDownOpened="ComboBox_OnDropDownOpened" 
+                  Name="Cbox" HorizontalAlignment="Right" HorizontalContentAlignment="Left" >
+        </ComboBox>
     </Grid>
+
 </UserControl>

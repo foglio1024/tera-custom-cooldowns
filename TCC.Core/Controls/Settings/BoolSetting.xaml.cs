@@ -5,12 +5,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace TCC.Controls
+namespace TCC.Controls.Settings
 {
-    /// <inheritdoc cref="UserControl" />
-    /// <summary>
-    /// Logica di interazione per BoolSetting.xaml
-    /// </summary>
     public partial class BoolSetting
     {
         public BoolSetting()
