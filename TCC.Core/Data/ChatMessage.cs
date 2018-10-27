@@ -702,7 +702,7 @@ namespace TCC.Data
             }
             var offset = hasSpace ? 10 : 8;
             var colorEnd = msg.IndexOf("\"", colorIndex+offset+1, StringComparison.Ordinal);
-            if(colorEnd == -1) colorEnd = msg.IndexOf("\'", colorIndex + offset + 1, StringComparison.Ordinal); ;
+            if(colorEnd == -1) colorEnd = msg.IndexOf("\'", colorIndex + offset + 1, StringComparison.Ordinal);
             if(colorIndex == -1) return "";
             var col = msg.Substring(colorIndex + offset, colorEnd - colorIndex - offset);
             while (col.Length < 6)
