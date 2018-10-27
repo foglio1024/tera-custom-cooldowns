@@ -47,7 +47,7 @@ namespace TCC.Controls.Skills
         }
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
+            if (DesignerProperties.GetIsInDesignMode(this) || !(DataContext is Cooldown)) return;
             Context = (Cooldown)DataContext;
             OnSecondsUpdated();
             if (!Context.IsAvailable)
