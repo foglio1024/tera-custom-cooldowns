@@ -1,82 +1,77 @@
-﻿using System;
-using System.Timers;
-using System.Windows.Threading;
+﻿//namespace TCC.Data
+//{
+    //public class SkillCooldown : TSPropertyChanged, IDisposable
+    //{
+    //    //TODO: use events
 
-namespace TCC.Data
-{
-    public class SkillCooldown : TSPropertyChanged, IDisposable
-    {
-        //TODO: use events
+    //    public event Action Ending;
 
-        public event Action Ending;
+    //    public Skill Skill { get; set; }
+    //    public ulong Cooldown { get; set; }
+    //    public ulong OriginalCooldown { get; set; }
+    //    public CooldownType Type { get; set; }
+    //    public bool Pre { get; set; }
+    //    private Timer _timer;
 
-        public new Dispatcher Dispatcher => base.Dispatcher;
-        public Skill Skill { get; set; }
-        public ulong Cooldown { get; set; }
-        public ulong OriginalCooldown { get; set; }
-        public CooldownType Type { get; set; }
-        public bool Pre { get; set; }
-        private Timer _timer;
+    //    public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d, bool autostart = true, bool pre = false)
+    //    {
+    //        base.Dispatcher = d;
+    //        Pre = pre;
+    //        var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
 
-        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d, bool autostart = true, bool pre = false)
-        {
-            base.Dispatcher = d;
-            Pre = pre;
-            var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
+    //        Skill = sk;
+    //        Cooldown = t==CooldownType.Skill ? cooldown : cooldown * 1000;
+    //        Type = t;
+    //        OriginalCooldown = Cooldown;
 
-            Skill = sk;
-            Cooldown = t==CooldownType.Skill ? cooldown : cooldown * 1000;
-            Type = t;
-            OriginalCooldown = Cooldown;
+    //        if (cooldown == 0) return;
+    //        _timer = new Timer(Cooldown);
+    //        _timer.Elapsed += _timer_Elapsed;
+    //        if(autostart) Start();
 
-            if (cooldown == 0) return;
-            _timer = new Timer(Cooldown);
-            _timer.Elapsed += _timer_Elapsed;
-            if(autostart) Start();
+    //    }
 
-        }
+    //    private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+    //    {
+    //        Ending?.Invoke();
+    //        _timer?.Stop();
+    //    }
 
-        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Ending?.Invoke();
-            _timer?.Stop();
-        }
+    //    public void Start()
+    //    {
+    //        _timer.Start();
+    //    }
+    //    public void Refresh(ulong cd)
+    //    {
+    //        Cooldown = cd;
+    //        Pre = false;
+    //        NPC();
+    //        if (_timer == null) return;
+    //        _timer.Stop();
+    //        _timer.Interval = Cooldown > 0 ? Cooldown : 1;
+    //        _timer.Start();
+    //    }
 
-        public void Start()
-        {
-            _timer.Start();
-        }
-        public void Refresh(ulong cd)
-        {
-            Cooldown = cd;
-            Pre = false;
-            NPC();
-            if (_timer == null) return;
-            _timer.Stop();
-            _timer.Interval = Cooldown > 0 ? Cooldown : 1;
-            _timer.Start();
-        }
+    //    public void Dispose()
+    //    {
+    //        _timer?.Stop();
+    //        if(_timer != null) _timer.Elapsed -= _timer_Elapsed;
+    //        _timer?.Dispose();
+    //    }
 
-        public void Dispose()
-        {
-            _timer?.Stop();
-            if(_timer != null) _timer.Elapsed -= _timer_Elapsed;
-            _timer?.Dispose();
-        }
-
-        public void Refresh(SkillCooldown sk)
-        {
-            if (Skill.Id % 10 == 0 && sk.Skill.Id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
-            Cooldown = sk.Cooldown;
-            Pre = false;
-            NPC();
-            if (_timer == null) return;
-            _timer.Stop();
-            _timer.Interval = Cooldown > 0 ? Cooldown : 1;
-            _timer.Start();
-        }
-    }
-}
+    //    public void Refresh(SkillCooldown sk)
+    //    {
+    //        if (Skill.Id % 10 == 0 && sk.Skill.Id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
+    //        Cooldown = sk.Cooldown;
+    //        Pre = false;
+    //        NPC();
+    //        if (_timer == null) return;
+    //        _timer.Stop();
+    //        _timer.Interval = Cooldown > 0 ? Cooldown : 1;
+    //        _timer.Start();
+    //    }
+    //}
+//}
 
 /*
 * C_START_SKILL            0xCBC5
