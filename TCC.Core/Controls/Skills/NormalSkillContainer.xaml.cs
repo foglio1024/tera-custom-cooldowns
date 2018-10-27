@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using TCC.ViewModels;
+﻿using TCC.ViewModels;
 
 namespace TCC.Controls.Skills
 {
