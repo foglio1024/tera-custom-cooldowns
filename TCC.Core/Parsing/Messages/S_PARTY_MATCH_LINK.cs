@@ -1,4 +1,4 @@
-﻿using TCC.Data;
+﻿using TCC.Data.Chat;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 

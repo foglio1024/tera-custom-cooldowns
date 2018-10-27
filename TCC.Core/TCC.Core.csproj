@@ -116,10 +116,12 @@
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
-    <Compile Include="Data\ClassPositions.cs" />
-    <Compile Include="Data\Cooldown.cs" />
+    <Compile Include="Windows\ClassPositions.cs" />
+    <Compile Include="Data\Skills\Cooldown.cs" />
+    <Compile Include="Data\Npc\HpTriggeredTimerPattern.cs" />
+    <Compile Include="Data\Npc\TimerPattern.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="MoongourdEncounter.cs" />
+    <Compile Include="Moongourd\MoongourdEncounter.cs" />
     <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
     <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
     <Compile Include="Parsing\Messages\S_CHANGE_GUILD_CHIEF.cs" />
@@ -286,10 +288,10 @@
     <Compile Include="Converters\TemplateIdToColorConverter.cs" />
     <Compile Include="Converters\TypeToCursorConverter.cs" />
     <Compile Include="Converters\ValueToFactorConverter.cs" />
-    <Compile Include="Data\ApplyMessage.cs" />
-    <Compile Include="Data\BrokerChatMessage.cs" />
-    <Compile Include="Data\ChatChannelOnOff.cs" />
-    <Compile Include="Data\ChatUtils.cs" />
+    <Compile Include="Data\Chat\ApplyMessage.cs" />
+    <Compile Include="Data\Chat\BrokerChatMessage.cs" />
+    <Compile Include="Data\Chat\ChatChannelOnOff.cs" />
+    <Compile Include="Data\Chat\ChatUtils.cs" />
     <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
     <Compile Include="Data\Databases\AchievementDatabase.cs" />
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
@@ -300,26 +302,26 @@
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
-    <Compile Include="Data\MessagePieceBuilder.cs" />
-    <Compile Include="Data\SystemMessage.cs" />
+    <Compile Include="Data\Chat\MessagePieceBuilder.cs" />
+    <Compile Include="Data\Chat\SystemMessage.cs" />
     <Compile Include="Data\Dungeon.cs" />
-    <Compile Include="Data\EnragePattern.cs" />
-    <Compile Include="Data\Friend.cs" />
+    <Compile Include="Data\Npc\EnragePattern.cs" />
+    <Compile Include="Data\Pc\SimpleUser.cs" />
     <Compile Include="Data\GearItem.cs" />
-    <Compile Include="Data\Guard.cs" />
+    <Compile Include="Data\Map\Guard.cs" />
     <Compile Include="Data\InventoryManager.cs" />
-    <Compile Include="Data\LFG.cs" />
+    <Compile Include="Data\Chat\LFG.cs" />
     <Compile Include="Data\Listing.cs" />
-    <Compile Include="Data\Location.cs" />
-    <Compile Include="Data\Section.cs" />
+    <Compile Include="Data\Map\Location.cs" />
+    <Compile Include="Data\Map\Section.cs" />
     <Compile Include="Data\StanceTracker.cs" />
-    <Compile Include="Data\World.cs" />
+    <Compile Include="Data\Map\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
     <Compile Include="FlyingGuardianDataProvider.cs" />
     <Compile Include="ForegroundManager.cs" />
     <Compile Include="HotKey.cs" />
     <Compile Include="KeyboardHook.cs" />
-    <Compile Include="MoongourdManager.cs" />
+    <Compile Include="Moongourd\MoongourdManager.cs" />
     <Compile Include="Parsing\CityWarGuildInfo.cs" />
     <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
@@ -356,7 +358,7 @@
     <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
-    <Compile Include="ProxyPacketSplitter.cs" />
+    <Compile Include="Proxy\ProxyPacketSplitter.cs" />
     <Compile Include="Settings\SettingsReader.cs" />
     <Compile Include="Settings\SettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
@@ -411,17 +413,17 @@
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\ArcherFocusTracker.cs" />
-    <Compile Include="Data\Npc.cs" />
-    <Compile Include="Data\Abnormality.cs" />
+    <Compile Include="Data\Npc\Npc.cs" />
+    <Compile Include="Data\Abnormalities\Abnormality.cs" />
     <Compile Include="Data\Databases\AbnormalityDatabase.cs" />
-    <Compile Include="Data\ChatMessage.cs" />
-    <Compile Include="Data\MessagePiece.cs" />
-    <Compile Include="Data\MessagePieceType.cs" />
-    <Compile Include="Data\Money.cs" />
-    <Compile Include="Data\PrivateChatChannel.cs" />
+    <Compile Include="Data\Chat\ChatMessage.cs" />
+    <Compile Include="Data\Chat\MessagePiece.cs" />
+    <Compile Include="Data\Chat\MessagePieceType.cs" />
+    <Compile Include="Data\Chat\Money.cs" />
+    <Compile Include="Data\Chat\PrivateChatChannel.cs" />
     <Compile Include="Data\Databases\SocialDatabase.cs" />
     <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
-    <Compile Include="Data\User.cs" />
+    <Compile Include="Data\Pc\User.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="Parsing\MessageFactory.cs" />
     <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
@@ -452,7 +454,7 @@
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
-    <Compile Include="Data\Player.cs" />
+    <Compile Include="Data\Pc\Player.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_USER.cs" />
     <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE_LOOT_ITEM.cs" />
@@ -466,7 +468,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
-    <Compile Include="Proxy.cs" />
+    <Compile Include="Proxy\Proxy.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
@@ -493,7 +495,7 @@
     <Compile Include="Tera.Data\InvalidConfigFileException.cs" />
     <Compile Include="Tera.Data\TeraData.cs" />
     <Compile Include="Tera.Data\WindowData.cs" />
-    <Compile Include="Data\AbnormalityDuration.cs" />
+    <Compile Include="Data\Abnormalities\AbnormalityDuration.cs" />
     <Compile Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml.cs">
       <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
@@ -742,7 +744,6 @@
     <Compile Include="Windows\Widgets\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\FixedSkillCooldown.cs" />
     <Compile Include="ViewModels\ClassManagers\ValkyrieBarManager.cs" />
     <Compile Include="Controls\Classes\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
@@ -784,9 +785,8 @@
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\SkillCooldown.cs" />
     <Compile Include="Controls\Arc.cs" />
-    <Compile Include="Data\Character.cs" />
+    <Compile Include="Data\Pc\Character.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="FocusManager.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
@@ -795,7 +795,7 @@
     <Compile Include="Parsing\Messages\S_LOGIN.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_START_COOLTIME_ITEM.cs" />
-    <Compile Include="Data\Skill.cs" />
+    <Compile Include="Data\Skills\Skill.cs" />
     <Compile Include="Controls\Skills\RoundSkillControl.xaml.cs">
       <DependentUpon>RoundSkillControl.xaml</DependentUpon>
     </Compile>
@@ -813,7 +813,7 @@
     <Compile Include="Windows\TccMessageBox.xaml.cs">
       <DependentUpon>TccMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TccWindow.cs" />
+    <Compile Include="Windows\TccWidget.cs" />
     <Compile Include="Controls\Chat\MoneyMessagePiece.xaml.cs">
       <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
     </Compile>

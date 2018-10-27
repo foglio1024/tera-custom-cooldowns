@@ -1,8 +1,9 @@
-﻿using System;
-
-namespace TCC.Parsing
+﻿namespace TCC.Data
 {
-    [Flags]
+    public enum WarriorStance
+    {
+        None, Assault, Defensive
+    }
     public enum ModifierKeys : uint
     {
         Alt = 1,
@@ -26,9 +27,7 @@ namespace TCC.Parsing
         THA = 10,
         SE = 11
     }
-}
-namespace TCC.Data
-{
+
     public enum CooldownMode
     {
         Normal,

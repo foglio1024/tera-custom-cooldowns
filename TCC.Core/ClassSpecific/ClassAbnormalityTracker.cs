@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCC.Data;
+using TCC.Data.Skills;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 

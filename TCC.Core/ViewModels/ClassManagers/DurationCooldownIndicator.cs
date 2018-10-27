@@ -1,5 +1,5 @@
 ﻿using System.Windows.Threading;
-using TCC.Data;
+using TCC.Data.Skills;
 
 namespace TCC.ViewModels
 {

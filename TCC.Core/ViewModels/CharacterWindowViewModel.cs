@@ -1,5 +1,6 @@
 ﻿using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Pc;
 
 namespace TCC.ViewModels
 {
@@ -42,7 +43,7 @@ namespace TCC.ViewModels
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             NPC(e.PropertyName);
-            if (e.PropertyName == nameof(Data.Player.Class))
+            if (e.PropertyName == nameof(Data.Pc.Player.Class))
             {
                 NPC(nameof(ShowRe));
                 NPC(nameof(ShowElements));

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
-using TCC.Parsing;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings

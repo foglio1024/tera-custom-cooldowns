@@ -263,7 +263,7 @@ namespace TCC
             EntityManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            Proxy.CloseConnection();
+            Proxy.Proxy.CloseConnection();
             SessionManager.Logged = false;
             SessionManager.LoadingScreen = true;
         }
@@ -300,7 +300,7 @@ namespace TCC
             TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching error.txt from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
-            if (Proxy.IsConnected) Proxy.CloseConnection();
+            if (Proxy.Proxy.IsConnected) Proxy.Proxy.CloseConnection();
             if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
             try
             {
@@ -426,7 +426,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = false;
             SettingsWriter.Save();
             WindowManager.Dispose();
-            Proxy.CloseConnection();
+            Proxy.Proxy.CloseConnection();
             UpdateManager.StopTimer();
 
             Environment.Exit(0);

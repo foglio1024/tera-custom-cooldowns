@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Npc;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Npc
@@ -49,7 +50,7 @@ namespace TCC.Controls.Npc
             }
         }
 
-        private Data.Npc Npc => DataContext as Data.Npc;
+        private Data.Npc.Npc Npc => DataContext as Data.Npc.Npc;
         private float _maxHp;
         private float _currentHp;
         private bool _enraged;
@@ -177,7 +178,7 @@ namespace TCC.Controls.Npc
             switch (e.PropertyName)
             {
                 case "CurrentHP":
-                    _currentHp = ((Data.Npc)sender).CurrentHP;
+                    _currentHp = ((Data.Npc.Npc)sender).CurrentHP;
                     if (_currentHp > _maxHp) _maxHp = _currentHp;
                     DoubleAnimation.To = ValueToLength(_currentHp, _maxHp);
                     AnimateHp();
@@ -196,11 +197,11 @@ namespace TCC.Controls.Npc
 
                     break;
                 case "MaxHP":
-                    _maxHp = ((Data.Npc)sender).MaxHP;
+                    _maxHp = ((Data.Npc.Npc)sender).MaxHP;
                     if (Npc.CurrentFactor == 1) NextEnragePercentage = 100 - Npc.EnragePattern.Percentage;
                     break;
                 case "Enraged":
-                    var value = ((Data.Npc)sender).Enraged;
+                    var value = ((Data.Npc.Npc)sender).Enraged;
                     if (_enraged == value) return;
                     _enraged = value;
                     if (_enraged)

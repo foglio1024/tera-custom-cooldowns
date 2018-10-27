@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
+using TCC.Data.Chat;
+using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Sniffing;
 using TCC.Tera.Data;
@@ -63,7 +65,7 @@ namespace TCC.Parsing
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt"));
                 Factory = new MessageFactory(message.Versions[0], sysMsgNamer: SystemMessageNamer);
                 TeraSniffer.Instance.Connected = true;
-                Proxy.ConnectToProxy();
+                Proxy.Proxy.ConnectToProxy();
                 return;
             }
             Packets.Enqueue(obj);
@@ -294,7 +296,7 @@ namespace TCC.Parsing
                     target.LeaderName = l.LeaderName;
                     if (target.PlayerCount != l.PlayerCount)
                     {
-                        Proxy.RequestPartyInfo(l.LeaderId);
+                        Proxy.Proxy.RequestPartyInfo(l.LeaderId);
                     }
                 }
                 else WindowManager.LfgListWindow.VM.Listings.Add(l);
@@ -714,7 +716,7 @@ namespace TCC.Parsing
                 WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
-            if (!Proxy.IsConnected) return;
+            if (!Proxy.Proxy.IsConnected) return;
             WindowManager.FloatingButton.OpenPlayerMenu();
         }
 
@@ -795,10 +797,10 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.IsConnected && Settings.Settings.LfgEnabled && SessionManager.InGameUiOn)
+            if (Proxy.Proxy.IsConnected && Settings.Settings.LfgEnabled && SessionManager.InGameUiOn)
             {
-                Proxy.RequestCandidates();
-                if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
+                Proxy.Proxy.RequestCandidates();
+                if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)

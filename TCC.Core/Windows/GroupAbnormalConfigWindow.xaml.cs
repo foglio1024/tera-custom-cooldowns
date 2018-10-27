@@ -108,10 +108,7 @@ namespace TCC.Windows
             }
         }
     }
-}
 
-namespace TCC.ViewModels
-{
     public class ClassToggle : TSPropertyChanged
     {
         private bool _selected;

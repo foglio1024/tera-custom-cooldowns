@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using TCC.Data.Map;
 
 namespace TCC.Data.Databases
 {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Settings;
 
 namespace TCC.ViewModels

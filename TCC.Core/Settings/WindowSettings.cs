@@ -7,6 +7,7 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC.Settings
 {

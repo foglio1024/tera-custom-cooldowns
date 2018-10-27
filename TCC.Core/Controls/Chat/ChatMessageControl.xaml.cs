@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using TCC.Data;
+using TCC.Data.Chat;
 
 namespace TCC.Controls.Chat
 {

@@ -11,6 +11,8 @@ using System.Windows.Threading;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
+using TCC.Data.Abnormalities;
+using TCC.Data.Skills;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Skills

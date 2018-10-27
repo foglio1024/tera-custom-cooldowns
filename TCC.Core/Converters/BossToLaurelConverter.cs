@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Data;
+using TCC.Data.Npc;
 
 namespace TCC.Converters
 {

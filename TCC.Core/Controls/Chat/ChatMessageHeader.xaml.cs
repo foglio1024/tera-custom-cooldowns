@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media.Effects;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Parsing;
 
 namespace TCC.Controls.Chat
@@ -20,7 +21,7 @@ namespace TCC.Controls.Chat
         {
             var context = (ChatMessage)DataContext;
             if (context.Author == "System" || context.Channel == ChatChannel.Twitch) return;
-            Proxy.AskInteractive(PacketProcessor.Server.ServerId, context.Author);
+            Proxy.Proxy.AskInteractive(PacketProcessor.Server.ServerId, context.Author);
         }
 
         private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)

@@ -23,19 +23,19 @@ namespace TCC.Windows.Widgets
         private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
         {
             if(!GroupWindowViewModel.Instance.AmILeader) return;
-            Proxy.LootSettings();
+            Proxy.Proxy.LootSettings();
         }
 
         private void DisbandButtonClicked(object sender, RoutedEventArgs e)
         {
             if(!GroupWindowViewModel.Instance.AmILeader) return;
-            Proxy.DisbandParty();
+            Proxy.Proxy.DisbandParty();
         }
 
         private void ResetButtonClicked(object sender, RoutedEventArgs e)
         {
             if(!GroupWindowViewModel.Instance.AmILeader) return;
-            Proxy.ResetInstance();
+            Proxy.Proxy.ResetInstance();
         }
 
         private void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
@@ -52,7 +52,7 @@ namespace TCC.Windows.Widgets
 
         private void LeaveParty(object sender, RoutedEventArgs e)
         {
-            Proxy.LeaveParty();
+            Proxy.Proxy.LeaveParty();
         }
 
         private void ShowAbnormalSettings(object sender, RoutedEventArgs e)

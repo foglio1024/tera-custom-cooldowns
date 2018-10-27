@@ -58,7 +58,7 @@ namespace TCC.Parsing.Messages
 
             }
 
-            if (page < pages) if (Settings.Settings.LfgEnabled && Proxy.IsConnected) Proxy.RequestNextLfgPage(page + 1);
+            if (page < pages) if (Settings.Settings.LfgEnabled && Proxy.Proxy.IsConnected) Proxy.Proxy.RequestNextLfgPage(page + 1);
             if (page == pages) IsLast = true;
         }
     }

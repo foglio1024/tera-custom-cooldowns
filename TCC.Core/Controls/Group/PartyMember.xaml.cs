@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using TCC.Data;
+using TCC.Data.Pc;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Group
@@ -139,7 +139,7 @@ namespace TCC.Controls.Group
         private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var dc = (User)DataContext;
-            Proxy.AskInteractive(dc.ServerId, dc.Name);
+            Proxy.Proxy.AskInteractive(dc.ServerId, dc.Name);
         }
 
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)

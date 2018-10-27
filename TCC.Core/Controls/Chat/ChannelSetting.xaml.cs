@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using TCC.Data;
+using TCC.Data.Chat;
 
 namespace TCC.Controls.Chat
 {

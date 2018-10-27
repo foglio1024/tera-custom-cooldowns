@@ -1,6 +1,7 @@
 ﻿using System;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Data.Skills;
 using TCC.ViewModels;
 
 namespace TCC

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.ViewModels;
 namespace TCC.Parsing
 {
@@ -172,7 +173,7 @@ namespace TCC.Parsing
             var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
             var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            if (Proxy.IsConnected) Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
+            if (Proxy.Proxy.IsConnected) Proxy.Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)

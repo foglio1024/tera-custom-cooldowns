@@ -19,7 +19,7 @@ namespace TCC.Controls.Npc
         private const uint DeleteDelay = 0;
         private DispatcherTimer _t;
         private DoubleAnimation _hpAnim;
-        private Data.Npc _dc;
+        private Data.Npc.Npc _dc;
         public SmallMobControl()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace TCC.Controls.Npc
 
         private void SmallMobControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Data.Npc)DataContext;
+            _dc = (Data.Npc.Npc)DataContext;
             _dc.DeleteEvent += Dc_DeleteEvent;
             _dc.PropertyChanged += OnDcPropertyChanged;
             _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(DeleteDelay) };
@@ -59,7 +59,7 @@ namespace TCC.Controls.Npc
 
         private void OnDcPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(Data.Npc.CurrentFactor)) return;
+            if (e.PropertyName != nameof(Data.Npc.Npc.CurrentFactor)) return;
             if (Compact)
             {
                 _hpAnim.To = _dc.CurrentFactor * 359.9;

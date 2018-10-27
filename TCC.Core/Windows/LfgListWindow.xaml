@@ -8,6 +8,7 @@
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:settings="clr-namespace:TCC.Controls.Settings"
+        xmlns:pc="clr-namespace:TCC.Data.Pc"
         Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="LfgListWindow" Height="800"
@@ -33,7 +34,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <DataTemplate x:Key="PlayerDt" DataType="data:User">
+        <DataTemplate x:Key="PlayerDt" DataType="pc:User">
             <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -90,7 +91,7 @@
 
             </DataTemplate.Triggers>
         </DataTemplate>
-        <DataTemplate x:Key="ApplicantDt" DataType="data:User">
+        <DataTemplate x:Key="ApplicantDt" DataType="pc:User">
             <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

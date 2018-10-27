@@ -7,7 +7,9 @@ using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
+using TCC.Data.Skills;
 using TCC.Windows;
 
 namespace TCC.ViewModels

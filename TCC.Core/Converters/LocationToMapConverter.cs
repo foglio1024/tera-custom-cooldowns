@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
-using TCC.Data;
+using TCC.Data.Map;
 
 namespace TCC.Converters
 {

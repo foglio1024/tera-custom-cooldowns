@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Dragablz;
 using TCC.Data;
+using TCC.Data.Chat;
 
 namespace TCC.ViewModels
 {

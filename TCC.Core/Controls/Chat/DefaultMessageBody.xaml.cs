@@ -1,7 +1,7 @@
 ﻿using Dragablz;
 using System.Windows;
 using System.Windows.Input;
-using TCC.Data;
+using TCC.Data.Chat;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TCC.Parsing;
+using TCC.Data;
 
 namespace TCC.TeraCommon.Game.Services
 {

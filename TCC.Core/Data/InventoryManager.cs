@@ -2,6 +2,7 @@
 
 namespace TCC.Data
 {
+    //TODO: rework this
     public static class InventoryManager
     {
         private const uint StartId = 88273;

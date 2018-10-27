@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using TCC.Data;
+using TCC.Data.Chat;
 
 namespace TCC.TemplateSelectors
 {

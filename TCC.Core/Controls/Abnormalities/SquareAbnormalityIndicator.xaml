@@ -1,14 +1,14 @@
-﻿<abnormalities:AbnormalityIndicatorBase x:Class="TCC.Controls.Abnormalities.SquareAbnormalityIndicator"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:data="clr-namespace:TCC.Data"
-             xmlns:abnormalities="clr-namespace:TCC.Controls.Abnormalities"
-             mc:Ignorable="d" 
+﻿<abnormalitiesCtrl:AbnormalityIndicatorBase x:Class="TCC.Controls.Abnormalities.SquareAbnormalityIndicator"
+                                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                        xmlns:local="clr-namespace:TCC.Controls"
+                                        xmlns:abnormalitiesCtrl="clr-namespace:TCC.Controls.Abnormalities"
+                                        xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
+                                        mc:Ignorable="d" 
              Width="Auto" Height="Auto" FlowDirection="LeftToRight"
-             d:DataContext="{d:DesignInstance data:AbnormalityDuration}">
+             d:DataContext="{d:DesignInstance abnormalities:AbnormalityDuration}">
     <Grid Margin="2 0" Name="RootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,7 +17,7 @@
         <Grid.ToolTip>
             <ToolTip Background="Transparent" BorderBrush="Transparent">
                 <Grid>
-                    <abnormalities:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
+                    <abnormalitiesCtrl:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
                                                         AbnormalityToolTip="{Binding Abnormality.ToolTip}"
                                                         Id="{Binding Abnormality.Id}"/>
                 </Grid>
@@ -29,8 +29,8 @@
                      RenderTransformOrigin=".5 .5" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             </Rectangle>
             <Rectangle Name="AbnormalityIcon" Margin="1" UseLayoutRounding="False"
-                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalities:AbnormalityIndicatorBase}}" 
-                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalities:AbnormalityIndicatorBase}}" 
+                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}}" 
+                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}}" 
                      RenderTransformOrigin=".5 .5" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
@@ -46,7 +46,7 @@
         </Grid>
         <!-- Duration -->
         <Grid x:Name="DurationLabel"  Width="Auto" 
-              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalities:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.55}"
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.55}"
               MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
               HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1"
               Margin="0 -4 0 0">
@@ -79,7 +79,7 @@
               x:Name="StacksLabel" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Top" 
-              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalities:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.6}"
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.6}"
 
               Margin="-1" >
             <Grid.LayoutTransform>
@@ -115,5 +115,7 @@
             </Viewbox>
         </Grid>
     </Grid>
-</abnormalities:AbnormalityIndicatorBase>
+</abnormalitiesCtrl:AbnormalityIndicatorBase>
+
+
 

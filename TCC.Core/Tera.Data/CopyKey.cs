@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using TCC.Parsing;
+using TCC.Data;
 
 namespace TCC.Tera.Data
 {

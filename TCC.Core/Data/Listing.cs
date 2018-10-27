@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
+using TCC.Data.Pc;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -184,7 +185,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.ApplyToLfg(_listing.LeaderId);
+            Proxy.Proxy.ApplyToLfg(_listing.LeaderId);
             _listing.CanApply = false;
             _t.Start();
         }
@@ -206,7 +207,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.RequestCandidates();
+            Proxy.Proxy.RequestCandidates();
         }
     }
 

@@ -6,14 +6,14 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:npc="clr-namespace:TCC.Controls.Npc"
              xmlns:converters="clr-namespace:TCC.Converters"
-             xmlns:data="clr-namespace:TCC.Data"
+             xmlns:npc1="clr-namespace:TCC.Data.Npc"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
              UseLayoutRounding="True" 
              Width="Auto"
              Height="Auto"
-             Visibility="{Binding Visible}" d:DataContext="{d:DesignInstance data:Npc}">
+             Visibility="{Binding Visible}" d:DataContext="{d:DesignInstance npc1:Npc}">
 
     <UserControl.Resources>
         <system:Double x:Key="GageWidth">520</system:Double>

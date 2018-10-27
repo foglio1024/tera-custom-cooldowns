@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Chat;
+using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Windows.Widgets;

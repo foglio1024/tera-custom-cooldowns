@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using TCC.Data;
+using TCC.Data.Chat;
 
 namespace TCC.Controls.Chat
 {
@@ -16,19 +16,19 @@ namespace TCC.Controls.Chat
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            Proxy.PartyInvite(dc.Author);
+            Proxy.Proxy.PartyInvite(dc.Author);
             dc.Handled = true;
         }
         private void InspectBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
-            Proxy.Inspect(dc.Author);
+            Proxy.Proxy.Inspect(dc.Author);
         }
         private void DeclineApplyBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            Proxy.DeclineApply(dc.PlayerId);
+            Proxy.Proxy.DeclineApply(dc.PlayerId);
             dc.Handled = true;
         }
     }

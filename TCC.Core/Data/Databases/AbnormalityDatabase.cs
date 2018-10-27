@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using TCC.Data.Abnormalities;
 
 namespace TCC.Data.Databases
 {

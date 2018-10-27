@@ -13,7 +13,7 @@ namespace TCC.Controls.Npc
     /// </summary>
     public partial class DragonControl
     {
-        private Data.Npc _dc;
+        private Data.Npc.Npc _dc;
         private DoubleAnimation _shieldArcAn;
 
         public DragonControl()
@@ -25,7 +25,7 @@ namespace TCC.Controls.Npc
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Data.Npc)DataContext;
+            _dc = (Data.Npc.Npc)DataContext;
             _dc.PropertyChanged += Dc_PropertyChanged;
             _dc.DeleteEvent += Dc_DeleteEvent;
             EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);

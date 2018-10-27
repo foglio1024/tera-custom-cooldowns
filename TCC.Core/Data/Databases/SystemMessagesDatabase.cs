@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using TCC.Data.Chat;
 
 namespace TCC.Data.Databases
 {

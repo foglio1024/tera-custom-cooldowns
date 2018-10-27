@@ -1,12 +1,12 @@
 ﻿<UserControl x:Class="TCC.Controls.Chat.DefaultMessageBody"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:data="clr-namespace:TCC.Data"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:chat="clr-namespace:TCC.Data.Chat"
              mc:Ignorable="d" d:DataContext="{d:DesignData ChatMessage}">
     <UserControl.Resources>
-        <DataTemplate x:Key="MainDataTemplate" DataType="data:ChatMessage">
+        <DataTemplate x:Key="MainDataTemplate" DataType="chat:ChatMessage">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

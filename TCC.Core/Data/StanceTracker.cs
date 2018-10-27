@@ -3,18 +3,7 @@ using System.Windows.Threading;
 
 namespace TCC.Data
 {
-    public enum ArcherStance
-    {
-        None, SniperEye
-    }
-    public enum WarriorStance
-    {
-        None, Assault, Defensive
-    }
-    public enum MysticAuras
-    {
-        None, Crit, Mana, CritRes, Swift
-    }
+
     public class StanceTracker<T> : TSPropertyChanged where T : IComparable
     {
         private T _currentStance;

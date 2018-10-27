@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using System.Runtime.CompilerServices;
 using TCC.Annotations;
 using TCC.Data;
+using TCC.Data.Chat;
 
 namespace TCC
 {

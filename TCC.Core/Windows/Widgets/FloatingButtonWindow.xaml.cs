@@ -121,7 +121,7 @@ namespace TCC.Windows.Widgets
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Proxy.RequestLfgList();
+            Proxy.Proxy.RequestLfgList();
         }
 
         private bool _busy;

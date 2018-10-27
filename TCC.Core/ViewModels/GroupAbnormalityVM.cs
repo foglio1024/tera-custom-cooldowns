@@ -1,5 +1,7 @@
 ﻿using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Abnormalities;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {

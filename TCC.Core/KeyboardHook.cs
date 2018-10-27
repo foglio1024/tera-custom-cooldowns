@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using TCC.Parsing;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC
@@ -40,9 +40,9 @@ namespace TCC
         {
             if (e.Key == Settings.Settings.LfgHotkey.Key && e.Modifier == Settings.Settings.LfgHotkey.Modifier)
             {
-                if (!Proxy.IsConnected) return;
+                if (!Proxy.Proxy.IsConnected) return;
 
-                if (!WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
+                if (!WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
                 else WindowManager.LfgListWindow.CloseWindow();
             }
             if (e.Key == Settings.Settings.SettingsHotkey.Key && e.Modifier == Settings.Settings.SettingsHotkey.Modifier)
@@ -67,8 +67,8 @@ namespace TCC
             if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             {
                 if (!GroupWindowViewModel.Instance.AmILeader) return;
-                if (!Proxy.IsConnected) return;
-                Proxy.LootSettings();
+                if (!Proxy.Proxy.IsConnected) return;
+                Proxy.Proxy.LootSettings();
             }
             
         }

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Windows;
 
 namespace TCC.Controls.Chat
@@ -29,7 +30,7 @@ namespace TCC.Controls.Chat
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    Proxy.ChatLinkData(_context.RawLink);
+                    Proxy.Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Url:
                     try
@@ -42,10 +43,10 @@ namespace TCC.Controls.Chat
                     }
                     break;
                 case MessagePieceType.PointOfInterest:
-                    Proxy.ChatLinkData(_context.RawLink);
+                    Proxy.Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Quest:
-                    Proxy.ChatLinkData(_context.RawLink);
+                    Proxy.Proxy.ChatLinkData(_context.RawLink);
                     break;
             }
         }

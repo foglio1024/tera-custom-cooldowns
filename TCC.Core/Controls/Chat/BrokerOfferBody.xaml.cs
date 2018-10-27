@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using TCC.Data;
+using TCC.Data.Chat;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
@@ -17,7 +17,7 @@ namespace TCC.Controls.Chat
         private void Accept(object sender, MouseButtonEventArgs e)
         {
             var dc = (BrokerChatMessage) DataContext;
-            Proxy.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
+            Proxy.Proxy.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
             ChatWindowManager.Instance.SetPaused(false, dc);
             ChatWindowManager.Instance.ScrollToBottom();
 
@@ -27,7 +27,7 @@ namespace TCC.Controls.Chat
         {
             var dc = (BrokerChatMessage) DataContext;
             if (dc.Handled) return;
-            Proxy.DeclineBrokerOffer(dc.PlayerId, dc.ListingId);
+            Proxy.Proxy.DeclineBrokerOffer(dc.PlayerId, dc.ListingId);
             OnHandled();
             ChatWindowManager.Instance.SetPaused(false, dc);
             ChatWindowManager.Instance.ScrollToBottom();

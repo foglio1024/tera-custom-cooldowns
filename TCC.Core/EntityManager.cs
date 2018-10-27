@@ -2,6 +2,7 @@
 using System.Windows;
 using TCC.ClassSpecific;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.ViewModels;
 
 namespace TCC

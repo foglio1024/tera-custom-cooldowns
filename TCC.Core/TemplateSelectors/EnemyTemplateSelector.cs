@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TCC.Data;
+using TCC.Data.Npc;
 
 namespace TCC.TemplateSelectors
 {

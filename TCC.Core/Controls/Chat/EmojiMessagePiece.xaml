@@ -4,8 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:TCC.Converters"
-             xmlns:data="clr-namespace:TCC.Data"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance data:MessagePiece}">
+             xmlns:chat="clr-namespace:TCC.Data.Chat"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:MessagePiece}">
     <UserControl.Resources>
         <converters:EmojiNameToImageConverter x:Key="EmojiNameToImageConverter" />
     </UserControl.Resources>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 using TCC.Data;
+using TCC.Data.Skills;
 
 namespace TCC
 {
@@ -149,7 +150,7 @@ namespace TCC
                     break;
             }
         }
-
+        //TODO: update these
         private static void BuildDefaultValkyrieSkillConfig(string filename)
         {
             var skills = new XElement("Skills",
