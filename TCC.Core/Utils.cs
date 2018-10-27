@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
@@ -231,6 +232,8 @@ namespace TCC
 
             return liveView;
         }
+
+
     }
 
     public static class UInt64Extensions
@@ -248,6 +251,15 @@ namespace TCC
         }
     }
 
+    public static class ItemsControlExtensions
+    {
+        public static void RefreshTemplate(this ItemsControl el, string resName)
+        {
+            if (el == null) return;
+            el.ItemTemplateSelector = null;
+            el.ItemTemplateSelector = Application.Current.FindResource(resName) as DataTemplateSelector;
+        }
+    }
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
     {
         public static readonly DependencyProperty ValueProperty =
