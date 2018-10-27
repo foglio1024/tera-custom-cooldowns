@@ -1,4 +1,4 @@
-﻿namespace TCC.Controls.ChatControls
+﻿namespace TCC.Controls.Chat
 {
     public partial class EmojiMessagePiece
     {

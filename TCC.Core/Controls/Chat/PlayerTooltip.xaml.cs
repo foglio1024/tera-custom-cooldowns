@@ -8,7 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using TCC.ViewModels;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Logica di interazione per PlayerTooltip.xaml
@@ -191,7 +191,7 @@ namespace TCC.Controls.ChatControls
         private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var p = (MgPopup.Child as MoongourdPopup);
-            p?.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, Settings.LastRegion);
+            p?.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, TCC.Settings.LastRegion);
             MgPopup.IsOpen = true;
         }
         private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
@@ -203,9 +203,9 @@ namespace TCC.Controls.ChatControls
         {
             Dispatcher.Invoke(() =>
             {
-                if (Settings.LastRegion != "NA" &&
-                    Settings.LastRegion != "RU" &&
-                    !Settings.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+                if (TCC.Settings.LastRegion != "NA" &&
+                    TCC.Settings.LastRegion != "RU" &&
+                    !TCC.Settings.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
             });
 
         }

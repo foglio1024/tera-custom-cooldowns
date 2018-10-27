@@ -5,7 +5,7 @@ using System.Windows.Media;
 using TCC.Data;
 using TCC.Windows;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Logica di interazione per MessagePieceControl.xaml

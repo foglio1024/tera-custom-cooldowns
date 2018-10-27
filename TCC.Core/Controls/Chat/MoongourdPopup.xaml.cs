@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using TCC.Annotations;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Logica di interazione per MoongourdPopup.xaml

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using TCC.Data;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Interaction logic for ChannelSetting.xaml

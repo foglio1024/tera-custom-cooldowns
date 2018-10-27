@@ -4,7 +4,7 @@ using System.Windows.Input;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Interaction logic for DefaultMessageBody.xaml

@@ -8,7 +8,7 @@ using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Interaction logic for LFGcontrol.xaml
@@ -37,7 +37,7 @@ namespace TCC.Controls.ChatControls
 
         private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (Settings.LfgEnabled)
+            if (TCC.Settings.LfgEnabled)
             {
                 Proxy.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 

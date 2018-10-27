@@ -4,7 +4,7 @@ using System.Windows.Media.Effects;
 using TCC.Data;
 using TCC.Parsing;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Logica di interazione per ChatMessageHeader.xaml

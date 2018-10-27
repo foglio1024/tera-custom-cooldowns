@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="TCC.Controls.ChatControls.PlayerTooltip"
+﻿<UserControl x:Class="TCC.Controls.Chat.PlayerTooltip"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:TCC.Controls"
-             xmlns:chatControls="clr-namespace:TCC.Controls.ChatControls"
-             xmlns:w="clr-namespace:TCC.Windows"
-             mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding RelativeSource={RelativeSource AncestorType=w:FloatingButtonWindow}}">
+             xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
+             xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+             mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding RelativeSource={RelativeSource AncestorType=widgets:FloatingButtonWindow}}">
     <Grid>
         <Border CornerRadius="1" Background="#9445" Grid.RowSpan="10" Margin="15" BorderBrush="#8666" BorderThickness="1" Width="Auto" Name="RootBorder">
             <Grid Margin="5" Height="Auto">
