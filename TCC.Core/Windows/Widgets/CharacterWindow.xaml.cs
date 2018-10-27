@@ -4,7 +4,7 @@ using System.Windows.Media.Animation;
 using TCC.Controls;
 using TCC.Data;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     /// <summary>
     /// Logica di interazione per HPbar.xaml

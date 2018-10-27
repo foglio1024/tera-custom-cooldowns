@@ -1,4 +1,4 @@
-﻿namespace TCC.Windows
+﻿namespace TCC.Windows.Widgets
 {
     public partial class CooldownWindow 
     {

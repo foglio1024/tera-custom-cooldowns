@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TCC.ViewModels;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     /// <summary>
     /// Logica di interazione per GroupWindow.xaml

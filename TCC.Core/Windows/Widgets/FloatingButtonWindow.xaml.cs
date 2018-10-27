@@ -6,11 +6,11 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using TCC.Controls.ChatControls;
+using TCC.Controls.Chat;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     public partial class FloatingButtonWindow
     {

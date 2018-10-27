@@ -1,15 +1,15 @@
-﻿using Dragablz;
-using GongSolutions.Wpf.DragDrop.Utilities;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Dragablz;
+using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.ViewModels;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
 
     public partial class ChatWindow

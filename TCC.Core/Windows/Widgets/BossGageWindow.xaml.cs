@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using TCC.ViewModels;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     public partial class BossWindow
     {

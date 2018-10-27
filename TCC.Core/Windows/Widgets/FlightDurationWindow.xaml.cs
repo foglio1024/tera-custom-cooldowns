@@ -7,7 +7,7 @@ using TCC.Annotations;
 using TCC.Data;
 using Arc = TCC.Controls.Arc;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     /// <summary>
     /// Logica di interazione per FlightDurationWindow.xaml

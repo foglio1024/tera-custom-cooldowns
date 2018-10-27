@@ -1,4 +1,4 @@
-﻿<w:TccWidget x:Class="TCC.Windows.CooldownWindow"
+﻿<w:TccWidget x:Class="TCC.Windows.Widgets.BossWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,28 +7,25 @@
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
              mc:Ignorable="d"
-        Title="Tera Custom Cooldowns"
-        Style="{StaticResource BaseWindowStyle}">
+        Title="BossGageWindow" 
+        Style="{StaticResource BaseWindowStyle}"
+        MouseLeftButtonDown="Drag"
+        MouseDoubleClick="TccWindow_MouseDoubleClick">
     <w:TccWidget.DataContext>
-        <vm:CooldownWindowViewModel />
+        <vm:BossGageWindowViewModel/>
     </w:TccWidget.DataContext>
-    <Grid Background="Transparent" >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <ContentControl x:Name="WindowContent" 
-                        Margin="5" 
-                        Grid.Row="1"
-                        Content="{Binding Instance}"
-                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" >
-            <ContentControl.LayoutTransform>
+        <Grid Grid.Row="1" Name="WindowContent">
+            <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
-            </ContentControl.LayoutTransform>
-        </ContentControl>
-        <c:WindowButtons WindowName="Cooldown bar" x:Name="Buttons" 
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
+            </Grid.LayoutTransform>
+            <ContentControl Content="{Binding Instance}" ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}" />
+        </Grid>
+            <c:WindowButtons WindowName="Boss bar" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>
 </w:TccWidget>

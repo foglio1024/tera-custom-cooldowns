@@ -1,6 +1,6 @@
 ﻿using TCC.ViewModels;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     /// <summary>
     /// Logica di interazione per WarriorBar.xaml

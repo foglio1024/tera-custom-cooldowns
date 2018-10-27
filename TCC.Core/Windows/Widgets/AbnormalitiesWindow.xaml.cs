@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using TCC.ViewModels;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
