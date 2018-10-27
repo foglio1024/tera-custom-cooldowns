@@ -35,10 +35,10 @@
 
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 -1 0 0" 
-              Opacity="{Binding Buff.Seconds}"
+              Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
               >
 
-            <Border BorderThickness="1"
+            <Border BorderThickness="0"
                 Width="24"
                 Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"
                 Background="#ffbd3d"
@@ -47,6 +47,10 @@
                 VerticalAlignment="Center"
                 RenderTransform="{StaticResource Rotate45}"
                 RenderTransformOrigin=".5 .5">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#ffffaa"/>
+                </Border.Effect>
+
             </Border>
             <TextBlock Foreground="#d222" 
                        Text="{Binding DurationLabel, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}}"

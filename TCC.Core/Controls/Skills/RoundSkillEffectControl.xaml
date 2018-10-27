@@ -32,7 +32,7 @@
 
 
         <Border Style="{StaticResource DefaultBorderStyle}" 
-                Opacity="{Binding Buff.Seconds}"
+                Opacity="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RoundSkillEffectControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
                 BorderThickness="0"
                 Background="#ffbd3d"
                 MinWidth="20"

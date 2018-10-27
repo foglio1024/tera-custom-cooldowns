@@ -23,6 +23,8 @@ namespace TCC.Controls.Skills
         private DurationCooldownIndicator _context;
         private DoubleAnimation _anim;
         public string DurationLabel => _context == null? "": Utils.TimeFormatter(_context.Buff.Seconds);
+        public bool ShowEffectSeconds => _context?.Buff != null && _context.Buff.Seconds > 0;
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
@@ -44,6 +46,7 @@ namespace TCC.Controls.Skills
         private void OnSecondsUpdated()
         {
             NPC(nameof(DurationLabel));
+            NPC(nameof(ShowEffectSeconds));
         }
 
         private void OnBuffStarted(Data.CooldownMode obj)
