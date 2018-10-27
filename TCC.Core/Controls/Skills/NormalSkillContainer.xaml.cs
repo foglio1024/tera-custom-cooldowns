@@ -1,4 +1,4 @@
-﻿namespace TCC.Controls
+﻿namespace TCC.Controls.Skills
 {
     /// <summary>
     /// Logica di interazione per NormalSkillContainer.xaml

@@ -7,15 +7,15 @@ using System.Windows.Media.Animation;
 using TCC.Properties;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.Skills
 {
     /// <inheritdoc cref="UserControl" />
     /// <summary>  
     /// Logica di interazione per LancerBuffCooldownControl.xaml
     /// </summary>
-    public partial class RhombBuffCooldownControl : INotifyPropertyChanged
+    public partial class RoundSkillEffectControl : INotifyPropertyChanged
     {
-        public RhombBuffCooldownControl()
+        public RoundSkillEffectControl()
         {
             InitializeComponent();
         }
@@ -28,17 +28,17 @@ namespace TCC.Controls
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (DurationCooldownIndicator)DataContext;
-            RhombFixedSkillControl.DataContext = _context.Cooldown;
+            FixedSkillControl.DataContext = _context.Cooldown;
             _context.Buff.Started += OnBuffStarted;
             _context.Buff.SecondsUpdated += OnSecondsUpdated;
             _context.Buff.Ended += OnBuffEnded;
-            _anim = new DoubleAnimation(328, 32, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
+            _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Duration));
         }
 
         private void OnBuffEnded(Data.CooldownMode obj)
         {
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
-            ExternalArc.EndAngle = 32;
+            ExternalArc.EndAngle = 0;
         }
 
         private void OnSecondsUpdated()
@@ -48,7 +48,7 @@ namespace TCC.Controls
 
         private void OnBuffStarted(Data.CooldownMode obj)
         {
-            _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Cooldown);
+            _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Duration);
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
 
         }

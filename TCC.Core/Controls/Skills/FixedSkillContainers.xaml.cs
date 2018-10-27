@@ -1,6 +1,4 @@
-﻿using Dragablz;
-using GongSolutions.Wpf.DragDrop;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -10,10 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Dragablz;
+using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.Skills
 {
     public partial class FixedSkillContainers
     {
@@ -57,7 +57,7 @@ namespace TCC.Controls
         }
 
         //really absurd way of fixing order issue
-        private void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<FixedSkillCooldown> collection)
+        private void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<Cooldown> collection)
         {
             var positions = new Dictionary<int, double>(); //index, X
             for (var i = 0; i < container.Items.Count; i++)
@@ -102,7 +102,7 @@ namespace TCC.Controls
                 CooldownWindowViewModel.Instance.Save();
             }
 
-            OtherSkills.Margin = ((SynchronizedObservableCollection<FixedSkillCooldown>)sender).Count == 0
+            OtherSkills.Margin = ((SynchronizedObservableCollection<Cooldown>)sender).Count == 0
                 ? new Thickness(-60, 0, 0, 0)
                 : new Thickness(0);
         }
@@ -168,7 +168,7 @@ namespace TCC.Controls
 
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
-            if (CooldownWindowViewModel.Instance.MainSkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
+            if (CooldownWindowViewModel.Instance.MainSkills.Contains(e.DragablzItem.DataContext as Cooldown))
             {
                 if (_mainOrder == null) return;
                 for (int j = 0; j < CooldownWindowViewModel.Instance.MainSkills.Count; j++)
@@ -178,7 +178,7 @@ namespace TCC.Controls
                     CooldownWindowViewModel.Instance.MainSkills.Move(oldIndex, newIndex);
                 }
             }
-            else if (CooldownWindowViewModel.Instance.SecondarySkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
+            else if (CooldownWindowViewModel.Instance.SecondarySkills.Contains(e.DragablzItem.DataContext as Cooldown))
             {
                 if (_secondaryOrder == null) return;
                 for (int i = 0; i < CooldownWindowViewModel.Instance.SecondarySkills.Count; i++)
@@ -256,13 +256,13 @@ namespace TCC.Controls
                 {
                     if (CooldownWindowViewModel.Instance.MainSkills.Any(x =>
                         x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
-                    CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, false));
+                    CooldownWindowViewModel.Instance.MainSkills.Add(new Cooldown(s.SelectedItems[0] as Skill, false));
                 }
                 else if (_lastSender == AddButtonGrid2.Name)
                 {
                     if (CooldownWindowViewModel.Instance.SecondarySkills.Any(x =>
                         x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
-                    CooldownWindowViewModel.Instance.SecondarySkills.Add(new FixedSkillCooldown(
+                    CooldownWindowViewModel.Instance.SecondarySkills.Add(new Cooldown(
                         s.SelectedItems[0] as Skill,
                          false));
                 }
@@ -283,20 +283,20 @@ namespace TCC.Controls
 
             public void Drop(IDropInfo dropInfo)
             {
-                var target = ((SynchronizedObservableCollection<FixedSkillCooldown>)dropInfo.TargetCollection);
+                var target = ((SynchronizedObservableCollection<Cooldown>)dropInfo.TargetCollection);
                 switch (dropInfo.Data)
                 {
                     case Skill sk:
                         if (target.All(x => x.Skill.IconName != sk.IconName))
                         {
-                            target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, false));
+                            target.Insert(dropInfo.InsertIndex, new Cooldown((Skill)dropInfo.Data, false));
                         }
                         break;
                     case Abnormality ab:
                         if (target.All(x => x.Skill.IconName != ab.IconName))
                         {
                             target.Insert(dropInfo.InsertIndex,
-                                new FixedSkillCooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
+                                new Cooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
                                     false, CooldownType.Passive));
                         }
                         break;
@@ -304,12 +304,12 @@ namespace TCC.Controls
                         if (target.All(x => x.Skill.IconName != i.IconName))
                         {
                             SessionManager.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
-                            target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, false, CooldownType.Item));
+                            target.Insert(dropInfo.InsertIndex, new Cooldown(s, false, CooldownType.Item));
                         }
 
                         break;
                 }
-                var tmp = new List<FixedSkillCooldown>();
+                var tmp = new List<Cooldown>();
 
                 //force correct order as it's not preserved
                 foreach (var fixedSkillCooldown in target)
@@ -377,11 +377,11 @@ namespace TCC.Controls
         private void OnSkillShapeChanged()
         {
             MainSkills.ItemContainerStyle =
-                FindResource(Settings.SkillShape == ControlShape.Round
+                FindResource(TCC.Settings.SkillShape == ControlShape.Round
                     ? "RoundDragableStyle"
                     : "SquareDragableStyle") as Style;
             SecSkills.ItemContainerStyle =
-                FindResource(Settings.SkillShape == ControlShape.Round
+                FindResource(TCC.Settings.SkillShape == ControlShape.Round
                     ? "RoundDragableStyle"
                     : "SquareDragableStyle") as Style;
         }

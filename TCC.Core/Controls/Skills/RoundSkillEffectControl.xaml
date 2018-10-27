@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="TCC.Controls.BuffCooldownControl"
+﻿<UserControl x:Class="TCC.Controls.Skills.RoundSkillEffectControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:skills="clr-namespace:TCC.Controls.Skills"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
         <local:Arc Width="58" 
@@ -17,16 +18,16 @@
                    x:Name="ExternalArc"
                    Margin="0,0,0,0">
         </local:Arc>
-        <local:FixedSkillControl HorizontalAlignment="Center" 
+        <skills:RoundFixedSkillControl HorizontalAlignment="Center" 
                                            IsHitTestVisible="False"
                                  VerticalAlignment="Center" Padding="25" Margin="-25"
                                  DataContext="{Binding Cooldown}" 
                                     x:Name="FixedSkillControl"
                                  >
-            <local:FixedSkillControl.LayoutTransform>
+            <skills:RoundFixedSkillControl.LayoutTransform>
                 <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
-            </local:FixedSkillControl.LayoutTransform>
-        </local:FixedSkillControl>
+            </skills:RoundFixedSkillControl.LayoutTransform>
+        </skills:RoundFixedSkillControl>
 
 
 

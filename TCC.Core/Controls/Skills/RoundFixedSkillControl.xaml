@@ -1,15 +1,16 @@
-﻿<UserControl x:Class="TCC.Controls.FixedSkillControl"
+﻿<skills:FixedSkillControlBase x:Class="TCC.Controls.Skills.RoundFixedSkillControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" Loaded="Control_Loaded"
+             xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             mc:Ignorable="d" 
              ClipToBounds="False" Background="Transparent"
-             MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData  FixedSkillCooldown}">
-    <UserControl.LayoutTransform>
+             MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData  Cooldown}">
+    <skills:FixedSkillControlBase.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
-    </UserControl.LayoutTransform>
+    </skills:FixedSkillControlBase.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
         <Grid ClipToBounds="False">
             <Ellipse Width="51" Height="51" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -64,7 +65,7 @@
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
               ClipToBounds="False"
-              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:RoundFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
               >
             <Border Background="{StaticResource RevampBackgroundBrush}" 
                     CornerRadius="5" Effect="{StaticResource FadedDropShadow}" 
@@ -78,10 +79,8 @@
                            Opacity="1" 
                            FontFamily="{StaticResource ArialMonoBold}"
                            Margin="0,0"
-                           Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Mode=OneWay}"
-
-                >
-                </TextBlock>
+                           Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=skills:RoundFixedSkillControl}, Mode=OneWay}"
+                />
 
             </Border>
         </Grid>
@@ -101,4 +100,4 @@
         </local:Arc>
 
     </Grid>
-</UserControl>
+</skills:FixedSkillControlBase>

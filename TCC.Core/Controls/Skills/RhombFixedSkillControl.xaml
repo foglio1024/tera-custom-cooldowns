@@ -1,12 +1,13 @@
-﻿<UserControl x:Class="TCC.Controls.SquareFixedSkillControl"
+﻿<skills:FixedSkillControlBase x:Class="TCC.Controls.Skills.RhombFixedSkillControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" Loaded="Control_Loaded"
+             xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             mc:Ignorable="d" 
              ClipToBounds="False" Background="Transparent" 
-             MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData FixedSkillCooldown}">
+             MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData Cooldown}">
     <UserControl.Resources>
         <ElasticEase x:Key="BounceEase" Oscillations="3" />
         <Storyboard x:Key="WarnShake" RepeatBehavior="Forever">
@@ -25,10 +26,32 @@
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
-    <Grid Width="54" Height="54" Margin="2" HorizontalAlignment="Center" Name="MainGrid" ClipToBounds="False" VerticalAlignment="Center">
+
+    <Grid Width="65" Height="65" Margin="2" HorizontalAlignment="Center" Name="MainGrid" ClipToBounds="False" VerticalAlignment="Center">
         <Grid ClipToBounds="False" >
-            <Rectangle Width="48" Height="48" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
-                        HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
+                <Rectangle Stroke="#7fff"
+                           StrokeThickness="1" Margin="10">
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=skills:RhombFixedSkillControl}, Path=Warning}"
+                                             Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource WarnShake}" x:Name="StartWarning"/>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="StartWarning"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+            </Grid>
+
+            <Rectangle Width="61" Height="61" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
+                       OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Rectangle.Fill>
@@ -38,7 +61,7 @@
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:SquareFixedSkillControl}, Path=Warning}"
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=skills:RhombFixedSkillControl}, Path=Warning}"
                                          Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource WarnShake}" x:Name="StartWarning"/>
@@ -50,25 +73,9 @@
                         </Style.Triggers>
                     </Style>
                 </Rectangle.Style>
+
             </Rectangle>
-            <Rectangle Stroke="#7fff" StrokeThickness="1" Width="48" Height="48">
-                <Rectangle.Style>
-                    <Style TargetType="Rectangle">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:SquareFixedSkillControl}, Path=Warning}"
-                                         Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource WarnShake}" x:Name="StartWarning"/>
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="StartWarning"/>
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Rectangle.Style>
-            </Rectangle>
-            <Grid ClipToBounds="False" RenderTransformOrigin=".5 .5" Margin="0">
+            <Grid ClipToBounds="False" RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" Margin="0">
                 <Border Margin="7" x:Name="WarnArc" Opacity="0" RenderTransformOrigin=".5 .5"
                        BorderBrush="White" BorderThickness="3"  Visibility="Visible"
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#2fff">
@@ -81,7 +88,7 @@
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:SquareAbnormalityIndicator}, Path=Warning}"
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=skills:RhombFixedSkillControl}, Path=Warning}"
                                          Value="True">
                                     <DataTrigger.EnterActions>
                                         <BeginStoryboard Storyboard="{StaticResource WarnGlow}" x:Name="StartWarning"/>
@@ -97,8 +104,9 @@
             </Grid>
         </Grid>
         <Grid ClipToBounds="True" Width="Auto" Height="Auto" 
+              RenderTransform="{StaticResource Rotate45}" 
               RenderTransformOrigin=".5 .5"
-              Margin="4">
+              Margin="11">
             <local:Arc x:Name="Arc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
@@ -112,36 +120,76 @@
                    EndAngle="0.01"
                    RenderTransformOrigin=".5 .5">
                 <local:Arc.RenderTransform>
-                    <RotateTransform Angle="0"/>
+                    <RotateTransform Angle="-45"/>
                 </local:Arc.RenderTransform>
             </local:Arc>
+        </Grid>
         <local:Arc x:Name="PreArc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
-                   Width="80" 
-                   Height="80" 
-                   StrokeThickness="40" Margin="-20" 
+                   Width="Auto" 
+                   Height="Auto" 
+                   StrokeThickness="40" Margin="0" 
                    Stroke="#9fa0" 
                    EndAngle=".01" 
                    HorizontalAlignment="Stretch" 
-                   VerticalAlignment="Stretch" >
+                   VerticalAlignment="Stretch" 
+                   OpacityMask="{StaticResource RhombOpacityMask}">
         </local:Arc>
-        </Grid>
-
-        <Rectangle Stroke="White" StrokeThickness="3"
+        <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
                    Fill="#9fff" Name="Glow" Opacity="0"
-                   Margin="3"/>
+                   Margin="8"/>
+        <!--<Grid Opacity="0">
+            <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
+                   Name="Exp"
+                   Margin="8">
+                <Rectangle.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:RhombFixedSkillControl}, Path=Warning}"
+                                     Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource WarnExpStroke}" x:Name="StartExpStroke"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="StartExpStroke"/>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Rectangle.Style>
+
+            </Rectangle>
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:RhombFixedSkillControl}, Path=Warning}"
+                                     Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource WarnExp}" x:Name="StartExp"/>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="StartExp"/>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+            </Grid.Style>
+        </Grid>-->
+
         <Grid Width="23" 
               Height="23" 
               x:Name="G" 
-              HorizontalAlignment="Right" 
+              HorizontalAlignment="Center" 
               VerticalAlignment="Bottom"
               ClipToBounds="False"
-              Margin="0 0 1 0"
-              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:SquareFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
+              Margin="0 0 0 6"
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:RhombFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border Background="{StaticResource RevampBackgroundBrush}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource RevampBorderBrush}"
-                    BorderThickness="1"
+                    BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"
                     Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"/>
             <TextBlock Foreground="#dfff" 
                        HorizontalAlignment="Center" 
@@ -152,19 +200,19 @@
                        Opacity="1" 
                        FontFamily="{StaticResource ArialMonoBold}"
                        Margin="0 0"
-                       Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=local:SquareFixedSkillControl}, Mode=OneWay}"/>
+                       Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=skills:RhombFixedSkillControl}, Mode=OneWay}"/>
         </Grid>
         <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="UserControl_MouseEnter" Fill="#01000000"/>
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" 
-              ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="DeleteButton"
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="DeleteButton"
               MouseLeftButtonDown="DeleteButton_MouseLeftButtonDown">
-            <Ellipse Fill="{StaticResource HpBrush}" Effect="{StaticResource DropShadow}"/>
-            <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"/>
+            <Ellipse Fill="{StaticResource HpBrush}" Effect="{StaticResource DropShadow}"></Ellipse>
+            <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
-        <Rectangle StrokeThickness="0" Stroke="White"  x:Name="ResetArc" Opacity="1" Margin="2" RenderTransformOrigin=".5 .5">
-            <Shape.RenderTransform>
+        <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity="1" Margin="2" RenderTransformOrigin=".5 .5">
+            <local:Arc.RenderTransform>
                 <ScaleTransform />
-            </Shape.RenderTransform>
-        </Rectangle>
+            </local:Arc.RenderTransform>
+        </local:Arc>
+
     </Grid>
-</UserControl>
+</skills:FixedSkillControlBase>
