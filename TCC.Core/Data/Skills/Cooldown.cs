@@ -131,15 +131,15 @@ namespace TCC.Data.Skills
 
             Mode = mode;
 
-            Seconds = cd / 1000;
-            Duration = cd;
-            OriginalDuration = cd;
+            Seconds = CooldownType== CooldownType.Item && IsAvailable? cd : cd / 1000;
+            Duration = CooldownType == CooldownType.Item && IsAvailable ? cd*1000 : cd;
+            OriginalDuration = CooldownType == CooldownType.Item && IsAvailable ? cd * 1000 : cd; 
 
-            _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
+            _mainTimer.Interval = TimeSpan.FromMilliseconds(Duration);
             _mainTimer.Start();
             NPC(nameof(IsAvailable));
 
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % 1000);
             _offsetTimer.Start();
 
             Dispatcher.Invoke(() => Started?.Invoke(Mode));
