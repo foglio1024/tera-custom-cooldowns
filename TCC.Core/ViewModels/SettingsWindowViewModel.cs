@@ -58,6 +58,17 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
+
+        public bool EthicalMode
+        {
+            get => Settings.Settings.EthicalMode;
+            set
+            {
+                if (Settings.Settings.EthicalMode == value) return;
+                Settings.Settings.EthicalMode = value;
+                NPC();
+            }
+        }
         public bool HideMe
         {
             get => Settings.Settings.IgnoreMeInGroupWindow;

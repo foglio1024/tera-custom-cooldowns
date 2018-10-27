@@ -252,6 +252,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.ChatEnabled)) Settings.ChatEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowTradeLfg)) Settings.ShowTradeLfg = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowAwakenIcon)) Settings.ShowAwakenIcon = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.EthicalMode)) Settings.EthicalMode = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.AccurateHp)) Settings.AccurateHp = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.WarriorShowEdge)) Settings.WarriorShowEdge = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.SorcererReplacesElementsInCharWindow)) Settings.SorcererReplacesElementsInCharWindow = bool.Parse(attr.Value);

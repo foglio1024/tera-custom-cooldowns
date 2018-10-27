@@ -144,7 +144,7 @@
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="735"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="765"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -450,7 +450,7 @@
                         <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Warrior</TextBlock>
                     </StackPanel>
                     <settings:BoolSetting SettingName="Show Edge" IsOn="{Binding WarriorShowEdge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
-                    <settings:SelectionSetting SettingName="Edge mode" SelectedItem="{Binding WarriorEdgeMode, Mode=TwoWay}" ChoicesType="{x:Type data:WarriorEdgeMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding WarriorEdgeModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
+                    <settings:SelectionSetting SettingName="Edge mode" SelectedItem="{Binding WarriorEdgeMode, Mode=TwoWay}" ChoicesType="{x:Type data:WarriorEdgeMode}" Choices="{Binding WarriorEdgeModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
                     <settings:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
                     <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Path Data="{StaticResource SvgClassPriest}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
@@ -953,6 +953,22 @@
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                         <TextBlock Margin="0,5" Foreground="#f77" Text="Send test message"/>
                     </Button>
+                    <settings:BoolSetting SettingName="'Ethical mode'" IsOn="{Binding EthicalMode, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <settings:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Disables some info which are not natively displayed in game and considered 'unethical' by some:"/>
+                                    <LineBreak/>
+                                    <Run Text="- Enrage info in boss HP bars"/><LineBreak/>
+                                    <Run Text="- Timers info in boss HP bars"/><LineBreak/>
+                                    <Run Text="- Dragon passive cooldown"/><LineBreak/>
+                                    <Run Text="- Insigna of the punisher cooldown"/><LineBreak/>
+                                    <Run Text="- Concentration cooldown"/>
+                                </TextBlock>
+                            </Grid>
+                        </settings:BoolSetting.ToolTip>
+                    </settings:BoolSetting>
                     <!--<Separator />
 
                     <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Twitch connector</TextBlock>

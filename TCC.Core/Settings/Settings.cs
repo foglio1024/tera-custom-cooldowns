@@ -137,6 +137,7 @@ namespace TCC.Settings
         public static bool StatSent { get; set; }
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
+        public static bool EthicalMode { get; set; } = false;
         public static HotKey LfgHotkey { get; } = new HotKey(Key.Y, ModifierKeys.Control);
         public static HotKey InfoWindowHotkey { get; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; } = new HotKey(Key.O, ModifierKeys.Control);

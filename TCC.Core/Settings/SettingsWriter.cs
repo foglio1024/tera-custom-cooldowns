@@ -141,7 +141,8 @@ namespace TCC.Settings
                 new XAttribute(nameof(Settings.FlightGaugeRotation), Settings.FlightGaugeRotation),
                 new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge),
                 new XAttribute(nameof(Settings.AbnormalityShape), Settings.AbnormalityShape),
-                new XAttribute(nameof(Settings.Winpcap), Settings.Winpcap)
+                new XAttribute(nameof(Settings.Winpcap), Settings.Winpcap),
+                new XAttribute(nameof(Settings.EthicalMode), Settings.EthicalMode)
             );
         }
         private static XElement BuildGroupAbnormalsXElement()

@@ -116,6 +116,7 @@ namespace TCC
 
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
+            if (Settings.Settings.EthicalMode) return;
             if (PassivityDatabase.Passivities.ContainsKey(ab.Id))
             {
                 SkillManager.AddPassivitySkill(ab.Id, PassivityDatabase.Passivities[ab.Id]);

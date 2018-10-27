@@ -282,6 +282,10 @@ namespace TCC.ViewModels
 
         private static void SetTimerPattern(Npc n)
         {
+            if (Settings.Settings.EthicalMode)
+            {
+                return;
+            }
             if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
             if (n.TemplateId == 3000 && n.ZoneId == 982) n.TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
             if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
@@ -302,6 +306,11 @@ namespace TCC.ViewModels
 
         private static void SetEnragePattern(Npc n)
         {
+            if (Settings.Settings.EthicalMode)
+            {
+                n.EnragePattern = new EnragePattern(0,0);
+                return;
+            }
             if (n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(14, 50);
             if (n.ZoneId == 950 && !n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(0, 0);
             if (n.ZoneId == 450)
