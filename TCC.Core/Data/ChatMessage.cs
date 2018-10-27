@@ -73,12 +73,12 @@ namespace TCC.Data
 
         public bool Animate
         {
-            get => _animate && Settings.AnimateChatMessages;
+            get => _animate && Settings.Settings.AnimateChatMessages;
             set => _animate = value;
         }
 
-        public bool ShowTimestamp => Settings.ShowTimestamp;
-        public bool ShowChannel => Settings.ShowChannel;
+        public bool ShowTimestamp => Settings.Settings.ShowTimestamp;
+        public bool ShowChannel => Settings.Settings.ShowChannel;
 
         private SynchronizedObservableCollection<MessagePiece> _pieces;
         private bool _isVisible;
@@ -119,7 +119,7 @@ namespace TCC.Data
             }
         }
 
-        public int Size => Settings.FontSize;
+        public int Size => Settings.Settings.FontSize;
         private void ShowChannelNPC()
         {
             NPC(nameof(ShowChannel));
@@ -203,7 +203,7 @@ namespace TCC.Data
                             customColor = "";
                         }
                         RawMessage = content;
-                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, Channel, Settings.FontSize, false, customColor));
+                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false, customColor));
                     }
                 }
                 else
@@ -217,7 +217,7 @@ namespace TCC.Data
                     {
                         string content;
                         string customColor;
-                        var fontSize = Settings.FontSize;
+                        var fontSize = Settings.Settings.FontSize;
                         if (piece.StartsWith("<font"))
                         {
                             //formatted piece: get color and content
@@ -445,7 +445,7 @@ namespace TCC.Data
         #region Chat Methods
         protected void ParseDirectMessage(string msg, ChatChannel ch)
         {
-            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, ch, Settings.FontSize, false));
+            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, ch, Settings.Settings.FontSize, false));
         }
         protected void ParseEmoteMessage(string msg)
         {
@@ -453,13 +453,13 @@ namespace TCC.Data
             var start = msg.IndexOf(header, StringComparison.Ordinal);
             if (start == -1)
             {
-                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, Channel, Settings.FontSize, false));
+                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false));
                 return;
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
             var text = SessionManager.SocialDatabase.Social[id].Replace("{Name}", Author);
-            AddPiece(new MessagePiece(text, MessagePieceType.Simple, Channel, Settings.FontSize, false));
+            AddPiece(new MessagePiece(text, MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false));
 
         }
         protected void ParseFormattedMessage(string msg)
@@ -496,7 +496,7 @@ namespace TCC.Data
                 if (content != "")
                 {
                     AddPiece(new MessagePiece(ReplaceEscapes(content.Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", "")),
-                                                MessagePieceType.Simple, Channel, Settings.FontSize, false));
+                                                MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false));
                 }
 
                 //cut message
@@ -725,10 +725,10 @@ namespace TCC.Data
                     //add it as url
                     if (content.ToString() != "")
                     {
-                        AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel, Settings.FontSize, false));
+                        AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false));
                         content = new StringBuilder("");
                     }
-                    AddPiece(new MessagePiece(ReplaceEscapes(token), MessagePieceType.Url, Channel, Settings.FontSize, false, "7289da"));
+                    AddPiece(new MessagePiece(ReplaceEscapes(token), MessagePieceType.Url, Channel, Settings.Settings.FontSize, false, "7289da"));
                 }
                 else
                 {
@@ -749,7 +749,7 @@ namespace TCC.Data
         //}
         private static int GetPieceSize()
         {
-            return Settings.FontSize;
+            return Settings.Settings.FontSize;
         }
         #endregion
 
@@ -927,7 +927,7 @@ namespace TCC.Data
             sb.Append(mw);
             sb.Append(mp.Text.Substring(1));
             mp.Text = sb.ToString();
-            msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, msg.Channel, Settings.FontSize, false, "cccccc"));
+            msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, msg.Channel, Settings.Settings.FontSize, false, "cccccc"));
             msg.AddPiece(mp);
 
             return msg;

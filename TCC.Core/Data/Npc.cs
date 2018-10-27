@@ -212,7 +212,7 @@ namespace TCC.Data
         //{
         //    _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
         //    EntityId = eId;
-        //    Name = EntitiesManager.MonsterDatabase.GetName(tId, zId);
+        //    Name = EntityManager.MonsterDatabase.GetName(tId, zId);
         //    ZoneId = zId;
         //    TemplateId = tId;
         //    MaxHP = maxHP;

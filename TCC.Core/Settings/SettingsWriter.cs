@@ -9,7 +9,7 @@ using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
-namespace TCC
+namespace TCC.Settings
 {
     public static class SettingsWriter
     {

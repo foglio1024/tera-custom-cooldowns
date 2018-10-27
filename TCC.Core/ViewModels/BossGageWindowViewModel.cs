@@ -188,7 +188,7 @@ namespace TCC.ViewModels
 
         private Npc AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, Visibility visibility)
         {
-            if (Settings.ShowOnlyBosses && !isBoss) return null;
+            if (Settings.Settings.ShowOnlyBosses && !isBoss) return null;
             if (templateId == 0 || zoneId == 0) return null;
             if (zoneId == 1023) return null;
 

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
 using TCC.Windows.Widgets;
@@ -171,7 +172,7 @@ namespace TCC
 
             SettingsWindow = new SettingsWindow();
 
-            if (Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            if (Settings.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
 
         }
@@ -427,12 +428,12 @@ namespace TCC
 
         public static void MakeGlobal()
         {
-            Settings.CooldownWindowSettings.MakePositionsGlobal();
-            Settings.ClassWindowSettings.MakePositionsGlobal();
-            Settings.CharacterWindowSettings.MakePositionsGlobal();
-            Settings.GroupWindowSettings.MakePositionsGlobal();
-            Settings.BuffWindowSettings.MakePositionsGlobal();
-            Settings.BossWindowSettings.MakePositionsGlobal();
+            Settings.Settings.CooldownWindowSettings.MakePositionsGlobal();
+            Settings.Settings.ClassWindowSettings.MakePositionsGlobal();
+            Settings.Settings.CharacterWindowSettings.MakePositionsGlobal();
+            Settings.Settings.GroupWindowSettings.MakePositionsGlobal();
+            Settings.Settings.BuffWindowSettings.MakePositionsGlobal();
+            Settings.Settings.BossWindowSettings.MakePositionsGlobal();
 
             SettingsWriter.Save();
         }

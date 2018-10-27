@@ -38,24 +38,24 @@ namespace TCC
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (e.Key == Settings.LfgHotkey.Key && e.Modifier == Settings.LfgHotkey.Modifier)
+            if (e.Key == Settings.Settings.LfgHotkey.Key && e.Modifier == Settings.Settings.LfgHotkey.Modifier)
             {
                 if (!Proxy.IsConnected) return;
 
                 if (!WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
                 else WindowManager.LfgListWindow.CloseWindow();
             }
-            if (e.Key == Settings.SettingsHotkey.Key && e.Modifier == Settings.SettingsHotkey.Modifier)
+            if (e.Key == Settings.Settings.SettingsHotkey.Key && e.Modifier == Settings.Settings.SettingsHotkey.Modifier)
             {
                 if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
                 else WindowManager.SettingsWindow.ShowWindow();
             }
-            if (e.Key == Settings.InfoWindowHotkey.Key && e.Modifier == Settings.InfoWindowHotkey.Modifier)
+            if (e.Key == Settings.Settings.InfoWindowHotkey.Key && e.Modifier == Settings.Settings.InfoWindowHotkey.Modifier)
             {
                 if (WindowManager.InfoWindow.IsVisible) WindowManager.InfoWindow.HideWindow();
                 else InfoWindowViewModel.Instance.ShowWindow();
             }
-            if (e.Key == Settings.ShowAllHotkey.Key && e.Modifier == Settings.ShowAllHotkey.Modifier)
+            if (e.Key == Settings.Settings.ShowAllHotkey.Key && e.Modifier == Settings.Settings.ShowAllHotkey.Modifier)
             {
 
             }
@@ -64,7 +64,7 @@ namespace TCC
                 if (WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
                 else WindowManager.SkillConfigWindow.ShowWindow();
             }
-            if (e.Key == Settings.LootSettingsHotkey.Key && e.Modifier == Settings.LootSettingsHotkey.Modifier)
+            if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             {
                 if (!GroupWindowViewModel.Instance.AmILeader) return;
                 if (!Proxy.IsConnected) return;
@@ -117,10 +117,10 @@ namespace TCC
 
         private void Register()
         {
-            RegisterHotKey(Settings.LfgHotkey.Modifier, Settings.LfgHotkey.Key);
-            RegisterHotKey(Settings.InfoWindowHotkey.Modifier, Settings.InfoWindowHotkey.Key);
-            RegisterHotKey(Settings.SettingsHotkey.Modifier, Settings.SettingsHotkey.Key);
-            RegisterHotKey(Settings.LootSettingsHotkey.Modifier, Settings.LootSettingsHotkey.Key);
+            RegisterHotKey(Settings.Settings.LfgHotkey.Modifier, Settings.Settings.LfgHotkey.Key);
+            RegisterHotKey(Settings.Settings.InfoWindowHotkey.Modifier, Settings.Settings.InfoWindowHotkey.Key);
+            RegisterHotKey(Settings.Settings.SettingsHotkey.Modifier, Settings.Settings.SettingsHotkey.Key);
+            RegisterHotKey(Settings.Settings.LootSettingsHotkey.Modifier, Settings.Settings.LootSettingsHotkey.Key);
             RegisterHotKey(ModifierKeys.Control, Keys.K);
             //RegisterHotKey(Settings.ShowAllHotkey.Modifier, Settings.ShowAllHotkey.Key);
 

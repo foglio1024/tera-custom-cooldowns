@@ -63,7 +63,7 @@ namespace TCC
             if (target.IsMe())
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
-                if (!Settings.DisablePartyAbnormals)
+                if (!Settings.Settings.DisablePartyAbnormals)
                 {
                     GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(
                         ab,

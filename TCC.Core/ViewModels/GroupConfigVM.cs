@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Settings;
 
 namespace TCC.ViewModels
 {
@@ -19,11 +20,11 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => Settings.ShowAllGroupAbnormalities;
+            get => Settings.Settings.ShowAllGroupAbnormalities;
             set
             {
-                if (Settings.ShowAllGroupAbnormalities == value) return;
-                Settings.ShowAllGroupAbnormalities = value;
+                if (Settings.Settings.ShowAllGroupAbnormalities == value) return;
+                Settings.Settings.ShowAllGroupAbnormalities = value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
                 SettingsWriter.Save();
                 NPC();

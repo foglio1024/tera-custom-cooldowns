@@ -357,8 +357,8 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="ProxyPacketSplitter.cs" />
-    <Compile Include="SettingsReader.cs" />
-    <Compile Include="SettingsWriter.cs" />
+    <Compile Include="Settings\SettingsReader.cs" />
+    <Compile Include="Settings\SettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
@@ -422,7 +422,7 @@
     <Compile Include="Data\Databases\SocialDatabase.cs" />
     <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
     <Compile Include="Data\User.cs" />
-    <Compile Include="EntitiesManager.cs" />
+    <Compile Include="EntityManager.cs" />
     <Compile Include="Parsing\MessageFactory.cs" />
     <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
@@ -467,7 +467,7 @@
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
     <Compile Include="Proxy.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Settings\Settings.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
@@ -696,7 +696,7 @@
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
-    <Compile Include="WindowSettings.cs" />
+    <Compile Include="Settings\WindowSettings.cs" />
     <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>

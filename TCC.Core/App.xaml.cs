@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Settings;
 using TCC.Sniffing;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
@@ -59,11 +60,11 @@ namespace TCC
             sr.LoadWindowSettings();
             sr.LoadSettings();
 
-            Process.GetCurrentProcess().PriorityClass = Settings.HighPriority ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
-            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            Process.GetCurrentProcess().PriorityClass = Settings.Settings.HighPriority ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
+            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases(string.IsNullOrEmpty(Settings.LastRegion) ? "EU-EN" : Settings.LastRegion == "EU" ? "EU-EN" : Settings.LastRegion);
+            SessionManager.InitDatabases(string.IsNullOrEmpty(Settings.Settings.LastRegion) ? "EU-EN" : Settings.Settings.LastRegion == "EU" ? "EU-EN" : Settings.Settings.LastRegion);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
@@ -82,13 +83,13 @@ namespace TCC
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
             SessionManager.CurrentPlayer.EntityId = 10;
-            TimeManager.Instance.SetServerTimeZone(Settings.LastRegion);
+            TimeManager.Instance.SetServerTimeZone(Settings.Settings.LastRegion);
             ChatWindowManager.Instance.AddTccMessage(_version);
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
 
-            if (Settings.LastRegion == "NA" || Settings.LastRegion == "")
+            if (Settings.Settings.LastRegion == "NA" || Settings.Settings.LastRegion == "")
                 WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
             if (Debug) DebugStuff();
             Loading = false;
@@ -149,20 +150,20 @@ namespace TCC
             //    {
 
             //        Console.WriteLine($"[{i}] Spawning NPCs");
-            //        EntitiesManager.SpawnNPC(15, 1, i, Visibility.Visible);
+            //        EntityManager.SpawnNPC(15, 1, i, Visibility.Visible);
             //        i++;
             //    }
             //    else
             //    {
             //        Console.WriteLine($"[{i}] Despawning NPCs");
-            //        EntitiesManager.DespawnNPC(i, DespawnType.OutOfView);
+            //        EntityManager.DespawnNPC(i, DespawnType.OutOfView);
             //        i--;
             //    }
             //    Thread.Sleep(2);
             //    if (i == 0) {break;}
             //}
-            //EntitiesManager.SpawnNPC(920, 3000, 11, Visibility.Visible);
-            //EntitiesManager.UpdateNPC(12, 1000, 1000);
+            //EntityManager.SpawnNPC(920, 3000, 11, Visibility.Visible);
+            //EntityManager.UpdateNPC(12, 1000, 1000);
             //AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(1, 1, 1495, 200000, 1);
             //AbnormalityManager.BeginAbnormality(1495, 10, 200000, 1);
             //AbnormalityManager.BeginAbnormality(1495, 11, 200000, 1);
@@ -173,7 +174,7 @@ namespace TCC
             //    ChatWindowManager.Instance.AddTccMessage($"Test {i}");
             //}
             /*
-                        EntitiesManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
+                        EntityManager.SpawnNPC(210, 1108, 11, Visibility.Visible);
                         var c = 0;
                         while (c < 1000)
                         {
@@ -200,14 +201,14 @@ namespace TCC
             //}
 
             //ClassWindowViewModel.Instance.CurrentClass = Class.Priest;
-            //EntitiesManager.SpawnNPC(920, 3000, 10, Visibility.Visible);
+            //EntityManager.SpawnNPC(920, 3000, 10, Visibility.Visible);
             //Task.Delay(2000).ContinueWith(t => BossGageWindowViewModel.Instance.AddOrUpdateBoss(10,5250000000,3240000000,true, HpChangeSource.BossGage));
             //Task.Delay(4000).ContinueWith(t => BossGageWindowViewModel.Instance.AddOrUpdateBoss(10,5250000000,2240000000,true, HpChangeSource.BossGage));
-            //EntitiesManager.SpawnNPC(950,3000,10,Visibility.Visible);
-            //EntitiesManager.SpawnNPC(970,1000,11,Visibility.Visible);
-            //EntitiesManager.SpawnNPC(970,2000,12,Visibility.Visible);
-            //EntitiesManager.SpawnNPC(970,3000,13,Visibility.Visible);
-            //EntitiesManager.SetNPCStatus(10, true);
+            //EntityManager.SpawnNPC(950,3000,10,Visibility.Visible);
+            //EntityManager.SpawnNPC(970,1000,11,Visibility.Visible);
+            //EntityManager.SpawnNPC(970,2000,12,Visibility.Visible);
+            //EntityManager.SpawnNPC(970,3000,13,Visibility.Visible);
+            //EntityManager.SetNPCStatus(10, true);
 
             //Task.Delay(1000).ContinueWith(t => (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Buff.Start(10000));
             //WindowManager.LfgListWindow.ShowWindow();
@@ -259,7 +260,7 @@ namespace TCC
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             SessionManager.CurrentPlayer.ClearAbnormalities();
             //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
-            EntitiesManager.ClearNPC();
+            EntityManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
             Proxy.CloseConnection();
@@ -415,7 +416,7 @@ namespace TCC
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                Settings.StatSent = true;
+                Settings.Settings.StatSent = true;
                 SettingsWriter.Save();
             }
         }

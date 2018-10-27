@@ -13,7 +13,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.BuffWindowSettings);
+            Init(Settings.Settings.BuffWindowSettings);
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
 

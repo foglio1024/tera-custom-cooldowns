@@ -377,11 +377,11 @@ namespace TCC.Controls.Skills
         private void OnSkillShapeChanged()
         {
             MainSkills.ItemContainerStyle =
-                FindResource(TCC.Settings.SkillShape == ControlShape.Round
+                FindResource(TCC.Settings.Settings.SkillShape == ControlShape.Round
                     ? "RoundDragableStyle"
                     : "SquareDragableStyle") as Style;
             SecSkills.ItemContainerStyle =
-                FindResource(TCC.Settings.SkillShape == ControlShape.Round
+                FindResource(TCC.Settings.Settings.SkillShape == ControlShape.Round
                     ? "RoundDragableStyle"
                     : "SquareDragableStyle") as Style;
         }

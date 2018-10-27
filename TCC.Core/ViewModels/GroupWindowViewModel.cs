@@ -43,7 +43,7 @@ namespace TCC.ViewModels
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && Settings.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && Settings.Settings.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && Proxy.IsConnected;
         public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
@@ -166,7 +166,7 @@ namespace TCC.ViewModels
                 // -- show only aggro stacks if we are in HH -- //
                 if (BossGageWindowViewModel.Instance.CurrentHHphase >= HarrowholdPhase.Phase2)
                 {
-                    if (ab.Id != 950023 && Settings.ShowOnlyAggroStacks) return;
+                    if (ab.Id != 950023 && Settings.Settings.ShowOnlyAggroStacks) return;
                 }
                 // -------------------------------------------- //
                 u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -199,7 +199,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (Settings.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (Settings.Settings.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 return;
@@ -283,7 +283,7 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            if (!Settings.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!Settings.Settings.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncArray().ToList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;

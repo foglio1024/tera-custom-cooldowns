@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -38,7 +39,7 @@ namespace TCC.Windows
 
         public void ShowWindow()
         {
-            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
@@ -69,7 +70,7 @@ namespace TCC.Windows
             an.Completed += (s, ev) =>
             {
                 Hide();
-                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             };
             BeginAnimation(OpacityProperty, an);
@@ -149,8 +150,8 @@ namespace TCC.ViewModels
         public void Execute(object parameter)
         {
             _toggle.Selected = !_toggle.Selected;
-            if (_toggle.Selected) Settings.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
-            else Settings.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
+            if (_toggle.Selected) Settings.Settings.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
+            else Settings.Settings.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 
         public event EventHandler CanExecuteChanged;

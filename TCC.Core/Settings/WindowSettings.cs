@@ -8,7 +8,7 @@ using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
 
-namespace TCC
+namespace TCC.Settings
 {
     public class WindowSettings : TSPropertyChanged
     {

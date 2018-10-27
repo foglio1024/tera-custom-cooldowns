@@ -6,7 +6,7 @@ using TCC.Data;
 using TCC.Parsing;
 using Key = System.Windows.Forms.Keys;
 
-namespace TCC
+namespace TCC.Settings
 {
     public static class Settings
     {

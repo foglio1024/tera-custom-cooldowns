@@ -27,13 +27,13 @@ namespace TCC.ViewModels
 
         public void SetMaxST(int v)
         {
-            if (!Settings.ClassWindowSettings.Enabled) return;
+            if (!Settings.Settings.ClassWindowSettings.Enabled) return;
             StaminaTracker.Max = v;
         }
 
         public void SetST(int currentStamina)
         {
-            if (!Settings.ClassWindowSettings.Enabled) return;
+            if (!Settings.Settings.ClassWindowSettings.Enabled) return;
             StaminaTracker.Val = currentStamina;
         }
         public ClassManager()

@@ -113,7 +113,7 @@ namespace TCC.Windows
                 a.Completed += (s, ev) =>
                 {
                     Hide();
-                    if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                    if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
                 };
                 BeginAnimation(OpacityProperty, a);
@@ -122,7 +122,7 @@ namespace TCC.Windows
 
         internal void ShowWindow()
         {
-            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
                 VM.RefreshSorting();

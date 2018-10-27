@@ -16,12 +16,12 @@ namespace TCC.ViewModels
             for (int i = 0; i < 13; i++)
             {
                 var ct = new ClassToggle((Class)i, ab.Id);
-                if (Settings.GroupAbnormals.ContainsKey(ct.Class)) ct.Selected = Settings.GroupAbnormals[ct.Class].Contains(ab.Id);
+                if (Settings.Settings.GroupAbnormals.ContainsKey(ct.Class)) ct.Selected = Settings.Settings.GroupAbnormals[ct.Class].Contains(ab.Id);
                 Classes.Add(ct);
             }
             Classes.Add(new ClassToggle(Class.Common, ab.Id)
             {
-                Selected = Settings.GroupAbnormals[Class.Common].Contains(ab.Id)
+                Selected = Settings.Settings.GroupAbnormals[Class.Common].Contains(ab.Id)
             });
 
         }

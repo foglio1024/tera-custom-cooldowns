@@ -50,7 +50,7 @@ namespace TCC.Windows
         }
         internal void ShowWindow()
         {
-            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
 
             Dispatcher.Invoke(() =>
             {
@@ -69,7 +69,7 @@ namespace TCC.Windows
             {
 
                 Hide(); InfoWindowViewModel.Instance.SaveToFile();
-                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             };
             BeginAnimation(OpacityProperty, a);

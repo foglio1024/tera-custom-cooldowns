@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -46,7 +47,7 @@ namespace TCC.Windows
             a.Completed += (s, ev) =>
             {
                 Hide();
-                if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, a);
             //WindowManager.ForegroundManager.RefreshVisible();
@@ -75,7 +76,7 @@ namespace TCC.Windows
         }
         public void ShowWindow()
         {
-            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
 
             Opacity = 0;
             Activate();

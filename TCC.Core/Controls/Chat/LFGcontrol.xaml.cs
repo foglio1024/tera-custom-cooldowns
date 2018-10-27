@@ -37,7 +37,7 @@ namespace TCC.Controls.Chat
 
         private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (TCC.Settings.LfgEnabled)
+            if (TCC.Settings.Settings.LfgEnabled)
             {
                 Proxy.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 

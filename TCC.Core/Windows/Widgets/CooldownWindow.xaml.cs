@@ -7,7 +7,7 @@
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
+            Init(Settings.Settings.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
 
         }
     }

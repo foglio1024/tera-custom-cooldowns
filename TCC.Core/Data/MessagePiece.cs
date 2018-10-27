@@ -35,12 +35,12 @@ namespace TCC.Data
 
         public int Size
         {
-            get => _customSize ? _size : Settings.FontSize;
+            get => _customSize ? _size : Settings.Settings.FontSize;
             set
             {
                 if (_size == value) return;
                 _size = value;
-                _customSize = value != Settings.FontSize;
+                _customSize = value != Settings.Settings.FontSize;
                 NPC(nameof(Size));
             }
         }

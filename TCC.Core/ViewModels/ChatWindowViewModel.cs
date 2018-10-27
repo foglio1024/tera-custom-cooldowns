@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing.Messages;
+using TCC.Settings;
 using TCC.Windows.Widgets;
 
 namespace TCC.ViewModels
@@ -140,7 +141,7 @@ namespace TCC.ViewModels
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 if (e.OldItems.Count == 0) return;
-                Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
+                Settings.Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
             }
         }
 
@@ -159,7 +160,7 @@ namespace TCC.ViewModels
                 if (_queue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
-                    if (ChatMessages.Count > Settings.MaxMessages)
+                    if (ChatMessages.Count > Settings.Settings.MaxMessages)
                     {
                         ChatMessages.RemoveAt(ChatMessages.Count - 1);
                     }
@@ -168,7 +169,7 @@ namespace TCC.ViewModels
         }
         private void HideTimer_Tick(object sender, EventArgs e)
         {
-            if (Settings.ChatFadeOut)
+            if (Settings.Settings.ChatFadeOut)
             {
                 IsChatVisible = false;
             }
@@ -182,9 +183,9 @@ namespace TCC.ViewModels
         }
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            if (!Settings.ChatEnabled) return;
+            if (!Settings.Settings.ChatEnabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
-            if (ChatMessages.Count < Settings.SpamThreshold)
+            if (ChatMessages.Count < Settings.Settings.SpamThreshold)
             {
                 for (var i = 0; i < ChatMessages.Count - 1; i++)
                 {
@@ -194,7 +195,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                for (var i = 0; i < Settings.SpamThreshold; i++)
+                for (var i = 0; i < Settings.Settings.SpamThreshold; i++)
                 {
                     if (i > ChatMessages.Count - 1) continue;
 
@@ -215,7 +216,7 @@ namespace TCC.ViewModels
             else _queue.Enqueue(chatMessage);
 
             NewMessage?.Invoke(chatMessage);
-            if (ChatMessages.Count > Settings.MaxMessages)
+            if (ChatMessages.Count > Settings.Settings.MaxMessages)
             {
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
@@ -225,8 +226,8 @@ namespace TCC.ViewModels
         internal void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
             if (!target.IsMe() || diff > 0 || target == source || source == 0 ||
-                !EntitiesManager.IsEntitySpawned(source)) return;
-            var srcName = EntitiesManager.GetEntityName(source);
+                !EntityManager.IsEntitySpawned(source)) return;
+            var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
                 : "<font color=\"#cccccc\">.</font>";
@@ -237,7 +238,7 @@ namespace TCC.ViewModels
         internal void InitWindows()
         {
             ChatWindows.Clear();
-            Settings.ChatWindowsSettings.ToList().ForEach(s =>
+            Settings.Settings.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
                 var w = new ChatWindow(s);
@@ -253,12 +254,12 @@ namespace TCC.ViewModels
                 var w = new ChatWindow(
                     new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false)
                     );
-                Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                Settings.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 var m = new ChatViewModel();
                 w.DataContext = m;
                 ChatWindows.Add(w);
                 m.LoadTabs();
-                if (Settings.ChatEnabled) w.Show();
+                if (Settings.Settings.ChatEnabled) w.Show();
             }
 
             //WindowManager.TccVisibilityChanged += (s, ev) =>

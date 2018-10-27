@@ -50,7 +50,7 @@ namespace TCC.Sniffing
             var servers = BasicTeraData.Instance.Servers;
             _serversByIp = servers.GetServersByIp();
 
-            if (Settings.Winpcap)
+            if (Settings.Settings.Winpcap)
             {
                 var netmasks = _serversByIp.Keys.Select(s => string.Join(".", s.Split('.').Take(3)) + ".0/24").Distinct().ToArray();
 

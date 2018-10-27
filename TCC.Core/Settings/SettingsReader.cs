@@ -10,7 +10,7 @@ using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 
-namespace TCC
+namespace TCC.Settings
 {
     public class SettingsReader
     {

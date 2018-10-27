@@ -52,7 +52,7 @@ namespace TCC.Controls.Group
         {
             Dispatcher.Invoke(() => {
                 if (!(DataContext is User user)) return;
-                AwakenIcon.Visibility = TCC.Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
+                AwakenIcon.Visibility = TCC.Settings.Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : Visibility.Collapsed;
             });
         }
 
@@ -62,7 +62,7 @@ namespace TCC.Controls.Group
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LaurelImage.Visibility = TCC.Settings.ShowMembersLaurels ? Visibility.Visible : Visibility.Hidden;
+                    LaurelImage.Visibility = TCC.Settings.Settings.ShowMembersLaurels ? Visibility.Visible : Visibility.Hidden;
                 });
             }
             catch
@@ -78,8 +78,8 @@ namespace TCC.Controls.Group
                 {
                     if (!(DataContext is User user)) return;
 
-                    Buffs.ItemsSource = TCC.Settings.IgnoreGroupBuffs ? null : user.Buffs;
-                    BuffGrid.Visibility = TCC.Settings.IgnoreGroupBuffs
+                    Buffs.ItemsSource = TCC.Settings.Settings.IgnoreGroupBuffs ? null : user.Buffs;
+                    BuffGrid.Visibility = TCC.Settings.Settings.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
 
@@ -99,8 +99,8 @@ namespace TCC.Controls.Group
                 {
                     // ReSharper disable once IsExpressionAlwaysTrue
                     if(!(_dc is User)) return;
-                    Debuffs.ItemsSource = TCC.Settings.IgnoreGroupDebuffs ? null : _dc.Debuffs;
-                    DebuffGrid.Visibility = TCC.Settings.IgnoreGroupDebuffs
+                    Debuffs.ItemsSource = TCC.Settings.Settings.IgnoreGroupDebuffs ? null : _dc.Debuffs;
+                    DebuffGrid.Visibility = TCC.Settings.Settings.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
@@ -132,14 +132,14 @@ namespace TCC.Controls.Group
         {
             Dispatcher.Invoke(() =>
             {
-                MpBar.Visibility = !TCC.Settings.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpBar.Visibility = !TCC.Settings.Settings.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void SetHP()
         {
             Dispatcher.Invoke(() =>
             {
-                HpBar.Visibility = !TCC.Settings.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpBar.Visibility = !TCC.Settings.Settings.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)

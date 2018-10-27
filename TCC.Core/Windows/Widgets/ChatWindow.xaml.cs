@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
@@ -90,9 +91,9 @@ namespace TCC.Windows.Widgets
                 ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
                 ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
                 ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
-                ((ChatWindowSettings)WindowSettings).X = Left / TCC.Settings.ScreenW;
-                ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.ScreenH;
-                var v = TCC.Settings.ChatWindowsSettings;
+                ((ChatWindowSettings)WindowSettings).X = Left / TCC.Settings.Settings.ScreenW;
+                ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.Settings.ScreenH;
+                var v = TCC.Settings.Settings.ChatWindowsSettings;
                 var s = v.FirstOrDefault(x => x == WindowSettings);
                 if (s == null) v.Add((ChatWindowSettings) WindowSettings);
 

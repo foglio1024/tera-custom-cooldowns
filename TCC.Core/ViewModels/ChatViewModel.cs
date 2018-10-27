@@ -51,7 +51,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public Tab CurrentTab { get; set; }
-        public double ChatWindowOpacity => Settings.ChatWindowOpacity;
+        public double ChatWindowOpacity => Settings.Settings.ChatWindowOpacity;
         public Func<HeaderedItemViewModel> AddNewTabCommand
         {
             get

@@ -86,7 +86,7 @@ namespace TCC.Data
             {
                 achiName = $"[{g}]";
             }
-            return new MessagePiece(achiName, MessagePieceType.Simple, _channel, Settings.FontSize, false);
+            return new MessagePiece(achiName, MessagePieceType.Simple, _channel, Settings.Settings.FontSize, false);
         }
         public MessagePiece ParseSysMsgQuest(Dictionary<string, string> info)
         {
@@ -96,7 +96,7 @@ namespace TCC.Data
             {
                 txt = q;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.FontSize, false);
+            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.Settings.FontSize, false);
         }
         public MessagePiece ParseSysMsgAchiGrade(Dictionary<string, string> info)
         {
@@ -111,7 +111,7 @@ namespace TCC.Data
                 if (id == 105) col = "ff264b";
 
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.FontSize, false, col);
+            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.Settings.FontSize, false, col);
         }
         public MessagePiece ParseSysMsgDungeon(Dictionary<string, string> info)
         {
@@ -121,7 +121,7 @@ namespace TCC.Data
             {
                 txt = dngName;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.FontSize, false);
+            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.Settings.FontSize, false);
         }
         public MessagePiece ParseSysMsgAccBenefit(Dictionary<string, string> info)
         {
@@ -131,7 +131,7 @@ namespace TCC.Data
             {
                 txt = ab;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.FontSize, false);
+            return new MessagePiece(txt, MessagePieceType.Simple, _channel, Settings.Settings.FontSize, false);
         }
         public MessagePiece ParseSysMsgGuildQuest(Dictionary<string, string> info)
         {
@@ -141,7 +141,7 @@ namespace TCC.Data
             {
                 questName = q.Title;
             }
-            return new MessagePiece(questName, MessagePieceType.Simple, _channel, Settings.FontSize, false);
+            return new MessagePiece(questName, MessagePieceType.Simple, _channel, Settings.Settings.FontSize, false);
         }
 
 

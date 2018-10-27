@@ -21,9 +21,9 @@ namespace TCC.Parsing.Messages
             action = reader.ReadInt32();
 
             //string sourceName = Source.ToString();
-            //if (EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == Source) != null)
+            //if (EntityManager.CurrentBosses.FirstOrDefault(x => x.EntityId == Source) != null)
             //{
-            //    sourceName = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == Source).Name;
+            //    sourceName = EntityManager.CurrentBosses.FirstOrDefault(x => x.EntityId == Source).Name;
             //}
             //string userName = User.ToString();
             //if (User == SessionManager.CurrentPlayer.EntityId) userName = SessionManager.CurrentPlayer.Name;

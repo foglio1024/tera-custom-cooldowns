@@ -18,9 +18,9 @@ namespace TCC.Parsing.Messages
             reader.Skip(4); //unk2 = reader.ReadInt32();
 
             //string npcName = entityId.ToString();
-            //if (EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == entityId) != null) 
+            //if (EntityManager.CurrentBosses.FirstOrDefault(x => x.EntityId == entityId) != null) 
             //{
-            //    npcName = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == entityId).Name;
+            //    npcName = EntityManager.CurrentBosses.FirstOrDefault(x => x.EntityId == entityId).Name;
             //}
             //string target = targetId.ToString();
             //if (targetId == SessionManager.CurrentPlayer.EntityId) target = SessionManager.CurrentPlayer.Name;

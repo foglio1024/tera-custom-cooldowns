@@ -109,7 +109,7 @@ namespace TCC
 
         public void Execute(object parameter)
         {
-            var reg = Settings.LastRegion.ToLower();
+            var reg = Settings.Settings.LastRegion.ToLower();
             reg = reg.StartsWith("eu") ? "eu" : reg;
             reg = reg == "na" ? "" : reg;
             reg = reg == "" ? reg : reg + "/";
