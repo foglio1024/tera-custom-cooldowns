@@ -1,4 +1,4 @@
-﻿namespace TCC.Controls
+﻿namespace TCC.Controls.Abnormalities
 {
     public partial class SquareAbnormalityIndicator
     {

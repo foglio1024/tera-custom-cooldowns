@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace TCC.Controls
+namespace TCC.Controls.Abnormalities
 {
     public partial class AbnormalityToolTipControl
     {

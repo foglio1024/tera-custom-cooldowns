@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using TCC.Data;
 
-namespace TCC.Controls
+namespace TCC.Controls.Abnormalities
 {
     public class AbnormalityIndicatorBase : UserControl
     {
@@ -59,8 +59,8 @@ namespace TCC.Controls
             set => SetValue(SizeProperty, value);
         }
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size",
-                                                                                             typeof(double),
-                                                                                             typeof(RoundAbnormalityIndicator),
-                                                                                             new PropertyMetadata(18.0));
+            typeof(double),
+            typeof(RoundAbnormalityIndicator),
+            new PropertyMetadata(18.0));
     }
 }
