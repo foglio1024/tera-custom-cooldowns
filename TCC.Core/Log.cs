@@ -1,5 +1,4 @@
 ﻿using System;
-using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC
