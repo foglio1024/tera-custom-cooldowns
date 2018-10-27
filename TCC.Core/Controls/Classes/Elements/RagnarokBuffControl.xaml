@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="TCC.Controls.Classes.Elements.RagnarokBuffControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls.Classes.Elements"
+             xmlns:controls="clr-namespace:TCC.Controls"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d" >
+    <Grid Margin="0,0,0,0" Effect="{StaticResource DropShadow}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Ellipse Width="43"
+                 Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" 
+                 Margin="2" 
+                 Stroke="#ccc" 
+                 StrokeThickness="1"
+                 x:Name="Icon">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+            </Ellipse.Fill>
+            <Ellipse.Effect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="IconGlow" Opacity="0"></DropShadowEffect>
+            </Ellipse.Effect>
+        </Ellipse>
+
+        <controls:Arc StrokeThickness="21.5" 
+                   Stroke="#6000" 
+                   Width="43" Height="43" 
+                   x:Name="InternalArc" 
+                   EndAngle="0"/>
+
+        <controls:Arc StrokeThickness="5" 
+                   Stroke="Orange" 
+                   Width="49" Height="49"
+                   x:Name="ExternalArc" 
+                   EndAngle="0"/>
+
+        <Grid Grid.Row="1">
+            <Grid Width="43" Height="18"  
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Bottom"
+                  Margin="0,0,0,0">
+
+                <Border  BorderBrush="#404045" 
+                     Background="#303035"
+                     BorderThickness="1" 
+                     Opacity="1" 
+                     CornerRadius="9" />
+                <TextBlock Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=local:RagnarokBuffControl}}" 
+                       Foreground="#ccc" 
+                       FontSize="15"                       
+                       HorizontalAlignment="Center" 
+                       TextAlignment="Center" 
+                       VerticalAlignment="Center" />
+            </Grid>
+            <Grid x:Name="SecondaryGrid" 
+              Width="43" 
+              Height="18"  
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Bottom" 
+              Margin="0,0,0,0" 
+              Opacity="0">
+                <Border  BorderBrush="#eee" 
+                     BorderThickness="0" 
+                     Opacity="1" 
+                     CornerRadius="9" 
+                     Background="Orange"/>
+                <TextBlock Text="{Binding Buff.Seconds}" 
+                       Foreground="#d000" 
+                       FontSize="15" 
+                       HorizontalAlignment="Center" 
+                       TextAlignment="Center" 
+                       VerticalAlignment="Center" />
+            </Grid>
+            <Grid.RenderTransform>
+                <TranslateTransform Y="-5"/>
+            </Grid.RenderTransform>
+        </Grid>
+    </Grid>
+</UserControl>
