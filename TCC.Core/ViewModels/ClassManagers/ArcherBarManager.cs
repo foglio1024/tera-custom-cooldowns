@@ -8,9 +8,9 @@ namespace TCC.ViewModels
 
         private ArcherFocusTracker _focus;
         //private StanceTracker<ArcherStance> _stance;
-        private FixedSkillCooldown _thunderbolt;
+        private Cooldown _thunderbolt;
         private DurationCooldownIndicator _windsong;
-        private FixedSkillCooldown _windWalk;
+        private Cooldown _windWalk;
 
         public ArcherFocusTracker Focus
         {
@@ -32,7 +32,7 @@ namespace TCC.ViewModels
         //        NPC();
         //    }
         //}
-        public FixedSkillCooldown Thunderbolt
+        public Cooldown Thunderbolt
         {
             get => _thunderbolt;
             set
@@ -52,7 +52,7 @@ namespace TCC.ViewModels
                 NPC();
             }
         }
-        public FixedSkillCooldown WindWalk
+        public Cooldown WindWalk
         {
             get => _windWalk;
             set
@@ -84,26 +84,26 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
             SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
             SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
-            Thunderbolt = new FixedSkillCooldown(tb, true);
+            Thunderbolt = new Cooldown(tb, true);
             Windsong = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(ws, true),
-                Buff = new FixedSkillCooldown(ws, false)
+                Cooldown = new Cooldown(ws, true),
+                Buff = new Cooldown(ws, false)
             };
-            WindWalk = new FixedSkillCooldown(ww, false);
+            WindWalk = new Cooldown(ww, false);
         }
 
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == Thunderbolt.Skill.IconName)
             {
-                Thunderbolt.Start(sk.Cooldown);
+                Thunderbolt.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Windsong.Cooldown.Skill.IconName)
             {
-                Windsong.Cooldown.Start(sk.Cooldown);
+                Windsong.Cooldown.Start(sk.Duration);
                 return true;
             }
             return false;

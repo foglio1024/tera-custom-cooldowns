@@ -29,23 +29,23 @@ namespace TCC.ViewModels
 
             BurstFire = new DurationCooldownIndicator(Dispatcher)
             {
-                Buff = new FixedSkillCooldown(bfire, false),
-                Cooldown = new FixedSkillCooldown(bfire, true)
+                Buff = new Cooldown(bfire, false),
+                Cooldown = new Cooldown(bfire, true)
             };
             Bombardment = new DurationCooldownIndicator(Dispatcher)
             {
-                Buff = new FixedSkillCooldown(bombard, false),
-                Cooldown = new FixedSkillCooldown(bombard, false)
+                Buff = new Cooldown(bombard, false),
+                Cooldown = new Cooldown(bombard, false)
             };
             Balder = new DurationCooldownIndicator(Dispatcher)
             {
-                Buff = new FixedSkillCooldown(balder, false),
-                Cooldown = new FixedSkillCooldown(balder, false)
+                Buff = new Cooldown(balder, false),
+                Cooldown = new Cooldown(balder, false)
             };
             ModularSystem = new DurationCooldownIndicator(Dispatcher)
             {
-                Buff = new FixedSkillCooldown(modSys, false),
-                Cooldown = new FixedSkillCooldown(modSys, true)
+                Buff = new Cooldown(modSys, false),
+                Cooldown = new Cooldown(modSys, true)
             };
             Balder.Cooldown.FlashOnAvailable = true;
             Bombardment.Cooldown.FlashOnAvailable = true;
@@ -54,21 +54,21 @@ namespace TCC.ViewModels
             StaminaTracker.PropertyChanged += FlashBfIfFullWp;
         }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (Balder.Cooldown.Skill != null && sk.Skill.IconName == Balder.Cooldown.Skill.IconName)
             {
-                Balder.Cooldown.Start(sk.Cooldown);
+                Balder.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (Bombardment.Cooldown.Skill != null && sk.Skill.IconName == Bombardment.Cooldown.Skill.IconName)
             {
-                Bombardment.Cooldown.Start(sk.Cooldown);
+                Bombardment.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (ModularSystem.Cooldown.Skill != null && sk.Skill.IconName == ModularSystem.Cooldown.Skill.IconName)
             {
-                ModularSystem.Cooldown.Start(sk.Cooldown);
+                ModularSystem.Cooldown.Start(sk.Duration);
                 return true;
             }
             return false;

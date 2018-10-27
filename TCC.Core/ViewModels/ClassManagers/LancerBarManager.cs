@@ -14,24 +14,24 @@ namespace TCC.ViewModels
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }
         public DurationCooldownIndicator GuardianShout { get; set; }
-        public FixedSkillCooldown Infuriate { get; set; }
+        public Cooldown Infuriate { get; set; }
         public StatTracker LH { get; set; }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == GuardianShout.Cooldown.Skill.IconName)
             {
-                GuardianShout.Cooldown.Start(sk.Cooldown);
+                GuardianShout.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == AdrenalineRush.Cooldown.Skill.IconName)
             {
-                AdrenalineRush.Cooldown.Start(sk.Cooldown);
+                AdrenalineRush.Cooldown.Start(sk.Duration);
                 return true;
             }
             if(sk.Skill.IconName == Infuriate.Skill.IconName)
             {
-                Infuriate.Start(sk.Cooldown);
+                Infuriate.Start(sk.Duration);
                 return true;
             }
             return false;
@@ -46,11 +46,11 @@ namespace TCC.ViewModels
             GuardianShout = new DurationCooldownIndicator(Dispatcher);
             AdrenalineRush = new DurationCooldownIndicator(Dispatcher);
 
-            GuardianShout.Cooldown = new FixedSkillCooldown(gshout,  true);
-            GuardianShout.Buff = new FixedSkillCooldown(gshout,  false);
-            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush,  true);
-            AdrenalineRush.Buff = new FixedSkillCooldown(arush,  false);
-            Infuriate = new FixedSkillCooldown(infu,  true);
+            GuardianShout.Cooldown = new Cooldown(gshout,  true);
+            GuardianShout.Buff = new Cooldown(gshout,  false);
+            AdrenalineRush.Cooldown = new Cooldown(arush,  true);
+            AdrenalineRush.Buff = new Cooldown(arush,  false);
+            Infuriate = new Cooldown(infu,  true);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator Bloodlust { get; set; }
         public DurationCooldownIndicator Unleash { get; set; }
 
-        public FixedSkillCooldown Dexter { get; set; }
-        public FixedSkillCooldown Sinister { get; set; }
-        public FixedSkillCooldown Rampage { get; set; }
-        public FixedSkillCooldown BeastFury { get; set; }
+        public Cooldown Dexter { get; set; }
+        public Cooldown Sinister { get; set; }
+        public Cooldown Rampage { get; set; }
+        public Cooldown BeastFury { get; set; }
 
         public StatTracker SinisterTracker { get; set; }
         public StatTracker DexterTracker { get; set; }
@@ -57,18 +57,18 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
             FieryRage = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(fr,  true),
-                Buff = new FixedSkillCooldown(fr,  true)
+                Cooldown = new Cooldown(fr,  true),
+                Buff = new Cooldown(fr,  true)
             };
             Bloodlust = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(bl,  true),
-                Buff = new FixedSkillCooldown(bl,  true)
+                Cooldown = new Cooldown(bl,  true),
+                Buff = new Cooldown(bl,  true)
             };
             Unleash = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(ul, false),
-                Buff = new FixedSkillCooldown(ul, false)
+                Cooldown = new Cooldown(ul, false),
+                Buff = new Cooldown(ul, false)
             };
 
             SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
@@ -76,32 +76,32 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
             SessionManager.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
 
-            Dexter = new FixedSkillCooldown(dx, false);
-            Sinister = new FixedSkillCooldown(sx, false);
-            Rampage = new FixedSkillCooldown(rp, false);
-            BeastFury = new FixedSkillCooldown(bf, false);
+            Dexter = new Cooldown(dx, false);
+            Sinister = new Cooldown(sx, false);
+            Rampage = new Cooldown(rp, false);
+            BeastFury = new Cooldown(bf, false);
         }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == FieryRage.Cooldown.Skill.IconName)
             {
-                FieryRage.Cooldown.Start(sk.Cooldown);
+                FieryRage.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Bloodlust.Cooldown.Skill.IconName)
             {
-                Bloodlust.Cooldown.Start(sk.Cooldown);
+                Bloodlust.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Unleash.Cooldown.Skill.IconName)
             {
-                Unleash.Cooldown.Start(sk.Cooldown);
+                Unleash.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == BeastFury.Skill.IconName)
             {
-                BeastFury.Start(sk.Cooldown);
+                BeastFury.Start(sk.Duration);
                 return true;
             }
             return false;

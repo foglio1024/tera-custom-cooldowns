@@ -1,15 +1,9 @@
-﻿using System.Windows;
-using TCC.Data;
+﻿using TCC.Data;
 
 namespace TCC.ViewModels
 {
     public class SorcererBarManager : ClassManager
     {
-
-        private bool _isBoostFire;
-        private bool _isBoostFrost;
-        private bool _isBoostArcane;
-
         public DurationCooldownIndicator ManaBoost { get; set; }
 
         public bool Fire => SessionManager.CurrentPlayer.Fire;
@@ -24,15 +18,15 @@ namespace TCC.ViewModels
         {
             ManaBoost = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
-            ManaBoost.Cooldown = new FixedSkillCooldown(mb,  true);
-            ManaBoost.Buff = new FixedSkillCooldown(mb, false);
+            ManaBoost.Cooldown = new Cooldown(mb,  true);
+            ManaBoost.Buff = new Cooldown(mb, false);
         }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == ManaBoost.Cooldown.Skill.IconName)
             {
-                ManaBoost.Cooldown.Start(sk.Cooldown);
+                ManaBoost.Cooldown.Start(sk.Duration);
                 return true;
             }
             return false;

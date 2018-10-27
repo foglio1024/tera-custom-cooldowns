@@ -14,26 +14,26 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
             ShadowReaping = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(sr, true),
-                Buff = new FixedSkillCooldown(sr, true)
+                Cooldown = new Cooldown(sr, true),
+                Buff = new Cooldown(sr, true)
             };
             ShroudedEscape = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown =  new FixedSkillCooldown(se, true),
-                Buff = new FixedSkillCooldown(se, true)
+                Cooldown =  new Cooldown(se, true),
+                Buff = new Cooldown(se, true)
             };
         }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == ShadowReaping.Cooldown.Skill.IconName)
             {
-                ShadowReaping.Cooldown.Start(sk.Cooldown);
+                ShadowReaping.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == ShroudedEscape.Cooldown.Skill.IconName)
             {
-                ShroudedEscape.Cooldown.Start(sk.Cooldown);
+                ShroudedEscape.Cooldown.Start(sk.Duration);
                 return true;
             }
             return false;

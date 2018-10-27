@@ -7,7 +7,7 @@ namespace TCC.ViewModels
 
         public DurationCooldownIndicator InColdBlood { get; set; }
         
-        public FixedSkillCooldown OverhandStrike { get; set; }
+        public Cooldown OverhandStrike { get; set; }
         
 
 
@@ -16,26 +16,26 @@ namespace TCC.ViewModels
             // In Cold Blood
             SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
             InColdBlood = new DurationCooldownIndicator(Dispatcher) {
-                Buff = new FixedSkillCooldown(icb, false),
-                Cooldown = new FixedSkillCooldown(icb, true)
+                Buff = new Cooldown(icb, false),
+                Cooldown = new Cooldown(icb, true)
             };
 
             // Overhand Strike
             SessionManager.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
-            OverhandStrike = new FixedSkillCooldown(ohs, false);
+            OverhandStrike = new Cooldown(ohs, false);
 
         }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == InColdBlood.Cooldown.Skill.IconName)
             {
-                InColdBlood.Cooldown.Start(sk.Cooldown);
+                InColdBlood.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == OverhandStrike.Skill.IconName)
             {
-                OverhandStrike.Start(sk.Cooldown);
+                OverhandStrike.Start(sk.Duration);
                 return true;
             }
             

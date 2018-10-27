@@ -29,13 +29,13 @@ namespace TCC.ViewModels
             //Energy Stars
             EnergyStars = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
-            EnergyStars.Buff = new FixedSkillCooldown(es,  false);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es,  true);
+            EnergyStars.Buff = new Cooldown(es,  false);
+            EnergyStars.Cooldown = new Cooldown(es,  true);
 
             Grace = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
-            Grace.Buff = new FixedSkillCooldown(gr,  false);
-            Grace.Cooldown = new FixedSkillCooldown(gr, true);
+            Grace.Buff = new Cooldown(gr,  false);
+            Grace.Cooldown = new Cooldown(gr, true);
 
             Grace.Buff.Started += OnGraceBuffStarted;
             Grace.Buff.Ended += OnGraceBuffEnded;
@@ -43,8 +43,8 @@ namespace TCC.ViewModels
             // Edict Of Judgment
             EdictOfJudgment = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
-            EdictOfJudgment.Buff = new FixedSkillCooldown(ed, false);
-            EdictOfJudgment.Cooldown = new FixedSkillCooldown(ed, true);
+            EdictOfJudgment.Buff = new Cooldown(ed, false);
+            EdictOfJudgment.Cooldown = new Cooldown(ed, true);
 
             EdictOfJudgment.Buff.Started += OnEdictBuffStarted;
             EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
@@ -52,14 +52,14 @@ namespace TCC.ViewModels
             // Divine Charge
             DivineCharge = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
-            DivineCharge.Cooldown = new FixedSkillCooldown(dc, true);
+            DivineCharge.Cooldown = new Cooldown(dc, true);
 
             // Tripple Nenesis
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
             TripleNemesis = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(tn, false),
-                Buff = new FixedSkillCooldown(tn, false)
+                Cooldown = new Cooldown(tn, false),
+                Buff = new Cooldown(tn, false)
             };
 
             ClassAbnormalityTracker.MarkingExpired+= OnTripleNemesisExpired;
@@ -86,31 +86,31 @@ namespace TCC.ViewModels
         private void OnEdictBuffEnded(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = true;
         private void OnEdictBuffStarted(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = false;
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if(sk.Skill.IconName == EnergyStars.Cooldown.Skill.IconName)
             {
-                EnergyStars.Cooldown.Start(sk.Cooldown);
+                EnergyStars.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Grace.Cooldown.Skill.IconName)
             {
-                Grace.Cooldown.Start(sk.Cooldown);
+                Grace.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
             {
-                EdictOfJudgment.Cooldown.Start(sk.Cooldown);
+                EdictOfJudgment.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == DivineCharge.Cooldown.Skill.IconName)
             {
-                DivineCharge.Cooldown.Start(sk.Cooldown);
+                DivineCharge.Cooldown.Start(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == TripleNemesis.Cooldown.Skill.IconName)
             {
-                TripleNemesis.Cooldown.Start(sk.Cooldown);
+                TripleNemesis.Cooldown.Start(sk.Duration);
                 return true;
             }
             return false;

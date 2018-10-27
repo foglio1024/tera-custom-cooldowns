@@ -5,7 +5,7 @@ namespace TCC.ViewModels
 {
     public abstract class ClassManager : TSPropertyChanged
     {
-        public virtual bool StartSpecialSkill(SkillCooldown sk)
+        public virtual bool StartSpecialSkill(Cooldown sk)
         {
             return false;
         }

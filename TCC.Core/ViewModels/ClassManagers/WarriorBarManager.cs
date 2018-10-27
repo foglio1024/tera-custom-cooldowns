@@ -28,15 +28,15 @@ namespace TCC.ViewModels
             //Deadly gamble
             DeadlyGamble = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
-            DeadlyGamble.Buff = new FixedSkillCooldown(dg, false);
-            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, true);
+            DeadlyGamble.Buff = new Cooldown(dg, false);
+            DeadlyGamble.Cooldown = new Cooldown(dg, true);
         }
 
-        public override bool StartSpecialSkill(SkillCooldown sk)
+        public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == DeadlyGamble.Cooldown.Skill.IconName)
             {
-                DeadlyGamble.Cooldown.Start(sk.Cooldown);
+                DeadlyGamble.Cooldown.Start(sk.Duration);
                 return true;
             }
             return false;
