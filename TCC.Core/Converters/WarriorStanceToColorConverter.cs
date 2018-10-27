@@ -5,7 +5,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
 
-namespace TCC.Controls.ClassBars
+namespace TCC.Converters
 {
     public class WarriorStanceToColorConverter : IValueConverter
     {

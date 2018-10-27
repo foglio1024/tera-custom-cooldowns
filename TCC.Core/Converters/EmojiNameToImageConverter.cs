@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 
-namespace TCC.Controls.ChatControls
+namespace TCC.Converters
 {
     public class EmojiNameToImageConverter : IValueConverter
     {
