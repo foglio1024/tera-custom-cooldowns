@@ -28,12 +28,16 @@ namespace TCC.Controls.Skills
             _glowAnimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
         }
 
+        protected override void OnCooldownStarted(CooldownMode mode)
+        {
+            base.OnCooldownStarted(mode);
+            Warning = false;
+        }
+
         protected override void OnCooldownEnded(CooldownMode mode)
         {
             base.OnCooldownEnded(mode);
             AnimateAvailableSkill();
-            if (!Context.FlashOnAvailable) return;
-            //Warning = !IsRunning;
             GlowRef?.BeginAnimation(OpacityProperty, _glowAnimation);
         }
         protected override void OnLoaded(object sender, RoutedEventArgs e)
@@ -45,7 +49,7 @@ namespace TCC.Controls.Skills
             Context.FlashingStopForced += OnForceStopFlashing;
             Context.Reset += OnReset;
 
-            if(!Context.IsAvailable) OnCooldownStarted(Context.Mode);
+            if (!Context.IsAvailable) OnCooldownStarted(Context.Mode);
 
         }
         protected override void OnUnloaded(object sender, RoutedEventArgs e)
@@ -73,10 +77,8 @@ namespace TCC.Controls.Skills
         {
             StopArcAnimation(MainArcRef); //stop any arc animations
             StopArcAnimation(PreArcRef); //stop any arc animations
-
-
-                var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
-                GlowRef.BeginAnimation(OpacityProperty, an);
+            var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
+            GlowRef.BeginAnimation(OpacityProperty, an);
             if (Context.FlashOnAvailable && (SessionManager.Combat || SessionManager.Encounter)) Warning = true;
 
         }
