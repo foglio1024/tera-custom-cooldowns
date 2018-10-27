@@ -6,7 +6,7 @@ using TCC.ViewModels;
 
 namespace TCC
 {
-    public static class EntitiesManager
+    public static class EntityManager
     {
         private static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
@@ -34,7 +34,7 @@ namespace TCC
                 }
                 else
                 {
-                    if (Settings.ShowOnlyBosses) return;
+                    if (Settings.Settings.ShowOnlyBosses) return;
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, Visibility.Collapsed);
                 }
             }
