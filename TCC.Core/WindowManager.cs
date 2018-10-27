@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TCC.ViewModels;
 using TCC.Windows;
+using TCC.Windows.Widgets;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
 
 namespace TCC

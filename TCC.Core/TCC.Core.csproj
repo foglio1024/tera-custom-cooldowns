@@ -90,31 +90,34 @@
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="ClassSpecific\GunnerAbnormalityTracker.cs" />
-    <Compile Include="Controls\SorcererElementsControl.xaml.cs">
+    <Compile Include="Controls\Abnormalities\AbnormalityIndicatorBase.cs" />
+    <Compile Include="Controls\Skills\FixedSkillControlBase.cs" />
+    <Compile Include="Controls\Skills\SkillControlBase.cs" />
+    <Compile Include="Controls\Classes\Elements\SorcererElementsControl.xaml.cs">
       <DependentUpon>SorcererElementsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SquareFixedSkillControl.xaml.cs">
+    <Compile Include="Controls\Skills\SquareFixedSkillControl.xaml.cs">
       <DependentUpon>SquareFixedSkillControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SquareSkillIconControl.xaml.cs">
-      <DependentUpon>SquareSkillIconControl.xaml</DependentUpon>
+    <Compile Include="Controls\Skills\SquareSkillControl.xaml.cs">
+      <DependentUpon>SquareSkillControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossHPbarColorConverter.cs" />
     <Compile Include="Converters\AggroTypeToFillConverter.cs" />
     <Compile Include="Converters\EntityIdToNameConverter.cs" />
     <Compile Include="Converters\DurationLabelConverter.cs" />
     <Compile Include="Converters\DurationToVisibilityConverter.cs" />
-    <Compile Include="Controls\RoundAbnormalityIndicator.cs" />
     <Compile Include="Converters\HPbarColorConverter2.cs" />
     <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelSizeConverter.cs" />
     <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
     <Compile Include="Converters\AbnormalityTypeToColorConverter.cs" />
-    <Compile Include="Controls\SquareAbnormalityIndicator.xaml.cs">
+    <Compile Include="Controls\Abnormalities\SquareAbnormalityIndicator.xaml.cs">
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Data\ClassPositions.cs" />
+    <Compile Include="Data\Cooldown.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MoongourdEncounter.cs" />
     <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
@@ -139,68 +142,67 @@
     <Compile Include="ClassSpecific\SlayerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\SorcererAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ValkyrieAbnormalityTracker.cs" />
-    <Compile Include="Controls\ChatControls\EmojiMessagePiece.xaml.cs">
+    <Compile Include="Controls\Chat\EmojiMessagePiece.xaml.cs">
       <DependentUpon>EmojiMessagePiece.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\EmojiNameToImageConverter.cs" />
-    <Compile Include="Controls\ClassBars\ArcherStanceToColorConverter.cs" />
-    <Compile Include="Controls\ClassBars\EdgeArrowLayout.xaml.cs">
+    <Compile Include="Converters\EmojiNameToImageConverter.cs" />
+    <Compile Include="Controls\Classes\Elements\EdgeArrowLayout.xaml.cs">
       <DependentUpon>EdgeArrowLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\EdgeBarLayout.xaml.cs">
+    <Compile Include="Controls\Classes\Elements\EdgeBarLayout.xaml.cs">
       <DependentUpon>EdgeBarLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\WarriorStanceToColorConverter.cs" />
-    <Compile Include="Controls\RhombBuffCooldownControl.xaml.cs">
-      <DependentUpon>RhombBuffCooldownControl.xaml</DependentUpon>
+    <Compile Include="Converters\WarriorStanceToColorConverter.cs" />
+    <Compile Include="Controls\Skills\RhombSkillEffectControl.xaml.cs">
+      <DependentUpon>RhombSkillEffectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\ChannelSetting.xaml.cs">
+    <Compile Include="Controls\Chat\ChannelSetting.xaml.cs">
       <DependentUpon>ChannelSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
+    <Compile Include="Controls\Chat\DefaultMessageBody.xaml.cs">
       <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\MoongourdPopup.xaml.cs">
+    <Compile Include="Controls\Chat\MoongourdPopup.xaml.cs">
       <DependentUpon>MoongourdPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\TabSettingControl.xaml.cs">
+    <Compile Include="Controls\Chat\TabSettingControl.xaml.cs">
       <DependentUpon>TabSettingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DungeonInfoControl.xaml.cs">
+    <Compile Include="Controls\Dashboard\DungeonInfoControl.xaml.cs">
       <DependentUpon>DungeonInfoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EventControl.xaml.cs">
+    <Compile Include="Controls\Dashboard\EventControl.xaml.cs">
       <DependentUpon>EventControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FieldSetting.xaml.cs">
+    <Compile Include="Controls\Settings\FieldSetting.xaml.cs">
       <DependentUpon>FieldSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GearItemControl.xaml.cs">
+    <Compile Include="Controls\Dashboard\GearItemControl.xaml.cs">
       <DependentUpon>GearItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GuildTowerControl.xaml.cs">
+    <Compile Include="Controls\Npc\GuildTowerControl.xaml.cs">
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OutlineText.cs" />
-    <Compile Include="Controls\RhombFixedSkillCooldown.xaml.cs">
-      <DependentUpon>RhombFixedSkillCooldown.xaml</DependentUpon>
+    <Compile Include="Controls\Skills\RhombFixedSkillControl.xaml.cs">
+      <DependentUpon>RhombFixedSkillControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Ripple.xaml.cs">
       <DependentUpon>Ripple.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SelectionSetting.xaml.cs">
+    <Compile Include="Controls\Settings\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TimelineControl.xaml.cs">
+    <Compile Include="Controls\Dashboard\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TimeMarkerControl.xaml.cs">
+    <Compile Include="Controls\Dashboard\TimeMarkerControl.xaml.cs">
       <DependentUpon>TimeMarkerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TimeSeparator.xaml.cs">
+    <Compile Include="Controls\Dashboard\TimeSeparator.xaml.cs">
       <DependentUpon>TimeSeparator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VanguardInfoControl.xaml.cs">
+    <Compile Include="Controls\Dashboard\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
@@ -215,46 +217,46 @@
     <Compile Include="Converters\GearLevelToFactorConverter.cs" />
     <Compile Include="Converters\GuardianPointsStringConverter.cs" />
     <Compile Include="Converters\IconConverter.cs" />
-    <Compile Include="Controls\ChatControls\ApplyBody.xaml.cs">
+    <Compile Include="Controls\Chat\ApplyBody.xaml.cs">
       <DependentUpon>ApplyBody.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\BrokerOfferBody.xaml.cs">
+    <Compile Include="Controls\Chat\BrokerOfferBody.xaml.cs">
       <DependentUpon>BrokerOfferBody.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\ChatMessageControl.xaml.cs">
+    <Compile Include="Controls\Chat\ChatMessageControl.xaml.cs">
       <DependentUpon>ChatMessageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\ChatMessageHeader.xaml.cs">
+    <Compile Include="Controls\Chat\ChatMessageHeader.xaml.cs">
       <DependentUpon>ChatMessageHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\FriendMessageDialog.xaml.cs">
+    <Compile Include="Controls\Chat\FriendMessageDialog.xaml.cs">
       <DependentUpon>FriendMessageDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\LFGcontrol.xaml.cs">
+    <Compile Include="Controls\Chat\LFGcontrol.xaml.cs">
       <DependentUpon>LFGcontrol.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
+    <Compile Include="Controls\Chat\PlayerTooltip.xaml.cs">
       <DependentUpon>PlayerTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DefaultEnemyWindowLayout.xaml.cs">
+    <Compile Include="Controls\Npc\DefaultEnemyWindowLayout.xaml.cs">
       <DependentUpon>DefaultEnemyWindowLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DragonControl.xaml.cs">
+    <Compile Include="Controls\Npc\DragonControl.xaml.cs">
       <DependentUpon>DragonControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Phase1BossControl.xaml.cs">
+    <Compile Include="Controls\Npc\Phase1BossControl.xaml.cs">
       <DependentUpon>Phase1BossControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Phase2BallistaBossControl.xaml.cs">
+    <Compile Include="Controls\Npc\Phase2BallistaBossControl.xaml.cs">
       <DependentUpon>Phase2BallistaBossControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Phase2BossControl.xaml.cs">
+    <Compile Include="Controls\Npc\Phase2BossControl.xaml.cs">
       <DependentUpon>Phase2BossControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Phase3BossControl.xaml.cs">
+    <Compile Include="Controls\Npc\Phase3BossControl.xaml.cs">
       <DependentUpon>Phase3BossControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Phase4BossControl.xaml.cs">
+    <Compile Include="Controls\Npc\Phase4BossControl.xaml.cs">
       <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\LfgVmToButtonLabelConverter.cs" />
@@ -265,7 +267,7 @@
     <Compile Include="Converters\ReadyToColorConverter.cs" />
     <Compile Include="Converters\ReadyToIconConverter.cs" />
     <Compile Include="Converters\ReadyToOpacityConverter.cs" />
-    <Compile Include="Controls\SmallMobControl.xaml.cs">
+    <Compile Include="Controls\Npc\SmallMobControl.xaml.cs">
       <DependentUpon>SmallMobControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CooldownWindowModeToTemplateConverter.cs" />
@@ -361,49 +363,49 @@
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessagePieceDataTemplateSelector.cs" />
-    <Compile Include="Controls\ClassBars\BerserkerBar.xaml.cs">
+    <Compile Include="Controls\Classes\BerserkerBar.xaml.cs">
       <DependentUpon>BerserkerBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\BrawlerBar.xaml.cs">
+    <Compile Include="Controls\Classes\BrawlerBar.xaml.cs">
       <DependentUpon>BrawlerBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
+    <Compile Include="Controls\Classes\ArcherBar.xaml.cs">
       <DependentUpon>ArcherBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MysticAurasIndicator.xaml.cs">
+    <Compile Include="Controls\Classes\Elements\MysticAurasIndicator.xaml.cs">
       <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RagnarokBuffControl.xaml.cs">
+    <Compile Include="Controls\Classes\Elements\RagnarokBuffControl.xaml.cs">
       <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FixedSkillContainers.xaml.cs">
+    <Compile Include="Controls\Skills\FixedSkillContainers.xaml.cs">
       <DependentUpon>FixedSkillContainers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FixedSkillControl.xaml.cs">
-      <DependentUpon>FixedSkillControl.xaml</DependentUpon>
+    <Compile Include="Controls\Skills\RoundFixedSkillControl.xaml.cs">
+      <DependentUpon>RoundFixedSkillControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\GunnerBar.xaml.cs">
+    <Compile Include="Controls\Classes\GunnerBar.xaml.cs">
       <DependentUpon>GunnerBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\LancerBar.xaml.cs">
+    <Compile Include="Controls\Classes\LancerBar.xaml.cs">
       <DependentUpon>LancerBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BuffCooldownControl.xaml.cs">
-      <DependentUpon>BuffCooldownControl.xaml</DependentUpon>
+    <Compile Include="Controls\Skills\RoundSkillEffectControl.xaml.cs">
+      <DependentUpon>RoundSkillEffectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\NinjaBar.xaml.cs">
+    <Compile Include="Controls\Classes\NinjaBar.xaml.cs">
       <DependentUpon>NinjaBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\PriestBar.xaml.cs">
+    <Compile Include="Controls\Classes\PriestBar.xaml.cs">
       <DependentUpon>PriestBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\ReaperBar.xaml.cs">
+    <Compile Include="Controls\Classes\ReaperBar.xaml.cs">
       <DependentUpon>ReaperBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\SlayerBar.xaml.cs">
+    <Compile Include="Controls\Classes\SlayerBar.xaml.cs">
       <DependentUpon>SlayerBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\SorcererBar.xaml.cs">
+    <Compile Include="Controls\Classes\SorcererBar.xaml.cs">
       <DependentUpon>SorcererBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\RollToStringConverter.cs" />
@@ -492,16 +494,16 @@
     <Compile Include="Tera.Data\TeraData.cs" />
     <Compile Include="Tera.Data\WindowData.cs" />
     <Compile Include="Data\AbnormalityDuration.cs" />
-    <Compile Include="Controls\RoundAbnormalityIndicator.xaml.cs">
+    <Compile Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml.cs">
       <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
+    <Compile Include="Controls\Abnormalities\AbnormalityTooltip.xaml.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BoolSetting.xaml.cs">
+    <Compile Include="Controls\Settings\BoolSetting.xaml.cs">
       <DependentUpon>BoolSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BossGage.xaml.cs">
+    <Compile Include="Controls\Npc\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClassSpecific\MysticAbnormalityTracker.cs" />
@@ -516,13 +518,13 @@
     <Compile Include="Controls\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PartyMember.xaml.cs">
+    <Compile Include="Controls\Group\PartyMember.xaml.cs">
       <DependentUpon>PartyMember.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RaidMember.xaml.cs">
+    <Compile Include="Controls\Group\RaidMember.xaml.cs">
       <DependentUpon>RaidMember.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ValueSetting.xaml.cs">
+    <Compile Include="Controls\Settings\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="TeraCommon\Game\Abnormality\Abnormality.cs" />
@@ -695,14 +697,14 @@
     <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
     <Compile Include="WindowSettings.cs" />
-    <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\BossGageWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\BossGageWindow.xaml.cs">
       <DependentUpon>BossGageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateSelectors\ChannelLabelDataTemplateSelector.cs" />
-    <Compile Include="Windows\CharacterWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\CharacterWindow.xaml.cs">
       <DependentUpon>CharacterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parsing\Messages\S_CREATURE_CHANGE_HP.cs" />
@@ -713,16 +715,16 @@
     <Compile Include="Converters\CombatToColorConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
-    <Compile Include="Controls\EdgeControl.xaml.cs">
+    <Compile Include="Controls\Classes\Elements\EdgeControl.xaml.cs">
       <DependentUpon>EdgeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Counter.cs" />
     <Compile Include="Data\StatTracker.cs" />
     <Compile Include="ViewModels\ClassManagers\WarriorBarManager.cs" />
-    <Compile Include="Controls\RunemarksControl.xaml.cs">
+    <Compile Include="Controls\Classes\Elements\RunemarksControl.xaml.cs">
       <DependentUpon>RunemarksControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\ValkyrieBar.xaml.cs">
+    <Compile Include="Controls\Classes\ValkyrieBar.xaml.cs">
       <DependentUpon>ValkyrieBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ChatChannelNameConverter.cs" />
@@ -730,28 +732,28 @@
     <Compile Include="Windows\ChatSettingsWindow.xaml.cs">
       <DependentUpon>ChatSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ChatWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ClassToFillConverter.cs" />
-    <Compile Include="Windows\CivilUnrestWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\CivilUnrestWindow.xaml.cs">
       <DependentUpon>CivilUnrestWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ClassWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\FixedSkillCooldown.cs" />
     <Compile Include="ViewModels\ClassManagers\ValkyrieBarManager.cs" />
-    <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
+    <Compile Include="Controls\Classes\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\FlightDurationWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\FloatingButtonWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\FloatingButtonWindow.xaml.cs">
       <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GroupAbnormalConfigWindow.xaml.cs">
@@ -759,16 +761,16 @@
     </Compile>
     <Compile Include="ViewModels\GroupConfigVM.cs" />
     <Compile Include="ViewModels\GroupAbnormalityVM.cs" />
-    <Compile Include="Windows\GroupWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\MysticBar.xaml.cs">
+    <Compile Include="Controls\Classes\MysticBar.xaml.cs">
       <DependentUpon>MysticBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NormalSkillContainer.xaml.cs">
+    <Compile Include="Controls\Skills\NormalSkillContainer.xaml.cs">
       <DependentUpon>NormalSkillContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\MessagePieceControl.xaml.cs">
+    <Compile Include="Controls\Chat\MessagePieceControl.xaml.cs">
       <DependentUpon>MessagePieceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\MentionToColorConverter.cs" />
@@ -794,8 +796,8 @@
     <Compile Include="Parsing\Messages\S_PLAYER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_START_COOLTIME_ITEM.cs" />
     <Compile Include="Data\Skill.cs" />
-    <Compile Include="Controls\SkillIconControl.xaml.cs">
-      <DependentUpon>SkillIconControl.xaml</DependentUpon>
+    <Compile Include="Controls\Skills\RoundSkillControl.xaml.cs">
+      <DependentUpon>RoundSkillControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SkillManager.cs" />
     <Compile Include="Data\Databases\SkillsDatabase.cs" />
@@ -812,157 +814,157 @@
       <DependentUpon>TccMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TccWindow.cs" />
-    <Compile Include="Controls\ChatControls\MoneyMessagePiece.xaml.cs">
+    <Compile Include="Controls\Chat\MoneyMessagePiece.xaml.cs">
       <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WindowButtons.xaml.cs">
       <DependentUpon>WindowButtons.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\RoundAbnormalityIndicator.xaml">
+    <Page Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AbnormalityTooltip.xaml">
+    <Page Include="Controls\Abnormalities\AbnormalityTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\EmojiMessagePiece.xaml">
+    <Page Include="Controls\Chat\EmojiMessagePiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\EdgeArrowLayout.xaml">
+    <Page Include="Controls\Classes\Elements\EdgeArrowLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\EdgeBarLayout.xaml">
+    <Page Include="Controls\Classes\Elements\EdgeBarLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RhombBuffCooldownControl.xaml">
+    <Page Include="Controls\Skills\RhombSkillEffectControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ChatControls\ApplyBody.xaml">
+    <Page Include="Controls\Chat\ApplyBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\BrokerOfferBody.xaml">
+    <Page Include="Controls\Chat\BrokerOfferBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\ChannelSetting.xaml">
+    <Page Include="Controls\Chat\ChannelSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\ChatMessageControl.xaml">
+    <Page Include="Controls\Chat\ChatMessageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\ChatMessageHeader.xaml">
+    <Page Include="Controls\Chat\ChatMessageHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\DefaultMessageBody.xaml">
+    <Page Include="Controls\Chat\DefaultMessageBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\FriendMessageDialog.xaml">
+    <Page Include="Controls\Chat\FriendMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\LFGcontrol.xaml">
+    <Page Include="Controls\Chat\LFGcontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\MoongourdPopup.xaml">
+    <Page Include="Controls\Chat\MoongourdPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\PlayerTooltip.xaml">
+    <Page Include="Controls\Chat\PlayerTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\TabSettingControl.xaml">
+    <Page Include="Controls\Chat\TabSettingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\BerserkerBar.xaml">
+    <Page Include="Controls\Classes\BerserkerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\BrawlerBar.xaml">
+    <Page Include="Controls\Classes\BrawlerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\ArcherBar.xaml">
+    <Page Include="Controls\Classes\ArcherBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BoolSetting.xaml">
+    <Page Include="Controls\Settings\BoolSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BossGage.xaml">
+    <Page Include="Controls\Npc\BossGage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DefaultEnemyWindowLayout.xaml">
+    <Page Include="Controls\Npc\DefaultEnemyWindowLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DragonControl.xaml">
+    <Page Include="Controls\Npc\DragonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DungeonInfoControl.xaml">
+    <Page Include="Controls\Dashboard\DungeonInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EventControl.xaml">
+    <Page Include="Controls\Dashboard\EventControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FieldSetting.xaml">
+    <Page Include="Controls\Settings\FieldSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GearItemControl.xaml">
+    <Page Include="Controls\Dashboard\GearItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GuildTowerControl.xaml">
+    <Page Include="Controls\Npc\GuildTowerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MysticAurasIndicator.xaml">
+    <Page Include="Controls\Classes\Elements\MysticAurasIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Phase1BossControl.xaml">
+    <Page Include="Controls\Npc\Phase1BossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Phase2BallistaBossControl.xaml">
+    <Page Include="Controls\Npc\Phase2BallistaBossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Phase2BossControl.xaml">
+    <Page Include="Controls\Npc\Phase2BossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Phase3BossControl.xaml">
+    <Page Include="Controls\Npc\Phase3BossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Phase4BossControl.xaml">
+    <Page Include="Controls\Npc\Phase4BossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RagnarokBuffControl.xaml">
+    <Page Include="Controls\Classes\Elements\RagnarokBuffControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RhombFixedSkillCooldown.xaml">
+    <Page Include="Controls\Skills\RhombFixedSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -970,27 +972,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SelectionSetting.xaml">
+    <Page Include="Controls\Settings\SelectionSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SmallMobControl.xaml">
+    <Page Include="Controls\Npc\SmallMobControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SorcererElementsControl.xaml">
+    <Page Include="Controls\Classes\Elements\SorcererElementsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SquareAbnormalityIndicator.xaml">
+    <Page Include="Controls\Abnormalities\SquareAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FixedSkillContainers.xaml">
+    <Page Include="Controls\Skills\FixedSkillContainers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FixedSkillControl.xaml">
+    <Page Include="Controls\Skills\RoundFixedSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -998,15 +1000,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ClassBars\GunnerBar.xaml">
+    <Page Include="Controls\Classes\GunnerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\LancerBar.xaml">
+    <Page Include="Controls\Classes\LancerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BuffCooldownControl.xaml">
+    <Page Include="Controls\Skills\RoundSkillEffectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1014,59 +1016,59 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\NinjaBar.xaml">
+    <Page Include="Controls\Classes\NinjaBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PartyMember.xaml">
+    <Page Include="Controls\Group\PartyMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\PriestBar.xaml">
+    <Page Include="Controls\Classes\PriestBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RaidMember.xaml">
+    <Page Include="Controls\Group\RaidMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\ReaperBar.xaml">
+    <Page Include="Controls\Classes\ReaperBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\SlayerBar.xaml">
+    <Page Include="Controls\Classes\SlayerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\SorcererBar.xaml">
+    <Page Include="Controls\Classes\SorcererBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SquareFixedSkillControl.xaml">
+    <Page Include="Controls\Skills\SquareFixedSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SquareSkillIconControl.xaml">
+    <Page Include="Controls\Skills\SquareSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TimelineControl.xaml">
+    <Page Include="Controls\Dashboard\TimelineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TimeMarkerControl.xaml">
+    <Page Include="Controls\Dashboard\TimeMarkerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TimeSeparator.xaml">
+    <Page Include="Controls\Dashboard\TimeSeparator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ValueSetting.xaml">
+    <Page Include="Controls\Settings\ValueSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\VanguardInfoControl.xaml">
+    <Page Include="Controls\Dashboard\VanguardInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1110,15 +1112,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AbnormalitiesWindow.xaml">
+    <Page Include="Windows\Widgets\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\BossGageWindow.xaml">
+    <Page Include="Windows\Widgets\BossGageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\CharacterWindow.xaml">
+    <Page Include="Windows\Widgets\CharacterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1126,35 +1128,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ChatWindow.xaml">
+    <Page Include="Windows\Widgets\ChatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\CivilUnrestWindow.xaml">
+    <Page Include="Windows\Widgets\CivilUnrestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassWindow.xaml">
+    <Page Include="Windows\Widgets\ClassWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EdgeControl.xaml">
+    <Page Include="Controls\Classes\Elements\EdgeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RunemarksControl.xaml">
+    <Page Include="Controls\Classes\Elements\RunemarksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\ValkyrieBar.xaml">
+    <Page Include="Controls\Classes\ValkyrieBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\WarriorBar.xaml">
+    <Page Include="Controls\Classes\WarriorBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\CooldownWindow.xaml">
+    <Page Include="Windows\Widgets\CooldownWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1163,7 +1165,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Parsing\CustomReader.cs" />
-    <Compile Include="Windows\CooldownWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\CooldownWindow.xaml.cs">
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -1171,11 +1173,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\FlightDurationWindow.xaml">
+    <Page Include="Windows\Widgets\FlightDurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\FloatingButtonWindow.xaml">
+    <Page Include="Windows\Widgets\FloatingButtonWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1183,19 +1185,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\GroupWindow.xaml">
+    <Page Include="Windows\Widgets\GroupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\MysticBar.xaml">
+    <Page Include="Controls\Classes\MysticBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\NormalSkillContainer.xaml">
+    <Page Include="Controls\Skills\NormalSkillContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\MessagePieceControl.xaml">
+    <Page Include="Controls\Chat\MessagePieceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1211,11 +1213,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SkillIconControl.xaml">
+    <Page Include="Controls\Skills\RoundSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\MoneyMessagePiece.xaml">
+    <Page Include="Controls\Chat\MoneyMessagePiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

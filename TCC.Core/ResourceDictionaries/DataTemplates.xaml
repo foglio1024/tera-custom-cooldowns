@@ -3,55 +3,59 @@
                     xmlns:ctrl="clr-namespace:TCC.Controls"
                     xmlns:data="clr-namespace:TCC.Data"
                     xmlns:vm="clr-namespace:TCC.ViewModels"
-                    xmlns:chatCtrl="clr-namespace:TCC.Controls.ChatControls"
-                    xmlns:tcc="clr-namespace:TCC">
+                    xmlns:chatCtrl="clr-namespace:TCC.Controls.Chat"
+                    xmlns:tcc="clr-namespace:TCC"
+                    xmlns:abnormalities="clr-namespace:TCC.Controls.Abnormalities"
+                    xmlns:group="clr-namespace:TCC.Controls.Group"
+                    xmlns:skills="clr-namespace:TCC.Controls.Skills"
+                    xmlns:npc="clr-namespace:TCC.Controls.Npc">
     <DataTemplate x:Key="RoundNormalSkill">
-        <ctrl:SkillIconControl />
+        <skills:RoundSkillControl />
     </DataTemplate>
     <DataTemplate x:Key="SquareNormalSkill">
-        <ctrl:SquareSkillIconControl Margin="-2 -2 -2 0"/>
+        <skills:SquareSkillControl Margin="-2 -2 -2 0"/>
     </DataTemplate>
     <DataTemplate x:Key="RoundFixedSkill">
-        <ctrl:FixedSkillControl/>
+        <skills:RoundFixedSkillControl/>
     </DataTemplate>
     <DataTemplate x:Key="SquareFixedSkill">
-        <ctrl:SquareFixedSkillControl/>
+        <skills:SquareFixedSkillControl/>
     </DataTemplate>
     <DataTemplate x:Key="SquareAbnormality">
-        <ctrl:SquareAbnormalityIndicator HorizontalAlignment="Right" Size="32">
-            <ctrl:SquareAbnormalityIndicator.Resources>
+        <abnormalities:SquareAbnormalityIndicator HorizontalAlignment="Right" Size="32">
+            <abnormalities:SquareAbnormalityIndicator.Resources>
                 <Style TargetType="{x:Type Path}">
                     <Setter Property="FlowDirection" Value="RightToLeft"/>
                 </Style>
-            </ctrl:SquareAbnormalityIndicator.Resources>
-        </ctrl:SquareAbnormalityIndicator>
+            </abnormalities:SquareAbnormalityIndicator.Resources>
+        </abnormalities:SquareAbnormalityIndicator>
     </DataTemplate>
     <DataTemplate x:Key="RoundAbnormality">
-        <ctrl:RoundAbnormalityIndicator HorizontalAlignment="Right" Size="32">
-            <ctrl:RoundAbnormalityIndicator.Resources>
+        <abnormalities:RoundAbnormalityIndicator HorizontalAlignment="Right" Size="32">
+            <abnormalities:RoundAbnormalityIndicator.Resources>
                 <Style TargetType="{x:Type Path}">
                     <Setter Property="FlowDirection" Value="RightToLeft"/>
                 </Style>
-            </ctrl:RoundAbnormalityIndicator.Resources>
-        </ctrl:RoundAbnormalityIndicator>
+            </abnormalities:RoundAbnormalityIndicator.Resources>
+        </abnormalities:RoundAbnormalityIndicator>
     </DataTemplate>
     <DataTemplate x:Key="RoundPartyAbnormality">
-        <ctrl:RoundAbnormalityIndicator Size="28" DataContext="{Binding}"/>
+        <abnormalities:RoundAbnormalityIndicator Size="28" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SquarePartyAbnormality">
-        <ctrl:SquareAbnormalityIndicator Size="28" DataContext="{Binding}"/>
+        <abnormalities:SquareAbnormalityIndicator Size="28" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="RoundRaidAbnormality">
-        <ctrl:RoundAbnormalityIndicator Size="20" DataContext="{Binding}"/>
+        <abnormalities:RoundAbnormalityIndicator Size="20" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SquareRaidAbnormality">
-        <ctrl:SquareAbnormalityIndicator Size="20" DataContext="{Binding}"/>
+        <abnormalities:SquareAbnormalityIndicator Size="20" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="RoundBossAbnormality">
-        <ctrl:RoundAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}"/>
+        <abnormalities:RoundAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SquareBossAbnormality">
-        <ctrl:SquareAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}"/>
+        <abnormalities:SquareAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Key="SkillDataTemplate" DataType="data:Skill">
         <Grid>
@@ -121,7 +125,7 @@
             <Grid.ToolTip>
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
                     <Grid>
-                        <ctrl:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
+                        <abnormalities:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
                                                                     AbnormalityToolTip="{Binding Abnormality.ToolTip}"
                                                                     Id="{Binding Abnormality.Id}"/>
                     </Grid>
@@ -169,7 +173,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="FixedSkillDataTemplateForConfig" DataType="data:FixedSkillCooldown">
+    <DataTemplate x:Key="FixedSkillDataTemplateForConfig" DataType="data:Cooldown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -335,49 +339,49 @@
 
     <!--NPC templates-->
     <DataTemplate x:Key="BossDataTemplate">
-        <ctrl:BossGage/>
+        <npc:BossGage/>
     </DataTemplate>
     <DataTemplate x:Key="MobDataTemplate">
-        <ctrl:SmallMobControl/>
+        <npc:SmallMobControl/>
     </DataTemplate>
     <DataTemplate x:Key="GuildTowerTemplate">
-        <ctrl:GuildTowerControl/>
+        <npc:GuildTowerControl/>
     </DataTemplate>
 
     <DataTemplate x:Key="DefaultEnemyWindowLayout">
-        <ctrl:DefaultEnemyWindowLayout/>
+        <npc:DefaultEnemyWindowLayout/>
     </DataTemplate>
     <DataTemplate x:Key="Phase1EnemyWindowLayout">
-        <ctrl:Phase1BossControl />
+        <npc:Phase1BossControl />
     </DataTemplate>
     <DataTemplate x:Key="Phase2EnemyWindowLayout">
-        <ctrl:Phase2BossControl />
+        <npc:Phase2BossControl />
     </DataTemplate>
     <DataTemplate x:Key="Phase2BEnemyWindowLayout">
-        <ctrl:Phase2BallistaBossControl />
+        <npc:Phase2BallistaBossControl />
     </DataTemplate>
     <DataTemplate x:Key="Phase3EnemyWindowLayout">
-        <ctrl:Phase3BossControl />
+        <npc:Phase3BossControl />
     </DataTemplate>
     <DataTemplate x:Key="Phase4EnemyWindowLayout">
-        <ctrl:Phase4BossControl />
+        <npc:Phase4BossControl />
     </DataTemplate>
     <DataTemplate x:Key="DragonIndicator">
-        <ctrl:DragonControl />
+        <npc:DragonControl />
     </DataTemplate>
 
     <DataTemplate x:Key="PartyDataTemplate">
-        <ctrl:PartyMember />
+        <group:PartyMember />
     </DataTemplate>
     <DataTemplate x:Key="RaidDataTemplate" >
-        <ctrl:RaidMember/>
+        <group:RaidMember/>
     </DataTemplate>
 
     <DataTemplate x:Key="FixedCooldownTemplate">
-        <ctrl:FixedSkillContainers/>
+        <skills:FixedSkillContainers/>
     </DataTemplate>
     <DataTemplate x:Key="NormalCooldownTemplate">
-        <ctrl:NormalSkillContainer/>
+        <skills:NormalSkillContainer/>
     </DataTemplate>
     <DataTemplate x:Key="TabSettingsTemplate">
         <chatCtrl:TabSettingControl/>

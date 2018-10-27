@@ -1,11 +1,11 @@
 ﻿<Window x:Class="TCC.Windows.InfoWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:TCC.ViewModels"
-        xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
         xmlns:data="clr-namespace:TCC.Data"
+        xmlns:viewmodels="clr-namespace:TCC.ViewModels"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
         Title="InfoWindow"
@@ -17,7 +17,7 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate x:Key="Vang">
-            <controls:VanguardInfoControl />
+            <dashboard:VanguardInfoControl />
         </DataTemplate>
         <DataTemplate x:Key="Dngs" DataType="data:DungeonCooldown">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -54,7 +54,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="Gear">
-            <controls:GearItemControl />
+            <dashboard:GearItemControl />
         </DataTemplate>
     </Window.Resources>
     <WindowChrome.WindowChrome>
@@ -165,7 +165,7 @@
             </Grid>
             <Border BorderBrush="#1999" BorderThickness="1 0 1 0" Grid.Column="1" />
             <!--Timeline-->
-            <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="3" Grid.Row="2"
+            <dashboard:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="3" Grid.Row="2"
                                       HorizontalAlignment="Center" Margin="15,10,15,30" />
 
             <!--Gear-->

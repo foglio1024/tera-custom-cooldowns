@@ -9,7 +9,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing.Messages;
-using TCC.Windows;
+using TCC.Windows.Widgets;
 
 namespace TCC.ViewModels
 {

@@ -6,7 +6,9 @@
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:tcc="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:controls="clr-namespace:TCC.Controls" Style="{StaticResource BaseWindowStyle}"
+        xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:settings="clr-namespace:TCC.Controls.Settings"
+        Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="LfgListWindow" Height="800"
         WindowStartupLocation="CenterScreen">
@@ -501,7 +503,7 @@
                              Text="{Binding NewMessage, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                     <Grid Grid.Column="1" ClipToBounds="True" Margin="0 5">
-                        <controls:BoolSetting Margin="-40 -4 -8 -4" SettingName="Raid" HorizontalAlignment="Right"
+                        <settings:BoolSetting Margin="-40 -4 -8 -4" SettingName="Raid" HorizontalAlignment="Right"
                                               VerticalContentAlignment="Center" x:Name="RaidSwitch" />
                     </Grid>
                     <Grid.LayoutTransform>
