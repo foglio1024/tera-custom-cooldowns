@@ -66,7 +66,7 @@ namespace TCC.ViewModels
                 list.Add(sk);
                 return;
             }
-            if(existing.Mode == CooldownMode.Pre && sk.Mode== CooldownMode.Normal) existing.Start(sk.Duration,sk.Mode);
+            if(existing.Mode == CooldownMode.Pre && sk.Mode== CooldownMode.Normal) existing.Start(sk);
             else existing.Refresh(sk.Skill.Id, sk.Duration);
         }
 
@@ -235,13 +235,13 @@ namespace TCC.ViewModels
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                skill.Start(sk.Duration, sk.Mode);
+                skill.Start(sk);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                skill.Start(sk.Duration, sk.Mode);
+                skill.Start(sk);
                 return;
             }
 

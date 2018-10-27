@@ -79,7 +79,7 @@ namespace TCC.Data.Skills
         public Cooldown(Skill sk, ulong cooldown,  CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal) : this(sk, false, type)
         {
             if (cooldown == 0) return;
-
+            if (type == CooldownType.Item) cooldown = cooldown * 1000;
             Start(cooldown, mode);
         }
         private void OnCombatStatusChanged()
@@ -114,7 +114,15 @@ namespace TCC.Data.Skills
         // methods
         public void Start(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
-            if (cd >= Int32.MaxValue) return;
+            Duration = cd;
+            OriginalDuration = cd;
+            Seconds = Duration / 1000;
+            Mode = mode;
+            Start(this);
+        }
+        public void Start(Cooldown sk)
+        {
+            if (sk.Duration >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
                 if (Mode == CooldownMode.Pre)
@@ -129,11 +137,10 @@ namespace TCC.Data.Skills
                 }
             }
 
-            Mode = mode;
-
-            Seconds = CooldownType== CooldownType.Item && IsAvailable? cd : cd / 1000;
-            Duration = CooldownType == CooldownType.Item && IsAvailable ? cd*1000 : cd;
-            OriginalDuration = CooldownType == CooldownType.Item && IsAvailable ? cd * 1000 : cd; 
+            Mode = sk.Mode;
+            Seconds = sk.Seconds;
+            Duration = sk.Duration;
+            OriginalDuration = sk.OriginalDuration;
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(Duration);
             _mainTimer.Start();
