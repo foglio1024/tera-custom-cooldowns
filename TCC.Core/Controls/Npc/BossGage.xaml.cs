@@ -10,7 +10,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.Npc
 {
     /// <inheritdoc cref="UserControl" />
     /// <summary>
@@ -49,7 +49,7 @@ namespace TCC.Controls
             }
         }
 
-        private Npc Npc => DataContext as Npc;
+        private Data.Npc Npc => DataContext as Data.Npc;
         private float _maxHp;
         private float _currentHp;
         private bool _enraged;
@@ -107,7 +107,7 @@ namespace TCC.Controls
                 }
                 else
                 {
-                    switch (Settings.EnrageLabelMode)
+                    switch (TCC.Settings.EnrageLabelMode)
                     {
                         case EnrageLabelMode.Next:
                             return $"{NextEnragePercentage:0.#}%";
@@ -177,7 +177,7 @@ namespace TCC.Controls
             switch (e.PropertyName)
             {
                 case "CurrentHP":
-                    _currentHp = ((Npc)sender).CurrentHP;
+                    _currentHp = ((Data.Npc)sender).CurrentHP;
                     if (_currentHp > _maxHp) _maxHp = _currentHp;
                     DoubleAnimation.To = ValueToLength(_currentHp, _maxHp);
                     AnimateHp();
@@ -196,11 +196,11 @@ namespace TCC.Controls
 
                     break;
                 case "MaxHP":
-                    _maxHp = ((Npc)sender).MaxHP;
+                    _maxHp = ((Data.Npc)sender).MaxHP;
                     if (Npc.CurrentFactor == 1) NextEnragePercentage = 100 - Npc.EnragePattern.Percentage;
                     break;
                 case "Enraged":
-                    var value = ((Npc)sender).Enraged;
+                    var value = ((Data.Npc)sender).Enraged;
                     if (_enraged == value) return;
                     _enraged = value;
                     if (_enraged)

@@ -1,4 +1,4 @@
-﻿namespace TCC.Controls
+﻿namespace TCC.Controls.Npc
 {
     /// <summary>
     /// Interaction logic for Phase1BossControl.xaml

@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="TCC.Controls.Phase4BossControl"
+﻿<UserControl x:Class="TCC.Controls.Npc.Phase2BossControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" Background="Transparent">
+             mc:Ignorable="d" >
     <Grid Width="Auto" Name="RootGrid" DataContext="{Binding Vergos}">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -83,7 +83,7 @@
                                Text="{Binding CurrentFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
-                <Grid Grid.Row="2" Margin="1,-2,1,1" Name="HpBarGrid" >
+                <Grid Grid.Row="2" Margin="1,-1,1,1" Name="HpBarGrid" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -113,17 +113,16 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Grid.CacheMode>
-                            <BitmapCache RenderAtScale="3"/>
-                        </Grid.CacheMode>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="1"/>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="3"/>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"/>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
-                        <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8"></Path>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="4"></Path>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,15,0" Grid.Column="1"></Path>
+
+                        <Border BorderThickness="0,0,.4,0" BorderBrush="#9000" Grid.Column="6"/>
+                        <Border BorderThickness=".4,0,.4,0" BorderBrush="#9000" Grid.Column="7"/>
+                        <Border BorderThickness=".4,0,.4,0" BorderBrush="#9000" Grid.Column="8"/>
+                        <Border BorderThickness=".4,0,0,0" BorderBrush="#9000" Grid.Column="9"/>
+
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="6"></Path>
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="7"></Path>
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8"></Path>
+                        <Rectangle Grid.ColumnSpan="6" Fill="#202027" ></Rectangle>
                     </Grid>
                 </Grid>
             </Grid>
@@ -138,5 +137,4 @@
             </ItemsControl>
         </Grid>
     </Grid>
-
 </UserControl>

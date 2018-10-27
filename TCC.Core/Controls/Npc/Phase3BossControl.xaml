@@ -1,13 +1,11 @@
-﻿<UserControl x:Class="TCC.Controls.Phase2BallistaBossControl"
+﻿<UserControl x:Class="TCC.Controls.Npc.Phase3BossControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:TCC.Controls"
-             mc:Ignorable="d"
-             Loaded="UserControl_Loaded">
-    <Grid Width="Auto" Name="RootGrid" DataContext="{Binding Vergos}"            
->
+             mc:Ignorable="d" >
+    <Grid Width="Auto" Name="RootGrid" DataContext="{Binding Vergos}">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -43,6 +41,22 @@
                                FontSize="15" 
                                Text="{Binding Name}" 
                                Grid.Row="0"/>
+                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}" Name="AggroArrow"
+                                 VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
+                                 Grid.Column="1" RenderTransformOrigin=".5,.5">
+                        <Polygon.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                    <TextBlock Name="AggroHolderNameTb" Style="{StaticResource DefaultTextStyle}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center" 
+                               FontWeight="Normal" 
+                               FontStretch="Condensed" 
+                               FontSize="13" 
+                               Text="{Binding Target, Converter={StaticResource Converters.EntityIdToName}}" 
+                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
+
                 </Grid>
 
                 <Grid Margin="5,2" Name="TopInfoGrid" Grid.Row="1" UseLayoutRounding="True">
@@ -69,7 +83,7 @@
                                Text="{Binding CurrentFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
-                <Grid Grid.Row="2" Margin="1,3,1,1" Name="HpBarGrid" >
+                <Grid Grid.Row="2" Margin="1,-2,1,1" Name="HpBarGrid" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -107,17 +121,22 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"/>
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
-                        <Rectangle Grid.ColumnSpan="4" Fill="#202027"></Rectangle>
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8"></Path>
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="6"></Path>
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="4"></Path>
+                        <Rectangle Grid.ColumnSpan="2" Fill="#202027"></Rectangle>
                     </Grid>
-
-                    <Path Fill="OrangeRed" Width="11" Stretch="Uniform" Height="8"  Data="M0,0 2,0 1,1 0,0" Name="EnrageEll" HorizontalAlignment="Left" Margin="155,-8,-5,-5">
-                        <Path.RenderTransform>
-                            <TranslateTransform X="240" Y="-5"></TranslateTransform>
-                        </Path.RenderTransform>
-                    </Path>
                 </Grid>
             </Grid>
         </Grid>
+        <Grid Grid.Row="1" Height="Auto" Margin="6,0,6,0" HorizontalAlignment="Left" Name="AbnormalitiesGrid">
+            <ItemsControl Name="Abnormalities" ItemTemplateSelector="{StaticResource BossAbnormalityTemplateSelector}" ItemsSource="{Binding Buffs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=MainBorder, Path=ActualWidth}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
     </Grid>
-
 </UserControl>

@@ -1,4 +1,4 @@
-﻿namespace TCC.Controls
+﻿namespace TCC.Controls.Npc
 {
     /// <summary>
     /// Logica di interazione per GuildTowerControl.xaml

@@ -7,10 +7,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Annotations;
-using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.Npc
 {
     /// <summary>
     /// Interaction logic for SmallMobControl.xaml
@@ -20,7 +19,7 @@ namespace TCC.Controls
         private const uint DeleteDelay = 0;
         private DispatcherTimer _t;
         private DoubleAnimation _hpAnim;
-        private Npc _dc;
+        private Data.Npc _dc;
         public SmallMobControl()
         {
             InitializeComponent();
@@ -29,7 +28,7 @@ namespace TCC.Controls
 
         private void SmallMobControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Npc)DataContext;
+            _dc = (Data.Npc)DataContext;
             _dc.DeleteEvent += Dc_DeleteEvent;
             _dc.PropertyChanged += OnDcPropertyChanged;
             _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(DeleteDelay) };
@@ -60,7 +59,7 @@ namespace TCC.Controls
 
         private void OnDcPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(Npc.CurrentFactor)) return;
+            if (e.PropertyName != nameof(Data.Npc.CurrentFactor)) return;
             if (Compact)
             {
                 _hpAnim.To = _dc.CurrentFactor * 359.9;
