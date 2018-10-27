@@ -156,6 +156,7 @@ namespace TCC.Windows.Widgets
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
                 }
+                RefreshTopmost();
                 NotificationContainer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
                     new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200))
                     {
