@@ -6,7 +6,7 @@ namespace TCC.ClassSpecific
 {
     public class LancerAbnormalityTracker : ClassAbnormalityTracker
     {
-        private static readonly uint[] ARushIDs = { 200700, 200701, 200731, 200732 };
+        private static readonly uint[] ARushIDs = { 200700, 200701, 200731 };
         private static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
         private static readonly uint LineHeldId = 201701;
 
