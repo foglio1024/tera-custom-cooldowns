@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using TCC.Data;
 
-namespace TCC.Controls
+namespace TCC.Controls.Dashboard
 {
     /// <summary>
     /// Logica di interazione per GearItemControl.xaml

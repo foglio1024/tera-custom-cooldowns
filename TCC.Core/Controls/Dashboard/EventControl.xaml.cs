@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace TCC.Controls
+namespace TCC.Controls.Dashboard
 {
     /// <summary>
     /// Interaction logic for EventControl.xaml

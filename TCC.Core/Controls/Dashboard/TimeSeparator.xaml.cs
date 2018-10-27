@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TCC.Controls
+namespace TCC.Controls.Dashboard
 {
     public partial class TimeSeparator 
     {

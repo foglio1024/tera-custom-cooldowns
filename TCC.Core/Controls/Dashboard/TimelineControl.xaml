@@ -1,18 +1,18 @@
-﻿<UserControl x:Class="TCC.Controls.TimelineControl"
+﻿<UserControl x:Class="TCC.Controls.Dashboard.TimelineControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Width="1000" d:DataContext="{d:DesignData InfoWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="TimeMarkerTemplate">
-            <local:TimeMarkerControl/>
+            <dashboard:TimeMarkerControl/>
         </DataTemplate>
         <DataTemplate x:Key="EventTemplate">
-            <local:EventControl />
+            <dashboard:EventControl />
         </DataTemplate>
         <DataTemplate x:Key="EventGroupTemplate" DataType="data:EventGroup">
             <Grid Margin="0">
@@ -92,30 +92,30 @@
           Margin="0,0,0,0" VerticalAlignment="Stretch">
 
         <UniformGrid Columns="24" Opacity="1">
-            <local:TimeSeparator TimeText="0:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="1:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="2:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="3:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="4:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="5:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="6:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="7:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="8:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="9:00" Borders="1,0,0,0"/>
-            <local:TimeSeparator TimeText="10:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="11:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="12:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="13:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="14:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="15:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="16:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="17:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="18:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="19:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="20:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="21:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="22:00" Borders="1,0,0,0" />
-            <local:TimeSeparator TimeText="23:00" Borders="1,0,1,0"/>
+            <dashboard:TimeSeparator TimeText="0:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="1:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="2:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="3:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="4:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="5:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="6:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="7:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="8:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="9:00" Borders="1,0,0,0"/>
+            <dashboard:TimeSeparator TimeText="10:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="11:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="12:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="13:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="14:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="15:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="16:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="17:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="18:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="19:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="20:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="21:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="22:00" Borders="1,0,0,0" />
+            <dashboard:TimeSeparator TimeText="23:00" Borders="1,0,1,0"/>
 
 
         </UniformGrid>

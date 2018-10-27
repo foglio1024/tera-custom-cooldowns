@@ -1,4 +1,4 @@
-﻿namespace TCC.Controls
+﻿namespace TCC.Controls.Dashboard
 {
     /// <summary>
     /// Interaction logic for TimelineControl.xaml

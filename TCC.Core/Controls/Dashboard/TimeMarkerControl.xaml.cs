@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.Dashboard
 {
     /// <summary>
     /// Interaction logic for TimeMarkerControl.xaml

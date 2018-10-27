@@ -7,7 +7,7 @@ using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.Dashboard
 {
     /// <summary>
     /// Interaction logic for VanguardInfoControl.xaml
