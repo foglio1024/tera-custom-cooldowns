@@ -1,19 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms.VisualStyles;
-using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Logica di interazione per DebugWindow.xaml
-    /// </summary>
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public sealed partial class DebugWindow : INotifyPropertyChanged
     {
         public DebugWindow()
