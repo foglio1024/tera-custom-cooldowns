@@ -169,5 +169,12 @@ namespace TCC.Windows
         {
             WindowManager.CivilUnrestWindow.ResetToCenter();
         }
+
+        //Add My Abnormals Setting by HQ ============================================================
+        private void ButtonMyBuffSettings_OnClick(object sender, RoutedEventArgs e)
+        {
+            WindowManager.MyAbnormalConfigWindow.ShowWindow();
+        }
+        //===========================================================================================
     }
 }
