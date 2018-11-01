@@ -50,7 +50,9 @@
     <SolidColorBrush x:Key="CopperBrush"                    Color="{StaticResource CopperColor}"                               />
                                                                                                                                
     <SolidColorBrush x:Key="AssaultStanceBrush"             Color="{StaticResource AssaultStanceColor}"                        />
+    <SolidColorBrush x:Key="AssaultStanceBrushLight"        Color="{StaticResource AssaultStanceColorLight}"                        />
     <SolidColorBrush x:Key="DefensiveStanceBrush"           Color="{StaticResource DefensiveStanceColor}"                      />
+    <SolidColorBrush x:Key="DefensiveStanceBrushLight"      Color="{StaticResource DefensiveStanceColorLight}"                      />
     <SolidColorBrush x:Key="SniperEyeBrush"                 Color="{StaticResource SniperEyeColor}"                            />
                                                                                                                                
     <SolidColorBrush x:Key="DpsRoleBrush"                   Color="{StaticResource DpsRoleColor}"                              />

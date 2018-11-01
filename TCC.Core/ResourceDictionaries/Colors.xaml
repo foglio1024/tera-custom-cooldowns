@@ -51,7 +51,9 @@
     <Color x:Key="CopperColor">                  #BE6F4D </Color>
 
     <Color x:Key="AssaultStanceColor">           #FF264B </Color>
+    <Color x:Key="AssaultStanceColorLight">      #FFDDE3 </Color>
     <Color x:Key="DefensiveStanceColor">         #32B3E2 </Color>
+    <Color x:Key="DefensiveStanceColorLight">    #D6F4FF </Color>
     <Color x:Key="SniperEyeColor">               #38BDE5 </Color>
 
     <Color x:Key="DpsRoleColor">                 #FF894A </Color>
