@@ -55,21 +55,17 @@ namespace TCC
                 if (WindowManager.InfoWindow.IsVisible) WindowManager.InfoWindow.HideWindow();
                 else InfoWindowViewModel.Instance.ShowWindow();
             }
-            if (e.Key == Settings.Settings.ShowAllHotkey.Key && e.Modifier == Settings.Settings.ShowAllHotkey.Modifier)
-            {
-
-            }
             if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {
                 if (WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
                 else WindowManager.SkillConfigWindow.ShowWindow();
             }
-            if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
-            {
-                if (!GroupWindowViewModel.Instance.AmILeader) return;
-                if (!Proxy.Proxy.IsConnected) return;
-                Proxy.Proxy.LootSettings();
-            }
+            //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
+            //{
+            //    if (!GroupWindowViewModel.Instance.AmILeader) return;
+            //    if (!Proxy.Proxy.IsConnected) return;
+            //    Proxy.Proxy.LootSettings();
+            //}
             
         }
 
