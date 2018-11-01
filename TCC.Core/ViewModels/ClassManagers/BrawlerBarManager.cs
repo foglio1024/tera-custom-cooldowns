@@ -45,7 +45,6 @@ namespace TCC.ViewModels
             GrowingFury.Buff = new Cooldown(gf, false);
 
             // Counter 
-            //Counter = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
             Counter = new Cooldown(c, false);
 

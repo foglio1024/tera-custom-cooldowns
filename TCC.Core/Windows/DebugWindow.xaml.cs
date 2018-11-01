@@ -116,5 +116,19 @@ namespace TCC.Windows
             SkillManager.ResetSkill(400120);
             //CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(100700, Class.Warrior, "dfa", ""),20000, CooldownType.Skill, Dispatcher.CurrentDispatcher, true, true));
         }
+
+        private void SetStance(object sender, RoutedEventArgs e)
+        {
+            if(((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
+            else if(((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
+            else if(((Button)sender).Content.ToString() == "None") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+        }
+
+        private void IncreaseEdge(object sender, RoutedEventArgs e)
+        {
+            if(((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = 0;
+            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val++;
+
+        }
     }
 }
