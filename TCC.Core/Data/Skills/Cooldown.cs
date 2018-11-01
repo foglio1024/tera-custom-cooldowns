@@ -122,6 +122,7 @@ namespace TCC.Data.Skills
         }
         public void Start(Cooldown sk)
         {
+            sk.Dispose();
             if (sk.Duration >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
@@ -203,7 +204,7 @@ namespace TCC.Data.Skills
 
         public void Dispose()
         {
-            _mainTimer.Stop(); //DispatcherTimer doesen't implement IDisposable
+            _mainTimer.Stop(); 
             _offsetTimer.Stop();
             _secondsTimer.Stop();
             SessionManager.CombatChanged -= OnCombatStatusChanged;
