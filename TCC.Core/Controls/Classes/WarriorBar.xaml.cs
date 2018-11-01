@@ -59,35 +59,20 @@ namespace TCC.Controls.Classes
 
         private void EdgeCounter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_dc.EdgeCounter.Val == 8 || _dc.EdgeCounter.Val == 10)
-            {
-                EdgeCounterBorder.BorderBrush = Brushes.White;
-                EdgeCounterBorder.Background = new SolidColorBrush(Color.FromArgb(255, 100, 100, 100));
-                ((DropShadowEffect) EdgeCounterBorder.Effect).Opacity = 1;
-                ((DropShadowEffect) EdgeCounterBorder.Effect).Color = Colors.White;
-            }
-            else
-            {
-                EdgeCounterBorder.Background = Application.Current.FindResource("RevampBackgroundBrush") as SolidColorBrush;
-                EdgeCounterBorder.BorderBrush = Application.Current.FindResource("RevampBorderBrush") as SolidColorBrush;
-                ((DropShadowEffect) EdgeCounterBorder.Effect).Opacity = 0;
-            }
+            //if (_dc.EdgeCounter.Val == 8 || _dc.EdgeCounter.Val == 10)
+            //{
+            //    EdgeCounterBorder.BorderBrush = Brushes.White;
+            //    EdgeCounterBorder.Background = new SolidColorBrush(Color.FromArgb(255, 100, 100, 100));
+            //    ((DropShadowEffect) EdgeCounterBorder.Effect).Opacity = 1;
+            //    ((DropShadowEffect) EdgeCounterBorder.Effect).Color = Colors.White;
+            //}
+            //else
+            //{
+            //    EdgeCounterBorder.Background = Application.Current.FindResource("RevampBackgroundBrush") as SolidColorBrush;
+            //    EdgeCounterBorder.BorderBrush = Application.Current.FindResource("RevampBorderBrush") as SolidColorBrush;
+            //    ((DropShadowEffect) EdgeCounterBorder.Effect).Opacity = 0;
+            //}
         }
-
-/*
-        private void TranslateMovingTo(int edge)
-        {
-            var d = TimeSpan.FromMilliseconds(250);
-            var e = new QuadraticEase();
-            var rt = Moving.RenderTransform as TranslateTransform;
-            var yan = new DoubleAnimation(-edge * 9, d) { EasingFunction = e };
-            var xan = new DoubleAnimation(edge < 4 ? edge * 9 : (10 - edge - 2) * 9 - 4, d) { EasingFunction = e };
-            rt.BeginAnimation(TranslateTransform.XProperty, xan);
-            rt.BeginAnimation(TranslateTransform.YProperty, yan);
-        }
-*/
-
-
 
         private void CheckStanceWarning(object sender, PropertyChangedEventArgs e)
         {
@@ -109,7 +94,7 @@ namespace TCC.Controls.Classes
                 _tcCd.From = _dc.TraverseCut.Factor * 359.9;
                 _tcCd.Duration = TimeSpan.FromMilliseconds(cd);
                 //TODO: TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _tcCd);
-                TcArc.BeginAnimation(Arc.EndAngleProperty, _tcCd);
+                //TcArc.BeginAnimation(Arc.EndAngleProperty, _tcCd);
             });
 
         }
@@ -124,7 +109,7 @@ namespace TCC.Controls.Classes
                 _tc.To = _dc.TraverseCut.Factor * 359.9;
                 _tcAnimating = true;
                 //TODO: TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _tc);
-                TcArc.BeginAnimation(Arc.EndAngleProperty, _tc);
+                //TcArc.BeginAnimation(Arc.EndAngleProperty, _tc);
 
             }
         }
