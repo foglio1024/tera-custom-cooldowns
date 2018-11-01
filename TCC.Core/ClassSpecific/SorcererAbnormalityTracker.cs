@@ -8,7 +8,7 @@ namespace TCC.ClassSpecific
         private const int ManaBoostId = 500150;
         private const int FlameFusionIncreaseId = 502070;   // Equipoise-Flame
         private const int FrostFusionIncreaseId = 502071;   // Equipoise-Frost
-        private const int ArcaneFusionIncreaseId = 502071;  // Equipoise-Arcane
+        private const int ArcaneFusionIncreaseId = 502072;  // Equipoise-Arcane
 
 
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
