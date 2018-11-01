@@ -13,6 +13,9 @@ namespace TCC.ClassSpecific
         private const int Dexter = 401709;
         private const int Rampage = 401710;
 
+        private const int Sinister_KR = 401706; // KR patch by HQ
+        private const int Dexter_KR = 401706;   // KR patch by HQ
+
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!p.TargetId.IsMe()) return;
@@ -74,47 +77,101 @@ namespace TCC.ClassSpecific
 
         private static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
         {
-            if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
+            if(Settings.Settings.LastRegion == "KR")  // KR patch by HQ
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Dexter_KR && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                }
             }
-            if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
+            else
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
-            }
-            if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
-            {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                }
             }
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
         {
-            if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
+            if (Settings.Settings.LastRegion == "KR")  // KR patch by HQ
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Dexter_KR && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                }
             }
-            if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
+            else
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
-            }
-            if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
-            {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                }
+                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                }
             }
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
         {
-            if (p.AbnormalityId == Sinister)
+            if (Settings.Settings.LastRegion == "KR")  // KR patch by HQ
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = 0;
+                if (p.AbnormalityId == Sinister_KR)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = 0;
+                }
+                if (p.AbnormalityId == Dexter_KR)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = 0;
+                }
+                if (p.AbnormalityId == Rampage)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = 0;
+                }
             }
-            if (p.AbnormalityId == Dexter)
-            {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = 0;
-            }
-            if (p.AbnormalityId == Rampage)
-            {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = 0;
+            else
+            { 
+                if (p.AbnormalityId == Sinister)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = 0;
+                }
+                if (p.AbnormalityId == Dexter)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = 0;
+                }
+                if (p.AbnormalityId == Rampage)
+                {
+                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = 0;
+                }
             }
         }
 

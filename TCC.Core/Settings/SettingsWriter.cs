@@ -30,7 +30,8 @@ namespace TCC.Settings
                     //add window here
                 ),
                 BuildOtherSettingsXElement(),
-                BuildGroupAbnormalsXElement()
+                BuildGroupAbnormalsXElement(),  //Add , by HQ
+                BuildMyAbnormalsXElement()      //Add My Abnormals Setting by HQ
             );
             WriteSettings(xSettings);
         }
@@ -82,6 +83,7 @@ namespace TCC.Settings
             return new XElement("OtherSettings",
                 // Buff
                 new XAttribute(nameof(Settings.BuffsDirection), Settings.BuffsDirection),
+                new XAttribute(nameof(Settings.ShowAllMyAbnormalities), Settings.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
                 // Character
                 new XAttribute(nameof(Settings.CharacterWindowCompactMode), Settings.CharacterWindowCompactMode),
                 // Cooldown
@@ -163,6 +165,26 @@ namespace TCC.Settings
             }
             return result;
         }
+        //Add My Abnormals Setting by HQ ===========================================================
+        private static XElement BuildMyAbnormalsXElement()
+        {
+            var result = new XElement(nameof(Settings.MyAbnormals));
+            foreach (var pair in Settings.MyAbnormals)
+            {
+                var c = pair.Key;
+                var sb = new StringBuilder();
+                foreach (var u in pair.Value)
+                {
+                    sb.Append(u);
+                    if (pair.Value.Count != pair.Value.IndexOf(u) + 1) sb.Append(',');
+                }
+                var cl = new XAttribute("class", c);
+                var xel = new XElement("Abnormals", cl, sb.ToString());
+                result.Add(xel);
+            }
+            return result;
+        }
+        //==========================================================================================
         private static XElement BuildChatWindowSettings()
         {
             var result = new XElement("ChatWindows");

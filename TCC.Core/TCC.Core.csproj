@@ -116,6 +116,8 @@
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
+    <Compile Include="ViewModels\MyAbnormalityVM.cs" />
     <Compile Include="Windows\ClassPositions.cs" />
     <Compile Include="Data\Skills\Cooldown.cs" />
     <Compile Include="Data\Npc\HpTriggeredTimerPattern.cs" />
@@ -699,6 +701,9 @@
     <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
     <Compile Include="Settings\WindowSettings.cs" />
+    <Compile Include="Windows\MyAbnormalConfigWindow.xaml.cs">
+      <DependentUpon>MyAbnormalConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -1111,6 +1116,10 @@
     <Page Include="ResourceDictionaries\TemplateSelectors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MyAbnormalConfigWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Widgets\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>

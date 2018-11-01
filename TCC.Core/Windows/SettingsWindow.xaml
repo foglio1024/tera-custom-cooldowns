@@ -406,6 +406,13 @@
 
                     <Separator />
                     <settings:SelectionSetting SettingName="Direction" ChoicesType="{x:Type FlowDirection}" Choices="{Binding FlowDirections, Mode=OneWay}" SelectedItem="{Binding BuffsDirection, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
+
+                    <!--Add My Abnormals Setting by HQ=======================================================-->
+                    <Button Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                            tcc:ButtonExtensions.CornerRadius="3" Margin="20 3" 
+                            Click="ButtonMyBuffSettings_OnClick" Content="Open My buff settings" Foreground="{StaticResource MainBrush}">
+                    </Button>
+                    <!--=====================================================================================-->
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
