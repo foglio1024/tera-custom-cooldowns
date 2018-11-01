@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              mc:Ignorable="d" Loaded="BrawlerBar_OnLoaded" d:DataContext="{d:DesignData BrawlerBarManager}">
-    <Grid Width="Auto" Margin="50 20 55 65" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="50 20 55 75" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -192,7 +192,7 @@
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="45" />
-                            <TranslateTransform X="0" Y="105" />
+                            <TranslateTransform X="0" Y="111" />
                             <ScaleTransform ScaleX=".7" ScaleY=".7"/>
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
@@ -201,7 +201,7 @@
                                               VerticalAlignment="Center" >
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform X="16" Y="121" />
+                            <TranslateTransform X="15" Y="126" />
                             <ScaleTransform ScaleX=".7" ScaleY=".7" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
