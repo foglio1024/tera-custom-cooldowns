@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using TCC.Data.Abnormalities;
 
 namespace TCC.Data.Skills
 {
@@ -55,7 +56,14 @@ namespace TCC.Data.Skills
             Name = name;
             ToolTip = toolTip;
         }
-
+        public Skill(Abnormality ab)
+        {
+            Id = ab.Id;
+            Class = Class.Common;
+            Name = ab.Name;
+            ToolTip = ab.ToolTip;
+            IconName = ab.IconName;
+        }
         //public void SetSkillIcon(string iconName)
         //{
         //    //if (!iconName.Contains("Icon_Skills.")) return;

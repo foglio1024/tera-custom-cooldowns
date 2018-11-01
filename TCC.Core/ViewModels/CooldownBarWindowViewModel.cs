@@ -29,7 +29,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<Cooldown> SecondarySkills { get; set; }
         public SynchronizedObservableCollection<Cooldown> OtherSkills { get; set; }
         public SynchronizedObservableCollection<Cooldown> ItemSkills { get; set; }
-        public SynchronizedObservableCollection<Skill> HiddenSkills { get; }
+        public SynchronizedObservableCollection<Cooldown> HiddenSkills { get; }
 
         public ICollectionViewLiveShaping SkillsView { get; set; }
         public ICollectionViewLiveShaping ItemsView { get; set; }
@@ -68,6 +68,7 @@ namespace TCC.ViewModels
             }
             if(existing.Mode == CooldownMode.Pre && sk.Mode== CooldownMode.Normal) existing.Start(sk);
             else existing.Refresh(sk.Skill.Id, sk.Duration);
+            sk.Dispose();
         }
 
         private void NormalMode_Update(Cooldown sk)
@@ -152,7 +153,8 @@ namespace TCC.ViewModels
 
         internal void AddHiddenSkill(Cooldown context)
         {
-            HiddenSkills.Add(context.Skill);
+            context.Dispose();
+            HiddenSkills.Add(context);
             Save();
         }
         //internal void AddHiddenSkill(Cooldown context)
@@ -218,7 +220,8 @@ namespace TCC.ViewModels
             });
             HiddenSkills.ToList().ForEach(sk =>
             {
-                root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3), new XAttribute("name", sk.ShortName)));
+                var tag = sk.CooldownType.ToString();
+                root.Add(new XElement(tag, new XAttribute("id", sk.Skill.Id), new XAttribute("row", 3), new XAttribute("name", sk.Skill.ShortName)));
             });
             if (SessionManager.CurrentPlayer.Class > (Class)12) return;
             root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
@@ -226,11 +229,25 @@ namespace TCC.ViewModels
 
         private void FixedMode_Update(Cooldown sk)
         {
-            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return;
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
+            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
+            {
+                return;
+            }
 
-            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.Skill.IconName);
-            if (hSkill != null) return;
+            if (!Settings.Settings.CooldownWindowSettings.Enabled)
+            {
+                sk.Dispose();
+
+                return;
+            }
+
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (hSkill != null)
+            {
+                sk.Dispose();
+
+                return;
+            }
 
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
@@ -253,7 +270,7 @@ namespace TCC.ViewModels
             if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
             if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.ChangeSpecialSkill(sk, cd)) return;
 
-            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.IconName);
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (hSkill != null) return;
 
 
@@ -324,7 +341,11 @@ namespace TCC.ViewModels
 
         private void UpdateOther(Cooldown sk)
         {
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
+            if (!Settings.Settings.CooldownWindowSettings.Enabled)
+            {
+                sk.Dispose();
+                return;
+            }
 
             sk.SetDispatcher(Dispatcher);
 
@@ -339,6 +360,7 @@ namespace TCC.ViewModels
             }
             catch
             {
+                sk.Dispose();
                 Debug.WriteLine("Error while refreshing skill");
             }
         }
@@ -382,6 +404,13 @@ namespace TCC.ViewModels
 
         public void ClearSkills()
         {
+            ShortSkills.ToList().ForEach(sk => sk.Dispose());
+            LongSkills.ToList().ForEach(sk => sk.Dispose());
+            MainSkills.ToList().ForEach(sk => sk.Dispose());
+            SecondarySkills.ToList().ForEach(sk => sk.Dispose());
+            OtherSkills.ToList().ForEach(sk => sk.Dispose());
+            ItemSkills.ToList().ForEach(sk => sk.Dispose());
+
             ShortSkills.Clear();
             LongSkills.Clear();
             MainSkills.Clear();
@@ -428,7 +457,7 @@ namespace TCC.ViewModels
 
                 foreach (var sk in sp.Hidden)
                 {
-                    HiddenSkills.Add(sk.Skill);
+                    HiddenSkills.Add(sk);
                 }
 
                 Dispatcher.Invoke(() =>
@@ -470,7 +499,7 @@ namespace TCC.ViewModels
             OtherSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
             ItemSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
-            HiddenSkills = new SynchronizedObservableCollection<Skill>(Dispatcher);
+            HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
             SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
 
             SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
@@ -491,6 +520,12 @@ namespace TCC.ViewModels
 
             var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);
             sk?.ProcReset();
+        }
+
+        public void RemoveHiddenSkill(Skill skill)
+        {
+            var target = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == skill.IconName);
+            if (target != null) HiddenSkills.Remove(target);
         }
     }
 }

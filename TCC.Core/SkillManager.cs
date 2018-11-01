@@ -44,7 +44,7 @@ namespace TCC
         {
             if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
             {
-                RouteSkill(new Cooldown(skill, cd * 1000));
+                RouteSkill(new Cooldown(skill, cd * 1000, CooldownType.Passive));
             }
 
         }
@@ -79,6 +79,7 @@ namespace TCC
         {
             if (skillCooldown.Duration== 0)
             {
+                skillCooldown.Dispose();
                 CooldownWindowViewModel.Instance.Remove(skillCooldown.Skill);
             }
             else

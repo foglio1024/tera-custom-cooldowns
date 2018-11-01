@@ -29,7 +29,7 @@
                 </Ellipse.RenderTransform>
             </Ellipse>
         </DataTemplate>
-        <DataTemplate x:Key="HddenSkillDataTemplate" DataType="skills:Skill">
+        <DataTemplate x:Key="HddenSkillDataTemplate" DataType="skills:Cooldown">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -41,10 +41,10 @@
                          StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Fill>
                         <ImageBrush
-                            ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                            ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
                     </Ellipse.Fill>
                 </Ellipse>
-                <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding ShortName}"
+                <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Skill.ShortName}"
                            VerticalAlignment="Center" Margin="5 0" />
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Center" Click="RemoveHiddenSkill" Grid.Column="2">
                     <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpBrush}"></Path>
@@ -141,7 +141,7 @@
                     </StackPanel>
                     <ListBox
                         VerticalAlignment="Stretch"
-                        ItemsSource="{Binding HiddenSkills}"
+                        ItemsSource="{Binding Instance.HiddenSkills}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ItemTemplate="{StaticResource HddenSkillDataTemplate}"
                         Grid.Row="2">
