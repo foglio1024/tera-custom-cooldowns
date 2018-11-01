@@ -223,7 +223,6 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.IgnoreGroupDebuffs)) Settings.IgnoreGroupDebuffs = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.BuffsDirection)) Settings.BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
                     else if (attr.Name == nameof(Settings.CooldownBarMode)) Settings.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
-                    else if (attr.Name == nameof(Settings.CooldownBarMode)) Settings.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(Settings.EnrageLabelMode)) Settings.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
                     else if (attr.Name == nameof(Settings.ChatClickThruMode)) Settings.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
                     else if (attr.Name == nameof(Settings.WarriorEdgeMode)) Settings.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
