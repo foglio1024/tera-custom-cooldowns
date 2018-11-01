@@ -57,7 +57,7 @@ namespace TCC.Settings
         // Buff window
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         //Add My Abnormals Setting by HQ ===========================================================
-        public static bool ShowAllMyAbnormalities { get; set; } = false;
+        public static bool ShowAllMyAbnormalities { get; set; } = true;
         public static Dictionary<Class, List<uint>> MyAbnormals { get; } = new Dictionary<Class, List<uint>>()
         {
             {(Class)0, new List<uint>{ 100800, 100801 }},
@@ -150,9 +150,9 @@ namespace TCC.Settings
         }
         public static string Webhook { get; set; } = "";
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
-        public static string TwitchName { get; set; } = "";
-        public static string TwitchToken { get; set; } = "";
-        public static string TwitchChannelName { get; set; } = "";
+        public static string TwitchName { get; set; } = ""; //TODO: re-add this
+        public static string TwitchToken { get; set; } = ""; //TODO: re-add this
+        public static string TwitchChannelName { get; set; } = ""; //TODO: re-add this
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowTradeLfg { get; set; } = true;
         public static bool StatSent { get; set; }
@@ -162,7 +162,6 @@ namespace TCC.Settings
         public static HotKey LfgHotkey { get; } = new HotKey(Key.Y, ModifierKeys.Control);
         public static HotKey InfoWindowHotkey { get; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; } = new HotKey(Key.O, ModifierKeys.Control);
-        public static HotKey ShowAllHotkey { get; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
         public static HotKey LootSettingsHotkey { get; } = new HotKey(Key.L, ModifierKeys.Control);
         public static string RegionOverride { get; set; } = "";
         public static double FlightGaugeRotation { get; set; }
@@ -172,7 +171,7 @@ namespace TCC.Settings
         public static bool ForceSoftwareRendering { get; set; }
         public static ControlShape AbnormalityShape { get; set; }
         public static ControlShape SkillShape { get; set; }
-        public static bool Winpcap { get; set; } = true;
+        public static bool Winpcap { get; set; } = true; //TODO: use this
 
         private static string _lastRegion = "";
         private static bool _chatEnabled;
