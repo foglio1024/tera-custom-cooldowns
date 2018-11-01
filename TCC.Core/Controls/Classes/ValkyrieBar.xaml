@@ -34,7 +34,7 @@
             </elements:RunemarksControl>
             <!--Runemarks-->
             <Grid>
-                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Width="101" Stretch="Uniform" x:Name="BgImage">
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
@@ -54,13 +54,10 @@
                                StrokeThickness="4" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-18" 
-                               Width="80" Height="80" x:Name="MainReArc">
+                               Width="83" Height="83" x:Name="MainReArc">
                         <local:Arc.LayoutTransform>
                                 <RotateTransform Angle="180"/>
                         </local:Arc.LayoutTransform>
-                        <FrameworkElement.RenderTransform>
-                            <TranslateTransform X="1"></TranslateTransform>
-                        </FrameworkElement.RenderTransform>
                         <Shape.Effect>
                             <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
                         </Shape.Effect>
@@ -84,13 +81,10 @@
                                StrokeThickness="4" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-18" 
-                               Width="80" Height="80" x:Name="RagArc">
+                               Width="83" Height="83" x:Name="RagArc">
                         <local:Arc.LayoutTransform>
                             <RotateTransform Angle="180"/>
                         </local:Arc.LayoutTransform>
-                        <FrameworkElement.RenderTransform>
-                            <TranslateTransform X="1"></TranslateTransform>
-                        </FrameworkElement.RenderTransform>
                         <local:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value="0"/>
@@ -126,7 +120,6 @@
                         </Style>
                     </Grid.Style>-->
                 </Grid>
-                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassValkyrie}" Margin="19" Opacity=".3"/>
                 <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" FontSize="16" 
                            FontWeight="DemiBold" Foreground="#afff" 
