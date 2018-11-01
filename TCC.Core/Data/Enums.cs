@@ -47,8 +47,9 @@
     }
     public enum WarriorEdgeMode
     {
-        Bar,
-        Arrow
+        Rhomb,
+        Arrow,
+        Bar
     }
 
     public enum HpChangeSource

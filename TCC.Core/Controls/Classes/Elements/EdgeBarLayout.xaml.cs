@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -7,40 +9,47 @@ using TCC.ViewModels;
 
 namespace TCC.Controls.Classes.Elements
 {
-    public partial class EdgeBarLayout
+    public partial class EdgeBarLayout : EdgeControlBase
     {
-        private WarriorBarManager _dc;
 
         public EdgeBarLayout()
         {
             InitializeComponent();
-            Loaded += (_, __) =>
-            {
-                _dc = DataContext as WarriorBarManager;
-                if (_dc != null) _dc.EdgeCounter.PropertyChanged += OnEdgePropertyChanged;
-                //else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
-            };
         }
 
-        private void OnEdgePropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override List<FrameworkElement> EdgeElements
         {
-            if (e.PropertyName != nameof(Counter.Val)) return;
-            for (var i = 0; i < _dc.EdgeCounter.MaxValue; i++)
+            get
             {
-                if (i < _dc.EdgeCounter.Val)
+                var ret = new List<FrameworkElement>();
+                foreach (FrameworkElement child in EdgeContainer.Children)
                 {
-                    EdgeContainer.Children[i].Opacity = 1;
-                    ((Shape) EdgeContainer.Children[i]).Fill = i < 8 ? i == 7 ?  Application.Current.FindResource("AquadraxBrush") as SolidColorBrush :
-                                                                                 Application.Current.FindResource("IgnidraxBrush") as SolidColorBrush :
-                                                                                 Application.Current.FindResource("HpBrush") as SolidColorBrush;
+                    ret.Add(child);
+                }
+                return ret.ToList();
 
-                }
-                else
-                {
-                    EdgeContainer.Children[i].Opacity = .1;
-                    ((Shape) EdgeContainer.Children[i]).Fill = Brushes.White;
-                }
             }
         }
+
+        //private void OnEdgePropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName != nameof(Counter.Val)) return;
+        //    for (var i = 0; i < _dc.EdgeCounter.MaxValue; i++)
+        //    {
+        //        if (i < _dc.EdgeCounter.Val)
+        //        {
+        //            EdgeContainer.Children[i].Opacity = 1;
+        //            ((Shape) EdgeContainer.Children[i]).Fill = i < 8 ? i == 7 ?  Application.Current.FindResource("AquadraxBrush") as SolidColorBrush :
+        //                                                                         Application.Current.FindResource("IgnidraxBrush") as SolidColorBrush :
+        //                                                                         Application.Current.FindResource("HpBrush") as SolidColorBrush;
+
+        //        }
+        //        else
+        //        {
+        //            EdgeContainer.Children[i].Opacity = .1;
+        //            ((Shape) EdgeContainer.Children[i]).Fill = Brushes.White;
+        //        }
+        //    }
+        //}
     }
 }

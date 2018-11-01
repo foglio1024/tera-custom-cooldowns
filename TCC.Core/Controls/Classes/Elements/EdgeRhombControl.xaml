@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TCC.Controls.Classes.Elements.RhombEdgeControl"
+﻿<local:EdgeControlBase x:Class="TCC.Controls.Classes.Elements.EdgeRhombControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,14 +11,14 @@
         <Style TargetType="controls:Arc">
             <Setter Property="Effect" >
                 <Setter.Value>
-                    <DropShadowEffect Color="{Binding GlowColor, RelativeSource={RelativeSource AncestorType=local:RhombEdgeControl}}"
+                    <DropShadowEffect Color="{Binding GlowColor, RelativeSource={RelativeSource AncestorType=local:EdgeRhombControl}}"
                                       BlurRadius="10" ShadowDepth="0"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="Opacity" Value="0"/>
             <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
             <Setter Property="StrokeThickness" Value="4"/>
-            <Setter Property="Stroke" Value="{Binding FillBrush, RelativeSource={RelativeSource AncestorType=local:RhombEdgeControl}}"/>
+            <Setter Property="Stroke" Value="{Binding FillBrush, RelativeSource={RelativeSource AncestorType=local:EdgeRhombControl}}"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="-20"/>
@@ -36,11 +36,11 @@
         <Style TargetType="Polygon">
             <Setter Property="Effect" >
                 <Setter.Value>
-                    <DropShadowEffect Color="{Binding GlowColor, RelativeSource={RelativeSource AncestorType=local:RhombEdgeControl}}" BlurRadius="10" ShadowDepth="0"/>
+                    <DropShadowEffect Color="{Binding GlowColor, RelativeSource={RelativeSource AncestorType=local:EdgeRhombControl}}" BlurRadius="10" ShadowDepth="0"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="Opacity" Value="0"/>
-            <Setter Property="Fill" Value="{Binding FillBrush, RelativeSource={RelativeSource AncestorType=local:RhombEdgeControl}}"/>
+            <Setter Property="Fill" Value="{Binding FillBrush, RelativeSource={RelativeSource AncestorType=local:EdgeRhombControl}}"/>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -82,7 +82,7 @@
             </controls:Arc>
         </Grid>
     </Grid>
-</UserControl>
+</local:EdgeControlBase>
 
 
 

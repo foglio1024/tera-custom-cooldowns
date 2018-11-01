@@ -452,13 +452,13 @@
                     </Button>
 
                     <Separator/>
-                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Path Data="{StaticResource SvgClassWarrior}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
                         <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#3fff">Warrior</TextBlock>
                     </StackPanel>
-                    <settings:BoolSetting SettingName="Show Edge" IsOn="{Binding WarriorShowEdge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
+                    <!--<settings:BoolSetting SettingName="Show Edge" IsOn="{Binding WarriorShowEdge, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />-->
                     <settings:SelectionSetting SettingName="Edge mode" SelectedItem="{Binding WarriorEdgeMode, Mode=TwoWay}" ChoicesType="{x:Type data:WarriorEdgeMode}" Choices="{Binding WarriorEdgeModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />
-                    <settings:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />-->
+                    <!--<settings:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />-->
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Path Data="{StaticResource SvgClassSorcerer}" Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff"></Path>
