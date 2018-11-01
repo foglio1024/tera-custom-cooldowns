@@ -175,7 +175,66 @@
                                VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
         </Grid>
     </DataTemplate>
-
+    <!--Add My Abnormals Setting by HQ=======================================================-->
+    <DataTemplate x:Key="MyAbnormalitySelectorDataTemplate" DataType="vm:MyAbnormalityVM">
+        <Grid Background="Transparent" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="350" />
+                <ColumnDefinition Width="450" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+            <Grid.ToolTip>
+                <ToolTip Background="Transparent" BorderBrush="Transparent">
+                    <Grid>
+                        <abnormalities:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
+                                                                    AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                                    Id="{Binding Abnormality.Id}"/>
+                    </Grid>
+                </ToolTip>
+            </Grid.ToolTip>
+            <Ellipse Width="30" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
+                             Stroke="#7fff"
+                             StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse.Fill>
+                    <ImageBrush
+                                ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
+                               VerticalAlignment="Center" Margin="5 0" />
+            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="2" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding MyToggleCommand}" Width="30" HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center">
+                            <Path Data="{StaticResource SvgCheckCircle}" Fill="#fff"
+                                          Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"></Path>
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource ButtonContentOpacityStyle}" TargetType="Button">
+                                    <Setter Property="Opacity" Value=".1"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Selected}" Value="True">
+                                            <Setter Property="Opacity" Value="1"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Grid.Column="3" Foreground="#3fff" Text="{Binding Abnormality.Id}"
+                               VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
+        </Grid>
+    </DataTemplate>
+    <!--=====================================================================================-->
     <DataTemplate x:Key="FixedSkillDataTemplateForConfig" DataType="skills1:Cooldown">
         <Grid>
             <Grid.ColumnDefinitions>

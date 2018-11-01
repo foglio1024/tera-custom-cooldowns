@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ArcherBarManager}">
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ArcherBarManager}"
+             Height="165">
+            <!-- Add Height = "165" to fix windwalk UI cropping problem by HQ -->
     <Grid Width="Auto" Margin="50 20 50 50" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
+using TCC.Settings;
 
 namespace TCC.Data.Pc
 {
@@ -358,10 +359,46 @@ namespace TCC.Data.Pc
             }
         }
 
+        //Add My Abnormals Setting by HQ ============================================================
+        public bool MyAbnormalsContainKey(Abnormality ab)
+        {
+            if (!Settings.Settings.ShowAllMyAbnormalities)
+            {
+                if (Settings.Settings.MyAbnormals.ContainsKey(Class.Common))
+                {
+                    if (!Settings.Settings.MyAbnormals[Class.Common].Contains(ab.Id))
+                    {
+                        if (Settings.Settings.MyAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        {
+                            if (!Settings.Settings.MyAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id))
+                            {
+                                return false;
 
-
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //===========================================================================================
+        
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
+            //Add My Abnormals Setting by HQ ============================================================
+            if (!MyAbnormalsContainKey(ab))
+            {
+                return;
+            }
+            //===========================================================================================
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
@@ -384,7 +421,12 @@ namespace TCC.Data.Pc
         }
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
-
+            //Add My Abnormals Setting by HQ ============================================================
+            if (!MyAbnormalsContainKey(ab))
+            {
+                return;
+            }
+            //===========================================================================================
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
@@ -400,6 +442,12 @@ namespace TCC.Data.Pc
         }
         public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
         {
+            //Add My Abnormals Setting by HQ ============================================================
+            if (!MyAbnormalsContainKey(ab))
+            {
+                return;
+            }
+            //===========================================================================================
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {

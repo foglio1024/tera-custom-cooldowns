@@ -119,5 +119,15 @@ namespace TCC.ViewModels
             }
             return false;
         }
+
+        public override bool ChangeSpecialSkill(Skill skill, uint cd)       // KR patch by HQ
+        {
+            if (skill.IconName == Thunderbolt.Skill.IconName)
+            {
+                Thunderbolt.Refresh(Thunderbolt.Skill.Id, cd);
+                return true;
+            }
+            return false;
+        }
     }
 }
