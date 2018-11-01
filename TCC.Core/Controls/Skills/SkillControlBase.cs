@@ -58,9 +58,13 @@ namespace TCC.Controls.Skills
             Context.Started += OnCooldownStarted;
             Context.SecondsUpdated += OnSecondsUpdated;
         }
-        protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
+        protected virtual void OnUnloaded(object sender, RoutedEventArgs e) //TODO: maybe use DataContextChanged
         {
-            if (Context == null) return;
+            if (Context == null)
+            {
+                Log.All($"[SkillControlBase.OnUnloaded] Context is null!");
+                return;
+            }
             Context.Ended -= OnCooldownEnded;
             Context.Started -= OnCooldownStarted;
             Context.SecondsUpdated -= OnSecondsUpdated;
