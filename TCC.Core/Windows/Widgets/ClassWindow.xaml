@@ -77,11 +77,11 @@
                                         />
 
     </w:TccWidget.Resources>
-    <Grid ClipToBounds="False" Margin="0">
+    <Grid ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
