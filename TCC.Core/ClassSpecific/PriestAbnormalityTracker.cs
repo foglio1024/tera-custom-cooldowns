@@ -9,7 +9,7 @@ namespace TCC.ClassSpecific
         private static readonly uint[] EnergyStarsIDs = { 801500, 801501, 801502, 801503, 98000107 };
         private static readonly int GraceId = 801700;
         private static readonly int TripleNemesisId = 28090;
-        private static readonly uint[] EdictIDs = { 805800, 805801, 805802, 805803 };
+        private static readonly uint[] EdictIDs = { 805800 };
 
         private static void CheckTripleNemesis(S_ABNORMALITY_BEGIN p)
         {
