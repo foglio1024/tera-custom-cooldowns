@@ -91,6 +91,12 @@
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="ClassSpecific\GunnerAbnormalityTracker.cs" />
     <Compile Include="Controls\Abnormalities\AbnormalityIndicatorBase.cs" />
+    <Compile Include="Controls\Classes\Elements\RhombEdgeControl.xaml.cs">
+      <DependentUpon>RhombEdgeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Classes\Elements\TraverseCutControl.xaml.cs">
+      <DependentUpon>TraverseCutControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Skills\FixedSkillControlBase.cs" />
     <Compile Include="Controls\Skills\SkillControlBase.cs" />
     <Compile Include="Controls\Classes\Elements\SorcererElementsControl.xaml.cs">
@@ -839,6 +845,14 @@
     <Page Include="Controls\Classes\Elements\EdgeBarLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Classes\Elements\RhombEdgeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Classes\Elements\TraverseCutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Skills\RhombSkillEffectControl.xaml">
       <Generator>MSBuild:Compile</Generator>
