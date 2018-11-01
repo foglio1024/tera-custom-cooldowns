@@ -62,7 +62,6 @@ namespace TCC.Controls.Classes.Elements
                 Thread.Sleep(500);
             }
             _context.PropertyChanged += _context_PropertyChanged;
-            _context.Maxed += OnMaxed;
         }
 
         private void OnMaxed()
@@ -72,7 +71,15 @@ namespace TCC.Controls.Classes.Elements
 
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Counter.Val)) SetEdge(_context.Val);
+            switch (e.PropertyName)
+            {
+                case nameof(Counter.Val):
+                    SetEdge(_context.Val);
+                    break;
+                case nameof(Counter.IsMaxed):
+                    MaxBorder.Opacity = _context.IsMaxed ? 1 :0;
+                    break;
+            }
         }
 
     }
