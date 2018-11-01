@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Width="101" Stretch="Uniform" x:Name="BgImage">
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
@@ -76,7 +76,6 @@
                         </Style>
                     </Grid.Style>
                 </Grid>
-                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3"/>
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
