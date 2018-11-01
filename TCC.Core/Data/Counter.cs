@@ -7,9 +7,9 @@ namespace TCC.Data
     {
         //TODO use events here
         private int _val;
+        private bool _isMaxed;
         private readonly DispatcherTimer _expire;
         private readonly bool _autoexpire;
-        public event Action Maxed;
 
         public int Val
         {
@@ -18,11 +18,23 @@ namespace TCC.Data
             {
                 if (_val == value) return;
                 _val = value;
-                Maxed?.Invoke();
+                IsMaxed = Val == MaxValue;
                 RefreshTimer();
                 NPC();
             }
         }
+
+        public bool IsMaxed
+        {
+            get => _isMaxed;
+            private set
+            {
+                if (_isMaxed == value) return;
+                _isMaxed = value;
+                NPC();
+            }
+        }
+
         public int MaxValue { get; }
         public Counter(int max, bool autoexpire)
         {
