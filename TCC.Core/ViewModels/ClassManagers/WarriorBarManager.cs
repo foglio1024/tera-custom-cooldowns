@@ -9,9 +9,22 @@ namespace TCC.ViewModels
 
         public DurationCooldownIndicator DeadlyGamble { get; set; }
         public Counter EdgeCounter { get; set; }
+        public Cooldown Swift { get; set; }
         public StanceTracker<WarriorStance> Stance { get; set; }
         public StatTracker TraverseCut { get; set; }
         //public StatTracker TempestAura { get; set; }
+        private bool _swiftProc;
+
+        public bool SwiftProc
+        {
+            get => _swiftProc;
+            set
+            {
+                if (_swiftProc == value) return; _swiftProc = value;
+                NPC();
+            }
+        }
+
         public WarriorBarManager()
         {
             EdgeCounter = new Counter(10, true);
@@ -27,10 +40,14 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
-            DeadlyGamble = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
-            DeadlyGamble.Buff = new Cooldown(dg, false);
-            DeadlyGamble.Cooldown = new Cooldown(dg, true);
+            DeadlyGamble = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(dg, false),
+                Cooldown = new Cooldown(dg, true)
+            };
+            var ab = SessionManager.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
+            Swift = new Cooldown(new Skill(ab), false);
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
