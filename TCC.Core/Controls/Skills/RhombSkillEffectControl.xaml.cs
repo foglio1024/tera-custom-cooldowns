@@ -22,7 +22,7 @@ namespace TCC.Controls.Skills
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
-            if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
+            if (DesignerProperties.GetIsInDesignMode(this) || !( DataContext is DurationCooldownIndicator)) return;
             _context = (DurationCooldownIndicator)DataContext;
             RhombFixedSkillControl.DataContext = _context.Cooldown;
             _context.Buff.Started += OnBuffStarted;
