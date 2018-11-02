@@ -20,6 +20,23 @@ namespace TCC.Settings
         private static readonly List<uint> PriestDefault = new List<uint> { 201, 202, 805100, 805101, 805102, 98000109, 805600, 805601, 805602, 805603, 805604, 98000110, 800300, 800301, 800302, 800303, 800304, 801500, 801501, 801502, 801503, 98000107 };
         private static readonly List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
 
+        //Add My Abnormals Setting by HQ ====================================================
+        private static readonly List<uint> MyCommonDefault = new List<uint> { 6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001 };
+        private static readonly List<uint> MyArcherDefault = new List<uint> { 601400, 601450, 601460, 88608101, 88608102, 88608103, 88608104, 88608105, 88608106, 88608107, 88608108, 88608109, 88608110 };
+        private static readonly List<uint> MyBerserkerDefault = new List<uint> { 401705, 401707, 401709, 401710, 400500, 400501, 400508, 400710, 400711 };
+        private static readonly List<uint> MyBrawlerDefault = new List<uint> { 31020, 10153210 };
+        private static readonly List<uint> MyGunnerDefault = new List<uint> { 89105101, 89105102, 89105103, 89105104, 89105105, 89105106, 89105107, 89105108, 89105109, 89105110, 89105111, 89105112, 89105113, 89105114, 89105115, 89105116, 89105117, 89105118, 89105119, 89105120, 10152340, 10152351 };
+        private static readonly List<uint> MyLancerDefault = new List<uint> { 200230, 200231, 200232, 201701 };
+        private static readonly List<uint> MyMysticDefault = new List<uint> { };
+        private static readonly List<uint> MyNinjaDefault = new List<uint> { 89314201, 89314202, 89314203, 89314204, 89314205, 89314206, 89314207, 89314208, 89314209, 89314210, 89314211, 89314212, 89314213, 89314214, 89314215, 89314216, 89314217, 89314218, 89314219, 89314220, 10154480, 10154450 };
+        private static readonly List<uint> MyPriestDefault = new List<uint> { };
+        private static readonly List<uint> MyReaperDefault = new List<uint> { 10151010, 10151131, 10151192 };
+        private static readonly List<uint> MySlayerDefault = new List<uint> { 300800, 300801, 300805 };
+        private static readonly List<uint> MySorcererDefault = new List<uint> { 21170, 22120, 23180, 26250, 29011, 25170, 25171, 25201, 25202, 500100, 500150, 501600, 501650 };
+        private static readonly List<uint> MyValkyrieDefault = new List<uint> { 10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542 };
+        private static readonly List<uint> MyWarriorDefault = new List<uint> { 100800, 100801 };
+        //===================================================================================
+        
         private List<Tab> ParseTabsSettings(XElement elem)
         {
             var result = new List<Tab>();
@@ -166,7 +183,42 @@ namespace TCC.Settings
             PriestDefault.ForEach(x => Settings.GroupAbnormals[Class.Priest].Add(x));
             MysticDefault.ForEach(x => Settings.GroupAbnormals[Class.Mystic].Add(x));
         }
+        //Add My Abnormals Setting by HQ ====================================================
+        private static void ParseMyAbnormalSettings(XElement el)
+        {
+            foreach (var myAbnormalList in Settings.MyAbnormals)
+            {
+                myAbnormalList.Value.Clear();
+            }
 
+            foreach (var abEl in el.Descendants().Where(x => x.Name == "Abnormals"))
+            {
+                var stringClass = abEl.Attribute("class")?.Value;
+                if (stringClass == null) continue;
+                var parsedClass = (Class)Enum.Parse(typeof(Class), stringClass);
+                var abnormalities = abEl.Value.Split(',');
+                var list = abnormalities.Length == 1 && abnormalities[0] == "" ? new List<uint>() : abnormalities.Select(uint.Parse).ToList();
+                list.ForEach(abnormality => Settings.MyAbnormals[parsedClass].Add(abnormality));
+            }
+            if (Settings.MyAbnormals.Count == 0)
+            {
+                MyCommonDefault.ForEach(x => Settings.MyAbnormals[Class.Common].Add(x));
+                MyArcherDefault.ForEach(x => Settings.MyAbnormals[Class.Archer].Add(x));
+                MyBerserkerDefault.ForEach(x => Settings.MyAbnormals[Class.Berserker].Add(x));
+                MyBrawlerDefault.ForEach(x => Settings.MyAbnormals[Class.Brawler].Add(x));
+                MyGunnerDefault.ForEach(x => Settings.MyAbnormals[Class.Gunner].Add(x));
+                MyLancerDefault.ForEach(x => Settings.MyAbnormals[Class.Lancer].Add(x));
+                MyMysticDefault.ForEach(x => Settings.MyAbnormals[Class.Mystic].Add(x));
+                MyNinjaDefault.ForEach(x => Settings.MyAbnormals[Class.Ninja].Add(x));
+                MyPriestDefault.ForEach(x => Settings.MyAbnormals[Class.Priest].Add(x));
+                MyReaperDefault.ForEach(x => Settings.MyAbnormals[Class.Reaper].Add(x));
+                MySlayerDefault.ForEach(x => Settings.MyAbnormals[Class.Slayer].Add(x));
+                MySorcererDefault.ForEach(x => Settings.MyAbnormals[Class.Sorcerer].Add(x));
+                MyValkyrieDefault.ForEach(x => Settings.MyAbnormals[Class.Valkyrie].Add(x));
+                MyWarriorDefault.ForEach(x => Settings.MyAbnormals[Class.Warrior].Add(x));
+            }
+        }
+        //===================================================================================
         public void LoadWindowSettings()
         {
             if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml")) return;
@@ -259,6 +311,9 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.WarriorShowTraverseCut)) Settings.WarriorShowTraverseCut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.CharacterWindowCompactMode)) Settings.CharacterWindowCompactMode = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowAllGroupAbnormalities)) Settings.ShowAllGroupAbnormalities = bool.Parse(attr.Value);
+                    //Add My Abnormals Setting by HQ ====================================================
+                    else if (attr.Name == nameof(Settings.ShowAllMyAbnormalities)) Settings.ShowAllMyAbnormalities = bool.Parse(attr.Value);
+                    //===================================================================================
                     else if (attr.Name == nameof(Settings.HighPriority)) Settings.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ForceSoftwareRendering)) Settings.ForceSoftwareRendering = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.Winpcap)) Settings.Winpcap = bool.Parse(attr.Value);
@@ -286,6 +341,29 @@ namespace TCC.Settings
                     PriestDefault.ForEach(x => Settings.GroupAbnormals[Class.Priest].Add(x));
                     MysticDefault.ForEach(x => Settings.GroupAbnormals[Class.Mystic].Add(x));
                 }
+                //Add My Abnormals Setting by HQ ====================================================
+                try
+                {
+                    ParseMyAbnormalSettings(_settingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(Settings.MyAbnormals)));
+                }
+                catch
+                {
+                    MyCommonDefault.ForEach(x => Settings.MyAbnormals[Class.Common].Add(x));
+                    MyArcherDefault.ForEach(x => Settings.MyAbnormals[Class.Archer].Add(x));
+                    MyBerserkerDefault.ForEach(x => Settings.MyAbnormals[Class.Berserker].Add(x));
+                    MyBrawlerDefault.ForEach(x => Settings.MyAbnormals[Class.Brawler].Add(x));
+                    MyGunnerDefault.ForEach(x => Settings.MyAbnormals[Class.Gunner].Add(x));
+                    MyLancerDefault.ForEach(x => Settings.MyAbnormals[Class.Lancer].Add(x));
+                    MyMysticDefault.ForEach(x => Settings.MyAbnormals[Class.Mystic].Add(x));
+                    MyNinjaDefault.ForEach(x => Settings.MyAbnormals[Class.Ninja].Add(x));
+                    MyPriestDefault.ForEach(x => Settings.MyAbnormals[Class.Priest].Add(x));
+                    MyReaperDefault.ForEach(x => Settings.MyAbnormals[Class.Reaper].Add(x));
+                    MySlayerDefault.ForEach(x => Settings.MyAbnormals[Class.Slayer].Add(x));
+                    MySorcererDefault.ForEach(x => Settings.MyAbnormals[Class.Sorcerer].Add(x));
+                    MyValkyrieDefault.ForEach(x => Settings.MyAbnormals[Class.Valkyrie].Add(x));
+                    MyWarriorDefault.ForEach(x => Settings.MyAbnormals[Class.Warrior].Add(x));
+                }
+                //===================================================================================
             }
             catch (XmlException)
             {
