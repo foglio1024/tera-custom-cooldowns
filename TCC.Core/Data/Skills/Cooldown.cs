@@ -19,9 +19,19 @@ namespace TCC.Data.Skills
         private DispatcherTimer _secondsTimer;
         private ulong _seconds;
         private bool _flashOnAvailable;
+        private Skill _skill;
 
         // properties
-        public Skill Skill { get; }
+        public Skill Skill
+        {
+            get => _skill;
+            set
+            {
+                if (_skill == value) return;
+                _skill = value;
+                NPC();
+            }
+        }
         public ulong Duration { get; private set; }
         public ulong OriginalDuration { get; private set; }
         public CooldownType CooldownType { get; set; }
@@ -57,7 +67,7 @@ namespace TCC.Data.Skills
             {
                 _mainTimer = new DispatcherTimer();
                 _offsetTimer = new DispatcherTimer();
-                _secondsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1)};
+                _secondsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             });
 
 
@@ -76,7 +86,7 @@ namespace TCC.Data.Skills
             FlashOnAvailable = flashOnAvailable;
         }
 
-        public Cooldown(Skill sk, ulong cooldown,  CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal) : this(sk, false, type)
+        public Cooldown(Skill sk, ulong cooldown, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal) : this(sk, false, type)
         {
             if (cooldown == 0) return;
             if (type == CooldownType.Item) cooldown = cooldown * 1000;
@@ -204,7 +214,7 @@ namespace TCC.Data.Skills
 
         public void Dispose()
         {
-            _mainTimer.Stop(); 
+            _mainTimer.Stop();
             _offsetTimer.Stop();
             _secondsTimer.Stop();
             SessionManager.CombatChanged -= OnCombatStatusChanged;
