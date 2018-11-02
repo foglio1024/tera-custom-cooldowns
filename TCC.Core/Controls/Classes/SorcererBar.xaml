@@ -14,7 +14,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Image Source="../../resources/images/char_window_bg_sorc.png" Stretch="Uniform" Width="90" Height="Auto"/>
+            <Image Source="../../resources/images/char_window_bg_sorc.png" Stretch="Uniform" Width="101" Height="Auto"/>
             <Path Data="{StaticResource SvgClassSorcerer}" Width="30" Stretch="Uniform" Opacity=".5" />
 
             <elements:SorcererElementsControl Fire="{Binding Fire}" 
@@ -23,14 +23,15 @@
                                            FireBoosted="{Binding IsBoostFire}"
                                            IceBoosted="{Binding IsBoostFrost}"
                                            ArcaneBoosted="{Binding IsBoostArcane}"
-                                           IndicatorsHeight="78"
-                                           IndicatorsWidth="78"
-                                           ArcaneBoostWidth="34"
-                                           ArcaneBoostMargin="0 -5 0 0"
-                                           FireIceBoostWidth="25"
-                                           FireBoostMargin="0"
-                                           IceBoostMargin="0"
+                                           IndicatorsHeight="87"
+                                           IndicatorsWidth="87"
+                                           ArcaneBoostWidth="39"
+                                           ArcaneBoostMargin="0 -4 0 0"
+                                           FireIceBoostWidth="28"
+                                           FireBoostMargin="-7 1 0 0"
+                                           IceBoostMargin="0 1 -5 0"
                                            />
+            <skills:RhombFixedSkillControl DataContext="{Binding Fusion}"></skills:RhombFixedSkillControl>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
                     Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     RenderTransform="{StaticResource Rotate45}"

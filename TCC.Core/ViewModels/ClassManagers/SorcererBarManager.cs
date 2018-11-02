@@ -7,6 +7,24 @@ namespace TCC.ViewModels
     {
         public DurationCooldownIndicator ManaBoost { get; set; }
 
+        public Cooldown Fusion{ get; set; }
+        public Skill PrimeFlame { get; set; }
+        public Skill Iceberg { get; set; }
+        public Skill ArcaneStorm { get; set; }
+        public Skill FusionSkill { get; set; }
+
+        private Skill CurrentFusionSkill
+        {
+            get
+            {
+                if(Fire && Ice && Arcane) return FusionSkill;
+                if (Fire && Ice) return PrimeFlame;
+                if (Ice && Arcane) return Iceberg;
+                if (Fire && Arcane) return ArcaneStorm;
+                return FusionSkill;
+            }
+        }
+
         public bool Fire => SessionManager.CurrentPlayer.Fire;
         public bool Ice => SessionManager.CurrentPlayer.Ice;
         public bool Arcane => SessionManager.CurrentPlayer.Arcane;
@@ -17,10 +35,24 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            ManaBoost = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
-            ManaBoost.Cooldown = new Cooldown(mb,  true);
-            ManaBoost.Buff = new Cooldown(mb, false);
+            SessionManager.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
+            SessionManager.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
+            SessionManager.SkillsDatabase.TryGetSkill(360400, Class.Sorcerer, out var iceberg);
+            SessionManager.SkillsDatabase.TryGetSkill(360300, Class.Sorcerer, out var arcaneStorm);
+
+            PrimeFlame = primeFlame; //fire ice
+            Iceberg = iceberg; //ice arcane
+            ArcaneStorm = arcaneStorm; //fire arcane
+            FusionSkill = fusion;
+
+            ManaBoost = new DurationCooldownIndicator(Dispatcher)
+            {
+                Cooldown = new Cooldown(mb, true),
+                Buff = new Cooldown(mb, false)
+            };
+            Fusion = new Cooldown(fusion, true);
+
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
@@ -30,6 +62,11 @@ namespace TCC.ViewModels
                 ManaBoost.Cooldown.Start(sk.Duration);
                 return true;
             }
+
+            if (sk.Skill.IconName == Fusion.Skill.IconName)
+            {
+                Fusion.Start(sk.Duration);
+            }
             return false;
         }
 
@@ -38,6 +75,7 @@ namespace TCC.ViewModels
             NPC(nameof(Fire));
             NPC(nameof(Ice));
             NPC(nameof(Arcane));
+            Fusion.Skill = CurrentFusionSkill;
         }
 
         public void NotifyElementBoostChanged()
