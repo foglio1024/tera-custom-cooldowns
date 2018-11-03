@@ -84,12 +84,16 @@ namespace TCC.Settings
                 // Buff
                 new XAttribute(nameof(Settings.BuffsDirection), Settings.BuffsDirection),
                 new XAttribute(nameof(Settings.ShowAllMyAbnormalities), Settings.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
+                new XAttribute(nameof(Settings.BuffDecimalPlaceSeconds), Settings.BuffDecimalPlaceSeconds), // by HQ
+                new XAttribute(nameof(Settings.ShowBuffDecimalPlace), Settings.ShowBuffDecimalPlace),       // by HQ
                 // Character
                 new XAttribute(nameof(Settings.CharacterWindowCompactMode), Settings.CharacterWindowCompactMode),
                 // Cooldown
                 new XAttribute(nameof(Settings.CooldownBarMode), Settings.CooldownBarMode),
                 new XAttribute(nameof(Settings.ShowItemsCooldown), Settings.ShowItemsCooldown),
                 new XAttribute(nameof(Settings.SkillShape), Settings.SkillShape),
+                new XAttribute(nameof(Settings.ShowSkillDecimalPlace), Settings.ShowSkillDecimalPlace),             // by HQ
+                new XAttribute(nameof(Settings.SkillDecimalPlaceSeconds), Settings.SkillDecimalPlaceSeconds),       // by HQ
                 // Boss
                 new XAttribute(nameof(Settings.ShowOnlyBosses), Settings.ShowOnlyBosses),
                 new XAttribute(nameof(Settings.EnrageLabelMode), Settings.EnrageLabelMode),

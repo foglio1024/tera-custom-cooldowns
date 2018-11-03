@@ -11,15 +11,21 @@ namespace TCC.Data.Skills
         public event Action FlashingForced;
         public event Action FlashingStopForced;
         public event Action SecondsUpdated;
+        public event Action DurationLeftUpdated;    // by HQ
         public event Action Reset;
 
         // fields
         private DispatcherTimer _mainTimer;
-        private DispatcherTimer _offsetTimer;
-        private DispatcherTimer _secondsTimer;
+        //private DispatcherTimer _offsetTimer;
+        //private DispatcherTimer _secondsTimer;
+        private DispatcherTimer _durationleftTimer; // by HQ
         private ulong _seconds;
+        private ulong _durationleft;                // by HQ
         private bool _flashOnAvailable;
         private Skill _skill;
+
+        DateTime Starttime;                         // by HQ
+        ulong interval;                             // by HQ
 
         // properties
         public Skill Skill
@@ -57,6 +63,17 @@ namespace TCC.Data.Skills
                 Dispatcher.Invoke(() => SecondsUpdated?.Invoke());
             }
         }
+        public ulong DurationLeft   // by HQ
+        {
+            get => _durationleft;
+            set
+            {
+                if (_durationleft == value) return;
+                _durationleft = value;
+                Dispatcher.Invoke(() => DurationLeftUpdated?.Invoke());
+            }
+        }
+
         public bool IsAvailable => !_mainTimer.IsEnabled;
 
         // ctors
@@ -66,14 +83,16 @@ namespace TCC.Data.Skills
             Dispatcher.Invoke(() =>
             {
                 _mainTimer = new DispatcherTimer();
-                _offsetTimer = new DispatcherTimer();
-                _secondsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                //_offsetTimer = new DispatcherTimer();
+                //_secondsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                _durationleftTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };    // by HQ
             });
 
 
             _mainTimer.Tick += CooldownEnded;
-            _offsetTimer.Tick += StartSecondsTimer;
-            _secondsTimer.Tick += DecreaseSeconds;
+            //_offsetTimer.Tick += StartSecondsTimer;
+            //_secondsTimer.Tick += DecreaseSeconds;
+            _durationleftTimer.Tick += DecreaseDurationLeft;                                        // by HQ
 
             SessionManager.CombatChanged += OnCombatStatusChanged;
             SessionManager.EncounterChanged += OnCombatStatusChanged;
@@ -106,21 +125,63 @@ namespace TCC.Data.Skills
         {
             _mainTimer.Stop();
             NPC(nameof(IsAvailable));
-            _secondsTimer.Stop();
+            //_secondsTimer.Stop();
+            _durationleftTimer.Stop();  // by HQ
             Seconds = 0;
             Dispatcher.Invoke(() => Ended?.Invoke(Mode));
         }
+        /*
         private void StartSecondsTimer(object sender, EventArgs e)
         {
             _offsetTimer.Stop();
             _secondsTimer.Start();
         }
+        */
+        /*
         private void DecreaseSeconds(object sender, EventArgs e)
         {
             if (Seconds > 0) Seconds = Seconds - 1;
             else _secondsTimer.Stop();
         }
+        */
+        private void DecreaseDurationLeft(object sender, EventArgs e)   // by HQ
+        {
+            UpdateNextinterval();
 
+            _durationleftTimer.Interval = TimeSpan.FromMilliseconds(interval);
+            _durationleftTimer.Stop();
+            if (interval > 0)
+            {
+                _durationleftTimer.Start();
+            }
+        }
+        private void UpdateNextinterval()                               // by HQ
+        {
+            TimeSpan Timediff = DateTime.Now - Starttime;
+
+            if (Duration > (uint)Timediff.TotalMilliseconds)
+            {
+                DurationLeft = Duration - (uint)Timediff.TotalMilliseconds;
+                Seconds = DurationLeft / 1000;
+                ulong DurationLeftRemainder = 0;
+                if ((DurationLeft <= Settings.Settings.SkillDecimalPlaceSeconds * 1000) && (Settings.Settings.ShowSkillDecimalPlace == true))
+                {
+                    DurationLeftRemainder = DurationLeft % 100;
+                    interval = DurationLeftRemainder + 1;
+                }
+                else
+                {
+                    DurationLeftRemainder = DurationLeft % 1000;
+                    interval = DurationLeftRemainder + 1;
+                }
+            }
+            else
+            {
+                DurationLeft = 0;
+                Seconds = 0;
+                interval = 0;
+            }
+        }
         // methods
         public void Start(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
@@ -141,8 +202,9 @@ namespace TCC.Data.Skills
 
                     _mainTimer.Stop();
                     NPC(nameof(IsAvailable));
-                    _secondsTimer.Stop();
-                    _offsetTimer.Stop();
+                    //_secondsTimer.Stop();
+                    //_offsetTimer.Stop();
+                    _durationleftTimer.Stop();  // by HQ
 
                     Dispatcher.Invoke(() => Ended?.Invoke(Mode));
                 }
@@ -157,8 +219,16 @@ namespace TCC.Data.Skills
             _mainTimer.Start();
             NPC(nameof(IsAvailable));
 
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % 1000);
-            _offsetTimer.Start();
+            //_offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % 1000);
+            //_offsetTimer.Start();
+            Starttime = DateTime.Now;                                           // by HQ
+            UpdateNextinterval();                                               // by HQ
+            _durationleftTimer.Interval = TimeSpan.FromMilliseconds(interval);  // by HQ
+            _durationleftTimer.Stop();                                          // by HQ
+            if (interval > 0)                                                   // by HQ
+            {
+                _durationleftTimer.Start();
+            }
 
             Dispatcher.Invoke(() => Started?.Invoke(Mode));
         }
@@ -178,12 +248,21 @@ namespace TCC.Data.Skills
             Duration = cd;
             Seconds = Duration / 1000;
 
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
-            _offsetTimer.Start();
+            //_offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
+            //_offsetTimer.Start();
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
             _mainTimer.Start();
             NPC(nameof(IsAvailable));
+
+            Starttime = DateTime.Now;                                           // by HQ
+            UpdateNextinterval();                                               // by HQ
+            _durationleftTimer.Stop();                                          // by HQ
+            _durationleftTimer.Interval = TimeSpan.FromMilliseconds(interval);  // by HQ
+            if (interval > 0)                                                   // by HQ
+            {
+                _durationleftTimer.Start();
+            }
 
             Dispatcher?.Invoke(() => Started?.Invoke(Mode));
 
@@ -215,8 +294,9 @@ namespace TCC.Data.Skills
         public void Dispose()
         {
             _mainTimer.Stop();
-            _offsetTimer.Stop();
-            _secondsTimer.Stop();
+            //_offsetTimer.Stop();
+            //_secondsTimer.Stop();
+            _durationleftTimer.Stop();      // by HQ
             SessionManager.CombatChanged -= OnCombatStatusChanged;
             SessionManager.EncounterChanged -= OnCombatStatusChanged;
         }

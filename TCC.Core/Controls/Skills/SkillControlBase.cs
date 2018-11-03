@@ -37,7 +37,8 @@ namespace TCC.Controls.Skills
                 NPC();
             }
         }
-        public string SecondsText => Context == null ? "0" : Utils.TimeFormatter(Convert.ToUInt32(Context.Seconds > uint.MaxValue ? 0 : Context.Seconds));
+        //public string SecondsText => Context == null ? "0" : Utils.TimeFormatter(Convert.ToUInt32(Context.Seconds > uint.MaxValue ? 0 : Context.Seconds));
+        public string SecondsText => Context == null ? "0" : Utils.TimeFormatterDurationLeft(Convert.ToUInt32(Context.DurationLeft > uint.MaxValue ? 0 : Context.DurationLeft));  // by HQ
 
         public SkillControlBase()
         {
@@ -56,7 +57,8 @@ namespace TCC.Controls.Skills
             }
             Context.Ended += OnCooldownEnded;
             Context.Started += OnCooldownStarted;
-            Context.SecondsUpdated += OnSecondsUpdated;
+            //Context.SecondsUpdated += OnSecondsUpdated;
+            Context.DurationLeftUpdated += OnDurationLeftUpdated;    // by HQ
         }
         protected virtual void OnUnloaded(object sender, RoutedEventArgs e) //TODO: maybe use DataContextChanged
         {
@@ -67,9 +69,14 @@ namespace TCC.Controls.Skills
             }
             Context.Ended -= OnCooldownEnded;
             Context.Started -= OnCooldownStarted;
-            Context.SecondsUpdated -= OnSecondsUpdated;
+            //Context.SecondsUpdated -= OnSecondsUpdated;
+            Context.DurationLeftUpdated -= OnDurationLeftUpdated;    // by HQ
         }
         private void OnSecondsUpdated()
+        {
+            NPC(nameof(SecondsText));
+        }
+        private void OnDurationLeftUpdated()    // by HQ
         {
             NPC(nameof(SecondsText));
         }

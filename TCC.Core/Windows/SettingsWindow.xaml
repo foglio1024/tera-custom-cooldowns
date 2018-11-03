@@ -250,6 +250,10 @@
                                                ChoicesType="{x:Type data:ControlShape}"
                                                Choices="{Binding ControlShapes, Mode=OneWay}"
                                                SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <settings:BoolSetting SettingName="Show decimal places" IsOn="{Binding ShowSkillDecimalPlace, Mode=TwoWay}" 
+                                          SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
+                    </settings:BoolSetting>
+                    <settings:ValueSetting SettingName="Decimal places under X sec" Min="0" Max="60" Value="{Binding SkillDecimalPlaceSeconds, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png"/>
 
                 </StackPanel>
             </TabItem>
@@ -406,6 +410,10 @@
 
                     <Separator />
                     <settings:SelectionSetting SettingName="Direction" ChoicesType="{x:Type FlowDirection}" Choices="{Binding FlowDirections, Mode=OneWay}" SelectedItem="{Binding BuffsDirection, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
+                    <settings:BoolSetting SettingName="Show decimal places" IsOn="{Binding ShowBuffDecimalPlace, Mode=TwoWay}" 
+                                          SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
+                    </settings:BoolSetting>
+                    <settings:ValueSetting SettingName="Decimal places under X sec" Min="0" Max="60" Value="{Binding BuffDecimalPlaceSeconds, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png"/>
 
                     <!--Add My Abnormals Setting by HQ=======================================================-->
                     <Button Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 

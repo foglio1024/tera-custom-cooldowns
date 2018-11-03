@@ -308,6 +308,46 @@ namespace TCC.ViewModels
                 NPC(nameof(ShowItemsCooldown));
             }
         }
+        public bool ShowBuffDecimalPlace        // by HQ
+        {
+            get => Settings.Settings.ShowBuffDecimalPlace;
+            set
+            {
+                if (Settings.Settings.ShowBuffDecimalPlace == value) return;
+                Settings.Settings.ShowBuffDecimalPlace = value;
+                NPC(nameof(ShowBuffDecimalPlace));
+            }
+        }
+        public bool ShowSkillDecimalPlace        // by HQ
+        {
+            get => Settings.Settings.ShowSkillDecimalPlace;
+            set
+            {
+                if (Settings.Settings.ShowSkillDecimalPlace == value) return;
+                Settings.Settings.ShowSkillDecimalPlace = value;
+                NPC(nameof(ShowSkillDecimalPlace));
+            }
+        }
+        public uint BuffDecimalPlaceSeconds        // by HQ
+        {
+            get => Settings.Settings.BuffDecimalPlaceSeconds;
+            set
+            {
+                if (Settings.Settings.BuffDecimalPlaceSeconds == value) return;
+                Settings.Settings.BuffDecimalPlaceSeconds = value;
+                NPC(nameof(BuffDecimalPlaceSeconds));
+            }
+        }
+        public uint SkillDecimalPlaceSeconds        // by HQ
+        {
+            get => Settings.Settings.SkillDecimalPlaceSeconds;
+            set
+            {
+                if (Settings.Settings.SkillDecimalPlaceSeconds == value) return;
+                Settings.Settings.SkillDecimalPlaceSeconds = value;
+                NPC(nameof(SkillDecimalPlaceSeconds));
+            }
+        }
         public bool UseLfg
         {
             get => Settings.Settings.LfgEnabled;

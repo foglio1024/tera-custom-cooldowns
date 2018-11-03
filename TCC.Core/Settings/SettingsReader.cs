@@ -314,6 +314,10 @@ namespace TCC.Settings
                     //Add My Abnormals Setting by HQ ====================================================
                     else if (attr.Name == nameof(Settings.ShowAllMyAbnormalities)) Settings.ShowAllMyAbnormalities = bool.Parse(attr.Value);
                     //===================================================================================
+                    else if (attr.Name == nameof(Settings.BuffDecimalPlaceSeconds)) Settings.BuffDecimalPlaceSeconds = uint.Parse(attr.Value);      //by HQ
+                    else if (attr.Name == nameof(Settings.SkillDecimalPlaceSeconds)) Settings.SkillDecimalPlaceSeconds = uint.Parse(attr.Value);    //by HQ
+                    else if (attr.Name == nameof(Settings.ShowBuffDecimalPlace)) Settings.ShowBuffDecimalPlace = bool.Parse(attr.Value);            //by HQ
+                    else if (attr.Name == nameof(Settings.ShowSkillDecimalPlace)) Settings.ShowSkillDecimalPlace = bool.Parse(attr.Value);          //by HQ
                     else if (attr.Name == nameof(Settings.HighPriority)) Settings.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ForceSoftwareRendering)) Settings.ForceSoftwareRendering = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.Winpcap)) Settings.Winpcap = bool.Parse(attr.Value);

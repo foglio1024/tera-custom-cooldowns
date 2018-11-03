@@ -56,6 +56,8 @@ namespace TCC.Settings
         };
         // Buff window
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
+        public static uint BuffDecimalPlaceSeconds { get; set; } = 5;   //by HQ
+        public static bool ShowBuffDecimalPlace = true;                 //by HQ
         //Add My Abnormals Setting by HQ ===========================================================
         public static bool ShowAllMyAbnormalities { get; set; } = true;
         public static Dictionary<Class, List<uint>> MyAbnormals { get; } = new Dictionary<Class, List<uint>>()
@@ -80,6 +82,8 @@ namespace TCC.Settings
         // Cooldown window
         public static CooldownBarMode CooldownBarMode { get; set; } = CooldownBarMode.Fixed;
         public static bool ShowItemsCooldown { get; set; } = true;
+        public static bool ShowSkillDecimalPlace { get; set; } = true;  //by HQ
+        public static uint SkillDecimalPlaceSeconds { get; set; } = 5;  //by HQ
 
         // Boss window
         public static bool ShowOnlyBosses { get; set; }

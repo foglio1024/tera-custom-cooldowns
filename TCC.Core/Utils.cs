@@ -202,6 +202,22 @@ namespace TCC
             if (seconds < 99 * 60 * 60) return seconds / (60 * 60) + "h";
             return seconds / (60 * 60 * 24) + "d";
         }
+        public static string TimeFormatterDurationLeft(ulong miliseconds)   // by HQ
+        {
+            if (Settings.Settings.ShowSkillDecimalPlace == true)
+            {
+                if (miliseconds < Settings.Settings.SkillDecimalPlaceSeconds * 1000) return miliseconds / 1000 + "." + (miliseconds / 100) % 10 + "";
+                if (miliseconds < 99 * 1000) return miliseconds / 1000 + "";
+                if (miliseconds < 99 * 60 * 1000) return miliseconds / 1000 / 60 + "m";
+                if (miliseconds < 99 * 60 * 60 * 1000) return miliseconds / 1000 / (60 * 60) + "h";
+                return miliseconds / (60 * 60 * 24 * 1000) + "d";
+            }
+            else
+            {
+                var result = TimeFormatter(miliseconds / 1000);
+                return result;
+            }
+        }
 
         public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
             string[] filters, SortDescription[] sortFilters)
