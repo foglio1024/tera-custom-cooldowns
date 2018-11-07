@@ -13,7 +13,7 @@ namespace TCC.Data.Databases
         public Dictionary<uint, Dictionary<int, int>> ExpData;
         public ItemsDatabase(string lang = "EU-EN")
         {
-            var f = File.OpenText(Path.Combine(App.DataPath, $"resources/data/items/items-{lang}.tsv"));
+            var f = File.OpenText(Path.Combine(App.DataPath, $"items/items-{lang}.tsv"));
             Items = new Dictionary<uint, Item>();
             while (true)
             {
