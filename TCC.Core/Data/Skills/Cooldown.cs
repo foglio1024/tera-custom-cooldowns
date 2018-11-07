@@ -132,7 +132,7 @@ namespace TCC.Data.Skills
         }
         public void Start(Cooldown sk)
         {
-            sk.Dispose();
+            if(sk!=this) sk.Dispose();
             if (sk.Duration >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
