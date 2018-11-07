@@ -3,14 +3,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.ViewModels;
-using Brushes = System.Windows.Media.Brushes;
 
 namespace TCC.Controls.Classes
 {
@@ -46,12 +43,12 @@ namespace TCC.Controls.Classes
             _dc = DataContext as WarriorBarManager;
             if (_dc != null)
             {
-                _dc.TraverseCut.PropertyChanged += AnimateTraverseCut;
-                _dc.TraverseCut.ToZero += CooldownTraverseCut;
-                _dc.EdgeCounter.PropertyChanged += EdgeCounter_PropertyChanged;
-                _tc = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) {EasingFunction = new QuadraticEase()};
-                _tc.Completed += (_, __) => _tcAnimating = false;
-                _tcCd = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
+               //_dc.TraverseCut.PropertyChanged += AnimateTraverseCut;
+               //_dc.TraverseCut.ToZero += CooldownTraverseCut;
+                //_dc.EdgeCounter.PropertyChanged += EdgeCounter_PropertyChanged;
+                //_tc = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)) {EasingFunction = new QuadraticEase()};
+                //_tc.Completed += (_, __) => _tcAnimating = false;
+                //_tcCd = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
                 SessionManager.CurrentPlayer.PropertyChanged += CheckStanceWarning;
                 _dc.Stance.PropertyChanged += CheckStanceWarning;
             }
