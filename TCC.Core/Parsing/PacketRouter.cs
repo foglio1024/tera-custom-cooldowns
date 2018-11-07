@@ -104,18 +104,6 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
-            //if (p.SkillId % 10 != 0) return;
-            //if (p.SkillId / 1000 == 260)
-            //{
-            //    if (p.SkillId % 10 == 0)
-            //    {
-            //        SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
-            //    }
-            //    else
-            //    {
-            //        SkillManager.ChangeSkillCooldown(10100, p.Cooldown);
-            //    }
-            //}
             SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
         }
 
