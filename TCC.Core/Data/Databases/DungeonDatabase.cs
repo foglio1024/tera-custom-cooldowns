@@ -14,14 +14,14 @@ namespace TCC.Data.Databases
         public DungeonDatabase(string lang)
         {
             if (string.IsNullOrEmpty(lang)) lang = "EU-EN";
-            var f = File.OpenText($"resources/data/dungeons/dungeons-{lang}.tsv");
+            var f = File.OpenText(Path.Combine(App.DataPath, $"dungeons/dungeons-{lang}.tsv"));
             //DungeonNames = new Dictionary<uint, string>();
             DungeonDefs = new Dictionary<uint, Dungeon>();
             DungeonNames = new Dictionary<uint, string>();
             //TODO
             var defs = new Dictionary<uint, Tuple<short, DungeonTier>>();
-            if (!File.Exists("resources/data/dungeons-def.xml")) File.Copy("resources/data/dungeons-def-default.xml", "resources/data/dungeons-def.xml");
-            var def = XDocument.Load("resources/data/dungeons-def.xml");
+            if (!File.Exists(Path.Combine(App.DataPath, "dungeons-def.xml"))) File.Copy(Path.Combine(App.DataPath, "dungeons-def-default.xml"), Path.Combine(App.DataPath, "dungeons-def.xml"));
+            var def = XDocument.Load(Path.Combine(App.DataPath, "dungeons-def.xml"));
             foreach (var dg in def.Descendants().Where(x => x.Name == "Dungeon"))
             {
                 uint id = 0;

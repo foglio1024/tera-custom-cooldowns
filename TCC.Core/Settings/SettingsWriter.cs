@@ -40,8 +40,9 @@ namespace TCC.Settings
             if (!doc.HasElements) return;
             try
             {
-                if (File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml")) File.Copy(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml", Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml.bak", true);
-                doc.Save(Path.GetDirectoryName(typeof(App).Assembly.Location)+ @"/tcc-config.xml");
+                if (File.Exists(Path.Combine(App.BasePath, "tcc-config.xml")))
+                    File.Copy(Path.Combine(App.BasePath, "tcc-config.xml"), Path.Combine(App.BasePath, "tcc-config.xml.bak"), true);
+                doc.Save(Path.Combine(App.BasePath,"tcc-config.xml"));
             }
             catch (Exception)
             {

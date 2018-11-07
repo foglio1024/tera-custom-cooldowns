@@ -29,6 +29,8 @@ namespace TCC
         private static string _version;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
+        public static string BasePath = Path.GetDirectoryName(typeof(App).Assembly.Location);
+        public static string DataPath = Path.Combine(BasePath, "resources", "data");
 
         // ReSharper disable once InconsistentNaming
         public const string ThankYou_mEME =
@@ -374,7 +376,7 @@ namespace TCC
         {
             try
             {
-                File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe");
+                File.Delete(Path.Combine(BasePath, "TCCupdater.exe"));
             }
             catch
             {
