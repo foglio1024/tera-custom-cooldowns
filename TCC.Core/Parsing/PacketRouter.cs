@@ -253,8 +253,8 @@ namespace TCC.Parsing
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
 
-            if (Settings.Settings.LastRegion == "NA")
-                Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
+            //if (Settings.Settings.LastRegion == "NA")
+            //    Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
 
         }
 

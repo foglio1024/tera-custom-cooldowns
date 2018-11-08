@@ -33,8 +33,8 @@ namespace TCC
         public static string DataPath = Path.Combine(BasePath, "resources", "data");
 
         // ReSharper disable once InconsistentNaming
-        public const string ThankYou_mEME =
-            "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
+        //public const string ThankYou_mEME =
+        //    "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
         public static bool Loading { get; private set; }
 
         private void OnStartup(object sender, StartupEventArgs e)
@@ -91,8 +91,8 @@ namespace TCC
 
             UpdateManager.StartCheck();
 
-            if (Settings.Settings.LastRegion == "NA" || Settings.Settings.LastRegion == "")
-                WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
+            //if (Settings.Settings.LastRegion == "NA" || Settings.Settings.LastRegion == "")
+            //    WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
             if (Debug) DebugStuff();
             Loading = false;
         }
