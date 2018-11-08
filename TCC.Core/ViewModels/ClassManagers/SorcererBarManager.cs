@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System.Diagnostics;
+using TCC.Data;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels
@@ -7,7 +8,7 @@ namespace TCC.ViewModels
     {
         public DurationCooldownIndicator ManaBoost { get; set; }
 
-        public Cooldown Fusion{ get; set; }
+        public Cooldown Fusion { get; set; }
         public Skill PrimeFlame { get; set; }
         public Skill Iceberg { get; set; }
         public Skill ArcaneStorm { get; set; }
@@ -17,7 +18,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                if(Fire && Ice && Arcane) return FusionSkill;
+                if (Fire && Ice && Arcane) return FusionSkill;
                 if (Fire && Ice) return PrimeFlame;
                 if (Ice && Arcane) return Iceberg;
                 if (Fire && Arcane) return ArcaneStorm;
@@ -51,23 +52,49 @@ namespace TCC.ViewModels
                 Cooldown = new Cooldown(mb, true),
                 Buff = new Cooldown(mb, false)
             };
-            Fusion = new Cooldown(fusion, true);
+            Fusion = new Cooldown(fusion, false);
+
+            _sw = new Stopwatch();
 
         }
 
+        private Stopwatch _sw;
+        private long _latestCooldown;
+
         public override bool StartSpecialSkill(Cooldown sk)
         {
+
             if (sk.Skill.IconName == ManaBoost.Cooldown.Skill.IconName)
             {
                 ManaBoost.Cooldown.Start(sk.Duration);
                 return true;
             }
+            if (sk.Skill.IconName == PrimeFlame.IconName)
+            {
+                Fusion.Skill = PrimeFlame;
+                Fusion.Start(sk.Duration, sk.Mode);
+                if (sk.Mode == CooldownMode.Normal)
+                {
+                    _latestCooldown = (long)sk.OriginalDuration;
+                    _sw.Restart();
 
+                }
+
+                return true;
+            }
             if (sk.Skill.IconName == Fusion.Skill.IconName)
             {
-                Fusion.Start(sk.Duration);
+                _latestCooldown = (long)sk.OriginalDuration;
+                Fusion.Start(sk.Duration, sk.Mode);
+                _sw.Restart();
             }
             return false;
+        }
+
+        public void EndFireIcePre()
+        {
+            _sw.Stop();
+            Fusion.Start(_latestCooldown > _sw.ElapsedMilliseconds ? (ulong)(_latestCooldown - _sw.ElapsedMilliseconds) : (ulong)_latestCooldown);
         }
 
         public void NotifyElementChanged()
