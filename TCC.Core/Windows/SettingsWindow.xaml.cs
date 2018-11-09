@@ -92,15 +92,15 @@ namespace TCC.Windows
 
         private void OpenSettingsFolder(object sender, RoutedEventArgs e)
         {
-            Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/config");
+            Process.Start(Path.Combine(App.BasePath, "resources/config"));
         }
 
-/*
-        private void ConnectToTwitch(object sender, RoutedEventArgs e)
-        {
-            //TwitchConnector.Instance.Init();
-        }
-*/
+        /*
+                private void ConnectToTwitch(object sender, RoutedEventArgs e)
+                {
+                    //TwitchConnector.Instance.Init();
+                }
+        */
 
         private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
         {

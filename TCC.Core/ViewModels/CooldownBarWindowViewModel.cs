@@ -67,7 +67,7 @@ namespace TCC.ViewModels
                 return;
             }
             if(existing.Mode == CooldownMode.Pre && sk.Mode== CooldownMode.Normal) existing.Start(sk);
-            else existing.Refresh(sk.Skill.Id, sk.Duration);
+            else existing.Refresh(sk.Skill.Id, sk.Duration, sk.Mode);
             sk.Dispose();
         }
 

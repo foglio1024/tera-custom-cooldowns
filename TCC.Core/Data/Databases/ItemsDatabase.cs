@@ -13,7 +13,7 @@ namespace TCC.Data.Databases
         public Dictionary<uint, Dictionary<int, int>> ExpData;
         public ItemsDatabase(string lang = "EU-EN")
         {
-            var f = File.OpenText(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/data/items/items-" + lang + ".tsv");
+            var f = File.OpenText(Path.Combine(App.DataPath, $"items/items-{lang}.tsv"));
             Items = new Dictionary<uint, Item>();
             while (true)
             {
@@ -37,7 +37,7 @@ namespace TCC.Data.Databases
             var euBuggedReju = new Item(149644, "Harrowhold Rejuvenation Potion", 1, 0, 30, "icon_items.potion1_tex");
             if (!Items.ContainsKey(euBuggedReju.Id)) Items.Add(euBuggedReju.Id, euBuggedReju);
 
-            var xpFile = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location)+ $"/resources/data/equip_exp/equip_exp-{lang}.xml");
+            var xpFile = XDocument.Load(Path.Combine(App.DataPath, $"equip_exp/equip_exp-{lang}.xml"));
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
             {

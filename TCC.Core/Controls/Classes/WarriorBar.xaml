@@ -228,8 +228,11 @@
                 >
             </ContentControl>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                    Opacity=".7">
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
+                    Opacity="1">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="45"/>

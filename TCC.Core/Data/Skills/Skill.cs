@@ -56,10 +56,10 @@ namespace TCC.Data.Skills
             Name = name;
             ToolTip = toolTip;
         }
-        public Skill(Abnormality ab)
+        public Skill(Abnormality ab, Class c = Class.Common)
         {
             Id = ab.Id;
-            Class = Class.Common;
+            Class = c;
             Name = ab.Name;
             ToolTip = ab.ToolTip;
             IconName = ab.IconName;

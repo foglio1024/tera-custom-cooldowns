@@ -53,7 +53,7 @@ namespace TCC.ViewModels
                 return;
             }
             LoadEventFile(today, region);
-            if(SessionManager.Logged) TimeManager.Instance.SetGuildBamTime(false);
+            if (SessionManager.Logged) TimeManager.Instance.SetGuildBamTime(false);
 
         }
         private void LoadEventFile(DayOfWeek today, string region)
@@ -352,7 +352,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                var fs = new FileStream(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                var fs = new FileStream(Path.Combine(App.BasePath, "resources/config/characters.xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                 fs.SetLength(0);
                 using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
                 {

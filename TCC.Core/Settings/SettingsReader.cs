@@ -36,7 +36,7 @@ namespace TCC.Settings
         private static readonly List<uint> MyValkyrieDefault = new List<uint> { 10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542 };
         private static readonly List<uint> MyWarriorDefault = new List<uint> { 100800, 100801 };
         //===================================================================================
-        
+
         private List<Tab> ParseTabsSettings(XElement elem)
         {
             var result = new List<Tab>();
@@ -221,10 +221,10 @@ namespace TCC.Settings
         //===================================================================================
         public void LoadWindowSettings()
         {
-            if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml")) return;
+            if (!File.Exists(Path.Combine(App.BasePath, "tcc-config.xml"))) return;
             try
             {
-                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
+                _settingsDoc = XDocument.Load(Path.Combine(App.BasePath, "tcc-config.xml"));
 
                 foreach (var ws in _settingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
                 {
@@ -255,7 +255,7 @@ namespace TCC.Settings
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
                 LoadWindowSettings();
             }
         }
@@ -263,8 +263,8 @@ namespace TCC.Settings
         {
             try
             {
-                if (!File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml")) return;
-                _settingsDoc = XDocument.Load(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
+                if (!File.Exists(Path.Combine(App.BasePath, "tcc-config.xml"))) return;
+                _settingsDoc = XDocument.Load(Path.Combine(App.BasePath, "tcc-config.xml"));
 
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -374,7 +374,7 @@ namespace TCC.Settings
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes) File.Delete(Path.GetDirectoryName(typeof(App).Assembly.Location) + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
                 LoadSettings();
             }
         }

@@ -123,19 +123,24 @@
                     <RotateTransform Angle="-45"/>
                 </local:Arc.RenderTransform>
             </local:Arc>
+            <local:Arc x:Name="PreArc" 
+                       Opacity="1" 
+                       UseLayoutRounding="False" 
+                       Width="80" 
+                       Height="80" 
+                       StrokeThickness="40" 
+                       Margin="-20" 
+                       Stroke="#9fa0" 
+                       EndAngle=".01" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"                   
+                       RenderTransformOrigin=".5 .5">
+                <local:Arc.RenderTransform>
+                    <RotateTransform Angle="-45"/>
+                </local:Arc.RenderTransform>
+
+            </local:Arc>
         </Grid>
-        <local:Arc x:Name="PreArc" 
-                   Opacity="1" 
-                   UseLayoutRounding="False" 
-                   Width="Auto" 
-                   Height="Auto" 
-                   StrokeThickness="40" Margin="0" 
-                   Stroke="#9fa0" 
-                   EndAngle=".01" 
-                   HorizontalAlignment="Stretch" 
-                   VerticalAlignment="Stretch" 
-                   OpacityMask="{StaticResource RhombOpacityMask}">
-        </local:Arc>
         <Rectangle RenderTransformOrigin=".5 .5" RenderTransform="{StaticResource Rotate45}" Stroke="White" StrokeThickness="3"
                    Fill="#9fff" Name="Glow" Opacity="0"
                    Margin="8"/>

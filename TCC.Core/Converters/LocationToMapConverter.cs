@@ -12,7 +12,7 @@ namespace TCC.Converters
         {
             if (value == null) return null;
             var loc = (Location)value;
-            return Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/images/maps/" + SessionManager.MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg";
+            return Path.Combine(App.BasePath, "/resources/images/maps/" + SessionManager.MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

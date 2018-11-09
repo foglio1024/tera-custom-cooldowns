@@ -104,18 +104,6 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
-            //if (p.SkillId % 10 != 0) return;
-            //if (p.SkillId / 1000 == 260)
-            //{
-            //    if (p.SkillId % 10 == 0)
-            //    {
-            //        SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
-            //    }
-            //    else
-            //    {
-            //        SkillManager.ChangeSkillCooldown(10100, p.Cooldown);
-            //    }
-            //}
             SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
         }
 
@@ -265,8 +253,8 @@ namespace TCC.Parsing
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
 
-            if (Settings.Settings.LastRegion == "NA")
-                Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
+            //if (Settings.Settings.LastRegion == "NA")
+            //    Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
 
         }
 

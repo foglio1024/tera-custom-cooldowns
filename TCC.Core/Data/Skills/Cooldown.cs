@@ -193,7 +193,7 @@ namespace TCC.Data.Skills
         }
         public void Start(Cooldown sk)
         {
-            sk.Dispose();
+            if(sk!=this) sk.Dispose();
             if (sk.Duration >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
@@ -232,7 +232,7 @@ namespace TCC.Data.Skills
 
             Dispatcher.Invoke(() => Started?.Invoke(Mode));
         }
-        public void Refresh(ulong cd)
+        public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
             _mainTimer.Stop();
             NPC(nameof(IsAvailable));
@@ -244,7 +244,7 @@ namespace TCC.Data.Skills
                 Dispatcher?.Invoke(() => Ended?.Invoke(Mode));
                 return;
             }
-
+            Mode = mode;
             Duration = cd;
             Seconds = Duration / 1000;
 
@@ -267,10 +267,10 @@ namespace TCC.Data.Skills
             Dispatcher?.Invoke(() => Started?.Invoke(Mode));
 
         }
-        public void Refresh(ulong id, ulong cd)
+        public void Refresh(ulong id, ulong cd, CooldownMode mode = CooldownMode.Normal)
         {
             if (Skill.Id % 10 == 0 && id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
-            Refresh(cd);
+            Refresh(cd, mode);
         }
 
 

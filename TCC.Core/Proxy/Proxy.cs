@@ -58,7 +58,7 @@ namespace TCC.Proxy
         }
         private static void ProxyPacketAnalysisLoop()
         {
-            while (true)
+            while (_client.Connected)
             {
                 var successDequeue = _splitter.Packets.TryDequeue(out var data);
                 if (!successDequeue)
