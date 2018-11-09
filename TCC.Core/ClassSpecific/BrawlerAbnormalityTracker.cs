@@ -1,4 +1,5 @@
-﻿using TCC.Parsing.Messages;
+﻿using TCC.Data;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -58,7 +59,7 @@ namespace TCC.ClassSpecific
         private static void CheckCounterProc(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Refresh(0);
+            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Refresh(0, CooldownMode.Normal);
             ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = false;
         }
     }

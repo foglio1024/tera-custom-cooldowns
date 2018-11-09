@@ -40,13 +40,13 @@ namespace TCC.ClassSpecific
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
         {
             if (ManaBoostId != p.AbnormalityId) return;
-            ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Refresh(p.Duration);
+            ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
         {
             if (ManaBoostId != p.AbnormalityId) return;
-            ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Refresh(0);
+            ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)

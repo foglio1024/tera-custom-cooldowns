@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -37,7 +38,7 @@ namespace TCC.ClassSpecific
         private static void CheckInColdBlood(S_ABNORMALITY_END p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Refresh(0);
+            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

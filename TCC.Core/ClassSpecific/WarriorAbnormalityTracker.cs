@@ -88,12 +88,12 @@ namespace TCC.ClassSpecific
         private static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
         {
             if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).DeadlyGamble.Buff.Refresh(p.Duration);
+            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_END p)
         {
             if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).DeadlyGamble.Buff.Refresh(0);
+            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
@@ -140,7 +140,7 @@ namespace TCC.ClassSpecific
         private static void CheckSwiftGlyphs(S_ABNORMALITY_END p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Swift.Refresh(0);
+            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Swift.Refresh(0, CooldownMode.Normal);
             ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).SwiftProc = false;
         }
     }

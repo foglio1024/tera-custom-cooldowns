@@ -109,13 +109,13 @@ namespace TCC.ViewModels
         private void OnVowBuffEnded(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
         private void OnVocRefreshed(ulong duration)
         {
-            VolleyOfCurse.Buff.Refresh(duration);
+            VolleyOfCurse.Buff.Refresh(duration, CooldownMode.Normal);
             VolleyOfCurse.Cooldown.FlashOnAvailable = false;
         }
 
         private void OnVocExpired()
         {
-            VolleyOfCurse.Buff.Refresh(0);
+            VolleyOfCurse.Buff.Refresh(0, CooldownMode.Normal);
             VolleyOfCurse.Cooldown.FlashOnAvailable = true;
         }
 

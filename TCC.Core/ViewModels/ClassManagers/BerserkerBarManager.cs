@@ -112,7 +112,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == Unleash.Cooldown.Skill.IconName)
             {
-                Unleash.Cooldown.Refresh(skill.Id, cd);
+                Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
             return false;

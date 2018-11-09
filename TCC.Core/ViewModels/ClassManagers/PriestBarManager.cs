@@ -69,14 +69,14 @@ namespace TCC.ViewModels
 
         private void OnTripleNemesisRefreshed(ulong duration)
         {
-            TripleNemesis.Buff.Refresh(duration);
+            TripleNemesis.Buff.Refresh(duration, CooldownMode.Normal);
             TripleNemesis.Cooldown.FlashOnAvailable = false;
 
         }
 
         private void OnTripleNemesisExpired()
         {
-            TripleNemesis.Buff.Refresh(0);
+            TripleNemesis.Buff.Refresh(0, CooldownMode.Normal);
             TripleNemesis.Cooldown.FlashOnAvailable = true;
 
         }
@@ -121,7 +121,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
             {
-                EdictOfJudgment.Cooldown.Refresh(skill.Id, cd);
+                EdictOfJudgment.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
             return false;

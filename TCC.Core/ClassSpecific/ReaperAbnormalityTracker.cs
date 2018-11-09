@@ -1,4 +1,5 @@
-﻿using TCC.Data.Skills;
+﻿using TCC.Data;
+using TCC.Data.Skills;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -62,12 +63,12 @@ namespace TCC.ClassSpecific
         private static void CheckAssassinate(S_ABNORMALITY_REFRESH p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Refresh(p.Duration);
+            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckAssassinate(S_ABNORMALITY_END p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Refresh(0);
+            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
         {
@@ -77,12 +78,12 @@ namespace TCC.ClassSpecific
         private static void CheckShadowReaping(S_ABNORMALITY_REFRESH p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(p.Duration);
+            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_END p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(0);
+            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(0, CooldownMode.Normal);
         }
 
     }
