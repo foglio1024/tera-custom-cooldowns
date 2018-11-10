@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
@@ -53,14 +54,14 @@ namespace TCC.ClassSpecific
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             Log.C($"[CheckLaserTargeting(S_ABNORMALITY_REFRESH)] id:{p.AbnormalityId} duration:{p.Duration}");
-            ((GunnerBarManager)ClassWindowViewModel.Instance.CurrentManager).ModularSystem.Buff.Refresh(p.Duration);
+            ((GunnerBarManager)ClassWindowViewModel.Instance.CurrentManager).ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_END p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             Log.C($"[CheckLaserTargeting(S_ABNORMALITY_END)] id:{p.AbnormalityId}");
 
-            ((GunnerBarManager)ClassWindowViewModel.Instance.CurrentManager).ModularSystem.Buff.Refresh(0);
+            ((GunnerBarManager)ClassWindowViewModel.Instance.CurrentManager).ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

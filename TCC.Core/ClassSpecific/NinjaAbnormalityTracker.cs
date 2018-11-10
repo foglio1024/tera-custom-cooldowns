@@ -1,4 +1,5 @@
-﻿using TCC.Parsing.Messages;
+﻿using TCC.Data;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -48,12 +49,12 @@ namespace TCC.ClassSpecific
         private static void CheckInnerHarmony(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            ((NinjaBarManager)ClassWindowViewModel.Instance.CurrentManager).InnerHarmony.Buff.Refresh(p.Duration);
+            ((NinjaBarManager)ClassWindowViewModel.Instance.CurrentManager).InnerHarmony.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            ((NinjaBarManager)ClassWindowViewModel.Instance.CurrentManager).InnerHarmony.Buff.Refresh(0);
+            ((NinjaBarManager)ClassWindowViewModel.Instance.CurrentManager).InnerHarmony.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

@@ -99,11 +99,11 @@ namespace TCC.ViewModels
                         }
                         else
                         {
-                            existing.Refresh(sk.Skill.Id, sk.Duration);
+                            existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
                         }
                         return;
                     }
-                    existing.Refresh(sk.Skill.Id, sk.Duration);
+                    existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
                 }
             }
             catch {/* ignored*/}
@@ -124,7 +124,7 @@ namespace TCC.ViewModels
                         ShortSkills.Add(sk);
                         return;
                     }
-                    existing.Refresh(sk.Skill.Id, sk.Duration);
+                    existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
                 }
                 else
                 {
@@ -138,11 +138,11 @@ namespace TCC.ViewModels
                         }
                         else
                         {
-                            existing.Refresh(sk.Skill.Id, sk.Duration);
+                            existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
                         }
                         return;
                     }
-                    existing.Refresh(sk.Skill.Id, sk.Duration);
+                    existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
                 }
             }
             catch
@@ -277,20 +277,20 @@ namespace TCC.ViewModels
             var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(sk.Id,cd);
+                skill.Refresh(sk.Id,cd, CooldownMode.Normal);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(sk.Id,cd);
+                skill.Refresh(sk.Id,cd, CooldownMode.Normal);
                 return;
             }
             try
             {
                 var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name); //TODO: shouldn't this check on IconName???
                 //OtherSkills.Remove(otherSkill);
-                otherSkill?.Refresh(sk.Id, cd);
+                otherSkill?.Refresh(sk.Id, cd, CooldownMode.Normal);
             }
             catch
             {
@@ -305,13 +305,13 @@ namespace TCC.ViewModels
             var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(sk.Id,0);
+                skill.Refresh(sk.Id,0, CooldownMode.Normal);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
-                skill.Refresh(sk.Id,0);
+                skill.Refresh(sk.Id,0, CooldownMode.Normal);
                 return;
             }
 

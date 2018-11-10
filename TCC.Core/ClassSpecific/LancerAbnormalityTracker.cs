@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -45,7 +46,7 @@ namespace TCC.ClassSpecific
         private static void CheckArush(S_ABNORMALITY_END p)
         {
             if (!ARushIDs.Contains(p.AbnormalityId)) return;
-            ((LancerBarManager)ClassWindowViewModel.Instance.CurrentManager).AdrenalineRush.Buff.Refresh(0);
+            ((LancerBarManager)ClassWindowViewModel.Instance.CurrentManager).AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGshout(S_ABNORMALITY_BEGIN p)
@@ -61,7 +62,7 @@ namespace TCC.ClassSpecific
         private static void CheckGshout(S_ABNORMALITY_END p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            ((LancerBarManager)ClassWindowViewModel.Instance.CurrentManager).GuardianShout.Buff.Refresh(0);
+            ((LancerBarManager)ClassWindowViewModel.Instance.CurrentManager).GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckLineHeld(S_ABNORMALITY_BEGIN p)

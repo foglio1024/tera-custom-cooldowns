@@ -80,7 +80,7 @@ namespace TCC.ClassSpecific
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Refresh(p.Duration);
+                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
@@ -111,7 +111,7 @@ namespace TCC.ClassSpecific
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Refresh(0);
+                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Refresh(0, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {

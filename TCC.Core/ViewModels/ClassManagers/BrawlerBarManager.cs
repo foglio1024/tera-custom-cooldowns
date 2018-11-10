@@ -78,12 +78,12 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
             {
-                RhythmicBlows.Cooldown.Refresh(skill.Id, cd);
+                RhythmicBlows.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
             if (skill.IconName == Infuriate.Cooldown.Skill.IconName)
             {
-                Infuriate.Cooldown.Refresh(cd);
+                Infuriate.Cooldown.Refresh(cd, CooldownMode.Normal);
                 return true;
             }
             return false;

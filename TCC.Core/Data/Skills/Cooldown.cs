@@ -232,7 +232,7 @@ namespace TCC.Data.Skills
 
             Dispatcher.Invoke(() => Started?.Invoke(Mode));
         }
-        public void Refresh(ulong cd, CooldownMode mode = CooldownMode.Normal)
+        public void Refresh(ulong cd, CooldownMode mode)
         {
             _mainTimer.Stop();
             NPC(nameof(IsAvailable));
@@ -267,7 +267,7 @@ namespace TCC.Data.Skills
             Dispatcher?.Invoke(() => Started?.Invoke(Mode));
 
         }
-        public void Refresh(ulong id, ulong cd, CooldownMode mode = CooldownMode.Normal)
+        public void Refresh(ulong id, ulong cd, CooldownMode mode)
         {
             if (Skill.Id % 10 == 0 && id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
             Refresh(cd, mode);

@@ -114,7 +114,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == Thunderbolt.Skill.IconName)
             {
-                Thunderbolt.Refresh(0);
+                Thunderbolt.Refresh(0, CooldownMode.Normal);
                 return true;
             }
             return false;
@@ -124,7 +124,7 @@ namespace TCC.ViewModels
         {
             if (skill.IconName == Thunderbolt.Skill.IconName)
             {
-                Thunderbolt.Refresh(Thunderbolt.Skill.Id, cd);
+                Thunderbolt.Refresh(Thunderbolt.Skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
             return false;

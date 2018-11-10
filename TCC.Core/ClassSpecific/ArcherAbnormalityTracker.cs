@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -45,12 +46,12 @@ namespace TCC.ClassSpecific
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Refresh(p.Duration);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Refresh(0);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).Windsong.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
@@ -62,13 +63,13 @@ namespace TCC.ClassSpecific
         private static void CheckWindWalk(S_ABNORMALITY_REFRESH p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Refresh(p.Duration);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Refresh(p.Duration, CooldownMode.Normal);
             ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalkProc = true;
         }
         private static void CheckGaleSteps(S_ABNORMALITY_END p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Refresh(0);
+            ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalk.Refresh(0, CooldownMode.Normal);
             ((ArcherBarManager)ClassWindowViewModel.Instance.CurrentManager).WindWalkProc = false;
         }
 
