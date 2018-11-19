@@ -1077,5 +1077,27 @@ namespace TCC.Parsing
             SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
         }
+
+        public static void HandleUpdateNpcGuild(S_UPDATE_NPCGUILD p)
+        {
+            switch (p.Guild)
+            {
+                case NpcGuild.Vanguard:
+                    InfoWindowViewModel.Instance.CurrentCharacter.VanguardCredits = p.Credits;
+                    break;
+                case NpcGuild.Guardian:
+                    InfoWindowViewModel.Instance.CurrentCharacter.GuardianCredits = p.Credits;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static void HandleNpcGuildList(S_NPCGUILD_LIST p)
+        {
+            if (!p.UserId.IsMe()) return;
+            InfoWindowViewModel.Instance.CurrentCharacter.VanguardCredits = p.NpcGuildList[(int) NpcGuild.Vanguard];
+            InfoWindowViewModel.Instance.CurrentCharacter.GuardianCredits = p.NpcGuildList[(int) NpcGuild.Guardian];
+        }
     }
 }
