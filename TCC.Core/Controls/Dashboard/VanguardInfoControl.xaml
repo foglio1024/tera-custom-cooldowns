@@ -79,19 +79,38 @@
 
                            />
                 </Grid>
-                <!--Guardian points-->
+                <!--Guardian credits-->
+                <Grid Margin="5 0" Background="Transparent" ToolTip="Guardian Legion credits."
+                  HorizontalAlignment="Right" VerticalAlignment="Center" >
+                    <Ellipse Fill="{StaticResource ArcaneBrush}" Opacity=".2" Margin="2"/>
+                    <Viewbox StretchDirection="DownOnly" Width="19">
+                        <TextBlock Text="{Binding GuardianCredits, Converter={StaticResource GuardianPointsStringConverter}}"
+                                   Foreground="{StaticResource ArcaneBrush}" 
+                                   TextAlignment="Center" FontSize="15" VerticalAlignment="Center"/>
+                    </Viewbox>
+                    <local:Arc x:Name="GuardianCreditsArc"
+                           Width="30" 
+                           Height="30" 
+                           Stroke="{StaticResource ArcaneBrush}" 
+                           StrokeThickness="3" 
+                           Margin="0" 
+                           Opacity=".8"
+                           EndAngle="{Binding GuardianCreditsFactor, Converter={StaticResource Converters.FactorToAngle}}"
+                           />
+                </Grid>
+                <!--Guardian quests-->
                 <Grid Margin="5 0" Background="Transparent" ToolTip="Claimed Guardian quests."
                   HorizontalAlignment="Right" VerticalAlignment="Center" >
-                    <Ellipse Fill="{StaticResource GuardianBrush}" Opacity=".2" Margin="2"></Ellipse>
+                    <Ellipse Fill="{StaticResource FireBrush}" Opacity=".2" Margin="2"></Ellipse>
                     <Viewbox StretchDirection="DownOnly" Width="19">
                         <TextBlock Text="{Binding ClaimedGuardianQuests}"
-                                   Foreground="{StaticResource GuardianBrush}" 
+                                   Foreground="{StaticResource FireBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
                     <local:Arc x:Name="GuardianArc"
                            Width="30" 
                            Height="30" 
-                           Stroke="{StaticResource GuardianBrush}" 
+                           Stroke="{StaticResource FireBrush}" 
                            StrokeThickness="3" 
                            Margin="0" 
                            Opacity=".8"
@@ -103,30 +122,30 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center" >
                     <Ellipse Fill="{StaticResource ArcaneBrush}" Opacity=".2" Margin="2"/>
                     <Viewbox StretchDirection="DownOnly" Width="19">
-                        <TextBlock Text="{Binding Credits, Converter={StaticResource GuardianPointsStringConverter}}"
+                        <TextBlock Text="{Binding VanguardCredits, Converter={StaticResource GuardianPointsStringConverter}}"
                                    Foreground="{StaticResource ArcaneBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"/>
                     </Viewbox>
-                    <local:Arc x:Name="CreditsArc"
+                    <local:Arc x:Name="VanguardCreditsArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource ArcaneBrush}" 
                            StrokeThickness="3" 
                            Margin="0" 
                            Opacity=".8"
-                           EndAngle="{Binding CreditsFactor, Converter={StaticResource Converters.FactorToAngle}}"
+                           EndAngle="{Binding VanguardCreditsFactor, Converter={StaticResource Converters.FactorToAngle}}"
                            />
                 </Grid>
 
                 <!--Daily-->
                 <Grid Margin="5 0" Background="Transparent" 
                   HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Completed daily Vanguard quests.">
-                    <Ellipse Fill="{StaticResource DailyBrush}" Opacity=".2" Margin="2"></Ellipse>
-                    <TextBlock Text="{Binding DailiesDone}" Foreground="{StaticResource DailyBrush}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    <Ellipse Fill="{StaticResource FireBrush}" Opacity=".2" Margin="2"></Ellipse>
+                    <TextBlock Text="{Binding VanguardDailiesDone}" Foreground="{StaticResource FireBrush}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     <local:Arc x:Name="DailyArc"
                            Width="30" 
                            Height="30" 
-                           Stroke="{StaticResource DailyBrush}"
+                           Stroke="{StaticResource FireBrush}"
                            StrokeThickness="3" 
                            Margin="0" 
                            Opacity=".8"
@@ -136,12 +155,12 @@
                 <!--Weekly-->
                 <Grid Margin="5 0" Background="Transparent" 
                   HorizontalAlignment="Right" VerticalAlignment="Center"  ToolTip="Completed weekly Vanguard quests.">
-                    <Ellipse Fill="{StaticResource WeeklyBrush}" Opacity=".2" Margin="2"/>
-                    <TextBlock Text="{Binding WeekliesDone}" Foreground="{StaticResource WeeklyBrush}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    <Ellipse Fill="{StaticResource FireBrushLight}" Opacity=".2" Margin="2"/>
+                    <TextBlock Text="{Binding VanguardWeekliesDone}" Foreground="{StaticResource FireBrushLight}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     <local:Arc x:Name="WeeklyArc"
                            Width="30" 
                            Height="30" 
-                           Stroke="{StaticResource WeeklyBrush}" 
+                           Stroke="{StaticResource FireBrushLight}" 
                            StrokeThickness="3" 
                            Margin="0" 
                            Opacity=".8"
@@ -233,7 +252,7 @@
                            Margin="0,0,0,0" 
                            FontWeight="Thin" 
                            Foreground="#2196f3" 
-                           Text="{Binding DailiesDone}" 
+                           Text="{Binding VanguardDailiesDone}" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Bottom"
                            ToolTip="Completed daily Vanguard quests."
@@ -244,7 +263,7 @@
                            Margin="0,0,0,0" 
                            FontWeight="Thin" 
                            Foreground="#0d47a1" 
-                           Text="{Binding WeekliesDone}" 
+                           Text="{Binding VanguardWeekliesDone}" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Bottom"
                            ToolTip="Completed weekly Vanguard quests."
