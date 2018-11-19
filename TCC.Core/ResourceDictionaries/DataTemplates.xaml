@@ -255,21 +255,20 @@
     </DataTemplate>
     <DataTemplate x:Key="SimpleTemplate" DataType="chat:MessagePiece">
         <ctrl:OutlinedTextBlock Fill="{Binding Color}"
-                                        Text="{Binding Text}" 
-                                        Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
-                                        Stroke="#9000"
-                                        StrokeThickness="3"
-                                        FontSize="{Binding Size}"
+                                Text="{Binding Text}" 
+                                Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
+                                Stroke="#9000"
+                                StrokeThickness="3"
+                                FontSize="{Binding Size}"
                                 FontFamily="{StaticResource NotoSansMed}"
-
-                                        TextWrapping="WrapWithOverflow"
-                                        FontWeight="DemiBold"
-                                        Opacity="1"
-                                        Width="Auto"
-                                        HorizontalAlignment="Stretch"
-                                        TextTrimming="None"
-                                        Margin="{Binding Spaces}"
-                                        />
+                                TextWrapping="WrapWithOverflow"
+                                FontWeight="DemiBold"
+                                Opacity="1"
+                                Width="Auto"
+                                HorizontalAlignment="Stretch"
+                                TextTrimming="None"
+                                Margin="{Binding Spaces}"
+                                />
     </DataTemplate>
     <DataTemplate x:Key="MoneyTemplate">
         <chatCtrl:MoneyMessagePiece />

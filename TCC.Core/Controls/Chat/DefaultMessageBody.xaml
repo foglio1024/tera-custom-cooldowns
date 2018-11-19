@@ -13,15 +13,15 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                          
                 <ItemsControl ItemsSource="{Binding Pieces}"
-                          ItemTemplate="{StaticResource MessageBodyTemplate}" 
-                          Background="#0f00"  
-                          Margin="3,0,0,0" 
+                              ItemTemplate="{StaticResource MessageBodyTemplate}"
+Background="Transparent"
+                          Margin="5,0,0,0" 
                           VerticalAlignment="Center" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" 
-                           PreviewMouseRightButtonDown="WrapPanel_PreviewMouseRightButtonDown" VerticalAlignment="Top">
+                            <WrapPanel HorizontalAlignment="Stretch" PreviewMouseRightButtonDown="WrapPanel_PreviewMouseRightButtonDown" VerticalAlignment="Top">
                             </WrapPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>

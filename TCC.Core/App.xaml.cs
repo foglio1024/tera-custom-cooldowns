@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;
@@ -103,20 +104,27 @@ namespace TCC
             new DebugWindow().Show();
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
-            _t = new System.Timers.Timer { Interval = 1000 };
-            _t.Elapsed += (_, __) =>
-            {
-                SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
-                    0 : SessionManager.CurrentPlayer.CurrentST + 100);
-            };
             SessionManager.CurrentPlayer.Class = Class.Warrior;
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
-            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower() + "-skills.xml", SessionManager.CurrentPlayer.Class);
-            //SessionManager.SetSorcererElements(true, true, true);
-            SessionManager.SetPlayerMaxSt(10, 1000);
-            SessionManager.SetPlayerSt(10, 1000);
 
-            //_t.Start();
+            SessionManager.SetCombatStatus(SessionManager.CurrentPlayer.EntityId, true);
+            SessionManager.Encounter = true;
+            (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Cooldown.Start(2000);
+            _t = new System.Timers.Timer { Interval = 100 };
+            var r = new Random();
+            _t.Elapsed += (_, __) =>
+            {
+                ChatWindowManager.Instance.AddTccMessage("Random message #" + r.Next(200));
+                //SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
+                //    0 : SessionManager.CurrentPlayer.CurrentST + 100);
+            };
+            //ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            //CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower() + "-skills.xml", SessionManager.CurrentPlayer.Class);
+            ////SessionManager.SetSorcererElements(true, true, true);
+            //SessionManager.SetPlayerMaxSt(10, 1000);
+            //SessionManager.SetPlayerSt(10, 1000);
+
+            _t.Start();
             //var i = 0;
             //while (i < 20000)
             //{
