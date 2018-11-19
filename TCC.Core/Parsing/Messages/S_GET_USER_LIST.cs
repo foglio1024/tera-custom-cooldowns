@@ -151,7 +151,7 @@ namespace TCC.Parsing.Messages
 
                 //c.guild = reader.ReadTeraString();
 
-                CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos, InfoWindowViewModel.Instance.GetDispatcher(), (Laurel)c.Laurel) { GuildName = c.GuildName });
+                CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos) { GuildName = c.GuildName, Laurel = (Laurel)c.Laurel });
 
             }
             CharacterList = CharacterList.OrderBy(ch => ch.Position).ToList();
