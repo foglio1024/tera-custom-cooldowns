@@ -123,6 +123,8 @@
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="ViewModels\ChatTabClient.cs" />
+    <Compile Include="ViewModels\ChatWindowManager.cs" />
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
     <Compile Include="ViewModels\MyAbnormalityVM.cs" />
     <Compile Include="Windows\ClassPositions.cs" />
@@ -674,7 +676,7 @@
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
-    <Compile Include="ViewModels\ChatWindowViewModel.cs" />
+    <Compile Include="ViewModels\TempPrivateMessage.cs" />
     <Compile Include="ViewModels\ClassManagers\DurationCooldownIndicator.cs" />
     <Compile Include="ViewModels\ClassManagers\GunnerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\LancerBarManager.cs" />
