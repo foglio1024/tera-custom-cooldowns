@@ -252,12 +252,22 @@ namespace TCC.ViewModels
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
+                if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
+                {
+                    //Log.All($"Discarded update for {sk.Skill.Name} [{sk.Skill.Id}]");
+                    return;
+                }
                 skill.Start(sk);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
+                if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
+                {
+                    //Log.All($"Discarded update for {sk.Skill.Name} [{sk.Skill.Id}]");
+                    return;
+                }
                 skill.Start(sk);
                 return;
             }
