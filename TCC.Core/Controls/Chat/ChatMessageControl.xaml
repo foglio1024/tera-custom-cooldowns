@@ -25,13 +25,6 @@
             <ContentControl Content="{Binding}" x:Name="Body" Grid.Column="1" 
                             ContentTemplateSelector="{StaticResource BodyTemplateSelector}" 
                             />
-            <Popup Grid.Column="0" IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True"
-                   x:Name="Popup" MouseLeave="Popup_MouseLeave">
-                <Border Style="{StaticResource DefaultBorderStyle}" Padding="5" >
-                    <ContentControl Content="{Binding}" Width="650"
-                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
-                </Border>
-            </Popup>
         </Grid>
     </Grid>
 </UserControl>
