@@ -457,4 +457,13 @@ namespace TCC
         public static readonly DependencyProperty CornerRadiusProperty =
         DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ButtonExtensions), new PropertyMetadata(new CornerRadius(0)));
     }
+
+    public static class DispatcherTimerExtensions
+    {
+        public static void Refresh(this DispatcherTimer t)
+        {
+            t.Stop();
+            t.Start();
+        }
+    }
 }
