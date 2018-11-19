@@ -40,7 +40,7 @@ namespace TCC.ViewModels
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(Dispatcher);
             LoadCharDoc();
             if (Characters.Count > 0) SelectCharacter(Characters[0]);
-            else SelectCharacter(new Character("", Class.None, 0, 0, Dispatcher));
+            else SelectCharacter(new Character());
         }
 
         public void LoadEvents(DayOfWeek today, string region)
@@ -267,9 +267,9 @@ namespace TCC.ViewModels
             var ch = Characters.ToSyncArray().FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
             if (ch != null)
             {
-                ch.WeekliesDone = x.WeeklyDone;
-                ch.DailiesDone = x.DailyDone;
-                ch.Credits = x.VanguardCredits;
+                ch.VanguardWeekliesDone = x.WeeklyDone;
+                ch.VanguardDailiesDone = x.DailyDone;
+                ch.VanguardCredits = x.VanguardCredits;
                 SaveToFile();
             }
 
@@ -307,11 +307,12 @@ namespace TCC.ViewModels
                 var ce = new XElement("Character",
                     new XAttribute("name", c.Name),
                     new XAttribute("id", c.Id),
-                    new XAttribute("pos", c.Position),
-                    new XAttribute("credits", c.Credits),
-                    new XAttribute("weekly", c.WeekliesDone),
-                    new XAttribute("daily", c.DailiesDone),
                     new XAttribute("class", c.Class),
+                    new XAttribute("pos", c.Position),
+                    new XAttribute("vanguardCredits", c.VanguardCredits),
+                    new XAttribute("guardianCredits", c.GuardianCredits),
+                    new XAttribute("vanguardWeekly", c.VanguardWeekliesDone),
+                    new XAttribute("vanguardDaily", c.VanguardDailiesDone),
                     new XAttribute("guardianQuests", c.ClaimedGuardianQuests),
                     new XAttribute("elleonMarks", c.ElleonMarks)
                     );
@@ -386,47 +387,41 @@ namespace TCC.ViewModels
         }
         private void LoadCharacters()
         {
+            //TODO: make reader class and refactor this
             if (!File.Exists("resources/config/characters.xml")) return;
             var doc = XDocument.Load("resources/config/characters.xml");
             // ReSharper disable AssignNullToNotNullAttribute
             SessionManager.IsElite = bool.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters")?.Attribute("elite")?.Value);
             foreach (var c in doc.Descendants().Where(x => x.Name == "Character"))
             {
-                var name = c.Attribute("name")?.Value;
-                var cr = Convert.ToInt32(c.Attribute("credits")?.Value);
-                var w = Convert.ToInt32(c.Attribute("weekly")?.Value);
-                var d = Convert.ToInt32(c.Attribute("daily")?.Value);
-                var id = Convert.ToUInt32(c.Attribute("id")?.Value);
-                var pos = Convert.ToInt32(c.Attribute("pos")?.Value);
-                var guard = c.Attribute("guardianQuests") != null ? Convert.ToInt32(c.Attribute("guardianQuests")?.Value) : 0;
-                var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks")?.Value) : 0;
-                var classString = c.Attribute("class")?.Value;
-                if (!Enum.TryParse<Class>(classString, out var cl))
+                var ch = new Character();
+                c.Attributes().ToList().ForEach(attr =>
                 {
-                    //keep retrocompatibility
-                    if (classString == "Elementalist") classString = "Mystic";
-                    else if (classString == "Fighter") classString = "Brawler";
-                    else if (classString == "Engineer") classString = "Gunner";
-                    else if (classString == "Soulless") classString = "Reaper";
-                    else if (classString == "Glaiver") classString = "Valkyrie";
-                    else if (classString == "Assassin") classString = "Ninja";
-                }
-                cl = (Class)Enum.Parse(typeof(Class), classString);
+                    if (attr.Name == "name") ch.Name = attr.Value;
+                    else if (attr.Name == "id") ch.Id = Convert.ToUInt32(attr.Value);
+                    else if (attr.Name == "pos") ch.Position = Convert.ToInt32(attr.Value);
+                    else if (attr.Name == "vanguardCredits") ch.VanguardCredits = Convert.ToInt32(attr.Value);
+                    else if (attr.Name == "guardianCredits") ch.GuardianCredits = Convert.ToInt32(attr.Value);
+                    else if (attr.Name == "vanguardWeekly") ch.VanguardWeekliesDone = Convert.ToInt32(attr.Value);
+                    else if (attr.Name == "vanguardDaily") ch.VanguardDailiesDone = Convert.ToInt32(attr.Value);
+                    else if (attr.Name == "guardianQuests") ch.ClaimedGuardianQuests = Convert.ToInt32(attr.Value);
+                    else if (attr.Name == "elleonMarks") ch.ElleonMarks = Convert.ToUInt32(attr.Value);
+                    else if (attr.Name == "class") ch.Class = (Class)Enum.Parse(typeof(Class), attr.Value);
+                });
 
-                var ch = new Character(name, cl, id, pos, Dispatcher)
-                {
-                    Credits = cr,
-                    WeekliesDone = w,
-                    DailiesDone = d,
-                    ClaimedGuardianQuests = guard,
-                    ElleonMarks = marks
-                };
                 var dgDict = new Dictionary<uint, short>();
                 foreach (var dgEl in c.Descendants().Where(x => x.Name == "Dungeon"))
                 {
-                    var dgId = Convert.ToUInt32(dgEl.Attribute("id")?.Value);
-                    var dgEntries = Convert.ToInt16(dgEl.Attribute("entries")?.Value);
-                    var dgTotal = dgEl.Attribute("total") != null ? Convert.ToInt16(dgEl.Attribute("total")?.Value) : 0;
+                    uint dgId = 0;
+                    short dgEntries = 0;
+                    var dgTotal = 0;
+
+                    dgEl.Attributes().ToList().ForEach(attr =>
+                    {
+                        if (attr.Name == "id") dgId = Convert.ToUInt32(attr.Value);
+                        else if (attr.Name == "entries") dgEntries = Convert.ToInt16(attr.Value);
+                        else if (attr.Name == "total") dgTotal = Convert.ToInt16(attr.Value);
+                    });
                     ch.SetDungeonTotalRuns(dgId, dgTotal);
                     dgDict.Add(dgId, dgEntries);
                 }
@@ -434,11 +429,20 @@ namespace TCC.ViewModels
                 var gear = new List<GearItem>();
                 foreach (var gearEl in c.Descendants().Where(x => x.Name == "Gear"))
                 {
-                    var pieceId = Convert.ToUInt32(gearEl.Attribute("id")?.Value);
-                    var pieceType = (GearPiece)Enum.Parse(typeof(GearPiece), gearEl.Attribute("piece")?.Value);
-                    var pieceTier = (GearTier)Enum.Parse(typeof(GearTier), gearEl.Attribute("tier")?.Value);
-                    var pieceEnchant = Convert.ToInt32(gearEl.Attribute("enchant")?.Value);
-                    var exp = Convert.ToUInt32(gearEl.Attribute("exp")?.Value);
+                    uint pieceId = 0;
+                    var pieceType = GearPiece.Weapon;
+                    var pieceTier = GearTier.Low;
+                    var pieceEnchant = 0;
+                    uint exp = 0;
+
+                    gearEl.Attributes().ToList().ForEach(attr =>
+                    {
+                        if (attr.Name == "id") pieceId = Convert.ToUInt32(attr.Value);
+                        if (attr.Name == "piece") pieceType = (GearPiece)Enum.Parse(typeof(GearPiece), attr.Value);
+                        if (attr.Name == "tier") pieceTier = (GearTier)Enum.Parse(typeof(GearTier), attr.Value);
+                        if (attr.Name == "enchant") pieceEnchant = Convert.ToInt32(attr.Value);
+                        if (attr.Name == "exp") exp = Convert.ToUInt32(attr.Value);
+                    });
                     gear.Add(new GearItem(pieceId, pieceTier, pieceType, pieceEnchant, exp));
                 }
                 ch.UpdateGear(gear);
