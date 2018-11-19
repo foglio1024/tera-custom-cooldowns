@@ -29,8 +29,8 @@ namespace TCC.ViewModels
         public event Action<ChatMessage> NewMessage;
         public event Action<int> PrivateChannelJoined;
 
-        public List<SimpleUser> Friends { get; }
-        public List<string> BlockedUsers { get; }
+        public List<SimpleUser> Friends { get; set; }
+        public List<string> BlockedUsers { get; set; }
         public LFG LastClickedLfg { get; set; }
 
         public bool IsChatVisible
