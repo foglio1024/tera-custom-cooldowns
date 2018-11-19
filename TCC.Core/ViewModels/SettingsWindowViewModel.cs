@@ -188,7 +188,7 @@ namespace TCC.ViewModels
             {
                 if (Settings.Settings.ChatFadeOut == value) return;
                 Settings.Settings.ChatFadeOut = value;
-                if (value) ChatWindowManager.Instance.RefreshTimer();
+                if (value) ChatWindowManager.Instance.RefreshHideTimer();
                 NPC(nameof(ChatFadeOut));
             }
         }
