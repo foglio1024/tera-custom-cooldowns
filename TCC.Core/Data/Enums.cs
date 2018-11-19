@@ -1,5 +1,10 @@
 ﻿namespace TCC.Data
 {
+    public enum NpcGuild
+    {
+        Vanguard = 609,
+        Guardian = 611
+    }
     public enum WarriorStance
     {
         None, Assault, Defensive
