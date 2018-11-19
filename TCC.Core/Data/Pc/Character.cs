@@ -13,9 +13,10 @@ namespace TCC.Data.Pc
         private string _name;
         private Class _class;
         private Laurel _laurel;
-        private int _dailiesDone;
-        private int _weekliesDone;
-        private int _credits;
+        private int _vanguardDailiesDone;
+        private int _vanguardWeekliesDone;
+        private int _vanguardCredits;
+        private int _guardianCredits;
         private bool _isLoggedIn;
         private bool _isSelected;
         private int _claimedGuardianQuests;
@@ -52,14 +53,14 @@ namespace TCC.Data.Pc
                 NPC(nameof(Laurel));
             }
         }
-        public int DailiesDone
+        public int VanguardDailiesDone
         {
-            get => _dailiesDone;
+            get => _vanguardDailiesDone;
             set
             {
-                if (_dailiesDone == value) return;
-                _dailiesDone = value;
-                NPC(nameof(DailiesDone));
+                if (_vanguardDailiesDone == value) return;
+                _vanguardDailiesDone = value;
+                NPC(nameof(VanguardDailiesDone));
                 NPC(nameof(VanguardDailyCompletion));
             }
         }
@@ -86,30 +87,42 @@ namespace TCC.Data.Pc
             var dg = Dungeons.ToSyncArray().FirstOrDefault(d => d.Id == dgId);
             if (dg != null) dg.Clears = runs;
         }
-        public int WeekliesDone
+        public int VanguardWeekliesDone
         {
-            get => _weekliesDone;
+            get => _vanguardWeekliesDone;
             set
             {
-                if (_weekliesDone == value) return;
-                _weekliesDone = value;
-                NPC(nameof(WeekliesDone));
+                if (_vanguardWeekliesDone == value) return;
+                _vanguardWeekliesDone = value;
+                NPC(nameof(VanguardWeekliesDone));
                 NPC(nameof(VanguardWeeklyCompletion));
 
             }
         }
-        public int Credits
+        public int VanguardCredits
         {
-            get => _credits;
+            get => _vanguardCredits;
             set
             {
-                if (_credits == value) return;
-                _credits = value;
-                NPC(nameof(Credits));
-                NPC(nameof(CreditsFactor));
+                if (_vanguardCredits == value) return;
+                _vanguardCredits = value;
+                NPC(nameof(VanguardCredits));
+                NPC(nameof(VanguardCreditsFactor));
             }
         }
-        public double CreditsFactor => Credits / 9000.0d;
+        public int GuardianCredits
+        {
+            get => _guardianCredits;
+            set
+            {
+                if (_guardianCredits == value) return;
+                _guardianCredits = value;
+                NPC(nameof(GuardianCredits));
+                NPC(nameof(GuardianCreditsFactor));
+            }
+        }
+        public double VanguardCreditsFactor => VanguardCredits / 9000.0d;
+        public double GuardianCreditsFactor => GuardianCredits / 100000.0d;
         public bool IsLoggedIn
         {
             get => _isLoggedIn;
@@ -129,8 +142,8 @@ namespace TCC.Data.Pc
                 NPC(nameof(IsSelected));
             }
         }
-        public double VanguardWeeklyCompletion => WeekliesDone / (double)SessionManager.MaxWeekly;
-        public double VanguardDailyCompletion => DailiesDone / (double)SessionManager.MaxDaily;
+        public double VanguardWeeklyCompletion => VanguardWeekliesDone / (double)SessionManager.MaxWeekly;
+        public double VanguardDailyCompletion => VanguardDailiesDone / (double)SessionManager.MaxDaily;
         public double GuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
@@ -189,18 +202,14 @@ namespace TCC.Data.Pc
 
         }
 
-        public Character(string name, Class c, uint id, int pos, Dispatcher d, Laurel l = Laurel.None)
+        public Character()
         {
-            Dispatcher = d;
+            Dispatcher = Dispatcher.CurrentDispatcher;
             Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(Dispatcher);
             Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
-            Name = name;
-            Class = c;
-            Laurel = l;
-            DailiesDone = 0;
-            WeekliesDone = 0;
-            Id = id;
-            Position = pos;
+            VanguardDailiesDone = 0;
+            VanguardWeekliesDone = 0;
+            Laurel = Laurel.None;
             MaxGuardianQuests = SessionManager.MaxGuardianQuests;
             foreach (var dg in SessionManager.DungeonDatabase.DungeonDefs)
             {
@@ -215,8 +224,14 @@ namespace TCC.Data.Pc
             Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
             Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
 
-            //Utils.InitLiveView(dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
-            //DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show, Dungeons, new string[] { nameof(Dungeon.Show) }, new string[] { nameof(Dungeon.Tier) });
+
+        }
+        public Character(string name, Class c, uint id, int pos) : this()
+        {
+            Name = name;
+            Class = c;
+            Id = id;
+            Position = pos;
         }
 
         public int CompareTo(object obj)
