@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -14,7 +15,6 @@ namespace TCC
         public const int MaxGuardianQuests = 40;
         private static bool _logged;
         private static bool _loadingScreen = true;
-
         private static bool _encounter;
         private static bool _inGameChatOpen;
         private static bool _inGameUiOn;
@@ -86,6 +86,13 @@ namespace TCC
         public static event Action LoggedChanged;
 
         public static readonly Player CurrentPlayer = new Player();
+
+        public static readonly Dictionary<uint, string> GuildMembersNames = new Dictionary<uint, string>();
+
+        public static string GetGuildMemberName(uint id)
+        {
+            return GuildMembersNames.ContainsKey(id) ? GuildMembersNames[id] : "Unkown player";
+        }
 
         public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
         public static MonsterDatabase MonsterDatabase { get; private set; }
