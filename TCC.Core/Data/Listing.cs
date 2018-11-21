@@ -144,7 +144,8 @@ namespace TCC.Data
             }
         }
 
-        public bool IsTwitch => _message.Contains("twitch.tv");
+        public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) !=-1;
+
 
         public void NotifyMyLfg()
         {
