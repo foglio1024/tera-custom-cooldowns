@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
@@ -252,7 +251,7 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
-
+            SessionManager.GuildMembersNames.Clear();
             //if (Settings.Settings.LastRegion == "NA")
             //    Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
 
@@ -471,8 +470,8 @@ namespace TCC.Parsing
         {
             if (message.IndexOf('[') != -1 && message.IndexOf(']') != -1)
             {
-                author = message.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                message = message.Replace('[' + author + ']', "");
+            //    author = message.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
+             //   message = message.Replace('[' + author + ']', "");
             }
             if (author == "undefined") author = "System";
             if (!ChatWindowManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
@@ -1098,6 +1097,31 @@ namespace TCC.Parsing
             if (!p.UserId.IsMe()) return;
             InfoWindowViewModel.Instance.CurrentCharacter.VanguardCredits = p.NpcGuildList[(int) NpcGuild.Vanguard];
             InfoWindowViewModel.Instance.CurrentCharacter.GuardianCredits = p.NpcGuildList[(int) NpcGuild.Guardian];
+        }
+
+        public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT obj)
+        {
+            const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            var questName = SessionManager.GuildQuestDatabase.GuildQuests[obj.QuestId].Title;
+            SessionManager.MonsterDatabase.TryGetMonster(obj.TemplateId, obj.ZoneId, out var npc);
+            var zone = SessionManager.MapDatabase.Names[obj.ZoneId];
+            var msg = $"@0\vquestName\v{questName}\vnpcName\v{npc.Name}\vzoneName\v{zone}";
+            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+
+        }
+
+        public static void HandleChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
+        {
+            const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{SessionManager.GetGuildMemberName(obj.PlayerId)}", m, opcode);
+        }
+
+        public static void HandleGuildMembersList(S_GUILD_MEMBER_LIST obj)
+        {
+            obj.GuildMembersList.ToList().ForEach(m => { SessionManager.GuildMembersNames[m.Key] = m.Value; });
+
         }
     }
 }

@@ -73,7 +73,7 @@ namespace TCC.Proxy
                 }
                 else
                 {
-                    var split = data.Split(new[] { "\t::\t" }, StringSplitOptions.RemoveEmptyEntries);
+                    var split = data.Split(new[] { "\t::\t" }, StringSplitOptions.None);
 
                     var type = split[0];
                     if (type == "output")

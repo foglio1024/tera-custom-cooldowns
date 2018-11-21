@@ -116,6 +116,7 @@ namespace TCC.Parsing
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.GuildNotice);
             ChatWindowManager.Instance.AddChatMessage(msg);
+            msg.ContainsPlayerName = true;
             WindowManager.FloatingButton.NotifyExtended("Guild", msg.ToString(), NotificationType.Success);
 
         }
