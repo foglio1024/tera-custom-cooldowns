@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Interop;
+using HtmlAgilityPack;
 using TCC.Data.Map;
 using TCC.ViewModels;
 
@@ -149,7 +151,9 @@ namespace TCC.Data.Chat
         {
             Channel = ch;
             RawMessage = msg;
-            Author = auth;
+            var authHtml = new HtmlDocument();
+            authHtml.LoadHtml(auth);
+            Author = authHtml.DocumentNode.InnerText;
             try
             {
                 if (Channel == ChatChannel.Raid && GroupWindowViewModel.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
@@ -466,7 +470,26 @@ namespace TCC.Data.Chat
         protected void ParseFormattedMessage(string msg)
         {
 
+
+            //add missing font tags
+
+            var pieces = SplitByFontTags(msg);
+            var sb = new StringBuilder();
+            for (var i = 0; i < pieces.Length; i++)
+            {
+                if (!pieces[i].StartsWith("<font", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    pieces[i] = $"<font>{pieces[i]}</font>";
+                }
+
+                sb.Append(pieces[i]);
+            }
+
+            msg = sb.ToString();
+
             var piecesCount = Regex.Matches(msg, CTag, RegexOptions.IgnoreCase).Count;
+
+
             for (var i = 0; i < piecesCount; i++)
             {
                 try
