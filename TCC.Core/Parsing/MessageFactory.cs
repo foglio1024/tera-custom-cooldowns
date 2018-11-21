@@ -110,6 +110,9 @@ namespace TCC.Parsing
             { nameof(S_FIELD_EVENT_ON_LEAVE),                  Contructor<Func<TeraMessageReader, S_FIELD_EVENT_ON_LEAVE>>() },
             { nameof(S_UPDATE_NPCGUILD),                       Contructor<Func<TeraMessageReader, S_UPDATE_NPCGUILD>>() },
             { nameof(S_NPCGUILD_LIST),                         Contructor<Func<TeraMessageReader, S_NPCGUILD_LIST>>() },
+            { nameof(S_NOTIFY_GUILD_QUEST_URGENT),             Contructor<Func<TeraMessageReader, S_NOTIFY_GUILD_QUEST_URGENT>>() },
+            { nameof(S_CHANGE_GUILD_CHIEF),                    Contructor<Func<TeraMessageReader, S_CHANGE_GUILD_CHIEF>>() },
+            { nameof(S_GUILD_MEMBER_LIST),                     Contructor<Func<TeraMessageReader, S_GUILD_MEMBER_LIST>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
         };
@@ -150,6 +153,9 @@ namespace TCC.Parsing
             {typeof(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL),       new Action<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(PacketProcessor.HandleCityWarMapInfoDetail) },
             {typeof(S_UPDATE_NPCGUILD),                        new Action<S_UPDATE_NPCGUILD>(PacketProcessor.HandleUpdateNpcGuild) },
             {typeof(S_NPCGUILD_LIST),                          new Action<S_NPCGUILD_LIST>(PacketProcessor.HandleNpcGuildList) },
+            {typeof(S_NOTIFY_GUILD_QUEST_URGENT),              new Action<S_NOTIFY_GUILD_QUEST_URGENT>(PacketProcessor.HandleNotifyGuildQuestUrgent) },
+            {typeof(S_CHANGE_GUILD_CHIEF),                     new Action<S_CHANGE_GUILD_CHIEF>(PacketProcessor.HandleChangeGuildChief) },
+            {typeof(S_GUILD_MEMBER_LIST),                      new Action<S_GUILD_MEMBER_LIST>(PacketProcessor.HandleGuildMembersList) },
           //{typeof(S_VIEW_WARE_EX),                           new Action<S_VIEW_WARE_EX>(PacketProcessor.HandleViewWareEx) },
           //{typeof(S_ACTION_STAGE),                           new Action<S_ACTION_STAGE>(x => PacketProcessor.HandleActionStage(x)) }, //nvm
           //{typeof(C_LOAD_TOPO_FIN),                          new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },

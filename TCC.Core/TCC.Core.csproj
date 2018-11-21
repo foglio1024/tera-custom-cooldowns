@@ -123,6 +123,8 @@
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
@@ -1917,6 +1919,9 @@
     </Reference>
     <Reference Include="GongSolutions.WPF.DragDrop, Version=1.2.0.57, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\gong-wpf-dragdrop.1.2.0-alpha0057\lib\net46\GongSolutions.WPF.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.10.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.10\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
