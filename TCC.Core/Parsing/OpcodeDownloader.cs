@@ -1,5 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Security.Policy;
+using Newtonsoft.Json.Linq;
+using TCC.TeraCommon.PacketLog.Parsing;
 
 namespace TCC.Parsing
 {
@@ -11,14 +17,49 @@ namespace TCC.Parsing
             DownloadSysmsg(version, directory);
         }
 
+        private static bool IsFileValid(string filename, uint version)
+        {
+            if (!File.Exists(filename)) return false;
+            var file = File.Open(filename, FileMode.Open);
+            var fileBuffer = new byte[file.Length];
+            file.Read(fileBuffer, 0, (int)file.Length);
+            file.Close();
+            var localHash = SHA256Managed.Create().ComputeHash(fileBuffer);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            using (var c = new WebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
+                try
+                {
+                    var st = c.OpenRead("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/mappings.json");
+                    if (st != null)
+                    {
+                        var sr = new StreamReader(st);
+                        var sMappings = sr.ReadToEnd();
+                        var jMappings = JObject.Parse(sMappings);
+                        var reg = PacketProcessor.Server.Region;
+                        var jReg = jMappings[reg];
+                        var remoteHash = jReg["protocol_hash"].Value<string>();
+                        if (StringUtils.ByteArrayToString(localHash) == remoteHash) return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
         private static void DownloadOpcode(uint version, string directory)
         {
             Directory.CreateDirectory(directory);
 
             var filename = directory + Path.DirectorySeparatorChar + version + ".txt";
-            if (File.Exists(filename)) return;
+            if (IsFileValid(filename, version)) return;
             filename = directory + Path.DirectorySeparatorChar + "protocol." + version + ".map";
-            if (File.Exists(filename)) return;
+            if (IsFileValid(filename, version)) return;
             try
             {
                 Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/protocol." + version + ".map", filename);
