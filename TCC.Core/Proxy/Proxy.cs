@@ -121,20 +121,24 @@ namespace TCC.Proxy
         private static string AddFontTagsIfMissing(string msg)
         {
             var sb = new StringBuilder();
-            if (msg.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase)) return msg;
-            if (msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase) > 0)
+            if (!msg.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase))
             {
-                sb.Append("<font>");
-                sb.Append(msg.Substring(0, msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
-                sb.Append("</font>");
-                sb.Append(msg.Substring(msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+
+                if (msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase) > 0)
+                {
+                    sb.Append("<font>");
+                    sb.Append(msg.Substring(0, msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+                    sb.Append("</font>");
+                    sb.Append(msg.Substring(msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+                }
+                else
+                {
+                    sb.Append("<font>");
+                    sb.Append(msg);
+                    sb.Append("</font>");
+                }
             }
-            else
-            {
-                sb.Append("<font>");
-                sb.Append(msg);
-                sb.Append("</font>");
-            }
+            else sb.Append(msg);
             var openCount = Regex.Matches(msg, "<font").Count;
             var closeCount = Regex.Matches(msg, "</font>").Count;
             if (openCount > closeCount) sb.Append("</font>");
@@ -441,7 +445,7 @@ namespace TCC.Proxy
         {
             var opc = PacketProcessor.SystemMessageNamer.GetCode(opcode);
             var badOpc = msg.Split('\v')[0];
-            if(badOpc == "@0") msg = msg.Replace(badOpc, "@" + opc);
+            if (badOpc == "@0") msg = msg.Replace(badOpc, "@" + opc);
             var sb = new StringBuilder("force_sysmsg");
             sb.Append("&msg=");
             sb.Append(msg);
