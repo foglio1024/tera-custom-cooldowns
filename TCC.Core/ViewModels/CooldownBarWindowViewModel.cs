@@ -532,9 +532,9 @@ namespace TCC.ViewModels
             sk?.ProcReset();
         }
 
-        public void RemoveHiddenSkill(Skill skill)
+        public void RemoveHiddenSkill(Cooldown skill)
         {
-            var target = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == skill.IconName);
+            var target = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == skill.Skill.IconName);
             if (target != null) HiddenSkills.Remove(target);
         }
     }

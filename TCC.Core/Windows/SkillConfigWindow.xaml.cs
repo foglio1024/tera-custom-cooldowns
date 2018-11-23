@@ -106,7 +106,7 @@ namespace TCC.Windows
 
         private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
         {
-            CooldownWindowViewModel.Instance.RemoveHiddenSkill(((Button) sender).DataContext as Skill);
+            CooldownWindowViewModel.Instance.RemoveHiddenSkill(((Button) sender).DataContext as Cooldown);
         }
     }
 }
