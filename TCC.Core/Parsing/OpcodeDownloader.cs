@@ -38,7 +38,7 @@ namespace TCC.Parsing
                         var sr = new StreamReader(st);
                         var sMappings = sr.ReadToEnd();
                         var jMappings = JObject.Parse(sMappings);
-                        var reg = PacketProcessor.Server.Region;
+                        var reg = SessionManager.Server.Region;
                         var jReg = jMappings[reg];
                         var remoteHash = jReg["protocol_hash"].Value<string>();
                         if (StringUtils.ByteArrayToString(localHash) == remoteHash) return true;
