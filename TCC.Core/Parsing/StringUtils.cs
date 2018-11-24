@@ -1,11 +1,22 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
 namespace TCC.Parsing
 {
+
     public static class StringUtils
     {
+        public static string ReplaceHtmlEscapes(string msg)
+        {
+            msg = msg.Replace("&lt;", "<");
+            msg = msg.Replace("&gt;", ">");
+            msg = msg.Replace("&#xA", "\n");
+            msg = msg.Replace("&quot;", "\"");
+            return msg;
+        }
+
         public static byte[] StringToByteArray(string hex)
         {
             var numberChars = hex.Length / 2;
@@ -45,7 +56,7 @@ namespace TCC.Parsing
                 sb.Append(hex[i]);
                 sb.Append(hex[i + 1]);
             }
-            var num = uint.Parse(sb.ToString(), System.Globalization.NumberStyles.AllowHexSpecifier);
+            var num = UInt32.Parse(sb.ToString(), NumberStyles.AllowHexSpecifier);
             var floatVals = BitConverter.GetBytes(num);
             var result = BitConverter.ToSingle(floatVals, 0);
             return result;
@@ -119,6 +130,5 @@ namespace TCC.Parsing
             var b = StringToByteArray(builder.ToString());
             return Encoding.UTF7.GetString(b);
         }
-
     }
 }
