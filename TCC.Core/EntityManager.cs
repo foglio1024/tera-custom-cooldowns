@@ -13,6 +13,7 @@ namespace TCC
         private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
         {
+            CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
             {
                 SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
