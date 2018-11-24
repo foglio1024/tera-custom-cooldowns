@@ -255,7 +255,7 @@ namespace TCC.ViewModels
             }
             SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
-            if(Proxy.Proxy.IsConnected) Proxy.Proxy.ForceSystemMessage(msg, opcode);
+            if (Proxy.Proxy.IsConnected) Proxy.Proxy.ForceSystemMessage(msg, opcode);
         }
         private void SendLeaveMessage(string name)
         {
@@ -342,10 +342,18 @@ namespace TCC.ViewModels
         public void SetRoll(ulong entityId, int rollResult)
         {
             if (rollResult == int.MaxValue) rollResult = -1;
-            var u = Members.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
-            if (u == null) return;
-            u.RollResult = rollResult;
-            u.IsWinning = u.EntityId == GetWinningUser();
+            Members.ToSyncArray().ToList().ForEach(x =>
+            {
+                if (x.EntityId == entityId)
+                {
+                    x.RollResult = rollResult;
+                }
+                x.IsWinning = x.EntityId == GetWinningUser();
+            });
+            //var u = Members.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            //if (u == null) return;
+            //u.RollResult = rollResult;
+            //u.IsWinning = u.EntityId == GetWinningUser();
         }
         public void EndRoll()
         {
@@ -423,7 +431,7 @@ namespace TCC.ViewModels
             u.MaxHp = p.MaxHP;
             u.MaxMp = p.MaxMP;
             u.Level = (uint)p.Level;
-            if(u.Alive && !p.Alive) SendDeathMessage(u.Name);
+            if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
             u.Alive = p.Alive;
             NPC(nameof(AliveCount));
             if (!p.Alive) u.HasAggro = false;
