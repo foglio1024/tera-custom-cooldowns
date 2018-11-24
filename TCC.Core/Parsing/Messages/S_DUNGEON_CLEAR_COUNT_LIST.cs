@@ -4,7 +4,7 @@ using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
-    internal class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
+    public class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
     {
         public Dictionary<uint, int> DungeonClears { get;}
         public uint PlayerId { get; }

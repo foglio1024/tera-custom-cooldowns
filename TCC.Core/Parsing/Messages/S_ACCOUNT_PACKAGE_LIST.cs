@@ -4,7 +4,7 @@ using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
-    internal class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
+    public class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
     {
         public bool IsElite { get; }
 
