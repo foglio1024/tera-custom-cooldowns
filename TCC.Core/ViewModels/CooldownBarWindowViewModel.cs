@@ -430,12 +430,14 @@ namespace TCC.ViewModels
             HiddenSkills.Clear();
         }
 
-        public void LoadSkills(string filename, Class c)
+        public void LoadSkills( Class c)
         {
+            if (c == Class.None) return;
+            var filename = Utils.ClassEnumToString(c).ToLower() + "-skills.xml";
             SkillConfigParser sp;
             Dispatcher.Invoke(() =>
             {
-                if (!File.Exists("resources/config/skills/" + filename))
+                if (!File.Exists( Path.Combine(App.BasePath, "resources/config/skills", filename)))
                 {
                     SkillUtils.BuildDefaultSkillConfig(filename, c);
                 }
@@ -451,7 +453,7 @@ namespace TCC.ViewModels
                         MessageBoxButton.OKCancel);
 
                     if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
-                    LoadSkills(filename, c);
+                    LoadSkills(c);
                     return;
                 }
 
