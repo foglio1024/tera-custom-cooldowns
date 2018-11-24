@@ -3,7 +3,7 @@ using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
-    internal class S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA : ParsedMessage
+    public class S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA : ParsedMessage
     {
         public uint PlayerId { get; set; }
         public uint WorldId { get; set; }
