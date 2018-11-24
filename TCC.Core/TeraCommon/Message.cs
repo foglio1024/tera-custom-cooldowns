@@ -1,4 +1,5 @@
 ﻿using System;
+using TCC.Parsing;
 
 namespace TCC.TeraCommon
 {
@@ -10,6 +11,7 @@ namespace TCC.TeraCommon
             Direction = direction;
             Data = data;
         }
+        public Message(DateTime time, MessageDirection dir, string hex) : this(time, dir, new ArraySegment<byte>(StringUtils.StringToByteArray(hex))) { }
 
         public DateTime Time { get; private set; }
         public MessageDirection Direction { get; private set; }
