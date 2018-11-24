@@ -56,23 +56,20 @@ namespace TCC.Controls.Chat
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    BgBorder.Background = _context.Color;
-                    break;
                 case MessagePieceType.Url:
-                    BgBorder.Background = _context.Color;
-                    break;
                 case MessagePieceType.PointOfInterest:
-                    BgBorder.Background = _context.Color;
-                    break;
                 case MessagePieceType.Quest:
-                    BgBorder.Background = _context.Color;
+                    //BgBorder.BorderBrush = _context.Color;
+                    _context.IsHovered = true;
                     break;
             }
 
         }
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            BgBorder.Background = Brushes.Transparent;
+            //BgBorder.Background = Brushes.Transparent;
+            _context.IsHovered = false;
+
         }
     }
 }

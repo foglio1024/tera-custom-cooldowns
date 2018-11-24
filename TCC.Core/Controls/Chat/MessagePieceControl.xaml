@@ -13,10 +13,11 @@
                 Margin="0"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch" 
-                CornerRadius="2" 
+                CornerRadius="0"
+                BorderThickness="0 0 0 2"
                 Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
                 PreviewMouseLeftButtonDown="OnMouseDown"
-                Opacity=".2"
+                Opacity=".8"
                 />
         <ContentControl x:Name="Root" 
                         Content="{Binding}" 

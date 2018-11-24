@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using TCC.Annotations;
 using TCC.Data.Map;
@@ -8,7 +9,23 @@ namespace TCC.Data.Chat
 {
     public class MessagePiece : TSPropertyChanged
     {
-        public readonly ChatChannel Channel;
+        private ChatMessage _container;
+
+        public ChatMessage Container
+        {
+            private get => _container;
+            set
+            {
+                if (_container == value) return;
+                _container = value;
+                if (Color == null)
+                {
+                    var conv = new Converters.ChatChannelToColor();
+                    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
+                    Color = col;
+                }
+            }
+        }
 
         public long ItemUid { get; set; }
         public uint ItemId { get; set; }
@@ -52,10 +69,27 @@ namespace TCC.Data.Chat
             set
             {
                 if (value) SettingsWindowViewModel.FontSizeChanged += OnFontSizeChanged;
-                else       SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
+                else SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
 
                 if (_isVisible == value) return;
                 _isVisible = value;
+                NPC();
+            }
+        }
+
+        private bool _isHovered;
+        public bool IsHovered
+        {
+            get => _isHovered;
+            set
+            {
+                if (_isHovered == value) return;
+                _isHovered = value;
+                if (Container != null)
+                { 
+                    var sameType = Container.Pieces.Where(x => x.Type == Type && x.RawLink == this.RawLink);
+                    sameType.ToList().ForEach(x => x.IsHovered = this.IsHovered);
+                }
                 NPC();
             }
         }
@@ -78,35 +112,35 @@ namespace TCC.Data.Chat
             return new Thickness(left, 0, right, 0);
 
         }
-        public void SetColor(string color = "")
+        public void SetColor(string color)
         {
+            if (color == "") return;
             Dispatcher.Invoke(() =>
             {
-                if (color == "")
-                {
-                    var conv = new Converters.ChatChannelToColor();
-                    var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
-                    Color = col;
-                }
-                else
-                {
-                    try
-                    {
-                        Color = new SolidColorBrush(Utils.ParseColor(color));
-                    }
-                    catch
-                    {
-                        var conv = new Converters.ChatChannelToColor();
-                        var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
-                        Color = col;
-                    }
-                }
+                //if (color == "")
+                //{
+                //    var conv = new Converters.ChatChannelToColor();
+                //    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
+                //    Color = col;
+                //}
+                //else
+                //{
+                //try
+                //{
+                Color = new SolidColorBrush(Utils.ParseColor(color));
+                //}
+                //catch
+                //{
+                //    var conv = new Converters.ChatChannelToColor();
+                //    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
+                //    Color = col;
+                //}
+                //}
             });
         }
-        public MessagePiece(string text, MessagePieceType type, ChatChannel ch, int size, bool customSize, string customColor = "") : this(text)
+        public MessagePiece(string text, MessagePieceType type, int size, bool customSize, string col = "") : this(text)
         {
-            Channel = ch;
-            SetColor(customColor);
+            if (col != "") SetColor(col);
             Type = type;
 
             _size = size;
@@ -129,7 +163,6 @@ namespace TCC.Data.Chat
 
         public MessagePiece(Money money) : this(text: "")
         {
-            SetColor();
             Type = MessagePieceType.Money;
             Money = money;
             _customSize = false;
