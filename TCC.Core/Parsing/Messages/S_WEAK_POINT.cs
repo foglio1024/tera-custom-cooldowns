@@ -15,7 +15,7 @@ namespace TCC.Parsing.Messages
         private uint type;
 
         public ulong Target { get; private set; }
-        public uint TotalRunemarks { get; private set; }
+        public int TotalRunemarks { get; private set; }
         public uint RemovedRunemarks { get; private set; }
         public RunemarksActionType Type => (RunemarksActionType)type;
         public uint SkillId { get; private set; }
@@ -24,7 +24,7 @@ namespace TCC.Parsing.Messages
         {
             Target = reader.ReadUInt64();
             RemovedRunemarks = reader.ReadUInt32();
-            TotalRunemarks = reader.ReadUInt32();
+            TotalRunemarks = reader.ReadInt32();
             type = reader.ReadUInt32();
             SkillId = reader.ReadUInt32();
         }
