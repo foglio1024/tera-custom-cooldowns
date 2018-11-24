@@ -10,6 +10,7 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Npc;
 using TCC.Parsing;
+using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
 {
@@ -308,7 +309,7 @@ namespace TCC.ViewModels
         {
             if (Settings.Settings.EthicalMode)
             {
-                n.EnragePattern = new EnragePattern(0,0);
+                n.EnragePattern = new EnragePattern(0, 0);
                 return;
             }
             if (n.IsPhase1Dragon) n.EnragePattern = new EnragePattern(14, 50);
@@ -419,10 +420,12 @@ namespace TCC.ViewModels
             }
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
+            if(boss.Visible == Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(entityId);
         }
-        public void SelectDragon(Dragon dragon)
+        public void SelectDragon(float x, float y)
         {
-            foreach (var item in NpcList.ToSyncArray().Where(x => x.TemplateId > 1099 && x.TemplateId < 1104))
+            var dragon = EntityManager.CheckCurrentDragon(new Point(x, y));
+            foreach (var item in NpcList.ToSyncArray().Where(d => d.TemplateId > 1099 && d.TemplateId < 1104))
             {
                 if (item.TemplateId == (uint)dragon) { item.IsSelected = true; SelectedDragon = item; }
                 else item.IsSelected = false;
