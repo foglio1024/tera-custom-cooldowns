@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
@@ -16,13 +12,13 @@ namespace TCC.Parsing.Messages
         {
             var membersCount = reader.ReadInt16();
             var membersOffset = reader.ReadInt16();
-            if (membersOffset == 0) return;
             GuildMembersList = new Dictionary<uint, string>();
+            if (membersCount == 0) return;
             reader.BaseStream.Position = membersOffset - 4;
 
             for (var i = 0; i < membersCount; i++)
             {
-                var curr = reader.ReadUInt16();
+                reader.Skip(2); //curr
                 var next = reader.ReadUInt16();
                 var nameOffset = reader.ReadInt16();
                 reader.Skip(2); //noteOffset
