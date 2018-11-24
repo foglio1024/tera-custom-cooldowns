@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -8,7 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using TCC.Annotations;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Parsing;
+using TCC.Parsing.Messages;
 using TCC.TeraCommon;
 using TCC.ViewModels;
 
@@ -16,6 +19,8 @@ namespace TCC.Proxy
 {
     public static class Proxy
     {
+        public static event Action<Message> ProxyPacketReceived;
+
         private static TcpClient _client = new TcpClient();
         private static ProxyPacketSplitter _splitter = new ProxyPacketSplitter();
 
@@ -69,7 +74,7 @@ namespace TCC.Proxy
 
                 if (data.Contains(":tcc"))
                 {
-                    PacketProcessor.HandleGpkData(data.Substring(data.IndexOf(":tcc", StringComparison.Ordinal)));
+                    HandleGpkData(data.Substring(data.IndexOf(":tcc", StringComparison.Ordinal)));
                 }
                 else
                 {
@@ -79,24 +84,24 @@ namespace TCC.Proxy
                     if (type == "output")
                     {
                         //Console.WriteLine($"[Proxy] received output: {split[3]}");
-                        var channel = uint.Parse(split[1]);
+                        var channel = UInt32.Parse(split[1]);
                         var author = split[2];
                         var message = split[3];
 
-                        PacketProcessor.HandleProxyOutput(author, channel, AddFontTagsIfMissing(message));
+                        HandleProxyOutput(author, channel, AddFontTagsIfMissing(message));
 
                         ////TODO: parse author
                         //var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
                         //msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
-                        //PacketProcessor.HandleCommandOutput(msg);
+                        //PacketHandler.HandleCommandOutput(msg);
                     }
                     else if (type == "packet")
                     {
                         //Console.WriteLine($"[Proxy] received packet: {split[2]}");
-                        var dir = bool.Parse(split[1])
+                        var dir = Boolean.Parse(split[1])
                             ? MessageDirection.ServerToClient
                             : MessageDirection.ClientToServer;
-                        PacketProcessor.EnqueueMessageFromProxy(dir, split[2]);
+                        ProxyPacketReceived?.Invoke(new Message(DateTime.UtcNow, dir,split[2].Substring(4)));
                     }
                     else if (type == "setval")
                     {
@@ -110,6 +115,35 @@ namespace TCC.Proxy
 
             }
             // ReSharper disable once FunctionNeverReturns
+        }
+        public static void HandleProxyOutput(string author, uint channel, string message)
+        {
+
+            if (author == "undefined") author = "System";
+            if (!ChatWindowManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
+                ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
+            else
+                ChatWindowManager.Instance.AddChatMessage(
+                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
+                                         x.Id == channel && x.Joined).Index + 11), author, message));
+        }
+
+        public static void HandleGpkData(string data)
+        {
+            const string chatModeCmd = ":tcc-chatMode:";
+            const string uiModeCmd = ":tcc-uiMode:";
+            const string unkString = "Unknown command ";
+            data = data.Replace(unkString, "").Replace("\"", "").Replace(".", "");
+            if (data.StartsWith(chatModeCmd))
+            {
+                var chatMode = data.Replace(chatModeCmd, "");
+                SessionManager.InGameChatOpen = chatMode == "1" || chatMode == "true"; //too lazy
+            }
+            else if (data.StartsWith(uiModeCmd))
+            {
+                var uiMode = data.Replace(uiModeCmd, "");
+                SessionManager.InGameUiOn = uiMode == "1" || uiMode == "true"; //too lazy
+            }
         }
 
         private static void SetProperty(string propName, string val)
@@ -173,7 +207,7 @@ namespace TCC.Proxy
                     if (_retries <= 0)
                     {
                         ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-                        if (Settings.Settings.ChatEnabled) WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
+                        WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
                         _retries = 2;
                         return;
                     }
@@ -199,7 +233,7 @@ namespace TCC.Proxy
         {
             var sb = new StringBuilder("init_stub");
             sb.Append("&use_lfg=");
-            sb.Append(Settings.Settings.LfgEnabled.ToString().ToLower());
+            sb.Append(Settings.LfgEnabled.ToString().ToLower());
 
             SendData(sb.ToString());
         }
@@ -212,7 +246,7 @@ namespace TCC.Proxy
             sb.Append(":tcc:");
             sb.Append(linkData.Replace("#####", ":tcc:"));
             sb.Append(":tcc:");
-            System.IO.File.AppendAllText("link-test.txt", sb + "\n");
+            File.AppendAllText("link-test.txt", sb + "\n");
             SendData(sb.ToString());
         }
         public static void LootSettings()
@@ -443,7 +477,7 @@ namespace TCC.Proxy
         }
         public static void ForceSystemMessage(string msg, string opcode)
         {
-            var opc = PacketProcessor.SystemMessageNamer.GetCode(opcode);
+            var opc = PacketAnalyzer.Factory.SystemMessageNamer.GetCode(opcode);
             var badOpc = msg.Split('\v')[0];
             if (badOpc == "@0") msg = msg.Replace(badOpc, "@" + opc);
             var sb = new StringBuilder("force_sysmsg");
