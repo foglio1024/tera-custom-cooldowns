@@ -56,32 +56,26 @@ namespace TCC
                     break;
             }
         }
-        public static bool BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
+        public static void BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
-            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
-            if (!Filter(ab)) return false;
+            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!Filter(ab)) return;
             if (duration == int.MaxValue) ab.Infinity = true;
             if (target.IsMe())
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!Settings.Settings.DisablePartyAbnormals)
                 {
-                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(
-                        ab,
-                        stacks,
-                        duration,
-                        SessionManager.CurrentPlayer.PlayerId,
-                        SessionManager.CurrentPlayer.ServerId
-                    );
+                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
             }
             else
             {
                 BeginNpcAbnormality(ab, stacks, duration, target);
             }
-            if(source.IsMe() || target.IsMe()) CheckPassivity(ab, duration);
+            if (source.IsMe() || target.IsMe()) CheckPassivity(ab, duration);
 
-            return true;
+            return;
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
@@ -169,11 +163,11 @@ namespace TCC
         private static bool Filter(Abnormality ab)
         {
             return ab.IsShow &&
-                   !ab.Name.Contains("BTS") && 
-                   !ab.ToolTip.Contains("BTS") && 
+                   !ab.Name.Contains("BTS") &&
+                   !ab.ToolTip.Contains("BTS") &&
                    (
-                   !ab.Name.Contains("(Hidden)") && 
-                   !ab.Name.Equals("Unknown") && 
+                   !ab.Name.Contains("(Hidden)") &&
+                   !ab.Name.Equals("Unknown") &&
                    !ab.Name.Equals(string.Empty)
                    );
         }
