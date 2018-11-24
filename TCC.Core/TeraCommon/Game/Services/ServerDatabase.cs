@@ -37,9 +37,6 @@ namespace TCC.TeraCommon.Game.Services
                     case LangEnum.GER:
                     case LangEnum.FR:
                         Region = "EU"; break;
-                    case LangEnum.THA:
-                    case LangEnum.SE:
-                        Region = "THA"; break;
                     default:
                         Region = _language.ToString(); break;
                 }
