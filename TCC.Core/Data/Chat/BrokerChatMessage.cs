@@ -60,7 +60,7 @@ namespace TCC.Data.Chat
             ListingId = p.Listing;
             PlayerId = p.PlayerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false);
+            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Settings.Settings.FontSize, false);
             OfferedPrice = new MessagePiece(new Money(p.OfferedPrice));
             StartingPrice = new MessagePiece(new Money(p.SellerPrice));
             Listing = new MessagePiece("");
