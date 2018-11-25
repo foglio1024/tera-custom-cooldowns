@@ -73,9 +73,23 @@ namespace TCC.ViewModels
 
         private void NormalMode_Update(Cooldown sk)
         {
+            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
+            {
+                //todo: dispose?
+                return;
+            }
+            if (!Settings.Settings.CooldownWindowSettings.Enabled)
+            {
+                sk.Dispose();
+                return;
+            }
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (hSkill != null)
+            {
+                sk.Dispose();
 
-            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return;
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
+                return;
+            }
             if (sk.CooldownType == CooldownType.Item)
             {
                 FindAndUpdate(ItemSkills, sk);
@@ -231,6 +245,7 @@ namespace TCC.ViewModels
         {
             if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
             {
+                //todo: dispose?
                 return;
             }
 
@@ -254,7 +269,6 @@ namespace TCC.ViewModels
             {
                 if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
                 {
-                    //Log.All($"Discarded update for {sk.Skill.Name} [{sk.Skill.Id}]");
                     return;
                 }
                 skill.Start(sk);
@@ -265,7 +279,6 @@ namespace TCC.ViewModels
             {
                 if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
                 {
-                    //Log.All($"Discarded update for {sk.Skill.Name} [{sk.Skill.Id}]");
                     return;
                 }
                 skill.Start(sk);
