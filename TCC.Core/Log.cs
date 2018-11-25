@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using TCC.ViewModels;
 
 namespace TCC
@@ -17,6 +18,11 @@ namespace TCC
 #if DEBUG
             ChatWindowManager.Instance.AddTccMessage(line);
 #endif
+        }
+
+        public static void F(string line)
+        {
+            File.AppendAllText(Path.Combine(App.BasePath, "error.log"), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
         }
 
         public static void All(string s)
