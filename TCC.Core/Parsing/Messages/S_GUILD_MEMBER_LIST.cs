@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TCC.Data;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
@@ -14,23 +16,32 @@ namespace TCC.Parsing.Messages
             var membersOffset = reader.ReadInt16();
             GuildMembersList = new Dictionary<uint, string>();
             if (membersCount == 0) return;
-            reader.BaseStream.Position = membersOffset - 4;
-
-            for (var i = 0; i < membersCount; i++)
+            try
             {
-                reader.Skip(2); //curr
-                var next = reader.ReadUInt16();
-                var nameOffset = reader.ReadInt16();
-                reader.Skip(2); //noteOffset
-                var playerId = reader.ReadUInt32();
+                reader.BaseStream.Position = membersOffset - 4;
 
-                reader.BaseStream.Position = nameOffset - 4;
-                var name = reader.ReadTeraString();
+                for (var i = 0; i < membersCount; i++)
+                {
+                    reader.Skip(2); //curr
+                    var next = reader.ReadUInt16();
+                    var nameOffset = reader.ReadInt16();
+                    reader.Skip(2); //noteOffset
+                    var playerId = reader.ReadUInt32();
 
-                GuildMembersList[playerId] = name;
+                    reader.BaseStream.Position = nameOffset - 4;
+                    var name = reader.ReadTeraString();
 
-                if (next == 0) return;
-                reader.BaseStream.Position = next - 4;
+                    GuildMembersList[playerId] = name;
+
+                    if (next == 0) return;
+                    reader.BaseStream.Position = next - 4;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Log.F($"[{nameof(S_GUILD_MEMBER_LIST)}] Failed to parse packet. \nContent:\n{StringUtils.ByteArrayToString(Payload.Array)}\nException:\n{e.Message}\n{e.StackTrace}");
+                WindowManager.FloatingButton.NotifyExtended("Warning", "A non-fatal error occured. More detailed info has been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
             }
         }
     }
