@@ -125,6 +125,7 @@
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
+    <Compile Include="Parsing\PacketAnalyzer.cs" />
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
@@ -135,7 +136,6 @@
     <Compile Include="Data\Npc\TimerPattern.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Moongourd\MoongourdEncounter.cs" />
-    <Compile Include="Parsing\Messages\LoginArbiterMessage.cs" />
     <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
     <Compile Include="Parsing\Messages\S_CHANGE_GUILD_CHIEF.cs" />
     <Compile Include="Parsing\Messages\S_FIELD_EVENT_ON_ENTER.cs" />
@@ -728,7 +728,7 @@
     <Compile Include="Parsing\Messages\S_CREATURE_CHANGE_HP.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_MP.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_STAMINA.cs" />
-    <Compile Include="Parsing\PacketRouter.cs" />
+    <Compile Include="Parsing\PacketHandler.cs" />
     <Compile Include="Converters\ClassImageConverter.cs" />
     <Compile Include="Converters\CombatToColorConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter.cs" />
