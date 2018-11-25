@@ -247,7 +247,7 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> ValkyrieOnly = new Dictionary<Type, Delegate>
         {
-            {typeof(S_WEAK_POINT),                             new Action<S_WEAK_POINT>(PacketHandler.HandleWeakPoint) },
+            {typeof(S_WEAK_POINT),                             new Action<S_WEAK_POINT>(PacketHandler.HandleRunemark) },
         };
         private static readonly Dictionary<Type, Delegate> BossWindow = new Dictionary<Type, Delegate>
         {
@@ -267,7 +267,7 @@ namespace TCC.Parsing
         public readonly uint Version;
         public int ReleaseVersion { get; set; }
         public OpCodeNamer OpCodeNamer { get; private set; }
-        public OpCodeNamer SystemMessageNamer { get; private set; }
+        public OpCodeNamer SystemMessageNamer { get; set; }
         public MessageFactory()
         {
             OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string>{{19900, nameof(C_CHECK_VERSION)}});
