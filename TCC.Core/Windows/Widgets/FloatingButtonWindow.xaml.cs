@@ -20,7 +20,7 @@ namespace TCC.Windows.Widgets
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = WindowContent;
             ButtonsRef = null;
-            Init(Settings.Settings.FloatingButtonSettings, perClassPosition:false);
+            Init(Settings.Settings.FloatingButtonSettings, perClassPosition: false);
         }
 
         private Timer _t;
@@ -37,7 +37,7 @@ namespace TCC.Windows.Widgets
             var m = source.CompositionTarget.TransformToDevice;
             var _ = m.M11;
             Left = 0;
-            Top = Screen.PrimaryScreen.Bounds.Height/ 2 - ActualHeight / 2;
+            Top = Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
 
             WindowManager.ForegroundManager.VisibilityChanged += OnTccVisibilityChanged;
             _t = new Timer { Interval = 2000 };
@@ -69,7 +69,7 @@ namespace TCC.Windows.Widgets
             if (FocusManager.TeraScreen == null) return;
             var teraScreenBounds = FocusManager.TeraScreen.Bounds;
             Left = teraScreenBounds.X;
-            Top = teraScreenBounds.Y+ teraScreenBounds.Height/2;
+            Top = teraScreenBounds.Y + teraScreenBounds.Height / 2;
             //RefreshTopmost();
             //AnimateContentOpacity(WindowManager.ForegroundManager.Visible ? 1 : 0);
         }
@@ -130,7 +130,11 @@ namespace TCC.Windows.Widgets
         {
             if (_busy)
             {
-                _queue.Enqueue(new Tuple<string, string, NotificationType, uint>(title, msg, type,timeMs));
+                Dispatcher.Invoke(() =>
+                {
+                    if (msg != NotificationText.Text || title != NotificationTitle.Text)
+                        _queue.Enqueue(new Tuple<string, string, NotificationType, uint>(title, msg, type, timeMs));
+                });
                 return;
             }
 
@@ -199,13 +203,13 @@ namespace TCC.Windows.Widgets
         {
             Dispatcher.Invoke(() =>
             {
-                FocusManager.PauseTopmost= true;//FocusTimer.Enabled = false;
+                FocusManager.PauseTopmost = true;//FocusTimer.Enabled = false;
                 RefreshTopmost();
                 if (PlayerInfo.IsOpen) ClosePlayerMenu();
                 TooltipInfo.Refresh();
                 PlayerInfo.IsOpen = true;
                 ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
-                
+
             });
         }
         public void ClosePlayerMenu()
