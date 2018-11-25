@@ -27,7 +27,7 @@ namespace TCC
     public partial class App
     {
         public const bool Debug = false;
-        private static string _version;
+        public static string AppVersion;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
         public static string BasePath = Path.GetDirectoryName(typeof(App).Assembly.Location);
@@ -42,7 +42,7 @@ namespace TCC
         {
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
+            AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSplashScreen();
 
             BaseDispatcher = Dispatcher.CurrentDispatcher;
@@ -87,7 +87,7 @@ namespace TCC
             SessionManager.CurrentPlayer.Name = "player";
             SessionManager.CurrentPlayer.EntityId = 10;
             TimeManager.Instance.SetServerTimeZone(Settings.Settings.LastRegion);
-            ChatWindowManager.Instance.AddTccMessage(_version);
+            ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
@@ -282,21 +282,21 @@ namespace TCC
         {
             var ex = (Exception)e.ExceptionObject;
             var sb = new StringBuilder("\r\n\r\n");
-            sb.AppendLine($"##### {_version} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} #####");
-            sb.AppendLine($"Version: {PacketAnalyzer.Factory.Version}");
+            sb.AppendLine($"##### {AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} #####");
+            sb.Append($"Version: {PacketAnalyzer.Factory.Version}");
             if (SessionManager.Server != null)
             {
                 sb.Append($" - Region: {SessionManager.Server.Region}");
                 sb.Append($" - Server:{SessionManager.Server.ServerId}");
             }
-
+            sb.AppendLine();
             sb.AppendLine($"{ex.Message}");
             sb.AppendLine($"{ex.StackTrace}");
             sb.AppendLine($"Source: {ex.Source}");
             sb.AppendLine($"Data: {ex.Data}");
             if(ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
             sb.AppendLine($"TargetSite: {ex.TargetSite}");
-            File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/error.txt", sb.ToString());
+            File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/crash.log", sb.ToString());
             try
             {
                 var t = new Thread(() => UploadCrashDump(e));
@@ -307,7 +307,7 @@ namespace TCC
                 // ignored
             }
 
-            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching error.txt from TCC folder.",
+            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
             if (Proxy.Proxy.IsConnected) Proxy.Proxy.CloseConnection();
@@ -338,7 +338,7 @@ namespace TCC
                            ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" +
                            ex.InnerException +
                            "\r\n" + ex.TargetSite;
-                js.Add("tcc_version", new JValue(_version));
+                js.Add("tcc_version", new JValue(AppVersion));
                 js.Add("full_exception", new JValue(full));
                 js.Add("inner_exception",
                     new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined"));
@@ -369,7 +369,7 @@ namespace TCC
                     SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                     SplashScreen = new SplashScreen();
                     SplashScreen.SetText("Initializing...");
-                    SplashScreen.SetVer(_version);
+                    SplashScreen.SetVer(AppVersion);
                     SplashScreen.Show();
                     waiting = false;
                     Dispatcher.Run();
