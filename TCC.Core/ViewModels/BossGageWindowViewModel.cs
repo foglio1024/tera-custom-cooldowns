@@ -283,14 +283,17 @@ namespace TCC.ViewModels
 
         private static void SetTimerPattern(Npc n)
         {
-            if (Settings.Settings.EthicalMode)
-            {
-                return;
-            }
-            if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
-            if (n.TemplateId == 3000 && n.ZoneId == 982) n.TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
-            if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
+            if (Settings.Settings.EthicalMode) return;
 
+            // vergos ph4
+            if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            // nightmare kylos
+            if (n.TemplateId == 3000 && n.ZoneId == 982) n.TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
+            // nightmare antaroth
+            if (n.TemplateId == 3000 && n.ZoneId == 920) n.TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
+            // bahaar
+            if (n.TemplateId == 2000 && n.ZoneId == 444) n.TimerPattern = new HpTriggeredTimerPattern(5 * 60, .3f);
+            // dreadspire
             if (n.TemplateId == 1000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
             if (n.TemplateId == 2000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
             if (n.TemplateId == 3000 && n.ZoneId == 434) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
