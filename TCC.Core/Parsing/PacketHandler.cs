@@ -313,7 +313,7 @@ namespace TCC.Parsing
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
             EntityManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
-            EntityManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed);
+            EntityManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, p.Villager);
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {

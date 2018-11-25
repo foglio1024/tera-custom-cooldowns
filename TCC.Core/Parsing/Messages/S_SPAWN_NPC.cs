@@ -5,13 +5,10 @@ namespace TCC.Parsing.Messages
 {
     public class S_SPAWN_NPC : ParsedMessage
     {
-        private ulong id;
-        private uint templateId;
-        private ushort huntingZoneId;
-
-        public ulong EntityId => id;
-        public uint TemplateId => templateId;
-        public ushort HuntingZoneId => huntingZoneId;
+        public ulong EntityId { get; }
+        public uint TemplateId {get; }
+        public ushort HuntingZoneId { get; }
+        public bool Villager { get; }
 
         public S_SPAWN_NPC(TeraMessageReader reader) : base(reader)
         {
@@ -47,10 +44,14 @@ namespace TCC.Parsing.Messages
             //var unk25 = reader.ReadUInt32();
 
             reader.Skip(10);
-            id = reader.ReadUInt64();
+            EntityId = reader.ReadUInt64();
             reader.Skip(26);
-            templateId = reader.ReadUInt32();
-            huntingZoneId = reader.ReadUInt16();
+            TemplateId = reader.ReadUInt32();
+            HuntingZoneId = reader.ReadUInt16();
+            reader.Skip(4+2+2+2+2+2+2+1);
+            Villager = reader.ReadBoolean();
+            //reader.Skip(4+8+4+4);
+            //var aggressive = reader.ReadBoolean();
 
             //Console.WriteLine("[S_SPAWN NPC] id:{0} tId:{1} hzId:{2}", id, templateId, huntingZoneId);
         }

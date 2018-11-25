@@ -11,7 +11,7 @@ namespace TCC
     {
         private static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
-        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
+        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool villager)
         {
             CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
@@ -19,7 +19,6 @@ namespace TCC
                 SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
                 if (monst.IsBoss)
                 {
-
                     var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
                     ChatWindowManager.Instance.AddChatMessage(msg);
                 }
@@ -28,11 +27,12 @@ namespace TCC
 
             if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
-                if (!NearbyNPC.ContainsKey(entityId)) NearbyNPC.Add(entityId, m.Name);
+                NearbyNPC[entityId] = m.Name;
                 FlyingGuardianDataProvider.InvokeProgressChanged();
+                if (villager) return;
                 if (m.IsBoss)
                 {
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp , templateId, zoneId, v);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace TCC
 
         public static void DespawnNPC(ulong target, DespawnType type)
         {
-            if(NearbyNPC.ContainsKey(target)) NearbyNPC.Remove(target);
+            if (NearbyNPC.ContainsKey(target)) NearbyNPC.Remove(target);
 
             BossGageWindowViewModel.Instance.RemoveBoss(target, type);
             if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0)
@@ -135,7 +135,7 @@ namespace TCC
 
             Dragon d;
             if (rel.Y > .8 * rel.X - 78)
-                 d = rel.Y > -1.3 * rel.X - 94 ? Dragon.Aquadrax : Dragon.Umbradrax;
+                d = rel.Y > -1.3 * rel.X - 94 ? Dragon.Aquadrax : Dragon.Umbradrax;
             else d = rel.Y > -1.3 * rel.X - 94 ? Dragon.Terradrax : Dragon.Ignidrax;
 
             return d;
@@ -157,7 +157,7 @@ namespace TCC
 
         internal static void SpawnUser(ulong entityId, string name)
         {
-            if(!NearbyPlayers.ContainsKey(entityId)) NearbyPlayers.Add(entityId, name);
+            if (!NearbyPlayers.ContainsKey(entityId)) NearbyPlayers.Add(entityId, name);
         }
 
         public static bool IsEntitySpawned(ulong pSource)
