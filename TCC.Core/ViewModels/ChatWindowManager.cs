@@ -2,12 +2,14 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
+using TCC.Parsing;
 using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Windows.Widgets;
@@ -122,7 +124,7 @@ namespace TCC.ViewModels
         }
         public void ScrollToBottom()
         {
-            //TODO
+            //TODO?
         }
         public void RefreshHideTimer()
         {
@@ -174,7 +176,7 @@ namespace TCC.ViewModels
                 }
             }
 
-            ChatMessage.SplitSimplePieces(chatMessage);
+            chatMessage.SplitSimplePieces();
 
             if (ChatWindows.All(x => !x.IsPaused))
             {

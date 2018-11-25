@@ -76,7 +76,7 @@ namespace TCC
             //TwitchConnector.Instance.Init();
 
             SplashScreen.SetText("Initializing packet processor...");
-            PacketProcessor.Init();
+            PacketAnalyzer.Init();
             TeraSniffer.Instance.NewConnection += TeraSniffer_OnNewConnection;
             TeraSniffer.Instance.EndConnection += TeraSniffer_OnEndConnection;
             TeraSniffer.Instance.Enabled = true;
@@ -107,7 +107,7 @@ namespace TCC
             SessionManager.CurrentPlayer.Class = Class.Warrior;
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
 
-            SessionManager.SetCombatStatus(SessionManager.CurrentPlayer.EntityId, true);
+            SessionManager.Combat = true;
             SessionManager.Encounter = true;
             (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Cooldown.Start(2000);
             _t = new System.Timers.Timer { Interval = 100 };
@@ -256,7 +256,7 @@ namespace TCC
 
         private static void TeraSniffer_OnNewConnection(Server srv)
         {
-            PacketProcessor.Server = srv;
+            SessionManager.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
@@ -283,11 +283,11 @@ namespace TCC
             var ex = (Exception)e.ExceptionObject;
             var sb = new StringBuilder("\r\n\r\n");
             sb.AppendLine($"##### {_version} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} #####");
-            sb.AppendLine($"Version: {PacketProcessor.Version}");
-            if (PacketProcessor.Server != null)
+            sb.AppendLine($"Version: {PacketAnalyzer.Factory.Version}");
+            if (SessionManager.Server != null)
             {
-                sb.Append($" - Region: {PacketProcessor.Server.Region}");
-                sb.Append($" - Server:{PacketProcessor.Server.ServerId}");
+                sb.Append($" - Region: {SessionManager.Server.Region}");
+                sb.Append($" - Server:{SessionManager.Server.ServerId}");
             }
 
             sb.AppendLine($"{ex.Message}");
@@ -343,11 +343,11 @@ namespace TCC
                 js.Add("inner_exception",
                     new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined"));
                 js.Add("exception", new JValue(ex.Message));
-                js.Add("game_version", new JValue(PacketProcessor.Version));
-                if (PacketProcessor.Server != null)
+                js.Add("game_version", new JValue(PacketAnalyzer.Factory.Version));
+                if (SessionManager.Server != null)
                 {
-                    js.Add("region", new JValue(PacketProcessor.Server.Region));
-                    js.Add("server_id", new JValue(PacketProcessor.Server.ServerId));
+                    js.Add("region", new JValue(SessionManager.Server.Region));
+                    js.Add("server_id", new JValue(SessionManager.Server.ServerId));
                 }
                 else
                 {
@@ -412,7 +412,7 @@ namespace TCC
 
                 var js = new JObject
                 {
-                    {"server", PacketProcessor.Server.ServerId},
+                    {"server", SessionManager.Server.ServerId},
                     {
                         "id",
                         InfoWindowViewModel.Instance.Characters == null ? 0 :
@@ -420,7 +420,7 @@ namespace TCC
                         // ReSharper disable once PossibleNullReferenceException
                         InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Position == 1).Id
                     },
-                    {"region", PacketProcessor.Server.Region}
+                    {"region", SessionManager.Server.Region}
                 };
                 c.Encoding = Encoding.UTF8;
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"),

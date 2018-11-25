@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TCC.Settings;
 using TCC.Data;
 using TCC.Data.Databases;
-using TCC.Data.Pc;
+using TCC.Parsing;
+using TCC.Parsing.Messages;
+using TCC.Tera.Data;
+using TCC.TeraCommon.Game;
 using TCC.ViewModels;
+using Player = TCC.Data.Pc.Player;
 
 namespace TCC
 {
@@ -18,6 +23,10 @@ namespace TCC
         private static bool _encounter;
         private static bool _inGameChatOpen;
         private static bool _inGameUiOn;
+
+        public static Server Server { get; set; }
+        public static string Language => Server.Region == "EU" ? "EU-EN" : Server.Region;
+
 
         public static bool LoadingScreen
         {
@@ -42,7 +51,15 @@ namespace TCC
             }
         }
 
-        public static bool Combat => CurrentPlayer?.IsInCombat ?? false;
+        public static bool Combat
+        {
+            get => CurrentPlayer?.IsInCombat ?? false;
+            set
+            {
+                if (Combat != value) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+                CurrentPlayer.IsInCombat = value;
+            }
+        }
 
         public static bool Logged
         {
@@ -91,7 +108,7 @@ namespace TCC
 
         public static string GetGuildMemberName(uint id)
         {
-            return GuildMembersNames.ContainsKey(id) ? GuildMembersNames[id] : "Unkown player";
+            return GuildMembersNames.ContainsKey(id) ? GuildMembersNames[id] : "Unknown player";
         }
 
         public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
@@ -109,22 +126,12 @@ namespace TCC
         public static SocialDatabase SocialDatabase { get; private set; }
         public static bool CivilUnrestZone { get; internal set; }
 
-        public static void SetCombatStatus(ulong target, bool combat)
-        {
-            if (target == CurrentPlayer.EntityId)
-            {
-                var old = CurrentPlayer.IsInCombat;
-                if (combat)
-                {
-                    CurrentPlayer.IsInCombat = true;
-                }
-                else
-                {
-                    CurrentPlayer.IsInCombat = false;
-                }
-                if (combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
-            }
-        }
+        //public static void SetCombatStatus(bool combat)
+        //{
+        //    //var old = Me.IsInCombat;
+        //    //Me.IsInCombat = combat;
+        //    //if (combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+        //}
         public static void SetPlayerHp(float hp)
         {
             CurrentPlayer.CurrentHP = hp;
