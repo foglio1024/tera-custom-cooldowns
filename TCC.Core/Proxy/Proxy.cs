@@ -101,7 +101,7 @@ namespace TCC.Proxy
                         var dir = Boolean.Parse(split[1])
                             ? MessageDirection.ServerToClient
                             : MessageDirection.ClientToServer;
-                        ProxyPacketReceived?.Invoke(new Message(DateTime.UtcNow, dir,split[2].Substring(4)));
+                        ProxyPacketReceived?.Invoke(new Message(DateTime.UtcNow, dir, split[2].Substring(4)));
                     }
                     else if (type == "setval")
                     {
