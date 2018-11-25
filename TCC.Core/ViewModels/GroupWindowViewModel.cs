@@ -348,7 +348,7 @@ namespace TCC.ViewModels
                 {
                     x.RollResult = rollResult;
                 }
-                x.IsWinning = x.EntityId == GetWinningUser();
+                x.IsWinning = x.EntityId == GetWinningUser() && rollResult != -1;
             });
             //var u = Members.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             //if (u == null) return;
