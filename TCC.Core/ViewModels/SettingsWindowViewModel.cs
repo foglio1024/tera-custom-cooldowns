@@ -29,7 +29,7 @@ namespace TCC.ViewModels
         public WindowSettings FloatingButtonSettings => Settings.Settings.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => Settings.Settings.CivilUnrestWindowSettings;
 
-        private int khCount = 0;
+        private int _khCount = 0;
         private bool _kh;
         public bool KylosHelper
         {
@@ -37,7 +37,7 @@ namespace TCC.ViewModels
             set
             {
                 _kh = true;
-                switch (khCount)
+                switch (_khCount)
                 {
                     case 0:
                         WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning, 4000);
@@ -52,8 +52,8 @@ namespace TCC.ViewModels
                 }
                 NPC();
 
-                khCount++;
-                if (khCount > 2) khCount = 0;
+                _khCount++;
+                if (_khCount > 2) _khCount = 0;
                 _kh = false;
                 NPC();
             }
@@ -66,6 +66,16 @@ namespace TCC.ViewModels
             {
                 if (Settings.Settings.EthicalMode == value) return;
                 Settings.Settings.EthicalMode = value;
+                NPC();
+            }
+        }
+        public bool CheckOpcodesHash
+        {
+            get => Settings.Settings.CheckOpcodesHash;
+            set
+            {
+                if (Settings.Settings.CheckOpcodesHash == value) return;
+                Settings.Settings.CheckOpcodesHash = value;
                 NPC();
             }
         }

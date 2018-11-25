@@ -328,6 +328,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.TwitchToken)) Settings.TwitchToken = attr.Value;
                     else if (attr.Name == nameof(Settings.TwitchChannelName)) Settings.TwitchChannelName = attr.Value;
                     else if (attr.Name == nameof(Settings.GroupSizeThreshold)) Settings.GroupSizeThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.CheckOpcodesHash)) Settings.CheckOpcodesHash = bool.Parse(attr.Value);
                     //add settings here
                 });
 

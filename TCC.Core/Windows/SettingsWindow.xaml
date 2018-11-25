@@ -144,7 +144,7 @@
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="765"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#199a" BorderThickness="0,0,0,0" Height="781"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -968,6 +968,18 @@
                                     <Run Text="- Dragon passive cooldown"/><LineBreak/>
                                     <Run Text="- Insigna of the punisher cooldown"/><LineBreak/>
                                     <Run Text="- Concentration cooldown"/>
+                                </TextBlock>
+                            </Grid>
+                        </settings:BoolSetting.ToolTip>
+                    </settings:BoolSetting>
+                    <settings:BoolSetting SettingName="Check opcodes file hash" IsOn="{Binding CheckOpcodesHash, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <settings:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource DefaultBorderStyle}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Compares local opcodes file hash to remote one. Useful to avoid manual file deletion when new opcodes are released without version changes."/>
+                                    <LineBreak/>
+                                    <Run Foreground="{StaticResource HpBrush}" Text="Disable this if you're using a custom opcodes file."></Run>
                                 </TextBlock>
                             </Grid>
                         </settings:BoolSetting.ToolTip>

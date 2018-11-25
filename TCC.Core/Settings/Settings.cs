@@ -172,6 +172,7 @@ namespace TCC.Settings
         public static ControlShape AbnormalityShape { get; set; }
         public static ControlShape SkillShape { get; set; }
         public static bool Winpcap { get; set; } = true; //TODO: use this
+        public static bool CheckOpcodesHash { get; set; } = true;
 
         private static string _lastRegion = "";
         private static bool _chatEnabled;

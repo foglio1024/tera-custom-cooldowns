@@ -20,6 +20,7 @@ namespace TCC.Parsing
         private static bool IsFileValid(string filename, uint version)
         {
             if (!File.Exists(filename)) return false;
+            if (!Settings.Settings.CheckOpcodesHash) return true;
             var file = File.Open(filename, FileMode.Open);
             var fileBuffer = new byte[file.Length];
             file.Read(fileBuffer, 0, (int)file.Length);
