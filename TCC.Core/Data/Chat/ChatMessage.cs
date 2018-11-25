@@ -278,7 +278,7 @@ namespace TCC.Data.Chat
             var simplePieces = new List<MessagePiece>();
             foreach (var item in Pieces)
             {
-                simplePieces.Add(item);
+                if(item.Type == MessagePieceType.Simple || item.Type == MessagePieceType.Item) simplePieces.Add(item);
             }
 
             for (var i = 0; i < simplePieces.Count; i++)
