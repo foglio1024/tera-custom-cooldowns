@@ -125,6 +125,7 @@
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
+    <Compile Include="Parsing\Messages\S_NPCGUILD_LIST.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
