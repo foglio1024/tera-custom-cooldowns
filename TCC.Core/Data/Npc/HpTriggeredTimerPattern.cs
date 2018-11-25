@@ -3,6 +3,11 @@
     public class HpTriggeredTimerPattern : TimerPattern
     {
         public float StartAt { get; }
+        /// <summary>
+        /// Creates a new TimerPattern triggered by HP value.
+        /// </summary>
+        /// <param name="duration">timer duration in seconds</param>
+        /// <param name="startAt">HP value trigger</param>
         public HpTriggeredTimerPattern(int duration, float startAt) : base(duration)
         {
             StartAt = startAt;
