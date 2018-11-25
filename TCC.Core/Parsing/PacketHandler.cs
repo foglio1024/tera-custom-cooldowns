@@ -590,7 +590,8 @@ namespace TCC.Parsing
             }
             catch (Exception)
             {
-                File.AppendAllText("chat-errors.log", x.Message + "\n");
+                //File.AppendAllText("chat-errors.log", x.Message + "\n");
+                Log.F($"Failed to parse system message: {x.Message}");
             }
         }
 
@@ -1030,7 +1031,7 @@ namespace TCC.Parsing
         {
             const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
             SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            var questName = SessionManager.GuildQuestDatabase.GuildQuests[obj.QuestId].Title;
+            var questName = obj.QuestId == 0? "Defeat Guild BAM" : SessionManager.GuildQuestDatabase.GuildQuests[obj.QuestId].Title;
             SessionManager.MonsterDatabase.TryGetMonster(obj.TemplateId, obj.ZoneId, out var npc);
             var zone = SessionManager.MapDatabase.Names[obj.ZoneId];
             var msg = $"@0\vquestName\v{questName}\vnpcName\v{npc.Name}\vzoneName\v{zone}";
