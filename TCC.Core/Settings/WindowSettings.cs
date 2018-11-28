@@ -30,7 +30,7 @@ namespace TCC.Settings
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
 
-        public RelayCommand ResetPositionCommand;
+        public RelayCommand ResetPositionCommand { get; }
 
         public string Name { [UsedImplicitly] get; }
         public bool PerClassPosition { get; set; }
