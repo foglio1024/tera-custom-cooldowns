@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using TCC.Controls;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -39,6 +40,7 @@ namespace TCC
         public static BuffWindow BuffWindow;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
+        //public static SettingsWindowOld SettingsWindowOld;
         public static SettingsWindow SettingsWindow;
         public static SkillConfigWindow SkillConfigWindow;
         public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
@@ -164,13 +166,14 @@ namespace TCC
             TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             TrayIcon.Text = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            var closeButton = new MenuItem() { Header = "Close" };
 
-            closeButton.Click += (s, ev) => App.CloseApp();
-            _contextMenu.Items.Add(closeButton);
+            _contextMenu.Items.Add(new MenuItem(){Header = "Dashboard", Command = new RelayCommand(o => InfoWindow.ShowWindow())});
+            _contextMenu.Items.Add(new MenuItem(){Header = "Settings", Command = new RelayCommand(o => SettingsWindow.ShowWindow())});
+            _contextMenu.Items.Add(new MenuItem(){Header = "Close", Command = new RelayCommand(o => App.CloseApp())});
 
             //_undimTimer.Elapsed += _undimTimer_Elapsed;
 
+            //SettingsWindowOld = new SettingsWindowOld();
             SettingsWindow = new SettingsWindow();
 
             if (Settings.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
