@@ -16,7 +16,6 @@ namespace TCC.Windows
 {
     public class TccWidget : Window
     {
-        private WindowSettings _settings;
         private bool _ignoreSize;
         private bool _undimOnFlyingGuardian;
         private DoubleAnimation _opacityAnimation;
@@ -27,22 +26,23 @@ namespace TCC.Windows
         protected WindowButtons ButtonsRef;
         protected UIElement MainContent;
 
-        public WindowSettings WindowSettings => _settings;
+        public WindowSettings WindowSettings { get; private set; }
+
         public IntPtr Handle => new WindowInteropHelper(this).Handle;
 
         public void ReloadPosition()
         {
             Dispatcher.Invoke(() =>
             {
-                Left = _settings.X * Settings.Settings.ScreenW;
-                Top = _settings.Y * Settings.Settings.ScreenH;
+                Left = WindowSettings.X * Settings.Settings.ScreenW;
+                Top = WindowSettings.Y * Settings.Settings.ScreenH;
 
                 //if(_settings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {_settings.Name}: {_settings.X}, {_settings.Y}");
                 CheckBounds();
 
                 if (ButtonsRef != null)
                 {
-                    switch (_settings.ButtonsPosition)
+                    switch (WindowSettings.ButtonsPosition)
                     {
                         case ButtonsPosition.Above:
                             Grid.SetRow(ButtonsRef, 0);
@@ -61,14 +61,14 @@ namespace TCC.Windows
             {
                 Left = Screen.PrimaryScreen.Bounds.X + (Screen.PrimaryScreen.Bounds.Width / 2) - (ActualWidth / 2);
                 Top = Screen.PrimaryScreen.Bounds.Y + (Screen.PrimaryScreen.Bounds.Height / 2) - (ActualHeight / 2);
-                _settings.X = Left / Settings.Settings.ScreenW;
-                _settings.Y = Top / Settings.Settings.ScreenH;
+                WindowSettings.X = Left / Settings.Settings.ScreenW;
+                WindowSettings.Y = Top / Settings.Settings.ScreenH;
             });
         }
         protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true, bool perClassPosition = true)
         {
             settings.PerClassPosition = perClassPosition;
-            _settings = settings;
+            WindowSettings = settings;
             _ignoreSize = ignoreSize;
             _undimOnFlyingGuardian = undimOnFlyingGuardian;
 
@@ -85,9 +85,10 @@ namespace TCC.Windows
                 if (settings.W != 0) Width = settings.W;
             }
 
-            _settings.EnabledChanged += OnEnabledChanged;
-            _settings.ClickThruModeChanged += OnClickThruModeChanged;
-            _settings.VisibilityChanged += OnWindowVisibilityChanged;
+            WindowSettings.EnabledChanged += OnEnabledChanged;
+            WindowSettings.ClickThruModeChanged += OnClickThruModeChanged;
+            WindowSettings.VisibilityChanged += OnWindowVisibilityChanged;
+            WindowSettings.ResetToCenter += ResetToCenter;
 
             Loaded += OnLoaded;
             SizeChanged += OnSizeChanged;
@@ -97,7 +98,7 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
             FocusManager.FocusTick += OnFocusTick;
 
-            if (_settings.Enabled) Show();
+            if (WindowSettings.Enabled) Show();
             OnClickThruModeChanged();
             OnVisibilityChanged();
             OnWindowVisibilityChanged();
@@ -131,7 +132,7 @@ namespace TCC.Windows
 
         private void OnWindowVisibilityChanged()
         {
-            SetVisibility(_settings.Visible);
+            SetVisibility(WindowSettings.Visible);
         }
 
         private void OnButtonsTimerTick(object sender, EventArgs e)
@@ -143,13 +144,13 @@ namespace TCC.Windows
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!_settings.AllowOffScreen) CheckBounds();
+            if (!WindowSettings.AllowOffScreen) CheckBounds();
             if (_ignoreSize) return;
-            if (_settings.W != ActualWidth ||
-                _settings.H != ActualHeight)
+            if (WindowSettings.W != ActualWidth ||
+                WindowSettings.H != ActualHeight)
             {
-                _settings.W = ActualWidth;
-                _settings.H = ActualHeight;
+                WindowSettings.W = ActualWidth;
+                WindowSettings.H = ActualHeight;
                 if(!App.Loading) SettingsWriter.Save();
             }
         }
@@ -158,19 +159,19 @@ namespace TCC.Windows
         {
             FocusManager.MakeUnfocusable(Handle);
             FocusManager.HideFromToolBar(Handle);
-            if (!_settings.Enabled) Hide();
+            if (!WindowSettings.Enabled) Hide();
         }
         private void OnDimChanged()
         {
             if (!WindowManager.ForegroundManager.Visible) return;
 
-            if (!_settings.AutoDim)
+            if (!WindowSettings.AutoDim)
                 AnimateContentOpacity(1);
             else
             {
-                if (_undimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
-                else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(_settings.DimOpacity);
-                else AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? _settings.DimOpacity : 1);
+                if (_undimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? WindowSettings.DimOpacity : 1);
+                else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(WindowSettings.DimOpacity);
+                else AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? WindowSettings.DimOpacity : 1);
             }
 
             OnClickThruModeChanged();
@@ -179,9 +180,9 @@ namespace TCC.Windows
         {
             if (WindowManager.ForegroundManager.Visible)
             {
-                if (WindowManager.ForegroundManager.Dim && _settings.AutoDim)
+                if (WindowManager.ForegroundManager.Dim && WindowSettings.AutoDim)
                 {
-                    AnimateContentOpacity(_settings.DimOpacity);
+                    AnimateContentOpacity(WindowSettings.DimOpacity);
                 }
                 else
                 {
@@ -191,13 +192,13 @@ namespace TCC.Windows
             }
             else
             {
-                if (_settings.ShowAlways) return;
+                if (WindowSettings.ShowAlways) return;
                 AnimateContentOpacity(0);
             }
         }
         private void OnClickThruModeChanged()
         {
-            switch (_settings.ClickThruMode)
+            switch (WindowSettings.ClickThruMode)
             {
                 case ClickThruMode.Never:
                     FocusManager.UndoClickThru(Handle);
@@ -225,7 +226,7 @@ namespace TCC.Windows
         {
             try
             {
-                if (_settings.Enabled) Show();
+                if (WindowSettings.Enabled) Show();
                 else Hide();
             }
             catch { }
@@ -256,7 +257,7 @@ namespace TCC.Windows
         }
         private void CheckBounds()
         {
-            if (_settings.AllowOffScreen) return;
+            if (WindowSettings.AllowOffScreen) return;
             if ((Left + ActualWidth) > Settings.Settings.ScreenW)
             {
                 Left = Settings.Settings.ScreenW - ActualWidth;
@@ -267,8 +268,8 @@ namespace TCC.Windows
             }
             CheckIndividualScreensBounds();
 
-            _settings.X = Left / Settings.Settings.ScreenW;
-            _settings.Y = Top / Settings.Settings.ScreenH;
+            WindowSettings.X = Left / Settings.Settings.ScreenW;
+            WindowSettings.Y = Top / Settings.Settings.ScreenH;
         }
 
         private void CheckIndividualScreensBounds()
@@ -354,12 +355,12 @@ namespace TCC.Windows
             if (!(distance > deadzone)) return;
             if (middle >= screenMiddle)
             {
-                _settings.ButtonsPosition = ButtonsPosition.Above;
+                WindowSettings.ButtonsPosition = ButtonsPosition.Above;
                 Grid.SetRow(ButtonsRef, 0);
             }
             else
             {
-                _settings.ButtonsPosition = ButtonsPosition.Below;
+                WindowSettings.ButtonsPosition = ButtonsPosition.Below;
                 Grid.SetRow(ButtonsRef, 2);
             }
         }
@@ -372,8 +373,8 @@ namespace TCC.Windows
                 UpdateButtons();
                 CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
-                _settings.X = Left / Settings.Settings.ScreenW;
-                _settings.Y = Top / Settings.Settings.ScreenH;
+                WindowSettings.X = Left / Settings.Settings.ScreenW;
+                WindowSettings.Y = Top / Settings.Settings.ScreenH;
                 SettingsWriter.Save();
             }
             catch
