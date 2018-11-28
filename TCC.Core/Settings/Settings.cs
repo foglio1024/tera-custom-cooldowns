@@ -171,8 +171,10 @@ namespace TCC.Settings
         public static bool ForceSoftwareRendering { get; set; }
         public static ControlShape AbnormalityShape { get; set; }
         public static ControlShape SkillShape { get; set; }
-        public static bool Winpcap { get; set; } = true; //TODO: use this
+        public static bool Npcap { get; set; } = true; //TODO: use this
         public static bool CheckOpcodesHash { get; set; } = true;
+        public static bool DiscordWebhookEnabled { get; set; } = false;
+        public static bool ShowNotificationBubble { get; set; } = true;
 
         private static string _lastRegion = "";
         private static bool _chatEnabled;

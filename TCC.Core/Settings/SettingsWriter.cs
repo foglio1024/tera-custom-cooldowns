@@ -129,6 +129,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(Settings.HighPriority), Settings.HighPriority),
                 new XAttribute(nameof(Settings.LastRun), DateTime.Now),
                 new XAttribute(nameof(Settings.LastRegion), Settings.LastRegion),
+                new XAttribute(nameof(Settings.DiscordWebhookEnabled), Settings.DiscordWebhookEnabled),
                 new XAttribute(nameof(Settings.Webhook), Settings.Webhook),
                 new XAttribute(nameof(Settings.WebhookMessage), Settings.WebhookMessage),
                 new XAttribute(nameof(Settings.TwitchName), Settings.TwitchName),
@@ -144,9 +145,10 @@ namespace TCC.Settings
                 new XAttribute(nameof(Settings.FlightGaugeRotation), Settings.FlightGaugeRotation),
                 new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge),
                 new XAttribute(nameof(Settings.AbnormalityShape), Settings.AbnormalityShape),
-                new XAttribute(nameof(Settings.Winpcap), Settings.Winpcap),
+                new XAttribute(nameof(Settings.Npcap), Settings.Npcap),
                 new XAttribute(nameof(Settings.EthicalMode), Settings.EthicalMode),
-                new XAttribute(nameof(Settings.CheckOpcodesHash), Settings.CheckOpcodesHash)
+                new XAttribute(nameof(Settings.CheckOpcodesHash), Settings.CheckOpcodesHash),
+                new XAttribute(nameof(Settings.ShowNotificationBubble), Settings.ShowNotificationBubble)
             );
         }
         private static XElement BuildGroupAbnormalsXElement()

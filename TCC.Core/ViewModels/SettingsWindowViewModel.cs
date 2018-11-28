@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -315,7 +316,7 @@ namespace TCC.ViewModels
                 if (Settings.Settings.ShowItemsCooldown == value) return;
                 Settings.Settings.ShowItemsCooldown = value;
                 CooldownWindowViewModel.Instance.NotifyItemsDisplay();
-                NPC(nameof(ShowItemsCooldown));
+                NPC();
             }
         }
         public bool UseLfg
@@ -413,19 +414,27 @@ namespace TCC.ViewModels
                 WindowManager.FlightDurationWindow.ExNPC(nameof(FlightGaugeRotation));
             }
         }
-        //public bool LfgOn
-        //{
-        //    get => Settings.LfgOn;
-        //    set
-        //    {
-        //        if (Settings.LfgOn == value) return;
-        //        Settings.LfgOn = value;
-        //        ChatWindowManager.Instance.LfgOn = value;
-        //        MessageFactory.Update();
-        //        NotifyPropertyChanged(nameof(LfgOn));
 
-        //    }
-        //}
+        public bool DiscordWebhookEnabled
+        {
+            get => Settings.Settings.DiscordWebhookEnabled;
+            set
+            {
+                if (Settings.Settings.DiscordWebhookEnabled == value) return;
+                Settings.Settings.DiscordWebhookEnabled = value;
+                NPC();
+            }
+        }
+        public bool ShowNotificationBubble
+        {
+            get => Settings.Settings.ShowNotificationBubble;
+            set
+            {
+                if (Settings.Settings.ShowNotificationBubble == value) return;
+                Settings.Settings.ShowNotificationBubble = value;
+                NPC();
+            }
+        }
         public string Webhook
         {
             get => Settings.Settings.Webhook;
@@ -487,7 +496,20 @@ namespace TCC.ViewModels
                 NPC(nameof(GroupSizeThreshold));
             }
         }
-
+        public bool Npcap
+        {
+            get => Settings.Settings.Npcap;
+            set
+            {
+                if (Settings.Settings.Npcap == value) return;
+                var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
+                    MessageBoxButton.OKCancel);
+                if (res == MessageBoxResult.Cancel) return;
+                Settings.Settings.Npcap = value;
+                NPC();
+                if(res == MessageBoxResult.OK) App.Restart();
+            }
+        }
         public double ChatWindowOpacity
         {
             get => Settings.Settings.ChatWindowOpacity;

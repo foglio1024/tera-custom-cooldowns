@@ -316,7 +316,7 @@ namespace TCC.Settings
                     //===================================================================================
                     else if (attr.Name == nameof(Settings.HighPriority)) Settings.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ForceSoftwareRendering)) Settings.ForceSoftwareRendering = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.Winpcap)) Settings.Winpcap = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.Npcap)) Settings.Npcap = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.RegionOverride)) Settings.RegionOverride = attr.Value;
                     else if (attr.Name == nameof(Settings.LastRegion)) Settings.LastRegion = attr.Value;
                     else if (attr.Name == nameof(Settings.Webhook)) Settings.Webhook = attr.Value;
@@ -329,6 +329,8 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.TwitchChannelName)) Settings.TwitchChannelName = attr.Value;
                     else if (attr.Name == nameof(Settings.GroupSizeThreshold)) Settings.GroupSizeThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.CheckOpcodesHash)) Settings.CheckOpcodesHash = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.DiscordWebhookEnabled)) Settings.DiscordWebhookEnabled = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(Settings.ShowNotificationBubble)) Settings.ShowNotificationBubble = bool.Parse(attr.Value);
                     //add settings here
                 });
 
