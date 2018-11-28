@@ -9,8 +9,16 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) value = Class.Common;
-            var c = (Class)value;
+            Class c = Class.Common;
+            switch (value)
+            {
+                case Class cl:
+                    c = cl;
+                    break;
+                case string s:
+                    c = (Class)Enum.Parse(typeof(Class), s);
+                    break;
+            }
             return System.Windows.Application.Current.FindResource("SvgClass" + c.ToString());
         }
 
