@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Annotations;
+using TCC.Controls;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
@@ -24,9 +25,12 @@ namespace TCC.Settings
         private bool _enabled;
         private bool _allowOffScreen;
 
+        public event Action ResetToCenter;
         public event Action EnabledChanged;
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
+
+        public RelayCommand ResetPositionCommand;
 
         public string Name { [UsedImplicitly] get; }
         public bool PerClassPosition { get; set; }
@@ -221,6 +225,7 @@ namespace TCC.Settings
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
+            ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
             Name = name;
             _w = w;
             _h = h;
@@ -233,8 +238,8 @@ namespace TCC.Settings
             _enabled = enabled;
             _allowOffScreen = allowOffscreen;
             PerClassPosition = perClassPosition;
-            Positions = positions == null ? 
-                new ClassPositions(x, y, buttonsPosition) : 
+            Positions = positions == null ?
+                new ClassPositions(x, y, buttonsPosition) :
                 new ClassPositions(positions);
         }
 
