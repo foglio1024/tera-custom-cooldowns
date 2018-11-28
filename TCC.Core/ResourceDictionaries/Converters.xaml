@@ -63,4 +63,6 @@
     <c:LfgVmToButtonLabelConverter x:Key="Converters.LfgVmToButtonLabel"/>
     <c:ClassToNameConverter x:Key="Converters.ClassToName" />
 
+    <c:RoundedClipConverter x:Key="RoundedClipConverter" />
+
 </ResourceDictionary>
