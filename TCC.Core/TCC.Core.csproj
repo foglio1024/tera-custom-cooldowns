@@ -98,6 +98,10 @@
     <Compile Include="Controls\Classes\Elements\TraverseCutControl.xaml.cs">
       <DependentUpon>TraverseCutControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RelayCommand.cs" />
+    <Compile Include="Controls\Settings\CheckboxSetting.xaml.cs">
+      <DependentUpon>CheckboxSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Skills\FixedSkillControlBase.cs" />
     <Compile Include="Controls\Skills\SkillControlBase.cs" />
     <Compile Include="Controls\Classes\Elements\SorcererElementsControl.xaml.cs">
@@ -115,6 +119,7 @@
     <Compile Include="Converters\DurationLabelConverter.cs" />
     <Compile Include="Converters\DurationToVisibilityConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter2.cs" />
+    <Compile Include="Converters\RoundedClipConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelSizeConverter.cs" />
     <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
@@ -716,6 +721,9 @@
     <Compile Include="Windows\MyAbnormalConfigWindow.xaml.cs">
       <DependentUpon>MyAbnormalConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -799,8 +807,8 @@
     <Compile Include="Windows\LfgListWindow.xaml.cs">
       <DependentUpon>LfgListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    <Compile Include="Windows\SettingsWindowOld.xaml.cs">
+      <DependentUpon>SettingsWindowOld.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Arc.cs" />
     <Compile Include="Data\Pc\Character.cs" />
@@ -862,6 +870,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Classes\Elements\TraverseCutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\CheckboxSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1141,6 +1153,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Widgets\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1238,7 +1254,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\SettingsWindow.xaml">
+    <Page Include="Windows\SettingsWindowOld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
