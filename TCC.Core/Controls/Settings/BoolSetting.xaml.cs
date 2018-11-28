@@ -46,7 +46,7 @@ namespace TCC.Controls.Settings
             set => SetValue(SettingImageProperty, value);
         }
         public static readonly DependencyProperty SettingImageProperty =
-            DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(BoolSetting));
+            DependencyProperty.Register("SvgIcon", typeof(ImageSource), typeof(BoolSetting));
 
         private void ToggleSetting(object sender, MouseButtonEventArgs e)
         {

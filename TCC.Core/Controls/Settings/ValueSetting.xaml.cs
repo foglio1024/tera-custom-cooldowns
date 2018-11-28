@@ -16,51 +16,48 @@ namespace TCC.Controls.Settings
             get => (string)GetValue(SettingNameProperty);
             set => SetValue(SettingNameProperty, value);
         }
-        public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
-        public ImageSource SettingImage
-        {
-            get => (ImageSource)GetValue(SettingImageProperty);
-            set => SetValue(SettingImageProperty, value);
-        }
-        public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(ValueSetting));
+        public static readonly DependencyProperty SettingNameProperty = 
+            DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
+
         public Visibility TextBoxVisibility
         {
             get => (Visibility)GetValue(TextBoxVisibilityProperty);
             set => SetValue(TextBoxVisibilityProperty, value);
         }
-        public static readonly DependencyProperty TextBoxVisibilityProperty = DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(ValueSetting));
-
-
+        public static readonly DependencyProperty TextBoxVisibilityProperty = 
+            DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(ValueSetting));
 
         public double Max
         {
             get => (double)GetValue(MaxProperty);
             set => SetValue(MaxProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for Max.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaxProperty =
             DependencyProperty.Register("Max", typeof(double), typeof(ValueSetting));
-
-
 
         public double Min
         {
             get => (double)GetValue(MinProperty);
             set => SetValue(MinProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for Min.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MinProperty =
             DependencyProperty.Register("Min", typeof(double), typeof(ValueSetting));
-
 
         public double Value
         {
             get => (double)GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
         }
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
+        public static readonly DependencyProperty ValueProperty = 
+            DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
+
+        public Geometry SvgIcon
+        {
+            get => (Geometry)GetValue(SvgIconProperty);
+            set => SetValue(SvgIconProperty, value);
+        }
+        public static readonly DependencyProperty SvgIconProperty =
+            DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(ValueSetting));
 
 
         private readonly ColorAnimation _glow;
@@ -78,7 +75,7 @@ namespace TCC.Controls.Settings
             _fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
             _fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
-            MainGrid.Background = new SolidColorBrush(Colors.Transparent);
+            //MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
 

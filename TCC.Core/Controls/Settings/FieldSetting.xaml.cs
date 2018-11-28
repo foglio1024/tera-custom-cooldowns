@@ -25,12 +25,12 @@ namespace TCC.Controls.Settings
             set => SetValue(SettingNameProperty, value);
         }
         public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(FieldSetting));
-        public ImageSource SettingImage
+        public Geometry SvgIcon
         {
-            get => (ImageSource)GetValue(SettingImageProperty);
-            set => SetValue(SettingImageProperty, value);
+            get => (Geometry)GetValue(SvgIconProperty);
+            set => SetValue(SvgIconProperty, value);
         }
-        public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(FieldSetting));
+        public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(FieldSetting));
 
         private readonly ColorAnimation _glow;
         private readonly ColorAnimation _unglow;

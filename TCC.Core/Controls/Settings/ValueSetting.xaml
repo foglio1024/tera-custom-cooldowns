@@ -10,27 +10,60 @@
         <Style x:Key="SliderThumbStyle" TargetType="Thumb">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="false"/>
-            <Setter Property="Height" Value="16"/>
-            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Width" Value="10"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse  Name="Ellipse"
-                                 Cursor="Hand"
-                          Fill="#ff303037" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Ellipse.Effect>
-                                <DropShadowEffect ShadowDepth="1" Opacity=".55" BlurRadius="4"/>
-                            </Ellipse.Effect>
-                        </Ellipse>
-                        
+                        <Grid>
+                            <Ellipse Opacity="0" Fill="{StaticResource DefensiveStanceBrush}" 
+                                     Margin="-5" Name="Ext" />
+                            <Ellipse  Name="Ellipse" 
+                                     Cursor="Hand"
+                                      Fill="{StaticResource DefensiveStanceBrush}"  >
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity=".5"></DropShadowEffect>
+                                </Ellipse.Effect>
+                            </Ellipse>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Ellipse" Property="Fill" Value="#ff3822"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Ext"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To=".3" EasingFunction="{StaticResource QuadraticEase}"
+                                                 Duration="0:0:0.2"/>
+                                            <ColorAnimation Storyboard.TargetName="Ellipse"
+                                                 Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
+                                                 To="{StaticResource DefensiveStanceColorLight}"
+                                                 Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Ext"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="0" EasingFunction="{StaticResource QuadraticEase}"
+                                                             Duration="0:0:0.2"/>
+                                            <ColorAnimation Storyboard.TargetName="Ellipse"
+                                                            Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
+                                                            To="{StaticResource DefensiveStanceColor}"
+                                                            Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+
                             </Trigger>
                         </ControlTemplate.Triggers>
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
         </Style>
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -40,7 +73,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  BorderThickness="0" BorderBrush="Black" Opacity=".3" Background="#ff3822" Height="2"/>
+                        <Border  BorderThickness="0" BorderBrush="Black" 
+                                 Opacity=".7" Background="{StaticResource DefensiveStanceBrush}"
+                                 Height="4" CornerRadius="2 0 0 2"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -51,7 +86,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border SnapsToDevicePixels="True" Background="#f444" Opacity="1" BorderThickness="0" BorderBrush="YellowGreen" Height="2"/>
+                        <Border SnapsToDevicePixels="True" 
+                                Background="{StaticResource RevampDarkerBackgroundBrush}"
+                                Opacity="1" BorderThickness="0" 
+                                CornerRadius="0 2 2 0" Height="4"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -81,12 +119,12 @@
                                 <Track.DecreaseRepeatButton>
                                     <RepeatButton Style="{StaticResource SliderRepeatButton}"  Command="Slider.DecreaseLarge" />
                                 </Track.DecreaseRepeatButton>
-                                <Track.Thumb>
-                                    <Thumb Style="{StaticResource SliderThumbStyle}" />
-                                </Track.Thumb>
                                 <Track.IncreaseRepeatButton>
                                     <RepeatButton Style="{StaticResource SliderRepeatButton1}" Command="Slider.IncreaseLarge" />
                                 </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumbStyle}" />
+                                </Track.Thumb>
 
                             </Track>
                         </Grid>
@@ -96,45 +134,47 @@
         </Style>
     </UserControl.Resources>
     <Grid Height="35" 
-          MouseEnter="Grid_MouseEnter" 
-          MouseLeave="Grid_MouseLeave" 
-          Background="Transparent" 
+          Style="{StaticResource GlowHoverGrid}"
           Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Image Source="{Binding SettingImage, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
-               Width="22" 
-               Height="22" 
+        <Path Data="{Binding SvgIcon, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
+               Width="18" 
+               Height="18" 
                RenderOptions.BitmapScalingMode="Fant" 
                HorizontalAlignment="Left" 
-               Margin="17,0,0,0" 
+               Margin="7 0" 
                Opacity=".3"
                x:Name="Img"/>
         <TextBlock Style="{StaticResource DefaultTextStyle}" 
                    Grid.Column="1" 
-                   Margin="10,0,14,0" 
+                   Margin="5 0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
                    VerticalAlignment="Center" 
                    Padding="0" 
                    TextAlignment="Left" 
                    Opacity=".9"/>
-        <Grid Grid.Column="2" Width="Auto">
+        <Grid Grid.Column="2" Width="Auto" Margin="7 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Width="Auto" TextAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"
+            <TextBox Width="Auto" TextAlignment="Right" Background="Transparent" 
+                     Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" 
+                     VerticalAlignment="Center" Margin="0 0 5 0" 
+                     Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"
+                     CaretBrush="{StaticResource DefensiveStanceBrushLight}"
+
                      Visibility="{Binding TextBoxVisibility, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBox>
-        <Slider Width="100" Grid.Column="1" Style="{StaticResource AppSliderStyle}" ValueChanged="Slider_ValueChanged" Loaded="FrameworkElement_OnLoaded" HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="Slider_MouseDoubleClick"
+            <Slider Width="100" Grid.Column="1" Style="{StaticResource AppSliderStyle}" ValueChanged="Slider_ValueChanged" Loaded="FrameworkElement_OnLoaded" HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="Slider_MouseDoubleClick"
                 Maximum="{Binding Max, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
                 Minimum="{Binding Min, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
-                Value="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" Margin="0,0,10,0">
-           
-        </Slider>
+                Value="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" Margin="0">
+            </Slider>
         </Grid>
         <Grid Visibility="Hidden" Grid.Column="2" Margin="10,0,20,0">
             <Grid.RowDefinitions >

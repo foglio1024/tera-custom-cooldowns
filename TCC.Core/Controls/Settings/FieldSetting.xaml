@@ -16,17 +16,17 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="{Binding SettingImage, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}" 
-               Width="22" 
-               Height="22" 
+        <Path Data="{Binding SvgIcon, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}" 
+               Width="18" 
+               Height="18" 
                RenderOptions.BitmapScalingMode="Fant" 
                HorizontalAlignment="Left" 
-               Margin="17,0,0,0" 
+               Margin="7 0" 
                Opacity=".3"
                x:Name="Img"/>
         <TextBlock Style="{StaticResource DefaultTextStyle}" 
                    Grid.Column="1" 
-                   Margin="10,0,14,0" 
+                   Margin="5 0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}" 
                    VerticalAlignment="Center" 
                    Padding="0" 
@@ -35,7 +35,7 @@
 
         <TextBox Grid.Column="2" Width="Auto" TextAlignment="Left" Background="#1fff" Foreground="White" 
                  BorderThickness="0" LostFocus="TextBox_LostFocus" TextChanged="TextBox_TextChanged"  VerticalAlignment="Center" 
-                 Margin="0,0,15,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}"></TextBox>
+                 Margin="7 0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}"></TextBox>
     </Grid>
 
 </UserControl>

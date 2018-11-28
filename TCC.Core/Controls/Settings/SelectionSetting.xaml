@@ -6,27 +6,26 @@
              xmlns:local="clr-namespace:TCC.Controls.Settings"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="SelectionSetting_OnLoaded">
-    <Grid Height="35" 
-          MouseEnter="Grid_MouseEnter" 
-          MouseLeave="Grid_MouseLeave" 
-          Background="Transparent" 
-          Name="MainGrid">
+    <Grid Height="35"  Cursor="Hand"
+          Name="MainGrid"
+            Style="{StaticResource GlowHoverGrid}"
+            MouseLeftButtonDown="OnMouseButtonDown">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MaxWidth="32"/>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="{Binding SettingImage, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
-               Width="22" 
-               Height="22" 
+        <Path Data="{Binding SvgIcon, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
+               Width="18" 
+               Height="18" 
                RenderOptions.BitmapScalingMode="Fant" 
                HorizontalAlignment="Left" 
-               Margin="17,0,0,0" 
+               Margin="7 0" 
                Opacity=".3"
                x:Name="Img"/>
         <TextBlock Style="{StaticResource DefaultTextStyle}" 
                    Grid.Column="1" 
-                   Margin="10,0,14,0" 
+                   Margin="5 0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
                    VerticalAlignment="Center" 
                    Padding="0" 
@@ -34,7 +33,7 @@
                    Opacity=".9"/>
         <ComboBox Grid.Column="2" ItemsSource="{Binding Choices, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
                   SelectionChanged="Selector_OnSelectionChanged" Foreground="White"  VerticalAlignment="Stretch" BorderThickness="0"
-                  VerticalContentAlignment="Center" Margin="0,0,15,0" DropDownOpened="ComboBox_OnDropDownOpened" 
+                  VerticalContentAlignment="Center" Margin="7 0" 
                   Name="Cbox" HorizontalAlignment="Right" HorizontalContentAlignment="Left" >
         </ComboBox>
     </Grid>

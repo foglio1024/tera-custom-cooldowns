@@ -25,13 +25,15 @@ namespace TCC.Controls.Settings
         }
         public static readonly DependencyProperty SettingNameProperty =
             DependencyProperty.Register("SettingName", typeof(string), typeof(SelectionSetting));
-        public ImageSource SettingImage
+
+        public Geometry SvgIcon
         {
-            get => (ImageSource)GetValue(SettingImageProperty);
-            set => SetValue(SettingImageProperty, value);
+            get => (Geometry)GetValue(SvgIconProperty);
+            set => SetValue(SvgIconProperty, value);
         }
-        public static readonly DependencyProperty SettingImageProperty =
-            DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(SelectionSetting));
+        public static readonly DependencyProperty SvgIconProperty =
+            DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(SelectionSetting));
+
 
         public IEnumerable Choices
         {
@@ -67,7 +69,7 @@ namespace TCC.Controls.Settings
             _fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
             _fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
-            MainGrid.Background = new SolidColorBrush(Colors.Transparent);
+            //MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
@@ -89,10 +91,6 @@ namespace TCC.Controls.Settings
             SelectedItem = cb.SelectedItem.ToString();
         }
 
-        private void ComboBox_OnDropDownOpened(object sender, EventArgs e)
-        {
-        }
-
         private void SelectionSetting_OnLoaded(object sender, RoutedEventArgs e)
         {
             var i = 0;
@@ -106,6 +104,11 @@ namespace TCC.Controls.Settings
                 i++;
             }
 
+        }
+
+        private void OnMouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Cbox.IsDropDownOpen = true;
         }
     }
 }
