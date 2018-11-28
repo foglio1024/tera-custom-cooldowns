@@ -53,7 +53,7 @@ namespace TCC
         {
             var closeEventsCount = InfoWindowViewModel.Instance.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
-            WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+            if(Settings.Settings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
         }
 
