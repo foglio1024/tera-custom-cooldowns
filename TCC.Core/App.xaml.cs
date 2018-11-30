@@ -274,6 +274,7 @@ namespace TCC
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+            Proxy.Proxy.ConnectToProxy();
         }
 
         private static void TeraSniffer_OnEndConnection()
