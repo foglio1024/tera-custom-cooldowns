@@ -155,5 +155,18 @@ namespace TCC.Windows
         {
             Process.Start("https://github.com/Foglio1024/Tera-custom-cooldowns/wiki");
         }
+
+        private void EventSetter_OnHandler(object sender, RoutedEventArgs e)
+        {
+            var t = sender as FrameworkElement;
+            t.Opacity = 0;
+            t.RenderTransform = new TranslateTransform(-20, 0);
+            var ease = new QuadraticEase();
+            var slideAnim = new DoubleAnimation(-20, 0, TimeSpan.FromMilliseconds(750)){EasingFunction = ease};
+            var fadeAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(750)){EasingFunction = ease};
+            t.BeginAnimation(OpacityProperty, fadeAnim);
+            t.RenderTransform.BeginAnimation(TranslateTransform.XProperty, slideAnim);
+
+        }
     }
 }

@@ -249,6 +249,7 @@
         <Style x:Key="VisibilitySettingStyle" TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
             <Setter Property="SettingName" Value="Visible"/>
             <Setter Property="ToolTip" Value="{StaticResource VisibilitySettingTooltip}"/>
+
         </Style>
         <Style x:Key="ShowAlwaysSettingStyle" TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
             <Setter Property="SettingName" Value="Show always"/>
@@ -257,6 +258,7 @@
         <Style x:Key="AllowOffscreenSettingStyle" TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
             <Setter Property="SettingName" Value="Allow offscreen"/>
             <Setter Property="ToolTip" Value="{StaticResource AllowOffscreenTooltip}"/>
+
         </Style>
         <Style x:Key="AutoDimSettingStyle" TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
             <Setter Property="SettingName" Value="Auto dim"/>
@@ -296,6 +298,19 @@
             <Setter Property="Opacity" Value=".5"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
+        <Style x:Key="BigPathStyle" TargetType="Path">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Fill" Value="#1ddf"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Grid.RowSpan" Value="10"/>
+            <Setter Property="Grid.ColumnSpan" Value="10"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <EventSetter Event="Loaded" Handler="EventSetter_OnHandler"/>
+        </Style>
+        
     </Window.Resources>
     <!-- Main grid -->
     <Grid Margin="10"
@@ -369,13 +384,13 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="5" Data="{StaticResource SvgCooldownIcon}"/>
                             <TextBlock Text="Cooldown window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1" />
                         </Grid>
                     </TabItem.Header>
-                    <Grid VerticalAlignment="Stretch">
+                    <Grid VerticalAlignment="Stretch" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -385,6 +400,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path  Data="{StaticResource SvgCooldownIcon}" Style="{StaticResource BigPathStyle}"/>
+
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -457,13 +474,13 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="5" Data="{StaticResource SvgCharacterIcon}"></Path>
                             <TextBlock Text="Character window settings"                                        
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
                         </Grid>
                     </TabItem.Header>
-                    <Grid VerticalAlignment="Stretch">
+                    <Grid VerticalAlignment="Stretch" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -473,6 +490,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgCharacterIcon}" Style="{StaticResource BigPathStyle}"/>
+
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -516,7 +535,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="5" Data="{StaticResource SvgNpcIcon}"/>
                             <TextBlock Text="NPC window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -532,6 +551,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgNpcIcon}" Style="{StaticResource BigPathStyle}"/>
+
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -612,7 +633,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="5" Data="{StaticResource SvgBuffIcon}"/>
                             <TextBlock Text="Buff window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -628,6 +649,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgBuffIcon}" Style="{StaticResource BigPathStyle}"/>
+
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -679,7 +702,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="7" Data="{StaticResource SvgClassWarrior}"/>
                             <TextBlock Text="Class window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -695,6 +718,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgClassWarrior}" Style="{StaticResource BigPathStyle}"/>
+
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -760,7 +785,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="6" Data="{StaticResource SvgUsers}"/>
                             <TextBlock Text="Group window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -776,6 +801,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgUsers}" Style="{StaticResource BigPathStyle}"/>
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -941,7 +967,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="6" Data="{StaticResource SvgChatMessage}"/>
                             <TextBlock Text="Chat window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -957,6 +983,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgChatMessage}" Style="{StaticResource BigPathStyle}"/>
+
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -1070,7 +1098,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="6" Data="{StaticResource SvgCrossedSwords}"/>
                             <TextBlock Text="Civil Unrest window settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -1086,6 +1114,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Data="{StaticResource SvgCrossedSwords}" Style="{StaticResource BigPathStyle}"/>
                         <!-- General -->
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="General settings"/>
@@ -1123,7 +1152,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="6" Data="{StaticResource SvgSettings}"/>
                             <TextBlock Text="System settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -1141,6 +1170,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Style="{StaticResource BigPathStyle}" Data="{StaticResource SvgSettings}"/>
+
                         <!-- System settings -->
                         <StackPanel VerticalAlignment="Stretch" Grid.RowSpan="2">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="System settings"/>
@@ -1235,7 +1266,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="6" Data="{StaticResource SvgCheckAll}"/>
                             <TextBlock Text="Misc settings" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -1253,6 +1284,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Style="{StaticResource BigPathStyle}" Data="{StaticResource SvgCheckAll}"/>
+
                         <!-- Flight gauge -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="0" >
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Flight gauge"/>
@@ -1378,7 +1411,7 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!--<Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>-->
+                            <Path Margin="6" Data="{StaticResource SvgOpenLink}"/>
                             <TextBlock Text="Links" 
                                        Style="{StaticResource TabItemHeaderTextStyle}" 
                                        Grid.Column="1"/>
@@ -1396,6 +1429,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Style="{StaticResource TabContentBackgroundBorder}"/>
+                        <Path Style="{StaticResource BigPathStyle}" Data="{StaticResource SvgOpenLink}"/>
+
                         <!-- GitHub -->
                         <StackPanel >
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="TCC Github"/>
