@@ -58,7 +58,7 @@ namespace TCC.Controls.Dashboard
             ((Character)DataContext).PropertyChanged += (s, ev) =>
             {
                 if (ev.PropertyName != nameof(Character.IsSelected)) return;
-                AnimateSel();
+                Dispatcher.Invoke(AnimateSel);
             };
             AnimateSel();
             var i = new MenuItem { Header = "Remove" };

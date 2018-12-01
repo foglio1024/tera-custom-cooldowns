@@ -615,7 +615,7 @@
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid Background="Transparent">
                         <Rectangle x:Name="hl" Fill="#1fff" Opacity="0" IsHitTestVisible="False" />
-                        <Rectangle x:Name="alt" Fill="#1999" Opacity="0" IsHitTestVisible="False" />
+                        <Rectangle x:Name="alt" Fill="#1779" Opacity="0" IsHitTestVisible="False"  />
                         <ContentPresenter Margin="{TemplateBinding Padding}" />
                     </Grid>
                     <ControlTemplate.Triggers>
