@@ -21,7 +21,7 @@
              SizeToContent="Manual"
              Loaded="OnLoaded">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5,10,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="7 12 7 7" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
     <w:TccWidget.DataContext>
         <vm:ChatViewModel />
@@ -219,7 +219,7 @@
                 <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
                        HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
                        Visibility="{Binding Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
-                <Path Data="{StaticResource SvgSettings}"
+                <!--<Path Data="{StaticResource SvgSettings}"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Top"
                   Fill="White"
@@ -229,7 +229,7 @@
                   Height="14" Width="14"
                   Margin="4"
                   Opacity=".4"
-                  />
+                  />-->
                 <Border Background="{StaticResource DefaultBackgroundBrush}" Width="Auto"
                         Grid.Column="0" Grid.Row="0" Opacity="0"
                         Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
@@ -247,10 +247,12 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <Button x:Name="Settings" Margin="5" HorizontalAlignment="Right" Click="Settings_Click" Opacity="0"
-                        Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14"
+                <Button x:Name="Settings" Margin="0 5" HorizontalAlignment="Right" Click="Settings_Click" Opacity=".5"
+                        Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14" 
                         VerticalAlignment="Top">
-                    <Path Data="{StaticResource SvgSettings}" />
+                    <Grid Background="#01000000">
+                        <Path Data="{StaticResource SvgSettings}"/>
+                    </Grid>
                 </Button>
             </Grid>
         </dockablz:Layout>
@@ -260,20 +262,21 @@
                MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=Settings}" StaysOpen="True"
                PopupAnimation="Slide">
-            <Border Style="{StaticResource DefaultBorderStyle}" CornerRadius="2" Margin="3">
-                <StackPanel Width="350" Margin="-30 0 0 0">
+            <Grid>
+
+                <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
+                <StackPanel Width="350" Margin="3">
                     <settings:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
-                                    Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0" Max="1" Visibility="Visible"/>
-                    <settings:BoolSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}" />
-                    <!--<c:BoolSetting SettingName="Can minimize" Foreground="#9fff" />-->
-                    <settings:BoolSetting SettingName="Show always" Foreground="#9fff"
-                                   IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWidget}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
-                    <Button Height="30" Style="{StaticResource ButtonContentOpacityStyle}" ToolTip="Use current position for all classes" 
-                            VerticalContentAlignment="Center" Click="MakeGlobal">
-                        <TextBlock Text="Make position global" Margin="50 0"></TextBlock>
+                                           Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0" Max="1" Visibility="Visible"/>
+                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
+                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" CheckBoxColor="{StaticResource DefensiveStanceBrush}"
+                                              IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWidget}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
+                    <Button  Style="{StaticResource SettingsButton}" ToolTip="Use current position for all classes" Click="MakeGlobal" Margin="10 5 10 7">
+                        <TextBlock Text="Make position global" Margin="0 0"/>
                     </Button>
                 </StackPanel>
-            </Border>
+            </Grid>
         </Popup>
+
     </Grid>
 </w:TccWidget>

@@ -16,22 +16,23 @@
         WindowStartupLocation="CenterScreen"
         Title="Chat tab settings" 
         Height="Auto" 
-        Width="300" 
+        Width="600" 
         d:DataContext="{d:DesignInstance {x:Type vm:Tab}}">
     <Grid x:Name="ChatSettingsPopup"  VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch">
-        <Border Style="{StaticResource DefaultBorderStyle}" 
-                Margin="5" Opacity="1" CornerRadius="1" 
+        <Border Style="{StaticResource RevampBorderStyle}" 
+                Margin="5"  
                 >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+        </Border>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                <chatcontrols:TabSettingControl Grid.Row="1" />
-                <Grid  MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-                    <Border Background="{StaticResource DefaultBackgroundBrush}" CornerRadius="1 1 0 0"></Border>
+            <chatcontrols:TabSettingControl Grid.Row="1" Visibility="Visible" Margin="3 0 3 3"/>
+            <Grid  MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
+                <!--<Border Background="{StaticResource RevampBackgroundBrush}" Style="{StaticResource RevampBorderStyle}"></Border>-->
                 <Button HorizontalAlignment="Right" Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Stretch"
                                Click="CloseChannelSettings" VerticalContentAlignment="Center">
                     <Path Data="{StaticResource SvgClose}" Margin="10 0" />
@@ -41,9 +42,8 @@
                 <TextBlock Text="Chat tab settings" Style="{StaticResource DefaultTextStyle}" 
                            Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                            FontSize="15" Foreground="#999"/>
-                </Grid>
             </Grid>
-        </Border>
+        </Grid>
 
 
     </Grid>

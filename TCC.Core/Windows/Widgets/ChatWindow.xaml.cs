@@ -277,7 +277,7 @@ namespace TCC.Windows.Widgets
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
             ChatWindowManager.Instance.RefreshHideTimer();
-            Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)));
+            Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(.3, TimeSpan.FromMilliseconds(300)));
             if (e.LeftButton == MouseButtonState.Pressed) UpdateSettings();
         }
 
