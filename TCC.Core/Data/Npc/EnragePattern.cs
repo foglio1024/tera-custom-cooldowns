@@ -6,6 +6,7 @@
 
         public double Percentage { get; set; }
         public int Duration { get; set; }
+        public bool StaysEnraged { get; set; }
         public EnragePattern()
         {
             Percentage = 10;

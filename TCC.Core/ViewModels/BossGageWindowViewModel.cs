@@ -322,6 +322,13 @@ namespace TCC.ViewModels
                 if (n.TemplateId == 1003) n.EnragePattern = new EnragePattern((long)n.MaxHP, 600000000, 72);
             }
 
+            //ghilli
+            if (n.TemplateId == 81301 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100 - 65, int.MaxValue){StaysEnraged = true};
+            if (n.TemplateId == 81312 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(0,0);
+            if (n.TemplateId == 81398 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100-25,int.MaxValue) { StaysEnraged = true };
+            if (n.TemplateId == 81399 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100-25,int.MaxValue) { StaysEnraged = true };
+
+
             if (n.ZoneId == 620 && n.TemplateId == 1000) n.EnragePattern = new EnragePattern((long)n.MaxHP, 420000000, 36);
             if (n.ZoneId == 622 && n.TemplateId == 1000) n.EnragePattern = new EnragePattern((long)n.MaxHP, 480000000, 36);
             if (n.ZoneId == 628)
@@ -423,7 +430,7 @@ namespace TCC.ViewModels
             }
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
-            if(boss.Visible == Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(entityId);
+            if (boss.Visible == Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(entityId);
         }
         public void SelectDragon(float x, float y)
         {

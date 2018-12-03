@@ -104,7 +104,7 @@ namespace TCC.Controls.Npc
             {
                 if (_enraged)
                 {
-                    return $"{CurrentEnrageTime}s";
+                    return Npc.EnragePattern.StaysEnraged ? "∞" : $"{CurrentEnrageTime}s";
                 }
                 else
                 {
@@ -212,13 +212,13 @@ namespace TCC.Controls.Npc
                         {
                             Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                CurrentEnrageTime--;
+                                if(!Npc.EnragePattern.StaysEnraged) CurrentEnrageTime--;
                             }));
                         };
                         _numberTimer.Enabled = true;
                         EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
                         NotifyPropertyChanged(nameof(EnrageHistory));
-                        EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
+                        if(!Npc.EnragePattern.StaysEnraged) EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
                         EnrageBorder.BeginAnimation(OpacityProperty, _flash);
                     }
                     else
@@ -229,7 +229,7 @@ namespace TCC.Controls.Npc
                         SlideEnrageIndicator(NextEnragePercentage);
                         EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
                         ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = 0;
-                        CurrentEnrageTime = Npc.EnragePattern.Duration;
+                        CurrentEnrageTime = Npc.EnragePattern.StaysEnraged ? int.MaxValue : Npc.EnragePattern.Duration;
                         NotifyPropertyChanged(nameof(RemainingPercentage));
 
                     }
