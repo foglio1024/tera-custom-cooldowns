@@ -32,6 +32,7 @@
     <c:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
     <c:MathMultiplicationConverter x:Key="Math.Multiplication"/>
     <c:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
+    <c:ColorToTransparentConverter x:Key="ColorToTransparent"/>
 
     <!--BossGage resources-->
     <c:EntityIdToNameConverter x:Key="Converters.EntityIdToName"/>
@@ -48,6 +49,10 @@
     <c:ReadyToColorConverter x:Key="Converters.ReadyToColor"/>
     <c:GroupSizeToTemplateConverter x:Key="Converters.GroupSizeToTemplate"/>
     <c:RaidToColorConverter x:Key="Converters.RaidToColor"/>
+    <c:ValueConverterGroup x:Key="ClassToTransparentFill">
+        <c:ClassToFillConverter/>
+        <c:ColorToTransparentConverter/>
+    </c:ValueConverterGroup>
 
     <c:LocationToMapConverter x:Key="Converters.LocationToMap"/>
     <c:LocationToStretchConverter x:Key="Converters.LocationToStretch"/>

@@ -1,119 +1,121 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="CardDarkColor">                #424245 </Color>
-    <Color x:Key="BackgroundDarkColor">          #2a2a30 </Color>
-    <Color x:Key="DefaultBackgroundColor">       #222228 </Color>
-    <Color x:Key="TooltipColor">                 #404040 </Color>
-    <Color x:Key="RevampBackgroundColor">        #2C313B </Color>
-    <Color x:Key="RevampDarkBackgroundColor">    #233147 </Color>
-    <Color x:Key="RevampDarkerBackgroundColor">  #101216 </Color>
-    <Color x:Key="RevampBorderColor">            #515B65 </Color>
-
-    <Color x:Key="ClassGlowColor">               #55ccff </Color>
-
-    <Color x:Key="GreenColor">                   #00A561 </Color>
-    <Color x:Key="MainColor">                    #a1c8dd </Color>
-    <Color x:Key="LightGreenColor">              #55ff77 </Color>
-    <Color x:Key="TwitchColor">                  #975eff </Color>
-    <Color x:Key="WeeklyColor">                  #2f9952 </Color>
-    <Color x:Key="DailyColor">                   #42b0f4 </Color>
-    <Color x:Key="MarksColor">                   #aaaadd </Color>
-    <Color x:Key="GuardianColor">                #ffc896 </Color>
-    <Color x:Key="EnchantLowColor">              #ff713c </Color>
-    <Color x:Key="EnchantHighColor">             #ff4500 </Color>
-
-    <Color x:Key="HpColor">                      #FF3333 </Color>
-    <Color x:Key="HpColorLight">                 #FAA089 </Color>
-    
-    <Color x:Key="MpColor">                      #3387FF </Color>
-    <Color x:Key="MpColorLight">                 #0AB8F6 </Color>
-    
-    <Color x:Key="HpDebuffColor">                #9C04BD </Color>
-    <Color x:Key="HpDebuffColorLight">           #B24CC8 </Color>
-
-    <Color x:Key="RunemarkColor">                #FFE3BD </Color>
-    <Color x:Key="MaxRunemarkColor">             #FF98BB </Color>
-
-    <Color x:Key="FireColor">                    #ff695a </Color>
-    <Color x:Key="FireColorLight">               #ffb2a5 </Color>
-    <Color x:Key="IceColor">                     #73d6fe </Color>
-    <Color x:Key="IceColorLight">                #ade7ff </Color>
-    <Color x:Key="ArcaneColor">                  #d68aff </Color>
-    <Color x:Key="ArcaneColorLight">             #e7d7ff </Color>
-    <Color x:Key="RageColor">                    #e0713b </Color>
-    <Color x:Key="RageColorLight">               #efe3c6 </Color>
-    <Color x:Key="WillpowerColor">               #49d0e7 </Color>
-    <Color x:Key="WillpowerColorLight">          #c5faf6 </Color>
-
-    <Color x:Key="GoldColor">                    #FFB033 </Color>
-    <Color x:Key="SilverColor">                  Silver  </Color>
-    <Color x:Key="CopperColor">                  #BE6F4D </Color>
-
-    <Color x:Key="AssaultStanceColor">           #FF264B </Color>
-    <Color x:Key="AssaultStanceColorLight">      #FFDDE3 </Color>
-    <Color x:Key="DefensiveStanceColor">         #32B3E2 </Color>
-    <Color x:Key="DefensiveStanceColorLight">    #D6F4FF </Color>
-    <Color x:Key="SniperEyeColor">               #38BDE5 </Color>
-
-    <Color x:Key="DpsRoleColor">                 #FF894A </Color>
-    <Color x:Key="HealerRoleColor">              #8BDB83 </Color>
-    <Color x:Key="TankRoleColor">                #32B3E2 </Color>
-
-    <Color x:Key="IgnidraxColor">                #FF894A </Color>
-    <Color x:Key="TerradraxColor">               #FFCB76 </Color>
-    <Color x:Key="AquadraxColor">                #DFF7FF </Color>
-    <Color x:Key="UmbradraxColor">               #AA1E1E </Color>
-
-    <Color x:Key="TierSoloDungeonColor">         #88d9f7 </Color>
-    <Color x:Key="Tier2DungeonColor">            #3bdb83 </Color>
-    <Color x:Key="Tier3DungeonColor">            #fcb06f </Color>
-    <Color x:Key="Tier4DungeonColor">            #fc946f </Color>
-    <Color x:Key="Tier5DungeonColor">            #fc6f6f </Color>
-                                                 
-    <Color x:Key="MoongourdBackgroundColor">     #34495e </Color>
-    <Color x:Key="MoongourdDarkBackgroundColor"> #2a3f54 </Color>
-    <Color x:Key="MoongourdHeaderColor">         #3b5167 </Color>
-    <Color x:Key="MoongourdAccentColor">         #26b99a </Color>
-    <Color x:Key="MoongourdFadedAccentColor">    #1b9190 </Color>
-
-                                                 
-    <Color x:Key="AbnormalityBuffColor">         #3F9FFF </Color>
-    <Color x:Key="AbnormalityStunColor">         #FF0000 </Color>
-    <Color x:Key="AbnormalityDebuffColor">       #8FF442 </Color>
-    <Color x:Key="AbnormalityDotColor">          #9842F4 </Color>
-
-    <!--Chat colors-->
-    <Color x:Key="ChatSayColor">                 #FFFFFF </Color>
-    <Color x:Key="ChatPartyColor">               #33B7FA </Color>
-    <Color x:Key="ChatGuildColor">               #00E974 </Color>
-    <Color x:Key="ChatAreaColor">                #A1A1E6 </Color>
-    <Color x:Key="ChatTradeColor">               #C07A81 </Color>
-    <Color x:Key="ChatGreetColor">               #999999 </Color>
-    <Color x:Key="ChatPartyNoticeColor">         #8EFFFF </Color>
-    <Color x:Key="ChatRaidNoticeColor">          #F28730 </Color>
-    <Color x:Key="ChatEmoteColor">               #FFB9B9 </Color>
-    <Color x:Key="ChatGlobalColor">              #F0FF89 </Color>
-    <Color x:Key="ChatRaidColor">                #FFCC00 </Color>
-    <Color x:Key="ChatMegaphoneColor">           #00D8FF </Color>
-    <Color x:Key="ChatGuildAdColor">             #70C401 </Color>
-    <Color x:Key="ChatPrivateColor">             #FF5F38 </Color>
-    <Color x:Key="ChatProxyColor">               #FFBAF2 </Color>
-    <Color x:Key="ChatWhisperColor">             #E996FA </Color>
-    <Color x:Key="ChatSystemGenericColor">       #C8C8b6 </Color>
-    <Color x:Key="ChatSystemNotifyColor">        #C8C8b6 </Color>
-    <Color x:Key="ChatSystemEventColor">         #C8C8b6 </Color>
-    <Color x:Key="ChatSystemErrorColor">         #FF5555 </Color>
-    <Color x:Key="ChatSystemGroupColor">         #D9D9D9 </Color>
-    <Color x:Key="ChatSystemDeathmatchColor">    #D9D9D9 </Color>
-    <Color x:Key="ChatSystemContractAlertColor"> #D9D9D9 </Color>
-    <Color x:Key="ChatSystemGroupAlertColor">    #D9D9D9 </Color>
-    <Color x:Key="ChatSystemLootColor">          #C5FBD4 </Color>
-    <Color x:Key="ChatSystemExpColor">           #A0E5FF </Color>
-    <Color x:Key="ChatSystemMoneyColor">         #FFFACC </Color>
-    <Color x:Key="ChatSystemBargainColor">       #FFbF8F </Color>
-    <Color x:Key="ChatSystemQuestColor">         #FFDDB6 </Color>
-    <Color x:Key="ChatSystemFriendColor">        #84E1FB </Color>
-    <Color x:Key="ChatSystemWorldBossColor">     #FCb7FF </Color>
+    <Color x:Key="CardDarkColor">                #424245   </Color>
+    <Color x:Key="BackgroundDarkColor">          #2a2a30   </Color>
+    <Color x:Key="DefaultBackgroundColor">       #222228   </Color>
+    <Color x:Key="TooltipColor">                 #404040   </Color>
+    <Color x:Key="RevampBackgroundColor">        #2C313B   </Color>
+    <Color x:Key="RevampDarkBackgroundColor">    #233147   </Color>
+    <Color x:Key="RevampDarkerBackgroundColor">  #101216   </Color>
+    <Color x:Key="RevampBorderColor">            #515B65   </Color>
+                                                           
+    <Color x:Key="ClassGlowColor">               #55ccff   </Color>
+                                                           
+    <Color x:Key="GreenColor">                   #00A561   </Color>
+    <Color x:Key="MainColor">                    #a1c8dd   </Color>
+    <Color x:Key="LightGreenColor">              #55ff77   </Color>
+    <Color x:Key="TwitchColor">                  #975eff   </Color>
+    <Color x:Key="WeeklyColor">                  #2f9952   </Color>
+    <Color x:Key="DailyColor">                   #42b0f4   </Color>
+    <Color x:Key="MarksColor">                   #aaaadd   </Color>
+    <Color x:Key="GuardianColor">                #ffc896   </Color>
+    <Color x:Key="EnchantLowColor">              #ff713c   </Color>
+    <Color x:Key="EnchantHighColor">             #ff4500   </Color>
+                                                           
+    <Color x:Key="HpColor">                      #FF3333   </Color>
+    <Color x:Key="HpColorLight">                 #FAA089   </Color>
+                                                           
+    <Color x:Key="MpColor">                      #3387FF   </Color>
+    <Color x:Key="MpColorLight">                 #0AB8F6   </Color>
+                                                           
+    <Color x:Key="HpDebuffColor">                #9C04BD   </Color>
+    <Color x:Key="HpDebuffColorLight">           #B24CC8   </Color>
+                                                           
+    <Color x:Key="RunemarkColor">                #FFE3BD   </Color>
+    <Color x:Key="MaxRunemarkColor">             #FF98BB   </Color>
+                                                           
+    <Color x:Key="FireColor">                    #ff695a   </Color>
+    <Color x:Key="FireColorLight">               #ffb2a5   </Color>
+    <Color x:Key="IceColor">                     #73d6fe   </Color>
+    <Color x:Key="IceColorLight">                #ade7ff   </Color>
+    <Color x:Key="ArcaneColor">                  #d68aff   </Color>
+    <Color x:Key="ArcaneColorLight">             #e7d7ff   </Color>
+    <Color x:Key="RageColor">                    #e0713b   </Color>
+    <Color x:Key="RageColorLight">               #efe3c6   </Color>
+    <Color x:Key="RageColorDark">                #a55129   </Color>
+    <Color x:Key="WillpowerColor">               #49d0e7   </Color>
+    <Color x:Key="WillpowerColorLight">          #c5faf6   </Color>
+                                                           
+    <Color x:Key="GoldColor">                    #FFB033   </Color>
+    <Color x:Key="SilverColor">                  SlateGray </Color>
+    <Color x:Key="CopperColor">                  #BE6F4D   </Color>
+                                                           
+    <Color x:Key="AssaultStanceColor">           #FF264B   </Color>
+    <Color x:Key="AssaultStanceColorLight">      #FFDDE3   </Color>
+    <Color x:Key="DefensiveStanceColor">         #2381a3   </Color>
+    <Color x:Key="DefensiveStanceColorLight">    #D6F4FF   </Color>
+    <Color x:Key="DefensiveStanceColorDark">     #1a617a   </Color>
+    <Color x:Key="SniperEyeColor">               #38BDE5   </Color>
+                                                           
+    <Color x:Key="DpsRoleColor">                 #FF894A   </Color>
+    <Color x:Key="HealerRoleColor">              #8BDB83   </Color>
+    <Color x:Key="TankRoleColor">                #32B3E2   </Color>
+                                                           
+    <Color x:Key="IgnidraxColor">                #FF894A   </Color>
+    <Color x:Key="TerradraxColor">               #FFCB76   </Color>
+    <Color x:Key="AquadraxColor">                #DFF7FF   </Color>
+    <Color x:Key="UmbradraxColor">               #AA1E1E   </Color>
+                                                           
+    <Color x:Key="TierSoloDungeonColor">         #88d9f7   </Color>
+    <Color x:Key="Tier2DungeonColor">            #3bdb83   </Color>
+    <Color x:Key="Tier3DungeonColor">            #fcb06f   </Color>
+    <Color x:Key="Tier4DungeonColor">            #fc946f   </Color>
+    <Color x:Key="Tier5DungeonColor">            #fc6f6f   </Color>
+                                                           
+    <Color x:Key="MoongourdBackgroundColor">     #34495e   </Color>
+    <Color x:Key="MoongourdDarkBackgroundColor"> #2a3f54   </Color>
+    <Color x:Key="MoongourdHeaderColor">         #3b5167   </Color>
+    <Color x:Key="MoongourdAccentColor">         #26b99a   </Color>
+    <Color x:Key="MoongourdFadedAccentColor">    #1b9190   </Color>
+                                                           
+                                                           
+    <Color x:Key="AbnormalityBuffColor">         #3F9FFF   </Color>
+    <Color x:Key="AbnormalityStunColor">         #FF0000   </Color>
+    <Color x:Key="AbnormalityDebuffColor">       #8FF442   </Color>
+    <Color x:Key="AbnormalityDotColor">          #9842F4   </Color>
+                                                           
+    <!--Chat colors-->                                     
+    <Color x:Key="ChatSayColor">                 #FFFFFF   </Color>
+    <Color x:Key="ChatPartyColor">               #33B7FA   </Color>
+    <Color x:Key="ChatGuildColor">               #00E974   </Color>
+    <Color x:Key="ChatAreaColor">                #A1A1E6   </Color>
+    <Color x:Key="ChatTradeColor">               #C07A81   </Color>
+    <Color x:Key="ChatGreetColor">               #999999   </Color>
+    <Color x:Key="ChatPartyNoticeColor">         #8EFFFF   </Color>
+    <Color x:Key="ChatRaidNoticeColor">          #F28730   </Color>
+    <Color x:Key="ChatEmoteColor">               #FFB9B9   </Color>
+    <Color x:Key="ChatGlobalColor">              #F0FF89   </Color>
+    <Color x:Key="ChatRaidColor">                #FFCC00   </Color>
+    <Color x:Key="ChatMegaphoneColor">           #00D8FF   </Color>
+    <Color x:Key="ChatGuildAdColor">             #70C401   </Color>
+    <Color x:Key="ChatPrivateColor">             #FF5F38   </Color>
+    <Color x:Key="ChatProxyColor">               #FFBAF2   </Color>
+    <Color x:Key="ChatWhisperColor">             #E996FA   </Color>
+    <Color x:Key="ChatSystemGenericColor">       #C8C8b6   </Color>
+    <Color x:Key="ChatSystemNotifyColor">        #C8C8b6   </Color>
+    <Color x:Key="ChatSystemEventColor">         #C8C8b6   </Color>
+    <Color x:Key="ChatSystemErrorColor">         #FF5555   </Color>
+    <Color x:Key="ChatSystemGroupColor">         #D9D9D9   </Color>
+    <Color x:Key="ChatSystemDeathmatchColor">    #D9D9D9   </Color>
+    <Color x:Key="ChatSystemContractAlertColor"> #D9D9D9   </Color>
+    <Color x:Key="ChatSystemGroupAlertColor">    #D9D9D9   </Color>
+    <Color x:Key="ChatSystemLootColor">          #C5FBD4   </Color>
+    <Color x:Key="ChatSystemExpColor">           #A0E5FF   </Color>
+    <Color x:Key="ChatSystemMoneyColor">         #FFFACC   </Color>
+    <Color x:Key="ChatSystemBargainColor">       #FFbF8F   </Color>
+    <Color x:Key="ChatSystemQuestColor">         #FFDDB6   </Color>
+    <Color x:Key="ChatSystemFriendColor">        #84E1FB   </Color>
+    <Color x:Key="ChatSystemWorldBossColor">     #FCb7FF   </Color>
 
 </ResourceDictionary>
