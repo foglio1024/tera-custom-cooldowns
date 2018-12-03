@@ -1,5 +1,13 @@
 ﻿namespace TCC.Data
 {
+    public enum ItemLevelTier
+    {
+        Low = 439,
+        Mid = 446,
+        High = 453,
+        Top = 456,
+    }
+
     public enum NpcGuild
     {
         Vanguard = 609,
@@ -132,20 +140,20 @@
         SentWhisper = 300,
         ReceivedWhisper = 301,
         System = 302, //missing in db
-        TradeRedirect = 303, 
+        TradeRedirect = 303,
         //Enchant12 = 304,
         //Enchant15 = 305,
         RaidLeader = 306,
-        Bargain = 307, 
-        Apply = 308, 
-        Death = 309,     
-        Ress = 310,      
-        Quest = 311,     
-        Friend = 312,    
+        Bargain = 307,
+        Apply = 308,
+        Death = 309,
+        Ress = 310,
+        Quest = 311,
+        Friend = 312,
         //Enchant7 = 313,  
         //Enchant8 = 314,  
         //Enchant9 = 315,  
-        WorldBoss = 316, 
+        WorldBoss = 316,
         Laurel = 317,
         Damage = 318,
         Guardian = 319,
