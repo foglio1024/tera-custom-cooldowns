@@ -95,13 +95,13 @@
             <skills:RhombFixedSkillControl DataContext="{Binding Thunderbolt}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
-                    <TranslateTransform X="-45" Y="45" />
+                    <TranslateTransform X="-45" Y="44" />
                 </FrameworkElement.RenderTransform>
             </skills:RhombFixedSkillControl>
             <skills:RhombSkillEffectControl DataContext="{Binding Windsong}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
-                    <TranslateTransform X="45" Y="45" />
+                    <TranslateTransform X="45" Y="44.5" />
                 </FrameworkElement.RenderTransform>
 
             </skills:RhombSkillEffectControl>
