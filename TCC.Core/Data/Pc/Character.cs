@@ -23,6 +23,9 @@ namespace TCC.Data.Pc
         private int _maxGuardianQuests = 40;
         private uint _elleonMarks;
         private int _clearedGuardianQuests;
+        private uint _dragonwingScales;
+        private uint _piecesOfDragonScroll;
+        private int _itemLevel;
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -64,7 +67,6 @@ namespace TCC.Data.Pc
                 NPC(nameof(VanguardDailyCompletion));
             }
         }
-
         public string GuildName { get; set; } = "";
         public void UpdateDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
@@ -150,7 +152,7 @@ namespace TCC.Data.Pc
         public ICollectionView VisibleDungeons { get; set; }
         public SynchronizedObservableCollection<GearItem> Gear { get; set; }
 
-        public GearItem Weapon => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0,GearTier.Low, GearPiece.Weapon,0,0);
+        public GearItem Weapon => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0, GearTier.Low, GearPiece.Weapon, 0, 0);
         public GearItem Chest => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Armor) ?? new GearItem(0, GearTier.Low, GearPiece.Armor, 0, 0);
         public GearItem Hands => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Hands) ?? new GearItem(0, GearTier.Low, GearPiece.Hands, 0, 0);
         public GearItem Feet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Feet) ?? new GearItem(0, GearTier.Low, GearPiece.Feet, 0, 0);
@@ -186,10 +188,12 @@ namespace TCC.Data.Pc
             {
                 if (_elleonMarks == value) return;
                 _elleonMarks = value;
-                NPC(nameof(ElleonMarks));
+                NPC();
+                NPC(nameof(ElleonMarksFactor));
             }
         }
 
+        public float ElleonMarksFactor => ElleonMarks / 1000f;
         public int ClearedGuardianQuests
         {
             get => _clearedGuardianQuests;
@@ -200,6 +204,42 @@ namespace TCC.Data.Pc
                 NPC();
             }
 
+        }
+
+        public uint DragonwingScales
+        {
+            get => _dragonwingScales;
+            set
+            {
+                if (_dragonwingScales == value) return;
+                _dragonwingScales = value;
+                NPC();
+                NPC(nameof(DragonwingScalesFactor));
+            }
+        }
+        public uint PiecesOfDragonScroll
+        {
+            get => _piecesOfDragonScroll;
+            set
+            {
+                if (_piecesOfDragonScroll == value) return;
+                _piecesOfDragonScroll = value;
+                NPC();
+                NPC(nameof(PiecesOfDragonScrollFactor));
+            }
+        }
+        public float DragonwingScalesFactor => DragonwingScales > 10 ? 1 : DragonwingScales / 10f;
+        public float PiecesOfDragonScrollFactor => PiecesOfDragonScroll > 40 ? 1 : PiecesOfDragonScroll / 40f;
+
+        public int ItemLevel  // 412 431 - 439 446 453 456
+        {
+            get => _itemLevel;
+            set
+            {
+                if (_itemLevel == value) return;
+                _itemLevel = value;
+                NPC();
+            }
         }
 
         public Character()
