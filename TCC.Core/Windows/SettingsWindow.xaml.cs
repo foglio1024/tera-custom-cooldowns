@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using TCC.Settings;
 using TCC.ViewModels;
 
@@ -22,49 +13,21 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow
     {
-        private readonly DoubleAnimation _closeWindowAnim;
-        private readonly DoubleAnimation _showWindowAnim;
 
         public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
 
         public SettingsWindow()
         {
             InitializeComponent();
-
-            _closeWindowAnim = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
-            _closeWindowAnim.Completed += (s, ev) =>
-            {
-                Hide();
-                if (Settings.Settings.ForceSoftwareRendering)
-                    RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-            };
-            _showWindowAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
-
             TitleBarGrid.MouseLeftButtonDown += (_, __) => DragMove();
         }
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            SettingsWriter.Save();
             HideWindow();
-        }
-
-        public void ShowWindow()
-        {
-            if (Settings.Settings.ForceSoftwareRendering)
-                RenderOptions.ProcessRenderMode = RenderMode.Default;
-
-            Opacity = 0;
-            Activate();
-            Show();
-            BeginAnimation(OpacityProperty, _showWindowAnim);
-
-        }
-        public void HideWindow()
-        {
-            BeginAnimation(OpacityProperty, _closeWindowAnim);
+            SettingsWriter.Save();
         }
 
         private void OpenPlayerBuffSettings(object sender, RoutedEventArgs e)

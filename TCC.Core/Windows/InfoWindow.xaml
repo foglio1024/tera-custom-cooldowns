@@ -1,4 +1,4 @@
-﻿<Window x:Class="TCC.Windows.InfoWindow"
+﻿<windows:TccWindow x:Class="TCC.Windows.InfoWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,16 +6,17 @@
         xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:viewmodels="clr-namespace:TCC.ViewModels"
+        xmlns:windows="clr-namespace:TCC.Windows"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
         Title="InfoWindow"
         Width="Auto" Height="Auto" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None"
         SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True"
         Background="Transparent">
-    <Window.DataContext>
+    <windows:TccWindow.DataContext>
         <viewmodels:InfoWindowViewModel />
-    </Window.DataContext>
-    <Window.Resources>
+    </windows:TccWindow.DataContext>
+    <windows:TccWindow.Resources>
         <DataTemplate x:Key="Vang">
             <dashboard:VanguardInfoControl />
         </DataTemplate>
@@ -56,7 +57,7 @@
         <DataTemplate x:Key="Gear">
             <dashboard:GearItemControl />
         </DataTemplate>
-    </Window.Resources>
+    </windows:TccWindow.Resources>
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="0" GlassFrameThickness="0" CornerRadius="0" />
     </WindowChrome.WindowChrome>
@@ -204,67 +205,4 @@
             </Grid>
         </Grid>
     </Grid>
-</Window>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</windows:TccWindow>

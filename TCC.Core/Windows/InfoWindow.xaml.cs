@@ -14,6 +14,7 @@ namespace TCC.Windows
     public partial class InfoWindow
     {
         public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
+        public InfoWindowViewModel VM => Dispatcher.Invoke(() => DataContext as InfoWindowViewModel);
 
         public InfoWindow()
         {
@@ -30,6 +31,7 @@ namespace TCC.Windows
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             HideWindow();
+            VM.SaveToFile();
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
@@ -48,31 +50,6 @@ namespace TCC.Windows
             FocusManager.HideFromToolBar(handle);
             FocusManager.MakeUnfocusable(handle);
         }
-        internal void ShowWindow()
-        {
-            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
 
-            Dispatcher.Invoke(() =>
-            {
-                Topmost = false; Topmost = true;
-                Opacity = 0;
-                Show();
-                //Activate();
-                BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
-            });
-        }
-
-        public void HideWindow()
-        {
-            var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            a.Completed += (s, ev) =>
-            {
-
-                Hide(); InfoWindowViewModel.Instance.SaveToFile();
-                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-
-            };
-            BeginAnimation(OpacityProperty, a);
-        }
     }
 }
