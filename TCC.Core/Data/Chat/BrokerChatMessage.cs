@@ -60,10 +60,10 @@ namespace TCC.Data.Chat
             ListingId = p.Listing;
             PlayerId = p.PlayerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Settings.Settings.FontSize, false);
-            OfferedPrice = new MessagePiece(new Money(p.OfferedPrice));
-            StartingPrice = new MessagePiece(new Money(p.SellerPrice));
-            Listing = new MessagePiece("");
+            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Settings.Settings.FontSize, false) {Container = this};
+            OfferedPrice = new MessagePiece(new Money(p.OfferedPrice)){ Container = this };
+            StartingPrice = new MessagePiece(new Money(p.SellerPrice)) { Container = this };
+            Listing = new MessagePiece("") { Container = this };
             
             SessionManager.ItemsDatabase.Items.TryGetValue((uint)p.Item, out var i);
             if(i != null)
