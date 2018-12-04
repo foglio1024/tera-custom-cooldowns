@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
 using System.Security.Cryptography;
-using System.Security.Policy;
 using Newtonsoft.Json.Linq;
-using TCC.TeraCommon.PacketLog.Parsing;
 
 namespace TCC.Parsing
 {

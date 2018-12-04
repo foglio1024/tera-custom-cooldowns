@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TCC.Settings;
 using TCC.Data;
 using TCC.Data.Databases;
-using TCC.Parsing;
-using TCC.Parsing.Messages;
-using TCC.Tera.Data;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using Player = TCC.Data.Pc.Player;

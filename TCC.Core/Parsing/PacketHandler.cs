@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using TCC.Data;
@@ -9,7 +8,6 @@ using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Sniffing;
 using TCC.Tera.Data;
-using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Game.Messages.Client;
 using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
@@ -492,7 +490,7 @@ namespace TCC.Parsing
             if (x.PlayerId != SessionManager.CurrentPlayer.PlayerId) return;
             foreach (var dg in x.DungeonClears)
             {
-                WindowManager.Dashboard.VM.CurrentCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
+                WindowManager.Dashboard.VM.CurrentCharacter.SetDungeonClears(dg.Key, dg.Value);
             }
         }
 

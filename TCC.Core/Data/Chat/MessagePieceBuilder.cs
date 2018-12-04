@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using HtmlAgilityPack;
@@ -131,9 +130,9 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "dungeon");
             var txt = id.ToString();
-            if (SessionManager.DungeonDatabase.DungeonNames.TryGetValue(id, out var dngName))
+            if (SessionManager.DungeonDatabase.Dungeons.TryGetValue(id, out var dung))
             {
-                txt = dngName;
+                txt = dung.Name;
             }
             return new MessagePiece(txt) { Type = MessagePieceType.Simple};
         }

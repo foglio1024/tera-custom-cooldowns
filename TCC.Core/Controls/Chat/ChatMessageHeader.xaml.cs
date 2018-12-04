@@ -3,7 +3,6 @@ using System.Windows.Input;
 using System.Windows.Media.Effects;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Parsing;
 
 namespace TCC.Controls.Chat
 {

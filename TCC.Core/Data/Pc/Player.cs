@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
-using TCC.Settings;
 
 namespace TCC.Data.Pc
 {

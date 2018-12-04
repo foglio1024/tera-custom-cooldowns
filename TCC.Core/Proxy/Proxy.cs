@@ -11,7 +11,6 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Parsing;
-using TCC.Parsing.Messages;
 using TCC.TeraCommon;
 using TCC.ViewModels;
 

@@ -1,11 +1,6 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC.Controls.Classes.Elements
 {

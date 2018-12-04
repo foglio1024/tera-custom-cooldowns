@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Windows;

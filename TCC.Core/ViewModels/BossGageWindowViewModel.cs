@@ -10,7 +10,6 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Npc;
 using TCC.Parsing;
-using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
 {

@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC
 {
