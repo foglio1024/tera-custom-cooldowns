@@ -402,10 +402,9 @@ namespace TCC
                     {"server", SessionManager.Server.ServerId},
                     {
                         "id",
-                        InfoWindowViewModel.Instance.Characters == null ? 0 :
-                        InfoWindowViewModel.Instance.Characters.Count == 0 ? 0 :
-                        // ReSharper disable once PossibleNullReferenceException
-                        InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Position == 1).Id
+                        WindowManager.Dashboard.VM.Characters == null ? 0 :
+                        WindowManager.Dashboard.VM.Characters.Count == 0 ? 0 :
+                        WindowManager.Dashboard.VM.Characters.FirstOrDefault(x => x.Position == 1)?.Id
                     },
                     {"region", SessionManager.Server.Region}
                 };
