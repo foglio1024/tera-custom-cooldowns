@@ -98,6 +98,12 @@
     <Compile Include="Controls\Classes\Elements\TraverseCutControl.xaml.cs">
       <DependentUpon>TraverseCutControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dashboard\RectangleBarGauge.xaml.cs">
+      <DependentUpon>RectangleBarGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Dashboard\VanguardInfoPopup.xaml.cs">
+      <DependentUpon>VanguardInfoPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Controls\Settings\CheckboxSetting.xaml.cs">
       <DependentUpon>CheckboxSetting.xaml</DependentUpon>
@@ -115,6 +121,7 @@
     </Compile>
     <Compile Include="Converters\BossHPbarColorConverter.cs" />
     <Compile Include="Converters\AggroTypeToFillConverter.cs" />
+    <Compile Include="Converters\ColorToTransparentConverter.cs" />
     <Compile Include="Converters\EntityIdToNameConverter.cs" />
     <Compile Include="Converters\DurationLabelConverter.cs" />
     <Compile Include="Converters\DurationToVisibilityConverter.cs" />
@@ -128,12 +135,15 @@
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
     <Compile Include="Parsing\Messages\S_NPCGUILD_LIST.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
+    <Compile Include="R.cs" />
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
     <Compile Include="ViewModels\MyAbnormalityVM.cs" />
     <Compile Include="Windows\ClassPositions.cs" />
@@ -718,12 +728,16 @@
     <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
     <Compile Include="Settings\WindowSettings.cs" />
+    <Compile Include="Windows\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MyAbnormalConfigWindow.xaml.cs">
       <DependentUpon>MyAbnormalConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TccWindow.cs" />
     <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -870,6 +884,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Classes\Elements\TraverseCutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dashboard\RectangleBarGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dashboard\VanguardInfoPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1146,6 +1168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionaries\TemplateSelectors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1976,4 +2002,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>D:\Repos\WpfResourcesBuilder\WpfResourcesBuilder\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
+  </PropertyGroup>
 </Project>
