@@ -39,14 +39,14 @@
                     </Viewbox>
                 </Border>
                 <Grid>
-                    <Border Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}"
+                    <Border Background="{Binding Id, Converter={StaticResource DungeonIdToTierColor}}"
                             Opacity=".5"
                             Margin="0 .5" CornerRadius="10 0 0 10" />
-                    <TextBlock Text="{Binding Id, Converter={StaticResource Converters.DungeonIdToName}}"
+                    <TextBlock Text="{Binding Id, Converter={StaticResource DungeonIdToName}}"
                                Foreground="#c000" HorizontalAlignment="Stretch" FontSize="13" Margin="10 2" />
                 </Grid>
                 <Grid HorizontalAlignment="Left" Grid.Column="1" ToolTip="Available runs.">
-                    <Border Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}"
+                    <Border Background="{Binding Id, Converter={StaticResource DungeonIdToTierColor}}"
                             Opacity=".7"
                             Margin="0 .5" CornerRadius="0 0 0 0" HorizontalAlignment="Stretch" />
                     <TextBlock Text="{Binding Entries}" Foreground="#b000"
@@ -185,7 +185,7 @@
 
                 <!--Content-->
                 <StackPanel Grid.Row="1"
-                            Visibility="{Binding SelectedCharacterExists, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                            Visibility="{Binding SelectedCharacterExists, Converter={StaticResource BoolToVisibleCollapsed}}">
                     <!--Weapon-->
                     <ContentControl Content="{Binding Instance.SelectedCharacter.Weapon}"
                                     ContentTemplate="{StaticResource Gear}" />

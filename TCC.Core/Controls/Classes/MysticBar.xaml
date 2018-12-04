@@ -115,7 +115,7 @@
                 <skills:RhombFixedSkillControl Margin="-25" VerticalAlignment="Top" DataContext="{Binding AuraSwift}" x:Name="SwiftAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
                 <skills:RhombFixedSkillControl Margin="-25" HorizontalAlignment="Center" DataContext="{Binding AuraUnyielding}" x:Name="CritResAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
             </UniformGrid>
-            <Border Width="55" Height="55" BorderThickness="3" Grid.Row="0" Visibility="{Binding Elementalize, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" RenderTransformOrigin=".5 .5"
+            <Border Width="55" Height="55" BorderThickness="3" Grid.Row="0" Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibleCollapsed}}" RenderTransformOrigin=".5 .5"
                 BorderBrush="{StaticResource GreenBrush}" Background="Transparent" Margin="0 4 0 0">
                 <Border.RenderTransform>
                     <RotateTransform Angle="45"/>

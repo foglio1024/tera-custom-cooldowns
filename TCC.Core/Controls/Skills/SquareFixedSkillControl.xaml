@@ -30,7 +30,7 @@
             <Rectangle Width="48" Height="48" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
+                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}"/>
                 </Rectangle.Fill>
                 <Rectangle.RenderTransform>
                     <RotateTransform />

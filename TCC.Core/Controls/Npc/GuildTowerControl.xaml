@@ -15,7 +15,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-            <Image Source="{Binding GuildId, Converter={StaticResource Converters.LogoInfoToImage}}" 
+            <Image Source="{Binding GuildId, Converter={StaticResource LogoInfoToImage}}" 
                    Width="36"
                    Margin="0"
                    Stretch="Uniform"

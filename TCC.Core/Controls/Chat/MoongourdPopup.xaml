@@ -24,7 +24,7 @@
                 <Run Text="{Binding PlayerName, RelativeSource={RelativeSource AncestorType=local:MoongourdPopup}, Mode=OneWay}" Foreground="{StaticResource MoongourdAccentBrush}"/><Run Text="'s Moongourd parses"/>
             </TextBlock>
         </Grid>
-        <Grid Margin="6 0" Grid.Row="1" Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+        <Grid Margin="6 0" Grid.Row="1" Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource BoolToVisibleCollapsed}}"
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"/>
@@ -48,7 +48,7 @@
             <TextBlock Text="Link" Grid.Column="3"></TextBlock>
         </Grid>
         <TextBlock Grid.Row="2" Text="No entries." HorizontalAlignment="Center" Foreground="#5fff" Margin="5" x:Name="EmptyInfo"
-                   Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource Converters.BoolToVisibleCollapsed}, ConverterParameter=true}"
+                   Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=true}"
                    />
         <ListBox Background="Transparent" BorderThickness="0" Grid.Row="2" ItemTemplate="{StaticResource MoongourdEncounterDataTemplate}"
                  ItemContainerStyle="{StaticResource DefaultListItemStyle}" AlternationCount="2" x:Name="List">

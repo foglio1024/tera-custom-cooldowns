@@ -24,7 +24,7 @@
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </Grid.LayoutTransform>
-            <ContentControl Content="{Binding Instance}" ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}" />
+            <ContentControl Content="{Binding Instance}" ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource HarrowholdPhaseToLayout}}" />
         </Grid>
             <c:WindowButtons WindowName="Boss bar" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>

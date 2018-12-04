@@ -23,7 +23,7 @@
                         Margin="5" 
                         Grid.Row="1"
                         Content="{Binding Instance}"
-                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" >
+                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource CooldowWindowModeToTemplate}}" >
             <ContentControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </ContentControl.LayoutTransform>

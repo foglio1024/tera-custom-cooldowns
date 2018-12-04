@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Background -->
-        <Border Background="{Binding ContainsPlayerName, Converter={StaticResource Converters.MentionToColor}}" 
+        <Border Background="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}}" 
                             Opacity=".4" 
                             CornerRadius="3" 
                             Visibility="Visible"
@@ -22,7 +22,7 @@
                             Grid.Column="0"
                             VerticalAlignment="Stretch"/>
         <!--Background tip-->
-        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource Converters.MentionToColor}}" Grid.Column="3" 
+        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" Grid.Column="3" 
                             CornerRadius="0,3,3,0" Margin="0,0" />
         <Border Width="4" Background="#999" Grid.Column="3" Visibility="Collapsed"
                             CornerRadius="0,3,3,0" Margin="0,0"/>
@@ -49,10 +49,10 @@
                         Width="38"   
                         Margin="0,5,0,0"
                         Grid.Column="1"
-                        Visibility="{Binding ShowChannel, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                        Visibility="{Binding ShowChannel, Converter={StaticResource BoolToVisibleCollapsed}}"
                         />
         <!--Timestamp-->
-        <TextBlock  Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
+        <TextBlock  Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
                     Width="Auto"   
                     Opacity=".8" 
                     FontWeight="Normal" 
@@ -61,7 +61,7 @@
                     VerticalAlignment="Top"
                     Text="{Binding Timestamp}"
                     Grid.Column="0"
-                        Visibility="{Binding ShowTimestamp, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                        Visibility="{Binding ShowTimestamp, Converter={StaticResource BoolToVisibleCollapsed}}"
                     
                     />
     </Grid>

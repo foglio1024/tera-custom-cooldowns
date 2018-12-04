@@ -39,8 +39,8 @@
                                Width="60"
                                HorizontalAlignment="Center"
                                TextAlignment="Center"/>
-            <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource Converters.ShieldStatusToVisibility}}">
-                <local:Arc Stroke="{Binding Shield, Converter={StaticResource Converters.ShieldStatusColor}}" 
+            <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource ShieldStatusToVisibility}}">
+                <local:Arc Stroke="{Binding Shield, Converter={StaticResource ShieldStatusColor}}" 
                            x:Name="ShieldArc"
                            Width="48" 
                            Height="48"
@@ -62,9 +62,9 @@
             </Grid>
 
             <local:Arc Width="50" Height="50"
-                                Stroke="{Binding TemplateId, Converter={StaticResource Converters.DragonIdToColor}}"
+                                Stroke="{Binding TemplateId, Converter={StaticResource DragonIdToColor}}"
                                StrokeThickness="4"
-                               EndAngle="{Binding CurrentFactor, Converter={StaticResource Converters.FactorToAngle}}"
+                               EndAngle="{Binding CurrentFactor, Converter={StaticResource FactorToAngle}}"
                                 Grid.Row="1"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -79,7 +79,7 @@
 
             <local:Arc Width="58" Height="58"
                        Stroke="Red"
-                       Visibility="{Binding Enraged, Converter={StaticResource Converters.BoolToVisibleHidden}}"
+                       Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleHidden}}"
                        StrokeThickness="3"
                        x:Name="EnrageArc"
                        EndAngle="359.9"

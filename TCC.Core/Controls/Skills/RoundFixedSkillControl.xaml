@@ -15,7 +15,7 @@
         <Grid ClipToBounds="False">
             <Ellipse Width="51" Height="51" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"></ImageBrush>
+                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}"></ImageBrush>
                 </Ellipse.Fill>
             </Ellipse>
             <local:Arc Margin="-500" x:Name="WarnArc" Opacity=".8" EndAngle="359.9" Stroke="White" StrokeThickness="30" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">

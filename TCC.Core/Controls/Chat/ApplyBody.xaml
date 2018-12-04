@@ -10,7 +10,7 @@
         <Border Height="Auto" Width="Auto" CornerRadius="9" Background="#7000" Padding="6,0">
             <StackPanel Orientation="Horizontal">
                 <!--TODO: Make this SVG-->
-                <Image Source="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" Width="19" Height="19" 
+                <Image Source="{Binding UserClass, Converter={StaticResource ClassToImageConverter}}" Width="19" Height="19" 
                        Margin="0,0,3,0" RenderOptions.BitmapScalingMode="HighQuality"/>
 
                 <TextBlock Text="{Binding PlayerLevel}" Foreground="#afff" FontSize="13" HorizontalAlignment="Center"

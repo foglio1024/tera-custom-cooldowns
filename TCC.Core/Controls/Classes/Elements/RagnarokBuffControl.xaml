@@ -19,7 +19,7 @@
                  StrokeThickness="1"
                  x:Name="Icon">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                <ImageBrush ImageSource="{Binding Buff.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
             </Ellipse.Fill>
             <Ellipse.Effect>
                 <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="IconGlow" Opacity="0"></DropShadowEffect>

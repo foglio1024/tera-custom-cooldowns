@@ -118,24 +118,24 @@
                             <Border Background="#556" CornerRadius="5" Padding="10,5,15,5" Effect="{StaticResource FadedDropShadow}">
                                 <StackPanel Orientation="Vertical" >
                                     <TextBlock Foreground="White"  Text="{Binding Name, Mode=OneWay}" FontWeight="DemiBold" FontSize="14" Margin="0,0,0,0"/>
-                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Weapon, Converter={StaticResource Converters.NullToVisibleCollapsed}}" Margin="0,5,0,0">
-                                        <Path Data="{Binding Weapon.Piece, Converter={StaticResource Converters.PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
+                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Weapon, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,5,0,0">
+                                        <Path Data="{Binding Weapon.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Weapon.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Armor, Converter={StaticResource Converters.NullToVisibleCollapsed}}" Margin="0,0,0,0">
-                                        <Path Data="{Binding Armor.Piece, Converter={StaticResource Converters.PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
+                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Armor, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,0,0,0">
+                                        <Path Data="{Binding Armor.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Armor.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Gloves, Converter={StaticResource Converters.NullToVisibleCollapsed}}" Margin="0,0,0,0">
-                                        <Path Data="{Binding Gloves.Piece, Converter={StaticResource Converters.PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
+                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Gloves, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,0,0,0">
+                                        <Path Data="{Binding Gloves.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Gloves.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Boots, Converter={StaticResource Converters.NullToVisibleCollapsed}}" Margin="0,0,0,0">
-                                        <Path Data="{Binding Boots.Piece, Converter={StaticResource Converters.PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
+                                    <StackPanel Orientation="Horizontal"  Visibility="{Binding Boots, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,0,0,0">
+                                        <Path Data="{Binding Boots.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Boots.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding Online, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding Online, Converter={StaticResource BoolToVisibleCollapsed}}">
                                         <!--map marker icon-->
                                         <Path Data="{StaticResource SvgMapMarker}" Fill="#6fff" Stretch="Uniform" Height="12" Margin="3"/>
                                         <TextBlock Foreground="#7fff" VerticalAlignment="Center" Margin="3,0,0,0">
@@ -144,7 +144,7 @@
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
-                            <Border Width="5" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Stretch" CornerRadius="0,3,3,0" Background="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"></Border>
+                            <Border Width="5" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Stretch" CornerRadius="0,3,3,0" Background="{Binding UserClass, Converter={StaticResource ClassToFill}}"></Border>
                         </Grid>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -172,8 +172,8 @@
                                x:Name="HpBar">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
-                                <GradientStop Offset=".2" Color="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}"></GradientStop>
-                                <GradientStop Offset="1" Color="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor2}}"></GradientStop>
+                                <GradientStop Offset=".2" Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
+                                <GradientStop Offset="1" Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
 
                                 <!--<GradientStop Color="{StaticResource HpColorLight}" Offset="0"></GradientStop>
                             <GradientStop Color="{StaticResource HpColor}" Offset=".6"></GradientStop>-->
@@ -225,7 +225,7 @@
             <!--Aggro indicator -->
             <Grid x:Name="AggroBorderGrid" RenderTransformOrigin=".5 .5">
                 <Border Name="AggroBorder" 
-                    Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                    Visibility="{Binding HasAggro, Converter={StaticResource BoolToVisibleCollapsed}}"
                     Background="#40ffa500"
                     BorderBrush="Orange" 
                     BorderThickness="3" 
@@ -263,7 +263,7 @@
             <!--Death indicator -->
             <Grid x:Name="DeathBorderGrid" RenderTransformOrigin=".5 .5">
                 <Border x:Name="DeathBorder" 
-                Visibility="{Binding Alive, Converter={StaticResource Converters.BoolToVisibleCollapsed}, ConverterParameter=True}"
+                Visibility="{Binding Alive, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=True}"
                 Background="#600"
                 BorderBrush="Red"
                 BorderThickness="3" 
@@ -301,7 +301,7 @@
 
             <Image  Opacity="1" x:Name="LaurelImage" 
                     Margin="-7" 
-                    Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}, ConverterParameter=kr}" 
+                    Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr}" 
                     
                     RenderOptions.BitmapScalingMode="Linear" 
                     UseLayoutRounding="True" 
@@ -350,7 +350,7 @@
             <Path Fill="#eee" Opacity="1"
                   Margin="11 0"
                   HorizontalAlignment="Center" VerticalAlignment="Stretch" Stretch="Uniform" 
-                  Data="{Binding UserClass,Converter={StaticResource Converters.ClassToSvg}}"
+                  Data="{Binding UserClass,Converter={StaticResource ClassToSvg}}"
                   Effect="{StaticResource ClassIconGlow}" 
                   UseLayoutRounding="True"
                     RenderOptions.BitmapScalingMode="HighQuality" 
@@ -435,11 +435,11 @@
                 <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
             </Grid.Effect>
             <Border Width="16" Height="16"
-             Background="{Binding Ready, Converter={StaticResource Converters.ReadyToColor}}"
+             Background="{Binding Ready, Converter={StaticResource ReadyToColor}}"
                     RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"/>
             <Rectangle Width="14" Height="14" Fill="Black" RenderOptions.BitmapScalingMode="Fant">
                 <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="{Binding Ready, Converter={StaticResource Converters.ReadyToIcon}}" />
+                    <ImageBrush ImageSource="{Binding Ready, Converter={StaticResource ReadyToIcon}}" />
                     <!--<ImageBrush ImageSource="../resources/images/ic_done_white_24dp_2x.png"></ImageBrush>-->
                 </Rectangle.OpacityMask>
             </Rectangle>
@@ -450,9 +450,9 @@
             <Grid.Effect>
                 <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
             </Grid.Effect>
-            <Border Background="{Binding IsWinning, Converter={StaticResource Converters.WinningToColor}}" CornerRadius="2"></Border>
+            <Border Background="{Binding IsWinning, Converter={StaticResource WinningToColor}}" CornerRadius="2"></Border>
             <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Margin="0,0,0,1" FontWeight="SemiBold" Text="{Binding RollResult, Converter={StaticResource Converters.RollToString}}"/>
+                           Margin="0,0,0,1" FontWeight="SemiBold" Text="{Binding RollResult, Converter={StaticResource RollToString}}"/>
             <Grid.RenderTransform>
                 <ScaleTransform ScaleX="0"/>
             </Grid.RenderTransform>

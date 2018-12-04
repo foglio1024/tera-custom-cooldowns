@@ -268,7 +268,7 @@
                         <local:Arc  EndAngle="359.9" 
                                     Width="46" Height="46" Stroke="#2fff" StrokeThickness="5">
                         </local:Arc>
-                        <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
+                        <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource FactorToAngle}}" 
                                     Width="46" Height="46" Stroke="{StaticResource AssaultStanceBrush}" StrokeThickness="5">
                         </local:Arc>
                         <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">

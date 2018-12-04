@@ -25,7 +25,7 @@
         </Grid.ToolTip>
         <!-- Icon -->
         <Grid Margin="-2">
-            <Rectangle Name="BgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}"
+            <Rectangle Name="BgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}"
                      RenderTransformOrigin=".5 .5" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             </Rectangle>
             <Rectangle Name="AbnormalityIcon" Margin="1" UseLayoutRounding="False"
@@ -33,7 +33,7 @@
                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}}" 
                      RenderTransformOrigin=".5 .5" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
+                    <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}"/>
                 </Rectangle.Fill>
             </Rectangle>
         </Grid>
@@ -46,14 +46,14 @@
         </Grid>
         <!-- Duration -->
         <Grid x:Name="DurationLabel"  Width="Auto" 
-              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.55}"
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}, Converter={StaticResource MathMultiplication}, ConverterParameter=0.55}"
               MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
               HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1"
               Margin="0 -4 0 0">
             <Border x:Name="Fill" Background="#eee"  Width="Auto" 
                     Opacity=".9" CornerRadius="0" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                    BorderBrush="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}" 
+                    BorderBrush="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}" 
                     BorderThickness="1.5"/>
 
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0" >
@@ -68,7 +68,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="6,3"
-                   Text="{Binding DurationLeft, Converter={StaticResource Converters.DurationToTimeFormat}}"/>
+                   Text="{Binding DurationLeft, Converter={StaticResource DurationToTimeFormat}}"/>
             </Viewbox>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -79,7 +79,7 @@
               x:Name="StacksLabel" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Top" 
-              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}, Converter={StaticResource Math.Multiplication}, ConverterParameter=0.6}"
+              MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormalitiesCtrl:AbnormalityIndicatorBase}, Converter={StaticResource MathMultiplication}, ConverterParameter=0.6}"
 
               Margin="-1" >
             <Grid.LayoutTransform>

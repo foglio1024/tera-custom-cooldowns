@@ -202,7 +202,7 @@
                             <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
                         </TextBlock.Effect>
                     </TextBlock>
-                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}"
+                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource AggroTypeToFill}}"
                              VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
                                  Grid.Column="1" RenderTransformOrigin=".5,.5">
                         <Polygon.RenderTransform>
@@ -215,7 +215,7 @@
                                FontWeight="Normal" 
                                FontStretch="Condensed" 
                                FontSize="13" 
-                               Text="{Binding Target, Converter={StaticResource Converters.EntityIdToName}}" 
+                               Text="{Binding Target, Converter={StaticResource EntityIdToName}}" 
                                Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
@@ -296,7 +296,7 @@
                                 </Rectangle>
                                 <Grid HorizontalAlignment="Left" Margin="3 2" >
                                     <Rectangle Fill="{StaticResource HpBrush}" x:Name="EnrageBar" Width="90"  
-                                           Visibility="{Binding Enraged, Converter={StaticResource Converters.BoolToVisibleHidden}}">
+                                           Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleHidden}}">
                                         <Rectangle.RenderTransform>
                                             <ScaleTransform ScaleX="1"/>
                                         </Rectangle.RenderTransform>
@@ -319,7 +319,7 @@
                                Width="Auto"
                                Height="8"
                                Name="HpBar"
-                               Fill="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                               Fill="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}"
                                >
                         <Rectangle.RenderTransform>
                             <ScaleTransform ScaleX="1"/>

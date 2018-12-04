@@ -71,7 +71,7 @@
                              StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                                ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                ImageSource="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding ShortName}"
@@ -89,7 +89,7 @@
                              StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                                ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                ImageSource="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Name}"
@@ -108,7 +108,7 @@
                              StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                                ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                ImageSource="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Name}"
@@ -139,7 +139,7 @@
                              StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                                ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                ImageSource="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
@@ -198,7 +198,7 @@
                              StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                                ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                ImageSource="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
@@ -246,7 +246,7 @@
                              StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                                ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Skill.ShortName}"
@@ -263,7 +263,7 @@
                     />            
             <ctrl:OutlinedTextBlock Fill="{Binding Color}"
                                     Text="{Binding Text}" 
-                                    Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
+                                    Cursor="{Binding Type, Converter={StaticResource MessageTypeToCursor}}"
                                     Stroke="#9000"
                                     StrokeThickness="3"
                                     FontSize="{Binding Size}"
@@ -308,7 +308,7 @@
                       Stretch="Uniform" VerticalAlignment="Center">
                 <Path.LayoutTransform>
                     <TransformGroup>
-                        <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource Converters.WhisperDirectionToAngle}}"/>
+                        <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource WhisperDirectionToAngle}}"/>
                     </TransformGroup>
                 </Path.LayoutTransform>
                 <Path.Style>
@@ -331,7 +331,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="DefaultChannelLabelTemplate" DataType="chat:ChatMessage">
-        <TextBlock  Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
+        <TextBlock  Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
                         Opacity=".5" 
                         FontWeight="SemiBold" 
                         FontSize="11"
@@ -341,14 +341,14 @@
                         Visibility="Visible"
                         MinWidth="33"
                         Margin="0,-3,0,0"
-                        Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
+                        Text="{Binding Channel, Converter={StaticResource ChatChannelToName}}"
             />
         <!--TextTrimming="CharacterEllipsis"-->
 
     </DataTemplate>
     <DataTemplate x:Key="EnchantChannelLabelTemplate" DataType="chat:ChatMessage">
         <Grid>
-            <TextBlock  Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
+            <TextBlock  Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
                         Opacity=".8" 
                         FontWeight="DemiBold" 
                         FontSize="11"
@@ -360,14 +360,14 @@
                         TextTrimming="CharacterEllipsis"
                         MinWidth="33"
                         Margin="0,-1,0,0"
-                        Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
+                        Text="{Binding Channel, Converter={StaticResource ChatChannelToName}}"
                                 />
             <Border Width="Auto"
                      Height="Auto"
                         CornerRadius="5"
                      Margin="4,-2,2,3"
                      Opacity=".3"
-                     Background="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"
+                     Background="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
 
                      />
         </Grid>
@@ -376,7 +376,7 @@
     <!--Author label templates-->
     <DataTemplate x:Key="DefaultAuthorTemplate" DataType="chat:ChatMessage">
         <ctrl:OutlinedTextBlock  Margin="3,0,3,0" 
-                        Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
+                        Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
                         FontSize="{Binding Size}"
                         HorizontalAlignment="Stretch"
                         TextAlignment="Left"
@@ -399,7 +399,7 @@
                      Height="10"
                      Margin="2,3,2,4"
                      Opacity=".5"
-                     Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"
+                     Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                      />
     </DataTemplate>
     <DataTemplate x:Key="LfgTemplate">
@@ -462,9 +462,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Ellipse Width="12" Height="12" Margin="4,0" VerticalAlignment="Center"
-                         Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"/>
+                         Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"/>
             <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" VerticalAlignment="Center"
-                           Foreground="#8fff" Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"></TextBlock>
+                           Foreground="#8fff" Text="{Binding Channel, Converter={StaticResource ChatChannelToName}}"></TextBlock>
         </Grid>
     </DataTemplate>
     <DataTemplate  x:Key="MoongourdEncounterDataTemplate" DataType="moongourd:MoongourdEncounter" >

@@ -43,7 +43,7 @@
                             </Grid.ColumnDefinitions>
                             <Ellipse Height="26" Width="26" Margin="2" StrokeThickness="1" Stroke="#999">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding Id, Converter={StaticResource Converters.LogoInfoToImage}}" ></ImageBrush>
+                                    <ImageBrush ImageSource="{Binding Id, Converter={StaticResource LogoInfoToImage}}" ></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                             <TextBlock Text="{Binding Name}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" Margin="5 0" TextTrimming="CharacterEllipsis"/>

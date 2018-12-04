@@ -98,7 +98,7 @@
                 </Grid.RowDefinitions>
                 <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
                 <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf"  Margin="1 3 2 0" 
-                        Visibility="{Binding Content.PinnedMessage, Converter={StaticResource Converters.NullToVisibleCollapsed}}">
+                        Visibility="{Binding Content.PinnedMessage, Converter={StaticResource NullToVisibleCollapsed}}">
                     <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}" 
                                 Content="{Binding Content.PinnedMessage}"
                                 Margin="10 3 4 2">
@@ -218,7 +218,7 @@
                 </dragablz:TabablzControl>
                 <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
                        HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
-                       Visibility="{Binding Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
+                       Visibility="{Binding Paused, Converter={StaticResource BoolToVisibleCollapsed}}" />
                 <!--<Path Data="{StaticResource SvgSettings}"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Top"
@@ -232,7 +232,7 @@
                   />-->
                 <Border Background="{StaticResource DefaultBackgroundBrush}" Width="Auto"
                         Grid.Column="0" Grid.Row="0" Opacity="0"
-                        Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
+                        Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}" />
                 <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
                               ItemTemplate="{StaticResource LfgTemplate}"
                               Margin="2"
@@ -240,7 +240,7 @@
                               Width="Auto"
                               Height="18"
                               Style="{StaticResource LfgItemsControl}"
-                              Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                              Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"></WrapPanel>

@@ -18,7 +18,7 @@
         <Grid>
             <Rectangle Width="48" Height="{Binding ElementName=Icon, Path=ActualWidth}" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Shape.Fill>
-                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
+                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}"/>
                 </Shape.Fill>
             </Rectangle>
             <Rectangle Stroke="#7fff" StrokeThickness="1" Width="48" Height="48"/>

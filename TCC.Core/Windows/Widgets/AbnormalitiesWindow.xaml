@@ -21,7 +21,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <FrameworkElement FlowDirection="{Binding Instance.Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top"/>
-        <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource Converters.DirectionToHorAlignConveter}}"
+        <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource DirectionToHorAlignConveter}}"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
 
         <StackPanel Background="Transparent" Name="WindowContent" Grid.Row="1">

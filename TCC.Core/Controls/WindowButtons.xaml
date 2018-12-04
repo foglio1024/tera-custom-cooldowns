@@ -36,12 +36,12 @@
             <Path Fill="White" Data="{StaticResource SvgHide}" Stretch="Uniform" Margin="2"/>
         </Button>
         <Button Click="Pin" Grid.Column="1" ToolTip="Show always">
-            <Path Fill="White" Data="{Binding ShowAlways, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SvgPin:SvgUnpin}" 
+            <Path Fill="White" Data="{Binding ShowAlways, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgPin:SvgUnpin}" 
                   Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
         <Button Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 Click="AutoDim" Grid.Column="2" ToolTip="Auto dim">
-            <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}" 
+            <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}" 
                    HorizontalAlignment="Center" Margin="2"/>
         </Button>
         <Button Click="MakeGlobal" Grid.Column="3" ToolTip="Apply current position to all classes">

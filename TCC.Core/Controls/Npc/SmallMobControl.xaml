@@ -39,7 +39,7 @@
             <local:Arc Width="80" 
                        Height="80" 
                        StrokeThickness="30" 
-                       Stroke="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}" 
+                       Stroke="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}" 
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        StartAngle="0"
@@ -109,7 +109,7 @@
                         BorderThickness="2 1" Height="8"
                         RenderTransformOrigin="1 1"></Border>
                 <Border RenderTransform="{StaticResource Skew45}" Height="4" RenderTransformOrigin="1 1"
-                       Background="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                       Background="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}"
                        Margin="5 0 0 0" HorizontalAlignment="Left" >
                     <FrameworkElement HorizontalAlignment="Stretch" Width="218" x:Name="HpBarGovernor">
                         <FrameworkElement.LayoutTransform>
@@ -130,7 +130,7 @@
             </Grid>
             <!--<local:GenericGauge Height="4" 
                                 Width="Auto"
-                                BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                                BarColor="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}"
                                 GaugeName=""
                                 ShowPercentage="False"
                                 ShowName="False"

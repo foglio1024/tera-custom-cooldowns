@@ -445,7 +445,7 @@
                             </Rectangle>
 
                             <!--<Grid HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
-                                              Visibility="{Binding Content.Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                                              Visibility="{Binding Content.Attention, Converter={StaticResource BoolToVisibleCollapsed}}"
                                                 Margin="0" Grid.Column="1">
                                         <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
                                     </Grid>-->

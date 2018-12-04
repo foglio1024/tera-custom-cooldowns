@@ -14,11 +14,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!--<Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource Converters.ChatChannelToColor}}" 
+                <!--<Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource ChatChannelToColor}}" 
                  Height="15" Width="15"/>-->
                 <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" ToolTip="{Binding}"
-                   Text="{Binding Converter={StaticResource Converters.ChatChannelToName}}" FontWeight="Normal"
-                           Foreground="{Binding Converter={StaticResource Converters.ChatChannelToColor}}"
+                   Text="{Binding Converter={StaticResource ChatChannelToName}}" FontWeight="Normal"
+                           Foreground="{Binding Converter={StaticResource ChatChannelToColor}}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Margin="4 2 0 4"/>
@@ -61,11 +61,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!--<Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource Converters.ChatChannelToColor}}" 
+                <!--<Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource ChatChannelToColor}}" 
                          Height="15" Width="15"/>-->
                 <TextBlock Grid.Column="1" Style="{StaticResource DefaultTextStyle}" ToolTip="{Binding}"
-                           Text="{Binding Converter={StaticResource Converters.ChatChannelToName}}" FontWeight="Normal"
-                           Foreground="{Binding Converter={StaticResource Converters.ChatChannelToColor}}"
+                           Text="{Binding Converter={StaticResource ChatChannelToName}}" FontWeight="Normal"
+                           Foreground="{Binding Converter={StaticResource ChatChannelToColor}}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
                            Margin="4 2 0 4"/>

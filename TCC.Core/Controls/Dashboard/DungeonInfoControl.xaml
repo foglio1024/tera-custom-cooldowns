@@ -31,7 +31,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Border>
-            <Border Height="26" Width="26" Effect="{StaticResource DropShadow}" Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}" Padding="0" CornerRadius="15" 
+            <Border Height="26" Width="26" Effect="{StaticResource DropShadow}" Background="{Binding Id, Converter={StaticResource DungeonIdToTierColor}}" Padding="0" CornerRadius="15" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-3,-3,0,0" Grid.Column="0" x:Name="EntriesBubble" RenderTransformOrigin=".5,.5">
                 <Grid Opacity="1">
                     <TextBlock Text="{Binding Entries}" FontWeight="Normal" HorizontalAlignment="Center" 
@@ -42,7 +42,7 @@
                 </Border.RenderTransform>
             </Border>
             <TextBlock Grid.Column="0" Foreground="#afff"  VerticalAlignment="Bottom" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
-                                   FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Id, Converter={StaticResource Converters.DungeonIdToName},ConverterParameter=False}"></TextBlock>
+                                   FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Id, Converter={StaticResource DungeonIdToName},ConverterParameter=False}"></TextBlock>
         </Grid>
         <Border.RenderTransform>
             <TranslateTransform Y="0"/>

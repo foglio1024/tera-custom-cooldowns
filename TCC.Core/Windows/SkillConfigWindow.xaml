@@ -22,7 +22,7 @@
                      StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush
-                        ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                        ImageSource="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
                 </Ellipse.Fill>
                 <Ellipse.RenderTransform>
                     <TranslateTransform X="-30" Y="30"></TranslateTransform>
@@ -41,7 +41,7 @@
                          StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Fill>
                         <ImageBrush
-                            ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                            ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Skill.ShortName}"

@@ -48,7 +48,7 @@
                                Width="20" Height="20" Stretch="Uniform">
                         <Rectangle.OpacityMask>
                             <ImageBrush
-                                ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
+                                ImageSource="{Binding UserClass, Converter={StaticResource ClassToImageConverter}}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
 
@@ -115,7 +115,7 @@
                                Width="20" Height="20" Stretch="Uniform">
                         <Rectangle.OpacityMask>
                             <ImageBrush
-                                ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
+                                ImageSource="{Binding UserClass, Converter={StaticResource ClassToImageConverter}}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Foreground="{StaticResource GoldBrush}" Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0"
@@ -193,7 +193,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Ellipse HorizontalAlignment="Left" x:Name="Ell"
-                         Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
+                         Fill="{Binding IsRaid, Converter={StaticResource RaidToColor}}"
                          Width="11" Height="11" />
                 <TextBlock Text="{Binding Message}"
                            x:Name="MessageTb"
@@ -222,7 +222,7 @@
                 <Rectangle Grid.Row="0"
                            Width="5"
                            Grid.RowSpan="3"
-                           Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
+                           Fill="{Binding IsRaid, Converter={StaticResource RaidToColor}}"
                            HorizontalAlignment="Left"
                            Margin="3 8 0 5"
                            x:Name="EllExt"
@@ -538,7 +538,7 @@
                         Style="{StaticResource ButtonMainStyle}"
                         Background="{StaticResource RevampBackgroundBrush}">
                     <Button.Content>
-                        <MultiBinding Converter="{StaticResource Converters.LfgVmToButtonLabel}">
+                        <MultiBinding Converter="{StaticResource LfgVmToButtonLabel}">
                             <Binding Path="Creating" />
                             <Binding Path="NewMessage" />
                         </MultiBinding>

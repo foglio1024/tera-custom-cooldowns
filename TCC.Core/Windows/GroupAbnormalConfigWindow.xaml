@@ -102,14 +102,14 @@
                             <Button Click="FilterByClass" Opacity=".3" x:Name="Btn">
                                 <Rectangle>
                                     <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="{Binding Converter={StaticResource Converters.ClassToImage}}" />
+                                        <ImageBrush ImageSource="{Binding Converter={StaticResource ClassToImageConverter}}" />
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
                                 <Button.ToolTip>
                                     <ToolTip>
                                         <TextBlock>
                                             <Run>Display active buffs for</Run>
-                                            <Run Text="{Binding Converter={StaticResource Converters.ClassToName}, ConverterParameter=true, Mode=OneWay}"></Run>
+                                            <Run Text="{Binding Converter={StaticResource ClassToName}, ConverterParameter=true, Mode=OneWay}"></Run>
                                         </TextBlock>
                                     </ToolTip>
                                 </Button.ToolTip>

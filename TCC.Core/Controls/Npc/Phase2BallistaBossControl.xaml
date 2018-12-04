@@ -76,7 +76,7 @@
                     </Grid.RowDefinitions>
 
                     <controls:GenericGauge Height="5" Width="400"
-                                           BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                                           BarColor="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}"
                                            GaugeName=""
                                            ShowPercentage="False"
                                            ShowName="False"

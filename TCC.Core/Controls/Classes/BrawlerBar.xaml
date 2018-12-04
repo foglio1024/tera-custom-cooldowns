@@ -101,7 +101,7 @@
                         <Rectangle Width="63" Height="63" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
                                    OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding GrowingFury.Buff.Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                                <ImageBrush ImageSource="{Binding GrowingFury.Buff.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
                             </Rectangle.Fill>
                             <FrameworkElement.RenderTransform>
                                 <TranslateTransform X="0"></TranslateTransform>

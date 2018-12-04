@@ -41,7 +41,7 @@
                                FontSize="15" 
                                Text="{Binding Name}" 
                                Grid.Row="0"/>
-                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}" Name="AggroArrow"
+                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource AggroTypeToFill}}" Name="AggroArrow"
                                  VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
                                  Grid.Column="1" RenderTransformOrigin=".5,.5">
                         <Polygon.RenderTransform>
@@ -54,7 +54,7 @@
                                FontWeight="Normal" 
                                FontStretch="Condensed" 
                                FontSize="13" 
-                               Text="{Binding Target, Converter={StaticResource Converters.EntityIdToName}}" 
+                               Text="{Binding Target, Converter={StaticResource EntityIdToName}}" 
                                Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
 
                 </Grid>
@@ -90,7 +90,7 @@
                     </Grid.RowDefinitions>
 
                     <controls:GenericGauge Height="5" Width="400"
-                                           BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                                           BarColor="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}"
                                            GaugeName=""
                                            ShowPercentage="False"
                                            ShowName="False"
