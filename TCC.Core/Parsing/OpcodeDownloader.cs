@@ -45,7 +45,7 @@ namespace TCC.Parsing
                         if (StringUtils.ByteArrayToString(localHash) == remoteHash) return true;
                     }
                 }
-                catch (Exception ex)
+                catch 
                 {
                     return false;
                 }

@@ -160,9 +160,9 @@ namespace TCC.Windows
             if (_toggle.Selected) Settings.Settings.MyAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
             else Settings.Settings.MyAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
-
+#pragma warning disable 0067
         public event EventHandler CanExecuteChanged;
-
+#pragma warning restore 0067
         public MyToggleCommand(MyClassToggle t)
         {
             _toggle = t;

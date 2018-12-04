@@ -176,9 +176,9 @@ namespace TCC.Data
                 listing.CanApply = true;
             };
         }
-
+#pragma warning disable 0067
         public event EventHandler CanExecuteChanged;
-
+#pragma warning restore 0067
         public bool CanExecute(object parameter)
         {
             return _listing.CanApply;
@@ -198,9 +198,9 @@ namespace TCC.Data
         {
             _listing = listing;
         }
-
+#pragma warning disable 0067
         public event EventHandler CanExecuteChanged;
-
+#pragma warning restore 0067
         public bool CanExecute(object parameter)
         {
             return _listing.IsMyLfg;
