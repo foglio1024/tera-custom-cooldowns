@@ -22,8 +22,8 @@ namespace TCC.Controls.Classes
         }
 
         private WarriorBarManager _dc;
-        private DoubleAnimation _tc;
-        private DoubleAnimation _tcCd;
+        //private DoubleAnimation _tc;
+        //private DoubleAnimation _tcCd;
 
 
         public bool WarningStance
@@ -88,8 +88,8 @@ namespace TCC.Controls.Classes
             //if (!_dc.TraverseCut.Maxed) return;
             Dispatcher.Invoke(() =>
             {
-                _tcCd.From = _dc.TraverseCut.Factor * 359.9;
-                _tcCd.Duration = TimeSpan.FromMilliseconds(cd);
+                //_tcCd.From = _dc.TraverseCut.Factor * 359.9;
+                //_tcCd.Duration = TimeSpan.FromMilliseconds(cd);
                 //TODO: TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _tcCd);
                 //TcArc.BeginAnimation(Arc.EndAngleProperty, _tcCd);
             });
@@ -103,7 +103,7 @@ namespace TCC.Controls.Classes
         {
             if (e.PropertyName == nameof(StatTracker.Factor))
             {
-                _tc.To = _dc.TraverseCut.Factor * 359.9;
+                //_tc.To = _dc.TraverseCut.Factor * 359.9;
                 _tcAnimating = true;
                 //TODO: TcGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _tc);
                 //TcArc.BeginAnimation(Arc.EndAngleProperty, _tc);

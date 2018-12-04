@@ -6,7 +6,7 @@ using TCC.Data;
 
 namespace TCC.Converters
 {
-    internal class PieceToPathConverter : IValueConverter
+    public class PieceToPathConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -14,31 +14,31 @@ namespace TCC.Converters
             switch (p)
             {
                 case GearPiece.Weapon:
-                    return Application.Current.FindResource("SvgWeapon");
+                    return R.SVG.SvgWeapon;
                 case GearPiece.Armor:
-                    return Application.Current.FindResource("SvgArmor");
+                    return R.SVG.SvgArmor;
                 case GearPiece.Hands:
-                    return Application.Current.FindResource("SvgHands");
+                    return R.SVG.SvgHands;
                 case GearPiece.Feet:
-                    return Application.Current.FindResource("SvgFeet");
+                    return R.SVG.SvgFeet;
                 case GearPiece.CritNecklace:
-                    return Application.Current.FindResource("SvgNecklace");
+                    return R.SVG.SvgNecklace;
                 case GearPiece.CritEarring:
-                    return Application.Current.FindResource("SvgEarring");
+                    return R.SVG.SvgEarring;
                 case GearPiece.CritRing:
-                    return Application.Current.FindResource("SvgRing");
+                    return R.SVG.SvgRing;
                 case GearPiece.PowerNecklace:
-                    return Application.Current.FindResource("SvgNecklace");
+                    return R.SVG.SvgNecklace;
                 case GearPiece.PowerEarring:
-                    return Application.Current.FindResource("SvgEarring");
+                    return R.SVG.SvgEarring;
                 case GearPiece.PowerRing:
-                    return Application.Current.FindResource("SvgRing");
+                    return R.SVG.SvgRing;
                 case GearPiece.Circlet:
-                    return Application.Current.FindResource("SvgCirclet");
+                    return R.SVG.SvgCirclet;
                 case GearPiece.Belt:
-                    return Application.Current.FindResource("SvgBelt");
+                    return R.SVG.SvgBelt;
             }
-            return Application.Current.FindResource("SvgClose");
+            return R.SVG.SvgClose;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

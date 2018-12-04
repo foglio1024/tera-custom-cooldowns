@@ -65,12 +65,12 @@ namespace TCC.Windows
                     if (VM.Creating)
                     {
                         _colAn.To = string.IsNullOrEmpty(VM.NewMessage)
-                            ? (Color)Application.Current.FindResource("HpColor")
-                            : (Color)Application.Current.FindResource("GreenColor");
+                            ? R.Colors.HpColor //(Color)Application.Current.FindResource("HpColor")
+                            : R.Colors.GreenColor;//(Color)Application.Current.FindResource("GreenColor");
                     }
                     else
                     {
-                        _colAn.To = (Color)Application.Current.FindResource("DefensiveStanceColor");
+                        _colAn.To = R.Colors.DefensiveStanceColor; //(Color)Application.Current.FindResource("DefensiveStanceColor");
                     }
                     var currBg = CreateMessageBtn.Background as SolidColorBrush;
                     var currCol = currBg.Color;

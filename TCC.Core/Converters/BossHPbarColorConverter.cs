@@ -12,7 +12,7 @@ namespace TCC.Converters
         {
             // ReSharper disable once PossibleNullReferenceException
             if (value == null) return new SolidColorBrush(Colors.DodgerBlue);
-            return (bool)value ? Application.Current.FindResource("HpBrush") : new SolidColorBrush(Colors.DodgerBlue);
+            return (bool)value ? R.Brushes.HpBrush /*Application.Current.FindResource("HpBrush")*/ : R.Brushes.DefensiveStanceBrush /*new SolidColorBrush(Colors.DodgerBlue)*/;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

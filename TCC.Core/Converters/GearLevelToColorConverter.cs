@@ -6,7 +6,7 @@ using TCC.Data;
 
 namespace TCC.Converters
 {
-    internal class GearLevelToColorConverter : IValueConverter
+    public class GearLevelToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -14,15 +14,15 @@ namespace TCC.Converters
             switch (val)
             {
                 case GearTier.Low:
-                    return Application.Current.FindResource("Tier2DungeonBrush");
+                    return R.Brushes.Tier2DungeonBrush; //Application.Current.FindResource("Tier2DungeonBrush");
                 case GearTier.Mid:
-                    return Application.Current.FindResource("Tier3DungeonBrush");
+                    return R.Brushes.Tier3DungeonBrush; //Application.Current.FindResource("Tier3DungeonBrush");
                 case GearTier.High:
-                    return Application.Current.FindResource("Tier4DungeonBrush");
+                    return R.Brushes.Tier4DungeonBrush;//Application.Current.FindResource("Tier4DungeonBrush");
                 case GearTier.Top:
-                    return Application.Current.FindResource("Tier5DungeonBrush");
+                    return R.Brushes.Tier5DungeonBrush; //Application.Current.FindResource("Tier5DungeonBrush");
                 default:
-                    return Application.Current.FindResource("TierSoloDungeonBrush");
+                    return R.Brushes.TierSoloDungeonBrush; // Application.Current.FindResource("TierSoloDungeonBrush");
             }
         }
 

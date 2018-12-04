@@ -11,8 +11,8 @@ namespace TCC.Converters
         {
             //TODO: to triggers btw
             return (bool?) value ?? false
-                ? new SolidColorBrush(Color.FromRgb(0xff, 0xcc, 0x00)) //TODO: to resource
-                : System.Windows.Application.Current.FindResource("AquadraxBrush"); //TODO: check color
+                ? R.Brushes.GoldBrush// new SolidColorBrush(Color.FromRgb(0xff, 0xcc, 0x00)) //TODO: to resource
+                : R.Brushes.AquadraxBrush; //System.Windows.Application.Current.FindResource("AquadraxBrush"); //TODO: check color
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -10,8 +10,8 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool?) value ?? false
-                ? Application.Current.FindResource("HpDebuffColor")
-                : Application.Current.FindResource("HpColor");
+                ? R.Colors.HpDebuffColor // Application.Current.FindResource("HpDebuffColor")
+                : R.Colors.HpColor; // Application.Current.FindResource("HpColor");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

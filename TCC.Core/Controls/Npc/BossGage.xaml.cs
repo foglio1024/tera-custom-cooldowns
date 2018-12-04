@@ -145,7 +145,7 @@ namespace TCC.Controls.Npc
         private void OnAbnormalityShapeChanged()
         {
             Abnormalities.ItemTemplateSelector = null;
-            Abnormalities.ItemTemplateSelector = Application.Current.FindResource("BossAbnormalityTemplateSelector") as DataTemplateSelector;
+            Abnormalities.ItemTemplateSelector = R.TemplateSelectors.BossAbnormalityTemplateSelector; //Application.Current.FindResource("BossAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
 
@@ -212,13 +212,13 @@ namespace TCC.Controls.Npc
                         {
                             Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                if(!Npc.EnragePattern.StaysEnraged) CurrentEnrageTime--;
+                                if (!Npc.EnragePattern.StaysEnraged) CurrentEnrageTime--;
                             }));
                         };
                         _numberTimer.Enabled = true;
                         EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
                         NotifyPropertyChanged(nameof(EnrageHistory));
-                        if(!Npc.EnragePattern.StaysEnraged) EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
+                        if (!Npc.EnragePattern.StaysEnraged) EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
                         EnrageBorder.BeginAnimation(OpacityProperty, _flash);
                     }
                     else

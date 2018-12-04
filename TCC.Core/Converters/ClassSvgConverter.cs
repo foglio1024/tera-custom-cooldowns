@@ -19,7 +19,8 @@ namespace TCC.Converters
                     c = (Class)Enum.Parse(typeof(Class), s);
                     break;
             }
-            return System.Windows.Application.Current.FindResource("SvgClass" + c.ToString());
+
+            return R.Helpers.SvgClass(c); //App.Current.FindResource("SvgClass" + c.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

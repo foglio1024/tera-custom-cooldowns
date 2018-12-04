@@ -31,15 +31,16 @@ namespace TCC.Controls.Classes.Elements
                 if (i < _dc.RunemarksCounter.Val)
                 {
                     RunemarkContainer.Children[i].Opacity = 1;
-                    ((Shape) RunemarkContainer.Children[i]).Fill = _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue ?
-                                   Application.Current.FindResource("MaxRunemarkBrush") as SolidColorBrush :
-                                   Application.Current.FindResource("RunemarkBrush") as SolidColorBrush;
+                    ((Shape)RunemarkContainer.Children[i]).Fill =
+                        _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue
+                            ? R.Brushes.MaxRunemarkBrush : // Application.Current.FindResource("MaxRunemarkBrush") as SolidColorBrush :
+                            R.Brushes.RunemarkBrush; //Application.Current.FindResource("RunemarkBrush") as SolidColorBrush;
 
                 }
                 else
                 {
                     RunemarkContainer.Children[i].Opacity = .1;
-                    ((Shape) RunemarkContainer.Children[i]).Fill = Brushes.White;
+                    ((Shape)RunemarkContainer.Children[i]).Fill = Brushes.White;
                 }
             }
 
@@ -48,8 +49,8 @@ namespace TCC.Controls.Classes.Elements
                 BlurRadius = 10,
                 ShadowDepth = 0,
                 // ReSharper disable once PossibleNullReferenceException
-                Color= (Application.Current.FindResource("MaxRunemarkBrush") as SolidColorBrush).Color
-            } : null; 
+                Color = R.Colors.MaxRunemarkColor //(Application.Current.FindResource("MaxRunemarkBrush") as SolidColorBrush).Color
+            } : null;
         }
 
 

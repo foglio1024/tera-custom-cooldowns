@@ -11,22 +11,20 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Color col = Colors.Transparent;
-            var parLight = parameter != null && parameter.ToString().Contains("light") ? "Light" : "";
+            var col = Colors.Transparent;
+            var light = parameter != null && parameter.ToString().Contains("light");
+            //var parLight = parameter != null && parameter.ToString().Contains("light") ? "Light" : "";
             if (value != null)
                 switch ((Class)value)
                 {
                     case Class.Gunner:
-                        // ReSharper disable once PossibleNullReferenceException
-                        col = (Color) Application.Current.FindResource("WillpowerColor"+parLight);
+                        col = light ? R.Colors.WillpowerColorLight : R.Colors.WillpowerColor; // (Color) Application.Current.FindResource("WillpowerColor"+parLight);
                         break;
                     case Class.Brawler:
-                        // ReSharper disable once PossibleNullReferenceException
-                        col = (Color)Application.Current.FindResource("RageColor" + parLight);
+                        col = light ? R.Colors.RageColorLight : R.Colors.RageColor; //(Color)Application.Current.FindResource("RageColor" + parLight);
                         break;
                     case Class.Ninja:
-                        // ReSharper disable once PossibleNullReferenceException
-                        col = (Color) Application.Current.FindResource("ArcaneColor"+parLight);
+                        col = light ? R.Colors.ArcaneColorLight : R.Colors.ArcaneColor; // (Color) Application.Current.FindResource("ArcaneColor"+parLight);
                         break;
                     case Class.Valkyrie:
                         col = Colors.White;

@@ -42,9 +42,9 @@ namespace TCC.Controls.Group
         private void OnAbnormalityShapeChanged()
         {
             Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; // Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
             Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
+            Debuffs.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; //Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
 

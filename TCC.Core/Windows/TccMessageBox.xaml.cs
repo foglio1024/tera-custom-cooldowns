@@ -121,12 +121,12 @@ namespace TCC.Windows
                     //_messageBox.SetImage("Question.png");
                     break;
                 case MessageBoxImage.Information:
-                    _messageBox.Bg.Background = Application.Current.FindResource("MpBrush") as SolidColorBrush;
+                    _messageBox.Bg.Background = R.Brushes.MpBrush;//Application.Current.FindResource("MpBrush") as SolidColorBrush;
                     //_messageBox.SetImage("Information.png");
                     break;
                 case MessageBoxImage.Error:
                     //_messageBox.SetImage("Error.png");
-                    _messageBox.Bg.Background = Application.Current.FindResource("HpBrush") as SolidColorBrush;
+                    _messageBox.Bg.Background = R.Brushes.HpBrush;//Application.Current.FindResource("HpBrush") as SolidColorBrush;
                     break;
             }
         }

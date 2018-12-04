@@ -8,7 +8,7 @@ using TCC.Parsing.Messages;
 
 namespace TCC.Converters
 {
-    internal class LogoInfoToImageConverter : IValueConverter
+    public class LogoInfoToImageConverter : IValueConverter
     {
         [DllImport("gdi32")]
         private static extern int DeleteObject(IntPtr o);
@@ -17,7 +17,7 @@ namespace TCC.Converters
             var guildId = (uint?) value ?? 0;
             if (!S_IMAGE_DATA.Database.ContainsKey(guildId))
             {
-                return Application.Current.FindResource("DefaultGuildLogo");
+                return R.MiscResources.DefaultGuildLogo; //Application.Current.FindResource("DefaultGuildLogo");
 
             }
 

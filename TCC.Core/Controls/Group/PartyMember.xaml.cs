@@ -27,10 +27,10 @@ namespace TCC.Controls.Group
         private void OnAbnormalityShapeChanged()
         {
             Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.ItemTemplateSelector = R.TemplateSelectors.PartyAbnormalityTemplateSelector;// Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
             Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
-            
+            Debuffs.ItemTemplateSelector = R.TemplateSelectors.PartyAbnormalityTemplateSelector; // Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
+
         }
 
         private void UpdateSettings()
@@ -46,11 +46,12 @@ namespace TCC.Controls.Group
 
         private void SetAwakenIcon()
         {
-            Dispatcher.Invoke(() => {
+            Dispatcher.Invoke(() =>
+            {
                 if (!(DataContext is User user)) return;
-                AwakenIcon.Visibility = TCC.Settings.Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : 
+                AwakenIcon.Visibility = TCC.Settings.Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) :
                     Visibility.Collapsed;
-                AwakenBorder.Visibility = TCC.Settings.Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) : 
+                AwakenBorder.Visibility = TCC.Settings.Settings.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) :
                     Visibility.Collapsed;
             });
         }

@@ -14,11 +14,11 @@ namespace TCC.Converters
             switch ((ReadyStatus?)value ?? ReadyStatus.None)
             {
                 case ReadyStatus.NotReady:
-                    return Application.Current.FindResource("HpBrush");
+                    return R.Brushes.HpBrush; //Application.Current.FindResource("HpBrush");
                 case ReadyStatus.Ready:
-                    return Application.Current.FindResource("LightGreenBrush");
+                    return R.Brushes.LightGreenBrush; //Application.Current.FindResource("LightGreenBrush");
                 case ReadyStatus.Undefined:
-                    return Application.Current.FindResource("GoldBrush");
+                    return R.Brushes.GoldBrush;// Application.Current.FindResource("GoldBrush");
                 default:
                     return Brushes.Transparent;
             }
