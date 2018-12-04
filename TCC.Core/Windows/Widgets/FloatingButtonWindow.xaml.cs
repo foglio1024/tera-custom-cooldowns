@@ -146,16 +146,16 @@ namespace TCC.Windows.Widgets
                 switch (type)
                 {
                     case NotificationType.Normal:
-                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("ChatPartyBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.ChatPartyBrush;// System.Windows.Application.Current.FindResource("ChatPartyBrush") as SolidColorBrush;
                         break;
                     case NotificationType.Success:
-                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("GreenBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.GreenBrush; // System.Windows.Application.Current.FindResource("GreenBrush") as SolidColorBrush;
                         break;
                     case NotificationType.Warning:
-                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("Tier4DungeonBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.Tier4DungeonBrush; // System.Windows.Application.Current.FindResource("Tier4DungeonBrush") as SolidColorBrush;
                         break;
                     case NotificationType.Error:
-                        NotificationColorBorder.Background = System.Windows.Application.Current.FindResource("HpBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.HpBrush; //System.Windows.Application.Current.FindResource("HpBrush") as SolidColorBrush;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
