@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using TCC.Annotations;
+using TCC.Converters;
 using TCC.Data.Map;
 using TCC.ViewModels;
 
@@ -20,7 +21,7 @@ namespace TCC.Data.Chat
                 _container = value;
                 if (Color == null)
                 {
-                    var conv = new Converters.ChatChannelToColor();
+                    var conv = new ChatChannelToColorConverter();
                     var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
                     Color = col;
                 }
@@ -119,7 +120,7 @@ namespace TCC.Data.Chat
             {
                 //if (color == "")
                 //{
-                //    var conv = new Converters.ChatChannelToColor();
+                //    var conv = new ChatChannelToColorConverter();
                 //    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
                 //    Color = col;
                 //}
@@ -131,7 +132,7 @@ namespace TCC.Data.Chat
                 //}
                 //catch
                 //{
-                //    var conv = new Converters.ChatChannelToColor();
+                //    var conv = new ChatChannelToColorConverter();
                 //    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
                 //    Color = col;
                 //}
