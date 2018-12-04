@@ -10,8 +10,31 @@ namespace TCC.Data.Pc
 
     public class Player : TSPropertyChanged
     {
+        private string _name = "";
+        private ulong _entityId;
+        private Class _playerclass = Class.None;
+        private Laurel _laurel = Laurel.None;
+        private int _level;
+        private int _itemLevel;
+        private float _currentHP;
+        private float _currentMP;
+        private float _currentST;
+        private long _maxHP;
+        private int _maxMP;
+        private int _maxST;
+        private uint _maxShield;
+        private float _currentShield;
+        private float _flightEnergy;
+        private bool _isInCombat;
         private float _critFactor;
-        private string _name;
+
+        private bool _fire;
+        private bool _ice;
+        private bool _arcane;
+        private bool _fireBoost;
+        private bool _iceBoost;
+        private bool _arcaneBoost;
+
         public string Name
         {
             get => _name;
@@ -22,8 +45,6 @@ namespace TCC.Data.Pc
                 NPC();
             }
         }
-
-        private ulong _entityId;
         public ulong EntityId
         {
             get => _entityId;
@@ -38,8 +59,6 @@ namespace TCC.Data.Pc
         }
         public uint PlayerId { get; internal set; }
         public uint ServerId { get; internal set; }
-
-        private Class _playerclass = Class.None;
         public Class Class
         {
             get => _playerclass;
@@ -52,8 +71,6 @@ namespace TCC.Data.Pc
                 }
             }
         }
-
-        private Laurel _laurel;
         public Laurel Laurel
         {
             get => _laurel;
@@ -66,8 +83,6 @@ namespace TCC.Data.Pc
                 }
             }
         }
-
-        private int _level;
         public int Level
         {
             get => _level;
@@ -80,8 +95,6 @@ namespace TCC.Data.Pc
                 }
             }
         }
-
-        private int _itemLevel;
         public int ItemLevel
         {
             get => _itemLevel;
@@ -94,8 +107,46 @@ namespace TCC.Data.Pc
                 }
             }
         }
+        public float CurrentHP
+        {
+            get => _currentHP;
+            set
+            {
+                if (_currentHP == value) return;
+                _currentHP = value;
+                NPC(nameof(CurrentHP));
+                NPC(nameof(TotalHP));
+                NPC(nameof(HpFactor));
+            }
+        }
+        public float CurrentMP
+        {
+            get => _currentMP;
+            set
+            {
+                if (_currentMP != value)
+                {
+                    _currentMP = value;
+                    NPC();
+                    NPC(nameof(MpFactor));
 
-        private long _maxHP;
+                }
+            }
+        }
+        public float CurrentST
+        {
+            get => _currentST;
+            set
+            {
+                if (_currentST != value)
+                {
+                    _currentST = value;
+                    NPC();
+                    NPC(nameof(StFactor));
+
+                }
+            }
+        }
         public long MaxHP
         {
             get => _maxHP;
@@ -111,7 +162,6 @@ namespace TCC.Data.Pc
 
             }
         }
-        private int _maxMP;
         public int MaxMP
         {
             get => _maxMP;
@@ -127,7 +177,6 @@ namespace TCC.Data.Pc
 
             }
         }
-        private int _maxST;
         public int MaxST
         {
             get => _maxST;
@@ -139,8 +188,6 @@ namespace TCC.Data.Pc
                 NPC(nameof(StFactor));
             }
         }
-
-        private uint _maxShield;
         public uint MaxShield
         {
             get => _maxShield;
@@ -155,62 +202,12 @@ namespace TCC.Data.Pc
                 }
             }
         }
-
-        private float _currentHP;
-        public float CurrentHP
-        {
-            get => _currentHP;
-            set
-            {
-                if (_currentHP == value) return;
-                _currentHP = value;
-                NPC(nameof(CurrentHP));
-                NPC(nameof(TotalHP));
-                NPC(nameof(HpFactor));
-            }
-        }
-
         public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
         public double MpFactor => MaxMP > 0 ? CurrentMP / MaxMP : 1;
         public double StFactor => MaxST > 0 ? CurrentST / MaxST : 1;
         public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
-
         public bool HasShield => ShieldFactor > 0;
-
         public float TotalHP => CurrentHP + CurrentShield;
-
-        private float _currentMP;
-        public float CurrentMP
-        {
-            get => _currentMP;
-            set
-            {
-                if (_currentMP != value)
-                {
-                    _currentMP = value;
-                    NPC();
-                    NPC(nameof(MpFactor));
-
-                }
-            }
-        }
-        private float _currentST;
-        public float CurrentST
-        {
-            get => _currentST;
-            set
-            {
-                if (_currentST != value)
-                {
-                    _currentST = value;
-                    NPC();
-                    NPC(nameof(StFactor));
-
-                }
-            }
-        }
-
-        private float _currentShield;
         public float CurrentShield
         {
             get => _currentShield;
@@ -225,8 +222,6 @@ namespace TCC.Data.Pc
                 NPC(nameof(HasShield));
             }
         }
-
-        private float _flightEnergy;
         public float FlightEnergy
         {
             get => _flightEnergy;
@@ -257,7 +252,6 @@ namespace TCC.Data.Pc
         }
         public bool IsDebuffed => _debuffList.Count != 0;
 
-        private bool _isInCombat;
         public bool IsInCombat
         {
             get => _isInCombat;
@@ -272,9 +266,7 @@ namespace TCC.Data.Pc
         }
 
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; set; }
-
         public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; set; }
-
         public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
 
         public float CritFactor
@@ -287,10 +279,6 @@ namespace TCC.Data.Pc
                 NPC();
             }
         }
-
-        private bool _fireBoost;
-        private bool _iceBoost;
-        private bool _arcaneBoost;
 
         public bool FireBoost
         {
@@ -322,11 +310,6 @@ namespace TCC.Data.Pc
                 NPC();
             }
         }
-
-
-        private bool _fire;
-        private bool _ice;
-        private bool _arcane;
 
         public bool Fire
         {
