@@ -96,11 +96,12 @@ namespace TCC.Parsing
 
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var standardCountString = $"<font color =\"#cccccc\">({InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1}/40)</font>";
-            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1}</font><font color=\"#cccccc\">/40)</font>";
-            var newMsg = new SystemMessage($"{sysMsg.Message} {(InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1 == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
+            var currChar = WindowManager.Dashboard.VM.CurrentCharacter;
+            var standardCountString = $"<font color =\"#cccccc\">({currChar.ClearedGuardianQuests + 1}/40)</font>";
+            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{currChar.ClearedGuardianQuests + 1}</font><font color=\"#cccccc\">/40)</font>";
+            var newMsg = new SystemMessage($"{sysMsg.Message} {(currChar.ClearedGuardianQuests + 1 == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
             var msg = new ChatMessage(srvMsg, newMsg, ChatChannel.Guardian);
-            if (InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests + 1 == 40) msg.ContainsPlayerName = true;
+            if (currChar.ClearedGuardianQuests + 1 == 40) msg.ContainsPlayerName = true;
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
@@ -150,7 +151,7 @@ namespace TCC.Parsing
         {
             const string s = "dungeon:";
             var dgId = Convert.ToUInt32(srvMsg.Substring(srvMsg.IndexOf(s, StringComparison.Ordinal) + s.Length));
-            InfoWindowViewModel.Instance.EngageDungeon(dgId);
+            WindowManager.Dashboard.VM.CurrentCharacter.EngageDungeon(dgId);
 
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);

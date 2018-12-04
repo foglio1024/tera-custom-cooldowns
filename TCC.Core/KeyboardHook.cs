@@ -52,8 +52,8 @@ namespace TCC
             }
             if (e.Key == Settings.Settings.InfoWindowHotkey.Key && e.Modifier == Settings.Settings.InfoWindowHotkey.Modifier)
             {
-                if (WindowManager.InfoWindow.IsVisible) WindowManager.InfoWindow.HideWindow();
-                else InfoWindowViewModel.Instance.ShowWindow();
+                if (WindowManager.Dashboard.IsVisible) WindowManager.Dashboard.HideWindow();
+                else WindowManager.Dashboard.ShowWindow();
             }
             if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {

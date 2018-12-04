@@ -51,7 +51,7 @@ namespace TCC
 
         private void CheckCloseEvents()
         {
-            var closeEventsCount = InfoWindowViewModel.Instance.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
+            var closeEventsCount = WindowManager.Dashboard.VM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
             if(Settings.Settings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
@@ -60,7 +60,7 @@ namespace TCC
         private void CheckNewDay(object sender, EventArgs e)
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
-                InfoWindowViewModel.Instance.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
+                WindowManager.Dashboard.VM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
             if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
         }
 
@@ -90,13 +90,13 @@ namespace TCC
                 ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
-            if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
+            if (WindowManager.Dashboard.VM.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
             {
-                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
+                WindowManager.Dashboard.VM.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
             }
 
             CheckReset();
-            InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
+            WindowManager.Dashboard.VM.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
 
         }
 
@@ -105,7 +105,7 @@ namespace TCC
             if (CurrentRegion == null) return;
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
             if (Settings.Settings.LastRun > todayReset || DateTime.Now < todayReset) return;
-            foreach (var ch in InfoWindowViewModel.Instance.Characters)
+            foreach (var ch in WindowManager.Dashboard.VM.Characters)
             {
                 foreach (var dg in ch.Dungeons)
                 {
@@ -124,7 +124,7 @@ namespace TCC
                 }
             }
             Settings.Settings.LastRun = DateTime.Now;
-            InfoWindowViewModel.Instance.SaveToFile();
+            WindowManager.Dashboard.VM.SaveCharacters();
             SettingsWriter.Save();
             if (DateTime.Now.DayOfWeek == _resetDay)
             {
@@ -198,7 +198,7 @@ namespace TCC
 
         public void SetGuildBamTime(bool force)
         {
-            foreach (var eg in InfoWindowViewModel.Instance.EventGroups.ToSyncArray().Where(x => x.RemoteCheck))
+            foreach (var eg in WindowManager.Dashboard.VM.EventGroups.ToSyncArray().Where(x => x.RemoteCheck))
             {
                 foreach (var ev in eg.Events.ToSyncArray())
                 {

@@ -434,7 +434,7 @@ namespace TCC.Data.Chat
             //check if player is mentioned
             try
             {
-                foreach (var item in InfoWindowViewModel.Instance.Characters)
+                foreach (var item in WindowManager.Dashboard.VM.Characters)
                 {
                     if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
                     ContainsPlayerName = true;

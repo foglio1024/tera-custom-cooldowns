@@ -454,10 +454,10 @@ namespace TCC.ViewModels
             var u = Members.ToSyncArray().FirstOrDefault(x => x.IsPlayer);
             if (u == null) return;
 
-            u.Weapon = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
-            u.Armor = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
-            u.Gloves = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
-            u.Boots = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
+            u.Weapon = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
+            u.Armor = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
+            u.Gloves = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
+            u.Boots = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
         public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)

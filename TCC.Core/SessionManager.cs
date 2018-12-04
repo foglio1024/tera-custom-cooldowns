@@ -156,7 +156,7 @@ namespace TCC
         {
             try
             {
-                p.Laurel = InfoWindowViewModel.Instance.Characters.First(x => x.Name == p.Name).Laurel;
+                p.Laurel = WindowManager.Dashboard.VM.Characters.First(x => x.Name == p.Name).Laurel;
             }
             catch
             {

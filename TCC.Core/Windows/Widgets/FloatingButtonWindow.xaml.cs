@@ -93,7 +93,7 @@ namespace TCC.Windows.Widgets
                 NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
                 _t.Stop();
             }
-            InfoWindowViewModel.Instance.ShowWindow();
+            WindowManager.Dashboard.ShowWindow();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

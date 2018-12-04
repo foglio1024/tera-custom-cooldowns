@@ -105,13 +105,13 @@ namespace TCC.ViewModels
             {
                 g.TowerHp = guildInfo.TowerHp;
                 if (g.Name != "") return;
-                if(guildInfo.Self && InfoWindowViewModel.Instance.CurrentCharacter != null) g.Name = InfoWindowViewModel.Instance.CurrentCharacter.GuildName;
+                if(guildInfo.Self) g.Name = WindowManager.Dashboard.VM.CurrentCharacter?.GuildName;
                 //TODO: add kills and deaths?
             }
             else
             {
                 var name = "";
-                if (guildInfo.Self && InfoWindowViewModel.Instance.CurrentCharacter != null) name = InfoWindowViewModel.Instance.CurrentCharacter.GuildName;
+                if (guildInfo.Self) name = WindowManager.Dashboard.VM.CurrentCharacter?.GuildName;
                 _guilds.Add(new CivilUnrestGuild() { Id = guildInfo.Id, Name = name, TowerHp = guildInfo.TowerHp, TowersDestroyed = 0 });
             }
         }

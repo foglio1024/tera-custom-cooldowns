@@ -76,7 +76,7 @@ namespace TCC.Controls.Dashboard
         }
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {
-            InfoWindowViewModel.Instance.Characters.Remove((Character)DataContext);
+            WindowManager.Dashboard.VM.Characters.Remove((Character)DataContext);
         }
 
         //private bool _animDown = true;
@@ -89,11 +89,7 @@ namespace TCC.Controls.Dashboard
             scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, _scaleRipple);
             scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, _scaleRipple);
             Ripple.BeginAnimation(OpacityProperty, _fadeRipple);
-            //Point relativePoint = rootBorder.TransformToAncestor(WindowManager.InfoWindow)
-            //                  .Transform(new Point(0, 0));
-            //WindowManager.InfoWindow.ExpandCharacter(relativePoint, rootBorder.ActualWidth, this.ActualHeight);
-            InfoWindowViewModel.Instance.SelectCharacter((Character)DataContext);
-            //Task.Delay(300).ContinueWith(t => _animDown = true);
+            //WindowManager.Dashboard.VM.SelectCharacter((Character)DataContext);
         }
 
         private void RootBorder_OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

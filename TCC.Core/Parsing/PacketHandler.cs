@@ -39,7 +39,6 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.CurrentPlayer.CritFactor = p.BonusCritFactor;
-
             SessionManager.SetPlayerMaxHp(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMp(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
             SessionManager.SetPlayerMaxSt(SessionManager.CurrentPlayer.EntityId, p.MaxST + p.BonusST);
@@ -47,6 +46,8 @@ namespace TCC.Parsing
             SessionManager.SetPlayerHp(p.CurrentHP);
             SessionManager.SetPlayerMp(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
+
+            WindowManager.Dashboard.VM.CurrentCharacter.ItemLevel = p.Ilvl;
 
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -131,7 +132,7 @@ namespace TCC.Parsing
 
             foreach (var item in p.CharacterList)
             {
-                var ch = InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Id == item.Id);
+                var ch = WindowManager.Dashboard.VM.Characters.FirstOrDefault(x => x.Id == item.Id);
                 if (ch != null)
                 {
                     ch.Name = item.Name;
@@ -141,10 +142,10 @@ namespace TCC.Parsing
                 }
                 else
                 {
-                    InfoWindowViewModel.Instance.Characters.Add(item);
+                    WindowManager.Dashboard.VM.Characters.Add(item);
                 }
             }
-            InfoWindowViewModel.Instance.SaveToFile();
+            WindowManager.Dashboard.VM.SaveCharacters();
         }
         public static void HandleLogin(S_LOGIN p)
         {
@@ -178,7 +179,7 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Name = p.Name;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
-            InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
+            WindowManager.Dashboard.VM.SetLoggedIn(p.PlayerId);
             SessionManager.GuildMembersNames.Clear();
             //if (Settings.Settings.LastRegion == "NA")
             //    Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
@@ -451,7 +452,7 @@ namespace TCC.Parsing
 
         internal static void HandleDungeonCooltimeList(S_DUNGEON_COOL_TIME_LIST x)
         {
-            InfoWindowViewModel.Instance.SetDungeons(x.DungeonCooldowns);
+            WindowManager.Dashboard.VM.SetDungeons(x.DungeonCooldowns);
         }
 
         internal static void HandleAccountPackageList(S_ACCOUNT_PACKAGE_LIST x)
@@ -475,15 +476,15 @@ namespace TCC.Parsing
 
         internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
         {
-            if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
-            InfoWindowViewModel.Instance.CurrentCharacter.ClaimedGuardianQuests = x.Claimed;
-            InfoWindowViewModel.Instance.CurrentCharacter.ClearedGuardianQuests = x.Cleared;
+            if (WindowManager.Dashboard.VM.CurrentCharacter == null) return;
+            WindowManager.Dashboard.VM.CurrentCharacter.ClaimedGuardianQuests = x.Claimed;
+            WindowManager.Dashboard.VM.CurrentCharacter.ClearedGuardianQuests = x.Cleared;
             //InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianQuests = x.MaxPoints;
         }
 
         internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
         {
-            InfoWindowViewModel.Instance.SetVanguard(x);
+            WindowManager.Dashboard.VM.SetVanguard(x);
         }
 
         internal static void HandleDungeonClears(S_DUNGEON_CLEAR_COUNT_LIST x)
@@ -491,8 +492,7 @@ namespace TCC.Parsing
             if (x.PlayerId != SessionManager.CurrentPlayer.PlayerId) return;
             foreach (var dg in x.DungeonClears)
             {
-                if (InfoWindowViewModel.Instance.SelectedCharacter != null)
-                    InfoWindowViewModel.Instance.SelectedCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
+                WindowManager.Dashboard.VM.CurrentCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
             }
         }
 
@@ -808,19 +808,18 @@ namespace TCC.Parsing
             if (!x.IsOpen) return;
             if (x.First && x.More) return;
             if (S_INVEN.Items == null) return;
-            if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
-            InfoWindowViewModel.Instance.CurrentCharacter.ClearGear();
+            if (WindowManager.Dashboard.VM.CurrentCharacter == null) return;
+            WindowManager.Dashboard.VM.CurrentCharacter.ClearGear();
             foreach (var tuple in S_INVEN.Items)
             {
-                if (InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece))
-                {
-                    var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
-                    //Console.WriteLine($"Item: {i}");
-                    InfoWindowViewModel.Instance.CurrentCharacter.Gear.Add(i);
-                }
+                if (!InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece)) continue;
+                var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
+                WindowManager.Dashboard.VM.CurrentCharacter.Gear.Add(i);
             }
-            InfoWindowViewModel.Instance.SelectCharacter(InfoWindowViewModel.Instance.SelectedCharacter);
-            InfoWindowViewModel.Instance.CurrentCharacter.ElleonMarks = S_INVEN.ElleonMarks;
+            WindowManager.Dashboard.VM.CurrentCharacter.ElleonMarks = S_INVEN.ElleonMarks;
+            WindowManager.Dashboard.VM.CurrentCharacter.DragonwingScales = S_INVEN.DragonwingScales;
+            WindowManager.Dashboard.VM.CurrentCharacter.PiecesOfDragonScroll= S_INVEN.PiecesOfDragonScroll;
+
             GroupWindowViewModel.Instance.UpdateMyGear();
             //88273 - 88285 L weapons
             //88286 - 88298 L armors
@@ -1011,10 +1010,10 @@ namespace TCC.Parsing
             switch (p.Guild)
             {
                 case NpcGuild.Vanguard:
-                    InfoWindowViewModel.Instance.CurrentCharacter.VanguardCredits = p.Credits;
+                    WindowManager.Dashboard.VM.CurrentCharacter.VanguardCredits = p.Credits;
                     break;
                 case NpcGuild.Guardian:
-                    InfoWindowViewModel.Instance.CurrentCharacter.GuardianCredits = p.Credits;
+                    WindowManager.Dashboard.VM.CurrentCharacter.GuardianCredits = p.Credits;
                     break;
                 default:
                     break;
@@ -1024,8 +1023,18 @@ namespace TCC.Parsing
         public static void HandleNpcGuildList(S_NPCGUILD_LIST p)
         {
             if (!p.UserId.IsMe()) return;
-            if (p.NpcGuildList.ContainsKey((int)NpcGuild.Vanguard)) InfoWindowViewModel.Instance.CurrentCharacter.VanguardCredits = p.NpcGuildList[(int)NpcGuild.Vanguard];
-            if (p.NpcGuildList.ContainsKey((int)NpcGuild.Guardian)) InfoWindowViewModel.Instance.CurrentCharacter.GuardianCredits = p.NpcGuildList[(int)NpcGuild.Guardian];
+            p.NpcGuildList.Keys.ToList().ForEach(k =>
+            {
+                switch (k)
+                {
+                    case (int)NpcGuild.Vanguard:
+                        WindowManager.Dashboard.VM.CurrentCharacter.VanguardCredits = p.NpcGuildList[k];
+                        break;
+                    case (int)NpcGuild.Guardian:
+                        WindowManager.Dashboard.VM.CurrentCharacter.GuardianCredits = p.NpcGuildList[k];
+                        break;
+                }
+            });
         }
 
         public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT obj)
