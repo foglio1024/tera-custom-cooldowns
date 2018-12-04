@@ -7,116 +7,113 @@ using TCC.Data;
 
 namespace TCC.Converters
 {
-    public class ChatChannelToColor : IValueConverter
+    public class ChatChannelToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var ch = (ChatChannel?)value ?? ChatChannel.Say;
-            string resName;
             switch (ch)
             {
                 case ChatChannel.Say:
-                    resName = "ChatSayBrush"; break;
+                    return R.Brushes.ChatSayBrush;
                 case ChatChannel.Party:
-                    resName = "ChatPartyBrush"; break;
+                    return R.Brushes.ChatPartyBrush;
                 case ChatChannel.Guild:
-                    resName = "ChatGuildBrush"; break;
+                    return R.Brushes.ChatGuildBrush;
                 case ChatChannel.Area:
-                    resName = "ChatAreaBrush"; break;
+                    return R.Brushes.ChatAreaBrush;
                 case ChatChannel.Trade:
-                    resName = "ChatTradeBrush"; break;
+                    return R.Brushes.ChatTradeBrush;
                 case ChatChannel.Greet:
-                    resName = "ChatGreetBrush"; break;
+                    return R.Brushes.ChatGreetBrush;
                 case ChatChannel.PartyNotice:
-                    resName = "ChatPartyNoticeBrush"; break;
+                    return R.Brushes.ChatPartyNoticeBrush;
                 case ChatChannel.RaidNotice:
-                    resName = "ChatRaidNoticeBrush"; break;
+                    return R.Brushes.ChatRaidNoticeBrush;
                 case ChatChannel.Emote:
-                    resName = "ChatEmoteBrush"; break;
+                    return R.Brushes.ChatEmoteBrush;
                 case ChatChannel.Global:
-                    resName = "ChatGlobalBrush"; break;
+                    return R.Brushes.ChatGlobalBrush;
                 case ChatChannel.Raid:
-                    resName = "ChatRaidBrush"; break;
+                    return R.Brushes.ChatRaidBrush;
                 case ChatChannel.Megaphone:
-                    resName = "ChatMegaphoneBrush"; break;
+                    return R.Brushes.ChatMegaphoneBrush;
                 case ChatChannel.GuildAdvertising:
-                    resName = "ChatGuildAdBrush"; break;
+                    return R.Brushes.ChatGuildAdBrush;
                 case ChatChannel.Private1:
                 case ChatChannel.Private2:
                 case ChatChannel.Private3:
                 case ChatChannel.Private4:
                 case ChatChannel.Private5:
                 case ChatChannel.Private6:
-                    resName = "ChatPrivateBrush"; break;
+                    return R.Brushes.ChatPrivateBrush;
                 case ChatChannel.Private7:
                 case ChatChannel.Private8:
-                    resName = "ChatProxyBrush"; break;
+                    return R.Brushes.ChatProxyBrush;
                 case ChatChannel.SentWhisper:
                 case ChatChannel.ReceivedWhisper:
-                    resName = "ChatWhisperBrush"; break;
+                    return R.Brushes.ChatWhisperBrush;
                 case ChatChannel.System:
-                    resName = "ChatSystemGenericBrush"; break;
+                    return R.Brushes.ChatSystemGenericBrush;
                 case ChatChannel.Notify:
-                    resName = "ChatSystemNotifyBrush"; break;
+                    return R.Brushes.ChatSystemNotifyBrush;
                 case ChatChannel.Event:
-                    resName = "ChatSystemEventBrush"; break;
+                    return R.Brushes.ChatSystemEventBrush;
                 case ChatChannel.Error:
-                    resName = "ChatSystemErrorBrush"; break;
+                    return R.Brushes.ChatSystemErrorBrush;
                 case ChatChannel.Group:
-                    resName = "ChatSystemGroupBrush"; break;
+                    return R.Brushes.ChatSystemGroupBrush;
                 case ChatChannel.GuildNotice:
-                    resName = "ChatGuildBrush"; break;
+                    return R.Brushes.ChatGuildBrush;
                 case ChatChannel.Deathmatch:
-                    resName = "ChatSystemDeathmatchBrush"; break;
+                    return R.Brushes.ChatSystemDeathmatchBrush;
                 case ChatChannel.ContractAlert:
-                    resName = "ChatSystemContractAlertBrush"; break;
+                    return R.Brushes.ChatSystemContractAlertBrush;
                 case ChatChannel.GroupAlerts:
-                    resName = "ChatSystemGroupAlertBrush"; break;
+                    return R.Brushes.ChatSystemGroupAlertBrush;
                 case ChatChannel.Loot:
-                    resName = "ChatSystemLootBrush"; break;
+                    return R.Brushes.ChatSystemLootBrush;
                 case ChatChannel.Exp:
-                    resName = "ChatSystemExpBrush"; break;
+                    return R.Brushes.ChatSystemExpBrush;
                 case ChatChannel.Money:
-                    resName = "ChatSystemMoneyBrush"; break;
+                    return R.Brushes.ChatSystemMoneyBrush;
                 case ChatChannel.TradeRedirect:
-                    resName = "ChatTradeBrush"; break;
+                    return R.Brushes.ChatTradeBrush;
                 //case ChatChannel.Enchant12:
                 //case ChatChannel.Enchant7:
                 //case ChatChannel.Enchant8:
                 case ChatChannel.Enchant:
-                    resName = "EnchantLowBrush"; break;
+                    return R.Brushes.EnchantLowBrush;
                 //case ChatChannel.Enchant9:
                 case ChatChannel.Laurel:
                 //case ChatChannel.Enchant15:
-                    resName = "EnchantHighBrush"; break;
+                    return R.Brushes.EnchantHighBrush;
                 case ChatChannel.RaidLeader:
-                    resName = "ChatRaidNoticeBrush"; break;
+                    return R.Brushes.ChatRaidNoticeBrush;
                 case ChatChannel.TCC:
-                    resName = "MainBrush"; break;
+                    return R.Brushes.MainBrush;
                 case ChatChannel.Bargain:
-                    resName = "ChatSystemBargainBrush"; break;
+                    return R.Brushes.ChatSystemBargainBrush;
                 case ChatChannel.Apply:
-                    resName = "ChatMegaphoneBrush"; break;
+                    return R.Brushes.ChatMegaphoneBrush;
                 case ChatChannel.Death:
                 case ChatChannel.Damage:
-                    resName = "HpBrush"; break;
+                    return R.Brushes.HpBrush;
                 case ChatChannel.Ress:
-                    resName = "GreenBrush"; break;
+                    return R.Brushes.GreenBrush;
                 case ChatChannel.Quest:
-                    resName = "ChatSystemQuestBrush"; break;
+                    return R.Brushes.ChatSystemQuestBrush;
                 case ChatChannel.Friend:
-                    resName = "ChatSystemFriendBrush"; break;
+                    return R.Brushes.ChatSystemFriendBrush;
                 case ChatChannel.Twitch:
-                    resName = "TwitchBrush"; break;
+                    return R.Brushes.TwitchBrush;
                 case ChatChannel.WorldBoss:
-                    resName = "ChatSystemWorldBossBrush"; break;
+                    return R.Brushes.ChatSystemWorldBossBrush;
                 case ChatChannel.Guardian:
-                    resName = "GuardianBrush"; break;
+                    return R.Brushes.GuardianBrush;
                 default:
-                    resName = "ChatSystemGenericBrush"; break;
+                    return R.Brushes.ChatSystemGenericBrush;
             }
-            return (SolidColorBrush)Application.Current.FindResource(resName);
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
