@@ -80,9 +80,6 @@ namespace TCC
 
             SplashScreen.SetText("Initializing packet processor...");
             PacketAnalyzer.Init();
-            TeraSniffer.Instance.NewConnection += TeraSniffer_OnNewConnection;
-            TeraSniffer.Instance.EndConnection += TeraSniffer_OnEndConnection;
-            TeraSniffer.Instance.Enabled = true;
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
             SplashScreen.SetText("Starting");
 
@@ -266,31 +263,6 @@ namespace TCC
 
             ////GroupWindowViewModel.Instance.SetRaid(true);
             //GroupWindowViewModel.Instance.SetNewLeader(1, "1");
-        }
-
-        private static void TeraSniffer_OnNewConnection(Server srv)
-        {
-            SessionManager.Server = srv;
-            WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-            ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
-            WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
-            Proxy.Proxy.ConnectToProxy();
-        }
-
-        private static void TeraSniffer_OnEndConnection()
-        {
-            ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
-            WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
-
-            GroupWindowViewModel.Instance.ClearAllAbnormalities();
-            SessionManager.CurrentPlayer.ClearAbnormalities();
-            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
-            EntityManager.ClearNPC();
-            SkillManager.Clear();
-            WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            Proxy.Proxy.CloseConnection();
-            SessionManager.Logged = false;
-            SessionManager.LoadingScreen = true;
         }
 
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
