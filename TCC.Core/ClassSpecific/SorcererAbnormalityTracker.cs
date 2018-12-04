@@ -18,8 +18,8 @@ namespace TCC.ClassSpecific
         //private const int IceArcaneFusionId = 502040;
 
         private static Skill _fireIceFusion;
-        private static Skill _fireArcaneFusion;
-        private static Skill _iceArcaneFusion;
+        //private static Skill _fireArcaneFusion;
+        //private static Skill _iceArcaneFusion;
 
         public SorcererAbnormalityTracker()
         {
