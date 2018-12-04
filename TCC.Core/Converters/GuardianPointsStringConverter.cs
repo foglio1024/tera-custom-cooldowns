@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    internal class GuardianPointsStringConverter : IValueConverter
+    public class GuardianPointsStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

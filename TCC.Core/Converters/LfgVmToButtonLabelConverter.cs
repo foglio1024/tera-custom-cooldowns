@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    internal class LfgVmToButtonLabelConverter : IMultiValueConverter
+    public class LfgVmToButtonLabelConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

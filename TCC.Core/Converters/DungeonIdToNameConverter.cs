@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    internal class DungeonIdToNameConverter : IValueConverter
+    public class DungeonIdToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

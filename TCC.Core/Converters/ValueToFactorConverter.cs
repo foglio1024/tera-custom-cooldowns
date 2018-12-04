@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    internal class ValueToFactorConverter : IValueConverter
+    public class ValueToFactorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

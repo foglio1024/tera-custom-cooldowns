@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace TCC.Converters
 {
-    internal class StringToFillConverter : IValueConverter
+    public class StringToFillConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

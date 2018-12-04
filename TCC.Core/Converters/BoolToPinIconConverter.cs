@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace TCC.Converters
 {
-    internal class BoolToSvgSwitchConverter : IValueConverter
+    public class BoolToSvgSwitchConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
