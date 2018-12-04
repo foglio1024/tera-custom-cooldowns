@@ -150,6 +150,7 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
+            S_INVEN.Reset();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
             if (Settings.Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);

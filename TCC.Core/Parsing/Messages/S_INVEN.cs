@@ -9,11 +9,19 @@ namespace TCC.Parsing.Messages
 {
     public class S_INVEN : ParsedMessage
     {
+        public static void Reset()
+        {
+            ElleonMarks = 0;
+            DragonwingScales = 0;
+            PiecesOfDragonScroll = 0;
+        }
         public static List<Tuple<uint, int, uint>> Items { get; private set; }
         public bool More { get; }
         public bool First { get; }
         public bool IsOpen { get; }
         public static uint ElleonMarks { get; set; }
+        public static uint DragonwingScales { get; set; }
+        public static uint PiecesOfDragonScroll { get; set; }
         public S_INVEN(TeraMessageReader reader) : base(reader)
         {
             //TODO
@@ -41,10 +49,18 @@ namespace TCC.Parsing.Messages
                     var slot = reader.ReadUInt32();
                     if (slot > 39)
                     {
-                        if (itemId == 151643)
+                        reader.Skip(4);
+                        switch (itemId)
                         {
-                            reader.Skip(4);
-                            ElleonMarks = reader.ReadUInt32();
+                            case 151643:
+                                ElleonMarks = reader.ReadUInt32();
+                                break;
+                            case 45474:
+                                DragonwingScales = reader.ReadUInt32();
+                                break;
+                            case 45482:
+                                PiecesOfDragonScroll = reader.ReadUInt32();
+                                break;
                         }
                         reader.BaseStream.Position = next - 4;
                         continue;
@@ -62,6 +78,7 @@ namespace TCC.Parsing.Messages
             {
                 // ignored
             }
+
         }
     }
 }
