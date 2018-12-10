@@ -26,6 +26,7 @@ namespace TCC.Data.Pc
         private uint _dragonwingScales;
         private uint _piecesOfDragonScroll;
         private int _itemLevel;
+        private int _level;
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -56,6 +57,16 @@ namespace TCC.Data.Pc
                 NPC(nameof(Laurel));
             }
         }
+        public int Level
+        {
+            get => _level;
+            set
+            {
+                if (_level == value) return;
+                _level = value;
+                NPC();
+            }
+        }
         public int VanguardDailiesDone
         {
             get => _vanguardDailiesDone;
@@ -70,23 +81,15 @@ namespace TCC.Data.Pc
         public string GuildName { get; set; } = "";
         public void UpdateDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
-            foreach (var keyVal in dungeonCooldowns)
+            Dungeons.ToSyncArray().ToList().ForEach(dung =>
             {
-                if (!SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(keyVal.Key)) continue;
-                var dg = Dungeons.FirstOrDefault(x => x.Id == keyVal.Key);
-                if (dg != null)
-                {
-                    dg.Entries = keyVal.Value;
-                }
-                //else
-                //{
-                //    Dungeons.Add(new DungeonCooldown(keyVal.Key, keyVal.Value, _dispatcher));
-                //}
-            }
+                if (dungeonCooldowns.ContainsKey(dung.Dungeon.Id))
+                    dung.Entries = dungeonCooldowns[dung.Dungeon.Id];
+            });
         }
-        public void SetDungeonTotalRuns(uint dgId, int runs)
+        public void SetDungeonClears(uint dgId, int runs)
         {
-            var dg = Dungeons.ToSyncArray().FirstOrDefault(d => d.Id == dgId);
+            var dg = Dungeons.ToSyncArray().FirstOrDefault(d => d.Dungeon.Id == dgId);
             if (dg != null) dg.Clears = runs;
         }
         public int VanguardWeekliesDone
@@ -148,8 +151,36 @@ namespace TCC.Data.Pc
         public double VanguardDailyCompletion => VanguardDailiesDone / (double)SessionManager.MaxDaily;
         public double GuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
 
+        public int ItemLevel  // 412 431 - 439 446 453 456
+        {
+            get => _itemLevel;
+            set
+            {
+                if (_itemLevel == value) return;
+                _itemLevel = value;
+                NPC();
+                NPC(nameof(ItemLevelTier));
+            }
+        }
+        public ItemLevelTier ItemLevelTier
+        {
+            get
+            {
+                var tiers = Enum.GetValues(typeof(ItemLevelTier)).Cast<ItemLevelTier>().ToList();
+                var ret = ItemLevelTier.Tier0;
+                foreach (var t in tiers)
+                {
+                    if (_itemLevel >= (int)t) ret = t;
+                }
+
+                return ret;
+            }
+        }
+
+
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
-        public ICollectionView VisibleDungeons { get; set; }
+        public List<DungeonCooldown> VisibleDungeons => Dungeons.Where(x => x.Dungeon.Show).ToList();
+        public ICollectionViewLiveShaping VisibleDungeonsView { get; set; }
         public SynchronizedObservableCollection<GearItem> Gear { get; set; }
 
         public GearItem Weapon => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0, GearTier.Low, GearPiece.Weapon, 0, 0);
@@ -231,16 +262,6 @@ namespace TCC.Data.Pc
         public float DragonwingScalesFactor => DragonwingScales > 10 ? 1 : DragonwingScales / 10f;
         public float PiecesOfDragonScrollFactor => PiecesOfDragonScroll > 40 ? 1 : PiecesOfDragonScroll / 40f;
 
-        public int ItemLevel  // 412 431 - 439 446 453 456
-        {
-            get => _itemLevel;
-            set
-            {
-                if (_itemLevel == value) return;
-                _itemLevel = value;
-                NPC();
-            }
-        }
 
         public Character()
         {
@@ -251,15 +272,16 @@ namespace TCC.Data.Pc
             VanguardWeekliesDone = 0;
             Laurel = Laurel.None;
             MaxGuardianQuests = SessionManager.MaxGuardianQuests;
-            foreach (var dg in SessionManager.DungeonDatabase.DungeonDefs)
+            foreach (var dg in SessionManager.DungeonDatabase.Dungeons.Values)
             {
-                Dungeons.Add(new DungeonCooldown(dg.Key, Dispatcher));
+                Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
             }
-            VisibleDungeons = new CollectionViewSource() { Source = Dungeons }.View;
-            VisibleDungeons.Filter = dc => SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(((DungeonCooldown)dc).Id) &&
-                                           SessionManager.DungeonDatabase.DungeonDefs[((DungeonCooldown)dc).Id].Show;
-            VisibleDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
-
+            //VisibleDungeonsView = new CollectionViewSource() { Source = Dungeons }.View;
+            //VisibleDungeonsView.Filter = dc => ((DungeonCooldown) dc).Dungeon.Show;
+            //VisibleDungeonsView.SortDescriptions.Add(new SortDescription(nameof(DungeonCooldown.RequiredIlvl), ListSortDirection.Ascending));
+            VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
+                new[]
+                    {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
             Jewels = new CollectionViewSource() { Source = Gear }.View;
             Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
             Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
@@ -282,10 +304,12 @@ namespace TCC.Data.Pc
 
         internal void EngageDungeon(uint dgId)
         {
-            var dg = Dungeons.FirstOrDefault(x => x.Id == dgId);
+            var dg = Dungeons.FirstOrDefault(x => x.Dungeon.Id == dgId);
             if (dg != null)
             {
-                dg.Entries = dg.Entries == 0 ? Convert.ToInt16(dg.GetRuns() - 1) : Convert.ToInt16(dg.Entries - 1);
+                dg.Entries = dg.Entries == 0
+                    ? dg.Runs - 1
+                    : dg.Entries - 1;
             }
         }
 
