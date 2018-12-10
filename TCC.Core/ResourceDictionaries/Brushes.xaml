@@ -53,6 +53,7 @@
                                                                                                                                
     <SolidColorBrush x:Key="AssaultStanceBrush"             Color="{StaticResource AssaultStanceColor}"                        />
     <SolidColorBrush x:Key="AssaultStanceBrushLight"        Color="{StaticResource AssaultStanceColorLight}"                   />
+    <SolidColorBrush x:Key="AssaultStanceBrushDark"         Color="{StaticResource AssaultStanceColorDark}"                    />
     <SolidColorBrush x:Key="DefensiveStanceBrush"           Color="{StaticResource DefensiveStanceColor}"                      />
     <SolidColorBrush x:Key="DefensiveStanceBrushLight"      Color="{StaticResource DefensiveStanceColorLight}"                 />
     <SolidColorBrush x:Key="DefensiveStanceBrushDark"       Color="{StaticResource DefensiveStanceColorDark}"                  />
@@ -67,7 +68,7 @@
     <SolidColorBrush x:Key="AquadraxBrush"                  Color="{StaticResource AquadraxColor}"                             />
     <SolidColorBrush x:Key="UmbradraxBrush"                 Color="{StaticResource UmbradraxColor}"                            />
                                                                                                                                
-    <SolidColorBrush x:Key="TierSoloDungeonBrush"           Color="{StaticResource TierSoloDungeonColor}"                      />
+    <SolidColorBrush x:Key="Tier1DungeonBrush"              Color="{StaticResource Tier1DungeonColor}"                         />
     <SolidColorBrush x:Key="Tier2DungeonBrush"              Color="{StaticResource Tier2DungeonColor}"                         />
     <SolidColorBrush x:Key="Tier3DungeonBrush"              Color="{StaticResource Tier3DungeonColor}"                         />
     <SolidColorBrush x:Key="Tier4DungeonBrush"              Color="{StaticResource Tier4DungeonColor}"                         />

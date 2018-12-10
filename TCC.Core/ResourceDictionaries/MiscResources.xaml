@@ -31,7 +31,6 @@
     <FontFamily x:Key="ArialMonoBold">pack://application:,,,/resources/fonts/#Arial Monospaced MT</FontFamily>
     <FontFamily x:Key="NotoSansMed">pack://application:,,,/resources/fonts/#Noto Sans Med</FontFamily>
 
-
     <ImageSource x:Key="DefaultGuildLogo">pack://application:,,,/resources/images/default_guild_logo.png</ImageSource>
 
     <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />

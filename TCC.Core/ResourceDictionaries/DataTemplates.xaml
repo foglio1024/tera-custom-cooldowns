@@ -11,7 +11,9 @@
                     xmlns:vm="clr-namespace:TCC.ViewModels"
                     xmlns:abnormalities1="clr-namespace:TCC.Data.Abnormalities"
                     xmlns:skills1="clr-namespace:TCC.Data.Skills"
-                    xmlns:chat="clr-namespace:TCC.Data.Chat">
+                    xmlns:chat="clr-namespace:TCC.Data.Chat"
+                    xmlns:pc="clr-namespace:TCC.Data.Pc"
+                    xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard">
     <DataTemplate x:Key="RoundNormalSkill">
         <skills:RoundSkillControl />
     </DataTemplate>
@@ -493,5 +495,177 @@
             </Button>
         </Grid>
     </DataTemplate>
+
+    <DataTemplate x:Key="NameClassCharDataTemplate" DataType="pc:Character">
+        <Grid HorizontalAlignment="Stretch" ShowGridLines="False" Background="Transparent" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle 
+                Fill="{Binding Class, Converter={StaticResource ClassToFill}}"  
+                       VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                         StrokeThickness="0" Width="4" Margin="0 -1 0 0">
+                <Rectangle.Style>
+                    <Style TargetType="Shape">
+                        <Setter Property="Opacity" Value=".3"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoggedIn}" Value="True">
+                                <Setter Property="Opacity" Value="1"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                       Grid.ColumnSpan="3" StrokeThickness="0" Margin="0 -1 0 0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0 .7" EndPoint="1 3" >
+                        <GradientStop Offset=".3"  x:Name="StartGradient" Color="White"/>
+                                      <!--Color="{Binding Class, Converter={StaticResource ClassToFill}}"-->
+                        <GradientStop Offset=".9" Color="Transparent" 
+                                      />
+                                      <!--Color="{Binding Class,  Converter={StaticResource ClassToTransparentFill}}"-->
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+                <Rectangle.Style>
+                    <Style TargetType="Shape">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoggedIn}" Value="True">
+                                <Setter Property="Opacity" Value=".08"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+            <Path Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Width="20" Height="20" Margin="10 4 5 4" VerticalAlignment="Center"
+                      HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Level}"
+                       Grid.Column="1"
+                       FontSize="9"
+                       Foreground="#5fff"
+                       TextAlignment="Center"
+                       VerticalAlignment="Top">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="0" Y="2"></TranslateTransform>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Text="{Binding ItemLevel}" 
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       FontSize="9"
+                       Width="15"
+                       Foreground="{Binding ItemLevelTier, Converter={StaticResource IlvlTierToColor}}"
+
+                       TextAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="0" Y="4"></TranslateTransform>
+                </TextBlock.RenderTransform>
+
+            </TextBlock>
+            <TextBlock Text="{Binding Name}" 
+                           Grid.Column="2" Margin="4 0 0 0" 
+                           Style="{StaticResource DefaultTextStyle}"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Thin"
+                           Foreground="#8fff"
+                           TextTrimming="CharacterEllipsis"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="NameClassCharDataTemplateWithVM" DataType="dashboard:CharacterViewModel">
+        <Grid HorizontalAlignment="Stretch" ShowGridLines="False" Background="Transparent" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="{Binding Character.Class, Converter={StaticResource ClassToFill}}"  
+                       VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                         StrokeThickness="0" Width="4" Margin="0 -1 0 0">
+                <Rectangle.Style>
+                    <Style TargetType="Shape">
+                        <Setter Property="Opacity" Value=".3"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Character.IsLoggedIn}" Value="True">
+                                <Setter Property="Opacity" Value="1"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                       Grid.ColumnSpan="3" StrokeThickness="0" Margin="0 -1 0 0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0 .7" EndPoint="1 3" >
+                        <GradientStop Offset=".3"  x:Name="StartGradient" Color="White"/>
+                        <!--Color="{Binding Class, Converter={StaticResource ClassToFill}}"-->
+                        <GradientStop Offset=".9" Color="Transparent" 
+                                      />
+                        <!--Color="{Binding Class,  Converter={StaticResource ClassToTransparentFill}}"-->
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+                <Rectangle.Style>
+                    <Style TargetType="Shape">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Character.IsLoggedIn}" Value="True">
+                                <Setter Property="Opacity" Value=".08"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="#2ddf" 
+                       Grid.ColumnSpan="3" StrokeThickness="0" Margin="0 -1 0 0">
+                <Rectangle.Style>
+                    <Style TargetType="Shape">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Hilight}" Value="True">
+                                <Setter Property="Opacity" Value=".2"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+            <Path Data="{Binding Character.Class, Converter={StaticResource ClassToSvg}}" Width="20" Height="20" Margin="10 4 5 4" VerticalAlignment="Center"
+                      HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Character.Level}"
+                       Grid.Column="1"
+                       FontSize="9"
+                       Foreground="#5fff"
+                       TextAlignment="Center"
+                       VerticalAlignment="Top">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="0" Y="2"></TranslateTransform>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Text="{Binding Character.ItemLevel}" 
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       FontSize="9"
+                       Width="15"
+                       Foreground="{Binding Character.ItemLevelTier, Converter={StaticResource IlvlTierToColor}}"
+
+                       TextAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="0" Y="4"></TranslateTransform>
+                </TextBlock.RenderTransform>
+
+            </TextBlock>
+            <TextBlock Text="{Binding Character.Name}" 
+                           Grid.Column="2" Margin="4 0 0 0" 
+                           Style="{StaticResource DefaultTextStyle}"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Thin"
+                           Foreground="#8fff"
+                           TextTrimming="CharacterEllipsis"/>
+        </Grid>
+    </DataTemplate>
+
 
 </ResourceDictionary>

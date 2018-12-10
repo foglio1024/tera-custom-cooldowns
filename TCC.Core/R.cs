@@ -76,6 +76,7 @@ namespace TCC.R
 		public static Geometry SvgWarning => ((Geometry)App.Current.FindResource("SvgWarning"));
 		public static Geometry SvgAwaken => ((Geometry)App.Current.FindResource("SvgAwaken"));
 		public static Geometry SvgCopy => ((Geometry)App.Current.FindResource("SvgCopy"));
+		public static Geometry SvgAddCircle => ((Geometry)App.Current.FindResource("SvgAddCircle"));
 		public static Geometry SvgClassGunner => ((Geometry)App.Current.FindResource("SvgClassGunner"));
 		public static Geometry SvgClassBrawler => ((Geometry)App.Current.FindResource("SvgClassBrawler"));
 		public static Geometry SvgClassBerserker => ((Geometry)App.Current.FindResource("SvgClassBerserker"));
@@ -144,6 +145,7 @@ namespace TCC.R
 		public static Color CopperColor => ((Color)App.Current.FindResource("CopperColor"));
 		public static Color AssaultStanceColor => ((Color)App.Current.FindResource("AssaultStanceColor"));
 		public static Color AssaultStanceColorLight => ((Color)App.Current.FindResource("AssaultStanceColorLight"));
+		public static Color AssaultStanceColorDark => ((Color)App.Current.FindResource("AssaultStanceColorDark"));
 		public static Color DefensiveStanceColor => ((Color)App.Current.FindResource("DefensiveStanceColor"));
 		public static Color DefensiveStanceColorLight => ((Color)App.Current.FindResource("DefensiveStanceColorLight"));
 		public static Color DefensiveStanceColorDark => ((Color)App.Current.FindResource("DefensiveStanceColorDark"));
@@ -155,7 +157,7 @@ namespace TCC.R
 		public static Color TerradraxColor => ((Color)App.Current.FindResource("TerradraxColor"));
 		public static Color AquadraxColor => ((Color)App.Current.FindResource("AquadraxColor"));
 		public static Color UmbradraxColor => ((Color)App.Current.FindResource("UmbradraxColor"));
-		public static Color TierSoloDungeonColor => ((Color)App.Current.FindResource("TierSoloDungeonColor"));
+		public static Color Tier1DungeonColor => ((Color)App.Current.FindResource("Tier1DungeonColor"));
 		public static Color Tier2DungeonColor => ((Color)App.Current.FindResource("Tier2DungeonColor"));
 		public static Color Tier3DungeonColor => ((Color)App.Current.FindResource("Tier3DungeonColor"));
 		public static Color Tier4DungeonColor => ((Color)App.Current.FindResource("Tier4DungeonColor"));
@@ -249,6 +251,7 @@ namespace TCC.R
 		public static SolidColorBrush CopperBrush => ((SolidColorBrush)App.Current.FindResource("CopperBrush"));
 		public static SolidColorBrush AssaultStanceBrush => ((SolidColorBrush)App.Current.FindResource("AssaultStanceBrush"));
 		public static SolidColorBrush AssaultStanceBrushLight => ((SolidColorBrush)App.Current.FindResource("AssaultStanceBrushLight"));
+		public static SolidColorBrush AssaultStanceBrushDark => ((SolidColorBrush)App.Current.FindResource("AssaultStanceBrushDark"));
 		public static SolidColorBrush DefensiveStanceBrush => ((SolidColorBrush)App.Current.FindResource("DefensiveStanceBrush"));
 		public static SolidColorBrush DefensiveStanceBrushLight => ((SolidColorBrush)App.Current.FindResource("DefensiveStanceBrushLight"));
 		public static SolidColorBrush DefensiveStanceBrushDark => ((SolidColorBrush)App.Current.FindResource("DefensiveStanceBrushDark"));
@@ -260,7 +263,7 @@ namespace TCC.R
 		public static SolidColorBrush TerradraxBrush => ((SolidColorBrush)App.Current.FindResource("TerradraxBrush"));
 		public static SolidColorBrush AquadraxBrush => ((SolidColorBrush)App.Current.FindResource("AquadraxBrush"));
 		public static SolidColorBrush UmbradraxBrush => ((SolidColorBrush)App.Current.FindResource("UmbradraxBrush"));
-		public static SolidColorBrush TierSoloDungeonBrush => ((SolidColorBrush)App.Current.FindResource("TierSoloDungeonBrush"));
+		public static SolidColorBrush Tier1DungeonBrush => ((SolidColorBrush)App.Current.FindResource("Tier1DungeonBrush"));
 		public static SolidColorBrush Tier2DungeonBrush => ((SolidColorBrush)App.Current.FindResource("Tier2DungeonBrush"));
 		public static SolidColorBrush Tier3DungeonBrush => ((SolidColorBrush)App.Current.FindResource("Tier3DungeonBrush"));
 		public static SolidColorBrush Tier4DungeonBrush => ((SolidColorBrush)App.Current.FindResource("Tier4DungeonBrush"));
@@ -377,18 +380,19 @@ namespace TCC.R
 		public static GroupSizeToTemplateConverter GroupSizeToTemplate => ((GroupSizeToTemplateConverter)App.Current.FindResource("GroupSizeToTemplate"));
 		public static RaidToColorConverter RaidToColor => ((RaidToColorConverter)App.Current.FindResource("RaidToColor"));
 		public static ValueConverterGroup ClassToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("ClassToTransparentFill"));
+		public static ValueConverterGroup IlvlTierToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IlvlTierToTransparentFill"));
 		public static ShieldStatusColorConverter ShieldStatusColor => ((ShieldStatusColorConverter)App.Current.FindResource("ShieldStatusColor"));
 		public static ShieldStatusToVisibilityConverter ShieldStatusToVisibility => ((ShieldStatusToVisibilityConverter)App.Current.FindResource("ShieldStatusToVisibility"));
 		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
 		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
-		public static DungeonIdToNameConverter DungeonIdToName => ((DungeonIdToNameConverter)App.Current.FindResource("DungeonIdToName"));
-		public static DungeonIdToStarsConverter DungeonIdToStars => ((DungeonIdToStarsConverter)App.Current.FindResource("DungeonIdToStars"));
-		public static DungeonIdToTierColorConverter DungeonIdToTierColor => ((DungeonIdToTierColorConverter)App.Current.FindResource("DungeonIdToTierColor"));
 		public static StringToFillConverter StringToFill => ((StringToFillConverter)App.Current.FindResource("StringToFill"));
 		public static GuardianPointsStringConverter GuardianPointsStringConverter => ((GuardianPointsStringConverter)App.Current.FindResource("GuardianPointsStringConverter"));
 		public static LfgVmToButtonLabelConverter LfgVmToButtonLabel => ((LfgVmToButtonLabelConverter)App.Current.FindResource("LfgVmToButtonLabel"));
 		public static ClassToNameConverter ClassToName => ((ClassToNameConverter)App.Current.FindResource("ClassToName"));
 		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
+		public static ItemLevelTierToColorConverter IlvlTierToColor => ((ItemLevelTierToColorConverter)App.Current.FindResource("IlvlTierToColor"));
+		public static EntriesToColor EntriesToColor => ((EntriesToColor)App.Current.FindResource("EntriesToColor"));
+		public static DungeonImageConverter DungeonImageConverter => ((DungeonImageConverter)App.Current.FindResource("DungeonImageConverter"));
 	}
 	public static class DragablzMaterialDesign
 	{
@@ -432,10 +436,13 @@ namespace TCC.R
 		public static Style SettingsButton => ((Style)App.Current.FindResource("SettingsButton"));
 		public static Style ScrollThumbs => ((Style)App.Current.FindResource("ScrollThumbs"));
 		public static Style NormalScrollBar => ((Style)App.Current.FindResource("NormalScrollBar"));
+		public static Style TempScrollViewerStyle => ((Style)App.Current.FindResource("TempScrollViewerStyle"));
 		public static Style ChatTabControlStyle => ((Style)App.Current.FindResource("ChatTabControlStyle"));
 		public static Style ChatDragableTabItemStyle => ((Style)App.Current.FindResource("ChatDragableTabItemStyle"));
 		public static Style ChatTabablzControlStyle => ((Style)App.Current.FindResource("ChatTabablzControlStyle"));
 		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
+		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
+		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
 		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
 		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
 		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
@@ -494,6 +501,8 @@ namespace TCC.R
 		public static DataTemplate TabSettingsTemplate => ((DataTemplate)App.Current.FindResource("TabSettingsTemplate"));
 		public static DataTemplate SimpleChatChannelTemplate => ((DataTemplate)App.Current.FindResource("SimpleChatChannelTemplate"));
 		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
+		public static DataTemplate NameClassCharDataTemplate => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplate"));
+		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
 	}
 	public static class TemplateSelectors
 	{

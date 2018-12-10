@@ -52,19 +52,27 @@
         <c:ClassToFillConverter/>
         <c:ColorToTransparentConverter/>
     </c:ValueConverterGroup>
+    <c:ValueConverterGroup x:Key="IlvlTierToTransparentFill">
+        <c:ItemLevelTierToColorConverter/>
+        <c:ColorToTransparentConverter/>
+    </c:ValueConverterGroup>
 
     <c:ShieldStatusColorConverter x:Key="ShieldStatusColor"/>
     <c:ShieldStatusToVisibilityConverter x:Key="ShieldStatusToVisibility"/>
     <c:FactorToAngleConverter x:Key="FactorToAngle"/>
     <c:ValueToFactorConverter x:Key="ValueToFactor"/>
-    <c:DungeonIdToNameConverter x:Key="DungeonIdToName"/>
+    <!--<c:DungeonIdToNameConverter x:Key="DungeonIdToName"/>
     <c:DungeonIdToStarsConverter x:Key="DungeonIdToStars"/>
-    <c:DungeonIdToTierColorConverter x:Key="DungeonIdToTierColor"/>
+    <c:DungeonIdToTierColorConverter x:Key="DungeonIdToTierColor"/>-->
     <c:StringToFillConverter x:Key="StringToFill"/>
     <c:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
     <c:LfgVmToButtonLabelConverter x:Key="LfgVmToButtonLabel"/>
     <c:ClassToNameConverter x:Key="ClassToName" />
 
     <c:RoundedClipConverter x:Key="RoundedClipConverter" />
+
+    <c:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />
+    <c:EntriesToColor x:Key="EntriesToColor" />
+    <c:DungeonImageConverter x:Key="DungeonImageConverter" />
 
 </ResourceDictionary>

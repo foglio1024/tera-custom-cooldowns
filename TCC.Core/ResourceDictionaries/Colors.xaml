@@ -53,6 +53,7 @@
                                                            
     <Color x:Key="AssaultStanceColor">           #FF264B   </Color>
     <Color x:Key="AssaultStanceColorLight">      #FFDDE3   </Color>
+    <Color x:Key="AssaultStanceColorDark">       #B51933   </Color>
     <Color x:Key="DefensiveStanceColor">         #2381a3   </Color>
     <Color x:Key="DefensiveStanceColorLight">    #D6F4FF   </Color>
     <Color x:Key="DefensiveStanceColorDark">     #1a617a   </Color>
@@ -67,7 +68,7 @@
     <Color x:Key="AquadraxColor">                #DFF7FF   </Color>
     <Color x:Key="UmbradraxColor">               #AA1E1E   </Color>
                                                            
-    <Color x:Key="TierSoloDungeonColor">         #88d9f7   </Color>
+    <Color x:Key="Tier1DungeonColor">            #88d9f7   </Color>
     <Color x:Key="Tier2DungeonColor">            #3bdb83   </Color>
     <Color x:Key="Tier3DungeonColor">            #fcb06f   </Color>
     <Color x:Key="Tier4DungeonColor">            #fc946f   </Color>
