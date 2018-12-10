@@ -8,18 +8,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.Data.Chat;
 using TCC.Parsing;
-using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Sniffing;
-using TCC.TeraCommon;
-using TCC.TeraCommon.Game;
-using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -30,16 +26,13 @@ namespace TCC
     public partial class App
     {
         public const bool Debug = false;
-        public static string AppVersion;
+        public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
-        public static string BasePath = Path.GetDirectoryName(typeof(App).Assembly.Location);
-        public static string DataPath = Path.Combine(BasePath, "resources", "data");
-
-        // ReSharper disable once InconsistentNaming
-        //public const string ThankYou_mEME =
-        //    "Due to the recent events regarding EME's DMCA takedowns of proxy related repositories, TCC will stop to be supported for NA, meaning that all data required to make it work after patch won't be released for this region. Sorry for this and thanks for all your support.";
+        public static string BasePath { get; }= Path.GetDirectoryName(typeof(App).Assembly.Location);
+        public static string DataPath { get; } = Path.Combine(BasePath, "resources", "data");
         public static bool Loading { get; private set; }
+        public static Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
@@ -74,18 +67,14 @@ namespace TCC
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
-
-            //SplashScreen.SetText("Initializing Twitch connector...");
-            //TwitchConnector.Instance.Init();
-
+            //debug
+            //WindowManager.Dashboard.ShowWindow();
+            //
             SplashScreen.SetText("Initializing packet processor...");
             PacketAnalyzer.Init();
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
             SplashScreen.SetText("Starting");
 
-            SessionManager.CurrentPlayer.Class = Class.None;
-            SessionManager.CurrentPlayer.Name = "player";
-            SessionManager.CurrentPlayer.EntityId = 10;
             TimeManager.Instance.SetServerTimeZone(Settings.Settings.LastRegion);
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
@@ -94,11 +83,14 @@ namespace TCC
 
             //if (Settings.Settings.LastRegion == "NA" || Settings.Settings.LastRegion == "")
             //    WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
+#pragma warning disable 0162
             if (Debug) DebugStuff();
+#pragma warning restore 0162
             Loading = false;
+           // new DebugWindow().Show();
+            
         }
 
-        private static System.Timers.Timer _t;
         private static void DebugStuff()
         {
             //var broken =
