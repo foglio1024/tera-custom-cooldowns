@@ -262,7 +262,7 @@
             <!--Death indicator -->
             <Grid x:Name="DeathBorderGrid" RenderTransformOrigin=".5 .5">
                 <Border x:Name="DeathBorder" 
-                Visibility="{Binding Alive, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=True}"
+                Visibility="{Binding Alive, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
                 Background="#600"
                 BorderBrush="Red"
                 BorderThickness="3" 
