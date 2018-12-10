@@ -15,9 +15,6 @@
                         <Path Data="{Binding Piece, Converter={StaticResource PieceToPath}}" Height="18" Width="22"  Stretch="Uniform" Fill="#5fff" Margin="0,0,8,0"/>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <!--<TextBlock Foreground="{Binding Tier, Converter={StaticResource GearLevelToColor}}" FontWeight="DemiBold" FontSize="14" Margin="0,0,4,0" Visibility="{Binding IsJewel, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=True}">
-                                    <Run Text="+"/><Run Text="{Binding Enchant, Mode=OneWay}"/>
-                                    </TextBlock>-->
                                 <TextBlock Foreground="White" >
                                     <Run Text="{Binding Name, Mode=OneWay}" FontWeight="DemiBold" FontSize="14"/>
                                 </TextBlock>
@@ -112,95 +109,3 @@
         </Grid>
 </UserControl>
 
-<!--<Grid ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" ToolTip="{StaticResource tooltip}" >
-    <Grid.RowDefinitions>
-        <RowDefinition/>
-        <RowDefinition/>
-    </Grid.RowDefinitions>
-    <local:Arc Width="68" Height="68" Stroke="White" Effect="{StaticResource FadedDropShadow}" 
-                   StrokeThickness="10" EndAngle="135" StartAngle="45" >
-        <local:Arc.CacheMode>
-            <BitmapCache/>
-        </local:Arc.CacheMode>
-    </local:Arc>
-    <local:Arc Width="68" Height="68" Stroke="{StaticResource MpBrush}"   StrokeThickness="10" RenderTransformOrigin=".5,.5" Opacity=".7"
-                   EndAngle="{Binding ExperienceFactor, Converter={StaticResource FactorToAngle}, ConverterParameter=4}">
-        <local:Arc.RenderTransform>
-            <TransformGroup>
-                <RotateTransform Angle="45"></RotateTransform>
-                <ScaleTransform ScaleY="-1"></ScaleTransform>
-            </TransformGroup>
-        </local:Arc.RenderTransform>
-        <local:Arc.CacheMode>
-            <BitmapCache/>
-        </local:Arc.CacheMode>
-
-    </local:Arc>
-
-    <local:Arc Width="60" Height="60" Stroke="White" StrokeThickness="30"  StartAngle="-159" EndAngle="160" Effect="{StaticResource FadedDropShadow}" >
-        <local:Arc.CacheMode>
-            <BitmapCache/>
-        </local:Arc.CacheMode>
-
-    </local:Arc>
-
-    <Grid RenderTransformOrigin=".5,.5">
-        <local:Arc Width="60" Height="60" StrokeThickness="20" x:Name="MainArc" Margin="-1,0,0,0"
-                       Stroke="{Binding Tier, Converter={StaticResource GearLevelToColor}}"
-                       EndAngle="0" 
-            />
-
-
-        --><!--EndAngle="{Binding LevelFactor, Converter={StaticResource FactorToAngle}}"--><!--
-
-        <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="58" EndAngle="60" Width="58" Height="58">
-            <local:Arc.CacheMode>
-                <BitmapCache/>
-            </local:Arc.CacheMode>
-
-        </local:Arc>
-        <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="146" EndAngle="148" Width="58" Height="58" >
-            <local:Arc.CacheMode>
-                <BitmapCache/>
-            </local:Arc.CacheMode>
-
-        </local:Arc>
-        <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="234" EndAngle="236" Width="58" Height="58" >
-            <local:Arc.CacheMode>
-                <BitmapCache/>
-            </local:Arc.CacheMode>
-
-        </local:Arc>
-
-        <Grid.RenderTransform>
-            <RotateTransform Angle="198.5"></RotateTransform>
-        </Grid.RenderTransform>
-    </Grid>
-    <Border Width="22" Height="22" Background="White" BorderBrush="#1555" Effect="{StaticResource FadedDropShadow}" CornerRadius="11" VerticalAlignment="Bottom" 
-                Margin="1,0,0,-4" Visibility="{Binding IsJewel, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=True}"
-                HorizontalAlignment="Center">
-        <TextBlock Text="{Binding Enchant}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-3"
-                       Foreground="{Binding Tier, Converter={StaticResource GearLevelToColor}}" FontWeight="DemiBold"></TextBlock>
-        <Border.CacheMode>
-            <BitmapCache/>
-        </Border.CacheMode>
-
-    </Border>
-
-
-    <Ellipse  Width="40" Height="40" Fill="White" Stroke="#0000" StrokeThickness="1" Effect="{StaticResource FadedDropShadow}">
-        <Ellipse.CacheMode>
-            <BitmapCache/>
-        </Ellipse.CacheMode>
-    </Ellipse>
-
-    <Path Data="{Binding Piece, Converter={StaticResource PieceToPath}}" Height="24" 
-              Width="24"  Stretch="Uniform" Fill="#4000">
-        <Path.CacheMode>
-            <BitmapCache />
-        </Path.CacheMode>
-    </Path>
-
-    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Row="1" HorizontalAlignment="Center" TextAlignment="Center" 
-                   FontSize="10" Foreground="#9000" MaxWidth="75" Margin="0,3"/>
-</Grid>-->

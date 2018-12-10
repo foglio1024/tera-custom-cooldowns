@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" Opacity="1" >
+             xmlns:data="clr-namespace:TCC.Data"
+             mc:Ignorable="d" Loaded="UserControl_Loaded" Opacity="1" d:DataContext="{d:DesignInstance data:DungeonCooldown}">
     <Border  Margin="2" Padding="0" CornerRadius="2" Width="Auto" Height="Auto" x:Name="RootBorder">
         <Grid >
             <Grid.RowDefinitions>
@@ -31,7 +32,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Border>
-            <Border Height="26" Width="26" Effect="{StaticResource DropShadow}" Background="{Binding Id, Converter={StaticResource DungeonIdToTierColor}}" Padding="0" CornerRadius="15" 
+            <Border Height="26" Width="26" Effect="{StaticResource DropShadow}" Background="{Binding Dungeon.RequiredIlvl, Converter={StaticResource RequiredIlvlToColor}}" Padding="0" CornerRadius="15" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-3,-3,0,0" Grid.Column="0" x:Name="EntriesBubble" RenderTransformOrigin=".5,.5">
                 <Grid Opacity="1">
                     <TextBlock Text="{Binding Entries}" FontWeight="Normal" HorizontalAlignment="Center" 
@@ -42,7 +43,7 @@
                 </Border.RenderTransform>
             </Border>
             <TextBlock Grid.Column="0" Foreground="#afff"  VerticalAlignment="Bottom" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
-                                   FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Id, Converter={StaticResource DungeonIdToName},ConverterParameter=False}"></TextBlock>
+                                   FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Dungeon.Name}"></TextBlock>
         </Grid>
         <Border.RenderTransform>
             <TranslateTransform Y="0"/>
