@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
@@ -119,16 +120,25 @@ namespace TCC.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if(((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
-            else if(((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
-            else if(((Button)sender).Content.ToString() == "None") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if(((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = 0;
+            if (((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = 0;
             ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val++;
 
+        }
+
+        private void DungeonTest(object sender, RoutedEventArgs e)
+        {
+            //i = 0;
+            //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
+
+            WindowManager.Dashboard.VM.Characters[0].VanguardDailiesDone = App.Random.Next(0,16);
+            WindowManager.Dashboard.VM.Characters[0].VanguardWeekliesDone= App.Random.Next(0,16);
         }
     }
 }

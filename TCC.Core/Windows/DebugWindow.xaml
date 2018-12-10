@@ -36,6 +36,7 @@
             <Button Click="SetStance">Defensive</Button>
             <Button Click="SetStance">None</Button>
             <Button Click="IncreaseEdge">Edge</Button>
+            <Button Click="DungeonTest">DungeonTest</Button>
         </StackPanel>
     </StackPanel>
 </Window>
