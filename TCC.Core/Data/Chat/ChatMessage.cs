@@ -9,7 +9,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class ChatMessage : TSPropertyChanged
+    public class ChatMessage : TSPropertyChanged, IDisposable
     {
         #region Properties
 
@@ -516,6 +516,14 @@ namespace TCC.Data.Chat
         }
 
 
+        public void Dispose()
+        {
+            foreach (var messagePiece in Pieces)
+            {
+                messagePiece.Dispose();
+            }
+            Pieces.Clear();
+        }
     }
 }
 //protected string[] ParseLinkedParameters(string a)

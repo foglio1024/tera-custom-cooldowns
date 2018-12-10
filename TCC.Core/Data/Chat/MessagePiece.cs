@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using TCC.Annotations;
@@ -8,7 +9,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class MessagePiece : TSPropertyChanged
+    public class MessagePiece : TSPropertyChanged, IDisposable
     {
         private ChatMessage _container;
 
@@ -167,6 +168,12 @@ namespace TCC.Data.Chat
             Type = MessagePieceType.Money;
             Money = money;
             _customSize = false;
+        }
+
+        public void Dispose()
+        {
+            Color = null;
+            _container = null;
         }
     }
 }
