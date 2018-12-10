@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -203,6 +204,17 @@ namespace TCC
             return seconds / (60 * 60 * 24) + "d";
         }
 
+        public static ICollectionView InitView(Predicate<object> filter, IEnumerable source, IEnumerable<SortDescription> sortDescr)
+        {
+            var view = new CollectionViewSource { Source = source }.View;
+            view.Filter =  filter;
+            foreach (var sd in sortDescr)
+            {
+                view.SortDescriptions.Add(sd);
+            }
+            return view;
+        }
+
         public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
             string[] filters, SortDescription[] sortFilters)
         {
@@ -225,6 +237,7 @@ namespace TCC
                 foreach (var filter in sortFilters)
                 {
                     (liveView as ICollectionView)?.SortDescriptions.Add(filter);
+                    liveView.LiveSortingProperties.Add(filter.PropertyName);
                 }
 
                 if (liveView != null) liveView.IsLiveSorting = true;
