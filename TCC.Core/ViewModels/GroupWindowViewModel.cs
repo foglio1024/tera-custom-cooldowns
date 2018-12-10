@@ -342,13 +342,13 @@ namespace TCC.ViewModels
         public void SetRoll(ulong entityId, int rollResult)
         {
             if (rollResult == int.MaxValue) rollResult = -1;
-            Members.ToSyncArray().ToList().ForEach(x =>
+            Members.ToSyncArray().ToList().ForEach(member =>
             {
-                if (x.EntityId == entityId)
+                if (member.EntityId == entityId)
                 {
-                    x.RollResult = rollResult;
+                    member.RollResult = rollResult;
                 }
-                x.IsWinning = x.EntityId == GetWinningUser() && rollResult != -1;
+                member.IsWinning = member.EntityId == GetWinningUser() && member.RollResult != -1;
             });
             //var u = Members.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             //if (u == null) return;
