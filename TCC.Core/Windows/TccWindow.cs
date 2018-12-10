@@ -8,14 +8,16 @@ namespace TCC.Windows
 {
     public class TccWindow : Window
     {
+        public event Action Hidden;
+        public event Action Showed;
         public void HideWindow()
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
             a.Completed += (s, ev) =>
             {
-
                 Hide();
                 if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                Hidden?.Invoke();
             };
             BeginAnimation(OpacityProperty, a);
         }
@@ -27,6 +29,7 @@ namespace TCC.Windows
                 Topmost = false; Topmost = true;
                 Opacity = 0;
                 Show();
+                Showed?.Invoke();
                 BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
         }
