@@ -75,7 +75,7 @@ namespace TCC.ViewModels
         {
             if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
             {
-                //todo: dispose?
+                sk.Dispose();
                 return;
             }
             if (!Settings.Settings.CooldownWindowSettings.Enabled)
@@ -114,10 +114,13 @@ namespace TCC.ViewModels
                         else
                         {
                             existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
+                            sk.Dispose();
                         }
                         return;
                     }
                     existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
+                    sk.Dispose();
+
                 }
             }
             catch {/* ignored*/}
@@ -136,9 +139,12 @@ namespace TCC.ViewModels
                     if (existing == null)
                     {
                         ShortSkills.Add(sk);
-                        return;
                     }
-                    existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
+                    else
+                    {
+                        sk.Dispose();
+                        existing.Refresh(sk.Skill.Id, sk.Duration, CooldownMode.Normal);
+                    }
                 }
                 else
                 {
@@ -246,6 +252,7 @@ namespace TCC.ViewModels
             if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
             {
                 //todo: dispose?
+                sk.Dispose();
                 return;
             }
 
@@ -269,6 +276,7 @@ namespace TCC.ViewModels
             {
                 if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
                 {
+                    sk.Dispose();
                     return;
                 }
                 skill.Start(sk);
@@ -279,6 +287,7 @@ namespace TCC.ViewModels
             {
                 if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
                 {
+                    sk.Dispose();
                     return;
                 }
                 skill.Start(sk);
