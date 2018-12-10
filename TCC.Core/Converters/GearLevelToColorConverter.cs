@@ -13,15 +13,15 @@ namespace TCC.Converters
             switch (val)
             {
                 case GearTier.Low:
-                    return R.Brushes.Tier2DungeonBrush; //Application.Current.FindResource("Tier2DungeonBrush");
+                    return R.Brushes.Tier2DungeonBrush; 
                 case GearTier.Mid:
-                    return R.Brushes.Tier3DungeonBrush; //Application.Current.FindResource("Tier3DungeonBrush");
+                    return R.Brushes.Tier3DungeonBrush; 
                 case GearTier.High:
-                    return R.Brushes.Tier4DungeonBrush;//Application.Current.FindResource("Tier4DungeonBrush");
+                    return R.Brushes.Tier4DungeonBrush; 
                 case GearTier.Top:
-                    return R.Brushes.Tier5DungeonBrush; //Application.Current.FindResource("Tier5DungeonBrush");
+                    return R.Brushes.Tier5DungeonBrush; 
                 default:
-                    return R.Brushes.TierSoloDungeonBrush; // Application.Current.FindResource("TierSoloDungeonBrush");
+                    return R.Brushes.Tier1DungeonBrush; 
             }
         }
 
