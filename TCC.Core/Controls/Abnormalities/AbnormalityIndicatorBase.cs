@@ -48,7 +48,7 @@ namespace TCC.Controls.Abnormalities
         {
             if (_context == null) return;
             _an.Duration = TimeSpan.FromMilliseconds(_context.DurationLeft);
-            var fps = _context.DurationLeft > 20000 ? 1 : 60;
+            var fps = _context.DurationLeft > 20000 ? 1 : 5;
             Timeline.SetDesiredFrameRate(_an, fps);
             MainArcRef.BeginAnimation(Arc.EndAngleProperty, _an);
 
