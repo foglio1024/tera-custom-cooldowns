@@ -1,20 +1,19 @@
-﻿using System;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 
 namespace TCC.Data
 {
     public class DungeonCooldown : TSPropertyChanged
     {
-        private short _entries;
+        private int _entries;
         private int _total;
-        public uint Id { get; }
-        public short Entries
+
+        public int Entries
         {
             get => _entries; set
             {
                 if (_entries == value) return;
                 _entries = value;
-                NPC(nameof(Entries));
+                NPC();
             }
         }
         public int Clears
@@ -24,36 +23,27 @@ namespace TCC.Data
             {
                 if (_total == value) return;
                 _total = value;
-                NPC(nameof(Clears));
+                NPC();
             }
         }
+        public Dungeon Dungeon { get; set; }
 
-        public DungeonTier Tier => SessionManager.DungeonDatabase.DungeonDefs[Id].Tier;
+        //used only for filtering
+        public ItemLevelTier RequiredIlvl => Dungeon.RequiredIlvl;
+        public int Index => Dungeon.Index;
 
-
-        public DungeonCooldown(uint id, Dispatcher d)
+        public DungeonCooldown(Dungeon dung, Dispatcher d)
         {
             Dispatcher = d;
-            Id = id;
-            Entries = (short)GetRuns();
+            Dungeon = dung;
+            Entries = Runs;
         }
 
         public void Reset()
         {
-            Entries = Convert.ToInt16(GetRuns());
+            Entries = Runs;
         }
 
-        internal int GetMaxBaseRuns()
-        {
-            return SessionManager.DungeonDatabase.DungeonDefs[Id].MaxBaseRuns;
-        }
-        public int GetRuns()
-        {
-            var bEntries = GetMaxBaseRuns();
-            var eliteMultiplier = SessionManager.IsElite ? 2 : 1;
-
-            return bEntries * eliteMultiplier;
-
-        }
+        public int Runs => Dungeon.ActualRuns;
     }
 }

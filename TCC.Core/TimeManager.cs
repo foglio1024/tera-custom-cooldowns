@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -109,7 +108,7 @@ namespace TCC
             {
                 foreach (var dg in ch.Dungeons)
                 {
-                    if (dg.Id == 9950)
+                    if (dg.Dungeon.Id == 9950)
                     {
                         if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday) dg.Reset();
                         else continue;
