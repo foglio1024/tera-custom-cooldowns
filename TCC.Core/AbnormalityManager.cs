@@ -88,7 +88,7 @@ namespace TCC
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
-            Log.CW($"[BeginPlayerAbnormality] {ab.Name} ({ab.Id})");
+            //Log.CW($"[BeginPlayerAbnormality] {ab.Name} ({ab.Id})");
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
