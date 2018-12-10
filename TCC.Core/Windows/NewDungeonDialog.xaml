@@ -1,0 +1,147 @@
+﻿<Window x:Class="TCC.Windows.NewDungeonDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+        xmlns:data="clr-namespace:TCC.Data"
+        xmlns:converters="clr-namespace:TCC.Converters"
+        xmlns:tcc="clr-namespace:TCC"
+        mc:Ignorable="d"
+        Title="TCC" Height="350" Width="380"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+>
+    <Window.Resources>
+        <!-- TODO: refactor this ############################################################ -->
+        <Style TargetType="{x:Type ScrollViewer}"
+               BasedOn="{StaticResource TempScrollViewerStyle}" />
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <!-- ################################################################################ -->
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource RevampBorderStyle}"
+                Opacity=".7"
+                Grid.RowSpan="3" />
+        <!-- Title bar -->
+        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Top"
+              MouseLeftButtonDown="OnTitleBarMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image Source="/TCC;component/resources/images/tera-logo-flat.png"
+                   Opacity=".4"
+                   Width="Auto" Height="32"
+                   Margin="0"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
+            <TextBlock Style="{StaticResource DefaultTextStyle}"
+                       Foreground="#999"
+                       Text="Add dungeon"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Grid.Column="1"
+                       Margin="2 0" />
+            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Opacity=".9"
+                    Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Click="OnCloseButtonClick"
+                    VerticalContentAlignment="Center"
+                    Grid.Column="2">
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
+            </Button>
+        </Grid>
+        <Border Style="{StaticResource RevampBorderStyle}"
+                Margin="5 0 5 5"
+                Grid.Row="1"
+                Background="{StaticResource RevampDarkerBackground70Brush}"
+                HorizontalAlignment="Stretch">
+            <Grid HorizontalAlignment="Left">
+                <ListBox ItemsSource="{Binding Dungeons, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NewDungeonDialog}}}"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Top"
+                                               HorizontalContentAlignment="Left"
+                                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="data:Dungeon">
+                            <Grid ShowGridLines="False" 
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding Name}"
+                                               TextTrimming="CharacterEllipsis"
+                                               VerticalAlignment="Center"
+                                               Style="{StaticResource DefaultTextStyle}"
+                                               Margin="10 0">
+                                    </TextBlock>
+
+                                    <TextBlock Text="{Binding Id}"
+                                               Width="20"
+                                               FontSize="9"
+                                               Foreground="#3fff"
+                                               TextTrimming="CharacterEllipsis"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Style="{StaticResource DefaultTextStyle}"
+                                               Margin="10 0">
+                                    </TextBlock>
+                                </StackPanel>
+                                <Button Grid.Column="1" HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Click="AddDungeon"
+                                        Style="{StaticResource ButtonContentOpacityStyle}"
+                                        Visibility="{Binding Show, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
+                                        >
+                                    <Path Data="{StaticResource SvgAddCircle}" Margin="2"/>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="2 4"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Grid >
+                                            <Rectangle x:Name="alt" Height="1" VerticalAlignment="Bottom" Fill="#1ddf" ></Rectangle>
+                                            <ContentPresenter Margin="{TemplateBinding Padding}"></ContentPresenter>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ListBox>
+            </Grid>
+        </Border>
+        <Grid  Grid.Row="2" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
+</Window>
