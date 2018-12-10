@@ -12,7 +12,7 @@ namespace TCC.Converters
             var inv = false;
             if (parameter != null)
             {
-                if (bool.Parse(parameter.ToString()))
+                if (parameter.ToString().Contains("invert"))
                 {
                     inv = true;
                 }
