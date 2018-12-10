@@ -46,6 +46,7 @@ namespace TCC.Parsing
             SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
 
             WindowManager.Dashboard.VM.CurrentCharacter.ItemLevel = p.Ilvl;
+            WindowManager.Dashboard.VM.CurrentCharacter.Level = p.Level;
 
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -137,6 +138,7 @@ namespace TCC.Parsing
                     ch.Laurel = item.Laurel;
                     ch.Position = item.Position;
                     ch.GuildName = item.GuildName;
+                    ch.Level = item.Level;
                 }
                 else
                 {
@@ -378,10 +380,11 @@ namespace TCC.Parsing
         }
 
         public static void HandleChat(S_CHAT x)
+
         {
             if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
                 x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Foglio is watching you °L°", NotificationType.Warning);
-            Log.CW(x.Message);
+            //Log.CW(x.Message);
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
 
@@ -842,6 +845,8 @@ namespace TCC.Parsing
             //88398 - 88400 T gloves
             //88401 - 88403 T boots
             //88404 T belt
+
+
 
             //88405 - 88407 L crit  set (neck/earr/ring)
             //88408 - 88410 L power set
