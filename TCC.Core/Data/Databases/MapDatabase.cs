@@ -69,9 +69,9 @@ namespace TCC.Data.Databases
 
         public bool TryGetGuardOrDungeonNameFromContinentId(uint continent, out string s)
         {
-            if (SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(continent))
+            if (SessionManager.DungeonDatabase.Dungeons.ContainsKey(continent))
             {
-                s = SessionManager.DungeonDatabase.DungeonDefs[continent].Name;
+                s = SessionManager.DungeonDatabase.Dungeons[continent].Name;
                 return true;
             }
             var guard = Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continent);
@@ -134,6 +134,21 @@ namespace TCC.Data.Databases
                 // ignored
             }
             return ret;
+        }
+
+        public string GetDungeonGuardName(uint dungeonId)
+        {
+            var dungWorld = Worlds[9999];
+            var guardList = dungWorld.Guards.Values.ToList();
+            var guard = guardList.FirstOrDefault(x => x.Sections.ContainsKey(dungeonId));
+            if (guard == null) return "";
+            var openWorld = Worlds[1];
+
+            if (!openWorld.Guards.ContainsKey(guard.Id)) return "";
+
+            var nameId = openWorld.Guards[guard.Id].NameId;
+
+            return Names.ContainsKey(nameId) ? Names[nameId] : "";
         }
     }
 }
