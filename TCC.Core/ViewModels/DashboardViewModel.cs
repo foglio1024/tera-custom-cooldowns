@@ -162,6 +162,12 @@ namespace TCC.ViewModels
             SaveCharacters();
             NPC(nameof(TotalVanguardCredits));
         }
+
+        public void SetElleonMarks(uint val)
+        {
+            CurrentCharacter.ElleonMarks = val;
+            NPC(nameof(TotalElleonMarks));
+        }
         public void LoadEvents(DayOfWeek dayOfWeek, string currentRegion)
         {
             //TODO
@@ -201,6 +207,19 @@ namespace TCC.ViewModels
                 var res = TccMessageBox.Show("TCC", "Could not write character data to characters.xml. File is being used by another process. Try again?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
             }
+        }
+
+
+        public void SetVanguardCredits(int pCredits)
+        {
+            CurrentCharacter.VanguardCredits = pCredits;
+            NPC(nameof(TotalVanguardCredits));
+        }
+
+        public void SetGuardianCredits(int pCredits)
+        {
+            CurrentCharacter.GuardianCredits = pCredits;
+            NPC(nameof(TotalGuardianCredits));
         }
     }
 }

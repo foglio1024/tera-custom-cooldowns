@@ -818,7 +818,7 @@ namespace TCC.Parsing
                 var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
                 WindowManager.Dashboard.VM.CurrentCharacter.Gear.Add(i);
             }
-            WindowManager.Dashboard.VM.CurrentCharacter.ElleonMarks = S_INVEN.ElleonMarks;
+            WindowManager.Dashboard.VM.SetElleonMarks(S_INVEN.ElleonMarks);
             WindowManager.Dashboard.VM.CurrentCharacter.DragonwingScales = S_INVEN.DragonwingScales;
             WindowManager.Dashboard.VM.CurrentCharacter.PiecesOfDragonScroll= S_INVEN.PiecesOfDragonScroll;
 
@@ -1014,10 +1014,10 @@ namespace TCC.Parsing
             switch (p.Guild)
             {
                 case NpcGuild.Vanguard:
-                    WindowManager.Dashboard.VM.CurrentCharacter.VanguardCredits = p.Credits;
+                    WindowManager.Dashboard.VM.SetVanguardCredits(p.Credits);
                     break;
                 case NpcGuild.Guardian:
-                    WindowManager.Dashboard.VM.CurrentCharacter.GuardianCredits = p.Credits;
+                    WindowManager.Dashboard.VM.SetGuardianCredits(p.Credits);
                     break;
                 default:
                     break;
@@ -1032,10 +1032,10 @@ namespace TCC.Parsing
                 switch (k)
                 {
                     case (int)NpcGuild.Vanguard:
-                        WindowManager.Dashboard.VM.CurrentCharacter.VanguardCredits = p.NpcGuildList[k];
+                        WindowManager.Dashboard.VM.SetVanguardCredits(p.NpcGuildList[k]);
                         break;
                     case (int)NpcGuild.Guardian:
-                        WindowManager.Dashboard.VM.CurrentCharacter.GuardianCredits = p.NpcGuildList[k];
+                        WindowManager.Dashboard.VM.SetGuardianCredits(p.NpcGuildList[k]);
                         break;
                 }
             });
