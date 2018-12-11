@@ -153,7 +153,7 @@
                     Dungeons
                 </TextBlock>
 
-                <ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.VisibleDungeons}"
+                <ItemsControl ItemsSource="{Binding Instance.SelectedCharacter.VisibleDungeonsView}"
                               ItemTemplate="{StaticResource Dngs}" Grid.Row="1"
                               HorizontalAlignment="Stretch" Margin="30 8" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>

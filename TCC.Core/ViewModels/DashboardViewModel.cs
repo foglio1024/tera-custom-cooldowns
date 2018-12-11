@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Xml.Linq;
+using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Parsing.Messages;
@@ -19,7 +21,9 @@ namespace TCC.ViewModels
         /* -- Fields ----------------------------------------------- */
 
         private bool _discardFirstVanguardPacket = true;
-        private bool _detailView = false;
+        private ICollectionViewLiveShaping _sortedColumns;
+        private ObservableCollection<CharacterViewModel> _characters;
+        private ObservableCollection<DungeonColumnViewModel> _columns;
 
         /* -- Properties ------------------------------------------- */
 
@@ -27,17 +31,29 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<EventGroup> EventGroups { get; }
         public SynchronizedObservableCollection<TimeMarker> Markers { get; }
 
-        public ICollectionViewLiveShaping SortedCharacters { get; }
 
         public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
-        public bool ShowElleonMarks => TimeManager.Instance.CurrentRegion == "EU";
+        public bool ShowElleonMarks => Settings.Settings.LastRegion.Contains("EU");
+
+
+        public ICollectionViewLiveShaping SortedCharacters { get; }
+
+        public ICollectionViewLiveShaping SortedColumns
+        {
+            get
+            {
+                return _sortedColumns ?? (_sortedColumns = Utils.InitLiveView(o => ((DungeonColumnViewModel)o).Dungeon.Show, Columns,
+                                            new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Show)}", $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
+                                            new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
+            }
+        }
 
         public uint TotalElleonMarks
         {
             get
             {
                 uint ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret+=c.ElleonMarks);
+                Characters.ToSyncArray().ToList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
         }
@@ -46,7 +62,7 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret+=c.VanguardCredits);
+                Characters.ToSyncArray().ToList().ForEach(c => ret += c.VanguardCredits);
                 return ret;
             }
         }
@@ -55,21 +71,45 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret+=c.GuardianCredits);
+                Characters.ToSyncArray().ToList().ForEach(c => ret += c.GuardianCredits);
                 return ret;
             }
         }
 
-        public bool DetailView
+        public ObservableCollection<CharacterViewModel> CharacterViewModels
         {
-            get => _detailView;
-            set
+            get
             {
-                if(_detailView == value) return;
-                _detailView = value;
-                NPC();
+                if (_characters != null) return _characters;
+                _characters = new ObservableCollection<CharacterViewModel>();
+                foreach (var o in ((ICollectionView)SortedCharacters).Cast<Character>())
+                {
+                    _characters.Add(new CharacterViewModel { Character = o });
+                }
+                return _characters;
             }
         }
+
+        public ObservableCollection<DungeonColumnViewModel> Columns
+        {
+            get
+            {
+                if (_columns != null) return _columns;
+                _columns = new ObservableCollection<DungeonColumnViewModel>();
+                SessionManager.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                {
+                    var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
+                    CharacterViewModels?.ToList().ForEach(charVm => dvc.DungeonsList.Add(new DungeonCooldownViewModel
+                    {
+                        Owner = charVm.Character,
+                        Cooldown = charVm.Character.Dungeons.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id)
+                    }));
+                    _columns.Add(dvc);
+                });
+                return _columns;
+            }
+        }
+
 
         /* -- Constructor ------------------------------------------ */
 
@@ -78,7 +118,7 @@ namespace TCC.ViewModels
             Characters = new SynchronizedObservableCollection<Character>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
-            SortedCharacters = Utils.InitLiveView(o => o != null, Characters, new string[]{}, new[]
+            SortedCharacters = Utils.InitLiveView(o => o != null, Characters, new string[] { }, new[]
             {
                 new SortDescription(nameof(Character.Position), ListSortDirection.Ascending)
 
@@ -100,6 +140,11 @@ namespace TCC.ViewModels
         public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
             CurrentCharacter?.UpdateDungeons(dungeonCooldowns);
+
+        }
+        public void SetDungeons(uint charId, Dictionary<uint, short> dungeonCooldowns)
+        {
+            Characters.FirstOrDefault(x => x.Id == charId)?.UpdateDungeons(dungeonCooldowns);
 
         }
         public void SetVanguard(S_AVAILABLE_EVENT_MATCHING_LIST x)
