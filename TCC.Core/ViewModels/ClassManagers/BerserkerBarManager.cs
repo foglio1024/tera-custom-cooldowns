@@ -58,17 +58,17 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
             FieryRage = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(fr,  true),
+                Cooldown = new Cooldown(fr,  true) { CanFlash = true },
                 Buff = new Cooldown(fr,  true)
             };
             Bloodlust = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(bl,  true),
+                Cooldown = new Cooldown(bl,  true) { CanFlash = true },
                 Buff = new Cooldown(bl,  true)
             };
             Unleash = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(ul, false),
+                Cooldown = new Cooldown(ul, false) { CanFlash = true },
                 Buff = new Cooldown(ul, false)
             };
 
@@ -116,6 +116,13 @@ namespace TCC.ViewModels
                 return true;
             }
             return false;
+        }
+
+        public override void Dispose()
+        {
+            FieryRage.Cooldown.Dispose();
+            Bloodlust.Cooldown.Dispose();
+            Unleash.Cooldown.Dispose();
         }
     }
 }

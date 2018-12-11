@@ -49,13 +49,18 @@ namespace TCC.ViewModels
 
             ManaBoost = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(mb, true),
+                Cooldown = new Cooldown(mb, true) { CanFlash = true },
                 Buff = new Cooldown(mb, false)
             };
             Fusion = new Cooldown(fusion, false);
 
             _sw = new Stopwatch();
 
+        }
+
+        public override void Dispose()
+        {
+            ManaBoost.Cooldown.Dispose();
         }
 
         private Stopwatch _sw;

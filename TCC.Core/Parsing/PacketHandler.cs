@@ -260,6 +260,7 @@ namespace TCC.Parsing
             SkillManager.Clear();
             EntityManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
+            ClassWindowViewModel.Instance.CurrentClass = Class.None;
 
         }
 

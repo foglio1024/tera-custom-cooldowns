@@ -10,8 +10,8 @@ namespace TCC.ViewModels
 
         public DurationCooldownIndicator GrowingFury { get; set; }
         public Cooldown Counter { get; set; }
-        public DurationCooldownIndicator RhythmicBlows { get; set; }
-        public DurationCooldownIndicator Infuriate { get; set; }
+        public Cooldown RhythmicBlows { get; set; }
+        public Cooldown Infuriate { get; set; }
 
 
         public bool IsGfOn
@@ -49,26 +49,24 @@ namespace TCC.ViewModels
             Counter = new Cooldown(c, false);
 
             // Rhythmic Blows
-            RhythmicBlows = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
-            RhythmicBlows.Cooldown = new Cooldown(rb, true);
+            RhythmicBlows = new Cooldown(rb, true) { CanFlash = true };
 
             // Infuriate
-            Infuriate = new DurationCooldownIndicator(Dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
-            Infuriate.Cooldown = new Cooldown(infu, true);
+            Infuriate = new Cooldown(infu, true) { CanFlash = true };
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
-            if (sk.Skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
+            if (sk.Skill.IconName == RhythmicBlows.Skill.IconName)
             {
-                RhythmicBlows.Cooldown.Start(sk.Duration);
+                RhythmicBlows.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Infuriate.Cooldown.Skill.IconName)
+            if (sk.Skill.IconName == Infuriate.Skill.IconName)
             {
-                Infuriate.Cooldown.Start(sk.Duration);
+                Infuriate.Start(sk.Duration);
                 return true;
             }
             return false;
@@ -76,17 +74,23 @@ namespace TCC.ViewModels
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
         {
-            if (skill.IconName == RhythmicBlows.Cooldown.Skill.IconName)
+            if (skill.IconName == RhythmicBlows.Skill.IconName)
             {
-                RhythmicBlows.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
+                RhythmicBlows.Refresh(skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
-            if (skill.IconName == Infuriate.Cooldown.Skill.IconName)
+            if (skill.IconName == Infuriate.Skill.IconName)
             {
-                Infuriate.Cooldown.Refresh(cd, CooldownMode.Normal);
+                Infuriate.Refresh(cd, CooldownMode.Normal);
                 return true;
             }
             return false;
+        }
+
+        public override void Dispose()
+        {
+            RhythmicBlows.Dispose();
+            Infuriate.Dispose();
         }
     }
 }

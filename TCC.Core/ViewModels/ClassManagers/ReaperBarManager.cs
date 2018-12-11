@@ -15,14 +15,20 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
             ShadowReaping = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(sr, true),
+                Cooldown = new Cooldown(sr, true) { CanFlash = true },
                 Buff = new Cooldown(sr, true)
             };
             ShroudedEscape = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown =  new Cooldown(se, true),
+                Cooldown = new Cooldown(se, true) { CanFlash = true },
                 Buff = new Cooldown(se, true)
             };
+        }
+
+        public override void Dispose()
+        {
+            ShadowReaping.Cooldown.Dispose();
+            ShroudedEscape.Cooldown.Dispose();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)

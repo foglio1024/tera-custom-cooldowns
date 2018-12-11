@@ -59,21 +59,21 @@ namespace TCC.ViewModels
 
             ThrallOfProtection = new Cooldown(top, false);
             ThrallOfLife = new Cooldown(tol, false);
-            ThrallOfVengeance = new Cooldown(tov, true);
-            ThrallOfWrath = new Cooldown(tow, true);
-            KingBlob = new Cooldown(kb, true);
+            ThrallOfVengeance = new Cooldown(tov, true) { CanFlash = true };
+            ThrallOfWrath = new Cooldown(tow, true) { CanFlash = true };
+            KingBlob = new Cooldown(kb, true) { CanFlash = true };
 
-            AuraTenacious = new Cooldown(at, false);
-            AuraMerciless = new Cooldown(am, false);
-            AuraSwift = new Cooldown(asw, false);
-            AuraUnyielding = new Cooldown(au, false);
+            AuraTenacious = new Cooldown(at, false) { CanFlash = true };
+            AuraMerciless = new Cooldown(am, false) { CanFlash = true };
+            AuraSwift = new Cooldown(asw, false) { CanFlash = true };
+            AuraUnyielding = new Cooldown(au, false) { CanFlash = true };
 
-            Contagion = new Cooldown(cont, true);
+            Contagion = new Cooldown(cont, true) { CanFlash = true };
 
             Vow = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(vow, false),
-                Cooldown = new Cooldown(vow, false)
+                Cooldown = new Cooldown(vow, false) { CanFlash = true }
             };
             Vow.Buff.Ended += OnVowBuffEnded;
             Vow.Buff.Started += OnVowBuffStarted;
@@ -81,7 +81,7 @@ namespace TCC.ViewModels
             VolleyOfCurse = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(voc, false),
-                Cooldown = new Cooldown(voc, false)
+                Cooldown = new Cooldown(voc, false) { CanFlash = true }
             };
 
             ClassAbnormalityTracker.MarkingExpired += OnVocExpired;
@@ -90,6 +90,23 @@ namespace TCC.ViewModels
             SessionManager.CombatChanged += OnCombatChanged;
             SessionManager.EncounterChanged += OnCombatChanged;
             Auras.AuraChanged += CheckAurasWarning;
+        }
+
+        public override void Dispose()
+        {
+            ThrallOfVengeance.Dispose();
+            ThrallOfWrath.Dispose();
+            KingBlob.Dispose();
+
+            AuraTenacious.Dispose();
+            AuraMerciless.Dispose();
+            AuraSwift.Dispose();
+            AuraUnyielding.Dispose();
+
+            Contagion.Dispose();
+
+            Vow.Cooldown.Dispose();
+            VolleyOfCurse.Cooldown.Dispose();
         }
 
         private void CheckAurasWarning()

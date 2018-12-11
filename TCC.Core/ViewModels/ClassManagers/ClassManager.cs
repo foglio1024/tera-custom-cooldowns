@@ -1,10 +1,11 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels
 {
-    public abstract class ClassManager : TSPropertyChanged
+    public abstract class ClassManager : TSPropertyChanged, IDisposable
     {
         public virtual bool StartSpecialSkill(Cooldown sk)
         {
@@ -43,6 +44,10 @@ namespace TCC.ViewModels
             StaminaTracker = new StatTracker();
         }
 
+        public virtual void Dispose()
+        {
+
+        }
     }
 }
 

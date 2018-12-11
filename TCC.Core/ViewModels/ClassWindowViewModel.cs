@@ -25,6 +25,7 @@ namespace TCC.ViewModels
                 _currentClass = value;
                 Dispatcher.Invoke(() =>
                 {
+                    CurrentManager.Dispose();
                     switch (_currentClass)
                     {
                         case Class.Warrior:

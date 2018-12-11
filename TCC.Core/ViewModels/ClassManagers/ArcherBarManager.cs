@@ -38,7 +38,7 @@ namespace TCC.ViewModels
             get => _thunderbolt;
             set
             {
-                if(_thunderbolt == value) return;
+                if (_thunderbolt == value) return;
                 _thunderbolt = value;
                 NPC();
             }
@@ -85,10 +85,10 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
             SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
             SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
-            Thunderbolt = new Cooldown(tb, true);
+            Thunderbolt = new Cooldown(tb, true) { CanFlash = true };
             Windsong = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(ws, true),
+                Cooldown = new Cooldown(ws, true) { CanFlash = true },
                 Buff = new Cooldown(ws, false)
             };
             WindWalk = new Cooldown(ww, false);
@@ -118,6 +118,12 @@ namespace TCC.ViewModels
                 return true;
             }
             return false;
+        }
+
+        public override void Dispose()
+        {
+            Windsong.Cooldown.Dispose();
+            Thunderbolt.Dispose();
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)       // KR patch by HQ

@@ -44,10 +44,15 @@ namespace TCC.ViewModels
             DeadlyGamble = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(dg, false),
-                Cooldown = new Cooldown(dg, true)
+                Cooldown = new Cooldown(dg, true) { CanFlash = true }
             };
             var ab = SessionManager.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
             Swift = new Cooldown(new Skill(ab), false);
+        }
+
+        public override void Dispose()
+        {
+            DeadlyGamble.Cooldown.Dispose();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)

@@ -18,7 +18,7 @@ namespace TCC.ViewModels
             {
                 if (_focusOn == value) return;
                 _focusOn = value;
-                NPC(nameof(FocusOn));
+                NPC();
             }
 
         }
@@ -37,15 +37,26 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
             SessionManager.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);
             SessionManager.SkillsDatabase.TryGetSkill(230100, Class.Ninja, out var ih);
-            BurningHeart = new Cooldown(bh,  false);
-            FireAvalanche = new Cooldown(fa,  false);
 
-            InnerHarmony = new DurationCooldownIndicator(Dispatcher);
-            InnerHarmony.Cooldown = new Cooldown(ih, true);
-            InnerHarmony.Buff = new Cooldown(ih, false);
+            BurningHeart = new Cooldown(bh,  false) { CanFlash = true };
+            FireAvalanche = new Cooldown(fa,  false) { CanFlash = true };
+
+            InnerHarmony = new DurationCooldownIndicator(Dispatcher)
+            {
+                Cooldown = new Cooldown(ih, true) {CanFlash = true},
+                Buff = new Cooldown(ih, false)
+            };
 
             StaminaTracker.PropertyChanged += FlashOnMaxSt;
 
+        }
+
+        public override void Dispose()
+        {
+            BurningHeart.Dispose();
+            FireAvalanche.Dispose();
+            InnerHarmony.Cooldown.Dispose();
+            
         }
 
         public override bool StartSpecialSkill(Cooldown sk)

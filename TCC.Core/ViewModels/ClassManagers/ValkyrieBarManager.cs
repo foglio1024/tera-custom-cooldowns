@@ -21,15 +21,22 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
             Ragnarok = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(rag, true),
+                Cooldown = new Cooldown(rag, true) { CanFlash = true },
                 Buff = new Cooldown(rag, false)
             };
             Godsfall = new DurationCooldownIndicator(Dispatcher)
             {
-                Cooldown = new Cooldown(gf, true),
+                Cooldown = new Cooldown(gf, true) { CanFlash = true },
                 Buff = new Cooldown(gf, false)
             };
         }
+
+        public override void Dispose()
+        {
+            Ragnarok.Cooldown.Dispose();
+            Godsfall.Cooldown.Dispose();
+        }
+
         public override bool StartSpecialSkill(Cooldown sk)
         {
 

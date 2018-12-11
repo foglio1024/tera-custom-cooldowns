@@ -30,7 +30,7 @@ namespace TCC.ViewModels
                 AdrenalineRush.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if(sk.Skill.IconName == Infuriate.Skill.IconName)
+            if (sk.Skill.IconName == Infuriate.Skill.IconName)
             {
                 Infuriate.Start(sk.Duration);
                 return true;
@@ -44,14 +44,25 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
             SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
-            GuardianShout = new DurationCooldownIndicator(Dispatcher);
-            AdrenalineRush = new DurationCooldownIndicator(Dispatcher);
+            GuardianShout = new DurationCooldownIndicator(Dispatcher)
+            {
+                Cooldown = new Cooldown(gshout, true) { CanFlash = true },
+                Buff = new Cooldown(gshout, false)
+            };
+            AdrenalineRush = new DurationCooldownIndicator(Dispatcher)
+            {
+                Cooldown = new Cooldown(arush, true) { CanFlash = true },
+                Buff = new Cooldown(arush, false)
+            };
 
-            GuardianShout.Cooldown = new Cooldown(gshout,  true);
-            GuardianShout.Buff = new Cooldown(gshout,  false);
-            AdrenalineRush.Cooldown = new Cooldown(arush,  true);
-            AdrenalineRush.Buff = new Cooldown(arush,  false);
-            Infuriate = new Cooldown(infu,  true);
+            Infuriate = new Cooldown(infu, true) { CanFlash = true };
+        }
+
+        public override void Dispose()
+        {
+            GuardianShout.Cooldown.Dispose();
+            AdrenalineRush.Cooldown.Dispose();
+            Infuriate.Dispose();
         }
     }
 }

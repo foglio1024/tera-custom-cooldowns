@@ -18,13 +18,18 @@ namespace TCC.ViewModels
             SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
             InColdBlood = new DurationCooldownIndicator(Dispatcher) {
                 Buff = new Cooldown(icb, false),
-                Cooldown = new Cooldown(icb, true)
+                Cooldown = new Cooldown(icb, true) { CanFlash = true }
             };
 
             // Overhand Strike
             SessionManager.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
             OverhandStrike = new Cooldown(ohs, false);
 
+        }
+
+        public override void Dispose()
+        {
+            InColdBlood.Cooldown.Dispose();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
