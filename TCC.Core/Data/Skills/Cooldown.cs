@@ -19,6 +19,7 @@ namespace TCC.Data.Skills
         private DispatcherTimer _secondsTimer;
         private ulong _seconds;
         private bool _flashOnAvailable;
+        private bool _canFlash;
         private Skill _skill;
 
         // properties
@@ -58,6 +59,33 @@ namespace TCC.Data.Skills
             }
         }
         public bool IsAvailable => !_mainTimer.IsEnabled;
+        public bool CanFlash
+        {
+            get => _canFlash;
+            set
+            {
+                if (_canFlash == value) return;
+                _canFlash = value;
+                if (value)
+                {
+                    SessionManager.CombatChanged += OnCombatStatusChanged;
+                    _ccSub++;
+                    SessionManager.EncounterChanged += OnCombatStatusChanged;
+                    _ecSub++;
+
+                }
+                else
+                {
+                    SessionManager.CombatChanged -= OnCombatStatusChanged;
+                    _ccSub--;
+                    SessionManager.EncounterChanged -= OnCombatStatusChanged;
+                    _ecSub--;
+                    Log.CW($"CC: {_ccSub}\t\t-\t\tEC: {_ecSub}");
+
+                }
+
+            }
+        }
 
         // ctors
         public Cooldown()
@@ -75,10 +103,10 @@ namespace TCC.Data.Skills
             _offsetTimer.Tick += StartSecondsTimer;
             _secondsTimer.Tick += DecreaseSeconds;
 
-            SessionManager.CombatChanged += OnCombatStatusChanged;
-            SessionManager.EncounterChanged += OnCombatStatusChanged;
-
         }
+
+        private static int _ccSub = 0;
+        private static int _ecSub = 0;
         public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill) : this()
         {
             CooldownType = t;
@@ -132,7 +160,7 @@ namespace TCC.Data.Skills
         }
         public void Start(Cooldown sk)
         {
-            if(sk!=this) sk.Dispose();
+            if (sk != this) sk.Dispose();
             if (sk.Duration >= Int32.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
@@ -194,6 +222,12 @@ namespace TCC.Data.Skills
             Refresh(cd, mode);
         }
 
+        public void Refresh(Cooldown cd)
+        {
+            cd.Dispose();
+            Refresh(cd.Skill.Id, cd.Duration, cd.Mode);
+        }
+
 
         private void ForceFlashing()
         {
@@ -214,11 +248,10 @@ namespace TCC.Data.Skills
 
         public void Dispose()
         {
+            CanFlash = false;
             _mainTimer.Stop();
             _offsetTimer.Stop();
             _secondsTimer.Stop();
-            SessionManager.CombatChanged -= OnCombatStatusChanged;
-            SessionManager.EncounterChanged -= OnCombatStatusChanged;
         }
         public override string ToString()
         {
