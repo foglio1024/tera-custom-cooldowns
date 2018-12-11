@@ -76,15 +76,16 @@ namespace TCC.Windows
 
         private void Close(object sender, RoutedEventArgs e)
         {
+            SettingsWriter.Save();
+
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             an.Completed += (s, ev) =>
             {
-                Hide();
+                Close();
                 if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             };
             BeginAnimation(OpacityProperty, an);
-            SettingsWriter.Save();
         }
 
         private void FilterByClass(object sender, RoutedEventArgs e)

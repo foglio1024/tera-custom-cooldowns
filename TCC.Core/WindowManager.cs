@@ -43,8 +43,8 @@ namespace TCC
         //public static SettingsWindowOld SettingsWindowOld;
         public static SettingsWindow SettingsWindow;
         public static SkillConfigWindow SkillConfigWindow;
-        public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
-        public static MyAbnormalConfigWindow MyAbnormalConfigWindow; //Add My Abnormals Setting by HQ
+        //public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
+        //public static MyAbnormalConfigWindow MyAbnormalConfigWindow; //Add My Abnormals Setting by HQ
         public static CivilUnrestWindow CivilUnrestWindow;
         //public static InfoWindow InfoWindow;
         public static Dashboard Dashboard;
@@ -248,8 +248,8 @@ namespace TCC
             FlightDurationWindow = new FlightDurationWindow();
             LfgListWindow = new LfgListWindow();
             SkillConfigWindow = new SkillConfigWindow();
-            GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
-            MyAbnormalConfigWindow = new MyAbnormalConfigWindow(); //Add My Abnormals Setting by HQ
+            //GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
+            //MyAbnormalConfigWindow = new MyAbnormalConfigWindow(); //Add My Abnormals Setting by HQ
             CivilUnrestWindow = new CivilUnrestWindow();
             FloatingButton = new FloatingButtonWindow();
             ChatWindowManager.Instance.InitWindows();

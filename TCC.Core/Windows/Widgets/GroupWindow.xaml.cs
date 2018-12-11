@@ -57,7 +57,8 @@ namespace TCC.Windows.Widgets
 
         private void ShowAbnormalSettings(object sender, RoutedEventArgs e)
         {
-            WindowManager.GroupAbnormalConfigWindow.ShowWindow();
+            new GroupAbnormalConfigWindow().ShowWindow();
+            //WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
     }
 }

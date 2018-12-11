@@ -33,13 +33,15 @@ namespace TCC.Windows
         private void OpenPlayerBuffSettings(object sender, RoutedEventArgs e)
         {
             //Add My Abnormals Setting by HQ ============================================================
-            WindowManager.MyAbnormalConfigWindow.ShowWindow();
+            new MyAbnormalConfigWindow().ShowWindow();
             //===========================================================================================
         }
 
         private void OpenGroupBuffSettings(object sender, RoutedEventArgs e)
         {
-            WindowManager.GroupAbnormalConfigWindow.ShowWindow();
+            new GroupAbnormalConfigWindow().ShowWindow();
+
+            //WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
         private void ResetChatWindowsPosition(object sender, RoutedEventArgs e)
         {
@@ -130,6 +132,16 @@ namespace TCC.Windows
             t.BeginAnimation(OpacityProperty, fadeAnim);
             t.RenderTransform.BeginAnimation(TranslateTransform.XProperty, slideAnim);
 
+        }
+
+        private void ClearChatMessages(object sender, RoutedEventArgs e)
+        {
+            foreach (var chatMessage in ChatWindowManager.Instance.ChatMessages)
+            {
+             chatMessage.Dispose();
+            }
+
+            ChatWindowManager.Instance.ChatMessages.Clear();
         }
     }
 }

@@ -91,6 +91,12 @@
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="ClassSpecific\GunnerAbnormalityTracker.cs" />
     <Compile Include="Controls\Abnormalities\AbnormalityIndicatorBase.cs" />
+    <Compile Include="Controls\Dashboard\DungeonView.xaml.cs">
+      <DependentUpon>DungeonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Dashboard\GenericInfoView.xaml.cs">
+      <DependentUpon>GenericInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Classes\Elements\EdgeControlBase.cs" />
     <Compile Include="Controls\Classes\Elements\EdgeRhombControl.xaml.cs">
       <DependentUpon>EdgeRhombControl.xaml</DependentUpon>
@@ -122,10 +128,13 @@
     <Compile Include="Converters\BossHPbarColorConverter.cs" />
     <Compile Include="Converters\AggroTypeToFillConverter.cs" />
     <Compile Include="Converters\ColorToTransparentConverter.cs" />
+    <Compile Include="Converters\DungeonImageConverter.cs" />
     <Compile Include="Converters\EntityIdToNameConverter.cs" />
     <Compile Include="Converters\DurationLabelConverter.cs" />
     <Compile Include="Converters\DurationToVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumDescriptionConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter2.cs" />
+    <Compile Include="Converters\ItemLevelTierToColorConverter.cs" />
     <Compile Include="Converters\RoundedClipConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelSizeConverter.cs" />
@@ -241,9 +250,6 @@
     <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\ClassToReColorConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
-    <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
-    <Compile Include="Converters\DungeonIdToNameConverter.cs" />
-    <Compile Include="Converters\DungeonIdToTierColorConverter.cs" />
     <Compile Include="Converters\GearLevelToColorConverter.cs" />
     <Compile Include="Converters\GearLevelToFactorConverter.cs" />
     <Compile Include="Converters\GuardianPointsStringConverter.cs" />
@@ -731,8 +737,14 @@
     <Compile Include="Windows\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DungeonEditWindow.xaml.cs">
+      <DependentUpon>DungeonEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MyAbnormalConfigWindow.xaml.cs">
       <DependentUpon>MyAbnormalConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewDungeonDialog.xaml.cs">
+      <DependentUpon>NewDungeonDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -884,6 +896,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Classes\Elements\TraverseCutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dashboard\DungeonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dashboard\GenericInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1175,9 +1195,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\DungeonEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MyAbnormalConfigWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NewDungeonDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
@@ -1359,6 +1387,9 @@
     <None Include="resources\data\achi_grade\achi_grade-SE.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\data\default-dungeon-defs.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\dungeons\dungeons-SE.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1419,6 +1450,9 @@
     <Content Include="resources\data\world_map\world_map-RU.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="resources\data\section_images.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\data\world_map\world_map-SE.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1982,6 +2016,7 @@
     <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>

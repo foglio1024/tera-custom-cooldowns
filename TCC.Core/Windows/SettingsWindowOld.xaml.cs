@@ -109,7 +109,8 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            WindowManager.GroupAbnormalConfigWindow.ShowWindow();
+            new GroupAbnormalConfigWindow().ShowWindow();
+           // WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
 
         private void MakePositionsGlobal(object sender, RoutedEventArgs e)
@@ -173,7 +174,7 @@ namespace TCC.Windows
         //Add My Abnormals Setting by HQ ============================================================
         private void ButtonMyBuffSettings_OnClick(object sender, RoutedEventArgs e)
         {
-            WindowManager.MyAbnormalConfigWindow.ShowWindow();
+            new MyAbnormalConfigWindow().ShowWindow();
         }
         //===========================================================================================
     }
