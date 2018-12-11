@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,7 +49,7 @@ namespace TCC.Controls.Abnormalities
         {
             if (_context == null) return;
             _an.Duration = TimeSpan.FromMilliseconds(_context.DurationLeft);
-            var fps = _context.DurationLeft > 20000 ? 1 : 5;
+            var fps = _context.DurationLeft > 20000 ? 1 : 10;
             Timeline.SetDesiredFrameRate(_an, fps);
             MainArcRef.BeginAnimation(Arc.EndAngleProperty, _an);
 

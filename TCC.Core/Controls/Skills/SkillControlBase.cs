@@ -109,7 +109,7 @@ namespace TCC.Controls.Skills
             if (arc == null) return;
             _arcAnimation.Duration = TimeSpan.FromMilliseconds(Context.Duration);
             _arcAnimation.From = 359.9 * val;
-            var fps = Context.Duration > 30000 ? 1 : 10;
+            var fps = Context.Duration > 30000 ? 1 : 20;
             Timeline.SetDesiredFrameRate(_arcAnimation, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
         }
