@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <FrameworkElement Width="1000" >
+            <FrameworkElement Width="1100" >
                 <FrameworkElement.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
@@ -24,10 +24,10 @@
                     Margin="0,-2,0,0">
                 
             </Border>
-        <Ellipse Width="8" Height="8" Fill="#ccc" Margin="-5 4 0 0" ></Ellipse>
+        <!--<Ellipse Width="8" Height="8" Fill="#ccc" Margin="-5 4 0 0" ></Ellipse>-->
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <FrameworkElement Width="960">
+            <FrameworkElement Width="1060">
                 <FrameworkElement.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>

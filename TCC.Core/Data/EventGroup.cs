@@ -24,7 +24,7 @@ namespace TCC.Data
 
         public EventGroup(string name, DateTime start, DateTime end, bool rc)
         {
-            Dispatcher = WindowManager.Dashboard.VM.GetDispatcher();
+            Dispatcher = WindowManager.Dashboard.Dispatcher;
             Events = new SynchronizedObservableCollection<DailyEvent>(Dispatcher);
             Name = name;
             RemoteCheck = rc;

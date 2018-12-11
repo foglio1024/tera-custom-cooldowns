@@ -304,7 +304,7 @@
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                             </Grid>
-                            <Grid Margin="0 3 0 6">
+                            <Grid Margin="0 3 0 3">
                                 <ContentPresenter x:Name="ContentSite"
                                                   VerticalAlignment="Center"
                                                   HorizontalAlignment="Left"
@@ -403,6 +403,12 @@
                     <Grid HorizontalAlignment="Stretch" >
                         <dashboard:DungeonView x:Name="DungeonView"/>
                     </Grid>
+                </TabItem>
+                <TabItem Header="Timeline (temp)" Foreground="#9fff" >
+                    <dashboard:TimelineControl x:Name="TimeLine"
+                                               HorizontalAlignment="Stretch" 
+                                               Margin="0,0,0,30" 
+                                               VerticalAlignment="Stretch"/>
                 </TabItem>
                 <!--<TabItem Header="Gear" Foreground="#9fff" >
                     <Border Style="{StaticResource RevampBorderStyle}" HorizontalAlignment="Stretch" 

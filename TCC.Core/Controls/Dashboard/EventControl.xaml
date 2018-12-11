@@ -8,7 +8,7 @@
              MouseLeave="UserControl_MouseLeave"
              Loaded="ControlLoaded" d:DataContext="{d:DesignData DailyEvent}">
     <StackPanel Orientation="Horizontal" Margin="1,1,0,1" Opacity="1">
-        <FrameworkElement Width="1000" >
+        <FrameworkElement Width="1100" >
             <FrameworkElement.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
             </FrameworkElement.LayoutTransform>
@@ -16,10 +16,10 @@
 
         <Border Height="14" 
                 MinWidth="14"
-                CornerRadius="7"
+                CornerRadius="5"
                 Background="{Binding Color, Converter={StaticResource StringToFill}}"
-                BorderBrush="#1fff"
-                BorderThickness="0"
+                BorderBrush="#fff"
+                BorderThickness="2"
                 HorizontalAlignment="Left"
                 ToolTip="{Binding ToolTip}"
                 Name="Border"

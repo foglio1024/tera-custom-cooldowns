@@ -6,7 +6,7 @@
              xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" Width="1000" d:DataContext="{d:DesignData InfoWindowViewModel}">
+             mc:Ignorable="d"  d:DataContext="{d:DesignData viewModels:DashboardViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="TimeMarkerTemplate">
             <dashboard:TimeMarkerControl/>
@@ -17,7 +17,7 @@
         <DataTemplate x:Key="EventGroupTemplate" DataType="data:EventGroup">
             <Grid Margin="0">
                 <Rectangle Height="6" 
-                   Width="1000" 
+                   Width="1100" 
                     Opacity=".8"
                    HorizontalAlignment="Left" 
                    Margin="0,0,0,0" 
@@ -56,7 +56,7 @@
         <DataTemplate x:Key="SpecialEventTemplate" DataType="viewModels:DailyEvent">
             <Grid VerticalAlignment="Stretch">
                 <StackPanel Orientation="Horizontal" Margin="-4,0,0,0" VerticalAlignment="Stretch">
-                    <FrameworkElement Width="1000" >
+                    <FrameworkElement Width="1100" >
                         <FrameworkElement.LayoutTransform>
                             <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
                         </FrameworkElement.LayoutTransform>
@@ -88,79 +88,83 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid HorizontalAlignment="Stretch" 
+    <Border Style="{StaticResource RevampBorderStyle}" 
+            Background="{StaticResource RevampDarkerBackgroundBrush}"
+            Opacity=".7" Padding="10 15 10 25">
+        <Grid HorizontalAlignment="Stretch" Width="1100"
           Margin="0,0,0,0" VerticalAlignment="Stretch">
 
-        <UniformGrid Columns="24" Opacity="1">
-            <dashboard:TimeSeparator TimeText="0:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="1:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="2:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="3:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="4:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="5:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="6:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="7:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="8:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="9:00" Borders="1,0,0,0"/>
-            <dashboard:TimeSeparator TimeText="10:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="11:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="12:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="13:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="14:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="15:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="16:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="17:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="18:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="19:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="20:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="21:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="22:00" Borders="1,0,0,0" />
-            <dashboard:TimeSeparator TimeText="23:00" Borders="1,0,1,0"/>
+            <UniformGrid Columns="24" Opacity="1">
+                <dashboard:TimeSeparator TimeText="0:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="1:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="2:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="3:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="4:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="5:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="6:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="7:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="8:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="9:00" Borders="1,0,0,0"/>
+                <dashboard:TimeSeparator TimeText="10:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="11:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="12:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="13:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="14:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="15:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="16:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="17:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="18:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="19:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="20:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="21:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="22:00" Borders="1,0,0,0" />
+                <dashboard:TimeSeparator TimeText="23:00" Borders="1,0,1,0"/>
 
 
-        </UniformGrid>
-        <!--Events-->
-        <ItemsControl ItemsSource="{Binding Instance.EventGroups}"
+            </UniformGrid>
+            <!--Events-->
+            <ItemsControl ItemsSource="{Binding EventGroups}"
                       ItemTemplate="{StaticResource EventGroupTemplate}"
                       VerticalAlignment="Top"
                       Margin="-10,18,-10,0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Margin="10,0,0,0"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <!--Time markers-->
-        <ItemsControl ItemsSource="{Binding Instance.Markers}" 
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="10,0,0,0"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <!--Time markers-->
+            <ItemsControl ItemsSource="{Binding Markers}" 
                       ItemTemplate="{StaticResource TimeMarkerTemplate}"
                       VerticalAlignment="Stretch">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="{x:Type ContentPresenter}">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="99" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-        </ItemsControl>
-        <!--Events2-->
-        <ItemsControl ItemsSource="{Binding Instance.SpecialEvents}"
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type ContentPresenter}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="99" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+            <!--Events2-->
+            <ItemsControl ItemsSource="{Binding SpecialEvents}"
                       ItemTemplate="{StaticResource SpecialEventTemplate}"
                       VerticalAlignment="Stretch"
                      
                       Margin="0,15,0,-3" >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
 
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>
