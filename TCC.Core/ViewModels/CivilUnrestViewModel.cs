@@ -59,7 +59,7 @@ namespace TCC.ViewModels
                 var ret = Utils.InitLiveView(p => p != null, _guilds, new string[] { },
                     new[]
                     {
-                        new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
+                        //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
                         new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending)
                     });
                 return ret;
