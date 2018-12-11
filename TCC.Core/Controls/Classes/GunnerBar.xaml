@@ -108,21 +108,21 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <skills:RhombSkillEffectControl DataContext="{Binding Bombardment}" HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
+            <skills:RhombFixedSkillControl DataContext="{Binding Bombardment}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="45" Y="45" />
                 </FrameworkElement.RenderTransform>
-            </skills:RhombSkillEffectControl>
-            <skills:RhombSkillEffectControl DataContext="{Binding Balder}" HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
+            </skills:RhombFixedSkillControl>
+            <skills:RhombFixedSkillControl DataContext="{Binding Balder}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="-45" Y="45" />
                 </FrameworkElement.RenderTransform>
 
-            </skills:RhombSkillEffectControl>
+            </skills:RhombFixedSkillControl>
             <skills:RhombSkillEffectControl DataContext="{Binding ModularSystem}" HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="0" Y="88" />
                 </FrameworkElement.RenderTransform>

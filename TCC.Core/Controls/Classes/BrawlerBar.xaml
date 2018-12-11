@@ -42,7 +42,7 @@
                 <Grid x:Name="MainReArcGrid">
                     <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="4"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Margin="-20" Width="83" Height="83" x:Name="MainReArc"
+                               Margin="-20" Width="81" Height="81" x:Name="MainReArc"
                                Rhomb="True">
                         <local:Arc.RenderTransform>
                             <TransformGroup>
@@ -120,8 +120,9 @@
                 </Grid>
 
             </Grid>
-            <Border BorderBrush="#89a" BorderThickness="1" Margin="11"
-                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+            <Border BorderBrush="{StaticResource RevampBorderBrush}" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" 
+                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     Opacity=".7">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -130,16 +131,17 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <skills:RhombSkillEffectControl DataContext="{Binding RhythmicBlows}" HorizontalAlignment="Center"
+            <skills:RhombFixedSkillControl DataContext="{Binding RhythmicBlows}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="-45" Y="45" />
                 </FrameworkElement.RenderTransform>
 
-            </skills:RhombSkillEffectControl>
-            <Border BorderThickness="1" Margin="11" 
+            </skills:RhombFixedSkillControl>
+            <Border BorderThickness="1" Width="51" Height="51"
                      RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                    Opacity=".7" BorderBrush="{StaticResource RevampBorderBrush}" Background="{StaticResource RevampBackgroundGradientBrush}"
+                    Opacity=".7" BorderBrush="{StaticResource RevampBorderBrush}" 
+                    Background="{StaticResource RevampBackgroundGradientBrush}"
                     >
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
@@ -148,13 +150,13 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <skills:RhombSkillEffectControl DataContext="{Binding Infuriate}" HorizontalAlignment="Center"
+            <skills:RhombFixedSkillControl DataContext="{Binding Infuriate}" HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="45" Y="45" />
                 </FrameworkElement.RenderTransform>
 
-            </skills:RhombSkillEffectControl>
+            </skills:RhombFixedSkillControl>
 
             <Polygon Fill="{StaticResource RevampBackgroundBrush}"
                      Points="0 0 1 0 2 1 -1 1"
@@ -185,7 +187,7 @@
 
             </local:OutlinedTextBlock>
             <Grid Visibility="{Binding CounterProc, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
+                <Border BorderBrush="#89a" BorderThickness="1" Margin="8"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"
                         >
