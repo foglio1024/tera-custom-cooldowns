@@ -20,7 +20,7 @@ namespace TCC.Settings
         public static WindowSettings ClassWindowSettings { get; set; } = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(ClassWindowSettings));
         public static WindowSettings FlightGaugeWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
         public static WindowSettings FloatingButtonSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true);
-        public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1, .45,0,0, true, ClickThruMode.Never,1,true,.5,false,true,false,null,nameof(CivilUnrestWindowSettings));
+        public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings));
 
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; set; } = new SynchronizedObservableCollection<ChatWindowSettings>();
 
@@ -30,7 +30,7 @@ namespace TCC.Settings
         public static bool IgnoreGroupDebuffs { get; set; }
         public static bool DisablePartyMP { get; set; }
         public static bool DisablePartyHP { get; set; }
-        public static bool DisablePartyAbnormals { get; set; } 
+        public static bool DisablePartyAbnormals { get; set; }
         public static bool ShowOnlyAggroStacks { get; set; } = true;
         public static uint GroupSizeThreshold { get; set; } = 7;
         public static bool ShowMembersLaurels { get; set; }
@@ -39,7 +39,7 @@ namespace TCC.Settings
         public static bool ShowAwakenIcon { get; set; } = true;
         public static Dictionary<Class, List<uint>> GroupAbnormals { get; } = new Dictionary<Class, List<uint>>()
         {
-            {0, new List<uint>()},
+            {       0, new List<uint>()},
             {(Class)1, new List<uint>()},
             {(Class)2, new List<uint>()},
             {(Class)3, new List<uint>()},
@@ -60,7 +60,7 @@ namespace TCC.Settings
         public static bool ShowAllMyAbnormalities { get; set; } = true;
         public static Dictionary<Class, List<uint>> MyAbnormals { get; } = new Dictionary<Class, List<uint>>()
         {
-            {(Class)0, new List<uint>{ 100800, 100801 }},
+            {       0, new List<uint>{ 100800, 100801 }},
             {(Class)1, new List<uint>{ 200230, 200231, 200232, 201701 }},
             {(Class)2, new List<uint>{ 300800, 300801, 300805 }},
             {(Class)3, new List<uint>{ 401705, 401706, 401710, 400500, 400501, 400508, 400710, 400711 }},
@@ -107,9 +107,9 @@ namespace TCC.Settings
         public static int SpamThreshold { get; set; } = 2;
         public static bool ShowChannel { get; set; } = true;
         public static bool ShowTimestamp { get; set; } = true;
-        public static double ChatWindowOpacity { get; set; } = 0.4;
+        //public static double ChatWindowOpacity { get; set; } = 0.4;
         public static int FontSize { get; set; } = 15;
-        public static bool ChatFadeOut { get; set; } = true;
+        //public static bool ChatFadeOut { get; set; } = true;
         public static bool AnimateChatMessages { get; set; }
         public static ClickThruMode ChatClickThruMode
         {

@@ -290,7 +290,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.DisablePartyMP)) Settings.DisablePartyMP = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowOnlyAggroStacks)) Settings.ShowOnlyAggroStacks = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.DisablePartyAbnormals)) Settings.DisablePartyAbnormals = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ChatFadeOut)) Settings.ChatFadeOut = bool.Parse(attr.Value);
+                    //else if (attr.Name == nameof(Settings.ChatFadeOut)) Settings.ChatFadeOut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowItemsCooldown)) Settings.ShowItemsCooldown = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.ShowMembersLaurels)) Settings.ShowMembersLaurels = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.AnimateChatMessages)) Settings.AnimateChatMessages = bool.Parse(attr.Value);
@@ -321,7 +321,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(Settings.LastRegion)) Settings.LastRegion = attr.Value;
                     else if (attr.Name == nameof(Settings.Webhook)) Settings.Webhook = attr.Value;
                     else if (attr.Name == nameof(Settings.WebhookMessage)) Settings.WebhookMessage = attr.Value;
-                    else if (attr.Name == nameof(Settings.ChatWindowOpacity)) Settings.ChatWindowOpacity = double.Parse(attr.Value, CultureInfo.InvariantCulture);
+                    //else if (attr.Name == nameof(Settings.ChatWindowOpacity)) Settings.ChatWindowOpacity = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(Settings.FlightGaugeRotation)) Settings.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(Settings.LastRun)) Settings.LastRun = DateTime.Parse(attr.Value);
                     else if (attr.Name == nameof(Settings.TwitchName)) Settings.TwitchName = attr.Value;

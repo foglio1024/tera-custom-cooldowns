@@ -9,6 +9,7 @@
              xmlns:settings="clr-namespace:TCC.Controls.Settings"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseDoubleClick="TccWindow_MouseDoubleClick"
@@ -158,7 +159,9 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" Opacity="{Binding BackgroundOpacity}">
+                        <!--Opacity="{Binding WindowSettings.BackgroundOpacity}"-->
+                <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" Opacity=".2"
+                        >
                     <Border.Effect>
                         <BlurEffect Radius="20"/>
                     </Border.Effect>
@@ -240,7 +243,9 @@
                               Width="Auto"
                               Height="18"
                               Style="{StaticResource LfgItemsControl}"
-                              Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}">
+Visibility="Collapsed"
+                              >
+                              <!--Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}"-->
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"></WrapPanel>
@@ -261,16 +266,17 @@
                MouseLeftButtonDown="SettingsPopup_PreviewMouseLeftButtonDown"
                MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=Settings}" StaysOpen="True"
-               PopupAnimation="Slide">
+               PopupAnimation="Slide" >
             <Grid>
-
                 <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
                 <StackPanel Width="350" Margin="3">
                     <settings:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
-                                           Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0" Max="1" Visibility="Visible"/>
-                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
-                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" CheckBoxColor="{StaticResource DefensiveStanceBrush}"
-                                              IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWidget}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
+                                           Value="{Binding WindowSettings.BackgroundOpacity,  Mode=TwoWay}" 
+                                           Min="0" Max="1" Visibility="Visible"/>
+
+                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
+                    <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff" IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
+                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <Button  Style="{StaticResource SettingsButton}" ToolTip="Use current position for all classes" Click="MakeGlobal" Margin="10 5 10 7">
                         <TextBlock Text="Make position global" Margin="0 0"/>
                     </Button>

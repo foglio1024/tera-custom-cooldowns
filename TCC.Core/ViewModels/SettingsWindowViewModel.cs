@@ -192,17 +192,17 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool ChatFadeOut
-        {
-            get => Settings.Settings.ChatFadeOut;
-            set
-            {
-                if (Settings.Settings.ChatFadeOut == value) return;
-                Settings.Settings.ChatFadeOut = value;
-                if (value) ChatWindowManager.Instance.RefreshHideTimer();
-                NPC(nameof(ChatFadeOut));
-            }
-        }
+        //public bool ChatFadeOut
+        //{
+        //    get => Settings.Settings.ChatFadeOut;
+        //    set
+        //    {
+        //        if (Settings.Settings.ChatFadeOut == value) return;
+        //        Settings.Settings.ChatFadeOut = value;
+        //        if (value) ChatWindowManager.Instance.ForceHideTimerRefresh();
+        //        NPC(nameof(ChatFadeOut));
+        //    }
+        //}
         public string RegionOverride
         {
             get => Settings.Settings.RegionOverride;
@@ -510,17 +510,17 @@ namespace TCC.ViewModels
                 if(res == MessageBoxResult.OK) App.Restart();
             }
         }
-        public double ChatWindowOpacity
-        {
-            get => Settings.Settings.ChatWindowOpacity;
-            set
-            {
-                if (Settings.Settings.ChatWindowOpacity == value) return;
-                Settings.Settings.ChatWindowOpacity = value;
-                ChatWindowManager.Instance.NotifyOpacityChange();
-                NPC(nameof(ChatWindowOpacity));
-            }
-        }
+        //public double ChatWindowOpacity
+        //{
+        //    get => Settings.Settings.ChatWindowOpacity;
+        //    set
+        //    {
+        //        if (Settings.Settings.ChatWindowOpacity == value) return;
+        //        Settings.Settings.ChatWindowOpacity = value;
+        //        ChatWindowManager.Instance.NotifyOpacityChange();
+        //        NPC(nameof(ChatWindowOpacity));
+        //    }
+        //}
         public int FontSize
         {
             get => Settings.Settings.FontSize;
@@ -613,13 +613,13 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        public List<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
-        public List<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
-        public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
-        public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
-        public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
-        public List<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
-        public List<ControlShape> ControlShapes => Utils.ListFromEnum<ControlShape>();
+        public IEnumerable<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+        public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
+        public IEnumerable<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
+        public IEnumerable<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
+        public IEnumerable<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
+        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
+        public IEnumerable<ControlShape> ControlShapes => Utils.ListFromEnum<ControlShape>();
 
         public bool ChatWindowEnabled
         {

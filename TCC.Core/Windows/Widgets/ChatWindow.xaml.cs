@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Settings;
@@ -20,21 +21,32 @@ namespace TCC.Windows.Widgets
         private bool _bottom = true;
         public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
         public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
+
         public ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
+            VM.WindowSettings = ws;
             //ButtonsRef = buttons;
             MainContent = content;
             Init(ws, false, true, false);
-            _opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
-            _opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
-            ChatWindowManager.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
+            _opacityUp = new DoubleAnimation( 1, TimeSpan.FromMilliseconds(120));
+            _opacityDown = new DoubleAnimation(0.01, TimeSpan.FromMilliseconds(120));
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnDragCompleted));
+            (WindowSettings as ChatWindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
+            //(WindowSettings as ChatWindowSettings).OpacityChanged += () => VM.NotifyOpacityChanged();
         }
+
+        private void OnVisibilityChanged(bool obj)
+        {
+            if((WindowSettings as ChatWindowSettings).FadeOut) AnimateChatVisibility(obj);
+        }
+
+
         public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
         {
             DataContext = vm;
-            UpdateSettings();
+            //UpdateSettings();
+            VM.VisibilityChanged += OnVisibilityChanged; 
         }
 
 
@@ -89,8 +101,8 @@ namespace TCC.Windows.Widgets
 
             ((ChatWindowSettings)WindowSettings).Tabs.Clear();
                 ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
-                ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
-                ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
+                //((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
+                //((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
                 ((ChatWindowSettings)WindowSettings).X = Left / TCC.Settings.Settings.ScreenW;
                 ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.Settings.ScreenH;
                 var v = TCC.Settings.Settings.ChatWindowsSettings;
@@ -102,13 +114,6 @@ namespace TCC.Windows.Widgets
                     ChatTabClient.LastSource.UpdateSettings();
                 }
             });
-        }
-        private void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ChatWindowManager.Instance.IsChatVisible))
-            {
-                AnimateChatVisibility(ChatWindowManager.Instance.IsChatVisible);
-            }
         }
 
         private void AnimateChatVisibility(bool isChatVisible)
@@ -136,28 +141,7 @@ namespace TCC.Windows.Widgets
             }
 
             ChatWindowManager.Instance.SetPaused(!_bottom);
-
         }
-
-        //public void OpenTooltip()
-        //{
-        //    Dispatcher.Invoke(() =>
-        //    {
-        //        FocusManager.FocusTimer.Enabled = false;
-        //        if (PlayerInfo.IsOpen) CloseTooltip();
-        //        WindowManager.FloatingButton.TooltipInfo.Refresh();
-        //        PlayerInfo.IsOpen = true;
-        //        ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
-        //    });
-        //}
-        //public void CloseTooltip()
-        //{
-        //    Dispatcher.Invoke(() =>
-        //    {
-        //        FocusManager.FocusTimer.Enabled = true;
-        //        PlayerInfo.IsOpen = false;
-        //    });
-        //}
 
         private void TabClicked(object sender, MouseButtonEventArgs e)
         {
@@ -276,14 +260,14 @@ namespace TCC.Windows.Widgets
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChatWindowManager.Instance.RefreshHideTimer();
+            VM.RefreshHideTimer();
             Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(.3, TimeSpan.FromMilliseconds(300)));
             if (e.LeftButton == MouseButtonState.Pressed) UpdateSettings();
         }
 
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
         {
-            ChatWindowManager.Instance.StopHideTimer();
+            VM.StopHideTimer();
             Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
         }
 

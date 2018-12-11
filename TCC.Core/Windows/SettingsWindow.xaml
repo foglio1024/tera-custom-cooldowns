@@ -991,7 +991,7 @@
                                     </Grid>
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
-                            <settings:ValueSetting SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" >
+                            <!--<settings:ValueSetting SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" >
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}"/>
@@ -1000,7 +1000,7 @@
                                         </TextBlock>
                                     </Grid>
                                 </settings:ValueSetting.ToolTip>
-                            </settings:ValueSetting>
+                            </settings:ValueSetting>-->
                             <settings:ValueSetting SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" >
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1031,7 +1031,7 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Fade out" IsOn="{Binding ChatFadeOut, Mode=TwoWay}">
+                            <!--<settings:CheckboxSetting SettingName="Fade out" IsOn="{Binding ChatFadeOut, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}"/>
@@ -1040,7 +1040,7 @@
                                         </TextBlock>
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
+                            </settings:CheckboxSetting>-->
                             <settings:CheckboxSetting SettingName="Animate chat messages" IsOn="{Binding AnimateChatMessages, Mode=TwoWay}" >
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1061,6 +1061,9 @@
                             <Button Style="{StaticResource SettingsButton}"  
                                     Content="Move window to center screen"
                                     Click="ResetChatWindowsPosition" />
+                            <Button Style="{StaticResource SettingsButton}"  
+                                    Content="Clear chat messages"
+                                    Click="ClearChatMessages" />
                         </StackPanel>
                     </Grid>
                 </TabItem>

@@ -19,8 +19,6 @@ namespace TCC.ViewModels
         private static ChatWindowManager _instance;
         public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
 
-        private bool _isChatVisible;
-        private readonly DispatcherTimer _hideTimer;
         private readonly ConcurrentQueue<ChatMessage> _queue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
@@ -33,16 +31,6 @@ namespace TCC.ViewModels
         public List<string> BlockedUsers { get; set; }
         public LFG LastClickedLfg { get; set; }
 
-        public bool IsChatVisible
-        {
-            get => _isChatVisible;
-            private set
-            {
-                if (_isChatVisible == value) return;
-                _isChatVisible = value;
-                NPC(nameof(IsChatVisible));
-            }
-        }
         public int MessageCount => ChatMessages.Count;
         public bool IsQueueEmpty => _queue.Count == 0;
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; }
@@ -58,8 +46,6 @@ namespace TCC.ViewModels
             _privateMessagesCache = new List<TempPrivateMessage>();
             LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>();
-            _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(15) };
-            _hideTimer.Tick += OnHideTimerTick;
 
             ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
@@ -76,24 +62,25 @@ namespace TCC.ViewModels
             Settings.Settings.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
-                var w = new ChatWindow(s);
                 var m = new ChatViewModel();
-                w.DataContext = m;
+                var w = new ChatWindow(s, m);
+                //w.DataContext = m;
                 ChatWindows.Add(w);
                 m.LoadTabs(s.Tabs);
-                m.LfgOn = s.LfgOn;
-                m.BackgroundOpacity = s.BackgroundOpacity;
+                //m.LfgOn = s.LfgOn;
+                //m.BackgroundOpacity = s.BackgroundOpacity;
             });
             if (ChatWindows.Count == 0)
             {
-                var w = new ChatWindow(
-                    new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false)
-                );
-                Settings.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true,
+                    false);
                 var m = new ChatViewModel();
-                w.DataContext = m;
+                var w = new ChatWindow(ws, m);
+                Settings.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 ChatWindows.Add(w);
                 m.LoadTabs();
+                //m.LfgOn = ws.LfgOn;
+                //m.BackgroundOpacity = ws.BackgroundOpacity;
                 if (Settings.Settings.ChatEnabled) w.Show();
             }
         }
@@ -124,43 +111,39 @@ namespace TCC.ViewModels
         {
             //TODO?
         }
-        public void RefreshHideTimer()
-        {
-            _hideTimer.Refresh();
-        }
-        public void StopHideTimer()
-        {
-            _hideTimer.Stop();
-            IsChatVisible = true;
-        }
-        private void OnHideTimerTick(object sender, EventArgs e)
-        {
-            if (Settings.Settings.ChatFadeOut)
-            {
-                IsChatVisible = false;
-            }
-            _hideTimer.Stop();
-        }
-        public void NotifyOpacityChange()
-        {
-            ChatWindows.ToList().ForEach(x =>
-            {
-                //TODO: make this different per window
-                x.VM.NotifyOpacityChange();
-            });
-        }
+        //public void NotifyOpacityChange()
+        //{
+        //    ChatWindows.ToList().ForEach(x =>
+        //    {
+        //        //TODO: make this different per window
+        //        x.VM.NotifyOpacityChange();
+        //    });
+        //}
 
         public void AddChatMessage(ChatMessage chatMessage)
         {
             //return;
-            if (!Settings.Settings.ChatEnabled) return;
-            if (BlockedUsers.Contains(chatMessage.Author)) return;
+            if (!Settings.Settings.ChatEnabled)
+            {
+                chatMessage.Dispose();
+                return;
+            }
+
+            if (BlockedUsers.Contains(chatMessage.Author))
+            {
+                return;
+                chatMessage.Dispose();
+            }
             if (ChatMessages.Count < Settings.Settings.SpamThreshold)
             {
                 for (var i = 0; i < ChatMessages.Count - 1; i++)
                 {
                     var m = ChatMessages[i];
-                    if (!Pass(chatMessage, m)) return;
+                    if (!Pass(chatMessage, m))
+                    {
+                        chatMessage.Dispose();
+                        return;
+                    }
                 }
             }
             else
@@ -170,7 +153,12 @@ namespace TCC.ViewModels
                     if (i > ChatMessages.Count - 1) continue;
 
                     var m = ChatMessages[i];
-                    if (!Pass(chatMessage, m)) return;
+                    if (!Pass(chatMessage, m))
+                    {
+                        chatMessage.Dispose();
+
+                        return;
+                    }
                 }
             }
 
@@ -186,7 +174,8 @@ namespace TCC.ViewModels
             NewMessage?.Invoke(chatMessage);
             if (ChatMessages.Count > Settings.Settings.MaxMessages)
             {
-
+                var toRemove = ChatMessages[ChatMessages.Count - 1];
+                toRemove.Dispose();
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
             NPC(nameof(MessageCount));
@@ -290,8 +279,12 @@ namespace TCC.ViewModels
 
         private void OnChatMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            RefreshHideTimer();
-            IsChatVisible = true;
+            if (e.Action != NotifyCollectionChangedAction.Add) return;
+            //TODO
+            foreach (var chatWindow in ChatWindows)
+            {
+                chatWindow.VM.CheckVisibility(e.NewItems);
+            }
         }
 
         public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
@@ -336,5 +329,12 @@ namespace TCC.ViewModels
             }
         }
 
+        public void ForceHideTimerRefresh()
+        {
+            foreach (var chatWindow in ChatWindows)
+            {
+                chatWindow.VM.RefreshHideTimer();
+            }
+        }
     }
 }

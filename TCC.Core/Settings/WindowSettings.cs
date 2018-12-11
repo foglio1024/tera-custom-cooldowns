@@ -287,9 +287,62 @@ namespace TCC.Settings
 
     public class ChatWindowSettings : WindowSettings
     {
-        public double BackgroundOpacity { get; set; } = .3;
+        private bool _fadeOut = true;
+        private double _backgroundOpacity = .3;
+        private bool _lfgOn = true;
+
+        public event Action FadeoutChanged;
+        public event Action OpacityChanged;
+
+        private int _hideTimeout;
+
+        public int HideTimeout
+        {
+            get { return _hideTimeout; }
+            set
+            {
+                if(_hideTimeout == value) return;
+                _hideTimeout = value;
+                NPC();
+            }
+        }
+
+        public double BackgroundOpacity
+        {
+            get => _backgroundOpacity;
+            set
+            {
+                if(_backgroundOpacity == value) return;
+                _backgroundOpacity = value;
+                NPC();
+                OpacityChanged?.Invoke();
+            }
+        }
+        public bool FadeOut
+        {
+            get => _fadeOut;
+            set
+            {
+                if(_fadeOut == value) return;
+                _fadeOut = value;
+                NPC();
+                FadeoutChanged?.Invoke();
+            }
+        }
+
         public List<Tab> Tabs { get; set; }
-        public bool LfgOn { get; set; } = true;
+
+        public bool LfgOn
+        {
+            get => _lfgOn;
+            set
+            {
+                if(_lfgOn == value) return;
+                _lfgOn = value;
+                NPC();
+            }
+        }
+
 
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {

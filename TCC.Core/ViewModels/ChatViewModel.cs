@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Threading;
 using Dragablz;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Settings;
 
 namespace TCC.ViewModels
 {
@@ -13,8 +16,12 @@ namespace TCC.ViewModels
     {
         private SynchronizedObservableCollection<HeaderedItemViewModel> _tabVMs;
         private bool _paused;
-        private bool _lfgOn;
-        private double _backgroundOpacity = 0.3;
+        //private bool _lfgOn;
+        //private double _backgroundOpacity = 0.3;
+        private readonly DispatcherTimer _hideTimer;
+
+        public event Action<bool> VisibilityChanged;
+
 
         public bool Paused
         {
@@ -52,7 +59,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public Tab CurrentTab { get; set; }
-        public double ChatWindowOpacity => Settings.Settings.ChatWindowOpacity;
+        //public double ChatWindowOpacity => Settings.Settings.ChatWindowOpacity;
         public Func<HeaderedItemViewModel> AddNewTabCommand
         {
             get
@@ -73,46 +80,56 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool LfgOn
-        {
-            get => _lfgOn; set
-            {
-                if (_lfgOn == value) return;
-                _lfgOn = value;
-                NPC();
-            }
-        }
-        public double BackgroundOpacity
-        {
-            get => _backgroundOpacity; set
-            {
-                if (_backgroundOpacity == value) return;
-                _backgroundOpacity = value;
-                NPC();
-            }
-        }
+        //public bool LfgOn
+        //{
+        //    get => _lfgOn; set
+        //    {
+        //        if (_lfgOn == value) return;
+        //        _lfgOn = value;
+        //        NPC();
+        //    }
+        //}
+        //public double BackgroundOpacity
+        //{
+        //    get => _backgroundOpacity; set
+        //    {
+        //        if (_backgroundOpacity == value) return;
+        //        _backgroundOpacity = value;
+        //        NPC();
+        //    }
+        //}
+
+        public ChatWindowSettings WindowSettings { get; set; }
 
 
-
-        public void NotifyOpacityChange()
+        public void RefreshHideTimer()
         {
-            NPC(nameof(ChatWindowOpacity));
+            _hideTimer.Refresh();
         }
+        public void StopHideTimer()
+        {
+            _hideTimer.Stop();
+            VisibilityChanged?.Invoke(true);// IsChatVisible = true;
+        }
+
+        //public void NotifyOpacityChange()
+        //{
+        //    NPC(nameof(ChatWindowOpacity));
+        //}
         public ChatViewModel()
         {
             TabVMs = new SynchronizedObservableCollection<HeaderedItemViewModel>();
-            //WindowManager.TccVisibilityChanged += (s, ev) =>
-            //{
-            //NPC($"IsTeraOnTop");
-            //if (IsTeraOnTop)
-            //{
-            ////WindowManager.ChatWindow.RefreshTopmost(); //TODO: handle event in ChatWindow.xaml.cs
-            //}
-            //};
+
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             TabVMs.CollectionChanged += TabVMs_CollectionChanged;
-            //LoadTabs(Settings.ParseTabsSettings());
 
+            _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
+            _hideTimer.Tick += OnHideTimerTick;
+        }
+        private void OnHideTimerTick(object sender, EventArgs e)
+        {
+            VisibilityChanged?.Invoke(false); //IsChatVisible = false;
+            _hideTimer.Stop();
         }
         private void TabVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -194,5 +211,16 @@ namespace TCC.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void CheckVisibility(IList newItems)
+        {
+            if (CurrentTab == null)
+            {
+                CurrentTab = TabVMs[0].Content as Tab;
+            }
+            if (!CurrentTab.Filter(newItems[0] as ChatMessage)) return;
+            RefreshHideTimer();
+            VisibilityChanged?.Invoke(true);  // IsChatVisible = true;
+        }
     }
 }
