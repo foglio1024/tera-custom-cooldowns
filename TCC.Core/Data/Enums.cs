@@ -1,11 +1,25 @@
-﻿namespace TCC.Data
+﻿using System.ComponentModel;
+
+namespace TCC.Data
 {
     public enum ItemLevelTier
     {
-        Low = 439,
-        Mid = 446,
-        High = 453,
-        Top = 456,
+        [Description("None")]
+        Tier0 = 0,
+        [Description("412")]
+        Tier1 = 412,
+        [Description("431")]
+        Tier2 = 431,
+        [Description("439")]
+        Tier3 = 439,
+        [Description("446")]
+        Tier4 = 446,
+        [Description("453")]
+        Tier5 = 453,
+        [Description("455")]
+        Tier6 = 455,
+        [Description("456")]
+        Tier7 = 456
     }
 
     public enum NpcGuild
@@ -81,7 +95,7 @@
     }
     public enum DungeonTier
     {
-        Solo,
+        Solo = 1,
         Tier2,
         Tier3,
         Tier4,
@@ -286,7 +300,8 @@
         Low = 0,
         Mid = 1,
         High = 2,
-        Top = 3
+        Top = 3,
+        Heroic
     }
 
     public enum ClickThruMode
