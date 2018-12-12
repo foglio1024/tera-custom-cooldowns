@@ -753,7 +753,7 @@ namespace TCC.Parsing
             if (Settings.Settings.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
-        internal static void HandleKicked(S_BAN_PARTY x)
+        public static void HandleKicked(S_BAN_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
             if (Settings.Settings.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
