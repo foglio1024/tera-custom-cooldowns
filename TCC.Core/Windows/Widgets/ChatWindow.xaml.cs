@@ -22,31 +22,33 @@ namespace TCC.Windows.Widgets
         public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
         public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
 
-        public ChatWindow(ChatWindowSettings ws)
+        private ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
-            VM.WindowSettings = ws;
             //ButtonsRef = buttons;
             MainContent = content;
             Init(ws, false, true, false);
-            _opacityUp = new DoubleAnimation( 1, TimeSpan.FromMilliseconds(120));
+            _opacityUp = new DoubleAnimation(1, TimeSpan.FromMilliseconds(120));
             _opacityDown = new DoubleAnimation(0.01, TimeSpan.FromMilliseconds(120));
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnDragCompleted));
-            (WindowSettings as ChatWindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
-            //(WindowSettings as ChatWindowSettings).OpacityChanged += () => VM.NotifyOpacityChanged();
         }
 
         private void OnVisibilityChanged(bool obj)
         {
-            if((WindowSettings as ChatWindowSettings).FadeOut) AnimateChatVisibility(obj);
+            if ((WindowSettings as ChatWindowSettings).FadeOut) AnimateChatVisibility(obj);
         }
 
 
         public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
         {
             DataContext = vm;
+            VM.WindowSettings = ws;
+
             //UpdateSettings();
-            VM.VisibilityChanged += OnVisibilityChanged; 
+            (WindowSettings as ChatWindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
+            //(WindowSettings as ChatWindowSettings).OpacityChanged += () => VM.NotifyOpacityChanged();
+            VM.VisibilityChanged += OnVisibilityChanged;
+            VM.RefreshHideTimer();
         }
 
 
@@ -82,7 +84,7 @@ namespace TCC.Windows.Widgets
             {
                 VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
-                FocusManager.ForceFocused = false;
+            FocusManager.ForceFocused = false;
 
         }
 
@@ -99,7 +101,7 @@ namespace TCC.Windows.Widgets
                     }
                 }
 
-            ((ChatWindowSettings)WindowSettings).Tabs.Clear();
+                ((ChatWindowSettings)WindowSettings).Tabs.Clear();
                 ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
                 //((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
                 //((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
@@ -107,7 +109,7 @@ namespace TCC.Windows.Widgets
                 ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.Settings.ScreenH;
                 var v = TCC.Settings.Settings.ChatWindowsSettings;
                 var s = v.FirstOrDefault(x => x == WindowSettings);
-                if (s == null) v.Add((ChatWindowSettings) WindowSettings);
+                if (s == null) v.Add((ChatWindowSettings)WindowSettings);
 
                 if (!Equals(ChatTabClient.LastSource, this) && ChatTabClient.LastSource != null)
                 {
@@ -283,6 +285,7 @@ namespace TCC.Windows.Widgets
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
+            SettingsPopup.DataContext = this.DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
 

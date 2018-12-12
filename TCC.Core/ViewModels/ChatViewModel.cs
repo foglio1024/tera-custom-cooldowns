@@ -18,7 +18,8 @@ namespace TCC.ViewModels
         private bool _paused;
         //private bool _lfgOn;
         //private double _backgroundOpacity = 0.3;
-        private readonly DispatcherTimer _hideTimer;
+        private DispatcherTimer _hideTimer;
+        private ChatWindowSettings _windowSettings;
 
         public event Action<bool> VisibilityChanged;
 
@@ -99,8 +100,31 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        public ChatWindowSettings WindowSettings { get; set; }
+        public ChatWindowSettings WindowSettings
+        {
+            get => _windowSettings;
+            set
+            {
+                if (_windowSettings == value) return;
+                if (_windowSettings != null)
+                {
+                    _windowSettings.TimeoutChanged -= ChangeTimerInterval;
+                }
+                _windowSettings = value;
+                if (_windowSettings != null)
+                {
+                    _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
+                    _hideTimer.Tick += OnHideTimerTick;
+                    _windowSettings.TimeoutChanged += ChangeTimerInterval;
+                }
+            }
+        }
 
+        private void ChangeTimerInterval()
+        {
+            _hideTimer.Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout);
+            _hideTimer.Refresh();
+        }
 
         public void RefreshHideTimer()
         {
@@ -123,8 +147,6 @@ namespace TCC.ViewModels
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             TabVMs.CollectionChanged += TabVMs_CollectionChanged;
 
-            _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
-            _hideTimer.Tick += OnHideTimerTick;
         }
         private void OnHideTimerTick(object sender, EventArgs e)
         {

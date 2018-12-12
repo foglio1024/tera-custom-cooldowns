@@ -24,9 +24,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="7 12 7 7" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
-    <w:TccWidget.DataContext>
-        <vm:ChatViewModel />
-    </w:TccWidget.DataContext>
     <w:TccWidget.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
             <chatcontrols:ChatMessageControl VerticalAlignment="Top">
@@ -97,7 +94,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
                 <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf"  Margin="1 3 2 0" 
                         Visibility="{Binding Content.PinnedMessage, Converter={StaticResource NullToVisibleCollapsed}}">
                     <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}" 
@@ -139,10 +135,7 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
-
             </Grid>
-            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         </DataTemplate>
     </w:TccWidget.Resources>
     <Grid>
@@ -150,17 +143,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <!--<c:WindowButtons  WindowName="Chat window" x:Name="buttons" AutoDimButtonVisiblity="Collapsed" HideButtonVisibility="Collapsed"
-                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />-->
-        <!-- ReSharper disable once InconsistentNaming -->
         <dockablz:Layout Name="content" Grid.Row="1">
             <Grid Margin="3" Width="Auto" Name="Root">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                        <!--Opacity="{Binding WindowSettings.BackgroundOpacity}"-->
-                <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" Opacity=".2"
+                <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" 
+                        Opacity="{Binding WindowSettings.BackgroundOpacity}"
                         >
                     <Border.Effect>
                         <BlurEffect Radius="20"/>
@@ -222,17 +212,6 @@
                 <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
                        HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
                        Visibility="{Binding Paused, Converter={StaticResource BoolToVisibleCollapsed}}" />
-                <!--<Path Data="{StaticResource SvgSettings}"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Top"
-                  Fill="White"
-                  Grid.Row="1"
-                  IsHitTestVisible="False"
-                  Stretch="Uniform"
-                  Height="14" Width="14"
-                  Margin="4"
-                  Opacity=".4"
-                  />-->
                 <Border Background="{StaticResource DefaultBackgroundBrush}" Width="Auto"
                         Grid.Column="0" Grid.Row="0" Opacity="0"
                         Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}" />
@@ -243,9 +222,8 @@
                               Width="Auto"
                               Height="18"
                               Style="{StaticResource LfgItemsControl}"
-Visibility="Collapsed"
+                              Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}"
                               >
-                              <!--Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}"-->
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"></WrapPanel>
@@ -276,6 +254,9 @@ Visibility="Collapsed"
 
                     <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
                     <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff" IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
+                    <settings:ValueSetting SettingName="Fade timeout" Foreground="#9fff" TextBoxVisibility="Visible"
+                                           Value="{Binding WindowSettings.HideTimeout,  Mode=TwoWay}" 
+                                           Min="3" Max="60" Visibility="Visible"/>
                     <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <Button  Style="{StaticResource SettingsButton}" ToolTip="Use current position for all classes" Click="MakeGlobal" Margin="10 5 10 7">
                         <TextBlock Text="Make position global" Margin="0 0"/>
