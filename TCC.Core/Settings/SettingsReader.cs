@@ -85,8 +85,17 @@ namespace TCC.Settings
         {
             var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
             var ts = s.Descendants().FirstOrDefault(x => x.Name == "Tabs");
-            var lfg = ws?.Attribute(nameof(ChatWindowSettings.LfgOn));
-            var op = ws?.Attribute(nameof(ChatWindowSettings.BackgroundOpacity));
+            var lfg = false;
+            var fo = true;
+            var op = .3;
+            var ht = 10;
+            ws?.Attributes().ToList().ForEach(a =>
+            {
+                if (a.Name == nameof(ChatWindowSettings.LfgOn)) lfg = bool.Parse(a.Value);
+                else if (a.Name == nameof(ChatWindowSettings.FadeOut)) fo = bool.Parse(a.Value);
+                else if (a.Name == nameof(ChatWindowSettings.BackgroundOpacity)) op = float.Parse(a.Value, CultureInfo.InvariantCulture);
+                else if (a.Name == nameof(ChatWindowSettings.HideTimeout)) ht = int.Parse(a.Value);
+            });
 
             var sett = ParseWindowSettings(ws);
             var tabs = ParseTabsSettings(ts);
@@ -98,8 +107,11 @@ namespace TCC.Settings
                 sett.Enabled, sett.AllowOffScreen)
             {
                 Tabs = tabs,
-                LfgOn = lfg == null || bool.Parse(lfg.Value),
-                BackgroundOpacity = op != null ? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
+                LfgOn = lfg,
+                BackgroundOpacity = op,
+                FadeOut = fo,
+                HideTimeout = ht
+
             };
         }
         private ClassPositions ParseWindowPositions(XElement windowSettingXElement)

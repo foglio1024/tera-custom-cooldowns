@@ -293,6 +293,7 @@ namespace TCC.Settings
 
         public event Action FadeoutChanged;
         public event Action OpacityChanged;
+        public event Action TimeoutChanged;
 
         private int _hideTimeout;
 
@@ -304,6 +305,7 @@ namespace TCC.Settings
                 if(_hideTimeout == value) return;
                 _hideTimeout = value;
                 NPC();
+                TimeoutChanged?.Invoke();
             }
         }
 
