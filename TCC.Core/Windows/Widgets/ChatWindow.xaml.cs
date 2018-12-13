@@ -364,16 +364,20 @@ namespace TCC.Windows.Widgets
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var lb = sender as ItemsControl;
-
             var sw = Utils.GetChild<ScrollViewer>(lb);
-            sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? 3 : -3));
+            var lines = 3;
+            if (sw.VerticalOffset + e.Delta >= sw.ScrollableHeight)
+            {
+                lines = 1;
+            }
+            sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? lines : -lines));
+
             e.Handled = true;
             if (sw.VerticalOffset == 0)
             {
                 _bottom = true;
                 ChatWindowManager.Instance.AddFromQueue(0);
                 if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
-
             }
             else
             {
