@@ -62,6 +62,8 @@ namespace TCC.Parsing.Messages
                                 PiecesOfDragonScroll = reader.ReadUInt32();
                                 break;
                         }
+
+                        if (next == 0) break;
                         reader.BaseStream.Position = next - 4;
                         continue;
                     }
