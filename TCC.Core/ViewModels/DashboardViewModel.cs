@@ -6,8 +6,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using System.Xml.Linq;
+using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Pc;
@@ -94,29 +97,43 @@ namespace TCC.ViewModels
             {
                 if (_columns != null) return _columns;
                 _columns = new ObservableCollection<DungeonColumnViewModel>();
-                SessionManager.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
-                {
-                    var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
-                    CharacterViewModels?.ToList().ForEach(charVm => dvc.DungeonsList.Add(new DungeonCooldownViewModel
-                    {
-                        Owner = charVm.Character,
-                        Cooldown = charVm.Character.Dungeons.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id)
-                    }));
-                    _columns.Add(dvc);
-                });
                 return _columns;
             }
         }
-
+        public RelayCommand LoadDungeonsCommand { get; }
         /* -- Constructor ------------------------------------------ */
-
+        bool _loaded = false;
         public DashboardViewModel()
         {
             Characters = new SynchronizedObservableCollection<Character>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>();
+            LoadDungeonsCommand = new RelayCommand(o =>
+            {
+                if (_loaded) return;
 
+                Task.Factory.StartNew(() =>
+                {
+                    SessionManager.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                    {
+                        App.BaseDispatcher.BeginInvoke(new Action(() =>
+                        {
+                            var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
+                            CharacterViewModels?.ToList().ForEach(charVm =>
+                                    dvc.DungeonsList.Add(
+                                        new DungeonCooldownViewModel
+                                        {
+                                            Owner = charVm.Character,
+                                            Cooldown = charVm.Character.Dungeons.FirstOrDefault(x =>
+                                                x.Dungeon.Id == dungeon.Id)
+                                        }));
+                            _columns.Add(dvc);
+                        }), DispatcherPriority.Background);
+                    });
+                });
+                _loaded = true;
+            }, c => !_loaded);
             SortedCharacters = Utils.InitLiveView(o => o != null, Characters, new string[] { }, new[]
             {
                 new SortDescription(nameof(Character.Position), ListSortDirection.Ascending)

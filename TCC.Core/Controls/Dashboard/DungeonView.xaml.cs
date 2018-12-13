@@ -33,6 +33,7 @@ namespace TCC.Controls.Dashboard
         public DungeonView()
         {
             InitializeComponent();
+            IsVisibleChanged += (_, __) => { (DataContext as DashboardViewModel).LoadDungeonsCommand.Execute(null); };
         }
 
         private void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
