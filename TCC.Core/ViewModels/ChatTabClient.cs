@@ -14,7 +14,7 @@ namespace TCC.ViewModels
             LastSource = Window.GetWindow(source) as ChatWindow;
             var model = new ChatViewModel();
             var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
-                1, false, 1, false, true, false), model);
+                1, false, 1, false, true, false){ HideTimeout = 10, BackgroundOpacity = .3, FadeOut = true, LfgOn = false}, model);
             ChatWindowManager.Instance.ChatWindows.Add(view);
             return new NewTabHost<Window>(view, view.TabControl);
 
