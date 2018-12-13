@@ -123,21 +123,19 @@
                         dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
                         dd:DragDrop.IsDropTarget="True"
                         dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}">
-                        <ListBox.Resources>
-                            <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                        </ListBox.Resources>
+
 
                     </ListBox>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" Margin="10 0"
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" Margin="10 0"
                                Opacity=".8" FontWeight="Thin" FontSize="16" >
                         Hidden skills
-                    </TextBlock>
-                    <Path Data="{StaticResource SvgInfo}" Margin="0 1 10 0" Height="14"
+                        </TextBlock>
+                        <Path Data="{StaticResource SvgInfo}" Margin="0 1 10 0" Height="14"
                           VerticalAlignment="Top" Fill="#3fff"
                           HorizontalAlignment="Right" ToolTip="Non-fixed skills (also items) hidden using the Hide button will be displayed here.">
-                    </Path>
+                        </Path>
                     </StackPanel>
                     <ListBox
                         VerticalAlignment="Stretch"
@@ -145,9 +143,6 @@
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ItemTemplate="{StaticResource HddenSkillDataTemplate}"
                         Grid.Row="2">
-                        <ListBox.Resources>
-                            <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                        </ListBox.Resources>
                     </ListBox>
                 </Grid>
             </Grid>
@@ -178,9 +173,6 @@
                          dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
                          dd:DragDrop.IsDropTarget="True"
                          Grid.Row="2">
-                    <ListBox.Resources>
-                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                    </ListBox.Resources>
                 </ListBox>
             </Grid>
             <Grid>
@@ -211,9 +203,6 @@
                          dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
                          dd:DragDrop.IsDropTarget="True">
 
-                    <ListBox.Resources>
-                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                    </ListBox.Resources>
                 </ListBox>
             </Grid>
         </UniformGrid>
@@ -222,4 +211,5 @@
             Drag and drop a skill, item, abnormality to the cooldown bar
         </TextBlock>
     </Grid>
+
 </Window>

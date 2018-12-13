@@ -17,16 +17,6 @@
                  AllowsTransparency="True"
                  d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
     <local:TccWindow.Resources>
-
-        <!-- TODO: remove this ############################################################ -->
-        <Style TargetType="ScrollViewer" BasedOn="{StaticResource TempScrollViewerStyle}"/>
-        <!-- ############################################################################## -->
-
-        <Style TargetType="ListBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-
         <DataTemplate x:Key="DungeonCharDataTemplate" DataType="pc:Character">
             <Grid HorizontalAlignment="Stretch" ShowGridLines="False" Background="Transparent" Height="28">
                 <Grid.ColumnDefinitions>

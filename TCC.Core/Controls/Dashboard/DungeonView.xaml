@@ -123,14 +123,6 @@
             </Grid>
 
         </DataTemplate>
-        <!-- TODO: refactor this ############################################################ -->
-        <Style TargetType="{x:Type ScrollViewer}"
-               BasedOn="{StaticResource TempScrollViewerStyle}" />
-        <Style TargetType="{x:Type ListBox}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
-        <!-- ################################################################################ -->
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

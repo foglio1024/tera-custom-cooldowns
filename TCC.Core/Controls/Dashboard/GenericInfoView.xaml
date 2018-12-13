@@ -14,14 +14,6 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <!-- TODO: refactor this ############################################################ -->
-        <Style TargetType="{x:Type ScrollViewer}"
-               BasedOn="{StaticResource TempScrollViewerStyle}" />
-        <Style TargetType="{x:Type ListBox}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
-        <!-- ############################################################################## -->
         <ToolTip x:Key="DragonwingTooltip" d:DataContext="{d:DesignInstance pc:Character}">
             <Border Style="{StaticResource RevampBorderStyle}" Opacity="1">
                 <Grid>
@@ -214,7 +206,6 @@
                                                  Factor="{Binding VanguardWeeklyCompletion}" />
                     </StackPanel>
                 </Grid>
-
                 <Grid VerticalAlignment="Stretch"
                       ToolTipService.InitialShowDelay="0"
                       ToolTipService.BetweenShowDelay="0"

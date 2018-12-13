@@ -123,9 +123,6 @@
                 <!--Content-->
                 <ScrollViewer Height="506" VerticalScrollBarVisibility="Visible"
                               HorizontalAlignment="Left" Grid.Row="2">
-                    <ScrollViewer.Resources>
-                        <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}" />
-                    </ScrollViewer.Resources>
                     <ItemsControl ItemsSource="{Binding Instance.Characters}" HorizontalAlignment="Left"
                                   ItemTemplate="{StaticResource Vang}" VerticalAlignment="Top">
                         <ItemsControl.ItemsPanel>

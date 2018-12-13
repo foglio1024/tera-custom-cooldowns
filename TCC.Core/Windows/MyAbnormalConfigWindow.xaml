@@ -138,11 +138,9 @@
             <ListBox Grid.Row="1" ItemsSource="{Binding AbnormalitiesView}" 
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                      Height="500" ItemTemplate="{StaticResource MyAbnormalitySelectorDataTemplate}"
-                     AlternationCount="2" VirtualizingStackPanel.IsVirtualizing="True"  VirtualizingStackPanel.VirtualizationMode="Recycling"
-                     >
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                </ListBox.Resources>
+                     AlternationCount="2" VirtualizingStackPanel.IsVirtualizing="True"  
+                     VirtualizingStackPanel.VirtualizationMode="Recycling"
+            >
             </ListBox>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="1"/>

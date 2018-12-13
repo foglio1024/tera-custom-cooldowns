@@ -132,11 +132,9 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                      Height="500" ItemTemplate="{StaticResource GroupAbnormalitySelectorDataTemplate}"
                      AlternationCount="2" VirtualizingStackPanel.IsVirtualizing="True"  VirtualizingStackPanel.VirtualizationMode="Recycling"
-                     >
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                </ListBox.Resources>
+            >
             </ListBox>
+
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="1"/>
             </Grid.LayoutTransform>

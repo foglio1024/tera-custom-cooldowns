@@ -473,7 +473,7 @@
             </Grid>
             <!--Main List-->
             <ListBox Background="Transparent"
-                     Padding="-1 -1 -1 5"
+                     Padding="-1 -1 -1 -1"
                      ScrollViewer.CanContentScroll="False"
                      Height="600"
                      ItemContainerStyle="{StaticResource DefaultListItemStyle}"
@@ -481,18 +481,16 @@
                      Grid.Row="2"
                      ItemsSource="{Binding ListingsView}"
                      HorizontalAlignment="Stretch"
-                     Margin="5 5 5 35"
+                     Margin="5 5 5 40"
                      AlternationCount="2"
                      ItemTemplate="{StaticResource ListingDt}">
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
-                </ListBox.Resources>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel HorizontalAlignment="Stretch" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
+
             <!--Footer-->
             <Grid Grid.Row="2" VerticalAlignment="Bottom" Margin=" 0 0 0 2" >
                 <Grid.RowDefinitions>
