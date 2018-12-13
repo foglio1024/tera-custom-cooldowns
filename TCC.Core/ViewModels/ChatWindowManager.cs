@@ -131,8 +131,8 @@ namespace TCC.ViewModels
 
             if (BlockedUsers.Contains(chatMessage.Author))
             {
-                return;
                 chatMessage.Dispose();
+                return;
             }
             if (ChatMessages.Count < Settings.Settings.SpamThreshold)
             {
@@ -198,6 +198,7 @@ namespace TCC.ViewModels
         }
         public void AddFromQueue(int itemsToAdd)
         {
+            if (itemsToAdd == 0) itemsToAdd = _queue.Count;
             for (var i = 0; i < itemsToAdd; i++)
             {
                 if (_queue.TryDequeue(out var msg))
