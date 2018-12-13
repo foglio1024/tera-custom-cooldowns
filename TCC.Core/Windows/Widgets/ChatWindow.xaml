@@ -30,7 +30,7 @@
                 <chatcontrols:ChatMessageControl.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"></ScaleTransform>
-                        <RotateTransform Angle="180"></RotateTransform>
+                        <RotateTransform Angle="0"></RotateTransform>
                     </TransformGroup>
                 </chatcontrols:ChatMessageControl.LayoutTransform>
             </chatcontrols:ChatMessageControl>
@@ -60,7 +60,6 @@
             <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
             <Setter Property="Height" Value="Auto" />
-
             <Setter Property="Padding" Value="0 0 0 0" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -92,7 +91,7 @@
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition />
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf"  Margin="1 3 2 0" 
                         Visibility="{Binding Content.PinnedMessage, Converter={StaticResource NullToVisibleCollapsed}}">
@@ -100,7 +99,7 @@
                                 Content="{Binding Content.PinnedMessage}"
                                 Margin="10 3 4 2">
                         <ContentControl.LayoutTransform>
-                            <RotateTransform Angle="-180"></RotateTransform>
+                            <RotateTransform Angle="180"/>
                         </ContentControl.LayoutTransform>
                         <ContentControl.ContextMenu>
                             <ContextMenu>
@@ -109,32 +108,43 @@
                         </ContentControl.ContextMenu>
                     </ContentControl>
                 </Border>
-                <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
+                <ItemsControl Name="itemsControl" VerticalAlignment="Top"
                           VerticalContentAlignment="Top"
+                              ScrollViewer.CanContentScroll="True"
                           Margin="0 5 5 3"
                           ItemsSource="{Binding Content.Messages}"
                           ItemTemplate="{StaticResource ChatMessageTemplate}"
                           Width="Auto"
                           Grid.Row="1"
-                              HorizontalAlignment="Stretch"
-                              >
-                    <ItemsControl.Style>
-                        <Style BasedOn="{StaticResource ChatItemsControl}" TargetType="ItemsControl">
-                        </Style>
-                    </ItemsControl.Style>
+                          HorizontalAlignment="Stretch"
+                          VirtualizingStackPanel.IsVirtualizing="True"
+                          VirtualizingStackPanel.VirtualizationMode="Recycling"
+                          PreviewMouseWheel="ItemsControl_OnMouseWheel"
+                         >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Margin="0,0,0,0"
-                                                VerticalAlignment="Stretch"
-                                                Background="#01000000"
-                                                VirtualizationMode="Standard">
-                                <VirtualizingStackPanel.LayoutTransform>
-                                    <RotateTransform Angle="180"></RotateTransform>
-                                </VirtualizingStackPanel.LayoutTransform>
-                            </VirtualizingStackPanel>
+                            <VirtualizingStackPanel  VirtualizationMode="Recycling"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.LayoutTransform>
+                        <RotateTransform Angle="180"/>
+                    </ItemsControl.LayoutTransform>
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <Border SnapsToDevicePixels="True"
+                                    BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                    Padding="{TemplateBinding Control.Padding}"
+                                    BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                    Background="{TemplateBinding Panel.Background}">
+                                <ScrollViewer VerticalAlignment="Top" Focusable="False">
+                                    <ItemsPresenter  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+
                 </ItemsControl>
+
             </Grid>
         </DataTemplate>
     </w:TccWidget.Resources>
@@ -214,7 +224,7 @@
                        Visibility="{Binding Paused, Converter={StaticResource BoolToVisibleCollapsed}}" />
                 <Border Background="{StaticResource DefaultBackgroundBrush}" Width="Auto"
                         Grid.Column="0" Grid.Row="0" Opacity="0"
-                        Visibility="{Binding LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}" />
+                        Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}" />
                 <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
                               ItemTemplate="{StaticResource LfgTemplate}"
                               Margin="2"

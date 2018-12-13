@@ -330,7 +330,6 @@ namespace TCC.Windows.Widgets
         {
             base.OnLoaded(sender, e);
             TabControl.SelectedIndex = 0;
-
         }
 
         //private new void Drag(object sender, MouseButtonEventArgs e)
@@ -360,6 +359,29 @@ namespace TCC.Windows.Widgets
         private void MakeGlobal(object sender, RoutedEventArgs e)
         {
             WindowSettings.MakePositionsGlobal();
+        }
+
+        private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var lb = sender as ItemsControl;
+
+            var sw = Utils.GetChild<ScrollViewer>(lb);
+            sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? 5 : -5));
+            e.Handled = true;
+            if (sw.VerticalOffset == 0)
+            {
+                _bottom = true;
+                ChatWindowManager.Instance.AddFromQueue(0);
+                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
+
+            }
+            else
+            {
+
+                _bottom = false;
+            }
+            ChatWindowManager.Instance.SetPaused(!_bottom);
+
         }
     }
 
