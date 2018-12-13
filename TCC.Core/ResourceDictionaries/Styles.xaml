@@ -523,8 +523,8 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Rectangle Fill="#aad5ff" 
-                                               Margin="1"
+                            <Rectangle Fill="#ffaad5ff" 
+                                               Margin="7 2"
                                                VerticalAlignment="Bottom"
                                                Height="2"
                                                Opacity="0"
@@ -534,7 +534,7 @@
                                                HorizontalAlignment="Stretch"
                                                RenderTransformOrigin=".5 .5"
                                                RenderTransform="{StaticResource DefaultScaleTransform}"
-
+                                               UseLayoutRounding="True"
                                                >
                             </Rectangle>
 
@@ -609,17 +609,25 @@
                         <DataTrigger Binding="{Binding Content.Attention}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard x:Name="WarnAttention">
-                                    <Storyboard RepeatBehavior="Forever" >
+                                    <Storyboard RepeatBehavior="Forever" Timeline.DesiredFrameRate="15" >
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 Storyboard.TargetName="AttentionRect"
+                                                                 From="0"
+                                                                 To="1"
+                                                                 EasingFunction="{StaticResource QuadraticEase}"
+                                                                 Duration="0:0:0.5"/>
                                         <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                                                  Storyboard.TargetName="AttentionRect"
                                                                  From="1"
                                                                  To="0"
-                                                                 EasingFunction="{StaticResource QuadraticEase}"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 EasingFunction="{StaticResource QuadraticEase}"
+                                                                 Duration="0:0:0.5"
+                                                         BeginTime="0:0:0.5"/>
+                                        <!--<DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                                                  Storyboard.TargetName="AttentionRect"
                                                                  From="0"
                                                                  To="1"
-                                                                 EasingFunction="{StaticResource QuadraticEase}"/>
+                                                                 EasingFunction="{StaticResource QuadraticEase}"/>-->
 
                                     </Storyboard>
                                 </BeginStoryboard>
