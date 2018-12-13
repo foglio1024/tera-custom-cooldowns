@@ -166,7 +166,7 @@ namespace TCC.Parsing
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntityManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
-
+            ChatWindowManager.Instance.BlockedUsers.Clear();
             SessionManager.CurrentPlayer.ClearAbnormalities();
 
             SessionManager.LoadingScreen = true;
@@ -609,7 +609,11 @@ namespace TCC.Parsing
 
         public static void HandleBlockList(S_USER_BLOCK_LIST x)
         {
-            ChatWindowManager.Instance.BlockedUsers = x.BlockedUsers;
+            x.BlockedUsers.ForEach(u =>
+            {
+                if (ChatWindowManager.Instance.BlockedUsers.Contains(u)) return;
+                ChatWindowManager.Instance.BlockedUsers.Add(u);
+            });
         }
 
         internal static void HandleFriendList(S_FRIEND_LIST x)
@@ -820,7 +824,7 @@ namespace TCC.Parsing
             }
             WindowManager.Dashboard.VM.SetElleonMarks(S_INVEN.ElleonMarks);
             WindowManager.Dashboard.VM.CurrentCharacter.DragonwingScales = S_INVEN.DragonwingScales;
-            WindowManager.Dashboard.VM.CurrentCharacter.PiecesOfDragonScroll= S_INVEN.PiecesOfDragonScroll;
+            WindowManager.Dashboard.VM.CurrentCharacter.PiecesOfDragonScroll = S_INVEN.PiecesOfDragonScroll;
 
             GroupWindowViewModel.Instance.UpdateMyGear();
             //88273 - 88285 L weapons
