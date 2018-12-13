@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Tera.Data;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using Player = TCC.Data.Pc.Player;
@@ -21,7 +22,7 @@ namespace TCC
         private static bool _inGameUiOn;
 
         public static Server Server { get; set; }
-        public static string Language => Server.Region == "EU" ? "EU-EN" : Server.Region;
+        public static string Language => BasicTeraData.Instance.Servers.StringLanguage;
 
 
         public static bool LoadingScreen

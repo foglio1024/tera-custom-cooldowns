@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TCC.Data;
@@ -37,11 +38,33 @@ namespace TCC.TeraCommon.Game.Services
                     case LangEnum.GER:
                     case LangEnum.FR:
                         Region = "EU"; break;
+                    case LangEnum.THA:
+                    case LangEnum.SE:
+                        Region = "THA"; break;
                     default:
                         Region = _language.ToString(); break;
                 }
             }
         }
+
+        public string StringLanguage
+        {
+            get
+            {
+                var ret = _language.ToString();
+                switch (_language)
+                {
+                    case LangEnum.GER:
+                    case LangEnum.FR:
+                    case LangEnum.EN:
+                        ret = "EU-" + ret;
+                        break;
+                }
+
+                return ret;
+            }
+        }
+
         public string GetServerName(uint serverId, Server oldServer = null)
         {
             var servers = _servers.Where(x => x.ServerId == serverId).ToList();
