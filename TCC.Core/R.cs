@@ -435,8 +435,8 @@ namespace TCC.R
 		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
 		public static Style SettingsButton => ((Style)App.Current.FindResource("SettingsButton"));
 		public static Style ScrollThumbs => ((Style)App.Current.FindResource("ScrollThumbs"));
-		public static Style NormalScrollBar => ((Style)App.Current.FindResource("NormalScrollBar"));
-		public static Style TempScrollViewerStyle => ((Style)App.Current.FindResource("TempScrollViewerStyle"));
+		public static Style ReversedScrollBar => ((Style)App.Current.FindResource("ReversedScrollBar"));
+		public static Style ScrollViewerWithReversedVerticalScrollBar => ((Style)App.Current.FindResource("ScrollViewerWithReversedVerticalScrollBar"));
 		public static Style ChatTabControlStyle => ((Style)App.Current.FindResource("ChatTabControlStyle"));
 		public static Style ChatDragableTabItemStyle => ((Style)App.Current.FindResource("ChatDragableTabItemStyle"));
 		public static Style ChatTabablzControlStyle => ((Style)App.Current.FindResource("ChatTabablzControlStyle"));
