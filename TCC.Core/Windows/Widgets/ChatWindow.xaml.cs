@@ -366,7 +366,7 @@ namespace TCC.Windows.Widgets
             var lb = sender as ItemsControl;
 
             var sw = Utils.GetChild<ScrollViewer>(lb);
-            sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? 5 : -5));
+            sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? 3 : -3));
             e.Handled = true;
             if (sw.VerticalOffset == 0)
             {
