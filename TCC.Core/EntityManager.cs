@@ -11,7 +11,7 @@ namespace TCC
     {
         private static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
-        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool villager)
+        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager)
         {
             CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
@@ -36,8 +36,8 @@ namespace TCC
                 }
                 else
                 {
-                    if (Settings.Settings.ShowOnlyBosses) return;
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, Visibility.Collapsed);
+                    if (Settings.SettingsStorage.ShowOnlyBosses) return;
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
                 }
             }
         }

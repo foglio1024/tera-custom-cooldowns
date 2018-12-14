@@ -6,9 +6,9 @@ using System.Windows;
 using TCC.Data.Abnormalities;
 using TCC.ViewModels;
 
-namespace TCC.Data.Npc
+namespace TCC.Data.NPCs
 {
-    public class Npc : TSPropertyChanged, IDisposable
+    public class NPC : TSPropertyChanged, IDisposable
     {
         public bool HasGage { get; set; }
 
@@ -22,7 +22,7 @@ namespace TCC.Data.Npc
                 if (_name != value)
                 {
                     _name = value;
-                    NPC(nameof(Name));
+                    N(nameof(Name));
                 }
             }
         }
@@ -36,7 +36,7 @@ namespace TCC.Data.Npc
             {
                 if (_buffs == value) return;
                 _buffs = value;
-                NPC();
+                N();
             }
         }
 
@@ -48,7 +48,7 @@ namespace TCC.Data.Npc
             {
                 if (_enraged == value) return;
                 _enraged = value;
-                NPC();
+                N();
             }
         }
 
@@ -62,7 +62,7 @@ namespace TCC.Data.Npc
                 {
                     _maxHP = value;
                     EnragePattern?.Update(value);
-                    NPC();
+                    N();
                 }
             }
         }
@@ -76,9 +76,9 @@ namespace TCC.Data.Npc
                 if (_currentHP != value)
                 {
                     _currentHP = value;
-                    NPC(nameof(CurrentHP));
-                    NPC(nameof(CurrentPercentage));
-                    NPC(nameof(CurrentFactor));
+                    N(nameof(CurrentHP));
+                    N(nameof(CurrentPercentage));
+                    N(nameof(HPFactor));
                 }
             }
         }
@@ -91,8 +91,8 @@ namespace TCC.Data.Npc
                 if (_maxShield != value)
                 {
                     _maxShield = value;
-                    NPC(nameof(MaxShield));
-                    NPC(nameof(ShieldFactor));
+                    N(nameof(MaxShield));
+                    N(nameof(ShieldFactor));
                 }
             }
         }
@@ -104,24 +104,24 @@ namespace TCC.Data.Npc
             {
                 if (_currentShield == value) return;
                 _currentShield = value;
-                NPC(nameof(CurrentShield));
-                NPC(nameof(ShieldFactor));
+                N(nameof(CurrentShield));
+                N(nameof(ShieldFactor));
             }
         }
 
         public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
 
-        public float CurrentFactor => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
-        public float CurrentPercentage => CurrentFactor * 100;
-        private Visibility _visible;
-        public Visibility Visible
+        public float HPFactor => (float)Utils.Factor(_currentHP, _maxHP); //_maxHP == 0 ? 0 : (_currentHP / _maxHP);
+        public float CurrentPercentage => HPFactor * 100;
+        private bool _visible;
+        public bool Visible
         {
             get => _visible;
             set
             {
                 if (_visible == value) return;
                 _visible = value;
-                NPC();
+                N();
             }
         }
 
@@ -133,7 +133,7 @@ namespace TCC.Data.Npc
             {
                 if (_target == value) return;
                 _target = value;
-                NPC();
+                N();
             }
         }
 
@@ -145,7 +145,7 @@ namespace TCC.Data.Npc
             {
                 if (_currentAggroType == value) return;
                 _currentAggroType = value;
-                NPC();
+                N();
             }
         }
 
@@ -208,7 +208,7 @@ namespace TCC.Data.Npc
             }
         }
 
-        //public Npc(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
+        //public NPC(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         //{
         //    _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
         //    EntityId = eId;
@@ -230,7 +230,7 @@ namespace TCC.Data.Npc
         //    }
 
         //}
-        public Npc(ulong eId, uint zId, uint tId, bool boss, Visibility visible, EnragePattern ep = null, TimerPattern tp = null)
+        public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
             Dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
@@ -284,7 +284,7 @@ namespace TCC.Data.Npc
             {
                 if (_shield == value) return;
                 _shield = value;
-                NPC(nameof(Shield));
+                N(nameof(Shield));
             }
         }
 
@@ -296,7 +296,7 @@ namespace TCC.Data.Npc
             {
                 if (_isSelected == value) return;
                 _isSelected = value;
-                NPC();
+                N();
             }
         }
         private void ShieldFailed(object sender, EventArgs e)
