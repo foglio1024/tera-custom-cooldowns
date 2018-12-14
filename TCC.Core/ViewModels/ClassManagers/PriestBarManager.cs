@@ -15,7 +15,7 @@ namespace TCC.ViewModels
             {
                 if (_energyStars == value) return;
                 _energyStars = value;
-                NPC();
+                N();
             }
         }
 

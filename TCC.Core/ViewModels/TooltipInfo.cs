@@ -13,10 +13,10 @@ namespace TCC.ViewModels
             {
                 if (_name == value) return;
                 _name = value;
-                NPC(nameof(Name));
-                NPC(nameof(BlockLabelText));
-                NPC(nameof(ShowAddFriend));
-                NPC(nameof(ShowWhisper));
+                N(nameof(Name));
+                N(nameof(BlockLabelText));
+                N(nameof(ShowAddFriend));
+                N(nameof(ShowWhisper));
             }
         }
         private string _info;
@@ -25,7 +25,7 @@ namespace TCC.ViewModels
             get => _info; set
             {
                 if (_info == value) return; _info = value;
-                NPC(nameof(Info));
+                N(nameof(Info));
             }
         }
         private int _level;
@@ -33,7 +33,7 @@ namespace TCC.ViewModels
         {
             get => _level; set
             {
-                if (_level == value) return; _level = value; NPC(nameof(Level));
+                if (_level == value) return; _level = value; N(nameof(Level));
             }
         }
         private Class _charClass;
@@ -44,7 +44,7 @@ namespace TCC.ViewModels
             {
                 if (_charClass == value) return;
                 _charClass = value;
-                NPC(nameof(Class));
+                N(nameof(Class));
             }
         }
         private bool _showPartyInvite;
@@ -55,7 +55,7 @@ namespace TCC.ViewModels
             {
                 if (_showPartyInvite == value) return;
                 _showPartyInvite = value;
-                NPC(nameof(ShowPartyInvite));
+                N(nameof(ShowPartyInvite));
             }
         }
         private bool _showGuildInvite;
@@ -66,7 +66,7 @@ namespace TCC.ViewModels
             {
                 if (_showGuildInvite == value) return;
                 _showGuildInvite = value;
-                NPC(nameof(ShowGuildInvite));
+                N(nameof(ShowGuildInvite));
             }
         }
 
@@ -98,19 +98,19 @@ namespace TCC.ViewModels
         }
         public void Refresh()
         {
-            NPC(nameof(ShowPartyInvite));
-            NPC(nameof(ShowGuildInvite));
-            NPC(nameof(ShowAddFriend));
-            NPC(nameof(ShowKick));
-            NPC(nameof(ShowWhisper));
-            NPC(nameof(BlockLabelText));
-            NPC(nameof(FriendLabelText));
-            NPC(nameof(IsBlocked));
-            NPC(nameof(IsFriend));
-            NPC(nameof(PowersLabelText));
-            NPC(nameof(ShowDelegateLeader));
-            NPC(nameof(ShowGrantPowers));
-            NPC(nameof(ShowFpsUtils));
+            N(nameof(ShowPartyInvite));
+            N(nameof(ShowGuildInvite));
+            N(nameof(ShowAddFriend));
+            N(nameof(ShowKick));
+            N(nameof(ShowWhisper));
+            N(nameof(BlockLabelText));
+            N(nameof(FriendLabelText));
+            N(nameof(IsBlocked));
+            N(nameof(IsFriend));
+            N(nameof(PowersLabelText));
+            N(nameof(ShowDelegateLeader));
+            N(nameof(ShowGrantPowers));
+            N(nameof(ShowFpsUtils));
         }
         public void SetInfo(uint model)
         {

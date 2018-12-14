@@ -87,7 +87,7 @@ namespace TCC.Controls.Dashboard
             {
                 if (_hilight == value) return;
                 _hilight = value;
-                NPC();
+                N();
             }
         }
 
@@ -114,7 +114,7 @@ namespace TCC.Controls.Dashboard
             {
                 if (_hilight == value) return;
                 _hilight = value;
-                NPC();
+                N();
             }
         }
         public Character Character { get; set; }

@@ -30,7 +30,7 @@ namespace TCC.Data.Skills
             {
                 if (_skill == value) return;
                 _skill = value;
-                NPC();
+                N();
             }
         }
         public ulong Duration { get; private set; }
@@ -43,7 +43,7 @@ namespace TCC.Data.Skills
             set
             {
                 _flashOnAvailable = value;
-                NPC();
+                N();
                 if (value) ForceFlashing();
                 else ForceStopFlashing();
             }
@@ -133,7 +133,7 @@ namespace TCC.Data.Skills
         private void CooldownEnded(object sender, EventArgs e)
         {
             _mainTimer.Stop();
-            NPC(nameof(IsAvailable));
+            N(nameof(IsAvailable));
             _secondsTimer.Stop();
             Seconds = 0;
             Dispatcher.Invoke(() => Ended?.Invoke(Mode));
@@ -168,7 +168,7 @@ namespace TCC.Data.Skills
                 {
 
                     _mainTimer.Stop();
-                    NPC(nameof(IsAvailable));
+                    N(nameof(IsAvailable));
                     _secondsTimer.Stop();
                     _offsetTimer.Stop();
 
@@ -183,7 +183,7 @@ namespace TCC.Data.Skills
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(Duration);
             _mainTimer.Start();
-            NPC(nameof(IsAvailable));
+            N(nameof(IsAvailable));
 
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % 1000);
             _offsetTimer.Start();
@@ -193,7 +193,7 @@ namespace TCC.Data.Skills
         public void Refresh(ulong cd, CooldownMode mode)
         {
             _mainTimer.Stop();
-            NPC(nameof(IsAvailable));
+            N(nameof(IsAvailable));
 
             if (cd == 0 || cd >= Int32.MaxValue)
             {
@@ -211,7 +211,7 @@ namespace TCC.Data.Skills
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
             _mainTimer.Start();
-            NPC(nameof(IsAvailable));
+            N(nameof(IsAvailable));
 
             Dispatcher?.Invoke(() => Started?.Invoke(Mode));
 

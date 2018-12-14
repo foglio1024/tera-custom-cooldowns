@@ -55,13 +55,13 @@ namespace TCC.Data.Chat
 
         public int Size
         {
-            get => _customSize ? _size : Settings.Settings.FontSize;
+            get => _customSize ? _size : Settings.SettingsStorage.FontSize;
             set
             {
                 if (_size == value) return;
                 _size = value;
-                _customSize = value != Settings.Settings.FontSize;
-                NPC(nameof(Size));
+                _customSize = value != Settings.SettingsStorage.FontSize;
+                N(nameof(Size));
             }
         }
 
@@ -75,7 +75,7 @@ namespace TCC.Data.Chat
 
                 if (_isVisible == value) return;
                 _isVisible = value;
-                NPC();
+                N();
             }
         }
 
@@ -89,10 +89,10 @@ namespace TCC.Data.Chat
                 _isHovered = value;
                 if (Container != null)
                 { 
-                    var sameType = Container.Pieces.Where(x => x.Type == Type && x.RawLink == this.RawLink);
-                    sameType.ToList().ForEach(x => x.IsHovered = this.IsHovered);
+                    var sameType = Container.Pieces.Where(x => x.Type == Type && x.RawLink == RawLink);
+                    sameType.ToList().ForEach(x => x.IsHovered = IsHovered);
                 }
-                NPC();
+                N();
             }
         }
 
@@ -160,7 +160,7 @@ namespace TCC.Data.Chat
 
         private void OnFontSizeChanged()
         {
-            NPC(nameof(Size));
+            N(nameof(Size));
         }
 
         public MessagePiece(Money money) : this(text: "")

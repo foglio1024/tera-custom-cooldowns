@@ -47,7 +47,7 @@ namespace TCC.Windows
             a.Completed += (s, ev) =>
             {
                 Hide();
-                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, a);
             //WindowManager.ForegroundManager.RefreshVisible();
@@ -76,7 +76,7 @@ namespace TCC.Windows
         }
         public void ShowWindow()
         {
-            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
 
             Opacity = 0;
             Activate();

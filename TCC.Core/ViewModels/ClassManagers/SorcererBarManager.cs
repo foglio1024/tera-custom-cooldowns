@@ -104,17 +104,17 @@ namespace TCC.ViewModels
 
         public void NotifyElementChanged()
         {
-            NPC(nameof(Fire));
-            NPC(nameof(Ice));
-            NPC(nameof(Arcane));
+            N(nameof(Fire));
+            N(nameof(Ice));
+            N(nameof(Arcane));
             Fusion.Skill = CurrentFusionSkill;
         }
 
         public void NotifyElementBoostChanged()
         {
-            NPC(nameof(IsBoostFire));
-            NPC(nameof(IsBoostFrost));
-            NPC(nameof(IsBoostArcane));
+            N(nameof(IsBoostFire));
+            N(nameof(IsBoostFrost));
+            N(nameof(IsBoostArcane));
         }
     }
 }

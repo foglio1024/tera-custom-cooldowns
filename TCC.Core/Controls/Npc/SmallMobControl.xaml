@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="TCC.Controls.Npc.SmallMobControl"
+﻿<UserControl x:Class="TCC.Controls.NPCs.SmallMobControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:npc="clr-namespace:TCC.Controls.Npc"
-             mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded"
-             Visibility="{Binding Visible}" IsHitTestVisible="False" UseLayoutRounding="True"
+             xmlns:npc="clr-namespace:TCC.Controls.NPCs"
+             mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded" IsHitTestVisible="False" UseLayoutRounding="True"
              d:DataContext="{d:DesignData Npc}">
 
 
@@ -39,7 +38,6 @@
             <local:Arc Width="80" 
                        Height="80" 
                        StrokeThickness="30" 
-                       Stroke="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}" 
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        StartAngle="0"
@@ -47,6 +45,15 @@
                        x:Name="ExternalArc"
                        Margin="-20"
                        RenderTransformOrigin=".5 .5">
+                <local:Arc.Style>
+                        <Style TargetType="Shape">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Enraged}" Value="True">
+                                    <Setter Property="Stroke" Value="{StaticResource HpBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                </local:Arc.Style>
                 <local:Arc.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="-45"/>
@@ -89,7 +96,7 @@
                 <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}" 
                            Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Grid.Column="1"/>
                 <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}"  
-                               FontWeight="Bold" Text="{Binding CurrentFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2"/>
+                               FontWeight="Bold" Text="{Binding HPFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2"/>
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
                         <Style.Triggers>
@@ -108,9 +115,22 @@
                         RenderTransform="{StaticResource Skew45}"
                         BorderThickness="2 1" Height="8"
                         RenderTransformOrigin="1 1"></Border>
-                <Border RenderTransform="{StaticResource Skew45}" Height="4" RenderTransformOrigin="1 1"
-                       Background="{Binding Enraged, Converter={StaticResource EnrageToHpColor}}"
-                       Margin="5 0 0 0" HorizontalAlignment="Left" >
+                <Border RenderTransform="{StaticResource Skew45}" 
+                        Height="4" 
+                        RenderTransformOrigin="1 1"
+                        Margin="5 0 0 0"
+                        HorizontalAlignment="Left" >
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{StaticResource MpBrush}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Enraged}" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource AssaultStanceBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
                     <FrameworkElement HorizontalAlignment="Stretch" Width="218" x:Name="HpBarGovernor">
                         <FrameworkElement.LayoutTransform>
                             <ScaleTransform ScaleX="1"></ScaleTransform>

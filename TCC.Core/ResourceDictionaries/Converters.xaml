@@ -36,7 +36,6 @@
     <!--BossGage resources-->
     <c:EntityIdToNameConverter x:Key="EntityIdToName"/>
     <c:AggroTypeToFillConverter x:Key="AggroTypeToFill"/>
-    <c:BossHPbarColorConverter x:Key="EnrageToHpColor"/>
     <c:DragonIdToColorConverter x:Key="DragonIdToColor"/>
     <c:HHphaseToEnemyWindowTemplate x:Key="HarrowholdPhaseToLayout"/>
 

@@ -291,23 +291,23 @@ namespace TCC.Parsing
 
             InfoWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
 
-            if (Settings.Settings.ChatEnabled)
+            if (Settings.SettingsStorage.ChatEnabled)
             {
                 ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (Settings.Settings.CooldownWindowSettings.Enabled || Settings.Settings.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (Settings.Settings.BossWindowSettings.Enabled || Settings.Settings.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (Settings.Settings.GroupWindowSettings.Enabled)
+            if (Settings.SettingsStorage.CooldownWindowSettings.Enabled || Settings.SettingsStorage.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (Settings.SettingsStorage.BossWindowSettings.Enabled || Settings.SettingsStorage.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (Settings.SettingsStorage.GroupWindowSettings.Enabled)
             {
                 GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!Settings.Settings.DisablePartyAbnormals) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!Settings.Settings.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!Settings.Settings.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!Settings.SettingsStorage.DisablePartyAbnormals) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!Settings.SettingsStorage.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!Settings.SettingsStorage.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (Settings.Settings.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (Settings.SettingsStorage.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (Settings.Settings.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (Settings.SettingsStorage.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (!SessionManager.CivilUnrestZone) PartyMemberPosition.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)

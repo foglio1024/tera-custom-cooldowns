@@ -43,7 +43,7 @@ namespace TCC.ViewModels
             if (!Dispatcher.Thread.IsAlive) return;
             //LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.Dashboard.ShowWindow();
-            NPC(nameof(SelectedCharacterExists));
+            N(nameof(SelectedCharacterExists));
             //SelectCharacter(SelectedCharacter);
         }
         public bool SelectedCharacterExists => SelectedCharacter != null;
@@ -58,7 +58,7 @@ namespace TCC.ViewModels
                 if (ch.Id == c.Id) ch.IsSelected = true;
                 else ch.IsSelected = false;
             }
-            NPC(nameof(SelectedCharacter));
+            N(nameof(SelectedCharacter));
 
             //AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             //SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
@@ -285,7 +285,7 @@ namespace TCC.ViewModels
                 {
                     ch.IsLoggedIn = true;
                     DiscardFirstVanguardPacket = true;
-                    NPC(nameof(CurrentCharacter));
+                    N(nameof(CurrentCharacter));
                     SelectCharacter(CurrentCharacter);
                 }
                 else ch.IsLoggedIn = false;

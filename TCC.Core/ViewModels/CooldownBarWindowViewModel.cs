@@ -19,7 +19,7 @@ namespace TCC.ViewModels
     {
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
-        public bool ShowItems => Settings.Settings.ShowItemsCooldown;
+        public bool ShowItems => Settings.SettingsStorage.ShowItemsCooldown;
 
         public event Action SkillsLoaded;
 
@@ -81,11 +81,11 @@ namespace TCC.ViewModels
 
         private bool NormalMode_Update(Cooldown sk)
         {
-            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
+            if (Settings.SettingsStorage.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
             {
                 return false;
             }
-            if (!Settings.Settings.CooldownWindowSettings.Enabled)
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled)
             {
                 return false;
             }
@@ -133,7 +133,7 @@ namespace TCC.ViewModels
         }
         private void NormalMode_Change(Skill skill, uint cd)
         {
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled) return;
             if (ClassManager.ChangeSpecialSkill(skill, cd)) return;
 
             try
@@ -197,7 +197,7 @@ namespace TCC.ViewModels
 
         private void NormalMode_Remove(Skill sk)
         {
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled) return;
 
             try
             {
@@ -253,12 +253,12 @@ namespace TCC.ViewModels
 
         private bool FixedMode_Update(Cooldown sk)
         {
-            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
+            if (Settings.SettingsStorage.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
             {
                 return false;
             }
 
-            if (!Settings.Settings.CooldownWindowSettings.Enabled)
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled)
             {
                 return false;
             }
@@ -293,8 +293,8 @@ namespace TCC.ViewModels
         }
         private void FixedMode_Change(Skill sk, uint cd)
         {
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
-            if (Settings.Settings.ClassWindowSettings.Enabled && ClassManager.ChangeSpecialSkill(sk, cd)) return;
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled) return;
+            if (Settings.SettingsStorage.ClassWindowSettings.Enabled && ClassManager.ChangeSpecialSkill(sk, cd)) return;
 
             var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (hSkill != null) return;
@@ -326,7 +326,7 @@ namespace TCC.ViewModels
         private void FixedMode_Remove(Skill sk)
         {
             //sk.SetDispatcher(Dispatcher);
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled) return;
 
             var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
@@ -367,7 +367,7 @@ namespace TCC.ViewModels
 
         private bool UpdateOther(Cooldown sk)
         {
-            if (!Settings.Settings.CooldownWindowSettings.Enabled)
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled)
             {
                 return false;
             }
@@ -388,7 +388,7 @@ namespace TCC.ViewModels
 
         public void AddOrRefresh(Cooldown sk)
         {
-            switch (Settings.Settings.CooldownBarMode)
+            switch (Settings.SettingsStorage.CooldownBarMode)
             {
                 case CooldownBarMode.Fixed:
                     if (!FixedMode_Update(sk)) sk.Dispose();
@@ -400,7 +400,7 @@ namespace TCC.ViewModels
         }
         public void Change(Skill skill, uint cd)
         {
-            switch (Settings.Settings.CooldownBarMode)
+            switch (Settings.SettingsStorage.CooldownBarMode)
             {
                 case CooldownBarMode.Fixed:
                     FixedMode_Change(skill, cd);
@@ -412,7 +412,7 @@ namespace TCC.ViewModels
         }
         public void Remove(Skill sk)
         {
-            switch (Settings.Settings.CooldownBarMode)
+            switch (Settings.SettingsStorage.CooldownBarMode)
             {
                 case CooldownBarMode.Fixed:
                     FixedMode_Remove(sk);
@@ -493,18 +493,18 @@ namespace TCC.ViewModels
 
                     SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
                 });
-                NPC(nameof(SkillsView));
-                NPC(nameof(MainSkills));
-                NPC(nameof(SecondarySkills));
+                N(nameof(SkillsView));
+                N(nameof(MainSkills));
+                N(nameof(SecondarySkills));
                 SkillsLoaded?.Invoke();
             });
         }
 
-        public CooldownBarMode Mode => Settings.Settings.CooldownBarMode;
+        public CooldownBarMode Mode => Settings.SettingsStorage.CooldownBarMode;
 
         public void NotifyModeChanged()
         {
-            NPC(nameof(Mode));
+            N(nameof(Mode));
         }
         //public bool IsClassWindowOn
         //{
@@ -532,13 +532,13 @@ namespace TCC.ViewModels
 
         public void NotifyItemsDisplay()
         {
-            NPC(nameof(ShowItems));
+            N(nameof(ShowItems));
         }
 
         public void ResetSkill(Skill skill)
         {
-            if (!Settings.Settings.CooldownWindowSettings.Enabled) return;
-            if (Settings.Settings.CooldownBarMode == CooldownBarMode.Normal) return;
+            if (!Settings.SettingsStorage.CooldownWindowSettings.Enabled) return;
+            if (Settings.SettingsStorage.CooldownBarMode == CooldownBarMode.Normal) return;
             if (ClassManager.ResetSpecialSkill(skill)) return;
 
             var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);

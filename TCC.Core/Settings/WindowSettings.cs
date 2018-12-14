@@ -55,7 +55,7 @@ namespace TCC.Settings
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
                 Positions.SetPosition(cc, new Point(value, old.Y));
-                NPC(nameof(X));
+                N(nameof(X));
             }
         }
 
@@ -72,7 +72,7 @@ namespace TCC.Settings
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
                 Positions.SetPosition(cc, new Point(old.X, value));
-                NPC(nameof(Y));
+                N(nameof(Y));
             }
         }
 
@@ -88,7 +88,7 @@ namespace TCC.Settings
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 Positions.SetButtons(cc, value);
-                NPC(nameof(ButtonsPosition));
+                N(nameof(ButtonsPosition));
             }
         }
 
@@ -98,7 +98,7 @@ namespace TCC.Settings
             set
             {
                 _w = value;
-                NPC(nameof(W));
+                N(nameof(W));
             }
         }
         public double H
@@ -107,7 +107,7 @@ namespace TCC.Settings
             set
             {
                 _h = value;
-                NPC(nameof(H));
+                N(nameof(H));
             }
         }
         public bool Visible
@@ -117,7 +117,7 @@ namespace TCC.Settings
             {
                 if (_visible == value) return;
                 _visible = value;
-                NPC(nameof(Visible));
+                N(nameof(Visible));
                 VisibilityChanged?.Invoke();
             }
         }
@@ -127,7 +127,7 @@ namespace TCC.Settings
             set
             {
                 _clickThruMode = value;
-                NPC(nameof(ClickThruMode));
+                N(nameof(ClickThruMode));
                 ClickThruModeChanged?.Invoke();
             }
         }
@@ -138,7 +138,7 @@ namespace TCC.Settings
             {
                 if (_scale == value) return;
                 _scale = value;
-                NPC(nameof(Scale));
+                N(nameof(Scale));
             }
         }
         public bool AutoDim
@@ -147,7 +147,7 @@ namespace TCC.Settings
             set
             {
                 _autoDim = value;
-                NPC(nameof(AutoDim));
+                N(nameof(AutoDim));
                 WindowManager.ForegroundManager.RefreshDim();
             }
         }
@@ -158,7 +158,7 @@ namespace TCC.Settings
             {
                 if (_dimOpacity == value) return;
                 _dimOpacity = value;
-                NPC(nameof(DimOpacity));
+                N(nameof(DimOpacity));
                 WindowManager.ForegroundManager.RefreshDim();
             }
         }
@@ -168,7 +168,7 @@ namespace TCC.Settings
             set
             {
                 _showAlways = value;
-                NPC(nameof(ShowAlways));
+                N(nameof(ShowAlways));
                 WindowManager.ForegroundManager.RefreshVisible();
             }
         }
@@ -206,7 +206,7 @@ namespace TCC.Settings
                 }
                 MessageFactory.Update();
                 EnabledChanged?.Invoke();
-                NPC(nameof(Enabled));
+                N(nameof(Enabled));
             }
         }
         public bool AllowOffScreen
@@ -216,7 +216,7 @@ namespace TCC.Settings
             {
                 if (_allowOffScreen == value) return;
                 _allowOffScreen = value;
-                NPC();
+                N();
             }
         }
 
@@ -304,7 +304,7 @@ namespace TCC.Settings
             {
                 if(_hideTimeout == value) return;
                 _hideTimeout = value;
-                NPC();
+                N();
                 TimeoutChanged?.Invoke();
             }
         }
@@ -316,7 +316,7 @@ namespace TCC.Settings
             {
                 if(_backgroundOpacity == value) return;
                 _backgroundOpacity = value;
-                NPC();
+                N();
                 OpacityChanged?.Invoke();
             }
         }
@@ -327,7 +327,7 @@ namespace TCC.Settings
             {
                 if(_fadeOut == value) return;
                 _fadeOut = value;
-                NPC();
+                N();
                 FadeoutChanged?.Invoke();
             }
         }
@@ -341,7 +341,7 @@ namespace TCC.Settings
             {
                 if(_lfgOn == value) return;
                 _lfgOn = value;
-                NPC();
+                N();
             }
         }
 

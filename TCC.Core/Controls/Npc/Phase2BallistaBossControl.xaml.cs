@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace TCC.Controls.Npc
+namespace TCC.Controls.NPCs
 {
     /// <summary>
     /// Interaction logic for Phase2BallistaBossControl.xaml

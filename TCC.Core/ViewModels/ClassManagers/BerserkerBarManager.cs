@@ -29,7 +29,7 @@ namespace TCC.ViewModels
             {
                 if (_isUnleashOn == value) return;
                 _isUnleashOn = value;
-                NPC(nameof(IsUnleashOn));
+                N(nameof(IsUnleashOn));
             }
         }
 
@@ -40,7 +40,7 @@ namespace TCC.ViewModels
             {
                 if (_isUnleashOff == value) return;
                 _isUnleashOff = value;
-                NPC(nameof(IsUnleashOff));
+                N(nameof(IsUnleashOff));
             }
         }
 

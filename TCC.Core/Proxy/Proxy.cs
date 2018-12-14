@@ -232,7 +232,7 @@ namespace TCC.Proxy
         {
             var sb = new StringBuilder("init_stub");
             sb.Append("&use_lfg=");
-            sb.Append(Settings.Settings.LfgEnabled.ToString().ToLower());
+            sb.Append(Settings.SettingsStorage.LfgEnabled.ToString().ToLower());
 
             SendData(sb.ToString());
         }

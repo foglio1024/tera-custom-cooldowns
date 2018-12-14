@@ -18,7 +18,7 @@ namespace TCC.ViewModels
             {
                 if (_focusOn == value) return;
                 _focusOn = value;
-                NPC();
+                N();
             }
 
         }

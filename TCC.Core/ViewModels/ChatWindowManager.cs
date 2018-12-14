@@ -59,7 +59,7 @@ namespace TCC.ViewModels
         public void InitWindows()
         {
             ChatWindows.Clear();
-            Settings.Settings.ChatWindowsSettings.ToList().ForEach(s =>
+            SettingsStorage.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
                 var m = new ChatViewModel();
@@ -76,12 +76,12 @@ namespace TCC.ViewModels
                     false);
                 var m = new ChatViewModel();
                 var w = new ChatWindow(ws, m);
-                Settings.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                SettingsStorage.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 ChatWindows.Add(w);
                 m.LoadTabs();
                 //m.LfgOn = ws.LfgOn;
                 //m.BackgroundOpacity = ws.BackgroundOpacity;
-                if (Settings.Settings.ChatEnabled) w.Show();
+                if (SettingsStorage.ChatEnabled) w.Show();
             }
         }
         public void CloseAllWindows()
@@ -123,7 +123,7 @@ namespace TCC.ViewModels
         public void AddChatMessage(ChatMessage chatMessage)
         {
             //return;
-            if (!Settings.Settings.ChatEnabled)
+            if (!SettingsStorage.ChatEnabled)
             {
                 chatMessage.Dispose();
                 return;
@@ -134,7 +134,7 @@ namespace TCC.ViewModels
                 chatMessage.Dispose();
                 return;
             }
-            if (ChatMessages.Count < Settings.Settings.SpamThreshold)
+            if (ChatMessages.Count < SettingsStorage.SpamThreshold)
             {
                 for (var i = 0; i < ChatMessages.Count - 1; i++)
                 {
@@ -148,7 +148,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                for (var i = 0; i < Settings.Settings.SpamThreshold; i++)
+                for (var i = 0; i < SettingsStorage.SpamThreshold; i++)
                 {
                     if (i > ChatMessages.Count - 1) continue;
 
@@ -172,13 +172,13 @@ namespace TCC.ViewModels
             else _queue.Enqueue(chatMessage);
 
             NewMessage?.Invoke(chatMessage);
-            if (ChatMessages.Count > Settings.Settings.MaxMessages)
+            if (ChatMessages.Count > SettingsStorage.MaxMessages)
             {
                 var toRemove = ChatMessages[ChatMessages.Count - 1];
                 toRemove.Dispose();
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
-            NPC(nameof(MessageCount));
+            N(nameof(MessageCount));
         }
         public void AddTccMessage(string message)
         {
@@ -204,7 +204,7 @@ namespace TCC.ViewModels
                 if (_queue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
-                    if (ChatMessages.Count > Settings.Settings.MaxMessages)
+                    if (ChatMessages.Count > SettingsStorage.MaxMessages)
                     {
                         ChatMessages.RemoveAt(ChatMessages.Count - 1);
                     }
@@ -275,7 +275,7 @@ namespace TCC.ViewModels
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             if (e.OldItems.Count == 0) return;
-            Settings.Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
+            SettingsStorage.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
         }
 
         private void OnChatMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

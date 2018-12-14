@@ -24,7 +24,7 @@ namespace TCC.Data.Abnormalities
             {
                 if (value == _duration) return;
                 _duration = value;
-                NPC();
+                N();
             }
         }
         public int Stacks
@@ -34,7 +34,7 @@ namespace TCC.Data.Abnormalities
             {
                 if (value == _stacks) return;
                 _stacks = value;
-                NPC();
+                N();
             }
         }
         public uint DurationLeft
@@ -44,7 +44,7 @@ namespace TCC.Data.Abnormalities
             {
                 if (value == _durationLeft) return;
                 _durationLeft = value;
-                NPC();
+                N();
             }
         }
         public bool Animated { get; private set; }

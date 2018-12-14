@@ -13,7 +13,7 @@ namespace TCC.Data
             {
                 if (_entries == value) return;
                 _entries = value;
-                NPC();
+                N();
             }
         }
         public int Clears
@@ -23,7 +23,7 @@ namespace TCC.Data
             {
                 if (_total == value) return;
                 _total = value;
-                NPC();
+                N();
             }
         }
         public Dungeon Dungeon { get; set; }

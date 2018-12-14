@@ -51,7 +51,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    if (Settings.Settings.ClassWindowSettings.Enabled)
+                    if (Settings.SettingsStorage.ClassWindowSettings.Enabled)
                         ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
                     break;
                 case Class.Sorcerer:
@@ -104,7 +104,7 @@ namespace TCC.Parsing
             }
             var b = BossGageWindowViewModel.Instance.NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == p.EntityId);
             //if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
-            if (b != null /*&& b.IsBoss*/ && b.Visible == System.Windows.Visibility.Visible)
+            if (b != null /*&& b.IsBoss*/ && b.Visible)
             {
                 GroupWindowViewModel.Instance.SetAggro(p.Target);
                 BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, p.Target);
@@ -153,14 +153,14 @@ namespace TCC.Parsing
             WindowManager.ReloadPositions();
             S_INVEN.Reset();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
-            if (Settings.Settings.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
+            if (Settings.SettingsStorage.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
-            if (!Settings.Settings.StatSent) App.SendUsageStat();
-            Settings.Settings.LastRegion = SessionManager.Language;
-            TimeManager.Instance.SetServerTimeZone(Settings.Settings.LastRegion);
+            if (!Settings.SettingsStorage.StatSent) App.SendUsageStat();
+            Settings.SettingsStorage.LastRegion = SessionManager.Language;
+            TimeManager.Instance.SetServerTimeZone(Settings.SettingsStorage.LastRegion);
             TimeManager.Instance.SetGuildBamTime(false);
-            SessionManager.InitDatabases(Settings.Settings.LastRegion);
+            SessionManager.InitDatabases(Settings.SettingsStorage.LastRegion);
             SkillManager.Clear();
             CooldownWindowViewModel.Instance.LoadSkills(p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
@@ -188,7 +188,7 @@ namespace TCC.Parsing
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
         {
-            if (!Settings.Settings.LfgEnabled) return;
+            if (!Settings.SettingsStorage.LfgEnabled) return;
             if (WindowManager.LfgListWindow == null) return;
             if (WindowManager.LfgListWindow.VM == null) return;
             if (!x.IsLast) return;
@@ -276,7 +276,7 @@ namespace TCC.Parsing
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
             SessionManager.CivilUnrestZone = x.Zone == 152;
-            if (Settings.Settings.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
+            if (Settings.SettingsStorage.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
             //MessageFactory.Update(); already in CurrentHHphase set
 
             //GC.Collect();
@@ -316,7 +316,7 @@ namespace TCC.Parsing
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
             EntityManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
-            EntityManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, p.Villager);
+            EntityManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, false, p.Villager);
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
@@ -684,7 +684,7 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.Settings.ClassWindowSettings.Enabled) return;
+            if (!Settings.SettingsStorage.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -692,7 +692,7 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.Settings.ClassWindowSettings.Enabled) return;
+            if (!Settings.SettingsStorage.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
@@ -700,7 +700,7 @@ namespace TCC.Parsing
             if (!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.Settings.ClassWindowSettings.Enabled) return;
+            if (!Settings.SettingsStorage.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
@@ -719,7 +719,7 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.Proxy.IsConnected && Settings.Settings.LfgEnabled && SessionManager.InGameUiOn)
+            if (Proxy.Proxy.IsConnected && Settings.SettingsStorage.LfgEnabled && SessionManager.InGameUiOn)
             {
                 Proxy.Proxy.RequestCandidates();
                 if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
@@ -754,13 +754,13 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (Settings.Settings.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Settings.SettingsStorage.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
         public static void HandleKicked(S_BAN_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (Settings.Settings.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Settings.SettingsStorage.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
 
@@ -779,7 +779,7 @@ namespace TCC.Parsing
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
         {
             ChatWindowManager.Instance.UpdateLfgMembers(packet);
-            if (!Settings.Settings.LfgEnabled) return;
+            if (!Settings.SettingsStorage.LfgEnabled) return;
 
             var lfg = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
             if (lfg == null) return;

@@ -389,13 +389,13 @@ namespace TCC.Controls.Skills
 
         private void RefreshBorder()
         {
-            MainBorder.CornerRadius = new CornerRadius(TCC.Settings.Settings.SkillShape == ControlShape.Round ? 29 : 0);
-            MainBorderSec.CornerRadius = new CornerRadius(TCC.Settings.Settings.SkillShape == ControlShape.Round ? 29 : 0);
+            MainBorder.CornerRadius = new CornerRadius(TCC.Settings.SettingsStorage.SkillShape == ControlShape.Round ? 29 : 0);
+            MainBorderSec.CornerRadius = new CornerRadius(TCC.Settings.SettingsStorage.SkillShape == ControlShape.Round ? 29 : 0);
         }
         private void RefreshControlTemplate(ItemsControl ic)
         {
             ic.ItemContainerStyle =
-                FindResource(TCC.Settings.Settings.SkillShape == ControlShape.Round
+                FindResource(TCC.Settings.SettingsStorage.SkillShape == ControlShape.Round
                     ? "RoundDragableStyle"
                     : "SquareDragableStyle") as Style;
         }

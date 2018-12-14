@@ -21,7 +21,7 @@ namespace TCC.Data
             {
                 if (_shortName == value) return;
                 _shortName = value;
-                NPC();
+                N();
             }
         }
 
@@ -34,8 +34,8 @@ namespace TCC.Data
             {
                 if (_requiredIlvl == value) return;
                 _requiredIlvl = value;
-                NPC();
-                NPC(nameof(ItemLevel));
+                N();
+                N(nameof(ItemLevel));
             }
         }
 
@@ -48,7 +48,7 @@ namespace TCC.Data
             {
                 if (_show == value) return;
                 _show = value;
-                NPC();
+                N();
             }
         }
 
@@ -59,7 +59,7 @@ namespace TCC.Data
             {
                 if (_doublesOnElite == value) return;
                 _doublesOnElite = value;
-                NPC();
+                N();
             }
         }
 
@@ -70,7 +70,7 @@ namespace TCC.Data
             {
                 if(_index == value) return;
                 _index = value;
-                NPC();
+                N();
             }
         }
 

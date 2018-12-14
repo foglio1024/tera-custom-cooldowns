@@ -20,7 +20,7 @@ namespace TCC.ViewModels
             {
                 if (_focus == value) return;
                 _focus = value;
-                NPC();
+                N();
             }
         }
         //public StanceTracker<ArcherStance> Stance
@@ -40,7 +40,7 @@ namespace TCC.ViewModels
             {
                 if (_thunderbolt == value) return;
                 _thunderbolt = value;
-                NPC();
+                N();
             }
         }
         public DurationCooldownIndicator Windsong
@@ -50,7 +50,7 @@ namespace TCC.ViewModels
             {
                 if (_windsong == value) return;
                 _windsong = value;
-                NPC();
+                N();
             }
         }
         public Cooldown WindWalk
@@ -60,7 +60,7 @@ namespace TCC.ViewModels
             {
                 if (_windWalk == value) return;
                 _windWalk = value;
-                NPC();
+                N();
             }
         }
         public bool WindWalkProc
@@ -70,7 +70,7 @@ namespace TCC.ViewModels
             {
                 if (_windWalkProc == value) return;
                 _windWalkProc = value;
-                NPC(nameof(WindWalkProc));
+                N(nameof(WindWalkProc));
             }
         }
 

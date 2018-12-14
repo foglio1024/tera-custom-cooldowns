@@ -19,7 +19,7 @@ namespace TCC.Data.Chat
             {
                 if (_id == value) return;
                 _id = value;
-                NPC(nameof(Id));
+                N(nameof(Id));
             }
         }
         public string Name
@@ -28,7 +28,7 @@ namespace TCC.Data.Chat
             {
                 if (_name == value) return;
                 _name = value;
-                NPC(nameof(Name));
+                N(nameof(Name));
             }
         }
         public string Message
@@ -38,7 +38,7 @@ namespace TCC.Data.Chat
                 if (_message == value) return;
                 _message = value;
                 UpdateDungeonName();
-                NPC(nameof(Message));
+                N(nameof(Message));
             }
         }
         public bool Raid
@@ -47,7 +47,7 @@ namespace TCC.Data.Chat
             {
                 if (_raid == value) return;
                 _raid = value;
-                NPC(nameof(Raid));
+                N(nameof(Raid));
             }
         }
 
@@ -57,7 +57,7 @@ namespace TCC.Data.Chat
             {
                 if (_dungeonName == value) return;
                 _dungeonName = value;
-                NPC(nameof(DungeonName));
+                N(nameof(DungeonName));
             }
         }
 
@@ -67,8 +67,8 @@ namespace TCC.Data.Chat
             {
                 if (_membersCount == value) return;
                 _membersCount = value;
-                NPC(nameof(MembersCount));
-                NPC(nameof(MembersCountLabel));
+                N(nameof(MembersCount));
+                N(nameof(MembersCountLabel));
             }
         }
         public string MembersCountLabel => MembersCount == 0 ? "" : MembersCount.ToString();
@@ -100,7 +100,7 @@ namespace TCC.Data.Chat
             {
                 _removeTimer?.Stop();
                 _removeTimer?.Start();
-                NPC();
+                N();
             }
             catch
             {

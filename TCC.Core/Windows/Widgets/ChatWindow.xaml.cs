@@ -105,9 +105,9 @@ namespace TCC.Windows.Widgets
                 ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
                 //((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
                 //((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
-                ((ChatWindowSettings)WindowSettings).X = Left / TCC.Settings.Settings.ScreenW;
-                ((ChatWindowSettings)WindowSettings).Y = Top / TCC.Settings.Settings.ScreenH;
-                var v = TCC.Settings.Settings.ChatWindowsSettings;
+                ((ChatWindowSettings)WindowSettings).X = Left / SettingsStorage.ScreenW;
+                ((ChatWindowSettings)WindowSettings).Y = Top / SettingsStorage.ScreenH;
+                var v = SettingsStorage.ChatWindowsSettings;
                 var s = v.FirstOrDefault(x => x == WindowSettings);
                 if (s == null) v.Add((ChatWindowSettings)WindowSettings);
 
@@ -285,7 +285,7 @@ namespace TCC.Windows.Widgets
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsPopup.DataContext = this.DataContext;
+            SettingsPopup.DataContext = DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
 

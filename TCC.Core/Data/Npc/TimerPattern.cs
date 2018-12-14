@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Timers;
 
-namespace TCC.Data.Npc
+namespace TCC.Data.NPCs
 {
     public class TimerPattern : TSPropertyChanged, IDisposable
     {
         private readonly Timer _timer;
         protected bool Running => _timer.Enabled;
-        protected Npc Target { get; set; }
+        protected NPC Target { get; set; }
         public int Duration { get; }
 
         public event Action Started;
@@ -20,7 +20,7 @@ namespace TCC.Data.Npc
             Started?.Invoke();
         }
 
-        public virtual void SetTarget(Npc target)
+        public virtual void SetTarget(NPC target)
         {
             Target = target;
         }

@@ -28,8 +28,8 @@ namespace TCC.ViewModels
             {
                 if (_elementalize == value) return;
                 _elementalize = value;
-                NPC();
-                NPC(nameof(ElementalizeWarning));
+                N();
+                N(nameof(ElementalizeWarning));
             }
         }
         public bool ElementalizeWarning => !Elementalize && (SessionManager.Combat || SessionManager.Encounter);
@@ -118,7 +118,7 @@ namespace TCC.ViewModels
         }
         private void OnCombatChanged()
         {
-            NPC(nameof(ElementalizeWarning));
+            N(nameof(ElementalizeWarning));
             CheckAurasWarning();
         }
 

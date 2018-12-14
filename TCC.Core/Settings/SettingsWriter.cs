@@ -17,16 +17,16 @@ namespace TCC.Settings
         {
             var xSettings = new XElement("Settings",
                 new XElement("WindowSettings",
-                    Settings.BossWindowSettings.ToXElement("BossWindow"),
-                    Settings.BuffWindowSettings.ToXElement("BuffWindow"),
-                    Settings.CharacterWindowSettings.ToXElement("CharacterWindow"),
-                    Settings.CooldownWindowSettings.ToXElement("CooldownWindow"),
-                    Settings.GroupWindowSettings.ToXElement("GroupWindow"),
-                    Settings.ClassWindowSettings.ToXElement("ClassWindow"),
+                    SettingsStorage.BossWindowSettings.ToXElement("BossWindow"),
+                    SettingsStorage.BuffWindowSettings.ToXElement("BuffWindow"),
+                    SettingsStorage.CharacterWindowSettings.ToXElement("CharacterWindow"),
+                    SettingsStorage.CooldownWindowSettings.ToXElement("CooldownWindow"),
+                    SettingsStorage.GroupWindowSettings.ToXElement("GroupWindow"),
+                    SettingsStorage.ClassWindowSettings.ToXElement("ClassWindow"),
                     BuildChatWindowSettings(),
-                    Settings.FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
-                    Settings.FloatingButtonSettings.ToXElement("FloatingButton"),
-                    Settings.CivilUnrestWindowSettings.ToXElement("CivilUnrestWindow")
+                    SettingsStorage.FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
+                    SettingsStorage.FloatingButtonSettings.ToXElement("FloatingButton"),
+                    SettingsStorage.CivilUnrestWindowSettings.ToXElement("CivilUnrestWindow")
                     //add window here
                 ),
                 BuildOtherSettingsXElement(),
@@ -83,78 +83,78 @@ namespace TCC.Settings
             /* add new settings down here */
             return new XElement("OtherSettings",
                 // Buff
-                new XAttribute(nameof(Settings.BuffsDirection), Settings.BuffsDirection),
-                new XAttribute(nameof(Settings.ShowAllMyAbnormalities), Settings.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
+                new XAttribute(nameof(SettingsStorage.BuffsDirection), SettingsStorage.BuffsDirection),
+                new XAttribute(nameof(SettingsStorage.ShowAllMyAbnormalities), SettingsStorage.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
                 // Character
-                new XAttribute(nameof(Settings.CharacterWindowCompactMode), Settings.CharacterWindowCompactMode),
+                new XAttribute(nameof(SettingsStorage.CharacterWindowCompactMode), SettingsStorage.CharacterWindowCompactMode),
                 // Cooldown
-                new XAttribute(nameof(Settings.CooldownBarMode), Settings.CooldownBarMode),
-                new XAttribute(nameof(Settings.ShowItemsCooldown), Settings.ShowItemsCooldown),
-                new XAttribute(nameof(Settings.SkillShape), Settings.SkillShape),
+                new XAttribute(nameof(SettingsStorage.CooldownBarMode), SettingsStorage.CooldownBarMode),
+                new XAttribute(nameof(SettingsStorage.ShowItemsCooldown), SettingsStorage.ShowItemsCooldown),
+                new XAttribute(nameof(SettingsStorage.SkillShape), SettingsStorage.SkillShape),
                 // Boss
-                new XAttribute(nameof(Settings.ShowOnlyBosses), Settings.ShowOnlyBosses),
-                new XAttribute(nameof(Settings.EnrageLabelMode), Settings.EnrageLabelMode),
-                new XAttribute(nameof(Settings.AccurateHp), Settings.AccurateHp),
+                new XAttribute(nameof(SettingsStorage.ShowOnlyBosses), SettingsStorage.ShowOnlyBosses),
+                new XAttribute(nameof(SettingsStorage.EnrageLabelMode), SettingsStorage.EnrageLabelMode),
+                new XAttribute(nameof(SettingsStorage.AccurateHp), SettingsStorage.AccurateHp),
                 // Class
-                new XAttribute(nameof(Settings.WarriorShowTraverseCut), Settings.WarriorShowTraverseCut),
-                new XAttribute(nameof(Settings.WarriorShowEdge), Settings.WarriorShowEdge),
-                new XAttribute(nameof(Settings.WarriorEdgeMode), Settings.WarriorEdgeMode),
-                new XAttribute(nameof(Settings.SorcererReplacesElementsInCharWindow), Settings.SorcererReplacesElementsInCharWindow),
+                new XAttribute(nameof(SettingsStorage.WarriorShowTraverseCut), SettingsStorage.WarriorShowTraverseCut),
+                new XAttribute(nameof(SettingsStorage.WarriorShowEdge), SettingsStorage.WarriorShowEdge),
+                new XAttribute(nameof(SettingsStorage.WarriorEdgeMode), SettingsStorage.WarriorEdgeMode),
+                new XAttribute(nameof(SettingsStorage.SorcererReplacesElementsInCharWindow), SettingsStorage.SorcererReplacesElementsInCharWindow),
                 // Chat
-                new XAttribute(nameof(Settings.MaxMessages), Settings.MaxMessages),
-                new XAttribute(nameof(Settings.SpamThreshold), Settings.SpamThreshold),
-                new XAttribute(nameof(Settings.FontSize), Settings.FontSize),
-                new XAttribute(nameof(Settings.ShowChannel), Settings.ShowChannel),
-                new XAttribute(nameof(Settings.ShowTimestamp), Settings.ShowTimestamp),
+                new XAttribute(nameof(SettingsStorage.MaxMessages), SettingsStorage.MaxMessages),
+                new XAttribute(nameof(SettingsStorage.SpamThreshold), SettingsStorage.SpamThreshold),
+                new XAttribute(nameof(SettingsStorage.FontSize), SettingsStorage.FontSize),
+                new XAttribute(nameof(SettingsStorage.ShowChannel), SettingsStorage.ShowChannel),
+                new XAttribute(nameof(SettingsStorage.ShowTimestamp), SettingsStorage.ShowTimestamp),
                 //new XAttribute(nameof(Settings.ChatFadeOut), Settings.ChatFadeOut),
-                new XAttribute(nameof(Settings.AnimateChatMessages), Settings.AnimateChatMessages),
-                new XAttribute(nameof(Settings.ChatEnabled), Settings.ChatEnabled),
-                new XAttribute(nameof(Settings.ChatClickThruMode), Settings.ChatClickThruMode),
+                new XAttribute(nameof(SettingsStorage.AnimateChatMessages), SettingsStorage.AnimateChatMessages),
+                new XAttribute(nameof(SettingsStorage.ChatEnabled), SettingsStorage.ChatEnabled),
+                new XAttribute(nameof(SettingsStorage.ChatClickThruMode), SettingsStorage.ChatClickThruMode),
                 // Group
-                new XAttribute(nameof(Settings.IgnoreMeInGroupWindow), Settings.IgnoreMeInGroupWindow),
-                new XAttribute(nameof(Settings.IgnoreGroupBuffs), Settings.IgnoreGroupBuffs),
-                new XAttribute(nameof(Settings.IgnoreGroupDebuffs), Settings.IgnoreGroupDebuffs),
-                new XAttribute(nameof(Settings.DisablePartyMP), Settings.DisablePartyMP),
-                new XAttribute(nameof(Settings.DisablePartyHP), Settings.DisablePartyHP),
-                new XAttribute(nameof(Settings.DisablePartyAbnormals), Settings.DisablePartyAbnormals),
-                new XAttribute(nameof(Settings.ShowOnlyAggroStacks), Settings.ShowOnlyAggroStacks),
+                new XAttribute(nameof(SettingsStorage.IgnoreMeInGroupWindow), SettingsStorage.IgnoreMeInGroupWindow),
+                new XAttribute(nameof(SettingsStorage.IgnoreGroupBuffs), SettingsStorage.IgnoreGroupBuffs),
+                new XAttribute(nameof(SettingsStorage.IgnoreGroupDebuffs), SettingsStorage.IgnoreGroupDebuffs),
+                new XAttribute(nameof(SettingsStorage.DisablePartyMP), SettingsStorage.DisablePartyMP),
+                new XAttribute(nameof(SettingsStorage.DisablePartyHP), SettingsStorage.DisablePartyHP),
+                new XAttribute(nameof(SettingsStorage.DisablePartyAbnormals), SettingsStorage.DisablePartyAbnormals),
+                new XAttribute(nameof(SettingsStorage.ShowOnlyAggroStacks), SettingsStorage.ShowOnlyAggroStacks),
                 //new XAttribute(nameof(Settings.ChatWindowOpacity), Settings.ChatWindowOpacity),
-                new XAttribute(nameof(Settings.GroupSizeThreshold), Settings.GroupSizeThreshold),
-                new XAttribute(nameof(Settings.ShowMembersLaurels), Settings.ShowMembersLaurels),
-                new XAttribute(nameof(Settings.ShowGroupWindowDetails), Settings.ShowGroupWindowDetails),
-                new XAttribute(nameof(Settings.ShowAwakenIcon), Settings.ShowAwakenIcon),
-                new XAttribute(nameof(Settings.ShowAllGroupAbnormalities), Settings.ShowAllGroupAbnormalities),
+                new XAttribute(nameof(SettingsStorage.GroupSizeThreshold), SettingsStorage.GroupSizeThreshold),
+                new XAttribute(nameof(SettingsStorage.ShowMembersLaurels), SettingsStorage.ShowMembersLaurels),
+                new XAttribute(nameof(SettingsStorage.ShowGroupWindowDetails), SettingsStorage.ShowGroupWindowDetails),
+                new XAttribute(nameof(SettingsStorage.ShowAwakenIcon), SettingsStorage.ShowAwakenIcon),
+                new XAttribute(nameof(SettingsStorage.ShowAllGroupAbnormalities), SettingsStorage.ShowAllGroupAbnormalities),
                 // Misc
-                new XAttribute(nameof(Settings.ForceSoftwareRendering), Settings.ForceSoftwareRendering),
-                new XAttribute(nameof(Settings.HighPriority), Settings.HighPriority),
-                new XAttribute(nameof(Settings.LastRun), DateTime.Now),
-                new XAttribute(nameof(Settings.LastRegion), Settings.LastRegion),
-                new XAttribute(nameof(Settings.DiscordWebhookEnabled), Settings.DiscordWebhookEnabled),
-                new XAttribute(nameof(Settings.Webhook), Settings.Webhook),
-                new XAttribute(nameof(Settings.WebhookMessage), Settings.WebhookMessage),
-                new XAttribute(nameof(Settings.TwitchName), Settings.TwitchName),
-                new XAttribute(nameof(Settings.TwitchToken), Settings.TwitchToken),
-                new XAttribute(nameof(Settings.TwitchChannelName), Settings.TwitchChannelName),
-                new XAttribute(nameof(Settings.StatSent), Settings.StatSent),
-                new XAttribute(nameof(Settings.ShowFlightEnergy), Settings.ShowFlightEnergy),
-                new XAttribute(nameof(Settings.LfgEnabled), Settings.LfgEnabled),
-                new XAttribute(nameof(Settings.UseHotkeys), Settings.UseHotkeys),
-                new XAttribute(nameof(Settings.HideHandles), Settings.HideHandles),
-                new XAttribute(nameof(Settings.ShowTradeLfg), Settings.ShowTradeLfg),
-                new XAttribute(nameof(Settings.RegionOverride), Settings.RegionOverride),
-                new XAttribute(nameof(Settings.FlightGaugeRotation), Settings.FlightGaugeRotation),
-                new XAttribute(nameof(Settings.FlipFlightGauge), Settings.FlipFlightGauge),
-                new XAttribute(nameof(Settings.AbnormalityShape), Settings.AbnormalityShape),
-                new XAttribute(nameof(Settings.Npcap), Settings.Npcap),
-                new XAttribute(nameof(Settings.EthicalMode), Settings.EthicalMode),
-                new XAttribute(nameof(Settings.CheckOpcodesHash), Settings.CheckOpcodesHash),
-                new XAttribute(nameof(Settings.ShowNotificationBubble), Settings.ShowNotificationBubble)
+                new XAttribute(nameof(SettingsStorage.ForceSoftwareRendering), SettingsStorage.ForceSoftwareRendering),
+                new XAttribute(nameof(SettingsStorage.HighPriority), SettingsStorage.HighPriority),
+                new XAttribute(nameof(SettingsStorage.LastRun), DateTime.Now),
+                new XAttribute(nameof(SettingsStorage.LastRegion), SettingsStorage.LastRegion),
+                new XAttribute(nameof(SettingsStorage.DiscordWebhookEnabled), SettingsStorage.DiscordWebhookEnabled),
+                new XAttribute(nameof(SettingsStorage.Webhook), SettingsStorage.Webhook),
+                new XAttribute(nameof(SettingsStorage.WebhookMessage), SettingsStorage.WebhookMessage),
+                new XAttribute(nameof(SettingsStorage.TwitchName), SettingsStorage.TwitchName),
+                new XAttribute(nameof(SettingsStorage.TwitchToken), SettingsStorage.TwitchToken),
+                new XAttribute(nameof(SettingsStorage.TwitchChannelName), SettingsStorage.TwitchChannelName),
+                new XAttribute(nameof(SettingsStorage.StatSent), SettingsStorage.StatSent),
+                new XAttribute(nameof(SettingsStorage.ShowFlightEnergy), SettingsStorage.ShowFlightEnergy),
+                new XAttribute(nameof(SettingsStorage.LfgEnabled), SettingsStorage.LfgEnabled),
+                new XAttribute(nameof(SettingsStorage.UseHotkeys), SettingsStorage.UseHotkeys),
+                new XAttribute(nameof(SettingsStorage.HideHandles), SettingsStorage.HideHandles),
+                new XAttribute(nameof(SettingsStorage.ShowTradeLfg), SettingsStorage.ShowTradeLfg),
+                new XAttribute(nameof(SettingsStorage.RegionOverride), SettingsStorage.RegionOverride),
+                new XAttribute(nameof(SettingsStorage.FlightGaugeRotation), SettingsStorage.FlightGaugeRotation),
+                new XAttribute(nameof(SettingsStorage.FlipFlightGauge), SettingsStorage.FlipFlightGauge),
+                new XAttribute(nameof(SettingsStorage.AbnormalityShape), SettingsStorage.AbnormalityShape),
+                new XAttribute(nameof(SettingsStorage.Npcap), SettingsStorage.Npcap),
+                new XAttribute(nameof(SettingsStorage.EthicalMode), SettingsStorage.EthicalMode),
+                new XAttribute(nameof(SettingsStorage.CheckOpcodesHash), SettingsStorage.CheckOpcodesHash),
+                new XAttribute(nameof(SettingsStorage.ShowNotificationBubble), SettingsStorage.ShowNotificationBubble)
             );
         }
         private static XElement BuildGroupAbnormalsXElement()
         {
-            var result = new XElement(nameof(Settings.GroupAbnormals));
-            foreach (var pair in Settings.GroupAbnormals)
+            var result = new XElement(nameof(SettingsStorage.GroupAbnormals));
+            foreach (var pair in SettingsStorage.GroupAbnormals)
             {
                 var c = pair.Key;
                 var sb = new StringBuilder();
@@ -172,8 +172,8 @@ namespace TCC.Settings
         //Add My Abnormals Setting by HQ ===========================================================
         private static XElement BuildMyAbnormalsXElement()
         {
-            var result = new XElement(nameof(Settings.MyAbnormals));
-            foreach (var pair in Settings.MyAbnormals)
+            var result = new XElement(nameof(SettingsStorage.MyAbnormals));
+            foreach (var pair in SettingsStorage.MyAbnormals)
             {
                 var c = pair.Key;
                 var sb = new StringBuilder();

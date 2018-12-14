@@ -8,7 +8,7 @@ using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.ViewModels;
 
-namespace TCC.Controls.Npc
+namespace TCC.Controls.NPCs
 {
     /// <summary>
     /// Interaction logic for SmallMobControl.xaml
@@ -18,7 +18,7 @@ namespace TCC.Controls.Npc
         private const uint DeleteDelay = 0;
         private DispatcherTimer _t;
         private DoubleAnimation _hpAnim;
-        private Data.Npc.Npc _dc;
+        private Data.NPCs.NPC _dc;
         public SmallMobControl()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace TCC.Controls.Npc
 
         private void SmallMobControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Data.Npc.Npc)DataContext;
+            _dc = (Data.NPCs.NPC)DataContext;
             _dc.DeleteEvent += Dc_DeleteEvent;
             _dc.PropertyChanged += OnDcPropertyChanged;
             _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(DeleteDelay) };
@@ -48,6 +48,7 @@ namespace TCC.Controls.Npc
                 Duration = TimeSpan.FromMilliseconds(250),
                 EasingFunction = new QuadraticEase()
             };
+            Timeline.SetDesiredFrameRate(_hpAnim, 20);
         }
 
         private void OnViewModelPropertyChanged()
@@ -58,15 +59,15 @@ namespace TCC.Controls.Npc
 
         private void OnDcPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(Data.Npc.Npc.CurrentFactor)) return;
+            if (e.PropertyName != nameof(Data.NPCs.NPC.HPFactor)) return;
             if (Compact)
             {
-                _hpAnim.To = _dc.CurrentFactor * 359.9;
+                _hpAnim.To = _dc.HPFactor * 359.9;
                 ExternalArc.BeginAnimation(Arc.EndAngleProperty, _hpAnim);
             }
             else
             {
-                _hpAnim.To = _dc.CurrentFactor;
+                _hpAnim.To = _dc.HPFactor;
                 HpBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             }
         }

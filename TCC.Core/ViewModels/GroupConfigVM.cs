@@ -21,14 +21,14 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => Settings.Settings.ShowAllGroupAbnormalities;
+            get => SettingsStorage.ShowAllGroupAbnormalities;
             set
             {
-                if (Settings.Settings.ShowAllGroupAbnormalities == value) return;
-                Settings.Settings.ShowAllGroupAbnormalities = value;
+                if (SettingsStorage.ShowAllGroupAbnormalities == value) return;
+                SettingsStorage.ShowAllGroupAbnormalities = value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
                 SettingsWriter.Save();
-                NPC();
+                N();
             }
         }
         public List<Class> Classes

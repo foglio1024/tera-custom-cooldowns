@@ -4,7 +4,7 @@
                     xmlns:abnormalities="clr-namespace:TCC.Controls.Abnormalities"
                     xmlns:chatCtrl="clr-namespace:TCC.Controls.Chat"
                     xmlns:group="clr-namespace:TCC.Controls.Group"
-                    xmlns:npc="clr-namespace:TCC.Controls.Npc"
+                    xmlns:npc="clr-namespace:TCC.Controls.NPCs"
                     xmlns:skills="clr-namespace:TCC.Controls.Skills"
                     xmlns:data="clr-namespace:TCC.Data"
                     xmlns:moongourd="clr-namespace:TCC.Moongourd"

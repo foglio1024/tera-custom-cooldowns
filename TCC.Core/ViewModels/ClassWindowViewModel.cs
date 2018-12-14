@@ -72,7 +72,7 @@ namespace TCC.ViewModels
                             break;
                     }
                 });
-                NPC();
+                N();
             }
         }
 
@@ -85,7 +85,7 @@ namespace TCC.ViewModels
                 if (_currentManager == value) return;
                 _currentManager = value;
                 Instance.CurrentManager = _currentManager;
-                NPC();
+                N();
                 CurrentManager.LoadSpecialSkills();
             }
         }

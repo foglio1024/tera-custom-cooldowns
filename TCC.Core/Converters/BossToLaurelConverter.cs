@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Data.Npc;
+using TCC.Data.NPCs;
 
 namespace TCC.Converters
 {
-    class BossToLaurelConverter : IValueConverter
+    public class BossToLaurelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Npc npc)) return null;
+            if (!(value is NPC npc)) return null;
             var laurel = "";
 
             switch (npc.ZoneId)

@@ -28,8 +28,8 @@ namespace TCC.ViewModels
         private void T_Tick(object sender, EventArgs e)
         {
             _dateTime = DateTime.Now.AddHours(_hourOffset);
-            NPC(nameof(TimeString));
-            NPC(nameof(TimeFactor));
+            N(nameof(TimeString));
+            N(nameof(TimeFactor));
         }
     }
 }

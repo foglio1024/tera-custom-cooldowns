@@ -38,14 +38,14 @@ namespace TCC.ViewModels
             {
                 if (_raid == value) return;
                 _raid = value;
-                NPC();
+                N();
             }
         }
         public int Size => Members.Count;
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && Settings.Settings.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && Settings.SettingsStorage.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && Proxy.Proxy.IsConnected;
         public bool ShowLeaderButtons => Formed && Proxy.Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
@@ -67,20 +67,20 @@ namespace TCC.ViewModels
             //Task.Delay(0).ContinueWith(t =>
             //{
             //});
-            NPC(nameof(Size));
-            NPC(nameof(Formed));
-            NPC(nameof(AmILeader));
-            NPC(nameof(ShowDetails));
-            NPC(nameof(ShowLeaveButton));
-            NPC(nameof(AliveCount));
-            NPC(nameof(ReadyCount));
-            NPC(nameof(ShowLeaderButtons));
+            N(nameof(Size));
+            N(nameof(Formed));
+            N(nameof(AmILeader));
+            N(nameof(ShowDetails));
+            N(nameof(ShowLeaveButton));
+            N(nameof(AliveCount));
+            N(nameof(ReadyCount));
+            N(nameof(ShowLeaderButtons));
         }
         public void NotifySettingUpdated()
         {
             SettingsUpdated?.Invoke();
 
-            NPC(nameof(ShowDetails));
+            N(nameof(ShowDetails));
         }
         public bool Exists(ulong id)
         {
@@ -168,7 +168,7 @@ namespace TCC.ViewModels
                 // -- show only aggro stacks if we are in HH -- //
                 if (BossGageWindowViewModel.Instance.CurrentHHphase >= HarrowholdPhase.Phase2)
                 {
-                    if (ab.Id != 950023 && Settings.Settings.ShowOnlyAggroStacks) return;
+                    if (ab.Id != 950023 && Settings.SettingsStorage.ShowOnlyAggroStacks) return;
                 }
                 // -------------------------------------------- //
                 u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -201,7 +201,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (Settings.Settings.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (Settings.SettingsStorage.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 return;
@@ -285,7 +285,7 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            if (!Settings.Settings.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!Settings.SettingsStorage.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncArray().ToList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;
@@ -327,8 +327,8 @@ namespace TCC.ViewModels
                 m.IsLeader = m.Name == name;
             }
             _leaderOverride = name == SessionManager.CurrentPlayer.Name;
-            NPC(nameof(AmILeader));
-            NPC(nameof(ShowLeaderButtons));
+            N(nameof(AmILeader));
+            N(nameof(ShowLeaderButtons));
         }
         public void StartRoll()
         {
@@ -390,7 +390,7 @@ namespace TCC.ViewModels
             var user = Members.ToSyncArray().FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
             if (user != null) user.Ready = p.Status;
             _firstCheck = false;
-            NPC(nameof(ReadyCount));
+            N(nameof(ReadyCount));
         }
         public void EndReadyCheck()
         {
@@ -433,12 +433,12 @@ namespace TCC.ViewModels
             u.Level = (uint)p.Level;
             if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
             u.Alive = p.Alive;
-            NPC(nameof(AliveCount));
+            N(nameof(AliveCount));
             if (!p.Alive) u.HasAggro = false;
         }
         public void NotifyThresholdChanged()
         {
-            NPC(nameof(Size));
+            N(nameof(Size));
         }
         public void UpdateMemberGear(S_SPAWN_USER p)
         {

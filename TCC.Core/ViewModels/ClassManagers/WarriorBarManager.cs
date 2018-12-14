@@ -21,7 +21,7 @@ namespace TCC.ViewModels
             set
             {
                 if (_swiftProc == value) return; _swiftProc = value;
-                NPC();
+                N();
             }
         }
 
@@ -33,9 +33,9 @@ namespace TCC.ViewModels
             Stance = new StanceTracker<WarriorStance>();
         }
 
-        public bool ShowEdge => Settings.Settings.WarriorShowEdge;
-        public bool ShowTraverseCut => Settings.Settings.WarriorShowTraverseCut;
-        public WarriorEdgeMode WarriorEdgeMode => Settings.Settings.WarriorEdgeMode;
+        public bool ShowEdge => Settings.SettingsStorage.WarriorShowEdge;
+        public bool ShowTraverseCut => Settings.SettingsStorage.WarriorShowTraverseCut;
+        public WarriorEdgeMode WarriorEdgeMode => Settings.SettingsStorage.WarriorEdgeMode;
 
         public sealed override void LoadSpecialSkills()
         {

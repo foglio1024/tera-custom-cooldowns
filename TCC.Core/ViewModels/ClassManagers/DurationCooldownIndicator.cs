@@ -15,7 +15,7 @@ namespace TCC.ViewModels
             {
                 if(_cooldown == value) return;
                 _cooldown = value;
-                NPC();
+                N();
             }
         }
         public Cooldown Buff
@@ -25,7 +25,7 @@ namespace TCC.ViewModels
             {
                 if(_buff == value) return;
                 _buff = value;
-                NPC();
+                N();
             }
         }
 

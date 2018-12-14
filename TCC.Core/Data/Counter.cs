@@ -20,7 +20,7 @@ namespace TCC.Data
                 _val = value;
                 IsMaxed = Val == MaxValue;
                 RefreshTimer();
-                NPC();
+                N();
             }
         }
 
@@ -31,7 +31,7 @@ namespace TCC.Data
             {
                 if (_isMaxed == value) return;
                 _isMaxed = value;
-                NPC();
+                N();
             }
         }
 

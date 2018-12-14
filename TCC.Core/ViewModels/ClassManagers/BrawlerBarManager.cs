@@ -21,7 +21,7 @@ namespace TCC.ViewModels
             {
                 if (_isGfOn == value) return;
                 _isGfOn = value;
-                NPC(nameof(IsGfOn));
+                N(nameof(IsGfOn));
             }
         }
 
@@ -32,7 +32,7 @@ namespace TCC.ViewModels
             {
                 if (_counterProc == value) return;
                 _counterProc = value;
-                NPC(nameof(CounterProc));
+                N(nameof(CounterProc));
             }
         }
 

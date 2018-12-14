@@ -22,7 +22,7 @@ namespace TCC.ViewModels
             {
                 if (_tabName == value) return;
                 _tabName = value;
-                NPC(nameof(TabName));
+                N(nameof(TabName));
             }
         }
         private bool _attention;
@@ -34,7 +34,7 @@ namespace TCC.ViewModels
             {
                 if (_attention == value) return;
                 _attention = value;
-                NPC(nameof(Attention));
+                N(nameof(Attention));
             }
         }
 
@@ -49,7 +49,7 @@ namespace TCC.ViewModels
             {
                 if (_messages == value) return;
                 _messages = value;
-                NPC(nameof(Messages));
+                N(nameof(Messages));
             }
         }
         public ChatMessage PinnedMessage
@@ -59,7 +59,7 @@ namespace TCC.ViewModels
             {
                 if (_pinnedMessage == value) return;
                 _pinnedMessage = value;
-                NPC();
+                N();
             }
         }
         public void Refresh()

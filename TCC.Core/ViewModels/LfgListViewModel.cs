@@ -32,7 +32,7 @@ namespace TCC.ViewModels
             {
                 if (_creating == value) return;
                 _creating = value;
-                NPC();
+                N();
             }
         }
         public string NewMessage
@@ -42,7 +42,7 @@ namespace TCC.ViewModels
             {
                 if (_newMessage == value) return;
                 _newMessage = value;
-                NPC();
+                N();
             }
         }
         public bool AmIinLfg => Dispatcher.Invoke(() => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
@@ -51,8 +51,8 @@ namespace TCC.ViewModels
                                                                      || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId))));
         public void NotifyMyLfg()
         {
-            NPC(nameof(AmIinLfg));
-            NPC(nameof(MyLfg));
+            N(nameof(AmIinLfg));
+            N(nameof(MyLfg));
             foreach (var listing in Listings.ToSyncArray())
             {
                 listing?.NotifyMyLfg();

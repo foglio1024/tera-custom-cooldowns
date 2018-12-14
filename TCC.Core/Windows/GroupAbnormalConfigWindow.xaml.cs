@@ -39,7 +39,7 @@ namespace TCC.Windows
 
         public void ShowWindow()
         {
-            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
@@ -71,7 +71,7 @@ namespace TCC.Windows
             an.Completed += (s, ev) =>
             {
                 Close();
-                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             };
             BeginAnimation(OpacityProperty, an);
@@ -120,7 +120,7 @@ namespace TCC.Windows
             {
                 if (_selected == value) return;
                 _selected = value;
-                NPC();
+                N();
 
             }
         }
@@ -147,8 +147,8 @@ namespace TCC.Windows
         public void Execute(object parameter)
         {
             _toggle.Selected = !_toggle.Selected;
-            if (_toggle.Selected) Settings.Settings.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
-            else Settings.Settings.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
+            if (_toggle.Selected) SettingsStorage.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
+            else SettingsStorage.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 #pragma warning disable 0067
         public event EventHandler CanExecuteChanged;

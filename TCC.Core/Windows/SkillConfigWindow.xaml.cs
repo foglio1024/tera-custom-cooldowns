@@ -57,7 +57,7 @@ namespace TCC.Windows
             an.Completed += (s, ev) =>
             {
                 Hide();
-                if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (Settings.SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, an);
             CooldownWindowViewModel.Instance.Save();
@@ -65,7 +65,7 @@ namespace TCC.Windows
 
         internal void ShowWindow()
         {
-            if (Settings.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (Settings.SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
             WindowManager.ForegroundManager.ForceUndim = true;
             Dispatcher.Invoke(() =>

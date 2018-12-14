@@ -21,7 +21,7 @@ namespace TCC.ViewModels
             {
                 if (_name == value) return;
                 _name = value;
-                NPC();
+                N();
             }
         }
 
@@ -33,7 +33,7 @@ namespace TCC.ViewModels
             {
                 if (_towerHp == value) return;
                 _towerHp = value;
-                NPC();
+                N();
             }
         }
         public uint TowersDestroyed
@@ -43,7 +43,7 @@ namespace TCC.ViewModels
             {
                 if (_towersDestroyed == value) return;
                 _towersDestroyed = value;
-                NPC();
+                N();
             }
         }
     }

@@ -35,7 +35,7 @@ namespace TCC.ViewModels
 
 
         public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
-        public bool ShowElleonMarks => Settings.Settings.LastRegion.Contains("EU");
+        public bool ShowElleonMarks => Settings.SettingsStorage.LastRegion.Contains("EU");
 
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
@@ -176,22 +176,22 @@ namespace TCC.ViewModels
             CurrentCharacter.VanguardDailiesDone = x.DailyDone;
             CurrentCharacter.VanguardCredits = x.VanguardCredits;
             SaveCharacters();
-            NPC(nameof(TotalVanguardCredits));
+            N(nameof(TotalVanguardCredits));
         }
         public void SetVanguardCredits(int pCredits)
         {
             CurrentCharacter.VanguardCredits = pCredits;
-            NPC(nameof(TotalVanguardCredits));
+            N(nameof(TotalVanguardCredits));
         }
         public void SetGuardianCredits(int pCredits)
         {
             CurrentCharacter.GuardianCredits = pCredits;
-            NPC(nameof(TotalGuardianCredits));
+            N(nameof(TotalGuardianCredits));
         }
         public void SetElleonMarks(uint val)
         {
             CurrentCharacter.ElleonMarks = val;
-            NPC(nameof(TotalElleonMarks));
+            N(nameof(TotalElleonMarks));
         }
         private void LoadCharacters()
         {

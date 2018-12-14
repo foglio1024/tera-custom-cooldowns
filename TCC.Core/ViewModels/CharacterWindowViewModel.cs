@@ -12,17 +12,17 @@ namespace TCC.ViewModels
         public Player Player => SessionManager.CurrentPlayer;
 
 
-        public bool CompactMode => Settings.Settings.CharacterWindowCompactMode;
+        public bool CompactMode => Settings.SettingsStorage.CharacterWindowCompactMode;
 
         public bool ShowRe =>(
-            !Settings.Settings.ClassWindowSettings.Visible ||
-            !Settings.Settings.ClassWindowSettings.Enabled) &&
+            !Settings.SettingsStorage.ClassWindowSettings.Visible ||
+            !Settings.SettingsStorage.ClassWindowSettings.Enabled) &&
             (Player.Class == Class.Brawler  ||
             Player.Class == Class.Gunner ||
             Player.Class == Class.Ninja ||
             Player.Class == Class.Valkyrie);
         public bool ShowElements => Player.Class == Class.Sorcerer &&
-            ((!Settings.Settings.ClassWindowSettings.Visible || !Settings.Settings.ClassWindowSettings.Enabled) || (!Settings.Settings.SorcererReplacesElementsInCharWindow));
+            ((!Settings.SettingsStorage.ClassWindowSettings.Visible || !Settings.SettingsStorage.ClassWindowSettings.Enabled) || (!Settings.SettingsStorage.SorcererReplacesElementsInCharWindow));
 
 
         public CharacterWindowViewModel()
@@ -30,23 +30,23 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
-            Settings.Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
-            Settings.Settings.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
+            Settings.SettingsStorage.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
+            Settings.SettingsStorage.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
         }
 
         private void ClassWindowSettings_EnabledChanged()
         {
-            NPC(nameof(ShowRe));
-            NPC(nameof(ShowElements));
+            N(nameof(ShowRe));
+            N(nameof(ShowElements));
         }
 
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            NPC(e.PropertyName);
+            N(e.PropertyName);
             if (e.PropertyName == nameof(Data.Pc.Player.Class))
             {
-                NPC(nameof(ShowRe));
-                NPC(nameof(ShowElements));
+                N(nameof(ShowRe));
+                N(nameof(ShowElements));
             }
         }
     }

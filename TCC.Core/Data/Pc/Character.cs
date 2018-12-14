@@ -36,7 +36,7 @@ namespace TCC.Data.Pc
             {
                 if (_name == value) return;
                 _name = value;
-                NPC(nameof(Name));
+                N(nameof(Name));
             }
         }
         public Class Class
@@ -45,7 +45,7 @@ namespace TCC.Data.Pc
             {
                 if (_class == value) return;
                 _class = value;
-                NPC(nameof(Class));
+                N(nameof(Class));
             }
         }
         public Laurel Laurel
@@ -54,7 +54,7 @@ namespace TCC.Data.Pc
             {
                 if (_laurel == value) return;
                 _laurel = value;
-                NPC(nameof(Laurel));
+                N(nameof(Laurel));
             }
         }
         public int Level
@@ -64,7 +64,7 @@ namespace TCC.Data.Pc
             {
                 if (_level == value) return;
                 _level = value;
-                NPC();
+                N();
             }
         }
         public int VanguardDailiesDone
@@ -74,8 +74,8 @@ namespace TCC.Data.Pc
             {
                 if (_vanguardDailiesDone == value) return;
                 _vanguardDailiesDone = value;
-                NPC(nameof(VanguardDailiesDone));
-                NPC(nameof(VanguardDailyCompletion));
+                N(nameof(VanguardDailiesDone));
+                N(nameof(VanguardDailyCompletion));
             }
         }
         public string GuildName { get; set; } = "";
@@ -99,8 +99,8 @@ namespace TCC.Data.Pc
             {
                 if (_vanguardWeekliesDone == value) return;
                 _vanguardWeekliesDone = value;
-                NPC(nameof(VanguardWeekliesDone));
-                NPC(nameof(VanguardWeeklyCompletion));
+                N(nameof(VanguardWeekliesDone));
+                N(nameof(VanguardWeeklyCompletion));
 
             }
         }
@@ -111,8 +111,8 @@ namespace TCC.Data.Pc
             {
                 if (_vanguardCredits == value) return;
                 _vanguardCredits = value;
-                NPC(nameof(VanguardCredits));
-                NPC(nameof(VanguardCreditsFactor));
+                N(nameof(VanguardCredits));
+                N(nameof(VanguardCreditsFactor));
             }
         }
         public int GuardianCredits
@@ -122,8 +122,8 @@ namespace TCC.Data.Pc
             {
                 if (_guardianCredits == value) return;
                 _guardianCredits = value;
-                NPC(nameof(GuardianCredits));
-                NPC(nameof(GuardianCreditsFactor));
+                N(nameof(GuardianCredits));
+                N(nameof(GuardianCreditsFactor));
             }
         }
         public double VanguardCreditsFactor => VanguardCredits / 9000.0d;
@@ -135,7 +135,7 @@ namespace TCC.Data.Pc
             {
                 if (_isLoggedIn == value) return;
                 _isLoggedIn = value;
-                NPC(nameof(IsLoggedIn));
+                N(nameof(IsLoggedIn));
             }
         }
         public bool IsSelected
@@ -144,7 +144,7 @@ namespace TCC.Data.Pc
             {
                 if (_isSelected == value) return;
                 _isSelected = value;
-                NPC(nameof(IsSelected));
+                N(nameof(IsSelected));
             }
         }
         public double VanguardWeeklyCompletion => VanguardWeekliesDone / (double)SessionManager.MaxWeekly;
@@ -158,8 +158,8 @@ namespace TCC.Data.Pc
             {
                 if (_itemLevel == value) return;
                 _itemLevel = value;
-                NPC();
-                NPC(nameof(ItemLevelTier));
+                N();
+                N(nameof(ItemLevelTier));
             }
         }
         public ItemLevelTier ItemLevelTier
@@ -198,8 +198,8 @@ namespace TCC.Data.Pc
             {
                 if (_claimedGuardianQuests == value) return;
                 _claimedGuardianQuests = value;
-                NPC();
-                NPC(nameof(GuardianCompletion));
+                N();
+                N(nameof(GuardianCompletion));
             }
         }
         public int MaxGuardianQuests
@@ -208,8 +208,8 @@ namespace TCC.Data.Pc
             {
                 if (_maxGuardianQuests == value) return;
                 _maxGuardianQuests = value;
-                NPC();
-                NPC(nameof(GuardianCompletion));
+                N();
+                N(nameof(GuardianCompletion));
             }
         }
 
@@ -219,8 +219,8 @@ namespace TCC.Data.Pc
             {
                 if (_elleonMarks == value) return;
                 _elleonMarks = value;
-                NPC();
-                NPC(nameof(ElleonMarksFactor));
+                N();
+                N(nameof(ElleonMarksFactor));
             }
         }
 
@@ -232,7 +232,7 @@ namespace TCC.Data.Pc
             {
                 if (_clearedGuardianQuests == value) return;
                 _clearedGuardianQuests = value;
-                NPC();
+                N();
             }
 
         }
@@ -244,8 +244,8 @@ namespace TCC.Data.Pc
             {
                 if (_dragonwingScales == value) return;
                 _dragonwingScales = value;
-                NPC();
-                NPC(nameof(DragonwingScalesFactor));
+                N();
+                N(nameof(DragonwingScalesFactor));
             }
         }
         public uint PiecesOfDragonScroll
@@ -255,8 +255,8 @@ namespace TCC.Data.Pc
             {
                 if (_piecesOfDragonScroll == value) return;
                 _piecesOfDragonScroll = value;
-                NPC();
-                NPC(nameof(PiecesOfDragonScrollFactor));
+                N();
+                N(nameof(PiecesOfDragonScrollFactor));
             }
         }
         public float DragonwingScalesFactor => DragonwingScales > 10 ? 1 : DragonwingScales / 10f;

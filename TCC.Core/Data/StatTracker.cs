@@ -18,9 +18,9 @@ namespace TCC.Data
                 if (_val == value) return;
                 _val = value;
 
-                NPC();
-                NPC(nameof(Factor));
-                NPC(nameof(Maxed));
+                N();
+                N(nameof(Factor));
+                N(nameof(Maxed));
             }
         }
         public int Max
@@ -31,8 +31,8 @@ namespace TCC.Data
                 if (_max == value) return;
                 _max = value;
                 if (_max == 0) _max = 1;
-                NPC();
-                NPC(nameof(Factor));
+                N();
+                N(nameof(Factor));
             }
         }
         public bool Maxed => Factor == 1;
@@ -44,7 +44,7 @@ namespace TCC.Data
             {
                 if (_status == value) return;
                 _status = value;
-                NPC();
+                N();
             }
         }
 

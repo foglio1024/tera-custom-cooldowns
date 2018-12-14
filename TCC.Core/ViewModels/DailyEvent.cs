@@ -60,9 +60,9 @@ namespace TCC.ViewModels
                     Start = time;
                     Duration = TimeSpan.Zero;
                     _happened = true;
-                    NPC(nameof(StartFactor));
-                    NPC(nameof(DurationFactor));
-                    NPC(nameof(ToolTip));
+                    N(nameof(StartFactor));
+                    N(nameof(DurationFactor));
+                    N(nameof(ToolTip));
                 }
             }
         }

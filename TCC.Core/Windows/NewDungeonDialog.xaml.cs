@@ -37,7 +37,7 @@ namespace TCC.Windows
             if (dg.Show) return;
             dg.Show = true;
             dg.Index = int.MaxValue;
-            //WindowManager.Dashboard.VM.ExNPC(nameof(DashboardViewModel.SortedColumns));
+            //WindowManager.Dashboard.VM.ExN(nameof(DashboardViewModel.SortedColumns));
         }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)

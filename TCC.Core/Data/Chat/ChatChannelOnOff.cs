@@ -14,7 +14,7 @@ namespace TCC.Data.Chat
             {
                 if (_enabled == value) return;
                 _enabled = value;
-                NPC(nameof(Enabled));
+                N(nameof(Enabled));
             }
         }
         public ChatChannel Channel
@@ -24,7 +24,7 @@ namespace TCC.Data.Chat
             {
                 if (_channel == value) return;
                 _channel = value;
-                NPC(nameof(Channel));
+                N(nameof(Channel));
             }
         }
 

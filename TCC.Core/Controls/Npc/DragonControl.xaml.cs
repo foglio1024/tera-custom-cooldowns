@@ -6,14 +6,14 @@ using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC.Controls.Npc
+namespace TCC.Controls.NPCs
 {
     /// <summary>
     /// Interaction logic for DragonControl.xaml
     /// </summary>
     public partial class DragonControl
     {
-        private Data.Npc.Npc _dc;
+        private Data.NPCs.NPC _dc;
         private DoubleAnimation _shieldArcAn;
 
         public DragonControl()
@@ -25,7 +25,7 @@ namespace TCC.Controls.Npc
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Data.Npc.Npc)DataContext;
+            _dc = (Data.NPCs.NPC)DataContext;
             _dc.PropertyChanged += Dc_PropertyChanged;
             _dc.DeleteEvent += Dc_DeleteEvent;
             EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
@@ -82,7 +82,7 @@ namespace TCC.Controls.Npc
             {
                 if (_dc.Enraged)
                 {
-                    EnrageLine.LayoutTransform = new RotateTransform(_dc.CurrentFactor * 359.9);
+                    EnrageLine.LayoutTransform = new RotateTransform(_dc.HPFactor * 359.9);
                 }
             }
         }

@@ -166,8 +166,8 @@ namespace TCC.Settings
                 else if (a.Name == nameof(WindowSettings.Enabled)) enabled = bool.Parse(a.Value);
             });
 
-            if (x > 1) x = x / Settings.ScreenW;
-            if (y > 1) y = y / Settings.ScreenH;
+            if (x > 1) x = x / SettingsStorage.ScreenW;
+            if (y > 1) y = y / SettingsStorage.ScreenH;
 
             var positions = ParseWindowPositions(ws);
 
@@ -175,7 +175,7 @@ namespace TCC.Settings
         }
         private static void ParseGroupAbnormalSettings(XElement el)
         {
-            foreach (var groupAbnormalList in Settings.GroupAbnormals)
+            foreach (var groupAbnormalList in SettingsStorage.GroupAbnormals)
             {
                 groupAbnormalList.Value.Clear();
             }
@@ -187,18 +187,18 @@ namespace TCC.Settings
                 var parsedClass = (Class)Enum.Parse(typeof(Class), stringClass);
                 var abnormalities = abEl.Value.Split(',');
                 var list = abnormalities.Length == 1 && abnormalities[0] == "" ? new List<uint>() : abnormalities.Select(uint.Parse).ToList();
-                list.ForEach(abnormality => Settings.GroupAbnormals[parsedClass].Add(abnormality));
+                list.ForEach(abnormality => SettingsStorage.GroupAbnormals[parsedClass].Add(abnormality));
             }
 
-            if (Settings.GroupAbnormals.Count != 0) return;
-            CommonDefault.ForEach(x => Settings.GroupAbnormals[Class.Common].Add(x));
-            PriestDefault.ForEach(x => Settings.GroupAbnormals[Class.Priest].Add(x));
-            MysticDefault.ForEach(x => Settings.GroupAbnormals[Class.Mystic].Add(x));
+            if (SettingsStorage.GroupAbnormals.Count != 0) return;
+            CommonDefault.ForEach(x => SettingsStorage.GroupAbnormals[Class.Common].Add(x));
+            PriestDefault.ForEach(x => SettingsStorage.GroupAbnormals[Class.Priest].Add(x));
+            MysticDefault.ForEach(x => SettingsStorage.GroupAbnormals[Class.Mystic].Add(x));
         }
         //Add My Abnormals Setting by HQ ====================================================
         private static void ParseMyAbnormalSettings(XElement el)
         {
-            foreach (var myAbnormalList in Settings.MyAbnormals)
+            foreach (var myAbnormalList in SettingsStorage.MyAbnormals)
             {
                 myAbnormalList.Value.Clear();
             }
@@ -210,24 +210,24 @@ namespace TCC.Settings
                 var parsedClass = (Class)Enum.Parse(typeof(Class), stringClass);
                 var abnormalities = abEl.Value.Split(',');
                 var list = abnormalities.Length == 1 && abnormalities[0] == "" ? new List<uint>() : abnormalities.Select(uint.Parse).ToList();
-                list.ForEach(abnormality => Settings.MyAbnormals[parsedClass].Add(abnormality));
+                list.ForEach(abnormality => SettingsStorage.MyAbnormals[parsedClass].Add(abnormality));
             }
-            if (Settings.MyAbnormals.Count == 0)
+            if (SettingsStorage.MyAbnormals.Count == 0)
             {
-                MyCommonDefault.ForEach(x => Settings.MyAbnormals[Class.Common].Add(x));
-                MyArcherDefault.ForEach(x => Settings.MyAbnormals[Class.Archer].Add(x));
-                MyBerserkerDefault.ForEach(x => Settings.MyAbnormals[Class.Berserker].Add(x));
-                MyBrawlerDefault.ForEach(x => Settings.MyAbnormals[Class.Brawler].Add(x));
-                MyGunnerDefault.ForEach(x => Settings.MyAbnormals[Class.Gunner].Add(x));
-                MyLancerDefault.ForEach(x => Settings.MyAbnormals[Class.Lancer].Add(x));
-                MyMysticDefault.ForEach(x => Settings.MyAbnormals[Class.Mystic].Add(x));
-                MyNinjaDefault.ForEach(x => Settings.MyAbnormals[Class.Ninja].Add(x));
-                MyPriestDefault.ForEach(x => Settings.MyAbnormals[Class.Priest].Add(x));
-                MyReaperDefault.ForEach(x => Settings.MyAbnormals[Class.Reaper].Add(x));
-                MySlayerDefault.ForEach(x => Settings.MyAbnormals[Class.Slayer].Add(x));
-                MySorcererDefault.ForEach(x => Settings.MyAbnormals[Class.Sorcerer].Add(x));
-                MyValkyrieDefault.ForEach(x => Settings.MyAbnormals[Class.Valkyrie].Add(x));
-                MyWarriorDefault.ForEach(x => Settings.MyAbnormals[Class.Warrior].Add(x));
+                MyCommonDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Common].Add(x));
+                MyArcherDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Archer].Add(x));
+                MyBerserkerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Berserker].Add(x));
+                MyBrawlerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Brawler].Add(x));
+                MyGunnerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Gunner].Add(x));
+                MyLancerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Lancer].Add(x));
+                MyMysticDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Mystic].Add(x));
+                MyNinjaDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Ninja].Add(x));
+                MyPriestDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Priest].Add(x));
+                MyReaperDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Reaper].Add(x));
+                MySlayerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Slayer].Add(x));
+                MySorcererDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Sorcerer].Add(x));
+                MyValkyrieDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Valkyrie].Add(x));
+                MyWarriorDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Warrior].Add(x));
             }
         }
         //===================================================================================
@@ -242,15 +242,15 @@ namespace TCC.Settings
                 {
                     var name = ws.Attribute("Name")?.Value;
                     if (name == null) return;
-                    if (name == "BossWindow") Settings.BossWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "CharacterWindow") Settings.CharacterWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "CooldownWindow") Settings.CooldownWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "BuffWindow") Settings.BuffWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "GroupWindow") Settings.GroupWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "ClassWindow") Settings.ClassWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "FlightGaugeWindow") Settings.FlightGaugeWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "FloatingButton") Settings.FloatingButtonSettings = ParseWindowSettings(ws);
-                    else if (name == "CivilUnrestWindow") Settings.CivilUnrestWindowSettings = ParseWindowSettings(ws);
+                    if (name == "BossWindow") SettingsStorage.BossWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "CharacterWindow") SettingsStorage.CharacterWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "CooldownWindow") SettingsStorage.CooldownWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "BuffWindow") SettingsStorage.BuffWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "GroupWindow") SettingsStorage.GroupWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "ClassWindow") SettingsStorage.ClassWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "FlightGaugeWindow") SettingsStorage.FlightGaugeWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "FloatingButton") SettingsStorage.FloatingButtonSettings = ParseWindowSettings(ws);
+                    else if (name == "CivilUnrestWindow") SettingsStorage.CivilUnrestWindowSettings = ParseWindowSettings(ws);
                     //add window here
                 }
 
@@ -258,7 +258,7 @@ namespace TCC.Settings
                 {
                     _settingsDoc.Descendants().Where(x => x.Name == "ChatWindow").ToList().ForEach(s =>
                     {
-                        Settings.ChatWindowsSettings.Add(ParseChatWindowSettings(s));
+                        SettingsStorage.ChatWindowsSettings.Add(ParseChatWindowSettings(s));
                     });
                 }
             }
@@ -282,101 +282,101 @@ namespace TCC.Settings
                 if (b == null) return;
                 b.Attributes().ToList().ForEach(attr =>
                 {
-                    if (attr.Name == nameof(Settings.IgnoreMeInGroupWindow)) Settings.IgnoreMeInGroupWindow = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.IgnoreGroupBuffs)) Settings.IgnoreGroupBuffs = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.IgnoreGroupDebuffs)) Settings.IgnoreGroupDebuffs = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.BuffsDirection)) Settings.BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
-                    else if (attr.Name == nameof(Settings.CooldownBarMode)) Settings.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
-                    else if (attr.Name == nameof(Settings.EnrageLabelMode)) Settings.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
-                    else if (attr.Name == nameof(Settings.ChatClickThruMode)) Settings.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
-                    else if (attr.Name == nameof(Settings.WarriorEdgeMode)) Settings.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
-                    else if (attr.Name == nameof(Settings.AbnormalityShape)) Settings.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
-                    else if (attr.Name == nameof(Settings.SkillShape)) Settings.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
-                    else if (attr.Name == nameof(Settings.MaxMessages)) Settings.MaxMessages = int.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.SpamThreshold)) Settings.SpamThreshold = int.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.FontSize)) Settings.FontSize = int.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowChannel)) Settings.ShowChannel = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowTimestamp)) Settings.ShowTimestamp = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowOnlyBosses)) Settings.ShowOnlyBosses = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.DisablePartyHP)) Settings.DisablePartyHP = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.DisablePartyMP)) Settings.DisablePartyMP = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowOnlyAggroStacks)) Settings.ShowOnlyAggroStacks = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.DisablePartyAbnormals)) Settings.DisablePartyAbnormals = bool.Parse(attr.Value);
+                    if (attr.Name == nameof(SettingsStorage.IgnoreMeInGroupWindow)) SettingsStorage.IgnoreMeInGroupWindow = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.IgnoreGroupBuffs)) SettingsStorage.IgnoreGroupBuffs = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.IgnoreGroupDebuffs)) SettingsStorage.IgnoreGroupDebuffs = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.BuffsDirection)) SettingsStorage.BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.CooldownBarMode)) SettingsStorage.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.EnrageLabelMode)) SettingsStorage.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ChatClickThruMode)) SettingsStorage.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.WarriorEdgeMode)) SettingsStorage.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.AbnormalityShape)) SettingsStorage.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.SkillShape)) SettingsStorage.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.MaxMessages)) SettingsStorage.MaxMessages = int.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.SpamThreshold)) SettingsStorage.SpamThreshold = int.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.FontSize)) SettingsStorage.FontSize = int.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowChannel)) SettingsStorage.ShowChannel = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowTimestamp)) SettingsStorage.ShowTimestamp = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowOnlyBosses)) SettingsStorage.ShowOnlyBosses = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.DisablePartyHP)) SettingsStorage.DisablePartyHP = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.DisablePartyMP)) SettingsStorage.DisablePartyMP = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowOnlyAggroStacks)) SettingsStorage.ShowOnlyAggroStacks = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.DisablePartyAbnormals)) SettingsStorage.DisablePartyAbnormals = bool.Parse(attr.Value);
                     //else if (attr.Name == nameof(Settings.ChatFadeOut)) Settings.ChatFadeOut = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowItemsCooldown)) Settings.ShowItemsCooldown = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowMembersLaurels)) Settings.ShowMembersLaurels = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.AnimateChatMessages)) Settings.AnimateChatMessages = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.StatSent)) Settings.StatSent = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowFlightEnergy)) Settings.ShowFlightEnergy = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.LfgEnabled)) Settings.LfgEnabled = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowGroupWindowDetails)) Settings.ShowGroupWindowDetails = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.UseHotkeys)) Settings.UseHotkeys = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.HideHandles)) Settings.HideHandles = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ChatEnabled)) Settings.ChatEnabled = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowTradeLfg)) Settings.ShowTradeLfg = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowAwakenIcon)) Settings.ShowAwakenIcon = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.EthicalMode)) Settings.EthicalMode = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.AccurateHp)) Settings.AccurateHp = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.WarriorShowEdge)) Settings.WarriorShowEdge = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.SorcererReplacesElementsInCharWindow)) Settings.SorcererReplacesElementsInCharWindow = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.FlipFlightGauge)) Settings.FlipFlightGauge = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.WarriorShowTraverseCut)) Settings.WarriorShowTraverseCut = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.CharacterWindowCompactMode)) Settings.CharacterWindowCompactMode = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowAllGroupAbnormalities)) Settings.ShowAllGroupAbnormalities = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowItemsCooldown)) SettingsStorage.ShowItemsCooldown = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowMembersLaurels)) SettingsStorage.ShowMembersLaurels = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.AnimateChatMessages)) SettingsStorage.AnimateChatMessages = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.StatSent)) SettingsStorage.StatSent = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowFlightEnergy)) SettingsStorage.ShowFlightEnergy = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.LfgEnabled)) SettingsStorage.LfgEnabled = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowGroupWindowDetails)) SettingsStorage.ShowGroupWindowDetails = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.UseHotkeys)) SettingsStorage.UseHotkeys = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.HideHandles)) SettingsStorage.HideHandles = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ChatEnabled)) SettingsStorage.ChatEnabled = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowTradeLfg)) SettingsStorage.ShowTradeLfg = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowAwakenIcon)) SettingsStorage.ShowAwakenIcon = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.EthicalMode)) SettingsStorage.EthicalMode = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.AccurateHp)) SettingsStorage.AccurateHp = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.WarriorShowEdge)) SettingsStorage.WarriorShowEdge = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.SorcererReplacesElementsInCharWindow)) SettingsStorage.SorcererReplacesElementsInCharWindow = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.FlipFlightGauge)) SettingsStorage.FlipFlightGauge = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.WarriorShowTraverseCut)) SettingsStorage.WarriorShowTraverseCut = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.CharacterWindowCompactMode)) SettingsStorage.CharacterWindowCompactMode = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowAllGroupAbnormalities)) SettingsStorage.ShowAllGroupAbnormalities = bool.Parse(attr.Value);
                     //Add My Abnormals Setting by HQ ====================================================
-                    else if (attr.Name == nameof(Settings.ShowAllMyAbnormalities)) Settings.ShowAllMyAbnormalities = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowAllMyAbnormalities)) SettingsStorage.ShowAllMyAbnormalities = bool.Parse(attr.Value);
                     //===================================================================================
-                    else if (attr.Name == nameof(Settings.HighPriority)) Settings.HighPriority = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ForceSoftwareRendering)) Settings.ForceSoftwareRendering = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.Npcap)) Settings.Npcap = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.RegionOverride)) Settings.RegionOverride = attr.Value;
-                    else if (attr.Name == nameof(Settings.LastRegion)) Settings.LastRegion = attr.Value;
-                    else if (attr.Name == nameof(Settings.Webhook)) Settings.Webhook = attr.Value;
-                    else if (attr.Name == nameof(Settings.WebhookMessage)) Settings.WebhookMessage = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.HighPriority)) SettingsStorage.HighPriority = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ForceSoftwareRendering)) SettingsStorage.ForceSoftwareRendering = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.Npcap)) SettingsStorage.Npcap = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.RegionOverride)) SettingsStorage.RegionOverride = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.LastRegion)) SettingsStorage.LastRegion = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.Webhook)) SettingsStorage.Webhook = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.WebhookMessage)) SettingsStorage.WebhookMessage = attr.Value;
                     //else if (attr.Name == nameof(Settings.ChatWindowOpacity)) Settings.ChatWindowOpacity = double.Parse(attr.Value, CultureInfo.InvariantCulture);
-                    else if (attr.Name == nameof(Settings.FlightGaugeRotation)) Settings.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
-                    else if (attr.Name == nameof(Settings.LastRun)) Settings.LastRun = DateTime.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.TwitchName)) Settings.TwitchName = attr.Value;
-                    else if (attr.Name == nameof(Settings.TwitchToken)) Settings.TwitchToken = attr.Value;
-                    else if (attr.Name == nameof(Settings.TwitchChannelName)) Settings.TwitchChannelName = attr.Value;
-                    else if (attr.Name == nameof(Settings.GroupSizeThreshold)) Settings.GroupSizeThreshold = uint.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.CheckOpcodesHash)) Settings.CheckOpcodesHash = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.DiscordWebhookEnabled)) Settings.DiscordWebhookEnabled = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(Settings.ShowNotificationBubble)) Settings.ShowNotificationBubble = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.FlightGaugeRotation)) SettingsStorage.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
+                    else if (attr.Name == nameof(SettingsStorage.LastRun)) SettingsStorage.LastRun = DateTime.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.TwitchName)) SettingsStorage.TwitchName = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.TwitchToken)) SettingsStorage.TwitchToken = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.TwitchChannelName)) SettingsStorage.TwitchChannelName = attr.Value;
+                    else if (attr.Name == nameof(SettingsStorage.GroupSizeThreshold)) SettingsStorage.GroupSizeThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.CheckOpcodesHash)) SettingsStorage.CheckOpcodesHash = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.DiscordWebhookEnabled)) SettingsStorage.DiscordWebhookEnabled = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsStorage.ShowNotificationBubble)) SettingsStorage.ShowNotificationBubble = bool.Parse(attr.Value);
                     //add settings here
                 });
 
                 try
                 {
-                    ParseGroupAbnormalSettings(_settingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(Settings.GroupAbnormals)));
+                    ParseGroupAbnormalSettings(_settingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(SettingsStorage.GroupAbnormals)));
                 }
                 catch
                 {
-                    CommonDefault.ForEach(x => Settings.GroupAbnormals[Class.Common].Add(x));
-                    PriestDefault.ForEach(x => Settings.GroupAbnormals[Class.Priest].Add(x));
-                    MysticDefault.ForEach(x => Settings.GroupAbnormals[Class.Mystic].Add(x));
+                    CommonDefault.ForEach(x => SettingsStorage.GroupAbnormals[Class.Common].Add(x));
+                    PriestDefault.ForEach(x => SettingsStorage.GroupAbnormals[Class.Priest].Add(x));
+                    MysticDefault.ForEach(x => SettingsStorage.GroupAbnormals[Class.Mystic].Add(x));
                 }
                 //Add My Abnormals Setting by HQ ====================================================
                 try
                 {
-                    ParseMyAbnormalSettings(_settingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(Settings.MyAbnormals)));
+                    ParseMyAbnormalSettings(_settingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(SettingsStorage.MyAbnormals)));
                 }
                 catch
                 {
-                    MyCommonDefault.ForEach(x => Settings.MyAbnormals[Class.Common].Add(x));
-                    MyArcherDefault.ForEach(x => Settings.MyAbnormals[Class.Archer].Add(x));
-                    MyBerserkerDefault.ForEach(x => Settings.MyAbnormals[Class.Berserker].Add(x));
-                    MyBrawlerDefault.ForEach(x => Settings.MyAbnormals[Class.Brawler].Add(x));
-                    MyGunnerDefault.ForEach(x => Settings.MyAbnormals[Class.Gunner].Add(x));
-                    MyLancerDefault.ForEach(x => Settings.MyAbnormals[Class.Lancer].Add(x));
-                    MyMysticDefault.ForEach(x => Settings.MyAbnormals[Class.Mystic].Add(x));
-                    MyNinjaDefault.ForEach(x => Settings.MyAbnormals[Class.Ninja].Add(x));
-                    MyPriestDefault.ForEach(x => Settings.MyAbnormals[Class.Priest].Add(x));
-                    MyReaperDefault.ForEach(x => Settings.MyAbnormals[Class.Reaper].Add(x));
-                    MySlayerDefault.ForEach(x => Settings.MyAbnormals[Class.Slayer].Add(x));
-                    MySorcererDefault.ForEach(x => Settings.MyAbnormals[Class.Sorcerer].Add(x));
-                    MyValkyrieDefault.ForEach(x => Settings.MyAbnormals[Class.Valkyrie].Add(x));
-                    MyWarriorDefault.ForEach(x => Settings.MyAbnormals[Class.Warrior].Add(x));
+                    MyCommonDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Common].Add(x));
+                    MyArcherDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Archer].Add(x));
+                    MyBerserkerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Berserker].Add(x));
+                    MyBrawlerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Brawler].Add(x));
+                    MyGunnerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Gunner].Add(x));
+                    MyLancerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Lancer].Add(x));
+                    MyMysticDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Mystic].Add(x));
+                    MyNinjaDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Ninja].Add(x));
+                    MyPriestDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Priest].Add(x));
+                    MyReaperDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Reaper].Add(x));
+                    MySlayerDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Slayer].Add(x));
+                    MySorcererDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Sorcerer].Add(x));
+                    MyValkyrieDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Valkyrie].Add(x));
+                    MyWarriorDefault.ForEach(x => SettingsStorage.MyAbnormals[Class.Warrior].Add(x));
                 }
                 //===================================================================================
             }

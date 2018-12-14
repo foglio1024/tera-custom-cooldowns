@@ -64,7 +64,7 @@ namespace TCC
             if (target.IsMe())
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
-                if (!Settings.Settings.DisablePartyAbnormals)
+                if (!Settings.SettingsStorage.DisablePartyAbnormals)
                 {
                     GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
@@ -110,7 +110,7 @@ namespace TCC
 
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (Settings.Settings.EthicalMode) return;
+            if (Settings.SettingsStorage.EthicalMode) return;
             if (PassivityDatabase.Passivities.ContainsKey(ab.Id))
             {
                 SkillManager.AddPassivitySkill(ab.Id, PassivityDatabase.Passivities[ab.Id]);
@@ -153,7 +153,7 @@ namespace TCC
 
         private static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            //if (EntitiesViewModel.TryGetBossById(target, out Npc b))
+            //if (EntitiesViewModel.TryGetBossById(target, out NPC b))
             //{
             //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
             //}

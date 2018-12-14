@@ -23,7 +23,7 @@ namespace TCC.Data
             {
                 if (_stacks == value) return;
                 _stacks = value;
-                NPC(nameof(Stacks));
+                N(nameof(Stacks));
                 StacksChanged?.Invoke(Stacks);
             }
         }

@@ -7,7 +7,7 @@ using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings
 {
-    public static class Settings
+    public static class SettingsStorage
     {
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;

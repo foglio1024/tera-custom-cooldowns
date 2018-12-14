@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TCC.Data.Npc;
+using TCC.Data.NPCs;
 
 namespace TCC.TemplateSelectors
 {
@@ -12,7 +12,7 @@ namespace TCC.TemplateSelectors
         {
             if (item == null) return null;
 
-            if (((Npc)item).IsBoss) return BossDataTemplate;
+            if (((NPC)item).IsBoss) return BossDataTemplate;
             else return MobDataTemplate;
         }
     }

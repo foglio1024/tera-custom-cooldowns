@@ -16,12 +16,12 @@ namespace TCC.Parsing
         private static bool IsFileValid(string filename, uint version)
         {
             if (!File.Exists(filename)) return false;
-            if (!Settings.Settings.CheckOpcodesHash) return true;
+            if (!Settings.SettingsStorage.CheckOpcodesHash) return true;
             var file = File.Open(filename, FileMode.Open);
             var fileBuffer = new byte[file.Length];
             file.Read(fileBuffer, 0, (int)file.Length);
             file.Close();
-            var localHash = SHA256Managed.Create().ComputeHash(fileBuffer);
+            var localHash = SHA256.Create().ComputeHash(fileBuffer);
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             using (var c = new WebClient())
             {

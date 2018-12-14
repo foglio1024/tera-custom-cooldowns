@@ -44,7 +44,7 @@ namespace TCC.Data.Pc
             {
                 if (_entityId == value) return;
                 _entityId = value;
-                NPC(nameof(EntityId));
+                N(nameof(EntityId));
             }
         }
         public uint Level
@@ -54,7 +54,7 @@ namespace TCC.Data.Pc
             {
                 if (_level == value) return;
                 _level = value;
-                NPC(nameof(Level));
+                N(nameof(Level));
             }
         }
         public Class UserClass
@@ -82,7 +82,7 @@ namespace TCC.Data.Pc
                         Role = Role.Dps;
                         break;
                 }
-                NPC(nameof(UserClass));
+                N(nameof(UserClass));
             }
         }
         public Role Role
@@ -92,7 +92,7 @@ namespace TCC.Data.Pc
             {
                 if (_role == value) return;
                 _role = value;
-                NPC(nameof(Role));
+                N(nameof(Role));
             }
         }
         public bool Online
@@ -103,7 +103,7 @@ namespace TCC.Data.Pc
                 if (_online == value) return;
                 _online = value;
                 if (!_online) { CurrentHp = 0; CurrentMp = 0; }
-                NPC(nameof(Online));
+                N(nameof(Online));
             }
         }
         public uint ServerId
@@ -113,7 +113,7 @@ namespace TCC.Data.Pc
             {
                 if (_serverId == value) return;
                 _serverId = value;
-                NPC(nameof(ServerId));
+                N(nameof(ServerId));
             }
         }
         public uint PlayerId
@@ -123,7 +123,7 @@ namespace TCC.Data.Pc
             {
                 if (_playerId == value) return;
                 _playerId = value;
-                NPC(nameof(PlayerId));
+                N(nameof(PlayerId));
             }
         }
         public int Order
@@ -133,7 +133,7 @@ namespace TCC.Data.Pc
             {
                 if (_order == value) return;
                 _order = value;
-                NPC(nameof(Order));
+                N(nameof(Order));
             }
         }
         public bool CanInvite
@@ -143,7 +143,7 @@ namespace TCC.Data.Pc
             {
                 if (_canInvite == value) return;
                 _canInvite = value;
-                NPC(nameof(CanInvite));
+                N(nameof(CanInvite));
             }
         }
         public Laurel Laurel
@@ -153,7 +153,7 @@ namespace TCC.Data.Pc
             {
                 if (_laurel == value) return;
                 _laurel = value;
-                NPC(nameof(Laurel));
+                N(nameof(Laurel));
             }
         }
         public string Name
@@ -163,7 +163,7 @@ namespace TCC.Data.Pc
             {
                 if (_name == value) return;
                 _name = value;
-                NPC(nameof(Name));
+                N(nameof(Name));
             }
         }
         public long CurrentHp
@@ -173,8 +173,8 @@ namespace TCC.Data.Pc
             {
                 if (_currentHp == value) return;
                 _currentHp = value;
-                NPC(nameof(CurrentHp));
-                NPC(nameof(HpFactor));
+                N(nameof(CurrentHp));
+                N(nameof(HpFactor));
             }
         }
         public int CurrentMp
@@ -184,8 +184,8 @@ namespace TCC.Data.Pc
             {
                 if (_currentMp == value) return;
                 _currentMp = value;
-                NPC(nameof(CurrentMp));
-                NPC(nameof(MpFactor));
+                N(nameof(CurrentMp));
+                N(nameof(MpFactor));
             }
         }
         public long MaxHp
@@ -195,8 +195,8 @@ namespace TCC.Data.Pc
             {
                 if (_maxHp == value) return;
                 _maxHp = value;
-                NPC(nameof(MaxHp));
-                NPC(nameof(HpFactor));
+                N(nameof(MaxHp));
+                N(nameof(HpFactor));
             }
         }
         public int MaxMp
@@ -206,8 +206,8 @@ namespace TCC.Data.Pc
             {
                 if (_maxMp == value) return;
                 _maxMp = value;
-                NPC(nameof(MaxMp));
-                NPC(nameof(MpFactor));
+                N(nameof(MaxMp));
+                N(nameof(MpFactor));
             }
         }
         public double HpFactor => Utils.FactorCalc(CurrentHp, MaxHp);
@@ -219,7 +219,7 @@ namespace TCC.Data.Pc
             {
                 if (_ready == value) return;
                 _ready = value;
-                NPC(nameof(Ready));
+                N(nameof(Ready));
             }
         }
         public bool Alive
@@ -229,7 +229,7 @@ namespace TCC.Data.Pc
             {
                 if (_alive == value) return;
                 _alive = value;
-                NPC(nameof(Alive));
+                N(nameof(Alive));
             }
         }
         public int RollResult
@@ -240,7 +240,7 @@ namespace TCC.Data.Pc
                 if (_rollResult == value) return;
                 _rollResult = value;
                 if (_rollResult == -1) IsRolling = false;
-                NPC(nameof(RollResult));
+                N(nameof(RollResult));
             }
         }
         public bool IsRolling
@@ -250,7 +250,7 @@ namespace TCC.Data.Pc
             {
                 if (_isRolling == value) return;
                 _isRolling = value;
-                NPC(nameof(IsRolling));
+                N(nameof(IsRolling));
             }
         }
         public bool IsWinning
@@ -260,7 +260,7 @@ namespace TCC.Data.Pc
             {
                 if (_isWinning == value) return;
                 _isWinning = value;
-                NPC(nameof(IsWinning));
+                N(nameof(IsWinning));
             }
         }
         public bool IsLeader
@@ -270,7 +270,7 @@ namespace TCC.Data.Pc
             {
                 if (_isLeader == value) return;
                 _isLeader = value;
-                NPC(nameof(IsLeader));
+                N(nameof(IsLeader));
             }
         }
         public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
@@ -281,7 +281,7 @@ namespace TCC.Data.Pc
             {
                 if (_hasAggro == value) return;
                 _hasAggro = value;
-                NPC(nameof(HasAggro));
+                N(nameof(HasAggro));
             }
         }
         public string Location
@@ -291,7 +291,7 @@ namespace TCC.Data.Pc
             {
                 if (_location == value) return;
                 _location = value;
-                NPC(nameof(Location));
+                N(nameof(Location));
             }
         }
         public GearItem Weapon
@@ -301,7 +301,7 @@ namespace TCC.Data.Pc
             {
                 if (_weapon == value) return;
                 _weapon = value;
-                NPC(nameof(Weapon));
+                N(nameof(Weapon));
             }
         }
         public GearItem Armor
@@ -311,7 +311,7 @@ namespace TCC.Data.Pc
             {
                 if (_armor == value) return;
                 _armor = value;
-                NPC(nameof(Armor));
+                N(nameof(Armor));
             }
         }
         public GearItem Gloves
@@ -321,7 +321,7 @@ namespace TCC.Data.Pc
             {
                 if (_gloves == value) return;
                 _gloves = value;
-                NPC(nameof(Gloves));
+                N(nameof(Gloves));
             }
         }
         public GearItem Boots
@@ -331,7 +331,7 @@ namespace TCC.Data.Pc
             {
                 if (_boots == value) return;
                 _boots = value;
-                NPC(nameof(Boots));
+                N(nameof(Boots));
             }
         }
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
@@ -340,15 +340,15 @@ namespace TCC.Data.Pc
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!Settings.Settings.ShowAllGroupAbnormalities)
+            if (!Settings.SettingsStorage.ShowAllGroupAbnormalities)
             {
-                if (Settings.Settings.GroupAbnormals.ContainsKey(Class.Common))
+                if (Settings.SettingsStorage.GroupAbnormals.ContainsKey(Class.Common))
                 {
-                    if (!Settings.Settings.GroupAbnormals[Class.Common].Contains(ab.Id))
+                    if (!Settings.SettingsStorage.GroupAbnormals[Class.Common].Contains(ab.Id))
                     {
-                        if (Settings.Settings.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (Settings.SettingsStorage.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
                         {
-                            if (!Settings.Settings.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                            if (!Settings.SettingsStorage.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
                         }
                         else return;
                     }
@@ -375,7 +375,7 @@ namespace TCC.Data.Pc
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NPC(nameof(IsDebuffed));
+                N(nameof(IsDebuffed));
             }
 
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -403,7 +403,7 @@ namespace TCC.Data.Pc
             if (!ab.IsBuff)
             {
                 _debuffList.Remove(ab.Id);
-                NPC(nameof(IsDebuffed));
+                N(nameof(IsDebuffed));
             }
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;

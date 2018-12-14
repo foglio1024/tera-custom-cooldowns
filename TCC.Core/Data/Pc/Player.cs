@@ -41,7 +41,7 @@ namespace TCC.Data.Pc
             {
                 if (_name == value) return;
                 _name = value;
-                NPC();
+                N();
             }
         }
         public ulong EntityId
@@ -52,7 +52,7 @@ namespace TCC.Data.Pc
                 if (_entityId != value)
                 {
                     _entityId = value;
-                    NPC();
+                    N();
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace TCC.Data.Pc
                 if (_playerclass != value)
                 {
                     _playerclass = value;
-                    NPC();
+                    N();
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace TCC.Data.Pc
                 if (_laurel != value)
                 {
                     _laurel = value;
-                    NPC();
+                    N();
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace TCC.Data.Pc
                 if (_level != value)
                 {
                     _level = value;
-                    NPC();
+                    N();
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace TCC.Data.Pc
                 if (value != _itemLevel)
                 {
                     _itemLevel = value;
-                    NPC();
+                    N();
                 }
             }
         }
@@ -113,9 +113,9 @@ namespace TCC.Data.Pc
             {
                 if (_currentHP == value) return;
                 _currentHP = value;
-                NPC(nameof(CurrentHP));
-                NPC(nameof(TotalHP));
-                NPC(nameof(HpFactor));
+                N(nameof(CurrentHP));
+                N(nameof(TotalHP));
+                N(nameof(HpFactor));
             }
         }
         public float CurrentMP
@@ -126,8 +126,8 @@ namespace TCC.Data.Pc
                 if (_currentMP != value)
                 {
                     _currentMP = value;
-                    NPC();
-                    NPC(nameof(MpFactor));
+                    N();
+                    N(nameof(MpFactor));
 
                 }
             }
@@ -140,8 +140,8 @@ namespace TCC.Data.Pc
                 if (_currentST != value)
                 {
                     _currentST = value;
-                    NPC();
-                    NPC(nameof(StFactor));
+                    N();
+                    N(nameof(StFactor));
 
                 }
             }
@@ -154,8 +154,8 @@ namespace TCC.Data.Pc
                 if (_maxHP != value)
                 {
                     _maxHP = value;
-                    NPC();
-                    NPC(nameof(HpFactor));
+                    N();
+                    N(nameof(HpFactor));
 
                 }
 
@@ -169,8 +169,8 @@ namespace TCC.Data.Pc
                 if (_maxMP != value)
                 {
                     _maxMP = value;
-                    NPC();
-                    NPC(nameof(MpFactor));
+                    N();
+                    N(nameof(MpFactor));
 
                 }
 
@@ -183,8 +183,8 @@ namespace TCC.Data.Pc
             {
                 if (_maxST == value) return;
                 _maxST = value;
-                NPC();
-                NPC(nameof(StFactor));
+                N();
+                N(nameof(StFactor));
             }
         }
         public uint MaxShield
@@ -195,9 +195,9 @@ namespace TCC.Data.Pc
                 if (_maxShield != value)
                 {
                     _maxShield = value;
-                    NPC(nameof(MaxShield));
-                    NPC(nameof(ShieldFactor));
-                    NPC(nameof(HasShield));
+                    N(nameof(MaxShield));
+                    N(nameof(ShieldFactor));
+                    N(nameof(HasShield));
                 }
             }
         }
@@ -215,10 +215,10 @@ namespace TCC.Data.Pc
                 if(_currentShield == value) return;
                 if(value < 0) return;
                 _currentShield = value;
-                NPC(nameof(CurrentShield));
-                NPC(nameof(TotalHP));
-                NPC(nameof(ShieldFactor));
-                NPC(nameof(HasShield));
+                N(nameof(CurrentShield));
+                N(nameof(TotalHP));
+                N(nameof(ShieldFactor));
+                N(nameof(HasShield));
             }
         }
         public float FlightEnergy
@@ -228,7 +228,7 @@ namespace TCC.Data.Pc
             {
                 if (_flightEnergy == value) return;
                 _flightEnergy = value;
-                NPC();
+                N();
             }
         }
 
@@ -238,7 +238,7 @@ namespace TCC.Data.Pc
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NPC(nameof(IsDebuffed));
+                N(nameof(IsDebuffed));
             }
         }
         internal void RemoveFromDebuffList(Abnormality ab)
@@ -246,7 +246,7 @@ namespace TCC.Data.Pc
             if (ab.IsBuff == false)
             {
                 _debuffList.Remove(ab.Id);
-                NPC(nameof(IsDebuffed));
+                N(nameof(IsDebuffed));
             }
         }
         public bool IsDebuffed => _debuffList.Count != 0;
@@ -259,7 +259,7 @@ namespace TCC.Data.Pc
                 if (value != _isInCombat)
                 {
                     _isInCombat = value;
-                    NPC();
+                    N();
                 }
             }
         }
@@ -275,7 +275,7 @@ namespace TCC.Data.Pc
             {
                 if(_critFactor == value) return;
                 _critFactor = value;
-                NPC();
+                N();
             }
         }
 
@@ -286,7 +286,7 @@ namespace TCC.Data.Pc
             {
                 if (_fireBoost == value) return;
                 _fireBoost = value;
-                NPC();
+                N();
             }
         }
         public bool IceBoost
@@ -296,7 +296,7 @@ namespace TCC.Data.Pc
             {
                 if (_iceBoost == value) return;
                 _iceBoost = value;
-                NPC();
+                N();
             }
         }
         public bool ArcaneBoost
@@ -306,7 +306,7 @@ namespace TCC.Data.Pc
             {
                 if (_arcaneBoost == value) return;
                 _arcaneBoost = value;
-                NPC();
+                N();
             }
         }
 
@@ -317,7 +317,7 @@ namespace TCC.Data.Pc
             {
                 if (_fire == value) return;
                 _fire = value;
-                NPC();
+                N();
             }
         }
         public bool Ice
@@ -327,7 +327,7 @@ namespace TCC.Data.Pc
             {
                 if (_ice == value) return;
                 _ice = value;
-                NPC();
+                N();
             }
         }
         public bool Arcane
@@ -337,22 +337,22 @@ namespace TCC.Data.Pc
             {
                 if (_arcane == value) return;
                 _arcane = value;
-                NPC();
+                N();
             }
         }
 
         //Add My Abnormals Setting by HQ ============================================================
         public bool MyAbnormalsContainKey(Abnormality ab)
         {
-            if (!Settings.Settings.ShowAllMyAbnormalities)
+            if (!Settings.SettingsStorage.ShowAllMyAbnormalities)
             {
-                if (Settings.Settings.MyAbnormals.ContainsKey(Class.Common))
+                if (Settings.SettingsStorage.MyAbnormals.ContainsKey(Class.Common))
                 {
-                    if (!Settings.Settings.MyAbnormals[Class.Common].Contains(ab.Id))
+                    if (!Settings.SettingsStorage.MyAbnormals[Class.Common].Contains(ab.Id))
                     {
-                        if (Settings.Settings.MyAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (Settings.SettingsStorage.MyAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
                         {
-                            if (!Settings.Settings.MyAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id))
+                            if (!Settings.SettingsStorage.MyAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id))
                             {
                                 return false;
 
@@ -494,7 +494,7 @@ namespace TCC.Data.Pc
             Debuffs.Clear();
             InfBuffs.Clear();
             _debuffList.Clear();
-            NPC(nameof(IsDebuffed));
+            N(nameof(IsDebuffed));
         }
 
         public Player()

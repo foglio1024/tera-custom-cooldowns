@@ -11,7 +11,7 @@ namespace TCC.Data.Chat
             set
             {
                 _startingPrice = value;
-                NPC();
+                N();
             }
         }
 
@@ -22,7 +22,7 @@ namespace TCC.Data.Chat
             set
             {
                 _offeredPrice = value;
-                NPC();
+                N();
             }
         }
 
@@ -33,7 +33,7 @@ namespace TCC.Data.Chat
             set
             {
                 _listing = value;
-                NPC();
+                N();
             }
         }
 
@@ -44,7 +44,7 @@ namespace TCC.Data.Chat
             set
             {
                 _amount = value;
-                NPC();
+                N();
             }
         }
 
@@ -60,7 +60,7 @@ namespace TCC.Data.Chat
             ListingId = p.Listing;
             PlayerId = p.PlayerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Settings.Settings.FontSize, false) {Container = this};
+            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Settings.SettingsStorage.FontSize, false) {Container = this};
             OfferedPrice = new MessagePiece(new Money(p.OfferedPrice)){ Container = this };
             StartingPrice = new MessagePiece(new Money(p.SellerPrice)) { Container = this };
             Listing = new MessagePiece("") { Container = this };

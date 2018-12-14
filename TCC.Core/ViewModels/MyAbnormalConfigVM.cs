@@ -28,14 +28,14 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => Settings.Settings.ShowAllMyAbnormalities;
+            get => SettingsStorage.ShowAllMyAbnormalities;
             set
             {
-                if (Settings.Settings.ShowAllMyAbnormalities== value) return;
-                Settings.Settings.ShowAllMyAbnormalities= value;
+                if (SettingsStorage.ShowAllMyAbnormalities== value) return;
+                SettingsStorage.ShowAllMyAbnormalities= value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
                 SettingsWriter.Save();
-                NPC();
+                N();
             }
         }
         public List<Class> Classes
