@@ -110,6 +110,7 @@
     <Compile Include="Controls\Dashboard\VanguardInfoPopup.xaml.cs">
       <DependentUpon>VanguardInfoPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Npc\EnragePeriodItem.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Controls\Settings\CheckboxSetting.xaml.cs">
       <DependentUpon>CheckboxSetting.xaml</DependentUpon>
@@ -125,7 +126,6 @@
     <Compile Include="Controls\Skills\SquareSkillControl.xaml.cs">
       <DependentUpon>SquareSkillControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BossHPbarColorConverter.cs" />
     <Compile Include="Converters\AggroTypeToFillConverter.cs" />
     <Compile Include="Converters\ColorToTransparentConverter.cs" />
     <Compile Include="Converters\DungeonImageConverter.cs" />
@@ -448,7 +448,7 @@
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\ArcherFocusTracker.cs" />
-    <Compile Include="Data\Npc\Npc.cs" />
+    <Compile Include="Data\Npc\NPC.cs" />
     <Compile Include="Data\Abnormalities\Abnormality.cs" />
     <Compile Include="Data\Databases\AbnormalityDatabase.cs" />
     <Compile Include="Data\Chat\ChatMessage.cs" />
@@ -504,7 +504,7 @@
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
     <Compile Include="Proxy\Proxy.cs" />
-    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Settings\SettingsStorage.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
@@ -1994,6 +1994,7 @@
     <Reference Include="HtmlAgilityPack, Version=1.8.10.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.8.10\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
