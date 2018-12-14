@@ -369,7 +369,6 @@ namespace TCC.R
 		public static ColorToTransparentConverter ColorToTransparent => ((ColorToTransparentConverter)App.Current.FindResource("ColorToTransparent"));
 		public static EntityIdToNameConverter EntityIdToName => ((EntityIdToNameConverter)App.Current.FindResource("EntityIdToName"));
 		public static AggroTypeToFillConverter AggroTypeToFill => ((AggroTypeToFillConverter)App.Current.FindResource("AggroTypeToFill"));
-		public static BossHPbarColorConverter EnrageToHpColor => ((BossHPbarColorConverter)App.Current.FindResource("EnrageToHpColor"));
 		public static DragonIdToColorConverter DragonIdToColor => ((DragonIdToColorConverter)App.Current.FindResource("DragonIdToColor"));
 		public static HHphaseToEnemyWindowTemplate HarrowholdPhaseToLayout => ((HHphaseToEnemyWindowTemplate)App.Current.FindResource("HarrowholdPhaseToLayout"));
 		public static LaurelImageConverter LaurelToImage => ((LaurelImageConverter)App.Current.FindResource("LaurelToImage"));
