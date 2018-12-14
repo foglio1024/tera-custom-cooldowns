@@ -17,7 +17,7 @@
         <vm:CharacterWindowViewModel/>
     </w:TccWidget.DataContext>
     <w:TccWidget.Resources>
-        <converters:ClassToReColorConverter x:Key="ReColorConverter"></converters:ClassToReColorConverter>
+        <converters:ClassToReColorConverter x:Key="ReColorConverter"/>
         <Style TargetType="Border">
             <Setter Property="BorderBrush"                Value="{StaticResource RevampBorderBrush}"/>
             <Setter Property="BorderThickness"            Value="2 1" />
@@ -79,9 +79,7 @@
                     <Grid x:Name="HpGrid">
                         <Border VerticalAlignment="Top" BorderThickness="0"  Margin="0" Opacity=".65">
                             <Border.Background>
-                                <SolidColorBrush Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}">
-
-                                </SolidColorBrush>
+                                <SolidColorBrush Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"/>
                             </Border.Background>
                             <FrameworkElement x:Name="HpGovernorWhite" HorizontalAlignment="Stretch" 
                                               Width="{Binding ElementName=HpGrid, Path=ActualWidth}">

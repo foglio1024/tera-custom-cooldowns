@@ -21,7 +21,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.Settings.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
+            Init(Settings.SettingsStorage.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
             _hp = new DoubleAnimation()
             {
                 Duration = DefaultDuration,
@@ -37,6 +37,9 @@ namespace TCC.Windows.Widgets
                 Duration = DefaultDuration,
                 EasingFunction = DefaultEasing
             };
+            Timeline.SetDesiredFrameRate(_hp, 30);
+            Timeline.SetDesiredFrameRate(_mp, 30);
+            Timeline.SetDesiredFrameRate(_st, 30);
             //(DataContext as CharacterWindowViewModel).Player.PropertyChanged += Player_PropertyChanged;
             SessionManager.CurrentPlayer.PropertyChanged += Player_PropertyChanged;
         }
