@@ -24,8 +24,8 @@ namespace TCC.Controls.Dashboard
             var time2 = TimeSpan.FromMilliseconds(250);
             var an = new DoubleAnimation(.95, 1, time){EasingFunction = ease};
             var an2 = new DoubleAnimation(0, 1, time2);
-            this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
-            this.BeginAnimation(OpacityProperty, an2);
+            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
+            BeginAnimation(OpacityProperty, an2);
         }
     }
 }

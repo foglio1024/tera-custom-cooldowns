@@ -10,33 +10,33 @@ namespace TCC.R
             switch (c)
             {
                 case Class.Warrior:
-                    return R.SVG.SvgClassWarrior;
+                    return SVG.SvgClassWarrior;
                 case Class.Lancer:
-                    return R.SVG.SvgClassLancer;
+                    return SVG.SvgClassLancer;
                 case Class.Slayer:
-                    return R.SVG.SvgClassSlayer;
+                    return SVG.SvgClassSlayer;
                 case Class.Berserker:
-                    return R.SVG.SvgClassBerserker;
+                    return SVG.SvgClassBerserker;
                 case Class.Sorcerer:
-                    return R.SVG.SvgClassSorcerer;
+                    return SVG.SvgClassSorcerer;
                 case Class.Archer:
-                    return R.SVG.SvgClassArcher;
+                    return SVG.SvgClassArcher;
                 case Class.Priest:
-                    return R.SVG.SvgClassPriest;
+                    return SVG.SvgClassPriest;
                 case Class.Mystic:
-                    return R.SVG.SvgClassMystic;
+                    return SVG.SvgClassMystic;
                 case Class.Reaper:
-                    return R.SVG.SvgClassReaper;
+                    return SVG.SvgClassReaper;
                 case Class.Gunner:
-                    return R.SVG.SvgClassGunner;
+                    return SVG.SvgClassGunner;
                 case Class.Brawler:
-                    return R.SVG.SvgClassBrawler;
+                    return SVG.SvgClassBrawler;
                 case Class.Ninja:
-                    return R.SVG.SvgClassNinja;
+                    return SVG.SvgClassNinja;
                 case Class.Valkyrie:
-                    return R.SVG.SvgClassValkyrie;
+                    return SVG.SvgClassValkyrie;
                 default:
-                    return R.SVG.SvgClassCommon;
+                    return SVG.SvgClassCommon;
             }
         }
     }
