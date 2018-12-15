@@ -46,6 +46,7 @@ namespace TCC.Windows.Widgets
 
         private void Player_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+
             if (e.PropertyName == nameof(Player.HpFactor))
             {
                 _hp.From = (HpGovernor.LayoutTransform as ScaleTransform)?.ScaleX;

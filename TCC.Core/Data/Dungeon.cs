@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TCC.Data.Map;
-
-namespace TCC.Data
+﻿namespace TCC.Data
 {
     public class Dungeon : TSPropertyChanged
     {

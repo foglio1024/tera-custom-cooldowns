@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Shapes;
-using GongSolutions.Wpf.DragDrop.Utilities;
-using TCC.Controls.Dashboard;
-using TCC.Data;
-using TCC.Data.Pc;
 using TCC.ViewModels;
 
 namespace TCC.Windows

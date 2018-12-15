@@ -6,7 +6,7 @@ namespace TCC.Controls.Classes.Elements
     /// <summary>
     /// Logica di interazione per EdgeArrowLayout.xaml
     /// </summary>
-    public partial class EdgeArrowLayout : EdgeControlBase
+    public partial class EdgeArrowLayout
     {
         public EdgeArrowLayout()
         {
