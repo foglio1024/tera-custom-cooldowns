@@ -9,19 +9,12 @@ namespace TCC.Parsing.Messages
 {
     public class S_INVEN : ParsedMessage
     {
-        public static void Reset()
-        {
-            ElleonMarks = 0;
-            DragonwingScales = 0;
-            PiecesOfDragonScroll = 0;
-        }
-        public static List<Tuple<uint, int, uint>> Items { get; private set; }
+
+        public static List<Tuple<uint, int, uint>> GearItems { get; private set; }
+        public static Dictionary<uint, int> Items { get; private set; }
         public bool More { get; }
         public bool First { get; }
         public bool IsOpen { get; }
-        public static uint ElleonMarks { get; set; }
-        public static uint DragonwingScales { get; set; }
-        public static uint PiecesOfDragonScroll { get; set; }
         public S_INVEN(TeraMessageReader reader) : base(reader)
         {
             //TODO
@@ -32,7 +25,11 @@ namespace TCC.Parsing.Messages
             IsOpen = reader.ReadBoolean();
             if (!IsOpen) return;
             First = reader.ReadBoolean();
-            if (First) Items = new List<Tuple<uint, int, uint>>();
+            if (First)
+            {
+                Items = new Dictionary<uint, int>();
+                GearItems = new List<Tuple<uint, int, uint>>();
+            }
             More = reader.ReadBoolean();
             if (invOffset == 0) return;
             reader.BaseStream.Position = invOffset - 4;
@@ -50,18 +47,20 @@ namespace TCC.Parsing.Messages
                     if (slot > 39)
                     {
                         reader.Skip(4);
-                        switch (itemId)
-                        {
-                            case 151643:
-                                ElleonMarks = reader.ReadUInt32();
-                                break;
-                            case 45474:
-                                DragonwingScales = reader.ReadUInt32();
-                                break;
-                            case 45482:
-                                PiecesOfDragonScroll = reader.ReadUInt32();
-                                break;
-                        }
+                        var amount = reader.ReadInt32();
+                        Items[itemId] = amount;
+                        //switch (itemId)
+                        //{
+                        //    case 151643:
+                        //        ElleonMarks = reader.ReadUInt32();
+                        //        break;
+                        //    case 45474:
+                        //        DragonwingScales = reader.ReadUInt32();
+                        //        break;
+                        //    case 45482:
+                        //        PiecesOfDragonScroll = reader.ReadUInt32();
+                        //        break;
+                        //}
 
                         if (next == 0) break;
                         reader.BaseStream.Position = next - 4;
@@ -71,7 +70,7 @@ namespace TCC.Parsing.Messages
                     var enchant = reader.ReadInt32();
                     reader.Skip(4 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 1 + 4 + 4 + 4 + 4 + 1 + 1);
                     var exp = reader.ReadUInt32();
-                    Items.Add(new Tuple<uint, int, uint>(itemId, enchant, exp));
+                    GearItems.Add(new Tuple<uint, int, uint>(itemId, enchant, exp));
                     reader.BaseStream.Position = next - 4;
                 }
 
