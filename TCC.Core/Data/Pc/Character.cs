@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Threading;
+using TCC.Controls.Dashboard;
+using TCC.Data.Abnormalities;
+using TCC.Data.Map;
 
 namespace TCC.Data.Pc
 {
@@ -21,12 +27,15 @@ namespace TCC.Data.Pc
         private bool _isSelected;
         private int _claimedGuardianQuests;
         private int _maxGuardianQuests = 40;
-        private uint _elleonMarks;
         private int _clearedGuardianQuests;
-        private uint _dragonwingScales;
-        private uint _piecesOfDragonScroll;
+        private int _elleonMarks;
+        private int _dragonwingScales;
+        private int _piecesOfDragonScroll;
         private int _itemLevel;
         private int _level;
+        private Location _lastLocation;
+        private long _lastOnline;
+        private string _serverName = "";
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -149,7 +158,8 @@ namespace TCC.Data.Pc
         }
         public double VanguardWeeklyCompletion => VanguardWeekliesDone / (double)SessionManager.MaxWeekly;
         public double VanguardDailyCompletion => VanguardDailiesDone / (double)SessionManager.MaxDaily;
-        public double GuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
+        public double ClaimedGuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
+        public double ClearedGuardianCompletion => ClearedGuardianQuests / (double)MaxGuardianQuests;
 
         public int ItemLevel  // 412 431 - 439 446 453 456
         {
@@ -199,7 +209,7 @@ namespace TCC.Data.Pc
                 if (_claimedGuardianQuests == value) return;
                 _claimedGuardianQuests = value;
                 N();
-                N(nameof(GuardianCompletion));
+                N(nameof(ClaimedGuardianCompletion));
             }
         }
         public int MaxGuardianQuests
@@ -209,11 +219,11 @@ namespace TCC.Data.Pc
                 if (_maxGuardianQuests == value) return;
                 _maxGuardianQuests = value;
                 N();
-                N(nameof(GuardianCompletion));
+                N(nameof(ClaimedGuardianCompletion));
             }
         }
 
-        public uint ElleonMarks
+        public int ElleonMarks
         {
             get => _elleonMarks; set
             {
@@ -237,7 +247,7 @@ namespace TCC.Data.Pc
 
         }
 
-        public uint DragonwingScales
+        public int DragonwingScales
         {
             get => _dragonwingScales;
             set
@@ -248,7 +258,7 @@ namespace TCC.Data.Pc
                 N(nameof(DragonwingScalesFactor));
             }
         }
-        public uint PiecesOfDragonScroll
+        public int PiecesOfDragonScroll
         {
             get => _piecesOfDragonScroll;
             set
@@ -262,12 +272,50 @@ namespace TCC.Data.Pc
         public float DragonwingScalesFactor => DragonwingScales > 10 ? 1 : DragonwingScales / 10f;
         public float PiecesOfDragonScrollFactor => PiecesOfDragonScroll > 40 ? 1 : PiecesOfDragonScroll / 40f;
 
+        public long LastOnline
+        {
+            get => _lastOnline;
+            set
+            {
+                if (_lastOnline == value) return;
+                _lastOnline = value;
+                N();
+            }
+        }
+
+        public Location LastLocation
+        {
+            get => _lastLocation;
+            set
+            {
+                if (_lastLocation == value) return;
+                _lastLocation = value;
+                N();
+            }
+        }
+
+        public SynchronizedObservableCollection<AbnormalityData> Buffs { get; set; }
+        public SynchronizedObservableCollection<InventoryItem> Inventory { get; }
+
+        public string ServerName
+        {
+            get => _serverName;
+            set
+            {
+                if(_serverName == value) return;
+                _serverName = value;
+                N();
+            }
+        }
+
 
         public Character()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(Dispatcher);
             Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
+            Buffs = new SynchronizedObservableCollection<AbnormalityData>(Dispatcher);
+            Inventory = new SynchronizedObservableCollection<InventoryItem>(Dispatcher);
             VanguardDailiesDone = 0;
             VanguardWeekliesDone = 0;
             Laurel = Laurel.None;
@@ -276,16 +324,12 @@ namespace TCC.Data.Pc
             {
                 Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
             }
-            //VisibleDungeonsView = new CollectionViewSource() { Source = Dungeons }.View;
-            //VisibleDungeonsView.Filter = dc => ((DungeonCooldown) dc).Dungeon.Show;
-            //VisibleDungeonsView.SortDescriptions.Add(new SortDescription(nameof(DungeonCooldown.RequiredIlvl), ListSortDirection.Ascending));
             VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
                 new[]
                     {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
             Jewels = new CollectionViewSource() { Source = Gear }.View;
             Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
             Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
-
 
         }
         public Character(string name, Class c, uint id, int pos) : this()
@@ -315,6 +359,7 @@ namespace TCC.Data.Pc
 
         public void ClearGear()
         {
+            //TODO: wut
             Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
         }
 
@@ -327,6 +372,30 @@ namespace TCC.Data.Pc
                     Gear.Add(gearItem);
                 }
             }
+        }
+    }
+
+    public class InventoryItem : TSPropertyChanged
+    {
+        private int _amount;
+        private readonly uint _id;
+
+        public Item Item => SessionManager.ItemsDatabase.Items[_id];
+        public int Amount
+        {
+            get => _amount;
+            set
+            {
+                if (_amount == value) return;
+                _amount = value;
+                N();
+            }
+        }
+
+        public InventoryItem(uint id, int amount)
+        {
+            _id = id;
+            Amount = amount;
         }
     }
 }
