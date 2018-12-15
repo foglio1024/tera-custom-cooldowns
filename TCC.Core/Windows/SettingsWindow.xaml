@@ -284,7 +284,7 @@
             <Setter Property="Stretch" Value="Uniform"/>
             <EventSetter Event="Loaded" Handler="EventSetter_OnHandler"/>
         </Style>
-        
+
     </local:TccWindow.Resources>
     <!-- Main grid -->
     <Grid Margin="10"
@@ -987,6 +987,16 @@
                                         <Border Style="{StaticResource RevampBorderStyle}"/>
                                         <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Amount of most recent messages to compare. If a new message's author and content match one of these, it will be considered as spam and discarded (0 = spam filter off)."/>
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:ValueSetting SettingName="Scroll amount" Min="1" Max="10" Value="{Binding ChatScrollAmount, Mode=TwoWay}" >
+                                <settings:ValueSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}"/>
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                            <Run Text="Sets how many messages will the chat scroll with one mouse wheel tick. It's suggested to keep this value low."/>
                                         </TextBlock>
                                     </Grid>
                                 </settings:ValueSetting.ToolTip>
