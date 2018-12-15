@@ -133,6 +133,7 @@
     <Compile Include="Converters\DurationLabelConverter.cs" />
     <Compile Include="Converters\DurationToVisibilityConverter.cs" />
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
+    <Compile Include="Converters\EpochConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter2.cs" />
     <Compile Include="Converters\ItemLevelTierToColorConverter.cs" />
     <Compile Include="Converters\RoundedClipConverter.cs" />
@@ -144,12 +145,16 @@
       <DependentUpon>SquareAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
+    <Compile Include="Data\Abnormalities\AbnormalityData.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
     <Compile Include="Parsing\Messages\S_NPCGUILD_LIST.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
     <Compile Include="R.cs" />
+    <Compile Include="ResourceDictionaries\DataTemplates.xaml.cs">
+      <DependentUpon>DataTemplates.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
@@ -504,7 +509,7 @@
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
     <Compile Include="Proxy\Proxy.cs" />
-    <Compile Include="Settings\SettingsStorage.cs" />
+    <Compile Include="Settings\SettingsHolder.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />

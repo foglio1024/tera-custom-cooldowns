@@ -33,9 +33,9 @@ namespace TCC.ViewModels
             Stance = new StanceTracker<WarriorStance>();
         }
 
-        public bool ShowEdge => Settings.SettingsStorage.WarriorShowEdge;
-        public bool ShowTraverseCut => Settings.SettingsStorage.WarriorShowTraverseCut;
-        public WarriorEdgeMode WarriorEdgeMode => Settings.SettingsStorage.WarriorEdgeMode;
+        public bool ShowEdge => Settings.SettingsHolder.WarriorShowEdge;
+        public bool ShowTraverseCut => Settings.SettingsHolder.WarriorShowTraverseCut;
+        public WarriorEdgeMode WarriorEdgeMode => Settings.SettingsHolder.WarriorEdgeMode;
 
         public sealed override void LoadSpecialSkills()
         {

@@ -21,11 +21,11 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => SettingsStorage.ShowAllGroupAbnormalities;
+            get => SettingsHolder.ShowAllGroupAbnormalities;
             set
             {
-                if (SettingsStorage.ShowAllGroupAbnormalities == value) return;
-                SettingsStorage.ShowAllGroupAbnormalities = value;
+                if (SettingsHolder.ShowAllGroupAbnormalities == value) return;
+                SettingsHolder.ShowAllGroupAbnormalities = value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
                 SettingsWriter.Save();
                 N();

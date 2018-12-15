@@ -36,7 +36,7 @@ namespace TCC
                 }
                 else
                 {
-                    if (Settings.SettingsStorage.ShowOnlyBosses) return;
+                    if (Settings.SettingsHolder.ShowOnlyBosses) return;
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
                 }
             }

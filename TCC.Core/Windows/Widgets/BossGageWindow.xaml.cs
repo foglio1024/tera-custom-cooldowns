@@ -11,7 +11,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.SettingsStorage.BossWindowSettings);
+            Init(Settings.SettingsHolder.BossWindowSettings);
         }
 
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -55,12 +55,12 @@ namespace TCC.Data.Chat
 
         public int Size
         {
-            get => _customSize ? _size : Settings.SettingsStorage.FontSize;
+            get => _customSize ? _size : Settings.SettingsHolder.FontSize;
             set
             {
                 if (_size == value) return;
                 _size = value;
-                _customSize = value != Settings.SettingsStorage.FontSize;
+                _customSize = value != Settings.SettingsHolder.FontSize;
                 N(nameof(Size));
             }
         }

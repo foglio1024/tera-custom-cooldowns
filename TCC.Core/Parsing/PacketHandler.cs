@@ -51,7 +51,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    if (Settings.SettingsStorage.ClassWindowSettings.Enabled)
+                    if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
                         ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
                     break;
                 case Class.Sorcerer:
@@ -122,11 +122,12 @@ namespace TCC.Parsing
         {
             /*- Moved from HandleReturnToLobby -*/
             SessionManager.Logged = false;
-            SessionManager.CurrentPlayer.ClearAbnormalities();
-            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntityManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
+            WindowManager.Dashboard.VM.UpdateBuffs();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+
             /*---------------------------------*/
 
             foreach (var item in p.CharacterList)
@@ -139,28 +140,32 @@ namespace TCC.Parsing
                     ch.Position = item.Position;
                     ch.GuildName = item.GuildName;
                     ch.Level = item.Level;
+                    ch.LastLocation = item.LastLocation;
+                    ch.LastOnline = item.LastOnline;
+                    ch.ServerName = SessionManager.Server.Name;
                 }
                 else
                 {
                     WindowManager.Dashboard.VM.Characters.Add(item);
                 }
             }
+
             WindowManager.Dashboard.VM.SaveCharacters();
+
         }
         public static void HandleLogin(S_LOGIN p)
         {
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
-            S_INVEN.Reset();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
-            if (Settings.SettingsStorage.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
+            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
-            if (!Settings.SettingsStorage.StatSent) App.SendUsageStat();
-            Settings.SettingsStorage.LastRegion = SessionManager.Language;
-            TimeManager.Instance.SetServerTimeZone(Settings.SettingsStorage.LastRegion);
+            if (!Settings.SettingsHolder.StatSent) App.SendUsageStat();
+            Settings.SettingsHolder.LastRegion = SessionManager.Language;
+            TimeManager.Instance.SetServerTimeZone(Settings.SettingsHolder.LastRegion);
             TimeManager.Instance.SetGuildBamTime(false);
-            SessionManager.InitDatabases(Settings.SettingsStorage.LastRegion);
+            SessionManager.InitDatabases(Settings.SettingsHolder.LastRegion);
             SkillManager.Clear();
             CooldownWindowViewModel.Instance.LoadSkills(p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
@@ -188,7 +193,7 @@ namespace TCC.Parsing
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
         {
-            if (!Settings.SettingsStorage.LfgEnabled) return;
+            if (!Settings.SettingsHolder.LfgEnabled) return;
             if (WindowManager.LfgListWindow == null) return;
             if (WindowManager.LfgListWindow.VM == null) return;
             if (!x.IsLast) return;
@@ -255,8 +260,8 @@ namespace TCC.Parsing
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
+            WindowManager.Dashboard.VM.UpdateBuffs();
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntityManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -271,16 +276,12 @@ namespace TCC.Parsing
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             GroupWindowViewModel.Instance.SetAggro(0);
+            WindowManager.Dashboard.VM.UpdateBuffs();
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
             SessionManager.CivilUnrestZone = x.Zone == 152;
-            if (Settings.SettingsStorage.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
-            //MessageFactory.Update(); already in CurrentHHphase set
-
-            //GC.Collect();
-            //GC.WaitForPendingFinalizers();
+            if (Settings.SettingsHolder.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
         }
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
@@ -684,7 +685,7 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.SettingsStorage.ClassWindowSettings.Enabled) return;
+            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -692,7 +693,7 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.SettingsStorage.ClassWindowSettings.Enabled) return;
+            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
@@ -700,7 +701,7 @@ namespace TCC.Parsing
             if (!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.SettingsStorage.ClassWindowSettings.Enabled) return;
+            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
@@ -719,7 +720,7 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.Proxy.IsConnected && Settings.SettingsStorage.LfgEnabled && SessionManager.InGameUiOn)
+            if (Proxy.Proxy.IsConnected && Settings.SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
             {
                 Proxy.Proxy.RequestCandidates();
                 if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
@@ -754,13 +755,13 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (Settings.SettingsStorage.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Settings.SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
         public static void HandleKicked(S_BAN_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (Settings.SettingsStorage.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Settings.SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
 
@@ -779,7 +780,7 @@ namespace TCC.Parsing
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
         {
             ChatWindowManager.Instance.UpdateLfgMembers(packet);
-            if (!Settings.SettingsStorage.LfgEnabled) return;
+            if (!Settings.SettingsHolder.LfgEnabled) return;
 
             var lfg = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
             if (lfg == null) return;
@@ -813,19 +814,18 @@ namespace TCC.Parsing
         {
             if (!x.IsOpen) return;
             if (x.First && x.More) return;
-            if (S_INVEN.Items == null) return;
+            if (S_INVEN.GearItems == null) return;
             if (WindowManager.Dashboard.VM.CurrentCharacter == null) return;
             WindowManager.Dashboard.VM.CurrentCharacter.ClearGear();
-            foreach (var tuple in S_INVEN.Items)
+            foreach (var tuple in S_INVEN.GearItems)
             {
                 if (!InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece)) continue;
                 var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
                 WindowManager.Dashboard.VM.CurrentCharacter.Gear.Add(i);
             }
-            WindowManager.Dashboard.VM.SetElleonMarks(S_INVEN.ElleonMarks);
-            WindowManager.Dashboard.VM.CurrentCharacter.DragonwingScales = S_INVEN.DragonwingScales;
-            WindowManager.Dashboard.VM.CurrentCharacter.PiecesOfDragonScroll = S_INVEN.PiecesOfDragonScroll;
 
+
+            WindowManager.Dashboard.VM.UpdateInventory();
             GroupWindowViewModel.Instance.UpdateMyGear();
             //88273 - 88285 L weapons
             //88286 - 88298 L armors

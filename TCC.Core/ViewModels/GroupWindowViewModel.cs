@@ -26,7 +26,6 @@ namespace TCC.ViewModels
         public event Action SettingsUpdated;
 
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
-        //public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
         public SynchronizedObservableCollection<User> Members { get; }
         public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
         public ICollectionViewLiveShaping Tanks { [UsedImplicitly] get; }
@@ -45,7 +44,7 @@ namespace TCC.ViewModels
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && Settings.SettingsStorage.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && Settings.SettingsHolder.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && Proxy.Proxy.IsConnected;
         public bool ShowLeaderButtons => Formed && Proxy.Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
@@ -168,7 +167,7 @@ namespace TCC.ViewModels
                 // -- show only aggro stacks if we are in HH -- //
                 if (BossGageWindowViewModel.Instance.CurrentHHphase >= HarrowholdPhase.Phase2)
                 {
-                    if (ab.Id != 950023 && Settings.SettingsStorage.ShowOnlyAggroStacks) return;
+                    if (ab.Id != 950023 && Settings.SettingsHolder.ShowOnlyAggroStacks) return;
                 }
                 // -------------------------------------------- //
                 u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -201,7 +200,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (Settings.SettingsStorage.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (Settings.SettingsHolder.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 return;
@@ -285,7 +284,7 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            if (!Settings.SettingsStorage.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!Settings.SettingsHolder.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncArray().ToList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;

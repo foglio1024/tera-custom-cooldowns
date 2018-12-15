@@ -340,15 +340,15 @@ namespace TCC.Data.Pc
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!Settings.SettingsStorage.ShowAllGroupAbnormalities)
+            if (!Settings.SettingsHolder.ShowAllGroupAbnormalities)
             {
-                if (Settings.SettingsStorage.GroupAbnormals.ContainsKey(Class.Common))
+                if (Settings.SettingsHolder.GroupAbnormals.ContainsKey(Class.Common))
                 {
-                    if (!Settings.SettingsStorage.GroupAbnormals[Class.Common].Contains(ab.Id))
+                    if (!Settings.SettingsHolder.GroupAbnormals[Class.Common].Contains(ab.Id))
                     {
-                        if (Settings.SettingsStorage.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (Settings.SettingsHolder.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
                         {
-                            if (!Settings.SettingsStorage.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                            if (!Settings.SettingsHolder.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
                         }
                         else return;
                     }

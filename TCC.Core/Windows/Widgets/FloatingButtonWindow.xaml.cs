@@ -20,7 +20,7 @@ namespace TCC.Windows.Widgets
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = WindowContent;
             ButtonsRef = null;
-            Init(Settings.SettingsStorage.FloatingButtonSettings, perClassPosition: false);
+            Init(Settings.SettingsHolder.FloatingButtonSettings, perClassPosition: false);
         }
 
         private Timer _t;

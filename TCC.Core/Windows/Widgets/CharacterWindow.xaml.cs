@@ -21,7 +21,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.SettingsStorage.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
+            Init(Settings.SettingsHolder.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
             _hp = new DoubleAnimation()
             {
                 Duration = DefaultDuration,

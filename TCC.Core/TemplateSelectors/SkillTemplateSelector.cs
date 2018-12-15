@@ -11,7 +11,7 @@ namespace TCC.TemplateSelectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            return Settings.SettingsStorage.SkillShape == ControlShape.Round ? RoundTemplate : SquareTemplate;
+            return Settings.SettingsHolder.SkillShape == ControlShape.Round ? RoundTemplate : SquareTemplate;
         }
 
     }

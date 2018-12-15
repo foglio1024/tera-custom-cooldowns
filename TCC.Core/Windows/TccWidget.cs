@@ -34,8 +34,8 @@ namespace TCC.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                Left = WindowSettings.X * SettingsStorage.ScreenW;
-                Top = WindowSettings.Y * SettingsStorage.ScreenH;
+                Left = WindowSettings.X * SettingsHolder.ScreenW;
+                Top = WindowSettings.Y * SettingsHolder.ScreenH;
 
                 //if(_settings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {_settings.Name}: {_settings.X}, {_settings.Y}");
                 CheckBounds();
@@ -61,8 +61,8 @@ namespace TCC.Windows
             {
                 Left = Screen.PrimaryScreen.Bounds.X + (Screen.PrimaryScreen.Bounds.Width / 2) - (ActualWidth / 2);
                 Top = Screen.PrimaryScreen.Bounds.Y + (Screen.PrimaryScreen.Bounds.Height / 2) - (ActualHeight / 2);
-                WindowSettings.X = Left / SettingsStorage.ScreenW;
-                WindowSettings.Y = Top / SettingsStorage.ScreenH;
+                WindowSettings.X = Left / SettingsHolder.ScreenW;
+                WindowSettings.Y = Top / SettingsHolder.ScreenH;
             });
         }
         protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true, bool perClassPosition = true)
@@ -76,8 +76,8 @@ namespace TCC.Windows
 
             MainContent.Opacity = 0;
             Topmost = true;
-            Left = settings.X * SettingsStorage.ScreenW;
-            Top = settings.Y * SettingsStorage.ScreenH;
+            Left = settings.X * SettingsHolder.ScreenW;
+            Top = settings.Y * SettingsHolder.ScreenH;
             CheckBounds();
             if (!ignoreSize)
             {
@@ -119,7 +119,7 @@ namespace TCC.Windows
 
             MouseEnter += (_, __) =>
             {
-                if (!SettingsStorage.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
+                if (!SettingsHolder.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
@@ -258,18 +258,18 @@ namespace TCC.Windows
         private void CheckBounds()
         {
             if (WindowSettings.AllowOffScreen) return;
-            if ((Left + ActualWidth) > SettingsStorage.ScreenW)
+            if ((Left + ActualWidth) > SettingsHolder.ScreenW)
             {
-                Left = SettingsStorage.ScreenW - ActualWidth;
+                Left = SettingsHolder.ScreenW - ActualWidth;
             }
-            if ((Top + ActualHeight) > SettingsStorage.ScreenH)
+            if ((Top + ActualHeight) > SettingsHolder.ScreenH)
             {
-                Top = SettingsStorage.ScreenH - ActualHeight;
+                Top = SettingsHolder.ScreenH - ActualHeight;
             }
             CheckIndividualScreensBounds();
 
-            WindowSettings.X = Left / SettingsStorage.ScreenW;
-            WindowSettings.Y = Top / SettingsStorage.ScreenH;
+            WindowSettings.X = Left / SettingsHolder.ScreenW;
+            WindowSettings.Y = Top / SettingsHolder.ScreenH;
         }
 
         private void CheckIndividualScreensBounds()
@@ -347,9 +347,9 @@ namespace TCC.Windows
         {
             if (ButtonsRef == null) return;
 
-            var screenMiddle = SettingsStorage.ScreenH / 2;
+            var screenMiddle = SettingsHolder.ScreenH / 2;
             var middle = Top + Height / 2;
-            var deadzone = SettingsStorage.ScreenH / 15;
+            var deadzone = SettingsHolder.ScreenH / 15;
             var distance = Math.Abs(screenMiddle - middle);
 
             if (!(distance > deadzone)) return;
@@ -373,8 +373,8 @@ namespace TCC.Windows
                 UpdateButtons();
                 CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
-                WindowSettings.X = Left / SettingsStorage.ScreenW;
-                WindowSettings.Y = Top / SettingsStorage.ScreenH;
+                WindowSettings.X = Left / SettingsHolder.ScreenW;
+                WindowSettings.Y = Top / SettingsHolder.ScreenH;
                 SettingsWriter.Save();
             }
             catch

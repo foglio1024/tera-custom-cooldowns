@@ -19,8 +19,8 @@ namespace TCC.Windows.Widgets
         private readonly DoubleAnimation _winHide;
 
         public FlightStackType Type => FlyingGuardianDataProvider.StackType;
-        public double FlightGaugeRotation => Settings.SettingsStorage.FlightGaugeRotation;
-        public bool FlipFlightGauge => Settings.SettingsStorage.FlipFlightGauge;
+        public double FlightGaugeRotation => Settings.SettingsHolder.FlightGaugeRotation;
+        public bool FlipFlightGauge => Settings.SettingsHolder.FlipFlightGauge;
 
 
         public FlightDurationWindow()
@@ -38,7 +38,7 @@ namespace TCC.Windows.Widgets
             FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
             SessionManager.CombatChanged += OnCombatChanged;
 
-            Init(Settings.SettingsStorage.FlightGaugeWindowSettings, perClassPosition: false);
+            Init(Settings.SettingsHolder.FlightGaugeWindowSettings, perClassPosition: false);
             Opacity = 0;
 
             _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
@@ -75,7 +75,7 @@ namespace TCC.Windows.Widgets
 
         public void SetEnergy(double val)
         {
-            if (!Settings.SettingsStorage.ShowFlightEnergy) return;
+            if (!Settings.SettingsHolder.ShowFlightEnergy) return;
             Dispatcher.Invoke(() =>
             {
                 if (Opacity == 0) ShowWindow();

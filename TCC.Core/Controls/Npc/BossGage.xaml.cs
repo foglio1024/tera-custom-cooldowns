@@ -80,7 +80,7 @@ namespace TCC.Controls.NPCs
                 }
                 else
                 {
-                    switch (SettingsStorage.EnrageLabelMode)
+                    switch (SettingsHolder.EnrageLabelMode)
                     {
                         case EnrageLabelMode.Next:
                             return $"{NextEnragePercentage:0.#}%";

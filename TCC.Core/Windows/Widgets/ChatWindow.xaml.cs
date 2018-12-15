@@ -103,9 +103,9 @@ namespace TCC.Windows.Widgets
                 ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
                 //((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
                 //((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
-                ((ChatWindowSettings)WindowSettings).X = Left / SettingsStorage.ScreenW;
-                ((ChatWindowSettings)WindowSettings).Y = Top / SettingsStorage.ScreenH;
-                var v = SettingsStorage.ChatWindowsSettings;
+                ((ChatWindowSettings)WindowSettings).X = Left / SettingsHolder.ScreenW;
+                ((ChatWindowSettings)WindowSettings).Y = Top / SettingsHolder.ScreenH;
+                var v = SettingsHolder.ChatWindowsSettings;
                 var s = v.FirstOrDefault(x => x == WindowSettings);
                 if (s == null) v.Add((ChatWindowSettings)WindowSettings);
 
@@ -363,7 +363,7 @@ namespace TCC.Windows.Widgets
         {
             var lb = sender as ItemsControl;
             var sw = Utils.GetChild<ScrollViewer>(lb);
-            var lines = 3;
+            var lines = SettingsHolder.ChatScrollAmount;
             if (sw.VerticalOffset + e.Delta >= sw.ScrollableHeight)
             {
                 lines = 1;

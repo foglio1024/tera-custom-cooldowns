@@ -64,7 +64,7 @@ namespace TCC
             if (target.IsMe())
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
-                if (!Settings.SettingsStorage.DisablePartyAbnormals)
+                if (!Settings.SettingsHolder.DisablePartyAbnormals)
                 {
                     GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
@@ -88,7 +88,6 @@ namespace TCC
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
-            //Log.CW($"[BeginPlayerAbnormality] {ab.Name} ({ab.Id})");
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
@@ -110,7 +109,7 @@ namespace TCC
 
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (Settings.SettingsStorage.EthicalMode) return;
+            if (Settings.SettingsHolder.EthicalMode) return;
             if (PassivityDatabase.Passivities.ContainsKey(ab.Id))
             {
                 SkillManager.AddPassivitySkill(ab.Id, PassivityDatabase.Passivities[ab.Id]);
@@ -119,7 +118,7 @@ namespace TCC
                 CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
 
             {
-                //TODO: can't do this correctly since we don't know passivity cooldown from database so we just add duration
+                //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
                 SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
             }
         }
@@ -136,6 +135,7 @@ namespace TCC
                 }
                 else
                 {
+
                     SessionManager.CurrentPlayer.RemoveBuff(ab);
                     if (ab.IsShield)
                     {

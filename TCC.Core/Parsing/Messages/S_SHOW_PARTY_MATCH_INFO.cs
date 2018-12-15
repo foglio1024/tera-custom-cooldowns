@@ -53,12 +53,12 @@ namespace TCC.Parsing.Messages
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
-                if (!(l.IsTrade && !Settings.SettingsStorage.ShowTradeLfg)) Listings.Add(l);
+                if (!(l.IsTrade && !Settings.SettingsHolder.ShowTradeLfg)) Listings.Add(l);
                 if (next != 0) reader.BaseStream.Position = next - 4;
 
             }
 
-            if (page < pages) if (Settings.SettingsStorage.LfgEnabled && Proxy.Proxy.IsConnected) Proxy.Proxy.RequestNextLfgPage(page + 1);
+            if (page < pages) if (Settings.SettingsHolder.LfgEnabled && Proxy.Proxy.IsConnected) Proxy.Proxy.RequestNextLfgPage(page + 1);
             if (page == pages) IsLast = true;
         }
     }

@@ -187,7 +187,7 @@ namespace TCC.ViewModels
 
         private NPC AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
         {
-            if (Settings.SettingsStorage.ShowOnlyBosses && !isBoss) return null;
+            if (Settings.SettingsHolder.ShowOnlyBosses && !isBoss) return null;
             if (templateId == 0 || zoneId == 0) return null;
             if (zoneId == 1023) return null;
 
@@ -279,7 +279,7 @@ namespace TCC.ViewModels
 
         private static void SetTimerPattern(NPC n)
         {
-            if (Settings.SettingsStorage.EthicalMode) return;
+            if (Settings.SettingsHolder.EthicalMode) return;
 
             // vergos ph4
             if (n.TemplateId == 4000 && n.ZoneId == 950) n.TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
@@ -306,7 +306,7 @@ namespace TCC.ViewModels
 
         private static void SetEnragePattern(NPC n)
         {
-            if (Settings.SettingsStorage.EthicalMode)
+            if (Settings.SettingsHolder.EthicalMode)
             {
                 n.EnragePattern = new EnragePattern(0, 0);
                 return;

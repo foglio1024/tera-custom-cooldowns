@@ -344,15 +344,15 @@ namespace TCC.Data.Pc
         //Add My Abnormals Setting by HQ ============================================================
         public bool MyAbnormalsContainKey(Abnormality ab)
         {
-            if (!Settings.SettingsStorage.ShowAllMyAbnormalities)
+            if (!Settings.SettingsHolder.ShowAllMyAbnormalities)
             {
-                if (Settings.SettingsStorage.MyAbnormals.ContainsKey(Class.Common))
+                if (Settings.SettingsHolder.MyAbnormals.ContainsKey(Class.Common))
                 {
-                    if (!Settings.SettingsStorage.MyAbnormals[Class.Common].Contains(ab.Id))
+                    if (!Settings.SettingsHolder.MyAbnormals[Class.Common].Contains(ab.Id))
                     {
-                        if (Settings.SettingsStorage.MyAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (Settings.SettingsHolder.MyAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
                         {
-                            if (!Settings.SettingsStorage.MyAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id))
+                            if (!Settings.SettingsHolder.MyAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id))
                             {
                                 return false;
 

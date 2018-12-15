@@ -177,7 +177,7 @@ namespace TCC
             //SettingsWindowOld = new SettingsWindowOld();
             SettingsWindow = new SettingsWindow();
 
-            if (SettingsStorage.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            if (SettingsHolder.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
             //TccWindow.RecreateWindow += TccWindow_RecreateWindow;
 
         }
@@ -435,12 +435,12 @@ namespace TCC
 
         public static void MakeGlobal()
         {
-            SettingsStorage.CooldownWindowSettings.MakePositionsGlobal();
-            SettingsStorage.ClassWindowSettings.MakePositionsGlobal();
-            SettingsStorage.CharacterWindowSettings.MakePositionsGlobal();
-            SettingsStorage.GroupWindowSettings.MakePositionsGlobal();
-            SettingsStorage.BuffWindowSettings.MakePositionsGlobal();
-            SettingsStorage.BossWindowSettings.MakePositionsGlobal();
+            SettingsHolder.CooldownWindowSettings.MakePositionsGlobal();
+            SettingsHolder.ClassWindowSettings.MakePositionsGlobal();
+            SettingsHolder.CharacterWindowSettings.MakePositionsGlobal();
+            SettingsHolder.GroupWindowSettings.MakePositionsGlobal();
+            SettingsHolder.BuffWindowSettings.MakePositionsGlobal();
+            SettingsHolder.BossWindowSettings.MakePositionsGlobal();
 
             SettingsWriter.Save();
         }

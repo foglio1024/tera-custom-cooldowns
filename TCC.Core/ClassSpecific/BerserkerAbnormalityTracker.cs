@@ -78,7 +78,7 @@ namespace TCC.ClassSpecific
 
         private static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
         {
-            if(Settings.SettingsStorage.LastRegion == "KR")  // KR patch by HQ
+            if(Settings.SettingsHolder.LastRegion == "KR")  // KR patch by HQ
             {
                 if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
                 {
@@ -111,7 +111,7 @@ namespace TCC.ClassSpecific
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
         {
-            if (Settings.SettingsStorage.LastRegion == "KR")  // KR patch by HQ
+            if (Settings.SettingsHolder.LastRegion == "KR")  // KR patch by HQ
             {
                 if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
                 {
@@ -144,7 +144,7 @@ namespace TCC.ClassSpecific
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
         {
-            if (Settings.SettingsStorage.LastRegion == "KR")  // KR patch by HQ
+            if (Settings.SettingsHolder.LastRegion == "KR")  // KR patch by HQ
             {
                 if (p.AbnormalityId == Sinister_KR)
                 {

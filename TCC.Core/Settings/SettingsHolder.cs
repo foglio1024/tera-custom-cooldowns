@@ -7,7 +7,7 @@ using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings
 {
-    public static class SettingsStorage
+    public static class SettingsHolder
     {
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
@@ -175,6 +175,7 @@ namespace TCC.Settings
         public static bool CheckOpcodesHash { get; set; } = true;
         public static bool DiscordWebhookEnabled { get; set; } = false;
         public static bool ShowNotificationBubble { get; set; } = true;
+        public static int ChatScrollAmount { get; set; } = 1;
 
         private static string _lastRegion = "";
         private static bool _chatEnabled;

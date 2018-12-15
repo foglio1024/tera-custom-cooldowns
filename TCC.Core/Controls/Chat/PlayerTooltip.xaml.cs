@@ -191,7 +191,7 @@ namespace TCC.Controls.Chat
         private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var p = (MgPopup.Child as MoongourdPopup);
-            p?.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, TCC.Settings.SettingsStorage.LastRegion);
+            p?.SetInfo(WindowManager.FloatingButton.TooltipInfo.Name, TCC.Settings.SettingsHolder.LastRegion);
             MgPopup.IsOpen = true;
         }
         private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
@@ -203,9 +203,9 @@ namespace TCC.Controls.Chat
         {
             Dispatcher.Invoke(() =>
             {
-                if (TCC.Settings.SettingsStorage.LastRegion != "NA" &&
-                    TCC.Settings.SettingsStorage.LastRegion != "RU" &&
-                    !TCC.Settings.SettingsStorage.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
+                if (TCC.Settings.SettingsHolder.LastRegion != "NA" &&
+                    TCC.Settings.SettingsHolder.LastRegion != "RU" &&
+                    !TCC.Settings.SettingsHolder.LastRegion.StartsWith("EU")) MgButton.Visibility = Visibility.Collapsed;
             });
 
         }

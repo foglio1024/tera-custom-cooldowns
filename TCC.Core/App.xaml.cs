@@ -58,11 +58,11 @@ namespace TCC
             sr.LoadWindowSettings();
             sr.LoadSettings();
 
-            Process.GetCurrentProcess().PriorityClass = SettingsStorage.HighPriority ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
-            if (SettingsStorage.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            Process.GetCurrentProcess().PriorityClass = SettingsHolder.HighPriority ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
+            if (SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsStorage.LastRegion) ? "EU-EN" : SettingsStorage.LastRegion == "EU" ? "EU-EN" : SettingsStorage.LastRegion);
+            SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsHolder.LastRegion) ? "EU-EN" : SettingsHolder.LastRegion == "EU" ? "EU-EN" : SettingsHolder.LastRegion);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
@@ -74,7 +74,7 @@ namespace TCC
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
             SplashScreen.SetText("Starting");
 
-            TimeManager.Instance.SetServerTimeZone(SettingsStorage.LastRegion);
+            TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastRegion);
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
@@ -409,7 +409,7 @@ namespace TCC
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                SettingsStorage.StatSent = true;
+                SettingsHolder.StatSent = true;
                 SettingsWriter.Save();
             }
         }

@@ -52,7 +52,7 @@ namespace TCC
         {
             var closeEventsCount = WindowManager.Dashboard.VM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
-            if(SettingsStorage.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+            if(SettingsHolder.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
         }
 
@@ -68,11 +68,11 @@ namespace TCC
             if (string.IsNullOrEmpty(region)) return;
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
 
-            SettingsStorage.LastRegion = region;
+            SettingsHolder.LastRegion = region;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
                 CurrentRegion = "EU";
-                SettingsStorage.LastRegion = "EU-EN";
+                SettingsHolder.LastRegion = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK);
@@ -103,7 +103,7 @@ namespace TCC
         {
             if (CurrentRegion == null) return;
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
-            if (SettingsStorage.LastRun > todayReset || DateTime.Now < todayReset) return;
+            if (SettingsHolder.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in WindowManager.Dashboard.VM.Characters)
             {
                 foreach (var dg in ch.Dungeons)
@@ -122,7 +122,7 @@ namespace TCC
                     ch.VanguardWeekliesDone = 0;
                 }
             }
-            SettingsStorage.LastRun = DateTime.Now;
+            SettingsHolder.LastRun = DateTime.Now;
             WindowManager.Dashboard.VM.SaveCharacters();
             SettingsWriter.Save();
             if (DateTime.Now.DayOfWeek == _resetDay)
@@ -208,12 +208,12 @@ namespace TCC
 
         public void SendWebhookMessageOld(bool testMessage = false)
         {
-            if (!string.IsNullOrEmpty(SettingsStorage.Webhook))
+            if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
             {
                 var sb = new StringBuilder("{");
                 sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
-                sb.Append("\""); sb.Append(SettingsStorage.WebhookMessage);
+                sb.Append("\""); sb.Append(SettingsHolder.WebhookMessage);
                 if (testMessage) sb.Append(" (Test message)");
                 sb.Append("\"");
                 sb.Append(",");
@@ -236,7 +236,7 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-                        client.UploadString(SettingsStorage.Webhook, "POST", sb.ToString());
+                        client.UploadString(SettingsHolder.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)
@@ -248,11 +248,11 @@ namespace TCC
         }
         public void SendWebhookMessage(string bamName)
         {
-            if (!string.IsNullOrEmpty(SettingsStorage.Webhook))
+            if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
             {
-                var msg = SettingsStorage.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
-                    ? SettingsStorage.WebhookMessage.Replace("{npc_name}", bamName)
-                    : SettingsStorage.WebhookMessage;
+                var msg = SettingsHolder.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
+                    ? SettingsHolder.WebhookMessage.Replace("{npc_name}", bamName)
+                    : SettingsHolder.WebhookMessage;
                 var sb = new StringBuilder("{");
                 sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
@@ -276,7 +276,7 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                        client.UploadString(SettingsStorage.Webhook, "POST", sb.ToString());
+                        client.UploadString(SettingsHolder.Webhook, "POST", sb.ToString());
                     }
                 }
                 catch (Exception)

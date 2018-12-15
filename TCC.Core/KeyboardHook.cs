@@ -37,19 +37,19 @@ namespace TCC
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (e.Key == Settings.SettingsStorage.LfgHotkey.Key && e.Modifier == Settings.SettingsStorage.LfgHotkey.Modifier)
+            if (e.Key == Settings.SettingsHolder.LfgHotkey.Key && e.Modifier == Settings.SettingsHolder.LfgHotkey.Modifier)
             {
                 if (!Proxy.Proxy.IsConnected) return;
 
                 if (!WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
                 else WindowManager.LfgListWindow.CloseWindow();
             }
-            if (e.Key == Settings.SettingsStorage.SettingsHotkey.Key && e.Modifier == Settings.SettingsStorage.SettingsHotkey.Modifier)
+            if (e.Key == Settings.SettingsHolder.SettingsHotkey.Key && e.Modifier == Settings.SettingsHolder.SettingsHotkey.Modifier)
             {
                 if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
                 else WindowManager.SettingsWindow.ShowWindow();
             }
-            if (e.Key == Settings.SettingsStorage.InfoWindowHotkey.Key && e.Modifier == Settings.SettingsStorage.InfoWindowHotkey.Modifier)
+            if (e.Key == Settings.SettingsHolder.InfoWindowHotkey.Key && e.Modifier == Settings.SettingsHolder.InfoWindowHotkey.Modifier)
             {
                 if (WindowManager.Dashboard.IsVisible) WindowManager.Dashboard.HideWindow();
                 else WindowManager.Dashboard.ShowWindow();
@@ -112,10 +112,10 @@ namespace TCC
 
         private void Register()
         {
-            RegisterHotKey(Settings.SettingsStorage.LfgHotkey.Modifier, Settings.SettingsStorage.LfgHotkey.Key);
-            RegisterHotKey(Settings.SettingsStorage.InfoWindowHotkey.Modifier, Settings.SettingsStorage.InfoWindowHotkey.Key);
-            RegisterHotKey(Settings.SettingsStorage.SettingsHotkey.Modifier, Settings.SettingsStorage.SettingsHotkey.Key);
-            RegisterHotKey(Settings.SettingsStorage.LootSettingsHotkey.Modifier, Settings.SettingsStorage.LootSettingsHotkey.Key);
+            RegisterHotKey(Settings.SettingsHolder.LfgHotkey.Modifier, Settings.SettingsHolder.LfgHotkey.Key);
+            RegisterHotKey(Settings.SettingsHolder.InfoWindowHotkey.Modifier, Settings.SettingsHolder.InfoWindowHotkey.Key);
+            RegisterHotKey(Settings.SettingsHolder.SettingsHotkey.Modifier, Settings.SettingsHolder.SettingsHotkey.Key);
+            RegisterHotKey(Settings.SettingsHolder.LootSettingsHotkey.Modifier, Settings.SettingsHolder.LootSettingsHotkey.Key);
             RegisterHotKey(ModifierKeys.Control, Keys.K);
             //RegisterHotKey(Settings.ShowAllHotkey.Modifier, Settings.ShowAllHotkey.Key);
 

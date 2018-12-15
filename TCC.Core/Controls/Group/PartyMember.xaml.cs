@@ -48,9 +48,9 @@ namespace TCC.Controls.Group
             Dispatcher.Invoke(() =>
             {
                 if (!(DataContext is User user)) return;
-                AwakenIcon.Visibility = TCC.Settings.SettingsStorage.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) :
+                AwakenIcon.Visibility = TCC.Settings.SettingsHolder.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) :
                     Visibility.Collapsed;
-                AwakenBorder.Visibility = TCC.Settings.SettingsStorage.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) :
+                AwakenBorder.Visibility = TCC.Settings.SettingsHolder.ShowAwakenIcon ? (user.Awakened ? Visibility.Visible : Visibility.Collapsed) :
                     Visibility.Collapsed;
             });
         }
@@ -61,7 +61,7 @@ namespace TCC.Controls.Group
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LaurelImage.Visibility = TCC.Settings.SettingsStorage.ShowMembersLaurels ? Visibility.Visible : Visibility.Collapsed;
+                    LaurelImage.Visibility = TCC.Settings.SettingsHolder.ShowMembersLaurels ? Visibility.Visible : Visibility.Collapsed;
                 });
             }
             catch
@@ -76,8 +76,8 @@ namespace TCC.Controls.Group
                 Dispatcher.Invoke(() =>
                 {
                     if (!(DataContext is User user)) return;
-                    Buffs.ItemsSource = TCC.Settings.SettingsStorage.IgnoreGroupBuffs ? null : user.Buffs;
-                    BuffGrid.Visibility = TCC.Settings.SettingsStorage.IgnoreGroupBuffs
+                    Buffs.ItemsSource = TCC.Settings.SettingsHolder.IgnoreGroupBuffs ? null : user.Buffs;
+                    BuffGrid.Visibility = TCC.Settings.SettingsHolder.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
@@ -94,8 +94,8 @@ namespace TCC.Controls.Group
                 Dispatcher.Invoke(() =>
                 {
                     if (!(DataContext is User)) return;
-                    Debuffs.ItemsSource = TCC.Settings.SettingsStorage.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
-                    DebuffGrid.Visibility = TCC.Settings.SettingsStorage.IgnoreGroupDebuffs
+                    Debuffs.ItemsSource = TCC.Settings.SettingsHolder.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
+                    DebuffGrid.Visibility = TCC.Settings.SettingsHolder.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
@@ -109,14 +109,14 @@ namespace TCC.Controls.Group
         {
             Dispatcher.Invoke(() =>
             {
-                MpBar.Visibility = !TCC.Settings.SettingsStorage.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpBar.Visibility = !TCC.Settings.SettingsHolder.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void SetHp()
         {
             Dispatcher.Invoke(() =>
             {
-                HpBar.Visibility = !TCC.Settings.SettingsStorage.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpBar.Visibility = !TCC.Settings.SettingsHolder.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
 
