@@ -73,5 +73,6 @@
     <c:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />
     <c:EntriesToColor x:Key="EntriesToColor" />
     <c:DungeonImageConverter x:Key="DungeonImageConverter" />
+    <c:EpochConverter x:Key="EpochConverter" />
 
 </ResourceDictionary>

@@ -392,6 +392,7 @@ namespace TCC.R
 		public static ItemLevelTierToColorConverter IlvlTierToColor => ((ItemLevelTierToColorConverter)App.Current.FindResource("IlvlTierToColor"));
 		public static EntriesToColor EntriesToColor => ((EntriesToColor)App.Current.FindResource("EntriesToColor"));
 		public static DungeonImageConverter DungeonImageConverter => ((DungeonImageConverter)App.Current.FindResource("DungeonImageConverter"));
+		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
 	}
 	public static class DragablzMaterialDesign
 	{
