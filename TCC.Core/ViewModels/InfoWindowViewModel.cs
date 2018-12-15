@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
+using TCC.Data.Abnormalities;
+using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Windows;
@@ -215,7 +217,7 @@ namespace TCC.ViewModels
                     else if (attr.Name == "vanguardWeekly") ch.VanguardWeekliesDone = Convert.ToInt32(attr.Value);
                     else if (attr.Name == "vanguardDaily") ch.VanguardDailiesDone = Convert.ToInt32(attr.Value);
                     else if (attr.Name == "guardianQuests") ch.ClaimedGuardianQuests = Convert.ToInt32(attr.Value);
-                    else if (attr.Name == "elleonMarks") ch.ElleonMarks = Convert.ToUInt32(attr.Value);
+                    else if (attr.Name == "elleonMarks") ch.ElleonMarks = Convert.ToInt32(attr.Value);
                     else if (attr.Name == "class") ch.Class = (Class)Enum.Parse(typeof(Class), attr.Value);
                 });
 
@@ -515,6 +517,18 @@ namespace TCC.Data
         private const string EnchantTag = "enchant";
         private const string ExpTag = "exp";
         private const string EliteTag = "elite";
+        private const string LastOnlineTag = "lastOnline";
+        private const string LastLocationTag = "lastLocation";
+        private const string GuildNameTag = "guildName";
+        private const string BuffTag = "Buff";
+        private const string BuffsTag = "Buffs";
+        private const string StacksTag = "stacks";
+        private const string DurationTag = "duration";
+        private const string InventoryTag = "Inventory";
+        private const string ItemTag = "Item";
+        private const string AmountTag = "amount";
+        private const string ServerTag = "server";
+
 
         private readonly string _path = Path.Combine(App.BasePath, "resources/config/characters.xml");
         private XDocument _doc;
@@ -527,10 +541,26 @@ namespace TCC.Data
                 var xChar = BuildGeneralDataXelement(c);
                 xChar.Add(BuildDungeonDataXelement(c));
                 xChar.Add(BuildGearDataXelement(c));
+                xChar.Add(BuildBuffsXelement(c));
+                xChar.Add(BuildInventoryDataXelement(c));
                 root.Add(xChar);
             });
 
             return new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
+        }
+
+        private static XElement BuildBuffsXelement(Character character)
+        {
+            var xRet = new XElement(BuffsTag);
+            character.Buffs.ToList().ForEach(b =>
+            {
+                xRet.Add(new XElement(BuffTag,
+                            new XAttribute(IdTag, b.Id),
+                            new XAttribute(DurationTag, b.Duration),
+                            new XAttribute(StacksTag, b.Stacks)
+                    ));
+            });
+            return xRet;
         }
         private static XElement BuildGearDataXelement(Character c)
         {
@@ -553,7 +583,11 @@ namespace TCC.Data
                 new XAttribute(IdTag, c.Id),
                 new XAttribute(ClassTag, c.Class),
                 new XAttribute(PosTag, c.Position),
+                new XAttribute(LastOnlineTag, c.LastOnline),
+                new XAttribute(LastLocationTag, c.LastLocation == null ? "0_0_0": $"{c.LastLocation.World}_{c.LastLocation.Guard}_{c.LastLocation.Section}"),
                 new XAttribute(VanguardCreditsTag, c.VanguardCredits),
+                new XAttribute(GuildNameTag, c.GuildName),
+                new XAttribute(ServerTag, c.ServerName),
                 new XAttribute(GuardianCreditsTag, c.GuardianCredits),
                 new XAttribute(VanguardWeeklyTag, c.VanguardWeekliesDone),
                 new XAttribute(VanguardDailyTag, c.VanguardDailiesDone),
@@ -578,6 +612,18 @@ namespace TCC.Data
 
             return xDungeons;
         }
+        private static XElement BuildInventoryDataXelement(Character c)
+        {
+            var xRet = new XElement(InventoryTag);
+            c.Inventory.ToList().ForEach(item =>
+            {
+                xRet.Add(new XElement(ItemTag,
+                            new XAttribute(IdTag, item.Item.Id),
+                            new XAttribute(AmountTag, item.Amount)));
+            });
+
+            return xRet;
+        }
         private static void ParseGeneralCharInfo(XElement xChar, Character ch)
         {
             xChar.Attributes().ToList().ForEach(attr =>
@@ -590,12 +636,16 @@ namespace TCC.Data
                 else if (attr.Name == VanguardWeeklyTag) ch.VanguardWeekliesDone = Convert.ToInt32(attr.Value);
                 else if (attr.Name == VanguardDailyTag) ch.VanguardDailiesDone = Convert.ToInt32(attr.Value);
                 else if (attr.Name == GuardianQuestsTag) ch.ClaimedGuardianQuests = Convert.ToInt32(attr.Value);
-                else if (attr.Name == ElleonMarksTag) ch.ElleonMarks = Convert.ToUInt32(attr.Value);
-                else if (attr.Name == DragonwingScalesTag) ch.DragonwingScales = Convert.ToUInt32(attr.Value);
-                else if (attr.Name == PiecesOfDragonScrollTag) ch.PiecesOfDragonScroll = Convert.ToUInt32(attr.Value);
+                else if (attr.Name == ElleonMarksTag) ch.ElleonMarks = Convert.ToInt32(attr.Value);
+                else if (attr.Name == DragonwingScalesTag) ch.DragonwingScales = Convert.ToInt32(attr.Value);
+                else if (attr.Name == PiecesOfDragonScrollTag) ch.PiecesOfDragonScroll = Convert.ToInt32(attr.Value);
                 else if (attr.Name == ClassTag) ch.Class = (Class)Enum.Parse(typeof(Class), attr.Value);
                 else if (attr.Name == LevelTag) ch.Level = Convert.ToInt32(attr.Value);
                 else if (attr.Name == ItemLevelTag) ch.ItemLevel = Convert.ToInt32(attr.Value);
+                else if (attr.Name == LastOnlineTag) ch.LastOnline = Convert.ToInt64(attr.Value);
+                else if (attr.Name == LastLocationTag) ch.LastLocation = new Location(attr.Value);
+                else if (attr.Name == GuildNameTag) ch.GuildName = attr.Value;
+                else if (attr.Name == ServerTag) ch.ServerName = attr.Value;
             });
         }
         private static void ParseDungeonCharInfo(XElement xChar, Character ch)
@@ -642,7 +692,40 @@ namespace TCC.Data
             });
             ch.UpdateGear(gear);
         }
+        private static void ParseBuffsInfo(XElement xChar, Character ch)
+        {
+            xChar.Descendants().Where(x => x.Name == BuffTag).ToList().ForEach(xBuff =>
+            {
+                var id = 0U;
+                ulong duration = 0;
+                var stacks = 0;
 
+                xBuff.Attributes().ToList().ForEach(a =>
+                {
+                    if (a.Name == IdTag) id = uint.Parse(a.Value);
+                    if (a.Name == DurationTag) duration = ulong.Parse(a.Value);
+                    if (a.Name == StacksTag) stacks = int.Parse(a.Value);
+                });
+                ch.Buffs.Add(new AbnormalityData { Id = id, Duration = duration, Stacks = stacks });
+            });
+
+        }
+
+        private static void ParseInventoryInfo(XElement xChar, Character ch)
+        {
+            xChar.Descendants().Where(x => x.Name == ItemTag).ToList().ForEach(xItem =>
+            {
+                var id = 0U;
+                var amount = 0;
+
+                xItem.Attributes().ToList().ForEach(a =>
+                {
+                    if (a.Name == IdTag) id = uint.Parse(a.Value);
+                    if (a.Name == AmountTag) amount = int.Parse(a.Value);
+                });
+                ch.Inventory.Add(new InventoryItem(id,amount));
+            });
+        }
         public void Read(SynchronizedObservableCollection<Character> dest)
         {
             if (File.Exists(_path)) _doc = XDocument.Load(_path);
@@ -656,10 +739,12 @@ namespace TCC.Data
                 ParseGeneralCharInfo(xChar, ch);
                 ParseDungeonCharInfo(xChar, ch);
                 ParseGearCharInfo(xChar, ch);
+                ParseBuffsInfo(xChar, ch);
+                ParseInventoryInfo(xChar, ch);
                 dest.Add(ch);
             });
-
         }
+
         private void ParseEliteStatus()
         {
             SessionManager.IsElite = bool.Parse(_doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value);

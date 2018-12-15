@@ -821,7 +821,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    <ScrollViewer x:Name="PART_ContentHost" 
+                                  Background="Transparent" 
+                                  Focusable="false" 
+                                  HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Hidden"
+                                  Margin="{TemplateBinding Padding}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

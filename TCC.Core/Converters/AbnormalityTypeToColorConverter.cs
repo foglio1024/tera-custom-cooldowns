@@ -33,6 +33,7 @@ namespace TCC.Converters
 
             // ReSharper disable once PossibleNullReferenceException
             var color = (Color)Application.Current.FindResource($"Abnormality{resName}Color");
+            if (targetType == typeof(Color)) return color;
             return new SolidColorBrush(color);
 
         }
