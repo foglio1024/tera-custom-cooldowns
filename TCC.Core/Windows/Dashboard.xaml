@@ -9,20 +9,26 @@
                  xmlns:pc="clr-namespace:TCC.Data.Pc"
                  xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
                  xmlns:data="clr-namespace:TCC.Data"
+                 xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
+                 xmlns:abnormalities1="clr-namespace:TCC.Controls.Abnormalities"
+                 xmlns:tcc="clr-namespace:TCC"
                  mc:Ignorable="d"
                  Title="Dashboard" Height="650" Width="1220"
                  ResizeMode="NoResize"
                  WindowStyle="None"
                  Background="Transparent"
                  AllowsTransparency="True"
+                 UseLayoutRounding="True"
                  d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
     <local:TccWindow.Resources>
         <DataTemplate x:Key="DungeonCharDataTemplate" DataType="pc:Character">
             <Grid HorizontalAlignment="Stretch" ShowGridLines="False" Background="Transparent" Height="28">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ItemsControl ItemsSource="{Binding VisibleDungeonsView}" ItemTemplate="{StaticResource DungeonCooldownDataTemplate}" Grid.Column="0" Foreground="#9fff" FontWeight="DemiBold" FontSize="15">
+                <ItemsControl ItemsSource="{Binding VisibleDungeonsView}"
+                              ItemTemplate="{StaticResource DungeonCooldownDataTemplate}" Grid.Column="0"
+                              Foreground="#9fff" FontWeight="DemiBold" FontSize="15">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="1" HorizontalAlignment="Stretch"></UniformGrid>
@@ -40,65 +46,67 @@
             </Grid>
         </DataTemplate>
         <Style TargetType="{x:Type TabControl}" x:Key="MainTabControlStyle">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" 
+                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true"
                               KeyboardNavigation.TabNavigation="Local">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="ColumnDefinition0"/>
-                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                                <ColumnDefinition x:Name="ColumnDefinition0" />
+                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
-                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                                <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                                <RowDefinition x:Name="RowDefinition1" Height="*" />
                             </Grid.RowDefinitions>
-                            <TabPanel x:Name="headerPanel" Background="#0000" Grid.Column="0" IsItemsHost="true" Margin="0,25,0,0" Grid.Row="0" 
-                                      KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" HorizontalAlignment="Stretch"/>
-                            <Border x:Name="contentPanel" BorderBrush="{TemplateBinding BorderBrush}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                                    Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" 
+                            <TabPanel x:Name="headerPanel" Background="#0000" Grid.Column="0" IsItemsHost="true"
+                                      Margin="0,25,0,0" Grid.Row="0"
+                                      KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" HorizontalAlignment="Stretch" />
+                            <Border x:Name="contentPanel" BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1"
                                     KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" 
+                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"
                                                   Margin="{TemplateBinding Padding}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="TabStripPlacement" Value="Bottom">
-                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="1"/>
-                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                                <Setter Property="Margin" TargetName="headerPanel" Value="2,0,2,2"/>
+                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="1" />
+                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition1" Value="Auto" />
+                                <Setter Property="Margin" TargetName="headerPanel" Value="2,0,2,2" />
                             </Trigger>
                             <Trigger Property="TabStripPlacement" Value="Left">
-                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
-                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="1"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                                <Setter Property="Margin" TargetName="headerPanel" Value="0,25,0,0"/>
+                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0" />
+                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="0" />
+                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="1" />
+                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto" />
+                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
+                                <Setter Property="Margin" TargetName="headerPanel" Value="0,25,0,0" />
                             </Trigger>
                             <Trigger Property="TabStripPlacement" Value="Right">
-                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
-                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="1"/>
-                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                                <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2"/>
+                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0" />
+                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="1" />
+                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="*" />
+                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto" />
+                                <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
+                                <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="TextElement.Foreground" TargetName="templateRoot" 
-                                        Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="templateRoot"
+                                        Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -106,65 +114,67 @@
             </Setter>
         </Style>
         <Style TargetType="{x:Type TabControl}" x:Key="NestedTabControlStyle">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" 
+                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true"
                               KeyboardNavigation.TabNavigation="Local">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="ColumnDefinition0"/>
-                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                                <ColumnDefinition x:Name="ColumnDefinition0" />
+                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
-                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                                <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                                <RowDefinition x:Name="RowDefinition1" Height="*" />
                             </Grid.RowDefinitions>
-                            <TabPanel x:Name="headerPanel" Background="#0000" Grid.Column="0" IsItemsHost="true" Margin="0,0,0,0" Grid.Row="0" 
-                                      KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" HorizontalAlignment="Center"/>
-                            <Border x:Name="contentPanel" BorderBrush="{TemplateBinding BorderBrush}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                                    Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" 
+                            <TabPanel x:Name="headerPanel" Background="#0000" Grid.Column="0" IsItemsHost="true"
+                                      Margin="0,0,0,0" Grid.Row="0"
+                                      KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" HorizontalAlignment="Center" />
+                            <Border x:Name="contentPanel" BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1"
                                     KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" 
+                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"
                                                   Margin="{TemplateBinding Padding}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="TabStripPlacement" Value="Bottom">
-                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="1"/>
-                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                                <Setter Property="Margin" TargetName="headerPanel" Value="2,0,2,2"/>
+                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="1" />
+                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition1" Value="Auto" />
+                                <Setter Property="Margin" TargetName="headerPanel" Value="2,0,2,2" />
                             </Trigger>
                             <Trigger Property="TabStripPlacement" Value="Left">
-                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
-                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="1"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                                <Setter Property="Margin" TargetName="headerPanel" Value="2,0,0,2"/>
+                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0" />
+                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="0" />
+                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="1" />
+                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto" />
+                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
+                                <Setter Property="Margin" TargetName="headerPanel" Value="2,0,0,2" />
                             </Trigger>
                             <Trigger Property="TabStripPlacement" Value="Right">
-                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
-                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="1"/>
-                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="0"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                                <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2"/>
+                                <Setter Property="Grid.Row" TargetName="headerPanel" Value="0" />
+                                <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Grid.Column" TargetName="headerPanel" Value="1" />
+                                <Setter Property="Grid.Column" TargetName="contentPanel" Value="0" />
+                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="*" />
+                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto" />
+                                <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                                <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
+                                <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="TextElement.Foreground" TargetName="templateRoot" 
-                                        Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="templateRoot"
+                                        Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -172,11 +182,10 @@
             </Setter>
         </Style>
         <Style TargetType="TabItem" x:Key="TabItemStyle">
-            <Setter Property="Template" >
+            <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate  TargetType="TabItem">
-                        <Grid Name="Panel" Style="{StaticResource GlowHoverGrid}" Cursor="Hand"
-                        >
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid Name="Panel" Style="{StaticResource GlowHoverGrid}" Cursor="Hand">
                             <Grid.Background>
                                 <LinearGradientBrush Opacity="0">
                                     <GradientStop Color="#1ddf" Offset="0"></GradientStop>
@@ -186,13 +195,13 @@
                             </Grid.Background>
                             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="InnerGrid">
                                 <Rectangle x:Name="ExpandSelector"
-                                           Fill="{StaticResource DefensiveStanceBrush}" 
-                                           Width="3" 
+                                           Fill="{StaticResource DefensiveStanceBrush}"
+                                           Width="3"
                                            HorizontalAlignment="Left"
                                            RenderTransformOrigin=".5 .5"
                                            VerticalAlignment="Stretch">
                                     <Rectangle.RenderTransform>
-                                        <ScaleTransform ScaleY="0"/>
+                                        <ScaleTransform ScaleY="0" />
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                             </Grid>
@@ -202,14 +211,14 @@
                                               ContentSource="Header"
                                               Margin="3 0 6 0" Opacity=".7">
                                 <ContentPresenter.RenderTransform>
-                                    <TranslateTransform/>
+                                    <TranslateTransform />
                                 </ContentPresenter.RenderTransform>
 
                             </ContentPresenter>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="InnerGrid" Property="Background" >
+                                <Setter TargetName="InnerGrid" Property="Background">
                                     <Setter.Value>
                                         <LinearGradientBrush Opacity="1">
                                             <GradientStop Color="#2ddf" Offset="0"></GradientStop>
@@ -219,45 +228,45 @@
                                 </Setter>
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
-                                        <Storyboard >
-                                            <DoubleAnimation To="1" Duration="0:0:0.2" 
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ExpandSelector"
                                                              Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                     <BeginStoryboard>
-                                        <Storyboard >
-                                            <DoubleAnimation To="10" Duration="0:0:0.2" 
+                                        <Storyboard>
+                                            <DoubleAnimation To="10" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ContentSite"
                                                              Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
-                                            <DoubleAnimation To="1" Duration="0:0:0.2" 
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
+                                            <DoubleAnimation To="1" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ContentSite"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
-                                        <Storyboard >
-                                            <DoubleAnimation To="0" Duration="0:0:0.2" 
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ExpandSelector"
                                                              Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                     <BeginStoryboard>
-                                        <Storyboard >
-                                            <DoubleAnimation To="0" Duration="0:0:0.2" 
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ContentSite"
                                                              Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
-                                            <DoubleAnimation To=".7" Duration="0:0:0.2" 
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
+                                            <DoubleAnimation To=".7" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ContentSite"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
 
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -271,11 +280,11 @@
             </Setter>
         </Style>
         <Style TargetType="TabItem" x:Key="TabItemStyleHorizontal">
-            <Setter Property="Padding" Value="20 4"/>
-            <Setter Property="Template" >
+            <Setter Property="Padding" Value="20 4" />
+            <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate  TargetType="TabItem">
-                        <Grid Name="Panel" Style="{StaticResource GlowHoverGrid}" Cursor="Hand" >
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid Name="Panel" Style="{StaticResource GlowHoverGrid}" Cursor="Hand">
                             <Grid.Background>
                                 <LinearGradientBrush Opacity="0" StartPoint="0 0" EndPoint="0 1">
                                     <GradientStop Color="#1ddf" Offset=".80"></GradientStop>
@@ -284,13 +293,13 @@
                             </Grid.Background>
                             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="InnerGrid">
                                 <Rectangle x:Name="ExpandSelector"
-                                           Fill="{StaticResource DefensiveStanceBrush}" 
-                                           Height="3" 
+                                           Fill="{StaticResource DefensiveStanceBrush}"
+                                           Height="3"
                                            HorizontalAlignment="Stretch"
                                            RenderTransformOrigin=".5 .5"
                                            VerticalAlignment="Bottom">
                                     <Rectangle.RenderTransform>
-                                        <ScaleTransform ScaleX="0"/>
+                                        <ScaleTransform ScaleX="0" />
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                             </Grid>
@@ -307,21 +316,21 @@
                             <Trigger Property="IsSelected" Value="True">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
-                                        <Storyboard >
-                                            <DoubleAnimation To="1" Duration="0:0:0.2" 
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ExpandSelector"
                                                              Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
-                                        <Storyboard >
-                                            <DoubleAnimation To="0" Duration="0:0:0.2" 
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" Duration="0:0:0.2"
                                                              Storyboard.TargetName="ExpandSelector"
                                                              Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
+                                                             EasingFunction="{StaticResource QuadraticEase}" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
@@ -348,9 +357,10 @@
                 BorderThickness="1"
                 Opacity=".7"
                 BorderBrush="{StaticResource RevampBorderBrush}"
-                HorizontalAlignment="Stretch"  Grid.ColumnSpan="2"/>
+                HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
         <!-- Title bar -->
-        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Top" MouseLeftButtonDown="OnTitleBarMouseDown">
+        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Top"
+              MouseLeftButtonDown="OnTitleBarMouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -379,26 +389,27 @@
                 <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
             </Button>
         </Grid>
-
         <!-- Content -->
-        <Grid  ClipToBounds="False" Grid.Row="0" Grid.RowSpan="2" UseLayoutRounding="True">
-            <TabControl Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource TabItemStyleHorizontal}"
+        <Grid x:Name="MainContent" ClipToBounds="False" Opacity="1" Grid.RowSpan="2" UseLayoutRounding="True">
+            <TabControl Background="Transparent" BorderThickness="0"
+                        SelectionChanged="OnTabChanged"
+                        ItemContainerStyle="{StaticResource TabItemStyleHorizontal}"
                         TabStripPlacement="Top" Style="{StaticResource NestedTabControlStyle}" Padding="5 0 5 5">
-                <TabItem Header="General" Foreground="#9fff" >
-                    <Grid HorizontalAlignment="Stretch" >
-                        <dashboard:GenericInfoView/>
+                <TabItem Header="General" Foreground="#9fff">
+                    <Grid HorizontalAlignment="Stretch">
+                        <dashboard:GenericInfoView />
                     </Grid>
                 </TabItem>
-                <TabItem Header="Dungeons" Foreground="#9fff" >
-                    <Grid HorizontalAlignment="Stretch" >
-                        <dashboard:DungeonView x:Name="DungeonView"/>
+                <TabItem Header="Dungeons" Foreground="#9fff">
+                    <Grid HorizontalAlignment="Stretch">
+                        <dashboard:DungeonView x:Name="DungeonView" />
                     </Grid>
                 </TabItem>
-                <TabItem Header="Timeline (temp)" Foreground="#9fff" >
+                <TabItem Header="Timeline (temp)" Foreground="#9fff">
                     <dashboard:TimelineControl x:Name="TimeLine"
-                                               HorizontalAlignment="Stretch" 
-                                               Margin="0,0,0,30" 
-                                               VerticalAlignment="Stretch"/>
+                                               HorizontalAlignment="Stretch"
+                                               Margin="0,0,0,30"
+                                               VerticalAlignment="Stretch" />
                 </TabItem>
                 <!--<TabItem Header="Gear" Foreground="#9fff" >
                     <Border Style="{StaticResource RevampBorderStyle}" HorizontalAlignment="Stretch" 
@@ -406,8 +417,691 @@
 
                 </TabItem>-->
             </TabControl>
-
         </Grid>
+        <!-- Details -->
+        <Border x:Name="DetailsBorder"
+                Grid.RowSpan="2"
+                Style="{StaticResource RevampBorderStyle}"
+                MouseLeftButtonDown="OnDetailsMouseButtonDown"
+                RenderTransformOrigin=".5 .5"
+                Margin="180 30 5 35"
+                Opacity="0"
+                IsHitTestVisible="False"
+                Effect="{x:Null}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!-- Header icon -->
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="{Binding SelectedCharacter.Class, Converter={StaticResource ClassToSvg}}"
+                          Opacity=".8"
+                          Effect="{StaticResource DropShadow}"
+                          Width="70"
+                          Height="70"
+                          VerticalAlignment="Center"
+                          UseLayoutRounding="True"
+                          Margin="15" />
+                    <StackPanel Margin="0 -10 0 0"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="{Binding SelectedCharacter.Name}"
+                                   Style="{StaticResource DefaultTextStyle}"
+                                   FontWeight="Thin" FontSize="45"
+                                   Opacity=".7"
+                                   Width="300" VerticalAlignment="Center" />
+                        <Separator Background="#2ddf" Margin="0 -8 0 4"></Separator>
+                        <TextBlock Foreground="#5fff"
+                                   Margin="3 0"
+                                   FontSize="15"
+                                   TextTrimming="CharacterEllipsis">
+                            <Run Text="{Binding SelectedCharacter.ServerName, Mode=OneWay}" />
+                            <Run Text=" -  lv." />
+                            <Run Text="{Binding SelectedCharacter.Level, Mode=OneWay}"
+                                 FontWeight="DemiBold">
+                                <Run.Style>
+                                    <Style TargetType="Run">
+                                        <Setter Property="Foreground" Value="{StaticResource MpBrushLight}"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedCharacter.Level}" Value="65">
+                                                <Setter Property="Foreground" Value="#ccc"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Run.Style>
+                            </Run>
+                            <Run Text=" -  ilv." />
+                            <Run Text="{Binding SelectedCharacter.ItemLevel, Mode=OneWay}"
+                                 Foreground="{Binding SelectedCharacter.ItemLevelTier, Converter={StaticResource IlvlTierToColor}}"
+                                 FontWeight="DemiBold" />
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <!-- Header info -->
+                <Grid Grid.Column="1" VerticalAlignment="Stretch"
+                      Margin="20 15 20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Foreground="#6fff"
+                               FontSize="14"
+                               Grid.Column="0"
+                               VerticalAlignment="Center">
+                        <Run Text="Last online: " />
+                        <Run
+                            Text="{Binding SelectedCharacter.LastOnline, Mode=OneWay, Converter={StaticResource EpochConverter}, StringFormat=HH:mm:ss dd/MM/yyyy}"
+                            Foreground="#cfff" />
+                    </TextBlock>
+                    <TextBlock Foreground="#6fff"
+                               FontSize="14"
+                               Grid.Column="0"
+                               Grid.Row="1"
+                               VerticalAlignment="Center">
+                        <Run Text="Last location: " />
+                        <Run Text="{Binding SelectedCharacter.LastLocation.SectionName, Mode=OneWay}"
+                             FontWeight="DemiBold"
+                             Foreground="#cfff" />
+                    </TextBlock>
+                    <TextBlock Foreground="#6fff"
+                               FontSize="14"
+                               Margin="20 0"
+                               Grid.Column="1"
+                               VerticalAlignment="Center">
+                        <Run Text="Guild: " />
+                        <Run Text="{Binding SelectedCharacter.GuildName, Mode=OneWay}"
+                             FontWeight="DemiBold"
+                             Foreground="#cfff" />
+                    </TextBlock>
+                    <Button Style="{StaticResource ButtonMainStyle}" 
+                            Background="{StaticResource HpBrush}"
+                            tcc:ButtonExtensions.CornerRadius="12"
+                            Grid.Column="2"
+                            Grid.RowSpan="2"
+                            Margin="-7 0"
+                            Effect="{StaticResource DropShadow}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="RemoveCharacter"
+                            Padding="10 3">
+                        <TextBlock Text="Remove character"
+                                   FontSize="14"></TextBlock>
+                    </Button>
+                </Grid>
+                <!-- Panels -->
+                <Grid Grid.Row="1"
+                      Grid.ColumnSpan="2"
+                      Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!-- Col 1 -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{StaticResource RevampBorderStyle}"
+                                Background="{StaticResource RevampDarkerBackground70Brush}"
+                                Grid.Row="0"
+                                Margin="5" />
+                        <Border Style="{StaticResource RevampBorderStyle}"
+                                Background="{StaticResource RevampDarkerBackground70Brush}"
+                                Grid.Row="1"
+                                Margin="5" />
+                        <Border Style="{StaticResource RevampBorderStyle}"
+                                Background="{StaticResource RevampDarkerBackground70Brush}"
+                                Grid.Row="2"
+                                Margin="5" />
+
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Vanguard Initiative" Foreground="#5fff" FontSize="20"
+                                       FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center">
+                            </TextBlock>
+                            <Grid Margin="10 0 10 10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Credits"
+                                           Foreground="#9fff">
+                                </TextBlock>
+                                <TextBlock Text="{Binding SelectedCharacter.VanguardCredits}"
+                                           Foreground="#7fff"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right">
+                                </TextBlock>
+                                <dashboard:RectangleBarGauge VerticalAlignment="Top"
+                                                             Height="4"
+                                                             Grid.Row="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Factor="{Binding SelectedCharacter.VanguardCreditsFactor}"
+                                                             Color="{StaticResource AssaultStanceBrush}"
+                                                             Skew="-45"
+                                                             Margin="0 2">
+                                </dashboard:RectangleBarGauge>
+                            </Grid>
+                            <Grid Margin="10 5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Daily quests"
+                                           Foreground="#9fff">
+                                </TextBlock>
+                                <TextBlock Text="{Binding SelectedCharacter.VanguardDailiesDone}"
+                                           Foreground="#7fff"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right">
+                                </TextBlock>
+                                <dashboard:RectangleBarGauge VerticalAlignment="Top"
+                                                             Height="4"
+                                                             Grid.Row="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Factor="{Binding SelectedCharacter.VanguardDailyCompletion}"
+                                                             Color="{StaticResource AssaultStanceBrush}"
+                                                             Skew="-45"
+                                                             Margin="0 2">
+                                </dashboard:RectangleBarGauge>
+                            </Grid>
+                            <Grid Margin="10 0 10 2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Weekly quests"
+                                           Foreground="#9fff">
+                                </TextBlock>
+                                <TextBlock Text="{Binding SelectedCharacter.VanguardWeekliesDone}"
+                                           Foreground="#7fff"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right">
+                                </TextBlock>
+                                <dashboard:RectangleBarGauge VerticalAlignment="Top"
+                                                             Height="4"
+                                                             Grid.Row="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Factor="{Binding SelectedCharacter.VanguardWeeklyCompletion}"
+                                                             Color="{StaticResource AssaultStanceBrush}"
+                                                             Skew="-45"
+                                                             Margin="0 2">
+                                </dashboard:RectangleBarGauge>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="10">
+                            <TextBlock Text="Guardian Legion" Foreground="#5fff" FontSize="20"
+                                       FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center">
+                            </TextBlock>
+
+                            <Grid Margin="10 0 10 10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Credits"
+                                           Foreground="#9fff">
+                                </TextBlock>
+                                <TextBlock Text="{Binding SelectedCharacter.GuardianCredits}"
+                                           Foreground="#7fff"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right">
+                                </TextBlock>
+                                <dashboard:RectangleBarGauge VerticalAlignment="Top"
+                                                             Height="4"
+                                                             Grid.Row="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Factor="{Binding SelectedCharacter.GuardianCreditsFactor}"
+                                                             Color="{StaticResource DefensiveStanceBrush}"
+                                                             Skew="-45"
+                                                             Margin="0 2">
+                                </dashboard:RectangleBarGauge>
+                            </Grid>
+                            <Grid Margin="10 5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Claimed quests"
+                                           Foreground="#9fff">
+                                </TextBlock>
+                                <TextBlock Text="{Binding SelectedCharacter.ClaimedGuardianQuests}"
+                                           Foreground="#7fff"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right">
+                                </TextBlock>
+                                <dashboard:RectangleBarGauge VerticalAlignment="Top"
+                                                             Height="4"
+                                                             Grid.Row="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Factor="{Binding SelectedCharacter.ClaimedGuardianCompletion}"
+                                                             Color="{StaticResource DefensiveStanceBrush}"
+                                                             Skew="-45"
+                                                             Margin="0 2">
+                                </dashboard:RectangleBarGauge>
+                            </Grid>
+                            <Grid Margin="10 0 10 2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Cleared quests"
+                                           Foreground="#9fff">
+                                </TextBlock>
+                                <TextBlock Text="{Binding SelectedCharacter.ClearedGuardianQuests}"
+                                           Foreground="#7fff"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right">
+                                </TextBlock>
+                                <dashboard:RectangleBarGauge VerticalAlignment="Top"
+                                                             Height="4"
+                                                             Grid.Row="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Factor="{Binding SelectedCharacter.ClearedGuardianCompletion}"
+                                                             Color="{StaticResource DefensiveStanceBrush}"
+                                                             Skew="-45"
+                                                             Margin="0 2">
+                                </dashboard:RectangleBarGauge>
+                            </Grid>
+                        </StackPanel>
+                        <Grid Grid.Row="2"
+                                    Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid >
+                                <TextBlock Text="Buffs" Foreground="#5fff" FontSize="20"
+                                           FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center">
+                                </TextBlock>
+                                <Path Data="{StaticResource SvgInfo}" HorizontalAlignment="Right" Margin="0 -4 1 10"
+                                      Height="16" VerticalAlignment="Center"
+                                      Opacity=".5"
+                                      ToolTip="Buffs are only updated when teleporting, logging out or disconnecting.">
+                                </Path>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1">
+                                <ItemsControl ItemsSource="{Binding SelectedCharacter.Buffs}"
+                                              Margin="0 0 -16 0"
+                                              UseLayoutRounding="True"
+                                              HorizontalAlignment="Center">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type abnormalities:AbnormalityData}">
+                                            <Grid Margin="4">
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="Transparent" BorderBrush="Transparent">
+                                                        <Grid>
+                                                            <abnormalities1:AbnormalityToolTipControl
+                                                                AbnormalityName="{Binding Abnormality.Name}"
+                                                                AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                                Id="{Binding Abnormality.Id}" />
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                                <Rectangle Width="40" Height="40"
+                                                           RadiusX="5"
+                                                           RadiusY="5"
+                                                           Margin="0 0 0 10"
+                                                           StrokeThickness="1"
+                                                           Effect="{StaticResource DropShadow}"
+                                                           Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}">
+                                                    <Shape.Fill>
+                                                        <ImageBrush
+                                                            ImageSource="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}">
+                                                        </ImageBrush>
+                                                    </Shape.Fill>
+                                                </Rectangle>
+                                                <Border VerticalAlignment="Bottom"
+                                                        Height="18"
+                                                        CornerRadius="2"
+                                                        Background="{StaticResource RevampBackgroundBrush}"
+                                                        HorizontalAlignment="Center"
+                                                        BorderThickness="1"
+                                                        Padding="4 0 4 0"
+                                                        UseLayoutRounding="False"
+                                                        BorderBrush="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}">
+                                                    <!--BorderBrush="{StaticResource RevampBorderBrush}"-->
+                                                    <Viewbox VerticalAlignment="Center" Margin="0 0 0 0">
+                                                        <TextBlock FontWeight="DemiBold"
+                                                                   Text="{Binding Duration, Converter={StaticResource DurationToTimeFormat}}"
+                                                                   Foreground="#9fff"
+                                                                   VerticalAlignment="Center">
+                                                        </TextBlock>
+                                                    </Viewbox>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                    <!-- Col 2 -->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{StaticResource RevampBorderStyle}"
+                                Background="{StaticResource RevampDarkerBackground70Brush}"
+                                Grid.Row="1"
+                                Margin="5" />
+
+                        <Grid Grid.Row="1" Margin="10" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Inventory" Foreground="#5fff" FontSize="20"
+                                       FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center" />
+                            <ScrollViewer Grid.Row="1" CanContentScroll="False"
+                                          VerticalAlignment="Stretch">
+                                <ItemsControl ItemsSource="{Binding SelectedCharacterInventory}"
+                                              Margin="0 0 0 0"
+                                              VerticalAlignment="Top"
+                                              UseLayoutRounding="True">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type pc:InventoryItem}">
+                                            <Grid Margin="4" ToolTip="{Binding Item.Name}">
+                                                <Rectangle Width="40" Height="40"
+                                                           RadiusX="5"
+                                                           RadiusY="5"
+                                                           Margin="0 0 0 0"
+                                                           StrokeThickness="1"
+                                                           Effect="{StaticResource DropShadow}">
+                                                    <!--TODO:Stroke="{Binding Item.RareGrade, Converter={StaticResource ...}}"-->
+                                                    <Shape.Fill>
+                                                        <ImageBrush
+                                                            ImageSource="{Binding Item.IconName, Converter={StaticResource IconNameToPath}}">
+                                                        </ImageBrush>
+                                                    </Shape.Fill>
+                                                    <Shape.Style>
+                                                        <Style TargetType="Shape">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Common">
+                                                                    <Setter Property="Stroke"
+                                                                            Value="{StaticResource RevampBorderBrush}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Uncommon">
+                                                                    <Setter Property="Stroke" Value="Green"></Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Rare">
+                                                                    <Setter Property="Stroke" Value="DodgerBlue"></Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Superior">
+                                                                    <Setter Property="Stroke" Value="Orange"></Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Shape.Style>
+                                                </Rectangle>
+                                                <Polygon Points="0 0 1 0 0 1" Width="12" Height="12"
+                                                         Stretch="Uniform" VerticalAlignment="Top"
+                                                         HorizontalAlignment="Left">
+                                                    <Shape.Effect>
+                                                        <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
+                                                    </Shape.Effect>
+                                                    <Shape.Style>
+                                                        <Style TargetType="Shape">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Common">
+                                                                    <Setter Property="Fill"
+                                                                            Value="{StaticResource RevampBorderBrush}">
+                                                                    </Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Uncommon">
+                                                                    <Setter Property="Fill" Value="Green"></Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Rare">
+                                                                    <Setter Property="Fill" Value="DodgerBlue"></Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Item.RareGrade}"
+                                                                             Value="Superior">
+                                                                    <Setter Property="Fill" Value="Orange"></Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Shape.Style>
+
+                                                </Polygon>
+                                                <Viewbox Height="20"
+                                                         HorizontalAlignment="Right"
+                                                         VerticalAlignment="Bottom"
+                                                         Margin="2 0">
+                                                    <ctrl:OutlinedTextBlock FontWeight="DemiBold"
+                                                                            Text="{Binding Amount}"
+                                                                            Fill="#ddd"
+                                                                            StrokeThickness="3"
+                                                                            Stroke="#9000"
+                                                                            HorizontalAlignment="Right"
+                                                                            TextAlignment="Right">
+                                                    </ctrl:OutlinedTextBlock>
+                                                </Viewbox>
+                                            </Grid>
+                                            <DataTemplate.Triggers>
+                                                <Trigger Property="IsVisible" Value="True">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                 Duration="0:0:0.4"
+                                                                                 From="0"
+                                                                                 Timeline.DesiredFrameRate="15"
+                                                                                 To="1">
+                                                                </DoubleAnimation>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                </Trigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <Grid Grid.Row="2">
+                                <Path Data="{StaticResource SvgSearch}" Margin="0 3 0 3" Height="15"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right">
+                                </Path>
+                                <TextBox Margin="-4 0 -4 -4" BorderThickness="0"
+                                         x:Name="InventoryFilter"
+                                         VerticalAlignment="Stretch"
+                                         VerticalContentAlignment="Center"
+                                         Foreground="#bfff" Background="#1ddf"
+                                         CaretBrush="#8fff" TextChanged="FilterInventory">
+                                </TextBox>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <!-- Col 3 -->
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{StaticResource RevampBorderStyle}"
+                                Background="{StaticResource RevampDarkerBackground70Brush}"
+                                Grid.Row="1"
+                                Margin="5" />
+
+                        <Grid Grid.Row="1" Margin="10" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Dungeons" Foreground="#5fff" FontSize="20"
+                                       FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center" />
+                            <ScrollViewer Grid.Row="1" CanContentScroll="True"
+                                          VerticalAlignment="Stretch">
+                            </ScrollViewer>
+                            <ListBox ItemsSource="{Binding SelectedCharacter.VisibleDungeonsView}"
+                                     Margin="0 0 0 0"
+                                     Grid.Row="1"
+                                     ItemContainerStyle="{StaticResource DefaultListItemStyle}"
+                                     VerticalAlignment="Top"
+                                     UseLayoutRounding="True">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="data:DungeonCooldown">
+                                        <Grid Height="Auto" Margin="4 0" HorizontalAlignment="Stretch">
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="Transparent">
+
+                                                    <Border Style="{StaticResource RevampBorderStyle}" Opacity="1">
+                                                        <Grid Margin="10 5 10 5">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Rectangle Width="64" Height="64" Margin="0 5 10 0"
+                                                                       VerticalAlignment="Top">
+                                                                <Rectangle.Fill>
+                                                                    <ImageBrush
+                                                                        ImageSource="{Binding Dungeon.IconName, Converter={StaticResource DungeonImageConverter}}"
+                                                                        RenderOptions.BitmapScalingMode="Fant"
+                                                                        Stretch="Uniform" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                            <StackPanel Grid.Column="1">
+                                                                <TextBlock FontSize="16" Foreground="#4fff"
+                                                                           FontWeight="DemiBold"
+                                                                           VerticalAlignment="Center">
+                                                                    <Run Text="{Binding Dungeon.Name, Mode=OneWay}"
+                                                                         Foreground="#9fff" />
+                                                                </TextBlock>
+                                                                <TextBlock Foreground="#4fff">
+                                                                    <Run Text="Item level requirement:" />
+                                                                    <Run
+                                                                        Text="{Binding Dungeon.ItemLevel, Mode=OneWay}"
+                                                                        Foreground="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}" />
+                                                                </TextBlock>
+                                                                <Separator Margin="5 2"
+                                                                           Background="#2fff" />
+                                                                <TextBlock Foreground="#4fff">
+                                                                    <Run Text="Max daily runs:" />
+                                                                    <Run
+                                                                        Text="{Binding Dungeon.ActualRuns, Mode=OneWay}"
+                                                                        Foreground="#9fff" />
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="45" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="45" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Entries}"
+                                                       ToolTip="Entries left"
+                                                       FontWeight="DemiBold"
+                                                       Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                                       TextAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15"
+                                                       Grid.Column="2">
+                                                <TextBlock.Foreground>
+                                                    <MultiBinding Converter="{StaticResource EntriesToColor}">
+                                                        <Binding Path="Entries" />
+                                                        <Binding Path="Runs" />
+                                                    </MultiBinding>
+                                                </TextBlock.Foreground>
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding Clears}"
+                                                       ToolTip="Total clears"
+                                                       TextAlignment="Right"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Right"
+                                                       FontSize="13"
+                                                       Grid.Column="3"
+                                                       Opacity=".7"
+                                                       Foreground="{StaticResource GoldBrush}"
+                                                       Margin="5 0"
+                                                       TextTrimming="CharacterEllipsis">
+                                            </TextBlock>
+                                            <TextBlock TextTrimming="CharacterEllipsis"
+                                                       Foreground="#ccc"
+                                                       HorizontalAlignment="Left">
+                                                <Run Text="{Binding Dungeon.ShortName, Mode=OneWay}"
+                                                     Foreground="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}">
+                                                </Run>
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="1"
+                                                       Foreground="#ccc"
+                                                       HorizontalAlignment="Left">
+                                                <Run Text="{Binding Dungeon.Name, Mode=OneWay}"></Run>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+
+                            </ListBox>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:TccWindow>
-

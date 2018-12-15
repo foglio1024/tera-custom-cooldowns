@@ -92,7 +92,17 @@
                                                  Skew="-45"
                                                  HorizontalAlignment="Stretch"
                                                  Color="{StaticResource DefensiveStanceBrush}"
-                                                 Factor="{Binding GuardianCompletion}" />
+                                                 Factor="{Binding ClaimedGuardianCompletion}" />
+                        <Grid Margin="0 5 0 3">
+                            <TextBlock HorizontalAlignment="Left" Text="Cleared quests" Foreground="#4fff" />
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding ClearedGuardianQuests, Mode=OneWay}"
+                                       Foreground="#9fff" FontWeight="DemiBold" />
+                        </Grid>
+                        <local:RectangleBarGauge Height="4"
+                                                 Skew="-45"
+                                                 HorizontalAlignment="Stretch"
+                                                 Color="{StaticResource DefensiveStanceBrush}"
+                                                 Factor="{Binding ClearedGuardianCompletion}" />
                         <Grid Margin="0 5 0 3">
                             <TextBlock HorizontalAlignment="Left" Text="Credits" Foreground="#4fff" />
                             <TextBlock HorizontalAlignment="Right" Text="{Binding GuardianCredits, Mode=OneWay}"
@@ -108,7 +118,6 @@
             </Border>
 
         </ToolTip>
-
         <ToolTip x:Key="VanguardCreditsTooltip" d:DataContext="{d:DesignInstance pc:Character}">
             <Border Style="{StaticResource RevampBorderStyle}" Opacity="1">
                 <Grid>
@@ -220,7 +229,7 @@
                                                  Margin="2 0 -2 0"
                                                  HorizontalAlignment="Left"
                                                  Color="{StaticResource DefensiveStanceBrush}"
-                                                 Factor="{Binding GuardianCompletion}" />
+                                                 Factor="{Binding ClaimedGuardianCompletion}" />
                         <local:RectangleBarGauge Width="180"
                                                  Height="2"
                                                  Skew="-45"

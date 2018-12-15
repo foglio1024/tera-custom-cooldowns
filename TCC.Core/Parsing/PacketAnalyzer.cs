@@ -61,8 +61,9 @@ namespace TCC.Parsing
             WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
 
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
+            WindowManager.Dashboard.VM.UpdateBuffs();
+            WindowManager.Dashboard.VM.SaveCharacters();
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            //BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             EntityManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;

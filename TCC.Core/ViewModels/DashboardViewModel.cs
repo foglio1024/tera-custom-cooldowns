@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Windows;
@@ -28,6 +29,7 @@ namespace TCC.ViewModels
         private ICollectionViewLiveShaping _sortedColumns;
         private ObservableCollection<CharacterViewModel> _characters;
         private ObservableCollection<DungeonColumnViewModel> _columns;
+        private Character _selectedCharacter;
 
         /* -- Properties ------------------------------------------- */
 
@@ -35,7 +37,18 @@ namespace TCC.ViewModels
 
 
         public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
-        public bool ShowElleonMarks => Settings.SettingsStorage.LastRegion.Contains("EU");
+        public Character SelectedCharacter
+        {
+            get => _selectedCharacter;
+            set
+            {
+                if (_selectedCharacter == value) return;
+                _selectedCharacter = value;
+                N();
+            }
+        }
+
+        public bool ShowElleonMarks => Settings.SettingsHolder.LastRegion.Contains("EU");
 
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
@@ -50,11 +63,33 @@ namespace TCC.ViewModels
             }
         }
 
-        public uint TotalElleonMarks
+        public ObservableCollection<InventoryItem> InventoryViewList
         {
             get
             {
-                uint ret = 0;
+                var ret = new ObservableCollection<InventoryItem>();
+                Task.Factory.StartNew(() =>
+                {
+                    SelectedCharacter.Inventory.ToList().ForEach(item =>
+                    {
+                        App.BaseDispatcher.BeginInvoke(new Action(() =>
+                        {
+                            ret.Add(item);
+                        }), DispatcherPriority.Background);
+                    });
+                });
+                return ret;
+            }
+        }
+
+        public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
+
+
+        public int TotalElleonMarks
+        {
+            get
+            {
+                int ret = 0;
                 Characters.ToSyncArray().ToList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
@@ -188,7 +223,7 @@ namespace TCC.ViewModels
             CurrentCharacter.GuardianCredits = pCredits;
             N(nameof(TotalGuardianCredits));
         }
-        public void SetElleonMarks(uint val)
+        public void SetElleonMarks(int val)
         {
             CurrentCharacter.ElleonMarks = val;
             N(nameof(TotalElleonMarks));
@@ -229,6 +264,17 @@ namespace TCC.ViewModels
             }
         }
 
+        public void SelectCharacter(Character character)
+        {
+            //if(SelectedCharacter == character) return;
+            SelectedCharacter = character;
+            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, SelectedCharacter.Inventory, new string[] { }, new SortDescription[]
+            {
+                new SortDescription("Item.Id", ListSortDirection.Ascending), 
+            });
+            WindowManager.Dashboard.ShowDetails();
+            Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+        }
 
         /* -- EVENTS: TO BE REFACTORED (TODO)----------------------- */
 
@@ -415,6 +461,61 @@ namespace TCC.ViewModels
             {
                 EventGroups.Add(eg);
             }
+        }
+
+        public void UpdateBuffs()
+        {
+            SessionManager.CurrentPlayer.Buffs.ToList().ForEach(b =>
+            {
+                var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+                if (existing == null) CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                else
+                {
+                    existing.Id = b.Abnormality.Id;
+                    existing.Duration = b.DurationLeft;
+                    existing.Stacks = b.Stacks;
+                }
+            });
+            SessionManager.CurrentPlayer.Debuffs.ToList().ForEach(b =>
+            {
+                var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+                if (existing == null) CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                else
+                {
+                    existing.Id = b.Abnormality.Id;
+                    existing.Duration = b.DurationLeft;
+                    existing.Stacks = b.Stacks;
+                }
+            });
+        }
+
+        public void UpdateInventory()
+        {
+            if (S_INVEN.Items.ContainsKey(151643)) SetElleonMarks(S_INVEN.Items[151643]);
+            if (S_INVEN.Items.ContainsKey(45474)) CurrentCharacter.DragonwingScales = S_INVEN.Items[45474];
+            if (S_INVEN.Items.ContainsKey(45482)) CurrentCharacter.PiecesOfDragonScroll = S_INVEN.Items[45482];
+
+            foreach (var id in S_INVEN.Items.Keys)
+            {
+                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == id);
+                if (existing != null) existing.Amount = S_INVEN.Items[id];
+                else CurrentCharacter.Inventory.Add(new InventoryItem(id, S_INVEN.Items[id]));
+            }
+
+            var toRemove = new List<uint>();
+
+            foreach (var item in CurrentCharacter.Inventory)
+            {
+                if (!S_INVEN.Items.ContainsKey(item.Item.Id)) toRemove.Add(item.Item.Id);
+            }
+            
+            toRemove.ForEach(id =>
+            {
+                var target = CurrentCharacter.Inventory.FirstOrDefault(i => i.Item.Id == id);
+                if (target != null) CurrentCharacter.Inventory.Remove(target);
+            });
+
+            N(nameof(SelectedCharacterInventory));
         }
     }
 }
