@@ -1,111 +1,79 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 using TCC.Annotations;
+using TCC.Data.NPCs;
 using TCC.ViewModels;
 
 namespace TCC.Controls.NPCs
 {
-    /// <summary>
-    /// Interaction logic for SmallMobControl.xaml
-    /// </summary>
-    public partial class SmallMobControl : INotifyPropertyChanged
+    public partial class SmallMobControl
     {
+        bool _firstLoad = true;
         private const uint DeleteDelay = 0;
-        private DispatcherTimer _t;
         private DoubleAnimation _hpAnim;
-        private Data.NPCs.NPC _dc;
+
+        public SmallMobViewModel VM { get; set; }
+
         public SmallMobControl()
         {
             InitializeComponent();
-        }
-        public bool Compact => BossGageWindowViewModel.Instance.IsCompact;
 
-        private void SmallMobControl_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            _dc = (Data.NPCs.NPC)DataContext;
-            _dc.DeleteEvent += Dc_DeleteEvent;
-            _dc.PropertyChanged += OnDcPropertyChanged;
-            _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(DeleteDelay) };
-            _t.Tick += (s, ev) =>
+            DataContextChanged += (_, e) =>
             {
-                RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                        new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)));
-                _t.Stop();
-                _dc = null;
-                _t = null;
+                if (e.NewValue is NPC npc) VM = new SmallMobViewModel(npc);
             };
-            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
-            BossGageWindowViewModel.Instance.NpcListChanged += OnNpcListChanged;
-            SettingsWindowViewModel.AbnormalityShapeChanged += OnViewModelPropertyChanged;
-
             _hpAnim = new DoubleAnimation
             {
                 Duration = TimeSpan.FromMilliseconds(250),
-                EasingFunction = new QuadraticEase()
+                EasingFunction = R.MiscResources.QuadraticEase
             };
             Timeline.SetDesiredFrameRate(_hpAnim, 20);
+
         }
 
-        private void OnViewModelPropertyChanged()
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Abnormalities.ItemTemplateSelector = null;
-            Abnormalities.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; //Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
+            if (!_firstLoad) return;
+            _firstLoad = false;
+            VM.HpFactorChanged += OnHpChanged;
+            VM.Disposed += OnDispose;
+
+
+            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+            SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
+
         }
 
-        private void OnDcPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnDispose()
         {
-            if (e.PropertyName != nameof(Data.NPCs.NPC.HPFactor)) return;
-            if (Compact)
+            VM.HpFactorChanged -= OnHpChanged;
+            SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
+            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)));
+        }
+
+        private void OnHpChanged()
+        {
+            if (VM.Compact)
             {
-                _hpAnim.To = _dc.HPFactor * 359.9;
+                _hpAnim.To = VM.NPC.HPFactor * 359.9;
                 ExternalArc.BeginAnimation(Arc.EndAngleProperty, _hpAnim);
             }
             else
             {
-                _hpAnim.To = _dc.HPFactor;
+                _hpAnim.To = VM.NPC.HPFactor;
                 HpBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             }
         }
 
-        private void OnNpcListChanged()
+        private void RefreshAbnormalityTemplate()
         {
-            NPC(nameof(Compact));
-        }
-
-        private void Dc_DeleteEvent()
-        {
-            SettingsWindowViewModel.AbnormalityShapeChanged -= OnViewModelPropertyChanged;
-            BossGageWindowViewModel.Instance.NpcListChanged -= OnNpcListChanged;
-            if (_dc == null) return;
-            _dc.DeleteEvent -= Dc_DeleteEvent;
-            _dc.PropertyChanged -= OnDcPropertyChanged;
-
-            Dispatcher.Invoke(() =>
-            {
-                _t.Start();
-
-                try
-                {
-                    BossGageWindowViewModel.Instance.RemoveMe(_dc, DeleteDelay);
-                }
-                catch
-                {
-                    // ignored
-                }
-            });
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void NPC([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Abnormalities.ItemTemplateSelector = null;
+            Abnormalities.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; 
         }
     }
 }

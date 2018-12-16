@@ -110,7 +110,10 @@
     <Compile Include="Controls\Dashboard\VanguardInfoPopup.xaml.cs">
       <DependentUpon>VanguardInfoPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Npc\BossViewModel.cs" />
     <Compile Include="Controls\Npc\EnragePeriodItem.cs" />
+    <Compile Include="Controls\Npc\NpcViewModel.cs" />
+    <Compile Include="Controls\Npc\SmallMobViewModel.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Controls\Settings\CheckboxSetting.xaml.cs">
       <DependentUpon>CheckboxSetting.xaml</DependentUpon>

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:npc="clr-namespace:TCC.Controls.NPCs"
-             mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded" IsHitTestVisible="False" UseLayoutRounding="True"
+             mc:Ignorable="d" Loaded="OnLoaded" IsHitTestVisible="False" UseLayoutRounding="True"
              d:DataContext="{d:DesignData Npc}">
 
 
@@ -14,7 +14,7 @@
             <Style TargetType="FrameworkElement">
                 <Setter Property="Width" Value="250"></Setter>
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                    <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                                  Value="True">
                         <Setter Property="Width" Value="Auto"></Setter>
                     </DataTrigger>
@@ -64,7 +64,7 @@
                 <Style TargetType="FrameworkElement">
                     <Setter Property="Visibility" Value="Collapsed"></Setter>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                        <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                                      Value="True">
                             <Setter Property="Visibility" Value="Visible"></Setter>
                         </DataTrigger>
@@ -100,7 +100,7 @@
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                            <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                                          Value="True">
                                 <Setter Property="Visibility" Value="Collapsed"></Setter>
                             </DataTrigger>
@@ -140,7 +140,7 @@
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                            <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                                          Value="True">
                                 <Setter Property="Visibility" Value="Collapsed"></Setter>
                             </DataTrigger>
@@ -159,7 +159,8 @@
                                 MaxVal="{Binding MaxHP}"
                                 x:Name="HPgauge"/>-->
         </StackPanel>
-        <ItemsControl x:Name="Abnormalities" ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
+        <ItemsControl x:Name="Abnormalities" ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" 
+                      Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" 
@@ -174,7 +175,7 @@
             <ItemsControl.Style>
                 <Style TargetType="FrameworkElement">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                        <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                                      Value="True">
                             <Setter Property="Visibility" Value="Collapsed"></Setter>
                         </DataTrigger>
