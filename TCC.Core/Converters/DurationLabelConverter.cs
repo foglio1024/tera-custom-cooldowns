@@ -8,8 +8,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = 0;
-            if (value != null) val = System.Convert.ToInt32(value);
+            var val = 0U;
+            if (value != null) val = System.Convert.ToUInt32(value);
             var seconds = val / 1000;
             var minutes = seconds / 60;
             var hours = minutes / 60;
