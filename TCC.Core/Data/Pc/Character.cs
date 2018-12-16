@@ -243,6 +243,7 @@ namespace TCC.Data.Pc
                 if (_clearedGuardianQuests == value) return;
                 _clearedGuardianQuests = value;
                 N();
+                N(nameof(ClearedGuardianCompletion));
             }
 
         }
