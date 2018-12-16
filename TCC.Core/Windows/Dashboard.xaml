@@ -21,30 +21,6 @@
                  UseLayoutRounding="True"
                  d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
     <local:TccWindow.Resources>
-        <DataTemplate x:Key="DungeonCharDataTemplate" DataType="pc:Character">
-            <Grid HorizontalAlignment="Stretch" ShowGridLines="False" Background="Transparent" Height="28">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ItemsControl ItemsSource="{Binding VisibleDungeonsView}"
-                              ItemTemplate="{StaticResource DungeonCooldownDataTemplate}" Grid.Column="0"
-                              Foreground="#9fff" FontWeight="DemiBold" FontSize="15">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Rows="1" HorizontalAlignment="Stretch"></UniformGrid>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style TargetType="FrameworkElement">
-                            <Setter Property="Margin" Value="3 0"></Setter>
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-
-                </ItemsControl>
-            </Grid>
-        </DataTemplate>
         <Style TargetType="{x:Type TabControl}" x:Key="MainTabControlStyle">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -920,7 +896,9 @@
                                                 <Viewbox Height="20"
                                                          HorizontalAlignment="Right"
                                                          VerticalAlignment="Bottom"
-                                                         Margin="2 0">
+                                                         Margin="2 0"
+                                                         MaxWidth="36"
+                                                         >
                                                     <ctrl:OutlinedTextBlock FontWeight="DemiBold"
                                                                             Text="{Binding Amount}"
                                                                             Fill="#ddd"

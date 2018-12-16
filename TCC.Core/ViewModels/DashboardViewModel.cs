@@ -508,8 +508,11 @@ namespace TCC.ViewModels
             foreach (var slot in S_INVEN.Items.Keys)
             {
                 var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == S_INVEN.Items[slot].Id);
-                if (existing != null) existing.Amount = S_INVEN.Items[slot].Amount;
-
+                if (existing != null)
+                {
+                    existing.Amount += S_INVEN.Items[slot].Amount;
+                    continue;
+                }
                 CurrentCharacter.Inventory.Add(new InventoryItem(slot, S_INVEN.Items[slot].Id, S_INVEN.Items[slot].Amount));
             }
 
