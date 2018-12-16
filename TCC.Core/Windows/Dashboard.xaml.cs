@@ -27,6 +27,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             DataContext = new DashboardViewModel();
+            Showed += () => VM.UpdateBuffs();
             Hidden += () => SessionManager.DungeonDatabase.SaveCustomDefs();
         }
 
