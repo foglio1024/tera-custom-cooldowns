@@ -382,6 +382,7 @@ namespace TCC.Data.Pc
         private readonly uint _id;
 
         public Item Item => SessionManager.ItemsDatabase.Items[_id];
+        public uint Slot { get; }
         public int Amount
         {
             get => _amount;
@@ -393,10 +394,11 @@ namespace TCC.Data.Pc
             }
         }
 
-        public InventoryItem(uint id, int amount)
+        public InventoryItem(uint slot, uint id, int amount)
         {
             _id = id;
             Amount = amount;
+            Slot = slot;
         }
     }
 }

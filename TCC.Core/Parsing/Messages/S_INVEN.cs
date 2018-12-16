@@ -7,11 +7,22 @@ using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
 {
+
     public class S_INVEN : ParsedMessage
     {
+        public class ItemAmount
+        {
+            public uint Id { get; set; }
+            public int Amount { get; set; }
 
+            public ItemAmount(uint id, int amount)
+            {
+                Id = id;
+                Amount = amount;
+            }
+        }
         public static List<Tuple<uint, int, uint>> GearItems { get; private set; }
-        public static Dictionary<uint, int> Items { get; private set; }
+        public static Dictionary<uint, ItemAmount> Items { get; private set; }
         public bool More { get; }
         public bool First { get; }
         public bool IsOpen { get; }
@@ -27,7 +38,7 @@ namespace TCC.Parsing.Messages
             First = reader.ReadBoolean();
             if (First)
             {
-                Items = new Dictionary<uint, int>();
+                Items = new Dictionary<uint, ItemAmount>();
                 GearItems = new List<Tuple<uint, int, uint>>();
             }
             More = reader.ReadBoolean();
@@ -48,7 +59,7 @@ namespace TCC.Parsing.Messages
                     {
                         reader.Skip(4);
                         var amount = reader.ReadInt32();
-                        Items[itemId] = amount;
+                        Items[slot] = new ItemAmount(itemId, amount);
                         //switch (itemId)
                         //{
                         //    case 151643:

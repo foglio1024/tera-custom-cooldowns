@@ -276,7 +276,6 @@ namespace TCC.Parsing
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             GroupWindowViewModel.Instance.SetAggro(0);
-            WindowManager.Dashboard.VM.UpdateBuffs();
             SessionManager.CurrentPlayer.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();

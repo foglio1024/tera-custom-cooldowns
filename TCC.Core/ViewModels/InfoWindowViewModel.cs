@@ -528,6 +528,7 @@ namespace TCC.Data
         private const string ItemTag = "Item";
         private const string AmountTag = "amount";
         private const string ServerTag = "server";
+        private const string SlotTag = "slot";
 
 
         private readonly string _path = Path.Combine(App.BasePath, "resources/config/characters.xml");
@@ -618,6 +619,7 @@ namespace TCC.Data
             c.Inventory.ToList().ForEach(item =>
             {
                 xRet.Add(new XElement(ItemTag,
+                            new XAttribute(SlotTag, item.Slot),
                             new XAttribute(IdTag, item.Item.Id),
                             new XAttribute(AmountTag, item.Amount)));
             });
@@ -715,15 +717,17 @@ namespace TCC.Data
         {
             xChar.Descendants().Where(x => x.Name == ItemTag).ToList().ForEach(xItem =>
             {
+                var slot = 0U;
                 var id = 0U;
                 var amount = 0;
 
                 xItem.Attributes().ToList().ForEach(a =>
                 {
+                    if (a.Name == SlotTag) slot = uint.Parse(a.Value);
                     if (a.Name == IdTag) id = uint.Parse(a.Value);
                     if (a.Name == AmountTag) amount = int.Parse(a.Value);
                 });
-                ch.Inventory.Add(new InventoryItem(id,amount));
+                ch.Inventory.Add(new InventoryItem(slot,id,amount));
             });
         }
         public void Read(SynchronizedObservableCollection<Character> dest)
