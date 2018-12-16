@@ -270,7 +270,7 @@ namespace TCC.ViewModels
             SelectedCharacter = character;
             SelectedCharacterInventory = Utils.InitLiveView(o => o != null, SelectedCharacter.Inventory, new string[] { }, new SortDescription[]
             {
-                new SortDescription("Item.Id", ListSortDirection.Ascending), 
+                new SortDescription("Item.Id", ListSortDirection.Ascending),
             });
             WindowManager.Dashboard.ShowDetails();
             Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
@@ -465,55 +465,53 @@ namespace TCC.ViewModels
 
         public void UpdateBuffs()
         {
+            if (!SessionManager.Logged) return;
+            CurrentCharacter.Buffs.Clear();
             SessionManager.CurrentPlayer.Buffs.ToList().ForEach(b =>
             {
-                var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-                if (existing == null) CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-                else
-                {
-                    existing.Id = b.Abnormality.Id;
-                    existing.Duration = b.DurationLeft;
-                    existing.Stacks = b.Stacks;
-                }
+                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+                /*if (existing == null)*/
+                CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                //else
+                //{
+                //    existing.Id = b.Abnormality.Id;
+                //    existing.Duration = b.DurationLeft;
+                //    existing.Stacks = b.Stacks;
+                //}
             });
             SessionManager.CurrentPlayer.Debuffs.ToList().ForEach(b =>
             {
-                var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-                if (existing == null) CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-                else
-                {
-                    existing.Id = b.Abnormality.Id;
-                    existing.Duration = b.DurationLeft;
-                    existing.Stacks = b.Stacks;
-                }
+                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+                /*if (existing == null)*/
+                CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                //else
+                //{
+                //    existing.Id = b.Abnormality.Id;
+                //    existing.Duration = b.DurationLeft;
+                //    existing.Stacks = b.Stacks;
+                //}
             });
         }
 
         public void UpdateInventory()
         {
-            if (S_INVEN.Items.ContainsKey(151643)) SetElleonMarks(S_INVEN.Items[151643]);
-            if (S_INVEN.Items.ContainsKey(45474)) CurrentCharacter.DragonwingScales = S_INVEN.Items[45474];
-            if (S_INVEN.Items.ContainsKey(45482)) CurrentCharacter.PiecesOfDragonScroll = S_INVEN.Items[45482];
+            var em = S_INVEN.Items.Values.FirstOrDefault(x => x.Id == 151643);
+            var ds = S_INVEN.Items.Values.FirstOrDefault(x => x.Id == 45474);
+            var ps = S_INVEN.Items.Values.FirstOrDefault(x => x.Id == 45482);
 
-            foreach (var id in S_INVEN.Items.Keys)
+            if (em != null) SetElleonMarks(em.Amount);
+            if (ds != null) CurrentCharacter.DragonwingScales = ds.Amount;
+            if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
+
+            CurrentCharacter.Inventory.Clear();
+
+            foreach (var slot in S_INVEN.Items.Keys)
             {
-                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == id);
-                if (existing != null) existing.Amount = S_INVEN.Items[id];
-                else CurrentCharacter.Inventory.Add(new InventoryItem(id, S_INVEN.Items[id]));
+                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == S_INVEN.Items[slot].Id);
+                if (existing != null) existing.Amount = S_INVEN.Items[slot].Amount;
+
+                CurrentCharacter.Inventory.Add(new InventoryItem(slot, S_INVEN.Items[slot].Id, S_INVEN.Items[slot].Amount));
             }
-
-            var toRemove = new List<uint>();
-
-            foreach (var item in CurrentCharacter.Inventory)
-            {
-                if (!S_INVEN.Items.ContainsKey(item.Item.Id)) toRemove.Add(item.Item.Id);
-            }
-            
-            toRemove.ForEach(id =>
-            {
-                var target = CurrentCharacter.Inventory.FirstOrDefault(i => i.Item.Id == id);
-                if (target != null) CurrentCharacter.Inventory.Remove(target);
-            });
 
             N(nameof(SelectedCharacterInventory));
         }
