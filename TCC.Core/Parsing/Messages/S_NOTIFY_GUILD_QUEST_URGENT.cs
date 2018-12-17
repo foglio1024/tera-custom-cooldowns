@@ -33,7 +33,7 @@ namespace TCC.Parsing.Messages
                             var strId = keyVal[1];
                             return Convert.ToUInt32(strId);
                         }
-                        catch 
+                        catch
                         {
                             Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Failed to parse guild quest id. \nContent:\n{StringUtils.ByteArrayToString(Payload.Array)}\nQuest string:\n{Quest}");
                             WindowManager.FloatingButton.NotifyExtended("Warning", "A non-fatal error occured. More detailed info has been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
@@ -106,21 +106,20 @@ namespace TCC.Parsing.Messages
             //00000000 # quest
             //0000
 
-            reader.BaseStream.Position = 0;
-            var questOffset = reader.ReadInt16();
-            var t = reader.ReadInt32();
             try
             {
+                var questOffset = reader.ReadInt16();
+                var t = reader.ReadInt32();
                 Type = (GuildBamQuestType)t;
+                ZoneId = reader.ReadUInt16();
+                TemplateId = reader.ReadUInt32();
+                reader.BaseStream.Position = questOffset - 4;
+                Quest = reader.ReadTeraString();
             }
-            catch
+            catch(Exception e)
             {
-                Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Unexpected type value: {t}");
+                Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Error while reading packet: {e}");
             }
-            ZoneId = reader.ReadUInt16();
-            TemplateId = reader.ReadUInt32();
-            reader.BaseStream.Position = questOffset - 4;
-            Quest = reader.ReadTeraString();
         }
     }
 }
