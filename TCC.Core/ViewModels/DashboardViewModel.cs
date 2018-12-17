@@ -506,18 +506,25 @@ namespace TCC.ViewModels
             if (em != null) SetElleonMarks(em.Amount);
             if (ds != null) CurrentCharacter.DragonwingScales = ds.Amount;
             if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
-
-            CurrentCharacter.Inventory.Clear();
-
-            foreach (var keyVal in S_INVEN.Items)
+            try
             {
-                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
-                if (existing != null)
+
+                CurrentCharacter.Inventory.Clear();
+
+                foreach (var keyVal in S_INVEN.Items)
                 {
-                    existing.Amount += keyVal.Value.Amount;
-                    continue;
+                    var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
+                    if (existing != null)
+                    {
+                        existing.Amount += keyVal.Value.Amount;
+                        continue;
+                    }
+                    CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
                 }
-                CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
+            }
+            catch (Exception e)
+            {
+                Log.F($"Error while refreshing inventory: {e.ToString()}");
             }
 
             N(nameof(SelectedCharacterInventory));
