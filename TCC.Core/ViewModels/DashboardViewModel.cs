@@ -263,15 +263,19 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
             }
         }
+        private void GcPls(object sender, EventArgs ev) { }
 
         public void SelectCharacter(Character character)
         {
             //if(SelectedCharacter == character) return;
+            if(SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
+
             SelectedCharacter = character;
             SelectedCharacterInventory = Utils.InitLiveView(o => o != null, SelectedCharacter.Inventory, new string[] { }, new SortDescription[]
             {
                 new SortDescription("Item.Id", ListSortDirection.Ascending),
             });
+            ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
             WindowManager.Dashboard.ShowDetails();
             Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
         }

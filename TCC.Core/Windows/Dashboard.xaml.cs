@@ -60,25 +60,16 @@ namespace TCC.Windows
 
         private void FilterInventory(object sender, TextChangedEventArgs e)
         {
-            try
+            var view = ((ICollectionView)VM.SelectedCharacterInventory);
+            view.Filter = o =>
             {
-                var view = CollectionViewSource.GetDefaultView(VM.SelectedCharacterInventory);
-                view.Filter = o =>
-                {
-                    var item = ((InventoryItem)o).Item;
-                    var name = item.Name;
-                    return name.IndexOf(((TextBox)sender).Text,
-                                   StringComparison.InvariantCultureIgnoreCase) != -1;
-                };
-                view.Refresh();
-            }
-            catch (Exception ex)
-            {
-                Log.All("Error while filtering inventory");
-                Log.F($"Error while filtering inventory: {ex.ToString()}");
-            }
+                var item = ((InventoryItem)o).Item;
+                var name = item.Name;
+                return name.IndexOf(((TextBox)sender).Text,
+                               StringComparison.InvariantCultureIgnoreCase) != -1;
+            };
+            view.Refresh();
         }
-
         private void OnTabChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count != 0 && e.AddedItems[0] is TabItem) OnDetailsMouseButtonDown(null, null);
