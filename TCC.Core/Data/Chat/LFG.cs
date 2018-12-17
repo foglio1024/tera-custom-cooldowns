@@ -110,7 +110,7 @@ namespace TCC.Data.Chat
         private void UpdateDungeonName()
         {
             var a = Message.Split(' ');
-            if (a[0].Length <= 4)
+            if (a[0].Length <= 5)
             {
                 DungeonName = a[0];
             }
