@@ -200,7 +200,7 @@ namespace TCC.Proxy
             catch (Exception e)
             {
                 _retries--;
-                Debug.WriteLine(e.Message);
+                Log.F("Failed to connect to proxy: "+ e.Message);
                 Task.Delay(2000).ContinueWith(t =>
                 {
                     if (_retries <= 0)
