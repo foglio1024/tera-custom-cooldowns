@@ -168,12 +168,22 @@
                 </Border>
                 <Border Background="#3445" Opacity="1" x:Name="MainBorder"
                         CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1" 
-                        BorderBrush="#8555"
-                        Margin="0 25 0 0" Grid.Row="0" VerticalAlignment="Stretch">
+                        BorderBrush="#8555" Grid.Row="0" VerticalAlignment="Stretch">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Margin" Value="0 25 0 0"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WindowSettings.LfgOn}" Value="True">
+                                    <Setter Property="Margin" Value="0 50 0 0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".9" />
                     </Border.Effect>
                 </Border>
+
                 <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" 
                         Margin="0 0 0 0" HorizontalAlignment="Left" 
                        VerticalAlignment="Top" Grid.Row="1"
@@ -222,9 +232,7 @@
                 <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
                        HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
                        Visibility="{Binding Paused, Converter={StaticResource BoolToVisibleCollapsed}}" />
-                <Border Background="{StaticResource DefaultBackgroundBrush}" Width="Auto"
-                        Grid.Column="0" Grid.Row="0" Opacity="0"
-                        Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}" />
+
                 <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
                               ItemTemplate="{StaticResource LfgTemplate}"
                               Margin="2"
