@@ -303,7 +303,7 @@ namespace TCC.Data.Pc
             get => _serverName;
             set
             {
-                if(_serverName == value) return;
+                if (_serverName == value) return;
                 _serverName = value;
                 N();
             }
@@ -381,7 +381,9 @@ namespace TCC.Data.Pc
         private int _amount;
         private readonly uint _id;
 
-        public Item Item => SessionManager.ItemsDatabase.Items[_id];
+        public Item Item => SessionManager.ItemsDatabase.Items.ContainsKey(_id)
+                            ? SessionManager.ItemsDatabase.Items[_id]
+                            : new Item(0, "", 0, 0, 0, "");
         public uint Slot { get; }
         public int Amount
         {
