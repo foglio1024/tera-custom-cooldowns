@@ -11,7 +11,7 @@ namespace TCC.Data.Abnormalities
         public ulong Target { get; set; }
         public Abnormality Abnormality { get; set; }
 
-        private readonly Timer _timer;
+        private readonly DispatcherTimer _timer;
         private uint _duration;
         private int _stacks;
         private uint _durationLeft;
@@ -48,8 +48,12 @@ namespace TCC.Data.Abnormalities
             }
         }
         public bool Animated { get; private set; }
-
-        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated)
+        public AbnormalityDuration()
+        {
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _isTimerDisposed = false;
+        }
+        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this()
         {
             Dispatcher = disp;
             Animated = animated;
@@ -57,25 +61,24 @@ namespace TCC.Data.Abnormalities
             Duration = d;
             Stacks = s;
             Target = t;
-            _isTimerDisposed = false;
-
             DurationLeft = d;
+
             if (!Abnormality.Infinity)
             {
-                _timer = new Timer(1000);
-                _timer.Elapsed += DecreaseDuration;
+                _timer.Tick += DecreaseDuration;
                 _timer.Start();
             }
         }
 
-        private void DecreaseDuration(object sender, ElapsedEventArgs e)
+
+        private void DecreaseDuration(object sender, EventArgs e)
         {
             DurationLeft = DurationLeft - 1000;
-            if(DurationLeft < DurationLeft - 1000) _timer.Stop();
+            if (DurationLeft < DurationLeft - 1000) _timer.Stop();
         }
         public void Refresh()
         {
-            if(_timer == null || _isTimerDisposed) return;
+            if (_timer == null || _isTimerDisposed) return;
             _timer?.Stop();
             if (Duration != 0) _timer?.Start();
             Refreshed?.Invoke();
@@ -83,9 +86,8 @@ namespace TCC.Data.Abnormalities
         public void Dispose()
         {
             if (_timer == null) return;
-            _timer.Stop();
-            _timer.Elapsed -= DecreaseDuration;
-            _timer.Dispose();
+            _timer?.Stop();
+            _timer.Tick -= DecreaseDuration;
             _isTimerDisposed = true;
 
         }
