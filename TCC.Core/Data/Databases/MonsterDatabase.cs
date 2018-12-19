@@ -74,13 +74,7 @@ namespace TCC.Data.Databases
 
         public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
-            if (_zones.TryGetValue(zoneId, out var z))
-            {
-                if (z.Monsters.TryGetValue(templateId, out m))
-                {
-                    return true;
-                }
-            }
+            if (_zones.TryGetValue(zoneId, out var z) && z.Monsters.TryGetValue(templateId, out m)) return true;
             m = new Monster(0, "Unknown", 0, false);
             return false;
         }
@@ -91,10 +85,7 @@ namespace TCC.Data.Databases
         }
         public string GetName(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out var m))
-            {
-                return m.Name;
-            }
+            if (TryGetMonster(templateId, zoneId, out var m)) return m.Name;
             else return "Unknown";
         }
         public ulong GetMaxHP(uint templateId, uint zoneId)

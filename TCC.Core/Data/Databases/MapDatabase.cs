@@ -135,7 +135,10 @@ namespace TCC.Data.Databases
             }
             return ret;
         }
-
+        public string GetName(uint zoneId)
+        {
+            return Names.ContainsKey(zoneId) = Names[zoneId] : "Unknown";
+        }
         public string GetDungeonGuardName(uint dungeonId)
         {
             var dungWorld = Worlds[9999];
@@ -150,5 +153,6 @@ namespace TCC.Data.Databases
 
             return Names.ContainsKey(nameId) ? Names[nameId] : "";
         }
+
     }
 }
