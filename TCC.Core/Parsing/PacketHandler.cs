@@ -1044,17 +1044,17 @@ namespace TCC.Parsing
             });
         }
 
-        public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT obj)
+        public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
             SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            switch (obj.Type)
+            switch (p.Type)
             {
                 case S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce:
-                    var questName = obj.QuestId == 0 ? "Defeat Guild BAM" : SessionManager.GuildQuestDatabase.GuildQuests[obj.QuestId].Title;
-                    SessionManager.MonsterDatabase.TryGetMonster(obj.TemplateId, obj.ZoneId, out var npc);
-                    var zone = SessionManager.MapDatabase.Names[obj.ZoneId];
-                    var msg = $"@0\vquestName\v{questName}\vnpcName\v{npc.Name}\vzoneName\v{zone}";
+                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : SessionManager.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
+                    var zone = SessionManager.MapDatabase.GetName(p.ZoneId);
+                    var name = SessionManager.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
+                    var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
                     break;
                 default:
