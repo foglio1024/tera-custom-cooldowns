@@ -137,7 +137,7 @@ namespace TCC.Data.Databases
         }
         public string GetName(uint zoneId)
         {
-            return Names.ContainsKey(zoneId) = Names[zoneId] : "Unknown";
+            return Names.ContainsKey(zoneId) ? Names[zoneId] : "Unknown";
         }
         public string GetDungeonGuardName(uint dungeonId)
         {
