@@ -356,6 +356,8 @@ namespace TCC.Settings
             b.Add(SettingsWriter.BuildChatTabsXElement(Tabs));
             b.Add(new XAttribute(nameof(LfgOn), LfgOn));
             b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
+            b.Add(new XAttribute(nameof(FadeOut), FadeOut));
+            b.Add(new XAttribute(nameof(HideTimeout), HideTimeout));
             return b;
         }
     }
