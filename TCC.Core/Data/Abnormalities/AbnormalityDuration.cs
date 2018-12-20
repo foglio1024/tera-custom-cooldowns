@@ -11,7 +11,7 @@ namespace TCC.Data.Abnormalities
         public ulong Target { get; set; }
         public Abnormality Abnormality { get; set; }
 
-        private readonly DispatcherTimer _timer;
+        private readonly Timer _timer;
         private uint _duration;
         private int _stacks;
         private uint _durationLeft;
@@ -50,7 +50,7 @@ namespace TCC.Data.Abnormalities
         public bool Animated { get; private set; }
         public AbnormalityDuration()
         {
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _timer = new Timer { Interval = 1000 };
             _isTimerDisposed = false;
         }
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this()
@@ -65,7 +65,7 @@ namespace TCC.Data.Abnormalities
 
             if (!Abnormality.Infinity)
             {
-                _timer.Tick += DecreaseDuration;
+                _timer.Elapsed += DecreaseDuration;
                 _timer.Start();
             }
         }
@@ -78,16 +78,17 @@ namespace TCC.Data.Abnormalities
         }
         public void Refresh()
         {
-            if (_timer == null || _isTimerDisposed) return;
+            if (/*_timer == null || */_isTimerDisposed) return;
             _timer?.Stop();
             if (Duration != 0) _timer?.Start();
             Refreshed?.Invoke();
         }
         public void Dispose()
         {
-            if (_timer == null) return;
+            //if (_timer == null) return;
             _timer?.Stop();
-            _timer.Tick -= DecreaseDuration;
+            _timer.Elapsed -= DecreaseDuration;
+            _timer?.Dispose();
             _isTimerDisposed = true;
 
         }
