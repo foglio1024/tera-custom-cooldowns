@@ -1091,7 +1091,6 @@ namespace TCC.Parsing
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
             };
             TeraSniffer.Instance.Connected = true;
-            Proxy.Proxy.ConnectToProxy();
         }
         public static void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
@@ -1103,6 +1102,7 @@ namespace TCC.Parsing
             }
 
             BasicTeraData.Instance.Servers.Language = p.Language;
+            Proxy.Proxy.ConnectToProxy();
 
         }
     }
