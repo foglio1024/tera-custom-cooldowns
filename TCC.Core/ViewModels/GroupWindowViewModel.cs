@@ -235,7 +235,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private void SendDeathMessage(string name)
@@ -252,7 +252,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_BATTLE_PARTY_DIE";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
             if (Proxy.Proxy.IsConnected) Proxy.Proxy.ForceSystemMessage(msg, opcode);
         }
@@ -270,7 +270,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }
@@ -464,7 +464,7 @@ namespace TCC.ViewModels
             var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
-            u.Location = SessionManager.MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
+            u.Location = SessionManager.CurrentDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
         }
 
     }

@@ -82,9 +82,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
-            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
-            SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
             Thunderbolt = new Cooldown(tb, true) { CanFlash = true };
             Windsong = new DurationCooldownIndicator(Dispatcher)
             {

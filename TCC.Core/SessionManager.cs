@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Settings;
 using TCC.Tera.Data;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
+using TCC.Windows;
 using Player = TCC.Data.Pc.Player;
 
 namespace TCC
@@ -107,20 +109,7 @@ namespace TCC
         {
             return GuildMembersNames.ContainsKey(id) ? GuildMembersNames[id] : "Unknown player";
         }
-
-        public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
-        public static MonsterDatabase MonsterDatabase { get; private set; }
-        public static ItemsDatabase ItemsDatabase { get; private set; }
-        public static SkillsDatabase SkillsDatabase { get; private set; }
-        public static SystemMessagesDatabase SystemMessagesDatabase { get; private set; }
-        public static GuildQuestDatabase GuildQuestDatabase { get; private set; }
-        public static AchievementDatabase AchievementDatabase { get; private set; }
-        public static AchievementGradeDatabase AchievementGradeDatabase { get; private set; }
-        public static MapDatabase MapDatabase { get; private set; }
-        public static QuestDatabase QuestDatabase { get; private set; }
-        public static AbnormalityDatabase AbnormalityDatabase { get; private set; }
-        public static DungeonDatabase DungeonDatabase { get; private set; }
-        public static SocialDatabase SocialDatabase { get; private set; }
+        public static TccDatabase CurrentDatabase { get; set; }
         public static bool CivilUnrestZone { get; internal set; }
 
         //public static void SetCombatStatus(bool combat)
@@ -193,20 +182,21 @@ namespace TCC
 
         public static void InitDatabases(string lang)
         {
-            MonsterDatabase = new MonsterDatabase(lang);
-            AccountBenefitDatabase = new AccountBenefitDatabase(lang);
-            ItemsDatabase = new ItemsDatabase(lang);
-            SkillsDatabase = new SkillsDatabase(lang);
-            AbnormalityDatabase = new AbnormalityDatabase(lang);
-            DungeonDatabase = new DungeonDatabase(lang);
-            SocialDatabase = new SocialDatabase(lang);
-            SkillsDatabase = new SkillsDatabase(lang);
-            SystemMessagesDatabase = new SystemMessagesDatabase(lang);
-            GuildQuestDatabase = new GuildQuestDatabase(lang);
-            AchievementDatabase = new AchievementDatabase(lang);
-            AchievementGradeDatabase = new AchievementGradeDatabase(lang);
-            MapDatabase = new MapDatabase(lang);
-            QuestDatabase = new QuestDatabase(lang);
+            CurrentDatabase = new TccDatabase(lang);
+            if (!CurrentDatabase.Exists)
+            {
+                var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
+                if (res == System.Windows.MessageBoxResult.Yes)
+                {
+                    var sw = new SettingsWindow();
+                    sw.TabControl.SelectedIndex = 8;
+                    sw.ShowDialog();
+                    InitDatabases(SettingsHolder.LastLanguage);
+                }
+                else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
+                else if (res == System.Windows.MessageBoxResult.Cancel) App.CloseApp();
+            }
+            else CurrentDatabase.Load();
         }
 
         public static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)

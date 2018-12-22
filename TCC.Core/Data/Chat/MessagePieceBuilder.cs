@@ -13,7 +13,7 @@ namespace TCC.Data.Chat
         {
             var dictionary = ChatUtils.BuildParametersDictionary(msgText);
             var zoneId = uint.Parse(dictionary["zoneName"]);
-            var zoneName = SessionManager.MonsterDatabase.GetZoneName(zoneId);
+            var zoneName = SessionManager.CurrentDatabase.MonsterDatabase.GetZoneName(zoneId);
             var txt = zoneId.ToString();
             if (zoneName != null) txt = zoneName;
             var mp = new MessagePiece(txt)
@@ -33,7 +33,7 @@ namespace TCC.Data.Chat
 
             var txt = creatureId;
 
-            if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+            if (SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 txt = m.Name;
             }
@@ -65,7 +65,7 @@ namespace TCC.Data.Chat
                 rawLink.Append("@" + username);
             }
             var mp = new MessagePiece(id.ToString());
-            if (SessionManager.ItemsDatabase.Items.TryGetValue(id, out var i))
+            if (SessionManager.CurrentDatabase.ItemsDatabase.Items.TryGetValue(id, out var i))
             {
                 var txt = $"<{i.Name}>";
                 mp = new MessagePiece(txt)
@@ -87,7 +87,7 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "achievement");
             var achiName = id.ToString();
-            if (SessionManager.AchievementDatabase.Achievements.TryGetValue(id, out var g))
+            if (SessionManager.CurrentDatabase.AchievementDatabase.Achievements.TryGetValue(id, out var g))
             {
                 achiName = $"[{g}]";
             }
@@ -100,7 +100,7 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "quest");
             var txt = id.ToString();
-            if (SessionManager.QuestDatabase.Quests.TryGetValue(id, out var q))
+            if (SessionManager.CurrentDatabase.QuestDatabase.Quests.TryGetValue(id, out var q))
             {
                 txt = q;
             }
@@ -114,7 +114,7 @@ namespace TCC.Data.Chat
             var txt = id.ToString();
             var col = "fcb06f";
 
-            if (SessionManager.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
+            if (SessionManager.CurrentDatabase.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
             {
                 txt = g;
                 if (id == 104) col = "38bde5"; //TODO: use resources
@@ -130,7 +130,7 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "dungeon");
             var txt = id.ToString();
-            if (SessionManager.DungeonDatabase.Dungeons.TryGetValue(id, out var dung))
+            if (SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.TryGetValue(id, out var dung))
             {
                 txt = dung.Name;
             }
@@ -142,7 +142,7 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "accountBenefit");
             var txt = id.ToString();
-            if (SessionManager.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
+            if (SessionManager.CurrentDatabase.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
             {
                 txt = ab;
             }
@@ -154,7 +154,7 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "GuildQuest");
             var questName = id.ToString();
-            if (SessionManager.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
+            if (SessionManager.CurrentDatabase.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
             {
                 questName = q.Title;
             }
@@ -238,13 +238,13 @@ namespace TCC.Data.Chat
             var x = double.Parse(coords[0], CultureInfo.InvariantCulture);
             var y = double.Parse(coords[1], CultureInfo.InvariantCulture);
 
-            var world = SessionManager.MapDatabase.Worlds[worldId];
+            var world = SessionManager.CurrentDatabase.MapDatabase.Worlds[worldId];
             var guard = world.Guards[guardId];
             var section = guard.Sections[sectionId];
             var sb = new StringBuilder();
 
-            var guardName = guard.NameId != 0 ? SessionManager.MapDatabase.Names[guard.NameId] : "";
-            var sectionName = SessionManager.MapDatabase.Names[section.NameId];
+            var guardName = guard.NameId != 0 ? SessionManager.CurrentDatabase.RegionsDatabase.Names[guard.NameId] : "";
+            var sectionName = SessionManager.CurrentDatabase.RegionsDatabase.Names[section.NameId];
 
             sb.Append("<");
             sb.Append(guardName);

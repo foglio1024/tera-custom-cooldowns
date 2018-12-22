@@ -36,11 +36,11 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
-            SessionManager.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
-            SessionManager.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
-            SessionManager.SkillsDatabase.TryGetSkill(360400, Class.Sorcerer, out var iceberg);
-            SessionManager.SkillsDatabase.TryGetSkill(360300, Class.Sorcerer, out var arcaneStorm);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(360400, Class.Sorcerer, out var iceberg);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(360300, Class.Sorcerer, out var arcaneStorm);
 
             PrimeFlame = primeFlame; //fire ice
             Iceberg = iceberg; //ice arcane

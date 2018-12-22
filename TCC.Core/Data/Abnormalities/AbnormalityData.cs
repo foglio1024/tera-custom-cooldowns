@@ -12,6 +12,6 @@ namespace TCC.Data.Abnormalities
         public int Stacks { get; set; }
         public ulong Duration { get; set; }
 
-        public Abnormality Abnormality => SessionManager.AbnormalityDatabase.Abnormalities[Id];
+        public Abnormality Abnormality => SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[Id];
     }
 }

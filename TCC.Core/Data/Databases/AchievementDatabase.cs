@@ -3,13 +3,22 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public class AchievementDatabase
+    public class AchievementDatabase : DatabaseBase
     {
-        public Dictionary<uint, string> Achievements { get; }
-        public AchievementDatabase(string lang)
+        public Dictionary<uint, string> Achievements;
+        public AchievementDatabase(string lang) : base(lang)
         {
-            var f = File.OpenText($"resources/data/achievements/achievements-{lang}.tsv");
             Achievements = new Dictionary<uint, string>();
+        }
+
+        protected override string FolderName => "achievements";
+
+        protected override string Extension => "tsv";
+
+        public override void Load()
+        {
+            Achievements.Clear();
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();

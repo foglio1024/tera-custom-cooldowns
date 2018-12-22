@@ -37,7 +37,7 @@ namespace TCC.Data
         public ArcherFocusTracker()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
+            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
             {
                 Icon = ab.IconName;
             }

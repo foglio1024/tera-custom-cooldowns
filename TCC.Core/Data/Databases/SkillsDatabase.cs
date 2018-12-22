@@ -6,83 +6,16 @@ using TCC.Data.Skills;
 
 namespace TCC.Data.Databases
 {
-    public class SkillsDatabase
+    public class SkillsDatabase : DatabaseBase
     {
         private Dictionary<Class, Dictionary<uint, Skill>> Skills { get; }
-        //private List<SkillConnection> SkillConnections { get; }
 
-        //private class SkillConnection
-        //{
-        //    public Class Class;
-        //    public int Id;
-        //    public List<int> ConnectedSkills;
+        protected override string FolderName => "skills";
+        protected override string Extension => "tsv";
 
-        //    public SkillConnection(int id, Class c)
-        //    {
-        //        ConnectedSkills = new List<int>();
-        //        Id = id;
-        //        Class = c;
-        //    }
-        //    public void AddConnectedSkill(int id)
-        //    {
-        //        ConnectedSkills.Add(id);
-        //    }
-        //}
-
-        public SkillsDatabase(string lang)
+        public SkillsDatabase(string lang) : base(lang)
         {
-            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/skills/skills-{lang}.tsv"));
-
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
-            for (var i = 0; i <= 12; i++)
-            {
-                Skills.Add((Class)i, new Dictionary<uint, Skill>());
-            }
-            Skills.Add(Class.Common, new Dictionary<uint, Skill>());
-            Skills.Add(Class.None, new Dictionary<uint, Skill>());
-
-
-            while (true)
-            {
-                var line = f.ReadLine();
-                if (line == null) break;
-                var s = line.Split('\t');
-                var id = Convert.ToUInt32(s[0]);
-                /*if (!*/
-                Enum.TryParse(s[3], out Class c);/*)*/
-                //{
-                    //if (cString == "Mystic") cString = "Mystic";
-                    //if (cString == "Reaper") cString = "Reaper";
-                    //if (cString == "Brawler") cString = "Brawler";
-                    //if (cString == "Ninja") cString = "Ninja";
-                    //if (cString == "Gunner") cString = "Gunner";
-                    //if (cString == "Valkyrie") cString = "Valkyrie";
-                //}
-                //Enum.TryParse(cString, out c);
-                var name = s[4];
-                //var tooltip = s[3];
-                var detail = s[6];
-                var iconName = s[7];
-
-                var sk = new Skill(id, c, name, "")
-                {
-                    IconName = iconName,
-                    Detail = detail.ToLowerInvariant()
-                };
-                if (Skills[c].ContainsKey(id)) continue;
-                Skills[c].Add(id, sk);
-
-
-                //var skc = new SkillConnection((int)id, c);
-                //for (int i = 5; i < s.Count(); i++)
-                //{
-                //    skc.AddConnectedSkill(Convert.ToInt32(s[i]));
-                //}
-                //if(skc.ConnectedSkills.Count > 0)
-                //{
-                //    SkillConnections.Add(skc);
-                //}
-            }
 
         }
 
@@ -163,7 +96,7 @@ namespace TCC.Data.Databases
             {
                 var list = new SynchronizedObservableCollection<Skill>();
                 var c = SessionManager.CurrentPlayer.Class;
-                var skillsForClass = SessionManager.SkillsDatabase.Skills[c];
+                var skillsForClass = SessionManager.CurrentDatabase.SkillsDatabase.Skills[c];
                 foreach (var skill in skillsForClass.Values)
                 {
                     if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))
@@ -175,6 +108,8 @@ namespace TCC.Data.Databases
             }
 
         }
+
+
 
         public static bool IsIgnoredSkill(Skill skill)
         {
@@ -297,6 +232,40 @@ namespace TCC.Data.Databases
             sk = Skills[c].Values.ToList().FirstOrDefault(x => x.IconName == iconName);
             if (sk != null) result = true;
             return result;
+        }
+
+        public override void Load()
+        {
+            Skills.Clear();
+            var f = File.OpenText(FullPath);
+            for (var i = 0; i <= 12; i++)
+            {
+                Skills.Add((Class)i, new Dictionary<uint, Skill>());
+            }
+            Skills.Add(Class.Common, new Dictionary<uint, Skill>());
+            Skills.Add(Class.None, new Dictionary<uint, Skill>());
+
+
+            while (true)
+            {
+                var line = f.ReadLine();
+                if (line == null) break;
+                var s = line.Split('\t');
+                var id = Convert.ToUInt32(s[0]);
+                Enum.TryParse(s[3], out Class c);
+                var name = s[4];
+                var detail = s[6];
+                var iconName = s[7];
+
+                var sk = new Skill(id, c, name, "")
+                {
+                    IconName = iconName,
+                    Detail = detail.ToLowerInvariant()
+                };
+                if (Skills[c].ContainsKey(id)) continue;
+                Skills[c].Add(id, sk);
+            }
+
         }
     }
 }

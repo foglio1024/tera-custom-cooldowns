@@ -3,13 +3,22 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public class QuestDatabase
+    public class QuestDatabase : DatabaseBase
     {
         public Dictionary<uint, string> Quests { get; }
-        public QuestDatabase(string lang)
+
+        protected override string FolderName => "quests";
+        protected override string Extension => "tsv";
+
+        public QuestDatabase(string lang) : base(lang)
         {
-            var f = File.OpenText($"resources/data/quests/quests-{lang}.tsv");
             Quests = new Dictionary<uint, string>();
+        }
+
+        public override void Load()
+        {
+            Quests.Clear();
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();
@@ -21,6 +30,5 @@ namespace TCC.Data.Databases
                 Quests.Add(id, name);
             }
         }
-
     }
 }

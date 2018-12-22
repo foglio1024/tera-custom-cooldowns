@@ -22,7 +22,7 @@ namespace TCC.ClassSpecific
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
             if (msg.AbnormalityId != HurricaneId || !msg.CasterId.IsMe()) return;
-            SessionManager.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
             SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
         }
 

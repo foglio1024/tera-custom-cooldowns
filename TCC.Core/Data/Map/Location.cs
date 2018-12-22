@@ -10,7 +10,7 @@ namespace TCC.Data.Map
         public uint Guard { get; }
         public uint Section { get; }
 
-        public string SectionName => SessionManager.MapDatabase.GetName(Guard, Section);
+        public string SectionName => SessionManager.CurrentDatabase.GetSectionName(Guard, Section);
 
         public Point Position { get; }
 

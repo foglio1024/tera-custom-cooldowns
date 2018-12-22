@@ -40,20 +40,20 @@ namespace TCC.ViewModels
         {
             // Growing Fury
             GrowingFury = new DurationCooldownIndicator(Dispatcher);
-            SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
             GrowingFury.Cooldown = new Cooldown(gf,  true);
             GrowingFury.Buff = new Cooldown(gf, false);
 
             // Counter 
-            SessionManager.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
             Counter = new Cooldown(c, false);
 
             // Rhythmic Blows
-            SessionManager.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
             RhythmicBlows = new Cooldown(rb, true) { CanFlash = true };
 
             // Infuriate
-            SessionManager.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
             Infuriate = new Cooldown(infu, true) { CanFlash = true };
         }
 

@@ -6,6 +6,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing.Messages;
+using TCC.Settings;
 using TCC.Sniffing;
 using TCC.Tera.Data;
 using TCC.TeraCommon.Game.Messages.Client;
@@ -51,7 +52,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
+                    if (SettingsHolder.ClassWindowSettings.Enabled)
                         ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
                     break;
                 case Class.Sorcerer:
@@ -158,14 +159,14 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
+            if (SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
-            if (!Settings.SettingsHolder.StatSent) App.SendUsageStat();
-            Settings.SettingsHolder.LastRegion = SessionManager.Language;
-            TimeManager.Instance.SetServerTimeZone(Settings.SettingsHolder.LastRegion);
+            if (!SettingsHolder.StatSent) App.SendUsageStat();
+            SettingsHolder.LastLanguage = SessionManager.Language;
+            TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
             TimeManager.Instance.SetGuildBamTime(false);
-            SessionManager.InitDatabases(Settings.SettingsHolder.LastRegion);
+            SessionManager.InitDatabases(SettingsHolder.LastLanguage);
             SkillManager.Clear();
             CooldownWindowViewModel.Instance.LoadSkills(p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
@@ -193,7 +194,7 @@ namespace TCC.Parsing
 
         internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
         {
-            if (!Settings.SettingsHolder.LfgEnabled) return;
+            if (!SettingsHolder.LfgEnabled) return;
             if (WindowManager.LfgListWindow == null) return;
             if (WindowManager.LfgListWindow.VM == null) return;
             if (!x.IsLast) return;
@@ -280,7 +281,7 @@ namespace TCC.Parsing
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
             SessionManager.CivilUnrestZone = x.Zone == 152;
-            if (Settings.SettingsHolder.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
+            if (SettingsHolder.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
         }
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
@@ -424,14 +425,14 @@ namespace TCC.Parsing
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = SessionManager.MapDatabase.Names[SessionManager.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+                areaName = SessionManager.CurrentDatabase.RegionsDatabase.Names[SessionManager.CurrentDatabase.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
             }
             catch (Exception)
             {
                 // ignored
             }
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
 
             SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
         }
@@ -563,7 +564,7 @@ namespace TCC.Parsing
         {
             var opcodeName = "SMT_FRIEND_IS_CONNECTED";
             if (!x.Online) return;
-            if (SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+            if (SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
             {
                 SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
             }
@@ -585,7 +586,7 @@ namespace TCC.Parsing
                 var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+                if (SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
                 {
                     SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
                 }
@@ -600,8 +601,8 @@ namespace TCC.Parsing
 
         internal static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            if (!SessionManager.AchievementDatabase.Achievements.ContainsKey(x.AchievementId)) return;
-            if (!SessionManager.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
+            if (!SessionManager.CurrentDatabase.AchievementDatabase.Achievements.ContainsKey(x.AchievementId)) return;
+            if (!SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
 
             var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -623,7 +624,7 @@ namespace TCC.Parsing
 
         internal static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
-            SessionManager.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
+            SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
             WindowManager.FloatingButton.TooltipInfo.Name = x.Name;
             WindowManager.FloatingButton.TooltipInfo.Info = m.Name;
             WindowManager.FloatingButton.TooltipInfo.Level = (int)x.Level;
@@ -656,7 +657,7 @@ namespace TCC.Parsing
                 var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+                if (SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
                 {
                     var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
                     ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -684,7 +685,7 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
+            if (!SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -692,7 +693,7 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
+            if (!SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
@@ -700,7 +701,7 @@ namespace TCC.Parsing
             if (!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
             if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
+            if (!SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
@@ -719,7 +720,7 @@ namespace TCC.Parsing
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.Proxy.IsConnected && Settings.SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
+            if (Proxy.Proxy.IsConnected && SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
             {
                 Proxy.Proxy.RequestCandidates();
                 if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
@@ -754,13 +755,13 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (Settings.SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
         public static void HandleKicked(S_BAN_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-            if (Settings.SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
 
@@ -779,7 +780,7 @@ namespace TCC.Parsing
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
         {
             ChatWindowManager.Instance.UpdateLfgMembers(packet);
-            if (!Settings.SettingsHolder.LfgEnabled) return;
+            if (!SettingsHolder.LfgEnabled) return;
 
             var lfg = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
             if (lfg == null) return;
@@ -990,7 +991,7 @@ namespace TCC.Parsing
                     foreach (var item in page.Items)
                     {
                         if (pg.Items.All(x => x.Id != item.Id)) continue;
-                        var name = SessionManager.ItemsDatabase.GetItemName((uint)item.Id);
+                        var name = SessionManager.CurrentDatabase.ItemsDatabase.GetItemName((uint)item.Id);
                         Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index + 1}) in page {i + 1}");
                     }
                 }
@@ -1000,7 +1001,7 @@ namespace TCC.Parsing
         public static void HandleGuardianOnEnter(S_FIELD_EVENT_ON_ENTER obj)
         {
             const string opcode = "SMT_FIELD_EVENT_ENTER";
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
         }
@@ -1008,7 +1009,7 @@ namespace TCC.Parsing
         public static void HandleGuardianOnLeave(S_FIELD_EVENT_ON_LEAVE obj)
         {
             const string opcode = "SMT_FIELD_EVENT_LEAVE";
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
         }
 
@@ -1047,13 +1048,13 @@ namespace TCC.Parsing
         public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             switch (p.Type)
             {
                 case S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce:
-                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : SessionManager.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
-                    var zone = SessionManager.MapDatabase.GetName(p.ZoneId);
-                    var name = SessionManager.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
+                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : SessionManager.CurrentDatabase.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
+                    var zone = SessionManager.CurrentDatabase.RegionsDatabase.GetZoneName(p.ZoneId);
+                    var name = SessionManager.CurrentDatabase.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
                     var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
                     break;
@@ -1066,7 +1067,7 @@ namespace TCC.Parsing
         public static void HandleChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
         {
             const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
-            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{SessionManager.GetGuildMemberName(obj.PlayerId)}", m, opcode);
         }
 

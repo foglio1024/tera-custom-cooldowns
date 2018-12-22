@@ -3,13 +3,23 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public class GuildQuestDatabase
+    public class GuildQuestDatabase : DatabaseBase
     {
-        public Dictionary<uint, GuildQuest> GuildQuests { get; }
-        public GuildQuestDatabase(string lang)
+        public Dictionary<uint, GuildQuest> GuildQuests;
+
+        protected override string FolderName => "guild_quests";
+
+        protected override string Extension => "tsv";
+
+        public GuildQuestDatabase(string lang) : base(lang)
         {
             GuildQuests = new Dictionary<uint, GuildQuest>();
-            var f = File.OpenText(Path.Combine(App.DataPath, $"guild_quests/guild_quests-{lang}.tsv"));
+        }
+
+        public override void Load()
+        {
+            GuildQuests.Clear();
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();
@@ -22,20 +32,5 @@ namespace TCC.Data.Databases
             }
         }
     }
-    public class GuildQuest
-    {
-        public uint Id { get;  }
-        public string Title { get;  }
-/*
-        public uint ZoneId { get; }
-*/
-
-        public GuildQuest(uint id, string s)
-        {
-            Id = id;
-            Title = s;
-            //ZoneId = zId;
-        }
-    }
-
 }
+

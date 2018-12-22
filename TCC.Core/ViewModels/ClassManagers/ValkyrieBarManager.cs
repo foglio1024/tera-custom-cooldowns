@@ -17,8 +17,8 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             //Ragnarok
-            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
-            SessionManager.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
             Ragnarok = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(rag, true) { CanFlash = true },

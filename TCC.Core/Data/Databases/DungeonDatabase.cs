@@ -6,25 +6,25 @@ using System.Text;
 
 namespace TCC.Data.Databases
 {
-    public class DungeonDatabase
+    public class DungeonDatabase : DatabaseBase
     {
         private readonly string CustomDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
         private readonly string DefaultDefsPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
         private readonly string ImagesPath = Path.Combine(App.DataPath, "section_images.tsv");
+
         public readonly Dictionary<uint, Dungeon> Dungeons;
 
-        public DungeonDatabase(string lang)
+        protected override string FolderName => "dungeons";
+        protected override string Extension => "tsv";
+
+        public DungeonDatabase(string lang) :base(lang)
         {
             Dungeons = new Dictionary<uint, Dungeon>();
-            ParseDungeons(lang);
-            ParseDungeonDefs();
-            ParseDungeonIcons();
         }
 
-        private void ParseDungeons(string lang)
+        private void ParseDungeons()
         {
-            if (string.IsNullOrEmpty(lang)) lang = "EU-EN";
-            var f = File.OpenText(Path.Combine(App.DataPath, $"dungeons/dungeons-{lang}.tsv"));
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();
@@ -37,8 +37,7 @@ namespace TCC.Data.Databases
         }
         private void ParseDungeonDefs()
         {
-            if (!File.Exists(CustomDefsPath))
-                File.Copy(DefaultDefsPath, CustomDefsPath);
+            if (!File.Exists(CustomDefsPath)) File.Copy(DefaultDefsPath, CustomDefsPath);
             var def = File.OpenText(CustomDefsPath);
             while (true)
             {
@@ -115,6 +114,14 @@ namespace TCC.Data.Databases
                 sb.Append("\n");
             });
             File.WriteAllText(CustomDefsPath, sb.ToString());
+        }
+
+        public override void Load()
+        {
+            Dungeons.Clear();
+            ParseDungeons();
+            ParseDungeonDefs();
+            ParseDungeonIcons();
         }
     }
 }

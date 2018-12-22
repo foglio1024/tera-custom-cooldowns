@@ -321,7 +321,7 @@ namespace TCC.Data.Pc
             VanguardWeekliesDone = 0;
             Laurel = Laurel.None;
             MaxGuardianQuests = SessionManager.MaxGuardianQuests;
-            foreach (var dg in SessionManager.DungeonDatabase.Dungeons.Values)
+            foreach (var dg in SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values)
             {
                 Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
             }
@@ -381,8 +381,8 @@ namespace TCC.Data.Pc
         private int _amount;
         private readonly uint _id;
 
-        public Item Item => SessionManager.ItemsDatabase.Items.ContainsKey(_id)
-                            ? SessionManager.ItemsDatabase.Items[_id]
+        public Item Item => SessionManager.CurrentDatabase.ItemsDatabase.Items.ContainsKey(_id)
+                            ? SessionManager.CurrentDatabase.ItemsDatabase.Items[_id]
                             : new Item(0, "", 0, 0, 0, "");
         public uint Slot { get; }
         public int Amount

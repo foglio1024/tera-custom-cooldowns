@@ -28,14 +28,14 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
-            SessionManager.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
             EnergyStars = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(es, false),
                 Cooldown = new Cooldown(es, true) {CanFlash = true}
             };
 
-            SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
             Grace = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(gr, false),
@@ -46,7 +46,7 @@ namespace TCC.ViewModels
             Grace.Buff.Ended += OnGraceBuffEnded;
 
             // Edict Of Judgment
-            SessionManager.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
             EdictOfJudgment = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(ed, false),
@@ -57,14 +57,14 @@ namespace TCC.ViewModels
             EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
 
             // Divine Charge
-            SessionManager.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
             DivineCharge = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(dc, true) {CanFlash = true}
             };
 
             // Tripple Nenesis
-            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
             TripleNemesis = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(tn, false) {CanFlash = true},

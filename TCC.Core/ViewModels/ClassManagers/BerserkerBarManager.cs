@@ -53,9 +53,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
-            SessionManager.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
-            SessionManager.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
             FieryRage = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(fr,  true) { CanFlash = true },
@@ -72,10 +72,10 @@ namespace TCC.ViewModels
                 Buff = new Cooldown(ul, false)
             };
 
-            SessionManager.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
-            SessionManager.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
-            SessionManager.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
-            SessionManager.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
 
             Dexter = new Cooldown(dx, false);
             Sinister = new Cooldown(sx, false);

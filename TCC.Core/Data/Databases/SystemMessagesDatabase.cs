@@ -4,14 +4,22 @@ using TCC.Data.Chat;
 
 namespace TCC.Data.Databases
 {
-    public class SystemMessagesDatabase
+    public class SystemMessagesDatabase : DatabaseBase
     {
         public Dictionary<string, SystemMessage> Messages { get; }
 
-        public SystemMessagesDatabase(string lang)
+        protected override string FolderName => "sys_msg";
+        protected override string Extension => "tsv";
+
+        public SystemMessagesDatabase(string lang) : base(lang)
         {
-            var f = File.OpenText($"resources/data/sys_msg/sys_msg-{lang}.tsv");
             Messages = new Dictionary<string, SystemMessage>();
+        }
+
+        public override void Load()
+        {
+            Messages.Clear();
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();

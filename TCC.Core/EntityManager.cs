@@ -16,7 +16,7 @@ namespace TCC
             CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
             {
-                SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
+                SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
                 if (monst.IsBoss)
                 {
                     var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
@@ -25,7 +25,7 @@ namespace TCC
             }
             if (!Filter(zoneId, templateId)) return;
 
-            if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+            if (SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 NearbyNPC[entityId] = m.Name;
                 FlyingGuardianDataProvider.InvokeProgressChanged();
@@ -167,7 +167,7 @@ namespace TCC
 
         public static bool IsEntitySpawned(uint zoneId, uint templateId)
         {
-            var name = SessionManager.MonsterDatabase.GetName(templateId, zoneId);
+            var name = SessionManager.CurrentDatabase.MonsterDatabase.GetName(templateId, zoneId);
             return name != "Unknown" && NearbyNPC.ContainsValue(name);
         }
 

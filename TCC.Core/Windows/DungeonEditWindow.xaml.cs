@@ -23,7 +23,7 @@ namespace TCC.Windows
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            SessionManager.DungeonDatabase.SaveCustomDefs();
+            SessionManager.CurrentDatabase.DungeonDatabase.SaveCustomDefs();
             Close();
 
         }

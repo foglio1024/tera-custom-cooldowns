@@ -4,13 +4,22 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public class SocialDatabase
+    public class SocialDatabase : DatabaseBase
     {
         public Dictionary<uint, string> Social { get; }
-        public SocialDatabase(string lang)
+
+        protected override string FolderName => "social";
+        protected override string Extension => "tsv";
+
+        public SocialDatabase(string lang) : base(lang)
         {
-            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/social/social-{lang}.tsv"));
             Social = new Dictionary<uint, string>();
+        }
+
+        public override void Load()
+        {
+            Social.Clear();
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();

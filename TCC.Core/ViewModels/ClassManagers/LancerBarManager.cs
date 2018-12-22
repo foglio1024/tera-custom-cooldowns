@@ -40,9 +40,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
-            SessionManager.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
-            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
+            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
             GuardianShout = new DurationCooldownIndicator(Dispatcher)
             {

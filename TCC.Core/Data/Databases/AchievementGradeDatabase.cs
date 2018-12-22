@@ -3,13 +3,23 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public class AchievementGradeDatabase
+    public class AchievementGradeDatabase : DatabaseBase
     {
         public Dictionary<uint, string> Grades { get; }
-        public AchievementGradeDatabase(string lang)
+
+        protected override string FolderName => "achi_grade";
+
+        protected override string Extension => "tsv";
+
+        public AchievementGradeDatabase(string lang) : base(lang)
         {
-            var f = File.OpenText($"resources/data/achi_grade/achi_grade-{lang}.tsv");
             Grades = new Dictionary<uint, string>();
+        }
+
+        public override void Load()
+        {
+            Grades.Clear();
+            var f = File.OpenText(FullPath);
             while (true)
             {
                 var line = f.ReadLine();
@@ -21,6 +31,5 @@ namespace TCC.Data.Databases
                 Grades.Add(id, name);
             }
         }
-
     }
 }

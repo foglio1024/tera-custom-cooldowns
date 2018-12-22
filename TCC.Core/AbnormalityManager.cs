@@ -58,7 +58,7 @@ namespace TCC
         }
         public static void BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
-            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             if (duration == int.MaxValue) ab.Infinity = true;
             if (target.IsMe())
@@ -79,7 +79,7 @@ namespace TCC
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
-            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (target.IsMe()) EndPlayerAbnormality(ab);
             else BossGageWindowViewModel.Instance.EndNpcAbnormality(target, ab);
 
@@ -174,14 +174,14 @@ namespace TCC
 
         public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
         }
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (!SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);
         }

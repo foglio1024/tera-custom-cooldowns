@@ -149,6 +149,10 @@
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Data\Abnormalities\AbnormalityData.cs" />
+    <Compile Include="Data\Databases\ItemExpDataDatabase.cs" />
+    <Compile Include="Data\Databases\RegionsDatabase.cs" />
+    <Compile Include="Data\GuildQuest.cs" />
+    <Compile Include="Data\Databases\TccDatabase.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
@@ -158,6 +162,7 @@
     <Compile Include="ResourceDictionaries\DataTemplates.xaml.cs">
       <DependentUpon>DataTemplates.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CharactersXmlParser.cs" />
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
