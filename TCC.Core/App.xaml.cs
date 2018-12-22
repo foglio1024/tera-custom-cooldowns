@@ -28,7 +28,7 @@ namespace TCC
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
-        public static string BasePath { get; }= Path.GetDirectoryName(typeof(App).Assembly.Location);
+        public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
         public static string DataPath { get; } = Path.Combine(BasePath, "resources", "data");
         public static bool Loading { get; private set; }
         public static Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
@@ -62,36 +62,33 @@ namespace TCC
             if (SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsHolder.LastRegion) ? "EU-EN" : SettingsHolder.LastRegion == "EU" ? "EU-EN" : SettingsHolder.LastRegion);
+            SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsHolder.LastLanguage) ? "EU-EN" : SettingsHolder.LastLanguage == "EU" ? "EU-EN" : SettingsHolder.LastLanguage);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
-            //debug
-            //WindowManager.Dashboard.ShowWindow();
-            //
+
             SplashScreen.SetText("Initializing packet processor...");
             PacketAnalyzer.Init();
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
             SplashScreen.SetText("Starting");
 
-            TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastRegion);
+            TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
 
-            //if (Settings.Settings.LastRegion == "NA" || Settings.Settings.LastRegion == "")
-            //    WindowManager.FloatingButton.NotifyExtended("So long, and thanks for all the fish", ThankYou_mEME, NotificationType.Error, 15000);
-#pragma warning disable 0162
-            if (Debug) DebugStuff();
-#pragma warning restore 0162
+            if (Debug)
+            {
+                DebugStuff();
+            }
             Loading = false;
-           // new DebugWindow().Show();
-            
+
         }
 
         private static void DebugStuff()
         {
+            new DebugWindow().Show();
             var i = 0;
             while (i < 50)
             {
@@ -278,7 +275,7 @@ namespace TCC
             sb.AppendLine($"{ex.StackTrace}");
             sb.AppendLine($"Source: {ex.Source}");
             sb.AppendLine($"Data: {ex.Data}");
-            if(ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
+            if (ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
             sb.AppendLine($"TargetSite: {ex.TargetSite}");
             File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/crash.log", sb.ToString());
             try
