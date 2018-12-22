@@ -213,7 +213,7 @@ namespace TCC
 
         public static void Dispose()
         {
-            FocusTimer.Stop();
+            FocusTimer?.Stop();
         }
     }
 }
