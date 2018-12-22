@@ -48,7 +48,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool ShowElleonMarks => Settings.SettingsHolder.LastRegion.Contains("EU");
+        public bool ShowElleonMarks => Settings.SettingsHolder.LastLanguage.Contains("EU");
 
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
@@ -150,7 +150,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    SessionManager.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                    SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
