@@ -31,7 +31,7 @@
                             </Grid.Background>
                             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="InnerGrid">
                                 <Rectangle x:Name="ExpandSelector"
-                                           Fill="{StaticResource DefensiveStanceBrush}" 
+                                           Fill="{StaticResource GreenBrush}" 
                                            Width="3" 
                                            HorizontalAlignment="Left"
                                            RenderTransformOrigin=".5 .5"
@@ -213,7 +213,7 @@
         </Style>
 
         <Style TargetType="settings:CheckboxSetting" >
-            <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}"></Setter>
+            <Setter Property="CheckBoxColor" Value="{StaticResource GreenBrush}"></Setter>
         </Style>
 
         <Style x:Key="EnabledSettingStyle" TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">

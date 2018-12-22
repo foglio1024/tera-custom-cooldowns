@@ -16,11 +16,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
                         <Grid>
-                            <Ellipse Opacity="0" Fill="{StaticResource DefensiveStanceBrush}" 
+                            <Ellipse Opacity="0" Fill="{StaticResource GreenBrush}" 
                                      Margin="-5" Name="Ext" />
                             <Ellipse  Name="Ellipse" 
                                      Cursor="Hand"
-                                      Fill="{StaticResource DefensiveStanceBrush}"  >
+                                      Fill="{StaticResource GreenBrush}"  >
                                 <Ellipse.Effect>
                                     <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity=".5"></DropShadowEffect>
                                 </Ellipse.Effect>
@@ -37,11 +37,12 @@
                                                  Duration="0:0:0.2"/>
                                             <ColorAnimation Storyboard.TargetName="Ellipse"
                                                  Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
-                                                 To="{StaticResource DefensiveStanceColorLight}"
+                                                 To="{StaticResource LightGreenColor}"
                                                  Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
+
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
@@ -51,7 +52,7 @@
                                                              Duration="0:0:0.2"/>
                                             <ColorAnimation Storyboard.TargetName="Ellipse"
                                                             Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
-                                                            To="{StaticResource DefensiveStanceColor}"
+                                                            To="{StaticResource GreenColor}"
                                                             Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -74,7 +75,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
                         <Border  BorderThickness="0" BorderBrush="Black" 
-                                 Opacity=".7" Background="{StaticResource DefensiveStanceBrush}"
+                                 Opacity=".7" Background="{StaticResource GreenBrush}"
                                  Height="4" CornerRadius="2 0 0 2"/>
                     </ControlTemplate>
                 </Setter.Value>

@@ -182,7 +182,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Effect" Value="{StaticResource DropShadow}"/>
-        <Setter Property="Background" Value="{StaticResource DefensiveStanceBrush}"/>
+        <Setter Property="Background" Value="{StaticResource GreenBrush}"/>
         <Setter Property="tcc:ButtonExtensions.CornerRadius" Value="13"/>
         <Setter Property="Foreground" Value="#d000"/>
         <Setter Property="Padding" Value="0 5"/>
