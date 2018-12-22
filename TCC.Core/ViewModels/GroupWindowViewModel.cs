@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,9 +56,9 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new[] { nameof(User.Role) }, new[] {new SortDescription( nameof(User.UserClass), ListSortDirection.Ascending) });
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
 
         }
 
@@ -452,11 +453,11 @@ namespace TCC.ViewModels
         {
             var u = Members.ToSyncArray().FirstOrDefault(x => x.IsPlayer);
             if (u == null) return;
-
-            u.Weapon = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
-            u.Armor = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
-            u.Gloves = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
-            u.Boots = WindowManager.Dashboard.VM.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
+            var currCharGear = WindowManager.Dashboard.VM.CurrentCharacter.Gear;
+            u.Weapon = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
+            u.Armor = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
+            u.Gloves = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
+            u.Boots = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
         public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)

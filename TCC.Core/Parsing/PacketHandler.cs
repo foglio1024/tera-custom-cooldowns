@@ -812,21 +812,11 @@ namespace TCC.Parsing
 
         public static void HandleInventory(S_INVEN x)
         {
-            if (!x.IsOpen) return;
-            if (x.First && x.More) return;
-            if (S_INVEN.GearItems == null) return;
-            if (WindowManager.Dashboard.VM.CurrentCharacter == null) return;
-            WindowManager.Dashboard.VM.CurrentCharacter.ClearGear();
-            foreach (var tuple in S_INVEN.GearItems)
-            {
-                if (!InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece)) continue;
-                var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
-                WindowManager.Dashboard.VM.CurrentCharacter.Gear.Add(i);
-            }
+            //TODO: add gear again?
+            
+            WindowManager.Dashboard.VM.UpdateInventory(x.Items, x.First);
+            //GroupWindowViewModel.Instance.UpdateMyGear();
 
-
-            WindowManager.Dashboard.VM.UpdateInventory();
-            GroupWindowViewModel.Instance.UpdateMyGear();
             //88273 - 88285 L weapons
             //88286 - 88298 L armors
             //88299 - 88301 L gloves

@@ -497,21 +497,20 @@ namespace TCC.ViewModels
             });
         }
 
-        public void UpdateInventory()
+        public void UpdateInventory(Dictionary<uint, ItemAmount> list, bool first)
         {
-            var em = S_INVEN.Items.Values.FirstOrDefault(x => x.Id == 151643);
-            var ds = S_INVEN.Items.Values.FirstOrDefault(x => x.Id == 45474);
-            var ps = S_INVEN.Items.Values.FirstOrDefault(x => x.Id == 45482);
+            var em = list.Values.FirstOrDefault(x => x.Id == 151643);
+            var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
+            var ps = list.Values.FirstOrDefault(x => x.Id == 45482);
 
             if (em != null) SetElleonMarks(em.Amount);
             if (ds != null) CurrentCharacter.DragonwingScales = ds.Amount;
             if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
+                if(first) CurrentCharacter.Inventory.Clear();
 
-                CurrentCharacter.Inventory.Clear();
-
-                foreach (var keyVal in S_INVEN.Items)
+                foreach (var keyVal in list)
                 {
                     var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
                     if (existing != null)
