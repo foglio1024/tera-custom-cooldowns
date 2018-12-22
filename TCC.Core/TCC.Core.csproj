@@ -357,7 +357,6 @@
     <Compile Include="Data\Pc\SimpleUser.cs" />
     <Compile Include="Data\GearItem.cs" />
     <Compile Include="Data\Map\Guard.cs" />
-    <Compile Include="Data\InventoryManager.cs" />
     <Compile Include="Data\Chat\LFG.cs" />
     <Compile Include="Data\Listing.cs" />
     <Compile Include="Data\Map\Location.cs" />
