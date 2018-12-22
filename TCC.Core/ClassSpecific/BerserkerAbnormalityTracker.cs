@@ -1,4 +1,5 @@
 ﻿using TCC.Data;
+using TCC.Parsing;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -78,7 +79,7 @@ namespace TCC.ClassSpecific
 
         private static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
         {
-            if(Settings.SettingsHolder.LastRegion == "KR")  // KR patch by HQ
+            if(TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
                 if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
                 {
@@ -111,7 +112,7 @@ namespace TCC.ClassSpecific
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
         {
-            if (Settings.SettingsHolder.LastRegion == "KR")  // KR patch by HQ
+            if (TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
                 if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
                 {
@@ -144,7 +145,7 @@ namespace TCC.ClassSpecific
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
         {
-            if (Settings.SettingsHolder.LastRegion == "KR")  // KR patch by HQ
+            if (TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
                 if (p.AbnormalityId == Sinister_KR)
                 {

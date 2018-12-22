@@ -54,6 +54,16 @@ namespace TCC.Data
         THA = 10,
         SE = 11
     }
+    public enum RegionEnum
+    {
+        EU,
+        NA,
+        KR,
+        JP,
+        TW,
+        THA,
+        RU
+    }
 
     public enum CooldownMode
     {

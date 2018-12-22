@@ -15,17 +15,15 @@ namespace TCC
 {
     public class TimeManager : TSPropertyChanged
     {
-        private readonly Dictionary<string, TeraServerTimeInfo> _serverTimezones = new Dictionary<string, TeraServerTimeInfo>
+        private readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new Dictionary<RegionEnum, TeraServerTimeInfo>
         {
-            {"EU", new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday) },
-            {"NA", new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday) },
-            {"RU", new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
-            {"TW", new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
-            {"JP", new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
-            {"SE", new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
-            {"THA", new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
-            {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) },
-            {"KR-PTS", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
+            {RegionEnum.EU, new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.NA, new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday) },
+            {RegionEnum.RU, new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.TW, new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.JP, new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.THA, new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.KR, new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) },
         };
 
         public const double SecondsInDay = 60 * 60 * 24;
@@ -35,7 +33,7 @@ namespace TCC
         private DayOfWeek _resetDay;
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
-        public string CurrentRegion { get; set; }
+        public RegionEnum CurrentRegion { get; set; }
         public int ServerHourOffsetFromLocal;
         public int ServerHourOffsetFromUtc;
 
@@ -60,20 +58,20 @@ namespace TCC
         private void CheckNewDay(object sender, EventArgs e)
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
-                WindowManager.Dashboard.VM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
+                WindowManager.Dashboard.VM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
             if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
         }
 
-        public void SetServerTimeZone(string region)
+        public void SetServerTimeZone(string lang)
         {
-            if (string.IsNullOrEmpty(region)) return;
-            CurrentRegion = region.StartsWith("EU") ? "EU" : region;
+            if (string.IsNullOrEmpty(lang)) return;
+            CurrentRegion = Utils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
 
-            SettingsHolder.LastRegion = region;
+            SettingsHolder.LastLanguage = lang;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
-                CurrentRegion = "EU";
-                SettingsHolder.LastRegion = "EU-EN";
+                CurrentRegion = RegionEnum.EU;
+                SettingsHolder.LastLanguage = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK);
@@ -96,13 +94,12 @@ namespace TCC
             }
 
             CheckReset();
-            WindowManager.Dashboard.VM.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
+            WindowManager.Dashboard.VM.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion.ToString());
 
         }
 
         private void CheckReset()
         {
-            if (CurrentRegion == null) return;
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
             if (SettingsHolder.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in WindowManager.Dashboard.VM.Characters)

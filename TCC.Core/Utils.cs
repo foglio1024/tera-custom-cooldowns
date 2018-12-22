@@ -211,12 +211,24 @@ namespace TCC
         public static ICollectionView InitView(Predicate<object> filter, IEnumerable source, IEnumerable<SortDescription> sortDescr)
         {
             var view = new CollectionViewSource { Source = source }.View;
-            view.Filter =  filter;
+            view.Filter = filter;
             foreach (var sd in sortDescr)
             {
                 view.SortDescriptions.Add(sd);
             }
             return view;
+        }
+
+        internal static RegionEnum RegionEnumFromLanguage(string language)
+        {
+            if (Enum.TryParse<RegionEnum>(language, out var res))
+            {
+                return res;
+            }
+            else if (language.StartsWith("EU")) return RegionEnum.EU;
+            else if (language.StartsWith("KR")) return RegionEnum.KR;
+            else if (language == "THA" || language == "SE") return RegionEnum.THA;
+            else return RegionEnum.EU;
         }
 
         public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
