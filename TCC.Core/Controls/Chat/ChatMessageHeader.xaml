@@ -61,7 +61,7 @@
                     VerticalAlignment="Top"
                     Text="{Binding Timestamp}"
                     Grid.Column="0"
-                        Visibility="{Binding ShowTimestamp, Converter={StaticResource BoolToVisibleCollapsed}}"
+                    Visibility="{Binding ShowTimestamp, Converter={StaticResource BoolToVisibleCollapsed}}"
                     
                     />
     </Grid>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using TCC.Parsing;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
@@ -84,7 +85,7 @@ namespace TCC.Data.Chat
         {
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
-            Timestamp = DateTime.Now.ToShortTimeString();
+            Timestamp = SettingsHolder.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }
         public ChatMessage(ChatChannel ch, string auth, string msg) : this()
@@ -356,7 +357,7 @@ namespace TCC.Data.Chat
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
-            var text = SessionManager.SocialDatabase.Social[id].Replace("{Name}", Author);
+            var text = SessionManager.CurrentDatabase.SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new MessagePiece(text, MessagePieceType.Simple, Settings.SettingsHolder.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)
@@ -735,13 +736,13 @@ namespace TCC.Data.Chat
 //    //var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
 //    //text = ReplaceHtmlEscapes(text);
 
-//    var world = SessionManager.MapDatabase.Worlds[worldId];
+//    var world = SessionManager.CurrentDatabase.MapDatabase.Worlds[worldId];
 //    var guard = world.Guards[guardId];
 //    var section = guard.Sections[sectionId];
 //    var sb = new StringBuilder();
 
-//    var guardName = guard.NameId != 0 ? SessionManager.MapDatabase.Names[guard.NameId] : "";
-//    var sectionName = SessionManager.MapDatabase.Names[section.NameId];
+//    var guardName = guard.NameId != 0 ? SessionManager.CurrentDatabase.MapDatabase.Names[guard.NameId] : "";
+//    var sectionName = SessionManager.CurrentDatabase.MapDatabase.Names[section.NameId];
 //    //sb.Append(MapDatabase.Names[world.NameId]);
 //    sb.Append("<");
 

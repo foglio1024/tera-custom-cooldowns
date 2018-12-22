@@ -9,6 +9,10 @@ namespace TCC.Settings
 {
     public static class SettingsHolder
     {
+        private static string _lastLanguage = "";
+        private static bool _chatEnabled;
+        private static ClickThruMode _chatClickThruMode;
+
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
 
@@ -107,9 +111,8 @@ namespace TCC.Settings
         public static int SpamThreshold { get; set; } = 2;
         public static bool ShowChannel { get; set; } = true;
         public static bool ShowTimestamp { get; set; } = true;
-        //public static double ChatWindowOpacity { get; set; } = 0.4;
+        public static bool ChatTimestampSeconds { get; internal set; }
         public static int FontSize { get; set; } = 15;
-        //public static bool ChatFadeOut { get; set; } = true;
         public static bool AnimateChatMessages { get; set; }
         public static ClickThruMode ChatClickThruMode
         {
@@ -132,6 +135,7 @@ namespace TCC.Settings
                 }
             }
         }
+        public static int ChatScrollAmount { get; set; } = 1;
         // Character window
         public static bool CharacterWindowCompactMode { get; set; } = true;
         // Class window
@@ -143,10 +147,10 @@ namespace TCC.Settings
 
         // Misc
         public static DateTime LastRun { get; set; } = DateTime.MinValue;
-        public static string LastRegion
+        public static string LastLanguage
         {
-            get => RegionOverride != "" ? RegionOverride : _lastRegion;
-            set => _lastRegion = value;
+            get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
+            set => _lastLanguage = value;
         }
         public static string Webhook { get; set; } = "";
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
@@ -155,7 +159,7 @@ namespace TCC.Settings
         public static string TwitchChannelName { get; set; } = ""; //TODO: re-add this
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowTradeLfg { get; set; } = true;
-        public static bool StatSent { get; set; }
+        public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
         public static bool EthicalMode { get; set; } = false;
@@ -163,23 +167,17 @@ namespace TCC.Settings
         public static HotKey InfoWindowHotkey { get; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; } = new HotKey(Key.O, ModifierKeys.Control);
         public static HotKey LootSettingsHotkey { get; } = new HotKey(Key.L, ModifierKeys.Control);
-        public static string RegionOverride { get; set; } = "";
-        public static double FlightGaugeRotation { get; set; }
-        public static bool FlipFlightGauge { get; set; }
-        public static bool HideHandles { get; set; }
-        public static bool HighPriority { get; set; }
-        public static bool ForceSoftwareRendering { get; set; }
-        public static ControlShape AbnormalityShape { get; set; }
-        public static ControlShape SkillShape { get; set; }
-        public static bool Npcap { get; set; } = true; //TODO: use this
+        public static string LanguageOverride { get; set; } = "";
+        public static double FlightGaugeRotation { get; set; } = 0;
+        public static bool FlipFlightGauge { get; set; } = false;
+        public static bool HideHandles { get; set; } = false;
+        public static bool HighPriority { get; set; } = false;
+        public static bool ForceSoftwareRendering { get; set; } = true;
+        public static ControlShape AbnormalityShape { get; set; } = ControlShape.Round;
+        public static ControlShape SkillShape { get; set; } = ControlShape.Round;
+        public static bool Npcap { get; set; } = true;
         public static bool CheckOpcodesHash { get; set; } = true;
         public static bool DiscordWebhookEnabled { get; set; } = false;
         public static bool ShowNotificationBubble { get; set; } = true;
-        public static int ChatScrollAmount { get; set; } = 1;
-
-        private static string _lastRegion = "";
-        private static bool _chatEnabled;
-        private static ClickThruMode _chatClickThruMode;
-
     }
 }

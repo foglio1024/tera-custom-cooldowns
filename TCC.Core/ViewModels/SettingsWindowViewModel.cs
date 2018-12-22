@@ -205,11 +205,12 @@ namespace TCC.ViewModels
         //}
         public string RegionOverride
         {
-            get => SettingsHolder.RegionOverride;
+            get => SettingsHolder.LanguageOverride;
             set
             {
-                if (SettingsHolder.RegionOverride == value) return;
-                SettingsHolder.RegionOverride = value;
+                if (SettingsHolder.LanguageOverride == value) return;
+                SettingsHolder.LanguageOverride = value;
+                if (value == "") SettingsHolder.LastLanguage = "EU-EN";
                 N(nameof(RegionOverride));
             }
         }
@@ -257,6 +258,17 @@ namespace TCC.ViewModels
                 SettingsHolder.ShowTimestamp = value;
                 N(nameof(ShowTimestamp));
                 ChatShowTimestampChanged?.Invoke();
+            }
+
+        }
+        public bool ChatTimestampSeconds
+        {
+            get => SettingsHolder.ChatTimestampSeconds;
+            set
+            {
+                if (SettingsHolder.ChatTimestampSeconds == value) return;
+                SettingsHolder.ChatTimestampSeconds= value;
+                N();
             }
 
         }

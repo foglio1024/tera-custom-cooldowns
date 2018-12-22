@@ -297,13 +297,13 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.FontSize)) SettingsHolder.FontSize = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ChatScrollAmount)) SettingsHolder.ChatScrollAmount = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowChannel)) SettingsHolder.ShowChannel = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.ChatTimestampSeconds)) SettingsHolder.ChatTimestampSeconds = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowTimestamp)) SettingsHolder.ShowTimestamp = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowOnlyBosses)) SettingsHolder.ShowOnlyBosses = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.DisablePartyHP)) SettingsHolder.DisablePartyHP = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.DisablePartyMP)) SettingsHolder.DisablePartyMP = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowOnlyAggroStacks)) SettingsHolder.ShowOnlyAggroStacks = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.DisablePartyAbnormals)) SettingsHolder.DisablePartyAbnormals = bool.Parse(attr.Value);
-                    //else if (attr.Name == nameof(Settings.ChatFadeOut)) Settings.ChatFadeOut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowItemsCooldown)) SettingsHolder.ShowItemsCooldown = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowMembersLaurels)) SettingsHolder.ShowMembersLaurels = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.AnimateChatMessages)) SettingsHolder.AnimateChatMessages = bool.Parse(attr.Value);
@@ -324,17 +324,18 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.WarriorShowTraverseCut)) SettingsHolder.WarriorShowTraverseCut = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.CharacterWindowCompactMode)) SettingsHolder.CharacterWindowCompactMode = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowAllGroupAbnormalities)) SettingsHolder.ShowAllGroupAbnormalities = bool.Parse(attr.Value);
-                    //Add My Abnormals Setting by HQ ====================================================
-                    else if (attr.Name == nameof(SettingsHolder.ShowAllMyAbnormalities)) SettingsHolder.ShowAllMyAbnormalities = bool.Parse(attr.Value);
-                    //===================================================================================
+                    else if (attr.Name == nameof(SettingsHolder.ShowAllMyAbnormalities)) SettingsHolder.ShowAllMyAbnormalities = bool.Parse(attr.Value); // MyAbnormals Setting by HQ 
                     else if (attr.Name == nameof(SettingsHolder.HighPriority)) SettingsHolder.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ForceSoftwareRendering)) SettingsHolder.ForceSoftwareRendering = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.Npcap)) SettingsHolder.Npcap = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.RegionOverride)) SettingsHolder.RegionOverride = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.LastRegion)) SettingsHolder.LastRegion = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.LanguageOverride) 
+                    || attr.Name == "RegionOverride" // retrocompatibility <<-----------------------------<<<<<<<<<< TODO: remove at some point
+                    ) SettingsHolder.LanguageOverride = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.LastLanguage)
+                    || attr.Name == "LastRegion" // retrocompatibility <<---------------------------------<<<<<<<<<< TODO: remove at some point
+                    ) SettingsHolder.LastLanguage = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.Webhook)) SettingsHolder.Webhook = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.WebhookMessage)) SettingsHolder.WebhookMessage = attr.Value;
-                    //else if (attr.Name == nameof(Settings.ChatWindowOpacity)) Settings.ChatWindowOpacity = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(SettingsHolder.FlightGaugeRotation)) SettingsHolder.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(SettingsHolder.LastRun)) SettingsHolder.LastRun = DateTime.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.TwitchName)) SettingsHolder.TwitchName = attr.Value;
