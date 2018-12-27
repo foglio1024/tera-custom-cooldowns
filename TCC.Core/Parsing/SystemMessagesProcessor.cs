@@ -92,6 +92,8 @@ namespace TCC.Parsing
             { "SMT_FIELD_EVENT_REWARD_AVAILABLE", new Action<string, SystemMessage>(HandleClearedGuardianQuestsMessage) },
             { "SMT_FIELD_EVENT_CLEAR_REWARD_SENT", new Action<string, SystemMessage>(RedirectGuardianMessage) },
             { "SMT_FIELD_EVENT_WORLD_ANNOUNCE", new Action<string, SystemMessage>(RedirectGuardianMessage) },
+
+            { "SMT_ITEM_DECOMPOSE_COMPLETE", new Action<string, SystemMessage>(RedirectDismantleMessage) },
         };
 
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
@@ -109,6 +111,11 @@ namespace TCC.Parsing
         private static void RedirectGuardianMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Guardian);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+        }
+        private static void RedirectDismantleMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Loot);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
