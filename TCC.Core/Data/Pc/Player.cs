@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
+using TCC.Settings;
 
 namespace TCC.Data.Pc
 {
@@ -212,8 +213,8 @@ namespace TCC.Data.Pc
             get => _currentShield;
             set
             {
-                if(_currentShield == value) return;
-                if(value < 0) return;
+                if (_currentShield == value) return;
+                if (value < 0) return;
                 _currentShield = value;
                 N(nameof(CurrentShield));
                 N(nameof(TotalHP));
@@ -273,7 +274,7 @@ namespace TCC.Data.Pc
             get => _critFactor;
             set
             {
-                if(_critFactor == value) return;
+                if (_critFactor == value) return;
                 _critFactor = value;
                 N();
             }
@@ -344,19 +345,15 @@ namespace TCC.Data.Pc
         //Add My Abnormals Setting by HQ ============================================================
         public bool MyAbnormalsContainKey(Abnormality ab)
         {
-            if (!Settings.SettingsHolder.ShowAllMyAbnormalities)
+            if (!SettingsHolder.ShowAllMyAbnormalities)
             {
-                if (Settings.SettingsHolder.MyAbnormals.ContainsKey(Class.Common))
+                if (SettingsHolder.MyAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
-                    if (!Settings.SettingsHolder.MyAbnormals[Class.Common].Contains(ab.Id))
+                    if (!commonList.Contains(ab.Id))
                     {
-                        if (Settings.SettingsHolder.MyAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (SettingsHolder.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
                         {
-                            if (!Settings.SettingsHolder.MyAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id))
-                            {
-                                return false;
-
-                            }
+                            if (!classList.Contains(ab.Id)) return false;
                         }
                         else
                         {
@@ -372,7 +369,7 @@ namespace TCC.Data.Pc
             return true;
         }
         //===========================================================================================
-        
+
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
             //Add My Abnormals Setting by HQ ============================================================

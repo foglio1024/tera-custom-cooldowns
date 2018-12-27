@@ -213,7 +213,7 @@ namespace TCC.ViewModels
         private void AddNormalNpc(NPC boss)
         {
             SetVergos(boss);
-            if (_savedHp.ContainsKey(boss.EntityId)) boss.CurrentHP = _savedHp[boss.EntityId];
+            if (_savedHp.TryGetValue(boss.EntityId, out var cached)) boss.CurrentHP = cached;
             NpcList.Add(boss);
         }
 
@@ -242,7 +242,7 @@ namespace TCC.ViewModels
             }
             boss.IsBoss = true;
             NpcList.Add(boss);
-            if (_savedHp.ContainsKey(entityId)) boss.CurrentHP = _savedHp[entityId];
+            if (_savedHp.TryGetValue(entityId, out var hp)) boss.CurrentHP = hp;
 
         }
 
@@ -273,8 +273,9 @@ namespace TCC.ViewModels
         private readonly Dictionary<ulong, float> _cache;
         private void AddToCache(ulong entityId, float curHp)
         {
-            if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
-            else _cache[entityId] = curHp;
+            //if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
+            /*else */
+            _cache[entityId] = curHp;
         }
 
         private static void SetTimerPattern(NPC n)
@@ -319,10 +320,10 @@ namespace TCC.ViewModels
             }
 
             //ghilli
-            if (n.TemplateId == 81301 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100 - 65, int.MaxValue){StaysEnraged = true};
-            if (n.TemplateId == 81312 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(0,0);
-            if (n.TemplateId == 81398 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100-25,int.MaxValue) { StaysEnraged = true };
-            if (n.TemplateId == 81399 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100-25,int.MaxValue) { StaysEnraged = true };
+            if (n.TemplateId == 81301 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100 - 65, int.MaxValue) { StaysEnraged = true };
+            if (n.TemplateId == 81312 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(0, 0);
+            if (n.TemplateId == 81398 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
+            if (n.TemplateId == 81399 && n.ZoneId == 713) n.EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
 
 
             if (n.ZoneId == 620 && n.TemplateId == 1000) n.EnragePattern = new EnragePattern((long)n.MaxHP, 420000000, 36);
@@ -342,11 +343,11 @@ namespace TCC.ViewModels
             if (boss == null) return;
             if (type == DespawnType.OutOfView)
             {
-                if (!_savedHp.ContainsKey(id)) _savedHp.Add(id, boss.CurrentHP);
+                _savedHp[id] = boss.CurrentHP;
             }
             else
             {
-                if (_savedHp.ContainsKey(id)) _savedHp.Remove(id);
+                _savedHp.Remove(id);
             }
             if (!boss.Visible || boss.IsTower)
             {
@@ -443,15 +444,14 @@ namespace TCC.ViewModels
         }
         public void AddGuildTower(ulong towerId, string guildName, uint guildId)
         {
-            if (!GuildIds.ContainsKey(towerId)) GuildIds.Add(towerId, guildId);
+            GuildIds[towerId] = guildId;
             var t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
             if (t != null)
             {
                 t.Name = guildName;
                 t.ExN(nameof(NPC.GuildId));
             }
-            if (_towerNames.ContainsKey(towerId)) return;
-            _towerNames.Add(towerId, guildName);
+            _towerNames[towerId] =  guildName;
         }
 
         public void UpdateShield(ulong target, uint damage)

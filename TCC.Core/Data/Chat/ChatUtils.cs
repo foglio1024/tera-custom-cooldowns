@@ -34,7 +34,7 @@ namespace TCC.Data.Chat
 
         public static long GetItemUid(Dictionary<string, string> d)
         {
-            return d.ContainsKey("dbid") ? long.Parse(d["dbid"]) : 0;
+            return d.TryGetValue("dbid", out var value) ? long.Parse(value) : 0;
         }
 
         public static Dictionary<string, string> SplitDirectives(string m)

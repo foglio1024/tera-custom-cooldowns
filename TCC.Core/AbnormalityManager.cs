@@ -110,9 +110,9 @@ namespace TCC
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
             if (Settings.SettingsHolder.EthicalMode) return;
-            if (PassivityDatabase.Passivities.ContainsKey(ab.Id))
+            if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var passivity))
             {
-                SkillManager.AddPassivitySkill(ab.Id, PassivityDatabase.Passivities[ab.Id]);
+                SkillManager.AddPassivitySkill(ab.Id, passivity);
             }
             else if (CooldownWindowViewModel.Instance.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id) ||
                 CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))

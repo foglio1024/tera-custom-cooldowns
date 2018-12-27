@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
+using TCC.Settings;
 
 namespace TCC.Data.Pc
 {
@@ -340,15 +341,15 @@ namespace TCC.Data.Pc
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!Settings.SettingsHolder.ShowAllGroupAbnormalities)
+            if (!SettingsHolder.ShowAllGroupAbnormalities)
             {
-                if (Settings.SettingsHolder.GroupAbnormals.ContainsKey(Class.Common))
+                if (SettingsHolder.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
-                    if (!Settings.SettingsHolder.GroupAbnormals[Class.Common].Contains(ab.Id))
+                    if (!commonList.Contains(ab.Id))
                     {
-                        if (Settings.SettingsHolder.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                        if (SettingsHolder.GroupAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
                         {
-                            if (!Settings.SettingsHolder.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                            if (!classList.Contains(ab.Id)) return;
                         }
                         else return;
                     }

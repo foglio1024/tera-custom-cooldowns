@@ -107,7 +107,7 @@ namespace TCC
 
         public static string GetGuildMemberName(uint id)
         {
-            return GuildMembersNames.ContainsKey(id) ? GuildMembersNames[id] : "Unknown player";
+            return GuildMembersNames.TryGetValue(id, out var name) ? name : "Unknown player";
         }
         public static TccDatabase CurrentDatabase { get; set; }
         public static bool CivilUnrestZone { get; internal set; }
@@ -204,7 +204,7 @@ namespace TCC
             CurrentPlayer.Fire = pFire;
             CurrentPlayer.Ice = pIce;
             CurrentPlayer.Arcane = pArcane;
-            
+
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
                 ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementChanged();

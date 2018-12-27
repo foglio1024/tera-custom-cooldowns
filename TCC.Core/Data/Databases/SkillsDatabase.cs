@@ -19,51 +19,51 @@ namespace TCC.Data.Databases
 
         }
 
-/*
-        private string FindSkillNameByIdClass(uint id, Class c)
-        {
-            if (Skills[c].TryGetValue(id, out var sk))
-            {
-                return sk.Name;
-            }
-            else return "Not found";
-
-        }
-*/
-
-/*
-        private int GetSkillIdByConnectedId(uint id, Class c)
-        {
-            foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
-            {
-                foreach (var connectedSkill in skillConnection.ConnectedSkills)
+        /*
+                private string FindSkillNameByIdClass(uint id, Class c)
                 {
-                    if ((int)id == connectedSkill)
+                    if (Skills[c].TryGetValue(id, out var sk))
                     {
-                        return skillConnection.Id;
+                        return sk.Name;
                     }
-                }
-            }
-            return -1;
-        }
-*/
-/*
-        public string SkillIdToName(uint id, Class c)
-        {
-            var name = FindSkillNameByIdClass(id, c);
-            var connSkill = GetSkillIdByConnectedId(id, c);
+                    else return "Not found";
 
-            if (name != "Not found") //found skill
-            {
-                return name;
-            }
-            else if (connSkill != -1) //skill found in connected skills
-            {
-                name = FindSkillNameByIdClass(id, c);
-            }
-            return name;
-        }
-*/
+                }
+        */
+
+        /*
+                private int GetSkillIdByConnectedId(uint id, Class c)
+                {
+                    foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
+                    {
+                        foreach (var connectedSkill in skillConnection.ConnectedSkills)
+                        {
+                            if ((int)id == connectedSkill)
+                            {
+                                return skillConnection.Id;
+                            }
+                        }
+                    }
+                    return -1;
+                }
+        */
+        /*
+                public string SkillIdToName(uint id, Class c)
+                {
+                    var name = FindSkillNameByIdClass(id, c);
+                    var connSkill = GetSkillIdByConnectedId(id, c);
+
+                    if (name != "Not found") //found skill
+                    {
+                        return name;
+                    }
+                    else if (connSkill != -1) //skill found in connected skills
+                    {
+                        name = FindSkillNameByIdClass(id, c);
+                    }
+                    return name;
+                }
+        */
         public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             var result = false;
@@ -262,8 +262,7 @@ namespace TCC.Data.Databases
                     IconName = iconName,
                     Detail = detail.ToLowerInvariant()
                 };
-                if (Skills[c].ContainsKey(id)) continue;
-                Skills[c].Add(id, sk);
+                Skills[c][id] = sk;
             }
 
         }

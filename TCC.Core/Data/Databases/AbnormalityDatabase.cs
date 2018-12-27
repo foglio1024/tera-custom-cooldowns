@@ -47,15 +47,15 @@ namespace TCC.Data.Databases
                 {
                     ab.SetShield((uint)amount); //TODO: may just parse everything instead of doing this
                 }
-                if (Abnormalities.ContainsKey(id))
+                if (Abnormalities.TryGetValue(id, out var ex)) //.ContainsKey(id))
                 {
-                    if (!Abnormalities[id].IsShield && ab.IsShield) Abnormalities[id] = ab;
-                    if (ab.Infinity && !Abnormalities[id].Infinity) Abnormalities[id].Infinity = false;
-                    if (Abnormalities[id].Type != AbnormalityType.Debuff && ab.Type == AbnormalityType.Debuff) Abnormalities[id].Type = AbnormalityType.Debuff;
-                    if (!isBuff) Abnormalities[id].IsBuff = false;
+                    if (!ex.IsShield && ab.IsShield) Abnormalities[id] = ab;
+                    if (ab.Infinity && !ex.Infinity) ex.Infinity = false;
+                    if (ex.Type != AbnormalityType.Debuff && ab.Type == AbnormalityType.Debuff) ex.Type = AbnormalityType.Debuff;
+                    if (!isBuff) ex.IsBuff = false;
                     continue;
                 }
-                Abnormalities.Add(id, ab);
+                Abnormalities[id] = ab;
             }
         }
     }

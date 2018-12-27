@@ -20,7 +20,7 @@ namespace TCC.Parsing.Messages
             if (!Directory.Exists("resources/images/guilds")) return;
             foreach (var file in Directory.EnumerateFiles("resources/images/guilds"))
             {
-                if (!Database.ContainsKey(Convert.ToUInt32(file.Split('_')[2]))) Database.Add(Convert.ToUInt32(file.Split('_')[2]), new Bitmap(file));
+                Database[Convert.ToUInt32(file.Split('_')[2])] = new Bitmap(file);
             }
         }
 
@@ -70,8 +70,7 @@ namespace TCC.Parsing.Messages
             image.UnlockBits(pixels);
             image.Palette = palette;
             var id = Convert.ToUInt32(imageName.Split('_')[2]);
-            if (Database.ContainsKey(id)) return;
-            Database.Add(id, image);
+            Database[id] = image;
             //if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
             //image.Save("resources/images/guilds/" + imageName + ".bmp", ImageFormat.Bmp);
 

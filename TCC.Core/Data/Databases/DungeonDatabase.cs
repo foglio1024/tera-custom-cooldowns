@@ -51,16 +51,16 @@ namespace TCC.Data.Databases
                 var sReqIlvl = s[3];
                 var sDobuleElite = s[4];
                 var sIndex = s[5];
-                if (!Dungeons.ContainsKey(id)) continue;
-                Dungeons[id].Show = true;
-                Dungeons[id].ShortName = shortName;
-                Dungeons[id].DoublesOnElite = bool.Parse(sDobuleElite);
-                Dungeons[id].Index = int.Parse(sIndex);
-                if (short.TryParse(sMaxBaseRuns, out var baseRuns)) Dungeons[id].MaxBaseRuns = baseRuns;
+                if (!Dungeons.TryGetValue(id, out var dung)) continue;
+                dung.Show = true;
+                dung.ShortName = shortName;
+                dung.DoublesOnElite = bool.Parse(sDobuleElite);
+                dung.Index = int.Parse(sIndex);
+                if (short.TryParse(sMaxBaseRuns, out var baseRuns)) dung.MaxBaseRuns = baseRuns;
                 if (!int.TryParse(sReqIlvl, out var reqIlvl)) continue;
                 try
                 {
-                    Dungeons[id].RequiredIlvl = (ItemLevelTier)reqIlvl;
+                    dung.RequiredIlvl = (ItemLevelTier)reqIlvl;
                 }
                 catch
                 {
@@ -81,13 +81,13 @@ namespace TCC.Data.Databases
                 var id = Convert.ToUInt32(split[2]);
                 var icon = split[3];
 
-                if (Dungeons.ContainsKey(id)) Dungeons[id].IconName = icon;
+                if (Dungeons.TryGetValue(id, out var dung)) dung.IconName = icon;
             }
         }
 
         public string GetDungeonNameOrOpenWorld(uint continentId)
         {
-            return Dungeons.ContainsKey(continentId) ? Dungeons[continentId].Name : "Open world";
+            return Dungeons.TryGetValue(continentId, out var dungeon) ? dungeon.Name : "Open world";
         }
 
         public void UpdateIndex(uint dungeonId, int newIdx)

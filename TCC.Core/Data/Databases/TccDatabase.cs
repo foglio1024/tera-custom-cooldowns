@@ -103,11 +103,9 @@ namespace TCC.Data.Databases
 
             var openWorld = MapDatabase.Worlds[1];
 
-            if (!openWorld.Guards.ContainsKey(guard.Id)) return ret;
+            if (!openWorld.Guards.TryGetValue(guard.Id, out var grd)) return ret;
 
-            var nameId = openWorld.Guards[guard.Id].NameId;
-
-            if (RegionsDatabase.Names.ContainsKey(nameId)) ret = RegionsDatabase.Names[nameId];
+            if (RegionsDatabase.Names.TryGetValue(grd.NameId, out var value)) ret = value;
             return ret;
         }
         /// <summary>
@@ -123,11 +121,10 @@ namespace TCC.Data.Databases
             {
                 MapDatabase.Worlds.ToList().ForEach(w =>
                 {
-                    if (!w.Value.Guards.ContainsKey(guardId)) return;
-                    var g = w.Value.Guards[guardId];
-                    if (!g.Sections.ContainsKey(sectionId)) return;
-                    var name = g.Sections[sectionId].NameId;
-                    ret = RegionsDatabase.Names[name];
+                    if (!w.Value.Guards.TryGetValue(guardId, out var g)) return;
+                    if (!g.Sections.TryGetValue(sectionId, out var s)) return;
+                    var nameId = s.NameId;
+                    ret = RegionsDatabase.Names[nameId];
                 });
             }
             catch
@@ -144,9 +141,9 @@ namespace TCC.Data.Databases
         /// <returns>max exp amount</returns>
         public int GetItemMaxExp(uint id, int enchant)
         {
-            if (!ItemsDatabase.Items.ContainsKey(id)) return 0;
-            if (ItemsDatabase.Items[id].ExpId == 0) return 0;
-            return ItemExpDatabase.ExpData[ItemsDatabase.Items[id].ExpId][enchant];
+            if (!ItemsDatabase.Items.TryGetValue(id, out var item)) return 0;
+            if (item.ExpId == 0) return 0;
+            return ItemExpDatabase.ExpData[item.ExpId][enchant];
         }
         /// <summary>
         /// Tries to convert a continent id to a guard name or dungeon name.
@@ -156,9 +153,9 @@ namespace TCC.Data.Databases
         /// <returns>true if value was successfully found</returns>
         public bool TryGetGuardOrDungeonNameFromContinentId(uint continentId, out string name)
         {
-            if (DungeonDatabase.Dungeons.ContainsKey(continentId))
+            if (DungeonDatabase.Dungeons.TryGetValue(continentId, out var dung))
             {
-                name = DungeonDatabase.Dungeons[continentId].Name;
+                name = dung.Name;
                 return true;
             }
             var guard = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);

@@ -59,9 +59,8 @@ namespace TCC.Data.Chat
             }
 
             var username = SessionManager.CurrentPlayer.Name;
-            if (dictionary.ContainsKey("UserName"))
+            if (dictionary.TryGetValue("UserName", out username))
             {
-                username = dictionary["UserName"];
                 rawLink.Append("@" + username);
             }
             var mp = new MessagePiece(id.ToString());
@@ -87,9 +86,14 @@ namespace TCC.Data.Chat
 
             var id = ChatUtils.GetId(dictionary, "achievement");
             var achiName = id.ToString();
-            if (SessionManager.CurrentDatabase.AchievementDatabase.Achievements.TryGetValue(id, out var g))
+            //if (SessionManager.CurrentDatabase.AchievementDatabase.Achievements.TryGetValue(id, out var g))
+            //{
+            //    achiName = $"[{g}]";
+            //}
+            if(SessionManager.CurrentDatabase.AchievementDatabase.Achievements.TryGetValue(id*1000+1, out var g2))
             {
-                achiName = $"[{g}]";
+                achiName = $"[{g2}]";
+
             }
 
             return new MessagePiece(achiName) { Type = MessagePieceType.Simple, };

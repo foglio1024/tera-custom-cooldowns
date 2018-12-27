@@ -19,9 +19,8 @@ namespace TCC.Data.Databases
             var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
-            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.ContainsKey(id))
+            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab))
             {
-                var ab = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[id];
                 result = true;
                 sk = new Skill(id, Class.Common, ab.Name, "") { IconName = ab.IconName };
             }

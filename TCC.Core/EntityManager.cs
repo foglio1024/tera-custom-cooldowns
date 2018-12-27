@@ -62,7 +62,7 @@ namespace TCC
 
         public static void DespawnNPC(ulong target, DespawnType type)
         {
-            if (NearbyNPC.ContainsKey(target)) NearbyNPC.Remove(target);
+            NearbyNPC.Remove(target);
 
             BossGageWindowViewModel.Instance.RemoveBoss(target, type);
             if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0)
@@ -143,21 +143,21 @@ namespace TCC
 
         public static string GetNpcName(ulong eid)
         {
-            return NearbyNPC.ContainsKey(eid) ? NearbyNPC[eid] : "unknown";
+            return NearbyNPC.TryGetValue(eid, out var name) ? name : "unknown";
         }
         public static string GetUserName(ulong eid)
         {
-            return NearbyPlayers.ContainsKey(eid) ? NearbyNPC[eid] : "unknown";
+            return NearbyPlayers.TryGetValue(eid, out var name) ? name : "unknown";
         }
 
         internal static void DepawnUser(ulong entityId)
         {
-            if (NearbyPlayers.ContainsKey(entityId)) NearbyPlayers.Remove(entityId);
+            NearbyPlayers.Remove(entityId);
         }
 
         internal static void SpawnUser(ulong entityId, string name)
         {
-            if (!NearbyPlayers.ContainsKey(entityId)) NearbyPlayers.Add(entityId, name);
+            NearbyPlayers[entityId] = name;
         }
 
         public static bool IsEntitySpawned(ulong pSource)

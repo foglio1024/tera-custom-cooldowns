@@ -92,8 +92,7 @@ namespace TCC.Data.Pc
         {
             Dungeons.ToSyncArray().ToList().ForEach(dung =>
             {
-                if (dungeonCooldowns.ContainsKey(dung.Dungeon.Id))
-                    dung.Entries = dungeonCooldowns[dung.Dungeon.Id];
+                if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
             });
         }
         public void SetDungeonClears(uint dgId, int runs)
@@ -381,8 +380,8 @@ namespace TCC.Data.Pc
         private int _amount;
         private readonly uint _id;
 
-        public Item Item => SessionManager.CurrentDatabase.ItemsDatabase.Items.ContainsKey(_id)
-                            ? SessionManager.CurrentDatabase.ItemsDatabase.Items[_id]
+        public Item Item => SessionManager.CurrentDatabase.ItemsDatabase.Items.TryGetValue(_id, out var item)
+                            ? item
                             : new Item(0, "", 0, 0, 0, "");
         public uint Slot { get; }
         public int Amount

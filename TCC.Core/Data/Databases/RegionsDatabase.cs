@@ -35,7 +35,7 @@ namespace TCC.Data.Databases
         }
         public string GetZoneName(uint zoneId)
         {
-            return Names.ContainsKey(zoneId) ? Names[zoneId] : "Unknown";
+            return Names.TryGetValue(zoneId, out var name) ? name : "Unknown";
         }
 
     }

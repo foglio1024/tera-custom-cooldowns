@@ -24,7 +24,7 @@ namespace TCC.ViewModels
             for (int i = 0; i < 13; i++)
             {
                 var ct = new MyClassToggle((Class)i, ab.Id);
-                if (Settings.SettingsHolder.MyAbnormals.ContainsKey(ct.Class)) ct.Selected = Settings.SettingsHolder.MyAbnormals[ct.Class].Contains(ab.Id);
+                if (Settings.SettingsHolder.MyAbnormals.TryGetValue(ct.Class, out var list)) ct.Selected = list.Contains(ab.Id);
                 Classes.Add(ct);
             }
             Classes.Add(new MyClassToggle(Class.Common, ab.Id)

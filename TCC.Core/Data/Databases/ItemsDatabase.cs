@@ -19,18 +19,17 @@ namespace TCC.Data.Databases
 
         public string GetItemName(uint id)
         {
-            return Items.ContainsKey(id) ? Items[id].Name : "Unknown";
+            return Items.TryGetValue(id, out var item) ? item.Name : "Unknown";
         }
         public bool TryGetItemSkill(uint itemId, out Skill sk)
         {
             var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
-            if (Items.ContainsKey(itemId))
+            if (Items.TryGetValue(itemId, out var item))
             {
-                var item = Items[itemId];
                 result = true;
-                sk = new Skill(itemId, Class.Common, item.Name, "") {IconName = item.IconName};
+                sk = new Skill(itemId, Class.Common, item.Name, "") { IconName = item.IconName };
             }
             return result;
 
@@ -60,7 +59,7 @@ namespace TCC.Data.Databases
 
             // Manual fix for bugged EU HP pot from HH
             var euBuggedReju = new Item(149644, "Harrowhold Rejuvenation Potion", 1, 0, 30, "icon_items.potion1_tex");
-            if (!Items.ContainsKey(euBuggedReju.Id)) Items.Add(euBuggedReju.Id, euBuggedReju);
+            Items[euBuggedReju.Id] = euBuggedReju;
 
         }
 

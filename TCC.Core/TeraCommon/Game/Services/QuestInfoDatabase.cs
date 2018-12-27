@@ -5,7 +5,7 @@ namespace TCC.TeraCommon.Game.Services
 {
     public class QuestInfoDatabase
     {
-        private Dictionary<int,string> _lookup = new Dictionary<int, string>();
+        private Dictionary<int, string> _lookup = new Dictionary<int, string>();
         public QuestInfoDatabase(string folder, string language)
         {
             var reader = new StreamReader(File.OpenRead(Path.Combine(folder, $"quests\\battle-{language}.tsv")));
@@ -33,7 +33,7 @@ namespace TCC.TeraCommon.Game.Services
 
         public string Get(int id)
         {
-            return !_lookup.ContainsKey(id) ? id.ToString() : _lookup[id];
+            return _lookup.TryGetValue(id, out var value) ? value : id.ToString();
         }
     }
 

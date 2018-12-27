@@ -1,6 +1,7 @@
 ﻿using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Settings;
 using TCC.Windows;
 
 namespace TCC.ViewModels
@@ -18,12 +19,12 @@ namespace TCC.ViewModels
             for (int i = 0; i < 13; i++)
             {
                 var ct = new ClassToggle((Class)i, ab.Id);
-                if (Settings.SettingsHolder.GroupAbnormals.ContainsKey(ct.Class)) ct.Selected = Settings.SettingsHolder.GroupAbnormals[ct.Class].Contains(ab.Id);
+                if (SettingsHolder.GroupAbnormals.TryGetValue(ct.Class, out var list)) ct.Selected = list.Contains(ab.Id);
                 Classes.Add(ct);
             }
             Classes.Add(new ClassToggle(Class.Common, ab.Id)
             {
-                Selected = Settings.SettingsHolder.GroupAbnormals[Class.Common].Contains(ab.Id)
+                Selected = SettingsHolder.GroupAbnormals[Class.Common].Contains(ab.Id)
             });
 
         }

@@ -15,11 +15,8 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var guildId = (uint?) value ?? 0;
-            if (!S_IMAGE_DATA.Database.ContainsKey(guildId))
-            {
-                return R.MiscResources.DefaultGuildLogo; //Application.Current.FindResource("DefaultGuildLogo");
+            if (!S_IMAGE_DATA.Database.ContainsKey(guildId)) return R.MiscResources.DefaultGuildLogo; 
 
-            }
 
             var ip = S_IMAGE_DATA.Database[guildId].GetHbitmap();
             BitmapSource bs;
