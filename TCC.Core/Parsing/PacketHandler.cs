@@ -601,7 +601,7 @@ namespace TCC.Parsing
 
         internal static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            if (!SessionManager.CurrentDatabase.AchievementDatabase.Achievements.ContainsKey(x.AchievementId)) return;
+            //if (!SessionManager.CurrentDatabase.AchievementDatabase.Achievements.ContainsKey(x.AchievementId)) return;
             if (!SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
 
             var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
@@ -813,7 +813,7 @@ namespace TCC.Parsing
         public static void HandleInventory(S_INVEN x)
         {
             //TODO: add gear again?
-            
+
             WindowManager.Dashboard.VM.UpdateInventory(x.Items, x.First);
             //GroupWindowViewModel.Instance.UpdateMyGear();
 
@@ -882,12 +882,8 @@ namespace TCC.Parsing
 
         public static void HandleUserGuildLogo(S_GET_USER_GUILD_LOGO sGetUserGuildLogo)
         {
-            if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId))
-            {
-                S_IMAGE_DATA.Database[sGetUserGuildLogo.GuildId] = sGetUserGuildLogo.GuildLogo;
-                return;
-            }
-            S_IMAGE_DATA.Database.Add(sGetUserGuildLogo.GuildId, sGetUserGuildLogo.GuildLogo);
+            S_IMAGE_DATA.Database[sGetUserGuildLogo.GuildId] = sGetUserGuildLogo.GuildLogo;
+
             if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
             sGetUserGuildLogo.GuildLogo.Save("resources/images/guilds/guildlogo_" + SessionManager.Server.ServerId + "_" + sGetUserGuildLogo.GuildId + "_" + 0 + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
