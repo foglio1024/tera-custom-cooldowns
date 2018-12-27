@@ -45,7 +45,7 @@ namespace TCC.ViewModels
             _queue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
             LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
-            ChatWindows = new SynchronizedObservableCollection<ChatWindow>();
+            ChatWindows = new SynchronizedObservableCollection<ChatWindow>(Dispatcher);
 
             ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
@@ -220,6 +220,8 @@ namespace TCC.ViewModels
             if (old.Author != current.Author) return true;
             switch (current.Channel)
             {
+                case ChatChannel.Group:
+                case ChatChannel.GroupAlerts:
                 case ChatChannel.Money:
                 case ChatChannel.Loot:
                 case ChatChannel.Bargain:
