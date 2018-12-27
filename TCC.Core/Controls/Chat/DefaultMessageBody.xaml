@@ -15,9 +15,8 @@
                 </Grid.ColumnDefinitions>
                           
                 <ItemsControl ItemsSource="{Binding Pieces}"
-                              ItemTemplate="{StaticResource MessageBodyTemplate}"
-Background="Transparent"
-                          Margin="5,0,0,0" 
+                              ItemTemplate="{StaticResource MessageBodyTemplate}" Background="Transparent"
+                          Margin="5 0 0 5" 
                           VerticalAlignment="Center" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -25,6 +24,12 @@ Background="Transparent"
                             </WrapPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Margin" Value="0 0 0 -5"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
                 </ItemsControl>
                 <Grid Grid.Column="1" Margin="-80 0 0 0" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>

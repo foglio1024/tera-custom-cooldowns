@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" d:DataContext="{d:DesignData Type=ChatMessage}">
-    <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="Auto">
+    <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0"
+          VerticalAlignment="Stretch" Height="Auto"
+          UseLayoutRounding="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -15,21 +17,19 @@
         <!--Background -->
         <Border Background="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}}" 
                             Opacity=".25" 
-                            CornerRadius="3" 
+                            CornerRadius="1" 
                             Visibility="Visible"
                             Margin="0,0" 
                             Grid.ColumnSpan="4"
                             Grid.Column="0"
                             VerticalAlignment="Stretch"/>
         <!--Background tip-->
-        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" Grid.Column="3" 
-                            CornerRadius="0,3,3,0" Margin="0,0" Opacity=".5" />
-        <Border Width="4" Background="#999" Grid.Column="3" Visibility="Collapsed"
-                            CornerRadius="0,3,3,0" Margin="0,0" Opacity="1"/>
+        <Border Width="3" Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" Grid.Column="3" 
+                            CornerRadius="0 1 1 0" Margin="0,0" Opacity=".5" />
         <!--Author-->
         <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}" 
                         Content="{Binding}"
-                        Margin="3,1,3,1"
+                        Margin="2 1 2 1"
                         Grid.Column="2"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
