@@ -79,12 +79,12 @@ namespace TCC.ViewModels
         public bool ShowGrantPowers => GroupWindowViewModel.Instance.AmILeader && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool ShowKick => GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool ShowDelegateLeader => GroupWindowViewModel.Instance.AmILeader && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
-        public bool IsBlocked => ChatWindowManager.Instance.BlockedUsers.Contains(_name);
+        public bool IsBlocked => _name == "" ? false : ChatWindowManager.Instance.BlockedUsers.Contains(_name);
         public bool IsFriend
         {
             get
             {
-                var f = ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == _name);
+                var f = _name == "" ? null : ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == _name);
                 return f != null;
             }
         }
