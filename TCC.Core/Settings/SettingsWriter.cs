@@ -27,7 +27,7 @@ namespace TCC.Settings
                     SettingsHolder.FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
                     SettingsHolder.FloatingButtonSettings.ToXElement("FloatingButton"),
                     SettingsHolder.CivilUnrestWindowSettings.ToXElement("CivilUnrestWindow")
-                    //add window here
+                //add window here
                 ),
                 BuildOtherSettingsXElement(),
                 BuildGroupAbnormalsXElement(),  //Add , by HQ
@@ -42,7 +42,7 @@ namespace TCC.Settings
             {
                 if (File.Exists(Path.Combine(App.BasePath, "tcc-config.xml")))
                     File.Copy(Path.Combine(App.BasePath, "tcc-config.xml"), Path.Combine(App.BasePath, "tcc-config.xml.bak"), true);
-                doc.Save(Path.Combine(App.BasePath,"tcc-config.xml"));
+                doc.Save(Path.Combine(App.BasePath, "tcc-config.xml"));
             }
             catch (Exception)
             {
@@ -85,7 +85,7 @@ namespace TCC.Settings
                 // Buff
                 new XAttribute(nameof(SettingsHolder.BuffsDirection), SettingsHolder.BuffsDirection),
                 new XAttribute(nameof(SettingsHolder.ShowAllMyAbnormalities), SettingsHolder.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
-                // Character
+                                                                                                                      // Character
                 new XAttribute(nameof(SettingsHolder.CharacterWindowCompactMode), SettingsHolder.CharacterWindowCompactMode),
                 // Cooldown
                 new XAttribute(nameof(SettingsHolder.CooldownBarMode), SettingsHolder.CooldownBarMode),
@@ -193,10 +193,14 @@ namespace TCC.Settings
         {
             var result = new XElement("ChatWindows");
             if (ChatWindowManager.Instance.ChatWindows.Count == 0) return result;
+            
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
                 if (cw.VM.Tabs.Count == 0) return;
-                cw.UpdateSettings();
+                //cw.Dispatcher.Invoke(() =>
+                //{
+                //    cw.UpdateSettings();
+                //});
                 result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("ChatWindow")));
             });
             return result;
