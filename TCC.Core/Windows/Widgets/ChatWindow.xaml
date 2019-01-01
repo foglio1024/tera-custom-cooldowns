@@ -12,10 +12,9 @@
              xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
-             MouseDoubleClick="TccWindow_MouseDoubleClick"
-             MouseLeave="TccWindow_MouseLeave"
-             MouseEnter="TccWindow_MouseEnter"
-             PreviewMouseUp="ChatWindow_OnPreviewMouseUp"
+             MouseEnter="OnWindowMouseEnter"
+             MouseLeave="OnWindowMouseLeave"
+             PreviewMouseUp="OnWindowPreviewMouseUp"
              Title="ChatWindow"
              MinWidth="350" MinHeight="110"
              ResizeMode="CanResize"
@@ -56,7 +55,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="ItemsControl" x:Key="ChatItemsControl">
+        <!--<Style TargetType="ItemsControl" x:Key="ChatItemsControl">
             <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
             <Setter Property="Height" Value="Auto" />
@@ -73,11 +72,11 @@
                                           PreviewMouseWheel="SwPreviewMouseWheel"
                                           FlowDirection="RightToLeft" VerticalContentAlignment="Top"
                                           VerticalAlignment="Top" Height="Auto" 
-                                          CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged"
+                                          CanContentScroll="True" 
                                           Margin="0 0 0 0">
-                                <!--<ScrollViewer.Resources>
+                                <ScrollViewer.Resources>
                                     <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">4</system:Double>
-                                </ScrollViewer.Resources>-->
+                                </ScrollViewer.Resources>
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
                                                 FlowDirection="LeftToRight" Margin="2 0 2 0" />
                             </ScrollViewer>
@@ -86,7 +85,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
         <DataTemplate x:Key="TabContentTemplate" DataType="dragablz:HeaderedDragablzItem">
             <Grid >
                 <Grid.RowDefinitions>
@@ -103,7 +102,7 @@
                         </ContentControl.LayoutTransform>
                         <ContentControl.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Unpin" Click="UnpinMessage"></MenuItem>
+                                <MenuItem Header="Unpin" Click="UnpinMessage"/>
                             </ContextMenu>
                         </ContentControl.ContextMenu>
                     </ContentControl>
@@ -214,7 +213,6 @@
                                          ShowDefaultAddButton="True"
                                          NewItemFactory="{Binding AddNewTabCommand}"
                                          ShowDefaultCloseButton="True"
-                                         SelectionChanged="TabControl_OnSelectionChanged"
                                          Style="{DynamicResource ChatTabablzControlStyle}">
                     <dragablz:TabablzControl.ItemContainerStyle>
                         <Style TargetType="{x:Type dragablz:DragablzItem}"
@@ -248,20 +246,43 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <Button x:Name="Settings" Margin="0 5" HorizontalAlignment="Right" Click="Settings_Click" Opacity=".5"
+                <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right" Click="OnSettingsButtonClick" Opacity=".5"
                         Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14" 
                         VerticalAlignment="Top">
                     <Grid Background="#01000000">
                         <Path Data="{StaticResource SvgSettings}"/>
                     </Grid>
                 </Button>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visible}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="1" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="0.01" Duration="0:0:1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
             </Grid>
         </dockablz:Layout>
         <Popup Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
-               MouseLeave="SettingsPopup_MouseLeave"
-               MouseLeftButtonDown="SettingsPopup_PreviewMouseLeftButtonDown"
-               MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"
-               AllowsTransparency="True" PlacementTarget="{Binding ElementName=Settings}" StaysOpen="True"
+               MouseLeave="OnSettingsPopupMouseLeave"
+               AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True"
                PopupAnimation="Slide" >
             <Grid>
                 <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
@@ -270,12 +291,12 @@
                                            Value="{Binding WindowSettings.BackgroundOpacity,  Mode=TwoWay}" 
                                            Min="0" Max="1" Visibility="Visible"/>
 
-                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
-                    <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff" IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
+                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource GreenBrush}"/>
+                    <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff" IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}" CheckBoxColor="{StaticResource GreenBrush}"/>
                     <settings:ValueSetting SettingName="Fade timeout" Foreground="#9fff" TextBoxVisibility="Visible"
                                            Value="{Binding WindowSettings.HideTimeout,  Mode=TwoWay}" 
                                            Min="3" Max="60" Visibility="Visible"/>
-                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
+                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource GreenBrush}"  />
                     <Button  Style="{StaticResource SettingsButton}" ToolTip="Use current position for all classes" Click="MakeGlobal" Margin="10 5 10 7">
                         <TextBlock Text="Make position global" Margin="0 0"/>
                     </Button>
