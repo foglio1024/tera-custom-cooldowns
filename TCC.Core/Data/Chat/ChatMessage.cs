@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Threading;
 using HtmlAgilityPack;
 using TCC.Parsing;
 using TCC.Settings;
@@ -26,7 +27,6 @@ namespace TCC.Data.Chat
             {
                 if (_channel == value) return;
                 _channel = value;
-                N();
             }
         }
         public string Timestamp { get; protected set; }
@@ -40,7 +40,6 @@ namespace TCC.Data.Chat
             {
                 if (_author == value) return;
                 _author = value;
-                N();
             }
         }
         public bool ContainsPlayerName { get; set; }
@@ -185,7 +184,7 @@ namespace TCC.Data.Chat
                                 selectionStep++;
                                 continue;
                             }
-                            if(inPiece.StartsWith("@item"))
+                            if (inPiece.StartsWith("@item"))
                             {
                                 mp = MessagePieceBuilder.BuildSysMsgItem(inPiece);
                             }
@@ -251,11 +250,8 @@ namespace TCC.Data.Chat
 
         private void AddPiece(MessagePiece mp)
         {
-            Dispatcher.Invoke(() =>
-            {
-                mp.Container = this;
-                Pieces.Add(mp);
-            });
+            mp.Container = this;
+            Pieces.Add(mp);
         }
         private void InsertPiece(MessagePiece mp, int index)
         {
@@ -275,7 +271,7 @@ namespace TCC.Data.Chat
             var simplePieces = new List<MessagePiece>();
             foreach (var item in Pieces)
             {
-                if(item.Type == MessagePieceType.Simple || item.Type == MessagePieceType.Item) simplePieces.Add(item);
+                if (item.Type == MessagePieceType.Simple || item.Type == MessagePieceType.Item) simplePieces.Add(item);
             }
 
             for (var i = 0; i < simplePieces.Count; i++)
