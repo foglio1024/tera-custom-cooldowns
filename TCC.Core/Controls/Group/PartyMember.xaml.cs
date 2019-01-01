@@ -25,11 +25,8 @@ namespace TCC.Controls.Group
 
         private void OnAbnormalityShapeChanged()
         {
-            Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = R.TemplateSelectors.PartyAbnormalityTemplateSelector;// Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
-            Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = R.TemplateSelectors.PartyAbnormalityTemplateSelector; // Application.Current.FindResource("PartyAbnormalityTemplateSelector") as DataTemplateSelector;
-
+            Buffs.RefreshTemplate(R.TemplateSelectors.PartyAbnormalityTemplateSelector);
+            Debuffs.RefreshTemplate(R.TemplateSelectors.PartyAbnormalityTemplateSelector);
         }
 
         private void UpdateSettings()

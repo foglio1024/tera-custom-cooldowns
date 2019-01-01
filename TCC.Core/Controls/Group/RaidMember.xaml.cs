@@ -40,10 +40,12 @@ namespace TCC.Controls.Group
         }
         private void OnAbnormalityShapeChanged()
         {
-            Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; // Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
-            Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; //Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
+            Buffs.RefreshTemplate(R.TemplateSelectors.RaidAbnormalityTemplateSelector);
+            Debuffs.RefreshTemplate(R.TemplateSelectors.RaidAbnormalityTemplateSelector);
+            //Buffs.ItemTemplateSelector = null;
+            //Buffs.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; // Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
+            //Debuffs.ItemTemplateSelector = null;
+            //Debuffs.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; //Application.Current.FindResource("RaidAbnormalityTemplateSelector") as DataTemplateSelector;
 
         }
 
@@ -96,14 +98,12 @@ namespace TCC.Controls.Group
             {
                 Dispatcher.Invoke(() =>
                 {
-                    // ReSharper disable once IsExpressionAlwaysTrue
                     if(!(_dc is User)) return;
                     Debuffs.ItemsSource = TCC.Settings.SettingsHolder.IgnoreGroupDebuffs ? null : _dc.Debuffs;
                     DebuffGrid.Visibility = TCC.Settings.SettingsHolder.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
                 });
-
             }
             catch
             {
