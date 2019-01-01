@@ -68,6 +68,8 @@ namespace TCC.Windows
         {
             SessionManager.CurrentPlayer.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
             ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            WindowManager.CooldownWindow.VM.ClearSkills();
+            WindowManager.CooldownWindow.VM.LoadSkills(SessionManager.CurrentPlayer.Class);
         }
 
         private void SetSorcElement(object sender, RoutedEventArgs e)
@@ -108,7 +110,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            //((SorcererBarManager) ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Start(20000);
+            ((SorcererBarManager) ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);

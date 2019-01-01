@@ -114,9 +114,8 @@ namespace TCC
             {
                 SkillManager.AddPassivitySkill(ab.Id, passivity);
             }
-            else if (CooldownWindowViewModel.Instance.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id) ||
-                CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
-
+            else if (WindowManager.CooldownWindow.VM.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
+                  || WindowManager.CooldownWindow.VM.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
             {
                 //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
                 SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
@@ -162,13 +161,13 @@ namespace TCC
 
         private static bool Filter(Abnormality ab)
         {
-            return ab.IsShow &&
-                   !ab.Name.Contains("BTS") &&
-                   !ab.ToolTip.Contains("BTS") &&
-                   (
-                   !ab.Name.Contains("(Hidden)") &&
-                   !ab.Name.Equals("Unknown") &&
-                   !ab.Name.Equals(string.Empty)
+            return  ab.IsShow 
+                && !ab.Name.Contains("BTS") 
+                && !ab.ToolTip.Contains("BTS") 
+                && (    
+                       !ab.Name.Contains("(Hidden)") 
+                    && !ab.Name.Equals("Unknown") 
+                    && !ab.Name.Equals(string.Empty)
                    );
         }
 

@@ -144,7 +144,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.BuffsDirection == value) return;
                 SettingsHolder.BuffsDirection = value;
-                BuffBarWindowViewModel.Instance.ExN(nameof(BuffBarWindowViewModel.Direction));
+                WindowManager.BuffWindow.VM.ExN(nameof(BuffBarWindowViewModel.Direction));
                 N(nameof(BuffsDirection));
             }
         }
@@ -177,7 +177,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.CooldownBarMode == value) return;
                 SettingsHolder.CooldownBarMode = value;
-                CooldownWindowViewModel.Instance.NotifyModeChanged();
+                WindowManager.CooldownWindow.VM.NotifyModeChanged();
                 N(nameof(CooldownBarMode));
             }
         }
@@ -267,7 +267,7 @@ namespace TCC.ViewModels
             set
             {
                 if (SettingsHolder.ChatTimestampSeconds == value) return;
-                SettingsHolder.ChatTimestampSeconds= value;
+                SettingsHolder.ChatTimestampSeconds = value;
                 N();
             }
 
@@ -337,7 +337,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.ShowItemsCooldown == value) return;
                 SettingsHolder.ShowItemsCooldown = value;
-                CooldownWindowViewModel.Instance.NotifyItemsDisplay();
+                WindowManager.CooldownWindow.VM.NotifyItemsDisplay();
                 N();
             }
         }
@@ -529,7 +529,7 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.Cancel) return;
                 SettingsHolder.Npcap = value;
                 N();
-                if(res == MessageBoxResult.OK) App.Restart();
+                if (res == MessageBoxResult.OK) App.Restart();
             }
         }
         //public double ChatWindowOpacity
@@ -685,8 +685,12 @@ namespace TCC.ViewModels
                 SettingsHolder.CharacterWindowCompactMode = value;
                 N();
                 CharacterWindowViewModel.Instance.ExN(nameof(CharacterWindowViewModel.CompactMode));
-                WindowManager.CharacterWindow.Left = value ? WindowManager.CharacterWindow.Left + 175 :
-                    WindowManager.CharacterWindow.Left - 175;
+                WindowManager.CharacterWindow.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    WindowManager.CharacterWindow.Left = value 
+                    ? WindowManager.CharacterWindow.Left + 175 
+                    : WindowManager.CharacterWindow.Left - 175;
+                }), DispatcherPriority.Background);
 
             }
         }

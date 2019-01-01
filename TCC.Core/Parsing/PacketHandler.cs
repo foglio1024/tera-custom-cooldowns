@@ -168,7 +168,7 @@ namespace TCC.Parsing
             TimeManager.Instance.SetGuildBamTime(false);
             SessionManager.InitDatabases(SettingsHolder.LastLanguage);
             SkillManager.Clear();
-            CooldownWindowViewModel.Instance.LoadSkills(p.CharacterClass);
+            WindowManager.CooldownWindow.VM.LoadSkills(p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntityManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();

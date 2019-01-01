@@ -48,9 +48,9 @@ namespace TCC
             }
 
         }
-        public static void AddSkillDirectly(Skill sk, uint cd)
+        public static void AddSkillDirectly(Skill sk, uint cd, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal)
         {
-            RouteSkill(new Cooldown(sk, cd));
+            RouteSkill(new Cooldown(sk, cd, type, mode));
         }
 
         public static void ChangeSkillCooldown(uint id, uint cd)
@@ -58,7 +58,7 @@ namespace TCC
             if (SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
-                CooldownWindowViewModel.Instance.Change(skill, cd);
+                WindowManager.CooldownWindow.VM.Change(skill, cd);
             }
 
         }
@@ -67,12 +67,12 @@ namespace TCC
             if (SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
-                CooldownWindowViewModel.Instance.ResetSkill(skill);
+                WindowManager.CooldownWindow.VM.ResetSkill(skill);
             }
         }
         public static void Clear()
         {
-            CooldownWindowViewModel.Instance.ClearSkills();
+            WindowManager.CooldownWindow.VM.ClearSkills();
         }
 
         private static void RouteSkill(Cooldown skillCooldown)
@@ -80,11 +80,11 @@ namespace TCC
             if (skillCooldown.Duration== 0)
             {
                 skillCooldown.Dispose();
-                CooldownWindowViewModel.Instance.Remove(skillCooldown.Skill);
+                WindowManager.CooldownWindow.VM.Remove(skillCooldown.Skill);
             }
             else
             {
-                CooldownWindowViewModel.Instance.AddOrRefresh(skillCooldown);
+                WindowManager.CooldownWindow.VM.AddOrRefresh(skillCooldown);
             }
             App.BaseDispatcher.Invoke(() => SkillStarted?.Invoke());
         }
