@@ -20,13 +20,15 @@ namespace TCC.Windows
     /// </summary>
     public partial class Dashboard : TccWindow
     {
-        public DashboardViewModel VM => Dispatcher.Invoke(() => DataContext as DashboardViewModel);
-        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
+        public DashboardViewModel VM { get; }
+        public IntPtr Handle { get; private set; }
 
         public Dashboard()
         {
             InitializeComponent();
             DataContext = new DashboardViewModel();
+            VM = DataContext as DashboardViewModel;
+            Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
             Showed += () => VM.UpdateBuffs();
             Hidden += () => SessionManager.CurrentDatabase.DungeonDatabase.SaveCustomDefs();
         }
