@@ -62,7 +62,7 @@ namespace TCC
                 if (ForegroundWindow == TeraWindow && TeraWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == MeterWindow && MeterWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.SettingsWindow?.Handle && WindowManager.SettingsWindow?.Handle != IntPtr.Zero) return true;
-                if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
+                //if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.LfgListWindow?.Handle && WindowManager.LfgListWindow?.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.Dashboard?.Handle && WindowManager.Dashboard?.Handle != IntPtr.Zero) return true;
                 return false;
