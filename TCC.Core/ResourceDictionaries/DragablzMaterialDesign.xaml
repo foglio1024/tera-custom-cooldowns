@@ -126,16 +126,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid>
-                        <Ellipse Width="{TemplateBinding Width}"
-                                 Height="{TemplateBinding Height}"
-                                 Fill="{TemplateBinding Background}"/>
+                    <Grid Background="#01000000">
                         <Path x:Name="Path"
-                              Data="M38,6L38.0003451911513,70.6666666666666 M70.3336667356886,38L5.50002465137562,38" 
-                              Width="6" Height="6"
+                              Data="{StaticResource SvgAddCircle}" 
+                              Width="12" Height="12"
                               Stretch="Uniform"
                               Stroke="{TemplateBinding Foreground}"
-                              StrokeThickness="1.5"
+                              StrokeThickness="0"
+                              Opacity=".5"
                               StrokeStartLineCap="Square" 
                               StrokeEndLineCap="Square"
                               SnapsToDevicePixels="True" />
