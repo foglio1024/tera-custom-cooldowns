@@ -88,9 +88,9 @@ namespace TCC.Data.Skills
         }
 
         // ctors
-        public Cooldown()
+        public Cooldown(Dispatcher d = null)
         {
-            Dispatcher = App.BaseDispatcher;
+            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
             Dispatcher.Invoke(() =>
             {
                 _mainTimer = new DispatcherTimer();
@@ -104,22 +104,21 @@ namespace TCC.Data.Skills
             _secondsTimer.Tick += DecreaseSeconds;
 
         }
-
-        private static int _ccSub = 0;
-        private static int _ecSub = 0;
-        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill) : this()
+        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher d = null) : this(d)
         {
             CooldownType = t;
             Skill = sk;
             FlashOnAvailable = flashOnAvailable;
         }
-
-        public Cooldown(Skill sk, ulong cooldown, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal) : this(sk, false, type)
+        public Cooldown(Skill sk, ulong cooldown, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal, Dispatcher d = null) : this(sk, false, type, d)
         {
             if (cooldown == 0) return;
             if (type == CooldownType.Item) cooldown = cooldown * 1000;
             Start(cooldown, mode);
         }
+
+        private static int _ccSub = 0;
+        private static int _ecSub = 0;
         private void OnCombatStatusChanged()
         {
             if ((SessionManager.Encounter || SessionManager.Combat) && FlashOnAvailable)
@@ -221,14 +220,11 @@ namespace TCC.Data.Skills
             if (Skill.Id % 10 == 0 && id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
             Refresh(cd, mode);
         }
-
         public void Refresh(Cooldown cd)
         {
             cd.Dispose();
             Refresh(cd.Skill.Id, cd.Duration, cd.Mode);
         }
-
-
         private void ForceFlashing()
         {
             Dispatcher.Invoke(() => FlashingForced?.Invoke());
@@ -245,7 +241,6 @@ namespace TCC.Data.Skills
         {
             Dispatcher.Invoke(() => Reset?.Invoke());
         }
-
         public void Dispose()
         {
             CanFlash = false;
@@ -257,6 +252,5 @@ namespace TCC.Data.Skills
         {
             return Skill.Name;
         }
-
     }
 }
