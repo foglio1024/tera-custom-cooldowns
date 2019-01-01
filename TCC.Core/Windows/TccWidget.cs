@@ -98,7 +98,7 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
             FocusManager.FocusTick += OnFocusTick;
 
-            if (WindowSettings.Enabled) Show();
+            //if (WindowSettings.Enabled) Show();
             OnClickThruModeChanged();
             OnVisibilityChanged();
             OnWindowVisibilityChanged();
@@ -151,7 +151,7 @@ namespace TCC.Windows
             {
                 WindowSettings.W = ActualWidth;
                 WindowSettings.H = ActualHeight;
-                if(!App.Loading) SettingsWriter.Save();
+                if (!App.Loading) SettingsWriter.Save();
             }
         }
 
