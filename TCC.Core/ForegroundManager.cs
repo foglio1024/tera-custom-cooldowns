@@ -12,7 +12,7 @@ namespace TCC
             get => _forceUndim;
             set
             {
-                if(_forceUndim == value) return;
+                if (_forceUndim == value) return;
                 _forceUndim = value;
                 NotifyDimChanged();
             }
@@ -34,7 +34,7 @@ namespace TCC
             FocusManager.ForegroundChanged += NotifyVisibilityChanged;
             SkillManager.SkillStarted += OnSkillStarted;
 
-            _dimTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(3)};
+            _dimTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             _dimTimer.Tick += (_, __) =>
             {
                 _dimTimer.Stop();
@@ -57,24 +57,25 @@ namespace TCC
         private void NotifyVisibilityChanged()
         {
             //Console.WriteLine($"[Foreground Manager] Notifying Visibility = {Visible} (Logged:{SessionManager.Logged}, LoadingScreen:{SessionManager.LoadingScreen}, Foreground:{FocusManager.IsForeground})");
-            App.BaseDispatcher?.Invoke(() =>
-                VisibilityChanged?.Invoke());
+            App.BaseDispatcher?.BeginInvoke(new Action(() =>
+                VisibilityChanged?.Invoke()), DispatcherPriority.Background);
         }
 
         private void NotifyDimChanged()
         {
             //Console.WriteLine($"[Foreground Manager] Notifying Dim = {Dim} (TimerEnabled:{_dimTimer.IsEnabled}, Encounter:{SessionManager.Encounter})");
-            App.BaseDispatcher?.Invoke(() =>
-                DimChanged?.Invoke());
+            App.BaseDispatcher?.BeginInvoke(new Action(() =>
+                DimChanged?.Invoke()), DispatcherPriority.Background);
         }
 
-        public bool Dim => !_dimTimer      .IsEnabled && 
-                            !SessionManager.Encounter &&
-                            !ForceUndim;
 
-        public bool Visible => SessionManager .Logged &&
+        public bool Dim => !_dimTimer.IsEnabled &&
+                                !SessionManager.Encounter &&
+                                !ForceUndim;
+
+        public bool Visible => SessionManager.Logged &&
                                !SessionManager.LoadingScreen &&
-                                FocusManager  .IsForeground ||
+                                FocusManager.IsForeground ||
                                 _forceVisible;
 
         public bool ForceVisible
@@ -82,7 +83,7 @@ namespace TCC
             get => _forceVisible;
             set
             {
-                if(_forceVisible == value) return;
+                if (_forceVisible == value) return;
                 _forceVisible = value;
                 NotifyVisibilityChanged();
             }
