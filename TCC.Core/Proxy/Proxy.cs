@@ -115,6 +115,12 @@ namespace TCC.Proxy
             }
             // ReSharper disable once FunctionNeverReturns
         }
+
+        internal static void ReturnToLobby()
+        {
+            SendData("return_to_lobby");
+        }
+
         public static void HandleProxyOutput(string author, uint channel, string message)
         {
 
