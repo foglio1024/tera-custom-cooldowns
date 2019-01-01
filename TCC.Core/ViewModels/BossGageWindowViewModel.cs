@@ -182,7 +182,7 @@ namespace TCC.ViewModels
             if (npc != null) npc.CurrentHP = hpcCurrentHp;
         }
 
-        private bool IsCaching => VisibleBossesCount > 1;
+        private bool IsCaching => true;//VisibleBossesCount > 1;
         public bool IsCompact => VisibleMobsCount > 6;
 
         private NPC AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
