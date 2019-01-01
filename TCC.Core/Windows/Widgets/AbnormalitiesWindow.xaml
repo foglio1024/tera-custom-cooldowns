@@ -10,17 +10,15 @@
         Title="AbnormalitiesWindow" 
         MouseLeftButtonDown="Drag"
         Style="{StaticResource BaseWindowStyle}"
+             d:DataContext="{d:DesignInstance vm:BuffBarWindowViewModel}"
         >
-    <w:TccWidget.DataContext>
-        <vm:BuffBarWindowViewModel />
-    </w:TccWidget.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <FrameworkElement FlowDirection="{Binding Instance.Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top"/>
+        <FrameworkElement FlowDirection="{Binding Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top"/>
         <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource DirectionToHorAlignConveter}}"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
 
@@ -28,11 +26,11 @@
             <StackPanel.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </StackPanel.LayoutTransform>
-            <ItemsControl Name="InfBuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Instance.Player.InfBuffs}">
+            <ItemsControl Name="InfBuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Player.InfBuffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" 
-                                FlowDirection="{Binding Instance.Direction}" x:Name="InfBuffsPanel"/>
+                                FlowDirection="{Binding Direction}" x:Name="InfBuffsPanel"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
@@ -42,10 +40,10 @@
                 </ItemsControl.ItemContainerStyle>
 
             </ItemsControl>
-            <ItemsControl Name="Buffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Instance.Player.Buffs}">
+            <ItemsControl Name="Buffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Player.Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
@@ -56,10 +54,10 @@
 
             </ItemsControl>
             <ItemsControl Name="Debuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" Background="#00000000"
-                      ItemsSource="{Binding Instance.Player.Debuffs}">
+                      ItemsSource="{Binding Player.Debuffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
