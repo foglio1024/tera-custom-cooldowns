@@ -33,13 +33,13 @@ namespace TCC
                                 switch (row)
                                 {
                                     case 1:
-                                        Main.Add(new Cooldown(sk, false));
+                                        Main.Add(new Cooldown(sk, false, d:WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 2:
-                                        Secondary.Add(new Cooldown(sk, false));
+                                        Secondary.Add(new Cooldown(sk, false, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 3:
-                                        Hidden.Add(new Cooldown(sk, false));
+                                        Hidden.Add(new Cooldown(sk, false, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                 }
                             }
@@ -52,13 +52,13 @@ namespace TCC
                                 switch (row)
                                 {
                                     case 1:
-                                        Main.Add(new Cooldown(sk, false, CooldownType.Item));
+                                        Main.Add(new Cooldown(sk, false, CooldownType.Item, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 2:
-                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Item));
+                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Item, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 3:
-                                        Hidden.Add(new Cooldown(sk, false, CooldownType.Item));
+                                        Hidden.Add(new Cooldown(sk, false, CooldownType.Item, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                 }
                             }
@@ -73,13 +73,13 @@ namespace TCC
                                 switch (row)
                                 {
                                     case 1:
-                                        Main.Add(     new Cooldown(sk, false, CooldownType.Passive));
+                                        Main.Add(     new Cooldown(sk, false, CooldownType.Passive, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;                                   
                                     case 2:                                      
-                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Passive));
+                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Passive, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;                                   
                                     case 3:                                      
-                                        Hidden.Add(   new Cooldown(sk, false, CooldownType.Passive));
+                                        Hidden.Add(   new Cooldown(sk, false, CooldownType.Passive, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                 }
                             }
