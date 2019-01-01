@@ -153,6 +153,7 @@
     <Compile Include="Data\Databases\RegionsDatabase.cs" />
     <Compile Include="Data\GuildQuest.cs" />
     <Compile Include="Data\Databases\TccDatabase.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
@@ -1997,8 +1998,8 @@
     <Reference Include="Discord.Net.Rpc, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Discord.Net.Rpc.1.0.2\lib\net45\Discord.Net.Rpc.dll</HintPath>
     </Reference>
-    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    <Reference Include="Dragablz">
+      <HintPath>..\..\Dragablz\bin\Release_net45\Dragablz.dll</HintPath>
     </Reference>
     <Reference Include="GongSolutions.WPF.DragDrop, Version=1.2.0.57, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\gong-wpf-dragdrop.1.2.0-alpha0057\lib\net46\GongSolutions.WPF.DragDrop.dll</HintPath>
