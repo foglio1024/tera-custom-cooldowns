@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
@@ -33,56 +34,62 @@ namespace TCC.ViewModels
 
         public int MessageCount => ChatMessages.Count;
         public bool IsQueueEmpty => _queue.Count == 0;
-        public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; }
-        public SynchronizedObservableCollection<LFG> LFGs { get; }
-        public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; }
+        public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; private set; }
+        public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
+        public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
 
         private ChatWindowManager()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            //_scale = Settings.ChatWindowSettings.Scale; TODO
-            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
+
             _queue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
-            LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
+
+            BlockedUsers = new List<string>();
+            Friends = new List<SimpleUser>();
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>(Dispatcher);
+            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
+            LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
 
             ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
 
-            BlockedUsers = new List<string>();
-            Friends = new List<SimpleUser>();
             ChatWindows.CollectionChanged += OnChatWindowsCollectionChanged;
-            //TODO: create windows based on settings
             PrivateChannelJoined += OnPrivateChannelJoined;
         }
+
+
         public void InitWindows()
         {
-            ChatWindows.Clear();
-            SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
-            {
-                if (s.Tabs.Count == 0) return;
-                var m = new ChatViewModel();
-                var w = new ChatWindow(s, m);
-                //w.DataContext = m;
-                ChatWindows.Add(w);
-                m.LoadTabs(s.Tabs);
-                //m.LfgOn = s.LfgOn;
-                //m.BackgroundOpacity = s.BackgroundOpacity;
-            });
-            if (ChatWindows.Count == 0)
-            {
-                var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true,
-                    false);
-                var m = new ChatViewModel();
-                var w = new ChatWindow(ws, m);
-                SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
-                ChatWindows.Add(w);
-                m.LoadTabs();
-                //m.LfgOn = ws.LfgOn;
-                //m.BackgroundOpacity = ws.BackgroundOpacity;
-                if (SettingsHolder.ChatEnabled) w.Show();
-            }
+            //Dispatcher.BeginInvoke(new Action(() =>
+            //{
+                ChatWindows.Clear();
+                SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
+                {
+                    if (s.Tabs.Count == 0) return;
+                    var m = new ChatViewModel();
+                    //App.ChatDispatcher.BeginInvoke(new Action(() =>
+                    //{
+                        var w = new ChatWindow(s, m);
+                        ChatWindows.Add(w);
+                    //}), DispatcherPriority.DataBind);
+                    m.LoadTabs(s.Tabs);
+                });
+                if (ChatWindows.Count == 0)
+                {
+                    Log.CW("No chat windows found, initializing default one.");
+                    var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
+                    var m = new ChatViewModel();
+                    //App.ChatDispatcher.BeginInvoke(new Action(() =>
+                    //{
+                        var w = new ChatWindow(ws, m);
+                        SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                        ChatWindows.Add(w);
+                        m.LoadTabs();
+                        if (SettingsHolder.ChatEnabled) w.Show();
+                    //}), DispatcherPriority.DataBind);
+                }
+            //}), DispatcherPriority.Normal);
         }
         public void CloseAllWindows()
         {
@@ -111,18 +118,9 @@ namespace TCC.ViewModels
         {
             //TODO?
         }
-        //public void NotifyOpacityChange()
-        //{
-        //    ChatWindows.ToList().ForEach(x =>
-        //    {
-        //        //TODO: make this different per window
-        //        x.VM.NotifyOpacityChange();
-        //    });
-        //}
 
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            //return;
             if (!SettingsHolder.ChatEnabled)
             {
                 chatMessage.Dispose();
@@ -166,8 +164,10 @@ namespace TCC.ViewModels
 
             if (ChatWindows.All(x => !x.IsPaused))
             {
-                ChatMessages.Insert(0, chatMessage);
-                //_cache.Add(chatMessage);
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    ChatMessages.Insert(0, chatMessage);
+                }), DispatcherPriority.DataBind);
             }
             else _queue.Enqueue(chatMessage);
 
@@ -339,5 +339,6 @@ namespace TCC.ViewModels
                 chatWindow.VM.RefreshHideTimer();
             }
         }
+
     }
 }
