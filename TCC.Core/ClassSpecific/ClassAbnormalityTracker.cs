@@ -32,7 +32,7 @@ namespace TCC.ClassSpecific
         }
         protected static void StartPrecooldown(Skill sk, uint duration)
         {
-            CooldownWindowViewModel.Instance.AddOrRefresh(new Cooldown(sk, duration, CooldownType.Skill, CooldownMode.Pre));
+            SkillManager.AddSkillDirectly(sk, duration, CooldownType.Skill, CooldownMode.Pre); //CooldownWindowViewModel.Instance.AddOrRefresh(new Cooldown(sk, duration, CooldownType.Skill, CooldownMode.Pre));
         }
         protected ClassAbnormalityTracker()
         {
