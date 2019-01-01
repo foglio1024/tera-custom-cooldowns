@@ -291,8 +291,20 @@ namespace TCC
         public static void RefreshTemplate(this ItemsControl el, string resName)
         {
             if (el == null) return;
-            el.ItemTemplateSelector = null;
-            el.ItemTemplateSelector = Application.Current.FindResource(resName) as DataTemplateSelector;
+            el.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                el.ItemTemplateSelector = null;
+                el.ItemTemplateSelector = Application.Current.FindResource(resName) as DataTemplateSelector;
+            }), DispatcherPriority.Background);
+        }
+        public static void RefreshTemplate(this ItemsControl el, DataTemplateSelector selector)
+        {
+            if (el == null) return;
+            el.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                el.ItemTemplateSelector = null;
+                el.ItemTemplateSelector = selector;
+            }), DispatcherPriority.Background);
         }
     }
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
@@ -340,6 +352,13 @@ namespace TCC
             else
                 dotIt();
         }
+        public static void BeginInvokeIfRequired(this Dispatcher disp, Action dotIt, DispatcherPriority priority)
+        {
+            if (disp.Thread != Thread.CurrentThread)
+                disp.BeginInvoke(dotIt, priority);
+            else
+                dotIt();
+        }
     }
     public class TSPropertyChanged : INotifyPropertyChanged
     {
@@ -356,7 +375,7 @@ namespace TCC
         protected void N([CallerMemberName] string v = null)
         {
             if (Dispatcher == null) SetDispatcher(App.BaseDispatcher);
-            Dispatcher.InvokeIfRequired(() =>
+            Dispatcher.BeginInvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
 
@@ -369,16 +388,20 @@ namespace TCC
     {
         private readonly Dispatcher _dispatcher;
         private readonly ReaderWriterLockSlim _lock;
-
+        private string _owner = "";
         public SynchronizedObservableCollection()
         {
-            _dispatcher = App.BaseDispatcher;
+            _dispatcher = Dispatcher.CurrentDispatcher; //App.BaseDispatcher;
             _lock = new ReaderWriterLockSlim();
+            _owner = Thread.CurrentThread.Name;
+            BindingOperations.EnableCollectionSynchronization(this, _lock);
         }
         public SynchronizedObservableCollection(Dispatcher d)
         {
-            _dispatcher = d;
+            _dispatcher = d ?? Dispatcher.CurrentDispatcher;
             _lock = new ReaderWriterLockSlim();
+            _owner = Thread.CurrentThread.Name;
+            BindingOperations.EnableCollectionSynchronization(this, _lock);
         }
         protected override void ClearItems()
         {
@@ -397,8 +420,8 @@ namespace TCC
         }
         protected override void InsertItem(int index, T item)
         {
-            var disp = _dispatcher == null ? App.BaseDispatcher : _dispatcher;
-            disp.InvokeIfRequired(() =>
+            //var disp = _dispatcher == null ? App.BaseDispatcher : _dispatcher;
+            _dispatcher.InvokeIfRequired(() =>
             {
                 if (index > Count)
                     return;
@@ -500,6 +523,17 @@ namespace TCC
         {
             t.Stop();
             t.Start();
+        }
+    }
+
+    public static class WindowCollectionExtensions
+    {
+        public static List<Window> ToList(this WindowCollection wc)
+        {
+            var ret = new Window[wc.Count];
+            wc.CopyTo(ret, 0);
+            return ret.ToList();
+
         }
     }
 }
