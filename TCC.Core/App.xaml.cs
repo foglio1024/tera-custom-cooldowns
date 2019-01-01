@@ -80,7 +80,9 @@ namespace TCC
 
             if (Debug)
             {
+#pragma warning disable CS0162 
                 DebugStuff();
+#pragma warning restore CS0162
             }
             Loading = false;
 
@@ -119,7 +121,7 @@ namespace TCC
             var r = new Random();
             _t.Elapsed += (_, __) =>
             {
-                ChatWindowManager.Instance.AddTccMessage("Random message #" + r.Next(200));
+                ChatWindowManager.Instance.AddTccMessage("Long Random message which I'm using to test multi thread performance in TCC. Now only cooldown window runs on its own UI thread and should not show stutter when adding this kind of messages. " + r.Next(200));
                 //SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
                 //    0 : SessionManager.CurrentPlayer.CurrentST + 100);
             };
