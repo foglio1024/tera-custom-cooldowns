@@ -7,7 +7,6 @@
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:dd="urn:gong-wpf-dragdrop"
-             Loaded="FixedSkillContainers_OnLoaded"
              PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
              PreviewDragEnter="FixedSkillContainers_OnDragOver" MouseEnter="MainSkillsGrid_MouseEnter"
              MouseLeave="MainSkillsGrid_MouseLeave"
@@ -17,7 +16,6 @@
             <ControlTemplate.Resources>
                 <SineEase x:Key="Ease" EasingMode="EaseInOut" />
             </ControlTemplate.Resources>
-            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
             <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}" Margin="-2 0">
                 <skills:SquareFixedSkillControl />
                 <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch"
@@ -222,7 +220,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Popup IsOpen="False" Placement="Mouse" MinWidth="220" MaxHeight="300" AllowsTransparency="True"
+            <!--<Popup IsOpen="False" Placement="Mouse" MinWidth="220" MaxHeight="300" AllowsTransparency="True"
                    x:Name="SelectionPopup" MouseLeave="SelectionPopup_MouseLeave" Margin="10">
                 <Popup.Resources>
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}" />
@@ -233,15 +231,15 @@
                          Effect="{StaticResource DropShadow}" Margin="15" x:Name="ChoiceListBox"
                          ItemTemplate="{StaticResource SkillDataTemplate}">
                 </ListBox>
-            </Popup>
+            </Popup>-->
 
             <dragablz:DragablzItemsControl Grid.Row="0" Grid.Column="0" Name="MainSkills"
-                                           ItemsSource="{Binding Instance.MainSkills}" Background="Transparent"
+                                           ItemsSource="{Binding MainSkills}" Background="Transparent"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
                                            BorderBrush="Red" Margin="0" MinWidth="60" MinHeight="60"
                                            dd:DragDrop.IsDropTarget="True"
                                            Drop="MainSkills_OnDrop"
-                                           dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource AncestorType=skills:FixedSkillContainers}}"
+                                           dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=skills:FixedSkillContainers}}"
                                            dd:DragDrop.ItemsPanelOrientation="Horizontal">
                 <dragablz:DragablzItemsControl.ItemContainerStyle>
                     <Style TargetType="dragablz:DragablzItem">
@@ -257,12 +255,12 @@
                 </dragablz:DragablzItemsControl.PositionMonitor>
 
             </dragablz:DragablzItemsControl>
-            <Grid IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand"
+            <!--<Grid IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand"
                   Opacity="0" x:Name="AddButtonGrid" 
                   MouseLeftButtonDown="AddButtonPressed">
                 <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff" />
                 <Ellipse Width="50" Margin="5 0 5 0" Height="50" Stroke="#3fff" Fill="#1fff" StrokeThickness="1" />
-            </Grid>
+            </Grid>-->
             <Grid Grid.Row="0" Grid.Column="1" Width="58" x:Name="Spacer">
                 <Grid.LayoutTransform>
                     <ScaleTransform ScaleX="0" />
@@ -292,7 +290,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>-->
-            <dragablz:DragablzItemsControl Name="SecSkills" ItemsSource="{Binding Instance.SecondarySkills}" Grid.Column="0"
+            <dragablz:DragablzItemsControl Name="SecSkills" ItemsSource="{Binding SecondarySkills}" Grid.Column="0"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
                                            BorderBrush="Red" Margin="0"
                                            dd:DragDrop.IsDropTarget="True"
@@ -311,12 +309,12 @@
                     <dragablz:HorizontalPositionMonitor OrderChanged="SecondarySkillOrderChanged" />
                 </dragablz:DragablzItemsControl.PositionMonitor>
             </dragablz:DragablzItemsControl>
-            <Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0" IsHitTestVisible="False"
+            <!--<Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0" IsHitTestVisible="False"
                   x:Name="AddButtonGrid2" Margin="0 0 0 0"
                   MouseLeftButtonDown="AddButtonPressed">
                 <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff" />
                 <Ellipse Width="50" Margin="5 0 5 0" Height="50" Stroke="#3fff" Fill="#1fff" StrokeThickness="1" />
-            </Grid>
+            </Grid>-->
             <Grid Grid.Column="1" Width="58" x:Name="Spacer2">
                 <Grid.LayoutTransform>
                     <ScaleTransform ScaleX="0" />
@@ -326,7 +324,7 @@
             <!--Other skills-->
             <ItemsControl Name="OtherSkills" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto"
                           VerticalAlignment="Stretch"
-                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding Instance.OtherSkills}"
+                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}"
                           BorderBrush="Green" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
