@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -16,8 +17,8 @@ namespace TCC.ViewModels
 
     public class CooldownWindowViewModel : TccWindowViewModel
     {
-        private static CooldownWindowViewModel _instance;
-        public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
+        //private static CooldownWindowViewModel _instance;
+        //public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
         public bool ShowItems => Settings.SettingsHolder.ShowItemsCooldown;
 
         public event Action SkillsLoaded;
@@ -88,40 +89,42 @@ namespace TCC.ViewModels
             {
                 return false;
             }
+            var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
+
             var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (hSkill != null)
             {
                 return false;
             }
-            if (sk.CooldownType == CooldownType.Item)
+            if (other.CooldownType == CooldownType.Item)
             {
-                return FindAndUpdate(ItemSkills, sk);
+                return FindAndUpdate(ItemSkills, other);
             }
 
             try
             {
-                if (sk.Duration < SkillManager.LongSkillTreshold)
+                if (other.Duration < SkillManager.LongSkillTreshold)
                 {
-                    return FindAndUpdate(ShortSkills, sk);
+                    return FindAndUpdate(ShortSkills, other);
                 }
                 else
                 {
-                    var existing = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                    var existing = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == other.Skill.Name);
                     if (existing == null)
                     {
-                        existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                        existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == other.Skill.Name);
                         if (existing == null)
                         {
-                            LongSkills.Add(sk);
+                            LongSkills.Add(other);
                         }
                         else
                         {
-                            existing.Refresh(sk);
+                            existing.Refresh(other);
                         }
 
                         return true;
                     }
-                    else existing.Refresh(sk);
+                    else existing.Refresh(other);
                     return true;
                 }
             }
@@ -370,13 +373,14 @@ namespace TCC.ViewModels
             {
                 return false;
             }
-
-            sk.SetDispatcher(Dispatcher);
+            //create it again with cd window dispatcher
+            var other = new Cooldown(sk.Skill, sk.CooldownType== CooldownType.Item? sk.OriginalDuration /1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
+            sk.Dispose();
 
             try
             {
-                if (sk.CooldownType != CooldownType.Item) return FindAndUpdate(OtherSkills, sk);
-                return FindAndUpdate(ItemSkills, sk) || FindAndUpdate(OtherSkills, sk);
+                if (other.CooldownType != CooldownType.Item) return FindAndUpdate(OtherSkills, other);
+                return FindAndUpdate(ItemSkills, other) || FindAndUpdate(OtherSkills, other);
             }
             catch
             {
@@ -393,7 +397,7 @@ namespace TCC.ViewModels
                     if (!FixedMode_Update(sk)) sk.Dispose();
                     break;
                 default:
-                    if(!NormalMode_Update(sk)) sk.Dispose();
+                    if (!NormalMode_Update(sk)) sk.Dispose();
                     break;
             }
         }
@@ -445,58 +449,46 @@ namespace TCC.ViewModels
             if (c == Class.None) return;
             var filename = Utils.ClassEnumToString(c).ToLower() + "-skills.xml";
             SkillConfigParser sp;
-            Dispatcher.Invoke(() =>
+            //Dispatcher.Invoke(() =>
+            //{
+            if (!File.Exists(Path.Combine(App.BasePath, "resources/config/skills", filename)))
             {
-                if (!File.Exists(Path.Combine(App.BasePath, "resources/config/skills", filename)))
-                {
-                    SkillUtils.BuildDefaultSkillConfig(filename, c);
-                }
+                SkillUtils.BuildDefaultSkillConfig(filename, c);
+            }
 
-                try
-                {
-                    sp = new SkillConfigParser(filename, c);
-                }
-                catch (Exception)
-                {
-                    var res = TccMessageBox.Show("TCC",
-                        $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
-                        MessageBoxButton.OKCancel);
+            try
+            {
+                sp = new SkillConfigParser(filename, c);
+            }
+            catch (Exception)
+            {
+                var res = TccMessageBox.Show("TCC",
+                    $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
+                    MessageBoxButton.OKCancel);
 
-                    if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
-                    LoadSkills(c);
-                    return;
-                }
+                if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                LoadSkills(c);
+                return;
+            }
+            foreach (var sk in sp.Main)
+            {
+                MainSkills.Add(sk);
+            }
+            foreach (var sk in sp.Secondary)
+            {
+                SecondarySkills.Add(sk);
+            }
+            foreach (var sk in sp.Hidden)
+            {
+                HiddenSkills.Add(sk);
+            }
 
-                foreach (var sk in sp.Main)
-                {
-                    MainSkills.Add(sk);
-                }
-
-                foreach (var sk in sp.Secondary)
-                {
-                    SecondarySkills.Add(sk);
-                }
-
-                foreach (var sk in sp.Hidden)
-                {
-                    HiddenSkills.Add(sk);
-                }
-
-                Dispatcher.Invoke(() =>
-                {
-                    SkillChoiceList.Clear();
-                    foreach (var skill in SkillsDatabase.SkillsForClass)
-                    {
-                        SkillChoiceList.Add(skill);
-                    }
-
-                    SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
-                });
-                N(nameof(SkillsView));
-                N(nameof(MainSkills));
-                N(nameof(SecondarySkills));
-                SkillsLoaded?.Invoke();
-            });
+            Dispatcher.Invoke(() => SkillsView = Utils.InitLiveView(null, SkillsDatabase.SkillsForClass, new string[] { }, new SortDescription[] { }));
+            N(nameof(SkillsView));
+            N(nameof(MainSkills));
+            N(nameof(SecondarySkills));
+            SkillsLoaded?.Invoke();
+            //});
         }
 
         public CooldownBarMode Mode => Settings.SettingsHolder.CooldownBarMode;
@@ -512,7 +504,7 @@ namespace TCC.ViewModels
         //}
         public CooldownWindowViewModel()
         {
-            Dispatcher = App.BaseDispatcher;
+            Dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher; //App.BaseDispatcher;
 
             ShortSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
             LongSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
@@ -522,9 +514,11 @@ namespace TCC.ViewModels
             ItemSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
-            SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
 
-            SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
+
+            //SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
+
+            //SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
             ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
             AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
         }
