@@ -235,17 +235,20 @@ namespace TCC.Windows
         private void AnimateContentOpacity(double opacity)
         {
             if (MainContent == null) return;
-            _opacityAnimation.To = opacity;
-            Dispatcher.InvokeIfRequired(() => MainContent.BeginAnimation(OpacityProperty, _opacityAnimation)
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _opacityAnimation.To = opacity;
+                MainContent.BeginAnimation(OpacityProperty, _opacityAnimation);
+            })
             , DispatcherPriority.DataBind);
         }
         private void RefreshTopmost()
         {
             if (FocusManager.PauseTopmost) return;
-            Dispatcher.InvokeIfRequired(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 Topmost = false; Topmost = true;
-            }, DispatcherPriority.DataBind);
+            }), DispatcherPriority.DataBind);
         }
         private void SetVisibility(bool v)
         {
