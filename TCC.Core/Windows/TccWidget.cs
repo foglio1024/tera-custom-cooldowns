@@ -28,7 +28,7 @@ namespace TCC.Windows
 
         public WindowSettings WindowSettings { get; private set; }
 
-        public IntPtr Handle => new WindowInteropHelper(this).Handle;
+        public IntPtr Handle { get; private set; }
 
         public void ReloadPosition()
         {
@@ -157,6 +157,7 @@ namespace TCC.Windows
 
         protected void OnLoaded(object sender, RoutedEventArgs e)
         {
+            Handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(Handle);
             FocusManager.HideFromToolBar(Handle);
             if (!WindowSettings.Enabled) Hide();
