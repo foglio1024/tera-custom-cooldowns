@@ -17,6 +17,7 @@ namespace TCC
     {
         private static bool _isForeground;
         private static bool _forceFocused;
+        private static bool _disposed;
 
         // window styles
         // ReSharper disable InconsistentNaming
@@ -164,6 +165,7 @@ namespace TCC
 
         private static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
+            if (_disposed) return;
             FocusTick?.Invoke();
             if (IsForeground == IsActive) return;
             IsForeground = IsActive;
@@ -213,6 +215,7 @@ namespace TCC
 
         public static void Dispose()
         {
+            _disposed = true;
             FocusTimer?.Stop();
         }
     }
