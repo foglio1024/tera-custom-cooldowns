@@ -93,7 +93,7 @@ namespace TCC.Controls.NPCs
             if (VM.NPC.Enraged)
             {
                 SlideEnrageIndicator(VM.CurrentPercentage);
-                EnrageBorder.BeginAnimation(OpacityProperty, _flash);
+                //EnrageBorder.BeginAnimation(OpacityProperty, _flash);
                 if (!VM.NPC.EnragePattern.StaysEnraged) EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
             }
             else
@@ -141,12 +141,13 @@ namespace TCC.Controls.NPCs
 
         private void AnimateFadeOut()
         {
-            LayoutTransform = new ScaleTransform { ScaleY = 0 };
-            LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _fadeAnim);
-
-            BossNameGrid.BeginAnimation(OpacityProperty, _fadeAnim);
-            HpBarGrid.BeginAnimation(OpacityProperty, _fadeAnim);
-            TopInfoGrid.BeginAnimation(OpacityProperty, _fadeAnim);
+            _fadeAnim.Duration = TimeSpan.FromMilliseconds(500);
+            //LayoutTransform = new ScaleTransform { ScaleY = 1 };
+            //LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _fadeAnim);
+            //this.BeginAnimation(OpacityProperty, _fadeAnim);            
+            //BossNameGrid.BeginAnimation(OpacityProperty, _fadeAnim);
+            //HpBarGrid.BeginAnimation(OpacityProperty, _fadeAnim);
+            //TopInfoGrid.BeginAnimation(OpacityProperty, _fadeAnim);
             BeginAnimation(OpacityProperty, _fadeAnim);
         }
 
