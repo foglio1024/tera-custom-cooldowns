@@ -388,7 +388,9 @@ namespace TCC.Windows
         }
         public void CloseWindowSafe()
         {
-            Hide();
+            Close();
+            Dispatcher.InvokeShutdown();
+            //Hide();
         }
     }
 
