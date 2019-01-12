@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -127,8 +128,8 @@ namespace TCC.Windows
             t.Opacity = 0;
             t.RenderTransform = new TranslateTransform(-20, 0);
             var ease = new QuadraticEase();
-            var slideAnim = new DoubleAnimation(-20, 0, TimeSpan.FromMilliseconds(750)){EasingFunction = ease};
-            var fadeAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(750)){EasingFunction = ease};
+            var slideAnim = new DoubleAnimation(-20, 0, TimeSpan.FromMilliseconds(750)) { EasingFunction = ease };
+            var fadeAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(750)) { EasingFunction = ease };
             t.BeginAnimation(OpacityProperty, fadeAnim);
             t.RenderTransform.BeginAnimation(TranslateTransform.XProperty, slideAnim);
 
@@ -138,10 +139,18 @@ namespace TCC.Windows
         {
             foreach (var chatMessage in ChatWindowManager.Instance.ChatMessages)
             {
-             chatMessage.Dispose();
+                chatMessage.Dispose();
             }
 
             ChatWindowManager.Instance.ChatMessages.Clear();
+        }
+
+        private async void ForceExperimentalBuildDownlaod(object sender, RoutedEventArgs e)
+        {
+            if (TccMessageBox.Show("Warning: experimental build could be unstable. Proceed?", Data.MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
+            {
+                await Task.Factory.StartNew(() => UpdateManager.ForceDownloadExperimental());
+            }
         }
     }
 }
