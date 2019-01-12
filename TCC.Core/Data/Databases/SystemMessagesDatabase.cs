@@ -27,12 +27,12 @@ namespace TCC.Data.Databases
 
                 var s = line.Split('\t');
 
-                if(!int.TryParse(s[0], out var ch)) continue;
+                if (!int.TryParse(s[0], out var ch)) continue;
                 var opcodeName = s[1];
-                var msg = s[2].Replace("&#xA","\n");
+                var msg = s[2].Replace("&#xA", "\n");
 
                 var sm = new SystemMessage(msg, ch);
-                Messages.Add(opcodeName, sm);
+                Messages[opcodeName] = sm;
             }
         }
     }

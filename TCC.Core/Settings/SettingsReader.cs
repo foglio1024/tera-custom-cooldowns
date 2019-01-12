@@ -345,6 +345,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.CheckOpcodesHash)) SettingsHolder.CheckOpcodesHash = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.DiscordWebhookEnabled)) SettingsHolder.DiscordWebhookEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowNotificationBubble)) SettingsHolder.ShowNotificationBubble = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.UserExcludedSysMsg)) SettingsHolder.UserExcludedSysMsg = ParseUserExcludedSysMsg(attr.Value);
                     //add settings here
                 });
 
@@ -392,5 +393,11 @@ namespace TCC.Settings
             }
         }
 
+        private List<string> ParseUserExcludedSysMsg(string value)
+        {
+            var opcodes = value.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            return opcodes.Where(item => !string.IsNullOrEmpty(item)).ToList();
+        }
     }
 }

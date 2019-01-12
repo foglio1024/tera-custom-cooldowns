@@ -111,6 +111,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ChatEnabled), SettingsHolder.ChatEnabled),
                 new XAttribute(nameof(SettingsHolder.ChatClickThruMode), SettingsHolder.ChatClickThruMode),
                 new XAttribute(nameof(SettingsHolder.ChatScrollAmount), SettingsHolder.ChatScrollAmount),
+                new XAttribute(nameof(SettingsHolder.UserExcludedSysMsg), SettingsHolder.UserExcludedSysMsg.ToCSV()),
                 // Group
                 new XAttribute(nameof(SettingsHolder.IgnoreMeInGroupWindow), SettingsHolder.IgnoreMeInGroupWindow),
                 new XAttribute(nameof(SettingsHolder.IgnoreGroupBuffs), SettingsHolder.IgnoreGroupBuffs),
@@ -151,6 +152,9 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ShowNotificationBubble), SettingsHolder.ShowNotificationBubble)
             );
         }
+
+
+
         private static XElement BuildGroupAbnormalsXElement()
         {
             var result = new XElement(nameof(SettingsHolder.GroupAbnormals));

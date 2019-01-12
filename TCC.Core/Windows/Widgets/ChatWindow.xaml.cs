@@ -149,5 +149,10 @@ namespace TCC.Windows.Widgets
             ChatWindowManager.Instance.SetPaused(!_bottom);
 
         }
+
+        private void OpenSysMsgSettings(object sender, RoutedEventArgs e)
+        {
+            new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show();
+        }
     }
 }
