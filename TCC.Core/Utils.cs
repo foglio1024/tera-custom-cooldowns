@@ -21,6 +21,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
+using System.Text;
 
 namespace TCC
 {
@@ -270,7 +271,19 @@ namespace TCC
         }
     }
 
-
+    public static class ListExtensions
+    {
+        public static string ToCSV(this IList list)
+        {
+            var sb = new StringBuilder();
+            foreach (var val in list)
+            {
+                sb.Append(val.ToString());
+                if (list.IndexOf(val) < list.Count - 1) sb.Append(',');
+            }
+            return sb.ToString();
+        }
+    }
     public static class UInt64Extensions
     {
         public static bool IsMe(this ulong val)
