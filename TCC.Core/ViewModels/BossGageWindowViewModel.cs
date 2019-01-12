@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -130,14 +132,8 @@ namespace TCC.ViewModels
             //_flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
             NpcListChanged += OnNpcCollectionChanged;
-            //WindowManager.TccVisibilityChanged += (s, ev) =>
-            //{
-            //NPC(nameof(IsTeraOnTop));
-            //if (IsTeraOnTop)
-            //{
-            //WindowManager.BossWindow.RefreshTopmost();
-            //}
-            //};
+
+
 
         }
 
@@ -173,6 +169,7 @@ namespace TCC.ViewModels
                 }
 
                 _cache.Clear();
+
             });
         }
 
@@ -182,7 +179,7 @@ namespace TCC.ViewModels
             if (npc != null) npc.CurrentHP = hpcCurrentHp;
         }
 
-        private bool IsCaching => true;//VisibleBossesCount > 1;
+        private bool IsCaching => true;//VisibleBossesCount > 3;
         public bool IsCompact => VisibleMobsCount > 6;
 
         private NPC AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
@@ -451,7 +448,7 @@ namespace TCC.ViewModels
                 t.Name = guildName;
                 t.ExN(nameof(NPC.GuildId));
             }
-            _towerNames[towerId] =  guildName;
+            _towerNames[towerId] = guildName;
         }
 
         public void UpdateShield(ulong target, uint damage)
