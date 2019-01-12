@@ -13,10 +13,14 @@ namespace TCC
     public static class UpdateManager
     {
         private static System.Timers.Timer _checkTimer;
-        private const string DatabasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
-        private const string DatabaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
-        private const string AppVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-        private const string BaseDatabaseDir = "tera-used-icons-master";
+
+        private const string DatabasePath           = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
+        private const string DatabaseVersion        = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
+
+        private const string AppVersion             = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+        private const string AppVersionExperimental = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/version";
+
+        private const string BaseDatabaseDir        = "tera-used-icons-master";
 
         public static void CheckDatabaseVersion()
         {
@@ -168,7 +172,7 @@ namespace TCC
 
                 try
                 {
-                    var st = c.OpenRead(AppVersion);
+                    var st = c.OpenRead(App.Experimental ? AppVersionExperimental : AppVersion);
                     if (st == null) return;
                     var sr = new StreamReader(st);
                     var newVersionInfo = sr.ReadLine();
@@ -197,7 +201,7 @@ namespace TCC
 
                 try
                 {
-                    var st = c.OpenRead(AppVersion);
+                    var st = c.OpenRead(App.Experimental ? AppVersionExperimental : AppVersion);
                     if (st != null)
                     {
                         var sr = new StreamReader(st);
