@@ -41,11 +41,8 @@ namespace TCC.TemplateSelectors
                 case ChatChannel.Laurel:
                 case ChatChannel.Guardian:
                     return SystemAuthorTemplate;
-                case ChatChannel.Private7:
-                case ChatChannel.Private8:
-                    if(m.Author == "System" ||string.IsNullOrWhiteSpace(m.Author) || string.IsNullOrEmpty(m.Author)) return SystemAuthorTemplate;
-                    return DefaultAuthorTemplate;
                 default:
+                    if(m.Author == "System" ||string.IsNullOrWhiteSpace(m.Author) || string.IsNullOrEmpty(m.Author)) return SystemAuthorTemplate;
                     return DefaultAuthorTemplate;
             }
         }
