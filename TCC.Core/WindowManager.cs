@@ -175,11 +175,12 @@ namespace TCC
             var cooldownWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 CooldownWindow = new CooldownWindow();
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
                 Dispatcher.Run();
             }));
-            cooldownWindowThread.Name = "Cooldown thread";
+            cooldownWindowThread.Name = "Cdwn";
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
             cooldownWindowThread.Start();
         }
@@ -188,11 +189,13 @@ namespace TCC
             var classWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 ClassWindow = new ClassWindow();
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
                 Dispatcher.Run();
             }));
-            classWindowThread.Name = "Class thread";
+            classWindowThread.Name = "Class";
+
             classWindowThread.SetApartmentState(ApartmentState.STA);
             classWindowThread.Start();
         }
@@ -205,7 +208,7 @@ namespace TCC
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 Dispatcher.Run();
             }));
-            charWindowThread.Name = "Character window thread";
+            charWindowThread.Name = "Char";
             charWindowThread.SetApartmentState(ApartmentState.STA);
             charWindowThread.Start();
         }
@@ -218,7 +221,7 @@ namespace TCC
                 if (BossWindow.WindowSettings.Enabled) BossWindow.Show();
                 Dispatcher.Run();
             }));
-            bossGaugeThread.Name = "Boss gauge thread";
+            bossGaugeThread.Name = "Boss";
             bossGaugeThread.SetApartmentState(ApartmentState.STA);
             bossGaugeThread.Start();
         }
@@ -231,7 +234,7 @@ namespace TCC
                 if (BuffWindow.WindowSettings.Enabled) BuffWindow.Show();
                 Dispatcher.Run();
             }));
-            buffBarThread.Name = "Buff bar thread";
+            buffBarThread.Name = "Buff";
             buffBarThread.SetApartmentState(ApartmentState.STA);
             buffBarThread.Start();
         }
@@ -240,12 +243,14 @@ namespace TCC
             var groupWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
+
                 GroupWindow = new GroupWindow();
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
 
                 Dispatcher.Run();
             }));
-            groupWindowThread.Name = "Group thread";
+            groupWindowThread.Name = "Group";
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
         }
