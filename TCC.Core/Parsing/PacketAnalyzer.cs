@@ -12,7 +12,8 @@ namespace TCC.Parsing
     {
         public static MessageFactory Factory;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
-        private static Thread _analysisThread;
+        public static Thread AnalysisThread;
+        public static int AnalysisThreadId;
         public static void Init()
         {
             TeraSniffer.Instance.NewConnection += OnNewConnection;
@@ -22,11 +23,11 @@ namespace TCC.Parsing
             Proxy.Proxy.ProxyPacketReceived += Packets.Enqueue;
 
             Factory = new MessageFactory();
-            if (_analysisThread == null)
+            if (AnalysisThread == null)
             {
                 Log.All("Analysis thread not running, starting it...");
-                _analysisThread = new Thread(PacketAnalysisLoop);
-                _analysisThread.Start();
+                AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Anal" };
+                AnalysisThread.Start();
             }
             else
             {
@@ -36,6 +37,7 @@ namespace TCC.Parsing
         }
         private static void PacketAnalysisLoop()
         {
+            AnalysisThreadId = App.GetCurrentThreadId();
             while (true)
             {
                 if (!Packets.TryDequeue(out var msg))
