@@ -33,7 +33,11 @@ namespace TCC.Windows
         }
         public void SetVer(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Ver.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                Ver.Text = t;
+                if (App.Experimental) Ver.Foreground = R.Brushes.HpBrushLight;
+            }));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
