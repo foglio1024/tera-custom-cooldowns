@@ -17,10 +17,10 @@
         <Storyboard x:Key="WarnGlow" RepeatBehavior="Forever" >
             <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
-            <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="Opacity"                Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="Opacity"                BeginTime="0:0:0.1" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <ThicknessAnimation Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="BorderThickness"                        Duration="0:0:0.1" From="2" To="6" EasingFunction="{StaticResource QuadraticEase}" />
-            <ThicknessAnimation Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="BorderThickness"                      BeginTime="0:0:0.1"  Duration="0:0:0.6" From="6" To="2" EasingFunction="{StaticResource QuadraticEase}" />
+            <DoubleAnimation    Timeline.DesiredFrameRate="20" Storyboard.TargetProperty="Opacity"                Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <DoubleAnimation    Timeline.DesiredFrameRate="20" Storyboard.TargetProperty="Opacity"                BeginTime="0:0:0.1" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <ThicknessAnimation Timeline.DesiredFrameRate="20" Storyboard.TargetProperty="BorderThickness"                        Duration="0:0:0.1" From="2" To="6" EasingFunction="{StaticResource QuadraticEase}" />
+            <ThicknessAnimation Timeline.DesiredFrameRate="20" Storyboard.TargetProperty="BorderThickness"                      BeginTime="0:0:0.1"  Duration="0:0:0.6" From="6" To="2" EasingFunction="{StaticResource QuadraticEase}" />
         </Storyboard>
     </UserControl.Resources>
     <UserControl.LayoutTransform>

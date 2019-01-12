@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:BossGageWindowViewModel}">
     <StackPanel Width="Auto" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Stretch" 
                 Orientation="Horizontal"
                 >
         <ItemsControl Name="Bosses" 

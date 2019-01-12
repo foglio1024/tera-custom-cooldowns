@@ -40,8 +40,10 @@ namespace TCC.Controls.Classes.Elements
 
             _anim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
             _anim.Completed += (_, __) => _isAnimating = false;
+            Timeline.SetDesiredFrameRate(_anim, 20);
 
             _toZeroAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
+            Timeline.SetDesiredFrameRate(_toZeroAnimation, 20);
 
             _delay = new DispatcherTimer
             {

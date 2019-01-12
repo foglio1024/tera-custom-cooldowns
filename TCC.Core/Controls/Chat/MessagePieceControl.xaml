@@ -21,6 +21,7 @@
                 />
         <ContentControl x:Name="Root" 
                         Content="{Binding}" 
+                        Cursor="{Binding Type, Converter={StaticResource MessageTypeToCursor}}"
                         Margin="0,0,0,0" 
                         HorizontalAlignment="Right"
                         Visibility="Visible"
