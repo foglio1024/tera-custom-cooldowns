@@ -70,6 +70,16 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool ExperimentalNotification
+        {
+            get => SettingsHolder.ExperimentalNotification;
+            set
+            {
+                if (SettingsHolder.ExperimentalNotification == value) return;
+                SettingsHolder.ExperimentalNotification = value;
+                N();
+            }
+        }
         public bool CheckOpcodesHash
         {
             get => SettingsHolder.CheckOpcodesHash;

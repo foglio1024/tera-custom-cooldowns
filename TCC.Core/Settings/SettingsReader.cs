@@ -328,6 +328,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.HighPriority)) SettingsHolder.HighPriority = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ForceSoftwareRendering)) SettingsHolder.ForceSoftwareRendering = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.Npcap)) SettingsHolder.Npcap = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.ExperimentalNotification)) SettingsHolder.ExperimentalNotification = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.LanguageOverride) 
                     || attr.Name == "RegionOverride" // retrocompatibility <<-----------------------------<<<<<<<<<< TODO: remove at some point
                     ) SettingsHolder.LanguageOverride = attr.Value;

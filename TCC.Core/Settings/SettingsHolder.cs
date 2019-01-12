@@ -179,5 +179,6 @@ namespace TCC.Settings
         public static bool CheckOpcodesHash { get; set; } = true;
         public static bool DiscordWebhookEnabled { get; set; } = false;
         public static bool ShowNotificationBubble { get; set; } = true;
+        public static bool ExperimentalNotification { get; set; } = true;
     }
 }
