@@ -78,6 +78,12 @@ namespace TCC
 
             UpdateManager.StartCheck();
 
+            if (SettingsHolder.ExperimentalNotification)
+                WindowManager.FloatingButton.NotifyExtended("TCC experimental",
+                    "An experimental version of TCC is available. Open System settings to download it or disable this notification.", 
+                    NotificationType.Success, 
+                    10000);
+
             if (Debug)
             {
                 DebugStuff();
