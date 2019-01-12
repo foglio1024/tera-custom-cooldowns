@@ -8,7 +8,7 @@
              xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
-             Title="FlightDurationWindow" Height="300" Width="300" 
+             Title="TCC Flight" Height="300" Width="300" 
              d:DataContext="{x:Type widgets:FlightDurationWindow}">
     <Grid RenderTransformOrigin=".5 .5">
         <Grid.Style>

@@ -9,7 +9,7 @@
              xmlns:w="clr-namespace:TCC.Windows"
              Style="{StaticResource BaseWindowStyle}"
              mc:Ignorable="d" 
-             Title="WarriorBar" 
+             Title="TCC Class" 
              UseLayoutRounding="True"
              x:Name="Win"
              BorderBrush="Red"

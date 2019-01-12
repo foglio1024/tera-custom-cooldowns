@@ -13,7 +13,7 @@
                  xmlns:abnormalities1="clr-namespace:TCC.Controls.Abnormalities"
                  xmlns:tcc="clr-namespace:TCC"
                  mc:Ignorable="d"
-                 Title="Dashboard" Height="650" Width="1220"
+                 Title="TCC Dashboard" Height="650" Width="1220"
                  ResizeMode="NoResize"
                  WindowStyle="None"
                  Background="Transparent"

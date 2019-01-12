@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
-        Title="AbnormalitiesWindow" 
+        Title="TCC buffs" 
         MouseLeftButtonDown="Drag"
         Style="{StaticResource BaseWindowStyle}"
              d:DataContext="{d:DesignInstance vm:BuffBarWindowViewModel}"

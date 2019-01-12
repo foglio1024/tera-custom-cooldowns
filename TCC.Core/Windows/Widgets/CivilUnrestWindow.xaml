@@ -6,7 +6,7 @@
                  xmlns:vm="clr-namespace:TCC.ViewModels"
                  xmlns:local="clr-namespace:TCC.Windows"
                  mc:Ignorable="d"
-        Title="CivilUnrestWindow"
+        Title="TCC Civil Unrest"
                  Style="{StaticResource BaseWindowStyle}"
         Loaded="OnLoaded"
         d:DataContext="{d:DesignInstance {x:Type vm:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">

@@ -8,7 +8,7 @@
         mc:Ignorable="d" MouseEnter="Window_MouseEnter"
         MouseLeave="Window_MouseLeave"
         Loaded="FloatinButtonLoaded"
-        Title="FloatingButtonWindow" Height="Auto" Width="Auto"
+        Title="TCC Floating button" Height="Auto" Width="Auto"
         MinWidth="70"
         ResizeMode="NoResize" 
         WindowStyle="None"

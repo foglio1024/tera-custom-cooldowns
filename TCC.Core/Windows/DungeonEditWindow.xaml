@@ -10,7 +10,7 @@
                  xmlns:converters="clr-namespace:TCC.Converters"
                  xmlns:tcc="clr-namespace:TCC"
                  mc:Ignorable="d"
-                 Title="TCC" Height="550" Width="620"
+                 Title="TCC Dungeon edit" Height="550" Width="620"
                  WindowStyle="None"
                  ResizeMode="NoResize"
                  WindowStartupLocation="CenterOwner"

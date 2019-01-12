@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" WindowStyle="None" IsVisibleChanged="Window_IsVisibleChanged" RenderTransformOrigin=".5 .5" Background="Transparent" AllowsTransparency="True"
-        Title="TccMessageBox" Height="190" Width="340" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="TCC" Height="190" Width="340" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.RenderTransform>
         <ScaleTransform/>
     </Window.RenderTransform>

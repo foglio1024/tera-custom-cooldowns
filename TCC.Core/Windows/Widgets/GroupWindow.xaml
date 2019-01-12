@@ -6,7 +6,7 @@
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:w="clr-namespace:TCC.Windows"
              mc:Ignorable="d"
-             Title="GroupWindow"
+             Title="TCC Group"
              MouseLeftButtonDown="Drag"
              UseLayoutRounding="True"
              Style="{StaticResource BaseWindowStyle}"

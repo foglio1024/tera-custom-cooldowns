@@ -11,7 +11,7 @@
         xmlns:pc="clr-namespace:TCC.Data.Pc"
         Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
-        Title="LfgListWindow" Height="800"
+        Title="TCC LFG" Height="800"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="ListBoxItem" x:Key="PlayerListItemStyle">

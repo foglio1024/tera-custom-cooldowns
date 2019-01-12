@@ -9,7 +9,7 @@
         xmlns:c="clr-namespace:TCC.Controls"
         xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
         mc:Ignorable="d"
-        Title="HPbar" 
+        Title="TCC Character" 
         Style="{StaticResource BaseWindowStyle}"
         MouseLeftButtonDown="Drag"
         >

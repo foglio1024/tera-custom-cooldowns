@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
              mc:Ignorable="d"
-        Title="BossGageWindow" 
+        Title="TCC NPC" 
         Style="{StaticResource BaseWindowStyle}"
         MouseLeftButtonDown="Drag"
         MouseDoubleClick="TccWindow_MouseDoubleClick">
