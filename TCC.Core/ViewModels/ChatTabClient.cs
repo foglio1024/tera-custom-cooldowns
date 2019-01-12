@@ -13,16 +13,23 @@ namespace TCC.ViewModels
         {
             LastSource = Window.GetWindow(source) as ChatWindow;
             var model = new ChatViewModel();
-            var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
-                1, false, 1, false, true, false){ HideTimeout = 10, BackgroundOpacity = .3, FadeOut = true, LfgOn = false}, model);
+            var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false)
+            { HideTimeout = 10, BackgroundOpacity = .3, FadeOut = true, LfgOn = false }, model);
             ChatWindowManager.Instance.ChatWindows.Add(view);
             return new NewTabHost<Window>(view, view.TabControl);
 
         }
         public TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window)
         {
-            ChatWindowManager.Instance.ChatWindows.Remove(window as ChatWindow);
-            window.Close();
+            try
+            {
+                ChatWindowManager.Instance.ChatWindows.Remove(window as ChatWindow);
+                window.Close();
+            }
+            catch (System.Exception e)
+            {
+                Log.F($"Error while removing empty chat window: {e.ToString()} ");
+            }
             return TabEmptiedResponse.DoNothing;
         }
     }
