@@ -317,11 +317,11 @@ namespace TCC.ViewModels
         }
         private bool TryGetLfg(uint id, string msg, string name, out LFG lfg)
         {
-            lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Id == id);
+            lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Id == id);
             if (lfg != null) return true;
-            lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Name == name);
+            lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Name == name);
             if (lfg != null) return false;
-            lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Message == msg);
+            lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Message == msg);
             return lfg != null;
         }
         public void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)

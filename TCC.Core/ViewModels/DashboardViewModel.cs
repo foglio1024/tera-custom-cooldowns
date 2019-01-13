@@ -36,7 +36,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<Character> Characters { get; }
 
 
-        public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+        public Character CurrentCharacter => Characters.ToSyncList().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
         public Character SelectedCharacter
         {
             get => _selectedCharacter;
@@ -90,7 +90,7 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret += c.ElleonMarks);
+                Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
         }
@@ -99,7 +99,7 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret += c.VanguardCredits);
+                Characters.ToSyncList().ForEach(c => ret += c.VanguardCredits);
                 return ret;
             }
         }
@@ -108,7 +108,7 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret += c.GuardianCredits);
+                Characters.ToSyncList().ForEach(c => ret += c.GuardianCredits);
                 return ret;
             }
         }
@@ -186,7 +186,7 @@ namespace TCC.ViewModels
         public void SetLoggedIn(uint id)
         {
             _discardFirstVanguardPacket = true;
-            Characters.ToSyncArray().ToList().ForEach(x => x.IsLoggedIn = x.Id == id);
+            Characters.ToSyncList().ForEach(x => x.IsLoggedIn = x.Id == id);
         }
         public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
@@ -268,7 +268,7 @@ namespace TCC.ViewModels
         public void SelectCharacter(Character character)
         {
             //if(SelectedCharacter == character) return;
-            if(SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
+            if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
 
             SelectedCharacter = character;
             SelectedCharacterInventory = Utils.InitLiveView(o => o != null, SelectedCharacter.Inventory, new string[] { }, new SortDescription[]
@@ -453,7 +453,7 @@ namespace TCC.ViewModels
         }
         public void AddEventGroup(EventGroup eg)
         {
-            var g = EventGroups.ToSyncArray().FirstOrDefault(x => x.Name == eg.Name);
+            var g = EventGroups.ToSyncList().FirstOrDefault(x => x.Name == eg.Name);
             if (g != null)
             {
                 foreach (var ev in eg.Events)
@@ -473,28 +473,28 @@ namespace TCC.ViewModels
             CurrentCharacter.Buffs.Clear();
             SessionManager.CurrentPlayer.Buffs.ToList().ForEach(b =>
             {
-                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-                /*if (existing == null)*/
+        //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+        /*if (existing == null)*/
                 CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-                //else
-                //{
-                //    existing.Id = b.Abnormality.Id;
-                //    existing.Duration = b.DurationLeft;
-                //    existing.Stacks = b.Stacks;
-                //}
-            });
+        //else
+        //{
+        //    existing.Id = b.Abnormality.Id;
+        //    existing.Duration = b.DurationLeft;
+        //    existing.Stacks = b.Stacks;
+        //}
+    });
             SessionManager.CurrentPlayer.Debuffs.ToList().ForEach(b =>
             {
-                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-                /*if (existing == null)*/
+        //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+        /*if (existing == null)*/
                 CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-                //else
-                //{
-                //    existing.Id = b.Abnormality.Id;
-                //    existing.Duration = b.DurationLeft;
-                //    existing.Stacks = b.Stacks;
-                //}
-            });
+        //else
+        //{
+        //    existing.Id = b.Abnormality.Id;
+        //    existing.Duration = b.DurationLeft;
+        //    existing.Stacks = b.Stacks;
+        //}
+    });
         }
 
         public void UpdateInventory(Dictionary<uint, ItemAmount> list, bool first)
@@ -508,7 +508,7 @@ namespace TCC.ViewModels
             if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
-                if(first) CurrentCharacter.Inventory.Clear();
+                if (first) CurrentCharacter.Inventory.Clear();
 
                 foreach (var keyVal in list)
                 {

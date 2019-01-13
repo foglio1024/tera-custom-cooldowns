@@ -45,15 +45,15 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool AmIinLfg => Dispatcher.Invoke(() => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
+        public bool AmIinLfg => Dispatcher.Invoke(() => (Listings.ToSyncList().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
                                                                      || listing.LeaderName == SessionManager.CurrentPlayer.Name
-                                                                     || listing.Players.ToSyncArray().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
-                                                                     || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId))));
+                                                                     || listing.Players.ToSyncList().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
+                                                                     || GroupWindowViewModel.Instance.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId))));
         public void NotifyMyLfg()
         {
             N(nameof(AmIinLfg));
             N(nameof(MyLfg));
-            foreach (var listing in Listings.ToSyncArray())
+            foreach (var listing in Listings.ToSyncList())
             {
                 listing?.NotifyMyLfg();
             }
@@ -62,7 +62,7 @@ namespace TCC.ViewModels
 
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
                                                                    || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
-                                                                   || GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == listing.LeaderId)
+                                                                   || GroupWindowViewModel.Instance.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
         public LfgListViewModel()
         {

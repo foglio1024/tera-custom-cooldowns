@@ -401,19 +401,16 @@ namespace TCC
     {
         private readonly Dispatcher _dispatcher;
         private readonly ReaderWriterLockSlim _lock;
-        private string _owner = "";
         public SynchronizedObservableCollection()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher; //App.BaseDispatcher;
+            _dispatcher = Dispatcher.CurrentDispatcher; 
             _lock = new ReaderWriterLockSlim();
-            _owner = Thread.CurrentThread.Name;
             BindingOperations.EnableCollectionSynchronization(this, _lock);
         }
         public SynchronizedObservableCollection(Dispatcher d)
         {
             _dispatcher = d ?? Dispatcher.CurrentDispatcher;
             _lock = new ReaderWriterLockSlim();
-            _owner = Thread.CurrentThread.Name;
             BindingOperations.EnableCollectionSynchronization(this, _lock);
         }
         protected override void ClearItems()
@@ -433,7 +430,6 @@ namespace TCC
         }
         protected override void InsertItem(int index, T item)
         {
-            //var disp = _dispatcher == null ? App.BaseDispatcher : _dispatcher;
             _dispatcher.InvokeIfRequired(() =>
             {
                 if (index > Count)
@@ -501,14 +497,28 @@ namespace TCC
                 }
             }, DispatcherPriority.DataBind);
         }
-        public T[] ToSyncArray()
+        //public T[] ToSyncArray()
+        //{
+        //    _lock.EnterReadLock();
+        //    try
+        //    {
+        //        var array = new T[Count];
+        //        CopyTo(array, 0);
+        //        return array;
+        //    }
+        //    finally
+        //    {
+        //        _lock.ExitReadLock();
+        //    }
+        //}
+        public List<T> ToSyncList()
         {
             _lock.EnterReadLock();
             try
             {
-                var array = new T[Count];
-                CopyTo(array, 0);
-                return array;
+                var list = new List<T>();
+                list.AddRange(this);
+                return list;
             }
             finally
             {
