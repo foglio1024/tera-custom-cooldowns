@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:ctrl="clr-namespace:TCC.Controls"
-        xmlns:controls="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
         mc:Ignorable="d"        
         Title="TCC Merged inventory" Height="600" Width="435"
         WindowStartupLocation="CenterOwner"
