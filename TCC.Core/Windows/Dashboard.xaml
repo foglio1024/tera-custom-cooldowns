@@ -811,6 +811,17 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="Inventory" Foreground="#5fff" FontSize="20"
                                        FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center" />
+                            <Button Style="{StaticResource ButtonContentOpacityStyle}" Height="16"  
+                                    HorizontalAlignment="Right" Margin="0 0 10 0"
+                                    ToolTip="Open merged inventory"
+                                    Click="OpenMergedInventory">
+                                
+                            <Path Data="{StaticResource SvgOpenLink}"
+                                       VerticalAlignment="Center"
+                                      Opacity=".5">
+                            </Path>
+                            </Button>
+
                             <ScrollViewer Grid.Row="1" CanContentScroll="False"
                                           VerticalAlignment="Stretch">
                                 <ItemsControl ItemsSource="{Binding SelectedCharacterInventory}"

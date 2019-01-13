@@ -82,5 +82,9 @@ namespace TCC.Windows
             OnDetailsMouseButtonDown(null, null);
             VM.Characters.Remove(VM.SelectedCharacter);
         }
+        private void OpenMergedInventory(object sender, RoutedEventArgs e)
+        {
+            new MergedInventoryWindow() { Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog();
+        }
     }
 }
