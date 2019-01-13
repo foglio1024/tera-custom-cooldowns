@@ -139,12 +139,11 @@ namespace TCC.ViewModels
 
         private void OnNpcCollectionChanged()
         {
-            var caching = IsCaching;
-            if (caching && !_flushTimer.IsEnabled)
+            if (!_flushTimer.IsEnabled)
             {
                 _flushTimer.Start();
             }
-            else if (!caching && _flushTimer.IsEnabled)
+            else if(NpcList.Count == 0)
             {
                 _flushTimer.Stop();
                 FlushCache(null, null);
