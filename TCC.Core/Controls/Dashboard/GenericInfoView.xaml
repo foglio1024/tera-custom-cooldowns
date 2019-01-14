@@ -176,7 +176,7 @@
         </ToolTip>
         <DataTemplate x:Key="GeneralCharDataTemplate" DataType="pc:Character">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"
-                        Background="Transparent" MouseLeave="CloseInfoPopup" Height="30">
+                        Background="Transparent" Height="30">
                 <Grid VerticalAlignment="Stretch"
                       ToolTipService.InitialShowDelay="0"
                       ToolTipService.BetweenShowDelay="0"
@@ -351,7 +351,8 @@
         <ListBox ItemsSource="{Binding SortedCharacters}" AlternationCount="1" Grid.ColumnSpan="2"
                  VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch"
-                 ItemTemplate="{StaticResource NameClassCharDataTemplate}" Grid.Row="1" x:Name="CharNames">
+                 ItemTemplate="{StaticResource NameClassCharDataTemplate}" Grid.Row="1" x:Name="CharNames"
+                 ScrollViewer.ScrollChanged="CharNames_ScrollChanged">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel HorizontalAlignment="Stretch" />
@@ -368,7 +369,7 @@
                  VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource GeneralCharDataTemplate}" Grid.Row="1"
-                 ScrollViewer.ScrollChanged="ScrollViewer_OnScrollChanged">
+                 ScrollViewer.ScrollChanged="ContentListOnScrollChanged" x:Name="ContentList">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel HorizontalAlignment="Stretch" />
