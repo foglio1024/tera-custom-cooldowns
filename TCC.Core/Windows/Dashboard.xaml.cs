@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -31,6 +32,7 @@ namespace TCC.Windows
             Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
             Showed += () => VM.UpdateBuffs();
             Hidden += () => SessionManager.CurrentDatabase.DungeonDatabase.SaveCustomDefs();
+            //MouseLeftButtonDown += (_, __) => MenuPopup.IsOpen = false;
         }
 
 
@@ -86,6 +88,31 @@ namespace TCC.Windows
         private void OpenMergedInventory(object sender, RoutedEventArgs e)
         {
             new MergedInventoryWindow() { Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog();
+        }
+
+        private void OnMenuButtonClick(object sender, RoutedEventArgs e)
+        {
+            //MenuPopup.IsOpen = true;
+        }
+
+        private void UnHideChar(object sender, RoutedEventArgs e)
+        {
+            ((Character)((FrameworkElement)sender).DataContext).Hidden = false;
+            //HiddenCharsPopup.IsOpen = false;
+        }
+
+        private void OpenHiddenCharsPopup(object sender, MouseEventArgs e)
+        {
+            //HiddenCharsPopup.IsOpen = true;
+        }
+
+        private void CloseHiddenCharsPopup(object sender, MouseEventArgs e)
+        {
+            var s = sender as FrameworkElement;
+            Task.Delay(1000).ContinueWith(t =>
+            {
+            //    if (!s.IsMouseOver && !HiddenCharsPopup.IsMouseOver) Dispatcher.Invoke(() => HiddenCharsPopup.IsOpen = false);
+            });
         }
     }
 }

@@ -53,6 +53,7 @@ namespace TCC.ViewModels
 
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
+        public ICollectionViewLiveShaping HiddenCharacters { get; }
 
         public ICollectionViewLiveShaping SortedColumns
         {
@@ -71,6 +72,7 @@ namespace TCC.ViewModels
                 var ret = new ObservableCollection<InventoryItem>();
                 Task.Factory.StartNew(() =>
                 {
+                    if (SelectedCharacter == null) return;
                     SelectedCharacter.Inventory.ToList().ForEach(item =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
@@ -204,9 +206,15 @@ namespace TCC.ViewModels
             SortedCharacters = Utils.InitLiveView(o => !((Character)o).Hidden, Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+
+            HiddenCharacters = Utils.InitLiveView(o => ((Character)o).Hidden, Characters,
+                new[] { nameof(Character.Hidden) },
+                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+
             CharacterViewModelsView = Utils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
+
             LoadCharacters();
         }
 
