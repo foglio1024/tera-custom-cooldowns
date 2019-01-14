@@ -36,6 +36,7 @@ namespace TCC.Data.Pc
         private Location _lastLocation;
         private long _lastOnline;
         private string _serverName = "";
+        private bool _hidden;
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -90,14 +91,14 @@ namespace TCC.Data.Pc
         public string GuildName { get; set; } = "";
         public void UpdateDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
-            Dungeons.ToSyncArray().ToList().ForEach(dung =>
+            Dungeons.ToSyncList().ForEach(dung =>
             {
                 if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
             });
         }
         public void SetDungeonClears(uint dgId, int runs)
         {
-            var dg = Dungeons.ToSyncArray().FirstOrDefault(d => d.Dungeon.Id == dgId);
+            var dg = Dungeons.ToSyncList().FirstOrDefault(d => d.Dungeon.Id == dgId);
             if (dg != null) dg.Clears = runs;
         }
         public int VanguardWeekliesDone
@@ -192,12 +193,12 @@ namespace TCC.Data.Pc
         public ICollectionViewLiveShaping VisibleDungeonsView { get; set; }
         public SynchronizedObservableCollection<GearItem> Gear { get; set; }
 
-        public GearItem Weapon => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0, GearTier.Low, GearPiece.Weapon, 0, 0);
-        public GearItem Chest => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Armor) ?? new GearItem(0, GearTier.Low, GearPiece.Armor, 0, 0);
-        public GearItem Hands => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Hands) ?? new GearItem(0, GearTier.Low, GearPiece.Hands, 0, 0);
-        public GearItem Feet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Feet) ?? new GearItem(0, GearTier.Low, GearPiece.Feet, 0, 0);
-        public GearItem Belt => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Belt) ?? new GearItem(0, GearTier.Low, GearPiece.Belt, 0, 0);
-        public GearItem Circlet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
+        public GearItem Weapon => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0, GearTier.Low, GearPiece.Weapon, 0, 0);
+        public GearItem Chest => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Armor) ?? new GearItem(0, GearTier.Low, GearPiece.Armor, 0, 0);
+        public GearItem Hands => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Hands) ?? new GearItem(0, GearTier.Low, GearPiece.Hands, 0, 0);
+        public GearItem Feet => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Feet) ?? new GearItem(0, GearTier.Low, GearPiece.Feet, 0, 0);
+        public GearItem Belt => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Belt) ?? new GearItem(0, GearTier.Low, GearPiece.Belt, 0, 0);
+        public GearItem Circlet => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
         public ICollectionView Jewels { get; set; }
 
         public int ClaimedGuardianQuests
@@ -308,98 +309,107 @@ namespace TCC.Data.Pc
             }
         }
 
-
-        public Character()
+        public bool Hidden
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(Dispatcher);
-            Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
-            Buffs = new SynchronizedObservableCollection<AbnormalityData>(Dispatcher);
-            Inventory = new SynchronizedObservableCollection<InventoryItem>(Dispatcher);
-            VanguardDailiesDone = 0;
-            VanguardWeekliesDone = 0;
-            Laurel = Laurel.None;
-            MaxGuardianQuests = SessionManager.MaxGuardianQuests;
-            foreach (var dg in SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values)
+            get => _hidden; set
             {
-                Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
-            }
-            VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
-                new[]
-                    {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
-            Jewels = new CollectionViewSource() { Source = Gear }.View;
-            Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
-            Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
-
-        }
-        public Character(string name, Class c, uint id, int pos) : this()
-        {
-            Name = name;
-            Class = c;
-            Id = id;
-            Position = pos;
-        }
-
-        public int CompareTo(object obj)
-        {
-            var ch = (Character)obj;
-            return Position.CompareTo(ch.Position);
-        }
-
-        internal void EngageDungeon(uint dgId)
-        {
-            var dg = Dungeons.FirstOrDefault(x => x.Dungeon.Id == dgId);
-            if (dg != null)
-            {
-                dg.Entries = dg.Entries == 0
-                    ? dg.Runs - 1
-                    : dg.Entries - 1;
-            }
-        }
-
-        public void ClearGear()
-        {
-            //TODO: wut
-            Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
-        }
-
-        public void UpdateGear(List<GearItem> gear)
-        {
-            foreach (var gearItem in gear)
-            {
-                if (!Gear.Contains(gearItem))
-                {
-                    Gear.Add(gearItem);
-                }
-            }
-        }
-    }
-
-    public class InventoryItem : TSPropertyChanged
-    {
-        private int _amount;
-        private readonly uint _id;
-
-        public Item Item => SessionManager.CurrentDatabase.ItemsDatabase.Items.TryGetValue(_id, out var item)
-                            ? item
-                            : new Item(0, "", 0, 0, 0, "");
-        public uint Slot { get; }
-        public int Amount
-        {
-            get => _amount;
-            set
-            {
-                if (_amount == value) return;
-                _amount = value;
+                if (_hidden == value) return;
+                _hidden = value;
                 N();
             }
         }
 
-        public InventoryItem(uint slot, uint id, int amount)
+    public Character()
+    {
+        Dispatcher = Dispatcher.CurrentDispatcher;
+        Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(Dispatcher);
+        Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
+        Buffs = new SynchronizedObservableCollection<AbnormalityData>(Dispatcher);
+        Inventory = new SynchronizedObservableCollection<InventoryItem>(Dispatcher);
+        VanguardDailiesDone = 0;
+        VanguardWeekliesDone = 0;
+        Laurel = Laurel.None;
+        MaxGuardianQuests = SessionManager.MaxGuardianQuests;
+        foreach (var dg in SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values)
         {
-            _id = id;
-            Amount = amount;
-            Slot = slot;
+            Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
+        }
+        VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
+            new[]
+                {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
+        Jewels = new CollectionViewSource() { Source = Gear }.View;
+        Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
+        Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
+
+    }
+    public Character(string name, Class c, uint id, int pos) : this()
+    {
+        Name = name;
+        Class = c;
+        Id = id;
+        Position = pos;
+    }
+
+    public int CompareTo(object obj)
+    {
+        var ch = (Character)obj;
+        return Position.CompareTo(ch.Position);
+    }
+
+    internal void EngageDungeon(uint dgId)
+    {
+        var dg = Dungeons.FirstOrDefault(x => x.Dungeon.Id == dgId);
+        if (dg != null)
+        {
+            dg.Entries = dg.Entries == 0
+                ? dg.Runs - 1
+                : dg.Entries - 1;
         }
     }
+
+    public void ClearGear()
+    {
+        //TODO: wut
+        Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
+    }
+
+    public void UpdateGear(List<GearItem> gear)
+    {
+        foreach (var gearItem in gear)
+        {
+            if (!Gear.Contains(gearItem))
+            {
+                Gear.Add(gearItem);
+            }
+        }
+    }
+}
+
+public class InventoryItem : TSPropertyChanged
+{
+    private int _amount;
+    private readonly uint _id;
+
+    public Item Item => SessionManager.CurrentDatabase.ItemsDatabase.Items.TryGetValue(_id, out var item)
+                        ? item
+                        : new Item(0, "", 0, 0, 0, "");
+    public uint Slot { get; }
+    public int Amount
+    {
+        get => _amount;
+        set
+        {
+            if (_amount == value) return;
+            _amount = value;
+            N();
+        }
+    }
+
+    public InventoryItem(uint slot, uint id, int amount)
+    {
+        _id = id;
+        Amount = amount;
+        Slot = slot;
+    }
+}
 }

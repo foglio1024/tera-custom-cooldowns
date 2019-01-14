@@ -80,7 +80,8 @@ namespace TCC.Windows
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {
             OnDetailsMouseButtonDown(null, null);
-            VM.Characters.Remove(VM.SelectedCharacter);
+            //VM.Characters.Remove(VM.SelectedCharacter);
+            VM.SelectedCharacter.Hidden = true;
         }
         private void OpenMergedInventory(object sender, RoutedEventArgs e)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -83,6 +84,7 @@ namespace TCC.ViewModels
         }
 
         public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
+        public ICollectionViewLiveShaping CharacterViewModelsView { get; set; }
 
 
         public int TotalElleonMarks
@@ -115,17 +117,40 @@ namespace TCC.ViewModels
 
         public ObservableCollection<CharacterViewModel> CharacterViewModels
         {
-            get
+            get;
+            //{
+            //    if (_characters == null) _characters = new ObservableCollection<CharacterViewModel>();
+            //    _characters.Clear();
+            //    foreach (var o in Characters)
+            //    {
+            //        _characters.Add(new CharacterViewModel { Character = o });
+            //    }
+            //    return _characters;
+            //}
+        }
+
+        private void SyncViewModel(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
             {
-                if (_characters != null) return _characters;
-                _characters = new ObservableCollection<CharacterViewModel>();
-                foreach (var o in ((ICollectionView)SortedCharacters).Cast<Character>())
-                {
-                    _characters.Add(new CharacterViewModel { Character = o });
-                }
-                return _characters;
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Character item in e.NewItems)
+                    {
+                        CharacterViewModels.Add(new CharacterViewModel() { Character = item });
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Character item in e.OldItems)
+                    {
+                        var target = CharacterViewModels.FirstOrDefault(x => x.Character == item);
+                        CharacterViewModels.Remove(target);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
+
         public ObservableCollection<DungeonColumnViewModel> Columns
         {
             get
@@ -141,6 +166,7 @@ namespace TCC.ViewModels
         public DashboardViewModel()
         {
             Characters = new SynchronizedObservableCollection<Character>();
+            CharacterViewModels = new ObservableCollection<CharacterViewModel>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>();
@@ -156,26 +182,35 @@ namespace TCC.ViewModels
                         {
                             var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
                             CharacterViewModels?.ToList().ForEach(charVm =>
+                                {
+                                    //if (charVm.Character.Hidden) return;
                                     dvc.DungeonsList.Add(
-                                        new DungeonCooldownViewModel
-                                        {
-                                            Owner = charVm.Character,
-                                            Cooldown = charVm.Character.Dungeons.FirstOrDefault(x =>
-                                                x.Dungeon.Id == dungeon.Id)
-                                        }));
+                                          new DungeonCooldownViewModel
+                                          {
+                                              Owner = charVm.Character,
+                                              Cooldown = charVm.Character.Dungeons.FirstOrDefault(x =>
+                                                  x.Dungeon.Id == dungeon.Id)
+                                          });
+                                });
                             _columns.Add(dvc);
                         }), DispatcherPriority.Background);
                     });
                 });
                 _loaded = true;
             }, c => !_loaded);
-            SortedCharacters = Utils.InitLiveView(o => o != null, Characters, new string[] { }, new[]
-            {
-                new SortDescription(nameof(Character.Position), ListSortDirection.Ascending)
 
-            });
+            Characters.CollectionChanged += SyncViewModel;
+
+            SortedCharacters = Utils.InitLiveView(o => !((Character)o).Hidden, Characters,
+                new[] { nameof(Character.Hidden) },
+                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+            CharacterViewModelsView = Utils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
+                new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
+                new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
             LoadCharacters();
         }
+
+
 
         /* -- Methods ---------------------------------------------- */
 
