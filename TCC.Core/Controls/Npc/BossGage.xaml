@@ -132,7 +132,7 @@
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
-                    <Image Stretch="Uniform" 
+                    <!--<Image Stretch="Uniform" 
                            VerticalAlignment="Center" 
                            Margin="-14"
                            Width="60"
@@ -144,7 +144,7 @@
                                 <TranslateTransform Y="18.5" X="0" />
                             </TransformGroup>
                         </Image.RenderTransform>
-                    </Image>
+                    </Image>-->
                     <Image Margin="-10" 
                            Stretch="Uniform"
                            Width="50"
