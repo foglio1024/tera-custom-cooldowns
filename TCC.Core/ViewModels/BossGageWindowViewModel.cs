@@ -129,9 +129,9 @@ namespace TCC.ViewModels
             _cache = new Dictionary<ulong, float>();
             _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
             _flushTimer.Tick += FlushCache;
-            //_flushTimer.Start();
+            _flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
-            NpcListChanged += OnNpcCollectionChanged;
+            //NpcListChanged += OnNpcCollectionChanged;
 
 
 
