@@ -98,6 +98,7 @@ namespace TCC.R
 		public static Geometry SvgCharacterIcon => ((Geometry)App.Current.FindResource("SvgCharacterIcon"));
 		public static Geometry SvgNpcIcon => ((Geometry)App.Current.FindResource("SvgNpcIcon"));
 		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
+		public static Geometry SvgDotsVertical => ((Geometry)App.Current.FindResource("SvgDotsVertical"));
 		public static Geometry Svg => ((Geometry)App.Current.FindResource("Svg"));
 	}
 	public static class Colors
@@ -448,6 +449,7 @@ namespace TCC.R
 		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
 		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
 		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
+		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
 	}
 	public static class DataTemplates
 	{
