@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -484,6 +485,8 @@ namespace TCC.ViewModels
             }
 
             Dispatcher.Invoke(() => SkillsView = Utils.InitLiveView(null, SkillsDatabase.SkillsForClass, new string[] { }, new SortDescription[] { }));
+            ((ICollectionView)SkillsView).CollectionChanged += GcStahp;
+
             N(nameof(SkillsView));
             N(nameof(MainSkills));
             N(nameof(SecondarySkills));
@@ -521,6 +524,13 @@ namespace TCC.ViewModels
             //SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
             ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
             AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
+
+            ((ICollectionView)ItemsView).CollectionChanged += GcStahp;
+            ((ICollectionView)AbnormalitiesView).CollectionChanged += GcStahp;
+        }
+
+        private void GcStahp(object sender, NotifyCollectionChangedEventArgs e)
+        {
         }
 
         public void NotifyItemsDisplay()
