@@ -79,7 +79,15 @@ namespace TCC
 
             _contextMenu.Items.Add(new MenuItem() { Header = "Dashboard", Command = new RelayCommand(o => Dashboard.ShowWindow()) });
             _contextMenu.Items.Add(new MenuItem() { Header = "Settings", Command = new RelayCommand(o => SettingsWindow.ShowWindow()) });
-            _contextMenu.Items.Add(new MenuItem() { Header = "Close", Command = new RelayCommand(o => App.CloseApp()) });
+            _contextMenu.Items.Add(new MenuItem()
+            {
+                Header = "Close",
+                Command = new RelayCommand(o =>
+                {
+                    _contextMenu.Closed += (_, __) => App.CloseApp();
+                    _contextMenu.IsOpen = false;
+                })
+            });
 
             SettingsWindow = new SettingsWindow();
 
@@ -96,7 +104,7 @@ namespace TCC
 
         public static bool IsWindowOpen(Type type)
         {
-            return App.Current.Windows.ToList().Any(w => 
+            return App.Current.Windows.ToList().Any(w =>
             w.GetType() == type && w.IsVisible);
         }
 
@@ -147,7 +155,7 @@ namespace TCC
             //    while (waiting) { }
             //}
 
-            LoadCooldownWindow(); 
+            LoadCooldownWindow();
             LoadClassWindow();
             LoadGroupWindow();
             LoadNpcWindow();
@@ -178,7 +186,16 @@ namespace TCC
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 CooldownWindow = new CooldownWindow();
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
+                //try
+                //{
                 Dispatcher.Run();
+
+                //}
+                //catch (Exception e)
+                //{
+
+                //    throw e;
+                //}
             }));
             cooldownWindowThread.Name = "Cdwn";
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
