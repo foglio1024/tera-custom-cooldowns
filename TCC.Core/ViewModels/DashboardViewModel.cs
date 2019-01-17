@@ -54,7 +54,6 @@ namespace TCC.ViewModels
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
         public ICollectionViewLiveShaping HiddenCharacters { get; }
-
         public ICollectionViewLiveShaping SortedColumns
         {
             get
@@ -64,6 +63,8 @@ namespace TCC.ViewModels
                                             new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
             }
         }
+        public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
+        public ICollectionViewLiveShaping CharacterViewModelsView { get; set; }
 
         public ObservableCollection<InventoryItem> InventoryViewList
         {
@@ -85,8 +86,6 @@ namespace TCC.ViewModels
             }
         }
 
-        public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
-        public ICollectionViewLiveShaping CharacterViewModelsView { get; set; }
 
 
         public int TotalElleonMarks

@@ -55,7 +55,7 @@ namespace TCC.Controls.Dashboard
         }
         private void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
         {
-            new DungeonEditWindow() { Topmost = true, Owner = WindowManager.Dashboard}.ShowDialog();
+            new DungeonEditWindow() { Topmost = true, Owner = WindowManager.Dashboard }.ShowDialog();
         }
     }
 
@@ -81,7 +81,13 @@ namespace TCC.Controls.Dashboard
         public DungeonColumnViewModel()
         {
             DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
-            DungeonsListView = Utils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList, new[] { "Owner.Hidden" }, new SortDescription[] { });
+            DungeonsListView = Utils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
+                new[] { "Owner.Hidden" },
+                new SortDescription[]
+                {
+                    new SortDescription("Owner.Position", ListSortDirection.Ascending)
+                }
+            );
         }
     }
 
