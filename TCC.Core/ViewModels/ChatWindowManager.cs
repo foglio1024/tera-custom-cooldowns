@@ -93,10 +93,13 @@ namespace TCC.ViewModels
         }
         public void CloseAllWindows()
         {
-            foreach (var w in ChatWindows)
+            Dispatcher.Invoke(() =>
             {
-                w.CloseWindowSafe();
-            }
+                foreach (var w in ChatWindows)
+                {
+                    w.CloseWindowSafe();
+                }
+            });
         }
 
         public void SetPaused(bool v)
