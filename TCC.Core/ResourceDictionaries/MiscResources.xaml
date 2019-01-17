@@ -14,11 +14,11 @@
     <SkewTransform x:Key="Skew45" AngleX="-45"/>
     <SkewTransform x:Key="Skew45Inv" AngleX="45"/>
 
-    <Storyboard x:Key="Pulse" RepeatBehavior="Forever" >
+    <Storyboard x:Key="Pulse" RepeatBehavior="Forever" Duration="0:0:2" Timeline.DesiredFrameRate="20">
         <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
         <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
-        <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.6" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.2"/>
-        <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.6" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
+        <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.2"/>
+        <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
     </Storyboard>
 
     <!-- Fonts -->
