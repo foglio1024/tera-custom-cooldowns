@@ -15,6 +15,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;
@@ -167,6 +168,9 @@ namespace TCC
                 Console.WriteLine("----------------------------------");
             };
             _t.Start();
+
+
+
             //new DebugWindow().Show();
             //var i = 0;
             //while (i < 50)
@@ -216,18 +220,19 @@ namespace TCC
             //}
             //GC.Collect();
             //GC.WaitForPendingFinalizers();
-            //GroupWindowViewModel.Instance.AddOrUpdateMember(new User(BaseDispatcher)
-            //{
-            //    Alive = true,
-            //    Awakened = true,
-            //    CurrentHp = 1000,
-            //    MaxHp = 1000,
-            //    EntityId = 1,
-            //    ServerId = 1,
-            //    PlayerId = 1,
-            //    UserClass = Class.Archer,
-            //    Online = true
-            //});
+            GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher())
+            {
+                Alive = true,
+                Awakened = true,
+                CurrentHp = 0,
+                MaxHp = 1000,
+                EntityId = 1,
+                ServerId = 1,
+                PlayerId = 1,
+                UserClass = Class.Archer,
+                Online = true,
+                HasAggro = true
+            });
             //bool up = true;
             //bool inv = false;
             //ulong i = 0;
