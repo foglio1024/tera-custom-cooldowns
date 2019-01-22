@@ -6,13 +6,13 @@ namespace TCC.Parsing.Messages
     public class S_SPAWN_NPC : ParsedMessage
     {
         public ulong EntityId { get; }
-        public uint TemplateId {get; }
+        public uint TemplateId { get; }
         public ushort HuntingZoneId { get; }
         public bool Villager { get; }
+        public int RemainingEnrageTime { get; }
 
         public S_SPAWN_NPC(TeraMessageReader reader) : base(reader)
         {
-            reader.BaseStream.Position = 0;
             //reader.Skip(10);
             //id = reader.ReadUInt64();
             //var target = reader.ReadUInt64();
@@ -45,11 +45,25 @@ namespace TCC.Parsing.Messages
 
             reader.Skip(10);
             EntityId = reader.ReadUInt64();
-            reader.Skip(26);
+            var target = reader.ReadUInt64();
+            var loc = reader.ReadVector3f();
+            var angle = reader.ReadInt16();
+            var relation = reader.ReadInt32();
             TemplateId = reader.ReadUInt32();
             HuntingZoneId = reader.ReadUInt16();
-            reader.Skip(4+2+2+2+2+2+2+1);
+            reader.Skip(4  // shapeID
+                      + 2  // walkSpeed
+                      );
+            var enrage = reader.ReadUInt16(); // 0/1
+            if (reader.Factory.ReleaseVersion / 100 >= 79)
+            {
+                RemainingEnrageTime = reader.ReadInt32();
+            }
+            reader.Skip(2  // hpLevel  
+                      + 2  // questInfo
+                      + 1);  // visible
             Villager = reader.ReadBoolean();
+            reader.Skip(4);
             //reader.Skip(4+8+4+4);
             //var aggressive = reader.ReadBoolean();
 
