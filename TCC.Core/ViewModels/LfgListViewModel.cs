@@ -59,7 +59,7 @@ namespace TCC.ViewModels
             }
             MyLfg?.NotifyMyLfg();
         }
-
+        public bool AmILeader => GroupWindowViewModel.Instance.AmILeader;
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
                                                                    || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
                                                                    || GroupWindowViewModel.Instance.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
@@ -71,6 +71,12 @@ namespace TCC.ViewModels
             ListingsView = Utils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
+            GroupWindowViewModel.Instance.PropertyChanged += OnGroupWindowVmPropertyChanged;
+        }
+
+        private void OnGroupWindowVmPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GroupWindowViewModel.AmILeader)) N(nameof(AmILeader));
         }
 
         private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

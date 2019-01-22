@@ -6,6 +6,7 @@
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:tcc="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:w="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:settings="clr-namespace:TCC.Controls.Settings"
         xmlns:pc="clr-namespace:TCC.Data.Pc"
@@ -34,14 +35,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <DataTemplate x:Key="PlayerDt" DataType="pc:User">
-            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown">
+        <DataTemplate x:Key="PlayerDt" DataType="pc:User" >
+            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown" Grid.IsSharedSizeScope="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="A"/>
+                    <ColumnDefinition Width="2*" SharedSizeGroup="B" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="C" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Grid.Column="1" >
                     <Rectangle Fill="#cfff" Opacity="1"
                                Margin="2" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True"
                                HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -62,7 +64,6 @@
                           Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
                           HorizontalAlignment="Right" Margin="5 0 5 1" />
                 </StackPanel>
-
                 <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
                            Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0" VerticalAlignment="Center">
                 </TextBlock>
@@ -92,12 +93,12 @@
             </DataTemplate.Triggers>
         </DataTemplate>
         <DataTemplate x:Key="ApplicantDt" DataType="pc:User">
-            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown">
+            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown" Grid.IsSharedSizeScope="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="A"/>
+                    <ColumnDefinition Width="2*" SharedSizeGroup="B"/>
+                    <ColumnDefinition Width=".6*" SharedSizeGroup="C" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
@@ -141,13 +142,14 @@
                             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                         </Style>
                     </UniformGrid.Resources>
-                    <Button Background="{StaticResource GreenBrush}" Click="AcceptApply" >
+                    <Button Background="{StaticResource GreenBrush}" Click="AcceptApply" Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
                         <Path Data="{StaticResource SvgCheckCircle}"/>
                     </Button>
+
                     <Button Background="{StaticResource ChatPartyBrush}" Click="InspectApplicant">
                         <Path Data="{StaticResource SvgEye}" />
                     </Button>
-                    <Button Background="{StaticResource HpBrush}" Click="RefuseApplicant">
+                    <Button Background="{StaticResource HpBrush}" Click="RefuseApplicant" Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
                         <Path Data="{StaticResource SvgClose}"/>
                     </Button>
                 </UniformGrid>
@@ -257,7 +259,7 @@
                          Grid.ColumnSpan="5"
                          Grid.Column="0"
                          Visibility="Collapsed"
-                         Margin="15 0 15 0"
+                         Margin="15 5 15 0"
                          Background="Transparent"
                          BorderThickness="0"
                          HorizontalAlignment="Stretch"

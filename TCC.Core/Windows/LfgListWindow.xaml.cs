@@ -124,16 +124,20 @@ namespace TCC.Windows
         internal void ShowWindow()
         {
             if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 VM.RefreshSorting();
+            }), DispatcherPriority.Background);
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 if (IsVisible) return;
                 Opacity = 0;
                 Show();
                 Activate();
                 BeginAnimation(OpacityProperty, animation);
-            });
+            }), DispatcherPriority.Background);
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
