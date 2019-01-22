@@ -16,7 +16,8 @@ namespace TCC.Parsing.Messages
             IsEnraged = reader.ReadBoolean();
             if (reader.Factory.ReleaseVersion / 100 >= 79)
             {
-                RemainingEnrageTime = reader.ReadInt32();
+                var et = reader.ReadInt32();
+                RemainingEnrageTime = et < 0 ? 0 : et;
             }
 
             reader.Skip(4); // hpLevel

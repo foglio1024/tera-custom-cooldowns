@@ -94,7 +94,13 @@ namespace TCC.Controls.NPCs
             {
                 SlideEnrageIndicator(VM.CurrentPercentage);
                 EnrageBorder.BeginAnimation(OpacityProperty, _flash);
-                if (!VM.NPC.EnragePattern.StaysEnraged) EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
+                if (!VM.NPC.EnragePattern.StaysEnraged)
+               {
+                    _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
+                    Log.All($"Starting animation with duration {_enrageArcAnimation.Duration}");
+                    Log.All($"Remaining E time {VM.RemainingPercentage} - {VM.NPC.RemainingEnrageTime}");
+                    EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
+                }
             }
             else
             {
@@ -126,7 +132,6 @@ namespace TCC.Controls.NPCs
 
             SlideEnrageIndicator(VM.NextEnragePercentage);
 
-            _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
 
         }
 

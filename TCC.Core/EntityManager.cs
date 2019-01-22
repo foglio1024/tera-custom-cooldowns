@@ -77,8 +77,8 @@ namespace TCC
         }
         public static void SetNPCStatus(ulong entityId, bool enraged, int remainingEnrageTime)
         {
-            BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
             BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
+            BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
         }
         public static void UpdateNPC(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
