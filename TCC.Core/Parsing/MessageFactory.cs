@@ -250,7 +250,7 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> BossWindow = new Dictionary<Type, Delegate>
         {
-            {typeof(S_BOSS_GAGE_INFO),                         new Action<S_BOSS_GAGE_INFO>(PacketHandler.HandleGageReceived) },
+            {typeof(S_BOSS_GAGE_INFO),                         new Action<S_BOSS_GAGE_INFO>(PacketHandler.HandleBossGageInfo) },
             {typeof(S_NPC_STATUS),                             new Action<S_NPC_STATUS>(PacketHandler.HandleNpcStatusChanged) },
             {typeof(S_GUILD_TOWER_INFO),                       new Action<S_GUILD_TOWER_INFO>(PacketHandler.HandleGuildTowerInfo) },
         };

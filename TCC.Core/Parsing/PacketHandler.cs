@@ -92,12 +92,13 @@ namespace TCC.Parsing
             if (p.EntityId.IsMe()) SessionManager.Combat = p.IsInCombat;
         }
 
-        public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
+        public static void HandleBossGageInfo(S_BOSS_GAGE_INFO p)
         {
             EntityManager.UpdateNPC(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
         }
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
+            // TODO: server enrage info here
             EntityManager.SetNPCStatus(p.EntityId, p.IsEnraged);
             if (p.Target == 0)
             {
