@@ -161,9 +161,13 @@ namespace TCC.ViewModels
 
         private void FlushCache(object sender, EventArgs e)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (_cache.Count == 0) return;
+                if (_cache.Count == 0)
+                {
+                    //Log.CW($"[BossGageWindowViewModel L161] HP cache is empty, returning");
+                    return;
+                }
                 try
                 {
                     foreach (var hpc in _cache.ToList())
@@ -171,20 +175,27 @@ namespace TCC.ViewModels
                         SetHpFromCache(hpc.Key, hpc.Value);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Log.CW($"[BossGageWindowViewModel L173] Error while setting HP from cache: {ex.Message}");
+
                     // ignored
                 }
 
                 _cache.Clear();
 
-            });
+            }), DispatcherPriority.Background);
         }
 
         private void SetHpFromCache(ulong hpcEntityId, float hpcCurrentHp)
         {
             var npc = NpcList.FirstOrDefault(x => x.EntityId == hpcEntityId);
             if (npc != null) npc.CurrentHP = hpcCurrentHp;
+            else
+            {
+                Log.CW($"[BossGageWindowViewModel L189] NPC {hpcEntityId} not found while setting HP from cache");
+
+            }
         }
 
         private bool IsCaching => true;//VisibleBossesCount > 3;
@@ -271,7 +282,11 @@ namespace TCC.ViewModels
             else if (src == HpChangeSource.CreatureChangeHp && boss.HasGage) return;
 
             if (!IsCaching) boss.CurrentHP = curHp;
-            else AddToCache(boss.EntityId, curHp);
+            else
+            {
+                //Log.CW($"[BossGageWindowViewModel L273] Adding HP ({curHp}) to cache for NPC with eid {boss.EntityId}");
+                AddToCache(boss.EntityId, curHp);
+            }
 
         }
 

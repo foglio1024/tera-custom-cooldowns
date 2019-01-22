@@ -15,6 +15,7 @@ namespace TCC.Controls.NPCs
 
         private double _nextEnragePerc;
         private bool _isTimerRunning;
+        private bool _serverSentEnrage;
 
         private readonly DispatcherTimer _numberTimer;
 
@@ -225,6 +226,7 @@ namespace TCC.Controls.NPCs
                     else
                     {
                         _addEnrageItem = true;
+                        _serverSentEnrage = false;
                         _numberTimer?.Stop();
                         NextEnragePercentage = CurrentPercentage - NPC.EnragePattern.Percentage;
                         CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;
@@ -233,7 +235,12 @@ namespace TCC.Controls.NPCs
                     EnragedChanged?.Invoke();
                     break;
                 case nameof(NPC.RemainingEnrageTime):
-                    //_numberTimer.Refresh();
+                    if (!_serverSentEnrage && NPC.RemainingEnrageTime/1000 != 0)
+                    {
+                        NPC.EnragePattern.Duration = NPC.RemainingEnrageTime / 1000;
+                        _serverSentEnrage = true;
+                    }
+                    _numberTimer.Refresh();
                     CurrentEnrageTime = NPC.RemainingEnrageTime / 1000;
                     N(nameof(EnrageTBtext));
                     N(nameof(RemainingPercentage));
