@@ -8,14 +8,20 @@ namespace TCC.Parsing.Messages
         public ulong EntityId { get; }
         public ulong Target { get; }
         public bool IsEnraged { get; }
+        public int RemainingEnrageTime { get; }
 
         public S_NPC_STATUS(TeraMessageReader reader) : base(reader)
         {
             EntityId = reader.ReadUInt64();
             IsEnraged = reader.ReadBoolean();
-            reader.Skip(4); //unk1 = reader.ReadInt32();
+            if (reader.Factory.ReleaseVersion / 100 >= 79)
+            {
+                RemainingEnrageTime = reader.ReadInt32();
+            }
+
+            reader.Skip(4); // hpLevel
             Target = reader.ReadUInt64();
-            reader.Skip(4); //unk2 = reader.ReadInt32();
+            reader.Skip(4); // status
 
             //string npcName = entityId.ToString();
             //if (EntityManager.CurrentBosses.FirstOrDefault(x => x.EntityId == entityId) != null) 

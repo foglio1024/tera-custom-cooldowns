@@ -98,8 +98,7 @@ namespace TCC.Parsing
         }
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
-            // TODO: server enrage info here
-            EntityManager.SetNPCStatus(p.EntityId, p.IsEnraged);
+            EntityManager.SetNPCStatus(p.EntityId, p.IsEnraged, p.RemainingEnrageTime);
             if (p.Target == 0)
             {
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
@@ -318,7 +317,7 @@ namespace TCC.Parsing
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
             EntityManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
-            EntityManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, false, p.Villager);
+            EntityManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, false, p.Villager, p.RemainingEnrageTime);
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {

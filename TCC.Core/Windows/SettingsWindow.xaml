@@ -1251,8 +1251,15 @@
                                                        Choices="{Binding ControlShapes, Mode=OneWay}"
                             />
                             <settings:CheckboxSetting SettingName="Use npcap" 
-                                                      IsOn="{Binding Npcap, Mode=TwoWay}" >
-                            </settings:CheckboxSetting>
+                                                      IsOn="{Binding Npcap, Mode=TwoWay}" />
+                            <settings:CheckboxSetting SettingName="Experimental builds notification" 
+                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}" />
+                            <Button Style="{StaticResource SettingsButton}"  
+                                    Content="Download experimental build"
+                                    Click="ForceExperimentalBuildDownlaod" 
+                                    Background="{StaticResource AssaultStanceBrush}"
+                                    Foreground="White"/>
+
                         </StackPanel>
                     </Grid>
                 </TabItem>

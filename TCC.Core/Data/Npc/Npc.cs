@@ -298,6 +298,19 @@ namespace TCC.Data.NPCs
                 N();
             }
         }
+
+        private int _remainingEnrageTime;
+        public int RemainingEnrageTime
+        {
+            get => _remainingEnrageTime;
+            set
+            {
+                if (_remainingEnrageTime == value) return;
+                _remainingEnrageTime = value;
+                N();
+            }
+        }
+
         private void ShieldFailed(object sender, EventArgs e)
         {
             _shieldDuration.Stop();

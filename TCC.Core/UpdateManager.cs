@@ -191,6 +191,60 @@ namespace TCC
                 }
             }
         }
+        public async static void ForceDownloadExperimental()
+        {
+            using (var c = new WebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
+                try
+                {
+                    var st = c.OpenRead(AppVersionExperimental);
+                    if (st != null)
+                    {
+                        var sr = new StreamReader(st);
+                        var newVersionInfo = sr.ReadLine();
+                        var newVersionUrl = sr.ReadLine();
+
+                        if (newVersionInfo != null)
+                        {
+                            var v = Version.Parse(newVersionInfo);
+                            if (v > Assembly.GetExecutingAssembly().GetName().Version)
+                            {
+                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Download started", NotificationType.Success, 3000);
+
+                                c.DownloadFile(new Uri(newVersionUrl), "update.zip");
+
+                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
+                                if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
+                                ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
+
+                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Moving files", NotificationType.Success, 2000);
+
+
+                                File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
+                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Starting updater", NotificationType.Success, 1000);
+
+
+                                 await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
+                                Environment.Exit(0);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), ex.Message + "\r\n" +
+                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
+                             "\r\n" + ex.TargetSite);
+                    //MessageBox.Show("Error while checking updates. More info in update-check-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (TccMessageBox.Show("Error while checking updates. Try again?", MessageBoxType.ConfirmationWithYesNo) == System.Windows.MessageBoxResult.Yes)
+                    {
+                        ForceDownloadExperimental();
+                    }
+                }
+            }
+        }
         public static void CheckAppVersion()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

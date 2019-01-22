@@ -61,6 +61,13 @@ namespace TCC.ViewModels
                 N(nameof(CurrentHHphase));
             }
         }
+
+        public void SetBossEnrageTime(ulong entityId, int remainingEnrageTime)
+        {
+            var target = NpcList.FirstOrDefault(x => x.EntityId == entityId);
+            if(target != null) target.RemainingEnrageTime = remainingEnrageTime;
+        }
+
         public ICollectionViewLiveShaping Bams
         {
             get

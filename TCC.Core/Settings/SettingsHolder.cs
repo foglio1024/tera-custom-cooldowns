@@ -181,5 +181,6 @@ namespace TCC.Settings
         public static bool DiscordWebhookEnabled { get; set; } = false;
         public static bool ShowNotificationBubble { get; set; } = true;
         public static List<string> UserExcludedSysMsg { get; set; } = new List<string>();
+        public static bool ExperimentalNotification { get; set; } = true;
     }
 }

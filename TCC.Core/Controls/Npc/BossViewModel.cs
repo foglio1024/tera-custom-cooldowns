@@ -156,7 +156,11 @@ namespace TCC.Controls.NPCs
         {
 
             _numberTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _numberTimer.Tick += (_, __) => { if (!NPC.EnragePattern.StaysEnraged) CurrentEnrageTime--; };
+            _numberTimer.Tick += (_, __) =>
+            {
+                if (!NPC.EnragePattern.StaysEnraged)
+                    CurrentEnrageTime--;
+            };
 
 
             EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>();
@@ -225,9 +229,15 @@ namespace TCC.Controls.NPCs
                         NextEnragePercentage = CurrentPercentage - NPC.EnragePattern.Percentage;
                         CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;
                         N(nameof(RemainingPercentage));
-
                     }
                     EnragedChanged?.Invoke();
+                    break;
+                case nameof(NPC.RemainingEnrageTime):
+                    //_numberTimer.Refresh();
+                    CurrentEnrageTime = NPC.RemainingEnrageTime / 1000;
+                    N(nameof(EnrageTBtext));
+                    N(nameof(RemainingPercentage));
+
                     break;
 
             }
