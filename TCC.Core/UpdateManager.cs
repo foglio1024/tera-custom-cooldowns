@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Threading;
 using TCC.Data;
 using TCC.ViewModels;
+using System.Threading.Tasks;
+using TCC.Windows;
 
 namespace TCC
 {
