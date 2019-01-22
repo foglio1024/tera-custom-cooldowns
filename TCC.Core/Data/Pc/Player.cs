@@ -491,6 +491,7 @@ namespace TCC.Data.Pc
             Debuffs.Clear();
             InfBuffs.Clear();
             _debuffList.Clear();
+            CurrentShield = 0;
             N(nameof(IsDebuffed));
         }
 
