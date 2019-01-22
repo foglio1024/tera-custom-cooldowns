@@ -11,7 +11,7 @@ namespace TCC
     {
         private static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
-        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager)
+        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
         {
             CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
@@ -33,11 +33,13 @@ namespace TCC
                 if (m.IsBoss)
                 {
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
+                    BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
                 else
                 {
                     if (Settings.SettingsHolder.ShowOnlyBosses) return;
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
+                    BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
             }
         }
@@ -73,9 +75,10 @@ namespace TCC
             ClassAbnormalityTracker.CheckMarkingOnDespawn(target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
-        public static void SetNPCStatus(ulong entityId, bool enraged)
+        public static void SetNPCStatus(ulong entityId, bool enraged, int remainingEnrageTime)
         {
             BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
+            BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
         }
         public static void UpdateNPC(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {

@@ -47,8 +47,8 @@ namespace TCC.Controls.NPCs
             }
         }
         public double CurrentPercentage => NPC.HPFactor * 100;
-        public double RemainingPercentage => (CurrentPercentage - NextEnragePercentage) / NPC.EnragePattern.Percentage > 0 
-                                           ? (CurrentPercentage - NextEnragePercentage) / NPC.EnragePattern.Percentage 
+        public double RemainingPercentage => (CurrentPercentage - NextEnragePercentage) / NPC.EnragePattern.Percentage > 0
+                                           ? (CurrentPercentage - NextEnragePercentage) / NPC.EnragePattern.Percentage
                                            : 0;
         public double NextEnragePercentage
         {
@@ -116,7 +116,11 @@ namespace TCC.Controls.NPCs
         {
 
             _numberTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _numberTimer.Tick += (_, __) => { if (!NPC.EnragePattern.StaysEnraged) CurrentEnrageTime--; };
+            _numberTimer.Tick += (_, __) =>
+            {
+                if (!NPC.EnragePattern.StaysEnraged)
+                    CurrentEnrageTime--;
+            };
 
 
             EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>();
@@ -165,7 +169,7 @@ namespace TCC.Controls.NPCs
                     if (NPC.Enraged)
                     {
                         EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
-                        _numberTimer.Refresh();
+                        //_numberTimer.Refresh();
                         N(nameof(EnrageHistory));
                     }
                     else
@@ -174,9 +178,15 @@ namespace TCC.Controls.NPCs
                         NextEnragePercentage = CurrentPercentage - NPC.EnragePattern.Percentage;
                         CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;
                         N(nameof(RemainingPercentage));
-
                     }
                     EnragedChanged?.Invoke();
+                    break;
+                case nameof(NPC.RemainingEnrageTime):
+                    //_numberTimer.Refresh();
+                    CurrentEnrageTime = NPC.RemainingEnrageTime / 1000;
+                    N(nameof(EnrageTBtext));
+                    N(nameof(RemainingPercentage));
+
                     break;
 
             }
