@@ -1253,12 +1253,14 @@
                             <settings:CheckboxSetting SettingName="Use npcap" 
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />
                             <settings:CheckboxSetting SettingName="Experimental builds notification" 
-                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}" />
+                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}" 
+                                                      Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"/>
                             <Button Style="{StaticResource SettingsButton}"  
                                     Content="Download experimental build"
                                     Click="ForceExperimentalBuildDownlaod" 
                                     Background="{StaticResource AssaultStanceBrush}"
-                                    Foreground="White"/>
+                                    Foreground="White"
+                                    Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"/>
 
                         </StackPanel>
                     </Grid>
