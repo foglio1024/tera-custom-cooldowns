@@ -9,18 +9,38 @@ namespace TCC.Data.Databases
     public class DungeonDatabase : DatabaseBase
     {
         private readonly string CustomDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
-        private readonly string DefaultDefsPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
-        private readonly string ImagesPath = Path.Combine(App.DataPath, "section_images.tsv");
+        private readonly string DefaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
+        private readonly string DefaultDefsRelativePath =  "default-dungeon-defs.tsv";
+        private readonly string ImagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
+        private readonly string ImagesRelativePath = "section_images.tsv";
 
         public readonly Dictionary<uint, Dungeon> Dungeons;
 
         protected override string FolderName => "dungeons";
         protected override string Extension => "tsv";
+        public override bool Exists => base.Exists
+                                    && File.Exists(DefaultDefsFullPath) 
+                                    && File.Exists(ImagesFullPath);
+
+        public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
+        {
+            base.CheckVersion();
+            base.CheckVersion(DefaultDefsFullPath, DefaultDefsRelativePath);
+            base.CheckVersion(ImagesFullPath, ImagesRelativePath);
+        }
+        public override void Update(string custom = null)
+        {
+            base.Update();
+            base.Update(DefaultDefsRelativePath);
+            base.Update(ImagesRelativePath);
+        }
 
         public DungeonDatabase(string lang) :base(lang)
         {
             Dungeons = new Dictionary<uint, Dungeon>();
         }
+
+
 
         private void ParseDungeons()
         {
@@ -37,7 +57,7 @@ namespace TCC.Data.Databases
         }
         private void ParseDungeonDefs()
         {
-            if (!File.Exists(CustomDefsPath)) File.Copy(DefaultDefsPath, CustomDefsPath);
+            if (!File.Exists(CustomDefsPath)) File.Copy(DefaultDefsFullPath, CustomDefsPath);
             var def = File.OpenText(CustomDefsPath);
             while (true)
             {
@@ -71,7 +91,7 @@ namespace TCC.Data.Databases
         }
         private void ParseDungeonIcons()
         {
-            var f = File.OpenText(ImagesPath);
+            var f = File.OpenText(ImagesFullPath);
             while (true)
             {
                 var line = f.ReadLine();

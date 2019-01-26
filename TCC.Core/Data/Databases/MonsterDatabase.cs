@@ -14,6 +14,15 @@ namespace TCC.Data.Databases
 
         protected override string FolderName => "monsters";
         protected override string Extension => "xml";
+        public override bool Exists
+        {
+            get
+            {
+                return base.Exists && File.Exists(OverrideFileFullPath);
+            }
+        }
+        private string OverrideFileFullPath => FullPath.Replace(_language, "override");
+        private string OverrideFileRelativePath => RelativePath.Replace(_language, "override");
 
         public MonsterDatabase(string lang) : base(lang)
         {
@@ -45,11 +54,16 @@ namespace TCC.Data.Databases
             else return 1;
         }
 
+        public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
+        {
+            base.CheckVersion();
+            base.CheckVersion(OverrideFileFullPath, OverrideFileRelativePath);
+        }
+
         public override void Load()
         {
             _zones.Clear();
             var _monstersDoc = XDocument.Load(FullPath);
-            var _overrideDoc = XDocument.Load(FullPath.Replace(_language, "override"));
 
             foreach (var zone in _monstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
@@ -69,6 +83,7 @@ namespace TCC.Data.Databases
                 }
                 _zones.Add(zoneId, z);
             }
+            var _overrideDoc = XDocument.Load(OverrideFileFullPath);
             foreach (var zone in _overrideDoc.Descendants().Where(x => x.Name == "Zone"))
             {
                 var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
@@ -91,6 +106,12 @@ namespace TCC.Data.Databases
                     }
                 }
             }
+        }
+
+        public override void Update(string custom = null)
+        {
+            base.Update();
+            base.Update(OverrideFileRelativePath);
         }
     }
 
