@@ -7,7 +7,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -21,6 +23,7 @@ using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Parsing;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
 
@@ -269,6 +272,26 @@ namespace TCC
             if (maxValue == 0) return 1;
             var n = value / maxValue;
             return n;
+        }
+
+        public static WebClient GetDefaultWebClient()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            var ret = new WebClient();
+            ret.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+            return ret;
+
+        }
+
+        public static string GenerateFileHash(string fileName)
+        {
+            if (!File.Exists(fileName)) return "";
+            var file = File.Open(fileName, FileMode.Open);
+            var fileBuffer = new byte[file.Length];
+            file.Read(fileBuffer, 0, (int)file.Length);
+            file.Close();
+            return StringUtils.ByteArrayToString(SHA256.Create().ComputeHash(fileBuffer));
+
         }
     }
 
