@@ -31,21 +31,10 @@ namespace TCC.Data.Databases
         /// <summary>
         /// True if all database files are found.
         /// </summary>
-        public bool Exists => MonsterDatabase.Exists &&
-                              AccountBenefitDatabase.Exists &&
-                              ItemsDatabase.Exists &&
-                              ItemExpDatabase.Exists &&
-                              SkillsDatabase.Exists &&
-                              AbnormalityDatabase.Exists &&
-                              DungeonDatabase.Exists &&
-                              SocialDatabase.Exists &&
-                              SystemMessagesDatabase.Exists &&
-                              GuildQuestDatabase.Exists &&
-                              AchievementDatabase.Exists &&
-                              AchievementGradeDatabase.Exists &&
-                              MapDatabase.Exists &&
-                              RegionsDatabase.Exists &&
-                              QuestDatabase.Exists;
+        public bool Exists => Databases.All(db => db.Exists);
+
+        public bool IsUpToDate => Databases.All(db => db.IsUpToDate);
+
 
         public TccDatabase(string lang)
         {
@@ -71,21 +60,7 @@ namespace TCC.Data.Databases
         /// </summary>
         public void Load()
         {
-            AccountBenefitDatabase.Load();
-            MonsterDatabase.Load();
-            ItemsDatabase.Load();
-            ItemExpDatabase.Load();
-            SkillsDatabase.Load();
-            SystemMessagesDatabase.Load();
-            GuildQuestDatabase.Load();
-            AchievementDatabase.Load();
-            AchievementGradeDatabase.Load();
-            MapDatabase.Load();
-            RegionsDatabase.Load();
-            QuestDatabase.Load();
-            AbnormalityDatabase.Load();
-            DungeonDatabase.Load();
-            SocialDatabase.Load();
+            Databases.ForEach(db => db.Load());
         }
 
         /// <summary>
@@ -133,6 +108,15 @@ namespace TCC.Data.Databases
             }
             return ret;
         }
+
+        public void DownloadOutdatedDatabases()
+        {
+            foreach(var outdated in Databases.Where(db => !db.IsUpToDate))
+            {
+                outdated.Update();
+            }
+        }
+
         /// <summary>
         /// Gets max exp amount for the specified item at the specified enchantment level.
         /// </summary>
@@ -145,6 +129,35 @@ namespace TCC.Data.Databases
             if (item.ExpId == 0) return 0;
             return ItemExpDatabase.ExpData[item.ExpId][enchant];
         }
+        private void InvokeActionOnAllDatabases(Action<DatabaseBase> a)
+        {
+            foreach (var item in Databases)
+            {
+                a.Invoke(item);
+            }
+
+        }
+        private List<DatabaseBase> Databases
+        {
+            get
+            {
+                var t = this.GetType();
+                var ret = new List<DatabaseBase>(); 
+                foreach (var prop in t.GetProperties())
+                {
+                    if (prop.PropertyType.IsSubclassOf(typeof(DatabaseBase)))
+                    {
+                        ret.Add(prop.GetValue(this) as DatabaseBase);
+                    }
+                }
+                return ret;
+            }
+        }
+        public void CheckVersion()
+        {
+            Databases.ForEach(db => db.CheckVersion());
+        }
+
         /// <summary>
         /// Tries to convert a continent id to a guard name or dungeon name.
         /// </summary>
