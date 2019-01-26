@@ -65,7 +65,7 @@ namespace TCC.ViewModels
         public void SetBossEnrageTime(ulong entityId, int remainingEnrageTime)
         {
             var target = NpcList.FirstOrDefault(x => x.EntityId == entityId);
-            if(target != null) target.RemainingEnrageTime = remainingEnrageTime;
+            if (target != null) target.RemainingEnrageTime = remainingEnrageTime;
         }
 
         public ICollectionViewLiveShaping Bams
@@ -134,11 +134,11 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
             NpcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
             _cache = new Dictionary<ulong, float>();
-            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
+            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
             _flushTimer.Tick += FlushCache;
             _flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
-            //NpcListChanged += OnNpcCollectionChanged;
+            NpcListChanged += OnNpcCollectionChanged;
 
 
 
@@ -146,17 +146,18 @@ namespace TCC.ViewModels
 
         private void OnNpcCollectionChanged()
         {
-            if (!_flushTimer.IsEnabled)
-            {
-                Log.All($"+ Starting flush timer");
-                _flushTimer.Start();
-            }
-            else if(NpcList.Count == 0)
-            {
-                Log.All($"- Stopping flush timer");
-                _flushTimer.Stop();
-                FlushCache(null, null);
-            }
+            //if (!_flushTimer.IsEnabled)
+            //{
+            //    Log.All($"+ Starting flush timer");
+            //    _flushTimer.Start();
+            //}
+            //else if (NpcList.Count == 0)
+            //{
+            //    Log.All($"- Stopping flush timer");
+            //    _flushTimer.Stop();
+            //    FlushCache(null, null);
+            //}
+            FlushCache(null, null);
         }
 
         private void FlushCache(object sender, EventArgs e)
@@ -279,13 +280,18 @@ namespace TCC.ViewModels
             boss.MaxHP = maxHp;
 
             if (src == HpChangeSource.BossGage) boss.HasGage = true;
-            else if (src == HpChangeSource.CreatureChangeHp && boss.HasGage) return;
+            else if (src == HpChangeSource.Me && boss.HasGage)
+            {
+                FlushCache(null, null);
+                return;
+            }
 
             if (!IsCaching) boss.CurrentHP = curHp;
             else
             {
                 //Log.CW($"[BossGageWindowViewModel L273] Adding HP ({curHp}) to cache for NPC with eid {boss.EntityId}");
                 AddToCache(boss.EntityId, curHp);
+                if (src == HpChangeSource.Me) FlushCache(null, null);
             }
 
         }
