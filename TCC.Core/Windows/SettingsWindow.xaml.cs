@@ -149,7 +149,7 @@ namespace TCC.Windows
         {
             if (TccMessageBox.Show("Warning: experimental build could be unstable. Proceed?", Data.MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
             {
-                await Task.Factory.StartNew(() => UpdateManager.ForceDownloadExperimental());
+                await Task.Factory.StartNew(() => UpdateManager.ForceUpdateExperimental());
             }
         }
     }
