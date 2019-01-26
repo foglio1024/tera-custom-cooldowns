@@ -261,7 +261,6 @@ namespace TCC
 
         public static void CheckAppVersion()
         {
-            CheckServersFile();
             try
             {
                 var vp = new VersionParser();

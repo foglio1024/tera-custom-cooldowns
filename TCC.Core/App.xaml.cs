@@ -71,6 +71,7 @@ namespace TCC
             SplashScreen.SetText("Pre-loading databases...");
             UpdateManager.CheckDatabaseHash();
             SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsHolder.LastLanguage) ? "EU-EN" : SettingsHolder.LastLanguage == "EU" ? "EU-EN" : SettingsHolder.LastLanguage);
+            UpdateManager.CheckServersFile();
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
