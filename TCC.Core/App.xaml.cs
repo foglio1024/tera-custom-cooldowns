@@ -34,7 +34,8 @@ namespace TCC
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
         public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
-        public static string DataPath { get; } = Path.Combine(BasePath, "resources", "data");
+        public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
+        public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
         public static Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
 
@@ -57,7 +58,7 @@ namespace TCC
             UpdateManager.CheckAppVersion();
 
             SplashScreen.SetText("Checking for database updates...");
-            UpdateManager.CheckDatabaseVersion();
+            UpdateManager.CheckIconsVersion();
 
             SplashScreen.SetText("Loading settings...");
             var sr = new SettingsReader();
@@ -68,6 +69,7 @@ namespace TCC
             if (SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             SplashScreen.SetText("Pre-loading databases...");
+            UpdateManager.CheckDatabaseHash();
             SessionManager.InitDatabases(string.IsNullOrEmpty(SettingsHolder.LastLanguage) ? "EU-EN" : SettingsHolder.LastLanguage == "EU" ? "EU-EN" : SettingsHolder.LastLanguage);
 
             SplashScreen.SetText("Initializing windows...");
@@ -82,7 +84,7 @@ namespace TCC
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
-            UpdateManager.StartCheck();
+            UpdateManager.StartPeriodicCheck();
 
             if (!Experimental && SettingsHolder.ExperimentalNotification)
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",

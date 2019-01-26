@@ -186,6 +186,15 @@ namespace TCC
         public static void InitDatabases(string lang)
         {
             CurrentDatabase = new TccDatabase(lang);
+            CurrentDatabase.CheckVersion();
+            if (!CurrentDatabase.IsUpToDate)
+            {
+                var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
+                if(res == System.Windows.MessageBoxResult.Yes)
+                {
+                    CurrentDatabase.DownloadOutdatedDatabases();
+                }
+            }
             if (!CurrentDatabase.Exists)
             {
                 var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
