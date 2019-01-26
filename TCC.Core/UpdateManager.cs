@@ -1,13 +1,15 @@
-﻿using System;
-using System.Net;
-using System.IO.Compression;
-using System.IO;
-using System.Reflection;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
-using TCC.Data;
-using TCC.ViewModels;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using TCC.Data;
+using TCC.Data.Databases;
+using TCC.ViewModels;
 using TCC.Windows;
 
 namespace TCC
@@ -16,141 +18,178 @@ namespace TCC
     {
         private static System.Timers.Timer _checkTimer;
 
-        private const string DatabasePath           = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
-        private const string DatabaseVersion        = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
+        private const string IconsUrl = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
+        private const string IconsVersionUrl = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
 
-        private const string AppVersion             = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-        private const string AppVersionExperimental = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/version";
+        private const string AppVersionUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+        private const string AppVersionExperimentalUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/version";
 
-        private const string BaseDatabaseDir        = "tera-used-icons-master";
+        private const string DownloadedIconsDir = "tera-used-icons-master";
 
-        public static void CheckDatabaseVersion()
+        public const string DatabaseHashFileUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/database-hashes.json";
+
+        public static Dictionary<string, string> DatabaseHashes { get; set; }
+
+        public static void CheckServersFile()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var c = new WebClient())
+            var path = Path.Combine(App.DataPath, "servers.txt");
+            if (!File.Exists(path) || Utils.GenerateFileHash(path) != DatabaseHashes["servers.txt"])
+                DownloadServersFile();
+        }
+        private static void DownloadServersFile()
+        {
+            if (!Directory.Exists(App.DataPath)) Directory.CreateDirectory(App.DataPath);
+            using (var c = Utils.GetDefaultWebClient())
             {
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 try
                 {
-                    var st = c.OpenRead(DatabaseVersion);
-                    if (st != null)
-                    {
-                        var sr = new StreamReader(st);
 
-                        var newVersion = Convert.ToInt32(sr.ReadLine());
-                        var currentVersion = 0;
-                        if (File.Exists("resources/images/current_version"))
-                        {
-                            using (var str = File.OpenText("resources/images/current_version"))
-                            {
-                                currentVersion = Convert.ToInt32(str.ReadLine());
-                                str.Close();
-                            }
-
-                        }
-
-                        if (newVersion > currentVersion)
-                        {
-                            if (App.SplashScreen.AskUpdate($"Icons database v{newVersion} available. Download now?"))
-                            {
-                                DownloadDatabase();
-                                ExtractDatabase();
-                            }
-                            //if (MessageBox.Show($"Icons database v{newVersion} available. Download now?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                            //{
-                            //    DownloadDatabase();
-                            //    ExtractDatabase();
-                            //}
-                        }
-                    }
+                    c.DownloadFile("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/servers.txt", Path.Combine(App.DataPath, "servers.txt"));
                 }
-                catch (Exception)
+                catch
                 {
-                    if (App.SplashScreen.AskUpdate("Error while checking database update. Try again?"))
-                    {
-                        CheckDatabaseVersion();
-                    }
-                    //MessageBox.Show("Error while checking database updates.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
+                    var res = TccMessageBox.Show("Failed to download servers file. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                    if (res == System.Windows.MessageBoxResult.Yes) DownloadServersFile();
+
                 }
             }
         }
 
-        private static void DownloadDatabase()
+        public static void CheckIconsVersion()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var c = new WebClient())
+            using (var c = Utils.GetDefaultWebClient())
             {
-                var ready = false;
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+                try
+                {
+                    var st = c.OpenRead(IconsVersionUrl);
+                    if (st == null) return;
+                    var newVersion = Convert.ToInt32(new StreamReader(st).ReadLine());
+                    var currentVersion = 0;
+                    var currVersionFilePath = Path.Combine(App.ResourcesPath, "images/current_version");
+                    if (File.Exists(currVersionFilePath))
+                    {
+                        using (var str = File.OpenText(currVersionFilePath))
+                        {
+                            currentVersion = Convert.ToInt32(str.ReadLine());
+                            str.Close();
+                        }
+                    }
+
+                    if (newVersion <= currentVersion) return;
+                    if (!App.SplashScreen.AskUpdate($"Icon database v{newVersion} available. Download now?")) return;
+
+                    DownloadIcons();
+                    ExtractIcons();
+                }
+                catch (Exception)
+                {
+                    if (!App.SplashScreen.AskUpdate("Error while checking icon database update. Try again?")) return;
+                    CheckIconsVersion();
+                }
+            }
+        }
+
+        public static void CheckDatabaseHash()
+        {
+            DatabaseHashes = new Dictionary<string, string>();
+
+            try
+            {
+                DownloadDatabaseHashes();
+            }
+            catch (Exception ex)
+            {
+                Log.F($"Failed to download database hashes. nException: {ex.Message}\n{ex.StackTrace}");
+                if (App.SplashScreen.AskUpdate("Failed to download database hashes. Try again?")) CheckDatabaseHash();
+            }
+        }
+
+        private static async void DownloadIcons()
+        {
+
+            using (var c = Utils.GetDefaultWebClient())
+            {
+                //var ready = false;
 
                 c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
-                c.DownloadFileCompleted += (s, ev) => ready = true;
+                //c.DownloadFileCompleted += (s, ev) => ready = true;
+
                 try
                 {
                     App.SplashScreen.SetText("Downloading database...");
-                    // ReSharper disable once AccessToDisposedClosure
-                    App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(DatabasePath), "icons.zip"));
-                    while (!ready) Thread.Sleep(1);
+                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip")));
+                    //while (!ready) Thread.Sleep(1);
                     App.SplashScreen.SetText("Downloading database... Done.");
 
                 }
                 catch (Exception)
                 {
-                    if (App.SplashScreen.AskUpdate("Error while downloading database. Try again?"))
-                    {
-                        DownloadDatabase();
-                    }
-
-                    //MessageBox.Show("Couldn't download database.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);                    
+                    if (!App.SplashScreen.AskUpdate("Error while downloading database. Try again?")) return;
+                    DownloadIcons();
                 }
             }
         }
 
-        private static void ExtractDatabase()
+        private static void ExtractIcons()
         {
-            if (Directory.Exists(BaseDatabaseDir))
-            {
-                Directory.Delete(BaseDatabaseDir, true);
-            }
-            App.SplashScreen.SetText("Extracting database...");
+            if (Directory.Exists(DownloadedIconsDir)) Directory.Delete(DownloadedIconsDir, true);
 
-            ZipFile.ExtractToDirectory("icons.zip", AppDomain.CurrentDomain.BaseDirectory);
+            App.SplashScreen.SetText("Extracting database...");
+            ZipFile.ExtractToDirectory("icons.zip", App.BasePath);
             App.SplashScreen.SetText("Extracting database... Done.");
 
-            foreach (var dirPath in Directory.GetDirectories(BaseDatabaseDir, "*", SearchOption.AllDirectories))
+            App.SplashScreen.SetText("Creating directories...");
+            Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(dirPath =>
             {
-                Directory.CreateDirectory(dirPath.Replace(BaseDatabaseDir, "resources/images"));
-            }
-            App.SplashScreen.SetText("Copying files...");
+                Directory.CreateDirectory(dirPath.Replace(DownloadedIconsDir, "resources/images"));
+            });
+            App.SplashScreen.SetText("Creating directories... Done.");
 
-            foreach (var newPath in Directory.GetFiles(BaseDatabaseDir, "*.*", SearchOption.AllDirectories))
+            App.SplashScreen.SetText("Copying files...");
+            Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList().ForEach(newPath =>
             {
-                File.Copy(newPath, newPath.Replace(BaseDatabaseDir, "resources/images"), true);
-            }
+                File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+            });
             App.SplashScreen.SetText("Copying files... Done.");
 
-            CleanTempDatabase();
+            CleanTempIcons();
 
-            App.SplashScreen.SetText("Database updated successfully.");
-
-            //MessageBox.Show("Database updated.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+            App.SplashScreen.SetText("Icons updated successfully.");
         }
 
-        private static void CleanTempDatabase()
+        public static void UpdateDatabase(string relativePath)
+        {
+            // example https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/acc_benefits/acc_benefits-EU-EN.tsv
+            var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{relativePath.Replace("\\", "/")}";
+            var destPath = Path.Combine(App.DataPath, relativePath);
+            if (!Directory.Exists(Path.GetDirectoryName(destPath))) Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+
+            try
+            {
+                using (var c = Utils.GetDefaultWebClient())
+                {
+                    c.DownloadFile(url, destPath);
+                }
+            }
+            catch
+            {
+                var res = TccMessageBox.Show($"Failed to download database file {Path.GetFileNameWithoutExtension(relativePath)}. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                if (res == System.Windows.MessageBoxResult.Yes) UpdateDatabase(relativePath);
+            }
+        }
+
+        private static void CleanTempIcons()
         {
             try
             {
-                Directory.Delete(BaseDatabaseDir, true);
+                Directory.Delete(DownloadedIconsDir, true);
                 File.Delete("icons.zip");
             }
-            catch (Exception)
-            {
-                // ignored
-            }
+            catch { }
         }
-        public static void StartCheck()
+
+        public static void StartPeriodicCheck()
         {
             _checkTimer = new System.Timers.Timer(60 * 10 * 1000);
             _checkTimer.Elapsed += CheckTimer_Elapsed;
@@ -166,22 +205,16 @@ namespace TCC
 
         private static void CheckAppVersionPeriodic()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var c = new WebClient())
+            using (var c = Utils.GetDefaultWebClient())
             {
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
                 try
                 {
-                    var st = c.OpenRead(App.Experimental ? AppVersionExperimental : AppVersion);
+                    var st = c.OpenRead(App.Experimental ? AppVersionExperimentalUrl : AppVersionUrl);
                     if (st == null) return;
-                    var sr = new StreamReader(st);
-                    var newVersionInfo = sr.ReadLine();
-
+                    var newVersionInfo = new StreamReader(st).ReadLine();
                     if (newVersionInfo == null) return;
-                    var v = Version.Parse(newVersionInfo);
-                    if (v <= Assembly.GetExecutingAssembly().GetName().Version) return;
+                    if (Version.Parse(newVersionInfo) <= Assembly.GetExecutingAssembly().GetName().Version) return;
+
                     ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
                     WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                 }
@@ -193,156 +226,140 @@ namespace TCC
                 }
             }
         }
-        public async static void ForceDownloadExperimental()
+
+        public async static void ForceUpdateExperimental()
         {
-            using (var c = new WebClient())
-            {
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
-                try
-                {
-                    var st = c.OpenRead(AppVersionExperimental);
-                    if (st != null)
-                    {
-                        var sr = new StreamReader(st);
-                        var newVersionInfo = sr.ReadLine();
-                        var newVersionUrl = sr.ReadLine();
-
-                        if (newVersionInfo != null)
-                        {
-                            var v = Version.Parse(newVersionInfo);
-                            if (v > Assembly.GetExecutingAssembly().GetName().Version)
-                            {
-                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Download started", NotificationType.Success, 3000);
-
-                                c.DownloadFile(new Uri(newVersionUrl), "update.zip");
-
-                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
-                                if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
-                                ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
-
-                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Moving files", NotificationType.Success, 2000);
-
-
-                                File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
-                                WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Starting updater", NotificationType.Success, 1000);
-
-
-                                 await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
-                                Environment.Exit(0);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), ex.Message + "\r\n" +
-                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                             "\r\n" + ex.TargetSite);
-                    //MessageBox.Show("Error while checking updates. More info in update-check-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (TccMessageBox.Show("Error while checking updates. Try again?", MessageBoxType.ConfirmationWithYesNo) == System.Windows.MessageBoxResult.Yes)
-                    {
-                        ForceDownloadExperimental();
-                    }
-                }
-            }
-        }
-        public static void CheckAppVersion()
-        {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var c = new WebClient())
-            {
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
-                try
-                {
-                    var st = c.OpenRead(App.Experimental ? AppVersionExperimental : AppVersion);
-                    if (st != null)
-                    {
-                        var sr = new StreamReader(st);
-                        var newVersionInfo = sr.ReadLine();
-                        var newVersionUrl = sr.ReadLine();
-
-                        if (newVersionInfo != null)
-                        {
-                            var v = Version.Parse(newVersionInfo);
-                            if (v > Assembly.GetExecutingAssembly().GetName().Version)
-                            {
-                                if (App.SplashScreen.AskUpdate($"TCC v{newVersionInfo} available. Download now?"))
-                                {
-                                    Update(newVersionUrl);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), ex.Message + "\r\n" +
-                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                             "\r\n" + ex.TargetSite);
-                    //MessageBox.Show("Error while checking updates. More info in update-check-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (App.SplashScreen.AskUpdate("Error while checking updates. Try again?"))
-                    {
-                        CheckAppVersion();
-                    }
-                }
-            }
-        }
-
-
-        private static void Update(string url)
-        {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var c = new WebClient())
+            using (var c = Utils.GetDefaultWebClient())
             {
                 try
                 {
-                    c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+                    var vp = new VersionParser(forceExperimental: true);
+                    if (!vp.Valid) return;
 
-                    App.SplashScreen.SetText("Downloading update...");
-                    var ready = false;
-                    c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
-                    c.DownloadFileCompleted += (s, ev) => ready = true;
-                    // ReSharper disable once AccessToDisposedClosure
-                    App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(url), "update.zip"));
+                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Download started", NotificationType.Success, 3000);
+                    c.DownloadFile(new Uri(vp.NewVersionUrl), "update.zip");
 
-                    while (!ready) Thread.Sleep(1);
-
-                    App.SplashScreen.SetText("Extracting zip...");
+                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
                     if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
                     ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
-                    App.SplashScreen.SetText("Moving files...");
 
+                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Moving files", NotificationType.Success, 2000);
                     File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
-                    App.SplashScreen.SetText("Starting updater...");
 
-                    Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update");
+                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Starting updater", NotificationType.Success, 1000);
+                    await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
                     Environment.Exit(0);
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(Path.Combine(App.BasePath, "update-error.txt"), ex.Message + "\r\n" +
-                         ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                         "\r\n" + ex.TargetSite);
-                    //           MessageBox.Show("Error while checking updates. More info in update-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    //           MessageBox.Show("Couldn't download update.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    if (App.SplashScreen.AskUpdate("Error while downloading update. Try again? If the error perists download TCC manually."))
-                    {
-                        Update(url);
-                    }
+                    Log.F($"Error while checking updates. \nException: {ex.Message}\n{ex.StackTrace}");
+                    if (TccMessageBox.Show("Error while checking updates. Try again?", MessageBoxType.ConfirmationWithYesNo) != System.Windows.MessageBoxResult.Yes) return;
+                    ForceUpdateExperimental();
                 }
             }
-
         }
 
-        internal static void StopTimer()
+        public static void CheckAppVersion()
+        {
+            CheckServersFile();
+            try
+            {
+                var vp = new VersionParser();
+                if (!vp.Valid) return;
+                if (!vp.IsNewer) return;
+                if (!App.SplashScreen.AskUpdate($"TCC v{vp.NewVersionNumber} available. Download now?")) return;
+
+                Update(vp.NewVersionUrl);
+            }
+            catch (Exception e)
+            {
+                Log.F($"Error while checking update. \nException:\n{e.Message}\n{e.StackTrace}");
+                if (!App.SplashScreen.AskUpdate("Error while checking updates. Try again?")) return;
+                CheckAppVersion();
+            }
+        }
+
+        private async static void Update(string url)
+        {
+            using (var c = Utils.GetDefaultWebClient())
+            {
+                try
+                {
+                    //var ready = false;
+                    //c.DownloadFileCompleted += (s, ev) => ready = true;
+                    App.SplashScreen.SetText("Downloading update...");
+                    c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
+                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() => c.DownloadFileAsync(new Uri(url), "update.zip")));
+                    //while (!ready) Thread.Sleep(1);
+
+                    App.SplashScreen.SetText("Extracting zip...");
+                    if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
+                    ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
+
+                    App.SplashScreen.SetText("Moving files...");
+                    File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
+
+                    App.SplashScreen.SetText("Starting updater...");
+                    Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update");
+                    Environment.Exit(0);
+                }
+                catch (Exception e)
+                {
+                    Log.F($"Error while downloading update. \nException:\n{e.Message}\n{e.StackTrace}");
+                    if (!App.SplashScreen.AskUpdate("Error while downloading update. Try again? If the error perists download TCC manually.")) return;
+                    Update(url);
+                }
+            }
+        }
+
+        public static void StopTimer()
         {
             _checkTimer?.Stop();
         }
+
+        public static void DownloadDatabaseHashes()
+        {
+            DatabaseHashes.Clear();
+            using (var c = Utils.GetDefaultWebClient())
+            {
+                var f = c.OpenRead(DatabaseHashFileUrl);
+                using (var sr = new StreamReader(f))
+                {
+                    var sHashes = sr.ReadToEnd();
+                    var jHashes = JObject.Parse(sHashes);
+                    jHashes.Descendants().ToList().ForEach(jDesc =>
+                    {
+                        if (!(jDesc is JProperty jProp)) return;
+                        DatabaseHashes[jProp.Name] = jProp.Value.ToString();
+                    });
+                }
+            }
+        }
+
+        private class VersionParser
+        {
+            public string NewVersionNumber { get; }
+            public string NewVersionUrl { get; }
+            public Version Version => Version.Parse(NewVersionNumber);
+            public bool IsNewer => Version > Assembly.GetExecutingAssembly().GetName().Version;
+            public bool Valid { get; } = false;
+
+            public VersionParser(bool forceExperimental = false)
+            {
+                using (var c = Utils.GetDefaultWebClient())
+                {
+                    var st = c.OpenRead(App.Experimental || forceExperimental ? AppVersionExperimentalUrl : AppVersionUrl);
+                    if (st == null) return;
+
+                    using (var sr = new StreamReader(st))
+                    {
+                        NewVersionNumber = sr.ReadLine();
+                        NewVersionUrl = sr.ReadLine();
+                        Valid = true;
+                    }
+                }
+            }
+        }
+
     }
 }
