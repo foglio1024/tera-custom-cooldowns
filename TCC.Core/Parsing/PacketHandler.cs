@@ -70,7 +70,7 @@ namespace TCC.Parsing
             }
             else
             {
-                EntityManager.UpdateNPC(p.Target, p.CurrentHP, p.MaxHP);
+                EntityManager.UpdateNPC(p.Target, p.CurrentHP, p.MaxHP, p.Source);
             }
             ChatWindowManager.Instance.AddDamageReceivedMessage(p.Source, p.Target, p.Diff, p.MaxHP);
         }

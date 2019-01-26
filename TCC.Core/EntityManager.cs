@@ -85,9 +85,9 @@ namespace TCC
             BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
             SetEncounter(curHP, maxHP);
         }
-        public static void UpdateNPC(ulong target, long currentHP, long maxHP)
+        public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, HpChangeSource.CreatureChangeHp);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, source.IsMe() ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             SetEncounter(currentHP, maxHP);
         }
         private static void SetEncounter(float curHP, float maxHP)
