@@ -17,16 +17,9 @@ namespace TCC.Parsing
         {
             if (!File.Exists(filename)) return false;
             if (!Settings.SettingsHolder.CheckOpcodesHash) return true;
-            var file = File.Open(filename, FileMode.Open);
-            var fileBuffer = new byte[file.Length];
-            file.Read(fileBuffer, 0, (int)file.Length);
-            file.Close();
-            var localHash = SHA256.Create().ComputeHash(fileBuffer);
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            using (var c = new WebClient())
+            var localHash = Utils.GenerateFileHash(filename);
+            using (var c = Utils.GetDefaultWebClient())
             {
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
                 try
                 {
                     var st = c.OpenRead("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/mappings.json");
@@ -38,7 +31,7 @@ namespace TCC.Parsing
                         var reg = SessionManager.Server.Region;
                         var jReg = jMappings[reg];
                         var remoteHash = jReg["protocol_hash"].Value<string>();
-                        if (StringUtils.ByteArrayToString(localHash) == remoteHash) return true;
+                        if (localHash == remoteHash) return true;
                     }
                 }
                 catch 
