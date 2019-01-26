@@ -55,7 +55,6 @@ namespace TCC.Windows
             });
         }
 
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -135,7 +134,8 @@ namespace TCC.Windows
                 if (IsVisible) return;
                 Opacity = 0;
                 Show();
-                Activate();
+                FocusManager.HideFromToolBar(this.Handle);
+                FocusManager.MakeUnfocusable(this.Handle);
                 BeginAnimation(OpacityProperty, animation);
             }), DispatcherPriority.Background);
         }
@@ -165,6 +165,8 @@ namespace TCC.Windows
         {
             if (!VM.Creating)
             {
+                FocusManager.UndoUnfocusable(this.Handle);
+                Activate();
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 NewMessageTextBox.Focus();
                 VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
