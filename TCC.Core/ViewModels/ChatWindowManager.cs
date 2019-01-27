@@ -220,6 +220,7 @@ namespace TCC.ViewModels
             if (current.Author == SessionManager.CurrentPlayer.Name ||
                 old.Author == SessionManager.CurrentPlayer.Name) return true;
             if (old.RawMessage != current.RawMessage) return true;
+
             if (old.Author != current.Author) return true;
             switch (current.Channel)
             {
@@ -229,12 +230,6 @@ namespace TCC.ViewModels
                 case ChatChannel.Loot:
                 case ChatChannel.Bargain:
                 case ChatChannel.Damage:
-                case ChatChannel.Private1:
-                case ChatChannel.Private2:
-                case ChatChannel.Private3:
-                case ChatChannel.Private4:
-                case ChatChannel.Private5:
-                case ChatChannel.Private6:
                 case ChatChannel.Private7:
                 case ChatChannel.Private8:
                 case ChatChannel.TCC:
