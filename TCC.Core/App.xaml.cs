@@ -49,9 +49,7 @@ namespace TCC
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
             TccMessageBox.Create(); //Create it here in STA thread
-#if !DEBUG
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
-#endif
             TryDeleteUpdater();
 
             SplashScreen.SetText("Checking for application updates...");
@@ -386,6 +384,8 @@ namespace TCC
             if (ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
             sb.AppendLine($"TargetSite: {ex.TargetSite}");
             File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/crash.log", sb.ToString());
+#if !DEBUG
+
             try
             {
                 var t = new Thread(() => UploadCrashDump(e));
@@ -395,7 +395,7 @@ namespace TCC
             {
                 // ignored
             }
-
+#endif
             TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
