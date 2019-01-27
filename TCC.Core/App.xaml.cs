@@ -39,7 +39,7 @@ namespace TCC
         public static bool Loading { get; private set; }
         public static Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
 
-        private void OnStartup(object sender, StartupEventArgs e)
+        private async void OnStartup(object sender, StartupEventArgs e)
         {
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
@@ -56,7 +56,7 @@ namespace TCC
             UpdateManager.CheckAppVersion();
 
             SplashScreen.SetText("Checking for database updates...");
-            UpdateManager.CheckIconsVersion();
+            await UpdateManager.CheckIconsVersion();
 
             SplashScreen.SetText("Loading settings...");
             var sr = new SettingsReader();

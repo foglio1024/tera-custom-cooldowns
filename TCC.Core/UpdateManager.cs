@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using TCC.Data;
@@ -14,6 +15,7 @@ using TCC.Windows;
 
 namespace TCC
 {
+
     public static class UpdateManager
     {
         private static System.Timers.Timer _checkTimer;
@@ -56,7 +58,7 @@ namespace TCC
             }
         }
 
-        public static void CheckIconsVersion()
+        public static async Task CheckIconsVersion()
         {
             using (var c = Utils.GetDefaultWebClient())
             {
@@ -79,13 +81,12 @@ namespace TCC
                     if (newVersion <= currentVersion) return;
                     if (!App.SplashScreen.AskUpdate($"Icon database v{newVersion} available. Download now?")) return;
 
-                    DownloadIcons();
-                    ExtractIcons();
+                    await DownloadIcons();
                 }
                 catch (Exception)
                 {
                     if (!App.SplashScreen.AskUpdate("Error while checking icon database update. Try again?")) return;
-                    CheckIconsVersion();
+                    await CheckIconsVersion();
                 }
             }
         }
@@ -105,57 +106,75 @@ namespace TCC
             }
         }
 
-        private static async void DownloadIcons()
+        private static async Task DownloadIcons()
         {
 
             using (var c = Utils.GetDefaultWebClient())
             {
-                //var ready = false;
-
-                c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
-                //c.DownloadFileCompleted += (s, ev) => ready = true;
-
+                //c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
+                c.DownloadFileCompleted += async (_, args) =>
+                {
+                    if (args.Error != null)
+                    {
+                        var res = TccMessageBox.Show("Failed to download icons, try again?", MessageBoxType.ConfirmationWithYesNo);
+                        if (res == System.Windows.MessageBoxResult.Yes) await DownloadIcons();
+                    }
+                    else
+                    {
+                        if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Done downloading icons.", NotificationType.Success, 2000);
+                        ExtractIcons();
+                    }
+                };
                 try
                 {
-                    App.SplashScreen.SetText("Downloading database...");
-                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip")));
-                    //while (!ready) Thread.Sleep(1);
-                    App.SplashScreen.SetText("Downloading database... Done.");
-
+                    App.SplashScreen.SetText("Downloading icons...");
+                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip")); //not awaited
                 }
                 catch (Exception)
                 {
                     if (!App.SplashScreen.AskUpdate("Error while downloading database. Try again?")) return;
-                    DownloadIcons();
+                    await DownloadIcons();
                 }
             }
         }
 
         private static void ExtractIcons()
         {
-            if (Directory.Exists(DownloadedIconsDir)) Directory.Delete(DownloadedIconsDir, true);
-
-            App.SplashScreen.SetText("Extracting database...");
-            ZipFile.ExtractToDirectory("icons.zip", App.BasePath);
-            App.SplashScreen.SetText("Extracting database... Done.");
-
-            App.SplashScreen.SetText("Creating directories...");
-            Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(dirPath =>
+            try
             {
-                Directory.CreateDirectory(dirPath.Replace(DownloadedIconsDir, "resources/images"));
-            });
-            App.SplashScreen.SetText("Creating directories... Done.");
+                if (Directory.Exists(DownloadedIconsDir)) Directory.Delete(DownloadedIconsDir, true);
 
-            App.SplashScreen.SetText("Copying files...");
-            Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList().ForEach(newPath =>
+                //App.SplashScreen.SetText("Extracting database...");
+
+                if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
+                ZipFile.ExtractToDirectory("icons.zip", App.BasePath);
+                //App.SplashScreen.SetText("Extracting database... Done.");
+
+                //App.SplashScreen.SetText("Creating directories...");
+                Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(dirPath =>
+                {
+                    Directory.CreateDirectory(dirPath.Replace(DownloadedIconsDir, "resources/images"));
+                });
+                //App.SplashScreen.SetText("Creating directories... Done.");
+
+                //App.SplashScreen.SetText("Copying files...");
+                Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList().ForEach(newPath =>
+                {
+                    File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+                });
+                //App.SplashScreen.SetText("Copying files... Done.");
+
+                CleanTempIcons();
+                if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
+
+                //App.SplashScreen.SetText("Icons updated successfully.");
+
+            }
+            catch
             {
-                File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
-            });
-            App.SplashScreen.SetText("Copying files... Done.");
-
-            CleanTempIcons();
-
-            App.SplashScreen.SetText("Icons updated successfully.");
+                var res = TccMessageBox.Show("Error while extracting icons. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                if (res == System.Windows.MessageBoxResult.Yes) ExtractIcons();
+            }
         }
 
         public static void UpdateDatabase(string relativePath)
