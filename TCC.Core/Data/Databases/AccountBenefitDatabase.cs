@@ -20,10 +20,10 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Benefits.Clear();
-            var f = File.OpenText(FullPath);
-            while (true)
+            var lines = File.ReadAllLines(FullPath);
+            //var f = File.OpenText(FullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
                 if (line == null) return;
                 if (line == "") continue;
                 var s = line.Split('\t');

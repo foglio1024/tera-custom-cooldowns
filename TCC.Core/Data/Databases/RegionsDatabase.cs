@@ -19,10 +19,11 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Names.Clear();
-            var f = File.OpenText(FullPath);
-            while (true)
+            //var f = File.OpenText(FullPath);
+            var lines = File.ReadAllLines(FullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
+                //var line = f.ReadLine();
                 if (line == null) break;
 
                 var s = line.Split('\t');

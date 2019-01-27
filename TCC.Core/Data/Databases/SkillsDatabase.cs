@@ -237,7 +237,6 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Skills.Clear();
-            var f = File.OpenText(FullPath);
             for (var i = 0; i <= 12; i++)
             {
                 Skills.Add((Class)i, new Dictionary<uint, Skill>());
@@ -245,10 +244,12 @@ namespace TCC.Data.Databases
             Skills.Add(Class.Common, new Dictionary<uint, Skill>());
             Skills.Add(Class.None, new Dictionary<uint, Skill>());
 
+            //var f = File.OpenText(FullPath);
+            var lines = File.ReadAllLines(FullPath);
 
-            while (true)
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
+                //var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);

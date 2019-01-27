@@ -23,10 +23,10 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Abnormalities.Clear();
-            var hd = File.OpenText(FullPath);
-            while (true)
+            //var hd = File.OpenText(FullPath);
+            var lines = File.ReadAllLines(FullPath);
+            foreach(var l in lines)
             {
-                var l = hd.ReadLine();
                 if (l == null) break;
                 if (l == "") continue;
                 var s = l.Split('\t');

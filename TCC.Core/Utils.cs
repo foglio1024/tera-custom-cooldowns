@@ -286,10 +286,20 @@ namespace TCC
         public static string GenerateFileHash(string fileName)
         {
             if (!File.Exists(fileName)) return "";
-            var file = File.Open(fileName, FileMode.Open);
-            var fileBuffer = new byte[file.Length];
-            file.Read(fileBuffer, 0, (int)file.Length);
-            file.Close();
+            byte[] fileBuffer = new byte[1];
+            try
+            {
+                fileBuffer = File.ReadAllBytes(fileName);
+            }
+            catch
+            {
+                Log.F($"Failed to check hash on file {fileName}");
+                return "";
+            }
+            //var file = File.Open(fileName, FileMode.Open);
+            //var fileBuffer = new byte[file.Length];
+            //file.Read(fileBuffer, 0, (int)file.Length);
+            //file.Close();
             return StringUtils.ByteArrayToString(SHA256.Create().ComputeHash(fileBuffer));
 
         }
@@ -427,7 +437,7 @@ namespace TCC
         private readonly ReaderWriterLockSlim _lock;
         public SynchronizedObservableCollection()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher; 
+            _dispatcher = Dispatcher.CurrentDispatcher;
             _lock = new ReaderWriterLockSlim();
             BindingOperations.EnableCollectionSynchronization(this, _lock);
         }

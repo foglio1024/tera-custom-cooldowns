@@ -44,10 +44,11 @@ namespace TCC.Data.Databases
 
         private void ParseDungeons()
         {
-            var f = File.OpenText(FullPath);
-            while (true)
+            //var f = File.OpenText(FullPath);
+            var lines = File.ReadAllLines(FullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
+                //var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
                 var id = uint.Parse(s[0]);
@@ -58,10 +59,11 @@ namespace TCC.Data.Databases
         private void ParseDungeonDefs()
         {
             if (!File.Exists(CustomDefsPath)) File.Copy(DefaultDefsFullPath, CustomDefsPath);
-            var def = File.OpenText(CustomDefsPath);
-            while (true)
+            //var def = File.OpenText(CustomDefsPath);
+            var lines = File.ReadAllLines(CustomDefsPath);
+            foreach (var line in lines)
             {
-                var line = def.ReadLine();
+                //var line = def.ReadLine();
                 if (line == null) break;
                 if (line.StartsWith("#")) continue;
                 var s = line.Split('\t');
@@ -91,10 +93,11 @@ namespace TCC.Data.Databases
         }
         private void ParseDungeonIcons()
         {
-            var f = File.OpenText(ImagesFullPath);
-            while (true)
+            //var f = File.OpenText(ImagesFullPath);
+            var lines = File.ReadAllLines(ImagesFullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
+                //var line = f.ReadLine();
                 if (line == null) break;
                 var split = line.Split('\t');
 
