@@ -128,21 +128,20 @@ namespace TCC
             FocusManager.Dispose();
             TrayIcon?.Dispose();
 
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w is TccWidget) continue;
+                try { w.Close(); } catch { }
+            }
+
+            ChatWindowManager.Instance.CloseAllWindows();
+
             try { CharacterWindow.CloseWindowSafe(); } catch { }
             try { CooldownWindow.CloseWindowSafe(); } catch { }
             try { GroupWindow.CloseWindowSafe(); } catch { }
             try { BossWindow.CloseWindowSafe(); } catch { }
             try { BuffWindow.CloseWindowSafe(); } catch { }
-            try { Dashboard.Close(); } catch { }
             try { ClassWindow.CloseWindowSafe(); } catch { }
-
-            ChatWindowManager.Instance.CloseAllWindows();
-
-
-            foreach (Window w in Application.Current.Windows)
-            {
-                try { w.Close(); } catch { }
-            }
 
         }
         private static void LoadWindows()
