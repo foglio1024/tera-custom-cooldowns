@@ -174,6 +174,7 @@ namespace TCC.Windows
             }
             else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
             {
+                FocusManager.UndoUnfocusable(this.Handle);
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 Proxy.Proxy.RegisterLfg(VM.NewMessage, RaidSwitch.IsOn);
                 VM.Creating = false;
