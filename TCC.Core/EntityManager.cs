@@ -103,7 +103,7 @@ namespace TCC
         }
         public static void ClearNPC()
         {
-            BossGageWindowViewModel.Instance.ClearBosses();
+            if(Settings.SettingsHolder.BossWindowSettings.Enabled) BossGageWindowViewModel.Instance.ClearBosses();
             NearbyNPC.Clear();
             NearbyPlayers.Clear();
             ClassAbnormalityTracker.ClearMarkedTargets();
