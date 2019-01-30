@@ -217,9 +217,11 @@ namespace TCC
             CurrentPlayer.Ice = pIce;
             CurrentPlayer.Arcane = pArcane;
 
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            if (SettingsHolder.ClassWindowSettings.Enabled
+                && CurrentPlayer.Class == Class.Sorcerer 
+                && ClassWindowViewModel.Instance.CurrentManager is SorcererBarManager sm)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementChanged();
+                sm.NotifyElementChanged();
             }
 
         }

@@ -52,8 +52,8 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    if (SettingsHolder.ClassWindowSettings.Enabled)
-                        ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
+                    if (SettingsHolder.ClassWindowSettings.Enabled && ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm)
+                        wm.EdgeCounter.Val = p.Edge;
                     break;
                 case Class.Sorcerer:
                     SessionManager.SetSorcererElements(p.Fire, p.Ice, p.Arcane);
@@ -813,7 +813,7 @@ namespace TCC.Parsing
         public static void HandleInventory(S_INVEN x)
         {
             //TODO: add gear again?
-
+            if (x.Failed) return;
             WindowManager.Dashboard.VM.UpdateInventory(x.Items, x.First);
             //GroupWindowViewModel.Instance.UpdateMyGear();
 
