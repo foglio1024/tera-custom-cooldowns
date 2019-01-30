@@ -64,7 +64,7 @@ namespace TCC.ViewModels
 
         public void SetBossEnrageTime(ulong entityId, int remainingEnrageTime)
         {
-            var target = NpcList.FirstOrDefault(x => x.EntityId == entityId);
+            var target = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
             if (target != null) target.RemainingEnrageTime = remainingEnrageTime;
         }
 
@@ -139,9 +139,6 @@ namespace TCC.ViewModels
             _flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
             NpcListChanged += OnNpcCollectionChanged;
-
-
-
         }
 
         private void OnNpcCollectionChanged()
