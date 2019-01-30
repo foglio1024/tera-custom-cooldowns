@@ -54,7 +54,7 @@ namespace TCC.Controls.Classes.Elements
                 _delay.Stop();
                 OnToZero(_lastDuration);
             };
-
+            if (_dc == null) return;
             _dc.ToZero += OnToZero;
             _dc.PropertyChanged += OnPropertyChanged;
         }
