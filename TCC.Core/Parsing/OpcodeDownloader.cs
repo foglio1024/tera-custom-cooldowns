@@ -2,6 +2,7 @@
 using System.Net;
 using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
+using TCC.Windows;
 
 namespace TCC.Parsing
 {
@@ -18,6 +19,11 @@ namespace TCC.Parsing
             if (!File.Exists(filename)) return false;
             if (!Settings.SettingsHolder.CheckOpcodesHash) return true;
             var localHash = Utils.GenerateFileHash(filename);
+            if (localHash == "")
+            {
+                WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to check opcode file hash.\n Skipping download...", Data.NotificationType.Warning);
+                return true;
+            }
             using (var c = Utils.GetDefaultWebClient())
             {
                 try
@@ -34,7 +40,7 @@ namespace TCC.Parsing
                         if (localHash == remoteHash) return true;
                     }
                 }
-                catch 
+                catch
                 {
                     return false;
                 }
@@ -69,7 +75,7 @@ namespace TCC.Parsing
 
             var filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
             if (File.Exists(filename)) return false;
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision/100 + ".map";
+            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
             if (File.Exists(filename)) return false;
             try
             {
