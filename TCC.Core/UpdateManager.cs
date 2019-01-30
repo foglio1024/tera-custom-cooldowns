@@ -108,7 +108,6 @@ namespace TCC
 
         private static async Task DownloadIcons()
         {
-
             using (var c = Utils.GetDefaultWebClient())
             {
                 //c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
@@ -128,7 +127,7 @@ namespace TCC
                 try
                 {
                     App.SplashScreen.SetText("Downloading icons...");
-                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip")); //not awaited
+                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip")); 
                 }
                 catch (Exception)
                 {
