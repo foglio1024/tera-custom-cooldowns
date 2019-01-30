@@ -125,14 +125,17 @@ namespace TCC
 
         public static void Dispose()
         {
-            FocusManager.Dispose();
-            TrayIcon?.Dispose();
-
-            foreach (Window w in Application.Current.Windows)
+            App.BaseDispatcher.Invoke(() =>
             {
-                if (w is TccWidget) continue;
-                try { w.Close(); } catch { }
-            }
+                FocusManager.Dispose();
+                TrayIcon?.Dispose();
+
+                foreach (Window w in Application.Current.Windows)
+                {
+                    if (w is TccWidget) continue;
+                    try { w.Close(); } catch { }
+                }
+            });
 
             ChatWindowManager.Instance.CloseAllWindows();
 
