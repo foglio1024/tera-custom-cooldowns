@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -50,6 +51,8 @@ namespace TCC
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
         public static LfgListWindow LfgListWindow;
+
+        public static ConcurrentDictionary<int ,Dispatcher> RunningDispatchers;
 
         private static ContextMenu _contextMenu;
 
@@ -146,6 +149,13 @@ namespace TCC
             try { BuffWindow.CloseWindowSafe(); } catch { }
             try { ClassWindow.CloseWindowSafe(); } catch { }
 
+            while (true)
+            {
+                if (RunningDispatchers.Count == 0) break;
+                Log.CW("Waiting all dispatcher to shutdown...");
+                Thread.Sleep(100);
+            }
+
         }
         private static void LoadWindows()
         {
@@ -156,7 +166,7 @@ namespace TCC
             //    del.DynamicInvoke();
             //    while (waiting) { }
             //}
-
+            RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
             LoadCooldownWindow();
             LoadClassWindow();
             LoadGroupWindow();
@@ -180,6 +190,15 @@ namespace TCC
 
         }
         public static bool _chatInitalized = false;
+        private static void AddDispatcher(int threadId, Dispatcher d)
+        {
+            RunningDispatchers[threadId] = d;
+        }
+        private static void RemoveDispatcher(int threadId)
+        {
+            RunningDispatchers.TryRemove(threadId, out var _);
+        }
+
         private static void LoadCooldownWindow()
         {
             var cooldownWindowThread = new Thread(new ThreadStart(() =>
@@ -188,16 +207,10 @@ namespace TCC
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 CooldownWindow = new CooldownWindow();
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
-                //try
-                //{
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
 
-                //}
-                //catch (Exception e)
-                //{
-
-                //    throw e;
-                //}
             }));
             cooldownWindowThread.Name = "Cdwn";
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
@@ -211,10 +224,12 @@ namespace TCC
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 ClassWindow = new ClassWindow();
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+
             }));
             classWindowThread.Name = "Class";
-
             classWindowThread.SetApartmentState(ApartmentState.STA);
             classWindowThread.Start();
         }
@@ -225,7 +240,10 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+
             }));
             charWindowThread.Name = "Char";
             charWindowThread.SetApartmentState(ApartmentState.STA);
@@ -238,7 +256,10 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow();
                 if (BossWindow.WindowSettings.Enabled) BossWindow.Show();
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+
             }));
             bossGaugeThread.Name = "Boss";
             bossGaugeThread.SetApartmentState(ApartmentState.STA);
@@ -251,7 +272,10 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BuffWindow = new BuffWindow();
                 if (BuffWindow.WindowSettings.Enabled) BuffWindow.Show();
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+
             }));
             buffBarThread.Name = "Buff";
             buffBarThread.SetApartmentState(ApartmentState.STA);
@@ -266,8 +290,10 @@ namespace TCC
 
                 GroupWindow = new GroupWindow();
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
-
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+
             }));
             groupWindowThread.Name = "Group";
             groupWindowThread.SetApartmentState(ApartmentState.STA);
