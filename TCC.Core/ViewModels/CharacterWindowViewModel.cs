@@ -1,37 +1,36 @@
 ﻿using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Pc;
+using TCC.Settings;
 
 namespace TCC.ViewModels
 {
     public class CharacterWindowViewModel : TccWindowViewModel
     {
-        private static CharacterWindowViewModel _instance;
-        public static CharacterWindowViewModel Instance => _instance ?? (_instance = new CharacterWindowViewModel());
+        //private static CharacterWindowViewModel _instance;
+        //public static CharacterWindowViewModel Instance => _instance ?? (_instance = new CharacterWindowViewModel());
 
         public Player Player => SessionManager.CurrentPlayer;
 
 
-        public bool CompactMode => Settings.SettingsHolder.CharacterWindowCompactMode;
+        public bool CompactMode => SettingsHolder.CharacterWindowCompactMode;
 
-        public bool ShowRe =>(
-            !Settings.SettingsHolder.ClassWindowSettings.Visible ||
-            !Settings.SettingsHolder.ClassWindowSettings.Enabled) &&
-            (Player.Class == Class.Brawler  ||
-            Player.Class == Class.Gunner ||
-            Player.Class == Class.Ninja ||
-            Player.Class == Class.Valkyrie);
+        public bool ShowRe => (!SettingsHolder.ClassWindowSettings.Visible || !SettingsHolder.ClassWindowSettings.Enabled) &&
+                              (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
+                               Player.Class == Class.Ninja || Player.Class == Class.Valkyrie);
+
         public bool ShowElements => Player.Class == Class.Sorcerer &&
-            ((!Settings.SettingsHolder.ClassWindowSettings.Visible || !Settings.SettingsHolder.ClassWindowSettings.Enabled) || (!Settings.SettingsHolder.SorcererReplacesElementsInCharWindow));
-
+                                 ( !SettingsHolder.ClassWindowSettings.Visible 
+                                 ||!SettingsHolder.ClassWindowSettings.Enabled 
+                                 ||!SettingsHolder.SorcererReplacesElementsInCharWindow);
 
         public CharacterWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
-            Settings.SettingsHolder.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
-            Settings.SettingsHolder.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
+            SettingsHolder.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
+            SettingsHolder.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
         }
 
         private void ClassWindowSettings_EnabledChanged()

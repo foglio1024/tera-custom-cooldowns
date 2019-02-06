@@ -695,7 +695,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.CharacterWindowCompactMode == value) return;
                 SettingsHolder.CharacterWindowCompactMode = value;
                 N();
-                CharacterWindowViewModel.Instance.ExN(nameof(CharacterWindowViewModel.CompactMode));
+                WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.CompactMode));
                 WindowManager.CharacterWindow.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     WindowManager.CharacterWindow.Left = value 
@@ -725,7 +725,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.SorcererReplacesElementsInCharWindow == value) return;
                 SettingsHolder.SorcererReplacesElementsInCharWindow = value;
                 N();
-                CharacterWindowViewModel.Instance.ExN(nameof(CharacterWindowViewModel.ShowElements));
+                WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.ShowElements));
             }
         }
 

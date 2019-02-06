@@ -1,131 +1,144 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data.Pc;
+using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {
-    /// <summary>
-    /// Logica di interazione per HPbar.xaml
-    /// </summary>
+    //TODO: refactor more?
     public partial class CharacterWindow
     {
-        private DoubleAnimation _hp;
-        private DoubleAnimation _mp;
-        private DoubleAnimation _st;
-        private TimeSpan DefaultDuration = TimeSpan.FromMilliseconds(200);
-        private QuadraticEase DefaultEasing = new QuadraticEase();
+        private DoubleAnimation _hpAnim;
+        private DoubleAnimation _mpAnim;
+        private DoubleAnimation _stAnim;
+        private DoubleAnimation _shAnim;
+
+        public CharacterWindowViewModel VM { get; }
+
         public CharacterWindow()
         {
+            DataContext = new CharacterWindowViewModel();
+            VM = DataContext as CharacterWindowViewModel;
+
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
             Init(Settings.SettingsHolder.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
-            _hp = new DoubleAnimation()
-            {
-                Duration = DefaultDuration,
-                EasingFunction = DefaultEasing
-            };
-            _mp = new DoubleAnimation()
-            {
-                Duration = DefaultDuration,
-                EasingFunction = DefaultEasing
-            };
-            _st = new DoubleAnimation()
-            {
-                Duration = DefaultDuration,
-                EasingFunction = DefaultEasing
-            };
-            Timeline.SetDesiredFrameRate(_hp, 30);
-            Timeline.SetDesiredFrameRate(_mp, 30);
-            Timeline.SetDesiredFrameRate(_st, 30);
-            //(DataContext as CharacterWindowViewModel).Player.PropertyChanged += Player_PropertyChanged;
-            SessionManager.CurrentPlayer.PropertyChanged += Player_PropertyChanged;
+
+            InitAnimations();
+
+            VM.Player.PropertyChanged += OnPropertyChanged;
         }
-        //TODO: refactor
-        private void Player_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+        private void InitAnimations()
         {
+            var duration = TimeSpan.FromMilliseconds(200);
+            var ease = R.MiscResources.QuadraticEase;
+            _hpAnim = new DoubleAnimation
+            {
+                Duration = duration,
+                EasingFunction = ease
+            };
+            _mpAnim = new DoubleAnimation
+            {
+                Duration = duration,
+                EasingFunction = ease
+            };
+            _stAnim = new DoubleAnimation
+            {
+                Duration = duration,
+                EasingFunction = ease
+            };
+            _shAnim = new DoubleAnimation
+            {
+                Duration = duration,
+                EasingFunction = ease
+            };
 
-            if (e.PropertyName == nameof(Player.HpFactor))
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    _hp.From = (HpGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
-                    _hp.To = (sender as Player)?.HpFactor;
+            Timeline.SetDesiredFrameRate(_hpAnim, 30);
+            Timeline.SetDesiredFrameRate(_mpAnim, 30);
+            Timeline.SetDesiredFrameRate(_stAnim, 30);
+            Timeline.SetDesiredFrameRate(_shAnim, 30);
 
-                    if (_hp.From > _hp.To)
-                    {
-                        //taking damage
 
-                        HpGovernor.LayoutTransform = new ScaleTransform(((Player)sender).HpFactor, 1);
-                        HpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hp);
-                    }
-                    else
-                    {
-                        //healing
-                        HpGovernorWhite.LayoutTransform = new ScaleTransform(((Player)sender).HpFactor, 1);
-                        HpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hp);
-                    }
-                }), DispatcherPriority.DataBind);
-            }
-            else if (e.PropertyName == nameof(Player.MpFactor))
+        }
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Action action = null;
+            switch (e.PropertyName)
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    _mp.From = ((ScaleTransform)MpGovernor.LayoutTransform).ScaleX;
-                    _mp.To = ((Player)sender).MpFactor;
-                    if (_mp.From > _mp.To)
-                    {
-                        //taking damage
-                        MpGovernor.LayoutTransform = new ScaleTransform(((Player)sender).MpFactor, 1);
-                        MpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mp);
-                    }
-                    else
-                    {
-                        //healing
-                        MpGovernorWhite.LayoutTransform = new ScaleTransform(((Player)sender).MpFactor, 1);
-                        MpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mp);
-                    }
-                }), DispatcherPriority.DataBind);
+                case nameof(Player.HpFactor): action = new Action(ChangeHP); break;
+                case nameof(Player.MpFactor): action = new Action(ChangeMP); break;
+                case nameof(Player.StFactor): action = new Action(ChangeStamina); break;
+                case nameof(Player.ShieldFactor): action = new Action(ChangeShield); break;
+                default: return;
             }
-            else if (e.PropertyName == nameof(Player.StFactor))
+            Dispatcher.BeginInvoke(action, DispatcherPriority.DataBind);
+        }
+
+        private void ChangeHP()
+        {
+            _hpAnim.From = (HpGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
+            _hpAnim.To = VM.Player.HpFactor;
+
+            if (_hpAnim.From > _hpAnim.To)
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    _st.From = ((ScaleTransform)StGovernor.LayoutTransform).ScaleX;
-                    _st.To = (sender as Player)?.StFactor;
-                    if (_st.From > _st.To)
-                    {
-                        //taking damage
-                        StGovernor.LayoutTransform = new ScaleTransform(((Player)sender).StFactor, 1);
-                        StGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
-                    }
-                    else
-                    {
-                        //healing
-                        StGovernorWhite.LayoutTransform = new ScaleTransform(((Player)sender).StFactor, 1);
-                        StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _st);
-                    }
-                    ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation((((Player)sender).StFactor) * (360 - 2 * ReArc.StartAngle) + ReArc.StartAngle, _st.Duration));
-                }), DispatcherPriority.DataBind);
+                //taking damage
+                HpGovernor.LayoutTransform = new ScaleTransform(VM.Player.HpFactor, 1);
+                HpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             }
-            else if (e.PropertyName == nameof(Player.ShieldFactor))
+            else
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    var sh = new DoubleAnimation
-                    {
-                        Duration = DefaultDuration,
-                        EasingFunction = DefaultEasing,
-                        From = (ShGovernor.LayoutTransform as ScaleTransform)?.ScaleX,
-                        To = (sender as Player)?.ShieldFactor
-                    };
-                    ShGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, sh);
-                }), DispatcherPriority.DataBind);
+                //healing
+                HpGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.HpFactor, 1);
+                HpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             }
+        }
+        private void ChangeMP()
+        {
+            _mpAnim.From = ((ScaleTransform)MpGovernor.LayoutTransform).ScaleX;
+            _mpAnim.To = VM.Player.MpFactor;
+            if (_mpAnim.From > _mpAnim.To)
+            {
+                //taking damage
+                MpGovernor.LayoutTransform = new ScaleTransform(VM.Player.MpFactor, 1);
+                MpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mpAnim);
+            }
+            else
+            {
+                //healing
+                MpGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.MpFactor, 1);
+                MpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mpAnim);
+            }
+        }
+        private void ChangeStamina()
+        {
+            _stAnim.From = ((ScaleTransform)StGovernor.LayoutTransform).ScaleX;
+            _stAnim.To = VM.Player.StFactor;
+            if (_stAnim.From > _stAnim.To)
+            {
+                //taking damage
+                StGovernor.LayoutTransform = new ScaleTransform(VM.Player.StFactor, 1);
+                StGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _stAnim);
+            }
+            else
+            {
+                //healing
+                StGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.StFactor, 1);
+                StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _stAnim);
+            }
+            ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation((VM.Player.StFactor) * (360 - 2 * ReArc.StartAngle) + ReArc.StartAngle, _stAnim.Duration));
+
+        }
+        private void ChangeShield()
+        {
+            _shAnim.From = (ShGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
+            _shAnim.To = VM.Player.ShieldFactor;
+            ShGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _shAnim);
         }
     }
 }
-
