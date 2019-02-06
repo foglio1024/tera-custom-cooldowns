@@ -77,10 +77,11 @@
                 <!--HP-->
                 <Border RenderTransform="{StaticResource Skew45Inv}" Padding="3 2" >
                     <Grid x:Name="HpGrid">
-                        <Border VerticalAlignment="Top" BorderThickness="0"  Margin="0" Opacity=".65">
-                            <Border.Background>
+                        <Border VerticalAlignment="Top" BorderThickness="0" Background="White"
+                                Margin="0" Opacity=".7">
+                            <!--<Border.Background>
                                 <SolidColorBrush Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"/>
-                            </Border.Background>
+                            </Border.Background>-->
                             <FrameworkElement x:Name="HpGovernorWhite" HorizontalAlignment="Stretch" 
                                               Width="{Binding ElementName=HpGrid, Path=ActualWidth}">
                                 <FrameworkElement.LayoutTransform>

@@ -9,11 +9,7 @@
              mc:Ignorable="d"
         Title="TCC NPC" 
         Style="{StaticResource BaseWindowStyle}"
-        MouseLeftButtonDown="Drag"
-        MouseDoubleClick="TccWindow_MouseDoubleClick">
-    <w:TccWidget.DataContext>
-        <vm:BossGageWindowViewModel/>
-    </w:TccWidget.DataContext>
+        MouseLeftButtonDown="Drag" d:DataContext="{d:DesignInstance vm:BossGageWindowViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,9 +18,10 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" Name="WindowContent">
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
+                                ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </Grid.LayoutTransform>
-            <ContentControl Content="{Binding Instance}" ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource HarrowholdPhaseToLayout}}" />
+            <ContentControl Content="{Binding}" ContentTemplate="{Binding CurrentHHphase, Converter={StaticResource HarrowholdPhaseToLayout}}" />
         </Grid>
             <c:WindowButtons WindowName="Boss bar" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>

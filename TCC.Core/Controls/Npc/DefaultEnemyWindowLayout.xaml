@@ -18,7 +18,7 @@
                       <!--TODO: Medium sized datatemplate?-->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="Auto"
+                    <StackPanel Width="Auto"
                                Orientation="Vertical"
                                MaxHeight="340"
                                Background="Transparent"/>
@@ -46,7 +46,7 @@
 
         <ItemsControl Name="GuildTowers" 
                       ItemTemplate="{StaticResource GuildTowerTemplate}"
-                      ItemsSource="{Binding Instance.GuildTowers}"
+                      ItemsSource="{Binding GuildTowers}"
 
                       Width="Auto"
                       HorizontalAlignment="Left">
