@@ -453,7 +453,7 @@ namespace TCC.ViewModels
             }
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
-            if (boss.Visible) GroupWindowViewModel.Instance.SetAggro(entityId);
+            if (boss.Visible) WindowManager.GroupWindow.VM.SetAggro(entityId);
         }
         public void SelectDragon(float x, float y)
         {

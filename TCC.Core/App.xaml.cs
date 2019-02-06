@@ -200,11 +200,11 @@ namespace TCC
             //SessionManager.Logged = true;
             //SessionManager.LoadingScreen = false;
             //SessionManager.CurrentPlayer.Class = Class.Warrior;
-            //ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            //WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
 
             //SessionManager.Combat = true;
             //SessionManager.Encounter = true;
-            //(ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Cooldown.Start(2000);
+            //(WindowManager.ClassWindow.VM.CurrentManager as WarriorBarManager).DeadlyGamble.Cooldown.Start(2000);
             //System.Timers.Timer _t = new System.Timers.Timer { Interval = 1000 };
             //var r = new Random();
             //_t.Elapsed += (_, __) =>
@@ -213,7 +213,7 @@ namespace TCC
             //    //SessionManager.SetPlayerSt(10, SessionManager.CurrentPlayer.CurrentST + 100 > SessionManager.CurrentPlayer.MaxST ?
             //    //    0 : SessionManager.CurrentPlayer.CurrentST + 100);
             //};
-            //ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            //WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
             //CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower() + "-skills.xml", SessionManager.CurrentPlayer.Class);
             ////SessionManager.SetSorcererElements(true, true, true);
             //SessionManager.SetPlayerMaxSt(10, 1000);
@@ -227,7 +227,7 @@ namespace TCC
             //}
             //GC.Collect();
             //GC.WaitForPendingFinalizers();
-            GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher())
+            WindowManager.GroupWindow.VM.AddOrUpdateMember(new User(WindowManager.GroupWindow.VM.GetDispatcher())
             {
                 Alive = true,
                 Awakened = true,
@@ -316,7 +316,7 @@ namespace TCC
 
             //}
 
-            //ClassWindowViewModel.Instance.CurrentClass = Class.Priest;
+            //WindowManager.ClassWindow.VM.CurrentClass = Class.Priest;
             //EntityManager.SpawnNPC(920, 3000, 10, Visibility.Visible);
             //Task.Delay(2000).ContinueWith(t => WindowManager.BossWindow.VM.AddOrUpdateBoss(10,5250000000,3240000000,true, HpChangeSource.BossGage));
             //Task.Delay(4000).ContinueWith(t => WindowManager.BossWindow.VM.AddOrUpdateBoss(10,5250000000,2240000000,true, HpChangeSource.BossGage));
@@ -326,7 +326,7 @@ namespace TCC
             //EntityManager.SpawnNPC(970,3000,13,Visibility.Visible);
             //EntityManager.SetNPCStatus(10, true);
 
-            //Task.Delay(1000).ContinueWith(t => (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager).DeadlyGamble.Buff.Start(10000));
+            //Task.Delay(1000).ContinueWith(t => (WindowManager.ClassWindow.VM.CurrentManager as WarriorBarManager).DeadlyGamble.Buff.Start(10000));
             //WindowManager.LfgListWindow.ShowWindow();
             // var l = new Listing();
             // l.LeaderId = 10;
@@ -340,7 +340,7 @@ namespace TCC
             //var r = new Random();
             //for (uint i = 0; i <= 10; i++)
             //{
-            //    var u = new User(GroupWindowViewModel.Instance.GetDispatcher())
+            //    var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
             //    {
             //        Name = i.ToString(),
             //        PlayerId = i,
@@ -353,11 +353,11 @@ namespace TCC
             //        UserClass = (Class)r.Next(0, 12),
             //        Awakened = i < 5,
             //    };
-            //    GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            //    WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
             //}
 
-            ////GroupWindowViewModel.Instance.SetRaid(true);
-            //GroupWindowViewModel.Instance.SetNewLeader(1, "1");
+            ////WindowManager.GroupWindow.VM.SetRaid(true);
+            //WindowManager.GroupWindow.VM.SetNewLeader(1, "1");
         }
 
         private static void _t_Tick(object sender, EventArgs e)

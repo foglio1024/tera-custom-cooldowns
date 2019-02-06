@@ -7,8 +7,8 @@ namespace TCC.ViewModels
 {
     public class ClassWindowViewModel : TccWindowViewModel
     {
-        private static ClassWindowViewModel _instance;
-        public static ClassWindowViewModel Instance => _instance ?? (_instance = new ClassWindowViewModel());
+        //private static ClassWindowViewModel _instance;
+        //public static ClassWindowViewModel Instance => _instance ?? (_instance = new ClassWindowViewModel());
 
         public ClassWindowViewModel()
         {
@@ -84,24 +84,11 @@ namespace TCC.ViewModels
             {
                 if (_currentManager == value) return;
                 _currentManager = value;
-                Instance.CurrentManager = _currentManager;
+                CurrentManager = _currentManager;
                 N();
                 CurrentManager.LoadSpecialSkills();
             }
         }
-
-        public static bool ClassWindowExists()
-        {
-            var result = false;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-            {
-                if (((ClassWindowViewModel) WindowManager.ClassWindow.DataContext).CurrentManager != null)
-                    result = true;
-                else result = false;
-            });
-            return result;
-        }
-
     }
 
     public class ClassWindowTemplateSelector : DataTemplateSelector
@@ -124,7 +111,7 @@ namespace TCC.ViewModels
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            switch (ClassWindowViewModel.Instance.CurrentClass)
+            switch (WindowManager.ClassWindow.VM.CurrentClass)
                 {
                     case Class.Warrior:
                         return Warrior;

@@ -48,7 +48,7 @@ namespace TCC.ViewModels
         public bool AmIinLfg => Dispatcher.Invoke(() => (Listings.ToSyncList().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
                                                                      || listing.LeaderName == SessionManager.CurrentPlayer.Name
                                                                      || listing.Players.ToSyncList().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
-                                                                     || GroupWindowViewModel.Instance.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId))));
+                                                                     || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId))));
         public void NotifyMyLfg()
         {
             N(nameof(AmIinLfg));
@@ -59,10 +59,10 @@ namespace TCC.ViewModels
             }
             MyLfg?.NotifyMyLfg();
         }
-        public bool AmILeader => GroupWindowViewModel.Instance.AmILeader;
+        public bool AmILeader => WindowManager.GroupWindow.VM.AmILeader;
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
                                                                    || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
-                                                                   || GroupWindowViewModel.Instance.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+                                                                   || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
         public LfgListViewModel()
         {
@@ -71,7 +71,7 @@ namespace TCC.ViewModels
             ListingsView = Utils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
-            GroupWindowViewModel.Instance.PropertyChanged += OnGroupWindowVmPropertyChanged;
+            WindowManager.GroupWindow.VM.PropertyChanged += OnGroupWindowVmPropertyChanged;
         }
 
         private void OnGroupWindowVmPropertyChanged(object sender, PropertyChangedEventArgs e)

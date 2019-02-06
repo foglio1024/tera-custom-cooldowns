@@ -13,10 +13,8 @@
              UseLayoutRounding="True"
              x:Name="Win"
              BorderBrush="Red"
-             BorderThickness="0">
-    <w:TccWidget.DataContext>
-        <wm:ClassWindowViewModel />
-    </w:TccWidget.DataContext>
+             BorderThickness="0"
+             d:DataContext="{d:DesignInstance wm:ClassWindowViewModel}">
     <w:TccWidget.Resources>
         <DataTemplate x:Key="Warrior">
             <classBars:WarriorBar />
@@ -86,7 +84,7 @@
         <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
                          />
-        <ContentControl x:Name="WindowContent" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center" 
+        <ContentControl x:Name="WindowContent" Content="{Binding CurrentManager}" HorizontalAlignment="Center" 
                         ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}"  Grid.Row="1" >
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 

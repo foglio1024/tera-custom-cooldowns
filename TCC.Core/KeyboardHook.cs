@@ -73,7 +73,7 @@ namespace TCC
 
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             //{
-            //    if (!GroupWindowViewModel.Instance.AmILeader) return;
+            //    if (!WindowManager.GroupWindow.VM.AmILeader) return;
             //    if (!Proxy.Proxy.IsConnected) return;
             //    Proxy.Proxy.LootSettings();
             //}

@@ -18,7 +18,7 @@ namespace TCC.ViewModels
 {
     public class GroupWindowViewModel : TccWindowViewModel
     {
-        private static GroupWindowViewModel _instance;
+        //private static GroupWindowViewModel _instance;
         private bool _raid;
         private bool _firstCheck = true;
         private readonly object _lock = new object();
@@ -26,7 +26,7 @@ namespace TCC.ViewModels
         private ulong _aggroHolder;
         public event Action SettingsUpdated;
 
-        public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
+        //public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         public SynchronizedObservableCollection<User> Members { get; }
         public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
         public ICollectionViewLiveShaping Tanks { [UsedImplicitly] get; }

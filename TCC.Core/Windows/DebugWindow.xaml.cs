@@ -67,7 +67,7 @@ namespace TCC.Windows
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
             SessionManager.CurrentPlayer.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
-            ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
             WindowManager.CooldownWindow.VM.ClearSkills();
             WindowManager.CooldownWindow.VM.LoadSkills(SessionManager.CurrentPlayer.Class);
         }
@@ -110,7 +110,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SorcererBarManager) ClassWindowViewModel.Instance.CurrentManager).ManaBoost.Buff.Start(10000);
+            ((SorcererBarManager) WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);
@@ -121,15 +121,15 @@ namespace TCC.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
-            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
-            else if (((Button)sender).Content.ToString() == "None") ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if (((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = 0;
-            ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val++;
+            if (((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val = 0;
+            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val++;
 
         }
 

@@ -66,7 +66,7 @@ namespace TCC
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!Settings.SettingsHolder.DisablePartyAbnormals)
                 {
-                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+                    WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
             }
             else
@@ -124,7 +124,7 @@ namespace TCC
 
         private static void EndPlayerAbnormality(Abnormality ab)
         {
-            GroupWindowViewModel.Instance.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+            WindowManager.GroupWindow.VM.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
 
             if (ab.Type == AbnormalityType.Buff)
             {
@@ -175,14 +175,14 @@ namespace TCC
         {
             if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
-            GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
+            WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
         }
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
             if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
-            GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);
+            WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
         }
     }
 }

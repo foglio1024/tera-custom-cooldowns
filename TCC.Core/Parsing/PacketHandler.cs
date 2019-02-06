@@ -52,7 +52,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    if (SettingsHolder.ClassWindowSettings.Enabled && ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm)
+                    if (SettingsHolder.ClassWindowSettings.Enabled && WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm)
                         wm.EdgeCounter.Val = p.Edge;
                     break;
                 case Class.Sorcerer:
@@ -107,7 +107,7 @@ namespace TCC.Parsing
             //if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.None) return;
             if (b != null /*&& b.IsBoss*/ && b.Visible)
             {
-                GroupWindowViewModel.Instance.SetAggro(p.Target);
+                WindowManager.GroupWindow.VM.SetAggro(p.Target);
                 WindowManager.BossWindow.VM.SetBossAggro(p.EntityId, p.Target);
 
             }
@@ -116,7 +116,7 @@ namespace TCC.Parsing
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
             WindowManager.BossWindow.VM.SetBossAggro(p.Source, p.User);
-            GroupWindowViewModel.Instance.SetAggroCircle(p);
+            WindowManager.GroupWindow.VM.SetAggroCircle(p);
         }
 
         public static void HandleCharList(S_GET_USER_LIST p)
@@ -125,7 +125,7 @@ namespace TCC.Parsing
             SessionManager.Logged = false;
             SkillManager.Clear();
             EntityManager.ClearNPC();
-            GroupWindowViewModel.Instance.ClearAll();
+            WindowManager.GroupWindow.VM.ClearAll();
             WindowManager.Dashboard.VM.UpdateBuffs();
             SessionManager.CurrentPlayer.ClearAbnormalities();
 
@@ -159,7 +159,7 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
-            if (SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
+            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
             if (!SettingsHolder.StatSent) App.SendUsageStat();
@@ -171,7 +171,7 @@ namespace TCC.Parsing
             WindowManager.CooldownWindow.VM.LoadSkills(p.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility();
             EntityManager.ClearNPC();
-            GroupWindowViewModel.Instance.ClearAll();
+            WindowManager.GroupWindow.VM.ClearAll();
             ChatWindowManager.Instance.BlockedUsers.Clear();
             SessionManager.CurrentPlayer.ClearAbnormalities();
 
@@ -265,8 +265,8 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.ClearAbnormalities();
             SkillManager.Clear();
             EntityManager.ClearNPC();
-            GroupWindowViewModel.Instance.ClearAll();
-            ClassWindowViewModel.Instance.CurrentClass = Class.None;
+            WindowManager.GroupWindow.VM.ClearAll();
+            WindowManager.ClassWindow.VM.CurrentClass = Class.None;
 
         }
 
@@ -275,8 +275,8 @@ namespace TCC.Parsing
         {
             SessionManager.LoadingScreen = true;
             SessionManager.Encounter = false;
-            GroupWindowViewModel.Instance.ClearAllAbnormalities();
-            GroupWindowViewModel.Instance.SetAggro(0);
+            WindowManager.GroupWindow.VM.ClearAllAbnormalities();
+            WindowManager.GroupWindow.VM.SetAggro(0);
             SessionManager.CurrentPlayer.ClearAbnormalities();
             WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.None;
             WindowManager.BossWindow.VM.ClearGuildTowers();
@@ -286,16 +286,16 @@ namespace TCC.Parsing
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
         {
-            GroupWindowViewModel.Instance.StartRoll();
+            WindowManager.GroupWindow.VM.StartRoll();
         }
         public static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
         {
-            if (!GroupWindowViewModel.Instance.Rolling) GroupWindowViewModel.Instance.StartRoll();
-            GroupWindowViewModel.Instance.SetRoll(x.EntityId, x.RollResult);
+            if (!WindowManager.GroupWindow.VM.Rolling) WindowManager.GroupWindow.VM.StartRoll();
+            WindowManager.GroupWindow.VM.SetRoll(x.EntityId, x.RollResult);
         }
         public static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
         {
-            GroupWindowViewModel.Instance.EndRoll();
+            WindowManager.GroupWindow.VM.EndRoll();
         }
 
         public static void HandleSpawnMe(S_SPAWN_ME p)
@@ -322,9 +322,9 @@ namespace TCC.Parsing
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
             EntityManager.SpawnUser(p.EntityId, p.Name);
-            if (!GroupWindowViewModel.Instance.Exists(p.EntityId)) return;
+            if (!WindowManager.GroupWindow.VM.Exists(p.EntityId)) return;
 
-            GroupWindowViewModel.Instance.UpdateMemberGear(p);
+            WindowManager.GroupWindow.VM.UpdateMemberGear(p);
         }
 
         public static void HandlePartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE x)
@@ -346,15 +346,15 @@ namespace TCC.Parsing
         public static void HandleRunemark(S_WEAK_POINT x)
         {
             if (SessionManager.CurrentPlayer.Class != Class.Valkyrie) return;
-            if (ClassWindowViewModel.Instance.CurrentManager.GetType() != typeof(ValkyrieBarManager)) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
+            if (WindowManager.ClassWindow.VM.CurrentManager.GetType() != typeof(ValkyrieBarManager)) return;
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
         /*
                 public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
                 {
-                    //bool sourceInParty = GroupWindowViewModel.Instance.UserExists(x.Source);
-                    //bool targetInParty = GroupWindowViewModel.Instance.UserExists(x.Target);
+                    //bool sourceInParty = WindowManager.GroupWindow.VM.UserExists(x.Source);
+                    //bool targetInParty = WindowManager.GroupWindow.VM.UserExists(x.Target);
                     //if (x.Target == x.Source) return;
                     //if (sourceInParty && targetInParty) return;
                     //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
@@ -369,12 +369,12 @@ namespace TCC.Parsing
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
-            GroupWindowViewModel.Instance.SetNewLeader(x.EntityId, x.Name);
+            WindowManager.GroupWindow.VM.SetNewLeader(x.EntityId, x.Name);
         }
 
         public static void HandlePartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR x)
         {
-            GroupWindowViewModel.Instance.ClearAbnormality(x.PlayerId, x.ServerId);
+            WindowManager.GroupWindow.VM.ClearAbnormality(x.PlayerId, x.ServerId);
         }
         public static void HandlePartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH x)
         {
@@ -712,12 +712,12 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
-            var notifyLfg = GroupWindowViewModel.Instance.Members.Count == 0;
+            var notifyLfg = WindowManager.GroupWindow.VM.Members.Count == 0;
 
-            GroupWindowViewModel.Instance.SetRaid(p.Raid);
+            WindowManager.GroupWindow.VM.SetRaid(p.Raid);
 
             foreach (var user in p.Members)
-                GroupWindowViewModel.Instance.AddOrUpdateMember(user);
+                WindowManager.GroupWindow.VM.AddOrUpdateMember(user);
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
             if (Proxy.Proxy.IsConnected && SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
@@ -728,39 +728,39 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
         {
-            GroupWindowViewModel.Instance.RemoveMember(p.PlayerId, p.ServerId);
+            WindowManager.GroupWindow.VM.RemoveMember(p.PlayerId, p.ServerId);
         }
         public static void HandlePartyMemberLogout(S_LOGOUT_PARTY_MEMBER p)
         {
-            GroupWindowViewModel.Instance.LogoutMember(p.PlayerId, p.ServerId);
-            GroupWindowViewModel.Instance.ClearAbnormality(p.PlayerId, p.ServerId);
+            WindowManager.GroupWindow.VM.LogoutMember(p.PlayerId, p.ServerId);
+            WindowManager.GroupWindow.VM.ClearAbnormality(p.PlayerId, p.ServerId);
 
         }
         public static void HandlePartyMemberKick(S_BAN_PARTY_MEMBER p)
         {
-            GroupWindowViewModel.Instance.RemoveMember(p.PlayerId, p.ServerId, true);
+            WindowManager.GroupWindow.VM.RemoveMember(p.PlayerId, p.ServerId, true);
         }
         public static void HandlePartyMemberHp(S_PARTY_MEMBER_CHANGE_HP p)
         {
-            GroupWindowViewModel.Instance.UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
+            WindowManager.GroupWindow.VM.UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
         }
         public static void HandlePartyMemberMp(S_PARTY_MEMBER_CHANGE_MP p)
         {
-            GroupWindowViewModel.Instance.UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+            WindowManager.GroupWindow.VM.UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
         }
         public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            GroupWindowViewModel.Instance.UpdateMember(p);
+            WindowManager.GroupWindow.VM.UpdateMember(p);
         }
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
-            GroupWindowViewModel.Instance.ClearAll();
+            WindowManager.GroupWindow.VM.ClearAll();
             if (SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
         public static void HandleKicked(S_BAN_PARTY x)
         {
-            GroupWindowViewModel.Instance.ClearAll();
+            WindowManager.GroupWindow.VM.ClearAll();
             if (SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.NotifyMyLfg();
 
         }
@@ -769,12 +769,12 @@ namespace TCC.Parsing
         {
             foreach (var item in p.Party)
             {
-                GroupWindowViewModel.Instance.SetReadyStatus(item);
+                WindowManager.GroupWindow.VM.SetReadyStatus(item);
             }
         }
         public static void HandleReadyCheckFin(S_CHECK_TO_READY_PARTY_FIN x)
         {
-            GroupWindowViewModel.Instance.EndReadyCheck();
+            WindowManager.GroupWindow.VM.EndReadyCheck();
         }
 
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
@@ -815,7 +815,7 @@ namespace TCC.Parsing
             //TODO: add gear again?
             if (x.Failed) return;
             WindowManager.Dashboard.VM.UpdateInventory(x.Items, x.First);
-            //GroupWindowViewModel.Instance.UpdateMyGear();
+            //WindowManager.GroupWindow.VM.UpdateMyGear();
 
             //88273 - 88285 L weapons
             //88286 - 88298 L armors
@@ -863,7 +863,7 @@ namespace TCC.Parsing
 
         public static void HandlePartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE sPartyMemberIntervalPosUpdate)
         {
-            GroupWindowViewModel.Instance.UpdateMemberLocation(sPartyMemberIntervalPosUpdate);
+            WindowManager.GroupWindow.VM.UpdateMemberLocation(sPartyMemberIntervalPosUpdate);
         }
 
         public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)

@@ -139,7 +139,7 @@ namespace TCC.Controls.Chat
         private void GrantInviteClick(object sender, RoutedEventArgs e)
         {
 
-            if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
+            if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 Proxy.Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
@@ -149,7 +149,7 @@ namespace TCC.Controls.Chat
 
         private void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
-            if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
+            if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 Proxy.Proxy.DelegateLeader(u.ServerId, u.PlayerId);
             }
@@ -165,7 +165,7 @@ namespace TCC.Controls.Chat
                 KickText.Text = "Kick";
                 KickRipple.Opacity = 0;
                 _kicking = false;
-                if (GroupWindowViewModel.Instance.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
+                if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
                 {
                     Proxy.Proxy.KickMember(u.ServerId, u.PlayerId);
                 }

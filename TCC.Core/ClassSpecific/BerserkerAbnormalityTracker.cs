@@ -24,17 +24,17 @@ namespace TCC.ClassSpecific
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Bloodlust.Buff.Start(p.Duration);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Bloodlust.Buff.Start(p.Duration);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Start(p.Duration);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).FieryRage.Buff.Start(p.Duration);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Unleash.Buff.Start(p.Duration);
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOn = true;
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOff = false;
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Unleash.Buff.Start(p.Duration);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOn = true;
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOff = false;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
@@ -44,17 +44,17 @@ namespace TCC.ClassSpecific
 
             if (p.AbnormalityId == BloodlustId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOn = true;
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOff = false;
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOn = true;
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOff = false;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
@@ -63,17 +63,17 @@ namespace TCC.ClassSpecific
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).FieryRage.Buff.Refresh(0, CooldownMode.Normal);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).FieryRage.Buff.Refresh(0, CooldownMode.Normal);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).Unleash.Buff.Refresh(0, CooldownMode.Normal);
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOn = false;
-                ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsUnleashOff = true;
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Unleash.Buff.Refresh(0, CooldownMode.Normal);
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOn = false;
+                ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOff = true;
             }
         }
 
@@ -83,30 +83,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Dexter_KR && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
                 if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
                 }
             }
         }
@@ -116,30 +116,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == Sinister_KR && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Dexter_KR && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
                 if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = p.Stacks;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
                 }
             }
         }
@@ -149,30 +149,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == Sinister_KR)
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = 0;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Dexter_KR)
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = 0;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Rampage)
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = 0;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = 0;
                 }
             }
             else
             { 
                 if (p.AbnormalityId == Sinister)
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).SinisterTracker.Val = 0;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Dexter)
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).DexterTracker.Val = 0;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Rampage)
                 {
-                    ((BerserkerBarManager)ClassWindowViewModel.Instance.CurrentManager).RampageTracker.Val = 0;
+                    ((BerserkerBarManager)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = 0;
                 }
             }
         }

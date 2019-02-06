@@ -134,7 +134,7 @@ namespace TCC
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentST = st;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
+            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -169,7 +169,7 @@ namespace TCC
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
@@ -219,7 +219,7 @@ namespace TCC
 
             if (SettingsHolder.ClassWindowSettings.Enabled
                 && CurrentPlayer.Class == Class.Sorcerer 
-                && ClassWindowViewModel.Instance.CurrentManager is SorcererBarManager sm)
+                && WindowManager.ClassWindow.VM.CurrentManager is SorcererBarManager sm)
             {
                 sm.NotifyElementChanged();
             }
@@ -234,7 +234,7 @@ namespace TCC
 
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementBoostChanged();
+                ((SorcererBarManager)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
             }
 
 

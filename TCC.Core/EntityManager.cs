@@ -70,7 +70,7 @@ namespace TCC
             if (WindowManager.BossWindow.VM.VisibleBossesCount == 0)
             {
                 SessionManager.Encounter = false;
-                GroupWindowViewModel.Instance.SetAggro(0);
+                WindowManager.GroupWindow.VM.SetAggro(0);
             }
             ClassAbnormalityTracker.CheckMarkingOnDespawn(target);
             FlyingGuardianDataProvider.InvokeProgressChanged();

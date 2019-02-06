@@ -57,7 +57,7 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        private static ClassManager ClassManager => ClassWindowViewModel.Instance.CurrentManager;
+        private static ClassManager ClassManager => WindowManager.ClassWindow.VM.CurrentManager;
 
         private static bool FindAndUpdate(SynchronizedObservableCollection<Cooldown> list, Cooldown sk)
         {

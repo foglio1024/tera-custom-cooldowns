@@ -74,11 +74,11 @@ namespace TCC.ViewModels
         public bool ShowWhisper => !IsBlocked;
         public string BlockLabelText => IsBlocked ? "Unblock" : "Block";
         public string FriendLabelText => IsFriend ? "Remove friend" : "Add friend";
-        public string PowersLabelText => !GroupWindowViewModel.Instance.HasPowers(Name) ? "Grant invite power" : "Revoke invite power";
+        public string PowersLabelText => !WindowManager.GroupWindow.VM.HasPowers(Name) ? "Grant invite power" : "Revoke invite power";
 
-        public bool ShowGrantPowers => GroupWindowViewModel.Instance.AmILeader && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
-        public bool ShowKick => GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
-        public bool ShowDelegateLeader => GroupWindowViewModel.Instance.AmILeader && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowGrantPowers => WindowManager.GroupWindow.VM.AmILeader && WindowManager.GroupWindow.VM.Raid && WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowKick => WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowDelegateLeader => WindowManager.GroupWindow.VM.AmILeader && WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool IsBlocked => _name == "" ? false : ChatWindowManager.Instance.BlockedUsers.Contains(_name);
         public bool IsFriend
         {

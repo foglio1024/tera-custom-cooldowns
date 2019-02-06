@@ -25,7 +25,7 @@ namespace TCC.Controls.Group
             UpdateSettings();
 
             AnimateIn();
-            GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
+            WindowManager.GroupWindow.VM.SettingsUpdated += UpdateSettings;
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
         private void UpdateSettings()

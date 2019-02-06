@@ -28,17 +28,17 @@ namespace TCC.ClassSpecific
         private static void CheckInColdBlood(S_ABNORMALITY_BEGIN p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Start(p.Duration);
+            ((SlayerBarManager)WindowManager.ClassWindow.VM.CurrentManager).InColdBlood.Buff.Start(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_REFRESH p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Start(p.Duration);
+            ((SlayerBarManager)WindowManager.ClassWindow.VM.CurrentManager).InColdBlood.Buff.Start(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_END p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)ClassWindowViewModel.Instance.CurrentManager).InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
+            ((SlayerBarManager)WindowManager.ClassWindow.VM.CurrentManager).InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

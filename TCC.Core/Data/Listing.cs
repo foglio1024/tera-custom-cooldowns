@@ -92,7 +92,7 @@ namespace TCC.Data
 
         public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
                                LeaderId == SessionManager.CurrentPlayer.PlayerId ||
-                                GroupWindowViewModel.Instance.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
+                                WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;

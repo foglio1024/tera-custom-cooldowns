@@ -384,7 +384,7 @@ namespace TCC.Proxy
             sb.Append("&name=");
             sb.Append(name);
             sb.Append("&raid=");
-            sb.Append(GroupWindowViewModel.Instance.Raid ? 1 : 0);
+            sb.Append(WindowManager.GroupWindow.VM.Raid ? 1 : 0);
 
             SendData(sb.ToString());
         }
