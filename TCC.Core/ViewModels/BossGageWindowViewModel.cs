@@ -18,7 +18,7 @@ namespace TCC.ViewModels
     public class BossGageWindowViewModel : TccWindowViewModel
     {
         public const int Ph1ShieldDuration = 16;
-        private static BossGageWindowViewModel _instance;
+        //private static BossGageWindowViewModel _instance;
         private HarrowholdPhase _currentHHphase;
         private ICollectionViewLiveShaping _bams;
         private ICollectionViewLiveShaping _mobs;
@@ -126,7 +126,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<NPC> NpcList { get; set; }
 
-        public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
+        //public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
         public Dictionary<ulong, uint> GuildIds { get; private set; }
 
         public BossGageWindowViewModel()
@@ -163,7 +163,7 @@ namespace TCC.ViewModels
             {
                 if (_cache.Count == 0)
                 {
-                    //Log.CW($"[BossGageWindowViewModel L161] HP cache is empty, returning");
+                    Log.CW($"FlushCache() - nothing to flush");
                     return;
                 }
                 try
@@ -171,11 +171,12 @@ namespace TCC.ViewModels
                     foreach (var hpc in _cache.ToList())
                     {
                         SetHpFromCache(hpc.Key, hpc.Value);
+                        Log.CW($"FlushCache() - flushing HP for {hpc.Key}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.CW($"[BossGageWindowViewModel L173] Error while setting HP from cache: {ex.Message}");
+                    Log.All($"[BossGageWindowViewModel.FlushCache()] Error while setting HP from cache: {ex.Message}");
 
                     // ignored
                 }
@@ -191,7 +192,7 @@ namespace TCC.ViewModels
             if (npc != null) npc.CurrentHP = hpcCurrentHp;
             else
             {
-                Log.CW($"[BossGageWindowViewModel L189] NPC {hpcEntityId} not found while setting HP from cache");
+                Log.All($"[BossGageWindowViewModel.SetHpFromCache()] NPC {hpcEntityId} not found while setting HP from cache");
 
             }
         }
@@ -298,6 +299,7 @@ namespace TCC.ViewModels
         {
             //if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
             /*else */
+            Log.CW($"AddToCache({entityId}, {curHp})");
             _cache[entityId] = curHp;
         }
 
@@ -364,6 +366,7 @@ namespace TCC.ViewModels
         {
             var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
+            Log.CW($"RemoveBoss({boss.Name}, {type}) - HP:{boss.CurrentHP}");
             if (type == DespawnType.OutOfView)
             {
                 _savedHp[id] = boss.CurrentHP;
@@ -488,9 +491,11 @@ namespace TCC.ViewModels
 
         public void RemoveMe(NPC npc, uint delay)
         {
+
             Dispatcher.Invoke(() =>
             {
                 if (NpcList.ToSyncList().All(x => x != npc)) return;
+                Log.CW($"RemoveMe({npc.Name}, {delay}) - HP:{npc.CurrentHP}");
                 npc.Buffs.Clear();
                 if (delay != 0)
                 {
