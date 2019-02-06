@@ -32,14 +32,14 @@ namespace TCC
                 if (villager) return;
                 if (m.IsBoss)
                 {
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
-                    BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
+                    WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
+                    WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
                 else
                 {
                     if (Settings.SettingsHolder.ShowOnlyBosses) return;
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
-                    BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
+                    WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
+                    WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
             }
         }
@@ -66,8 +66,8 @@ namespace TCC
         {
             NearbyNPC.Remove(target);
 
-            BossGageWindowViewModel.Instance.RemoveBoss(target, type);
-            if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0)
+            WindowManager.BossWindow.VM.RemoveBoss(target, type);
+            if (WindowManager.BossWindow.VM.VisibleBossesCount == 0)
             {
                 SessionManager.Encounter = false;
                 GroupWindowViewModel.Instance.SetAggro(0);
@@ -77,17 +77,17 @@ namespace TCC
         }
         public static void SetNPCStatus(ulong entityId, bool enraged, int remainingEnrageTime)
         {
-            BossGageWindowViewModel.Instance.SetBossEnrageTime(entityId, remainingEnrageTime);
-            BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
+            WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
+            WindowManager.BossWindow.VM.SetBossEnrage(entityId, enraged);
         }
         public static void UpdateNPC(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
+            WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
             SetEncounter(curHP, maxHP);
         }
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, source.IsMe() ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            WindowManager.BossWindow.VM.AddOrUpdateBoss(target, maxHP, currentHP, false, source.IsMe() ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             SetEncounter(currentHP, maxHP);
         }
         private static void SetEncounter(float curHP, float maxHP)
@@ -103,7 +103,7 @@ namespace TCC
         }
         public static void ClearNPC()
         {
-            if(Settings.SettingsHolder.BossWindowSettings.Enabled) BossGageWindowViewModel.Instance.ClearBosses();
+            if(Settings.SettingsHolder.BossWindowSettings.Enabled) WindowManager.BossWindow.VM.ClearBosses();
             NearbyNPC.Clear();
             NearbyPlayers.Clear();
             ClassAbnormalityTracker.ClearMarkedTargets();
@@ -113,23 +113,23 @@ namespace TCC
             if (zoneId != 950) return;
             if (templateId >= 1100 && templateId <= 1103)
             {
-                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase1;
+                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase1;
             }
             else if (templateId == 1000)
             {
-                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase2;
+                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase2;
             }
             else if (templateId == 2000)
             {
-                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Balistas;
+                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Balistas;
             }
             else if (templateId == 3000)
             {
-                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase3;
+                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase3;
             }
             else if (templateId == 4000)
             {
-                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase4;
+                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase4;
             }
         }
         public static Dragon CheckCurrentDragon(Point p)

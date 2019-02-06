@@ -81,7 +81,7 @@ namespace TCC
         {
             if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (target.IsMe()) EndPlayerAbnormality(ab);
-            else BossGageWindowViewModel.Instance.EndNpcAbnormality(target, ab);
+            else WindowManager.BossWindow.VM.EndNpcAbnormality(target, ab);
 
             return true;
         }
@@ -156,7 +156,7 @@ namespace TCC
             //{
             //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
             //}
-            BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
+            WindowManager.BossWindow.VM.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
         }
 
         private static bool Filter(Abnormality ab)

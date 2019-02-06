@@ -43,7 +43,7 @@ namespace TCC.Controls.NPCs
 
                 try
                 {
-                    BossGageWindowViewModel.Instance.RemoveMe(_dc, 0);
+                    WindowManager.BossWindow.VM.RemoveMe(_dc, 0);
                 }
                 catch
                 {

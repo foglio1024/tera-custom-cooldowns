@@ -141,7 +141,7 @@ namespace TCC.ViewModels
         }
         public void SetAggroCircle(S_USER_EFFECT p)
         {
-            if (BossGageWindowViewModel.Instance.CurrentHHphase != HarrowholdPhase.None) return;
+            if (WindowManager.BossWindow.VM.CurrentHHphase != HarrowholdPhase.None) return;
 
             if (p.Circle != AggroCircle.Main) return;
             if (p.Action == AggroAction.Add)
@@ -166,7 +166,7 @@ namespace TCC.ViewModels
             else
             {
                 // -- show only aggro stacks if we are in HH -- //
-                if (BossGageWindowViewModel.Instance.CurrentHHphase >= HarrowholdPhase.Phase2)
+                if (WindowManager.BossWindow.VM.CurrentHHphase >= HarrowholdPhase.Phase2)
                 {
                     if (ab.Id != 950023 && Settings.SettingsHolder.ShowOnlyAggroStacks) return;
                 }

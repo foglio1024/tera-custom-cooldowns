@@ -318,8 +318,8 @@ namespace TCC
 
             //ClassWindowViewModel.Instance.CurrentClass = Class.Priest;
             //EntityManager.SpawnNPC(920, 3000, 10, Visibility.Visible);
-            //Task.Delay(2000).ContinueWith(t => BossGageWindowViewModel.Instance.AddOrUpdateBoss(10,5250000000,3240000000,true, HpChangeSource.BossGage));
-            //Task.Delay(4000).ContinueWith(t => BossGageWindowViewModel.Instance.AddOrUpdateBoss(10,5250000000,2240000000,true, HpChangeSource.BossGage));
+            //Task.Delay(2000).ContinueWith(t => WindowManager.BossWindow.VM.AddOrUpdateBoss(10,5250000000,3240000000,true, HpChangeSource.BossGage));
+            //Task.Delay(4000).ContinueWith(t => WindowManager.BossWindow.VM.AddOrUpdateBoss(10,5250000000,2240000000,true, HpChangeSource.BossGage));
             //EntityManager.SpawnNPC(950,3000,10,Visibility.Visible);
             //EntityManager.SpawnNPC(970,1000,11,Visibility.Visible);
             //EntityManager.SpawnNPC(970,2000,12,Visibility.Visible);

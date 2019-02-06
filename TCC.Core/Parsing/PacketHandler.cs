@@ -101,21 +101,21 @@ namespace TCC.Parsing
             EntityManager.SetNPCStatus(p.EntityId, p.IsEnraged, p.RemainingEnrageTime);
             if (p.Target == 0)
             {
-                BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
+                WindowManager.BossWindow.VM.UnsetBossTarget(p.EntityId);
             }
-            var b = BossGageWindowViewModel.Instance.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.EntityId);
-            //if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
+            var b = WindowManager.BossWindow.VM.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.EntityId);
+            //if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.None) return;
             if (b != null /*&& b.IsBoss*/ && b.Visible)
             {
                 GroupWindowViewModel.Instance.SetAggro(p.Target);
-                BossGageWindowViewModel.Instance.SetBossAggro(p.EntityId, p.Target);
+                WindowManager.BossWindow.VM.SetBossAggro(p.EntityId, p.Target);
 
             }
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
-            BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.User);
+            WindowManager.BossWindow.VM.SetBossAggro(p.Source, p.User);
             GroupWindowViewModel.Instance.SetAggroCircle(p);
         }
 
@@ -278,8 +278,8 @@ namespace TCC.Parsing
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             GroupWindowViewModel.Instance.SetAggro(0);
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
-            BossGageWindowViewModel.Instance.ClearGuildTowers();
+            WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.None;
+            WindowManager.BossWindow.VM.ClearGuildTowers();
             SessionManager.CivilUnrestZone = x.Zone == 152;
             if (SettingsHolder.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
         }
@@ -360,10 +360,10 @@ namespace TCC.Parsing
                     //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
                     //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
                     //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-                    //BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
+                    //WindowManager.BossWindow.VM.UpdateShield(x.Target, x.Damage);
                     if (x.Type != 1) return;
                     if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-                    BossGageWindowViewModel.Instance.UpdateBySkillResult(x.Target, x.Damage);
+                    WindowManager.BossWindow.VM.UpdateBySkillResult(x.Target, x.Damage);
                 }
         */
 
@@ -444,7 +444,7 @@ namespace TCC.Parsing
 
         internal static void HandleGuildTowerInfo(S_GUILD_TOWER_INFO x)
         {
-            BossGageWindowViewModel.Instance.AddGuildTower(x.TowerId, x.GuildName, x.GuildId);
+            WindowManager.BossWindow.VM.AddGuildTower(x.TowerId, x.GuildName, x.GuildId);
         }
 
         public static void HandleLeavePrivateChat(S_LEAVE_PRIVATE_CHANNEL x)
@@ -504,7 +504,7 @@ namespace TCC.Parsing
             if (p.MessageId == 9950045)
             {
                 //shield start
-                foreach (var item in BossGageWindowViewModel.Instance.NpcList.Where(x => x.IsPhase1Dragon))
+                foreach (var item in WindowManager.BossWindow.VM.NpcList.Where(x => x.IsPhase1Dragon))
                 {
                     item.StartShield();
                 }
@@ -512,24 +512,24 @@ namespace TCC.Parsing
             else if (p.MessageId == 9950113)
             {
                 //aquadrax interrupted
-                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
+                WindowManager.BossWindow.VM.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
             }
             else if (p.MessageId == 9950114)
             {
                 //umbradrax interrupted
-                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
+                WindowManager.BossWindow.VM.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
 
             }
             else if (p.MessageId == 9950115)
             {
                 //ignidrax interrupted
-                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
+                WindowManager.BossWindow.VM.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
 
             }
             else if (p.MessageId == 9950116)
             {
                 //terradrax interrupted
-                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
+                WindowManager.BossWindow.VM.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
 
             }
             else if (p.MessageId == 9950044)
@@ -707,8 +707,8 @@ namespace TCC.Parsing
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
-            if (BossGageWindowViewModel.Instance.CurrentHHphase != HarrowholdPhase.Phase1) return;
-            BossGageWindowViewModel.Instance.SelectDragon(p.X, p.Y);
+            if (WindowManager.BossWindow.VM.CurrentHHphase != HarrowholdPhase.Phase1) return;
+            WindowManager.BossWindow.VM.SelectDragon(p.X, p.Y);
         }
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
@@ -870,8 +870,8 @@ namespace TCC.Parsing
         {
             if (p.Target.IsMe())
                 SessionManager.SetPlayerShield(p.Damage);
-            else if (BossGageWindowViewModel.Instance.NpcList.Any(x => x.EntityId == p.Target))
-                BossGageWindowViewModel.Instance.UpdateShield(p.Target, p.Damage);
+            else if (WindowManager.BossWindow.VM.NpcList.Any(x => x.EntityId == p.Target))
+                WindowManager.BossWindow.VM.UpdateShield(p.Target, p.Damage);
         }
 
         public static void HandleImageData(S_IMAGE_DATA sImageData)
@@ -928,7 +928,7 @@ namespace TCC.Parsing
 
         public static void HandleShowHp(S_SHOW_HP x)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(x.GameId, x.MaxHp, x.CurrentHp, false, HpChangeSource.CreatureChangeHp);
+            WindowManager.BossWindow.VM.AddOrUpdateBoss(x.GameId, x.MaxHp, x.CurrentHp, false, HpChangeSource.CreatureChangeHp);
         }
 
         public static void HandleDestroyGuildTower(S_DESTROY_GUILD_TOWER p)
