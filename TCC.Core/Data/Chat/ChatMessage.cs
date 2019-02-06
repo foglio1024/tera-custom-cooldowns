@@ -517,6 +517,7 @@ namespace TCC.Data.Chat
         {
             foreach (var messagePiece in Pieces)
             {
+                if (messagePiece == null) continue;
                 messagePiece.Dispose();
             }
             Pieces.Clear();
