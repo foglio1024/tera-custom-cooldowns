@@ -163,7 +163,7 @@ namespace TCC.ViewModels
             {
                 if (_cache.Count == 0)
                 {
-                    Log.CW($"FlushCache() - nothing to flush");
+                    //Log.CW($"FlushCache() - nothing to flush");
                     return;
                 }
                 try
