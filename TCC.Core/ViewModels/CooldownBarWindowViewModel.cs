@@ -11,6 +11,7 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
+using TCC.Settings;
 using TCC.Windows;
 
 namespace TCC.ViewModels
@@ -82,25 +83,14 @@ namespace TCC.ViewModels
 
         private bool NormalMode_Update(Cooldown sk)
         {
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
-            {
-                return false;
-            }
-            if (!Settings.SettingsHolder.CooldownWindowSettings.Enabled)
-            {
-                return false;
-            }
+            if (SettingsHolder.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
+            if (!SettingsHolder.CooldownWindowSettings.Enabled) return false;
+
             var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
 
             var hSkill = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (hSkill != null)
-            {
-                return false;
-            }
-            if (other.CooldownType == CooldownType.Item)
-            {
-                return FindAndUpdate(ItemSkills, other);
-            }
+            if (hSkill != null) return false;
+            if (other.CooldownType == CooldownType.Item) return FindAndUpdate(ItemSkills, other);
 
             try
             {
@@ -110,10 +100,10 @@ namespace TCC.ViewModels
                 }
                 else
                 {
-                    var existing = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == other.Skill.Name);
+                    var existing = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == other.Skill.IconName);
                     if (existing == null)
                     {
-                        existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == other.Skill.Name);
+                        existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == other.Skill.IconName);
                         if (existing == null)
                         {
                             LongSkills.Add(other);
@@ -131,6 +121,7 @@ namespace TCC.ViewModels
             }
             catch
             {
+                Log.All($"[NormalMode_Update] Error in skill: {sk.Skill.Name}");
                 return false;
             }
         }
@@ -143,9 +134,10 @@ namespace TCC.ViewModels
             {
                 if (cd < SkillManager.LongSkillTreshold)
                 {
-                    var existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == skill.Name);
+                    var existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == skill.IconName);
                     if (existing == null)
                     {
+                        if (skill.Id % 10 != 0) return; //TODO: check this; discards updates if new id is not base
                         ShortSkills.Add(new Cooldown(skill, cd));
                     }
                     else
@@ -155,10 +147,10 @@ namespace TCC.ViewModels
                 }
                 else
                 {
-                    var existing = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == skill.Name);
+                    var existing = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == skill.IconName);
                     if (existing == null)
                     {
-                        existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == skill.Name);
+                        existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == skill.IconName);
                         if (existing == null)
                         {
                             LongSkills.Add(new Cooldown(skill, cd));
@@ -174,6 +166,7 @@ namespace TCC.ViewModels
             }
             catch
             {
+                Log.All($"Error while changing cd on {skill.Name}");
                 // ignored
             }
         }
@@ -204,13 +197,13 @@ namespace TCC.ViewModels
 
             try
             {
-                var longSkill = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var longSkill = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
                 if (longSkill != null)
                 {
                     LongSkills.Remove(longSkill);
                     longSkill.Dispose();
                 }
-                var shortSkill = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var shortSkill = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
                 if (shortSkill != null)
                 {
 
