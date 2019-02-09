@@ -53,7 +53,7 @@ namespace TCC
             TryDeleteUpdater();
 
             SplashScreen.SetText("Checking for application updates...");
-            UpdateManager.CheckAppVersion();
+            await UpdateManager.CheckAppVersion();
 
             SplashScreen.SetText("Checking for database updates...");
             await UpdateManager.CheckIconsVersion();

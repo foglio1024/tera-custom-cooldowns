@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -127,7 +128,7 @@ namespace TCC
                 try
                 {
                     App.SplashScreen.SetText("Downloading icons...");
-                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip")); 
+                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip"));
                 }
                 catch (Exception)
                 {
@@ -277,7 +278,7 @@ namespace TCC
             }
         }
 
-        public static void CheckAppVersion()
+        public async static Task CheckAppVersion()
         {
             try
             {
@@ -286,28 +287,28 @@ namespace TCC
                 if (!vp.IsNewer) return;
                 if (!App.SplashScreen.AskUpdate($"TCC v{vp.NewVersionNumber} available. Download now?")) return;
 
-                Update(vp.NewVersionUrl);
+                await Update(vp.NewVersionUrl);
             }
             catch (Exception e)
             {
                 Log.F($"Error while checking update. \nException:\n{e.Message}\n{e.StackTrace}");
                 if (!App.SplashScreen.AskUpdate("Error while checking updates. Try again?")) return;
-                CheckAppVersion();
+                await CheckAppVersion();
             }
         }
-
-        private async static void Update(string url)
+        private static bool _waitingDownload = true;
+        private async static Task Update(string url)
         {
             using (var c = Utils.GetDefaultWebClient())
             {
                 try
                 {
-                    //var ready = false;
-                    //c.DownloadFileCompleted += (s, ev) => ready = true;
                     App.SplashScreen.SetText("Downloading update...");
+                    c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                     await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() => c.DownloadFileAsync(new Uri(url), "update.zip")));
-                    //while (!ready) Thread.Sleep(1);
+
+                    while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
 
                     App.SplashScreen.SetText("Extracting zip...");
                     if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
@@ -323,8 +324,9 @@ namespace TCC
                 catch (Exception e)
                 {
                     Log.F($"Error while downloading update. \nException:\n{e.Message}\n{e.StackTrace}");
-                    if (!App.SplashScreen.AskUpdate("Error while downloading update. Try again? If the error perists download TCC manually.")) return;
-                    Update(url);
+                    var res = TccMessageBox.Show("Error while downloading update. Try again? If the error perists download TCC manually.", MessageBoxType.ConfirmationWithYesNo);
+                    if (res != System.Windows.MessageBoxResult.Yes) return;
+                    await Update(url);
                 }
             }
         }
