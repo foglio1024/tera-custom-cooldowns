@@ -12,7 +12,7 @@ namespace TCC.ClassSpecific
         private const int FrostFusionIncreaseId = 502071;   // Equipoise-Frost
         private const int ArcaneFusionIncreaseId = 502072;  // Equipoise-Arcane
 
-        private const int FireIceFusionId = 502021;
+        private const int FireIceFusionId = 502020;
         //private const int FireArcaneFusionId = 502030;
         //private const int IceArcaneFusionId = 502040;
 
@@ -22,11 +22,14 @@ namespace TCC.ClassSpecific
 
         public SorcererAbnormalityTracker()
         {
-            var fireIceFusionAb = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[FireIceFusionId];
+            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
+            {
+                _fireIceFusion = new Skill(ab, Class.Sorcerer);
+            }
+
             //var fireArcaneFusionAb = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[FireArcaneFusionId];
             //var iceArcaneFusionAb = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[IceArcaneFusionId];
 
-            _fireIceFusion = new Skill(fireIceFusionAb, Class.Sorcerer);
             //_fireArcaneFusion = new Skill(fireArcaneFusionAb, Class.Sorcerer);
             //_iceArcaneFusion = new Skill(iceArcaneFusionAb, Class.Sorcerer);
         }
@@ -87,7 +90,7 @@ namespace TCC.ClassSpecific
         }
         private static void CheckFusions(S_ABNORMALITY_BEGIN p)
         {
-            if (FireIceFusionId == p.AbnormalityId)
+            if (FireIceFusionId == p.AbnormalityId && _fireIceFusion != null)
             {
                 StartPrecooldown(_fireIceFusion, p.Duration);
             }
