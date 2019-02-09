@@ -149,6 +149,7 @@ namespace TCC
             try { BuffWindow.CloseWindowSafe(); } catch { }
             try { ClassWindow.CloseWindowSafe(); } catch { }
 
+            if (RunningDispatchers == null) return;
             while (true)
             {
                 if (RunningDispatchers.Count == 0) break;
