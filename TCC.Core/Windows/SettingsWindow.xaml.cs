@@ -14,7 +14,7 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow
+    public partial class SettingsWindow : TccWindow
     {
 
         public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
