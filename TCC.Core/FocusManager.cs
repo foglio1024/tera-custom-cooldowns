@@ -46,7 +46,6 @@ namespace TCC
                 if(_forceFocused == value) return;
                 _forceFocused = value;
                 ForegroundChanged?.Invoke();
-                Log.All($"ForceFocused set to {value}");
             }
         }
 
