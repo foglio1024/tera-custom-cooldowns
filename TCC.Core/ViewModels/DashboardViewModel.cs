@@ -313,7 +313,7 @@ namespace TCC.ViewModels
             if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
 
             SelectedCharacter = character;
-            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, SelectedCharacter.Inventory, new string[] { }, new SortDescription[]
+            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new SortDescription[]
             {
                 new SortDescription("Item.Id", ListSortDirection.Ascending),
             });
