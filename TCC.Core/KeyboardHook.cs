@@ -58,8 +58,11 @@ namespace TCC
             }
             else if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {
-                if (WindowManager.IsWindowOpen(typeof(SkillConfigWindow))) WindowManager.CloseWindow(typeof(SkillConfigWindow));
-                else WindowManager.CooldownWindow.Dispatcher.BeginInvoke(new Action(() => new SkillConfigWindow().ShowWindow()), DispatcherPriority.Background);
+                WindowManager.CooldownWindow.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
+                    else new SkillConfigWindow().ShowWindow();
+                }), DispatcherPriority.Background);
             }
             else if (e.Key == Keys.R && e.Modifier == (ModifierKeys.Alt | ModifierKeys.Control))
             {

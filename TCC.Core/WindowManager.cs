@@ -51,6 +51,8 @@ namespace TCC
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
         public static LfgListWindow LfgListWindow;
+        public static SkillConfigWindow SkillConfigWindow;
+
 
         public static ConcurrentDictionary<int ,Dispatcher> RunningDispatchers;
 
