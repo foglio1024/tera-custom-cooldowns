@@ -1,13 +1,13 @@
-﻿<UserControl x:Class="TCC.Controls.Group.RaidMember"
+﻿<grp:GroupMemberBase x:Class="TCC.Controls.Group.RaidMember"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pc="clr-namespace:TCC.Data.Pc"
+             xmlns:grp="clr-namespace:TCC.Controls.Group"
              mc:Ignorable="d" 
-             Loaded="UserControl_Loaded"
              d:DataContext="{d:DesignInstance pc:User}">
-    <UserControl.Resources>
+    <grp:GroupMemberBase.Resources>
         <Style TargetType="FrameworkElement" x:Key="OnlineBoundVisibility">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Online}" Value="False">
@@ -33,8 +33,30 @@
 
             </Style.Triggers>
         </Style>
-    </UserControl.Resources>
-
+        <Style TargetType="ItemsControl" x:Key="AbnormalitiesItemsControlStyle">
+            <Setter Property="ItemTemplateSelector" Value="{Binding CurrentAbnormalityTemplateSelector, 
+                                                                    RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}"/>
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="Margin" Value="-10 0 0 0"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="ContentControl.Margin" Value="-6 6 0 -6" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                                   HorizontalAlignment="Left"
+                                   Height="Auto"
+                                   Width="Auto"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </grp:GroupMemberBase.Resources>
     <Grid Height="Auto" Margin="2 0" Width="145" Name="RootGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -48,48 +70,24 @@
         </Grid.RowDefinitions>
         <!--Abnormalities grids-->
         <Grid Name="DebuffGrid" Grid.Row="2" Grid.ColumnSpan="2">
-            <ItemsControl Name="Debuffs" ItemsSource="{Binding Debuffs}" Grid.ColumnSpan="2"
-                          ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" Margin="0,-10,0,0" 
-                      ClipToBounds="False">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal"
-                               HorizontalAlignment="Left"
-                               Width="Auto"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+            <ItemsControl Name="Debuffs" 
+                          Style="{StaticResource AbnormalitiesItemsControlStyle}"
+                          ItemsSource="{Binding DebuffsSource, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" 
+                          Grid.ColumnSpan="2"
+                     >
                 <ItemsControl.RenderTransform>
-                    <TranslateTransform X="26"></TranslateTransform>
+                    <TranslateTransform X="26"/>
                 </ItemsControl.RenderTransform>
-                <ItemsControl.ItemContainerStyle>
-                    <Style>
-                        <Setter Value="-6,6,0,-6" Property="ContentControl.Margin"></Setter>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-
             </ItemsControl>
         </Grid>
         <Grid Name="BuffGrid" Grid.Row="1" Grid.ColumnSpan="2" >
-            <ItemsControl Name="Buffs" ItemsSource="{Binding Buffs}" 
-                          ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" 
-                          Grid.ColumnSpan="2" Margin="0,-10,0,0"
-                          ClipToBounds="False">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" Height="Auto"
-                                   HorizontalAlignment="Left"
-                                   Width="Auto"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+            <ItemsControl Name="Buffs" 
+                          Style="{StaticResource AbnormalitiesItemsControlStyle}"
+                          ItemsSource="{Binding BuffsSource, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" 
+                          Grid.ColumnSpan="2" >
                 <ItemsControl.RenderTransform>
-                    <TranslateTransform X="26" Y="-2"></TranslateTransform>
+                    <TranslateTransform X="26" Y="-2"/>
                 </ItemsControl.RenderTransform>
-                <ItemsControl.ItemContainerStyle>
-                    <Style>
-                        <Setter Value="-6,6,0,-6" Property="ContentControl.Margin"></Setter>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-
             </ItemsControl>
         </Grid>
 
@@ -107,7 +105,7 @@
             </Grid.ColumnDefinitions>
             <!--Name-->
             <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand" ToolTipService.ShowDuration="50000"
-                       PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
+                       PreviewMouseLeftButtonDown="ShowUserMenu"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,-2,0,2" FontSize="12" Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level}" FontSize="10" Foreground="#6fff"/>
                 <Run Text="{Binding Name, Mode=OneWay}" FontSize="12"/>
@@ -168,6 +166,9 @@
                                Height="3" Width="Auto" 
                                Margin="0" HorizontalAlignment="Stretch"
                                Style="{StaticResource OnlineBoundVisibility}"
+                                                       Visibility="{Binding ShowHp, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
+                                                            Converter={StaticResource BoolToVisibleCollapsed}}"
+
                                x:Name="HpBar">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
@@ -189,6 +190,9 @@
                     <Rectangle x:Name="MpBar" 
                                Grid.Row="1" Height="2" 
                                Margin="0 1 0 0" Width="Auto" HorizontalAlignment="Stretch" 
+                               Visibility="{Binding ShowMp, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
+                                                            Converter={StaticResource BoolToVisibleCollapsed}}"
+
                                Style="{StaticResource OnlineBoundVisibility}">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
@@ -297,7 +301,6 @@
 
             </Grid>
 
-
             <Image  Opacity="1" x:Name="LaurelImage" 
                     Margin="-3" 
                     Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr}" 
@@ -305,7 +308,10 @@
                     UseLayoutRounding="True" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Stretch"
-                    Stretch="Uniform" >
+                    Stretch="Uniform" 
+                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
+                                                     Converter={StaticResource BoolToVisibleCollapsed}}"
+                    >
                 <Image.RenderTransform>
                     <TranslateTransform Y="1" X="-.5"/>
                 </Image.RenderTransform>
@@ -313,8 +319,8 @@
             <Grid  Width="13" Height="13" Margin="0 0 0 0"
                    HorizontalAlignment="Right" VerticalAlignment="Center"
                    Grid.Column="0" ToolTip="Awakened"
-            >
-                <!--<Ellipse Fill="Orange"/>-->
+                   Visibility="{Binding ShowAwaken, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
+                                                    Converter={StaticResource BoolToVisibleCollapsed}}">
                 <Border Background="Transparent" 
                         BorderBrush="Transparent"
                         Visibility="{Binding Awakened, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -492,4 +498,4 @@
         </Grid>
     </Grid>
 
-</UserControl>
+</grp:GroupMemberBase>
