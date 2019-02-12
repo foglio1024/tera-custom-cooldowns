@@ -425,14 +425,19 @@
 
     </DataTemplate>
     <DataTemplate x:Key="SystemAuthorTemplate" DataType="chat:ChatMessage">
-        <Ellipse Width="6"
-                     Height="6"
-                     Margin="3 5"
+        <Grid>
+            <Rectangle Width="7"
+                     Height="7"
+                     Margin="3 5 3 0"
+                   RenderTransformOrigin=".5 .5"
+                   RenderTransform="{StaticResource Rotate45}"
                  VerticalAlignment="Center"
-HorizontalAlignment="Center"
+                HorizontalAlignment="Center"
                  Opacity=".5"
                      Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                      />
+
+        </Grid>
     </DataTemplate>
     <DataTemplate x:Key="LfgTemplate">
         <chatCtrl:LFGcontrol Margin="1"/>

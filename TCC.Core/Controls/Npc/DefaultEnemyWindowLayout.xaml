@@ -52,10 +52,8 @@
                       HorizontalAlignment="Left">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" 
-                               ItemHeight="Auto" 
+                    <StackPanel Orientation="Vertical" 
                                MaxHeight="100" 
-                               ItemWidth="Auto" 
                                Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

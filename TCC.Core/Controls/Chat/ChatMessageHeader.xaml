@@ -15,21 +15,38 @@
         </Grid.ColumnDefinitions>
 
         <!--Background -->
-        <Border Background="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}}" 
-                            Opacity=".25" 
+        <Border 
+                            Opacity=".35" 
                             CornerRadius="1" 
                             Visibility="Visible"
-                            Margin="0,0" 
+                            Margin="0 0 0 0" 
                             Grid.ColumnSpan="4"
                             Grid.Column="0"
-                            VerticalAlignment="Stretch"/>
+                            VerticalAlignment="Stretch"
+            Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" >
+            <!--<Border.Background>
+                <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
+                    <GradientStop Offset=".2" Color="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}, ConverterParameter=color}"/>
+                    <GradientStop Offset=".9" Color="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}, ConverterParameter=color_transparent}" />
+                </LinearGradientBrush>
+            </Border.Background>-->
+        </Border>
         <!--Background tip-->
-        <Border Width="3" Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" Grid.Column="3" 
-                            CornerRadius="0 1 1 0" Margin="0,0" Opacity=".5" />
+        <Border Width="3" Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" 
+                Grid.Column="3" CornerRadius="0 1 1 0" Margin="0,0" Opacity=".8" />
+        <!--<Path Fill="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}"  
+              Data="M0,0 1,-1 1,1" Grid.Column="2" VerticalAlignment="Top" Opacity=".5"
+              Width="20" Height="20"  HorizontalAlignment="Left" Stretch="Uniform"></Path>
+        <Rectangle Fill="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}"  Grid.Column="2"
+                   Opacity=".5" VerticalAlignment="Top" Height="20" Margin="10 0 10 0"></Rectangle>
+        <Path Fill="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}"  
+              Data="M0,-1 1,0 0,1" Grid.Column="2" VerticalAlignment="Top" Opacity=".5"
+              Width="20" Height="20"  HorizontalAlignment="Right" Stretch="Uniform" Margin="0 0 0 0"></Path>-->
         <!--Author-->
         <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}" 
+                        Name="Author"
                         Content="{Binding}"
-                        Margin="2 1 2 1"
+                        Margin="2 1"
                         Grid.Column="2"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
@@ -39,7 +56,7 @@
                         MouseLeave="UIElement_OnMouseLeave"
         >
             <ContentControl.Effect>
-                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="1" Opacity="0"></DropShadowEffect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="2" Opacity="0"></DropShadowEffect>
             </ContentControl.Effect>
         </ContentControl>
 

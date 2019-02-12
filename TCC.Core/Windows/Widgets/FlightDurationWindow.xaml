@@ -50,8 +50,8 @@
                 <Style TargetType="c:Arc">
                     <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
                     <Setter Property="StrokeThickness" Value="6"/>
-                    <Setter Property="StrokeStartLineCap" Value="Round"/>
-                    <Setter Property="StrokeEndLineCap" Value="Round"/>
+                    <Setter Property="StrokeStartLineCap" Value="Flat"/>
+                    <Setter Property="StrokeEndLineCap" Value="Flat"/>
                     <Setter Property="StartAngle" Value="0"/>
                     <Setter Property="Opacity" Value="0.2"/>
                     <Setter Property="EndAngle" Value="7"/>
