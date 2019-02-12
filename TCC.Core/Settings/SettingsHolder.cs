@@ -37,7 +37,14 @@ namespace TCC.Settings
         public static bool DisablePartyHP { get; set; }
         public static bool DisablePartyAbnormals { get; set; }
         public static bool ShowOnlyAggroStacks { get; set; } = true;
+
         public static uint GroupSizeThreshold { get; set; } = 7;
+        public static uint HideBuffsThreshold { get; set; } = 7;
+        public static uint HideDebuffsThreshold { get; set; } = 7;
+        public static uint DisableAbnormalitiesThreshold { get; set; } = 7;
+        public static uint HideHpThreshold { get; set; } = 7;
+        public static uint HideMpThreshold { get; set; } = 7;
+
         public static bool ShowMembersLaurels { get; set; }
         public static bool ShowAllGroupAbnormalities { get; set; }
         public static bool ShowGroupWindowDetails { get; set; } = true;

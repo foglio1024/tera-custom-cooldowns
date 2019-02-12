@@ -343,6 +343,13 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.TwitchToken)) SettingsHolder.TwitchToken = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.TwitchChannelName)) SettingsHolder.TwitchChannelName = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.GroupSizeThreshold)) SettingsHolder.GroupSizeThreshold = uint.Parse(attr.Value);
+
+                    else if (attr.Name == nameof(SettingsHolder.HideBuffsThreshold)) SettingsHolder.HideBuffsThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.HideDebuffsThreshold)) SettingsHolder.HideDebuffsThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.DisableAbnormalitiesThreshold)) SettingsHolder.DisableAbnormalitiesThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.HideHpThreshold)) SettingsHolder.HideHpThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.HideMpThreshold)) SettingsHolder.HideMpThreshold = uint.Parse(attr.Value);
+
                     else if (attr.Name == nameof(SettingsHolder.CheckOpcodesHash)) SettingsHolder.CheckOpcodesHash = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.DiscordWebhookEnabled)) SettingsHolder.DiscordWebhookEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowNotificationBubble)) SettingsHolder.ShowNotificationBubble = bool.Parse(attr.Value);

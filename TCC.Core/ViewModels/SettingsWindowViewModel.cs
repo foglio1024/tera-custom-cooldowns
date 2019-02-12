@@ -112,6 +112,61 @@ namespace TCC.ViewModels
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
+        public uint HideBuffsThreshold
+        {
+            get => SettingsHolder.HideBuffsThreshold;
+            set
+            {
+                if (SettingsHolder.HideBuffsThreshold == value) return;
+                SettingsHolder.HideBuffsThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideDebuffsThreshold
+        {
+            get => SettingsHolder.HideDebuffsThreshold;
+            set
+            {
+                if (SettingsHolder.HideDebuffsThreshold == value) return;
+                SettingsHolder.HideDebuffsThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideHpThreshold
+        {
+            get => SettingsHolder.HideHpThreshold;
+            set
+            {
+                if (SettingsHolder.HideHpThreshold == value) return;
+                SettingsHolder.HideHpThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideMpThreshold
+        {
+            get => SettingsHolder.HideMpThreshold;
+            set
+            {
+                if (SettingsHolder.HideMpThreshold == value) return;
+                SettingsHolder.HideMpThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint DisableAbnormalitiesThreshold
+        {
+            get => SettingsHolder.DisableAbnormalitiesThreshold;
+            set
+            {
+                if (SettingsHolder.DisableAbnormalitiesThreshold == value) return;
+                SettingsHolder.DisableAbnormalitiesThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
         public bool HideDebuffs
         {
             get => SettingsHolder.IgnoreGroupDebuffs;
