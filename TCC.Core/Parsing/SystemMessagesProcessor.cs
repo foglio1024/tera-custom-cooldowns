@@ -156,6 +156,8 @@ namespace TCC.Parsing
 
             { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_ALL",   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Laurel)) },
 
+            { "SMT_DROPDMG_DAMAGE",                     new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Damage)) },
+
             { "SMT_FIELD_EVENT_REWARD_AVAILABLE",       new Action<string, SystemMessage>(HandleClearedGuardianQuestsMessage) },
             { "SMT_FIELD_EVENT_ENTER",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
             { "SMT_FIELD_EVENT_LEAVE",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
@@ -165,6 +167,8 @@ namespace TCC.Parsing
             { "SMT_FIELD_EVENT_WORLD_ANNOUNCE",         new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
 
             { "SMT_ITEM_DECOMPOSE_COMPLETE",            new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
+            { "SMT_WAREHOUSE_ITEM_DRAW",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
+            { "SMT_WAREHOUSE_ITEM_INSERT",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
 
             { "SMT_GC_MSGBOX_APPLYLIST_1",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
             { "SMT_GC_MSGBOX_APPLYLIST_2",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
