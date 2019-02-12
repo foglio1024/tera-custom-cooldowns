@@ -21,6 +21,7 @@ namespace TCC.Windows
 
         public SettingsWindow()
         {
+            DataContext = new SettingsWindowViewModel();
             InitializeComponent();
             TitleBarGrid.MouseLeftButtonDown += (_, __) => DragMove();
         }
