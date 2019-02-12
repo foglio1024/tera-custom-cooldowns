@@ -20,6 +20,7 @@ namespace TCC.Controls.NPCs
         private readonly DispatcherTimer _numberTimer;
 
         public event Action EnragedChanged;
+        public event Action ReEnraged;
 
         public ObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
         public string MainPercInt => (Convert.ToInt32(Math.Floor(NPC.HPFactor * 100))).ToString();
@@ -240,6 +241,7 @@ namespace TCC.Controls.NPCs
                         NPC.EnragePattern.Duration = NPC.RemainingEnrageTime / 1000;
                         _serverSentEnrage = true;
                     }
+                    if (CurrentEnrageTime < NPC.RemainingEnrageTime / 1000) ReEnraged?.Invoke();
                     _numberTimer.Refresh();
                     CurrentEnrageTime = NPC.RemainingEnrageTime / 1000;
                     N(nameof(EnrageTBtext));
