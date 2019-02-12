@@ -126,55 +126,55 @@ namespace TCC
         }
         private static void DebugStuff()
         {
-            var _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
-            var dispatchers = new List<Dispatcher>
-            {
-                 App.BaseDispatcher                                ,
-                 WindowManager.BossWindow.Dispatcher               ,
-                 WindowManager.BuffWindow.Dispatcher               ,
-                 WindowManager.CharacterWindow.Dispatcher          ,
-                 WindowManager.GroupWindow.Dispatcher              ,
-                 WindowManager.CooldownWindow.Dispatcher           ,
-                 WindowManager.ClassWindow.Dispatcher              ,
-            };
-            var threadIdToName = new ConcurrentDictionary<int, string>();
-            foreach (var disp in dispatchers)
-            {
-                disp.Invoke(() =>
-                {
-                    var myId = GetCurrentThreadId();
-                    threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
-                });
-            }
-            threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
+            //var _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+            //var dispatchers = new List<Dispatcher>
+            //{
+            //     App.BaseDispatcher                                ,
+            //     WindowManager.BossWindow.Dispatcher               ,
+            //     WindowManager.BuffWindow.Dispatcher               ,
+            //     WindowManager.CharacterWindow.Dispatcher          ,
+            //     WindowManager.GroupWindow.Dispatcher              ,
+            //     WindowManager.CooldownWindow.Dispatcher           ,
+            //     WindowManager.ClassWindow.Dispatcher              ,
+            //};
+            //var threadIdToName = new ConcurrentDictionary<int, string>();
+            //foreach (var disp in dispatchers)
+            //{
+            //    disp.Invoke(() =>
+            //    {
+            //        var myId = GetCurrentThreadId();
+            //        threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
+            //    });
+            //}
+            //threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
 
-            var stats = new Dictionary<int, ThreadInfo> { };
-            _t.Tick += (_, __) =>
-            {
-                var p = Process.GetCurrentProcess();
-                foreach (ProcessThread th in p.Threads)
-                {
-                    if (threadIdToName.ContainsKey(th.Id))
-                    {
-                        if (!stats.ContainsKey(th.Id)) stats.Add(th.Id, new ThreadInfo
-                        {
-                            Name = threadIdToName[th.Id],
-                            Id = th.Id,
-                            TotalTime = th.TotalProcessorTime.TotalMilliseconds,
-                            Priority = threadIdToName[th.Id] == "Anal" ? PacketAnalyzer.AnalysisThread.Priority : dispatchers.FirstOrDefault(d => d.Thread.Name == threadIdToName[th.Id]).Thread.Priority
-                        });
-                        else stats[th.Id].TotalTime = th.TotalProcessorTime.TotalMilliseconds;
-                    }
-                }
-                foreach (var item in stats)
-                {
-                    Console.WriteLine($"{threadIdToName[item.Key]} ({(int)item.Value.Priority}):\t\t{item.Value.TotalTime:0}\t\t{item.Value.DiffTime/1000:P}\t");
-                }
+            //var stats = new Dictionary<int, ThreadInfo> { };
+            //_t.Tick += (_, __) =>
+            //{
+            //    var p = Process.GetCurrentProcess();
+            //    foreach (ProcessThread th in p.Threads)
+            //    {
+            //        if (threadIdToName.ContainsKey(th.Id))
+            //        {
+            //            if (!stats.ContainsKey(th.Id)) stats.Add(th.Id, new ThreadInfo
+            //            {
+            //                Name = threadIdToName[th.Id],
+            //                Id = th.Id,
+            //                TotalTime = th.TotalProcessorTime.TotalMilliseconds,
+            //                Priority = threadIdToName[th.Id] == "Anal" ? PacketAnalyzer.AnalysisThread.Priority : dispatchers.FirstOrDefault(d => d.Thread.Name == threadIdToName[th.Id]).Thread.Priority
+            //            });
+            //            else stats[th.Id].TotalTime = th.TotalProcessorTime.TotalMilliseconds;
+            //        }
+            //    }
+            //    foreach (var item in stats)
+            //    {
+            //        Console.WriteLine($"{threadIdToName[item.Key]} ({(int)item.Value.Priority}):\t\t{item.Value.TotalTime:0}\t\t{item.Value.DiffTime/1000:P}\t");
+            //    }
 
 
-                Console.WriteLine("----------------------------------");
-            };
-            _t.Start();
+            //    Console.WriteLine("----------------------------------");
+            //};
+            //_t.Start();
 
 
 
@@ -337,24 +337,27 @@ namespace TCC
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
 
             //var l = new List<User>();
-            //var r = new Random();
-            //for (uint i = 0; i <= 10; i++)
-            //{
-            //    var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
-            //    {
-            //        Name = i.ToString(),
-            //        PlayerId = i,
-            //        ServerId = i,
-            //        EntityId = i,
-            //        Online = true,
-            //        Laurel = (Laurel)(r.Next(0, 6)),
-            //        HasAggro = i == 1,
-            //        Alive = true, //i != 0,
-            //        UserClass = (Class)r.Next(0, 12),
-            //        Awakened = i < 5,
-            //    };
-            //    WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
-            //}
+            var r = new Random();
+            for (uint i = 0; i <= 10; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+                {
+                    Name = i.ToString(),
+                    PlayerId = i,
+                    ServerId = i,
+                    EntityId = i,
+                    Online = true,
+                    Laurel = (Laurel)(r.Next(0, 6)),
+                    HasAggro = i == 1,
+                    Alive = true, //i != 0,
+                    UserClass = (Class)r.Next(0, 12),
+                    Awakened = i < 5,
+                };
+                WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
+            }
+            AbnormalityManager.UpdatePartyMemberAbnormality(1, 1, 1495, 200000, 1);
+            AbnormalityManager.UpdatePartyMemberAbnormality(2, 2, 1495, 200000, 1);
+            AbnormalityManager.UpdatePartyMemberAbnormality(3, 3, 1495, 200000, 1);
 
             ////WindowManager.GroupWindow.VM.SetRaid(true);
             //WindowManager.GroupWindow.VM.SetNewLeader(1, "1");
