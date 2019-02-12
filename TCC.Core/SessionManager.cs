@@ -125,16 +125,14 @@ namespace TCC
         {
             CurrentPlayer.CurrentHP = hp;
         }
-        public static void SetPlayerMp(ulong target, float mp)
+        public static void SetPlayerMp(float mp)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentMP = mp;
         }
-        public static void SetPlayerSt(ulong target, float st)
+        public static void SetPlayerSt(float st)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentST = st;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
+            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -153,21 +151,18 @@ namespace TCC
             }
         }
 
-        public static void SetPlayerMaxHp(ulong target, long maxHp)
+        public static void SetPlayerMaxHp(long maxHp)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxHP = maxHp;
             //ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
         }
-        public static void SetPlayerMaxMp(ulong target, int maxMp)
+        public static void SetPlayerMaxMp(int maxMp)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxMP = maxMp;
             //ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
         }
-        public static void SetPlayerMaxSt(ulong target, int maxSt)
+        public static void SetPlayerMaxSt(int maxSt)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
@@ -190,7 +185,7 @@ namespace TCC
             if (!CurrentDatabase.IsUpToDate)
             {
                 var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
-                if(res == System.Windows.MessageBoxResult.Yes)
+                if (res == System.Windows.MessageBoxResult.Yes)
                 {
                     CurrentDatabase.DownloadOutdatedDatabases();
                 }
@@ -220,7 +215,7 @@ namespace TCC
             CurrentPlayer.Arcane = pArcane;
 
             if (SettingsHolder.ClassWindowSettings.Enabled
-                && CurrentPlayer.Class == Class.Sorcerer 
+                && CurrentPlayer.Class == Class.Sorcerer
                 && WindowManager.ClassWindow.VM.CurrentManager is SorcererBarManager sm)
             {
                 sm.NotifyElementChanged();
