@@ -151,49 +151,53 @@ namespace TCC.ViewModels
         }
         public void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
-            if (ab.Infinity) duration = uint.MaxValue;
-            var u = Members.ToSyncList().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
-            if (u == null) return;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (ab.Infinity) duration = uint.MaxValue;
+                var u = Members.ToSyncList().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
+                if (u == null) return;
 
-            if (ab.Type == AbnormalityType.Buff)
-            {
-                u.AddOrRefreshBuff(ab, duration, stacks);
-                if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
+                if (ab.Type == AbnormalityType.Buff)
                 {
-                    u.Role = Role.Tank; //def stance turned on: switch warrior to tank 
+                    u.AddOrRefreshBuff(ab, duration, stacks);
+                    if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
+                    {
+                        u.Role = Role.Tank; //def stance turned on: switch warrior to tank 
+                    }
                 }
-            }
-            else
-            {
-                // -- show only aggro stacks if we are in HH -- //
-                if (WindowManager.BossWindow.VM.CurrentHHphase >= HarrowholdPhase.Phase2)
+                else
                 {
-                    if (ab.Id != 950023 && Settings.SettingsHolder.ShowOnlyAggroStacks) return;
+                    // -- show only aggro stacks if we are in HH -- //
+                    if (WindowManager.BossWindow.VM.CurrentHHphase >= HarrowholdPhase.Phase2)
+                    {
+                        if (ab.Id != 950023 && Settings.SettingsHolder.ShowOnlyAggroStacks) return;
+                    }
+                    // -------------------------------------------- //
+                    u.AddOrRefreshDebuff(ab, duration, stacks);
                 }
-                // -------------------------------------------- //
-                u.AddOrRefreshDebuff(ab, duration, stacks);
-            }
+            }));
         }
         public void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (u == null) return;
-
-            if (ab.Type == AbnormalityType.Buff)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                u.RemoveBuff(ab);
-                if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
+
+                var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+                if (u == null) return;
+
+                if (ab.Type == AbnormalityType.Buff)
                 {
-                    u.Role = Role.Dps; //def stance ended: make warrior dps again
+                    u.RemoveBuff(ab);
+                    if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
+                    {
+                        u.Role = Role.Dps; //def stance ended: make warrior dps again
+                    }
                 }
-            }
-            else
-            {
-                u.RemoveDebuff(ab);
-            }
-
-
-
+                else
+                {
+                    u.RemoveDebuff(ab);
+                }
+            }));
         }
         public void ClearAbnormality(uint playerId, uint serverId)
         {
@@ -379,9 +383,9 @@ namespace TCC.ViewModels
         }
         public void SetReadyStatus(ReadyPartyMember p)
         {
+            
             if (_firstCheck)
             {
-                //Members.ToList().ForEach(u => u.Ready = ReadyStatus.Undefined);
                 foreach (var u in Members.ToSyncList())
                 {
                     u.Ready = ReadyStatus.Undefined;
@@ -406,35 +410,44 @@ namespace TCC.ViewModels
         }
         public void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (u == null) return;
-            u.CurrentHp = curHp;
-            u.MaxHp = maxHp;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+                if (u == null) return;
+                u.CurrentHp = curHp;
+                u.MaxHp = maxHp;
+            }));
         }
         public void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (u == null) return;
-            u.CurrentMp = curMp;
-            u.MaxMp = maxMp;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+                if (u == null) return;
+                u.CurrentMp = curMp;
+                u.MaxMp = maxMp;
+            }));
         }
         public void SetRaid(bool raid)
         {
-            Dispatcher.Invoke(() => Raid = raid);
+            Dispatcher.BeginInvoke(new Action(() => Raid = raid));
         }
         public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (u == null) return;
-            u.CurrentHp = p.CurrentHP;
-            u.CurrentMp = p.CurrentMP;
-            u.MaxHp = p.MaxHP;
-            u.MaxMp = p.MaxMP;
-            u.Level = (uint)p.Level;
-            if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
-            u.Alive = p.Alive;
-            N(nameof(AliveCount));
-            if (!p.Alive) u.HasAggro = false;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+                if (u == null) return;
+                u.CurrentHp = p.CurrentHP;
+                u.CurrentMp = p.CurrentMP;
+                u.MaxHp = p.MaxHP;
+                u.MaxMp = p.MaxMP;
+                u.Level = (uint)p.Level;
+                if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
+                u.Alive = p.Alive;
+                N(nameof(AliveCount));
+                if (!p.Alive) u.HasAggro = false;
+            }));
         }
         public void NotifyThresholdChanged()
         {

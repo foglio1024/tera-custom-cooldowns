@@ -38,13 +38,13 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.CurrentPlayer.CritFactor = p.BonusCritFactor;
-            SessionManager.SetPlayerMaxHp(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
-            SessionManager.SetPlayerMaxMp(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
-            SessionManager.SetPlayerMaxSt(SessionManager.CurrentPlayer.EntityId, p.MaxST + p.BonusST);
+            SessionManager.SetPlayerMaxHp(p.MaxHP);
+            SessionManager.SetPlayerMaxMp(p.MaxMP);
+            SessionManager.SetPlayerMaxSt(p.MaxST + p.BonusST);
 
             SessionManager.SetPlayerHp(p.CurrentHP);
-            SessionManager.SetPlayerMp(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
-            SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
+            SessionManager.SetPlayerMp(p.CurrentMP);
+            SessionManager.SetPlayerSt(p.CurrentST);
 
             WindowManager.Dashboard.VM.CurrentCharacter.ItemLevel = p.Ilvl;
             WindowManager.Dashboard.VM.CurrentCharacter.Level = p.Level;
@@ -63,9 +63,9 @@ namespace TCC.Parsing
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
-            SessionManager.SetPlayerMaxHp(p.Target, p.MaxHP);
             if (p.Target.IsMe())
             {
+                SessionManager.SetPlayerMaxHp(p.MaxHP);
                 SessionManager.SetPlayerHp(p.CurrentHP);
             }
             else
@@ -76,12 +76,12 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
         {
-            SessionManager.SetPlayerMaxMp(p.Target, p.MaxMP);
-            SessionManager.SetPlayerMp(p.Target, p.CurrentMP);
+            SessionManager.SetPlayerMaxMp(p.MaxMP);
+            SessionManager.SetPlayerMp(p.CurrentMP);
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
-            SessionManager.SetPlayerSt(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
+            SessionManager.SetPlayerSt(p.CurrentST);
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
@@ -331,12 +331,12 @@ namespace TCC.Parsing
         {
             foreach (var buff in x.Abnormals)
             {
-                AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, buff.Id, buff.Duration, buff.Stacks);
+                AbnormalityManager.UpdatePartyMemberAbnormality(x.PlayerId, x.ServerId, buff.Id, buff.Duration, buff.Stacks);
             }
         }
         public static void HandlePartyMemberAbnormalAdd(S_PARTY_MEMBER_ABNORMAL_ADD x)
         {
-            AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
+            AbnormalityManager.UpdatePartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
         }
         public static void HandlePartyMemberAbnormalDel(S_PARTY_MEMBER_ABNORMAL_DEL x)
         {
@@ -378,14 +378,14 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH x)
         {
-            AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
+            AbnormalityManager.UpdatePartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
         }
 
         public static void HandleChat(S_CHAT x)
 
         {
             if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
-                x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Foglio is watching you °L°", NotificationType.Warning);
+                x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Nice TCC :lul:", NotificationType.Warning);
             //Log.CW(x.Message);
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
@@ -400,11 +400,11 @@ namespace TCC.Parsing
 
         public static void HandleProxyOutput(string author, uint channel, string message)
         {
-            if (message.IndexOf('[') != -1 && message.IndexOf(']') != -1)
-            {
-                //    author = message.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                //   message = message.Replace('[' + author + ']', "");
-            }
+            //if (message.IndexOf('[') != -1 && message.IndexOf(']') != -1)
+            //{
+            //    //    author = message.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries)[1];
+            //    //   message = message.Replace('[' + author + ']', "");
+            //}
             if (author == "undefined") author = "System";
             if (!ChatWindowManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
                 ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
@@ -666,8 +666,7 @@ namespace TCC.Parsing
             }
             catch (Exception)
             {
-
-                File.AppendAllText("chat-errors.log", x.SysMessage + "\n");
+                Log.F($"Failed to parse sysmsg: {x.SysMessage}");
             }
         }
 
@@ -714,10 +713,11 @@ namespace TCC.Parsing
         {
             var notifyLfg = WindowManager.GroupWindow.VM.Members.Count == 0;
 
-            WindowManager.GroupWindow.VM.SetRaid(p.Raid);
-
-            foreach (var user in p.Members)
-                WindowManager.GroupWindow.VM.AddOrUpdateMember(user);
+            WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                WindowManager.GroupWindow.VM.SetRaid(p.Raid);
+                p.Members.ForEach(WindowManager.GroupWindow.VM.AddOrUpdateMember);
+            }));
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
             if (Proxy.Proxy.IsConnected && SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
@@ -767,10 +767,13 @@ namespace TCC.Parsing
 
         public static void HandleReadyCheck(S_CHECK_TO_READY_PARTY p)
         {
-            foreach (var item in p.Party)
+            WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                WindowManager.GroupWindow.VM.SetReadyStatus(item);
-            }
+                foreach (var member in p.Party)
+                {
+                    WindowManager.GroupWindow.VM.SetReadyStatus(member);
+                }
+            }));
         }
         public static void HandleReadyCheckFin(S_CHECK_TO_READY_PARTY_FIN x)
         {
@@ -866,8 +869,10 @@ namespace TCC.Parsing
             WindowManager.GroupWindow.VM.UpdateMemberLocation(sPartyMemberIntervalPosUpdate);
         }
 
+        // todo: add chat message too
         public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
         {
+
             if (p.Target.IsMe())
                 SessionManager.SetPlayerShield(p.Damage);
             else if (WindowManager.BossWindow.VM.NpcList.Any(x => x.EntityId == p.Target))

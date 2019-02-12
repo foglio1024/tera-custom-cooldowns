@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using TCC.ViewModels;
 
 namespace TCC
 {
@@ -171,18 +171,24 @@ namespace TCC
                    );
         }
 
-        public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
+        public static void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
-            if (!Filter(ab)) return;
-            WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
+            WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!Filter(ab)) return;
+                WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
+            }));
         }
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
-            if (!Filter(ab)) return;
-            WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
+            WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!Filter(ab)) return;
+                WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
+            }));
         }
     }
 }

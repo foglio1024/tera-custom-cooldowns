@@ -77,7 +77,8 @@ namespace TCC
 
         private static void RouteSkill(Cooldown skillCooldown)
         {
-            if (skillCooldown.Duration== 0)
+
+            if (skillCooldown.Duration == 0)
             {
                 skillCooldown.Dispose();
                 WindowManager.CooldownWindow.VM.Remove(skillCooldown.Skill);
@@ -86,7 +87,7 @@ namespace TCC
             {
                 WindowManager.CooldownWindow.VM.AddOrRefresh(skillCooldown);
             }
-            App.BaseDispatcher.Invoke(() => SkillStarted?.Invoke());
+            App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
         }
         private static bool Pass(Skill sk)
         {

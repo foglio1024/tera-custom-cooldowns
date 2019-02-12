@@ -23,7 +23,7 @@ namespace TCC.ViewModels
         private ICollectionViewLiveShaping _bams;
         private ICollectionViewLiveShaping _mobs;
         private ICollectionView _dragons;
-        private ICollectionView _guildTowers;
+        private ICollectionViewLiveShaping _guildTowers;
 
         private NPC _selectedDragon;
         private NPC _vergos;
@@ -86,12 +86,12 @@ namespace TCC.ViewModels
                 return _mobs;
             }
         }
-        public ICollectionView GuildTowers
+        public ICollectionViewLiveShaping GuildTowers
         {
             get
             {
-                _guildTowers = new CollectionViewSource { Source = NpcList }.View;
-                _guildTowers.Filter = p => ((NPC)p).IsTower;
+                _guildTowers = Utils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
+                    new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;
             }
         }
@@ -171,7 +171,7 @@ namespace TCC.ViewModels
                     foreach (var hpc in _cache.ToList())
                     {
                         SetHpFromCache(hpc.Key, hpc.Value);
-                        Log.CW($"FlushCache() - flushing HP for {hpc.Key}");
+                        //Log.CW($"FlushCache() - flushing HP for {hpc.Key}");
                     }
                 }
                 catch (Exception ex)
@@ -263,14 +263,17 @@ namespace TCC.ViewModels
 
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true)
         {
-            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
-            if (boss == null) return;
-            SetHp(boss, maxHp, curHp, src);
-            if (boss.Visible != visibility)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                boss.Visible = visibility;
-                NpcListChanged?.Invoke();
-            }
+                var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
+                if (boss == null) return;
+                SetHp(boss, maxHp, curHp, src);
+                if (boss.Visible != visibility)
+                {
+                    boss.Visible = visibility;
+                    NpcListChanged?.Invoke();
+                }
+            }));
         }
 
         private void SetHp(NPC boss, float maxHp, float curHp, HpChangeSource src)
@@ -299,7 +302,7 @@ namespace TCC.ViewModels
         {
             //if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
             /*else */
-            Log.CW($"AddToCache({entityId}, {curHp})");
+            //Log.CW($"AddToCache({entityId}, {curHp})");
             _cache[entityId] = curHp;
         }
 
@@ -364,31 +367,34 @@ namespace TCC.ViewModels
 
         public void RemoveBoss(ulong id, DespawnType type)
         {
-            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == id);
-            if (boss == null) return;
-            Log.CW($"RemoveBoss({boss.Name}, {type}) - HP:{boss.CurrentHP}");
-            if (type == DespawnType.OutOfView)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                _savedHp[id] = boss.CurrentHP;
-            }
-            else
-            {
-                _savedHp.Remove(id);
-            }
-            if (!boss.Visible || boss.IsTower)
-            {
-                NpcList.Remove(boss);
-                boss.Dispose();
-            }
-            else
-            {
-                boss.Delete();
-            }
-            NpcListChanged?.Invoke();
+                var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == id);
+                if (boss == null) return;
+                //Log.CW($"RemoveBoss({boss.Name}, {type}) - HP:{boss.CurrentHP}");
+                if (type == DespawnType.OutOfView)
+                {
+                    _savedHp[id] = boss.CurrentHP;
+                }
+                else
+                {
+                    _savedHp.Remove(id);
+                }
+                if (!boss.Visible || boss.IsTower)
+                {
+                    NpcList.Remove(boss);
+                    boss.Dispose();
+                }
+                else
+                {
+                    boss.Delete();
+                }
+                NpcListChanged?.Invoke();
 
-            //_currentNPCs.Remove(boss);
-            //boss.Dispose();
-            if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
+                //_currentNPCs.Remove(boss);
+                //boss.Dispose();
+                if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
+            }));
         }
         public void CopyToClipboard()
         {
@@ -413,11 +419,14 @@ namespace TCC.ViewModels
         }
         public void ClearBosses()
         {
-            foreach (var npc in NpcList.ToSyncList())
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                npc.Dispose();
-            }
-            NpcList.Clear();
+                foreach (var npc in NpcList.ToSyncList())
+                {
+                    npc.Dispose();
+                }
+                NpcList.Clear();
+            }));
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
@@ -491,11 +500,10 @@ namespace TCC.ViewModels
 
         public void RemoveMe(NPC npc, uint delay)
         {
-
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (NpcList.ToSyncList().All(x => x != npc)) return;
-                Log.CW($"RemoveMe({npc.Name}, {delay}) - HP:{npc.CurrentHP}");
+                //Log.CW($"RemoveMe({npc.Name}, {delay}) - HP:{npc.CurrentHP}");
                 npc.Buffs.Clear();
                 if (delay != 0)
                 {
@@ -515,7 +523,7 @@ namespace TCC.ViewModels
                 {
                     RemoveAndDisposeNPC(npc);
                 }
-            });
+            }));
         }
 
         private void RemoveAndDisposeNPC(NPC b)

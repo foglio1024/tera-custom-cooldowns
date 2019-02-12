@@ -63,32 +63,32 @@ namespace TCC.ViewModels
         {
             //Dispatcher.BeginInvoke(new Action(() =>
             //{
-                ChatWindows.Clear();
-                SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
-                {
-                    if (s.Tabs.Count == 0) return;
-                    var m = new ChatViewModel();
+            ChatWindows.Clear();
+            SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
+            {
+                if (s.Tabs.Count == 0) return;
+                var m = new ChatViewModel();
                     //App.ChatDispatcher.BeginInvoke(new Action(() =>
                     //{
-                        var w = new ChatWindow(s, m);
-                        ChatWindows.Add(w);
+                    var w = new ChatWindow(s, m);
+                ChatWindows.Add(w);
                     //}), DispatcherPriority.DataBind);
                     m.LoadTabs(s.Tabs);
-                });
-                if (ChatWindows.Count == 0)
-                {
-                    Log.CW("No chat windows found, initializing default one.");
-                    var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
-                    var m = new ChatViewModel();
-                    //App.ChatDispatcher.BeginInvoke(new Action(() =>
-                    //{
-                        var w = new ChatWindow(ws, m);
-                        SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
-                        ChatWindows.Add(w);
-                        m.LoadTabs();
-                        if (SettingsHolder.ChatEnabled) w.Show();
-                    //}), DispatcherPriority.DataBind);
-                }
+            });
+            if (ChatWindows.Count == 0)
+            {
+                Log.CW("No chat windows found, initializing default one.");
+                var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
+                var m = new ChatViewModel();
+                //App.ChatDispatcher.BeginInvoke(new Action(() =>
+                //{
+                var w = new ChatWindow(ws, m);
+                SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                ChatWindows.Add(w);
+                m.LoadTabs();
+                if (SettingsHolder.ChatEnabled) w.Show();
+                //}), DispatcherPriority.DataBind);
+            }
             //}), DispatcherPriority.Normal);
         }
         public void CloseAllWindows()
@@ -124,64 +124,64 @@ namespace TCC.ViewModels
 
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            if (!SettingsHolder.ChatEnabled)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                chatMessage.Dispose();
-                return;
-            }
-
-            if (BlockedUsers.Contains(chatMessage.Author))
-            {
-                chatMessage.Dispose();
-                return;
-            }
-            if (ChatMessages.Count < SettingsHolder.SpamThreshold)
-            {
-                for (var i = 0; i < ChatMessages.Count - 1; i++)
+                if (!SettingsHolder.ChatEnabled)
                 {
-                    var m = ChatMessages[i];
-                    if (!Pass(chatMessage, m))
+                    chatMessage.Dispose();
+                    return;
+                }
+
+                if (BlockedUsers.Contains(chatMessage.Author))
+                {
+                    chatMessage.Dispose();
+                    return;
+                }
+                if (ChatMessages.Count < SettingsHolder.SpamThreshold)
+                {
+                    for (var i = 0; i < ChatMessages.Count - 1; i++)
                     {
-                        chatMessage.Dispose();
-                        return;
+                        var m = ChatMessages[i];
+                        if (!Pass(chatMessage, m))
+                        {
+                            chatMessage.Dispose();
+                            return;
+                        }
                     }
                 }
-            }
-            else
-            {
-                for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+                else
                 {
-                    if (i > ChatMessages.Count - 1) continue;
-
-                    var m = ChatMessages[i];
-                    if (!Pass(chatMessage, m))
+                    for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
                     {
-                        chatMessage.Dispose();
+                        if (i > ChatMessages.Count - 1) continue;
 
-                        return;
+                        var m = ChatMessages[i];
+                        if (!Pass(chatMessage, m))
+                        {
+                            chatMessage.Dispose();
+
+                            return;
+                        }
                     }
                 }
-            }
 
-            chatMessage.SplitSimplePieces();
+                chatMessage.SplitSimplePieces();
 
-            if (ChatWindows.All(x => !x.IsPaused))
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
+                if (ChatWindows.All(x => !x.IsPaused))
                 {
                     ChatMessages.Insert(0, chatMessage);
-                }), DispatcherPriority.DataBind);
-            }
-            else _queue.Enqueue(chatMessage);
+                }
+                else _queue.Enqueue(chatMessage);
 
-            NewMessage?.Invoke(chatMessage);
-            if (ChatMessages.Count > SettingsHolder.MaxMessages)
-            {
-                var toRemove = ChatMessages[ChatMessages.Count - 1];
-                toRemove.Dispose();
-                ChatMessages.RemoveAt(ChatMessages.Count - 1);
-            }
-            N(nameof(MessageCount));
+                NewMessage?.Invoke(chatMessage);
+                if (ChatMessages.Count > SettingsHolder.MaxMessages)
+                {
+                    var toRemove = ChatMessages[ChatMessages.Count - 1];
+                    toRemove.Dispose();
+                    ChatMessages.RemoveAt(ChatMessages.Count - 1);
+                }
+                N(nameof(MessageCount));
+            }), DispatcherPriority.DataBind);
         }
         public void AddTccMessage(string message)
         {
