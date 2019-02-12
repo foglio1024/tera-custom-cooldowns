@@ -51,15 +51,20 @@ namespace TCC.Windows
 
         public GenericDragHandler DragHandler => new GenericDragHandler();
 
+        public static bool IsOpen { get; private set; }
+
         private void ClosewWindow(object sender, RoutedEventArgs e)
         {
+
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             FocusManager.ForceFocused = false;
             WindowManager.ForegroundManager.ForceUndim = false;
+            WindowManager.SkillConfigWindow = null;
 
             an.Completed += (s, ev) =>
             {
                 Close();
+                IsOpen = false;
                 if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, an);
@@ -71,8 +76,10 @@ namespace TCC.Windows
             if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
             WindowManager.ForegroundManager.ForceUndim = true;
+            WindowManager.SkillConfigWindow = this;
             Dispatcher.Invoke(() =>
             {
+                IsOpen = true;
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 if (IsVisible) return;
                 Opacity = 0;
