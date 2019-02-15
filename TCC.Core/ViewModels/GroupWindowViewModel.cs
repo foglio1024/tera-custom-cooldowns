@@ -201,7 +201,10 @@ namespace TCC.ViewModels
         }
         public void ClearAbnormality(uint playerId, uint serverId)
         {
-            Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
+            Dispatcher.Invoke(() =>
+            {
+                Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
+            });
         }
         public void AddOrUpdateMember(User p)
         {
