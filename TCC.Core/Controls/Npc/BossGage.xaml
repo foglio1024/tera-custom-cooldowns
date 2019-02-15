@@ -452,6 +452,29 @@
                                    VerticalAlignment="Bottom"
                                    Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}" />
                     </StackPanel>
+                    <UniformGrid Rows="1" VerticalAlignment="Center">
+                        <UniformGrid.Resources>
+                            <Style TargetType="Line">
+                                <Setter Property="X1" Value="0"/>
+                                <Setter Property="Y1" Value="0"/>
+                                <Setter Property="X2" Value="0"/>
+                                <Setter Property="Y2" Value="6"/>
+                                <Setter Property="Stroke" Value="#7fff"/>
+                                <Setter Property="StrokeThickness" Value="1"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </UniformGrid.Resources>
+                        <Line Visibility="Hidden"/>
+                        <Line />
+                        <Line />
+                        <Line />
+                        <Line />
+                        <Line />
+                        <Line />
+                        <Line />
+                        <Line />
+                        <Line Visibility="Hidden"/>
+                    </UniformGrid>
                 </Grid>
             </Grid>
         </Grid>
