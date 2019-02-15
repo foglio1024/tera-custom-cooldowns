@@ -76,6 +76,7 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
         {
+            if (!p.Target.IsMe()) return;
             SessionManager.SetPlayerMaxMp(p.MaxMP);
             SessionManager.SetPlayerMp(p.CurrentMP);
         }
