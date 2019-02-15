@@ -117,7 +117,7 @@ namespace TCC.Controls.Skills
             }
 
             OtherSkills.Margin = ((SynchronizedObservableCollection<Cooldown>)sender).Count == 0
-                ? new Thickness(-60, 0, 0, 0)
+                ? new Thickness(0, 0, 0, 0)
                 : new Thickness(0);
         }
 
