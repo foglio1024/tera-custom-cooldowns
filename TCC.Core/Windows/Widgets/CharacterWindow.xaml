@@ -75,6 +75,18 @@
                 <!--HP-->
                 <Border RenderTransform="{StaticResource Skew45Inv}" Padding="3 2" >
                     <Grid x:Name="HpGrid">
+                        <!--<Grid.Resources>
+                            <Style TargetType="Line">
+                                <Setter Property="X1" Value="0"/>
+                                <Setter Property="Y1" Value="0"/>
+                                <Setter Property="X2" Value="0"/>
+                                <Setter Property="Y2" Value="12"/>
+                                <Setter Property="Stroke" Value="#9000"/>
+                                <Setter Property="StrokeThickness" Value="2"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>-->
                         <Border VerticalAlignment="Top" BorderThickness="0" Background="White"
                                 Margin="0" Opacity=".7">
                             <!--<Border.Background>
@@ -101,7 +113,6 @@
                                 </Style>
                             </Border.Style>
                         </Border>
-
                         <Border VerticalAlignment="Top" BorderThickness="0"  Margin="0" Opacity="1">
                             <FrameworkElement x:Name="HpGovernor" HorizontalAlignment="Stretch" 
                                               Width="{Binding ElementName=HpGrid, Path=ActualWidth}">
