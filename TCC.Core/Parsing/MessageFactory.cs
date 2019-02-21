@@ -176,7 +176,7 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> AccurateHp = new Dictionary<Type, Delegate>
         {
-          //{typeof(S_EACH_SKILL_RESULT),                      new Action<S_EACH_SKILL_RESULT>(PacketHandler.HandleSkillResult)}
+          //{typeof(S_EACH_SKILL_RESULT),                      new Action<S_EACH_SKILL_RESULT>(PacketHandler.HandleSkillResult)},
             {typeof(S_SHOW_HP),                                new Action<S_SHOW_HP>(PacketHandler.HandleShowHp)}
         };
         private static readonly Dictionary<Type, Delegate> CooldownWindow = new Dictionary<Type, Delegate>

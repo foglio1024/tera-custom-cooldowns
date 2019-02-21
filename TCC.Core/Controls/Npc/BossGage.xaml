@@ -473,7 +473,7 @@
                         <Line />
                         <Line />
                         <Line />
-                        <Line Visibility="Hidden"/>
+                        <Line />
                     </UniformGrid>
                 </Grid>
             </Grid>

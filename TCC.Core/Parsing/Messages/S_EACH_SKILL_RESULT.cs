@@ -9,8 +9,10 @@ namespace TCC.Parsing.Messages
         public ulong Target { get; private set; }
         public ulong Damage { get; private set; }
         public ushort Type { get; private set; }
+        public int Skill { get; private set; }
         public S_EACH_SKILL_RESULT(TeraMessageReader reader) : base(reader)
         {
+            reader.BaseStream.Position = 0;
             reader.Skip(4);
             Source = reader.ReadUInt64();
             var owner = reader.ReadUInt64();
@@ -18,7 +20,7 @@ namespace TCC.Parsing.Messages
             Target = reader.ReadUInt64();
             // ReSharper disable UnusedVariable
             var template = reader.ReadInt32();
-            var skill = reader.ReadInt32();
+            Skill = new SkillId(reader).Id;
             var stage = reader.ReadInt32();
             var targeting = reader.ReadInt16();
             var area = reader.ReadInt16();

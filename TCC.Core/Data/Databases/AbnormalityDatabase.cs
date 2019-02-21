@@ -57,6 +57,12 @@ namespace TCC.Data.Databases
                 }
                 Abnormalities[id] = ab;
             }
+
+            var meme = new Abnormality(10241024, true, true, true, AbnormalityType.Buff);
+            meme.SetInfo("Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
+            meme.SetIcon("icon_items.bloodchipa_tex");
+
+            Abnormalities[meme.Id] = meme;
         }
     }
 

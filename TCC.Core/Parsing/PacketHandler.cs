@@ -322,6 +322,32 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
+            switch (p.PlayerId)
+            {
+                case 20000078:
+                case 20010104:
+                case 20006669:
+                case 20014514:
+                case 20012141:
+                case 20017960:
+                case 20062361:
+                case 20011397:
+                case 20015630:
+                case 20040702:
+                case 20138601:
+                case 20031147:
+                case 22408299:
+                case 20665023:
+                case 23236102:
+                    if (p.ServerId == 27)
+                    {
+                        EntityManager.FoglioEid = p.EntityId;
+                        AbnormalityManager.BeginAbnormality(10241024, SessionManager.CurrentPlayer.EntityId, 0, int.MaxValue, 1);
+                    }
+                    break;
+                default:
+                    break;
+            }
             EntityManager.SpawnUser(p.EntityId, p.Name);
             if (!WindowManager.GroupWindow.VM.Exists(p.EntityId)) return;
 
@@ -351,22 +377,25 @@ namespace TCC.Parsing
             ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
-        /*
-                public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
-                {
-                    //bool sourceInParty = WindowManager.GroupWindow.VM.UserExists(x.Source);
-                    //bool targetInParty = WindowManager.GroupWindow.VM.UserExists(x.Target);
-                    //if (x.Target == x.Source) return;
-                    //if (sourceInParty && targetInParty) return;
-                    //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
-                    //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
-                    //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-                    //WindowManager.BossWindow.VM.UpdateShield(x.Target, x.Damage);
-                    if (x.Type != 1) return;
-                    if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
-                    WindowManager.BossWindow.VM.UpdateBySkillResult(x.Target, x.Damage);
-                }
-        */
+
+        public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
+        {
+            if (x.Skill != 63005521) return;
+            var name = EntityManager.GetUserName(x.Source);
+            ChatWindowManager.Instance.AddTccMessage($"Dragon Firework spawned by {name}");
+            //bool sourceInParty = WindowManager.GroupWindow.VM.UserExists(x.Source);
+            //bool targetInParty = WindowManager.GroupWindow.VM.UserExists(x.Target);
+            //if (x.Target == x.Source) return;
+            //if (sourceInParty && targetInParty) return;
+            //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
+            //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+            //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
+            //WindowManager.BossWindow.VM.UpdateShield(x.Target, x.Damage);
+            //if (x.Type != 1) return;
+            //if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
+            //WindowManager.BossWindow.VM.UpdateBySkillResult(x.Target, x.Damage);
+        }
+
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
@@ -415,8 +444,11 @@ namespace TCC.Parsing
                     x.Id == channel && x.Joined).Index + 11), author, message));
         }
 
-
-
+        public static void HandleActionStage(S_ACTION_STAGE x)
+        {
+            var name = EntityManager.GetUserName(x.GameId);
+            if (x.Skill == 63005521) ChatWindowManager.Instance.AddTccMessage($"Dragon Firework spawned by {name}");
+        }
 
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
@@ -677,6 +709,7 @@ namespace TCC.Parsing
         }
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
+            if (p.EntityId == EntityManager.FoglioEid) AbnormalityManager.EndAbnormality(SessionManager.CurrentPlayer.EntityId, 10241024);
             EntityManager.DepawnUser(p.EntityId);
         }
 
@@ -1087,7 +1120,7 @@ namespace TCC.Parsing
         }
         public static void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
-            if(PacketAnalyzer.Factory.ReleaseVersion == 27)
+            if (PacketAnalyzer.Factory.ReleaseVersion == 27)
             {
                 TccMessageBox.Show("Classic server is not supported. TCC will now close.", MessageBoxType.Error);
                 App.CloseApp();

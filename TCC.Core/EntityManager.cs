@@ -9,6 +9,7 @@ namespace TCC
 {
     public static class EntityManager
     {
+        public static ulong FoglioEid = 0;
         private static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         private static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
