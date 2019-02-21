@@ -465,15 +465,25 @@
                             </Style>
                         </UniformGrid.Resources>
                         <Line Visibility="Hidden"/>
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
+                        <Line Y2="8" Stroke="#9fff"/>
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
                         <Line />
+                        <Line Y2="4" />
                         <Line />
-                        <Line />
+                        <Line Y2="4" />
                     </UniformGrid>
                 </Grid>
             </Grid>
