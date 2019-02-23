@@ -373,7 +373,8 @@ namespace TCC.ViewModels
                 if (!Directory.Exists(Path.Combine(App.ResourcesPath, "config/events")))
                     Directory.CreateDirectory(Path.Combine(App.ResourcesPath, "config/events"));
 
-                if(!Utils.IsFileLocked(path, FileAccess.ReadWrite)) root.Save(path);
+                //if(!Utils.IsFileLocked(path, FileAccess.ReadWrite))
+                root.Save(path);
             }
 
             try
@@ -516,28 +517,28 @@ namespace TCC.ViewModels
             CurrentCharacter.Buffs.Clear();
             SessionManager.CurrentPlayer.Buffs.ToList().ForEach(b =>
             {
-        //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-        /*if (existing == null)*/
+                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+                /*if (existing == null)*/
                 CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-        //else
-        //{
-        //    existing.Id = b.Abnormality.Id;
-        //    existing.Duration = b.DurationLeft;
-        //    existing.Stacks = b.Stacks;
-        //}
-    });
+                //else
+                //{
+                //    existing.Id = b.Abnormality.Id;
+                //    existing.Duration = b.DurationLeft;
+                //    existing.Stacks = b.Stacks;
+                //}
+            });
             SessionManager.CurrentPlayer.Debuffs.ToList().ForEach(b =>
             {
-        //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-        /*if (existing == null)*/
+                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
+                /*if (existing == null)*/
                 CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-        //else
-        //{
-        //    existing.Id = b.Abnormality.Id;
-        //    existing.Duration = b.DurationLeft;
-        //    existing.Stacks = b.Stacks;
-        //}
-    });
+                //else
+                //{
+                //    existing.Id = b.Abnormality.Id;
+                //    existing.Duration = b.DurationLeft;
+                //    existing.Stacks = b.Stacks;
+                //}
+            });
         }
 
         public void UpdateInventory(Dictionary<uint, ItemAmount> list, bool first)
