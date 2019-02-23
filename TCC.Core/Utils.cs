@@ -303,6 +303,25 @@ namespace TCC
             return StringUtils.ByteArrayToString(SHA256.Create().ComputeHash(fileBuffer));
 
         }
+
+        public static bool IsFileLocked(string filename, FileAccess file_access)
+        {
+            // Try to open the file with the indicated access.
+            try
+            {
+                var fs = new FileStream(filename, FileMode.Open, file_access);
+                fs.Close();
+                return false;
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
     public static class ListExtensions
