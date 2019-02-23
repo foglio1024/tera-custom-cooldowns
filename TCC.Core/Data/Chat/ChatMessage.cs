@@ -244,6 +244,7 @@ namespace TCC.Data.Chat
             }
             catch
             {
+                Log.F($"Failed to parse system message: {systemMessage} -- {m.Message}");
                 // ignored
             }
         }
@@ -330,10 +331,13 @@ namespace TCC.Data.Chat
         public override string ToString()
         {
             var sb = new StringBuilder();
-            foreach (var item in Pieces)
+            Dispatcher.Invoke(() =>
             {
-                sb.Append(item.Text);
-            }
+                foreach (var item in Pieces.ToSyncList())
+                {
+                    sb.Append(item.Text);
+                }
+            });
             return sb.ToString();
         }
 
