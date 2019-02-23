@@ -460,7 +460,7 @@ namespace TCC.ViewModels
             SkillConfigParser sp;
             //Dispatcher.Invoke(() =>
             //{
-            if (!File.Exists(Path.Combine(App.BasePath, "resources/config/skills", filename)))
+            if (!File.Exists(Path.Combine(App.ResourcesPath, "config/skills", filename)))
             {
                 SkillUtils.BuildDefaultSkillConfig(filename, c);
             }
@@ -475,7 +475,7 @@ namespace TCC.ViewModels
                     $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
                     MessageBoxButton.OKCancel);
 
-                if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                if (res == MessageBoxResult.Cancel) File.Delete(Path.Combine(App.ResourcesPath, "config/skills/", filename));
                 LoadSkills(c);
                 return;
             }

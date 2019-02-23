@@ -350,7 +350,7 @@ namespace TCC.ViewModels
         {
             var yesterday = today - 1;
             if (region.StartsWith("EU")) region = "EU";
-            var path = Path.Combine(App.BasePath, $"resources/config/events/events-{region}.xml");
+            var path = Path.Combine(App.ResourcesPath, $"config/events/events-{region}.xml");
             if (!File.Exists(path))
             {
                 var root = new XElement("Events");
@@ -370,9 +370,10 @@ namespace TCC.ViewModels
                 eg.Add(ev);
                 eg.Add(ev2);
                 root.Add(eg);
-                if (!Directory.Exists($"resources/config/events"))
-                    Directory.CreateDirectory($"resources/config/events");
-                root.Save(path);
+                if (!Directory.Exists(Path.Combine(App.ResourcesPath, "config/events")))
+                    Directory.CreateDirectory(Path.Combine(App.ResourcesPath, "config/events"));
+
+                if(!Utils.IsFileLocked(path, FileAccess.ReadWrite)) root.Save(path);
             }
 
             try
