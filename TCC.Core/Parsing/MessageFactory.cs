@@ -15,6 +15,7 @@ using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 using TCC.Settings;
+using System.IO;
 
 namespace TCC.Parsing
 {
@@ -270,7 +271,7 @@ namespace TCC.Parsing
         public OpCodeNamer SystemMessageNamer { get; set; }
         public MessageFactory()
         {
-            OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string>{{19900, nameof(C_CHECK_VERSION)}});
+            OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, nameof(C_CHECK_VERSION) } });
             Init.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             SessionManager.Server = new Server("", "", "", 0);
             Version = 0;
@@ -344,6 +345,13 @@ namespace TCC.Parsing
             return true;
         }
 
-        public void ReloadSysMsg() { SystemMessageNamer?.Reload(Version, ReleaseVersion); }
+        public void ReloadSysMsg()
+        {
+            if (SystemMessageNamer == null)
+            {
+                SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{ReleaseVersion}.map"));
+            }
+            SystemMessageNamer?.Reload(Version, ReleaseVersion);
+        }
     }
 }

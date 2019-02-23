@@ -322,28 +322,28 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
-            switch (p.PlayerId)
+            switch (p.Name)
             {
-                case 20000078:
-                case 20010104:
-                case 20006669:
-                case 20014514:
-                case 20012141:
-                case 20017960:
-                case 20062361:
-                case 20011397:
-                case 20015630:
-                case 20040702:
-                case 20138601:
-                case 20031147:
-                case 22408299:
-                case 20665023:
-                case 23236102:
-                    if (p.ServerId == 27)
-                    {
-                        EntityManager.FoglioEid = p.EntityId;
-                        AbnormalityManager.BeginAbnormality(10241024, SessionManager.CurrentPlayer.EntityId, 0, int.MaxValue, 1);
-                    }
+                case "Foglio":
+                case "Foglietto":
+                case "Foglia":
+                case "Myvia":
+                case "Foglietta.Blu":
+                case "Foglia.Trancer":
+                case "Folyria":
+                case "Folyvia":
+                case "Fogliolina":
+                case "Folyemi":
+                case "Foiya":
+                case "Fogliarya":
+                    if (p.ServerId != 27) break;
+                    if (SessionManager.CivilUnrestZone) break;
+                    EntityManager.FoglioEid = p.EntityId;
+                    var ab = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[10241024];
+                    AbnormalityManager.BeginAbnormality(ab.Id, SessionManager.CurrentPlayer.EntityId, 0, int.MaxValue, 1);
+                    var sysMsg = SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
+                    var msg = $"@0\vAbnormalName\v{ab.Name}";
+                    SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
                     break;
                 default:
                     break;
@@ -525,6 +525,7 @@ namespace TCC.Parsing
 
         internal static void HandleDungeonClears(S_DUNGEON_CLEAR_COUNT_LIST x)
         {
+            if (x.Failed) return;
             if (x.PlayerId != SessionManager.CurrentPlayer.PlayerId) return;
             foreach (var dg in x.DungeonClears)
             {
@@ -1114,7 +1115,7 @@ namespace TCC.Parsing
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map"));
             PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer)
             {
-                SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
+                //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
             };
             TeraSniffer.Instance.Connected = true;
         }
@@ -1126,8 +1127,7 @@ namespace TCC.Parsing
                 App.CloseApp();
                 return;
             }
-            if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version,
-                Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
+            if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
             {
 
                 PacketAnalyzer.Factory.ReloadSysMsg();
