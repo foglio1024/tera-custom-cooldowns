@@ -11,6 +11,14 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
+    public class MessageLine : TSPropertyChanged
+    {
+        public SynchronizedObservableCollection<MessagePiece> LinePieces { get; protected set; }
+        public MessageLine()
+        {
+            LinePieces = new SynchronizedObservableCollection<MessagePiece>();
+        }
+    }
     public class ChatMessage : TSPropertyChanged, IDisposable
     {
         #region Properties
@@ -50,6 +58,7 @@ namespace TCC.Data.Chat
         }
         public bool ShowTimestamp => Settings.SettingsHolder.ShowTimestamp;
         public bool ShowChannel => Settings.SettingsHolder.ShowChannel;
+        public SynchronizedObservableCollection<MessageLine> Lines { get; protected set; }
         public SynchronizedObservableCollection<MessagePiece> Pieces { get; protected set; }
 
         public bool IsVisible
@@ -84,6 +93,7 @@ namespace TCC.Data.Chat
         {
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
+            Lines = new SynchronizedObservableCollection<MessageLine>(Dispatcher);
             Timestamp = SettingsHolder.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }
@@ -116,6 +126,8 @@ namespace TCC.Data.Chat
             {
                 // ignored
             }
+
+
         }
         public ChatMessage(string systemMessage, SystemMessage m, ChatChannel ch) : this()
         {
@@ -126,7 +138,7 @@ namespace TCC.Data.Chat
             {
                 var prm = ChatUtils.SplitDirectives(systemMessage);
                 var txt = StringUtils.ReplaceHtmlEscapes(m.Message);
-                txt = txt.Replace("<BR>", " ");
+                txt = txt.Replace("<BR>", "\r\n");
                 var html = new HtmlDocument(); html.LoadHtml(txt);
                 var htmlPieces = html.DocumentNode.ChildNodes;
                 if (prm == null)
@@ -241,6 +253,7 @@ namespace TCC.Data.Chat
                         }
                     }
                 }
+
             }
             catch
             {
@@ -314,6 +327,18 @@ namespace TCC.Data.Chat
                     index = Pieces.IndexOf(mp) + 1;
                 }
                 RemovePiece(simplePieces[i]);
+            }
+
+            // split lines
+            Lines.Add(new MessageLine());
+            foreach (var item in Pieces)
+            {
+                if (item.Text.Contains("\r\n") || item.Text.Contains("\n\t") || item.Text.Contains("\n"))
+                {
+                    item.Text = item.Text.Replace("\r\n", "").Replace("\n\t", "").Replace("\n", "");
+                    Lines.Add(new MessageLine());
+                }
+                Lines.Last().LinePieces.Add(item);
             }
         }
         private void ShowChannelNPC()
@@ -515,7 +540,6 @@ namespace TCC.Data.Chat
 
             return msg;
         }
-
 
         public void Dispose()
         {
