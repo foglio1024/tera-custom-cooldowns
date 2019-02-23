@@ -18,6 +18,7 @@
                                     SimpleTemplate="{StaticResource SimpleTemplate}"
                                     MoneyTemplate="{StaticResource MoneyTemplate}"
                                     QuestTemplate="{StaticResource SimpleTemplate}"
+                                    AchievementTemplate="{StaticResource SimpleTemplate}"
                                     PointOfInterestTemplate="{StaticResource SimpleTemplate}"
                                     ItemTemplate="{StaticResource SimpleTemplate}"
                                     EmojiTemplate="{StaticResource EmojiTemplate}"

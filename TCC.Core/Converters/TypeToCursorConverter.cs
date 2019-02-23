@@ -15,21 +15,14 @@ namespace TCC.Converters
             switch (val)
             {
                 case MessagePieceType.Simple:
-                    c = Cursors.Arrow;
-                    break;
-                case MessagePieceType.Item:
-                    c = Cursors.Hand;
-                    break;
-                case MessagePieceType.Quest:
-                    c = Cursors.Hand;
-                    break;
-                case MessagePieceType.PointOfInterest:
-                    c = Cursors.Hand;
-                    break;
                 case MessagePieceType.Money:
                     c = Cursors.Arrow;
                     break;
+                case MessagePieceType.Item:
+                case MessagePieceType.Quest:
+                case MessagePieceType.PointOfInterest:
                 case MessagePieceType.Url:
+                case MessagePieceType.Achievement:
                     c = Cursors.Hand;
                     break;
             }

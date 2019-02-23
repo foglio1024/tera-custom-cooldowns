@@ -9,5 +9,6 @@
         Money,
         Url,
         Emoji,
+        Achievement
     }
 }

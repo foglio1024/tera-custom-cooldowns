@@ -181,10 +181,30 @@ namespace TCC.Data.Chat
                 case 3:
                     mp = ParseHtmlLocation(chatLinkAction);
                     break;
+                case 7:
+                    mp = ParseHtmlAchievement(chatLinkAction);
+                    break;
                 default:
                     throw new Exception();
             }
             return mp;
+        }
+        private static MessagePiece ParseHtmlAchievement(HtmlNode node)
+        {
+            var linkData = node.GetAttributeValue("param", "");
+
+            var text = node.InnerText;
+            text = StringUtils.ReplaceHtmlEscapes(text);
+
+            var result = new MessagePiece(text)
+            {
+                Type = MessagePieceType.Achievement
+            };
+            result.RawLink = linkData;
+
+            return result;
+
+
         }
         private static MessagePiece ParseHtmlItem(HtmlNode node)
         {
@@ -198,7 +218,6 @@ namespace TCC.Data.Chat
             {
                 // ignored
             }
-
 
             var text = node.InnerText;
 

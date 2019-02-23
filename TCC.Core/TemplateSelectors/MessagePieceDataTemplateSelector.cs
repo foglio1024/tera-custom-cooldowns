@@ -9,6 +9,7 @@ namespace TCC.TemplateSelectors
         public DataTemplate SimpleTemplate { get; set; }
         public DataTemplate ItemTemplate { get; set; }
         public DataTemplate QuestTemplate { get; set; }
+        public DataTemplate AchievementTemplate { get; set; }
         public DataTemplate PointOfInterestTemplate { get; set; }
         public DataTemplate MoneyTemplate { get; set; }
         public DataTemplate EmojiTemplate { get; set; }
@@ -19,11 +20,10 @@ namespace TCC.TemplateSelectors
             if (m == null) return null;
             switch (m.Type)
             {
-                case MessagePieceType.Simple:
-                    return SimpleTemplate;
                 case MessagePieceType.Item:
                     return ItemTemplate;
                 case MessagePieceType.Quest:
+                case MessagePieceType.Achievement:
                     return QuestTemplate;
                 case MessagePieceType.PointOfInterest:
                     return PointOfInterestTemplate;
