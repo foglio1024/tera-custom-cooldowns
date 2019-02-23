@@ -20,10 +20,17 @@ namespace TCC.Parsing.Messages
             Listing = reader.ReadUInt32();
             Item = reader.ReadInt32();
             Amount = reader.ReadInt64();
-            SellerPrice= reader.ReadInt64();
+            SellerPrice = reader.ReadInt64();
             OfferedPrice = reader.ReadInt64();
-            reader.RepositionAt(nameOffset);
-            Name = reader.ReadTeraString();
+            try
+            {
+                reader.RepositionAt(nameOffset);
+                Name = reader.ReadTeraString();
+            }
+            catch
+            {
+                Name = "";
+            }
         }
     }
 }

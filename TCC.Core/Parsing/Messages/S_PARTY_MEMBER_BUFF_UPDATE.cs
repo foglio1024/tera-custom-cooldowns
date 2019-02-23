@@ -11,16 +11,17 @@ namespace TCC.Parsing.Messages
         public int Stacks;
     }
 
-/*
-    public struct MemberCondition
-    {
-        public uint Id;
-        public uint Duration;
-        public byte Status;
-    }
-*/
+    /*
+        public struct MemberCondition
+        {
+            public uint Id;
+            public uint Duration;
+            public byte Status;
+        }
+    */
     public class S_PARTY_MEMBER_BUFF_UPDATE : ParsedMessage
     {
+        public bool Failed { get; }
         public uint ServerId { get; private set; }
         public uint PlayerId { get; private set; }
         public List<MemberAbnormal> Abnormals { get; private set; }
@@ -30,40 +31,48 @@ namespace TCC.Parsing.Messages
         {
             Abnormals = new List<MemberAbnormal>();
 
-            var abnormalsCount = reader.ReadUInt16();
-            reader.Skip(2); // var abnormalsOffset = reader.ReadUInt16();
-            reader.Skip(2); // var conditionsCount = reader.ReadUInt16();
-            reader.Skip(2); // var conditionsOffset = reader.ReadUInt16();
-
-            ServerId = reader.ReadUInt32();
-            PlayerId = reader.ReadUInt32();
-
-            for (var i = 0; i < abnormalsCount; i++)
+            try
             {
-                reader.Skip(4);
-                var ab = new MemberAbnormal
+                var abnormalsCount = reader.ReadUInt16();
+                reader.Skip(2); // var abnormalsOffset = reader.ReadUInt16();
+                reader.Skip(2); // var conditionsCount = reader.ReadUInt16();
+                reader.Skip(2); // var conditionsOffset = reader.ReadUInt16();
+
+                ServerId = reader.ReadUInt32();
+                PlayerId = reader.ReadUInt32();
+
+                for (var i = 0; i < abnormalsCount; i++)
                 {
-                    Id = reader.ReadUInt32(),
-                    Duration = reader.ReadUInt32()
-                };
-                reader.Skip(4);
-                ab.Stacks = reader.ReadInt32();
+                    reader.Skip(4);
+                    var ab = new MemberAbnormal
+                    {
+                        Id = reader.ReadUInt32(),
+                        Duration = reader.ReadUInt32()
+                    };
+                    reader.Skip(4);
+                    ab.Stacks = reader.ReadInt32();
 
-                Abnormals.Add(ab);
+                    Abnormals.Add(ab);
+                }
+                /*
+                            for (var i = 0; i < conditionsCount; i++)
+                            {
+                                reader.Skip(4);
+                                var cond = new MemberCondition();
+                                cond.Id = reader.ReadUInt32();
+                                cond.Duration = reader.ReadUInt32();
+                                cond.Status = reader.ReadByte();
+
+                                Conditions.Add(cond);
+                            }
+                */
+
+
             }
-/*
-            for (var i = 0; i < conditionsCount; i++)
+            catch
             {
-                reader.Skip(4);
-                var cond = new MemberCondition();
-                cond.Id = reader.ReadUInt32();
-                cond.Duration = reader.ReadUInt32();
-                cond.Status = reader.ReadByte();
-
-                Conditions.Add(cond);
+                Failed = true; // not used for now
             }
-*/
-
         }
     }
 }
