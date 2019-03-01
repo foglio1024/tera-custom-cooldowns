@@ -28,7 +28,6 @@ namespace TCC.ViewModels
 
         private bool _discardFirstVanguardPacket = true;
         private ICollectionViewLiveShaping _sortedColumns;
-        private ObservableCollection<CharacterViewModel> _characters;
         private ObservableCollection<DungeonColumnViewModel> _columns;
         private Character _selectedCharacter;
 
