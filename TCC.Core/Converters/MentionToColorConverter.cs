@@ -12,7 +12,21 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool?) value ?? false ? R.Brushes.GoldBrush : Brushes.Black; //TODO: use trigger
+            var color = false;
+            var transparent = false;
+            var col = (bool?)value ?? false
+                ? R.Colors.GoldColor
+                : Colors.Black; //TODO: use trigger
+            if (parameter is string par)
+            {
+                color = par.IndexOf("color") != -1;
+                transparent = par.IndexOf("transparent") != -1;
+            }
+            if (transparent) col.A = 0;
+
+            if (color) return col;
+            else return new SolidColorBrush(col);
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -42,8 +42,7 @@ namespace TCC.Controls.Chat
                     }
                     break;
                 case MessagePieceType.PointOfInterest:
-                    Proxy.Proxy.ChatLinkData(_context.RawLink);
-                    break;
+                case MessagePieceType.Achievement:
                 case MessagePieceType.Quest:
                     Proxy.Proxy.ChatLinkData(_context.RawLink);
                     break;
@@ -58,6 +57,7 @@ namespace TCC.Controls.Chat
                 case MessagePieceType.Url:
                 case MessagePieceType.PointOfInterest:
                 case MessagePieceType.Quest:
+                case MessagePieceType.Achievement:
                     //BgBorder.BorderBrush = _context.Color;
                     _context.IsHovered = true;
                     break;

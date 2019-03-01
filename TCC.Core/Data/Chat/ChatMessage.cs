@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Threading;
 using HtmlAgilityPack;
 using TCC.Parsing;
 using TCC.Settings;
@@ -10,6 +11,14 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
+    public class MessageLine : TSPropertyChanged
+    {
+        public SynchronizedObservableCollection<MessagePiece> LinePieces { get; protected set; }
+        public MessageLine()
+        {
+            LinePieces = new SynchronizedObservableCollection<MessagePiece>();
+        }
+    }
     public class ChatMessage : TSPropertyChanged, IDisposable
     {
         #region Properties
@@ -26,7 +35,6 @@ namespace TCC.Data.Chat
             {
                 if (_channel == value) return;
                 _channel = value;
-                N();
             }
         }
         public string Timestamp { get; protected set; }
@@ -40,7 +48,6 @@ namespace TCC.Data.Chat
             {
                 if (_author == value) return;
                 _author = value;
-                N();
             }
         }
         public bool ContainsPlayerName { get; set; }
@@ -51,6 +58,7 @@ namespace TCC.Data.Chat
         }
         public bool ShowTimestamp => Settings.SettingsHolder.ShowTimestamp;
         public bool ShowChannel => Settings.SettingsHolder.ShowChannel;
+        public SynchronizedObservableCollection<MessageLine> Lines { get; protected set; }
         public SynchronizedObservableCollection<MessagePiece> Pieces { get; protected set; }
 
         public bool IsVisible
@@ -85,6 +93,7 @@ namespace TCC.Data.Chat
         {
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
+            Lines = new SynchronizedObservableCollection<MessageLine>(Dispatcher);
             Timestamp = SettingsHolder.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }
@@ -98,7 +107,7 @@ namespace TCC.Data.Chat
 
             try
             {
-                if (Channel == ChatChannel.Raid && GroupWindowViewModel.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
+                if (Channel == ChatChannel.Raid && WindowManager.GroupWindow.VM.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
                 switch (ch)
                 {
                     case ChatChannel.Greet:
@@ -117,6 +126,8 @@ namespace TCC.Data.Chat
             {
                 // ignored
             }
+
+
         }
         public ChatMessage(string systemMessage, SystemMessage m, ChatChannel ch) : this()
         {
@@ -127,7 +138,7 @@ namespace TCC.Data.Chat
             {
                 var prm = ChatUtils.SplitDirectives(systemMessage);
                 var txt = StringUtils.ReplaceHtmlEscapes(m.Message);
-                txt = txt.Replace("<BR>", " ");
+                txt = txt.Replace("<BR>", "\r\n");
                 var html = new HtmlDocument(); html.LoadHtml(txt);
                 var htmlPieces = html.DocumentNode.ChildNodes;
                 if (prm == null)
@@ -185,7 +196,7 @@ namespace TCC.Data.Chat
                                 selectionStep++;
                                 continue;
                             }
-                            if(inPiece.StartsWith("@item"))
+                            if (inPiece.StartsWith("@item"))
                             {
                                 mp = MessagePieceBuilder.BuildSysMsgItem(inPiece);
                             }
@@ -242,20 +253,19 @@ namespace TCC.Data.Chat
                         }
                     }
                 }
+
             }
             catch
             {
+                Log.F($"Failed to parse system message: {systemMessage} -- {m.Message}");
                 // ignored
             }
         }
 
         private void AddPiece(MessagePiece mp)
         {
-            Dispatcher.Invoke(() =>
-            {
-                mp.Container = this;
-                Pieces.Add(mp);
-            });
+            mp.Container = this;
+            Pieces.Add(mp);
         }
         private void InsertPiece(MessagePiece mp, int index)
         {
@@ -275,7 +285,7 @@ namespace TCC.Data.Chat
             var simplePieces = new List<MessagePiece>();
             foreach (var item in Pieces)
             {
-                if(item.Type == MessagePieceType.Simple || item.Type == MessagePieceType.Item) simplePieces.Add(item);
+                if (item.Type == MessagePieceType.Simple || item.Type == MessagePieceType.Item) simplePieces.Add(item);
             }
 
             for (var i = 0; i < simplePieces.Count; i++)
@@ -318,6 +328,18 @@ namespace TCC.Data.Chat
                 }
                 RemovePiece(simplePieces[i]);
             }
+
+            // split lines
+            Lines.Add(new MessageLine());
+            foreach (var item in Pieces)
+            {
+                if (item.Text.Contains("\r\n") || item.Text.Contains("\n\t") || item.Text.Contains("\n"))
+                {
+                    item.Text = item.Text.Replace("\r\n", "").Replace("\n\t", "").Replace("\n", "");
+                    Lines.Add(new MessageLine());
+                }
+                Lines.Last().LinePieces.Add(item);
+            }
         }
         private void ShowChannelNPC()
         {
@@ -334,10 +356,13 @@ namespace TCC.Data.Chat
         public override string ToString()
         {
             var sb = new StringBuilder();
-            foreach (var item in Pieces)
+            Dispatcher.Invoke(() =>
             {
-                sb.Append(item.Text);
-            }
+                foreach (var item in Pieces.ToSyncList())
+                {
+                    sb.Append(item.Text);
+                }
+            });
             return sb.ToString();
         }
 
@@ -431,7 +456,7 @@ namespace TCC.Data.Chat
             //check if player is mentioned
             try
             {
-                foreach (var item in WindowManager.Dashboard.VM.Characters)
+                foreach (var item in WindowManager.Dashboard.VM.Characters.Where(c => !c.Hidden))
                 {
                     if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
                     ContainsPlayerName = true;
@@ -516,11 +541,11 @@ namespace TCC.Data.Chat
             return msg;
         }
 
-
         public void Dispose()
         {
             foreach (var messagePiece in Pieces)
             {
+                if (messagePiece == null) continue;
                 messagePiece.Dispose();
             }
             Pieces.Clear();

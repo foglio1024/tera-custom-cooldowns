@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,7 +55,7 @@ namespace TCC.Controls.Dashboard
         }
         private void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
         {
-            new DungeonEditWindow() { Topmost = true, Owner = WindowManager.Dashboard}.ShowDialog();
+            new DungeonEditWindow() { Topmost = true, Owner = WindowManager.Dashboard }.ShowDialog();
         }
     }
 
@@ -64,7 +65,8 @@ namespace TCC.Controls.Dashboard
 
         public Dungeon Dungeon { get; set; }
 
-        public List<DungeonCooldownViewModel> DungeonsList { get; private set; }
+        public SynchronizedObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
+        public ICollectionViewLiveShaping DungeonsListView { get; }
         public bool Hilight
         {
             get => _hilight;
@@ -78,7 +80,14 @@ namespace TCC.Controls.Dashboard
 
         public DungeonColumnViewModel()
         {
-            DungeonsList = new List<DungeonCooldownViewModel>();
+            DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
+            DungeonsListView = Utils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
+                new[] { "Owner.Hidden" },
+                new SortDescription[]
+                {
+                    new SortDescription("Owner.Position", ListSortDirection.Ascending)
+                }
+            );
         }
     }
 

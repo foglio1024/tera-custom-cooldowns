@@ -20,10 +20,10 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Benefits.Clear();
-            var f = File.OpenText(FullPath);
-            while (true)
+            var lines = File.ReadAllLines(FullPath);
+            //var f = File.OpenText(FullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
                 if (line == null) return;
                 if (line == "") continue;
                 var s = line.Split('\t');
@@ -40,13 +40,36 @@ namespace TCC.Data.Databases
         protected abstract string FolderName { get; }
         protected abstract string Extension { get; }
 
-        protected string FullPath => Path.Combine(App.DataPath, $"{FolderName}/{FolderName}-{_language}.{Extension}");
-        public bool Exists => File.Exists(FullPath);
+        public string RelativePath => $"{FolderName}/{FolderName}-{_language}.{Extension}";
+        protected string FullPath => Path.Combine(App.DataPath, RelativePath);
+        public virtual bool Exists => File.Exists(FullPath);
+        public bool IsUpToDate { get; private set; } = false;
+
 
         public abstract void Load();
+        public virtual void CheckVersion(string customAbsPath = null, string customRelPath = null)
+        {
+            if (!Exists) return;
+            var localHash = Utils.GenerateFileHash(customAbsPath ?? FullPath);
+            if (UpdateManager.DatabaseHashes.Count == 0) return;
+            if (!UpdateManager.DatabaseHashes.ContainsKey(customRelPath ?? RelativePath)) return;
+            if (UpdateManager.DatabaseHashes[customRelPath ?? RelativePath] != localHash)
+            {
+                Log.CW($"Hash mismatch for {customRelPath ?? RelativePath}");
+                return;
+            }
+
+            IsUpToDate = true;
+
+        }
         public DatabaseBase(string lang)
         {
             _language = lang;
+        }
+
+        public virtual void Update(string custom = null)
+        {
+            UpdateManager.UpdateDatabase(custom ?? RelativePath);
         }
     }
 }

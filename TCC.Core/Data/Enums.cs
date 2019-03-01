@@ -93,7 +93,8 @@ namespace TCC.Data
     {
         CreatureChangeHp,
         BossGage,
-        SkillResult
+        SkillResult,
+        Me
     }
 
     public enum NotificationType

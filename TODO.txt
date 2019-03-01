@@ -1,3 +1,0 @@
-TODO:
-- make party members more compact by adding border
-- per class UI window positions

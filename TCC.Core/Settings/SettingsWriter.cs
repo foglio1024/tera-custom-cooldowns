@@ -27,7 +27,7 @@ namespace TCC.Settings
                     SettingsHolder.FlightGaugeWindowSettings.ToXElement("FlightGaugeWindow"),
                     SettingsHolder.FloatingButtonSettings.ToXElement("FloatingButton"),
                     SettingsHolder.CivilUnrestWindowSettings.ToXElement("CivilUnrestWindow")
-                    //add window here
+                //add window here
                 ),
                 BuildOtherSettingsXElement(),
                 BuildGroupAbnormalsXElement(),  //Add , by HQ
@@ -42,7 +42,7 @@ namespace TCC.Settings
             {
                 if (File.Exists(Path.Combine(App.BasePath, "tcc-config.xml")))
                     File.Copy(Path.Combine(App.BasePath, "tcc-config.xml"), Path.Combine(App.BasePath, "tcc-config.xml.bak"), true);
-                doc.Save(Path.Combine(App.BasePath,"tcc-config.xml"));
+                doc.Save(Path.Combine(App.BasePath, "tcc-config.xml"));
             }
             catch (Exception)
             {
@@ -85,7 +85,7 @@ namespace TCC.Settings
                 // Buff
                 new XAttribute(nameof(SettingsHolder.BuffsDirection), SettingsHolder.BuffsDirection),
                 new XAttribute(nameof(SettingsHolder.ShowAllMyAbnormalities), SettingsHolder.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
-                // Character
+                                                                                                                      // Character
                 new XAttribute(nameof(SettingsHolder.CharacterWindowCompactMode), SettingsHolder.CharacterWindowCompactMode),
                 // Cooldown
                 new XAttribute(nameof(SettingsHolder.CooldownBarMode), SettingsHolder.CooldownBarMode),
@@ -111,6 +111,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ChatEnabled), SettingsHolder.ChatEnabled),
                 new XAttribute(nameof(SettingsHolder.ChatClickThruMode), SettingsHolder.ChatClickThruMode),
                 new XAttribute(nameof(SettingsHolder.ChatScrollAmount), SettingsHolder.ChatScrollAmount),
+                new XAttribute(nameof(SettingsHolder.UserExcludedSysMsg), SettingsHolder.UserExcludedSysMsg.ToCSV()),
                 // Group
                 new XAttribute(nameof(SettingsHolder.IgnoreMeInGroupWindow), SettingsHolder.IgnoreMeInGroupWindow),
                 new XAttribute(nameof(SettingsHolder.IgnoreGroupBuffs), SettingsHolder.IgnoreGroupBuffs),
@@ -120,6 +121,11 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.DisablePartyAbnormals), SettingsHolder.DisablePartyAbnormals),
                 new XAttribute(nameof(SettingsHolder.ShowOnlyAggroStacks), SettingsHolder.ShowOnlyAggroStacks),
                 new XAttribute(nameof(SettingsHolder.GroupSizeThreshold), SettingsHolder.GroupSizeThreshold),
+                new XAttribute(nameof(SettingsHolder.HideHpThreshold), SettingsHolder.HideHpThreshold),
+                new XAttribute(nameof(SettingsHolder.HideMpThreshold), SettingsHolder.HideMpThreshold),
+                new XAttribute(nameof(SettingsHolder.DisableAbnormalitiesThreshold), SettingsHolder.DisableAbnormalitiesThreshold),
+                new XAttribute(nameof(SettingsHolder.HideBuffsThreshold), SettingsHolder.HideBuffsThreshold),
+                new XAttribute(nameof(SettingsHolder.HideDebuffsThreshold), SettingsHolder.HideDebuffsThreshold),
                 new XAttribute(nameof(SettingsHolder.ShowMembersLaurels), SettingsHolder.ShowMembersLaurels),
                 new XAttribute(nameof(SettingsHolder.ShowGroupWindowDetails), SettingsHolder.ShowGroupWindowDetails),
                 new XAttribute(nameof(SettingsHolder.ShowAwakenIcon), SettingsHolder.ShowAwakenIcon),
@@ -149,9 +155,13 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.EthicalMode), SettingsHolder.EthicalMode),
                 new XAttribute(nameof(SettingsHolder.CheckOpcodesHash), SettingsHolder.CheckOpcodesHash),
                 new XAttribute(nameof(SettingsHolder.ShowNotificationBubble), SettingsHolder.ShowNotificationBubble),
+                new XAttribute(nameof(SettingsHolder.FpsAtGuardian), SettingsHolder.FpsAtGuardian),
                 new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification)
             );
         }
+
+
+
         private static XElement BuildGroupAbnormalsXElement()
         {
             var result = new XElement(nameof(SettingsHolder.GroupAbnormals));
@@ -194,10 +204,14 @@ namespace TCC.Settings
         {
             var result = new XElement("ChatWindows");
             if (ChatWindowManager.Instance.ChatWindows.Count == 0) return result;
+            
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
                 if (cw.VM.Tabs.Count == 0) return;
-                cw.UpdateSettings();
+                //cw.Dispatcher.Invoke(() =>
+                //{
+                //    cw.UpdateSettings();
+                //});
                 result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("ChatWindow")));
             });
             return result;

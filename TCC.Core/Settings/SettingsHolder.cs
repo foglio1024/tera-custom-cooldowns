@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;
 
@@ -26,7 +27,7 @@ namespace TCC.Settings
         public static WindowSettings FloatingButtonSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true);
         public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings));
 
-        public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; set; } = new SynchronizedObservableCollection<ChatWindowSettings>();
+        public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; } = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
 
         // Group window
         public static bool IgnoreMeInGroupWindow { get; set; }
@@ -36,7 +37,14 @@ namespace TCC.Settings
         public static bool DisablePartyHP { get; set; }
         public static bool DisablePartyAbnormals { get; set; }
         public static bool ShowOnlyAggroStacks { get; set; } = true;
+
         public static uint GroupSizeThreshold { get; set; } = 7;
+        public static uint HideBuffsThreshold { get; set; } = 7;
+        public static uint HideDebuffsThreshold { get; set; } = 7;
+        public static uint DisableAbnormalitiesThreshold { get; set; } = 7;
+        public static uint HideHpThreshold { get; set; } = 7;
+        public static uint HideMpThreshold { get; set; } = 7;
+
         public static bool ShowMembersLaurels { get; set; }
         public static bool ShowAllGroupAbnormalities { get; set; }
         public static bool ShowGroupWindowDetails { get; set; } = true;
@@ -179,6 +187,8 @@ namespace TCC.Settings
         public static bool CheckOpcodesHash { get; set; } = true;
         public static bool DiscordWebhookEnabled { get; set; } = false;
         public static bool ShowNotificationBubble { get; set; } = true;
+        public static List<string> UserExcludedSysMsg { get; set; } = new List<string>();
         public static bool ExperimentalNotification { get; set; } = true;
+        public static bool FpsAtGuardian { get; set; } = true;
     }
 }

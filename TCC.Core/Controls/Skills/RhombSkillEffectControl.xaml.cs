@@ -29,6 +29,7 @@ namespace TCC.Controls.Skills
             _context.Buff.SecondsUpdated += OnSecondsUpdated;
             _context.Buff.Ended += OnBuffEnded;
             _anim = new DoubleAnimation(328, 32, TimeSpan.FromMilliseconds(_context.Buff.Duration));
+            DoubleAnimation.SetDesiredFrameRate(_anim, 20);
         }
 
         private void OnBuffEnded(Data.CooldownMode obj)

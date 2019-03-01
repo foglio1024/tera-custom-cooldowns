@@ -14,6 +14,8 @@ using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
 //using Tera.Game.Messages;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
+using TCC.Settings;
+using System.IO;
 
 namespace TCC.Parsing
 {
@@ -107,7 +109,6 @@ namespace TCC.Parsing
             { nameof(S_REQUEST_CITY_WAR_MAP_INFO),             Contructor<Func<TeraMessageReader, S_REQUEST_CITY_WAR_MAP_INFO>>() },
             { nameof(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL),      Contructor<Func<TeraMessageReader, S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>>() },
             { nameof(S_DESTROY_GUILD_TOWER),                   Contructor<Func<TeraMessageReader, S_DESTROY_GUILD_TOWER>>() },
-            { nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
             { nameof(S_FIELD_EVENT_ON_ENTER),                  Contructor<Func<TeraMessageReader, S_FIELD_EVENT_ON_ENTER>>() },
             { nameof(S_FIELD_EVENT_ON_LEAVE),                  Contructor<Func<TeraMessageReader, S_FIELD_EVENT_ON_LEAVE>>() },
             { nameof(S_UPDATE_NPCGUILD),                       Contructor<Func<TeraMessageReader, S_UPDATE_NPCGUILD>>() },
@@ -115,6 +116,7 @@ namespace TCC.Parsing
             { nameof(S_NOTIFY_GUILD_QUEST_URGENT),             Contructor<Func<TeraMessageReader, S_NOTIFY_GUILD_QUEST_URGENT>>() },
             { nameof(S_CHANGE_GUILD_CHIEF),                    Contructor<Func<TeraMessageReader, S_CHANGE_GUILD_CHIEF>>() },
             { nameof(S_GUILD_MEMBER_LIST),                     Contructor<Func<TeraMessageReader, S_GUILD_MEMBER_LIST>>() },
+          //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
         };
@@ -175,7 +177,7 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> AccurateHp = new Dictionary<Type, Delegate>
         {
-          //{typeof(S_EACH_SKILL_RESULT),                      new Action<S_EACH_SKILL_RESULT>(PacketHandler.HandleSkillResult)}
+          //{typeof(S_EACH_SKILL_RESULT),                      new Action<S_EACH_SKILL_RESULT>(PacketHandler.HandleSkillResult)},
             {typeof(S_SHOW_HP),                                new Action<S_SHOW_HP>(PacketHandler.HandleShowHp)}
         };
         private static readonly Dictionary<Type, Delegate> CooldownWindow = new Dictionary<Type, Delegate>
@@ -250,7 +252,7 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> BossWindow = new Dictionary<Type, Delegate>
         {
-            {typeof(S_BOSS_GAGE_INFO),                         new Action<S_BOSS_GAGE_INFO>(PacketHandler.HandleGageReceived) },
+            {typeof(S_BOSS_GAGE_INFO),                         new Action<S_BOSS_GAGE_INFO>(PacketHandler.HandleBossGageInfo) },
             {typeof(S_NPC_STATUS),                             new Action<S_NPC_STATUS>(PacketHandler.HandleNpcStatusChanged) },
             {typeof(S_GUILD_TOWER_INFO),                       new Action<S_GUILD_TOWER_INFO>(PacketHandler.HandleGuildTowerInfo) },
         };
@@ -269,7 +271,7 @@ namespace TCC.Parsing
         public OpCodeNamer SystemMessageNamer { get; set; }
         public MessageFactory()
         {
-            OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string>{{19900, nameof(C_CHECK_VERSION)}});
+            OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, nameof(C_CHECK_VERSION) } });
             Init.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             SessionManager.Server = new Server("", "", "", 0);
             Version = 0;
@@ -291,23 +293,23 @@ namespace TCC.Parsing
 
             InfoWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
 
-            if (Settings.SettingsHolder.ChatEnabled)
+            if (SettingsHolder.ChatEnabled)
             {
                 ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (Settings.SettingsHolder.CooldownWindowSettings.Enabled || Settings.SettingsHolder.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (Settings.SettingsHolder.BossWindowSettings.Enabled || Settings.SettingsHolder.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (Settings.SettingsHolder.GroupWindowSettings.Enabled)
+            if (SettingsHolder.CooldownWindowSettings.Enabled || SettingsHolder.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsHolder.BossWindowSettings.Enabled || SettingsHolder.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsHolder.GroupWindowSettings.Enabled)
             {
                 GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!Settings.SettingsHolder.DisablePartyAbnormals) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!Settings.SettingsHolder.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!Settings.SettingsHolder.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsHolder.DisablePartyAbnormals) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsHolder.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsHolder.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (Settings.SettingsHolder.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsHolder.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsHolder.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (!SessionManager.CivilUnrestZone) PartyMemberPosition.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
@@ -343,6 +345,13 @@ namespace TCC.Parsing
             return true;
         }
 
-        public void ReloadSysMsg() { SystemMessageNamer?.Reload(Version, ReleaseVersion); }
+        public void ReloadSysMsg()
+        {
+            if (SystemMessageNamer == null)
+            {
+                SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{ReleaseVersion}.map"));
+            }
+            SystemMessageNamer?.Reload(Version, ReleaseVersion);
+        }
     }
 }

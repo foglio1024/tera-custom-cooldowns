@@ -7,9 +7,12 @@ namespace TCC.Windows.Widgets
     /// </summary>
     public partial class BuffWindow
     {
+        public BuffBarWindowViewModel VM { get; }
         public BuffWindow()
         {
             InitializeComponent();
+            DataContext = new BuffBarWindowViewModel();
+            VM = DataContext as BuffBarWindowViewModel;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
             Init(Settings.SettingsHolder.BuffWindowSettings);
@@ -18,13 +21,9 @@ namespace TCC.Windows.Widgets
 
         private void OnAbnormalityShapeChanged()
         {
-            Buffs.ItemTemplateSelector = null;
-            Buffs.ItemTemplateSelector = R.TemplateSelectors.PlayerAbnormalityTemplateSelector;//System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
-            Debuffs.ItemTemplateSelector = null;
-            Debuffs.ItemTemplateSelector = R.TemplateSelectors.PlayerAbnormalityTemplateSelector; //System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
-            InfBuffs.ItemTemplateSelector = null;
-            InfBuffs.ItemTemplateSelector = R.TemplateSelectors.PlayerAbnormalityTemplateSelector; //System.Windows.Application.Current.FindResource("PlayerAbnormalityTemplateSelector") as DataTemplateSelector;
-
+            Buffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
+            Debuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
+            InfBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
         }
     }
 }

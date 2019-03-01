@@ -15,7 +15,7 @@ namespace TCC
 
         private void ParseSkillConfig(string filename, Class c)
         {
-            var skillsDoc = XDocument.Load("resources/config/skills/" + filename);
+            var skillsDoc = XDocument.Load(Path.Combine(App.ResourcesPath, "config/skills/" + filename));
             foreach (var skillElement in skillsDoc.Descendants("Skills").Descendants())
             {
                 var type = CooldownType.Skill;
@@ -33,13 +33,13 @@ namespace TCC
                                 switch (row)
                                 {
                                     case 1:
-                                        Main.Add(new Cooldown(sk, false));
+                                        Main.Add(new Cooldown(sk, false, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 2:
-                                        Secondary.Add(new Cooldown(sk, false));
+                                        Secondary.Add(new Cooldown(sk, false, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 3:
-                                        Hidden.Add(new Cooldown(sk, false));
+                                        Hidden.Add(new Cooldown(sk, false, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                 }
                             }
@@ -52,13 +52,13 @@ namespace TCC
                                 switch (row)
                                 {
                                     case 1:
-                                        Main.Add(new Cooldown(sk, false, CooldownType.Item));
+                                        Main.Add(new Cooldown(sk, false, CooldownType.Item, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 2:
-                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Item));
+                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Item, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                     case 3:
-                                        Hidden.Add(new Cooldown(sk, false, CooldownType.Item));
+                                        Hidden.Add(new Cooldown(sk, false, CooldownType.Item, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                 }
                             }
@@ -73,13 +73,13 @@ namespace TCC
                                 switch (row)
                                 {
                                     case 1:
-                                        Main.Add(     new Cooldown(sk, false, CooldownType.Passive));
-                                        break;                                   
-                                    case 2:                                      
-                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Passive));
-                                        break;                                   
-                                    case 3:                                      
-                                        Hidden.Add(   new Cooldown(sk, false, CooldownType.Passive));
+                                        Main.Add(new Cooldown(sk, false, CooldownType.Passive, d: WindowManager.CooldownWindow.Dispatcher));
+                                        break;
+                                    case 2:
+                                        Secondary.Add(new Cooldown(sk, false, CooldownType.Passive, d: WindowManager.CooldownWindow.Dispatcher));
+                                        break;
+                                    case 3:
+                                        Hidden.Add(new Cooldown(sk, false, CooldownType.Passive, d: WindowManager.CooldownWindow.Dispatcher));
                                         break;
                                 }
                             }
@@ -102,8 +102,8 @@ namespace TCC
     {
         private static void SaveSkillFile(XElement xe, string filename)
         {
-            if (!Directory.Exists("resources/config/skills")) Directory.CreateDirectory("resources/config/skills");
-            xe.Save("resources/config/skills/" + filename);
+            if (!Directory.Exists(Path.Combine(App.ResourcesPath, "config/skills"))) Directory.CreateDirectory(Path.Combine(App.ResourcesPath, "config/skills"));
+            xe.Save(Path.Combine(App.ResourcesPath, "config/skills/", filename));
         }
         public static void BuildDefaultSkillConfig(string filename, Class c)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -27,7 +28,6 @@ namespace TCC.ViewModels
 
         private bool _discardFirstVanguardPacket = true;
         private ICollectionViewLiveShaping _sortedColumns;
-        private ObservableCollection<CharacterViewModel> _characters;
         private ObservableCollection<DungeonColumnViewModel> _columns;
         private Character _selectedCharacter;
 
@@ -36,7 +36,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<Character> Characters { get; }
 
 
-        public Character CurrentCharacter => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+        public Character CurrentCharacter => Characters.ToSyncList().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
         public Character SelectedCharacter
         {
             get => _selectedCharacter;
@@ -52,7 +52,7 @@ namespace TCC.ViewModels
 
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
-
+        public ICollectionViewLiveShaping HiddenCharacters { get; }
         public ICollectionViewLiveShaping SortedColumns
         {
             get
@@ -62,6 +62,8 @@ namespace TCC.ViewModels
                                             new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
             }
         }
+        public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
+        public ICollectionViewLiveShaping CharacterViewModelsView { get; set; }
 
         public ObservableCollection<InventoryItem> InventoryViewList
         {
@@ -70,6 +72,7 @@ namespace TCC.ViewModels
                 var ret = new ObservableCollection<InventoryItem>();
                 Task.Factory.StartNew(() =>
                 {
+                    if (SelectedCharacter == null) return;
                     SelectedCharacter.Inventory.ToList().ForEach(item =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
@@ -82,7 +85,6 @@ namespace TCC.ViewModels
             }
         }
 
-        public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
 
 
         public int TotalElleonMarks
@@ -90,7 +92,7 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret += c.ElleonMarks);
+                Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
         }
@@ -99,7 +101,7 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret += c.VanguardCredits);
+                Characters.ToSyncList().ForEach(c => ret += c.VanguardCredits);
                 return ret;
             }
         }
@@ -108,24 +110,47 @@ namespace TCC.ViewModels
             get
             {
                 int ret = 0;
-                Characters.ToSyncArray().ToList().ForEach(c => ret += c.GuardianCredits);
+                Characters.ToSyncList().ForEach(c => ret += c.GuardianCredits);
                 return ret;
             }
         }
 
         public ObservableCollection<CharacterViewModel> CharacterViewModels
         {
-            get
+            get;
+            //{
+            //    if (_characters == null) _characters = new ObservableCollection<CharacterViewModel>();
+            //    _characters.Clear();
+            //    foreach (var o in Characters)
+            //    {
+            //        _characters.Add(new CharacterViewModel { Character = o });
+            //    }
+            //    return _characters;
+            //}
+        }
+
+        private void SyncViewModel(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
             {
-                if (_characters != null) return _characters;
-                _characters = new ObservableCollection<CharacterViewModel>();
-                foreach (var o in ((ICollectionView)SortedCharacters).Cast<Character>())
-                {
-                    _characters.Add(new CharacterViewModel { Character = o });
-                }
-                return _characters;
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Character item in e.NewItems)
+                    {
+                        CharacterViewModels.Add(new CharacterViewModel() { Character = item });
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Character item in e.OldItems)
+                    {
+                        var target = CharacterViewModels.FirstOrDefault(x => x.Character == item);
+                        CharacterViewModels.Remove(target);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
+
         public ObservableCollection<DungeonColumnViewModel> Columns
         {
             get
@@ -141,6 +166,7 @@ namespace TCC.ViewModels
         public DashboardViewModel()
         {
             Characters = new SynchronizedObservableCollection<Character>();
+            CharacterViewModels = new ObservableCollection<CharacterViewModel>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>();
@@ -156,26 +182,41 @@ namespace TCC.ViewModels
                         {
                             var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
                             CharacterViewModels?.ToList().ForEach(charVm =>
+                                {
+                                    //if (charVm.Character.Hidden) return;
                                     dvc.DungeonsList.Add(
-                                        new DungeonCooldownViewModel
-                                        {
-                                            Owner = charVm.Character,
-                                            Cooldown = charVm.Character.Dungeons.FirstOrDefault(x =>
-                                                x.Dungeon.Id == dungeon.Id)
-                                        }));
+                                          new DungeonCooldownViewModel
+                                          {
+                                              Owner = charVm.Character,
+                                              Cooldown = charVm.Character.Dungeons.FirstOrDefault(x =>
+                                                  x.Dungeon.Id == dungeon.Id)
+                                          });
+                                });
                             _columns.Add(dvc);
                         }), DispatcherPriority.Background);
                     });
                 });
                 _loaded = true;
             }, c => !_loaded);
-            SortedCharacters = Utils.InitLiveView(o => o != null, Characters, new string[] { }, new[]
-            {
-                new SortDescription(nameof(Character.Position), ListSortDirection.Ascending)
 
-            });
+            Characters.CollectionChanged += SyncViewModel;
+
+            SortedCharacters = Utils.InitLiveView(o => !((Character)o).Hidden, Characters,
+                new[] { nameof(Character.Hidden) },
+                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+
+            HiddenCharacters = Utils.InitLiveView(o => ((Character)o).Hidden, Characters,
+                new[] { nameof(Character.Hidden) },
+                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+
+            CharacterViewModelsView = Utils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
+                new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
+                new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
+
             LoadCharacters();
         }
+
+
 
         /* -- Methods ---------------------------------------------- */
 
@@ -186,7 +227,7 @@ namespace TCC.ViewModels
         public void SetLoggedIn(uint id)
         {
             _discardFirstVanguardPacket = true;
-            Characters.ToSyncArray().ToList().ForEach(x => x.IsLoggedIn = x.Id == id);
+            Characters.ToSyncList().ForEach(x => x.IsLoggedIn = x.Id == id);
         }
         public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
@@ -268,10 +309,10 @@ namespace TCC.ViewModels
         public void SelectCharacter(Character character)
         {
             //if(SelectedCharacter == character) return;
-            if(SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
+            if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
 
             SelectedCharacter = character;
-            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, SelectedCharacter.Inventory, new string[] { }, new SortDescription[]
+            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new SortDescription[]
             {
                 new SortDescription("Item.Id", ListSortDirection.Ascending),
             });
@@ -308,7 +349,7 @@ namespace TCC.ViewModels
         {
             var yesterday = today - 1;
             if (region.StartsWith("EU")) region = "EU";
-            var path = Path.Combine(App.BasePath, $"resources/config/events/events-{region}.xml");
+            var path = Path.Combine(App.ResourcesPath, $"config/events/events-{region}.xml");
             if (!File.Exists(path))
             {
                 var root = new XElement("Events");
@@ -328,8 +369,10 @@ namespace TCC.ViewModels
                 eg.Add(ev);
                 eg.Add(ev2);
                 root.Add(eg);
-                if (!Directory.Exists($"resources/config/events"))
-                    Directory.CreateDirectory($"resources/config/events");
+                if (!Directory.Exists(Path.Combine(App.ResourcesPath, "config/events")))
+                    Directory.CreateDirectory(Path.Combine(App.ResourcesPath, "config/events"));
+
+                //if(!Utils.IsFileLocked(path, FileAccess.ReadWrite))
                 root.Save(path);
             }
 
@@ -453,7 +496,7 @@ namespace TCC.ViewModels
         }
         public void AddEventGroup(EventGroup eg)
         {
-            var g = EventGroups.ToSyncArray().FirstOrDefault(x => x.Name == eg.Name);
+            var g = EventGroups.ToSyncList().FirstOrDefault(x => x.Name == eg.Name);
             if (g != null)
             {
                 foreach (var ev in eg.Events)
@@ -508,7 +551,7 @@ namespace TCC.ViewModels
             if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
-                if(first) CurrentCharacter.Inventory.Clear();
+                if (first) CurrentCharacter.Inventory.Clear();
 
                 foreach (var keyVal in list)
                 {

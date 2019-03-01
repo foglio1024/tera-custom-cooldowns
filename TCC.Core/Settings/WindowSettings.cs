@@ -54,6 +54,7 @@ namespace TCC.Settings
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
+                if (old.X == value) return;
                 Positions.SetPosition(cc, new Point(value, old.Y));
                 N(nameof(X));
             }
@@ -71,6 +72,7 @@ namespace TCC.Settings
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
+                if (old.Y == value) return;
                 Positions.SetPosition(cc, new Point(old.X, value));
                 N(nameof(Y));
             }

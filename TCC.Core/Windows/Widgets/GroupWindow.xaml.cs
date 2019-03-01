@@ -11,30 +11,33 @@ namespace TCC.Windows.Widgets
     /// </summary>
     public partial class GroupWindow
     {
+        public GroupWindowViewModel VM { get;}
+
         public GroupWindow()
         {
+            DataContext = new GroupWindowViewModel();
+            VM = DataContext as GroupWindowViewModel;
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
             Init(Settings.SettingsHolder.GroupWindowSettings, ignoreSize: false);
-            DataContext = GroupWindowViewModel.Instance;
         }
 
         private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
         {
-            if(!GroupWindowViewModel.Instance.AmILeader) return;
+            if(!VM.AmILeader) return;
             Proxy.Proxy.LootSettings();
         }
 
         private void DisbandButtonClicked(object sender, RoutedEventArgs e)
         {
-            if(!GroupWindowViewModel.Instance.AmILeader) return;
+            if(!VM.AmILeader) return;
             Proxy.Proxy.DisbandParty();
         }
 
         private void ResetButtonClicked(object sender, RoutedEventArgs e)
         {
-            if(!GroupWindowViewModel.Instance.AmILeader) return;
+            if(!VM.AmILeader) return;
             Proxy.Proxy.ResetInstance();
         }
 

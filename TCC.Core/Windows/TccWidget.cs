@@ -28,7 +28,7 @@ namespace TCC.Windows
 
         public WindowSettings WindowSettings { get; private set; }
 
-        public IntPtr Handle => new WindowInteropHelper(this).Handle;
+        public IntPtr Handle { get; private set; }
 
         public void ReloadPosition()
         {
@@ -98,7 +98,7 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
             FocusManager.FocusTick += OnFocusTick;
 
-            if (WindowSettings.Enabled) Show();
+            //if (WindowSettings.Enabled) Show();
             OnClickThruModeChanged();
             OnVisibilityChanged();
             OnWindowVisibilityChanged();
@@ -151,12 +151,13 @@ namespace TCC.Windows
             {
                 WindowSettings.W = ActualWidth;
                 WindowSettings.H = ActualHeight;
-                if(!App.Loading) SettingsWriter.Save();
+                if (!App.Loading) SettingsWriter.Save();
             }
         }
 
         protected void OnLoaded(object sender, RoutedEventArgs e)
         {
+            Handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(Handle);
             FocusManager.HideFromToolBar(Handle);
             if (!WindowSettings.Enabled) Hide();
@@ -234,17 +235,20 @@ namespace TCC.Windows
         private void AnimateContentOpacity(double opacity)
         {
             if (MainContent == null) return;
-            _opacityAnimation.To = opacity;
-            Dispatcher.InvokeIfRequired(() => MainContent.BeginAnimation(OpacityProperty, _opacityAnimation)
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _opacityAnimation.To = opacity;
+                MainContent.BeginAnimation(OpacityProperty, _opacityAnimation);
+            })
             , DispatcherPriority.DataBind);
         }
         private void RefreshTopmost()
         {
             if (FocusManager.PauseTopmost) return;
-            Dispatcher.InvokeIfRequired(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 Topmost = false; Topmost = true;
-            }, DispatcherPriority.DataBind);
+            }), DispatcherPriority.DataBind);
         }
         private void SetVisibility(bool v)
         {
@@ -384,7 +388,9 @@ namespace TCC.Windows
         }
         public void CloseWindowSafe()
         {
-            Hide();
+            Dispatcher.Invoke(() => Close());
+            Dispatcher.InvokeShutdown();
+            //Hide();
         }
     }
 

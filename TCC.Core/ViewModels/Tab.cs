@@ -10,7 +10,9 @@ namespace TCC.ViewModels
 {
     public class Tab : TSPropertyChanged
     {
+        // needed for combobox in settings
         public List<ChatChannelOnOff> AllChannels => Utils.GetEnabledChannelsList();
+
         private ICollectionView _messages;
         private string _tabName;
         private ChatMessage _pinnedMessage;
@@ -114,23 +116,6 @@ namespace TCC.ViewModels
             {
                 var m = f as ChatMessage;
                 return Filter(m);
-                //if (Authors.Count == 0 && Channels.Count != 0)
-                //{
-                //    if (ExcludedChannels.Count != 0)
-                //    {
-                //        return Channels.Contains(m.Channel) && !ExcludedChannels.Contains(m.Channel);
-                //    }
-                //    return Channels.Contains(m.Channel);
-                //}
-                //if (Channels.Count == 0 && Authors.Count != 0)
-                //{
-                //    if (ExcludedChannels.Count != 0)
-                //    {
-                //        return Authors.Contains(m.Author) && !ExcludedChannels.Contains(m.Channel);
-                //    }
-                //    return Authors.Contains(m.Author);
-                //}
-
             };
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,15 +21,18 @@ namespace TCC.Windows
     /// </summary>
     public partial class Dashboard : TccWindow
     {
-        public DashboardViewModel VM => Dispatcher.Invoke(() => DataContext as DashboardViewModel);
-        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
+        public DashboardViewModel VM { get; }
+        public IntPtr Handle { get; private set; }
 
         public Dashboard()
         {
             InitializeComponent();
             DataContext = new DashboardViewModel();
+            VM = DataContext as DashboardViewModel;
+            Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
             Showed += () => VM.UpdateBuffs();
             Hidden += () => SessionManager.CurrentDatabase.DungeonDatabase.SaveCustomDefs();
+            //MouseLeftButtonDown += (_, __) => MenuPopup.IsOpen = false;
         }
 
 
@@ -78,7 +82,37 @@ namespace TCC.Windows
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {
             OnDetailsMouseButtonDown(null, null);
-            VM.Characters.Remove(VM.SelectedCharacter);
+            //VM.Characters.Remove(VM.SelectedCharacter);
+            VM.SelectedCharacter.Hidden = true;
+        }
+        private void OpenMergedInventory(object sender, RoutedEventArgs e)
+        {
+            new MergedInventoryWindow() { Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog();
+        }
+
+        private void OnMenuButtonClick(object sender, RoutedEventArgs e)
+        {
+            //MenuPopup.IsOpen = true;
+        }
+
+        private void UnHideChar(object sender, RoutedEventArgs e)
+        {
+            ((Character)((FrameworkElement)sender).DataContext).Hidden = false;
+            //HiddenCharsPopup.IsOpen = false;
+        }
+
+        private void OpenHiddenCharsPopup(object sender, MouseEventArgs e)
+        {
+            //HiddenCharsPopup.IsOpen = true;
+        }
+
+        private void CloseHiddenCharsPopup(object sender, MouseEventArgs e)
+        {
+            var s = sender as FrameworkElement;
+            Task.Delay(1000).ContinueWith(t =>
+            {
+            //    if (!s.IsMouseOver && !HiddenCharsPopup.IsMouseOver) Dispatcher.Invoke(() => HiddenCharsPopup.IsOpen = false);
+            });
         }
     }
 }

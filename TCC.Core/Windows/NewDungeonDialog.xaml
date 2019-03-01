@@ -9,7 +9,7 @@
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:tcc="clr-namespace:TCC"
         mc:Ignorable="d"
-        Title="TCC" Height="350" Width="380"
+        Title="TCC New dungeon dialog" Height="350" Width="380"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -125,13 +125,5 @@
                 </ListBox>
             </Grid>
         </Border>
-        <Grid  Grid.Row="2" >
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
     </Grid>
 </Window>

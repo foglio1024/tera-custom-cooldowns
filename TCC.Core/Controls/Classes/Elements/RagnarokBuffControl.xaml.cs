@@ -23,7 +23,7 @@ namespace TCC.Controls.Classes.Elements
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (DurationCooldownIndicator)DataContext;
             _context.Buff.Started += OnRagnarokStarted;
-            ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.PropertyChanged += ST_PropertyChanged;
+            WindowManager.ClassWindow.VM.CurrentManager.StaminaTracker.PropertyChanged += ST_PropertyChanged;
         }
 
         private void OnRagnarokStarted(CooldownMode mode)
@@ -37,16 +37,16 @@ namespace TCC.Controls.Classes.Elements
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, an);
         }
 
-        public string SecondsText => ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Val.ToString();
+        public string SecondsText => WindowManager.ClassWindow.VM.CurrentManager.StaminaTracker.Val.ToString();
 
         private void ST_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Val")
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecondsText)));
-                IconGlow.Opacity = ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Factor == 1 ? 1 : 0;
+                IconGlow.Opacity = WindowManager.ClassWindow.VM.CurrentManager.StaminaTracker.Factor == 1 ? 1 : 0;
                 if (Running) return;
-                var an = new DoubleAnimation((1-ClassWindowViewModel.Instance.CurrentManager.StaminaTracker.Factor) * 359.9, TimeSpan.FromMilliseconds(50));
+                var an = new DoubleAnimation((1-WindowManager.ClassWindow.VM.CurrentManager.StaminaTracker.Factor) * 359.9, TimeSpan.FromMilliseconds(50));
                 InternalArc.BeginAnimation(Arc.EndAngleProperty, an);
 
             }

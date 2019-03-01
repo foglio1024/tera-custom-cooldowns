@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
@@ -357,10 +358,9 @@ namespace TCC.Data.Pc
                 else return;
             }
 
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false);
                 if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
@@ -413,17 +413,20 @@ namespace TCC.Data.Pc
         }
         public void ClearAbnormalities()
         {
-            foreach (var item in Buffs)
+            Dispatcher.Invoke(() =>
             {
-                item.Dispose();
-            }
-            foreach (var item in Debuffs)
-            {
-                item.Dispose();
-            }
-            Buffs.Clear();
-            Debuffs.Clear();
-            _debuffList.Clear();
+                foreach (var item in Buffs)
+                {
+                    item.Dispose();
+                }
+                foreach (var item in Debuffs)
+                {
+                    item.Dispose();
+                }
+                Buffs.Clear();
+                Debuffs.Clear();
+                _debuffList.Clear();
+            });
         }
 
         public User(Dispatcher d)

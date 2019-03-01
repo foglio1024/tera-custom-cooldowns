@@ -19,20 +19,21 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Messages.Clear();
-            var f = File.OpenText(FullPath);
-            while (true)
+            //var f = File.OpenText(FullPath);
+            var lines = File.ReadAllLines(FullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
+                //var line = f.ReadLine();
                 if (line == null) break;
 
                 var s = line.Split('\t');
 
-                if(!int.TryParse(s[0], out var ch)) continue;
+                if (!int.TryParse(s[0], out var ch)) continue;
                 var opcodeName = s[1];
-                var msg = s[2].Replace("&#xA","\n");
+                var msg = s[2].Replace("&#xA", "\n");
 
                 var sm = new SystemMessage(msg, ch);
-                Messages.Add(opcodeName, sm);
+                Messages[opcodeName] = sm;
             }
         }
     }

@@ -7,8 +7,12 @@ namespace TCC.Windows.Widgets
     /// </summary>
     public partial class ClassWindow 
     {
+        public ClassWindowViewModel VM { get; }
+
         public ClassWindow()
         {
+            DataContext = new ClassWindowViewModel();
+            VM = DataContext as ClassWindowViewModel;
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
@@ -16,8 +20,8 @@ namespace TCC.Windows.Widgets
             Settings.SettingsHolder.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
 
             if (!SessionManager.Logged) return;
-            if (ClassWindowViewModel.Instance.CurrentManager == null)
-                ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+            if (WindowManager.ClassWindow.VM.CurrentManager == null)
+                WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
 
 
         }
@@ -27,7 +31,7 @@ namespace TCC.Windows.Widgets
         private new void OnEnabledChanged() 
         {
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
-                ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
+                WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
             base.OnEnabledChanged();
         }
 

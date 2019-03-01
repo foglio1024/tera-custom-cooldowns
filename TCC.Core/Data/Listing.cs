@@ -23,10 +23,10 @@ namespace TCC.Data
         {
             get
             {
-                return Players.ToSyncArray().Length == 0
+                return Players.ToSyncList().Count == 0
                     ? _playerId
                     // ReSharper disable once PossibleNullReferenceException
-                    : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
+                    : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
             }
             set
             {
@@ -71,7 +71,7 @@ namespace TCC.Data
         }
         public string LeaderName
         {
-            get => Players.ToSyncArray().Length == 0 ? _leaderName : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader)?.Name;
+            get => Players.ToSyncList().Count == 0 ? _leaderName : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.Name;
             set
             {
                 if (_leaderName == value) return;
@@ -92,7 +92,7 @@ namespace TCC.Data
 
         public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
                                LeaderId == SessionManager.CurrentPlayer.PlayerId ||
-                                GroupWindowViewModel.Instance.Members.ToSyncArray().Any(member => member.PlayerId == LeaderId));
+                                WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;

@@ -19,10 +19,10 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Grades.Clear();
-            var f = File.OpenText(FullPath);
-            while (true)
+            var lines = File.ReadAllLines(FullPath);
+            foreach (var line in lines)
             {
-                var line = f.ReadLine();
+                //var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
                 if (!uint.TryParse(s[0], out var id)) continue;

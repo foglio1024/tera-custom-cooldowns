@@ -13,23 +13,35 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                          
-                <ItemsControl ItemsSource="{Binding Pieces}"
-                              ItemTemplate="{StaticResource MessageBodyTemplate}" Background="Transparent"
-                          Margin="5 0 0 5" 
-                          VerticalAlignment="Center" >
+                <ItemsControl ItemsSource="{Binding Lines}"
+                              Background="Transparent"
+                              Margin="5 0 0 5" 
+                              VerticalAlignment="Center" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel HorizontalAlignment="Stretch" PreviewMouseRightButtonDown="WrapPanel_PreviewMouseRightButtonDown" VerticalAlignment="Top">
-                            </WrapPanel>
+                            <StackPanel VerticalAlignment="Top"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style TargetType="FrameworkElement">
-                            <Setter Property="Margin" Value="0 0 0 -5"/>
-                            <Setter Property="VerticalAlignment" Value="Top"/>
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding LinePieces}"
+                              ItemTemplate="{StaticResource MessageBodyTemplate}" Background="Transparent"
+                              VerticalAlignment="Center" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                        </WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="FrameworkElement">
+                                        <Setter Property="Margin" Value="0 0 0 -3"/>
+                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <Grid Grid.Column="1" Margin="-80 0 0 0" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>

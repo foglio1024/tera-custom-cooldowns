@@ -7,7 +7,7 @@
         SizeToContent="Height"
         mc:Ignorable="d"
          Style="{StaticResource BaseWindowStyle}" DataContext="{Binding DC, RelativeSource={RelativeSource Self}}"
-        Title="TCC" Width="950" d:DataContext="{d:DesignData GroupConfigVM}">
+        Title="TCC Group buffs settings" Width="950" d:DataContext="{d:DesignData GroupConfigVM}">
     <Window.Resources>
         <Style TargetType="ListBox">
             <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplateForConfig}"></Setter>

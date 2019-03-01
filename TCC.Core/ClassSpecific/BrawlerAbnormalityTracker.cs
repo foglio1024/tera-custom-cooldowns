@@ -31,36 +31,36 @@ namespace TCC.ClassSpecific
         private static void CheckGrowingFury(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsGfOn = true;
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsGfOn = true;
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).IsGfOn = false;
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).IsGfOn = false;
         }
 
         private static void CheckCounterProc(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Counter.Start(p.Duration);
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Start(p.Duration);
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = true;
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Counter.Start(p.Duration);
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).Counter.Refresh(0, CooldownMode.Normal);
-            ((BrawlerBarManager)ClassWindowViewModel.Instance.CurrentManager).CounterProc = false;
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).Counter.Refresh(0, CooldownMode.Normal);
+            ((BrawlerBarManager)WindowManager.ClassWindow.VM.CurrentManager).CounterProc = false;
         }
     }
 }

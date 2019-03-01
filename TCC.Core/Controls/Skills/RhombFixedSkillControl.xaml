@@ -10,17 +10,17 @@
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData Cooldown}">
     <UserControl.Resources>
         <ElasticEase x:Key="BounceEase" Oscillations="3" />
-        <Storyboard x:Key="WarnShake" RepeatBehavior="Forever">
-            <DoubleAnimation Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
+        <Storyboard x:Key="WarnShake" RepeatBehavior="Forever" Timeline.DesiredFrameRate="30" Duration="0:0:2">
+            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
         </Storyboard>
-        <Storyboard x:Key="WarnGlow" RepeatBehavior="Forever" >
-            <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
-            <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="Opacity"                Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation    Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="Opacity"                BeginTime="0:0:0.1" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <ThicknessAnimation Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="BorderThickness"                        Duration="0:0:0.1" From="2" To="6" EasingFunction="{StaticResource QuadraticEase}" />
-            <ThicknessAnimation Timeline.DesiredFrameRate="25" Storyboard.TargetProperty="BorderThickness"                      BeginTime="0:0:0.1"  Duration="0:0:0.6" From="6" To="2" EasingFunction="{StaticResource QuadraticEase}" />
+        <Storyboard x:Key="WarnGlow" RepeatBehavior="Forever" Timeline.DesiredFrameRate="25" Duration="0:0:2">
+            <DoubleAnimation    Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <DoubleAnimation     Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>
+            <DoubleAnimation    Storyboard.TargetProperty="Opacity"                Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <DoubleAnimation    Storyboard.TargetProperty="Opacity"                BeginTime="0:0:0.1" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
+            <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"                        Duration="0:0:0.1" From="2" To="6" EasingFunction="{StaticResource QuadraticEase}" />
+            <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"                      BeginTime="0:0:0.1"  Duration="0:0:0.6" From="6" To="2" EasingFunction="{StaticResource QuadraticEase}" />
         </Storyboard>
     </UserControl.Resources>
     <UserControl.LayoutTransform>
@@ -78,30 +78,40 @@
             <Grid ClipToBounds="False" RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" Margin="0">
                 <Border Margin="7" x:Name="WarnArc" Opacity="0" RenderTransformOrigin=".5 .5"
                        BorderBrush="White" BorderThickness="3"  Visibility="Visible"
-                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#2fff">
-                    <Border.Effect>
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#7fff">
+                    <!--<Border.Effect>
                         <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"/>
-                    </Border.Effect>
+                    </Border.Effect>-->
                     <Border.RenderTransform>
                         <RotateTransform />
                     </Border.RenderTransform>
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=skills:RhombFixedSkillControl}, Path=Warning}"
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=skills:RhombFixedSkillControl}, Path=Warning}"
                                          Value="True">
+                                    <!--<Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"/>
+                                        </Setter.Value>
+                                    </Setter>-->
                                     <DataTrigger.EnterActions>
+
                                         <BeginStoryboard Storyboard="{StaticResource WarnGlow}" x:Name="StartWarning"/>
                                     </DataTrigger.EnterActions>
-                                    <DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=skills:RhombFixedSkillControl}, Path=Warning}"
+                                         Value="False">
+                                    <DataTrigger.EnterActions>
                                         <StopStoryboard BeginStoryboardName="StartWarning"/>
-                                    </DataTrigger.ExitActions>
+                                    </DataTrigger.EnterActions>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
                 </Border>
             </Grid>
+
         </Grid>
         <Grid ClipToBounds="True" Width="Auto" Height="Auto" 
               RenderTransform="{StaticResource Rotate45}" 
@@ -200,10 +210,10 @@
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 
                        TextAlignment="Center"
+                       FontWeight="DemiBold"
                        FontSize="15" 
                        x:Name="Number" 
                        Opacity="1" 
-                       FontFamily="{StaticResource ArialMonoBold}"
                        Margin="0 0"
                        Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=skills:RhombFixedSkillControl}, Mode=OneWay}"/>
         </Grid>

@@ -58,32 +58,32 @@ namespace TCC.ClassSpecific
         private static void CheckAssassinate(S_ABNORMALITY_BEGIN p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Start(p.Duration);
+            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShroudedEscape.Buff.Start(p.Duration);
         }
         private static void CheckAssassinate(S_ABNORMALITY_REFRESH p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShroudedEscape.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckAssassinate(S_ABNORMALITY_END p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShroudedEscape.Buff.Refresh(0, CooldownMode.Normal);
+            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShroudedEscape.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Start(p.Duration);
+            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShadowReaping.Buff.Start(p.Duration);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_REFRESH p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShadowReaping.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_END p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(0, CooldownMode.Normal);
+            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShadowReaping.Buff.Refresh(0, CooldownMode.Normal);
         }
 
     }

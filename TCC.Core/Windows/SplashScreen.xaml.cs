@@ -22,7 +22,12 @@ namespace TCC.Windows
             {
                 var r = new Random();
                 var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
-                Img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+                var bm = new BitmapImage();
+                bm.BeginInit();
+                bm.UriSource = new Uri(path, UriKind.Absolute);
+                bm.CacheOption = BitmapCacheOption.OnLoad;
+                bm.EndInit();
+                Img.Source = bm;
             }
             catch { }
         }
@@ -33,7 +38,11 @@ namespace TCC.Windows
         }
         public void SetVer(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Ver.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                Ver.Text = t;
+                if (App.Experimental) Ver.Foreground = R.Brushes.HpBrushLight;
+            }));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

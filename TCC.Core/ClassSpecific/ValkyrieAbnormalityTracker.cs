@@ -43,33 +43,33 @@ namespace TCC.ClassSpecific
         private static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Start(p.Duration);
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Ragnarok.Buff.Start(p.Duration);
         }
         private static void CheckRagnarok(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
 
         private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Godsfall.Buff.Start(p.Duration);
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Godsfall.Buff.Start(p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGodsfall(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).Godsfall.Buff.Refresh(0, CooldownMode.Normal);
+            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Godsfall.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)

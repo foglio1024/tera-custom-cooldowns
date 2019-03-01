@@ -202,14 +202,14 @@ namespace TCC.Data.NPCs
         {
             get
             {
-                BossGageWindowViewModel.Instance.GuildIds.TryGetValue(EntityId, out var val);
+                WindowManager.BossWindow.VM.GuildIds.TryGetValue(EntityId, out var val);
                 return val;
             }
         }
 
         //public NPC(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         //{
-        //    _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
+        //    _dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
         //    EntityId = eId;
         //    Name = EntityManager.MonsterDatabase.GetName(tId, zId);
         //    ZoneId = zId;
@@ -221,7 +221,7 @@ namespace TCC.Data.NPCs
 
         //    IsShieldPhase = false;
         //    IsSelected = false;
-        //    if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1)
+        //    if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.Phase1)
         //    {
         //        ShieldDuration = new DispatcherTimer();
         //        ShieldDuration.Interval = TimeSpan.FromSeconds(13);
@@ -231,7 +231,7 @@ namespace TCC.Data.NPCs
         //}
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
-            Dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
+            Dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
             EntityId = eId;
             Name = SessionManager.CurrentDatabase.MonsterDatabase.GetName(tId, zId);
             MaxHP = SessionManager.CurrentDatabase.MonsterDatabase.GetMaxHP(tId, zId);

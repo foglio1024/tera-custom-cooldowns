@@ -14,7 +14,7 @@
         AllowsTransparency="True" 
         WindowStyle="None" 
         WindowStartupLocation="CenterScreen"
-        Title="Chat tab settings" 
+        Title="TCC chat tab settings" 
         Height="Auto" 
         Width="600" 
         d:DataContext="{d:DesignInstance {x:Type vm:Tab}}">

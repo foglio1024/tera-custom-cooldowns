@@ -35,11 +35,10 @@ namespace TCC.Parsing.Messages
                     reader.BaseStream.Position = next - 4;
                 }
             }
-            catch (Exception e)
+            catch
             {
                 //Log.F($"[{nameof(S_NPCGUILD_LIST)}] Failed to parse packet. \nContent:\n{StringUtils.ByteArrayToString(Payload.Array)}\nException:\n{e.Message}\n{e.StackTrace}");
                 //WindowManager.FloatingButton.NotifyExtended("Warning", "A non-fatal error occured. More detailed info has been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
-
             }
         }
     }

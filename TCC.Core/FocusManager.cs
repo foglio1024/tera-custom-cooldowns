@@ -17,6 +17,7 @@ namespace TCC
     {
         private static bool _isForeground;
         private static bool _forceFocused;
+        private static bool _disposed;
 
         // window styles
         // ReSharper disable InconsistentNaming
@@ -45,7 +46,6 @@ namespace TCC
                 if(_forceFocused == value) return;
                 _forceFocused = value;
                 ForegroundChanged?.Invoke();
-                Log.All($"ForceFocused set to {value}");
             }
         }
 
@@ -62,7 +62,7 @@ namespace TCC
                 if (ForegroundWindow == TeraWindow && TeraWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == MeterWindow && MeterWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.SettingsWindow?.Handle && WindowManager.SettingsWindow?.Handle != IntPtr.Zero) return true;
-                if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
+                //if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.LfgListWindow?.Handle && WindowManager.LfgListWindow?.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.Dashboard?.Handle && WindowManager.Dashboard?.Handle != IntPtr.Zero) return true;
                 return false;
@@ -139,13 +139,13 @@ namespace TCC
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
-/*
+
         public static void UndoUnfocusable(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
         }
-*/
+
         public static void HideFromToolBar(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
@@ -164,6 +164,7 @@ namespace TCC
 
         private static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
+            if (_disposed) return;
             FocusTick?.Invoke();
             if (IsForeground == IsActive) return;
             IsForeground = IsActive;
@@ -213,6 +214,7 @@ namespace TCC
 
         public static void Dispose()
         {
+            _disposed = true;
             FocusTimer?.Stop();
         }
     }

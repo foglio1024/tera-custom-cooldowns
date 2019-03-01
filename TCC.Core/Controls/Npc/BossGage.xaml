@@ -22,7 +22,7 @@
                         <ScaleTransform ScaleX="{Binding StartFactor}" />
                     </Rectangle.LayoutTransform>
                 </Rectangle>
-                <Rectangle Width="{StaticResource GageWidth}" Fill="{StaticResource AssaultStanceBrush}" Opacity=".4">
+                <Rectangle Width="{StaticResource GageWidth}" Fill="{StaticResource AssaultStanceBrush}"  Opacity=".4">
                     <Rectangle.RenderTransform>
                         <ScaleTransform ScaleX="{Binding Factor}" />
                     </Rectangle.RenderTransform>
@@ -107,22 +107,32 @@
                                 RenderTransform="{StaticResource Rotate45}"/>
                     </Grid>
                     <Border x:Name="EnrageBorder"
-                            Background="Red" 
-                            Opacity="0" 
                             RenderTransformOrigin=".5 .5"
                             Style="{StaticResource DefaultBorderStyle}" 
                             HorizontalAlignment="Stretch"
                             Width="{Binding ElementName=IconBaseBorder, Path=ActualWidth}"
                             Height="{Binding ElementName=IconBaseBorder, Path=ActualWidth}"
-                            BorderThickness="{Binding ElementName=IconBaseBorder, Path=BorderThickness}">
+                            BorderThickness="{Binding ElementName=IconBaseBorder, Path=BorderThickness}"
+                            BorderBrush="White"
+                            Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleCollapsed}}"
+                            >
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="-.5 .5" EndPoint="1 2">
+                                <GradientStop Color="{StaticResource HpColor}" Offset=".2" ></GradientStop>
+                                <GradientStop Color="Black" Offset="1"></GradientStop>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="{StaticResource HpColorLight}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+                        </Border.Effect>
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <StaticResource ResourceKey="Rotate45" />
-                                <TranslateTransform Y="19" />
+                                <TranslateTransform Y="18" />
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
-                    <Image Stretch="Uniform" 
+                    <!--<Image Stretch="Uniform" 
                            VerticalAlignment="Center" 
                            Margin="-14"
                            Width="60"
@@ -134,7 +144,7 @@
                                 <TranslateTransform Y="18.5" X="0" />
                             </TransformGroup>
                         </Image.RenderTransform>
-                    </Image>
+                    </Image>-->
                     <Image Margin="-10" 
                            Stretch="Uniform"
                            Width="50"
@@ -142,11 +152,26 @@
                            StretchDirection="DownOnly"
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           Source="../../resources/images/kr_boss_icon.png">
+                           Source="../../resources/images/kr_boss_icon.png"
+                           Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}">
                         <Image.RenderTransform>
                             <TranslateTransform Y="20" X="0.5" />
                         </Image.RenderTransform>
                     </Image>
+                    <TextBlock Text="{Binding VM.RhombEnrageTimerText, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" 
+                               TextAlignment="Center"
+                               Width="50"
+                               Height="50"
+                               FontSize="21"
+                               Margin="-10">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="28" X="0" />
+                        </TextBlock.RenderTransform>
+
+                    </TextBlock>
                 </Grid>
 
                 <!-- Boss name grid-->
@@ -307,7 +332,7 @@
                 <Grid Name="HpBarGrid" 
                       Grid.Row="2" 
                       Grid.Column="1" 
-                      Margin="5 0" 
+                      Margin="6 0" 
                       Width="{StaticResource GageWidth}"
                       VerticalAlignment="Bottom" 
                       ClipToBounds="False" 
@@ -322,8 +347,12 @@
                             BorderBrush="{StaticResource RevampBorderBrush}"
                             BorderThickness="2 1" 
                             Height="14" 
-                            Margin="-4 0" >
+                            Margin="-5 0" >
                     </Border>
+                    <Rectangle Fill="#1fff"
+                            Height="8" 
+                            Margin="0" >
+                    </Rectangle>
                     <Rectangle HorizontalAlignment="Stretch"
                                Width="Auto"
                                Height="8"
@@ -333,7 +362,7 @@
                                 <Setter Property="Fill" Value="{StaticResource MpBrush}"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                        <Setter Property="Fill" Value="{StaticResource AssaultStanceBrush}"/>
+                                        <Setter Property="Fill" Value="{StaticResource HpBrush}"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -419,10 +448,43 @@
                                    Width="3"
                                    Fill="#cfff"
                                    HorizontalAlignment="Left"
-                                   Margin="-2 -1 -50 3"
+                                   Margin="-3 -1 -50 3"
                                    VerticalAlignment="Bottom"
                                    Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}" />
                     </StackPanel>
+                    <UniformGrid Rows="1" VerticalAlignment="Center">
+                        <UniformGrid.Resources>
+                            <Style TargetType="Line">
+                                <Setter Property="X1" Value="0"/>
+                                <Setter Property="Y1" Value="0"/>
+                                <Setter Property="X2" Value="0"/>
+                                <Setter Property="Y2" Value="6"/>
+                                <Setter Property="Stroke" Value="#7fff"/>
+                                <Setter Property="StrokeThickness" Value="1"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </UniformGrid.Resources>
+                        <Line Visibility="Hidden"/>
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line Y2="8" Stroke="#9fff"/>
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                        <Line />
+                        <Line Y2="4" />
+                    </UniformGrid>
                 </Grid>
             </Grid>
         </Grid>

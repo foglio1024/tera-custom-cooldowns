@@ -55,8 +55,11 @@ namespace TCC
             get => CurrentPlayer?.IsInCombat ?? false;
             set
             {
-                if (Combat != value) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
-                CurrentPlayer.IsInCombat = value;
+                if (Combat != value)
+                {
+                    CurrentPlayer.IsInCombat = value;
+                    App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+                }
             }
         }
 
@@ -122,16 +125,14 @@ namespace TCC
         {
             CurrentPlayer.CurrentHP = hp;
         }
-        public static void SetPlayerMp(ulong target, float mp)
+        public static void SetPlayerMp(float mp)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentMP = mp;
         }
-        public static void SetPlayerSt(ulong target, float st)
+        public static void SetPlayerSt(float st)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentST = st;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
+            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -150,23 +151,20 @@ namespace TCC
             }
         }
 
-        public static void SetPlayerMaxHp(ulong target, long maxHp)
+        public static void SetPlayerMaxHp(long maxHp)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxHP = maxHp;
             //ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
         }
-        public static void SetPlayerMaxMp(ulong target, int maxMp)
+        public static void SetPlayerMaxMp(int maxMp)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxMP = maxMp;
             //ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
         }
-        public static void SetPlayerMaxSt(ulong target, int maxSt)
+        public static void SetPlayerMaxSt(int maxSt)
         {
-            if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
@@ -183,14 +181,25 @@ namespace TCC
         public static void InitDatabases(string lang)
         {
             CurrentDatabase = new TccDatabase(lang);
+            CurrentDatabase.CheckVersion();
+            if (!CurrentDatabase.IsUpToDate)
+            {
+                var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
+                if (res == System.Windows.MessageBoxResult.Yes)
+                {
+                    CurrentDatabase.DownloadOutdatedDatabases();
+                }
+            }
             if (!CurrentDatabase.Exists)
             {
                 var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
                 if (res == System.Windows.MessageBoxResult.Yes)
                 {
-                    var sw = new SettingsWindow();
-                    sw.TabControl.SelectedIndex = 8;
-                    sw.ShowDialog();
+                    App.BaseDispatcher.Invoke(() =>
+                    {
+                        WindowManager.SettingsWindow.TabControl.SelectedIndex = 8;
+                        WindowManager.SettingsWindow.ShowDialog();
+                    });
                     InitDatabases(SettingsHolder.LastLanguage);
                 }
                 else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
@@ -205,9 +214,11 @@ namespace TCC
             CurrentPlayer.Ice = pIce;
             CurrentPlayer.Arcane = pArcane;
 
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            if (SettingsHolder.ClassWindowSettings.Enabled
+                && CurrentPlayer.Class == Class.Sorcerer
+                && WindowManager.ClassWindow.VM.CurrentManager is SorcererBarManager sm)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementChanged();
+                sm.NotifyElementChanged();
             }
 
         }
@@ -220,7 +231,7 @@ namespace TCC
 
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                ((SorcererBarManager)ClassWindowViewModel.Instance.CurrentManager).NotifyElementBoostChanged();
+                ((SorcererBarManager)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
             }
 
 

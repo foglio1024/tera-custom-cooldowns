@@ -43,7 +43,7 @@ namespace TCC.Controls.NPCs
             VM.Disposed += OnDispose;
 
 
-            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+            //RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
 
         }

@@ -11,10 +11,7 @@
         Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
         Title="TCC Settings" Height="600" Width="900" ResizeMode="NoResize"
-        Background="Transparent" UseLayoutRounding="True" d:DataContext="{d:DesignData SettingsWindowViewModel}">
-    <local:TccWindow.DataContext>
-        <vm:SettingsWindowViewModel/>
-    </local:TccWindow.DataContext>
+        Background="Transparent" UseLayoutRounding="True" d:DataContext="{d:DesignData vm:SettingsWindowViewModel}">
     <local:TccWindow.Resources>
         <Style TargetType="TabItem" x:Key="TabItemStyle">
             <Setter Property="Template" >
@@ -809,44 +806,33 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
 
-                            <settings:CheckboxSetting SettingName="Hide me" 
-                                                      IsOn="{Binding HideMe, Mode=TwoWay}" >
-                                <settings:CheckboxSetting.ToolTip>
+                            <settings:ValueSetting SettingName="Hide buffs threshold" 
+                                                   Value="{Binding HideBuffsThreshold, Mode=TwoWay}" 
+                                                   Max="30"
+                                                   Min="1">
+                                <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}"/>
                                         <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                    <Run Text="Hides current player from group window."/>
-                                    <LineBreak /> <LineBreak/>
-                                    <Run Text="Note: " Foreground="#59f"/>
-                                    <Run Text="if turned back on while in a party, player will not be visible until party composition changes." />
+                                    <Run Text="Hides buffs row when members count is above this value. Tracking will still be active and current buffs will be showed if turned back off."/>
                                         </TextBlock>
                                     </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Hide buffs" 
-                                                      IsOn="{Binding HideBuffs, Mode=TwoWay}" >
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}"/>
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                    <Run Text="Hides buffs row. Tracking will still be active and current buffs will be showed if turned back off."/>
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Hide debuffs" Grid.Row="8" IsOn="{Binding HideDebuffs, Mode=TwoWay}" >
-                                <settings:CheckboxSetting.ToolTip>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:ValueSetting SettingName="Hide debuffs threshold" Grid.Row="8" Value="{Binding HideDebuffsThreshold, Mode=TwoWay}" Max="30" Min="1">
+                                <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2"/>
                                         <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                    <Run Text="Hides debuffs row. Tracking will still be active and current debuffs will be showed if turned back off."/>
+                                    <Run Text="Hides debuffs row when members count is above this value. Tracking will still be active and current debuffs will be showed if turned back off."/>
                                         </TextBlock>
                                     </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Disable all buffs and debuffs" 
-                                                      IsOn="{Binding DisableAllPartyAbnormals, Mode=TwoWay}" >
-                                <settings:CheckboxSetting.ToolTip>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:ValueSetting SettingName="Disable (de)buffs threshold" 
+                                                      Value="{Binding DisableAbnormalitiesThreshold, Mode=TwoWay}" 
+                                                   Min="1" Max="30">
+                                <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
                                         <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
@@ -862,6 +848,38 @@
                                     <Run Text="warriors will not be moved to tank or dps column when switching between stances." />
                                         </TextBlock>
                                     </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:ValueSetting SettingName="Disable HP threshold" 
+                                                      Value="{Binding HideHpThreshold, Mode=TwoWay}" 
+                                                   Max="30" Min="1">
+                                <settings:ValueSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2"/>
+                                        <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                                    </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:ValueSetting SettingName="Disable MP threshold" Value="{Binding HideMpThreshold, Mode=TwoWay}" Max="30" Min="1">
+                                <settings:ValueSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2"/>
+                                        <TextBlock Foreground="LightGray" Text="Disable party members' MP tracking to save performance (recommended). MP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                                    </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:CheckboxSetting SettingName="Hide me" 
+                                                      IsOn="{Binding HideMe, Mode=TwoWay}" >
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}"/>
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Hides current player from group window."/>
+                                    <LineBreak /> <LineBreak/>
+                                    <Run Text="Note: " Foreground="#59f"/>
+                                    <Run Text="if turned back on while in a party, player will not be visible until party composition changes." />
+                                        </TextBlock>
+                                    </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show only aggro debuff in HH" 
@@ -874,23 +892,6 @@
                                 <LineBreak/>
                                 <Run Text="Requires 'Hide debuffs' and 'Disable all buffs and debuffs' to be disabled." Foreground="DarkOrange"/>
                                         </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Disable HP" 
-                                                      IsOn="{Binding DisableHP, Mode=TwoWay}" >
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2"/>
-                                        <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Disable MP" IsOn="{Binding DisableMP, Mode=TwoWay}" >
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2"/>
-                                        <TextBlock Foreground="LightGray" Text="Disable party members' MP tracking to save performance (recommended). MP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
@@ -1252,13 +1253,31 @@
                             />
                             <settings:CheckboxSetting SettingName="Use npcap" 
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />
+                            <settings:CheckboxSetting SettingName="Auto fps mode" 
+                                                      IsOn="{Binding FpsAtGuardian, Mode=TwoWay}" 
+                                                      >
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}"/>
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                            <Run Text="Automatically"/>
+                                            <Run Foreground="DodgerBlue" Text="fps mode 3"/>
+                                            <Run Text="when entering Guardian Legion mission zones and switches back to"/>
+                                            <Run Foreground="DodgerBlue" Text="fps mode 1"/>
+                                            <Run Text="when exiting"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Experimental builds notification" 
-                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}" />
+                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}" 
+                                                      Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"/>
                             <Button Style="{StaticResource SettingsButton}"  
                                     Content="Download experimental build"
                                     Click="ForceExperimentalBuildDownlaod" 
                                     Background="{StaticResource AssaultStanceBrush}"
-                                    Foreground="White"/>
+                                    Foreground="White"
+                                    Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"/>
 
                         </StackPanel>
                     </Grid>

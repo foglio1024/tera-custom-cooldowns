@@ -22,7 +22,7 @@ namespace TCC.Parsing.Messages
             reader.Skip(2+2+2+2+2+2+2);
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
-            //if(!GroupWindowViewModel.Instance.Exists(PlayerId,ServerId)) return;
+            //if(!WindowManager.GroupWindow.VM.Exists(PlayerId,ServerId)) return;
             EntityId = reader.ReadUInt64();
             reader.Skip(4+4+4+2+4+4+2+2+2+2+2+1+1+4+4);
             var weaponId = reader.ReadUInt32();

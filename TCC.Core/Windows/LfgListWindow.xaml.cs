@@ -55,7 +55,6 @@ namespace TCC.Windows
             });
         }
 
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -124,16 +123,21 @@ namespace TCC.Windows
         internal void ShowWindow()
         {
             if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 VM.RefreshSorting();
+            }), DispatcherPriority.Background);
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 if (IsVisible) return;
                 Opacity = 0;
                 Show();
-                Activate();
+                FocusManager.HideFromToolBar(this.Handle);
+                FocusManager.MakeUnfocusable(this.Handle);
                 BeginAnimation(OpacityProperty, animation);
-            });
+            }), DispatcherPriority.Background);
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -161,6 +165,8 @@ namespace TCC.Windows
         {
             if (!VM.Creating)
             {
+                FocusManager.UndoUnfocusable(this.Handle);
+                Activate();
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 NewMessageTextBox.Focus();
                 VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
@@ -168,6 +174,7 @@ namespace TCC.Windows
             }
             else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
             {
+                FocusManager.UndoUnfocusable(this.Handle);
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 Proxy.Proxy.RegisterLfg(VM.NewMessage, RaidSwitch.IsOn);
                 VM.Creating = false;

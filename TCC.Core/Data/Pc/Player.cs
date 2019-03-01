@@ -491,26 +491,26 @@ namespace TCC.Data.Pc
             Debuffs.Clear();
             InfBuffs.Clear();
             _debuffList.Clear();
+            CurrentShield = 0;
             N(nameof(IsDebuffed));
         }
 
         public Player()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
-            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             _debuffList = new List<uint>();
         }
-        public Player(ulong id, string name)
+        public Player(ulong id, string name) : this()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
-            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
-            _debuffList = new List<uint>();
             _entityId = id;
             _name = name;
+        }
+
+        public void InitAbnormalityCollections(Dispatcher disp)
+        {
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
+            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
         }
     }
 }

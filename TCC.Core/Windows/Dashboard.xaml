@@ -13,7 +13,7 @@
                  xmlns:abnormalities1="clr-namespace:TCC.Controls.Abnormalities"
                  xmlns:tcc="clr-namespace:TCC"
                  mc:Ignorable="d"
-                 Title="Dashboard" Height="650" Width="1220"
+                 Title="TCC Dashboard" Height="650" Width="1220"
                  ResizeMode="NoResize"
                  WindowStyle="None"
                  Background="Transparent"
@@ -341,6 +341,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Image Source="/TCC;component/resources/images/tera-logo-flat.png"
                    Opacity=".4"
@@ -359,9 +360,95 @@
                     HorizontalContentAlignment="Center"
                     Opacity=".9"
                     Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Click="OnMenuButtonClick"
+                    VerticalContentAlignment="Center"
+                    Grid.Column="2"
+                    x:Name="MenuButton"
+                    tcc:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True">
+                <Path Data="{StaticResource SvgDotsVertical}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"/>
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Unhide character" ItemsSource="{Binding HiddenCharacters}"
+                                  >
+                            <MenuItem.ItemContainerStyle>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                                    <Setter Property="Command" Value="{Binding UnhideCommand}"/>
+                                    <!--<Setter Property="Icon">
+                                        <Setter.Value>
+                                            
+                                        <Path Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Fill="White" Opacity=".7"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Width="15"
+                                              Height="15"
+                                              Margin="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Header" Value="{Binding Name}"></Setter>-->
+                                </Style>
+                            </MenuItem.ItemContainerStyle>
+                            <MenuItem.ItemTemplate>
+                                <DataTemplate DataType="{x:Type pc:Character}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Path Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Fill="White" Opacity=".7"
+                                              Height="15" Width="15"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                        <TextBlock Style="{StaticResource DefaultTextStyle}" Text="{Binding Name}" Grid.Column="1" Margin="7 0 0 0"
+                                                   VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </MenuItem.ItemTemplate>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+
+            </Button>
+            <!--<Popup Placement="Bottom" PlacementTarget="{Binding ElementName=MenuButton}" HorizontalOffset="5" VerticalOffset="-5" x:Name="MenuPopup" AllowsTransparency="True">
+                <Border Style="{StaticResource RevampBorderStyle}" Margin="5" BorderThickness="0" Background="{StaticResource RevampDarkerBackground70Brush}" CornerRadius="3"
+>
+                    <StackPanel>
+                        <Grid Margin="5 0" MouseEnter="OpenHiddenCharsPopup" MouseLeave="CloseHiddenCharsPopup" x:Name="RedisplayCharButton" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Redisplay character" Margin="5" Style="{StaticResource DefaultTextStyle}"/>
+                            <Path Data="{StaticResource SvgMenuRight}" Grid.Column="1" Margin="5"/>
+                            <Popup x:Name="HiddenCharsPopup" AllowsTransparency="True" Placement="Right" PlacementTarget="{Binding ElementName=RedisplayCharButton}" MouseLeave="CloseHiddenCharsPopup">
+                                <Border Style="{StaticResource RevampBorderStyle}" Margin="5" BorderThickness="0" Background="{StaticResource RevampDarkerBackground70Brush}" CornerRadius="3">
+                                    <ItemsControl ItemsSource="{Binding HiddenCharacters}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{StaticResource ButtonContentOpacityStyle}"
+                                                        Click="UnHideChar" Background="Transparent">
+                                                    <TextBlock Style="{StaticResource DefaultTextStyle}" Text="{Binding Name}" Margin="10 5"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Border>
+
+                            </Popup>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+
+            </Popup>-->
+
+            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Opacity=".9"
+                    Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
                     Click="OnCloseButtonClick"
                     VerticalContentAlignment="Center"
-                    Grid.Column="2">
+                    Grid.Column="3">
                 <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
             </Button>
         </Grid>
@@ -811,6 +898,17 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="Inventory" Foreground="#5fff" FontSize="20"
                                        FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center" />
+                            <Button Style="{StaticResource ButtonContentOpacityStyle}" Height="16"  
+                                    HorizontalAlignment="Right" Margin="0 0 10 0"
+                                    ToolTip="Open merged inventory"
+                                    Click="OpenMergedInventory">
+
+                                <Path Data="{StaticResource SvgOpenLink}"
+                                       VerticalAlignment="Center"
+                                      Opacity=".5">
+                                </Path>
+                            </Button>
+
                             <ScrollViewer Grid.Row="1" CanContentScroll="False"
                                           VerticalAlignment="Stretch">
                                 <ItemsControl ItemsSource="{Binding SelectedCharacterInventory}"

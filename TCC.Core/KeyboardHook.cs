@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using TCC.Data;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -44,28 +46,41 @@ namespace TCC
                 if (!WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
                 else WindowManager.LfgListWindow.CloseWindow();
             }
-            if (e.Key == Settings.SettingsHolder.SettingsHotkey.Key && e.Modifier == Settings.SettingsHolder.SettingsHotkey.Modifier)
+            else if (e.Key == Settings.SettingsHolder.SettingsHotkey.Key && e.Modifier == Settings.SettingsHolder.SettingsHotkey.Modifier)
             {
                 if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
                 else WindowManager.SettingsWindow.ShowWindow();
             }
-            if (e.Key == Settings.SettingsHolder.InfoWindowHotkey.Key && e.Modifier == Settings.SettingsHolder.InfoWindowHotkey.Modifier)
+            else if (e.Key == Settings.SettingsHolder.InfoWindowHotkey.Key && e.Modifier == Settings.SettingsHolder.InfoWindowHotkey.Modifier)
             {
                 if (WindowManager.Dashboard.IsVisible) WindowManager.Dashboard.HideWindow();
                 else WindowManager.Dashboard.ShowWindow();
             }
-            if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
+            else if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {
-                if (WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
-                else WindowManager.SkillConfigWindow.ShowWindow();
+                WindowManager.CooldownWindow.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
+                    else new SkillConfigWindow().ShowWindow();
+                }), DispatcherPriority.Background);
             }
+            else if (e.Key == Keys.R && e.Modifier == (ModifierKeys.Alt | ModifierKeys.Control))
+            {
+                if (!SessionManager.Logged
+                  || SessionManager.LoadingScreen
+                  || SessionManager.Combat
+                  || !Proxy.Proxy.IsConnected) return;
+
+                Proxy.Proxy.ReturnToLobby();
+            }
+
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             //{
-            //    if (!GroupWindowViewModel.Instance.AmILeader) return;
+            //    if (!WindowManager.GroupWindow.VM.AmILeader) return;
             //    if (!Proxy.Proxy.IsConnected) return;
             //    Proxy.Proxy.LootSettings();
             //}
-            
+
         }
 
 
@@ -104,10 +119,10 @@ namespace TCC
         }
         private void CheckHotkeys()
         {
-            WindowManager.FloatingButton.Dispatcher.Invoke(() =>
+            WindowManager.FloatingButton.Dispatcher.BeginInvoke(new Action(() =>
             {
                 SetHotkeys(!SessionManager.InGameChatOpen && FocusManager.IsForeground);
-            });
+            }), DispatcherPriority.Background);
         }
 
         private void Register()
@@ -117,6 +132,7 @@ namespace TCC
             RegisterHotKey(Settings.SettingsHolder.SettingsHotkey.Modifier, Settings.SettingsHolder.SettingsHotkey.Key);
             RegisterHotKey(Settings.SettingsHolder.LootSettingsHotkey.Modifier, Settings.SettingsHolder.LootSettingsHotkey.Key);
             RegisterHotKey(ModifierKeys.Control, Keys.K);
+            RegisterHotKey(ModifierKeys.Control | ModifierKeys.Alt, Keys.R);
             //RegisterHotKey(Settings.ShowAllHotkey.Modifier, Settings.ShowAllHotkey.Key);
 
             _isRegistered = true;

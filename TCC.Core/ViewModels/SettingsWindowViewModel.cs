@@ -97,7 +97,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.IgnoreMeInGroupWindow == value) return;
                 SettingsHolder.IgnoreMeInGroupWindow = value;
-                if (value) GroupWindowViewModel.Instance.RemoveMe();
+                if (value) WindowManager.GroupWindow.VM.RemoveMe();
                 N();
             }
         }
@@ -109,7 +109,62 @@ namespace TCC.ViewModels
                 if (SettingsHolder.IgnoreGroupBuffs == value) return;
                 SettingsHolder.IgnoreGroupBuffs = value;
                 N(nameof(HideBuffs));
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideBuffsThreshold
+        {
+            get => SettingsHolder.HideBuffsThreshold;
+            set
+            {
+                if (SettingsHolder.HideBuffsThreshold == value) return;
+                SettingsHolder.HideBuffsThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideDebuffsThreshold
+        {
+            get => SettingsHolder.HideDebuffsThreshold;
+            set
+            {
+                if (SettingsHolder.HideDebuffsThreshold == value) return;
+                SettingsHolder.HideDebuffsThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideHpThreshold
+        {
+            get => SettingsHolder.HideHpThreshold;
+            set
+            {
+                if (SettingsHolder.HideHpThreshold == value) return;
+                SettingsHolder.HideHpThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint HideMpThreshold
+        {
+            get => SettingsHolder.HideMpThreshold;
+            set
+            {
+                if (SettingsHolder.HideMpThreshold == value) return;
+                SettingsHolder.HideMpThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+            }
+        }
+        public uint DisableAbnormalitiesThreshold
+        {
+            get => SettingsHolder.DisableAbnormalitiesThreshold;
+            set
+            {
+                if (SettingsHolder.DisableAbnormalitiesThreshold == value) return;
+                SettingsHolder.DisableAbnormalitiesThreshold = value;
+                N();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public bool HideDebuffs
@@ -120,7 +175,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.IgnoreGroupDebuffs == value) return;
                 SettingsHolder.IgnoreGroupDebuffs = value;
                 N(nameof(HideDebuffs));
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public bool DisableAllPartyAbnormals
@@ -132,7 +187,7 @@ namespace TCC.ViewModels
                 SettingsHolder.DisablePartyAbnormals = value;
                 N(nameof(DisableAllPartyAbnormals));
                 MessageFactory.Update();
-                if (value) GroupWindowViewModel.Instance.ClearAllAbnormalities();
+                if (value) WindowManager.GroupWindow.VM.ClearAllAbnormalities();
             }
         }
         public bool AccurateHp
@@ -154,7 +209,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.BuffsDirection == value) return;
                 SettingsHolder.BuffsDirection = value;
-                BuffBarWindowViewModel.Instance.ExN(nameof(BuffBarWindowViewModel.Direction));
+                WindowManager.BuffWindow.VM.ExN(nameof(BuffBarWindowViewModel.Direction));
                 N(nameof(BuffsDirection));
             }
         }
@@ -187,7 +242,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.CooldownBarMode == value) return;
                 SettingsHolder.CooldownBarMode = value;
-                CooldownWindowViewModel.Instance.NotifyModeChanged();
+                WindowManager.CooldownWindow.VM.NotifyModeChanged();
                 N(nameof(CooldownBarMode));
             }
         }
@@ -277,7 +332,7 @@ namespace TCC.ViewModels
             set
             {
                 if (SettingsHolder.ChatTimestampSeconds == value) return;
-                SettingsHolder.ChatTimestampSeconds= value;
+                SettingsHolder.ChatTimestampSeconds = value;
                 N();
             }
 
@@ -311,7 +366,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.DisablePartyMP == value) return;
                 SettingsHolder.DisablePartyMP = value;
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 MessageFactory.Update();
                 N(nameof(DisableMP));
             }
@@ -323,7 +378,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.DisablePartyHP == value) return;
                 SettingsHolder.DisablePartyHP = value;
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 MessageFactory.Update();
                 N(nameof(DisableHP));
             }
@@ -335,7 +390,17 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.ShowAwakenIcon == value) return;
                 SettingsHolder.ShowAwakenIcon = value;
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                N();
+            }
+        }
+        public bool FpsAtGuardian
+        {
+            get => SettingsHolder.FpsAtGuardian;
+            set
+            {
+                if (SettingsHolder.FpsAtGuardian == value) return;
+                SettingsHolder.FpsAtGuardian = value;
                 N();
             }
         }
@@ -347,7 +412,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.ShowItemsCooldown == value) return;
                 SettingsHolder.ShowItemsCooldown = value;
-                CooldownWindowViewModel.Instance.NotifyItemsDisplay();
+                WindowManager.CooldownWindow.VM.NotifyItemsDisplay();
                 N();
             }
         }
@@ -400,7 +465,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.ShowGroupWindowDetails == value) return;
                 SettingsHolder.ShowGroupWindowDetails = value;
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 N(nameof(ShowGroupWindowDetails));
             }
         }
@@ -411,7 +476,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.ShowMembersLaurels == value) return;
                 SettingsHolder.ShowMembersLaurels = value;
-                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 N(nameof(ShowMembersLaurels));
             }
         }
@@ -524,7 +589,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.GroupSizeThreshold == value) return;
                 SettingsHolder.GroupSizeThreshold = value;
-                GroupWindowViewModel.Instance.NotifyThresholdChanged();
+                WindowManager.GroupWindow.VM.NotifyThresholdChanged();
                 N(nameof(GroupSizeThreshold));
             }
         }
@@ -539,7 +604,7 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.Cancel) return;
                 SettingsHolder.Npcap = value;
                 N();
-                if(res == MessageBoxResult.OK) App.Restart();
+                if (res == MessageBoxResult.OK) App.Restart();
             }
         }
         //public double ChatWindowOpacity
@@ -576,6 +641,7 @@ namespace TCC.ViewModels
             //if (Settings.GroupWindowSettings.Enabled) WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
             //if (Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
         }
+        public bool Experimental => App.Experimental;
 
         //private void ClassWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         //{
@@ -694,9 +760,13 @@ namespace TCC.ViewModels
                 if (SettingsHolder.CharacterWindowCompactMode == value) return;
                 SettingsHolder.CharacterWindowCompactMode = value;
                 N();
-                CharacterWindowViewModel.Instance.ExN(nameof(CharacterWindowViewModel.CompactMode));
-                WindowManager.CharacterWindow.Left = value ? WindowManager.CharacterWindow.Left + 175 :
-                    WindowManager.CharacterWindow.Left - 175;
+                WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.CompactMode));
+                WindowManager.CharacterWindow.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    WindowManager.CharacterWindow.Left = value 
+                    ? WindowManager.CharacterWindow.Left + 175 
+                    : WindowManager.CharacterWindow.Left - 175;
+                }), DispatcherPriority.Background);
 
             }
         }
@@ -709,7 +779,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowEdge == value) return;
                 SettingsHolder.WarriorShowEdge = value;
                 N();
-                if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowEdge));
+                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowEdge));
             }
         }
         public bool SorcererReplacesElementsInCharWindow
@@ -720,7 +790,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.SorcererReplacesElementsInCharWindow == value) return;
                 SettingsHolder.SorcererReplacesElementsInCharWindow = value;
                 N();
-                CharacterWindowViewModel.Instance.ExN(nameof(CharacterWindowViewModel.ShowElements));
+                WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.ShowElements));
             }
         }
 
@@ -732,7 +802,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowTraverseCut == value) return;
                 SettingsHolder.WarriorShowTraverseCut = value;
                 N();
-                if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowTraverseCut));
+                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowTraverseCut));
             }
         }
 
@@ -744,7 +814,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorEdgeMode == value) return;
                 SettingsHolder.WarriorEdgeMode = value;
                 N();
-                if (ClassWindowViewModel.Instance.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.WarriorEdgeMode));
+                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.WarriorEdgeMode));
             }
 
         }

@@ -2,8 +2,8 @@
 {
     public struct SystemMessage
     {
-        public readonly string Message;
-        public readonly int ChatChannel;
+        public string Message { get; }
+        public int ChatChannel { get; }
 
         public SystemMessage(string s, int ch)
         {

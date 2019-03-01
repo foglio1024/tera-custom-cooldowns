@@ -7,18 +7,23 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Parsing;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
 
@@ -268,9 +273,70 @@ namespace TCC
             var n = value / maxValue;
             return n;
         }
+
+        public static WebClient GetDefaultWebClient()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            var ret = new WebClient();
+            ret.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+            return ret;
+
+        }
+
+        public static string GenerateFileHash(string fileName)
+        {
+            if (!File.Exists(fileName)) return "";
+            byte[] fileBuffer = new byte[1];
+            try
+            {
+                fileBuffer = File.ReadAllBytes(fileName);
+            }
+            catch
+            {
+                Log.F($"Failed to check hash on file {fileName}");
+                return "";
+            }
+            //var file = File.Open(fileName, FileMode.Open);
+            //var fileBuffer = new byte[file.Length];
+            //file.Read(fileBuffer, 0, (int)file.Length);
+            //file.Close();
+            return StringUtils.ByteArrayToString(SHA256.Create().ComputeHash(fileBuffer));
+
+        }
+
+        public static bool IsFileLocked(string filename, FileAccess file_access)
+        {
+            // Try to open the file with the indicated access.
+            try
+            {
+                var fs = new FileStream(filename, FileMode.Open, file_access);
+                fs.Close();
+                return false;
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
-
+    public static class ListExtensions
+    {
+        public static string ToCSV(this IList list)
+        {
+            var sb = new StringBuilder();
+            foreach (var val in list)
+            {
+                sb.Append(val.ToString());
+                if (list.IndexOf(val) < list.Count - 1) sb.Append(',');
+            }
+            return sb.ToString();
+        }
+    }
     public static class UInt64Extensions
     {
         public static bool IsMe(this ulong val)
@@ -291,8 +357,20 @@ namespace TCC
         public static void RefreshTemplate(this ItemsControl el, string resName)
         {
             if (el == null) return;
-            el.ItemTemplateSelector = null;
-            el.ItemTemplateSelector = Application.Current.FindResource(resName) as DataTemplateSelector;
+            el.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                el.ItemTemplateSelector = null;
+                el.ItemTemplateSelector = Application.Current.FindResource(resName) as DataTemplateSelector;
+            }), DispatcherPriority.Background);
+        }
+        public static void RefreshTemplate(this ItemsControl el, DataTemplateSelector selector)
+        {
+            if (el == null) return;
+            el.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                el.ItemTemplateSelector = null;
+                el.ItemTemplateSelector = selector;
+            }), DispatcherPriority.Background);
         }
     }
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
@@ -340,6 +418,13 @@ namespace TCC
             else
                 dotIt();
         }
+        public static void BeginInvokeIfRequired(this Dispatcher disp, Action dotIt, DispatcherPriority priority)
+        {
+            if (disp.Thread != Thread.CurrentThread)
+                disp.BeginInvoke(dotIt, priority);
+            else
+                dotIt();
+        }
     }
     public class TSPropertyChanged : INotifyPropertyChanged
     {
@@ -356,7 +441,7 @@ namespace TCC
         protected void N([CallerMemberName] string v = null)
         {
             if (Dispatcher == null) SetDispatcher(App.BaseDispatcher);
-            Dispatcher.InvokeIfRequired(() =>
+            Dispatcher.BeginInvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
 
@@ -369,16 +454,17 @@ namespace TCC
     {
         private readonly Dispatcher _dispatcher;
         private readonly ReaderWriterLockSlim _lock;
-
         public SynchronizedObservableCollection()
         {
-            _dispatcher = App.BaseDispatcher;
+            _dispatcher = Dispatcher.CurrentDispatcher;
             _lock = new ReaderWriterLockSlim();
+            BindingOperations.EnableCollectionSynchronization(this, _lock);
         }
         public SynchronizedObservableCollection(Dispatcher d)
         {
-            _dispatcher = d;
+            _dispatcher = d ?? Dispatcher.CurrentDispatcher;
             _lock = new ReaderWriterLockSlim();
+            BindingOperations.EnableCollectionSynchronization(this, _lock);
         }
         protected override void ClearItems()
         {
@@ -397,8 +483,7 @@ namespace TCC
         }
         protected override void InsertItem(int index, T item)
         {
-            var disp = _dispatcher == null ? App.BaseDispatcher : _dispatcher;
-            disp.InvokeIfRequired(() =>
+            _dispatcher.InvokeIfRequired(() =>
             {
                 if (index > Count)
                     return;
@@ -465,14 +550,28 @@ namespace TCC
                 }
             }, DispatcherPriority.DataBind);
         }
-        public T[] ToSyncArray()
+        //public T[] ToSyncArray()
+        //{
+        //    _lock.EnterReadLock();
+        //    try
+        //    {
+        //        var array = new T[Count];
+        //        CopyTo(array, 0);
+        //        return array;
+        //    }
+        //    finally
+        //    {
+        //        _lock.ExitReadLock();
+        //    }
+        //}
+        public List<T> ToSyncList()
         {
             _lock.EnterReadLock();
             try
             {
-                var array = new T[Count];
-                CopyTo(array, 0);
-                return array;
+                var list = new List<T>();
+                list.AddRange(this);
+                return list;
             }
             finally
             {
@@ -501,5 +600,78 @@ namespace TCC
             t.Stop();
             t.Start();
         }
+    }
+
+    public static class WindowCollectionExtensions
+    {
+        public static List<Window> ToList(this WindowCollection wc)
+        {
+            var ret = new Window[wc.Count];
+            wc.CopyTo(ret, 0);
+            return ret.ToList();
+
+        }
+    }
+
+    public static class ContextMenuLeftClickBehavior
+    {
+        public static bool GetIsLeftClickEnabled(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsLeftClickEnabledProperty);
+        }
+
+        public static void SetIsLeftClickEnabled(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsLeftClickEnabledProperty, value);
+        }
+
+        public static readonly DependencyProperty IsLeftClickEnabledProperty = DependencyProperty.RegisterAttached(
+            "IsLeftClickEnabled",
+            typeof(bool),
+            typeof(ContextMenuLeftClickBehavior),
+            new UIPropertyMetadata(false, OnIsLeftClickEnabledChanged));
+
+        private static void OnIsLeftClickEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var uiElement = sender as UIElement;
+
+            if (uiElement != null)
+            {
+                bool IsEnabled = e.NewValue is bool && (bool)e.NewValue;
+
+                if (IsEnabled)
+                {
+                    if (uiElement is ButtonBase)
+                        ((ButtonBase)uiElement).Click += OnMouseLeftButtonUp;
+                    else
+                        uiElement.MouseLeftButtonUp += OnMouseLeftButtonUp;
+                }
+                else
+                {
+                    if (uiElement is ButtonBase)
+                        ((ButtonBase)uiElement).Click -= OnMouseLeftButtonUp;
+                    else
+                        uiElement.MouseLeftButtonUp -= OnMouseLeftButtonUp;
+                }
+            }
+        }
+
+        private static void OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
+        {
+            var fe = sender as FrameworkElement;
+            if (fe != null)
+            {
+                // if we use binding in our context menu, then it's DataContext won't be set when we show the menu on left click
+                // (it seems setting DataContext for ContextMenu is hardcoded in WPF when user right clicks on a control, although I'm not sure)
+                // so we have to set up ContextMenu.DataContext manually here
+                if (fe.ContextMenu.DataContext == null)
+                {
+                    fe.ContextMenu.SetBinding(FrameworkElement.DataContextProperty, new Binding { Source = fe.DataContext });
+                }
+
+                fe.ContextMenu.IsOpen = true;
+            }
+        }
+
     }
 }

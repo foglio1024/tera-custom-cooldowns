@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:BossGageWindowViewModel}">
     <StackPanel Width="Auto" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Stretch" 
                 Orientation="Horizontal"
                 >
         <ItemsControl Name="Bosses" 
@@ -18,7 +18,7 @@
                       <!--TODO: Medium sized datatemplate?-->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="Auto"
+                    <StackPanel Width="Auto"
                                Orientation="Vertical"
                                MaxHeight="340"
                                Background="Transparent"/>
@@ -46,16 +46,14 @@
 
         <ItemsControl Name="GuildTowers" 
                       ItemTemplate="{StaticResource GuildTowerTemplate}"
-                      ItemsSource="{Binding Instance.GuildTowers}"
+                      ItemsSource="{Binding GuildTowers}"
 
                       Width="Auto"
                       HorizontalAlignment="Left">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" 
-                               ItemHeight="Auto" 
+                    <StackPanel Orientation="Vertical" 
                                MaxHeight="100" 
-                               ItemWidth="Auto" 
                                Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

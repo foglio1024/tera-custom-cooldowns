@@ -257,14 +257,14 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="SimpleTemplate" DataType="chat:MessagePiece">
-        <Grid>
+        <Grid UseLayoutRounding="True">
             <Border BorderBrush="{Binding Color}" 
                     Visibility="{Binding IsHovered, Converter={StaticResource BooleanToVisibilityConverter}}"
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch"
                      BorderThickness="0 0 0 2"
                     />            
-            <ctrl:OutlinedTextBlock Fill="{Binding Color}"
+            <!--<ctrl:OutlinedTextBlock Fill="{Binding Color}"
                                     Text="{Binding Text}" 
                                     Cursor="{Binding Type, Converter={StaticResource MessageTypeToCursor}}"
                                     Stroke="#9000"
@@ -278,6 +278,18 @@
                                     HorizontalAlignment="Stretch"
                                     TextTrimming="None"
                                     Margin="{Binding Spaces}"
+                                />-->
+            <TextBlock Foreground="{Binding Color}"
+                                    Text="{Binding Text}" 
+                                    Cursor="{Binding Type, Converter={StaticResource MessageTypeToCursor}}"
+                                    FontSize="{Binding Size}"
+                                    FontFamily="{StaticResource NotoSansMed}"
+                                    TextWrapping="Wrap"
+                                    FontWeight="Normal"
+                                    Opacity="1"
+                                    Width="Auto"
+                                    HorizontalAlignment="Stretch"
+                                    TextTrimming="None"
                                 />
         </Grid>
     </DataTemplate>
@@ -378,7 +390,7 @@
 
     <!--Author label templates-->
     <DataTemplate x:Key="DefaultAuthorTemplate" DataType="chat:ChatMessage">
-        <ctrl:OutlinedTextBlock  Margin="3,0,3,0" 
+        <!--<ctrl:OutlinedTextBlock  Margin="3,0,3,0" 
                         Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
                         FontSize="{Binding Size}"
                         HorizontalAlignment="Stretch"
@@ -394,18 +406,38 @@
                         TextTrimming="CharacterEllipsis"
                         Stroke="#9000"
                         StrokeThickness="3"                       
+                        />-->
+        <TextBlock  Margin="3,0,3,0" 
+                        Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
+                        FontSize="{Binding Size}"
+                        HorizontalAlignment="Stretch"
+                        TextAlignment="Left"
+                        FontWeight="Normal"
+                        FontFamily="{StaticResource NotoSansMed}"
+                        Width="Auto"
+                        MinWidth="0"
+                        UseLayoutRounding="True"
+                        Opacity=".9"
+                        Text="{Binding Author}"
+                        Cursor="Hand"
+                        TextTrimming="CharacterEllipsis"
                         />
 
     </DataTemplate>
     <DataTemplate x:Key="SystemAuthorTemplate" DataType="chat:ChatMessage">
-        <Ellipse Width="6"
-                     Height="6"
-                     Margin="3 5"
+        <Grid>
+            <Rectangle Width="7"
+                     Height="7"
+                     Margin="3 5 3 0"
+                   RenderTransformOrigin=".5 .5"
+                   RenderTransform="{StaticResource Rotate45}"
                  VerticalAlignment="Center"
-HorizontalAlignment="Center"
+                HorizontalAlignment="Center"
                  Opacity=".5"
                      Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                      />
+
+        </Grid>
     </DataTemplate>
     <DataTemplate x:Key="LfgTemplate">
         <chatCtrl:LFGcontrol Margin="1"/>
@@ -660,7 +692,7 @@ HorizontalAlignment="Center"
 
                        TextAlignment="Center">
                 <TextBlock.RenderTransform>
-                    <TranslateTransform X="0" Y="4"></TranslateTransform>
+                    <TranslateTransform X="0" Y="4"/>
                 </TextBlock.RenderTransform>
 
             </TextBlock>

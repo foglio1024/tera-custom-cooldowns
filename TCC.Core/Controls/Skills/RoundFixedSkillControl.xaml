@@ -75,10 +75,11 @@
                            VerticalAlignment="Center" 
                            TextAlignment="Center"
                            FontSize="15" 
+                           FontWeight="DemiBold"
                            x:Name="Number" 
                            Opacity="1" 
-                           FontFamily="{StaticResource ArialMonoBold}"
                            Margin="0,0"
+                           
                            Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=skills:RoundFixedSkillControl}, Mode=OneWay}"
                 />
 

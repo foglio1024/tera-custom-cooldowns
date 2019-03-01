@@ -20,6 +20,7 @@ namespace TCC.Controls.NPCs
         private readonly DispatcherTimer _numberTimer;
 
         public event Action EnragedChanged;
+        public event Action ReEnraged;
 
         public ObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
         public string MainPercInt => (Convert.ToInt32(Math.Floor(NPC.HPFactor * 100))).ToString();
@@ -84,7 +85,21 @@ namespace TCC.Controls.NPCs
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
+                    //return $"{NextEnrageTime:0.0}s";
                 }
+            }
+        }
+        public string RhombEnrageTimerText
+        {
+            get
+            {
+                return NPC.Enraged
+                        ? NPC.EnragePattern.StaysEnraged
+                            ? "∞"
+                            : NPC.EnragePattern.Duration != 0
+                                ? $"{CurrentEnrageTime}"
+                                : "-"
+                        : "";
             }
         }
         private int _curEnrageTime;
@@ -98,6 +113,8 @@ namespace TCC.Controls.NPCs
                     _curEnrageTime = value;
                     N();
                     N(nameof(EnrageTBtext));
+                    N(nameof(RhombEnrageTimerText));
+
                 }
             }
         }
@@ -112,6 +129,30 @@ namespace TCC.Controls.NPCs
                 N();
             }
         }
+
+        private double _prevHpPerc;
+        private DateTime _prevTimestamp;
+        private double _nextEnrageTime;
+        //public double NextEnrageTime
+        //{
+        //    get
+        //    {
+        //        var diff = _prevHpPerc - CurrentPercentage;
+        //        _prevHpPerc = CurrentPercentage;
+        //        if (diff < 0) { return _nextEnrageTime; }
+        //        var now = DateTime.Now;
+        //        var timeDiff = now - _prevTimestamp;
+        //        _prevTimestamp = now;
+        //        var percLeft = CurrentPercentage - NextEnragePercentage;
+
+        //        var dps = (diff / timeDiff.TotalMilliseconds) * 1000;
+        //        if (dps == 0) return _nextEnrageTime;
+
+        //        var newVal = (.7 * _nextEnrageTime + .3 * percLeft / dps);
+        //        if (!double.IsNaN(newVal)) _nextEnrageTime = newVal;
+        //        return _nextEnrageTime;
+        //    }
+        //}
 
         public BossViewModel(NPC npc) : base(npc)
         {
@@ -133,7 +174,7 @@ namespace TCC.Controls.NPCs
             NPC.PropertyChanged += OnPropertyChanged;
             NPC.DeleteEvent += () =>
             {
-                BossGageWindowViewModel.Instance.RemoveMe(NPC, Delay + 250);
+                WindowManager.BossWindow.VM.RemoveMe(NPC, Delay + 250);
                 _deleteTimer.Start();
                 _numberTimer.Stop();
             };
@@ -145,7 +186,7 @@ namespace TCC.Controls.NPCs
             }
 
         }
-
+        private bool _addEnrageItem = true;
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -153,8 +194,16 @@ namespace TCC.Controls.NPCs
                 case nameof(NPC.CurrentHP):
                     if (NPC.Enraged)
                     {
-                        if (EnrageHistory.Count > 0) EnrageHistory.Last().SetEnd(CurrentPercentage);
-                        N(nameof(EnrageHistory));
+                        if (_addEnrageItem)
+                        {
+                            EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
+                            _addEnrageItem = false;
+                        }
+                        if (EnrageHistory.Count > 0)
+                        {
+                            EnrageHistory.Last().SetEnd(CurrentPercentage);
+                            //N(nameof(EnrageHistory));
+                        }
                     }
                     InvokeHpChanged();
                     N(nameof(EnrageTBtext));
@@ -170,11 +219,14 @@ namespace TCC.Controls.NPCs
                     if (NPC.Enraged)
                     {
                         EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
+                        _addEnrageItem = false;
                         _numberTimer.Refresh();
-                        N(nameof(EnrageHistory));
+                        N(nameof(RhombEnrageTimerText));
+                        //N(nameof(EnrageHistory));
                     }
                     else
                     {
+                        _addEnrageItem = true;
                         _serverSentEnrage = false;
                         _numberTimer?.Stop();
                         NextEnragePercentage = CurrentPercentage - NPC.EnragePattern.Percentage;
@@ -189,6 +241,7 @@ namespace TCC.Controls.NPCs
                         NPC.EnragePattern.Duration = NPC.RemainingEnrageTime / 1000;
                         _serverSentEnrage = true;
                     }
+                    if (CurrentEnrageTime < NPC.RemainingEnrageTime / 1000) ReEnraged?.Invoke();
                     _numberTimer.Refresh();
                     CurrentEnrageTime = NPC.RemainingEnrageTime / 1000;
                     N(nameof(EnrageTBtext));

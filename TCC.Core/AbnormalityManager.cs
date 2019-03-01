@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using TCC.ViewModels;
 
 namespace TCC
 {
@@ -66,7 +66,7 @@ namespace TCC
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!Settings.SettingsHolder.DisablePartyAbnormals)
                 {
-                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+                    WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
             }
             else
@@ -81,7 +81,7 @@ namespace TCC
         {
             if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (target.IsMe()) EndPlayerAbnormality(ab);
-            else BossGageWindowViewModel.Instance.EndNpcAbnormality(target, ab);
+            else WindowManager.BossWindow.VM.EndNpcAbnormality(target, ab);
 
             return true;
         }
@@ -114,9 +114,8 @@ namespace TCC
             {
                 SkillManager.AddPassivitySkill(ab.Id, passivity);
             }
-            else if (CooldownWindowViewModel.Instance.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id) ||
-                CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
-
+            else if (WindowManager.CooldownWindow.VM.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
+                  || WindowManager.CooldownWindow.VM.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
             {
                 //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
                 SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
@@ -125,7 +124,7 @@ namespace TCC
 
         private static void EndPlayerAbnormality(Abnormality ab)
         {
-            GroupWindowViewModel.Instance.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+            WindowManager.GroupWindow.VM.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
 
             if (ab.Type == AbnormalityType.Buff)
             {
@@ -157,33 +156,39 @@ namespace TCC
             //{
             //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
             //}
-            BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
+            WindowManager.BossWindow.VM.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
         }
 
         private static bool Filter(Abnormality ab)
         {
-            return ab.IsShow &&
-                   !ab.Name.Contains("BTS") &&
-                   !ab.ToolTip.Contains("BTS") &&
-                   (
-                   !ab.Name.Contains("(Hidden)") &&
-                   !ab.Name.Equals("Unknown") &&
-                   !ab.Name.Equals(string.Empty)
+            return  ab.IsShow 
+                && !ab.Name.Contains("BTS") 
+                && !ab.ToolTip.Contains("BTS") 
+                && (    
+                       !ab.Name.Contains("(Hidden)") 
+                    && !ab.Name.Equals("Unknown") 
+                    && !ab.Name.Equals(string.Empty)
                    );
         }
 
-        public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
+        public static void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
-            if (!Filter(ab)) return;
-            GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
+            WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!Filter(ab)) return;
+                WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
+            }));
         }
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
-            if (!Filter(ab)) return;
-            GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);
+            WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!Filter(ab)) return;
+                WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
+            }));
         }
     }
 }

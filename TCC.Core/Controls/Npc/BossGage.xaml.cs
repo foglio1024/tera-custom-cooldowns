@@ -93,12 +93,10 @@ namespace TCC.Controls.NPCs
             if (VM.NPC.Enraged)
             {
                 SlideEnrageIndicator(VM.CurrentPercentage);
-                EnrageBorder.BeginAnimation(OpacityProperty, _flash);
+                //EnrageBorder.BeginAnimation(OpacityProperty, _flash);
                 if (!VM.NPC.EnragePattern.StaysEnraged)
-               {
+                {
                     _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
-                    Log.All($"Starting animation with duration {_enrageArcAnimation.Duration}");
-                    Log.All($"Remaining E time {VM.RemainingPercentage} - {VM.NPC.RemainingEnrageTime}");
                     EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
                 }
             }
@@ -125,6 +123,7 @@ namespace TCC.Controls.NPCs
             _firstLoad = false;
             VM.HpFactorChanged += OnHpChanged;
             VM.EnragedChanged += OnEnragedChanged;
+            VM.ReEnraged += OnReEnraged;
             VM.Disposed += OnDispose;
             if (VM.NPC.TimerPattern != null) VM.NPC.TimerPattern.Started += AnimateTimer;
 
@@ -133,6 +132,12 @@ namespace TCC.Controls.NPCs
             SlideEnrageIndicator(VM.NextEnragePercentage);
 
 
+        }
+
+        private void OnReEnraged()
+        {
+            _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
+            EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
         }
 
         private void OnDispose()
@@ -146,12 +151,13 @@ namespace TCC.Controls.NPCs
 
         private void AnimateFadeOut()
         {
-            LayoutTransform = new ScaleTransform { ScaleY = 0 };
-            LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _fadeAnim);
-
-            BossNameGrid.BeginAnimation(OpacityProperty, _fadeAnim);
-            HpBarGrid.BeginAnimation(OpacityProperty, _fadeAnim);
-            TopInfoGrid.BeginAnimation(OpacityProperty, _fadeAnim);
+            _fadeAnim.Duration = TimeSpan.FromMilliseconds(500);
+            //LayoutTransform = new ScaleTransform { ScaleY = 1 };
+            //LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _fadeAnim);
+            //this.BeginAnimation(OpacityProperty, _fadeAnim);            
+            //BossNameGrid.BeginAnimation(OpacityProperty, _fadeAnim);
+            //HpBarGrid.BeginAnimation(OpacityProperty, _fadeAnim);
+            //TopInfoGrid.BeginAnimation(OpacityProperty, _fadeAnim);
             BeginAnimation(OpacityProperty, _fadeAnim);
         }
 

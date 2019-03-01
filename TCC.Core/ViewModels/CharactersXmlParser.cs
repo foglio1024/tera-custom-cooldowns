@@ -50,6 +50,7 @@ namespace TCC.Data
         private const string AmountTag = "amount";
         private const string ServerTag = "server";
         private const string SlotTag = "slot";
+        private const string HiddenTag = "hidden";
 
 
         private readonly string _path = Path.Combine(App.BasePath, "resources/config/characters.xml");
@@ -58,7 +59,7 @@ namespace TCC.Data
         public static XDocument BuildCharacterFile(SynchronizedObservableCollection<Character> list)
         {
             var root = new XElement(CharactersTag, new XAttribute(EliteTag, SessionManager.IsElite));
-            list.ToSyncArray().ToList().ForEach(c =>
+            list.ToSyncList().ForEach(c =>
             {
                 var xChar = BuildGeneralDataXelement(c);
                 xChar.Add(BuildDungeonDataXelement(c));
@@ -87,7 +88,7 @@ namespace TCC.Data
         private static XElement BuildGearDataXelement(Character c)
         {
             var xGear = new XElement(GearPiecesTag);
-            c.Gear.ToSyncArray().ToList().ForEach(item =>
+            c.Gear.ToSyncList().ForEach(item =>
             {
                 xGear.Add(new XElement(GearTag,
                     new XAttribute(IdTag, item.Id),
@@ -118,13 +119,14 @@ namespace TCC.Data
                 new XAttribute(DragonwingScalesTag, c.DragonwingScales),
                 new XAttribute(LevelTag, c.Level),
                 new XAttribute(ItemLevelTag, c.ItemLevel),
+                new XAttribute(HiddenTag, c.Hidden),
                 new XAttribute(PiecesOfDragonScrollTag, c.PiecesOfDragonScroll)
             );
         }
         private static XElement BuildDungeonDataXelement(Character c)
         {
             var xDungeons = new XElement(DungeonsTag);
-            c.Dungeons.ToSyncArray().ToList().ForEach(dungCd =>
+            c.Dungeons.ToSyncList().ForEach(dungCd =>
             {
                 xDungeons.Add(new XElement(DungeonTag,
                     new XAttribute(IdTag, dungCd.Dungeon.Id),
@@ -169,6 +171,7 @@ namespace TCC.Data
                 else if (attr.Name == LastLocationTag) ch.LastLocation = new Location(attr.Value);
                 else if (attr.Name == GuildNameTag) ch.GuildName = attr.Value;
                 else if (attr.Name == ServerTag) ch.ServerName = attr.Value;
+                else if (attr.Name == HiddenTag) ch.Hidden = bool.Parse(attr.Value);
             });
         }
         private static void ParseDungeonCharInfo(XElement xChar, Character ch)

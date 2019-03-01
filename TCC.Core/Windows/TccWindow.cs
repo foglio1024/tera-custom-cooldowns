@@ -10,6 +10,18 @@ namespace TCC.Windows
     {
         public event Action Hidden;
         public event Action Showed;
+
+        public TccWindow()
+        {
+            Closing += OnClosing;
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            HideWindow();
+        }
+
         public void HideWindow()
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));

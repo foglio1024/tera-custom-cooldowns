@@ -9,13 +9,11 @@
         xmlns:c="clr-namespace:TCC.Controls"
         xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
         mc:Ignorable="d"
-        Title="HPbar" 
+        Title="TCC Character" 
         Style="{StaticResource BaseWindowStyle}"
+        d:DataContext="{d:DesignInstance vm:CharacterWindowViewModel}"
         MouseLeftButtonDown="Drag"
         >
-    <w:TccWidget.DataContext>
-        <vm:CharacterWindowViewModel/>
-    </w:TccWidget.DataContext>
     <w:TccWidget.Resources>
         <converters:ClassToReColorConverter x:Key="ReColorConverter"/>
         <Style TargetType="Border">
@@ -48,7 +46,7 @@
                 <Grid.Style>
                     <Style TargetType="Grid">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Instance.CompactMode}" Value="True">
+                            <DataTrigger Binding="{Binding CompactMode}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
@@ -77,10 +75,23 @@
                 <!--HP-->
                 <Border RenderTransform="{StaticResource Skew45Inv}" Padding="3 2" >
                     <Grid x:Name="HpGrid">
-                        <Border VerticalAlignment="Top" BorderThickness="0"  Margin="0" Opacity=".65">
-                            <Border.Background>
+                        <!--<Grid.Resources>
+                            <Style TargetType="Line">
+                                <Setter Property="X1" Value="0"/>
+                                <Setter Property="Y1" Value="0"/>
+                                <Setter Property="X2" Value="0"/>
+                                <Setter Property="Y2" Value="12"/>
+                                <Setter Property="Stroke" Value="#9000"/>
+                                <Setter Property="StrokeThickness" Value="2"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>-->
+                        <Border VerticalAlignment="Top" BorderThickness="0" Background="White"
+                                Margin="0" Opacity=".7">
+                            <!--<Border.Background>
                                 <SolidColorBrush Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"/>
-                            </Border.Background>
+                            </Border.Background>-->
                             <FrameworkElement x:Name="HpGovernorWhite" HorizontalAlignment="Stretch" 
                                               Width="{Binding ElementName=HpGrid, Path=ActualWidth}">
                                 <FrameworkElement.LayoutTransform>
@@ -94,7 +105,7 @@
                                         <Setter Property="HorizontalAlignment" Value="Left"/>
                                     </Style.Setters>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                        <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"/>
                                             <Setter Property="Height" Value="10"/>
                                         </DataTrigger>
@@ -102,7 +113,6 @@
                                 </Style>
                             </Border.Style>
                         </Border>
-
                         <Border VerticalAlignment="Top" BorderThickness="0"  Margin="0" Opacity="1">
                             <FrameworkElement x:Name="HpGovernor" HorizontalAlignment="Stretch" 
                                               Width="{Binding ElementName=HpGrid, Path=ActualWidth}">
@@ -118,21 +128,21 @@
                                         <Setter Property="Background">
                                             <Setter.Value>
                                                 <LinearGradientBrush EndPoint="1 0">
-                                                    <GradientStop Offset=".6" Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                                    <GradientStop Offset="1" Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                    <GradientStop Offset=".6" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
+                                                    <GradientStop Offset="1" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
                                                 </LinearGradientBrush>
                                             </Setter.Value>
                                         </Setter>
                                     </Style.Setters>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                        <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"/>
                                             <Setter Property="Height" Value="10"/>
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1 0">
-                                                        <GradientStop Offset=".4" Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                                        <GradientStop Offset="0" Color="{Binding Instance.Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                        <GradientStop Offset=".4" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
+                                                        <GradientStop Offset="0" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
                                                     </LinearGradientBrush>
                                                 </Setter.Value>
                                             </Setter>
@@ -151,7 +161,7 @@
                                 <Setter Property="Width" Value="350"/>
                             </Style.Setters>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="0 50 0 0"/>
                                     <Setter Property="Width" Value="300"/>
@@ -161,7 +171,7 @@
                     </Border.Style>
                 </Border>
                 <!--SH-->
-                <Border Visibility="{Binding Instance.Player.HasShield, Converter={StaticResource BoolToVisibleCollapsed}}" 
+                <Border Visibility="{Binding Player.HasShield, Converter={StaticResource BoolToVisibleCollapsed}}" 
                     Padding="3 2" >
                     <Grid x:Name="ShGrid">
                         <Border VerticalAlignment="Top" BorderThickness="0" Height="8" Margin="0" >
@@ -185,7 +195,7 @@
                                     </Style.Setters>
 
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                        <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"></Setter>
                                             <Setter Property="Background">
                                                 <Setter.Value>
@@ -211,7 +221,7 @@
                                 <Setter Property="Margin" Value="-33 16 33 0"/>
                             </Style.Setters>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Width" Value="300"/>
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="14 65 -14 0"/>
@@ -236,7 +246,7 @@
                                                 <Setter Property="Height" Value="12"/>
                                             </Style.Setters>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                                     <Setter Property="Height" Value="10"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -257,7 +267,7 @@
                                                 <Setter Property="Height" Value="12"/>
                                             </Style.Setters>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                                     <Setter Property="Height" Value="10"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -281,7 +291,7 @@
                             <Grid>
                                 <Border Background="#ddd" BorderBrush="#aaa" VerticalAlignment="Top" BorderThickness="0"
                                     HorizontalAlignment="Left" Height="5" Margin="0 3 0 0"  Opacity=".3"
-                                    Visibility="{Binding Instance.Player.Class, Converter={StaticResource StaminaVisConv}}">
+                                    Visibility="{Binding Player.Class, Converter={StaticResource StaminaVisConv}}">
                                     <FrameworkElement x:Name="StGovernorWhite" HorizontalAlignment="Stretch" Width="{Binding ElementName=MpReGrid, Path=ActualWidth}">
                                         <FrameworkElement.LayoutTransform>
                                             <ScaleTransform ScaleX="1"/>
@@ -290,7 +300,7 @@
                                 </Border>
                                 <Border Background="#ddd" BorderBrush="#aaa" VerticalAlignment="Top" BorderThickness="0"
                                     HorizontalAlignment="Left" Height="5" Margin="0 3 0 0" 
-                                    Visibility="{Binding Instance.Player.Class, Converter={StaticResource StaminaVisConv}}">
+                                    Visibility="{Binding Player.Class, Converter={StaticResource StaminaVisConv}}">
                                     <FrameworkElement x:Name="StGovernor" HorizontalAlignment="Stretch" Width="{Binding ElementName=MpReGrid, Path=ActualWidth}">
                                         <FrameworkElement.LayoutTransform>
                                             <ScaleTransform ScaleX="1"/>
@@ -306,7 +316,7 @@
                                 <Setter Property="Width" Value="350"/>
                             </Style.Setters>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Width" Value="300"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -319,13 +329,13 @@
                 <!--Player Info-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 35" VerticalAlignment="Bottom" >
                     <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="Lv." Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Instance.Player.Name}" 
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Player.Name}" 
                                          Fill="#eee" StrokeThickness="3" Stroke="#7000"  FontSize="16" FontFamily="{StaticResource Frutiger}"/>
                     <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level"></Path>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.ItemLevel}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.ItemLevel}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <Path Data="{StaticResource SvgCrossedSwords}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Current crit factor"></Path>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.CritFactor, StringFormat={}{0:0}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000" 
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CritFactor, StringFormat={}{0:0}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000" 
                                          FontSize="14" FontFamily="{StaticResource Frutiger}" Margin="0 0 -300 0"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel"  >
@@ -333,8 +343,8 @@
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Instance.Player.HasShield}" Value="True"/>
-                                        <Condition Binding="{Binding Instance.CompactMode}" Value="True"/>
+                                        <Condition Binding="{Binding Player.HasShield}" Value="True"/>
+                                        <Condition Binding="{Binding CompactMode}" Value="True"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="Opacity" Value=".5"/>
@@ -348,8 +358,8 @@
                                 </MultiDataTrigger>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Instance.Player.HasShield}" Value="False"/>
-                                        <Condition Binding="{Binding Instance.CompactMode}" Value="False"/>
+                                        <Condition Binding="{Binding Player.HasShield}" Value="False"/>
+                                        <Condition Binding="{Binding CompactMode}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="RenderTransform">
@@ -363,8 +373,8 @@
                                 </MultiDataTrigger>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Instance.Player.HasShield}" Value="False"/>
-                                        <Condition Binding="{Binding Instance.CompactMode}" Value="True"/>
+                                        <Condition Binding="{Binding Player.HasShield}" Value="False"/>
+                                        <Condition Binding="{Binding CompactMode}" Value="True"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="RenderTransform">
@@ -376,8 +386,8 @@
                                 </MultiDataTrigger>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Instance.Player.HasShield}" Value="True"/>
-                                        <Condition Binding="{Binding Instance.CompactMode}" Value="False"/>
+                                        <Condition Binding="{Binding Player.HasShield}" Value="True"/>
+                                        <Condition Binding="{Binding CompactMode}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="RenderTransform">
@@ -396,7 +406,7 @@
                 </StackPanel>
 
                 <!--HP Perc-->
-                <c:OutlinedTextBlock VerticalAlignment="Center" Text="{Binding Instance.Player.HpFactor, StringFormat=0.# %}" 
+                <c:OutlinedTextBlock VerticalAlignment="Center" Text="{Binding Player.HpFactor, StringFormat=0.# %}" 
                                      Fill="#eee" StrokeThickness="4" Stroke="#4000" FontSize="16" FontFamily="{StaticResource Frutiger}">
                     <c:OutlinedTextBlock.Style>
                         <Style TargetType="c:OutlinedTextBlock">
@@ -404,7 +414,7 @@
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0 0 30 20"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="0 0 0 13"/>
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -416,8 +426,8 @@
                     </c:OutlinedTextBlock.Style>
                 </c:OutlinedTextBlock>
                 <!--RE Info-->
-                <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Instance.Player.CurrentST}" 
-                                     Visibility="{Binding Instance.Player.Class, Converter={StaticResource StaminaVisConv}}"
+                <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CurrentST}" 
+                                     Visibility="{Binding Player.Class, Converter={StaticResource StaminaVisConv}}"
                                      Fill="#eee" StrokeThickness="3" Stroke="#3000" FontSize="16" FontFamily="{StaticResource Frutiger}">
                     <c:OutlinedTextBlock.Style>
                         <Style TargetType="c:OutlinedTextBlock">
@@ -425,7 +435,7 @@
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0 0 28 5"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Margin" Value="0 0 25 7"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -436,11 +446,11 @@
 
                 <!--HP Info-->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="0 -2 0 0" Text="{Binding Instance.Player.TotalHP}" 
+                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="0 -2 0 0" Text="{Binding Player.TotalHP}" 
                                         Fill="#eee" StrokeThickness="4" Stroke="#4000" FontSize="16" FontFamily="{StaticResource Frutiger}"/>
                     <c:OutlinedTextBlock VerticalAlignment="Top" Margin="3 0 2 0" Text="/" 
                                         Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="0 0 0 0" Text="{Binding Instance.Player.MaxHP}" 
+                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="0 0 0 0" Text="{Binding Player.MaxHP}" 
                                         Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -448,7 +458,7 @@
                             <Setter Property="Margin" Value="0 -18 0 0"/>
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="0 -11 5 0"/>
                                     <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -460,18 +470,18 @@
 
                 <!--MP Info-->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="2">
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 -2" Text="{Binding Instance.Player.CurrentMP}" 
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 -2" Text="{Binding Player.CurrentMP}" 
                                          Fill="#eee" StrokeThickness="4" Stroke="#4000" FontSize="16" FontFamily="{StaticResource Frutiger}"/>
                     <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="3 0 2 0" Text="/" 
                                          Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.MaxMP}" 
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.MaxMP}" 
                                          Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
                             <Setter Property="Margin" Value="0 17 0 0"/>
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Margin" Value="5 -14 0 0"/>
                                     <Setter Property="HorizontalAlignment" Value="Left"/>
                                 </DataTrigger>
@@ -484,12 +494,12 @@
                 <!--SH Info-->
                 <StackPanel Orientation="Horizontal" 
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                            Visibility="{Binding Instance.Player.HasShield, Converter={StaticResource BoolToVisibleCollapsed}}">
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.CurrentShield}" 
+                            Visibility="{Binding Player.HasShield, Converter={StaticResource BoolToVisibleCollapsed}}">
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.CurrentShield}" 
                                          Fill="#ddd" StrokeThickness="3" Stroke="#99005723" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="2 0 2 0" Text="/" 
                                          Fill="#ddd" StrokeThickness="3" Stroke="#99005723" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Instance.Player.MaxShield}" 
+                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.MaxShield}" 
                                          Fill="#ddd" StrokeThickness="3" Stroke="#99005723" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -497,7 +507,7 @@
                             <Setter Property="Grid.Column" Value="2"/>
 
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Instance.CompactMode}" Value="False">
+                                <DataTrigger Binding="{Binding CompactMode}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="40 0 0 19"/>
                                 </DataTrigger>
@@ -515,13 +525,13 @@
                             <Style.Triggers>
                                 <MultiDataTrigger >
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Instance.Player.StFactor}" Value="1"/>
-                                        <Condition Binding="{Binding Instance.ShowRe}" Value="True"/>
+                                        <Condition Binding="{Binding Player.StFactor}" Value="1"/>
+                                        <Condition Binding="{Binding ShowRe}" Value="True"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Effect">
                                         <Setter.Value>
                                             <DropShadowEffect ShadowDepth="0"  
-                                                              Color="{Binding Instance.Player.Class , Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
+                                                              Color="{Binding Player.Class , Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
                                                               
                                                               BlurRadius="50"></DropShadowEffect>
                                         </Setter.Value>
@@ -539,7 +549,7 @@
                                     <Setter Property="Source" Value="../../resources/images/char_window_bg.png"/>
                                 </Style.Setters>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Instance.ShowElements}" Value="True">
+                                    <DataTrigger Binding="{Binding ShowElements}" Value="True">
                                         <Setter Property="Source" Value="../../resources/images/char_window_bg_sorc.png"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -548,7 +558,7 @@
                     </Image>
                     <Image Source="../../resources/images/char_window_fg.png" Stretch="Uniform"/>
                     <c:Arc StrokeThickness="4" StrokeEndLineCap="Flat"
-                               Stroke="{Binding Instance.Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=light}"
+                               Stroke="{Binding Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=light}"
                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ReArc"
                                Width="82" Height="82" StartAngle="42" EndAngle="318"  RenderTransformOrigin=".5 .5" Margin="0" 
                                Rhomb="True">
@@ -560,17 +570,17 @@
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Setter Property="Opacity" Value=".8"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Instance.ShowRe}" Value="True">
+                                    <DataTrigger Binding="{Binding ShowRe}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect ShadowDepth="0" 
-                                                                  Color="{Binding Instance.Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
+                                                                  Color="{Binding Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
                                                                   BlurRadius="10"/>
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding Instance.Player.StFactor}" Value="1">
+                                    <DataTrigger Binding="{Binding Player.StFactor}" Value="1">
                                         <Setter Property="Opacity" Value="1"/>
                                     </DataTrigger>
 
@@ -579,12 +589,12 @@
 
                         </c:Arc.Style>
                     </c:Arc>
-                    <elements:SorcererElementsControl Fire="{Binding Instance.Player.Fire}"
-                                               Ice="{Binding Instance.Player.Ice}"
-                                               Arcane="{Binding Instance.Player.Arcane}"
-                                               FireBoosted="{Binding Instance.Player.FireBoost}"
-                                               IceBoosted="{Binding Instance.Player.IceBoost}"
-                                               ArcaneBoosted="{Binding Instance.Player.ArcaneBoost}"
+                    <elements:SorcererElementsControl Fire="{Binding Player.Fire}"
+                                               Ice="{Binding Player.Ice}"
+                                               Arcane="{Binding Player.Arcane}"
+                                               FireBoosted="{Binding Player.FireBoost}"
+                                               IceBoosted="{Binding Player.IceBoost}"
+                                               ArcaneBoosted="{Binding Player.ArcaneBoost}"
                                                IndicatorsWidth="86"
                                                IndicatorsHeight="86"
                                                FireIceBoostWidth="28"
@@ -597,7 +607,7 @@
                             <Style TargetType="FrameworkElement">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Instance.ShowElements}" Value="True">
+                                    <DataTrigger Binding="{Binding ShowElements}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -668,9 +678,9 @@
                     </Grid>-->
 
                     <Image Opacity="1"
-                        Source="{Binding Instance.Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr.big}"
+                        Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr.big}"
                            Margin="-3 -2 -3 -4"/>
-                    <Path Data="{Binding Instance.Player.Class, Converter={StaticResource ClassToSvg}}" 
+                    <Path Data="{Binding Player.Class, Converter={StaticResource ClassToSvg}}" 
                       HorizontalAlignment="Center" 
                       Fill="#eee" 
                       Margin="34" 
@@ -688,14 +698,14 @@
                                          StrokeThickness="4"
                                          Stroke="#6000"
                                FontFamily="{StaticResource Frutiger}" TextAlignment="Center"
-                               Margin="0 -18 0 0" FontSize="20" Text="{Binding Instance.Player.CurrentST}"
+                               Margin="0 -18 0 0" FontSize="20" Text="{Binding Player.CurrentST}"
                                >
 
                         <c:OutlinedTextBlock.Style>
                             <Style TargetType="c:OutlinedTextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Instance.ShowRe}" Value="True">
+                                    <DataTrigger Binding="{Binding ShowRe}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>

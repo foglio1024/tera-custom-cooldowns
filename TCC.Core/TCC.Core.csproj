@@ -153,6 +153,7 @@
     <Compile Include="Data\Databases\RegionsDatabase.cs" />
     <Compile Include="Data\GuildQuest.cs" />
     <Compile Include="Data\Databases\TccDatabase.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
@@ -752,6 +753,9 @@
     <Compile Include="Windows\DungeonEditWindow.xaml.cs">
       <DependentUpon>DungeonEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MergedInventoryWindow.xaml.cs">
+      <DependentUpon>MergedInventoryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MyAbnormalConfigWindow.xaml.cs">
       <DependentUpon>MyAbnormalConfigWindow.xaml</DependentUpon>
     </Compile>
@@ -760,6 +764,9 @@
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SystemMessagesConfigWindow.xaml.cs">
+      <DependentUpon>SystemMessagesConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TccWindow.cs" />
     <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
@@ -1211,6 +1218,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\MergedInventoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MyAbnormalConfigWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1220,6 +1231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SystemMessagesConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1390,481 +1405,7 @@
     <Resource Include="resources\images\Icon_Laurels\silver_kr.png" />
     <Resource Include="resources\images\awakened.png" />
     <None Include="packages.config" />
-    <None Include="resources\data\acc_benefits\acc_benefits-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\default-dungeon-defs.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-EU-FR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-EU-GER.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-JP.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-KR-PTS.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-KR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-NA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-RU.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-THA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-TW.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-SE.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-SE.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="resources\data\world_map\world_map-EU-FR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-EU-GER.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-JP.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-KR-PTS.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-KR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-NA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-RU.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="resources\data\section_images.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\world_map\world_map-SE.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="resources\data\world_map\world_map-THA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\world_map\world_map-TW.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="resources\images\moongourd.png" />
-    <None Include="resources\data\acc_benefits\acc_benefits-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\equip_exp\equip_exp-EU-EN.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\items\items-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-SE.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\world_map\world_map-EU-EN.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\acc_benefits\acc_benefits-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achievements\achievements-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\achi_grade\achi_grade-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\dungeons\dungeons-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\guild_quests\guild_quests-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-short-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\hotdot\hotdot-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\quests\quests-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\regions\regions-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\skills\skills-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\social\social-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\sys_msg\sys_msg-EU-EN.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Resource Include="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
     <Resource Include="resources\fonts\DroidSansMono.ttf" />
     <Resource Include="resources\fonts\RobotoMono-Medium.ttf" />
@@ -1883,12 +1424,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="resources\data\monsters\monsters-KR-PTS.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-THA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />
@@ -1926,34 +1461,6 @@
     <Resource Include="resources\images\ic_close_white_24dp_2x.png" />
     <Resource Include="resources\images\Icon_Laurels\blank.png" />
     <Resource Include="resources\images\combat.png" />
-    <None Include="resources\data\monsters\monsters-EU-EN.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="resources\data\monsters\monsters-EU-FR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-EU-GER.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-JP.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-KR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-NA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-override.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-RU.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\data\monsters\monsters-TW.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Resource Include="resources\images\Icon_Classes\archer.png" />
     <Resource Include="resources\images\Icon_Classes\berserker.png" />
     <Resource Include="resources\images\Icon_Classes\brawler.png" />
@@ -1975,12 +1482,8 @@
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
     <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
     <Resource Include="resources\images\enraged.png" />
-    <Content Include="resources\data\servers.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="resources\data\opcodes\" />
     <Folder Include="ViewModels\Helpers\" />
     <Folder Include="ViewModels\WindowManagers\" />
   </ItemGroup>
@@ -1997,8 +1500,8 @@
     <Reference Include="Discord.Net.Rpc, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Discord.Net.Rpc.1.0.2\lib\net45\Discord.Net.Rpc.dll</HintPath>
     </Reference>
-    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    <Reference Include="Dragablz">
+      <HintPath>..\..\Dragablz\bin\Release_net45\Dragablz.dll</HintPath>
     </Reference>
     <Reference Include="GongSolutions.WPF.DragDrop, Version=1.2.0.57, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\gong-wpf-dragdrop.1.2.0-alpha0057\lib\net46\GongSolutions.WPF.DragDrop.dll</HintPath>

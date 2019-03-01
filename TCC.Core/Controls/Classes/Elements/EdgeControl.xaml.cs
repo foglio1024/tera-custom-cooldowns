@@ -52,7 +52,7 @@ namespace TCC.Controls.Classes.Elements
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             //lazy way of making sure that DataContext is not null
-            var classMgr = (ClassWindowViewModel.Instance.CurrentManager as WarriorBarManager);
+            var classMgr = (WindowManager.ClassWindow.VM.CurrentManager as WarriorBarManager);
             _context = classMgr?.EdgeCounter;
             while (_context == null)
             {

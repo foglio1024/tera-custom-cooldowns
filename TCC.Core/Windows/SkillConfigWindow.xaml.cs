@@ -20,18 +20,21 @@ namespace TCC.Windows
     public partial class SkillConfigWindow
     {
 
-        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
-
+        public IntPtr Handle { get; private set; }
+        private CooldownWindowViewModel _vm { get;  }
         public SkillConfigWindow()
         {
             InitializeComponent();
-            DataContext = CooldownWindowViewModel.Instance;
+            DataContext = WindowManager.CooldownWindow.VM;
+            _vm = DataContext as CooldownWindowViewModel;
+
             Closing += OnClosing;
+            Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
         }
 
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            e.Cancel = true;
+            if(Opacity != 0) e.Cancel = true;
             ClosewWindow(null,null);
         }
 
@@ -48,19 +51,24 @@ namespace TCC.Windows
 
         public GenericDragHandler DragHandler => new GenericDragHandler();
 
+        public static bool IsOpen { get; private set; }
+
         private void ClosewWindow(object sender, RoutedEventArgs e)
         {
+
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             FocusManager.ForceFocused = false;
             WindowManager.ForegroundManager.ForceUndim = false;
+            WindowManager.SkillConfigWindow = null;
 
             an.Completed += (s, ev) =>
             {
-                Hide();
+                Close();
+                IsOpen = false;
                 if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, an);
-            CooldownWindowViewModel.Instance.Save();
+            _vm.Save();
         }
 
         internal void ShowWindow()
@@ -68,8 +76,10 @@ namespace TCC.Windows
             if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
             WindowManager.ForegroundManager.ForceUndim = true;
+            WindowManager.SkillConfigWindow = this;
             Dispatcher.Invoke(() =>
             {
+                IsOpen = true;
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 if (IsVisible) return;
                 Opacity = 0;
@@ -86,27 +96,27 @@ namespace TCC.Windows
 
         private void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = ((ICollectionView)CooldownWindowViewModel.Instance.SkillsView);
+            var view = ((ICollectionView)_vm.SkillsView);
             view.Filter = o =>  ((Skill)o).ShortName.IndexOf(((TextBox) sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
 
         private void ItemSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = (ICollectionView)CooldownWindowViewModel.Instance.ItemsView;
+            var view = (ICollectionView)_vm.ItemsView;
             view.Filter = o => ((Item)o).Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
         private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = (ICollectionView)CooldownWindowViewModel.Instance.AbnormalitiesView;
+            var view = (ICollectionView)_vm.AbnormalitiesView;
             view.Filter = o => ((Abnormality)o).Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
 
         private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
         {
-            CooldownWindowViewModel.Instance.RemoveHiddenSkill(((Button) sender).DataContext as Cooldown);
+            _vm.RemoveHiddenSkill(((Button) sender).DataContext as Cooldown);
         }
     }
 }

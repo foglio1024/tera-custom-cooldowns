@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -16,12 +18,12 @@ namespace TCC.ViewModels
     public class BossGageWindowViewModel : TccWindowViewModel
     {
         public const int Ph1ShieldDuration = 16;
-        private static BossGageWindowViewModel _instance;
+        //private static BossGageWindowViewModel _instance;
         private HarrowholdPhase _currentHHphase;
         private ICollectionViewLiveShaping _bams;
         private ICollectionViewLiveShaping _mobs;
         private ICollectionView _dragons;
-        private ICollectionView _guildTowers;
+        private ICollectionViewLiveShaping _guildTowers;
 
         private NPC _selectedDragon;
         private NPC _vergos;
@@ -45,8 +47,8 @@ namespace TCC.ViewModels
 
         //public bool IsTeraOnTop => WindowManager.IsTccVisible;
 
-        public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible && x.CurrentHP > 0);
-        public int VisibleMobsCount => NpcList.ToSyncArray().Count(x => x.Visible && x.CurrentHP > 0 && !x.IsBoss);
+        public int VisibleBossesCount => NpcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0);
+        public int VisibleMobsCount => NpcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0 && !x.IsBoss);
 
         public HarrowholdPhase CurrentHHphase
         {
@@ -62,8 +64,8 @@ namespace TCC.ViewModels
 
         public void SetBossEnrageTime(ulong entityId, int remainingEnrageTime)
         {
-            var target = NpcList.FirstOrDefault(x => x.EntityId == entityId);
-            if(target != null) target.RemainingEnrageTime = remainingEnrageTime;
+            var target = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
+            if (target != null) target.RemainingEnrageTime = remainingEnrageTime;
         }
 
         public ICollectionViewLiveShaping Bams
@@ -84,12 +86,12 @@ namespace TCC.ViewModels
                 return _mobs;
             }
         }
-        public ICollectionView GuildTowers
+        public ICollectionViewLiveShaping GuildTowers
         {
             get
             {
-                _guildTowers = new CollectionViewSource { Source = NpcList }.View;
-                _guildTowers.Filter = p => ((NPC)p).IsTower;
+                _guildTowers = Utils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
+                    new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;
             }
         }
@@ -124,7 +126,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<NPC> NpcList { get; set; }
 
-        public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
+        //public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
         public Dictionary<ulong, uint> GuildIds { get; private set; }
 
         public BossGageWindowViewModel()
@@ -132,34 +134,27 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
             NpcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
             _cache = new Dictionary<ulong, float>();
-            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
+            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
             _flushTimer.Tick += FlushCache;
-            //_flushTimer.Start();
+            _flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
             NpcListChanged += OnNpcCollectionChanged;
-            //WindowManager.TccVisibilityChanged += (s, ev) =>
-            //{
-            //NPC(nameof(IsTeraOnTop));
-            //if (IsTeraOnTop)
-            //{
-            //WindowManager.BossWindow.RefreshTopmost();
-            //}
-            //};
-
         }
 
         private void OnNpcCollectionChanged()
         {
-            var caching = IsCaching;
-            if (caching && !_flushTimer.IsEnabled)
-            {
-                _flushTimer.Start();
-            }
-            else if (NpcList.Count == 0)
-            {
-                _flushTimer.Stop();
-                FlushCache(null, null);
-            }
+            //if (!_flushTimer.IsEnabled)
+            //{
+            //    Log.All($"+ Starting flush timer");
+            //    _flushTimer.Start();
+            //}
+            //else if (NpcList.Count == 0)
+            //{
+            //    Log.All($"- Stopping flush timer");
+            //    _flushTimer.Stop();
+            //    FlushCache(null, null);
+            //}
+            FlushCache(null, null);
         }
 
         private void FlushCache(object sender, EventArgs e)
@@ -168,7 +163,7 @@ namespace TCC.ViewModels
             {
                 if (_cache.Count == 0)
                 {
-                    //Log.CW($"[BossGageWindowViewModel L161] HP cache is empty, returning");
+                    //Log.CW($"FlushCache() - nothing to flush");
                     return;
                 }
                 try
@@ -176,11 +171,12 @@ namespace TCC.ViewModels
                     foreach (var hpc in _cache.ToList())
                     {
                         SetHpFromCache(hpc.Key, hpc.Value);
+                        //Log.CW($"FlushCache() - flushing HP for {hpc.Key}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.CW($"[BossGageWindowViewModel L173] Error while setting HP from cache: {ex.Message}");
+                    Log.All($"[BossGageWindowViewModel.FlushCache()] Error while setting HP from cache: {ex.Message}");
 
                     // ignored
                 }
@@ -196,12 +192,12 @@ namespace TCC.ViewModels
             if (npc != null) npc.CurrentHP = hpcCurrentHp;
             else
             {
-                Log.CW($"[BossGageWindowViewModel L189] NPC {hpcEntityId} not found while setting HP from cache");
+                Log.All($"[BossGageWindowViewModel.SetHpFromCache()] NPC {hpcEntityId} not found while setting HP from cache");
 
             }
         }
 
-        private bool IsCaching => VisibleBossesCount > 1;
+        private bool IsCaching => true;//VisibleBossesCount > 3;
         public bool IsCompact => VisibleMobsCount > 6;
 
         private NPC AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
@@ -267,14 +263,17 @@ namespace TCC.ViewModels
 
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
-            if (boss == null) return;
-            SetHp(boss, maxHp, curHp, src);
-            if (boss.Visible != visibility)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                boss.Visible = visibility;
-                NpcListChanged?.Invoke();
-            }
+                var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
+                if (boss == null) return;
+                SetHp(boss, maxHp, curHp, src);
+                if (boss.Visible != visibility)
+                {
+                    boss.Visible = visibility;
+                    NpcListChanged?.Invoke();
+                }
+            }));
         }
 
         private void SetHp(NPC boss, float maxHp, float curHp, HpChangeSource src)
@@ -282,13 +281,18 @@ namespace TCC.ViewModels
             boss.MaxHP = maxHp;
 
             if (src == HpChangeSource.BossGage) boss.HasGage = true;
-            else if (src == HpChangeSource.CreatureChangeHp && boss.HasGage) return;
+            else if (src == HpChangeSource.Me && boss.HasGage)
+            {
+                FlushCache(null, null);
+                return;
+            }
 
             if (!IsCaching) boss.CurrentHP = curHp;
             else
             {
                 //Log.CW($"[BossGageWindowViewModel L273] Adding HP ({curHp}) to cache for NPC with eid {boss.EntityId}");
                 AddToCache(boss.EntityId, curHp);
+                if (src == HpChangeSource.Me) FlushCache(null, null);
             }
 
         }
@@ -298,6 +302,7 @@ namespace TCC.ViewModels
         {
             //if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
             /*else */
+            //Log.CW($"AddToCache({entityId}, {curHp})");
             _cache[entityId] = curHp;
         }
 
@@ -362,35 +367,39 @@ namespace TCC.ViewModels
 
         public void RemoveBoss(ulong id, DespawnType type)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == id);
-            if (boss == null) return;
-            if (type == DespawnType.OutOfView)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                _savedHp[id] = boss.CurrentHP;
-            }
-            else
-            {
-                _savedHp.Remove(id);
-            }
-            if (!boss.Visible || boss.IsTower)
-            {
-                NpcList.Remove(boss);
-                boss.Dispose();
-            }
-            else
-            {
-                boss.Delete();
-            }
-            NpcListChanged?.Invoke();
+                var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == id);
+                if (boss == null) return;
+                //Log.CW($"RemoveBoss({boss.Name}, {type}) - HP:{boss.CurrentHP}");
+                if (type == DespawnType.OutOfView)
+                {
+                    _savedHp[id] = boss.CurrentHP;
+                }
+                else
+                {
+                    _savedHp.Remove(id);
+                }
+                if (!boss.Visible || boss.IsTower)
+                {
+                    NpcList.Remove(boss);
+                    boss.Dispose();
+                }
+                else
+                {
+                    boss.Delete();
+                }
+                NpcListChanged?.Invoke();
 
-            //_currentNPCs.Remove(boss);
-            //boss.Dispose();
-            if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
+                //_currentNPCs.Remove(boss);
+                //boss.Dispose();
+                if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
+            }));
         }
         public void CopyToClipboard()
         {
             var sb = new StringBuilder();
-            foreach (var boss in NpcList.ToSyncArray())
+            foreach (var boss in NpcList.ToSyncList())
             {
                 if (!boss.Visible) continue;
                 sb.Append(boss.Name);
@@ -410,31 +419,34 @@ namespace TCC.ViewModels
         }
         public void ClearBosses()
         {
-            foreach (var npc in NpcList.ToSyncArray())
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                npc.Dispose();
-            }
-            NpcList.Clear();
+                foreach (var npc in NpcList.ToSyncList())
+                {
+                    npc.Dispose();
+                }
+                NpcList.Clear();
+            }));
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
             boss?.EndBuff(ab);
         }
         public void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
             boss?.AddorRefresh(ab, duration, stacks);
         }
         public void SetBossEnrage(ulong entityId, bool enraged)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null) return;
             boss.Enraged = enraged;
         }
         public void UnsetBossTarget(ulong entityId)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -443,19 +455,19 @@ namespace TCC.ViewModels
         }
         public void SetBossAggro(ulong entityId, ulong user)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
+            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
             }
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
-            if (boss.Visible) GroupWindowViewModel.Instance.SetAggro(entityId);
+            if (boss.Visible) WindowManager.GroupWindow.VM.SetAggro(entityId);
         }
         public void SelectDragon(float x, float y)
         {
             var dragon = EntityManager.CheckCurrentDragon(new Point(x, y));
-            foreach (var item in NpcList.ToSyncArray().Where(d => d.TemplateId > 1099 && d.TemplateId < 1104))
+            foreach (var item in NpcList.ToSyncList().Where(d => d.TemplateId > 1099 && d.TemplateId < 1104))
             {
                 if (item.TemplateId == (uint)dragon) { item.IsSelected = true; SelectedDragon = item; }
                 else item.IsSelected = false;
@@ -468,18 +480,18 @@ namespace TCC.ViewModels
         public void AddGuildTower(ulong towerId, string guildName, uint guildId)
         {
             GuildIds[towerId] = guildId;
-            var t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
+            var t = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == towerId);
             if (t != null)
             {
                 t.Name = guildName;
                 t.ExN(nameof(NPC.GuildId));
             }
-            _towerNames[towerId] =  guildName;
+            _towerNames[towerId] = guildName;
         }
 
         public void UpdateShield(ulong target, uint damage)
         {
-            var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+            var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.CurrentShield -= damage;
@@ -488,9 +500,10 @@ namespace TCC.ViewModels
 
         public void RemoveMe(NPC npc, uint delay)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (NpcList.ToSyncArray().All(x => x != npc)) return;
+                if (NpcList.ToSyncList().All(x => x != npc)) return;
+                //Log.CW($"RemoveMe({npc.Name}, {delay}) - HP:{npc.CurrentHP}");
                 npc.Buffs.Clear();
                 if (delay != 0)
                 {
@@ -510,7 +523,7 @@ namespace TCC.ViewModels
                 {
                     RemoveAndDisposeNPC(npc);
                 }
-            });
+            }));
         }
 
         private void RemoveAndDisposeNPC(NPC b)
@@ -522,7 +535,7 @@ namespace TCC.ViewModels
         /*
                 public void UpdateBySkillResult(ulong target, ulong damage)
                 {
-                    var boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
+                    var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
                     if (boss != null && !boss.HasGage)
                     {
                         if (boss.CurrentHP - damage < 0) boss.CurrentHP = 0;

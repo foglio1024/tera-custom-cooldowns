@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace TCC.Controls.Dashboard
 {
@@ -13,15 +12,14 @@ namespace TCC.Controls.Dashboard
             InitializeComponent();
         }
 
-        private void CloseInfoPopup(object sender, MouseEventArgs e)
-        {
-            
-
-        }
-
-        private void ScrollViewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)
+        private void ContentListOnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             Utils.GetChild<ScrollViewer>(CharNames).ScrollToVerticalOffset(e.VerticalOffset);
+        }
+
+        private void CharNames_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            Utils.GetChild<ScrollViewer>(ContentList).ScrollToVerticalOffset(e.VerticalOffset);
         }
     }
 }

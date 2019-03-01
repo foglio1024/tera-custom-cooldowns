@@ -115,6 +115,12 @@ namespace TCC.Proxy
             }
             // ReSharper disable once FunctionNeverReturns
         }
+
+        internal static void ReturnToLobby()
+        {
+            SendData("return_to_lobby");
+        }
+
         public static void HandleProxyOutput(string author, uint channel, string message)
         {
 
@@ -378,7 +384,7 @@ namespace TCC.Proxy
             sb.Append("&name=");
             sb.Append(name);
             sb.Append("&raid=");
-            sb.Append(GroupWindowViewModel.Instance.Raid ? 1 : 0);
+            sb.Append(WindowManager.GroupWindow.VM.Raid ? 1 : 0);
 
             SendData(sb.ToString());
         }

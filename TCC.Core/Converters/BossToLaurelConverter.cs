@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Windows.Data;
 using TCC.Data.NPCs;
 
@@ -55,7 +56,10 @@ namespace TCC.Converters
 
 
             if (laurel == "") return null;
-            return "../resources/images/Icon_Laurels/" + laurel + "_kr_big.png";
+
+            return Path.Combine(App.BasePath, "resources/images/Icon_Laurels/" + laurel + "_kr_big.png");
+
+            //return "../resources/images/Icon_Laurels/" + laurel + "_kr_big.png";
 
 
         }

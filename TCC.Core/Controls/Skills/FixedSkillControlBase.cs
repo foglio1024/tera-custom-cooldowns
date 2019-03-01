@@ -38,6 +38,7 @@ namespace TCC.Controls.Skills
         {
             base.OnCooldownEnded(mode);
             AnimateAvailableSkill();
+            Timeline.SetDesiredFrameRate(_glowAnimation, 20);
             GlowRef?.BeginAnimation(OpacityProperty, _glowAnimation);
         }
         protected override void OnLoaded(object sender, RoutedEventArgs e)
@@ -70,6 +71,7 @@ namespace TCC.Controls.Skills
         }
         private void OnReset()
         {
+            Timeline.SetDesiredFrameRate(_resetAnimation, 20);
             ResetArcRef.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
         }
 

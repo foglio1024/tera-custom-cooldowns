@@ -8,7 +8,7 @@
              xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
-             Title="FlightDurationWindow" Height="300" Width="300" 
+             Title="TCC Flight" Height="300" Width="300" 
              d:DataContext="{x:Type widgets:FlightDurationWindow}">
     <Grid RenderTransformOrigin=".5 .5">
         <Grid.Style>
@@ -50,8 +50,8 @@
                 <Style TargetType="c:Arc">
                     <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
                     <Setter Property="StrokeThickness" Value="6"/>
-                    <Setter Property="StrokeStartLineCap" Value="Round"/>
-                    <Setter Property="StrokeEndLineCap" Value="Round"/>
+                    <Setter Property="StrokeStartLineCap" Value="Flat"/>
+                    <Setter Property="StrokeEndLineCap" Value="Flat"/>
                     <Setter Property="StartAngle" Value="0"/>
                     <Setter Property="Opacity" Value="0.2"/>
                     <Setter Property="EndAngle" Value="7"/>
