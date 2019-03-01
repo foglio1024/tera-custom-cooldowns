@@ -1030,6 +1030,10 @@ namespace TCC.Parsing
             SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
+            if (Proxy.Proxy.IsConnected && Proxy.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            {
+                Proxy.Proxy.SendCommand($"fps mode 3");
+            }
         }
 
         public static void HandleGuardianOnLeave(S_FIELD_EVENT_ON_LEAVE obj)
@@ -1037,6 +1041,11 @@ namespace TCC.Parsing
             const string opcode = "SMT_FIELD_EVENT_LEAVE";
             SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
+
+            if (Proxy.Proxy.IsConnected && Proxy.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            {
+                Proxy.Proxy.SendCommand($"fps mode 1");
+            }
         }
 
         public static void HandleUpdateNpcGuild(S_UPDATE_NPCGUILD p)

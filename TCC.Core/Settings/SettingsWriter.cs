@@ -155,6 +155,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.EthicalMode), SettingsHolder.EthicalMode),
                 new XAttribute(nameof(SettingsHolder.CheckOpcodesHash), SettingsHolder.CheckOpcodesHash),
                 new XAttribute(nameof(SettingsHolder.ShowNotificationBubble), SettingsHolder.ShowNotificationBubble),
+                new XAttribute(nameof(SettingsHolder.FpsAtGuardian), SettingsHolder.FpsAtGuardian),
                 new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification)
             );
         }

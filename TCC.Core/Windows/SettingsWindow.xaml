@@ -1253,6 +1253,22 @@
                             />
                             <settings:CheckboxSetting SettingName="Use npcap" 
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />
+                            <settings:CheckboxSetting SettingName="Auto fps mode" 
+                                                      IsOn="{Binding FpsAtGuardian, Mode=TwoWay}" 
+                                                      >
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}"/>
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                            <Run Text="Automatically"/>
+                                            <Run Foreground="DodgerBlue" Text="fps mode 3"/>
+                                            <Run Text="when entering Guardian Legion mission zones and switches back to"/>
+                                            <Run Foreground="DodgerBlue" Text="fps mode 1"/>
+                                            <Run Text="when exiting"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Experimental builds notification" 
                                                       IsOn="{Binding ExperimentalNotification, Mode=TwoWay}" 
                                                       Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"/>

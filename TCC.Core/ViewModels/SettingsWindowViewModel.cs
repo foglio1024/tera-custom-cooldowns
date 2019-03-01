@@ -394,6 +394,16 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool FpsAtGuardian
+        {
+            get => SettingsHolder.FpsAtGuardian;
+            set
+            {
+                if (SettingsHolder.FpsAtGuardian == value) return;
+                SettingsHolder.FpsAtGuardian = value;
+                N();
+            }
+        }
 
         public bool ShowItemsCooldown
         {

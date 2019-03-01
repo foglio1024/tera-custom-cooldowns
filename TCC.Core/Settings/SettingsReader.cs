@@ -354,6 +354,8 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.DiscordWebhookEnabled)) SettingsHolder.DiscordWebhookEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowNotificationBubble)) SettingsHolder.ShowNotificationBubble = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.UserExcludedSysMsg)) SettingsHolder.UserExcludedSysMsg = ParseUserExcludedSysMsg(attr.Value);
+
+                    else if (attr.Name == nameof(SettingsHolder.FpsAtGuardian)) SettingsHolder.FpsAtGuardian = bool.Parse(attr.Value);
                     //add settings here
                 });
 
