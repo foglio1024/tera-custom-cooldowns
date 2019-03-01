@@ -30,7 +30,7 @@ namespace TCC
     {
         public const bool Debug = false;
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
-        public static bool Experimental = false;
+        public static bool Experimental = true;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
         public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
