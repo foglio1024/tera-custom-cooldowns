@@ -30,7 +30,7 @@ namespace TCC
     {
         public const bool Debug = false;
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
-        public static bool Experimental = true;
+        public static bool Experimental = false;
         public static SplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher;
         public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
@@ -85,7 +85,7 @@ namespace TCC
 
             UpdateManager.StartPeriodicCheck();
 
-            if (!Experimental && SettingsHolder.ExperimentalNotification)
+            if (!Experimental && SettingsHolder.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",
                     "An experimental version of TCC is available. Open System settings to download it or disable this notification.", 
                     NotificationType.Success, 

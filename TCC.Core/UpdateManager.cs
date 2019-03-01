@@ -107,6 +107,26 @@ namespace TCC
             }
         }
 
+        public static bool IsExperimentalNewer()
+        {
+            try
+            {
+                using (var c = Utils.GetDefaultWebClient())
+                {
+                    var st = c.OpenRead(AppVersionExperimentalUrl);
+                    if (st == null) return false;
+                    var newVersionInfo = new StreamReader(st).ReadLine();
+                    if (newVersionInfo == null) return false;
+                    if (Version.Parse(newVersionInfo) > Assembly.GetExecutingAssembly().GetName().Version) return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.F($"[IsExperimentalNewer] Failed to check experimental version {e.ToString()}");
+            }
+            return false;
+        }
+
         private static async Task DownloadIcons()
         {
             using (var c = Utils.GetDefaultWebClient())
