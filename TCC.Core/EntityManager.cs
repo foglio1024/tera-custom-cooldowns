@@ -29,6 +29,8 @@ namespace TCC
             if (SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 NearbyNPC[entityId] = m.Name;
+                //if (m.Name == "Tradon") ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "TCC", "Tradon spawned") { ContainsPlayerName = true });
+                //if (m.Name == "Garash Bloodtusk") ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "TCC", "Garash Bloodtusk spawned") { ContainsPlayerName = true });
                 FlyingGuardianDataProvider.InvokeProgressChanged();
                 if (villager) return;
                 if (m.IsBoss)
