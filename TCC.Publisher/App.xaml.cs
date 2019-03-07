@@ -115,7 +115,7 @@ namespace TCC.Publisher
             var sb = new StringBuilder();
             sb.AppendLine(StringVersion);
             Logger.WriteLine($"    Added version: {StringVersion}.");
-            sb.AppendLine(url);
+            sb.Append(url);
             Logger.WriteLine($"    Added URL: {url}.");
             File.WriteAllText(versionCheckFile, sb.ToString());
             Logger.WriteLine("    File saved.");
