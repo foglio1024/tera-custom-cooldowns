@@ -29,7 +29,7 @@ namespace TCC
 
         private const string DownloadedIconsDir = "tera-used-icons-master";
 
-        public const string DatabaseHashFileUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/database-hashes.json";
+        private const string DatabaseHashFileUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/database-hashes.json";
 
         public static Dictionary<string, string> DatabaseHashes { get; set; }
 
