@@ -925,7 +925,17 @@ namespace TCC.Parsing
             S_IMAGE_DATA.Database[sGetUserGuildLogo.GuildId] = sGetUserGuildLogo.GuildLogo;
 
             if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
-            sGetUserGuildLogo.GuildLogo.Save("resources/images/guilds/guildlogo_" + SessionManager.Server.ServerId + "_" + sGetUserGuildLogo.GuildId + "_" + 0 + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            try
+            {
+                sGetUserGuildLogo.GuildLogo.Save(
+                    Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{SessionManager.Server.ServerId}_{sGetUserGuildLogo.GuildId}_{0}.bmp"), 
+                    System.Drawing.Imaging.ImageFormat.Bmp
+                    );
+            }
+            catch (Exception e)
+            {
+                Log.F("Error while saving guild logo.");
+            }
 
         }
 
