@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿//#define FIRESTORE
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -41,6 +41,7 @@ namespace TCC
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
@@ -87,8 +88,8 @@ namespace TCC
 
             if (!Experimental && SettingsHolder.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",
-                    "An experimental version of TCC is available. Open System settings to download it or disable this notification.", 
-                    NotificationType.Success, 
+                    "An experimental version of TCC is available. Open System settings to download it or disable this notification.",
+                    NotificationType.Success,
                     10000);
 
             if (Debug)
@@ -420,7 +421,28 @@ namespace TCC
         {
             var ex = (Exception)e.ExceptionObject;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#if FIRESTORE
+            var exObj = new Dictionary<string, object>
+            {
+                {"tcc_version", AppVersion },
+                {"full_exception", ex.Message + "\r\n" +
+                                   ex.StackTrace + "\r\n" +
+                                   ex.Source + "\r\n" +
+                                   ex + "\r\n" +
+                                   ex.Data + "\r\n" +
+                                   ex.InnerException + "\r\n" +
+                                   ex.TargetSite },
+                { "inner_exception" , ex.InnerException != null ? ex.InnerException.Message : "undefined" },
+                { "exception", ex.Message },
+                { "game_version", PacketAnalyzer.Factory.Version },
+                { "region", SessionManager.Server != null ? SessionManager.Server.Region : "" },
+                { "server_id", SessionManager.Server != null ? SessionManager.Server.ServerId.ToString(): "" },
+            };
 
+            var doc = await FirestoreDb.Create("tcc-report")
+                                       .Collection("crash")
+                                       .AddAsync(exObj);
+#else
             using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -451,6 +473,7 @@ namespace TCC
                 c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
             }
+#endif
         }
 
         private static void InitSplashScreen()
