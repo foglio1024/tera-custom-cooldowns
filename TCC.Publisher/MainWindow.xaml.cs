@@ -30,7 +30,7 @@ namespace TCC.Publisher
 
         private async void Push(object sender, RoutedEventArgs e)
         {
-            var confirm = MessageBox.Show("Confirm release push?", "TCC publisher", MessageBoxButton.YesNo);
+            var confirm = MessageBox.Show("Confirm zip push?", "TCC publisher", MessageBoxButton.YesNo);
             if (confirm != MessageBoxResult.Yes) return;
             await Publisher.Upload();
         }
@@ -42,6 +42,24 @@ namespace TCC.Publisher
             Log.RemoveAt(Log.Count - 1);
             Log.Add(last + msg);
             Utils.GetChild<ScrollViewer>(LogList).ScrollToBottom();
+        }
+
+        private async void Release(object sender, RoutedEventArgs e)
+        {
+            var confirm = MessageBox.Show("Confirm release creation?", "TCC publisher", MessageBoxButton.YesNo);
+            if (confirm != MessageBoxResult.Yes) return;
+            if (string.IsNullOrWhiteSpace(ReleaseNotesTB.Text))
+            {
+                var emptyNotesConf = MessageBox.Show("Release notes field is empty, continue anyway?", "TCC publisher", MessageBoxButton.YesNo);
+                if (emptyNotesConf != MessageBoxResult.Yes) return;
+            }
+            await Publisher.CreateRelease();
+
+        }
+
+        private void GetVersion(object sender, RoutedEventArgs e)
+        {
+            Publisher.GetVersion();
         }
     }
 }

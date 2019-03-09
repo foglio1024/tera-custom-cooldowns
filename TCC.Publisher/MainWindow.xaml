@@ -16,13 +16,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBox x:Name="ReleaseNotesTB" Margin="20" AcceptsReturn="True"/>
-        <StackPanel Grid.Column="1" Margin="0 20 20 20">
+        <StackPanel Grid.Column="1" Margin="0 20 20 20" VerticalAlignment="Top" Grid.RowSpan="2">
 
+            <Button Content="Get version" VerticalAlignment="Top" Margin="0 0 0 20" Click="GetVersion"></Button>
             <Button Content="Generate" VerticalAlignment="Top" Margin="0 0 0 20" Click="Generate"></Button>
-            <Button Content="Push" VerticalAlignment="Top" Margin="0 0 0 20" Click="Push"></Button>
+            <Button Content="Create release" VerticalAlignment="Top" Margin="0 0 0 20" Click="Release"></Button>
+            <Button Content="Push zip" VerticalAlignment="Top" Margin="0 0 0 20" Click="Push"></Button>
         </StackPanel>
         <ListBox Grid.Row="1"
-                 Grid.ColumnSpan="2"
                  Margin="20 0 20 20"
                  x:Name="LogList"
                  >
