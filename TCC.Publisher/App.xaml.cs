@@ -145,7 +145,7 @@ namespace TCC.Publisher
                 Prerelease = false,
                 TargetCommitish = string.IsNullOrEmpty(Experimental) ? "master" : "experimental"
             };
-            await Task.Run(() => client.Repository.Release.Create("Foglio1024", "test", newRelease));
+            await Task.Run(() => client.Repository.Release.Create("Foglio1024", "Tera-custom-cooldowns", newRelease));
             Logger.WriteLine($"Release created");
             var au = new ReleaseAssetUpload
             {
