@@ -24,10 +24,10 @@
                 </Image>
                 <Grid x:Name="MainReArcGrid" >
                     <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
-                               StrokeThickness="3" Stroke="Orange" HorizontalAlignment="Center"
+                               StrokeThickness="4" Stroke="{StaticResource LightGreenBrush}" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
-                               Margin="-20"
-                               Width="87" Height="87" x:Name="MainReArc">
+                               Margin="-20 -19 -20 -20"
+                               Width="91" Height="91" x:Name="MainReArc">
                         <local:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180"/>
@@ -44,11 +44,10 @@
                             </Style>
                         </local:Arc.Style>
                     </local:Arc>
-
                     <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
-                               StrokeThickness="3" Stroke="White" HorizontalAlignment="Center"
+                               StrokeThickness="4" Stroke="White" HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Margin="-20" Opacity=".5" Rhomb="True"
+                               Margin="-20 -20 -20 -20" Rhomb="True"
                                Width="77" Height="77" x:Name="SecReArc">
                         <local:Arc.RenderTransform>
                             <TransformGroup>
@@ -66,9 +65,7 @@
                             </Style>
                         </local:Arc.Style>
                     </local:Arc>
-
                 </Grid>
-
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>
             </Grid>
@@ -114,6 +111,7 @@
                     </FrameworkElement.RenderTransform>
             </TextBlock>
             <Grid Visibility="{Binding WindWalkProc, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <!--<Grid >-->
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"
@@ -122,16 +120,16 @@
                         <TransformGroup>
                             <RotateTransform Angle="45" />
                             <TranslateTransform X="0" Y="105" />
-                            <ScaleTransform ScaleX=".7" ScaleY=".7"/>
+                            <ScaleTransform ScaleX=".73" ScaleY=".73"/>
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
                 <skills:RhombFixedSkillControl DataContext="{Binding WindWalk}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" >
+                                              VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform X="16" Y="121" />
-                            <ScaleTransform ScaleX=".7" ScaleY=".7" />
+                            <ScaleTransform ScaleX=".82" ScaleY=".82" />
+                            <TranslateTransform X="0" Y="76.5" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </skills:RhombFixedSkillControl>

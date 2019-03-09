@@ -1,76 +1,106 @@
 ﻿using System;
 using System.Windows.Threading;
+using TCC.ClassSpecific;
 
 namespace TCC.Data
 {
-    public class ArcherFocusTracker : TSPropertyChanged
+    public class BaseStackBuffTracker : TSPropertyChanged
     {
-        public event Action<int> StacksChanged;
-        public event Action<long> FocusStarted;
-        public event Action<long> Refreshed;
-        public event Action<long> FocusXStarted;
-        public event Action FocusEnded;
+        public event Action BuffEnded;
+        public event Action<int> BaseStacksChanged;
+        public event Action<long> BaseBuffStarted;
+        public event Action<long> BaseBuffRefreshed;
+        public event Action<long> EmpoweredBuffStarted;
 
-        public string Icon { get; }
-        public readonly uint Duration = 10000;
+        public static bool IsEmpoweredBuffRunning { get; set; }
+
+        public string Icon { get; protected set; }
+
         private int _stacks;
-        private static bool _isFocusXRunning;
-
         public int Stacks
         {
             get => _stacks;
-            private set
+            protected set
             {
                 if (_stacks == value) return;
                 _stacks = value;
                 N(nameof(Stacks));
-                StacksChanged?.Invoke(Stacks);
+                BaseStacksChanged?.Invoke(Stacks);
             }
         }
 
-        public static bool IsFocusXRunning
-        {
-            get => _isFocusXRunning;
-            set => _isFocusXRunning = value;
-        }
-
-        public ArcherFocusTracker()
+        public BaseStackBuffTracker()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
+        }
+
+        public virtual void StartBaseBuff(long duration)
+        {
+            Stacks = 1;
+            BaseBuffStarted?.Invoke(duration);
+        }
+        public virtual void RefreshBaseBuff(int stacks, long duration)
+        {
+            Stacks = stacks;
+            BaseBuffRefreshed?.Invoke(duration);
+        }
+        public virtual void StartEmpoweredBuff(long duration)
+        {
+            EmpoweredBuffStarted?.Invoke(duration);
+            IsEmpoweredBuffRunning = true;
+            Stacks = 10;
+        }
+        public virtual void StopEmpoweredBuff()
+        {
+            IsEmpoweredBuffRunning = false;
+            Stacks = 0;
+            BuffEnded?.Invoke();
+        }
+        public virtual void StopBaseBuff()
+        {
+            IsEmpoweredBuffRunning = false;
+            Stacks = 0;
+            BuffEnded?.Invoke();
+        }
+    }
+
+    public class ArcherFocusTracker : BaseStackBuffTracker
+    {
+        public ArcherFocusTracker() : base()
+        {
             if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
             {
                 Icon = ab.IconName;
             }
         }
-
         public void StartFocus(long duration)
         {
-            Stacks = 1;
-            FocusStarted?.Invoke(duration);
+            base.StartBaseBuff(duration);
         }
         public void SetFocusStacks(int stacks, long duration)
         {
-            Stacks = stacks;
-            Refreshed?.Invoke(duration);
+            base.RefreshBaseBuff(stacks, duration);
         }
         public void StartFocusX(long duration)
         {
-            FocusXStarted?.Invoke(duration);
-            IsFocusXRunning = true;
-            Stacks = 10;
+            base.StartEmpoweredBuff(duration);
         }
         public void StopFocusX()
         {
-            IsFocusXRunning = false;
-            Stacks = 0;
-            FocusEnded?.Invoke();
+            base.StopEmpoweredBuff();
         }
-
         public void StopFocus()
         {
-            IsFocusXRunning = false;
-            Stacks = 0;
-            FocusEnded?.Invoke();
+            base.StopBaseBuff();
+        }
+    }
+
+    public class LancerLineHeldTracker : BaseStackBuffTracker
+    {
+        public LancerLineHeldTracker()
+        {
+            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(LancerAbnormalityTracker.LineHeldId, out var ab)) return;
+            Icon = ab.IconName;
         }
     }
 }

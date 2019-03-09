@@ -26,8 +26,11 @@ namespace TCC.Controls.Classes
             _an = new DoubleAnimation { Duration = TimeSpan.FromMilliseconds(150) };
             _an2 = new DoubleAnimation();
 
-            _context.Focus.FocusXStarted += OnFocusXStarted;
-            _context.Focus.StacksChanged += OnStacksChanged;
+            Timeline.SetDesiredFrameRate(_an, 20);
+            Timeline.SetDesiredFrameRate(_an2, 30);
+
+            _context.Focus.EmpoweredBuffStarted += OnFocusXStarted;
+            _context.Focus.BaseStacksChanged += OnStacksChanged;
         }
 
 
@@ -35,15 +38,15 @@ namespace TCC.Controls.Classes
         {
             Dispatcher.Invoke(() => _an2.To = ((stacks / 10D) * 280) + 42);
             Dispatcher.Invoke(() => _an2.Duration = TimeSpan.FromMilliseconds(150));
-                
-                Dispatcher.Invoke(() => SecReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
-            if (ArcherFocusTracker.IsFocusXRunning)
-            {
-            }
-            else
-            {
-                //Dispatcher.Invoke(() => MainReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
-            }
+            Dispatcher.Invoke(() => SecReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
+
+            //if (ArcherFocusTracker.IsFocusXRunning)
+            //{
+            //}
+            //else
+            //{
+            //    //Dispatcher.Invoke(() => MainReArc.BeginAnimation(Arc.EndAngleProperty, _an2));
+            //}
         }
 
         private void OnFocusXStarted(long duration)
