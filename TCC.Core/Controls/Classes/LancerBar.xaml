@@ -7,7 +7,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:LancerBarManager}">
-    <Grid Width="Auto" Margin="45 10 45 90" Name="Root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="45 35 45 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -19,25 +19,71 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                    <FrameworkElement.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                    </FrameworkElement.Effect>
+
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding LH.Factor}" Value="1">
+                            <!--<Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Stacks}" Value="10">
                                     <Setter Property="Effect" >
                                         <Setter.Value>
-                                            <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="{StaticResource DefensiveStanceColorLight}" BlurRadius="25" ShadowDepth="0"/>
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
-                            </Style.Triggers>
+                            </Style.Triggers>-->
                         </Style>
                     </Image.Style>
-
+                
                 </Image>
-                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage">
+                </Image>
                 <Path Data="{StaticResource SvgClassLancer}" Margin="19" Opacity=".3"/>
                 <Grid x:Name="LineHeldContainer" >
-                    <Grid.Resources>
+                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="4" Stroke="#dfff" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20"
+                               Width="91" Height="91" x:Name="MainReArc" Panel.ZIndex="1">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                    </local:Arc>
+                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="4" Stroke="{StaticResource TankRoleBrush}" HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="-20" Opacity="1" Rhomb="True"
+                               Width="77" Height="77" x:Name="SecReArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <!--<local:Arc.Style>
+                            <Style TargetType="FrameworkElement">
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding LH.Stacks}" Value="10">
+                                        <Setter Property="Effect" >
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="{StaticResource DefensiveStanceColorLight}" BlurRadius="15" ShadowDepth="0"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </local:Arc.Style>-->
+
+                    </local:Arc>
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
+                           FontWeight="DemiBold" Foreground="#afff"  Width="45" VerticalAlignment="Center"
+                                             Text="{Binding LH.Stacks}"></TextBlock>
+                    <!--<Grid.Resources>
                         <Style TargetType="Rectangle">
                             <Setter Property="Fill" Value="{StaticResource TankRoleBrush}"></Setter>
                             <Setter Property="Opacity" Value="0"></Setter>
@@ -70,7 +116,7 @@
                         </Style>
 
                     </Grid.Resources>
-                    <!--1-->
+                    --><!--1--><!--
                     <Rectangle Width="14" Height="6" >
                         <Rectangle.RenderTransform>
                             <TransformGroup>
@@ -79,7 +125,7 @@
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <!--2-->
+                    --><!--2--><!--
                     <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -88,7 +134,7 @@
                             </TransformGroup>
                         </Shape.RenderTransform>
                     </Polygon>
-                    <!--3-->
+                    --><!--3--><!--
                     <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -98,7 +144,7 @@
                             </TransformGroup>
                         </Shape.RenderTransform>
                     </Polygon>
-                    <!--4-->
+                    --><!--4--><!--
                     <Rectangle Width="23" Height="6"  >
                         <Rectangle.RenderTransform>
                             <TransformGroup>
@@ -108,7 +154,7 @@
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <!--5-->
+                    --><!--5--><!--
                     <Polygon  Points="-2 0, 9 0, 9 6, -8 6" Width="Auto" Height="6" Stretch="Uniform" >
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -119,7 +165,7 @@
                             </TransformGroup>
                         </Shape.RenderTransform>
                     </Polygon>
-                    <!--6-->
+                    --><!--6--><!--
                     <Polygon  Points="-2 0, 9 0, 9 6, -8 6" Width="Auto" Height="6" Stretch="Uniform" >
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -131,7 +177,7 @@
                             </TransformGroup>
                         </Shape.RenderTransform>
                     </Polygon>
-                    <!--7-->
+                    --><!--7--><!--
                     <Rectangle Width="23" Height="6"  >
                         <Rectangle.RenderTransform>
                             <TransformGroup>
@@ -142,7 +188,7 @@
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <!--8-->
+                    --><!--8--><!--
                     <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -153,7 +199,7 @@
                             </TransformGroup>
                         </Shape.RenderTransform>
                     </Polygon>
-                    <!--9-->
+                    --><!--9--><!--
                     <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -163,7 +209,7 @@
                             </TransformGroup>
                         </Shape.RenderTransform>
                     </Polygon>
-                    <!--10-->
+                    --><!--10--><!--
                     <Rectangle Width="14" Height="6"  Fill="White">
                         <Rectangle.RenderTransform>
                             <TransformGroup>
@@ -172,12 +218,16 @@
                                 <ScaleTransform ScaleX="-1"/>
                             </TransformGroup>
                         </Rectangle.RenderTransform>
-                    </Rectangle>
+                    </Rectangle>-->
                 </Grid>
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
-                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    RenderTransformOrigin=".5 .5" 
                     Opacity=".7">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
+
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="45"/>
@@ -186,8 +236,12 @@
                 </FrameworkElement.RenderTransform>
             </Border>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
                     Opacity=".7">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
+
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="45"/>
@@ -208,19 +262,21 @@
                 </FrameworkElement.RenderTransform>
 
             </skills:RhombSkillEffectControl>
-
             <local:OutlinedTextBlock TextAlignment="Center" Margin="0,-1,0,0" FontSize="17" 
                            FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
                        Text="{Binding LH.Val}" 
                        Width="45" VerticalAlignment="Center">
-                    <FrameworkElement.RenderTransform>
-                        <TranslateTransform X="0" Y="0" />
-                    </FrameworkElement.RenderTransform>
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </FrameworkElement.RenderTransform>
             </local:OutlinedTextBlock>
-
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
                     Opacity=".7">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
+
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="45"/>
@@ -237,74 +293,6 @@
 
         </Grid>
     </Grid>
-
-    <!--<Grid Width="Auto" Margin="10" Name="Root">
-        --><!--HP/MP--><!--
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            --><!--<Border Style="{StaticResource DefaultBorderStyle}"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    CornerRadius="29"
-                    Margin="4,2"
-                    VerticalAlignment="Stretch" />-->
-            <!--Arush + Gshout--><!--
-            <StackPanel Grid.Column="0"
-                         Grid.RowSpan="1"
-                         Margin="2,0"
-                        Orientation="Horizontal">
-                <local:RhombBuffCooldownControl DataContext="{Binding AdrenalineRush}" Margin="0,0,0,0" VerticalAlignment="Top"/>
-                <local:RhombBuffCooldownControl DataContext="{Binding GuardianShout}" Margin="-39 34 0 0" VerticalAlignment="Top"/>
-                <local:RhombBuffCooldownControl DataContext="{Binding Infuriate}" Margin="-39,0,0,0" VerticalAlignment="Top"/>
-                <Border  Style="{StaticResource DefaultBorderStyle}"  Height="48" Effect="{x:Null}"
-                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="48" 
-                         CornerRadius="25" >
-                    
-                    <Grid>
-                        <local:Arc  EndAngle="359.9" 
-                                    Width="46" Height="46" Stroke="#2fff" StrokeThickness="5">
-                        </local:Arc>
-                        <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource FactorToAngle}}" 
-                                    Width="46" Height="46" Stroke="{StaticResource AssaultStanceBrush}" StrokeThickness="5">
-                        </local:Arc>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
-                            <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="0"/>
-                            </Rectangle.LayoutTransform>
-                        </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
-                            <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="36"/>
-                            </Rectangle.LayoutTransform>
-                        </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
-                            <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="72" />
-                            </Rectangle.LayoutTransform>
-                        </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
-                            <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="108"/>
-                            </Rectangle.LayoutTransform>
-                        </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundBrush}">
-                            <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="144"/>
-                            </Rectangle.LayoutTransform>
-                        </Rectangle>
-                        <TextBlock Text="{Binding LH.Val}" Foreground="White" TextAlignment="Center" FontSize="22" Margin="-1,-1,0,0"
-                                   VerticalAlignment="Center"/>
-                    </Grid>
-                </Border>
-
-            </StackPanel>
-        </Grid>
-
-    </Grid>-->
 </UserControl>
 
 

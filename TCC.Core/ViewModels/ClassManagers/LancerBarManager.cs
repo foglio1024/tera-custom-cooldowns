@@ -7,16 +7,13 @@ namespace TCC.ViewModels
     {
         public LancerBarManager()
         {
-            LH = new StatTracker()
-            {
-                Max = 10
-            };
+            LH = new LancerLineHeldTracker();
         }
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }
         public DurationCooldownIndicator GuardianShout { get; set; }
         public Cooldown Infuriate { get; set; }
-        public StatTracker LH { get; set; }
+        public LancerLineHeldTracker LH { get; set; }
 
         public override bool StartSpecialSkill(Cooldown sk)
         {

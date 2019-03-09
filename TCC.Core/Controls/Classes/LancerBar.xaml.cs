@@ -1,4 +1,8 @@
-﻿using TCC.ViewModels;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Media.Animation;
+using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls.Classes
 {
@@ -8,6 +12,8 @@ namespace TCC.Controls.Classes
     public partial class LancerBar
     {
         private LancerBarManager _dc;
+        private DoubleAnimation _lineHeldDurationAn;
+        private DoubleAnimation _lineHeldStacksAn;
 
         public LancerBar()
         {
@@ -18,18 +24,57 @@ namespace TCC.Controls.Classes
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
             _dc = DataContext as LancerBarManager;
-            if (_dc != null) _dc.LH.PropertyChanged += OnLineHeldPropertyChanged;
+            _lineHeldDurationAn = new DoubleAnimation { Duration = TimeSpan.FromMilliseconds(150) };
+            _lineHeldStacksAn = new DoubleAnimation();
+            Timeline.SetDesiredFrameRate(_lineHeldDurationAn, 20);
+            Timeline.SetDesiredFrameRate(_lineHeldStacksAn, 30);
+            //if (_dc != null) _dc.LH.PropertyChanged += OnLineHeldPropertyChanged;
+            if (_dc == null) return;
+            _dc.LH.BaseStacksChanged += OnStacksChanged;
+            _dc.LH.BaseBuffRefreshed += OnLineHeldRefreshed;
+            _dc.LH.BuffEnded += OnLineHeldEnded;
         }
 
-        private void OnLineHeldPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnLineHeldEnded()
         {
-            if (e.PropertyName != nameof(_dc.LH.Val)) return;
             Dispatcher.Invoke(() =>
             {
-                for (var i = 0; i < _dc.LH.Max; i++)
-                {
-                    LineHeldContainer.Children[i].Opacity = i <= _dc.LH.Val - 1 ? 1 : 0;
-                }
+                _lineHeldStacksAn.To = 42;
+                _lineHeldStacksAn.Duration = TimeSpan.FromMilliseconds(150);
+                SecReArc.BeginAnimation(Arc.EndAngleProperty, _lineHeldStacksAn);
+            });
+
+        }
+
+        //private void OnLineHeldPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName != nameof(_dc.LH.Val)) return;
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        for (var i = 0; i < _dc.LH.Max; i++)
+        //        {
+        //            LineHeldContainer.Children[i].Opacity = i <= _dc.LH.Val - 1 ? 1 : 0;
+        //        }
+        //    });
+        //}
+        private void OnStacksChanged(int stacks)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                _lineHeldStacksAn.To = ((stacks / 10D) * 280) + 42;
+                _lineHeldStacksAn.Duration = TimeSpan.FromMilliseconds(150);
+                SecReArc.BeginAnimation(Arc.EndAngleProperty, _lineHeldStacksAn);
+            });
+        }
+        private void OnLineHeldRefreshed(long duration)
+        {
+            if (_dc.LH.Stacks != 10) return;
+            Dispatcher.Invoke(() =>
+            {
+                _lineHeldDurationAn.From = 318;
+                _lineHeldDurationAn.To = 42;
+                _lineHeldDurationAn.Duration = TimeSpan.FromMilliseconds(duration);
+                MainReArc.BeginAnimation(Arc.EndAngleProperty, _lineHeldDurationAn);
             });
         }
     }

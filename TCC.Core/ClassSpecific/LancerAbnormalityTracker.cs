@@ -7,9 +7,9 @@ namespace TCC.ClassSpecific
 {
     public class LancerAbnormalityTracker : ClassAbnormalityTracker
     {
-        private static readonly uint[] ARushIDs = { 200700, 200701, 200731 };
-        private static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
-        private static readonly uint LineHeldId = 201701;
+        public static readonly uint[] ARushIDs = { 200700, 200701, 200731 };
+        public static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
+        public static readonly uint LineHeldId = 201701;
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
@@ -68,17 +68,17 @@ namespace TCC.ClassSpecific
         private static void CheckLineHeld(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.Val = p.Stacks;
+            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.StartBaseBuff(p.Duration);
         }
         private static void CheckLineHeld(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.Val = p.Stacks;
+            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.RefreshBaseBuff(p.Stacks, p.Duration);
         }
         private static void CheckLineHeld(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.Val = 0;
+            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.StopBaseBuff();
         }
     }
 }
