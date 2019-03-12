@@ -528,7 +528,8 @@ namespace TCC
                         { "region", SessionManager.Server.Region },
                         { "server", SessionManager.Server.ServerId },
                         { "account", accountNameHash },
-                        { "tcc_version", App.AppVersion}
+                        { "tcc_version", App.AppVersion},
+                        { "timestamp", DateTime.UtcNow.Ticks }
                     };
 
                     c.Encoding = Encoding.UTF8;
