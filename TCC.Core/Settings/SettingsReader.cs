@@ -307,7 +307,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.ShowItemsCooldown)) SettingsHolder.ShowItemsCooldown = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowMembersLaurels)) SettingsHolder.ShowMembersLaurels = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.AnimateChatMessages)) SettingsHolder.AnimateChatMessages = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.StatSent)) SettingsHolder.StatSent = bool.Parse(attr.Value);
+                    //else if (attr.Name == nameof(SettingsHolder.StatSent)) SettingsHolder.StatSent = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowFlightEnergy)) SettingsHolder.ShowFlightEnergy = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.LfgEnabled)) SettingsHolder.LfgEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowGroupWindowDetails)) SettingsHolder.ShowGroupWindowDetails = bool.Parse(attr.Value);
@@ -329,12 +329,8 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.ForceSoftwareRendering)) SettingsHolder.ForceSoftwareRendering = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.Npcap)) SettingsHolder.Npcap = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ExperimentalNotification)) SettingsHolder.ExperimentalNotification = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.LanguageOverride) 
-                    || attr.Name == "RegionOverride" // retrocompatibility <<-----------------------------<<<<<<<<<< TODO: remove at some point
-                    ) SettingsHolder.LanguageOverride = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.LastLanguage)
-                    || attr.Name == "LastRegion" // retrocompatibility <<---------------------------------<<<<<<<<<< TODO: remove at some point
-                    ) SettingsHolder.LastLanguage = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.LanguageOverride)) SettingsHolder.LanguageOverride = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.LastLanguage)) SettingsHolder.LastLanguage = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.Webhook)) SettingsHolder.Webhook = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.WebhookMessage)) SettingsHolder.WebhookMessage = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.FlightGaugeRotation)) SettingsHolder.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
@@ -356,6 +352,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.UserExcludedSysMsg)) SettingsHolder.UserExcludedSysMsg = ParseUserExcludedSysMsg(attr.Value);
 
                     else if (attr.Name == nameof(SettingsHolder.FpsAtGuardian)) SettingsHolder.FpsAtGuardian = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.EnableProxy)) SettingsHolder.EnableProxy = bool.Parse(attr.Value);
                     //add settings here
                 });
 

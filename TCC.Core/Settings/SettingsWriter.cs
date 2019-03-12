@@ -141,7 +141,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.TwitchName), SettingsHolder.TwitchName),
                 new XAttribute(nameof(SettingsHolder.TwitchToken), SettingsHolder.TwitchToken),
                 new XAttribute(nameof(SettingsHolder.TwitchChannelName), SettingsHolder.TwitchChannelName),
-                new XAttribute(nameof(SettingsHolder.StatSent), SettingsHolder.StatSent),
+                //new XAttribute(nameof(SettingsHolder.StatSent), SettingsHolder.StatSent),
                 new XAttribute(nameof(SettingsHolder.ShowFlightEnergy), SettingsHolder.ShowFlightEnergy),
                 new XAttribute(nameof(SettingsHolder.LfgEnabled), SettingsHolder.LfgEnabled),
                 new XAttribute(nameof(SettingsHolder.UseHotkeys), SettingsHolder.UseHotkeys),
@@ -156,7 +156,8 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.CheckOpcodesHash), SettingsHolder.CheckOpcodesHash),
                 new XAttribute(nameof(SettingsHolder.ShowNotificationBubble), SettingsHolder.ShowNotificationBubble),
                 new XAttribute(nameof(SettingsHolder.FpsAtGuardian), SettingsHolder.FpsAtGuardian),
-                new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification)
+                new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification),
+                new XAttribute(nameof(SettingsHolder.EnableProxy), SettingsHolder.EnableProxy)
             );
         }
 

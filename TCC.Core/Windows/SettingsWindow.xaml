@@ -1253,6 +1253,8 @@
                             />
                             <settings:CheckboxSetting SettingName="Use npcap" 
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />
+                            <settings:CheckboxSetting SettingName="Use Tera proxy" 
+                                                      IsOn="{Binding EnableProxy, Mode=TwoWay}" />
                             <settings:CheckboxSetting SettingName="Auto fps mode" 
                                                       IsOn="{Binding FpsAtGuardian, Mode=TwoWay}" 
                                                       >

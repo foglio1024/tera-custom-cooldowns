@@ -188,6 +188,7 @@ namespace TCC.Proxy
 
         public static void ConnectToProxy()
         {
+            if (!Settings.SettingsHolder.EnableProxy) return;
             try
             {
                 if (_client.Client != null && _client.Connected) return;
@@ -212,7 +213,7 @@ namespace TCC.Proxy
                     if (_retries <= 0)
                     {
                         ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-                        WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available.", NotificationType.Error);
+                        WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available. If you don't want to see this message again disable proxy in TCC System Settings.", NotificationType.Error);
                         _retries = 2;
                         return;
                     }

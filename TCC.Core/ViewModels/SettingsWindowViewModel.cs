@@ -426,6 +426,16 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool EnableProxy
+        {
+            get => SettingsHolder.EnableProxy;
+            set
+            {
+                if (SettingsHolder.EnableProxy == value) return;
+                SettingsHolder.EnableProxy = value;
+                N();
+            }
+        }
         public bool ShowFlightGauge
         {
             get => SettingsHolder.ShowFlightEnergy;

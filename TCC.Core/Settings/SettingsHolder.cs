@@ -17,15 +17,15 @@ namespace TCC.Settings
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
 
-        public static WindowSettings GroupWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false, null, nameof(GroupWindowSettings));
-        public static WindowSettings CooldownWindowSettings { get; set; } = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
-        public static WindowSettings BossWindowSettings { get; set; } = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false, null, nameof(BossWindowSettings));
-        public static WindowSettings BuffWindowSettings { get; set; } = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BuffWindowSettings));
-        public static WindowSettings CharacterWindowSettings { get; set; } = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false, null, nameof(CharacterWindowSettings));
-        public static WindowSettings ClassWindowSettings { get; set; } = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(ClassWindowSettings));
-        public static WindowSettings FlightGaugeWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
-        public static WindowSettings FloatingButtonSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true);
-        public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings));
+        public static WindowSettings GroupWindowSettings       { get; set; } = new WindowSettings(0,    0, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
+        public static WindowSettings CooldownWindowSettings    { get; set; } = new WindowSettings(.4,  .7, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
+        public static WindowSettings BossWindowSettings        { get; set; } = new WindowSettings(.4,   0, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(BossWindowSettings));
+        public static WindowSettings BuffWindowSettings        { get; set; } = new WindowSettings(1,   .7, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(BuffWindowSettings));
+        public static WindowSettings CharacterWindowSettings   { get; set; } = new WindowSettings(.4,   1, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(CharacterWindowSettings));
+        public static WindowSettings ClassWindowSettings       { get; set; } = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(ClassWindowSettings));
+        public static WindowSettings FlightGaugeWindowSettings { get; set; } = new WindowSettings(0,    0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
+        public static WindowSettings FloatingButtonSettings    { get; set; } = new WindowSettings(0,    0, 0, 0, true, ClickThruMode.Never,  1, false, 1, false, true, true);
+        public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1,  .45, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings));
 
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; } = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
 
@@ -190,5 +190,6 @@ namespace TCC.Settings
         public static List<string> UserExcludedSysMsg { get; set; } = new List<string>();
         public static bool ExperimentalNotification { get; set; } = true;
         public static bool FpsAtGuardian { get; set; } = true;
+        public static bool EnableProxy { get; set; } = true;
     }
 }
