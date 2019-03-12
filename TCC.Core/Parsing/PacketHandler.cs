@@ -1140,15 +1140,9 @@ namespace TCC.Parsing
         }
         public static void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
-            if (PacketAnalyzer.Factory.ReleaseVersion == 27)
-            {
-                TccMessageBox.Show("Classic server is not supported. TCC will now close.", MessageBoxType.Error);
-                App.CloseApp();
-                return;
-            }
+            SessionManager.CurrentAccountName = p.AccountName;
             if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
             {
-
                 PacketAnalyzer.Factory.ReloadSysMsg();
             }
 

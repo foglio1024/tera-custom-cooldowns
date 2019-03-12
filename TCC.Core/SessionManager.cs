@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Settings;
@@ -114,13 +115,8 @@ namespace TCC
         }
         public static TccDatabase CurrentDatabase { get; set; }
         public static bool CivilUnrestZone { get; internal set; }
+        public static string CurrentAccountName { get; internal set; }
 
-        //public static void SetCombatStatus(bool combat)
-        //{
-        //    //var old = Me.IsInCombat;
-        //    //Me.IsInCombat = combat;
-        //    //if (combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
-        //}
         public static void SetPlayerHp(float hp)
         {
             CurrentPlayer.CurrentHP = hp;
@@ -164,7 +160,7 @@ namespace TCC
         public static void SetPlayerMaxSt(int maxSt)
         {
             CurrentPlayer.MaxST = maxSt;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
@@ -229,7 +225,7 @@ namespace TCC
             CurrentPlayer.IceBoost = i;
             CurrentPlayer.ArcaneBoost = a;
 
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            if (SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
                 ((SorcererBarManager)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
             }
