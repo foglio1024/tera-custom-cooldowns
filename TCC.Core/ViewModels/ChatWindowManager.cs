@@ -217,14 +217,18 @@ namespace TCC.ViewModels
 
         private static bool Pass(ChatMessage current, ChatMessage old)
         {
-            if (current.Author == SessionManager.CurrentPlayer.Name ||
-                old.Author == SessionManager.CurrentPlayer.Name) return true;
+            if (current.Author == SessionManager.CurrentPlayer.Name) return true;
             if (old.RawMessage != current.RawMessage) return true;
 
             if (old.Author != current.Author) return true;
             switch (current.Channel)
             {
                 case ChatChannel.Group:
+                case ChatChannel.Party:
+                case ChatChannel.PartyNotice:
+                case ChatChannel.Raid:
+                case ChatChannel.RaidLeader:
+                case ChatChannel.RaidNotice:
                 case ChatChannel.GroupAlerts:
                 case ChatChannel.Money:
                 case ChatChannel.Loot:
