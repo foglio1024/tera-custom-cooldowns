@@ -16,7 +16,7 @@ namespace TCC.Publisher
     public partial class App : System.Windows.Application
     {
         public static List<string> Exclusions;
-        private async void Application_Startup(object sender, StartupEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
             Exclusions = File.ReadAllLines("D:/Repos/TCC/TCC.Publisher/exclusions.txt").ToList();
         }
@@ -44,14 +44,14 @@ namespace TCC.Publisher
         });
 
         const string TCC_PATH = "D:/Repos/TCC";
+        const string Repo = "Tera-custom-cooldowns";
+        const string Owner = "Foglio1024";
 
         static string ReleaseFolder => Path.Combine(TCC_PATH, "release");
         static string StringVersion = ""; // "X.Y.Z"
         static string Experimental = "";  // "-e"
         static string ZipName => $"TCC-{StringVersion}{Experimental}.zip";
         static string Tag => $"v{StringVersion}{Experimental}";
-        static string Repo = "Tera-custom-cooldowns";
-        static string Owner = "Foglio1024";
 
         public static void GetVersion()
         {
@@ -143,13 +143,13 @@ namespace TCC.Publisher
                     Prerelease = false,
                     TargetCommitish = string.IsNullOrEmpty(Experimental) ? "master" : "experimental"
                 };
-                await Task.Run(() => Client.Repository.Release.Create("Foglio1024", "Tera-custom-cooldowns", newRelease));
+                await Task.Run(() => Client.Repository.Release.Create(Owner, Repo, newRelease));
                 Logger.WriteLine($"Release created");
             }
         }
         public static async Task Upload()
         {
-            var rls = await Client.Repository.Release.Get(owner: "Foglio1024", name: "Tera-custom-cooldowns", tag: $"v{StringVersion}{Experimental}");
+            var rls = await Client.Repository.Release.Get(owner: Owner, name: Repo, tag: $"v{StringVersion}{Experimental}");
             if (rls.Assets.Any(x => x.Name == ZipName))
             {
                 Logger.WriteLine("ERROR: This release already contains an asset with the same name.");
