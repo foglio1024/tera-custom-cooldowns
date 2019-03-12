@@ -11,7 +11,6 @@ using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Messages.Client;
 using TCC.TeraCommon.Game.Services;
 using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
-//using Tera.Game.Messages;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 using TCC.Settings;

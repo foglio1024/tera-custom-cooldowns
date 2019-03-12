@@ -114,7 +114,7 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
-            if (Settings.SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.RemoveDeadLfg();
+            if (SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.RemoveDeadLfg();
         }
 
         #region Factory
