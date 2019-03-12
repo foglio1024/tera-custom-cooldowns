@@ -23,6 +23,7 @@ namespace TCC.Converters
                 case ChatChannel.Trade:
                     return R.Brushes.ChatTradeBrush;
                 case ChatChannel.Greet:
+                case ChatChannel.Angler:
                     return R.Brushes.ChatGreetBrush;
                 case ChatChannel.PartyNotice:
                     return R.Brushes.ChatPartyNoticeBrush;

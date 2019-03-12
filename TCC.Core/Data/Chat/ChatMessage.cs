@@ -111,6 +111,7 @@ namespace TCC.Data.Chat
                 switch (ch)
                 {
                     case ChatChannel.Greet:
+                    case ChatChannel.Angler:
                         ParseDirectMessage(RawMessage.ReplaceHtmlEscapes(), ch);
                         break;
                     case ChatChannel.Emote:

@@ -133,6 +133,7 @@ namespace TCC.Data
         Area = 3,
         Trade = 4,
         Greet = 9,
+        Angler = 10,
         Private1 = 11,
         Private2 = 12,
         Private3 = 13,
