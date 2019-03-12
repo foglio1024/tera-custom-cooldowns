@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -41,7 +42,6 @@ namespace TCC
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
-
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
@@ -99,7 +99,6 @@ namespace TCC
 #pragma warning restore CS0162
             }
             Loading = false;
-
         }
         [DllImport("kernel32.dll")]
         public static extern int GetCurrentThreadId();
@@ -470,7 +469,7 @@ namespace TCC
                 }
 
                 c.Encoding = Encoding.UTF8;
-                c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"),
+                c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report" /*"https://us-central1-tcc-report.cloudfunctions.net/crash"*/),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
             }
 #endif
@@ -516,32 +515,33 @@ namespace TCC
 
         public static void SendUsageStat()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var c = new WebClient())
+            try
             {
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Headers.Add(HttpRequestHeader.UserAgent,
-                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
-                var js = new JObject
+                using (var c = Utils.GetDefaultWebClient())
                 {
-                    {"server", SessionManager.Server.ServerId},
-                    {
-                        "id",
-                        WindowManager.Dashboard.VM.Characters == null ? 0 :
-                        WindowManager.Dashboard.VM.Characters.Count == 0 ? 0 :
-                        WindowManager.Dashboard.VM.Characters.FirstOrDefault(x => x.Position == 1)?.Id
-                    },
-                    {"region", SessionManager.Server.Region}
+                    c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                    var sha256 = SHA256.Create();
+                    var accountNameHash = sha256.ComputeHash(SessionManager.CurrentAccountName.ToByteArray()).ToStringEx();
+                    var js = new JObject
+                {
+                    { "region", SessionManager.Server.Region },
+                    { "server", SessionManager.Server.ServerId },
+                    { "account", accountNameHash }
+                    //{ "id", WindowManager.Dashboard.VM.Characters == null ? 0 :
+                    //        WindowManager.Dashboard.VM.Characters.Count == 0 ? 0 :
+                    //        WindowManager.Dashboard.VM.Characters.FirstOrDefault(x => x.Position == 1)?.Id },
                 };
-                c.Encoding = Encoding.UTF8;
-                c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"),
-                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                    c.Encoding = Encoding.UTF8;
+                    c.UploadStringAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
+                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                SettingsHolder.StatSent = true;
-                SettingsWriter.Save();
+                    SettingsHolder.StatSent = true;
+                }
+            }
+            catch (Exception e)
+            {
+                //TODO: write error?
             }
         }
 
