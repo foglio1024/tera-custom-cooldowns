@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
@@ -34,6 +35,7 @@ namespace TCC.Data.Pc
         private bool _fireBoost;
         private bool _iceBoost;
         private bool _arcaneBoost;
+        private bool _isAlive;
 
         public string Name
         {
@@ -339,6 +341,20 @@ namespace TCC.Data.Pc
                 if (_arcane == value) return;
                 _arcane = value;
                 N();
+            }
+        }
+
+        public event Action Death;
+        public event Action Ress;
+        public bool IsAlive
+        {
+            get => _isAlive;
+            internal set
+            {
+                if (_isAlive == value) return;
+                _isAlive = value;
+                if (value) Ress?.Invoke();
+                else Death?.Invoke();
             }
         }
 

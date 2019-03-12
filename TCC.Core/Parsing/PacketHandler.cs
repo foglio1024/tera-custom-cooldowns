@@ -420,6 +420,14 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
 
+        internal static void HandleCreatureLife(S_CREATURE_LIFE p)
+        {
+            if (p.Target.IsMe())
+            {
+                SessionManager.CurrentPlayer.IsAlive = p.Alive;
+            }
+        }
+
         public static void HandlePrivateChat(S_PRIVATE_CHAT x)
         {
             var i = ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(y => y.Id == x.Channel).Index;

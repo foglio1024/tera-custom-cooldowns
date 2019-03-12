@@ -115,6 +115,7 @@ namespace TCC.Parsing
             { nameof(S_NOTIFY_GUILD_QUEST_URGENT),             Contructor<Func<TeraMessageReader, S_NOTIFY_GUILD_QUEST_URGENT>>() },
             { nameof(S_CHANGE_GUILD_CHIEF),                    Contructor<Func<TeraMessageReader, S_CHANGE_GUILD_CHIEF>>() },
             { nameof(S_GUILD_MEMBER_LIST),                     Contructor<Func<TeraMessageReader, S_GUILD_MEMBER_LIST>>() },
+            { nameof(S_CREATURE_LIFE),                         Contructor<Func<TeraMessageReader, S_CREATURE_LIFE>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
@@ -165,6 +166,7 @@ namespace TCC.Parsing
             {typeof(S_NOTIFY_GUILD_QUEST_URGENT),              new Action<S_NOTIFY_GUILD_QUEST_URGENT>(PacketHandler.HandleNotifyGuildQuestUrgent) },
             {typeof(S_CHANGE_GUILD_CHIEF),                     new Action<S_CHANGE_GUILD_CHIEF>(PacketHandler.HandleChangeGuildChief) },
             {typeof(S_GUILD_MEMBER_LIST),                      new Action<S_GUILD_MEMBER_LIST>(PacketHandler.HandleGuildMembersList) },
+            {typeof(S_CREATURE_LIFE),                          new Action<S_CREATURE_LIFE>(PacketHandler.HandleCreatureLife) },
           //{typeof(S_VIEW_WARE_EX),                           new Action<S_VIEW_WARE_EX>(PacketHandler.HandleViewWareEx) },
           //{typeof(S_ACTION_STAGE),                           new Action<S_ACTION_STAGE>(x => PacketHandler.HandleActionStage(x)) }, //nvm
           //{typeof(C_LOAD_TOPO_FIN),                          new Action<C_LOAD_TOPO_FIN>(x => PacketHandler.HandleLoadTopoFin(x)) },
