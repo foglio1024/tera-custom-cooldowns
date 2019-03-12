@@ -17,7 +17,7 @@ namespace TCC
     }
     public static class StringExtensions
     {
-        public static byte[] ToByteArray(this string str)
+        public static byte[] ToByteArrayHex(this string str)
         {
             var numberChars = str.Length / 2;
             var bytes = new byte[numberChars];
@@ -28,7 +28,16 @@ namespace TCC
                       Convert.ToByte(new string(new[] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
             return bytes;
-
+        }
+        public static byte[] ToByteArray(this string str)
+        {
+            var ret = new byte[str.Length];
+            for (var i = 0; i < str.Length; i++)
+            {
+                ret[i] = Convert.ToByte(str[i]);
+            }
+            return ret;
+            //return Encoding.Default.GetBytes(str);
         }
         public static string ReplaceHtmlEscapes(this string str)
         {
