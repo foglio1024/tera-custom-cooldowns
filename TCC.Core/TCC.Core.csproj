@@ -623,7 +623,7 @@
     <Compile Include="TeraCommon\Game\Messages\Server\S_CHAT.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\S_CHECK_TO_READY_PARTY.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_CHANGE_HP.cs" />
-    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_LIFE.cs" />
+    <Compile Include="Parsing\Messages\S_CREATURE_LIFE.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_ROTATE.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\S_CREST_INFO.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\S_CREST_MESSAGE.cs" />
