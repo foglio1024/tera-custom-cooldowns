@@ -524,14 +524,13 @@ namespace TCC
                     var sha256 = SHA256.Create();
                     var accountNameHash = sha256.ComputeHash(SessionManager.CurrentAccountName.ToByteArray()).ToStringEx();
                     var js = new JObject
-                {
-                    { "region", SessionManager.Server.Region },
-                    { "server", SessionManager.Server.ServerId },
-                    { "account", accountNameHash }
-                    //{ "id", WindowManager.Dashboard.VM.Characters == null ? 0 :
-                    //        WindowManager.Dashboard.VM.Characters.Count == 0 ? 0 :
-                    //        WindowManager.Dashboard.VM.Characters.FirstOrDefault(x => x.Position == 1)?.Id },
-                };
+                    {
+                        { "region", SessionManager.Server.Region },
+                        { "server", SessionManager.Server.ServerId },
+                        { "account", accountNameHash },
+                        { "tcc_version", App.AppVersion}
+                    };
+
                     c.Encoding = Encoding.UTF8;
                     c.UploadStringAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
