@@ -78,7 +78,7 @@ namespace TCC.ClassSpecific
         private static void CheckLineHeld(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.StopBaseBuff();
+            ((LancerBarManager)WindowManager.ClassWindow.VM.CurrentManager).LH.Stop();
         }
     }
 }

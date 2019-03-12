@@ -31,6 +31,7 @@ namespace TCC.Controls.Classes
             //if (_dc != null) _dc.LH.PropertyChanged += OnLineHeldPropertyChanged;
             if (_dc == null) return;
             _dc.LH.BaseStacksChanged += OnStacksChanged;
+            _dc.LH.BaseBuffStarted += OnLineHeldRefreshed;
             _dc.LH.BaseBuffRefreshed += OnLineHeldRefreshed;
             _dc.LH.BuffEnded += OnLineHeldEnded;
         }
@@ -42,6 +43,7 @@ namespace TCC.Controls.Classes
                 _lineHeldStacksAn.To = 42;
                 _lineHeldStacksAn.Duration = TimeSpan.FromMilliseconds(150);
                 SecReArc.BeginAnimation(Arc.EndAngleProperty, _lineHeldStacksAn);
+                MainReArc.BeginAnimation(Arc.EndAngleProperty, _lineHeldStacksAn);
             });
 
         }
@@ -68,7 +70,6 @@ namespace TCC.Controls.Classes
         }
         private void OnLineHeldRefreshed(long duration)
         {
-            if (_dc.LH.Stacks != 10) return;
             Dispatcher.Invoke(() =>
             {
                 _lineHeldDurationAn.From = 318;

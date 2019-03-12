@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System;
+using TCC.Data;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels
@@ -8,6 +9,15 @@ namespace TCC.ViewModels
         public LancerBarManager()
         {
             LH = new LancerLineHeldTracker();
+            SessionManager.CurrentPlayer.Death += OnDeath;
+        }
+
+        
+        private void OnDeath()
+        {
+            LH.Stop();
+            GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
+            AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }

@@ -50,13 +50,8 @@ namespace TCC.Data
             IsEmpoweredBuffRunning = true;
             Stacks = 10;
         }
-        public virtual void StopEmpoweredBuff()
-        {
-            IsEmpoweredBuffRunning = false;
-            Stacks = 0;
-            BuffEnded?.Invoke();
-        }
-        public virtual void StopBaseBuff()
+
+        public virtual void Stop()
         {
             IsEmpoweredBuffRunning = false;
             Stacks = 0;
@@ -87,11 +82,11 @@ namespace TCC.Data
         }
         public void StopFocusX()
         {
-            base.StopEmpoweredBuff();
+            base.Stop();
         }
         public void StopFocus()
         {
-            base.StopBaseBuff();
+            base.Stop();
         }
     }
 
@@ -101,6 +96,7 @@ namespace TCC.Data
         {
             if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(LancerAbnormalityTracker.LineHeldId, out var ab)) return;
             Icon = ab.IconName;
+            BaseStacksChanged += (stacks) => { if (stacks == 0) Stop(); };
         }
     }
 }
