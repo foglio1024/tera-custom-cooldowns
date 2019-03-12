@@ -193,8 +193,7 @@ namespace TCC.Data.Chat
         {
             var linkData = node.GetAttributeValue("param", "");
 
-            var text = node.InnerText;
-            text = StringUtils.ReplaceHtmlEscapes(text);
+            var text = node.InnerText.ReplaceHtmlEscapes();
 
             var result = new MessagePiece(text)
             {
@@ -219,9 +218,8 @@ namespace TCC.Data.Chat
                 // ignored
             }
 
-            var text = node.InnerText;
 
-            var result = new MessagePiece(StringUtils.ReplaceHtmlEscapes(text))
+            var result = new MessagePiece(node.InnerText.ReplaceHtmlEscapes())
             {
                 ItemId = id,
                 ItemUid = uid,
@@ -236,10 +234,7 @@ namespace TCC.Data.Chat
             var linkData = node.GetAttributeValue("param", "");
             //parsing only name
 
-            var text = node.InnerText;
-            text = StringUtils.ReplaceHtmlEscapes(text);
-
-            var result = new MessagePiece(text)
+            var result = new MessagePiece(node.InnerText.ReplaceHtmlEscapes())
             {
                 Type = MessagePieceType.Quest
             };

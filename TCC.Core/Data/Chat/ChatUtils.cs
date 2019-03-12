@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using TCC.Parsing;
 
 namespace TCC.Data.Chat
 {
@@ -80,11 +81,11 @@ namespace TCC.Data.Chat
                     result = regex.Replace(txt, '{' + keyVal.Value + '}', 1);
                     if (txt == result)
                     {
-                        result = Utils.ReplaceFirstOccurrenceCaseInsensitive(txt, '{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
+                        result = txt.ReplaceFirstOccurrenceCaseInsensitive('{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
                     }
                     if (txt == result)
                     {
-                        result = Utils.ReplaceFirstOccurrenceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
+                        result = txt.ReplaceFirstOccurrenceCaseInsensitive('{' + keyVal.Key, '{' + keyVal.Value);
                     }
                     txt = result;
                 }
@@ -98,11 +99,11 @@ namespace TCC.Data.Chat
                     result = regex.Replace(txt, '{' + keyVal.Value + '}');
                     if (txt == result)
                     {
-                        result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
+                        result = txt.ReplaceCaseInsensitive('{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
                     }
                     if (txt == result)
                     {
-                        result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
+                        result = txt.ReplaceCaseInsensitive('{' + keyVal.Key, '{' + keyVal.Value);
                     }
                     txt = result;
                 }

@@ -92,24 +92,6 @@ namespace TCC
             }
         }
 
-        public static string ReplaceFirstOccurrenceCaseInsensitive(string input, string search, string replacement)
-        {
-            var pos = input.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
-            if (pos < 0) return input;
-            var result = input.Substring(0, pos) + replacement + input.Substring(pos + search.Length);
-            return result;
-        }
-
-        public static string ReplaceCaseInsensitive(string input, string search, string replacement)
-        {
-            var result = Regex.Replace(
-                input,
-                Regex.Escape(search),
-                replacement.Replace("$", "$$"),
-                RegexOptions.IgnoreCase
-            );
-            return result;
-        }
 
         public static bool IsPhase1Dragon(uint zoneId, uint templateId)
         {
@@ -277,9 +259,9 @@ namespace TCC
         public static WebClient GetDefaultWebClient()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            var ret = new WebClient();
-            ret.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-            return ret;
+            var wc = new WebClient();
+            wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+            return wc;
 
         }
 
@@ -300,7 +282,7 @@ namespace TCC
             //var fileBuffer = new byte[file.Length];
             //file.Read(fileBuffer, 0, (int)file.Length);
             //file.Close();
-            return StringUtils.ByteArrayToString(SHA256.Create().ComputeHash(fileBuffer));
+            return SHA256.Create().ComputeHash(fileBuffer).ToStringEx();
 
         }
 
