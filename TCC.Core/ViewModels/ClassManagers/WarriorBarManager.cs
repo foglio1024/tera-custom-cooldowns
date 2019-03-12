@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System;
+using TCC.Data;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels
@@ -31,6 +32,12 @@ namespace TCC.ViewModels
             TraverseCut = new StatTracker { Max = 13, Val = 0 };
             //TempestAura = new StatTracker { Max = 50, Val = 0 };
             Stance = new StanceTracker<WarriorStance>();
+            SessionManager.CurrentPlayer.Death += OnDeath;
+        }
+
+        private void OnDeath()
+        {
+            DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         public bool ShowEdge => Settings.SettingsHolder.WarriorShowEdge;
