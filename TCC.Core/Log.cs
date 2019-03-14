@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using TCC.ViewModels;
 
 namespace TCC
 {
@@ -22,7 +21,11 @@ namespace TCC
 
         public static void F(string line)
         {
-            File.AppendAllText(Path.Combine(App.BasePath, "error.log"), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
+            try
+            {
+                File.AppendAllText(Path.Combine(App.BasePath, "error.log"), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
+            }
+            catch { }
         }
 
         public static void All(string s)
