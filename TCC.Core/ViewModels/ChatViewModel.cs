@@ -58,7 +58,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs { get; }
+        public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs { get; set; }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public IInterTabClient InterTabClient { get; }
         public List<Tab> Tabs
