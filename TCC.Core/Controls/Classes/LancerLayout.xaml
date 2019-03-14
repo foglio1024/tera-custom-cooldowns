@@ -1,0 +1,299 @@
+﻿<UserControl x:Class="TCC.Controls.Classes.LancerLayout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:LancerLayoutVM}">
+    <Grid Width="Auto" Margin="45 35 45 90" Name="Root" ClipToBounds="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False" Width="Auto" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                    <FrameworkElement.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                    </FrameworkElement.Effect>
+
+                    <Image.Style>
+                        <Style TargetType="FrameworkElement">
+                            <!--<Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Stacks}" Value="10">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource DefensiveStanceColorLight}" BlurRadius="25" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>-->
+                        </Style>
+                    </Image.Style>
+                
+                </Image>
+                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage">
+                </Image>
+                <Path Data="{StaticResource SvgClassLancer}" Margin="19" Opacity=".3"/>
+                <Grid x:Name="LineHeldContainer" >
+                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="4" Stroke="#dfff" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20"
+                               Width="91" Height="91" x:Name="MainReArc" Panel.ZIndex="1">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                    </local:Arc>
+                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="4" Stroke="{StaticResource TankRoleBrush}" HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="-20" Opacity="1" Rhomb="True"
+                               Width="77" Height="77" x:Name="SecReArc">
+                        <local:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </local:Arc.RenderTransform>
+                        <!--<local:Arc.Style>
+                            <Style TargetType="FrameworkElement">
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding LH.Stacks}" Value="10">
+                                        <Setter Property="Effect" >
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="{StaticResource DefensiveStanceColorLight}" BlurRadius="15" ShadowDepth="0"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </local:Arc.Style>-->
+
+                    </local:Arc>
+                    <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
+                           FontWeight="DemiBold" Foreground="#afff"  Width="45" VerticalAlignment="Center"
+                                             Text="{Binding LH.Stacks}"></TextBlock>
+                    <!--<Grid.Resources>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Fill" Value="{StaticResource TankRoleBrush}"></Setter>
+                            <Setter Property="Opacity" Value="0"></Setter>
+                            <Setter Property="RenderTransformOrigin" Value=".5 .5"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource TankRoleColor}" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+
+                        </Style>
+                        <Style TargetType="Polygon">
+                            <Setter Property="Fill" Value="{StaticResource TankRoleBrush}"/>
+                            <Setter Property="Opacity" Value="0"/>
+                            <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LH.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource TankRoleColor}" BlurRadius="15" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+
+                        </Style>
+
+                    </Grid.Resources>
+                    --><!--1--><!--
+                    <Rectangle Width="14" Height="6" >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-24" Y="16"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    --><!--2--><!--
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-35" Y="4"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    --><!--3--><!--
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-36" Y="4"/>
+                                <ScaleTransform ScaleY="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    --><!--4--><!--
+                    <Rectangle Width="23" Height="6"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-21" Y="19"/>
+                                <ScaleTransform ScaleY="-1"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    --><!--5--><!--
+                    <Polygon  Points="-2 0, 9 0, 9 6, -8 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                                <StaticResource ResourceKey="Rotate45Inv"/>
+                                <TranslateTransform X="-5" Y="-35"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    --><!--6--><!--
+                    <Polygon  Points="-2 0, 9 0, 9 6, -8 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                                <StaticResource ResourceKey="Rotate45Inv"/>
+                                <TranslateTransform X="-5" Y="-35"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    --><!--7--><!--
+                    <Rectangle Width="23" Height="6"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-21" Y="19"/>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    --><!--8--><!--
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-36" Y="4"/>
+                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    --><!--9--><!--
+                    <Polygon  Points="0 0, 9 0, 9 6, -6 6" Width="Auto" Height="6" Stretch="Uniform" >
+                        <Shape.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-35" Y="4"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Shape.RenderTransform>
+                    </Polygon>
+                    --><!--10--><!--
+                    <Rectangle Width="14" Height="6"  Fill="White">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <StaticResource ResourceKey="Rotate45"/>
+                                <TranslateTransform X="-23" Y="16"/>
+                                <ScaleTransform ScaleX="-1"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>-->
+                </Grid>
+            </Grid>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
+                    RenderTransformOrigin=".5 .5" 
+                    Opacity=".7">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
+
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="43" Y="48" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
+                    Opacity=".7">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
+
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="-43" Y="48" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <skills:RhombSkillEffectControl DataContext="{Binding GuardianShout}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="43" Y="48" />
+                </FrameworkElement.RenderTransform>
+            </skills:RhombSkillEffectControl>
+            <skills:RhombSkillEffectControl DataContext="{Binding AdrenalineRush}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-43" Y="48" />
+                </FrameworkElement.RenderTransform>
+
+            </skills:RhombSkillEffectControl>
+            <!--<local:OutlinedTextBlock TextAlignment="Center" Margin="0,-1,0,0" FontSize="17" 
+                           FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
+                       Text="{Binding LH.Val}" 
+                       Width="45" VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </FrameworkElement.RenderTransform>
+            </local:OutlinedTextBlock>-->
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
+                    Opacity=".7">
+                <FrameworkElement.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                </FrameworkElement.Effect>
+
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="0" Y="88" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <skills:RhombFixedSkillControl DataContext="{Binding Infuriate}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="88" />
+                </FrameworkElement.RenderTransform>
+            </skills:RhombFixedSkillControl>
+
+        </Grid>
+    </Grid>
+</UserControl>
+
+
+
