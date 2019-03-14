@@ -166,7 +166,7 @@ namespace TCC.Windows
 
         private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (((bool)e.NewValue) != true) return;
+            if ((bool)e.NewValue != true) return;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
             RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
             RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });

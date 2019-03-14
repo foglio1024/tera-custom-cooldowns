@@ -9,7 +9,6 @@ using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Sniffing;
 using TCC.Tera.Data;
-using TCC.TeraCommon.Game.Messages.Client;
 using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -52,7 +51,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    if (SettingsHolder.ClassWindowSettings.Enabled && WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm)
+                    if (SettingsHolder.ClassWindowSettings.Enabled && WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm)
                         wm.EdgeCounter.Val = p.Edge;
                     break;
                 case Class.Sorcerer:
@@ -345,8 +344,6 @@ namespace TCC.Parsing
                     var msg = $"@0\vAbnormalName\v{ab.Name}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
                     break;
-                default:
-                    break;
             }
             EntityManager.SpawnUser(p.EntityId, p.Name);
             if (!WindowManager.GroupWindow.VM.Exists(p.EntityId)) return;
@@ -373,8 +370,8 @@ namespace TCC.Parsing
         public static void HandleRunemark(S_WEAK_POINT x)
         {
             if (SessionManager.CurrentPlayer.Class != Class.Valkyrie) return;
-            if (WindowManager.ClassWindow.VM.CurrentManager.GetType() != typeof(ValkyrieBarManager)) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
+            if (WindowManager.ClassWindow.VM.CurrentManager.GetType() != typeof(ValkyrieLayoutVM)) return;
+            ((ValkyrieLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RunemarksCounter.Val = x.TotalRunemarks;
         }
 
 
@@ -448,8 +445,8 @@ namespace TCC.Parsing
                 ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
             else
                 ChatWindowManager.Instance.AddChatMessage(
-                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
-                    x.Id == channel && x.Joined).Index + 11), author, message));
+                    new ChatMessage((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
+                                        x.Id == channel && x.Joined).Index + 11, author, message));
         }
 
         public static void HandleActionStage(S_ACTION_STAGE x)
@@ -942,7 +939,7 @@ namespace TCC.Parsing
             }
             catch (Exception e)
             {
-                Log.F("Error while saving guild logo.");
+                Log.F($"Error while saving guild logo: {e}");
             }
 
         }
@@ -1076,8 +1073,6 @@ namespace TCC.Parsing
                 case NpcGuild.Guardian:
                     WindowManager.Dashboard.VM.SetGuardianCredits(p.Credits);
                     break;
-                default:
-                    break;
             }
         }
 
@@ -1140,10 +1135,7 @@ namespace TCC.Parsing
                 return;
             }
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map"));
-            PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer)
-            {
-                //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
-            };
+            PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer); //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
             TeraSniffer.Instance.Connected = true;
         }
         public static void HandleLoginArbiter(C_LOGIN_ARBITER p)

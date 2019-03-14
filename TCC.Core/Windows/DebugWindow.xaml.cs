@@ -110,7 +110,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SorcererBarManager) WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
+            ((SorcererLayoutVM) WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);
@@ -121,15 +121,15 @@ namespace TCC.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
-            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
-            else if (((Button)sender).Content.ToString() == "None") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if (((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val = 0;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val++;
+            if (((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.IsMaxed) ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val = 0;
+            ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val++;
 
         }
 

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TCC.Windows;
 
 namespace TCC.Data.Databases
 {
@@ -111,7 +107,7 @@ namespace TCC.Data.Databases
 
         public void DownloadOutdatedDatabases()
         {
-            foreach(var outdated in Databases.Where(db => !db.IsUpToDate))
+            foreach (var outdated in Databases.Where(db => !db.IsUpToDate))
             {
                 outdated.Update();
             }
@@ -129,20 +125,13 @@ namespace TCC.Data.Databases
             if (item.ExpId == 0) return 0;
             return ItemExpDatabase.ExpData[item.ExpId][enchant];
         }
-        private void InvokeActionOnAllDatabases(Action<DatabaseBase> a)
-        {
-            foreach (var item in Databases)
-            {
-                a.Invoke(item);
-            }
 
-        }
         private List<DatabaseBase> Databases
         {
             get
             {
-                var t = this.GetType();
-                var ret = new List<DatabaseBase>(); 
+                var t = GetType();
+                var ret = new List<DatabaseBase>();
                 foreach (var prop in t.GetProperties())
                 {
                     if (prop.PropertyType.IsSubclassOf(typeof(DatabaseBase)))

@@ -38,7 +38,7 @@ namespace TCC.TeraCommon.Game
             }
 
             // If one is null, but not both, return false.
-            if (((object)a == null) || ((object)b == null))
+            if ((object)a == null || (object)b == null)
             {
                 return false;
             }

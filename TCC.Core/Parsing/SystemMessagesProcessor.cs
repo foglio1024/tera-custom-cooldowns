@@ -8,22 +8,6 @@ namespace TCC.Parsing
 {
     public static class SystemMessagesProcessor
     {
-        private static readonly List<string> ExclusionList = new List<string>
-        {
-            "SMT_ITEM_ROULETTE_VALUE",
-            "SMT_BATTLE_START",
-            "SMT_BATTLE_END",
-            "SMT_DROPDMG_DAMAGE",
-            "SMT_ABANDON_DIVIDE_DICE_PARTYPLAYER",
-            "SMT_JOIN_DIVIDE_DICE_PATYPLAYER",
-            "SMT_ABANDON_DIVIDE_DICE",
-            "SMT_JOIN_DIVIDE_DICE",
-            "SMT_INCREASE_SKILL_PROF_MORE",
-            "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_GUILD",
-            "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_PARTY"
-        };
-
-
         public static void AnalyzeMessage(string srvMsg, SystemMessage sysMsg, string opcodeName)
         {
             if (!Pass(opcodeName)) return;

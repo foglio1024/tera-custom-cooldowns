@@ -74,8 +74,6 @@ namespace TCC
                 BeginNpcAbnormality(ab, stacks, duration, target);
             }
             if (source.IsMe() || target.IsMe()) CheckPassivity(ab, duration);
-
-            return;
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
@@ -162,13 +160,8 @@ namespace TCC
         private static bool Filter(Abnormality ab)
         {
             return  ab.IsShow 
-                && !ab.Name.Contains("BTS") 
-                && !ab.ToolTip.Contains("BTS") 
-                && (    
-                       !ab.Name.Contains("(Hidden)") 
-                    && !ab.Name.Equals("Unknown") 
-                    && !ab.Name.Equals(string.Empty)
-                   );
+                    && !ab.Name.Contains("BTS") 
+                    && !ab.ToolTip.Contains("BTS") && !ab.Name.Contains("(Hidden)") && !ab.Name.Equals("Unknown") && !ab.Name.Equals(string.Empty);
         }
 
         public static void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)

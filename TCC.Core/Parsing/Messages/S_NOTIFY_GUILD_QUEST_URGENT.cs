@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using TCC.Data;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
@@ -29,9 +28,12 @@ namespace TCC.Parsing.Messages
                         {
                             var param = Quest.Split('@');
                             var gqStr = param.FirstOrDefault(x => x.StartsWith("GuildQuest"));
-                            var keyVal = gqStr.Split(':');
-                            var strId = keyVal[1];
-                            return Convert.ToUInt32(strId);
+                            if (gqStr != null)
+                            {
+                                var keyVal = gqStr.Split(':');
+                                var strId = keyVal[1];
+                                return Convert.ToUInt32(strId);
+                            }
                         }
                         catch
                         {

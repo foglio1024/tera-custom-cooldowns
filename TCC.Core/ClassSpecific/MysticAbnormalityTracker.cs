@@ -32,27 +32,27 @@ namespace TCC.ClassSpecific
             if (!p.TargetId.IsMe()) return;
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = true;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = true;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = true;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = true;
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Start(p.Duration);
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Start(p.Duration);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = true;
             }
 
         }
@@ -64,27 +64,27 @@ namespace TCC.ClassSpecific
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = true;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = true;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = true;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = true;
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = true;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = true;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
@@ -95,27 +95,27 @@ namespace TCC.ClassSpecific
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = false;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = false;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = false;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = false;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = false;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = false;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = false;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = false;
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Refresh(0, CooldownMode.Normal);
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Refresh(0, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = false;
+                ((MysticLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = false;
             }
         }
 

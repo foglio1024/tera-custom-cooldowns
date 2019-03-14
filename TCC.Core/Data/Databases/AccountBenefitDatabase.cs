@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace TCC.Data.Databases
@@ -36,14 +35,14 @@ namespace TCC.Data.Databases
 
     public abstract class DatabaseBase
     {
-        protected string _language;
+        protected string Language;
         protected abstract string FolderName { get; }
         protected abstract string Extension { get; }
 
-        public string RelativePath => $"{FolderName}/{FolderName}-{_language}.{Extension}";
+        public string RelativePath => $"{FolderName}/{FolderName}-{Language}.{Extension}";
         protected string FullPath => Path.Combine(App.DataPath, RelativePath);
         public virtual bool Exists => File.Exists(FullPath);
-        public bool IsUpToDate { get; private set; } = false;
+        public bool IsUpToDate { get; private set; }
 
 
         public abstract void Load();
@@ -64,7 +63,7 @@ namespace TCC.Data.Databases
         }
         public DatabaseBase(string lang)
         {
-            _language = lang;
+            Language = lang;
         }
 
         public virtual void Update(string custom = null)

@@ -7,9 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.Chat"
              xmlns:settings="clr-namespace:TCC.Controls.Settings"
-             xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
-             xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="OnWindowMouseEnter"
@@ -152,7 +150,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <dockablz:Layout Name="content" Grid.Row="1">
+        <dockablz:Layout Name="ChatContent" Grid.Row="1">
             <Grid Margin="3" Width="Auto" Name="Root">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

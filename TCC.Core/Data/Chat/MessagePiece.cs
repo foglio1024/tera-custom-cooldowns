@@ -23,7 +23,7 @@ namespace TCC.Data.Chat
                 if (Color == null)
                 {
                     var conv = new ChatChannelToColorConverter();
-                    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
+                    var col = (SolidColorBrush)conv.Convert(Container.Channel, null, null, null);
                     Color = col;
                 }
             }

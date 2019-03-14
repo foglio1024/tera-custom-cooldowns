@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Controls;
-using TCC.Controls.Dashboard;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 

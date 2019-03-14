@@ -117,8 +117,8 @@ namespace TCC.Data.Skills
             Start(cooldown, mode);
         }
 
-        private static int _ccSub = 0;
-        private static int _ecSub = 0;
+        private static int _ccSub;
+        private static int _ecSub;
         private void OnCombatStatusChanged()
         {
             if ((SessionManager.Encounter || SessionManager.Combat) && FlashOnAvailable)

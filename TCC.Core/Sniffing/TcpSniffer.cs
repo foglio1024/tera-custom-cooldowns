@@ -11,7 +11,7 @@ namespace TCC.Sniffing
             new ConcurrentDictionary<ConnectionId, TcpConnection>();
 
         private readonly object _lock = new object();
-        private string SnifferType;
+        private string _snifferType;
         //internal struct QPacket
         //{
         //    internal TcpConnection Connection;
@@ -31,7 +31,7 @@ namespace TCC.Sniffing
         public TcpSniffer(IpSniffer ipSniffer)
         {
             ipSniffer.PacketReceived += Receive;
-            SnifferType = ipSniffer.GetType().FullName;
+            _snifferType = ipSniffer.GetType().FullName;
             //Task.Run(()=>ParsePacketsLoop());
         }
 
@@ -82,7 +82,7 @@ namespace TCC.Sniffing
             bool isInterestingConnection;
             if (isFirstPacket)
             {
-                connection = new TcpConnection(connectionId, tcpPacket.SequenceNumber, RemoveConnection, SnifferType);
+                connection = new TcpConnection(connectionId, tcpPacket.SequenceNumber, RemoveConnection, _snifferType);
                 OnNewConnection(connection);
                 isInterestingConnection = connection.HasSubscribers;
                 if (!isInterestingConnection) return;

@@ -8,7 +8,6 @@ using TCC.Parsing.Messages;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Game.Messages;
-using TCC.TeraCommon.Game.Messages.Client;
 using TCC.TeraCommon.Game.Services;
 using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;

@@ -30,7 +30,7 @@ namespace TCC.ViewModels
         public WindowSettings FloatingButtonSettings => SettingsHolder.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => SettingsHolder.CivilUnrestWindowSettings;
 
-        private int _khCount = 0;
+        private int _khCount;
         private bool _kh;
         public bool KylosHelper
         {
@@ -41,7 +41,7 @@ namespace TCC.ViewModels
                 switch (_khCount)
                 {
                     case 0:
-                        WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning, 4000);
+                        WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
                         break;
                     case 1:
                         WindowManager.FloatingButton.NotifyExtended(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
@@ -789,7 +789,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowEdge == value) return;
                 SettingsHolder.WarriorShowEdge = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowEdge));
+                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm) wm.ExN(nameof(WarriorLayoutVM.ShowEdge));
             }
         }
         public bool SorcererReplacesElementsInCharWindow
@@ -812,7 +812,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowTraverseCut == value) return;
                 SettingsHolder.WarriorShowTraverseCut = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowTraverseCut));
+                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm) wm.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
             }
         }
 
@@ -824,7 +824,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorEdgeMode == value) return;
                 SettingsHolder.WarriorEdgeMode = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.WarriorEdgeMode));
+                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm) wm.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
             }
 
         }

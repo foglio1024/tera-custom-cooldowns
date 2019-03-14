@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TCC.Data;
+﻿using System.Collections.Generic;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
@@ -22,13 +20,12 @@ namespace TCC.Parsing.Messages
                 reader.BaseStream.Position = offset - 4;
                 for (var i = 0; i < count; i++)
                 {
-                    var curr = reader.ReadUInt16();
+                    reader.Skip(2); //var curr = reader.ReadUInt16();
                     var next = reader.ReadUInt16();
-
-                    var region = reader.ReadInt32();
+                    reader.Skip(4); //var region = reader.ReadInt32();
                     var faction = reader.ReadInt32();
-                    var rank = reader.ReadInt32();
-                    var reputation = reader.ReadInt32();
+                    reader.Skip(4); //var rank = reader.ReadInt32();
+                    reader.Skip(4); //var reputation = reader.ReadInt32();
                     var credits = reader.ReadInt32();
                     NpcGuildList[faction] = credits;
                     if (next == 0) return;

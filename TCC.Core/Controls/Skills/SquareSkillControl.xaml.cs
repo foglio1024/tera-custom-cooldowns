@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC.Controls.Skills
 {

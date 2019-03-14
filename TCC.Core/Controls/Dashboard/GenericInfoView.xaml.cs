@@ -5,7 +5,7 @@ namespace TCC.Controls.Dashboard
     /// <summary>
     /// Logica di interazione per GenericInfoView.xaml
     /// </summary>
-    public partial class GenericInfoView : UserControl
+    public partial class GenericInfoView
     {
         public GenericInfoView()
         {

@@ -5,12 +5,10 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -122,7 +120,7 @@ namespace TCC
             }
             catch (Exception e)
             {
-                Log.F($"[IsExperimentalNewer] Failed to check experimental version {e.ToString()}");
+                Log.F($"[IsExperimentalNewer] Failed to check experimental version {e}");
             }
             return false;
         }
@@ -202,8 +200,8 @@ namespace TCC
             // example https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/acc_benefits/acc_benefits-EU-EN.tsv
             var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{relativePath.Replace("\\", "/")}";
             var destPath = Path.Combine(App.DataPath, relativePath);
-            if (!Directory.Exists(Path.GetDirectoryName(destPath))) Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-
+            var destDir = Path.GetDirectoryName(destPath);
+            if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
             try
             {
                 using (var c = Utils.GetDefaultWebClient())
@@ -326,7 +324,10 @@ namespace TCC
                     App.SplashScreen.SetText("Downloading update...");
                     c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
-                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() => c.DownloadFileAsync(new Uri(url), "update.zip")));
+                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        c.DownloadFileAsync(new Uri(url), "update.zip");
+                    }));
 
                     while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
 
@@ -362,6 +363,7 @@ namespace TCC
             using (var c = Utils.GetDefaultWebClient())
             {
                 var f = c.OpenRead(DatabaseHashFileUrl);
+                if (f == null) return;
                 using (var sr = new StreamReader(f))
                 {
                     var sHashes = sr.ReadToEnd();
@@ -381,7 +383,7 @@ namespace TCC
             public string NewVersionUrl { get; }
             public Version Version => Version.Parse(NewVersionNumber);
             public bool IsNewer => Version > Assembly.GetExecutingAssembly().GetName().Version;
-            public bool Valid { get; } = false;
+            public bool Valid { get; }
 
             public VersionParser(bool forceExperimental = false)
             {

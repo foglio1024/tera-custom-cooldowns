@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -71,7 +70,7 @@ namespace TCC.Windows
                     {
                         _colAn.To = R.Colors.DefensiveStanceColor; //(Color)Application.Current.FindResource("DefensiveStanceColor");
                     }
-                    var currBg = CreateMessageBtn.Background as SolidColorBrush;
+                    var currBg = (SolidColorBrush)CreateMessageBtn.Background;
                     var currCol = currBg.Color;
                     var newBg = new SolidColorBrush(currCol);
                     CreateMessageBtn.Background = newBg;
@@ -134,8 +133,8 @@ namespace TCC.Windows
                 if (IsVisible) return;
                 Opacity = 0;
                 Show();
-                FocusManager.HideFromToolBar(this.Handle);
-                FocusManager.MakeUnfocusable(this.Handle);
+                FocusManager.HideFromToolBar(Handle);
+                FocusManager.MakeUnfocusable(Handle);
                 BeginAnimation(OpacityProperty, animation);
             }), DispatcherPriority.Background);
         }
@@ -165,7 +164,7 @@ namespace TCC.Windows
         {
             if (!VM.Creating)
             {
-                FocusManager.UndoUnfocusable(this.Handle);
+                FocusManager.UndoUnfocusable(Handle);
                 Activate();
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 NewMessageTextBox.Focus();
@@ -174,7 +173,7 @@ namespace TCC.Windows
             }
             else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
             {
-                FocusManager.UndoUnfocusable(this.Handle);
+                FocusManager.UndoUnfocusable(Handle);
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 Proxy.Proxy.RegisterLfg(VM.NewMessage, RaidSwitch.IsOn);
                 VM.Creating = false;

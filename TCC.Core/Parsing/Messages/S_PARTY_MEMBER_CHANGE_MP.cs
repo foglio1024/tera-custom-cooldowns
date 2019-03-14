@@ -5,20 +5,20 @@ namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_CHANGE_MP : ParsedMessage
     {
-        private uint serverId, playerId;
-        private int currentMP, maxMP;
-        public uint ServerId => serverId;
-        public uint PlayerId => playerId;
-        public int CurrentMP => currentMP;
-        public int MaxMP => maxMP;
+        private uint _serverId, _playerId;
+        private int _currentMP, _maxMP;
+        public uint ServerId => _serverId;
+        public uint PlayerId => _playerId;
+        public int CurrentMP => _currentMP;
+        public int MaxMP => _maxMP;
 
         public S_PARTY_MEMBER_CHANGE_MP(TeraMessageReader reader) : base(reader)
         {
-            serverId = reader.ReadUInt32();
-            playerId = reader.ReadUInt32();
+            _serverId = reader.ReadUInt32();
+            _playerId = reader.ReadUInt32();
 
-            currentMP = reader.ReadInt32();
-            maxMP = reader.ReadInt32();
+            _currentMP = reader.ReadInt32();
+            _maxMP = reader.ReadInt32();
 
         }
     }

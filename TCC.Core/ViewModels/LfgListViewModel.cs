@@ -45,10 +45,10 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool AmIinLfg => Dispatcher.Invoke(() => (Listings.ToSyncList().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
-                                                                     || listing.LeaderName == SessionManager.CurrentPlayer.Name
-                                                                     || listing.Players.ToSyncList().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
-                                                                     || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId))));
+        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
+                                                                                              || listing.LeaderName == SessionManager.CurrentPlayer.Name
+                                                                                              || listing.Players.ToSyncList().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
+                                                                                              || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
         public void NotifyMyLfg()
         {
             N(nameof(AmIinLfg));

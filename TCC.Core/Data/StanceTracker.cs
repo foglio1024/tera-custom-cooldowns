@@ -14,7 +14,7 @@ namespace TCC.Data
             {
                 if (_currentStance.CompareTo(value) == 0) return;
                 _currentStance = value;
-                N(nameof(CurrentStance));
+                N();
             }
         }
         public StanceTracker()

@@ -4,24 +4,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TCC.Data.Chat;
-using TCC.Data.Databases;
 using TCC.Settings;
 
 namespace TCC.Windows
 {
-    public class SystemMessageViewModel
-    {
-        public SystemMessage SysMsg { get; }
-        public string Opcode { get; }
-
-        public SystemMessageViewModel(string opc, SystemMessage msg)
-        {
-            Opcode = opc;
-            SysMsg = msg;
-        }
-    }
-    public partial class SystemMessagesConfigWindow : Window
+    public partial class SystemMessagesConfigWindow
     {
         public SystemMessagesConfigWindow()
         {
@@ -47,16 +34,14 @@ namespace TCC.Windows
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                         foreach (var item in args.NewItems)
                         {
-                            SettingsHolder.UserExcludedSysMsg.Add((item as SystemMessageViewModel).Opcode);
+                            SettingsHolder.UserExcludedSysMsg.Add((item as SystemMessageViewModel)?.Opcode);
                         }
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                         foreach (var item in args.OldItems)
                         {
-                            SettingsHolder.UserExcludedSysMsg.Remove((item as SystemMessageViewModel).Opcode);
+                            SettingsHolder.UserExcludedSysMsg.Remove((item as SystemMessageViewModel)?.Opcode);
                         }
-                        break;
-                    default:
                         break;
                 }
                 SettingsWriter.Save();
@@ -102,27 +87,23 @@ namespace TCC.Windows
 
         private void ExcludeMessage(object sender, RoutedEventArgs e)
         {
-            var msgVm = ((sender as FrameworkElement).DataContext) as SystemMessageViewModel;
-            if (!HiddenMessages.Any(x => x.Opcode == msgVm.Opcode))
-            {
-                HiddenMessages.Add(msgVm);
-                ShowedMessages.Remove(msgVm);
-            }
+            var msgVm = (sender as FrameworkElement)?.DataContext as SystemMessageViewModel;
+            if (HiddenMessages.Any(x => x.Opcode == msgVm?.Opcode)) return;
+            HiddenMessages.Add(msgVm);
+            ShowedMessages.Remove(msgVm);
         }
 
         private void RestoreMessage(object sender, RoutedEventArgs e)
         {
-            var msgVm = ((sender as FrameworkElement).DataContext) as SystemMessageViewModel;
-            if (HiddenMessages.Any(x => x.Opcode == msgVm.Opcode))
-            {
-                ShowedMessages.Add(msgVm);
-                HiddenMessages.Remove(msgVm);
-            }
+            var msgVm = (sender as FrameworkElement)?.DataContext as SystemMessageViewModel;
+            if (HiddenMessages.All(x => x.Opcode != msgVm?.Opcode)) return;
+            ShowedMessages.Add(msgVm);
+            HiddenMessages.Remove(msgVm);
         }
 
         private void FilterShowedMessages(object sender, TextChangedEventArgs e)
         {
-            var view = ((ICollectionView)ShowedMessagesView);
+            var view = (ICollectionView)ShowedMessagesView;
             view.Filter = o =>
             {
                 var msg = ((SystemMessageViewModel)o).SysMsg.Message;
@@ -133,7 +114,7 @@ namespace TCC.Windows
         }
         private void FilterHiddenMessages(object sender, TextChangedEventArgs e)
         {
-            var view = ((ICollectionView)HiddenMessagesView);
+            var view = (ICollectionView)HiddenMessagesView;
             view.Filter = o =>
             {
                 var msg = ((SystemMessageViewModel)o).SysMsg.Message;

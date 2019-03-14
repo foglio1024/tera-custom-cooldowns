@@ -48,20 +48,20 @@ namespace TCC.ClassSpecific
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             Log.C($"[CheckLaserTargeting(S_ABNORMALITY_BEGIN)] id:{p.AbnormalityId} duration:{p.Duration}");
-            ((GunnerBarManager)WindowManager.ClassWindow.VM.CurrentManager).ModularSystem.Buff.Start(p.Duration);
+            ((GunnerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ModularSystem.Buff.Start(p.Duration);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_REFRESH p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             Log.C($"[CheckLaserTargeting(S_ABNORMALITY_REFRESH)] id:{p.AbnormalityId} duration:{p.Duration}");
-            ((GunnerBarManager)WindowManager.ClassWindow.VM.CurrentManager).ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            ((GunnerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_END p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             Log.C($"[CheckLaserTargeting(S_ABNORMALITY_END)] id:{p.AbnormalityId}");
 
-            ((GunnerBarManager)WindowManager.ClassWindow.VM.CurrentManager).ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
+            ((GunnerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

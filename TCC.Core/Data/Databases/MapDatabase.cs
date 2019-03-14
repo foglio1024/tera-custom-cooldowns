@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using TCC.Data.Map;
@@ -18,13 +16,11 @@ namespace TCC.Data.Databases
         public MapDatabase(string lang) : base(lang)
         {
             Worlds = new Dictionary<uint, World>();
-
         }
 
-        public bool GetDungeon(Location loc)
+        public bool IsDungeon(Location loc)
         {
-            if (loc.World == 9999) return true;
-            return Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section].IsDungeon;
+            return loc.World == 9999 || Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section].IsDungeon;
         }
 
         public string GetMapId(uint w, uint g, uint s)
@@ -32,43 +28,88 @@ namespace TCC.Data.Databases
             return Worlds[w].Guards[g].Sections[s].MapId;
         }
 
+        private static World WorldFromXElement(XElement worldElem)
+        {
+            var worldId = 0U;
+            var worldNameId = 0U;
+            worldElem.Attributes().ToList().ForEach(a =>
+            {
+                if (a.Name == "id") worldId = uint.Parse(a.Value);
+                if (a.Name == "nameId") worldNameId = uint.Parse(a.Value);
+            });
+
+            var world = new World(worldId, worldNameId);
+            ParseGuards();
+            return world;
+
+            //----------------------------------------------
+            void ParseGuards()
+            {
+                worldElem.Descendants().Where(x => x.Name == "Guard").ToList().ForEach(guardElem =>
+                {
+                    var guard = GuardFromXElement(guardElem);
+                    world.Guards[guard.Id] = guard;
+                });
+
+            }
+        }
+
+        private static Guard GuardFromXElement(XElement guardElem)
+        {
+            var guardId = 0U;
+            var guardNameId = 0U;
+            var continentId = 0U;
+
+            guardElem.Attributes().ToList().ForEach(a =>
+            {
+                if (a.Name == "id") guardId = uint.Parse(a.Value);
+                if (a.Name == "nameId") guardNameId = uint.Parse(a.Value);
+                if (a.Name == "continentId") continentId = uint.Parse(a.Value);
+            });
+            var guard = new Guard(guardId, guardNameId, continentId);
+
+            ParseSections();
+
+            return guard;
+            // ------------------------------
+            void ParseSections()
+            {
+                guardElem.Descendants().Where(x => x.Name == "Section").ToList().ForEach(sectionElem =>
+                {
+                    var section = SectionFromXElement(sectionElem);
+                    guard.Sections[section.Id] = section;
+                });
+            }
+        }
+
+        private static Section SectionFromXElement(XElement sectionElem)
+        {
+            var sectionId = 0U;
+            var sectionNameId = 0U;
+            var sectionMapId = "";
+            var isDungeon = false;
+
+            sectionElem.Attributes().ToList().ForEach(a =>
+            {
+                if (a.Name == "id") sectionId = uint.Parse(a.Value);
+                if (a.Name == "nameId") sectionNameId = uint.Parse(a.Value);
+                if (a.Name == "mapId") sectionMapId = a.Value;
+                if (a.Name == "type") isDungeon = a.Value == "dungeon";
+            });
+            return new Section(sectionId, sectionNameId, sectionMapId, isDungeon);
+        }
+
         public override void Load()
         {
             Worlds.Clear();
             var xdoc = XDocument.Load(FullPath);
 
-            foreach (var w in xdoc.Descendants().Where(x => x.Name == "World"))
+            xdoc.Descendants().Where(x => x.Name == "World").ToList().ForEach(worldElem =>
             {
-                var wId = uint.Parse(w.Attribute("id")?.Value);
-                var wNameId = w.Attribute("nameId") != null ? uint.Parse(w.Attribute("nameId").Value) : 0;
-                var world = new World(wId, wNameId);
+                var world = WorldFromXElement(worldElem);
+                Worlds[world.Id] = world;
+            });
 
-                foreach (var g in w.Descendants().Where(x => x.Name == "Guard"))
-                {
-                    var gId = uint.Parse(g.Attribute("id").Value);
-                    var gNameId = g.Attribute("nameId") != null ? uint.Parse(g.Attribute("nameId").Value) : 0;
-                    var gMapId = g.Attribute("mapId") != null ? g.Attribute("mapId").Value : "";
-
-                    var guard = new Guard(gId, gNameId, gMapId)
-                    {
-                        ContinentId = g.Attribute("continentId") != null
-                            ? Convert.ToUInt32(g.Attribute("continentId").Value)
-                            : 0
-                    };
-
-                    foreach (var s in g.Descendants().Where(x => x.Name == "Section"))
-                    {
-                        var sId = uint.Parse(s.Attribute("id").Value);
-                        var sNameId = s.Attribute("nameId") != null ? uint.Parse(s.Attribute("nameId").Value) : 0;
-                        var sMapId = s.Attribute("mapId") != null ? s.Attribute("mapId").Value : "";
-                        var dg = s.Attribute("type") != null && s.Attribute("type").Value == "dungeon";
-                        var section = new Section(sId, sNameId, sMapId, dg);
-                        guard.Sections.Add(sId, section);
-                    }
-                    world.Guards.Add(guard.Id, guard);
-                }
-                Worlds.Add(world.Id, world);
-            }
         }
     }
 }

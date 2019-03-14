@@ -3,7 +3,7 @@
 namespace TCC.Windows.Widgets
 {
     /// <summary>
-    /// Logica di interazione per WarriorBar.xaml
+    /// Logica di interazione per WarriorLayout.xaml
     /// </summary>
     public partial class ClassWindow 
     {

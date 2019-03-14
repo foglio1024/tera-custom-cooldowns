@@ -275,7 +275,8 @@ namespace TCC.Data
 
         private void ParseEliteStatus()
         {
-            SessionManager.IsElite = bool.Parse(_doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value);
+            var val = _doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value;
+            if(val != null) SessionManager.IsElite = bool.Parse(val);
         }
     }
 }

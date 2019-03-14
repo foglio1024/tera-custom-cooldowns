@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using System.Net;
-using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
-using TCC.Windows;
 
 namespace TCC.Parsing
 {
@@ -14,7 +12,7 @@ namespace TCC.Parsing
             DownloadSysmsg(version, directory);
         }
 
-        private static bool IsFileValid(string filename, uint version)
+        private static bool IsFileValid(string filename)
         {
             if (!File.Exists(filename)) return false;
             if (!Settings.SettingsHolder.CheckOpcodesHash) return true;
@@ -53,9 +51,9 @@ namespace TCC.Parsing
             Directory.CreateDirectory(directory);
 
             var filename = directory + Path.DirectorySeparatorChar + version + ".txt";
-            if (IsFileValid(filename, version)) return;
+            if (IsFileValid(filename)) return;
             filename = directory + Path.DirectorySeparatorChar + "protocol." + version + ".map";
-            if (IsFileValid(filename, version)) return;
+            if (IsFileValid(filename)) return;
             try
             {
                 Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/protocol." + version + ".map", filename);

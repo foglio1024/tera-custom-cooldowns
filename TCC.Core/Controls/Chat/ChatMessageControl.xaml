@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--Header-->
-            <ContentControl Content="{Binding}" Name="Header" MouseEnter="UserControl_MouseEnter"
+            <ContentControl Content="{Binding}" Name="Header" 
                             ContentTemplate="{StaticResource MessageHeaderTemplate}"/>
             <!--Message-->
             <ContentControl Content="{Binding}" x:Name="Body" Grid.Column="1" 

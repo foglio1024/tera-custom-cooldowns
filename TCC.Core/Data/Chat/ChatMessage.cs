@@ -1,65 +1,40 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Threading;
-using HtmlAgilityPack;
-using TCC.Parsing;
+using TCC.Annotations;
 using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class MessageLine : TSPropertyChanged
-    {
-        public SynchronizedObservableCollection<MessagePiece> LinePieces { get; protected set; }
-        public MessageLine()
-        {
-            LinePieces = new SynchronizedObservableCollection<MessagePiece>();
-        }
-    }
     public class ChatMessage : TSPropertyChanged, IDisposable
     {
         #region Properties
 
-        private ChatChannel _channel;
-        private string _author;
         private bool _animate = true;
         private bool _isVisible;
 
-        public ChatChannel Channel
-        {
-            get => _channel;
-            protected set
-            {
-                if (_channel == value) return;
-                _channel = value;
-            }
-        }
-        public string Timestamp { get; protected set; }
+        public ChatChannel Channel { get; protected set; }
+
+        [UsedImplicitly] public string Timestamp { get; protected set; }
 
         public string RawMessage { get; private set; }
 
-        public string Author
-        {
-            get => _author;
-            set
-            {
-                if (_author == value) return;
-                _author = value;
-            }
-        }
+        public string Author { get; set; }
+
         public bool ContainsPlayerName { get; set; }
         public bool Animate
         {
             get => _animate && SettingsHolder.AnimateChatMessages;
             set => _animate = value;
         }
-        public bool ShowTimestamp => SettingsHolder.ShowTimestamp;
-        public bool ShowChannel => SettingsHolder.ShowChannel;
+        [UsedImplicitly] public bool ShowTimestamp => SettingsHolder.ShowTimestamp;
+        [UsedImplicitly] public bool ShowChannel => SettingsHolder.ShowChannel;
         public SynchronizedObservableCollection<MessageLine> Lines { get; protected set; }
-        public SynchronizedObservableCollection<MessagePiece> Pieces { get; protected set; }
+        public SynchronizedObservableCollection<MessagePiece> Pieces { get; }
 
         public bool IsVisible
         {
@@ -112,7 +87,7 @@ namespace TCC.Data.Chat
                 {
                     case ChatChannel.Greet:
                     case ChatChannel.Angler:
-                        ParseDirectMessage(RawMessage.ReplaceHtmlEscapes(), ch);
+                        ParseDirectMessage(RawMessage.ReplaceHtmlEscapes());
                         break;
                     case ChatChannel.Emote:
                         ParseEmoteMessage(msg);
@@ -367,7 +342,7 @@ namespace TCC.Data.Chat
         }
 
 
-        private void ParseDirectMessage(string msg, ChatChannel ch)
+        private void ParseDirectMessage(string msg)
         {
             AddPiece(new MessagePiece(msg, MessagePieceType.Simple, SettingsHolder.FontSize, false));
         }

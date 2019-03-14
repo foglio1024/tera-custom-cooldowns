@@ -49,12 +49,12 @@ namespace TCC
 
         private static bool IsWorldBoss(ushort zoneId, uint templateId)
         {
-            return (zoneId == 10 && templateId == 99) ||
-                   (zoneId == 4 && templateId == 5011) ||
-                   (zoneId == 51 && templateId == 7011) ||
-                   (zoneId == 52 && templateId == 9050) ||
-                   (zoneId == 57 && templateId == 33) ||
-                   (zoneId == 38 && templateId == 35);
+            return zoneId == 10 && templateId == 99 ||
+                   zoneId == 4 && templateId == 5011 ||
+                   zoneId == 51 && templateId == 7011 ||
+                   zoneId == 52 && templateId == 9050 ||
+                   zoneId == 57 && templateId == 33 ||
+                   zoneId == 38 && templateId == 35;
         }
 
         private static bool Filter(uint zoneId, uint templateId)

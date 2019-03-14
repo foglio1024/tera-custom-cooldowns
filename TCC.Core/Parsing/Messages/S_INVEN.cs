@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TCC.Data.Databases;
 using TCC.TeraCommon.Game.Messages;
@@ -56,9 +55,9 @@ namespace TCC.Parsing.Messages
                 More = reader.ReadBoolean();
                 if (offset == 0) return;
                 reader.BaseStream.Position = offset - 4;
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
-                    var curr = reader.ReadUInt16();
+                    reader.Skip(2); // var curr = reader.ReadUInt16();
                     var next = reader.ReadUInt16();
                     reader.Skip(2); // passivity array count
                     reader.Skip(2); // passivity array offset

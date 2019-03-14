@@ -7,9 +7,9 @@ namespace TCC.Publisher
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        public SynchronizedObservableCollection<string> Log;
+        public readonly SynchronizedObservableCollection<string> Log;
         public MainWindow()
         {
             Log = new SynchronizedObservableCollection<string>();
@@ -48,7 +48,7 @@ namespace TCC.Publisher
         {
             var confirm = MessageBox.Show("Confirm release creation?", "TCC publisher", MessageBoxButton.YesNo);
             if (confirm != MessageBoxResult.Yes) return;
-            if (string.IsNullOrWhiteSpace(ReleaseNotesTB.Text))
+            if (string.IsNullOrWhiteSpace(ReleaseNotesTb.Text))
             {
                 var emptyNotesConf = MessageBox.Show("Release notes field is empty, continue anyway?", "TCC publisher", MessageBoxButton.YesNo);
                 if (emptyNotesConf != MessageBoxResult.Yes) return;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Threading;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;
 
@@ -78,8 +77,8 @@ namespace TCC.Settings
             {(Class)3, new List<uint>{ 401705, 401706, 401710, 400500, 400501, 400508, 400710, 400711 }},
             {(Class)4, new List<uint>{ 21170, 22120, 23180, 26250, 29011, 25170, 25171, 25201, 25202, 500100, 500150, 501600, 501650, 502001, 502051, 502070, 502071, 502072 }},
             {(Class)5, new List<uint>{ 601400, 601450, 601460, 88608101, 88608102, 88608103, 88608104, 88608105, 88608106, 88608107, 88608108, 88608109, 88608110,602101,602102,602103,601611 }},
-            {(Class)6, new List<uint>{ }},
-            {(Class)7, new List<uint>{ }},
+            {(Class)6, new List<uint>()},
+            {(Class)7, new List<uint>()},
             {(Class)8, new List<uint>{ 10151010, 10151131, 10151192 }},
             {(Class)9, new List<uint>{ 89105101, 89105102, 89105103, 89105104, 89105105, 89105106, 89105107, 89105108, 89105109, 89105110, 89105111, 89105112, 89105113, 89105114, 89105115, 89105116, 89105117, 89105118, 89105119, 89105120, 10152340, 10152351 }},
             {(Class)10, new List<uint>{ 31020, 10153210 }},

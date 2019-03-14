@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -58,7 +57,7 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        private static ClassManager ClassManager => WindowManager.ClassWindow.VM.CurrentManager;
+        private static BaseClassLayoutVM ClassManager => WindowManager.ClassWindow.VM.CurrentManager;
 
         private static bool FindAndUpdate(SynchronizedObservableCollection<Cooldown> list, Cooldown sk)
         {

@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;

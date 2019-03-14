@@ -68,13 +68,13 @@ namespace TCC.Windows.Widgets
         }
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Action action = null;
+            Action action;
             switch (e.PropertyName)
             {
-                case nameof(Player.HpFactor): action = new Action(ChangeHP); break;
-                case nameof(Player.MpFactor): action = new Action(ChangeMP); break;
-                case nameof(Player.StFactor): action = new Action(ChangeStamina); break;
-                case nameof(Player.ShieldFactor): action = new Action(ChangeShield); break;
+                case nameof(Player.HpFactor): action = ChangeHP; break;
+                case nameof(Player.MpFactor): action = ChangeMP; break;
+                case nameof(Player.StFactor): action = ChangeStamina; break;
+                case nameof(Player.ShieldFactor): action = ChangeShield; break;
                 default: return;
             }
             Dispatcher.BeginInvoke(action, DispatcherPriority.DataBind);
@@ -131,7 +131,7 @@ namespace TCC.Windows.Widgets
                 StGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.StFactor, 1);
                 StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _stAnim);
             }
-            ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation((VM.Player.StFactor) * (360 - 2 * ReArc.StartAngle) + ReArc.StartAngle, _stAnim.Duration));
+            ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(VM.Player.StFactor * (360 - 2 * ReArc.StartAngle) + ReArc.StartAngle, _stAnim.Duration));
 
         }
         private void ChangeShield()

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -517,7 +516,7 @@ namespace TCC.ViewModels
         {
             // ignoring error checking
             var element = (UIElement)sender;
-            var isDrag = (bool)(e.NewValue);
+            var isDrag = (bool)e.NewValue;
 
             Instance = new DragBehavior();
             ((UIElement)sender).RenderTransform = Instance.Transform;
@@ -554,7 +553,7 @@ namespace TCC.ViewModels
         {
             var parent = Application.Current.MainWindow;
             var mousePos = mouseEventArgs.GetPosition(parent);
-            var diff = (mousePos - _mouseStartPosition2);
+            var diff = mousePos - _mouseStartPosition2;
             if (!((UIElement)sender).IsMouseCaptured) return;
             Transform.X = _elementStartPosition2.X + diff.X;
             Transform.Y = _elementStartPosition2.Y + diff.Y;

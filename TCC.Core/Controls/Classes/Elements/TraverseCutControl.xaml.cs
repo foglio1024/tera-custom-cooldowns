@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
@@ -11,7 +10,7 @@ namespace TCC.Controls.Classes.Elements
     /// <summary>
     /// Logica di interazione per TraverseCutControl.xaml
     /// </summary>
-    public partial class TraverseCutControl : UserControl
+    public partial class TraverseCutControl
     {
         private DoubleAnimation _toZeroAnimation;
         private DoubleAnimation _anim;
@@ -30,7 +29,7 @@ namespace TCC.Controls.Classes.Elements
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            if (!(_dc is StatTracker st)) return;
+            if (_dc == null) return;
             _dc.ToZero -= OnToZero;
             _dc.PropertyChanged -= OnPropertyChanged;
         }

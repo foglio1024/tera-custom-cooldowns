@@ -8,7 +8,7 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per NewDungeonDialog.xaml
     /// </summary>
-    public partial class NewDungeonDialog : Window
+    public partial class NewDungeonDialog
     {
         public NewDungeonDialog()
         {
@@ -21,7 +21,7 @@ namespace TCC.Windows
         });
         private void AddDungeon(object sender, RoutedEventArgs e)
         {
-            var dg = (sender as FrameworkElement).DataContext as Dungeon;
+            if (!((sender as FrameworkElement)?.DataContext is Dungeon dg)) return;
             if (dg.Show) return;
             dg.Show = true;
             dg.Index = int.MaxValue;

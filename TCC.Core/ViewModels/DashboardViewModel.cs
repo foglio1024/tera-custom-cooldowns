@@ -91,7 +91,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                int ret = 0;
+                var ret = 0;
                 Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
@@ -100,7 +100,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                int ret = 0;
+                var ret = 0;
                 Characters.ToSyncList().ForEach(c => ret += c.VanguardCredits);
                 return ret;
             }
@@ -109,7 +109,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                int ret = 0;
+                var ret = 0;
                 Characters.ToSyncList().ForEach(c => ret += c.GuardianCredits);
                 return ret;
             }
@@ -146,8 +146,6 @@ namespace TCC.ViewModels
                         CharacterViewModels.Remove(target);
                     }
                     break;
-                default:
-                    break;
             }
         }
 
@@ -162,7 +160,7 @@ namespace TCC.ViewModels
         }
         public RelayCommand LoadDungeonsCommand { get; }
         /* -- Constructor ------------------------------------------ */
-        bool _loaded = false;
+        bool _loaded;
         public DashboardViewModel()
         {
             Characters = new SynchronizedObservableCollection<Character>();
@@ -312,7 +310,7 @@ namespace TCC.ViewModels
             if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
 
             SelectedCharacter = character;
-            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new SortDescription[]
+            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
             {
                 new SortDescription("Item.Id", ListSortDirection.Ascending),
             });
@@ -566,7 +564,7 @@ namespace TCC.ViewModels
             }
             catch (Exception e)
             {
-                Log.F($"Error while refreshing inventory: {e.ToString()}");
+                Log.F($"Error while refreshing inventory: {e}");
             }
 
             N(nameof(SelectedCharacterInventory));

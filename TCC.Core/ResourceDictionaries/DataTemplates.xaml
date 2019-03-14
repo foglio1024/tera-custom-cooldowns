@@ -1,20 +1,19 @@
 ﻿<ResourceDictionary x:Class="TCC.ResourceDictionaries.DataTemplates"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ctrl="clr-namespace:TCC.Controls"
                     xmlns:abnormalities="clr-namespace:TCC.Controls.Abnormalities"
                     xmlns:chatCtrl="clr-namespace:TCC.Controls.Chat"
+                    xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
                     xmlns:group="clr-namespace:TCC.Controls.Group"
                     xmlns:npc="clr-namespace:TCC.Controls.NPCs"
                     xmlns:skills="clr-namespace:TCC.Controls.Skills"
                     xmlns:data="clr-namespace:TCC.Data"
-                    xmlns:moongourd="clr-namespace:TCC.Moongourd"
-                    xmlns:vm="clr-namespace:TCC.ViewModels"
                     xmlns:abnormalities1="clr-namespace:TCC.Data.Abnormalities"
-                    xmlns:skills1="clr-namespace:TCC.Data.Skills"
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
                     xmlns:pc="clr-namespace:TCC.Data.Pc"
-                    xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard">
+                    xmlns:skills1="clr-namespace:TCC.Data.Skills"
+                    xmlns:moongourd="clr-namespace:TCC.Moongourd"
+                    xmlns:vm="clr-namespace:TCC.ViewModels">
     <DataTemplate x:Key="RoundNormalSkill">
         <skills:RoundSkillControl />
     </DataTemplate>

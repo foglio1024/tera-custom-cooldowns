@@ -9,7 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Class c = Class.Common;
+            var c = Class.Common;
             switch (value)
             {
                 case Class cl:

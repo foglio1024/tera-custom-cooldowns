@@ -19,7 +19,7 @@ namespace TCC.Parsing.Messages
             Candidates = new List<User>();
             if (count == 0) return;
             reader.BaseStream.Position = offset - 4;
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 reader.Skip(2); //var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();

@@ -34,8 +34,7 @@ namespace TCC.Windows
 
         private void RemoveDungeon(object sender, RoutedEventArgs e)
         {
-            var dng = (sender as FrameworkElement).DataContext as DungeonColumnViewModel;
-            dng.Dungeon.Show = false;
+            if (((FrameworkElement) sender).DataContext is DungeonColumnViewModel dng) dng.Dungeon.Show = false;
         }
 
         private void OnDungeonsOrderChanged(object sender, OrderChangedEventArgs e)

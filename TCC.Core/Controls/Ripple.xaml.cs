@@ -27,9 +27,9 @@ namespace TCC.Controls
             ((TransformGroup) RippleCircle.RenderTransform).Children[1] = new TranslateTransform(
                 e.MouseDevice.GetPosition(this).X - RippleCircle.Width / 2,
                 e.MouseDevice.GetPosition(this).Y - RippleCircle.Height / 2);
-            var fac = (ActualWidth * ActualHeight) / 100;
+            var fac = ActualWidth * ActualHeight / 100;
             _scaleRipple.To = fac + 5;
-            _scaleRipple.Duration = TimeSpan.FromMilliseconds((fac/30)* AnimTime);
+            _scaleRipple.Duration = TimeSpan.FromMilliseconds(fac/30* AnimTime);
             if (scaleTrans != null)
             {
                 scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, _scaleRipple);

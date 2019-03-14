@@ -114,7 +114,7 @@ namespace TCC.ViewModels
         }
         public void SetInfo(uint model)
         {
-            var c = (model % 100) - 1;
+            var c = model % 100 - 1;
             Class = (Class)c;
         }
     }

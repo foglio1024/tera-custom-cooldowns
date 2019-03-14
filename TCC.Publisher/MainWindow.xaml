@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Publisher"
         mc:Ignorable="d"
         Title="TCC GitHub Publisher" Height="450" Width="800">
     <Grid>
@@ -15,7 +14,7 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="ReleaseNotesTB" Margin="20" AcceptsReturn="True"/>
+        <TextBox x:Name="ReleaseNotesTb" Margin="20" AcceptsReturn="True"/>
         <StackPanel Grid.Column="1" Margin="0 20 20 20" VerticalAlignment="Top" Grid.RowSpan="2">
 
             <Button Content="Get version" VerticalAlignment="Top" Margin="0 0 0 20" Click="GetVersion"></Button>

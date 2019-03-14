@@ -14,7 +14,7 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : TccWindow
+    public partial class SettingsWindow
     {
 
         public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
@@ -125,15 +125,14 @@ namespace TCC.Windows
 
         private void EventSetter_OnHandler(object sender, RoutedEventArgs e)
         {
-            var t = sender as FrameworkElement;
+            if (!(sender is FrameworkElement t)) return;
             t.Opacity = 0;
             t.RenderTransform = new TranslateTransform(-20, 0);
             var ease = new QuadraticEase();
-            var slideAnim = new DoubleAnimation(-20, 0, TimeSpan.FromMilliseconds(750)) { EasingFunction = ease };
-            var fadeAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(750)) { EasingFunction = ease };
+            var slideAnim = new DoubleAnimation(-20, 0, TimeSpan.FromMilliseconds(750)) {EasingFunction = ease};
+            var fadeAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(750)) {EasingFunction = ease};
             t.BeginAnimation(OpacityProperty, fadeAnim);
             t.RenderTransform.BeginAnimation(TranslateTransform.XProperty, slideAnim);
-
         }
 
         private void ClearChatMessages(object sender, RoutedEventArgs e)

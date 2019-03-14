@@ -5,21 +5,21 @@ namespace TCC.Parsing.Messages
 {
     public class S_LEAVE_PARTY_MEMBER : ParsedMessage
     {
-        private uint serverId;
-        public uint ServerId => serverId;
+        private uint _serverId;
+        public uint ServerId => _serverId;
 
-        private uint playerId;
-        public uint PlayerId => playerId;
+        private uint _playerId;
+        public uint PlayerId => _playerId;
 
-        private string name;
-        public string Name => name;
+        private string _name;
+        public string Name => _name;
 
         public S_LEAVE_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {
             reader.Skip(2); //var nameOffset = reader.ReadUInt16();
-            serverId = reader.ReadUInt32();
-            playerId = reader.ReadUInt32();
-            name = reader.ReadTeraString();
+            _serverId = reader.ReadUInt32();
+            _playerId = reader.ReadUInt32();
+            _name = reader.ReadTeraString();
         }
     }
 }

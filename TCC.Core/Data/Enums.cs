@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace TCC.Data
 {
@@ -31,6 +32,7 @@ namespace TCC.Data
     {
         None, Assault, Defensive
     }
+    [Flags]
     public enum ModifierKeys : uint
     {
         Alt = 1,

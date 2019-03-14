@@ -9,14 +9,14 @@ namespace TCC.Controls.Classes.Elements
 {
     public partial class RunemarksControl
     {
-        private ValkyrieBarManager _dc;
+        private ValkyrieLayoutVM _dc;
 
         public RunemarksControl()
         {
             InitializeComponent();
             Loaded += (_, __) =>
             {
-                _dc = DataContext as ValkyrieBarManager;
+                _dc = DataContext as ValkyrieLayoutVM;
                 if (_dc != null) _dc.RunemarksCounter.PropertyChanged += OnEdgePropertyChanged;
                 //else Console.WriteLine("[EdgeBarLayout] DataContext is null!");
             };

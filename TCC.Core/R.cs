@@ -332,6 +332,7 @@ namespace TCC.R
 		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
 		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
+		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
 		public static VisualBrush RhombOpacityMask => ((VisualBrush)App.Current.FindResource("RhombOpacityMask"));
 		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
 		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
@@ -449,6 +450,7 @@ namespace TCC.R
 		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
 		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
 		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
+		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
 		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
 	}
 	public static class DataTemplates

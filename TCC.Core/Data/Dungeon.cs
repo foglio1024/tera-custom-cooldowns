@@ -4,7 +4,7 @@
     {
         private string _shortName;
         private bool _doublesOnElite;
-        private bool _show = false;
+        private bool _show;
         private ItemLevelTier _requiredIlvl = ItemLevelTier.Tier0;
         private int _index = -1;
         public uint Id { get; }

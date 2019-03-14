@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Settings;
@@ -212,7 +211,7 @@ namespace TCC
 
             if (SettingsHolder.ClassWindowSettings.Enabled
                 && CurrentPlayer.Class == Class.Sorcerer
-                && WindowManager.ClassWindow.VM.CurrentManager is SorcererBarManager sm)
+                && WindowManager.ClassWindow.VM.CurrentManager is SorcererLayoutVM sm)
             {
                 sm.NotifyElementChanged();
             }
@@ -227,7 +226,7 @@ namespace TCC
 
             if (SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                ((SorcererBarManager)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
+                ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
             }
 
 

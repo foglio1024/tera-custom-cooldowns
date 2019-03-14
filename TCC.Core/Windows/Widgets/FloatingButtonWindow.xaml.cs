@@ -68,7 +68,6 @@ namespace TCC.Windows.Widgets
 
             if (FocusManager.TeraScreen == null) return;
             var teraScreenBounds = FocusManager.TeraScreen.Bounds;
-            if (teraScreenBounds == null) return; // whateverrrrrrrrr
             Left = teraScreenBounds.X;
             Top = teraScreenBounds.Y + teraScreenBounds.Height / 2;
             //RefreshTopmost();

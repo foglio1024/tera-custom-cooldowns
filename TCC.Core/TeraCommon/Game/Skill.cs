@@ -42,7 +42,7 @@ namespace TCC.TeraCommon.Game
             var other = obj as Skill;
             if (other == null)
                 return false;
-            return (Id == other.Id) && (IsHotDot == other.IsHotDot) && (NpcInfo == other.NpcInfo);
+            return Id == other.Id && IsHotDot == other.IsHotDot && NpcInfo == other.NpcInfo;
         }
 
         public static string RemoveLvl(string name)

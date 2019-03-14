@@ -11,7 +11,6 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +22,6 @@ using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Parsing;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
 
@@ -129,16 +127,16 @@ namespace TCC
         {
             if (sender == null)
             {
-                return (null);
+                return null;
             }
             else if (VisualTreeHelper.GetParent(sender) is T)
             {
-                return (VisualTreeHelper.GetParent(sender) as T);
+                return VisualTreeHelper.GetParent(sender) as T;
             }
             else
             {
                 var parent = VisualTreeHelper.GetParent(sender);
-                return (FindVisualParent<T>(parent));
+                return FindVisualParent<T>(parent);
             }
         }
 
@@ -223,28 +221,26 @@ namespace TCC
         {
             var cv = new CollectionViewSource { Source = source }.View;
             cv.Filter = predicate;
-            var liveView = cv as ICollectionViewLiveShaping;
-            if (liveView != null && !liveView.CanChangeLiveFiltering) return null;
+            if (!(cv is ICollectionViewLiveShaping liveView)) return null;
+            if (!liveView.CanChangeLiveFiltering) return null;
             if (filters.Length > 0)
             {
                 foreach (var filter in filters)
                 {
-                    liveView?.LiveFilteringProperties.Add(filter);
+                    liveView.LiveFilteringProperties.Add(filter);
                 }
-
-                if (liveView != null) liveView.IsLiveFiltering = true;
+                liveView.IsLiveFiltering = true;
             }
 
-            if (sortFilters.Length > 0)
+            if (sortFilters.Length <= 0) return liveView;
+
+            foreach (var filter in sortFilters)
             {
-                foreach (var filter in sortFilters)
-                {
-                    (liveView as ICollectionView)?.SortDescriptions.Add(filter);
-                    liveView.LiveSortingProperties.Add(filter.PropertyName);
-                }
-
-                if (liveView != null) liveView.IsLiveSorting = true;
+                ((ICollectionView)liveView).SortDescriptions.Add(filter);
+                liveView.LiveSortingProperties.Add(filter.PropertyName);
             }
+
+            liveView.IsLiveSorting = true;
 
             return liveView;
         }
@@ -268,7 +264,7 @@ namespace TCC
         public static string GenerateFileHash(string fileName)
         {
             if (!File.Exists(fileName)) return "";
-            byte[] fileBuffer = new byte[1];
+            byte[] fileBuffer;
             try
             {
                 fileBuffer = File.ReadAllBytes(fileName);
@@ -286,22 +282,18 @@ namespace TCC
 
         }
 
-        public static bool IsFileLocked(string filename, FileAccess file_access)
+        public static bool IsFileLocked(string filename, FileAccess fileAccess)
         {
             // Try to open the file with the indicated access.
             try
             {
-                var fs = new FileStream(filename, FileMode.Open, file_access);
+                var fs = new FileStream(filename, FileMode.Open, fileAccess);
                 fs.Close();
                 return false;
             }
             catch (IOException)
             {
                 return true;
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
     }
@@ -313,7 +305,7 @@ namespace TCC
             var sb = new StringBuilder();
             foreach (var val in list)
             {
-                sb.Append(val.ToString());
+                sb.Append(val);
                 if (list.IndexOf(val) < list.Count - 1) sb.Append(',');
             }
             return sb.ToString();
@@ -619,9 +611,9 @@ namespace TCC
 
             if (uiElement != null)
             {
-                bool IsEnabled = e.NewValue is bool && (bool)e.NewValue;
+                var isEnabled = e.NewValue is bool && (bool)e.NewValue;
 
-                if (IsEnabled)
+                if (isEnabled)
                 {
                     if (uiElement is ButtonBase)
                         ((ButtonBase)uiElement).Click += OnMouseLeftButtonUp;
@@ -640,20 +632,17 @@ namespace TCC
 
         private static void OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
-            var fe = sender as FrameworkElement;
-            if (fe != null)
+            if (!(sender is FrameworkElement fe)) return;
+            // if we use binding in our context menu, then it's DataContext won't be set when we show the menu on left click
+            // (it seems setting DataContext for ContextMenu is hardcoded in WPF when user right clicks on a control, although I'm not sure)
+            // so we have to set up ContextMenu.DataContext manually here
+
+            if (fe.ContextMenu == null) return;
+            if (fe.ContextMenu.DataContext == null)
             {
-                // if we use binding in our context menu, then it's DataContext won't be set when we show the menu on left click
-                // (it seems setting DataContext for ContextMenu is hardcoded in WPF when user right clicks on a control, although I'm not sure)
-                // so we have to set up ContextMenu.DataContext manually here
-                if (fe.ContextMenu.DataContext == null)
-                {
-                    fe.ContextMenu.SetBinding(FrameworkElement.DataContextProperty, new Binding { Source = fe.DataContext });
-                }
-
-                fe.ContextMenu.IsOpen = true;
+                fe.ContextMenu.SetBinding(FrameworkElement.DataContextProperty, new Binding { Source = fe.DataContext });
             }
+            fe.ContextMenu.IsOpen = true;
         }
-
     }
 }

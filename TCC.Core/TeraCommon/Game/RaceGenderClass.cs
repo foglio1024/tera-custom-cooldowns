@@ -73,7 +73,7 @@ namespace TCC.TeraCommon.Game
             if (!(obj is RaceGenderClass))
                 return false;
             var other = (RaceGenderClass) obj;
-            return (Race == other.Race) && (Gender == other.Gender) && (Class == other.Class);
+            return Race == other.Race && Gender == other.Gender && Class == other.Class;
         }
 
         public override int GetHashCode()

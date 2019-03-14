@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
-using System.Windows.Threading;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Settings;
@@ -22,7 +19,7 @@ namespace TCC.Windows.Widgets
         private ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
-            MainContent = content;
+            MainContent = ChatContent;
             Init(ws, false, true, false);
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnIsDraggingChanged));
         }
@@ -30,8 +27,9 @@ namespace TCC.Windows.Widgets
         {
             DataContext = vm;
             VM = DataContext as ChatViewModel;
+            if (VM == null) return;
             VM.WindowSettings = ws;
-            ((ChatWindowSettings)WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
+            ((ChatWindowSettings) WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
             VM.RefreshHideTimer();
         }
 

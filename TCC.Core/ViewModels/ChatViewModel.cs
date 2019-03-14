@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using Dragablz;
 using TCC.Data;
@@ -60,7 +58,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs { get; set; }
+        public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs { get; }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public IInterTabClient InterTabClient { get; }
         public List<Tab> Tabs
@@ -216,7 +214,7 @@ namespace TCC.ViewModels
             {
                 CurrentTab = TabVMs[0].Content as Tab;
             }
-            if (!CurrentTab.Filter(newItems[0] as ChatMessage)) return;
+            if (CurrentTab != null && !CurrentTab.Filter(newItems[0] as ChatMessage)) return;
             RefreshHideTimer();
             //VisibilityChanged?.Invoke(true);  // IsChatVisible = true;
             Visible = true;

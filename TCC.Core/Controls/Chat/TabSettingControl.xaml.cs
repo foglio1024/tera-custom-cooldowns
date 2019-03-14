@@ -126,8 +126,7 @@ namespace TCC.Controls.Chat
         private void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
-            if (!(sender is TextBox s) ||
-                (string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author..."))) return;
+            if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author...")) return;
             if (_dc.ExcludedAuthors.Contains(s.Text)) return;
             _dc.ExcludedAuthors.Add(s.Text);
             _dc.ApplyFilter();

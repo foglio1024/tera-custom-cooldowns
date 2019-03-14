@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
 using TCC.Windows.Widgets;
+using Application = System.Windows.Application;
+using ContextMenu = System.Windows.Controls.ContextMenu;
+using MenuItem = System.Windows.Controls.MenuItem;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
 
 namespace TCC
@@ -54,7 +56,7 @@ namespace TCC
         public static SkillConfigWindow SkillConfigWindow;
 
 
-        public static ConcurrentDictionary<int ,Dispatcher> RunningDispatchers;
+        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers;
 
         private static ContextMenu _contextMenu;
 
@@ -70,8 +72,10 @@ namespace TCC
             FocusManager.Init();
             LoadWindows();
             _contextMenu = new ContextMenu();
-            DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative))?.Stream);
-            ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative))?.Stream);
+            var defaultIconStream = Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative))?.Stream;
+            if (defaultIconStream != null) DefaultIcon = new Icon(defaultIconStream);
+            var connectedIconStream = Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative))?.Stream;
+            if (connectedIconStream != null) ConnectedIcon = new Icon(connectedIconStream);
             TrayIcon = new NotifyIcon()
             {
                 Icon = DefaultIcon,
@@ -101,7 +105,7 @@ namespace TCC
 
         public static void CloseWindow(Type type)
         {
-            App.Current.Windows.ToList().ForEach(w =>
+            Application.Current.Windows.ToList().ForEach(w =>
             {
                 if (w.GetType() == type) w.Close();
             });
@@ -109,7 +113,7 @@ namespace TCC
 
         public static bool IsWindowOpen(Type type)
         {
-            return App.Current.Windows.ToList().Any(w =>
+            return Application.Current.Windows.ToList().Any(w =>
             w.GetType() == type && w.IsVisible);
         }
 
@@ -117,7 +121,7 @@ namespace TCC
         {
             App.BaseDispatcher.BeginInvoke(new Action(() =>
             {
-                foreach (ChatWindow w in App.Current.Windows.ToList().Where(x => x is ChatWindow c && c.VM.TabVMs.Count == 0))
+                foreach (ChatWindow w in Application.Current.Windows.ToList().Where(x => x is ChatWindow c && c.VM.TabVMs.Count == 0))
                 {
                     ChatWindowManager.Instance.ChatWindows.Remove(w);
                     w.Close();
@@ -192,7 +196,7 @@ namespace TCC
             ChatWindowManager.Instance.InitWindows();
 
         }
-        public static bool _chatInitalized = false;
+        public static bool ChatInitalized = false;
         private static void AddDispatcher(int threadId, Dispatcher d)
         {
             RunningDispatchers[threadId] = d;
@@ -204,41 +208,41 @@ namespace TCC
 
         private static void LoadCooldownWindow()
         {
-            var cooldownWindowThread = new Thread(new ThreadStart(() =>
+            var cooldownWindowThread = new Thread(() =>
             {
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SynchronizationContext.SetSynchronizationContext(
+                    new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 CooldownWindow = new CooldownWindow();
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-
-            }));
-            cooldownWindowThread.Name = "Cdwn";
+            })
+            { Name = "Cdwn" };
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
             cooldownWindowThread.Start();
         }
         private static void LoadClassWindow()
         {
-            var classWindowThread = new Thread(new ThreadStart(() =>
+            var classWindowThread = new Thread(() =>
             {
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SynchronizationContext.SetSynchronizationContext(
+                    new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 ClassWindow = new ClassWindow();
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-
-            }));
-            classWindowThread.Name = "Class";
+            })
+            { Name = "Class" };
             classWindowThread.SetApartmentState(ApartmentState.STA);
             classWindowThread.Start();
         }
         private static void LoadCharWindow()
         {
-            var charWindowThread = new Thread(new ThreadStart(() =>
+            var charWindowThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
@@ -246,15 +250,14 @@ namespace TCC
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-
-            }));
-            charWindowThread.Name = "Char";
+            })
+            { Name = "Char" };
             charWindowThread.SetApartmentState(ApartmentState.STA);
             charWindowThread.Start();
         }
         private static void LoadNpcWindow()
         {
-            var bossGaugeThread = new Thread(new ThreadStart(() =>
+            var bossGaugeThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow();
@@ -262,15 +265,14 @@ namespace TCC
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-
-            }));
-            bossGaugeThread.Name = "Boss";
+            })
+            { Name = "Boss" };
             bossGaugeThread.SetApartmentState(ApartmentState.STA);
             bossGaugeThread.Start();
         }
         private static void LoadBuffBarWindow()
         {
-            var buffBarThread = new Thread(new ThreadStart(() =>
+            var buffBarThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BuffWindow = new BuffWindow();
@@ -278,51 +280,49 @@ namespace TCC
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-
-            }));
-            buffBarThread.Name = "Buff";
+            })
+            { Name = "Buff" };
             buffBarThread.SetApartmentState(ApartmentState.STA);
             buffBarThread.Start();
         }
         private static void LoadGroupWindow()
         {
-            var groupWindowThread = new Thread(new ThreadStart(() =>
+            var groupWindowThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-
                 GroupWindow = new GroupWindow();
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-
-            }));
-            groupWindowThread.Name = "Group";
+            })
+            { Name = "Group" };
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
         }
 
-        private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private static void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (SettingsWindow == null)
             {
-                SettingsWindow = new SettingsWindow()
+                SettingsWindow = new SettingsWindow
                 {
                     Name = "Settings"
                 };
             }
             SettingsWindow.ShowWindow();
         }
-        private static void NI_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private static void NI_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            switch (e.Button)
             {
-                _contextMenu.IsOpen = true;
-            }
-            else if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                _contextMenu.IsOpen = false;
+                case MouseButtons.Right:
+                    _contextMenu.IsOpen = true;
+                    break;
+                case MouseButtons.Left:
+                    _contextMenu.IsOpen = false;
+                    break;
             }
         }
 

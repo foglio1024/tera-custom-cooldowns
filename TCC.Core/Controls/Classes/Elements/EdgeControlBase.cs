@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TCC.Annotations;
 using TCC.Data;
 
 namespace TCC.Controls.Classes.Elements
@@ -30,6 +31,7 @@ namespace TCC.Controls.Classes.Elements
         }
         public static readonly DependencyProperty EdgeCounterProperty = DependencyProperty.Register("EdgeCounter", typeof(Counter), typeof(EdgeControlBase));
 
+        [UsedImplicitly]
         public virtual List<FrameworkElement> EdgeElements { get; }
 
         public EdgeControlBase()

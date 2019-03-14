@@ -8,14 +8,14 @@ namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_LIST : ParsedMessage
     {
-        private bool im, raid;
-        private uint leaderServerId;
-        private uint leaderPlayerId;
+        private bool _im, _raid;
+        private uint _leaderServerId;
+        private uint _leaderPlayerId;
 
-        public bool Im => im;
-        public bool Raid => raid;
-        public uint LeaderServerId => leaderServerId;
-        public uint LeaderPlayerId => leaderPlayerId;
+        public bool Im => _im;
+        public bool Raid => _raid;
+        public uint LeaderServerId => _leaderServerId;
+        public uint LeaderPlayerId => _leaderPlayerId;
 
         public List<User> Members { get; }
 
@@ -24,8 +24,8 @@ namespace TCC.Parsing.Messages
             var count = reader.ReadUInt16();
             var offset = reader.ReadUInt16();
 
-            im = reader.ReadBoolean();
-            raid = reader.ReadBoolean();
+            _im = reader.ReadBoolean();
+            _raid = reader.ReadBoolean();
 
             reader.Skip(12);
             //unk1 = reader.ReadUInt32();
@@ -33,8 +33,8 @@ namespace TCC.Parsing.Messages
             //unk3 = reader.ReadUInt16();
             //unk4 = reader.ReadUInt16();
 
-            leaderServerId = reader.ReadUInt32();
-            leaderPlayerId = reader.ReadUInt32();
+            _leaderServerId = reader.ReadUInt32();
+            _leaderPlayerId = reader.ReadUInt32();
 
             reader.Skip(19);
             //unk5 = reader.ReadUInt32();

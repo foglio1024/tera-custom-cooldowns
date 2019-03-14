@@ -29,7 +29,7 @@ namespace TCC.Controls.Skills
         private static readonly Action EmptyDelegate = delegate { };
         //private string _lastSender = "";
 
-        private CooldownWindowViewModel _vm => Dispatcher.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
+        private CooldownWindowViewModel VM => Dispatcher.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
 
         public FixedSkillContainers()
         {
@@ -53,9 +53,9 @@ namespace TCC.Controls.Skills
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
 
-            _vm.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
-            _vm.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
-            _vm.SkillsLoaded += OnSkillsLoaded;
+            VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
+            VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
+            VM.SkillsLoaded += OnSkillsLoaded;
 
             OnSkillShapeChanged();
             SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
@@ -65,8 +65,8 @@ namespace TCC.Controls.Skills
         {
             Dispatcher.Invoke(() =>
             {
-                ReorderSkillContainer(MainSkills, _vm.MainSkills);
-                ReorderSkillContainer(SecSkills, _vm.SecondarySkills);
+                ReorderSkillContainer(MainSkills, VM.MainSkills);
+                ReorderSkillContainer(SecSkills, VM.SecondarySkills);
             });
         }
 
@@ -104,7 +104,7 @@ namespace TCC.Controls.Skills
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             MainSkills.InvalidateMeasure();
             MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
-            _vm.Save();
+            VM.Save();
         }
 
         private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -113,7 +113,7 @@ namespace TCC.Controls.Skills
             {
                 SecSkills.InvalidateMeasure();
                 SecSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
-                _vm.Save();
+                VM.Save();
             }
 
             OtherSkills.Margin = ((SynchronizedObservableCollection<Cooldown>)sender).Count == 0
@@ -182,27 +182,27 @@ namespace TCC.Controls.Skills
 
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
-            if (_vm.MainSkills.Contains(e.DragablzItem.DataContext as Cooldown))
+            if (VM.MainSkills.Contains(e.DragablzItem.DataContext as Cooldown))
             {
                 if (_mainOrder == null) return;
-                for (int j = 0; j < _vm.MainSkills.Count; j++)
+                for (var j = 0; j < VM.MainSkills.Count; j++)
                 {
-                    var newIndex = _mainOrder.ToList().IndexOf(_vm.MainSkills[j]);
+                    var newIndex = _mainOrder.ToList().IndexOf(VM.MainSkills[j]);
                     var oldIndex = j;
-                    _vm.MainSkills.Move(oldIndex, newIndex);
+                    VM.MainSkills.Move(oldIndex, newIndex);
                 }
             }
-            else if (_vm.SecondarySkills.Contains(e.DragablzItem.DataContext as Cooldown))
+            else if (VM.SecondarySkills.Contains(e.DragablzItem.DataContext as Cooldown))
             {
                 if (_secondaryOrder == null) return;
-                for (int i = 0; i < _vm.SecondarySkills.Count; i++)
+                for (var i = 0; i < VM.SecondarySkills.Count; i++)
                 {
-                    var newIndex = _secondaryOrder.ToList().IndexOf(_vm.SecondarySkills[i]);
+                    var newIndex = _secondaryOrder.ToList().IndexOf(VM.SecondarySkills[i]);
                     var oldIndex = i;
-                    _vm.SecondarySkills.Move(oldIndex, newIndex);
+                    VM.SecondarySkills.Move(oldIndex, newIndex);
                 }
             }
-            _vm.Save();
+            VM.Save();
             //FocusManager.ForceVisible = false; // FocusTimer.Enabled = true;
             //WindowManager.ForegroundManager.ForceVisible = false;
             //WindowManager.ForegroundManager.ForceUndim = false;
@@ -290,9 +290,6 @@ namespace TCC.Controls.Skills
 
         public class SkillDropHandler : IDropTarget
         {
-            public SkillDropHandler()
-            {
-            }
             public void DragOver(IDropInfo dropInfo)
             {
                 dropInfo.Effects = DragDropEffects.Move;
@@ -300,13 +297,13 @@ namespace TCC.Controls.Skills
 
             public void Drop(IDropInfo dropInfo)
             {
-                var target = ((SynchronizedObservableCollection<Cooldown>)dropInfo.TargetCollection);
+                var target = (SynchronizedObservableCollection<Cooldown>)dropInfo.TargetCollection;
                 switch (dropInfo.Data)
                 {
                     case Skill sk:
                         if (target.All(x => x.Skill.IconName != sk.IconName))
                         {
-                            target.Insert(dropInfo.InsertIndex, new Cooldown((Skill)dropInfo.Data, false));
+                            target.Insert(dropInfo.InsertIndex, new Cooldown(sk, false));
                         }
                         break;
                     case Abnormality ab:
@@ -347,14 +344,14 @@ namespace TCC.Controls.Skills
                     {
                         if (x.Seconds > 0)
                         {
-                            x.Start((x.Seconds) * 1000 - delay);
+                            x.Start(x.Seconds * 1000 - delay);
                         }
                     });
                     WindowManager.CooldownWindow.VM.SecondarySkills.ToList().ForEach(x =>
                     {
                         if (x.Seconds > 0)
                         {
-                            x.Start((x.Seconds) * 1000 - delay);
+                            x.Start(x.Seconds * 1000 - delay);
                         }
                     });
                 });

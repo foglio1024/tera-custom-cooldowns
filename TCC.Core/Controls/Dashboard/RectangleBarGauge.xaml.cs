@@ -58,7 +58,7 @@ namespace TCC.Controls.Dashboard
         {
 
             var a = new DoubleAnimation((double)e.NewValue, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
-            (d as RectangleBarGauge).GaugeValue.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, a);
+            (d as RectangleBarGauge)?.GaugeValue.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, a);
         }
 
         public double Skew

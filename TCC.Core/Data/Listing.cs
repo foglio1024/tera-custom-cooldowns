@@ -3,7 +3,6 @@ using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Pc;
-using TCC.ViewModels;
 
 namespace TCC.Data
 {

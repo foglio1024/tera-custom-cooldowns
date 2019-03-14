@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -27,8 +25,6 @@ namespace TCC.ViewModels
 
         private NPC _selectedDragon;
         private NPC _vergos;
-
-        private readonly DispatcherTimer _flushTimer;
 
         private readonly List<NPC> _holdedDragons = new List<NPC>();
         private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
@@ -72,7 +68,10 @@ namespace TCC.ViewModels
         {
             get
             {
-                _bams = Utils.InitLiveView(p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new string[] { nameof(NPC.Visible) },
+                _bams = Utils.InitLiveView(
+                    p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible,
+                    NpcList, 
+                    new[] { nameof(NPC.Visible) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _bams;
             }
@@ -81,7 +80,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _mobs = Utils.InitLiveView(p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new string[] { nameof(NPC.Visible) },
+                _mobs = Utils.InitLiveView(p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new[] { nameof(NPC.Visible) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _mobs;
             }
@@ -134,9 +133,9 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
             NpcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
             _cache = new Dictionary<ulong, float>();
-            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            _flushTimer.Tick += FlushCache;
-            _flushTimer.Start();
+            var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            flushTimer.Tick += FlushCache;
+            flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
             NpcListChanged += OnNpcCollectionChanged;
         }

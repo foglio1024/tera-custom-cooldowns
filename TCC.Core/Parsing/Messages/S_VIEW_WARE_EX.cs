@@ -32,7 +32,7 @@ namespace TCC.Parsing.Messages
             reader.Skip(8);
             reader.Skip(2); // var tabsCount = reader.ReadInt16();
             reader.BaseStream.Position = itemsArrayOffset - 4;
-            for (int i = 0; i < itemsArrayCount; i++)
+            for (var i = 0; i < itemsArrayCount; i++)
             {
                 reader.Skip(2); // var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();

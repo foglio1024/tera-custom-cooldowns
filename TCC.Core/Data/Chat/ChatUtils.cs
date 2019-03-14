@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using TCC.Parsing;
 
 namespace TCC.Data.Chat
 {
@@ -9,21 +8,21 @@ namespace TCC.Data.Chat
     {
         public static string GetItemColor(Item i)
         {
-            var CommonColor = "FFFFFF";
-            var UncommonColor = "4DCB30";
-            var RareColor = "009ED9";
-            var SuperiorColor = "EEBE00";
+            var commonColor = "FFFFFF";
+            var uncommonColor = "4DCB30";
+            var rareColor = "009ED9";
+            var superiorColor = "EEBE00";
 
             switch (i.RareGrade)
             {
                 case RareGrade.Common:
-                    return CommonColor;
+                    return commonColor;
                 case RareGrade.Uncommon:
-                    return UncommonColor;
+                    return uncommonColor;
                 case RareGrade.Rare:
-                    return RareColor;
+                    return rareColor;
                 case RareGrade.Superior:
-                    return SuperiorColor;
+                    return superiorColor;
                 default:
                     return "";
             }

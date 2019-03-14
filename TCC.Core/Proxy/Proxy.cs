@@ -129,8 +129,8 @@ namespace TCC.Proxy
                 ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
             else
                 ChatWindowManager.Instance.AddChatMessage(
-                    new ChatMessage(((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
-                                         x.Id == channel && x.Joined).Index + 11), author, message));
+                    new ChatMessage((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
+                                        x.Id == channel && x.Joined).Index + 11, author, message));
         }
 
         public static void HandleGpkData(string data)

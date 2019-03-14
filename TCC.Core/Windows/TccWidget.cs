@@ -59,8 +59,8 @@ namespace TCC.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                Left = Screen.PrimaryScreen.Bounds.X + (Screen.PrimaryScreen.Bounds.Width / 2) - (ActualWidth / 2);
-                Top = Screen.PrimaryScreen.Bounds.Y + (Screen.PrimaryScreen.Bounds.Height / 2) - (ActualHeight / 2);
+                Left = Screen.PrimaryScreen.Bounds.X + Screen.PrimaryScreen.Bounds.Width / 2 - ActualWidth / 2;
+                Top = Screen.PrimaryScreen.Bounds.Y + Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
                 WindowSettings.X = Left / SettingsHolder.ScreenW;
                 WindowSettings.Y = Top / SettingsHolder.ScreenH;
             });
@@ -262,11 +262,11 @@ namespace TCC.Windows
         private void CheckBounds()
         {
             if (WindowSettings.AllowOffScreen) return;
-            if ((Left + ActualWidth) > SettingsHolder.ScreenW)
+            if (Left + ActualWidth > SettingsHolder.ScreenW)
             {
                 Left = SettingsHolder.ScreenW - ActualWidth;
             }
-            if ((Top + ActualHeight) > SettingsHolder.ScreenH)
+            if (Top + ActualHeight > SettingsHolder.ScreenH)
             {
                 Top = SettingsHolder.ScreenH - ActualHeight;
             }

@@ -52,7 +52,7 @@ namespace TCC.Controls.Classes.Elements
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             //lazy way of making sure that DataContext is not null
-            var classMgr = (WindowManager.ClassWindow.VM.CurrentManager as WarriorBarManager);
+            var classMgr = WindowManager.ClassWindow.VM.CurrentManager as WarriorLayoutVM;
             _context = classMgr?.EdgeCounter;
             while (_context == null)
             {
@@ -60,11 +60,6 @@ namespace TCC.Controls.Classes.Elements
                 Thread.Sleep(500);
             }
             _context.PropertyChanged += _context_PropertyChanged;
-        }
-
-        private void OnMaxed()
-        {
-            MaxBorder.Opacity = 1;
         }
 
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)

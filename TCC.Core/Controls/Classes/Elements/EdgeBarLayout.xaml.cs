@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace TCC.Controls.Classes.Elements
 {
-    public partial class EdgeBarLayout : EdgeControlBase
+    public partial class EdgeBarLayout
     {
 
         public EdgeBarLayout()

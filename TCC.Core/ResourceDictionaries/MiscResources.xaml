@@ -36,6 +36,7 @@
     <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
     <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
     <DropShadowEffect x:Key="ClassIconGlow" Color="{StaticResource ClassGlowColor}" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
+    <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20"/>
 
     <VisualBrush x:Key="RhombOpacityMask" >
         <VisualBrush.Visual>

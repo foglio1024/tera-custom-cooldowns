@@ -74,9 +74,9 @@ namespace TCC.TeraCommon.Game.Messages.Server
         public Vector3f Position { get; }
         public Angle Heading { get; }
 
-        public bool IsMana => ((Flags & SkillResultFlags.Bit0) != 0) && ((Flags & SkillResultFlags.Heal) != 0);
+        public bool IsMana => (Flags & SkillResultFlags.Bit0) != 0 && (Flags & SkillResultFlags.Heal) != 0;
 
-        public bool IsHeal => ((Flags & SkillResultFlags.Bit0) == 0) && ((Flags & SkillResultFlags.Heal) != 0);
+        public bool IsHeal => (Flags & SkillResultFlags.Bit0) == 0 && (Flags & SkillResultFlags.Heal) != 0;
         public bool IsUseless => (Flags & SkillResultFlags.IsDfaResolve) != 0;
         public bool IsHp => !IsMana;
     }
