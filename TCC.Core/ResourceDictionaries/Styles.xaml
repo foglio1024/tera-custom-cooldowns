@@ -4,7 +4,6 @@
                     xmlns:ctrl="clr-namespace:TCC.Controls"
                     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
                     xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-                    xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
                     x:Class="TCC.ResourceDictionaries.Styles">
 
 
@@ -1280,6 +1279,18 @@
             </Trigger>-->
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="ClassWindowSkillBorder" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#89a"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Width" Value="51"/>
+        <Setter Property="Height" Value="51"/>
+        <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
+        <Setter Property="Background" Value="{StaticResource RevampBackgroundGradientBrush}"/>
+        <Setter Property="Effect" Value="{StaticResource ClassWindowSkillBorderShadow}"/>
+    </Style>
+
+
     <ControlTemplate x:Key="MenuItemControlTemplate1" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                 Background="{TemplateBinding Background}" SnapsToDevicePixels="True"  Effect="{StaticResource DropShadow}">
