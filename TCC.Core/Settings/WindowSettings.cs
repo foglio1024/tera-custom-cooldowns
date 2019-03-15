@@ -347,7 +347,6 @@ namespace TCC.Settings
             }
         }
 
-
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
             Tabs = new List<Tab>();

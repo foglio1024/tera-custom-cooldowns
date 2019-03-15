@@ -961,6 +961,8 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
+                            <settings:CheckboxSetting SettingName="Show HP numbers"
+                                                      IsOn="{Binding ShowMembersHpNumbers, Mode=TwoWay}"/>
                             <settings:CheckboxSetting SettingName="Show laurels"
                                                       IsOn="{Binding ShowMembersLaurels, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>

@@ -340,6 +340,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.TwitchToken)) SettingsHolder.TwitchToken = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.TwitchChannelName)) SettingsHolder.TwitchChannelName = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.GroupSizeThreshold)) SettingsHolder.GroupSizeThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.ShowMembersHpNumbers)) SettingsHolder.ShowMembersHpNumbers = bool.Parse(attr.Value);
 
                     else if (attr.Name == nameof(SettingsHolder.HideBuffsThreshold)) SettingsHolder.HideBuffsThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.HideDebuffsThreshold)) SettingsHolder.HideDebuffsThreshold = uint.Parse(attr.Value);

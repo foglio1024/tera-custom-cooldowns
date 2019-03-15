@@ -190,5 +190,6 @@ namespace TCC.Settings
         public static bool ExperimentalNotification { get; set; } = true;
         public static bool FpsAtGuardian { get; set; } = true;
         public static bool EnableProxy { get; set; } = true;
+        public static bool ShowMembersHpNumbers { get; set; } = true;
     }
 }

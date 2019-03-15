@@ -130,6 +130,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ShowGroupWindowDetails), SettingsHolder.ShowGroupWindowDetails),
                 new XAttribute(nameof(SettingsHolder.ShowAwakenIcon), SettingsHolder.ShowAwakenIcon),
                 new XAttribute(nameof(SettingsHolder.ShowAllGroupAbnormalities), SettingsHolder.ShowAllGroupAbnormalities),
+                new XAttribute(nameof(SettingsHolder.ShowMembersHpNumbers), SettingsHolder.ShowMembersHpNumbers),
                 // Misc
                 new XAttribute(nameof(SettingsHolder.ForceSoftwareRendering), SettingsHolder.ForceSoftwareRendering),
                 new XAttribute(nameof(SettingsHolder.HighPriority), SettingsHolder.HighPriority),

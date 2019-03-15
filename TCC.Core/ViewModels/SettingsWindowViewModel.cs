@@ -70,6 +70,17 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool ShowMembersHpNumbers
+        {
+            get => SettingsHolder.ShowMembersHpNumbers;
+            set
+            {
+                if (SettingsHolder.ShowMembersHpNumbers == value) return;
+                SettingsHolder.ShowMembersHpNumbers = value;
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                N();
+            }
+        }
         public bool ExperimentalNotification
         {
             get => SettingsHolder.ExperimentalNotification;

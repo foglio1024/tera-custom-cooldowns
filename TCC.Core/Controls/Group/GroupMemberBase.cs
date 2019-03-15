@@ -39,6 +39,7 @@ namespace TCC.Controls.Group
         public bool ShowDebuffs => WindowManager.GroupWindow.VM.Size <= SettingsHolder.HideDebuffsThreshold;
         public bool ShowLaurel => SettingsHolder.ShowMembersLaurels;
         public bool ShowAwaken => SettingsHolder.ShowAwakenIcon;
+        public bool ShowHpNumbers => SettingsHolder.ShowMembersHpNumbers && ShowHp;
         public DataTemplateSelector CurrentAbnormalityTemplateSelector
         {
             get => _currentAbnormalityTemplateSelector;
@@ -74,6 +75,7 @@ namespace TCC.Controls.Group
             NPC(nameof(DebuffsSource));
             NPC(nameof(ShowLaurel));
             NPC(nameof(ShowAwaken));
+            NPC(nameof(ShowHpNumbers));
         }
         private void OnAbnormalityShapeChanged()
         {
