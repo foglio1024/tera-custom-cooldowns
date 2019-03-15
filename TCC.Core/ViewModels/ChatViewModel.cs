@@ -103,6 +103,11 @@ namespace TCC.ViewModels
         }
         private void OnHideTimerTick(object sender, EventArgs e)
         {
+            if (!_windowSettings.FadeOut)
+            {
+                if (!Visible) Visible = true;
+                return;
+            }
             Visible = false;
             _hideTimer.Stop();
         }
