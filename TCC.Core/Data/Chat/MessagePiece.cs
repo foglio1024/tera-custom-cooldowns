@@ -144,7 +144,6 @@ namespace TCC.Data.Chat
         {
             if (col != "") SetColor(col);
             Type = type;
-
             _size = size;
             _customSize = customSize;
 

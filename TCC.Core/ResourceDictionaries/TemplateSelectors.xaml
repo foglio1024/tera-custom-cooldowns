@@ -22,6 +22,7 @@
                                     PointOfInterestTemplate="{StaticResource SimpleTemplate}"
                                     ItemTemplate="{StaticResource SimpleTemplate}"
                                     EmojiTemplate="{StaticResource EmojiTemplate}"
+                                    IconTemplate="{StaticResource IconTemplate}"
                                     />
     <ts:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
                                     NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"

@@ -93,6 +93,7 @@
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="Controls\Group\GroupMemberBase.cs" />
+    <Compile Include="Converters\MessageTextToIconConverter.cs" />
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />

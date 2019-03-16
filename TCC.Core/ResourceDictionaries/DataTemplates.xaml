@@ -298,6 +298,22 @@
     <DataTemplate x:Key="EmojiTemplate">
         <chatCtrl:EmojiMessagePiece />
     </DataTemplate>
+    <DataTemplate x:Key="IconTemplate" DataType="chat:MessagePiece">
+        <Ellipse Width="24" Height="24" Margin="0 0 3 0" VerticalAlignment="Center">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Text, Converter={StaticResource MessageTextToIcon}}"></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <!--<Image RenderOptions.BitmapScalingMode="HighQuality" 
+               Margin="-2 0 4 -4" 
+               Width="18" 
+               Stretch="Uniform" 
+               HorizontalAlignment="Center" 
+               Height="18" 
+               Source="{Binding Text, Converter={StaticResource MessageTextToIcon}}"/>-->
+
+    </DataTemplate>
 
     <DataTemplate x:Key="MessageHeaderTemplate">
         <chatCtrl:ChatMessageHeader />

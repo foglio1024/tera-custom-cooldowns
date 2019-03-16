@@ -13,6 +13,7 @@ namespace TCC.TemplateSelectors
         public DataTemplate PointOfInterestTemplate { get; set; }
         public DataTemplate MoneyTemplate { get; set; }
         public DataTemplate EmojiTemplate { get; set; }
+        public DataTemplate IconTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -29,6 +30,8 @@ namespace TCC.TemplateSelectors
                     return PointOfInterestTemplate;
                 case MessagePieceType.Emoji:
                     return EmojiTemplate;
+                case MessagePieceType.Icon:
+                    return IconTemplate;
                 case MessagePieceType.Money:
                     return MoneyTemplate;
                 default:

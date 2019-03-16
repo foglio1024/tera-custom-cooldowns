@@ -369,6 +369,7 @@ namespace TCC.R
 		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
 		public static SizeToDurationLabelMarginConverter MainSizeToDurationLabelMargin => ((SizeToDurationLabelMarginConverter)App.Current.FindResource("MainSizeToDurationLabelMargin"));
 		public static ColorToTransparentConverter ColorToTransparent => ((ColorToTransparentConverter)App.Current.FindResource("ColorToTransparent"));
+		public static MessageTextToIconConverter MessageTextToIcon => ((MessageTextToIconConverter)App.Current.FindResource("MessageTextToIcon"));
 		public static EntityIdToNameConverter EntityIdToName => ((EntityIdToNameConverter)App.Current.FindResource("EntityIdToName"));
 		public static AggroTypeToFillConverter AggroTypeToFill => ((AggroTypeToFillConverter)App.Current.FindResource("AggroTypeToFill"));
 		public static DragonIdToColorConverter DragonIdToColor => ((DragonIdToColorConverter)App.Current.FindResource("DragonIdToColor"));
@@ -476,6 +477,7 @@ namespace TCC.R
 		public static DataTemplate SimpleTemplate => ((DataTemplate)App.Current.FindResource("SimpleTemplate"));
 		public static DataTemplate MoneyTemplate => ((DataTemplate)App.Current.FindResource("MoneyTemplate"));
 		public static DataTemplate EmojiTemplate => ((DataTemplate)App.Current.FindResource("EmojiTemplate"));
+		public static DataTemplate IconTemplate => ((DataTemplate)App.Current.FindResource("IconTemplate"));
 		public static DataTemplate MessageHeaderTemplate => ((DataTemplate)App.Current.FindResource("MessageHeaderTemplate"));
 		public static DataTemplate MessageBodyTemplate => ((DataTemplate)App.Current.FindResource("MessageBodyTemplate"));
 		public static DataTemplate DefaultBody => ((DataTemplate)App.Current.FindResource("DefaultBody"));

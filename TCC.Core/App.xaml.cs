@@ -40,6 +40,7 @@ namespace TCC
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+
 #if false
             try
             {
@@ -338,6 +339,9 @@ namespace TCC
         }
         private static void DebugStuff()
         {
+            var sysMsg = "@4143\vUserName\vFoglio\vAbnormalityName\vCloverBuff";
+            SystemMessagesProcessor.AnalyzeMessage(sysMsg, SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages["SMT_GOLDENBELL_MESSAGE"], "SMT_GOLDENBELL_MESSAGE");
+
             //var _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             //var dispatchers = new List<Dispatcher>
             //{
@@ -439,19 +443,19 @@ namespace TCC
             //}
             //GC.Collect();
             //GC.WaitForPendingFinalizers();
-            WindowManager.GroupWindow.VM.AddOrUpdateMember(new User(WindowManager.GroupWindow.VM.GetDispatcher())
-            {
-                Alive = true,
-                Awakened = true,
-                CurrentHp = 0,
-                MaxHp = 1000,
-                EntityId = 1,
-                ServerId = 1,
-                PlayerId = 1,
-                UserClass = Class.Archer,
-                Online = true,
-                HasAggro = true
-            });
+            //WindowManager.GroupWindow.VM.AddOrUpdateMember(new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            //{
+            //    Alive = true,
+            //    Awakened = true,
+            //    CurrentHp = 0,
+            //    MaxHp = 1000,
+            //    EntityId = 1,
+            //    ServerId = 1,
+            //    PlayerId = 1,
+            //    UserClass = Class.Archer,
+            //    Online = true,
+            //    HasAggro = true
+            //});
             //bool up = true;
             //bool inv = false;
             //ulong i = 0;
@@ -549,27 +553,27 @@ namespace TCC
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
 
             //var l = new List<User>();
-            var r = new Random();
-            for (uint i = 0; i <= 10; i++)
-            {
-                var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
-                {
-                    Name = i.ToString(),
-                    PlayerId = i,
-                    ServerId = i,
-                    EntityId = i,
-                    Online = true,
-                    Laurel = (Laurel)r.Next(0, 6),
-                    HasAggro = i == 1,
-                    Alive = true, //i != 0,
-                    UserClass = (Class)r.Next(0, 12),
-                    Awakened = i < 5,
-                };
-                WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
-            }
-            AbnormalityManager.UpdatePartyMemberAbnormality(1, 1, 1495, 200000, 1);
-            AbnormalityManager.UpdatePartyMemberAbnormality(2, 2, 1495, 200000, 1);
-            AbnormalityManager.UpdatePartyMemberAbnormality(3, 3, 1495, 200000, 1);
+            //var r = new Random();
+            //for (uint i = 0; i <= 10; i++)
+            //{
+            //    var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            //    {
+            //        Name = i.ToString(),
+            //        PlayerId = i,
+            //        ServerId = i,
+            //        EntityId = i,
+            //        Online = true,
+            //        Laurel = (Laurel)r.Next(0, 6),
+            //        HasAggro = i == 1,
+            //        Alive = true, //i != 0,
+            //        UserClass = (Class)r.Next(0, 12),
+            //        Awakened = i < 5,
+            //    };
+            //    WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
+            //}
+            //AbnormalityManager.UpdatePartyMemberAbnormality(1, 1, 1495, 200000, 1);
+            //AbnormalityManager.UpdatePartyMemberAbnormality(2, 2, 1495, 200000, 1);
+            //AbnormalityManager.UpdatePartyMemberAbnormality(3, 3, 1495, 200000, 1);
 
             ////WindowManager.GroupWindow.VM.SetRaid(true);
             //WindowManager.GroupWindow.VM.SetNewLeader(1, "1");
