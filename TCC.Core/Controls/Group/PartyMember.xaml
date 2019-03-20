@@ -324,7 +324,7 @@
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Stretch"
                    Stretch="Uniform" 
-                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr}" 
+                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr_half}" 
                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
                                                     Converter={StaticResource BoolToVisibleCollapsed}}"
                    >
