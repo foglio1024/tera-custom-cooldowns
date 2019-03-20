@@ -162,7 +162,7 @@ namespace TCC.Parsing
             if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
-            if (!SettingsHolder.StatSent) App.SendUsageStat();
+            App.SendUsageStat();
             SettingsHolder.LastLanguage = SessionManager.Language;
             TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
             TimeManager.Instance.SetGuildBamTime(false);

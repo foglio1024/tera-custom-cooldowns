@@ -12,6 +12,7 @@ namespace TCC.Settings
         private static string _lastLanguage = "";
         private static bool _chatEnabled;
         private static ClickThruMode _chatClickThruMode;
+        private static DateTime _statSentTime = DateTime.MinValue;
 
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
@@ -154,6 +155,18 @@ namespace TCC.Settings
 
         // Misc
         public static DateTime LastRun { get; set; } = DateTime.MinValue;
+
+        public static DateTime StatSentTime
+        {
+            get => _statSentTime;
+            set
+            {
+                _statSentTime = value;
+                SettingsWriter.Save();
+            }
+        }
+
+        public static string StatSentVersion { get; set; }= App.AppVersion;
         public static string LastLanguage
         {
             get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
@@ -166,7 +179,7 @@ namespace TCC.Settings
         public static string TwitchChannelName { get; set; } = ""; //TODO: re-add this
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowTradeLfg { get; set; } = true;
-        public static bool StatSent { get; set; } = false;
+        //public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
         public static bool EthicalMode { get; set; } = false;

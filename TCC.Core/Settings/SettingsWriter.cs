@@ -85,7 +85,7 @@ namespace TCC.Settings
                 // Buff
                 new XAttribute(nameof(SettingsHolder.BuffsDirection), SettingsHolder.BuffsDirection),
                 new XAttribute(nameof(SettingsHolder.ShowAllMyAbnormalities), SettingsHolder.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
-                                                                                                                      // Character
+                // Character
                 new XAttribute(nameof(SettingsHolder.CharacterWindowCompactMode), SettingsHolder.CharacterWindowCompactMode),
                 // Cooldown
                 new XAttribute(nameof(SettingsHolder.CooldownBarMode), SettingsHolder.CooldownBarMode),
@@ -135,6 +135,8 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ForceSoftwareRendering), SettingsHolder.ForceSoftwareRendering),
                 new XAttribute(nameof(SettingsHolder.HighPriority), SettingsHolder.HighPriority),
                 new XAttribute(nameof(SettingsHolder.LastRun), DateTime.Now),
+                new XAttribute(nameof(SettingsHolder.StatSentTime), SettingsHolder.StatSentTime),
+                new XAttribute(nameof(SettingsHolder.StatSentVersion), SettingsHolder.StatSentVersion),
                 new XAttribute(nameof(SettingsHolder.LastLanguage), SettingsHolder.LastLanguage),
                 new XAttribute(nameof(SettingsHolder.DiscordWebhookEnabled), SettingsHolder.DiscordWebhookEnabled),
                 new XAttribute(nameof(SettingsHolder.Webhook), SettingsHolder.Webhook),
@@ -142,7 +144,6 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.TwitchName), SettingsHolder.TwitchName),
                 new XAttribute(nameof(SettingsHolder.TwitchToken), SettingsHolder.TwitchToken),
                 new XAttribute(nameof(SettingsHolder.TwitchChannelName), SettingsHolder.TwitchChannelName),
-                //new XAttribute(nameof(SettingsHolder.StatSent), SettingsHolder.StatSent),
                 new XAttribute(nameof(SettingsHolder.ShowFlightEnergy), SettingsHolder.ShowFlightEnergy),
                 new XAttribute(nameof(SettingsHolder.LfgEnabled), SettingsHolder.LfgEnabled),
                 new XAttribute(nameof(SettingsHolder.UseHotkeys), SettingsHolder.UseHotkeys),
