@@ -28,7 +28,7 @@ namespace TCC.Controls.Skills
         protected override void OnCooldownEnded(CooldownMode mode)
         {
             base.OnCooldownEnded(mode);
-            WindowManager.CooldownWindow.VM.Remove(Context.Skill);
+            if(mode == CooldownMode.Normal) WindowManager.CooldownWindow.VM.Remove(Context.Skill);
         }
         
         private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)
