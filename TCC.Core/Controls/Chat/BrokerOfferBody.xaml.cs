@@ -17,7 +17,7 @@ namespace TCC.Controls.Chat
         private void Accept(object sender, MouseButtonEventArgs e)
         {
             var dc = (BrokerChatMessage) DataContext;
-            Proxy.Proxy.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
+            ProxyInterop.Proxy.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
             ChatWindowManager.Instance.SetPaused(false, dc);
             ChatWindowManager.Instance.ScrollToBottom();
 
@@ -27,7 +27,7 @@ namespace TCC.Controls.Chat
         {
             var dc = (BrokerChatMessage) DataContext;
             if (dc.Handled) return;
-            Proxy.Proxy.DeclineBrokerOffer(dc.PlayerId, dc.ListingId);
+            ProxyInterop.Proxy.DeclineBrokerOffer(dc.PlayerId, dc.ListingId);
             OnHandled();
             ChatWindowManager.Instance.SetPaused(false, dc);
             ChatWindowManager.Instance.ScrollToBottom();

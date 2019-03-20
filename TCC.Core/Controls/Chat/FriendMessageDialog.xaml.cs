@@ -30,7 +30,7 @@ namespace TCC.Controls.Chat
 
         private void OkClick(object sender, RoutedEventArgs e)
         {
-            Proxy.Proxy.FriendRequest(WindowManager.FloatingButton.TooltipInfo.Name, _message);
+            ProxyInterop.Proxy.FriendRequest(WindowManager.FloatingButton.TooltipInfo.Name, _message);
             //ChatWindowManager.Instance.LockTooltip();
             Close();
             _message = "Friend me?";

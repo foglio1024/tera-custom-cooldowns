@@ -14,7 +14,7 @@ using TCC.Parsing;
 using TCC.TeraCommon;
 using TCC.ViewModels;
 
-namespace TCC.Proxy
+namespace TCC.ProxyInterop
 {
     public static class Proxy
     {
@@ -197,7 +197,7 @@ namespace TCC.Proxy
                 _client = new TcpClient();
                 _client.Connect("127.0.0.50", 9550);
                 ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
-                WindowManager.FloatingButton.NotifyExtended("Proxy", "Successfully connected to tera-proxy.", NotificationType.Success);
+                WindowManager.FloatingButton.NotifyExtended("TCC", "Successfully connected to tcc-stub.", NotificationType.Success);
                 var t = new Thread(ReceiveData);
                 var analysisThread = new Thread(ProxyPacketAnalysisLoop);
                 t.Start();
@@ -260,6 +260,7 @@ namespace TCC.Proxy
             var sb = new StringBuilder("loot_settings");
             SendData(sb.ToString());
         }
+        private static int _partyInfoCount = 0;
         public static void RequestPartyInfo(uint id)
         {
             var sb = new StringBuilder("lfg_party_req");
@@ -267,6 +268,8 @@ namespace TCC.Proxy
             sb.Append(id);
 
             SendData(sb.ToString());
+            _partyInfoCount++;
+            Log.CW($"Total party info requests: {_partyInfoCount}");
         }
         public static void ApplyToLfg(uint id)
         {
@@ -332,6 +335,8 @@ namespace TCC.Proxy
 
             SendData(sb.ToString());
         }
+
+        private static int _lfgListCount = 0;
         public static void RequestLfgList(int min = 60, int max = 65)
         {
             var sb = new StringBuilder("lfg_request_list");
@@ -340,6 +345,9 @@ namespace TCC.Proxy
             sb.Append("&maxlvl=");
             sb.Append(max);
             SendData(sb.ToString());
+            _lfgListCount++;
+            Log.CW($"Total LFG list requests: {_lfgListCount}");
+
         }
         public static void AskInteractive(uint srvId, string name)
         {

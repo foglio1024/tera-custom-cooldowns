@@ -85,7 +85,7 @@ namespace TCC.Parsing
             var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
             var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            if (Proxy.Proxy.IsConnected) Proxy.Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
+            if (ProxyInterop.Proxy.IsConnected) ProxyInterop.Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)

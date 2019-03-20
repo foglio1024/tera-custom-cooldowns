@@ -86,7 +86,7 @@ namespace TCC.Controls.Group
         protected void ShowUserMenu(object sender, MouseButtonEventArgs e)
         {
             var dc = (User)DataContext;
-            Proxy.Proxy.AskInteractive(dc.ServerId, dc.Name);
+            ProxyInterop.Proxy.AskInteractive(dc.ServerId, dc.Name);
         }
         protected void ToolTip_OnOpened(object sender, RoutedEventArgs e)
         {

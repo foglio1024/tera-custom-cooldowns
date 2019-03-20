@@ -185,7 +185,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.Proxy.ApplyToLfg(_listing.LeaderId);
+            ProxyInterop.Proxy.ApplyToLfg(_listing.LeaderId);
             _listing.CanApply = false;
             _t.Start();
         }
@@ -207,7 +207,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.Proxy.RequestCandidates();
+            ProxyInterop.Proxy.RequestCandidates();
         }
     }
 

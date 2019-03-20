@@ -88,7 +88,7 @@ namespace TCC.ViewModels
                 return f != null;
             }
         }
-        public bool ShowFpsUtils => Proxy.Proxy.IsConnected && Proxy.Proxy.IsFpsUtilsAvailable;
+        public bool ShowFpsUtils => ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable;
         public TooltipInfo(string n, string i, int l)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;

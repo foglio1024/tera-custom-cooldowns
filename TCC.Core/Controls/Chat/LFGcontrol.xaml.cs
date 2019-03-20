@@ -39,12 +39,12 @@ namespace TCC.Controls.Chat
         {
             if (TCC.Settings.SettingsHolder.LfgEnabled)
             {
-                Proxy.Proxy.RequestLfgList();
+                ProxyInterop.Proxy.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 
                 WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
                     );
             }
-            Proxy.Proxy.RequestPartyInfo(_dc.Id);
+            ProxyInterop.Proxy.RequestPartyInfo(_dc.Id);
             ChatWindowManager.Instance.LastClickedLfg = _dc;
         }
 

@@ -20,7 +20,7 @@ namespace TCC.Parsing
             TeraSniffer.Instance.EndConnection += OnEndConnection;
 
             TeraSniffer.Instance.MessageReceived += Packets.Enqueue;
-            Proxy.Proxy.ProxyPacketReceived += Packets.Enqueue;
+            ProxyInterop.Proxy.ProxyPacketReceived += Packets.Enqueue;
 
             Factory = new MessageFactory();
             if (AnalysisThread == null)
@@ -68,7 +68,7 @@ namespace TCC.Parsing
             EntityManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            Proxy.Proxy.CloseConnection();
+            ProxyInterop.Proxy.CloseConnection();
             SessionManager.Logged = false;
             SessionManager.LoadingScreen = true;
         }

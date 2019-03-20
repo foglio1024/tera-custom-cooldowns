@@ -121,6 +121,11 @@ namespace TCC.Windows
 
         internal void ShowWindow()
         {
+            if (VM.StayClosed)
+            {
+                VM.StayClosed = false;
+                return;
+            }
             if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -150,14 +155,14 @@ namespace TCC.Windows
             {
                 var id = l.LeaderId;
                 VM.LastClicked = l;
-                Proxy.Proxy.RequestPartyInfo(id);
+                ProxyInterop.Proxy.RequestPartyInfo(id);
             }
         }
 
         private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((sender as FrameworkElement)?.DataContext is User dc)
-                Proxy.Proxy.AskInteractive(SessionManager.CurrentPlayer.ServerId, dc.Name);
+                ProxyInterop.Proxy.AskInteractive(SessionManager.CurrentPlayer.ServerId, dc.Name);
         }
 
         private void CreateMessageBtn_Click(object sender, RoutedEventArgs e)
@@ -175,11 +180,11 @@ namespace TCC.Windows
             {
                 FocusManager.UndoUnfocusable(Handle);
                 NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                Proxy.Proxy.RegisterLfg(VM.NewMessage, RaidSwitch.IsOn);
+                ProxyInterop.Proxy.RegisterLfg(VM.NewMessage, RaidSwitch.IsOn);
                 VM.Creating = false;
                 //VM.NewMessage = "";
                 VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
-                Task.Delay(200).ContinueWith(t => Proxy.Proxy.RequestLfgList());
+                Task.Delay(200).ContinueWith(t => ProxyInterop.Proxy.RequestLfgList());
             }
             else
             {
@@ -202,35 +207,35 @@ namespace TCC.Windows
                 PublicizeBtn.IsHitTestVisible = true;
             };
             PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
-            Proxy.Proxy.PublicizeLfg();
+            ProxyInterop.Proxy.PublicizeLfg();
         }
 
         private void RemoveMessageButton_Click(object sender, RoutedEventArgs e)
         {
-            Proxy.Proxy.RemoveLfg();
-            Proxy.Proxy.RequestLfgList();
-            Proxy.Proxy.RequestLfgList();
+            ProxyInterop.Proxy.RemoveLfg();
+            ProxyInterop.Proxy.RequestLfgList();
+            ProxyInterop.Proxy.RequestLfgList();
         }
 
         private void AcceptApply(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement)sender).DataContext is User user) Proxy.Proxy.PartyInvite(user.Name);
+            if (((FrameworkElement)sender).DataContext is User user) ProxyInterop.Proxy.PartyInvite(user.Name);
         }
 
         private void InspectApplicant(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement)sender).DataContext is User user) Proxy.Proxy.Inspect(user.Name);
+            if (((FrameworkElement)sender).DataContext is User user) ProxyInterop.Proxy.Inspect(user.Name);
         }
 
         private void RefuseApplicant(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement)sender).DataContext is User user) Proxy.Proxy.DeclineApply(user.PlayerId);
-            Proxy.Proxy.RequestCandidates();
+            if (((FrameworkElement)sender).DataContext is User user) ProxyInterop.Proxy.DeclineApply(user.PlayerId);
+            ProxyInterop.Proxy.RequestCandidates();
         }
 
         private void ReloadLfgList(object sender, RoutedEventArgs e)
         {
-            Proxy.Proxy.RequestLfgList();
+            ProxyInterop.Proxy.RequestLfgList();
         }
 
         private void OnLfgMessageMouseButtonDown(object sender, MouseButtonEventArgs e)
