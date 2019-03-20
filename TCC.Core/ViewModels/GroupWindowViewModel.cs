@@ -7,8 +7,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Annotations;
+using TCC.Converters;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Parsing.Messages;
@@ -45,8 +47,8 @@ namespace TCC.ViewModels
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
         public bool ShowDetails => Formed && Settings.SettingsHolder.ShowGroupWindowDetails;
-        public bool ShowLeaveButton => Formed && Proxy.Proxy.IsConnected;
-        public bool ShowLeaderButtons => Formed && Proxy.Proxy.IsConnected && AmILeader;
+        public bool ShowLeaveButton => Formed && ProxyInterop.Proxy.IsConnected;
+        public bool ShowLeaderButtons => Formed && ProxyInterop.Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel()
@@ -221,6 +223,8 @@ namespace TCC.ViewModels
                     SendAddMessage(p.Name);
                     return;
                 }
+
+                if (user.Online != p.Online) SendOnlineMessage(user.Name, p.Online);
                 user.Online = p.Online;
                 user.EntityId = p.EntityId;
                 user.IsLeader = p.IsLeader;
@@ -228,6 +232,16 @@ namespace TCC.ViewModels
                 user.Awakened = p.Awakened;
             }
         }
+
+        private void SendOnlineMessage(string name,  bool newVal)
+        {
+            var opcode = newVal ? "SMT_GUILD_MEMBER_LOGON_NO_MESSAGE" : "SMT_GUILD_MEMBER_LOGOUT";
+            var msg = "@0\vUserName\v" + name;
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            var newMsg = new SystemMessage(m.Message, (int) ChatChannel.GroupAlerts);
+            SystemMessagesProcessor.AnalyzeMessage(msg, newMsg, opcode);
+        }
+
         private void SendAddMessage(string name)
         {
             string msg;
@@ -261,7 +275,7 @@ namespace TCC.ViewModels
             }
             SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
-            if (Proxy.Proxy.IsConnected) Proxy.Proxy.ForceSystemMessage(msg, opcode);
+            if (ProxyInterop.Proxy.IsConnected) ProxyInterop.Proxy.ForceSystemMessage(msg, opcode);
         }
         private void SendLeaveMessage(string name)
         {
@@ -385,7 +399,7 @@ namespace TCC.ViewModels
         }
         public void SetReadyStatus(ReadyPartyMember p)
         {
-            
+
             if (_firstCheck)
             {
                 foreach (var u in Members.ToSyncList())
