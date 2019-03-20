@@ -936,6 +936,7 @@ namespace TCC.Parsing
 
         public static void HandleUserGuildLogo(S_GET_USER_GUILD_LOGO sGetUserGuildLogo)
         {
+            if (sGetUserGuildLogo.GuildLogo == null) return;
             S_IMAGE_DATA.Database[sGetUserGuildLogo.GuildId] = sGetUserGuildLogo.GuildLogo;
 
             if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
