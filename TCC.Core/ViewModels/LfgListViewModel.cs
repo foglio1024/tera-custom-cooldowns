@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -7,16 +8,18 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.ProxyInterop;
 
 namespace TCC.ViewModels
 {
     public class LfgListViewModel : TSPropertyChanged
     {
+        public static DispatcherTimer RequestTimer;
+        public static Queue<uint> RequestQueue = new Queue<uint>();
         private bool _creating;
         public Listing LastClicked;
         private string _newMessage;
-        public string LastSortDescr { get; set; }= "Message";
-
+        public string LastSortDescr { get; set; } = "Message";
         public void RefreshSorting()
         {
             SortCommand.Refresh(LastSortDescr);
@@ -45,7 +48,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
+        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
                                                                                               || listing.LeaderName == SessionManager.CurrentPlayer.Name
                                                                                               || listing.Players.ToSyncList().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
                                                                                               || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
@@ -60,10 +63,13 @@ namespace TCC.ViewModels
             MyLfg?.NotifyMyLfg();
         }
         public bool AmILeader => WindowManager.GroupWindow.VM.AmILeader;
-        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) 
+        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId)
                                                                    || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
                                                                    || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
+
+        public bool StayClosed { get; set; }
+
         public LfgListViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
@@ -72,6 +78,35 @@ namespace TCC.ViewModels
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             WindowManager.GroupWindow.VM.PropertyChanged += OnGroupWindowVmPropertyChanged;
+            RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
+            RequestTimer.Start();
+        }
+
+        private void RequestNextLfg(object sender, EventArgs e)
+        {
+            if (!Settings.SettingsHolder.LfgEnabled) return;
+            if (RequestQueue.Count == 0) return;
+           
+            var req = RequestQueue.Dequeue();
+            if (req == 0)
+            {
+                StayClosed = true;
+                Proxy.RequestLfgList();
+            }
+            else
+            {
+                Proxy.RequestPartyInfo(req);
+            }
+        }
+
+        public void EnqueueRequest(uint id)
+        {
+            if ((SessionManager.IsInDungeon || SessionManager.CivilUnrestZone) && SessionManager.Combat) return;
+            Dispatcher.Invoke(() =>
+            {
+                if (RequestQueue.Count > 0 && RequestQueue.Last() == id) return;
+                RequestQueue.Enqueue(id);
+            });
         }
 
         private void OnGroupWindowVmPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -91,6 +126,15 @@ namespace TCC.ViewModels
             Listings.Remove(LastClicked);
         }
 
+        public void EnqueueListRequest()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (RequestQueue.Count > 0 && RequestQueue.Last() == 0) return;
+                RequestQueue.Enqueue(0);
+            });
+
+        }
     }
 
     public class SortCommand : ICommand
@@ -109,7 +153,7 @@ namespace TCC.ViewModels
         public void Execute(object parameter)
         {
             var f = (string)parameter;
-            if(!_refreshing) _direction = _direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            if (!_refreshing) _direction = _direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             ((CollectionView)_view).SortDescriptions.Clear();
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(f, _direction));
             WindowManager.LfgListWindow.VM.LastSortDescr = parameter.ToString();

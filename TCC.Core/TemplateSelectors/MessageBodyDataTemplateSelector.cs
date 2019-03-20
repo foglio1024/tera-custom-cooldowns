@@ -10,6 +10,7 @@ namespace TCC.TemplateSelectors
         public DataTemplate DefaultBody { get; set; }
         public DataTemplate BrokerBody { get; set; }
         public DataTemplate ApplyBody { get; set; }
+        public DataTemplate LfgBody { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var m = item as ChatMessage;
@@ -17,6 +18,8 @@ namespace TCC.TemplateSelectors
 
             switch (m.Channel)
             {
+                case ChatChannel.LFG:
+                    return LfgBody;
                 case ChatChannel.Bargain:
                     return BrokerBody;
                 case ChatChannel.Apply:

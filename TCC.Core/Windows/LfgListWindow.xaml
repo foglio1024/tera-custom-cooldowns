@@ -536,7 +536,7 @@
                         FontSize="15"
                         FontWeight="Thin"
                         Style="{StaticResource ButtonMainStyle}"
-                        Background="{StaticResource RevampBackgroundBrush}">
+                        Background="{StaticResource DefensiveStanceBrush}">
                     <Button.Content>
                         <MultiBinding Converter="{StaticResource LfgVmToButtonLabel}">
                             <Binding Path="Creating" />

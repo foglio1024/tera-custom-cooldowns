@@ -35,8 +35,6 @@ namespace TCC.Converters
                     return R.Brushes.ChatGlobalBrush;
                 case ChatChannel.Raid:
                     return R.Brushes.ChatRaidBrush;
-                case ChatChannel.Megaphone:
-                    return R.Brushes.ChatMegaphoneBrush;
                 case ChatChannel.GuildAdvertising:
                     return R.Brushes.ChatGuildAdBrush;
                 case ChatChannel.Private1:
@@ -94,6 +92,8 @@ namespace TCC.Converters
                 case ChatChannel.Bargain:
                     return R.Brushes.ChatSystemBargainBrush;
                 case ChatChannel.Apply:
+                case ChatChannel.LFG:
+                case ChatChannel.Megaphone:
                     return R.Brushes.ChatMegaphoneBrush;
                 case ChatChannel.Death:
                 case ChatChannel.Damage:

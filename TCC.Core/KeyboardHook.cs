@@ -41,9 +41,13 @@ namespace TCC
         {
             if (e.Key == Settings.SettingsHolder.LfgHotkey.Key && e.Modifier == Settings.SettingsHolder.LfgHotkey.Modifier)
             {
-                if (!Proxy.Proxy.IsConnected) return;
+                if (!ProxyInterop.Proxy.IsConnected) return;
 
-                if (!WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
+                if (!WindowManager.LfgListWindow.IsVisible)
+                {
+                    WindowManager.LfgListWindow.VM.StayClosed = false;
+                    ProxyInterop.Proxy.RequestLfgList();
+                }
                 else WindowManager.LfgListWindow.CloseWindow();
             }
             else if (e.Key == Settings.SettingsHolder.SettingsHotkey.Key && e.Modifier == Settings.SettingsHolder.SettingsHotkey.Modifier)
@@ -69,9 +73,9 @@ namespace TCC
                 if (!SessionManager.Logged
                   || SessionManager.LoadingScreen
                   || SessionManager.Combat
-                  || !Proxy.Proxy.IsConnected) return;
+                  || !ProxyInterop.Proxy.IsConnected) return;
 
-                Proxy.Proxy.ReturnToLobby();
+                ProxyInterop.Proxy.ReturnToLobby();
             }
 
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)

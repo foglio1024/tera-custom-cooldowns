@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Settings;
 using TCC.ViewModels;
@@ -558,6 +560,66 @@ namespace TCC.Data.Chat
                 messagePiece.Dispose();
             }
             Pieces.Clear();
+        }
+    }
+    public class LfgMessage : ChatMessage
+    {
+        private int _tries = 10;
+        private Listing _linkedListing;
+
+        public Listing LinkedListing
+        {
+            get => _linkedListing;
+            set
+            {
+                if (_linkedListing == value) return;
+                _linkedListing = value;
+                N();
+            }
+        }
+
+        public uint AuthorId { get; }
+        private DispatcherTimer _timer;
+        public LfgMessage(uint authorId, string author, string msg) : base(ChatChannel.LFG, author, msg)
+        {
+            AuthorId = authorId;
+        }
+
+        private void GetListing(object sender, EventArgs e)
+        {
+            if (_tries == 0)
+            {
+                _timer.Stop();
+                return;
+            }
+            LinkedListing = FindListing();
+            if (LinkedListing == null)
+            {
+                Log.CW("Linked listing is still null!");
+                _tries--;
+                return;
+            }
+            _timer.Stop();
+            WindowManager.LfgListWindow.VM.EnqueueRequest(LinkedListing.LeaderId);
+
+        }
+
+        private Listing FindListing()
+        {
+            return WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(x =>
+                x.Players.Any(p => p.Name == Author) ||
+                x.LeaderName == Author ||
+                x.Message == RawMessage);
+        }
+
+        public void LinkLfg()
+        {
+            LinkedListing = FindListing();
+            if (LinkedListing != null) return;
+            Log.CW("Linked listing is null! Requesting list.");
+            WindowManager.LfgListWindow.VM.EnqueueListRequest();
+            _timer = new DispatcherTimer(TimeSpan.FromSeconds(1.5), DispatcherPriority.Background, GetListing, Dispatcher);
+            _timer.Start();
         }
     }
 }

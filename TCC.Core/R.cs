@@ -483,6 +483,7 @@ namespace TCC.R
 		public static DataTemplate DefaultBody => ((DataTemplate)App.Current.FindResource("DefaultBody"));
 		public static DataTemplate BrokerOfferBody => ((DataTemplate)App.Current.FindResource("BrokerOfferBody"));
 		public static DataTemplate ApplyBody => ((DataTemplate)App.Current.FindResource("ApplyBody"));
+		public static DataTemplate LfgBody => ((DataTemplate)App.Current.FindResource("LfgBody"));
 		public static DataTemplate WhisperChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("WhisperChannelLabelTemplate"));
 		public static DataTemplate MegaphoneChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("MegaphoneChannelLabelTemplate"));
 		public static DataTemplate DefaultChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("DefaultChannelLabelTemplate"));

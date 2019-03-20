@@ -330,6 +330,9 @@
     <DataTemplate x:Key="ApplyBody">
         <chatCtrl:ApplyBody/>
     </DataTemplate>
+    <DataTemplate x:Key="LfgBody">
+        <chatCtrl:LfgBody/>
+    </DataTemplate>
 
     <!--Channel label templates-->
     <DataTemplate x:Key="WhisperChannelLabelTemplate" DataType="chat:ChatMessage">

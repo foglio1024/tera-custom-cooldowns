@@ -42,6 +42,7 @@
                                     BrokerBody="{StaticResource BrokerOfferBody}"
                                     DefaultBody="{StaticResource DefaultBody}" 
                                     ApplyBody="{StaticResource ApplyBody}"
+                                    LfgBody="{StaticResource LfgBody}"
                                     />
     <ts:AbnormalityTemplateSelector x:Key="RaidAbnormalityTemplateSelector"
                                     RoundTemplate="{StaticResource  RoundRaidAbnormality}"

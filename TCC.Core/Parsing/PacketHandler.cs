@@ -187,6 +187,8 @@ namespace TCC.Parsing
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
             WindowManager.Dashboard.VM.SetLoggedIn(p.PlayerId);
             SessionManager.GuildMembersNames.Clear();
+
+            WindowManager.LfgListWindow.VM.EnqueueListRequest();
             //if (Settings.Settings.LastRegion == "NA")
             //    Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
 
@@ -218,10 +220,14 @@ namespace TCC.Parsing
                     target.LeaderName = l.LeaderName;
                     if (target.PlayerCount != l.PlayerCount)
                     {
-                        Proxy.Proxy.RequestPartyInfo(l.LeaderId);
+                        WindowManager.LfgListWindow.VM.EnqueueRequest(l.LeaderId);
                     }
                 }
-                else WindowManager.LfgListWindow.VM.Listings.Add(l);
+                else
+                {
+                    WindowManager.LfgListWindow.VM.Listings.Add(l);
+                    WindowManager.LfgListWindow.VM.EnqueueRequest(l.LeaderId);
+                }
             });
             var toRemove = new List<uint>();
             WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(l =>
@@ -281,6 +287,8 @@ namespace TCC.Parsing
             WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.None;
             WindowManager.BossWindow.VM.ClearGuildTowers();
             SessionManager.CivilUnrestZone = x.Zone == 152;
+            SessionManager.IsInDungeon = x.Zone >= 8999; // from Salty's server-exposer
+
             if (SettingsHolder.CivilUnrestWindowSettings.Enabled) WindowManager.CivilUnrestWindow.VM.NotifyTeleported();
         }
 
@@ -409,8 +417,8 @@ namespace TCC.Parsing
         }
 
         public static void HandleChat(S_CHAT x)
-
         {
+            Console.WriteLine($"{x.AuthorId} - {x.AuthorName}");
             if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
                 x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Nice TCC :lul:", NotificationType.Warning);
             //Log.CW(x.Message);
@@ -615,6 +623,7 @@ namespace TCC.Parsing
             if (x.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (x.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             ChatWindowManager.Instance.AddOrRefreshLfg(x);
+            ChatWindowManager.Instance.AddChatMessage(new LfgMessage(x.Id, x.Name, x.Message));
         }
 
         public static void HandleSystemMessage(S_SYSTEM_MESSAGE x)
@@ -678,7 +687,7 @@ namespace TCC.Parsing
                 WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
-            if (!Proxy.Proxy.IsConnected) return;
+            if (!ProxyInterop.Proxy.IsConnected) return;
             WindowManager.FloatingButton.OpenPlayerMenu();
         }
 
@@ -760,10 +769,10 @@ namespace TCC.Parsing
             }));
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (Proxy.Proxy.IsConnected && SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
+            if (ProxyInterop.Proxy.IsConnected && SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
             {
-                Proxy.Proxy.RequestCandidates();
-                if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) Proxy.Proxy.RequestLfgList();
+                ProxyInterop.Proxy.RequestCandidates();
+                if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) ProxyInterop.Proxy.RequestLfgList();
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
@@ -1045,9 +1054,9 @@ namespace TCC.Parsing
             SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (Proxy.Proxy.IsConnected && Proxy.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
             {
-                Proxy.Proxy.SendCommand($"fps mode 3");
+                ProxyInterop.Proxy.SendCommand($"fps mode 3");
             }
         }
 
@@ -1057,9 +1066,9 @@ namespace TCC.Parsing
             SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (Proxy.Proxy.IsConnected && Proxy.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
             {
-                Proxy.Proxy.SendCommand($"fps mode 1");
+                ProxyInterop.Proxy.SendCommand($"fps mode 1");
             }
         }
 
@@ -1147,7 +1156,7 @@ namespace TCC.Parsing
             }
 
             BasicTeraData.Instance.Servers.Language = p.Language;
-            Proxy.Proxy.ConnectToProxy();
+            ProxyInterop.Proxy.ConnectToProxy();
 
         }
     }

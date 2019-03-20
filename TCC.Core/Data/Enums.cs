@@ -186,6 +186,7 @@ namespace TCC.Data
         Damage = 318,
         Guardian = 319,
         Enchant = 320,
+        LFG = 321, // not sure if old /u is still here
         TCC = 1000,
         Twitch = 1001
         // --custom

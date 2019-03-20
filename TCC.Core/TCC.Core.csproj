@@ -92,6 +92,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Controls\Chat\LfgBody.xaml.cs">
+      <DependentUpon>LfgBody.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Group\GroupMemberBase.cs" />
     <Compile Include="Converters\MessageTextToIconConverter.cs" />
     <Compile Include="Data\BaseStackBuffTracker.cs" />
@@ -417,7 +420,7 @@
     <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
-    <Compile Include="Proxy\ProxyPacketSplitter.cs" />
+    <Compile Include="ProxyInterop\ProxyPacketSplitter.cs" />
     <Compile Include="Settings\SettingsReader.cs" />
     <Compile Include="Settings\SettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
@@ -521,7 +524,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
-    <Compile Include="Proxy\Proxy.cs" />
+    <Compile Include="ProxyInterop\Proxy.cs" />
     <Compile Include="Settings\SettingsHolder.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
@@ -892,6 +895,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Chat\EmojiMessagePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Chat\LfgBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1511,6 +1518,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr_bottom.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
