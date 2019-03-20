@@ -306,17 +306,23 @@ namespace TCC.ViewModels
 
         public void SelectCharacter(Character character)
         {
-            //if(SelectedCharacter == character) return;
-            if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
-
-            SelectedCharacter = character;
-            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
+            try
             {
-                new SortDescription("Item.Id", ListSortDirection.Ascending),
-            });
-            ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
-            WindowManager.Dashboard.ShowDetails();
-            Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+                if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
+
+                SelectedCharacter = character;
+                SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
+                {
+                    new SortDescription("Item.Id", ListSortDirection.Ascending),
+                });
+                ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
+                WindowManager.Dashboard.ShowDetails();
+                Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+            }
+            catch (Exception e)
+            {
+                Log.F($"Failed to select character: {e}");
+            }
         }
 
         /* -- EVENTS: TO BE REFACTORED (TODO)----------------------- */
