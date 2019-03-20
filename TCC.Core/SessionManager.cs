@@ -58,7 +58,7 @@ namespace TCC
                 if (Combat != value)
                 {
                     CurrentPlayer.IsInCombat = value;
-                    App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+                    App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke()); // check logs for other exceptions here
                 }
             }
         }

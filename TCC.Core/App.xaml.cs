@@ -275,9 +275,9 @@ namespace TCC
 
         public static void SendUsageStat()
         {
-            if (SettingsHolder.StatSentVersion == AppVersion && 
-                SettingsHolder.StatSentTime.Month == DateTime.Now.Month && 
-                SettingsHolder.StatSentTime.Day == DateTime.Now.Day) return;
+            if (SettingsHolder.StatSentVersion == AppVersion &&
+                SettingsHolder.StatSentTime.Month == DateTime.UtcNow.Month &&
+                SettingsHolder.StatSentTime.Day == DateTime.UtcNow.Day) return;
 
             try
             {
@@ -292,14 +292,17 @@ namespace TCC
                         { "region", SessionManager.Server.Region },
                         { "server", SessionManager.Server.ServerId },
                         { "account", accountNameHash },
-                        { "tcc_version", AppVersion}
+                        { "tcc_version", AppVersion},
+                        { "updated",(SettingsHolder.StatSentTime.Month == DateTime.Now.Month &&
+                                     SettingsHolder.StatSentTime.Day == DateTime.Now.Day) &&
+                                     SettingsHolder.StatSentVersion != AppVersion }
                     };
 
                     c.Encoding = Encoding.UTF8;
                     c.UploadStringAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                    SettingsHolder.StatSentTime = DateTime.Now;
+                    SettingsHolder.StatSentTime = DateTime.UtcNow;
                     SettingsHolder.StatSentVersion = AppVersion;
                 }
             }
