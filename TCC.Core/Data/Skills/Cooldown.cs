@@ -55,6 +55,7 @@ namespace TCC.Data.Skills
             {
                 if (_seconds == value) return;
                 _seconds = value;
+                N();
                 Dispatcher.Invoke(() => SecondsUpdated?.Invoke());
             }
         }
