@@ -1,6 +1,7 @@
 ﻿//#define FIRESTORE
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -160,7 +162,7 @@ namespace TCC
             TccMessageBox.Show("TCC", "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
-            if (Proxy.Proxy.IsConnected) Proxy.Proxy.CloseConnection();
+            if (ProxyInterop.Proxy.IsConnected) ProxyInterop.Proxy.CloseConnection();
             if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
             try
             {
@@ -307,7 +309,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = false;
             SettingsWriter.Save();
             WindowManager.Dispose();
-            Proxy.Proxy.CloseConnection();
+            ProxyInterop.Proxy.CloseConnection();
             UpdateManager.StopTimer();
 
             Environment.Exit(0);
@@ -339,8 +341,8 @@ namespace TCC
         }
         private static void DebugStuff()
         {
-            var sysMsg = "@4143\vUserName\vFoglio\vAbnormalityName\vCloverBuff";
-            SystemMessagesProcessor.AnalyzeMessage(sysMsg, SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages["SMT_GOLDENBELL_MESSAGE"], "SMT_GOLDENBELL_MESSAGE");
+            //var sysMsg = "@4143\vUserName\vFoglio\vAbnormalityName\vCloverBuff";
+            //SystemMessagesProcessor.AnalyzeMessage(sysMsg, SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages["SMT_GOLDENBELL_MESSAGE"], "SMT_GOLDENBELL_MESSAGE");
 
             //var _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             //var dispatchers = new List<Dispatcher>
@@ -552,25 +554,42 @@ namespace TCC
             // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
 
-            //var l = new List<User>();
-            //var r = new Random();
-            //for (uint i = 0; i <= 10; i++)
-            //{
-            //    var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
-            //    {
-            //        Name = i.ToString(),
-            //        PlayerId = i,
-            //        ServerId = i,
-            //        EntityId = i,
-            //        Online = true,
-            //        Laurel = (Laurel)r.Next(0, 6),
-            //        HasAggro = i == 1,
-            //        Alive = true, //i != 0,
-            //        UserClass = (Class)r.Next(0, 12),
-            //        Awakened = i < 5,
-            //    };
-            //    WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
-            //}
+            var l = new List<User>();
+            var r = new Random();
+            for (uint i = 0; i <= 10; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+                {
+                    Name = i.ToString(),
+                    PlayerId = i,
+                    ServerId = i,
+                    EntityId = i,
+                    Online = true,
+                    Laurel = (Laurel)r.Next(0, 6),
+                    HasAggro = true,//i == 1,
+                    Alive = true, //i != 0,
+                    UserClass = (Class)r.Next(0, 12),
+                    Awakened = i < 5,
+                };
+
+                l.Add(u);
+                WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
+            }
+            var ut = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            {
+                Name = l[2].ToString(),
+                PlayerId = l[2].PlayerId,
+                ServerId = l[2].ServerId,
+                EntityId = l[2].EntityId,
+                Online = false,
+                Laurel = l[2].Laurel,
+                HasAggro = l[2].HasAggro,//i == 1,
+                Alive = l[2].Alive, //i != 0,
+                UserClass = l[2].UserClass,
+                Awakened = l[2].Awakened,
+            };
+            Task.Delay(2000).ContinueWith(t => WindowManager.GroupWindow.VM.AddOrUpdateMember(ut));
+
             //AbnormalityManager.UpdatePartyMemberAbnormality(1, 1, 1495, 200000, 1);
             //AbnormalityManager.UpdatePartyMemberAbnormality(2, 2, 1495, 200000, 1);
             //AbnormalityManager.UpdatePartyMemberAbnormality(3, 3, 1495, 200000, 1);
