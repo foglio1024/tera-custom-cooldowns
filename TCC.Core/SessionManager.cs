@@ -114,6 +114,7 @@ namespace TCC
         }
         public static TccDatabase CurrentDatabase { get; set; }
         public static bool CivilUnrestZone { get; internal set; }
+        public static bool IsInDungeon { get; internal set; }
         public static string CurrentAccountName { get; internal set; }
 
         public static void SetPlayerHp(float hp)
