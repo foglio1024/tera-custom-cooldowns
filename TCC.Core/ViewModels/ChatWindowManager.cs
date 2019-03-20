@@ -164,7 +164,7 @@ namespace TCC.ViewModels
                     }
                 }
 
-                if (chatMessage is LfgMessage lm) lm.LinkLfg();
+                if (chatMessage is LfgMessage lm && !SettingsHolder.DisableLfgChatMessages) lm.LinkLfg();
                 chatMessage.SplitSimplePieces();
 
                 if (ChatWindows.All(x => !x.IsPaused))

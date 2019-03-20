@@ -159,7 +159,8 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ShowNotificationBubble), SettingsHolder.ShowNotificationBubble),
                 new XAttribute(nameof(SettingsHolder.FpsAtGuardian), SettingsHolder.FpsAtGuardian),
                 new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification),
-                new XAttribute(nameof(SettingsHolder.EnableProxy), SettingsHolder.EnableProxy)
+                new XAttribute(nameof(SettingsHolder.EnableProxy), SettingsHolder.EnableProxy),
+                new XAttribute(nameof(SettingsHolder.DisableLfgChatMessages), SettingsHolder.DisableLfgChatMessages)
             );
         }
 

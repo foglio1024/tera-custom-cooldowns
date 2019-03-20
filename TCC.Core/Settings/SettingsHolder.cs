@@ -204,5 +204,6 @@ namespace TCC.Settings
         public static bool FpsAtGuardian { get; set; } = true;
         public static bool EnableProxy { get; set; } = true;
         public static bool ShowMembersHpNumbers { get; set; } = true;
+        public static bool DisableLfgChatMessages { get; set; } = true;
     }
 }

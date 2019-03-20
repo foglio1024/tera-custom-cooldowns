@@ -1167,6 +1167,19 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
 
+                            <settings:CheckboxSetting SettingName="Disable LFG messages sync"
+                                                      IsOn="{Binding DisableLfgChatMessages, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run Text="Avoid automatic requests of LFG listings details." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
+
 
                         </StackPanel>
                         <!-- Actions -->

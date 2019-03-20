@@ -70,6 +70,16 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool DisableLfgChatMessages
+        {
+            get => SettingsHolder.DisableLfgChatMessages;
+            set
+            {
+                if (SettingsHolder.DisableLfgChatMessages == value) return;
+                SettingsHolder.DisableLfgChatMessages = value;
+                N();
+            }
+        }
         public bool ShowMembersHpNumbers
         {
             get => SettingsHolder.ShowMembersHpNumbers;

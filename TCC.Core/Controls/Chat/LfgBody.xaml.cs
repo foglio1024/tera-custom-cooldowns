@@ -21,8 +21,11 @@ namespace TCC.Controls.Chat
 
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.LfgListWindow.VM.LastClicked = ((LfgMessage) DataContext).LinkedListing;
-            ProxyInterop.Proxy.RequestLfgList();
+            if (((LfgMessage)DataContext).LinkedListing != null)
+            {
+                WindowManager.LfgListWindow.VM.LastClicked = ((LfgMessage)DataContext).LinkedListing;
+                ProxyInterop.Proxy.RequestLfgList();
+            }
             ProxyInterop.Proxy.RequestPartyInfo(((LfgMessage)DataContext).AuthorId);
         }
 
