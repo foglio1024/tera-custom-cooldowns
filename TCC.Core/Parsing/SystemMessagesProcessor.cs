@@ -164,6 +164,10 @@ namespace TCC.Parsing
             { "SMT_GC_SYSMSG_LEAVE_GUILD",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
             { "SMT_GC_SYSMSG_LEAVE_GUILD_FRIEND",       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
             { "SMT_GC_SYSMSG_REFUSE_GUILD_APPLY",       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+
+            { "SMT_FIELDBOSS_APPEAR",                   new Action<string, SystemMessage>(HandleFieldBossAppear) },     //by HQ 20181224
+            { "SMT_FIELDBOSS_DIE_GUILD",                new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
+            { "SMT_FIELDBOSS_DIE_NOGUILD",              new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
         };
 
         private static void Redirect(string srvMsg, SystemMessage sysMsg, ChatChannel ch)
@@ -172,6 +176,53 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
+        //by HQ 20181224
+        private static void HandleFieldBossAppear(string srvMsg, SystemMessage sysMsg)
+        {
+            if (srvMsg.Contains("@creature:39#501"))     // Hazar
+            {
+                TimeManager.Instance.SendWebhookMessageOldFieldBoss(501, 1);
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}"); //by HQ 20181228
+            }
+            else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
+            {
+                TimeManager.Instance.SendWebhookMessageOldFieldBoss(4001, 1);
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}"); //by HQ 20181228
+            }
+            else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
+            {
+                TimeManager.Instance.SendWebhookMessageOldFieldBoss(5001, 1);
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}"); //by HQ 20181228
+            }
+            else
+            {
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}\n"); //by HQ 20181228
+            }
+        }
+
+        //by HQ 20181224
+        private static void HandleFieldBossDie(string srvMsg, SystemMessage sysMsg)
+        {
+            if (srvMsg.Contains("@creature:39#501"))     // Hazar
+            {
+                TimeManager.Instance.SendWebhookMessageOldFieldBoss(501, 2);
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            }
+            else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
+            {
+                TimeManager.Instance.SendWebhookMessageOldFieldBoss(4001, 2);
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            }
+            else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
+            {
+                TimeManager.Instance.SendWebhookMessageOldFieldBoss(5001, 2);
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            }
+            else
+            {
+                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            }
+        }
 
         private static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)
         {

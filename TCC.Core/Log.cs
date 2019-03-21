@@ -28,6 +28,14 @@ namespace TCC
             }
             catch { }
         }
+        public static void F(string filename, string line)   //by HQ 20181228
+        {
+            try
+            {
+                File.AppendAllText(Path.Combine(App.BasePath, filename), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
+            }
+            catch { }
+        }
 
         public static void All(string s)
         {

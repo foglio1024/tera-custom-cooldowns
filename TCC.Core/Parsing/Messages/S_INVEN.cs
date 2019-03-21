@@ -61,6 +61,11 @@ namespace TCC.Parsing.Messages
                     var next = reader.ReadUInt16();
                     reader.Skip(2); // passivity array count
                     reader.Skip(2); // passivity array offset
+                    if (reader.Factory.ReleaseVersion >= 8201)    // by HQ 20190216. Probably less than 8201  
+                    {
+                        reader.Skip(2);     // Unknown array count added.    by HQ 20190122
+                        reader.Skip(2);     // Unknown array offset added.    by HQ 20190122
+                    }
                     reader.Skip(2); // custom string offset
                     var itemId = reader.ReadUInt32();
                     reader.Skip(8); //dbid

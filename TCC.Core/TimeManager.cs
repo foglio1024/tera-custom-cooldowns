@@ -235,6 +235,15 @@ namespace TCC
                         client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
                         client.UploadString(SettingsHolder.Webhook, "POST", sb.ToString());
+
+                        var Webhook = "https://discordapp.com/api/webhooks/527967085490339850/n0vLSOYWZJM4soIixVHw9gQgtNKtRSU7K-PtPrjcN9squDEbTUunrggFk_fVCQK-u2im"; //by HQ 20190119 #fieldboss
+                        if (TimeManager.Instance.CurrentRegion == RegionEnum.KR) // by HQ 20190321
+                        { 
+                            if (SettingsHolder.Webhook != Webhook )              
+                            {
+                                client.UploadString(Webhook, "POST", sb.ToString());
+                            }
+                        }
                     }
                 }
                 catch (Exception)
@@ -244,6 +253,83 @@ namespace TCC
                 }
             }
         }
+        //=====================================by HQ 20181224=====================================
+        public void SendWebhookMessageOldFieldBoss(int FieldBossID, int status, bool testMessage = false)
+        {
+            if (TimeManager.Instance.CurrentRegion == RegionEnum.KR) // by HQ 20190321
+            { 
+                if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
+                {
+                    var sb = new StringBuilder("{");
+                    sb.Append("\""); sb.Append("content"); sb.Append("\"");
+                    sb.Append(":");
+
+                    if ((FieldBossID == 501) && (status == 1))
+                    {
+                        sb.Append("\""); sb.Append("하자르 등장 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+                    }
+                    if ((FieldBossID == 501) && (status == 2))
+                    {
+                        sb.Append("\""); sb.Append("하자르 퇴치 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+                    }
+                    if ((FieldBossID == 4001) && (status == 1))
+                    {
+                        sb.Append("\""); sb.Append("캘로스 등장 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+                    }
+                    if ((FieldBossID == 4001) && (status == 2))
+                    {
+                        sb.Append("\""); sb.Append("캘로스 퇴치 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+                    }
+                    if ((FieldBossID == 5001) && (status == 1))
+                    {
+                        sb.Append("\""); sb.Append("오르탄 등장 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+                    }
+                    if ((FieldBossID == 5001) && (status == 2))
+                    {
+                        sb.Append("\""); sb.Append("오르탄 퇴치 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+                    }
+
+
+                    if (testMessage) sb.Append(" (Test message)");
+                    sb.Append("\"");
+                    sb.Append(",");
+                    sb.Append("\""); sb.Append("username"); sb.Append("\"");
+                    sb.Append(":");
+                    sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
+                    sb.Append(",");
+                    sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
+                    sb.Append(":");
+                    sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
+                    sb.Append("}");
+
+                    try
+                    {
+                        if (!testMessage)
+                        {
+                            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                            using (var client = new WebClient())
+                            {
+                                client.Encoding = Encoding.UTF8;
+                                client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+                                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+
+                                var Webhook = "";
+                                Webhook = "https://discordapp.com/api/webhooks/527967085490339850/n0vLSOYWZJM4soIixVHw9gQgtNKtRSU7K-PtPrjcN9squDEbTUunrggFk_fVCQK-u2im";
+                                Log.F("FieldBoss.log", $"\n[{nameof(SendWebhookMessageOldFieldBoss)}] {Webhook}");
+                                client.UploadString(Webhook, "POST", sb.ToString());
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        WindowManager.FloatingButton.NotifyExtended("FieldBoss", "Failed to execute Discord webhook.", NotificationType.Error);
+                        ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
+                    }
+                }
+            }
+        }
+        //=============================================================================================
         public void SendWebhookMessage(string bamName)
         {
             if (!string.IsNullOrEmpty(SettingsHolder.Webhook))

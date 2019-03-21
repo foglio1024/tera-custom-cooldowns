@@ -1479,7 +1479,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Dragablz">
-      <HintPath>..\..\Dragablz\bin\Release_net45\Dragablz.dll</HintPath>
+      <HintPath>D:\Games\Tera_sub\Helper\TCC\Tera-custom-cooldowns-1.3.4-e\Tera-custom-cooldowns-1.3.4-e\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
     <Reference Include="GongSolutions.WPF.DragDrop, Version=1.2.0.57, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\gong-wpf-dragdrop.1.2.0-alpha0057\lib\net46\GongSolutions.WPF.DragDrop.dll</HintPath>
@@ -1533,7 +1533,8 @@
     </PropertyGroup>
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>D:\Repos\WpfResourcesBuilder\WpfResourcesBuilder\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
