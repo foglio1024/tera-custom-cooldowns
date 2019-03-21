@@ -1409,7 +1409,65 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <!-- Misc window -->
+                <!-- Discord settings -->
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Margin="6" Data="{StaticResource SvgDiscord}" />
+                            <TextBlock Text="Discord settings"
+                                       Style="{StaticResource TabItemHeaderTextStyle}"
+                                       Grid.Column="1" />
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource TabContentBackgroundBorder}" />
+                        <Path Style="{StaticResource BigPathStyle}" Data="{StaticResource SvgDiscord}" />
+
+                        <!-- Guild Bam -->
+                        <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
+                                            Content="Guild BAM" />
+                            <settings:CheckboxSetting SettingName="Enabled"
+                                                      IsOn="{Binding WebhookEnabledGuildBam, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Webhook"
+                                                   Value="{Binding WebhookUrlGuildBam, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Message" Value="{Binding WebhookMessageGuildBam, Mode=TwoWay}" />
+                            <Button Style="{StaticResource SettingsButton}" Click="TestWebhookGuildBam"
+                                    Content="Send test message" />
+                        </StackPanel>
+                        <!-- Discord -->
+                        <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
+                                            Content="Field bosses" />
+                            <settings:CheckboxSetting SettingName="Enabled"
+                                                      IsOn="{Binding WebhookEnabledFieldBoss, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Webhook"
+                                                   Value="{Binding WebhookUrlFieldBoss, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Spawn message" Value="{Binding WebhookMessageFieldBossSpawn, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Death message" Value="{Binding WebhookMessageFieldBossDie, Mode=TwoWay}" />
+                            <Button Style="{StaticResource SettingsButton}" Click="TestWebhookFieldBoss"
+                                    Content="Send test message" />
+                        </StackPanel>
+
+
+
+                    </Grid>
+                </TabItem>
+                <!-- Misc settings -->
                 <TabItem>
                     <TabItem.Header>
                         <Grid Height="30">
@@ -1565,6 +1623,8 @@
 
                     </Grid>
                 </TabItem>
+
+
                 <!-- Links -->
                 <TabItem>
                     <TabItem.Header>

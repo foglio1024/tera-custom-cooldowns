@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
@@ -57,7 +58,7 @@ namespace TCC.Parsing
         {
             TimeManager.Instance.UploadGuildBamTimestamp();
             TimeManager.Instance.SetGuildBamTime(true);
-            TimeManager.Instance.SendWebhookMessageOld();
+            TimeManager.Instance.ExecuteGuildBamWebhook();
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
             WindowManager.FloatingButton.NotifyExtended("Guild BAM", msg.ToString(), NotificationType.Normal);
@@ -179,49 +180,78 @@ namespace TCC.Parsing
         //by HQ 20181224
         private static void HandleFieldBossAppear(string srvMsg, SystemMessage sysMsg)
         {
-            if (srvMsg.Contains("@creature:39#501"))     // Hazar
-            {
-                TimeManager.Instance.SendWebhookMessageOldFieldBoss(501, 1);
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}"); //by HQ 20181228
-            }
-            else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
-            {
-                TimeManager.Instance.SendWebhookMessageOldFieldBoss(4001, 1);
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}"); //by HQ 20181228
-            }
-            else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
-            {
-                TimeManager.Instance.SendWebhookMessageOldFieldBoss(5001, 1);
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}"); //by HQ 20181228
-            }
-            else
-            {
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossAppear)}] {srvMsg}\n"); //by HQ 20181228
-            }
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+
+            if (!SettingsHolder.WebhookEnabledFieldBoss) return;
+
+            // @4157 \v
+            // regionName \v @rgn:213 \v
+            // npcName \v @creature:26#5001
+
+            var monsterName = GetFieldBossName(srvMsg);
+            var regName = srvMsg.Split('\v')[2].Replace("@rgn:", "");
+            var regId = uint.Parse(regName);
+
+            SessionManager.CurrentDatabase.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
+
+            TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, msg.RawMessage);
+
         }
 
+        private static string GetFieldBossName(string srvMsg)
+        {
+            // only for 'SMT_FIELDBOSS_*'
+            var srvMsgSplit = srvMsg.Split('\v');
+            var npcName = srvMsgSplit.Last().Replace("@creature:", "");
+            var zoneId = uint.Parse(npcName.Split('#')[0]);
+            var templateId = uint.Parse(npcName.Split('#')[1]);
+            SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
+            return m.Name;
+
+        }
         //by HQ 20181224
         private static void HandleFieldBossDie(string srvMsg, SystemMessage sysMsg)
         {
-            if (srvMsg.Contains("@creature:39#501"))     // Hazar
-            {
-                TimeManager.Instance.SendWebhookMessageOldFieldBoss(501, 2);
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            }
-            else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
-            {
-                TimeManager.Instance.SendWebhookMessageOldFieldBoss(4001, 2);
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            }
-            else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
-            {
-                TimeManager.Instance.SendWebhookMessageOldFieldBoss(5001, 2);
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            }
-            else
-            {
-                //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            }
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+
+            if (!SettingsHolder.WebhookEnabledFieldBoss) return;
+
+            //@4158
+            //guildNameWish
+            //userName쿤
+            //npcname@creature:26#5001
+
+            //@????
+            //userName쿤
+            //npcname@creature:26#5001
+
+            var monsterName = GetFieldBossName(srvMsg);
+
+            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, msg.RawMessage);
+
+
+
+            //if (srvMsg.Contains("@creature:39#501"))     // Hazar
+            //{
+            //    TimeManager.Instance.ExecuteFieldBossWebhook(501, 2);
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+            //else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
+            //{
+            //    TimeManager.Instance.ExecuteFieldBossWebhook(4001, 2);
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+            //else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
+            //{
+            //    TimeManager.Instance.ExecuteFieldBossWebhook(5001, 2);
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+            //else
+            //{
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
         }
 
         private static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)

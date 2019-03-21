@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Settings;
 using TCC.ViewModels;
 
@@ -55,7 +57,7 @@ namespace TCC.Windows
 
         private void SendWebhookTest(object sender, RoutedEventArgs e)
         {
-            TimeManager.Instance.SendWebhookMessageOld(testMessage: true);
+            TimeManager.Instance.ExecuteGuildBamWebhook(testMessage: true);
         }
 
         private void MakePositionsGlobal(object sender, RoutedEventArgs e)
@@ -151,6 +153,24 @@ namespace TCC.Windows
             {
                 await Task.Factory.StartNew(() => UpdateManager.ForceUpdateExperimental());
             }
+        }
+
+        private void TestWebhookGuildBam(object sender, RoutedEventArgs e)
+        {
+            TimeManager.Instance.ExecuteGuildBamWebhook(testMessage: true);
+        }
+
+        private void TestWebhookFieldBoss(object sender, RoutedEventArgs e)
+        {
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue("SMT_FIELDBOSS_APPEAR", out var sysMsg);
+            var srvMsg = "@4157\vregionName\v@rgn:213\vnpcName\v@creature:26#5001";
+            var cm = new ChatMessage(srvMsg, sysMsg, ChatChannel.TCC);
+            TimeManager.Instance.ExecuteFieldBossSpawnWebhook("Boss", "Region",cm.RawMessage,  testMessage: true);
+
+            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue("SMT_FIELDBOSS_DIE_GUILD", out var dieSysMsg);
+            var dieSrvMsg = "@4158\vguildName\vWish\vuserName\v쿤\vnpcname\v@creature:26#5001";
+            var cmd = new ChatMessage(dieSrvMsg, dieSysMsg, ChatChannel.TCC);
+            TimeManager.Instance.ExecuteFieldBossDieWebhook("Boss", cmd.RawMessage,  testMessage: true);
         }
     }
 }

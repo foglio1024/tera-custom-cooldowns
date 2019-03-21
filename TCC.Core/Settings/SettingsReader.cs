@@ -332,8 +332,6 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.ExperimentalNotification)) SettingsHolder.ExperimentalNotification = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.LanguageOverride)) SettingsHolder.LanguageOverride = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.LastLanguage)) SettingsHolder.LastLanguage = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.Webhook)) SettingsHolder.Webhook = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.WebhookMessage)) SettingsHolder.WebhookMessage = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.FlightGaugeRotation)) SettingsHolder.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(SettingsHolder.LastRun)) SettingsHolder.LastRun = DateTime.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.TwitchName)) SettingsHolder.TwitchName = attr.Value;
@@ -350,8 +348,18 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.HideHpThreshold)) SettingsHolder.HideHpThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.HideMpThreshold)) SettingsHolder.HideMpThreshold = uint.Parse(attr.Value);
 
+                    else if (attr.Name == "Webhook") SettingsHolder.WebhookUrlGuildBam = attr.Value; // for retrocompat
+                    else if (attr.Name == "WebhookMessage") SettingsHolder.WebhookMessageGuildBam = attr.Value; // for retrocompat
+
+                    else if (attr.Name == nameof(SettingsHolder.WebhookEnabledGuildBam)) SettingsHolder.WebhookEnabledGuildBam = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.WebhookEnabledFieldBoss)) SettingsHolder.WebhookEnabledFieldBoss = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlGuildBam)) SettingsHolder.WebhookUrlGuildBam = attr.Value; 
+                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlFieldBoss)) SettingsHolder.WebhookUrlFieldBoss = attr.Value; 
+                    else if (attr.Name == nameof(SettingsHolder.WebhookMessageGuildBam)) SettingsHolder.WebhookMessageGuildBam = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookMessageFieldBossSpawn)) SettingsHolder.WebhookMessageFieldBossSpawn = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookMessageFieldBossDie)) SettingsHolder.WebhookMessageFieldBossDie = attr.Value;
+
                     else if (attr.Name == nameof(SettingsHolder.CheckOpcodesHash)) SettingsHolder.CheckOpcodesHash = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.DiscordWebhookEnabled)) SettingsHolder.DiscordWebhookEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowNotificationBubble)) SettingsHolder.ShowNotificationBubble = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.UserExcludedSysMsg)) SettingsHolder.UserExcludedSysMsg = ParseUserExcludedSysMsg(attr.Value);
 

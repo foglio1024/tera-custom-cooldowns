@@ -1157,7 +1157,7 @@ namespace TCC.Parsing
 
             BasicTeraData.Instance.Servers.Language = p.Language;
             ProxyInterop.Proxy.ConnectToProxy();
-            WindowManager.FloatingButton.NotifyExtended("TCC", $"ReleaseVersion:{PacketAnalyzer.Factory.ReleaseVersion}", NotificationType.Success); //by HQ 20190209
+            WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion}", NotificationType.Normal); //by HQ 20190209
         }
     }
 }

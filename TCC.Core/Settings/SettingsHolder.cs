@@ -172,8 +172,6 @@ namespace TCC.Settings
             get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
             set => _lastLanguage = value;
         }
-        public static string Webhook { get; set; } = "";
-        public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
         public static string TwitchName { get; set; } = ""; //TODO: re-add this
         public static string TwitchToken { get; set; } = ""; //TODO: re-add this
         public static string TwitchChannelName { get; set; } = ""; //TODO: re-add this
@@ -197,7 +195,6 @@ namespace TCC.Settings
         public static ControlShape SkillShape { get; set; } = ControlShape.Round;
         public static bool Npcap { get; set; } = true;
         public static bool CheckOpcodesHash { get; set; } = true;
-        public static bool DiscordWebhookEnabled { get; set; } = false;
         public static bool ShowNotificationBubble { get; set; } = true;
         public static List<string> UserExcludedSysMsg { get; set; } = new List<string>();
         public static bool ExperimentalNotification { get; set; } = true;
@@ -205,5 +202,15 @@ namespace TCC.Settings
         public static bool EnableProxy { get; set; } = true;
         public static bool ShowMembersHpNumbers { get; set; } = true;
         public static bool DisableLfgChatMessages { get; set; } = true;
+
+
+        public static bool WebhookEnabledFieldBoss { get; set; } = false;
+        public static string WebhookUrlFieldBoss { get; set; } = "";
+        public static string WebhookMessageFieldBossSpawn { get; set; } = "@here {npcName} spawned in {regionName}!";
+        public static string WebhookMessageFieldBossDie { get; set; } = "{npcName} is dead.";
+
+        public static bool WebhookEnabledGuildBam { get; set; } = false;
+        public static string WebhookUrlGuildBam { get; set; } = "";
+        public static string WebhookMessageGuildBam { get; set; } = "@here Guild BAM will spawn soon!";
     }
 }

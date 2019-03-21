@@ -543,13 +543,73 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool DiscordWebhookEnabled
+        public bool WebhookEnabledGuildBam
         {
-            get => SettingsHolder.DiscordWebhookEnabled;
+            get => SettingsHolder.WebhookEnabledGuildBam;
             set
             {
-                if (SettingsHolder.DiscordWebhookEnabled == value) return;
-                SettingsHolder.DiscordWebhookEnabled = value;
+                if (SettingsHolder.WebhookEnabledGuildBam == value) return;
+                SettingsHolder.WebhookEnabledGuildBam = value;
+                N();
+            }
+        }
+        public bool WebhookEnabledFieldBoss
+        {
+            get => SettingsHolder.WebhookEnabledFieldBoss;
+            set
+            {
+                if (SettingsHolder.WebhookEnabledFieldBoss == value) return;
+                SettingsHolder.WebhookEnabledFieldBoss = value;
+                N();
+            }
+        }
+        public string WebhookUrlGuildBam
+        {
+            get => SettingsHolder.WebhookUrlGuildBam;
+            set
+            {
+                if (value == SettingsHolder.WebhookUrlGuildBam) return;
+                SettingsHolder.WebhookUrlGuildBam = value;
+                N();
+            }
+        }
+        public string WebhookUrlFieldBoss
+        {
+            get => SettingsHolder.WebhookUrlFieldBoss;
+            set
+            {
+                if (value == SettingsHolder.WebhookUrlFieldBoss) return;
+                SettingsHolder.WebhookUrlFieldBoss = value;
+                N();
+            }
+        }
+        public string WebhookMessageGuildBam
+        {
+            get => SettingsHolder.WebhookMessageGuildBam;
+            set
+            {
+                if (value == SettingsHolder.WebhookMessageGuildBam) return;
+                SettingsHolder.WebhookMessageGuildBam = value;
+                N();
+            }
+        }
+        public string WebhookMessageFieldBossSpawn
+        {
+            get => SettingsHolder.WebhookMessageFieldBossSpawn;
+            set
+            {
+                if (value == SettingsHolder.WebhookMessageFieldBossSpawn) return;
+                SettingsHolder.WebhookMessageFieldBossSpawn = value;
+                N();
+            }
+        }
+        public string WebhookMessageFieldBossDie
+        {
+            get => SettingsHolder.WebhookMessageFieldBossDie;
+            set
+            {
+                if (value == SettingsHolder.WebhookMessageFieldBossDie) return;
+                SettingsHolder.WebhookMessageFieldBossDie = value;
                 N();
             }
         }
@@ -561,26 +621,6 @@ namespace TCC.ViewModels
                 if (SettingsHolder.ShowNotificationBubble == value) return;
                 SettingsHolder.ShowNotificationBubble = value;
                 N();
-            }
-        }
-        public string Webhook
-        {
-            get => SettingsHolder.Webhook;
-            set
-            {
-                if (value == SettingsHolder.Webhook) return;
-                SettingsHolder.Webhook = value;
-                N(nameof(Webhook));
-            }
-        }
-        public string WebhookMessage
-        {
-            get => SettingsHolder.WebhookMessage;
-            set
-            {
-                if (value == SettingsHolder.WebhookMessage) return;
-                SettingsHolder.WebhookMessage = value;
-                N(nameof(WebhookMessage));
             }
         }
         public string TwitchUsername
