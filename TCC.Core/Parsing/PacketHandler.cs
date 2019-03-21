@@ -769,11 +769,10 @@ namespace TCC.Parsing
             }));
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (ProxyInterop.Proxy.IsConnected && SettingsHolder.LfgEnabled && SessionManager.InGameUiOn)
-            {
-                ProxyInterop.Proxy.RequestCandidates();
-                if (WindowManager.LfgListWindow != null) if (WindowManager.LfgListWindow.IsVisible) ProxyInterop.Proxy.RequestLfgList();
-            }
+            if (!ProxyInterop.Proxy.IsConnected || !SettingsHolder.LfgEnabled || !SessionManager.InGameUiOn) return;
+            ProxyInterop.Proxy.RequestCandidates();
+            if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
+            ProxyInterop.Proxy.RequestLfgList();
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
         {
@@ -943,7 +942,7 @@ namespace TCC.Parsing
             try
             {
                 sGetUserGuildLogo.GuildLogo.Save(
-                    Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{SessionManager.Server.ServerId}_{sGetUserGuildLogo.GuildId}_{0}.bmp"), 
+                    Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{SessionManager.Server.ServerId}_{sGetUserGuildLogo.GuildId}_{0}.bmp"),
                     System.Drawing.Imaging.ImageFormat.Bmp
                     );
             }

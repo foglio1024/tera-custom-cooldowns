@@ -233,13 +233,12 @@ namespace TCC.ViewModels
             }
         }
 
-        private void SendOnlineMessage(string name,  bool newVal)
+        private void SendOnlineMessage(string name, bool newVal)
         {
-            var opcode = newVal ? "SMT_GUILD_MEMBER_LOGON_NO_MESSAGE" : "SMT_GUILD_MEMBER_LOGOUT";
+            var opcode = newVal ? "TCC_PARTY_MEMBER_LOGON" : "TCC_PARTY_MEMBER_LOGOUT";
             var msg = "@0\vUserName\v" + name;
             SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            var newMsg = new SystemMessage(m.Message, (int) ChatChannel.GroupAlerts);
-            SystemMessagesProcessor.AnalyzeMessage(msg, newMsg, opcode);
+            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
 
         private void SendAddMessage(string name)
