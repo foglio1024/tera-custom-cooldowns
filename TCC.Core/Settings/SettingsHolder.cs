@@ -206,8 +206,8 @@ namespace TCC.Settings
 
         public static bool WebhookEnabledFieldBoss { get; set; } = false;
         public static string WebhookUrlFieldBoss { get; set; } = "";
-        public static string WebhookMessageFieldBossSpawn { get; set; } = "@here {npcName} spawned in {regionName}!";
-        public static string WebhookMessageFieldBossDie { get; set; } = "{npcName} is dead.";
+        public static string WebhookMessageFieldBossSpawn { get; set; } = "@here {bossName} spawned in {regionName}!";
+        public static string WebhookMessageFieldBossDie { get; set; } = "{bossName} is dead.";
 
         public static bool WebhookEnabledGuildBam { get; set; } = false;
         public static string WebhookUrlGuildBam { get; set; } = "";
