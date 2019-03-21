@@ -1559,18 +1559,6 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                         </StackPanel>
-                        <!-- Discord -->
-                        <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0">
-                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Discord" />
-                            <settings:CheckboxSetting SettingName="Enabled"
-                                                      IsOn="{Binding DiscordWebhookEnabled, Mode=TwoWay}" />
-                            <settings:FieldSetting SettingName="Webhook"
-                                                   Value="{Binding Webhook, Mode=TwoWay}" />
-                            <settings:FieldSetting SettingName="Message" Value="{Binding WebhookMessage, Mode=TwoWay}" />
-                            <Button Style="{StaticResource SettingsButton}" Click="SendWebhookTest"
-                                    Content="Send test message" />
-
-                        </StackPanel>
 
 
                         <StackPanel Grid.Row="1" Grid.Column="1">

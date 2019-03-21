@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;
@@ -13,19 +14,26 @@ namespace TCC.Settings
         private static bool _chatEnabled;
         private static ClickThruMode _chatClickThruMode;
         private static DateTime _statSentTime = DateTime.MinValue;
+        private static string _statSentVersion = GetVersion();
 
+        private static string GetVersion() //no idea, just use this for now
+        {
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Experimental ? "-e" : "")}";
+
+        }
         public static double ScreenW => SystemParameters.VirtualScreenWidth;
         public static double ScreenH => SystemParameters.VirtualScreenHeight;
 
-        public static WindowSettings GroupWindowSettings       { get; set; } = new WindowSettings(0,    0, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
-        public static WindowSettings CooldownWindowSettings    { get; set; } = new WindowSettings(.4,  .7, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
-        public static WindowSettings BossWindowSettings        { get; set; } = new WindowSettings(.4,   0, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(BossWindowSettings));
-        public static WindowSettings BuffWindowSettings        { get; set; } = new WindowSettings(1,   .7, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(BuffWindowSettings));
-        public static WindowSettings CharacterWindowSettings   { get; set; } = new WindowSettings(.4,   1, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(CharacterWindowSettings));
-        public static WindowSettings ClassWindowSettings       { get; set; } = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(ClassWindowSettings));
-        public static WindowSettings FlightGaugeWindowSettings { get; set; } = new WindowSettings(0,    0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
-        public static WindowSettings FloatingButtonSettings    { get; set; } = new WindowSettings(0,    0, 0, 0, true, ClickThruMode.Never,  1, false, 1, false, true, true);
-        public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1,  .45, 0, 0, true, ClickThruMode.Never,  1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings));
+        public static WindowSettings GroupWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
+        public static WindowSettings CooldownWindowSettings { get; set; } = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
+        public static WindowSettings BossWindowSettings { get; set; } = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BossWindowSettings));
+        public static WindowSettings BuffWindowSettings { get; set; } = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BuffWindowSettings));
+        public static WindowSettings CharacterWindowSettings { get; set; } = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CharacterWindowSettings));
+        public static WindowSettings ClassWindowSettings { get; set; } = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(ClassWindowSettings));
+        public static WindowSettings FlightGaugeWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
+        public static WindowSettings FloatingButtonSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true);
+        public static WindowSettings CivilUnrestWindowSettings { get; set; } = new WindowSettings(1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings));
 
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; } = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
 
@@ -166,7 +174,17 @@ namespace TCC.Settings
             }
         }
 
-        public static string StatSentVersion { get; set; }= App.AppVersion;
+        public static string StatSentVersion
+        {
+            get
+            {
+                Log.CW(_statSentVersion);
+                return _statSentVersion; 
+
+            }
+            set => _statSentVersion = value;
+        }
+
         public static string LastLanguage
         {
             get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
