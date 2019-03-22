@@ -294,6 +294,7 @@ namespace TCC
             var content = SettingsHolder.WebhookMessageFieldBossSpawn;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
             if (content.Contains("{regionName}")) content = content.Replace("{regionName}", regionName);
+            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
 
             if (content == "") content = defaultMessage;
             SendWebhook(content,SettingsHolder.WebhookUrlFieldBoss, testMessage);
@@ -302,6 +303,7 @@ namespace TCC
         {
             var content = SettingsHolder.WebhookMessageFieldBossDie;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
+            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
             if (content == "") content = defaultMessage;
             SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
