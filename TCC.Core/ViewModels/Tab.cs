@@ -1,22 +1,78 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Threading;
+using Dragablz;
+using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
 
 namespace TCC.ViewModels
 {
+    public class TabViewModel : HeaderedItemViewModel
+    {
+        public static event Action<Tab, ImportantRemovedArgs> ImportantRemoved;
+        public static event Action<TabViewModel> TabOpened;
+
+        public static void InvokeImportantRemoved(Tab source, ImportantRemovedArgs e)
+        {
+            ImportantRemoved?.Invoke(source, e);
+        }
+
+        private bool _showImportantPopup;
+        public bool ShowImportantPopup
+        {
+            get => _showImportantPopup;
+            set
+            {
+                if (_showImportantPopup == value) return;
+                _showImportantPopup = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand TogglePopupCommand { get; }
+
+
+        public TabViewModel()
+        {
+            TogglePopupCommand = new RelayCommand(SetPopupStatus);
+            TabOpened += OnTabOpened;
+        }
+        public TabViewModel(object header, object content, bool isSelected = false) : base(header, content, isSelected)
+        {
+            TogglePopupCommand = new RelayCommand(SetPopupStatus);
+            TabOpened += OnTabOpened;
+        }
+
+        private void SetPopupStatus(object par)
+        {
+            var val = Convert.ToBoolean(par);
+            ShowImportantPopup = val;
+            if (val) TabOpened?.Invoke(this);
+        }
+        private void OnTabOpened(TabViewModel vm)
+        {
+            if (vm == this) return;
+            ShowImportantPopup = false;
+        }
+
+
+    }
     public class Tab : TSPropertyChanged
     {
         // needed for combobox in settings
         public List<ChatChannelOnOff> AllChannels => Utils.GetEnabledChannelsList();
 
         private ICollectionView _messages;
-        private string _tabName;
         private ChatMessage _pinnedMessage;
-
+        public ICommand ScrollToMessageCommand { get; }
+        public ICommand RemoveImportantMessageCommand { get; }
+        public ICommand ClearAllCommand { get; }
+        private string _tabName;
         public string TabName
         {
             get => _tabName;
@@ -24,26 +80,19 @@ namespace TCC.ViewModels
             {
                 if (_tabName == value) return;
                 _tabName = value;
-                N(nameof(TabName));
+                N();
             }
         }
-        private bool _attention;
 
-        public bool Attention
-        {
-            get => _attention;
-            set
-            {
-                if (_attention == value) return;
-                _attention = value;
-                N(nameof(Attention));
-            }
-        }
+        public string ImportantMessagesLabel => ImportantMessages.Count > 9 ? "!" : ImportantMessages.Count.ToString();
+
+        public bool Attention => ImportantMessages.Count > 0;
 
         public SynchronizedObservableCollection<string> Authors { get; set; }
         public SynchronizedObservableCollection<string> ExcludedAuthors { get; set; }
         public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
         public SynchronizedObservableCollection<ChatChannel> ExcludedChannels { get; set; }
+        public SynchronizedObservableCollection<ChatMessage> ImportantMessages { get; set; }
         public ICollectionView Messages
         {
             get => _messages;
@@ -78,6 +127,18 @@ namespace TCC.ViewModels
             ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
             Channels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
             ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
+            ImportantMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
+            RemoveImportantMessageCommand = new RelayCommand(msg =>
+            {
+                RemoveImportantMessage((ChatMessage) msg);
+                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage) msg));
+            });
+            ClearAllCommand = new RelayCommand(par =>
+            {
+                ClearImportant();
+                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
+            });
+            ScrollToMessageCommand = new RelayCommand(msg => { ChatWindowManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
             foreach (var auth in a)
             {
                 Authors.Add(auth);
@@ -100,6 +161,21 @@ namespace TCC.ViewModels
                 return;
             }
             ApplyFilter();
+            TabViewModel.ImportantRemoved += SyncImportant;
+        }
+
+        private void SyncImportant(Tab source, ImportantRemovedArgs e)
+        {
+            if (source == this) return;
+            switch (e.Action)
+            {
+                case ImportantRemovedArgs.ActionType.Remove:
+                    RemoveImportantMessage(e.Item);
+                    break;
+                case ImportantRemovedArgs.ActionType.Clear:
+                    ClearImportant();
+                    break;
+            }
         }
 
         public bool Filter(ChatMessage m)
@@ -117,6 +193,26 @@ namespace TCC.ViewModels
                 var m = f as ChatMessage;
                 return Filter(m);
             };
+        }
+
+        public void AddImportantMessage(ChatMessage chatMessage)
+        {
+            ImportantMessages.Add(chatMessage);
+            N(nameof(Attention));
+            N(nameof(ImportantMessagesLabel));
+        }
+
+        public void RemoveImportantMessage(ChatMessage msg)
+        {
+            ImportantMessages.Remove(msg);
+            N(nameof(Attention));
+            N(nameof(ImportantMessagesLabel));
+        }
+        public void ClearImportant()
+        {
+            ImportantMessages.Clear();
+            N(nameof(Attention));
+            N(nameof(ImportantMessagesLabel));
         }
     }
 }

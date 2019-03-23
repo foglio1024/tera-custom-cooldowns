@@ -355,5 +355,12 @@ namespace TCC.ViewModels
             }
         }
 
+        public void ScrollToMessage(Tab tab, ChatMessage msg)
+        {
+            var win = ChatWindows.FirstOrDefault(x => x.VM.Tabs.Contains(tab));
+            if (win == null) return;
+
+            win.ScrollToMessage(tab, msg);
+        }
     }
 }

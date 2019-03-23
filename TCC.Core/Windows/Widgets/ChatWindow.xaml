@@ -207,6 +207,7 @@
                                          DisplayMemberPath="Content"
                                          ItemsSource="{Binding TabVMs, Mode=TwoWay}"
                                          ContentTemplate="{StaticResource TabContentTemplate}"
+                                         SelectionChanged="TabChanged"
                                          x:Name="TabControl"
                                          ShowDefaultAddButton="True"
                                          NewItemFactory="{Binding AddNewTabCommand}"
@@ -216,7 +217,7 @@
                         <Style TargetType="{x:Type dragablz:DragablzItem}"
                                BasedOn="{StaticResource ChatDragableTabItemStyle}">
                             <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings" />
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TabClicked" />
+                            <EventSetter Event="PreviewMouseLeftButtonUp" Handler="SetLines" />
                             <EventSetter Event="Loaded" Handler="TabLoaded"></EventSetter>
                         </Style>
                     </dragablz:TabablzControl.ItemContainerStyle>
