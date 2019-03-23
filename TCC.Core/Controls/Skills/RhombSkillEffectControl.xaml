@@ -15,7 +15,13 @@
                                       DataContext="{Binding Cooldown}" 
                                       x:Name="RhombFixedSkillControl"
         />
-
+        <Rectangle Fill="#50ffbd3d" RenderTransformOrigin=".5 .5"
+                   RenderTransform="{StaticResource Rotate45}"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch"
+                   Margin="8"
+                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   ></Rectangle>
             <local:Arc Width="71" 
                        Height="71" 
                        StrokeThickness="3" 
@@ -54,13 +60,13 @@
             </Border>
             <TextBlock Foreground="#d222" 
                        Text="{Binding DurationLabel, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}}"
-
+                       FontWeight="DemiBold"
                        TextAlignment="Center"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       FontSize="14"
-                       FontFamily="{StaticResource ArialMonoBold}"
-                       Margin="0 0 0 0"/>
+                       FontSize="15"
+                       Margin="0 -2 0 0"/>
+                       <!--FontFamily="{StaticResource ArialMonoBold}"-->
         </Grid>
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
