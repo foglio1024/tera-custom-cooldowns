@@ -19,7 +19,7 @@ namespace TCC.ViewModels
         private static ChatWindowManager _instance;
         public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
 
-        private readonly ConcurrentQueue<ChatMessage> _queue;
+        private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
         private readonly object _lock = new object();
@@ -32,7 +32,7 @@ namespace TCC.ViewModels
         public LFG LastClickedLfg { get; set; }
 
         public int MessageCount => ChatMessages.Count;
-        public bool IsQueueEmpty => _queue.Count == 0;
+        public bool IsQueueEmpty => _pauseQueue.Count == 0;
         public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; private set; }
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
         public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
@@ -41,7 +41,7 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
-            _queue = new ConcurrentQueue<ChatMessage>();
+            _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
 
             BlockedUsers = new List<string>();
@@ -67,12 +67,12 @@ namespace TCC.ViewModels
             {
                 if (s.Tabs.Count == 0) return;
                 var m = new ChatViewModel();
-                    //App.ChatDispatcher.BeginInvoke(new Action(() =>
-                    //{
-                    var w = new ChatWindow(s, m);
+                //App.ChatDispatcher.BeginInvoke(new Action(() =>
+                //{
+                var w = new ChatWindow(s, m);
                 ChatWindows.Add(w);
-                    //}), DispatcherPriority.DataBind);
-                    m.LoadTabs(s.Tabs);
+                //}), DispatcherPriority.DataBind);
+                m.LoadTabs(s.Tabs);
             });
             if (ChatWindows.Count == 0)
             {
@@ -121,57 +121,70 @@ namespace TCC.ViewModels
             //TODO?
         }
 
+        private bool Filtered(ChatMessage message)
+        {
+            if (!SettingsHolder.ChatEnabled)
+            {
+                message.Dispose();
+                return true;
+            }
+            if (BlockedUsers.Contains(message.Author) && !(message is LfgMessage))
+            {
+                message.Dispose();
+                return true;
+            }
+
+            var pausedCount = _pauseQueue.Count;
+            for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+            {
+                if (i >= pausedCount + ChatMessages.Count) continue;
+                if (Pass(message, i <= pausedCount - 1 
+                                                 ? _pauseQueue.ElementAt(i) 
+                                                 : ChatMessages[i - pausedCount])) continue;
+                message.Dispose();
+                return true;
+            }
+            //if (ChatMessages.Count < SettingsHolder.SpamThreshold)
+            //{
+            //    for (var i = 0; i < ChatMessages.Count - 1; i++)
+            //    {
+            //        var m = ChatMessages[i];
+            //        if (Pass(message, m)) continue;
+            //        message.Dispose();
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+            //    {
+            //        if (i > ChatMessages.Count - 1) continue;
+            //        var m = ChatMessages[i];
+            //        if (Pass(message, m)) continue;
+            //        message.Dispose();
+            //        return false;
+            //    }
+            //}
+            return false;
+        }
         public void AddChatMessage(ChatMessage chatMessage)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SettingsHolder.ChatEnabled)
-                {
-                    chatMessage.Dispose();
-                    return;
-                }
-
-                if (BlockedUsers.Contains(chatMessage.Author))
-                {
-                    chatMessage.Dispose();
-                    return;
-                }
-                if (ChatMessages.Count < SettingsHolder.SpamThreshold)
-                {
-                    for (var i = 0; i < ChatMessages.Count - 1; i++)
-                    {
-                        var m = ChatMessages[i];
-                        if (!Pass(chatMessage, m))
-                        {
-                            chatMessage.Dispose();
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
-                    {
-                        if (i > ChatMessages.Count - 1) continue;
-
-                        var m = ChatMessages[i];
-                        if (!Pass(chatMessage, m))
-                        {
-                            chatMessage.Dispose();
-
-                            return;
-                        }
-                    }
-                }
+                if (Filtered(chatMessage)) return;
 
                 if (chatMessage is LfgMessage lm && !SettingsHolder.DisableLfgChatMessages) lm.LinkLfg();
+
                 chatMessage.SplitSimplePieces();
 
                 if (ChatWindows.All(x => !x.IsPaused))
                 {
                     ChatMessages.Insert(0, chatMessage);
                 }
-                else _queue.Enqueue(chatMessage);
+                else
+                {
+                    _pauseQueue.Enqueue(chatMessage);
+                }
 
                 NewMessage?.Invoke(chatMessage);
                 if (ChatMessages.Count > SettingsHolder.MaxMessages)
@@ -201,10 +214,10 @@ namespace TCC.ViewModels
         }
         public void AddFromQueue(int itemsToAdd)
         {
-            if (itemsToAdd == 0) itemsToAdd = _queue.Count;
+            if (itemsToAdd == 0) itemsToAdd = _pauseQueue.Count;
             for (var i = 0; i < itemsToAdd; i++)
             {
-                if (_queue.TryDequeue(out var msg))
+                if (_pauseQueue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
                     if (ChatMessages.Count > SettingsHolder.MaxMessages)

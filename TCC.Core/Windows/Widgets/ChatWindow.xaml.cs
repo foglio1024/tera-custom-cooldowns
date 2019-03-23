@@ -136,15 +136,14 @@ namespace TCC.Windows.Widgets
             if (sw.VerticalOffset == 0)
             {
                 _bottom = true;
-                ChatWindowManager.Instance.AddFromQueue(0);
-                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
+                ChatWindowManager.Instance.AddFromQueue(SettingsHolder.ChatScrollAmount);
             }
             else
             {
 
                 _bottom = false;
             }
-            ChatWindowManager.Instance.SetPaused(!_bottom);
+            ChatWindowManager.Instance.SetPaused(!_bottom || !ChatWindowManager.Instance.IsQueueEmpty);
 
         }
 
