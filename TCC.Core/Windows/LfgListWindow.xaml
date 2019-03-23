@@ -558,13 +558,62 @@
                             Margin="5" Background="{StaticResource  IgnidraxBrush}"
                             tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Edit message" HorizontalContentAlignment="Center" Padding="0 4" />
-                    <Grid Margin="5">
+                    <Grid Margin="5" x:Name="PublicizeGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Click="PublicizeBtn_Click"-->
                         <Button Style="{StaticResource ButtonMainStyle}"
                                 Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
-                                tcc:ButtonExtensions.CornerRadius="3" Padding="0 4" Click="PublicizeBtn_Click"
-                                Content="Publicize" HorizontalContentAlignment="Center" x:Name="PublicizeBtn" />
-                        <Border Background="#6fff" CornerRadius="3" HorizontalAlignment="Left" Margin=" 0"
-                                IsHitTestVisible="False">
+                                tcc:ButtonExtensions.CornerRadius="3 0 0 3" Padding="0 4" 
+                                Content="Publicize" HorizontalContentAlignment="Center" 
+                                Command="{Binding PublicizeCommand}"
+                                IsEnabled="{Binding IsPublicizeEnabled}"
+                                IsHitTestVisible="{Binding IsPublicizeEnabled}"
+                                x:Name="PublicizeBtn"/>
+                        <!--Click="ToggleAutoPublicize"-->
+                        <Button Style="{StaticResource ButtonMainStyle}" ToolTip="Auto publicize"
+                                Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
+                                tcc:ButtonExtensions.CornerRadius="0 3 3 0" Padding="0 4" 
+                                Command="{Binding ToggleAutoPublicizeCommand}"
+                                IsEnabled="true"
+                                IsHitTestVisible="true"
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"
+                                Grid.Column="1" Margin="0 0 0 0">
+                            <Path Data="{StaticResource SvgAuto}" 
+                                  Fill="#dfff" Height="18" Margin="0"
+                                  RenderTransformOrigin=".5 .5">
+                                <Path.Style>
+                                    <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
+                                        <Setter Property="RenderTransform" Value="{StaticResource DefaultRotateTransform}"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsAutoPublicizeOn}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard x:Name="AutoSpin">
+                                                        <Storyboard RepeatBehavior="Forever" Timeline.DesiredFrameRate="15" >
+                                                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"
+                                                                 From="0" To="359.9"
+                                                                 Duration="0:0:2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <StopStoryboard BeginStoryboardName="AutoSpin"/>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Path.Style>
+                            </Path>
+                        </Button>
+                        <Line Stroke="#2fff" X1="0" Y1="0" X2="0" Y2="{Binding ElementName=PublicizeGrid, Path=ActualHeight}"
+                              Height="Auto" StrokeThickness="2" VerticalAlignment="Stretch" Grid.Column="1"
+                              HorizontalAlignment="Left" IsHitTestVisible="False" Margin="0 0 0 0"></Line>
+
+                        <Border Background="#6fff" CornerRadius="3 0 0 3" HorizontalAlignment="Left" Margin=" 0"
+                                IsHitTestVisible="False" Grid.ColumnSpan="1" Opacity="1" Height="3" VerticalAlignment="Bottom">
                             <FrameworkElement Width="{Binding ElementName=PublicizeBtn, Path=ActualWidth}"
                                               x:Name="PublicizeBarGovernor">
                                 <FrameworkElement.LayoutTransform>
@@ -574,7 +623,7 @@
                         </Border>
                     </Grid>
                     <UniformGrid.LayoutTransform>
-                        <ScaleTransform ScaleY="0" />
+                        <ScaleTransform ScaleY="1" />
                     </UniformGrid.LayoutTransform>
                 </UniformGrid>
             </Grid>

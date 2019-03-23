@@ -75,6 +75,7 @@ namespace TCC
                   || SessionManager.Combat
                   || !ProxyInterop.Proxy.IsConnected) return;
 
+                WindowManager.LfgListWindow.VM.ForceStopPublicize();
                 ProxyInterop.Proxy.ReturnToLobby();
             }
 

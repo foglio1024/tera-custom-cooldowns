@@ -30,6 +30,7 @@ namespace TCC.Windows
             InitializeComponent();
             DataContext = new LfgListViewModel();
             VM.PropertyChanged += VM_PropertyChanged;
+            VM.Publicized += OnPublicized;
             WindowManager.ForegroundManager.VisibilityChanged += () =>
             {
                 if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
@@ -41,6 +42,13 @@ namespace TCC.Windows
                 ev.Cancel = true;
                 CloseWindow();
             };
+        }
+
+        private void OnPublicized(int cd)
+        {
+            var an = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(cd));
+            PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
+
         }
 
         private void RefreshTopmost()
@@ -195,23 +203,25 @@ namespace TCC.Windows
             }
         }
 
-        private void PublicizeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            PublicizeBtn.IsEnabled = false;
-            PublicizeBtn.IsHitTestVisible = false;
-            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(3000));
-            an.Completed += (s, ev) =>
-            {
-                PublicizeBarGovernor.LayoutTransform = new ScaleTransform(0, 1);
-                PublicizeBtn.IsEnabled = true;
-                PublicizeBtn.IsHitTestVisible = true;
-            };
-            PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
-            ProxyInterop.Proxy.PublicizeLfg();
-        }
+        //private void PublicizeBtn_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //    PublicizeBtn.IsEnabled = false;
+        //    PublicizeBtn.IsHitTestVisible = false;
+        //    var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(3000));
+        //    an.Completed += (s, ev) =>
+        //    {
+        //        PublicizeBarGovernor.LayoutTransform = new ScaleTransform(0, 1);
+        //        PublicizeBtn.IsEnabled = true;
+        //        PublicizeBtn.IsHitTestVisible = true;
+        //    };
+        //    PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
+        //    ProxyInterop.Proxy.PublicizeLfg();
+        //}
 
         private void RemoveMessageButton_Click(object sender, RoutedEventArgs e)
         {
+            VM.ForceStopPublicize();
             ProxyInterop.Proxy.RemoveLfg();
             ProxyInterop.Proxy.RequestLfgList();
             ProxyInterop.Proxy.RequestLfgList();
@@ -244,5 +254,7 @@ namespace TCC.Windows
             if (!listing.IsTwitch) return;
             Process.Start(listing.TwitchLink);
         }
+
+
     }
 }

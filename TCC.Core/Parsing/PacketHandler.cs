@@ -267,13 +267,13 @@ namespace TCC.Parsing
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
+            WindowManager.LfgListWindow.VM.ForceStopPublicize();
             WindowManager.Dashboard.VM.UpdateBuffs();
             SessionManager.CurrentPlayer.ClearAbnormalities();
             SkillManager.Clear();
             EntityManager.ClearNPC();
             WindowManager.GroupWindow.VM.ClearAll();
             WindowManager.ClassWindow.VM.CurrentClass = Class.None;
-
         }
 
 

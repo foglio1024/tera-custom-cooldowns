@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TCC.Controls;
 using TCC.Data;
 using TCC.ProxyInterop;
 
@@ -14,19 +15,28 @@ namespace TCC.ViewModels
 {
     public class LfgListViewModel : TSPropertyChanged
     {
+        public event Action<int> Publicized;
         public static DispatcherTimer RequestTimer;
+        private DispatcherTimer PublicizeTimer;
+        private DispatcherTimer AutoPublicizeTimer;
         public static Queue<uint> RequestQueue = new Queue<uint>();
         private bool _creating;
         public Listing LastClicked;
         private string _newMessage;
         public string LastSortDescr { get; set; } = "Message";
+        public int PublicizeCooldown => 5;
+        public int AutoPublicizeCooldown => 30;
         public void RefreshSorting()
         {
             SortCommand.Refresh(LastSortDescr);
         }
-
+        public bool IsPublicizeEnabled => !PublicizeTimer.IsEnabled;
+        public bool IsAutoPublicizeOn => AutoPublicizeTimer.IsEnabled;
+        private bool _stopAuto = false;
         public SynchronizedObservableCollection<Listing> Listings { get; }
         public SortCommand SortCommand { get; }
+        public RelayCommand PublicizeCommand { get; }
+        public RelayCommand ToggleAutoPublicizeCommand { get; }
         public ICollectionViewLiveShaping ListingsView { get; }
         public bool Creating
         {
@@ -79,14 +89,91 @@ namespace TCC.ViewModels
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             WindowManager.GroupWindow.VM.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
-            RequestTimer.Start();
+            PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher){ IsEnabled = false};
+            AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
+            PublicizeCommand = new RelayCommand(Publicize, CanPublicize);
+            ToggleAutoPublicizeCommand = new RelayCommand(ToggleAutoPublicize, CanToggleAutoPublicize);
         }
+
+        private void OnAutoPublicizeTimerTick(object sender, EventArgs e)
+        {
+            Log.All($"[OnAutoPublicizeTimerTick]");
+            if (SessionManager.IsInDungeon || !AmIinLfg) _stopAuto = true;
+
+            if (_stopAuto)
+            {
+                AutoPublicizeTimer.Stop();
+                N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
+                N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+                _stopAuto = false;
+            }
+            else
+            {
+                if (!Proxy.IsConnected) return;
+                Proxy.PublicizeLfg();
+                Publicized?.Invoke(AutoPublicizeCooldown);
+            }
+        }
+
+        private void OnPublicizeTimerTick(object sender, EventArgs e)
+        {
+            Log.All($"[OnPublicizeTimerTick]");
+            PublicizeTimer.Stop();
+            N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+        }
+
+        private void Publicize(object obj)
+        {
+            Log.All($"[Publicize]");
+            if (SessionManager.IsInDungeon) return;
+            PublicizeTimer.Start();
+            N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            if (!Proxy.IsConnected) return;
+            Proxy.PublicizeLfg();
+            Publicized?.Invoke(PublicizeCooldown);
+
+        }
+        private bool CanPublicize(object arg)
+        {
+            Log.All($"[CanPublicize]");
+            return IsPublicizeEnabled && !IsAutoPublicizeOn;
+        }
+        private void ToggleAutoPublicize(object obj)
+        {
+            Log.All($"[ToggleAutoPublicize]");
+            if (IsAutoPublicizeOn)
+            {
+                _stopAuto = true;
+            }
+            else
+            {
+                if (!AmIinLfg)
+                {
+                    _stopAuto = true;
+                    return;
+                }
+                AutoPublicizeTimer.Start();
+                N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
+                N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+                if (!Proxy.IsConnected) return;
+                Proxy.PublicizeLfg();
+                Publicized?.Invoke(AutoPublicizeCooldown);
+            }
+        }
+        private bool CanToggleAutoPublicize(object arg)
+        {
+            return Proxy.IsConnected &&
+                   !SessionManager.LoadingScreen &&
+                   SessionManager.Logged &&
+                   !SessionManager.IsInDungeon;
+        }
+
 
         private void RequestNextLfg(object sender, EventArgs e)
         {
             if (!Settings.SettingsHolder.LfgEnabled) return;
             if (RequestQueue.Count == 0) return;
-           
+
             var req = RequestQueue.Dequeue();
             if (req == 0)
             {
@@ -134,6 +221,14 @@ namespace TCC.ViewModels
                 RequestQueue.Enqueue(0);
             });
 
+        }
+
+        public void ForceStopPublicize()
+        {
+            PublicizeTimer.Stop();
+            AutoPublicizeTimer.Stop();
+            N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
         }
     }
 
