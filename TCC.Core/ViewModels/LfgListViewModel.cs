@@ -97,7 +97,6 @@ namespace TCC.ViewModels
 
         private void OnAutoPublicizeTimerTick(object sender, EventArgs e)
         {
-            Log.All($"[OnAutoPublicizeTimerTick]");
             if (SessionManager.IsInDungeon || !AmIinLfg) _stopAuto = true;
 
             if (_stopAuto)
@@ -117,14 +116,12 @@ namespace TCC.ViewModels
 
         private void OnPublicizeTimerTick(object sender, EventArgs e)
         {
-            Log.All($"[OnPublicizeTimerTick]");
             PublicizeTimer.Stop();
             N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
         }
 
         private void Publicize(object obj)
         {
-            Log.All($"[Publicize]");
             if (SessionManager.IsInDungeon) return;
             PublicizeTimer.Start();
             N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
@@ -135,12 +132,10 @@ namespace TCC.ViewModels
         }
         private bool CanPublicize(object arg)
         {
-            Log.All($"[CanPublicize]");
             return IsPublicizeEnabled && !IsAutoPublicizeOn;
         }
         private void ToggleAutoPublicize(object obj)
         {
-            Log.All($"[ToggleAutoPublicize]");
             if (IsAutoPublicizeOn)
             {
                 _stopAuto = true;
