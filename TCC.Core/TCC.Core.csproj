@@ -1539,8 +1539,7 @@
     </PropertyGroup>
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>D:\Repos\WpfResourcesBuilder\WpfResourcesBuilder\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
