@@ -16,6 +16,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
@@ -562,42 +563,41 @@ namespace TCC
             // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
             // WindowManager.LfgListWindow.VM.Listings.Add(l);
 
-            var l = new List<User>();
-            var r = new Random();
-            for (uint i = 0; i <= 10; i++)
-            {
-                var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
-                {
-                    Name = i.ToString(),
-                    PlayerId = i,
-                    ServerId = i,
-                    EntityId = i,
-                    Online = true,
-                    Laurel = (Laurel)r.Next(0, 6),
-                    HasAggro = true,//i == 1,
-                    Alive = true, //i != 0,
-                    UserClass = (Class)r.Next(0, 12),
-                    Awakened = i < 5,
-                };
+            //var l = new List<User>();
+            //var r = new Random();
+            //for (uint i = 0; i <= 10; i++)
+            //{
+            //    var u = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            //    {
+            //        Name = i.ToString(),
+            //        PlayerId = i,
+            //        ServerId = i,
+            //        EntityId = i,
+            //        Online = true,
+            //        Laurel = (Laurel)r.Next(0, 6),
+            //        HasAggro = true,//i == 1,
+            //        Alive = true, //i != 0,
+            //        UserClass = (Class)r.Next(0, 12),
+            //        Awakened = i < 5,
+            //    };
 
-                l.Add(u);
-                WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
-            }
-            var ut = new User(WindowManager.GroupWindow.VM.GetDispatcher())
-            {
-                Name = l[2].ToString(),
-                PlayerId = l[2].PlayerId,
-                ServerId = l[2].ServerId,
-                EntityId = l[2].EntityId,
-                Online = false,
-                Laurel = l[2].Laurel,
-                HasAggro = l[2].HasAggro,//i == 1,
-                Alive = l[2].Alive, //i != 0,
-                UserClass = l[2].UserClass,
-                Awakened = l[2].Awakened,
-            };
-            Task.Delay(2000).ContinueWith(t => WindowManager.GroupWindow.VM.AddOrUpdateMember(ut));
-
+            //    l.Add(u);
+            //    WindowManager.GroupWindow.VM.AddOrUpdateMember(u);
+            //}
+            //var ut = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            //{
+            //    Name = l[2].ToString(),
+            //    PlayerId = l[2].PlayerId,
+            //    ServerId = l[2].ServerId,
+            //    EntityId = l[2].EntityId,
+            //    Online = false,
+            //    Laurel = l[2].Laurel,
+            //    HasAggro = l[2].HasAggro,//i == 1,
+            //    Alive = l[2].Alive, //i != 0,
+            //    UserClass = l[2].UserClass,
+            //    Awakened = l[2].Awakened,
+            //};
+            //Task.Delay(2000).ContinueWith(t => WindowManager.GroupWindow.VM.AddOrUpdateMember(ut));
             //AbnormalityManager.UpdatePartyMemberAbnormality(1, 1, 1495, 200000, 1);
             //AbnormalityManager.UpdatePartyMemberAbnormality(2, 2, 1495, 200000, 1);
             //AbnormalityManager.UpdatePartyMemberAbnormality(3, 3, 1495, 200000, 1);
