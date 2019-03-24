@@ -1326,6 +1326,24 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
+                            <!-- ===================== by HQ 20190324 ===================== -->
+                            <settings:CheckboxSetting SettingName="Check Guild BAM without opcode"
+                                                      IsOn="{Binding CheckGuildBamWithoutOpcode, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run
+                                                Text="Check Guild BAM without opcode. This is useful if the opcodes file is not completely updated." />
+                                            <LineBreak />
+                                            <Run Foreground="{StaticResource HpBrush}"
+                                                 Text="Disable this if you have a completely updated opcodes file. This option will consume more computing resources" />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
+                            <!-- ========================================================== -->
                             <settings:CheckboxSetting SettingName="'Ethical mode'"
                                                       IsOn="{Binding EthicalMode, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>

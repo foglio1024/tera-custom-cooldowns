@@ -30,8 +30,8 @@ namespace TCC.ViewModels
         public WindowSettings FloatingButtonSettings => SettingsHolder.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => SettingsHolder.CivilUnrestWindowSettings;
 
-        private int _khCount;
-        private bool _kh;
+        //private int _khCount;
+        //private bool _kh;
         public bool KylosHelper
         {
             get => _kh;
@@ -108,6 +108,16 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.CheckOpcodesHash == value) return;
                 SettingsHolder.CheckOpcodesHash = value;
+                N();
+            }
+        }
+        public bool CheckGuildBamWithoutOpcode  // by HQ 20190324
+        {
+            get => SettingsHolder.CheckGuildBamWithoutOpcode;
+            set
+            {
+                if (SettingsHolder.CheckGuildBamWithoutOpcode == value) return;
+                SettingsHolder.CheckGuildBamWithoutOpcode = value;
                 N();
             }
         }

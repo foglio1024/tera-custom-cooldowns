@@ -213,6 +213,7 @@ namespace TCC.Settings
         public static ControlShape SkillShape { get; set; } = ControlShape.Round;
         public static bool Npcap { get; set; } = true;
         public static bool CheckOpcodesHash { get; set; } = true;
+        public static bool CheckGuildBamWithoutOpcode { get; set; } = false;    //by HQ 20190324
         public static bool ShowNotificationBubble { get; set; } = true;
         public static List<string> UserExcludedSysMsg { get; set; } = new List<string>();
         public static bool ExperimentalNotification { get; set; } = true;
