@@ -341,6 +341,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.GroupSizeThreshold)) SettingsHolder.GroupSizeThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowMembersHpNumbers)) SettingsHolder.ShowMembersHpNumbers = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.DisableLfgChatMessages)) SettingsHolder.DisableLfgChatMessages = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.CheckGuildBamWithoutOpcode)) SettingsHolder.CheckGuildBamWithoutOpcode = bool.Parse(attr.Value);
 
                     else if (attr.Name == nameof(SettingsHolder.HideBuffsThreshold)) SettingsHolder.HideBuffsThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.HideDebuffsThreshold)) SettingsHolder.HideDebuffsThreshold = uint.Parse(attr.Value);

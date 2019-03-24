@@ -267,9 +267,9 @@ namespace TCC.Parsing
 
         public readonly uint Version;
         public int ReleaseVersion { get; set; }
-        public OpCodeNamer OpCodeNamer { get; private set; }
-        public OpCodeNamer SystemMessageNamer { get; set; }
-        public static bool NoGuildBamOpcode { get; set; }    //by HQ 20190324
+        public OpCodeNamer OpCodeNamer { get; }
+        public OpCodeNamer SystemMessageNamer { get; private set; }
+        public static bool NoGuildBamOpcode { get; private set; }    //by HQ 20190324
         public MessageFactory()
         {
             OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, nameof(C_CHECK_VERSION) } });
@@ -285,15 +285,7 @@ namespace TCC.Parsing
             TeraMessages.ToList().ForEach(x => OpcodeNameToType[OpCodeNamer.GetCode(x.Key)] = x.Value);
 
             // by HQ 20190324 ===================================
-            if(OpCodeNamer.GetCode("S_NOTIFY_GUILD_QUEST_URGENT") == 0)
-            {
-                NoGuildBamOpcode = true;
-                //System.Windows.Forms.MessageBox.Show("S_NOTIFY_GUILD_QUEST_URGENT:" + OpCodeNamer.GetCode("S_NOTIFY_GUILD_QUEST_URGENT").ToString());
-            }
-            else
-            {
-                NoGuildBamOpcode = false;
-            }
+            NoGuildBamOpcode = OpCodeNamer.GetCode(nameof(S_NOTIFY_GUILD_QUEST_URGENT)) == 0;
             // ==================================================
             Update();
         }
