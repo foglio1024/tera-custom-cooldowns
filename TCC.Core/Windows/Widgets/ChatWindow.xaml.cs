@@ -170,6 +170,7 @@ namespace TCC.Windows.Widgets
 
         private void TabChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.AddedItems.Count == 0) return;
             var tabVm = (TabViewModel) e.AddedItems[0];
             var selectedTab = (Tab)tabVm.Content;
             //clickedTab.ClearImportant();
