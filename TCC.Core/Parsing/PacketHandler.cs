@@ -593,6 +593,7 @@ namespace TCC.Parsing
         internal static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
             ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x)); //TODO: got NullRefEx here
+            if (!SettingsHolder.LfgEnabled) return;
             if (WindowManager.LfgListWindow.VM.MyLfg == null) return;
             var dest = WindowManager.LfgListWindow.VM.MyLfg.Applicants;
             if (dest.Any(u => u.PlayerId == x.PlayerId)) return;
@@ -844,6 +845,7 @@ namespace TCC.Parsing
                     if (target == null) return;
                     target.IsLeader = member.IsLeader;
                     target.Online = member.Online;
+                    target.Location = member.Location;
                 }
                 else lfg.Players.Add(member);
             });

@@ -30,8 +30,8 @@ namespace TCC.ViewModels
         public WindowSettings FloatingButtonSettings => SettingsHolder.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => SettingsHolder.CivilUnrestWindowSettings;
 
-        //private int _khCount;
-        //private bool _kh;
+        private int _khCount;
+        private bool _kh;
         public bool KylosHelper
         {
             get => _kh;

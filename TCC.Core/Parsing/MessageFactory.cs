@@ -166,6 +166,8 @@ namespace TCC.Parsing
             {typeof(S_CHANGE_GUILD_CHIEF),                     new Action<S_CHANGE_GUILD_CHIEF>(PacketHandler.HandleChangeGuildChief) },
             {typeof(S_GUILD_MEMBER_LIST),                      new Action<S_GUILD_MEMBER_LIST>(PacketHandler.HandleGuildMembersList) },
             {typeof(S_CREATURE_LIFE),                          new Action<S_CREATURE_LIFE>(PacketHandler.HandleCreatureLife) },
+            {typeof(S_PARTY_MEMBER_INFO),                      new Action<S_PARTY_MEMBER_INFO>(PacketHandler.HandlePartyMemberInfo) },
+            {typeof(S_OTHER_USER_APPLY_PARTY),                 new Action<S_OTHER_USER_APPLY_PARTY>(PacketHandler.HandleUserApplyToParty) },
           //{typeof(S_VIEW_WARE_EX),                           new Action<S_VIEW_WARE_EX>(PacketHandler.HandleViewWareEx) },
           //{typeof(S_ACTION_STAGE),                           new Action<S_ACTION_STAGE>(x => PacketHandler.HandleActionStage(x)) }, //nvm
           //{typeof(C_LOAD_TOPO_FIN),                          new Action<C_LOAD_TOPO_FIN>(x => PacketHandler.HandleLoadTopoFin(x)) },
@@ -236,8 +238,6 @@ namespace TCC.Parsing
             {typeof(S_ACCOMPLISH_ACHIEVEMENT),                 new Action<S_ACCOMPLISH_ACHIEVEMENT>(PacketHandler.HandleAccomplishAchievement) },
             {typeof(S_TRADE_BROKER_DEAL_SUGGESTED),            new Action<S_TRADE_BROKER_DEAL_SUGGESTED>(PacketHandler.HandleBrokerOffer) },
             {typeof(S_UPDATE_FRIEND_INFO),                     new Action<S_UPDATE_FRIEND_INFO>(PacketHandler.HandleFriendStatus) },
-            {typeof(S_PARTY_MEMBER_INFO),                      new Action<S_PARTY_MEMBER_INFO>(PacketHandler.HandlePartyMemberInfo) },
-            {typeof(S_OTHER_USER_APPLY_PARTY),                 new Action<S_OTHER_USER_APPLY_PARTY>(PacketHandler.HandleUserApplyToParty) },
             {typeof(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA),  new Action<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(PacketHandler.HandleFriendIntoArea) },
             {typeof(S_FIELD_EVENT_ON_ENTER),                   new Action<S_FIELD_EVENT_ON_ENTER>(PacketHandler.HandleGuardianOnEnter) },
             {typeof(S_FIELD_EVENT_ON_LEAVE),                   new Action<S_FIELD_EVENT_ON_LEAVE>(PacketHandler.HandleGuardianOnLeave) },
