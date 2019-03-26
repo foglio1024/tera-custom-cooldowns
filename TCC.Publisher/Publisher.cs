@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Octokit;
 using SevenZip;
 using Application = System.Windows.Application;
@@ -105,6 +107,7 @@ namespace TCC.Publisher
         {
             try
             {
+
                 await Client.Repository.Release.Get(Owner, Repo, Tag);
                 Logger.WriteLine($"WARNING: Release already existing.");
             }
@@ -118,9 +121,29 @@ namespace TCC.Publisher
                     TargetCommitish = string.IsNullOrEmpty(_experimental) ? "master" : "experimental"
                 };
                 await Task.Run(() => Client.Repository.Release.Create(Owner, Repo, newRelease));
+                ExecuteWebhook();
                 Logger.WriteLine($"Release created");
             }
         }
+
+        private static void ExecuteWebhook()
+        {
+
+            var msg = new JObject
+            {
+                {"content", $"**TCC v{_stringVersion}{_experimental}**\n{(Application.Current.MainWindow as MainWindow)?.ReleaseNotesTb.Text}"},
+                {"username", "TCC Update" },
+                {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
+            };
+
+            using (var client = Utils.GetDefaultWebClient())
+            {
+                client.Encoding = Encoding.UTF8;
+                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                client.UploadString(File.ReadAllText("D:/Repos/TCC/TCC.Publisher/webhook.txt"), msg.ToString());
+            }
+        }
+
         public static async Task Upload()
         {
             var rls = await Client.Repository.Release.Get(owner: Owner, name: Repo, tag: $"v{_stringVersion}{_experimental}");
