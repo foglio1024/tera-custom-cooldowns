@@ -1,7 +1,6 @@
 ﻿//#define FIRESTORE
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -10,14 +9,11 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.Data.Chat;
-using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;

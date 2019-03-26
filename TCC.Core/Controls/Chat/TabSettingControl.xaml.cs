@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Dragablz;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
@@ -136,6 +139,14 @@ namespace TCC.Controls.Chat
         {
             if ((sender as TextBox)?.Text != "New author...") return;
             ((TextBox) sender).Text = "";
+        }
+
+        private void DeleteTab(object sender, RoutedEventArgs e)
+        {
+            var win = ChatWindowManager.Instance.ChatWindows.FirstOrDefault(w => w.VM.Tabs.Contains(_dc));
+            win?.VM.RemoveTab(_dc);
+            win?.UpdateSettings();
+            Window.GetWindow(this)?.Close();
         }
     }
 }

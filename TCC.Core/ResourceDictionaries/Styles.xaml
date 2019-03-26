@@ -150,7 +150,8 @@
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               x:Name="content"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Opacity=".5" />
+                                              Opacity=".5" 
+                                              Margin="{TemplateBinding Padding}"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
