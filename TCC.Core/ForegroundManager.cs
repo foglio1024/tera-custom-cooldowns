@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using TCC.Test;
 
 namespace TCC
 {
@@ -18,8 +19,8 @@ namespace TCC
             }
         }
 
-        private bool _forceVisible = App.Debug;
-        private bool _forceUndim = App.Debug;
+        private bool _forceVisible = Tester.Enabled;
+        private bool _forceUndim = Tester.Enabled;
         public event Action VisibilityChanged;
         public event Action DimChanged;
         public event Action ClickThruChanged;

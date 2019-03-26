@@ -4,6 +4,7 @@ using TCC.Data;
 using TCC.Sniffing;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game;
+using TCC.Test;
 using TCC.ViewModels;
 
 namespace TCC.Parsing
@@ -37,7 +38,7 @@ namespace TCC.Parsing
         }
         private static void PacketAnalysisLoop()
         {
-            AnalysisThreadId = App.GetCurrentThreadId();
+            AnalysisThreadId = Utils.GetCurrentThreadId();
             while (true)
             {
                 if (!Packets.TryDequeue(out var msg))

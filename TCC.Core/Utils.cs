@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -296,6 +297,9 @@ namespace TCC
                 return true;
             }
         }
+
+        [DllImport("kernel32.dll")]
+        public static extern int GetCurrentThreadId();
     }
 
     public static class ListExtensions
