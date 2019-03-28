@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
         xmlns:windows="clr-namespace:TCC.Windows"
-        mc:Ignorable="d" MouseEnter="Window_MouseEnter"
-        MouseLeave="Window_MouseLeave"
+        mc:Ignorable="d" 
         Loaded="FloatinButtonLoaded"
-        Title="TCC Floating button" Height="Auto" Width="Auto"
+        Title="TCC Floating button"
+        Height="Auto" Width="Auto"
         MinWidth="70"
         ResizeMode="NoResize" 
         WindowStyle="None"
@@ -22,7 +22,10 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid x:Name="WindowContent">
+        <Grid x:Name="WindowContent"         
+              MouseEnter="Window_MouseEnter"
+              MouseLeave="Window_MouseLeave"
+        >
             <Border Style="{StaticResource DefaultBorderStyle}" CornerRadius="0,2,2,0" x:Name="RootBorder" Margin="0,10"
                 HorizontalAlignment="Stretch">
                 <StackPanel Width="35">
@@ -60,7 +63,6 @@
             </Border>
         </Grid>
         <Grid Grid.Column="1" Width="250" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer">
-
             <Grid x:Name="NotificationContent" VerticalAlignment="Center" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -101,8 +103,5 @@
         <Grid.RenderTransform>
             <TranslateTransform X="-32"></TranslateTransform>
         </Grid.RenderTransform>
-
     </Grid>
-
 </windows:TccWidget>
-

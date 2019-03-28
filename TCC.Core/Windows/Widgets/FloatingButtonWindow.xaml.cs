@@ -20,6 +20,7 @@ namespace TCC.Windows.Widgets
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = WindowContent;
             ButtonsRef = null;
+            CanMove = false;
             Init(Settings.SettingsHolder.FloatingButtonSettings, perClassPosition: false);
         }
 
@@ -49,7 +50,6 @@ namespace TCC.Windows.Widgets
         }
 
         public TooltipInfo TooltipInfo { get; set; }
-
 
         private void RepeatAnimation(object sender, EventArgs e)
         {
