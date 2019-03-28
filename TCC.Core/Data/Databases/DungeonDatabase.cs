@@ -73,11 +73,15 @@ namespace TCC.Data.Databases
                 var sReqIlvl = s[3];
                 var sDobuleElite = s[4];
                 var sIndex = s[5];
+                var resetMode = ResetMode.Daily;
+                if (s.Length >= 7 && (ResetMode)Enum.Parse(typeof(ResetMode), s[6]) == ResetMode.Weekly) resetMode = ResetMode.Weekly;
+
                 if (!Dungeons.TryGetValue(id, out var dung)) continue;
                 dung.Show = true;
                 dung.ShortName = shortName;
                 dung.DoublesOnElite = bool.Parse(sDobuleElite);
                 dung.Index = int.Parse(sIndex);
+                dung.ResetMode = resetMode;
                 if (short.TryParse(sMaxBaseRuns, out var baseRuns)) dung.MaxBaseRuns = baseRuns;
                 if (!int.TryParse(sReqIlvl, out var reqIlvl)) continue;
                 try
@@ -134,6 +138,8 @@ namespace TCC.Data.Databases
                 sb.Append(d.DoublesOnElite);
                 sb.Append("\t");
                 sb.Append(d.Index);
+                sb.Append("\t");
+                sb.Append(d.ResetMode);
                 sb.Append("\n");
             });
             File.WriteAllText(_customDefsPath, sb.ToString());

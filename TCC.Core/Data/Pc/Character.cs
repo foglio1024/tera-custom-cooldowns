@@ -382,6 +382,18 @@ namespace TCC.Data.Pc
         }
 
         public RelayCommand UnhideCommand { get; }
+
+        public void ResetWeeklyDungeons()
+        {
+            Dungeons.Where(d => d.Dungeon.ResetMode == ResetMode.Weekly).ToList().ForEach(dg => dg.Reset());
+        }
+
+        public void ResetDailyData()
+        {
+            VanguardDailiesDone = 0;
+            ClaimedGuardianQuests = 0;
+            Dungeons.Where(d => d.Dungeon.ResetMode == ResetMode.Daily).ToList().ForEach(dg => dg.Reset());
+        }
     }
 
     public class InventoryItem : TSPropertyChanged

@@ -575,5 +575,23 @@ namespace TCC.ViewModels
 
             N(nameof(SelectedCharacterInventory));
         }
+
+        public void ResetDailyData()
+        {
+            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.ResetDailyData());
+            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
+        }
+
+        public void ResetWeeklyDungeons()
+        {
+            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.ResetWeeklyDungeons());
+            ChatWindowManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
+        }
+
+        public void ResetVanguardWeekly()
+        {
+            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.VanguardWeekliesDone = 0);
+            ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
+        }
     }
 }

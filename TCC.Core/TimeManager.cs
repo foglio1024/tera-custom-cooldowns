@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
+using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -16,22 +17,22 @@ namespace TCC
 {
     public class TimeManager : TSPropertyChanged
     {
+        // TODO: not sure about other regions reset days
         private readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new Dictionary<RegionEnum, TeraServerTimeInfo>
         {
-            {RegionEnum.EU, new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.NA, new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday) },
-            {RegionEnum.RU, new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.TW, new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.JP, new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.THA, new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.KR, new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.EU, new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.NA, new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday, DayOfWeek.Thursday) },
+            {RegionEnum.RU, new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.TW, new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.JP, new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.THA, new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.KR, new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
         };
 
         public const double SecondsInDay = 60 * 60 * 24;
         private const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam";
 
         private static TimeManager _instance;
-        private DayOfWeek _resetDay;
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
         public RegionEnum CurrentRegion { get; set; }
@@ -79,7 +80,6 @@ namespace TCC
             }
             var timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
-            _resetDay = _serverTimezones[CurrentRegion].ResetDay;
 
             if (timezone != null)
             {
@@ -103,33 +103,18 @@ namespace TCC
         {
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
             if (SettingsHolder.LastRun > todayReset || DateTime.Now < todayReset) return;
-            foreach (var ch in WindowManager.Dashboard.VM.Characters)
-            {
-                foreach (var dg in ch.Dungeons)
-                {
-                    if (dg.Dungeon.Id == 9950)
-                    {
-                        if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday) dg.Reset();
-                        else continue;
-                    }
-                    dg.Reset();
-                }
-                ch.VanguardDailiesDone = 0;
-                ch.ClaimedGuardianQuests = 0;
-                if (DateTime.Now.DayOfWeek == _resetDay)
-                {
-                    ch.VanguardWeekliesDone = 0;
-                }
-            }
-            SettingsHolder.LastRun = DateTime.Now;
-            WindowManager.Dashboard.VM.SaveCharacters();
-            SettingsWriter.Save();
-            if (DateTime.Now.DayOfWeek == _resetDay)
-            {
-                ChatWindowManager.Instance.AddTccMessage("Weekly data has been reset.");
-            }
 
-            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
+            WindowManager.Dashboard.VM.ResetDailyData();
+
+            var weeklyDungeonsReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].DungeonsWeeklyResetDay && PacketAnalyzer.Factory.ReleaseVersion >= 8000;
+            var weeklyVanguardReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].VanguardResetDay;
+
+            if (weeklyDungeonsReset) WindowManager.Dashboard.VM.ResetWeeklyDungeons();
+            if (weeklyVanguardReset) WindowManager.Dashboard.VM.ResetVanguardWeekly();
+
+            WindowManager.Dashboard.VM.SaveCharacters();
+            SettingsHolder.LastRun = DateTime.Now;
+            SettingsWriter.Save();
         }
 
 
@@ -297,7 +282,7 @@ namespace TCC
             if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
 
             if (content == "") content = defaultMessage;
-            SendWebhook(content,SettingsHolder.WebhookUrlFieldBoss, testMessage);
+            SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
         public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, bool testMessage = false)
         {
@@ -308,7 +293,7 @@ namespace TCC
             SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
 
-        private void SendWebhook(string content,string url, bool test = false)
+        private void SendWebhook(string content, string url, bool test = false)
         {
             var msg = new JObject
             {

@@ -20,6 +20,7 @@ namespace TCC.Windows
             DataContext = WindowManager.Dashboard.VM;
         }
         public IEnumerable<ItemLevelTier> ItemLevelTiers => Utils.ListFromEnum<ItemLevelTier>();
+        public IEnumerable<ResetMode> ResetModes => Utils.ListFromEnum<ResetMode>();
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {

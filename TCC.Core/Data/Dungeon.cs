@@ -35,6 +35,8 @@
             }
         }
 
+        public ResetMode ResetMode { get; set; } = ResetMode.Weekly;
+
         public int ItemLevel => (int)RequiredIlvl;
 
         public bool Show
@@ -79,5 +81,11 @@
             Id = id;
             Name = name;
         }
+    }
+
+    public enum ResetMode
+    {
+        Daily,
+        Weekly
     }
 }

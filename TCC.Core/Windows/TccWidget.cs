@@ -29,7 +29,7 @@ namespace TCC.Windows
         public WindowSettings WindowSettings { get; private set; }
 
         public IntPtr Handle { get; private set; }
-
+        public bool CanMove { get; set; } = true;
         public void ReloadPosition()
         {
             Dispatcher.Invoke(() =>
@@ -108,7 +108,7 @@ namespace TCC.Windows
 
             if (ButtonsRef == null)
             {
-                MouseLeftButtonDown += Drag;
+                if(CanMove) MouseLeftButtonDown += Drag;
                 return;
             }
 
@@ -122,7 +122,7 @@ namespace TCC.Windows
                 if (!SettingsHolder.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
-            ButtonsRef.MouseLeftButtonDown += Drag;
+            if (CanMove) ButtonsRef.MouseLeftButtonDown += Drag;
         }
 
         private void OnFocusTick()
