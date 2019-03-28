@@ -75,9 +75,11 @@ namespace TCC.Parsing
             if (File.Exists(filename)) return false;
             filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
             if (File.Exists(filename)) return false;
+            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
+            if (File.Exists(filename)) return false;
             try
             {
-                Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/sysmsg." + revision / 100 + ".map", filename);
+                Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/sysmsg." + version + ".map", filename);
                 return true;
             }
             catch { /* ignored*/ }

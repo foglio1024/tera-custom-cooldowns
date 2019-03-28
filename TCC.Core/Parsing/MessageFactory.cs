@@ -354,7 +354,14 @@ namespace TCC.Parsing
         {
             if (SystemMessageNamer == null)
             {
-                SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{ReleaseVersion}.map"));
+                var path = File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{ReleaseVersion / 100}.map"))
+                    ?
+                    Path.Combine(App.DataPath, $"opcodes/sysmsg.{ReleaseVersion / 100}.map")
+                    :
+                    File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Version}.map"))
+                        ? Path.Combine(App.DataPath, $"opcodes/sysmsg.{Version}.map")
+                        : "";
+                SystemMessageNamer = new OpCodeNamer(path);
             }
             SystemMessageNamer?.Reload(Version, ReleaseVersion);
         }
