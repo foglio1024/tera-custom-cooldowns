@@ -28,7 +28,7 @@ namespace TCC.Data.Databases
                 if (!uint.TryParse(s[0], out var id)) continue;
                 var name = s[1];
 
-                Quests.Add(id, name);
+                Quests[id] =  name;
             }
         }
     }
