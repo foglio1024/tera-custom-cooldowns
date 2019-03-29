@@ -302,6 +302,13 @@ namespace TCC
         public static extern int GetCurrentThreadId();
     }
 
+    public static class ColorExtensions
+    {
+        public static string ToHex(this Color col, bool alpha = false)
+        {
+            return $"#{(alpha ? col.A.ToStringEx() : "")}{col.R.ToStringEx()}{col.G.ToStringEx()}{col.B.ToStringEx()}";
+        }
+    }
     public static class ListExtensions
     {
         public static string ToCSV(this IList list)
