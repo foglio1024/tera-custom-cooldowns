@@ -115,6 +115,7 @@ namespace TCC.Parsing
             { nameof(S_CHANGE_GUILD_CHIEF),                    Contructor<Func<TeraMessageReader, S_CHANGE_GUILD_CHIEF>>() },
             { nameof(S_GUILD_MEMBER_LIST),                     Contructor<Func<TeraMessageReader, S_GUILD_MEMBER_LIST>>() },
             { nameof(S_CREATURE_LIFE),                         Contructor<Func<TeraMessageReader, S_CREATURE_LIFE>>() },
+            { nameof(S_PLAYER_CHANGE_EXP),                     Contructor<Func<TeraMessageReader, S_PLAYER_CHANGE_EXP>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
@@ -168,6 +169,7 @@ namespace TCC.Parsing
             {typeof(S_CREATURE_LIFE),                          new Action<S_CREATURE_LIFE>(PacketHandler.HandleCreatureLife) },
             {typeof(S_PARTY_MEMBER_INFO),                      new Action<S_PARTY_MEMBER_INFO>(PacketHandler.HandlePartyMemberInfo) },
             {typeof(S_OTHER_USER_APPLY_PARTY),                 new Action<S_OTHER_USER_APPLY_PARTY>(PacketHandler.HandleUserApplyToParty) },
+            {typeof(S_PLAYER_CHANGE_EXP),                      new Action<S_PLAYER_CHANGE_EXP>(PacketHandler.HandlePlayerChangeExp) },
           //{typeof(S_VIEW_WARE_EX),                           new Action<S_VIEW_WARE_EX>(PacketHandler.HandleViewWareEx) },
           //{typeof(S_ACTION_STAGE),                           new Action<S_ACTION_STAGE>(x => PacketHandler.HandleActionStage(x)) }, //nvm
           //{typeof(C_LOAD_TOPO_FIN),                          new Action<C_LOAD_TOPO_FIN>(x => PacketHandler.HandleLoadTopoFin(x)) },

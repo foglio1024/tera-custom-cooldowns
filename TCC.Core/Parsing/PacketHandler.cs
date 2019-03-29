@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using TCC.Data;
@@ -12,6 +13,7 @@ using TCC.Tera.Data;
 using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
 using TCC.Windows;
+using Color = System.Windows.Media.Color;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 
 namespace TCC.Parsing
@@ -346,9 +348,9 @@ namespace TCC.Parsing
                     if (p.ServerId != 27) break;
                     if (SessionManager.CivilUnrestZone) break;
                     EntityManager.FoglioEid = p.EntityId;
-                    var ab = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[10241024];
+                    var ab = SessionManager.DB.AbnormalityDatabase.Abnormalities[10241024];
                     AbnormalityManager.BeginAbnormality(ab.Id, SessionManager.CurrentPlayer.EntityId, 0, int.MaxValue, 1);
-                    var sysMsg = SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
+                    var sysMsg = SessionManager.DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
                     var msg = $"@0\vAbnormalName\v{ab.Name}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
                     break;
@@ -471,14 +473,14 @@ namespace TCC.Parsing
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = SessionManager.CurrentDatabase.RegionsDatabase.Names[SessionManager.CurrentDatabase.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+                areaName = SessionManager.DB.RegionsDatabase.Names[SessionManager.DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
             }
             catch (Exception)
             {
                 // ignored
             }
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
-            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
 
             SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
         }
@@ -612,7 +614,7 @@ namespace TCC.Parsing
         {
             var opcodeName = "SMT_FRIEND_IS_CONNECTED";
             if (!x.Online) return;
-            if (SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+            if (SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
             {
                 SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
             }
@@ -635,7 +637,7 @@ namespace TCC.Parsing
                 var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+                if (SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
                 {
                     SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
                 }
@@ -650,8 +652,8 @@ namespace TCC.Parsing
 
         internal static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            //if (!SessionManager.CurrentDatabase.AchievementDatabase.Achievements.ContainsKey(x.AchievementId)) return;
-            if (!SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
+            //if (!SessionManager.DB.AchievementDatabase.Achievements.ContainsKey(x.AchievementId)) return;
+            if (!SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
 
             var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -673,7 +675,7 @@ namespace TCC.Parsing
 
         internal static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
-            SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
+            SessionManager.DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
             WindowManager.FloatingButton.TooltipInfo.Name = x.Name;
             WindowManager.FloatingButton.TooltipInfo.Info = m.Name;
             WindowManager.FloatingButton.TooltipInfo.Level = (int)x.Level;
@@ -706,7 +708,7 @@ namespace TCC.Parsing
                 var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+                if (SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
                 {
                     var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
                     ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -1043,7 +1045,7 @@ namespace TCC.Parsing
                     foreach (var item in page.Items)
                     {
                         if (pg.Items.All(x => x.Id != item.Id)) continue;
-                        var name = SessionManager.CurrentDatabase.ItemsDatabase.GetItemName((uint)item.Id);
+                        var name = SessionManager.DB.ItemsDatabase.GetItemName((uint)item.Id);
                         Console.WriteLine($"Found duplicate of {name} [{item.Id}] (page {page.Index + 1}) in page {i + 1}");
                     }
                 }
@@ -1053,7 +1055,7 @@ namespace TCC.Parsing
         public static void HandleGuardianOnEnter(S_FIELD_EVENT_ON_ENTER obj)
         {
             const string opcode = "SMT_FIELD_EVENT_ENTER";
-            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
             if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
@@ -1065,7 +1067,7 @@ namespace TCC.Parsing
         public static void HandleGuardianOnLeave(S_FIELD_EVENT_ON_LEAVE obj)
         {
             const string opcode = "SMT_FIELD_EVENT_LEAVE";
-            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
             if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
@@ -1107,13 +1109,13 @@ namespace TCC.Parsing
         public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
-            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             switch (p.Type)
             {
                 case S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce:
-                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : SessionManager.CurrentDatabase.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
-                    var zone = SessionManager.CurrentDatabase.RegionsDatabase.GetZoneName(p.ZoneId);
-                    var name = SessionManager.CurrentDatabase.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
+                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : SessionManager.DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
+                    var zone = SessionManager.DB.RegionsDatabase.GetZoneName(p.ZoneId);
+                    var name = SessionManager.DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
                     var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
                     break;
@@ -1126,7 +1128,7 @@ namespace TCC.Parsing
         public static void HandleChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
         {
             const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
-            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{SessionManager.GetGuildMemberName(obj.PlayerId)}", m, opcode);
         }
 
@@ -1162,5 +1164,22 @@ namespace TCC.Parsing
             ProxyInterop.Proxy.ConnectToProxy();
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion}", NotificationType.Normal); //by HQ 20190209
         }
+
+        public static void HandlePlayerChangeExp(S_PLAYER_CHANGE_EXP p)
+        {
+            var msg = $"<font>You gained </font>";
+            msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.GainedTotalExp}</font> ";
+            msg += $"<font>{(p.GainedRestedExp > 0 ? $"+</font><font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedRestedExp}" : "")} </font>";
+            msg += $"<font>(</font>";
+            msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>";
+            msg += $"{(p.GainedTotalExp + p.GainedRestedExp) / (double)(p.LevelExp + p.NextLevelExp):P}</font>";
+            msg += $"<font>) XP.</font>";
+            msg += $"<font> Total: </font>";
+            msg +=$"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.LevelExp / (double) (p.LevelExp + p.NextLevelExp):P}</font>";
+            msg += $"<font>.</font>";
+
+            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
+        }
     }
+
 }
