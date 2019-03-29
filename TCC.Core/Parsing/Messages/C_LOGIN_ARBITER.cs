@@ -20,7 +20,6 @@ namespace TCC.Parsing.Messages
             reader.RepositionAt(nameOffset);
             AccountName = reader.ReadTeraString();
             reader.Factory.ReleaseVersion = Version;
-            reader.Factory.ReloadSysMsg();
         }
 
     }
