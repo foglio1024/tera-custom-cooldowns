@@ -99,6 +99,7 @@
     <Compile Include="Converters\MessageTextToIconConverter.cs" />
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
+    <Compile Include="Data\Databases\DatabaseBase.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_EXP.cs" />
     <Compile Include="Test\ThreadInfo.cs" />
     <Compile Include="Test\Tester.cs" />
