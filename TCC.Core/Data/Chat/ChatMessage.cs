@@ -109,6 +109,9 @@ namespace TCC.Data.Chat
         }
         public ChatMessage(string systemMessage, SystemMessage m, ChatChannel ch) : this()
         {
+#if DEBUG
+            Log.F("sysmsg.log", $"{systemMessage} -- {m.Message}");
+#endif
             Channel = ch;
             RawMessage = systemMessage;
             Author = "System";
@@ -189,7 +192,7 @@ namespace TCC.Data.Chat
                                 else if (inPiece.StartsWith("@abnormal"))
                                 {
                                     var abName = "Unknown";
-                                    if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(
+                                    if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
                                         uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
                                     mp = new MessagePiece(abName, MessagePieceType.Simple, SettingsHolder.FontSize, false);
                                     mp.SetColor(col);
@@ -377,7 +380,7 @@ namespace TCC.Data.Chat
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
-            var text = SessionManager.CurrentDatabase.SocialDatabase.Social[id].Replace("{Name}", Author);
+            var text = SessionManager.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new MessagePiece(text, MessagePieceType.Simple, SettingsHolder.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)
@@ -832,13 +835,13 @@ namespace TCC.Data.Chat
 //    //var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
 //    //text = ReplaceHtmlEscapes(text);
 
-//    var world = SessionManager.CurrentDatabase.MapDatabase.Worlds[worldId];
+//    var world = SessionManager.DB.MapDatabase.Worlds[worldId];
 //    var guard = world.Guards[guardId];
 //    var section = guard.Sections[sectionId];
 //    var sb = new StringBuilder();
 
-//    var guardName = guard.NameId != 0 ? SessionManager.CurrentDatabase.MapDatabase.Names[guard.NameId] : "";
-//    var sectionName = SessionManager.CurrentDatabase.MapDatabase.Names[section.NameId];
+//    var guardName = guard.NameId != 0 ? SessionManager.DB.MapDatabase.Names[guard.NameId] : "";
+//    var sectionName = SessionManager.DB.MapDatabase.Names[section.NameId];
 //    //sb.Append(MapDatabase.Names[world.NameId]);
 //    sb.Append("<");
 
