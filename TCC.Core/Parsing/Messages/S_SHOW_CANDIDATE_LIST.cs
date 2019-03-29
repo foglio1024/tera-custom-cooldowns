@@ -43,7 +43,7 @@ namespace TCC.Parsing.Messages
                     PlayerId = playerId,
                     UserClass = cls,
                     Level = level,
-                    Location = SessionManager.CurrentDatabase.GetSectionName(guardId, sectionId),
+                    Location = SessionManager.DB.GetSectionName(guardId, sectionId),
                     Online = true,
                     Name = name
 

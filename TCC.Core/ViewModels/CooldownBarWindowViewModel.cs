@@ -36,14 +36,14 @@ namespace TCC.ViewModels
         public ICollectionViewLiveShaping ItemsView { get; set; }
         public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
         public SynchronizedObservableCollection<Skill> SkillChoiceList { get; set; }
-        public IEnumerable<Item> Items => SessionManager.CurrentDatabase.ItemsDatabase.ItemSkills;
-        public IEnumerable<Abnormality> Passivities => SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Item> Items => SessionManager.DB.ItemsDatabase.ItemSkills;
+        public IEnumerable<Abnormality> Passivities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         //{
         //    get
         //    {
         //        var list = new SynchronizedObservableCollection<Skill>();
         //        var c = SessionManager.CurrentPlayer.Class;
-        //        var skillsForClass = SessionManager.CurrentDatabase.SkillsDatabase.Skills[c];
+        //        var skillsForClass = SessionManager.DB.SkillsDatabase.Skills[c];
         //        foreach (var skill in skillsForClass.Values)
         //        {
         //            if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;

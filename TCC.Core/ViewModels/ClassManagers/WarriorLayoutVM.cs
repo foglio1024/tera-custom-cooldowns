@@ -62,13 +62,13 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
             DeadlyGamble = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(dg, false),
                 Cooldown = new Cooldown(dg, true) { CanFlash = true }
             };
-            var ab = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
+            var ab = SessionManager.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
             Swift = new Cooldown(new Skill(ab), false);
         }
 

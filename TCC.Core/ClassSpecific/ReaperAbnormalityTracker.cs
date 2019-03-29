@@ -17,8 +17,8 @@ namespace TCC.ClassSpecific
 
         public ReaperAbnormalityTracker()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", SessionManager.CurrentPlayer.Class, out _deathSpiral);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", SessionManager.CurrentPlayer.Class, out _shadowStep);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", SessionManager.CurrentPlayer.Class, out _deathSpiral);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", SessionManager.CurrentPlayer.Class, out _shadowStep);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

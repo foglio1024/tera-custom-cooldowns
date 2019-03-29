@@ -6,6 +6,6 @@
         public int Stacks { get; set; }
         public ulong Duration { get; set; }
 
-        public Abnormality Abnormality => SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[Id];
+        public Abnormality Abnormality => SessionManager.DB.AbnormalityDatabase.Abnormalities[Id];
     }
 }

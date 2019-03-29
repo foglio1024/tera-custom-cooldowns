@@ -112,7 +112,7 @@ namespace TCC
         {
             return GuildMembersNames.TryGetValue(id, out var name) ? name : "Unknown player";
         }
-        public static TccDatabase CurrentDatabase { get; set; }
+        public static TccDatabase DB { get; set; }
         public static bool CivilUnrestZone { get; internal set; }
         public static bool IsInDungeon { get; internal set; }
         public static string CurrentAccountName { get; internal set; }
@@ -176,17 +176,17 @@ namespace TCC
 
         public static void InitDatabases(string lang)
         {
-            CurrentDatabase = new TccDatabase(lang);
-            CurrentDatabase.CheckVersion();
-            if (!CurrentDatabase.IsUpToDate)
+            DB = new TccDatabase(lang);
+            DB.CheckVersion();
+            if (!DB.IsUpToDate)
             {
                 var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes)
                 {
-                    CurrentDatabase.DownloadOutdatedDatabases();
+                    DB.DownloadOutdatedDatabases();
                 }
             }
-            if (!CurrentDatabase.Exists)
+            if (!DB.Exists)
             {
                 var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
                 if (res == System.Windows.MessageBoxResult.Yes)
@@ -201,7 +201,7 @@ namespace TCC
                 else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
                 else if (res == System.Windows.MessageBoxResult.Cancel) App.CloseApp();
             }
-            else CurrentDatabase.Load();
+            else DB.Load();
         }
 
         public static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)

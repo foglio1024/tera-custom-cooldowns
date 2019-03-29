@@ -14,8 +14,8 @@ namespace TCC.ClassSpecific
         private static Skill _rollingReload;
         public GunnerAbnormalityTracker()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.airdash_tex", SessionManager.CurrentPlayer.Class, out _dashingReload);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.ambushrolling_tex", SessionManager.CurrentPlayer.Class, out _rollingReload);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.airdash_tex", SessionManager.CurrentPlayer.Class, out _dashingReload);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.ambushrolling_tex", SessionManager.CurrentPlayer.Class, out _rollingReload);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

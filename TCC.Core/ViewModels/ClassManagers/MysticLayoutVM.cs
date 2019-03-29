@@ -42,20 +42,20 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
 
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
 
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
 
             ThrallOfProtection = new Cooldown(top, false);
             ThrallOfLife = new Cooldown(tol, false);

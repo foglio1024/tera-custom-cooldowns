@@ -22,13 +22,13 @@ namespace TCC.ClassSpecific
 
         public SorcererAbnormalityTracker()
         {
-            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
+            if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
             {
                 _fireIceFusion = new Skill(ab, Class.Sorcerer);
             }
 
-            //var fireArcaneFusionAb = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[FireArcaneFusionId];
-            //var iceArcaneFusionAb = SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities[IceArcaneFusionId];
+            //var fireArcaneFusionAb = SessionManager.DB.AbnormalityDatabase.Abnormalities[FireArcaneFusionId];
+            //var iceArcaneFusionAb = SessionManager.DB.AbnormalityDatabase.Abnormalities[IceArcaneFusionId];
 
             //_fireArcaneFusion = new Skill(fireArcaneFusionAb, Class.Sorcerer);
             //_iceArcaneFusion = new Skill(iceArcaneFusionAb, Class.Sorcerer);

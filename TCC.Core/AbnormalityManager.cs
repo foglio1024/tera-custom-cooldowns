@@ -58,7 +58,7 @@ namespace TCC
         }
         public static void BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             if (duration == int.MaxValue) ab.Infinity = true;
             if (target.IsMe())
@@ -77,7 +77,7 @@ namespace TCC
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (target.IsMe()) EndPlayerAbnormality(ab);
             else WindowManager.BossWindow.VM.EndNpcAbnormality(target, ab);
 
@@ -168,7 +168,7 @@ namespace TCC
         {
             WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
                 WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             }));
@@ -178,7 +178,7 @@ namespace TCC
         {
             WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
                 WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
             }));

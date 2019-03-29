@@ -104,7 +104,7 @@ namespace TCC.ClassSpecific
 
         public WarriorAbnormalityTracker()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out _bladeWaltz);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out _bladeWaltz);
 
         }
         private static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)

@@ -65,7 +65,7 @@ namespace TCC.Data.Chat
             StartingPrice = new MessagePiece(new Money(p.SellerPrice)) { Container = this };
             Listing = new MessagePiece("") { Container = this };
             
-            SessionManager.CurrentDatabase.ItemsDatabase.Items.TryGetValue((uint)p.Item, out var i);
+            SessionManager.DB.ItemsDatabase.Items.TryGetValue((uint)p.Item, out var i);
             if(i != null)
             {
                 Listing.Text = "<"+ i.Name + ">";

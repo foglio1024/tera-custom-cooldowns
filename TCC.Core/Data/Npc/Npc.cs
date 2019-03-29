@@ -233,8 +233,8 @@ namespace TCC.Data.NPCs
         {
             Dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
             EntityId = eId;
-            Name = SessionManager.CurrentDatabase.MonsterDatabase.GetName(tId, zId);
-            MaxHP = SessionManager.CurrentDatabase.MonsterDatabase.GetMaxHP(tId, zId);
+            Name = SessionManager.DB.MonsterDatabase.GetName(tId, zId);
+            MaxHP = SessionManager.DB.MonsterDatabase.GetMaxHP(tId, zId);
             ZoneId = zId;
             IsBoss = boss;
             TemplateId = tId;

@@ -15,14 +15,14 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             // In Cold Blood
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
             InColdBlood = new DurationCooldownIndicator(Dispatcher) {
                 Buff = new Cooldown(icb, false),
                 Cooldown = new Cooldown(icb, true) { CanFlash = true }
             };
 
             // Overhand Strike
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
+            SessionManager.DB.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
             OverhandStrike = new Cooldown(ohs, false);
 
         }

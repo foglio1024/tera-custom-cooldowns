@@ -74,7 +74,7 @@
 
         public int ActualRuns => MaxBaseRuns * (SessionManager.IsElite && DoublesOnElite ? 2 : 1);
         public string IconName { get; set; }
-        public string Region => SessionManager.CurrentDatabase.GetDungeonGuardName(Id);
+        public string Region => SessionManager.DB.GetDungeonGuardName(Id);
 
         public Dungeon(uint id, string name)
         {

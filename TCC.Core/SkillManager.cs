@@ -16,7 +16,7 @@ namespace TCC
 
         public static void AddSkill(uint id, ulong cd)
         {
-            if (SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
                 RouteSkill(new Cooldown(skill, cd));
@@ -25,7 +25,7 @@ namespace TCC
         }
         public static void AddItemSkill(uint id, uint cd)
         {
-            if (SessionManager.CurrentDatabase.ItemsDatabase.TryGetItemSkill(id, out var brooch))
+            if (SessionManager.DB.ItemsDatabase.TryGetItemSkill(id, out var brooch))
             {
                 try
                 {
@@ -54,7 +54,7 @@ namespace TCC
 
         public static void ChangeSkillCooldown(uint id, uint cd)
         {
-            if (SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
                 WindowManager.CooldownWindow.VM.Change(skill, cd);
@@ -63,7 +63,7 @@ namespace TCC
         }
         public static void ResetSkill(uint id)
         {
-            if (SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
                 WindowManager.CooldownWindow.VM.ResetSkill(skill);

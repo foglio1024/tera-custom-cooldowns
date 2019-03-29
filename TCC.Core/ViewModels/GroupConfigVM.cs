@@ -16,7 +16,7 @@ namespace TCC.ViewModels
         public event Action ShowAllChanged;
 
         public SynchronizedObservableCollection<GroupAbnormalityVM> GroupAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Abnormality> Abnormalities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll

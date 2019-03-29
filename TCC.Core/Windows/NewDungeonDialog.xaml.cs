@@ -15,7 +15,7 @@ namespace TCC.Windows
             InitializeComponent();
         }
 
-        public ICollectionView Dungeons => Utils.InitView(d => d != null, SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values, new[]
+        public ICollectionView Dungeons => Utils.InitView(d => d != null, SessionManager.DB.DungeonDatabase.Dungeons.Values, new[]
         {
             new SortDescription(nameof(Dungeon.Name), ListSortDirection.Ascending)
         });

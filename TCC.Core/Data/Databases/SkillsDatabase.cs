@@ -96,7 +96,7 @@ namespace TCC.Data.Databases
             {
                 var list = new SynchronizedObservableCollection<Skill>();
                 var c = SessionManager.CurrentPlayer.Class;
-                var skillsForClass = SessionManager.CurrentDatabase.SkillsDatabase.Skills[c];
+                var skillsForClass = SessionManager.DB.SkillsDatabase.Skills[c];
                 foreach (var skill in skillsForClass.Values)
                 {
                     if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))

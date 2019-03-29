@@ -19,9 +19,9 @@ namespace TCC.Windows
 
             SettingsHolder.UserExcludedSysMsg.ForEach(opc =>
             {
-                _hiddenMessages.Add(new SystemMessageViewModel(opc, SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages[opc]));
+                _hiddenMessages.Add(new SystemMessageViewModel(opc, SessionManager.DB.SystemMessagesDatabase.Messages[opc]));
             });
-            SessionManager.CurrentDatabase.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
+            SessionManager.DB.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
             {
                 if (SettingsHolder.UserExcludedSysMsg.Contains(keyVal.Key)) return;
                 _showedMessages.Add(new SystemMessageViewModel(keyVal.Key, keyVal.Value));

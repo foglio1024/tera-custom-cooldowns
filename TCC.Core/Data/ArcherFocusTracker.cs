@@ -6,7 +6,7 @@ namespace TCC.Data
     {
         public ArcherFocusTracker()
         {
-            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
+            if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
             {
                 Icon = ab.IconName;
             }
@@ -37,7 +37,7 @@ namespace TCC.Data
     {
         public LancerLineHeldTracker()
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(LancerAbnormalityTracker.LineHeldId, out var ab)) return;
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(LancerAbnormalityTracker.LineHeldId, out var ab)) return;
             Icon = ab.IconName;
             BaseStacksChanged += (stacks) => { if (stacks == 0) Stop(); };
         }

@@ -8,7 +8,7 @@
 
         public int Enchant { get; private set; }
         public long Experience { get; private set; }
-        public int MaxExperience => SessionManager.CurrentDatabase.GetItemMaxExp(Id, Enchant);
+        public int MaxExperience => SessionManager.DB.GetItemMaxExp(Id, Enchant);
 
         public double ExperienceFactor
         {
@@ -42,7 +42,7 @@
             return t + CorrectedEnchant;
         }
 
-        public string Name => SessionManager.CurrentDatabase.ItemsDatabase.GetItemName(Id);
+        public string Name => SessionManager.DB.ItemsDatabase.GetItemName(Id);
         public GearItem(uint id, GearTier t, GearPiece p, int enchant, long exp)
         {
             Id = id;

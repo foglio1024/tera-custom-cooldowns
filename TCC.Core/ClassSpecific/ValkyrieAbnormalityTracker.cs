@@ -90,9 +90,9 @@ namespace TCC.ClassSpecific
 
         public ValkyrieAbnormalityTracker()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out _twilightWaltz);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out _godsfall);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out _grugnirsBite);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out _twilightWaltz);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out _godsfall);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out _grugnirsBite);
 
         }
     }

@@ -174,7 +174,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                    SessionManager.DB.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
