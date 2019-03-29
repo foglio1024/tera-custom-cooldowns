@@ -15,6 +15,14 @@ namespace TCC
             return hex.ToString();
         }
     }
+
+    public static class ByteExtensions
+    {
+        public static string ToStringEx(this byte b)
+        {
+            return $"{b:x2}";
+        }
+    }
     public static class StringExtensions
     {
         public static byte[] ToByteArrayHex(this string str)
