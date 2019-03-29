@@ -1156,6 +1156,7 @@ namespace TCC.Parsing
             {
                 PacketAnalyzer.Factory.ReloadSysMsg();
             }
+            else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
             BasicTeraData.Instance.Servers.Language = p.Language;
             ProxyInterop.Proxy.ConnectToProxy();
