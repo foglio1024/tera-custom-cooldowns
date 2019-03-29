@@ -72,11 +72,11 @@ namespace TCC.Parsing
             Directory.CreateDirectory(directory);
 
             var filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
-            if (File.Exists(filename)) return false;
+            if (File.Exists(filename)) return true;
             filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
-            if (File.Exists(filename)) return false;
+            if (File.Exists(filename)) return true;
             filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
-            if (File.Exists(filename)) return false;
+            if (File.Exists(filename)) return true;
             try
             {
                 Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/sysmsg." + version + ".map", filename);
