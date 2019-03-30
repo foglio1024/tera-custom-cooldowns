@@ -11,7 +11,7 @@ namespace TCC.Data.Databases
         public string RelativePath => $"{FolderName}/{FolderName}-{Language}.{Extension}";
         protected string FullPath => Path.Combine(App.DataPath, RelativePath);
         public virtual bool Exists => File.Exists(FullPath);
-        public bool IsUpToDate => outdatedCount == 0;
+        public bool IsUpToDate => outdatedCount == 0 && Exists;
         protected int outdatedCount;
 
         public abstract void Load();
