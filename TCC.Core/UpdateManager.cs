@@ -178,7 +178,14 @@ namespace TCC
                 //App.SplashScreen.SetText("Copying files...");
                 Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList().ForEach(newPath =>
                 {
-                    File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+                    try
+                    {
+                        File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.F("Failed to copy icon "+ newPath);
+                    }
                 });
                 //App.SplashScreen.SetText("Copying files... Done.");
 
