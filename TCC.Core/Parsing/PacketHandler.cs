@@ -1172,10 +1172,10 @@ namespace TCC.Parsing
             msg += $"<font>{(p.GainedRestedExp > 0 ? $"+</font><font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedRestedExp}" : "")} </font>";
             msg += $"<font>(</font>";
             msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>";
-            msg += $"{(p.GainedTotalExp + p.GainedRestedExp) / (double)(p.LevelExp + p.NextLevelExp):P}</font>";
+            msg += $"{(p.GainedTotalExp + p.GainedRestedExp) / (double)(p.NextLevelExp):P}</font>";
             msg += $"<font>) XP.</font>";
             msg += $"<font> Total: </font>";
-            msg +=$"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.LevelExp / (double) (p.LevelExp + p.NextLevelExp):P}</font>";
+            msg +=$"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.LevelExp / (double) (p.NextLevelExp):P}</font>";
             msg += $"<font>.</font>";
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
