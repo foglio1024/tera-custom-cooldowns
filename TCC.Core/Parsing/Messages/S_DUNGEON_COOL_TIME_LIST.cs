@@ -18,11 +18,14 @@ namespace TCC.Parsing.Messages
                 reader.Skip(4);
                 for (var i = 0; i < count; i++)
                 {
-                    reader.Skip(4);
+                    reader.Skip(2);
+                    var next = reader.ReadUInt16();
                     var id = reader.ReadUInt32();
-                    reader.Skip(8);
+                    reader.Skip(10);
                     var entries = reader.ReadInt16();
                     DungeonCooldowns.Add(id, entries);
+                    if (next == 0) return;
+                    reader.RepositionAt(next);
                 }
 
             }
