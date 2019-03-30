@@ -91,6 +91,7 @@ namespace TCC.Data.Pc
             Dungeons.ToSyncList().ForEach(dung =>
             {
                 if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
+                else dung.Reset();
             });
         }
         public void SetDungeonClears(uint dgId, int runs)
