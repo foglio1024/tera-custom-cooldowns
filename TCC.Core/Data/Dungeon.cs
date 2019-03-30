@@ -7,6 +7,7 @@
         private bool _show;
         private ItemLevelTier _requiredIlvl = ItemLevelTier.Tier0;
         private int _index = -1;
+        private short _maxBaseRuns = 1;
         public uint Id { get; }
         public string Name { get; }
 
@@ -21,7 +22,16 @@
             }
         }
 
-        public short MaxBaseRuns { get; set; } = 1;
+        public short MaxBaseRuns
+        {
+            get => _maxBaseRuns;
+            set
+            {
+                if(_maxBaseRuns == value) return;
+                _maxBaseRuns = value;
+                N();
+            }
+        }
 
         public ItemLevelTier RequiredIlvl
         {

@@ -10,7 +10,7 @@
                  xmlns:converters="clr-namespace:TCC.Converters"
                  xmlns:tcc="clr-namespace:TCC"
                  mc:Ignorable="d"
-                 Title="TCC Dungeon edit" Height="550" Width="720"
+                 Title="TCC Dungeon edit" Height="550" Width="810"
                  WindowStyle="None"
                  ResizeMode="NoResize"
                  WindowStartupLocation="CenterOwner"
@@ -75,6 +75,7 @@
                         <ColumnDefinition Width="210" />
                         <ColumnDefinition Width="80" />
                         <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="90" />
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="Auto" />
@@ -99,18 +100,25 @@
                                Grid.Column="3" 
                                Margin="7 4"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="Double elite entries"
+                    <TextBlock Text="Base entries"
                                FontSize="11"
                                TextWrapping="Wrap"
                                Foreground="#5fff"
                                Grid.Column="4" 
                                Margin="3 4"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="Reset frequency"
+                    <TextBlock Text="Double elite entries"
                                FontSize="11"
                                TextWrapping="Wrap"
                                Foreground="#5fff"
                                Grid.Column="5" 
+                               Margin="3 4"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="Reset frequency"
+                               FontSize="11"
+                               TextWrapping="Wrap"
+                               Foreground="#5fff"
+                               Grid.Column="6" 
                                Margin="3 4"
                                VerticalAlignment="Center"/>
                 </Grid>
@@ -137,6 +145,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="210"/>
                                     <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="100"/>
@@ -207,12 +216,22 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <CheckBox Grid.Column="4"
+                                <TextBox Grid.Column="4"
+                                         Text="{Binding Dungeon.MaxBaseRuns, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Background="#0fff"
+                                         MinWidth="10"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         BorderThickness="0 0 0 1"
+                                         BorderBrush="#3fff"
+                                         Foreground="#8fff"
+                                         CaretBrush="White" />
+                                <CheckBox Grid.Column="5"
                                           Margin="10 0"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           IsChecked="{Binding Dungeon.DoublesOnElite, Mode=TwoWay}" />
-                                <ComboBox Grid.Column="5"
+                                <ComboBox Grid.Column="6"
                                           ItemsSource="{Binding ResetModes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DungeonEditWindow}}"
                                           SelectedItem="{Binding Dungeon.ResetMode, Mode=TwoWay}"
                                           VerticalAlignment="Center"
@@ -236,7 +255,7 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
 
-                                <Button Grid.Column="6" HorizontalAlignment="Right"
+                                <Button Grid.Column="7" HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Margin="5 0 0 0"
                                         Style="{StaticResource ButtonContentOpacityStyle}"
@@ -279,8 +298,7 @@
                 </dragablz:DragablzItemsControl>
             </Grid>
         </Border>
-        <Grid  Grid.Row="2" >
-
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
