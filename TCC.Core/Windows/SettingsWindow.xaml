@@ -601,19 +601,6 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Nightmare Kylos helper"
-                                                      IsOn="{Binding KylosHelper, Mode=TwoWay}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                                   MaxWidth="200">
-                                            <Run
-                                                Text="Shows Nightmare Kylos awaken stage and Empowered stacks. It also shows timer for next stack." />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
                             <settings:SelectionSetting SettingName="Enrage label mode"
                                                        SelectedItem="{Binding EnrageLabelMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:EnrageLabelMode}"
@@ -1629,7 +1616,7 @@
 
                     </Grid>
                 </TabItem>
-                <!-- Misc settings -->
+                <!-- P2W settings -->
                 <TabItem>
                     <TabItem.Header>
                         <Grid Height="30">
@@ -1673,7 +1660,23 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Dungeon bosses" />
+                            <settings:CheckboxSetting SettingName="Nightmare Kylos helper - 29.99€"
+                                                      CheckBoxColor="{StaticResource GoldBrush}"
+                                                  IsOn="{Binding KylosHelper, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                               MaxWidth="200">
+                                        <Run
+                                            Text="Shows Nightmare Kylos awaken stage and Empowered stacks. It also shows timer for next stack." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
                         </StackPanel>
 
                     </Grid>
