@@ -1,4 +1,5 @@
-﻿using TCC.TeraCommon.Game.Messages;
+﻿using System.Windows.Forms;
+using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages
@@ -113,6 +114,7 @@ namespace TCC.Parsing.Messages
             Fire = reader.ReadUInt32() == 4;
             Ice = reader.ReadUInt32() == 4;
             Arcane = reader.ReadUInt32() == 4;
+            if (reader.Factory.ReleaseVersion < 8000) return;
             Coins = reader.ReadUInt32();
             MaxCoins = reader.ReadUInt32();
             //Log.CW($"F/I/A {fire}/{ice}/{arcane}");

@@ -39,8 +39,11 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.CurrentPlayer.CritFactor = p.BonusCritFactor;
-            SessionManager.CurrentPlayer.Coins = p.Coins;
-            SessionManager.CurrentPlayer.MaxCoins = p.MaxCoins;
+            if (PacketAnalyzer.Factory.ReleaseVersion > 8000)
+            {
+                SessionManager.CurrentPlayer.Coins = p.Coins;
+                SessionManager.CurrentPlayer.MaxCoins = p.MaxCoins;
+            }
             SessionManager.SetPlayerMaxHp(p.MaxHP);
             SessionManager.SetPlayerMaxMp(p.MaxMP);
             SessionManager.SetPlayerMaxSt(p.MaxST + p.BonusST);
@@ -1178,7 +1181,7 @@ namespace TCC.Parsing
             msg += $"{(p.GainedTotalExp + p.GainedRestedExp) / (double)(p.NextLevelExp):P}</font>";
             msg += $"<font>) XP.</font>";
             msg += $"<font> Total: </font>";
-            msg +=$"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.LevelExp / (double) (p.NextLevelExp):P}</font>";
+            msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.LevelExp / (double)(p.NextLevelExp):P}</font>";
             msg += $"<font>.</font>";
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
