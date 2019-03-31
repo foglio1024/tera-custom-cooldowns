@@ -41,7 +41,7 @@
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding LinkedListing.IsRaid}" Value="False"/>
+                                <Condition Binding="{Binding ShowMembers}" Value="True"/>
                                 <Condition Binding="{Binding ElementName=Players, Path=HasItems}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.Setters>

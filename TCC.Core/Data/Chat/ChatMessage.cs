@@ -581,6 +581,8 @@ namespace TCC.Data.Chat
             }
         }
 
+        public bool ShowMembers => LinkedListing != null && LinkedListing.Players.Count <= 7;
+
         public uint AuthorId { get; }
         private DispatcherTimer _timer;
         public LfgMessage(uint authorId, string author, string msg) : base(ChatChannel.LFG, author, msg)
