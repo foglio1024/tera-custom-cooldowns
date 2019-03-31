@@ -95,7 +95,7 @@ namespace TCC
                 else
                 {
                     SessionManager.CurrentPlayer.AddOrRefreshBuff(ab, duration, stacks);
-                    if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
+                    //if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
@@ -132,13 +132,8 @@ namespace TCC
                 }
                 else
                 {
-
                     SessionManager.CurrentPlayer.RemoveBuff(ab);
-                    if (ab.IsShield)
-                    {
-                        SessionManager.SetPlayerShield(0);
-                        SessionManager.SetPlayerMaxShield(0);
-                    }
+
                 }
             }
             else

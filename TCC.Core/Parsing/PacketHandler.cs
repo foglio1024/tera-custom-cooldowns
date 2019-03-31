@@ -927,10 +927,11 @@ namespace TCC.Parsing
         public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
         {
 
-            if (p.Target.IsMe())
-                SessionManager.SetPlayerShield(p.Damage);
+            if (p.Target.IsMe()) SessionManager.SetPlayerShield(p.Damage);
             else if (WindowManager.BossWindow.VM.NpcList.Any(x => x.EntityId == p.Target))
+            {
                 WindowManager.BossWindow.VM.UpdateShield(p.Target, p.Damage);
+            }
         }
 
         public static void HandleImageData(S_IMAGE_DATA sImageData)

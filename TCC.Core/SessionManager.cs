@@ -166,13 +166,14 @@ namespace TCC
         public static void SetPlayerShield(uint damage)
         {
             if (CurrentPlayer.CurrentShield < 0) return;
-            CurrentPlayer.CurrentShield -= damage;
+            //CurrentPlayer.CurrentShield -= damage;
+            CurrentPlayer.DamageShield(damage);
         }
-        public static void SetPlayerMaxShield(uint shield)
-        {
-            CurrentPlayer.MaxShield = shield;
-            CurrentPlayer.CurrentShield = shield;
-        }
+        //public static void SetPlayerMaxShield(uint shield)
+        //{
+        //    CurrentPlayer.MaxShield = shield;
+        //    CurrentPlayer.CurrentShield = shield;
+        //}
 
         public static void InitDatabases(string lang)
         {
