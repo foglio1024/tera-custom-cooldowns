@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
+using TCC.Data.Chat;
 using TCC.Settings;
+using TCC.ViewModels;
 
 namespace TCC.Data.Pc
 {
@@ -36,7 +38,38 @@ namespace TCC.Data.Pc
         private bool _iceBoost;
         private bool _arcaneBoost;
         private bool _isAlive;
+        private uint _coins;
 
+        public uint Coins
+        {
+            get { return _coins; }
+            set
+            {
+                if (_coins == value) return;
+                _coins = value;
+                if (_coins == _maxCoins)
+                {
+                    WindowManager.FloatingButton.NotifyExtended("TCC", "Adventure coins maxed!", NotificationType.Success);
+                    ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
+                }
+
+                N();
+
+            }
+        }
+        private uint _maxCoins;
+
+        public uint MaxCoins
+        {
+            get { return _maxCoins; }
+            set
+            {
+                if (_maxCoins == value) return;
+                _maxCoins = value;
+                N();
+
+            }
+        }
         public string Name
         {
             get => _name;

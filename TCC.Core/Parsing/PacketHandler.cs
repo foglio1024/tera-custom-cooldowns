@@ -39,6 +39,8 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.CurrentPlayer.CritFactor = p.BonusCritFactor;
+            SessionManager.CurrentPlayer.Coins = p.Coins;
+            SessionManager.CurrentPlayer.MaxCoins = p.MaxCoins;
             SessionManager.SetPlayerMaxHp(p.MaxHP);
             SessionManager.SetPlayerMaxMp(p.MaxMP);
             SessionManager.SetPlayerMaxSt(p.MaxST + p.BonusST);

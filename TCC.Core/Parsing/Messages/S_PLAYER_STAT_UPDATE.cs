@@ -22,6 +22,9 @@ namespace TCC.Parsing.Messages
         public bool Fire { get; set; }
         public bool Ice { get; set; }
         public bool Arcane { get; set; }
+        public uint MaxCoins { get; set; }
+        public uint Coins { get; set; }
+
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
             CurrentHP = reader.ReadInt32();
@@ -110,6 +113,8 @@ namespace TCC.Parsing.Messages
             Fire = reader.ReadUInt32() == 4;
             Ice = reader.ReadUInt32() == 4;
             Arcane = reader.ReadUInt32() == 4;
+            Coins = reader.ReadUInt32();
+            MaxCoins = reader.ReadUInt32();
             //Log.CW($"F/I/A {fire}/{ice}/{arcane}");
         }
 
