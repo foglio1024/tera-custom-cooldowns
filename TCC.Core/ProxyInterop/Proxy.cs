@@ -340,7 +340,7 @@ namespace TCC.ProxyInterop
         public static void RequestLfgList()
         {
             var min = 60;
-            var max = SessionManager.CurrentPlayer.Level; // potato fix until i make it configurable
+            var max = 70;//SessionManager.CurrentPlayer.Level; // potato fix until i make it configurable
             var sb = new StringBuilder("lfg_request_list");
             sb.Append("&minlvl=");
             sb.Append(min);
