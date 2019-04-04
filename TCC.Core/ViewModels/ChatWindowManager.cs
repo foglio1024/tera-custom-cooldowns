@@ -236,6 +236,7 @@ namespace TCC.ViewModels
             if (old.Author != current.Author) return true;
             switch (current.Channel)
             {
+                case ChatChannel.Exp:
                 case ChatChannel.Group:
                 case ChatChannel.Party:
                 case ChatChannel.PartyNotice:
