@@ -85,11 +85,11 @@ namespace TCC.Data.Abnormalities
         }
         public void Dispose()
         {
-            if (_timer != null)
+            if (_timer != null && !_isTimerDisposed)
             {
-                _timer.Stop();
+                _timer?.Stop();
                 _timer.Elapsed -= DecreaseDuration;
-                _timer.Dispose();
+                _timer?.Dispose();
             }
             _isTimerDisposed = true;
         }
