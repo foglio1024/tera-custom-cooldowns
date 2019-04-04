@@ -1174,14 +1174,14 @@ namespace TCC.Parsing
         public static void HandlePlayerChangeExp(S_PLAYER_CHANGE_EXP p)
         {
             var msg = $"<font>You gained </font>";
-            msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.GainedTotalExp}</font> ";
-            msg += $"<font>{(p.GainedRestedExp > 0 ? $"+</font><font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedRestedExp}" : "")} </font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedTotalExp:N0}</font>";
+            msg += $"<font>{(p.GainedRestedExp > 0 ? $"+</font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'> {p.GainedRestedExp:N0}" : "")} </font>";
             msg += $"<font>(</font>";
-            msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
             msg += $"{(p.GainedTotalExp + p.GainedRestedExp) / (double)(p.NextLevelExp):P}</font>";
             msg += $"<font>) XP.</font>";
             msg += $"<font> Total: </font>";
-            msg += $"<font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.LevelExp / (double)(p.NextLevelExp):P}</font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.LevelExp / (double)(p.NextLevelExp):P}</font>";
             msg += $"<font>.</font>";
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
