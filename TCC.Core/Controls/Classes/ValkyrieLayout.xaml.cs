@@ -38,7 +38,8 @@ namespace TCC.Controls.Classes
         {
             if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
             if (!_dc.Ragnarok.Buff.IsAvailable) return;
-            _an.To = _dc.StaminaTracker.Factor * (359.99 - MainReArc.StartAngle*2) + MainReArc.StartAngle;
+            var to = _dc.StaminaTracker.Factor * (359.99 - MainReArc.StartAngle * 2) + MainReArc.StartAngle;
+            _an.To = double.IsNaN(to) ? 0 : to;
             MainReArc.BeginAnimation(Arc.EndAngleProperty, _an);
         }
     }
