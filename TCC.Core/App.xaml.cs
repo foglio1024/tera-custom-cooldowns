@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -19,6 +18,7 @@ using TCC.Parsing;
 using TCC.ProxyInterop;
 using TCC.Settings;
 using TCC.Sniffing;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -115,8 +115,8 @@ namespace TCC
             sb.AppendLine($"Data: {ex.Data}");
             if (ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
             sb.AppendLine($"TargetSite: {ex.TargetSite}");
-            File.AppendAllText(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/crash.log", sb.ToString());
-#if !DEBUG
+            File.AppendAllText(BasePath + "/crash.log", sb.ToString());
+#if DEBUG
             try
             {
                 var t = new Thread(() => UploadCrashDump(e));
@@ -159,12 +159,33 @@ namespace TCC
                 var js = new JObject
                 {
                     { "tcc_version" , new JValue(AppVersion) },
+                    { "tcc_hash", Utils.GenerateFileHash(typeof(App).Assembly.Location) },
+                    { "exception", new JValue(ex.Message)},
                     { "full_exception", new JValue(full)},
                     { "inner_exception",new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined") },
-                    { "exception", new JValue(ex.Message)},
-                    { "game_version", new JValue(PacketAnalyzer.Factory.Version)},
+                    { "game_version", new JValue(PacketAnalyzer.Factory.ReleaseVersion)},
                     { "region", new JValue(SessionManager.Server != null ? SessionManager.Server.Region : "")},
-                    { "server_id", new JValue(SessionManager.Server != null ? SessionManager.Server.ServerId.ToString() : "")}
+                    { "server_id", new JValue(SessionManager.Server != null ? SessionManager.Server.ServerId.ToString() : "")},
+                    { "settings_summary", new JObject
+                        {
+                            { "windows", new JObject
+                                {
+                                { "cooldown", SettingsHolder.CooldownWindowSettings.Enabled },
+                                { "buffs", SettingsHolder.BuffWindowSettings.Enabled },
+                                { "character", SettingsHolder.CharacterWindowSettings.Enabled },
+                                { "class", SettingsHolder.ClassWindowSettings.Enabled },
+                                { "chat", SettingsHolder.ChatEnabled},
+                                { "group", SettingsHolder.GroupWindowSettings.Enabled }
+                                }
+                            },
+                            {
+                                "generic", new JObject
+                                {
+                                    { "proxy_enabled", SettingsHolder.EnableProxy },
+                                }
+                            }
+                        }
+                    }
                 };
 
                 c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"),
