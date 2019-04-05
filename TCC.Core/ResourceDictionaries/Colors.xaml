@@ -85,6 +85,11 @@
     <Color x:Key="AbnormalityStunColor">         #FF0000   </Color>
     <Color x:Key="AbnormalityDebuffColor">       #8FF442   </Color>
     <Color x:Key="AbnormalityDotColor">          #9842F4   </Color>
+
+    <Color x:Key="ItemCommonColor">              #FFFFFF   </Color>
+    <Color x:Key="ItemUncommonColor">            #4DCB30   </Color>
+    <Color x:Key="ItemRareColor">                #009ED9   </Color>
+    <Color x:Key="ItemSuperiorColor">            #EEBE00   </Color>
                                                            
     <!--Chat colors-->                                     
     <Color x:Key="ChatSayColor">                 #FFFFFF   </Color>

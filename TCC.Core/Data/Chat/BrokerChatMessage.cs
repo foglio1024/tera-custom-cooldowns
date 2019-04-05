@@ -70,7 +70,7 @@ namespace TCC.Data.Chat
             {
                 Listing.Text = "<"+ i.Name + ">";
                 Listing.ItemId = i.Id;
-                Listing.SetColor(ChatUtils.GetItemColor(i));
+                Listing.SetColor(ChatUtils.GradeToColorString(i.RareGrade));
             }
             Listing.Type = MessagePieceType.Item;
         }

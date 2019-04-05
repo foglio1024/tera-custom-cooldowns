@@ -175,6 +175,10 @@ namespace TCC.R
 		public static Color AbnormalityStunColor => ((Color)App.Current.FindResource("AbnormalityStunColor"));
 		public static Color AbnormalityDebuffColor => ((Color)App.Current.FindResource("AbnormalityDebuffColor"));
 		public static Color AbnormalityDotColor => ((Color)App.Current.FindResource("AbnormalityDotColor"));
+		public static Color ItemCommonColor => ((Color)App.Current.FindResource("ItemCommonColor"));
+		public static Color ItemUncommonColor => ((Color)App.Current.FindResource("ItemUncommonColor"));
+		public static Color ItemRareColor => ((Color)App.Current.FindResource("ItemRareColor"));
+		public static Color ItemSuperiorColor => ((Color)App.Current.FindResource("ItemSuperiorColor"));
 		public static Color ChatSayColor => ((Color)App.Current.FindResource("ChatSayColor"));
 		public static Color ChatPartyColor => ((Color)App.Current.FindResource("ChatPartyColor"));
 		public static Color ChatGuildColor => ((Color)App.Current.FindResource("ChatGuildColor"));
@@ -279,6 +283,10 @@ namespace TCC.R
 		public static SolidColorBrush MoongourdFadedAccentBrush => ((SolidColorBrush)App.Current.FindResource("MoongourdFadedAccentBrush"));
 		public static SolidColorBrush RunemarkBrush => ((SolidColorBrush)App.Current.FindResource("RunemarkBrush"));
 		public static SolidColorBrush MaxRunemarkBrush => ((SolidColorBrush)App.Current.FindResource("MaxRunemarkBrush"));
+		public static SolidColorBrush ItemCommonBrush => ((SolidColorBrush)App.Current.FindResource("ItemCommonBrush"));
+		public static SolidColorBrush ItemUncommonBrush => ((SolidColorBrush)App.Current.FindResource("ItemUncommonBrush"));
+		public static SolidColorBrush ItemRareBrush => ((SolidColorBrush)App.Current.FindResource("ItemRareBrush"));
+		public static SolidColorBrush ItemSuperiorBrush => ((SolidColorBrush)App.Current.FindResource("ItemSuperiorBrush"));
 		public static SolidColorBrush ChatSayBrush => ((SolidColorBrush)App.Current.FindResource("ChatSayBrush"));
 		public static SolidColorBrush ChatPartyBrush => ((SolidColorBrush)App.Current.FindResource("ChatPartyBrush"));
 		public static SolidColorBrush ChatGuildBrush => ((SolidColorBrush)App.Current.FindResource("ChatGuildBrush"));

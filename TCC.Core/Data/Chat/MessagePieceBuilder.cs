@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using HtmlAgilityPack;
 using TCC.Data.Map;
+using TCC.Utilities.Extensions;
 
 namespace TCC.Data.Chat
 {
@@ -71,7 +72,7 @@ namespace TCC.Data.Chat
                 OwnerName = username,
                 RawLink = rawLink.ToString()
             };
-            mp.SetColor(ChatUtils.GetItemColor(i));
+            mp.SetColor(ChatUtils.GradeToColorString(i.RareGrade));
             return mp;
         }
         public static MessagePiece BuildSysMsgAchi(string msgText)
