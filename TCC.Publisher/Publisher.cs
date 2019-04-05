@@ -122,7 +122,25 @@ namespace TCC.Publisher
                 };
                 await Task.Run(() => Client.Repository.Release.Create(Owner, Repo, newRelease));
                 ExecuteWebhook();
+                UpdateFirestoreVersion();
                 Logger.WriteLine($"Release created");
+            }
+        }
+
+        private static void UpdateFirestoreVersion()
+        {
+            var msg = new JObject
+            {
+                {"version", $"{_stringVersion}{_experimental}"},
+                {"hash", Utils.GenerateFileHash("D:/Repos/TCC/release/TCC.exe") }
+            };
+
+            using (var c = Utils.GetDefaultWebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Encoding = Encoding.UTF8;
+                c.UploadString(File.ReadAllText("D:/Repos/TCC/TCC.Publisher/firestore_version_update.txt"), msg.ToString());
             }
         }
 
