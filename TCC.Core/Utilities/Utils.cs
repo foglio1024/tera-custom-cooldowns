@@ -11,10 +11,8 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -23,6 +21,7 @@ using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Utilities.Extensions;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
 
@@ -302,33 +301,6 @@ namespace TCC
         public static extern int GetCurrentThreadId();
     }
 
-    public static class ColorExtensions
-    {
-        public static string ToHex(this Color col, bool alpha = false)
-        {
-            return $"#{(alpha ? col.A.ToStringEx() : "")}{col.R.ToStringEx()}{col.G.ToStringEx()}{col.B.ToStringEx()}";
-        }
-    }
-    public static class ListExtensions
-    {
-        public static string ToCSV(this IList list)
-        {
-            var sb = new StringBuilder();
-            foreach (var val in list)
-            {
-                sb.Append(val);
-                if (list.IndexOf(val) < list.Count - 1) sb.Append(',');
-            }
-            return sb.ToString();
-        }
-    }
-    public static class UInt64Extensions
-    {
-        public static bool IsMe(this ulong val)
-        {
-            return val == SessionManager.CurrentPlayer.EntityId;
-        }
-    }
     public static class EventUtils
     {
         public static bool EndsToday(double start, double ed, bool d)
@@ -337,27 +309,6 @@ namespace TCC
         }
     }
 
-    public static class ItemsControlExtensions
-    {
-        public static void RefreshTemplate(this ItemsControl el, string resName)
-        {
-            if (el == null) return;
-            el.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                el.ItemTemplateSelector = null;
-                el.ItemTemplateSelector = Application.Current.FindResource(resName) as DataTemplateSelector;
-            }), DispatcherPriority.Background);
-        }
-        public static void RefreshTemplate(this ItemsControl el, DataTemplateSelector selector)
-        {
-            if (el == null) return;
-            el.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                el.ItemTemplateSelector = null;
-                el.ItemTemplateSelector = selector;
-            }), DispatcherPriority.Background);
-        }
-    }
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
     {
         public static readonly DependencyProperty ValueProperty =
@@ -394,23 +345,7 @@ namespace TCC
             ClearValue(ValueProperty);
         }
     }
-    public static class DispatcherExtensions
-    {
-        public static void InvokeIfRequired(this Dispatcher disp, Action dotIt, DispatcherPriority priority)
-        {
-            if (disp.Thread != Thread.CurrentThread)
-                disp.Invoke(priority, dotIt);
-            else
-                dotIt();
-        }
-        public static void BeginInvokeIfRequired(this Dispatcher disp, Action dotIt, DispatcherPriority priority)
-        {
-            if (disp.Thread != Thread.CurrentThread)
-                disp.BeginInvoke(dotIt, priority);
-            else
-                dotIt();
-        }
-    }
+
     public class TSPropertyChanged : INotifyPropertyChanged
     {
         protected Dispatcher Dispatcher;
@@ -562,39 +497,6 @@ namespace TCC
             {
                 _lock.ExitReadLock();
             }
-        }
-    }
-    public class ButtonExtensions
-    {
-        public static CornerRadius GetCornerRadius(DependencyObject obj)
-        {
-            return (CornerRadius)obj.GetValue(CornerRadiusProperty);
-        }
-        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
-        {
-            obj.SetValue(CornerRadiusProperty, value);
-        }
-        public static readonly DependencyProperty CornerRadiusProperty =
-        DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ButtonExtensions), new PropertyMetadata(new CornerRadius(0)));
-    }
-
-    public static class DispatcherTimerExtensions
-    {
-        public static void Refresh(this DispatcherTimer t)
-        {
-            t.Stop();
-            t.Start();
-        }
-    }
-
-    public static class WindowCollectionExtensions
-    {
-        public static List<Window> ToList(this WindowCollection wc)
-        {
-            var ret = new Window[wc.Count];
-            wc.CopyTo(ret, 0);
-            return ret.ToList();
-
         }
     }
 

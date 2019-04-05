@@ -100,9 +100,20 @@
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
     <Compile Include="Data\Databases\DatabaseBase.cs" />
+    <Compile Include="Parsing\Messages\S_LOAD_EP_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_EXP.cs" />
     <Compile Include="Test\ThreadInfo.cs" />
     <Compile Include="Test\Tester.cs" />
+    <Compile Include="Utilities\Extensions\ByteExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ButtonExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ColorExtensions.cs" />
+    <Compile Include="Utilities\Extensions\DispatcherExtensions.cs" />
+    <Compile Include="Utilities\Extensions\DispatcherTimerExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ItemsControlExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ListExtensions.cs" />
+    <Compile Include="Utilities\Extensions\UInt64Extensions.cs" />
+    <Compile Include="Utilities\Extensions\WindowCollectionExtensions.cs" />
+    <Compile Include="Utilities\Extensions\StringExtensions.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />
     <Compile Include="Controls\Classes\ArcherLayout.xaml.cs">
       <DependentUpon>ArcherLayout.xaml</DependentUpon>
@@ -604,9 +615,7 @@
     <Compile Include="TeraCommon\Game\HotDot.cs" />
     <Compile Include="TeraCommon\Game\IHasOwner.cs" />
     <Compile Include="Parsing\Messages\C_CHECK_VERSION.cs" />
-    <Compile Include="TeraCommon\Game\Messages\Client\C_PLAYER_LOCATION.cs" />
     <Compile Include="TeraCommon\Game\Messages\ParsedMessage.cs" />
-    <Compile Include="TeraCommon\Game\Messages\Server\EachSkillResultServerMessage.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\LoginServerMessage.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\SBanPartyMember.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\SNpcOccupierInfo.cs" />
@@ -677,19 +686,8 @@
     <Compile Include="TeraCommon\Game\RaceGenderClass.cs" />
     <Compile Include="TeraCommon\Game\Region.cs" />
     <Compile Include="TeraCommon\Game\Server.cs" />
-    <Compile Include="TeraCommon\Game\Services\AbnormalityTracker.cs" />
-    <Compile Include="TeraCommon\Game\Services\EntityTracker.cs" />
-    <Compile Include="TeraCommon\Game\Services\Helpers.cs" />
-    <Compile Include="TeraCommon\Game\Services\HotDotDatabase.cs" />
-    <Compile Include="TeraCommon\Game\Services\IconsDatabase.cs" />
-    <Compile Include="TeraCommon\Game\Services\MessageFactory.cs" />
-    <Compile Include="TeraCommon\Game\Services\NpcDatabase.cs" />
     <Compile Include="TeraCommon\Game\Services\OpCodeNamer.cs" />
-    <Compile Include="TeraCommon\Game\Services\PetSkillDatabase.cs" />
-    <Compile Include="TeraCommon\Game\Services\PlayerTracker.cs" />
-    <Compile Include="TeraCommon\Game\Services\QuestInfoDatabase.cs" />
     <Compile Include="TeraCommon\Game\Services\ServerDatabase.cs" />
-    <Compile Include="TeraCommon\Game\Services\SkillDatabase.cs" />
     <Compile Include="TeraCommon\Game\Services\TeraMessageReader.cs" />
     <Compile Include="TeraCommon\Game\Skill.cs" />
     <Compile Include="TeraCommon\Game\SkillResult.cs" />
@@ -745,7 +743,7 @@
     <Compile Include="ViewModels\ClassManagers\ReaperLayoutVM.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="Utilities\Utils.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
@@ -871,7 +869,7 @@
     </Compile>
     <Compile Include="SkillManager.cs" />
     <Compile Include="Data\Databases\SkillsDatabase.cs" />
-    <Compile Include="Parsing\StringUtils.cs" />
+    <Compile Include="Utilities\Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
     <Compile Include="Windows\SkillConfigWindow.xaml.cs">
@@ -1290,7 +1288,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Parsing\CustomReader.cs" />
     <Compile Include="Windows\Widgets\CooldownWindow.xaml.cs">
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
