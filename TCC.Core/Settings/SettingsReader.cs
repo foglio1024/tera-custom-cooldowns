@@ -232,9 +232,11 @@ namespace TCC.Settings
             }
         }
         //===================================================================================
-        public void LoadWindowSettings()
+        public void LoadWindowSettings(string pathOverride = null)
         {
-            if (!File.Exists(Path.Combine(App.BasePath, "tcc-config.xml"))) return;
+            var path = Path.Combine(App.BasePath, "tcc-config.xml");
+            if (pathOverride != null) path = pathOverride;
+            if (!File.Exists(path)) return;
             try
             {
                 _settingsDoc = XDocument.Load(Path.Combine(App.BasePath, "tcc-config.xml"));
@@ -269,15 +271,18 @@ namespace TCC.Settings
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
-                LoadWindowSettings();
+                LoadWindowSettings(pathOverride);
             }
         }
-        public void LoadSettings()
+        public void LoadSettings(string pathOverride = null)
         {
             try
             {
-                if (!File.Exists(Path.Combine(App.BasePath, "tcc-config.xml"))) return;
-                _settingsDoc = XDocument.Load(Path.Combine(App.BasePath, "tcc-config.xml"));
+                var path = Path.Combine(App.BasePath, "tcc-config.xml");
+                if (pathOverride != null) path = pathOverride;
+
+                if (!File.Exists(path)) return;
+                _settingsDoc = XDocument.Load(path);
 
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -409,7 +414,7 @@ namespace TCC.Settings
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
-                LoadSettings();
+                LoadSettings(pathOverride);
             }
         }
 
