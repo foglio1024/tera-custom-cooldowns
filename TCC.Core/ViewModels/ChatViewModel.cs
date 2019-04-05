@@ -2,13 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 using System.Windows.Threading;
 using Dragablz;
-using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
+using TCC.Utilities.Extensions;
 
 namespace TCC.ViewModels
 {

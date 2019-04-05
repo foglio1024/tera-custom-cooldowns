@@ -10,6 +10,7 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:settings="clr-namespace:TCC.Controls.Settings"
         xmlns:pc="clr-namespace:TCC.Data.Pc"
+        xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
         Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="TCC LFG" Height="800"
@@ -136,7 +137,7 @@
                 <UniformGrid Grid.Column="3" Rows="1">
                     <UniformGrid.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
-                            <Setter Property="tcc:ButtonExtensions.CornerRadius" Value="2"></Setter>
+                            <Setter Property="extensions:ButtonExtensions.CornerRadius" Value="2"></Setter>
                             <Setter Property="Margin" Value="2 3"></Setter>
                             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
@@ -525,7 +526,7 @@
                         <ScaleTransform ScaleY="0" />
                     </Grid.LayoutTransform>
                 </Grid>
-                <Button tcc:ButtonExtensions.CornerRadius="3"
+                <Button extensions:ButtonExtensions.CornerRadius="3"
                         Grid.Row="1"
                         HorizontalContentAlignment="Center"
                         Width="200"
@@ -551,12 +552,12 @@
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton"
                             Click="RemoveMessageButton_Click"
                             Margin="5" Background="{StaticResource HpBrush}"
-                            tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
+                            extensions:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="EditMessageButton"
                             Click="CreateMessageBtn_Click"
                             Margin="5" Background="{StaticResource  IgnidraxBrush}"
-                            tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
+                            extensions:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Edit message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Grid Margin="5" x:Name="PublicizeGrid">
                         <Grid.ColumnDefinitions>
@@ -566,7 +567,7 @@
                         <!--Click="PublicizeBtn_Click"-->
                         <Button Style="{StaticResource ButtonMainStyle}"
                                 Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
-                                tcc:ButtonExtensions.CornerRadius="3 0 0 3" Padding="0 4" 
+                                extensions:ButtonExtensions.CornerRadius="3 0 0 3" Padding="0 4" 
                                 Content="Publicize" HorizontalContentAlignment="Center" 
                                 Command="{Binding PublicizeCommand}"
                                 IsEnabled="{Binding IsPublicizeEnabled}"
@@ -575,7 +576,7 @@
                         <!--Click="ToggleAutoPublicize"-->
                         <Button Style="{StaticResource ButtonMainStyle}" ToolTip="Auto publicize"
                                 Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
-                                tcc:ButtonExtensions.CornerRadius="0 3 3 0" Padding="0 4" 
+                                extensions:ButtonExtensions.CornerRadius="0 3 3 0" Padding="0 4" 
                                 Command="{Binding ToggleAutoPublicizeCommand}"
                                 IsEnabled="true"
                                 IsHitTestVisible="true"

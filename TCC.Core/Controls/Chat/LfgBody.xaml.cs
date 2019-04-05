@@ -1,13 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
-using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
-using TCC.ViewModels;
-using TCC.Windows;
 
 
 namespace TCC.Controls.Chat

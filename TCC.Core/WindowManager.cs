@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Settings;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 using TCC.Windows.Widgets;

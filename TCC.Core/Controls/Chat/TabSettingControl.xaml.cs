@@ -3,10 +3,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Dragablz;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat

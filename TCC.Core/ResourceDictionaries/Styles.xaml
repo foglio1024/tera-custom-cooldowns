@@ -10,7 +10,9 @@
                     xmlns:chat1="clr-namespace:TCC.Data.Chat"
                     xmlns:viewModels="clr-namespace:TCC.ViewModels"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
+                    mc:Ignorable="d">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -104,14 +106,14 @@
                                 BorderThickness="0"
                                 Padding="{TemplateBinding Padding}"
                                 BorderBrush="Transparent"
-                                CornerRadius="{TemplateBinding tcc:ButtonExtensions.CornerRadius}"
+                                CornerRadius="{TemplateBinding extensions:ButtonExtensions.CornerRadius}"
                                 Background="{TemplateBinding Background}">
 
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <Border x:Name="hl" Background="Transparent"
-                                CornerRadius="{TemplateBinding tcc:ButtonExtensions.CornerRadius}" />
+                                CornerRadius="{TemplateBinding extensions:ButtonExtensions.CornerRadius}" />
                         <ctrl:Ripple HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <ctrl:Ripple.Clip>
                                 <MultiBinding Converter="{StaticResource RoundedClipConverter}">
@@ -190,7 +192,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
         <Setter Property="Background" Value="{StaticResource GreenBrush}" />
-        <Setter Property="tcc:ButtonExtensions.CornerRadius" Value="13" />
+        <Setter Property="extensions:ButtonExtensions.CornerRadius" Value="13" />
         <Setter Property="Foreground" Value="#d000" />
         <Setter Property="Padding" Value="0 5" />
     </Style>

@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls.Chat;
 using TCC.Data;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets

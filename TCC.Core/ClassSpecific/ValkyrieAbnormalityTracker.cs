@@ -2,6 +2,7 @@
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific

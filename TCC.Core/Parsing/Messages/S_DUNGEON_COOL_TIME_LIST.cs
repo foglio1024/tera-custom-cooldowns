@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 

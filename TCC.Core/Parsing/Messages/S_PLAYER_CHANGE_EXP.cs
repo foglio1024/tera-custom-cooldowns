@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TCC.TeraCommon.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Parsing.Messages

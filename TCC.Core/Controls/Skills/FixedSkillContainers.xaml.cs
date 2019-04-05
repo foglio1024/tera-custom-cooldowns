@@ -13,6 +13,7 @@ using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 

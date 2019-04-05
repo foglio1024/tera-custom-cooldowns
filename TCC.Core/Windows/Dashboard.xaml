@@ -12,6 +12,7 @@
                  xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
                  xmlns:abnormalities1="clr-namespace:TCC.Controls.Abnormalities"
                  xmlns:tcc="clr-namespace:TCC"
+                 xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
                  mc:Ignorable="d"
                  Title="TCC Dashboard" Height="650" Width="1220"
                  ResizeMode="NoResize"
@@ -587,7 +588,7 @@
                     </TextBlock>
                     <Button Style="{StaticResource ButtonMainStyle}" 
                             Background="{StaticResource HpBrush}"
-                            tcc:ButtonExtensions.CornerRadius="12"
+                            extensions:ButtonExtensions.CornerRadius="12"
                             Grid.Column="2"
                             Grid.RowSpan="2"
                             Margin="-7 0"

@@ -1,5 +1,6 @@
 ﻿using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
+using TCC.Utilities.Extensions;
 
 namespace TCC.Parsing.Messages
 {

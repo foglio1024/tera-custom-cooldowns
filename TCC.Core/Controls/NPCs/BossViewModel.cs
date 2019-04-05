@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Settings;
+using TCC.Utilities.Extensions;
 
 namespace TCC.Controls.NPCs
 {

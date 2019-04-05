@@ -10,6 +10,7 @@ using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Settings;
+using TCC.Utilities.Extensions;
 using TCC.Windows.Widgets;
 
 namespace TCC.ViewModels

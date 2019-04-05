@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -14,6 +13,7 @@ using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game.Services;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 
