@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using TCC.Data;
@@ -11,9 +10,9 @@ using TCC.Settings;
 using TCC.Sniffing;
 using TCC.Tera.Data;
 using TCC.TeraCommon.Game.Services;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
-using Color = System.Windows.Media.Color;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 
 namespace TCC.Parsing
@@ -43,6 +42,8 @@ namespace TCC.Parsing
             {
                 SessionManager.CurrentPlayer.Coins = p.Coins;
                 SessionManager.CurrentPlayer.MaxCoins = p.MaxCoins;
+                WindowManager.Dashboard.VM.CurrentCharacter.Coins = p.Coins;
+                WindowManager.Dashboard.VM.CurrentCharacter.MaxCoins = p.MaxCoins;
             }
             SessionManager.SetPlayerMaxHp(p.MaxHP);
             SessionManager.SetPlayerMaxMp(p.MaxMP);
@@ -112,12 +113,9 @@ namespace TCC.Parsing
             }
             var b = WindowManager.BossWindow.VM.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.EntityId);
             //if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.None) return;
-            if (b != null /*&& b.IsBoss*/ && b.Visible)
-            {
-                WindowManager.GroupWindow.VM.SetAggro(p.Target);
-                WindowManager.BossWindow.VM.SetBossAggro(p.EntityId, p.Target);
-
-            }
+            if (b == null || !b.Visible) return;
+            WindowManager.GroupWindow.VM.SetAggro(p.Target);
+            WindowManager.BossWindow.VM.SetBossAggro(p.EntityId, p.Target);
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
@@ -931,7 +929,7 @@ namespace TCC.Parsing
         {
 
             if (p.Target.IsMe()) SessionManager.SetPlayerShield(p.Damage);
-            else if (WindowManager.BossWindow.VM.NpcList.Any(x => x.EntityId == p.Target))
+            else if (WindowManager.BossWindow.VM.NpcList.ToSyncList().Any(x => x.EntityId == p.Target))
             {
                 WindowManager.BossWindow.VM.UpdateShield(p.Target, p.Damage);
             }
@@ -1160,25 +1158,26 @@ namespace TCC.Parsing
         public static void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
             SessionManager.CurrentAccountName = p.AccountName;
-            if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
-            {
-                PacketAnalyzer.Factory.ReloadSysMsg();
-            }
-            else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
+            // check should already be done when downloading opcodes
+            //if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
+            //{
+            //}
+            PacketAnalyzer.Factory.ReloadSysMsg();
+            //else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
             BasicTeraData.Instance.Servers.Language = p.Language;
             ProxyInterop.Proxy.ConnectToProxy();
-            WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion}", NotificationType.Normal); //by HQ 20190209
+            WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion / 100d}", NotificationType.Normal); //by HQ 20190209
         }
 
         public static void HandlePlayerChangeExp(S_PLAYER_CHANGE_EXP p)
         {
             var msg = $"<font>You gained </font>";
-            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedTotalExp:N0}</font>";
-            msg += $"<font>{(p.GainedRestedExp > 0 ? $"+</font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'> {p.GainedRestedExp:N0}" : "")} </font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedTotalExp-p.GainedRestedExp:N0}</font>";
+            msg += $"<font>{(p.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.GainedRestedExp:N0}" : "")} </font>";
             msg += $"<font>(</font>";
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
-            msg += $"{(p.GainedTotalExp + p.GainedRestedExp) / (double)(p.NextLevelExp):P}</font>";
+            msg += $"{(p.GainedTotalExp) / (double)(p.NextLevelExp):P}</font>";
             msg += $"<font>) XP.</font>";
             msg += $"<font> Total: </font>";
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.LevelExp / (double)(p.NextLevelExp):P}</font>";
