@@ -12,13 +12,7 @@ namespace TCC.Data.Databases
 
         protected override string FolderName => "monsters";
         protected override string Extension => "xml";
-        public override bool Exists
-        {
-            get
-            {
-                return base.Exists && File.Exists(OverrideFileFullPath);
-            }
-        }
+        public override bool Exists => base.Exists && File.Exists(OverrideFileFullPath);
         private string OverrideFileFullPath => FullPath.Replace(Language, "override");
         private string OverrideFileRelativePath => RelativePath.Replace(Language, "override");
 
@@ -36,26 +30,21 @@ namespace TCC.Data.Databases
         public string GetZoneName(uint zoneId)
         {
             _zones.TryGetValue(zoneId, out var z);
-            return z != null ? z.Name : "Unkown zone";
+            return z != null ? z.Name : "Unknown zone";
         }
         public string GetName(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out var m)) return m.Name;
-            else return "Unknown";
+            return TryGetMonster(templateId, zoneId, out var m) ? m.Name : "Unknown";
         }
         public ulong GetMaxHP(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out var m))
-            {
-                return m.MaxHP;
-            }
-            else return 1;
+            return TryGetMonster(templateId, zoneId, out var m) ? m.MaxHP : 1;
         }
 
         public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
         {
             base.CheckVersion(customAbsPath, customRelPath);
-            base.CheckVersion(OverrideFileFullPath, OverrideFileRelativePath);
+            //base.CheckVersion(OverrideFileFullPath, OverrideFileRelativePath);
         }
 
         public override void Load()
