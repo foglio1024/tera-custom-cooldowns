@@ -1665,14 +1665,30 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Dungeon bosses" />
                             <settings:CheckboxSetting SettingName="Nightmare Kylos helper - 29.99€"
                                                       CheckBoxColor="{StaticResource GoldBrush}"
-                                                  IsOn="{Binding KylosHelper, Mode=TwoWay}">
+                                                      IsOn="{Binding KylosHelper, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
                                         <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                               MaxWidth="200">
-                                        <Run
-                                            Text="Shows Nightmare Kylos awaken stage and Empowered stacks. It also shows timer for next stack." />
+                                                   MaxWidth="200">
+                                            <Run
+                                                Text="Shows Nightmare Kylos awaken stage and Empowered stacks. It also shows timer for next stack." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Stretch" Grid.Row="2">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Elite status" />
+                            <settings:CheckboxSetting SettingName="Remove Broker fees - 7.99€"
+                                                      CheckBoxColor="{StaticResource GoldBrush}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run
+                                                Text="Removes 2% gold fee when listing an item on Trade Broker." />
                                         </TextBlock>
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
