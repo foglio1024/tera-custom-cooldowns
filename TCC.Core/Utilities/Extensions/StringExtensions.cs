@@ -28,12 +28,20 @@ namespace TCC.Utilities.Extensions
             return ret;
             //return Encoding.Default.GetBytes(str);
         }
-        public static string ReplaceHtmlEscapes(this string str)
+        public static string UnescapeHtml(this string str)
         {
             str = str.Replace("&lt;", "<");
             str = str.Replace("&gt;", ">");
             str = str.Replace("&#xA", "\n");
             str = str.Replace("&quot;", "\"");
+            return str;
+        }
+        public static string EscapeHtml(this string str)
+        {
+            str = str.Replace("<", "&lt;");
+            str = str.Replace(">", "&gt;");
+            str = str.Replace("\n", "&#xA");
+            str = str.Replace("\"", "&quot;");
             return str;
         }
         public static string ReplaceFirstOccurrenceCaseInsensitive(this string input, string search, string replacement)
