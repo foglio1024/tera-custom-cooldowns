@@ -89,7 +89,7 @@ namespace TCC.Data.Chat
                 {
                     case ChatChannel.Greet:
                     case ChatChannel.Angler:
-                        ParseDirectMessage(RawMessage.ReplaceHtmlEscapes());
+                        ParseDirectMessage(RawMessage.UnescapeHtml());
                         break;
                     case ChatChannel.Emote:
                         ParseEmoteMessage(msg);
@@ -118,7 +118,7 @@ namespace TCC.Data.Chat
             try
             {
                 var prm = ChatUtils.SplitDirectives(systemMessage);
-                var txt = m.Message.ReplaceHtmlEscapes().Replace("<BR>", "\r\n");
+                var txt = m.Message.UnescapeHtml().Replace("<BR>", "\r\n");
                 var html = new HtmlDocument(); html.LoadHtml(txt);
                 var htmlPieces = html.DocumentNode.ChildNodes;
                 if (prm == null)
@@ -228,7 +228,15 @@ namespace TCC.Data.Chat
                                 }
                                 else if (inPiece.StartsWith("@creature"))
                                 {
+
                                     mp = MessagePieceBuilder.BuildSysMsgCreature(inPiece);
+                                    mp.SetColor(col);
+                                }
+                                else if (inPiece.StartsWith("@rgn"))
+                                {
+
+                                    mp = MessagePieceBuilder.BuildSysMsgRegion(inPiece);
+                                    
                                     mp.SetColor(col);
                                 }
                                 else if (inPiece.StartsWith("@zoneName"))
@@ -244,7 +252,7 @@ namespace TCC.Data.Chat
                                 }
                                 else
                                 {
-                                    mp = new MessagePiece(inPiece.ReplaceHtmlEscapes(), MessagePieceType.Simple, SettingsHolder.FontSize, false, col);
+                                    mp = new MessagePiece(inPiece.UnescapeHtml(), MessagePieceType.Simple, SettingsHolder.FontSize, false, col);
                                 }
                                 AddPiece(mp);
                             }
@@ -433,7 +441,7 @@ namespace TCC.Data.Chat
                                 content
                                 .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                                 .Replace("</a>", "")
-                                .ReplaceHtmlEscapes(),
+                                .UnescapeHtml(),
                             MessagePieceType.Simple, SettingsHolder.FontSize, false, customColor
                             )
                         );
@@ -454,7 +462,7 @@ namespace TCC.Data.Chat
                             content
                             .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                             .Replace("</a>", "")
-                            .ReplaceHtmlEscapes(),
+                            .UnescapeHtml(),
                         MessagePieceType.Simple, SettingsHolder.FontSize, false
                         )
                     );
@@ -505,10 +513,10 @@ namespace TCC.Data.Chat
                     //add it as url
                     if (content.ToString() != "")
                     {
-                        AddPiece(new MessagePiece(content.ToString().ReplaceHtmlEscapes(), MessagePieceType.Simple, SettingsHolder.FontSize, false));
+                        AddPiece(new MessagePiece(content.ToString().UnescapeHtml(), MessagePieceType.Simple, SettingsHolder.FontSize, false));
                         content = new StringBuilder("");
                     }
-                    AddPiece(new MessagePiece(token.ReplaceHtmlEscapes(), MessagePieceType.Url, SettingsHolder.FontSize, false, "7289da"));
+                    AddPiece(new MessagePiece(token.UnescapeHtml(), MessagePieceType.Url, SettingsHolder.FontSize, false, "7289da"));
                 }
                 else
                 {
@@ -706,7 +714,7 @@ namespace TCC.Data.Chat
 //        var content = GetPieceContent(text);
 //        if (content != "")
 //        {
-//            AddPiece(new MessagePiece(StringUtils.ReplaceHtmlEscapes(content.Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", "")),
+//            AddPiece(new MessagePiece(StringUtils.UnescapeHtml(content.Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", "")),
 //                                        MessagePieceType.Simple, Channel, Settings.Settings.FontSize, false));
 //        }
 
@@ -784,7 +792,7 @@ namespace TCC.Data.Chat
 
 //    var text = a.Substring(textStart, textEnd - textStart);
 
-//    var result = new MessagePiece(StringUtils.ReplaceHtmlEscapes(text))
+//    var result = new MessagePiece(StringUtils.UnescapeHtml(text))
 //    {
 //        ItemId = id,
 //        ItemUid = uid,
@@ -804,7 +812,7 @@ namespace TCC.Data.Chat
 //    var textEnd = a.IndexOf('<', textStart);
 
 //    var text = a.Substring(textStart, textEnd - textStart);
-//    text = StringUtils.ReplaceHtmlEscapes(text);
+//    text = StringUtils.UnescapeHtml(text);
 
 //    var result = new MessagePiece(text)
 //    {
@@ -835,7 +843,7 @@ namespace TCC.Data.Chat
 //    //var textStart = a.IndexOf('>', a.IndexOf("#####", StringComparison.Ordinal)) + 1;
 //    //var textEnd = a.IndexOf('<', textStart);
 //    //var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
-//    //text = ReplaceHtmlEscapes(text);
+//    //text = UnescapeHtml(text);
 
 //    var world = SessionManager.DB.MapDatabase.Worlds[worldId];
 //    var guard = world.Guards[guardId];

@@ -182,7 +182,7 @@ namespace TCC.Data.Chat
         }
         private static MessagePiece ParseHtmlAchievement(HtmlNode node)
         {
-            return new MessagePiece(node.InnerText.ReplaceHtmlEscapes())
+            return new MessagePiece(node.InnerText.UnescapeHtml())
             {
                 Type = MessagePieceType.Achievement,
                 RawLink = node.GetAttributeValue("param", "")
@@ -202,7 +202,7 @@ namespace TCC.Data.Chat
             }
 
 
-            var result = new MessagePiece(node.InnerText.ReplaceHtmlEscapes())
+            var result = new MessagePiece(node.InnerText.UnescapeHtml())
             {
                 ItemId = id,
                 ItemUid = uid,
@@ -214,7 +214,7 @@ namespace TCC.Data.Chat
         }
         private static MessagePiece ParseHtmlQuest(HtmlNode node)
         {
-            return new MessagePiece(node.InnerText.ReplaceHtmlEscapes())
+            return new MessagePiece(node.InnerText.UnescapeHtml())
             {
                 Type = MessagePieceType.Quest,
                 RawLink = node.GetAttributeValue("param", "")
@@ -257,6 +257,19 @@ namespace TCC.Data.Chat
                 Location = new Location(worldId, guardId, sectionId, x, y),
                 RawLink = linkData
             };
+        }
+
+        public static MessagePiece BuildSysMsgRegion(string inPiece)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(inPiece);
+            var regId = dictionary["rgn"];
+            var msgText = regId;
+            if (SessionManager.DB.RegionsDatabase.Names.TryGetValue(Convert.ToUInt32(regId), out var regName))
+            {
+                msgText = regName;
+            }
+            return new MessagePiece(msgText) { Type = MessagePieceType.Simple };
+
         }
     }
 }
