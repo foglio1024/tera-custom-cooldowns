@@ -10,7 +10,7 @@
         private short _maxBaseRuns = 1;
         public uint Id { get; }
         public string Name { get; }
-
+        public int Cost { get; set; }
         public string ShortName
         {
             get => _shortName;

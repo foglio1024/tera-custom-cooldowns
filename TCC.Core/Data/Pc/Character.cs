@@ -35,6 +35,31 @@ namespace TCC.Data.Pc
         private string _serverName = "";
         private bool _hidden;
 
+        private uint _coins;
+        public uint Coins
+        {
+            get { return _coins; }
+            set
+            {
+                if (_coins == value) return;
+                _coins = value;
+                N();
+            }
+        }
+        private uint _maxCoins;
+        public uint MaxCoins
+        {
+            get { return _maxCoins; }
+            set
+            {
+                if (_maxCoins == value) return;
+                _maxCoins = value;
+                N();
+
+            }
+        }
+
+
         public uint Id { get; set; }
         public int Position { get; set; }
         public string Name
@@ -330,7 +355,7 @@ namespace TCC.Data.Pc
             MaxGuardianQuests = SessionManager.MaxGuardianQuests;
             foreach (var dg in SessionManager.DB.DungeonDatabase.Dungeons.Values)
             {
-                Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
+                Dungeons.Add(new DungeonCooldown(dg, Dispatcher, this));
             }
             VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
                 new[]

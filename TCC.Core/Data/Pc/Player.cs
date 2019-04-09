@@ -38,8 +38,8 @@ namespace TCC.Data.Pc
         private bool _iceBoost;
         private bool _arcaneBoost;
         private bool _isAlive;
-        private uint _coins;
 
+        private uint _coins;
         public uint Coins
         {
             get { return _coins; }
@@ -58,7 +58,6 @@ namespace TCC.Data.Pc
             }
         }
         private uint _maxCoins;
-
         public uint MaxCoins
         {
             get { return _maxCoins; }
@@ -70,6 +69,7 @@ namespace TCC.Data.Pc
 
             }
         }
+
         public string Name
         {
             get => _name;

@@ -53,7 +53,12 @@ namespace TCC.Data.Databases
                 var s = line.Split('\t');
                 var id = uint.Parse(s[0]);
                 var name = s[1];
-                Dungeons[id] = new Dungeon(id, name);
+                var dg = new Dungeon(id, name);
+                if (s.Length > 2) //TODO: remove check when all regions are updated
+                {
+                    dg.Cost = int.Parse(s[2]);
+                }
+                Dungeons[id] = dg;
             }
         }
         private void ParseDungeonDefs()
