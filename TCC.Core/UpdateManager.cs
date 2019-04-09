@@ -182,7 +182,7 @@ namespace TCC
                     {
                         File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
                     }
-                    catch (Exception e)
+                    catch 
                     {
                         Log.F("Failed to copy icon "+ newPath);
                     }

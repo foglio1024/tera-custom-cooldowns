@@ -259,7 +259,7 @@ namespace TCC
                     SettingsHolder.StatSentVersion = AppVersion;
                 }
             }
-            catch (Exception e)
+            catch 
             {
                 //TODO: write error?
             }
