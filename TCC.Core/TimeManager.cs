@@ -61,7 +61,8 @@ namespace TCC
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
                 WindowManager.Dashboard.VM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
-            if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
+            if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0)
+                CheckCloseEvents();
         }
 
         public void SetServerTimeZone(string lang)
