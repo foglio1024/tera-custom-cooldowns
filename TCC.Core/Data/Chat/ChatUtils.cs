@@ -78,7 +78,7 @@ namespace TCC.Data.Chat
                 foreach (var keyVal in pars)
                 {
                     var regex = new Regex(Regex.Escape($"{{{keyVal.Key}}}"));
-                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", 1);
+                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", int.MaxValue);
                     if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}}}", $"{{{keyVal.Value}}}");
                     if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}", $"{{{keyVal.Value}");
                     txt = result;
