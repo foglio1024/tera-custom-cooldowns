@@ -231,6 +231,7 @@ namespace TCC.ViewModels
 
         private static bool Pass(ChatMessage current, ChatMessage old)
         {
+            if (current.Author == "System") return true;
             if (current.Author == SessionManager.CurrentPlayer.Name) return true;
             if (old.RawMessage != current.RawMessage) return true;
 
