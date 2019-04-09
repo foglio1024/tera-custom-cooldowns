@@ -19,7 +19,7 @@ namespace TCC.Parsing.Messages
             Name = reader.ReadTeraString();
 
             reader.BaseStream.Position = msgOffset - 4;
-            Message = reader.ReadTeraString().ReplaceHtmlEscapes();
+            Message = reader.ReadTeraString().UnescapeHtml();
         }
 
         public uint Id { get; private set; }
