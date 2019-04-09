@@ -12,6 +12,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.TeraCommon;
+using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ProxyInterop
@@ -466,7 +467,7 @@ namespace TCC.ProxyInterop
         {
             var sb = new StringBuilder("lfg_register");
             sb.Append("&msg=");
-            sb.Append(msg);
+            sb.Append(msg.EscapeHtml());
             sb.Append("&raid=");
             sb.Append(raid.ToString().ToLower());
             SendData(sb.ToString());
