@@ -1617,7 +1617,7 @@
                     </Grid>
                 </TabItem>
                 <!-- P2W settings -->
-                <TabItem>
+                <TabItem Visibility="Collapsed">
                     <TabItem.Header>
                         <Grid Height="30">
                             <Grid.ColumnDefinitions>
