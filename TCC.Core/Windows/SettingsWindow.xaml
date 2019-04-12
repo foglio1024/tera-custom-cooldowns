@@ -1451,8 +1451,8 @@
                             <settings:FieldSetting SettingName="Webhook"
                                                    Value="{Binding WebhookUrlGuildBam, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Message" Value="{Binding WebhookMessageGuildBam, Mode=TwoWay}" />
-                            <Button Style="{StaticResource SettingsButton}" Click="TestWebhookGuildBam"
-                                    Content="Send test message" />
+                            <Button Style="{StaticResource SettingsButton}" Click="RegisterGuildBamWebhook"
+                                    Content="Confirm" />
                         </StackPanel>
                         <!-- Discord -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
@@ -1464,8 +1464,8 @@
                                                    Value="{Binding WebhookUrlFieldBoss, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Spawn message" Value="{Binding WebhookMessageFieldBossSpawn, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Death message" Value="{Binding WebhookMessageFieldBossDie, Mode=TwoWay}" />
-                            <Button Style="{StaticResource SettingsButton}" Click="TestWebhookFieldBoss"
-                                    Content="Send test message" />
+                            <Button Style="{StaticResource SettingsButton}" Click="RegisterFieldBossWebhook"
+                                    Content="Confirm" />
                         </StackPanel>
 
 

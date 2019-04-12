@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Interop;
 using TCC.Settings;
 using TCC.ViewModels;
 
@@ -170,7 +171,17 @@ namespace TCC.Windows
             SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_FIELDBOSS_DIE_GUILD", out var dieSysMsg);
             var dieSrvMsg = "@4158\vguildName\vWish\vuserName\v쿤\vnpcname\v@creature:26#5001";
             var cmd = new ChatMessage(dieSrvMsg, dieSysMsg, ChatChannel.TCC);
-            TimeManager.Instance.ExecuteFieldBossDieWebhook("Boss", cmd.RawMessage,  testMessage: true);
+            //TimeManager.Instance.ExecuteFieldBossDieWebhook("Boss", cmd.RawMessage,  testMessage: true);
+        }
+
+        private void RegisterGuildBamWebhook(object sender, RoutedEventArgs e)
+        {
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, true);
+        }
+
+        private void RegisterFieldBossWebhook(object sender, RoutedEventArgs e)
+        {
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, true);
         }
     }
 }
