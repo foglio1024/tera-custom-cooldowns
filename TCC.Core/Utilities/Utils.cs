@@ -282,6 +282,10 @@ namespace TCC
 
         }
 
+        public static string GenerateHash(string input)
+        {
+            return SHA256.Create().ComputeHash(input.ToByteArray()).ToStringEx();
+        }
         public static bool IsFileLocked(string filename, FileAccess fileAccess)
         {
             // Try to open the file with the indicated access.
