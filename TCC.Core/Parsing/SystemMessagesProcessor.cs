@@ -209,7 +209,24 @@ namespace TCC.Parsing
             var templateId = uint.Parse(npcName.Split('#')[1]);
             SessionManager.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
             return m.Name;
-
+        }
+        private static string GetFieldBossKillerName(string srvMsg)
+        {
+            // only for 'SMT_FIELDBOSS_*'
+            var ret = "";
+            var srvMsgSplit = srvMsg.Split('\v').ToList();
+            var idx = srvMsgSplit.IndexOf("userName") + 1;
+            if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
+            return ret;
+        }
+        private static string GetFieldBossKillerGuild(string srvMsg)
+        {
+            // only for 'SMT_FIELDBOSS_*'
+            var ret = "";
+            var srvMsgSplit = srvMsg.Split('\v').ToList();
+            var idx = srvMsgSplit.IndexOf("guildName") + 1;
+            if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
+            return ret;
         }
         //by HQ 20181224
         private static void HandleFieldBossDie(string srvMsg, SystemMessage sysMsg)
@@ -229,8 +246,10 @@ namespace TCC.Parsing
             //npcname@creature:26#5001
 
             var monsterName = GetFieldBossName(srvMsg);
-
-            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, msg.RawMessage);
+            var userName = GetFieldBossKillerName(srvMsg);
+            var guildName = GetFieldBossKillerGuild(srvMsg);
+            if (string.IsNullOrEmpty(guildName)) guildName = "-no guild-";
+            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, msg.RawMessage, userName, guildName);
 
 
 

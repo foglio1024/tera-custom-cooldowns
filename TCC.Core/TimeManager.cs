@@ -285,11 +285,13 @@ namespace TCC
             if (content == "") content = defaultMessage;
             SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
-        public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, bool testMessage = false)
+        public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, string userName, string guildName ,bool testMessage = false)
         {
             var content = SettingsHolder.WebhookMessageFieldBossDie;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
             if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+            if (content.Contains("{userName}")) content = content.Replace("{userName}", userName);
+            if (content.Contains("{guildName}")) content = content.Replace("{guildName}", guildName);
             if (content == "") content = defaultMessage;
             SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
