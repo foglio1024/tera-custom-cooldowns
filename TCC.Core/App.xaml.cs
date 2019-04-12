@@ -1,5 +1,6 @@
 ﻿//#define FIRESTORE
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,12 +13,12 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Newtonsoft.Json.Linq;
 using TCC.Data;
+using TCC.Interop;
 using TCC.Parsing;
-using TCC.ProxyInterop;
 using TCC.Settings;
 using TCC.Sniffing;
+using TCC.Test;
 using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -40,6 +41,7 @@ namespace TCC
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+            
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
@@ -116,7 +118,7 @@ namespace TCC
             if (ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
             sb.AppendLine($"TargetSite: {ex.TargetSite}");
             File.AppendAllText(BasePath + "/crash.log", sb.ToString());
-#if DEBUG
+#if !DEBUG
             try
             {
                 var t = new Thread(() => UploadCrashDump(e));
@@ -142,6 +144,14 @@ namespace TCC
                 /* ignored*/
             }
 
+            try
+            {
+                Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
+                Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
+            }
+            catch 
+            {
+            }
             Environment.Exit(-1);
         }
 
@@ -259,7 +269,7 @@ namespace TCC
                     SettingsHolder.StatSentVersion = AppVersion;
                 }
             }
-            catch 
+            catch
             {
                 //TODO: write error?
             }

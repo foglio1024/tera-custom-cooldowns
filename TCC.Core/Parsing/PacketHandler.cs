@@ -5,6 +5,7 @@ using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
+using TCC.Interop;
 using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Sniffing;
@@ -124,7 +125,7 @@ namespace TCC.Parsing
             WindowManager.GroupWindow.VM.SetAggroCircle(p);
         }
 
-        public static void HandleCharList(S_GET_USER_LIST p)
+        public static void HandleGetUserList(S_GET_USER_LIST p)
         {
             /*- Moved from HandleReturnToLobby -*/
             SessionManager.Logged = false;
@@ -133,8 +134,10 @@ namespace TCC.Parsing
             WindowManager.GroupWindow.VM.ClearAll();
             WindowManager.Dashboard.VM.UpdateBuffs();
             SessionManager.CurrentPlayer.ClearAbnormalities();
-
             /*---------------------------------*/
+
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
 
             foreach (var item in p.CharacterList)
             {
@@ -161,6 +164,11 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            Log.All("Logging in");
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, true);
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, true);
+            Log.All("Webhooks setup done.");
+
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
@@ -194,6 +202,8 @@ namespace TCC.Parsing
             SessionManager.GuildMembersNames.Clear();
 
             WindowManager.LfgListWindow.VM.EnqueueListRequest();
+
+
             //if (Settings.Settings.LastRegion == "NA")
             //    Task.Delay(20000).ContinueWith(t => ChatWindowManager.Instance.AddTccMessage(App.ThankYou_mEME));
 
@@ -693,7 +703,7 @@ namespace TCC.Parsing
                 WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
-            if (!ProxyInterop.Proxy.IsConnected) return;
+            if (!Proxy.IsConnected) return;
             WindowManager.FloatingButton.OpenPlayerMenu();
         }
 
@@ -775,10 +785,10 @@ namespace TCC.Parsing
             }));
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (!ProxyInterop.Proxy.IsConnected || !SettingsHolder.LfgEnabled || !SessionManager.InGameUiOn) return;
-            ProxyInterop.Proxy.RequestCandidates();
+            if (!Proxy.IsConnected || !SettingsHolder.LfgEnabled || !SessionManager.InGameUiOn) return;
+            Proxy.RequestCandidates();
             if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
-            ProxyInterop.Proxy.RequestLfgList();
+            Proxy.RequestLfgList();
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
         {
@@ -1062,9 +1072,9 @@ namespace TCC.Parsing
             SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
             {
-                ProxyInterop.Proxy.SendCommand($"fps mode 3");
+                Proxy.SendCommand($"fps mode 3");
             }
         }
 
@@ -1074,9 +1084,9 @@ namespace TCC.Parsing
             SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
             {
-                ProxyInterop.Proxy.SendCommand($"fps mode 1");
+                Proxy.SendCommand($"fps mode 1");
             }
         }
 
@@ -1166,7 +1176,7 @@ namespace TCC.Parsing
             //else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
             BasicTeraData.Instance.Servers.Language = p.Language;
-            ProxyInterop.Proxy.ConnectToProxy();
+            Proxy.ConnectToProxy();
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion / 100d}", NotificationType.Normal); //by HQ 20190209
         }
 

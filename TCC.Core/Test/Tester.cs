@@ -235,7 +235,7 @@ namespace TCC.Test
         public static async void FireWebhook(string username)
         {
             var canFire = true;
-            var wh = "https://discordapp.com/api/webhooks/464514643205947392/35xc3vXVNATrFATbCZFqhptbtHOnlfDIYdhBZ8H807Lohmv3MNRpedsDE8b0FPZkqtut";
+            var wh = "";
             var whHash = Utils.GenerateHash(wh);
             var req = new JObject
             {
@@ -287,8 +287,7 @@ namespace TCC.Test
 
         public async static void RegisterWebhook(string username)
         {
-            var wh =
-                "https://discordapp.com/api/webhooks/464514643205947392/35xc3vXVNATrFATbCZFqhptbtHOnlfDIYdhBZ8H807Lohmv3MNRpedsDE8b0FPZkqtut";
+            var wh = "";
             var whHash = Utils.GenerateHash(wh);
             var r = new Random(DateTime.Now.Millisecond);
             var req = new JObject

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
 using TCC.Data;
+using TCC.Interop;
+using TCC.Settings;
 using TCC.Sniffing;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game;
@@ -20,7 +22,7 @@ namespace TCC.Parsing
             TeraSniffer.Instance.EndConnection += OnEndConnection;
 
             TeraSniffer.Instance.MessageReceived += Packets.Enqueue;
-            ProxyInterop.Proxy.ProxyPacketReceived += Packets.Enqueue;
+            Proxy.ProxyPacketReceived += Packets.Enqueue;
 
             Factory = new MessageFactory();
             if (AnalysisThread == null)
@@ -58,6 +60,9 @@ namespace TCC.Parsing
         }
         private static void OnEndConnection()
         {
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
+            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
+
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
             WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
 
@@ -68,7 +73,7 @@ namespace TCC.Parsing
             EntityManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            ProxyInterop.Proxy.CloseConnection();
+            Proxy.CloseConnection();
             SessionManager.Logged = false;
             SessionManager.LoadingScreen = true;
         }
