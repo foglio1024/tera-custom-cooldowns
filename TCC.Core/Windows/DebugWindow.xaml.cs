@@ -3,10 +3,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using TCC.Annotations;
 using TCC.Data;
+using TCC.Test;
 using TCC.ViewModels;
+using Button = System.Windows.Controls.Button;
 
 namespace TCC.Windows
 {
@@ -110,7 +112,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SorcererLayoutVM) WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
+            ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);
@@ -133,13 +135,30 @@ namespace TCC.Windows
 
         }
 
+        private void RegisterWebhook(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 80; i++)
+            {
+                var i1 = i;
+                Dispatcher.BeginInvoke(new Action(() => Tester.RegisterWebhook("user" + i1)));
+            }
+        }
+
+        private void FireWebhook(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 80; i++)
+            {
+                var i1 = i;
+                Dispatcher.BeginInvoke(new Action(() => Tester.FireWebhook("user" + i1)));
+            }
+        }
         private void DungeonTest(object sender, RoutedEventArgs e)
         {
             //i = 0;
             //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
 
-            WindowManager.Dashboard.VM.Characters[0].VanguardDailiesDone = App.Random.Next(0,16);
-            WindowManager.Dashboard.VM.Characters[0].VanguardWeekliesDone= App.Random.Next(0,16);
+            WindowManager.Dashboard.VM.Characters[0].VanguardDailiesDone = App.Random.Next(0, 16);
+            WindowManager.Dashboard.VM.Characters[0].VanguardWeekliesDone = App.Random.Next(0, 16);
         }
     }
 }

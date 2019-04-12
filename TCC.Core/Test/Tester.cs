@@ -231,5 +231,89 @@ namespace TCC.Test
                 client.UploadString(url, "POST", msg.ToString());
             }
         }
+
+        public static async void FireWebhook(string username)
+        {
+            var canFire = true;
+            var wh = "https://discordapp.com/api/webhooks/464514643205947392/35xc3vXVNATrFATbCZFqhptbtHOnlfDIYdhBZ8H807Lohmv3MNRpedsDE8b0FPZkqtut";
+            var whHash = Utils.GenerateHash(wh);
+            var req = new JObject
+            {
+                { "webhook" , whHash},
+                {"user", username }
+
+            };
+            using (var c = Utils.GetDefaultWebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Encoding = Encoding.UTF8;
+                try
+                {
+
+                    var res = await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook"),
+                                                Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
+
+                    var jRes = JObject.Parse(res);
+                    canFire = jRes["canFire"].Value<bool>();
+                }
+                catch (WebException e)
+                {
+                    Console.WriteLine($"{username} failed");
+                }
+
+                if (!canFire)
+                {
+                    Console.WriteLine($"- Webhook refused for {username}");
+                    return;
+                }
+                Console.WriteLine($"+ Webhook fired for {username}");
+                var msg = new JObject
+                {
+                    {"content", $"Test from {username}"},
+                    {"username", "TCC" },
+                    {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
+                };
+                using (var client = Utils.GetDefaultWebClient())
+                {
+                    client.Encoding = Encoding.UTF8;
+                    client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    client.UploadString(wh, "POST", msg.ToString());
+                }
+
+            }
+
+        }
+
+        public async static void RegisterWebhook(string username)
+        {
+            var wh =
+                "https://discordapp.com/api/webhooks/464514643205947392/35xc3vXVNATrFATbCZFqhptbtHOnlfDIYdhBZ8H807Lohmv3MNRpedsDE8b0FPZkqtut";
+            var whHash = Utils.GenerateHash(wh);
+            var r = new Random(DateTime.Now.Millisecond);
+            var req = new JObject
+            {
+                {"webhook", whHash},
+                {"user", username},
+                {"online", r.NextDouble() >= 0.9 }
+            };
+            using (var c = Utils.GetDefaultWebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Encoding = Encoding.UTF8;
+                try
+                {
+
+                    var res = await c.UploadStringTaskAsync(
+                        new Uri("http://localhost:5001/tcc-global-events/us-central1/register_webhook"),
+                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
+                }
+                catch
+                {
+                    Console.WriteLine($"Failed to register webhook for {username}");
+                }
+            }
+        }
     }
 }
