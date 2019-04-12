@@ -100,6 +100,8 @@
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
     <Compile Include="Data\Databases\DatabaseBase.cs" />
+    <Compile Include="Interop\Discord.cs" />
+    <Compile Include="Interop\Firebase.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_EP_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_EXP.cs" />
     <Compile Include="Test\ThreadInfo.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Utilities\Extensions\ByteExtensions.cs" />
     <Compile Include="Utilities\Extensions\ButtonExtensions.cs" />
     <Compile Include="Utilities\Extensions\ColorExtensions.cs" />
+    <Compile Include="Utilities\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Utilities\Extensions\DispatcherExtensions.cs" />
     <Compile Include="Utilities\Extensions\DispatcherTimerExtensions.cs" />
     <Compile Include="Utilities\Extensions\ItemsControlExtensions.cs" />
@@ -435,7 +438,7 @@
     <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
-    <Compile Include="ProxyInterop\ProxyPacketSplitter.cs" />
+    <Compile Include="Interop\ProxyPacketSplitter.cs" />
     <Compile Include="Settings\SettingsReader.cs" />
     <Compile Include="Settings\SettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
@@ -539,7 +542,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
-    <Compile Include="ProxyInterop\Proxy.cs" />
+    <Compile Include="Interop\Proxy.cs" />
     <Compile Include="Settings\SettingsHolder.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />

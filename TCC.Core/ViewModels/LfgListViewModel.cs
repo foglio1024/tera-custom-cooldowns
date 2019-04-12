@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data;
-using TCC.ProxyInterop;
+using TCC.Interop;
 
 namespace TCC.ViewModels
 {

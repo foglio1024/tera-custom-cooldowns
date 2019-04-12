@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 
-namespace TCC.ProxyInterop
+namespace TCC.Interop
 {
     public class ProxyPacketSplitter
     {

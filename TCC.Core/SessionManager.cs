@@ -230,8 +230,6 @@ namespace TCC
             {
                 ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
             }
-
-
         }
     }
 }

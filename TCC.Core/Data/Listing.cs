@@ -3,6 +3,7 @@ using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Pc;
+using TCC.Interop;
 
 namespace TCC.Data
 {
@@ -185,7 +186,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            ProxyInterop.Proxy.ApplyToLfg(_listing.LeaderId);
+            Proxy.ApplyToLfg(_listing.LeaderId);
             _listing.CanApply = false;
             _t.Start();
         }
@@ -207,7 +208,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            ProxyInterop.Proxy.RequestCandidates();
+            Proxy.RequestCandidates();
         }
     }
 

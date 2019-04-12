@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Interop;
 using TCC.Windows;
 
 namespace TCC
@@ -41,12 +42,12 @@ namespace TCC
         {
             if (e.Key == Settings.SettingsHolder.LfgHotkey.Key && e.Modifier == Settings.SettingsHolder.LfgHotkey.Modifier)
             {
-                if (!ProxyInterop.Proxy.IsConnected) return;
+                if (!Proxy.IsConnected) return;
 
                 if (!WindowManager.LfgListWindow.IsVisible)
                 {
                     WindowManager.LfgListWindow.VM.StayClosed = false;
-                    ProxyInterop.Proxy.RequestLfgList();
+                    Proxy.RequestLfgList();
                 }
                 else WindowManager.LfgListWindow.CloseWindow();
             }
@@ -73,10 +74,10 @@ namespace TCC
                 if (!SessionManager.Logged
                   || SessionManager.LoadingScreen
                   || SessionManager.Combat
-                  || !ProxyInterop.Proxy.IsConnected) return;
+                  || !Proxy.IsConnected) return;
 
                 WindowManager.LfgListWindow.VM.ForceStopPublicize();
-                ProxyInterop.Proxy.ReturnToLobby();
+                Proxy.ReturnToLobby();
             }
 
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)

@@ -10,6 +10,7 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
+using TCC.Interop;
 using TCC.Parsing;
 using TCC.Parsing.Messages;
 
@@ -45,8 +46,8 @@ namespace TCC.ViewModels
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
         public bool ShowDetails => Formed && Settings.SettingsHolder.ShowGroupWindowDetails;
-        public bool ShowLeaveButton => Formed && ProxyInterop.Proxy.IsConnected;
-        public bool ShowLeaderButtons => Formed && ProxyInterop.Proxy.IsConnected && AmILeader;
+        public bool ShowLeaveButton => Formed && Proxy.IsConnected;
+        public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel()
@@ -272,7 +273,7 @@ namespace TCC.ViewModels
             }
             SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
-            if (ProxyInterop.Proxy.IsConnected) ProxyInterop.Proxy.ForceSystemMessage(msg, opcode);
+            if (Proxy.IsConnected) Proxy.ForceSystemMessage(msg, opcode);
         }
         private void SendLeaveMessage(string name)
         {

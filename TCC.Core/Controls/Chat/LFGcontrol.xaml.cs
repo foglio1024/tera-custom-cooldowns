@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data.Chat;
+using TCC.Interop;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
@@ -39,12 +40,12 @@ namespace TCC.Controls.Chat
         {
             if (TCC.Settings.SettingsHolder.LfgEnabled)
             {
-                ProxyInterop.Proxy.RequestLfgList();
+                Proxy.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 
                 WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
                     );
             }
-            ProxyInterop.Proxy.RequestPartyInfo(_dc.Id);
+            Proxy.RequestPartyInfo(_dc.Id);
             ChatWindowManager.Instance.LastClickedLfg = _dc;
         }
 

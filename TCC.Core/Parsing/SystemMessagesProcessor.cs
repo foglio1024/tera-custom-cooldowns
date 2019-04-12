@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Interop;
 using TCC.Settings;
 using TCC.ViewModels;
 namespace TCC.Parsing
@@ -86,7 +87,7 @@ namespace TCC.Parsing
             var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
             var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            if (ProxyInterop.Proxy.IsConnected) ProxyInterop.Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
+            if (Proxy.IsConnected) Proxy.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)

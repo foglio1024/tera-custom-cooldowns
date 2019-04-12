@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Interop;
 
 namespace TCC.ViewModels
 {
@@ -88,7 +89,7 @@ namespace TCC.ViewModels
                 return f != null;
             }
         }
-        public bool ShowFpsUtils => ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable;
+        public bool ShowFpsUtils => Proxy.IsConnected && Proxy.IsFpsUtilsAvailable;
         public TooltipInfo(string n, string i, int l)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;

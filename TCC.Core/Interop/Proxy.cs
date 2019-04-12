@@ -15,7 +15,7 @@ using TCC.TeraCommon;
 using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 
-namespace TCC.ProxyInterop
+namespace TCC.Interop
 {
     public static class Proxy
     {

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data.Pc;
+using TCC.Interop;
 using TCC.Settings;
 using TCC.ViewModels;
 
@@ -86,7 +87,7 @@ namespace TCC.Controls.Group
         protected void ShowUserMenu(object sender, MouseButtonEventArgs e)
         {
             var dc = (User)DataContext;
-            ProxyInterop.Proxy.AskInteractive(dc.ServerId, dc.Name);
+            Proxy.AskInteractive(dc.ServerId, dc.Name);
         }
         protected void ToolTip_OnOpened(object sender, RoutedEventArgs e)
         {

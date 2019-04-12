@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
+using TCC.Interop;
 
 
 namespace TCC.Controls.Chat
@@ -19,16 +20,16 @@ namespace TCC.Controls.Chat
             if (((LfgMessage)DataContext).LinkedListing != null)
             {
                 WindowManager.LfgListWindow.VM.LastClicked = ((LfgMessage)DataContext).LinkedListing;
-                ProxyInterop.Proxy.RequestLfgList();
+                Proxy.RequestLfgList();
             }
-            ProxyInterop.Proxy.RequestPartyInfo(((LfgMessage)DataContext).AuthorId);
+            Proxy.RequestPartyInfo(((LfgMessage)DataContext).AuthorId);
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
 
             var name = ((sender as FrameworkElement).DataContext as User).Name;
-            ProxyInterop.Proxy.AskInteractive(SessionManager.Server.ServerId, name);
+            Proxy.AskInteractive(SessionManager.Server.ServerId, name);
 
         }
     }

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using TCC.Interop;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
@@ -44,19 +45,19 @@ namespace TCC.Controls.Chat
 
         private void InspectClick(object sender, RoutedEventArgs e)
         {
-            ProxyInterop.Proxy.Inspect(WindowManager.FloatingButton.TooltipInfo.Name);
+            Proxy.Inspect(WindowManager.FloatingButton.TooltipInfo.Name);
             WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void PartyInviteClick(object sender, RoutedEventArgs e)
         {
-            ProxyInterop.Proxy.PartyInvite(WindowManager.FloatingButton.TooltipInfo.Name);
+            Proxy.PartyInvite(WindowManager.FloatingButton.TooltipInfo.Name);
             WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
         private void GuildInviteClick(object sender, RoutedEventArgs e)
         {
-            ProxyInterop.Proxy.GuildInvite(WindowManager.FloatingButton.TooltipInfo.Name);
+            Proxy.GuildInvite(WindowManager.FloatingButton.TooltipInfo.Name);
             WindowManager.FloatingButton.ClosePlayerMenu();
         }
 
@@ -68,7 +69,7 @@ namespace TCC.Controls.Chat
             {
                 if (_unfriending)
                 {
-                    ProxyInterop.Proxy.UnfriendUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                    Proxy.UnfriendUser(WindowManager.FloatingButton.TooltipInfo.Name);
                     WindowManager.FloatingButton.ClosePlayerMenu();
                     UnfriendRipple.Opacity = 0;
                     _unfriending = false;
@@ -92,7 +93,7 @@ namespace TCC.Controls.Chat
             {
                 if (_blocking)
                 {
-                    ProxyInterop.Proxy.BlockUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                    Proxy.BlockUser(WindowManager.FloatingButton.TooltipInfo.Name);
                     ChatWindowManager.Instance.BlockedUsers.Add(WindowManager.FloatingButton.TooltipInfo.Name);
                     try
                     {
@@ -117,7 +118,7 @@ namespace TCC.Controls.Chat
             }
             else
             {
-                ProxyInterop.Proxy.UnblockUser(WindowManager.FloatingButton.TooltipInfo.Name);
+                Proxy.UnblockUser(WindowManager.FloatingButton.TooltipInfo.Name);
                 ChatWindowManager.Instance.BlockedUsers.Remove(WindowManager.FloatingButton.TooltipInfo.Name);
                 WindowManager.FloatingButton.ClosePlayerMenu();
 
@@ -141,7 +142,7 @@ namespace TCC.Controls.Chat
 
             if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
-                ProxyInterop.Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
+                Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
             }
             WindowManager.FloatingButton.ClosePlayerMenu();
@@ -151,7 +152,7 @@ namespace TCC.Controls.Chat
         {
             if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
-                ProxyInterop.Proxy.DelegateLeader(u.ServerId, u.PlayerId);
+                Proxy.DelegateLeader(u.ServerId, u.PlayerId);
             }
             WindowManager.FloatingButton.ClosePlayerMenu();
         }
@@ -167,7 +168,7 @@ namespace TCC.Controls.Chat
                 _kicking = false;
                 if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
                 {
-                    ProxyInterop.Proxy.KickMember(u.ServerId, u.PlayerId);
+                    Proxy.KickMember(u.ServerId, u.PlayerId);
                 }
             }
             else
@@ -212,17 +213,17 @@ namespace TCC.Controls.Chat
 
         private void FpsUtilsHideClick(object sender, RoutedEventArgs e)
         {
-            if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable)
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable)
             {
-                ProxyInterop.Proxy.SendCommand($"fps hide {WindowManager.FloatingButton.TooltipInfo.Name}");
+                Proxy.SendCommand($"fps hide {WindowManager.FloatingButton.TooltipInfo.Name}");
             }
         }
 
         private void FpsUtilsShowClick(object sender, RoutedEventArgs e)
         {
-            if (ProxyInterop.Proxy.IsConnected && ProxyInterop.Proxy.IsFpsUtilsAvailable)
+            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable)
             {
-                ProxyInterop.Proxy.SendCommand($"fps show {WindowManager.FloatingButton.TooltipInfo.Name}");
+                Proxy.SendCommand($"fps show {WindowManager.FloatingButton.TooltipInfo.Name}");
             }
         }
     }

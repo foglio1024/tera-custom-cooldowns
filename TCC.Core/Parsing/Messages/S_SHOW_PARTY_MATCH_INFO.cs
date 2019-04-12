@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TCC.Data;
+using TCC.Interop;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 
@@ -58,7 +59,7 @@ namespace TCC.Parsing.Messages
 
             }
 
-            if (page < pages) if (Settings.SettingsHolder.LfgEnabled && ProxyInterop.Proxy.IsConnected) ProxyInterop.Proxy.RequestNextLfgPage(page + 1);
+            if (page < pages) if (Settings.SettingsHolder.LfgEnabled && Proxy.IsConnected) Proxy.RequestNextLfgPage(page + 1);
             if (page == pages) IsLast = true;
         }
     }
