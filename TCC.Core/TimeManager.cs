@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
+using TCC.Interop;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
@@ -296,29 +297,30 @@ namespace TCC
             SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
 
-        private void SendWebhook(string content, string url, bool test = false)
+        private static void SendWebhook(string content, string url, bool test = false)
         {
-            var msg = new JObject
-            {
-                {"content", $"{content}{(test ? " (test message)" : "")}"},
-                {"username", "TCC" },
-                {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
-            };
+            Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}");
+            //var msg = new JObject
+            //{
+            //    {"content", $"{content}{(test ? " (test message)" : "")}"},
+            //    {"username", "TCC" },
+            //    {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
+            //};
 
-            try
-            {
-                using (var client = Utils.GetDefaultWebClient())
-                {
-                    client.Encoding = Encoding.UTF8;
-                    client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    client.UploadString(url, "POST", msg.ToString());
-                }
-            }
-            catch (Exception)
-            {
-                WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to execute Discord webhook.", NotificationType.Error);
-                ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
-            }
+            //try
+            //{
+            //    using (var client = Utils.GetDefaultWebClient())
+            //    {
+            //        client.Encoding = Encoding.UTF8;
+            //        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            //        client.UploadString(url, "POST", msg.ToString());
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to execute Discord webhook.", NotificationType.Error);
+            //    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
+            //}
         }
     }
 }
