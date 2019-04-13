@@ -454,10 +454,15 @@ namespace TCC.Data.Pc
         {
             Dispatcher.Invoke(() =>
             {
-                Shields[ab.Id] = ab.ShieldSize;
+                Shields[ab.Id] = GetShieldSize(ab);
                 RefreshMaxShieldAmount();
                 RefreshShieldAmount();
             });
+
+            uint GetShieldSize(Abnormality a)
+            {
+                return Class != Class.Sorcerer ? a.ShieldSize : Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize);
+            }
         }
 
         private void RefreshMaxShieldAmount()

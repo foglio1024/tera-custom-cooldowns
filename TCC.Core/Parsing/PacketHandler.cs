@@ -1187,13 +1187,34 @@ namespace TCC.Parsing
             msg += $"<font>{(p.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.GainedRestedExp:N0}" : "")} </font>";
             msg += $"<font>(</font>";
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
-            msg += $"{(p.GainedTotalExp) / (double)(p.NextLevelExp):P}</font>";
+            msg += $"{(p.GainedTotalExp) / (double)(p.NextLevelExp):P3}</font>";
             msg += $"<font>) XP.</font>";
             msg += $"<font> Total: </font>";
-            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.LevelExp / (double)(p.NextLevelExp):P}</font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.LevelExp / (double)(p.NextLevelExp):P3}</font>";
             msg += $"<font>.</font>";
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
+        }
+
+        public static void HandleLoadEpInfo(S_LOAD_EP_INFO p)
+        {
+            if (p.Perks.TryGetValue(851010, out var level))
+            {
+                EpDataProvider.SetManaBarrierPerkLevel(level);
+            }
+        }
+
+        public static void HandleLearnEpPerk(S_LEARN_EP_PERK p)
+        {
+            if (p.Perks.TryGetValue(851010, out var level))
+            {
+                EpDataProvider.SetManaBarrierPerkLevel(level);
+            }
+        }
+
+        public static void HandleResetEpPerk(S_RESET_EP_PERK p)
+        {
+            if(p.Success) EpDataProvider.SetManaBarrierPerkLevel(0);
         }
     }
 
