@@ -178,7 +178,6 @@ namespace TCC.Settings
         {
             get
             {
-                Log.CW(_statSentVersion);
                 return _statSentVersion; 
 
             }
