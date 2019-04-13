@@ -227,8 +227,11 @@ namespace TCC.Windows
         {
             try
             {
-                if (WindowSettings.Enabled) Show();
-                else Hide();
+                Dispatcher.Invoke(() =>
+                {
+                    if (WindowSettings.Enabled) Show();
+                    else Hide();
+                });
             }
             catch { }
         }
