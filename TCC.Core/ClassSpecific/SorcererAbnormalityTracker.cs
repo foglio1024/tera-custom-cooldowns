@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System.Runtime.Serialization.Formatters;
+using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
 using TCC.Utilities.Extensions;
@@ -9,6 +10,8 @@ namespace TCC.ClassSpecific
     public class SorcererAbnormalityTracker : ClassAbnormalityTracker
     {
         private const int ManaBoostId = 500150;
+        private const int ManaBoost2Id = 501602;
+        private const int ManaBoost2MId = 503061;
         private const int FlameFusionIncreaseId = 502070;   // Equipoise-Flame
         private const int FrostFusionIncreaseId = 502071;   // Equipoise-Frost
         private const int ArcaneFusionIncreaseId = 502072;  // Equipoise-Arcane
@@ -21,34 +24,33 @@ namespace TCC.ClassSpecific
         //private static Skill _fireArcaneFusion;
         //private static Skill _iceArcaneFusion;
 
+        private static bool IsManaBoost(uint id)
+        {
+            return id == ManaBoostId || id == ManaBoost2Id || id == ManaBoost2MId;
+        }
+
         public SorcererAbnormalityTracker()
         {
             if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
             {
                 _fireIceFusion = new Skill(ab, Class.Sorcerer);
             }
-
-            //var fireArcaneFusionAb = SessionManager.DB.AbnormalityDatabase.Abnormalities[FireArcaneFusionId];
-            //var iceArcaneFusionAb = SessionManager.DB.AbnormalityDatabase.Abnormalities[IceArcaneFusionId];
-
-            //_fireArcaneFusion = new Skill(fireArcaneFusionAb, Class.Sorcerer);
-            //_iceArcaneFusion = new Skill(iceArcaneFusionAb, Class.Sorcerer);
         }
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
         {
-            if (ManaBoostId != p.AbnormalityId) return;
+            if (IsManaBoost(p.AbnormalityId)) return;
             ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
         {
-            if (ManaBoostId != p.AbnormalityId) return;
+            if (IsManaBoost(p.AbnormalityId)) return;
             ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
         {
-            if (ManaBoostId != p.AbnormalityId) return;
+            if (IsManaBoost(p.AbnormalityId)) return;
             ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
         }
 
