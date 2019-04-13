@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization.Formatters;
+﻿
+using System.Runtime.Serialization.Formatters;
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
@@ -38,19 +39,19 @@ namespace TCC.ClassSpecific
         }
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
         {
-            if (IsManaBoost(p.AbnormalityId)) return;
+            if (!IsManaBoost(p.AbnormalityId)) return;
             ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
         {
-            if (IsManaBoost(p.AbnormalityId)) return;
+            if (!IsManaBoost(p.AbnormalityId)) return;
             ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
         {
-            if (IsManaBoost(p.AbnormalityId)) return;
+            if (!IsManaBoost(p.AbnormalityId)) return;
             ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
         }
 
