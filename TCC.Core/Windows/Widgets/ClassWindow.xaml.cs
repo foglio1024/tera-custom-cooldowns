@@ -1,4 +1,5 @@
-﻿using TCC.ViewModels;
+﻿using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {
@@ -31,8 +32,11 @@ namespace TCC.Windows.Widgets
         private new void OnEnabledChanged() 
         {
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
+            {
+                WindowManager.ClassWindow.VM.CurrentClass = Class.None;
                 WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
-            base.OnEnabledChanged();
+            }
+            //base.OnEnabledChanged();
         }
 
         

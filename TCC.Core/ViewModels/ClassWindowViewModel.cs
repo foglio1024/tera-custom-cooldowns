@@ -21,7 +21,7 @@ namespace TCC.ViewModels
             get => _currentClass;
             set
             {
-                if (_currentClass == value) return;
+                //if (_currentClass == value) return;
                 _currentClass = value;
                 Dispatcher.Invoke(() =>
                 {
