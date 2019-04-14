@@ -33,7 +33,6 @@ namespace TCC.Windows.Widgets
         {
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
             {
-                WindowManager.ClassWindow.VM.CurrentClass = Class.None;
                 WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
             }
             //base.OnEnabledChanged();
