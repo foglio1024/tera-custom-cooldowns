@@ -88,6 +88,12 @@ namespace TCC.Parsing
                 return true;
             }
             catch { /* ignored*/ }
+            try
+            {
+                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + version+ ".map", filename);
+                return true;
+            }
+            catch { /* ignored*/ }
             return false;
         }
 
