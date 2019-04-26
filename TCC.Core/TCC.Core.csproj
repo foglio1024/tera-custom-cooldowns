@@ -38,7 +38,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>tcc-logo.ico</ApplicationIcon>
+    <ApplicationIcon>resources\tcc-logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -103,6 +103,13 @@
     <Compile Include="EpDataProvider.cs" />
     <Compile Include="Interop\Discord.cs" />
     <Compile Include="Interop\Firebase.cs" />
+    <Compile Include="Interop\JsonRPC\Request.cs" />
+    <Compile Include="Interop\JsonRPC\Response.cs" />
+    <Compile Include="Interop\Proxy\Client.cs" />
+    <Compile Include="Interop\Proxy\ProxyInterface.cs" />
+    <Compile Include="Interop\Proxy\ProxyMessageHandler.cs" />
+    <Compile Include="Interop\Proxy\Server.cs" />
+    <Compile Include="Interop\Proxy\TccStubInterface.cs" />
     <Compile Include="Parsing\Messages\S_LEARN_EP_PERK.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_EP_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_EXP.cs" />
@@ -545,7 +552,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
-    <Compile Include="Interop\Proxy.cs" />
+    <Compile Include="Interop\ProxyOld.cs" />
     <Compile Include="Settings\SettingsHolder.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
@@ -1538,6 +1545,11 @@
     <Resource Include="resources\images\Icon_Laurels\diamond_kr_bottom.png" />
     <Resource Include="resources\images\Icon_Laurels\gold_kr_bottom.png" />
     <Resource Include="resources\images\Icon_Laurels\silver_kr_bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tt.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
