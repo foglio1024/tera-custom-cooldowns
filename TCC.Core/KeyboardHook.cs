@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.Windows;
 
 namespace TCC
@@ -42,12 +43,12 @@ namespace TCC
         {
             if (e.Key == Settings.SettingsHolder.LfgHotkey.Key && e.Modifier == Settings.SettingsHolder.LfgHotkey.Modifier)
             {
-                if (!Proxy.IsConnected) return;
-
+//                if (!ProxyOld.IsConnected) return;
+                if (!ProxyInterface.Instance.IsStubAvailable) return;
                 if (!WindowManager.LfgListWindow.IsVisible)
                 {
                     WindowManager.LfgListWindow.VM.StayClosed = false;
-                    Proxy.RequestLfgList();
+                    ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
                 }
                 else WindowManager.LfgListWindow.CloseWindow();
             }
@@ -74,17 +75,18 @@ namespace TCC
                 if (!SessionManager.Logged
                   || SessionManager.LoadingScreen
                   || SessionManager.Combat
-                  || !Proxy.IsConnected) return;
+                  || !ProxyInterface.Instance.IsStubAvailable
+                    /*|| !ProxyOld.IsConnected*/) return;
 
                 WindowManager.LfgListWindow.VM.ForceStopPublicize();
-                Proxy.ReturnToLobby();
+                ProxyInterface.Instance.Stub.ReturnToLobby(); //   ProxyOld.ReturnToLobby();
             }
 
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             //{
             //    if (!WindowManager.GroupWindow.VM.AmILeader) return;
-            //    if (!Proxy.Proxy.IsConnected) return;
-            //    Proxy.Proxy.LootSettings();
+            //    if (!ProxyOld.ProxyOld.IsConnected) return;
+            //    ProxyOld.ProxyOld.LootSettings();
             //}
 
         }

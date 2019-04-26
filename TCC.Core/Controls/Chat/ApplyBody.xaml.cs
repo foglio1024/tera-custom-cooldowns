@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using TCC.Data.Chat;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 
 namespace TCC.Controls.Chat
 {
@@ -17,19 +18,19 @@ namespace TCC.Controls.Chat
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            Proxy.PartyInvite(dc.Author);
+            ProxyInterface.Instance.Stub.GroupInviteUser(dc.Author); //ProxyOld.PartyInvite(dc.Author);
             dc.Handled = true;
         }
         private void InspectBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
-            Proxy.Inspect(dc.Author);
+            ProxyInterface.Instance.Stub.InspectUser(dc.Author); //ProxyOld.Inspect(dc.Author);
         }
         private void DeclineApplyBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            Proxy.DeclineApply(dc.PlayerId);
+            ProxyInterface.Instance.Stub.DeclineUserGroupApply(dc.PlayerId); //ProxyOld.DeclineApply(dc.PlayerId);
             dc.Handled = true;
         }
     }

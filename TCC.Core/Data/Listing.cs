@@ -4,6 +4,7 @@ using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Pc;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 
 namespace TCC.Data
 {
@@ -186,7 +187,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.ApplyToLfg(_listing.LeaderId);
+            ProxyInterface.Instance.Stub.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
             _listing.CanApply = false;
             _t.Start();
         }
@@ -208,7 +209,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.RequestCandidates();
+            ProxyInterface.Instance.Stub.RequestListingCandidates(); //ProxyOld.RequestCandidates();
         }
     }
 

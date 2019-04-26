@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;
@@ -41,7 +42,7 @@ namespace TCC
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
-            
+
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
@@ -133,7 +134,8 @@ namespace TCC
                 "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
-            if (Proxy.IsConnected) Proxy.CloseConnection();
+            //if (ProxyOld.IsConnected) ProxyOld.CloseConnection();
+            ProxyInterface.Instance.Disconnect();
             if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
             try
             {
@@ -149,7 +151,7 @@ namespace TCC
                 Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
                 Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
             }
-            catch 
+            catch
             {
             }
             Environment.Exit(-1);
@@ -280,7 +282,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = false;
             SettingsWriter.Save();
             WindowManager.Dispose();
-            Proxy.CloseConnection();
+            ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
             UpdateManager.StopTimer();
 
             Environment.Exit(0);

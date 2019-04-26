@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
@@ -27,19 +28,19 @@ namespace TCC.Windows.Widgets
         private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
         {
             if(!VM.AmILeader) return;
-            Proxy.LootSettings();
+            //ProxyOld.LootSettings();
         }
 
         private void DisbandButtonClicked(object sender, RoutedEventArgs e)
         {
             if(!VM.AmILeader) return;
-            Proxy.DisbandParty();
+            ProxyInterface.Instance.Stub.DisbandGroup(); //ProxyOld.DisbandParty();
         }
 
         private void ResetButtonClicked(object sender, RoutedEventArgs e)
         {
             if(!VM.AmILeader) return;
-            Proxy.ResetInstance();
+            ProxyInterface.Instance.Stub.ResetInstance(); //ProxyOld.ResetInstance();
         }
 
         private void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
@@ -56,7 +57,7 @@ namespace TCC.Windows.Widgets
 
         private void LeaveParty(object sender, RoutedEventArgs e)
         {
-            Proxy.LeaveParty();
+            ProxyInterface.Instance.Stub.LeaveGroup(); //ProxyOld.LeaveParty();
         }
 
         private void ShowAbnormalSettings(object sender, RoutedEventArgs e)

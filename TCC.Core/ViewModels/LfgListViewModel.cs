@@ -10,6 +10,8 @@ using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Interop;
+using TCC.Interop.Proxy;
+using TCC.Settings;
 
 namespace TCC.ViewModels
 {
@@ -108,8 +110,8 @@ namespace TCC.ViewModels
             }
             else
             {
-                if (!Proxy.IsConnected) return;
-                Proxy.PublicizeLfg();
+                if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
+                ProxyInterface.Instance.Stub.PublicizeListing(); //ProxyOld.PublicizeLfg();
                 Publicized?.Invoke(AutoPublicizeCooldown);
             }
         }
@@ -125,8 +127,8 @@ namespace TCC.ViewModels
             if (SessionManager.IsInDungeon) return;
             PublicizeTimer.Start();
             N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-            if (!Proxy.IsConnected) return;
-            Proxy.PublicizeLfg();
+            if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
+            ProxyInterface.Instance.Stub.PublicizeListing(); //ProxyOld.PublicizeLfg();
             Publicized?.Invoke(PublicizeCooldown);
 
         }
@@ -150,14 +152,14 @@ namespace TCC.ViewModels
                 AutoPublicizeTimer.Start();
                 N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
                 N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-                if (!Proxy.IsConnected) return;
-                Proxy.PublicizeLfg();
+                if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
+                ProxyInterface.Instance.Stub.PublicizeListing(); //ProxyOld.PublicizeLfg();
                 Publicized?.Invoke(AutoPublicizeCooldown);
             }
         }
         private bool CanToggleAutoPublicize(object arg)
         {
-            return Proxy.IsConnected &&
+            return /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable &&
                    !SessionManager.LoadingScreen &&
                    SessionManager.Logged &&
                    !SessionManager.IsInDungeon;
@@ -173,11 +175,11 @@ namespace TCC.ViewModels
             if (req == 0)
             {
                 StayClosed = true;
-                Proxy.RequestLfgList();
+                ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
             }
             else
             {
-                Proxy.RequestPartyInfo(req);
+                ProxyInterface.Instance.Stub.RequestPartyInfo(req); //ProxyOld.RequestPartyInfo(req);
             }
         }
 

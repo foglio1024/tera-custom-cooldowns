@@ -6,6 +6,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Sniffing;
@@ -433,7 +434,6 @@ namespace TCC.Parsing
 
         public static void HandleChat(S_CHAT x)
         {
-            Console.WriteLine($"{x.AuthorId} - {x.AuthorName}");
             if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
                 x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Nice TCC :lul:", NotificationType.Warning);
             //Log.CW(x.Message);
@@ -703,7 +703,7 @@ namespace TCC.Parsing
                 WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
-            if (!Proxy.IsConnected) return;
+            if (!ProxyInterface.Instance.IsStubAvailable /*ProxyOld.IsConnected*/) return;
             WindowManager.FloatingButton.OpenPlayerMenu();
         }
 
@@ -785,10 +785,10 @@ namespace TCC.Parsing
             }));
 
             if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
-            if (!Proxy.IsConnected || !SettingsHolder.LfgEnabled || !SessionManager.InGameUiOn) return;
-            Proxy.RequestCandidates();
+            if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable || !SettingsHolder.LfgEnabled || !SessionManager.InGameUiOn) return;
+            ProxyInterface.Instance.Stub.RequestListingCandidates(); //ProxyOld.RequestCandidates();
             if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
-            Proxy.RequestLfgList();
+            ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
         {
@@ -1072,9 +1072,9 @@ namespace TCC.Parsing
             SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            if (/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
             {
-                Proxy.SendCommand($"fps mode 3");
+                ProxyInterface.Instance.Stub.InvokeCommand("fps mode 3"); //ProxyOld.SendCommand($"fps mode 3");
             }
         }
 
@@ -1084,9 +1084,9 @@ namespace TCC.Parsing
             SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (Proxy.IsConnected && Proxy.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
+            if (/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable && SettingsHolder.FpsAtGuardian)
             {
-                Proxy.SendCommand($"fps mode 1");
+                ProxyInterface.Instance.Stub.InvokeCommand("fps mode 1"); //ProxyOld.SendCommand($"fps mode 1");
             }
         }
 
@@ -1165,7 +1165,7 @@ namespace TCC.Parsing
             PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer); //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
             TeraSniffer.Instance.Connected = true;
         }
-        public static void HandleLoginArbiter(C_LOGIN_ARBITER p)
+        public static async void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
             SessionManager.CurrentAccountName = p.AccountName;
             // check should already be done when downloading opcodes
@@ -1176,14 +1176,15 @@ namespace TCC.Parsing
             //else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
             BasicTeraData.Instance.Servers.Language = p.Language;
-            Proxy.ConnectToProxy();
+
+            await ProxyInterface.Instance.Init(); //ProxyOld.ConnectToProxy();
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion / 100d}", NotificationType.Normal); //by HQ 20190209
         }
 
         public static void HandlePlayerChangeExp(S_PLAYER_CHANGE_EXP p)
         {
             var msg = $"<font>You gained </font>";
-            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedTotalExp-p.GainedRestedExp:N0}</font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{p.GainedTotalExp - p.GainedRestedExp:N0}</font>";
             msg += $"<font>{(p.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{p.GainedRestedExp:N0}" : "")} </font>";
             msg += $"<font>(</font>";
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
@@ -1214,7 +1215,7 @@ namespace TCC.Parsing
 
         public static void HandleResetEpPerk(S_RESET_EP_PERK p)
         {
-            if(p.Success) EpDataProvider.SetManaBarrierPerkLevel(0);
+            if (p.Success) EpDataProvider.SetManaBarrierPerkLevel(0);
         }
     }
 

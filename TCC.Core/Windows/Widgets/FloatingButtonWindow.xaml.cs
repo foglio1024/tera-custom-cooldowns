@@ -8,7 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls.Chat;
 using TCC.Data;
-using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 
@@ -123,7 +123,7 @@ namespace TCC.Windows.Widgets
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Proxy.RequestLfgList();
+            ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
         }
 
         private bool _busy;
