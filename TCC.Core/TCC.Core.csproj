@@ -1546,11 +1546,6 @@
     <Resource Include="resources\images\Icon_Laurels\gold_kr_bottom.png" />
     <Resource Include="resources\images\Icon_Laurels\silver_kr_bottom.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="tt.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
