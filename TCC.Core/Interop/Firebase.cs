@@ -28,7 +28,7 @@ namespace TCC.Interop
                     var res = await c.UploadStringTaskAsync(
                         new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
-                    Log.All("Webhook registered");
+                    //Log.All("Webhook registered");
                 }
                 catch
                 {

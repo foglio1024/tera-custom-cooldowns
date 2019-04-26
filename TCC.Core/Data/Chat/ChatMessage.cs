@@ -608,7 +608,7 @@ namespace TCC.Data.Chat
             LinkedListing = FindListing();
             if (LinkedListing == null)
             {
-                Log.CW("Linked listing is still null!");
+                //Log.CW($"Linked listing ({Author}/{AuthorId}) is still null!");
                 _tries--;
                 return;
             }
@@ -629,7 +629,7 @@ namespace TCC.Data.Chat
         {
             LinkedListing = FindListing();
             if (LinkedListing != null) return;
-            Log.CW("Linked listing is null! Requesting list.");
+            //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
             WindowManager.LfgListWindow.VM.EnqueueListRequest();
             _timer = new DispatcherTimer(TimeSpan.FromSeconds(1.5), DispatcherPriority.Background, GetListing, Dispatcher);
             _timer.Start();
