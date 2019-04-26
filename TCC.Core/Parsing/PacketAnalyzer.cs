@@ -2,11 +2,13 @@
 using System.Threading;
 using TCC.Data;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.Sniffing;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
+using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing
 {
@@ -21,8 +23,8 @@ namespace TCC.Parsing
             TeraSniffer.Instance.NewConnection += OnNewConnection;
             TeraSniffer.Instance.EndConnection += OnEndConnection;
 
-            TeraSniffer.Instance.MessageReceived += Packets.Enqueue;
-            Proxy.ProxyPacketReceived += Packets.Enqueue;
+            TeraSniffer.Instance.MessageReceived += EnqueuePacket;
+            //ProxyOld.ProxyPacketReceived += EnqueuePacket;
 
             Factory = new MessageFactory();
             if (AnalysisThread == null)
@@ -73,9 +75,14 @@ namespace TCC.Parsing
             EntityManager.ClearNPC();
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            Proxy.CloseConnection();
+            ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
             SessionManager.Logged = false;
             SessionManager.LoadingScreen = true;
+        }
+
+        public static void EnqueuePacket(Message message)
+        {
+            Packets.Enqueue(message);
         }
     }
 }
