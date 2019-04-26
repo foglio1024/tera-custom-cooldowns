@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace TCC.Utilities.Extensions
@@ -62,6 +63,31 @@ namespace TCC.Utilities.Extensions
             );
             return result;
         }
+        public static string AddFontTagsIfMissing(this string msg)
+        {
+            var sb = new StringBuilder();
+            if (!msg.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase))
+            {
 
+                if (msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase) > 0)
+                {
+                    sb.Append("<font>");
+                    sb.Append(msg.Substring(0, msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+                    sb.Append("</font>");
+                    sb.Append(msg.Substring(msg.IndexOf("<font", StringComparison.OrdinalIgnoreCase)));
+                }
+                else
+                {
+                    sb.Append("<font>");
+                    sb.Append(msg);
+                    sb.Append("</font>");
+                }
+            }
+            else sb.Append(msg);
+            var openCount = Regex.Matches(msg, "<font").Count;
+            var closeCount = Regex.Matches(msg, "</font>").Count;
+            if (openCount > closeCount) sb.Append("</font>");
+            return sb.ToString();
+        }
     }
 }
