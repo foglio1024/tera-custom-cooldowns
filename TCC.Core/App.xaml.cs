@@ -261,7 +261,28 @@ namespace TCC
                         {"updated", SettingsHolder.StatSentTime.Month == DateTime.Now.Month &&
                                     SettingsHolder.StatSentTime.Day == DateTime.Now.Day &&
                                     SettingsHolder.StatSentVersion != AppVersion
+                        },
+                        { "settings_summary", new JObject
+                            {
+                                { "windows", new JObject
+                                    {
+                                        { "cooldown", SettingsHolder.CooldownWindowSettings.Enabled },
+                                        { "buffs", SettingsHolder.BuffWindowSettings.Enabled },
+                                        { "character", SettingsHolder.CharacterWindowSettings.Enabled },
+                                        { "class", SettingsHolder.ClassWindowSettings.Enabled },
+                                        { "chat", SettingsHolder.ChatEnabled},
+                                        { "group", SettingsHolder.GroupWindowSettings.Enabled }
+                                    }
+                                },
+                                {
+                                    "generic", new JObject
+                                    {
+                                        { "proxy_enabled", SettingsHolder.EnableProxy },
+                                    }
+                                }
+                            }
                         }
+
                     };
 
                     c.UploadStringAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
