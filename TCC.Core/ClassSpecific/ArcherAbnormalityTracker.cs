@@ -10,7 +10,7 @@ namespace TCC.ClassSpecific
     {
         private static readonly uint FocusId = 601400;
         private static readonly uint FocusXId = 601450;
-        private static readonly uint[] WindsongIds = { 602101, 602107, 602108 };
+        private static readonly uint[] WindsongIds = { 602101, 602107, 602108, 602221, 602227 };
         private static readonly uint[] WindWalkIds = { 602102, 602103 };
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
