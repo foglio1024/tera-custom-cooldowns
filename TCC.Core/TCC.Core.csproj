@@ -95,7 +95,13 @@
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
       <DependentUpon>LfgBody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Group\RoleColumnsGroupLayout.xaml.cs">
+      <DependentUpon>RoleColumnsGroupLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Group\GroupMemberBase.cs" />
+    <Compile Include="Controls\Group\SingleColumnGroupLayout.xaml.cs">
+      <DependentUpon>SingleColumnGroupLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\MessageTextToIconConverter.cs" />
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
@@ -114,6 +120,7 @@
     <Compile Include="Parsing\Messages\S_LOAD_EP_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_EXP.cs" />
     <Compile Include="Parsing\Messages\S_RESET_EP_PERK.cs" />
+    <Compile Include="TemplateSelectors\GroupWindowTemplateSelector.cs" />
     <Compile Include="Test\ThreadInfo.cs" />
     <Compile Include="Test\Tester.cs" />
     <Compile Include="Utilities\Extensions\ByteExtensions.cs" />
@@ -942,6 +949,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dashboard\RectangleBarGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Group\RoleColumnsGroupLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Group\SingleColumnGroupLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

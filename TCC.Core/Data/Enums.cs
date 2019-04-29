@@ -3,6 +3,14 @@ using System.ComponentModel;
 
 namespace TCC.Data
 {
+
+    public enum GroupWindowLayout
+    {
+        [Description("Role separated")]
+        RoleSeparated,
+        [Description("Single column")]
+        SingleColumn
+    }
     public enum ItemLevelTier
     {
         [Description("None")]

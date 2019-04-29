@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -30,6 +31,9 @@ namespace TCC.ViewModels
 
         //public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         public SynchronizedObservableCollection<User> Members { get; }
+        public GroupWindowLayout GroupWindowLayout => SettingsHolder.GroupWindowLayout;
+
+        public ICollectionViewLiveShaping All { get; }
         public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
         public ICollectionViewLiveShaping Tanks { [UsedImplicitly] get; }
         public ICollectionViewLiveShaping Healers { [UsedImplicitly] get; }
@@ -61,8 +65,18 @@ namespace TCC.ViewModels
             Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
             Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
             Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            All = Utils.InitLiveView(null, Members, new string[] { }, new[]
+            {
+                new SortDescription(nameof(User.Role), ListSortDirection.Descending),
+                new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
+            });
 
+            ((ICollectionView)Dps).CollectionChanged += GcPls;
+            ((ICollectionView)Tanks).CollectionChanged += GcPls;
+            ((ICollectionView)Healers).CollectionChanged += GcPls;
+            ((ICollectionView)All).CollectionChanged += GcPls;
         }
+        private void GcPls(object sender, EventArgs ev) { }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -122,6 +136,8 @@ namespace TCC.ViewModels
             return Members.ToSyncList().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
         public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name) || _leaderOverride;
+
+
 
         public void SetAggro(ulong target)
         {

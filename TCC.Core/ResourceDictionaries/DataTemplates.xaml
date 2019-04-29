@@ -471,7 +471,6 @@
     <DataTemplate x:Key="GuildTowerTemplate">
         <npc:GuildTowerControl/>
     </DataTemplate>
-
     <DataTemplate x:Key="DefaultEnemyWindowLayout">
         <npc:DefaultEnemyWindowLayout/>
     </DataTemplate>
@@ -492,6 +491,13 @@
     </DataTemplate>
     <DataTemplate x:Key="DragonIndicator">
         <npc:DragonControl />
+    </DataTemplate>
+
+    <DataTemplate x:Key="RoleColumnsGroupLayout">
+        <group:RoleColumnsGroupLayout/>
+    </DataTemplate>
+    <DataTemplate x:Key="SingleColumnGroupLayout">
+        <group:SingleColumnGroupLayout/>
     </DataTemplate>
 
     <DataTemplate x:Key="PartyDataTemplate">

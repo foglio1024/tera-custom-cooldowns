@@ -54,5 +54,9 @@
     <ts:SkillTemplateSelector x:Key="FixedSkillTemplateSelector"
                                     RoundTemplate="{StaticResource RoundFixedSkill}"
                                     SquareTemplate="{StaticResource SquareFixedSkill}"/>
+    <ts:GroupWindowTemplateSelector x:Key="GroupWindowTemplateSelector"
+                                    SingleColumn="{StaticResource SingleColumnGroupLayout}"
+                                    RoleColumns="{StaticResource RoleColumnsGroupLayout}"/>
+
 
 </ResourceDictionary>

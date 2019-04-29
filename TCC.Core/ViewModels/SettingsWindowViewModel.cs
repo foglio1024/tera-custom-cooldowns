@@ -799,6 +799,7 @@ namespace TCC.ViewModels
         public IEnumerable<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
         public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
         public IEnumerable<ControlShape> ControlShapes => Utils.ListFromEnum<ControlShape>();
+        public IEnumerable<GroupWindowLayout> GroupWindowLayouts => Utils.ListFromEnum<GroupWindowLayout>();
 
         public bool ChatWindowEnabled
         {
@@ -860,7 +861,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowEdge == value) return;
                 SettingsHolder.WarriorShowEdge = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm) wm.ExN(nameof(WarriorLayoutVM.ShowEdge));
+                Utils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
             }
         }
         public bool SorcererReplacesElementsInCharWindow
@@ -883,7 +884,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowTraverseCut == value) return;
                 SettingsHolder.WarriorShowTraverseCut = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm) wm.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
+                Utils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
             }
         }
 
@@ -895,7 +896,23 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorEdgeMode == value) return;
                 SettingsHolder.WarriorEdgeMode = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorLayoutVM wm) wm.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
+                Utils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
+            }
+
+        }
+        public GroupWindowLayout GroupWindowLayout
+        {
+            get => SettingsHolder.GroupWindowLayout;
+            set
+            {
+                if (SettingsHolder.GroupWindowLayout == value) return;
+                SettingsHolder.GroupWindowLayout = value;
+                N();
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.GroupWindowLayout));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.All));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Dps));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Healers));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Tanks));
             }
 
         }

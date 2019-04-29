@@ -980,6 +980,10 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
+                            <settings:SelectionSetting SettingName="Group window layout"
+                                                       SelectedItem="{Binding GroupWindowLayout, Mode=TwoWay}"
+                                                       ChoicesType="{x:Type data:GroupWindowLayout}"
+                                                       Choices="{Binding GroupWindowLayouts, Mode=OneWay}" />
 
                         </StackPanel>
                         <!-- Actions -->

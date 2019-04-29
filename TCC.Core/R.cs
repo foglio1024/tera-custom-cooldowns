@@ -512,6 +512,8 @@ namespace TCC.R
 		public static DataTemplate Phase3EnemyWindowLayout => ((DataTemplate)App.Current.FindResource("Phase3EnemyWindowLayout"));
 		public static DataTemplate Phase4EnemyWindowLayout => ((DataTemplate)App.Current.FindResource("Phase4EnemyWindowLayout"));
 		public static DataTemplate DragonIndicator => ((DataTemplate)App.Current.FindResource("DragonIndicator"));
+		public static DataTemplate RoleColumnsGroupLayout => ((DataTemplate)App.Current.FindResource("RoleColumnsGroupLayout"));
+		public static DataTemplate SingleColumnGroupLayout => ((DataTemplate)App.Current.FindResource("SingleColumnGroupLayout"));
 		public static DataTemplate PartyDataTemplate => ((DataTemplate)App.Current.FindResource("PartyDataTemplate"));
 		public static DataTemplate RaidDataTemplate => ((DataTemplate)App.Current.FindResource("RaidDataTemplate"));
 		public static DataTemplate FixedCooldownTemplate => ((DataTemplate)App.Current.FindResource("FixedCooldownTemplate"));
@@ -535,5 +537,6 @@ namespace TCC.R
 		public static AbnormalityTemplateSelector RaidAbnormalityTemplateSelector => ((AbnormalityTemplateSelector)App.Current.FindResource("RaidAbnormalityTemplateSelector"));
 		public static SkillTemplateSelector NormalSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("NormalSkillTemplateSelector"));
 		public static SkillTemplateSelector FixedSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("FixedSkillTemplateSelector"));
+		public static GroupWindowTemplateSelector GroupWindowTemplateSelector => ((GroupWindowTemplateSelector)App.Current.FindResource("GroupWindowTemplateSelector"));
 	}
 }
