@@ -13,7 +13,9 @@
                     xmlns:pc="clr-namespace:TCC.Data.Pc"
                     xmlns:skills1="clr-namespace:TCC.Data.Skills"
                     xmlns:moongourd="clr-namespace:TCC.Moongourd"
-                    xmlns:vm="clr-namespace:TCC.ViewModels">
+                    xmlns:vm="clr-namespace:TCC.ViewModels"
+                    xmlns:converters="clr-namespace:TCC.Converters"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
     <DataTemplate x:Key="RoundNormalSkill">
         <skills:RoundSkillControl />
     </DataTemplate>
@@ -729,6 +731,20 @@
                            Foreground="#8fff"
                            TextTrimming="CharacterEllipsis"/>
         </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="EnumDescrDataTemplate" DataType="system:Enum">
+        <TextBlock
+            Foreground="#afff"
+            FontWeight="DemiBold"
+            VerticalAlignment="Center">
+            <TextBlock.Text>
+                <Binding Path=".">
+                    <Binding.Converter>
+                        <converters:EnumDescriptionConverter />
+                    </Binding.Converter>
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock>
     </DataTemplate>
 
 

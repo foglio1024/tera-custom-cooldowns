@@ -339,6 +339,7 @@ namespace TCC.R
 		public static FontFamily RobotoMonoMedium => ((FontFamily)App.Current.FindResource("RobotoMonoMedium"));
 		public static FontFamily ArialMonoBold => ((FontFamily)App.Current.FindResource("ArialMonoBold"));
 		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
+		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
 		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
 		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
@@ -523,6 +524,7 @@ namespace TCC.R
 		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplate => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
+		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
 	}
 	public static class TemplateSelectors
 	{

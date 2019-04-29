@@ -191,10 +191,13 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
-        <Setter Property="Background" Value="{StaticResource GreenBrush}" />
-        <Setter Property="extensions:ButtonExtensions.CornerRadius" Value="13" />
+        <Setter Property="Background" Value="{StaticResource DefensiveStanceBrush}" />
+        <Setter Property="extensions:ButtonExtensions.CornerRadius" Value="12" />
         <Setter Property="Foreground" Value="#d000" />
         <Setter Property="Padding" Value="0 5" />
+        <!--<Setter Property="FontSize" Value="14" />-->
+        <Setter Property="FontWeight" Value="DemiBold" />
+        <!--<Setter Property="FontFamily" Value="{StaticResource ProductSans}" />-->
     </Style>
 
     <Style TargetType="{x:Type ctrl:WindowButtons}">
