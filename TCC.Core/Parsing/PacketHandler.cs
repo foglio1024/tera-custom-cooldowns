@@ -1154,7 +1154,7 @@ namespace TCC.Parsing
 
         public static void HandleCheckVersion(C_CHECK_VERSION p)
         {
-            OpcodeDownloader.DownloadIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
+            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
             if (!File.Exists(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map")))
             {
                 TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
@@ -1172,6 +1172,8 @@ namespace TCC.Parsing
             //if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
             //{
             //}
+            OpcodeDownloader.DownloadSysmsgIfNotExist(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion);
+
             PacketAnalyzer.Factory.ReloadSysMsg();
             //else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
