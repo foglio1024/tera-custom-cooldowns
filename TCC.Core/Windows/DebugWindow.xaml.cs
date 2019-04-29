@@ -112,7 +112,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
+            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);
@@ -123,15 +123,15 @@ namespace TCC.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Assault") ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
-            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
-            else if (((Button)sender).Content.ToString() == "None") ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") Utils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") Utils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") Utils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if (((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.IsMaxed) ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val = 0;
-            ((WarriorLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val++;
+            if (Utils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.IsMaxed) Utils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val = 0;
+            Utils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val++;
 
         }
 

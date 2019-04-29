@@ -37,49 +37,49 @@ namespace TCC.ClassSpecific
         private static void CheckArush(S_ABNORMALITY_BEGIN p)
         {
             if (!ARushIDs.Contains(p.AbnormalityId)) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).AdrenalineRush.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Start(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_REFRESH p)
         {
             if (!ARushIDs.Contains(p.AbnormalityId)) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).AdrenalineRush.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Start(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_END p)
         {
             if (!ARushIDs.Contains(p.AbnormalityId)) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGshout(S_ABNORMALITY_BEGIN p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).GuardianShout.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<LancerLayoutVM>().GuardianShout.Buff.Start(p.Duration);
         }
         private static void CheckGshout(S_ABNORMALITY_REFRESH p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).GuardianShout.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<LancerLayoutVM>().GuardianShout.Buff.Start(p.Duration);
         }
         private static void CheckGshout(S_ABNORMALITY_END p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<LancerLayoutVM>().GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckLineHeld(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).LH.StartBaseBuff(p.Duration);
+            Utils.CurrentClassVM<LancerLayoutVM>().LH.StartBaseBuff(p.Duration);
         }
         private static void CheckLineHeld(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).LH.RefreshBaseBuff(p.Stacks, p.Duration);
+            Utils.CurrentClassVM<LancerLayoutVM>().LH.RefreshBaseBuff(p.Stacks, p.Duration);
         }
         private static void CheckLineHeld(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            ((LancerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).LH.Stop();
+            Utils.CurrentClassVM<LancerLayoutVM>().LH.Stop();
         }
     }
 }

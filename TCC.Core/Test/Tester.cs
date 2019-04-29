@@ -21,7 +21,7 @@ namespace TCC.Test
 {
     public static class Tester
     {
-        public const bool Enabled = false;
+        public static bool Enabled = false;
 
         public static void ShowDebugWindow()
         {
@@ -81,7 +81,7 @@ namespace TCC.Test
         }
         public static void StartDeadlyGambleCooldown(uint cd)
         {
-            (WindowManager.ClassWindow.VM.CurrentManager as WarriorLayoutVM)?.DeadlyGamble.Cooldown.Start(cd);
+            Utils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.Cooldown.Start(cd);
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l)
         {

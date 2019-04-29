@@ -228,7 +228,7 @@ namespace TCC
 
             if (SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
+                Utils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged();
             }
         }
     }

@@ -31,7 +31,6 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-
             if (!p.TargetId.IsMe()) return;
             CheckFocus(p);
             CheckFocusX(p);
@@ -42,68 +41,68 @@ namespace TCC.ClassSpecific
         private static void CheckWindsong(S_ABNORMALITY_BEGIN p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Windsong.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Start(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Windsong.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).WindWalk.Start(p.Duration);
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).WindWalkProc = true;
+            Utils.CurrentClassVM<ArcherLayoutVM>().WindWalk.Start(p.Duration);
+            Utils.CurrentClassVM<ArcherLayoutVM>().WindWalkProc = true;
         }
         private static void CheckWindWalk(S_ABNORMALITY_REFRESH p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).WindWalk.Refresh(p.Duration, CooldownMode.Normal);
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).WindWalkProc = true;
+            Utils.CurrentClassVM<ArcherLayoutVM>().WindWalk.Refresh(p.Duration, CooldownMode.Normal);
+            Utils.CurrentClassVM<ArcherLayoutVM>().WindWalkProc = true;
         }
         private static void CheckGaleSteps(S_ABNORMALITY_END p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).WindWalk.Refresh(0, CooldownMode.Normal);
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).WindWalkProc = false;
+            Utils.CurrentClassVM<ArcherLayoutVM>().WindWalk.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<ArcherLayoutVM>().WindWalkProc = false;
         }
 
         private static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusId) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Focus.StartFocus(p.Duration);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Focus.StartFocus(p.Duration);
         }
         private static void CheckFocus(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != FocusId) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Focus.SetFocusStacks(p.Stacks, p.Duration);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Focus.SetFocusStacks(p.Stacks, p.Duration);
         }
         private static void CheckFocus(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusId) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Focus.StopFocus();
+            Utils.CurrentClassVM<ArcherLayoutVM>().Focus.StopFocus();
         }
 
         private static void CheckFocusX(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusXId) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Focus.StartFocusX(p.Duration);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Focus.StartFocusX(p.Duration);
         }
         private static void CheckFocusX(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != FocusXId) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Focus.StartFocusX(p.Duration);
+            Utils.CurrentClassVM<ArcherLayoutVM>().Focus.StartFocusX(p.Duration);
         }
         private static void CheckFocusX(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusXId) return;
-            ((ArcherLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Focus.StopFocusX();
+            Utils.CurrentClassVM<ArcherLayoutVM>().Focus.StopFocusX();
         }
     }
 }

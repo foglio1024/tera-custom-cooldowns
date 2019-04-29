@@ -24,17 +24,17 @@ namespace TCC.ClassSpecific
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Bloodlust.Buff.Start(p.Duration);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Start(p.Duration);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).FieryRage.Buff.Start(p.Duration);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Start(p.Duration);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Unleash.Buff.Start(p.Duration);
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOn = true;
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOff = false;
+                Utils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Start(p.Duration);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
+                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
@@ -44,17 +44,17 @@ namespace TCC.ClassSpecific
 
             if (p.AbnormalityId == BloodlustId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOn = true;
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOff = false;
+                Utils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
+                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
@@ -63,17 +63,17 @@ namespace TCC.ClassSpecific
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).FieryRage.Buff.Refresh(0, CooldownMode.Normal);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(0, CooldownMode.Normal);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Unleash.Buff.Refresh(0, CooldownMode.Normal);
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOn = false;
-                ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsUnleashOff = true;
+                Utils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(0, CooldownMode.Normal);
+                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = false;
+                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = true;
             }
         }
 
@@ -83,30 +83,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == SinisterKR && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == DexterKR && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
                 if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
         }
@@ -116,30 +116,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == SinisterKR && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == DexterKR && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
                 if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
                 if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = p.Stacks;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
         }
@@ -149,30 +149,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == SinisterKR)
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = 0;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == DexterKR)
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = 0;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Rampage)
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = 0;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
                 }
             }
             else
             { 
                 if (p.AbnormalityId == Sinister)
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).SinisterTracker.Val = 0;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Dexter)
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).DexterTracker.Val = 0;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Rampage)
                 {
-                    ((BerserkerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RampageTracker.Val = 0;
+                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
                 }
             }
         }

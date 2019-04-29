@@ -394,8 +394,8 @@ namespace TCC.Parsing
         public static void HandleRunemark(S_WEAK_POINT x)
         {
             if (SessionManager.CurrentPlayer.Class != Class.Valkyrie) return;
-            if (WindowManager.ClassWindow.VM.CurrentManager.GetType() != typeof(ValkyrieLayoutVM)) return;
-            ((ValkyrieLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).RunemarksCounter.Val = x.TotalRunemarks;
+            if (Utils.CurrentClassVM<ValkyrieLayoutVM>() == null) return;
+            Utils.CurrentClassVM<ValkyrieLayoutVM>().RunemarksCounter.Val = x.TotalRunemarks;
         }
 
 

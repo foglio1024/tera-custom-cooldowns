@@ -32,36 +32,36 @@ namespace TCC.ClassSpecific
         private static void CheckGrowingFury(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsGfOn = true;
+            Utils.CurrentClassVM<BrawlerLayoutVM>().IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsGfOn = true;
+            Utils.CurrentClassVM<BrawlerLayoutVM>().IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).IsGfOn = false;
+            Utils.CurrentClassVM<BrawlerLayoutVM>().IsGfOn = false;
         }
 
         private static void CheckCounterProc(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Counter.Start(p.Duration);
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).CounterProc = true;
+            Utils.CurrentClassVM<BrawlerLayoutVM>().Counter.Start(p.Duration);
+            Utils.CurrentClassVM<BrawlerLayoutVM>().CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Counter.Start(p.Duration);
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).CounterProc = true;
+            Utils.CurrentClassVM<BrawlerLayoutVM>().Counter.Start(p.Duration);
+            Utils.CurrentClassVM<BrawlerLayoutVM>().CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Counter.Refresh(0, CooldownMode.Normal);
-            ((BrawlerLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).CounterProc = false;
+            Utils.CurrentClassVM<BrawlerLayoutVM>().Counter.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<BrawlerLayoutVM>().CounterProc = false;
         }
     }
 }

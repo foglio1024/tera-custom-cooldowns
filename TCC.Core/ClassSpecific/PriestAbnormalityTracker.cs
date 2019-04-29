@@ -43,50 +43,50 @@ namespace TCC.ClassSpecific
         private static void CheckEnergyStars(S_ABNORMALITY_BEGIN p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EnergyStars.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Start(p.Duration);
         }
         private static void CheckEnergyStars(S_ABNORMALITY_REFRESH p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            Utils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckEnergyStars(S_ABNORMALITY_END p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGrace(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GraceId) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Grace.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Start(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GraceId) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            Utils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGrace(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GraceId) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).Grace.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckEdict(S_ABNORMALITY_BEGIN p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdictOfJudgment.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Start(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_REFRESH p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            Utils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckEdict(S_ABNORMALITY_END p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            ((PriestLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

@@ -22,6 +22,7 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Utilities.Extensions;
+using TCC.ViewModels;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
 
@@ -216,8 +217,7 @@ namespace TCC
             else return RegionEnum.EU;
         }
 
-        public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
-            string[] filters, SortDescription[] sortFilters)
+        public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source, [NotNull] string[] filters, [NotNull] SortDescription[] sortFilters)
         {
             var cv = new CollectionViewSource { Source = source }.View;
             cv.Filter = predicate;
@@ -299,6 +299,11 @@ namespace TCC
             {
                 return true;
             }
+        }
+
+        public static C CurrentClassVM<C>() where C : BaseClassLayoutVM
+        {
+            return WindowManager.ClassWindow.VM.CurrentManager as C;
         }
 
         [DllImport("kernel32.dll")]

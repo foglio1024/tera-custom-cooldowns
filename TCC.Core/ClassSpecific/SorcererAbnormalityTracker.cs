@@ -40,19 +40,19 @@ namespace TCC.ClassSpecific
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(p.Duration);
+            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
+            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)
@@ -111,7 +111,7 @@ namespace TCC.ClassSpecific
         {
             if (FireIceFusionId == p.AbnormalityId)
             {
-                ((SorcererLayoutVM)WindowManager.ClassWindow.VM.CurrentManager).EndFireIcePre();
+                Utils.CurrentClassVM<SorcererLayoutVM>().EndFireIcePre();
             }
             //else if (FireArcaneFusionId == p.AbnormalityId)
             //{
