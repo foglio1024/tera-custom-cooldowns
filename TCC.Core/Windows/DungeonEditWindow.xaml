@@ -237,23 +237,8 @@
                                           SelectedItem="{Binding Dungeon.ResetMode, Mode=TwoWay}"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Right"
-                                          HorizontalContentAlignment="Right">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate DataType="data:ResetMode">
-                                            <TextBlock
-                                                Foreground="#afff"
-                                                FontWeight="DemiBold"
-                                                VerticalAlignment="Center">
-                                                <TextBlock.Text>
-                                                    <Binding Path=".">
-                                                        <Binding.Converter>
-                                                            <converters:EnumDescriptionConverter />
-                                                        </Binding.Converter>
-                                                    </Binding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                          HorizontalContentAlignment="Right"
+                                          ItemTemplate="{StaticResource EnumDescrDataTemplate}">
                                 </ComboBox>
 
                                 <Button Grid.Column="7" HorizontalAlignment="Right"

@@ -26,7 +26,7 @@
                             </Grid.Background>
                             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="InnerGrid">
                                 <Rectangle x:Name="ExpandSelector"
-                                           Fill="{StaticResource GreenBrush}"
+                                           Fill="{StaticResource DefensiveStanceBrush}"
                                            Width="3"
                                            HorizontalAlignment="Left"
                                            RenderTransformOrigin=".5 .5"
@@ -172,7 +172,7 @@
         <ToolTip x:Key="CenterScreenButtonTooltip" Background="Transparent">
             <Grid Margin="5">
                 <Border Style="{StaticResource RevampBorderStyle}" />
-                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run
                         Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen." />
                 </TextBlock>
@@ -185,7 +185,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <ContentPresenter
+                <ContentPresenter 
                     Content="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}}"
                     VerticalAlignment="Center" Margin="10 0" Opacity=".5" />
                 <Separator Margin="0 0 5 0" Opacity=".3" Grid.Column="1" VerticalAlignment="Center" />
@@ -203,7 +203,7 @@
                     <Path
                         Data="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Converter={StaticResource ClassToSvg}}"
                         Margin="0 0 2 0" Width="15" Height="15" Fill="#3fff" />
-                    <TextBlock
+                    <TextBlock 
                         Text="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}}"
                         HorizontalAlignment="Center" Margin="5" Foreground="#3fff" />
                 </StackPanel>
@@ -217,7 +217,7 @@
         </Style>
 
         <Style TargetType="settings:CheckboxSetting">
-            <Setter Property="CheckBoxColor" Value="{StaticResource GreenBrush}" />
+            <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}" />
         </Style>
 
         <Style x:Key="EnabledSettingStyle" TargetType="settings:CheckboxSetting"
@@ -814,7 +814,7 @@
                                                       Style="{StaticResource AllowOffscreenSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}"
                                                       Style="{StaticResource AutoDimSettingStyle}" />
-                            <settings:SelectionSetting
+                            <settings:SelectionSetting 
                                 SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}"
                                 Style="{StaticResource ClickThruSettingStyle}" />
                             <settings:ValueSetting Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}"

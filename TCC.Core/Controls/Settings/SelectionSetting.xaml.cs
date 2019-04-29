@@ -50,10 +50,14 @@ namespace TCC.Controls.Settings
             get => (Type)GetValue(ChoicesTypeProperty);
             set => SetValue(ChoicesTypeProperty, value);
         }
-        public static readonly DependencyProperty ChoicesTypeProperty =
-            DependencyProperty.Register("ChoicesType", typeof(Type), typeof(SelectionSetting));
+        public static readonly DependencyProperty ChoicesTypeProperty = DependencyProperty.Register("ChoicesType", typeof(Type), typeof(SelectionSetting));
 
-
+        public DataTemplate ChoicesTemplate
+        {
+            get => (DataTemplate) GetValue(ChoicesTemplateProperty);
+            set => SetValue(ChoicesTemplateProperty, value);
+        }
+        public static readonly DependencyProperty ChoicesTemplateProperty = DependencyProperty.Register("ChoicesTemplate", typeof(DataTemplate), typeof(SelectionSetting), new PropertyMetadata(R.DataTemplates.EnumDescrDataTemplate));
 
         public SelectionSetting()
         {

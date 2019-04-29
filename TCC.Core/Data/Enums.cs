@@ -331,8 +331,11 @@ namespace TCC.Data
     {
         Never = 0,
         Always = 1,
+        [Description("When dim")]
         WhenDim = 2,
+        [Description("When undim")]
         WhenUndim = 3,
+        [Description("Game-driven")]
         GameDriven = 4
     }
 
