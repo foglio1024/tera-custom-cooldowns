@@ -24,14 +24,14 @@ namespace TCC.Interop.Proxy
 
         private static void HandleRawPacket(JObject parameters)
         {
-            Log.CW("[ProxyMessageHandler] Handling raw packet");
+            //Log.CW("[ProxyMessageHandler] Handling raw packet");
             var direction = (MessageDirection)parameters["direction"].Value<uint>();
             var content = new Message(DateTime.UtcNow, direction, parameters["content"].Value<string>().Substring(4));
             PacketAnalyzer.EnqueuePacket(content);
         }
         private static void HandleChatMessage(JObject parameters)
         {
-            Log.CW("[ProxyMessageHandler] Handling chat message");
+            //Log.CW("[ProxyMessageHandler] Handling chat message");
             var author = parameters["author"].Value<string>();
             var channel = parameters["channel"].Value<uint>();
             var message = parameters["message"].Value<string>().AddFontTagsIfMissing();
@@ -46,12 +46,12 @@ namespace TCC.Interop.Proxy
         }
         private static void SetUiMode(JObject parameters)
         {
-            Log.CW("[ProxyMessageHandler] Setting UI mode");
+            //Log.CW("[ProxyMessageHandler] Setting UI mode");
             SessionManager.InGameUiOn = parameters["uiMode"].Value<bool>();
         }
         private static void SetChatMode(JObject parameters)
         {
-            Log.CW("[ProxyMessageHandler] Setting chat mode");
+            //Log.CW("[ProxyMessageHandler] Setting chat mode");
             SessionManager.InGameChatOpen = parameters["chatMode"].Value<bool>();
         }
         public void HandleResponse(Response res)
@@ -59,7 +59,7 @@ namespace TCC.Interop.Proxy
         }
         public void HandleRequest(Request req)
         {
-            Log.CW($"[ProxyMessageHandler] Handling request for {req.Method}");
+            //Log.CW($"[ProxyMessageHandler] Handling request for {req.Method}");
             if (!Methods.TryGetValue(req.Method, out var del)) return;
             del.DynamicInvoke(req.Parameters);
         }
