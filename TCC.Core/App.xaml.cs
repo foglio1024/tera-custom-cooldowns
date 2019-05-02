@@ -19,7 +19,6 @@ using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;
-using TCC.Test;
 using TCC.Utilities.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -118,7 +117,7 @@ namespace TCC
             sb.AppendLine($"Data: {ex.Data}");
             if (ex.InnerException != null) sb.AppendLine($"InnerException: \n{ex.InnerException}");
             sb.AppendLine($"TargetSite: {ex.TargetSite}");
-            File.AppendAllText(BasePath + "/crash.log", sb.ToString());
+            Log.F(sb.ToString(), "crash.log");
 #if !DEBUG
             try
             {

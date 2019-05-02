@@ -23,7 +23,7 @@ namespace TCC.TeraCommon.Game.Messages
                 var msg = new S_NOTIFY_GUILD_QUEST_URGENT(reader);
                 PacketHandler.HandleNotifyGuildQuestUrgent(msg);
                 //TimeManager.Instance.ExecuteGuildBamWebhook();
-                Log.F("GuildQuestUrgent.log", $"\n[{nameof(UnknownMessage)}] S_NOTIFY_GUILD_QUEST_URGENT : {reader.Message.OpCode}, reader.Message.Payload.Count : {reader.Message.Payload.Count}");
+                Log.F($"\n[{nameof(UnknownMessage)}] S_NOTIFY_GUILD_QUEST_URGENT : {reader.Message.OpCode}, reader.Message.Payload.Count : {reader.Message.Payload.Count}", "GuildQuestUrgent.log");
             }
             catch
             {

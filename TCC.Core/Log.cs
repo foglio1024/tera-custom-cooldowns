@@ -20,22 +20,24 @@ namespace TCC
 #endif
         }
 
-        public static void F(string line)
+        public static void F(string line, string fileName = "error.log")
         {
             try
             {
-                File.AppendAllText(Path.Combine(App.BasePath, "error.log"), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
+                if (!Directory.Exists(Path.Combine(App.BasePath, "logs")))
+                    Directory.CreateDirectory(Path.Combine(App.BasePath, "logs"));
+                File.AppendAllText(Path.Combine(App.BasePath, "logs", fileName), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
             }
             catch { }
         }
-        public static void F(string filename, string line)   //by HQ 20181228
-        {
-            try
-            {
-                File.AppendAllText(Path.Combine(App.BasePath, filename), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
-            }
-            catch { }
-        }
+        //public static void F(string filename, string line)   //by HQ 20181228
+        //{
+        //    try
+        //    {
+        //        File.AppendAllText(Path.Combine(App.BasePath, "logs", filename), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
+        //    }
+        //    catch { }
+        //}
 
         public static void All(string s)
         {
