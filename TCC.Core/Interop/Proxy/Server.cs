@@ -21,6 +21,7 @@ namespace TCC.Interop.Proxy
 
         public void Start()
         {
+            Log.F("Starting listening thread...", "http_server.log");
             _listening = true;
             _server.Start();
             new Thread(Listen).Start();
@@ -33,6 +34,8 @@ namespace TCC.Interop.Proxy
         }
         private void Listen()
         {
+            Log.F( "Listening thread started.", "http_server.log");
+
             while (_listening)
             {
                 try
@@ -52,8 +55,10 @@ namespace TCC.Interop.Proxy
                 catch (Exception e)
                 {
                     Log.CW($"[Server] Error while parsing request: {e}");
+                    Log.F($"Error while parsing request: {e}", "http_server.log");
                 }
             }
+            Log.F( "Exiting listening thread.", "http_server.log");
         }
     }
 }
