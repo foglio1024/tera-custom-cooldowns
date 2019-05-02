@@ -54,14 +54,17 @@ namespace TCC.Data.Databases
                 var cd = Convert.ToUInt32(s[4]);
                 var icon = s[5];
 
-                var item = new Item(id, name, grad, expId, cd, icon);
+                var item = new Item(id, name, (RareGrade)grad, expId, cd, icon);
                 Items.Add(id, item);
             }
 
-            // Manual fix for bugged EU HP pot from HH
-            var euBuggedReju = new Item(149644, "Harrowhold Rejuvenation Potion", 1, 0, 30, "icon_items.potion1_tex");
-            Items[euBuggedReju.Id] = euBuggedReju;
+            AddOverride(new Item(149644, "Harrowhold Rejuvenation Potion", RareGrade.Uncommon, 0, 30, "icon_items.potion1_tex"));
+            AddOverride(new Item(139520, "Minify", RareGrade.Common, 0, 3, "icon_items.icon_janggoe_item_tex_minus"));
+        }
 
+        private void AddOverride(Item item)
+        {
+            Items[item.Id] = item;
         }
 
         public IEnumerable<Item> ItemSkills
