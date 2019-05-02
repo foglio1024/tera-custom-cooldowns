@@ -8,11 +8,12 @@
         public RareGrade RareGrade { get; }
         public uint Cooldown { get; }
         public string IconName { get; }
-        public Item(uint id, string name, uint g, uint expId, uint cd, string iconName)
+
+        public Item(uint id, string name, RareGrade g, uint expId, uint cd, string iconName)
         {
             Id = id;
             Name = name;
-            RareGrade = (RareGrade)g;
+            RareGrade = g;
             ExpId = expId;
             Cooldown = cd;
             IconName = iconName;

@@ -429,7 +429,7 @@ namespace TCC.Data.Pc
 
         public Item Item => SessionManager.DB.ItemsDatabase.Items.TryGetValue(_id, out var item)
                             ? item
-                            : new Item(0, "", 0, 0, 0, "");
+                            : new Item(0, "", RareGrade.Common, 0, 0, "");
         public uint Slot { get; }
         public int Amount
         {
