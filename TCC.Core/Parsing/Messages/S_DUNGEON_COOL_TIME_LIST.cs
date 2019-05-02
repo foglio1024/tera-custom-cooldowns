@@ -19,7 +19,7 @@ namespace TCC.Parsing.Messages
                 reader.Skip(4);
                 for (var i = 0; i < count; i++)
                 {
-                    var curr = reader.ReadUInt16();
+                    reader.Skip(2); //var curr = reader.ReadUInt16();
                     var next = reader.ReadUInt16();
                     var id = reader.ReadUInt32();
                     reader.Skip(8);
