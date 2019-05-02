@@ -61,9 +61,14 @@ namespace TCC.Data.Chat
             if (dictionary.TryGetValue("UserName", out var username)) rawLink.Append("@" + username);
             else username = SessionManager.CurrentPlayer.Name;
 
-            var mp = new MessagePiece(id.ToString());
-            if (!SessionManager.DB.ItemsDatabase.Items.TryGetValue(id, out var i)) return mp;
-            mp = new MessagePiece($"<{i.Name}>")
+            var name = $"Unknown item [{id}]";
+            var grade = RareGrade.Common;
+            if (SessionManager.DB.ItemsDatabase.Items.TryGetValue(id, out var i))
+            {
+                name = i.Name;
+                grade = i.RareGrade;
+            }
+            var mp = new MessagePiece($"<{name}>")
             {
                 Type = MessagePieceType.Item,
                 //BoundType = i.BoundType,
@@ -72,7 +77,7 @@ namespace TCC.Data.Chat
                 OwnerName = username,
                 RawLink = rawLink.ToString()
             };
-            mp.SetColor(ChatUtils.GradeToColorString(i.RareGrade));
+            mp.SetColor(ChatUtils.GradeToColorString(grade));
             return mp;
         }
         public static MessagePiece BuildSysMsgAchi(string msgText)
