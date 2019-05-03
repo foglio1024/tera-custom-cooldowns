@@ -29,6 +29,7 @@ namespace TCC
 {
     public partial class App
     {
+        private static Mutex _mutex;
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
         public const bool Experimental = false;
         public static SplashScreen SplashScreen;
@@ -41,15 +42,22 @@ namespace TCC
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
-
+            BaseDispatcher = Dispatcher.CurrentDispatcher;
+            BaseDispatcher.Thread.Name = "Main";
+            TccMessageBox.Create(); //Create it here in STA thread
+            _mutex = new Mutex(true, "TCC", out var createdNew);
+            if (!createdNew)
+            {
+                TccMessageBox.Show("Another instance of TCC is already running. Shutting down.",
+                    MessageBoxType.Information);
+                Application.Current.Shutdown();
+                return;
+            }
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
             InitSplashScreen();
 
-            BaseDispatcher = Dispatcher.CurrentDispatcher;
-            BaseDispatcher.Thread.Name = "Main";
-            TccMessageBox.Create(); //Create it here in STA thread
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
             TryDeleteUpdater();
 
@@ -153,6 +161,7 @@ namespace TCC
             catch
             {
             }
+            _mutex.ReleaseMutex();
             Environment.Exit(-1);
         }
 
@@ -304,7 +313,7 @@ namespace TCC
             WindowManager.Dispose();
             ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
             UpdateManager.StopTimer();
-
+            _mutex.ReleaseMutex();
             Environment.Exit(0);
         }
 
