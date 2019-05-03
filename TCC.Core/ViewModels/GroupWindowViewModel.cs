@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -11,7 +10,6 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Parsing.Messages;
@@ -51,7 +49,7 @@ namespace TCC.ViewModels
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && Settings.SettingsHolder.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && SettingsHolder.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable;
         public bool ShowLeaderButtons => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
@@ -188,7 +186,7 @@ namespace TCC.ViewModels
                     // -- show only aggro stacks if we are in HH -- //
                     if (WindowManager.BossWindow.VM.CurrentHHphase >= HarrowholdPhase.Phase2)
                     {
-                        if (ab.Id != 950023 && Settings.SettingsHolder.ShowOnlyAggroStacks) return;
+                        if (ab.Id != 950023 && SettingsHolder.ShowOnlyAggroStacks) return;
                     }
                     // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -226,7 +224,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (Settings.SettingsHolder.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (SettingsHolder.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 return;
@@ -321,7 +319,7 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            if (!Settings.SettingsHolder.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!SettingsHolder.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;

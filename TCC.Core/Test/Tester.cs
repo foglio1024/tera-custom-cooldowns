@@ -187,7 +187,7 @@ namespace TCC.Test
             }
             threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
 
-            var stats = new Dictionary<int, ThreadInfo> { };
+            var stats = new Dictionary<int, ThreadInfo>();
             _t.Tick += (_, __) =>
             {
                 var p = Process.GetCurrentProcess();
@@ -195,13 +195,19 @@ namespace TCC.Test
                 {
                     if (threadIdToName.ContainsKey(th.Id))
                     {
-                        if (!stats.ContainsKey(th.Id)) stats.Add(th.Id, new ThreadInfo
+                        if (!stats.ContainsKey(th.Id))
                         {
-                            Name = threadIdToName[th.Id],
-                            Id = th.Id,
-                            TotalTime = th.TotalProcessorTime.TotalMilliseconds,
-                            Priority = threadIdToName[th.Id] == "Anal" ? PacketAnalyzer.AnalysisThread.Priority : dispatchers.FirstOrDefault(d => d.Thread.Name == threadIdToName[th.Id]).Thread.Priority
-                        });
+                            stats.Add(th.Id, new ThreadInfo
+                            {
+                                Name = threadIdToName[th.Id],
+                                Id = th.Id,
+                                TotalTime = th.TotalProcessorTime.TotalMilliseconds,
+                                Priority = threadIdToName[th.Id] == "Anls"
+                                    ? PacketAnalyzer.AnalysisThread.Priority
+                                    : dispatchers.FirstOrDefault(d => d.Thread.Name == threadIdToName[th.Id]).Thread
+                                        .Priority
+                            });
+                        }
                         else stats[th.Id].TotalTime = th.TotalProcessorTime.TotalMilliseconds;
                     }
                 }
@@ -257,7 +263,7 @@ namespace TCC.Test
                     var jRes = JObject.Parse(res);
                     canFire = jRes["canFire"].Value<bool>();
                 }
-                catch (WebException e)
+                catch (WebException)
                 {
                     Console.WriteLine($"{username} failed");
                 }
@@ -303,8 +309,7 @@ namespace TCC.Test
                 c.Encoding = Encoding.UTF8;
                 try
                 {
-
-                    var res = await c.UploadStringTaskAsync(
+                    await c.UploadStringTaskAsync(
                         new Uri("http://localhost:5001/tcc-global-events/us-central1/register_webhook"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
                 }

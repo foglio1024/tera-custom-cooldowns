@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using Newtonsoft.Json.Linq;
 using TCC.Interop.JsonRPC;
 
@@ -47,10 +46,10 @@ namespace TCC.Interop.Proxy
             var req = new Request(methodName, parameters);
             return await CallAsync(req);
         }
-        public void SendResponse(Response resp)
-        {
-            Send(resp);
-        }
+        //public void SendResponse(Response resp)
+        //{
+        //    Send(resp);
+        //}
 
 
     }

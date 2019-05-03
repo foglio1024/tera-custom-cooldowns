@@ -6,7 +6,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data.Chat;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 

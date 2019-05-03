@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using TCC.Data.Chat;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 

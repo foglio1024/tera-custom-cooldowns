@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TCC.Data;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.TeraCommon.Game.Messages;
@@ -56,7 +55,7 @@ namespace TCC.Parsing.Messages
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
-                if (!(l.IsTrade && !Settings.SettingsHolder.ShowTradeLfg)) Listings.Add(l);
+                if (!(l.IsTrade && !SettingsHolder.ShowTradeLfg)) Listings.Add(l);
                 if (next != 0) reader.BaseStream.Position = next - 4;
 
             }

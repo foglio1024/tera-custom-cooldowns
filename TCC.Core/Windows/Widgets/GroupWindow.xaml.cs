@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 
@@ -25,11 +24,6 @@ namespace TCC.Windows.Widgets
             Init(Settings.SettingsHolder.GroupWindowSettings, ignoreSize: false);
         }
 
-        private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
-        {
-            if(!VM.AmILeader) return;
-            //ProxyOld.LootSettings();
-        }
 
         private void DisbandButtonClicked(object sender, RoutedEventArgs e)
         {

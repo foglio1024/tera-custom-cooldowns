@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Newtonsoft.Json.Linq;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Parsing;

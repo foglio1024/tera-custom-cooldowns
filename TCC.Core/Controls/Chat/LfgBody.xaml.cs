@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 
 
@@ -28,10 +27,9 @@ namespace TCC.Controls.Chat
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-
-            var name = ((sender as FrameworkElement).DataContext as User).Name;
+            var name = ((sender as FrameworkElement)?.DataContext as User)?.Name;
+            if (name == null) return;
             ProxyInterface.Instance.Stub.AskInteractive(SessionManager.Server.ServerId, name); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, name);
-
         }
     }
 }

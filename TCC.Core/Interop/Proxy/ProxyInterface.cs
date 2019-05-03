@@ -11,7 +11,7 @@ namespace TCC.Interop.Proxy
         public TccStubInterface Stub { get; }
         private ProxyMessageHandler MessageHandler { get; }
         public bool IsFpsUtilsAvailable { get; set; }
-        public bool IsStubAvailable { get; set; } = false;
+        public bool IsStubAvailable { get; set; }
 
         private ProxyInterface()
         {

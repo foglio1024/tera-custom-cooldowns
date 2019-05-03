@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              mc:Ignorable="d" Loaded="TabSettingControl_OnLoaded" d:DataContext="{d:DesignInstance viewModels:Tab }"
              Margin="0">
     <UserControl.Resources>

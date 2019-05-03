@@ -8,7 +8,6 @@
                  xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:converters="clr-namespace:TCC.Converters"
-                 xmlns:tcc="clr-namespace:TCC"
                  xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
                  mc:Ignorable="d"
                  Title="TCC Dungeon edit" Height="550" Width="810"

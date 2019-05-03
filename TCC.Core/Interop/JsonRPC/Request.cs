@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace TCC.Interop.JsonRPC
 {
@@ -13,11 +8,11 @@ namespace TCC.Interop.JsonRPC
         public const string IdKey = "id";
         public const string ParametersKey = "params";
 
-        public string Method => this.ContainsKey(MethodKey) ? this[MethodKey].Value<string>() : null;
-        public string Id => this.ContainsKey(IdKey) ? this[IdKey].Value<string>() : null;
-        public JObject Parameters => this.ContainsKey(ParametersKey) ? this[ParametersKey] as JObject : null;
+        public string Method => ContainsKey(MethodKey) ? this[MethodKey].Value<string>() : null;
+        public string Id => ContainsKey(IdKey) ? this[IdKey].Value<string>() : null;
+        public JObject Parameters => ContainsKey(ParametersKey) ? this[ParametersKey] as JObject : null;
 
-        private static uint _nextId = 0;
+        private static uint _nextId;
         public Request(string methodName, JObject parameters = null)
         {
             this["jsonrpc"] = "2.0";

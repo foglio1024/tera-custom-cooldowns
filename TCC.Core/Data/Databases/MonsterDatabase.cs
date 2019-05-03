@@ -41,12 +41,6 @@ namespace TCC.Data.Databases
             return TryGetMonster(templateId, zoneId, out var m) ? m.MaxHP : 1;
         }
 
-        public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
-        {
-            base.CheckVersion(customAbsPath, customRelPath);
-            //base.CheckVersion(OverrideFileFullPath, OverrideFileRelativePath);
-        }
-
         public override void Load()
         {
             _zones.Clear();

@@ -9,9 +9,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data;
-using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Settings;
 
 namespace TCC.ViewModels
 {
@@ -34,7 +32,7 @@ namespace TCC.ViewModels
         }
         public bool IsPublicizeEnabled => !PublicizeTimer.IsEnabled;
         public bool IsAutoPublicizeOn => AutoPublicizeTimer.IsEnabled;
-        private bool _stopAuto = false;
+        private bool _stopAuto;
         public SynchronizedObservableCollection<Listing> Listings { get; }
         public SortCommand SortCommand { get; }
         public RelayCommand PublicizeCommand { get; }

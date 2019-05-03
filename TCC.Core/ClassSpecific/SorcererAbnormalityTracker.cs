@@ -1,6 +1,4 @@
-﻿
-using System.Runtime.Serialization.Formatters;
-using TCC.Data;
+﻿using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
 using TCC.Utilities.Extensions;

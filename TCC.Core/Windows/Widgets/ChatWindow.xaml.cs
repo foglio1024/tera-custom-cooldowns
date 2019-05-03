@@ -195,7 +195,7 @@ namespace TCC.Windows.Widgets
 
         private void SetLines(object sender, MouseButtonEventArgs e)
         {
-            if (VM.CurrentTab != ((sender as FrameworkElement).DataContext as TabViewModel).Content as Tab) return;
+            if (VM.CurrentTab != ((sender as FrameworkElement)?.DataContext as TabViewModel)?.Content as Tab) return;
             SetTopBorder(sender as FrameworkElement);
         }
     }

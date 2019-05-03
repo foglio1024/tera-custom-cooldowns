@@ -6,7 +6,6 @@ using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.Sniffing;
 using TCC.TeraCommon;
-using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using Server = TCC.TeraCommon.Game.Server;
 

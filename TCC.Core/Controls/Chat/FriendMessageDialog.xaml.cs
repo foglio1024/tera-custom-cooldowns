@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 
 namespace TCC.Controls.Chat

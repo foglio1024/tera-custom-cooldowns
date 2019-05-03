@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Settings;
 
 namespace TCC.ViewModels
 {

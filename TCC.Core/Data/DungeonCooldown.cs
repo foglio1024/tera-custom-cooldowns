@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using TCC.Data.Pc;
 
 namespace TCC.Data

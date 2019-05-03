@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:data="clr-namespace:TCC.Data"
-        xmlns:tcc="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"

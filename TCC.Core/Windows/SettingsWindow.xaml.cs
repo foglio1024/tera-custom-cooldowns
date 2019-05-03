@@ -7,7 +7,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
-using TCC.Data.Chat;
 using TCC.Interop;
 using TCC.Settings;
 using TCC.ViewModels;
@@ -54,11 +53,6 @@ namespace TCC.Windows
             {
                 cw.ResetToCenter();
             }
-        }
-
-        private void SendWebhookTest(object sender, RoutedEventArgs e)
-        {
-            TimeManager.Instance.ExecuteGuildBamWebhook(testMessage: true);
         }
 
         private void MakePositionsGlobal(object sender, RoutedEventArgs e)
@@ -150,28 +144,10 @@ namespace TCC.Windows
 
         private async void ForceExperimentalBuildDownlaod(object sender, RoutedEventArgs e)
         {
-            if (TccMessageBox.Show("Warning: experimental build could be unstable. Proceed?", Data.MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
+            if (TccMessageBox.Show("Warning: experimental build could be unstable. Proceed?", MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
             {
-                await Task.Factory.StartNew(() => UpdateManager.ForceUpdateExperimental());
+                await Task.Factory.StartNew(UpdateManager.ForceUpdateExperimental);
             }
-        }
-
-        private void TestWebhookGuildBam(object sender, RoutedEventArgs e)
-        {
-            TimeManager.Instance.ExecuteGuildBamWebhook(testMessage: true);
-        }
-
-        private void TestWebhookFieldBoss(object sender, RoutedEventArgs e)
-        {
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_FIELDBOSS_APPEAR", out var sysMsg);
-            var srvMsg = "@4157\vregionName\v@rgn:213\vnpcName\v@creature:26#5001";
-            var cm = new ChatMessage(srvMsg, sysMsg, ChatChannel.TCC);
-            TimeManager.Instance.ExecuteFieldBossSpawnWebhook("Boss", "Region",cm.RawMessage,  testMessage: true);
-
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_FIELDBOSS_DIE_GUILD", out var dieSysMsg);
-            var dieSrvMsg = "@4158\vguildName\vWish\vuserName\v쿤\vnpcname\v@creature:26#5001";
-            var cmd = new ChatMessage(dieSrvMsg, dieSysMsg, ChatChannel.TCC);
-            //TimeManager.Instance.ExecuteFieldBossDieWebhook("Boss", cmd.RawMessage,  testMessage: true);
         }
 
         private void RegisterGuildBamWebhook(object sender, RoutedEventArgs e)

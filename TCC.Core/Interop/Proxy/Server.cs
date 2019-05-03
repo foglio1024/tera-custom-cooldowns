@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Threading;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TCC.Interop.JsonRPC;
 
@@ -13,7 +12,7 @@ namespace TCC.Interop.Proxy
         public event Action<Response> ResponseReceived;
         public event Action<Request> RequestReceived;
         private readonly HttpListener _server;
-        private bool _listening = false;
+        private bool _listening;
         public Server()
         {
             _server = new HttpListener { Prefixes = { "http://127.0.0.51:9551/" } };

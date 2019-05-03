@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Windows;
 

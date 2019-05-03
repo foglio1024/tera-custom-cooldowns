@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.ViewModels;

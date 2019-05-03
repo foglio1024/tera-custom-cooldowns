@@ -25,10 +25,9 @@ namespace TCC.Interop
                 c.Encoding = Encoding.UTF8;
                 try
                 {
-                    var res = await c.UploadStringTaskAsync(
+                    await c.UploadStringTaskAsync(
                         new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
-                    //Log.All("Webhook registered");
                 }
                 catch
                 {
@@ -39,7 +38,7 @@ namespace TCC.Interop
 
         public static async Task<bool> RequestWebhookExecution(string webhook)
         {
-            var canFire = true;
+            bool canFire;
             var req = new JObject
             {
                 { "webhook" , Utils.GenerateHash(webhook)},
