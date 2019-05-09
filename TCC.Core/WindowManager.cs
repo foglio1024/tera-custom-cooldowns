@@ -94,7 +94,7 @@ namespace TCC
                 Header = "Close",
                 Command = new RelayCommand(o =>
                 {
-                    _contextMenu.Closed += (_, __) => App.CloseApp();
+                    _contextMenu.Closed += (_, __) => App.Close();
                     _contextMenu.IsOpen = false;
                 })
             });
@@ -157,11 +157,13 @@ namespace TCC
             try { ClassWindow.CloseWindowSafe(); } catch { }
 
             if (RunningDispatchers == null) return;
-            while (true)
+            var times = 50;
+            while (times > 0)
             {
                 if (RunningDispatchers.Count == 0) break;
                 Log.CW("Waiting all dispatcher to shutdown...");
                 Thread.Sleep(100);
+                times--;
             }
 
         }
