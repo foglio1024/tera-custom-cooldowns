@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop.Proxy;
+using TCC.ViewModels;
 using TCC.Windows;
 
 namespace TCC
@@ -20,7 +21,7 @@ namespace TCC
         private KeyboardHook()
         {
             // register the event of the inner native window.
-            _window.KeyPressed += delegate (object sender, KeyPressedEventArgs args) { KeyPressed?.Invoke(this, args); };
+            _window.KeyPressed += (sender, args) => KeyPressed?.Invoke(this, args);
         }
 
 
@@ -42,7 +43,9 @@ namespace TCC
         {
             if (e.Key == Settings.SettingsHolder.LfgHotkey.Key && e.Modifier == Settings.SettingsHolder.LfgHotkey.Modifier)
             {
-//                if (!ProxyOld.IsConnected) return;
+                //                if (!ProxyOld.IsConnected) return;
+                if (!SessionManager.Logged) return;
+
                 if (!ProxyInterface.Instance.IsStubAvailable) return;
                 if (!WindowManager.LfgListWindow.IsVisible)
                 {
@@ -63,6 +66,7 @@ namespace TCC
             }
             else if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {
+                if (!SessionManager.Logged) return;
                 WindowManager.CooldownWindow.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
@@ -80,7 +84,10 @@ namespace TCC
                 WindowManager.LfgListWindow.VM.ForceStopPublicize();
                 ProxyInterface.Instance.Stub.ReturnToLobby(); //   ProxyOld.ReturnToLobby();
             }
-
+            else if (e.Key == Keys.C && e.Modifier == (ModifierKeys.Alt | ModifierKeys.Control))
+            {
+                ChatWindowManager.Instance.ToggleForcedClickThru();
+            }
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             //{
             //    if (!WindowManager.GroupWindow.VM.AmILeader) return;
@@ -91,13 +98,13 @@ namespace TCC
         }
 
 
-/*
-        public void Update()
-        {
-            ClearHotkeys();
-            Register();
-        }
-*/
+        /*
+                public void Update()
+                {
+                    ClearHotkeys();
+                    Register();
+                }
+        */
 
         public void RegisterKeyboardHook()
         {
@@ -140,6 +147,7 @@ namespace TCC
             RegisterHotKey(Settings.SettingsHolder.LootSettingsHotkey.Modifier, Settings.SettingsHolder.LootSettingsHotkey.Key);
             RegisterHotKey(ModifierKeys.Control, Keys.K);
             RegisterHotKey(ModifierKeys.Control | ModifierKeys.Alt, Keys.R);
+            RegisterHotKey(ModifierKeys.Control | ModifierKeys.Alt, Keys.C);
             //RegisterHotKey(Settings.ShowAllHotkey.Modifier, Settings.ShowAllHotkey.Key);
 
             _isRegistered = true;

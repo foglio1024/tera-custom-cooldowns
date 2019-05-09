@@ -250,5 +250,8 @@ namespace TCC.ViewModels
             Visible = true;
 
         }
+
+        public IEnumerable<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+
     }
 }

@@ -365,5 +365,14 @@ namespace TCC.ViewModels
 
             win.ScrollToMessage(tab, msg);
         }
+
+        public void ToggleForcedClickThru()
+        {
+            SettingsHolder.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
+            if (SettingsHolder.ChatWindowsSettings.Count == 0) return;
+            var msg = $"Forcing chat clickable turned {(SettingsHolder.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
+            WindowManager.FloatingButton.NotifyExtended("TCC", msg, NotificationType.Normal, 2000);
+            AddTccMessage(msg);
+        }
     }
 }
