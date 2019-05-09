@@ -8,6 +8,10 @@
              xmlns:chatcontrols="clr-namespace:TCC.Controls.Chat"
              xmlns:settings="clr-namespace:TCC.Controls.Settings"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+             xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
+             xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="OnWindowMouseEnter"
@@ -17,7 +21,7 @@
              MinWidth="350" MinHeight="110"
              ResizeMode="CanResize"
              SizeToContent="Manual"
-             Loaded="OnLoaded">
+             Loaded="OnLoaded" d:DataContext="{d:DesignInstance viewModels:ChatViewModel}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="7 12 7 7" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
@@ -163,9 +167,10 @@
                         <BlurEffect Radius="20"/>
                     </Border.Effect>
                 </Border>
-                <Border Background="#3445" Opacity="1" x:Name="MainBorder"
+                <Border Background="#3445" 
+                        Opacity="{Binding WindowSettings.FrameOpacity}" x:Name="MainBorder"
                         CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1" 
-                        BorderBrush="#8555" Grid.Row="0" VerticalAlignment="Stretch">
+                        BorderBrush="#8666" Grid.Row="0" VerticalAlignment="Stretch">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Margin" Value="0 25 0 0"/>
@@ -181,17 +186,19 @@
                     </Border.Effect>
                 </Border>
 
-                <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" 
+                <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" 
                         Margin="0 0 0 0" HorizontalAlignment="Left" 
                        VerticalAlignment="Top" Grid.Row="1"
+                        Opacity="{Binding WindowSettings.FrameOpacity}"
                         x:Name="LeftLine">
                     <Border.RenderTransform>
                         <TranslateTransform Y="26"/>
                     </Border.RenderTransform>
                 </Border>
-                <Border BorderBrush="#8555" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" 
+                <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" 
                         Margin="0 0 0 0" HorizontalAlignment="Stretch" 
                        VerticalAlignment="Top" Grid.Row="1"
+                        Opacity="{Binding WindowSettings.FrameOpacity}"
                         x:Name="RightLine">
                     <Border.RenderTransform>
                         <TranslateTransform Y="26"/>
@@ -212,10 +219,14 @@
                                          ShowDefaultAddButton="True"
                                          NewItemFactory="{Binding AddNewTabCommand}"
                                          ShowDefaultCloseButton="True"
-                                         Style="{DynamicResource ChatTabablzControlStyle}">
+                                         Style="{DynamicResource ChatTabablzControlStyle}"
+                                         >
                     <dragablz:TabablzControl.ItemContainerStyle>
                         <Style TargetType="{x:Type dragablz:DragablzItem}"
                                BasedOn="{StaticResource ChatDragableTabItemStyle}">
+                            <Setter Property="extensions:DragablzHeaderExtensions.FrameOpacity" 
+                                    Value="{Binding Path=DataContext.WindowSettings.FrameOpacity, RelativeSource={RelativeSource AncestorType=widgets:ChatWindow}}"></Setter>
+
                             <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings" />
                             <EventSetter Event="PreviewMouseLeftButtonUp" Handler="SetLines" />
                             <EventSetter Event="Loaded" Handler="TabLoaded"></EventSetter>
@@ -282,20 +293,27 @@
         <Popup Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
                MouseLeave="OnSettingsPopupMouseLeave"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True"
-               PopupAnimation="Slide" >
+               PopupAnimation="Slide" d:DataContext="{d:DesignInstance viewModels:ChatViewModel}">
             <Grid>
                 <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
                 <StackPanel Width="350" Margin="3">
                     <settings:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
                                            Value="{Binding WindowSettings.BackgroundOpacity,  Mode=TwoWay}" 
                                            Min="0" Max="1" Visibility="Visible"/>
+                    <settings:ValueSetting SettingName="Frame opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
+                                           Value="{Binding WindowSettings.FrameOpacity,  Mode=TwoWay}" 
+                                           Min="0" Max="1" Visibility="Visible"/>
 
-                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource GreenBrush}"/>
-                    <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff" IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}" CheckBoxColor="{StaticResource GreenBrush}"/>
+                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
+                    <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff" IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"/>
                     <settings:ValueSetting SettingName="Fade timeout" Foreground="#9fff" TextBoxVisibility="Visible"
                                            Value="{Binding WindowSettings.HideTimeout,  Mode=TwoWay}" 
                                            Min="3" Max="60" Visibility="Visible"/>
-                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource GreenBrush}"  />
+                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
+                    <settings:SelectionSetting SettingName="Click thru" Foreground="#9fff" 
+                                               SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}" 
+                                               Choices="{Binding ClickThruModes}"
+                                               ChoicesType="{x:Type data:ClickThruMode}"/>
                     <Button  Style="{StaticResource SettingsButton}" ToolTip="Use current position for all classes" Click="MakeGlobal" Margin="10 5 10 7">
                         <TextBlock Text="Make position global" Margin="0 0"/>
                     </Button>

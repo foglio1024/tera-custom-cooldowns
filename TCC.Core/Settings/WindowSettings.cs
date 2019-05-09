@@ -25,6 +25,8 @@ namespace TCC.Settings
         private bool _enabled;
         private bool _allowOffScreen;
 
+        public bool ForcedClickable { get; protected set; }
+
         public event Action ResetToCenter;
         public event Action EnabledChanged;
         public event Action ClickThruModeChanged;
@@ -125,12 +127,12 @@ namespace TCC.Settings
         }
         public ClickThruMode ClickThruMode
         {
-            get => _clickThruMode;
+            get => ForcedClickable ? ClickThruMode.Never : _clickThruMode;
             set
             {
                 _clickThruMode = value;
                 N(nameof(ClickThruMode));
-                ClickThruModeChanged?.Invoke();
+                InvokeClickThruModeChanged();
             }
         }
         public double Scale
@@ -252,7 +254,7 @@ namespace TCC.Settings
             xe.Add(new XAttribute(nameof(W), W));
             xe.Add(new XAttribute(nameof(H), H));
             xe.Add(new XAttribute(nameof(Visible), Visible));
-            xe.Add(new XAttribute(nameof(ClickThruMode), ClickThruMode));
+            xe.Add(new XAttribute(nameof(ClickThruMode), _clickThruMode));
             xe.Add(new XAttribute(nameof(Scale), Scale));
             xe.Add(new XAttribute(nameof(AutoDim), AutoDim));
             xe.Add(new XAttribute(nameof(DimOpacity), DimOpacity));
@@ -285,12 +287,15 @@ namespace TCC.Settings
             Positions.SetAllPositions(currentPos);
             SettingsWriter.Save();
         }
+
+        protected void InvokeClickThruModeChanged() => ClickThruModeChanged?.Invoke();
     }
 
     public class ChatWindowSettings : WindowSettings
     {
         private bool _fadeOut = true;
         private double _backgroundOpacity = .3;
+        private double _frameOpacity = 1;
         private bool _lfgOn = true;
 
         public event Action FadeoutChanged;
@@ -304,7 +309,7 @@ namespace TCC.Settings
             get { return _hideTimeout; }
             set
             {
-                if(_hideTimeout == value) return;
+                if (_hideTimeout == value) return;
                 _hideTimeout = value;
                 N();
                 TimeoutChanged?.Invoke();
@@ -316,8 +321,19 @@ namespace TCC.Settings
             get => _backgroundOpacity;
             set
             {
-                if(_backgroundOpacity == value) return;
+                if (_backgroundOpacity == value) return;
                 _backgroundOpacity = value;
+                N();
+                OpacityChanged?.Invoke();
+            }
+        }
+        public double FrameOpacity
+        {
+            get => _frameOpacity;
+            set
+            {
+                if (_frameOpacity == value) return;
+                _frameOpacity = value;
                 N();
                 OpacityChanged?.Invoke();
             }
@@ -327,7 +343,7 @@ namespace TCC.Settings
             get => _fadeOut;
             set
             {
-                if(_fadeOut == value) return;
+                if (_fadeOut == value) return;
                 _fadeOut = value;
                 N();
                 FadeoutChanged?.Invoke();
@@ -341,7 +357,7 @@ namespace TCC.Settings
             get => _lfgOn;
             set
             {
-                if(_lfgOn == value) return;
+                if (_lfgOn == value) return;
                 _lfgOn = value;
                 N();
             }
@@ -357,9 +373,16 @@ namespace TCC.Settings
             b.Add(SettingsWriter.BuildChatTabsXElement(Tabs));
             b.Add(new XAttribute(nameof(LfgOn), LfgOn));
             b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
+            b.Add(new XAttribute(nameof(FrameOpacity), FrameOpacity));
             b.Add(new XAttribute(nameof(FadeOut), FadeOut));
             b.Add(new XAttribute(nameof(HideTimeout), HideTimeout));
             return b;
+        }
+
+        public void ForceToggleClickThru()
+        {
+            ForcedClickable = !ForcedClickable;
+            InvokeClickThruModeChanged();
         }
     }
 }

@@ -100,9 +100,9 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Border x:Name="border" ClipToBounds="True"
-                                BorderThickness="0"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}"
-                                BorderBrush="Transparent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 CornerRadius="{TemplateBinding extensions:ButtonExtensions.CornerRadius}"
                                 Background="{TemplateBinding Background}">
 
@@ -550,19 +550,15 @@
                                        RenderTransform="{StaticResource DefaultScaleTransform}"
                                        UseLayoutRounding="True">
                             </Rectangle>
-
-                            <!--<Grid HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
-                                              Visibility="{Binding Content.Attention, Converter={StaticResource BoolToVisibleCollapsed}}"
-                                                Margin="0" Grid.Column="1">
-                                        <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
-                                    </Grid>-->
                             <Grid Grid.Column="0" Background="Transparent">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Border BorderThickness="1 1 1 0" Grid.ColumnSpan="2" Margin="0 0 0 0"
-                                        CornerRadius="1 1 0 0" Background="#4445" BorderBrush="#8555" Opacity="1"
+                                        CornerRadius="1 1 0 0" Background="#4445" BorderBrush="#8666"
+                                        Opacity="{Binding Path=(extensions:DragablzHeaderExtensions.FrameOpacity), RelativeSource={RelativeSource TemplatedParent}}"
+
                                         x:Name="SelBorder" Visibility="Collapsed">
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".5"></DropShadowEffect>
@@ -597,27 +593,9 @@
                                        Style="{StaticResource MaterialDesignInvisibleThumbStyle}">
 
                                 </Thumb>
-                                <!--<Button Grid.Column="1" x:Name="CloseButton" VerticalAlignment="Center"
-                                                Style="{StaticResource MaterialDesignCloseItemCommandButtonStyle}"  
-                                                Foreground="{StaticResource HpBrush}" Background="Transparent"
-                                                Margin="-2 0 2 0"
-                                                Command="{x:Static dragablz:TabablzControl.CloseItemCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}">
-                                    <Button.Visibility>
-                                        <MultiBinding Converter="{StaticResource ShowDefaultCloseButtonConverter}">
-                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type dragablz:TabablzControl}}" Path="ShowDefaultCloseButton" />
-                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type dragablz:TabablzControl}}" Path="FixedHeaderCount" />
-                                            <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="LogicalIndex" />
-                                        </MultiBinding>
-                                    </Button.Visibility>
-                                    <Button.LayoutTransform>
-                                        <ScaleTransform ScaleX="0"/>
-                                    </Button.LayoutTransform>
-                                </Button>-->
                                 <Grid HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ImportantCounter"
                                       Background="Transparent"
                                       Visibility="{Binding Content.Attention, Converter={StaticResource BoolToVisibleCollapsed}}">
-
                                     <TextBlock Text="{Binding Content.ImportantMessagesLabel}" Foreground="{StaticResource MainBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                                FontWeight="DemiBold" FontSize="14" Margin="0 0 4 1" x:Name="ImpCount"/>
