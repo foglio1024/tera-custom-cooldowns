@@ -12,6 +12,7 @@ using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
@@ -77,7 +78,7 @@ namespace TCC
                 SettingsHolder.LastLanguage = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
-                    MessageBoxButton.OK);
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             var timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
