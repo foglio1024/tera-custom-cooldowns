@@ -9,6 +9,10 @@
     <Color x:Key="RevampDarkBackgroundColor">    #233147   </Color>
     <Color x:Key="RevampDarkerBackgroundColor">  #101216   </Color>
     <Color x:Key="RevampBorderColor">            #515B65   </Color>
+
+    <Color x:Key="TeraRestylePanelColor">        #10141E   </Color>
+    <Color x:Key="TeraRestyleBorderColor">       #627088   </Color>
+    <Color x:Key="TeraRestyleBorderColorLight">  #96ABCE   </Color>
                                                            
     <Color x:Key="ClassGlowColor">               #55ccff   </Color>
                                                            

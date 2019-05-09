@@ -114,6 +114,9 @@ namespace TCC.R
 		public static Color RevampDarkBackgroundColor => ((Color)App.Current.FindResource("RevampDarkBackgroundColor"));
 		public static Color RevampDarkerBackgroundColor => ((Color)App.Current.FindResource("RevampDarkerBackgroundColor"));
 		public static Color RevampBorderColor => ((Color)App.Current.FindResource("RevampBorderColor"));
+		public static Color TeraRestylePanelColor => ((Color)App.Current.FindResource("TeraRestylePanelColor"));
+		public static Color TeraRestyleBorderColor => ((Color)App.Current.FindResource("TeraRestyleBorderColor"));
+		public static Color TeraRestyleBorderColorLight => ((Color)App.Current.FindResource("TeraRestyleBorderColorLight"));
 		public static Color ClassGlowColor => ((Color)App.Current.FindResource("ClassGlowColor"));
 		public static Color GreenColor => ((Color)App.Current.FindResource("GreenColor"));
 		public static Color MainColor => ((Color)App.Current.FindResource("MainColor"));
@@ -245,6 +248,9 @@ namespace TCC.R
 		public static SolidColorBrush RevampDarkerBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("RevampDarkerBackgroundBrush"));
 		public static SolidColorBrush RevampDarkerBackground70Brush => ((SolidColorBrush)App.Current.FindResource("RevampDarkerBackground70Brush"));
 		public static SolidColorBrush RevampBorderBrush => ((SolidColorBrush)App.Current.FindResource("RevampBorderBrush"));
+		public static SolidColorBrush TeraRestylePanelBrush => ((SolidColorBrush)App.Current.FindResource("TeraRestylePanelBrush"));
+		public static SolidColorBrush TeraRestyleBorderBrush => ((SolidColorBrush)App.Current.FindResource("TeraRestyleBorderBrush"));
+		public static SolidColorBrush TeraRestyleBorderBrushLight => ((SolidColorBrush)App.Current.FindResource("TeraRestyleBorderBrushLight"));
 		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
 		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
 		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
@@ -342,6 +348,7 @@ namespace TCC.R
 		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
 		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
+		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
 		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
 		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
