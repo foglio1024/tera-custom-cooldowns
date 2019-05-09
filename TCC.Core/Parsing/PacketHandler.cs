@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
@@ -165,10 +166,8 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            Log.All("Logging in");
             Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, true);
             Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, true);
-            Log.All("Webhooks setup done.");
 
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             WindowManager.ReloadPositions();
@@ -176,7 +175,7 @@ namespace TCC.Parsing
             if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
-            App.SendUsageStat();
+            Firebase.SendUsageStatAsync(); 
             SettingsHolder.LastLanguage = SessionManager.Language;
             TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
             TimeManager.Instance.SetGuildBamTime(false);
@@ -1158,7 +1157,7 @@ namespace TCC.Parsing
             if (!File.Exists(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map")))
             {
                 TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
-                App.CloseApp();
+                App.Close();
                 return;
             }
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map"));

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Settings;
@@ -174,6 +175,10 @@ namespace TCC
         //    CurrentPlayer.MaxShield = shield;
         //    CurrentPlayer.CurrentShield = shield;
         //}
+        public static async void InitDatabasesAsync(string lang)
+        {
+            await Task.Factory.StartNew(() => InitDatabases(lang));
+        }
 
         public static void InitDatabases(string lang)
         {
@@ -200,7 +205,7 @@ namespace TCC
                     InitDatabases(SettingsHolder.LastLanguage);
                 }
                 else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
-                else if (res == System.Windows.MessageBoxResult.Cancel) App.CloseApp();
+                else if (res == System.Windows.MessageBoxResult.Cancel) App.Close();
             }
             else DB.Load();
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
+using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Interop.Proxy;
@@ -37,6 +38,12 @@ namespace TCC.Parsing
                 Log.All("Analysis already running, skipping...");
             }
             TeraSniffer.Instance.Enabled = true;
+        }
+
+        public static async void InitAsync()
+        {
+            await Task.Factory.StartNew(Init);
+            WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
         }
         private static void PacketAnalysisLoop()
         {
