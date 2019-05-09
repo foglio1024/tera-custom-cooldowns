@@ -107,6 +107,7 @@
     <Compile Include="Data\Chat\MessageLine.cs" />
     <Compile Include="Data\Databases\DatabaseBase.cs" />
     <Compile Include="EpDataProvider.cs" />
+    <Compile Include="GlobalExceptionHandler.cs" />
     <Compile Include="Interop\Discord.cs" />
     <Compile Include="Interop\Firebase.cs" />
     <Compile Include="Interop\JsonRPC\Request.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Utilities\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Utilities\Extensions\DispatcherExtensions.cs" />
     <Compile Include="Utilities\Extensions\DispatcherTimerExtensions.cs" />
+    <Compile Include="Utilities\Extensions\DragablzHeaderExtensions.cs" />
     <Compile Include="Utilities\Extensions\ItemsControlExtensions.cs" />
     <Compile Include="Utilities\Extensions\ListExtensions.cs" />
     <Compile Include="Utilities\Extensions\UInt64Extensions.cs" />

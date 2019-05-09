@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using TCC.Settings;
+using TCC.Utilities.Extensions;
 
 namespace TCC.Interop
 {
@@ -35,7 +38,6 @@ namespace TCC.Interop
                 }
             }
         }
-
         public static async Task<bool> RequestWebhookExecution(string webhook)
         {
             bool canFire;
@@ -71,5 +73,70 @@ namespace TCC.Interop
 
             return canFire;
         }
+
+        public static async void SendUsageStatAsync()
+        {
+            if (SettingsHolder.StatSentVersion == App.AppVersion &&
+                SettingsHolder.StatSentTime.Month == DateTime.UtcNow.Month &&
+                SettingsHolder.StatSentTime.Day == DateTime.UtcNow.Day) return;
+
+            try
+            {
+                using (var c = Utils.GetDefaultWebClient())
+                {
+                    c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                    c.Encoding = Encoding.UTF8;
+
+                    var accountNameHash = SHA256.Create().ComputeHash(SessionManager.CurrentAccountName.ToByteArray())
+                        .ToStringEx();
+                    var js = new JObject
+                    {
+                        {"region", SessionManager.Server.Region},
+                        {"server", SessionManager.Server.ServerId},
+                        {"account", accountNameHash},
+                        {"tcc_version", App.AppVersion},
+                        {
+                            "updated", SettingsHolder.StatSentTime.Month == DateTime.Now.Month &&
+                                       SettingsHolder.StatSentTime.Day == DateTime.Now.Day &&
+                                       SettingsHolder.StatSentVersion != App.AppVersion
+                        },
+                        {
+                            "settings_summary", new JObject
+                            {
+                                {
+                                    "windows", new JObject
+                                    {
+                                        {"cooldown", SettingsHolder.CooldownWindowSettings.Enabled},
+                                        {"buffs", SettingsHolder.BuffWindowSettings.Enabled},
+                                        {"character", SettingsHolder.CharacterWindowSettings.Enabled},
+                                        {"class", SettingsHolder.ClassWindowSettings.Enabled},
+                                        {"chat", SettingsHolder.ChatEnabled},
+                                        {"group", SettingsHolder.GroupWindowSettings.Enabled}
+                                    }
+                                },
+                                {
+                                    "generic", new JObject
+                                    {
+                                        {"proxy_enabled", SettingsHolder.EnableProxy}
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
+                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+
+                    SettingsHolder.StatSentTime = DateTime.UtcNow;
+                    SettingsHolder.StatSentVersion = App.AppVersion;
+                }
+            }
+            catch
+            {
+                //TODO: write error?
+            }
+        }
+
     }
 }
