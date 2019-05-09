@@ -12,6 +12,7 @@ using TCC.Data.Databases;
 using TCC.Data.Skills;
 using TCC.Settings;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
@@ -245,7 +246,7 @@ namespace TCC.ViewModels
                     root.Add(new XElement(tag, new XAttribute("id", sk.Skill.Id), new XAttribute("row", 3), new XAttribute("name", sk.Skill.ShortName)));
                 });
                 if (SessionManager.CurrentPlayer.Class > (Class)12) return;
-                root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
+                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
             }));
         }
 
@@ -472,7 +473,7 @@ namespace TCC.ViewModels
             {
                 var res = TccMessageBox.Show("TCC",
                     $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
-                    MessageBoxButton.OKCancel);
+                    MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(Path.Combine(App.ResourcesPath, "config/skills/", filename));
                 LoadSkills(c);

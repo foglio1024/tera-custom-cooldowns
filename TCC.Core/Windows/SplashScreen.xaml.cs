@@ -21,7 +21,7 @@ namespace TCC.Windows
             try
             {
                 var r = new Random();
-                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
+                var path = Path.Combine(App.ResourcesPath, $"images/splash/{r.Next(1, 15)}.jpg");
                 var bm = new BitmapImage();
                 bm.BeginInit();
                 bm.UriSource = new Uri(path, UriKind.Absolute);

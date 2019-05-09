@@ -279,7 +279,7 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.OK) LoadCharacters();
                 else
                 {
-                    File.Delete(Path.Combine(App.BasePath, "resources/config/characters.xml"));
+                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml"));
                     LoadCharacters();
                 }
             }
@@ -288,7 +288,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                var fs = new FileStream(Path.Combine(App.BasePath, "resources/config/characters.xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                var fs = new FileStream(Path.Combine(App.ResourcesPath, "config/characters.xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                 fs.SetLength(0);
                 using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
                 {
@@ -492,7 +492,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);

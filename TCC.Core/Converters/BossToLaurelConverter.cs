@@ -57,7 +57,7 @@ namespace TCC.Converters
 
             if (laurel == "") return null;
 
-            return Path.Combine(App.BasePath, "resources/images/Icon_Laurels/" + laurel + "_kr_big.png");
+            return Path.Combine(App.ResourcesPath, "images/Icon_Laurels/" + laurel + "_kr_big.png");
 
             //return "../resources/images/Icon_Laurels/" + laurel + "_kr_big.png";
 

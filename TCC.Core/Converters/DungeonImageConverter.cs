@@ -14,7 +14,7 @@ namespace TCC.Converters
             {
                 iconName = name != "" ? name : iconName;
             }
-            return Path.Combine(App.BasePath, "resources/images/dungeons/rp", iconName + ".jpg");
+            return Path.Combine(App.ResourcesPath, "images/dungeons/rp", iconName + ".jpg");
 
         }
 

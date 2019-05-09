@@ -55,7 +55,7 @@ namespace TCC.Data
         private const string MaxCoinsTag = "maxCoins";
 
 
-        private readonly string _path = Path.Combine(App.BasePath, "resources/config/characters.xml");
+        private readonly string _path = Path.Combine(App.ResourcesPath, "config/characters.xml");
         private XDocument _doc;
 
         public static XDocument BuildCharacterFile(SynchronizedObservableCollection<Character> list)
