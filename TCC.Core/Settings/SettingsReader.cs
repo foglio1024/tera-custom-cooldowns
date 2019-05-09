@@ -9,6 +9,8 @@ using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
+
 // ReSharper disable CollectionNeverUpdated.Local
 
 namespace TCC.Settings
@@ -269,7 +271,7 @@ namespace TCC.Settings
             {
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
-                    MessageBoxButton.YesNo);
+                    MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
                 LoadWindowSettings(pathOverride);
             }
@@ -294,7 +296,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.BuffsDirection)) SettingsHolder.BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.CooldownBarMode)) SettingsHolder.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.EnrageLabelMode)) SettingsHolder.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.ChatClickThruMode)) SettingsHolder.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
+                    //else if (attr.Name == nameof(SettingsHolder.ChatClickThruMode)) SettingsHolder.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.WarriorEdgeMode)) SettingsHolder.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.AbnormalityShape)) SettingsHolder.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.SkillShape)) SettingsHolder.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
@@ -413,7 +415,7 @@ namespace TCC.Settings
             {
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
-                    MessageBoxButton.YesNo);
+                    MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
                 LoadSettings(pathOverride);
             }

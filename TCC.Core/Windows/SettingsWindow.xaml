@@ -1030,9 +1030,9 @@
                                             Content="General settings" />
                             <settings:CheckboxSetting IsOn="{Binding ChatWindowEnabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
-                            <settings:SelectionSetting SelectedItem="{Binding ChatClickThruMode, Mode=TwoWay}"
+                            <!--<settings:SelectionSetting SelectedItem="{Binding ChatClickThruMode, Mode=TwoWay}"
                                                        Style="{StaticResource ClickThruSettingStyle}"
-                                                       Choices="{Binding ChatClickThruModes, Mode=OneWay}" />
+                                                       Choices="{Binding ChatClickThruModes, Mode=OneWay}" />-->
                         </StackPanel>
                         <!-- Specific -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
@@ -1386,7 +1386,7 @@
                                                        Choices="{Binding ControlShapes, Mode=OneWay}" />
                             <settings:CheckboxSetting SettingName="Use npcap"
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />
-                            <settings:CheckboxSetting SettingName="Use Tera proxy"
+                            <settings:CheckboxSetting SettingName="Use Tera Toolbox"
                                                       IsOn="{Binding EnableProxy, Mode=TwoWay}" />
                             <settings:CheckboxSetting SettingName="Auto fps mode"
                                                       IsOn="{Binding FpsAtGuardian, Mode=TwoWay}">

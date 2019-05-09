@@ -111,7 +111,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ChatTimestampSeconds), SettingsHolder.ChatTimestampSeconds),
                 new XAttribute(nameof(SettingsHolder.AnimateChatMessages), SettingsHolder.AnimateChatMessages),
                 new XAttribute(nameof(SettingsHolder.ChatEnabled), SettingsHolder.ChatEnabled),
-                new XAttribute(nameof(SettingsHolder.ChatClickThruMode), SettingsHolder.ChatClickThruMode),
+                //new XAttribute(nameof(SettingsHolder.ChatClickThruMode), SettingsHolder.ChatClickThruMode),
                 new XAttribute(nameof(SettingsHolder.ChatScrollAmount), SettingsHolder.ChatScrollAmount),
                 new XAttribute(nameof(SettingsHolder.UserExcludedSysMsg), SettingsHolder.UserExcludedSysMsg.ToCSV()),
                 // Group

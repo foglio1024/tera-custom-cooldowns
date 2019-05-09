@@ -12,7 +12,7 @@ namespace TCC.Settings
     {
         private static string _lastLanguage = "";
         private static bool _chatEnabled;
-        private static ClickThruMode _chatClickThruMode;
+        //private static ClickThruMode _chatClickThruMode;
         private static DateTime _statSentTime = DateTime.MinValue;
         private static string _statSentVersion = GetVersion();
 
@@ -130,27 +130,27 @@ namespace TCC.Settings
         public static bool ChatTimestampSeconds { get; internal set; }
         public static int FontSize { get; set; } = 15;
         public static bool AnimateChatMessages { get; set; }
-        public static ClickThruMode ChatClickThruMode
-        {
-            get
-            {
-                if (ChatWindowsSettings.Count > 0) return ChatWindowsSettings[0].ClickThruMode;
-                return _chatClickThruMode;
-            }
+        //public static ClickThruMode ChatClickThruMode
+        //{
+        //    get
+        //    {
+        //        if (ChatWindowsSettings.Count > 0) return ChatWindowsSettings[0].ClickThruMode;
+        //        return _chatClickThruMode;
+        //    }
 
-            set
-            {
-                if (ChatWindowsSettings.Count > 0)
-                {
-                    if (ChatWindowsSettings[0].ClickThruMode == value) return;
-                    ChatWindowsSettings.ToList().ForEach(x => x.ClickThruMode = value);
-                }
-                else
-                {
-                    _chatClickThruMode = value;
-                }
-            }
-        }
+        //    set
+        //    {
+        //        if (ChatWindowsSettings.Count > 0)
+        //        {
+        //            if (ChatWindowsSettings[0].ClickThruMode == value) return;
+        //            ChatWindowsSettings.ToList().ForEach(x => x.ClickThruMode = value);
+        //        }
+        //        else
+        //        {
+        //            _chatClickThruMode = value;
+        //        }
+        //    }
+        //}
         public static int ChatScrollAmount { get; set; } = 1;
         // Character window
         public static bool CharacterWindowCompactMode { get; set; } = true;

@@ -9,6 +9,7 @@ using TCC.Data;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
@@ -681,7 +682,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.Npcap == value) return;
                 var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
-                    MessageBoxButton.OKCancel);
+                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Cancel) return;
                 SettingsHolder.Npcap = value;
                 N();
@@ -793,7 +794,7 @@ namespace TCC.ViewModels
         //}
 
         public IEnumerable<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
-        public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
+        //public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
         public IEnumerable<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
         public IEnumerable<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public IEnumerable<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
@@ -812,16 +813,16 @@ namespace TCC.ViewModels
             }
         }
 
-        public ClickThruMode ChatClickThruMode
-        {
-            get => SettingsHolder.ChatClickThruMode;
-            set
-            {
-                if (SettingsHolder.ChatClickThruMode == value) return;
-                SettingsHolder.ChatClickThruMode = value;
-                N();
-            }
-        }
+        //public ClickThruMode ChatClickThruMode
+        //{
+        //    get => SettingsHolder.ChatClickThruMode;
+        //    set
+        //    {
+        //        if (SettingsHolder.ChatClickThruMode == value) return;
+        //        SettingsHolder.ChatClickThruMode = value;
+        //        N();
+        //    }
+        //}
 
         public bool ShowTradeLfgs
         {
