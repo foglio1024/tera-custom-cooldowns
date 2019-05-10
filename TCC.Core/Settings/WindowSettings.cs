@@ -226,10 +226,13 @@ namespace TCC.Settings
 
         public ClassPositions Positions { get; set; }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above)
+        public WindowSettings()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
+        }
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
+        {
             Name = name;
             _w = w;
             _h = h;
@@ -245,6 +248,25 @@ namespace TCC.Settings
             Positions = positions == null ?
                 new ClassPositions(x, y, buttonsPosition) :
                 new ClassPositions(positions);
+        }
+
+        protected WindowSettings(WindowSettings other) : this()
+        {
+            _w = other.W;
+            _h = other.H;
+            _visible = other.Visible;
+            _clickThruMode = other._clickThruMode;
+            _scale = other.Scale;
+            _autoDim = other.AutoDim;
+            _dimOpacity = other.DimOpacity;
+            _showAlways = other.ShowAlways;
+            _enabled = other.Enabled;
+            _allowOffScreen = other.AllowOffScreen;
+            PerClassPosition = other.PerClassPosition;
+            Positions = other.Positions;
+            Name = other.Name;
+
+
         }
 
         public virtual XElement ToXElement(string name)
@@ -363,6 +385,10 @@ namespace TCC.Settings
             }
         }
 
+        public ChatWindowSettings(WindowSettings other) : base(other)
+        {
+            Tabs = new List<Tab>();
+        }
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
             Tabs = new List<Tab>();
