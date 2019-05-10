@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.Utilities.Extensions;
 
@@ -118,7 +119,7 @@ namespace TCC.Interop
                                 {
                                     "generic", new JObject
                                     {
-                                        {"proxy_enabled", SettingsHolder.EnableProxy}
+                                        {"proxy_enabled", ProxyInterface.Instance.IsStubAvailable}
                                     }
                                 }
                             }
