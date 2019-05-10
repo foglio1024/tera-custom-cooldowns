@@ -180,8 +180,8 @@ namespace TCC.ViewModels
         {
             _windowSettings.Tabs.Clear();
             _windowSettings.Tabs.AddRange(Tabs);
-            _windowSettings.X = left / SettingsHolder.ScreenW;
-            _windowSettings.Y = top / SettingsHolder.ScreenH;
+            _windowSettings.X = left / WindowManager.ScreenSize.Width * WindowManager.ScreenCorrection.Width;
+            _windowSettings.Y = top / WindowManager.ScreenSize.Height * WindowManager.ScreenCorrection.Height;
             var v = SettingsHolder.ChatWindowsSettings;
             var s = v.FirstOrDefault(x => x == _windowSettings);
             if (s == null) v.Add(_windowSettings);

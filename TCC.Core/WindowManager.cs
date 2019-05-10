@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using Microsoft.Win32;
 using TCC.Controls;
 using TCC.Settings;
 using TCC.Utilities.Extensions;
@@ -17,6 +18,7 @@ using Application = System.Windows.Application;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using MenuItem = System.Windows.Controls.MenuItem;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
+using Size = System.Windows.Size;
 
 namespace TCC
 {
@@ -41,6 +43,8 @@ namespace TCC
         //    new Action(LoadClassWindow),
         //    new Action(LoadInfoWindow),
         //};
+        public static Size ScreenSize;
+        public static Size ScreenCorrection;
 
         public static CooldownWindow CooldownWindow;
         public static CharacterWindow CharacterWindow;
@@ -67,9 +71,21 @@ namespace TCC
 
         public static ForegroundManager ForegroundManager { get; private set; }
 
+        public static void UpdateScreenCorrection()
+        {
+            if (ScreenSize.IsEqual(SettingsHolder.LastScreenSize)) return;
+            var wFac = SettingsHolder.LastScreenSize.Width/ScreenSize.Width;
+            var hFac = SettingsHolder.LastScreenSize.Height/ScreenSize.Height;
+            ScreenCorrection = new Size(wFac, hFac);
+            SettingsHolder.LastScreenSize = ScreenSize;
+            if(!App.Loading) SettingsWriter.Save();
+        }
         public static void Init()
         {
             ForegroundManager = new ForegroundManager();
+            ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            ScreenCorrection = new Size(1, 1);
+            UpdateScreenCorrection();
             FocusManager.Init();
             LoadWindows();
             _contextMenu = new ContextMenu();
@@ -102,6 +118,16 @@ namespace TCC
             SettingsWindow = new SettingsWindow();
 
             if (SettingsHolder.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+
+            SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged; 
+
+        }
+
+        private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
+        {
+            ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            UpdateScreenCorrection();
+            ReloadPositions();
         }
 
         public static void CloseWindow(Type type)
@@ -135,6 +161,8 @@ namespace TCC
 
         public static void Dispose()
         {
+            SystemEvents.DisplaySettingsChanged -= SystemEventsOnDisplaySettingsChanged;
+
             App.BaseDispatcher.Invoke(() =>
             {
                 FocusManager.Dispose();
