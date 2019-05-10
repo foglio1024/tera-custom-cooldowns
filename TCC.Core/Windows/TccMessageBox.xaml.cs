@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using MessageBoxImage = TCC.Data.MessageBoxImage;

@@ -8,7 +8,6 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Windows.Controls;
-using Microsoft.Win32;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
