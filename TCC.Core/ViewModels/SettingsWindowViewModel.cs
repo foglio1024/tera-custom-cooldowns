@@ -129,7 +129,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.IgnoreMeInGroupWindow == value) return;
                 SettingsHolder.IgnoreMeInGroupWindow = value;
-                if (value) WindowManager.GroupWindow.VM.RemoveMe();
+                WindowManager.GroupWindow.VM.ToggleMe(!value);
                 N();
             }
         }

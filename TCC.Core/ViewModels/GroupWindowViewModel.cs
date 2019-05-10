@@ -60,10 +60,10 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new[] { nameof(User.Role) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            All = Utils.InitLiveView(null, Members, new string[] { }, new[]
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            All = Utils.InitLiveView(o => ((User)o).Visible, Members, new [] {nameof(User.Visible) }, new[]
             {
                 new SortDescription(nameof(User.Role), ListSortDirection.Descending),
                 new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
@@ -134,8 +134,6 @@ namespace TCC.ViewModels
             return Members.ToSyncList().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
         public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name) || _leaderOverride;
-
-
 
         public void SetAggro(ulong target)
         {
@@ -227,9 +225,10 @@ namespace TCC.ViewModels
             if (SettingsHolder.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
-                return;
+                p.Visible = false;
+                //return;
             }
-            lock (_lock)
+            lock (_lock) //TODO: really needed?
             {
                 var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
                 if (user == null)
@@ -245,6 +244,7 @@ namespace TCC.ViewModels
                 user.IsLeader = p.IsLeader;
                 user.Order = p.Order;
                 user.Awakened = p.Awakened;
+                user.Visible = p.Visible;
             }
         }
 
@@ -331,12 +331,13 @@ namespace TCC.ViewModels
             if (u == null) return;
             u.Online = false;
         }
-        public void RemoveMe()
+        public void ToggleMe(bool visible)
         {
             var me = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
             if (me == null) return;
-            me.ClearAbnormalities();
-            Members.Remove(me);
+            me.Visible = visible;
+            //me.ClearAbnormalities();
+            //Members.Remove(me);
         }
         internal void ClearAllAbnormalities()
         {

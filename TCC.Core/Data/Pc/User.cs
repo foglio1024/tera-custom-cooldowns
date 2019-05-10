@@ -37,6 +37,7 @@ namespace TCC.Data.Pc
         private GearItem _armor;
         private GearItem _gloves;
         private GearItem _boots;
+        private bool _visible = true;
 
         public ulong EntityId
         {
@@ -338,6 +339,17 @@ namespace TCC.Data.Pc
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
         public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; }
         public bool Awakened { get; set; }
+
+        public bool Visible
+        {
+            get => _visible;
+            set
+            {
+                if(_visible == value) return;
+                _visible = value;
+                N();
+            }
+        }
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
