@@ -21,7 +21,7 @@ namespace TCC.Windows.Widgets
         {
             InitializeComponent();
             MainContent = ChatContent;
-            Init(ws, false, true, false);
+            Init(ws, ignoreSize: false, undimOnFlyingGuardian: true, perClassPosition: false);
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnIsDraggingChanged));
         }
         public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
@@ -100,12 +100,14 @@ namespace TCC.Windows.Widgets
         }
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
+            FocusManager.PauseTopmost = true;
             SettingsPopup.DataContext = DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
         private void OnSettingsPopupMouseLeave(object sender, MouseEventArgs e)
         {
             SettingsPopup.IsOpen = false;
+            FocusManager.PauseTopmost = false;
         }
         private void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
