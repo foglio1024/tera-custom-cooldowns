@@ -88,33 +88,31 @@ namespace TCC.Settings
         {
             var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
             var ts = s.Descendants().FirstOrDefault(x => x.Name == "Tabs");
-            var lfg = false;
-            var fo = true;
-            var op = .3;
-            var ht = 10;
+            var lfgOn = false;
+            var fadeOut = true;
+            var backgroundOpacity = .3;
+            var frameOpacity = 1f;
+            var hideTimeout = 10;
             ws?.Attributes().ToList().ForEach(a =>
             {
-                if (a.Name == nameof(ChatWindowSettings.LfgOn)) lfg = bool.Parse(a.Value);
-                else if (a.Name == nameof(ChatWindowSettings.FadeOut)) fo = bool.Parse(a.Value);
-                else if (a.Name == nameof(ChatWindowSettings.BackgroundOpacity)) op = float.Parse(a.Value, CultureInfo.InvariantCulture);
-                else if (a.Name == nameof(ChatWindowSettings.HideTimeout)) ht = int.Parse(a.Value);
+                if (a.Name == nameof(ChatWindowSettings.LfgOn)) lfgOn = bool.Parse(a.Value);
+                else if (a.Name == nameof(ChatWindowSettings.FadeOut)) fadeOut = bool.Parse(a.Value);
+                else if (a.Name == nameof(ChatWindowSettings.BackgroundOpacity)) backgroundOpacity = float.Parse(a.Value, CultureInfo.InvariantCulture);
+                else if (a.Name == nameof(ChatWindowSettings.FrameOpacity)) frameOpacity = float.Parse(a.Value, CultureInfo.InvariantCulture);
+                else if (a.Name == nameof(ChatWindowSettings.HideTimeout)) hideTimeout = int.Parse(a.Value);
             });
 
             var sett = ParseWindowSettings(ws);
             var tabs = ParseTabsSettings(ts);
 
-            return new ChatWindowSettings(sett.X, sett.Y, sett.H, sett.W,
-                sett.Visible, sett.ClickThruMode,
-                sett.Scale, sett.AutoDim, sett.DimOpacity,
-                sett.ShowAlways, /*sett.AllowTransparency,*/
-                sett.Enabled, sett.AllowOffScreen)
+            return new ChatWindowSettings(sett)
             {
                 Tabs = tabs,
-                LfgOn = lfg,
-                BackgroundOpacity = op,
-                FadeOut = fo,
-                HideTimeout = ht
-
+                LfgOn = lfgOn,
+                BackgroundOpacity = backgroundOpacity,
+                FrameOpacity = frameOpacity,
+                FadeOut = fadeOut,
+                HideTimeout = hideTimeout
             };
         }
         private ClassPositions ParseWindowPositions(XElement windowSettingXElement)
@@ -169,8 +167,8 @@ namespace TCC.Settings
                 else if (a.Name == nameof(WindowSettings.Enabled)) enabled = bool.Parse(a.Value);
             });
 
-            if (x > 1) x = x / SettingsHolder.ScreenW;
-            if (y > 1) y = y / SettingsHolder.ScreenH;
+            if (x > 1) x /= WindowManager.ScreenSize.Width * WindowManager.ScreenCorrection.Width;
+            if (y > 1) y /= WindowManager.ScreenSize.Height * WindowManager.ScreenCorrection.Height;
 
             var positions = ParseWindowPositions(ws);
 
@@ -362,8 +360,8 @@ namespace TCC.Settings
 
                     else if (attr.Name == nameof(SettingsHolder.WebhookEnabledGuildBam)) SettingsHolder.WebhookEnabledGuildBam = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.WebhookEnabledFieldBoss)) SettingsHolder.WebhookEnabledFieldBoss = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlGuildBam)) SettingsHolder.WebhookUrlGuildBam = attr.Value; 
-                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlFieldBoss)) SettingsHolder.WebhookUrlFieldBoss = attr.Value; 
+                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlGuildBam)) SettingsHolder.WebhookUrlGuildBam = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlFieldBoss)) SettingsHolder.WebhookUrlFieldBoss = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.WebhookMessageGuildBam)) SettingsHolder.WebhookMessageGuildBam = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.WebhookMessageFieldBossSpawn)) SettingsHolder.WebhookMessageFieldBossSpawn = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.WebhookMessageFieldBossDie)) SettingsHolder.WebhookMessageFieldBossDie = attr.Value;
@@ -374,6 +372,12 @@ namespace TCC.Settings
 
                     else if (attr.Name == nameof(SettingsHolder.FpsAtGuardian)) SettingsHolder.FpsAtGuardian = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.EnableProxy)) SettingsHolder.EnableProxy = bool.Parse(attr.Value);
+
+                    else if (attr.Name == nameof(SettingsHolder.LastScreenSize))
+                    {
+                        var val = attr.Value.Split(',');
+                        SettingsHolder.LastScreenSize = new Size(float.Parse(val[0], CultureInfo.InvariantCulture), float.Parse(val[1], CultureInfo.InvariantCulture));
+                    }
                     //add settings here
                 });
 

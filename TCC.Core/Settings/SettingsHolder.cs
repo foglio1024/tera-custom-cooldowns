@@ -12,7 +12,6 @@ namespace TCC.Settings
     {
         private static string _lastLanguage = "";
         private static bool _chatEnabled;
-        //private static ClickThruMode _chatClickThruMode;
         private static DateTime _statSentTime = DateTime.MinValue;
         private static string _statSentVersion = GetVersion();
 
@@ -22,8 +21,9 @@ namespace TCC.Settings
             return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Experimental ? "-e" : "")}";
 
         }
-        public static double ScreenW => SystemParameters.VirtualScreenWidth;
-        public static double ScreenH => SystemParameters.VirtualScreenHeight;
+        //public static double ScreenW => SystemParameters.VirtualScreenWidth;
+        //public static double ScreenH => SystemParameters.VirtualScreenHeight;
+        public static Size LastScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
 
         public static WindowSettings GroupWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
         public static WindowSettings CooldownWindowSettings { get; set; } = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
@@ -178,7 +178,7 @@ namespace TCC.Settings
         {
             get
             {
-                return _statSentVersion; 
+                return _statSentVersion;
 
             }
             set => _statSentVersion = value;
