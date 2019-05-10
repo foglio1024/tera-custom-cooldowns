@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.TeraCommon;
@@ -317,6 +318,14 @@ namespace TCC.Test
                 {
                     Console.WriteLine($"Failed to register webhook for {username}");
                 }
+            }
+        }
+
+        public static void AddWhispers(int amount)
+        {
+            for (var i = 0; i < amount; i++)
+            {
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
             }
         }
     }
