@@ -63,7 +63,7 @@
             </Border>
         </Grid>
         <Grid Grid.Column="1" Width="250" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer">
-            <Grid x:Name="NotificationContent" VerticalAlignment="Center" >
+            <Grid x:Name="NotificationContent" VerticalAlignment="Center" Opacity="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -91,8 +91,11 @@
                            TextWrapping="Wrap" HorizontalAlignment="Center"/>
             </Grid>
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleY="0" ScaleX="1"></ScaleTransform>
+                <ScaleTransform ScaleY="1" ScaleX="1"></ScaleTransform>
             </Grid.LayoutTransform>
+            <Grid.RenderTransform>
+                <TranslateTransform />
+            </Grid.RenderTransform>
         </Grid>
         <Popup Grid.Row="0" Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
                AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"

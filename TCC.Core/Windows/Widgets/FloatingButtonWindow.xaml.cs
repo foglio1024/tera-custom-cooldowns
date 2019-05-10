@@ -14,6 +14,7 @@ using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {
+    // TODO: refactor this when???
     public partial class FloatingButtonWindow
     {
         public FloatingButtonWindow()
@@ -163,16 +164,17 @@ namespace TCC.Windows.Widgets
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
                 }
                 RefreshTopmost();
-                NotificationContainer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200))
+                NotificationContainer.RenderTransform.BeginAnimation(TranslateTransform.XProperty,
+                    new DoubleAnimation(50, 0, TimeSpan.FromMilliseconds(250))
                     {
                         EasingFunction = new QuadraticEase()
                     });
                 NotificationContent.BeginAnimation(OpacityProperty,
-                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150))
+                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200))
                     {
                         EasingFunction = new QuadraticEase()
                     });
+
                 NotificationTimeGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(timeMs)));
                 _n.Interval = TimeSpan.FromMilliseconds(timeMs);
                 _n.Start();
@@ -183,13 +185,13 @@ namespace TCC.Windows.Widgets
         {
             Dispatcher.Invoke(() =>
             {
-                NotificationContainer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200))
+                NotificationContainer.RenderTransform.BeginAnimation(TranslateTransform.XProperty,
+                    new DoubleAnimation(0, -50, TimeSpan.FromMilliseconds(250))
                     {
                         EasingFunction = new QuadraticEase()
                     });
                 NotificationContent.BeginAnimation(OpacityProperty,
-                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150))
+                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200))
                     {
                         EasingFunction = new QuadraticEase()
                     });
