@@ -4,11 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Timers;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using TCC.Controls;
+using TCC.Data.Pc;
 using TCC.Settings;
 using TCC.Utilities.Extensions;
 using TCC.ViewModels;
@@ -71,6 +73,17 @@ namespace TCC
 
         public static ForegroundManager ForegroundManager { get; private set; }
 
+        private static void PrintDispatcher()
+        {
+            Console.WriteLine("----------------------");
+            foreach (var keyValuePair in RunningDispatchers)
+            {
+                var d = keyValuePair.Value;
+                Console.WriteLine($"{d.Thread.Name} alive: {d.Thread.IsAlive} bg: {d.Thread.IsBackground}");
+            }
+        }
+
+        private static System.Timers.Timer t;
         public static void UpdateScreenCorrection()
         {
             if (ScreenSize.IsEqual(SettingsHolder.LastScreenSize)) return;
@@ -119,8 +132,11 @@ namespace TCC
 
             if (SettingsHolder.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
 
-            SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged; 
-
+            SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
+            //t = new System.Timers.Timer();
+            //t.Interval = 1000;
+            //t.Elapsed += (_, __) => PrintDispatcher();
+            //t.Start();
         }
 
         private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
@@ -276,6 +292,7 @@ namespace TCC
             var charWindowThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SessionManager.CurrentPlayer = new Player();
                 CharacterWindow = new CharacterWindow();
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);

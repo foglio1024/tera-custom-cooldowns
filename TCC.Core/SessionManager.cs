@@ -105,7 +105,7 @@ namespace TCC
         public static event Action LoadingScreenChanged;
         public static event Action LoggedChanged;
 
-        public static readonly Player CurrentPlayer = new Player();
+        public static Player CurrentPlayer;
 
         public static readonly Dictionary<uint, string> GuildMembersNames = new Dictionary<uint, string>();
 
