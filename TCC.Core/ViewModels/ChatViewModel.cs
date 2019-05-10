@@ -74,6 +74,7 @@ namespace TCC.ViewModels
                 {
                     _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
                     _hideTimer.Tick += OnHideTimerTick;
+                    _hideTimer.Start();
                     _windowSettings.TimeoutChanged += ChangeTimerInterval;
                 }
             }
