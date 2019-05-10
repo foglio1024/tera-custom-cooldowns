@@ -605,7 +605,8 @@
                                            IsOpen="{Binding ShowImportantPopup}"
                                            AllowsTransparency="True"
                                            MinWidth="350"
-                                           MaxWidth="600">
+                                           MaxWidth="600"
+                                           MaxHeight="400">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
@@ -616,7 +617,8 @@
                                             <ItemsControl ItemsSource="{Binding Content.ImportantMessages}"
                                                           Margin="10"
                                                           x:Name="ImportantMessagesIc"
-                                                          Grid.Row="1">
+                                                          Grid.Row="1"
+                                                          >
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate DataType="chat1:ChatMessage">
                                                         <Grid Margin="0 0 0 0">
@@ -670,6 +672,25 @@
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <VirtualizingStackPanel  VirtualizationMode="Recycling"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.Template>
+                                                    <ControlTemplate>
+                                                        <Border SnapsToDevicePixels="True"
+                                                                BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                                                Padding="{TemplateBinding Control.Padding}"
+                                                                BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                                                Background="{TemplateBinding Panel.Background}">
+                                                            <ScrollViewer VerticalAlignment="Top" Focusable="False">
+                                                                <ItemsPresenter  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                                                            </ScrollViewer>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </ItemsControl.Template>
+
                                             </ItemsControl>
                                             <Button Grid.Row="2" Command="{Binding Content.ClearAllCommand}"
                                                     Style="{StaticResource ButtonContentOpacityStyle}"
