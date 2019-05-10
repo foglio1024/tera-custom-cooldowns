@@ -133,6 +133,7 @@
     <Compile Include="Utilities\Extensions\DragablzHeaderExtensions.cs" />
     <Compile Include="Utilities\Extensions\ItemsControlExtensions.cs" />
     <Compile Include="Utilities\Extensions\ListExtensions.cs" />
+    <Compile Include="Utilities\Extensions\SizeExtensions.cs" />
     <Compile Include="Utilities\Extensions\UInt64Extensions.cs" />
     <Compile Include="Utilities\Extensions\WindowCollectionExtensions.cs" />
     <Compile Include="Utilities\Extensions\StringExtensions.cs" />
