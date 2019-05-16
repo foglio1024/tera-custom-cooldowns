@@ -12,7 +12,6 @@ using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;
-using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
 using SplashScreen = TCC.Windows.SplashScreen;
@@ -25,7 +24,6 @@ namespace TCC
         private static Mutex _mutex;
         public static readonly Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
         public static SplashScreen SplashScreen;
-
         public static Dispatcher BaseDispatcher { get; private set; }
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
         public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
@@ -75,7 +73,6 @@ namespace TCC
             SessionManager.InitDatabasesAsync(string.IsNullOrEmpty(SettingsHolder.LastLanguage) ? "EU-EN" :
                 SettingsHolder.LastLanguage == "EU" ? "EU-EN" :
                 SettingsHolder.LastLanguage);
-
             UpdateManager.CheckServersFile();
 
             SplashScreen.SetText("Initializing windows...");
@@ -153,14 +150,14 @@ namespace TCC
 
         private static bool IsRunning()
         {
-            //_mutex = new Mutex(true, "TCC", out var createdNew);
-            //return !createdNew;
+            _mutex = new Mutex(true, "TCC", out var createdNew);
+            return !createdNew;
             return false;
         }
 
         public static void ReleaseMutex()
         {
-            //_mutex.ReleaseMutex();
+            _mutex.ReleaseMutex();
         }
     }
 }
