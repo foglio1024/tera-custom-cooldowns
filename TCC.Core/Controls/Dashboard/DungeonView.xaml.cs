@@ -47,7 +47,8 @@ namespace TCC.Controls.Dashboard
         {
             var cd = (sender as FrameworkElement)?.DataContext as DungeonCooldownViewModel;
             var chara = cd?.Owner;
-            var dung = cd?.Cooldown.Dungeon;
+            var dung = cd?.Cooldown?.Dungeon;
+            if (dung == null) return;
             var col = WindowManager.Dashboard.VM.Columns.FirstOrDefault(x => dung != null && x.Dungeon.Id == dung.Id);
             if (col != null) col.Hilight = false;
             var chVM = WindowManager.Dashboard.VM.CharacterViewModels.ToList().FirstOrDefault(x => chara != null && x.Character.Id == chara.Id);
