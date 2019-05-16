@@ -12,6 +12,7 @@ using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Sniffing;
+using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
 using SplashScreen = TCC.Windows.SplashScreen;
@@ -152,13 +153,14 @@ namespace TCC
 
         private static bool IsRunning()
         {
-            _mutex = new Mutex(true, "TCC", out var createdNew);
-            return !createdNew;
+            //_mutex = new Mutex(true, "TCC", out var createdNew);
+            //return !createdNew;
+            return false;
         }
 
         public static void ReleaseMutex()
         {
-            _mutex.ReleaseMutex();
+            //_mutex.ReleaseMutex();
         }
     }
 }
