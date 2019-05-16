@@ -56,10 +56,17 @@ namespace TCC
         public static ClassWindow ClassWindow;
         public static SettingsWindow SettingsWindow;
         public static CivilUnrestWindow CivilUnrestWindow;
-        public static Dashboard Dashboard;
+        //public static Dashboard Dashboard;
+        //public static LfgListWindow LfgListWindow;
+        private static Dashboard _dashboard;
+        private static LfgListWindow _lfgWindow;
+
+
+        public static Dashboard Dashboard => _dashboard ?? (_dashboard = new Dashboard());
+        public static LfgListWindow LfgListWindow => _lfgWindow ?? (_lfgWindow = new LfgListWindow());
+
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
-        public static LfgListWindow LfgListWindow;
         public static SkillConfigWindow SkillConfigWindow;
 
 
@@ -87,11 +94,11 @@ namespace TCC
         public static void UpdateScreenCorrection()
         {
             if (ScreenSize.IsEqual(SettingsHolder.LastScreenSize)) return;
-            var wFac = SettingsHolder.LastScreenSize.Width/ScreenSize.Width;
-            var hFac = SettingsHolder.LastScreenSize.Height/ScreenSize.Height;
+            var wFac = SettingsHolder.LastScreenSize.Width / ScreenSize.Width;
+            var hFac = SettingsHolder.LastScreenSize.Height / ScreenSize.Height;
             ScreenCorrection = new Size(wFac, hFac);
             SettingsHolder.LastScreenSize = ScreenSize;
-            if(!App.Loading) SettingsWriter.Save();
+            if (!App.Loading) SettingsWriter.Save();
         }
         public static void Init()
         {
@@ -237,13 +244,14 @@ namespace TCC
             FloatingButton = new FloatingButtonWindow();
             if (FloatingButton.WindowSettings.Enabled) FloatingButton.Show();
 
-            LfgListWindow = new LfgListWindow();
-            Dashboard = new Dashboard();
+            //LfgListWindow = new LfgListWindow();
+            //Dashboard = new Dashboard();
 
             ChatWindowManager.Instance.InitWindows();
 
         }
         public static bool ChatInitalized = false;
+
         private static void AddDispatcher(int threadId, Dispatcher d)
         {
             RunningDispatchers[threadId] = d;
