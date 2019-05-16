@@ -42,6 +42,8 @@
         <Grid Grid.Row="1" 
               Grid.Column="0" 
               Height="Auto" 
+              Width="Auto"
+              MaxWidth="500"
               Margin="40 -10 0 0"
               HorizontalAlignment="Left">
             <ItemsControl x:Name="Abnormalities"
@@ -49,7 +51,7 @@
                           ItemsSource="{Binding Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" 
+                        <WrapPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left"
                                     Margin="0" />
                     </ItemsPanelTemplate>
