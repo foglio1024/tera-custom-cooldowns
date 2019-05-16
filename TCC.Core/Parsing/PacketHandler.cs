@@ -200,7 +200,7 @@ namespace TCC.Parsing
             WindowManager.Dashboard.VM.SetLoggedIn(p.PlayerId);
             SessionManager.GuildMembersNames.Clear();
 
-            WindowManager.LfgListWindow.VM.EnqueueListRequest();
+            App.BaseDispatcher.Invoke(() => { WindowManager.LfgListWindow.VM.EnqueueListRequest(); });
 
 
             //if (Settings.Settings.LastRegion == "NA")
