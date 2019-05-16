@@ -108,7 +108,7 @@ namespace TCC
 
             WindowManager.Dashboard.VM.ResetDailyData();
 
-            var weeklyDungeonsReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].DungeonsWeeklyResetDay && PacketAnalyzer.Factory.ReleaseVersion >= 8000;
+            var weeklyDungeonsReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].DungeonsWeeklyResetDay;
             var weeklyVanguardReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].VanguardResetDay;
 
             if (weeklyDungeonsReset) WindowManager.Dashboard.VM.ResetWeeklyDungeons();
