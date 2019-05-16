@@ -16,6 +16,12 @@ namespace TCC.ClassSpecific
         public virtual void CheckAbnormality(S_ABNORMALITY_REFRESH p) { }
         public virtual void CheckAbnormality(S_ABNORMALITY_END p) { }
 
+        protected static bool CheckByIconName(uint id, string iconName)
+        {
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            return ab.IconName == iconName;
+        }
+
         protected static void InvokeMarkingExpired() => MarkingExpired?.Invoke();
         protected static void InvokeMarkingRefreshed(ulong duration) => MarkingRefreshed?.Invoke(duration);
         public static void CheckMarkingOnDespawn(ulong target)

@@ -15,6 +15,7 @@ namespace TCC.ClassSpecific
         private static readonly uint[] TraverseCutIDs = { 101300/*, 101301*/ };
         private static readonly uint[] BladeWaltzIDs = { 104100 };
         private static readonly uint[] SwiftGlyphs = { 21010, 21070 };
+        public const string DeadlyGambleIconName = "icon_skills.deadlywill_tex";
 
         private Skill _bladeWaltz;
 
@@ -88,17 +89,20 @@ namespace TCC.ClassSpecific
 
         private static void CheckDeadlyGamble(S_ABNORMALITY_BEGIN p)
         {
-            if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             Utils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Start(p.Duration);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
         {
-            if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             Utils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_END p)
         {
-            if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             Utils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 

@@ -11,6 +11,7 @@ namespace TCC.ClassSpecific
         public static readonly uint[] ARushIDs = { 200700, 200701, 200731 };
         public static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
         public static readonly uint LineHeldId = 201701;
+        public const string AdrenalineRushIconName = "icon_skills.fightingwill_tex";
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
@@ -36,17 +37,20 @@ namespace TCC.ClassSpecific
 
         private static void CheckArush(S_ABNORMALITY_BEGIN p)
         {
-            if (!ARushIDs.Contains(p.AbnormalityId)) return;
+            //if (!ARushIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             Utils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Start(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_REFRESH p)
         {
-            if (!ARushIDs.Contains(p.AbnormalityId)) return;
+            //if (!ARushIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             Utils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Start(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_END p)
         {
-            if (!ARushIDs.Contains(p.AbnormalityId)) return;
+            //if (!ARushIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             Utils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
         }
 
