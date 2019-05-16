@@ -62,7 +62,7 @@
 
             </Border>
         </Grid>
-        <Grid Grid.Column="1" Width="250" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer">
+        <Grid Grid.Column="1" Width="250" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer" IsHitTestVisible="False">
             <Grid x:Name="NotificationContent" VerticalAlignment="Center" Opacity="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
