@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Threading;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
@@ -327,6 +328,37 @@ namespace TCC.Test
             {
                 ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
             }
+        }
+
+        private static Timer _t;
+        public static void AddMobs()
+        {
+            _t = new Timer { Interval = 1 };
+            _t.Elapsed += T_Elapsed;
+            _t.Start();
+        }
+
+        public static void AddNpcAndAbnormalities()
+        {
+            EntityManager.SpawnNPC(950, 4000, 1, true, false, 36);
+            var t = new Timer(1);
+            var id = 0U;
+            var a = true;
+            t.Elapsed += (_, __) =>
+            {
+                if (true) AbnormalityManager.BeginAbnormality(id++, 1, 0, 500000, 1);
+                else AbnormalityManager.EndAbnormality(1, 100800);
+                a = !a;
+            };
+            t.Start();
+        }
+        private static ulong _eid = 1;
+        private static void T_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            EntityManager.SpawnNPC(9, 700, _eid++, true, false, 0);
+            if (_eid != 10000) return;
+            EntityManager.ClearNPC();
+            _t.Stop();
         }
     }
 }
