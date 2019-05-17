@@ -50,18 +50,17 @@ namespace TCC.Windows
         {
             var an = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(cd));
             PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
-
         }
 
         private void RefreshTopmost()
         {
             if (FocusManager.PauseTopmost) return;
 
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 Topmost = false;
                 Topmost = true;
-            });
+            }));
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
