@@ -526,15 +526,21 @@ namespace TCC.ViewModels
 
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
+            SessionManager.DatabaseLoaded += InitViews;
 
             //SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
 
             //SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
+        }
+
+        public void InitViews()
+        {
+            if (ItemsView != null && AbnormalitiesView != null) return;
             ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
             AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
 
-            ((ICollectionView)ItemsView).CollectionChanged += GcStahp;
-            ((ICollectionView)AbnormalitiesView).CollectionChanged += GcStahp;
+            ((ICollectionView) ItemsView).CollectionChanged += GcStahp;
+            ((ICollectionView) AbnormalitiesView).CollectionChanged += GcStahp;
         }
 
         private void GcStahp(object sender, NotifyCollectionChangedEventArgs e)
