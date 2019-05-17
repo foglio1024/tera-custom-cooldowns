@@ -17,8 +17,7 @@ namespace TCC.ViewModels
 {
     public class ChatWindowManager : TccWindowViewModel
     {
-        private static ChatWindowManager _instance;
-        public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
+        public static ChatWindowManager Instance { get; set; }
 
         private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
@@ -38,7 +37,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
         public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
 
-        private ChatWindowManager()
+        public ChatWindowManager()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
@@ -56,40 +55,34 @@ namespace TCC.ViewModels
 
             ChatWindows.CollectionChanged += OnChatWindowsCollectionChanged;
             PrivateChannelJoined += OnPrivateChannelJoined;
+
+
         }
 
 
         public void InitWindows()
         {
-            //Dispatcher.BeginInvoke(new Action(() =>
-            //{
             ChatWindows.Clear();
             SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
                 var m = new ChatViewModel();
-                //App.ChatDispatcher.BeginInvoke(new Action(() =>
-                //{
                 var w = new ChatWindow(s, m);
                 ChatWindows.Add(w);
-                //}), DispatcherPriority.DataBind);
                 m.LoadTabs(s.Tabs);
             });
-            if (ChatWindows.Count == 0)
+
+            if (ChatWindows.Count != 0) return;
             {
                 Log.CW("No chat windows found, initializing default one.");
                 var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
                 var m = new ChatViewModel();
-                //App.ChatDispatcher.BeginInvoke(new Action(() =>
-                //{
                 var w = new ChatWindow(ws, m);
                 SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 ChatWindows.Add(w);
                 m.LoadTabs();
                 if (SettingsHolder.ChatEnabled) w.Show();
-                //}), DispatcherPriority.DataBind);
             }
-            //}), DispatcherPriority.Normal);
         }
         public void CloseAllWindows()
         {
@@ -167,6 +160,14 @@ namespace TCC.ViewModels
             //    }
             //}
             return false;
+        }
+        public void AddSystemMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+        }
+        public void AddSystemMessage(string srvMsg, SystemMessage sysMsg, ChatChannel channelOverride)
+        {
+            AddChatMessage(new ChatMessage(srvMsg, sysMsg, channelOverride));
         }
         public void AddChatMessage(ChatMessage chatMessage)
         {
