@@ -300,6 +300,7 @@ namespace TCC.Parsing
 
         public static void Update()
         {
+            if (App.Loading) return;
             MainProcessor.Clear();
 
             Base.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
