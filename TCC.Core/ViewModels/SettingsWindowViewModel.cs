@@ -550,7 +550,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.FlightGaugeRotation == value) return;
                 SettingsHolder.FlightGaugeRotation = value;
                 N(nameof(FlightGaugeRotation));
-                WindowManager.FlightDurationWindow.ExNPC(nameof(FlightGaugeRotation));
+                WindowManager.FlightDurationWindow.VM.ExN(nameof(FlightGaugeRotation));
             }
         }
 
@@ -926,7 +926,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.FlipFlightGauge == value) return;
                 SettingsHolder.FlipFlightGauge = value;
                 N();
-                WindowManager.FlightDurationWindow.ExNPC(nameof(FlipFlightGauge));
+                WindowManager.FlightDurationWindow.VM.ExN(nameof(FlipFlightGauge));
             }
         }
         public bool ForceSoftwareRendering

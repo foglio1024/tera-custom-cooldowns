@@ -851,6 +851,7 @@
     <Compile Include="Windows\Widgets\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FlightGaugeViewModel.cs" />
     <Compile Include="Windows\Widgets\FloatingButtonWindow.xaml.cs">
       <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
     </Compile>

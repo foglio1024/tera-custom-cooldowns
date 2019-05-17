@@ -1,15 +1,15 @@
 ﻿<w:TccWidget x:Class="TCC.Windows.Widgets.FlightDurationWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:w="clr-namespace:TCC.Windows"
              xmlns:c="clr-namespace:TCC.Controls"
-             xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:w="clr-namespace:TCC.Windows"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
              Title="TCC Flight" Height="300" Width="300" 
-             d:DataContext="{x:Type widgets:FlightDurationWindow}">
+             d:DataContext="{d:DesignInstance viewModels:FlightGaugeViewModel}">
     <Grid RenderTransformOrigin=".5 .5">
         <Grid.Style>
             <Style TargetType="FrameworkElement">
@@ -17,17 +17,17 @@
                     <Setter.Value>
                         <TransformGroup>
                             <ScaleTransform ScaleX="1"/>
-                            <RotateTransform Angle="{Binding RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}, Path=FlightGaugeRotation}"/>
+                            <RotateTransform Angle="{Binding FlightGaugeRotation}"/>
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding FlipFlightGauge, RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}}" Value="True">
+                    <DataTrigger Binding="{Binding FlipFlightGauge}" Value="True">
                         <Setter Property="RenderTransform">
                             <Setter.Value>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="-1"/>
-                                    <RotateTransform Angle="{Binding FlightGaugeRotation, RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}}"/>
+                                    <RotateTransform Angle="{Binding FlightGaugeRotation}"/>
                                 </TransformGroup>
                             </Setter.Value>
                         </Setter>
@@ -42,7 +42,7 @@
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
                StrokeStartLineCap="Flat" Stroke="#9fff" Height="288" Width="288" OriginRotationDegrees="-45">
         </c:Arc>
-        <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="Collapsed">
+        <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="{Binding FlyingMissionInProgress, Converter={StaticResource BoolToVisibleCollapsed}}">
             <Grid.RenderTransform>
                 <ScaleTransform ScaleY="-1"></ScaleTransform>
             </Grid.RenderTransform>
@@ -58,16 +58,16 @@
                     <Setter Property="Height" Value="280"/>
                     <Setter Property="Width" Value="280"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}}" Value="Air">
+                        <DataTrigger Binding="{Binding Type}" Value="Air">
                             <Setter Property="Stroke" Value="{StaticResource MpBrushLight}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}}" Value="Fire">
+                        <DataTrigger Binding="{Binding Type}" Value="Fire">
                             <Setter Property="Stroke" Value="{StaticResource HpBrush}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}}" Value="Spark">
+                        <DataTrigger Binding="{Binding Type}" Value="Spark">
                             <Setter Property="Stroke" Value="{StaticResource HpDebuffBrushLight}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource AncestorType=widgets:FlightDurationWindow}}" Value="None">
+                        <DataTrigger Binding="{Binding Type}" Value="None">
                             <Setter Property="Stroke" Value="White"/>
                         </DataTrigger>
                     </Style.Triggers>
