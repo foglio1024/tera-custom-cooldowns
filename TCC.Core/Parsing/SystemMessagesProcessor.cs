@@ -107,75 +107,82 @@ namespace TCC.Parsing
 
         private static readonly Dictionary<string, Delegate> Processor = new Dictionary<string, Delegate>
         {
-            { "SMT_MAX_ENCHANT_SUCCEED",                new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
-            { "SMT_FRIEND_IS_CONNECTED",                new Action<string, SystemMessage>(HandleFriendLogin) },
-            { "SMT_FRIEND_WALK_INTO_SAME_AREA",         new Action<string, SystemMessage>(HandleFriendInAreaMessage) },
-            { "SMT_CHAT_LINKTEXT_DISCONNECT",           new Action<string, SystemMessage>(HandleInvalidLink) },
+            { "SMT_MAX_ENCHANT_SUCCEED",                    new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
+            { "SMT_FRIEND_IS_CONNECTED",                    new Action<string, SystemMessage>(HandleFriendLogin) },
+            { "SMT_FRIEND_WALK_INTO_SAME_AREA",             new Action<string, SystemMessage>(HandleFriendInAreaMessage) },
+            { "SMT_CHAT_LINKTEXT_DISCONNECT",               new Action<string, SystemMessage>(HandleInvalidLink) },
 
-            { "SMT_BATTLE_PARTY_DIE",                   new Action<string, SystemMessage>(HandleDeathMessage) },
-            { "SMT_BATTLE_YOU_DIE",                     new Action<string, SystemMessage>(HandleDeathMessage) },
-            { "SMT_BATTLE_PARTY_RESURRECT",             new Action<string, SystemMessage>(HandleRessMessage) },
-            { "SMT_BATTLE_RESURRECT",                   new Action<string, SystemMessage>(HandleRessMessage) },
+            { "SMT_BATTLE_PARTY_DIE",                       new Action<string, SystemMessage>(HandleDeathMessage) },
+            { "SMT_BATTLE_YOU_DIE",                         new Action<string, SystemMessage>(HandleDeathMessage) },
+            { "SMT_BATTLE_PARTY_RESURRECT",                 new Action<string, SystemMessage>(HandleRessMessage) },
+            { "SMT_BATTLE_RESURRECT",                       new Action<string, SystemMessage>(HandleRessMessage) },
 
-            { "SMT_ACCEPT_QUEST",                       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_CANT_START_QUEST",                   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_COMPLATE_GUILD_QUEST",               new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_COMPLETE_MISSION",                   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_COMPLETE_QUEST",                     new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_FAILED_QUEST_COMPENSATION",          new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_FAILED_QUEST",                       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_FAILED_QUEST_CANCLE",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_QUEST_FAILED_GET_FLAG_PARTY_LEVEL",  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_QUEST_ITEM_DELETED",                 new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_QUEST_RESET_MESSAGE",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_UPDATE_QUEST_TASK",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_QUEST_SHARE_MESSAGE2",               new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_QUEST_USE_SKILL",                    new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
-            { "SMT_QUEST_USE_ITEM",                     new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_ACCEPT_QUEST",                           new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_CANT_START_QUEST",                       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_COMPLATE_GUILD_QUEST",                   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_COMPLETE_MISSION",                       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_COMPLETE_QUEST",                         new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_FAILED_QUEST_COMPENSATION",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_FAILED_QUEST",                           new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_FAILED_QUEST_CANCLE",                    new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_QUEST_FAILED_GET_FLAG_PARTY_LEVEL",      new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_QUEST_ITEM_DELETED",                     new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_QUEST_RESET_MESSAGE",                    new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_UPDATE_QUEST_TASK",                      new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_QUEST_SHARE_MESSAGE2",                   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_QUEST_USE_SKILL",                        new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
+            { "SMT_QUEST_USE_ITEM",                         new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Quest)) },
 
-            { "SMT_GRANT_DUNGEON_COOLTIME_AND_COUNT",   new Action<string, SystemMessage>(HandleDungeonEngagedMessage) },
-            { "SMT_GQUEST_URGENT_NOTIFY",               new Action<string, SystemMessage>(HandleGuilBamSpawn) },
+            { "SMT_GRANT_DUNGEON_COOLTIME_AND_COUNT",       new Action<string, SystemMessage>(HandleDungeonEngagedMessage) },
+            { "SMT_GQUEST_URGENT_NOTIFY",                   new Action<string, SystemMessage>(HandleGuilBamSpawn) },
 
-            { "SMT_PARTY_LOOT_ITEM_PARTYPLAYER",        new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
+            { "SMT_PARTY_LOOT_ITEM_PARTYPLAYER",            new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
 
-            { "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED",      new Action<string, SystemMessage>(HandleNewGuildMasterMessage) },
+            { "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED",          new Action<string, SystemMessage>(HandleNewGuildMasterMessage) },
 
-            { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_ALL",   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Laurel)) },
+            { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_ALL",       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Laurel)) },
 
-            { "SMT_DROPDMG_DAMAGE",                     new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Damage)) },
+            { "SMT_DROPDMG_DAMAGE",                         new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Damage)) },
 
-            { "SMT_FIELD_EVENT_REWARD_AVAILABLE",       new Action<string, SystemMessage>(HandleClearedGuardianQuestsMessage) },
-            { "SMT_FIELD_EVENT_ENTER",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
-            { "SMT_FIELD_EVENT_LEAVE",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
-            { "SMT_FIELD_EVENT_COMPLETE",               new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
-            { "SMT_FIELD_EVENT_FAIL_OVERTIME",          new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
-            { "SMT_FIELD_EVENT_CLEAR_REWARD_SENT",      new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
-            { "SMT_FIELD_EVENT_WORLD_ANNOUNCE",         new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
+            { "SMT_FIELD_EVENT_REWARD_AVAILABLE",           new Action<string, SystemMessage>(HandleClearedGuardianQuestsMessage) },
+            { "SMT_FIELD_EVENT_ENTER",                      new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
+            { "SMT_FIELD_EVENT_LEAVE",                      new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
+            { "SMT_FIELD_EVENT_COMPLETE",                   new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
+            { "SMT_FIELD_EVENT_FAIL_OVERTIME",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
+            { "SMT_FIELD_EVENT_CLEAR_REWARD_SENT",          new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
+            { "SMT_FIELD_EVENT_WORLD_ANNOUNCE",             new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guardian)) },
 
-            { "SMT_ITEM_DECOMPOSE_COMPLETE",            new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
-            { "SMT_WAREHOUSE_ITEM_DRAW",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
-            { "SMT_WAREHOUSE_ITEM_INSERT",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
+            { "SMT_ITEM_DECOMPOSE_COMPLETE",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
+            { "SMT_WAREHOUSE_ITEM_DRAW",                    new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
+            { "SMT_WAREHOUSE_ITEM_INSERT",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Loot)) },
 
-            { "SMT_GC_MSGBOX_APPLYLIST_1",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_MSGBOX_APPLYLIST_2",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_MSGBOX_APPLYRESULT_1",            new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_MSGBOX_APPLYRESULT_2",            new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_SYSMSG_ACCEPT_GUILD_APPLY",       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_SYSMSG_GUILD_MEMBER_BANNED",      new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_SYSMSG_GUILD_MEMBER_BANNED_2",    new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_SYSMSG_LEAVE_GUILD",              new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_SYSMSG_LEAVE_GUILD_FRIEND",       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
-            { "SMT_GC_SYSMSG_REFUSE_GUILD_APPLY",       new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_MSGBOX_APPLYLIST_1",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_MSGBOX_APPLYLIST_2",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_MSGBOX_APPLYRESULT_1",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_MSGBOX_APPLYRESULT_2",                new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_SYSMSG_ACCEPT_GUILD_APPLY",           new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_SYSMSG_GUILD_MEMBER_BANNED",          new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_SYSMSG_GUILD_MEMBER_BANNED_2",        new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_SYSMSG_LEAVE_GUILD",                  new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_SYSMSG_LEAVE_GUILD_FRIEND",           new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
+            { "SMT_GC_SYSMSG_REFUSE_GUILD_APPLY",           new Action<string, SystemMessage>((sys, srv) => Redirect(sys, srv, ChatChannel.Guild)) },
 
-            { "SMT_FIELDBOSS_APPEAR",                   new Action<string, SystemMessage>(HandleFieldBossAppear) },     //by HQ 20181224
-            { "SMT_FIELDBOSS_DIE_GUILD",                new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
-            { "SMT_FIELDBOSS_DIE_NOGUILD",              new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
+            { "SMT_FIELDBOSS_APPEAR",                       new Action<string, SystemMessage>(HandleFieldBossAppear) },     //by HQ 20181224
+            { "SMT_FIELDBOSS_DIE_GUILD",                    new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
+            { "SMT_FIELDBOSS_DIE_NOGUILD",                  new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
+
+            { "SMT_PARTY_MATCHING_CANT_PR_NO_INFORMATION",  new Action<string, SystemMessage>(HandleLfgNotListed)}
         };
+
+        private static void HandleLfgNotListed(string srvMsg, SystemMessage sysMsg)
+        {
+            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
+            WindowManager.LfgListWindow.VM.ForceStopPublicize();
+        }
 
         private static void Redirect(string srvMsg, SystemMessage sysMsg, ChatChannel ch)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, ch);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg, ch);
         }
 
         //by HQ 20181224
