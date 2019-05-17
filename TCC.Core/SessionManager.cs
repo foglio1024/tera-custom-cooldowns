@@ -104,6 +104,7 @@ namespace TCC
         public static event Action CombatChanged;
         public static event Action LoadingScreenChanged;
         public static event Action LoggedChanged;
+        public static event Action DatabaseLoaded;
 
         public static Player CurrentPlayer;
 
@@ -178,6 +179,7 @@ namespace TCC
         public static async void InitDatabasesAsync(string lang)
         {
             await Task.Factory.StartNew(() => InitDatabases(lang));
+            DatabaseLoaded?.Invoke();
         }
 
         public static void InitDatabases(string lang)
