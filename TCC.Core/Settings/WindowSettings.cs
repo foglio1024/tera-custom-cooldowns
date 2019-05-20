@@ -53,6 +53,7 @@ namespace TCC.Settings
             }
             set
             {
+                if (value >= int.MaxValue) return;
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
@@ -71,6 +72,7 @@ namespace TCC.Settings
             }
             set
             {
+                if (value >= int.MaxValue) return;
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
