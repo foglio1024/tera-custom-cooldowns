@@ -51,6 +51,8 @@ namespace TCC
         private static string FormatFullException(Exception ex)
         {
             var fullSb = new StringBuilder();
+            fullSb.AppendLine("---- Exception ----");
+            fullSb.AppendLine(ex.GetType().FullName);
             fullSb.AppendLine("---- Message ----");
             fullSb.AppendLine(ex.Message);
             fullSb.AppendLine("---- Source ----");
@@ -82,6 +84,7 @@ namespace TCC
                 { "id" , new JValue(SessionManager.CurrentAccountName != null ? Utils.GenerateHash(SessionManager.CurrentAccountName) : "") },
                 { "tcc_hash", Utils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
+                { "exception_type", new JValue(ex.GetType().FullName)},
                 { "full_exception", new JValue(FormatFullException(ex))},
                 { "inner_exception",new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined") },
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
@@ -134,6 +137,7 @@ namespace TCC
             sb.AppendLine($"server_id: {js["server_id"]}");
             sb.AppendLine($"settings_summary: {js["settings_summary"]}");
             sb.AppendLine($"stats: {js["stats"]}");
+            sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
             sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
             Log.F(sb.ToString(), "crash.log");
         }
