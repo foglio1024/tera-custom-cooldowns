@@ -30,7 +30,15 @@ namespace TCC
         public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
         public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
-
+        private static FUBH fubh;
+        public static void FUBH()
+        {
+            BaseDispatcher.BeginInvoke(new Action(() =>
+            {
+                if (fubh == null) fubh = new FUBH();
+                fubh.Show();
+            }));
+        }
         private async void OnStartup(object sender, StartupEventArgs e)
         {
             BaseDispatcher = Dispatcher.CurrentDispatcher;

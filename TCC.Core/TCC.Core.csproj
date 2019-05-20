@@ -779,6 +779,9 @@
     <Compile Include="Windows\DungeonEditWindow.xaml.cs">
       <DependentUpon>DungeonEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FUBH.xaml.cs">
+      <DependentUpon>FUBH.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MergedInventoryWindow.xaml.cs">
       <DependentUpon>MergedInventoryWindow.xaml</DependentUpon>
     </Compile>
@@ -1245,6 +1248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\DungeonEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FUBH.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

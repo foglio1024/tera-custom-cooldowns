@@ -65,6 +65,8 @@ namespace TCC.Parsing
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+
+            App.FUBH();
         }
         private static void OnEndConnection()
         {
