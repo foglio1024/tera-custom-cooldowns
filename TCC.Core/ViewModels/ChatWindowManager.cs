@@ -17,7 +17,8 @@ namespace TCC.ViewModels
 {
     public class ChatWindowManager : TccWindowViewModel
     {
-        public static ChatWindowManager Instance { get; set; }
+        private static ChatWindowManager _instance;
+        public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
 
         private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
@@ -37,7 +38,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
         public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
 
-        public ChatWindowManager()
+        private ChatWindowManager()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
