@@ -137,6 +137,7 @@
     <Compile Include="Utilities\Extensions\UInt64Extensions.cs" />
     <Compile Include="Utilities\Extensions\WindowCollectionExtensions.cs" />
     <Compile Include="Utilities\Extensions\StringExtensions.cs" />
+    <Compile Include="Utilities\Extensions\WindowExtensions.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />
     <Compile Include="Controls\Classes\ArcherLayout.xaml.cs">
       <DependentUpon>ArcherLayout.xaml</DependentUpon>
@@ -1581,7 +1582,7 @@
     </PropertyGroup>
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>D:\Repos\WpfResourcesBuilder\WpfResourcesBuilder\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
+    <PreBuildEvent>$(SolutionDir)\..\WpfResourcesBuilder\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
