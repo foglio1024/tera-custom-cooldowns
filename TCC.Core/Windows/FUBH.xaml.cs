@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using TCC.Utilities.Extensions;
 
 namespace TCC.Windows
 {
@@ -24,7 +25,7 @@ namespace TCC.Windows
 
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            this.TryDragMove();
         }
 
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
