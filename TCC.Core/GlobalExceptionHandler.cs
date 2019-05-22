@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
@@ -75,9 +77,8 @@ namespace TCC
 
             return fullSb.ToString();
         }
-        private static JObject BuildJsonDump(Exception ex)
+        private static async Task<JObject> BuildJsonDump(Exception ex)
         {
-
             return new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
@@ -85,8 +86,11 @@ namespace TCC
                 { "tcc_hash", Utils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
+                { "exception_source", new JValue(ex.Source)},
+                { "stack_trace", new JValue(ex.StackTrace)},
                 { "full_exception", new JValue(FormatFullException(ex))},
-                { "inner_exception",new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined") },
+                { "thread_traces", await GetThreadTraces() },
+                { "inner_exception", ex.InnerException != null ? BuildInnerExceptionJObject(ex.InnerException) : null },
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
                 { "region", new JValue(SessionManager.Server != null ? SessionManager.Server.Region : "")},
                 { "server_id", new JValue(SessionManager.Server != null ? SessionManager.Server.ServerId.ToString() : "")},
@@ -122,14 +126,52 @@ namespace TCC
             };
         }
 
-        private static void DumpCrashToFile(Exception ex)
+        private static JObject BuildInnerExceptionJObject(Exception ex)
+        {
+            return new JObject
+            {
+                { "exception", new JValue(ex.Message)},
+                { "exception_type", new JValue(ex.GetType().FullName)},
+                { "exception_source", new JValue(ex.Source)},
+                { "stack_trace", new JValue(ex.StackTrace)},
+                //{ "stack_trace", new JValue(new StackTrace().ToString())}, //just for test
+                { "inner_exception", ex.InnerException != null ? new JValue(BuildInnerExceptionJObject(ex.InnerException)) : new JValue("undefined") },
+            };
+        }
+
+        private static async Task<JObject> GetThreadTraces()
+        {
+            var ret = new JObject();
+
+            ret["Main"] = new StackTrace(false).ToString();
+
+            WindowManager.RunningDispatchers.ToList().ForEach(d =>
+            {
+                var t = d.Value.Thread;
+                t.Suspend();
+                ret[t.Name] = new StackTrace(t, false).ToString();
+                t.Resume();
+            });
+
+            if (PacketAnalyzer.AnalysisThread != null)
+            {
+                PacketAnalyzer.AnalysisThread.Suspend();
+                ret["Analysis"] = new StackTrace(PacketAnalyzer.AnalysisThread, false).ToString();
+                PacketAnalyzer.AnalysisThread.Resume();
+            }
+
+            return ret;
+        }
+
+
+        private static async void DumpCrashToFile(Exception ex)
         {
             //if (ex is TaskCanceledException tce)
             //{
             //    // TODO
             //}
             var sb = new StringBuilder();
-            var js = BuildJsonDump(ex);
+            var js = await BuildJsonDump(ex);
             sb.AppendLine($"id: {js["id"]}");
             sb.AppendLine($"tcc_hash: {js["tcc_hash"]}");
             sb.AppendLine($"game_version: {js["game_version"]}");
@@ -139,9 +181,11 @@ namespace TCC
             sb.AppendLine($"stats: {js["stats"]}");
             sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
             sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
+            sb.AppendLine($"threads");
+            sb.AppendLine($"{js["thread_traces"]}");
             Log.F(sb.ToString(), "crash.log");
         }
-        private static void UploadCrashDump(Exception ex)
+        private static async void UploadCrashDump(Exception ex)
         {
             using (var c = Utils.GetDefaultWebClient())
             {
@@ -149,10 +193,13 @@ namespace TCC
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 c.Encoding = Encoding.UTF8;
 
-                var js = BuildJsonDump(ex);
-
-                c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"),
-                               Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                var js = await BuildJsonDump(ex);
+                try
+                {
+                    c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"),
+                                   Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                }
+                catch { }
             }
         }
 

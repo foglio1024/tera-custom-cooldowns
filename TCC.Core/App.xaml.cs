@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+
 using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
@@ -14,6 +16,7 @@ using TCC.Settings;
 using TCC.Sniffing;
 using TCC.ViewModels;
 using TCC.Windows;
+
 using SplashScreen = TCC.Windows.SplashScreen;
 
 namespace TCC
