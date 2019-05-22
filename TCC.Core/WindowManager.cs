@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -46,7 +47,6 @@ namespace TCC
         //    new Action(LoadInfoWindow),
         //};
         public static Size ScreenSize;
-        public static Size ScreenCorrection;
 
         public static CooldownWindow CooldownWindow;
         public static CharacterWindow CharacterWindow;
@@ -96,15 +96,32 @@ namespace TCC
             if (ScreenSize.IsEqual(SettingsHolder.LastScreenSize)) return;
             var wFac = SettingsHolder.LastScreenSize.Width / ScreenSize.Width;
             var hFac = SettingsHolder.LastScreenSize.Height / ScreenSize.Height;
-            ScreenCorrection = new Size(wFac, hFac);
+            var sc = new Size(wFac, hFac);
             SettingsHolder.LastScreenSize = ScreenSize;
+            ApplyScreenCorrection(sc);
             if (!App.Loading) SettingsWriter.Save();
         }
+
+        private static void ApplyScreenCorrection(Size sc)
+        {
+            var list = new List<WindowSettings>
+            {
+                CooldownWindow.WindowSettings,
+                ClassWindow.WindowSettings,
+                CharacterWindow.WindowSettings,
+                GroupWindow.WindowSettings,
+                BuffWindow.WindowSettings,
+                BossWindow.WindowSettings
+            };
+
+            list.ForEach(s => { s.ApplyScreenCorrection(sc); });
+
+        }
+
         public static void Init()
         {
             ForegroundManager = new ForegroundManager();
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
-            ScreenCorrection = new Size(1, 1);
             UpdateScreenCorrection();
             FocusManager.Init();
             LoadWindows();

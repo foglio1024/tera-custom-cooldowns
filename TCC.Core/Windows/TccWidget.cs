@@ -34,8 +34,8 @@ namespace TCC.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                Left = WindowSettings.X * WindowManager.ScreenSize.Width * WindowManager.ScreenCorrection.Width;
-                Top = WindowSettings.Y * WindowManager.ScreenSize.Height * WindowManager.ScreenCorrection.Height;
+                Left = WindowSettings.X * WindowManager.ScreenSize.Width ;
+                Top = WindowSettings.Y * WindowManager.ScreenSize.Height ;
 
                 //if(WindowSettings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {WindowSettings.Name}: ({Left},{Top}) {WindowSettings.X}, {WindowSettings.Y}");
                 CheckBounds();
@@ -76,8 +76,8 @@ namespace TCC.Windows
 
             MainContent.Opacity = 0;
             Topmost = true;
-            Left = settings.X * WindowManager.ScreenSize.Width*WindowManager.ScreenCorrection.Width;
-            Top = settings.Y * WindowManager.ScreenSize.Height * WindowManager.ScreenCorrection.Height;
+            Left = settings.X * WindowManager.ScreenSize.Width;
+            Top = settings.Y * WindowManager.ScreenSize.Height;
             CheckBounds();
             if (!ignoreSize)
             {

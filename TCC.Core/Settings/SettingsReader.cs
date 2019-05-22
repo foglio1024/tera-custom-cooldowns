@@ -167,8 +167,8 @@ namespace TCC.Settings
                 else if (a.Name == nameof(WindowSettings.Enabled)) enabled = bool.Parse(a.Value);
             });
 
-            if (x > 1) x /= WindowManager.ScreenSize.Width * WindowManager.ScreenCorrection.Width;
-            if (y > 1) y /= WindowManager.ScreenSize.Height * WindowManager.ScreenCorrection.Height;
+            if (x > 1) x /= WindowManager.ScreenSize.Width;
+            if (y > 1) y /= WindowManager.ScreenSize.Height;
 
             var positions = ParseWindowPositions(ws);
 

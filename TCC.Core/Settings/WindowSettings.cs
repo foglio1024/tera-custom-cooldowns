@@ -313,6 +313,11 @@ namespace TCC.Settings
         }
 
         protected void InvokeClickThruModeChanged() => ClickThruModeChanged?.Invoke();
+
+        public void ApplyScreenCorrection(Size sc)
+        {
+            Positions.ApplyCorrection(sc);
+        }
     }
 
     public class ChatWindowSettings : WindowSettings

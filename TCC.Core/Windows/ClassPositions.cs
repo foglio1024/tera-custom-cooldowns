@@ -21,6 +21,11 @@ namespace TCC.Windows
             Position = new Point(x, y);
             Buttons = buttons;
         }
+
+        public void ApplyCorrection(Size sc)
+        {
+            Position = new Point(sc.Width * Position.X, sc.Height * Position.Y);
+        }
     }
 
     public class ClassPositions
@@ -67,6 +72,13 @@ namespace TCC.Windows
             }
         }
 
+        public void ApplyCorrection(Size sc)
+        {
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
+            {
+                _classes[cl].ApplyCorrection(sc);
+            }
+        }
         public void SetButtons(Class cname, ButtonsPosition buttons)
         {
             _classes[cname].Buttons = buttons;
