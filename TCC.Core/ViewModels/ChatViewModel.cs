@@ -34,7 +34,7 @@ namespace TCC.ViewModels
     {
 
         private bool _paused;
-        private bool _visible;
+        private bool _visible = true;
         private DispatcherTimer _hideTimer;
         private ChatWindowSettings _windowSettings;
 
@@ -181,8 +181,8 @@ namespace TCC.ViewModels
         {
             _windowSettings.Tabs.Clear();
             _windowSettings.Tabs.AddRange(Tabs);
-            _windowSettings.X = left / WindowManager.ScreenSize.Width * WindowManager.ScreenCorrection.Width;
-            _windowSettings.Y = top / WindowManager.ScreenSize.Height * WindowManager.ScreenCorrection.Height;
+            _windowSettings.X = left / WindowManager.ScreenSize.Width;
+            _windowSettings.Y = top / WindowManager.ScreenSize.Height;
             var v = SettingsHolder.ChatWindowsSettings;
             var s = v.FirstOrDefault(x => x == _windowSettings);
             if (s == null) v.Add(_windowSettings);
