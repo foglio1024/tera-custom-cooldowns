@@ -372,6 +372,7 @@ namespace TCC.Settings
 
                     else if (attr.Name == nameof(SettingsHolder.FpsAtGuardian)) SettingsHolder.FpsAtGuardian = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.EnableProxy)) SettingsHolder.EnableProxy = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.DontShowFUBH)) SettingsHolder.DontShowFUBH = bool.Parse(attr.Value);
 
                     else if (attr.Name == nameof(SettingsHolder.LastScreenSize))
                     {

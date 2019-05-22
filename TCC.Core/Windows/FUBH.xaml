@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:settings="clr-namespace:TCC.Controls.Settings"
+
         Topmost="True"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         mc:Ignorable="d"
         Title="FUBH" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" d:DataContext="{d:DesignInstance local:FUBHVM}">
     <Grid MouseDown="UIElement_OnMouseDown" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -45,16 +47,16 @@
             <Run Text="I thought the best I could do to help the community would be to add this message here, so that hopefully more people will put pressure on the developer for actual changes, since I've been playing this game for 6 years and it's really sad to see what it has become."></Run>
             <LineBreak/>
             <LineBreak/>
-            <Run Text="This message will be displayed at every server login until future release." Foreground="#5fff"></Run>
-            <LineBreak/>
-            <LineBreak/>
-            <Run Text="No, you can't disable it." Foreground="#5fff" FontSize="9"></Run>
+            <Run Text="This message will be displayed at every server login." Foreground="#5fff"></Run>
         </TextBlock>
-        <TextBlock VerticalAlignment="Bottom" 
+        <TextBlock VerticalAlignment="Center" 
                    TextAlignment="Center" 
                    Grid.Row="1"
-                   Margin="0 6"
+                   Margin="0"
                    Foreground="#2fff"
-                   IsHitTestVisible="False">Click to temporarily hide this window</TextBlock>
+                   IsHitTestVisible="False"
+                   Text="{Binding CloseMessage}"/>
+        <settings:CheckboxSetting Grid.Row="1" VerticalAlignment="Center" Margin="0" SettingName="Don't show again" HorizontalAlignment="Right" 
+                                  IsOn="{Binding DontShowAgain, Mode=TwoWay}"/>
     </Grid>
 </Window>
