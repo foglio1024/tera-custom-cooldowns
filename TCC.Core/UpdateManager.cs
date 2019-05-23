@@ -182,9 +182,9 @@ namespace TCC
                     {
                         File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
                     }
-                    catch 
+                    catch
                     {
-                        Log.F("Failed to copy icon "+ newPath);
+                        Log.F("Failed to copy icon " + newPath);
                     }
                 });
                 //App.SplashScreen.SetText("Copying files... Done.");
@@ -205,12 +205,12 @@ namespace TCC
         public static void UpdateDatabase(string relativePath)
         {
             // example https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/acc_benefits/acc_benefits-EU-EN.tsv
-            var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{relativePath.Replace("\\", "/")}";
-            var destPath = Path.Combine(App.DataPath, relativePath);
-            var destDir = Path.GetDirectoryName(destPath);
-            if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
             try
             {
+                var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{relativePath.Replace("\\", "/")}";
+                var destPath = Path.Combine(App.DataPath, relativePath);
+                var destDir = Path.GetDirectoryName(destPath);
+                if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
                 using (var c = Utils.GetDefaultWebClient())
                 {
                     c.DownloadFile(url, destPath);
