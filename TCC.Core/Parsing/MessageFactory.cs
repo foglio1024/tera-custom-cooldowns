@@ -14,6 +14,7 @@ using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUI
 using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 using TCC.Settings;
 using System.IO;
+using TCC.Windows;
 
 namespace TCC.Parsing
 {
@@ -370,6 +371,12 @@ namespace TCC.Parsing
                     File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Version}.map"))
                         ? Path.Combine(App.DataPath, $"opcodes/sysmsg.{Version}.map")
                         : "";
+                if (path == "")
+                {
+                    TccMessageBox.Show($"sysmsg.{ReleaseVersion/100}.map or sysmsg.{Version}.map not found. TCC will now close.", MessageBoxType.Error);
+                    App.Close();
+                    return;
+                }
                 SystemMessageNamer = new OpCodeNamer(path);
             }
             SystemMessageNamer?.Reload(Version, ReleaseVersion);
