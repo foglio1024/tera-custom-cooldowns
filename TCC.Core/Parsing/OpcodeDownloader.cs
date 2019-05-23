@@ -51,19 +51,19 @@ namespace TCC.Parsing
         {
             Directory.CreateDirectory(directory);
 
-            var filename = directory + Path.DirectorySeparatorChar + version + ".txt";
+            var filename = Path.Combine(directory, $"{version}.txt");
             if (IsFileValid(filename)) return;
-            filename = directory + Path.DirectorySeparatorChar + "protocol." + version + ".map";
+            filename = Path.Combine(directory, $"protocol.{version}.map");
             if (IsFileValid(filename)) return;
             try
             {
-                Download("https://raw.githubusercontent.com/tera-toolbox/tera-data/master/map_base/protocol." + version + ".map", filename);
+                Download($"https://raw.githubusercontent.com/tera-toolbox/tera-data/master/map_base/protocol.{version}.map", filename);
                 return;
             }
             catch { /* ignored*/ }
             try
             {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
+                Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol.{version}.map", filename);
             }
             catch { /* ignored*/ }
         }
@@ -72,25 +72,24 @@ namespace TCC.Parsing
         {
             Directory.CreateDirectory(directory);
 
-            var filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
+            var filename = Path.Combine(directory, $"sysmsg.{revision / 100}.map");
             if (File.Exists(filename)) return true;
             else
             {
                 try
                 {
-                    Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision / 100 + ".map", filename);
-                    Log.CW($"[DownloadSysmsg] file downloaded from TeraDpsMeterData (rev/100) repo");
+                    Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{revision / 100}.map", filename);
                     return true;
                 }
                 catch { /* ignored*/ }
             }
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
+            filename = Path.Combine(directory, $"sysmsg.{version}.map");
             if (File.Exists(filename)) return true;
             else
             {
                 try
                 {
-                    Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + version + ".map", filename);
+                    Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{version}.map", filename);
                     return true;
                 }
                 catch { /* ignored*/ }
