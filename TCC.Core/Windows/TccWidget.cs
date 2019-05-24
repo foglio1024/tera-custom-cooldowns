@@ -32,7 +32,7 @@ namespace TCC.Windows
         public bool CanMove { get; set; } = true;
         public void ReloadPosition()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 Left = WindowSettings.X * WindowManager.ScreenSize.Width ;
                 Top = WindowSettings.Y * WindowManager.ScreenSize.Height ;
@@ -53,7 +53,7 @@ namespace TCC.Windows
                     }
                     UpdateButtons();
                 }
-            });
+            }));
         }
         public void ResetToCenter()
         {
