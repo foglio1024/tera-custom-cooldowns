@@ -1583,7 +1583,7 @@
     </PropertyGroup>
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)\dependencies\WpfResourcesBuilder\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
+    <PreBuildEvent>$(SolutionDir)\dependencies\WpfRB\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
