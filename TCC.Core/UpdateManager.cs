@@ -264,9 +264,7 @@ namespace TCC
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), ex.Message + "\r\n" +
-                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                             "\r\n" + ex.TargetSite);
+                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), $"{ex.Message}\n{ex.StackTrace}\n{ex.Source}\n{ex}\n{ex.Data}\n{ex.InnerException}\n{ex.TargetSite}");
                 }
             }
         }
@@ -383,6 +381,19 @@ namespace TCC
                 }
             }
         }
+
+        public static void TryDeleteUpdater()
+        {
+            try
+            {
+                File.Delete(Path.Combine(App.BasePath, "TCCupdater.exe"));
+            }
+            catch
+            {
+                /* ignored*/
+            }
+        }
+
 
         private class VersionParser
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -24,6 +23,7 @@ namespace TCC
     public partial class App
     {
         public const bool Experimental = false;
+
         private static Mutex _mutex;
         public static readonly Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
         public static SplashScreen SplashScreen;
@@ -33,6 +33,7 @@ namespace TCC
         public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
         public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
+
         private static FUBH fubh;
         public static void FUBH()
         {
@@ -61,7 +62,7 @@ namespace TCC
             InitSplashScreen();
 
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
-            TryDeleteUpdater();
+            UpdateManager.TryDeleteUpdater();
 
             SplashScreen.SetText("Checking for application updates...");
             await UpdateManager.CheckAppVersion();
@@ -126,18 +127,6 @@ namespace TCC
             ssThread.SetApartmentState(ApartmentState.STA);
             ssThread.Start();
             while (waiting) Thread.Sleep(1);
-        }
-
-        private static void TryDeleteUpdater()
-        {
-            try
-            {
-                File.Delete(Path.Combine(BasePath, "TCCupdater.exe"));
-            }
-            catch
-            {
-                /* ignored*/
-            }
         }
 
         public static void Restart()
