@@ -1,6 +1,0 @@
-[submodule "Dragablz"]
-	path = dependencies/Dragablz
-	url = ../Dragablz.git
-[submodule "WpfResourcesBuilder"]
-	path = WpfResourcesBuilder
-	url = ../WpfResourcesBuilder.git
