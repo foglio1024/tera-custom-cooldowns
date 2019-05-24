@@ -126,6 +126,15 @@ namespace TCC.Test
                 WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower((uint)r.Next(0, 29));
             }
         }
+
+        internal static void AddFakeSystemMessage(string v, params string[] p)
+        {
+            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(v, out var sysmsg);
+            var srvMsg = $"@0";
+            p.ToList().ForEach(par => srvMsg += $"\v{par}");
+            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
+        }
+
         public static void AddFakeLfgAndShowWindow()
         {
             WindowManager.LfgListWindow.ShowWindow();
