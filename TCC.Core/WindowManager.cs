@@ -122,9 +122,9 @@ namespace TCC
         {
             ForegroundManager = new ForegroundManager();
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
-            UpdateScreenCorrection();
             FocusManager.Init();
             LoadWindows();
+            UpdateScreenCorrection();
             _contextMenu = new ContextMenu();
             var defaultIconStream = Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative))?.Stream;
             if (defaultIconStream != null) DefaultIcon = new Icon(defaultIconStream);
