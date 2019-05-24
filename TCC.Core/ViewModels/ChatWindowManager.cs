@@ -133,8 +133,8 @@ namespace TCC.ViewModels
             for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
             {
                 if (i >= pausedCount + ChatMessages.Count) continue;
-                if (Pass(message, i <= pausedCount - 1 
-                                                 ? _pauseQueue.ElementAt(i) 
+                if (Pass(message, i <= pausedCount - 1
+                                                 ? _pauseQueue.ElementAt(i)
                                                  : ChatMessages[i - pausedCount])) continue;
                 message.Dispose();
                 return true;
@@ -201,13 +201,12 @@ namespace TCC.ViewModels
         }
         public void AddTccMessage(string message)
         {
-            var msg = new ChatMessage(ChatChannel.TCC, "System", "<FONT>" + message + "</FONT>");
+            var msg = new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{message}</FONT>");
             AddChatMessage(msg);
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!target.IsMe() || diff > 0 || target == source || source == 0 ||
-                !EntityManager.IsEntitySpawned(source)) return;
+            if (!target.IsMe() || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
             var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
