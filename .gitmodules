@@ -1,3 +1,7 @@
-[submodule "TCC.Core/resources/data"]
-	path = TCC.Core/resources/data
-	url = https://github.com/neowutran/TeraDpsMeterData
+[submodule "TCC.Core/dependencies/Dragablz"]
+	path = TCC.Core/dependencies/Dragablz
+	url = https://github.com/Foglio1024/Dragablz
+	
+[submodule "TCC.Core/dependencies/WpfResourcesBuilder"]
+	path = TCC.Core/dependencies/WpfResourcesBuilder
+	url = https://github.com/Foglio1024/WpfResourcesBuilder
