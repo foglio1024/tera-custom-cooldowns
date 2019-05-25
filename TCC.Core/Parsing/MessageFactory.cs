@@ -6,7 +6,6 @@ using System.Reflection;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.TeraCommon;
-using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
 using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
@@ -14,7 +13,9 @@ using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUI
 using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 using TCC.Settings;
 using System.IO;
+using TCC.Interop.Proxy;
 using TCC.Windows;
+using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing
 {
@@ -360,7 +361,7 @@ namespace TCC.Parsing
             return true;
         }
 
-        public void ReloadSysMsg()
+        public async void ReloadSysMsg()
         {
             if (SystemMessageNamer == null)
             {
@@ -373,7 +374,16 @@ namespace TCC.Parsing
                         : "";
                 if (path == "")
                 {
-                    TccMessageBox.Show($"sysmsg.{ReleaseVersion/100}.map or sysmsg.{Version}.map not found. TCC will now close.", MessageBoxType.Error);
+                    if (ProxyInterface.Instance.IsStubAvailable)
+                    {
+                        var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Version}.map").Replace("\\", "/");
+                        if (await ProxyInterface.Instance.Stub.DumpSysMsg(destPath))
+                        {
+                            SystemMessageNamer = new OpCodeNamer(destPath);
+                            return;
+                        }
+                    }
+                    TccMessageBox.Show($"sysmsg.{ReleaseVersion / 100}.map or sysmsg.{Version}.map not found.\nWait for update or use tcc-stub to automatically retreive sysmsg files from game client.\nTCC will now close.", MessageBoxType.Error);
                     App.Close();
                     return;
                 }
