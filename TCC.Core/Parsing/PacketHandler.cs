@@ -1152,6 +1152,7 @@ namespace TCC.Parsing
 
         public static void HandleCheckVersion(C_CHECK_VERSION p)
         {
+
             OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
             if (!File.Exists(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map")))
             {
@@ -1165,6 +1166,8 @@ namespace TCC.Parsing
         }
         public static async void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
+            await ProxyInterface.Instance.Init(); //ProxyOld.ConnectToProxy();
+
             SessionManager.CurrentAccountName = p.AccountName;
             // check should already be done when downloading opcodes
             //if (OpcodeDownloader.DownloadSysmsg(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
@@ -1177,7 +1180,6 @@ namespace TCC.Parsing
 
             BasicTeraData.Instance.Servers.Language = p.Language;
 
-            await ProxyInterface.Instance.Init(); //ProxyOld.ConnectToProxy();
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion / 100d}", NotificationType.Normal); //by HQ 20190209
         }
 
