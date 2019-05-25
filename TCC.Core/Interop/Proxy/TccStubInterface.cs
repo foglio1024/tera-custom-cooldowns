@@ -248,5 +248,14 @@ namespace TCC.Interop.Proxy
         {
             await TccStub.CallAsync("resetInstance");
         }
+
+        public async Task<bool> DumpSysMsg([NotNull] string path)
+        {
+            var resp = await TccStub.CallAsync("dumpSysMsg", new JObject
+            {
+                {"path", path}
+            });
+            return resp?.Result != null && resp.Result.Value<bool>();
+        }
     }
 }
