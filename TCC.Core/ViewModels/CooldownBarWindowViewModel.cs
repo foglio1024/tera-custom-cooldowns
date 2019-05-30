@@ -1,4 +1,5 @@
 ﻿using FoglioUtils;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,12 +8,16 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
+
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
 using TCC.Settings;
 using TCC.Windows;
+
+using TeraDataLite;
+
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels

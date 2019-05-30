@@ -9,6 +9,7 @@ using TCC.Parsing;
 using TCC.TeraCommon;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
+using TeraPacketParser;
 
 namespace TCC.Interop.Proxy
 {

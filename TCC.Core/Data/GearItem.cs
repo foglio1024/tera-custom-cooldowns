@@ -1,4 +1,6 @@
-﻿namespace TCC.Data
+﻿using TeraDataLite;
+
+namespace TCC.Data
 {
     public class GearItem
     {
@@ -51,7 +53,12 @@
             Enchant = enchant;
             Experience = exp;
         }
-
+        public GearItem(GearItemData data)
+        {
+            Id = data.Id;
+            Tier = data.Tier;
+            Piece = data.Piece;
+        }
         public override string ToString()
         {
             return $"[{Id}] {Piece} {Tier} +{Enchant}";

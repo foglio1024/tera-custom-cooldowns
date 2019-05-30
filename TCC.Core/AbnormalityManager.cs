@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using FoglioUtils.Extensions;
+
+using TeraDataLite;
 
 namespace TCC
 {

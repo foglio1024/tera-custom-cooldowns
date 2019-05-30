@@ -9,6 +9,7 @@ using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
 
 namespace TCC.Settings
 {
@@ -210,7 +211,7 @@ namespace TCC.Settings
                 {
                     Visible = true;
                 }
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 EnabledChanged?.Invoke();
                 N(nameof(Enabled));
             }

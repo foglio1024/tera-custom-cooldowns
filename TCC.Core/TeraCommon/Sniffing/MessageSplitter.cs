@@ -1,5 +1,6 @@
 ﻿using System;
 using TCC.TeraCommon.PacketLog.Parsing;
+using TeraPacketParser;
 
 namespace TCC.TeraCommon.Sniffing
 {

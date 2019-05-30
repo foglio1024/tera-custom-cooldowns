@@ -3,6 +3,7 @@
 
 using System;
 using TCC.TeraCommon.Game;
+using TeraPacketParser;
 
 namespace TCC.TeraCommon.Sniffing
 {

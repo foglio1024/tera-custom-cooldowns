@@ -3,6 +3,7 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Settings;
 using TCC.Windows;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {

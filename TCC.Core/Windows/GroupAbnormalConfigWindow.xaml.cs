@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Settings;
 using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC.Windows
 {

@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using FoglioUtils.Extensions;
+
+using System.Linq;
+
 using TCC.Data;
-using TCC.Parsing.Messages;
-using FoglioUtils.Extensions;
 using TCC.ViewModels;
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {

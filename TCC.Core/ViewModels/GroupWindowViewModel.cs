@@ -13,8 +13,8 @@ using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
-using TCC.Parsing.Messages;
 using TCC.Settings;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -154,14 +154,14 @@ namespace TCC.ViewModels
                 item.HasAggro = item.EntityId == target;
             }
         }
-        public void SetAggroCircle(S_USER_EFFECT p)
+        public void SetAggroCircle(AggroCircle circle, AggroAction action, ulong user)
         {
             if (WindowManager.BossWindow.VM.CurrentHHphase != HarrowholdPhase.None) return;
 
-            if (p.Circle != AggroCircle.Main) return;
-            if (p.Action == AggroAction.Add)
+            if (circle != AggroCircle.Main) return;
+            if (action == AggroAction.Add)
             {
-                SetAggro(p.User);
+                SetAggro(user);
             }
         }
         public void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
@@ -246,6 +246,34 @@ namespace TCC.ViewModels
                 user.Order = p.Order;
                 user.Awakened = p.Awakened;
                 user.Visible = p.Visible;
+            }
+        }
+        public void AddOrUpdateMember(PartyMemberData p)
+        {
+            var visible = true;
+            if (SettingsHolder.IgnoreMeInGroupWindow && p.Name == SessionManager.CurrentPlayer.Name)
+            {
+                _leaderOverride = p.IsLeader;
+                visible = false;
+                //return;
+            }
+            lock (_lock) //TODO: really needed?
+            {
+                var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+                if (user == null)
+                {
+                    Members.Add(new User(p));
+                    SendAddMessage(p.Name);
+                    return;
+                }
+
+                if (user.Online != p.Online) SendOnlineMessage(user.Name, p.Online);
+                user.Online = p.Online;
+                user.EntityId = p.EntityId;
+                user.IsLeader = p.IsLeader;
+                user.Order = p.Order;
+                user.Awakened = p.Awakened;
+                user.Visible = visible;
             }
         }
 
@@ -464,7 +492,7 @@ namespace TCC.ViewModels
         {
             Dispatcher.BeginInvoke(new Action(() => Raid = raid));
         }
-        public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
+        public void UpdateMember(PartyMemberData p)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -474,7 +502,7 @@ namespace TCC.ViewModels
                 u.CurrentMp = p.CurrentMP;
                 u.MaxHp = p.MaxHP;
                 u.MaxMp = p.MaxMP;
-                u.Level = (uint)p.Level;
+                u.Level = p.Level;
                 if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
                 u.Alive = p.Alive;
                 N(nameof(AliveCount));
@@ -485,14 +513,14 @@ namespace TCC.ViewModels
         {
             N(nameof(Size));
         }
-        public void UpdateMemberGear(S_SPAWN_USER p)
+        public void UpdateMemberGear(uint playerId, uint serverId, GearItemData weapon, GearItemData armor, GearItemData hands, GearItemData feet)
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
-            u.Weapon = p.Weapon;
-            u.Armor = p.Armor;
-            u.Gloves = p.Gloves;
-            u.Boots = p.Boots;
+            u.Weapon = new GearItem(weapon);
+            u.Armor = new GearItem(armor);
+            u.Gloves = new GearItem(hands);
+            u.Boots = new GearItem(feet);
         }
         public void UpdateMyGear()
         {
@@ -505,12 +533,12 @@ namespace TCC.ViewModels
             u.Boots = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
-        public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
+        public void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
-            var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
-            u.Location = SessionManager.DB.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
+            var ch = channel > 1000 ? "" : " ch." + channel;
+            u.Location = SessionManager.DB.TryGetGuardOrDungeonNameFromContinentId(continentId, out var l) ? l + ch : "Unknown";
         }
 
     }

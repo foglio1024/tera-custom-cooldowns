@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Threading;
 using TCC.Data;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC
 {

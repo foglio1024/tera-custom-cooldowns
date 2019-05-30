@@ -4,6 +4,7 @@ using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
+using TeraDataLite;
 
 namespace TCC.Data
 {
@@ -160,6 +161,15 @@ namespace TCC.Data
             Applicants = new SynchronizedObservableCollection<User>(Dispatcher);
             Apply = new ApplyCommand(this);
             RefreshApplicants = new RefreshApplicantsCommand(this);
+        }
+
+        public Listing(ListingData l) : this()
+        {
+            LeaderName = l.LeaderName;
+            LeaderId = l.LeaderId;
+            IsRaid = l.IsRaid;
+            Message = l.Message;
+            PlayerCount = l.PlayerCount;
         }
     }
 

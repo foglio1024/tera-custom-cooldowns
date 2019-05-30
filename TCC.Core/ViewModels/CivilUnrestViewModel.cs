@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using TCC.Data;
 using TCC.Parsing;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -99,7 +100,7 @@ namespace TCC.ViewModels
             _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
         }
 
-        public void AddGuild(CityWarGuildInfo guildInfo)
+        public void AddGuild(CityWarGuildData guildInfo)
         {
             var g = _guilds.FirstOrDefault(x => x.Id == guildInfo.Id);
             if (g != null)

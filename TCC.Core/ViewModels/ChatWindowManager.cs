@@ -8,10 +8,10 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
-using TCC.Parsing.Messages;
 using TCC.Settings;
 using FoglioUtils.Extensions;
 using TCC.Windows.Widgets;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -28,7 +28,7 @@ namespace TCC.ViewModels
         public event Action<ChatMessage> NewMessage;
         public event Action<int> PrivateChannelJoined;
 
-        public List<SimpleUser> Friends { get; set; }
+        public List<FriendData> Friends { get; set; }
         public List<string> BlockedUsers { get; set; }
         public LFG LastClickedLfg { get; set; }
 
@@ -46,7 +46,7 @@ namespace TCC.ViewModels
             _privateMessagesCache = new List<TempPrivateMessage>();
 
             BlockedUsers = new List<string>();
-            Friends = new List<SimpleUser>();
+            Friends = new List<FriendData>();
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>(Dispatcher);
             ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
             LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
@@ -309,16 +309,16 @@ namespace TCC.ViewModels
             }
         }
 
-        public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
+        public void AddOrRefreshLfg(ListingData x)
         {
-            if (TryGetLfg(x.Id, x.Message, x.Name, out var lfg))
+            if (TryGetLfg(x.LeaderId, x.Message, x.LeaderName, out var lfg))
             {
                 lfg.Message = x.Message;
                 lfg.Refresh();
             }
             else
             {
-                LFGs.Add(new LFG(x.Id, x.Name, x.Message, x.Raid));
+                LFGs.Add(new LFG(x.LeaderId, x.LeaderName, x.Message, x.IsRaid));
             }
         }
         public void RemoveLfg(LFG lfg)
@@ -343,11 +343,11 @@ namespace TCC.ViewModels
             lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Message == msg);
             return lfg != null;
         }
-        public void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
+        public void UpdateLfgMembers(uint id, int count)
         {
-            if (TryGetLfg(p.Id, "", "", out var lfg))
+            if (TryGetLfg(id, "", "", out var lfg))
             {
-                lfg.MembersCount = p.Members.Count;
+                lfg.MembersCount = count;
             }
         }
 

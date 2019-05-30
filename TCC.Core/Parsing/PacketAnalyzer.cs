@@ -9,6 +9,7 @@ using TCC.Settings;
 using TCC.Sniffing;
 using TCC.TeraCommon;
 using TCC.ViewModels;
+using TeraPacketParser;
 using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing
@@ -16,6 +17,7 @@ namespace TCC.Parsing
     public static class PacketAnalyzer
     {
         public static MessageFactory Factory;
+        public static MessageProcessor Processor;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         public static Thread AnalysisThread;
         public static int AnalysisThreadId;
@@ -26,8 +28,10 @@ namespace TCC.Parsing
 
             TeraSniffer.Instance.MessageReceived += EnqueuePacket;
             //ProxyOld.ProxyPacketReceived += EnqueuePacket;
+            SessionManager.Server = new Server("", "", "", 0);
 
             Factory = new MessageFactory();
+            Processor = new MessageProcessor();
             if (AnalysisThread == null)
             {
                 Log.All("Analysis thread not running, starting it...");
@@ -56,7 +60,7 @@ namespace TCC.Parsing
                     Thread.Sleep(1);
                     continue;
                 }
-                Factory.Process(Factory.Create(msg));
+                Processor.Process(Factory.Create(msg));
             }
             // ReSharper disable once FunctionNeverReturns
         }

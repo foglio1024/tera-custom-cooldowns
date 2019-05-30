@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using TCC.Parsing.Messages;
+using TeraPacketParser.Messages;
 
 namespace TCC.Converters
 {

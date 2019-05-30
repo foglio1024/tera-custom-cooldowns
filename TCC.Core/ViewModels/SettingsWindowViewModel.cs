@@ -219,7 +219,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.DisablePartyAbnormals == value) return;
                 SettingsHolder.DisablePartyAbnormals = value;
                 N(nameof(DisableAllPartyAbnormals));
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 if (value) WindowManager.GroupWindow.VM.ClearAllAbnormalities();
             }
         }
@@ -231,7 +231,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.AccurateHp == value) return;
                 SettingsHolder.AccurateHp = value;
                 N(nameof(AccurateHp));
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
             }
         }
 
@@ -400,7 +400,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.DisablePartyMP == value) return;
                 SettingsHolder.DisablePartyMP = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 N(nameof(DisableMP));
             }
         }
@@ -412,7 +412,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.DisablePartyHP == value) return;
                 SettingsHolder.DisablePartyHP = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 N(nameof(DisableHP));
             }
         }

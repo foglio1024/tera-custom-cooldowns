@@ -1,6 +1,4 @@
-﻿using TCC.Parsing.Messages;
-
-namespace TCC.Data.Chat
+﻿namespace TCC.Data.Chat
 {
     public class BrokerChatMessage : ChatMessage
     {
@@ -52,23 +50,23 @@ namespace TCC.Data.Chat
         public readonly uint PlayerId;
         public readonly uint ListingId;
 
-        public BrokerChatMessage(S_TRADE_BROKER_DEAL_SUGGESTED p)
+        public BrokerChatMessage(uint playerId, uint listing, int item, long amount, long sellerPrice, long offeredPrice, string name)
         {
             ContainsPlayerName = true;
             Channel = ChatChannel.Bargain;
-            Author = p.Name;
-            ListingId = p.Listing;
-            PlayerId = p.PlayerId;
+            Author = name;
+            ListingId = listing;
+            PlayerId = playerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount, MessagePieceType.Simple, Settings.SettingsHolder.FontSize, false) {Container = this};
-            OfferedPrice = new MessagePiece(new Money(p.OfferedPrice)){ Container = this };
-            StartingPrice = new MessagePiece(new Money(p.SellerPrice)) { Container = this };
+            Amount = new MessagePiece("Offer for " + amount, MessagePieceType.Simple, Settings.SettingsHolder.FontSize, false) { Container = this };
+            OfferedPrice = new MessagePiece(new Money(offeredPrice)) { Container = this };
+            StartingPrice = new MessagePiece(new Money(sellerPrice)) { Container = this };
             Listing = new MessagePiece("") { Container = this };
-            
-            SessionManager.DB.ItemsDatabase.Items.TryGetValue((uint)p.Item, out var i);
-            if(i != null)
+
+            SessionManager.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
+            if (i != null)
             {
-                Listing.Text = "<"+ i.Name + ">";
+                Listing.Text = "<" + i.Name + ">";
                 Listing.ItemId = i.Id;
                 Listing.SetColor(ChatUtils.GradeToColorString(i.RareGrade));
             }

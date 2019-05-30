@@ -5,9 +5,11 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using TCC.TeraCommon;
+
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
+
+using TeraPacketParser;
 
 namespace TCC.Sniffing
 {

@@ -1,19 +1,25 @@
-﻿using System;
+﻿using FoglioUtils.Extensions;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Sniffing;
-using TCC.TeraCommon.Game.Services;
-using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
+
+using TeraDataLite;
+
+using TeraPacketParser;
+using TeraPacketParser.Messages;
 
 namespace TCC.Parsing
 {
@@ -121,7 +127,7 @@ namespace TCC.Parsing
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
             WindowManager.BossWindow.VM.SetBossAggro(p.Source, p.User);
-            WindowManager.GroupWindow.VM.SetAggroCircle(p);
+            WindowManager.GroupWindow.VM.SetAggroCircle(p.Circle, p.Action, p.User);
         }
 
         public static void HandleGetUserList(S_GET_USER_LIST p)
@@ -148,13 +154,13 @@ namespace TCC.Parsing
                     ch.Position = item.Position;
                     ch.GuildName = item.GuildName;
                     ch.Level = item.Level;
-                    ch.LastLocation = item.LastLocation;
+                    ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
                     ch.LastOnline = item.LastOnline;
                     ch.ServerName = SessionManager.Server.Name;
                 }
                 else
                 {
-                    WindowManager.Dashboard.VM.Characters.Add(item);
+                    WindowManager.Dashboard.VM.Characters.Add(new Character(item));
                 }
             }
 
@@ -172,7 +178,7 @@ namespace TCC.Parsing
             if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
             SessionManager.Server = SessionManager.DB.ServerDatabase.GetServer(p.ServerId);
-            Firebase.SendUsageStatAsync(); 
+            Firebase.SendUsageStatAsync();
             SettingsHolder.LastLanguage = SessionManager.Language;
             TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
             TimeManager.Instance.SetGuildBamTime(false);
@@ -188,7 +194,7 @@ namespace TCC.Parsing
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.Encounter = false;
-            MessageFactory.Update();
+            PacketAnalyzer.Processor.Update();
             SessionManager.CurrentPlayer.EntityId = p.EntityId;
             SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
             SessionManager.CurrentPlayer.ServerId = p.ServerId;
@@ -237,7 +243,7 @@ namespace TCC.Parsing
                 }
                 else
                 {
-                    WindowManager.LfgListWindow.VM.Listings.Add(l);
+                    WindowManager.LfgListWindow.VM.Listings.Add(new Listing(l));
                     WindowManager.LfgListWindow.VM.EnqueueRequest(l.LeaderId);
                 }
             });
@@ -368,7 +374,7 @@ namespace TCC.Parsing
             EntityManager.SpawnUser(p.EntityId, p.Name);
             if (!WindowManager.GroupWindow.VM.Exists(p.EntityId)) return;
 
-            WindowManager.GroupWindow.VM.UpdateMemberGear(p);
+            WindowManager.GroupWindow.VM.UpdateMemberGear(p.PlayerId, p.ServerId, p.Weapon, p.Armor, p.Gloves, p.Boots);
         }
 
         public static void HandlePartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE x)
@@ -431,9 +437,9 @@ namespace TCC.Parsing
         public static void HandleChat(S_CHAT x)
         {
             if ((x.AuthorName == "Foglio" || x.AuthorName == "Myvia" || x.AuthorName == "Foglia" || x.AuthorName == "Foglia.Trancer" || x.AuthorName == "Folyemi" ||
-                x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Nice TCC :lul:", NotificationType.Warning);
+                x.AuthorName == "Folyria" || x.AuthorName == "Foglietto") && x.Channel == (uint)ChatChannel.Greet) WindowManager.FloatingButton.NotifyExtended("TCC", "Nice TCC :lul:", NotificationType.Warning);
             //Log.CW(x.Message);
-            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
+            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)x.Channel), x.AuthorName, x.Message));
         }
 
         internal static void HandleCreatureLife(S_CREATURE_LIFE p)
@@ -477,7 +483,7 @@ namespace TCC.Parsing
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
-            if (friend == null) return;
+            if (friend.Equals(default(FriendData))) return;
             const string opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
             var areaName = x.SectionId.ToString();
             try
@@ -544,7 +550,7 @@ namespace TCC.Parsing
 
         internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
         {
-            WindowManager.Dashboard.VM.SetVanguard(x);
+            WindowManager.Dashboard.VM.SetVanguard(x.WeeklyDone, x.DailyDone, x.VanguardCredits);
         }
 
         internal static void HandleDungeonClears(S_DUNGEON_CLEAR_COUNT_LIST x)
@@ -598,12 +604,12 @@ namespace TCC.Parsing
 
         internal static void HandleBrokerOffer(S_TRADE_BROKER_DEAL_SUGGESTED x)
         {
-            ChatWindowManager.Instance.AddChatMessage(new BrokerChatMessage(x));
+            ChatWindowManager.Instance.AddChatMessage(new BrokerChatMessage(x.PlayerId, x.Listing, x.Item, x.Amount, x.SellerPrice, x.OfferedPrice, x.Name));
         }
 
         internal static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
-            ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x)); //TODO: got NullRefEx here
+            ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x.PlayerId, x.Class, x.Level, x.Name)); //TODO: got NullRefEx here
             if (!SettingsHolder.LfgEnabled) return;
             if (WindowManager.LfgListWindow.VM.MyLfg == null) return;
             var dest = WindowManager.LfgListWindow.VM.MyLfg.Applicants;
@@ -634,7 +640,7 @@ namespace TCC.Parsing
             if (x.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (x.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (x.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-            ChatWindowManager.Instance.AddOrRefreshLfg(x);
+            ChatWindowManager.Instance.AddOrRefreshLfg(x.ListingData);
             ChatWindowManager.Instance.AddChatMessage(new LfgMessage(x.Id, x.Name, x.Message));
         }
 
@@ -810,7 +816,7 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            WindowManager.GroupWindow.VM.UpdateMember(p);
+            WindowManager.GroupWindow.VM.UpdateMember(p.PartyMemberData);
         }
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
@@ -842,7 +848,7 @@ namespace TCC.Parsing
 
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
         {
-            ChatWindowManager.Instance.UpdateLfgMembers(packet);
+            ChatWindowManager.Instance.UpdateLfgMembers(packet.Id, packet.Members.Count);
             if (!SettingsHolder.LfgEnabled) return;
 
             var lfg = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
@@ -856,9 +862,9 @@ namespace TCC.Parsing
                     if (target == null) return;
                     target.IsLeader = member.IsLeader;
                     target.Online = member.Online;
-                    target.Location = member.Location;
+                    target.Location = SessionManager.DB.GetSectionName(member.GuardId, member.SectionId);
                 }
-                else lfg.Players.Add(member);
+                else lfg.Players.Add(new User(member));
             });
             var toDelete = new List<uint>();
             lfg.Players.ToList().ForEach(player =>
@@ -925,9 +931,9 @@ namespace TCC.Parsing
 
         }
 
-        public static void HandlePartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE sPartyMemberIntervalPosUpdate)
+        public static void HandlePartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
         {
-            WindowManager.GroupWindow.VM.UpdateMemberLocation(sPartyMemberIntervalPosUpdate);
+            WindowManager.GroupWindow.VM.UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
         }
 
         // todo: add chat message too
@@ -993,7 +999,7 @@ namespace TCC.Parsing
             //TODO refactoring: method that does this "merge" thing
             foreach (var applicant in p.Candidates)
             {
-                if (dest.All(x => x.PlayerId != applicant.PlayerId)) dest.Add(applicant);
+                if (dest.All(x => x.PlayerId != applicant.PlayerId)) dest.Add(new User(applicant));
             }
 
             var toRemove = new List<User>();
@@ -1160,6 +1166,7 @@ namespace TCC.Parsing
             }
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map"));
             PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer); //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
+            PacketAnalyzer.Processor.Update();
             TeraSniffer.Instance.Connected = true;
         }
         public static async void HandleLoginArbiter(C_LOGIN_ARBITER p)
@@ -1172,8 +1179,30 @@ namespace TCC.Parsing
             //{
             //}
             OpcodeDownloader.DownloadSysmsgIfNotExist(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion);
+            var path = File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion / 100}.map"))
+                        ?
+                        Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion / 100}.map")
+                        :
+                        File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map"))
+                            ? Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map")
+                            : "";
 
-            PacketAnalyzer.Factory.ReloadSysMsg();
+            if (path == "")
+            {
+                if (ProxyInterface.Instance.IsStubAvailable)
+                {
+                    var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map").Replace("\\", "/");
+                    if (await ProxyInterface.Instance.Stub.DumpSysMsg(destPath))
+                    {
+                        PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                        return;
+                    }
+                }
+                TccMessageBox.Show($"sysmsg.{PacketAnalyzer.Factory.ReleaseVersion / 100}.map or sysmsg.{PacketAnalyzer.Factory.Version}.map not found.\nWait for update or use tcc-stub to automatically retreive sysmsg files from game client.\nTCC will now close.", MessageBoxType.Error);
+                App.Close();
+                return;
+            }
+            PacketAnalyzer.Factory.ReloadSysMsg(path);
             //else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
             SessionManager.DB.ServerDatabase.Language = p.Language;

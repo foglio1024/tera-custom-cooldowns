@@ -11,6 +11,7 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.NPCs;
 using TCC.Parsing;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -54,7 +55,7 @@ namespace TCC.ViewModels
             {
                 if (_currentHHphase == value) return;
                 _currentHHphase = value;
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 N(nameof(CurrentHHphase));
             }
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using TCC.Data;
+using TeraDataLite;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings

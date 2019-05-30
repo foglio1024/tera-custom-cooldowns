@@ -19,6 +19,8 @@ using TCC.TeraCommon.Game.Services;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
+using TeraPacketParser;
 
 namespace TCC.Test
 {
@@ -122,7 +124,7 @@ namespace TCC.Test
             var r = new Random();
             for (var i = 0; i < 30; i++)
             {
-                WindowManager.CivilUnrestWindow.VM.AddGuild(new CityWarGuildInfo(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
+                WindowManager.CivilUnrestWindow.VM.AddGuild(new CityWarGuildData(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
                 WindowManager.CivilUnrestWindow.VM.SetGuildName((uint)i, "Guild " + i);
                 WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower((uint)r.Next(0, 29));
             }

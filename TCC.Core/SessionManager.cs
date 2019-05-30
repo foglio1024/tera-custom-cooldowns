@@ -8,6 +8,7 @@ using TCC.Settings;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
 using Player = TCC.Data.Pc.Player;
 
 namespace TCC

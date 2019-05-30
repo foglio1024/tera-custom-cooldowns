@@ -2,6 +2,7 @@
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop.Proxy;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -81,14 +82,7 @@ namespace TCC.ViewModels
         public bool ShowKick => WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool ShowDelegateLeader => WindowManager.GroupWindow.VM.AmILeader && WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool IsBlocked => _name == "" ? false : ChatWindowManager.Instance.BlockedUsers.Contains(_name);
-        public bool IsFriend
-        {
-            get
-            {
-                var f = _name == "" ? null : ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == _name);
-                return f != null;
-            }
-        }
+        public bool IsFriend => !ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
         public bool ShowFpsUtils => /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable;
         public TooltipInfo(string n, string i, int l)
         {

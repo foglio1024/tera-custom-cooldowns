@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Settings;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {

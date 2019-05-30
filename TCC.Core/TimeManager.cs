@@ -13,6 +13,7 @@ using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC

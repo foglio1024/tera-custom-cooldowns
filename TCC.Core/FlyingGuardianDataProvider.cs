@@ -1,6 +1,8 @@
 ﻿using System;
+
 using TCC.Data;
-using TCC.Parsing.Messages;
+
+using TeraPacketParser.Messages; //TODO: remove
 
 namespace TCC
 {

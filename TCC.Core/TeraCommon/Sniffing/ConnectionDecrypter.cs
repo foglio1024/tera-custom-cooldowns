@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using TCC.TeraCommon.PacketLog.Parsing;
 using TCC.TeraCommon.Sniffing.Crypt;
+using TeraPacketParser;
 
 namespace TCC.TeraCommon.Sniffing
 {

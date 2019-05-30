@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
@@ -372,6 +373,19 @@ namespace TCC.Data.Pc
             Class = c;
             Id = id;
             Position = pos;
+        }
+
+        public Character(CharacterData item) : this()
+        {
+            Id = item.Id;
+            Class = item.CharClass;
+            Level = item.Level;
+            LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
+            LastOnline = item.LastOnline;
+            Laurel = item.Laurel;
+            Position = item.Position;
+            Name = item.Name;
+            GuildName = item.GuildName;
         }
 
         public int CompareTo(object obj)

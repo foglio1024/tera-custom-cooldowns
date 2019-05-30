@@ -106,6 +106,8 @@
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
     <Compile Include="Data\Databases\DatabaseBase.cs" />
+    <Compile Include="Data\GearItem.cs" />
+    <Compile Include="Data\Map\Location.cs" />
     <Compile Include="EpDataProvider.cs" />
     <Compile Include="GlobalExceptionHandler.cs" />
     <Compile Include="Interop\Discord.cs" />
@@ -117,10 +119,7 @@
     <Compile Include="Interop\Proxy\ProxyMessageHandler.cs" />
     <Compile Include="Interop\Proxy\Server.cs" />
     <Compile Include="Interop\Proxy\TccStubInterface.cs" />
-    <Compile Include="Parsing\Messages\S_LEARN_EP_PERK.cs" />
-    <Compile Include="Parsing\Messages\S_LOAD_EP_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_EXP.cs" />
-    <Compile Include="Parsing\Messages\S_RESET_EP_PERK.cs" />
+    <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="TemplateSelectors\GroupWindowTemplateSelector.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\BlockSplitter.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
@@ -201,9 +200,6 @@
     <Compile Include="Data\Databases\TccDatabase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers.cs" />
-    <Compile Include="Parsing\Messages\S_GUILD_MEMBER_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
-    <Compile Include="Parsing\Messages\S_NPCGUILD_LIST.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
     <Compile Include="R.cs" />
     <Compile Include="ResourceDictionaries\DataTemplates.xaml.cs">
@@ -221,10 +217,6 @@
     <Compile Include="Data\Npc\TimerPattern.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Moongourd\MoongourdEncounter.cs" />
-    <Compile Include="Parsing\Messages\ReadyPartyMember.cs" />
-    <Compile Include="Parsing\Messages\S_CHANGE_GUILD_CHIEF.cs" />
-    <Compile Include="Parsing\Messages\S_FIELD_EVENT_ON_ENTER.cs" />
-    <Compile Include="Parsing\Messages\S_VIEW_WARE_EX.cs" />
     <Compile Include="ResourceDictionaries\Styles.xaml.cs">
       <DependentUpon>Styles.xaml</DependentUpon>
     </Compile>
@@ -402,11 +394,9 @@
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\Npc\EnragePattern.cs" />
     <Compile Include="Data\Pc\SimpleUser.cs" />
-    <Compile Include="Data\GearItem.cs" />
     <Compile Include="Data\Map\Guard.cs" />
     <Compile Include="Data\Chat\LFG.cs" />
     <Compile Include="Data\Listing.cs" />
-    <Compile Include="Data\Map\Location.cs" />
     <Compile Include="Data\Map\Section.cs" />
     <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\Map\World.cs" />
@@ -416,40 +406,8 @@
     <Compile Include="HotKey.cs" />
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="Moongourd\MoongourdManager.cs" />
-    <Compile Include="Parsing\CityWarGuildInfo.cs" />
-    <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
-    <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
-    <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
-    <Compile Include="Parsing\Messages\S_ACCOUNT_PACKAGE_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_ACTION_STAGE.cs" />
-    <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
-    <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
-    <Compile Include="Parsing\Messages\S_DESTROY_GUILD_TOWER.cs" />
-    <Compile Include="Parsing\Messages\S_DUNGEON_CLEAR_COUNT_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
-    <Compile Include="Parsing\Messages\S_FIELD_POINT_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_IMAGE_DATA.cs" />
-    <Compile Include="Parsing\Messages\S_INVEN.cs" />
-    <Compile Include="Parsing\Messages\S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA.cs" />
-    <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INTERVAL_POS_UPDATE.cs" />
-    <Compile Include="Parsing\Messages\S_REQUEST_CITY_WAR_MAP_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_REQUEST_CITY_WAR_MAP_INFO_DETAIL.cs" />
-    <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
-    <Compile Include="Parsing\Messages\S_SHOW_CANDIDATE_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_SHOW_PARTY_MATCH_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
-    <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
     <Compile Include="Parsing\OpcodeDownloader.cs" />
-    <Compile Include="Parsing\SkillId.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
-    <Compile Include="Parsing\Messages\S_SHOW_HP.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Interop\ProxyPacketSplitter.cs" />
@@ -513,49 +471,7 @@
     <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
     <Compile Include="Data\Pc\User.cs" />
     <Compile Include="EntityManager.cs" />
-    <Compile Include="Parsing\MessageFactory.cs" />
-    <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
-    <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
-    <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
-    <Compile Include="Parsing\Messages\S_ASK_BIDDING_RARE_ITEM.cs" />
-    <Compile Include="Parsing\Messages\S_CHANGE_PARTY_MANAGER.cs" />
-    <Compile Include="Parsing\Messages\S_CHAT.cs" />
-    <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY.cs" />
-    <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY_FIN.cs" />
-    <Compile Include="Parsing\Messages\S_CREST_MESSAGE.cs" />
-    <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
-    <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
-    <Compile Include="Parsing\Messages\S_EACH_SKILL_RESULT.cs" />
-    <Compile Include="Parsing\Messages\S_JOIN_PRIVATE_CHANNEL.cs" />
-    <Compile Include="Parsing\Messages\S_LEAVE_PARTY_MEMBER.cs" />
-    <Compile Include="Parsing\Messages\S_LEAVE_PRIVATE_CHANNEL.cs" />
-    <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_DEL.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_BUFF_UPDATE.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_PRIVATE_CHAT.cs" />
-    <Compile Include="Parsing\Messages\S_RESULT_BIDDING_DICE_THROW.cs" />
-    <Compile Include="Parsing\Messages\S_RESULT_ITEM_BIDDING.cs" />
-    <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
-    <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
-    <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
     <Compile Include="Data\Pc\Player.cs" />
-    <Compile Include="Parsing\Messages\S_SPAWN_USER.cs" />
-    <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE.cs" />
-    <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE_LOOT_ITEM.cs" />
-    <Compile Include="Parsing\Messages\S_USER_EFFECT.cs" />
-    <Compile Include="Parsing\Messages\S_LOGOUT_PARTY_MEMBER.cs" />
-    <Compile Include="Parsing\Messages\S_BAN_PARTY_MEMBER.cs" />
-    <Compile Include="Parsing\Messages\S_LEAVE_PARTY.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_HP.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_MP.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
-    <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
-    <Compile Include="Parsing\Messages\S_WHISPER.cs" />
     <Compile Include="Interop\ProxyOld.cs" />
     <Compile Include="Settings\SettingsHolder.cs" />
     <Compile Include="SkillUtils.cs" />
@@ -588,9 +504,6 @@
     <Compile Include="ClassSpecific\MysticAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\WarriorAbnormalityTracker.cs" />
     <Compile Include="Data\Databases\MonsterDatabase.cs" />
-    <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
-    <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
     <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
     </Compile>
@@ -606,21 +519,8 @@
     <Compile Include="Controls\Settings\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TeraCommon\Game\Angle.cs" />
-    <Compile Include="TeraCommon\Game\EntityId.cs" />
-    <Compile Include="Parsing\Messages\C_CHECK_VERSION.cs" />
-    <Compile Include="TeraCommon\Game\Messages\ParsedMessage.cs" />
-    <Compile Include="Parsing\Messages\S_CREATURE_LIFE.cs" />
-    <Compile Include="Parsing\Messages\S_GET_USER_GUILD_LOGO.cs" />
-    <Compile Include="Parsing\Messages\S_UPDATE_NPCGUILD.cs" />
-    <Compile Include="TeraCommon\Game\Messages\UnknownMessage.cs" />
     <Compile Include="TeraCommon\Game\Server.cs" />
-    <Compile Include="TeraCommon\Game\Services\OpCodeNamer.cs" />
     <Compile Include="TeraCommon\Game\Services\ServerDatabase.cs" />
-    <Compile Include="TeraCommon\Game\Services\TeraMessageReader.cs" />
-    <Compile Include="TeraCommon\Game\Vector3f.cs" />
-    <Compile Include="TeraCommon\Message.cs" />
-    <Compile Include="TeraCommon\MessageDirection.cs" />
     <Compile Include="TeraCommon\Sniffing\ConnectionDecrypter.cs" />
     <Compile Include="TeraCommon\Sniffing\Crypt\Cryptor.cs" />
     <Compile Include="TeraCommon\Sniffing\Crypt\CryptorKey.cs" />
@@ -703,9 +603,6 @@
     <Compile Include="Windows\Widgets\CharacterWindow.xaml.cs">
       <DependentUpon>CharacterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Parsing\Messages\S_CREATURE_CHANGE_HP.cs" />
-    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_MP.cs" />
-    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_STAMINA.cs" />
     <Compile Include="Parsing\PacketHandler.cs" />
     <Compile Include="Converters\ClassImageConverter.cs" />
     <Compile Include="Converters\CombatToColorConverter.cs" />
@@ -778,19 +675,12 @@
     <Compile Include="Data\Pc\Character.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="FocusManager.cs" />
-    <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
-    <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />
-    <Compile Include="Parsing\Messages\S_GET_USER_LIST.cs" />
-    <Compile Include="Parsing\Messages\S_LOGIN.cs" />
-    <Compile Include="Parsing\Messages\S_PLAYER_STAT_UPDATE.cs" />
-    <Compile Include="Parsing\Messages\S_START_COOLTIME_ITEM.cs" />
     <Compile Include="Data\Skills\Skill.cs" />
     <Compile Include="Controls\Skills\RoundSkillControl.xaml.cs">
       <DependentUpon>RoundSkillControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SkillManager.cs" />
     <Compile Include="Data\Databases\SkillsDatabase.cs" />
-    <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
     <Compile Include="Windows\SkillConfigWindow.xaml.cs">
       <DependentUpon>SkillConfigWindow.xaml</DependentUpon>
@@ -1286,7 +1176,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parsing\Messages\S_START_COOLTIME_SKILL.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -1472,6 +1361,14 @@
     <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
       <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
       <Name>FoglioUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj">
+      <Project>{E8A1FC0B-C9BC-448E-9702-94CE50412D99}</Project>
+      <Name>TeraDataLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeraPacketParser\TeraPacketParser.csproj">
+      <Project>{32BD409E-AB38-4024-BA36-1E08B753C528}</Project>
+      <Name>TeraPacketParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

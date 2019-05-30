@@ -1,4 +1,5 @@
 ﻿using FoglioUtils;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +13,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+
 using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
-using TCC.Parsing.Messages;
 using TCC.Windows;
+
+using TeraDataLite;
+
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
@@ -238,7 +242,7 @@ namespace TCC.ViewModels
             Characters.FirstOrDefault(x => x.Id == charId)?.UpdateDungeons(dungeonCooldowns);
 
         }
-        public void SetVanguard(S_AVAILABLE_EVENT_MATCHING_LIST x)
+        public void SetVanguard(int weeklyDone, int dailyDone, int vanguardCredits)
         {
             if (_discardFirstVanguardPacket)
             {
@@ -247,9 +251,9 @@ namespace TCC.ViewModels
             }
 
             if (CurrentCharacter == null) return;
-            CurrentCharacter.VanguardWeekliesDone = x.WeeklyDone;
-            CurrentCharacter.VanguardDailiesDone = x.DailyDone;
-            CurrentCharacter.VanguardCredits = x.VanguardCredits;
+            CurrentCharacter.VanguardWeekliesDone = weeklyDone;
+            CurrentCharacter.VanguardDailiesDone = dailyDone;
+            CurrentCharacter.VanguardCredits = vanguardCredits;
             SaveCharacters();
             N(nameof(TotalVanguardCredits));
         }
@@ -550,10 +554,11 @@ namespace TCC.ViewModels
             var em = list.Values.FirstOrDefault(x => x.Id == 151643);
             var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
             var ps = list.Values.FirstOrDefault(x => x.Id == 45482);
-
-            if (em != null) SetElleonMarks(em.Amount);
-            if (ds != null) CurrentCharacter.DragonwingScales = ds.Amount;
-            if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
+            
+            //TODO: check this
+            /*if (em != null)*/ if(em.Id != 0) SetElleonMarks(em.Amount);
+            /*if (ds != null)*/ if(ds.Id != 0) CurrentCharacter.DragonwingScales = ds.Amount;
+            /*if (ps != null)*/ if(ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
                 if (first) CurrentCharacter.Inventory.Clear();

@@ -6,6 +6,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC
 {
