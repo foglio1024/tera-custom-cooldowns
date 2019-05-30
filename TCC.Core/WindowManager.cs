@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using System.Timers;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;

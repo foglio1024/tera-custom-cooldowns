@@ -1,5 +1,4 @@
 ﻿using System.Windows.Media;
-using TCC.Data;
 using TeraDataLite;
 
 namespace TCC.R

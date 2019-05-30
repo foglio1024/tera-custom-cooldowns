@@ -6,7 +6,6 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop.JsonRPC;
 using TCC.Parsing;
-using TCC.TeraCommon;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TeraPacketParser;

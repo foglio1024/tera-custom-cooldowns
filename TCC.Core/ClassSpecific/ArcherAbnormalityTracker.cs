@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using TCC.Data;
-using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 

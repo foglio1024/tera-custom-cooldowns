@@ -14,8 +14,6 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing;
-using TCC.TeraCommon;
-using TCC.TeraCommon.Game.Services;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;

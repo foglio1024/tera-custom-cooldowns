@@ -1,5 +1,4 @@
 ﻿using System.Windows.Threading;
-using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Settings;
 using TeraDataLite;

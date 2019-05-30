@@ -4,7 +4,6 @@ using System.Windows;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Chat;
-using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TeraDataLite;
 

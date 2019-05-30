@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Interop.Proxy;
 using TeraDataLite;
 

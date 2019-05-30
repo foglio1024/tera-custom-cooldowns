@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using TCC.Data;
-using TCC.Parsing;
 using TeraDataLite;
 
 namespace TCC.ViewModels

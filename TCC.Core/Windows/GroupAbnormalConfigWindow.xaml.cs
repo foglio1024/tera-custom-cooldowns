@@ -7,7 +7,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Settings;
 using TCC.ViewModels;
 using TeraDataLite;

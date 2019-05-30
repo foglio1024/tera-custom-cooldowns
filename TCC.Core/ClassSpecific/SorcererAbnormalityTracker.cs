@@ -1,5 +1,4 @@
-﻿using FoglioUtils.Extensions;
-
+﻿
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.ViewModels;

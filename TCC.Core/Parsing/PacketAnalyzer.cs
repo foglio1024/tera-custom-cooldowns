@@ -1,5 +1,4 @@
-﻿using FoglioUtils;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
@@ -7,7 +6,6 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.Sniffing;
-using TCC.TeraCommon;
 using TCC.ViewModels;
 using TeraPacketParser;
 using Server = TCC.TeraCommon.Game.Server;

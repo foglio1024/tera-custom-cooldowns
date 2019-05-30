@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop;
-using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
