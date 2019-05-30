@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC.Data.Databases
 {
@@ -23,6 +24,7 @@ namespace TCC.Data.Databases
         public AbnormalityDatabase AbnormalityDatabase { get; private set; }
         public DungeonDatabase DungeonDatabase { get; private set; }
         public SocialDatabase SocialDatabase { get; private set; }
+        public ServerDatabase ServerDatabase { get; private set; }
 
         /// <summary>
         /// True if all database files are found.
@@ -34,6 +36,7 @@ namespace TCC.Data.Databases
 
         public TccDatabase(string lang)
         {
+            ServerDatabase = new ServerDatabase(App.DataPath);
             MonsterDatabase = new MonsterDatabase(lang);
             AccountBenefitDatabase = new AccountBenefitDatabase(lang);
             ItemsDatabase = new ItemsDatabase(lang);

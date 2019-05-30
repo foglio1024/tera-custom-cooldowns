@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Settings;
-using TCC.Tera.Data;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -25,7 +24,7 @@ namespace TCC
         private static bool _inGameUiOn;
 
         public static Server Server { get; set; }
-        public static string Language => BasicTeraData.Instance.Servers.StringLanguage;
+        public static string Language => DB.ServerDatabase.StringLanguage;
 
 
         public static bool LoadingScreen

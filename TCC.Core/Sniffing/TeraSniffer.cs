@@ -5,7 +5,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using TCC.Tera.Data;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
@@ -47,8 +46,7 @@ namespace TCC.Sniffing
 
         private TeraSniffer()
         {
-            var servers = BasicTeraData.Instance.Servers;
-            _serversByIp = servers.GetServersByIp();
+            _serversByIp = SessionManager.DB.ServerDatabase.GetServersByIp();
 
             if (Settings.SettingsHolder.Npcap)
             {
@@ -191,7 +189,7 @@ namespace TCC.Sniffing
 
         private void OnResync(MessageDirection direction, int skipped, int size)
         {
-            BasicTeraData.LogError("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size, false, true);
+            Log.F("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size);
         }
 
         // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock

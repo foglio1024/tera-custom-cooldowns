@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return "IP:"+Ip+";Name:"+Name+";Region:"+Region+";ServerId:"+ServerId;
+            return $"[{Region}/{ServerId}] {Name} @ {Ip}";
         }
     }
 }

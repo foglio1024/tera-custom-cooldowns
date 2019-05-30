@@ -10,12 +10,10 @@ using TCC.Interop.Proxy;
 using TCC.Parsing.Messages;
 using TCC.Settings;
 using TCC.Sniffing;
-using TCC.Tera.Data;
 using TCC.TeraCommon.Game.Services;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
-using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 
 namespace TCC.Parsing
 {
@@ -173,7 +171,7 @@ namespace TCC.Parsing
             //S_IMAGE_DATA.LoadCachedImages(); //TODO: refactor this thing
             if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentClass = p.CharacterClass;
             AbnormalityManager.SetAbnormalityTracker(p.CharacterClass);
-            SessionManager.Server = BasicTeraData.Instance.Servers.GetServer(p.ServerId);
+            SessionManager.Server = SessionManager.DB.ServerDatabase.GetServer(p.ServerId);
             Firebase.SendUsageStatAsync(); 
             SettingsHolder.LastLanguage = SessionManager.Language;
             TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
@@ -1178,7 +1176,7 @@ namespace TCC.Parsing
             PacketAnalyzer.Factory.ReloadSysMsg();
             //else WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to download sysmsg file. System messages will not work.", NotificationType.Warning, 6000);
 
-            BasicTeraData.Instance.Servers.Language = p.Language;
+            SessionManager.DB.ServerDatabase.Language = p.Language;
 
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {PacketAnalyzer.Factory.ReleaseVersion / 100d}", NotificationType.Normal); //by HQ 20190209
         }
