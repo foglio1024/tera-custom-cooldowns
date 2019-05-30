@@ -1,7 +1,7 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -38,19 +38,19 @@ namespace TCC.ClassSpecific
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)
@@ -109,7 +109,7 @@ namespace TCC.ClassSpecific
         {
             if (FireIceFusionId == p.AbnormalityId)
             {
-                Utils.CurrentClassVM<SorcererLayoutVM>().EndFireIcePre();
+                TccUtils.CurrentClassVM<SorcererLayoutVM>().EndFireIcePre();
             }
             //else if (FireArcaneFusionId == p.AbnormalityId)
             //{
@@ -123,20 +123,20 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckFusions(p);
             CheckManaBoost(p);
             CheckFusionBoost(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckManaBoost(p);
             CheckFusionBoost(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckManaBoost(p);
             CheckFusionBoost(p);
             CheckFusions(p);

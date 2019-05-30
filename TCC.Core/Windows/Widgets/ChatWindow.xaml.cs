@@ -6,6 +6,7 @@ using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data.Chat;
 using TCC.Settings;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
@@ -64,7 +65,7 @@ namespace TCC.Windows.Widgets
         private void TabLoaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is FrameworkElement s)) return;
-            var p = Utils.FindVisualParent<DragablzItemsControl>(s);
+            var p = s.FindVisualParent<DragablzItemsControl>();
             if (p.ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
 
             SetTopBorder(s);
@@ -130,7 +131,7 @@ namespace TCC.Windows.Widgets
         }
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var sw = Utils.GetChild<ScrollViewer>((ItemsControl)sender);
+            var sw = ((ItemsControl)sender).GetChild<ScrollViewer>();
             var lines = sw.VerticalOffset + e.Delta >= sw.ScrollableHeight ? 1 : SettingsHolder.ChatScrollAmount;
             sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? lines : -lines));
 
@@ -162,7 +163,7 @@ namespace TCC.Windows.Widgets
             {
                 if (!x.IsVisible) return;
 
-                var host = Utils.GetChild<VirtualizingStackPanel>(x);
+                var host = x.GetChild<VirtualizingStackPanel>();
                 if (host == null) return;
                 var idx = x.Items.IndexOf(msg);
                 if (idx == -1) return;
@@ -183,7 +184,7 @@ namespace TCC.Windows.Widgets
                 // scroll all tabs to bottom if the same has been clicked
                 TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
                 {
-                    var sw = Utils.GetChild<ScrollViewer>(x);
+                    var sw = x.GetChild<ScrollViewer>();
                     sw?.ScrollToVerticalOffset(0);
                 });
                 _bottom = true;
@@ -191,8 +192,6 @@ namespace TCC.Windows.Widgets
                 if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
                 ChatWindowManager.Instance.SetPaused(!_bottom);
             }
-
-
         }
 
         private void SetLines(object sender, MouseButtonEventArgs e)

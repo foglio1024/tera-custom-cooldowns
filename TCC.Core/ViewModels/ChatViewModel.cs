@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using Dragablz;
+using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.ViewModels
 {
@@ -252,7 +253,7 @@ namespace TCC.ViewModels
 
         }
 
-        public IEnumerable<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
 
     }
 }

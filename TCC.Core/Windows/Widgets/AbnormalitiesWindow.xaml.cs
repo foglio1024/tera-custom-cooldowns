@@ -1,4 +1,4 @@
-﻿using TCC.Utilities.Extensions;
+﻿using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets

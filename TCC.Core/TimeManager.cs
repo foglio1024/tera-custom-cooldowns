@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -69,7 +70,7 @@ namespace TCC
         public void SetServerTimeZone(string lang)
         {
             if (string.IsNullOrEmpty(lang)) return;
-            CurrentRegion = Utils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
+            CurrentRegion = TccUtils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
 
             SettingsHolder.LastLanguage = lang;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
@@ -178,7 +179,7 @@ namespace TCC
             var t = DownloadGuildBamTimestamp();
             t.Wait();
             var ts = t.Result;
-            return Utils.FromUnixTime(ts);
+            return TimeUtils.FromUnixTime(ts);
         }
 
         public void SetGuildBamTime(bool force)

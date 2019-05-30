@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Dragablz;
+using FoglioUtils;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 
@@ -19,8 +20,8 @@ namespace TCC.Windows
             InitializeComponent();
             DataContext = WindowManager.Dashboard.VM;
         }
-        public IEnumerable<ItemLevelTier> ItemLevelTiers => Utils.ListFromEnum<ItemLevelTier>();
-        public IEnumerable<ResetMode> ResetModes => Utils.ListFromEnum<ResetMode>();
+        public IEnumerable<ItemLevelTier> ItemLevelTiers => EnumUtils.ListFromEnum<ItemLevelTier>();
+        public IEnumerable<ResetMode> ResetModes => EnumUtils.ListFromEnum<ResetMode>();
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {

@@ -2,7 +2,7 @@
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -21,7 +21,7 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckGrugnirsBite(p);
             CheckTwilightWaltz(p);
             CheckRagnarok(p);
@@ -30,13 +30,13 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckRagnarok(p);
             CheckGodsfall(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckRagnarok(p);
             CheckGodsfall(p);
         }
@@ -44,33 +44,33 @@ namespace TCC.ClassSpecific
         private static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Start(p.Duration);
         }
         private static void CheckRagnarok(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
 
         private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Start(p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGodsfall(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)

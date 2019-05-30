@@ -98,6 +98,11 @@ namespace TCC
             }
         }
 
+        public static bool IsMe(ulong eid)
+        {
+            return eid == CurrentPlayer.EntityId;
+        }
+
         public static event Action ChatModeChanged;
         public static event Action GameUiModeChanged;
         public static event Action EncounterChanged;
@@ -235,7 +240,7 @@ namespace TCC
 
             if (SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                Utils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged();
+                TccUtils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged();
             }
         }
     }

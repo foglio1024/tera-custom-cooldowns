@@ -3,10 +3,11 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using FoglioUtils;
 using Newtonsoft.Json.Linq;
 using TCC.Interop.Proxy;
 using TCC.Settings;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.Interop
 {
@@ -18,11 +19,11 @@ namespace TCC.Interop
             if (string.IsNullOrEmpty(SessionManager.CurrentAccountName)) return;
             var req = new JObject
             {
-                {"webhook", Utils.GenerateHash(webhook)},
-                {"user", Utils.GenerateHash(SessionManager.CurrentAccountName)},
+                {"webhook", HashUtils.GenerateHash(webhook)},
+                {"user", HashUtils.GenerateHash(SessionManager.CurrentAccountName)},
                 {"online", online }
             };
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -44,10 +45,10 @@ namespace TCC.Interop
             bool canFire;
             var req = new JObject
             {
-                { "webhook" , Utils.GenerateHash(webhook)},
-                { "user", Utils.GenerateHash(SessionManager.CurrentAccountName) }
+                { "webhook" , HashUtils.GenerateHash(webhook)},
+                { "user", HashUtils.GenerateHash(SessionManager.CurrentAccountName) }
             };
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -83,7 +84,7 @@ namespace TCC.Interop
 
             try
             {
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                     c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");

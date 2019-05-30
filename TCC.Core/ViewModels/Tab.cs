@@ -65,7 +65,7 @@ namespace TCC.ViewModels
     public class Tab : TSPropertyChanged
     {
         // needed for combobox in settings
-        public List<ChatChannelOnOff> AllChannels => Utils.GetEnabledChannelsList();
+        public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList();
 
         private ICollectionView _messages;
         private ChatMessage _pinnedMessage;

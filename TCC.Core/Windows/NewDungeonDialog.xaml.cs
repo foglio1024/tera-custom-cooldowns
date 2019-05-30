@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using FoglioUtils;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TCC.Data;
@@ -15,7 +16,7 @@ namespace TCC.Windows
             InitializeComponent();
         }
 
-        public ICollectionView Dungeons => Utils.InitView(d => d != null, SessionManager.DB.DungeonDatabase.Dungeons.Values, new[]
+        public ICollectionView Dungeons => CollectionViewUtils.InitView(d => d != null, SessionManager.DB.DungeonDatabase.Dungeons.Values, new[]
         {
             new SortDescription(nameof(Dungeon.Name), ListSortDirection.Ascending)
         });

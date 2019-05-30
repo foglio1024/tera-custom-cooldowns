@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 using TCC.ViewModels;
@@ -58,7 +59,7 @@ namespace TCC.Windows.Widgets
             {
                 if (Opacity == 0) ShowWindow();
                 _arcAn.From = Arc.EndAngle;
-                _arcAn.To = Utils.FactorToAngle(val / 1000, 4);
+                _arcAn.To = MathUtils.FactorToAngle(val / 1000, 4);
                 Arc.BeginAnimation(Arc.EndAngleProperty, _arcAn);
             }));
         }

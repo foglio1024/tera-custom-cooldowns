@@ -2,7 +2,7 @@
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Parsing.Messages;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -21,7 +21,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckDashingReload(p);
             CheckLaserTargeting(p);
         }
@@ -36,12 +36,12 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckLaserTargeting(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckLaserTargeting(p);
         }
 
@@ -49,20 +49,20 @@ namespace TCC.ClassSpecific
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             //Log.C($"[CheckLaserTargeting(S_ABNORMALITY_BEGIN)] id:{p.AbnormalityId} duration:{p.Duration}");
-            Utils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Start(p.Duration);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_REFRESH p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             //Log.C($"[CheckLaserTargeting(S_ABNORMALITY_REFRESH)] id:{p.AbnormalityId} duration:{p.Duration}");
-            Utils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_END p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             //Log.C($"[CheckLaserTargeting(S_ABNORMALITY_END)] id:{p.AbnormalityId}");
 
-            Utils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -793,14 +794,14 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        public IEnumerable<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
         //public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
-        public IEnumerable<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
-        public IEnumerable<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
-        public IEnumerable<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
-        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
-        public IEnumerable<ControlShape> ControlShapes => Utils.ListFromEnum<ControlShape>();
-        public IEnumerable<GroupWindowLayout> GroupWindowLayouts => Utils.ListFromEnum<GroupWindowLayout>();
+        public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
+        public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
+        public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();
+        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => EnumUtils.ListFromEnum<WarriorEdgeMode>();
+        public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
+        public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
 
         public bool ChatWindowEnabled
         {
@@ -862,7 +863,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowEdge == value) return;
                 SettingsHolder.WarriorShowEdge = value;
                 N();
-                Utils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
+                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
             }
         }
         public bool SorcererReplacesElementsInCharWindow
@@ -885,7 +886,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowTraverseCut == value) return;
                 SettingsHolder.WarriorShowTraverseCut = value;
                 N();
-                Utils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
+                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
             }
         }
 
@@ -897,7 +898,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorEdgeMode == value) return;
                 SettingsHolder.WarriorEdgeMode = value;
                 N();
-                Utils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
+                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
             }
 
         }

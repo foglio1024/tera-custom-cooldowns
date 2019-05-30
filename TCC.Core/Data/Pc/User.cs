@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FoglioUtils;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
@@ -212,8 +213,8 @@ namespace TCC.Data.Pc
                 N(nameof(MpFactor));
             }
         }
-        public double HpFactor => Utils.FactorCalc(CurrentHp, MaxHp);
-        public double MpFactor => Utils.FactorCalc(CurrentMp, MaxMp);
+        public double HpFactor => MathUtils.FactorCalc(CurrentHp, MaxHp);
+        public double MpFactor => MathUtils.FactorCalc(CurrentMp, MaxMp);
         public ReadyStatus Ready
         {
             get => _ready;

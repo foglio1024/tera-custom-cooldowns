@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using TCC.Data;
 using TCC.Parsing.Messages;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -43,56 +43,56 @@ namespace TCC.ClassSpecific
         private static void CheckEnergyStars(S_ABNORMALITY_BEGIN p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Start(p.Duration);
         }
         private static void CheckEnergyStars(S_ABNORMALITY_REFRESH p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckEnergyStars(S_ABNORMALITY_END p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGrace(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GraceId) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Start(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GraceId) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGrace(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GraceId) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckEdict(S_ABNORMALITY_BEGIN p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Start(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_REFRESH p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckEdict(S_ABNORMALITY_END p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            Utils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             CheckTripleNemesis(p);
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
             CheckGrace(p);
             CheckEdict(p);
@@ -100,7 +100,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
             CheckTripleNemesis(p);
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
             CheckGrace(p);
             CheckEdict(p);
@@ -108,7 +108,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             CheckTripleNemesis(p);
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
             CheckGrace(p);
             CheckEdict(p);

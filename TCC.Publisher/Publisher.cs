@@ -4,6 +4,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using FoglioUtils;
 using Newtonsoft.Json.Linq;
 using Octokit;
 using SevenZip;
@@ -132,10 +133,10 @@ namespace TCC.Publisher
             var msg = new JObject
             {
                 {"version", $"{_stringVersion}{_experimental}"},
-                {"hash", Utils.GenerateFileHash("D:/Repos/TCC/release/TCC.exe") }
+                {"hash", HashUtils.GenerateFileHash("D:/Repos/TCC/release/TCC.exe") }
             };
 
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -154,7 +155,7 @@ namespace TCC.Publisher
                 {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
             };
 
-            using (var client = Utils.GetDefaultWebClient())
+            using (var client = MiscUtils.GetDefaultWebClient())
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/json");

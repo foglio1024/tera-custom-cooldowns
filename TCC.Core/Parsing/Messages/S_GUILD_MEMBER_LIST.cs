@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TCC.Data;
 using TCC.TeraCommon.Game.Messages;
 using TCC.TeraCommon.Game.Services;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.Parsing.Messages
 {

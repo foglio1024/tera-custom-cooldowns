@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.Data.Chat
 {

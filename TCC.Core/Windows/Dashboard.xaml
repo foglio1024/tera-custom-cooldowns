@@ -12,7 +12,7 @@
                  xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
                  xmlns:abnormalities1="clr-namespace:TCC.Controls.Abnormalities"
                  xmlns:tcc="clr-namespace:TCC"
-                 xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
+                 xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
                  mc:Ignorable="d"
                  Title="TCC Dashboard" Height="650" Width="1220"
                  ResizeMode="NoResize"

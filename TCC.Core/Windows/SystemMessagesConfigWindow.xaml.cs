@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -47,8 +48,8 @@ namespace TCC.Windows
                 SettingsWriter.Save();
             };
 
-            ShowedMessagesView = Utils.InitLiveView(null, ShowedMessages, new string[] { }, new SortDescription[] { });
-            HiddenMessagesView = Utils.InitLiveView(null, HiddenMessages, new string[] { }, new SortDescription[] { });
+            ShowedMessagesView = CollectionViewUtils.InitLiveView(null, ShowedMessages, new string[] { }, new SortDescription[] { });
+            HiddenMessagesView = CollectionViewUtils.InitLiveView(null, HiddenMessages, new string[] { }, new SortDescription[] { });
             ((ICollectionView)ShowedMessagesView).CollectionChanged += GcPls;
             ((ICollectionView)HiddenMessagesView).CollectionChanged += GcPls;
         }

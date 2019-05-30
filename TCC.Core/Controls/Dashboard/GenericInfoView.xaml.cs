@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using FoglioUtils.Extensions;
 
 namespace TCC.Controls.Dashboard
 {
@@ -14,12 +15,12 @@ namespace TCC.Controls.Dashboard
 
         private void ContentListOnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            Utils.GetChild<ScrollViewer>(CharNames).ScrollToVerticalOffset(e.VerticalOffset);
+            CharNames.GetChild<ScrollViewer>().ScrollToVerticalOffset(e.VerticalOffset);
         }
 
         private void CharNames_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            Utils.GetChild<ScrollViewer>(ContentList).ScrollToVerticalOffset(e.VerticalOffset);
+            ContentList.GetChild<ScrollViewer>().ScrollToVerticalOffset(e.VerticalOffset);
         }
     }
 }

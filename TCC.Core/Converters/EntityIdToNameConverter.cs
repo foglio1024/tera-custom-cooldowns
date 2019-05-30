@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.Converters
 {
@@ -10,7 +10,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // ReSharper disable once PossibleNullReferenceException
-            return ((ulong)value).IsMe()
+            return SessionManager.IsMe((ulong)value)
                 ? SessionManager.CurrentPlayer.Name
                 : EntityManager.IsEntitySpawned((ulong)value) ? EntityManager.GetEntityName((ulong)value) /*(WindowManager.GroupWindow.VM.TryGetUser((ulong) value, out var p) ? p.Name*/ : "";
         }

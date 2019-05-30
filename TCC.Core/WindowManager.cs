@@ -13,7 +13,7 @@ using Microsoft.Win32;
 using TCC.Controls;
 using TCC.Data.Pc;
 using TCC.Settings;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 using TCC.Windows.Widgets;

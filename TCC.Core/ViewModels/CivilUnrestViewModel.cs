@@ -1,3 +1,4 @@
+using FoglioUtils;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -56,7 +57,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                var ret = Utils.InitLiveView(p => p != null, _guilds, new string[] { },
+                var ret = CollectionViewUtils.InitLiveView(p => p != null, _guilds, new string[] { },
                     new[]
                     {
                         //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),

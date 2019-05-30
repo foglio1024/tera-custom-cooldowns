@@ -124,20 +124,11 @@
     <Compile Include="TemplateSelectors\GroupWindowTemplateSelector.cs" />
     <Compile Include="Test\ThreadInfo.cs" />
     <Compile Include="Test\Tester.cs" />
-    <Compile Include="Utilities\Extensions\ByteExtensions.cs" />
-    <Compile Include="Utilities\Extensions\ButtonExtensions.cs" />
-    <Compile Include="Utilities\Extensions\ColorExtensions.cs" />
-    <Compile Include="Utilities\Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Utilities\Extensions\DispatcherExtensions.cs" />
-    <Compile Include="Utilities\Extensions\DispatcherTimerExtensions.cs" />
-    <Compile Include="Utilities\Extensions\DragablzHeaderExtensions.cs" />
-    <Compile Include="Utilities\Extensions\ItemsControlExtensions.cs" />
-    <Compile Include="Utilities\Extensions\ListExtensions.cs" />
-    <Compile Include="Utilities\Extensions\SizeExtensions.cs" />
-    <Compile Include="Utilities\Extensions\UInt64Extensions.cs" />
-    <Compile Include="Utilities\Extensions\WindowCollectionExtensions.cs" />
-    <Compile Include="Utilities\Extensions\StringExtensions.cs" />
-    <Compile Include="Utilities\Extensions\WindowExtensions.cs" />
+    <Compile Include="Utilities\ContextMenuLeftClickBehavior.cs" />
+    <Compile Include="Utilities\DependencyPropertyWatcher.cs" />
+    <Compile Include="Utilities\EventUtils.cs" />
+    <Compile Include="Utilities\SynchronizedObservableCollection.cs" />
+    <Compile Include="Utilities\TSPropertyChanged.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />
     <Compile Include="Controls\Classes\ArcherLayout.xaml.cs">
       <DependentUpon>ArcherLayout.xaml</DependentUpon>
@@ -572,10 +563,8 @@
     <Compile Include="Sniffing\IpSnifferRawSocketMultipleInterfaces.cs" />
     <Compile Include="Sniffing\IpSnifferRawSocketSingleInterface.cs" />
     <Compile Include="Sniffing\IpSnifferWinPcap.cs" />
-    <Compile Include="Sniffing\Packets\IpPacket.cs" />
     <Compile Include="Sniffing\Packets\ParserHelpers.cs" />
     <Compile Include="Sniffing\Packets\TcpFlags.cs" />
-    <Compile Include="Sniffing\Packets\TcpPacket.cs" />
     <Compile Include="Sniffing\TcpConnection.cs" />
     <Compile Include="Sniffing\TcpSniffer.cs" />
     <Compile Include="Sniffing\TeraSniffer.cs" />
@@ -585,11 +574,7 @@
     <Compile Include="Tera.Data\ClassIcons.cs" />
     <Compile Include="Tera.Data\CopyKey.cs" />
     <Compile Include="Tera.Data\DiscordInfoByGuild.cs" />
-    <Compile Include="Tera.Data\HotkeysData.cs" />
-    <Compile Include="Tera.Data\ImageDatabase.cs" />
     <Compile Include="Tera.Data\InvalidConfigFileException.cs" />
-    <Compile Include="Tera.Data\TeraData.cs" />
-    <Compile Include="Tera.Data\WindowData.cs" />
     <Compile Include="Data\Abnormalities\AbnormalityDuration.cs" />
     <Compile Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml.cs">
       <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
@@ -624,12 +609,6 @@
     <Compile Include="Controls\Settings\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TeraCommon\Game\Abnormality\Abnormality.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityDuration.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityStorage.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\Death.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\Duration.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\PlayerAbnormals.cs" />
     <Compile Include="TeraCommon\Game\Angle.cs" />
     <Compile Include="TeraCommon\Game\Entity.cs" />
     <Compile Include="TeraCommon\Game\EntityId.cs" />
@@ -897,7 +876,6 @@
     </Compile>
     <Compile Include="SkillManager.cs" />
     <Compile Include="Data\Databases\SkillsDatabase.cs" />
-    <Compile Include="Utilities\Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
     <Compile Include="Windows\SkillConfigWindow.xaml.cs">
@@ -1575,6 +1553,12 @@
     <Resource Include="resources\images\Icon_Laurels\diamond_kr_bottom.png" />
     <Resource Include="resources\images\Icon_Laurels\gold_kr_bottom.png" />
     <Resource Include="resources\images\Icon_Laurels\silver_kr_bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
+      <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
+      <Name>FoglioUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -9,7 +9,7 @@ using System.Windows.Threading;
 using TCC.Controls.Chat;
 using TCC.Data;
 using TCC.Interop.Proxy;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets

@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using FoglioUtils;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Pc;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -23,8 +25,8 @@ namespace TCC.Controls.Dashboard
 
         private void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            var headerSw = Utils.GetChild<ScrollViewer>(DungeonHeaders);
-            var namesSw = Utils.GetChild<ScrollViewer>(CharacterNames);
+            var headerSw = DungeonHeaders.GetChild<ScrollViewer>();
+            var namesSw = CharacterNames.GetChild<ScrollViewer>();
 
             headerSw.ScrollToHorizontalOffset(e.HorizontalOffset);
             namesSw.ScrollToVerticalOffset(e.VerticalOffset);
@@ -82,7 +84,7 @@ namespace TCC.Controls.Dashboard
         public DungeonColumnViewModel()
         {
             DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
-            DungeonsListView = Utils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
+            DungeonsListView = CollectionViewUtils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
                 new[] { "Owner.Hidden" },
                 new[]
                 {

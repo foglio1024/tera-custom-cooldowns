@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                var l = Utils.ListFromEnum<Class>();
+                var l = EnumUtils.ListFromEnum<Class>();
                 l.Remove(Class.None);
                 return l;
             }

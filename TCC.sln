@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Updater", "TCC.Updater\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Publisher", "TCC.Publisher\TCC.Publisher.csproj", "{70E2A9CB-5A78-4151-A8E2-DC5363284D85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoglioUtils", "dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj", "{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{70E2A9CB-5A78-4151-A8E2-DC5363284D85}.Release|x64.Build.0 = Release|x64
 		{70E2A9CB-5A78-4151-A8E2-DC5363284D85}.Release|x86.ActiveCfg = Release|Any CPU
 		{70E2A9CB-5A78-4151-A8E2-DC5363284D85}.Release|x86.Build.0 = Release|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Debug|x64.ActiveCfg = Debug|x64
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Debug|x64.Build.0 = Debug|x64
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Debug|x86.Build.0 = Debug|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Release|x64.ActiveCfg = Release|x64
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Release|x64.Build.0 = Release|x64
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Release|x86.ActiveCfg = Release|Any CPU
+		{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

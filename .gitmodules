@@ -4,3 +4,6 @@
 [submodule "dependencies/Dragablz"]
 	path = dependencies/Dragablz
 	url = https://github.com/Foglio1024/Dragablz.git
+[submodule "dependencies/FoglioUtils"]
+	path = dependencies/FoglioUtils
+	url = https://github.com/Foglio1024/FoglioUtils.git

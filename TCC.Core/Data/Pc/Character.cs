@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -357,7 +358,7 @@ namespace TCC.Data.Pc
             {
                 Dungeons.Add(new DungeonCooldown(dg, Dispatcher, this));
             }
-            VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
+            VisibleDungeonsView = CollectionViewUtils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
                 new[]
                     {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
             Jewels = new CollectionViewSource() { Source = Gear }.View;

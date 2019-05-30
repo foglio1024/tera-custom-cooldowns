@@ -1,5 +1,5 @@
 ﻿using System;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.TeraCommon
 {

@@ -10,7 +10,7 @@ using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing.Messages;
 using TCC.Settings;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.Windows.Widgets;
 
 namespace TCC.ViewModels
@@ -206,7 +206,7 @@ namespace TCC.ViewModels
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!target.IsMe() || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
+            if (!SessionManager.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
             var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"

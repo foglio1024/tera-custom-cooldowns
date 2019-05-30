@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -84,7 +85,7 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
-            ListingsView = Utils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
+            ListingsView = CollectionViewUtils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             WindowManager.GroupWindow.VM.PropertyChanged += OnGroupWindowVmPropertyChanged;

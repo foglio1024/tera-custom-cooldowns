@@ -9,7 +9,7 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:settings="clr-namespace:TCC.Controls.Settings"
         xmlns:pc="clr-namespace:TCC.Data.Pc"
-        xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
+        xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
         Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="TCC LFG" Height="800"

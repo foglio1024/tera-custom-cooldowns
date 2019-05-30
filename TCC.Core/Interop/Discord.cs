@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
+using FoglioUtils;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
 
@@ -20,7 +21,7 @@ namespace TCC.Interop
 
             try
             {
-                using (var client = Utils.GetDefaultWebClient())
+                using (var client = MiscUtils.GetDefaultWebClient())
                 {
                     client.Encoding = Encoding.UTF8;
                     client.Headers.Add(HttpRequestHeader.ContentType, "application/json");

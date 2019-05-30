@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -12,7 +13,7 @@ namespace TCC.Converters
             double mult = 1;
             if (parameter != null && parameter.ToString() != "") mult = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
 
-            return Utils.FactorToAngle(val, mult);
+            return MathUtils.FactorToAngle(val, mult);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

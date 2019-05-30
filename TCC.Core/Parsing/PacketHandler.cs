@@ -12,7 +12,7 @@ using TCC.Settings;
 using TCC.Sniffing;
 using TCC.Tera.Data;
 using TCC.TeraCommon.Game.Services;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
@@ -72,7 +72,7 @@ namespace TCC.Parsing
         }
         public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
-            if (p.Target.IsMe())
+            if (SessionManager.IsMe(p.Target))
             {
                 SessionManager.SetPlayerMaxHp(p.MaxHP);
                 SessionManager.SetPlayerHp(p.CurrentHP);
@@ -85,7 +85,7 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
         {
-            if (!p.Target.IsMe()) return;
+            if (!SessionManager.IsMe(p.Target)) return;
             SessionManager.SetPlayerMaxMp(p.MaxMP);
             SessionManager.SetPlayerMp(p.CurrentMP);
         }
@@ -99,7 +99,7 @@ namespace TCC.Parsing
         }
         public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
-            if (p.EntityId.IsMe()) SessionManager.Combat = p.IsInCombat;
+            if (SessionManager.IsMe(p.EntityId)) SessionManager.Combat = p.IsInCombat;
         }
 
         public static void HandleBossGageInfo(S_BOSS_GAGE_INFO p)
@@ -392,8 +392,8 @@ namespace TCC.Parsing
         public static void HandleRunemark(S_WEAK_POINT x)
         {
             if (SessionManager.CurrentPlayer.Class != Class.Valkyrie) return;
-            if (Utils.CurrentClassVM<ValkyrieLayoutVM>() == null) return;
-            Utils.CurrentClassVM<ValkyrieLayoutVM>().RunemarksCounter.Val = x.TotalRunemarks;
+            if (TccUtils.CurrentClassVM<ValkyrieLayoutVM>() == null) return;
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().RunemarksCounter.Val = x.TotalRunemarks;
         }
 
 
@@ -440,7 +440,7 @@ namespace TCC.Parsing
 
         internal static void HandleCreatureLife(S_CREATURE_LIFE p)
         {
-            if (p.Target.IsMe())
+            if (SessionManager.IsMe(p.Target))
             {
                 SessionManager.CurrentPlayer.IsAlive = p.Alive;
             }
@@ -745,7 +745,7 @@ namespace TCC.Parsing
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
-            if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (SessionManager.IsMe(p.TargetId)) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
@@ -753,7 +753,7 @@ namespace TCC.Parsing
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
-            if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (SessionManager.IsMe(p.TargetId)) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
@@ -761,7 +761,7 @@ namespace TCC.Parsing
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (!AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId)) return;
-            if (p.TargetId.IsMe()) FlyingGuardianDataProvider.HandleAbnormal(p);
+            if (SessionManager.IsMe(p.TargetId)) FlyingGuardianDataProvider.HandleAbnormal(p);
 
             if (!SettingsHolder.ClassWindowSettings.Enabled) return;
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
@@ -936,7 +936,7 @@ namespace TCC.Parsing
         public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
         {
 
-            if (p.Target.IsMe()) SessionManager.SetPlayerShield(p.Damage);
+            if (SessionManager.IsMe(p.Target)) SessionManager.SetPlayerShield(p.Damage);
             else if (WindowManager.BossWindow.VM.NpcList.ToSyncList().Any(x => x.EntityId == p.Target))
             {
                 WindowManager.BossWindow.VM.UpdateShield(p.Target, p.Damage);
@@ -1103,7 +1103,7 @@ namespace TCC.Parsing
 
         public static void HandleNpcGuildList(S_NPCGUILD_LIST p)
         {
-            if (!p.UserId.IsMe()) return;
+            if (!SessionManager.IsMe(p.UserId)) return;
             p.NpcGuildList.Keys.ToList().ForEach(k =>
             {
                 switch (k)

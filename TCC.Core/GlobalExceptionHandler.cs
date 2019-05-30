@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using FoglioUtils;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using TCC.Interop;
@@ -82,8 +83,8 @@ namespace TCC
             return new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
-                { "id" , new JValue(SessionManager.CurrentAccountName != null ? Utils.GenerateHash(SessionManager.CurrentAccountName) : "") },
-                { "tcc_hash", Utils.GenerateFileHash(typeof(App).Assembly.Location) },
+                { "id" , new JValue(SessionManager.CurrentAccountName != null ? HashUtils.GenerateHash(SessionManager.CurrentAccountName) : "") },
+                { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
                 { "exception_source", new JValue(ex.Source)},
@@ -187,7 +188,7 @@ namespace TCC
         }
         private static async void UploadCrashDump(Exception ex)
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");

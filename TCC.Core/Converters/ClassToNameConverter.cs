@@ -10,7 +10,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) value = Class.Common;
-            var ret = Utils.ClassEnumToString((Class) value);
+            var ret = TccUtils.ClassEnumToString((Class) value);
             var toLower = System.Convert.ToBoolean(parameter);
             if (toLower) return ret.ToLower();
             return ret;

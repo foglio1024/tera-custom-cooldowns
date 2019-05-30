@@ -10,7 +10,7 @@
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
-             xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
+             xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
              xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"

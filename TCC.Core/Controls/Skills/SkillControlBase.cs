@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -37,7 +38,7 @@ namespace TCC.Controls.Skills
                 NPC();
             }
         }
-        public string SecondsText => Context == null ? "0" : Utils.TimeFormatter(Convert.ToUInt32(Context.Seconds > uint.MaxValue ? 0 : Context.Seconds));
+        public string SecondsText => Context == null ? "0" : TimeUtils.FormatTime(Convert.ToUInt32(Context.Seconds > uint.MaxValue ? 0 : Context.Seconds));
 
         public SkillControlBase()
         {

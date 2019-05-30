@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -22,7 +23,7 @@ namespace TCC.Controls.Skills
 
         private DurationCooldownIndicator _context;
         private DoubleAnimation _anim;
-        public string DurationLabel => _context == null? "": Utils.TimeFormatter(_context.Buff.Seconds);
+        public string DurationLabel => _context == null? "": TimeUtils.FormatTime(_context.Buff.Seconds);
         public bool ShowEffectSeconds => _context?.Buff != null && _context.Buff.Seconds > 0;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

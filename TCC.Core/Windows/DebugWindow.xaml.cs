@@ -111,7 +111,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(10000);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);
@@ -122,15 +122,15 @@ namespace TCC.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Assault") Utils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
-            else if (((Button)sender).Content.ToString() == "Defensive") Utils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
-            else if (((Button)sender).Content.ToString() == "None") Utils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if (Utils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.IsMaxed) Utils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val = 0;
-            Utils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val++;
+            if (TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.IsMaxed) TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val = 0;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val++;
 
         }
 

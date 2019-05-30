@@ -8,7 +8,7 @@
                     xmlns:chat1="clr-namespace:TCC.Data.Chat"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:extensions="clr-namespace:TCC.Utilities.Extensions"
+                    xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
                     mc:Ignorable="d">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">

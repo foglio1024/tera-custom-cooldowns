@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text;
 using HtmlAgilityPack;
 using TCC.Data.Map;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.Data.Chat
 {

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using FoglioUtils;
 
 namespace TCC.Data.Databases
 {
@@ -18,7 +19,7 @@ namespace TCC.Data.Databases
         public virtual void CheckVersion(string customAbsPath = null, string customRelPath = null)
         {
             if (!Exists) return;
-            var localHash = Utils.GenerateFileHash(customAbsPath ?? FullPath);
+            var localHash = HashUtils.GenerateFileHash(customAbsPath ?? FullPath);
             if (UpdateManager.DatabaseHashes.Count == 0) return;
             if (!UpdateManager.DatabaseHashes.ContainsKey(customRelPath ?? RelativePath)) return;
             if (UpdateManager.DatabaseHashes[customRelPath ?? RelativePath] == localHash) return;

@@ -1,6 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Parsing.Messages;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.ClassSpecific
@@ -20,60 +20,60 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Start(p.Duration);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Start(p.Duration);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Start(p.Duration);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Start(p.Duration);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Start(p.Duration);
-                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
-                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Start(p.Duration);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckUnleashAbnormals(p);
 
             if (p.AbnormalityId == BloodlustId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
-                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
-                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
             }
             if (p.AbnormalityId == FieryRageId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(0, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(0, CooldownMode.Normal);
             }
             if (p.AbnormalityId == UnleashId)
             {
-                Utils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(0, CooldownMode.Normal);
-                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = false;
-                Utils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = true;
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(0, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = false;
+                TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = true;
             }
         }
 
@@ -81,32 +81,32 @@ namespace TCC.ClassSpecific
         {
             if(TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
-                if (p.AbnormalityId == SinisterKR && p.TargetId.IsMe())
+                if (p.AbnormalityId == SinisterKR && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == DexterKR && p.TargetId.IsMe())
+                if (p.AbnormalityId == DexterKR && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                if (p.AbnormalityId == Rampage && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
-                if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
+                if (p.AbnormalityId == Sinister && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
+                if (p.AbnormalityId == Dexter && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                if (p.AbnormalityId == Rampage && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
         }
@@ -114,32 +114,32 @@ namespace TCC.ClassSpecific
         {
             if (TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
-                if (p.AbnormalityId == SinisterKR && p.TargetId.IsMe())
+                if (p.AbnormalityId == SinisterKR && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == DexterKR && p.TargetId.IsMe())
+                if (p.AbnormalityId == DexterKR && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                if (p.AbnormalityId == Rampage && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
-                if (p.AbnormalityId == Sinister && p.TargetId.IsMe())
+                if (p.AbnormalityId == Sinister && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Dexter && p.TargetId.IsMe())
+                if (p.AbnormalityId == Dexter && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && p.TargetId.IsMe())
+                if (p.AbnormalityId == Rampage && SessionManager.IsMe(p.TargetId))
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
         }
@@ -149,30 +149,30 @@ namespace TCC.ClassSpecific
             {
                 if (p.AbnormalityId == SinisterKR)
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == DexterKR)
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Rampage)
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
                 }
             }
             else
             { 
                 if (p.AbnormalityId == Sinister)
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Dexter)
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
                 }
                 if (p.AbnormalityId == Rampage)
                 {
-                    Utils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
+                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
                 }
             }
         }

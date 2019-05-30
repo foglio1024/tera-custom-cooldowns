@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _bams = Utils.InitLiveView(
+                _bams = CollectionViewUtils.InitLiveView(
                     p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible,
                     NpcList, 
                     new[] { nameof(NPC.Visible) },
@@ -80,7 +81,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _mobs = Utils.InitLiveView(p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new[] { nameof(NPC.Visible) },
+                _mobs = CollectionViewUtils.InitLiveView(p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new[] { nameof(NPC.Visible) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _mobs;
             }
@@ -89,7 +90,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _guildTowers = Utils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
+                _guildTowers = CollectionViewUtils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;
             }

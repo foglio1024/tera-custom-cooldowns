@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,10 +61,10 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            All = Utils.InitLiveView(o => ((User)o).Visible, Members, new [] {nameof(User.Visible) }, new[]
+            Dps = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Dps && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Tanks = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Tank && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Healers = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Healer && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            All = CollectionViewUtils.InitLiveView(o => ((User)o).Visible, Members, new [] {nameof(User.Visible) }, new[]
             {
                 new SortDescription(nameof(User.Role), ListSortDirection.Descending),
                 new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)

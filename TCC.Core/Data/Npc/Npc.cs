@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -110,7 +111,7 @@ namespace TCC.Data.NPCs
 
         public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
 
-        public float HPFactor => (float)Utils.Factor(_currentHP, _maxHP); //_maxHP == 0 ? 0 : (_currentHP / _maxHP);
+        public float HPFactor => (float)MathUtils.FactorCalc(_currentHP, _maxHP); //_maxHP == 0 ? 0 : (_currentHP / _maxHP);
         public float CurrentPercentage => HPFactor * 100;
         private bool _visible;
         public bool Visible
@@ -195,8 +196,8 @@ namespace TCC.Data.NPCs
             }
         }
 
-        public bool IsTower => Utils.IsGuildTower(ZoneId, TemplateId);
-        public bool IsPhase1Dragon => Utils.IsPhase1Dragon(ZoneId, TemplateId);
+        public bool IsTower => TccUtils.IsGuildTower(ZoneId, TemplateId);
+        public bool IsPhase1Dragon => TccUtils.IsPhase1Dragon(ZoneId, TemplateId);
 
         public uint GuildId
         {

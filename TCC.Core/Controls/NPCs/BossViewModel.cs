@@ -6,7 +6,7 @@ using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Settings;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC.Controls.NPCs
 {

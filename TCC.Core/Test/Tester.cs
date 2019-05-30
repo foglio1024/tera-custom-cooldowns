@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Threading;
+using FoglioUtils;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
@@ -15,7 +16,7 @@ using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.TeraCommon;
 using TCC.TeraCommon.Game.Services;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -33,7 +34,7 @@ namespace TCC.Test
         {
             try
             {
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                     c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -83,7 +84,7 @@ namespace TCC.Test
         }
         public static void StartDeadlyGambleCooldown(uint cd)
         {
-            Utils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.Cooldown.Start(cd);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.Cooldown.Start(cd);
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l)
         {
@@ -192,7 +193,7 @@ namespace TCC.Test
             {
                 disp.Invoke(() =>
                 {
-                    var myId = Utils.GetCurrentThreadId();
+                    var myId = FoglioUtils.MiscUtils.GetCurrentThreadId();
                     threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
                 });
             }
@@ -241,7 +242,7 @@ namespace TCC.Test
                 {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
             };
 
-            using (var client = Utils.GetDefaultWebClient())
+            using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -253,14 +254,14 @@ namespace TCC.Test
         {
             var canFire = true;
             var wh = "";
-            var whHash = Utils.GenerateHash(wh);
+            var whHash = HashUtils.GenerateHash(wh);
             var req = new JObject
             {
                 { "webhook" , whHash},
                 {"user", username }
 
             };
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -291,7 +292,7 @@ namespace TCC.Test
                     {"username", "TCC" },
                     {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
                 };
-                using (var client = Utils.GetDefaultWebClient())
+                using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     client.Encoding = Encoding.UTF8;
                     client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -305,7 +306,7 @@ namespace TCC.Test
         public async static void RegisterWebhook(string username)
         {
             var wh = "";
-            var whHash = Utils.GenerateHash(wh);
+            var whHash = HashUtils.GenerateHash(wh);
             var r = new Random(DateTime.Now.Millisecond);
             var req = new JObject
             {
@@ -313,7 +314,7 @@ namespace TCC.Test
                 {"user", username},
                 {"online", r.NextDouble() >= 0.9 }
             };
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");

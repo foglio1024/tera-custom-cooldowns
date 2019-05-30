@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace TCC.Windows
         public MergedInventoryViewModel()
         {
             MergedInventory = new SynchronizedObservableCollection<MergedInventoryItem>();
-            MergedInventoryView = Utils.InitLiveView(o => o != null, MergedInventory, new string[] { }, new[]
+            MergedInventoryView = CollectionViewUtils.InitLiveView(o => o != null, MergedInventory, new string[] { }, new[]
             {
                 new SortDescription("Item.Item.Id", ListSortDirection.Ascending),
                 new SortDescription("Item.Item.RareGrade", ListSortDirection.Ascending),

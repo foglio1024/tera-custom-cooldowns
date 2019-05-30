@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -129,7 +130,7 @@ namespace TCC.Data.Chat
                 //{
                 //try
                 //{
-                Color = new SolidColorBrush(Utils.ParseColor(color));
+                Color = new SolidColorBrush(MiscUtils.ParseColor(color));
                 //}
                 //catch
                 //{

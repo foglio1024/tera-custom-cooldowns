@@ -4,7 +4,7 @@ using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 
 namespace TCC
 {
@@ -62,7 +62,7 @@ namespace TCC
             if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             if (duration == int.MaxValue) ab.Infinity = true;
-            if (target.IsMe())
+            if (SessionManager.IsMe(target))
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!Settings.SettingsHolder.DisablePartyAbnormals)
@@ -74,12 +74,12 @@ namespace TCC
             {
                 BeginNpcAbnormality(ab, stacks, duration, target);
             }
-            if (source.IsMe() || target.IsMe()) CheckPassivity(ab, duration);
+            if (SessionManager.IsMe(source) || SessionManager.IsMe(target)) CheckPassivity(ab, duration);
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
             if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
-            if (target.IsMe()) EndPlayerAbnormality(ab);
+            if (SessionManager.IsMe(target)) EndPlayerAbnormality(ab);
             else WindowManager.BossWindow.VM.EndNpcAbnormality(target, ab);
 
             return true;

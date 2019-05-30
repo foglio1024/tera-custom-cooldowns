@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using FoglioUtils;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
@@ -47,7 +48,7 @@ namespace TCC.Parsing
         }
         private static void PacketAnalysisLoop()
         {
-            AnalysisThreadId = Utils.GetCurrentThreadId();
+            AnalysisThreadId = FoglioUtils.MiscUtils.GetCurrentThreadId();
             while (true)
             {
                 if (!Packets.TryDequeue(out var msg))

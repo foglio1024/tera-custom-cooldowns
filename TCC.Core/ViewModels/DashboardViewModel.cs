@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -57,7 +58,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                return _sortedColumns ?? (_sortedColumns = Utils.InitLiveView(o => ((DungeonColumnViewModel)o).Dungeon.Show, Columns,
+                return _sortedColumns ?? (_sortedColumns = CollectionViewUtils.InitLiveView(o => ((DungeonColumnViewModel)o).Dungeon.Show, Columns,
                                             new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Show)}", $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
                                             new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
             }
@@ -199,15 +200,15 @@ namespace TCC.ViewModels
 
             Characters.CollectionChanged += SyncViewModel;
 
-            SortedCharacters = Utils.InitLiveView(o => !((Character)o).Hidden, Characters,
+            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = Utils.InitLiveView(o => ((Character)o).Hidden, Characters,
+            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            CharacterViewModelsView = Utils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
+            CharacterViewModelsView = CollectionViewUtils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
@@ -311,7 +312,7 @@ namespace TCC.ViewModels
                 if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
 
                 SelectedCharacter = character;
-                SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
+                SelectedCharacterInventory = CollectionViewUtils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
                 {
                     new SortDescription("Item.Id", ListSortDirection.Ascending),
                 });

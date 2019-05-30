@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using FoglioUtils;
 using Newtonsoft.Json.Linq;
 
 namespace TCC.Parsing
@@ -17,13 +18,13 @@ namespace TCC.Parsing
         {
             if (!File.Exists(filename)) return false;
             if (!Settings.SettingsHolder.CheckOpcodesHash) return true;
-            var localHash = Utils.GenerateFileHash(filename);
+            var localHash = HashUtils.GenerateFileHash(filename);
             if (localHash == "")
             {
                 WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to check opcode file hash.\n Skipping download...", Data.NotificationType.Warning);
                 return true;
             }
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -99,7 +100,7 @@ namespace TCC.Parsing
 
         private static void Download(string remote, string local)
         {
-            using (var client = Utils.GetDefaultWebClient())
+            using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 client.DownloadFile(remote, local);
             }

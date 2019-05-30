@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using FoglioUtils;
+using System.Collections.Generic;
 using System.Windows;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC
@@ -91,7 +92,7 @@ namespace TCC
         }
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            WindowManager.BossWindow.VM.AddOrUpdateBoss(target, maxHP, currentHP, false, source.IsMe() ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            WindowManager.BossWindow.VM.AddOrUpdateBoss(target, maxHP, currentHP, false, SessionManager.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             SetEncounter(currentHP, maxHP);
         }
         private static void SetEncounter(float curHP, float maxHP)
@@ -138,7 +139,7 @@ namespace TCC
         }
         public static Dragon CheckCurrentDragon(Point p)
         {
-            var rel = Utils.GetRelativePoint(p.X, p.Y, -7672, -84453);
+            var rel = MathUtils.GetRelativePoint(p.X, p.Y, -7672, -84453);
 
             Dragon d;
             if (rel.Y > .8 * rel.X - 78)

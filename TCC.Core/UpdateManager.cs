@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using FoglioUtils;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,13 +35,13 @@ namespace TCC
         public static void CheckServersFile()
         {
             var path = Path.Combine(App.DataPath, "servers.txt");
-            if (!File.Exists(path) || Utils.GenerateFileHash(path) != DatabaseHashes["servers.txt"])
+            if (!File.Exists(path) || HashUtils.GenerateFileHash(path) != DatabaseHashes["servers.txt"])
                 DownloadServersFile();
         }
         private static void DownloadServersFile()
         {
             if (!Directory.Exists(App.DataPath)) Directory.CreateDirectory(App.DataPath);
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
 
                 try
@@ -59,7 +60,7 @@ namespace TCC
 
         public static async Task CheckIconsVersion()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -109,7 +110,7 @@ namespace TCC
         {
             try
             {
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     var st = c.OpenRead(AppVersionExperimentalUrl);
                     if (st == null) return false;
@@ -127,7 +128,7 @@ namespace TCC
 
         private static async Task DownloadIcons()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 //c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                 c.DownloadFileCompleted += async (_, args) =>
@@ -211,7 +212,7 @@ namespace TCC
                 var destPath = Path.Combine(App.DataPath, relativePath);
                 var destDir = Path.GetDirectoryName(destPath);
                 if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     c.DownloadFile(url, destPath);
                 }
@@ -249,7 +250,7 @@ namespace TCC
 
         private static void CheckAppVersionPeriodic()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -271,7 +272,7 @@ namespace TCC
 
         public async static void ForceUpdateExperimental()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -322,7 +323,7 @@ namespace TCC
         private static bool _waitingDownload = true;
         private async static Task Update(string url)
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -365,7 +366,7 @@ namespace TCC
         public static void DownloadDatabaseHashes()
         {
             DatabaseHashes.Clear();
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 var f = c.OpenRead(DatabaseHashFileUrl);
                 if (f == null) return;
@@ -405,7 +406,7 @@ namespace TCC
 
             public VersionParser(bool forceExperimental = false)
             {
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     var st = c.OpenRead(App.Experimental || forceExperimental ? AppVersionExperimentalUrl : AppVersionUrl);
                     if (st == null) return;

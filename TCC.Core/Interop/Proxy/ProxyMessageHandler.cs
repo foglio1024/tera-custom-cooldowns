@@ -7,7 +7,7 @@ using TCC.Data.Chat;
 using TCC.Interop.JsonRPC;
 using TCC.Parsing;
 using TCC.TeraCommon;
-using TCC.Utilities.Extensions;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Interop.Proxy

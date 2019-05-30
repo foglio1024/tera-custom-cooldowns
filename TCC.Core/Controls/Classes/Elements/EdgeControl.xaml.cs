@@ -52,7 +52,7 @@ namespace TCC.Controls.Classes.Elements
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             //lazy way of making sure that DataContext is not null
-            var classMgr = Utils.CurrentClassVM<WarriorLayoutVM>();
+            var classMgr = TccUtils.CurrentClassVM<WarriorLayoutVM>();
             _context = classMgr?.EdgeCounter;
             while (_context == null)
             {
