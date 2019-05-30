@@ -6,6 +6,8 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.Sniffing;
+using TCC.TeraCommon.Game;
+using TCC.TeraCommon.Sniffing;
 using TCC.ViewModels;
 using TeraPacketParser;
 using Server = TCC.TeraCommon.Game.Server;
@@ -14,6 +16,7 @@ namespace TCC.Parsing
 {
     public static class PacketAnalyzer
     {
+        public static ITeraSniffer Sniffer;
         public static MessageFactory Factory;
         public static MessageProcessor Processor;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
@@ -21,11 +24,19 @@ namespace TCC.Parsing
         public static int AnalysisThreadId;
         public static void Init()
         {
-            TeraSniffer.Instance.NewConnection += OnNewConnection;
-            TeraSniffer.Instance.EndConnection += OnEndConnection;
+            switch (SettingsHolder.CaptureMode)
+            {
+                case CaptureMode.Toolbox:
+                    Sniffer = new ToolboxSniffer();
+                    break;
+                default:
+                    Sniffer = new TeraSniffer();
+                    break;
+            }
+            Sniffer.NewConnection += OnNewConnection;
+            Sniffer.EndConnection += OnEndConnection;
+            Sniffer.MessageReceived += EnqueuePacket;
 
-            TeraSniffer.Instance.MessageReceived += EnqueuePacket;
-            //ProxyOld.ProxyPacketReceived += EnqueuePacket;
             SessionManager.Server = new Server("", "", "", 0);
 
             Factory = new MessageFactory();
@@ -33,14 +44,15 @@ namespace TCC.Parsing
             if (AnalysisThread == null)
             {
                 Log.All("Analysis thread not running, starting it...");
-                AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Anal" };
+                AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Analysis" };
                 AnalysisThread.Start();
             }
             else
             {
                 Log.All("Analysis already running, skipping...");
             }
-            TeraSniffer.Instance.Enabled = true;
+
+            Sniffer.Enabled = true;
         }
 
         public static async void InitAsync()
@@ -69,7 +81,7 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
-            if(!SettingsHolder.DontShowFUBH) App.FUBH();
+            if (!SettingsHolder.DontShowFUBH) App.FUBH();
         }
         private static void OnEndConnection()
         {

@@ -1167,7 +1167,7 @@ namespace TCC.Parsing
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map"));
             PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer); //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
             PacketAnalyzer.Processor.Update();
-            TeraSniffer.Instance.Connected = true;
+            PacketAnalyzer.Sniffer.Connected = true;
         }
         public static async void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {

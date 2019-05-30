@@ -233,5 +233,6 @@ namespace TCC.Settings
         public static string WebhookMessageGuildBam { get; set; } = "@here Guild BAM will spawn soon!";
         public static GroupWindowLayout GroupWindowLayout { get; set; } = GroupWindowLayout.RoleSeparated;
         public static bool DontShowFUBH { get; set; }
+        public static CaptureMode CaptureMode { get; internal set; }
     }
 }

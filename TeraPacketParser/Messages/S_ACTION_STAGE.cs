@@ -1,4 +1,6 @@
-﻿namespace TeraPacketParser.Messages
+﻿using TeraPacketParser.Data;
+
+namespace TeraPacketParser.Messages
 {
     public class S_ACTION_STAGE : ParsedMessage
     {

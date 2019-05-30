@@ -1,4 +1,4 @@
-﻿namespace TeraPacketParser
+﻿namespace TeraPacketParser.Data
 {
     public enum MessageDirection
     {

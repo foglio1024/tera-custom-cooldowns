@@ -1,4 +1,4 @@
-﻿namespace TeraPacketParser
+﻿namespace TeraPacketParser.Data
 {
     public struct SkillId
     {

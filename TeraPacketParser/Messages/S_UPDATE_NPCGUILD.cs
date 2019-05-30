@@ -1,4 +1,5 @@
 ﻿using TeraDataLite;
+using TeraPacketParser.Data;
 
 namespace TeraPacketParser.Messages
 {

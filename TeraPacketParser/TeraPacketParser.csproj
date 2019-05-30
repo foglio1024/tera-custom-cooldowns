@@ -42,10 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Angle.cs" />
-    <Compile Include="EntityId.cs" />
+    <Compile Include="Data\Angle.cs" />
+    <Compile Include="Data\EntityId.cs" />
+    <Compile Include="Data\HitDirection.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="MessageDirection.cs" />
+    <Compile Include="Data\MessageDirection.cs" />
     <Compile Include="MessageFactory.cs" />
     <Compile Include="Messages\C_CHECK_VERSION.cs" />
     <Compile Include="Messages\C_LOGIN_ARBITER.cs" />
@@ -149,10 +150,10 @@
     <Compile Include="OpCodeNamer.cs" />
     <Compile Include="ParsedMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SkillId.cs" />
+    <Compile Include="Data\SkillId.cs" />
     <Compile Include="TeraMessageReader.cs" />
     <Compile Include="UnknownMessage.cs" />
-    <Compile Include="Vector3f.cs" />
+    <Compile Include="Data\Vector3f.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">

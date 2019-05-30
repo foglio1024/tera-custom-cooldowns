@@ -3,6 +3,15 @@ using System.ComponentModel;
 
 namespace TCC.Data
 {
+    public enum CaptureMode
+    {
+        [Description("npcap")]
+        Npcap,
+        [Description("Raw sockets")]
+        RawSockets,
+        [Description("TERA Toolbox")]
+        Toolbox
+    }
     public enum GroupWindowLayout
     {
         [Description("Role separated")]

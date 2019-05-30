@@ -690,6 +690,20 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.OK) App.Restart();
             }
         }
+        public CaptureMode CaptureMode
+        {
+            get => SettingsHolder.CaptureMode;
+            set
+            {
+                if (SettingsHolder.CaptureMode == value) return;
+                var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
+                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Cancel) return;
+                SettingsHolder.CaptureMode = value;
+                N();
+                if (res == MessageBoxResult.OK) App.Restart();
+            }
+        }
         //public double ChatWindowOpacity
         //{
         //    get => Settings.Settings.ChatWindowOpacity;
@@ -802,6 +816,7 @@ namespace TCC.ViewModels
         public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => EnumUtils.ListFromEnum<WarriorEdgeMode>();
         public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
         public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
+        public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
 
         public bool ChatWindowEnabled
         {

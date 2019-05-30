@@ -1384,8 +1384,12 @@
                                                        SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:ControlShape}"
                                                        Choices="{Binding ControlShapes, Mode=OneWay}" />
-                            <settings:CheckboxSetting SettingName="Use npcap"
-                                                      IsOn="{Binding Npcap, Mode=TwoWay}" />
+                            <settings:SelectionSetting SettingName="Capture mode"
+                                                       SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
+                                                       ChoicesType="{x:Type data:CaptureMode}"
+                                                       Choices="{Binding CaptureModes, Mode=OneWay}" />
+                            <!--<settings:CheckboxSetting SettingName="Use npcap"
+                                                      IsOn="{Binding Npcap, Mode=TwoWay}" />-->
                             <settings:CheckboxSetting SettingName="Use Tera Toolbox"
                                                       IsOn="{Binding EnableProxy, Mode=TwoWay}" />
                             <settings:CheckboxSetting SettingName="Auto fps mode"

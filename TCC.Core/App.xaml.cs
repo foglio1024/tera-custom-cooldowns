@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -33,6 +35,7 @@ namespace TCC
         public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
         public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
+        public static bool StartedByToolbox { get; private set; }
 
         private static FUBH fubh;
         public static void FUBH()
@@ -45,6 +48,7 @@ namespace TCC
         }
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+            ParseStartupArgs(e.Args.ToList());
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
             TccMessageBox.Create(); //Create it here in STA thread
@@ -109,6 +113,11 @@ namespace TCC
             Loading = false;
         }
 
+        private static void ParseStartupArgs(List<string> list)
+        {
+            StartedByToolbox = list.IndexOf("--toolbox") != -1;
+        }
+
         private static void InitSplashScreen()
         {
             var waiting = true;
@@ -139,7 +148,7 @@ namespace TCC
         public static void Close()
         {
             BaseDispatcher.Invoke(ReleaseMutex);
-            TeraSniffer.Instance.Enabled = false;
+            PacketAnalyzer.Sniffer.Enabled = false;
             SettingsWriter.Save();
             WindowManager.Dispose();
             ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();

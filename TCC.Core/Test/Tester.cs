@@ -19,6 +19,7 @@ using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser;
+using TeraPacketParser.Data;
 
 namespace TCC.Test
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using FoglioUtils.Extensions;
+using TeraPacketParser.Data;
 
 namespace TeraPacketParser
 {

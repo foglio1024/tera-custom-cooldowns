@@ -170,6 +170,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.DisableLfgChatMessages), SettingsHolder.DisableLfgChatMessages),
                 new XAttribute(nameof(SettingsHolder.CheckGuildBamWithoutOpcode), SettingsHolder.CheckGuildBamWithoutOpcode),
                 new XAttribute(nameof(SettingsHolder.DontShowFUBH), SettingsHolder.DontShowFUBH),
+                new XAttribute(nameof(SettingsHolder.CaptureMode), SettingsHolder.CaptureMode),
                 new XAttribute(nameof(SettingsHolder.LastScreenSize), $"{SettingsHolder.LastScreenSize.Width},{SettingsHolder.LastScreenSize.Height}")
             );
         }

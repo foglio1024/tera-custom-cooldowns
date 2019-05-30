@@ -300,6 +300,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.AbnormalityShape)) SettingsHolder.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.SkillShape)) SettingsHolder.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.GroupWindowLayout)) SettingsHolder.GroupWindowLayout = (GroupWindowLayout)Enum.Parse(typeof(GroupWindowLayout), attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.CaptureMode)) SettingsHolder.CaptureMode = (CaptureMode)Enum.Parse(typeof(CaptureMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.MaxMessages)) SettingsHolder.MaxMessages = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.SpamThreshold)) SettingsHolder.SpamThreshold = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.FontSize)) SettingsHolder.FontSize = int.Parse(attr.Value);

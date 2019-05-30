@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeraPacketParser
+namespace TeraPacketParser.Data
 {
     // ReSharper disable once InconsistentNaming
     public struct Vector3f

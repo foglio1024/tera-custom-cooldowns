@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using TeraPacketParser.Data;
 
 namespace TeraPacketParser
 {

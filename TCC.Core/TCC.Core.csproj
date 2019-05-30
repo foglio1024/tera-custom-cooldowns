@@ -120,6 +120,7 @@
     <Compile Include="Interop\Proxy\Server.cs" />
     <Compile Include="Interop\Proxy\TccStubInterface.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
+    <Compile Include="Parsing\ToolboxSniffer.cs" />
     <Compile Include="TemplateSelectors\GroupWindowTemplateSelector.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\BlockSplitter.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
