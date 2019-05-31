@@ -14,7 +14,7 @@ namespace TCC.Sniffing
 
         public static bool operator ==(EndpointIpv4 x, EndpointIpv4 y)
         {
-            return (x._ip == y._ip) && (x._port == y._port);
+            return x._ip == y._ip && x._port == y._port;
         }
 
         public static bool operator !=(EndpointIpv4 x, EndpointIpv4 y)

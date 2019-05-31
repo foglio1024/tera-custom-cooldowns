@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
-using System.Windows.Threading;
 using TCC.Data;
+using TeraDataLite;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings
@@ -12,16 +13,24 @@ namespace TCC.Settings
     {
         private static string _lastLanguage = "";
         private static bool _chatEnabled;
-        private static ClickThruMode _chatClickThruMode;
+        private static DateTime _statSentTime = DateTime.MinValue;
+        private static string _statSentVersion = GetVersion();
 
-        public static double ScreenW => SystemParameters.VirtualScreenWidth;
-        public static double ScreenH => SystemParameters.VirtualScreenHeight;
+        private static string GetVersion() //no idea, just use this for now
+        {
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Experimental ? "-e" : "")}";
 
-        public static WindowSettings GroupWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false, null, nameof(GroupWindowSettings));
+        }
+        //public static double ScreenW => SystemParameters.VirtualScreenWidth;
+        //public static double ScreenH => SystemParameters.VirtualScreenHeight;
+        public static Size LastScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+
+        public static WindowSettings GroupWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
         public static WindowSettings CooldownWindowSettings { get; set; } = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
-        public static WindowSettings BossWindowSettings { get; set; } = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false, null, nameof(BossWindowSettings));
+        public static WindowSettings BossWindowSettings { get; set; } = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BossWindowSettings));
         public static WindowSettings BuffWindowSettings { get; set; } = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BuffWindowSettings));
-        public static WindowSettings CharacterWindowSettings { get; set; } = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, false, false, null, nameof(CharacterWindowSettings));
+        public static WindowSettings CharacterWindowSettings { get; set; } = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CharacterWindowSettings));
         public static WindowSettings ClassWindowSettings { get; set; } = new WindowSettings(.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(ClassWindowSettings));
         public static WindowSettings FlightGaugeWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false);
         public static WindowSettings FloatingButtonSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true);
@@ -78,8 +87,8 @@ namespace TCC.Settings
             {(Class)3, new List<uint>{ 401705, 401706, 401710, 400500, 400501, 400508, 400710, 400711 }},
             {(Class)4, new List<uint>{ 21170, 22120, 23180, 26250, 29011, 25170, 25171, 25201, 25202, 500100, 500150, 501600, 501650, 502001, 502051, 502070, 502071, 502072 }},
             {(Class)5, new List<uint>{ 601400, 601450, 601460, 88608101, 88608102, 88608103, 88608104, 88608105, 88608106, 88608107, 88608108, 88608109, 88608110,602101,602102,602103,601611 }},
-            {(Class)6, new List<uint>{ }},
-            {(Class)7, new List<uint>{ }},
+            {(Class)6, new List<uint>()},
+            {(Class)7, new List<uint>()},
             {(Class)8, new List<uint>{ 10151010, 10151131, 10151192 }},
             {(Class)9, new List<uint>{ 89105101, 89105102, 89105103, 89105104, 89105105, 89105106, 89105107, 89105108, 89105109, 89105110, 89105111, 89105112, 89105113, 89105114, 89105115, 89105116, 89105117, 89105118, 89105119, 89105120, 10152340, 10152351 }},
             {(Class)10, new List<uint>{ 31020, 10153210 }},
@@ -122,27 +131,27 @@ namespace TCC.Settings
         public static bool ChatTimestampSeconds { get; internal set; }
         public static int FontSize { get; set; } = 15;
         public static bool AnimateChatMessages { get; set; }
-        public static ClickThruMode ChatClickThruMode
-        {
-            get
-            {
-                if (ChatWindowsSettings.Count > 0) return ChatWindowsSettings[0].ClickThruMode;
-                return _chatClickThruMode;
-            }
+        //public static ClickThruMode ChatClickThruMode
+        //{
+        //    get
+        //    {
+        //        if (ChatWindowsSettings.Count > 0) return ChatWindowsSettings[0].ClickThruMode;
+        //        return _chatClickThruMode;
+        //    }
 
-            set
-            {
-                if (ChatWindowsSettings.Count > 0)
-                {
-                    if (ChatWindowsSettings[0].ClickThruMode == value) return;
-                    ChatWindowsSettings.ToList().ForEach(x => x.ClickThruMode = value);
-                }
-                else
-                {
-                    _chatClickThruMode = value;
-                }
-            }
-        }
+        //    set
+        //    {
+        //        if (ChatWindowsSettings.Count > 0)
+        //        {
+        //            if (ChatWindowsSettings[0].ClickThruMode == value) return;
+        //            ChatWindowsSettings.ToList().ForEach(x => x.ClickThruMode = value);
+        //        }
+        //        else
+        //        {
+        //            _chatClickThruMode = value;
+        //        }
+        //    }
+        //}
         public static int ChatScrollAmount { get; set; } = 1;
         // Character window
         public static bool CharacterWindowCompactMode { get; set; } = true;
@@ -155,19 +164,38 @@ namespace TCC.Settings
 
         // Misc
         public static DateTime LastRun { get; set; } = DateTime.MinValue;
+
+        public static DateTime StatSentTime
+        {
+            get => _statSentTime;
+            set
+            {
+                _statSentTime = value;
+                SettingsWriter.Save();
+            }
+        }
+
+        public static string StatSentVersion
+        {
+            get
+            {
+                return _statSentVersion;
+
+            }
+            set => _statSentVersion = value;
+        }
+
         public static string LastLanguage
         {
             get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
             set => _lastLanguage = value;
         }
-        public static string Webhook { get; set; } = "";
-        public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
         public static string TwitchName { get; set; } = ""; //TODO: re-add this
         public static string TwitchToken { get; set; } = ""; //TODO: re-add this
         public static string TwitchChannelName { get; set; } = ""; //TODO: re-add this
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowTradeLfg { get; set; } = true;
-        public static bool StatSent { get; set; } = false;
+        //public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
         public static bool EthicalMode { get; set; } = false;
@@ -185,10 +213,26 @@ namespace TCC.Settings
         public static ControlShape SkillShape { get; set; } = ControlShape.Round;
         public static bool Npcap { get; set; } = true;
         public static bool CheckOpcodesHash { get; set; } = true;
-        public static bool DiscordWebhookEnabled { get; set; } = false;
+        public static bool CheckGuildBamWithoutOpcode { get; set; } = false;    //by HQ 20190324
         public static bool ShowNotificationBubble { get; set; } = true;
         public static List<string> UserExcludedSysMsg { get; set; } = new List<string>();
         public static bool ExperimentalNotification { get; set; } = true;
         public static bool FpsAtGuardian { get; set; } = true;
+        public static bool EnableProxy { get; set; } = true;
+        public static bool ShowMembersHpNumbers { get; set; } = true;
+        public static bool DisableLfgChatMessages { get; set; } = true;
+
+
+        public static bool WebhookEnabledFieldBoss { get; set; } = false;
+        public static string WebhookUrlFieldBoss { get; set; } = "";
+        public static string WebhookMessageFieldBossSpawn { get; set; } = "@here {bossName} spawned in {regionName}!";
+        public static string WebhookMessageFieldBossDie { get; set; } = "{bossName} is dead.";
+
+        public static bool WebhookEnabledGuildBam { get; set; } = false;
+        public static string WebhookUrlGuildBam { get; set; } = "";
+        public static string WebhookMessageGuildBam { get; set; } = "@here Guild BAM will spawn soon!";
+        public static GroupWindowLayout GroupWindowLayout { get; set; } = GroupWindowLayout.RoleSeparated;
+        public static bool DontShowFUBH { get; set; }
+        public static CaptureMode CaptureMode { get; internal set; }
     }
 }

@@ -1,20 +1,21 @@
 ﻿<ResourceDictionary x:Class="TCC.ResourceDictionaries.DataTemplates"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ctrl="clr-namespace:TCC.Controls"
                     xmlns:abnormalities="clr-namespace:TCC.Controls.Abnormalities"
                     xmlns:chatCtrl="clr-namespace:TCC.Controls.Chat"
+                    xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
                     xmlns:group="clr-namespace:TCC.Controls.Group"
                     xmlns:npc="clr-namespace:TCC.Controls.NPCs"
                     xmlns:skills="clr-namespace:TCC.Controls.Skills"
                     xmlns:data="clr-namespace:TCC.Data"
-                    xmlns:moongourd="clr-namespace:TCC.Moongourd"
-                    xmlns:vm="clr-namespace:TCC.ViewModels"
                     xmlns:abnormalities1="clr-namespace:TCC.Data.Abnormalities"
-                    xmlns:skills1="clr-namespace:TCC.Data.Skills"
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
                     xmlns:pc="clr-namespace:TCC.Data.Pc"
-                    xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard">
+                    xmlns:skills1="clr-namespace:TCC.Data.Skills"
+                    xmlns:moongourd="clr-namespace:TCC.Moongourd"
+                    xmlns:vm="clr-namespace:TCC.ViewModels"
+                    xmlns:converters="clr-namespace:TCC.Converters"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
     <DataTemplate x:Key="RoundNormalSkill">
         <skills:RoundSkillControl />
     </DataTemplate>
@@ -299,6 +300,22 @@
     <DataTemplate x:Key="EmojiTemplate">
         <chatCtrl:EmojiMessagePiece />
     </DataTemplate>
+    <DataTemplate x:Key="IconTemplate" DataType="chat:MessagePiece">
+        <Ellipse Width="24" Height="24" Margin="0 0 3 0" VerticalAlignment="Center">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Text, Converter={StaticResource MessageTextToIcon}}"></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <!--<Image RenderOptions.BitmapScalingMode="HighQuality" 
+               Margin="-2 0 4 -4" 
+               Width="18" 
+               Stretch="Uniform" 
+               HorizontalAlignment="Center" 
+               Height="18" 
+               Source="{Binding Text, Converter={StaticResource MessageTextToIcon}}"/>-->
+
+    </DataTemplate>
 
     <DataTemplate x:Key="MessageHeaderTemplate">
         <chatCtrl:ChatMessageHeader />
@@ -314,6 +331,9 @@
     </DataTemplate>
     <DataTemplate x:Key="ApplyBody">
         <chatCtrl:ApplyBody/>
+    </DataTemplate>
+    <DataTemplate x:Key="LfgBody">
+        <chatCtrl:LfgBody/>
     </DataTemplate>
 
     <!--Channel label templates-->
@@ -453,7 +473,6 @@
     <DataTemplate x:Key="GuildTowerTemplate">
         <npc:GuildTowerControl/>
     </DataTemplate>
-
     <DataTemplate x:Key="DefaultEnemyWindowLayout">
         <npc:DefaultEnemyWindowLayout/>
     </DataTemplate>
@@ -474,6 +493,13 @@
     </DataTemplate>
     <DataTemplate x:Key="DragonIndicator">
         <npc:DragonControl />
+    </DataTemplate>
+
+    <DataTemplate x:Key="RoleColumnsGroupLayout">
+        <group:RoleColumnsGroupLayout/>
+    </DataTemplate>
+    <DataTemplate x:Key="SingleColumnGroupLayout">
+        <group:SingleColumnGroupLayout/>
     </DataTemplate>
 
     <DataTemplate x:Key="PartyDataTemplate">
@@ -705,6 +731,20 @@
                            Foreground="#8fff"
                            TextTrimming="CharacterEllipsis"/>
         </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="EnumDescrDataTemplate" DataType="system:Enum">
+        <TextBlock
+            Foreground="#afff"
+            FontWeight="DemiBold"
+            VerticalAlignment="Center">
+            <TextBlock.Text>
+                <Binding Path=".">
+                    <Binding.Converter>
+                        <converters:EnumDescriptionConverter />
+                    </Binding.Converter>
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock>
     </DataTemplate>
 
 

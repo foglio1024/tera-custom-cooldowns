@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
+using TCC.Data.Chat;
 using TCC.Settings;
+using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
@@ -34,6 +38,38 @@ namespace TCC.Data.Pc
         private bool _fireBoost;
         private bool _iceBoost;
         private bool _arcaneBoost;
+        private bool _isAlive;
+
+        private uint _coins;
+        public uint Coins
+        {
+            get { return _coins; }
+            set
+            {
+                if (_coins == value) return;
+                _coins = value;
+                if (_coins == _maxCoins)
+                {
+                    WindowManager.FloatingButton.NotifyExtended("TCC", "Adventure coins maxed!", NotificationType.Success);
+                    ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
+                }
+
+                N();
+
+            }
+        }
+        private uint _maxCoins;
+        public uint MaxCoins
+        {
+            get { return _maxCoins; }
+            set
+            {
+                if (_maxCoins == value) return;
+                _maxCoins = value;
+                N();
+
+            }
+        }
 
         public string Name
         {
@@ -191,7 +227,7 @@ namespace TCC.Data.Pc
         public uint MaxShield
         {
             get => _maxShield;
-            set
+            private set
             {
                 if (_maxShield != value)
                 {
@@ -211,7 +247,7 @@ namespace TCC.Data.Pc
         public float CurrentShield
         {
             get => _currentShield;
-            set
+            private set
             {
                 if (_currentShield == value) return;
                 if (value < 0) return;
@@ -266,6 +302,7 @@ namespace TCC.Data.Pc
         }
 
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; set; }
+        public Dictionary<uint, uint> Shields { get; set; }
         public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; set; }
         public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
 
@@ -342,6 +379,20 @@ namespace TCC.Data.Pc
             }
         }
 
+        public event Action Death;
+        public event Action Ress;
+        public bool IsAlive
+        {
+            get => _isAlive;
+            internal set
+            {
+                if (_isAlive == value) return;
+                _isAlive = value;
+                if (value) Ress?.Invoke();
+                else Death?.Invoke();
+            }
+        }
+
         //Add My Abnormals Setting by HQ ============================================================
         public bool MyAbnormalsContainKey(Abnormality ab)
         {
@@ -386,8 +437,9 @@ namespace TCC.Data.Pc
                 Buffs.Add(newAb);
                 if (ab.IsShield)
                 {
-                    MaxShield = ab.ShieldSize;
-                    CurrentShield = ab.ShieldSize;
+                    //MaxShield = ab.ShieldSize;
+                    //CurrentShield = ab.ShieldSize;
+                    AddShield(ab);
                 }
 
                 return;
@@ -398,6 +450,30 @@ namespace TCC.Data.Pc
             existing.Refresh();
 
         }
+
+        private void AddShield(Abnormality ab)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Shields[ab.Id] = GetShieldSize(ab);
+                RefreshMaxShieldAmount();
+                RefreshShieldAmount();
+            });
+
+            uint GetShieldSize(Abnormality a)
+            {
+                return Class != Class.Sorcerer ? a.ShieldSize : Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize);
+            }
+        }
+
+        private void RefreshMaxShieldAmount()
+        {
+            foreach (var amount in Shields.Values)
+            {
+                MaxShield += amount;
+            }
+        }
+
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
             //Add My Abnormals Setting by HQ ============================================================
@@ -450,12 +526,44 @@ namespace TCC.Data.Pc
             Buffs.Remove(buff);
             buff.Dispose();
 
+            //if (ab.IsShield)
+            //{
+            //MaxShield = 0;
+            //CurrentShield = 0;
+            //}
             if (ab.IsShield)
             {
-                MaxShield = 0;
-                CurrentShield = 0;
+                EndShield(ab);
+                //SessionManager.SetPlayerShield(0);
+                //SessionManager.SetPlayerMaxShield(0);
             }
 
+        }
+
+        private void EndShield(Abnormality ab)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Shields.Remove(ab.Id);
+                RefreshShieldAmount();
+            });
+        }
+
+        private void RefreshShieldAmount()
+        {
+            if (Shields.Count == 0)
+            {
+                CurrentShield = 0;
+                MaxShield = 0;
+                return;
+            }
+            _currentShield = 0;
+            var total = 0U;
+            foreach (var amount in Shields.Values)
+            {
+                total += amount;
+            }
+            CurrentShield = total;
         }
         public void RemoveDebuff(Abnormality ab)
         {
@@ -511,6 +619,25 @@ namespace TCC.Data.Pc
             Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
             Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
             InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
+            Shields = new Dictionary<uint, uint>();
+        }
+
+        public void DamageShield(uint damage)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (Shields.Count == 0) return;
+                var firstShield = Shields.First();
+                if (Shields[firstShield.Key] >= damage)
+                {
+                    Shields[firstShield.Key] -= damage;
+                }
+                else
+                {
+                    Shields[firstShield.Key] = 0;
+                }
+                RefreshShieldAmount();
+            });
         }
     }
 }

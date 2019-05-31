@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Xml.Linq;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -37,6 +38,7 @@ namespace TCC.Settings
         }
         private static void WriteSettings(XElement doc)
         {
+
             if (!doc.HasElements) return;
             try
             {
@@ -85,7 +87,7 @@ namespace TCC.Settings
                 // Buff
                 new XAttribute(nameof(SettingsHolder.BuffsDirection), SettingsHolder.BuffsDirection),
                 new XAttribute(nameof(SettingsHolder.ShowAllMyAbnormalities), SettingsHolder.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
-                                                                                                                      // Character
+                // Character
                 new XAttribute(nameof(SettingsHolder.CharacterWindowCompactMode), SettingsHolder.CharacterWindowCompactMode),
                 // Cooldown
                 new XAttribute(nameof(SettingsHolder.CooldownBarMode), SettingsHolder.CooldownBarMode),
@@ -109,7 +111,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ChatTimestampSeconds), SettingsHolder.ChatTimestampSeconds),
                 new XAttribute(nameof(SettingsHolder.AnimateChatMessages), SettingsHolder.AnimateChatMessages),
                 new XAttribute(nameof(SettingsHolder.ChatEnabled), SettingsHolder.ChatEnabled),
-                new XAttribute(nameof(SettingsHolder.ChatClickThruMode), SettingsHolder.ChatClickThruMode),
+                //new XAttribute(nameof(SettingsHolder.ChatClickThruMode), SettingsHolder.ChatClickThruMode),
                 new XAttribute(nameof(SettingsHolder.ChatScrollAmount), SettingsHolder.ChatScrollAmount),
                 new XAttribute(nameof(SettingsHolder.UserExcludedSysMsg), SettingsHolder.UserExcludedSysMsg.ToCSV()),
                 // Group
@@ -130,18 +132,25 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.ShowGroupWindowDetails), SettingsHolder.ShowGroupWindowDetails),
                 new XAttribute(nameof(SettingsHolder.ShowAwakenIcon), SettingsHolder.ShowAwakenIcon),
                 new XAttribute(nameof(SettingsHolder.ShowAllGroupAbnormalities), SettingsHolder.ShowAllGroupAbnormalities),
+                new XAttribute(nameof(SettingsHolder.ShowMembersHpNumbers), SettingsHolder.ShowMembersHpNumbers),
+                new XAttribute(nameof(SettingsHolder.GroupWindowLayout), SettingsHolder.GroupWindowLayout),
                 // Misc
                 new XAttribute(nameof(SettingsHolder.ForceSoftwareRendering), SettingsHolder.ForceSoftwareRendering),
                 new XAttribute(nameof(SettingsHolder.HighPriority), SettingsHolder.HighPriority),
                 new XAttribute(nameof(SettingsHolder.LastRun), DateTime.Now),
+                new XAttribute(nameof(SettingsHolder.StatSentTime), SettingsHolder.StatSentTime),
+                new XAttribute(nameof(SettingsHolder.StatSentVersion), SettingsHolder.StatSentVersion),
                 new XAttribute(nameof(SettingsHolder.LastLanguage), SettingsHolder.LastLanguage),
-                new XAttribute(nameof(SettingsHolder.DiscordWebhookEnabled), SettingsHolder.DiscordWebhookEnabled),
-                new XAttribute(nameof(SettingsHolder.Webhook), SettingsHolder.Webhook),
-                new XAttribute(nameof(SettingsHolder.WebhookMessage), SettingsHolder.WebhookMessage),
+                new XAttribute(nameof(SettingsHolder.WebhookEnabledGuildBam), SettingsHolder.WebhookEnabledGuildBam),
+                new XAttribute(nameof(SettingsHolder.WebhookUrlGuildBam), SettingsHolder.WebhookUrlGuildBam),
+                new XAttribute(nameof(SettingsHolder.WebhookMessageGuildBam), SettingsHolder.WebhookMessageGuildBam),
+                new XAttribute(nameof(SettingsHolder.WebhookEnabledFieldBoss), SettingsHolder.WebhookEnabledFieldBoss),
+                new XAttribute(nameof(SettingsHolder.WebhookUrlFieldBoss), SettingsHolder.WebhookUrlFieldBoss),
+                new XAttribute(nameof(SettingsHolder.WebhookMessageFieldBossSpawn), SettingsHolder.WebhookMessageFieldBossSpawn),
+                new XAttribute(nameof(SettingsHolder.WebhookMessageFieldBossDie), SettingsHolder.WebhookMessageFieldBossDie),
                 new XAttribute(nameof(SettingsHolder.TwitchName), SettingsHolder.TwitchName),
                 new XAttribute(nameof(SettingsHolder.TwitchToken), SettingsHolder.TwitchToken),
                 new XAttribute(nameof(SettingsHolder.TwitchChannelName), SettingsHolder.TwitchChannelName),
-                new XAttribute(nameof(SettingsHolder.StatSent), SettingsHolder.StatSent),
                 new XAttribute(nameof(SettingsHolder.ShowFlightEnergy), SettingsHolder.ShowFlightEnergy),
                 new XAttribute(nameof(SettingsHolder.LfgEnabled), SettingsHolder.LfgEnabled),
                 new XAttribute(nameof(SettingsHolder.UseHotkeys), SettingsHolder.UseHotkeys),
@@ -156,7 +165,13 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsHolder.CheckOpcodesHash), SettingsHolder.CheckOpcodesHash),
                 new XAttribute(nameof(SettingsHolder.ShowNotificationBubble), SettingsHolder.ShowNotificationBubble),
                 new XAttribute(nameof(SettingsHolder.FpsAtGuardian), SettingsHolder.FpsAtGuardian),
-                new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification)
+                new XAttribute(nameof(SettingsHolder.ExperimentalNotification), SettingsHolder.ExperimentalNotification),
+                new XAttribute(nameof(SettingsHolder.EnableProxy), SettingsHolder.EnableProxy),
+                new XAttribute(nameof(SettingsHolder.DisableLfgChatMessages), SettingsHolder.DisableLfgChatMessages),
+                new XAttribute(nameof(SettingsHolder.CheckGuildBamWithoutOpcode), SettingsHolder.CheckGuildBamWithoutOpcode),
+                new XAttribute(nameof(SettingsHolder.DontShowFUBH), SettingsHolder.DontShowFUBH),
+                new XAttribute(nameof(SettingsHolder.CaptureMode), SettingsHolder.CaptureMode),
+                new XAttribute(nameof(SettingsHolder.LastScreenSize), $"{SettingsHolder.LastScreenSize.Width},{SettingsHolder.LastScreenSize.Height}")
             );
         }
 

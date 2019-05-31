@@ -1,41 +1,31 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using FoglioUtils;
+using System;
 using System.Windows;
 using System.Windows.Media.Animation;
-using TCC.Annotations;
-using TCC.Data;
+using TCC.ViewModels;
 using Arc = TCC.Controls.Arc;
 
 namespace TCC.Windows.Widgets
 {
-    /// <summary>
-    /// Logica di interazione per FlightDurationWindow.xaml
-    /// </summary>
-    public partial class FlightDurationWindow : INotifyPropertyChanged
+    public partial class FlightDurationWindow 
     {
         private readonly DoubleAnimation _arcAn;
         private readonly DoubleAnimation _winShow;
         private readonly DoubleAnimation _winHide;
 
-        public FlightStackType Type => FlyingGuardianDataProvider.StackType;
-        public double FlightGaugeRotation => Settings.SettingsHolder.FlightGaugeRotation;
-        public bool FlipFlightGauge => Settings.SettingsHolder.FlipFlightGauge;
-
-
         public FlightDurationWindow()
         {
             InitializeComponent();
 
+            VM = new FlightGaugeViewModel();
+            DataContext = VM;
+
             ButtonsRef = null;
             MainContent = Content as UIElement;
 
-            //Settings.FlightGaugeWindowSettings.ShowAlways = true;
-            //Settings.FloatingButtonSettings.AutoDim = false;
-
-            FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
-            FlyingGuardianDataProvider.StacksChanged += SetStacks;
-            FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
+            //FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
+            //FlyingGuardianDataProvider.StacksChanged += SetStacks;
+            //FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
             SessionManager.CombatChanged += OnCombatChanged;
 
             Init(Settings.SettingsHolder.FlightGaugeWindowSettings, perClassPosition: false);
@@ -60,11 +50,24 @@ namespace TCC.Windows.Widgets
             };
         }
 
+        public FlightGaugeViewModel VM { get; set; }
+
+        public void SetEnergy(double val)
+        {
+            if (!Settings.SettingsHolder.ShowFlightEnergy) return;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (Opacity == 0) ShowWindow();
+                _arcAn.From = Arc.EndAngle;
+                _arcAn.To = MathUtils.FactorToAngle(val / 1000, 4);
+                Arc.BeginAnimation(Arc.EndAngleProperty, _arcAn);
+            }));
+        }
+
         private void OnCombatChanged()
         {
             if (SessionManager.Combat) HideWindow();
         }
-
         private void OnFlyingGuardianInProgressChanged(bool obj)
         {
             Dispatcher.Invoke(() =>
@@ -72,53 +75,24 @@ namespace TCC.Windows.Widgets
                 StacksContainer.Visibility = obj ? Visibility.Visible : Visibility.Collapsed;
             });
         }
-
-        public void SetEnergy(double val)
-        {
-            if (!Settings.SettingsHolder.ShowFlightEnergy) return;
-            Dispatcher.Invoke(() =>
-            {
-                if (Opacity == 0) ShowWindow();
-                _arcAn.From = Arc.EndAngle;
-                _arcAn.To = Utils.FactorToAngle(val / 1000, 4);
-                Arc.BeginAnimation(Arc.EndAngleProperty, _arcAn);
-            });
-        }
-
-
         private void SetStacks(int stacks)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 for (var i = 9; i >= 0; i--)
                 {
-                    ((FrameworkElement) StacksContainer.Children[i]).Opacity = i + 1 <= stacks ? 1 : 0.2;
+                    ((FrameworkElement)StacksContainer.Children[i]).Opacity = i + 1 <= stacks ? 1 : 0.2;
                 }
-            });
+            }));
         }
-
         private void HideWindow()
         {
             BeginAnimation(OpacityProperty, _winHide);
         }
-
         private void ShowWindow()
         {
             Opacity = 0;
             BeginAnimation(OpacityProperty, _winShow);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void NPC([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void ExNPC(string prop)
-        {
-            NPC(prop);
         }
     }
 }

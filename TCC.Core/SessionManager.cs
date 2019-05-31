@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Settings;
-using TCC.Tera.Data;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
 using Player = TCC.Data.Pc.Player;
 
 namespace TCC
@@ -24,7 +25,7 @@ namespace TCC
         private static bool _inGameUiOn;
 
         public static Server Server { get; set; }
-        public static string Language => BasicTeraData.Instance.Servers.StringLanguage;
+        public static string Language => DB.ServerDatabase.StringLanguage;
 
 
         public static bool LoadingScreen
@@ -58,7 +59,7 @@ namespace TCC
                 if (Combat != value)
                 {
                     CurrentPlayer.IsInCombat = value;
-                    App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
+                    App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke()); // check logs for other exceptions here
                 }
             }
         }
@@ -97,14 +98,20 @@ namespace TCC
             }
         }
 
+        public static bool IsMe(ulong eid)
+        {
+            return eid == CurrentPlayer.EntityId;
+        }
+
         public static event Action ChatModeChanged;
         public static event Action GameUiModeChanged;
         public static event Action EncounterChanged;
         public static event Action CombatChanged;
         public static event Action LoadingScreenChanged;
         public static event Action LoggedChanged;
+        public static event Action DatabaseLoaded;
 
-        public static readonly Player CurrentPlayer = new Player();
+        public static Player CurrentPlayer;
 
         public static readonly Dictionary<uint, string> GuildMembersNames = new Dictionary<uint, string>();
 
@@ -112,15 +119,11 @@ namespace TCC
         {
             return GuildMembersNames.TryGetValue(id, out var name) ? name : "Unknown player";
         }
-        public static TccDatabase CurrentDatabase { get; set; }
+        public static TccDatabase DB { get; set; }
         public static bool CivilUnrestZone { get; internal set; }
+        public static bool IsInDungeon { get; internal set; }
+        public static string CurrentAccountName { get; internal set; }
 
-        //public static void SetCombatStatus(bool combat)
-        //{
-        //    //var old = Me.IsInCombat;
-        //    //Me.IsInCombat = combat;
-        //    //if (combat != old) App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke());
-        //}
         public static void SetPlayerHp(float hp)
         {
             CurrentPlayer.CurrentHP = hp;
@@ -164,33 +167,39 @@ namespace TCC
         public static void SetPlayerMaxSt(int maxSt)
         {
             CurrentPlayer.MaxST = maxSt;
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
         {
             if (CurrentPlayer.CurrentShield < 0) return;
-            CurrentPlayer.CurrentShield -= damage;
+            //CurrentPlayer.CurrentShield -= damage;
+            CurrentPlayer.DamageShield(damage);
         }
-        public static void SetPlayerMaxShield(uint shield)
+        //public static void SetPlayerMaxShield(uint shield)
+        //{
+        //    CurrentPlayer.MaxShield = shield;
+        //    CurrentPlayer.CurrentShield = shield;
+        //}
+        public static async void InitDatabasesAsync(string lang)
         {
-            CurrentPlayer.MaxShield = shield;
-            CurrentPlayer.CurrentShield = shield;
+            await Task.Factory.StartNew(() => InitDatabases(lang));
+            DatabaseLoaded?.Invoke();
         }
 
         public static void InitDatabases(string lang)
         {
-            CurrentDatabase = new TccDatabase(lang);
-            CurrentDatabase.CheckVersion();
-            if (!CurrentDatabase.IsUpToDate)
+            DB = new TccDatabase(lang);
+            DB.CheckVersion();
+            if (!DB.IsUpToDate)
             {
                 var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes)
                 {
-                    CurrentDatabase.DownloadOutdatedDatabases();
+                    DB.DownloadOutdatedDatabases();
                 }
             }
-            if (!CurrentDatabase.Exists)
+            if (!DB.Exists)
             {
                 var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
                 if (res == System.Windows.MessageBoxResult.Yes)
@@ -203,9 +212,9 @@ namespace TCC
                     InitDatabases(SettingsHolder.LastLanguage);
                 }
                 else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
-                else if (res == System.Windows.MessageBoxResult.Cancel) App.CloseApp();
+                else if (res == System.Windows.MessageBoxResult.Cancel) App.Close();
             }
-            else CurrentDatabase.Load();
+            else DB.Load();
         }
 
         public static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
@@ -216,7 +225,7 @@ namespace TCC
 
             if (SettingsHolder.ClassWindowSettings.Enabled
                 && CurrentPlayer.Class == Class.Sorcerer
-                && WindowManager.ClassWindow.VM.CurrentManager is SorcererBarManager sm)
+                && WindowManager.ClassWindow.VM.CurrentManager is SorcererLayoutVM sm)
             {
                 sm.NotifyElementChanged();
             }
@@ -229,12 +238,10 @@ namespace TCC
             CurrentPlayer.IceBoost = i;
             CurrentPlayer.ArcaneBoost = a;
 
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            if (SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
-                ((SorcererBarManager)WindowManager.ClassWindow.VM.CurrentManager).NotifyElementBoostChanged();
+                TccUtils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged();
             }
-
-
         }
     }
 }

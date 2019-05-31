@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using FoglioUtils;
+using System.Collections.Generic;
 using System.Windows;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC
 {
@@ -17,7 +19,7 @@ namespace TCC
             CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
             {
-                SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
+                SessionManager.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
                 if (monst.IsBoss)
                 {
                     var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
@@ -26,7 +28,7 @@ namespace TCC
             }
             if (!Filter(zoneId, templateId)) return;
 
-            if (SessionManager.CurrentDatabase.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+            if (SessionManager.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 NearbyNPC[entityId] = m.Name;
                 //if (m.Name == "Tradon") ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "TCC", "Tradon spawned") { ContainsPlayerName = true });
@@ -49,12 +51,12 @@ namespace TCC
 
         private static bool IsWorldBoss(ushort zoneId, uint templateId)
         {
-            return (zoneId == 10 && templateId == 99) ||
-                   (zoneId == 4 && templateId == 5011) ||
-                   (zoneId == 51 && templateId == 7011) ||
-                   (zoneId == 52 && templateId == 9050) ||
-                   (zoneId == 57 && templateId == 33) ||
-                   (zoneId == 38 && templateId == 35);
+            return zoneId == 10 && templateId == 99 ||
+                   zoneId == 4 && templateId == 5011 ||
+                   zoneId == 51 && templateId == 7011 ||
+                   zoneId == 52 && templateId == 9050 ||
+                   zoneId == 57 && templateId == 33 ||
+                   zoneId == 38 && templateId == 35;
         }
 
         private static bool Filter(uint zoneId, uint templateId)
@@ -90,7 +92,7 @@ namespace TCC
         }
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            WindowManager.BossWindow.VM.AddOrUpdateBoss(target, maxHP, currentHP, false, source.IsMe() ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            WindowManager.BossWindow.VM.AddOrUpdateBoss(target, maxHP, currentHP, false, SessionManager.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             SetEncounter(currentHP, maxHP);
         }
         private static void SetEncounter(float curHP, float maxHP)
@@ -137,7 +139,7 @@ namespace TCC
         }
         public static Dragon CheckCurrentDragon(Point p)
         {
-            var rel = Utils.GetRelativePoint(p.X, p.Y, -7672, -84453);
+            var rel = MathUtils.GetRelativePoint(p.X, p.Y, -7672, -84453);
 
             Dragon d;
             if (rel.Y > .8 * rel.X - 78)
@@ -173,7 +175,7 @@ namespace TCC
 
         public static bool IsEntitySpawned(uint zoneId, uint templateId)
         {
-            var name = SessionManager.CurrentDatabase.MonsterDatabase.GetName(templateId, zoneId);
+            var name = SessionManager.DB.MonsterDatabase.GetName(templateId, zoneId);
             return name != "Unknown" && NearbyNPC.ContainsValue(name);
         }
 

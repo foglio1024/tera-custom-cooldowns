@@ -1,7 +1,24 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace TCC.Data
 {
+    public enum CaptureMode
+    {
+        [Description("npcap")]
+        Npcap,
+        [Description("Raw sockets")]
+        RawSockets,
+        [Description("TERA Toolbox")]
+        Toolbox
+    }
+    public enum GroupWindowLayout
+    {
+        [Description("Role separated")]
+        RoleSeparated,
+        [Description("Single column")]
+        SingleColumn
+    }
     public enum ItemLevelTier
     {
         [Description("None")]
@@ -22,15 +39,11 @@ namespace TCC.Data
         Tier7 = 456
     }
 
-    public enum NpcGuild
-    {
-        Vanguard = 609,
-        Guardian = 611
-    }
     public enum WarriorStance
     {
         None, Assault, Defensive
     }
+    [Flags]
     public enum ModifierKeys : uint
     {
         Alt = 1,
@@ -38,31 +51,6 @@ namespace TCC.Data
         Shift = 4,
         Win = 8,
         None = 0
-    }
-    public enum LangEnum : uint
-    {
-        INT = 0,
-        KR = 1,
-        NA = 2,
-        JP = 3,
-        GER = 4,
-        FR = 5,
-        EN = 6,
-        TW = 7,
-        RU = 8,
-        CH = 9,
-        THA = 10,
-        SE = 11
-    }
-    public enum RegionEnum
-    {
-        EU,
-        NA,
-        KR,
-        JP,
-        TW,
-        THA,
-        RU
     }
 
     public enum CooldownMode
@@ -133,6 +121,7 @@ namespace TCC.Data
         Area = 3,
         Trade = 4,
         Greet = 9,
+        Angler = 10,
         Private1 = 11,
         Private2 = 12,
         Private3 = 13,
@@ -183,52 +172,12 @@ namespace TCC.Data
         Damage = 318,
         Guardian = 319,
         Enchant = 320,
+        LFG = 321, // not sure if old /u is still here
         TCC = 1000,
         Twitch = 1001
         // --custom
     }
 
-    public enum Class
-    {
-        Warrior = 0,
-        Lancer = 1,
-        Slayer = 2,
-        Berserker = 3,
-        Sorcerer = 4,
-        Archer = 5,
-        Priest = 6,
-        Mystic = 7,
-        Reaper = 8,
-        Gunner = 9,
-        Brawler = 10,
-        Ninja = 11,
-        Valkyrie = 12,
-        Common = 255,
-        None = 256
-    }
-    public enum Race
-    {
-        HumanMale = 1,
-        HumanFemale = 2,
-        ElfMale = 3,
-        ElfFemale = 4,
-        AmanMale = 5,
-        AmanFemale = 6,
-        CastanicMale = 7,
-        CastanicFemale = 8,
-        Popori = 9,
-        Elin = 10,
-        Baraka = 11
-    }
-    public enum Laurel
-    {
-        None = 0,
-        Bronze = 1,
-        Silver = 2,
-        Gold = 3,
-        Diamond = 4,
-        Champion = 5
-    }
     public enum CooldownType
     {
         Skill,
@@ -253,25 +202,7 @@ namespace TCC.Data
         Aquadrax = 1103,
     }
 
-    public enum AggroCircle
-    {
-        Main = 2,
-        Secondary = 3,
-        None = 255 //arbitrary
-    }
-    public enum AggroAction
-    {
-        Add = 1,
-        Remove = 2
-    }
 
-    public enum ReadyStatus
-    {
-        NotReady = 0,
-        Ready = 1,
-        None = 254,
-        Undefined = 255 //arbitrary
-    }
 
     public enum HarrowholdPhase
     {
@@ -290,37 +221,17 @@ namespace TCC.Data
         Failed
     }
 
-    public enum GearPiece
-    {
-        Weapon = 1,
-        Armor = 2,
-        Hands = 3,
-        Feet = 4,
-        CritNecklace = 5,
-        CritEarring = 6,
-        CritRing = 7,
-        PowerNecklace = 8,
-        PowerEarring = 9,
-        PowerRing = 10,
-        Circlet = 11,
-        Belt = 12,
-    }
 
-    public enum GearTier
-    {
-        Low = 0,
-        Mid = 1,
-        High = 2,
-        Top = 3,
-        Heroic
-    }
 
     public enum ClickThruMode
     {
         Never = 0,
         Always = 1,
+        [Description("When dim")]
         WhenDim = 2,
+        [Description("When undim")]
         WhenUndim = 3,
+        [Description("Game-driven")]
         GameDriven = 4
     }
 
@@ -342,11 +253,6 @@ namespace TCC.Data
         Remaining = 1
     }
 
-    public enum DespawnType
-    {
-        OutOfView = 1,
-        Dead = 5
-    }
 
     public enum Role
     {

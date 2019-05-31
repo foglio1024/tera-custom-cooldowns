@@ -5,16 +5,19 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using TCC.Tera.Data;
-using TCC.TeraCommon;
+using TCC.Data;
+using TCC.Settings;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
+
+using TeraPacketParser;
+using TeraPacketParser.Data;
 
 namespace TCC.Sniffing
 {
     public class TeraSniffer : ITeraSniffer
     {
-        private static TeraSniffer _instance;
+        //private static TeraSniffer _instance;
 
         // Only take this lock in callbacks from tcp sniffing, not in code that can be called by the user.
         // Otherwise this could cause a deadlock if the user calls such a method from a callback that already holds a lock
@@ -45,12 +48,11 @@ namespace TCC.Sniffing
         public ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         public int ServerProxyOverhead;
 
-        private TeraSniffer()
+        public TeraSniffer()
         {
-            var servers = BasicTeraData.Instance.Servers;
-            _serversByIp = servers.GetServersByIp();
+            _serversByIp = SessionManager.DB.ServerDatabase.GetServersByIp();
 
-            if (Settings.SettingsHolder.Npcap)
+            if (SettingsHolder.Npcap || SettingsHolder.CaptureMode == CaptureMode.Npcap)
             {
                 var netmasks = _serversByIp.Keys.Select(s => string.Join(".", s.Split('.').Take(3)) + ".0/24").Distinct().ToArray();
 
@@ -72,7 +74,7 @@ namespace TCC.Sniffing
         }
 
 
-        public static TeraSniffer Instance => _instance ?? (_instance = new TeraSniffer());
+        //public static TeraSniffer Instance => _instance ?? (_instance = new TeraSniffer());
 
         // IpSniffer has its own locking, so we need no lock here.
         public bool Enabled
@@ -191,7 +193,7 @@ namespace TCC.Sniffing
 
         private void OnResync(MessageDirection direction, int skipped, int size)
         {
-            BasicTeraData.LogError("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size, false, true);
+            Log.F("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size);
         }
 
         // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock

@@ -1,10 +1,11 @@
+using FoglioUtils;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using TCC.Data;
-using TCC.Parsing;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -56,7 +57,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                var ret = Utils.InitLiveView(p => p != null, _guilds, new string[] { },
+                var ret = CollectionViewUtils.InitLiveView(p => p != null, _guilds, new string[] { },
                     new[]
                     {
                         //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
@@ -70,10 +71,10 @@ namespace TCC.ViewModels
             var sb = new StringBuilder("Civil Unrest temporary rank (top 5):\\");
             var limit = 5;
             limit = _guilds.Count > limit ? limit : _guilds.Count;
-            for (int i = 0; i < limit; i++)
+            for (var i = 0; i < limit; i++)
             {
                 var item =
-                    ((WindowManager.CivilUnrestWindow.GuildList.Items[i])) as CivilUnrestGuild;
+                    WindowManager.CivilUnrestWindow.GuildList.Items[i] as CivilUnrestGuild;
                 sb.Append(item?.Name);
                 sb.Append(" | ");
                 sb.Append($"HP: {item?.TowerHp:##0%}");
@@ -98,7 +99,7 @@ namespace TCC.ViewModels
             _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
         }
 
-        public void AddGuild(CityWarGuildInfo guildInfo)
+        public void AddGuild(CityWarGuildData guildInfo)
         {
             var g = _guilds.FirstOrDefault(x => x.Id == guildInfo.Id);
             if (g != null)

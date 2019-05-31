@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using FoglioUtils;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TCC.Data;
@@ -8,20 +9,20 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per NewDungeonDialog.xaml
     /// </summary>
-    public partial class NewDungeonDialog : Window
+    public partial class NewDungeonDialog
     {
         public NewDungeonDialog()
         {
             InitializeComponent();
         }
 
-        public ICollectionView Dungeons => Utils.InitView(d => d != null, SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values, new[]
+        public ICollectionView Dungeons => CollectionViewUtils.InitView(d => d != null, SessionManager.DB.DungeonDatabase.Dungeons.Values, new[]
         {
             new SortDescription(nameof(Dungeon.Name), ListSortDirection.Ascending)
         });
         private void AddDungeon(object sender, RoutedEventArgs e)
         {
-            var dg = (sender as FrameworkElement).DataContext as Dungeon;
+            if (!((sender as FrameworkElement)?.DataContext is Dungeon dg)) return;
             if (dg.Show) return;
             dg.Show = true;
             dg.Index = int.MaxValue;

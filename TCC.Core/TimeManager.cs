@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,30 +8,33 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Interop;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
     public class TimeManager : TSPropertyChanged
     {
+        // TODO: not sure about other regions reset days
         private readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new Dictionary<RegionEnum, TeraServerTimeInfo>
         {
-            {RegionEnum.EU, new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.NA, new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday) },
-            {RegionEnum.RU, new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.TW, new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.JP, new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.THA, new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
-            {RegionEnum.KR, new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) },
+            {RegionEnum.EU, new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.NA, new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday, DayOfWeek.Thursday) },
+            {RegionEnum.RU, new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.TW, new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.JP, new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.THA, new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+            {RegionEnum.KR, new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
         };
 
         public const double SecondsInDay = 60 * 60 * 24;
         private const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam";
 
         private static TimeManager _instance;
-        private DayOfWeek _resetDay;
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
         public RegionEnum CurrentRegion { get; set; }
@@ -51,7 +55,7 @@ namespace TCC
         {
             var closeEventsCount = WindowManager.Dashboard.VM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
-            if(SettingsHolder.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+            if (SettingsHolder.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
         }
 
@@ -59,13 +63,14 @@ namespace TCC
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
                 WindowManager.Dashboard.VM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
-            if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
+            if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0)
+                CheckCloseEvents();
         }
 
         public void SetServerTimeZone(string lang)
         {
             if (string.IsNullOrEmpty(lang)) return;
-            CurrentRegion = Utils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
+            CurrentRegion = TccUtils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
 
             SettingsHolder.LastLanguage = lang;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
@@ -74,11 +79,10 @@ namespace TCC
                 SettingsHolder.LastLanguage = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
-                    MessageBoxButton.OK);
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             var timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
-            _resetDay = _serverTimezones[CurrentRegion].ResetDay;
 
             if (timezone != null)
             {
@@ -102,33 +106,18 @@ namespace TCC
         {
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
             if (SettingsHolder.LastRun > todayReset || DateTime.Now < todayReset) return;
-            foreach (var ch in WindowManager.Dashboard.VM.Characters)
-            {
-                foreach (var dg in ch.Dungeons)
-                {
-                    if (dg.Dungeon.Id == 9950)
-                    {
-                        if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday) dg.Reset();
-                        else continue;
-                    }
-                    dg.Reset();
-                }
-                ch.VanguardDailiesDone = 0;
-                ch.ClaimedGuardianQuests = 0;
-                if (DateTime.Now.DayOfWeek == _resetDay)
-                {
-                    ch.VanguardWeekliesDone = 0;
-                }
-            }
-            SettingsHolder.LastRun = DateTime.Now;
-            WindowManager.Dashboard.VM.SaveCharacters();
-            SettingsWriter.Save();
-            if (DateTime.Now.DayOfWeek == _resetDay)
-            {
-                ChatWindowManager.Instance.AddTccMessage("Weekly data has been reset.");
-            }
 
-            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
+            WindowManager.Dashboard.VM.ResetDailyData();
+
+            var weeklyDungeonsReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].DungeonsWeeklyResetDay;
+            var weeklyVanguardReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].VanguardResetDay;
+
+            if (weeklyDungeonsReset) WindowManager.Dashboard.VM.ResetWeeklyDungeons();
+            if (weeklyVanguardReset) WindowManager.Dashboard.VM.ResetVanguardWeekly();
+
+            WindowManager.Dashboard.VM.SaveCharacters();
+            SettingsHolder.LastRun = DateTime.Now;
+            SettingsWriter.Save();
         }
 
 
@@ -190,7 +179,7 @@ namespace TCC
             var t = DownloadGuildBamTimestamp();
             t.Wait();
             var ts = t.Result;
-            return Utils.FromUnixTime(ts);
+            return TimeUtils.FromUnixTime(ts);
         }
 
         public void SetGuildBamTime(bool force)
@@ -204,86 +193,135 @@ namespace TCC
             }
         }
 
-        public void SendWebhookMessageOld(bool testMessage = false)
+        public void ExecuteGuildBamWebhook(bool testMessage = false)
         {
-            if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
-            {
-                var sb = new StringBuilder("{");
-                sb.Append("\""); sb.Append("content"); sb.Append("\"");
-                sb.Append(":");
-                sb.Append("\""); sb.Append(SettingsHolder.WebhookMessage);
-                if (testMessage) sb.Append(" (Test message)");
-                sb.Append("\"");
-                sb.Append(",");
-                sb.Append("\""); sb.Append("username"); sb.Append("\"");
-                sb.Append(":");
-                sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
-                sb.Append(",");
-                sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
-                sb.Append(":");
-                sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
-                sb.Append("}");
+            if (string.IsNullOrEmpty(SettingsHolder.WebhookUrlGuildBam)) return;
+            if (!SettingsHolder.WebhookEnabledGuildBam) return;
 
-                try
-                {
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                    using (var client = new WebClient())
-                    {
-                        client.Encoding = Encoding.UTF8;
-                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-                        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-
-                        client.UploadString(SettingsHolder.Webhook, "POST", sb.ToString());
-                    }
-                }
-                catch (Exception)
-                {
-                    WindowManager.FloatingButton.NotifyExtended("Guild BAM", "Failed to execute Discord webhook.", NotificationType.Error);
-                    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
-                }
-            }
+            SendWebhook(SettingsHolder.WebhookMessageGuildBam, SettingsHolder.WebhookUrlGuildBam, testMessage);
         }
-        public void SendWebhookMessage(string bamName)
+        //=====================================by HQ 20181224=====================================
+        //public void ExecuteFieldBossWebhook(int bossId, int status, bool testMessage = false)
+        //{
+        //    if (TimeManager.Instance.CurrentRegion == RegionEnum.KR) // by HQ 20190321
+        //    {
+        //        if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
+        //        {
+        //            var sb = new StringBuilder("{");
+        //            sb.Append("\""); sb.Append("content"); sb.Append("\"");
+        //            sb.Append(":");
+
+        //            if ((bossId == 501) && (status == 1))
+        //            {
+        //                sb.Append("\""); sb.Append("하자르 등장 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+        //            }
+        //            if ((bossId == 501) && (status == 2))
+        //            {
+        //                sb.Append("\""); sb.Append("하자르 퇴치 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+        //            }
+        //            if ((bossId == 4001) && (status == 1))
+        //            {
+        //                sb.Append("\""); sb.Append("캘로스 등장 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+        //            }
+        //            if ((bossId == 4001) && (status == 2))
+        //            {
+        //                sb.Append("\""); sb.Append("캘로스 퇴치 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+        //            }
+        //            if ((bossId == 5001) && (status == 1))
+        //            {
+        //                sb.Append("\""); sb.Append("오르탄 등장 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+        //            }
+        //            if ((bossId == 5001) && (status == 2))
+        //            {
+        //                sb.Append("\""); sb.Append("오르탄 퇴치 " + DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+        //            }
+
+
+        //            if (testMessage) sb.Append(" (Test message)");
+        //            sb.Append("\"");
+        //            sb.Append(",");
+        //            sb.Append("\""); sb.Append("username"); sb.Append("\"");
+        //            sb.Append(":");
+        //            sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
+        //            sb.Append(",");
+        //            sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
+        //            sb.Append(":");
+        //            sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
+        //            sb.Append("}");
+
+        //            try
+        //            {
+        //                if (!testMessage)
+        //                {
+        //                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+        //                    using (var client = new WebClient())
+        //                    {
+        //                        client.Encoding = Encoding.UTF8;
+        //                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+        //                        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+
+        //                        var Webhook = "";
+        //                        Webhook = "https://discordapp.com/api/webhooks/527967085490339850/n0vLSOYWZJM4soIixVHw9gQgtNKtRSU7K-PtPrjcN9squDEbTUunrggFk_fVCQK-u2im";
+        //                        Log.F("FieldBoss.log", $"\n[{nameof(ExecuteFieldBossWebhook)}] {Webhook}");
+        //                        client.UploadString(Webhook, "POST", sb.ToString());
+        //                    }
+        //                }
+        //            }
+        //            catch (Exception)
+        //            {
+        //                WindowManager.FloatingButton.NotifyExtended("FieldBoss", "Failed to execute Discord webhook.", NotificationType.Error);
+        //                ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
+        //            }
+        //        }
+        //    }
+        //}
+        //=============================================================================================
+        public void ExecuteFieldBossSpawnWebhook(string monsterName, string regionName, string defaultMessage, bool testMessage = false)
         {
-            if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
-            {
-                var msg = SettingsHolder.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
-                    ? SettingsHolder.WebhookMessage.Replace("{npc_name}", bamName)
-                    : SettingsHolder.WebhookMessage;
-                var sb = new StringBuilder("{");
-                sb.Append("\""); sb.Append("content"); sb.Append("\"");
-                sb.Append(":");
-                sb.Append("\""); sb.Append(msg); sb.Append("\"");
-                sb.Append(",");
-                sb.Append("\""); sb.Append("username"); sb.Append("\"");
-                sb.Append(":");
-                sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
-                sb.Append(",");
-                sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
-                sb.Append(":");
-                sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
-                sb.Append("}");
+            var content = SettingsHolder.WebhookMessageFieldBossSpawn;
+            if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
+            if (content.Contains("{regionName}")) content = content.Replace("{regionName}", regionName);
+            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
 
-                try
-                {
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                    using (var client = new WebClient())
-                    {
-                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
-                        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                        client.UploadString(SettingsHolder.Webhook, "POST", sb.ToString());
-                    }
-                }
-                catch (Exception)
-                {
-                    WindowManager.FloatingButton.NotifyExtended("Guild BAM", "Failed to execute Discord webhook.", NotificationType.Error);
-                    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
-                }
-            }
+            if (content == "") content = defaultMessage;
+            SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
+        }
+        public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, string userName, string guildName ,bool testMessage = false)
+        {
+            var content = SettingsHolder.WebhookMessageFieldBossDie;
+            if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
+            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+            if (content.Contains("{userName}")) content = content.Replace("{userName}", userName);
+            if (content.Contains("{guildName}")) content = content.Replace("{guildName}", guildName);
+            if (content == "") content = defaultMessage;
+            SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
         }
 
+        private static void SendWebhook(string content, string url, bool test = false)
+        {
+            Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}");
+            //var msg = new JObject
+            //{
+            //    {"content", $"{content}{(test ? " (test message)" : "")}"},
+            //    {"username", "TCC" },
+            //    {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
+            //};
+
+            //try
+            //{
+            //    using (var client = Utils.GetDefaultWebClient())
+            //    {
+            //        client.Encoding = Encoding.UTF8;
+            //        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            //        client.UploadString(url, "POST", msg.ToString());
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to execute Discord webhook.", NotificationType.Error);
+            //    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
+            //}
+        }
     }
 }

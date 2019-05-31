@@ -8,9 +8,9 @@
                  xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:converters="clr-namespace:TCC.Converters"
-                 xmlns:tcc="clr-namespace:TCC"
+                 xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
                  mc:Ignorable="d"
-                 Title="TCC Dungeon edit" Height="550" Width="620"
+                 Title="TCC Dungeon edit" Height="550" Width="810"
                  WindowStyle="None"
                  ResizeMode="NoResize"
                  WindowStartupLocation="CenterOwner"
@@ -75,7 +75,9 @@
                         <ColumnDefinition Width="210" />
                         <ColumnDefinition Width="80" />
                         <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="90" />
                         <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Name"
@@ -98,11 +100,25 @@
                                Grid.Column="3" 
                                Margin="7 4"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="Double elite entries"
+                    <TextBlock Text="Base entries"
                                FontSize="11"
                                TextWrapping="Wrap"
                                Foreground="#5fff"
                                Grid.Column="4" 
+                               Margin="3 4"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="Double elite entries"
+                               FontSize="11"
+                               TextWrapping="Wrap"
+                               Foreground="#5fff"
+                               Grid.Column="5" 
+                               Margin="3 4"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="Reset frequency"
+                               FontSize="11"
+                               TextWrapping="Wrap"
+                               Foreground="#5fff"
+                               Grid.Column="6" 
                                Margin="3 4"
                                VerticalAlignment="Center"/>
                 </Grid>
@@ -130,7 +146,9 @@
                                     <ColumnDefinition Width="210"/>
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Ellipse HorizontalAlignment="Stretch"
@@ -198,13 +216,33 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <CheckBox Grid.Column="4"
+                                <TextBox Grid.Column="4"
+                                         Text="{Binding Dungeon.MaxBaseRuns, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Background="#0fff"
+                                         MinWidth="10"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         BorderThickness="0 0 0 1"
+                                         BorderBrush="#3fff"
+                                         Foreground="#8fff"
+                                         CaretBrush="White" />
+                                <CheckBox Grid.Column="5"
                                           Margin="10 0"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           IsChecked="{Binding Dungeon.DoublesOnElite, Mode=TwoWay}" />
-                                <Button Grid.Column="5" HorizontalAlignment="Right"
+                                <ComboBox Grid.Column="6"
+                                          ItemsSource="{Binding ResetModes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DungeonEditWindow}}"
+                                          SelectedItem="{Binding Dungeon.ResetMode, Mode=TwoWay}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          HorizontalContentAlignment="Right"
+                                          ItemTemplate="{StaticResource EnumDescrDataTemplate}">
+                                </ComboBox>
+
+                                <Button Grid.Column="7" HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
+                                        Margin="5 0 0 0"
                                         Style="{StaticResource ButtonContentOpacityStyle}"
                                         Click="RemoveDungeon">
                                     <Path Data="{StaticResource SvgClose}" Fill="{StaticResource HpBrush}"/>
@@ -245,8 +283,7 @@
                 </dragablz:DragablzItemsControl>
             </Grid>
         </Border>
-        <Grid  Grid.Row="2" >
-
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
@@ -255,7 +292,7 @@
             <Button Style="{StaticResource ButtonMainStyle}" 
                 HorizontalAlignment="Center" 
                 Background="{StaticResource DefensiveStanceBrush}" 
-                tcc:ButtonExtensions.CornerRadius="14"
+                extensions:ButtonExtensions.CornerRadius="14"
                 Effect="{StaticResource DropShadow}"
                 VerticalContentAlignment="Center" 
                 Height="28" 

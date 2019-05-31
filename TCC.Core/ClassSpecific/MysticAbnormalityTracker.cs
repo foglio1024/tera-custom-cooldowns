@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
+
 using TCC.Data;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
+using TeraDataLite;
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {
@@ -21,38 +24,38 @@ namespace TCC.ClassSpecific
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
-            if (msg.AbnormalityId != HurricaneId || !msg.CasterId.IsMe()) return;
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
+            if (msg.AbnormalityId != HurricaneId || !SessionManager.IsMe(msg.CasterId)) return;
+            SessionManager.DB.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
             SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             CheckVoc(p);
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = true;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = true;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = true;
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Start(p.Duration);
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Start(p.Duration);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = true;
             }
 
         }
@@ -60,62 +63,62 @@ namespace TCC.ClassSpecific
         {
             CheckVoc(p);
 
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = true;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = true;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = true;
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = true;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = true;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             CheckVoc(p);
 
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritAura = false;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = false;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.ManaAura = false;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = false;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.CritResAura = false;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = false;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Auras.SwiftAura = false;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = false;
             }
             else if (p.AbnormalityId == VowId )
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Vow.Buff.Refresh(0, CooldownMode.Normal);
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Refresh(0, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                ((MysticBarManager)WindowManager.ClassWindow.VM.CurrentManager).Elementalize = false;
+                TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = false;
             }
         }
 
@@ -130,7 +133,7 @@ namespace TCC.ClassSpecific
         private static void CheckVoc(S_ABNORMALITY_BEGIN p)
         {
             if (VocId != p.AbnormalityId) return;
-            var target = WindowManager.BossWindow.VM.NpcList.FirstOrDefault(x => x.EntityId == p.TargetId);
+            var target = WindowManager.BossWindow.VM.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
             if (target != null)
             {
                 if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
@@ -140,7 +143,7 @@ namespace TCC.ClassSpecific
         private static void CheckVoc(S_ABNORMALITY_REFRESH p)
         {
             if (VocId != p.AbnormalityId) return;
-            var target = WindowManager.BossWindow.VM.NpcList.FirstOrDefault(x => x.EntityId == p.TargetId);
+            var target = WindowManager.BossWindow.VM.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
             if (target != null)
             {
                 if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);

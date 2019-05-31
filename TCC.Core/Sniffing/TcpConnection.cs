@@ -101,7 +101,7 @@ namespace TCC.Sniffing
                 //BasicTeraData.LogError(debug + "\r\nNew Queue length:" + _bufferedPackets.Count+"\r\nSkipping bytes:"+needToSkip, false, true);
             }
             long firstBufferedPosition;
-            while (_bufferedPackets.Any() && ((firstBufferedPosition = _bufferedPackets.Keys.First()) <= BytesReceived))
+            while (_bufferedPackets.Any() && (firstBufferedPosition = _bufferedPackets.Keys.First()) <= BytesReceived)
             {
                 var dataArray = _bufferedPackets[firstBufferedPosition];
                 _bufferedPackets.Remove(firstBufferedPosition);

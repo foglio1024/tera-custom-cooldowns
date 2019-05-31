@@ -3,15 +3,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Data.Pc;
-using TCC.Parsing.Messages;
 using TCC.Settings;
+using FoglioUtils.Extensions;
 using TCC.Windows.Widgets;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -20,7 +19,7 @@ namespace TCC.ViewModels
         private static ChatWindowManager _instance;
         public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
 
-        private readonly ConcurrentQueue<ChatMessage> _queue;
+        private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
         private readonly object _lock = new object();
@@ -28,12 +27,12 @@ namespace TCC.ViewModels
         public event Action<ChatMessage> NewMessage;
         public event Action<int> PrivateChannelJoined;
 
-        public List<SimpleUser> Friends { get; set; }
+        public List<FriendData> Friends { get; set; }
         public List<string> BlockedUsers { get; set; }
         public LFG LastClickedLfg { get; set; }
 
         public int MessageCount => ChatMessages.Count;
-        public bool IsQueueEmpty => _queue.Count == 0;
+        public bool IsQueueEmpty => _pauseQueue.Count == 0;
         public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; private set; }
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
         public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
@@ -42,11 +41,11 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
-            _queue = new ConcurrentQueue<ChatMessage>();
+            _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
 
             BlockedUsers = new List<string>();
-            Friends = new List<SimpleUser>();
+            Friends = new List<FriendData>();
             ChatWindows = new SynchronizedObservableCollection<ChatWindow>(Dispatcher);
             ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
             LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
@@ -56,40 +55,34 @@ namespace TCC.ViewModels
 
             ChatWindows.CollectionChanged += OnChatWindowsCollectionChanged;
             PrivateChannelJoined += OnPrivateChannelJoined;
+
+
         }
 
 
         public void InitWindows()
         {
-            //Dispatcher.BeginInvoke(new Action(() =>
-            //{
             ChatWindows.Clear();
             SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
                 var m = new ChatViewModel();
-                    //App.ChatDispatcher.BeginInvoke(new Action(() =>
-                    //{
-                    var w = new ChatWindow(s, m);
+                var w = new ChatWindow(s, m);
                 ChatWindows.Add(w);
-                    //}), DispatcherPriority.DataBind);
-                    m.LoadTabs(s.Tabs);
+                m.LoadTabs(s.Tabs);
             });
-            if (ChatWindows.Count == 0)
+
+            if (ChatWindows.Count != 0) return;
             {
                 Log.CW("No chat windows found, initializing default one.");
                 var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
                 var m = new ChatViewModel();
-                //App.ChatDispatcher.BeginInvoke(new Action(() =>
-                //{
                 var w = new ChatWindow(ws, m);
                 SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 ChatWindows.Add(w);
                 m.LoadTabs();
                 if (SettingsHolder.ChatEnabled) w.Show();
-                //}), DispatcherPriority.DataBind);
             }
-            //}), DispatcherPriority.Normal);
         }
         public void CloseAllWindows()
         {
@@ -122,48 +115,67 @@ namespace TCC.ViewModels
             //TODO?
         }
 
+        private bool Filtered(ChatMessage message)
+        {
+            if (!SettingsHolder.ChatEnabled)
+            {
+                message.Dispose();
+                return true;
+            }
+            if (BlockedUsers.Contains(message.Author) && !(message is LfgMessage))
+            {
+                message.Dispose();
+                return true;
+            }
+
+            var pausedCount = _pauseQueue.Count;
+            for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+            {
+                if (i >= pausedCount + ChatMessages.Count) continue;
+                if (Pass(message, i <= pausedCount - 1
+                                                 ? _pauseQueue.ElementAt(i)
+                                                 : ChatMessages[i - pausedCount])) continue;
+                message.Dispose();
+                return true;
+            }
+            //if (ChatMessages.Count < SettingsHolder.SpamThreshold)
+            //{
+            //    for (var i = 0; i < ChatMessages.Count - 1; i++)
+            //    {
+            //        var m = ChatMessages[i];
+            //        if (Pass(message, m)) continue;
+            //        message.Dispose();
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+            //    {
+            //        if (i > ChatMessages.Count - 1) continue;
+            //        var m = ChatMessages[i];
+            //        if (Pass(message, m)) continue;
+            //        message.Dispose();
+            //        return false;
+            //    }
+            //}
+            return false;
+        }
+        public void AddSystemMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+        }
+        public void AddSystemMessage(string srvMsg, SystemMessage sysMsg, ChatChannel channelOverride)
+        {
+            AddChatMessage(new ChatMessage(srvMsg, sysMsg, channelOverride));
+        }
         public void AddChatMessage(ChatMessage chatMessage)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SettingsHolder.ChatEnabled)
-                {
-                    chatMessage.Dispose();
-                    return;
-                }
+                if (Filtered(chatMessage)) return;
 
-                if (BlockedUsers.Contains(chatMessage.Author))
-                {
-                    chatMessage.Dispose();
-                    return;
-                }
-                if (ChatMessages.Count < SettingsHolder.SpamThreshold)
-                {
-                    for (var i = 0; i < ChatMessages.Count - 1; i++)
-                    {
-                        var m = ChatMessages[i];
-                        if (!Pass(chatMessage, m))
-                        {
-                            chatMessage.Dispose();
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
-                    {
-                        if (i > ChatMessages.Count - 1) continue;
-
-                        var m = ChatMessages[i];
-                        if (!Pass(chatMessage, m))
-                        {
-                            chatMessage.Dispose();
-
-                            return;
-                        }
-                    }
-                }
+                if (chatMessage is LfgMessage lm && !SettingsHolder.DisableLfgChatMessages) lm.LinkLfg();
 
                 chatMessage.SplitSimplePieces();
 
@@ -171,7 +183,10 @@ namespace TCC.ViewModels
                 {
                     ChatMessages.Insert(0, chatMessage);
                 }
-                else _queue.Enqueue(chatMessage);
+                else
+                {
+                    _pauseQueue.Enqueue(chatMessage);
+                }
 
                 NewMessage?.Invoke(chatMessage);
                 if (ChatMessages.Count > SettingsHolder.MaxMessages)
@@ -185,13 +200,12 @@ namespace TCC.ViewModels
         }
         public void AddTccMessage(string message)
         {
-            var msg = new ChatMessage(ChatChannel.TCC, "System", "<FONT>" + message + "</FONT>");
+            var msg = new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{message}</FONT>");
             AddChatMessage(msg);
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!target.IsMe() || diff > 0 || target == source || source == 0 ||
-                !EntityManager.IsEntitySpawned(source)) return;
+            if (!SessionManager.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
             var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
@@ -201,10 +215,10 @@ namespace TCC.ViewModels
         }
         public void AddFromQueue(int itemsToAdd)
         {
-            if (itemsToAdd == 0) itemsToAdd = _queue.Count;
+            if (itemsToAdd == 0) itemsToAdd = _pauseQueue.Count;
             for (var i = 0; i < itemsToAdd; i++)
             {
-                if (_queue.TryDequeue(out var msg))
+                if (_pauseQueue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
                     if (ChatMessages.Count > SettingsHolder.MaxMessages)
@@ -217,14 +231,20 @@ namespace TCC.ViewModels
 
         private static bool Pass(ChatMessage current, ChatMessage old)
         {
-            if (current.Author == SessionManager.CurrentPlayer.Name ||
-                old.Author == SessionManager.CurrentPlayer.Name) return true;
+            if (current.Author == "System") return true;
+            if (current.Author == SessionManager.CurrentPlayer.Name) return true;
             if (old.RawMessage != current.RawMessage) return true;
 
             if (old.Author != current.Author) return true;
             switch (current.Channel)
             {
+                case ChatChannel.Exp:
                 case ChatChannel.Group:
+                case ChatChannel.Party:
+                case ChatChannel.PartyNotice:
+                case ChatChannel.Raid:
+                case ChatChannel.RaidLeader:
+                case ChatChannel.RaidNotice:
                 case ChatChannel.GroupAlerts:
                 case ChatChannel.Money:
                 case ChatChannel.Loot:
@@ -288,16 +308,16 @@ namespace TCC.ViewModels
             }
         }
 
-        public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
+        public void AddOrRefreshLfg(ListingData x)
         {
-            if (TryGetLfg(x.Id, x.Message, x.Name, out var lfg))
+            if (TryGetLfg(x.LeaderId, x.Message, x.LeaderName, out var lfg))
             {
                 lfg.Message = x.Message;
                 lfg.Refresh();
             }
             else
             {
-                LFGs.Add(new LFG(x.Id, x.Name, x.Message, x.Raid));
+                LFGs.Add(new LFG(x.LeaderId, x.LeaderName, x.Message, x.IsRaid));
             }
         }
         public void RemoveLfg(LFG lfg)
@@ -322,11 +342,11 @@ namespace TCC.ViewModels
             lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Message == msg);
             return lfg != null;
         }
-        public void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
+        public void UpdateLfgMembers(uint id, int count)
         {
-            if (TryGetLfg(p.Id, "", "", out var lfg))
+            if (TryGetLfg(id, "", "", out var lfg))
             {
-                lfg.MembersCount = p.Members.Count;
+                lfg.MembersCount = count;
             }
         }
 
@@ -338,5 +358,21 @@ namespace TCC.ViewModels
             }
         }
 
+        public void ScrollToMessage(Tab tab, ChatMessage msg)
+        {
+            var win = ChatWindows.FirstOrDefault(x => x.VM.Tabs.Contains(tab));
+            if (win == null) return;
+
+            win.ScrollToMessage(tab, msg);
+        }
+
+        public void ToggleForcedClickThru()
+        {
+            SettingsHolder.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
+            if (SettingsHolder.ChatWindowsSettings.Count == 0) return;
+            var msg = $"Forcing chat clickable turned {(SettingsHolder.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
+            WindowManager.FloatingButton.NotifyExtended("TCC", msg, NotificationType.Normal, 2000);
+            AddTccMessage(msg);
+        }
     }
 }

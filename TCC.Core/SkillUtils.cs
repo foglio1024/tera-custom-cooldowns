@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC
 {
@@ -28,7 +29,7 @@ namespace TCC
                 {
                     case CooldownType.Skill:
                         {
-                            if (SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkill(skillId, c, out var sk))
+                            if (SessionManager.DB.SkillsDatabase.TryGetSkill(skillId, c, out var sk))
                             {
                                 switch (row)
                                 {
@@ -47,7 +48,7 @@ namespace TCC
                         }
                     case CooldownType.Item:
                         {
-                            if (SessionManager.CurrentDatabase.ItemsDatabase.TryGetItemSkill(skillId, out var sk))
+                            if (SessionManager.DB.ItemsDatabase.TryGetItemSkill(skillId, out var sk))
                             {
                                 switch (row)
                                 {
@@ -66,7 +67,7 @@ namespace TCC
                         }
                     case CooldownType.Passive:
                         {
-                            if (SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(skillId, out var ab))
+                            if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(skillId, out var ab))
                             {
                                 var sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName };
                                 //PassivityDatabase.Passivities.Add(ab.Id);

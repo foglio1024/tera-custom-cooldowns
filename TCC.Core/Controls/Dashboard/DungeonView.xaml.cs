@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using FoglioUtils;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Pc;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -14,18 +15,18 @@ namespace TCC.Controls.Dashboard
     /// <summary>
     /// Logica di interazione per DungeonView.xaml
     /// </summary>
-    public partial class DungeonView : UserControl
+    public partial class DungeonView
     {
         public DungeonView()
         {
             InitializeComponent();
-            IsVisibleChanged += (_, __) => { (DataContext as DashboardViewModel).LoadDungeonsCommand.Execute(null); };
+            IsVisibleChanged += (_, __) => { (DataContext as DashboardViewModel)?.LoadDungeonsCommand.Execute(null); };
         }
 
         private void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            var headerSw = Utils.GetChild<ScrollViewer>(DungeonHeaders);
-            var namesSw = Utils.GetChild<ScrollViewer>(CharacterNames);
+            var headerSw = DungeonHeaders.GetChild<ScrollViewer>();
+            var namesSw = CharacterNames.GetChild<ScrollViewer>();
 
             headerSw.ScrollToHorizontalOffset(e.HorizontalOffset);
             namesSw.ScrollToVerticalOffset(e.VerticalOffset);
@@ -33,10 +34,10 @@ namespace TCC.Controls.Dashboard
         }
         private void OnEntryMouseEnter(object sender, MouseEventArgs e)
         {
-            var cd = (sender as FrameworkElement)?.DataContext as DungeonCooldownViewModel;
-
+            if (!((sender as FrameworkElement)?.DataContext is DungeonCooldownViewModel cd)) return;
             var chara = cd.Owner;
-            var dung = cd.Cooldown.Dungeon;
+            var dung = cd.Cooldown?.Dungeon;
+            if (dung == null) return;
 
             var dng = WindowManager.Dashboard.VM.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
             if (dng != null) dng.Hilight = true;
@@ -47,11 +48,13 @@ namespace TCC.Controls.Dashboard
         private void OnEntryMouseLeave(object sender, MouseEventArgs e)
         {
             var cd = (sender as FrameworkElement)?.DataContext as DungeonCooldownViewModel;
-            var chara = cd.Owner;
-            var dung = cd.Cooldown.Dungeon;
-            WindowManager.Dashboard.VM.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id).Hilight = false;
-            WindowManager.Dashboard.VM.CharacterViewModels.ToList().FirstOrDefault(x => x.Character.Id == chara.Id).Hilight = false;
-
+            var chara = cd?.Owner;
+            var dung = cd?.Cooldown?.Dungeon;
+            if (dung == null) return;
+            var col = WindowManager.Dashboard.VM.Columns.FirstOrDefault(x => dung != null && x.Dungeon.Id == dung.Id);
+            if (col != null) col.Hilight = false;
+            var chVM = WindowManager.Dashboard.VM.CharacterViewModels.ToList().FirstOrDefault(x => chara != null && x.Character.Id == chara.Id);
+            if (chVM != null) chVM.Hilight = false;
         }
         private void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
         {
@@ -81,9 +84,9 @@ namespace TCC.Controls.Dashboard
         public DungeonColumnViewModel()
         {
             DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
-            DungeonsListView = Utils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
+            DungeonsListView = CollectionViewUtils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
                 new[] { "Owner.Hidden" },
-                new SortDescription[]
+                new[]
                 {
                     new SortDescription("Owner.Position", ListSortDirection.Ascending)
                 }

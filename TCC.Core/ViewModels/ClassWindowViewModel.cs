@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using TCC.Data;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -29,43 +29,43 @@ namespace TCC.ViewModels
                     switch (_currentClass)
                     {
                         case Class.Warrior:
-                            CurrentManager = new WarriorBarManager();
+                            CurrentManager = new WarriorLayoutVM();
                             break;
                         case Class.Valkyrie:
-                            CurrentManager = new ValkyrieBarManager();
+                            CurrentManager = new ValkyrieLayoutVM();
                             break;
                         case Class.Archer:
-                            CurrentManager = new ArcherBarManager();
+                            CurrentManager = new ArcherLayoutVM();
                             break;
                         case Class.Lancer:
-                            CurrentManager = new LancerBarManager();
+                            CurrentManager = new LancerLayoutVM();
                             break;
                         case Class.Priest:
-                            CurrentManager = new PriestBarManager();
+                            CurrentManager = new PriestLayoutVM();
                             break;
                         case Class.Mystic:
-                            CurrentManager = new MysticBarManager();
+                            CurrentManager = new MysticLayoutVM();
                             break;
                         case Class.Slayer:
-                            CurrentManager = new SlayerBarManager();
+                            CurrentManager = new SlayerLayoutVM();
                             break;
                         case Class.Berserker:
-                            CurrentManager = new BerserkerBarManager();
+                            CurrentManager = new BerserkerLayoutVM();
                             break;
                         case Class.Sorcerer:
-                            CurrentManager = new SorcererBarManager();
+                            CurrentManager = new SorcererLayoutVM();
                             break;
                         case Class.Reaper:
-                            CurrentManager = new ReaperBarManager();
+                            CurrentManager = new ReaperLayoutVM();
                             break;
                         case Class.Gunner:
-                            CurrentManager = new GunnerBarManager();
+                            CurrentManager = new GunnerLayoutVM();
                             break;
                         case Class.Brawler:
-                            CurrentManager = new BrawlerBarManager();
+                            CurrentManager = new BrawlerLayoutVM();
                             break;
                         case Class.Ninja:
-                            CurrentManager = new NinjaBarManager();
+                            CurrentManager = new NinjaLayoutVM();
                             break;
                         default:
                             CurrentManager = new NullClassManager();
@@ -76,8 +76,8 @@ namespace TCC.ViewModels
             }
         }
 
-        private ClassManager _currentManager = new NullClassManager();
-        public ClassManager CurrentManager
+        private BaseClassLayoutVM _currentManager = new NullClassManager();
+        public BaseClassLayoutVM CurrentManager
         {
             get => _currentManager;
             set

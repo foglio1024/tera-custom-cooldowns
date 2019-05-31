@@ -36,6 +36,10 @@
     <SolidColorBrush x:Key="RevampDarkerBackground70Brush"  Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".7"  />
     <SolidColorBrush x:Key="RevampBorderBrush"              Color="{StaticResource RevampBorderColor}"                         />
 
+    <SolidColorBrush x:Key="TeraRestylePanelBrush"          Color="{StaticResource TeraRestylePanelColor}"                     />
+    <SolidColorBrush x:Key="TeraRestyleBorderBrush"         Color="{StaticResource TeraRestyleBorderColor}"                    />
+    <SolidColorBrush x:Key="TeraRestyleBorderBrushLight"    Color="{StaticResource TeraRestyleBorderColorLight}"               />
+
     <SolidColorBrush x:Key="SelectionBackgroundBrush"       Color="White"                                        Opacity=".04" />
     <SolidColorBrush x:Key="SelectionBackgroundLightBrush"  Color="White"                                        Opacity=".08" />
     <SolidColorBrush x:Key="SelectionBorderBrush"           Color="Transparent"                                                />
@@ -83,6 +87,11 @@
     <SolidColorBrush x:Key="RunemarkBrush"                  Color="{StaticResource RunemarkColor}"                             />
     <SolidColorBrush x:Key="MaxRunemarkBrush"               Color="{StaticResource MaxRunemarkColor}"                          />
                                                                                                                                
+    <SolidColorBrush x:Key="ItemCommonBrush"                Color="{StaticResource ItemCommonColor}"                           />
+    <SolidColorBrush x:Key="ItemUncommonBrush"              Color="{StaticResource ItemUncommonColor}"                         />
+    <SolidColorBrush x:Key="ItemRareBrush"                  Color="{StaticResource ItemRareColor}"                             />
+    <SolidColorBrush x:Key="ItemSuperiorBrush"              Color="{StaticResource ItemSuperiorColor}"                         />
+
     <SolidColorBrush x:Key="ChatSayBrush"                   Color="{StaticResource ChatSayColor}"                              />
     <SolidColorBrush x:Key="ChatPartyBrush"                 Color="{StaticResource ChatPartyColor}"                            />
     <SolidColorBrush x:Key="ChatGuildBrush"                 Color="{StaticResource ChatGuildColor}"                            />

@@ -28,7 +28,7 @@ namespace TCC.ViewModels
             }
             catch (System.Exception e)
             {
-                Log.F($"Error while removing empty chat window: {e.ToString()} ");
+                Log.F($"Error while removing empty chat window: {e} ");
             }
             return TabEmptiedResponse.DoNothing;
         }

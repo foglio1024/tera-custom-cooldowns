@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -126,8 +127,7 @@ namespace TCC.Controls.Chat
         private void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
-            if (!(sender is TextBox s) ||
-                (string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author..."))) return;
+            if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author...")) return;
             if (_dc.ExcludedAuthors.Contains(s.Text)) return;
             _dc.ExcludedAuthors.Add(s.Text);
             _dc.ApplyFilter();
@@ -137,6 +137,14 @@ namespace TCC.Controls.Chat
         {
             if ((sender as TextBox)?.Text != "New author...") return;
             ((TextBox) sender).Text = "";
+        }
+
+        private void DeleteTab(object sender, RoutedEventArgs e)
+        {
+            var win = ChatWindowManager.Instance.ChatWindows.FirstOrDefault(w => w.VM.Tabs.Contains(_dc));
+            win?.VM.RemoveTab(_dc);
+            win?.UpdateSettings();
+            Window.GetWindow(this)?.Close();
         }
     }
 }

@@ -21,12 +21,12 @@ namespace TCC.Windows
     {
 
         public IntPtr Handle { get; private set; }
-        private CooldownWindowViewModel _vm { get;  }
+        private CooldownWindowViewModel VM { get;  }
         public SkillConfigWindow()
         {
             InitializeComponent();
             DataContext = WindowManager.CooldownWindow.VM;
-            _vm = DataContext as CooldownWindowViewModel;
+            VM = DataContext as CooldownWindowViewModel;
 
             Closing += OnClosing;
             Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
@@ -68,7 +68,7 @@ namespace TCC.Windows
                 if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, an);
-            _vm.Save();
+            VM.Save();
         }
 
         internal void ShowWindow()
@@ -96,27 +96,27 @@ namespace TCC.Windows
 
         private void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = ((ICollectionView)_vm.SkillsView);
+            var view = (ICollectionView)VM.SkillsView;
             view.Filter = o =>  ((Skill)o).ShortName.IndexOf(((TextBox) sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
 
         private void ItemSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = (ICollectionView)_vm.ItemsView;
+            var view = (ICollectionView)VM.ItemsView;
             view.Filter = o => ((Item)o).Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
         private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = (ICollectionView)_vm.AbnormalitiesView;
+            var view = (ICollectionView)VM.AbnormalitiesView;
             view.Filter = o => ((Abnormality)o).Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
 
         private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
         {
-            _vm.RemoveHiddenSkill(((Button) sender).DataContext as Cooldown);
+            VM.RemoveHiddenSkill(((Button) sender).DataContext as Cooldown);
         }
     }
 }

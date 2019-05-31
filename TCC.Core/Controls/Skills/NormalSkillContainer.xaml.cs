@@ -1,4 +1,5 @@
-﻿using TCC.ViewModels;
+﻿using FoglioUtils.Extensions;
+using TCC.ViewModels;
 
 namespace TCC.Controls.Skills
 {

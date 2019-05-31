@@ -1,16 +1,14 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Controls;
-using TCC.Controls.Dashboard;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
@@ -38,6 +36,31 @@ namespace TCC.Data.Pc
         private long _lastOnline;
         private string _serverName = "";
         private bool _hidden;
+
+        private uint _coins;
+        public uint Coins
+        {
+            get { return _coins; }
+            set
+            {
+                if (_coins == value) return;
+                _coins = value;
+                N();
+            }
+        }
+        private uint _maxCoins;
+        public uint MaxCoins
+        {
+            get { return _maxCoins; }
+            set
+            {
+                if (_maxCoins == value) return;
+                _maxCoins = value;
+                N();
+
+            }
+        }
+
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -95,6 +118,7 @@ namespace TCC.Data.Pc
             Dungeons.ToSyncList().ForEach(dung =>
             {
                 if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
+                else dung.Reset();
             });
         }
         public void SetDungeonClears(uint dgId, int runs)
@@ -331,11 +355,11 @@ namespace TCC.Data.Pc
             VanguardWeekliesDone = 0;
             Laurel = Laurel.None;
             MaxGuardianQuests = SessionManager.MaxGuardianQuests;
-            foreach (var dg in SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values)
+            foreach (var dg in SessionManager.DB.DungeonDatabase.Dungeons.Values)
             {
-                Dungeons.Add(new DungeonCooldown(dg, Dispatcher));
+                Dungeons.Add(new DungeonCooldown(dg, Dispatcher, this));
             }
-            VisibleDungeonsView = Utils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
+            VisibleDungeonsView = CollectionViewUtils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
                 new[]
                     {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
             Jewels = new CollectionViewSource() { Source = Gear }.View;
@@ -349,6 +373,19 @@ namespace TCC.Data.Pc
             Class = c;
             Id = id;
             Position = pos;
+        }
+
+        public Character(CharacterData item) : this()
+        {
+            Id = item.Id;
+            Class = item.CharClass;
+            Level = item.Level;
+            LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
+            LastOnline = item.LastOnline;
+            Laurel = item.Laurel;
+            Position = item.Position;
+            Name = item.Name;
+            GuildName = item.GuildName;
         }
 
         public int CompareTo(object obj)
@@ -386,6 +423,18 @@ namespace TCC.Data.Pc
         }
 
         public RelayCommand UnhideCommand { get; }
+
+        public void ResetWeeklyDungeons()
+        {
+            Dungeons.Where(d => d.Dungeon.ResetMode == ResetMode.Weekly).ToList().ForEach(dg => dg.Reset());
+        }
+
+        public void ResetDailyData()
+        {
+            VanguardDailiesDone = 0;
+            ClaimedGuardianQuests = 0;
+            Dungeons.Where(d => d.Dungeon.ResetMode == ResetMode.Daily).ToList().ForEach(dg => dg.Reset());
+        }
     }
 
     public class InventoryItem : TSPropertyChanged
@@ -393,9 +442,9 @@ namespace TCC.Data.Pc
         private int _amount;
         private readonly uint _id;
 
-        public Item Item => SessionManager.CurrentDatabase.ItemsDatabase.Items.TryGetValue(_id, out var item)
+        public Item Item => SessionManager.DB.ItemsDatabase.Items.TryGetValue(_id, out var item)
                             ? item
-                            : new Item(0, "", 0, 0, 0, "");
+                            : new Item(0, "", RareGrade.Common, 0, 0, "");
         public uint Slot { get; }
         public int Amount
         {

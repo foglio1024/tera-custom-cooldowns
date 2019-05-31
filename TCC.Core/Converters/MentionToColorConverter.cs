@@ -19,8 +19,8 @@ namespace TCC.Converters
                 : Colors.Black; //TODO: use trigger
             if (parameter is string par)
             {
-                color = par.IndexOf("color") != -1;
-                transparent = par.IndexOf("transparent") != -1;
+                color = par.IndexOf("color", StringComparison.Ordinal) != -1;
+                transparent = par.IndexOf("transparent", StringComparison.Ordinal) != -1;
             }
             if (transparent) col.A = 0;
 

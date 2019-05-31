@@ -22,6 +22,7 @@
                                     PointOfInterestTemplate="{StaticResource SimpleTemplate}"
                                     ItemTemplate="{StaticResource SimpleTemplate}"
                                     EmojiTemplate="{StaticResource EmojiTemplate}"
+                                    IconTemplate="{StaticResource IconTemplate}"
                                     />
     <ts:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
                                     NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
@@ -41,6 +42,7 @@
                                     BrokerBody="{StaticResource BrokerOfferBody}"
                                     DefaultBody="{StaticResource DefaultBody}" 
                                     ApplyBody="{StaticResource ApplyBody}"
+                                    LfgBody="{StaticResource LfgBody}"
                                     />
     <ts:AbnormalityTemplateSelector x:Key="RaidAbnormalityTemplateSelector"
                                     RoundTemplate="{StaticResource  RoundRaidAbnormality}"
@@ -52,5 +54,9 @@
     <ts:SkillTemplateSelector x:Key="FixedSkillTemplateSelector"
                                     RoundTemplate="{StaticResource RoundFixedSkill}"
                                     SquareTemplate="{StaticResource SquareFixedSkill}"/>
+    <ts:GroupWindowTemplateSelector x:Key="GroupWindowTemplateSelector"
+                                    SingleColumn="{StaticResource SingleColumnGroupLayout}"
+                                    RoleColumns="{StaticResource RoleColumnsGroupLayout}"/>
+
 
 </ResourceDictionary>

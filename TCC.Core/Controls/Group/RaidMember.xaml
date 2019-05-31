@@ -41,6 +41,7 @@
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
                     <Style>
+                        <!-- ReSharper disable once Xaml.RedundantPropertyTypeQualifier -->
                         <Setter Property="ContentControl.Margin" Value="-6 6 0 -6" />
                     </Style>
                 </Setter.Value>
@@ -303,7 +304,7 @@
 
             <Image  Opacity="1" x:Name="LaurelImage" 
                     Margin="-3" 
-                    Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr}" 
+                    Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr_half}" 
                     RenderOptions.BitmapScalingMode="Linear" 
                     UseLayoutRounding="True" 
                     HorizontalAlignment="Center" 

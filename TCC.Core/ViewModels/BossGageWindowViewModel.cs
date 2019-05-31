@@ -1,10 +1,9 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -12,6 +11,7 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.NPCs;
 using TCC.Parsing;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -27,8 +27,6 @@ namespace TCC.ViewModels
 
         private NPC _selectedDragon;
         private NPC _vergos;
-
-        private readonly DispatcherTimer _flushTimer;
 
         private readonly List<NPC> _holdedDragons = new List<NPC>();
         private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
@@ -57,7 +55,7 @@ namespace TCC.ViewModels
             {
                 if (_currentHHphase == value) return;
                 _currentHHphase = value;
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 N(nameof(CurrentHHphase));
             }
         }
@@ -72,7 +70,10 @@ namespace TCC.ViewModels
         {
             get
             {
-                _bams = Utils.InitLiveView(p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new string[] { nameof(NPC.Visible) },
+                _bams = CollectionViewUtils.InitLiveView(
+                    p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible,
+                    NpcList, 
+                    new[] { nameof(NPC.Visible) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _bams;
             }
@@ -81,7 +82,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _mobs = Utils.InitLiveView(p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new string[] { nameof(NPC.Visible) },
+                _mobs = CollectionViewUtils.InitLiveView(p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible, NpcList, new[] { nameof(NPC.Visible) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _mobs;
             }
@@ -90,7 +91,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                _guildTowers = Utils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
+                _guildTowers = CollectionViewUtils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;
             }
@@ -134,9 +135,9 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
             NpcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
             _cache = new Dictionary<ulong, float>();
-            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            _flushTimer.Tick += FlushCache;
-            _flushTimer.Start();
+            var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            flushTimer.Tick += FlushCache;
+            flushTimer.Start();
             GuildIds = new Dictionary<ulong, uint>();
             NpcListChanged += OnNpcCollectionChanged;
         }

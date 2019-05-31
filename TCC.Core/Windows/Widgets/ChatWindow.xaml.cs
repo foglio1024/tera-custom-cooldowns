@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
-using System.Windows.Threading;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
+using TCC.Data.Chat;
 using TCC.Settings;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
@@ -22,16 +21,17 @@ namespace TCC.Windows.Widgets
         private ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
-            MainContent = content;
-            Init(ws, false, true, false);
+            MainContent = ChatContent;
+            Init(ws, ignoreSize: false, undimOnFlyingGuardian: true, perClassPosition: false);
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnIsDraggingChanged));
         }
         public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
         {
             DataContext = vm;
             VM = DataContext as ChatViewModel;
+            if (VM == null) return;
             VM.WindowSettings = ws;
-            ((ChatWindowSettings)WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
+            ((ChatWindowSettings) WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
             VM.RefreshHideTimer();
         }
 
@@ -40,32 +40,32 @@ namespace TCC.Windows.Widgets
             VM.UpdateSettings(Left, Top);
         }
 
-        private void TabClicked(object sender, MouseButtonEventArgs e)
-        {
-            if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel hivm)) return;
-            var clickedTab = (Tab)hivm.Content;
-            clickedTab.Attention = false;
+        //private void TabClicked(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel hivm)) return;
+        //    var clickedTab = (Tab)hivm.Content;
+        //    //clickedTab.ClearImportant();
 
-            if (VM.CurrentTab != clickedTab) VM.CurrentTab = clickedTab;
-            else
-            {
-                // scroll all tabs to bottom if the same has been clicked
-                TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
-                {
-                    var sw = Utils.GetChild<ScrollViewer>(x);
-                    sw?.ScrollToVerticalOffset(0);
-                });
-                _bottom = true;
-                ChatWindowManager.Instance.AddFromQueue(2);
-                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
-                ChatWindowManager.Instance.SetPaused(!_bottom);
-            }
-            SetTopBorder(s);
-        }
+        //    if (VM.CurrentTab != clickedTab) VM.CurrentTab = clickedTab;
+        //    else
+        //    {
+        //        // scroll all tabs to bottom if the same has been clicked
+        //        TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+        //        {
+        //            var sw = Utils.GetChild<ScrollViewer>(x);
+        //            sw?.ScrollToVerticalOffset(0);
+        //        });
+        //        _bottom = true;
+        //        ChatWindowManager.Instance.AddFromQueue(2);
+        //        if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
+        //        ChatWindowManager.Instance.SetPaused(!_bottom);
+        //    }
+        //    SetTopBorder(s);
+        //}
         private void TabLoaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is FrameworkElement s)) return;
-            var p = Utils.FindVisualParent<DragablzItemsControl>(s);
+            var p = s.FindVisualParent<DragablzItemsControl>();
             if (p.ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
 
             SetTopBorder(s);
@@ -74,8 +74,8 @@ namespace TCC.Windows.Widgets
         {
             var w = s.ActualWidth;
             var left = s.TransformToAncestor(this).Transform(new Point()).X;
-            if (left - 3 >= 0) LeftLine.Width = left - 3;
-            if (left + w - 3 >= 0) RightLine.Margin = new Thickness(left + w - 3, 0, 0, 0);
+            if (left - 2 >= 0) LeftLine.Width = left - 2;
+            if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
         }
         private void OpenTabSettings(object sender, MouseButtonEventArgs e)
         {
@@ -101,12 +101,14 @@ namespace TCC.Windows.Widgets
         }
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
+            FocusManager.PauseTopmost = true;
             SettingsPopup.DataContext = DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
         private void OnSettingsPopupMouseLeave(object sender, MouseEventArgs e)
         {
             SettingsPopup.IsOpen = false;
+            FocusManager.PauseTopmost = false;
         }
         private void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -129,7 +131,7 @@ namespace TCC.Windows.Widgets
         }
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var sw = Utils.GetChild<ScrollViewer>((ItemsControl)sender);
+            var sw = ((ItemsControl)sender).GetChild<ScrollViewer>();
             var lines = sw.VerticalOffset + e.Delta >= sw.ScrollableHeight ? 1 : SettingsHolder.ChatScrollAmount;
             sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? lines : -lines));
 
@@ -138,21 +140,64 @@ namespace TCC.Windows.Widgets
             if (sw.VerticalOffset == 0)
             {
                 _bottom = true;
-                ChatWindowManager.Instance.AddFromQueue(0);
-                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
+                ChatWindowManager.Instance.AddFromQueue(SettingsHolder.ChatScrollAmount);
             }
             else
             {
 
                 _bottom = false;
             }
-            ChatWindowManager.Instance.SetPaused(!_bottom);
+            ChatWindowManager.Instance.SetPaused(!_bottom || !ChatWindowManager.Instance.IsQueueEmpty);
 
         }
 
         private void OpenSysMsgSettings(object sender, RoutedEventArgs e)
         {
             new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show();
+        }
+
+        public void ScrollToMessage(Tab tab, ChatMessage msg)
+        {
+            if (VM.CurrentTab != tab) TabControl.SelectedIndex = VM.Tabs.IndexOf(tab);
+            TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+            {
+                if (!x.IsVisible) return;
+
+                var host = x.GetChild<VirtualizingStackPanel>();
+                if (host == null) return;
+                var idx = x.Items.IndexOf(msg);
+                if (idx == -1) return;
+                host.BringIndexIntoViewPublic(idx);
+            });
+        }
+
+        private void TabChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 0) return;
+            var tabVm = (TabViewModel) e.AddedItems[0];
+            var selectedTab = (Tab)tabVm.Content;
+            //clickedTab.ClearImportant();
+
+            if (VM.CurrentTab != selectedTab) VM.CurrentTab = selectedTab;
+            else
+            {
+                // scroll all tabs to bottom if the same has been clicked
+                TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+                {
+                    var sw = x.GetChild<ScrollViewer>();
+                    sw?.ScrollToVerticalOffset(0);
+                });
+                _bottom = true;
+                ChatWindowManager.Instance.AddFromQueue(2);
+                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
+                ChatWindowManager.Instance.SetPaused(!_bottom);
+            }
+        }
+
+        private void SetLines(object sender, MouseButtonEventArgs e)
+        {
+            if (VM.CurrentTab != ((sender as FrameworkElement)?.DataContext as TabViewModel)?.Content as Tab) return;
+            SetTopBorder(sender as FrameworkElement);
         }
     }
 }

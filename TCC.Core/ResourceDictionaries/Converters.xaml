@@ -32,6 +32,7 @@
     <c:MathMultiplicationConverter x:Key="MathMultiplication"/>
     <c:SizeToDurationLabelMarginConverter x:Key="MainSizeToDurationLabelMargin"/>
     <c:ColorToTransparentConverter x:Key="ColorToTransparent"/>
+    <c:MessageTextToIconConverter x:Key="MessageTextToIcon"/>
 
     <!--BossGage resources-->
     <c:EntityIdToNameConverter x:Key="EntityIdToName"/>

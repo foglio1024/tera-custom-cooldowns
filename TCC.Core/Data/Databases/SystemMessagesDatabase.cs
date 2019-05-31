@@ -35,6 +35,20 @@ namespace TCC.Data.Databases
                 var sm = new SystemMessage(msg, ch);
                 Messages[opcodeName] = sm;
             }
+
+            AddCustom();
+        }
+
+        private void AddCustom()
+        {
+            var guildieLogin = Messages["SMT_GUILD_MEMBER_LOGON_NO_MESSAGE"];
+            var guildieLogout = Messages["SMT_GUILD_MEMBER_LOGOUT"];
+
+            var memberLogin = new SystemMessage(guildieLogin.Message, (int)ChatChannel.GroupAlerts);
+            var memberLogout = new SystemMessage(guildieLogout.Message, (int)ChatChannel.GroupAlerts);
+
+            Messages["TCC_PARTY_MEMBER_LOGON"] = memberLogin;
+            Messages["TCC_PARTY_MEMBER_LOGOUT"] = memberLogout;
         }
     }
 }

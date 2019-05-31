@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Data;
+using TeraDataLite;
 
 namespace TCC.Converters
 {
@@ -10,13 +10,13 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var l = (Laurel?)value ?? Laurel.None;
-            bool kr = false, big = false;
+            bool kr = false, big = false, half = false;
             if (parameter != null)
             {
                 kr = parameter.ToString().Contains("kr");
                 big = parameter.ToString().Contains("big");
+                half = parameter.ToString().Contains("half");
             }
-            //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
             var laurel = "";
             switch (l)
             {
@@ -39,7 +39,11 @@ namespace TCC.Converters
                     break;
             }
 
-            if (kr) laurel += "_kr";
+            if (kr)
+            {
+                laurel += "_kr";
+                if (half) laurel += "_bottom";
+            }
             if (big) laurel += "_big";
             return "/resources/images/Icon_Laurels/" + laurel + ".png";
         }

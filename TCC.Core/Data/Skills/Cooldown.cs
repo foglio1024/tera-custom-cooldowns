@@ -55,6 +55,7 @@ namespace TCC.Data.Skills
             {
                 if (_seconds == value) return;
                 _seconds = value;
+                N();
                 Dispatcher.Invoke(() => SecondsUpdated?.Invoke());
             }
         }
@@ -117,8 +118,8 @@ namespace TCC.Data.Skills
             Start(cooldown, mode);
         }
 
-        private static int _ccSub = 0;
-        private static int _ecSub = 0;
+        private static int _ccSub;
+        private static int _ecSub;
         private void OnCombatStatusChanged()
         {
             if ((SessionManager.Encounter || SessionManager.Combat) && FlashOnAvailable)

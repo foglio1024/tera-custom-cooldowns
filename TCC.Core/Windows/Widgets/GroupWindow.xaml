@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:vm="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d"
              Title="TCC Group"
              MouseLeftButtonDown="Drag"
@@ -12,6 +13,7 @@
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="GroupWindow_OnMouseEnter"
              MouseLeave="GroupWindow_OnMouseLeave"
+             d:DataContext="{d:DesignInstance vm:GroupWindowViewModel}"
              >
 
     <Grid>
@@ -25,19 +27,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
             </Grid.LayoutTransform>
 
             <!--Info border-->
-            <Grid Grid.Column="3">
+            <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -106,10 +102,10 @@
                         x:Name="GroupButtons" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
 
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" Padding="10 0" Visibility="Collapsed"
+                        <!--<Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" Padding="10 0" Visibility="Collapsed"
                             ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgGift}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
-                        </Button>
+                        </Button>-->
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="ResetButton"
                             ToolTip="Reset instance" Click="ResetButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgReload}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
@@ -122,35 +118,9 @@
                 </Border>
 
             </Grid>
-            <!--Member lists-->
-            <ItemsControl x:Name="Dps" Width="Auto" ClipToBounds="False"
-                          ItemsSource="{Binding Dps}"
-                          ItemTemplate="{Binding Size, Converter={StaticResource GroupSizeToTemplate}}"
-                          Grid.Row="0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" Name="DpsPanel" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <ItemsControl x:Name="Healers" Grid.Column="1"
-                          ItemTemplate="{Binding Size, Converter={StaticResource GroupSizeToTemplate}}"
-                          ItemsSource="{Binding Healers}" Grid.Row="0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <ItemsControl x:Name="Tanks" Grid.Column="2"
-                          ItemTemplate="{Binding Size, Converter={StaticResource GroupSizeToTemplate}}"
-                          ItemsSource="{Binding Tanks}" Grid.Row="0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+
+            <ContentControl Content="{Binding}" ContentTemplate="{Binding GroupWindowLayout, Converter={StaticResource GroupWindowTemplateSelector}}" />
+
         </Grid>
         <c:WindowButtons WindowName="Group window" x:Name="Buttons" Grid.Row="2"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using TCC.Data;
 using TCC.Data.Skills;
-using TCC.Parsing.Messages;
-using TCC.ViewModels;
+
+using TeraPacketParser.Messages; //TODO: remove
 
 namespace TCC.ClassSpecific
 {
@@ -16,6 +17,13 @@ namespace TCC.ClassSpecific
         public virtual void CheckAbnormality(S_ABNORMALITY_BEGIN p) { }
         public virtual void CheckAbnormality(S_ABNORMALITY_REFRESH p) { }
         public virtual void CheckAbnormality(S_ABNORMALITY_END p) { }
+
+        protected static bool CheckByIconName(uint id, string iconName)
+        {
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (ab.Infinity) return false;
+            return ab.IconName == iconName;
+        }
 
         protected static void InvokeMarkingExpired() => MarkingExpired?.Invoke();
         protected static void InvokeMarkingRefreshed(ulong duration) => MarkingRefreshed?.Invoke(duration);

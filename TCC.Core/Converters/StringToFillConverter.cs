@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -10,7 +11,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var c = (string)value;
-            return new SolidColorBrush(Utils.ParseColor(c));
+            return new SolidColorBrush(MiscUtils.ParseColor(c));
 
         }
 

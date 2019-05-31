@@ -49,20 +49,11 @@ namespace TCC.Controls.Chat
             _dc.Animate = false;
 
         }
-        private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
-        }
-
-        private void Popup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            //Popup.IsOpen = false;
-        }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             if(!(DataContext is ChatMessage)) return;
-            _dc = ((ChatMessage) DataContext);
+            _dc = (ChatMessage) DataContext;
             var tg = (TransformGroup) LayoutTransform;
             var sc = tg.Children[0];
             if (!_dc.Animate)

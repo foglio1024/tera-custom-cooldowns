@@ -1,8 +1,7 @@
 ﻿namespace TCC.ViewModels
 {
-    class NullClassManager : ClassManager
+    internal class NullClassManager : BaseClassLayoutVM
     {
-
         public override void LoadSpecialSkills()
         {
         }

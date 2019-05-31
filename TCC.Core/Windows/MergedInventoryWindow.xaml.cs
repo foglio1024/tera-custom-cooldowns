@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace TCC.Windows
         public MergedInventoryViewModel()
         {
             MergedInventory = new SynchronizedObservableCollection<MergedInventoryItem>();
-            MergedInventoryView = Utils.InitLiveView(o => o != null, MergedInventory, new string[] { }, new SortDescription[]
+            MergedInventoryView = CollectionViewUtils.InitLiveView(o => o != null, MergedInventory, new string[] { }, new[]
             {
                 new SortDescription("Item.Item.Id", ListSortDirection.Ascending),
                 new SortDescription("Item.Item.RareGrade", ListSortDirection.Ascending),
@@ -115,20 +116,20 @@ namespace TCC.Windows
             Items.CollectionChanged += (_, __) => N(nameof(TotalAmount));
         }
     }
-    public partial class MergedInventoryWindow : Window
+    public partial class MergedInventoryWindow
     {
         public MergedInventoryWindow()
         {
             InitializeComponent();
             DataContext = new MergedInventoryViewModel();
-            (DataContext as MergedInventoryViewModel).SetDispatcher(this.Dispatcher);
+            (DataContext as MergedInventoryViewModel).SetDispatcher(Dispatcher);
             Loaded += OnLoaded;
 
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            (DataContext as MergedInventoryViewModel).LoadItems();
+            ((MergedInventoryViewModel) DataContext).LoadItems();
         }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
@@ -141,11 +142,11 @@ namespace TCC.Windows
             Close();
         }
 
-        private void FilterInventory(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void FilterInventory(object sender, TextChangedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                var view = ((ICollectionView)(this.DataContext as MergedInventoryViewModel).MergedInventoryView);
+                var view = (ICollectionView)((MergedInventoryViewModel) DataContext).MergedInventoryView;
                 view.Filter = o =>
                 {
                     var item = ((MergedInventoryItem)o).Item.Item;

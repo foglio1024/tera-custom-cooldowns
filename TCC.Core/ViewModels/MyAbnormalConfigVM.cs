@@ -5,15 +5,16 @@ GroupAbnormals              -> MyAbnormals
 
 ShowAllGroupAbnormalities   -> ShowAllMyAbnormalities
 */
+using FoglioUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Settings;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -23,7 +24,7 @@ namespace TCC.ViewModels
         public event Action ShowAllChanged;
 
         public SynchronizedObservableCollection<MyAbnormalityVM> MyAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Abnormality> Abnormalities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll
@@ -42,7 +43,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                var l = Utils.ListFromEnum<Class>();
+                var l = EnumUtils.ListFromEnum<Class>();
                 l.Remove(Class.None);
                 return l;
             }

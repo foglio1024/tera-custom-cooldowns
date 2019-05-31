@@ -1,18 +1,24 @@
-﻿using System;
+﻿using FoglioUtils;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using System.Xml.Linq;
+
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
 using TCC.Settings;
 using TCC.Windows;
+
+using TeraDataLite;
+
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
@@ -37,14 +43,14 @@ namespace TCC.ViewModels
         public ICollectionViewLiveShaping ItemsView { get; set; }
         public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
         public SynchronizedObservableCollection<Skill> SkillChoiceList { get; set; }
-        public IEnumerable<Item> Items => SessionManager.CurrentDatabase.ItemsDatabase.ItemSkills;
-        public IEnumerable<Abnormality> Passivities => SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Item> Items => SessionManager.DB.ItemsDatabase.ItemSkills;
+        public IEnumerable<Abnormality> Passivities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         //{
         //    get
         //    {
         //        var list = new SynchronizedObservableCollection<Skill>();
         //        var c = SessionManager.CurrentPlayer.Class;
-        //        var skillsForClass = SessionManager.CurrentDatabase.SkillsDatabase.Skills[c];
+        //        var skillsForClass = SessionManager.DB.SkillsDatabase.Skills[c];
         //        foreach (var skill in skillsForClass.Values)
         //        {
         //            if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
@@ -58,7 +64,7 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        private static ClassManager ClassManager => WindowManager.ClassWindow.VM.CurrentManager;
+        private static BaseClassLayoutVM ClassManager => WindowManager.ClassWindow.VM.CurrentManager;
 
         private static bool FindAndUpdate(SynchronizedObservableCollection<Cooldown> list, Cooldown sk)
         {
@@ -246,7 +252,7 @@ namespace TCC.ViewModels
                     root.Add(new XElement(tag, new XAttribute("id", sk.Skill.Id), new XAttribute("row", 3), new XAttribute("name", sk.Skill.ShortName)));
                 });
                 if (SessionManager.CurrentPlayer.Class > (Class)12) return;
-                root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
+                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
             }));
         }
 
@@ -456,7 +462,7 @@ namespace TCC.ViewModels
         public void LoadSkills(Class c)
         {
             if (c == Class.None) return;
-            var filename = Utils.ClassEnumToString(c).ToLower() + "-skills.xml";
+            var filename = TccUtils.ClassEnumToString(c).ToLower() + "-skills.xml";
             SkillConfigParser sp;
             //Dispatcher.Invoke(() =>
             //{
@@ -473,7 +479,7 @@ namespace TCC.ViewModels
             {
                 var res = TccMessageBox.Show("TCC",
                     $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
-                    MessageBoxButton.OKCancel);
+                    MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(Path.Combine(App.ResourcesPath, "config/skills/", filename));
                 LoadSkills(c);
@@ -492,7 +498,7 @@ namespace TCC.ViewModels
                 HiddenSkills.Add(sk);
             }
 
-            Dispatcher.Invoke(() => SkillsView = Utils.InitLiveView(null, SkillsDatabase.SkillsForClass, new string[] { }, new SortDescription[] { }));
+            Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(null, SkillsDatabase.SkillsForClass, new string[] { }, new SortDescription[] { }));
             ((ICollectionView)SkillsView).CollectionChanged += GcStahp;
 
             N(nameof(SkillsView));
@@ -526,15 +532,21 @@ namespace TCC.ViewModels
 
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
+            SessionManager.DatabaseLoaded += InitViews;
 
             //SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
 
             //SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
-            ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
-            AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
+        }
 
-            ((ICollectionView)ItemsView).CollectionChanged += GcStahp;
-            ((ICollectionView)AbnormalitiesView).CollectionChanged += GcStahp;
+        public void InitViews()
+        {
+            if (ItemsView != null && AbnormalitiesView != null) return;
+            ItemsView = CollectionViewUtils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
+            AbnormalitiesView = CollectionViewUtils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
+
+            ((ICollectionView) ItemsView).CollectionChanged += GcStahp;
+            ((ICollectionView) AbnormalitiesView).CollectionChanged += GcStahp;
         }
 
         private void GcStahp(object sender, NotifyCollectionChangedEventArgs e)

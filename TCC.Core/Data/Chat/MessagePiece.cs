@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -23,7 +24,7 @@ namespace TCC.Data.Chat
                 if (Color == null)
                 {
                     var conv = new ChatChannelToColorConverter();
-                    var col = ((SolidColorBrush)conv.Convert(Container.Channel, null, null, null));
+                    var col = (SolidColorBrush)conv.Convert(Container.Channel, null, null, null);
                     Color = col;
                 }
             }
@@ -129,7 +130,7 @@ namespace TCC.Data.Chat
                 //{
                 //try
                 //{
-                Color = new SolidColorBrush(Utils.ParseColor(color));
+                Color = new SolidColorBrush(MiscUtils.ParseColor(color));
                 //}
                 //catch
                 //{
@@ -144,7 +145,6 @@ namespace TCC.Data.Chat
         {
             if (col != "") SetColor(col);
             Type = type;
-
             _size = size;
             _customSize = customSize;
 

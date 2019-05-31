@@ -1,21 +1,41 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using Dragablz;
+using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
+using FoglioUtils.Extensions;
 
 namespace TCC.ViewModels
 {
+
+
+    public class ImportantRemovedArgs : EventArgs
+    {
+        public ActionType Action { get; }
+        public ChatMessage Item { get; }
+        public enum ActionType
+        {
+            Remove,
+            Clear
+        }
+
+        public ImportantRemovedArgs(ActionType action, ChatMessage item = null)
+        {
+            Action = action;
+            Item = item;
+        }
+
+    }
     public class ChatViewModel : TSPropertyChanged
     {
+
         private bool _paused;
-        private bool _visible;
+        private bool _visible = true;
         private DispatcherTimer _hideTimer;
         private ChatWindowSettings _windowSettings;
 
@@ -55,12 +75,13 @@ namespace TCC.ViewModels
                 {
                     _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
                     _hideTimer.Tick += OnHideTimerTick;
+                    _hideTimer.Start();
                     _windowSettings.TimeoutChanged += ChangeTimerInterval;
                 }
             }
         }
 
-        public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs { get; set; }
+        public SynchronizedObservableCollection<TabViewModel> TabVMs { get; set; }
         public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public IInterTabClient InterTabClient { get; }
         public List<Tab> Tabs
@@ -72,13 +93,13 @@ namespace TCC.ViewModels
                 return ret;
             }
         }
-        public Func<HeaderedItemViewModel> AddNewTabCommand
+        public Func<TabViewModel> AddNewTabCommand
         {
             get
             {
                 return () =>
                 {
-                    var t = new HeaderedItemViewModel();
+                    var t = new TabViewModel();
                     var content = new Tab("New tab", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { });
                     content.PropertyChanged += (_, ev) =>
                     {
@@ -93,7 +114,7 @@ namespace TCC.ViewModels
         public ChatViewModel()
         {
             InterTabClient = new ChatTabClient();
-            TabVMs = new SynchronizedObservableCollection<HeaderedItemViewModel>();
+            TabVMs = new SynchronizedObservableCollection<TabViewModel>();
 
             ChatWindowManager.Instance.NewMessage += CheckAttention;
         }
@@ -105,16 +126,25 @@ namespace TCC.ViewModels
         }
         private void OnHideTimerTick(object sender, EventArgs e)
         {
+            if (!_windowSettings.FadeOut)
+            {
+                if (!Visible) Visible = true;
+                return;
+            }
             Visible = false;
             _hideTimer.Stop();
         }
         private void CheckAttention(ChatMessage chatMessage)
         {
             if (!chatMessage.ContainsPlayerName && chatMessage.Channel != ChatChannel.ReceivedWhisper) return;
-            TabVMs.Where(x =>
-                ((Tab)x.Content).GetDispatcher().Invoke(() =>
-                    ((Tab)x.Content).Messages.Contains(chatMessage))).ToList().ForEach(t =>
-                        ((Tab)t.Content).Attention = true);
+            TabVMs.Where(x => ((Tab)x.Content).GetDispatcher()
+                                .Invoke(() => ((Tab)x.Content).Messages.Contains(chatMessage)))
+                        .ToList()
+                        .ForEach(t =>
+                        {
+                            ((Tab)t.Content).AddImportantMessage(chatMessage);
+                            //((Tab) t.Content).Attention = true;
+                        });
         }
         public void HandleIsDraggingChanged(bool isDragging, IEnumerable<DragablzItem> newOrder)
         {
@@ -124,7 +154,7 @@ namespace TCC.ViewModels
                 return;
             }
 
-            var old = new HeaderedItemViewModel[TabVMs.Count];
+            var old = new TabViewModel[TabVMs.Count];
             TabVMs.CopyTo(old, 0);
             var same = true;
             var items = newOrder.ToList();
@@ -152,8 +182,8 @@ namespace TCC.ViewModels
         {
             _windowSettings.Tabs.Clear();
             _windowSettings.Tabs.AddRange(Tabs);
-            _windowSettings.X = left / SettingsHolder.ScreenW;
-            _windowSettings.Y = top / SettingsHolder.ScreenH;
+            _windowSettings.X = left / WindowManager.ScreenSize.Width;
+            _windowSettings.Y = top / WindowManager.ScreenSize.Height;
             var v = SettingsHolder.ChatWindowsSettings;
             var s = v.FirstOrDefault(x => x == _windowSettings);
             if (s == null) v.Add(_windowSettings);
@@ -178,7 +208,7 @@ namespace TCC.ViewModels
                 foreach (var chatTabsSetting in tabs)
                 {
                     //chatTabsSetting.ApplyFilter();
-                    TabVMs.Add(new HeaderedItemViewModel(chatTabsSetting.TabName, chatTabsSetting));
+                    TabVMs.Add(new TabViewModel(chatTabsSetting.TabName, chatTabsSetting));
                 }
             }
             if (TabVMs.Count != 0) return;
@@ -196,11 +226,11 @@ namespace TCC.ViewModels
             var sys = new Tab("System", new ChatChannel[] { }, new ChatChannel[] { }, new[] { "System" }, new string[] { });
             //sys.ApplyFilter();
 
-            TabVMs.Add(new HeaderedItemViewModel(all.TabName, all));
-            TabVMs.Add(new HeaderedItemViewModel(guild.TabName, guild));
-            TabVMs.Add(new HeaderedItemViewModel(group.TabName, group));
-            TabVMs.Add(new HeaderedItemViewModel(w.TabName, w));
-            TabVMs.Add(new HeaderedItemViewModel(sys.TabName, sys));
+            TabVMs.Add(new TabViewModel(all.TabName, all));
+            TabVMs.Add(new TabViewModel(guild.TabName, guild));
+            TabVMs.Add(new TabViewModel(group.TabName, group));
+            TabVMs.Add(new TabViewModel(w.TabName, w));
+            TabVMs.Add(new TabViewModel(sys.TabName, sys));
             CurrentTab = TabVMs[0].Content as Tab;
             //ChatWindowManager.Instance.FindMyWindow(this).UpdateSettings();
 
@@ -216,11 +246,14 @@ namespace TCC.ViewModels
             {
                 CurrentTab = TabVMs[0].Content as Tab;
             }
-            if (!CurrentTab.Filter(newItems[0] as ChatMessage)) return;
+            if (CurrentTab != null && !CurrentTab.Filter(newItems[0] as ChatMessage)) return;
             RefreshHideTimer();
             //VisibilityChanged?.Invoke(true);  // IsChatVisible = true;
             Visible = true;
 
         }
+
+        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
+
     }
 }

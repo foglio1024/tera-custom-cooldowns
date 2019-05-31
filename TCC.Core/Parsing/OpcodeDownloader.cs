@@ -1,30 +1,30 @@
 ﻿using System.IO;
-using System.Net;
-using System.Security.Cryptography;
+using FoglioUtils;
 using Newtonsoft.Json.Linq;
-using TCC.Windows;
 
 namespace TCC.Parsing
 {
     public static class OpcodeDownloader
     {
-        public static void DownloadIfNotExist(uint version, string directory)
+        public static void DownloadOpcodesIfNotExist(uint version, string directory)
         {
             DownloadOpcode(version, directory);
-            DownloadSysmsg(version, directory);
         }
-
-        private static bool IsFileValid(string filename, uint version)
+        public static void DownloadSysmsgIfNotExist(uint version, string directory, int revision = 0)
+        {
+            DownloadSysmsg(version, directory, revision);
+        }
+        private static bool IsFileValid(string filename)
         {
             if (!File.Exists(filename)) return false;
             if (!Settings.SettingsHolder.CheckOpcodesHash) return true;
-            var localHash = Utils.GenerateFileHash(filename);
+            var localHash = HashUtils.GenerateFileHash(filename);
             if (localHash == "")
             {
                 WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to check opcode file hash.\n Skipping download...", Data.NotificationType.Warning);
                 return true;
             }
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -52,19 +52,19 @@ namespace TCC.Parsing
         {
             Directory.CreateDirectory(directory);
 
-            var filename = directory + Path.DirectorySeparatorChar + version + ".txt";
-            if (IsFileValid(filename, version)) return;
-            filename = directory + Path.DirectorySeparatorChar + "protocol." + version + ".map";
-            if (IsFileValid(filename, version)) return;
+            var filename = Path.Combine(directory, $"{version}.txt");
+            if (IsFileValid(filename)) return;
+            filename = Path.Combine(directory, $"protocol.{version}.map");
+            if (IsFileValid(filename)) return;
             try
             {
-                Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/protocol." + version + ".map", filename);
+                Download($"https://raw.githubusercontent.com/tera-toolbox/tera-data/master/map_base/protocol.{version}.map", filename);
                 return;
             }
             catch { /* ignored*/ }
             try
             {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol." + version + ".map", filename);
+                Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol.{version}.map", filename);
             }
             catch { /* ignored*/ }
         }
@@ -73,32 +73,35 @@ namespace TCC.Parsing
         {
             Directory.CreateDirectory(directory);
 
-            var filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
-            if (File.Exists(filename)) return false;
-            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
-            if (File.Exists(filename)) return false;
-            try
+            var filename = Path.Combine(directory, $"sysmsg.{revision / 100}.map");
+            if (File.Exists(filename)) return true;
+            else
             {
-                Download("https://raw.githubusercontent.com/caali-hackerman/tera-data/master/map_base/sysmsg." + revision / 100 + ".map", filename);
-                return true;
+                try
+                {
+                    Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{revision / 100}.map", filename);
+                    return true;
+                }
+                catch { /* ignored*/ }
             }
-            catch { /* ignored*/ }
-            try
+            filename = Path.Combine(directory, $"sysmsg.{version}.map");
+            if (File.Exists(filename)) return true;
+            else
             {
-                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision / 100 + ".map", filename);
-                return true;
+                try
+                {
+                    Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{version}.map", filename);
+                    return true;
+                }
+                catch { /* ignored*/ }
             }
-            catch { /* ignored*/ }
             return false;
         }
 
         private static void Download(string remote, string local)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            using (var client = new WebClient())
+            using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
-                client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                 client.DownloadFile(remote, local);
             }
         }

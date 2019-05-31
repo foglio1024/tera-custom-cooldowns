@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Media.Effects;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Interop.Proxy;
 
 namespace TCC.Controls.Chat
 {
@@ -18,9 +19,9 @@ namespace TCC.Controls.Chat
 
         private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var context = (ChatMessage)DataContext;
+            if (!(DataContext is ChatMessage context)) return;
             if (context.Author == "System" || context.Channel == ChatChannel.Twitch) return;
-            Proxy.Proxy.AskInteractive(SessionManager.Server.ServerId, context.Author);
+            ProxyInterface.Instance.Stub.AskInteractive(SessionManager.Server.ServerId, context.Author); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, context.Author);
         }
 
         private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)

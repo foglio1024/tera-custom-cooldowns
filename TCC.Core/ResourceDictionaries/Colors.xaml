@@ -9,6 +9,10 @@
     <Color x:Key="RevampDarkBackgroundColor">    #233147   </Color>
     <Color x:Key="RevampDarkerBackgroundColor">  #101216   </Color>
     <Color x:Key="RevampBorderColor">            #515B65   </Color>
+
+    <Color x:Key="TeraRestylePanelColor">        #10141E   </Color>
+    <Color x:Key="TeraRestyleBorderColor">       #627088   </Color>
+    <Color x:Key="TeraRestyleBorderColorLight">  #96ABCE   </Color>
                                                            
     <Color x:Key="ClassGlowColor">               #55ccff   </Color>
                                                            
@@ -85,6 +89,11 @@
     <Color x:Key="AbnormalityStunColor">         #FF0000   </Color>
     <Color x:Key="AbnormalityDebuffColor">       #8FF442   </Color>
     <Color x:Key="AbnormalityDotColor">          #9842F4   </Color>
+
+    <Color x:Key="ItemCommonColor">              #FFFFFF   </Color>
+    <Color x:Key="ItemUncommonColor">            #4DCB30   </Color>
+    <Color x:Key="ItemRareColor">                #009ED9   </Color>
+    <Color x:Key="ItemSuperiorColor">            #EEBE00   </Color>
                                                            
     <!--Chat colors-->                                     
     <Color x:Key="ChatSayColor">                 #FFFFFF   </Color>

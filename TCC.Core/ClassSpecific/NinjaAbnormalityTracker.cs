@@ -1,6 +1,7 @@
-﻿using TCC.Data;
-using TCC.Parsing.Messages;
+﻿
+using TCC.Data;
 using TCC.ViewModels;
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {
@@ -11,20 +12,20 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckFocus(p);
             CheckInnerHarmony(p);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckInnerHarmony(p);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckFocus(p);
             CheckInnerHarmony(p);
         }
@@ -32,29 +33,29 @@ namespace TCC.ClassSpecific
         private static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusId) return;
-            ((NinjaBarManager)WindowManager.ClassWindow.VM.CurrentManager).FocusOn = true;
+            TccUtils.CurrentClassVM<NinjaLayoutVM>().FocusOn = true;
         }
         private static void CheckFocus(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusId) return;
-            ((NinjaBarManager)WindowManager.ClassWindow.VM.CurrentManager).FocusOn = false;
+            TccUtils.CurrentClassVM<NinjaLayoutVM>().FocusOn = false;
         }
 
         private static void CheckInnerHarmony(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            ((NinjaBarManager)WindowManager.ClassWindow.VM.CurrentManager).InnerHarmony.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<NinjaLayoutVM>().InnerHarmony.Buff.Start(p.Duration);
 
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            ((NinjaBarManager)WindowManager.ClassWindow.VM.CurrentManager).InnerHarmony.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<NinjaLayoutVM>().InnerHarmony.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            ((NinjaBarManager)WindowManager.ClassWindow.VM.CurrentManager).InnerHarmony.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<NinjaLayoutVM>().InnerHarmony.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

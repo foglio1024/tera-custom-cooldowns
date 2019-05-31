@@ -4,41 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" WindowStyle="None" IsVisibleChanged="Window_IsVisibleChanged" RenderTransformOrigin=".5 .5" Background="Transparent" AllowsTransparency="True"
-        Title="TCC" Height="190" Width="340" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Window.RenderTransform>
-        <ScaleTransform/>
-    </Window.RenderTransform>
-    <Grid Margin="20">
+        Title="TCC" Height="230" Width="420" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        UseLayoutRounding="True">
+    <Grid Margin="20" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="0"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Foreground="#6fff" FontSize="16" x:Name="MessageTitle" Grid.Row="0" Margin="5"></TextBlock>
-        <Border Background="{StaticResource HpBrush}" Grid.RowSpan="3" Margin="0 0 0 3" CornerRadius="2" x:Name="Bg" MouseLeftButtonDown="BG_MouseLeftButtonDown"></Border>
-        <Border Background="{StaticResource CardDarkBrush}" Grid.Row="2" CornerRadius="0 0 2 2"/>
+        <Border Style="{StaticResource RevampBorderStyle}"  Grid.RowSpan="3" Margin="0 0 0 0" x:Name="Bg" 
+                 MouseLeftButtonDown="BG_MouseLeftButtonDown" Effect="{StaticResource BigDropShadow}"/>
+        <Border  Style="{StaticResource RevampBorderStyle}" Background="{StaticResource RevampDarkerBackground70Brush}"  Grid.Row="1" VerticalAlignment="Stretch" Margin="1 0"
+                 x:Name="InnerBorder" BorderThickness="0 1 0 1"/>
         <!--<Path Data="{StaticResource SvgInfo}" Fill="#4fff" VerticalAlignment="Center" Grid.Row="1" Height="50" HorizontalAlignment="Left" Margin="10"/>-->
-        <TextBlock Foreground="#bfff" x:Name="TxtMsg" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Margin="10 10" TextWrapping="WrapWithOverflow" IsHitTestVisible="False"/>
-        <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock Foreground="#cfff" FontSize="20" x:Name="MessageTitle" Grid.Row="0" Margin="5" Text="TCC"
+                   TextAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" IsHitTestVisible="False"></TextBlock>
+        <TextBlock Foreground="#bfff" x:Name="TxtMsg" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" 
+                   Margin="30 20" TextWrapping="WrapWithOverflow" IsHitTestVisible="False" FontSize="14"/>
+        <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 0">
             <UniformGrid.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
-                    <Setter Property="Margin" Value="0 0"/>
-                    <Setter Property="Foreground" Value="#9fff"/>
+                    <Setter Property="Margin" Value="10 5"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Foreground" Value="#ccc"/>
+                    <Setter Property="FontFamily" Value="{StaticResource Frutiger}"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}"/>
+                    <Setter Property="Background" >
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".7"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <EventSetter Event="Click" Handler="Button_Click"/>
                 </Style>
             </UniformGrid.Resources>
             <Button x:Name="BtnOk">
-                <TextBlock Margin="10 3">OK</TextBlock>
+                <TextBlock Margin="10 3">Ok</TextBlock>
             </Button>
             <Button x:Name="BtnYes">
-                <TextBlock Margin="10 3">YES</TextBlock>
+                <TextBlock Margin="10 3">Yes</TextBlock>
             </Button>
             <Button x:Name="BtnNo">
-                <TextBlock Margin="10 3">NO</TextBlock>
+                <TextBlock Margin="10 3">No</TextBlock>
             </Button>
             <Button x:Name="BtnCancel">
-                <TextBlock Margin="10 3">CANCEL</TextBlock>
+                <TextBlock Margin="10 3">Cancel</TextBlock>
             </Button>
         </UniformGrid>
     </Grid>

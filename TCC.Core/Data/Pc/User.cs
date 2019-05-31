@@ -1,9 +1,13 @@
-﻿using System;
+﻿using FoglioUtils;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
+
 using TCC.Data.Abnormalities;
 using TCC.Settings;
+
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
@@ -23,8 +27,10 @@ namespace TCC.Data.Pc
         private string _name;
         private long _currentHp = 1;
         private int _currentMp = 1;
+        private int _currentSt = 1;
         private long _maxHp = 1;
         private int _maxMp = 1;
+        private int _maxSt = 1;
         private ReadyStatus _ready = ReadyStatus.None;
         private bool _alive = true;
         private int _rollResult;
@@ -38,6 +44,7 @@ namespace TCC.Data.Pc
         private GearItem _armor;
         private GearItem _gloves;
         private GearItem _boots;
+        private bool _visible = true;
 
         public ulong EntityId
         {
@@ -190,6 +197,16 @@ namespace TCC.Data.Pc
                 N(nameof(MpFactor));
             }
         }
+        public int CurrentSt
+        {
+            get => _currentSt;
+            set
+            {
+                if (_currentSt == value) return;
+                _currentSt = value;
+                N();
+            }
+        }
         public long MaxHp
         {
             get => _maxHp;
@@ -212,8 +229,18 @@ namespace TCC.Data.Pc
                 N(nameof(MpFactor));
             }
         }
-        public double HpFactor => Utils.FactorCalc(CurrentHp, MaxHp);
-        public double MpFactor => Utils.FactorCalc(CurrentMp, MaxMp);
+        public int MaxSt
+        {
+            get => _maxSt;
+            set
+            {
+                if (_maxSt == value) return;
+                _maxSt = value;
+                N();
+            }
+        }
+        public double HpFactor => MathUtils.FactorCalc(CurrentHp, MaxHp);
+        public double MpFactor => MathUtils.FactorCalc(CurrentMp, MaxMp);
         public ReadyStatus Ready
         {
             get => _ready;
@@ -339,6 +366,18 @@ namespace TCC.Data.Pc
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
         public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; }
         public bool Awakened { get; set; }
+        public bool InCombat { get; set; } //make npc when needed
+
+        public bool Visible
+        {
+            get => _visible;
+            set
+            {
+                if (_visible == value) return;
+                _visible = value;
+                N();
+            }
+        }
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
@@ -429,11 +468,44 @@ namespace TCC.Data.Pc
             });
         }
 
+        public User()
+        {
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+
+        }
         public User(Dispatcher d)
         {
             Dispatcher = d;
             Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
             Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
+        }
+
+        public User(PartyMemberData applicant) : this()
+        {
+            PlayerId = applicant.PlayerId;
+            UserClass = applicant.UserClass;
+            Level = applicant.Level;
+            Order = applicant.Order;
+            Location = SessionManager.DB.GetSectionName(applicant.GuardId, applicant.SectionId);
+            IsLeader = applicant.IsLeader;
+            Online = applicant.Online;
+            Name = applicant.Name;
+            ServerId = applicant.ServerId;
+            EntityId = applicant.EntityId;
+            CanInvite = applicant.CanInvite;
+            Laurel = applicant.Laurel;
+            Awakened = applicant.Awakened;
+            Alive = applicant.Alive;
+            CurrentHp = applicant.CurrentHP;
+            CurrentMp = applicant.CurrentMP;
+            MaxHp = applicant.MaxHP;
+            MaxMp = applicant.MaxMP;
+            CurrentSt = applicant.CurrentST;
+            MaxSt = applicant.MaxST;
+            InCombat = applicant.InCombat;
+
         }
     }
 }

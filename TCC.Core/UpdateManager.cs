@@ -1,16 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using FoglioUtils;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -29,20 +28,20 @@ namespace TCC
 
         private const string DownloadedIconsDir = "tera-used-icons-master";
 
-        public const string DatabaseHashFileUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/database-hashes.json";
+        private const string DatabaseHashFileUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/database-hashes.json";
 
         public static Dictionary<string, string> DatabaseHashes { get; set; }
 
         public static void CheckServersFile()
         {
             var path = Path.Combine(App.DataPath, "servers.txt");
-            if (!File.Exists(path) || Utils.GenerateFileHash(path) != DatabaseHashes["servers.txt"])
+            if (!File.Exists(path) || HashUtils.GenerateFileHash(path) != DatabaseHashes["servers.txt"])
                 DownloadServersFile();
         }
         private static void DownloadServersFile()
         {
             if (!Directory.Exists(App.DataPath)) Directory.CreateDirectory(App.DataPath);
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
 
                 try
@@ -61,7 +60,7 @@ namespace TCC
 
         public static async Task CheckIconsVersion()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -111,7 +110,7 @@ namespace TCC
         {
             try
             {
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     var st = c.OpenRead(AppVersionExperimentalUrl);
                     if (st == null) return false;
@@ -122,14 +121,14 @@ namespace TCC
             }
             catch (Exception e)
             {
-                Log.F($"[IsExperimentalNewer] Failed to check experimental version {e.ToString()}");
+                Log.F($"[IsExperimentalNewer] Failed to check experimental version {e}");
             }
             return false;
         }
 
         private static async Task DownloadIcons()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 //c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                 c.DownloadFileCompleted += async (_, args) =>
@@ -180,7 +179,14 @@ namespace TCC
                 //App.SplashScreen.SetText("Copying files...");
                 Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList().ForEach(newPath =>
                 {
-                    File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+                    try
+                    {
+                        File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+                    }
+                    catch
+                    {
+                        Log.F("Failed to copy icon " + newPath);
+                    }
                 });
                 //App.SplashScreen.SetText("Copying files... Done.");
 
@@ -200,13 +206,13 @@ namespace TCC
         public static void UpdateDatabase(string relativePath)
         {
             // example https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/acc_benefits/acc_benefits-EU-EN.tsv
-            var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{relativePath.Replace("\\", "/")}";
-            var destPath = Path.Combine(App.DataPath, relativePath);
-            if (!Directory.Exists(Path.GetDirectoryName(destPath))) Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-
             try
             {
-                using (var c = Utils.GetDefaultWebClient())
+                var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{relativePath.Replace("\\", "/")}";
+                var destPath = Path.Combine(App.DataPath, relativePath);
+                var destDir = Path.GetDirectoryName(destPath);
+                if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     c.DownloadFile(url, destPath);
                 }
@@ -244,7 +250,7 @@ namespace TCC
 
         private static void CheckAppVersionPeriodic()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -259,16 +265,14 @@ namespace TCC
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), ex.Message + "\r\n" +
-                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
-                             "\r\n" + ex.TargetSite);
+                    File.WriteAllText(Path.Combine(App.BasePath, "update-check-error.txt"), $"{ex.Message}\n{ex.StackTrace}\n{ex.Source}\n{ex}\n{ex.Data}\n{ex.InnerException}\n{ex.TargetSite}");
                 }
             }
         }
 
         public async static void ForceUpdateExperimental()
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -319,14 +323,17 @@ namespace TCC
         private static bool _waitingDownload = true;
         private async static Task Update(string url)
         {
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
                     App.SplashScreen.SetText("Downloading update...");
                     c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
-                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() => c.DownloadFileAsync(new Uri(url), "update.zip")));
+                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        c.DownloadFileAsync(new Uri(url), "update.zip");
+                    }));
 
                     while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
 
@@ -359,9 +366,10 @@ namespace TCC
         public static void DownloadDatabaseHashes()
         {
             DatabaseHashes.Clear();
-            using (var c = Utils.GetDefaultWebClient())
+            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
             {
                 var f = c.OpenRead(DatabaseHashFileUrl);
+                if (f == null) return;
                 using (var sr = new StreamReader(f))
                 {
                     var sHashes = sr.ReadToEnd();
@@ -375,17 +383,30 @@ namespace TCC
             }
         }
 
+        public static void TryDeleteUpdater()
+        {
+            try
+            {
+                File.Delete(Path.Combine(App.BasePath, "TCCupdater.exe"));
+            }
+            catch
+            {
+                /* ignored*/
+            }
+        }
+
+
         private class VersionParser
         {
             public string NewVersionNumber { get; }
             public string NewVersionUrl { get; }
             public Version Version => Version.Parse(NewVersionNumber);
             public bool IsNewer => Version > Assembly.GetExecutingAssembly().GetName().Version;
-            public bool Valid { get; } = false;
+            public bool Valid { get; }
 
             public VersionParser(bool forceExperimental = false)
             {
-                using (var c = Utils.GetDefaultWebClient())
+                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
                 {
                     var st = c.OpenRead(App.Experimental || forceExperimental ? AppVersionExperimentalUrl : AppVersionUrl);
                     if (st == null) return;

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Threading;
-using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Settings;
 using TCC.Windows;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -16,7 +16,7 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
             Abnormality = ab;
             Classes = new SynchronizedObservableCollection<ClassToggle>(Dispatcher);
-            for (int i = 0; i < 13; i++)
+            for (var i = 0; i < 13; i++)
             {
                 var ct = new ClassToggle((Class)i, ab.Id);
                 if (SettingsHolder.GroupAbnormals.TryGetValue(ct.Class, out var list)) ct.Selected = list.Contains(ab.Id);

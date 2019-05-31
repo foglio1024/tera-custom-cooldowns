@@ -24,7 +24,7 @@ namespace TCC
         private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
         private const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
         private const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
-        private const int GWL_EXSTYLE = (-20);           //set new exStyle
+        private const int GWL_EXSTYLE = -20;           //set new exStyle
         private const int WM_CHAR = 0x0102;
         private const int WM_KEYDOWN = 0x0100;
         private const int WM_KEYUP = 0x0101;
@@ -63,8 +63,8 @@ namespace TCC
                 if (ForegroundWindow == MeterWindow && MeterWindow != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.SettingsWindow?.Handle && WindowManager.SettingsWindow?.Handle != IntPtr.Zero) return true;
                 //if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
-                if (ForegroundWindow == WindowManager.LfgListWindow?.Handle && WindowManager.LfgListWindow?.Handle != IntPtr.Zero) return true;
-                if (ForegroundWindow == WindowManager.Dashboard?.Handle && WindowManager.Dashboard?.Handle != IntPtr.Zero) return true;
+                //if (ForegroundWindow == WindowManager.LfgListWindow?.Handle && WindowManager.LfgListWindow?.Handle != IntPtr.Zero) return true;
+                //if (ForegroundWindow == WindowManager.Dashboard?.Handle && WindowManager.Dashboard?.Handle != IntPtr.Zero) return true;
                 return false;
             }
         }

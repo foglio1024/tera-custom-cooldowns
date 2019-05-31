@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TCC.Data.Pc;
+using TeraDataLite;
 
 namespace TCC.Data
 {
@@ -51,9 +52,11 @@ namespace TCC.Data
         private const string ServerTag = "server";
         private const string SlotTag = "slot";
         private const string HiddenTag = "hidden";
+        private const string CoinsTag = "coins";
+        private const string MaxCoinsTag = "maxCoins";
 
 
-        private readonly string _path = Path.Combine(App.BasePath, "resources/config/characters.xml");
+        private readonly string _path = Path.Combine(App.ResourcesPath, "config/characters.xml");
         private XDocument _doc;
 
         public static XDocument BuildCharacterFile(SynchronizedObservableCollection<Character> list)
@@ -120,7 +123,9 @@ namespace TCC.Data
                 new XAttribute(LevelTag, c.Level),
                 new XAttribute(ItemLevelTag, c.ItemLevel),
                 new XAttribute(HiddenTag, c.Hidden),
-                new XAttribute(PiecesOfDragonScrollTag, c.PiecesOfDragonScroll)
+                new XAttribute(PiecesOfDragonScrollTag, c.PiecesOfDragonScroll),
+                new XAttribute(CoinsTag, c.Coins),
+                new XAttribute(MaxCoinsTag, c.MaxCoins)
             );
         }
         private static XElement BuildDungeonDataXelement(Character c)
@@ -167,6 +172,8 @@ namespace TCC.Data
                 else if (attr.Name == ClassTag) ch.Class = (Class)Enum.Parse(typeof(Class), attr.Value);
                 else if (attr.Name == LevelTag) ch.Level = Convert.ToInt32(attr.Value);
                 else if (attr.Name == ItemLevelTag) ch.ItemLevel = Convert.ToInt32(attr.Value);
+                else if (attr.Name == CoinsTag) ch.Coins = Convert.ToUInt32(attr.Value);
+                else if (attr.Name == MaxCoinsTag) ch.MaxCoins = Convert.ToUInt32(attr.Value);
                 else if (attr.Name == LastOnlineTag) ch.LastOnline = Convert.ToInt64(attr.Value);
                 else if (attr.Name == LastLocationTag) ch.LastLocation = new Location(attr.Value);
                 else if (attr.Name == GuildNameTag) ch.GuildName = attr.Value;
@@ -275,7 +282,8 @@ namespace TCC.Data
 
         private void ParseEliteStatus()
         {
-            SessionManager.IsElite = bool.Parse(_doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value);
+            var val = _doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value;
+            if(val != null) SessionManager.IsElite = bool.Parse(val);
         }
     }
 }

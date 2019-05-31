@@ -8,10 +8,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls.Chat;
 using TCC.Data;
+using TCC.Interop.Proxy;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {
+    // TODO: refactor this when???
     public partial class FloatingButtonWindow
     {
         public FloatingButtonWindow()
@@ -20,6 +23,7 @@ namespace TCC.Windows.Widgets
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = WindowContent;
             ButtonsRef = null;
+            CanMove = false;
             Init(Settings.SettingsHolder.FloatingButtonSettings, perClassPosition: false);
         }
 
@@ -50,7 +54,6 @@ namespace TCC.Windows.Widgets
 
         public TooltipInfo TooltipInfo { get; set; }
 
-
         private void RepeatAnimation(object sender, EventArgs e)
         {
             Animate();
@@ -68,7 +71,6 @@ namespace TCC.Windows.Widgets
 
             if (FocusManager.TeraScreen == null) return;
             var teraScreenBounds = FocusManager.TeraScreen.Bounds;
-            if (teraScreenBounds == null) return; // whateverrrrrrrrr
             Left = teraScreenBounds.X;
             Top = teraScreenBounds.Y + teraScreenBounds.Height / 2;
             //RefreshTopmost();
@@ -122,7 +124,7 @@ namespace TCC.Windows.Widgets
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Proxy.Proxy.RequestLfgList();
+            ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
         }
 
         private bool _busy;
@@ -162,16 +164,17 @@ namespace TCC.Windows.Widgets
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
                 }
                 RefreshTopmost();
-                NotificationContainer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200))
+                NotificationContainer.RenderTransform.BeginAnimation(TranslateTransform.XProperty,
+                    new DoubleAnimation(50, 0, TimeSpan.FromMilliseconds(250))
                     {
                         EasingFunction = new QuadraticEase()
                     });
                 NotificationContent.BeginAnimation(OpacityProperty,
-                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150))
+                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200))
                     {
                         EasingFunction = new QuadraticEase()
                     });
+
                 NotificationTimeGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(timeMs)));
                 _n.Interval = TimeSpan.FromMilliseconds(timeMs);
                 _n.Start();
@@ -182,13 +185,13 @@ namespace TCC.Windows.Widgets
         {
             Dispatcher.Invoke(() =>
             {
-                NotificationContainer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200))
+                NotificationContainer.RenderTransform.BeginAnimation(TranslateTransform.XProperty,
+                    new DoubleAnimation(0, -50, TimeSpan.FromMilliseconds(250))
                     {
                         EasingFunction = new QuadraticEase()
                     });
                 NotificationContent.BeginAnimation(OpacityProperty,
-                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150))
+                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200))
                     {
                         EasingFunction = new QuadraticEase()
                     });

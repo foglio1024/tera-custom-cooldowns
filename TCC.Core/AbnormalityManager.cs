@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
+
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
+
+using TeraDataLite;
 
 namespace TCC
 {
@@ -58,10 +61,10 @@ namespace TCC
         }
         public static void BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             if (duration == int.MaxValue) ab.Infinity = true;
-            if (target.IsMe())
+            if (SessionManager.IsMe(target))
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!Settings.SettingsHolder.DisablePartyAbnormals)
@@ -73,14 +76,12 @@ namespace TCC
             {
                 BeginNpcAbnormality(ab, stacks, duration, target);
             }
-            if (source.IsMe() || target.IsMe()) CheckPassivity(ab, duration);
-
-            return;
+            if (SessionManager.IsMe(source) || SessionManager.IsMe(target)) CheckPassivity(ab, duration);
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
-            if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
-            if (target.IsMe()) EndPlayerAbnormality(ab);
+            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (SessionManager.IsMe(target)) EndPlayerAbnormality(ab);
             else WindowManager.BossWindow.VM.EndNpcAbnormality(target, ab);
 
             return true;
@@ -97,7 +98,7 @@ namespace TCC
                 else
                 {
                     SessionManager.CurrentPlayer.AddOrRefreshBuff(ab, duration, stacks);
-                    if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
+                    //if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
@@ -134,13 +135,8 @@ namespace TCC
                 }
                 else
                 {
-
                     SessionManager.CurrentPlayer.RemoveBuff(ab);
-                    if (ab.IsShield)
-                    {
-                        SessionManager.SetPlayerShield(0);
-                        SessionManager.SetPlayerMaxShield(0);
-                    }
+
                 }
             }
             else
@@ -162,20 +158,15 @@ namespace TCC
         private static bool Filter(Abnormality ab)
         {
             return  ab.IsShow 
-                && !ab.Name.Contains("BTS") 
-                && !ab.ToolTip.Contains("BTS") 
-                && (    
-                       !ab.Name.Contains("(Hidden)") 
-                    && !ab.Name.Equals("Unknown") 
-                    && !ab.Name.Equals(string.Empty)
-                   );
+                    && !ab.Name.Contains("BTS") 
+                    && !ab.ToolTip.Contains("BTS") && !ab.Name.Contains("(Hidden)") && !ab.Name.Equals("Unknown") && !ab.Name.Equals(string.Empty);
         }
 
         public static void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
             WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
                 WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             }));
@@ -185,7 +176,7 @@ namespace TCC
         {
             WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SessionManager.CurrentDatabase.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
                 WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
             }));

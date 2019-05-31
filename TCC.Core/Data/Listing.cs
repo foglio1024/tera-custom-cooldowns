@@ -3,7 +3,8 @@ using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Pc;
-using TCC.ViewModels;
+using TCC.Interop.Proxy;
+using TeraDataLite;
 
 namespace TCC.Data
 {
@@ -90,9 +91,10 @@ namespace TCC.Data
             }
         }
 
+        //TODO: deadlock may happen here
         public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
-                               LeaderId == SessionManager.CurrentPlayer.PlayerId ||
-                                WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
+                                                      LeaderId == SessionManager.CurrentPlayer.PlayerId ||
+                                                      WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
@@ -160,6 +162,15 @@ namespace TCC.Data
             Apply = new ApplyCommand(this);
             RefreshApplicants = new RefreshApplicantsCommand(this);
         }
+
+        public Listing(ListingData l) : this()
+        {
+            LeaderName = l.LeaderName;
+            LeaderId = l.LeaderId;
+            IsRaid = l.IsRaid;
+            Message = l.Message;
+            PlayerCount = l.PlayerCount;
+        }
     }
 
     public class ApplyCommand : ICommand
@@ -186,7 +197,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.Proxy.ApplyToLfg(_listing.LeaderId);
+            ProxyInterface.Instance.Stub.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
             _listing.CanApply = false;
             _t.Start();
         }
@@ -208,7 +219,7 @@ namespace TCC.Data
 
         public void Execute(object parameter)
         {
-            Proxy.Proxy.RequestCandidates();
+            ProxyInterface.Instance.Stub.RequestListingCandidates(); //ProxyOld.RequestCandidates();
         }
     }
 

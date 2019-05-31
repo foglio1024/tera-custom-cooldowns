@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using TCC.Data.Databases;
 
 namespace TCC.Data.Map
 {
@@ -10,7 +9,7 @@ namespace TCC.Data.Map
         public uint Guard { get; }
         public uint Section { get; }
 
-        public string SectionName => SessionManager.CurrentDatabase.GetSectionName(Guard, Section);
+        public string SectionName => SessionManager.DB.GetSectionName(Guard, Section);
 
         public Point Position { get; }
 

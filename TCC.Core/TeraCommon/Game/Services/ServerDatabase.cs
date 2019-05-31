@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TCC.Data;
+using TeraDataLite;
 
 namespace TCC.TeraCommon.Game.Services
 {
+    //TODO: make this the same as other DBs
     public class ServerDatabase
     {
+        private const string DefaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
+
         private readonly List<Server> _servers;
         private List<Server> _serverlist;
 
@@ -21,6 +24,13 @@ namespace TCC.TeraCommon.Game.Services
                             !string.IsNullOrEmpty(parts[2]) ? uint.Parse(parts[2]) : uint.MaxValue)).ToList();
             _servers = _serverlist.Where(x => x.ServerId != uint.MaxValue).ToList();
             _serverlist.Add(new Server("VPN", "Unknown", "127.0.0.1"));
+
+            var serversOverridePath = Path.Combine(App.ResourcesPath, "config/server-overrides.txt");
+            if (!File.Exists(serversOverridePath))//create the default file if it doesn't exist
+                File.WriteAllText(serversOverridePath, DefaultOverride);
+            var overriddenServers = GetServers(serversOverridePath).ToList();
+            AddOverrides(overriddenServers);
+
         }
 
         public string Region { get; set; }
@@ -64,6 +74,23 @@ namespace TCC.TeraCommon.Game.Services
             }
         }
 
+        private static IEnumerable<Server> GetServers(string filename)
+        {
+            return File.ReadAllLines(filename)
+                       .Where(s => !s.StartsWith("#") && !string.IsNullOrWhiteSpace(s))
+                       .Select(s => s.Split(new[] { ' ' }, 3))
+                       .Select(parts => new Server(parts[2], parts[1], parts[0]));
+        }
+        public Dictionary<string, Server> GetServersByIp()
+        {
+            return _serverlist.GroupBy(x => x.Ip).ToDictionary(x => x.Key, x => x.First());
+        }
+        public Server GetServer(uint serverId, Server oldServer = null)
+        {
+            var servers = _servers.Where(x => x.ServerId == serverId).ToList();
+            if (!servers.Any()) return oldServer;
+            return servers.FirstOrDefault(x => x.Region == Region) ?? servers.First();
+        }
         public string GetServerName(uint serverId, Server oldServer = null)
         {
             var servers = _servers.Where(x => x.ServerId == serverId).ToList();
@@ -71,21 +98,10 @@ namespace TCC.TeraCommon.Game.Services
             return servers.FirstOrDefault(x => x.Region == Region)?.Name ?? servers.First().Name;
         }
 
-        public Dictionary<string, Server> GetServersByIp()
-        {
-            return _serverlist.GroupBy(x => x.Ip).ToDictionary(x => x.Key, x => x.First());
-        }
-
-        public void AddOverrides(IEnumerable<Server> newServers)
+        private void AddOverrides(IEnumerable<Server> newServers)
         {
             _serverlist = _serverlist.Concat(newServers.Where(sl => _serverlist.All(os => os.Ip != sl.Ip))).ToList();
         }
 
-        public Server GetServer(uint serverId, Server oldServer = null)
-        {
-            var servers = _servers.Where(x => x.ServerId == serverId).ToList();
-            if (!servers.Any()) return oldServer;
-            return servers.FirstOrDefault(x => x.Region == Region) ?? servers.First();
-        }
     }
 }

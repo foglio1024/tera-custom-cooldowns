@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using TCC.Settings;
-using TCC.Windows;
 
 namespace TCC.Data.Databases
 {
@@ -14,15 +12,9 @@ namespace TCC.Data.Databases
 
         protected override string FolderName => "monsters";
         protected override string Extension => "xml";
-        public override bool Exists
-        {
-            get
-            {
-                return base.Exists && File.Exists(OverrideFileFullPath);
-            }
-        }
-        private string OverrideFileFullPath => FullPath.Replace(_language, "override");
-        private string OverrideFileRelativePath => RelativePath.Replace(_language, "override");
+        public override bool Exists => base.Exists && File.Exists(OverrideFileFullPath);
+        private string OverrideFileFullPath => FullPath.Replace(Language, "override");
+        private string OverrideFileRelativePath => RelativePath.Replace(Language, "override");
 
         public MonsterDatabase(string lang) : base(lang)
         {
@@ -38,34 +30,23 @@ namespace TCC.Data.Databases
         public string GetZoneName(uint zoneId)
         {
             _zones.TryGetValue(zoneId, out var z);
-            return z != null ? z.Name : "Unkown zone";
+            return z != null ? z.Name : "Unknown zone";
         }
         public string GetName(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out var m)) return m.Name;
-            else return "Unknown";
+            return TryGetMonster(templateId, zoneId, out var m) ? m.Name : "Unknown";
         }
         public ulong GetMaxHP(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(templateId, zoneId, out var m))
-            {
-                return m.MaxHP;
-            }
-            else return 1;
-        }
-
-        public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
-        {
-            base.CheckVersion();
-            base.CheckVersion(OverrideFileFullPath, OverrideFileRelativePath);
+            return TryGetMonster(templateId, zoneId, out var m) ? m.MaxHP : 1;
         }
 
         public override void Load()
         {
             _zones.Clear();
-            var _monstersDoc = XDocument.Load(FullPath);
+            var monstersDoc = XDocument.Load(FullPath);
 
-            foreach (var zone in _monstersDoc.Descendants().Where(x => x.Name == "Zone"))
+            foreach (var zone in monstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
                 var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
                 var zoneName = zone.Attribute("name")?.Value;
@@ -83,8 +64,8 @@ namespace TCC.Data.Databases
                 }
                 _zones.Add(zoneId, z);
             }
-            var _overrideDoc = XDocument.Load(OverrideFileFullPath);
-            foreach (var zone in _overrideDoc.Descendants().Where(x => x.Name == "Zone"))
+            var overrideDoc = XDocument.Load(OverrideFileFullPath);
+            foreach (var zone in overrideDoc.Descendants().Where(x => x.Name == "Zone"))
             {
                 var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
 
@@ -110,7 +91,7 @@ namespace TCC.Data.Databases
 
         public override void Update(string custom = null)
         {
-            base.Update();
+            base.Update(custom);
             base.Update(OverrideFileRelativePath);
         }
     }

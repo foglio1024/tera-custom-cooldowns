@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -9,6 +10,7 @@ using TCC.Data;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
@@ -30,7 +32,7 @@ namespace TCC.ViewModels
         public WindowSettings FloatingButtonSettings => SettingsHolder.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => SettingsHolder.CivilUnrestWindowSettings;
 
-        private int _khCount = 0;
+        private int _khCount;
         private bool _kh;
         public bool KylosHelper
         {
@@ -41,7 +43,7 @@ namespace TCC.ViewModels
                 switch (_khCount)
                 {
                     case 0:
-                        WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning, 4000);
+                        WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
                         break;
                     case 1:
                         WindowManager.FloatingButton.NotifyExtended(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
@@ -70,6 +72,27 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool DisableLfgChatMessages
+        {
+            get => SettingsHolder.DisableLfgChatMessages;
+            set
+            {
+                if (SettingsHolder.DisableLfgChatMessages == value) return;
+                SettingsHolder.DisableLfgChatMessages = value;
+                N();
+            }
+        }
+        public bool ShowMembersHpNumbers
+        {
+            get => SettingsHolder.ShowMembersHpNumbers;
+            set
+            {
+                if (SettingsHolder.ShowMembersHpNumbers == value) return;
+                SettingsHolder.ShowMembersHpNumbers = value;
+                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                N();
+            }
+        }
         public bool ExperimentalNotification
         {
             get => SettingsHolder.ExperimentalNotification;
@@ -90,6 +113,16 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool CheckGuildBamWithoutOpcode  // by HQ 20190324
+        {
+            get => SettingsHolder.CheckGuildBamWithoutOpcode;
+            set
+            {
+                if (SettingsHolder.CheckGuildBamWithoutOpcode == value) return;
+                SettingsHolder.CheckGuildBamWithoutOpcode = value;
+                N();
+            }
+        }
         public bool HideMe
         {
             get => SettingsHolder.IgnoreMeInGroupWindow;
@@ -97,7 +130,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.IgnoreMeInGroupWindow == value) return;
                 SettingsHolder.IgnoreMeInGroupWindow = value;
-                if (value) WindowManager.GroupWindow.VM.RemoveMe();
+                WindowManager.GroupWindow.VM.ToggleMe(!value);
                 N();
             }
         }
@@ -186,7 +219,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.DisablePartyAbnormals == value) return;
                 SettingsHolder.DisablePartyAbnormals = value;
                 N(nameof(DisableAllPartyAbnormals));
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 if (value) WindowManager.GroupWindow.VM.ClearAllAbnormalities();
             }
         }
@@ -198,7 +231,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.AccurateHp == value) return;
                 SettingsHolder.AccurateHp = value;
                 N(nameof(AccurateHp));
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
             }
         }
 
@@ -367,7 +400,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.DisablePartyMP == value) return;
                 SettingsHolder.DisablePartyMP = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 N(nameof(DisableMP));
             }
         }
@@ -379,7 +412,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.DisablePartyHP == value) return;
                 SettingsHolder.DisablePartyHP = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 N(nameof(DisableHP));
             }
         }
@@ -423,6 +456,16 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.LfgEnabled == value) return;
                 SettingsHolder.LfgEnabled = value;
+                N();
+            }
+        }
+        public bool EnableProxy
+        {
+            get => SettingsHolder.EnableProxy;
+            set
+            {
+                if (SettingsHolder.EnableProxy == value) return;
+                SettingsHolder.EnableProxy = value;
                 N();
             }
         }
@@ -508,17 +551,77 @@ namespace TCC.ViewModels
                 if (SettingsHolder.FlightGaugeRotation == value) return;
                 SettingsHolder.FlightGaugeRotation = value;
                 N(nameof(FlightGaugeRotation));
-                WindowManager.FlightDurationWindow.ExNPC(nameof(FlightGaugeRotation));
+                WindowManager.FlightDurationWindow.VM.ExN(nameof(FlightGaugeRotation));
             }
         }
 
-        public bool DiscordWebhookEnabled
+        public bool WebhookEnabledGuildBam
         {
-            get => SettingsHolder.DiscordWebhookEnabled;
+            get => SettingsHolder.WebhookEnabledGuildBam;
             set
             {
-                if (SettingsHolder.DiscordWebhookEnabled == value) return;
-                SettingsHolder.DiscordWebhookEnabled = value;
+                if (SettingsHolder.WebhookEnabledGuildBam == value) return;
+                SettingsHolder.WebhookEnabledGuildBam = value;
+                N();
+            }
+        }
+        public bool WebhookEnabledFieldBoss
+        {
+            get => SettingsHolder.WebhookEnabledFieldBoss;
+            set
+            {
+                if (SettingsHolder.WebhookEnabledFieldBoss == value) return;
+                SettingsHolder.WebhookEnabledFieldBoss = value;
+                N();
+            }
+        }
+        public string WebhookUrlGuildBam
+        {
+            get => SettingsHolder.WebhookUrlGuildBam;
+            set
+            {
+                if (value == SettingsHolder.WebhookUrlGuildBam) return;
+                SettingsHolder.WebhookUrlGuildBam = value;
+                N();
+            }
+        }
+        public string WebhookUrlFieldBoss
+        {
+            get => SettingsHolder.WebhookUrlFieldBoss;
+            set
+            {
+                if (value == SettingsHolder.WebhookUrlFieldBoss) return;
+                SettingsHolder.WebhookUrlFieldBoss = value;
+                N();
+            }
+        }
+        public string WebhookMessageGuildBam
+        {
+            get => SettingsHolder.WebhookMessageGuildBam;
+            set
+            {
+                if (value == SettingsHolder.WebhookMessageGuildBam) return;
+                SettingsHolder.WebhookMessageGuildBam = value;
+                N();
+            }
+        }
+        public string WebhookMessageFieldBossSpawn
+        {
+            get => SettingsHolder.WebhookMessageFieldBossSpawn;
+            set
+            {
+                if (value == SettingsHolder.WebhookMessageFieldBossSpawn) return;
+                SettingsHolder.WebhookMessageFieldBossSpawn = value;
+                N();
+            }
+        }
+        public string WebhookMessageFieldBossDie
+        {
+            get => SettingsHolder.WebhookMessageFieldBossDie;
+            set
+            {
+                if (value == SettingsHolder.WebhookMessageFieldBossDie) return;
+                SettingsHolder.WebhookMessageFieldBossDie = value;
                 N();
             }
         }
@@ -530,26 +633,6 @@ namespace TCC.ViewModels
                 if (SettingsHolder.ShowNotificationBubble == value) return;
                 SettingsHolder.ShowNotificationBubble = value;
                 N();
-            }
-        }
-        public string Webhook
-        {
-            get => SettingsHolder.Webhook;
-            set
-            {
-                if (value == SettingsHolder.Webhook) return;
-                SettingsHolder.Webhook = value;
-                N(nameof(Webhook));
-            }
-        }
-        public string WebhookMessage
-        {
-            get => SettingsHolder.WebhookMessage;
-            set
-            {
-                if (value == SettingsHolder.WebhookMessage) return;
-                SettingsHolder.WebhookMessage = value;
-                N(nameof(WebhookMessage));
             }
         }
         public string TwitchUsername
@@ -600,9 +683,23 @@ namespace TCC.ViewModels
             {
                 if (SettingsHolder.Npcap == value) return;
                 var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
-                    MessageBoxButton.OKCancel);
+                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Cancel) return;
                 SettingsHolder.Npcap = value;
+                N();
+                if (res == MessageBoxResult.OK) App.Restart();
+            }
+        }
+        public CaptureMode CaptureMode
+        {
+            get => SettingsHolder.CaptureMode;
+            set
+            {
+                if (SettingsHolder.CaptureMode == value) return;
+                var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
+                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Cancel) return;
+                SettingsHolder.CaptureMode = value;
                 N();
                 if (res == MessageBoxResult.OK) App.Restart();
             }
@@ -711,13 +808,15 @@ namespace TCC.ViewModels
         //    }
         //}
 
-        public IEnumerable<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
-        public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
-        public IEnumerable<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
-        public IEnumerable<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
-        public IEnumerable<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
-        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => Utils.ListFromEnum<WarriorEdgeMode>();
-        public IEnumerable<ControlShape> ControlShapes => Utils.ListFromEnum<ControlShape>();
+        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
+        //public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
+        public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
+        public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
+        public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();
+        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => EnumUtils.ListFromEnum<WarriorEdgeMode>();
+        public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
+        public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
+        public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
 
         public bool ChatWindowEnabled
         {
@@ -730,16 +829,16 @@ namespace TCC.ViewModels
             }
         }
 
-        public ClickThruMode ChatClickThruMode
-        {
-            get => SettingsHolder.ChatClickThruMode;
-            set
-            {
-                if (SettingsHolder.ChatClickThruMode == value) return;
-                SettingsHolder.ChatClickThruMode = value;
-                N();
-            }
-        }
+        //public ClickThruMode ChatClickThruMode
+        //{
+        //    get => SettingsHolder.ChatClickThruMode;
+        //    set
+        //    {
+        //        if (SettingsHolder.ChatClickThruMode == value) return;
+        //        SettingsHolder.ChatClickThruMode = value;
+        //        N();
+        //    }
+        //}
 
         public bool ShowTradeLfgs
         {
@@ -779,7 +878,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowEdge == value) return;
                 SettingsHolder.WarriorShowEdge = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowEdge));
+                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
             }
         }
         public bool SorcererReplacesElementsInCharWindow
@@ -802,7 +901,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorShowTraverseCut == value) return;
                 SettingsHolder.WarriorShowTraverseCut = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.ShowTraverseCut));
+                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
             }
         }
 
@@ -814,7 +913,23 @@ namespace TCC.ViewModels
                 if (SettingsHolder.WarriorEdgeMode == value) return;
                 SettingsHolder.WarriorEdgeMode = value;
                 N();
-                if (WindowManager.ClassWindow.VM.CurrentManager is WarriorBarManager wm) wm.ExN(nameof(WarriorBarManager.WarriorEdgeMode));
+                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
+            }
+
+        }
+        public GroupWindowLayout GroupWindowLayout
+        {
+            get => SettingsHolder.GroupWindowLayout;
+            set
+            {
+                if (SettingsHolder.GroupWindowLayout == value) return;
+                SettingsHolder.GroupWindowLayout = value;
+                N();
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.GroupWindowLayout));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.All));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Dps));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Healers));
+                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Tanks));
             }
 
         }
@@ -827,7 +942,7 @@ namespace TCC.ViewModels
                 if (SettingsHolder.FlipFlightGauge == value) return;
                 SettingsHolder.FlipFlightGauge = value;
                 N();
-                WindowManager.FlightDurationWindow.ExNPC(nameof(FlipFlightGauge));
+                WindowManager.FlightDurationWindow.VM.ExN(nameof(FlipFlightGauge));
             }
         }
         public bool ForceSoftwareRendering

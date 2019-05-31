@@ -8,34 +8,34 @@ namespace TCC.Data.Databases
 {
     public class DungeonDatabase : DatabaseBase
     {
-        private readonly string CustomDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
-        private readonly string DefaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
-        private readonly string DefaultDefsRelativePath =  "default-dungeon-defs.tsv";
-        private readonly string ImagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
-        private readonly string ImagesRelativePath = "section_images.tsv";
+        private readonly string _customDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
+        private readonly string _defaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
+        private readonly string _defaultDefsRelativePath = "default-dungeon-defs.tsv";
+        private readonly string _imagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
+        private readonly string _imagesRelativePath = "section_images.tsv";
 
         public readonly Dictionary<uint, Dungeon> Dungeons;
 
         protected override string FolderName => "dungeons";
         protected override string Extension => "tsv";
         public override bool Exists => base.Exists
-                                    && File.Exists(DefaultDefsFullPath) 
-                                    && File.Exists(ImagesFullPath);
+                                    && File.Exists(_defaultDefsFullPath)
+                                    && File.Exists(_imagesFullPath);
 
         public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
         {
-            base.CheckVersion();
-            base.CheckVersion(DefaultDefsFullPath, DefaultDefsRelativePath);
-            base.CheckVersion(ImagesFullPath, ImagesRelativePath);
+            base.CheckVersion(FullPath, RelativePath);
+            base.CheckVersion(_defaultDefsFullPath, _defaultDefsRelativePath);
+            base.CheckVersion(_imagesFullPath, _imagesRelativePath);
         }
         public override void Update(string custom = null)
         {
-            base.Update();
-            base.Update(DefaultDefsRelativePath);
-            base.Update(ImagesRelativePath);
+            base.Update(RelativePath);
+            base.Update(_defaultDefsRelativePath);
+            base.Update(_imagesRelativePath);
         }
 
-        public DungeonDatabase(string lang) :base(lang)
+        public DungeonDatabase(string lang) : base(lang)
         {
             Dungeons = new Dictionary<uint, Dungeon>();
         }
@@ -53,14 +53,19 @@ namespace TCC.Data.Databases
                 var s = line.Split('\t');
                 var id = uint.Parse(s[0]);
                 var name = s[1];
-                Dungeons[id] = new Dungeon(id, name);
+                var dg = new Dungeon(id, name);
+                if (s.Length > 2) //TODO: remove check when all regions are updated
+                {
+                    dg.Cost = int.Parse(s[2]);
+                }
+                Dungeons[id] = dg;
             }
         }
         private void ParseDungeonDefs()
         {
-            if (!File.Exists(CustomDefsPath)) File.Copy(DefaultDefsFullPath, CustomDefsPath);
+            if (!File.Exists(_customDefsPath)) File.Copy(_defaultDefsFullPath, _customDefsPath);
             //var def = File.OpenText(CustomDefsPath);
-            var lines = File.ReadAllLines(CustomDefsPath);
+            var lines = File.ReadAllLines(_customDefsPath);
             foreach (var line in lines)
             {
                 //var line = def.ReadLine();
@@ -73,11 +78,15 @@ namespace TCC.Data.Databases
                 var sReqIlvl = s[3];
                 var sDobuleElite = s[4];
                 var sIndex = s[5];
+                var resetMode = ResetMode.Daily;
+                if (s.Length >= 7 && (ResetMode)Enum.Parse(typeof(ResetMode), s[6]) == ResetMode.Weekly) resetMode = ResetMode.Weekly;
+
                 if (!Dungeons.TryGetValue(id, out var dung)) continue;
                 dung.Show = true;
                 dung.ShortName = shortName;
                 dung.DoublesOnElite = bool.Parse(sDobuleElite);
                 dung.Index = int.Parse(sIndex);
+                dung.ResetMode = resetMode;
                 if (short.TryParse(sMaxBaseRuns, out var baseRuns)) dung.MaxBaseRuns = baseRuns;
                 if (!int.TryParse(sReqIlvl, out var reqIlvl)) continue;
                 try
@@ -94,7 +103,7 @@ namespace TCC.Data.Databases
         private void ParseDungeonIcons()
         {
             //var f = File.OpenText(ImagesFullPath);
-            var lines = File.ReadAllLines(ImagesFullPath);
+            var lines = File.ReadAllLines(_imagesFullPath);
             foreach (var line in lines)
             {
                 //var line = f.ReadLine();
@@ -134,9 +143,11 @@ namespace TCC.Data.Databases
                 sb.Append(d.DoublesOnElite);
                 sb.Append("\t");
                 sb.Append(d.Index);
+                sb.Append("\t");
+                sb.Append(d.ResetMode);
                 sb.Append("\n");
             });
-            File.WriteAllText(CustomDefsPath, sb.ToString());
+            File.WriteAllText(_customDefsPath, sb.ToString());
         }
 
         public override void Load()

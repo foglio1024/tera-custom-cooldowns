@@ -30,13 +30,17 @@
             <Button Click="SetSorcElementBoost">Ice Boost</Button>
             <Button Click="SetSorcElementBoost">Arcane Boost</Button>
         </StackPanel>
-        <StackPanel>
+        <StackPanel Margin="5">
             <Button Click="ButtonBase_OnClick">Start Mana Boost</Button>
             <Button Click="SetStance">Assault</Button>
             <Button Click="SetStance">Defensive</Button>
             <Button Click="SetStance">None</Button>
             <Button Click="IncreaseEdge">Edge</Button>
             <Button Click="DungeonTest">DungeonTest</Button>
+        </StackPanel>
+        <StackPanel Margin="5">
+            <Button Click="RegisterWebhook">Register</Button>
+            <Button Click="FireWebhook">Fire</Button>
         </StackPanel>
     </StackPanel>
 </Window>

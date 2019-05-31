@@ -99,6 +99,9 @@ namespace TCC.R
 		public static Geometry SvgNpcIcon => ((Geometry)App.Current.FindResource("SvgNpcIcon"));
 		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
 		public static Geometry SvgDotsVertical => ((Geometry)App.Current.FindResource("SvgDotsVertical"));
+		public static Geometry SvgAuto => ((Geometry)App.Current.FindResource("SvgAuto"));
+		public static Geometry SvgShare => ((Geometry)App.Current.FindResource("SvgShare"));
+		public static Geometry SvgMoney => ((Geometry)App.Current.FindResource("SvgMoney"));
 		public static Geometry Svg => ((Geometry)App.Current.FindResource("Svg"));
 	}
 	public static class Colors
@@ -111,6 +114,9 @@ namespace TCC.R
 		public static Color RevampDarkBackgroundColor => ((Color)App.Current.FindResource("RevampDarkBackgroundColor"));
 		public static Color RevampDarkerBackgroundColor => ((Color)App.Current.FindResource("RevampDarkerBackgroundColor"));
 		public static Color RevampBorderColor => ((Color)App.Current.FindResource("RevampBorderColor"));
+		public static Color TeraRestylePanelColor => ((Color)App.Current.FindResource("TeraRestylePanelColor"));
+		public static Color TeraRestyleBorderColor => ((Color)App.Current.FindResource("TeraRestyleBorderColor"));
+		public static Color TeraRestyleBorderColorLight => ((Color)App.Current.FindResource("TeraRestyleBorderColorLight"));
 		public static Color ClassGlowColor => ((Color)App.Current.FindResource("ClassGlowColor"));
 		public static Color GreenColor => ((Color)App.Current.FindResource("GreenColor"));
 		public static Color MainColor => ((Color)App.Current.FindResource("MainColor"));
@@ -172,6 +178,10 @@ namespace TCC.R
 		public static Color AbnormalityStunColor => ((Color)App.Current.FindResource("AbnormalityStunColor"));
 		public static Color AbnormalityDebuffColor => ((Color)App.Current.FindResource("AbnormalityDebuffColor"));
 		public static Color AbnormalityDotColor => ((Color)App.Current.FindResource("AbnormalityDotColor"));
+		public static Color ItemCommonColor => ((Color)App.Current.FindResource("ItemCommonColor"));
+		public static Color ItemUncommonColor => ((Color)App.Current.FindResource("ItemUncommonColor"));
+		public static Color ItemRareColor => ((Color)App.Current.FindResource("ItemRareColor"));
+		public static Color ItemSuperiorColor => ((Color)App.Current.FindResource("ItemSuperiorColor"));
 		public static Color ChatSayColor => ((Color)App.Current.FindResource("ChatSayColor"));
 		public static Color ChatPartyColor => ((Color)App.Current.FindResource("ChatPartyColor"));
 		public static Color ChatGuildColor => ((Color)App.Current.FindResource("ChatGuildColor"));
@@ -238,6 +248,9 @@ namespace TCC.R
 		public static SolidColorBrush RevampDarkerBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("RevampDarkerBackgroundBrush"));
 		public static SolidColorBrush RevampDarkerBackground70Brush => ((SolidColorBrush)App.Current.FindResource("RevampDarkerBackground70Brush"));
 		public static SolidColorBrush RevampBorderBrush => ((SolidColorBrush)App.Current.FindResource("RevampBorderBrush"));
+		public static SolidColorBrush TeraRestylePanelBrush => ((SolidColorBrush)App.Current.FindResource("TeraRestylePanelBrush"));
+		public static SolidColorBrush TeraRestyleBorderBrush => ((SolidColorBrush)App.Current.FindResource("TeraRestyleBorderBrush"));
+		public static SolidColorBrush TeraRestyleBorderBrushLight => ((SolidColorBrush)App.Current.FindResource("TeraRestyleBorderBrushLight"));
 		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
 		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
 		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
@@ -276,6 +289,10 @@ namespace TCC.R
 		public static SolidColorBrush MoongourdFadedAccentBrush => ((SolidColorBrush)App.Current.FindResource("MoongourdFadedAccentBrush"));
 		public static SolidColorBrush RunemarkBrush => ((SolidColorBrush)App.Current.FindResource("RunemarkBrush"));
 		public static SolidColorBrush MaxRunemarkBrush => ((SolidColorBrush)App.Current.FindResource("MaxRunemarkBrush"));
+		public static SolidColorBrush ItemCommonBrush => ((SolidColorBrush)App.Current.FindResource("ItemCommonBrush"));
+		public static SolidColorBrush ItemUncommonBrush => ((SolidColorBrush)App.Current.FindResource("ItemUncommonBrush"));
+		public static SolidColorBrush ItemRareBrush => ((SolidColorBrush)App.Current.FindResource("ItemRareBrush"));
+		public static SolidColorBrush ItemSuperiorBrush => ((SolidColorBrush)App.Current.FindResource("ItemSuperiorBrush"));
 		public static SolidColorBrush ChatSayBrush => ((SolidColorBrush)App.Current.FindResource("ChatSayBrush"));
 		public static SolidColorBrush ChatPartyBrush => ((SolidColorBrush)App.Current.FindResource("ChatPartyBrush"));
 		public static SolidColorBrush ChatGuildBrush => ((SolidColorBrush)App.Current.FindResource("ChatGuildBrush"));
@@ -328,10 +345,13 @@ namespace TCC.R
 		public static FontFamily RobotoMonoMedium => ((FontFamily)App.Current.FindResource("RobotoMonoMedium"));
 		public static FontFamily ArialMonoBold => ((FontFamily)App.Current.FindResource("ArialMonoBold"));
 		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
+		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
 		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
+		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
 		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
+		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
 		public static VisualBrush RhombOpacityMask => ((VisualBrush)App.Current.FindResource("RhombOpacityMask"));
 		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
 		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
@@ -368,6 +388,7 @@ namespace TCC.R
 		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
 		public static SizeToDurationLabelMarginConverter MainSizeToDurationLabelMargin => ((SizeToDurationLabelMarginConverter)App.Current.FindResource("MainSizeToDurationLabelMargin"));
 		public static ColorToTransparentConverter ColorToTransparent => ((ColorToTransparentConverter)App.Current.FindResource("ColorToTransparent"));
+		public static MessageTextToIconConverter MessageTextToIcon => ((MessageTextToIconConverter)App.Current.FindResource("MessageTextToIcon"));
 		public static EntityIdToNameConverter EntityIdToName => ((EntityIdToNameConverter)App.Current.FindResource("EntityIdToName"));
 		public static AggroTypeToFillConverter AggroTypeToFill => ((AggroTypeToFillConverter)App.Current.FindResource("AggroTypeToFill"));
 		public static DragonIdToColorConverter DragonIdToColor => ((DragonIdToColorConverter)App.Current.FindResource("DragonIdToColor"));
@@ -449,6 +470,7 @@ namespace TCC.R
 		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
 		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
 		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
+		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
 		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
 	}
 	public static class DataTemplates
@@ -474,11 +496,13 @@ namespace TCC.R
 		public static DataTemplate SimpleTemplate => ((DataTemplate)App.Current.FindResource("SimpleTemplate"));
 		public static DataTemplate MoneyTemplate => ((DataTemplate)App.Current.FindResource("MoneyTemplate"));
 		public static DataTemplate EmojiTemplate => ((DataTemplate)App.Current.FindResource("EmojiTemplate"));
+		public static DataTemplate IconTemplate => ((DataTemplate)App.Current.FindResource("IconTemplate"));
 		public static DataTemplate MessageHeaderTemplate => ((DataTemplate)App.Current.FindResource("MessageHeaderTemplate"));
 		public static DataTemplate MessageBodyTemplate => ((DataTemplate)App.Current.FindResource("MessageBodyTemplate"));
 		public static DataTemplate DefaultBody => ((DataTemplate)App.Current.FindResource("DefaultBody"));
 		public static DataTemplate BrokerOfferBody => ((DataTemplate)App.Current.FindResource("BrokerOfferBody"));
 		public static DataTemplate ApplyBody => ((DataTemplate)App.Current.FindResource("ApplyBody"));
+		public static DataTemplate LfgBody => ((DataTemplate)App.Current.FindResource("LfgBody"));
 		public static DataTemplate WhisperChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("WhisperChannelLabelTemplate"));
 		public static DataTemplate MegaphoneChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("MegaphoneChannelLabelTemplate"));
 		public static DataTemplate DefaultChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("DefaultChannelLabelTemplate"));
@@ -496,6 +520,8 @@ namespace TCC.R
 		public static DataTemplate Phase3EnemyWindowLayout => ((DataTemplate)App.Current.FindResource("Phase3EnemyWindowLayout"));
 		public static DataTemplate Phase4EnemyWindowLayout => ((DataTemplate)App.Current.FindResource("Phase4EnemyWindowLayout"));
 		public static DataTemplate DragonIndicator => ((DataTemplate)App.Current.FindResource("DragonIndicator"));
+		public static DataTemplate RoleColumnsGroupLayout => ((DataTemplate)App.Current.FindResource("RoleColumnsGroupLayout"));
+		public static DataTemplate SingleColumnGroupLayout => ((DataTemplate)App.Current.FindResource("SingleColumnGroupLayout"));
 		public static DataTemplate PartyDataTemplate => ((DataTemplate)App.Current.FindResource("PartyDataTemplate"));
 		public static DataTemplate RaidDataTemplate => ((DataTemplate)App.Current.FindResource("RaidDataTemplate"));
 		public static DataTemplate FixedCooldownTemplate => ((DataTemplate)App.Current.FindResource("FixedCooldownTemplate"));
@@ -505,6 +531,7 @@ namespace TCC.R
 		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplate => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
+		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
 	}
 	public static class TemplateSelectors
 	{
@@ -519,5 +546,6 @@ namespace TCC.R
 		public static AbnormalityTemplateSelector RaidAbnormalityTemplateSelector => ((AbnormalityTemplateSelector)App.Current.FindResource("RaidAbnormalityTemplateSelector"));
 		public static SkillTemplateSelector NormalSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("NormalSkillTemplateSelector"));
 		public static SkillTemplateSelector FixedSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("FixedSkillTemplateSelector"));
+		public static GroupWindowTemplateSelector GroupWindowTemplateSelector => ((GroupWindowTemplateSelector)App.Current.FindResource("GroupWindowTemplateSelector"));
 	}
 }

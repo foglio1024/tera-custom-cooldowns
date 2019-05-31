@@ -272,3 +272,9 @@ TCC\.Core/resources/images/Icon_Items/
 TCC\.Core/resources/images/Icon_Skills/
 
 TCC\.Core/resources/images/Icon_Status/
+
+TCC\.Publisher/github-token.txt
+
+TCC\.Publisher/webhook.txt
+
+TCC\.Publisher/firestore_version_update.txt

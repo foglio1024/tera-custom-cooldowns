@@ -9,6 +9,10 @@ using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
+
+// ReSharper disable CollectionNeverUpdated.Local
 
 namespace TCC.Settings
 {
@@ -27,9 +31,9 @@ namespace TCC.Settings
         private static readonly List<uint> MyBrawlerDefault = new List<uint> { 31020, 10153210 };
         private static readonly List<uint> MyGunnerDefault = new List<uint> { 89105101, 89105102, 89105103, 89105104, 89105105, 89105106, 89105107, 89105108, 89105109, 89105110, 89105111, 89105112, 89105113, 89105114, 89105115, 89105116, 89105117, 89105118, 89105119, 89105120, 10152340, 10152351 };
         private static readonly List<uint> MyLancerDefault = new List<uint> { 200230, 200231, 200232, 201701 };
-        private static readonly List<uint> MyMysticDefault = new List<uint> { };
+        private static readonly List<uint> MyMysticDefault = new List<uint>();
         private static readonly List<uint> MyNinjaDefault = new List<uint> { 89314201, 89314202, 89314203, 89314204, 89314205, 89314206, 89314207, 89314208, 89314209, 89314210, 89314211, 89314212, 89314213, 89314214, 89314215, 89314216, 89314217, 89314218, 89314219, 89314220, 10154480, 10154450 };
-        private static readonly List<uint> MyPriestDefault = new List<uint> { };
+        private static readonly List<uint> MyPriestDefault = new List<uint>();
         private static readonly List<uint> MyReaperDefault = new List<uint> { 10151010, 10151131, 10151192 };
         private static readonly List<uint> MySlayerDefault = new List<uint> { 300800, 300801, 300805 };
         private static readonly List<uint> MySorcererDefault = new List<uint> { 21170, 22120, 23180, 26250, 29011, 25170, 25171, 25201, 25202, 500100, 500150, 501600, 501650 };
@@ -85,33 +89,31 @@ namespace TCC.Settings
         {
             var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
             var ts = s.Descendants().FirstOrDefault(x => x.Name == "Tabs");
-            var lfg = false;
-            var fo = true;
-            var op = .3;
-            var ht = 10;
+            var lfgOn = false;
+            var fadeOut = true;
+            var backgroundOpacity = .3;
+            var frameOpacity = 1f;
+            var hideTimeout = 10;
             ws?.Attributes().ToList().ForEach(a =>
             {
-                if (a.Name == nameof(ChatWindowSettings.LfgOn)) lfg = bool.Parse(a.Value);
-                else if (a.Name == nameof(ChatWindowSettings.FadeOut)) fo = bool.Parse(a.Value);
-                else if (a.Name == nameof(ChatWindowSettings.BackgroundOpacity)) op = float.Parse(a.Value, CultureInfo.InvariantCulture);
-                else if (a.Name == nameof(ChatWindowSettings.HideTimeout)) ht = int.Parse(a.Value);
+                if (a.Name == nameof(ChatWindowSettings.LfgOn)) lfgOn = bool.Parse(a.Value);
+                else if (a.Name == nameof(ChatWindowSettings.FadeOut)) fadeOut = bool.Parse(a.Value);
+                else if (a.Name == nameof(ChatWindowSettings.BackgroundOpacity)) backgroundOpacity = float.Parse(a.Value, CultureInfo.InvariantCulture);
+                else if (a.Name == nameof(ChatWindowSettings.FrameOpacity)) frameOpacity = float.Parse(a.Value, CultureInfo.InvariantCulture);
+                else if (a.Name == nameof(ChatWindowSettings.HideTimeout)) hideTimeout = int.Parse(a.Value);
             });
 
             var sett = ParseWindowSettings(ws);
             var tabs = ParseTabsSettings(ts);
 
-            return new ChatWindowSettings(sett.X, sett.Y, sett.H, sett.W,
-                sett.Visible, sett.ClickThruMode,
-                sett.Scale, sett.AutoDim, sett.DimOpacity,
-                sett.ShowAlways, /*sett.AllowTransparency,*/
-                sett.Enabled, sett.AllowOffScreen)
+            return new ChatWindowSettings(sett)
             {
                 Tabs = tabs,
-                LfgOn = lfg,
-                BackgroundOpacity = op,
-                FadeOut = fo,
-                HideTimeout = ht
-
+                LfgOn = lfgOn,
+                BackgroundOpacity = backgroundOpacity,
+                FrameOpacity = frameOpacity,
+                FadeOut = fadeOut,
+                HideTimeout = hideTimeout
             };
         }
         private ClassPositions ParseWindowPositions(XElement windowSettingXElement)
@@ -166,8 +168,8 @@ namespace TCC.Settings
                 else if (a.Name == nameof(WindowSettings.Enabled)) enabled = bool.Parse(a.Value);
             });
 
-            if (x > 1) x = x / SettingsHolder.ScreenW;
-            if (y > 1) y = y / SettingsHolder.ScreenH;
+            if (x > 1) x /= WindowManager.ScreenSize.Width;
+            if (y > 1) y /= WindowManager.ScreenSize.Height;
 
             var positions = ParseWindowPositions(ws);
 
@@ -231,9 +233,11 @@ namespace TCC.Settings
             }
         }
         //===================================================================================
-        public void LoadWindowSettings()
+        public void LoadWindowSettings(string pathOverride = null)
         {
-            if (!File.Exists(Path.Combine(App.BasePath, "tcc-config.xml"))) return;
+            var path = Path.Combine(App.BasePath, "tcc-config.xml");
+            if (pathOverride != null) path = pathOverride;
+            if (!File.Exists(path)) return;
             try
             {
                 _settingsDoc = XDocument.Load(Path.Combine(App.BasePath, "tcc-config.xml"));
@@ -266,17 +270,20 @@ namespace TCC.Settings
             {
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
-                    MessageBoxButton.YesNo);
+                    MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
-                LoadWindowSettings();
+                LoadWindowSettings(pathOverride);
             }
         }
-        public void LoadSettings()
+        public void LoadSettings(string pathOverride = null)
         {
             try
             {
-                if (!File.Exists(Path.Combine(App.BasePath, "tcc-config.xml"))) return;
-                _settingsDoc = XDocument.Load(Path.Combine(App.BasePath, "tcc-config.xml"));
+                var path = Path.Combine(App.BasePath, "tcc-config.xml");
+                if (pathOverride != null) path = pathOverride;
+
+                if (!File.Exists(path)) return;
+                _settingsDoc = XDocument.Load(path);
 
                 var b = _settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -288,10 +295,12 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.BuffsDirection)) SettingsHolder.BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.CooldownBarMode)) SettingsHolder.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.EnrageLabelMode)) SettingsHolder.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.ChatClickThruMode)) SettingsHolder.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
+                    //else if (attr.Name == nameof(SettingsHolder.ChatClickThruMode)) SettingsHolder.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.WarriorEdgeMode)) SettingsHolder.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.AbnormalityShape)) SettingsHolder.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.SkillShape)) SettingsHolder.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.GroupWindowLayout)) SettingsHolder.GroupWindowLayout = (GroupWindowLayout)Enum.Parse(typeof(GroupWindowLayout), attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.CaptureMode)) SettingsHolder.CaptureMode = (CaptureMode)Enum.Parse(typeof(CaptureMode), attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.MaxMessages)) SettingsHolder.MaxMessages = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.SpamThreshold)) SettingsHolder.SpamThreshold = int.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.FontSize)) SettingsHolder.FontSize = int.Parse(attr.Value);
@@ -307,7 +316,7 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.ShowItemsCooldown)) SettingsHolder.ShowItemsCooldown = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowMembersLaurels)) SettingsHolder.ShowMembersLaurels = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.AnimateChatMessages)) SettingsHolder.AnimateChatMessages = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.StatSent)) SettingsHolder.StatSent = bool.Parse(attr.Value);
+                    //else if (attr.Name == nameof(SettingsHolder.StatSent)) SettingsHolder.StatSent = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowFlightEnergy)) SettingsHolder.ShowFlightEnergy = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.LfgEnabled)) SettingsHolder.LfgEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowGroupWindowDetails)) SettingsHolder.ShowGroupWindowDetails = bool.Parse(attr.Value);
@@ -329,20 +338,18 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.ForceSoftwareRendering)) SettingsHolder.ForceSoftwareRendering = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.Npcap)) SettingsHolder.Npcap = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ExperimentalNotification)) SettingsHolder.ExperimentalNotification = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.LanguageOverride) 
-                    || attr.Name == "RegionOverride" // retrocompatibility <<-----------------------------<<<<<<<<<< TODO: remove at some point
-                    ) SettingsHolder.LanguageOverride = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.LastLanguage)
-                    || attr.Name == "LastRegion" // retrocompatibility <<---------------------------------<<<<<<<<<< TODO: remove at some point
-                    ) SettingsHolder.LastLanguage = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.Webhook)) SettingsHolder.Webhook = attr.Value;
-                    else if (attr.Name == nameof(SettingsHolder.WebhookMessage)) SettingsHolder.WebhookMessage = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.LanguageOverride)) SettingsHolder.LanguageOverride = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.LastLanguage)) SettingsHolder.LastLanguage = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.FlightGaugeRotation)) SettingsHolder.FlightGaugeRotation = double.Parse(attr.Value, CultureInfo.InvariantCulture);
                     else if (attr.Name == nameof(SettingsHolder.LastRun)) SettingsHolder.LastRun = DateTime.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.TwitchName)) SettingsHolder.TwitchName = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.TwitchToken)) SettingsHolder.TwitchToken = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.StatSentVersion)) SettingsHolder.StatSentVersion = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.TwitchChannelName)) SettingsHolder.TwitchChannelName = attr.Value;
                     else if (attr.Name == nameof(SettingsHolder.GroupSizeThreshold)) SettingsHolder.GroupSizeThreshold = uint.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.ShowMembersHpNumbers)) SettingsHolder.ShowMembersHpNumbers = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.DisableLfgChatMessages)) SettingsHolder.DisableLfgChatMessages = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.CheckGuildBamWithoutOpcode)) SettingsHolder.CheckGuildBamWithoutOpcode = bool.Parse(attr.Value);
 
                     else if (attr.Name == nameof(SettingsHolder.HideBuffsThreshold)) SettingsHolder.HideBuffsThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.HideDebuffsThreshold)) SettingsHolder.HideDebuffsThreshold = uint.Parse(attr.Value);
@@ -350,12 +357,30 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsHolder.HideHpThreshold)) SettingsHolder.HideHpThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.HideMpThreshold)) SettingsHolder.HideMpThreshold = uint.Parse(attr.Value);
 
+                    else if (attr.Name == "Webhook") SettingsHolder.WebhookUrlGuildBam = attr.Value; // for retrocompat
+                    else if (attr.Name == "WebhookMessage") SettingsHolder.WebhookMessageGuildBam = attr.Value; // for retrocompat
+
+                    else if (attr.Name == nameof(SettingsHolder.WebhookEnabledGuildBam)) SettingsHolder.WebhookEnabledGuildBam = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.WebhookEnabledFieldBoss)) SettingsHolder.WebhookEnabledFieldBoss = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlGuildBam)) SettingsHolder.WebhookUrlGuildBam = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookUrlFieldBoss)) SettingsHolder.WebhookUrlFieldBoss = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookMessageGuildBam)) SettingsHolder.WebhookMessageGuildBam = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookMessageFieldBossSpawn)) SettingsHolder.WebhookMessageFieldBossSpawn = attr.Value;
+                    else if (attr.Name == nameof(SettingsHolder.WebhookMessageFieldBossDie)) SettingsHolder.WebhookMessageFieldBossDie = attr.Value;
+
                     else if (attr.Name == nameof(SettingsHolder.CheckOpcodesHash)) SettingsHolder.CheckOpcodesHash = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsHolder.DiscordWebhookEnabled)) SettingsHolder.DiscordWebhookEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.ShowNotificationBubble)) SettingsHolder.ShowNotificationBubble = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsHolder.UserExcludedSysMsg)) SettingsHolder.UserExcludedSysMsg = ParseUserExcludedSysMsg(attr.Value);
 
                     else if (attr.Name == nameof(SettingsHolder.FpsAtGuardian)) SettingsHolder.FpsAtGuardian = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.EnableProxy)) SettingsHolder.EnableProxy = bool.Parse(attr.Value);
+                    else if (attr.Name == nameof(SettingsHolder.DontShowFUBH)) SettingsHolder.DontShowFUBH = bool.Parse(attr.Value);
+
+                    else if (attr.Name == nameof(SettingsHolder.LastScreenSize))
+                    {
+                        var val = attr.Value.Split(',');
+                        SettingsHolder.LastScreenSize = new Size(float.Parse(val[0], CultureInfo.InvariantCulture), float.Parse(val[1], CultureInfo.InvariantCulture));
+                    }
                     //add settings here
                 });
 
@@ -397,9 +422,9 @@ namespace TCC.Settings
             {
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
-                    MessageBoxButton.YesNo);
+                    MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, "tcc-config.xml"));
-                LoadSettings();
+                LoadSettings(pathOverride);
             }
         }
 

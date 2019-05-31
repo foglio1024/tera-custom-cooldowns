@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using TCC.Data;
 using TCC.Data.Skills;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {
@@ -14,12 +14,18 @@ namespace TCC.ClassSpecific
         private static readonly uint[] TraverseCutIDs = { 101300/*, 101301*/ };
         private static readonly uint[] BladeWaltzIDs = { 104100 };
         private static readonly uint[] SwiftGlyphs = { 21010, 21070 };
+        public const string DeadlyGambleIconName = "icon_skills.deadlywill_tex";
 
         private Skill _bladeWaltz;
 
+        public WarriorAbnormalityTracker()
+        {
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out _bladeWaltz);
+        }
+
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckAssaultStance(p);
             CheckDefensiveStance(p);
             CheckDeadlyGamble(p);
@@ -29,7 +35,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckAssaultStance(p);
             CheckDefensiveStance(p);
             CheckDeadlyGamble(p);
@@ -39,7 +45,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckTraverseCut(p);
             CheckSwiftGlyphs(p);
             CheckDefensiveStance(p);
@@ -51,49 +57,52 @@ namespace TCC.ClassSpecific
         private static void CheckAssaultStance(S_ABNORMALITY_BEGIN p)
         {
             if (!AstanceIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
         }
         private static void CheckAssaultStance(S_ABNORMALITY_REFRESH p)
         {
             if (!AstanceIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
         }
         private static void CheckAssaultStance(S_ABNORMALITY_END p)
         {
             if (!AstanceIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
         }
 
         private static void CheckDefensiveStance(S_ABNORMALITY_BEGIN p)
         {
             if (!DstanceIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
         }
         private static void CheckDefensiveStance(S_ABNORMALITY_REFRESH p)
         {
             if (!DstanceIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
         }
         private static void CheckDefensiveStance(S_ABNORMALITY_END p)
         {
             if (!DstanceIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
         }
 
         private static void CheckDeadlyGamble(S_ABNORMALITY_BEGIN p)
         {
-            if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).DeadlyGamble.Buff.Start(p.Duration);
+            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Start(p.Duration);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
         {
-            if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_END p)
         {
-            if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
+            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
+            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
@@ -102,46 +111,41 @@ namespace TCC.ClassSpecific
             StartPrecooldown(_bladeWaltz, p.Duration);
         }
 
-        public WarriorAbnormalityTracker()
-        {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out _bladeWaltz);
-
-        }
         private static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TraverseCut.Val = p.Stacks;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TraverseCut.InvokeToZero(p.Duration);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.Val = p.Stacks;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.InvokeToZero(p.Duration);
         }
         private static void CheckTraverseCut(S_ABNORMALITY_REFRESH p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TraverseCut.Val = p.Stacks;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TraverseCut.InvokeToZero(p.Duration);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.Val = p.Stacks;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.InvokeToZero(p.Duration);
         }
         private static void CheckTraverseCut(S_ABNORMALITY_END p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TraverseCut.Val = 0;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.Val = 0;
         }
 
         private static void CheckSwiftGlyphs(S_ABNORMALITY_BEGIN p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Swift.Start(p.Duration);
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).SwiftProc = true;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Swift.Start(p.Duration);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SwiftProc = true;
         }
         private static void CheckSwiftGlyphs(S_ABNORMALITY_REFRESH p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Swift.Start(p.Duration);
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).SwiftProc = true;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Swift.Start(p.Duration);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SwiftProc = true;
         }
         private static void CheckSwiftGlyphs(S_ABNORMALITY_END p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Swift.Refresh(0, CooldownMode.Normal);
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).SwiftProc = false;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().Swift.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SwiftProc = false;
         }
     }
 }
@@ -152,21 +156,21 @@ namespace TCC.ClassSpecific
         private static void CheckTempestAura(S_ABNORMALITY_BEGIN p)
         {
             if (!TempestAuraIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TempestAura.Val = p.Stacks;
+            Utils.CurrentClassVM<WarriorLayoutVM>().TempestAura.Val = p.Stacks;
         }
         private static void CheckTempestAura(S_ABNORMALITY_REFRESH p)
         {
             if (!TempestAuraIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TempestAura.Val = p.Stacks;
+            Utils.CurrentClassVM<WarriorLayoutVM>().TempestAura.Val = p.Stacks;
         }
         private static void CheckTempestAura(S_ABNORMALITY_END p)
         {
             if (!TempestAuraIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TempestAura.Val = 0;
+            Utils.CurrentClassVM<WarriorLayoutVM>().TempestAura.Val = 0;
         }
         private static void CheckShadowTempest(S_ABNORMALITY_BEGIN p)
         {
             if (!ShadowTempestIDs.Contains(p.AbnormalityId)) return;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).TempestAura.ToZero(p.Duration);
+            Utils.CurrentClassVM<WarriorLayoutVM>().TempestAura.ToZero(p.Duration);
         }
 */

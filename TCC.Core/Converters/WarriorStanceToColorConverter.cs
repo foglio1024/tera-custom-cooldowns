@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
@@ -24,10 +23,10 @@ namespace TCC.Converters
                 switch (s)
                 {
                     case WarriorStance.Assault:
-                        color = (Color)Application.Current.FindResource($"AssaultStanceColor{(light ? "Light" : "")}");
+                        color = light? R.Colors.AssaultStanceColorLight : R.Colors.AssaultStanceColor;
                         break;
                     case WarriorStance.Defensive:
-                        color = (Color)Application.Current.FindResource($"DefensiveStanceColor{(light ? "Light" : "")}");
+                        color = light ? R.Colors.DefensiveStanceColorLight : R.Colors.DefensiveStanceColor;
                         break;
                 }
             }

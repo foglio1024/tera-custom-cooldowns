@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Dragablz;
+using FoglioUtils;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 
@@ -19,11 +20,12 @@ namespace TCC.Windows
             InitializeComponent();
             DataContext = WindowManager.Dashboard.VM;
         }
-        public IEnumerable<ItemLevelTier> ItemLevelTiers => Utils.ListFromEnum<ItemLevelTier>();
+        public IEnumerable<ItemLevelTier> ItemLevelTiers => EnumUtils.ListFromEnum<ItemLevelTier>();
+        public IEnumerable<ResetMode> ResetModes => EnumUtils.ListFromEnum<ResetMode>();
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            SessionManager.CurrentDatabase.DungeonDatabase.SaveCustomDefs();
+            SessionManager.DB.DungeonDatabase.SaveCustomDefs();
             Close();
 
         }
@@ -34,8 +36,7 @@ namespace TCC.Windows
 
         private void RemoveDungeon(object sender, RoutedEventArgs e)
         {
-            var dng = (sender as FrameworkElement).DataContext as DungeonColumnViewModel;
-            dng.Dungeon.Show = false;
+            if (((FrameworkElement) sender).DataContext is DungeonColumnViewModel dng) dng.Dungeon.Show = false;
         }
 
         private void OnDungeonsOrderChanged(object sender, OrderChangedEventArgs e)

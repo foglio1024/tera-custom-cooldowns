@@ -29,15 +29,15 @@ namespace TCC.Windows
         public WindowSettings WindowSettings { get; private set; }
 
         public IntPtr Handle { get; private set; }
-
+        public bool CanMove { get; set; } = true;
         public void ReloadPosition()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                Left = WindowSettings.X * SettingsHolder.ScreenW;
-                Top = WindowSettings.Y * SettingsHolder.ScreenH;
+                Left = WindowSettings.X * WindowManager.ScreenSize.Width ;
+                Top = WindowSettings.Y * WindowManager.ScreenSize.Height ;
 
-                //if(_settings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {_settings.Name}: {_settings.X}, {_settings.Y}");
+                //if(WindowSettings.Name == nameof(WindowManager.CharacterWindow)) Console.WriteLine($"Reloading {WindowSettings.Name}: ({Left},{Top}) {WindowSettings.X}, {WindowSettings.Y}");
                 CheckBounds();
 
                 if (ButtonsRef != null)
@@ -53,16 +53,16 @@ namespace TCC.Windows
                     }
                     UpdateButtons();
                 }
-            });
+            }));
         }
         public void ResetToCenter()
         {
             Dispatcher.Invoke(() =>
             {
-                Left = Screen.PrimaryScreen.Bounds.X + (Screen.PrimaryScreen.Bounds.Width / 2) - (ActualWidth / 2);
-                Top = Screen.PrimaryScreen.Bounds.Y + (Screen.PrimaryScreen.Bounds.Height / 2) - (ActualHeight / 2);
-                WindowSettings.X = Left / SettingsHolder.ScreenW;
-                WindowSettings.Y = Top / SettingsHolder.ScreenH;
+                Left = Screen.PrimaryScreen.Bounds.X + Screen.PrimaryScreen.Bounds.Width / 2 - ActualWidth / 2;
+                Top = Screen.PrimaryScreen.Bounds.Y + Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
+                WindowSettings.X = Left / WindowManager.ScreenSize.Width;
+                WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
             });
         }
         protected void Init(WindowSettings settings, bool ignoreSize = true, bool undimOnFlyingGuardian = true, bool perClassPosition = true)
@@ -76,8 +76,8 @@ namespace TCC.Windows
 
             MainContent.Opacity = 0;
             Topmost = true;
-            Left = settings.X * SettingsHolder.ScreenW;
-            Top = settings.Y * SettingsHolder.ScreenH;
+            Left = settings.X * WindowManager.ScreenSize.Width;
+            Top = settings.Y * WindowManager.ScreenSize.Height;
             CheckBounds();
             if (!ignoreSize)
             {
@@ -108,7 +108,7 @@ namespace TCC.Windows
 
             if (ButtonsRef == null)
             {
-                MouseLeftButtonDown += Drag;
+                if(CanMove) MouseLeftButtonDown += Drag;
                 return;
             }
 
@@ -122,7 +122,7 @@ namespace TCC.Windows
                 if (!SettingsHolder.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
-            ButtonsRef.MouseLeftButtonDown += Drag;
+            if (CanMove) ButtonsRef.MouseLeftButtonDown += Drag;
         }
 
         private void OnFocusTick()
@@ -227,8 +227,11 @@ namespace TCC.Windows
         {
             try
             {
-                if (WindowSettings.Enabled) Show();
-                else Hide();
+                Dispatcher.Invoke(() =>
+                {
+                    if (WindowSettings.Enabled) Show();
+                    else Hide();
+                });
             }
             catch { }
         }
@@ -262,18 +265,18 @@ namespace TCC.Windows
         private void CheckBounds()
         {
             if (WindowSettings.AllowOffScreen) return;
-            if ((Left + ActualWidth) > SettingsHolder.ScreenW)
+            if (Left + ActualWidth > WindowManager.ScreenSize.Width)
             {
-                Left = SettingsHolder.ScreenW - ActualWidth;
+                Left = WindowManager.ScreenSize.Width - ActualWidth;
             }
-            if ((Top + ActualHeight) > SettingsHolder.ScreenH)
+            if (Top + ActualHeight > WindowManager.ScreenSize.Height)
             {
-                Top = SettingsHolder.ScreenH - ActualHeight;
+                Top = WindowManager.ScreenSize.Height - ActualHeight;
             }
             CheckIndividualScreensBounds();
 
-            WindowSettings.X = Left / SettingsHolder.ScreenW;
-            WindowSettings.Y = Top / SettingsHolder.ScreenH;
+            WindowSettings.X = Left / WindowManager.ScreenSize.Width;
+            WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
         }
 
         private void CheckIndividualScreensBounds()
@@ -351,9 +354,9 @@ namespace TCC.Windows
         {
             if (ButtonsRef == null) return;
 
-            var screenMiddle = SettingsHolder.ScreenH / 2;
+            var screenMiddle = WindowManager.ScreenSize.Height / 2;
             var middle = Top + Height / 2;
-            var deadzone = SettingsHolder.ScreenH / 15;
+            var deadzone = WindowManager.ScreenSize.Height / 15;
             var distance = Math.Abs(screenMiddle - middle);
 
             if (!(distance > deadzone)) return;
@@ -377,8 +380,8 @@ namespace TCC.Windows
                 UpdateButtons();
                 CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
-                WindowSettings.X = Left / SettingsHolder.ScreenW;
-                WindowSettings.Y = Top / SettingsHolder.ScreenH;
+                WindowSettings.X = Left / WindowManager.ScreenSize.Width;
+                WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
                 SettingsWriter.Save();
             }
             catch
@@ -426,8 +429,8 @@ namespace TCC.Windows
     //        //_settings.SafeClosed += CloseWindowSafe;
     //        _settings.EnabledChanged += EnableWindow;
     //        _settings.PropertyChanged += _settings_PropertyChanged;
-    //        Left = ws.X * Settings.ScreenW;
-    //        Top = ws.Y * Settings.ScreenH;
+    //        Left = ws.X * Settings.ScreenSize.Width;
+    //        Top = ws.Y * Settings.ScreenSize.Height;
     //        if (!ignoreSize)
     //        {
     //            if (ws.H != 0) Height = ws.H;
@@ -646,8 +649,8 @@ namespace TCC.Windows
     //            //_settings.X = newLeft / dx;
     //            //_settings.Y = newTop / dy;
 
-    //            _settings.X = Left / Settings.ScreenW;
-    //            _settings.Y = Top / Settings.ScreenH;
+    //            _settings.X = Left / Settings.ScreenSize.Width;
+    //            _settings.Y = Top / Settings.ScreenSize.Height;
     //            Settings.Save();
     //        }
     //        catch
@@ -658,13 +661,13 @@ namespace TCC.Windows
 
     //    private void CheckBounds()
     //    {
-    //        if ((Left + ActualWidth) > Settings.ScreenW)
+    //        if ((Left + ActualWidth) > Settings.ScreenSize.Width)
     //        {
-    //            Left = Settings.ScreenW - ActualWidth;
+    //            Left = Settings.ScreenSize.Width - ActualWidth;
     //        }
-    //        if ((Top + ActualHeight) > Settings.ScreenH)
+    //        if ((Top + ActualHeight) > Settings.ScreenSize.Height)
     //        {
-    //            Top = Settings.ScreenH - ActualHeight;
+    //            Top = Settings.ScreenSize.Height - ActualHeight;
     //        }
     //        if (Left < 0) Left = 0;
     //        if (Top < 0) Top = 0;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace TCC.Data.Databases
@@ -32,44 +31,5 @@ namespace TCC.Data.Databases
             }
         }
 
-    }
-
-    public abstract class DatabaseBase
-    {
-        protected string _language;
-        protected abstract string FolderName { get; }
-        protected abstract string Extension { get; }
-
-        public string RelativePath => $"{FolderName}/{FolderName}-{_language}.{Extension}";
-        protected string FullPath => Path.Combine(App.DataPath, RelativePath);
-        public virtual bool Exists => File.Exists(FullPath);
-        public bool IsUpToDate { get; private set; } = false;
-
-
-        public abstract void Load();
-        public virtual void CheckVersion(string customAbsPath = null, string customRelPath = null)
-        {
-            if (!Exists) return;
-            var localHash = Utils.GenerateFileHash(customAbsPath ?? FullPath);
-            if (UpdateManager.DatabaseHashes.Count == 0) return;
-            if (!UpdateManager.DatabaseHashes.ContainsKey(customRelPath ?? RelativePath)) return;
-            if (UpdateManager.DatabaseHashes[customRelPath ?? RelativePath] != localHash)
-            {
-                Log.CW($"Hash mismatch for {customRelPath ?? RelativePath}");
-                return;
-            }
-
-            IsUpToDate = true;
-
-        }
-        public DatabaseBase(string lang)
-        {
-            _language = lang;
-        }
-
-        public virtual void Update(string custom = null)
-        {
-            UpdateManager.UpdateDatabase(custom ?? RelativePath);
-        }
     }
 }

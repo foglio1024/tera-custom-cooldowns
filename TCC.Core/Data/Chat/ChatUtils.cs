@@ -1,30 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using FoglioUtils.Extensions;
 
 namespace TCC.Data.Chat
 {
     public static class ChatUtils
     {
-        public static string GetItemColor(Item i)
+        public static string GradeToColorString(RareGrade g)
         {
-            var CommonColor = "FFFFFF";
-            var UncommonColor = "4DCB30";
-            var RareColor = "009ED9";
-            var SuperiorColor = "EEBE00";
-
-            switch (i.RareGrade)
+            switch (g)
             {
-                case RareGrade.Common:
-                    return CommonColor;
-                case RareGrade.Uncommon:
-                    return UncommonColor;
-                case RareGrade.Rare:
-                    return RareColor;
-                case RareGrade.Superior:
-                    return SuperiorColor;
-                default:
-                    return "";
+                case RareGrade.Common:   return R.Colors.ItemCommonColor.ToHex();
+                case RareGrade.Uncommon: return R.Colors.ItemUncommonColor.ToHex();
+                case RareGrade.Rare:     return R.Colors.ItemRareColor.ToHex();
+                case RareGrade.Superior: return R.Colors.ItemSuperiorColor.ToHex();
+                default: return "";
             }
         }
         public static uint GetId(Dictionary<string, string> d, string paramName)
@@ -42,7 +33,7 @@ namespace TCC.Data.Chat
             var parameters = m.Split('\v');
             if (parameters.Length == 1) return null;
             var retDict = new Dictionary<string, string>();
-            for (var i = 1; i < parameters.Length - 1; i = i + 2)
+            for (var i = 1; i < parameters.Length - 1; i += 2)
             {
                 retDict.Add(parameters[i], parameters[i + 1]);
             }
@@ -75,17 +66,10 @@ namespace TCC.Data.Chat
             {
                 foreach (var keyVal in pars)
                 {
-                    var regex = new Regex(Regex.Escape('{' + keyVal.Key + '}'));
-
-                    result = regex.Replace(txt, '{' + keyVal.Value + '}', 1);
-                    if (txt == result)
-                    {
-                        result = Utils.ReplaceFirstOccurrenceCaseInsensitive(txt, '{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
-                    }
-                    if (txt == result)
-                    {
-                        result = Utils.ReplaceFirstOccurrenceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
-                    }
+                    var regex = new Regex(Regex.Escape($"{{{keyVal.Key}}}"));
+                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", 1);
+                    if (txt == result) result = txt.ReplaceFirstOccurrenceCaseInsensitive($"{{{keyVal.Key}}}", $"{{{keyVal.Value}}}");
+                    if (txt == result) result = txt.ReplaceFirstOccurrenceCaseInsensitive($"{{{keyVal.Key}", $"{{{keyVal.Value}");
                     txt = result;
                 }
             }
@@ -93,20 +77,12 @@ namespace TCC.Data.Chat
             {
                 foreach (var keyVal in pars)
                 {
-                    var regex = new Regex(Regex.Escape('{' + keyVal.Key + '}'));
-
-                    result = regex.Replace(txt, '{' + keyVal.Value + '}');
-                    if (txt == result)
-                    {
-                        result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
-                    }
-                    if (txt == result)
-                    {
-                        result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
-                    }
+                    var regex = new Regex(Regex.Escape($"{{{keyVal.Key}}}"));
+                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", int.MaxValue);
+                    if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}}}", $"{{{keyVal.Value}}}");
+                    if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}", $"{{{keyVal.Value}");
                     txt = result;
                 }
-
             }
             return result;
         }

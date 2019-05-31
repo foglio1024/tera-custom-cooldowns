@@ -43,9 +43,15 @@
                                 <Separator Margin="5 2"
                                            Background="#2fff" />
                                 <TextBlock Foreground="#4fff">
-                                    <Run Text="Max daily runs:" />
+                                    <Run Text="Max runs:" />
                                     <Run Text="{Binding Dungeon.ActualRuns, Mode=OneWay}" Foreground="#9fff" />
+                                    <Run Text="(" /><Run Text="{Binding Dungeon.ResetMode, Mode=OneWay}" /><Run Text=")" />
                                 </TextBlock>
+                                <TextBlock Foreground="#4fff">
+                                    <Run Text="Cost:" />
+                                    <Run Text="{Binding Dungeon.Cost, Mode=OneWay}" Foreground="#9fff" />
+                                </TextBlock>
+
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -97,12 +103,12 @@
                                 <Ellipse Opacity=".1" StrokeThickness="1" Margin="0" Width="22" Height="22">
                                     <Ellipse.Fill>
                                         <MultiBinding Converter="{StaticResource EntriesToColor}">
-                                            <Binding Path="Cooldown.Entries" />
-                                            <Binding Path="Cooldown.Runs" />
+                                            <Binding Path="Cooldown.AvailableEntries" />
+                                            <Binding Path="Cooldown.MaxAvailableEntries" />
                                         </MultiBinding>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <TextBlock Text="{Binding Cooldown.Entries}"
+                                <TextBlock Text="{Binding Cooldown.AvailableEntries}"
                                            FontWeight="DemiBold"
                                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                                            TextAlignment="Center"
@@ -111,8 +117,8 @@
                                            FontSize="15">
                                     <TextBlock.Foreground>
                                         <MultiBinding Converter="{StaticResource EntriesToColor}">
-                                            <Binding Path="Cooldown.Entries" />
-                                            <Binding Path="Cooldown.Runs" />
+                                            <Binding Path="Cooldown.AvailableEntries" />
+                                            <Binding Path="Cooldown.MaxAvailableEntries" />
                                         </MultiBinding>
                                     </TextBlock.Foreground>
                                 </TextBlock>

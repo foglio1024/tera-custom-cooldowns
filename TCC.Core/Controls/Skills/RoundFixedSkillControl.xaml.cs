@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using TCC.ViewModels;
 
 namespace TCC.Controls.Skills
 {

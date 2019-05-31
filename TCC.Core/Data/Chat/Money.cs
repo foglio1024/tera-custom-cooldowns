@@ -52,9 +52,9 @@ namespace TCC.Data.Chat
 
         public override string ToString()
         {
-            var goldString = Gold != 0 ? Gold.ToString() + "g " : "";
-            var silverString = Silver != 0 ? Silver.ToString() + "s " : "";
-            var copperString = Copper != 0 ? Copper.ToString() + "c " : "";
+            var goldString = Gold != 0 ? Gold + "g " : "";
+            var silverString = Silver != 0 ? Silver + "s " : "";
+            var copperString = Copper != 0 ? Copper + "c " : "";
 
             return $"{goldString}{silverString}{copperString}";
         }

@@ -9,6 +9,7 @@ using TCC.Data;
 using TCC.Parsing;
 using TCC.ViewModels;
 using TCC.Windows;
+using TeraDataLite;
 
 namespace TCC.Settings
 {
@@ -24,6 +25,8 @@ namespace TCC.Settings
         private bool _showAlways;
         private bool _enabled;
         private bool _allowOffScreen;
+
+        public bool ForcedClickable { get; protected set; }
 
         public event Action ResetToCenter;
         public event Action EnabledChanged;
@@ -51,6 +54,7 @@ namespace TCC.Settings
             }
             set
             {
+                if (value >= int.MaxValue) return;
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
@@ -69,6 +73,7 @@ namespace TCC.Settings
             }
             set
             {
+                if (value >= int.MaxValue) return;
                 var cc = CurrentClass();
                 if (cc == Class.None) return;
                 var old = Positions.Position(cc);
@@ -125,12 +130,12 @@ namespace TCC.Settings
         }
         public ClickThruMode ClickThruMode
         {
-            get => _clickThruMode;
+            get => ForcedClickable ? ClickThruMode.Never : _clickThruMode;
             set
             {
                 _clickThruMode = value;
                 N(nameof(ClickThruMode));
-                ClickThruModeChanged?.Invoke();
+                InvokeClickThruModeChanged();
             }
         }
         public double Scale
@@ -206,7 +211,7 @@ namespace TCC.Settings
                 {
                     Visible = true;
                 }
-                MessageFactory.Update();
+                PacketAnalyzer.Processor.Update();
                 EnabledChanged?.Invoke();
                 N(nameof(Enabled));
             }
@@ -224,10 +229,13 @@ namespace TCC.Settings
 
         public ClassPositions Positions { get; set; }
 
-        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above)
+        public WindowSettings()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
+        }
+        public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
+        {
             Name = name;
             _w = w;
             _h = h;
@@ -245,6 +253,25 @@ namespace TCC.Settings
                 new ClassPositions(positions);
         }
 
+        protected WindowSettings(WindowSettings other) : this()
+        {
+            _w = other.W;
+            _h = other.H;
+            _visible = other.Visible;
+            _clickThruMode = other._clickThruMode;
+            _scale = other.Scale;
+            _autoDim = other.AutoDim;
+            _dimOpacity = other.DimOpacity;
+            _showAlways = other.ShowAlways;
+            _enabled = other.Enabled;
+            _allowOffScreen = other.AllowOffScreen;
+            PerClassPosition = other.PerClassPosition;
+            Positions = other.Positions;
+            Name = other.Name;
+
+
+        }
+
         public virtual XElement ToXElement(string name)
         {
             var xe = new XElement("WindowSetting");
@@ -252,7 +279,7 @@ namespace TCC.Settings
             xe.Add(new XAttribute(nameof(W), W));
             xe.Add(new XAttribute(nameof(H), H));
             xe.Add(new XAttribute(nameof(Visible), Visible));
-            xe.Add(new XAttribute(nameof(ClickThruMode), ClickThruMode));
+            xe.Add(new XAttribute(nameof(ClickThruMode), _clickThruMode));
             xe.Add(new XAttribute(nameof(Scale), Scale));
             xe.Add(new XAttribute(nameof(AutoDim), AutoDim));
             xe.Add(new XAttribute(nameof(DimOpacity), DimOpacity));
@@ -285,12 +312,20 @@ namespace TCC.Settings
             Positions.SetAllPositions(currentPos);
             SettingsWriter.Save();
         }
+
+        protected void InvokeClickThruModeChanged() => ClickThruModeChanged?.Invoke();
+
+        public void ApplyScreenCorrection(Size sc)
+        {
+            Positions.ApplyCorrection(sc);
+        }
     }
 
     public class ChatWindowSettings : WindowSettings
     {
         private bool _fadeOut = true;
         private double _backgroundOpacity = .3;
+        private double _frameOpacity = 1;
         private bool _lfgOn = true;
 
         public event Action FadeoutChanged;
@@ -304,7 +339,7 @@ namespace TCC.Settings
             get { return _hideTimeout; }
             set
             {
-                if(_hideTimeout == value) return;
+                if (_hideTimeout == value) return;
                 _hideTimeout = value;
                 N();
                 TimeoutChanged?.Invoke();
@@ -316,8 +351,19 @@ namespace TCC.Settings
             get => _backgroundOpacity;
             set
             {
-                if(_backgroundOpacity == value) return;
+                if (_backgroundOpacity == value) return;
                 _backgroundOpacity = value;
+                N();
+                OpacityChanged?.Invoke();
+            }
+        }
+        public double FrameOpacity
+        {
+            get => _frameOpacity;
+            set
+            {
+                if (_frameOpacity == value) return;
+                _frameOpacity = value;
                 N();
                 OpacityChanged?.Invoke();
             }
@@ -327,7 +373,7 @@ namespace TCC.Settings
             get => _fadeOut;
             set
             {
-                if(_fadeOut == value) return;
+                if (_fadeOut == value) return;
                 _fadeOut = value;
                 N();
                 FadeoutChanged?.Invoke();
@@ -341,13 +387,16 @@ namespace TCC.Settings
             get => _lfgOn;
             set
             {
-                if(_lfgOn == value) return;
+                if (_lfgOn == value) return;
                 _lfgOn = value;
                 N();
             }
         }
 
-
+        public ChatWindowSettings(WindowSettings other) : base(other)
+        {
+            Tabs = new List<Tab>();
+        }
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
             Tabs = new List<Tab>();
@@ -358,9 +407,16 @@ namespace TCC.Settings
             b.Add(SettingsWriter.BuildChatTabsXElement(Tabs));
             b.Add(new XAttribute(nameof(LfgOn), LfgOn));
             b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
+            b.Add(new XAttribute(nameof(FrameOpacity), FrameOpacity));
             b.Add(new XAttribute(nameof(FadeOut), FadeOut));
             b.Add(new XAttribute(nameof(HideTimeout), HideTimeout));
             return b;
+        }
+
+        public void ForceToggleClickThru()
+        {
+            ForcedClickable = !ForcedClickable;
+            InvokeClickThruModeChanged();
         }
     }
 }

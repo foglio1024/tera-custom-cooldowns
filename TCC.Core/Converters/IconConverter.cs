@@ -17,7 +17,7 @@ namespace TCC.Converters
                     iconName = iconName.Replace(".", "/");
                 }
             }
-            return Path.Combine(App.BasePath, "resources/images/" + iconName + ".png");
+            return Path.Combine(App.ResourcesPath, "images/" + iconName + ".png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

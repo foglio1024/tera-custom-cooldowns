@@ -3,7 +3,7 @@
 namespace TCC.Windows.Widgets
 {
     /// <summary>
-    /// Logica di interazione per WarriorBar.xaml
+    /// Logica di interazione per WarriorLayout.xaml
     /// </summary>
     public partial class ClassWindow 
     {
@@ -31,8 +31,10 @@ namespace TCC.Windows.Widgets
         private new void OnEnabledChanged() 
         {
             if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
+            {
                 WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
-            base.OnEnabledChanged();
+            }
+            //base.OnEnabledChanged();
         }
 
         

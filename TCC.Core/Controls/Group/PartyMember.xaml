@@ -39,6 +39,7 @@
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
                     <Style>
+                        <!-- ReSharper disable once Xaml.RedundantPropertyTypeQualifier -->
                         <Setter Property="ContentControl.Margin" Value="-6 0 0 -6" />
                     </Style>
                 </Setter.Value>
@@ -159,7 +160,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Rectangle x:Name="HpBar" 
-                               Height="5" Width="Auto" 
+                               Height="7" Width="Auto" 
                                HorizontalAlignment="Stretch"
                                Style="{StaticResource OnlineBoundVisibility}"
                                Visibility="{Binding ShowHp, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
@@ -196,6 +197,36 @@
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
+                    <Rectangle Fill="#b000"
+                               Visibility="{Binding ShowHpNumbers, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
+                                                            Converter={StaticResource BoolToVisibleCollapsed}}"
+                               HorizontalAlignment="Center"
+                               RenderTransform="{StaticResource Skew45Inv}"
+                               RenderTransformOrigin=".5 .5"
+                               Width="40"
+                               Grid.RowSpan="2"
+                               Margin="5 0 0 0">
+                        <Rectangle.Effect>
+                            <BlurEffect Radius="15" RenderingBias="Performance" KernelType="Gaussian"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <TextBlock Foreground="White" 
+                               Grid.RowSpan="2"
+                               Visibility="{Binding ShowHpNumbers, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
+                                                            Converter={StaticResource BoolToVisibleCollapsed}}"
+                               RenderTransformOrigin=".5 .5"
+                               RenderTransform="{StaticResource Skew45Inv}"
+                               Margin="0 -20 0 -17"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontFamily="{StaticResource NotoSansMed}"
+                               FontSize="13"
+                               
+                    >
+                        <Run Text="{Binding CurrentHp}"/>
+                        <!--<Run Text="/" Foreground="#9fff"/>
+                        <Run Text="{Binding MaxHp}" Foreground="#9fff"/>-->
+                    </TextBlock>
                 </Grid>
             </Border>
         </Grid>
@@ -294,7 +325,7 @@
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Stretch"
                    Stretch="Uniform" 
-                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr}" 
+                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr_half}" 
                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
                                                     Converter={StaticResource BoolToVisibleCollapsed}}"
                    >

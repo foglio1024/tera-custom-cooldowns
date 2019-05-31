@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TCC.Data;
 using TCC.Data.Skills;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {
@@ -20,7 +20,7 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckGrugnirsBite(p);
             CheckTwilightWaltz(p);
             CheckRagnarok(p);
@@ -29,13 +29,13 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckRagnarok(p);
             CheckGodsfall(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckRagnarok(p);
             CheckGodsfall(p);
         }
@@ -43,33 +43,33 @@ namespace TCC.ClassSpecific
         private static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Ragnarok.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Start(p.Duration);
         }
         private static void CheckRagnarok(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
 
         private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Godsfall.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Start(p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGodsfall(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            ((ValkyrieBarManager)WindowManager.ClassWindow.VM.CurrentManager).Godsfall.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
@@ -90,9 +90,9 @@ namespace TCC.ClassSpecific
 
         public ValkyrieAbnormalityTracker()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out _twilightWaltz);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out _godsfall);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out _grugnirsBite);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out _twilightWaltz);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out _godsfall);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out _grugnirsBite);
 
         }
     }

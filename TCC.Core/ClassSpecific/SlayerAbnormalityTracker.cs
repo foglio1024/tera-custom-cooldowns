@@ -1,7 +1,8 @@
 ﻿using System.Linq;
+
 using TCC.Data;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {
@@ -11,34 +12,34 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckInColdBlood(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckInColdBlood(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckInColdBlood(p);
         }
 
         private static void CheckInColdBlood(S_ABNORMALITY_BEGIN p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)WindowManager.ClassWindow.VM.CurrentManager).InColdBlood.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<SlayerLayoutVM>().InColdBlood.Buff.Start(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_REFRESH p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)WindowManager.ClassWindow.VM.CurrentManager).InColdBlood.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<SlayerLayoutVM>().InColdBlood.Buff.Start(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_END p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            ((SlayerBarManager)WindowManager.ClassWindow.VM.CurrentManager).InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<SlayerLayoutVM>().InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

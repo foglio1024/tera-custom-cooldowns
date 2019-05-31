@@ -3,10 +3,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using TCC.Annotations;
 using TCC.Data;
+using TCC.Test;
 using TCC.ViewModels;
+using TeraDataLite;
+using Button = System.Windows.Controls.Button;
 
 namespace TCC.Windows
 {
@@ -110,7 +112,7 @@ namespace TCC.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SorcererBarManager) WindowManager.ClassWindow.VM.CurrentManager).ManaBoost.Buff.Start(10000);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(10000);
 
             SkillManager.AddSkill(100700, 20000);
             SkillManager.AddSkill(400120, 20000);
@@ -121,25 +123,42 @@ namespace TCC.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Assault") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Assault;
-            else if (((Button)sender).Content.ToString() == "Defensive") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.Defensive;
-            else if (((Button)sender).Content.ToString() == "None") ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if (((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.IsMaxed) ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val = 0;
-            ((WarriorBarManager)WindowManager.ClassWindow.VM.CurrentManager).EdgeCounter.Val++;
+            if (TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.IsMaxed) TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val = 0;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val++;
 
         }
 
+        private void RegisterWebhook(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 80; i++)
+            {
+                var i1 = i;
+                Dispatcher.BeginInvoke(new Action(() => Tester.RegisterWebhook("user" + i1)));
+            }
+        }
+
+        private void FireWebhook(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 80; i++)
+            {
+                var i1 = i;
+                Dispatcher.BeginInvoke(new Action(() => Tester.FireWebhook("user" + i1)));
+            }
+        }
         private void DungeonTest(object sender, RoutedEventArgs e)
         {
             //i = 0;
             //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
 
-            WindowManager.Dashboard.VM.Characters[0].VanguardDailiesDone = App.Random.Next(0,16);
-            WindowManager.Dashboard.VM.Characters[0].VanguardWeekliesDone= App.Random.Next(0,16);
+            WindowManager.Dashboard.VM.Characters[0].VanguardDailiesDone = App.Random.Next(0, 16);
+            WindowManager.Dashboard.VM.Characters[0].VanguardWeekliesDone = App.Random.Next(0, 16);
         }
     }
 }

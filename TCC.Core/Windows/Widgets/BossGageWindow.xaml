@@ -23,6 +23,6 @@
             </Grid.LayoutTransform>
             <ContentControl Content="{Binding}" ContentTemplate="{Binding CurrentHHphase, Converter={StaticResource HarrowholdPhaseToLayout}}" />
         </Grid>
-            <c:WindowButtons WindowName="Boss bar" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
+        <c:WindowButtons WindowName="Boss bar" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>
 </w:TccWidget>

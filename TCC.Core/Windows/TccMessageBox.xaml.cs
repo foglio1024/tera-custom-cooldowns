@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -50,7 +49,7 @@ namespace TCC.Windows
         }
         public static MessageBoxResult Show(string msg, MessageBoxType type)
         {
-            return Show(string.Empty, msg, type);
+            return Show("TCC", msg, type);
         }
         public static MessageBoxResult Show(string msg)
         {
@@ -60,8 +59,7 @@ namespace TCC.Windows
         {
             return Show(caption, text, MessageBoxButton.OK, MessageBoxImage.None);
         }
-        public static MessageBoxResult Show
-        (string caption, string text, MessageBoxButton button)
+        public static MessageBoxResult Show(string caption, string text, MessageBoxButton button)
         {
             return Show(caption, text, button, MessageBoxImage.None);
         }
@@ -112,21 +110,15 @@ namespace TCC.Windows
         }
         private static void SetImageOfMessageBox(MessageBoxImage image)
         {
+            return;
             switch (image)
             {
                 case MessageBoxImage.Warning:
-                    //_messageBox.SetImage("Warning.png");
-                    break;
                 case MessageBoxImage.Question:
-                    //_messageBox.SetImage("Question.png");
-                    break;
-                case MessageBoxImage.Information:
-                    _messageBox.Bg.Background = R.Brushes.MpBrush;//Application.Current.FindResource("MpBrush") as SolidColorBrush;
-                    //_messageBox.SetImage("Information.png");
+                    _messageBox.InnerBorder.BorderBrush = R.Brushes.GoldBrush;
                     break;
                 case MessageBoxImage.Error:
-                    //_messageBox.SetImage("Error.png");
-                    _messageBox.Bg.Background = R.Brushes.HpBrush;//Application.Current.FindResource("HpBrush") as SolidColorBrush;
+                    _messageBox.InnerBorder.BorderBrush = R.Brushes.HpBrush;
                     break;
             }
         }
@@ -144,8 +136,8 @@ namespace TCC.Windows
             else
                 _result = MessageBoxResult.None;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
-            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
-            RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+            //RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+            //RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
             Task.Delay(250).ContinueWith(t =>
             {
                 Dispatcher.Invoke(() =>
@@ -166,10 +158,12 @@ namespace TCC.Windows
 
         private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (((bool)e.NewValue) != true) return;
+            if ((bool)e.NewValue != true) return;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
-            RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
-            RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
+            //((FrameworkElement)Content).RenderTransform.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(20, 0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+
+            //RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
+            //RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
         }
 
         private void BG_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

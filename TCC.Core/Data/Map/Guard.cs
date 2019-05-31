@@ -4,34 +4,21 @@ namespace TCC.Data.Map
 {
     public class Guard
     {
-        public Dictionary<uint, Section> Sections { get; set; }
+        public Dictionary<uint, Section> Sections { get;  }
         public uint Id { get; }
         public uint NameId { get; }
-        public uint ContinentId { get; set; }
-        public string MapId { get; }
-        public double Top { get; }
-        public double Left { get; }
-        public double Width { get; }
-        public double Height { get; }
+        public uint ContinentId { get; }
 
-        public Guard(uint gId, uint gNameId, string mapId, double left = 0, double top = 0, double width = 0, double height = 0)
+        private Guard()
         {
             Sections = new Dictionary<uint, Section>();
-            Id = gId;
-            NameId = gNameId;
-            MapId = mapId;
-            Top = top;
-            Left = left;
-            Width = width;
-            Height = height;
-
         }
 
-        public bool ContainsPoint(float x, float y)
+        public Guard(uint gId, uint gNameId, uint continentId) : this()
         {
-            var matchesY = y > Left && y < Width + Left;
-            var matchesX = x < Top && x > Top - Height;
-            return matchesX && matchesY;
+            Id = gId;
+            NameId = gNameId;
+            ContinentId = continentId;
         }
     }
 }

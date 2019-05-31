@@ -9,7 +9,7 @@ namespace TCC.Controls.Classes.Elements
     /// <summary>
     /// Logica di interazione per EdgeRhombControl.xaml
     /// </summary>
-    public partial class EdgeRhombControl : EdgeControlBase
+    public partial class EdgeRhombControl
     {
         public EdgeRhombControl()
         {

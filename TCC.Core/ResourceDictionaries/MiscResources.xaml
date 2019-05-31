@@ -30,12 +30,15 @@
     <FontFamily x:Key="RobotoMonoMedium">pack://application:,,,/resources/fonts/#Roboto Mono Medium</FontFamily>
     <FontFamily x:Key="ArialMonoBold">pack://application:,,,/resources/fonts/#Arial Monospaced MT</FontFamily>
     <FontFamily x:Key="NotoSansMed">pack://application:,,,/resources/fonts/#Noto Sans Med</FontFamily>
+    <FontFamily x:Key="ProductSans">pack://application:,,,/resources/fonts/#Product Sans</FontFamily>
 
     <ImageSource x:Key="DefaultGuildLogo">pack://application:,,,/resources/images/default_guild_logo.png</ImageSource>
 
     <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
+    <DropShadowEffect x:Key="BigDropShadow" BlurRadius="10" ShadowDepth="5" Opacity=".4" />
     <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
     <DropShadowEffect x:Key="ClassIconGlow" Color="{StaticResource ClassGlowColor}" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
+    <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20"/>
 
     <VisualBrush x:Key="RhombOpacityMask" >
         <VisualBrush.Visual>

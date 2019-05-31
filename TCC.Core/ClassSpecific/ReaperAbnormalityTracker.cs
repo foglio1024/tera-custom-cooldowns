@@ -1,7 +1,8 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
+
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {
@@ -17,13 +18,13 @@ namespace TCC.ClassSpecific
 
         public ReaperAbnormalityTracker()
         {
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", SessionManager.CurrentPlayer.Class, out _deathSpiral);
-            SessionManager.CurrentDatabase.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", SessionManager.CurrentPlayer.Class, out _shadowStep);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", SessionManager.CurrentPlayer.Class, out _deathSpiral);
+            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", SessionManager.CurrentPlayer.Class, out _shadowStep);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckShadowReaping(p);
             CheckShadowStep(p);
             CheckDeathSpiral(p);
@@ -31,14 +32,14 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckShadowReaping(p);
             CheckAssassinate(p);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!p.TargetId.IsMe()) return;
+            if (!SessionManager.IsMe(p.TargetId)) return;
             CheckShadowReaping(p);
             CheckAssassinate(p);
 
@@ -58,32 +59,32 @@ namespace TCC.ClassSpecific
         private static void CheckAssassinate(S_ABNORMALITY_BEGIN p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShroudedEscape.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<ReaperLayoutVM>().ShroudedEscape.Buff.Start(p.Duration);
         }
         private static void CheckAssassinate(S_ABNORMALITY_REFRESH p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShroudedEscape.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ReaperLayoutVM>().ShroudedEscape.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckAssassinate(S_ABNORMALITY_END p)
         {
             if (AssassinateId != p.AbnormalityId) return;
-            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShroudedEscape.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ReaperLayoutVM>().ShroudedEscape.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShadowReaping.Buff.Start(p.Duration);
+            TccUtils.CurrentClassVM<ReaperLayoutVM>().ShadowReaping.Buff.Start(p.Duration);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_REFRESH p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShadowReaping.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ReaperLayoutVM>().ShadowReaping.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_END p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
-            ((ReaperBarManager)WindowManager.ClassWindow.VM.CurrentManager).ShadowReaping.Buff.Refresh(0, CooldownMode.Normal);
+            TccUtils.CurrentClassVM<ReaperLayoutVM>().ShadowReaping.Buff.Refresh(0, CooldownMode.Normal);
         }
 
     }

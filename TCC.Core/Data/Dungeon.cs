@@ -4,12 +4,13 @@
     {
         private string _shortName;
         private bool _doublesOnElite;
-        private bool _show = false;
+        private bool _show;
         private ItemLevelTier _requiredIlvl = ItemLevelTier.Tier0;
         private int _index = -1;
+        private short _maxBaseRuns = 1;
         public uint Id { get; }
         public string Name { get; }
-
+        public int Cost { get; set; }
         public string ShortName
         {
             get => _shortName;
@@ -21,7 +22,16 @@
             }
         }
 
-        public short MaxBaseRuns { get; set; } = 1;
+        public short MaxBaseRuns
+        {
+            get => _maxBaseRuns;
+            set
+            {
+                if(_maxBaseRuns == value) return;
+                _maxBaseRuns = value;
+                N();
+            }
+        }
 
         public ItemLevelTier RequiredIlvl
         {
@@ -34,6 +44,8 @@
                 N(nameof(ItemLevel));
             }
         }
+
+        public ResetMode ResetMode { get; set; } = ResetMode.Weekly;
 
         public int ItemLevel => (int)RequiredIlvl;
 
@@ -72,12 +84,18 @@
 
         public int ActualRuns => MaxBaseRuns * (SessionManager.IsElite && DoublesOnElite ? 2 : 1);
         public string IconName { get; set; }
-        public string Region => SessionManager.CurrentDatabase.GetDungeonGuardName(Id);
+        public string Region => SessionManager.DB.GetDungeonGuardName(Id);
 
         public Dungeon(uint id, string name)
         {
             Id = id;
             Name = name;
         }
+    }
+
+    public enum ResetMode
+    {
+        Daily,
+        Weekly
     }
 }

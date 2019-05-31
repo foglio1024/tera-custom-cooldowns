@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace TCC.Controls.Settings
 {
@@ -60,23 +59,9 @@ namespace TCC.Controls.Settings
             DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(ValueSetting));
 
 
-        private readonly ColorAnimation _glow;
-        private readonly ColorAnimation _unglow;
-        private readonly DoubleAnimation _fadeIn;
-        private readonly DoubleAnimation _fadeOut;
-
-
-
         public ValueSetting()
         {
             InitializeComponent();
-            _glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
-            _unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
-            _fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
-            _fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
-
-            //MainGrid.Background = new SolidColorBrush(Colors.Transparent);
-
         }
 
         private void AddValue(object sender, MouseButtonEventArgs e)
@@ -86,19 +71,6 @@ namespace TCC.Controls.Settings
         private void SubtractValue(object sender, MouseButtonEventArgs e)
         {
             Value = Math.Round(Value - 0.01, 2);
-        }
-        private void Grid_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ((Grid)sender).Background.BeginAnimation(SolidColorBrush.ColorProperty, _glow);
-            Img.BeginAnimation(OpacityProperty, _fadeIn);
-
-        }
-
-        private void Grid_MouseLeave(object sender, MouseEventArgs e)
-        {
-            ((Grid)sender).Background.BeginAnimation(SolidColorBrush.ColorProperty, _unglow);
-            Img.BeginAnimation(OpacityProperty, _fadeOut);
-
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

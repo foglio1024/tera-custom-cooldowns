@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32BD409E-AB38-4024-BA36-1E08B753C528}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TeraPacketParser</RootNamespace>
+    <AssemblyName>TeraPacketParser</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Angle.cs" />
+    <Compile Include="Data\EntityId.cs" />
+    <Compile Include="Data\HitDirection.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="Data\MessageDirection.cs" />
+    <Compile Include="MessageFactory.cs" />
+    <Compile Include="Messages\C_CHECK_VERSION.cs" />
+    <Compile Include="Messages\C_LOGIN_ARBITER.cs" />
+    <Compile Include="Messages\C_PLAYER_LOCATION.cs" />
+    <Compile Include="Messages\S_ABNORMALITY_BEGIN.cs" />
+    <Compile Include="Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
+    <Compile Include="Messages\S_ABNORMALITY_END.cs" />
+    <Compile Include="Messages\S_ABNORMALITY_REFRESH.cs" />
+    <Compile Include="Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
+    <Compile Include="Messages\S_ACCOUNT_PACKAGE_LIST.cs" />
+    <Compile Include="Messages\S_ACTION_STAGE.cs" />
+    <Compile Include="Messages\S_ANSWER_INTERACTIVE.cs" />
+    <Compile Include="Messages\S_ASK_BIDDING_RARE_ITEM.cs" />
+    <Compile Include="Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
+    <Compile Include="Messages\S_BAN_PARTY.cs" />
+    <Compile Include="Messages\S_BAN_PARTY_MEMBER.cs" />
+    <Compile Include="Messages\S_BOSS_GAGE_INFO.cs" />
+    <Compile Include="Messages\S_CHANGE_GUILD_CHIEF.cs" />
+    <Compile Include="Messages\S_CHANGE_PARTY_MANAGER.cs" />
+    <Compile Include="Messages\S_CHAT.cs" />
+    <Compile Include="Messages\S_CHECK_TO_READY_PARTY.cs" />
+    <Compile Include="Messages\S_CHECK_TO_READY_PARTY_FIN.cs" />
+    <Compile Include="Messages\S_CREATURE_CHANGE_HP.cs" />
+    <Compile Include="Messages\S_CREATURE_LIFE.cs" />
+    <Compile Include="Messages\S_CREST_MESSAGE.cs" />
+    <Compile Include="Messages\S_DECREASE_COOLTIME_SKILL.cs" />
+    <Compile Include="Messages\S_DESPAWN_NPC.cs" />
+    <Compile Include="Messages\S_DESPAWN_USER.cs" />
+    <Compile Include="Messages\S_DESTROY_GUILD_TOWER.cs" />
+    <Compile Include="Messages\S_DUNGEON_CLEAR_COUNT_LIST.cs" />
+    <Compile Include="Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
+    <Compile Include="Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
+    <Compile Include="Messages\S_EACH_SKILL_RESULT.cs" />
+    <Compile Include="Messages\S_FIELD_EVENT_ON_ENTER.cs" />
+    <Compile Include="Messages\S_FIELD_POINT_INFO.cs" />
+    <Compile Include="Messages\S_FRIEND_LIST.cs" />
+    <Compile Include="Messages\S_GET_USER_GUILD_LOGO.cs" />
+    <Compile Include="Messages\S_GET_USER_LIST.cs" />
+    <Compile Include="Messages\S_GUILD_MEMBER_LIST.cs" />
+    <Compile Include="Messages\S_GUILD_TOWER_INFO.cs" />
+    <Compile Include="Messages\S_IMAGE_DATA.cs" />
+    <Compile Include="Messages\S_INVEN.cs" />
+    <Compile Include="Messages\S_JOIN_PRIVATE_CHANNEL.cs" />
+    <Compile Include="Messages\S_LEARN_EP_PERK.cs" />
+    <Compile Include="Messages\S_LEAVE_PARTY.cs" />
+    <Compile Include="Messages\S_LEAVE_PARTY_MEMBER.cs" />
+    <Compile Include="Messages\S_LEAVE_PRIVATE_CHANNEL.cs" />
+    <Compile Include="Messages\S_LOAD_EP_INFO.cs" />
+    <Compile Include="Messages\S_LOAD_TOPO.cs" />
+    <Compile Include="Messages\S_LOGIN.cs" />
+    <Compile Include="Messages\S_LOGOUT_PARTY_MEMBER.cs" />
+    <Compile Include="Messages\S_NOTIFY_GUILD_QUEST_URGENT.cs" />
+    <Compile Include="Messages\S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA.cs" />
+    <Compile Include="Messages\S_NPCGUILD_LIST.cs" />
+    <Compile Include="Messages\S_NPC_STATUS.cs" />
+    <Compile Include="Messages\S_OTHER_USER_APPLY_PARTY.cs" />
+    <Compile Include="Messages\S_PARTY_MATCH_LINK.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_ABNORMAL_DEL.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_BUFF_UPDATE.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_CHANGE_HP.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_CHANGE_MP.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_INFO.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_INTERVAL_POS_UPDATE.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_LIST.cs" />
+    <Compile Include="Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
+    <Compile Include="Messages\S_PLAYER_CHANGE_EXP.cs" />
+    <Compile Include="Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
+    <Compile Include="Messages\S_PLAYER_CHANGE_MP.cs" />
+    <Compile Include="Messages\S_PLAYER_CHANGE_STAMINA.cs" />
+    <Compile Include="Messages\S_PLAYER_STAT_UPDATE.cs" />
+    <Compile Include="Messages\S_PRIVATE_CHAT.cs" />
+    <Compile Include="Messages\S_REQUEST_CITY_WAR_MAP_INFO.cs" />
+    <Compile Include="Messages\S_REQUEST_CITY_WAR_MAP_INFO_DETAIL.cs" />
+    <Compile Include="Messages\S_RESET_EP_PERK.cs" />
+    <Compile Include="Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Messages\S_RESULT_BIDDING_DICE_THROW.cs" />
+    <Compile Include="Messages\S_RESULT_ITEM_BIDDING.cs" />
+    <Compile Include="Messages\S_RETURN_TO_LOBBY.cs" />
+    <Compile Include="Messages\S_SHOW_CANDIDATE_LIST.cs" />
+    <Compile Include="Messages\S_SHOW_HP.cs" />
+    <Compile Include="Messages\S_SHOW_PARTY_MATCH_INFO.cs" />
+    <Compile Include="Messages\S_SPAWN_ME.cs" />
+    <Compile Include="Messages\S_SPAWN_NPC.cs" />
+    <Compile Include="Messages\S_SPAWN_USER.cs" />
+    <Compile Include="Messages\S_START_COOLTIME_ITEM.cs" />
+    <Compile Include="Messages\S_START_COOLTIME_SKILL.cs" />
+    <Compile Include="Messages\S_SYSTEM_MESSAGE.cs" />
+    <Compile Include="Messages\S_SYSTEM_MESSAGE_LOOT_ITEM.cs" />
+    <Compile Include="Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
+    <Compile Include="Messages\S_UPDATE_FRIEND_INFO.cs" />
+    <Compile Include="Messages\S_UPDATE_NPCGUILD.cs" />
+    <Compile Include="Messages\S_USER_BLOCK_LIST.cs" />
+    <Compile Include="Messages\S_USER_EFFECT.cs" />
+    <Compile Include="Messages\S_USER_STATUS.cs" />
+    <Compile Include="Messages\S_VIEW_WARE_EX.cs" />
+    <Compile Include="Messages\S_WEAK_POINT.cs" />
+    <Compile Include="Messages\S_WHISPER.cs" />
+    <Compile Include="OpCodeNamer.cs" />
+    <Compile Include="ParsedMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\SkillId.cs" />
+    <Compile Include="TeraMessageReader.cs" />
+    <Compile Include="UnknownMessage.cs" />
+    <Compile Include="Data\Vector3f.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
+      <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
+      <Name>FoglioUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj">
+      <Project>{E8A1FC0B-C9BC-448E-9702-94CE50412D99}</Project>
+      <Name>TeraDataLite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

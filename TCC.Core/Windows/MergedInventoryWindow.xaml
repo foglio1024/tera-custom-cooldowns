@@ -24,9 +24,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Border Style="{StaticResource RevampBorderStyle}"
                 Opacity=".7"
                 Grid.RowSpan="3" 
@@ -244,7 +241,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="1">
                     <Path Data="{StaticResource SvgSearch}" Margin="0 3 3 3" Height="15"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Right">

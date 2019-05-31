@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using TCC.ViewModels;
+﻿using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {

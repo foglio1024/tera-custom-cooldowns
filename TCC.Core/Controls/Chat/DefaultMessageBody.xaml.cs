@@ -1,6 +1,5 @@
 ﻿using Dragablz;
 using System.Windows;
-using System.Windows.Input;
 using TCC.Data.Chat;
 using TCC.ViewModels;
 
@@ -15,12 +14,6 @@ namespace TCC.Controls.Chat
         {
             InitializeComponent();
 
-        }
-
-        private void WrapPanel_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var contextMenu = (sender as FrameworkElement)?.ContextMenu;
-            if (contextMenu != null) contextMenu.IsOpen = true;
         }
 
         private void PinBtn_OnClick(object sender, RoutedEventArgs e)

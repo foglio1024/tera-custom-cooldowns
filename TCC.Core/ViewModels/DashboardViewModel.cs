@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FoglioUtils;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -11,13 +13,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+
 using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
-using TCC.Parsing.Messages;
 using TCC.Windows;
+
+using TeraDataLite;
+
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
@@ -57,7 +62,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                return _sortedColumns ?? (_sortedColumns = Utils.InitLiveView(o => ((DungeonColumnViewModel)o).Dungeon.Show, Columns,
+                return _sortedColumns ?? (_sortedColumns = CollectionViewUtils.InitLiveView(o => ((DungeonColumnViewModel)o).Dungeon.Show, Columns,
                                             new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Show)}", $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
                                             new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
             }
@@ -91,7 +96,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                int ret = 0;
+                var ret = 0;
                 Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
@@ -100,7 +105,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                int ret = 0;
+                var ret = 0;
                 Characters.ToSyncList().ForEach(c => ret += c.VanguardCredits);
                 return ret;
             }
@@ -109,7 +114,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                int ret = 0;
+                var ret = 0;
                 Characters.ToSyncList().ForEach(c => ret += c.GuardianCredits);
                 return ret;
             }
@@ -146,8 +151,6 @@ namespace TCC.ViewModels
                         CharacterViewModels.Remove(target);
                     }
                     break;
-                default:
-                    break;
             }
         }
 
@@ -162,7 +165,7 @@ namespace TCC.ViewModels
         }
         public RelayCommand LoadDungeonsCommand { get; }
         /* -- Constructor ------------------------------------------ */
-        bool _loaded = false;
+        bool _loaded;
         public DashboardViewModel()
         {
             Characters = new SynchronizedObservableCollection<Character>();
@@ -176,7 +179,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    SessionManager.CurrentDatabase.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                    SessionManager.DB.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
@@ -201,15 +204,15 @@ namespace TCC.ViewModels
 
             Characters.CollectionChanged += SyncViewModel;
 
-            SortedCharacters = Utils.InitLiveView(o => !((Character)o).Hidden, Characters,
+            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = Utils.InitLiveView(o => ((Character)o).Hidden, Characters,
+            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            CharacterViewModelsView = Utils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
+            CharacterViewModelsView = CollectionViewUtils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
@@ -239,7 +242,7 @@ namespace TCC.ViewModels
             Characters.FirstOrDefault(x => x.Id == charId)?.UpdateDungeons(dungeonCooldowns);
 
         }
-        public void SetVanguard(S_AVAILABLE_EVENT_MATCHING_LIST x)
+        public void SetVanguard(int weeklyDone, int dailyDone, int vanguardCredits)
         {
             if (_discardFirstVanguardPacket)
             {
@@ -248,9 +251,9 @@ namespace TCC.ViewModels
             }
 
             if (CurrentCharacter == null) return;
-            CurrentCharacter.VanguardWeekliesDone = x.WeeklyDone;
-            CurrentCharacter.VanguardDailiesDone = x.DailyDone;
-            CurrentCharacter.VanguardCredits = x.VanguardCredits;
+            CurrentCharacter.VanguardWeekliesDone = weeklyDone;
+            CurrentCharacter.VanguardDailiesDone = dailyDone;
+            CurrentCharacter.VanguardCredits = vanguardCredits;
             SaveCharacters();
             N(nameof(TotalVanguardCredits));
         }
@@ -281,7 +284,7 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.OK) LoadCharacters();
                 else
                 {
-                    File.Delete(Path.Combine(App.BasePath, "resources/config/characters.xml"));
+                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml"));
                     LoadCharacters();
                 }
             }
@@ -290,7 +293,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                var fs = new FileStream(Path.Combine(App.BasePath, "resources/config/characters.xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                var fs = new FileStream(Path.Combine(App.ResourcesPath, "config/characters.xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                 fs.SetLength(0);
                 using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
                 {
@@ -308,17 +311,23 @@ namespace TCC.ViewModels
 
         public void SelectCharacter(Character character)
         {
-            //if(SelectedCharacter == character) return;
-            if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
-
-            SelectedCharacter = character;
-            SelectedCharacterInventory = Utils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new SortDescription[]
+            try
             {
-                new SortDescription("Item.Id", ListSortDirection.Ascending),
-            });
-            ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
-            WindowManager.Dashboard.ShowDetails();
-            Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+                if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
+
+                SelectedCharacter = character;
+                SelectedCharacterInventory = CollectionViewUtils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
+                {
+                    new SortDescription("Item.Id", ListSortDirection.Ascending),
+                });
+                ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
+                WindowManager.Dashboard.ShowDetails();
+                Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+            }
+            catch (Exception e)
+            {
+                Log.F($"Failed to select character: {e}");
+            }
         }
 
         /* -- EVENTS: TO BE REFACTORED (TODO)----------------------- */
@@ -488,7 +497,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);
@@ -545,10 +554,11 @@ namespace TCC.ViewModels
             var em = list.Values.FirstOrDefault(x => x.Id == 151643);
             var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
             var ps = list.Values.FirstOrDefault(x => x.Id == 45482);
-
-            if (em != null) SetElleonMarks(em.Amount);
-            if (ds != null) CurrentCharacter.DragonwingScales = ds.Amount;
-            if (ps != null) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
+            
+            //TODO: check this
+            /*if (em != null)*/ if(em.Id != 0) SetElleonMarks(em.Amount);
+            /*if (ds != null)*/ if(ds.Id != 0) CurrentCharacter.DragonwingScales = ds.Amount;
+            /*if (ps != null)*/ if(ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
                 if (first) CurrentCharacter.Inventory.Clear();
@@ -566,10 +576,28 @@ namespace TCC.ViewModels
             }
             catch (Exception e)
             {
-                Log.F($"Error while refreshing inventory: {e.ToString()}");
+                Log.F($"Error while refreshing inventory: {e}");
             }
 
             N(nameof(SelectedCharacterInventory));
+        }
+
+        public void ResetDailyData()
+        {
+            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.ResetDailyData());
+            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
+        }
+
+        public void ResetWeeklyDungeons()
+        {
+            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.ResetWeeklyDungeons());
+            ChatWindowManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
+        }
+
+        public void ResetVanguardWeekly()
+        {
+            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.VanguardWeekliesDone = 0);
+            ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
         }
     }
 }
