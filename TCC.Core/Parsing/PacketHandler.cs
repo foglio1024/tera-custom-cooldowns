@@ -1154,24 +1154,36 @@ namespace TCC.Parsing
 
         }
 
-        public static void HandleCheckVersion(C_CHECK_VERSION p)
+        public static async void HandleCheckVersion(C_CHECK_VERSION p)
         {
-
-            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
-            if (!File.Exists(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map")))
+            var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
+            //OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
+            if (!File.Exists(opcPath) || true)
             {
-                TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
-                App.Close();
-                return;
+                if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
+                {
+                    if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
+                    {
+                        TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                        App.Close();
+                        return;
+                    }
+                }
+                else
+                {
+                    TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                    App.Close();
+                    return;
+                }
             }
-            var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map"));
+            var opcNamer = new OpCodeNamer(opcPath);
             PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer); //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
             PacketAnalyzer.Processor.Update();
             PacketAnalyzer.Sniffer.Connected = true;
         }
         public static async void HandleLoginArbiter(C_LOGIN_ARBITER p)
         {
-            await ProxyInterface.Instance.Init(); //ProxyOld.ConnectToProxy();
+            await ProxyInterface.Instance.Init();
 
             SessionManager.CurrentAccountName = p.AccountName;
             // check should already be done when downloading opcodes
@@ -1189,10 +1201,10 @@ namespace TCC.Parsing
 
             if (path == "")
             {
-                if (ProxyInterface.Instance.IsStubAvailable)
+                if (PacketAnalyzer.Sniffer.Connected && PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
                 {
                     var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map").Replace("\\", "/");
-                    if (await ProxyInterface.Instance.Stub.DumpSysMsg(destPath))
+                    if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))
                     {
                         PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
                         return;
