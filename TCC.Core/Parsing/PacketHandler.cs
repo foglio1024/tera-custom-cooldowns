@@ -1157,8 +1157,8 @@ namespace TCC.Parsing
         public static async void HandleCheckVersion(C_CHECK_VERSION p)
         {
             var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
-            //OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
-            if (!File.Exists(opcPath) || true)
+            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
+            if (!File.Exists(opcPath))
             {
                 if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
                 {
