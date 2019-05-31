@@ -8,11 +8,11 @@ namespace TCC.Interop.Proxy
 {
     public class TccStubInterface
     {
-        private Client TccStub { get; }
+        private ToolboxHttpClient TccStub { get; }
 
         public TccStubInterface()
         {
-            TccStub = new Client();
+            TccStub = new ToolboxHttpClient("http://127.0.0.52:9550");
         }
 
         public async Task<bool> PingStub()
@@ -249,13 +249,6 @@ namespace TCC.Interop.Proxy
             await TccStub.CallAsync("resetInstance");
         }
 
-        public async Task<bool> DumpSysMsg([NotNull] string path)
-        {
-            var resp = await TccStub.CallAsync("dumpSysMsg", new JObject
-            {
-                {"path", path}
-            });
-            return resp?.Result != null && resp.Result.Value<bool>();
-        }
+        
     }
 }

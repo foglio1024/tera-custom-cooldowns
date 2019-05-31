@@ -114,7 +114,7 @@
     <Compile Include="Interop\Firebase.cs" />
     <Compile Include="Interop\JsonRPC\Request.cs" />
     <Compile Include="Interop\JsonRPC\Response.cs" />
-    <Compile Include="Interop\Proxy\Client.cs" />
+    <Compile Include="Interop\Proxy\ToolboxHttpClient.cs" />
     <Compile Include="Interop\Proxy\ProxyInterface.cs" />
     <Compile Include="Interop\Proxy\ProxyMessageHandler.cs" />
     <Compile Include="Interop\Proxy\Server.cs" />

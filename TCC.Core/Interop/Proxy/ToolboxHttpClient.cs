@@ -7,16 +7,14 @@ using TCC.Interop.JsonRPC;
 
 namespace TCC.Interop.Proxy
 {
-    public class Client
+    public class ToolboxHttpClient
     {
         private readonly HttpClient _client;
-        private const string Address = "http://127.0.0.52:9550";
-        public Client()
+        private readonly string _address;
+        public ToolboxHttpClient(string address)
         {
+            _address = address;
             _client = new HttpClient();
-            //_client.DefaultRequestHeaders.Add("Connection", "Keep-Alive");
-            //_client.DefaultRequestHeaders.Add("Keep-Alive", "timeout=1, max=100");
-            //_client.DefaultRequestHeaders.Add("User-Agent", "TCC");
         }
 
         private async Task<Response> Send(JObject obj)
@@ -25,7 +23,7 @@ namespace TCC.Interop.Proxy
 
             try
             {
-                var resp = await _client.PostAsync(Address, req);
+                var resp = await _client.PostAsync(_address, req);
                 return new Response(JObject.Parse(await resp.Content.ReadAsStringAsync()));
             }
             catch (Exception e)
