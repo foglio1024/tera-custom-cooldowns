@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TeraPacketParser
 {
@@ -22,7 +25,7 @@ namespace TeraPacketParser
         }
 
         public OpCodeNamer(string filename)
-            : this(ReadOpCodeFile(filename))
+            : this(ReadOpCodeFile(filename).Result)
         {
             _path = Path.GetDirectoryName(filename);
         }
@@ -35,7 +38,7 @@ namespace TeraPacketParser
             return opCode.ToString("X4");
         }
 
-        private static IEnumerable<KeyValuePair<ushort, string>> ReadOpCodeFile(string filename)
+        private static async Task<IEnumerable<KeyValuePair<ushort, string>>> ReadOpCodeFile(string filename)
         {
             if (!File.Exists(filename))
             {
@@ -45,6 +48,9 @@ namespace TeraPacketParser
             }
 
             if (!File.Exists(filename)) { return new List<KeyValuePair<ushort, string>>(); }
+
+            await FoglioUtils.MiscUtils.WaitForFileUnlock(filename, FileAccess.Read);
+
             var names = File.ReadLines(filename)
                 .Select(s => Regex.Replace(s.Replace("=", " "), @"\s+", " ").Split(' ').ToArray())
                 .Select(parts => new KeyValuePair<ushort, string>(ushort.Parse(parts[1]), parts[0]));
@@ -66,7 +72,7 @@ namespace TeraPacketParser
             var filename = _path + "/sysmsg." + version + ".map";
             if (!File.Exists(filename)) filename = _path + "/sysmsg." + releaseVersion / 100 + ".map";
             if (!File.Exists(filename)) return;
-            var namesArray = ReadOpCodeFile(filename).ToArray();
+            var namesArray = ReadOpCodeFile(filename).Result.ToArray();
             _opCodeNames = namesArray.ToDictionary(parts => parts.Key, parts => parts.Value);
             _opCodeCodes = namesArray.ToDictionary(parts => parts.Value, parts => parts.Key);
         }
