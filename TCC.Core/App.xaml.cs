@@ -64,8 +64,9 @@ namespace TCC
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
             InitSplashScreen();
-
+#if !DEBUG
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
+#endif
             UpdateManager.TryDeleteUpdater();
 
             SplashScreen.SetText("Checking for application updates...");
