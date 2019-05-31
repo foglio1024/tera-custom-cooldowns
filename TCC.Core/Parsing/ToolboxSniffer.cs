@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -36,6 +37,12 @@ namespace TCC.Parsing
                 { "mapType", mapType }
             });
             return resp?.Result != null && resp.Result.Value<bool>();
+        }
+
+        public async Task<uint> GetProtocolVersion()
+        {
+            var resp = await _client.CallAsync("getProtocolVersion");
+            return resp?.Result?.Value<uint>() ?? 0;
         }
     }
 
@@ -85,8 +92,12 @@ namespace TCC.Parsing
             {
                 var client = _dataConnection.AcceptTcpClient();
                 await ProxyInterface.Instance.Init();
-                var resp = await ControlConnection.GetServer(); 
-                if (resp != 0) NewConnection?.Invoke(SessionManager.DB.ServerDatabase.GetServer(resp));
+                var resp = await ControlConnection.GetServer();
+                if (resp != 0)
+                {
+                    NewConnection?.Invoke(SessionManager.DB.ServerDatabase.GetServer(resp));
+                }
+
                 var stream = client.GetStream();
                 while (client.Connected)
                 {
