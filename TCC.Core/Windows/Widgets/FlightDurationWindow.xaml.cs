@@ -24,8 +24,8 @@ namespace TCC.Windows.Widgets
             MainContent = Content as UIElement;
 
             //FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
-            //FlyingGuardianDataProvider.StacksChanged += SetStacks;
             //FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
+            FlyingGuardianDataProvider.StacksChanged += SetStacks;
             SessionManager.CombatChanged += OnCombatChanged;
 
             Init(Settings.SettingsHolder.FlightGaugeWindowSettings, perClassPosition: false);
@@ -68,20 +68,14 @@ namespace TCC.Windows.Widgets
         {
             if (SessionManager.Combat) HideWindow();
         }
-        private void OnFlyingGuardianInProgressChanged(bool obj)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                StacksContainer.Visibility = obj ? Visibility.Visible : Visibility.Collapsed;
-            });
-        }
-        private void SetStacks(int stacks)
+
+        private void SetStacks()
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 for (var i = 9; i >= 0; i--)
                 {
-                    ((FrameworkElement)StacksContainer.Children[i]).Opacity = i + 1 <= stacks ? 1 : 0.2;
+                    ((FrameworkElement)StacksContainer.Children[i]).Opacity = i + 1 <= FlyingGuardianDataProvider.Stacks ? 1 : 0.2;
                 }
             }));
         }
