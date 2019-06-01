@@ -59,7 +59,7 @@ namespace TeraPacketParser.Messages
                     c.GuildName = reader.ReadTeraString();
                 }
                 catch { }
-
+                CharacterList.Add(c);
                 //CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos)
                 //{
                 //    GuildName = c.GuildName,
