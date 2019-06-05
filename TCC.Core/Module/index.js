@@ -1,6 +1,8 @@
 const { spawn } = require('child_process');
+const path = require('path');
+
 module.exports = function TCC(m)
 {
-    const tcc = spawn('TCC.exe', ["--toolbox"]);
+    const tcc = spawn(path.join(__dirname, 'TCC.exe'), ["--toolbox"]);
     tcc.on('exit', (code, signal) => { "TCC exited." });
 }
