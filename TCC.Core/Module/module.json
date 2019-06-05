@@ -1,0 +1,12 @@
+{
+	"servers": ["https://raw.githubusercontent.com/Foglio1024/Tera-Custom-Cooldowns/experimental/release/"],
+	"supportUrl": "https://github.com/Foglio1024/Tera-Custom-Cooldowns/issues",
+	"name": "TCC",
+	"author": "Foglio",
+	"description": "UI replacement with some extra features.",
+	"disableAutoUpdate": false,
+	"options": {
+		"niceName": "TCC",
+		"guiName": "TCC (TERA Custom Cooldowns)"
+	}
+}
