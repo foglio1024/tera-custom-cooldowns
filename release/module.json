@@ -8,5 +8,9 @@
 	"options": {
 		"niceName": "TCC",
 		"guiName": "TCC (TERA Custom Cooldowns)"
+	},
+	"dependencies" : {
+		"ttb-interface-control" : "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-control/module.json",
+		"ttb-interface-data" : "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-data/module.json"
 	}
 }
