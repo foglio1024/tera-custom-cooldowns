@@ -1382,7 +1382,8 @@
     <PreBuildEvent>$(SolutionDir)\dependencies\WpfRB\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy $(ProjectDir)Module\index.js $(TargetDir) /y /i
+xcopy $(ProjectDir)Module\module.json $(TargetDir) /y /i
+node D:\Repos\tcc-stub\manifest-generator.js $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
