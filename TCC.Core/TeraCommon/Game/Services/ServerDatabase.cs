@@ -26,8 +26,14 @@ namespace TCC.TeraCommon.Game.Services
             _serverlist.Add(new Server("VPN", "Unknown", "127.0.0.1"));
 
             var serversOverridePath = Path.Combine(App.ResourcesPath, "config/server-overrides.txt");
-            if (!File.Exists(serversOverridePath))//create the default file if it doesn't exist
+            if (!File.Exists(serversOverridePath)) //create the default file if it doesn't exist
+            {
+                if (!Directory.Exists(Path.GetDirectoryName(serversOverridePath)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(serversOverridePath));
+                }
                 File.WriteAllText(serversOverridePath, DefaultOverride);
+            }
             var overriddenServers = GetServers(serversOverridePath).ToList();
             AddOverrides(overriddenServers);
 
