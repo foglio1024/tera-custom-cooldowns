@@ -130,24 +130,24 @@
                     <Run Text="Decides how to apply click thru on this window:" />
                     <LineBreak />
                     <LineBreak />
-                    <Run Text="Never:" FontWeight="Bold" Foreground="White" />
-                    <Run Text=" click thru is never applied" />
+                    <Run Text=" - Never" FontWeight="Bold" Foreground="White" />
+                    <Run Text=": click thru is never applied" />
                     <LineBreak />
                     <LineBreak />
-                    <Run Text="WhenDim:" FontWeight="Bold" Foreground="White" />
-                    <Run Text=" click thru is applied when TCC is dim (out of combat)" />
+                    <Run Text=" - When dim" FontWeight="Bold" Foreground="White" />
+                    <Run Text=": click thru is applied when TCC is dim (out of combat)" />
                     <LineBreak />
                     <LineBreak />
-                    <Run Text="WhenUndim:" FontWeight="Bold" Foreground="White" />
-                    <Run Text=" click thru is applied when TCC is not dim (during combat or when using skills/items)" />
+                    <Run Text=" - When undim" FontWeight="Bold" Foreground="White" />
+                    <Run Text=": click thru is applied when TCC is not dim (during combat or when using skills/items)" />
                     <LineBreak />
                     <LineBreak />
-                    <Run Text="Always:" FontWeight="Bold" Foreground="White" />
-                    <Run Text=" click thru is always on" />
+                    <Run Text=" - Always" FontWeight="Bold" Foreground="White" />
+                    <Run Text=": click thru is always on" />
                     <LineBreak />
                     <LineBreak />
-                    <Run Text="GameDriven:" FontWeight="Bold" Foreground="White" />
-                    <Run Text=" click thru depends on ingame UI status;" />
+                    <Run Text=" - Game-driven" FontWeight="Bold" Foreground="White" />
+                    <Run Text=": click thru depends on ingame UI status;" />
                     <Run Text=" requires proxy and modded S1UI_Chat2.gpk" Foreground="{StaticResource HpBrush}" />
                 </TextBlock>
             </Grid>
@@ -1387,7 +1387,39 @@
                             <settings:SelectionSetting SettingName="Capture mode"
                                                        SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:CaptureMode}"
-                                                       Choices="{Binding CaptureModes, Mode=OneWay}" />
+                                                       Choices="{Binding CaptureModes, Mode=OneWay}" >
+                                <settings:SelectionSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="300">
+                                            <Run Text="Sets the method used to capture game data." />
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run FontWeight="DemiBold" Text="npcap" Foreground="{StaticResource MpBrush}"/>
+                                            <Run Text=": capture packets via npcap library. Uses less resources compared to raw sockets. Requires npcap to be installed."/>
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run FontWeight="DemiBold" Text="Raw sockets" Foreground="{StaticResource MpBrush}"/>
+                                            <Run Text=": use this if npcap doesn't work, but consider that this is the most resource demanding method. Requires firewall exception for TCC."/>
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run FontWeight="DemiBold" Text="TERA Toolbox" Foreground="{StaticResource TwitchBrush}"/>
+                                            <!--<Image Source="pack://application:,,/resources/ttb.ico" Width="24" >
+                                                <Image.RenderTransform>
+                                                    <TranslateTransform Y="6"/>
+                                                </Image.RenderTransform>
+                                            </Image>-->
+                                            <Run Text=": capture data from TERA Toolbox. This prevents crashes caused by corrupted packets and has better performance than the other two options."/>
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run Text="Note: if TCC is started by TERA Toolbox as a module, the third option will automatically be used even if another one is selected." />
+
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:SelectionSetting.ToolTip>
+
+                            </settings:SelectionSetting>
                             <!--<settings:CheckboxSetting SettingName="Use npcap"
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />-->
                             <settings:CheckboxSetting SettingName="Use Tera Toolbox"
