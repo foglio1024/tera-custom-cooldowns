@@ -36,7 +36,7 @@ namespace TCC
         public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
         public static bool StartedByToolbox { get; private set; }
-
+        public static bool Restarted { get; private set; }
         private static FUBH fubh;
         public static void FUBH()
         {
@@ -117,7 +117,9 @@ namespace TCC
         private static void ParseStartupArgs(List<string> list)
         {
             StartedByToolbox = list.IndexOf("--toolbox") != -1;
+            Restarted = list.IndexOf("--restart") != -1;
         }
+
 
         private static void InitSplashScreen()
         {
@@ -142,13 +144,13 @@ namespace TCC
         public static void Restart()
         {
             SettingsWriter.Save();
-            Process.Start("TCC.exe");
+            Process.Start("TCC.exe", "--restart");
             Close();
         }
 
-        public static void Close()
+        public static void Close(bool releaseMutex = true)
         {
-            BaseDispatcher.Invoke(ReleaseMutex);
+            if(releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
             PacketAnalyzer.Sniffer.Enabled = false;
             SettingsWriter.Save();
             WindowManager.Dispose();
@@ -161,7 +163,8 @@ namespace TCC
         private static bool IsRunning()
         {
             _mutex = new Mutex(true, "TCC", out var createdNew);
-            return !createdNew;
+            if (createdNew || !Restarted) return !createdNew;
+            _mutex.WaitOne();
             return false;
         }
 
