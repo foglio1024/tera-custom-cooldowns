@@ -318,12 +318,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.MaxMessages == value) return;
-                var val = value;
-                if (val < 20)
-                {
-                    val = 20;
-                }
-                App.Settings.MaxMessages = val;
+                App.Settings.MaxMessages = value == 0 ? int.MaxValue : value;
                 N();
             }
         }
@@ -731,82 +726,8 @@ namespace TCC.ViewModels
         public SettingsWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            //if (Settings.CooldownWindowSettings.Enabled) WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
-            //if (Settings.CharacterWindowSettings.Enabled) WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
-            //if (Settings.BossWindowSettings.Enabled) WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
-            //if (Settings.BuffWindowSettings.Enabled) WindowManager.BuffWindow.PropertyChanged += BuffBar_PropertyChanged;
-            //if (Settings.GroupWindowSettings.Enabled) WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
-            //if (Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
         }
         public bool Experimental => App.Experimental;
-
-        //private void ClassWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "Visibility")
-        //    {
-        //        IsClassWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
-        //    }
-        //    else if (e.PropertyName == "ClickThruMode")
-        //    {
-        //        //IsClassWindowTransparent = ((TccWindow)sender).ClickThru;
-        //    }
-        //}
-        //private void GroupWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "Visibility")
-        //    {
-        //        IsGroupWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
-        //    }
-        //    else if (e.PropertyName == "ClickThruMode")
-        //    {
-        //        //IsGroupWindowTransparent = ((TccWindow)sender).ClickThru;
-        //    }
-        //}
-        //private void BuffBar_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "Visibility")
-        //    {
-        //        IsBuffWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
-        //    }
-        //    else if (e.PropertyName == "ClickThruMode")
-        //    {
-        //        //IsBuffWindowTransparent = ((TccWindow)sender).ClickThru;
-        //    }
-        //}
-        //private void BossGauge_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "Visibility")
-        //    {
-        //        IsBossWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
-
-        //    }
-        //    else if (e.PropertyName == "ClickThruMode")
-        //    {
-        //        //IsBossWindowTransparent = ((TccWindow)sender).ClickThru;
-        //    }
-        //}
-        //private void CharacterWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "Visibility")
-        //    {
-        //        IsCharacterWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
-        //    }
-        //    else if (e.PropertyName == "ClickThruMode")
-        //    {
-        //        //IsCharacterWindowTransparent = ((TccWindow)sender).ClickThru;
-        //    }
-        //}
-        //private void CooldownWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "Visibility")
-        //    {
-        //        IsCooldownWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
-        //    }
-        //    else if (e.PropertyName == "ClickThruMode")
-        //    {
-        //        //IsCooldownWindowTransparent = ((TccWindow)sender).ClickThru;
-        //    }
-        //}
 
         public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
         //public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
@@ -828,17 +749,6 @@ namespace TCC.ViewModels
                 N();
             }
         }
-
-        //public ClickThruMode ChatClickThruMode
-        //{
-        //    get => App.Settings.ChatClickThruMode;
-        //    set
-        //    {
-        //        if (App.Settings.ChatClickThruMode == value) return;
-        //        App.Settings.ChatClickThruMode = value;
-        //        N();
-        //    }
-        //}
 
         public bool ShowTradeLfgs
         {
