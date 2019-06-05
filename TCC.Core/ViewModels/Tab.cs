@@ -6,6 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Dragablz;
+using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
@@ -65,12 +66,16 @@ namespace TCC.ViewModels
     public class Tab : TSPropertyChanged
     {
         // needed for combobox in settings
+        [JsonIgnore]
         public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList();
 
         private ICollectionView _messages;
         private ChatMessage _pinnedMessage;
+        [JsonIgnore]
         public ICommand ScrollToMessageCommand { get; }
+        [JsonIgnore]
         public ICommand RemoveImportantMessageCommand { get; }
+        [JsonIgnore]
         public ICommand ClearAllCommand { get; }
         private string _tabName;
         public string TabName
@@ -84,15 +89,19 @@ namespace TCC.ViewModels
             }
         }
 
+        [JsonIgnore]
         public string ImportantMessagesLabel => ImportantMessages.Count > 9 ? "!" : ImportantMessages.Count.ToString();
 
+        [JsonIgnore]
         public bool Attention => ImportantMessages.Count > 0;
 
         public SynchronizedObservableCollection<string> Authors { get; set; }
         public SynchronizedObservableCollection<string> ExcludedAuthors { get; set; }
         public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
         public SynchronizedObservableCollection<ChatChannel> ExcludedChannels { get; set; }
+        [JsonIgnore]
         public SynchronizedObservableCollection<ChatMessage> ImportantMessages { get; set; }
+        [JsonIgnore]
         public ICollectionView Messages
         {
             get => _messages;
@@ -103,6 +112,7 @@ namespace TCC.ViewModels
                 N(nameof(Messages));
             }
         }
+        [JsonIgnore]
         public ChatMessage PinnedMessage
         {
             get => _pinnedMessage;
@@ -121,7 +131,6 @@ namespace TCC.ViewModels
         public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            TabName = n;
             Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
             Authors = new SynchronizedObservableCollection<string>(Dispatcher);
             ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
@@ -139,6 +148,8 @@ namespace TCC.ViewModels
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
             });
             ScrollToMessageCommand = new RelayCommand(msg => { ChatWindowManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
+            if (n == null || ch == null || ex == null || a == null || exa == null) return;
+            TabName = n;
             foreach (var auth in a)
             {
                 Authors.Add(auth);

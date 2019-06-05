@@ -63,7 +63,7 @@ namespace TCC.Controls.Settings
         }
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            SettingsWriter.Save();
+            App.Settings.Save();
 
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

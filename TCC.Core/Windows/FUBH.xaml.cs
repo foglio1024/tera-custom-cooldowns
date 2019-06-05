@@ -21,7 +21,7 @@ namespace TCC.Windows
                 _dontshowagain = value;
                 N();
                 N(nameof(CloseMessage));
-                SettingsHolder.DontShowFUBH = value;
+                App.Settings.DontShowFUBH = value;
             }
         }
 
@@ -49,7 +49,7 @@ namespace TCC.Windows
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Hide();
-            SettingsWriter.Save();
+            App.Settings.Save();
         }
 
         private void Hyperlink_OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

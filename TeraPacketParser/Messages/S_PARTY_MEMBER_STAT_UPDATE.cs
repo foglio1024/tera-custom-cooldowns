@@ -41,7 +41,7 @@ namespace TeraPacketParser.Messages
             MaxMP = reader.ReadInt32();
 
             Level = reader.ReadInt16();
-            InCombat = reader.ReadInt16() > 0; //TODO: to check
+            InCombat = reader.ReadInt16() > 0;
             Vitality = reader.ReadInt16();
 
             Alive = reader.ReadBoolean();

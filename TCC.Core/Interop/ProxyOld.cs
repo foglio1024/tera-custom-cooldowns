@@ -142,7 +142,7 @@
 
 //    //    //public static void ConnectToProxy()
 //    //    //{
-//    //    //    if (!Settings.SettingsHolder.EnableProxy) return;
+//    //    //    if (!App.Settings.EnableProxy) return;
 //    //    //    try
 //    //    //    {
 //    //    //        if (_client.Client != null && _client.Connected) return;
@@ -194,7 +194,7 @@
 //    //    //{
 //    //    //    var sb = new StringBuilder("init_stub");
 //    //    //    sb.Append("&use_lfg=");
-//    //    //    sb.Append(Settings.SettingsHolder.LfgEnabled.ToString().ToLower());
+//    //    //    sb.Append(App.Settings.LfgEnabled.ToString().ToLower());
 
 //    //    //    SendData(sb.ToString());
 //    //    //}

@@ -22,15 +22,15 @@ namespace TCC.ViewModels
         public static event Action SkillShapeChanged;
         public static event Action FontSizeChanged;
 
-        public WindowSettings CooldownWindowSettings => SettingsHolder.CooldownWindowSettings;
-        public WindowSettings ClassWindowSettings => SettingsHolder.ClassWindowSettings;
-        public WindowSettings GroupWindowSettings => SettingsHolder.GroupWindowSettings;
-        public WindowSettings BuffWindowSettings => SettingsHolder.BuffWindowSettings;
-        public WindowSettings CharacterWindowSettings => SettingsHolder.CharacterWindowSettings;
-        public WindowSettings BossWindowSettings => SettingsHolder.BossWindowSettings;
-        public WindowSettings FlightWindowSettings => SettingsHolder.FlightGaugeWindowSettings;
-        public WindowSettings FloatingButtonSettings => SettingsHolder.FloatingButtonSettings;
-        public WindowSettings CuWindowSettings => SettingsHolder.CivilUnrestWindowSettings;
+        public WindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
+        public WindowSettings ClassWindowSettings => App.Settings.ClassWindowSettings;
+        public WindowSettings GroupWindowSettings => App.Settings.GroupWindowSettings;
+        public WindowSettings BuffWindowSettings => App.Settings.BuffWindowSettings;
+        public WindowSettings CharacterWindowSettings => App.Settings.CharacterWindowSettings;
+        public WindowSettings BossWindowSettings => App.Settings.BossWindowSettings;
+        public WindowSettings FlightWindowSettings => App.Settings.FlightGaugeWindowSettings;
+        public WindowSettings FloatingButtonSettings => App.Settings.FloatingButtonSettings;
+        public WindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
 
         private int _khCount;
         private bool _kh;
@@ -64,160 +64,160 @@ namespace TCC.ViewModels
 
         public bool EthicalMode
         {
-            get => SettingsHolder.EthicalMode;
+            get => App.Settings.EthicalMode;
             set
             {
-                if (SettingsHolder.EthicalMode == value) return;
-                SettingsHolder.EthicalMode = value;
+                if (App.Settings.EthicalMode == value) return;
+                App.Settings.EthicalMode = value;
                 N();
             }
         }
         public bool DisableLfgChatMessages
         {
-            get => SettingsHolder.DisableLfgChatMessages;
+            get => App.Settings.DisableLfgChatMessages;
             set
             {
-                if (SettingsHolder.DisableLfgChatMessages == value) return;
-                SettingsHolder.DisableLfgChatMessages = value;
+                if (App.Settings.DisableLfgChatMessages == value) return;
+                App.Settings.DisableLfgChatMessages = value;
                 N();
             }
         }
         public bool ShowMembersHpNumbers
         {
-            get => SettingsHolder.ShowMembersHpNumbers;
+            get => App.Settings.ShowMembersHpNumbers;
             set
             {
-                if (SettingsHolder.ShowMembersHpNumbers == value) return;
-                SettingsHolder.ShowMembersHpNumbers = value;
+                if (App.Settings.ShowMembersHpNumbers == value) return;
+                App.Settings.ShowMembersHpNumbers = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 N();
             }
         }
         public bool ExperimentalNotification
         {
-            get => SettingsHolder.ExperimentalNotification;
+            get => App.Settings.ExperimentalNotification;
             set
             {
-                if (SettingsHolder.ExperimentalNotification == value) return;
-                SettingsHolder.ExperimentalNotification = value;
+                if (App.Settings.ExperimentalNotification == value) return;
+                App.Settings.ExperimentalNotification = value;
                 N();
             }
         }
         public bool CheckOpcodesHash
         {
-            get => SettingsHolder.CheckOpcodesHash;
+            get => App.Settings.CheckOpcodesHash;
             set
             {
-                if (SettingsHolder.CheckOpcodesHash == value) return;
-                SettingsHolder.CheckOpcodesHash = value;
+                if (App.Settings.CheckOpcodesHash == value) return;
+                App.Settings.CheckOpcodesHash = value;
                 N();
             }
         }
         public bool CheckGuildBamWithoutOpcode  // by HQ 20190324
         {
-            get => SettingsHolder.CheckGuildBamWithoutOpcode;
+            get => App.Settings.CheckGuildBamWithoutOpcode;
             set
             {
-                if (SettingsHolder.CheckGuildBamWithoutOpcode == value) return;
-                SettingsHolder.CheckGuildBamWithoutOpcode = value;
+                if (App.Settings.CheckGuildBamWithoutOpcode == value) return;
+                App.Settings.CheckGuildBamWithoutOpcode = value;
                 N();
             }
         }
         public bool HideMe
         {
-            get => SettingsHolder.IgnoreMeInGroupWindow;
+            get => App.Settings.IgnoreMeInGroupWindow;
             set
             {
-                if (SettingsHolder.IgnoreMeInGroupWindow == value) return;
-                SettingsHolder.IgnoreMeInGroupWindow = value;
+                if (App.Settings.IgnoreMeInGroupWindow == value) return;
+                App.Settings.IgnoreMeInGroupWindow = value;
                 WindowManager.GroupWindow.VM.ToggleMe(!value);
                 N();
             }
         }
         public bool HideBuffs
         {
-            get => SettingsHolder.IgnoreGroupBuffs;
+            get => App.Settings.IgnoreGroupBuffs;
             set
             {
-                if (SettingsHolder.IgnoreGroupBuffs == value) return;
-                SettingsHolder.IgnoreGroupBuffs = value;
+                if (App.Settings.IgnoreGroupBuffs == value) return;
+                App.Settings.IgnoreGroupBuffs = value;
                 N(nameof(HideBuffs));
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public uint HideBuffsThreshold
         {
-            get => SettingsHolder.HideBuffsThreshold;
+            get => App.Settings.HideBuffsThreshold;
             set
             {
-                if (SettingsHolder.HideBuffsThreshold == value) return;
-                SettingsHolder.HideBuffsThreshold = value;
+                if (App.Settings.HideBuffsThreshold == value) return;
+                App.Settings.HideBuffsThreshold = value;
                 N();
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public uint HideDebuffsThreshold
         {
-            get => SettingsHolder.HideDebuffsThreshold;
+            get => App.Settings.HideDebuffsThreshold;
             set
             {
-                if (SettingsHolder.HideDebuffsThreshold == value) return;
-                SettingsHolder.HideDebuffsThreshold = value;
+                if (App.Settings.HideDebuffsThreshold == value) return;
+                App.Settings.HideDebuffsThreshold = value;
                 N();
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public uint HideHpThreshold
         {
-            get => SettingsHolder.HideHpThreshold;
+            get => App.Settings.HideHpThreshold;
             set
             {
-                if (SettingsHolder.HideHpThreshold == value) return;
-                SettingsHolder.HideHpThreshold = value;
+                if (App.Settings.HideHpThreshold == value) return;
+                App.Settings.HideHpThreshold = value;
                 N();
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public uint HideMpThreshold
         {
-            get => SettingsHolder.HideMpThreshold;
+            get => App.Settings.HideMpThreshold;
             set
             {
-                if (SettingsHolder.HideMpThreshold == value) return;
-                SettingsHolder.HideMpThreshold = value;
+                if (App.Settings.HideMpThreshold == value) return;
+                App.Settings.HideMpThreshold = value;
                 N();
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public uint DisableAbnormalitiesThreshold
         {
-            get => SettingsHolder.DisableAbnormalitiesThreshold;
+            get => App.Settings.DisableAbnormalitiesThreshold;
             set
             {
-                if (SettingsHolder.DisableAbnormalitiesThreshold == value) return;
-                SettingsHolder.DisableAbnormalitiesThreshold = value;
+                if (App.Settings.DisableAbnormalitiesThreshold == value) return;
+                App.Settings.DisableAbnormalitiesThreshold = value;
                 N();
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public bool HideDebuffs
         {
-            get => SettingsHolder.IgnoreGroupDebuffs;
+            get => App.Settings.IgnoreGroupDebuffs;
             set
             {
-                if (SettingsHolder.IgnoreGroupDebuffs == value) return;
-                SettingsHolder.IgnoreGroupDebuffs = value;
+                if (App.Settings.IgnoreGroupDebuffs == value) return;
+                App.Settings.IgnoreGroupDebuffs = value;
                 N(nameof(HideDebuffs));
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
             }
         }
         public bool DisableAllPartyAbnormals
         {
-            get => SettingsHolder.DisablePartyAbnormals;
+            get => App.Settings.DisablePartyAbnormals;
             set
             {
-                if (SettingsHolder.DisablePartyAbnormals == value) return;
-                SettingsHolder.DisablePartyAbnormals = value;
+                if (App.Settings.DisablePartyAbnormals == value) return;
+                App.Settings.DisablePartyAbnormals = value;
                 N(nameof(DisableAllPartyAbnormals));
                 PacketAnalyzer.Processor.Update();
                 if (value) WindowManager.GroupWindow.VM.ClearAllAbnormalities();
@@ -225,11 +225,11 @@ namespace TCC.ViewModels
         }
         public bool AccurateHp
         {
-            get => SettingsHolder.AccurateHp;
+            get => App.Settings.AccurateHp;
             set
             {
-                if (SettingsHolder.AccurateHp == value) return;
-                SettingsHolder.AccurateHp = value;
+                if (App.Settings.AccurateHp == value) return;
+                App.Settings.AccurateHp = value;
                 N(nameof(AccurateHp));
                 PacketAnalyzer.Processor.Update();
             }
@@ -237,55 +237,55 @@ namespace TCC.ViewModels
 
         public FlowDirection BuffsDirection
         {
-            get => SettingsHolder.BuffsDirection;
+            get => App.Settings.BuffsDirection;
             set
             {
-                if (SettingsHolder.BuffsDirection == value) return;
-                SettingsHolder.BuffsDirection = value;
+                if (App.Settings.BuffsDirection == value) return;
+                App.Settings.BuffsDirection = value;
                 WindowManager.BuffWindow.VM.ExN(nameof(BuffBarWindowViewModel.Direction));
                 N(nameof(BuffsDirection));
             }
         }
         public ControlShape AbnormalityShape
         {
-            get => SettingsHolder.AbnormalityShape;
+            get => App.Settings.AbnormalityShape;
             set
             {
-                if (SettingsHolder.AbnormalityShape == value) return;
-                SettingsHolder.AbnormalityShape = value;
+                if (App.Settings.AbnormalityShape == value) return;
+                App.Settings.AbnormalityShape = value;
                 AbnormalityShapeChanged?.Invoke();
                 N();
             }
         }
         public ControlShape SkillShape
         {
-            get => SettingsHolder.SkillShape;
+            get => App.Settings.SkillShape;
             set
             {
-                if (SettingsHolder.SkillShape == value) return;
-                SettingsHolder.SkillShape = value;
+                if (App.Settings.SkillShape == value) return;
+                App.Settings.SkillShape = value;
                 SkillShapeChanged?.Invoke();
                 N();
             }
         }
         public CooldownBarMode CooldownBarMode
         {
-            get => SettingsHolder.CooldownBarMode;
+            get => App.Settings.CooldownBarMode;
             set
             {
-                if (SettingsHolder.CooldownBarMode == value) return;
-                SettingsHolder.CooldownBarMode = value;
+                if (App.Settings.CooldownBarMode == value) return;
+                App.Settings.CooldownBarMode = value;
                 WindowManager.CooldownWindow.VM.NotifyModeChanged();
                 N(nameof(CooldownBarMode));
             }
         }
         public EnrageLabelMode EnrageLabelMode
         {
-            get => SettingsHolder.EnrageLabelMode;
+            get => App.Settings.EnrageLabelMode;
             set
             {
-                if (SettingsHolder.EnrageLabelMode == value) return;
-                SettingsHolder.EnrageLabelMode = value;
+                if (App.Settings.EnrageLabelMode == value) return;
+                App.Settings.EnrageLabelMode = value;
                 N(nameof(EnrageLabelMode));
             }
         }
@@ -303,57 +303,57 @@ namespace TCC.ViewModels
         //}
         public string RegionOverride
         {
-            get => SettingsHolder.LanguageOverride;
+            get => App.Settings.LanguageOverride;
             set
             {
-                if (SettingsHolder.LanguageOverride == value) return;
-                SettingsHolder.LanguageOverride = value;
-                if (value == "") SettingsHolder.LastLanguage = "EU-EN";
+                if (App.Settings.LanguageOverride == value) return;
+                App.Settings.LanguageOverride = value;
+                if (value == "") App.Settings.LastLanguage = "EU-EN";
                 N(nameof(RegionOverride));
             }
         }
         public int MaxMessages
         {
-            get => SettingsHolder.MaxMessages;
+            get => App.Settings.MaxMessages;
             set
             {
-                if (SettingsHolder.MaxMessages == value) return;
+                if (App.Settings.MaxMessages == value) return;
                 var val = value;
                 if (val < 20)
                 {
                     val = 20;
                 }
-                SettingsHolder.MaxMessages = val;
+                App.Settings.MaxMessages = val;
                 N();
             }
         }
         public int ChatScrollAmount
         {
-            get => SettingsHolder.ChatScrollAmount;
+            get => App.Settings.ChatScrollAmount;
             set
             {
-                if (SettingsHolder.ChatScrollAmount == value) return;
-                SettingsHolder.ChatScrollAmount = value;
+                if (App.Settings.ChatScrollAmount == value) return;
+                App.Settings.ChatScrollAmount = value;
                 N();
             }
         }
         public int SpamThreshold
         {
-            get => SettingsHolder.SpamThreshold;
+            get => App.Settings.SpamThreshold;
             set
             {
-                if (SettingsHolder.SpamThreshold == value) return;
-                SettingsHolder.SpamThreshold = value;
+                if (App.Settings.SpamThreshold == value) return;
+                App.Settings.SpamThreshold = value;
                 N();
             }
         }
         public bool ShowTimestamp
         {
-            get => SettingsHolder.ShowTimestamp;
+            get => App.Settings.ShowTimestamp;
             set
             {
-                if (SettingsHolder.ShowTimestamp == value) return;
-                SettingsHolder.ShowTimestamp = value;
+                if (App.Settings.ShowTimestamp == value) return;
+                App.Settings.ShowTimestamp = value;
                 N(nameof(ShowTimestamp));
                 ChatShowTimestampChanged?.Invoke();
             }
@@ -361,22 +361,22 @@ namespace TCC.ViewModels
         }
         public bool ChatTimestampSeconds
         {
-            get => SettingsHolder.ChatTimestampSeconds;
+            get => App.Settings.ChatTimestampSeconds;
             set
             {
-                if (SettingsHolder.ChatTimestampSeconds == value) return;
-                SettingsHolder.ChatTimestampSeconds = value;
+                if (App.Settings.ChatTimestampSeconds == value) return;
+                App.Settings.ChatTimestampSeconds = value;
                 N();
             }
 
         }
         public bool ShowChannel
         {
-            get => SettingsHolder.ShowChannel;
+            get => App.Settings.ShowChannel;
             set
             {
-                if (SettingsHolder.ShowChannel == value) return;
-                SettingsHolder.ShowChannel = value;
+                if (App.Settings.ShowChannel == value) return;
+                App.Settings.ShowChannel = value;
                 ChatShowChannelChanged?.Invoke();
                 N(nameof(ShowChannel));
             }
@@ -384,21 +384,21 @@ namespace TCC.ViewModels
         }
         public bool ShowOnlyBosses
         {
-            get => SettingsHolder.ShowOnlyBosses;
+            get => App.Settings.ShowOnlyBosses;
             set
             {
-                if (SettingsHolder.ShowOnlyBosses == value) return;
-                SettingsHolder.ShowOnlyBosses = value;
+                if (App.Settings.ShowOnlyBosses == value) return;
+                App.Settings.ShowOnlyBosses = value;
                 N(nameof(ShowOnlyBosses));
             }
         }
         public bool DisableMP
         {
-            get => SettingsHolder.DisablePartyMP;
+            get => App.Settings.DisablePartyMP;
             set
             {
-                if (SettingsHolder.DisablePartyMP == value) return;
-                SettingsHolder.DisablePartyMP = value;
+                if (App.Settings.DisablePartyMP == value) return;
+                App.Settings.DisablePartyMP = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 PacketAnalyzer.Processor.Update();
                 N(nameof(DisableMP));
@@ -406,11 +406,11 @@ namespace TCC.ViewModels
         }
         public bool DisableHP
         {
-            get => SettingsHolder.DisablePartyHP;
+            get => App.Settings.DisablePartyHP;
             set
             {
-                if (SettingsHolder.DisablePartyHP == value) return;
-                SettingsHolder.DisablePartyHP = value;
+                if (App.Settings.DisablePartyHP == value) return;
+                App.Settings.DisablePartyHP = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 PacketAnalyzer.Processor.Update();
                 N(nameof(DisableHP));
@@ -418,74 +418,74 @@ namespace TCC.ViewModels
         }
         public bool ShowAwakenIcon
         {
-            get => SettingsHolder.ShowAwakenIcon;
+            get => App.Settings.ShowAwakenIcon;
             set
             {
-                if (SettingsHolder.ShowAwakenIcon == value) return;
-                SettingsHolder.ShowAwakenIcon = value;
+                if (App.Settings.ShowAwakenIcon == value) return;
+                App.Settings.ShowAwakenIcon = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 N();
             }
         }
         public bool FpsAtGuardian
         {
-            get => SettingsHolder.FpsAtGuardian;
+            get => App.Settings.FpsAtGuardian;
             set
             {
-                if (SettingsHolder.FpsAtGuardian == value) return;
-                SettingsHolder.FpsAtGuardian = value;
+                if (App.Settings.FpsAtGuardian == value) return;
+                App.Settings.FpsAtGuardian = value;
                 N();
             }
         }
 
         public bool ShowItemsCooldown
         {
-            get => SettingsHolder.ShowItemsCooldown;
+            get => App.Settings.ShowItemsCooldown;
             set
             {
-                if (SettingsHolder.ShowItemsCooldown == value) return;
-                SettingsHolder.ShowItemsCooldown = value;
+                if (App.Settings.ShowItemsCooldown == value) return;
+                App.Settings.ShowItemsCooldown = value;
                 WindowManager.CooldownWindow.VM.NotifyItemsDisplay();
                 N();
             }
         }
         public bool UseLfg
         {
-            get => SettingsHolder.LfgEnabled;
+            get => App.Settings.LfgEnabled;
             set
             {
-                if (SettingsHolder.LfgEnabled == value) return;
-                SettingsHolder.LfgEnabled = value;
+                if (App.Settings.LfgEnabled == value) return;
+                App.Settings.LfgEnabled = value;
                 N();
             }
         }
         public bool EnableProxy
         {
-            get => SettingsHolder.EnableProxy;
+            get => App.Settings.EnableProxy;
             set
             {
-                if (SettingsHolder.EnableProxy == value) return;
-                SettingsHolder.EnableProxy = value;
+                if (App.Settings.EnableProxy == value) return;
+                App.Settings.EnableProxy = value;
                 N();
             }
         }
         public bool ShowFlightGauge
         {
-            get => SettingsHolder.ShowFlightEnergy;
+            get => App.Settings.ShowFlightEnergy;
             set
             {
-                if (SettingsHolder.ShowFlightEnergy == value) return;
-                SettingsHolder.ShowFlightEnergy = value;
+                if (App.Settings.ShowFlightEnergy == value) return;
+                App.Settings.ShowFlightEnergy = value;
                 N();
             }
         }
         public bool UseHotkeys
         {
-            get => SettingsHolder.UseHotkeys;
+            get => App.Settings.UseHotkeys;
             set
             {
-                if (SettingsHolder.UseHotkeys == value) return;
-                SettingsHolder.UseHotkeys = value;
+                if (App.Settings.UseHotkeys == value) return;
+                App.Settings.UseHotkeys = value;
                 if (value) KeyboardHook.Instance.RegisterKeyboardHook();
                 else KeyboardHook.Instance.UnRegisterKeyboardHook();
                 N(nameof(UseHotkeys));
@@ -493,63 +493,63 @@ namespace TCC.ViewModels
         }
         public bool HideHandles
         {
-            get => SettingsHolder.HideHandles;
+            get => App.Settings.HideHandles;
             set
             {
-                if (SettingsHolder.HideHandles == value) return;
-                SettingsHolder.HideHandles = value;
+                if (App.Settings.HideHandles == value) return;
+                App.Settings.HideHandles = value;
                 N(nameof(HideHandles));
             }
         }
         public bool ShowGroupWindowDetails
         {
-            get => SettingsHolder.ShowGroupWindowDetails;
+            get => App.Settings.ShowGroupWindowDetails;
             set
             {
-                if (SettingsHolder.ShowGroupWindowDetails == value) return;
-                SettingsHolder.ShowGroupWindowDetails = value;
+                if (App.Settings.ShowGroupWindowDetails == value) return;
+                App.Settings.ShowGroupWindowDetails = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 N(nameof(ShowGroupWindowDetails));
             }
         }
         public bool ShowMembersLaurels
         {
-            get => SettingsHolder.ShowMembersLaurels;
+            get => App.Settings.ShowMembersLaurels;
             set
             {
-                if (SettingsHolder.ShowMembersLaurels == value) return;
-                SettingsHolder.ShowMembersLaurels = value;
+                if (App.Settings.ShowMembersLaurels == value) return;
+                App.Settings.ShowMembersLaurels = value;
                 WindowManager.GroupWindow.VM.NotifySettingUpdated();
                 N(nameof(ShowMembersLaurels));
             }
         }
         public bool AnimateChatMessages
         {
-            get => SettingsHolder.AnimateChatMessages;
+            get => App.Settings.AnimateChatMessages;
             set
             {
-                if (SettingsHolder.AnimateChatMessages == value) return;
-                SettingsHolder.AnimateChatMessages = value;
+                if (App.Settings.AnimateChatMessages == value) return;
+                App.Settings.AnimateChatMessages = value;
                 N(nameof(AnimateChatMessages));
             }
         }
         public bool HhOnlyAggro
         {
-            get => SettingsHolder.ShowOnlyAggroStacks;
+            get => App.Settings.ShowOnlyAggroStacks;
             set
             {
-                if (SettingsHolder.ShowOnlyAggroStacks == value) return;
-                SettingsHolder.ShowOnlyAggroStacks = value;
+                if (App.Settings.ShowOnlyAggroStacks == value) return;
+                App.Settings.ShowOnlyAggroStacks = value;
                 N(nameof(HhOnlyAggro));
             }
         }
         public double FlightGaugeRotation
         {
-            get => SettingsHolder.FlightGaugeRotation;
+            get => App.Settings.FlightGaugeRotation;
             set
             {
-                if (SettingsHolder.FlightGaugeRotation == value) return;
-                SettingsHolder.FlightGaugeRotation = value;
+                if (App.Settings.FlightGaugeRotation == value) return;
+                App.Settings.FlightGaugeRotation = value;
                 N(nameof(FlightGaugeRotation));
                 WindowManager.FlightDurationWindow.VM.ExN(nameof(FlightGaugeRotation));
             }
@@ -557,149 +557,149 @@ namespace TCC.ViewModels
 
         public bool WebhookEnabledGuildBam
         {
-            get => SettingsHolder.WebhookEnabledGuildBam;
+            get => App.Settings.WebhookEnabledGuildBam;
             set
             {
-                if (SettingsHolder.WebhookEnabledGuildBam == value) return;
-                SettingsHolder.WebhookEnabledGuildBam = value;
+                if (App.Settings.WebhookEnabledGuildBam == value) return;
+                App.Settings.WebhookEnabledGuildBam = value;
                 N();
             }
         }
         public bool WebhookEnabledFieldBoss
         {
-            get => SettingsHolder.WebhookEnabledFieldBoss;
+            get => App.Settings.WebhookEnabledFieldBoss;
             set
             {
-                if (SettingsHolder.WebhookEnabledFieldBoss == value) return;
-                SettingsHolder.WebhookEnabledFieldBoss = value;
+                if (App.Settings.WebhookEnabledFieldBoss == value) return;
+                App.Settings.WebhookEnabledFieldBoss = value;
                 N();
             }
         }
         public string WebhookUrlGuildBam
         {
-            get => SettingsHolder.WebhookUrlGuildBam;
+            get => App.Settings.WebhookUrlGuildBam;
             set
             {
-                if (value == SettingsHolder.WebhookUrlGuildBam) return;
-                SettingsHolder.WebhookUrlGuildBam = value;
+                if (value == App.Settings.WebhookUrlGuildBam) return;
+                App.Settings.WebhookUrlGuildBam = value;
                 N();
             }
         }
         public string WebhookUrlFieldBoss
         {
-            get => SettingsHolder.WebhookUrlFieldBoss;
+            get => App.Settings.WebhookUrlFieldBoss;
             set
             {
-                if (value == SettingsHolder.WebhookUrlFieldBoss) return;
-                SettingsHolder.WebhookUrlFieldBoss = value;
+                if (value == App.Settings.WebhookUrlFieldBoss) return;
+                App.Settings.WebhookUrlFieldBoss = value;
                 N();
             }
         }
         public string WebhookMessageGuildBam
         {
-            get => SettingsHolder.WebhookMessageGuildBam;
+            get => App.Settings.WebhookMessageGuildBam;
             set
             {
-                if (value == SettingsHolder.WebhookMessageGuildBam) return;
-                SettingsHolder.WebhookMessageGuildBam = value;
+                if (value == App.Settings.WebhookMessageGuildBam) return;
+                App.Settings.WebhookMessageGuildBam = value;
                 N();
             }
         }
         public string WebhookMessageFieldBossSpawn
         {
-            get => SettingsHolder.WebhookMessageFieldBossSpawn;
+            get => App.Settings.WebhookMessageFieldBossSpawn;
             set
             {
-                if (value == SettingsHolder.WebhookMessageFieldBossSpawn) return;
-                SettingsHolder.WebhookMessageFieldBossSpawn = value;
+                if (value == App.Settings.WebhookMessageFieldBossSpawn) return;
+                App.Settings.WebhookMessageFieldBossSpawn = value;
                 N();
             }
         }
         public string WebhookMessageFieldBossDie
         {
-            get => SettingsHolder.WebhookMessageFieldBossDie;
+            get => App.Settings.WebhookMessageFieldBossDie;
             set
             {
-                if (value == SettingsHolder.WebhookMessageFieldBossDie) return;
-                SettingsHolder.WebhookMessageFieldBossDie = value;
+                if (value == App.Settings.WebhookMessageFieldBossDie) return;
+                App.Settings.WebhookMessageFieldBossDie = value;
                 N();
             }
         }
         public bool ShowNotificationBubble
         {
-            get => SettingsHolder.ShowNotificationBubble;
+            get => App.Settings.ShowNotificationBubble;
             set
             {
-                if (SettingsHolder.ShowNotificationBubble == value) return;
-                SettingsHolder.ShowNotificationBubble = value;
+                if (App.Settings.ShowNotificationBubble == value) return;
+                App.Settings.ShowNotificationBubble = value;
                 N();
             }
         }
         public string TwitchUsername
         {
-            get => SettingsHolder.TwitchName;
+            get => App.Settings.TwitchName;
             set
             {
-                if (value == SettingsHolder.TwitchName) return;
-                SettingsHolder.TwitchName = value;
+                if (value == App.Settings.TwitchName) return;
+                App.Settings.TwitchName = value;
                 N(nameof(TwitchUsername));
             }
         }
         public string TwitchToken
         {
-            get => SettingsHolder.TwitchToken;
+            get => App.Settings.TwitchToken;
             set
             {
-                if (value == SettingsHolder.TwitchToken) return;
-                SettingsHolder.TwitchToken = value;
+                if (value == App.Settings.TwitchToken) return;
+                App.Settings.TwitchToken = value;
                 N(nameof(TwitchToken));
             }
         }
         public string TwitchChannelName
         {
-            get => SettingsHolder.TwitchChannelName;
+            get => App.Settings.TwitchChannelName;
             set
             {
-                if (value == SettingsHolder.TwitchChannelName) return;
-                SettingsHolder.TwitchChannelName = value;
+                if (value == App.Settings.TwitchChannelName) return;
+                App.Settings.TwitchChannelName = value;
                 N(nameof(TwitchChannelName));
             }
         }
         public uint GroupSizeThreshold
         {
-            get => SettingsHolder.GroupSizeThreshold;
+            get => App.Settings.GroupSizeThreshold;
             set
             {
-                if (SettingsHolder.GroupSizeThreshold == value) return;
-                SettingsHolder.GroupSizeThreshold = value;
+                if (App.Settings.GroupSizeThreshold == value) return;
+                App.Settings.GroupSizeThreshold = value;
                 WindowManager.GroupWindow.VM.NotifyThresholdChanged();
                 N(nameof(GroupSizeThreshold));
             }
         }
         public bool Npcap
         {
-            get => SettingsHolder.Npcap;
+            get => App.Settings.Npcap;
             set
             {
-                if (SettingsHolder.Npcap == value) return;
+                if (App.Settings.Npcap == value) return;
                 var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
                     MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Cancel) return;
-                SettingsHolder.Npcap = value;
+                App.Settings.Npcap = value;
                 N();
                 if (res == MessageBoxResult.OK) App.Restart();
             }
         }
         public CaptureMode CaptureMode
         {
-            get => SettingsHolder.CaptureMode;
+            get => App.Settings.CaptureMode;
             set
             {
-                if (SettingsHolder.CaptureMode == value) return;
+                if (App.Settings.CaptureMode == value) return;
                 var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
                     MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Cancel) return;
-                SettingsHolder.CaptureMode = value;
+                App.Settings.CaptureMode = value;
                 N();
                 if (res == MessageBoxResult.OK) App.Restart();
             }
@@ -717,13 +717,13 @@ namespace TCC.ViewModels
         //}
         public int FontSize
         {
-            get => SettingsHolder.FontSize;
+            get => App.Settings.FontSize;
             set
             {
-                if (SettingsHolder.FontSize == value) return;
+                if (App.Settings.FontSize == value) return;
                 var val = value;
                 if (val < 10) val = 10;
-                SettingsHolder.FontSize = val;
+                App.Settings.FontSize = val;
                 FontSizeChanged?.Invoke();
                 N(nameof(FontSize));
             }
@@ -820,44 +820,44 @@ namespace TCC.ViewModels
 
         public bool ChatWindowEnabled
         {
-            get => SettingsHolder.ChatEnabled;
+            get => App.Settings.ChatEnabled;
             set
             {
-                if (SettingsHolder.ChatEnabled == value) return;
-                SettingsHolder.ChatEnabled = value;
+                if (App.Settings.ChatEnabled == value) return;
+                App.Settings.ChatEnabled = value;
                 N();
             }
         }
 
         //public ClickThruMode ChatClickThruMode
         //{
-        //    get => SettingsHolder.ChatClickThruMode;
+        //    get => App.Settings.ChatClickThruMode;
         //    set
         //    {
-        //        if (SettingsHolder.ChatClickThruMode == value) return;
-        //        SettingsHolder.ChatClickThruMode = value;
+        //        if (App.Settings.ChatClickThruMode == value) return;
+        //        App.Settings.ChatClickThruMode = value;
         //        N();
         //    }
         //}
 
         public bool ShowTradeLfgs
         {
-            get => SettingsHolder.ShowTradeLfg;
+            get => App.Settings.ShowTradeLfg;
             set
             {
-                if (SettingsHolder.ShowTradeLfg == value) return;
-                SettingsHolder.ShowTradeLfg = value;
+                if (App.Settings.ShowTradeLfg == value) return;
+                App.Settings.ShowTradeLfg = value;
                 N();
             }
         }
 
         public bool CharacterWindowCompactMode
         {
-            get => SettingsHolder.CharacterWindowCompactMode;
+            get => App.Settings.CharacterWindowCompactMode;
             set
             {
-                if (SettingsHolder.CharacterWindowCompactMode == value) return;
-                SettingsHolder.CharacterWindowCompactMode = value;
+                if (App.Settings.CharacterWindowCompactMode == value) return;
+                App.Settings.CharacterWindowCompactMode = value;
                 N();
                 WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.CompactMode));
                 WindowManager.CharacterWindow.Dispatcher.BeginInvoke(new Action(() =>
@@ -872,22 +872,22 @@ namespace TCC.ViewModels
 
         public bool WarriorShowEdge
         {
-            get => SettingsHolder.WarriorShowEdge;
+            get => App.Settings.WarriorShowEdge;
             set
             {
-                if (SettingsHolder.WarriorShowEdge == value) return;
-                SettingsHolder.WarriorShowEdge = value;
+                if (App.Settings.WarriorShowEdge == value) return;
+                App.Settings.WarriorShowEdge = value;
                 N();
                 TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
             }
         }
         public bool SorcererReplacesElementsInCharWindow
         {
-            get => SettingsHolder.SorcererReplacesElementsInCharWindow;
+            get => App.Settings.SorcererReplacesElementsInCharWindow;
             set
             {
-                if (SettingsHolder.SorcererReplacesElementsInCharWindow == value) return;
-                SettingsHolder.SorcererReplacesElementsInCharWindow = value;
+                if (App.Settings.SorcererReplacesElementsInCharWindow == value) return;
+                App.Settings.SorcererReplacesElementsInCharWindow = value;
                 N();
                 WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.ShowElements));
             }
@@ -895,11 +895,11 @@ namespace TCC.ViewModels
 
         public bool WarriorShowTraverseCut
         {
-            get => SettingsHolder.WarriorShowTraverseCut;
+            get => App.Settings.WarriorShowTraverseCut;
             set
             {
-                if (SettingsHolder.WarriorShowTraverseCut == value) return;
-                SettingsHolder.WarriorShowTraverseCut = value;
+                if (App.Settings.WarriorShowTraverseCut == value) return;
+                App.Settings.WarriorShowTraverseCut = value;
                 N();
                 TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
             }
@@ -907,11 +907,11 @@ namespace TCC.ViewModels
 
         public WarriorEdgeMode WarriorEdgeMode
         {
-            get => SettingsHolder.WarriorEdgeMode;
+            get => App.Settings.WarriorEdgeMode;
             set
             {
-                if (SettingsHolder.WarriorEdgeMode == value) return;
-                SettingsHolder.WarriorEdgeMode = value;
+                if (App.Settings.WarriorEdgeMode == value) return;
+                App.Settings.WarriorEdgeMode = value;
                 N();
                 TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
             }
@@ -919,11 +919,11 @@ namespace TCC.ViewModels
         }
         public GroupWindowLayout GroupWindowLayout
         {
-            get => SettingsHolder.GroupWindowLayout;
+            get => App.Settings.GroupWindowLayout;
             set
             {
-                if (SettingsHolder.GroupWindowLayout == value) return;
-                SettingsHolder.GroupWindowLayout = value;
+                if (App.Settings.GroupWindowLayout == value) return;
+                App.Settings.GroupWindowLayout = value;
                 N();
                 WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.GroupWindowLayout));
                 WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.All));
@@ -936,22 +936,22 @@ namespace TCC.ViewModels
 
         public bool FlipFlightGauge
         {
-            get => SettingsHolder.FlipFlightGauge;
+            get => App.Settings.FlipFlightGauge;
             set
             {
-                if (SettingsHolder.FlipFlightGauge == value) return;
-                SettingsHolder.FlipFlightGauge = value;
+                if (App.Settings.FlipFlightGauge == value) return;
+                App.Settings.FlipFlightGauge = value;
                 N();
                 WindowManager.FlightDurationWindow.VM.ExN(nameof(FlipFlightGauge));
             }
         }
         public bool ForceSoftwareRendering
         {
-            get => SettingsHolder.ForceSoftwareRendering;
+            get => App.Settings.ForceSoftwareRendering;
             set
             {
-                if (SettingsHolder.ForceSoftwareRendering == value) return;
-                SettingsHolder.ForceSoftwareRendering = value;
+                if (App.Settings.ForceSoftwareRendering == value) return;
+                App.Settings.ForceSoftwareRendering = value;
                 N();
                 RenderOptions.ProcessRenderMode = value ? RenderMode.SoftwareOnly : RenderMode.Default;
             }
@@ -959,11 +959,11 @@ namespace TCC.ViewModels
 
         public bool HighPriority
         {
-            get => SettingsHolder.HighPriority;
+            get => App.Settings.HighPriority;
             set
             {
-                if (SettingsHolder.HighPriority == value) return;
-                SettingsHolder.HighPriority = value;
+                if (App.Settings.HighPriority == value) return;
+                App.Settings.HighPriority = value;
                 N();
                 Process.GetCurrentProcess().PriorityClass = value ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
             }

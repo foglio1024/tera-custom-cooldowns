@@ -67,7 +67,7 @@ namespace TCC
             if (SessionManager.IsMe(target))
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
-                if (!Settings.SettingsHolder.DisablePartyAbnormals)
+                if (!App.Settings.DisablePartyAbnormals)
                 {
                     WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
@@ -110,7 +110,7 @@ namespace TCC
 
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (Settings.SettingsHolder.EthicalMode) return;
+            if (App.Settings.EthicalMode) return;
             if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var passivity))
             {
                 SkillManager.AddPassivitySkill(ab.Id, passivity);

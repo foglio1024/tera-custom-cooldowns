@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data.Chat;
 using TCC.Interop.Proxy;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
@@ -38,7 +39,7 @@ namespace TCC.Controls.Chat
 
         private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (TCC.Settings.SettingsHolder.LfgEnabled)
+            if (App.Settings.LfgEnabled)
             {
                 ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 

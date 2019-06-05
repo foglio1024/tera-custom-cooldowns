@@ -8,7 +8,7 @@
 #if false   //TODO: redo this without references to settings
             // [Foglio] better not do this at every UnknownMessage - it could be a good parser for OpcodeSearcher though
             // added as a setting (needed only for KR)
-            if (!Settings.SettingsHolder.CheckGuildBamWithoutOpcode || !MessageFactory.NoGuildBamOpcode) return;
+            if (!App.Settings.CheckGuildBamWithoutOpcode || !MessageFactory.NoGuildBamOpcode) return;
             if (reader.Message.Direction != MessageDirection.ServerToClient || reader.Message.Payload.Count != 54) return;
             try // by HQ 20181228
             {

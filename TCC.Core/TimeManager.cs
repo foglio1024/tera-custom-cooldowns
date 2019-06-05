@@ -55,7 +55,7 @@ namespace TCC
         {
             var closeEventsCount = WindowManager.Dashboard.VM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
-            if (SettingsHolder.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+            if (App.Settings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
         }
 
@@ -72,11 +72,11 @@ namespace TCC
             if (string.IsNullOrEmpty(lang)) return;
             CurrentRegion = TccUtils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
 
-            SettingsHolder.LastLanguage = lang;
+            App.Settings.LastLanguage = lang;
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
                 CurrentRegion = RegionEnum.EU;
-                SettingsHolder.LastLanguage = "EU-EN";
+                App.Settings.LastLanguage = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -105,7 +105,7 @@ namespace TCC
         private void CheckReset()
         {
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
-            if (SettingsHolder.LastRun > todayReset || DateTime.Now < todayReset) return;
+            if (App.Settings.LastRun > todayReset || DateTime.Now < todayReset) return;
 
             WindowManager.Dashboard.VM.ResetDailyData();
 
@@ -116,8 +116,8 @@ namespace TCC
             if (weeklyVanguardReset) WindowManager.Dashboard.VM.ResetVanguardWeekly();
 
             WindowManager.Dashboard.VM.SaveCharacters();
-            SettingsHolder.LastRun = DateTime.Now;
-            SettingsWriter.Save();
+            App.Settings.LastRun = DateTime.Now;
+            App.Settings.Save();
         }
 
 
@@ -195,17 +195,17 @@ namespace TCC
 
         public void ExecuteGuildBamWebhook(bool testMessage = false)
         {
-            if (string.IsNullOrEmpty(SettingsHolder.WebhookUrlGuildBam)) return;
-            if (!SettingsHolder.WebhookEnabledGuildBam) return;
+            if (string.IsNullOrEmpty(App.Settings.WebhookUrlGuildBam)) return;
+            if (!App.Settings.WebhookEnabledGuildBam) return;
 
-            SendWebhook(SettingsHolder.WebhookMessageGuildBam, SettingsHolder.WebhookUrlGuildBam, testMessage);
+            SendWebhook(App.Settings.WebhookMessageGuildBam, App.Settings.WebhookUrlGuildBam, testMessage);
         }
         //=====================================by HQ 20181224=====================================
         //public void ExecuteFieldBossWebhook(int bossId, int status, bool testMessage = false)
         //{
         //    if (TimeManager.Instance.CurrentRegion == RegionEnum.KR) // by HQ 20190321
         //    {
-        //        if (!string.IsNullOrEmpty(SettingsHolder.Webhook))
+        //        if (!string.IsNullOrEmpty(App.Settings.Webhook))
         //        {
         //            var sb = new StringBuilder("{");
         //            sb.Append("\""); sb.Append("content"); sb.Append("\"");
@@ -279,23 +279,23 @@ namespace TCC
         //=============================================================================================
         public void ExecuteFieldBossSpawnWebhook(string monsterName, string regionName, string defaultMessage, bool testMessage = false)
         {
-            var content = SettingsHolder.WebhookMessageFieldBossSpawn;
+            var content = App.Settings.WebhookMessageFieldBossSpawn;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
             if (content.Contains("{regionName}")) content = content.Replace("{regionName}", regionName);
             if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
 
             if (content == "") content = defaultMessage;
-            SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
+            SendWebhook(content, App.Settings.WebhookUrlFieldBoss, testMessage);
         }
         public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, string userName, string guildName ,bool testMessage = false)
         {
-            var content = SettingsHolder.WebhookMessageFieldBossDie;
+            var content = App.Settings.WebhookMessageFieldBossDie;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
             if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
             if (content.Contains("{userName}")) content = content.Replace("{userName}", userName);
             if (content.Contains("{guildName}")) content = content.Replace("{guildName}", guildName);
             if (content == "") content = defaultMessage;
-            SendWebhook(content, SettingsHolder.WebhookUrlFieldBoss, testMessage);
+            SendWebhook(content, App.Settings.WebhookUrlFieldBoss, testMessage);
         }
 
         private static void SendWebhook(string content, string url, bool test = false)

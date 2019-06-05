@@ -65,7 +65,7 @@ namespace TCC.Windows
             {
                 Close();
                 IsOpen = false;
-                if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, an);
             VM.Save();
@@ -73,7 +73,7 @@ namespace TCC.Windows
 
         internal void ShowWindow()
         {
-            if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
             WindowManager.ForegroundManager.ForceUndim = true;
             WindowManager.SkillConfigWindow = this;

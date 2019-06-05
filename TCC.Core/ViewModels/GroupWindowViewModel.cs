@@ -30,7 +30,7 @@ namespace TCC.ViewModels
 
         //public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         public SynchronizedObservableCollection<User> Members { get; }
-        public GroupWindowLayout GroupWindowLayout => SettingsHolder.GroupWindowLayout;
+        public GroupWindowLayout GroupWindowLayout => App.Settings.GroupWindowLayout;
 
         public ICollectionViewLiveShaping All { get; }
         public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
@@ -50,7 +50,7 @@ namespace TCC.ViewModels
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && SettingsHolder.ShowGroupWindowDetails;
+        public bool ShowDetails => Formed && App.Settings.ShowGroupWindowDetails;
         public bool ShowLeaveButton => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable;
         public bool ShowLeaderButtons => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
@@ -185,7 +185,7 @@ namespace TCC.ViewModels
                     // -- show only aggro stacks if we are in HH -- //
                     if (WindowManager.BossWindow.VM.CurrentHHphase >= HarrowholdPhase.Phase2)
                     {
-                        if (ab.Id != 950023 && SettingsHolder.ShowOnlyAggroStacks) return;
+                        if (ab.Id != 950023 && App.Settings.ShowOnlyAggroStacks) return;
                     }
                     // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -223,7 +223,7 @@ namespace TCC.ViewModels
         }
         public void AddOrUpdateMember(User p)
         {
-            if (SettingsHolder.IgnoreMeInGroupWindow && p.IsPlayer)
+            if (App.Settings.IgnoreMeInGroupWindow && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 p.Visible = false;
@@ -251,7 +251,7 @@ namespace TCC.ViewModels
         public void AddOrUpdateMember(PartyMemberData p)
         {
             var visible = true;
-            if (SettingsHolder.IgnoreMeInGroupWindow && p.Name == SessionManager.CurrentPlayer.Name)
+            if (App.Settings.IgnoreMeInGroupWindow && p.Name == SessionManager.CurrentPlayer.Name)
             {
                 _leaderOverride = p.IsLeader;
                 visible = false;
@@ -348,7 +348,7 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            if (!SettingsHolder.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!App.Settings.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;

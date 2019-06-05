@@ -17,7 +17,7 @@ namespace TCC.Parsing
         private static bool IsFileValid(string filename)
         {
             if (!File.Exists(filename)) return false;
-            if (!Settings.SettingsHolder.CheckOpcodesHash) return true;
+            if (!App.Settings.CheckOpcodesHash) return true;
             var localHash = HashUtils.GenerateFileHash(filename);
             if (localHash == "")
             {

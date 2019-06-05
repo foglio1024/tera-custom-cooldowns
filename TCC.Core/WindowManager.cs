@@ -78,7 +78,7 @@ namespace TCC
         public static Icon DefaultIcon;
         public static Icon ConnectedIcon;
 
-        public static ForegroundManager ForegroundManager { get; private set; }
+        public static ForegroundManager ForegroundManager { get; set; }
 
         private static void PrintDispatcher()
         {
@@ -93,13 +93,13 @@ namespace TCC
         private static System.Timers.Timer t;
         public static void UpdateScreenCorrection()
         {
-            if (ScreenSize.IsEqual(SettingsHolder.LastScreenSize)) return;
-            var wFac = SettingsHolder.LastScreenSize.Width / ScreenSize.Width;
-            var hFac = SettingsHolder.LastScreenSize.Height / ScreenSize.Height;
+            if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
+            var wFac = App.Settings.LastScreenSize.Width / ScreenSize.Width;
+            var hFac = App.Settings.LastScreenSize.Height / ScreenSize.Height;
             var sc = new Size(wFac, hFac);
-            SettingsHolder.LastScreenSize = ScreenSize;
+            App.Settings.LastScreenSize = ScreenSize;
             ApplyScreenCorrection(sc);
-            if (!App.Loading) SettingsWriter.Save();
+            if (!App.Loading) App.Settings.Save();
         }
 
         private static void ApplyScreenCorrection(Size sc)
@@ -120,7 +120,6 @@ namespace TCC
 
         public static void Init()
         {
-            ForegroundManager = new ForegroundManager();
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             FocusManager.Init();
             LoadWindows();
@@ -154,7 +153,7 @@ namespace TCC
 
             SettingsWindow = new SettingsWindow();
 
-            if (SettingsHolder.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            if (App.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
 
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
             //t = new System.Timers.Timer();
@@ -414,14 +413,14 @@ namespace TCC
 
         public static void MakeGlobal()
         {
-            SettingsHolder.CooldownWindowSettings.MakePositionsGlobal();
-            SettingsHolder.ClassWindowSettings.MakePositionsGlobal();
-            SettingsHolder.CharacterWindowSettings.MakePositionsGlobal();
-            SettingsHolder.GroupWindowSettings.MakePositionsGlobal();
-            SettingsHolder.BuffWindowSettings.MakePositionsGlobal();
-            SettingsHolder.BossWindowSettings.MakePositionsGlobal();
+            App.Settings.CooldownWindowSettings.MakePositionsGlobal();
+            App.Settings.ClassWindowSettings.MakePositionsGlobal();
+            App.Settings.CharacterWindowSettings.MakePositionsGlobal();
+            App.Settings.GroupWindowSettings.MakePositionsGlobal();
+            App.Settings.BuffWindowSettings.MakePositionsGlobal();
+            App.Settings.BossWindowSettings.MakePositionsGlobal();
 
-            SettingsWriter.Save();
+            App.Settings.Save();
         }
 
         public static void ResetToCenter()

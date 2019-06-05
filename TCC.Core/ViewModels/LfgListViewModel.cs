@@ -168,7 +168,7 @@ namespace TCC.ViewModels
 
         private void RequestNextLfg(object sender, EventArgs e)
         {
-            if (!Settings.SettingsHolder.LfgEnabled) return;
+            if (!App.Settings.LfgEnabled) return;
             if (RequestQueue.Count == 0) return;
 
             var req = RequestQueue.Dequeue();

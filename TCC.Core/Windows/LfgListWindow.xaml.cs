@@ -121,7 +121,7 @@ namespace TCC.Windows
                 a.Completed += (s, ev) =>
                 {
                     Hide();
-                    if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                    if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
                 };
                 BeginAnimation(OpacityProperty, a);
@@ -135,7 +135,7 @@ namespace TCC.Windows
                 VM.StayClosed = false;
                 return;
             }
-            if (Settings.SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 VM.RefreshSorting();

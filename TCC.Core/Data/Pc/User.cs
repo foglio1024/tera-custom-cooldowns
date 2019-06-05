@@ -381,13 +381,13 @@ namespace TCC.Data.Pc
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!SettingsHolder.ShowAllGroupAbnormalities)
+            if (!App.Settings.ShowAllGroupAbnormalities)
             {
-                if (SettingsHolder.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
+                if (App.Settings.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (SettingsHolder.GroupAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
+                        if (App.Settings.GroupAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return;
                         }

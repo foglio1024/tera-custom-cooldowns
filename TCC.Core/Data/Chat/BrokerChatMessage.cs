@@ -58,7 +58,7 @@
             ListingId = listing;
             PlayerId = playerId;
 
-            Amount = new MessagePiece("Offer for " + amount, MessagePieceType.Simple, Settings.SettingsHolder.FontSize, false) { Container = this };
+            Amount = new MessagePiece("Offer for " + amount, MessagePieceType.Simple, App.Settings.FontSize, false) { Container = this };
             OfferedPrice = new MessagePiece(new Money(offeredPrice)) { Container = this };
             StartingPrice = new MessagePiece(new Money(sellerPrice)) { Container = this };
             Listing = new MessagePiece("") { Container = this };

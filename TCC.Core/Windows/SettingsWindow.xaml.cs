@@ -31,7 +31,7 @@ namespace TCC.Windows
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             HideWindow();
-            SettingsWriter.Save();
+            App.Settings.Save();
         }
 
         private void OpenPlayerBuffSettings(object sender, RoutedEventArgs e)
@@ -152,12 +152,12 @@ namespace TCC.Windows
 
         private void RegisterGuildBamWebhook(object sender, RoutedEventArgs e)
         {
-            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, true);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true);
         }
 
         private void RegisterFieldBossWebhook(object sender, RoutedEventArgs e)
         {
-            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, true);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true);
         }
     }
 }

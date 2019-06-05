@@ -22,13 +22,13 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => SettingsHolder.ShowAllGroupAbnormalities;
+            get => App.Settings.ShowAllGroupAbnormalities;
             set
             {
-                if (SettingsHolder.ShowAllGroupAbnormalities == value) return;
-                SettingsHolder.ShowAllGroupAbnormalities = value;
+                if (App.Settings.ShowAllGroupAbnormalities == value) return;
+                App.Settings.ShowAllGroupAbnormalities = value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
-                SettingsWriter.Save();
+                App.Settings.Save();
                 N();
             }
         }

@@ -21,7 +21,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.SettingsHolder.GroupWindowSettings, ignoreSize: false);
+            Init(App.Settings.GroupWindowSettings, ignoreSize: false);
         }
 
 

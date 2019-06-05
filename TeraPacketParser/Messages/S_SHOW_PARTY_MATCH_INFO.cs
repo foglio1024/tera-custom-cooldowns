@@ -51,20 +51,12 @@ namespace TeraPacketParser.Messages
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
-                // ------------------------ TODO: move this  ---------------------------------------------
-                //if (!(l.IsTrade /* TODO: && !SettingsHolder.ShowTradeLfg*/))
-                //--------------------------------------------------------------------------------------
                 {
                     Listings.Add(l);
                 }
                 if (next != 0) reader.BaseStream.Position = next - 4;
 
             }
-            // ------------------------ TODO: move this  ---------------------------------------------
-            //if (page < pages && SettingsHolder.LfgEnabled && ProxyInterface.Instance.IsStubAvailable)
-            //    ProxyInterface.Instance.Stub.RequestListingsPage(page + 1); 
-            //--------------------------------------------------------------------------------------
-            //if (Page == Pages) IsLast = true;
         }
 
         public short Pages { get; set; }

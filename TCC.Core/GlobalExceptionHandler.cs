@@ -44,8 +44,8 @@ namespace TCC
 
             try
             {
-                Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
-                Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
+                Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
+                Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
             }
             catch { }
             Environment.Exit(-1);
@@ -99,18 +99,18 @@ namespace TCC
                     {
                         { "windows", new JObject
                             {
-                                { "cooldown", SettingsHolder.CooldownWindowSettings.Enabled },
-                                { "buffs", SettingsHolder.BuffWindowSettings.Enabled },
-                                { "character", SettingsHolder.CharacterWindowSettings.Enabled },
-                                { "class", SettingsHolder.ClassWindowSettings.Enabled },
-                                { "chat", SettingsHolder.ChatEnabled},
-                                { "group", SettingsHolder.GroupWindowSettings.Enabled }
+                                { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                                { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                                { "character", App.Settings.CharacterWindowSettings.Enabled },
+                                { "class", App.Settings.ClassWindowSettings.Enabled },
+                                { "chat", App.Settings.ChatEnabled},
+                                { "group", App.Settings.GroupWindowSettings.Enabled }
                             }
                         },
                         {
                             "generic", new JObject
                             {
-                                { "proxy_enabled", SettingsHolder.EnableProxy },
+                                { "proxy_enabled", App.Settings.EnableProxy },
                             }
                         }
                     }

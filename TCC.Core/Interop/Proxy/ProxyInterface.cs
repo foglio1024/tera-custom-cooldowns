@@ -26,7 +26,7 @@ namespace TCC.Interop.Proxy
 
         public async Task Init()
         {
-            if (!SettingsHolder.EnableProxy) return;
+            if (!App.Settings.EnableProxy) return;
             IsStubAvailable = await Stub.PingStub();
             if (!IsStubAvailable) return;
             Stub.Initialize();

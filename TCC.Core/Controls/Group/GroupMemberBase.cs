@@ -34,13 +34,13 @@ namespace TCC.Controls.Group
         private DataTemplateSelector _currentAbnormalityTemplateSelector;
         private DataTemplateSelector _initialAbnormalityDataTemplateSelector;
 
-        public bool ShowHp => WindowManager.GroupWindow.VM.Size <= SettingsHolder.HideHpThreshold;
-        public bool ShowMp => WindowManager.GroupWindow.VM.Size <= SettingsHolder.HideMpThreshold;
-        public bool ShowBuffs => WindowManager.GroupWindow.VM.Size <= SettingsHolder.HideBuffsThreshold;
-        public bool ShowDebuffs => WindowManager.GroupWindow.VM.Size <= SettingsHolder.HideDebuffsThreshold;
-        public bool ShowLaurel => SettingsHolder.ShowMembersLaurels;
-        public bool ShowAwaken => SettingsHolder.ShowAwakenIcon;
-        public bool ShowHpNumbers => SettingsHolder.ShowMembersHpNumbers && ShowHp;
+        public bool ShowHp => WindowManager.GroupWindow.VM.Size <= App.Settings.HideHpThreshold;
+        public bool ShowMp => WindowManager.GroupWindow.VM.Size <= App.Settings.HideMpThreshold;
+        public bool ShowBuffs => WindowManager.GroupWindow.VM.Size <= App.Settings.HideBuffsThreshold;
+        public bool ShowDebuffs => WindowManager.GroupWindow.VM.Size <= App.Settings.HideDebuffsThreshold;
+        public bool ShowLaurel => App.Settings.ShowMembersLaurels;
+        public bool ShowAwaken => App.Settings.ShowAwakenIcon;
+        public bool ShowHpNumbers => App.Settings.ShowMembersHpNumbers && ShowHp;
         public DataTemplateSelector CurrentAbnormalityTemplateSelector
         {
             get => _currentAbnormalityTemplateSelector;

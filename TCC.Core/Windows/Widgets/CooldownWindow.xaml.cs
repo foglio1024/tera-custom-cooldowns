@@ -15,7 +15,7 @@ namespace TCC.Windows.Widgets
             VM = DataContext as CooldownWindowViewModel;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(SettingsHolder.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
+            Init(App.Settings.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
         }
     }
 }

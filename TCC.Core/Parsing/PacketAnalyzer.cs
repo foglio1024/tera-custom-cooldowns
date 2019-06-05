@@ -24,13 +24,14 @@ namespace TCC.Parsing
         public static int AnalysisThreadId;
         public static void Init()
         {
-            switch (SettingsHolder.CaptureMode)
+            switch (App.Settings.CaptureMode)
             {
-                case CaptureMode.Toolbox:
-                    Sniffer = new ToolboxSniffer();
+                case CaptureMode.Npcap when !App.ToolboxMode:
+                case CaptureMode.RawSockets when !App.ToolboxMode:
+                    Sniffer = new TeraSniffer();
                     break;
                 default:
-                    Sniffer = new TeraSniffer();
+                    Sniffer = new ToolboxSniffer();
                     break;
             }
             Sniffer.NewConnection += OnNewConnection;
@@ -81,12 +82,12 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
-            if (!SettingsHolder.DontShowFUBH) App.FUBH();
+            if (!App.Settings.DontShowFUBH) App.FUBH();
         }
         private static void OnEndConnection()
         {
-            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
-            Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
             WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);

@@ -138,6 +138,11 @@
     <Compile Include="Interop\Proxy\TccStubInterface.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="Parsing\ToolboxSniffer.cs" />
+    <Compile Include="Settings\JsonSettingsReader.cs" />
+    <Compile Include="Settings\JsonSettingsWriter.cs" />
+    <Compile Include="Settings\SettingsGlobals.cs" />
+    <Compile Include="Settings\SettingsReaderBase.cs" />
+    <Compile Include="Settings\SettingsWriterBase.cs" />
     <Compile Include="TemplateSelectors\GroupWindowTemplateSelector.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\BlockSplitter.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
@@ -429,8 +434,8 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Interop\ProxyPacketSplitter.cs" />
-    <Compile Include="Settings\SettingsReader.cs" />
-    <Compile Include="Settings\SettingsWriter.cs" />
+    <Compile Include="Settings\XmlSettingsReader.cs" />
+    <Compile Include="Settings\XmlSettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
@@ -491,7 +496,7 @@
     <Compile Include="EntityManager.cs" />
     <Compile Include="Data\Pc\Player.cs" />
     <Compile Include="Interop\ProxyOld.cs" />
-    <Compile Include="Settings\SettingsHolder.cs" />
+    <Compile Include="Settings\SettingsContainer.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />

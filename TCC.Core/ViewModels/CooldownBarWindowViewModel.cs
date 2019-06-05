@@ -27,7 +27,7 @@ namespace TCC.ViewModels
     {
         //private static CooldownWindowViewModel _instance;
         //public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
-        public bool ShowItems => SettingsHolder.ShowItemsCooldown;
+        public bool ShowItems => App.Settings.ShowItemsCooldown;
 
         public event Action SkillsLoaded;
 
@@ -89,8 +89,8 @@ namespace TCC.ViewModels
 
         private bool NormalMode_Update(Cooldown sk)
         {
-            if (SettingsHolder.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
-            if (!SettingsHolder.CooldownWindowSettings.Enabled) return false;
+            if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
+            if (!App.Settings.CooldownWindowSettings.Enabled) return false;
 
             var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
 
@@ -133,7 +133,7 @@ namespace TCC.ViewModels
         }
         private void NormalMode_Change(Skill skill, uint cd)
         {
-            if (!SettingsHolder.CooldownWindowSettings.Enabled) return;
+            if (!App.Settings.CooldownWindowSettings.Enabled) return;
             if (ClassManager.ChangeSpecialSkill(skill, cd)) return;
 
             try
@@ -199,7 +199,7 @@ namespace TCC.ViewModels
 
         private void NormalMode_Remove(Skill sk)
         {
-            if (!SettingsHolder.CooldownWindowSettings.Enabled) return;
+            if (!App.Settings.CooldownWindowSettings.Enabled) return;
 
             try
             {
@@ -258,12 +258,12 @@ namespace TCC.ViewModels
 
         private bool FixedMode_Update(Cooldown sk)
         {
-            if (SettingsHolder.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
+            if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
             {
                 return false;
             }
 
-            if (!SettingsHolder.CooldownWindowSettings.Enabled)
+            if (!App.Settings.CooldownWindowSettings.Enabled)
             {
                 return false;
             }
@@ -298,8 +298,8 @@ namespace TCC.ViewModels
         }
         private void FixedMode_Change(Skill sk, uint cd)
         {
-            if (!SettingsHolder.CooldownWindowSettings.Enabled) return;
-            if (SettingsHolder.ClassWindowSettings.Enabled && ClassManager.ChangeSpecialSkill(sk, cd)) return;
+            if (!App.Settings.CooldownWindowSettings.Enabled) return;
+            if (App.Settings.ClassWindowSettings.Enabled && ClassManager.ChangeSpecialSkill(sk, cd)) return;
 
             var hSkill = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (hSkill != null) return;
@@ -331,7 +331,7 @@ namespace TCC.ViewModels
         private void FixedMode_Remove(Skill sk)
         {
             //sk.SetDispatcher(Dispatcher);
-            if (!SettingsHolder.CooldownWindowSettings.Enabled) return;
+            if (!App.Settings.CooldownWindowSettings.Enabled) return;
 
             var skill = MainSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
@@ -372,7 +372,7 @@ namespace TCC.ViewModels
 
         private bool UpdateOther(Cooldown sk)
         {
-            if (!SettingsHolder.CooldownWindowSettings.Enabled)
+            if (!App.Settings.CooldownWindowSettings.Enabled)
             {
                 return false;
             }
@@ -396,7 +396,7 @@ namespace TCC.ViewModels
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                switch (SettingsHolder.CooldownBarMode)
+                switch (App.Settings.CooldownBarMode)
                 {
                     case CooldownBarMode.Fixed:
                         if (!FixedMode_Update(sk)) sk.Dispose();
@@ -411,7 +411,7 @@ namespace TCC.ViewModels
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                switch (SettingsHolder.CooldownBarMode)
+                switch (App.Settings.CooldownBarMode)
                 {
                     case CooldownBarMode.Fixed:
                         FixedMode_Change(skill, cd);
@@ -426,7 +426,7 @@ namespace TCC.ViewModels
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                switch (SettingsHolder.CooldownBarMode)
+                switch (App.Settings.CooldownBarMode)
                 {
                     case CooldownBarMode.Fixed:
                         FixedMode_Remove(sk);
@@ -508,7 +508,7 @@ namespace TCC.ViewModels
             //});
         }
 
-        public CooldownBarMode Mode => SettingsHolder.CooldownBarMode;
+        public CooldownBarMode Mode => App.Settings.CooldownBarMode;
 
         public void NotifyModeChanged()
         {
@@ -560,8 +560,8 @@ namespace TCC.ViewModels
 
         public void ResetSkill(Skill skill)
         {
-            if (!SettingsHolder.CooldownWindowSettings.Enabled) return;
-            if (SettingsHolder.CooldownBarMode == CooldownBarMode.Normal) return;
+            if (!App.Settings.CooldownWindowSettings.Enabled) return;
+            if (App.Settings.CooldownBarMode == CooldownBarMode.Normal) return;
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (ClassManager.ResetSpecialSkill(skill)) return;

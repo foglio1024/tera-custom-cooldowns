@@ -16,7 +16,7 @@ namespace TCC.Windows.Widgets
             VM = DataContext as BuffBarWindowViewModel;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.SettingsHolder.BuffWindowSettings);
+            Init(App.Settings.BuffWindowSettings);
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
 

@@ -63,7 +63,7 @@ namespace TCC.ViewModels
         public void InitWindows()
         {
             ChatWindows.Clear();
-            SettingsHolder.ChatWindowsSettings.ToList().ForEach(s =>
+            App.Settings.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
                 var m = new ChatViewModel();
@@ -78,10 +78,10 @@ namespace TCC.ViewModels
                 var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
                 var m = new ChatViewModel();
                 var w = new ChatWindow(ws, m);
-                SettingsHolder.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                App.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 ChatWindows.Add(w);
                 m.LoadTabs();
-                if (SettingsHolder.ChatEnabled) w.Show();
+                if (App.Settings.ChatEnabled) w.Show();
             }
         }
         public void CloseAllWindows()
@@ -117,7 +117,7 @@ namespace TCC.ViewModels
 
         private bool Filtered(ChatMessage message)
         {
-            if (!SettingsHolder.ChatEnabled)
+            if (!App.Settings.ChatEnabled)
             {
                 message.Dispose();
                 return true;
@@ -129,7 +129,7 @@ namespace TCC.ViewModels
             }
 
             var pausedCount = _pauseQueue.Count;
-            for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+            for (var i = 0; i < App.Settings.SpamThreshold; i++)
             {
                 if (i >= pausedCount + ChatMessages.Count) continue;
                 if (Pass(message, i <= pausedCount - 1
@@ -138,7 +138,7 @@ namespace TCC.ViewModels
                 message.Dispose();
                 return true;
             }
-            //if (ChatMessages.Count < SettingsHolder.SpamThreshold)
+            //if (ChatMessages.Count < App.Settings.SpamThreshold)
             //{
             //    for (var i = 0; i < ChatMessages.Count - 1; i++)
             //    {
@@ -150,7 +150,7 @@ namespace TCC.ViewModels
             //}
             //else
             //{
-            //    for (var i = 0; i < SettingsHolder.SpamThreshold; i++)
+            //    for (var i = 0; i < App.Settings.SpamThreshold; i++)
             //    {
             //        if (i > ChatMessages.Count - 1) continue;
             //        var m = ChatMessages[i];
@@ -175,7 +175,7 @@ namespace TCC.ViewModels
             {
                 if (Filtered(chatMessage)) return;
 
-                if (chatMessage is LfgMessage lm && !SettingsHolder.DisableLfgChatMessages) lm.LinkLfg();
+                if (chatMessage is LfgMessage lm && !App.Settings.DisableLfgChatMessages) lm.LinkLfg();
 
                 chatMessage.SplitSimplePieces();
 
@@ -189,7 +189,7 @@ namespace TCC.ViewModels
                 }
 
                 NewMessage?.Invoke(chatMessage);
-                if (ChatMessages.Count > SettingsHolder.MaxMessages)
+                if (ChatMessages.Count > App.Settings.MaxMessages)
                 {
                     var toRemove = ChatMessages[ChatMessages.Count - 1];
                     toRemove.Dispose();
@@ -221,7 +221,7 @@ namespace TCC.ViewModels
                 if (_pauseQueue.TryDequeue(out var msg))
                 {
                     ChatMessages.Insert(0, msg);
-                    if (ChatMessages.Count > SettingsHolder.MaxMessages)
+                    if (ChatMessages.Count > App.Settings.MaxMessages)
                     {
                         ChatMessages.RemoveAt(ChatMessages.Count - 1);
                     }
@@ -295,7 +295,7 @@ namespace TCC.ViewModels
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             if (e.OldItems.Count == 0) return;
-            SettingsHolder.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
+            App.Settings.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
         }
 
         private void OnChatMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -368,9 +368,9 @@ namespace TCC.ViewModels
 
         public void ToggleForcedClickThru()
         {
-            SettingsHolder.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
-            if (SettingsHolder.ChatWindowsSettings.Count == 0) return;
-            var msg = $"Forcing chat clickable turned {(SettingsHolder.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
+            App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
+            if (App.Settings.ChatWindowsSettings.Count == 0) return;
+            var msg = $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
             WindowManager.FloatingButton.NotifyExtended("TCC", msg, NotificationType.Normal, 2000);
             AddTccMessage(msg);
         }

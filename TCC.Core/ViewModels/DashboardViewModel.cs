@@ -53,7 +53,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool ShowElleonMarks => Settings.SettingsHolder.LastLanguage.Contains("EU");
+        public bool ShowElleonMarks => App.Settings.LastLanguage.Contains("EU");
 
 
         public ICollectionViewLiveShaping SortedCharacters { get; }

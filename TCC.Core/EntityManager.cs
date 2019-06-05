@@ -42,7 +42,7 @@ namespace TCC
                 }
                 else
                 {
-                    if (Settings.SettingsHolder.ShowOnlyBosses) return;
+                    if (App.Settings.ShowOnlyBosses) return;
                     WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
                     WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
@@ -108,7 +108,7 @@ namespace TCC
         }
         public static void ClearNPC()
         {
-            if(Settings.SettingsHolder.BossWindowSettings.Enabled) WindowManager.BossWindow.VM.ClearBosses();
+            if(App.Settings.BossWindowSettings.Enabled) WindowManager.BossWindow.VM.ClearBosses();
             NearbyNPC.Clear();
             NearbyPlayers.Clear();
             ClassAbnormalityTracker.ClearMarkedTargets();

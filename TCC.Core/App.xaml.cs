@@ -37,6 +37,8 @@ namespace TCC
         public static bool ToolboxMode { get; private set; }
         public static bool Restarted { get; private set; }
 
+        public static SettingsContainer Settings;
+
         private static FUBH fubh;
         public static void FUBH()
         {
@@ -76,21 +78,24 @@ namespace TCC
             await UpdateManager.CheckIconsVersion();
 
             SplashScreen.SetText("Loading settings...");
-            var sr = new SettingsReader();
-            sr.LoadWindowSettings();
-            sr.LoadSettings();
+            WindowManager.ForegroundManager = new ForegroundManager();
 
-            Process.GetCurrentProcess().PriorityClass = SettingsHolder.HighPriority
+            SettingsContainer.Load();
+            
+            //var sr = new JsonSettingsReader();
+            //sr.LoadWindowSettings();
+            //sr.LoadSettings();
+
+            Process.GetCurrentProcess().PriorityClass = Settings.HighPriority
                 ? ProcessPriorityClass.High
                 : ProcessPriorityClass.Normal;
-            if (SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             SplashScreen.SetText("Pre-loading databases...");
             UpdateManager.CheckDatabaseHash();
-            SessionManager.InitDatabasesAsync(string.IsNullOrEmpty(SettingsHolder.LastLanguage) ? "EU-EN" :
-                SettingsHolder.LastLanguage == "EU" ? "EU-EN" :
-                SettingsHolder.LastLanguage);
-            UpdateManager.CheckServersFile();
+            SessionManager.InitDatabasesAsync(string.IsNullOrEmpty(Settings.LastLanguage) ? "EU-EN" :
+                Settings.LastLanguage == "EU" ? "EU-EN" :
+                Settings.LastLanguage);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
@@ -99,19 +104,21 @@ namespace TCC
             PacketAnalyzer.InitAsync();
             SplashScreen.SetText("Starting");
 
-            TimeManager.Instance.SetServerTimeZone(SettingsHolder.LastLanguage);
+            TimeManager.Instance.SetServerTimeZone(Settings.LastLanguage);
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartPeriodicCheck();
 
-            if (!Experimental && SettingsHolder.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
+            if (!Experimental && Settings.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",
                     "An experimental version of TCC is available. Open System settings to download it or disable this notification.",
                     NotificationType.Success,
                     10000);
 
             Loading = false;
+
+            Settings.Save();
         }
 
         private static void ParseStartupArgs(List<string> list)
@@ -143,7 +150,7 @@ namespace TCC
 
         public static void Restart()
         {
-            SettingsWriter.Save();
+            App.Settings.Save();
             Process.Start("TCC.exe", "--restart");
             Close();
         }
@@ -152,7 +159,7 @@ namespace TCC
         {
             if (releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
             PacketAnalyzer.Sniffer.Enabled = false;
-            SettingsWriter.Save();
+            App.Settings.Save();
             WindowManager.Dispose();
             ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
             UpdateManager.StopTimer();

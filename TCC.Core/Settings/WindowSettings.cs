@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 using TCC.Annotations;
 using TCC.Controls;
 using TCC.Data;
@@ -33,9 +34,12 @@ namespace TCC.Settings
         public event Action ClickThruModeChanged;
         public event Action VisibilityChanged;
 
+        [JsonIgnore]
         public RelayCommand ResetPositionCommand { get; }
 
+        [JsonIgnore]
         public string Name { [UsedImplicitly] get; }
+
         public bool PerClassPosition { get; set; }
 
         private Class CurrentClass()
@@ -45,6 +49,7 @@ namespace TCC.Settings
             return cc;
         }
 
+        [JsonIgnore]
         public double X
         {
             get
@@ -63,7 +68,7 @@ namespace TCC.Settings
                 N(nameof(X));
             }
         }
-
+        [JsonIgnore]
         public double Y
         {
             get
@@ -211,6 +216,8 @@ namespace TCC.Settings
                 {
                     Visible = true;
                 }
+
+                if (App.Loading) return;
                 PacketAnalyzer.Processor.Update();
                 EnabledChanged?.Invoke();
                 N(nameof(Enabled));
@@ -232,6 +239,7 @@ namespace TCC.Settings
         public WindowSettings()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
+            Positions = new ClassPositions();
             ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
         }
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
@@ -310,7 +318,7 @@ namespace TCC.Settings
         {
             var currentPos = new Point(X, Y);
             Positions.SetAllPositions(currentPos);
-            SettingsWriter.Save();
+            App.Settings.Save();
         }
 
         protected void InvokeClickThruModeChanged() => ClickThruModeChanged?.Invoke();
@@ -393,6 +401,10 @@ namespace TCC.Settings
             }
         }
 
+        public ChatWindowSettings()
+        {
+            Tabs = new List<Tab>();
+        }
         public ChatWindowSettings(WindowSettings other) : base(other)
         {
             Tabs = new List<Tab>();
@@ -404,7 +416,7 @@ namespace TCC.Settings
         public override XElement ToXElement(string name)
         {
             var b = base.ToXElement(name);
-            b.Add(SettingsWriter.BuildChatTabsXElement(Tabs));
+            b.Add(XmlSettingsWriter.BuildChatTabsXElement(Tabs));
             b.Add(new XAttribute(nameof(LfgOn), LfgOn));
             b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
             b.Add(new XAttribute(nameof(FrameOpacity), FrameOpacity));

@@ -16,8 +16,8 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(Settings.SettingsHolder.ClassWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
-            Settings.SettingsHolder.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
+            Init(App.Settings.ClassWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
+            App.Settings.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
 
             if (!SessionManager.Logged) return;
             if (WindowManager.ClassWindow.VM.CurrentManager == null)
@@ -30,7 +30,7 @@ namespace TCC.Windows.Widgets
 
         private new void OnEnabledChanged() 
         {
-            if (Settings.SettingsHolder.ClassWindowSettings.Enabled)
+            if (App.Settings.ClassWindowSettings.Enabled)
             {
                 WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
             }

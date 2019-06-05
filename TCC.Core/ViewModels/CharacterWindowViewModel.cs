@@ -13,24 +13,24 @@ namespace TCC.ViewModels
         public Player Player => SessionManager.CurrentPlayer;
 
 
-        public bool CompactMode => SettingsHolder.CharacterWindowCompactMode;
+        public bool CompactMode => App.Settings.CharacterWindowCompactMode;
 
-        public bool ShowRe => (!SettingsHolder.ClassWindowSettings.Visible || !SettingsHolder.ClassWindowSettings.Enabled) &&
+        public bool ShowRe => (!App.Settings.ClassWindowSettings.Visible || !App.Settings.ClassWindowSettings.Enabled) &&
                               (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
                                Player.Class == Class.Ninja || Player.Class == Class.Valkyrie);
 
         public bool ShowElements => Player.Class == Class.Sorcerer &&
-                                 ( !SettingsHolder.ClassWindowSettings.Visible 
-                                 ||!SettingsHolder.ClassWindowSettings.Enabled 
-                                 ||!SettingsHolder.SorcererReplacesElementsInCharWindow);
+                                 ( !App.Settings.ClassWindowSettings.Visible 
+                                 ||!App.Settings.ClassWindowSettings.Enabled 
+                                 ||!App.Settings.SorcererReplacesElementsInCharWindow);
 
         public CharacterWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
-            SettingsHolder.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
-            SettingsHolder.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
+            App.Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
+            App.Settings.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
         }
 
         private void ClassWindowSettings_EnabledChanged()

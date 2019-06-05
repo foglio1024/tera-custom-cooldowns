@@ -109,7 +109,7 @@ namespace TCC.Moongourd
 
         public void Execute(object parameter)
         {
-            var reg = Settings.SettingsHolder.LastLanguage.ToLower();
+            var reg = App.Settings.LastLanguage.ToLower();
             reg = reg.StartsWith("eu") ? "eu" : reg;
             reg = reg == "na" ? "" : reg;
             reg = reg == "" ? reg : reg + "/";

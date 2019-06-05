@@ -78,9 +78,9 @@ namespace TCC.Interop
 
         public static async void SendUsageStatAsync()
         {
-            if (SettingsHolder.StatSentVersion == App.AppVersion &&
-                SettingsHolder.StatSentTime.Month == DateTime.UtcNow.Month &&
-                SettingsHolder.StatSentTime.Day == DateTime.UtcNow.Day) return;
+            if (App.Settings.StatSentVersion == App.AppVersion &&
+                App.Settings.StatSentTime.Month == DateTime.UtcNow.Month &&
+                App.Settings.StatSentTime.Day == DateTime.UtcNow.Day) return;
 
             try
             {
@@ -99,9 +99,9 @@ namespace TCC.Interop
                         {"account", accountNameHash},
                         {"tcc_version", App.AppVersion},
                         {
-                            "updated", SettingsHolder.StatSentTime.Month == DateTime.Now.Month &&
-                                       SettingsHolder.StatSentTime.Day == DateTime.Now.Day &&
-                                       SettingsHolder.StatSentVersion != App.AppVersion
+                            "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
+                                       App.Settings.StatSentTime.Day == DateTime.Now.Day &&
+                                       App.Settings.StatSentVersion != App.AppVersion
                         },
                         {
                             "settings_summary", new JObject
@@ -109,12 +109,12 @@ namespace TCC.Interop
                                 {
                                     "windows", new JObject
                                     {
-                                        {"cooldown", SettingsHolder.CooldownWindowSettings.Enabled},
-                                        {"buffs", SettingsHolder.BuffWindowSettings.Enabled},
-                                        {"character", SettingsHolder.CharacterWindowSettings.Enabled},
-                                        {"class", SettingsHolder.ClassWindowSettings.Enabled},
-                                        {"chat", SettingsHolder.ChatEnabled},
-                                        {"group", SettingsHolder.GroupWindowSettings.Enabled}
+                                        {"cooldown", App.Settings.CooldownWindowSettings.Enabled},
+                                        {"buffs", App.Settings.BuffWindowSettings.Enabled},
+                                        {"character", App.Settings.CharacterWindowSettings.Enabled},
+                                        {"class", App.Settings.ClassWindowSettings.Enabled},
+                                        {"chat", App.Settings.ChatEnabled},
+                                        {"group", App.Settings.GroupWindowSettings.Enabled}
                                     }
                                 },
                                 {
@@ -130,8 +130,9 @@ namespace TCC.Interop
                     await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                    SettingsHolder.StatSentTime = DateTime.UtcNow;
-                    SettingsHolder.StatSentVersion = App.AppVersion;
+                    App.Settings.StatSentTime = DateTime.UtcNow;
+                    App.Settings.StatSentVersion = App.AppVersion;
+                    App.Settings.Save();
                 }
             }
             catch

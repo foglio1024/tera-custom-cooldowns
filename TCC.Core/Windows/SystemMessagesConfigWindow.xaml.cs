@@ -18,13 +18,13 @@ namespace TCC.Windows
             _hiddenMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
             _showedMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
 
-            SettingsHolder.UserExcludedSysMsg.ForEach(opc =>
+            App.Settings.UserExcludedSysMsg.ForEach(opc =>
             {
                 _hiddenMessages.Add(new SystemMessageViewModel(opc, SessionManager.DB.SystemMessagesDatabase.Messages[opc]));
             });
             SessionManager.DB.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
             {
-                if (SettingsHolder.UserExcludedSysMsg.Contains(keyVal.Key)) return;
+                if (App.Settings.UserExcludedSysMsg.Contains(keyVal.Key)) return;
                 _showedMessages.Add(new SystemMessageViewModel(keyVal.Key, keyVal.Value));
             });
 
@@ -35,17 +35,17 @@ namespace TCC.Windows
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                         foreach (var item in args.NewItems)
                         {
-                            SettingsHolder.UserExcludedSysMsg.Add((item as SystemMessageViewModel)?.Opcode);
+                            App.Settings.UserExcludedSysMsg.Add((item as SystemMessageViewModel)?.Opcode);
                         }
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                         foreach (var item in args.OldItems)
                         {
-                            SettingsHolder.UserExcludedSysMsg.Remove((item as SystemMessageViewModel)?.Opcode);
+                            App.Settings.UserExcludedSysMsg.Remove((item as SystemMessageViewModel)?.Opcode);
                         }
                         break;
                 }
-                SettingsWriter.Save();
+                App.Settings.Save();
             };
 
             ShowedMessagesView = CollectionViewUtils.InitLiveView(null, ShowedMessages, new string[] { }, new SortDescription[] { });

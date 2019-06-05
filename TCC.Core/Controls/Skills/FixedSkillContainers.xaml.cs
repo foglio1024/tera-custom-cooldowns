@@ -14,6 +14,7 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using FoglioUtils.Extensions;
+using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
@@ -402,8 +403,8 @@ namespace TCC.Controls.Skills
             Dispatcher.BeginInvoke(new Action(() =>
             {
 
-                MainBorder.CornerRadius = new CornerRadius(TCC.Settings.SettingsHolder.SkillShape == ControlShape.Round ? 29 : 0);
-                MainBorderSec.CornerRadius = new CornerRadius(TCC.Settings.SettingsHolder.SkillShape == ControlShape.Round ? 29 : 0);
+                MainBorder.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
+                MainBorderSec.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
             }), DispatcherPriority.Background);
         }
         private void RefreshControlTemplate(ItemsControl ic)
@@ -411,7 +412,7 @@ namespace TCC.Controls.Skills
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 ic.ItemContainerStyle =
-                    FindResource(TCC.Settings.SettingsHolder.SkillShape == ControlShape.Round
+                    FindResource(App.Settings.SkillShape == ControlShape.Round
                         ? "RoundDragableStyle"
                         : "SquareDragableStyle") as Style;
             }), DispatcherPriority.Background);

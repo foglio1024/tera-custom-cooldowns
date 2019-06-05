@@ -132,7 +132,7 @@ namespace TCC.Windows.Widgets
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var sw = ((ItemsControl)sender).GetChild<ScrollViewer>();
-            var lines = sw.VerticalOffset + e.Delta >= sw.ScrollableHeight ? 1 : SettingsHolder.ChatScrollAmount;
+            var lines = sw.VerticalOffset + e.Delta >= sw.ScrollableHeight ? 1 : App.Settings.ChatScrollAmount;
             sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? lines : -lines));
 
             e.Handled = true;
@@ -140,7 +140,7 @@ namespace TCC.Windows.Widgets
             if (sw.VerticalOffset == 0)
             {
                 _bottom = true;
-                ChatWindowManager.Instance.AddFromQueue(SettingsHolder.ChatScrollAmount);
+                ChatWindowManager.Instance.AddFromQueue(App.Settings.ChatScrollAmount);
             }
             else
             {

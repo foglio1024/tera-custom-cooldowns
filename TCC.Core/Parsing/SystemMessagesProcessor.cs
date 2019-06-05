@@ -22,7 +22,7 @@ namespace TCC.Parsing
 
         private static bool Pass(string opcodeName)
         {
-            return /*!ExclusionList.Contains(opcodeName) && */!SettingsHolder.UserExcludedSysMsg.Contains(opcodeName);
+            return /*!ExclusionList.Contains(opcodeName) && */!App.Settings.UserExcludedSysMsg.Contains(opcodeName);
         }
 
         private static void HandleMaxEnchantSucceed(string x)
@@ -100,7 +100,7 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
-            if (SettingsHolder.LfgEnabled) WindowManager.LfgListWindow.VM.RemoveDeadLfg();
+            if (App.Settings.LfgEnabled) WindowManager.LfgListWindow.VM.RemoveDeadLfg();
         }
 
         #region Factory
@@ -191,7 +191,7 @@ namespace TCC.Parsing
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
-            if (!SettingsHolder.WebhookEnabledFieldBoss) return;
+            if (!App.Settings.WebhookEnabledFieldBoss) return;
 
             // @4157 \v
             // regionName \v @rgn:213 \v
@@ -241,7 +241,7 @@ namespace TCC.Parsing
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
-            if (!SettingsHolder.WebhookEnabledFieldBoss) return;
+            if (!App.Settings.WebhookEnabledFieldBoss) return;
 
             //@4158
             //guildNameWish

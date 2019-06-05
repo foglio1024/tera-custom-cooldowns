@@ -6,11 +6,15 @@ using TeraDataLite;
 
 namespace TCC.Windows
 {
-    class ClassPositionsData
+    public class ClassPositionsData
     {
         public Point Position { get; set; }
         public ButtonsPosition Buttons { get; set; }
 
+        public ClassPositionsData()
+        {
+                
+        }
         public ClassPositionsData(ClassPositionsData origin)
         {
             Position = new Point(origin.Position.X, origin.Position.Y);
@@ -31,45 +35,45 @@ namespace TCC.Windows
 
     public class ClassPositions
     {
-        private Dictionary<Class, ClassPositionsData> _classes;
+        public Dictionary<Class, ClassPositionsData> Classes { get; set; }
 
         public ClassPositions()
         {
-            _classes = new Dictionary<Class, ClassPositionsData>();
+            Classes = new Dictionary<Class, ClassPositionsData>();
             foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
-                _classes.Add(cl, new ClassPositionsData(0, 0, ButtonsPosition.Above));
+                Classes.Add(cl, new ClassPositionsData(0, 0, ButtonsPosition.Above));
             }
         }
 
         public ClassPositions(ClassPositions origin)
         {
-            _classes = new Dictionary<Class, ClassPositionsData>();
+            Classes = new Dictionary<Class, ClassPositionsData>();
             foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
-                _classes.Add(cl, new ClassPositionsData(origin._classes[cl]));
+                Classes.Add(cl, new ClassPositionsData(origin.Classes[cl]));
             }
         }
 
         public ClassPositions(double x, double y, ButtonsPosition buttons)
         {
-            _classes = new Dictionary<Class, ClassPositionsData>();
+            Classes = new Dictionary<Class, ClassPositionsData>();
             foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
-                _classes.Add(cl, new ClassPositionsData(x, y, buttons));
+                Classes.Add(cl, new ClassPositionsData(x, y, buttons));
             }
         }
 
         public void SetPosition(Class cname, Point position)
         {
-            _classes[cname].Position = position;
+            Classes[cname].Position = position;
         }
 
         public void SetAllPositions(Point position)
         {
             foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
-                _classes[cl].Position = position;
+                Classes[cl].Position = position;
             }
         }
 
@@ -77,22 +81,22 @@ namespace TCC.Windows
         {
             foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
-                _classes[cl].ApplyCorrection(sc);
+                Classes[cl].ApplyCorrection(sc);
             }
         }
         public void SetButtons(Class cname, ButtonsPosition buttons)
         {
-            _classes[cname].Buttons = buttons;
+            Classes[cname].Buttons = buttons;
         }
 
         public Point Position(Class cname)
         {
-            return _classes[cname].Position;
+            return Classes[cname].Position;
         }
 
         public ButtonsPosition Buttons(Class cname)
         {
-            return _classes[cname].Buttons;
+            return Classes[cname].Buttons;
         }
     }
 }

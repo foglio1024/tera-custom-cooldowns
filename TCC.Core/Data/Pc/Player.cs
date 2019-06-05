@@ -396,13 +396,13 @@ namespace TCC.Data.Pc
         //Add My Abnormals Setting by HQ ============================================================
         public bool MyAbnormalsContainKey(Abnormality ab)
         {
-            if (!SettingsHolder.ShowAllMyAbnormalities)
+            if (!App.Settings.ShowAllMyAbnormalities)
             {
-                if (SettingsHolder.MyAbnormals.TryGetValue(Class.Common, out var commonList))
+                if (App.Settings.MyAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (SettingsHolder.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
+                        if (App.Settings.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return false;
                         }

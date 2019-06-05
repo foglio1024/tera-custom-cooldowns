@@ -119,7 +119,7 @@ namespace TCC.Windows
 
             MouseEnter += (_, __) =>
             {
-                if (!SettingsHolder.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
+                if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             if (CanMove) ButtonsRef.MouseLeftButtonDown += Drag;
@@ -151,7 +151,7 @@ namespace TCC.Windows
             {
                 WindowSettings.W = ActualWidth;
                 WindowSettings.H = ActualHeight;
-                if (!App.Loading) SettingsWriter.Save();
+                if (!App.Loading) App.Settings.Save();
             }
         }
 
@@ -382,7 +382,7 @@ namespace TCC.Windows
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
                 WindowSettings.X = Left / WindowManager.ScreenSize.Width;
                 WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
-                SettingsWriter.Save();
+                App.Settings.Save();
             }
             catch
             {

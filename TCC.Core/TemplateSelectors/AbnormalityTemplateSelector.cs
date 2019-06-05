@@ -12,7 +12,7 @@ namespace TCC.TemplateSelectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            return Settings.SettingsHolder.AbnormalityShape == ControlShape.Round ? RoundTemplate : SquareTemplate;
+            return App.Settings.AbnormalityShape == ControlShape.Round ? RoundTemplate : SquareTemplate;
         }
     }
 }

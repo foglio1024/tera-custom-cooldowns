@@ -30,11 +30,11 @@ namespace TCC.Data.Chat
         public bool ContainsPlayerName { get; set; }
         public bool Animate
         {
-            get => _animate && SettingsHolder.AnimateChatMessages;
+            get => _animate && App.Settings.AnimateChatMessages;
             set => _animate = value;
         }
-        [UsedImplicitly] public bool ShowTimestamp => SettingsHolder.ShowTimestamp;
-        [UsedImplicitly] public bool ShowChannel => SettingsHolder.ShowChannel;
+        [UsedImplicitly] public bool ShowTimestamp => App.Settings.ShowTimestamp;
+        [UsedImplicitly] public bool ShowChannel => App.Settings.ShowChannel;
         public SynchronizedObservableCollection<MessageLine> Lines { get; protected set; }
         public SynchronizedObservableCollection<MessagePiece> Pieces { get; }
 
@@ -62,7 +62,7 @@ namespace TCC.Data.Chat
                 N();
             }
         }
-        public int Size => SettingsHolder.FontSize;
+        public int Size => App.Settings.FontSize;
         #endregion
 
 
@@ -71,7 +71,7 @@ namespace TCC.Data.Chat
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
             Lines = new SynchronizedObservableCollection<MessageLine>(Dispatcher);
-            Timestamp = SettingsHolder.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
+            Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }
         public ChatMessage(ChatChannel ch, string auth, string msg) : this()
@@ -130,7 +130,7 @@ namespace TCC.Data.Chat
                         var customColor = ChatUtils.GetCustomColor(htmlPiece);
                         var content = htmlPiece.InnerText;
                         RawMessage = content;
-                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, SettingsHolder.FontSize, false, customColor));
+                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, App.Settings.FontSize, false, customColor));
                     }
                 }
                 else
@@ -149,7 +149,7 @@ namespace TCC.Data.Chat
                             var source = piece.GetAttributeValue("src", "")
                                               .Replace("img://__", "")
                                               .ToLower();
-                            var mp = new MessagePiece(source, MessagePieceType.Icon, SettingsHolder.FontSize, false);
+                            var mp = new MessagePiece(source, MessagePieceType.Icon, App.Settings.FontSize, false);
                             AddPiece(mp);
                         }
                         else
@@ -194,7 +194,7 @@ namespace TCC.Data.Chat
                                     var abName = "Unknown";
                                     if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
                                         uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
-                                    mp = new MessagePiece(abName, MessagePieceType.Simple, SettingsHolder.FontSize, false);
+                                    mp = new MessagePiece(abName, MessagePieceType.Simple, App.Settings.FontSize, false);
                                     mp.SetColor(col);
                                 }
                                 else if (inPiece.StartsWith("@achievement"))
@@ -252,7 +252,7 @@ namespace TCC.Data.Chat
                                 }
                                 else
                                 {
-                                    mp = new MessagePiece(inPiece.UnescapeHtml(), MessagePieceType.Simple, SettingsHolder.FontSize, false, col);
+                                    mp = new MessagePiece(inPiece.UnescapeHtml(), MessagePieceType.Simple, App.Settings.FontSize, false, col);
                                 }
                                 AddPiece(mp);
                             }
@@ -375,7 +375,7 @@ namespace TCC.Data.Chat
 
         private void ParseDirectMessage(string msg)
         {
-            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, SettingsHolder.FontSize, false));
+            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, App.Settings.FontSize, false));
         }
         private void ParseEmoteMessage(string msg)
         {
@@ -383,13 +383,13 @@ namespace TCC.Data.Chat
             var start = msg.IndexOf(header, StringComparison.Ordinal);
             if (start == -1)
             {
-                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, SettingsHolder.FontSize, false));
+                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, App.Settings.FontSize, false));
                 return;
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
             var text = SessionManager.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
-            AddPiece(new MessagePiece(text, MessagePieceType.Simple, SettingsHolder.FontSize, false));
+            AddPiece(new MessagePiece(text, MessagePieceType.Simple, App.Settings.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)
         {
@@ -442,7 +442,7 @@ namespace TCC.Data.Chat
                                 .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                                 .Replace("</a>", "")
                                 .UnescapeHtml(),
-                            MessagePieceType.Simple, SettingsHolder.FontSize, false, customColor
+                            MessagePieceType.Simple, App.Settings.FontSize, false, customColor
                             )
                         );
                     }
@@ -463,7 +463,7 @@ namespace TCC.Data.Chat
                             .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                             .Replace("</a>", "")
                             .UnescapeHtml(),
-                        MessagePieceType.Simple, SettingsHolder.FontSize, false
+                        MessagePieceType.Simple, App.Settings.FontSize, false
                         )
                     );
                 }
@@ -513,10 +513,10 @@ namespace TCC.Data.Chat
                     //add it as url
                     if (content.ToString() != "")
                     {
-                        AddPiece(new MessagePiece(content.ToString().UnescapeHtml(), MessagePieceType.Simple, SettingsHolder.FontSize, false));
+                        AddPiece(new MessagePiece(content.ToString().UnescapeHtml(), MessagePieceType.Simple, App.Settings.FontSize, false));
                         content = new StringBuilder("");
                     }
-                    AddPiece(new MessagePiece(token.UnescapeHtml(), MessagePieceType.Url, SettingsHolder.FontSize, false, "7289da"));
+                    AddPiece(new MessagePiece(token.UnescapeHtml(), MessagePieceType.Url, App.Settings.FontSize, false, "7289da"));
                 }
                 else
                 {
@@ -557,7 +557,7 @@ namespace TCC.Data.Chat
             sb.Append(mw);
             sb.Append(mp.Text.Substring(1));
             mp.Text = sb.ToString();
-            msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, SettingsHolder.FontSize, false, "cccccc"));
+            msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, App.Settings.FontSize, false, "cccccc"));
             msg.AddPiece(mp);
 
             return msg;

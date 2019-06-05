@@ -52,7 +52,7 @@ namespace TCC.Sniffing
         {
             _serversByIp = SessionManager.DB.ServerDatabase.GetServersByIp();
 
-            if (SettingsHolder.Npcap || SettingsHolder.CaptureMode == CaptureMode.Npcap)
+            if (App.Settings.Npcap || App.Settings.CaptureMode == CaptureMode.Npcap)
             {
                 var netmasks = _serversByIp.Keys.Select(s => string.Join(".", s.Split('.').Take(3)) + ".0/24").Distinct().ToArray();
 

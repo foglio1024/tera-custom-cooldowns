@@ -92,13 +92,14 @@ namespace TCC
 
         public void RefreshDim()
         {
+            if (App.Loading) return;
             App.BaseDispatcher?.Invoke(() =>
-            {
-                ForceUndim = true;
-                DimChanged?.Invoke();
-                ForceUndim = false;
-                DimChanged?.Invoke();
-            });
+        {
+            ForceUndim = true;
+            DimChanged?.Invoke();
+            ForceUndim = false;
+            DimChanged?.Invoke();
+        });
         }
 
         public void RefreshVisible()

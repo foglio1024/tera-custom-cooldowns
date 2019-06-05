@@ -184,7 +184,7 @@ namespace TCC.ViewModels
             _windowSettings.Tabs.AddRange(Tabs);
             _windowSettings.X = left / WindowManager.ScreenSize.Width;
             _windowSettings.Y = top / WindowManager.ScreenSize.Height;
-            var v = SettingsHolder.ChatWindowsSettings;
+            var v = App.Settings.ChatWindowsSettings;
             var s = v.FirstOrDefault(x => x == _windowSettings);
             if (s == null) v.Add(_windowSettings);
             //if (!Equals(ChatTabClient.LastSource, this) && ChatTabClient.LastSource != null)
@@ -233,7 +233,7 @@ namespace TCC.ViewModels
             TabVMs.Add(new TabViewModel(sys.TabName, sys));
             CurrentTab = TabVMs[0].Content as Tab;
             //ChatWindowManager.Instance.FindMyWindow(this).UpdateSettings();
-
+            Tabs.ForEach(WindowSettings.Tabs.Add);
         }
         public void RemoveTab(Tab dc)
         {

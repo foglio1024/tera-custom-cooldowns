@@ -135,7 +135,7 @@ namespace TCC
         public static void SetPlayerSt(float st)
         {
             CurrentPlayer.CurrentST = st;
-            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
+            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -167,7 +167,7 @@ namespace TCC
         public static void SetPlayerMaxSt(int maxSt)
         {
             CurrentPlayer.MaxST = maxSt;
-            if (SettingsHolder.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
@@ -209,7 +209,7 @@ namespace TCC
                         WindowManager.SettingsWindow.TabControl.SelectedIndex = 8;
                         WindowManager.SettingsWindow.ShowDialog();
                     });
-                    InitDatabases(SettingsHolder.LastLanguage);
+                    InitDatabases(App.Settings.LastLanguage);
                 }
                 else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
                 else if (res == System.Windows.MessageBoxResult.Cancel) App.Close();
@@ -223,7 +223,7 @@ namespace TCC
             CurrentPlayer.Ice = pIce;
             CurrentPlayer.Arcane = pArcane;
 
-            if (SettingsHolder.ClassWindowSettings.Enabled
+            if (App.Settings.ClassWindowSettings.Enabled
                 && CurrentPlayer.Class == Class.Sorcerer
                 && WindowManager.ClassWindow.VM.CurrentManager is SorcererLayoutVM sm)
             {
@@ -238,7 +238,7 @@ namespace TCC
             CurrentPlayer.IceBoost = i;
             CurrentPlayer.ArcaneBoost = a;
 
-            if (SettingsHolder.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
+            if (App.Settings.ClassWindowSettings.Enabled && CurrentPlayer.Class == Class.Sorcerer)
             {
                 TccUtils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged();
             }

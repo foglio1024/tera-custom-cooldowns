@@ -49,7 +49,7 @@ namespace TCC.Windows
 
         public void ShowWindow()
         {
-            if (SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher.Invoke(() =>
             {
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
@@ -76,13 +76,13 @@ namespace TCC.Windows
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            SettingsWriter.Save();
+            App.Settings.Save();
 
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             an.Completed += (s, ev) =>
             {
                 Close();
-                if (SettingsHolder.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             };
             BeginAnimation(OpacityProperty, an);
@@ -158,8 +158,8 @@ namespace TCC.Windows
         public void Execute(object parameter)
         {
             _toggle.Selected = !_toggle.Selected;
-            if (_toggle.Selected) SettingsHolder.MyAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
-            else SettingsHolder.MyAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
+            if (_toggle.Selected) App.Settings.MyAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
+            else App.Settings.MyAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 #pragma warning disable 0067
         public event EventHandler CanExecuteChanged;

@@ -24,7 +24,7 @@ namespace TCC.Windows.Widgets
             MainContent = WindowContent;
             ButtonsRef = null;
             CanMove = false;
-            Init(Settings.SettingsHolder.FloatingButtonSettings, perClassPosition: false);
+            Init(App.Settings.FloatingButtonSettings, perClassPosition: false);
         }
 
         private Timer _t;

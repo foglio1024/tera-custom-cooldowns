@@ -41,12 +41,10 @@ namespace TCC
         private static void DownloadServersFile()
         {
             if (!Directory.Exists(App.DataPath)) Directory.CreateDirectory(App.DataPath);
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
-
                 try
                 {
-
                     c.DownloadFile("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/servers.txt", Path.Combine(App.DataPath, "servers.txt"));
                 }
                 catch

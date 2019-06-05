@@ -15,6 +15,8 @@ namespace TCC.TeraCommon.Game.Services
 
         public ServerDatabase(string folder)
         {
+            UpdateManager.CheckServersFile();
+
             _serverlist = File.ReadAllLines(Path.Combine(folder, "servers.txt"))
                 .Where(s => !string.IsNullOrWhiteSpace(s))
                 .Select(s => s.Split(new[] { ' ' }, 4))
