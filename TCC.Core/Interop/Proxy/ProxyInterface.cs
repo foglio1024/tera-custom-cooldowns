@@ -5,7 +5,6 @@ namespace TCC.Interop.Proxy
 {
     public class ProxyInterface
     {
-        private bool _initialized = false;
         private static ProxyInterface _instance;
         public static ProxyInterface Instance => (_instance ?? new ProxyInterface());
         private Server Server { get; }
@@ -27,9 +26,7 @@ namespace TCC.Interop.Proxy
 
         public async Task Init()
         {
-            if (_initialized) return;
             if (!SettingsHolder.EnableProxy) return;
-            _initialized = true;
             IsStubAvailable = await Stub.PingStub();
             if (!IsStubAvailable) return;
             Stub.Initialize();
