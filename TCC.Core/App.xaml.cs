@@ -14,7 +14,6 @@ using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.Sniffing;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -35,8 +34,9 @@ namespace TCC
         public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
         public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
-        public static bool StartedByToolbox { get; private set; }
+        public static bool ToolboxMode { get; private set; }
         public static bool Restarted { get; private set; }
+
         private static FUBH fubh;
         public static void FUBH()
         {
@@ -54,8 +54,8 @@ namespace TCC
             TccMessageBox.Create(); //Create it here in STA thread
             if (IsRunning())
             {
-                TccMessageBox.Show("Another instance of TCC is already running. Shutting down.",
-                    MessageBoxType.Information);
+                if (!ToolboxMode) TccMessageBox.Show("Another instance of TCC is already running. Shutting down.",
+                     MessageBoxType.Information);
                 Current.Shutdown();
                 return;
             }
@@ -116,7 +116,7 @@ namespace TCC
 
         private static void ParseStartupArgs(List<string> list)
         {
-            StartedByToolbox = list.IndexOf("--toolbox") != -1;
+            ToolboxMode = list.IndexOf("--toolbox") != -1;
             Restarted = list.IndexOf("--restart") != -1;
         }
 
@@ -150,7 +150,7 @@ namespace TCC
 
         public static void Close(bool releaseMutex = true)
         {
-            if(releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
+            if (releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
             PacketAnalyzer.Sniffer.Enabled = false;
             SettingsWriter.Save();
             WindowManager.Dispose();
