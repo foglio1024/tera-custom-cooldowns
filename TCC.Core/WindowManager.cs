@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using Microsoft.Win32;
@@ -160,6 +161,9 @@ namespace TCC
             //t.Interval = 1000;
             //t.Elapsed += (_, __) => PrintDispatcher();
             //t.Start();
+            ToolTipService.ShowDurationProperty.OverrideMetadata(
+                typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+
         }
 
         private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
