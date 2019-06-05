@@ -25,6 +25,7 @@ namespace TCC.Settings
         //public static double ScreenW => SystemParameters.VirtualScreenWidth;
         //public static double ScreenH => SystemParameters.VirtualScreenHeight;
         public static Size LastScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+        private static CaptureMode _captureMode;
 
         public static WindowSettings GroupWindowSettings { get; set; } = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
         public static WindowSettings CooldownWindowSettings { get; set; } = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
@@ -233,6 +234,11 @@ namespace TCC.Settings
         public static string WebhookMessageGuildBam { get; set; } = "@here Guild BAM will spawn soon!";
         public static GroupWindowLayout GroupWindowLayout { get; set; } = GroupWindowLayout.RoleSeparated;
         public static bool DontShowFUBH { get; set; }
-        public static CaptureMode CaptureMode { get; internal set; }
+
+        public static CaptureMode CaptureMode
+        {
+            get => App.ToolboxMode ? CaptureMode.Toolbox : _captureMode;
+            internal set => _captureMode = value;
+        }
     }
 }
