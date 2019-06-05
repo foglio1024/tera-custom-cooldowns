@@ -1,10 +1,11 @@
 ﻿using FoglioUtils.Extensions;
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Map;
@@ -217,6 +218,9 @@ namespace TCC.Parsing
             if (!SettingsHolder.LfgEnabled) return;
             if (WindowManager.LfgListWindow == null) return;
             if (WindowManager.LfgListWindow.VM == null) return;
+            if(!x.IsLast && SettingsHolder.LfgEnabled && ProxyInterface.Instance.IsStubAvailable)
+                ProxyInterface.Instance.Stub.RequestListingsPage(x.Page + 1);
+
             if (!x.IsLast) return;
 
             if (S_SHOW_PARTY_MATCH_INFO.Listings.Count == 0)
@@ -225,40 +229,13 @@ namespace TCC.Parsing
                 WindowManager.LfgListWindow.ShowWindow();
                 return;
             }
-            //WindowManager.LfgListWindow.VM.Listings.Clear();
-            S_SHOW_PARTY_MATCH_INFO.Listings.ForEach(l =>
-            {
-                if (WindowManager.LfgListWindow.VM.Listings.Any(toFind => toFind.LeaderId == l.LeaderId))
-                {
-                    var target = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(t => t.LeaderId == l.LeaderId);
-                    if (target == null) return;
-                    target.LeaderId = l.LeaderId;
-                    target.Message = l.Message;
-                    target.IsRaid = l.IsRaid;
-                    target.LeaderName = l.LeaderName;
-                    if (target.PlayerCount != l.PlayerCount)
-                    {
-                        WindowManager.LfgListWindow.VM.EnqueueRequest(l.LeaderId);
-                    }
-                }
-                else
-                {
-                    WindowManager.LfgListWindow.VM.Listings.Add(new Listing(l));
-                    WindowManager.LfgListWindow.VM.EnqueueRequest(l.LeaderId);
-                }
-            });
-            var toRemove = new List<uint>();
-            WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(l =>
-            {
-                if (S_SHOW_PARTY_MATCH_INFO.Listings.All(f => f.LeaderId != l.LeaderId)) toRemove.Add(l.LeaderId);
-            });
-            toRemove.ForEach(r =>
-            {
-                var target = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(rm => rm.LeaderId == r);
-                if (target != null) WindowManager.LfgListWindow.VM.Listings.Remove(target);
-            });
+
+            WindowManager.LfgListWindow.VM.SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
+
             WindowManager.LfgListWindow.VM.NotifyMyLfg();
             WindowManager.LfgListWindow.ShowWindow();
+
+
         }
 
         /*

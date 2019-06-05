@@ -6,19 +6,19 @@ namespace TeraPacketParser.Messages
     public class S_SHOW_PARTY_MATCH_INFO : ParsedMessage
     {
         public static List<ListingData> Listings { get; } = new List<ListingData>();
-        public bool IsLast { get; }
+        public bool IsLast => Pages == Page;
         public S_SHOW_PARTY_MATCH_INFO(TeraMessageReader reader) : base(reader)
         {
             var count = reader.ReadUInt16();
             var offset = reader.ReadUInt16();
-            var page = reader.ReadInt16();
-            var pages = reader.ReadInt16();
+            Page = reader.ReadInt16();
+            Pages = reader.ReadInt16();
 
-            if (page == 0) Listings.Clear();
+            if (Page == 0) Listings.Clear();
             if (count == 0)
             {
                 Listings.Clear();
-                IsLast = true;
+                //IsLast = true;
                 return;
             }
 
@@ -51,7 +51,12 @@ namespace TeraPacketParser.Messages
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
-                if (!(l.IsTrade /* TODO: && !SettingsHolder.ShowTradeLfg*/)) Listings.Add(l);
+                // ------------------------ TODO: move this  ---------------------------------------------
+                //if (!(l.IsTrade /* TODO: && !SettingsHolder.ShowTradeLfg*/))
+                //--------------------------------------------------------------------------------------
+                {
+                    Listings.Add(l);
+                }
                 if (next != 0) reader.BaseStream.Position = next - 4;
 
             }
@@ -59,7 +64,11 @@ namespace TeraPacketParser.Messages
             //if (page < pages && SettingsHolder.LfgEnabled && ProxyInterface.Instance.IsStubAvailable)
             //    ProxyInterface.Instance.Stub.RequestListingsPage(page + 1); 
             //--------------------------------------------------------------------------------------
-            if (page == pages) IsLast = true;
+            //if (Page == Pages) IsLast = true;
         }
+
+        public short Pages { get; set; }
+
+        public short Page { get; set; }
     }
 }

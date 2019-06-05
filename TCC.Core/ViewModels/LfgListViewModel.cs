@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Interop.Proxy;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -225,6 +226,50 @@ namespace TCC.ViewModels
             AutoPublicizeTimer.Stop();
             N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
             N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
+        }
+
+        public void SyncListings(List<ListingData> listings)
+        {
+            listings.ForEach(AddOrRefreshListing);
+            RemoveMissingListings();
+
+
+
+            void AddOrRefreshListing(ListingData l)
+            {
+                if (Listings.Any(toFind => toFind.LeaderId == l.LeaderId))
+                {
+                    var target = Listings.FirstOrDefault(t => t.LeaderId == l.LeaderId);
+                    if (target == null) return;
+                    target.LeaderId = l.LeaderId;
+                    target.Message = l.Message;
+                    target.IsRaid = l.IsRaid;
+                    target.LeaderName = l.LeaderName;
+                    if (target.PlayerCount != l.PlayerCount)
+                    {
+                        EnqueueRequest(l.LeaderId);
+                    }
+                }
+                else
+                {
+                    Listings.Add(new Listing(l));
+                    EnqueueRequest(l.LeaderId);
+                }
+            }
+            void RemoveMissingListings()
+            {
+                var toRemove = new List<uint>();
+
+                Listings.ToSyncList().ForEach(l =>
+                {
+                    if (listings.All(f => f.LeaderId != l.LeaderId)) toRemove.Add(l.LeaderId);
+                });
+                toRemove.ForEach(r =>
+                {
+                    var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
+                    if (target != null) Listings.Remove(target);
+                });
+            }
         }
     }
 
