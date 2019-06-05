@@ -431,7 +431,7 @@ namespace TCC.Data.Chat
                 {
                     //parse normal formatted piece
                     var text = piece.InnerText;
-                    CheckMention(text);
+                    if(!App.Loading) CheckMention(text);
                     CheckRedirect(text);
                     var content = GetPieceContent(text);
                     if (content != "")

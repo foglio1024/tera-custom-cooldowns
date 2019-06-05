@@ -16,7 +16,7 @@ namespace TCC
         public static void C(string line)
         {
 #if DEBUG
-            ChatWindowManager.Instance.AddTccMessage(line);
+            App.BaseDispatcher.BeginInvoke(new Action(() => { ChatWindowManager.Instance.AddTccMessage(line); }));
 #endif
         }
 
