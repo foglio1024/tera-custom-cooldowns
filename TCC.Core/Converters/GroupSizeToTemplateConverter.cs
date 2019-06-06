@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
-using TCC.Settings;
 
 namespace TCC.Converters
 {
@@ -11,7 +9,10 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (int?)value ?? 0;
-            return Application.Current.FindResource(val > App.Settings.GroupSizeThreshold ? "RaidDataTemplate" : "PartyDataTemplate");
+            return val > App.Settings.GroupWindowSettings.GroupSizeThreshold
+                ? R.DataTemplates.RaidDataTemplate
+                : R.DataTemplates.PartyDataTemplate;
+            //return Application.Current.FindResource(val > App.Settings.GroupWindowSettings.GroupSizeThreshold ? "RaidDataTemplate" : "PartyDataTemplate");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

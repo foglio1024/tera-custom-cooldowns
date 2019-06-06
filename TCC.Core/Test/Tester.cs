@@ -35,7 +35,7 @@ namespace TCC.Test
         {
             try
             {
-                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+                using (var c = MiscUtils.GetDefaultWebClient())
                 {
                     c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                     c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -107,7 +107,7 @@ namespace TCC.Test
         public static void SpawnNpcAndUpdateHP(ushort zoneId, uint templateId)
         {
             EntityManager.SpawnNPC(zoneId, templateId, 11, true, false, 36);
-            var t = new System.Timers.Timer { Interval = 1000 };
+            var t = new Timer { Interval = 1000 };
             var hp = 1000;
             t.Elapsed += (_, __) =>
             {
@@ -194,7 +194,7 @@ namespace TCC.Test
             {
                 disp.Invoke(() =>
                 {
-                    var myId = FoglioUtils.MiscUtils.GetCurrentThreadId();
+                    var myId = MiscUtils.GetCurrentThreadId();
                     threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
                 });
             }
@@ -243,7 +243,7 @@ namespace TCC.Test
                 {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
             };
 
-            using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var client = MiscUtils.GetDefaultWebClient())
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -262,7 +262,7 @@ namespace TCC.Test
                 {"user", username }
 
             };
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -293,7 +293,7 @@ namespace TCC.Test
                     {"username", "TCC" },
                     {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
                 };
-                using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
+                using (var client = MiscUtils.GetDefaultWebClient())
                 {
                     client.Encoding = Encoding.UTF8;
                     client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -315,7 +315,7 @@ namespace TCC.Test
                 {"user", username},
                 {"online", r.NextDouble() >= 0.9 }
             };
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");

@@ -117,7 +117,7 @@ namespace TeraPacketParser.Messages
                 reader.BaseStream.Position = questOffset - 4;
                 Quest = reader.ReadTeraString();
             }
-            catch(Exception e)
+            catch
             {
                 //Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Error while reading packet: {e}");
             }

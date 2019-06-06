@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Group
@@ -34,13 +33,13 @@ namespace TCC.Controls.Group
         private DataTemplateSelector _currentAbnormalityTemplateSelector;
         private DataTemplateSelector _initialAbnormalityDataTemplateSelector;
 
-        public bool ShowHp => WindowManager.ViewModels.Group.Size <= App.Settings.HideHpThreshold;
-        public bool ShowMp => WindowManager.ViewModels.Group.Size <= App.Settings.HideMpThreshold;
-        public bool ShowBuffs => WindowManager.ViewModels.Group.Size <= App.Settings.HideBuffsThreshold;
-        public bool ShowDebuffs => WindowManager.ViewModels.Group.Size <= App.Settings.HideDebuffsThreshold;
-        public bool ShowLaurel => App.Settings.ShowMembersLaurels;
-        public bool ShowAwaken => App.Settings.ShowAwakenIcon;
-        public bool ShowHpNumbers => App.Settings.ShowMembersHpNumbers && ShowHp;
+        public bool ShowHp => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
+        public bool ShowMp => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
+        public bool ShowBuffs => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
+        public bool ShowDebuffs => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
+        public bool ShowLaurel => App.Settings.GroupWindowSettings.ShowLaurels;
+        public bool ShowAwaken => App.Settings.GroupWindowSettings.ShowAwakenIcon;
+        public bool ShowHpNumbers => App.Settings.GroupWindowSettings.ShowHpLabels && ShowHp;
         public DataTemplateSelector CurrentAbnormalityTemplateSelector
         {
             get => _currentAbnormalityTemplateSelector;

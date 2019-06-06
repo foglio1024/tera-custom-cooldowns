@@ -13,7 +13,6 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
-using TCC.Settings;
 using TCC.Windows;
 
 using TeraDataLite;

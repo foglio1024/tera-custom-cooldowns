@@ -150,7 +150,7 @@ namespace TCC
 
         public static void Restart()
         {
-            App.Settings.Save();
+            Settings.Save();
             Process.Start("TCC.exe", "--restart");
             Close();
         }
@@ -159,7 +159,7 @@ namespace TCC
         {
             if (releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
             PacketAnalyzer.Sniffer.Enabled = false;
-            App.Settings.Save();
+            Settings.Save();
             WindowManager.Dispose();
             ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
             UpdateManager.StopTimer();

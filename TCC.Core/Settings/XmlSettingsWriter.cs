@@ -22,7 +22,7 @@ namespace TCC.Settings
         {
             var xSettings = new XElement("Settings",
                 new XElement("WindowSettings",
-                     App.Settings.BossWindowSettings.ToXElement("BossWindow"),
+                     App.Settings.NpcWindowSettings.ToXElement("BossWindow"),
                      App.Settings.BuffWindowSettings.ToXElement("BuffWindow"),
                      App.Settings.CharacterWindowSettings.ToXElement("CharacterWindow"),
                      App.Settings.CooldownWindowSettings.ToXElement("CooldownWindow"),
@@ -88,23 +88,23 @@ namespace TCC.Settings
             /* add new settings down here */
             return new XElement("OtherSettings",
                 // Buff
-                new XAttribute(nameof(SettingsContainer.BuffsDirection), App.Settings.BuffsDirection),
-                new XAttribute(nameof(SettingsContainer.ShowAllMyAbnormalities), App.Settings.ShowAllMyAbnormalities), //Add My Abnormals Setting by HQ
+                new XAttribute(nameof(BuffWindowSettings.Direction), App.Settings.BuffWindowSettings.Direction),
+                new XAttribute(nameof(BuffWindowSettings.ShowAll), App.Settings.BuffWindowSettings.ShowAll), //Add My Abnormals Setting by HQ
                                                                                                                        // Character
-                new XAttribute(nameof(SettingsContainer.CharacterWindowCompactMode), App.Settings.CharacterWindowCompactMode),
+                new XAttribute("CharacterWindowCompactMode", App.Settings.CharacterWindowSettings.CompactMode),
                 // Cooldown
                 new XAttribute(nameof(CooldownWindowSettings.Mode), App.Settings.CooldownWindowSettings.Mode),
                 new XAttribute(nameof(CooldownWindowSettings.ShowItems), App.Settings.CooldownWindowSettings.ShowItems),
                 new XAttribute(nameof(SettingsContainer.SkillShape), App.Settings.SkillShape),
                 // Boss
-                new XAttribute(nameof(SettingsContainer.ShowOnlyBosses), App.Settings.ShowOnlyBosses),
-                new XAttribute(nameof(SettingsContainer.EnrageLabelMode), App.Settings.EnrageLabelMode),
-                new XAttribute(nameof(SettingsContainer.AccurateHp), App.Settings.AccurateHp),
+                new XAttribute(nameof(NpcWindowSettings.ShowOnlyBosses), App.Settings.NpcWindowSettings.ShowOnlyBosses),
+                new XAttribute(nameof(NpcWindowSettings.EnrageLabelMode), App.Settings.NpcWindowSettings.EnrageLabelMode),
+                new XAttribute(nameof(NpcWindowSettings.AccurateHp), App.Settings.NpcWindowSettings.AccurateHp),
                 // Class
-                new XAttribute(nameof(SettingsContainer.WarriorShowTraverseCut), App.Settings.WarriorShowTraverseCut),
-                new XAttribute(nameof(SettingsContainer.WarriorShowEdge), App.Settings.WarriorShowEdge),
-                new XAttribute(nameof(SettingsContainer.WarriorEdgeMode), App.Settings.WarriorEdgeMode),
-                new XAttribute(nameof(SettingsContainer.SorcererReplacesElementsInCharWindow), App.Settings.SorcererReplacesElementsInCharWindow),
+                new XAttribute(nameof(ClassWindowSettings.WarriorShowTraverseCut), App.Settings.ClassWindowSettings.WarriorShowTraverseCut),
+                new XAttribute(nameof(ClassWindowSettings.WarriorShowEdge), App.Settings.ClassWindowSettings.WarriorShowEdge),
+                new XAttribute(nameof(ClassWindowSettings.WarriorEdgeMode), App.Settings.ClassWindowSettings.WarriorEdgeMode),
+                new XAttribute(nameof(ClassWindowSettings.SorcererReplacesElementsInCharWindow), App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow),
                 // Chat
                 new XAttribute(nameof(SettingsContainer.MaxMessages), App.Settings.MaxMessages),
                 new XAttribute(nameof(SettingsContainer.SpamThreshold), App.Settings.SpamThreshold),
@@ -118,25 +118,20 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsContainer.ChatScrollAmount), App.Settings.ChatScrollAmount),
                 new XAttribute(nameof(SettingsContainer.UserExcludedSysMsg), App.Settings.UserExcludedSysMsg.ToCSV()),
                 // Group
-                new XAttribute(nameof(SettingsContainer.IgnoreMeInGroupWindow), App.Settings.IgnoreMeInGroupWindow),
-                new XAttribute(nameof(SettingsContainer.IgnoreGroupBuffs), App.Settings.IgnoreGroupBuffs),
-                new XAttribute(nameof(SettingsContainer.IgnoreGroupDebuffs), App.Settings.IgnoreGroupDebuffs),
-                new XAttribute(nameof(SettingsContainer.DisablePartyMP), App.Settings.DisablePartyMP),
-                new XAttribute(nameof(SettingsContainer.DisablePartyHP), App.Settings.DisablePartyHP),
-                new XAttribute(nameof(SettingsContainer.DisablePartyAbnormals), App.Settings.DisablePartyAbnormals),
-                new XAttribute(nameof(SettingsContainer.ShowOnlyAggroStacks), App.Settings.ShowOnlyAggroStacks),
-                new XAttribute(nameof(SettingsContainer.GroupSizeThreshold), App.Settings.GroupSizeThreshold),
-                new XAttribute(nameof(SettingsContainer.HideHpThreshold), App.Settings.HideHpThreshold),
-                new XAttribute(nameof(SettingsContainer.HideMpThreshold), App.Settings.HideMpThreshold),
-                new XAttribute(nameof(SettingsContainer.DisableAbnormalitiesThreshold), App.Settings.DisableAbnormalitiesThreshold),
-                new XAttribute(nameof(SettingsContainer.HideBuffsThreshold), App.Settings.HideBuffsThreshold),
-                new XAttribute(nameof(SettingsContainer.HideDebuffsThreshold), App.Settings.HideDebuffsThreshold),
-                new XAttribute(nameof(SettingsContainer.ShowMembersLaurels), App.Settings.ShowMembersLaurels),
-                new XAttribute(nameof(SettingsContainer.ShowGroupWindowDetails), App.Settings.ShowGroupWindowDetails),
-                new XAttribute(nameof(SettingsContainer.ShowAwakenIcon), App.Settings.ShowAwakenIcon),
-                new XAttribute(nameof(SettingsContainer.ShowAllGroupAbnormalities), App.Settings.ShowAllGroupAbnormalities),
-                new XAttribute(nameof(SettingsContainer.ShowMembersHpNumbers), App.Settings.ShowMembersHpNumbers),
-                new XAttribute(nameof(SettingsContainer.GroupWindowLayout), App.Settings.GroupWindowLayout),
+                new XAttribute("IgnoreMeInGroupWindow", App.Settings.GroupWindowSettings.IgnoreMe),
+                new XAttribute("ShowOnlyAggroStacks", App.Settings.GroupWindowSettings.ShowOnlyAggroStacks),
+                new XAttribute("GroupSizeThreshold", App.Settings.GroupWindowSettings.GroupSizeThreshold),
+                new XAttribute("HideHpThreshold", App.Settings.GroupWindowSettings.HideHpThreshold),
+                new XAttribute("HideMpThreshold", App.Settings.GroupWindowSettings.HideMpThreshold),
+                new XAttribute("DisableAbnormalitiesThreshold", App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold),
+                new XAttribute("HideBuffsThreshold", App.Settings.GroupWindowSettings.HideBuffsThreshold),
+                new XAttribute("HideDebuffsThreshold", App.Settings.GroupWindowSettings.HideDebuffsThreshold),
+                new XAttribute("ShowMembersLaurels", App.Settings.GroupWindowSettings.ShowLaurels),
+                new XAttribute("ShowGroupWindowDetails", App.Settings.GroupWindowSettings.ShowDetails),
+                new XAttribute("ShowAwakenIcon", App.Settings.GroupWindowSettings.ShowAwakenIcon),
+                new XAttribute("ShowAllGroupAbnormalities", App.Settings.GroupWindowSettings.ShowAllAbnormalities),
+                new XAttribute("ShowMembersHpNumbers", App.Settings.GroupWindowSettings.ShowHpLabels),
+                new XAttribute("GroupWindowLayout", App.Settings.GroupWindowSettings.Layout),
                 // Misc
                 new XAttribute(nameof(SettingsContainer.ForceSoftwareRendering), App.Settings.ForceSoftwareRendering),
                 new XAttribute(nameof(SettingsContainer.HighPriority), App.Settings.HighPriority),
@@ -154,19 +149,19 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsContainer.TwitchName), App.Settings.TwitchName),
                 new XAttribute(nameof(SettingsContainer.TwitchToken), App.Settings.TwitchToken),
                 new XAttribute(nameof(SettingsContainer.TwitchChannelName), App.Settings.TwitchChannelName),
-                new XAttribute(nameof(SettingsContainer.ShowFlightEnergy), App.Settings.ShowFlightEnergy),
                 new XAttribute(nameof(SettingsContainer.LfgEnabled), App.Settings.LfgEnabled),
                 new XAttribute(nameof(SettingsContainer.UseHotkeys), App.Settings.UseHotkeys),
                 new XAttribute(nameof(SettingsContainer.HideHandles), App.Settings.HideHandles),
                 new XAttribute(nameof(SettingsContainer.ShowTradeLfg), App.Settings.ShowTradeLfg),
                 new XAttribute(nameof(SettingsContainer.LanguageOverride), App.Settings.LanguageOverride),
-                new XAttribute(nameof(SettingsContainer.FlightGaugeRotation), App.Settings.FlightGaugeRotation),
-                new XAttribute(nameof(SettingsContainer.FlipFlightGauge), App.Settings.FlipFlightGauge),
+                //new XAttribute("ShowFlightEnergy", App.Settings.FlightGaugeWindowSettings.ShowFlightEnergy),
+                new XAttribute("FlightGaugeRotation", App.Settings.FlightGaugeWindowSettings.Rotation),
+                new XAttribute("FlipFlightGauge", App.Settings.FlightGaugeWindowSettings.Flip),
                 new XAttribute(nameof(SettingsContainer.AbnormalityShape), App.Settings.AbnormalityShape),
                 new XAttribute(nameof(SettingsContainer.Npcap), App.Settings.Npcap),
                 new XAttribute(nameof(SettingsContainer.EthicalMode), App.Settings.EthicalMode),
                 new XAttribute(nameof(SettingsContainer.CheckOpcodesHash), App.Settings.CheckOpcodesHash),
-                new XAttribute(nameof(SettingsContainer.ShowNotificationBubble), App.Settings.ShowNotificationBubble),
+                new XAttribute(nameof(FloatingButtonWindowSettings.ShowNotificationBubble), App.Settings.FloatingButtonSettings.ShowNotificationBubble),
                 new XAttribute(nameof(SettingsContainer.FpsAtGuardian), App.Settings.FpsAtGuardian),
                 new XAttribute(nameof(SettingsContainer.ExperimentalNotification), App.Settings.ExperimentalNotification),
                 new XAttribute(nameof(SettingsContainer.EnableProxy), App.Settings.EnableProxy),
@@ -179,8 +174,8 @@ namespace TCC.Settings
         }
         private static XElement BuildGroupAbnormalsXElement()
         {
-            var result = new XElement(nameof(SettingsContainer.GroupAbnormals));
-            foreach (var pair in App.Settings.GroupAbnormals)
+            var result = new XElement("GroupAbnormals");
+            foreach (var pair in App.Settings.GroupWindowSettings.GroupAbnormals)
             {
                 var c = pair.Key;
                 var sb = new StringBuilder();
@@ -198,8 +193,8 @@ namespace TCC.Settings
         //Add My Abnormals Setting by HQ ===========================================================
         private static XElement BuildMyAbnormalsXElement()
         {
-            var result = new XElement(nameof(SettingsContainer.MyAbnormals));
-            foreach (var pair in App.Settings.MyAbnormals)
+            var result = new XElement(nameof(SettingsContainer.BuffWindowSettings.MyAbnormals));
+            foreach (var pair in App.Settings.BuffWindowSettings.MyAbnormals)
             {
                 var c = pair.Key;
                 var sb = new StringBuilder();

@@ -16,7 +16,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.ClassWindowSettings, ignoreSize: true, undimOnFlyingGuardian:false);
+            Init(App.Settings.ClassWindowSettings);
             App.Settings.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
 
             if (!SessionManager.Logged) return;

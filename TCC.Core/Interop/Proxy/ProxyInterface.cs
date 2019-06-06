@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using TCC.Settings;
 
 namespace TCC.Interop.Proxy
 {

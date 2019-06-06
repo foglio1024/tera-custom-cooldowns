@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Windows;
 using TCC.Data;
@@ -11,8 +10,6 @@ namespace TCC.Settings
 {
     public class JsonSettingsReader : SettingsReaderBase
     {
-        private JObject _jSettings;
-
         public JsonSettingsReader()
         {
             FileName = SettingsGlobals.JsonFileName;

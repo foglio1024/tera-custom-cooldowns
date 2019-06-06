@@ -6,7 +6,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
-using TCC.Settings;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
 

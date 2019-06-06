@@ -406,7 +406,7 @@ namespace TCC
             App.Settings.CharacterWindowSettings.MakePositionsGlobal();
             App.Settings.GroupWindowSettings.MakePositionsGlobal();
             App.Settings.BuffWindowSettings.MakePositionsGlobal();
-            App.Settings.BossWindowSettings.MakePositionsGlobal();
+            App.Settings.NpcWindowSettings.MakePositionsGlobal();
 
             App.Settings.Save();
         }

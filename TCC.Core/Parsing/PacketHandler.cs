@@ -1,19 +1,15 @@
 ﻿using FoglioUtils.Extensions;
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Settings;
-using TCC.Sniffing;
 using TCC.ViewModels;
 using TCC.Windows;
 

@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
-using FoglioUtils.Extensions;
 using TCC.Windows.Widgets;
 using TeraDataLite;
 

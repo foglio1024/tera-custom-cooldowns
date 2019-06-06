@@ -28,7 +28,7 @@ namespace TCC.Windows.Widgets
             FlyingGuardianDataProvider.StacksChanged += SetStacks;
             SessionManager.CombatChanged += OnCombatChanged;
 
-            Init(App.Settings.FlightGaugeWindowSettings, perClassPosition: false);
+            Init(App.Settings.FlightGaugeWindowSettings);
             Opacity = 0;
 
             _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
@@ -54,7 +54,7 @@ namespace TCC.Windows.Widgets
 
         public void SetEnergy(double val)
         {
-            if (!App.Settings.ShowFlightEnergy) return;
+            if (!App.Settings.FlightGaugeWindowSettings.Enabled) return;
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (Opacity == 0) ShowWindow();

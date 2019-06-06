@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using TCC.Data.Pc;
-using TCC.Settings;
 using TeraDataLite;
 
 namespace TCC.ViewModels
@@ -11,7 +10,7 @@ namespace TCC.ViewModels
         public Player Player => SessionManager.CurrentPlayer;
 
 
-        public bool CompactMode => App.Settings.CharacterWindowCompactMode;
+        public bool CompactMode => App.Settings.CharacterWindowSettings.CompactMode;
 
         public bool ShowRe => (!App.Settings.ClassWindowSettings.Visible || !App.Settings.ClassWindowSettings.Enabled) &&
                               (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
@@ -20,7 +19,7 @@ namespace TCC.ViewModels
         public bool ShowElements => Player.Class == Class.Sorcerer &&
                                  (!App.Settings.ClassWindowSettings.Visible
                                  || !App.Settings.ClassWindowSettings.Enabled
-                                 || !App.Settings.SorcererReplacesElementsInCharWindow);
+                                 || !App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow);
 
         public CharacterWindowViewModel()
         {
@@ -50,7 +49,7 @@ namespace TCC.ViewModels
             N(nameof(CompactMode));
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                WindowManager.CharacterWindow.Left = App.Settings.CharacterWindowCompactMode
+                WindowManager.CharacterWindow.Left = App.Settings.CharacterWindowSettings.CompactMode
                 ? WindowManager.CharacterWindow.Left + 175
                 : WindowManager.CharacterWindow.Left - 175;
             }), DispatcherPriority.Background);

@@ -1,19 +1,17 @@
 ﻿using TeraDataLite;
-namespace TeraDataLite
-{
-}
+
 namespace TeraPacketParser.Messages
 {
     public class S_SPAWN_USER : ParsedMessage
     {
-        public ulong EntityId { get; private set; }
-        public uint ServerId { get; private set; }
-        public uint PlayerId { get; private set; }
-        public string Name { get; private set; }
-        public GearItemData Weapon { get; private set; }
-        public GearItemData Armor { get; private set; }
-        public GearItemData Gloves { get; private set; }
-        public GearItemData Boots { get; private set; }
+        public ulong EntityId { get; }
+        public uint ServerId { get; }
+        public uint PlayerId { get; }
+        public string Name { get; }
+        public GearItemData Weapon { get; }
+        public GearItemData Armor { get; }
+        public GearItemData Gloves { get; }
+        public GearItemData Boots { get; }
 
         public S_SPAWN_USER(TeraMessageReader reader) : base(reader)
         {

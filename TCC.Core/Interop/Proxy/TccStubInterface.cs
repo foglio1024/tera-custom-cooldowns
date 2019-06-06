@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using TCC.Annotations;
 using TCC.Parsing;
-using TCC.Settings;
 
 namespace TCC.Interop.Proxy
 {

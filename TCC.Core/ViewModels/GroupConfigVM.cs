@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
-using TCC.Settings;
 using TeraDataLite;
 
 namespace TCC.ViewModels
@@ -22,11 +21,11 @@ namespace TCC.ViewModels
 
         public bool ShowAll
         {
-            get => App.Settings.ShowAllGroupAbnormalities;
+            get => App.Settings.GroupWindowSettings.ShowAllAbnormalities;
             set
             {
-                if (App.Settings.ShowAllGroupAbnormalities == value) return;
-                App.Settings.ShowAllGroupAbnormalities = value;
+                if (App.Settings.GroupWindowSettings.ShowAllAbnormalities == value) return;
+                App.Settings.GroupWindowSettings.ShowAllAbnormalities = value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
                 App.Settings.Save();
                 N();

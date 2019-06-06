@@ -5,8 +5,6 @@ using System.Linq;
 using System.Windows.Threading;
 
 using TCC.Data.Abnormalities;
-using TCC.Settings;
-
 using TeraDataLite;
 
 namespace TCC.Data.Pc
@@ -381,13 +379,13 @@ namespace TCC.Data.Pc
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!App.Settings.ShowAllGroupAbnormalities)
+            if (!App.Settings.GroupWindowSettings.ShowAllAbnormalities)
             {
-                if (App.Settings.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
+                if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (App.Settings.GroupAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
+                        if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return;
                         }

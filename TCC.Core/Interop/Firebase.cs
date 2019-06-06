@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using FoglioUtils;
 using Newtonsoft.Json.Linq;
 using TCC.Interop.Proxy;
-using TCC.Settings;
 using FoglioUtils.Extensions;
 
 namespace TCC.Interop
@@ -23,7 +22,7 @@ namespace TCC.Interop
                 {"user", HashUtils.GenerateHash(SessionManager.CurrentAccountName)},
                 {"online", online }
             };
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -48,7 +47,7 @@ namespace TCC.Interop
                 { "webhook" , HashUtils.GenerateHash(webhook)},
                 { "user", HashUtils.GenerateHash(SessionManager.CurrentAccountName) }
             };
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -84,7 +83,7 @@ namespace TCC.Interop
 
             try
             {
-                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+                using (var c = MiscUtils.GetDefaultWebClient())
                 {
                     c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                     c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");

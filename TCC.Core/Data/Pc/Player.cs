@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
-using TCC.Settings;
 using TCC.ViewModels;
 using TeraDataLite;
 
@@ -396,13 +395,13 @@ namespace TCC.Data.Pc
         //Add My Abnormals Setting by HQ ============================================================
         public bool MyAbnormalsContainKey(Abnormality ab)
         {
-            if (!App.Settings.ShowAllMyAbnormalities)
+            if (!App.Settings.BuffWindowSettings.ShowAll)
             {
-                if (App.Settings.MyAbnormals.TryGetValue(Class.Common, out var commonList))
+                if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (App.Settings.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
+                        if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return false;
                         }

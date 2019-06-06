@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -9,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using TCC.Annotations;
 using TCC.Interop.Proxy;
 using TCC.TeraCommon.Sniffing;
-using TCC.TeraCommon.Sniffing.Crypt;
 using TeraPacketParser;
 using Server = TCC.TeraCommon.Game.Server;
 

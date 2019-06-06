@@ -12,7 +12,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.BossWindowSettings);
+            Init(App.Settings.NpcWindowSettings);
             MouseDoubleClick += (_, __) => VM.CopyToClipboard();
         }
     }

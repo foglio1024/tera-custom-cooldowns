@@ -169,7 +169,6 @@ namespace TeraPacketParser
         {
             if (SystemMessageNamer == null)
             {
-
                 SystemMessageNamer = new OpCodeNamer(path);
             }
             SystemMessageNamer?.Reload(Version, ReleaseVersion);

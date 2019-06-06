@@ -24,7 +24,7 @@ namespace TCC.Parsing
                 WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to check opcode file hash.\n Skipping download...", Data.NotificationType.Warning);
                 return true;
             }
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 try
                 {
@@ -100,7 +100,7 @@ namespace TCC.Parsing
 
         private static void Download(string remote, string local)
         {
-            using (var client = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var client = MiscUtils.GetDefaultWebClient())
             {
                 client.DownloadFile(remote, local);
             }

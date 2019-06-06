@@ -18,7 +18,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.GroupWindowSettings, ignoreSize: false);
+            Init(App.Settings.GroupWindowSettings);
         }
 
         //TODO: to commands in VM

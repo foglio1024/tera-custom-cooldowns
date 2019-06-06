@@ -67,7 +67,7 @@ namespace TCC
             if (SessionManager.IsMe(target))
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
-                if (!App.Settings.DisablePartyAbnormals)
+                if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold)
                 {
                     WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }

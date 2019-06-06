@@ -24,12 +24,12 @@ namespace TCC.ViewModels
             for (var i = 0; i < 13; i++)
             {
                 var ct = new MyClassToggle((Class)i, ab.Id);
-                if (App.Settings.MyAbnormals.TryGetValue(ct.Class, out var list)) ct.Selected = list.Contains(ab.Id);
+                if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(ct.Class, out var list)) ct.Selected = list.Contains(ab.Id);
                 Classes.Add(ct);
             }
             Classes.Add(new MyClassToggle(Class.Common, ab.Id)
             {
-                Selected = App.Settings.MyAbnormals[Class.Common].Contains(ab.Id)
+                Selected = App.Settings.BuffWindowSettings.MyAbnormals[Class.Common].Contains(ab.Id)
             });
 
         }

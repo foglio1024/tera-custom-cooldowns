@@ -56,9 +56,9 @@ namespace TCC.ViewModels
             DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
-        public bool ShowEdge => App.Settings.WarriorShowEdge;
-        public bool ShowTraverseCut => App.Settings.WarriorShowTraverseCut;
-        public WarriorEdgeMode WarriorEdgeMode => App.Settings.WarriorEdgeMode;
+        public bool ShowEdge => App.Settings.ClassWindowSettings.WarriorShowEdge;
+        public bool ShowTraverseCut => App.Settings.ClassWindowSettings.WarriorShowTraverseCut;
+        public WarriorEdgeMode WarriorEdgeMode => App.Settings.ClassWindowSettings.WarriorEdgeMode;
 
         public sealed override void LoadSpecialSkills()
         {

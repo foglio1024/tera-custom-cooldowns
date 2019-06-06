@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using TCC.Settings;
 using FoglioUtils.Extensions;
 
 namespace TCC.Windows

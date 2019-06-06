@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop;
-using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
@@ -55,7 +54,7 @@ namespace TCC
         {
             var closeEventsCount = WindowManager.Dashboard.VM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
-            if (App.Settings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+            if (App.Settings.FloatingButtonSettings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
         }
 

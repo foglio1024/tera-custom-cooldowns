@@ -405,14 +405,19 @@ namespace TCC.Settings
         public ChatWindowSettings()
         {
             Tabs = new List<Tab>();
+            PerClassPosition = false;
         }
         public ChatWindowSettings(WindowSettings other) : base(other)
         {
             Tabs = new List<Tab>();
+            PerClassPosition = false;
+
         }
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
             Tabs = new List<Tab>();
+            PerClassPosition = false;
+
         }
         public override XElement ToXElement(string name)
         {
@@ -452,6 +457,247 @@ namespace TCC.Settings
 
             Mode = CooldownBarMode.Fixed;
             ShowItems = true;
+            UndimOnFlyingGuardian = false;
+        }
+    }
+
+    public class CharacterWindowSettings : WindowSettings
+    {
+        public bool CompactMode { get; set; }
+
+        public CharacterWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(.4, 1, ButtonsPosition.Above);
+
+            CompactMode = true;
+            UndimOnFlyingGuardian = false;
+        }
+    }
+    public class NpcWindowSettings : WindowSettings
+    {
+        public bool ShowOnlyBosses { get; set; }
+        public bool AccurateHp { get; set; }
+        public EnrageLabelMode EnrageLabelMode { get; set; }
+
+        public NpcWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(.4, 0, ButtonsPosition.Above);
+
+            EnrageLabelMode = EnrageLabelMode.Remaining;
+            AccurateHp = true;
+            ShowOnlyBosses = false;
+        }
+    }
+
+    public class BuffWindowSettings : WindowSettings
+    {
+        public bool ShowAll { get; set; } // by HQ
+        public FlowDirection Direction { get; set; }
+        public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
+
+        public BuffWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(1, .7, ButtonsPosition.Above);
+
+            UndimOnFlyingGuardian = false;
+
+            Direction = FlowDirection.RightToLeft;
+            ShowAll = true;
+            MyAbnormals = new Dictionary<Class, List<uint>>()
+            {
+                {       0, new List<uint>{ 100800, 100801 }},
+                {(Class)1, new List<uint>{ 200230, 200231, 200232, 201701 }},
+                {(Class)2, new List<uint>{ 300800, 300801, 300805 }},
+                {(Class)3, new List<uint>{ 401705, 401706, 401710, 400500, 400501, 400508, 400710, 400711 }},
+                {(Class)4, new List<uint>{ 21170, 22120, 23180, 26250, 29011, 25170, 25171, 25201, 25202, 500100, 500150, 501600, 501650, 502001, 502051, 502070, 502071, 502072 }},
+                {(Class)5, new List<uint>{ 601400, 601450, 601460, 88608101, 88608102, 88608103, 88608104, 88608105, 88608106, 88608107, 88608108, 88608109, 88608110,602101,602102,602103,601611 }},
+                {(Class)6, new List<uint>()},
+                {(Class)7, new List<uint>()},
+                {(Class)8, new List<uint>{ 10151010, 10151131, 10151192 }},
+                {(Class)9, new List<uint>{ 89105101, 89105102, 89105103, 89105104, 89105105, 89105106, 89105107, 89105108, 89105109, 89105110, 89105111, 89105112, 89105113, 89105114, 89105115, 89105116, 89105117, 89105118, 89105119, 89105120, 10152340, 10152351 }},
+                {(Class)10, new List<uint>{ 31020, 10153210 }},
+                {(Class)11, new List<uint>{ 89314201, 89314202, 89314203, 89314204, 89314205, 89314206, 89314207, 89314208, 89314209, 89314210, 89314211, 89314212, 89314213, 89314214, 89314215, 89314216, 89314217, 89314218, 89314219, 89314220, 10154480, 10154450 }},
+                {(Class)12, new List<uint>{ 10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542 }},
+                {(Class)255, new List<uint>{ 6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001 }},
+            };
+
+        }
+    }
+    public class ClassWindowSettings : WindowSettings
+    {
+        public bool WarriorShowTraverseCut { get; set; }
+        public bool WarriorShowEdge { get; set; }
+        public WarriorEdgeMode WarriorEdgeMode { get; set; }
+        public bool SorcererReplacesElementsInCharWindow { get; set; }
+
+        public ClassWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(.25, .6, ButtonsPosition.Above);
+
+            UndimOnFlyingGuardian = false;
+
+            WarriorShowTraverseCut = true;
+            WarriorShowEdge = true;
+            WarriorEdgeMode = WarriorEdgeMode.Rhomb;
+            SorcererReplacesElementsInCharWindow = true;
+
+        }
+    }
+    public class GroupWindowSettings : WindowSettings
+    {
+        public GroupWindowLayout Layout { get; set; }
+        public bool IgnoreMe { get; set; }
+        public bool ShowOnlyAggroStacks { get; set; }
+        public bool ShowHpLabels { get; set; }
+        public bool ShowLaurels { get; set; }
+        public bool ShowAllAbnormalities { get; set; }
+        public bool ShowDetails { get; set; }
+        public bool ShowAwakenIcon { get; set; }
+        public uint GroupSizeThreshold { get; set; }
+        public uint HideBuffsThreshold { get; set; }
+        public uint HideDebuffsThreshold { get; set; }
+        public uint DisableAbnormalitiesThreshold { get; set; }
+        public uint HideHpThreshold { get; set; }
+        public uint HideMpThreshold { get; set; }
+        public Dictionary<Class, List<uint>> GroupAbnormals { get; }
+
+        public GroupWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(0, 0, ButtonsPosition.Above);
+
+            UndimOnFlyingGuardian = false;
+            IgnoreSize = false;
+
+            GroupSizeThreshold = 7;
+            HideBuffsThreshold = 7;
+            HideDebuffsThreshold = 7;
+            DisableAbnormalitiesThreshold = 7;
+            HideHpThreshold = 7;
+            HideMpThreshold = 7;
+            ShowOnlyAggroStacks = true;
+            ShowDetails = true;
+            ShowAwakenIcon = true;
+            ShowHpLabels = true;
+            Layout = GroupWindowLayout.RoleSeparated;
+            GroupAbnormals = new Dictionary<Class, List<uint>>()
+            {
+                {       0, new List<uint>()},
+                {(Class)1, new List<uint>()},
+                {(Class)2, new List<uint>()},
+                {(Class)3, new List<uint>()},
+                {(Class)4, new List<uint>()},
+                {(Class)5, new List<uint>()},
+                {(Class)6, new List<uint>()},
+                {(Class)7, new List<uint>()},
+                {(Class)8, new List<uint>()},
+                {(Class)9, new List<uint>()},
+                {(Class)10, new List<uint>()},
+                {(Class)11, new List<uint>()},
+                {(Class)12, new List<uint>()},
+                {(Class)255, new List<uint>()},
+            };
+
+        }
+    }
+    public class FlightWindowSettings : WindowSettings
+    {
+        public bool Flip { get; set; }
+        public double Rotation { get; set; }
+
+        public FlightWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = false;
+            _dimOpacity = 1;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(.5, .5, ButtonsPosition.Above);
+
+            PerClassPosition = false;
+
+            Rotation = 0;
+            Flip = false;
+        }
+    }
+    public class FloatingButtonWindowSettings : WindowSettings
+    {
+        public bool ShowNotificationBubble { get; set; }
+
+        public FloatingButtonWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = false;
+            _dimOpacity = 1;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = true;
+            Positions = new ClassPositions(0, 0, ButtonsPosition.Above);
+
+            PerClassPosition = false;
+
+            ShowNotificationBubble = true;
+
+        }
+    }
+    public class CivilUnrestWindowSettings : WindowSettings
+    {
+        public CivilUnrestWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(1, .45, ButtonsPosition.Above);
+
             UndimOnFlyingGuardian = false;
 
         }

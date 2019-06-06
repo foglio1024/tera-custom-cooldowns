@@ -42,7 +42,7 @@ namespace TeraPacketParser.Messages
                 //System.IO.File.WriteAllBytes($"q:\\{Time.Ticks}.bin", logo);
 
             }
-            catch (System.Exception)
+            catch (Exception)
             {
 
                 Console.WriteLine("Failed to parse guild logo.");

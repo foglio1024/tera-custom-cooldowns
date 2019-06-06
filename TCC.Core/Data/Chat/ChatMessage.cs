@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
 using TCC.Annotations;
-using TCC.Settings;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
 

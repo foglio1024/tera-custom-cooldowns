@@ -17,7 +17,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using TCC.Settings;
 using TCC.ViewModels;
 using TeraDataLite;
 
@@ -158,8 +157,8 @@ namespace TCC.Windows
         public void Execute(object parameter)
         {
             _toggle.Selected = !_toggle.Selected;
-            if (_toggle.Selected) App.Settings.MyAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
-            else App.Settings.MyAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
+            if (_toggle.Selected) App.Settings.BuffWindowSettings.MyAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
+            else App.Settings.BuffWindowSettings.MyAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 #pragma warning disable 0067
         public event EventHandler CanExecuteChanged;

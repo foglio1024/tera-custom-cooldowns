@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
-using TCC.Settings;
 using TCC.TeraCommon.Game;
 using TCC.ViewModels;
 using TCC.Windows;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
-using TCC.Settings;
 using TeraDataLite;
 using TeraPacketParser;
 using TeraPacketParser.Messages;
@@ -188,17 +187,17 @@ namespace TCC.Parsing
                 ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
             if (App.Settings.CooldownWindowSettings.Enabled || App.Settings.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (App.Settings.BossWindowSettings.Enabled || App.Settings.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (App.Settings.NpcWindowSettings.Enabled || App.Settings.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (App.Settings.GroupWindowSettings.Enabled)
             {
                 GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!App.Settings.DisablePartyAbnormals) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!App.Settings.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!App.Settings.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideHpThreshold) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideMpThreshold) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
             if (App.Settings.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (WindowManager.ViewModels.NPC.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (App.Settings.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (App.Settings.NpcWindowSettings.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (!SessionManager.CivilUnrestZone) PartyMemberPosition.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
 

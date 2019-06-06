@@ -16,7 +16,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             MainContent = WindowContent;
             DataContext = new CivilUnrestViewModel();
-            Init(App.Settings.CivilUnrestWindowSettings, perClassPosition:false);
+            Init(App.Settings.CivilUnrestWindowSettings);
             VM.Teleported += OnTeleported;
             ZoneBoundContent.Visibility = Visibility.Collapsed;
         }

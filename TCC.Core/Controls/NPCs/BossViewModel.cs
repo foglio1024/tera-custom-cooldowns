@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Threading;
 using TCC.Annotations;
 using TCC.Data;
-using TCC.Settings;
 using FoglioUtils.Extensions;
 
 namespace TCC.Controls.NPCs
@@ -77,7 +76,7 @@ namespace TCC.Controls.NPCs
                 }
                 else
                 {
-                    switch (App.Settings.EnrageLabelMode)
+                    switch (App.Settings.NpcWindowSettings.EnrageLabelMode)
                     {
                         case EnrageLabelMode.Next:
                             return $"{NextEnragePercentage:0.#}%";

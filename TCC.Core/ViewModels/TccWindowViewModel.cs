@@ -1,6 +1,4 @@
-﻿using TCC.Settings;
-
-namespace TCC.ViewModels
+﻿namespace TCC.ViewModels
 {
     public class TccWindowViewModel : TSPropertyChanged
     {

@@ -27,7 +27,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.CharacterWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
+            Init(App.Settings.CharacterWindowSettings);
 
             InitAnimations();
 

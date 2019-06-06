@@ -1,5 +1,4 @@
-﻿using TCC.Settings;
-using TCC.ViewModels;
+﻿using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {

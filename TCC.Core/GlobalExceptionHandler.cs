@@ -14,7 +14,6 @@ using Newtonsoft.Json.Linq;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
-using TCC.Settings;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
@@ -188,7 +187,7 @@ namespace TCC
         }
         private static async void UploadCrashDump(Exception ex)
         {
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");

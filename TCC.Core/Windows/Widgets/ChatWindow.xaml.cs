@@ -22,7 +22,7 @@ namespace TCC.Windows.Widgets
         {
             InitializeComponent();
             MainContent = ChatContent;
-            Init(ws, ignoreSize: false, undimOnFlyingGuardian: true, perClassPosition: false);
+            Init(ws);
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnIsDraggingChanged));
         }
         public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
