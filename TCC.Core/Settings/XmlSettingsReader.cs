@@ -236,7 +236,7 @@ namespace TCC.Settings
                     if (name == null) return;
                     if (name == "BossWindow") App.Settings.BossWindowSettings = ParseWindowSettings(ws);
                     else if (name == "CharacterWindow") App.Settings.CharacterWindowSettings = ParseWindowSettings(ws);
-                    else if (name == "CooldownWindow") App.Settings.CooldownWindowSettings = ParseWindowSettings(ws);
+                    else if (name == "CooldownWindow") App.Settings.CooldownWindowSettings = ParseWindowSettings(ws) as CooldownWindowSettings;
                     else if (name == "BuffWindow") App.Settings.BuffWindowSettings = ParseWindowSettings(ws);
                     else if (name == "GroupWindow") App.Settings.GroupWindowSettings = ParseWindowSettings(ws);
                     else if (name == "ClassWindow") App.Settings.ClassWindowSettings = ParseWindowSettings(ws);
@@ -297,9 +297,9 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsContainer.IgnoreGroupBuffs)) App.Settings.IgnoreGroupBuffs = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.IgnoreGroupDebuffs)) App.Settings.IgnoreGroupDebuffs = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.BuffsDirection)) App.Settings.BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
-                    else if (attr.Name == nameof(SettingsContainer.CooldownBarMode)) App.Settings.CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.EnrageLabelMode)) App.Settings.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
-                    //else if (attr.Name == nameof(SettingsContainer.ChatClickThruMode)) App.Settings.ChatClickThruMode = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), attr.Value);
+                    else if (attr.Name == "CooldownBarMode") App.Settings.CooldownWindowSettings.Mode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), attr.Value);
+                    else if (attr.Name == "ShowItemsCooldown") App.Settings.CooldownWindowSettings.ShowItems = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.WarriorEdgeMode)) App.Settings.WarriorEdgeMode = (WarriorEdgeMode)Enum.Parse(typeof(WarriorEdgeMode), attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.AbnormalityShape)) App.Settings.AbnormalityShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.SkillShape)) App.Settings.SkillShape = (ControlShape)Enum.Parse(typeof(ControlShape), attr.Value);
@@ -317,10 +317,8 @@ namespace TCC.Settings
                     else if (attr.Name == nameof(SettingsContainer.DisablePartyMP)) App.Settings.DisablePartyMP = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.ShowOnlyAggroStacks)) App.Settings.ShowOnlyAggroStacks = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.DisablePartyAbnormals)) App.Settings.DisablePartyAbnormals = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsContainer.ShowItemsCooldown)) App.Settings.ShowItemsCooldown = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.ShowMembersLaurels)) App.Settings.ShowMembersLaurels = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.AnimateChatMessages)) App.Settings.AnimateChatMessages = bool.Parse(attr.Value);
-                    //else if (attr.Name == nameof(SettingsContainer.StatSent)) App.Settings.StatSent = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.ShowFlightEnergy)) App.Settings.ShowFlightEnergy = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.LfgEnabled)) App.Settings.LfgEnabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.ShowGroupWindowDetails)) App.Settings.ShowGroupWindowDetails = bool.Parse(attr.Value);

@@ -109,7 +109,7 @@ namespace TCC.Interop.Proxy
             await TccStub.CallAsync("groupInviteUser", new JObject
             {
                 { "userName", userName },
-                { "isRaid", WindowManager.GroupWindow.VM.Raid ? 1 : 0 }
+                { "isRaid", WindowManager.ViewModels.Group.Raid ? 1 : 0 }
             });
         }
         public async void GuildInviteUser([NotNull] string userName)

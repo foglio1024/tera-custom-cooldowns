@@ -11,7 +11,7 @@ namespace TCC.Converters
             // ReSharper disable once PossibleNullReferenceException
             return SessionManager.IsMe((ulong)value)
                 ? SessionManager.CurrentPlayer.Name
-                : EntityManager.IsEntitySpawned((ulong)value) ? EntityManager.GetEntityName((ulong)value) /*(WindowManager.GroupWindow.VM.TryGetUser((ulong) value, out var p) ? p.Name*/ : "";
+                : EntityManager.IsEntitySpawned((ulong)value) ? EntityManager.GetEntityName((ulong)value) /*(WindowManager.ViewModels.Group.TryGetUser((ulong) value, out var p) ? p.Name*/ : "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

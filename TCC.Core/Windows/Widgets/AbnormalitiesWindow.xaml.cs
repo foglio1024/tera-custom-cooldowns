@@ -3,17 +3,12 @@ using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {
-    /// <summary>
-    /// Logica di interazione per AbnormalitiesWindow.xaml
-    /// </summary>
     public partial class BuffWindow
     {
-        public BuffBarWindowViewModel VM { get; }
-        public BuffWindow()
+        public BuffWindow(BuffBarWindowViewModel vm)
         {
             InitializeComponent();
-            DataContext = new BuffBarWindowViewModel();
-            VM = DataContext as BuffBarWindowViewModel;
+            DataContext = vm;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
             Init(App.Settings.BuffWindowSettings);

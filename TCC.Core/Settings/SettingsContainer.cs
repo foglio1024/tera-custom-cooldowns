@@ -67,9 +67,7 @@ namespace TCC.Settings
 
         #region Cooldown
         // Cooldown window
-        public WindowSettings CooldownWindowSettings { get; set; }
-        public bool ShowItemsCooldown { get; set; }
-        public CooldownBarMode CooldownBarMode { get; set; }
+        public CooldownWindowSettings CooldownWindowSettings { get; set; }
         #endregion
 
         #region Character
@@ -192,7 +190,7 @@ namespace TCC.Settings
             StatSentTime = DateTime.MinValue;
             LastScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(GroupWindowSettings));
-            CooldownWindowSettings = new WindowSettings(.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings));
+            CooldownWindowSettings = new CooldownWindowSettings(/*.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings)*/);
             BossWindowSettings = new WindowSettings(.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BossWindowSettings));
             BuffWindowSettings = new WindowSettings(1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BuffWindowSettings));
             CharacterWindowSettings = new WindowSettings(.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CharacterWindowSettings));
@@ -246,8 +244,6 @@ namespace TCC.Settings
                 {(Class)12, new List<uint>{ 10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542 }},
                 {(Class)255, new List<uint>{ 6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001 }},
             };
-            CooldownBarMode = CooldownBarMode.Fixed;
-            ShowItemsCooldown = true;
             EnrageLabelMode = EnrageLabelMode.Remaining;
             AccurateHp = true;
             MaxMessages = 500;

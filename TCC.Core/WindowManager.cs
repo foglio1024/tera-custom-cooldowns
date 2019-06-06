@@ -27,25 +27,20 @@ namespace TCC
 {
     public static class WindowManager
     {
-        //private static bool clickThru;
-        //private static bool isTccVisible;
-        //private static bool isFocused;
-        //private static bool skillsEnded = true;
-        //private static int focusCount;
-        //private static bool waiting;
-        //private static Timer _undimTimer = new Timer(5000);
+        /// <summary>
+        /// Container class to keep reference to view models
+        /// </summary>
+        public static class ViewModels
+        {
+            public static CooldownWindowViewModel Cooldowns { get; set; }
+            public static CharacterWindowViewModel Character { get; set; }
+            public static NpcWindowViewModel NPC { get; set; }
+            public static BuffBarWindowViewModel Abnormal { get; set; }
+            public static GroupWindowViewModel Group { get; set; }
+            public static ClassWindowViewModel Class { get; set; }
 
-        //private static List<Delegate> WindowLoadingDelegates = new List<Delegate>
-        //{
-        //    new Action(LoadGroupWindow),
-        //    new Action(LoadChatWindow),
-        //    new Action(LoadCooldownWindow),
-        //    new Action(LoadBossGaugeWindow),
-        //    new Action(LoadBuffBarWindow),
-        //    new Action(LoadCharWindow),
-        //    new Action(LoadClassWindow),
-        //    new Action(LoadInfoWindow),
-        //};
+        }
+
         public static Size ScreenSize;
 
         public static CooldownWindow CooldownWindow;
@@ -90,7 +85,6 @@ namespace TCC
             }
         }
 
-        private static System.Timers.Timer t;
         public static void UpdateScreenCorrection()
         {
             if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
@@ -156,12 +150,7 @@ namespace TCC
             if (App.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
 
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
-            //t = new System.Timers.Timer();
-            //t.Interval = 1000;
-            //t.Elapsed += (_, __) => PrintDispatcher();
-            //t.Start();
-            ToolTipService.ShowDurationProperty.OverrideMetadata(
-                typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+            ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
         }
 
@@ -239,13 +228,7 @@ namespace TCC
         }
         private static void LoadWindows()
         {
-            //waiting = true;
-            //foreach (var del in WindowLoadingDelegates)
-            //{
-            //    waiting = true;
-            //    del.DynamicInvoke();
-            //    while (waiting) { }
-            //}
+
             RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
             LoadCooldownWindow();
             LoadClassWindow();
@@ -284,10 +267,10 @@ namespace TCC
         {
             var cooldownWindowThread = new Thread(() =>
             {
-                SynchronizationContext.SetSynchronizationContext(
-                    new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
-                CooldownWindow = new CooldownWindow();
+                ViewModels.Cooldowns = new CooldownWindowViewModel ();
+                CooldownWindow = new CooldownWindow(ViewModels.Cooldowns);
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
@@ -304,7 +287,8 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(
                     new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
-                ClassWindow = new ClassWindow();
+                ViewModels.Class = new ClassWindowViewModel();
+                ClassWindow = new ClassWindow(ViewModels.Class);
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
@@ -320,7 +304,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 SessionManager.CurrentPlayer = new Player();
-                CharacterWindow = new CharacterWindow();
+                ViewModels.Character = new CharacterWindowViewModel();
+                CharacterWindow = new CharacterWindow(ViewModels.Character);
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
@@ -335,7 +320,8 @@ namespace TCC
             var bossGaugeThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                BossWindow = new BossWindow();
+                ViewModels.NPC = new NpcWindowViewModel();
+                BossWindow = new BossWindow(ViewModels.NPC);
                 if (BossWindow.WindowSettings.Enabled) BossWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
@@ -350,7 +336,8 @@ namespace TCC
             var buffBarThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                BuffWindow = new BuffWindow();
+                ViewModels.Abnormal = new BuffBarWindowViewModel();
+                BuffWindow = new BuffWindow(ViewModels.Abnormal);
                 if (BuffWindow.WindowSettings.Enabled) BuffWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
@@ -366,7 +353,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-                GroupWindow = new GroupWindow();
+                ViewModels.Group = new GroupWindowViewModel();
+                GroupWindow = new GroupWindow(ViewModels.Group);
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();

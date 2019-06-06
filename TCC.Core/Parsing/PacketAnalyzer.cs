@@ -92,7 +92,7 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
             WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
 
-            WindowManager.GroupWindow.VM.ClearAllAbnormalities();
+            WindowManager.ViewModels.Group.ClearAllAbnormalities();
             WindowManager.Dashboard.VM.UpdateBuffs();
             WindowManager.Dashboard.VM.SaveCharacters();
             SessionManager.CurrentPlayer.ClearAbnormalities();

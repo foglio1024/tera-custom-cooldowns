@@ -25,7 +25,7 @@ namespace TCC.Windows
         public SkillConfigWindow()
         {
             InitializeComponent();
-            DataContext = WindowManager.CooldownWindow.VM;
+            DataContext = WindowManager.ViewModels.Cooldowns;
             VM = DataContext as CooldownWindowViewModel;
 
             Closing += OnClosing;

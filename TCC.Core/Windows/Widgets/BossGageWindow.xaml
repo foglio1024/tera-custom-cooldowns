@@ -9,7 +9,7 @@
              mc:Ignorable="d"
         Title="TCC NPC" 
         Style="{StaticResource BaseWindowStyle}"
-        MouseLeftButtonDown="Drag" d:DataContext="{d:DesignInstance vm:BossGageWindowViewModel}">
+        MouseLeftButtonDown="Drag" d:DataContext="{d:DesignInstance vm:NpcWindowViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

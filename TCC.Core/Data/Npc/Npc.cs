@@ -204,14 +204,14 @@ namespace TCC.Data.NPCs
         {
             get
             {
-                WindowManager.BossWindow.VM.GuildIds.TryGetValue(EntityId, out var val);
+                WindowManager.ViewModels.NPC.GuildIds.TryGetValue(EntityId, out var val);
                 return val;
             }
         }
 
         //public NPC(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         //{
-        //    _dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
+        //    _dispatcher = WindowManager.ViewModels.NPC.GetDispatcher();
         //    EntityId = eId;
         //    Name = EntityManager.MonsterDatabase.GetName(tId, zId);
         //    ZoneId = zId;
@@ -223,7 +223,7 @@ namespace TCC.Data.NPCs
 
         //    IsShieldPhase = false;
         //    IsSelected = false;
-        //    if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.Phase1)
+        //    if (WindowManager.ViewModels.NPC.CurrentHHphase == HarrowholdPhase.Phase1)
         //    {
         //        ShieldDuration = new DispatcherTimer();
         //        ShieldDuration.Interval = TimeSpan.FromSeconds(13);
@@ -233,7 +233,7 @@ namespace TCC.Data.NPCs
         //}
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
-            Dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
+            Dispatcher = WindowManager.ViewModels.NPC.GetDispatcher();
             EntityId = eId;
             Name = SessionManager.DB.MonsterDatabase.GetName(tId, zId);
             MaxHP = SessionManager.DB.MonsterDatabase.GetMaxHP(tId, zId);
@@ -250,7 +250,7 @@ namespace TCC.Data.NPCs
             TimerPattern?.SetTarget(this);
             if (IsPhase1Dragon)
             {
-                _shieldDuration = new Timer { Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000 };
+                _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
                 _shieldDuration.Elapsed += ShieldFailed;
             }
         }

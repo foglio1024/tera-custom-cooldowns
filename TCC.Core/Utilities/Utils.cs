@@ -84,7 +84,7 @@ namespace TCC
 
         public static C CurrentClassVM<C>() where C : BaseClassLayoutVM
         {
-            return WindowManager.ClassWindow.VM.CurrentManager as C;
+            return WindowManager.ViewModels.Class.CurrentManager as C;
         }
 
     }

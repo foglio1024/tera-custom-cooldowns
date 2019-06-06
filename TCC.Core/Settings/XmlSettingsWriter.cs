@@ -93,8 +93,8 @@ namespace TCC.Settings
                                                                                                                        // Character
                 new XAttribute(nameof(SettingsContainer.CharacterWindowCompactMode), App.Settings.CharacterWindowCompactMode),
                 // Cooldown
-                new XAttribute(nameof(SettingsContainer.CooldownBarMode), App.Settings.CooldownBarMode),
-                new XAttribute(nameof(SettingsContainer.ShowItemsCooldown), App.Settings.ShowItemsCooldown),
+                new XAttribute(nameof(CooldownWindowSettings.Mode), App.Settings.CooldownWindowSettings.Mode),
+                new XAttribute(nameof(CooldownWindowSettings.ShowItems), App.Settings.CooldownWindowSettings.ShowItems),
                 new XAttribute(nameof(SettingsContainer.SkillShape), App.Settings.SkillShape),
                 // Boss
                 new XAttribute(nameof(SettingsContainer.ShowOnlyBosses), App.Settings.ShowOnlyBosses),

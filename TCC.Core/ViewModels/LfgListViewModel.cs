@@ -63,7 +63,7 @@ namespace TCC.ViewModels
         public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
                                                                                               || listing.LeaderName == SessionManager.CurrentPlayer.Name
                                                                                               || listing.Players.ToSyncList().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)
-                                                                                              || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
+                                                                                              || WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
         public void NotifyMyLfg()
         {
             N(nameof(AmIinLfg));
@@ -74,10 +74,10 @@ namespace TCC.ViewModels
             }
             MyLfg?.NotifyMyLfg();
         }
-        public bool AmILeader => WindowManager.GroupWindow.VM.AmILeader;
+        public bool AmILeader => WindowManager.ViewModels.Group.AmILeader;
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId)
                                                                    || listing.LeaderId == SessionManager.CurrentPlayer.PlayerId
-                                                                   || WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+                                                                   || WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
 
         public bool StayClosed { get; set; }
@@ -89,7 +89,7 @@ namespace TCC.ViewModels
             ListingsView = CollectionViewUtils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
-            WindowManager.GroupWindow.VM.PropertyChanged += OnGroupWindowVmPropertyChanged;
+            WindowManager.ViewModels.Group.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher){ IsEnabled = false};
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };

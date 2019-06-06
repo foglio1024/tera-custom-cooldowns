@@ -135,7 +135,7 @@ namespace TCC
         public static void SetPlayerSt(float st)
         {
             CurrentPlayer.CurrentST = st;
-            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetST(Convert.ToInt32(st));
+            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ViewModels.Class.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -167,7 +167,7 @@ namespace TCC
         public static void SetPlayerMaxSt(int maxSt)
         {
             CurrentPlayer.MaxST = maxSt;
-            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ClassWindow.VM.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
+            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ViewModels.Class.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
@@ -225,7 +225,7 @@ namespace TCC
 
             if (App.Settings.ClassWindowSettings.Enabled
                 && CurrentPlayer.Class == Class.Sorcerer
-                && WindowManager.ClassWindow.VM.CurrentManager is SorcererLayoutVM sm)
+                && WindowManager.ViewModels.Class.CurrentManager is SorcererLayoutVM sm)
             {
                 sm.NotifyElementChanged();
             }

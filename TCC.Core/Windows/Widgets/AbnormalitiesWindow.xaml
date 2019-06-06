@@ -10,7 +10,7 @@
         Title="TCC buffs" 
         MouseLeftButtonDown="Drag"
         Style="{StaticResource BaseWindowStyle}"
-             d:DataContext="{d:DesignInstance vm:BuffBarWindowViewModel}"
+        d:DataContext="{d:DesignInstance vm:BuffBarWindowViewModel}"
         >
     <Grid>
         <Grid.RowDefinitions>

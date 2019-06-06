@@ -343,14 +343,14 @@ namespace TCC.Controls.Skills
                 //wait a bit and restart any running skill
                 Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(t =>
                 {
-                    WindowManager.CooldownWindow.VM.MainSkills.ToList().ForEach(x =>
+                    WindowManager.ViewModels.Cooldowns.MainSkills.ToList().ForEach(x =>
                     {
                         if (x.Seconds > 0)
                         {
                             x.Start(x.Seconds * 1000 - delay);
                         }
                     });
-                    WindowManager.CooldownWindow.VM.SecondarySkills.ToList().ForEach(x =>
+                    WindowManager.ViewModels.Cooldowns.SecondarySkills.ToList().ForEach(x =>
                     {
                         if (x.Seconds > 0)
                         {
@@ -359,7 +359,7 @@ namespace TCC.Controls.Skills
                     });
                 });
 
-                WindowManager.CooldownWindow.VM.Save();
+                WindowManager.ViewModels.Cooldowns.Save();
             }
         }
 

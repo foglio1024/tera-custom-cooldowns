@@ -34,10 +34,10 @@ namespace TCC.Controls.Group
         private DataTemplateSelector _currentAbnormalityTemplateSelector;
         private DataTemplateSelector _initialAbnormalityDataTemplateSelector;
 
-        public bool ShowHp => WindowManager.GroupWindow.VM.Size <= App.Settings.HideHpThreshold;
-        public bool ShowMp => WindowManager.GroupWindow.VM.Size <= App.Settings.HideMpThreshold;
-        public bool ShowBuffs => WindowManager.GroupWindow.VM.Size <= App.Settings.HideBuffsThreshold;
-        public bool ShowDebuffs => WindowManager.GroupWindow.VM.Size <= App.Settings.HideDebuffsThreshold;
+        public bool ShowHp => WindowManager.ViewModels.Group.Size <= App.Settings.HideHpThreshold;
+        public bool ShowMp => WindowManager.ViewModels.Group.Size <= App.Settings.HideMpThreshold;
+        public bool ShowBuffs => WindowManager.ViewModels.Group.Size <= App.Settings.HideBuffsThreshold;
+        public bool ShowDebuffs => WindowManager.ViewModels.Group.Size <= App.Settings.HideDebuffsThreshold;
         public bool ShowLaurel => App.Settings.ShowMembersLaurels;
         public bool ShowAwaken => App.Settings.ShowAwakenIcon;
         public bool ShowHpNumbers => App.Settings.ShowMembersHpNumbers && ShowHp;
@@ -59,8 +59,8 @@ namespace TCC.Controls.Group
             Loaded += (_, __) =>
             {
                 UpdateSettings();
-                WindowManager.GroupWindow.VM.SettingsUpdated += UpdateSettings;
-                WindowManager.GroupWindow.VM.PropertyChanged += (___, args) => { if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings(); };
+                WindowManager.ViewModels.Group.SettingsUpdated += UpdateSettings;
+                WindowManager.ViewModels.Group.PropertyChanged += (___, args) => { if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings(); };
                 SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
             };
             Unloaded += (_, __) => SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;

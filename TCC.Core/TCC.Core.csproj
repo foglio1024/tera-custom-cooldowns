@@ -101,7 +101,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -559,7 +559,7 @@
     <Compile Include="ViewModels\ClassManagers\BerserkerLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerLayoutVM.cs" />
     <Compile Include="ViewModels\TempPrivateMessage.cs" />
-    <Compile Include="ViewModels\ClassManagers\DurationCooldownIndicator.cs" />
+    <Compile Include="ViewModels\DurationCooldownIndicator.cs" />
     <Compile Include="ViewModels\ClassManagers\GunnerLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\LancerLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\ArcherLayoutVM.cs" />
@@ -1317,10 +1317,7 @@
     <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
     <Resource Include="resources\images\enraged.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Helpers\" />
-    <Folder Include="ViewModels\WindowManagers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

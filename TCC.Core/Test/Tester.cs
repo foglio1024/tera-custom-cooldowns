@@ -75,8 +75,8 @@ namespace TCC.Test
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
             SessionManager.CurrentPlayer.Class = c;
-            WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
-            WindowManager.CooldownWindow.VM.LoadSkills(c);
+            WindowManager.ViewModels.Class.CurrentClass = SessionManager.CurrentPlayer.Class;
+            WindowManager.ViewModels.Cooldowns.LoadSkills(c);
         }
         public static void ForceEncounter(bool val = true)
         {
@@ -89,7 +89,7 @@ namespace TCC.Test
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l)
         {
-            WindowManager.GroupWindow.VM.AddOrUpdateMember(new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            WindowManager.ViewModels.Group.AddOrUpdateMember(new User(WindowManager.ViewModels.Group.GetDispatcher())
             {
                 Alive = true,
                 Awakened = true,
@@ -160,8 +160,8 @@ namespace TCC.Test
         }
         public static void UpdateFakeMember(ulong eid)
         {
-            WindowManager.GroupWindow.VM.TryGetUser(eid, out User l);
-            var ut = new User(WindowManager.GroupWindow.VM.GetDispatcher())
+            WindowManager.ViewModels.Group.TryGetUser(eid, out User l);
+            var ut = new User(WindowManager.ViewModels.Group.GetDispatcher())
             {
                 Name = l.Name,
                 PlayerId = l.PlayerId,
@@ -174,7 +174,7 @@ namespace TCC.Test
                 UserClass = l.UserClass,
                 Awakened = l.Awakened,
             };
-            Task.Delay(2000).ContinueWith(t => WindowManager.GroupWindow.VM.AddOrUpdateMember(ut));
+            Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.Group.AddOrUpdateMember(ut));
         }
         public static void ProfileThreadsUsage()
         {

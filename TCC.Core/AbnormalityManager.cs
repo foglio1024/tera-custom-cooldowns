@@ -69,7 +69,7 @@ namespace TCC
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (!App.Settings.DisablePartyAbnormals)
                 {
-                    WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+                    WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
             }
             else
@@ -82,7 +82,7 @@ namespace TCC
         {
             if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (SessionManager.IsMe(target)) EndPlayerAbnormality(ab);
-            else WindowManager.BossWindow.VM.EndNpcAbnormality(target, ab);
+            else WindowManager.ViewModels.NPC.EndNpcAbnormality(target, ab);
 
             return true;
         }
@@ -115,8 +115,8 @@ namespace TCC
             {
                 SkillManager.AddPassivitySkill(ab.Id, passivity);
             }
-            else if (WindowManager.CooldownWindow.VM.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
-                  || WindowManager.CooldownWindow.VM.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+            else if (WindowManager.ViewModels.Cooldowns.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
+                  || WindowManager.ViewModels.Cooldowns.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
             {
                 //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
                 SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
@@ -125,7 +125,7 @@ namespace TCC
 
         private static void EndPlayerAbnormality(Abnormality ab)
         {
-            WindowManager.GroupWindow.VM.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+            WindowManager.ViewModels.Group.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
 
             if (ab.Type == AbnormalityType.Buff)
             {
@@ -152,7 +152,7 @@ namespace TCC
             //{
             //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
             //}
-            WindowManager.BossWindow.VM.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
+            WindowManager.ViewModels.NPC.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
         }
 
         private static bool Filter(Abnormality ab)
@@ -168,7 +168,7 @@ namespace TCC
             {
                 if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
-                WindowManager.GroupWindow.VM.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
+                WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             }));
         }
 
@@ -178,7 +178,7 @@ namespace TCC
             {
                 if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
-                WindowManager.GroupWindow.VM.EndAbnormality(ab, playerId, serverId);
+                WindowManager.ViewModels.Group.EndAbnormality(ab, playerId, serverId);
             }));
         }
     }

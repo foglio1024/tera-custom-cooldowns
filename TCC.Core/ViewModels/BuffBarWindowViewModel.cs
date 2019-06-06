@@ -7,9 +7,6 @@ namespace TCC.ViewModels
 {
     public class BuffBarWindowViewModel : TccWindowViewModel
     {
-        //private static BuffBarWindowViewModel _instance;
-        //public static BuffBarWindowViewModel Instance => _instance ?? (_instance = new BuffBarWindowViewModel());
-
         public FlowDirection Direction => App.Settings.BuffsDirection;
         public ControlShape Shape => App.Settings.AbnormalityShape;
 

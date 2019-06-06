@@ -175,7 +175,7 @@ namespace TCC.Controls.NPCs
             NPC.PropertyChanged += OnPropertyChanged;
             NPC.DeleteEvent += () =>
             {
-                WindowManager.BossWindow.VM.RemoveMe(NPC, Delay + 250);
+                WindowManager.ViewModels.NPC.RemoveMe(NPC, Delay + 250);
                 DeleteTimer.Start();
                 _numberTimer.Stop();
             };

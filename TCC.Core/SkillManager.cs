@@ -58,7 +58,7 @@ namespace TCC
             if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
-                WindowManager.CooldownWindow.VM.Change(skill, cd);
+                WindowManager.ViewModels.Cooldowns.Change(skill, cd);
             }
 
         }
@@ -67,12 +67,12 @@ namespace TCC
             if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Pass(skill)) return;
-                WindowManager.CooldownWindow.VM.ResetSkill(skill);
+                WindowManager.ViewModels.Cooldowns.ResetSkill(skill);
             }
         }
         public static void Clear()
         {
-            WindowManager.CooldownWindow.VM.ClearSkills();
+            WindowManager.ViewModels.Cooldowns.ClearSkills();
         }
 
         private static void RouteSkill(Cooldown skillCooldown)
@@ -81,11 +81,11 @@ namespace TCC
             if (skillCooldown.Duration == 0)
             {
                 skillCooldown.Dispose();
-                WindowManager.CooldownWindow.VM.Remove(skillCooldown.Skill);
+                WindowManager.ViewModels.Cooldowns.Remove(skillCooldown.Skill);
             }
             else
             {
-                WindowManager.CooldownWindow.VM.AddOrRefresh(skillCooldown);
+                WindowManager.ViewModels.Cooldowns.AddOrRefresh(skillCooldown);
             }
             App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
         }

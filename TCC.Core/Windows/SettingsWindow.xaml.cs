@@ -36,16 +36,12 @@ namespace TCC.Windows
 
         private void OpenPlayerBuffSettings(object sender, RoutedEventArgs e)
         {
-            //Add My Abnormals Setting by HQ ============================================================
-            new MyAbnormalConfigWindow().ShowWindow();
-            //===========================================================================================
+            new MyAbnormalConfigWindow().ShowWindow(); //by HQ
         }
 
         private void OpenGroupBuffSettings(object sender, RoutedEventArgs e)
         {
             new GroupAbnormalConfigWindow().ShowWindow();
-
-            //WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
         private void ResetChatWindowsPosition(object sender, RoutedEventArgs e)
         {

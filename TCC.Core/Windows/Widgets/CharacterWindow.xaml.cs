@@ -17,11 +17,11 @@ namespace TCC.Windows.Widgets
         private DoubleAnimation _stAnim;
         private DoubleAnimation _shAnim;
 
-        public CharacterWindowViewModel VM { get; }
+        private CharacterWindowViewModel VM { get; }
 
-        public CharacterWindow()
+        public CharacterWindow(CharacterWindowViewModel vm)
         {
-            DataContext = new CharacterWindowViewModel();
+            DataContext = vm;
             VM = DataContext as CharacterWindowViewModel;
 
             InitializeComponent();

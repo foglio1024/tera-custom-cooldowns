@@ -28,7 +28,7 @@ namespace TCC.Controls.Skills
         protected override void OnCooldownEnded(CooldownMode mode)
         {
             base.OnCooldownEnded(mode);
-            if(mode == CooldownMode.Normal) WindowManager.CooldownWindow.VM.Remove(Context.Skill);
+            if(mode == CooldownMode.Normal) WindowManager.ViewModels.Cooldowns.Remove(Context.Skill);
         }
         
         private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)
@@ -43,7 +43,7 @@ namespace TCC.Controls.Skills
 
         private void HideButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.CooldownWindow.VM.AddHiddenSkill(Context);
+            WindowManager.ViewModels.Cooldowns.AddHiddenSkill(Context);
             OnCooldownEnded(Context.Mode);
         }
 

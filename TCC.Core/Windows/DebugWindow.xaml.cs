@@ -69,9 +69,9 @@ namespace TCC.Windows
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
             SessionManager.CurrentPlayer.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
-            WindowManager.ClassWindow.VM.CurrentClass = SessionManager.CurrentPlayer.Class;
-            WindowManager.CooldownWindow.VM.ClearSkills();
-            WindowManager.CooldownWindow.VM.LoadSkills(SessionManager.CurrentPlayer.Class);
+            WindowManager.ViewModels.Class.CurrentClass = SessionManager.CurrentPlayer.Class;
+            WindowManager.ViewModels.Cooldowns.ClearSkills();
+            WindowManager.ViewModels.Cooldowns.LoadSkills(SessionManager.CurrentPlayer.Class);
         }
 
         private void SetSorcElement(object sender, RoutedEventArgs e)

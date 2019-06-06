@@ -111,37 +111,23 @@ namespace TCC.ViewModels
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            switch (WindowManager.ClassWindow.VM.CurrentClass)
-                {
-                    case Class.Warrior:
-                        return Warrior;
-                    case Class.Lancer:
-                        return Lancer;
-                    case Class.Slayer:
-                        return Slayer;
-                    case Class.Berserker:
-                        return Berserker;
-                    case Class.Sorcerer:
-                        return Sorcerer;
-                    case Class.Archer:
-                        return Archer;
-                    case Class.Priest:
-                        return Priest;
-                    case Class.Mystic:
-                        return Mystic;
-                    case Class.Reaper:
-                        return Reaper;
-                    case Class.Gunner:
-                        return Gunner;
-                    case Class.Brawler:
-                        return Brawler;
-                    case Class.Ninja:
-                        return Ninja;
-                    case Class.Valkyrie:
-                        return Valkyrie;
-                    default:
-                        return None;
-                }
+            switch (WindowManager.ViewModels.Class.CurrentClass)
+            {
+                case Class.Warrior: return Warrior;
+                case Class.Lancer: return Lancer;
+                case Class.Slayer: return Slayer;
+                case Class.Berserker: return Berserker;
+                case Class.Sorcerer: return Sorcerer;
+                case Class.Archer: return Archer;
+                case Class.Priest: return Priest;
+                case Class.Mystic: return Mystic;
+                case Class.Reaper: return Reaper;
+                case Class.Gunner: return Gunner;
+                case Class.Brawler: return Brawler;
+                case Class.Ninja: return Ninja;
+                case Class.Valkyrie: return Valkyrie;
+                default: return None;
+            }
         }
     }
 }

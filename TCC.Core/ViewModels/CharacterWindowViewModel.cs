@@ -1,4 +1,5 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Windows.Threading;
 using TCC.Data.Pc;
 using TCC.Settings;
 using TeraDataLite;
@@ -7,9 +8,6 @@ namespace TCC.ViewModels
 {
     public class CharacterWindowViewModel : TccWindowViewModel
     {
-        //private static CharacterWindowViewModel _instance;
-        //public static CharacterWindowViewModel Instance => _instance ?? (_instance = new CharacterWindowViewModel());
-
         public Player Player => SessionManager.CurrentPlayer;
 
 
@@ -20,9 +18,9 @@ namespace TCC.ViewModels
                                Player.Class == Class.Ninja || Player.Class == Class.Valkyrie);
 
         public bool ShowElements => Player.Class == Class.Sorcerer &&
-                                 ( !App.Settings.ClassWindowSettings.Visible 
-                                 ||!App.Settings.ClassWindowSettings.Enabled 
-                                 ||!App.Settings.SorcererReplacesElementsInCharWindow);
+                                 (!App.Settings.ClassWindowSettings.Visible
+                                 || !App.Settings.ClassWindowSettings.Enabled
+                                 || !App.Settings.SorcererReplacesElementsInCharWindow);
 
         public CharacterWindowViewModel()
         {
@@ -42,11 +40,20 @@ namespace TCC.ViewModels
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             N(e.PropertyName);
-            if (e.PropertyName == nameof(Data.Pc.Player.Class))
+            if (e.PropertyName != nameof(Data.Pc.Player.Class)) return;
+            N(nameof(ShowRe));
+            N(nameof(ShowElements));
+        }
+
+        public void InvokeCompactModeChanged()
+        {
+            N(nameof(CompactMode));
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                N(nameof(ShowRe));
-                N(nameof(ShowElements));
-            }
+                WindowManager.CharacterWindow.Left = App.Settings.CharacterWindowCompactMode
+                ? WindowManager.CharacterWindow.Left + 175
+                : WindowManager.CharacterWindow.Left - 175;
+            }), DispatcherPriority.Background);
         }
     }
 

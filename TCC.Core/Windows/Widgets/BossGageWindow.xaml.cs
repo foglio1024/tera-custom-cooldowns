@@ -4,11 +4,11 @@ namespace TCC.Windows.Widgets
 {
     public partial class BossWindow
     {
-        public BossGageWindowViewModel VM { get; }
-        public BossWindow()
+        private NpcWindowViewModel VM { get; }
+        public BossWindow(NpcWindowViewModel vm)
         {
-            DataContext = new BossGageWindowViewModel();
-            VM = DataContext as BossGageWindowViewModel;
+            DataContext = vm;
+            VM = DataContext as NpcWindowViewModel;
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;

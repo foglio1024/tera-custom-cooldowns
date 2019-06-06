@@ -16,18 +16,17 @@ namespace TCC.Settings
 {
     public class WindowSettings : TSPropertyChanged
     {
-        private double _w;
-        private double _h;
-        private bool _visible;
-        private ClickThruMode _clickThruMode;
-        private double _scale;
-        private bool _autoDim;
-        private double _dimOpacity;
-        private bool _showAlways;
-        private bool _enabled;
-        private bool _allowOffScreen;
+        protected double _w;
+        protected double _h;
+        protected bool _visible;
+        protected ClickThruMode _clickThruMode;
+        protected double _scale;
+        protected bool _autoDim;
+        protected double _dimOpacity;
+        protected bool _showAlways;
+        protected bool _enabled;
+        protected bool _allowOffScreen;
 
-        public bool ForcedClickable { get; protected set; }
 
         public event Action ResetToCenter;
         public event Action EnabledChanged;
@@ -35,20 +34,9 @@ namespace TCC.Settings
         public event Action VisibilityChanged;
 
         [JsonIgnore]
-        public RelayCommand ResetPositionCommand { get; }
-
-        [JsonIgnore]
         public string Name { [UsedImplicitly] get; }
-
-        public bool PerClassPosition { get; set; }
-
-        private Class CurrentClass()
-        {
-            var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
-            cc = PerClassPosition ? cc : Class.Common;
-            return cc;
-        }
-
+        [JsonIgnore]
+        public bool ForcedClickable { get; protected set; }
         [JsonIgnore]
         public double X
         {
@@ -87,103 +75,15 @@ namespace TCC.Settings
                 N(nameof(Y));
             }
         }
+        [JsonIgnore]
+        public bool IgnoreSize { get; set; } = true;
+        [JsonIgnore]
+        public bool UndimOnFlyingGuardian { get; set; } = true;
+        [JsonIgnore]
+        public bool PerClassPosition { get; set; } = true;
+        [JsonIgnore]
+        public RelayCommand ResetPositionCommand { get; }
 
-        public ButtonsPosition ButtonsPosition
-        {
-            get
-            {
-                var cc = CurrentClass();
-                return Positions.Buttons(cc);
-            }
-            set
-            {
-                var cc = CurrentClass();
-                if (cc == Class.None) return;
-                Positions.SetButtons(cc, value);
-                N(nameof(ButtonsPosition));
-            }
-        }
-
-        public double W
-        {
-            get => _w;
-            set
-            {
-                _w = value;
-                N(nameof(W));
-            }
-        }
-        public double H
-        {
-            get => _h;
-            set
-            {
-                _h = value;
-                N(nameof(H));
-            }
-        }
-        public bool Visible
-        {
-            get => _visible;
-            set
-            {
-                if (_visible == value) return;
-                _visible = value;
-                N(nameof(Visible));
-                VisibilityChanged?.Invoke();
-            }
-        }
-        public ClickThruMode ClickThruMode
-        {
-            get => ForcedClickable ? ClickThruMode.Never : _clickThruMode;
-            set
-            {
-                _clickThruMode = value;
-                N(nameof(ClickThruMode));
-                InvokeClickThruModeChanged();
-            }
-        }
-        public double Scale
-        {
-            get => _scale;
-            set
-            {
-                if (_scale == value) return;
-                _scale = value;
-                N(nameof(Scale));
-            }
-        }
-        public bool AutoDim
-        {
-            get => _autoDim;
-            set
-            {
-                _autoDim = value;
-                N(nameof(AutoDim));
-                WindowManager.ForegroundManager.RefreshDim();
-            }
-        }
-        public double DimOpacity
-        {
-            get => _dimOpacity;
-            set
-            {
-                if (_dimOpacity == value) return;
-                _dimOpacity = value;
-                N(nameof(DimOpacity));
-                WindowManager.ForegroundManager.RefreshDim();
-            }
-        }
-        public bool ShowAlways
-        {
-            get => _showAlways;
-            set
-            {
-                _showAlways = value;
-                N(nameof(ShowAlways));
-                WindowManager.ForegroundManager.RefreshVisible();
-            }
-        }
         public bool Enabled
         {
             get => _enabled;
@@ -223,6 +123,27 @@ namespace TCC.Settings
                 N(nameof(Enabled));
             }
         }
+        public bool Visible
+        {
+            get => _visible;
+            set
+            {
+                if (_visible == value) return;
+                _visible = value;
+                N(nameof(Visible));
+                VisibilityChanged?.Invoke();
+            }
+        }
+        public bool ShowAlways
+        {
+            get => _showAlways;
+            set
+            {
+                _showAlways = value;
+                N(nameof(ShowAlways));
+                WindowManager.ForegroundManager.RefreshVisible();
+            }
+        }
         public bool AllowOffScreen
         {
             get => _allowOffScreen;
@@ -233,7 +154,80 @@ namespace TCC.Settings
                 N();
             }
         }
-
+        public bool AutoDim
+        {
+            get => _autoDim;
+            set
+            {
+                _autoDim = value;
+                N(nameof(AutoDim));
+                WindowManager.ForegroundManager.RefreshDim();
+            }
+        }
+        public double DimOpacity
+        {
+            get => _dimOpacity;
+            set
+            {
+                if (_dimOpacity == value) return;
+                _dimOpacity = value;
+                N(nameof(DimOpacity));
+                WindowManager.ForegroundManager.RefreshDim();
+            }
+        }
+        public double Scale
+        {
+            get => _scale;
+            set
+            {
+                if (_scale == value) return;
+                _scale = value;
+                N(nameof(Scale));
+            }
+        }
+        public double W
+        {
+            get => _w;
+            set
+            {
+                _w = value;
+                N(nameof(W));
+            }
+        }
+        public double H
+        {
+            get => _h;
+            set
+            {
+                _h = value;
+                N(nameof(H));
+            }
+        }
+        public ClickThruMode ClickThruMode
+        {
+            get => ForcedClickable ? ClickThruMode.Never : _clickThruMode;
+            set
+            {
+                _clickThruMode = value;
+                N(nameof(ClickThruMode));
+                InvokeClickThruModeChanged();
+            }
+        }
+        public ButtonsPosition ButtonsPosition
+        {
+            get
+            {
+                var cc = CurrentClass();
+                return Positions.Buttons(cc);
+            }
+            set
+            {
+                var cc = CurrentClass();
+                if (cc == Class.None) return;
+                Positions.SetButtons(cc, value);
+                N(nameof(ButtonsPosition));
+            }
+        }
         public ClassPositions Positions { get; set; }
 
         public WindowSettings()
@@ -297,7 +291,7 @@ namespace TCC.Settings
             xe.Add(BuildWindowPositionsXElement());
             return xe;
         }
-        private XElement BuildWindowPositionsXElement()
+        protected XElement BuildWindowPositionsXElement()
         {
             var ret = new XElement(nameof(Positions));
 
@@ -327,6 +321,13 @@ namespace TCC.Settings
         {
             Positions.ApplyCorrection(sc);
         }
+        protected Class CurrentClass()
+        {
+            var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+            cc = PerClassPosition ? cc : Class.Common;
+            return cc;
+        }
+
     }
 
     public class ChatWindowSettings : WindowSettings
@@ -429,6 +430,30 @@ namespace TCC.Settings
         {
             ForcedClickable = !ForcedClickable;
             InvokeClickThruModeChanged();
+        }
+    }
+
+    public class CooldownWindowSettings : WindowSettings
+    {
+        public bool ShowItems { get; set; }
+        public CooldownBarMode Mode { get; set; }
+
+        public CooldownWindowSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = true;
+            _dimOpacity = .5;
+            _showAlways = false;
+            _enabled = true;
+            _allowOffScreen = false;
+            Positions = new ClassPositions(.4, .7, ButtonsPosition.Above);
+
+            Mode = CooldownBarMode.Fixed;
+            ShowItems = true;
+            UndimOnFlyingGuardian = false;
+
         }
     }
 }

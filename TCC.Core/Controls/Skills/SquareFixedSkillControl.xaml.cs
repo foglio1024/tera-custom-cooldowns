@@ -27,7 +27,7 @@ namespace TCC.Controls.Skills
 
         private void DeleteButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.CooldownWindow.VM.DeleteFixedSkill(Context);
+            WindowManager.ViewModels.Cooldowns.DeleteFixedSkill(Context);
         }
 
     }

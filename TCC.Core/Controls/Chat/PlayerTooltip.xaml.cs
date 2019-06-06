@@ -141,7 +141,7 @@ namespace TCC.Controls.Chat
         private void GrantInviteClick(object sender, RoutedEventArgs e)
         {
 
-            if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
+            if (WindowManager.ViewModels.Group.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 ProxyInterface.Instance.Stub.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite); //ProxyOld.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
@@ -151,7 +151,7 @@ namespace TCC.Controls.Chat
 
         private void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
-            if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
+            if (WindowManager.ViewModels.Group.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
             {
                 ProxyInterface.Instance.Stub.DelegateLeader(u.ServerId, u.PlayerId);//ProxyOld.DelegateLeader(u.ServerId, u.PlayerId);
             }
@@ -167,7 +167,7 @@ namespace TCC.Controls.Chat
                 KickText.Text = "Kick";
                 KickRipple.Opacity = 0;
                 _kicking = false;
-                if (WindowManager.GroupWindow.VM.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
+                if (WindowManager.ViewModels.Group.TryGetUser(WindowManager.FloatingButton.TooltipInfo.Name, out var u))
                 {
                     ProxyInterface.Instance.Stub.KickUser(u.ServerId, u.PlayerId); //ProxyOld.KickMember(u.ServerId, u.PlayerId);
                 }

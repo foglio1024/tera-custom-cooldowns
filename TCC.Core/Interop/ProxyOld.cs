@@ -355,7 +355,7 @@
 //    //        sb.Append("&name=");
 //    //        sb.Append(name);
 //    //        sb.Append("&raid=");
-//    //        sb.Append(WindowManager.GroupWindow.VM.Raid ? 1 : 0);
+//    //        sb.Append(WindowManager.ViewModels.Group.Raid ? 1 : 0);
 
 //    //        SendData(sb.ToString());
 //    //    }

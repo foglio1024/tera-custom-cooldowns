@@ -90,7 +90,7 @@ namespace TCC
             }
             //if (e.Key == Settings.Settings.LootSettingsHotkey.Key && e.Modifier == Settings.Settings.LootSettingsHotkey.Modifier)
             //{
-            //    if (!WindowManager.GroupWindow.VM.AmILeader) return;
+            //    if (!WindowManager.ViewModels.Group.AmILeader) return;
             //    if (!ProxyOld.ProxyOld.IsConnected) return;
             //    ProxyOld.ProxyOld.LootSettings();
             //}

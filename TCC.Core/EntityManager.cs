@@ -37,14 +37,14 @@ namespace TCC
                 if (villager) return;
                 if (m.IsBoss)
                 {
-                    WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
-                    WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
+                    WindowManager.ViewModels.NPC.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
+                    WindowManager.ViewModels.NPC.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
                 else
                 {
                     if (App.Settings.ShowOnlyBosses) return;
-                    WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
-                    WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
+                    WindowManager.ViewModels.NPC.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
+                    WindowManager.ViewModels.NPC.SetBossEnrageTime(entityId, remainingEnrageTime);
                 }
             }
         }
@@ -71,28 +71,28 @@ namespace TCC
         {
             NearbyNPC.Remove(target);
 
-            WindowManager.BossWindow.VM.RemoveBoss(target, type);
-            if (WindowManager.BossWindow.VM.VisibleBossesCount == 0)
+            WindowManager.ViewModels.NPC.RemoveBoss(target, type);
+            if (WindowManager.ViewModels.NPC.VisibleBossesCount == 0)
             {
                 SessionManager.Encounter = false;
-                WindowManager.GroupWindow.VM.SetAggro(0);
+                WindowManager.ViewModels.Group.SetAggro(0);
             }
             ClassAbnormalityTracker.CheckMarkingOnDespawn(target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
         public static void SetNPCStatus(ulong entityId, bool enraged, int remainingEnrageTime)
         {
-            WindowManager.BossWindow.VM.SetBossEnrageTime(entityId, remainingEnrageTime);
-            WindowManager.BossWindow.VM.SetBossEnrage(entityId, enraged);
+            WindowManager.ViewModels.NPC.SetBossEnrageTime(entityId, remainingEnrageTime);
+            WindowManager.ViewModels.NPC.SetBossEnrage(entityId, enraged);
         }
         public static void UpdateNPC(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            WindowManager.BossWindow.VM.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
+            WindowManager.ViewModels.NPC.AddOrUpdateBoss(entityId, maxHP, curHP, true, HpChangeSource.BossGage, templateId, zoneId);
             SetEncounter(curHP, maxHP);
         }
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            WindowManager.BossWindow.VM.AddOrUpdateBoss(target, maxHP, currentHP, false, SessionManager.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            WindowManager.ViewModels.NPC.AddOrUpdateBoss(target, maxHP, currentHP, false, SessionManager.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             SetEncounter(currentHP, maxHP);
         }
         private static void SetEncounter(float curHP, float maxHP)
@@ -108,7 +108,7 @@ namespace TCC
         }
         public static void ClearNPC()
         {
-            if(App.Settings.BossWindowSettings.Enabled) WindowManager.BossWindow.VM.ClearBosses();
+            if(App.Settings.BossWindowSettings.Enabled) WindowManager.ViewModels.NPC.ClearBosses();
             NearbyNPC.Clear();
             NearbyPlayers.Clear();
             ClassAbnormalityTracker.ClearMarkedTargets();
@@ -118,23 +118,23 @@ namespace TCC
             if (zoneId != 950) return;
             if (templateId >= 1100 && templateId <= 1103)
             {
-                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase1;
+                WindowManager.ViewModels.NPC.CurrentHHphase = HarrowholdPhase.Phase1;
             }
             else if (templateId == 1000)
             {
-                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase2;
+                WindowManager.ViewModels.NPC.CurrentHHphase = HarrowholdPhase.Phase2;
             }
             else if (templateId == 2000)
             {
-                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Balistas;
+                WindowManager.ViewModels.NPC.CurrentHHphase = HarrowholdPhase.Balistas;
             }
             else if (templateId == 3000)
             {
-                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase3;
+                WindowManager.ViewModels.NPC.CurrentHHphase = HarrowholdPhase.Phase3;
             }
             else if (templateId == 4000)
             {
-                WindowManager.BossWindow.VM.CurrentHHphase = HarrowholdPhase.Phase4;
+                WindowManager.ViewModels.NPC.CurrentHHphase = HarrowholdPhase.Phase4;
             }
         }
         public static Dragon CheckCurrentDragon(Point p)

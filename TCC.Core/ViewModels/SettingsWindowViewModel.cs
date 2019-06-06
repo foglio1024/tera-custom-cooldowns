@@ -89,7 +89,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.ShowMembersHpNumbers == value) return;
                 App.Settings.ShowMembersHpNumbers = value;
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 N();
             }
         }
@@ -130,7 +130,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.IgnoreMeInGroupWindow == value) return;
                 App.Settings.IgnoreMeInGroupWindow = value;
-                WindowManager.GroupWindow.VM.ToggleMe(!value);
+                WindowManager.ViewModels.Group.ToggleMe(!value);
                 N();
             }
         }
@@ -142,7 +142,7 @@ namespace TCC.ViewModels
                 if (App.Settings.IgnoreGroupBuffs == value) return;
                 App.Settings.IgnoreGroupBuffs = value;
                 N(nameof(HideBuffs));
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public uint HideBuffsThreshold
@@ -153,7 +153,7 @@ namespace TCC.ViewModels
                 if (App.Settings.HideBuffsThreshold == value) return;
                 App.Settings.HideBuffsThreshold = value;
                 N();
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public uint HideDebuffsThreshold
@@ -164,7 +164,7 @@ namespace TCC.ViewModels
                 if (App.Settings.HideDebuffsThreshold == value) return;
                 App.Settings.HideDebuffsThreshold = value;
                 N();
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public uint HideHpThreshold
@@ -175,7 +175,7 @@ namespace TCC.ViewModels
                 if (App.Settings.HideHpThreshold == value) return;
                 App.Settings.HideHpThreshold = value;
                 N();
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public uint HideMpThreshold
@@ -186,7 +186,7 @@ namespace TCC.ViewModels
                 if (App.Settings.HideMpThreshold == value) return;
                 App.Settings.HideMpThreshold = value;
                 N();
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public uint DisableAbnormalitiesThreshold
@@ -197,7 +197,7 @@ namespace TCC.ViewModels
                 if (App.Settings.DisableAbnormalitiesThreshold == value) return;
                 App.Settings.DisableAbnormalitiesThreshold = value;
                 N();
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public bool HideDebuffs
@@ -208,7 +208,7 @@ namespace TCC.ViewModels
                 if (App.Settings.IgnoreGroupDebuffs == value) return;
                 App.Settings.IgnoreGroupDebuffs = value;
                 N(nameof(HideDebuffs));
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
             }
         }
         public bool DisableAllPartyAbnormals
@@ -220,7 +220,7 @@ namespace TCC.ViewModels
                 App.Settings.DisablePartyAbnormals = value;
                 N(nameof(DisableAllPartyAbnormals));
                 PacketAnalyzer.Processor.Update();
-                if (value) WindowManager.GroupWindow.VM.ClearAllAbnormalities();
+                if (value) WindowManager.ViewModels.Group.ClearAllAbnormalities();
             }
         }
         public bool AccurateHp
@@ -242,7 +242,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.BuffsDirection == value) return;
                 App.Settings.BuffsDirection = value;
-                WindowManager.BuffWindow.VM.ExN(nameof(BuffBarWindowViewModel.Direction));
+                WindowManager.ViewModels.Abnormal.ExN(nameof(BuffBarWindowViewModel.Direction));
                 N(nameof(BuffsDirection));
             }
         }
@@ -270,12 +270,12 @@ namespace TCC.ViewModels
         }
         public CooldownBarMode CooldownBarMode
         {
-            get => App.Settings.CooldownBarMode;
+            get => App.Settings.CooldownWindowSettings.Mode;
             set
             {
-                if (App.Settings.CooldownBarMode == value) return;
-                App.Settings.CooldownBarMode = value;
-                WindowManager.CooldownWindow.VM.NotifyModeChanged();
+                if (App.Settings.CooldownWindowSettings.Mode == value) return;
+                App.Settings.CooldownWindowSettings.Mode = value;
+                WindowManager.ViewModels.Cooldowns.NotifyModeChanged();
                 N(nameof(CooldownBarMode));
             }
         }
@@ -394,7 +394,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.DisablePartyMP == value) return;
                 App.Settings.DisablePartyMP = value;
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 PacketAnalyzer.Processor.Update();
                 N(nameof(DisableMP));
             }
@@ -406,7 +406,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.DisablePartyHP == value) return;
                 App.Settings.DisablePartyHP = value;
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 PacketAnalyzer.Processor.Update();
                 N(nameof(DisableHP));
             }
@@ -418,7 +418,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.ShowAwakenIcon == value) return;
                 App.Settings.ShowAwakenIcon = value;
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 N();
             }
         }
@@ -435,12 +435,12 @@ namespace TCC.ViewModels
 
         public bool ShowItemsCooldown
         {
-            get => App.Settings.ShowItemsCooldown;
+            get => App.Settings.CooldownWindowSettings.ShowItems;
             set
             {
-                if (App.Settings.ShowItemsCooldown == value) return;
-                App.Settings.ShowItemsCooldown = value;
-                WindowManager.CooldownWindow.VM.NotifyItemsDisplay();
+                if (App.Settings.CooldownWindowSettings.ShowItems == value) return;
+                App.Settings.CooldownWindowSettings.ShowItems = value;
+                WindowManager.ViewModels.Cooldowns.NotifyItemsDisplay();
                 N();
             }
         }
@@ -503,7 +503,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.ShowGroupWindowDetails == value) return;
                 App.Settings.ShowGroupWindowDetails = value;
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 N(nameof(ShowGroupWindowDetails));
             }
         }
@@ -514,7 +514,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.ShowMembersLaurels == value) return;
                 App.Settings.ShowMembersLaurels = value;
-                WindowManager.GroupWindow.VM.NotifySettingUpdated();
+                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 N(nameof(ShowMembersLaurels));
             }
         }
@@ -667,7 +667,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.GroupSizeThreshold == value) return;
                 App.Settings.GroupSizeThreshold = value;
-                WindowManager.GroupWindow.VM.NotifyThresholdChanged();
+                WindowManager.ViewModels.Group.NotifyThresholdChanged();
                 N(nameof(GroupSizeThreshold));
             }
         }
@@ -769,13 +769,7 @@ namespace TCC.ViewModels
                 if (App.Settings.CharacterWindowCompactMode == value) return;
                 App.Settings.CharacterWindowCompactMode = value;
                 N();
-                WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.CompactMode));
-                WindowManager.CharacterWindow.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    WindowManager.CharacterWindow.Left = value 
-                    ? WindowManager.CharacterWindow.Left + 175 
-                    : WindowManager.CharacterWindow.Left - 175;
-                }), DispatcherPriority.Background);
+                WindowManager.ViewModels.Character.InvokeCompactModeChanged();
 
             }
         }
@@ -799,7 +793,7 @@ namespace TCC.ViewModels
                 if (App.Settings.SorcererReplacesElementsInCharWindow == value) return;
                 App.Settings.SorcererReplacesElementsInCharWindow = value;
                 N();
-                WindowManager.CharacterWindow.VM.ExN(nameof(CharacterWindowViewModel.ShowElements));
+                WindowManager.ViewModels.Character.ExN(nameof(CharacterWindowViewModel.ShowElements));
             }
         }
 
@@ -835,11 +829,11 @@ namespace TCC.ViewModels
                 if (App.Settings.GroupWindowLayout == value) return;
                 App.Settings.GroupWindowLayout = value;
                 N();
-                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.GroupWindowLayout));
-                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.All));
-                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Dps));
-                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Healers));
-                WindowManager.GroupWindow.VM.ExN(nameof(GroupWindowViewModel.Tanks));
+                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.GroupWindowLayout));
+                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.All));
+                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.Dps));
+                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.Healers));
+                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.Tanks));
             }
 
         }

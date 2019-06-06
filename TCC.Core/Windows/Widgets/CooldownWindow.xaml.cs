@@ -5,17 +5,14 @@ namespace TCC.Windows.Widgets
 {
     public partial class CooldownWindow 
     {
-        public CooldownWindowViewModel VM { get; }
-
-        public CooldownWindow()
+        public CooldownWindow(CooldownWindowViewModel vm)
         {
             InitializeComponent();
 
-            DataContext = new CooldownWindowViewModel();
-            VM = DataContext as CooldownWindowViewModel;
+            DataContext = vm;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.CooldownWindowSettings, ignoreSize: true, undimOnFlyingGuardian: false);
+            Init(App.Settings.CooldownWindowSettings);
         }
     }
 }

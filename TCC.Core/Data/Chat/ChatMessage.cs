@@ -84,7 +84,7 @@ namespace TCC.Data.Chat
 
             try
             {
-                if (Channel == ChatChannel.Raid && WindowManager.GroupWindow.VM.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
+                if (Channel == ChatChannel.Raid && WindowManager.ViewModels.Group.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
                 switch (ch)
                 {
                     case ChatChannel.Greet:

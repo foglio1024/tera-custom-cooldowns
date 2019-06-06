@@ -15,7 +15,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class BossGageWindowViewModel : TccWindowViewModel
+    public class NpcWindowViewModel : TccWindowViewModel
     {
         public const int Ph1ShieldDuration = 16;
         //private static BossGageWindowViewModel _instance;
@@ -130,7 +130,7 @@ namespace TCC.ViewModels
         //public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
         public Dictionary<ulong, uint> GuildIds { get; private set; }
 
-        public BossGageWindowViewModel()
+        public NpcWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             NpcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
@@ -463,7 +463,7 @@ namespace TCC.ViewModels
             }
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
-            if (boss.Visible) WindowManager.GroupWindow.VM.SetAggro(entityId);
+            if (boss.Visible) WindowManager.ViewModels.Group.SetAggro(entityId);
         }
         public void SelectDragon(float x, float y)
         {

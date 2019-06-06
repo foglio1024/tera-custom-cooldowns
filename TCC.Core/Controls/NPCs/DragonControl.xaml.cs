@@ -16,7 +16,7 @@ namespace TCC.Controls.NPCs
         public DragonControl()
         {
             InitializeComponent();
-            _shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.Ph1ShieldDuration));
+            _shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(NpcWindowViewModel.Ph1ShieldDuration));
 
         }
 
@@ -40,7 +40,7 @@ namespace TCC.Controls.NPCs
 
                 try
                 {
-                    WindowManager.BossWindow.VM.RemoveMe(_dc, 0);
+                    WindowManager.ViewModels.NPC.RemoveMe(_dc, 0);
                 }
                 catch
                 {
@@ -55,7 +55,7 @@ namespace TCC.Controls.NPCs
             {
                 if (_dc.Shield == ShieldStatus.On)
                 {
-                    _shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.Ph1ShieldDuration));
+                    _shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(NpcWindowViewModel.Ph1ShieldDuration));
                     ShieldArc.BeginAnimation(Arc.EndAngleProperty, _shieldArcAn);
                 }
                 else

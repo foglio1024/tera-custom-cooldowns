@@ -133,7 +133,7 @@ namespace TCC.ClassSpecific
         private static void CheckVoc(S_ABNORMALITY_BEGIN p)
         {
             if (VocId != p.AbnormalityId) return;
-            var target = WindowManager.BossWindow.VM.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
+            var target = WindowManager.ViewModels.NPC.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
             if (target != null)
             {
                 if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
@@ -143,7 +143,7 @@ namespace TCC.ClassSpecific
         private static void CheckVoc(S_ABNORMALITY_REFRESH p)
         {
             if (VocId != p.AbnormalityId) return;
-            var target = WindowManager.BossWindow.VM.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
+            var target = WindowManager.ViewModels.NPC.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
             if (target != null)
             {
                 if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);

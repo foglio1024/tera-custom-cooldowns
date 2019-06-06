@@ -75,11 +75,11 @@ namespace TCC.ViewModels
         public bool ShowWhisper => !IsBlocked;
         public string BlockLabelText => IsBlocked ? "Unblock" : "Block";
         public string FriendLabelText => IsFriend ? "Remove friend" : "Add friend";
-        public string PowersLabelText => !WindowManager.GroupWindow.VM.HasPowers(Name) ? "Grant invite power" : "Revoke invite power";
+        public string PowersLabelText => !WindowManager.ViewModels.Group.HasPowers(Name) ? "Grant invite power" : "Revoke invite power";
 
-        public bool ShowGrantPowers => WindowManager.GroupWindow.VM.AmILeader && WindowManager.GroupWindow.VM.Raid && WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
-        public bool ShowKick => WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
-        public bool ShowDelegateLeader => WindowManager.GroupWindow.VM.AmILeader && WindowManager.GroupWindow.VM.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowGrantPowers => WindowManager.ViewModels.Group.AmILeader && WindowManager.ViewModels.Group.Raid && WindowManager.ViewModels.Group.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowKick => WindowManager.ViewModels.Group.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowDelegateLeader => WindowManager.ViewModels.Group.AmILeader && WindowManager.ViewModels.Group.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool IsBlocked => _name == "" ? false : ChatWindowManager.Instance.BlockedUsers.Contains(_name);
         public bool IsFriend => !ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
         public bool ShowFpsUtils => /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable;

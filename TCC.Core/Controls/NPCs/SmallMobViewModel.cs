@@ -6,7 +6,7 @@ namespace TCC.Controls.NPCs
     public class SmallMobViewModel : NpcViewModel
     {
 
-        public bool Compact => WindowManager.BossWindow.VM.IsCompact;
+        public bool Compact => WindowManager.ViewModels.NPC.IsCompact;
 
 
 
@@ -14,12 +14,12 @@ namespace TCC.Controls.NPCs
         {
             NPC = npc;
 
-            WindowManager.BossWindow.VM.NpcListChanged += () => N(nameof(Compact));
+            WindowManager.ViewModels.NPC.NpcListChanged += () => N(nameof(Compact));
 
             NPC.PropertyChanged += OnPropertyChanged;
             NPC.DeleteEvent += () =>
             {
-                WindowManager.BossWindow.VM.RemoveMe(NPC, Delay);
+                WindowManager.ViewModels.NPC.RemoveMe(NPC, Delay);
                 DeleteTimer.Start();
             };
 
