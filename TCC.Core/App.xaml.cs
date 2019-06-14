@@ -69,19 +69,22 @@ namespace TCC
 #if !DEBUG
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
 #endif
-            UpdateManager.TryDeleteUpdater();
+            if (!ToolboxMode)
+            {
+                UpdateManager.TryDeleteUpdater();
 
-            SplashScreen.SetText("Checking for application updates...");
-            await UpdateManager.CheckAppVersion();
+                SplashScreen.SetText("Checking for application updates...");
+                await UpdateManager.CheckAppVersion();
+            }
 
-            SplashScreen.SetText("Checking for database updates...");
+            SplashScreen.SetText("Checking for icon database updates...");
             await UpdateManager.CheckIconsVersion();
 
             SplashScreen.SetText("Loading settings...");
             WindowManager.ForegroundManager = new ForegroundManager();
 
             SettingsContainer.Load();
-            
+
             //var sr = new JsonSettingsReader();
             //sr.LoadWindowSettings();
             //sr.LoadSettings();
@@ -105,7 +108,7 @@ namespace TCC
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
-            UpdateManager.StartPeriodicCheck();
+            if (!ToolboxMode) UpdateManager.StartPeriodicCheck();
 
             if (!Experimental && Settings.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",
@@ -114,13 +117,11 @@ namespace TCC
                     10000);
 
             Loading = false;
-
-
         }
 
         private static void ParseStartupArgs(List<string> list)
         {
-            ToolboxMode = list.IndexOf("--toolbox") != -1;
+            ToolboxMode = true;// list.IndexOf("--toolbox") != -1;
             Restarted = list.IndexOf("--restart") != -1;
         }
 
