@@ -12,6 +12,7 @@
 	},
 	"dependencies" : {
 		"ttb-interface-control" : "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-control/module.json",
-		"ttb-interface-data" : "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-data/module.json"
+		"ttb-interface-data" : "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-data/module.json",
+		"tcc-stub" : "https://raw.githubusercontent.com/Foglio1024/tcc-stub/master/module.json"
 	}
 }
