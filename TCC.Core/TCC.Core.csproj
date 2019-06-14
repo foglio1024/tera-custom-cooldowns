@@ -112,6 +112,7 @@
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
       <DependentUpon>LfgBody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\MoneyAmountToVisibilityConverter.cs" />
     <Compile Include="Controls\Group\RoleColumnsGroupLayout.xaml.cs">
       <DependentUpon>RoleColumnsGroupLayout.xaml</DependentUpon>
     </Compile>

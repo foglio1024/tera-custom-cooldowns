@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
              xmlns:chat="clr-namespace:TCC.Data.Chat"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:MessagePiece }">
     <Grid VerticalAlignment="Top" Margin="0,0,0,0" UseLayoutRounding="True" Background="Transparent">
@@ -20,7 +19,6 @@
                 <Setter Property="FontFamily" Value="{StaticResource NotoSansMed}"/>
                 <Setter Property="FontWeight" Value="Normal"/>
             </Style>
-            <chatControls:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

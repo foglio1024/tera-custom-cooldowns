@@ -1,9 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-
-namespace TCC.Controls.Chat
+﻿namespace TCC.Controls.Chat
 {
     /// <summary>
     /// Logica di interazione per UserControl1.xaml
@@ -13,21 +8,6 @@ namespace TCC.Controls.Chat
         public MoneyMessagePiece()
         {
             InitializeComponent();
-        }
-    }
-
-    public class MoneyAmountToVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            var amount = (long)value;
-            return amount == 0 ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }
