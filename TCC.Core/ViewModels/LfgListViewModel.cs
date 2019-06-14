@@ -74,9 +74,9 @@ namespace TCC.ViewModels
             N(nameof(MyLfg));
             foreach (var listing in Listings.ToSyncList())
             {
-                listing?.NotifyMyLfg();
+                listing?.UpdateIsMyLfg();
             }
-            MyLfg?.NotifyMyLfg();
+            MyLfg?.UpdateIsMyLfg();
         }
         public bool AmILeader => WindowManager.ViewModels.Group.AmILeader;
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Session.Me.PlayerId)
