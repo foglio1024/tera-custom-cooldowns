@@ -117,8 +117,11 @@ namespace TCC.Data.Chat
             if (Session.DB.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
             {
                 txt = g;
-                if (id == 104) col = "38bde5"; //TODO: use resources
-                if (id == 105) col = "ff264b";
+                switch (id)
+                {
+                    case 104: col = R.Colors.ChatDiamondLaurelColor.ToHex(false, false); break;
+                    case 105: col = R.Colors.ChatChampionLaurelColor.ToHex(false, false); break;
+                }
             }
             var ret = new MessagePiece(txt) { Type = MessagePieceType.Simple };
             ret.SetColor(col);
