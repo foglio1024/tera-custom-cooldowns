@@ -297,16 +297,16 @@ namespace TCC.ViewModels
             }
         }
 
-        private void HandleNewTower(NPC boss, ulong entityId)
+        private void HandleNewTower(NPC tower, ulong entityId)
         {
             if (_towerNames.TryGetValue(entityId, out var towerName))
             {
-                boss.Name = towerName;
-                WindowManager.ViewModels.CivilUnrest.SetGuildName(boss.GuildId, towerName); //TODO: check for enabled?
+                tower.Name = towerName;
+                WindowManager.ViewModels.CivilUnrest.SetGuildName(tower.GuildId, towerName); //TODO: check for enabled?
             }
-            boss.IsBoss = true;
-            NpcList.Add(boss);
-            if (_savedHp.TryGetValue(entityId, out var hp)) boss.CurrentHP = hp;
+            tower.IsBoss = true;
+            NpcList.Add(tower);
+            if (_savedHp.TryGetValue(entityId, out var hp)) tower.CurrentHP = hp;
 
         }
 
