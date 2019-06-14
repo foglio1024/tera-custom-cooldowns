@@ -31,8 +31,6 @@ namespace TCC
 
         public static Server Server { get; set; }
         public static string Language => DB.ServerDatabase.StringLanguage;
-
-
         public static bool LoadingScreen
         {
             get => _loadingScreen;
@@ -55,7 +53,6 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => EncounterChanged?.Invoke());
             }
         }
-
         public static bool Combat
         {
             get => Me?.IsInCombat ?? false;
@@ -66,7 +63,6 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke()); // check logs for other exceptions here
             }
         }
-
         public static bool Logged
         {
             get => _logged;
@@ -78,7 +74,6 @@ namespace TCC
             }
         }
         public static bool IsElite { get; set; }
-
         public static bool InGameUiOn
         {
             get => _inGameUiOn;
@@ -89,7 +84,6 @@ namespace TCC
                 GameUiModeChanged?.Invoke();
             }
         }
-
         public static bool InGameChatOpen
         {
             get => _inGameChatOpen;
@@ -100,6 +94,8 @@ namespace TCC
                 ChatModeChanged?.Invoke();
             }
         }
+
+        public static int CurrentZoneId { get; private set; } = 0;
 
         public static bool IsMe(ulong eid)
         {
@@ -113,6 +109,7 @@ namespace TCC
         public static event Action LoadingScreenChanged;
         public static event Action LoggedChanged;
         public static event Action DatabaseLoaded;
+        public static event Action Teleported;
 
         public static Player Me;
 
@@ -123,8 +120,8 @@ namespace TCC
             return GuildMembersNames.TryGetValue(id, out var name) ? name : "Unknown player";
         }
         public static TccDatabase DB { get; set; }
-        public static bool CivilUnrestZone { get; internal set; }
-        public static bool IsInDungeon { get; internal set; }
+        public static bool CivilUnrestZone => CurrentZoneId == 152;
+        public static bool IsInDungeon => CurrentZoneId >= 8999;
         public static string CurrentAccountName { get; internal set; }
 
         public static void SetPlayerHp(float hp)
@@ -357,8 +354,8 @@ namespace TCC
             {
                 LoadingScreen = true;
                 Encounter = false;
-                CivilUnrestZone = m.Zone == 152;
-                IsInDungeon = m.Zone >= 8999; // from Salty's server-exposer
+                CurrentZoneId = m.Zone;
+                Teleported?.Invoke();
 
             });
             PacketAnalyzer.NewProcessor.Hook<S_ACCOUNT_PACKAGE_LIST>(m =>
