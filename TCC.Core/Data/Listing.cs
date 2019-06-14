@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TeraDataLite;
@@ -19,6 +21,7 @@ namespace TCC.Data
         private SynchronizedObservableCollection<User> _players;
         private SynchronizedObservableCollection<User> _applicants;
         private bool _canApply = true;
+        private bool _isMyLfg;
 
         public uint LeaderId
         {
@@ -91,10 +94,17 @@ namespace TCC.Data
             }
         }
 
-        //TODO: deadlock may happen here
-        public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == Session.Me.PlayerId) || 
-                                                      LeaderId == Session.Me.PlayerId ||
-                                                      WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
+        public bool IsMyLfg
+        {
+            get => _isMyLfg;
+            set
+            {
+                if(_isMyLfg == value) return;
+                _isMyLfg = value;
+                N();
+            }
+        }
+
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
@@ -148,11 +158,17 @@ namespace TCC.Data
 
         public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) !=-1;
 
-
-        public void NotifyMyLfg()
+        public void UpdateIsMyLfg()
         {
-            N(nameof(IsMyLfg));
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                IsMyLfg = Players.Any(x => x.PlayerId == Session.Me.PlayerId) ||
+                    LeaderId == Session.Me.PlayerId ||
+                    WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
+            }), DispatcherPriority.DataBind);
         }
+
+
 
         public Listing()
         {
