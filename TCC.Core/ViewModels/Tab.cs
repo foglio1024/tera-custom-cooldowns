@@ -78,6 +78,11 @@ namespace TCC.ViewModels
         [JsonIgnore]
         public ICommand ClearAllCommand { get; }
         private string _tabName;
+        private SynchronizedObservableCollection<string> _authors;
+        private SynchronizedObservableCollection<string> _excludedAuthors;
+        private SynchronizedObservableCollection<ChatChannel> _channels;
+        private SynchronizedObservableCollection<ChatChannel> _excludedChannels;
+
         public string TabName
         {
             get => _tabName;
@@ -95,10 +100,46 @@ namespace TCC.ViewModels
         [JsonIgnore]
         public bool Attention => ImportantMessages.Count > 0;
 
-        public SynchronizedObservableCollection<string> Authors { get; set; }
-        public SynchronizedObservableCollection<string> ExcludedAuthors { get; set; }
-        public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
-        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels { get; set; }
+        public SynchronizedObservableCollection<string> Authors
+        {
+            get => _authors;
+            set
+            {
+                _authors = value;
+                ApplyFilter();
+            }
+        }
+
+        public SynchronizedObservableCollection<string> ExcludedAuthors
+        {
+            get => _excludedAuthors;
+            set
+            {
+                _excludedAuthors = value;
+                ApplyFilter();
+            }
+        }
+
+        public SynchronizedObservableCollection<ChatChannel> Channels
+        {
+            get => _channels;
+            set
+            {
+                _channels = value;
+                ApplyFilter();
+            }
+        }
+
+        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels
+        {
+            get => _excludedChannels;
+            set
+            {
+                _excludedChannels = value;
+                ApplyFilter();
+            }
+        }
+
         [JsonIgnore]
         public SynchronizedObservableCollection<ChatMessage> ImportantMessages { get; set; }
         [JsonIgnore]
@@ -128,7 +169,7 @@ namespace TCC.ViewModels
             Messages.Refresh();
         }
 
-        public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa)
+        public Tab()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
@@ -139,8 +180,8 @@ namespace TCC.ViewModels
             ImportantMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
-                RemoveImportantMessage((ChatMessage) msg);
-                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage) msg));
+                RemoveImportantMessage((ChatMessage)msg);
+                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage)msg));
             });
             ClearAllCommand = new RelayCommand(par =>
             {
@@ -148,6 +189,11 @@ namespace TCC.ViewModels
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
             });
             ScrollToMessageCommand = new RelayCommand(msg => { ChatWindowManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
+            TabViewModel.ImportantRemoved += SyncImportant;
+
+        }
+        public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa) : this()
+        {
             if (n == null || ch == null || ex == null || a == null || exa == null) return;
             TabName = n;
             foreach (var auth in a)
@@ -166,13 +212,8 @@ namespace TCC.ViewModels
             {
                 ExcludedChannels.Add(chan);
             }
-            if (Channels.Count == 0 && Authors.Count == 0 && ExcludedChannels.Count == 0 && ExcludedAuthors.Count == 0)
-            {
-                Messages.Filter = null;
-                return;
-            }
+
             ApplyFilter();
-            TabViewModel.ImportantRemoved += SyncImportant;
         }
 
         private void SyncImportant(Tab source, ImportantRemovedArgs e)
@@ -199,6 +240,16 @@ namespace TCC.ViewModels
         }
         public void ApplyFilter()
         {
+            //if (Channels?.Count == 0 && 
+            //    Authors?.Count == 0 && 
+            //    ExcludedChannels?.Count == 0 && 
+            //    ExcludedAuthors?.Count == 0)
+            //{
+            //    Messages.Filter = null;
+            //}
+            //else
+            //{
+            //}
             Messages.Filter = f =>
             {
                 var m = f as ChatMessage;
