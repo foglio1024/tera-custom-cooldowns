@@ -10,7 +10,7 @@ namespace TCC.Data
 
         public int Enchant { get; private set; }
         public long Experience { get; private set; }
-        public int MaxExperience => SessionManager.DB.GetItemMaxExp(Id, Enchant);
+        public int MaxExperience => Session.DB.GetItemMaxExp(Id, Enchant);
 
         public double ExperienceFactor
         {
@@ -44,7 +44,7 @@ namespace TCC.Data
             return t + CorrectedEnchant;
         }
 
-        public string Name => SessionManager.DB.ItemsDatabase.GetItemName(Id);
+        public string Name => Session.DB.ItemsDatabase.GetItemName(Id);
         public GearItem(uint id, GearTier t, GearPiece p, int enchant, long exp)
         {
             Id = id;

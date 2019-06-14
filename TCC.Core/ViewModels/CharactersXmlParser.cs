@@ -61,7 +61,7 @@ namespace TCC.Data
 
         public static XDocument BuildCharacterFile(SynchronizedObservableCollection<Character> list)
         {
-            var root = new XElement(CharactersTag, new XAttribute(EliteTag, SessionManager.IsElite));
+            var root = new XElement(CharactersTag, new XAttribute(EliteTag, Session.IsElite));
             list.ToSyncList().ForEach(c =>
             {
                 var xChar = BuildGeneralDataXelement(c);
@@ -283,7 +283,7 @@ namespace TCC.Data
         private void ParseEliteStatus()
         {
             var val = _doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value;
-            if(val != null) SessionManager.IsElite = bool.Parse(val);
+            if(val != null) Session.IsElite = bool.Parse(val);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
+            Session.DB.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
+            Session.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
             ShadowReaping = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(sr, true) { CanFlash = true },

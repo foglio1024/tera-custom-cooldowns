@@ -27,21 +27,21 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool Fire => SessionManager.CurrentPlayer.Fire;
-        public bool Ice => SessionManager.CurrentPlayer.Ice;
-        public bool Arcane => SessionManager.CurrentPlayer.Arcane;
+        public bool Fire => Session.Me.Fire;
+        public bool Ice => Session.Me.Ice;
+        public bool Arcane => Session.Me.Arcane;
 
-        public bool IsBoostFire => SessionManager.CurrentPlayer.FireBoost;
-        public bool IsBoostFrost => SessionManager.CurrentPlayer.IceBoost;
-        public bool IsBoostArcane => SessionManager.CurrentPlayer.ArcaneBoost;
+        public bool IsBoostFire => Session.Me.FireBoost;
+        public bool IsBoostFrost => Session.Me.IceBoost;
+        public bool IsBoostArcane => Session.Me.ArcaneBoost;
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(360400, Class.Sorcerer, out var iceberg);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(360300, Class.Sorcerer, out var arcaneStorm);
+            Session.DB.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
+            Session.DB.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
+            Session.DB.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
+            Session.DB.SkillsDatabase.TryGetSkill(360400, Class.Sorcerer, out var iceberg);
+            Session.DB.SkillsDatabase.TryGetSkill(360300, Class.Sorcerer, out var arcaneStorm);
 
             PrimeFlame = primeFlame; //fire ice
             Iceberg = iceberg; //ice arcane

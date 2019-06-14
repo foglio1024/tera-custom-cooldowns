@@ -16,7 +16,7 @@ using TCC.Parsing;
 using TCC.Settings;
 using TCC.ViewModels;
 using TCC.Windows;
-
+using TeraPacketParser.Messages;
 using SplashScreen = TCC.Windows.SplashScreen;
 
 namespace TCC
@@ -93,10 +93,7 @@ namespace TCC
 
             SplashScreen.SetText("Pre-loading databases...");
             UpdateManager.CheckDatabaseHash();
-            SessionManager.InitDatabasesAsync(string.IsNullOrEmpty(Settings.LastLanguage) ? "EU-EN" :
-                Settings.LastLanguage == "EU" ? "EU-EN" :
-                Settings.LastLanguage);
-
+            Session.Init();
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
 
@@ -118,7 +115,7 @@ namespace TCC
 
             Loading = false;
 
-            Settings.Save();
+
         }
 
         private static void ParseStartupArgs(List<string> list)

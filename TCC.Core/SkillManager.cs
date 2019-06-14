@@ -11,22 +11,16 @@ namespace TCC
         public static event Action SkillStarted;
 
         public const int LongSkillTreshold = 40000;
-        public const int Ending = 1; //TODO: this stuff should be removed btw
-
-
 
         public static void AddSkill(uint id, ulong cd)
         {
-            if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
-            {
-                if (!Pass(skill)) return;
-                RouteSkill(new Cooldown(skill, cd));
-                //WindowManager.SkillsEnded = false;
-            }
+            if (!Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill)) return;
+            if (!Pass(skill)) return;
+            RouteSkill(new Cooldown(skill, cd));
         }
         public static void AddItemSkill(uint id, uint cd)
         {
-            if (SessionManager.DB.ItemsDatabase.TryGetItemSkill(id, out var brooch))
+            if (Session.DB.ItemsDatabase.TryGetItemSkill(id, out var brooch))
             {
                 try
                 {
@@ -55,7 +49,7 @@ namespace TCC
 
         public static void ChangeSkillCooldown(uint id, uint cd)
         {
-            if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            if (Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill))
             {
                 if (!Pass(skill)) return;
                 WindowManager.ViewModels.Cooldowns.Change(skill, cd);
@@ -64,16 +58,16 @@ namespace TCC
         }
         public static void ResetSkill(uint id)
         {
-            if (SessionManager.DB.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
+            if (Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill))
             {
                 if (!Pass(skill)) return;
                 WindowManager.ViewModels.Cooldowns.ResetSkill(skill);
             }
         }
-        public static void Clear()
-        {
-            WindowManager.ViewModels.Cooldowns.ClearSkills();
-        }
+        //public static void Clear()
+        //{
+        //    WindowManager.ViewModels.Cooldowns.ClearSkills();
+        //}
 
         private static void RouteSkill(Cooldown skillCooldown)
         {

@@ -9,13 +9,16 @@ namespace TCC.Windows.Widgets
     /// </summary>
     public partial class CivilUnrestWindow 
     {
-        public CivilUnrestViewModel VM => Dispatcher.Invoke(() => DataContext as CivilUnrestViewModel);
+        private CivilUnrestViewModel VM { get; }
+    
 
-        public CivilUnrestWindow()
+        public CivilUnrestWindow(CivilUnrestViewModel vm)
         {
             InitializeComponent();
             MainContent = WindowContent;
-            DataContext = new CivilUnrestViewModel();
+            DataContext = vm;
+            VM = DataContext as CivilUnrestViewModel;
+
             Init(App.Settings.CivilUnrestWindowSettings);
             VM.Teleported += OnTeleported;
             ZoneBoundContent.Visibility = Visibility.Collapsed;
@@ -23,7 +26,8 @@ namespace TCC.Windows.Widgets
 
         private void OnTeleported()
         {
-            ZoneBoundContent.Visibility = SessionManager.CivilUnrestZone ? Visibility.Visible : Visibility.Collapsed;
+            //TODO: move to vm and bind
+            ZoneBoundContent.Visibility = Session.CivilUnrestZone ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

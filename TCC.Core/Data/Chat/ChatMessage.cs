@@ -191,7 +191,7 @@ namespace TCC.Data.Chat
                                 else if (inPiece.StartsWith("@abnormal"))
                                 {
                                     var abName = "Unknown";
-                                    if (SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
+                                    if (Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
                                         uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
                                     mp = new MessagePiece(abName, MessagePieceType.Simple, App.Settings.FontSize, false);
                                     mp.SetColor(col);
@@ -387,7 +387,7 @@ namespace TCC.Data.Chat
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
-            var text = SessionManager.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
+            var text = Session.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new MessagePiece(text, MessagePieceType.Simple, App.Settings.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)
@@ -475,7 +475,7 @@ namespace TCC.Data.Chat
             //check if player is mentioned
             try
             {
-                foreach (var item in WindowManager.Dashboard.VM.Characters.Where(c => !c.Hidden))
+                foreach (var item in WindowManager.ViewModels.Dashboard.Characters.Where(c => !c.Hidden))
                 {
                     if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
                     ContainsPlayerName = true;
@@ -612,13 +612,13 @@ namespace TCC.Data.Chat
                 return;
             }
             _timer.Stop();
-            WindowManager.LfgListWindow.VM.EnqueueRequest(LinkedListing.LeaderId);
+            WindowManager.ViewModels.LFG.EnqueueRequest(LinkedListing.LeaderId);
 
         }
 
         private Listing FindListing()
         {
-            return WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(x =>
+            return WindowManager.ViewModels.LFG.Listings.FirstOrDefault(x =>
                 x.Players.Any(p => p.Name == Author) ||
                 x.LeaderName == Author ||
                 x.Message == RawMessage);
@@ -629,7 +629,7 @@ namespace TCC.Data.Chat
             LinkedListing = FindListing();
             if (LinkedListing != null) return;
             //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
-            WindowManager.LfgListWindow.VM.EnqueueListRequest();
+            WindowManager.ViewModels.LFG.EnqueueListRequest();
             _timer = new DispatcherTimer(TimeSpan.FromSeconds(1.5), DispatcherPriority.Background, GetListing, Dispatcher);
             _timer.Start();
         }

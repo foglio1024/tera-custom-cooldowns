@@ -42,7 +42,7 @@ namespace TCC.Controls.Chat
             {
                 ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 
-                WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
+                WindowManager.ViewModels.LFG.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
                     );
             }
             ChatWindowManager.Instance.LastClickedLfg = _dc;

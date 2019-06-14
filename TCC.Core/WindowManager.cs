@@ -32,12 +32,36 @@ namespace TCC
         /// </summary>
         public static class ViewModels
         {
-            public static CooldownWindowViewModel Cooldowns { get; set; }
-            public static CharacterWindowViewModel Character { get; set; }
-            public static NpcWindowViewModel NPC { get; set; }
-            public static BuffBarWindowViewModel Abnormal { get; set; }
-            public static GroupWindowViewModel Group { get; set; }
-            public static ClassWindowViewModel Class { get; set; }
+            private static CooldownWindowViewModel _cooldowns;
+            private static CharacterWindowViewModel _character;
+            private static NpcWindowViewModel _npc;
+            private static BuffBarWindowViewModel _abnormal;
+            private static GroupWindowViewModel _group;
+            private static ClassWindowViewModel _class;
+            private static CivilUnrestViewModel _civilUnrest;
+            private static DashboardViewModel _dashboard;
+            private static LfgListViewModel _lfg;
+            private static FlightGaugeViewModel _flightGauge;
+
+            public static CooldownWindowViewModel Cooldowns => _cooldowns ?? (_cooldowns = new CooldownWindowViewModel());
+
+            public static CharacterWindowViewModel Character => _character ?? (_character = new CharacterWindowViewModel());
+
+            public static NpcWindowViewModel NPC => _npc ?? (_npc = new NpcWindowViewModel());
+
+            public static BuffBarWindowViewModel Abnormal => _abnormal ?? (_abnormal = new BuffBarWindowViewModel());
+
+            public static GroupWindowViewModel Group => _group ?? (_group = new GroupWindowViewModel());
+
+            public static ClassWindowViewModel Class => _class ?? (_class = new ClassWindowViewModel());
+
+            public static CivilUnrestViewModel CivilUnrest => _civilUnrest ?? (_civilUnrest = new CivilUnrestViewModel());
+
+            public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel());
+
+            public static LfgListViewModel LFG => _lfg ?? (_lfg = new LfgListViewModel());
+
+            public static FlightGaugeViewModel FlightGauge => _flightGauge ?? (_flightGauge = new FlightGaugeViewModel());
 
         }
 
@@ -51,14 +75,29 @@ namespace TCC
         public static ClassWindow ClassWindow;
         public static SettingsWindow SettingsWindow;
         public static CivilUnrestWindow CivilUnrestWindow;
-        //public static Dashboard Dashboard;
-        //public static LfgListWindow LfgListWindow;
-        private static Dashboard _dashboard;
+        private static Dashboard _dashboardWindow;
         private static LfgListWindow _lfgWindow;
 
 
-        public static Dashboard Dashboard => _dashboard ?? (_dashboard = new Dashboard());
-        public static LfgListWindow LfgListWindow => _lfgWindow ?? (_lfgWindow = new LfgListWindow());
+        public static Dashboard DashboardWindow
+        {
+            get
+            {
+                if (_dashboardWindow != null) return _dashboardWindow;
+                _dashboardWindow = new Dashboard(ViewModels.Dashboard);
+                return _dashboardWindow;
+            }
+        }
+
+        public static LfgListWindow LfgListWindow
+        {
+            get
+            {
+                if (_lfgWindow != null) return _lfgWindow;
+                _lfgWindow = new LfgListWindow(ViewModels.LFG);
+                return _lfgWindow;
+            }
+        }
 
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
@@ -133,7 +172,7 @@ namespace TCC
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             TrayIcon.Text = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
 
-            _contextMenu.Items.Add(new MenuItem() { Header = "Dashboard", Command = new RelayCommand(o => Dashboard.ShowWindow()) });
+            _contextMenu.Items.Add(new MenuItem() { Header = "Dashboard", Command = new RelayCommand(o => DashboardWindow.ShowWindow()) });
             _contextMenu.Items.Add(new MenuItem() { Header = "Settings", Command = new RelayCommand(o => SettingsWindow.ShowWindow()) });
             _contextMenu.Items.Add(new MenuItem()
             {
@@ -230,24 +269,26 @@ namespace TCC
         {
 
             RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
+            LoadCharWindow();
             LoadCooldownWindow();
             LoadClassWindow();
             LoadGroupWindow();
             LoadNpcWindow();
-            LoadCharWindow();
             LoadBuffBarWindow();
 
-            FlightDurationWindow = new FlightDurationWindow();
+            FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGauge);
             if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
 
-            CivilUnrestWindow = new CivilUnrestWindow();
+            CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrest);
             if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
 
             FloatingButton = new FloatingButtonWindow();
             if (FloatingButton.WindowSettings.Enabled) FloatingButton.Show();
 
-            //LfgListWindow = new LfgListWindow();
-            //Dashboard = new Dashboard();
+            _dashboardWindow = new Dashboard(ViewModels.Dashboard);
+            _lfgWindow = new LfgListWindow(ViewModels.LFG);
+
+
 
             ChatWindowManager.Instance.InitWindows();
 
@@ -269,7 +310,6 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
-                ViewModels.Cooldowns = new CooldownWindowViewModel ();
                 CooldownWindow = new CooldownWindow(ViewModels.Cooldowns);
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -287,7 +327,6 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(
                     new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
-                ViewModels.Class = new ClassWindowViewModel();
                 ClassWindow = new ClassWindow(ViewModels.Class);
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -303,8 +342,7 @@ namespace TCC
             var charWindowThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                SessionManager.CurrentPlayer = new Player();
-                ViewModels.Character = new CharacterWindowViewModel();
+                Session.Me = new Player();
                 CharacterWindow = new CharacterWindow(ViewModels.Character);
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -320,7 +358,6 @@ namespace TCC
             var bossGaugeThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                ViewModels.NPC = new NpcWindowViewModel();
                 BossWindow = new BossWindow(ViewModels.NPC);
                 if (BossWindow.WindowSettings.Enabled) BossWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -336,7 +373,6 @@ namespace TCC
             var buffBarThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                ViewModels.Abnormal = new BuffBarWindowViewModel();
                 BuffWindow = new BuffWindow(ViewModels.Abnormal);
                 if (BuffWindow.WindowSettings.Enabled) BuffWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -353,7 +389,6 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-                ViewModels.Group = new GroupWindowViewModel();
                 GroupWindow = new GroupWindow(ViewModels.Group);
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);

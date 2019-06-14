@@ -12,6 +12,7 @@ using TCC.Data.Abnormalities;
 using TCC.Data.NPCs;
 using TCC.Parsing;
 using TeraDataLite;
+using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
@@ -48,6 +49,43 @@ namespace TCC.ViewModels
         public int VisibleBossesCount => NpcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0);
         public int VisibleMobsCount => NpcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0 && !x.IsBoss);
 
+        private void HandlePhase1Shields(S_DUNGEON_EVENT_MESSAGE p)
+        {
+            switch (p.MessageId)
+            {
+                case 9950045:
+                    //shield start
+                    foreach (var item in NpcList.Where(x => x.IsPhase1Dragon))
+                    {
+                        item.StartShield();
+                    }
+                    break;
+                case 9950113:
+                    //aquadrax interrupted
+                    NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
+                    break;
+                case 9950114:
+                    //umbradrax interrupted
+                    NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
+                    break;
+                case 9950115:
+                    //ignidrax interrupted
+                    NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
+                    break;
+                case 9950116:
+                    //terradrax interrupted
+                    NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
+                    break;
+                case 9950044:
+                    //shield fail
+                    break;
+            }
+
+        }
+        private void HandlePlayerLocation(C_PLAYER_LOCATION p)
+        {
+            SelectDragon(p.X, p.Y);
+        }
         public HarrowholdPhase CurrentHHphase
         {
             get => _currentHHphase;
@@ -55,7 +93,17 @@ namespace TCC.ViewModels
             {
                 if (_currentHHphase == value) return;
                 _currentHHphase = value;
-                PacketAnalyzer.Processor.Update();
+                if (value == HarrowholdPhase.Phase1)
+                {
+                    PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_EVENT_MESSAGE>(HandlePhase1Shields);
+                    PacketAnalyzer.NewProcessor.Hook<C_PLAYER_LOCATION>(HandlePlayerLocation);
+                }
+                else
+                {
+                    PacketAnalyzer.NewProcessor.Unhook<S_DUNGEON_EVENT_MESSAGE>(HandlePhase1Shields);
+                    PacketAnalyzer.NewProcessor.Unhook<C_PLAYER_LOCATION>(HandlePlayerLocation);
+                }
+                //PacketAnalyzer.Processor.Update();
                 N(nameof(CurrentHHphase));
             }
         }
@@ -254,7 +302,7 @@ namespace TCC.ViewModels
             if (_towerNames.TryGetValue(entityId, out var towerName))
             {
                 boss.Name = towerName;
-                WindowManager.CivilUnrestWindow.VM.SetGuildName(boss.GuildId, towerName); //TODO: check for enabled?
+                WindowManager.ViewModels.CivilUnrest.SetGuildName(boss.GuildId, towerName); //TODO: check for enabled?
             }
             boss.IsBoss = true;
             NpcList.Add(boss);
@@ -262,7 +310,7 @@ namespace TCC.ViewModels
 
         }
 
-        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true)
+        public void AddOrUpdateNpc(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -493,10 +541,8 @@ namespace TCC.ViewModels
         public void UpdateShield(ulong target, uint damage)
         {
             var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
-            if (boss != null)
-            {
-                boss.CurrentShield -= damage;
-            }
+            if (boss == null) return;
+            boss.CurrentShield -= damage;
         }
 
         public void RemoveMe(NPC npc, uint delay)
@@ -531,6 +577,70 @@ namespace TCC.ViewModels
         {
             b.Dispose();
             NpcList.Remove(b);
+        }
+
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(p =>
+            {
+                if (Session.IsMe(p.Target)) return;
+                UpdateShield(p.Target, p.Damage);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_SHOW_HP>(m =>
+            {
+                AddOrUpdateNpc(m.GameId, m.MaxHp, m.CurrentHp, false, HpChangeSource.CreatureChangeHp);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(m =>
+            {
+                if (Session.IsMe(m.Target)) return;
+                EntityManager.UpdateNPC(m.Target, m.CurrentHP, m.MaxHP, m.Source);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_BOSS_GAGE_INFO>(m =>
+            {
+                EntityManager.UpdateNPC(m.EntityId, m.CurrentHP, m.MaxHP, (ushort)m.HuntingZoneId, (uint)m.TemplateId);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_NPC_STATUS>(m =>
+            {
+                EntityManager.SetNPCStatus(m.EntityId, m.IsEnraged, m.RemainingEnrageTime);
+                if (m.Target == 0) UnsetBossTarget(m.EntityId);
+                SetBossAggro(m.EntityId, m.Target);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(m =>
+            {
+                SetBossAggro(m.Source, m.User);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m =>
+            {
+                EntityManager.ClearNPC();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
+            {
+                EntityManager.ClearNPC();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
+            {
+                EntityManager.ClearNPC();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(m =>
+            {
+                CurrentHHphase = HarrowholdPhase.None;
+                ClearGuildTowers();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_ME>(m =>
+            {
+                EntityManager.ClearNPC();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_NPC>(m =>
+            {
+                EntityManager.CheckHarrowholdMode(m.HuntingZoneId, m.TemplateId);
+                EntityManager.SpawnNPC(m.HuntingZoneId, m.TemplateId, m.EntityId, false, m.Villager, m.RemainingEnrageTime);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_GUILD_TOWER_INFO>(m =>
+            {
+                AddGuildTower(m.TowerId, m.GuildName, m.GuildId);
+            });
+
+
         }
 
         /*

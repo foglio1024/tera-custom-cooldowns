@@ -195,10 +195,10 @@ namespace TCC.Parsing
                 if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideHpThreshold) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideMpThreshold) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (App.Settings.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (App.Settings.ClassWindowSettings.Enabled && Session.Me.Class == Class.Valkyrie) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (WindowManager.ViewModels.NPC.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (App.Settings.NpcWindowSettings.AccurateHp) AccurateHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (!SessionManager.CivilUnrestZone) PartyMemberPosition.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (!Session.CivilUnrestZone) PartyMemberPosition.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
 
         public bool Process(ParsedMessage message)

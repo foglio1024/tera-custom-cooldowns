@@ -13,11 +13,11 @@ namespace TCC.Windows.Widgets
         private readonly DoubleAnimation _winShow;
         private readonly DoubleAnimation _winHide;
 
-        public FlightDurationWindow()
+        public FlightDurationWindow(FlightGaugeViewModel vm)
         {
             InitializeComponent();
 
-            VM = new FlightGaugeViewModel();
+            VM = vm;
             DataContext = VM;
 
             ButtonsRef = null;
@@ -26,8 +26,8 @@ namespace TCC.Windows.Widgets
             //FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
             //FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
             FlyingGuardianDataProvider.StacksChanged += SetStacks;
-            SessionManager.CombatChanged += OnCombatChanged;
-
+            Session.CombatChanged += OnCombatChanged;
+            VM.EnergyChanged += SetEnergy;
             Init(App.Settings.FlightGaugeWindowSettings);
             Opacity = 0;
 
@@ -50,7 +50,7 @@ namespace TCC.Windows.Widgets
             };
         }
 
-        public FlightGaugeViewModel VM { get; set; }
+        private FlightGaugeViewModel VM { get; set; }
 
         public void SetEnergy(double val)
         {
@@ -66,7 +66,7 @@ namespace TCC.Windows.Widgets
 
         private void OnCombatChanged()
         {
-            if (SessionManager.Combat) HideWindow();
+            if (Session.Combat) HideWindow();
         }
 
         private void SetStacks()

@@ -68,10 +68,10 @@ namespace TCC.Windows
 
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
-            SessionManager.CurrentPlayer.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
-            WindowManager.ViewModels.Class.CurrentClass = SessionManager.CurrentPlayer.Class;
+            Session.Me.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
+            WindowManager.ViewModels.Class.CurrentClass = Session.Me.Class;
             WindowManager.ViewModels.Cooldowns.ClearSkills();
-            WindowManager.ViewModels.Cooldowns.LoadSkills(SessionManager.CurrentPlayer.Class);
+            WindowManager.ViewModels.Cooldowns.LoadSkills(Session.Me.Class);
         }
 
         private void SetSorcElement(object sender, RoutedEventArgs e)
@@ -82,13 +82,13 @@ namespace TCC.Windows
             var ice = el == "Ice";
             var arc = el == "Arcane";
 
-            var currFire = SessionManager.CurrentPlayer.Fire;
-            var currIce = SessionManager.CurrentPlayer.Ice;
-            var currArc = SessionManager.CurrentPlayer.Arcane;
+            var currFire = Session.Me.Fire;
+            var currIce = Session.Me.Ice;
+            var currArc = Session.Me.Arcane;
 
-            if (fire) SessionManager.SetSorcererElements(!currFire, currIce, currArc);
-            if (ice) SessionManager.SetSorcererElements(currFire, !currIce, currArc);
-            if (arc) SessionManager.SetSorcererElements(currFire, currIce, !currArc);
+            if (fire) Session.SetSorcererElements(!currFire, currIce, currArc);
+            if (ice) Session.SetSorcererElements(currFire, !currIce, currArc);
+            if (arc) Session.SetSorcererElements(currFire, currIce, !currArc);
         }
 
         private void SetSorcElementBoost(object sender, RoutedEventArgs e)
@@ -99,13 +99,13 @@ namespace TCC.Windows
             var ice = el == "Ice";
             var arc = el == "Arcane";
 
-            var currFire = SessionManager.CurrentPlayer.FireBoost;
-            var currIce = SessionManager.CurrentPlayer.IceBoost;
-            var currArc = SessionManager.CurrentPlayer.ArcaneBoost;
+            var currFire = Session.Me.FireBoost;
+            var currIce = Session.Me.IceBoost;
+            var currArc = Session.Me.ArcaneBoost;
 
-            if (fire) SessionManager.SetSorcererElementsBoost(!currFire, currIce, currArc);
-            if (ice) SessionManager.SetSorcererElementsBoost(currFire, !currIce, currArc);
-            if (arc) SessionManager.SetSorcererElementsBoost(currFire, currIce, !currArc);
+            if (fire) Session.SetSorcererElementsBoost(!currFire, currIce, currArc);
+            if (ice) Session.SetSorcererElementsBoost(currFire, !currIce, currArc);
+            if (arc) Session.SetSorcererElementsBoost(currFire, currIce, !currArc);
 
 
         }
@@ -157,8 +157,8 @@ namespace TCC.Windows
             //i = 0;
             //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
 
-            WindowManager.Dashboard.VM.Characters[0].VanguardDailiesDone = App.Random.Next(0, 16);
-            WindowManager.Dashboard.VM.Characters[0].VanguardWeekliesDone = App.Random.Next(0, 16);
+            WindowManager.ViewModels.Dashboard.Characters[0].VanguardDailiesDone = App.Random.Next(0, 16);
+            WindowManager.ViewModels.Dashboard.Characters[0].VanguardWeekliesDone = App.Random.Next(0, 16);
         }
     }
 }

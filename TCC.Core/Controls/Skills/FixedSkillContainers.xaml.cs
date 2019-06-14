@@ -319,7 +319,7 @@ namespace TCC.Controls.Skills
                     case Item i:
                         if (target.All(x => x.Skill.IconName != i.IconName))
                         {
-                            SessionManager.DB.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
+                            Session.DB.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
                             target.Insert(dropInfo.InsertIndex, new Cooldown(s, false, CooldownType.Item));
                         }
 

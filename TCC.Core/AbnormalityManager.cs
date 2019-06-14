@@ -61,27 +61,27 @@ namespace TCC
         }
         public static void BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
-            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+            if (!Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
             if (!Filter(ab)) return;
             if (duration == int.MaxValue) ab.Infinity = true;
-            if (SessionManager.IsMe(target))
+            if (Session.IsMe(target))
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
                 if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold)
                 {
-                    WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+                    WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, Session.Me.PlayerId, Session.Me.ServerId);
                 }
             }
             else
             {
                 BeginNpcAbnormality(ab, stacks, duration, target);
             }
-            if (SessionManager.IsMe(source) || SessionManager.IsMe(target)) CheckPassivity(ab, duration);
+            if (Session.IsMe(source) || Session.IsMe(target)) CheckPassivity(ab, duration);
         }
         public static bool EndAbnormality(ulong target, uint id)
         {
-            if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
-            if (SessionManager.IsMe(target)) EndPlayerAbnormality(ab);
+            if (!Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (Session.IsMe(target)) EndPlayerAbnormality(ab);
             else WindowManager.ViewModels.NPC.EndNpcAbnormality(target, ab);
 
             return true;
@@ -93,18 +93,18 @@ namespace TCC
             {
                 if (ab.Infinity)
                 {
-                    SessionManager.CurrentPlayer.AddOrRefreshInfBuff(ab, duration, stacks);
+                    Session.Me.AddOrRefreshInfBuff(ab, duration, stacks);
                 }
                 else
                 {
-                    SessionManager.CurrentPlayer.AddOrRefreshBuff(ab, duration, stacks);
+                    Session.Me.AddOrRefreshBuff(ab, duration, stacks);
                     //if (ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
             {
-                SessionManager.CurrentPlayer.AddOrRefreshDebuff(ab, duration, stacks);
-                SessionManager.CurrentPlayer.AddToDebuffList(ab);
+                Session.Me.AddOrRefreshDebuff(ab, duration, stacks);
+                Session.Me.AddToDebuffList(ab);
             }
         }
 
@@ -125,24 +125,24 @@ namespace TCC
 
         private static void EndPlayerAbnormality(Abnormality ab)
         {
-            WindowManager.ViewModels.Group.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+            WindowManager.ViewModels.Group.EndAbnormality(ab, Session.Me.PlayerId, Session.Me.ServerId);
 
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
                 {
-                    SessionManager.CurrentPlayer.RemoveInfBuff(ab);
+                    Session.Me.RemoveInfBuff(ab);
                 }
                 else
                 {
-                    SessionManager.CurrentPlayer.RemoveBuff(ab);
+                    Session.Me.RemoveBuff(ab);
 
                 }
             }
             else
             {
-                SessionManager.CurrentPlayer.RemoveDebuff(ab);
-                SessionManager.CurrentPlayer.RemoveFromDebuffList(ab);
+                Session.Me.RemoveDebuff(ab);
+                Session.Me.RemoveFromDebuffList(ab);
             }
         }
 
@@ -166,7 +166,7 @@ namespace TCC
         {
             WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
                 WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             }));
@@ -176,7 +176,7 @@ namespace TCC
         {
             WindowManager.GroupWindow.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!SessionManager.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
+                if (!Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return;
                 if (!Filter(ab)) return;
                 WindowManager.ViewModels.Group.EndAbnormality(ab, playerId, serverId);
             }));

@@ -37,7 +37,7 @@ namespace TCC.Parsing
         }
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var currChar = WindowManager.Dashboard.VM.CurrentCharacter;
+            var currChar = WindowManager.ViewModels.Dashboard.CurrentCharacter;
             var standardCountString = $"<font color =\"#cccccc\">({currChar.ClearedGuardianQuests + 1}/40)</font>";
             var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{currChar.ClearedGuardianQuests + 1}</font><font color=\"#cccccc\">/40)</font>";
             var newMsg = new SystemMessage($"{sysMsg.Message} {(currChar.ClearedGuardianQuests + 1 == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
@@ -67,7 +67,7 @@ namespace TCC.Parsing
         {
             const string s = "dungeon:";
             var dgId = Convert.ToUInt32(srvMsg.Substring(srvMsg.IndexOf(s, StringComparison.Ordinal) + s.Length));
-            WindowManager.Dashboard.VM.CurrentCharacter.EngageDungeon(dgId);
+            WindowManager.ViewModels.Dashboard.CurrentCharacter.EngageDungeon(dgId);
 
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
@@ -99,7 +99,7 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
-            if (App.Settings.LfgEnabled) WindowManager.LfgListWindow.VM.RemoveDeadLfg();
+            if (App.Settings.LfgEnabled) WindowManager.ViewModels.LFG.RemoveDeadLfg();
         }
 
         #region Factory
@@ -176,7 +176,7 @@ namespace TCC.Parsing
         private static void HandleLfgNotListed(string srvMsg, SystemMessage sysMsg)
         {
             ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
-            WindowManager.LfgListWindow.VM.ForceStopPublicize();
+            WindowManager.ViewModels.LFG.ForceStopPublicize();
         }
 
         private static void Redirect(string srvMsg, SystemMessage sysMsg, ChatChannel ch)
@@ -200,7 +200,7 @@ namespace TCC.Parsing
             var regName = srvMsg.Split('\v')[2].Replace("@rgn:", "");
             var regId = uint.Parse(regName);
 
-            SessionManager.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
+            Session.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
 
             TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, msg.RawMessage);
 
@@ -213,7 +213,7 @@ namespace TCC.Parsing
             var npcName = srvMsgSplit.Last().Replace("@creature:", "");
             var zoneId = uint.Parse(npcName.Split('#')[0]);
             var templateId = uint.Parse(npcName.Split('#')[1]);
-            SessionManager.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
+            Session.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
             return m.Name;
         }
         private static string GetFieldBossKillerName(string srvMsg)

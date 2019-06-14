@@ -18,14 +18,14 @@ namespace TCC.Windows
         public DungeonEditWindow()
         {
             InitializeComponent();
-            DataContext = WindowManager.Dashboard.VM;
+            DataContext = WindowManager.ViewModels.Dashboard;
         }
         public IEnumerable<ItemLevelTier> ItemLevelTiers => EnumUtils.ListFromEnum<ItemLevelTier>();
         public IEnumerable<ResetMode> ResetModes => EnumUtils.ListFromEnum<ResetMode>();
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            SessionManager.DB.DungeonDatabase.SaveCustomDefs();
+            Session.DB.DungeonDatabase.SaveCustomDefs();
             Close();
 
         }

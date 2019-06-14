@@ -82,9 +82,9 @@
             }
         }
 
-        public int ActualRuns => MaxBaseRuns * (SessionManager.IsElite && DoublesOnElite ? 2 : 1);
+        public int ActualRuns => MaxBaseRuns * (Session.IsElite && DoublesOnElite ? 2 : 1);
         public string IconName { get; set; }
-        public string Region => SessionManager.DB.GetDungeonGuardName(Id);
+        public string Region => Session.DB.GetDungeonGuardName(Id);
 
         public Dungeon(uint id, string name)
         {

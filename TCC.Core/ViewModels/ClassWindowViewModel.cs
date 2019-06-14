@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using TCC.Parsing;
 using TeraDataLite;
+using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
@@ -14,6 +17,64 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
         }
+
+        private void HandleRunemarks(S_WEAK_POINT p)
+        {
+            if (!(CurrentManager is ValkyrieLayoutVM vvm)) return;
+            vvm.RunemarksCounter.Val = p.TotalRunemarks;
+        }
+
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_STAMINA>(m =>
+            {
+                CurrentManager.SetMaxST(Convert.ToInt32(m.MaxST));
+                CurrentManager.SetST(Convert.ToInt32(m.CurrentST));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
+            {
+                CurrentClass = m.CharacterClass; // todo: check for enabled?
+                if (m.CharacterClass == Class.Valkyrie)
+                {
+                    PacketAnalyzer.NewProcessor.Hook<S_WEAK_POINT>(HandleRunemarks);
+                }
+                else
+                {
+                    PacketAnalyzer.NewProcessor.Unhook<S_WEAK_POINT>(HandleRunemarks);
+                }
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
+            {
+                CurrentClass = Class.None;
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(m =>
+            {
+                // check enabled?
+                switch (CurrentClass)
+                {
+                    case Class.Warrior when CurrentManager is WarriorLayoutVM wm:
+                        wm.EdgeCounter.Val = m.Edge;
+                        break;
+                    case Class.Sorcerer when CurrentManager is SorcererLayoutVM sm:
+                        sm.NotifyElementChanged();
+                        break;
+                }
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(p =>
+            {
+                AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(p =>
+            {
+                AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(p =>
+            {
+                AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            });
+
+        }
+
         //public bool IsTeraOnTop => WindowManager.IsTccVisible;
         private Class _currentClass = Class.None;
         public Class CurrentClass
@@ -23,6 +84,7 @@ namespace TCC.ViewModels
             {
                 if (_currentClass == value) return;
                 _currentClass = value;
+
                 Dispatcher.Invoke(() =>
                 {
                     CurrentManager.Dispose();

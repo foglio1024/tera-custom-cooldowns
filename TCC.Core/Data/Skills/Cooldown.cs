@@ -69,17 +69,17 @@ namespace TCC.Data.Skills
                 _canFlash = value;
                 if (value)
                 {
-                    SessionManager.CombatChanged += OnCombatStatusChanged;
+                    Session.CombatChanged += OnCombatStatusChanged;
                     _ccSub++;
-                    SessionManager.EncounterChanged += OnCombatStatusChanged;
+                    Session.EncounterChanged += OnCombatStatusChanged;
                     _ecSub++;
 
                 }
                 else
                 {
-                    SessionManager.CombatChanged -= OnCombatStatusChanged;
+                    Session.CombatChanged -= OnCombatStatusChanged;
                     _ccSub--;
-                    SessionManager.EncounterChanged -= OnCombatStatusChanged;
+                    Session.EncounterChanged -= OnCombatStatusChanged;
                     _ecSub--;
                     Log.CW($"CC: {_ccSub}\t\t-\t\tEC: {_ecSub}");
 
@@ -122,7 +122,7 @@ namespace TCC.Data.Skills
         private static int _ecSub;
         private void OnCombatStatusChanged()
         {
-            if ((SessionManager.Encounter || SessionManager.Combat) && FlashOnAvailable)
+            if ((Session.Encounter || Session.Combat) && FlashOnAvailable)
                 ForceFlashing();
             else
                 ForceStopFlashing();

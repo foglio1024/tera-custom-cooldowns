@@ -92,7 +92,7 @@ namespace TCC.Parsing
                 var resp = await ControlConnection.GetServer();
                 if (resp != 0)
                 {
-                    NewConnection?.Invoke(SessionManager.DB.ServerDatabase.GetServer(resp));
+                    NewConnection?.Invoke(Session.DB.ServerDatabase.GetServer(resp));
                 }
 
                 var stream = client.GetStream();

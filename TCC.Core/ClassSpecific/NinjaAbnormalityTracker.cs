@@ -12,20 +12,20 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckFocus(p);
             CheckInnerHarmony(p);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckInnerHarmony(p);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckFocus(p);
             CheckInnerHarmony(p);
         }

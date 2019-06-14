@@ -16,13 +16,13 @@ namespace TCC.ClassSpecific
         private static Skill _rollingReload;
         public GunnerAbnormalityTracker()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.airdash_tex", SessionManager.CurrentPlayer.Class, out _dashingReload);
-            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.ambushrolling_tex", SessionManager.CurrentPlayer.Class, out _rollingReload);
+            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.airdash_tex", Session.Me.Class, out _dashingReload);
+            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.ambushrolling_tex", Session.Me.Class, out _rollingReload);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckDashingReload(p);
             CheckLaserTargeting(p);
         }
@@ -37,12 +37,12 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckLaserTargeting(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckLaserTargeting(p);
         }
 

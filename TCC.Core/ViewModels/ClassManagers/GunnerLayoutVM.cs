@@ -13,10 +13,10 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
+            Session.DB.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
+            Session.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
+            Session.DB.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
+            Session.DB.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
 
 
             BurstFire = new Cooldown(bfire, true);

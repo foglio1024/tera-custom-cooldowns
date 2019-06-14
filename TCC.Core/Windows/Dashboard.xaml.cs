@@ -16,17 +16,17 @@ namespace TCC.Windows
     /// </summary>
     public partial class Dashboard
     {
-        public DashboardViewModel VM { get; }
+        private DashboardViewModel VM { get; }
         public IntPtr Handle { get; private set; }
 
-        public Dashboard()
+        public Dashboard(DashboardViewModel vm)
         {
             InitializeComponent();
-            DataContext = new DashboardViewModel();
+            DataContext = vm;
             VM = DataContext as DashboardViewModel;
             Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
             Showed += () => VM.UpdateBuffs();
-            Hidden += () => SessionManager.DB.DungeonDatabase.SaveCustomDefs();
+            Hidden += () => Session.DB.DungeonDatabase.SaveCustomDefs();
             //MouseLeftButtonDown += (_, __) => MenuPopup.IsOpen = false;
         }
 

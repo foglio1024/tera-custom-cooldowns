@@ -401,7 +401,7 @@ namespace TCC.Data.Pc
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
+                        if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(Session.Me.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return false;
                         }

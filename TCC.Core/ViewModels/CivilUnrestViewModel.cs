@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using TCC.Data;
+using TCC.Parsing;
 using TeraDataLite;
+using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
@@ -99,6 +101,48 @@ namespace TCC.ViewModels
             _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
         }
 
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(m =>
+            {
+                try
+                {
+                    m.GuildDetails.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.SetGuildName(x.Item1, x.Item2));
+                }
+                catch
+                {
+                    // ignored
+                }
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO>(m =>
+            {
+                try
+                {
+                    m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.AddGuild(x));
+                }
+                catch
+                {
+                    // ignored
+                }
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_DESTROY_GUILD_TOWER>(m =>
+            {
+                try
+                {
+                    WindowManager.ViewModels.CivilUnrest.AddDestroyedGuildTower(m.SourceGuildId);
+                }
+                catch
+                {
+                    // ignored
+                }
+
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(p =>
+            {
+                NotifyTeleported(); // need check for enabled?
+            });
+        }
+
         public void AddGuild(CityWarGuildData guildInfo)
         {
             var g = _guilds.FirstOrDefault(x => x.Id == guildInfo.Id);
@@ -106,13 +150,13 @@ namespace TCC.ViewModels
             {
                 g.TowerHp = guildInfo.TowerHp;
                 if (g.Name != "") return;
-                if(guildInfo.Self) g.Name = WindowManager.Dashboard.VM.CurrentCharacter?.GuildName;
+                if(guildInfo.Self) g.Name = WindowManager.ViewModels.Dashboard.CurrentCharacter?.GuildName;
                 //TODO: add kills and deaths?
             }
             else
             {
                 var name = "";
-                if (guildInfo.Self) name = WindowManager.Dashboard.VM.CurrentCharacter?.GuildName;
+                if (guildInfo.Self) name = WindowManager.ViewModels.Dashboard.CurrentCharacter?.GuildName;
                 _guilds.Add(new CivilUnrestGuild() { Id = guildInfo.Id, Name = name, TowerHp = guildInfo.TowerHp, TowersDestroyed = 0 });
             }
         }

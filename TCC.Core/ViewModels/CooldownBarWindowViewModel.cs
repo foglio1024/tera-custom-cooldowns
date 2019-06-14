@@ -13,10 +13,11 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
+using TCC.Parsing;
 using TCC.Windows;
 
 using TeraDataLite;
-
+using TeraPacketParser.Messages;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
@@ -40,8 +41,8 @@ namespace TCC.ViewModels
         public ICollectionViewLiveShaping ItemsView { get; set; }
         public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
         public SynchronizedObservableCollection<Skill> SkillChoiceList { get; set; }
-        public IEnumerable<Item> Items => SessionManager.DB.ItemsDatabase.ItemSkills;
-        public IEnumerable<Abnormality> Passivities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Item> Items => Session.DB.ItemsDatabase.ItemSkills;
+        public IEnumerable<Abnormality> Passivities => Session.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
 
         private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.Class.CurrentManager;
 
@@ -230,8 +231,8 @@ namespace TCC.ViewModels
                     var tag = sk.CooldownType.ToString();
                     root.Add(new XElement(tag, new XAttribute("id", sk.Skill.Id), new XAttribute("row", 3), new XAttribute("name", sk.Skill.ShortName)));
                 });
-                if (SessionManager.CurrentPlayer.Class > (Class)12) return;
-                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
+                if (Session.Me.Class > (Class)12) return;
+                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(Session.Me.Class).ToLower()}-skills.xml"));
             }));
         }
 
@@ -511,7 +512,7 @@ namespace TCC.ViewModels
 
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
-            SessionManager.DatabaseLoaded += InitViews;
+            Session.DatabaseLoaded += InitViews;
 
             //SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
 
@@ -553,6 +554,42 @@ namespace TCC.ViewModels
         {
             var target = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == skill.Skill.IconName);
             if (target != null) HiddenSkills.Remove(target);
+        }
+
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(m =>
+            {
+                SkillManager.AddSkill(m.SkillId, m.Cooldown);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_ITEM>(m =>
+            {
+                SkillManager.AddItemSkill(m.ItemId, m.Cooldown);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(m =>
+            {
+                SkillManager.ChangeSkillCooldown(m.SkillId, m.Cooldown);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m =>
+            {
+                ClearSkills();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
+            {
+                ClearSkills();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
+            {
+                ClearSkills();
+                LoadSkills(m.CharacterClass);
+            });
+
+            PacketAnalyzer.NewProcessor.Hook<S_CREST_MESSAGE>(m =>
+            {
+                if (m.Type != 6) return;
+                SkillManager.ResetSkill(m.SkillId);
+            });
+
         }
     }
 }

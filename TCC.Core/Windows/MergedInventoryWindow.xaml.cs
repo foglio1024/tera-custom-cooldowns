@@ -43,14 +43,14 @@ namespace TCC.Windows
         public void LoadItems()
         {
             var totalItemsAmount = 0;
-            foreach (var ch in WindowManager.Dashboard.VM.Characters.Where(c => !c.Hidden))
+            foreach (var ch in WindowManager.ViewModels.Dashboard.Characters.Where(c => !c.Hidden))
             {
                 totalItemsAmount += ch.Inventory.Count;
             }
             var itemsParsed = 0;
             Task.Factory.StartNew(() =>
             {
-                WindowManager.Dashboard.VM.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
+                WindowManager.ViewModels.Dashboard.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
                 {
                     Dispatcher.BeginInvoke(new Action(() =>
                     {

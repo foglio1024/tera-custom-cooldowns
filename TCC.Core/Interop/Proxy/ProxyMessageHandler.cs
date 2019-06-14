@@ -48,12 +48,12 @@ namespace TCC.Interop.Proxy
         private static void SetUiMode(JObject parameters)
         {
             //Log.CW("[ProxyMessageHandler] Setting UI mode");
-            SessionManager.InGameUiOn = parameters["uiMode"].Value<bool>();
+            Session.InGameUiOn = parameters["uiMode"].Value<bool>();
         }
         private static void SetChatMode(JObject parameters)
         {
             //Log.CW("[ProxyMessageHandler] Setting chat mode");
-            SessionManager.InGameChatOpen = parameters["chatMode"].Value<bool>();
+            Session.InGameChatOpen = parameters["chatMode"].Value<bool>();
         }
         public void HandleResponse(Response res)
         {

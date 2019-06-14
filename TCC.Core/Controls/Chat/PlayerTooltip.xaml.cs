@@ -132,7 +132,7 @@ namespace TCC.Controls.Chat
         private void WhisperClick(object sender, RoutedEventArgs e)
         {
             WindowManager.FloatingButton.ClosePlayerMenu();
-            if (/*Settings.ChatEnabled &&*/ !SessionManager.InGameChatOpen) FocusManager.SendNewLine();
+            if (/*Settings.ChatEnabled &&*/ !Session.InGameChatOpen) FocusManager.SendNewLine();
 
             FocusManager.SendString("/w " + WindowManager.FloatingButton.TooltipInfo.Name + " ");
         }

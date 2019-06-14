@@ -1,6 +1,11 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Interop.Proxy;
@@ -8,19 +13,23 @@ using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
 using TCC.ViewModels;
 using TeraPacketParser;
+using TeraPacketParser.Messages;
 using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing
 {
     public static class PacketAnalyzer
     {
+        public static event Action ProcessorReady;
         public static ITeraSniffer Sniffer;
         public static MessageFactory Factory;
         public static MessageProcessor Processor;
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         public static Thread AnalysisThread;
         public static int AnalysisThreadId;
-        public static void Init()
+        public static NewProcessor NewProcessor { get; set; }
+
+        private static void Init()
         {
             switch (App.Settings.CaptureMode)
             {
@@ -36,7 +45,8 @@ namespace TCC.Parsing
             Sniffer.EndConnection += OnEndConnection;
             Sniffer.MessageReceived += EnqueuePacket;
 
-            SessionManager.Server = new Server("", "", "", 0);
+            Session.Server = new Server("", "", "", 0);
+            ProcessorReady += InstallHooks;
 
             Factory = new MessageFactory();
             Processor = new MessageProcessor();
@@ -50,32 +60,46 @@ namespace TCC.Parsing
             {
                 Log.All("Analysis already running, skipping...");
             }
-
             Sniffer.Enabled = true;
+
+        }
+        private static void InstallHooks()
+        {
+            NewProcessor.Hook<C_CHECK_VERSION>(PacketHandler.HandleCheckVersion);
+            NewProcessor.Hook<C_LOGIN_ARBITER>(PacketHandler.HandleLoginArbiter);
+            NewProcessor.Hook<S_GET_USER_LIST>(PacketHandler.HandleGetUserList);
+            NewProcessor.Hook<S_LOGIN>(PacketHandler.HandleLogin);
         }
 
         public static async void InitAsync()
         {
             await Task.Factory.StartNew(Init);
+
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
         }
         private static void PacketAnalysisLoop()
         {
-            AnalysisThreadId = FoglioUtils.MiscUtils.GetCurrentThreadId();
+            AnalysisThreadId = MiscUtils.GetCurrentThreadId();
+            NewProcessor = new NewProcessor();
+            ProcessorReady?.Invoke();
+
             while (true)
             {
-                if (!Packets.TryDequeue(out var msg))
+                if (!Packets.TryDequeue(out var pkt))
                 {
                     Thread.Sleep(1);
                     continue;
                 }
-                Processor.Process(Factory.Create(msg));
+
+                var msg = Factory.Create(pkt);
+                NewProcessor.Handle(msg);
+                //Processor.Process(msg);
             }
             // ReSharper disable once FunctionNeverReturns
         }
         private static void OnNewConnection(Server srv)
         {
-            SessionManager.Server = srv;
+            Session.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
@@ -91,20 +115,59 @@ namespace TCC.Parsing
             WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
 
             WindowManager.ViewModels.Group.ClearAllAbnormalities();
-            WindowManager.Dashboard.VM.UpdateBuffs();
-            WindowManager.Dashboard.VM.SaveCharacters();
-            SessionManager.CurrentPlayer.ClearAbnormalities();
+            WindowManager.ViewModels.Dashboard.UpdateBuffs();
+            WindowManager.ViewModels.Dashboard.SaveCharacters();
+            Session.Me.ClearAbnormalities();
             EntityManager.ClearNPC();
-            SkillManager.Clear();
+            WindowManager.ViewModels.Cooldowns.ClearSkills(); // TODO: hook connection to these too
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
-            SessionManager.Logged = false;
-            SessionManager.LoadingScreen = true;
+            ProxyInterface.Instance.Disconnect(); 
+            Session.Logged = false;
+            Session.LoadingScreen = true;
         }
 
         public static void EnqueuePacket(Message message)
         {
             Packets.Enqueue(message);
         }
+
     }
+    public class NewProcessor
+    {
+        private ConcurrentDictionary<Type, List<Delegate>> _hooks { get; }
+
+        private readonly object _lock = new object();
+
+        public NewProcessor()
+        {
+            _hooks = new ConcurrentDictionary<Type, List<Delegate>>();
+        }
+
+        public void Hook<T>(Action<T> action)
+        {
+            lock (_lock)
+            {
+                if (!_hooks.TryGetValue(typeof(T), out _)) _hooks[typeof(T)] = new List<Delegate>();
+                if(!_hooks[typeof(T)].Contains(action)) _hooks[typeof(T)].Add(action);
+            }
+        }
+        public void Unhook<T>(Action<T> action)
+        {
+            lock (_lock)
+            {
+                if (!_hooks.TryGetValue(typeof(T), out var handlers)) return;
+                handlers.Remove(action);
+            }
+        }
+        public void Handle(ParsedMessage msg)
+        {
+            Console.WriteLine($"Handling {msg.GetType().Name}");
+            if (!_hooks.TryGetValue(msg.GetType(), out var handlers) || handlers == null) return;
+            lock (_lock)
+            {
+                handlers.ForEach(del => del.DynamicInvoke(msg));
+            }
+        }
+    }
+
 }

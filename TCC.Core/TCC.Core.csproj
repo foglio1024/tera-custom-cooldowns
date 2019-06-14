@@ -573,7 +573,7 @@
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
-    <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
+    <Compile Include="ViewModels\NpcWindowViewModel.cs" />
     <Compile Include="ViewModels\BuffBarWindowViewModel.cs" />
     <Compile Include="ViewModels\CooldownBarWindowViewModel.cs" />
     <Compile Include="ViewModels\GroupWindowViewModel.cs" />
@@ -1199,7 +1199,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SessionManager.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -20,7 +20,7 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckGrugnirsBite(p);
             CheckTwilightWaltz(p);
             CheckRagnarok(p);
@@ -29,13 +29,13 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckRagnarok(p);
             CheckGodsfall(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckRagnarok(p);
             CheckGodsfall(p);
         }
@@ -90,9 +90,9 @@ namespace TCC.ClassSpecific
 
         public ValkyrieAbnormalityTracker()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", SessionManager.CurrentPlayer.Class, out _twilightWaltz);
-            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", SessionManager.CurrentPlayer.Class, out _godsfall);
-            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", SessionManager.CurrentPlayer.Class, out _grugnirsBite);
+            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.rageslash_tex", Session.Me.Class, out _twilightWaltz);
+            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.warbegin_tex", Session.Me.Class, out _godsfall);
+            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.halfmoon_tex", Session.Me.Class, out _grugnirsBite);
 
         }
     }

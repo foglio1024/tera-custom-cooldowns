@@ -1,5 +1,6 @@
 ﻿using FoglioUtils;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TeraDataLite;
+using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
@@ -63,7 +65,7 @@ namespace TCC.ViewModels
             Dps = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Dps && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
             Tanks = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Tank && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
             Healers = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Healer && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            All = CollectionViewUtils.InitLiveView(o => ((User)o).Visible, Members, new [] {nameof(User.Visible) }, new[]
+            All = CollectionViewUtils.InitLiveView(o => ((User)o).Visible, Members, new[] { nameof(User.Visible) }, new[]
             {
                 new SortDescription(nameof(User.Role), ListSortDirection.Descending),
                 new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
@@ -133,7 +135,7 @@ namespace TCC.ViewModels
         {
             return Members.ToSyncList().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
-        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name) || _leaderOverride;
+        public bool AmILeader => IsLeader(Session.Me.Name) || _leaderOverride;
 
         public void SetAggro(ulong target)
         {
@@ -250,7 +252,7 @@ namespace TCC.ViewModels
         public void AddOrUpdateMember(PartyMemberData p)
         {
             var visible = true;
-            if (App.Settings.GroupWindowSettings.IgnoreMe && p.Name == SessionManager.CurrentPlayer.Name)
+            if (App.Settings.GroupWindowSettings.IgnoreMe && p.Name == Session.Me.Name)
             {
                 _leaderOverride = p.IsLeader;
                 visible = false;
@@ -280,7 +282,7 @@ namespace TCC.ViewModels
         {
             var opcode = newVal ? "TCC_PARTY_MEMBER_LOGON" : "TCC_PARTY_MEMBER_LOGOUT";
             var msg = "@0\vUserName\v" + name;
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
 
@@ -298,7 +300,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private void SendDeathMessage(string name)
@@ -315,7 +317,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_BATTLE_PARTY_DIE";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
             if (/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(msg, opcode); //ProxyOld.ForceSystemMessage(msg, opcode);
         }
@@ -333,7 +335,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }
@@ -389,7 +391,7 @@ namespace TCC.ViewModels
             {
                 m.IsLeader = m.Name == name;
             }
-            _leaderOverride = name == SessionManager.CurrentPlayer.Name;
+            _leaderOverride = name == Session.Me.Name;
             N(nameof(AmILeader));
             N(nameof(ShowLeaderButtons));
         }
@@ -525,7 +527,7 @@ namespace TCC.ViewModels
         {
             var u = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
             if (u == null) return;
-            var currCharGear = WindowManager.Dashboard.VM.CurrentCharacter.Gear;
+            var currCharGear = WindowManager.ViewModels.Dashboard.CurrentCharacter.Gear;
             u.Weapon = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
             u.Armor = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
             u.Gloves = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
@@ -537,83 +539,107 @@ namespace TCC.ViewModels
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             var ch = channel > 1000 ? "" : " ch." + channel;
-            u.Location = SessionManager.DB.TryGetGuardOrDungeonNameFromContinentId(continentId, out var l) ? l + ch : "Unknown";
+            u.Location = Session.DB.TryGetGuardOrDungeonNameFromContinentId(continentId, out var l) ? l + ch : "Unknown";
         }
 
-    }
-
-    public class DragBehavior
-    {
-        public readonly TranslateTransform Transform = new TranslateTransform();
-        private Point _elementStartPosition2;
-        private Point _mouseStartPosition2;
-        private static DragBehavior _instance = new DragBehavior();
-        public static DragBehavior Instance
+        protected override void InstallHooks()
         {
-            get => _instance;
-            set => _instance = value;
-        }
-
-        public static bool GetDrag(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(IsDragProperty);
-        }
-
-        public static void SetDrag(DependencyObject obj, bool value)
-        {
-            obj.SetValue(IsDragProperty, value);
-        }
-
-        public static readonly DependencyProperty IsDragProperty =
-          DependencyProperty.RegisterAttached("Drag",
-          typeof(bool), typeof(DragBehavior),
-          new PropertyMetadata(false, OnDragChanged));
-
-        private static void OnDragChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            // ignoring error checking
-            var element = (UIElement)sender;
-            var isDrag = (bool)e.NewValue;
-
-            Instance = new DragBehavior();
-            ((UIElement)sender).RenderTransform = Instance.Transform;
-
-            if (isDrag)
+            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(m =>
             {
-                element.MouseLeftButtonDown += Instance.ElementOnMouseLeftButtonDown;
-                element.MouseLeftButtonUp += Instance.ElementOnMouseLeftButtonUp;
-                element.MouseMove += Instance.ElementOnMouseMove;
-            }
-            else
+                SetAggroCircle(m.Circle, m.Action, m.User);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m => ClearAll());
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(m => ClearAll());
+            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(m => ClearAll());
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m => ClearAll());
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m => ClearAll());
+            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(m =>
             {
-                element.MouseLeftButtonDown -= Instance.ElementOnMouseLeftButtonDown;
-                element.MouseLeftButtonUp -= Instance.ElementOnMouseLeftButtonUp;
-                element.MouseMove -= Instance.ElementOnMouseMove;
-            }
-        }
-
-        private void ElementOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
-        {
-            var parent = Application.Current.MainWindow;
-            _mouseStartPosition2 = mouseButtonEventArgs.GetPosition(parent);
-            ((UIElement)sender).CaptureMouse();
-        }
-
-        private void ElementOnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
-        {
-            ((UIElement)sender).ReleaseMouseCapture();
-            _elementStartPosition2.X = Transform.X;
-            _elementStartPosition2.Y = Transform.Y;
-        }
-
-        private void ElementOnMouseMove(object sender, MouseEventArgs mouseEventArgs)
-        {
-            var parent = Application.Current.MainWindow;
-            var mousePos = mouseEventArgs.GetPosition(parent);
-            var diff = mousePos - _mouseStartPosition2;
-            if (!((UIElement)sender).IsMouseCaptured) return;
-            Transform.X = _elementStartPosition2.X + diff.X;
-            Transform.Y = _elementStartPosition2.Y + diff.Y;
+                ClearAllAbnormalities();
+                SetAggro(0);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_ASK_BIDDING_RARE_ITEM>(m => StartRoll());
+            PacketAnalyzer.NewProcessor.Hook<S_RESULT_BIDDING_DICE_THROW>(m =>
+            {
+                if (!Rolling) StartRoll();
+                SetRoll(m.EntityId, m.RollResult);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_RESULT_ITEM_BIDDING>(m => EndRoll());
+            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_USER>(m =>
+            {
+                if (!Exists(m.EntityId)) return;
+                UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(m =>
+            {
+                foreach (var buff in m.Abnormals)
+                {
+                    AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, buff.Id, buff.Duration, buff.Stacks);
+                }
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_ADD>(m =>
+            {
+                AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_DEL>(m =>
+            {
+                AbnormalityManager.EndPartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(m =>
+            {
+                ClearAbnormality(m.PlayerId, m.ServerId);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(m =>
+            {
+                AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_CHANGE_PARTY_MANAGER>(m =>
+            {
+                SetNewLeader(m.EntityId, m.Name);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(p =>
+            {
+                SetRaid(p.Raid);
+                Dispatcher.BeginInvoke(new Action(() => p.Members.ForEach(AddOrUpdateMember)));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY_MEMBER>(p =>
+            {
+                RemoveMember(p.PlayerId, p.ServerId);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY_MEMBER>(p =>
+            {
+                RemoveMember(p.PlayerId, p.ServerId, true);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGOUT_PARTY_MEMBER>(p =>
+            {
+                LogoutMember(p.PlayerId, p.ServerId);
+                ClearAbnormality(p.PlayerId, p.ServerId);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_HP>(p =>
+            {
+                UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_MP>(p =>
+            {
+                UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_STAT_UPDATE>(p =>
+            {
+                UpdateMember(p.PartyMemberData);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY>(p =>
+            {
+                Dispatcher.BeginInvoke(new Action(() => p.Party.ForEach(SetReadyStatus)));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY_FIN>(p =>
+            {
+                EndReadyCheck();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(p => 
+            {
+                if (Session.CivilUnrestZone) return; //TODO: hook only when not in CU
+                UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
+            });
         }
     }
 }

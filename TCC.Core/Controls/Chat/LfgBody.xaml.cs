@@ -19,7 +19,7 @@ namespace TCC.Controls.Chat
         {
             if (((LfgMessage)DataContext).LinkedListing != null)
             {
-                WindowManager.LfgListWindow.VM.LastClicked = ((LfgMessage)DataContext).LinkedListing;
+                WindowManager.ViewModels.LFG.LastClicked = ((LfgMessage)DataContext).LinkedListing;
                 ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
             }
             ProxyInterface.Instance.Stub.RequestPartyInfo(((LfgMessage)DataContext).AuthorId); // ProxyOld.RequestPartyInfo(((LfgMessage)DataContext).AuthorId);
@@ -29,7 +29,7 @@ namespace TCC.Controls.Chat
         {
             var name = ((sender as FrameworkElement)?.DataContext as User)?.Name;
             if (name == null) return;
-            ProxyInterface.Instance.Stub.AskInteractive(SessionManager.Server.ServerId, name); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, name);
+            ProxyInterface.Instance.Stub.AskInteractive(Session.Server.ServerId, name); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, name);
         }
     }
 }

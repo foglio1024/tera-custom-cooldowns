@@ -10,6 +10,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
     <UserControl.Resources>
+        <FrameworkElement x:Key="VisibilityGovernor" Visibility="{Binding ShowElleonMarks, Converter={StaticResource BoolToVisibleCollapsed}}"/>
         <Style TargetType="{x:Type ToolTip}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -58,13 +59,12 @@
                         <Separator Margin="0 2"
                                    Background="#2fff" />
                         <Grid Margin="0 5 0 3"
-                              Visibility="{Binding VM.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}">
+                              >
                             <TextBlock HorizontalAlignment="Left" Text="Elleon Marks" Foreground="#4fff" />
                             <TextBlock HorizontalAlignment="Right" Text="{Binding ElleonMarks, Mode=OneWay}"
                                        Foreground="#9fff" FontWeight="DemiBold" />
                         </Grid>
                         <local:RectangleBarGauge Height="4"
-                                                 Visibility="{Binding VM.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
                                                  Skew="-45"
                                                  HorizontalAlignment="Stretch"
                                                  Color="{StaticResource SilverBrush}"
@@ -317,7 +317,7 @@
                       ToolTipService.InitialShowDelay="0"
                       ToolTipService.ShowDuration="50000"
                       Background="Transparent"
-                      Visibility="{Binding VM.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
                       >
                     <StackPanel Margin="6 0" VerticalAlignment="Center">
                         <local:RectangleBarGauge Width="100"
@@ -403,7 +403,7 @@
                        Width="100"
                        Grid.Column="4"
                        Margin="6 0" 
-                      Visibility="{Binding VM.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
             />
         </Grid>
         <ListBox ItemsSource="{Binding SortedCharacters}" AlternationCount="1" Grid.ColumnSpan="2"

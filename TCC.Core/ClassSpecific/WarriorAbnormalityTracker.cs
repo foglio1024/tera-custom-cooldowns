@@ -20,12 +20,12 @@ namespace TCC.ClassSpecific
 
         public WarriorAbnormalityTracker()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", SessionManager.CurrentPlayer.Class, out _bladeWaltz);
+            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", Session.Me.Class, out _bladeWaltz);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckAssaultStance(p);
             CheckDefensiveStance(p);
             CheckDeadlyGamble(p);
@@ -35,7 +35,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckAssaultStance(p);
             CheckDefensiveStance(p);
             CheckDeadlyGamble(p);
@@ -45,7 +45,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!SessionManager.IsMe(p.TargetId)) return;
+            if (!Session.IsMe(p.TargetId)) return;
             CheckTraverseCut(p);
             CheckSwiftGlyphs(p);
             CheckDefensiveStance(p);

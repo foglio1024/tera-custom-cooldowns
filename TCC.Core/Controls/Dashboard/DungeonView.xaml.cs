@@ -39,10 +39,10 @@ namespace TCC.Controls.Dashboard
             var dung = cd.Cooldown?.Dungeon;
             if (dung == null) return;
 
-            var dng = WindowManager.Dashboard.VM.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
+            var dng = WindowManager.ViewModels.Dashboard.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
             if (dng != null) dng.Hilight = true;
 
-            var ch = WindowManager.Dashboard.VM.CharacterViewModels.ToList().FirstOrDefault(x => x.Character.Id == chara.Id);
+            var ch = WindowManager.ViewModels.Dashboard.CharacterViewModels.ToList().FirstOrDefault(x => x.Character.Id == chara.Id);
             if (ch != null) ch.Hilight = true;
         }
         private void OnEntryMouseLeave(object sender, MouseEventArgs e)
@@ -51,14 +51,14 @@ namespace TCC.Controls.Dashboard
             var chara = cd?.Owner;
             var dung = cd?.Cooldown?.Dungeon;
             if (dung == null) return;
-            var col = WindowManager.Dashboard.VM.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
+            var col = WindowManager.ViewModels.Dashboard.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
             if (col != null) col.Hilight = false;
-            var chVM = WindowManager.Dashboard.VM.CharacterViewModels.ToList().FirstOrDefault(x => chara != null && x.Character.Id == chara.Id);
+            var chVM = WindowManager.ViewModels.Dashboard.CharacterViewModels.ToList().FirstOrDefault(x => chara != null && x.Character.Id == chara.Id);
             if (chVM != null) chVM.Hilight = false;
         }
         private void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
         {
-            new DungeonEditWindow() { Topmost = true, Owner = WindowManager.Dashboard }.ShowDialog();
+            new DungeonEditWindow() { Topmost = true, Owner = WindowManager.DashboardWindow }.ShowDialog();
         }
     }
 

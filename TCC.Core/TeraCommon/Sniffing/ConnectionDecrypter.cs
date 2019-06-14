@@ -13,7 +13,7 @@ namespace TCC.TeraCommon.Sniffing
         private readonly string _region;
         private MemoryStream _client = new MemoryStream();
         private MemoryStream _server = new MemoryStream();
-        private Session _session;
+        private Crypt.Session _session;
 
         public ConnectionDecrypter(string region = "Unknown")
         {
@@ -37,9 +37,9 @@ namespace TCC.TeraCommon.Sniffing
             action?.Invoke(data);
         }
 
-        private Session CreateSession(byte[] clientKey1, byte[] clientKey2, byte[] serverKey1, byte[] serverKey2)
+        private Crypt.Session CreateSession(byte[] clientKey1, byte[] clientKey2, byte[] serverKey1, byte[] serverKey2)
         {
-            var session = Session.Instance;
+            var session = Crypt.Session.Instance;
             session.ClientKey1 = clientKey1;
             session.ClientKey2 = clientKey2;
             session.ServerKey1 = serverKey1;

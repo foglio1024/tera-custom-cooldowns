@@ -33,7 +33,7 @@ namespace TCC.ViewModels
                 N(nameof(ElementalizeWarning));
             }
         }
-        public bool ElementalizeWarning => !Elementalize && (SessionManager.Combat || SessionManager.Encounter);
+        public bool ElementalizeWarning => !Elementalize && (Session.Combat || Session.Encounter);
 
         public MysticLayoutVM()
         {
@@ -43,20 +43,20 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
+            Session.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
+            Session.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
+            Session.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
+            Session.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
+            Session.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
+            Session.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
+            Session.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
+            Session.DB.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
+            Session.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
+            Session.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
+            Session.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
+            Session.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
 
             ThrallOfProtection = new Cooldown(top, false);
             ThrallOfLife = new Cooldown(tol, false);
@@ -88,8 +88,8 @@ namespace TCC.ViewModels
             ClassAbnormalityTracker.MarkingExpired += OnVocExpired;
             ClassAbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
 
-            SessionManager.CombatChanged += OnCombatChanged;
-            SessionManager.EncounterChanged += OnCombatChanged;
+            Session.CombatChanged += OnCombatChanged;
+            Session.EncounterChanged += OnCombatChanged;
             Auras.AuraChanged += CheckAurasWarning;
         }
 

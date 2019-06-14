@@ -44,12 +44,12 @@ namespace TCC
             if (e.Key == App.Settings.LfgHotkey.Key && e.Modifier == App.Settings.LfgHotkey.Modifier)
             {
                 //                if (!ProxyOld.IsConnected) return;
-                if (!SessionManager.Logged) return;
+                if (!Session.Logged) return;
 
                 if (!ProxyInterface.Instance.IsStubAvailable) return;
                 if (!WindowManager.LfgListWindow.IsVisible)
                 {
-                    WindowManager.LfgListWindow.VM.StayClosed = false;
+                    WindowManager.ViewModels.LFG.StayClosed = false;
                     ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
                 }
                 else WindowManager.LfgListWindow.CloseWindow();
@@ -61,12 +61,12 @@ namespace TCC
             }
             else if (e.Key == App.Settings.InfoWindowHotkey.Key && e.Modifier == App.Settings.InfoWindowHotkey.Modifier)
             {
-                if (WindowManager.Dashboard.IsVisible) WindowManager.Dashboard.HideWindow();
-                else WindowManager.Dashboard.ShowWindow();
+                if (WindowManager.DashboardWindow.IsVisible) WindowManager.DashboardWindow.HideWindow();
+                else WindowManager.DashboardWindow.ShowWindow();
             }
             else if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {
-                if (!SessionManager.Logged) return;
+                if (!Session.Logged) return;
                 WindowManager.CooldownWindow.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
@@ -75,13 +75,13 @@ namespace TCC
             }
             else if (e.Key == Keys.R && e.Modifier == (ModifierKeys.Alt | ModifierKeys.Control))
             {
-                if (!SessionManager.Logged
-                  || SessionManager.LoadingScreen
-                  || SessionManager.Combat
+                if (!Session.Logged
+                  || Session.LoadingScreen
+                  || Session.Combat
                   || !ProxyInterface.Instance.IsStubAvailable
                     /*|| !ProxyOld.IsConnected*/) return;
 
-                WindowManager.LfgListWindow.VM.ForceStopPublicize();
+                WindowManager.ViewModels.LFG.ForceStopPublicize();
                 ProxyInterface.Instance.Stub.ReturnToLobby(); //   ProxyOld.ReturnToLobby();
             }
             else if (e.Key == Keys.C && e.Modifier == (ModifierKeys.Alt | ModifierKeys.Control))
@@ -113,7 +113,7 @@ namespace TCC
             {
                 // register the event that is fired after the key press.
                 Instance.KeyPressed += hook_KeyPressed;
-                SessionManager.ChatModeChanged += CheckHotkeys;
+                Session.ChatModeChanged += CheckHotkeys;
                 FocusManager.ForegroundChanged += CheckHotkeys;
                 _isInitialized = true;
             });
@@ -126,7 +126,7 @@ namespace TCC
                 // register the event that is fired after the key press.
                 Instance.KeyPressed -= hook_KeyPressed;
                 if (_isRegistered) { ClearHotkeys(); }
-                SessionManager.ChatModeChanged -= CheckHotkeys;
+                Session.ChatModeChanged -= CheckHotkeys;
                 FocusManager.ForegroundChanged -= CheckHotkeys;
                 _isInitialized = false;
             });
@@ -135,7 +135,7 @@ namespace TCC
         {
             WindowManager.FloatingButton.Dispatcher.BeginInvoke(new Action(() =>
             {
-                SetHotkeys(!SessionManager.InGameChatOpen && FocusManager.IsForeground);
+                SetHotkeys(!Session.InGameChatOpen && FocusManager.IsForeground);
             }), DispatcherPriority.Background);
         }
 

@@ -92,8 +92,8 @@ namespace TCC.Data
         }
 
         //TODO: deadlock may happen here
-        public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
-                                                      LeaderId == SessionManager.CurrentPlayer.PlayerId ||
+        public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == Session.Me.PlayerId) || 
+                                                      LeaderId == Session.Me.PlayerId ||
                                                       WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||

@@ -18,11 +18,13 @@ using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Data.Map;
 using TCC.Data.Pc;
+using TCC.Parsing;
 using TCC.Windows;
 
 using TeraDataLite;
-
+using TeraPacketParser.Messages;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
@@ -38,10 +40,11 @@ namespace TCC.ViewModels
 
         /* -- Properties ------------------------------------------- */
 
+        //TODO: move to Session, keep only VM lists here
         public SynchronizedObservableCollection<Character> Characters { get; }
 
 
-        public Character CurrentCharacter => Characters.ToSyncList().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+        public Character CurrentCharacter => Characters.ToSyncList().FirstOrDefault(x => x.Id == Session.Me.PlayerId);
         public Character SelectedCharacter
         {
             get => _selectedCharacter;
@@ -179,7 +182,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    SessionManager.DB.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                    Session.DB.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
@@ -321,13 +324,113 @@ namespace TCC.ViewModels
                     new SortDescription("Item.Id", ListSortDirection.Ascending),
                 });
                 ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
-                WindowManager.Dashboard.ShowDetails();
+                WindowManager.DashboardWindow.ShowDetails();
                 Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
             }
             catch (Exception e)
             {
                 Log.F($"Failed to select character: {e}");
             }
+        }
+
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.NewProcessor.Hook<S_UPDATE_NPCGUILD>(m =>
+            {
+                switch (m.Guild)
+                {
+                    case NpcGuild.Vanguard:
+                        SetVanguardCredits(m.Credits);
+                        break;
+                    case NpcGuild.Guardian:
+                        SetGuardianCredits(m.Credits);
+                        break;
+                }
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_NPCGUILD_LIST>(m =>
+            {
+                if (!Session.IsMe(m.UserId)) return;
+                m.NpcGuildList.Keys.ToList().ForEach(k =>
+                {
+                    switch (k)
+                    {
+                        case (int)NpcGuild.Vanguard:
+                            SetVanguardCredits(m.NpcGuildList[k]);
+                            break;
+                        case (int)NpcGuild.Guardian:
+                            SetGuardianCredits(m.NpcGuildList[k]);
+                            break;
+                    }
+                });
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_INVEN>(m =>
+            {
+                if (m.Failed) return;
+                WindowManager.ViewModels.Dashboard.UpdateInventory(m.Items, m.First);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(m =>
+            {
+                CurrentCharacter.Coins = m.Coins;
+                CurrentCharacter.MaxCoins = m.MaxCoins;
+                CurrentCharacter.ItemLevel = m.Ilvl;
+                CurrentCharacter.Level = m.Level;
+
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m =>
+            {
+                UpdateBuffs();
+                foreach (var item in m.CharacterList)
+                {
+                    var ch = Characters.FirstOrDefault(x => x.Id == item.Id);
+                    if (ch != null)
+                    {
+                        ch.Name = item.Name;
+                        ch.Laurel = item.Laurel;
+                        ch.Position = item.Position;
+                        ch.GuildName = item.GuildName;
+                        ch.Level = item.Level;
+                        ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
+                        ch.LastOnline = item.LastOnline;
+                        ch.ServerName = Session.Server.Name;
+                    }
+                    else
+                    {
+                        Characters.Add(new Character(item));
+                    }
+                }
+                SaveCharacters();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
+            {
+                SetLoggedIn(m.PlayerId);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
+            {
+                UpdateBuffs();
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_COOL_TIME_LIST>(m =>
+            {
+                SetDungeons(m.DungeonCooldowns);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_FIELD_POINT_INFO>(m =>
+            {
+                if (CurrentCharacter == null) return;
+                CurrentCharacter.ClaimedGuardianQuests = m.Claimed;
+                CurrentCharacter.ClearedGuardianQuests = m.Cleared;
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(m =>
+            {
+                SetVanguard(m.WeeklyDone, m.DailyDone, m.VanguardCredits);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(m =>
+            {
+                if (m.Failed) return;
+                if (m.PlayerId != Session.Me.PlayerId) return;
+                foreach (var dg in m.DungeonClears)
+                {
+                    CurrentCharacter.SetDungeonClears(dg.Key, dg.Value);
+                }
+            });
         }
 
         /* -- EVENTS: TO BE REFACTORED (TODO)----------------------- */
@@ -346,7 +449,7 @@ namespace TCC.ViewModels
                 return;
             }
             LoadEventFile(today, region);
-            if (SessionManager.Logged) TimeManager.Instance.SetGuildBamTime(false);
+            if (Session.Logged) TimeManager.Instance.SetGuildBamTime(false);
 
         }
         public void ClearEvents()
@@ -521,9 +624,9 @@ namespace TCC.ViewModels
 
         public void UpdateBuffs()
         {
-            if (!SessionManager.Logged) return;
+            if (!Session.Logged) return;
             CurrentCharacter.Buffs.Clear();
-            SessionManager.CurrentPlayer.Buffs.ToList().ForEach(b =>
+            Session.Me.Buffs.ToList().ForEach(b =>
             {
                 //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
                 /*if (existing == null)*/
@@ -535,7 +638,7 @@ namespace TCC.ViewModels
                 //    existing.Stacks = b.Stacks;
                 //}
             });
-            SessionManager.CurrentPlayer.Debuffs.ToList().ForEach(b =>
+            Session.Me.Debuffs.ToList().ForEach(b =>
             {
                 //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
                 /*if (existing == null)*/
@@ -554,11 +657,14 @@ namespace TCC.ViewModels
             var em = list.Values.FirstOrDefault(x => x.Id == 151643);
             var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
             var ps = list.Values.FirstOrDefault(x => x.Id == 45482);
-            
+
             //TODO: check this
-            /*if (em != null)*/ if(em.Id != 0) SetElleonMarks(em.Amount);
-            /*if (ds != null)*/ if(ds.Id != 0) CurrentCharacter.DragonwingScales = ds.Amount;
-            /*if (ps != null)*/ if(ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
+            /*if (em != null)*/
+            if (em.Id != 0) SetElleonMarks(em.Amount);
+            /*if (ds != null)*/
+            if (ds.Id != 0) CurrentCharacter.DragonwingScales = ds.Amount;
+            /*if (ps != null)*/
+            if (ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
                 if (first) CurrentCharacter.Inventory.Clear();
@@ -584,19 +690,19 @@ namespace TCC.ViewModels
 
         public void ResetDailyData()
         {
-            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.ResetDailyData());
+            WindowManager.ViewModels.Dashboard.Characters.ToSyncList().ForEach(ch => ch.ResetDailyData());
             ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
         }
 
         public void ResetWeeklyDungeons()
         {
-            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.ResetWeeklyDungeons());
+            WindowManager.ViewModels.Dashboard.Characters.ToSyncList().ForEach(ch => ch.ResetWeeklyDungeons());
             ChatWindowManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
         }
 
         public void ResetVanguardWeekly()
         {
-            WindowManager.Dashboard.VM.Characters.ToSyncList().ForEach(ch => ch.VanguardWeekliesDone = 0);
+            WindowManager.ViewModels.Dashboard.Characters.ToSyncList().ForEach(ch => ch.VanguardWeekliesDone = 0);
             ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
         }
     }

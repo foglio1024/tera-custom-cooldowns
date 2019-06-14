@@ -81,7 +81,7 @@ namespace TCC.Controls.Skills
             StopArcAnimation(PreArcRef); //stop any arc animations
             var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             GlowRef.BeginAnimation(OpacityProperty, an);
-            if (Context.FlashOnAvailable && (SessionManager.Combat || SessionManager.Encounter)) Warning = true;
+            if (Context.FlashOnAvailable && (Session.Combat || Session.Encounter)) Warning = true;
 
         }
     }

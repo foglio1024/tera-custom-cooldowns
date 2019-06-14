@@ -52,7 +52,7 @@ namespace TCC
 
         private void CheckCloseEvents()
         {
-            var closeEventsCount = WindowManager.Dashboard.VM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
+            var closeEventsCount = WindowManager.ViewModels.Dashboard.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
             if (App.Settings.FloatingButtonSettings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
@@ -61,7 +61,7 @@ namespace TCC
         private void CheckNewDay(object sender, EventArgs e)
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
-                WindowManager.Dashboard.VM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
+                WindowManager.ViewModels.Dashboard.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
             if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0)
                 CheckCloseEvents();
         }
@@ -71,11 +71,11 @@ namespace TCC
             if (string.IsNullOrEmpty(lang)) return;
             CurrentRegion = TccUtils.RegionEnumFromLanguage(lang);// region.StartsWith("EU") ? "EU" : region;
 
-            App.Settings.LastLanguage = lang;
+            //App.Settings.LastLanguage = lang; //TODO: needed?
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
                 CurrentRegion = RegionEnum.EU;
-                App.Settings.LastLanguage = "EU-EN";
+                App.Settings.LastLanguage = "EU-EN"; 
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -91,13 +91,13 @@ namespace TCC
                 ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
-            if (WindowManager.Dashboard.VM.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
+            if (WindowManager.ViewModels.Dashboard.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
             {
-                WindowManager.Dashboard.VM.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
+                WindowManager.ViewModels.Dashboard.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
             }
 
             CheckReset();
-            WindowManager.Dashboard.VM.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion.ToString());
+            WindowManager.ViewModels.Dashboard.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion.ToString());
 
         }
 
@@ -106,15 +106,15 @@ namespace TCC
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
             if (App.Settings.LastRun > todayReset || DateTime.Now < todayReset) return;
 
-            WindowManager.Dashboard.VM.ResetDailyData();
+            WindowManager.ViewModels.Dashboard.ResetDailyData();
 
             var weeklyDungeonsReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].DungeonsWeeklyResetDay;
             var weeklyVanguardReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].VanguardResetDay;
 
-            if (weeklyDungeonsReset) WindowManager.Dashboard.VM.ResetWeeklyDungeons();
-            if (weeklyVanguardReset) WindowManager.Dashboard.VM.ResetVanguardWeekly();
+            if (weeklyDungeonsReset) WindowManager.ViewModels.Dashboard.ResetWeeklyDungeons();
+            if (weeklyVanguardReset) WindowManager.ViewModels.Dashboard.ResetVanguardWeekly();
 
-            WindowManager.Dashboard.VM.SaveCharacters();
+            WindowManager.ViewModels.Dashboard.SaveCharacters();
             App.Settings.LastRun = DateTime.Now;
             App.Settings.Save();
         }
@@ -126,7 +126,7 @@ namespace TCC
             {
                 var sb = new StringBuilder(BaseUrl);
                 sb.Append("?srv=");
-                sb.Append(SessionManager.Server.ServerId);
+                sb.Append(Session.Server.ServerId);
                 sb.Append("&reg=");
                 sb.Append(CurrentRegion);
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -152,7 +152,7 @@ namespace TCC
         {
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
-            sb.Append(SessionManager.Server.ServerId);
+            sb.Append(Session.Server.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             sb.Append("&post");
@@ -183,7 +183,7 @@ namespace TCC
 
         public void SetGuildBamTime(bool force)
         {
-            foreach (var eg in WindowManager.Dashboard.VM.EventGroups.ToSyncList().Where(x => x.RemoteCheck))
+            foreach (var eg in WindowManager.ViewModels.Dashboard.EventGroups.ToSyncList().Where(x => x.RemoteCheck))
             {
                 foreach (var ev in eg.Events.ToSyncList())
                 {

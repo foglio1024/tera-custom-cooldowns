@@ -323,7 +323,7 @@ namespace TCC.Settings
         }
         protected Class CurrentClass()
         {
-            var cc = SessionManager.CurrentPlayer == null || SessionManager.CurrentPlayer?.Class == Class.None ? Class.Common : SessionManager.CurrentPlayer.Class;
+            var cc = Session.Me == null || Session.Me?.Class == Class.None ? Class.Common : Session.Me.Class;
             cc = PerClassPosition ? cc : Class.Common;
             return cc;
         }

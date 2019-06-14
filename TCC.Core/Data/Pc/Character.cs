@@ -181,8 +181,8 @@ namespace TCC.Data.Pc
                 N(nameof(IsSelected));
             }
         }
-        public double VanguardWeeklyCompletion => VanguardWeekliesDone / (double)SessionManager.MaxWeekly;
-        public double VanguardDailyCompletion => VanguardDailiesDone / (double)SessionManager.MaxDaily;
+        public double VanguardWeeklyCompletion => VanguardWeekliesDone / (double)Session.MaxWeekly;
+        public double VanguardDailyCompletion => VanguardDailiesDone / (double)Session.MaxDaily;
         public double ClaimedGuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
         public double ClearedGuardianCompletion => ClearedGuardianQuests / (double)MaxGuardianQuests;
 
@@ -354,8 +354,8 @@ namespace TCC.Data.Pc
             VanguardDailiesDone = 0;
             VanguardWeekliesDone = 0;
             Laurel = Laurel.None;
-            MaxGuardianQuests = SessionManager.MaxGuardianQuests;
-            foreach (var dg in SessionManager.DB.DungeonDatabase.Dungeons.Values)
+            MaxGuardianQuests = Session.MaxGuardianQuests;
+            foreach (var dg in Session.DB.DungeonDatabase.Dungeons.Values)
             {
                 Dungeons.Add(new DungeonCooldown(dg, Dispatcher, this));
             }
@@ -442,7 +442,7 @@ namespace TCC.Data.Pc
         private int _amount;
         private readonly uint _id;
 
-        public Item Item => SessionManager.DB.ItemsDatabase.Items.TryGetValue(_id, out var item)
+        public Item Item => Session.DB.ItemsDatabase.Items.TryGetValue(_id, out var item)
                             ? item
                             : new Item(0, "", RareGrade.Common, 0, 0, "");
         public uint Slot { get; }

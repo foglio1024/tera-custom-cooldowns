@@ -5,11 +5,14 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
+using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Parsing;
 using TCC.Settings;
 using TCC.Windows.Widgets;
 using TeraDataLite;
+using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
@@ -58,6 +61,94 @@ namespace TCC.ViewModels
 
         }
 
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(m =>
+            {
+                AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
+            {
+                BlockedUsers.Clear();
+
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_EXP>(m =>
+            {
+                var msg = $"<font>You gained </font>";
+                msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.GainedTotalExp - m.GainedRestedExp:N0}</font>";
+                msg += $"<font>{(m.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{m.GainedRestedExp:N0}" : "")} </font>";
+                msg += $"<font>(</font>";
+                msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
+                msg += $"{(m.GainedTotalExp) / (double)(m.NextLevelExp):P3}</font>";
+                msg += $"<font>) XP.</font>";
+                msg += $"<font> Total: </font>";
+                msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.LevelExp / (double)(m.NextLevelExp):P3}</font>";
+                msg += $"<font>.</font>";
+
+                AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_CHAT>(m =>
+            {
+                AddChatMessage(new ChatMessage(m.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)m.Channel), m.AuthorName, m.Message));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PRIVATE_CHAT>(m =>
+            {
+                var i = PrivateChannels.FirstOrDefault(y => y.Id == m.Channel).Index;
+                var ch = (ChatChannel)(PrivateChannels[i].Index + 11);
+
+                AddChatMessage(new ChatMessage(ch, m.AuthorName, m.Message));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_JOIN_PRIVATE_CHANNEL>(m =>
+            {
+                JoinPrivateChannel(m.Id, m.Index, m.Name);
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PRIVATE_CHANNEL>(m =>
+            {
+                var i = PrivateChannels.FirstOrDefault(c => c.Id == m.Id).Index;
+                PrivateChannels[i].Joined = false;
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_WHISPER>(m =>
+            {
+                var isMe = m.Author == Session.Me.Name;
+                var author = isMe ? m.Recipient : m.Author;
+                var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
+                AddChatMessage(new ChatMessage(channel, author, m.Message));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(m =>
+            {
+                AddChatMessage(new BrokerChatMessage(m.PlayerId, m.Listing, m.Item, m.Amount, m.SellerPrice, m.OfferedPrice, m.Name));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(m =>
+            {
+                AddChatMessage(new ApplyMessage(m.PlayerId, m.Class, m.Level, m.Name));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MATCH_LINK>(m =>
+            {
+                if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+                if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+                if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+                AddOrRefreshLfg(m.ListingData);
+                AddChatMessage(new LfgMessage(m.Id, m.Name, m.Message));
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_USER_BLOCK_LIST>(m =>
+            {
+                m.BlockedUsers.ForEach(u =>
+                {
+                    if (BlockedUsers.Contains(u)) return;
+                    BlockedUsers.Add(u);
+                });
+
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_FRIEND_LIST>(m =>
+            {
+                Friends = m.Friends;
+            });
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(m =>
+            {
+                UpdateLfgMembers(m.Id, m.Members.Count);
+            });
+
+        }
 
         public void InitWindows()
         {
@@ -204,7 +295,7 @@ namespace TCC.ViewModels
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!SessionManager.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
+            if (!Session.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
             var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
@@ -231,7 +322,7 @@ namespace TCC.ViewModels
         private static bool Pass(ChatMessage current, ChatMessage old)
         {
             if (current.Author == "System") return true;
-            if (current.Author == SessionManager.CurrentPlayer.Name) return true;
+            if (current.Author == Session.Me.Name) return true;
             if (old.RawMessage != current.RawMessage) return true;
 
             if (old.Author != current.Author) return true;

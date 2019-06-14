@@ -63,7 +63,7 @@
             StartingPrice = new MessagePiece(new Money(sellerPrice)) { Container = this };
             Listing = new MessagePiece("") { Container = this };
 
-            SessionManager.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
+            Session.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
             if (i != null)
             {
                 Listing.Text = "<" + i.Name + ">";

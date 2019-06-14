@@ -8,6 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Windows.Controls;
+using FoglioUtils.Extensions;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
@@ -64,10 +65,10 @@ namespace TCC.Windows
 
             if (ButtonsRef == null)
             {
-                if(CanMove) MouseLeftButtonDown += Drag;
+                if (CanMove) MouseLeftButtonDown += Drag;
                 return;
             }
-            
+
             _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _buttonsTimer.Tick += OnButtonsTimerTick;
 
@@ -83,8 +84,8 @@ namespace TCC.Windows
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                Left = WindowSettings.X * WindowManager.ScreenSize.Width ;
-                Top = WindowSettings.Y * WindowManager.ScreenSize.Height ;
+                Left = WindowSettings.X * WindowManager.ScreenSize.Width;
+                Top = WindowSettings.Y * WindowManager.ScreenSize.Height;
 
                 CheckBounds();
 
@@ -205,7 +206,7 @@ namespace TCC.Windows
                     else FocusManager.MakeClickThru(Handle);
                     break;
                 case ClickThruMode.GameDriven:
-                    if (SessionManager.InGameUiOn) FocusManager.UndoClickThru(Handle);
+                    if (Session.InGameUiOn) FocusManager.UndoClickThru(Handle);
                     else FocusManager.MakeClickThru(Handle);
                     break;
                 default:
@@ -362,21 +363,14 @@ namespace TCC.Windows
         }
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
-                DragMove();
-                UpdateButtons();
-                CheckBounds();
-                if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
-                WindowSettings.X = Left / WindowManager.ScreenSize.Width;
-                WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
-                App.Settings.Save();
-            }
-            catch
-            {
-                // ignored
-            }
+            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
+            this.TryDragMove();
+            UpdateButtons();
+            CheckBounds();
+            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
+            WindowSettings.X = Left / WindowManager.ScreenSize.Width;
+            WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
+            App.Settings.Save();
         }
         public void CloseWindowSafe()
         {

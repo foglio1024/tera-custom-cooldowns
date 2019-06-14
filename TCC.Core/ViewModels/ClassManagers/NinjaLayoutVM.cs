@@ -34,9 +34,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(230100, Class.Ninja, out var ih);
+            Session.DB.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
+            Session.DB.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);
+            Session.DB.SkillsDatabase.TryGetSkill(230100, Class.Ninja, out var ih);
 
             BurningHeart = new Cooldown(bh,  false) { CanFlash = true };
             FireAvalanche = new Cooldown(fa,  false) { CanFlash = true };

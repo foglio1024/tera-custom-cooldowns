@@ -72,16 +72,16 @@ namespace TCC.Test
         }
         public static void Login(Class c)
         {
-            SessionManager.Logged = true;
-            SessionManager.LoadingScreen = false;
-            SessionManager.CurrentPlayer.Class = c;
-            WindowManager.ViewModels.Class.CurrentClass = SessionManager.CurrentPlayer.Class;
+            Session.Logged = true;
+            Session.LoadingScreen = false;
+            Session.Me.Class = c;
+            WindowManager.ViewModels.Class.CurrentClass = Session.Me.Class;
             WindowManager.ViewModels.Cooldowns.LoadSkills(c);
         }
         public static void ForceEncounter(bool val = true)
         {
-            SessionManager.Combat = val;
-            SessionManager.Encounter = val;
+            Session.Combat = val;
+            Session.Encounter = val;
         }
         public static void StartDeadlyGambleCooldown(uint cd)
         {
@@ -123,15 +123,15 @@ namespace TCC.Test
             var r = new Random();
             for (var i = 0; i < 30; i++)
             {
-                WindowManager.CivilUnrestWindow.VM.AddGuild(new CityWarGuildData(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
-                WindowManager.CivilUnrestWindow.VM.SetGuildName((uint)i, "Guild " + i);
-                WindowManager.CivilUnrestWindow.VM.AddDestroyedGuildTower((uint)r.Next(0, 29));
+                WindowManager.ViewModels.CivilUnrest.AddGuild(new CityWarGuildData(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
+                WindowManager.ViewModels.CivilUnrest.SetGuildName((uint)i, "Guild " + i);
+                WindowManager.ViewModels.CivilUnrest.AddDestroyedGuildTower((uint)r.Next(0, 29));
             }
         }
 
         internal static void AddFakeSystemMessage(string v, params string[] p)
         {
-            SessionManager.DB.SystemMessagesDatabase.Messages.TryGetValue(v, out var sysmsg);
+            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(v, out var sysmsg);
             var srvMsg = $"@0";
             p.ToList().ForEach(par => srvMsg += $"\v{par}");
             ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
@@ -148,7 +148,7 @@ namespace TCC.Test
             };
             l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 10, IsLeader = true, Online = true });
             l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest });
-            WindowManager.LfgListWindow.VM.Listings.Add(l);
+            WindowManager.ViewModels.LFG.Listings.Add(l);
         }
         public static void AddFakeGroupMembers(int count)
         {

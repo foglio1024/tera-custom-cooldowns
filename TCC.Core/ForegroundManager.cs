@@ -27,10 +27,10 @@ namespace TCC
 
         public ForegroundManager()
         {
-            SessionManager.LoadingScreenChanged += NotifyVisibilityChanged;
-            SessionManager.LoggedChanged += NotifyVisibilityChanged;
-            SessionManager.EncounterChanged += NotifyDimChanged;
-            SessionManager.GameUiModeChanged += OnGameUiModeChanged;
+            Session.LoadingScreenChanged += NotifyVisibilityChanged;
+            Session.LoggedChanged += NotifyVisibilityChanged;
+            Session.EncounterChanged += NotifyDimChanged;
+            Session.GameUiModeChanged += OnGameUiModeChanged;
 
             FocusManager.ForegroundChanged += NotifyVisibilityChanged;
             SkillManager.SkillStarted += OnSkillStarted;
@@ -71,11 +71,11 @@ namespace TCC
 
 
         public bool Dim => !_dimTimer.IsEnabled &&
-                                !SessionManager.Encounter &&
+                                !Session.Encounter &&
                                 !ForceUndim;
 
-        public bool Visible => SessionManager.Logged &&
-                               !SessionManager.LoadingScreen &&
+        public bool Visible => Session.Logged &&
+                               !Session.LoadingScreen &&
                                 FocusManager.IsForeground ||
                                 _forceVisible;
 
