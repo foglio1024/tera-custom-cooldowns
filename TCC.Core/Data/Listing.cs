@@ -172,7 +172,7 @@ namespace TCC.Data
 
         public Listing()
         {
-            Dispatcher = App.BaseDispatcher; //TODO check this
+            Dispatcher = App.BaseDispatcher; 
             Players = new SynchronizedObservableCollection<User>(Dispatcher);
             Applicants = new SynchronizedObservableCollection<User>(Dispatcher);
             Apply = new ApplyCommand(this);

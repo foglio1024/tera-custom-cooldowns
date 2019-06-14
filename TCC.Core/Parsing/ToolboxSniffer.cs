@@ -111,7 +111,6 @@ namespace TCC.Parsing
                     }
                     catch (Exception)
                     {
-                        // todo
                         Connected = false;
                         client.Close();
                     }

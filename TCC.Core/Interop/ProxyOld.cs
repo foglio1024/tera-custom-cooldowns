@@ -73,7 +73,6 @@
 
 //    //                    HandleProxyOutput(author, channel, message.AddFontTagsIfMissing());
 
-//    //                    ////TODO: parse author
 //    //                    //var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
 //    //                    //msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
 //    //                    //PacketHandler.HandleCommandOutput(msg);

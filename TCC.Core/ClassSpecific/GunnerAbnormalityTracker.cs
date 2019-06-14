@@ -49,19 +49,16 @@ namespace TCC.ClassSpecific
         private static void CheckLaserTargeting(S_ABNORMALITY_BEGIN p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
-            //Log.C($"[CheckLaserTargeting(S_ABNORMALITY_BEGIN)] id:{p.AbnormalityId} duration:{p.Duration}");
             TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Start(p.Duration);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_REFRESH p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
-            //Log.C($"[CheckLaserTargeting(S_ABNORMALITY_REFRESH)] id:{p.AbnormalityId} duration:{p.Duration}");
             TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_END p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
-            //Log.C($"[CheckLaserTargeting(S_ABNORMALITY_END)] id:{p.AbnormalityId}");
 
             TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
         }

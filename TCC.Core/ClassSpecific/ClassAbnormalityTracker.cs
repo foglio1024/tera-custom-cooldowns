@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TCC.Data;
 using TCC.Data.Skills;
 
-using TeraPacketParser.Messages; //TODO: remove
+using TeraPacketParser.Messages;
 
 namespace TCC.ClassSpecific
 {

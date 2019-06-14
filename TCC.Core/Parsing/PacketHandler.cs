@@ -520,7 +520,7 @@ namespace TCC.Parsing
         }
         public static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
-            //ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x.PlayerId, x.Class, x.Level, x.Name)); //TODO: got NullRefEx here
+            //ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x.PlayerId, x.Class, x.Level, x.Name)); 
             //if (!App.Settings.LfgEnabled) return;
             //if (WindowManager.ViewModels.LFG.MyLfg == null) return;
             //var dest = WindowManager.ViewModels.LFG.MyLfg.Applicants;
@@ -870,7 +870,7 @@ namespace TCC.Parsing
 
         #endregion // ---------------------------------------------------
 
-        //TODO
+        //TODO finish moving hooks
         #region todo - called from Session for now
         public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {

@@ -405,12 +405,6 @@ namespace TCC.Data.Pc
             }
         }
 
-        public void ClearGear()
-        {
-            //TODO: wut
-            Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
-        }
-
         public void UpdateGear(List<GearItem> gear)
         {
             foreach (var gearItem in gear)

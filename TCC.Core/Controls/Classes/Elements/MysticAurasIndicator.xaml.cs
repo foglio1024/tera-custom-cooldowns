@@ -5,9 +5,6 @@ using TCC.Data;
 
 namespace TCC.Controls.Classes.Elements
 {
-    /// <summary>
-    /// Logica di interazione per MysticAurasIndicator.xaml
-    /// </summary>
     public partial class MysticAurasIndicator
     {
         public MysticAurasIndicator()

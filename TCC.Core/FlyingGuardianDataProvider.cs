@@ -2,7 +2,7 @@
 
 using TCC.Data;
 
-using TeraPacketParser.Messages; //TODO: remove
+using TeraPacketParser.Messages;
 
 namespace TCC
 {
