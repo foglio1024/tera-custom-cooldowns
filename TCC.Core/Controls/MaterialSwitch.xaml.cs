@@ -5,9 +5,6 @@ using System.Windows.Media.Animation;
 
 namespace TCC.Controls
 {
-    /// <summary>
-    /// Logica di interazione per MaterialSwitch.xaml
-    /// </summary>
     public partial class MaterialSwitch
     {
         private readonly DoubleAnimation _on;
@@ -17,7 +14,7 @@ namespace TCC.Controls
         private readonly ColorAnimation _fillOff;
         private readonly ColorAnimation _backFillOff;
 
-        private readonly Color _onColor = Color.FromRgb(255, 56, 34); //TODO: resource
+        private readonly Color _onColor = R.Colors.MainColor;// Color.FromRgb(255, 56, 34);
         private readonly Color _offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundBrush"]).Color;
         private readonly Color _backOffColor = Colors.Black;
 

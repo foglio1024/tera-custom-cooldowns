@@ -213,6 +213,8 @@ namespace TCC.R
 		public static Color ChatSystemQuestColor => ((Color)App.Current.FindResource("ChatSystemQuestColor"));
 		public static Color ChatSystemFriendColor => ((Color)App.Current.FindResource("ChatSystemFriendColor"));
 		public static Color ChatSystemWorldBossColor => ((Color)App.Current.FindResource("ChatSystemWorldBossColor"));
+		public static Color ChatDiamondLaurelColor => ((Color)App.Current.FindResource("ChatDiamondLaurelColor"));
+		public static Color ChatChampionLaurelColor => ((Color)App.Current.FindResource("ChatChampionLaurelColor"));
 	}
 	public static class Brushes
 	{
@@ -415,6 +417,7 @@ namespace TCC.R
 		public static EntriesToColor EntriesToColor => ((EntriesToColor)App.Current.FindResource("EntriesToColor"));
 		public static DungeonImageConverter DungeonImageConverter => ((DungeonImageConverter)App.Current.FindResource("DungeonImageConverter"));
 		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
+		public static MoneyAmountToVisibilityConverter AmountToVisibilityConv => ((MoneyAmountToVisibilityConverter)App.Current.FindResource("AmountToVisibilityConv"));
 	}
 	public static class DragablzMaterialDesign
 	{

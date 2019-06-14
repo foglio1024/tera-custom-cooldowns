@@ -126,6 +126,8 @@
     <Color x:Key="ChatSystemBargainColor">       #FFbF8F   </Color>
     <Color x:Key="ChatSystemQuestColor">         #FFDDB6   </Color>
     <Color x:Key="ChatSystemFriendColor">        #84E1FB   </Color>
-    <Color x:Key="ChatSystemWorldBossColor">     #FCb7FF   </Color>
+    <Color x:Key="ChatSystemWorldBossColor">     #FCB7FF   </Color>
+    <Color x:Key="ChatDiamondLaurelColor">       #38BDE5   </Color>
+    <Color x:Key="ChatChampionLaurelColor">      #FF264B   </Color>
 
 </ResourceDictionary>
