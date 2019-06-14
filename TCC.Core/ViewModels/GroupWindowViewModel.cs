@@ -75,7 +75,18 @@ namespace TCC.ViewModels
             ((ICollectionView)Tanks).CollectionChanged += GcPls;
             ((ICollectionView)Healers).CollectionChanged += GcPls;
             ((ICollectionView)All).CollectionChanged += GcPls;
+
+            Session.Teleported += OnTeleported;
         }
+
+        private void OnTeleported()
+        {
+            if (!Session.CivilUnrestZone)
+                PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(HandlePartyMemberPosUpdate);
+            else
+                PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(HandlePartyMemberPosUpdate);
+        }
+
         private void GcPls(object sender, EventArgs ev) { }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -635,11 +646,11 @@ namespace TCC.ViewModels
             {
                 EndReadyCheck();
             });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(p => 
-            {
-                if (Session.CivilUnrestZone) return; //TODO: hook only when not in CU
-                UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
-            });
+        }
+
+        private void HandlePartyMemberPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
+        {
+            UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
         }
     }
 }
