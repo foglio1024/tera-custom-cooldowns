@@ -41,7 +41,12 @@ namespace TCC.Windows
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
             {
                 Ver.Text = t;
-                if (App.Experimental) Ver.Foreground = R.Brushes.HpBrushLight;
+                if (App.Experimental)
+                {
+                    Ver.Foreground = R.Brushes.HpBrushLight;
+                }
+
+                TtbLogo.Visibility = App.ToolboxMode ? Visibility.Visible : Visibility.Collapsed;
             }));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

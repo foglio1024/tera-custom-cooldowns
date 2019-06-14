@@ -20,6 +20,8 @@
                  BorderBrush="{StaticResource RevampBorderBrush}"/>
         <Image x:Name="Img" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".5" Margin="1"/>
         <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".7" />
+        <Image Source="/resources/ttb.ico" Opacity=".7" Width="24" Height="24" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"
+               x:Name="TtbLogo"/>
         <!--<Path Data="m 203.6,197.2 c 0,-1.7 -1.4,-3.1 -3,-3.1 -1.6,0 -2.8,1.2 -2.8,2.8 0,1.7 1.4,3.1 3,3.1 1.5,0.1 2.8,-1.2 2.8,-2.8 z m 10.4,-22 c 0,1.7
         1.4,3.1 3,3.1 1.6,0 2.9,-1.3 2.8,-2.8 0,-1.7 -1.4,-3.1 -3,-3.1 -1.6,0 -2.8,1.2 -2.8,2.8 z m 10.2,-42.3 c 0,1.7 1.4,3.1 3,3.1 1.6,0 2.9,-1.3 2.8,-2.8 
         0,-1.7 -1.4,-3.1 -3,-3.1 -1.6,-0.1 -2.8,1.1 -2.8,2.8 z m 4.8,169.4 c -1.8,-0.1 -3.2,1.2 -3.3,3 -0.1,1.8 1.4,3.5 3.2,3.6 1.8,0.1 3.2,-1.2 3.3,-3 0.1,-1.8 
