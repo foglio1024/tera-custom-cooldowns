@@ -406,6 +406,7 @@ namespace TCC.Settings
         {
             Tabs = new List<Tab>();
             PerClassPosition = false;
+            IgnoreSize = false;
         }
         public ChatWindowSettings(WindowSettings other) : base(other)
         {
