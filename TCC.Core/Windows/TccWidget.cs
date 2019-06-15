@@ -37,12 +37,12 @@ namespace TCC.Windows
             Topmost = true;
             Left = WindowSettings.X * WindowManager.ScreenSize.Width;
             Top = WindowSettings.Y * WindowManager.ScreenSize.Height;
-            CheckBounds();
             if (!WindowSettings.IgnoreSize)
             {
                 if (WindowSettings.H != 0) Height = WindowSettings.H;
                 if (WindowSettings.W != 0) Width = WindowSettings.W;
             }
+            CheckBounds();
 
             WindowSettings.EnabledChanged += OnEnabledChanged;
             WindowSettings.ClickThruModeChanged += OnClickThruModeChanged;
