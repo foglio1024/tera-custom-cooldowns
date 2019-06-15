@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
@@ -18,6 +19,12 @@ using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC
 {
+    public class Account
+    {
+        public bool IsElite { get; set; }
+        public List<Character> Characters { get; set; }
+    }
+
     public static class Session
     {
         public const int MaxWeekly = 16;
@@ -30,6 +37,7 @@ namespace TCC
         private static bool _inGameUiOn;
 
         public static Server Server { get; set; }
+        public static Account Account { get; set; } = new Account();
         public static string Language => DB.ServerDatabase.StringLanguage;
         public static bool LoadingScreen
         {
@@ -73,7 +81,6 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => LoggedChanged?.Invoke());
             }
         }
-        public static bool IsElite { get; set; }
         public static bool InGameUiOn
         {
             get => _inGameUiOn;
@@ -360,7 +367,7 @@ namespace TCC
             });
             PacketAnalyzer.NewProcessor.Hook<S_ACCOUNT_PACKAGE_LIST>(m =>
             {
-                IsElite = m.IsElite;
+                Account.IsElite = m.IsElite;
             });
             PacketAnalyzer.NewProcessor.Hook<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(PacketHandler.HandleFriendIntoArea);
             PacketAnalyzer.NewProcessor.Hook<S_UPDATE_FRIEND_INFO>(PacketHandler.HandleFriendStatus);
