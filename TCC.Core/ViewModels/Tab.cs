@@ -232,6 +232,8 @@ namespace TCC.ViewModels
 
         public bool Filter(ChatMessage m)
         {
+            if (Authors == null || Channels == null || ExcludedAuthors == null || ExcludedChannels == null)
+                return true;
             return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
                    (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
                    (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
