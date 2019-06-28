@@ -38,7 +38,7 @@
                                 <TextBlock Foreground="#4fff">
                                     <Run Text="Item level requirement:" />
                                     <Run Text="{Binding Dungeon.ItemLevel, Mode=OneWay}"
-                                         Foreground="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}" />
+                                         Foreground="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}" />
                                 </TextBlock>
                                 <Separator Margin="5 2"
                                            Background="#2fff" />
@@ -62,17 +62,17 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
                            Margin="1 0"
-                           Fill="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}" />
+                           Fill="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}" />
                 <Rectangle Grid.RowSpan="1"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            Margin="1 0"
-                           Fill="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}"
+                           Fill="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}"
                            Opacity=".1" />
                 <TextBlock Text="{Binding Dungeon.ShortName}"
                            Margin="0 4"
                            HorizontalAlignment="Center"
-                           Foreground="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}"
+                           Foreground="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}"
                            TextAlignment="Center"
                            FontSize="11"
                            TextTrimming="CharacterEllipsis" />

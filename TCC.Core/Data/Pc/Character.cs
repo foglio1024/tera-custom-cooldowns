@@ -276,6 +276,12 @@ namespace TCC.Data.Pc
         private uint _coins;
         private uint _maxCoins;
 
+        public DungeonCooldownData(uint id)
+        {
+            Id = id;
+            Reset();
+        }
+
         public uint Id { get; set; }
         public int Entries { get; set; }
         public int Clears { get; set; }

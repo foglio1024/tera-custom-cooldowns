@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace TCC.Data.Pc
 {
-    public class DungeonInfo 
+    public class DungeonInfo
     {
         //private List<DungeonCooldownData> _dungeonData;
         //[JsonIgnore] public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; }
@@ -50,7 +50,7 @@ namespace TCC.Data.Pc
             foreach (var keyValuePair in dungeonCooldowns)
             {
                 var dg = DungeonList.FirstOrDefault(x => x.Id == keyValuePair.Key);
-                if(dg == null) DungeonList.Add(new DungeonCooldownData { Id = keyValuePair.Key, Entries = keyValuePair.Value});
+                if (dg == null) DungeonList.Add(new DungeonCooldownData(keyValuePair.Key) { Entries = keyValuePair.Value });
             }
 
             DungeonList.Where(x => x.Dungeon.HasDef).ToList().ForEach(dung =>
@@ -78,9 +78,9 @@ namespace TCC.Data.Pc
             //    Dungeons.Add(new DungeonCooldown(id, disp, owner));
             //}
             DungeonList = Session.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef)
-                         .Select(d => new DungeonCooldownData{ Id = d.Id}).ToList(); //new List<DungeonCooldownData>();
+                         .Select(d => new DungeonCooldownData(d.Id)).ToList(); //new List<DungeonCooldownData>();
             VisibleDungeonsView = CollectionViewUtils.InitLiveView(null, DungeonList, new string[] { },
-                new[] {new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending)});
+                new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
 
         }
 
