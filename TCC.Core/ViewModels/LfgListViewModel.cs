@@ -280,6 +280,7 @@ namespace TCC.ViewModels
         {
             PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
             {
+                Listings.Clear();
                 EnqueueListRequest(); // need invoke?
             });
             PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
