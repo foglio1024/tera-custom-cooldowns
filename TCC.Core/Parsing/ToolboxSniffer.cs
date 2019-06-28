@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Newtonsoft.Json.Linq;
 using TCC.Annotations;
 using TCC.Interop.Proxy;
@@ -36,6 +38,35 @@ namespace TCC.Parsing
             return resp?.Result != null && resp.Result.Value<bool>();
         }
 
+        public async Task<bool> AddHooks(List<string> opcodes)
+        {
+            var jArray = new JArray();
+            opcodes.ForEach(opc => jArray.Add(opc));
+            var resp = await _client.CallAsync("addHooks", new JObject
+            {
+                {"hooks", jArray}
+            });
+            return resp?.Result != null && resp.Result.Value<bool>();
+        }
+        public async Task<bool> RemoveHooks(List<string> opcodes)
+        {
+            var jArray = new JArray();
+            opcodes.ForEach(opc => jArray.Add(opc));
+            var resp = await _client.CallAsync("removeHooks", new JObject
+            {
+                {"hooks", jArray}
+            });
+            return resp?.Result != null && resp.Result.Value<bool>();
+        }
+        public async Task<JObject> Query([NotNull] string query)
+        {
+            var resp = await _client.CallAsync("query", new JObject
+            {
+                { "query" , query }
+            });
+
+            return resp?.Result?.Value<JObject>();
+        }
         public async Task<uint> GetProtocolVersion()
         {
             var resp = await _client.CallAsync("getProtocolVersion");
@@ -93,6 +124,7 @@ namespace TCC.Parsing
                 if (resp != 0)
                 {
                     NewConnection?.Invoke(Session.DB.ServerDatabase.GetServer(resp));
+                    await ControlConnection.AddHooks(PacketAnalyzer.Factory.OpcodesList);
                 }
 
                 var stream = client.GetStream();

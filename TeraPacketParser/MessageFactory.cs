@@ -174,5 +174,7 @@ namespace TeraPacketParser
             }
             SystemMessageNamer?.Reload(Version, ReleaseVersion);
         }
+
+        public List<string> OpcodesList => TeraMessages.Keys.ToList();
     }
 }
