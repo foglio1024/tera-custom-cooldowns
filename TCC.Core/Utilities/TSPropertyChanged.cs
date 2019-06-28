@@ -26,9 +26,6 @@ namespace TCC
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
 
-        public void ExN(string v)
-        {
-            N(v);
-        }
+        public void ExN(string v) => N(v);
     }
 }

@@ -536,13 +536,13 @@ namespace TCC.ViewModels
         }
         public void UpdateMyGear()
         {
-            var u = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
-            if (u == null) return;
-            var currCharGear = WindowManager.ViewModels.Dashboard.CurrentCharacter.Gear;
-            u.Weapon = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
-            u.Armor = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
-            u.Gloves = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
-            u.Boots = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
+            //var u = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
+            //if (u == null) return;
+            //var currCharGear = WindowManager.ViewModels.Dashboard.CurrentCharacter.Gear;
+            //u.Weapon = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
+            //u.Armor = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
+            //u.Gloves = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
+            //u.Boots = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
         public void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)

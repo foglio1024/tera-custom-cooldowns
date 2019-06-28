@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,14 +23,16 @@ namespace TCC
     public class Account
     {
         public bool IsElite { get; set; }
-        public List<Character> Characters { get; set; }
+        public SynchronizedObservableCollection<Character> Characters { get; set; }
+
+        public Account()
+        {
+            Characters = new SynchronizedObservableCollection<Character>();
+        }
     }
 
     public static class Session
     {
-        public const int MaxWeekly = 16;
-        public const int MaxDaily = 16;
-        public const int MaxGuardianQuests = 40;
         private static bool _logged;
         private static bool _loadingScreen = true;
         private static bool _encounter;
@@ -129,66 +132,9 @@ namespace TCC
         public static TccDatabase DB { get; set; }
         public static bool CivilUnrestZone => CurrentZoneId == 152;
         public static bool IsInDungeon => CurrentZoneId >= 8999;
-        public static string CurrentAccountName { get; internal set; }
+        public static string CurrentAccountName { get; private set; }
 
-        public static void SetPlayerHp(float hp)
-        {
-            Me.CurrentHP = hp;
-        }
-        public static void SetPlayerMp(float mp)
-        {
-            Me.CurrentMP = mp;
-        }
-        public static void SetPlayerSt(float st)
-        {
-            Me.CurrentST = st;
-            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ViewModels.Class.CurrentManager.SetST(Convert.ToInt32(st));
-        }
-        public static void SetPlayerFe(float en)
-        {
-            Me.FlightEnergy = en; //useless
-            WindowManager.FlightDurationWindow.SetEnergy(en); // direct window reference lul
-        }
-        public static void SetPlayerLaurel(Player p)
-        {
-            try
-            {
-                p.Laurel = WindowManager.ViewModels.Dashboard.Characters.First(x => x.Name == p.Name).Laurel;
-            }
-            catch
-            {
-                p.Laurel = Laurel.None;
-            }
-        }
-
-        public static void SetPlayerMaxHp(long maxHp)
-        {
-            Me.MaxHP = maxHp;
-            //ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
-        }
-        public static void SetPlayerMaxMp(int maxMp)
-        {
-            Me.MaxMP = maxMp;
-            //ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
-        }
-        public static void SetPlayerMaxSt(int maxSt)
-        {
-            Me.MaxST = maxSt;
-            if (App.Settings.ClassWindowSettings.Enabled) WindowManager.ViewModels.Class.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
-        }
-
-        public static void SetPlayerShield(uint damage)
-        {
-            if (Me.CurrentShield < 0) return;
-            //CurrentPlayer.CurrentShield -= damage;
-            Me.DamageShield(damage);
-        }
-        //public static void SetPlayerMaxShield(uint shield)
-        //{
-        //    CurrentPlayer.MaxShield = shield;
-        //    CurrentPlayer.CurrentShield = shield;
-        //}
-        public static async void InitDatabasesAsync(string lang)
+        public static async Task InitDatabasesAsync(string lang)
         {
             await Task.Factory.StartNew(() => InitDatabases(lang));
             DatabaseLoaded?.Invoke();
@@ -232,6 +178,7 @@ namespace TCC
             {
                 CurrentAccountName = m.AccountName;
                 DB.ServerDatabase.Language = m.Language;
+                App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
             });
 
             // player stuff
@@ -422,7 +369,7 @@ namespace TCC
 
         private static Laurel GetLaurel(uint pId)
         {
-            var ch = WindowManager.ViewModels.Dashboard.Characters.FirstOrDefault(x => x.Id == pId);
+            var ch = Account.Characters.FirstOrDefault(x => x.Id == pId);
             return ch?.Laurel ?? Laurel.None;
         }
 
@@ -453,11 +400,10 @@ namespace TCC
             }
         }
 
-        public static void Init()
+        public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
-            InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
-
+            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
         }
     }
 }

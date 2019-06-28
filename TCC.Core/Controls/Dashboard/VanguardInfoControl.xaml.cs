@@ -75,7 +75,7 @@ namespace TCC.Controls.Dashboard
         }
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {
-            WindowManager.ViewModels.Dashboard.Characters.Remove((Character)DataContext);
+            Session.Account.Characters.Remove((Character)DataContext);
         }
 
         //private bool _animDown = true;

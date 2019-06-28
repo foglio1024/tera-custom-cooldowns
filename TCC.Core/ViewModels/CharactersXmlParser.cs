@@ -10,6 +10,7 @@ using TeraDataLite;
 
 namespace TCC.Data
 {
+
     public class CharactersXmlParser
     {
         private const string CharactersTag = "Characters";
@@ -91,15 +92,15 @@ namespace TCC.Data
         private static XElement BuildGearDataXelement(Character c)
         {
             var xGear = new XElement(GearPiecesTag);
-            c.Gear.ToSyncList().ForEach(item =>
-            {
-                xGear.Add(new XElement(GearTag,
-                    new XAttribute(IdTag, item.Id),
-                    new XAttribute(PieceTag, item.Piece),
-                    new XAttribute(TierTag, item.Tier),
-                    new XAttribute(ExpTag, item.Experience),
-                    new XAttribute(EnchantTag, item.Enchant)));
-            });
+            //c.Gear.ToSyncList().ForEach(item =>
+            //{
+            //    xGear.Add(new XElement(GearTag,
+            //        new XAttribute(IdTag, item.Id),
+            //        new XAttribute(PieceTag, item.Piece),
+            //        new XAttribute(TierTag, item.Tier),
+            //        new XAttribute(ExpTag, item.Experience),
+            //        new XAttribute(EnchantTag, item.Enchant)));
+            //});
             return xGear;
         }
         private static XElement BuildGeneralDataXelement(Character c)
@@ -111,13 +112,13 @@ namespace TCC.Data
                 new XAttribute(PosTag, c.Position),
                 new XAttribute(LastOnlineTag, c.LastOnline),
                 new XAttribute(LastLocationTag, c.LastLocation == null ? "0_0_0": $"{c.LastLocation.World}_{c.LastLocation.Guard}_{c.LastLocation.Section}"),
-                new XAttribute(VanguardCreditsTag, c.VanguardCredits),
+                new XAttribute(VanguardCreditsTag, c.VanguardInfo.Credits),
                 new XAttribute(GuildNameTag, c.GuildName),
                 new XAttribute(ServerTag, c.ServerName),
-                new XAttribute(GuardianCreditsTag, c.GuardianCredits),
-                new XAttribute(VanguardWeeklyTag, c.VanguardWeekliesDone),
-                new XAttribute(VanguardDailyTag, c.VanguardDailiesDone),
-                new XAttribute(GuardianQuestsTag, c.ClaimedGuardianQuests),
+                new XAttribute(GuardianCreditsTag, c.GuardianInfo.Credits),
+                new XAttribute(VanguardWeeklyTag, c.VanguardInfo.WeekliesDone),
+                new XAttribute(VanguardDailyTag, c.VanguardInfo.DailiesDone),
+                new XAttribute(GuardianQuestsTag, c.GuardianInfo.Claimed),
                 new XAttribute(ElleonMarksTag, c.ElleonMarks),
                 new XAttribute(DragonwingScalesTag, c.DragonwingScales),
                 new XAttribute(LevelTag, c.Level),
@@ -131,7 +132,7 @@ namespace TCC.Data
         private static XElement BuildDungeonDataXelement(Character c)
         {
             var xDungeons = new XElement(DungeonsTag);
-            c.Dungeons.ToSyncList().ForEach(dungCd =>
+            c.DungeonInfo.DungeonList.ForEach(dungCd =>
             {
                 xDungeons.Add(new XElement(DungeonTag,
                     new XAttribute(IdTag, dungCd.Dungeon.Id),
@@ -161,11 +162,11 @@ namespace TCC.Data
                 if (attr.Name == NameTag) ch.Name = attr.Value;
                 else if (attr.Name == IdTag) ch.Id = Convert.ToUInt32(attr.Value);
                 else if (attr.Name == PosTag) ch.Position = Convert.ToInt32(attr.Value);
-                else if (attr.Name == VanguardCreditsTag) ch.VanguardCredits = Convert.ToInt32(attr.Value);
-                else if (attr.Name == GuardianCreditsTag) ch.GuardianCredits = Convert.ToInt32(attr.Value);
-                else if (attr.Name == VanguardWeeklyTag) ch.VanguardWeekliesDone = Convert.ToInt32(attr.Value);
-                else if (attr.Name == VanguardDailyTag) ch.VanguardDailiesDone = Convert.ToInt32(attr.Value);
-                else if (attr.Name == GuardianQuestsTag) ch.ClaimedGuardianQuests = Convert.ToInt32(attr.Value);
+                else if (attr.Name == VanguardCreditsTag) ch.VanguardInfo.Credits = Convert.ToInt32(attr.Value);
+                else if (attr.Name == GuardianCreditsTag) ch.GuardianInfo.Credits = Convert.ToInt32(attr.Value);
+                else if (attr.Name == VanguardWeeklyTag) ch.VanguardInfo.WeekliesDone = Convert.ToInt32(attr.Value);
+                else if (attr.Name == VanguardDailyTag) ch.VanguardInfo.DailiesDone = Convert.ToInt32(attr.Value);
+                else if (attr.Name == GuardianQuestsTag) ch.GuardianInfo.Claimed = Convert.ToInt32(attr.Value);
                 else if (attr.Name == ElleonMarksTag) ch.ElleonMarks = Convert.ToInt32(attr.Value);
                 else if (attr.Name == DragonwingScalesTag) ch.DragonwingScales = Convert.ToInt32(attr.Value);
                 else if (attr.Name == PiecesOfDragonScrollTag) ch.PiecesOfDragonScroll = Convert.ToInt32(attr.Value);
@@ -196,11 +197,11 @@ namespace TCC.Data
                     else if (attr.Name == EntriesTag) entries = Convert.ToInt16(attr.Value);
                     else if (attr.Name == TotalTag) total = Convert.ToInt16(attr.Value);
                 });
-                ch.SetDungeonClears(id, total);
+                ch.DungeonInfo.UpdateClears(id, total);
                 dungeons.Add(id, entries);
             });
 
-            ch.UpdateDungeons(dungeons);
+            ch.DungeonInfo.UpdateEntries(dungeons);
         }
         private static void ParseGearCharInfo(XElement xChar, Character ch)
         {
@@ -223,7 +224,7 @@ namespace TCC.Data
                 });
                 gear.Add(new GearItem(id, tier, type, enchant, exp));
             });
-            ch.UpdateGear(gear);
+            //ch.UpdateGear(gear);
         }
         private static void ParseBuffsInfo(XElement xChar, Character ch)
         {
@@ -261,7 +262,7 @@ namespace TCC.Data
                 ch.Inventory.Add(new InventoryItem(slot,id,amount));
             });
         }
-        public void Read(SynchronizedObservableCollection<Character> dest)
+        public void Read(IList<Character> dest)
         {
             if (File.Exists(_path)) _doc = XDocument.Load(_path);
             if (_doc == null) return;

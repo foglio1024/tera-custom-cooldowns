@@ -44,7 +44,7 @@
                                            Background="#2fff" />
                                 <TextBlock Foreground="#4fff">
                                     <Run Text="Max runs:" />
-                                    <Run Text="{Binding Dungeon.ActualRuns, Mode=OneWay}" Foreground="#9fff" />
+                                    <Run Text="{Binding Dungeon.MaxEntries, Mode=OneWay}" Foreground="#9fff" />
                                     <Run Text="(" /><Run Text="{Binding Dungeon.ResetMode, Mode=OneWay}" /><Run Text=")" />
                                 </TextBlock>
                                 <TextBlock Foreground="#4fff">

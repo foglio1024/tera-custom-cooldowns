@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
-
+using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
@@ -40,11 +40,7 @@ namespace TCC.ViewModels
 
         /* -- Properties ------------------------------------------- */
 
-        //TODO: move to Session, keep only VM lists here
-        public SynchronizedObservableCollection<Character> Characters { get; }
-
-
-        public Character CurrentCharacter => Characters.ToSyncList().FirstOrDefault(x => x.Id == Session.Me.PlayerId);
+        public Character CurrentCharacter => Session.Account.Characters.FirstOrDefault(x => x.Id == Session.Me.PlayerId);
         public Character SelectedCharacter
         {
             get => _selectedCharacter;
@@ -100,7 +96,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = 0;
-                Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
+                Session.Account.Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
         }
@@ -109,7 +105,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = 0;
-                Characters.ToSyncList().ForEach(c => ret += c.VanguardCredits);
+                Session.Account.Characters.ToSyncList().ForEach(c => ret += c.VanguardInfo.Credits);
                 return ret;
             }
         }
@@ -118,7 +114,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = 0;
-                Characters.ToSyncList().ForEach(c => ret += c.GuardianCredits);
+                Session.Account.Characters.ToSyncList().ForEach(c => ret += c.GuardianInfo.Credits);
                 return ret;
             }
         }
@@ -171,7 +167,8 @@ namespace TCC.ViewModels
         bool _loaded;
         public DashboardViewModel()
         {
-            Characters = new SynchronizedObservableCollection<Character>();
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            //Characters = new SynchronizedObservableCollection<Character>();
             CharacterViewModels = new ObservableCollection<CharacterViewModel>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
@@ -182,7 +179,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    Session.DB.DungeonDatabase.Dungeons.Values.ToList().ForEach(dungeon =>
+                    Session.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
@@ -194,7 +191,7 @@ namespace TCC.ViewModels
                                           new DungeonCooldownViewModel
                                           {
                                               Owner = charVm.Character,
-                                              Cooldown = charVm.Character.Dungeons.FirstOrDefault(x =>
+                                              Cooldown = charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x =>
                                                   x.Dungeon.Id == dungeon.Id)
                                           });
                                 });
@@ -205,13 +202,17 @@ namespace TCC.ViewModels
                 _loaded = true;
             }, c => !_loaded);
 
-            Characters.CollectionChanged += SyncViewModel;
+            Session.Account.Characters.CollectionChanged += SyncViewModel;
 
-            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Characters,
+            LoadCharacters();
+
+            Session.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
+
+            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Session.Account.Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Characters,
+            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Session.Account.Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
@@ -219,7 +220,6 @@ namespace TCC.ViewModels
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
-            LoadCharacters();
         }
 
 
@@ -228,58 +228,25 @@ namespace TCC.ViewModels
 
         public void SaveCharacters()
         {
-            SaveCharDoc(CharactersXmlParser.BuildCharacterFile(Characters));
-        }
-        public void SetLoggedIn(uint id)
-        {
-            _discardFirstVanguardPacket = true;
-            Characters.ToSyncList().ForEach(x => x.IsLoggedIn = x.Id == id);
-        }
-        public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
-        {
-            CurrentCharacter?.UpdateDungeons(dungeonCooldowns);
+            //SaveCharDoc(CharactersXmlParser.BuildCharacterFile(Characters));
+            var json = JsonConvert.SerializeObject(Session.Account, Formatting.Indented);
+            File.WriteAllText(Path.Combine(App.ResourcesPath, "config/characters.json"), json);
+            if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
+                File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml"));
 
-        }
-        public void SetDungeons(uint charId, Dictionary<uint, short> dungeonCooldowns)
-        {
-            Characters.FirstOrDefault(x => x.Id == charId)?.UpdateDungeons(dungeonCooldowns);
-
-        }
-        public void SetVanguard(int weeklyDone, int dailyDone, int vanguardCredits)
-        {
-            if (_discardFirstVanguardPacket)
-            {
-                _discardFirstVanguardPacket = false;
-                return;
-            }
-
-            if (CurrentCharacter == null) return;
-            CurrentCharacter.VanguardWeekliesDone = weeklyDone;
-            CurrentCharacter.VanguardDailiesDone = dailyDone;
-            CurrentCharacter.VanguardCredits = vanguardCredits;
-            SaveCharacters();
-            N(nameof(TotalVanguardCredits));
-        }
-        public void SetVanguardCredits(int pCredits)
-        {
-            CurrentCharacter.VanguardCredits = pCredits;
-            N(nameof(TotalVanguardCredits));
-        }
-        public void SetGuardianCredits(int pCredits)
-        {
-            CurrentCharacter.GuardianCredits = pCredits;
-            N(nameof(TotalGuardianCredits));
-        }
-        public void SetElleonMarks(int val)
-        {
-            CurrentCharacter.ElleonMarks = val;
-            N(nameof(TotalElleonMarks));
         }
         private void LoadCharacters()
         {
             try
             {
-                new CharactersXmlParser().Read(Characters);
+                if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
+                    new CharactersXmlParser().Read(Session.Account.Characters);
+                else
+                {
+                    Session.Account =
+                        JsonConvert.DeserializeObject<Account>(
+                            File.ReadAllText(Path.Combine(App.ResourcesPath, "config/characters.json")));
+                }
             }
             catch (Exception)
             {
@@ -291,6 +258,51 @@ namespace TCC.ViewModels
                     LoadCharacters();
                 }
             }
+        }
+        public void SetLoggedIn(uint id)
+        {
+            _discardFirstVanguardPacket = true;
+            Session.Account.Characters.ToList().ForEach(x => x.IsLoggedIn = x.Id == id);
+        }
+        public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
+        {
+            CurrentCharacter?.DungeonInfo.UpdateEntries(dungeonCooldowns);
+
+        }
+        public void SetDungeons(uint charId, Dictionary<uint, short> dungeonCooldowns)
+        {
+            Session.Account.Characters.FirstOrDefault(x => x.Id == charId)?.DungeonInfo.UpdateEntries(dungeonCooldowns);
+
+        }
+        public void SetVanguard(int weeklyDone, int dailyDone, int vanguardCredits)
+        {
+            if (_discardFirstVanguardPacket)
+            {
+                _discardFirstVanguardPacket = false;
+                return;
+            }
+
+            if (CurrentCharacter == null) return;
+            CurrentCharacter.VanguardInfo.WeekliesDone = weeklyDone;
+            CurrentCharacter.VanguardInfo.DailiesDone = dailyDone;
+            CurrentCharacter.VanguardInfo.Credits = vanguardCredits;
+            SaveCharacters();
+            N(nameof(TotalVanguardCredits));
+        }
+        public void SetVanguardCredits(int pCredits)
+        {
+            CurrentCharacter.VanguardInfo.Credits = pCredits;
+            N(nameof(TotalVanguardCredits));
+        }
+        public void SetGuardianCredits(int pCredits)
+        {
+            CurrentCharacter.GuardianInfo.Credits = pCredits;
+            N(nameof(TotalGuardianCredits));
+        }
+        public void SetElleonMarks(int val)
+        {
+            CurrentCharacter.ElleonMarks = val;
+            N(nameof(TotalElleonMarks));
         }
         private static void SaveCharDoc(XDocument doc)
         {
@@ -381,7 +393,7 @@ namespace TCC.ViewModels
                 UpdateBuffs();
                 foreach (var item in m.CharacterList)
                 {
-                    var ch = Characters.FirstOrDefault(x => x.Id == item.Id);
+                    var ch = Session.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
                     if (ch != null)
                     {
                         ch.Name = item.Name;
@@ -395,7 +407,7 @@ namespace TCC.ViewModels
                     }
                     else
                     {
-                        Characters.Add(new Character(item));
+                        Session.Account.Characters.Add(new Character(item));
                     }
                 }
                 SaveCharacters();
@@ -415,8 +427,8 @@ namespace TCC.ViewModels
             PacketAnalyzer.NewProcessor.Hook<S_FIELD_POINT_INFO>(m =>
             {
                 if (CurrentCharacter == null) return;
-                CurrentCharacter.ClaimedGuardianQuests = m.Claimed;
-                CurrentCharacter.ClearedGuardianQuests = m.Cleared;
+                CurrentCharacter.GuardianInfo.Claimed = m.Claimed;
+                CurrentCharacter.GuardianInfo.Cleared = m.Cleared;
             });
             PacketAnalyzer.NewProcessor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(m =>
             {
@@ -428,12 +440,12 @@ namespace TCC.ViewModels
                 if (m.PlayerId != Session.Me.PlayerId) return;
                 foreach (var dg in m.DungeonClears)
                 {
-                    CurrentCharacter.SetDungeonClears(dg.Key, dg.Value);
+                    CurrentCharacter.DungeonInfo.UpdateClears(dg.Key, dg.Value);
                 }
             });
         }
 
-        /* -- EVENTS: TO BE REFACTORED (TODO)----------------------- */
+        /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
         public SynchronizedObservableCollection<EventGroup> EventGroups { get; }
         public SynchronizedObservableCollection<TimeMarker> Markers { get; }
@@ -690,19 +702,19 @@ namespace TCC.ViewModels
 
         public void ResetDailyData()
         {
-            WindowManager.ViewModels.Dashboard.Characters.ToSyncList().ForEach(ch => ch.ResetDailyData());
+            Session.Account.Characters.ToList().ForEach(ch => ch.ResetDailyData());
             ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
         }
 
         public void ResetWeeklyDungeons()
         {
-            WindowManager.ViewModels.Dashboard.Characters.ToSyncList().ForEach(ch => ch.ResetWeeklyDungeons());
+            Session.Account.Characters.ToSyncList().ForEach(ch => ch.DungeonInfo.ResetAll(ResetMode.Weekly));
             ChatWindowManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
         }
 
         public void ResetVanguardWeekly()
         {
-            WindowManager.ViewModels.Dashboard.Characters.ToSyncList().ForEach(ch => ch.VanguardWeekliesDone = 0);
+            Session.Account.Characters.ToList().ForEach(ch => ch.VanguardInfo.WeekliesDone = 0);
             ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
         }
     }

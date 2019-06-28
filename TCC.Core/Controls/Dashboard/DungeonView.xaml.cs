@@ -86,17 +86,14 @@ namespace TCC.Controls.Dashboard
             DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
             DungeonsListView = CollectionViewUtils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
                 new[] { "Owner.Hidden" },
-                new[]
-                {
-                    new SortDescription("Owner.Position", ListSortDirection.Ascending)
-                }
+                new[] { new SortDescription("Owner.Position", ListSortDirection.Ascending) }
             );
         }
     }
 
     public class DungeonCooldownViewModel : TSPropertyChanged
     {
-        public DungeonCooldown Cooldown { get; set; }
+        public DungeonCooldownData Cooldown { get; set; }
         public Character Owner { get; set; }
     }
 

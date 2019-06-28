@@ -157,8 +157,8 @@ namespace TCC.Windows
             //i = 0;
             //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
 
-            WindowManager.ViewModels.Dashboard.Characters[0].VanguardDailiesDone = App.Random.Next(0, 16);
-            WindowManager.ViewModels.Dashboard.Characters[0].VanguardWeekliesDone = App.Random.Next(0, 16);
+            Session.Account.Characters[0].VanguardInfo.DailiesDone = App.Random.Next(0, 16);
+            Session.Account.Characters[0].VanguardInfo.WeekliesDone = App.Random.Next(0, 16);
         }
     }
 }

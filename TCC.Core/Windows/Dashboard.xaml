@@ -646,7 +646,7 @@
                                 <TextBlock Text="Credits"
                                            Foreground="#9fff">
                                 </TextBlock>
-                                <TextBlock Text="{Binding SelectedCharacter.VanguardCredits}"
+                                <TextBlock Text="{Binding SelectedCharacter.VanguardInfo.Credits}"
                                            Foreground="#7fff"
                                            Grid.Column="1"
                                            HorizontalAlignment="Right">
@@ -655,7 +655,7 @@
                                                              Height="4"
                                                              Grid.Row="1"
                                                              Grid.ColumnSpan="2"
-                                                             Factor="{Binding SelectedCharacter.VanguardCreditsFactor}"
+                                                             Factor="{Binding SelectedCharacter.VanguardInfo.CreditsFactor}"
                                                              Color="{StaticResource AssaultStanceBrush}"
                                                              Skew="-45"
                                                              Margin="0 2">
@@ -673,7 +673,7 @@
                                 <TextBlock Text="Daily quests"
                                            Foreground="#9fff">
                                 </TextBlock>
-                                <TextBlock Text="{Binding SelectedCharacter.VanguardDailiesDone}"
+                                <TextBlock Text="{Binding SelectedCharacter.VanguardInfo.DailiesDone}"
                                            Foreground="#7fff"
                                            Grid.Column="1"
                                            HorizontalAlignment="Right">
@@ -682,7 +682,7 @@
                                                              Height="4"
                                                              Grid.Row="1"
                                                              Grid.ColumnSpan="2"
-                                                             Factor="{Binding SelectedCharacter.VanguardDailyCompletion}"
+                                                             Factor="{Binding SelectedCharacter.VanguardInfo.DailyCompletion}"
                                                              Color="{StaticResource AssaultStanceBrush}"
                                                              Skew="-45"
                                                              Margin="0 2">
@@ -700,7 +700,7 @@
                                 <TextBlock Text="Weekly quests"
                                            Foreground="#9fff">
                                 </TextBlock>
-                                <TextBlock Text="{Binding SelectedCharacter.VanguardWeekliesDone}"
+                                <TextBlock Text="{Binding SelectedCharacter.VanguardInfo.WeekliesDone}"
                                            Foreground="#7fff"
                                            Grid.Column="1"
                                            HorizontalAlignment="Right">
@@ -709,7 +709,7 @@
                                                              Height="4"
                                                              Grid.Row="1"
                                                              Grid.ColumnSpan="2"
-                                                             Factor="{Binding SelectedCharacter.VanguardWeeklyCompletion}"
+                                                             Factor="{Binding SelectedCharacter.VanguardInfo.WeeklyCompletion}"
                                                              Color="{StaticResource AssaultStanceBrush}"
                                                              Skew="-45"
                                                              Margin="0 2">
@@ -733,7 +733,7 @@
                                 <TextBlock Text="Credits"
                                            Foreground="#9fff">
                                 </TextBlock>
-                                <TextBlock Text="{Binding SelectedCharacter.GuardianCredits}"
+                                <TextBlock Text="{Binding SelectedCharacter.GuardianInfo.Credits}"
                                            Foreground="#7fff"
                                            Grid.Column="1"
                                            HorizontalAlignment="Right">
@@ -742,7 +742,7 @@
                                                              Height="4"
                                                              Grid.Row="1"
                                                              Grid.ColumnSpan="2"
-                                                             Factor="{Binding SelectedCharacter.GuardianCreditsFactor}"
+                                                             Factor="{Binding SelectedCharacter.GuardianInfo.CreditsFactor}"
                                                              Color="{StaticResource DefensiveStanceBrush}"
                                                              Skew="-45"
                                                              Margin="0 2">
@@ -760,7 +760,7 @@
                                 <TextBlock Text="Claimed quests"
                                            Foreground="#9fff">
                                 </TextBlock>
-                                <TextBlock Text="{Binding SelectedCharacter.ClaimedGuardianQuests}"
+                                <TextBlock Text="{Binding SelectedCharacter.GuardianInfo.Claimed}"
                                            Foreground="#7fff"
                                            Grid.Column="1"
                                            HorizontalAlignment="Right">
@@ -769,7 +769,7 @@
                                                              Height="4"
                                                              Grid.Row="1"
                                                              Grid.ColumnSpan="2"
-                                                             Factor="{Binding SelectedCharacter.ClaimedGuardianCompletion}"
+                                                             Factor="{Binding SelectedCharacter.GuardianInfo.ClaimedFactor}"
                                                              Color="{StaticResource DefensiveStanceBrush}"
                                                              Skew="-45"
                                                              Margin="0 2">
@@ -787,7 +787,7 @@
                                 <TextBlock Text="Cleared quests"
                                            Foreground="#9fff">
                                 </TextBlock>
-                                <TextBlock Text="{Binding SelectedCharacter.ClearedGuardianQuests}"
+                                <TextBlock Text="{Binding SelectedCharacter.GuardianInfo.Cleared}"
                                            Foreground="#7fff"
                                            Grid.Column="1"
                                            HorizontalAlignment="Right">
@@ -796,7 +796,7 @@
                                                              Height="4"
                                                              Grid.Row="1"
                                                              Grid.ColumnSpan="2"
-                                                             Factor="{Binding SelectedCharacter.ClearedGuardianCompletion}"
+                                                             Factor="{Binding SelectedCharacter.GuardianInfo.ClearedFactor}"
                                                              Color="{StaticResource DefensiveStanceBrush}"
                                                              Skew="-45"
                                                              Margin="0 2">
@@ -1065,7 +1065,7 @@
                             <ScrollViewer Grid.Row="1" CanContentScroll="True"
                                           VerticalAlignment="Stretch">
                             </ScrollViewer>
-                            <ListBox ItemsSource="{Binding SelectedCharacter.VisibleDungeonsView}"
+                            <ListBox ItemsSource="{Binding SelectedCharacter.DungeonInfo.VisibleDungeonsView}"
                                      Margin="0 0 0 0"
                                      Grid.Row="1"
                                      ItemContainerStyle="{StaticResource DefaultListItemStyle}"
@@ -1115,7 +1115,7 @@
                                                                 <TextBlock Foreground="#4fff">
                                                                     <Run Text="Max daily runs:" />
                                                                     <Run
-                                                                        Text="{Binding Dungeon.ActualRuns, Mode=OneWay}"
+                                                                        Text="{Binding Dungeon.MaxEntries, Mode=OneWay}"
                                                                         Foreground="#9fff" />
                                                                 </TextBlock>
                                                             </StackPanel>
@@ -1142,7 +1142,7 @@
                                                 <TextBlock.Foreground>
                                                     <MultiBinding Converter="{StaticResource EntriesToColor}">
                                                         <Binding Path="Entries" />
-                                                        <Binding Path="Runs" />
+                                                        <Binding Path="Dungeon.MaxEntries" />
                                                     </MultiBinding>
                                                 </TextBlock.Foreground>
                                             </TextBlock>
