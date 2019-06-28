@@ -235,7 +235,7 @@ namespace TCC.Data.Chat
                                 {
 
                                     mp = MessagePieceBuilder.BuildSysMsgRegion(inPiece);
-                                    
+
                                     mp.SetColor(col);
                                 }
                                 else if (inPiece.StartsWith("@zoneName"))
@@ -270,15 +270,18 @@ namespace TCC.Data.Chat
         private void AddPiece(MessagePiece mp)
         {
             mp.Container = this;
-            Pieces.Add(mp);
+            Dispatcher.BeginInvokeIfRequired(() =>
+            {
+                Pieces.Add(mp);
+            }, DispatcherPriority.DataBind);
         }
         private void InsertPiece(MessagePiece mp, int index)
         {
-            Dispatcher.Invoke(() =>
+            mp.Container = this;
+            Dispatcher.BeginInvokeIfRequired(() =>
             {
-                mp.Container = this;
                 Pieces.Insert(index, mp);
-            });
+            }, DispatcherPriority.DataBind);
         }
         private void RemovePiece(MessagePiece mp)
         {
@@ -430,7 +433,7 @@ namespace TCC.Data.Chat
                 {
                     //parse normal formatted piece
                     var text = piece.InnerText;
-                    if(!App.Loading) CheckMention(text);
+                    if (!App.Loading) CheckMention(text);
                     CheckRedirect(text);
                     var content = GetPieceContent(text);
                     if (content != "")
@@ -451,7 +454,7 @@ namespace TCC.Data.Chat
             {
                 //parse normal non formatted piece
                 var text = piece.InnerText;
-                if(!App.Loading) CheckMention(text);
+                if (!App.Loading) CheckMention(text);
                 CheckRedirect(text);
                 var content = GetPieceContent(text);
                 if (content != "")
@@ -475,7 +478,7 @@ namespace TCC.Data.Chat
             //check if player is mentioned
             try
             {
-                foreach (var item in WindowManager.ViewModels.Dashboard.Characters.Where(c => !c.Hidden))
+                foreach (var item in Session.Account.Characters.Where(c => !c.Hidden))
                 {
                     if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
                     ContainsPlayerName = true;
@@ -564,10 +567,13 @@ namespace TCC.Data.Chat
 
         public void Dispose()
         {
+            SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
+            SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
+            SettingsWindowViewModel.FontSizeChanged -= FontSizeNPC;
+
             foreach (var messagePiece in Pieces)
             {
-                if (messagePiece == null) continue;
-                messagePiece.Dispose();
+                messagePiece?.Dispose();
             }
             Pieces.Clear();
         }
@@ -601,13 +607,14 @@ namespace TCC.Data.Chat
         {
             if (_tries == 0)
             {
+                Log.CW($"Unable to find linked listing for [{Author}]{RawMessage}, stopping tries.");
                 _timer.Stop();
                 return;
             }
             LinkedListing = FindListing();
             if (LinkedListing == null)
             {
-                //Log.CW($"Linked listing ({Author}/{AuthorId}) is still null!");
+                Log.CW($"Linked listing ({Author}/{AuthorId}) is still null! ({_tries})");
                 _tries--;
                 return;
             }
