@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define FORCE_TTB
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,8 +14,10 @@ using System.Windows.Threading;
 
 using TCC.Data;
 using TCC.Interop.Proxy;
+using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraPacketParser.Messages;
@@ -96,7 +100,7 @@ namespace TCC
 
             SplashScreen.SetText("Pre-loading databases...");
             UpdateManager.CheckDatabaseHash();
-            Session.Init();
+            await Session.InitAsync();
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
 
@@ -107,6 +111,8 @@ namespace TCC
             TimeManager.Instance.SetServerTimeZone(Settings.LastLanguage);
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
+
+            ModuleLoader.LoadModules();
 
             if (!ToolboxMode) UpdateManager.StartPeriodicCheck();
 
@@ -121,7 +127,11 @@ namespace TCC
 
         private static void ParseStartupArgs(List<string> list)
         {
-            ToolboxMode = true;// list.IndexOf("--toolbox") != -1;
+#if FORCE_TTB
+            ToolboxMode = true;
+#else
+            ToolboxMode = list.IndexOf("--toolbox") != -1;
+#endif
             Restarted = list.IndexOf("--restart") != -1;
         }
 
@@ -178,4 +188,5 @@ namespace TCC
             _mutex.ReleaseMutex();
         }
     }
+
 }
