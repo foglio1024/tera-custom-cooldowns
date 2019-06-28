@@ -127,8 +127,8 @@ namespace TCC.ViewModels
                 if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
                 if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
                 if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-                AddOrRefreshLfg(m.ListingData);
-                AddChatMessage(new LfgMessage(m.Id, m.Name, m.Message));
+                AddOrRefreshLfg(m.ListingData); //Dispatcher.BeginInvoke(new Action(() => { AddOrRefreshLfg(m.ListingData); }), DispatcherPriority.DataBind);
+                AddLfgMessage(m.Id, m.Name, m.Message);
             });
             PacketAnalyzer.NewProcessor.Hook<S_USER_BLOCK_LIST>(m =>
             {
@@ -259,6 +259,14 @@ namespace TCC.ViewModels
         {
             AddChatMessage(new ChatMessage(srvMsg, sysMsg, channelOverride));
         }
+
+        public void AddLfgMessage(uint id, string name, string msg)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                AddChatMessage(new LfgMessage(id, name, msg));
+            }), DispatcherPriority.DataBind);
+        }
         public void AddChatMessage(ChatMessage chatMessage)
         {
             Dispatcher.BeginInvoke(new Action(() =>
@@ -295,7 +303,7 @@ namespace TCC.ViewModels
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!Session.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
+            //if (!Session.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
             var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
