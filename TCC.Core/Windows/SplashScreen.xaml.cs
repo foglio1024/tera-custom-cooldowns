@@ -46,7 +46,7 @@ namespace TCC.Windows
                     Ver.Foreground = R.Brushes.HpBrushLight;
                 }
 
-                TtbLogo.Visibility = App.ToolboxMode ? Visibility.Visible : Visibility.Collapsed;
+                TtbLogoContainer.Visibility = App.ToolboxMode ? Visibility.Visible : Visibility.Collapsed;
             }));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

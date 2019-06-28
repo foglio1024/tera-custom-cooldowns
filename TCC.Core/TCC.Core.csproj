@@ -1323,7 +1323,9 @@
     <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
     <Resource Include="resources\images\enraged.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ttb.png" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
@@ -1415,6 +1417,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\ttb.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ttb64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
