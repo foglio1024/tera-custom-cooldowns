@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Threading;
@@ -107,7 +108,7 @@ namespace TCC.Test
         public static void SpawnNpcAndUpdateHP(ushort zoneId, uint templateId)
         {
             EntityManager.SpawnNPC(zoneId, templateId, 11, true, false, 36);
-            var t = new Timer { Interval = 1000 };
+            var t = new System.Timers.Timer { Interval = 1000 };
             var hp = 1000;
             t.Elapsed += (_, __) =>
             {
@@ -341,10 +342,10 @@ namespace TCC.Test
             }
         }
 
-        private static Timer _t;
+        private static System.Timers.Timer _t;
         public static void AddMobs()
         {
-            _t = new Timer { Interval = 1 };
+            _t = new System.Timers.Timer { Interval = 1 };
             _t.Elapsed += T_Elapsed;
             _t.Start();
         }
@@ -352,7 +353,7 @@ namespace TCC.Test
         public static void AddNpcAndAbnormalities()
         {
             EntityManager.SpawnNPC(950, 4000, 1, true, false, 36);
-            var t = new Timer(1);
+            var t = new System.Timers.Timer(1);
             var id = 0U;
             var a = true;
             t.Elapsed += (_, __) =>
@@ -370,6 +371,44 @@ namespace TCC.Test
             if (_eid != 10000) return;
             EntityManager.ClearNPC();
             _t.Stop();
+        }
+
+        public static void AddMessages(int count)
+        {
+            var t = new Thread(() =>
+            {
+                for (var i = 0; i < (count == 0 ? int.MaxValue : count); i++)
+                {
+                    if (i > 1000)
+                    {
+                        i = 0;
+                        ChatWindowManager.Instance.GetDispatcher().BeginInvoke(new Action(() =>
+                        {
+                            foreach (var chatMessage in ChatWindowManager.Instance.ChatMessages)
+                            {
+                                chatMessage.Dispose();
+                            }
+                            ChatWindowManager.Instance.ChatMessages.Clear();
+                        }));
+                    }
+                    ChatWindowManager.Instance.AddDamageReceivedMessage(1, 2, int.MaxValue - i, int.MaxValue);
+
+                    Thread.Sleep(1);
+                }
+            });
+            t.Start();
+        }
+
+        public static void CheckDelegateSubs()
+        {
+            var t = new System.Timers.Timer(1000);
+            t.Elapsed += (_, __) =>
+            {
+                SettingsWindowViewModel.PrintEventsData();
+                Log.CW($"Messages: {ChatWindowManager.Instance.ChatMessages.Count}");
+                Log.CW("----------------------------------------------------------");
+            };
+            t.Start();
         }
     }
 }

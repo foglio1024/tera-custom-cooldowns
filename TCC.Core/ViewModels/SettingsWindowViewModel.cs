@@ -21,6 +21,13 @@ namespace TCC.ViewModels
         public static event Action AbnormalityShapeChanged;
         public static event Action SkillShapeChanged;
         public static event Action FontSizeChanged;
+        public static void PrintEventsData()
+        {
+            Log.CW($"ChatShowChannelChanged: {ChatShowChannelChanged?.GetInvocationList().Length}");
+            Log.CW($"ChatShowTimestampChanged: {ChatShowTimestampChanged?.GetInvocationList().Length}");
+            Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
+            
+        }
 
         public WindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
         public WindowSettings ClassWindowSettings => App.Settings.ClassWindowSettings;
