@@ -174,6 +174,8 @@ namespace TCC.Data.Chat
         {
             Color = null;
             _container = null;
+            SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
+
         }
     }
 }
