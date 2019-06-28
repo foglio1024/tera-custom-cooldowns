@@ -25,14 +25,12 @@ namespace TCC.Controls.Chat
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine(_dc.RawMessage + " LOADED");
             if (_dc == null) return;
             _dc.IsVisible = true;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine(_dc.RawMessage + " UNLOADED");
             if(_dc == null) return;
             _dc.IsVisible = false;
             _dc = null;
@@ -47,7 +45,6 @@ namespace TCC.Controls.Chat
         {
             if (_dc == null) return;
             _dc.Animate = false;
-
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
