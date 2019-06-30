@@ -16,6 +16,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+    [TccModule]
     public class ChatWindowManager : TccWindowViewModel
     {
         private static ChatWindowManager _instance;

@@ -50,6 +50,8 @@ namespace TCC.ViewModels
             }
         }
     }
+
+    [TccModule]
     public class CivilUnrestViewModel : TccWindowViewModel
     {
         public event Action Teleported;

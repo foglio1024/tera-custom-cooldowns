@@ -23,6 +23,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC.ViewModels
 {
 
+    [TccModule]
     public class CooldownWindowViewModel : TccWindowViewModel
     {
         public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;

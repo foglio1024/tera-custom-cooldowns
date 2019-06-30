@@ -7,6 +7,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+    [TccModule]
     public class CharacterWindowViewModel : TccWindowViewModel
     {
         public Player Player => Session.Me;

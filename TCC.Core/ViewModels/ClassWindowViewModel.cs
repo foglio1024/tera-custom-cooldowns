@@ -8,6 +8,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+    [TccModule]
     public class ClassWindowViewModel : TccWindowViewModel
     {
         //private static ClassWindowViewModel _instance;

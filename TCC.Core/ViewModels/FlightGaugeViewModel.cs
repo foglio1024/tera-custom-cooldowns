@@ -5,6 +5,8 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+
+    [TccModule]
     public class FlightGaugeViewModel : TccWindowViewModel
     {
         public event Action<double> EnergyChanged;

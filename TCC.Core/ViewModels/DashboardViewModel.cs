@@ -29,6 +29,8 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
+
+    [TccModule]
     public class DashboardViewModel : TccWindowViewModel
     {
         /* -- Fields ----------------------------------------------- */
@@ -243,6 +245,7 @@ namespace TCC.ViewModels
                     new CharactersXmlParser().Read(Session.Account.Characters);
                 else
                 {
+                    if (!File.Exists(Path.Combine(App.ResourcesPath, "config/characters.json"))) return;
                     Session.Account =
                         JsonConvert.DeserializeObject<Account>(
                             File.ReadAllText(Path.Combine(App.ResourcesPath, "config/characters.json")));

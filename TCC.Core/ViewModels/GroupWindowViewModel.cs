@@ -19,6 +19,8 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+
+    [TccModule]
     public class GroupWindowViewModel : TccWindowViewModel
     {
         //private static GroupWindowViewModel _instance;

@@ -16,6 +16,8 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+
+    [TccModule]
     public class NpcWindowViewModel : TccWindowViewModel
     {
         public const int Ph1ShieldDuration = 16;
@@ -578,6 +580,7 @@ namespace TCC.ViewModels
             b.Dispose();
             NpcList.Remove(b);
         }
+
 
         protected override void InstallHooks()
         {

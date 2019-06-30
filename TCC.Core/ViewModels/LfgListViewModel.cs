@@ -18,6 +18,8 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+
+    [TccModule]
     public class LfgListViewModel : TccWindowViewModel
     {
         public event Action<int> Publicized;

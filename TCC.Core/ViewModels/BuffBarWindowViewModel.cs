@@ -8,6 +8,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
+    [TccModule]
     public class BuffBarWindowViewModel : TccWindowViewModel
     {
         public Player Player => Session.Me;
