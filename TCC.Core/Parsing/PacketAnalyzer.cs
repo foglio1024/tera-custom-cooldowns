@@ -64,7 +64,7 @@ namespace TCC.Parsing
 
         }
         private static void InstallHooks()
-        {
+         {
             NewProcessor.Hook<C_CHECK_VERSION>(PacketHandler.HandleCheckVersion);
             NewProcessor.Hook<C_LOGIN_ARBITER>(PacketHandler.HandleLoginArbiter);
             NewProcessor.Hook<S_GET_USER_LIST>(PacketHandler.HandleGetUserList);
@@ -81,7 +81,7 @@ namespace TCC.Parsing
         {
             AnalysisThreadId = MiscUtils.GetCurrentThreadId();
             NewProcessor = new NewProcessor();
-            ProcessorReady?.Invoke();
+            App.BaseDispatcher.BeginInvoke(new Action(() => { ProcessorReady?.Invoke(); })); 
 
             while (true)
             {
