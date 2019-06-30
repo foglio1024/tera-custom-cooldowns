@@ -1,4 +1,5 @@
-﻿using TCC.Parsing;
+﻿using System.Windows.Threading;
+using TCC.Parsing;
 
 namespace TCC.ViewModels
 {
@@ -8,7 +9,10 @@ namespace TCC.ViewModels
 
         protected TccWindowViewModel()
         {
-            PacketAnalyzer.ProcessorReady += InstallHooks;
+            App.BaseDispatcher.Invoke(() =>
+            {
+                PacketAnalyzer.ProcessorReady += InstallHooks;
+            });
         }
     }
 }
