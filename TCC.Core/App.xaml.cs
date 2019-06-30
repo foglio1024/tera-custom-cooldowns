@@ -101,10 +101,17 @@ namespace TCC
             SplashScreen.SetText("Pre-loading databases...");
             UpdateManager.CheckDatabaseHash();
             await Session.InitAsync();
-            SplashScreen.SetText("Initializing windows...");
-            WindowManager.Init();
 
             SplashScreen.SetText("Initializing packet processor...");
+            PacketAnalyzer.ProcessorReady += () =>
+            {
+                BaseDispatcher.Invoke(() =>
+                {
+                    WindowManager.Init();
+                    ModuleLoader.LoadModules();
+                });
+                //SplashScreen.SetText("Initializing windows...");
+            };
             PacketAnalyzer.InitAsync();
             SplashScreen.SetText("Starting");
 
@@ -112,7 +119,6 @@ namespace TCC
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
             SplashScreen.CloseWindowSafe();
 
-            ModuleLoader.LoadModules();
 
             if (!ToolboxMode) UpdateManager.StartPeriodicCheck();
 
