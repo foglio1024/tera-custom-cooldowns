@@ -21,8 +21,8 @@ namespace TCC.Data.Databases
             if (!Exists) return;
             var localHash = HashUtils.GenerateFileHash(customAbsPath ?? FullPath);
             if (UpdateManager.DatabaseHashes.Count == 0) return;
-            if (!UpdateManager.DatabaseHashes.ContainsKey(customRelPath ?? RelativePath)) return;
-            if (UpdateManager.DatabaseHashes[customRelPath ?? RelativePath] == localHash) return;
+            if (!UpdateManager.DatabaseHashes.TryGetValue(customRelPath ?? RelativePath, out var remoteHash)) return;
+            if (remoteHash == localHash) return;
             Log.CW($"Hash mismatch for {customRelPath ?? RelativePath}");
             outdatedCount++;
 
