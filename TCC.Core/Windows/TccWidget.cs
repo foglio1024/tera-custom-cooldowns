@@ -254,6 +254,7 @@ namespace TCC.Windows
         }
         private void CheckBounds()
         {
+            if (WindowSettings == null) return;
             if (WindowSettings.AllowOffScreen) return;
             if (Left + ActualWidth > WindowManager.ScreenSize.Width)
             {
@@ -363,11 +364,12 @@ namespace TCC.Windows
         }
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
-            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
+            if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
             this.TryDragMove();
             UpdateButtons();
             CheckBounds();
-            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
+            if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
+            if (WindowSettings == null) return;
             WindowSettings.X = Left / WindowManager.ScreenSize.Width;
             WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
             App.Settings.Save();
