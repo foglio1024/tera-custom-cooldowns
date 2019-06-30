@@ -89,10 +89,6 @@ namespace TCC
 
             SettingsContainer.Load();
 
-            //var sr = new JsonSettingsReader();
-            //sr.LoadWindowSettings();
-            //sr.LoadSettings();
-
             Process.GetCurrentProcess().PriorityClass = Settings.HighPriority
                 ? ProcessPriorityClass.High
                 : ProcessPriorityClass.Normal;
@@ -103,12 +99,12 @@ namespace TCC
             await Session.InitAsync();
 
             SplashScreen.SetText("Initializing packet processor...");
+            WindowManager.Init();
             PacketAnalyzer.ProcessorReady += () =>
             {
                 BaseDispatcher.Invoke(() =>
                 {
-                    WindowManager.Init();
-                    ModuleLoader.LoadModules();
+                    ModuleLoader.LoadModules(BasePath);
                 });
                 //SplashScreen.SetText("Initializing windows...");
             };
