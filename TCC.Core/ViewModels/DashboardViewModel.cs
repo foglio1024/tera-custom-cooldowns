@@ -248,9 +248,10 @@ namespace TCC.ViewModels
                             File.ReadAllText(Path.Combine(App.ResourcesPath, "config/characters.json")));
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters.xml. Manually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters file (more info in error.log). Manually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
+                Log.F($"Cannot read characters file: {e}");
                 if (res == MessageBoxResult.OK) LoadCharacters();
                 else
                 {
