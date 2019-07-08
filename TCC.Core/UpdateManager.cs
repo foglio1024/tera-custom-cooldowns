@@ -26,7 +26,7 @@ namespace TCC
         private const string AppVersionUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
         private const string AppVersionExperimentalUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/version";
 
-        private const string DownloadedIconsDir = "tera-used-icons-master";
+        private static string DownloadedIconsDir => Path.Combine(App.BasePath, "tera-used-icons-master");
 
         private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{(App.Experimental ? "experimental" : "master")}/database-hashes.json";
 
