@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using TCC.ViewModels;
 
@@ -6,18 +7,16 @@ namespace TCC
 {
     public static class Log
     {
+        [Conditional("DEBUG")]
         public static void CW(string line)
         {
-#if DEBUG
             Console.WriteLine(line);
-#endif
         }
 
+        [Conditional("DEBUG")]
         public static void C(string line)
         {
-#if DEBUG
             App.BaseDispatcher.BeginInvoke(new Action(() => { ChatWindowManager.Instance.AddTccMessage(line); }));
-#endif
         }
 
         public static void F(string line, string fileName = "error.log")
@@ -30,14 +29,6 @@ namespace TCC
             }
             catch { }
         }
-        //public static void F(string filename, string line)   //by HQ 20181228
-        //{
-        //    try
-        //    {
-        //        File.AppendAllText(Path.Combine(App.BasePath, "logs", filename), $"############### {App.AppVersion} - {DateTime.Now:dd/MM/yyyy HH:mm:ss} ###############\n{line}\n\n");
-        //    }
-        //    catch { }
-        //}
 
         public static void All(string s)
         {

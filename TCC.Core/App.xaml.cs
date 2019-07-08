@@ -1,5 +1,7 @@
 ﻿//#define FORCE_TTB
-
+#if DEBUG
+#define RELEASE
+#endif
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -70,9 +72,9 @@ namespace TCC
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
             InitSplashScreen();
-#if !DEBUG
+
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
-#endif
+
             if (!ToolboxMode)
             {
                 UpdateManager.TryDeleteUpdater();

@@ -23,12 +23,16 @@ namespace TCC
     {
         public static void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
         {
+            HandleGlobalExceptionImpl(e);
+        }
+
+        [Conditional("RELEASE")]
+        private static void HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
+        {
             var ex = (Exception)e.ExceptionObject;
             DumpCrashToFile(ex);
-            //#if !DEBUG
             try { new Thread(() => UploadCrashDump(ex)).Start(); }
             catch { /*ignored*/ }
-            //#endif
 
             TccMessageBox.Show("TCC",
                 "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
@@ -48,8 +52,8 @@ namespace TCC
             }
             catch { }
             Environment.Exit(-1);
-        }
 
+        }
         private static string FormatFullException(Exception ex)
         {
             var fullSb = new StringBuilder();
