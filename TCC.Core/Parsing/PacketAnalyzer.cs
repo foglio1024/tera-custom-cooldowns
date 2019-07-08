@@ -64,7 +64,7 @@ namespace TCC.Parsing
 
         }
         private static void InstallHooks()
-         {
+        {
             NewProcessor.Hook<C_CHECK_VERSION>(PacketHandler.HandleCheckVersion);
             NewProcessor.Hook<C_LOGIN_ARBITER>(PacketHandler.HandleLoginArbiter);
             NewProcessor.Hook<S_GET_USER_LIST>(PacketHandler.HandleGetUserList);
@@ -81,7 +81,7 @@ namespace TCC.Parsing
         {
             AnalysisThreadId = MiscUtils.GetCurrentThreadId();
             NewProcessor = new NewProcessor();
-            App.BaseDispatcher.BeginInvoke(new Action(() => { ProcessorReady?.Invoke(); })); 
+            App.BaseDispatcher.BeginInvoke(new Action(() => { ProcessorReady?.Invoke(); }));
 
             while (true)
             {
@@ -121,7 +121,7 @@ namespace TCC.Parsing
             EntityManager.ClearNPC();
             WindowManager.ViewModels.Cooldowns.ClearSkills(); // TODO: hook connection to these too
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-            ProxyInterface.Instance.Disconnect(); 
+            ProxyInterface.Instance.Disconnect();
             Session.Logged = false;
             Session.LoadingScreen = true;
         }
@@ -148,7 +148,7 @@ namespace TCC.Parsing
             lock (_lock)
             {
                 if (!_hooks.TryGetValue(typeof(T), out _)) _hooks[typeof(T)] = new List<Delegate>();
-                if(!_hooks[typeof(T)].Contains(action)) _hooks[typeof(T)].Add(action);
+                if (!_hooks[typeof(T)].Contains(action)) _hooks[typeof(T)].Add(action);
             }
         }
         public void Unhook<T>(Action<T> action)
@@ -161,10 +161,10 @@ namespace TCC.Parsing
         }
         public void Handle(ParsedMessage msg)
         {
-            Console.WriteLine($"Handling {msg.GetType().Name}");
             if (!_hooks.TryGetValue(msg.GetType(), out var handlers) || handlers == null) return;
             lock (_lock)
             {
+                //Log.All($"Handling {msg.GetType().Name}");
                 handlers.ForEach(del => del.DynamicInvoke(msg));
             }
         }
