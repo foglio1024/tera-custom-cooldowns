@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -77,13 +78,29 @@ namespace TCC.Publisher
 
             SevenZipBase.SetLibraryPath("C:/Program Files/7-Zip/7z.dll");
             Logger.WriteLine("    Starting compression...");
-            await Task.Factory.StartNew(() => new SevenZipCompressor
+            await Task.Factory.StartNew(() =>
             {
-                CompressionLevel = CompressionLevel.Ultra,
-                CompressionMethod = CompressionMethod.Deflate,
-                CompressionMode = CompressionMode.Create,
-                ArchiveFormat = OutArchiveFormat.Zip
-            }.CompressDirectory(ReleaseFolder, ZipName));
+                var files = new Dictionary<int, string>();
+                var comp = new SevenZipCompressor
+                {
+                    CompressionLevel = CompressionLevel.Ultra,
+                    CompressionMethod = CompressionMethod.Deflate,
+                    CompressionMode = CompressionMode.Create,
+                    ArchiveFormat = OutArchiveFormat.Zip
+
+                };
+                comp.CompressDirectory(ReleaseFolder, ZipName);
+
+                var extr = new SevenZipExtractor(ZipName);
+                foreach (var f in extr.ArchiveFileData)
+                {
+                    if (f.FileName.StartsWith(".git"))
+                    {
+                        files[f.Index] = null;
+                    }
+                }
+                comp.ModifyArchive(ZipName, files);
+            });
             Logger.Write(" Done\n");
             Logger.WriteLine("    Copying zip to release folder...");
             File.Move(ZipName, Path.Combine(ReleaseFolder, ZipName));
