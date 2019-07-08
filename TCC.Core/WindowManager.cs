@@ -123,15 +123,17 @@ namespace TCC
                 Console.WriteLine($"{d.Thread.Name} alive: {d.Thread.IsAlive} bg: {d.Thread.IsBackground}");
             }
         }
-
+        private static Size GetScreenCorrection()
+        {
+            var wFac = App.Settings.LastScreenSize.Width / ScreenSize.Width;
+            var hFac = App.Settings.LastScreenSize.Height / ScreenSize.Height;
+            return new Size(wFac, hFac);
+        }
         public static void UpdateScreenCorrection()
         {
             if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
-            var wFac = App.Settings.LastScreenSize.Width / ScreenSize.Width;
-            var hFac = App.Settings.LastScreenSize.Height / ScreenSize.Height;
-            var sc = new Size(wFac, hFac);
             App.Settings.LastScreenSize = ScreenSize;
-            ApplyScreenCorrection(sc);
+            ApplyScreenCorrection(GetScreenCorrection());
             if (!App.Loading) App.Settings.Save();
         }
 
@@ -156,7 +158,6 @@ namespace TCC
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             FocusManager.Init();
             LoadWindows();
-            UpdateScreenCorrection();
             _contextMenu = new ContextMenu();
             var defaultIconStream = Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative))?.Stream;
             if (defaultIconStream != null) DefaultIcon = new Icon(defaultIconStream);
@@ -312,6 +313,7 @@ namespace TCC
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 CooldownWindow = new CooldownWindow(ViewModels.Cooldowns);
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
+                CooldownWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
@@ -329,6 +331,8 @@ namespace TCC
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 ClassWindow = new ClassWindow(ViewModels.Class);
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
+                ClassWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
+
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
@@ -345,6 +349,7 @@ namespace TCC
                 Session.Me = new Player();
                 CharacterWindow = new CharacterWindow(ViewModels.Character);
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
+                CharacterWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
@@ -360,6 +365,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossWindow = new BossWindow(ViewModels.NPC);
                 if (BossWindow.WindowSettings.Enabled) BossWindow.Show();
+                BossWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
@@ -375,6 +381,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BuffWindow = new BuffWindow(ViewModels.Abnormal);
                 if (BuffWindow.WindowSettings.Enabled) BuffWindow.Show();
+                BuffWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
@@ -391,6 +398,7 @@ namespace TCC
                 Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
                 GroupWindow = new GroupWindow(ViewModels.Group);
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
+                GroupWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
