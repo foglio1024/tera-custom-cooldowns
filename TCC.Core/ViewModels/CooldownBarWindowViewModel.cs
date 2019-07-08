@@ -513,7 +513,7 @@ namespace TCC.ViewModels
 
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
-            Session.DatabaseLoaded += InitViews;
+            InitViews();
 
             //SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
 
