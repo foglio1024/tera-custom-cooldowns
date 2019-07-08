@@ -108,9 +108,6 @@ namespace TCC.Data.Chat
         }
         public ChatMessage(string systemMessage, SystemMessage m, ChatChannel ch) : this()
         {
-#if DEBUG
-            //Log.F("sysmsg.log", $"{systemMessage} -- {m.Message}");
-#endif
             Channel = ch;
             RawMessage = systemMessage;
             Author = "System";
