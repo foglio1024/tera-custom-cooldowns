@@ -10,6 +10,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.ViewModels.Widgets;
 using TCC.Windows.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Messages;
@@ -20,7 +21,7 @@ namespace TCC.ViewModels
     public class ChatWindowManager : TccWindowViewModel
     {
         private static ChatWindowManager _instance;
-        public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
+        public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager(App.Settings.ChatSettings));
 
         private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
@@ -40,10 +41,8 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
         public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
 
-        private ChatWindowManager()
+        private ChatWindowManager(WindowSettings settings) : base(settings)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-
             _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
 
@@ -59,96 +58,127 @@ namespace TCC.ViewModels
             ChatWindows.CollectionChanged += OnChatWindowsCollectionChanged;
             PrivateChannelJoined += OnPrivateChannelJoined;
 
-
         }
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(m =>
-            {
-                AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
-            {
-                BlockedUsers.Clear();
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Hook<S_CHAT>(OnChat);
+            PacketAnalyzer.NewProcessor.Hook<S_PRIVATE_CHAT>(OnPrivateChat);
+            PacketAnalyzer.NewProcessor.Hook<S_WHISPER>(OnWhisper);
+            PacketAnalyzer.NewProcessor.Hook<S_JOIN_PRIVATE_CHANNEL>(OnJoinPrivateChannel);
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PRIVATE_CHANNEL>(OnLeavePrivateChannel);
+            PacketAnalyzer.NewProcessor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
+            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
+            PacketAnalyzer.NewProcessor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
+            PacketAnalyzer.NewProcessor.Hook<S_FRIEND_LIST>(OnFriendList);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
 
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_EXP>(m =>
-            {
-                var msg = $"<font>You gained </font>";
-                msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.GainedTotalExp - m.GainedRestedExp:N0}</font>";
-                msg += $"<font>{(m.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{m.GainedRestedExp:N0}" : "")} </font>";
-                msg += $"<font>(</font>";
-                msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
-                msg += $"{(m.GainedTotalExp) / (double)(m.NextLevelExp):P3}</font>";
-                msg += $"<font>) XP.</font>";
-                msg += $"<font> Total: </font>";
-                msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.LevelExp / (double)(m.NextLevelExp):P3}</font>";
-                msg += $"<font>.</font>";
+        }
 
-                AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_CHAT>(m =>
-            {
-                AddChatMessage(new ChatMessage(m.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)m.Channel), m.AuthorName, m.Message));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PRIVATE_CHAT>(m =>
-            {
-                var i = PrivateChannels.FirstOrDefault(y => y.Id == m.Channel).Index;
-                var ch = (ChatChannel)(PrivateChannels[i].Index + 11);
+        protected override void RemoveHooks()
+        {
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Unhook<S_CHAT>(OnChat);
+            PacketAnalyzer.NewProcessor.Unhook<S_PRIVATE_CHAT>(OnPrivateChat);
+            PacketAnalyzer.NewProcessor.Unhook<S_WHISPER>(OnWhisper);
+            PacketAnalyzer.NewProcessor.Unhook<S_JOIN_PRIVATE_CHANNEL>(OnJoinPrivateChannel);
+            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PRIVATE_CHANNEL>(OnLeavePrivateChannel);
+            PacketAnalyzer.NewProcessor.Unhook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
+            PacketAnalyzer.NewProcessor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
+            PacketAnalyzer.NewProcessor.Unhook<S_USER_BLOCK_LIST>(OnUserBlockList);
+            PacketAnalyzer.NewProcessor.Unhook<S_FRIEND_LIST>(OnFriendList);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
 
-                AddChatMessage(new ChatMessage(ch, m.AuthorName, m.Message));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_JOIN_PRIVATE_CHANNEL>(m =>
-            {
-                JoinPrivateChannel(m.Id, m.Index, m.Name);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PRIVATE_CHANNEL>(m =>
-            {
-                var i = PrivateChannels.FirstOrDefault(c => c.Id == m.Id).Index;
-                PrivateChannels[i].Joined = false;
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_WHISPER>(m =>
-            {
-                var isMe = m.Author == Session.Me.Name;
-                var author = isMe ? m.Recipient : m.Author;
-                var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
-                AddChatMessage(new ChatMessage(channel, author, m.Message));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(m =>
-            {
-                AddChatMessage(new BrokerChatMessage(m.PlayerId, m.Listing, m.Item, m.Amount, m.SellerPrice, m.OfferedPrice, m.Name));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(m =>
-            {
-                AddChatMessage(new ApplyMessage(m.PlayerId, m.Class, m.Level, m.Name));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MATCH_LINK>(m =>
-            {
-                if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-                if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-                if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-                AddOrRefreshLfg(m.ListingData); //Dispatcher.BeginInvoke(new Action(() => { AddOrRefreshLfg(m.ListingData); }), DispatcherPriority.DataBind);
-                AddLfgMessage(m.Id, m.Name, m.Message);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_USER_BLOCK_LIST>(m =>
-            {
-                m.BlockedUsers.ForEach(u =>
-                {
-                    if (BlockedUsers.Contains(u)) return;
-                    BlockedUsers.Add(u);
-                });
+        }
 
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_FRIEND_LIST>(m =>
+        private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
+        {
+            UpdateLfgMembers(m.Id, m.Members.Count);
+        }
+        private void OnFriendList(S_FRIEND_LIST m)
+        {
+            Friends = m.Friends;
+        }
+        private void OnUserBlockList(S_USER_BLOCK_LIST m)
+        {
+            m.BlockedUsers.ForEach(u =>
             {
-                Friends = m.Friends;
+                if (BlockedUsers.Contains(u)) return;
+                BlockedUsers.Add(u);
             });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(m =>
-            {
-                UpdateLfgMembers(m.Id, m.Members.Count);
-            });
+        }
+        private void OnPartyMatchLink(S_PARTY_MATCH_LINK m)
+        {
+            if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+            if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+            if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+            AddOrRefreshLfg(m.ListingData); //Dispatcher.BeginInvoke(new Action(() => { AddOrRefreshLfg(m.ListingData); }), DispatcherPriority.DataBind);
+            AddLfgMessage(m.Id, m.Name, m.Message);
+        }
+        private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
+        {
+            AddChatMessage(new ApplyMessage(m.PlayerId, m.Class, m.Level, m.Name));
+        }
+        private void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
+        {
+            AddChatMessage(new BrokerChatMessage(m.PlayerId, m.Listing, m.Item, m.Amount, m.SellerPrice, m.OfferedPrice, m.Name));
+        }
+        private void OnWhisper(S_WHISPER m)
+        {
+            var isMe = m.Author == Session.Me.Name;
+            var author = isMe ? m.Recipient : m.Author;
+            var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
+            AddChatMessage(new ChatMessage(channel, author, m.Message));
+        }
+        private void OnLeavePrivateChannel(S_LEAVE_PRIVATE_CHANNEL m)
+        {
+            var i = PrivateChannels.FirstOrDefault(c => c.Id == m.Id).Index;
+            PrivateChannels[i].Joined = false;
+        }
+        private void OnJoinPrivateChannel(S_JOIN_PRIVATE_CHANNEL m)
+        {
+            JoinPrivateChannel(m.Id, m.Index, m.Name);
+        }
+        private void OnPrivateChat(S_PRIVATE_CHAT m)
+        {
+            var i = PrivateChannels.FirstOrDefault(y => y.Id == m.Channel).Index;
+            var ch = (ChatChannel) (PrivateChannels[i].Index + 11);
 
+            AddChatMessage(new ChatMessage(ch, m.AuthorName, m.Message));
+        }
+        private void OnChat(S_CHAT m)
+        {
+            AddChatMessage(new ChatMessage(m.Channel == 212 ? (ChatChannel) 26 : ((ChatChannel) m.Channel), m.AuthorName, m.Message));
+        }
+        private void OnPlayerChangeExp(S_PLAYER_CHANGE_EXP m)
+        {
+            var msg = $"<font>You gained </font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.GainedTotalExp - m.GainedRestedExp:N0}</font>";
+            msg += $"<font>{(m.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{m.GainedRestedExp:N0}" : "")} </font>";
+            msg += $"<font>(</font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
+            msg += $"{(m.GainedTotalExp) / (double) (m.NextLevelExp):P3}</font>";
+            msg += $"<font>) XP.</font>";
+            msg += $"<font> Total: </font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.LevelExp / (double) (m.NextLevelExp):P3}</font>";
+            msg += $"<font>.</font>";
+
+            AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
+        }
+        private void OnLogin(S_LOGIN m)
+        {
+            BlockedUsers.Clear();
+        }
+        private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
+        {
+            AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP);
         }
 
         public void InitWindows()
@@ -472,6 +502,11 @@ namespace TCC.ViewModels
             var msg = $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
             WindowManager.FloatingButton.NotifyExtended("TCC", msg, NotificationType.Normal, 2000);
             AddTccMessage(msg);
+        }
+
+        public void NotifyEnabledChanged(bool value)
+        {
+            OnEnabledChanged(value);
         }
     }
 }

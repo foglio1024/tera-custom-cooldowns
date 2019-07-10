@@ -13,6 +13,8 @@ using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
+using TCC.Settings;
+using TCC.ViewModels.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
@@ -88,9 +90,8 @@ namespace TCC.ViewModels
 
         public bool StayClosed { get; set; }
 
-        public LfgListViewModel()
+        public LfgListViewModel(WindowSettings settings) : base(settings)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
             Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
             ListingsView = CollectionViewUtils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
@@ -174,7 +175,7 @@ namespace TCC.ViewModels
 
         private void RequestNextLfg(object sender, EventArgs e)
         {
-            if (!App.Settings.LfgEnabled) return;
+            if (!App.Settings.LfgWindowSettings.Enabled) return;
             if (RequestQueue.Count == 0) return;
 
             var req = RequestQueue.Dequeue();
@@ -280,104 +281,135 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
-            {
-                Listings.Clear();
-                EnqueueListRequest(); // need invoke?
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
-            {
-                ForceStopPublicize();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_SHOW_PARTY_MATCH_INFO>(m =>
-            {
-                //if (!App.Settings.LfgEnabled) return; //
-                if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable)
-                    ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Hook<S_SHOW_PARTY_MATCH_INFO>(OnShowPartyMatchInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
+        }
 
-                if (!m.IsLast) return;
+        protected override void RemoveHooks()
+        {
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Unhook<S_SHOW_PARTY_MATCH_INFO>(OnShowPartyMatchInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
+        }
 
-                if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0) SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
+        private void OnLogin(S_LOGIN m)
+        {
+            Listings.Clear();
+            EnqueueListRequest(); // need invoke?
+        }
+        private void OnShowCandidateList(S_SHOW_CANDIDATE_LIST p)
+        {
+            if (MyLfg == null) return;
 
-                NotifyMyLfg();
-                WindowManager.LfgListWindow.ShowWindow();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(m =>
+            var dest = MyLfg.Applicants;
+            foreach (var applicant in p.Candidates)
             {
-                //if (!App.Settings.LfgEnabled) return;
-                if (MyLfg == null) return;
-                var dest = MyLfg.Applicants;
-                if (dest.Any(u => u.PlayerId == m.PlayerId)) return;
-                dest.Add(new User(Dispatcher)
+                if (dest.All(x => x.PlayerId != applicant.PlayerId)) dest.Add(new User(applicant));
+            }
+
+            var toRemove = new List<User>();
+            foreach (var user in dest)
+            {
+                if (p.Candidates.All(x => x.PlayerId != user.PlayerId)) toRemove.Add(user);
+            }
+
+            toRemove.ForEach(r => dest.Remove(r));
+        }
+        private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
+        {
+            //if (!App.Settings.LfgWindowSettings.Enabled) return;
+            var lfg = Listings.FirstOrDefault(listing => listing.LeaderId == m.Id || m.Members.Any(member => member.PlayerId == listing.LeaderId));
+            if (lfg == null) return;
+
+            m.Members.ForEach(member =>
+            {
+                if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
                 {
-                    PlayerId = m.PlayerId,
-                    UserClass = m.Class,
-                    Level = Convert.ToUInt32(m.Level),
-                    Name = m.Name,
-                    Online = true
-                });
+                    var target = lfg.Players.FirstOrDefault(player => player.PlayerId == member.PlayerId);
+                    if (target == null) return;
+                    target.IsLeader = member.IsLeader;
+                    target.Online = member.Online;
+                    target.Location = Session.DB.GetSectionName(member.GuardId, member.SectionId);
+                }
+                else
+                    lfg.Players.Add(new User(member));
             });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(m =>
-            {
-                if(_lastGroupSize == 0) NotifyMyLfg();
-                _lastGroupSize = m.Members.Count;
-                if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgEnabled || !Session.InGameUiOn) return;
-                ProxyInterface.Instance.Stub.RequestListingCandidates();
-                if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
-                ProxyInterface.Instance.Stub.RequestListings();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(m => NotifyMyLfg());
-            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(m => NotifyMyLfg());
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(m =>
-            {
-                //if (!App.Settings.LfgEnabled) return;
-                var lfg = Listings.FirstOrDefault(listing => listing.LeaderId == m.Id || m.Members.Any(member => member.PlayerId == listing.LeaderId));
-                if (lfg == null) return;
 
-                m.Members.ForEach(member =>
-                {
-                    if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
-                    {
-                        var target = lfg.Players.FirstOrDefault(player => player.PlayerId == member.PlayerId);
-                        if (target == null) return;
-                        target.IsLeader = member.IsLeader;
-                        target.Online = member.Online;
-                        target.Location = Session.DB.GetSectionName(member.GuardId, member.SectionId);
-                    }
-                    else lfg.Players.Add(new User(member));
-                });
-
-                var toDelete = new List<uint>();
-                lfg.Players.ToList().ForEach(player =>
+            var toDelete = new List<uint>();
+            lfg.Players.ToList()
+                .ForEach(player =>
                 {
                     if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
                     toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
                 });
 
-                lfg.LeaderId = m.Id;
-                var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
-                if (leader != null) lfg.LeaderName = leader.Name;
-                if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
-                lfg.PlayerCount = m.Members.Count;
-                NotifyMyLfg();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_SHOW_CANDIDATE_LIST>(p =>
+            lfg.LeaderId = m.Id;
+            var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
+            if (leader != null) lfg.LeaderName = leader.Name;
+            if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
+            lfg.PlayerCount = m.Members.Count;
+            NotifyMyLfg();
+        }
+        private void OnLeaveParty(S_LEAVE_PARTY m)
+        {
+            NotifyMyLfg();
+        }
+        private void OnBanParty(S_BAN_PARTY m)
+        {
+            NotifyMyLfg();
+        }
+        private void OnPartyMemberList(S_PARTY_MEMBER_LIST m)
+        {
+            if (_lastGroupSize == 0) NotifyMyLfg();
+            _lastGroupSize = m.Members.Count;
+            if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled || !Session.InGameUiOn) return;
+            ProxyInterface.Instance.Stub.RequestListingCandidates();
+            if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
+            ProxyInterface.Instance.Stub.RequestListings();
+        }
+        private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
+        {
+            //if (!App.Settings.LfgWindowSettings.Enabled) return;
+            if (MyLfg == null) return;
+            var dest = MyLfg.Applicants;
+            if (dest.Any(u => u.PlayerId == m.PlayerId)) return;
+            dest.Add(new User(Dispatcher)
             {
-                if (MyLfg == null) return;
-
-                var dest = MyLfg.Applicants;
-                foreach (var applicant in p.Candidates)
-                {
-                    if (dest.All(x => x.PlayerId != applicant.PlayerId)) dest.Add(new User(applicant));
-                }
-
-                var toRemove = new List<User>();
-                foreach (var user in dest)
-                {
-                    if (p.Candidates.All(x => x.PlayerId != user.PlayerId)) toRemove.Add(user);
-                }
-                toRemove.ForEach(r => dest.Remove(r));
+                PlayerId = m.PlayerId,
+                UserClass = m.Class,
+                Level = Convert.ToUInt32(m.Level),
+                Name = m.Name,
+                Online = true
             });
+        }
+        private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
+        {
+            //if (!App.Settings.LfgWindowSettings.Enabled) return; //
+            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
+
+            if (!m.IsLast) return;
+
+            if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0) SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
+
+            NotifyMyLfg();
+            WindowManager.LfgListWindow.ShowWindow();
+        }
+        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+        {
+            ForceStopPublicize();
         }
     }
 

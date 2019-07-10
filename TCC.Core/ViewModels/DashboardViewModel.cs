@@ -21,6 +21,7 @@ using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Parsing;
+using TCC.Settings;
 using TCC.Windows;
 
 using TeraDataLite;
@@ -167,10 +168,8 @@ namespace TCC.ViewModels
         public RelayCommand LoadDungeonsCommand { get; }
         /* -- Constructor ------------------------------------------ */
         bool _loaded;
-        public DashboardViewModel()
+        public DashboardViewModel(WindowSettings settings) : base(settings)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            //Characters = new SynchronizedObservableCollection<Character>();
             CharacterViewModels = new ObservableCollection<CharacterViewModel>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
@@ -351,102 +350,130 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_UPDATE_NPCGUILD>(m =>
+            PacketAnalyzer.NewProcessor.Hook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
+            PacketAnalyzer.NewProcessor.Hook<S_NPCGUILD_LIST>(OnNpcGuildList);
+            PacketAnalyzer.NewProcessor.Hook<S_INVEN>(OnInven);
+            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
+            PacketAnalyzer.NewProcessor.Hook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
+            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
+        }
+
+        protected override void RemoveHooks()
+        {
+            PacketAnalyzer.NewProcessor.Unhook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
+            PacketAnalyzer.NewProcessor.Unhook<S_NPCGUILD_LIST>(OnNpcGuildList);
+            PacketAnalyzer.NewProcessor.Unhook<S_INVEN>(OnInven);
+            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Unhook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
+            PacketAnalyzer.NewProcessor.Unhook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
+            PacketAnalyzer.NewProcessor.Unhook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
+        }
+
+        private void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)
+        {
+            if (m.Failed) return;
+            if (m.PlayerId != Session.Me.PlayerId) return;
+            foreach (var dg in m.DungeonClears)
             {
-                switch (m.Guild)
+                CurrentCharacter.DungeonInfo.UpdateClears(dg.Key, dg.Value);
+            }
+        }
+        private void OnAvailableEventMatchingList(S_AVAILABLE_EVENT_MATCHING_LIST m)
+        {
+            SetVanguard(m.WeeklyDone, m.DailyDone, m.VanguardCredits);
+        }
+        private void OnFieldPointInfo(S_FIELD_POINT_INFO m)
+        {
+            if (CurrentCharacter == null) return;
+            CurrentCharacter.GuardianInfo.Claimed = m.Claimed;
+            CurrentCharacter.GuardianInfo.Cleared = m.Cleared;
+        }
+        private void OnDungeonCoolTimeList(S_DUNGEON_COOL_TIME_LIST m)
+        {
+            SetDungeons(m.DungeonCooldowns);
+        }
+        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+        {
+            UpdateBuffs();
+        }
+        private void OnLogin(S_LOGIN m)
+        {
+            SetLoggedIn(m.PlayerId);
+        }
+        private void OnGetUserList(S_GET_USER_LIST m)
+        {
+            UpdateBuffs();
+            foreach (var item in m.CharacterList)
+            {
+                var ch = Session.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
+                if (ch != null)
                 {
-                    case NpcGuild.Vanguard:
-                        SetVanguardCredits(m.Credits);
-                        break;
-                    case NpcGuild.Guardian:
-                        SetGuardianCredits(m.Credits);
-                        break;
+                    ch.Name = item.Name;
+                    ch.Laurel = item.Laurel;
+                    ch.Position = item.Position;
+                    ch.GuildName = item.GuildName;
+                    ch.Level = item.Level;
+                    ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
+                    ch.LastOnline = item.LastOnline;
+                    ch.ServerName = Session.Server.Name;
                 }
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_NPCGUILD_LIST>(m =>
-            {
-                if (!Session.IsMe(m.UserId)) return;
-                m.NpcGuildList.Keys.ToList().ForEach(k =>
+                else
+                {
+                    Session.Account.Characters.Add(new Character(item));
+                }
+            }
+
+            SaveCharacters();
+        }
+        private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
+        {
+            CurrentCharacter.Coins = m.Coins;
+            CurrentCharacter.MaxCoins = m.MaxCoins;
+            CurrentCharacter.ItemLevel = m.Ilvl;
+            CurrentCharacter.Level = m.Level;
+        }
+        private void OnInven(S_INVEN m)
+        {
+            if (m.Failed) return;
+            WindowManager.ViewModels.Dashboard.UpdateInventory(m.Items, m.First);
+        }
+        private void OnNpcGuildList(S_NPCGUILD_LIST m)
+        {
+            if (!Session.IsMe(m.UserId)) return;
+            m.NpcGuildList.Keys.ToList()
+                .ForEach(k =>
                 {
                     switch (k)
                     {
-                        case (int)NpcGuild.Vanguard:
+                        case (int) NpcGuild.Vanguard:
                             SetVanguardCredits(m.NpcGuildList[k]);
                             break;
-                        case (int)NpcGuild.Guardian:
+                        case (int) NpcGuild.Guardian:
                             SetGuardianCredits(m.NpcGuildList[k]);
                             break;
                     }
                 });
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_INVEN>(m =>
+        }
+        private void OnUpdateNpcGuild(S_UPDATE_NPCGUILD m)
+        {
+            switch (m.Guild)
             {
-                if (m.Failed) return;
-                WindowManager.ViewModels.Dashboard.UpdateInventory(m.Items, m.First);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(m =>
-            {
-                CurrentCharacter.Coins = m.Coins;
-                CurrentCharacter.MaxCoins = m.MaxCoins;
-                CurrentCharacter.ItemLevel = m.Ilvl;
-                CurrentCharacter.Level = m.Level;
-
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m =>
-            {
-                UpdateBuffs();
-                foreach (var item in m.CharacterList)
-                {
-                    var ch = Session.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
-                    if (ch != null)
-                    {
-                        ch.Name = item.Name;
-                        ch.Laurel = item.Laurel;
-                        ch.Position = item.Position;
-                        ch.GuildName = item.GuildName;
-                        ch.Level = item.Level;
-                        ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
-                        ch.LastOnline = item.LastOnline;
-                        ch.ServerName = Session.Server.Name;
-                    }
-                    else
-                    {
-                        Session.Account.Characters.Add(new Character(item));
-                    }
-                }
-                SaveCharacters();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
-            {
-                SetLoggedIn(m.PlayerId);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
-            {
-                UpdateBuffs();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_COOL_TIME_LIST>(m =>
-            {
-                SetDungeons(m.DungeonCooldowns);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_FIELD_POINT_INFO>(m =>
-            {
-                if (CurrentCharacter == null) return;
-                CurrentCharacter.GuardianInfo.Claimed = m.Claimed;
-                CurrentCharacter.GuardianInfo.Cleared = m.Cleared;
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(m =>
-            {
-                SetVanguard(m.WeeklyDone, m.DailyDone, m.VanguardCredits);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(m =>
-            {
-                if (m.Failed) return;
-                if (m.PlayerId != Session.Me.PlayerId) return;
-                foreach (var dg in m.DungeonClears)
-                {
-                    CurrentCharacter.DungeonInfo.UpdateClears(dg.Key, dg.Value);
-                }
-            });
+                case NpcGuild.Vanguard:
+                    SetVanguardCredits(m.Credits);
+                    break;
+                case NpcGuild.Guardian:
+                    SetGuardianCredits(m.Credits);
+                    break;
+            }
         }
 
         /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
