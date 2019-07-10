@@ -1,6 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using TCC.ViewModels;
+﻿using System.Windows.Input;
+using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows.Widgets
 {
@@ -20,14 +19,6 @@ namespace TCC.Windows.Widgets
             VM = DataContext as CivilUnrestViewModel;
 
             Init(App.Settings.CivilUnrestWindowSettings);
-            VM.Teleported += OnTeleported;
-            ZoneBoundContent.Visibility = Visibility.Collapsed;
-        }
-
-        private void OnTeleported()
-        {
-            //TODO: move to vm and bind
-            ZoneBoundContent.Visibility = Session.CivilUnrestZone ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
