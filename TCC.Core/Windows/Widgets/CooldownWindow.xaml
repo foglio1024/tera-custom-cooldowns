@@ -6,10 +6,11 @@
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              mc:Ignorable="d"
         Title="TCC Cooldowns"
         Style="{StaticResource BaseWindowStyle}"
-             d:DataContext="{d:DesignInstance vm:CooldownWindowViewModel}">
+             d:DataContext="{d:DesignInstance widgets:CooldownWindowViewModel}">
     <Grid Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

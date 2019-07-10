@@ -6,11 +6,12 @@
         xmlns:w="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
         mc:Ignorable="d"
         Title="TCC buffs" 
         MouseLeftButtonDown="Drag"
         Style="{StaticResource BaseWindowStyle}"
-        d:DataContext="{d:DesignInstance vm:BuffBarWindowViewModel}"
+        d:DataContext="{d:DesignInstance widgets:BuffBarWindowViewModel}"
         >
     <Grid>
         <Grid.RowDefinitions>

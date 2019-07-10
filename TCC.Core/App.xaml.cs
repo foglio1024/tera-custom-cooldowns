@@ -19,10 +19,8 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
-using TeraPacketParser.Messages;
 using SplashScreen = TCC.Windows.SplashScreen;
 
 namespace TCC

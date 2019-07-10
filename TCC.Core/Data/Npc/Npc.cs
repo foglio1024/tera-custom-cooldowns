@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using TCC.Data.Abnormalities;
-using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 using TeraDataLite;
 
 namespace TCC.Data.NPCs

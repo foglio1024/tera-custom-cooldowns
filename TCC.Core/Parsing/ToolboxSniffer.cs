@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using Newtonsoft.Json.Linq;
 using TCC.Annotations;
 using TCC.Interop.Proxy;

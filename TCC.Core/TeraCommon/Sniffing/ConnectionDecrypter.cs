@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using TCC.TeraCommon.PacketLog.Parsing;
-using TCC.TeraCommon.Sniffing.Crypt;
 using TeraPacketParser.Data;
 
 namespace TCC.TeraCommon.Sniffing

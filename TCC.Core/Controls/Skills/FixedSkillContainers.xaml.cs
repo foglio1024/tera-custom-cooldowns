@@ -15,6 +15,7 @@ using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 using TCC.Windows;
 using TeraDataLite;
 

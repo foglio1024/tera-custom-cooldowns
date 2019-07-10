@@ -7,6 +7,7 @@
              xmlns:classBars="clr-namespace:TCC.Controls.Classes"
              xmlns:wm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              Style="{StaticResource BaseWindowStyle}"
              mc:Ignorable="d" 
              Title="TCC Class" 
@@ -14,7 +15,7 @@
              x:Name="Win"
              BorderBrush="Red"
              BorderThickness="0"
-             d:DataContext="{d:DesignInstance wm:ClassWindowViewModel}">
+             d:DataContext="{d:DesignInstance widgets:ClassWindowViewModel}">
     <w:TccWidget.Resources>
         <DataTemplate x:Key="Warrior">
             <classBars:WarriorLayout />

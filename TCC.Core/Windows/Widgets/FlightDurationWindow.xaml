@@ -6,10 +6,11 @@
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
              Title="TCC Flight" Height="300" Width="300" 
-             d:DataContext="{d:DesignInstance viewModels:FlightGaugeViewModel}">
+             d:DataContext="{d:DesignInstance widgets:FlightGaugeViewModel}">
     <Grid RenderTransformOrigin=".5 .5">
         <Grid.Style>
             <Style TargetType="FrameworkElement">

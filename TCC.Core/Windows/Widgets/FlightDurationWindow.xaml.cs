@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media.Animation;
-using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 using Arc = TCC.Controls.Arc;
 
 namespace TCC.Windows.Widgets

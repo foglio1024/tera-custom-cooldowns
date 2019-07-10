@@ -8,10 +8,11 @@
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:dd="urn:gong-wpf-dragdrop"
              xmlns:skills1="clr-namespace:TCC.Data.Skills"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
              PreviewDragEnter="FixedSkillContainers_OnDragOver" MouseEnter="MainSkillsGrid_MouseEnter"
              MouseLeave="MainSkillsGrid_MouseLeave"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:CooldownWindowViewModel}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance widgets:CooldownWindowViewModel}">
     <UserControl.Resources>
         <ControlTemplate x:Key="SquareDragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
             <ControlTemplate.Resources>

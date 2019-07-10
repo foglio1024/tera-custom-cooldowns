@@ -1,7 +1,5 @@
-﻿using System.Windows.Forms;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using Newtonsoft.Json;
-using TCC.Annotations;
 using TCC.Data.Pc;
 
 namespace TCC.Data

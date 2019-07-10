@@ -6,6 +6,7 @@
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:vm="clr-namespace:TCC.ViewModels"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              mc:Ignorable="d"
              Title="TCC Group"
              MouseLeftButtonDown="Drag"
@@ -13,7 +14,7 @@
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="GroupWindow_OnMouseEnter"
              MouseLeave="GroupWindow_OnMouseLeave"
-             d:DataContext="{d:DesignInstance vm:GroupWindowViewModel}"
+             d:DataContext="{d:DesignInstance widgets:GroupWindowViewModel}"
              >
 
     <Grid>

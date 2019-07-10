@@ -8,6 +8,7 @@ using TCC.Data.Chat;
 using TCC.Settings;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows.Widgets
 {

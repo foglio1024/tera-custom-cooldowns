@@ -2,6 +2,7 @@
 using Dragablz;
 using TCC.Data;
 using TCC.Settings;
+using TCC.ViewModels.Widgets;
 using TCC.Windows.Widgets;
 
 namespace TCC.ViewModels

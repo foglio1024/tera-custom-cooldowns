@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TCC.Interop.Proxy;
-using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows.Widgets
 {

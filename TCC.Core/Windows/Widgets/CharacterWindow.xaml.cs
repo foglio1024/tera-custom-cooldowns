@@ -5,7 +5,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data.Pc;
-using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows.Widgets
 {

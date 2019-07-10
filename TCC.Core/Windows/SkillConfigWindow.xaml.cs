@@ -10,7 +10,7 @@ using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
-using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows
 {

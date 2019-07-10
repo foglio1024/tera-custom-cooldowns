@@ -12,6 +12,7 @@
              xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
              xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
              xmlns:data="clr-namespace:TCC.Data"
+             xmlns:widgets1="clr-namespace:TCC.ViewModels.Widgets"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="OnWindowMouseEnter"
@@ -21,7 +22,7 @@
              MinWidth="350" MinHeight="110"
              ResizeMode="CanResize"
              SizeToContent="Manual"
-             Loaded="OnLoaded" d:DataContext="{d:DesignInstance viewModels:ChatViewModel}">
+             Loaded="OnLoaded" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="7 12 7 7" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
@@ -293,7 +294,7 @@
         <Popup Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
                MouseLeave="OnSettingsPopupMouseLeave"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True"
-               PopupAnimation="Slide" d:DataContext="{d:DesignInstance viewModels:ChatViewModel}">
+               PopupAnimation="Slide" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
             <Grid>
                 <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
                 <StackPanel Width="350" Margin="3">

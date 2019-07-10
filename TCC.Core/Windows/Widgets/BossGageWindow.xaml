@@ -6,10 +6,11 @@
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              mc:Ignorable="d"
         Title="TCC NPC" 
         Style="{StaticResource BaseWindowStyle}"
-        MouseLeftButtonDown="Drag" d:DataContext="{d:DesignInstance vm:NpcWindowViewModel}">
+        MouseLeftButtonDown="Drag" d:DataContext="{d:DesignInstance widgets:NpcWindowViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

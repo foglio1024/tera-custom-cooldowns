@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Data.Databases;
-using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
-using TCC.TeraCommon.Sniffing.Crypt;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
@@ -20,17 +17,6 @@ using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC
 {
-    public class Account
-    {
-        public bool IsElite { get; set; }
-        public SynchronizedObservableCollection<Character> Characters { get; set; }
-
-        public Account()
-        {
-            Characters = new SynchronizedObservableCollection<Character>();
-        }
-    }
-
     public static class Session
     {
         private static bool _logged;
@@ -105,7 +91,7 @@ namespace TCC
             }
         }
 
-        public static int CurrentZoneId { get; private set; } = 0;
+        public static int CurrentZoneId { get; private set; }
 
         public static bool IsMe(ulong eid)
         {
@@ -252,7 +238,7 @@ namespace TCC
                 try
                 {
                     p.GuildLogo.Save(
-                        Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{Session.Server.ServerId}_{p.GuildId}_{0}.bmp"),
+                        Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{Server.ServerId}_{p.GuildId}_{0}.bmp"),
                         System.Drawing.Imaging.ImageFormat.Bmp
                     );
                 }
@@ -351,11 +337,11 @@ namespace TCC
                     case "Foiya":
                     case "Fogliarya":
                         if (p.ServerId != 27) break;
-                        if (Session.CivilUnrestZone) break;
+                        if (CivilUnrestZone) break;
                         EntityManager.FoglioEid = p.EntityId;
-                        var ab = Session.DB.AbnormalityDatabase.Abnormalities[10241024];
+                        var ab = DB.AbnormalityDatabase.Abnormalities[10241024];
                         AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
-                        var sysMsg = Session.DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
+                        var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
                         var msg = $"@0\vAbnormalName\v{ab.Name}";
                         SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
                         break;

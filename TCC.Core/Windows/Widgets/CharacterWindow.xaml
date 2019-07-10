@@ -8,10 +8,11 @@
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:c="clr-namespace:TCC.Controls"
         xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
+        xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
         mc:Ignorable="d"
         Title="TCC Character" 
         Style="{StaticResource BaseWindowStyle}"
-        d:DataContext="{d:DesignInstance vm:CharacterWindowViewModel}"
+        d:DataContext="{d:DesignInstance widgets:CharacterWindowViewModel}"
         MouseLeftButtonDown="Drag"
         >
     <w:TccWidget.Resources>
