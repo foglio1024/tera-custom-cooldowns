@@ -51,6 +51,7 @@
     <Compile Include="Messages\C_CHECK_VERSION.cs" />
     <Compile Include="Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Messages\C_PLAYER_LOCATION.cs" />
+    <Compile Include="Messages\ParsedGearItem.cs" />
     <Compile Include="Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Messages\S_ABNORMALITY_END.cs" />

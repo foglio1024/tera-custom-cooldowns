@@ -1,6 +1,4 @@
-﻿using FoglioUtils;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -8,19 +6,19 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
-
+using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
 using TCC.Parsing;
+using TCC.Settings;
 using TCC.Windows;
-
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.Widgets
 {
 
     [TccModule]
@@ -164,11 +162,6 @@ namespace TCC.ViewModels
             HiddenSkills.Add(context);
             Save();
         }
-        //internal void AddHiddenSkill(Cooldown context)
-        //{
-        //    HiddenSkills.Add(context.Skill);
-        //    Save();
-        //}
 
         internal void DeleteFixedSkill(Cooldown context)
         {
@@ -495,15 +488,8 @@ namespace TCC.ViewModels
         {
             N(nameof(Mode));
         }
-        //public bool IsClassWindowOn
-        //{
-        //    get => Settings.CooldownBarMode;
-        //    set => NotifyPropertyChanged(nameof(IsClassWindowOn));
-        //}
-        public CooldownWindowViewModel()
+        public CooldownWindowViewModel(WindowSettings settings) : base(settings)
         {
-            Dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher; //App.BaseDispatcher;
-
             ShortSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
             LongSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
             SecondarySkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
@@ -514,10 +500,6 @@ namespace TCC.ViewModels
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
             InitViews();
-
-            //SkillChoiceList = new SynchronizedObservableCollection<Skill>(Dispatcher);
-
-            //SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new SortDescription[] { });
         }
 
         public void InitViews()
@@ -529,16 +511,13 @@ namespace TCC.ViewModels
             ((ICollectionView) ItemsView).CollectionChanged += GcStahp;
             ((ICollectionView) AbnormalitiesView).CollectionChanged += GcStahp;
         }
-
         private void GcStahp(object sender, NotifyCollectionChangedEventArgs e)
         {
         }
-
         public void NotifyItemsDisplay()
         {
             N(nameof(ShowItems));
         }
-
         public void ResetSkill(Skill skill)
         {
             if (!App.Settings.CooldownWindowSettings.Enabled) return;
@@ -550,7 +529,6 @@ namespace TCC.ViewModels
                 sk?.ProcReset();
             }));
         }
-
         public void RemoveHiddenSkill(Cooldown skill)
         {
             var target = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == skill.Skill.IconName);
@@ -559,38 +537,55 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(m =>
-            {
-                SkillManager.AddSkill(m.SkillId, m.Cooldown);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_ITEM>(m =>
-            {
-                SkillManager.AddItemSkill(m.ItemId, m.Cooldown);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(m =>
-            {
-                SkillManager.ChangeSkillCooldown(m.SkillId, m.Cooldown);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m =>
-            {
-                ClearSkills();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
-            {
-                ClearSkills();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
-            {
-                ClearSkills();
-                LoadSkills(m.CharacterClass);
-            });
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
+            PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+            PacketAnalyzer.NewProcessor.Hook<S_CREST_MESSAGE>(OnCrestMessage);
+        }
 
-            PacketAnalyzer.NewProcessor.Hook<S_CREST_MESSAGE>(m =>
-            {
-                if (m.Type != 6) return;
-                SkillManager.ResetSkill(m.SkillId);
-            });
+        protected override void RemoveHooks()
+        {
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
+            PacketAnalyzer.NewProcessor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+            PacketAnalyzer.NewProcessor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
+        }
 
+        private void OnLogin(S_LOGIN m)
+        {
+            ClearSkills();
+            LoadSkills(m.CharacterClass);
+        }
+        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+        {
+            ClearSkills();
+        }
+        private void OnGetUserList(S_GET_USER_LIST m)
+        {
+            ClearSkills();
+        }
+        private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
+        {
+            SkillManager.ChangeSkillCooldown(m.SkillId, m.Cooldown);
+        }
+        private void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
+        {
+            SkillManager.AddItemSkill(m.ItemId, m.Cooldown);
+        }
+        private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
+        {
+            SkillManager.AddSkill(m.SkillId, m.Cooldown);
+        }
+        private void OnCrestMessage(S_CREST_MESSAGE m)
+        {
+            if (m.Type != 6) return;
+            SkillManager.ResetSkill(m.SkillId);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FoglioUtils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,14 +6,16 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.NPCs;
 using TCC.Parsing;
+using TCC.Settings;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.Widgets
 {
 
     [TccModule]
@@ -180,9 +181,8 @@ namespace TCC.ViewModels
         //public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
         public Dictionary<ulong, uint> GuildIds { get; private set; }
 
-        public NpcWindowViewModel()
+        public NpcWindowViewModel(WindowSettings settings) : base(settings)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
             NpcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
             _cache = new Dictionary<ulong, float>();
             var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
@@ -584,66 +584,95 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(p =>
-            {
-                if (Session.IsMe(p.Target)) return;
-                UpdateShield(p.Target, p.Damage);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_SHOW_HP>(m =>
-            {
-                AddOrUpdateNpc(m.GameId, m.MaxHp, m.CurrentHp, false, HpChangeSource.CreatureChangeHp);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(m =>
-            {
-                if (Session.IsMe(m.Target)) return;
-                EntityManager.UpdateNPC(m.Target, m.CurrentHP, m.MaxHP, m.Source);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_BOSS_GAGE_INFO>(m =>
-            {
-                EntityManager.UpdateNPC(m.EntityId, m.CurrentHP, m.MaxHP, (ushort)m.HuntingZoneId, (uint)m.TemplateId);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_NPC_STATUS>(m =>
-            {
-                EntityManager.SetNPCStatus(m.EntityId, m.IsEnraged, m.RemainingEnrageTime);
-                if (m.Target == 0) UnsetBossTarget(m.EntityId);
-                SetBossAggro(m.EntityId, m.Target);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(m =>
-            {
-                SetBossAggro(m.Source, m.User);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m =>
-            {
-                EntityManager.ClearNPC();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m =>
-            {
-                EntityManager.ClearNPC();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
-            {
-                EntityManager.ClearNPC();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(m =>
-            {
-                CurrentHHphase = HarrowholdPhase.None;
-                ClearGuildTowers();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_ME>(m =>
-            {
-                EntityManager.ClearNPC();
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_NPC>(m =>
-            {
-                EntityManager.CheckHarrowholdMode(m.HuntingZoneId, m.TemplateId);
-                EntityManager.SpawnNPC(m.HuntingZoneId, m.TemplateId, m.EntityId, false, m.Villager, m.RemainingEnrageTime);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_GUILD_TOWER_INFO>(m =>
-            {
-                AddGuildTower(m.TowerId, m.GuildName, m.GuildId);
-            });
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
+            PacketAnalyzer.NewProcessor.Hook<S_SHOW_HP>(OnShowHp);
+            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.NewProcessor.Hook<S_BOSS_GAGE_INFO>(OnBossGageInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_NPC_STATUS>(OnNpcStatus);
+            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(OnUserEffect);
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_ME>(OnSpawnMe);
+            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_NPC>(OnSpawnNpc);
+            PacketAnalyzer.NewProcessor.Hook<S_GUILD_TOWER_INFO>(OnGuildTowerInfo);
+        }
 
+        protected override void RemoveHooks()
+        {
+            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
+            PacketAnalyzer.NewProcessor.Unhook<S_SHOW_HP>(OnShowHp);
+            PacketAnalyzer.NewProcessor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.NewProcessor.Unhook<S_BOSS_GAGE_INFO>(OnBossGageInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_NPC_STATUS>(OnNpcStatus);
+            PacketAnalyzer.NewProcessor.Unhook<S_USER_EFFECT>(OnUserEffect);
+            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.NewProcessor.Unhook<S_SPAWN_ME>(OnSpawnMe);
+            PacketAnalyzer.NewProcessor.Unhook<S_SPAWN_NPC>(OnSpawnNpc);
+            PacketAnalyzer.NewProcessor.Unhook<S_GUILD_TOWER_INFO>(OnGuildTowerInfo);
+        }
 
+        private void OnGuildTowerInfo(S_GUILD_TOWER_INFO m)
+        {
+            AddGuildTower(m.TowerId, m.GuildName, m.GuildId);
+        }
+        private void OnSpawnNpc(S_SPAWN_NPC m)
+        {
+            EntityManager.CheckHarrowholdMode(m.HuntingZoneId, m.TemplateId);
+            EntityManager.SpawnNPC(m.HuntingZoneId, m.TemplateId, m.EntityId, false, m.Villager, m.RemainingEnrageTime);
+        }
+        private void OnSpawnMe(S_SPAWN_ME m)
+        {
+            EntityManager.ClearNPC();
+        }
+        private void OnLoadTopo(S_LOAD_TOPO m)
+        {
+            CurrentHHphase = HarrowholdPhase.None;
+            ClearGuildTowers();
+        }
+        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+        {
+            EntityManager.ClearNPC();
+        }
+        private void OnLogin(S_LOGIN m)
+        {
+            EntityManager.ClearNPC();
+        }
+        private void OnGetUserList(S_GET_USER_LIST m)
+        {
+            EntityManager.ClearNPC();
+        }
+        private void OnUserEffect(S_USER_EFFECT m)
+        {
+            SetBossAggro(m.Source, m.User);
+        }
+        private void OnNpcStatus(S_NPC_STATUS m)
+        {
+            EntityManager.SetNPCStatus(m.EntityId, m.IsEnraged, m.RemainingEnrageTime);
+            if (m.Target == 0) UnsetBossTarget(m.EntityId);
+            SetBossAggro(m.EntityId, m.Target);
+        }
+        private void OnBossGageInfo(S_BOSS_GAGE_INFO m)
+        {
+            EntityManager.UpdateNPC(m.EntityId, m.CurrentHP, m.MaxHP, (ushort) m.HuntingZoneId, (uint) m.TemplateId);
+        }
+        private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
+        {
+            if (Session.IsMe(m.Target)) return;
+            EntityManager.UpdateNPC(m.Target, m.CurrentHP, m.MaxHP, m.Source);
+        }
+        private void OnShowHp(S_SHOW_HP m)
+        {
+            AddOrUpdateNpc(m.GameId, m.MaxHp, m.CurrentHp, false, HpChangeSource.CreatureChangeHp);
+        }
+        private void OnAbnormalityDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
+        {
+            if (Session.IsMe(p.Target)) return;
+            UpdateShield(p.Target, p.Damage);
         }
 
         /*

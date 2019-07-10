@@ -5,12 +5,12 @@ using System.Linq;
 using System.Windows.Threading;
 using Dragablz;
 using FoglioUtils;
+using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
-using FoglioUtils.Extensions;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.Widgets
 {
 
 

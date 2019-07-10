@@ -1,15 +1,15 @@
-using FoglioUtils;
-using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using FoglioUtils;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Settings;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.Widgets
 {
     public class CivilUnrestGuild : TSPropertyChanged
     {
@@ -54,7 +54,7 @@ namespace TCC.ViewModels
     [TccModule]
     public class CivilUnrestViewModel : TccWindowViewModel
     {
-        public event Action Teleported;
+        public bool CivilUnrest => Session.CivilUnrestZone;
         private readonly SynchronizedObservableCollection<CivilUnrestGuild> _guilds;
 
         public ICollectionViewLiveShaping Guilds
@@ -97,52 +97,59 @@ namespace TCC.ViewModels
             }
         }
 
-        public CivilUnrestViewModel()
+        public CivilUnrestViewModel(WindowSettings settings) : base(settings)
         {
-            Dispatcher = App.BaseDispatcher;
             _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
         }
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(m =>
-            {
-                try
-                {
-                    m.GuildDetails.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.SetGuildName(x.Item1, x.Item2));
-                }
-                catch
-                {
-                    // ignored
-                }
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO>(m =>
-            {
-                try
-                {
-                    m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.AddGuild(x));
-                }
-                catch
-                {
-                    // ignored
-                }
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_DESTROY_GUILD_TOWER>(m =>
-            {
-                try
-                {
-                    WindowManager.ViewModels.CivilUnrest.AddDestroyedGuildTower(m.SourceGuildId);
-                }
-                catch
-                {
-                    // ignored
-                }
+            Session.Teleported += NotifyTeleported;
+            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
+            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
+        }
 
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(p =>
+        protected override void RemoveHooks()
+        {
+            Session.Teleported -= NotifyTeleported;
+            PacketAnalyzer.NewProcessor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
+            PacketAnalyzer.NewProcessor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
+        }
+
+        private void OnDestroyGuildTower(S_DESTROY_GUILD_TOWER m)
+        {
+            try
             {
-                NotifyTeleported(); // need check for enabled?
-            });
+                AddDestroyedGuildTower(m.SourceGuildId);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        private void OnRequestCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO m)
+        {
+            try
+            {
+                m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.AddGuild(x));
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        private void OnRequestCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL m)
+        {
+            try
+            {
+                m.GuildDetails.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.SetGuildName(x.Item1, x.Item2));
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         public void AddGuild(CityWarGuildData guildInfo)
@@ -162,7 +169,6 @@ namespace TCC.ViewModels
                 _guilds.Add(new CivilUnrestGuild() { Id = guildInfo.Id, Name = name, TowerHp = guildInfo.TowerHp, TowersDestroyed = 0 });
             }
         }
-
         public void SetGuildName(uint id, string name)
         {
             var g = _guilds.FirstOrDefault(x => x.Id == id);
@@ -171,7 +177,6 @@ namespace TCC.ViewModels
                 g.Name = name;
             }
         }
-
         public void AddDestroyedGuildTower(uint id)
         {
             var g = _guilds.FirstOrDefault(x => x.Id == id);
@@ -180,10 +185,9 @@ namespace TCC.ViewModels
                 g.TowersDestroyed++;
             }
         }
-
-        public void NotifyTeleported()
+        private void NotifyTeleported()
         {
-            Dispatcher.Invoke(Teleported);
+            N(nameof(CivilUnrest));
         }
     }
 }

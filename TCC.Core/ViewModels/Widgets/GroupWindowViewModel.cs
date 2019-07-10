@@ -1,29 +1,24 @@
-﻿using FoglioUtils;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
+using TCC.Settings;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.Widgets
 {
 
     [TccModule]
     public class GroupWindowViewModel : TccWindowViewModel
     {
-        //private static GroupWindowViewModel _instance;
         private bool _raid;
         private bool _firstCheck = true;
         private readonly object _lock = new object();
@@ -31,7 +26,6 @@ namespace TCC.ViewModels
         private ulong _aggroHolder;
         public event Action SettingsUpdated;
 
-        //public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         public SynchronizedObservableCollection<User> Members { get; }
         public GroupWindowLayout GroupWindowLayout => App.Settings.GroupWindowSettings.Layout;
 
@@ -58,9 +52,8 @@ namespace TCC.ViewModels
         public bool ShowLeaderButtons => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
 
-        public GroupWindowViewModel()
+        public GroupWindowViewModel(WindowSettings settings) : base(settings)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
@@ -84,9 +77,9 @@ namespace TCC.ViewModels
         private void OnTeleported()
         {
             if (!Session.CivilUnrestZone)
-                PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(HandlePartyMemberPosUpdate);
+                PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
             else
-                PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(HandlePartyMemberPosUpdate);
+                PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
         }
 
         private void GcPls(object sender, EventArgs ev) { }
@@ -557,100 +550,174 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(m =>
-            {
-                SetAggroCircle(m.Circle, m.Action, m.User);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(m => ClearAll());
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(m => ClearAll());
-            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(m => ClearAll());
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(m => ClearAll());
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m => ClearAll());
-            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(m =>
-            {
-                ClearAllAbnormalities();
-                SetAggro(0);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_ASK_BIDDING_RARE_ITEM>(m => StartRoll());
-            PacketAnalyzer.NewProcessor.Hook<S_RESULT_BIDDING_DICE_THROW>(m =>
-            {
-                if (!Rolling) StartRoll();
-                SetRoll(m.EntityId, m.RollResult);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_RESULT_ITEM_BIDDING>(m => EndRoll());
-            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_USER>(m =>
-            {
-                if (!Exists(m.EntityId)) return;
-                UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(m =>
-            {
-                foreach (var buff in m.Abnormals)
-                {
-                    AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, buff.Id, buff.Duration, buff.Stacks);
-                }
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_ADD>(m =>
-            {
-                AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_DEL>(m =>
-            {
-                AbnormalityManager.EndPartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(m =>
-            {
-                ClearAbnormality(m.PlayerId, m.ServerId);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(m =>
-            {
-                AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_CHANGE_PARTY_MANAGER>(m =>
-            {
-                SetNewLeader(m.EntityId, m.Name);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(p =>
-            {
-                SetRaid(p.Raid);
-                Dispatcher.BeginInvoke(new Action(() => p.Members.ForEach(AddOrUpdateMember)));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY_MEMBER>(p =>
-            {
-                RemoveMember(p.PlayerId, p.ServerId);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY_MEMBER>(p =>
-            {
-                RemoveMember(p.PlayerId, p.ServerId, true);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_LOGOUT_PARTY_MEMBER>(p =>
-            {
-                LogoutMember(p.PlayerId, p.ServerId);
-                ClearAbnormality(p.PlayerId, p.ServerId);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_HP>(p =>
-            {
-                UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_MP>(p =>
-            {
-                UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_STAT_UPDATE>(p =>
-            {
-                UpdateMember(p.PartyMemberData);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY>(p =>
-            {
-                Dispatcher.BeginInvoke(new Action(() => p.Party.ForEach(SetReadyStatus)));
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY_FIN>(p =>
-            {
-                EndReadyCheck();
-            });
+            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(OnUserEffect);
+            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.NewProcessor.Hook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
+            PacketAnalyzer.NewProcessor.Hook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
+            PacketAnalyzer.NewProcessor.Hook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
+            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_USER>(OnSpawnUser);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(OnPartyMemberAbnormalClear);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(OnPartyMemberAbnormalRefresh);
+            PacketAnalyzer.NewProcessor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
+            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+            PacketAnalyzer.NewProcessor.Hook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
+            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
+            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
+            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
         }
 
-        private void HandlePartyMemberPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
+        protected override void RemoveHooks()
+        {
+            PacketAnalyzer.NewProcessor.Unhook<S_USER_EFFECT>(OnUserEffect);
+            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.NewProcessor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.NewProcessor.Unhook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
+            PacketAnalyzer.NewProcessor.Unhook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
+            PacketAnalyzer.NewProcessor.Unhook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
+            PacketAnalyzer.NewProcessor.Unhook<S_SPAWN_USER>(OnSpawnUser);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(OnPartyMemberAbnormalClear);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(OnPartyMemberAbnormalRefresh);
+            PacketAnalyzer.NewProcessor.Unhook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
+            PacketAnalyzer.NewProcessor.Unhook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+            PacketAnalyzer.NewProcessor.Unhook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
+            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
+            PacketAnalyzer.NewProcessor.Unhook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
+            PacketAnalyzer.NewProcessor.Unhook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
+        }
+
+        private void OnCheckToReadyPartyFin(S_CHECK_TO_READY_PARTY_FIN p)
+        {
+            EndReadyCheck();
+        }
+        private void OnCheckToReadyParty(S_CHECK_TO_READY_PARTY p)
+        {
+            Dispatcher.BeginInvoke(new Action(() => p.Party.ForEach(SetReadyStatus)));
+        }
+        private void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)
+        {
+            UpdateMember(p.PartyMemberData);
+        }
+        private void OnPartyMemberChangeMp(S_PARTY_MEMBER_CHANGE_MP p)
+        {
+            UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+        }
+        private void OnPartyMemberChangeHp(S_PARTY_MEMBER_CHANGE_HP p)
+        {
+            UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
+        }
+        private void OnLogoutPartyMember(S_LOGOUT_PARTY_MEMBER p)
+        {
+            LogoutMember(p.PlayerId, p.ServerId);
+            ClearAbnormality(p.PlayerId, p.ServerId);
+        }
+        private void OnBanPartyMember(S_BAN_PARTY_MEMBER p)
+        {
+            RemoveMember(p.PlayerId, p.ServerId, true);
+        }
+        private void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER p)
+        {
+            RemoveMember(p.PlayerId, p.ServerId);
+        }
+        private void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
+        {
+            SetRaid(p.Raid);
+            Dispatcher.BeginInvoke(new Action(() => p.Members.ForEach(AddOrUpdateMember)));
+        }
+        private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
+        {
+            SetNewLeader(m.EntityId, m.Name);
+        }
+        private void OnPartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH m)
+        {
+            AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
+        }
+        private void OnPartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR m)
+        {
+            ClearAbnormality(m.PlayerId, m.ServerId);
+        }
+        private void OnPartyMemberAbnormalDel(S_PARTY_MEMBER_ABNORMAL_DEL m)
+        {
+            AbnormalityManager.EndPartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id);
+        }
+        private void OnPartyMemberAbnormalAdd(S_PARTY_MEMBER_ABNORMAL_ADD m)
+        {
+            AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
+        }
+        private void OnPartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE m)
+        {
+            foreach (var buff in m.Abnormals) AbnormalityManager.UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, buff.Id, buff.Duration, buff.Stacks);
+        }
+        private void OnSpawnUser(S_SPAWN_USER m)
+        {
+            if (!Exists(m.EntityId)) return;
+            UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
+        }
+        private void OnResultItemBidding(S_RESULT_ITEM_BIDDING m)
+        {
+            EndRoll();
+        }
+        private void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
+        {
+            if (!Rolling) StartRoll();
+            SetRoll(m.EntityId, m.RollResult);
+        }
+        private void OnAskBiddingRareItem(S_ASK_BIDDING_RARE_ITEM m)
+        {
+            StartRoll();
+        }
+        private void OnLoadTopo(S_LOAD_TOPO m)
+        {
+            ClearAllAbnormalities();
+            SetAggro(0);
+        }
+        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+        {
+            ClearAll();
+        }
+        private void OnLogin(S_LOGIN m)
+        {
+            ClearAll();
+        }
+        private void OnBanParty(S_BAN_PARTY m)
+        {
+            ClearAll();
+        }
+        private void OnLeaveParty(S_LEAVE_PARTY m)
+        {
+            ClearAll();
+        }
+        private void OnGetUserList(S_GET_USER_LIST m)
+        {
+            ClearAll();
+        }
+        private void OnUserEffect(S_USER_EFFECT m)
+        {
+            SetAggroCircle(m.Circle, m.Action, m.User);
+        }
+        private void OnPartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
         {
             UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
         }
