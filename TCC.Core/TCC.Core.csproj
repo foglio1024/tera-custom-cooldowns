@@ -109,6 +109,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
       <DependentUpon>LfgBody.xaml</DependentUpon>
     </Compile>
@@ -124,6 +126,7 @@
     <Compile Include="Data\BaseStackBuffTracker.cs" />
     <Compile Include="Data\Chat\MessageLine.cs" />
     <Compile Include="Data\Databases\DatabaseBase.cs" />
+    <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\GearItem.cs" />
     <Compile Include="Data\Map\Location.cs" />
     <Compile Include="Data\Pc\DungeonInfo.cs" />
@@ -143,6 +146,9 @@
     <Compile Include="Interop\Proxy\TccStubInterface.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="Parsing\ToolboxSniffer.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="R.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Settings\JsonSettingsReader.cs" />
     <Compile Include="Settings\JsonSettingsWriter.cs" />
     <Compile Include="Settings\SettingsGlobals.cs" />
@@ -159,6 +165,7 @@
     <Compile Include="Utilities\EventUtils.cs" />
     <Compile Include="Utilities\SynchronizedObservableCollection.cs" />
     <Compile Include="Utilities\TSPropertyChanged.cs" />
+    <Compile Include="ViewModels\CharactersXmlParser.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />
     <Compile Include="Controls\Classes\ArcherLayout.xaml.cs">
       <DependentUpon>ArcherLayout.xaml</DependentUpon>
@@ -215,7 +222,7 @@
     <Compile Include="Converters\ItemLevelTierToColorConverter.cs" />
     <Compile Include="Converters\RoundedClipConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
-    <Compile Include="Converters\SizeToDurationLabelSizeConverter.cs" />
+    <Compile Include="Converters\MathMultiplicationConverter.cs" />
     <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
     <Compile Include="Converters\AbnormalityTypeToColorConverter.cs" />
     <Compile Include="Controls\Abnormalities\SquareAbnormalityIndicator.xaml.cs">
@@ -223,23 +230,23 @@
     </Compile>
     <Compile Include="Converters\BossToLaurelConverter.cs" />
     <Compile Include="Data\Abnormalities\AbnormalityData.cs" />
-    <Compile Include="Data\Databases\ItemExpDataDatabase.cs" />
+    <Compile Include="Data\Databases\ItemExpDatabase.cs" />
     <Compile Include="Data\Databases\RegionsDatabase.cs" />
     <Compile Include="Data\GuildQuest.cs" />
     <Compile Include="Data\Databases\TccDatabase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
-    <Compile Include="R.cs" />
     <Compile Include="ResourceDictionaries\DataTemplates.xaml.cs">
       <DependentUpon>DataTemplates.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CharactersXmlParser.cs" />
     <Compile Include="ViewModels\ChatTabClient.cs" />
     <Compile Include="ViewModels\ChatWindowManager.cs" />
+    <Compile Include="ViewModels\ClassWindowTemplateSelector.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
     <Compile Include="ViewModels\MyAbnormalityVM.cs" />
+    <Compile Include="ViewModels\TabViewModel.cs" />
     <Compile Include="Windows\ClassPositions.cs" />
     <Compile Include="Data\Skills\Cooldown.cs" />
     <Compile Include="Data\Npc\HpTriggeredTimerPattern.cs" />
@@ -251,7 +258,7 @@
     </Compile>
     <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\SkillTemplateSelector.cs" />
-    <Compile Include="ViewModels\CivilUnrestViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\CivilUnrestViewModel.cs" />
     <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
     <Compile Include="ClassSpecific\BrawlerAbnormalityTracker.cs" />
@@ -304,7 +311,7 @@
     <Compile Include="Controls\NPCs\GuildTowerControl.xaml.cs">
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OutlineText.cs" />
+    <Compile Include="Controls\OutlinedTextBlock.cs" />
     <Compile Include="Controls\Skills\RhombFixedSkillControl.xaml.cs">
       <DependentUpon>RhombFixedSkillControl.xaml</DependentUpon>
     </Compile>
@@ -326,7 +333,7 @@
     <Compile Include="Controls\Dashboard\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToPinIconConverter.cs" />
+    <Compile Include="Converters\BoolToSvgSwitchConverter.cs" />
     <Compile Include="Converters\ClassSvgConverter.cs" />
     <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\ClassToReColorConverter.cs" />
@@ -398,11 +405,11 @@
     <Compile Include="Converters\LocationToMapConverter.cs" />
     <Compile Include="Converters\LocationToStretchConverter.cs" />
     <Compile Include="Converters\RowsToHeightConverter.cs" />
-    <Compile Include="Converters\ShieldBrokenColorConverter.cs" />
+    <Compile Include="Converters\ShieldStatusColorConverter.cs" />
     <Compile Include="Converters\ShieldStatusToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToFillConverter.cs" />
-    <Compile Include="Converters\TemplateIdToColorConverter.cs" />
-    <Compile Include="Converters\TypeToCursorConverter.cs" />
+    <Compile Include="Converters\DragonIdToColorConverter.cs" />
+    <Compile Include="Converters\MessageTypeToCursor.cs" />
     <Compile Include="Converters\ValueToFactorConverter.cs" />
     <Compile Include="Data\Chat\ApplyMessage.cs" />
     <Compile Include="Data\Chat\BrokerChatMessage.cs" />
@@ -437,8 +444,6 @@
     <Compile Include="Moongourd\MoongourdManager.cs" />
     <Compile Include="Parsing\OpcodeDownloader.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
-    <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Interop\ProxyPacketSplitter.cs" />
     <Compile Include="Settings\XmlSettingsReader.cs" />
     <Compile Include="Settings\XmlSettingsWriter.cs" />
@@ -521,7 +526,7 @@
     <Compile Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml.cs">
       <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Abnormalities\AbnormalityTooltip.xaml.cs">
+    <Compile Include="Controls\Abnormalities\AbnormalityToolTipControl.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Settings\BoolSetting.xaml.cs">
@@ -560,8 +565,8 @@
     <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
     <Compile Include="TeraServerTimeInfo.cs" />
     <Compile Include="TimeManager.cs" />
-    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
-    <Compile Include="ViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\CharacterWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\ChatViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerLayoutVM.cs" />
     <Compile Include="ViewModels\TempPrivateMessage.cs" />
@@ -571,7 +576,7 @@
     <Compile Include="ViewModels\ClassManagers\ArcherLayoutVM.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
     <Compile Include="ViewModels\ClassManagers\NullClassManager.cs" />
-    <Compile Include="ViewModels\ClassWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\ClassWindowViewModel.cs" />
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
     <Compile Include="ViewModels\LfgListViewModel.cs" />
@@ -579,23 +584,24 @@
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
-    <Compile Include="ViewModels\NpcWindowViewModel.cs" />
-    <Compile Include="ViewModels\BuffBarWindowViewModel.cs" />
-    <Compile Include="ViewModels\CooldownBarWindowViewModel.cs" />
-    <Compile Include="ViewModels\GroupWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\NpcWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\BuffBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\CooldownWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\GroupWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\MysticLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\PriestLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\NinjaLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\ReaperLayoutVM.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
-    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Utilities\TccUtils.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\ClassManagers\SlayerLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererLayoutVM.cs" />
     <Compile Include="Settings\WindowSettings.cs" />
+    <Compile Include="Windows\ClassPositionsData.cs" />
     <Compile Include="Windows\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -605,6 +611,7 @@
     <Compile Include="Windows\FUBH.xaml.cs">
       <DependentUpon>FUBH.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FUBHVM.cs" />
     <Compile Include="Windows\MergedInventoryWindow.xaml.cs">
       <DependentUpon>MergedInventoryWindow.xaml</DependentUpon>
     </Compile>
@@ -622,10 +629,10 @@
     </Compile>
     <Compile Include="Windows\SystemMessageViewModel.cs" />
     <Compile Include="Windows\TccWindow.cs" />
-    <Compile Include="Windows\Widgets\AbnormalitiesWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\BuffWindow.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Widgets\BossGageWindow.xaml.cs">
+    <Compile Include="Windows\Widgets\BossWindow.cs">
       <DependentUpon>BossGageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateSelectors\ChannelLabelDataTemplateSelector.cs" />
@@ -649,7 +656,7 @@
     <Compile Include="Controls\Classes\ValkyrieLayout.xaml.cs">
       <DependentUpon>ValkyrieLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ChatChannelNameConverter.cs" />
+    <Compile Include="Converters\ChatChannelToName.cs" />
     <Compile Include="Converters\ChatChannelToColorConverter.cs" />
     <Compile Include="Windows\ChatSettingsWindow.xaml.cs">
       <DependentUpon>ChatSettingsWindow.xaml</DependentUpon>
@@ -674,7 +681,7 @@
     <Compile Include="Windows\Widgets\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FlightGaugeViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\FlightGaugeViewModel.cs" />
     <Compile Include="Windows\Widgets\FloatingButtonWindow.xaml.cs">
       <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
     </Compile>
@@ -702,7 +709,6 @@
     </Compile>
     <Compile Include="Controls\Arc.cs" />
     <Compile Include="Data\Pc\Character.cs" />
-    <Compile Include="Data\Enums.cs" />
     <Compile Include="FocusManager.cs" />
     <Compile Include="Data\Skills\Skill.cs" />
     <Compile Include="Controls\Skills\RoundSkillControl.xaml.cs">
@@ -1205,7 +1211,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
