@@ -29,9 +29,9 @@ namespace TCC.Settings
 
 
         public event Action ResetToCenter;
-        public event Action EnabledChanged;
+        public event Action<bool> EnabledChanged;
         public event Action ClickThruModeChanged;
-        public event Action VisibilityChanged;
+        public event Action<bool> VisibilityChanged;
 
         [JsonIgnore]
         public string Name { [UsedImplicitly] get; }
@@ -119,7 +119,7 @@ namespace TCC.Settings
 
                 if (App.Loading) return;
                 PacketAnalyzer.Processor.Update();
-                EnabledChanged?.Invoke();
+                EnabledChanged?.Invoke(_enabled);
                 N(nameof(Enabled));
             }
         }
@@ -131,7 +131,7 @@ namespace TCC.Settings
                 if (_visible == value) return;
                 _visible = value;
                 N(nameof(Visible));
-                VisibilityChanged?.Invoke();
+                VisibilityChanged?.Invoke(_visible);
             }
         }
         public bool ShowAlways

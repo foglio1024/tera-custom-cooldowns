@@ -59,7 +59,7 @@ namespace TCC.Windows
 
             OnClickThruModeChanged();
             OnVisibilityChanged();
-            OnWindowVisibilityChanged();
+            OnWindowVisibilityChanged(WindowSettings.Visible);
 
             FocusManager.MakeUnfocusable(Handle);
 
@@ -120,9 +120,9 @@ namespace TCC.Windows
             if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
         }
 
-        private void OnWindowVisibilityChanged()
+        private void OnWindowVisibilityChanged(bool visible)
         {
-            SetVisibility(WindowSettings.Visible);
+            SetVisibility(visible);
         }
 
         private void OnButtonsTimerTick(object sender, EventArgs e)
@@ -213,7 +213,7 @@ namespace TCC.Windows
                     throw new ArgumentOutOfRangeException();
             }
         }
-        protected void OnEnabledChanged()
+        protected void OnEnabledChanged(bool enabled)
         {
             try
             {
