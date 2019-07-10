@@ -99,7 +99,7 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
-            if (App.Settings.LfgEnabled) WindowManager.ViewModels.LFG.RemoveDeadLfg();
+            if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LFG.RemoveDeadLfg();
         }
 
         #region Factory

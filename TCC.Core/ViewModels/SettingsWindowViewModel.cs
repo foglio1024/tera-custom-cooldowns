@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.ViewModels.Widgets;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
@@ -397,11 +398,11 @@ namespace TCC.ViewModels
         }
         public bool UseLfg
         {
-            get => App.Settings.LfgEnabled;
+            get => App.Settings.LfgWindowSettings.Enabled;
             set
             {
-                if (App.Settings.LfgEnabled == value) return;
-                App.Settings.LfgEnabled = value;
+                if (App.Settings.LfgWindowSettings.Enabled == value) return;
+                App.Settings.LfgWindowSettings.Enabled = value;
                 N();
             }
         }
@@ -697,6 +698,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.ChatEnabled == value) return;
                 App.Settings.ChatEnabled = value;
+                ChatWindowManager.Instance.NotifyEnabledChanged(value);
                 N();
             }
         }

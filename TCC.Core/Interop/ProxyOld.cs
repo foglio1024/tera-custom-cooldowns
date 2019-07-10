@@ -193,7 +193,7 @@
 //    //    //{
 //    //    //    var sb = new StringBuilder("init_stub");
 //    //    //    sb.Append("&use_lfg=");
-//    //    //    sb.Append(App.Settings.LfgEnabled.ToString().ToLower());
+//    //    //    sb.Append(App.Settings.LfgWindowSettings.Enabled.ToString().ToLower());
 
 //    //    //    SendData(sb.ToString());
 //    //    //}

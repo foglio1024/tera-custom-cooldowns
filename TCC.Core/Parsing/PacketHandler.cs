@@ -1,14 +1,8 @@
-﻿using FoglioUtils.Extensions;
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Data.Map;
-using TCC.Data.Pc;
-using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -267,10 +261,10 @@ namespace TCC.Parsing
         }
         public static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
         {
-            //if (!App.Settings.LfgEnabled) return;
+            //if (!App.Settings.LfgWindowSettings.Enabled) return;
             //if (WindowManager.LfgListWindow == null) return;
             //if (WindowManager.ViewModels.LFG == null) return;
-            //if (!x.IsLast && App.Settings.LfgEnabled && ProxyInterface.Instance.IsStubAvailable)
+            //if (!x.IsLast && App.Settings.LfgWindowSettings.Enabled && ProxyInterface.Instance.IsStubAvailable)
             //    ProxyInterface.Instance.Stub.RequestListingsPage(x.Page + 1);
 
             //if (!x.IsLast) return;
@@ -521,7 +515,7 @@ namespace TCC.Parsing
         public static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
             //ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x.PlayerId, x.Class, x.Level, x.Name)); 
-            //if (!App.Settings.LfgEnabled) return;
+            //if (!App.Settings.LfgWindowSettings.Enabled) return;
             //if (WindowManager.ViewModels.LFG.MyLfg == null) return;
             //var dest = WindowManager.ViewModels.LFG.MyLfg.Applicants;
             //if (dest.Any(u => u.PlayerId == x.PlayerId)) return;
@@ -595,7 +589,7 @@ namespace TCC.Parsing
             //}));
 
             //if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.ViewModels.LFG != null) WindowManager.ViewModels.LFG.NotifyMyLfg();
-            //if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgEnabled || !Session.InGameUiOn) return;
+            //if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled || !Session.InGameUiOn) return;
             //ProxyInterface.Instance.Stub.RequestListingCandidates(); 
             //if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
             //ProxyInterface.Instance.Stub.RequestListings(); 
@@ -638,12 +632,12 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             //WindowManager.ViewModels.Group.ClearAll();
-            //if (App.Settings.LfgEnabled) WindowManager.ViewModels.LFG.NotifyMyLfg();
+            //if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LFG.NotifyMyLfg();
         }
         public static void HandleKicked(S_BAN_PARTY x)
         {
             //WindowManager.ViewModels.Group.ClearAll();
-            //if (App.Settings.LfgEnabled) WindowManager.ViewModels.LFG.NotifyMyLfg();
+            //if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LFG.NotifyMyLfg();
         }
         public static void HandleReadyCheckFin(S_CHECK_TO_READY_PARTY_FIN x)
         {
@@ -775,7 +769,7 @@ namespace TCC.Parsing
         {
             //ChatWindowManager.Instance.UpdateLfgMembers(packet.Id, packet.Members.Count);
 
-            //if (!App.Settings.LfgEnabled) return;
+            //if (!App.Settings.LfgWindowSettings.Enabled) return;
             //var lfg = WindowManager.ViewModels.LFG.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
             //if (lfg == null) return;
             ////lfg.Players.Clear();

@@ -11,9 +11,7 @@ using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
 {
-    /// <summary>
-    /// Interaction logic for LFGcontrol.xaml
-    /// </summary>
+    //TODO: rework when?
     public partial class LFGcontrol
     {
         private LFG _dc;
@@ -32,13 +30,13 @@ namespace TCC.Controls.Chat
         {
             if(e.PropertyName == "Refresh")
             {
-                Root.Background.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Color.FromArgb(0xff, 0x00, 0xaa, 0xff), Color.FromArgb(0x55,0,0xaa,0xff), TimeSpan.FromMilliseconds(500)));
+                Root.Background.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Color.FromArgb(0xff, 0x00, 0xaa, 0xff), Color.FromArgb(0x55,0,0xaa,0xff), TimeSpan.FromMilliseconds(500))); //TODO: resources
             }
         }
 
         private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (App.Settings.LfgEnabled)
+            if (App.Settings.LfgWindowSettings.Enabled)
             {
                 ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
                 Task.Delay(1000).ContinueWith(t => 

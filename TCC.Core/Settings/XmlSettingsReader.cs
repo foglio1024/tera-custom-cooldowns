@@ -352,7 +352,7 @@ namespace TCC.Settings
                     else if (attr.Name == "HideHpThreshold") App.Settings.GroupWindowSettings.HideHpThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == "HideMpThreshold") App.Settings.GroupWindowSettings.HideMpThreshold = uint.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.AnimateChatMessages)) App.Settings.AnimateChatMessages = bool.Parse(attr.Value);
-                    else if (attr.Name == nameof(SettingsContainer.LfgEnabled)) App.Settings.LfgEnabled = bool.Parse(attr.Value);
+                    //else if (attr.Name == nameof(SettingsContainer.LfgEnabled)) App.Settings.LfgWindowSettings.Enabled = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.UseHotkeys)) App.Settings.UseHotkeys = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.HideHandles)) App.Settings.HideHandles = bool.Parse(attr.Value);
                     else if (attr.Name == nameof(SettingsContainer.ChatEnabled)) App.Settings.ChatEnabled = bool.Parse(attr.Value);

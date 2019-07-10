@@ -26,7 +26,6 @@ namespace TCC.Settings
         public DateTime StatSentTime { get; set; }
         public string StatSentVersion { get; set; }
         public string LanguageOverride { get; set; }
-        public bool LfgEnabled { get; set; }
         public bool ShowTradeLfg { get; set; }
         public bool UseHotkeys { get; set; }
         public bool EthicalMode { get; set; }
@@ -50,7 +49,7 @@ namespace TCC.Settings
         public HotKey LfgHotkey { get; }
         public HotKey InfoWindowHotkey { get; }
         public HotKey SettingsHotkey { get; }
-        public HotKey LootSettingsHotkey { get; } 
+        public HotKey LootSettingsHotkey { get; }
         #endregion
 
         #region Webhooks
@@ -64,31 +63,26 @@ namespace TCC.Settings
         #endregion
 
         public CooldownWindowSettings CooldownWindowSettings { get; set; }
-
         public CharacterWindowSettings CharacterWindowSettings { get; set; }
-
         public NpcWindowSettings NpcWindowSettings { get; set; }
-
         public BuffWindowSettings BuffWindowSettings { get; set; }
-
         public ClassWindowSettings ClassWindowSettings { get; set; }
-
         public GroupWindowSettings GroupWindowSettings { get; set; }
-        
         public FlightWindowSettings FlightGaugeWindowSettings { get; set; }
-
         public FloatingButtonWindowSettings FloatingButtonSettings { get; set; }
-
         public CivilUnrestWindowSettings CivilUnrestWindowSettings { get; set; }
+        public WindowSettings LfgWindowSettings { get; set; }
 
         #region Chat
         // Chat window
         public SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
+        public WindowSettings ChatSettings { get; private set; } // added to have the EnabledChanged event
         public bool ChatEnabled
         {
             get => ChatWindowsSettings.Count > 0 ? ChatWindowsSettings[0].Enabled : _chatEnabled;
             set
             {
+                ChatSettings.Enabled = value;
                 if (ChatWindowsSettings.Count > 0)
                 {
                     if (ChatWindowsSettings[0].Enabled == value) return;
@@ -119,6 +113,8 @@ namespace TCC.Settings
         public string TwitchToken { get; set; } //TODO: re-add this
         [JsonIgnore]
         public string TwitchChannelName { get; set; } //TODO: re-add this 
+
+
         #endregion
 
         public SettingsContainer()
@@ -137,8 +133,9 @@ namespace TCC.Settings
             FloatingButtonSettings = new FloatingButtonWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true*/);
             CivilUnrestWindowSettings = new CivilUnrestWindowSettings(/*1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings)*/);
             ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
+            ChatSettings = new WindowSettings();
+            LfgWindowSettings = new WindowSettings();
 
-            
             MaxMessages = 500;
             SpamThreshold = 2;
             ShowChannel = true;
@@ -149,7 +146,6 @@ namespace TCC.Settings
             TwitchName = "";
             TwitchToken = "";
             TwitchChannelName = "";
-            LfgEnabled = true;
             ShowTradeLfg = true;
             UseHotkeys = true;
             EthicalMode = false;
@@ -178,7 +174,7 @@ namespace TCC.Settings
             WebhookEnabledGuildBam = false;
             WebhookUrlGuildBam = "";
             WebhookMessageGuildBam = "@here Guild BAM will spawn soon!";
-            
+
         }
 
         public static void Load()

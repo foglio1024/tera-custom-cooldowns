@@ -149,7 +149,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsContainer.TwitchName), App.Settings.TwitchName),
                 new XAttribute(nameof(SettingsContainer.TwitchToken), App.Settings.TwitchToken),
                 new XAttribute(nameof(SettingsContainer.TwitchChannelName), App.Settings.TwitchChannelName),
-                new XAttribute(nameof(SettingsContainer.LfgEnabled), App.Settings.LfgEnabled),
+                //new XAttribute(nameof(SettingsContainer.LfgEnabled), App.Settings.LfgWindowSettings.Enabled),
                 new XAttribute(nameof(SettingsContainer.UseHotkeys), App.Settings.UseHotkeys),
                 new XAttribute(nameof(SettingsContainer.HideHandles), App.Settings.HideHandles),
                 new XAttribute(nameof(SettingsContainer.ShowTradeLfg), App.Settings.ShowTradeLfg),

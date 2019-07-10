@@ -240,7 +240,7 @@ namespace TCC.Interop.Proxy
         {
             await TccStub.CallAsync("initialize", new JObject
             {
-                { "useLfg", App.Settings.LfgEnabled }
+                { "useLfg", App.Settings.LfgWindowSettings.Enabled }
             });
         }
         public async void ResetInstance()
