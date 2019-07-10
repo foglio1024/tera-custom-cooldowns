@@ -15,6 +15,7 @@ using TCC.Data.Pc;
 using TCC.Settings;
 using FoglioUtils.Extensions;
 using TCC.ViewModels;
+using TCC.ViewModels.Widgets;
 using TCC.Windows;
 using TCC.Windows.Widgets;
 using Application = System.Windows.Application;
@@ -43,25 +44,16 @@ namespace TCC
             private static LfgListViewModel _lfg;
             private static FlightGaugeViewModel _flightGauge;
 
-            public static CooldownWindowViewModel Cooldowns => _cooldowns ?? (_cooldowns = new CooldownWindowViewModel());
-
-            public static CharacterWindowViewModel Character => _character ?? (_character = new CharacterWindowViewModel());
-
-            public static NpcWindowViewModel NPC => _npc ?? (_npc = new NpcWindowViewModel());
-
-            public static BuffBarWindowViewModel Abnormal => _abnormal ?? (_abnormal = new BuffBarWindowViewModel());
-
-            public static GroupWindowViewModel Group => _group ?? (_group = new GroupWindowViewModel());
-
-            public static ClassWindowViewModel Class => _class ?? (_class = new ClassWindowViewModel());
-
-            public static CivilUnrestViewModel CivilUnrest => _civilUnrest ?? (_civilUnrest = new CivilUnrestViewModel());
-
-            public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel());
-
-            public static LfgListViewModel LFG => _lfg ?? (_lfg = new LfgListViewModel());
-
-            public static FlightGaugeViewModel FlightGauge => _flightGauge ?? (_flightGauge = new FlightGaugeViewModel());
+            public static CooldownWindowViewModel Cooldowns => _cooldowns ?? (_cooldowns = new CooldownWindowViewModel(App.Settings.CooldownWindowSettings));
+            public static CharacterWindowViewModel Character => _character ?? (_character = new CharacterWindowViewModel(App.Settings.CharacterWindowSettings));
+            public static NpcWindowViewModel NPC => _npc ?? (_npc = new NpcWindowViewModel(App.Settings.NpcWindowSettings));
+            public static BuffBarWindowViewModel Abnormal => _abnormal ?? (_abnormal = new BuffBarWindowViewModel(App.Settings.BuffWindowSettings));
+            public static GroupWindowViewModel Group => _group ?? (_group = new GroupWindowViewModel(App.Settings.GroupWindowSettings));
+            public static ClassWindowViewModel Class => _class ?? (_class = new ClassWindowViewModel(App.Settings.ClassWindowSettings));
+            public static CivilUnrestViewModel CivilUnrest => _civilUnrest ?? (_civilUnrest = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
+            public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel(null));
+            public static LfgListViewModel LFG => _lfg ?? (_lfg = new LfgListViewModel(App.Settings.LfgWindowSettings));
+            public static FlightGaugeViewModel FlightGauge => _flightGauge ?? (_flightGauge = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
 
         }
 
