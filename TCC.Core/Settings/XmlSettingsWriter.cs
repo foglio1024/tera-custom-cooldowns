@@ -55,7 +55,7 @@ namespace TCC.Settings
                 if (res == MessageBoxResult.Yes) WriteSettings(doc);
             }
         }
-        public static XElement BuildChatTabsXElement(List<Tab> tabList)
+        public static XElement BuildChatTabsXElement(List<TabData> tabList)
         {
             var result = new XElement("Tabs");
             foreach (var tab in tabList)

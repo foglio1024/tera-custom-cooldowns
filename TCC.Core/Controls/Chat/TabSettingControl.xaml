@@ -139,7 +139,7 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Background="Transparent" Foreground="White" FontSize="14" CaretBrush="White"
                      ToolTip="Tab name"
-                     Text="{Binding TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding TabData.TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      BorderThickness="0 0 0 0" Margin="5 5 5 5" Padding="0 0 0 0" />
             <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="1" Margin="5 5" Height="15"
                   IsHitTestVisible="False" Opacity=".3" />
@@ -182,7 +182,7 @@
 
                 </Grid>
             </Border>
-            <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}" ItemsSource="{Binding Channels}"
+            <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}" ItemsSource="{Binding TabData.Channels}"
                           Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -228,7 +228,7 @@
                 </Grid>
             </Border>
             <ItemsControl ItemTemplate="{StaticResource ExcludedChannelSettingTemplate}"
-                          ItemsSource="{Binding ExcludedChannels}"
+                          ItemsSource="{Binding TabData.ExcludedChannels}"
                           Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -268,7 +268,7 @@
 
                 </Grid>
             </Border>
-            <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding Authors}"
+            <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding TabData.Authors}"
                           Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -307,7 +307,7 @@
                 </Grid>
             </Border>
             <ItemsControl ItemTemplate="{StaticResource ExcludedAuthorSettingTemplate}"
-                          ItemsSource="{Binding ExcludedAuthors}"
+                          ItemsSource="{Binding TabData.ExcludedAuthors}"
                           Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

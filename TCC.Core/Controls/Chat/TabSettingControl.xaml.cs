@@ -28,14 +28,14 @@ namespace TCC.Controls.Chat
 
         private void RemoveAuthor(object sender, RoutedEventArgs e)
         {
-            _dc.Authors.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.TabData.Authors.Remove(((FrameworkElement)sender).DataContext as string);
             _dc.ApplyFilter();
             
         }
 
         private void RemoveChannel(object sender, RoutedEventArgs e)
         {
-            _dc.Channels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc.TabData.Channels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
             _dc.ApplyFilter();
 
         }
@@ -50,14 +50,14 @@ namespace TCC.Controls.Chat
 
         private void RemoveExAuthor(object sender, RoutedEventArgs e)
         {
-            _dc.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.TabData.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
             _dc.ApplyFilter();
 
         }
 
         private void RemoveExChannel(object sender, RoutedEventArgs e)
         {
-            _dc.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc.TabData.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
             _dc.ApplyFilter();
 
         }
@@ -70,9 +70,9 @@ namespace TCC.Controls.Chat
                 if (e.AddedItems[0] is ChatChannelOnOff i)
                 {
                     var ch = i.Channel;
-                    if (!_dc.Channels.Contains(ch))
+                    if (!_dc.TabData.Channels.Contains(ch))
                     {
-                        _dc.Channels.Add(ch);
+                        _dc.TabData.Channels.Add(ch);
                         _dc.ApplyFilter();
                     }
                 }
@@ -90,8 +90,8 @@ namespace TCC.Controls.Chat
             if (e.Key != Key.Enter) return;
             var s = sender as TextBox;
             if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New author...")) return;
-            if (_dc.Authors.Contains(s.Text)) return;
-            _dc.Authors.Add(s.Text);
+            if (_dc.TabData.Authors.Contains(s.Text)) return;
+            _dc.TabData.Authors.Add(s.Text);
             _dc.ApplyFilter();
 
         }
@@ -109,9 +109,9 @@ namespace TCC.Controls.Chat
                 if (e.AddedItems[0] is ChatChannelOnOff i)
                 {
                     var ch = i.Channel;
-                    if (!_dc.ExcludedChannels.Contains(ch))
+                    if (!_dc.TabData.ExcludedChannels.Contains(ch))
                     {
-                        _dc.ExcludedChannels.Add(ch);
+                        _dc.TabData.ExcludedChannels.Add(ch);
                         _dc.ApplyFilter();
                     }
                 }
@@ -128,8 +128,8 @@ namespace TCC.Controls.Chat
         {
             if (e.Key != Key.Enter) return;
             if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author...")) return;
-            if (_dc.ExcludedAuthors.Contains(s.Text)) return;
-            _dc.ExcludedAuthors.Add(s.Text);
+            if (_dc.TabData.ExcludedAuthors.Contains(s.Text)) return;
+            _dc.TabData.ExcludedAuthors.Add(s.Text);
             _dc.ApplyFilter();
         }
 

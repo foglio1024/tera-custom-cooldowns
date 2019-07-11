@@ -564,7 +564,7 @@
                                         <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".5"></DropShadowEffect>
                                     </Border.Effect>
                                 </Border>
-                                <ContentPresenter Content="{Binding Content.TabName}"
+                                <ContentPresenter Content="{Binding Content.TabData.TabName}"
                                                   ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                   ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                                                   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
@@ -577,7 +577,7 @@
                                         <DropShadowEffect Opacity="1" Color="Black" ShadowDepth="0" BlurRadius="3"></DropShadowEffect>
                                     </ContentPresenter.Effect>
                                 </ContentPresenter>
-                                <ContentPresenter Content="{Binding Content.TabName}"
+                                <ContentPresenter Content="{Binding Content.TabData.TabName}"
                                                   ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                   ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                                                   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"

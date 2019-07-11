@@ -12,8 +12,79 @@ using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels
 {
+    public class TabData : TSPropertyChanged
+    {
+        private string _tabName;
+        private SynchronizedObservableCollection<string> _authors;
+        private SynchronizedObservableCollection<string> _excludedAuthors;
+        private SynchronizedObservableCollection<ChatChannel> _channels;
+        private SynchronizedObservableCollection<ChatChannel> _excludedChannels;
+        public string TabName
+        {
+            get => _tabName;
+            set
+            {
+                if (_tabName == value) return;
+                _tabName = value;
+                N();
+            }
+        }
+        public SynchronizedObservableCollection<string> Authors
+        {
+            get => _authors;
+            set
+            {
+                _authors = value;
+                //ApplyFilter();
+            }
+        }
+
+        public SynchronizedObservableCollection<string> ExcludedAuthors
+        {
+            get => _excludedAuthors;
+            set
+            {
+                _excludedAuthors = value;
+                //ApplyFilter();
+            }
+        }
+
+        public SynchronizedObservableCollection<ChatChannel> Channels
+        {
+            get => _channels;
+            set
+            {
+                _channels = value;
+                //ApplyFilter();
+            }
+        }
+
+        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels
+        {
+            get => _excludedChannels;
+            set
+            {
+                _excludedChannels = value;
+                //ApplyFilter();
+            }
+        }
+
+        public TabData()
+        {
+            Authors = new SynchronizedObservableCollection<string>(Dispatcher);
+            ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
+            Channels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
+            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
+        }
+
+        public TabData(string tabName) : this()
+        {
+            TabName = tabName;
+        }
+    }
     public class Tab : TSPropertyChanged
     {
+        public TabData TabData { get; set; }
         // needed for combobox in settings
         [JsonIgnore]
         public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList();
@@ -26,22 +97,7 @@ namespace TCC.ViewModels
         public ICommand RemoveImportantMessageCommand { get; }
         [JsonIgnore]
         public ICommand ClearAllCommand { get; }
-        private string _tabName;
-        private SynchronizedObservableCollection<string> _authors;
-        private SynchronizedObservableCollection<string> _excludedAuthors;
-        private SynchronizedObservableCollection<ChatChannel> _channels;
-        private SynchronizedObservableCollection<ChatChannel> _excludedChannels;
 
-        public string TabName
-        {
-            get => _tabName;
-            set
-            {
-                if (_tabName == value) return;
-                _tabName = value;
-                N();
-            }
-        }
 
         [JsonIgnore]
         public string ImportantMessagesLabel => ImportantMessages.Count > 9 ? "!" : ImportantMessages.Count.ToString();
@@ -49,45 +105,7 @@ namespace TCC.ViewModels
         [JsonIgnore]
         public bool Attention => ImportantMessages.Count > 0;
 
-        public SynchronizedObservableCollection<string> Authors
-        {
-            get => _authors;
-            set
-            {
-                _authors = value;
-                ApplyFilter();
-            }
-        }
 
-        public SynchronizedObservableCollection<string> ExcludedAuthors
-        {
-            get => _excludedAuthors;
-            set
-            {
-                _excludedAuthors = value;
-                ApplyFilter();
-            }
-        }
-
-        public SynchronizedObservableCollection<ChatChannel> Channels
-        {
-            get => _channels;
-            set
-            {
-                _channels = value;
-                ApplyFilter();
-            }
-        }
-
-        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels
-        {
-            get => _excludedChannels;
-            set
-            {
-                _excludedChannels = value;
-                ApplyFilter();
-            }
-        }
 
         [JsonIgnore]
         public SynchronizedObservableCollection<ChatMessage> ImportantMessages { get; set; }
@@ -122,10 +140,6 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
-            Authors = new SynchronizedObservableCollection<string>(Dispatcher);
-            ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
-            Channels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
-            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
             ImportantMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
@@ -141,29 +155,35 @@ namespace TCC.ViewModels
             TabViewModel.ImportantRemoved += SyncImportant;
 
         }
-        public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa) : this()
-        {
-            if (n == null || ch == null || ex == null || a == null || exa == null) return;
-            TabName = n;
-            foreach (var auth in a)
-            {
-                Authors.Add(auth);
-            }
-            foreach (var auth in exa)
-            {
-                ExcludedAuthors.Add(auth);
-            }
-            foreach (var chan in ch)
-            {
-                Channels.Add(chan);
-            }
-            foreach (var chan in ex)
-            {
-                ExcludedChannels.Add(chan);
-            }
 
+        public Tab(TabData tabData) : this()
+        {
+            TabData = tabData;
             ApplyFilter();
         }
+        //public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa) : this()
+        //{
+        //    if (n == null || ch == null || ex == null || a == null || exa == null) return;
+        //    TabName = n;
+        //    foreach (var auth in a)
+        //    {
+        //        Authors.Add(auth);
+        //    }
+        //    foreach (var auth in exa)
+        //    {
+        //        ExcludedAuthors.Add(auth);
+        //    }
+        //    foreach (var chan in ch)
+        //    {
+        //        Channels.Add(chan);
+        //    }
+        //    foreach (var chan in ex)
+        //    {
+        //        ExcludedChannels.Add(chan);
+        //    }
+
+        //    ApplyFilter();
+        //}
 
         private void SyncImportant(Tab source, ImportantRemovedArgs e)
         {
@@ -181,12 +201,12 @@ namespace TCC.ViewModels
 
         public bool Filter(ChatMessage m)
         {
-            if (Authors == null || Channels == null || ExcludedAuthors == null || ExcludedChannels == null)
+            if (TabData.Authors == null || TabData.Channels == null || TabData.ExcludedAuthors == null || TabData.ExcludedChannels == null)
                 return true;
-            return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
-                   (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
-                   (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
-                   (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
+            return (TabData.Authors.Count == 0 || TabData.Authors.Any(x => x == m.Author)) &&
+                   (TabData.Channels.Count == 0 || TabData.Channels.Any(x => x == m.Channel)) &&
+                   (TabData.ExcludedChannels.Count == 0 || TabData.ExcludedChannels.All(x => x != m.Channel)) &&
+                   (TabData.ExcludedAuthors.Count == 0 || TabData.ExcludedAuthors.All(x => x != m.Author));
 
         }
         public void ApplyFilter()

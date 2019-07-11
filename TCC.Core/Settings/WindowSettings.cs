@@ -389,7 +389,7 @@ namespace TCC.Settings
             }
         }
 
-        public List<Tab> Tabs { get; set; }
+        public List<TabData> Tabs { get; set; }
 
         public bool LfgOn
         {
@@ -404,19 +404,19 @@ namespace TCC.Settings
 
         public ChatWindowSettings()
         {
-            Tabs = new List<Tab>();
+            Tabs = new List<TabData>();
             PerClassPosition = false;
             IgnoreSize = false;
         }
         public ChatWindowSettings(WindowSettings other) : base(other)
         {
-            Tabs = new List<Tab>();
+            Tabs = new List<TabData>();
             PerClassPosition = false;
 
         }
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
-            Tabs = new List<Tab>();
+            Tabs = new List<TabData>();
             PerClassPosition = false;
 
         }
