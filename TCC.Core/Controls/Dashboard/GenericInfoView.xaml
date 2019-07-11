@@ -309,6 +309,7 @@
                     </TextBlock>
 
                 </Grid>
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <Grid VerticalAlignment="Stretch"
                       Margin="0 5 0 -5"
                       
@@ -399,6 +400,7 @@
                        Width="100"
                        Grid.Column="3"
                        Margin="6 0" />
+            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
             <TextBlock Text="Elleon Marks"
                        Width="100"
                        Grid.Column="4"

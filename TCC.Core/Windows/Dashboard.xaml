@@ -373,7 +373,7 @@
                                   >
                             <MenuItem.ItemContainerStyle>
                                 <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
-                                    <Setter Property="Command" Value="{Binding UnhideCommand}"/>
+                                    <Setter Property="Command" Value="{Binding CurrentCharacter.UnhideCommand}"/>
                                     <!--<Setter Property="Icon">
                                         <Setter.Value>
                                             
@@ -1108,7 +1108,7 @@
                                                                     <Run Text="Item level requirement:" />
                                                                     <Run
                                                                         Text="{Binding Dungeon.ItemLevel, Mode=OneWay}"
-                                                                        Foreground="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}" />
+                                                                        Foreground="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}" />
                                                                 </TextBlock>
                                                                 <Separator Margin="5 2"
                                                                            Background="#2fff" />
@@ -1162,7 +1162,7 @@
                                                        Foreground="#ccc"
                                                        HorizontalAlignment="Left">
                                                 <Run Text="{Binding Dungeon.ShortName, Mode=OneWay}"
-                                                     Foreground="{Binding Dungeon.RequiredIlvl, Converter={StaticResource IlvlTierToColor}}">
+                                                     Foreground="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}">
                                                 </Run>
                                             </TextBlock>
                                             <TextBlock Grid.Column="1"

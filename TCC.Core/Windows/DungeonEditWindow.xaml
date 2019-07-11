@@ -195,7 +195,7 @@
                                          CaretBrush="White" />
                                 <ComboBox Grid.Column="3"
                                           ItemsSource="{Binding ItemLevelTiers,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DungeonEditWindow}}"
-                                          SelectedItem="{Binding Dungeon.RequiredIlvl, Mode=TwoWay}"
+                                          SelectedItem="{Binding Dungeon.ItemLevel, Mode=TwoWay}"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Right"
                                           HorizontalContentAlignment="Right">
