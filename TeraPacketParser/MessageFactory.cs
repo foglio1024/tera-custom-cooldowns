@@ -175,6 +175,6 @@ namespace TeraPacketParser
             SystemMessageNamer?.Reload(Version, ReleaseVersion);
         }
 
-        public List<string> OpcodesList => TeraMessages.Keys.ToList();
+        public List<string> OpcodesList => TeraMessages.Keys.Where(o => !(o.Equals(nameof(C_CHECK_VERSION)) || o.Equals(nameof(C_LOGIN_ARBITER)))).ToList();
     }
 }
