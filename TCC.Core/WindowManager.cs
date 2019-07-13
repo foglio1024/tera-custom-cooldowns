@@ -48,7 +48,18 @@ namespace TCC
             public static CharacterWindowViewModel Character => _character ?? (_character = new CharacterWindowViewModel(App.Settings.CharacterWindowSettings));
             public static NpcWindowViewModel NPC => _npc ?? (_npc = new NpcWindowViewModel(App.Settings.NpcWindowSettings));
             public static BuffBarWindowViewModel Abnormal => _abnormal ?? (_abnormal = new BuffBarWindowViewModel(App.Settings.BuffWindowSettings));
-            public static GroupWindowViewModel Group => _group ?? (_group = new GroupWindowViewModel(App.Settings.GroupWindowSettings));
+            private static readonly object _groupVmLock = new object();
+            public static GroupWindowViewModel Group
+            {
+                get
+                {
+                    lock (_groupVmLock)
+                    {
+                        return _group ?? (_group = new GroupWindowViewModel(App.Settings.GroupWindowSettings));
+                    }
+                }
+            }
+
             public static ClassWindowViewModel Class => _class ?? (_class = new ClassWindowViewModel(App.Settings.ClassWindowSettings));
             public static CivilUnrestViewModel CivilUnrest => _civilUnrest ?? (_civilUnrest = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
             public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel(null));

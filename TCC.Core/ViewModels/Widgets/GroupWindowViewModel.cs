@@ -15,7 +15,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
 {
-
+    //TODO: remove all references from other vms to this, maybe move party members to Core
     [TccModule]
     public class GroupWindowViewModel : TccWindowViewModel
     {
@@ -262,10 +262,9 @@ namespace TCC.ViewModels.Widgets
             {
                 _leaderOverride = p.IsLeader;
                 visible = false;
-                //return;
             }
-            lock (_lock) //TODO: really needed?
-            {
+            //lock (_lock) //TODO: really needed?
+            //{
                 var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
                 if (user == null)
                 {
@@ -281,7 +280,7 @@ namespace TCC.ViewModels.Widgets
                 user.Order = p.Order;
                 user.Awakened = p.Awakened;
                 user.Visible = visible;
-            }
+            //}
         }
 
         private void SendOnlineMessage(string name, bool newVal)
@@ -644,6 +643,7 @@ namespace TCC.ViewModels.Widgets
         private void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             SetRaid(p.Raid);
+            //p.Members.ForEach(m => Dispatcher.Invoke(() => AddOrUpdateMember(m)));
             Dispatcher.BeginInvoke(new Action(() => p.Members.ForEach(AddOrUpdateMember)));
         }
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)

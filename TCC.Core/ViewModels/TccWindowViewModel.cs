@@ -22,15 +22,15 @@ namespace TCC.ViewModels
 
         protected TccWindowViewModel(WindowSettings settings) : this()
         {
-            App.BaseDispatcher.Invoke(() =>
-            {
+            //App.BaseDispatcher.Invoke(() =>
+            //{
+            //});
                 if (settings != null)
                 {
                     settings.EnabledChanged += OnEnabledChanged;
                     if (!settings.Enabled) return;
                 }
                 PacketAnalyzer.ProcessorReady += InstallHooks;
-            });
         }
     }
 }
