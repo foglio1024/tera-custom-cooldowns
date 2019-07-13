@@ -53,6 +53,7 @@ namespace TCC
             {
                 get
                 {
+                    // TODO: temporary workaround
                     lock (_groupVmLock)
                     {
                         return _group ?? (_group = new GroupWindowViewModel(App.Settings.GroupWindowSettings));
