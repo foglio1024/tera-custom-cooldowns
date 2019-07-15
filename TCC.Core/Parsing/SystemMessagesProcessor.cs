@@ -39,10 +39,10 @@ namespace TCC.Parsing
         {
             var currChar = WindowManager.ViewModels.Dashboard.CurrentCharacter;
             var standardCountString = $"<font color =\"#cccccc\">({currChar.GuardianInfo.Cleared + 1}/40)</font>";
-            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{currChar.GuardianInfo.Cleared + 1}</font><font color=\"#cccccc\">/40)</font>";
-            var newMsg = new SystemMessage($"{sysMsg.Message} {(currChar.GuardianInfo.Cleared + 1 == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
+            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{currChar.GuardianInfo.Cleared}</font><font color=\"#cccccc\">/40)</font>";
+            var newMsg = new SystemMessage($"{sysMsg.Message} {(currChar.GuardianInfo.Cleared == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
             var msg = new ChatMessage(srvMsg, newMsg, ChatChannel.Guardian);
-            if (currChar.GuardianInfo.Cleared + 1 == 40) msg.ContainsPlayerName = true;
+            if (currChar.GuardianInfo.Cleared == 40) msg.ContainsPlayerName = true;
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
