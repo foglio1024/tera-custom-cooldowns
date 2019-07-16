@@ -97,7 +97,7 @@ namespace TCC.Settings
         public bool DisableLfgChatMessages { get; set; }
         public bool ShowChannel { get; set; }
         public bool ShowTimestamp { get; set; }
-        public bool ChatTimestampSeconds { get; internal set; }
+        public bool ChatTimestampSeconds { get; set; }
         public bool AnimateChatMessages { get; set; }
         public int MaxMessages { get; set; }
         public int SpamThreshold { get; set; }
