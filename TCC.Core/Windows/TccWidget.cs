@@ -84,8 +84,11 @@ namespace TCC.Windows
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                Left = WindowSettings.X * WindowManager.ScreenSize.Width;
-                Top = WindowSettings.Y * WindowManager.ScreenSize.Height;
+                var left = WindowSettings.X * WindowManager.ScreenSize.Width;
+                Left = left >= int.MaxValue ? 0 : left;
+
+                var top = WindowSettings.Y * WindowManager.ScreenSize.Height;
+                Top = top >= int.MaxValue ? 0 : top;
 
                 CheckBounds();
 
