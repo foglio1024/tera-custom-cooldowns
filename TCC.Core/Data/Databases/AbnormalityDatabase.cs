@@ -58,11 +58,17 @@ namespace TCC.Data.Databases
                 Abnormalities[id] = ab;
             }
 
-            var meme = new Abnormality(10241024, true, true, true, AbnormalityType.Buff);
-            meme.SetInfo("Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
-            meme.SetIcon("icon_items.bloodchipa_tex");
+            var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Buff);
+            foglioAura.SetInfo("Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
+            foglioAura.SetIcon("icon_items.bloodchipa_tex");
+            Abnormalities[foglioAura.Id] = foglioAura;
 
-            Abnormalities[meme.Id] = meme;
+            var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Buff);
+            fearInoculum.SetInfo("Fear Inoculum", "New $H_W_GOODTool$COLOR_END album release provides the following effects:$BR - increases attack speed by $H_W_GOOD25%$COLOR_END $BR - increases skill damage by $H_W_GOOD100%$COLOR_END $BR - decreases skill cooldowns by $H_W_GOOD80%$COLOR_END $BR - increases drop rate in dungeons by $H_W_GOOD800%$COLOR_END $BR$BREffect only applies while Tool music is playing.");
+            fearInoculum.SetIcon("icon_status.third_eye_ab");
+            fearInoculum.Type = AbnormalityType.Special;
+            Abnormalities[fearInoculum.Id] = fearInoculum;
+
         }
     }
 

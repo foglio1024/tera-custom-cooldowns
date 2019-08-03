@@ -8,8 +8,6 @@ namespace TCC
 {
     public static class SkillManager
     {
-        public static event Action SkillStarted;
-
         public const int LongSkillTreshold = 40000;
 
         public static void AddSkill(uint id, ulong cd)
@@ -25,7 +23,6 @@ namespace TCC
                 try
                 {
                     RouteSkill(new Cooldown(brooch, cd, CooldownType.Item));
-
                 }
                 catch (Exception e)
                 {
@@ -36,10 +33,8 @@ namespace TCC
         }
         public static void AddPassivitySkill(uint abId, uint cd)
         {
-            if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
-            {
-                RouteSkill(new Cooldown(skill, cd * 1000, CooldownType.Passive));
-            }
+            if (!PassivityDatabase.TryGetPassivitySkill(abId, out var skill)) return;
+            RouteSkill(new Cooldown(skill, cd * 1000, CooldownType.Passive));
 
         }
         public static void AddSkillDirectly(Skill sk, uint cd, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal)
@@ -49,29 +44,20 @@ namespace TCC
 
         public static void ChangeSkillCooldown(uint id, uint cd)
         {
-            if (Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill))
-            {
-                if (!Pass(skill)) return;
-                WindowManager.ViewModels.Cooldowns.Change(skill, cd);
-            }
+            if (!Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill)) return;
+            if (!Pass(skill)) return;
+            WindowManager.ViewModels.Cooldowns.Change(skill, cd);
 
         }
         public static void ResetSkill(uint id)
         {
-            if (Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill))
-            {
-                if (!Pass(skill)) return;
-                WindowManager.ViewModels.Cooldowns.ResetSkill(skill);
-            }
+            if (!Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill)) return;
+            if (!Pass(skill)) return;
+            WindowManager.ViewModels.Cooldowns.ResetSkill(skill);
         }
-        //public static void Clear()
-        //{
-        //    WindowManager.ViewModels.Cooldowns.ClearSkills();
-        //}
 
         private static void RouteSkill(Cooldown skillCooldown)
         {
-
             if (skillCooldown.Duration == 0)
             {
                 skillCooldown.Dispose();
@@ -81,8 +67,8 @@ namespace TCC
             {
                 WindowManager.ViewModels.Cooldowns.AddOrRefresh(skillCooldown);
             }
-            App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
         }
+
         private static bool Pass(Skill sk)
         {
             if (sk.Detail == "off") return false;

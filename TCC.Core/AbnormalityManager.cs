@@ -89,7 +89,7 @@ namespace TCC
 
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
-            if (ab.Type == AbnormalityType.Buff)
+            if (ab.Type == AbnormalityType.Buff || ab.Type == AbnormalityType.Special)
             {
                 if (ab.Infinity)
                 {
@@ -127,7 +127,7 @@ namespace TCC
         {
             WindowManager.ViewModels.Group.EndAbnormality(ab, Session.Me.PlayerId, Session.Me.ServerId);
 
-            if (ab.Type == AbnormalityType.Buff)
+            if (ab.Type == AbnormalityType.Buff || ab.Type == AbnormalityType.Special)
             {
                 if (ab.Infinity)
                 {

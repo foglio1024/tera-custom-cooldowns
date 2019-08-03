@@ -41,6 +41,8 @@ namespace TCC
         public static bool ToolboxMode { get; private set; }
         public static bool Restarted { get; private set; }
 
+        public static bool FI = DateTime.Now >= DateTime.Parse("00:00 30/08/2019") && DateTime.Now < DateTime.Parse("00:00 31/08/2019");
+
         public static SettingsContainer Settings;
 
         private static FUBH fubh;

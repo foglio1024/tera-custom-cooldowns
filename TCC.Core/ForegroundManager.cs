@@ -33,7 +33,7 @@ namespace TCC
             Session.GameUiModeChanged += OnGameUiModeChanged;
 
             FocusManager.ForegroundChanged += NotifyVisibilityChanged;
-            SkillManager.SkillStarted += OnSkillStarted;
+            Session.SkillStarted += OnSkillStarted;
 
             _dimTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             _dimTimer.Tick += (_, __) =>

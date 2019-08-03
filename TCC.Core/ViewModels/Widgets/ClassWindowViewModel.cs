@@ -1,4 +1,5 @@
 ﻿using System;
+using TCC.Data.Skills;
 using TCC.Parsing;
 using TCC.Settings;
 using TeraDataLite;
@@ -96,8 +97,9 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
             PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
         }
-
         protected override void RemoveHooks()
         {
             PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
@@ -107,6 +109,15 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
             PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+            PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.NewProcessor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+        }
+
+        private void UpdateSkillCooldown(uint skillId, uint cooldown)
+        {
+            if (!App.Settings.ClassWindowSettings.Enabled) return;
+            if (!Session.DB.SkillsDatabase.TryGetSkill(skillId, Session.Me.Class, out var skill)) return;
+            CurrentManager.StartSpecialSkill(new Cooldown(skill, cooldown));
         }
 
         private void OnLogin(S_LOGIN m)
@@ -159,6 +170,14 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+        }
+        private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
+        {
+            UpdateSkillCooldown(m.SkillId, m.Cooldown);
+        }
+        private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
+        {
+            UpdateSkillCooldown(m.SkillId, m.Cooldown);
         }
     }
 }

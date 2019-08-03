@@ -68,7 +68,7 @@ namespace TCC.ViewModels.Widgets
 
         private bool NormalMode_Update(Cooldown sk)
         {
-            if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
+            //if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
             if (!App.Settings.CooldownWindowSettings.Enabled) return false;
 
             var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
@@ -232,10 +232,7 @@ namespace TCC.ViewModels.Widgets
 
         private bool FixedMode_Update(Cooldown sk)
         {
-            if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk))
-            {
-                return false;
-            }
+            //if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
 
             if (!App.Settings.CooldownWindowSettings.Enabled)
             {

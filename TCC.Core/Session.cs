@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -133,7 +135,7 @@ namespace TCC
             if (!DB.IsUpToDate)
             {
                 var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
-                if (res == System.Windows.MessageBoxResult.Yes)
+                if (res == MessageBoxResult.Yes)
                 {
                     DB.DownloadOutdatedDatabases();
                 }
@@ -141,7 +143,7 @@ namespace TCC
             if (!DB.Exists)
             {
                 var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
-                if (res == System.Windows.MessageBoxResult.Yes)
+                if (res == MessageBoxResult.Yes)
                 {
                     App.BaseDispatcher.Invoke(() =>
                     {
@@ -150,8 +152,8 @@ namespace TCC
                     });
                     InitDatabases(App.Settings.LastLanguage);
                 }
-                else if (res == System.Windows.MessageBoxResult.No) InitDatabases("EU-EN");
-                else if (res == System.Windows.MessageBoxResult.Cancel) App.Close();
+                else if (res == MessageBoxResult.No) InitDatabases("EU-EN");
+                else if (res == MessageBoxResult.Cancel) App.Close();
             }
             else DB.Load();
         }
@@ -198,6 +200,7 @@ namespace TCC
                 AbnormalityManager.SetAbnormalityTracker(m.CharacterClass);
                 WindowManager.FloatingButton.SetMoongourdButtonVisibility(); //TODO: do this via vm, need to refactor it first
 
+
             });
             PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(m =>
             {
@@ -239,7 +242,7 @@ namespace TCC
                 {
                     p.GuildLogo.Save(
                         Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{Server.ServerId}_{p.GuildId}_{0}.bmp"),
-                        System.Drawing.Imaging.ImageFormat.Bmp
+                        ImageFormat.Bmp
                     );
                 }
                 catch (Exception e) { Log.F($"Error while saving guild logo: {e}"); }
@@ -318,6 +321,11 @@ namespace TCC
                 {
                     LoadingScreen = false;
                     WindowManager.ForegroundManager.RefreshDim();
+                    var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
+                    AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
+                    var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
+                    var msg = $"@0\vAbnormalName\v{ab.Name}";
+                    SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
                 });
             });
             PacketAnalyzer.NewProcessor.Hook<S_SPAWN_USER>(p =>
@@ -340,7 +348,7 @@ namespace TCC
                         if (CivilUnrestZone) break;
                         EntityManager.FoglioEid = p.EntityId;
                         var ab = DB.AbnormalityDatabase.Abnormalities[10241024];
-                        AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
+                        AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, Int32.MaxValue, 1);
                         var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
                         var msg = $"@0\vAbnormalName\v{ab.Name}";
                         SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
@@ -350,7 +358,17 @@ namespace TCC
             });
             PacketAnalyzer.NewProcessor.Hook<S_DESPAWN_NPC>(PacketHandler.HandleDespawnNpc);
             PacketAnalyzer.NewProcessor.Hook<S_DESPAWN_USER>(PacketHandler.HandleDespawnUser);
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
+            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
 
+        }
+        private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
+        {
+            App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
+        }
+        private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
+        {
+            App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
         }
 
         private static Laurel GetLaurel(uint pId)
@@ -389,7 +407,9 @@ namespace TCC
         public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
-            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
+            await InitDatabasesAsync(String.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
         }
+
+        public static event Action SkillStarted;
     }
 }

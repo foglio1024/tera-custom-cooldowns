@@ -30,8 +30,24 @@ namespace TCC.Windows
                 Img.Source = bm;
             }
             catch { }
+
+            SetFI();
         }
 
+        public void SetFI()
+        {
+            if (!App.FI) return;
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                var bm = new BitmapImage();
+                bm.BeginInit();
+                bm.UriSource = new Uri("pack://application:,,,/resources/images/10kdays.jpg", UriKind.Absolute);
+                bm.CacheOption = BitmapCacheOption.OnLoad;
+                bm.EndInit();
+                Img.Source = bm;
+                TccLogo.Opacity = .2;
+            }));
+        }
         public void SetText(string t)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Txt.Text = t));

@@ -190,7 +190,8 @@ namespace TCC.Data
         Debuff = 1,
         DOT = 2,
         Stun = 3,
-        Buff = 4
+        Buff = 4,
+        Special = 100
     }
 
     public enum Dragon

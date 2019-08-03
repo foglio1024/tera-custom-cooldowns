@@ -12,29 +12,37 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (AbnormalityType?)value ?? AbnormalityType.Buff;
-            string resName;
+            //string resName;
+            Color ret;
             switch (val)
             {
                 case AbnormalityType.Stun:
-                    resName = "Stun";
+                    ret = R.Colors.AbnormalityStunColor;
+                    //resName = "Stun";
                     break;
                 case AbnormalityType.DOT:
-                    resName = "Dot";
+                    ret = R.Colors.AbnormalityDotColor;
+                    //resName = "Dot";
                     break;
                 case AbnormalityType.Debuff:
-                    resName = "Debuff";
+                    ret = R.Colors.AbnormalityDebuffColor;
+                    //resName = "Debuff";
                     break;
                 case AbnormalityType.Buff:
-                    resName = "Buff";
+                    ret = R.Colors.AbnormalityBuffColor;
+                    //resName = "Buff";
+                    break;
+                case AbnormalityType.Special:
+                    ret = R.Colors.GoldColor;
                     break;
                 default:
                     return new SolidColorBrush(Colors.White);
             }
 
             // ReSharper disable once PossibleNullReferenceException
-            var color = (Color)Application.Current.FindResource($"Abnormality{resName}Color");
-            if (targetType == typeof(Color)) return color;
-            return new SolidColorBrush(color);
+            //var color = (Color)Application.Current.FindResource($"Abnormality{resName}Color");
+            if (targetType == typeof(Color)) return ret;
+            return new SolidColorBrush(ret);
 
         }
 

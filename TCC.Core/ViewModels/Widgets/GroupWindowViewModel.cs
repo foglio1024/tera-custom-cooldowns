@@ -179,7 +179,7 @@ namespace TCC.ViewModels.Widgets
                 var u = Members.ToSyncList().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
                 if (u == null) return;
 
-                if (ab.Type == AbnormalityType.Buff)
+                if (ab.Type == AbnormalityType.Buff || ab.Type == AbnormalityType.Special)
                 {
                     u.AddOrRefreshBuff(ab, duration, stacks);
                     if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
@@ -207,7 +207,7 @@ namespace TCC.ViewModels.Widgets
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
                 if (u == null) return;
 
-                if (ab.Type == AbnormalityType.Buff)
+                if (ab.Type == AbnormalityType.Buff || ab.Type == AbnormalityType.Special)
                 {
                     u.RemoveBuff(ab);
                     if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
