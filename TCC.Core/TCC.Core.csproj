@@ -1426,6 +1426,12 @@
   <ItemGroup>
     <Resource Include="ttb64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\third-eye.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\10kdays.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
