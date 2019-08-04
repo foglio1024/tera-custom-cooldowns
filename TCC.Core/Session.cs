@@ -134,9 +134,11 @@ namespace TCC
             DB.CheckVersion();
             if (!DB.IsUpToDate)
             {
-                WindowManager.FloatingButton.NotifyExtended("TCC", $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.", NotificationType.Warning, 5000);
-                ChatWindowManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
-
+                if (!App.Loading)
+                {
+                    WindowManager.FloatingButton.NotifyExtended("TCC", $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.", NotificationType.Warning, 5000);
+                    ChatWindowManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
+                }
                 //var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
                 //if (res == MessageBoxResult.Yes)
                 //{
