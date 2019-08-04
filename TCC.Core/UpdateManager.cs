@@ -31,6 +31,7 @@ namespace TCC
         private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{(App.Experimental ? "experimental" : "master")}/database-hashes.json";
 
         public static Dictionary<string, string> DatabaseHashes { get; set; }
+        public static bool UpdateAvailable { get; private set; }
 
         public static void CheckServersFile()
         {
@@ -234,7 +235,7 @@ namespace TCC
 
         public static void StartPeriodicCheck()
         {
-            _checkTimer = new System.Timers.Timer(60 * 10 * 1000);
+            _checkTimer = new System.Timers.Timer((App.ToolboxMode ? 2 : 10) * 60 * 1000);
             _checkTimer.Elapsed += CheckTimer_Elapsed;
             _checkTimer.Start();
         }
@@ -258,6 +259,10 @@ namespace TCC
                     if (newVersionInfo == null) return;
                     if (Version.Parse(newVersionInfo) <= Assembly.GetExecutingAssembly().GetName().Version) return;
 
+                    UpdateAvailable = true;
+
+                    if (App.ToolboxMode) return;
+
                     ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
                     WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                 }
@@ -267,6 +272,7 @@ namespace TCC
                 }
             }
         }
+
 
         public async static void ForceUpdateExperimental()
         {

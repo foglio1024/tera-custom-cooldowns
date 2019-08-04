@@ -110,7 +110,7 @@ namespace TCC.Parsing
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
-            WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Warning);
+            WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Normal);
 
             WindowManager.ViewModels.Group.ClearAllAbnormalities();
             WindowManager.ViewModels.Dashboard.UpdateBuffs();
@@ -122,6 +122,8 @@ namespace TCC.Parsing
             ProxyInterface.Instance.Disconnect();
             Session.Logged = false;
             Session.LoadingScreen = true;
+
+            if (App.ToolboxMode && UpdateManager.UpdateAvailable) App.Close();
         }
 
         public static void EnqueuePacket(Message message)
