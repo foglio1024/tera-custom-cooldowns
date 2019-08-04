@@ -118,7 +118,7 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
 
-            if (!ToolboxMode) UpdateManager.StartPeriodicCheck();
+            /*if (!ToolboxMode)*/ UpdateManager.StartPeriodicCheck();
 
             if (!Experimental && Settings.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",
@@ -163,7 +163,7 @@ namespace TCC
         public static void Restart()
         {
             Settings.Save();
-            Process.Start("TCC.exe", "--restart");
+            Process.Start("TCC.exe", $"--restart{(ToolboxMode ? " --toolbox" : "")}");
             Close();
         }
 
