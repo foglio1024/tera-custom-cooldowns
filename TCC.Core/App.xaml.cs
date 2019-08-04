@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-
+using FoglioUtils;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.Loader;
@@ -38,7 +38,7 @@ namespace TCC
         public static bool ToolboxMode { get; private set; }
         public static bool Restarted { get; private set; }
 
-        public static bool FI = DateTime.Now >= DateTime.Parse("00:00 30/08/2019") && DateTime.Now < DateTime.Parse("00:00 31/08/2019");
+        public static bool FI = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) && DateTime.Now < TimeUtils.FromUnixTime(1567209600);
 
         public static SettingsContainer Settings;
 
