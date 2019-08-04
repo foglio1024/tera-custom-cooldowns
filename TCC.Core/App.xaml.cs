@@ -1,7 +1,4 @@
 ﻿//#define FORCE_TTB
-#if DEBUG
-#define RELEASE
-#endif
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
