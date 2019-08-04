@@ -321,6 +321,7 @@ namespace TCC
                 {
                     LoadingScreen = false;
                     WindowManager.ForegroundManager.RefreshDim();
+                    if (!App.FI) return;
                     var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
                     AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
                     var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
