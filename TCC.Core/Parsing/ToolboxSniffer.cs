@@ -9,6 +9,8 @@ using TCC.Annotations;
 using TCC.Interop.Proxy;
 using TCC.TeraCommon.Sniffing;
 using TeraPacketParser;
+using FoglioUtils.Extensions;
+using TCC.Windows.Widgets;
 using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing
@@ -36,7 +38,6 @@ namespace TCC.Parsing
             });
             return resp?.Result != null && resp.Result.Value<bool>();
         }
-
         public async Task<bool> AddHooks(List<string> opcodes)
         {
             var jArray = new JArray();
@@ -113,6 +114,7 @@ namespace TCC.Parsing
         public event Action<Server> NewConnection;
         public event Action EndConnection;
 
+
         private async void Listen()
         {
             while (Enabled)
@@ -125,30 +127,39 @@ namespace TCC.Parsing
                     NewConnection?.Invoke(Session.DB.ServerDatabase.GetServer(resp));
                     await ControlConnection.AddHooks(PacketAnalyzer.Factory.OpcodesList);
                 }
-
                 var stream = client.GetStream();
-                while (client.Connected)
+                while (true)
                 {
                     Connected = true;
                     try
                     {
                         var lenBuf = new byte[2];
                         stream.Read(lenBuf, 0, 2);
-                        var length = BitConverter.ToUInt16(lenBuf, 0) - 2;
+                        var len = BitConverter.ToUInt16(lenBuf, 0);
+                        if (len <= 2)
+                        {
+                            if (!client.IsConnected())
+                            {
+                                client.Close();
+                                Connected = false;
+                                break;
+                            }
+                            continue;
+                        }
+                        var length = len - 2;
                         var dataBuf = new byte[length];
                         stream.Read(dataBuf, 0, length);
 
                         MessageReceived?.Invoke(new Message(DateTime.Now, dataBuf));
+
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         Connected = false;
                         client.Close();
+                        Log.F($"Disconnected: {e}");
                     }
-
                 }
-                Connected = false;
-                client.Close();
             }
         }
 
