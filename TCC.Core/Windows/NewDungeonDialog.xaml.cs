@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -26,7 +27,11 @@ namespace TCC.Windows
             if (dg.Show) return;
             dg.Show = true;
             dg.Index = int.MaxValue;
-            //WindowManager.Dashboard.VM.ExN(nameof(DashboardViewModel.SortedColumns));
+            dg.Cost = 0;
+            dg.DoublesOnElite = true;
+            dg.ItemLevel = 0;
+            dg.HasDef = true;
+            //WindowManager.ViewModels.Dashboard.RefreshDungeons();
         }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)

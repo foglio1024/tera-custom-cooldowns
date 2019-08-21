@@ -71,14 +71,9 @@ namespace TCC.Data.Pc
 
         public DungeonInfo()
         {
-            //var disp = owner.GetDispatcher();
-            //Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(disp);
-            //foreach (var id in Session.DB.DungeonDatabase.Dungeons.Keys.Where(k => Session.DB.DungeonDatabase.Dungeons[k].HasDef))
-            //{
-            //    Dungeons.Add(new DungeonCooldown(id, disp, owner));
-            //}
             DungeonList = Session.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef)
-                         .Select(d => new DungeonCooldownData(d.Id)).ToList(); //new List<DungeonCooldownData>();
+                         .Select(d => new DungeonCooldownData(d.Id)).ToList();
+            //DungeonList = new List<DungeonCooldownData>();
             VisibleDungeonsView = CollectionViewUtils.InitLiveView(null, DungeonList, new string[] { },
                 new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
 

@@ -180,7 +180,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    Session.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
+                    Session.DB.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
@@ -454,10 +454,10 @@ namespace TCC.ViewModels
                 {
                     switch (k)
                     {
-                        case (int) NpcGuild.Vanguard:
+                        case (int)NpcGuild.Vanguard:
                             SetVanguardCredits(m.NpcGuildList[k]);
                             break;
-                        case (int) NpcGuild.Guardian:
+                        case (int)NpcGuild.Guardian:
                             SetGuardianCredits(m.NpcGuildList[k]);
                             break;
                     }
@@ -747,6 +747,33 @@ namespace TCC.ViewModels
         {
             Session.Account.Characters.ToList().ForEach(ch => ch.VanguardInfo.WeekliesDone = 0);
             ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
+        }
+
+        public void RefreshDungeons()
+        {
+            _columns.Clear();
+            Task.Factory.StartNew(() =>
+            {
+                Session.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
+                {
+                    App.BaseDispatcher.BeginInvoke(new Action(() =>
+                    {
+                        var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
+                        CharacterViewModels?.ToList().ForEach(charVm =>
+                        {
+                            //if (charVm.Character.Hidden) return;
+                            dvc.DungeonsList.Add(
+                                new DungeonCooldownViewModel
+                                {
+                                    Owner = charVm.Character,
+                                    Cooldown = charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x =>
+                                        x.Dungeon.Id == dungeon.Id)
+                                });
+                        });
+                        _columns.Add(dvc);
+                    }), DispatcherPriority.Background);
+                });
+            });
         }
     }
 }
