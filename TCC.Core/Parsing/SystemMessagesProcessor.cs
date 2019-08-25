@@ -38,9 +38,10 @@ namespace TCC.Parsing
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
         {
             var currChar = WindowManager.ViewModels.Dashboard.CurrentCharacter;
-            var standardCountString = $"<font color =\"#cccccc\">({currChar.GuardianInfo.Cleared + 1}/40)</font>";
-            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{currChar.GuardianInfo.Cleared}</font><font color=\"#cccccc\">/40)</font>";
-            var newMsg = new SystemMessage($"{sysMsg.Message} {(currChar.GuardianInfo.Cleared == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
+            var cleared = currChar.GuardianInfo.Cleared;
+            var standardCountString = $"<font color =\"#cccccc\">({cleared}/40)</font>";
+            var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{cleared}</font><font color=\"#cccccc\">/40)</font>";
+            var newMsg = new SystemMessage($"{sysMsg.Message} {(cleared == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
             var msg = new ChatMessage(srvMsg, newMsg, ChatChannel.Guardian);
             if (currChar.GuardianInfo.Cleared == 40) msg.ContainsPlayerName = true;
             ChatWindowManager.Instance.AddChatMessage(msg);
