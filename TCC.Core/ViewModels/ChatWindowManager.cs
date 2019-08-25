@@ -148,8 +148,11 @@ namespace TCC.ViewModels
         }
         private void OnPrivateChat(S_PRIVATE_CHAT m)
         {
+            // ignore these since they're handled differently
+            //if (m.Message.Contains(":tcc-chatMode:") || m.Message.Contains(":tcc-uiMode:")) return;
             var i = PrivateChannels.FirstOrDefault(y => y.Id == m.Channel).Index;
             var ch = (ChatChannel) (PrivateChannels[i].Index + 11);
+            if (ch == ChatChannel.Private8) return; // already sent by stub
 
             AddChatMessage(new ChatMessage(ch, m.AuthorName, m.Message));
         }

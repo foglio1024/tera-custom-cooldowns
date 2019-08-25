@@ -7,6 +7,7 @@ using TCC.Data.Chat;
 using TCC.Interop.JsonRPC;
 using TCC.Parsing;
 using FoglioUtils.Extensions;
+using TCC.Settings;
 using TCC.ViewModels;
 using TeraPacketParser;
 using TeraPacketParser.Data;
@@ -32,7 +33,6 @@ namespace TCC.Interop.Proxy
         }
         private static void HandleChatMessage(JObject parameters)
         {
-            //Log.CW("[ProxyMessageHandler] Handling chat message");
             var author = parameters["author"].Value<string>();
             var channel = parameters["channel"].Value<uint>();
             var message = parameters["message"].Value<string>().AddFontTagsIfMissing();
