@@ -10,6 +10,7 @@ using TCC.Interop.Proxy;
 using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
 using TCC.ViewModels;
+using TCC.Windows;
 using TeraPacketParser;
 using TeraPacketParser.Messages;
 using Server = TCC.TeraCommon.Game.Server;
@@ -101,8 +102,10 @@ namespace TCC.Parsing
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
-
             if (!App.Settings.DontShowFUBH) App.FUBH();
+            if (Game.Server.Region == "EU")
+                TccMessageBox.Show("WARNING",
+                    "Official statement from Gameforge:\n\n don't combine partners or pets! It will lock you out of your character permanently.\n\n This message will keep showing until next release.");
         }
         private static void OnEndConnection()
         {
