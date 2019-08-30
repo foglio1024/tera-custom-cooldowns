@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using FoglioUtils;
+using FoglioUtils.Extensions;
 
 namespace TCC.Publisher
 {
@@ -21,7 +23,7 @@ namespace TCC.Publisher
             msg = msg.Replace("\n", "");
 
             Log.Add($"[{DateTime.Now.ToShortTimeString()}] {msg}");
-            Utils.GetChild<ScrollViewer>(LogList).ScrollToBottom();
+            LogList.GetChild<ScrollViewer>().ScrollToBottom();
         }
         private void Generate(object sender, RoutedEventArgs e)
         {
@@ -41,7 +43,7 @@ namespace TCC.Publisher
             var last = Log[Log.Count - 1];
             Log.RemoveAt(Log.Count - 1);
             Log.Add(last + msg);
-            Utils.GetChild<ScrollViewer>(LogList).ScrollToBottom();
+            LogList.GetChild<ScrollViewer>().ScrollToBottom();
         }
 
         private async void Release(object sender, RoutedEventArgs e)

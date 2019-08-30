@@ -126,6 +126,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
+      <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
+      <Name>FoglioUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCC.Core\TCC.Core.csproj">
       <Project>{b3f6e516-cd4b-404e-93c5-ffc729406fa9}</Project>
       <Name>TCC.Core</Name>
