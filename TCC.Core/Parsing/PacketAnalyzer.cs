@@ -103,9 +103,9 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
             if (!App.Settings.DontShowFUBH) App.FUBH();
-            if (Game.Server.Region == "EU")
-                TccMessageBox.Show("WARNING",
-                    "Official statement from Gameforge:\n\n don't combine partners or pets! It will lock you out of your character permanently.\n\n This message will keep showing until next release.");
+            //if (Game.Server.Region == "EU")
+            //    TccMessageBox.Show("WARNING",
+            //        "Official statement from Gameforge:\n\n don't combine partners or pets! It will lock you out of your character permanently.\n\n This message will keep showing until next release.");
         }
         private static void OnEndConnection()
         {
