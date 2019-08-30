@@ -188,7 +188,7 @@ namespace TCC.Data.Chat
                                 else if (inPiece.StartsWith("@abnormal"))
                                 {
                                     var abName = "Unknown";
-                                    if (Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
+                                    if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
                                         uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
                                     mp = new MessagePiece(abName, MessagePieceType.Simple, App.Settings.FontSize, false);
                                     mp.SetColor(col);
@@ -387,7 +387,7 @@ namespace TCC.Data.Chat
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
-            var text = Session.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
+            var text = Game.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new MessagePiece(text, MessagePieceType.Simple, App.Settings.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)
@@ -475,7 +475,7 @@ namespace TCC.Data.Chat
             //check if player is mentioned
             try
             {
-                foreach (var item in Session.Account.Characters.Where(c => !c.Hidden))
+                foreach (var item in Game.Account.Characters.Where(c => !c.Hidden))
                 {
                     if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
                     ContainsPlayerName = true;

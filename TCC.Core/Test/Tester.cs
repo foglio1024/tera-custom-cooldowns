@@ -73,16 +73,16 @@ namespace TCC.Test
         }
         public static void Login(Class c)
         {
-            Session.Logged = true;
-            Session.LoadingScreen = false;
-            Session.Me.Class = c;
-            WindowManager.ViewModels.Class.CurrentClass = Session.Me.Class;
+            Game.Logged = true;
+            Game.LoadingScreen = false;
+            Game.Me.Class = c;
+            WindowManager.ViewModels.Class.CurrentClass = Game.Me.Class;
             WindowManager.ViewModels.Cooldowns.LoadSkills(c);
         }
         public static void ForceEncounter(bool val = true)
         {
-            Session.Combat = val;
-            Session.Encounter = val;
+            Game.Combat = val;
+            Game.Encounter = val;
         }
         public static void StartDeadlyGambleCooldown(uint cd)
         {
@@ -132,7 +132,7 @@ namespace TCC.Test
 
         internal static void AddFakeSystemMessage(string v, params string[] p)
         {
-            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(v, out var sysmsg);
+            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(v, out var sysmsg);
             var srvMsg = $"@0";
             p.ToList().ForEach(par => srvMsg += $"\v{par}");
             ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
@@ -358,8 +358,8 @@ namespace TCC.Test
             var a = true;
             t.Elapsed += (_, __) =>
             {
-                if (true) AbnormalityManager.BeginAbnormality(id++, 1, 0, 500000, 1);
-                else AbnormalityManager.EndAbnormality(1, 100800);
+                //if (true) AbnormalityUtils.BeginAbnormality(id++, 1, 0, 500000, 1);
+                //else AbnormalityUtils.EndAbnormality(1, 100800);
                 a = !a;
             };
             t.Start();

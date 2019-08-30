@@ -43,7 +43,7 @@ namespace TCC.ViewModels
 
         /* -- Properties ------------------------------------------- */
 
-        public Character CurrentCharacter => Session.Account.Characters.FirstOrDefault(x => x.Id == Session.Me.PlayerId);
+        public Character CurrentCharacter => Game.Account.Characters.FirstOrDefault(x => x.Id == Game.Me.PlayerId);
         public Character SelectedCharacter
         {
             get => _selectedCharacter;
@@ -99,7 +99,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = 0;
-                Session.Account.Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
+                Game.Account.Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
                 return ret;
             }
         }
@@ -108,7 +108,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = 0;
-                Session.Account.Characters.ToSyncList().ForEach(c => ret += c.VanguardInfo.Credits);
+                Game.Account.Characters.ToSyncList().ForEach(c => ret += c.VanguardInfo.Credits);
                 return ret;
             }
         }
@@ -117,7 +117,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = 0;
-                Session.Account.Characters.ToSyncList().ForEach(c => ret += c.GuardianInfo.Credits);
+                Game.Account.Characters.ToSyncList().ForEach(c => ret += c.GuardianInfo.Credits);
                 return ret;
             }
         }
@@ -180,7 +180,7 @@ namespace TCC.ViewModels
 
                 Task.Factory.StartNew(() =>
                 {
-                    Session.DB.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
+                    Game.DB.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.BeginInvoke(new Action(() =>
                         {
@@ -203,17 +203,17 @@ namespace TCC.ViewModels
                 _loaded = true;
             }, c => !_loaded);
 
-            Session.Account.Characters.CollectionChanged += SyncViewModel;
+            Game.Account.Characters.CollectionChanged += SyncViewModel;
 
             LoadCharacters();
 
-            Session.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
+            Game.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
 
-            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Session.Account.Characters,
+            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Game.Account.Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Session.Account.Characters,
+            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Game.Account.Characters,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
@@ -230,7 +230,7 @@ namespace TCC.ViewModels
         public void SaveCharacters()
         {
             //SaveCharDoc(CharactersXmlParser.BuildCharacterFile(Characters));
-            var json = JsonConvert.SerializeObject(Session.Account, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(Game.Account, Formatting.Indented);
             File.WriteAllText(Path.Combine(App.ResourcesPath, "config/characters.json"), json);
             if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
                 File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml"));
@@ -241,11 +241,11 @@ namespace TCC.ViewModels
             try
             {
                 if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
-                    new CharactersXmlParser().Read(Session.Account.Characters);
+                    new CharactersXmlParser().Read(Game.Account.Characters);
                 else
                 {
                     if (!File.Exists(Path.Combine(App.ResourcesPath, "config/characters.json"))) return;
-                    Session.Account =
+                    Game.Account =
                         JsonConvert.DeserializeObject<Account>(
                             File.ReadAllText(Path.Combine(App.ResourcesPath, "config/characters.json")));
                 }
@@ -265,7 +265,7 @@ namespace TCC.ViewModels
         public void SetLoggedIn(uint id)
         {
             _discardFirstVanguardPacket = true;
-            Session.Account.Characters.ToList().ForEach(x => x.IsLoggedIn = x.Id == id);
+            Game.Account.Characters.ToList().ForEach(x => x.IsLoggedIn = x.Id == id);
         }
         public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
@@ -274,7 +274,7 @@ namespace TCC.ViewModels
         }
         public void SetDungeons(uint charId, Dictionary<uint, short> dungeonCooldowns)
         {
-            Session.Account.Characters.FirstOrDefault(x => x.Id == charId)?.DungeonInfo.UpdateEntries(dungeonCooldowns);
+            Game.Account.Characters.FirstOrDefault(x => x.Id == charId)?.DungeonInfo.UpdateEntries(dungeonCooldowns);
 
         }
         public void SetVanguard(int weeklyDone, int dailyDone, int vanguardCredits)
@@ -381,7 +381,7 @@ namespace TCC.ViewModels
         private void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)
         {
             if (m.Failed) return;
-            if (m.PlayerId != Session.Me.PlayerId) return;
+            if (m.PlayerId != Game.Me.PlayerId) return;
             foreach (var dg in m.DungeonClears)
             {
                 CurrentCharacter.DungeonInfo.UpdateClears(dg.Key, dg.Value);
@@ -414,7 +414,7 @@ namespace TCC.ViewModels
             UpdateBuffs();
             foreach (var item in m.CharacterList)
             {
-                var ch = Session.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
+                var ch = Game.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
                 if (ch != null)
                 {
                     ch.Name = item.Name;
@@ -424,11 +424,11 @@ namespace TCC.ViewModels
                     ch.Level = item.Level;
                     ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
                     ch.LastOnline = item.LastOnline;
-                    ch.ServerName = Session.Server.Name;
+                    ch.ServerName = Game.Server.Name;
                 }
                 else
                 {
-                    Session.Account.Characters.Add(new Character(item));
+                    Game.Account.Characters.Add(new Character(item));
                 }
             }
 
@@ -448,7 +448,7 @@ namespace TCC.ViewModels
         }
         private void OnNpcGuildList(S_NPCGUILD_LIST m)
         {
-            if (!Session.IsMe(m.UserId)) return;
+            if (!Game.IsMe(m.UserId)) return;
             m.NpcGuildList.Keys.ToList()
                 .ForEach(k =>
                 {
@@ -492,7 +492,7 @@ namespace TCC.ViewModels
                 return;
             }
             LoadEventFile(today, region);
-            if (Session.Logged) TimeManager.Instance.SetGuildBamTime(false);
+            if (Game.Logged) TimeManager.Instance.SetGuildBamTime(false);
 
         }
         public void ClearEvents()
@@ -667,9 +667,9 @@ namespace TCC.ViewModels
 
         public void UpdateBuffs()
         {
-            if (!Session.Logged) return;
+            if (!Game.Logged) return;
             CurrentCharacter.Buffs.Clear();
-            Session.Me.Buffs.ToList().ForEach(b =>
+            Game.Me.Buffs.ToList().ForEach(b =>
             {
                 //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
                 /*if (existing == null)*/
@@ -681,7 +681,7 @@ namespace TCC.ViewModels
                 //    existing.Stacks = b.Stacks;
                 //}
             });
-            Session.Me.Debuffs.ToList().ForEach(b =>
+            Game.Me.Debuffs.ToList().ForEach(b =>
             {
                 //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
                 /*if (existing == null)*/
@@ -733,19 +733,19 @@ namespace TCC.ViewModels
 
         public void ResetDailyData()
         {
-            Session.Account.Characters.ToList().ForEach(ch => ch.ResetDailyData());
+            Game.Account.Characters.ToList().ForEach(ch => ch.ResetDailyData());
             ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
         }
 
         public void ResetWeeklyDungeons()
         {
-            Session.Account.Characters.ToSyncList().ForEach(ch => ch.DungeonInfo.ResetAll(ResetMode.Weekly));
+            Game.Account.Characters.ToSyncList().ForEach(ch => ch.DungeonInfo.ResetAll(ResetMode.Weekly));
             ChatWindowManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
         }
 
         public void ResetVanguardWeekly()
         {
-            Session.Account.Characters.ToList().ForEach(ch => ch.VanguardInfo.WeekliesDone = 0);
+            Game.Account.Characters.ToList().ForEach(ch => ch.VanguardInfo.WeekliesDone = 0);
             ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
         }
 
@@ -754,7 +754,7 @@ namespace TCC.ViewModels
             _columns.Clear();
             Task.Factory.StartNew(() =>
             {
-                Session.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
+                Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
                 {
                     App.BaseDispatcher.BeginInvoke(new Action(() =>
                     {

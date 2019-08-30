@@ -10,7 +10,7 @@ namespace TCC.Data.Map
         public uint Section { get; }
 
         [JsonIgnore]
-        public string SectionName => Session.DB.GetSectionName(Guard, Section);
+        public string SectionName => Game.DB.GetSectionName(Guard, Section);
 
         [JsonIgnore]
         public Point Position { get; }

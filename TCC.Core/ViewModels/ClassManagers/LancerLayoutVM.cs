@@ -9,7 +9,7 @@ namespace TCC.ViewModels
         public LancerLayoutVM()
         {
             LH = new LancerLineHeldTracker();
-            Session.Me.Death += OnDeath;
+            Game.Me.Death += OnDeath;
         }
 
         
@@ -47,9 +47,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            Session.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
-            Session.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
-            Session.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
+            Game.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            Game.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
+            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
             GuardianShout = new DurationCooldownIndicator(Dispatcher)
             {

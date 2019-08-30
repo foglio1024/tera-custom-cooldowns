@@ -43,14 +43,14 @@ namespace TCC.Windows
         public void LoadItems()
         {
             var totalItemsAmount = 0;
-            foreach (var ch in Session.Account.Characters.Where(c => !c.Hidden))
+            foreach (var ch in Game.Account.Characters.Where(c => !c.Hidden))
             {
                 totalItemsAmount += ch.Inventory.Count;
             }
             var itemsParsed = 0;
             Task.Factory.StartNew(() =>
             {
-                Session.Account.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
+                Game.Account.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
                 {
                     Dispatcher.BeginInvoke(new Action(() =>
                     {

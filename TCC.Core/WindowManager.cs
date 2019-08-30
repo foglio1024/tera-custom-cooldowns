@@ -350,7 +350,7 @@ namespace TCC
             var charWindowThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                Session.Me = new Player();
+                Game.Me = new Player();
                 CharacterWindow = new CharacterWindow(ViewModels.Character);
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 CharacterWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());

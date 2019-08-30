@@ -172,7 +172,7 @@ namespace TCC.Windows
         private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((sender as FrameworkElement)?.DataContext is User dc)
-                ProxyInterface.Instance.Stub.AskInteractive(Session.Me.ServerId, dc.Name);//ProxyOld.AskInteractive(SessionManager.CurrentPlayer.ServerId, dc.Name);
+                ProxyInterface.Instance.Stub.AskInteractive(Game.Me.ServerId, dc.Name);//ProxyOld.AskInteractive(SessionManager.CurrentPlayer.ServerId, dc.Name);
         }
 
         private void CreateMessageBtn_Click(object sender, RoutedEventArgs e)

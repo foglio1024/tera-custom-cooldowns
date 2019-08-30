@@ -116,7 +116,7 @@ namespace TCC.ViewModels.Widgets
         private void UpdateSkillCooldown(uint skillId, uint cooldown)
         {
             if (!App.Settings.ClassWindowSettings.Enabled) return;
-            if (!Session.DB.SkillsDatabase.TryGetSkill(skillId, Session.Me.Class, out var skill)) return;
+            if (!Game.DB.SkillsDatabase.TryGetSkill(skillId, Game.Me.Class, out var skill)) return;
             CurrentManager.StartSpecialSkill(new Cooldown(skill, cooldown));
         }
 
@@ -161,15 +161,15 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            AbnormalityManager.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {

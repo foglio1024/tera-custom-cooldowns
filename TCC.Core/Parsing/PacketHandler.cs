@@ -869,13 +869,13 @@ namespace TCC.Parsing
         public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
-            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             switch (p.Type)
             {
                 case S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce:
-                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : Session.DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
-                    var zone = Session.DB.RegionsDatabase.GetZoneName(p.ZoneId);
-                    var name = Session.DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
+                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : Game.DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
+                    var zone = Game.DB.RegionsDatabase.GetZoneName(p.ZoneId);
+                    var name = Game.DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
                     var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
                     break;
@@ -886,8 +886,8 @@ namespace TCC.Parsing
         public static void HandleChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
         {
             const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
-            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Session.GetGuildMemberName(obj.PlayerId)}", m, opcode);
+            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Game.GetGuildMemberName(obj.PlayerId)}", m, opcode);
         }
         public static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
@@ -897,14 +897,14 @@ namespace TCC.Parsing
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = Session.DB.RegionsDatabase.Names[Session.DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+                areaName = Game.DB.RegionsDatabase.Names[Game.DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
             }
             catch (Exception)
             {
                 // ignored
             }
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
-            Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
+            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
 
             SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
         }
@@ -912,7 +912,7 @@ namespace TCC.Parsing
         {
             var opcodeName = "SMT_FRIEND_IS_CONNECTED";
             if (!x.Online) return;
-            if (Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+            if (Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
             {
                 SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
             }
@@ -920,18 +920,18 @@ namespace TCC.Parsing
         public static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
             //TODO: do it the same way as other client sysmsgs
-            if (!Session.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
+            if (!Game.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
             var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(sysMsg);
         }
         public static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
-            Session.DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
+            Game.DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
             WindowManager.FloatingButton.TooltipInfo.Name = x.Name;
             WindowManager.FloatingButton.TooltipInfo.Info = m.Name;
             WindowManager.FloatingButton.TooltipInfo.Level = (int)x.Level;
             WindowManager.FloatingButton.TooltipInfo.SetInfo(x.Model);
-            if (x.Name == Session.Me.Name)
+            if (x.Name == Game.Me.Name)
             {
                 WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = false;
                 WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = false;
@@ -952,7 +952,7 @@ namespace TCC.Parsing
                 var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+                if (Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
                 {
                     var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
                     ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -972,7 +972,7 @@ namespace TCC.Parsing
                 var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (Session.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
+                if (Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
                 {
                     SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
                 }
@@ -990,7 +990,7 @@ namespace TCC.Parsing
         }
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
-            if (p.EntityId == EntityManager.FoglioEid) AbnormalityManager.EndAbnormality(Session.Me.EntityId, 10241024);
+            if (p.EntityId == EntityManager.FoglioEid) Game.Me.EndAbnormality(10241024); //AbnormalityUtils.EndAbnormality(Game.Me.EntityId, 10241024);
             EntityManager.DepawnUser(p.EntityId);
         }
         #endregion

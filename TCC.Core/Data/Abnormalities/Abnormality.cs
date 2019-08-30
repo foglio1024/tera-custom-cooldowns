@@ -7,6 +7,10 @@
         public string Name { get; set; }
         public string ToolTip { get; set; }
         public bool IsBuff { get; set; }
+
+        public bool IsDebuff => Type == AbnormalityType.DOT ||
+                               Type == AbnormalityType.Stun ||
+                               Type == AbnormalityType.Debuff;
         public bool IsShow { get; set; }
         public bool Infinity { get; set; }
         public AbnormalityType Type { get; set; }

@@ -19,7 +19,7 @@ using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC
 {
-    public static class Session
+    public static class Game
     {
         private static bool _logged;
         private static bool _loadingScreen = true;
@@ -202,7 +202,7 @@ namespace TCC
                 TimeManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
                 TimeManager.Instance.SetGuildBamTime(false);
                 InitDatabases(App.Settings.LastLanguage);
-                AbnormalityManager.SetAbnormalityTracker(m.CharacterClass);
+                AbnormalityUtils.SetAbnormalityTracker(m.CharacterClass);
                 WindowManager.FloatingButton.SetMoongourdButtonVisibility(); //TODO: do this via vm, need to refactor it first
 
 
@@ -255,18 +255,9 @@ namespace TCC
 
             // abnormality
 
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(p =>
-            {
-                if (IsMe(p.TargetId)) FlyingGuardianDataProvider.HandleAbnormal(p);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(p =>
-            {
-                if (IsMe(p.TargetId)) FlyingGuardianDataProvider.HandleAbnormal(p);
-            });
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(p =>
-            {
-                if (IsMe(p.TargetId)) FlyingGuardianDataProvider.HandleAbnormal(p);
-            });
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
 
             // guardian
             PacketAnalyzer.NewProcessor.Hook<S_FIELD_EVENT_ON_ENTER>(p =>
@@ -328,7 +319,8 @@ namespace TCC
                     WindowManager.ForegroundManager.RefreshDim();
                     if (!App.FI) return;
                     var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
-                    AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
+                    Me.UpdateAbnormality(ab, int.MaxValue, 1);
+                    //AbnormalityUtils.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
                     var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
                     var msg = $"@0\vAbnormalName\v{ab.Name}";
                     SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
@@ -354,7 +346,7 @@ namespace TCC
                         if (CivilUnrestZone) break;
                         EntityManager.FoglioEid = p.EntityId;
                         var ab = DB.AbnormalityDatabase.Abnormalities[10241024];
-                        AbnormalityManager.BeginAbnormality(ab.Id, Me.EntityId, 0, Int32.MaxValue, 1);
+                        Me.UpdateAbnormality(ab, int.MaxValue, 1);
                         var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
                         var msg = $"@0\vAbnormalName\v{ab.Name}";
                         SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
@@ -368,6 +360,35 @@ namespace TCC
             PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
 
         }
+
+        private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+        {
+            if (!IsMe(p.TargetId)) return;
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (p.Duration == int.MaxValue) ab.Infinity = true;
+            Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
+            FlyingGuardianDataProvider.HandleAbnormal(p);
+
+            //AbnormalityUtils.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
+        }
+        private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+        {
+            if (!IsMe(p.TargetId)) return;
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (p.Duration == int.MaxValue) ab.Infinity = true;
+            Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
+            FlyingGuardianDataProvider.HandleAbnormal(p);
+            //AbnormalityUtils.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
+        }
+        private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
+        {
+            if (!IsMe(p.TargetId)) return;
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            FlyingGuardianDataProvider.HandleAbnormal(p);
+            Me.EndAbnormality(ab);
+            //AbnormalityUtils.EndAbnormality(p.TargetId, p.AbnormalityId);
+        }
+
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
             App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));

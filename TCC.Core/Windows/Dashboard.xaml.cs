@@ -26,7 +26,7 @@ namespace TCC.Windows
             VM = DataContext as DashboardViewModel;
             Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
             Showed += () => VM.UpdateBuffs();
-            Hidden += () => Session.DB.DungeonDatabase.SaveCustomDefs();
+            Hidden += () => Game.DB.DungeonDatabase.SaveCustomDefs();
             //MouseLeftButtonDown += (_, __) => MenuPopup.IsOpen = false;
         }
 

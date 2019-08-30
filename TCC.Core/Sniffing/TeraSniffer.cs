@@ -49,7 +49,7 @@ namespace TCC.Sniffing
 
         public TeraSniffer()
         {
-            _serversByIp = Session.DB.ServerDatabase.GetServersByIp();
+            _serversByIp = Game.DB.ServerDatabase.GetServersByIp();
 
             if (App.Settings.Npcap || App.Settings.CaptureMode == CaptureMode.Npcap)
             {

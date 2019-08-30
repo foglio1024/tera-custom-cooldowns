@@ -209,7 +209,7 @@ namespace TCC.Windows
                     else FocusManager.MakeClickThru(Handle);
                     break;
                 case ClickThruMode.GameDriven:
-                    if (Session.InGameUiOn) FocusManager.UndoClickThru(Handle);
+                    if (Game.InGameUiOn) FocusManager.UndoClickThru(Handle);
                     else FocusManager.MakeClickThru(Handle);
                     break;
                 default:

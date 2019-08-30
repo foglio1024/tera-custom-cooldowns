@@ -27,13 +27,13 @@ namespace TCC
 
         public ForegroundManager()
         {
-            Session.LoadingScreenChanged += NotifyVisibilityChanged;
-            Session.LoggedChanged += NotifyVisibilityChanged;
-            Session.EncounterChanged += NotifyDimChanged;
-            Session.GameUiModeChanged += OnGameUiModeChanged;
+            Game.LoadingScreenChanged += NotifyVisibilityChanged;
+            Game.LoggedChanged += NotifyVisibilityChanged;
+            Game.EncounterChanged += NotifyDimChanged;
+            Game.GameUiModeChanged += OnGameUiModeChanged;
 
             FocusManager.ForegroundChanged += NotifyVisibilityChanged;
-            Session.SkillStarted += OnSkillStarted;
+            Game.SkillStarted += OnSkillStarted;
 
             _dimTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             _dimTimer.Tick += (_, __) =>
@@ -71,11 +71,11 @@ namespace TCC
 
 
         public bool Dim => !_dimTimer.IsEnabled &&
-                                !Session.Encounter &&
+                                !Game.Encounter &&
                                 !ForceUndim;
 
-        public bool Visible => Session.Logged &&
-                               !Session.LoadingScreen &&
+        public bool Visible => Game.Logged &&
+                               !Game.LoadingScreen &&
                                 FocusManager.IsForeground ||
                                 _forceVisible;
 

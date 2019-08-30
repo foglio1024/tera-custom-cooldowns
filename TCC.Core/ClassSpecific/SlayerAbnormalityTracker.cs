@@ -12,17 +12,17 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckInColdBlood(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckInColdBlood(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckInColdBlood(p);
         }
 

@@ -68,10 +68,10 @@ namespace TCC.Windows
 
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
-            Session.Me.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
-            WindowManager.ViewModels.Class.CurrentClass = Session.Me.Class;
+            Game.Me.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
+            WindowManager.ViewModels.Class.CurrentClass = Game.Me.Class;
             WindowManager.ViewModels.Cooldowns.ClearSkills();
-            WindowManager.ViewModels.Cooldowns.LoadSkills(Session.Me.Class);
+            WindowManager.ViewModels.Cooldowns.LoadSkills(Game.Me.Class);
         }
 
         private void SetSorcElement(object sender, RoutedEventArgs e)
@@ -82,13 +82,13 @@ namespace TCC.Windows
             var ice = el == "Ice";
             var arc = el == "Arcane";
 
-            var currFire = Session.Me.Fire;
-            var currIce = Session.Me.Ice;
-            var currArc = Session.Me.Arcane;
+            var currFire = Game.Me.Fire;
+            var currIce = Game.Me.Ice;
+            var currArc = Game.Me.Arcane;
 
-            if (fire) Session.SetSorcererElements(!currFire, currIce, currArc);
-            if (ice) Session.SetSorcererElements(currFire, !currIce, currArc);
-            if (arc) Session.SetSorcererElements(currFire, currIce, !currArc);
+            if (fire) Game.SetSorcererElements(!currFire, currIce, currArc);
+            if (ice) Game.SetSorcererElements(currFire, !currIce, currArc);
+            if (arc) Game.SetSorcererElements(currFire, currIce, !currArc);
         }
 
         private void SetSorcElementBoost(object sender, RoutedEventArgs e)
@@ -99,13 +99,13 @@ namespace TCC.Windows
             var ice = el == "Ice";
             var arc = el == "Arcane";
 
-            var currFire = Session.Me.FireBoost;
-            var currIce = Session.Me.IceBoost;
-            var currArc = Session.Me.ArcaneBoost;
+            var currFire = Game.Me.FireBoost;
+            var currIce = Game.Me.IceBoost;
+            var currArc = Game.Me.ArcaneBoost;
 
-            if (fire) Session.SetSorcererElementsBoost(!currFire, currIce, currArc);
-            if (ice) Session.SetSorcererElementsBoost(currFire, !currIce, currArc);
-            if (arc) Session.SetSorcererElementsBoost(currFire, currIce, !currArc);
+            if (fire) Game.SetSorcererElementsBoost(!currFire, currIce, currArc);
+            if (ice) Game.SetSorcererElementsBoost(currFire, !currIce, currArc);
+            if (arc) Game.SetSorcererElementsBoost(currFire, currIce, !currArc);
 
 
         }
@@ -157,8 +157,8 @@ namespace TCC.Windows
             //i = 0;
             //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
 
-            Session.Account.Characters[0].VanguardInfo.DailiesDone = App.Random.Next(0, 16);
-            Session.Account.Characters[0].VanguardInfo.WeekliesDone = App.Random.Next(0, 16);
+            Game.Account.Characters[0].VanguardInfo.DailiesDone = App.Random.Next(0, 16);
+            Game.Account.Characters[0].VanguardInfo.WeekliesDone = App.Random.Next(0, 16);
         }
     }
 }

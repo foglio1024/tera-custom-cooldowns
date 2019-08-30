@@ -31,7 +31,7 @@ namespace TCC.ClassSpecific
 
         public SorcererAbnormalityTracker()
         {
-            if (Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
+            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
             {
                 _fireIceFusion = new Skill(ab, Class.Sorcerer);
             }
@@ -58,37 +58,37 @@ namespace TCC.ClassSpecific
         {
             if (FlameFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(true, false, false);
+                Game.SetSorcererElementsBoost(true, false, false);
             }
             else if (FrostFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(false, true, false);
+                Game.SetSorcererElementsBoost(false, true, false);
             }
             else if (ArcaneFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(false, false, true);
+                Game.SetSorcererElementsBoost(false, false, true);
             }
         }
         private static void CheckFusionBoost(S_ABNORMALITY_REFRESH p)
         {
             if (FlameFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(true, false, false);
+                Game.SetSorcererElementsBoost(true, false, false);
             }
             else if (FrostFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(false, true, false);
+                Game.SetSorcererElementsBoost(false, true, false);
             }
             else if (ArcaneFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(false, false, true);
+                Game.SetSorcererElementsBoost(false, false, true);
             }
         }
         private static void CheckFusionBoost(S_ABNORMALITY_END p)
         {
             if (FlameFusionIncreaseId == p.AbnormalityId || FrostFusionIncreaseId == p.AbnormalityId || ArcaneFusionIncreaseId == p.AbnormalityId)
             {
-                Session.SetSorcererElementsBoost(false, false, false);
+                Game.SetSorcererElementsBoost(false, false, false);
             }
         }
         private static void CheckFusions(S_ABNORMALITY_BEGIN p)
@@ -124,20 +124,20 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckFusions(p);
             CheckManaBoost(p);
             CheckFusionBoost(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckManaBoost(p);
             CheckFusionBoost(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckManaBoost(p);
             CheckFusionBoost(p);
             CheckFusions(p);

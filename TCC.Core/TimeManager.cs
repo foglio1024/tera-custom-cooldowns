@@ -126,7 +126,7 @@ namespace TCC
             {
                 var sb = new StringBuilder(BaseUrl);
                 sb.Append("?srv=");
-                sb.Append(Session.Server.ServerId);
+                sb.Append(Game.Server.ServerId);
                 sb.Append("&reg=");
                 sb.Append(CurrentRegion);
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -152,7 +152,7 @@ namespace TCC
         {
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
-            sb.Append(Session.Server.ServerId);
+            sb.Append(Game.Server.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             sb.Append("&post");

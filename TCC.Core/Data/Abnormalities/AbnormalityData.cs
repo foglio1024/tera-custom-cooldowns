@@ -8,6 +8,6 @@ namespace TCC.Data.Abnormalities
         public int Stacks { get; set; }
         public ulong Duration { get; set; }
         [JsonIgnore]
-        public Abnormality Abnormality => Session.DB.AbnormalityDatabase.Abnormalities[Id];
+        public Abnormality Abnormality => Game.DB.AbnormalityDatabase.Abnormalities[Id];
     }
 }

@@ -54,7 +54,7 @@ namespace TCC.ViewModels.Widgets
     [TccModule]
     public class CivilUnrestViewModel : TccWindowViewModel
     {
-        public bool CivilUnrest => Session.CivilUnrestZone;
+        public bool CivilUnrest => Game.CivilUnrestZone;
         private readonly SynchronizedObservableCollection<CivilUnrestGuild> _guilds;
 
         public ICollectionViewLiveShaping Guilds
@@ -104,7 +104,7 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
-            Session.Teleported += NotifyTeleported;
+            Game.Teleported += NotifyTeleported;
             PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
             PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
             PacketAnalyzer.NewProcessor.Hook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
@@ -112,7 +112,7 @@ namespace TCC.ViewModels.Widgets
 
         protected override void RemoveHooks()
         {
-            Session.Teleported -= NotifyTeleported;
+            Game.Teleported -= NotifyTeleported;
             PacketAnalyzer.NewProcessor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
             PacketAnalyzer.NewProcessor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
             PacketAnalyzer.NewProcessor.Unhook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);

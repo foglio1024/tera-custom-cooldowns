@@ -18,13 +18,13 @@ namespace TCC.ClassSpecific
 
         public ReaperAbnormalityTracker()
         {
-            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", Session.Me.Class, out _deathSpiral);
-            Session.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", Session.Me.Class, out _shadowStep);
+            Game.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", Game.Me.Class, out _deathSpiral);
+            Game.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", Game.Me.Class, out _shadowStep);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckShadowReaping(p);
             CheckShadowStep(p);
             CheckDeathSpiral(p);
@@ -32,14 +32,14 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckShadowReaping(p);
             CheckAssassinate(p);
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckShadowReaping(p);
             CheckAssassinate(p);
 

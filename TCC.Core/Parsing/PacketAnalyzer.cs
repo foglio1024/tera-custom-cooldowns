@@ -43,7 +43,7 @@ namespace TCC.Parsing
             Sniffer.EndConnection += OnEndConnection;
             Sniffer.MessageReceived += EnqueuePacket;
 
-            Session.Server = new Server("", "", "", 0);
+            Game.Server = new Server("", "", "", 0);
             ProcessorReady += InstallHooks;
 
             Factory = new MessageFactory();
@@ -97,7 +97,7 @@ namespace TCC.Parsing
         }
         private static void OnNewConnection(Server srv)
         {
-            Session.Server = srv;
+            Game.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
@@ -115,13 +115,13 @@ namespace TCC.Parsing
             WindowManager.ViewModels.Group.ClearAllAbnormalities();
             WindowManager.ViewModels.Dashboard.UpdateBuffs();
             WindowManager.ViewModels.Dashboard.SaveCharacters();
-            Session.Me.ClearAbnormalities();
+            Game.Me.ClearAbnormalities();
             EntityManager.ClearNPC();
             WindowManager.ViewModels.Cooldowns.ClearSkills(); // TODO: hook connection to these too
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
             ProxyInterface.Instance.Disconnect();
-            Session.Logged = false;
-            Session.LoadingScreen = true;
+            Game.Logged = false;
+            Game.LoadingScreen = true;
 
             if (App.ToolboxMode && UpdateManager.UpdateAvailable) App.Close();
         }

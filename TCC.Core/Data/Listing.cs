@@ -161,8 +161,8 @@ namespace TCC.Data
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                IsMyLfg = Players.Any(x => x.PlayerId == Session.Me.PlayerId) ||
-                    LeaderId == Session.Me.PlayerId ||
+                IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) ||
+                    LeaderId == Game.Me.PlayerId ||
                     WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
             }), DispatcherPriority.DataBind);
         }

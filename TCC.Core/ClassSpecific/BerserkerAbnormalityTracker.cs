@@ -20,7 +20,7 @@ namespace TCC.ClassSpecific
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
@@ -39,7 +39,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckUnleashAbnormals(p);
 
             if (p.AbnormalityId == BloodlustId)
@@ -59,7 +59,7 @@ namespace TCC.ClassSpecific
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckUnleashAbnormals(p);
             if (p.AbnormalityId == BloodlustId)
             {
@@ -81,30 +81,30 @@ namespace TCC.ClassSpecific
         {
             if(TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
-                if (p.AbnormalityId == SinisterKR && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == SinisterKR && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == DexterKR && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == DexterKR && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Rampage && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
-                if (p.AbnormalityId == Sinister && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Sinister && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Dexter && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Dexter && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Rampage && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
@@ -114,30 +114,30 @@ namespace TCC.ClassSpecific
         {
             if (TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
-                if (p.AbnormalityId == SinisterKR && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == SinisterKR && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == DexterKR && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == DexterKR && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Rampage && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }
             }
             else
             {
-                if (p.AbnormalityId == Sinister && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Sinister && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Dexter && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Dexter && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
                 }
-                if (p.AbnormalityId == Rampage && Session.IsMe(p.TargetId))
+                if (p.AbnormalityId == Rampage && Game.IsMe(p.TargetId))
                 {
                     TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
                 }

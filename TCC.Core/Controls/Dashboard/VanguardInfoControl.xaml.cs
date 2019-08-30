@@ -75,7 +75,7 @@ namespace TCC.Controls.Dashboard
         }
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {
-            Session.Account.Characters.Remove((Character)DataContext);
+            Game.Account.Characters.Remove((Character)DataContext);
         }
 
         //private bool _animDown = true;

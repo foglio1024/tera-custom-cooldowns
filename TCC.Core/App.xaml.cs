@@ -95,7 +95,7 @@ namespace TCC
 
             SplashScreen.SetText("Pre-loading databases...");
             UpdateManager.CheckDatabaseHash();
-            await Session.InitAsync();
+            await Game.InitAsync();
 
             SplashScreen.SetText("Initializing packet processor...");
             WindowManager.Init();

@@ -68,9 +68,9 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == Session.Me.PlayerId
-                                                                                              || listing.LeaderName == Session.Me.Name
-                                                                                              || listing.Players.ToSyncList().Any(player => player.PlayerId == Session.Me.PlayerId)
+        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == Game.Me.PlayerId
+                                                                                              || listing.LeaderName == Game.Me.Name
+                                                                                              || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
                                                                                               || WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
         public void NotifyMyLfg()
         {
@@ -83,8 +83,8 @@ namespace TCC.ViewModels
             MyLfg?.UpdateIsMyLfg();
         }
         public bool AmILeader => WindowManager.ViewModels.Group.AmILeader;
-        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Session.Me.PlayerId)
-                                                                   || listing.LeaderId == Session.Me.PlayerId
+        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
+                                                                   || listing.LeaderId == Game.Me.PlayerId
                                                                    || WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
 
@@ -106,7 +106,7 @@ namespace TCC.ViewModels
 
         private void OnAutoPublicizeTimerTick(object sender, EventArgs e)
         {
-            if (Session.IsInDungeon || !AmIinLfg) _stopAuto = true;
+            if (Game.IsInDungeon || !AmIinLfg) _stopAuto = true;
 
             if (_stopAuto)
             {
@@ -131,7 +131,7 @@ namespace TCC.ViewModels
 
         private void Publicize(object obj)
         {
-            if (Session.IsInDungeon) return;
+            if (Game.IsInDungeon) return;
             PublicizeTimer.Start();
             N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
             if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
@@ -167,9 +167,9 @@ namespace TCC.ViewModels
         private bool CanToggleAutoPublicize(object arg)
         {
             return /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable &&
-                   !Session.LoadingScreen &&
-                   Session.Logged &&
-                   !Session.IsInDungeon;
+                   !Game.LoadingScreen &&
+                   Game.Logged &&
+                   !Game.IsInDungeon;
         }
 
 
@@ -192,7 +192,7 @@ namespace TCC.ViewModels
 
         public void EnqueueRequest(uint id)
         {
-            if ((Session.IsInDungeon || Session.CivilUnrestZone) && Session.Combat) return;
+            if ((Game.IsInDungeon || Game.CivilUnrestZone) && Game.Combat) return;
             Dispatcher.Invoke(() =>
             {
                 if (RequestQueue.Count > 0 && RequestQueue.Last() == id) return;
@@ -342,7 +342,7 @@ namespace TCC.ViewModels
                     if (target == null) return;
                     target.IsLeader = member.IsLeader;
                     target.Online = member.Online;
-                    target.Location = Session.DB.GetSectionName(member.GuardId, member.SectionId);
+                    target.Location = Game.DB.GetSectionName(member.GuardId, member.SectionId);
                 }
                 else
                     lfg.Players.Add(new User(member));
@@ -375,7 +375,7 @@ namespace TCC.ViewModels
         {
             if (_lastGroupSize == 0) NotifyMyLfg();
             _lastGroupSize = m.Members.Count;
-            if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled || !Session.InGameUiOn) return;
+            if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled || !Game.InGameUiOn) return;
             ProxyInterface.Instance.Stub.RequestListingCandidates();
             if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
             ProxyInterface.Instance.Stub.RequestListings();

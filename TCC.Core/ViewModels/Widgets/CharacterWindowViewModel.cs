@@ -12,7 +12,7 @@ namespace TCC.ViewModels.Widgets
     [TccModule]
     public class CharacterWindowViewModel : TccWindowViewModel
     {
-        public Player Player => Session.Me;
+        public Player Player => Game.Me;
         public bool CompactMode => App.Settings.CharacterWindowSettings.CompactMode;
         public bool ShowRe =>
             (!App.Settings.ClassWindowSettings.Visible || !App.Settings.ClassWindowSettings.Enabled) &&
@@ -25,7 +25,7 @@ namespace TCC.ViewModels.Widgets
 
         public CharacterWindowViewModel(WindowSettings settings) : base(settings)
         {
-            Session.Me.PropertyChanged += MePropertyChanged;
+            Game.Me.PropertyChanged += MePropertyChanged;
             App.Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
             App.Settings.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
         }
@@ -74,20 +74,20 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnPlayerChangeMp(S_PLAYER_CHANGE_MP m)
         {
-            if (!Session.IsMe(m.Target)) return;
+            if (!Game.IsMe(m.Target)) return;
             Player.MaxMP = m.MaxMP;
             Player.CurrentMP = m.CurrentMP;
         }
         private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
-            if (!Session.IsMe(m.Target)) return;
+            if (!Game.IsMe(m.Target)) return;
             Player.MaxHP = m.MaxHP;
             Player.CurrentHP = m.CurrentHP;
         }
         private void OnAbnormalityDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
         {
             // todo: add chat message too
-            if (!Session.IsMe(p.Target) || Player.CurrentShield < 0) return;
+            if (!Game.IsMe(p.Target) || Player.CurrentShield < 0) return;
             Player.DamageShield(p.Damage);
         }
         private void OnGetUserList(S_GET_USER_LIST m)
@@ -96,7 +96,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnCreatureLife(S_CREATURE_LIFE m)
         {
-            if (!Session.IsMe(m.Target)) return;
+            if (!Game.IsMe(m.Target)) return;
             Player.IsAlive = m.Alive;
         }
         private void OnLoadTopo(S_LOAD_TOPO m)

@@ -57,7 +57,7 @@ namespace TCC.Data
             }
         }
         [JsonIgnore]
-        public Dungeon Dungeon => Session.DB.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
+        public Dungeon Dungeon => Game.DB.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
             ? dg
             : new Dungeon(0, "");
         [JsonIgnore]

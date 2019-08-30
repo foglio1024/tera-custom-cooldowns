@@ -456,7 +456,20 @@
                  Opacity=".5"
                      Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                      />
-
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ToolboxSystemAuthorTemplate" DataType="chat:ChatMessage">
+        <Grid>
+            <Rectangle Width="7"
+                       Height="7"
+                       Margin="3 5 3 0"
+                       RenderTransformOrigin=".5 .5"
+                       RenderTransform="{StaticResource Rotate45}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Opacity=".5"
+                       Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
+            />
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="LfgTemplate">

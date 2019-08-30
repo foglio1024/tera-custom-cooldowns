@@ -94,9 +94,9 @@
             }
         }
 
-        public int MaxEntries => MaxBaseRuns * (Session.Account.IsElite && DoublesOnElite ? 2 : 1);
+        public int MaxEntries => MaxBaseRuns * (Game.Account.IsElite && DoublesOnElite ? 2 : 1);
         public string IconName { get; set; }
-        public string Region => Session.DB.GetDungeonGuardName(Id);
+        public string Region => Game.DB.GetDungeonGuardName(Id);
         public bool HasDef { get; set; }
         public Dungeon(uint id, string name)
         {

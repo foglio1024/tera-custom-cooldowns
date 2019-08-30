@@ -19,9 +19,9 @@ namespace TCC.Windows.Widgets
             Init(App.Settings.ClassWindowSettings);
             App.Settings.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
 
-            if (!Session.Logged) return;
+            if (!Game.Logged) return;
             if (VM.CurrentManager == null)
-                VM.CurrentClass = Session.Me.Class;
+                VM.CurrentClass = Game.Me.Class;
 
         }
 
@@ -29,7 +29,7 @@ namespace TCC.Windows.Widgets
         {
             if (App.Settings.ClassWindowSettings.Enabled)
             {
-                VM.CurrentClass = Session.Me.Class;
+                VM.CurrentClass = Game.Me.Class;
             }
         }
     }

@@ -56,7 +56,7 @@ namespace TCC.Interop.Proxy
                 {
                     Log.CW($"[Server] Error while parsing request: {e}");
                     Log.F($"Error while parsing request: {e}", "http_server.log");
-                    _listening = false;
+                    //_listening = false;
                 }
             }
             _listening = false;

@@ -11,7 +11,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var loc = (Location)value;
-            if (Session.DB.MapDatabase.IsDungeon(loc))
+            if (Game.DB.MapDatabase.IsDungeon(loc))
             {
                 return Stretch.Uniform;
             }

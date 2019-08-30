@@ -29,14 +29,14 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
-            Session.DB.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
+            Game.DB.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
             EnergyStars = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(es, false),
                 Cooldown = new Cooldown(es, true) {CanFlash = true}
             };
 
-            Session.DB.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
+            Game.DB.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
             Grace = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(gr, false),
@@ -47,7 +47,7 @@ namespace TCC.ViewModels
             Grace.Buff.Ended += OnGraceBuffEnded;
 
             // Edict Of Judgment
-            Session.DB.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
+            Game.DB.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
             EdictOfJudgment = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(ed, false),
@@ -58,14 +58,14 @@ namespace TCC.ViewModels
             EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
 
             // Divine Charge
-            Session.DB.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
+            Game.DB.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
             DivineCharge = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(dc, true) {CanFlash = true}
             };
 
             // Tripple Nenesis
-            Session.DB.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
+            Game.DB.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
             TripleNemesis = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(tn, false) {CanFlash = true},

@@ -20,7 +20,7 @@ namespace TCC.ClassSpecific
 
         protected static bool CheckByIconName(uint id, string iconName)
         {
-            if (!Session.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (!Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             if (ab.Infinity) return false;
             return ab.IconName == iconName;
         }

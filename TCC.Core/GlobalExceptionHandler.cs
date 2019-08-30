@@ -86,7 +86,7 @@ namespace TCC
             return new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
-                { "id" , new JValue(Session.CurrentAccountName != null ? HashUtils.GenerateHash(Session.CurrentAccountName) : "") },
+                { "id" , new JValue(Game.CurrentAccountName != null ? HashUtils.GenerateHash(Game.CurrentAccountName) : "") },
                 { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
@@ -96,8 +96,8 @@ namespace TCC
                 { "thread_traces", await GetThreadTraces() },
                 { "inner_exception", ex.InnerException != null ? BuildInnerExceptionJObject(ex.InnerException) : null },
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
-                { "region", new JValue(Session.Server != null ? Session.Server.Region : "")},
-                { "server_id", new JValue(Session.Server != null ? Session.Server.ServerId.ToString() : "")},
+                { "region", new JValue(Game.Server != null ? Game.Server.Region : "")},
+                { "server_id", new JValue(Game.Server != null ? Game.Server.ServerId.ToString() : "")},
                 { "settings_summary", new JObject
                     {
                         { "windows", new JObject

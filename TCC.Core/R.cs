@@ -512,6 +512,7 @@ namespace TCC.R
 		public static DataTemplate EnchantChannelLabelTemplate => ((DataTemplate)App.Current.FindResource("EnchantChannelLabelTemplate"));
 		public static DataTemplate DefaultAuthorTemplate => ((DataTemplate)App.Current.FindResource("DefaultAuthorTemplate"));
 		public static DataTemplate SystemAuthorTemplate => ((DataTemplate)App.Current.FindResource("SystemAuthorTemplate"));
+		public static DataTemplate ToolboxSystemAuthorTemplate => ((DataTemplate)App.Current.FindResource("ToolboxSystemAuthorTemplate"));
 		public static DataTemplate LfgTemplate => ((DataTemplate)App.Current.FindResource("LfgTemplate"));
 		public static DataTemplate BossDataTemplate => ((DataTemplate)App.Current.FindResource("BossDataTemplate"));
 		public static DataTemplate MobDataTemplate => ((DataTemplate)App.Current.FindResource("MobDataTemplate"));

@@ -12,13 +12,13 @@ namespace TCC
 
         public static void AddSkill(uint id, ulong cd)
         {
-            if (!Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill)) return;
+            if (!Game.DB.SkillsDatabase.TryGetSkill(id, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
             RouteSkill(new Cooldown(skill, cd));
         }
         public static void AddItemSkill(uint id, uint cd)
         {
-            if (Session.DB.ItemsDatabase.TryGetItemSkill(id, out var brooch))
+            if (Game.DB.ItemsDatabase.TryGetItemSkill(id, out var brooch))
             {
                 try
                 {
@@ -44,14 +44,14 @@ namespace TCC
 
         public static void ChangeSkillCooldown(uint id, uint cd)
         {
-            if (!Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill)) return;
+            if (!Game.DB.SkillsDatabase.TryGetSkill(id, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
             WindowManager.ViewModels.Cooldowns.Change(skill, cd);
 
         }
         public static void ResetSkill(uint id)
         {
-            if (!Session.DB.SkillsDatabase.TryGetSkill(id, Session.Me.Class, out var skill)) return;
+            if (!Game.DB.SkillsDatabase.TryGetSkill(id, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
             WindowManager.ViewModels.Cooldowns.ResetSkill(skill);
         }

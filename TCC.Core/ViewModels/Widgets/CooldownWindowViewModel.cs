@@ -40,8 +40,8 @@ namespace TCC.ViewModels.Widgets
         public ICollectionViewLiveShaping ItemsView { get; set; }
         public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
         public SynchronizedObservableCollection<Skill> SkillChoiceList { get; set; }
-        public IEnumerable<Item> Items => Session.DB.ItemsDatabase.ItemSkills;
-        public IEnumerable<Abnormality> Passivities => Session.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Item> Items => Game.DB.ItemsDatabase.ItemSkills;
+        public IEnumerable<Abnormality> Passivities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
 
         private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.Class.CurrentManager;
 
@@ -225,8 +225,8 @@ namespace TCC.ViewModels.Widgets
                     var tag = sk.CooldownType.ToString();
                     root.Add(new XElement(tag, new XAttribute("id", sk.Skill.Id), new XAttribute("row", 3), new XAttribute("name", sk.Skill.ShortName)));
                 });
-                if (Session.Me.Class > (Class)12) return;
-                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(Session.Me.Class).ToLower()}-skills.xml"));
+                if (Game.Me.Class > (Class)12) return;
+                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(Game.Me.Class).ToLower()}-skills.xml"));
             }));
         }
 
@@ -541,8 +541,10 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
             PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
             PacketAnalyzer.NewProcessor.Hook<S_CREST_MESSAGE>(OnCrestMessage);
-        }
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
 
+        }
         protected override void RemoveHooks()
         {
             PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
@@ -552,7 +554,40 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
             PacketAnalyzer.NewProcessor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
             PacketAnalyzer.NewProcessor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
+            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+
         }
+
+        private void CheckPassivity(Abnormality ab, uint cd)
+        {
+            if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var cdFromDb))
+            {
+                SkillManager.AddPassivitySkill(ab.Id, cdFromDb);
+            }
+            else if (MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
+                    || SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+            {
+                //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
+                SkillManager.AddPassivitySkill(ab.Id, cd / 1000);
+            }
+
+        }
+        private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+        {
+            if (App.Settings.EthicalMode) return;
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+
+            CheckPassivity(ab, p.Duration);
+        }
+        private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+        {
+            if (App.Settings.EthicalMode) return;
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+
+            CheckPassivity(ab, p.Duration);
+        }
+
 
         private void OnLogin(S_LOGIN m)
         {

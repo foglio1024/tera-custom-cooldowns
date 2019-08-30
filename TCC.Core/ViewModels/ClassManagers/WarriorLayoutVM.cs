@@ -45,8 +45,8 @@ namespace TCC.ViewModels
             TraverseCut = new StatTracker { Max = 13, Val = 0 };
             //TempestAura = new StatTracker { Max = 50, Val = 0 };
             Stance = new StanceTracker<WarriorStance>();
-            Session.Me.Death += OnDeath;
-            Session.CombatChanged += CheckStanceWarning;
+            Game.Me.Death += OnDeath;
+            Game.CombatChanged += CheckStanceWarning;
             Stance.PropertyChanged += (_, __) => CheckStanceWarning(); // StanceTracker has only one prop
 
         }
@@ -63,13 +63,13 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
-            Session.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
             DeadlyGamble = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(dg, false),
                 Cooldown = new Cooldown(dg, true) { CanFlash = true }
             };
-            var ab = Session.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
+            var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
             Swift = new Cooldown(new Skill(ab), false);
         }
 
@@ -90,7 +90,7 @@ namespace TCC.ViewModels
 
         private void CheckStanceWarning()
         {
-            WarningStance = Stance.CurrentStance == WarriorStance.None && Session.Combat;
+            WarningStance = Stance.CurrentStance == WarriorStance.None && Game.Combat;
         }
     }
 }

@@ -201,7 +201,7 @@ namespace TCC.Parsing
             var regName = srvMsg.Split('\v')[2].Replace("@rgn:", "");
             var regId = uint.Parse(regName);
 
-            Session.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
+            Game.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
 
             TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, msg.RawMessage);
 
@@ -214,7 +214,7 @@ namespace TCC.Parsing
             var npcName = srvMsgSplit.Last().Replace("@creature:", "");
             var zoneId = uint.Parse(npcName.Split('#')[0]);
             var templateId = uint.Parse(npcName.Split('#')[1]);
-            Session.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
+            Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
             return m.Name;
         }
         private static string GetFieldBossKillerName(string srvMsg)

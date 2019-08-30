@@ -124,7 +124,7 @@ namespace TCC.Parsing
                 var resp = await ControlConnection.GetServer();
                 if (resp != 0)
                 {
-                    NewConnection?.Invoke(Session.DB.ServerDatabase.GetServer(resp));
+                    NewConnection?.Invoke(Game.DB.ServerDatabase.GetServer(resp));
                     await ControlConnection.AddHooks(PacketAnalyzer.Factory.OpcodesList);
                 }
                 var stream = client.GetStream();

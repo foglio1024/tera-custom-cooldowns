@@ -44,7 +44,7 @@ namespace TCC
             if (e.Key == App.Settings.LfgHotkey.Key && e.Modifier == App.Settings.LfgHotkey.Modifier)
             {
                 //                if (!ProxyOld.IsConnected) return;
-                if (!Session.Logged) return;
+                if (!Game.Logged) return;
 
                 if (!ProxyInterface.Instance.IsStubAvailable) return;
                 if (!WindowManager.LfgListWindow.IsVisible)
@@ -66,7 +66,7 @@ namespace TCC
             }
             else if (e.Key == Keys.K && e.Modifier == ModifierKeys.Control)
             {
-                if (!Session.Logged) return;
+                if (!Game.Logged) return;
                 WindowManager.CooldownWindow.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
@@ -75,9 +75,9 @@ namespace TCC
             }
             else if (e.Key == Keys.R && e.Modifier == (ModifierKeys.Alt | ModifierKeys.Control))
             {
-                if (!Session.Logged
-                  || Session.LoadingScreen
-                  || Session.Combat
+                if (!Game.Logged
+                  || Game.LoadingScreen
+                  || Game.Combat
                   || !ProxyInterface.Instance.IsStubAvailable
                     /*|| !ProxyOld.IsConnected*/) return;
 
@@ -113,7 +113,7 @@ namespace TCC
             {
                 // register the event that is fired after the key press.
                 Instance.KeyPressed += hook_KeyPressed;
-                Session.ChatModeChanged += CheckHotkeys;
+                Game.ChatModeChanged += CheckHotkeys;
                 FocusManager.ForegroundChanged += CheckHotkeys;
                 _isInitialized = true;
             });
@@ -126,7 +126,7 @@ namespace TCC
                 // register the event that is fired after the key press.
                 Instance.KeyPressed -= hook_KeyPressed;
                 if (_isRegistered) { ClearHotkeys(); }
-                Session.ChatModeChanged -= CheckHotkeys;
+                Game.ChatModeChanged -= CheckHotkeys;
                 FocusManager.ForegroundChanged -= CheckHotkeys;
                 _isInitialized = false;
             });
@@ -135,7 +135,7 @@ namespace TCC
         {
             WindowManager.FloatingButton.Dispatcher.BeginInvoke(new Action(() =>
             {
-                SetHotkeys(!Session.InGameChatOpen && FocusManager.IsForeground);
+                SetHotkeys(!Game.InGameChatOpen && FocusManager.IsForeground);
             }), DispatcherPriority.Background);
         }
 

@@ -123,7 +123,7 @@ namespace TCC.ViewModels.Widgets
             {
                 _bams = CollectionViewUtils.InitLiveView(
                     p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible,
-                    NpcList, 
+                    NpcList,
                     new[] { nameof(NPC.Visible) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _bams;
@@ -479,12 +479,12 @@ namespace TCC.ViewModels.Widgets
                 NpcList.Clear();
             }));
         }
-        public void EndNpcAbnormality(ulong target, Abnormality ab)
+        public void EndAbnormality(ulong target, Abnormality ab)
         {
             var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
             boss?.EndBuff(ab);
         }
-        public void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
+        public void UpdateAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == target);
             boss?.AddorRefresh(ab, duration, stacks);
@@ -597,6 +597,10 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Hook<S_SPAWN_ME>(OnSpawnMe);
             PacketAnalyzer.NewProcessor.Hook<S_SPAWN_NPC>(OnSpawnNpc);
             PacketAnalyzer.NewProcessor.Hook<S_GUILD_TOWER_INFO>(OnGuildTowerInfo);
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+
         }
 
         protected override void RemoveHooks()
@@ -614,6 +618,10 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Unhook<S_SPAWN_ME>(OnSpawnMe);
             PacketAnalyzer.NewProcessor.Unhook<S_SPAWN_NPC>(OnSpawnNpc);
             PacketAnalyzer.NewProcessor.Unhook<S_GUILD_TOWER_INFO>(OnGuildTowerInfo);
+            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+
         }
 
         private void OnGuildTowerInfo(S_GUILD_TOWER_INFO m)
@@ -658,11 +666,11 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnBossGageInfo(S_BOSS_GAGE_INFO m)
         {
-            EntityManager.UpdateNPC(m.EntityId, m.CurrentHP, m.MaxHP, (ushort) m.HuntingZoneId, (uint) m.TemplateId);
+            EntityManager.UpdateNPC(m.EntityId, m.CurrentHP, m.MaxHP, (ushort)m.HuntingZoneId, (uint)m.TemplateId);
         }
         private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
-            if (Session.IsMe(m.Target)) return;
+            if (Game.IsMe(m.Target)) return;
             EntityManager.UpdateNPC(m.Target, m.CurrentHP, m.MaxHP, m.Source);
         }
         private void OnShowHp(S_SHOW_HP m)
@@ -671,9 +679,30 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
         {
-            if (Session.IsMe(p.Target)) return;
+            if (Game.IsMe(p.Target)) return;
             UpdateShield(p.Target, p.Damage);
         }
+        private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+        {
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (p.Duration == int.MaxValue) ab.Infinity = true;
+
+
+            UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);
+        }
+        private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+        {
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (p.Duration == int.MaxValue) ab.Infinity = true;
+
+            UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);
+        }
+        private void OnAbnormalityEnd(S_ABNORMALITY_END p)
+        {
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            EndAbnormality(p.TargetId, ab);
+        }
+
 
         /*
                 public void UpdateBySkillResult(ulong target, ulong damage)

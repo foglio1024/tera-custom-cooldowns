@@ -15,11 +15,11 @@ namespace TCC.Interop
         public static async void RegisterWebhook(string webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;
-            if (string.IsNullOrEmpty(Session.CurrentAccountName)) return;
+            if (string.IsNullOrEmpty(Game.CurrentAccountName)) return;
             var req = new JObject
             {
                 {"webhook", HashUtils.GenerateHash(webhook)},
-                {"user", HashUtils.GenerateHash(Session.CurrentAccountName)},
+                {"user", HashUtils.GenerateHash(Game.CurrentAccountName)},
                 {"online", online }
             };
             using (var c = MiscUtils.GetDefaultWebClient())
@@ -45,7 +45,7 @@ namespace TCC.Interop
             var req = new JObject
             {
                 { "webhook" , HashUtils.GenerateHash(webhook)},
-                { "user", HashUtils.GenerateHash(Session.CurrentAccountName) }
+                { "user", HashUtils.GenerateHash(Game.CurrentAccountName) }
             };
             using (var c = MiscUtils.GetDefaultWebClient())
             {
@@ -89,12 +89,12 @@ namespace TCC.Interop
                     c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                     c.Encoding = Encoding.UTF8;
 
-                    var accountNameHash = SHA256.Create().ComputeHash(Session.CurrentAccountName.ToByteArray())
+                    var accountNameHash = SHA256.Create().ComputeHash(Game.CurrentAccountName.ToByteArray())
                         .ToStringEx();
                     var js = new JObject
                     {
-                        {"region", Session.Server.Region},
-                        {"server", Session.Server.ServerId},
+                        {"region", Game.Server.Region},
+                        {"server", Game.Server.ServerId},
                         {"account", accountNameHash},
                         {"tcc_version", App.AppVersion},
                         {

@@ -25,7 +25,7 @@ namespace TCC.Windows
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            Session.DB.DungeonDatabase.SaveCustomDefs();
+            Game.DB.DungeonDatabase.SaveCustomDefs();
             Close();
 
         }

@@ -108,7 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="AbnormalityUtils.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
@@ -148,7 +148,7 @@
     <Compile Include="Parsing\ToolboxSniffer.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="R.cs" />
-    <Compile Include="Session.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Settings\JsonSettingsReader.cs" />
     <Compile Include="Settings\JsonSettingsWriter.cs" />
     <Compile Include="Settings\SettingsGlobals.cs" />

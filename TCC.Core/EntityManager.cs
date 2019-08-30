@@ -19,7 +19,7 @@ namespace TCC
             CheckHarrowholdMode(zoneId, templateId);
             if (IsWorldBoss(zoneId, templateId))
             {
-                Session.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
+                Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
                 if (monst.IsBoss)
                 {
                     var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
@@ -28,7 +28,7 @@ namespace TCC
             }
             if (!Filter(zoneId, templateId)) return;
 
-            if (Session.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+            if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 NearbyNPC[entityId] = m.Name;
                 //if (m.Name == "Tradon") ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "TCC", "Tradon spawned") { ContainsPlayerName = true });
@@ -74,7 +74,7 @@ namespace TCC
             WindowManager.ViewModels.NPC.RemoveBoss(target, type);
             if (WindowManager.ViewModels.NPC.VisibleBossesCount == 0)
             {
-                Session.Encounter = false;
+                Game.Encounter = false;
                 WindowManager.ViewModels.Group.SetAggro(0);
             }
             ClassAbnormalityTracker.CheckMarkingOnDespawn(target);
@@ -92,18 +92,18 @@ namespace TCC
         }
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            WindowManager.ViewModels.NPC.AddOrUpdateNpc(target, maxHP, currentHP, false, Session.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            WindowManager.ViewModels.NPC.AddOrUpdateNpc(target, maxHP, currentHP, false, Game.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             SetEncounter(currentHP, maxHP);
         }
         private static void SetEncounter(float curHP, float maxHP)
         {
             if (maxHP > curHP)
             {
-                Session.Encounter = true;
+                Game.Encounter = true;
             }
             else if (maxHP == curHP || curHP == 0)
             {
-                Session.Encounter = false;
+                Game.Encounter = false;
             }
         }
         public static void ClearNPC()
@@ -175,7 +175,7 @@ namespace TCC
 
         public static bool IsEntitySpawned(uint zoneId, uint templateId)
         {
-            var name = Session.DB.MonsterDatabase.GetName(templateId, zoneId);
+            var name = Game.DB.MonsterDatabase.GetName(templateId, zoneId);
             return name != "Unknown" && NearbyNPC.ContainsValue(name);
         }
 

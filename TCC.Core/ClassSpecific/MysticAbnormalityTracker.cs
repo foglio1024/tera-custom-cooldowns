@@ -24,15 +24,15 @@ namespace TCC.ClassSpecific
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
-            if (msg.AbnormalityId != HurricaneId || !Session.IsMe(msg.CasterId)) return;
-            Session.DB.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
+            if (msg.AbnormalityId != HurricaneId || !Game.IsMe(msg.CasterId)) return;
+            Game.DB.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
             SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             CheckVoc(p);
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
@@ -63,7 +63,7 @@ namespace TCC.ClassSpecific
         {
             CheckVoc(p);
 
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
@@ -94,7 +94,7 @@ namespace TCC.ClassSpecific
         {
             CheckVoc(p);
 
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId) )
             {

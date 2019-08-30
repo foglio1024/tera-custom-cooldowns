@@ -93,7 +93,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             CheckTripleNemesis(p);
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
             CheckGrace(p);
             CheckEdict(p);
@@ -101,7 +101,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
             CheckTripleNemesis(p);
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
             CheckGrace(p);
             CheckEdict(p);
@@ -109,7 +109,7 @@ namespace TCC.ClassSpecific
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             CheckTripleNemesis(p);
-            if (!Session.IsMe(p.TargetId)) return;
+            if (!Game.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
             CheckGrace(p);
             CheckEdict(p);

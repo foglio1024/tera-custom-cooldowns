@@ -132,7 +132,7 @@ namespace TCC.ViewModels
         }
         private void OnWhisper(S_WHISPER m)
         {
-            var isMe = m.Author == Session.Me.Name;
+            var isMe = m.Author == Game.Me.Name;
             var author = isMe ? m.Recipient : m.Author;
             var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
             AddChatMessage(new ChatMessage(channel, author, m.Message));
@@ -337,7 +337,7 @@ namespace TCC.ViewModels
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!Session.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
+            if (!Game.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
             var srcName = EntityManager.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
@@ -364,7 +364,7 @@ namespace TCC.ViewModels
         private static bool Pass(ChatMessage current, ChatMessage old)
         {
             if (current.Author == "System") return true;
-            if (current.Author == Session.Me.Name) return true;
+            if (current.Author == Game.Me.Name) return true;
             if (old.RawMessage != current.RawMessage) return true;
 
             if (old.Author != current.Author) return true;

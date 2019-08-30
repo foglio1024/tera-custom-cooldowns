@@ -300,7 +300,7 @@ namespace TCC.Data.Pc
                 N(nameof(IsLeader));
             }
         }
-        public bool IsPlayer => Name == Session.Me.Name;
+        public bool IsPlayer => Name == Game.Me.Name;
         public bool IsDebuffed => _debuffList.Count != 0;
         public bool HasAggro
         {
@@ -385,7 +385,7 @@ namespace TCC.Data.Pc
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Session.Me.Class, out var classList))
+                        if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Game.Me.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return;
                         }
@@ -486,7 +486,7 @@ namespace TCC.Data.Pc
             UserClass = applicant.UserClass;
             Level = applicant.Level;
             Order = applicant.Order;
-            Location = Session.DB.GetSectionName(applicant.GuardId, applicant.SectionId);
+            Location = Game.DB.GetSectionName(applicant.GuardId, applicant.SectionId);
             IsLeader = applicant.IsLeader;
             Online = applicant.Online;
             Name = applicant.Name;

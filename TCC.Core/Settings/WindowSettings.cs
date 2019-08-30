@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using TCC.Annotations;
 using TCC.Controls;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Parsing;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -323,7 +324,7 @@ namespace TCC.Settings
         }
         protected Class CurrentClass()
         {
-            var cc = Session.Me == null || Session.Me?.Class == Class.None ? Class.Common : Session.Me.Class;
+            var cc = Game.Me == null || Game.Me?.Class == Class.None ? Class.Common : Game.Me.Class;
             cc = PerClassPosition ? cc : Class.Common;
             return cc;
         }
@@ -511,6 +512,22 @@ namespace TCC.Settings
         public bool ShowAll { get; set; } // by HQ
         public FlowDirection Direction { get; set; }
         public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
+        public bool Pass(Abnormality ab) // by HQ
+        {
+            if (App.Settings.BuffWindowSettings.ShowAll) return true;
+            if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(Class.Common, out var commonList))
+            {
+                if (commonList.Contains(ab.Id)) return true;
+                if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(Game.Me.Class, out var classList))
+                {
+                    if (!classList.Contains(ab.Id)) return false;
+                }
+                else return false;
+            }
+            else return false;
+
+            return true;
+        }
 
         public BuffWindowSettings()
         {

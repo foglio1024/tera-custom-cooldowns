@@ -26,7 +26,7 @@ namespace TCC.Windows.Widgets
             //FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
             //FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;
             FlyingGuardianDataProvider.StacksChanged += SetStacks;
-            Session.CombatChanged += OnCombatChanged;
+            Game.CombatChanged += OnCombatChanged;
             VM.EnergyChanged += SetEnergy;
             Init(App.Settings.FlightGaugeWindowSettings);
             Opacity = 0;
@@ -66,7 +66,7 @@ namespace TCC.Windows.Widgets
 
         private void OnCombatChanged()
         {
-            if (Session.Combat) HideWindow();
+            if (Game.Combat) HideWindow();
         }
 
         private void SetStacks()
