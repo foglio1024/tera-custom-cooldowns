@@ -578,14 +578,14 @@ namespace TCC.ViewModels.Widgets
             if (App.Settings.EthicalMode) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
 
-            CheckPassivity(ab, p.Duration);
+            if (Game.IsMe(p.CasterId) || Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (App.Settings.EthicalMode) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
 
-            CheckPassivity(ab, p.Duration);
+            if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
 
 
