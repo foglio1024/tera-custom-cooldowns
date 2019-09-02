@@ -146,7 +146,7 @@ namespace TCC
                 try
                 {
                     App.SplashScreen.SetText("Downloading icons...");
-                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), "icons.zip"));
+                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), Path.Combine(App.BasePath, "icons.zip")));
                 }
                 catch (Exception)
                 {
@@ -165,7 +165,7 @@ namespace TCC
                 //App.SplashScreen.SetText("Extracting database...");
 
                 if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
-                ZipFile.ExtractToDirectory("icons.zip", App.BasePath);
+                ZipFile.ExtractToDirectory(Path.Combine(App.BasePath, "icons.zip"), App.BasePath);
                 //App.SplashScreen.SetText("Extracting database... Done.");
 
                 //App.SplashScreen.SetText("Creating directories...");
@@ -180,7 +180,7 @@ namespace TCC
                 {
                     try
                     {
-                        File.Copy(newPath, newPath.Replace(DownloadedIconsDir, "resources/images"), true);
+                        File.Copy(newPath, Path.Combine(App.ResourcesPath, "images", newPath.Replace(DownloadedIconsDir + "\\", "")), true);
                     }
                     catch
                     {
