@@ -161,7 +161,8 @@ namespace TCC
             try
             {
                 if (Directory.Exists(DownloadedIconsDir)) Directory.Delete(DownloadedIconsDir, true);
-
+                var imagesPath = Path.Combine(App.ResourcesPath, "images");
+                if (!Directory.Exists(imagesPath)) Directory.CreateDirectory(imagesPath);
                 //App.SplashScreen.SetText("Extracting database...");
 
                 if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
@@ -171,7 +172,10 @@ namespace TCC
                 //App.SplashScreen.SetText("Creating directories...");
                 Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(dirPath =>
                 {
-                    Directory.CreateDirectory(dirPath.Replace(DownloadedIconsDir, "resources/images"));
+                    Directory.CreateDirectory(Path.Combine(imagesPath, Path.GetFileName(dirPath)));
+                    //Log.F(!info.Exists
+                    //    ? $"Failed to crate dir:{Path.Combine(imagesPath, Path.GetDirectoryName(dirPath))}"
+                    //    : $"Created dir: {info.FullName}");
                 });
                 //App.SplashScreen.SetText("Creating directories... Done.");
 
@@ -180,11 +184,12 @@ namespace TCC
                 {
                     try
                     {
-                        File.Copy(newPath, Path.Combine(App.ResourcesPath, "images", newPath.Replace(DownloadedIconsDir + "\\", "")), true);
+                        File.Copy(newPath.Replace("\\", "/"), Path.Combine(App.ResourcesPath, "images", newPath.Replace(DownloadedIconsDir + "\\", "").Replace("\\", "/")), true);
                     }
-                    catch
+                    catch (Exception e)
                     {
-                        Log.F("Failed to copy icon " + newPath);
+                        Log.F("Failed to copy icon " + newPath + "\n" + e);
+                        throw e;
                     }
                 });
                 //App.SplashScreen.SetText("Copying files... Done.");
