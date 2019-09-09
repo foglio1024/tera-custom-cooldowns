@@ -55,9 +55,7 @@
   <PropertyGroup>
     <ApplicationIcon>resources\tcc-logo.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -102,6 +100,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -1263,9 +1264,10 @@
     <Resource Include="resources\images\ic_filter_list_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_label_white_24dp_2x.png" />
     <Resource Include="resources\images\chat.png" />
-    <None Include="app.manifest">
+    <Content Include="TCC.exe.manifest">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
