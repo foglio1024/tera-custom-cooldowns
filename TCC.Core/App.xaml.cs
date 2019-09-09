@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Principal;
 using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
@@ -57,6 +58,7 @@ namespace TCC
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
             TccMessageBox.Create(); //Create it here in STA thread
+
             if (IsRunning())
             {
                 if (!ToolboxMode) TccMessageBox.Show("Another instance of TCC is already running. Shutting down.",
@@ -115,7 +117,8 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
 
-            /*if (!ToolboxMode)*/ UpdateManager.StartPeriodicCheck();
+            /*if (!ToolboxMode)*/
+            UpdateManager.StartPeriodicCheck();
 
             if (!Experimental && Settings.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
                 WindowManager.FloatingButton.NotifyExtended("TCC experimental",
