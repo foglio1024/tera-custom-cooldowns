@@ -13,6 +13,7 @@ using TCC.Data.Databases;
 using TCC.Data.Skills;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Utilities;
 using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;

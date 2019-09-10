@@ -10,6 +10,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Utilities;
 using TCC.ViewModels.Widgets;
 using TCC.Windows.Widgets;
 using TeraDataLite;

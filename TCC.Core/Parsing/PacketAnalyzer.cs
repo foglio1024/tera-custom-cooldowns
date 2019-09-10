@@ -9,6 +9,7 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
+using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraPacketParser;

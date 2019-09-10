@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using TCC.Interop.JsonRPC;
+using TCC.Utilities;
 
 namespace TCC.Interop.Proxy
 {

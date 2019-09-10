@@ -4,6 +4,7 @@ using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop.Proxy;
+using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
 

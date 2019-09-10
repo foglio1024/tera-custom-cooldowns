@@ -10,6 +10,7 @@ using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
+using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;

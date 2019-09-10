@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Threading;
 using TCC.Annotations;
 using FoglioUtils.Extensions;
+using TCC.Utilities;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat

@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Utilities;
 using TCC.ViewModels.Widgets;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;

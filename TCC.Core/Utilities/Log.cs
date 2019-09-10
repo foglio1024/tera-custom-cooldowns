@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using TCC.ViewModels;
 
-namespace TCC
+namespace TCC.Utilities
 {
     public static class Log
     {

@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
+using TCC.Utilities;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
