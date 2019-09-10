@@ -29,9 +29,6 @@ namespace TCC
 {
     public static class WindowManager
     {
-        /// <summary>
-        /// Container class to keep reference to view models
-        /// </summary>
         public static class ViewModels
         {
             private static CooldownWindowViewModel _cooldowns;
@@ -44,12 +41,12 @@ namespace TCC
             private static DashboardViewModel _dashboard;
             private static LfgListViewModel _lfg;
             private static FlightGaugeViewModel _flightGauge;
+            private static readonly object _groupVmLock = new object();
 
             public static CooldownWindowViewModel Cooldowns => _cooldowns ?? (_cooldowns = new CooldownWindowViewModel(App.Settings.CooldownWindowSettings));
             public static CharacterWindowViewModel Character => _character ?? (_character = new CharacterWindowViewModel(App.Settings.CharacterWindowSettings));
             public static NpcWindowViewModel NPC => _npc ?? (_npc = new NpcWindowViewModel(App.Settings.NpcWindowSettings));
             public static BuffBarWindowViewModel Abnormal => _abnormal ?? (_abnormal = new BuffBarWindowViewModel(App.Settings.BuffWindowSettings));
-            private static readonly object _groupVmLock = new object();
             public static GroupWindowViewModel Group
             {
                 get
@@ -61,7 +58,6 @@ namespace TCC
                     }
                 }
             }
-
             public static ClassWindowViewModel Class => _class ?? (_class = new ClassWindowViewModel(App.Settings.ClassWindowSettings));
             public static CivilUnrestViewModel CivilUnrest => _civilUnrest ?? (_civilUnrest = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
             public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel(null));
@@ -83,7 +79,6 @@ namespace TCC
         private static Dashboard _dashboardWindow;
         private static LfgListWindow _lfgWindow;
 
-
         public static Dashboard DashboardWindow
         {
             get
@@ -93,7 +88,6 @@ namespace TCC
                 return _dashboardWindow;
             }
         }
-
         public static LfgListWindow LfgListWindow
         {
             get
@@ -107,7 +101,6 @@ namespace TCC
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
         public static SkillConfigWindow SkillConfigWindow;
-
 
         public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers;
 
@@ -192,7 +185,7 @@ namespace TCC
 
             SettingsWindow = new SettingsWindow();
 
-            if (App.Settings.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            if (App.Settings.UseHotkeys) KeyboardHook.Instance.Enable();
 
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));

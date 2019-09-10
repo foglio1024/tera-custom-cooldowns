@@ -95,30 +95,9 @@ namespace TCC
             if (!PostMessage(hWnd, WM_KEYUP, VK_RETURN, 0)) { throw new Win32Exception(); }
         }
 
-        private static IntPtr TeraWindow
-        {
-            get
-            {
-                Marshal.GetLastWin32Error();
-                var result = FindWindow("LaunchUnrealUWindowsClient", "TERA");
-                Marshal.GetLastWin32Error();
-                return result;
-            }
-        }
-        private static IntPtr MeterWindow
-        {
-            get
-            {
-                Marshal.GetLastWin32Error();
-                var result = FindWindow("Shinra Meter", null);
-                Marshal.GetLastWin32Error();
-                return result;
-            }
-        }
-
-/*
-        public static int TeraScreenIndex => Screen.AllScreens.ToList().IndexOf(TeraScreen);
-*/
+        private static IntPtr TeraWindow => FindWindow("LaunchUnrealUWindowsClient", "TERA");
+        private static IntPtr MeterWindow => FindWindow("Shinra Meter", null);
+        private static IntPtr ForegroundWindow => GetForegroundWindow();
 
         public static Screen TeraScreen
         {
@@ -131,7 +110,6 @@ namespace TCC
                     new Size(rect.Right - rect.Left, rect.Bottom - rect.Top))));
             }
         }
-        private static IntPtr ForegroundWindow => GetForegroundWindow();
         public static bool PauseTopmost { get; set; }
 
         public static void MakeUnfocusable(IntPtr hwnd)
@@ -139,7 +117,6 @@ namespace TCC
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
-
         public static void UndoUnfocusable(IntPtr hwnd)
         {
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
@@ -171,6 +148,17 @@ namespace TCC
             ForegroundChanged?.Invoke();
         }
 
+        public static void Init()
+        {
+            FocusTimer = new Timer(1000);
+            FocusTimer.Elapsed += CheckForegroundWindow;
+            FocusTimer.Start();
+        }
+        public static void Dispose()
+        {
+            _disposed = true;
+            FocusTimer?.Stop();
+        }
 
         // winapi
         [DllImport("user32.dll")]
@@ -188,14 +176,11 @@ namespace TCC
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
-/*
-        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
-*/
-
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+
+
         [StructLayout(LayoutKind.Sequential)]
         private struct RECT
         {
@@ -205,17 +190,5 @@ namespace TCC
             public readonly int Bottom;
         }
 
-        public static void Init()
-        {
-            FocusTimer = new Timer(1000);
-            FocusTimer.Elapsed += CheckForegroundWindow;
-            FocusTimer.Start();
-        }
-
-        public static void Dispose()
-        {
-            _disposed = true;
-            FocusTimer?.Stop();
-        }
     }
 }

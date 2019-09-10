@@ -1,15 +1,11 @@
-﻿using System;
-using System.Linq;
-
+﻿using System.Linq;
 using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using TCC.Data.NPCs;
-using TCC.TeraCommon.Sniffing.Crypt;
 using TeraDataLite;
 
-namespace TCC
+namespace TCC.Utilities
 {
     public static class AbnormalityUtils
     {

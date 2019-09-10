@@ -70,7 +70,7 @@ namespace TCC.Data.Databases
         public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             var result = false;
-            sk = new Skill(0, Class.None, String.Empty, String.Empty);
+            sk = new Skill(0, Class.None, string.Empty, string.Empty);
             if (Skills[c].TryGetValue(id, out sk))
             {
                 result = true;

@@ -162,7 +162,7 @@ namespace TCC.Data.Skills
         public void Start(Cooldown sk)
         {
             if (sk != this) sk.Dispose();
-            if (sk.Duration >= Int32.MaxValue) return;
+            if (sk.Duration >= int.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
                 if (Mode == CooldownMode.Pre)
@@ -196,7 +196,7 @@ namespace TCC.Data.Skills
             _mainTimer.Stop();
             N(nameof(IsAvailable));
 
-            if (cd == 0 || cd >= Int32.MaxValue)
+            if (cd == 0 || cd >= int.MaxValue)
             {
                 Seconds = 0;
                 Duration = 0;

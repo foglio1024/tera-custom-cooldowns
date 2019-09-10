@@ -15,7 +15,7 @@ namespace TCC.Converters
                 var width = (double) values[0];
                 var height = (double) values[1];
 
-                if (width < Double.Epsilon || height < Double.Epsilon)
+                if (width < double.Epsilon || height < double.Epsilon)
                 {
                     return Geometry.Empty;
                 }

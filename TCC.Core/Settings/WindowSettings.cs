@@ -514,11 +514,11 @@ namespace TCC.Settings
         public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
         public bool Pass(Abnormality ab) // by HQ
         {
-            if (App.Settings.BuffWindowSettings.ShowAll) return true;
-            if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(Class.Common, out var commonList))
+            if (ShowAll) return true;
+            if (MyAbnormals.TryGetValue(Class.Common, out var commonList))
             {
                 if (commonList.Contains(ab.Id)) return true;
-                if (App.Settings.BuffWindowSettings.MyAbnormals.TryGetValue(Game.Me.Class, out var classList))
+                if (MyAbnormals.TryGetValue(Game.Me.Class, out var classList))
                 {
                     if (!classList.Contains(ab.Id)) return false;
                 }

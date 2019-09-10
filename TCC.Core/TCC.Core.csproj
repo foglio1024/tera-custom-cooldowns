@@ -109,7 +109,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbnormalityUtils.cs" />
+    <Compile Include="Utilities\AbnormalityUtils.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
@@ -563,7 +563,6 @@
     <Compile Include="TeraCommon\Sniffing\Crypt\Utils.cs" />
     <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
     <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
-    <Compile Include="TeraServerTimeInfo.cs" />
     <Compile Include="TimeManager.cs" />
     <Compile Include="ViewModels\Widgets\CharacterWindowViewModel.cs" />
     <Compile Include="ViewModels\Widgets\ChatViewModel.cs" />

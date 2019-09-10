@@ -31,9 +31,9 @@ namespace TCC
             Game.LoggedChanged += NotifyVisibilityChanged;
             Game.EncounterChanged += NotifyDimChanged;
             Game.GameUiModeChanged += OnGameUiModeChanged;
+            Game.SkillStarted += OnSkillStarted;
 
             FocusManager.ForegroundChanged += NotifyVisibilityChanged;
-            Game.SkillStarted += OnSkillStarted;
 
             _dimTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             _dimTimer.Tick += (_, __) =>
@@ -57,14 +57,12 @@ namespace TCC
 
         private void NotifyVisibilityChanged()
         {
-            //Console.WriteLine($"[Foreground Manager] Notifying Visibility = {Visible} (Logged:{SessionManager.Logged}, LoadingScreen:{SessionManager.LoadingScreen}, Foreground:{FocusManager.IsForeground})");
             App.BaseDispatcher?.BeginInvoke(new Action(() =>
                 VisibilityChanged?.Invoke()), DispatcherPriority.Background);
         }
 
         private void NotifyDimChanged()
         {
-            //Console.WriteLine($"[Foreground Manager] Notifying Dim = {Dim} (TimerEnabled:{_dimTimer.IsEnabled}, Encounter:{SessionManager.Encounter})");
             App.BaseDispatcher?.BeginInvoke(new Action(() =>
                 DimChanged?.Invoke()), DispatcherPriority.Background);
         }
