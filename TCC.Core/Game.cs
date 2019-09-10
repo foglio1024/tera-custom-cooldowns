@@ -435,7 +435,20 @@ namespace TCC
         public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
-            await InitDatabasesAsync(String.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
+            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
+            KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
+        }
+
+        private static void OnReturnToLobbyHotkeyPressed()
+        {
+            if (!Logged
+              || LoadingScreen
+              || Combat
+              || !ProxyInterface.Instance.IsStubAvailable)
+                return;
+
+            WindowManager.ViewModels.LFG.ForceStopPublicize();
+            ProxyInterface.Instance.Stub.ReturnToLobby();
         }
 
         public static event Action SkillStarted;

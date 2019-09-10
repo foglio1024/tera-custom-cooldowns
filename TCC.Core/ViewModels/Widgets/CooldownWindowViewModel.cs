@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using System.Xml.Linq;
 using FoglioUtils;
 using TCC.Data;
@@ -498,6 +499,18 @@ namespace TCC.ViewModels.Widgets
             HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
 
             InitViews();
+
+            KeyboardHook.Instance.RegisterCallback(App.Settings.SkillSettingsHotkey, OnShowSkillConfigHotkeyPressed);
+        }
+
+        private void OnShowSkillConfigHotkeyPressed()
+        {
+            if (!Game.Logged) return;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
+                else new SkillConfigWindow().ShowWindow();
+            }), DispatcherPriority.Background);
         }
 
         public void InitViews()

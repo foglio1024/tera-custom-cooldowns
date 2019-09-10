@@ -434,8 +434,8 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.UseHotkeys == value) return;
                 App.Settings.UseHotkeys = value;
-                if (value) KeyboardHook.Instance.RegisterKeyboardHook();
-                else KeyboardHook.Instance.UnRegisterKeyboardHook();
+                if (value) KeyboardHook.Instance.Enable();
+                else KeyboardHook.Instance.Disable();
                 N(nameof(UseHotkeys));
             }
         }
@@ -679,6 +679,12 @@ namespace TCC.ViewModels
         public SettingsWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
+            KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
+        }
+        private void OnShowSettingsWindowHotkeyPressed()
+        {
+            if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
+            else WindowManager.SettingsWindow.ShowWindow();
         }
         public bool Experimental => App.Experimental;
 

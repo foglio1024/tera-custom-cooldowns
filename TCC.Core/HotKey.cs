@@ -13,5 +13,11 @@ namespace TCC
 
         public Keys Key { get; }
         public ModifierKeys Modifier { get; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is HotKey other)) return false;
+            return other.Key == Key && other.Modifier == Modifier;
+        }
     }
 }

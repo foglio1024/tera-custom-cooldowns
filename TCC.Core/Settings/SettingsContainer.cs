@@ -49,7 +49,10 @@ namespace TCC.Settings
         public HotKey LfgHotkey { get; }
         public HotKey InfoWindowHotkey { get; }
         public HotKey SettingsHotkey { get; }
-        public HotKey LootSettingsHotkey { get; }
+        public HotKey SkillSettingsHotkey { get; }
+        public HotKey ForceClickableChatHotkey { get;  }
+        public HotKey ReturnToLobbyHotkey { get; }
+
         #endregion
 
         #region Webhooks
@@ -152,7 +155,9 @@ namespace TCC.Settings
             LfgHotkey = new HotKey(Key.Y, ModifierKeys.Control);
             InfoWindowHotkey = new HotKey(Key.I, ModifierKeys.Control);
             SettingsHotkey = new HotKey(Key.O, ModifierKeys.Control);
-            LootSettingsHotkey = new HotKey(Key.L, ModifierKeys.Control);
+            SkillSettingsHotkey = new HotKey(Key.K, ModifierKeys.Control);
+            ReturnToLobbyHotkey = new HotKey(Key.R, ModifierKeys.Control | ModifierKeys.Alt);
+            ForceClickableChatHotkey = new HotKey(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
             LanguageOverride = "";
             HideHandles = false;
             HighPriority = false;
@@ -176,6 +181,7 @@ namespace TCC.Settings
             WebhookMessageGuildBam = "@here Guild BAM will spawn soon!";
 
         }
+
 
         public static void Load()
         {

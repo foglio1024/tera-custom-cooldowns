@@ -92,6 +92,7 @@ namespace TCC.ViewModels
 
         public LfgListViewModel(WindowSettings settings) : base(settings)
         {
+            KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
             Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
             ListingsView = CollectionViewUtils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
@@ -102,6 +103,18 @@ namespace TCC.ViewModels
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             PublicizeCommand = new RelayCommand(Publicize, CanPublicize);
             ToggleAutoPublicizeCommand = new RelayCommand(ToggleAutoPublicize, CanToggleAutoPublicize);
+        }
+
+        private void OnShowLfgHotkeyPressed()
+        {
+            if (!Game.Logged) return;
+            if (!ProxyInterface.Instance.IsStubAvailable) return;
+            if (!WindowManager.LfgListWindow.IsVisible)
+            {
+                StayClosed = false;
+                ProxyInterface.Instance.Stub.RequestListings();
+            }
+            else WindowManager.LfgListWindow.CloseWindow();
         }
 
         private void OnAutoPublicizeTimerTick(object sender, EventArgs e)

@@ -59,6 +59,8 @@ namespace TCC.ViewModels
             ChatWindows.CollectionChanged += OnChatWindowsCollectionChanged;
             PrivateChannelJoined += OnPrivateChannelJoined;
 
+            KeyboardHook.Instance.RegisterCallback(App.Settings.ForceClickableChatHotkey, ToggleForcedClickThru);
+
         }
 
         protected override void InstallHooks()

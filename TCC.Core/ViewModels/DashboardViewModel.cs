@@ -171,6 +171,8 @@ namespace TCC.ViewModels
         bool _loaded;
         public DashboardViewModel(WindowSettings settings) : base(settings)
         {
+            KeyboardHook.Instance.RegisterCallback(App.Settings.InfoWindowHotkey, OnShowDashboardHotkeyPressed);
+
             CharacterViewModels = new ObservableCollection<CharacterViewModel>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
             Markers = new SynchronizedObservableCollection<TimeMarker>();
@@ -224,6 +226,11 @@ namespace TCC.ViewModels
 
         }
 
+        private void OnShowDashboardHotkeyPressed()
+        {
+            if (WindowManager.DashboardWindow.IsVisible) WindowManager.DashboardWindow.HideWindow();
+            else WindowManager.DashboardWindow.ShowWindow();
+        }
 
 
         /* -- Methods ---------------------------------------------- */
