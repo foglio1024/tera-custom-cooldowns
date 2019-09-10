@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Utilities;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels

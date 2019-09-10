@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop;
+using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;

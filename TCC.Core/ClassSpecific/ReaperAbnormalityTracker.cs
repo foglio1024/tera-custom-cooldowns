@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TCC.Utilities;
 using TCC.ViewModels;
 
 using TeraPacketParser.Messages;

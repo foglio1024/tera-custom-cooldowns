@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows;
 using TCC.Data;
+using TCC.Utilities;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Classes.Elements

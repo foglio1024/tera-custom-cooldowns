@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Utilities;
 using TeraDataLite;
 
 namespace TCC.Converters
@@ -20,7 +21,7 @@ namespace TCC.Converters
                     break;
             }
 
-            return R.Helpers.SvgClass(c); //App.Current.FindResource("SvgClass" + c.ToString());
+            return TccUtils.SvgClass(c); //App.Current.FindResource("SvgClass" + c.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

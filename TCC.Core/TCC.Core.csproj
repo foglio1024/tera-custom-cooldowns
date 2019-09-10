@@ -236,7 +236,6 @@
     <Compile Include="Data\GuildQuest.cs" />
     <Compile Include="Data\Databases\TccDatabase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Helpers.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
     <Compile Include="ResourceDictionaries\DataTemplates.xaml.cs">
       <DependentUpon>DataTemplates.xaml</DependentUpon>
