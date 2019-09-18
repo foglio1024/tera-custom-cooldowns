@@ -42,7 +42,7 @@ namespace TCC.Parsing
             }
             var opcNamer = new OpCodeNamer(opcPath);
             PacketAnalyzer.Factory = new MessageFactory(p.Versions[0], opcNamer); //SystemMessageNamer = new OpCodeNamer(Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.ReleaseVersion}.map"))
-            PacketAnalyzer.Processor.Update();
+            PacketAnalyzer.Processor?.Update(); //TODO
             PacketAnalyzer.Sniffer.Connected = true;
         }
         public static async void HandleLoginArbiter(C_LOGIN_ARBITER p)
@@ -247,7 +247,7 @@ namespace TCC.Parsing
             //Session.Logged = true;
             //Session.LoadingScreen = true;
             //Session.Encounter = false;
-            PacketAnalyzer.Processor.Update();
+            PacketAnalyzer.Processor?.Update(); //TODO
             //SessionManager.CurrentPlayer.EntityId = p.EntityId;
             //SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
             //SessionManager.CurrentPlayer.ServerId = p.ServerId;
@@ -865,137 +865,6 @@ namespace TCC.Parsing
 
         #endregion // ---------------------------------------------------
 
-        //TODO finish moving hooks
-        #region todo - called from Session for now
-        public static void HandleNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
-        {
-            const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            switch (p.Type)
-            {
-                case S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce:
-                    var questName = p.QuestId == 0 ? "Defeat Guild BAM" : Game.DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
-                    var zone = Game.DB.RegionsDatabase.GetZoneName(p.ZoneId);
-                    var name = Game.DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
-                    var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
-                    SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
-                    break;
-                default:
-                    return;
-            }
-        }
-        public static void HandleChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
-        {
-            const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Game.GetGuildMemberName(obj.PlayerId)}", m, opcode);
-        }
-        public static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
-        {
-            var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
-            if (friend.Equals(default(FriendData))) return;
-            const string opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
-            var areaName = x.SectionId.ToString();
-            try
-            {
-                areaName = Game.DB.RegionsDatabase.Names[Game.DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-            var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-
-            SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
-        }
-        public static void HandleFriendStatus(S_UPDATE_FRIEND_INFO x)
-        {
-            var opcodeName = "SMT_FRIEND_IS_CONNECTED";
-            if (!x.Online) return;
-            if (Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
-            {
-                SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
-            }
-        }
-        public static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
-        {
-            //TODO: do it the same way as other client sysmsgs
-            if (!Game.DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
-            var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(sysMsg);
-        }
-        public static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
-        {
-            Game.DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
-            WindowManager.FloatingButton.TooltipInfo.Name = x.Name;
-            WindowManager.FloatingButton.TooltipInfo.Info = m.Name;
-            WindowManager.FloatingButton.TooltipInfo.Level = (int)x.Level;
-            WindowManager.FloatingButton.TooltipInfo.SetInfo(x.Model);
-            if (x.Name == Game.Me.Name)
-            {
-                WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = false;
-                WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = false;
-            }
-            else
-            {
-                WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
-                WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
-            }
-            if (!ProxyInterface.Instance.IsStubAvailable /*ProxyOld.IsConnected*/) return;
-            WindowManager.FloatingButton.OpenPlayerMenu();
-        }
-        public static void HandleSystemMessageLoot(S_SYSTEM_MESSAGE_LOOT_ITEM x)
-        {
-            try
-            {
-                var msg = x.SysMessage.Split('\v');
-                var opcode = ushort.Parse(msg[0].Substring(1));
-                var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
-
-                if (Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
-                {
-                    var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
-                    ChatWindowManager.Instance.AddChatMessage(sysMsg);
-                }
-
-            }
-            catch (Exception)
-            {
-                Log.F($"Failed to parse sysmsg: {x.SysMessage}");
-            }
-        }
-        public static void HandleSystemMessage(S_SYSTEM_MESSAGE x)
-        {
-            try
-            {
-                var msg = x.Message.Split('\v');
-                var opcode = ushort.Parse(msg[0].Substring(1));
-                var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
-
-                if (Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m))
-                {
-                    SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
-                }
-
-            }
-            catch (Exception)
-            {
-                //File.AppendAllText("chat-errors.log", x.Message + "\n");
-                Log.F($"Failed to parse system message: {x.Message}");
-            }
-        }
-        public static void HandleDespawnNpc(S_DESPAWN_NPC p)
-        {
-            EntityManager.DespawnNPC(p.Target, p.Type);
-        }
-        public static void HandleDespawnUser(S_DESPAWN_USER p)
-        {
-            if (p.EntityId == EntityManager.FoglioEid) Game.Me.EndAbnormality(10241024); //AbnormalityUtils.EndAbnormality(Game.Me.EntityId, 10241024);
-            EntityManager.DepawnUser(p.EntityId);
-        }
-        #endregion
-
         //public static void HandleViewWareEx(S_VIEW_WARE_EX p)
         //{
         //    foreach (var page in S_VIEW_WARE_EX.Pages)
@@ -1084,6 +953,45 @@ namespace TCC.Parsing
         //    var name = EntityManager.GetUserName(x.GameId);
         //    if (x.Skill == 63005521) ChatWindowManager.Instance.AddTccMessage($"Dragon Firework spawned by {name}");
         //}
+        public static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnAnswerInteractive(S_ANSWER_INTERACTIVE obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnDespawnUser(S_DESPAWN_USER obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnDespawnNpc(S_DESPAWN_NPC obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void OnSystemMessage(S_SYSTEM_MESSAGE obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

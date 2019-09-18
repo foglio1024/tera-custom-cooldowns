@@ -119,7 +119,7 @@ namespace TCC.Settings
                 }
 
                 if (App.Loading) return;
-                PacketAnalyzer.Processor.Update();
+                PacketAnalyzer.Processor?.Update(); // TODO: do it in NewProcessor
                 EnabledChanged?.Invoke(_enabled);
                 N(nameof(Enabled));
             }

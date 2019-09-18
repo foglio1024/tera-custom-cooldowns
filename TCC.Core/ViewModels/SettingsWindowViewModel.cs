@@ -208,7 +208,7 @@ namespace TCC.ViewModels
                 if (App.Settings.NpcWindowSettings.AccurateHp == value) return;
                 App.Settings.NpcWindowSettings.AccurateHp = value;
                 N(nameof(AccurateHp));
-                PacketAnalyzer.Processor.Update();
+                PacketAnalyzer.Processor?.Update(); //TODO: remove hook in NpcWindowVM
             }
         }
 
