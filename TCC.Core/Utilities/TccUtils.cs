@@ -121,5 +121,9 @@ namespace TCC.Utilities
             return WindowManager.ViewModels.Class.CurrentManager as C;
         }
 
+        public static Race RaceFromTemplateId(int templateId)
+        {
+            return (Race) ((templateId - 10000) / 100);
+        }
     }
 }
