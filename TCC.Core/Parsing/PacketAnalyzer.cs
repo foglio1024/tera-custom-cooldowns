@@ -23,7 +23,7 @@ namespace TCC.Parsing
         public static event Action ProcessorReady;
         public static ITeraSniffer Sniffer;
         public static MessageFactory Factory;
-        public static MessageProcessor Processor;
+        public static MessageProcessor Processor { get; }
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         public static Thread AnalysisThread;
         public static int AnalysisThreadId;
@@ -49,7 +49,7 @@ namespace TCC.Parsing
             ProcessorReady += InstallHooks;
 
             Factory = new MessageFactory();
-            Processor = new MessageProcessor();
+            //Processor = new MessageProcessor();
             if (AnalysisThread == null)
             {
                 Log.All("Analysis thread not running, starting it...");
