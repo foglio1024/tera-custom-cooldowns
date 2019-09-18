@@ -12,6 +12,7 @@ using TCC.Data.Abnormalities;
 using TCC.Data.NPCs;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Utilities;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
@@ -106,7 +107,7 @@ namespace TCC.ViewModels.Widgets
                     PacketAnalyzer.NewProcessor.Unhook<S_DUNGEON_EVENT_MESSAGE>(HandlePhase1Shields);
                     PacketAnalyzer.NewProcessor.Unhook<C_PLAYER_LOCATION>(HandlePlayerLocation);
                 }
-                //PacketAnalyzer.Processor.Update();
+                //PacketAnalyzer.Processor.Update(); //TODO?
                 N(nameof(CurrentHHphase));
             }
         }
@@ -319,11 +320,9 @@ namespace TCC.ViewModels.Widgets
                 var boss = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId) ?? AddNpc(entityId, zoneId, templateId, isBoss, visibility);
                 if (boss == null) return;
                 SetHp(boss, maxHp, curHp, src);
-                if (boss.Visible != visibility)
-                {
-                    boss.Visible = visibility;
-                    NpcListChanged?.Invoke();
-                }
+                if (boss.Visible == visibility) return;
+                boss.Visible = visibility;
+                NpcListChanged?.Invoke();
             }));
         }
 
@@ -341,7 +340,6 @@ namespace TCC.ViewModels.Widgets
             if (!IsCaching) boss.CurrentHP = curHp;
             else
             {
-                //Log.CW($"[BossGageWindowViewModel L273] Adding HP ({curHp}) to cache for NPC with eid {boss.EntityId}");
                 AddToCache(boss.EntityId, curHp);
                 if (src == HpChangeSource.Me) FlushCache(null, null);
             }
@@ -351,9 +349,6 @@ namespace TCC.ViewModels.Widgets
         private readonly Dictionary<ulong, float> _cache;
         private void AddToCache(ulong entityId, float curHp)
         {
-            //if (!_cache.ContainsKey(entityId)) _cache.Add(entityId, curHp);
-            /*else */
-            //Log.CW($"AddToCache({entityId}, {curHp})");
             _cache[entityId] = curHp;
         }
 
@@ -600,7 +595,6 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
             PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
-
         }
 
         protected override void RemoveHooks()
@@ -621,7 +615,6 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
             PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
-
         }
 
         private void OnGuildTowerInfo(S_GUILD_TOWER_INFO m)
@@ -631,7 +624,13 @@ namespace TCC.ViewModels.Widgets
         private void OnSpawnNpc(S_SPAWN_NPC m)
         {
             EntityManager.CheckHarrowholdMode(m.HuntingZoneId, m.TemplateId);
-            EntityManager.SpawnNPC(m.HuntingZoneId, m.TemplateId, m.EntityId, false, m.Villager, m.RemainingEnrageTime);
+            EntityManager.SpawnNPC(m.HuntingZoneId, m.TemplateId, m.EntityId, IsFieldBoss(m.HuntingZoneId, m.TemplateId), m.Villager, m.RemainingEnrageTime);
+        }
+        private bool IsFieldBoss(ushort zone, uint template)
+        {
+            return (zone == 39 && template == 501) ||
+                   (zone == 26 && template == 5001) ||
+                   (zone == 51 && template == 4001);
         }
         private void OnSpawnMe(S_SPAWN_ME m)
         {
