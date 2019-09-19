@@ -294,28 +294,28 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Hook<S_SHOW_PARTY_MATCH_INFO>(OnShowPartyMatchInfo);
-            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
-            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(OnBanParty);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
-            PacketAnalyzer.NewProcessor.Hook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_SHOW_PARTY_MATCH_INFO>(OnShowPartyMatchInfo);
+            PacketAnalyzer.Processor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.Processor.Hook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.Processor.Hook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
         }
 
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Unhook<S_SHOW_PARTY_MATCH_INFO>(OnShowPartyMatchInfo);
-            PacketAnalyzer.NewProcessor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
-            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PARTY>(OnLeaveParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_BAN_PARTY>(OnBanParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
-            PacketAnalyzer.NewProcessor.Unhook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_SHOW_PARTY_MATCH_INFO>(OnShowPartyMatchInfo);
+            PacketAnalyzer.Processor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.Processor.Unhook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.Processor.Unhook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.Processor.Unhook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
         }
 
         private void OnLogin(S_LOGIN m)

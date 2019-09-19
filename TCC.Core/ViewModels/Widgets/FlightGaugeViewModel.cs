@@ -25,12 +25,12 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_FLIGHT_ENERGY>(OnPlayerChangeFlightEnergy);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_FLIGHT_ENERGY>(OnPlayerChangeFlightEnergy);
         }
 
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_CHANGE_FLIGHT_ENERGY>(OnPlayerChangeFlightEnergy);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_FLIGHT_ENERGY>(OnPlayerChangeFlightEnergy);
         }
 
         private void OnPlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY m)

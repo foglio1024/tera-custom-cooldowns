@@ -91,27 +91,27 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
-            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
-            PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+            PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.Processor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
         }
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
-            PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
-            PacketAnalyzer.NewProcessor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+            PacketAnalyzer.Processor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.Processor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
         }
 
         private void UpdateSkillCooldown(uint skillId, uint cooldown)
@@ -126,11 +126,11 @@ namespace TCC.ViewModels.Widgets
             CurrentClass = m.CharacterClass; // todo: check for enabled?
             if (m.CharacterClass == Class.Valkyrie)
             {
-                PacketAnalyzer.NewProcessor.Hook<S_WEAK_POINT>(OnWeakPoint);
+                PacketAnalyzer.Processor.Hook<S_WEAK_POINT>(OnWeakPoint);
             }
             else
             {
-                PacketAnalyzer.NewProcessor.Unhook<S_WEAK_POINT>(OnWeakPoint);
+                PacketAnalyzer.Processor.Unhook<S_WEAK_POINT>(OnWeakPoint);
             }
         }
         private void OnReturnToLobby(S_RETURN_TO_LOBBY m)

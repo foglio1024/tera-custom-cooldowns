@@ -65,39 +65,39 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_CHAT>(OnChat);
-            PacketAnalyzer.NewProcessor.Hook<S_PRIVATE_CHAT>(OnPrivateChat);
-            PacketAnalyzer.NewProcessor.Hook<S_WHISPER>(OnWhisper);
-            PacketAnalyzer.NewProcessor.Hook<S_JOIN_PRIVATE_CHANNEL>(OnJoinPrivateChannel);
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PRIVATE_CHANNEL>(OnLeavePrivateChannel);
-            PacketAnalyzer.NewProcessor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
-            PacketAnalyzer.NewProcessor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
-            PacketAnalyzer.NewProcessor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
-            PacketAnalyzer.NewProcessor.Hook<S_FRIEND_LIST>(OnFriendList);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
-            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
+            PacketAnalyzer.Processor.Hook<S_PRIVATE_CHAT>(OnPrivateChat);
+            PacketAnalyzer.Processor.Hook<S_WHISPER>(OnWhisper);
+            PacketAnalyzer.Processor.Hook<S_JOIN_PRIVATE_CHANNEL>(OnJoinPrivateChannel);
+            PacketAnalyzer.Processor.Hook<S_LEAVE_PRIVATE_CHANNEL>(OnLeavePrivateChannel);
+            PacketAnalyzer.Processor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
+            PacketAnalyzer.Processor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
+            PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
+            PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
 
         }
 
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_CHAT>(OnChat);
-            PacketAnalyzer.NewProcessor.Unhook<S_PRIVATE_CHAT>(OnPrivateChat);
-            PacketAnalyzer.NewProcessor.Unhook<S_WHISPER>(OnWhisper);
-            PacketAnalyzer.NewProcessor.Unhook<S_JOIN_PRIVATE_CHANNEL>(OnJoinPrivateChannel);
-            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PRIVATE_CHANNEL>(OnLeavePrivateChannel);
-            PacketAnalyzer.NewProcessor.Unhook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
-            PacketAnalyzer.NewProcessor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
-            PacketAnalyzer.NewProcessor.Unhook<S_USER_BLOCK_LIST>(OnUserBlockList);
-            PacketAnalyzer.NewProcessor.Unhook<S_FRIEND_LIST>(OnFriendList);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
-            PacketAnalyzer.NewProcessor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_CHAT>(OnChat);
+            PacketAnalyzer.Processor.Unhook<S_PRIVATE_CHAT>(OnPrivateChat);
+            PacketAnalyzer.Processor.Unhook<S_WHISPER>(OnWhisper);
+            PacketAnalyzer.Processor.Unhook<S_JOIN_PRIVATE_CHANNEL>(OnJoinPrivateChannel);
+            PacketAnalyzer.Processor.Unhook<S_LEAVE_PRIVATE_CHANNEL>(OnLeavePrivateChannel);
+            PacketAnalyzer.Processor.Unhook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
+            PacketAnalyzer.Processor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
+            PacketAnalyzer.Processor.Unhook<S_USER_BLOCK_LIST>(OnUserBlockList);
+            PacketAnalyzer.Processor.Unhook<S_FRIEND_LIST>(OnFriendList);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
+            PacketAnalyzer.Processor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
 
         }
 

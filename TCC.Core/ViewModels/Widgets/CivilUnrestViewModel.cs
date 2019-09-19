@@ -105,17 +105,17 @@ namespace TCC.ViewModels.Widgets
         protected override void InstallHooks()
         {
             Game.Teleported += NotifyTeleported;
-            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
-            PacketAnalyzer.NewProcessor.Hook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
-            PacketAnalyzer.NewProcessor.Hook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
+            PacketAnalyzer.Processor.Hook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
+            PacketAnalyzer.Processor.Hook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
+            PacketAnalyzer.Processor.Hook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
         }
 
         protected override void RemoveHooks()
         {
             Game.Teleported -= NotifyTeleported;
-            PacketAnalyzer.NewProcessor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
-            PacketAnalyzer.NewProcessor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
-            PacketAnalyzer.NewProcessor.Unhook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
+            PacketAnalyzer.Processor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO_DETAIL>(OnRequestCityWarMapInfoDetail);
+            PacketAnalyzer.Processor.Unhook<S_REQUEST_CITY_WAR_MAP_INFO>(OnRequestCityWarMapInfo);
+            PacketAnalyzer.Processor.Unhook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
         }
 
         private void OnDestroyGuildTower(S_DESTROY_GUILD_TOWER m)

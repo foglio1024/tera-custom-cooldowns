@@ -32,30 +32,30 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(OnLoadTopo);
-            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_LIFE>(OnCreatureLife);
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
-            PacketAnalyzer.NewProcessor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.Processor.Hook<S_CREATURE_LIFE>(OnCreatureLife);
+            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
+            PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
         }
 
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
-            PacketAnalyzer.NewProcessor.Unhook<S_CREATURE_LIFE>(OnCreatureLife);
-            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
-            PacketAnalyzer.NewProcessor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.Processor.Unhook<S_CREATURE_LIFE>(OnCreatureLife);
+            PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
+            PacketAnalyzer.Processor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
         }
 
         private void OnLogin(S_LOGIN m)
