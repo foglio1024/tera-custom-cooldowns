@@ -125,5 +125,12 @@ namespace TCC.Utilities
         {
             return (Race) ((templateId - 10000) / 100);
         }
+
+        public static bool IsFieldBoss(ushort zone, uint template)
+        {
+            return (zone == 39 && template == 501) ||
+                   (zone == 26 && template == 5001) ||
+                   (zone == 51 && template == 4001);
+        }
     }
 }
