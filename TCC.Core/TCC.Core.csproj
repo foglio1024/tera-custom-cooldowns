@@ -639,7 +639,6 @@
     <Compile Include="Windows\Widgets\CharacterWindow.xaml.cs">
       <DependentUpon>CharacterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Parsing\PacketHandler.cs" />
     <Compile Include="Converters\ClassImageConverter.cs" />
     <Compile Include="Converters\CombatToColorConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter.cs" />
