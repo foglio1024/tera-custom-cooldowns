@@ -106,18 +106,18 @@ namespace TCC.Test
             });
 
         }
-        public static void SpawnNpcAndUpdateHP(ushort zoneId, uint templateId)
+        public static void SpawnNpcAndUpdateHP(ushort zoneId, uint templateId, ulong eid)
         {
-            EntityManager.SpawnNPC(zoneId, templateId, 11, true, false, 36);
+            EntityManager.SpawnNPC(zoneId, templateId, eid, true, false, 36);
             var t = new System.Timers.Timer { Interval = 1000 };
             var hp = 1000;
             t.Elapsed += (_, __) =>
             {
                 hp -= 10;
                 if (hp <= 900) hp = 1000;
-                EntityManager.UpdateNPC(11, hp, 1000, 0);
+                EntityManager.UpdateNPC(eid, hp, 1000, 0);
             };
-            t.Start();
+            //t.Start();
 
         }
         public static void AddFakeCuGuilds()
