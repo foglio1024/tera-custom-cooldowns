@@ -119,7 +119,6 @@ namespace TCC.Settings
                 }
 
                 if (App.Loading) return;
-                PacketAnalyzer.Processor?.Update(); // TODO: do it in NewProcessor
                 EnabledChanged?.Invoke(_enabled);
                 N(nameof(Enabled));
             }
@@ -485,8 +484,21 @@ namespace TCC.Settings
     }
     public class NpcWindowSettings : WindowSettings
     {
+        private bool _accurateHp;
+
+        public event Action AccurateHpChanged;
         public bool ShowOnlyBosses { get; set; }
-        public bool AccurateHp { get; set; }
+        public bool AccurateHp
+        {
+            get => _accurateHp;
+            set
+            {
+                if(_accurateHp == value) return;
+                _accurateHp = value;
+                AccurateHpChanged?.Invoke();
+            }
+        }
+
         public EnrageLabelMode EnrageLabelMode { get; set; }
 
         public NpcWindowSettings()
