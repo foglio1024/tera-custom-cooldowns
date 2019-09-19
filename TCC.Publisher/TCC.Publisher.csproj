@@ -146,6 +146,7 @@
     <PostBuildEvent>del "$(SolutionDir)\release\*.xml"
 xcopy $(SolutionDir)\TCC.Core\Module\index.js $(SolutionDir)\release\ /y /i
 xcopy $(SolutionDir)\TCC.Core\Module\module.json $(SolutionDir)\release\ /y /i
+xcopy C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe $(SolutionDir)\release\ /y /i
 node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\</PostBuildEvent>
   </PropertyGroup>
 </Project>
