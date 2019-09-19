@@ -109,8 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Parsing\MessageProcessor.cs" />
+    <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="Utilities\AbnormalityUtils.cs" />
-    <Compile Include="Account.cs" />
+    <Compile Include="Data\Account.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
       <DependentUpon>LfgBody.xaml</DependentUpon>
@@ -145,7 +147,6 @@
     <Compile Include="Interop\Proxy\ProxyMessageHandler.cs" />
     <Compile Include="Interop\Proxy\Server.cs" />
     <Compile Include="Interop\Proxy\TccStubInterface.cs" />
-    <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="Parsing\ToolboxSniffer.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="R.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Controls\Classes\BerserkerLayout.xaml.cs">
       <DependentUpon>BerserkerLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClassSpecific\GunnerAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\GunnerAbnormalityTracker.cs" />
     <Compile Include="Controls\Abnormalities\AbnormalityIndicatorBase.cs" />
     <Compile Include="Controls\Dashboard\DungeonView.xaml.cs">
       <DependentUpon>DungeonView.xaml</DependentUpon>
@@ -259,17 +260,17 @@
     <Compile Include="TemplateSelectors\AbnormalityTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\SkillTemplateSelector.cs" />
     <Compile Include="ViewModels\Widgets\CivilUnrestViewModel.cs" />
-    <Compile Include="ClassSpecific\BerserkerAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\ArcherAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\BrawlerAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\ClassAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\LancerAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\NinjaAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\PriestAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\ReaperAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\SlayerAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\SorcererAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\ValkyrieAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\BerserkerAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\ArcherAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\BrawlerAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\AbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\LancerAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\NinjaAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\PriestAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\ReaperAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\SlayerAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\SorcererAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\ValkyrieAbnormalityTracker.cs" />
     <Compile Include="Controls\Chat\EmojiMessagePiece.xaml.cs">
       <DependentUpon>EmojiMessagePiece.xaml</DependentUpon>
     </Compile>
@@ -535,8 +536,8 @@
     <Compile Include="Controls\NPCs\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClassSpecific\MysticAbnormalityTracker.cs" />
-    <Compile Include="ClassSpecific\WarriorAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\MysticAbnormalityTracker.cs" />
+    <Compile Include="Data\Abnormalities\WarriorAbnormalityTracker.cs" />
     <Compile Include="Data\Databases\MonsterDatabase.cs" />
     <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
@@ -1432,6 +1433,7 @@
   <ItemGroup>
     <Resource Include="resources\images\10kdays.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
