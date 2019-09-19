@@ -75,7 +75,7 @@ namespace TCC
         public bool Visible => Game.Logged &&
                                !Game.LoadingScreen &&
                                 FocusManager.IsForeground ||
-                                _forceVisible;
+                                Tester.Enabled;
 
         public bool ForceVisible
         {
