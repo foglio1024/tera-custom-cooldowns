@@ -3,11 +3,27 @@ const path = require('path');
 
 module.exports = function TCC(m)
 {
-    // if (!global.TeraProxy.IsAdmin)
-    // {
-    //     m.error("TCC requires Toolbox to be executed as admin.");
-    //     return;
-    // }
-    const tcc = spawn(path.join(__dirname, 'TCC.exe'), ["--toolbox"], { stdio: "ignore" });
-    tcc.on('exit', (code, signal) => { "TCC exited." });
+    const ngenPath = path.join(__dirname, "ngen.exe");
+    const tccPath = path.join(__dirname, "TCC.exe");
+    const modsPath = path.join(__dirname, "TCC.Modules.dll");
+
+    m.log("Starting ngen...");
+
+    // Cringe.
+    ngen(modsPath).on('exit', () => {
+        ngen(tccPath).on('exit', () => {
+            run();
+        });
+    });
+
+    function run(){
+        m.log("Starting TCC...");
+        const tcc = spawn(tccPath, ["--toolbox"], { stdio: "ignore" });
+        tcc.on('exit', () => m.log("TCC exited."));
+    }
+
+    function ngen(assembly)
+    {
+        return spawn(ngenPath, ["install", assembly], {stdio : "ignore"});
+    }
 }
