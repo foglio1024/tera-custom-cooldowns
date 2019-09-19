@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Input;
+using TCC.Controls;
 using TCC.Data.Abnormalities;
 using TCC.Utilities;
 using TCC.ViewModels.Widgets;
@@ -13,7 +15,7 @@ namespace TCC.Data.NPCs
     public class NPC : TSPropertyChanged, IDisposable
     {
         public bool HasGage { get; set; }
-
+        public ICommand Override { get; }
         public ulong EntityId { get; }
         private string _name;
         public string Name
@@ -29,7 +31,17 @@ namespace TCC.Data.NPCs
             }
         }
 
-        public bool IsBoss { get; set; }
+        public bool IsBoss
+        {
+            get => _isBoss;
+            set
+            {
+                if(_isBoss == value) return;
+                _isBoss = value;
+                N();
+            }
+        }
+
         private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
@@ -254,6 +266,12 @@ namespace TCC.Data.NPCs
                 _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
                 _shieldDuration.Elapsed += ShieldFailed;
             }
+            Override = new RelayCommand(ex =>
+            {
+                Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
+                WindowManager.ViewModels.NPC.RefreshOverride(ZoneId, TemplateId, !IsBoss);
+
+            }, ce => true);
         }
 
         public override string ToString()
@@ -303,6 +321,8 @@ namespace TCC.Data.NPCs
         }
 
         private int _remainingEnrageTime;
+        private bool _isBoss;
+
         public int RemainingEnrageTime
         {
             get => _remainingEnrageTime;
@@ -340,6 +360,60 @@ namespace TCC.Data.NPCs
             foreach (var buff in _buffs) buff.Dispose();
 
             DeleteEvent?.Invoke();
+        }
+
+        public void SetTimerPattern()
+        {
+            if (App.Settings.EthicalMode) return;
+
+            // vergos ph4
+            if (TemplateId == 4000 && ZoneId == 950) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            // nightmare kylos
+            if (TemplateId == 3000 && ZoneId == 982) TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
+            // nightmare antaroth
+            if (TemplateId == 3000 && ZoneId == 920) TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
+            // bahaar
+            if (TemplateId == 2000 && ZoneId == 444) TimerPattern = new HpTriggeredTimerPattern(5 * 60, .3f);
+            // dreadspire
+            if (TemplateId == 1000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 2000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 3000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 4000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 5000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 6000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 7000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 8000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 9000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 10000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+
+            TimerPattern?.SetTarget(this);
+        }
+
+        public void SetEnragePattern()
+        {
+            if (App.Settings.EthicalMode)
+            {
+                EnragePattern = new EnragePattern(0, 0);
+                return;
+            }
+            if (IsPhase1Dragon) EnragePattern = new EnragePattern(14, 50);
+            if (ZoneId == 950 && !IsPhase1Dragon) EnragePattern = new EnragePattern(0, 0);
+            if (ZoneId == 450 && TemplateId == 1003) EnragePattern = new EnragePattern((long) MaxHP, 600000000, 72);
+
+            //ghilli
+            if (TemplateId == 81301 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 65, Int32.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81312 && ZoneId == 713) EnragePattern = new EnragePattern(0, 0);
+            if (TemplateId == 81398 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, Int32.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81399 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, Int32.MaxValue) { StaysEnraged = true };
+
+
+            if (ZoneId == 620 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 420000000, 36);
+            if (ZoneId == 622 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 480000000, 36);
+            if (ZoneId == 628)
+            {
+                if (TemplateId == 1000) EnragePattern = new EnragePattern(0, 0);
+                if (TemplateId == 3000 || TemplateId == 3001) EnragePattern = new EnragePattern(10, 36);
+            }
         }
     }
 }

@@ -94,6 +94,38 @@ namespace TCC.Data.Databases
             base.Update(custom);
             base.Update(OverrideFileRelativePath);
         }
+
+        public void ToggleOverride(uint zoneId, uint templateId, bool b)
+        {
+            var overrideDoc = XDocument.Load(OverrideFileFullPath);
+            var zone = overrideDoc.Descendants("Zone").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == zoneId);
+            if (zone != null)
+            {
+                var monster = zone.Descendants("Monster").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == templateId);
+                if (monster != null)
+                {
+                    if (_zones[zoneId].Monsters[templateId].IsBoss == b)
+                    {
+                        monster.Remove();
+                        if(!zone.Descendants().Any()) zone.Remove();
+                    }
+                    else
+                    {
+                        monster.Attribute("isBoss").Value = b.ToString();
+                    }
+                }
+            }
+            else
+            {
+                overrideDoc.Descendants("Zones").First().Add(
+                    new XElement("Zone", new XAttribute("id", zoneId),
+                        new XElement("Monster", new XAttribute("id", templateId),
+                                                new XAttribute("isBoss", b.ToString()))));
+            }
+
+            overrideDoc.Save(OverrideFileFullPath);
+
+        }
     }
 
     internal class Zone

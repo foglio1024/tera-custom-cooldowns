@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data.NPCs;
@@ -181,5 +182,14 @@ namespace TCC.Controls.NPCs
             }));
         }
 
+        private void BossGage_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            VM.ShowOverrideBtn = true;
+        }
+
+        private void BossGage_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            VM.ShowOverrideBtn = false;
+        }
     }
 }

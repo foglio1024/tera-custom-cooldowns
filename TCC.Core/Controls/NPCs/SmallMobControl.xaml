@@ -5,8 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:npc="clr-namespace:TCC.Controls.NPCs"
-             mc:Ignorable="d" Loaded="OnLoaded" IsHitTestVisible="False" UseLayoutRounding="True"
-             d:DataContext="{d:DesignData Npc}">
+             mc:Ignorable="d" Loaded="OnLoaded"  UseLayoutRounding="True"
+             d:DataContext="{d:DesignData Npc}"
+             MouseEnter="SmallMobControl_OnMouseEnter"
+             MouseLeave="SmallMobControl_OnMouseLeave">
 
 
     <Grid Margin="2 2 6 2" x:Name="RootGrid" >
@@ -46,13 +48,13 @@
                        Margin="-20"
                        RenderTransformOrigin=".5 .5">
                 <local:Arc.Style>
-                        <Style TargetType="Shape">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                    <Setter Property="Stroke" Value="{StaticResource HpBrush}"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
+                    <Style TargetType="Shape">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Enraged}" Value="True">
+                                <Setter Property="Stroke" Value="{StaticResource HpBrush}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
                 </local:Arc.Style>
                 <local:Arc.RenderTransform>
                     <TransformGroup>
@@ -88,6 +90,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Name}"  Style="{StaticResource DefaultTextStyle}" 
@@ -183,6 +186,17 @@
                 </Style>
             </ItemsControl.Style>
         </ItemsControl>
+        <Button Grid.Column="0"
+                Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                VerticalAlignment="Top"
+                Command="{Binding Override}"
+                HorizontalAlignment="Left"
+                Margin="-2 -7 0 0"
+                ToolTip="Use boss bar for this NPC type"
+                Style="{StaticResource ButtonContentOpacityStyle}">
+            <Path Data="{StaticResource SvgUpArrow}"
+                  Height="12" Fill="White"></Path>
+        </Button>
 
     </Grid>
 </UserControl>

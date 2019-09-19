@@ -11,7 +11,9 @@
              UseLayoutRounding="True"
              Width="Auto"
              Height="Auto"
-             d:DataContext="{d:DesignInstance npc:NPC}">
+             d:DataContext="{d:DesignInstance npc:NPC}"
+             MouseEnter="BossGage_OnMouseEnter"
+             MouseLeave="BossGage_OnMouseLeave">
     <UserControl.Resources>
         <system:Double x:Key="GageWidth">520</system:Double>
         <DataTemplate x:Key="EnrageHistoryItem" DataType="npcCtrl:EnragePeriodItem">
@@ -61,14 +63,7 @@
         <Grid Width="Auto" 
               Height="Auto" 
               Margin="6 0 6 2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+
             <Grid Margin="6 0 0 10" 
                   ClipToBounds="False">
                 <Grid.RowDefinitions>
@@ -77,7 +72,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
+                    <ColumnDefinition  Width="Auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Border x:Name="MainBorder"
@@ -486,7 +481,21 @@
                         <Line Y2="4" />
                     </UniformGrid>
                 </Grid>
+
             </Grid>
+            <Button HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="-5 0 0 0"
+                    Height="14"
+                    Background="Transparent"
+                    Grid.RowSpan="2"
+                    ToolTip="Use small bar for this NPC type"
+                    Command="{Binding Override}"
+                    Style="{StaticResource ButtonContentOpacityStyle}"
+                    Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource AncestorType={x:Type npcCtrl:BossGage}}}"
+                    >
+                <Path Data="{StaticResource SvgDownArrow}" Fill="White"/>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

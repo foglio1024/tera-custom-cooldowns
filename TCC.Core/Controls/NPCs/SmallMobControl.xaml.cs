@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data.NPCs;
@@ -38,8 +39,6 @@ namespace TCC.Controls.NPCs
             _firstLoad = false;
             VM.HpFactorChanged += OnHpChanged;
             VM.Disposed += OnDispose;
-
-
             //RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
 
@@ -71,6 +70,16 @@ namespace TCC.Controls.NPCs
         {
             Abnormalities.ItemTemplateSelector = null;
             Abnormalities.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; 
+        }
+
+        private void SmallMobControl_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            VM.ShowOverrideBtn = true;
+        }
+
+        private void SmallMobControl_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            VM.ShowOverrideBtn = false;
         }
     }
 }
