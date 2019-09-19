@@ -102,6 +102,8 @@ namespace TCC.R
 		public static Geometry SvgAuto => ((Geometry)App.Current.FindResource("SvgAuto"));
 		public static Geometry SvgShare => ((Geometry)App.Current.FindResource("SvgShare"));
 		public static Geometry SvgMoney => ((Geometry)App.Current.FindResource("SvgMoney"));
+		public static Geometry SvgDownArrow => ((Geometry)App.Current.FindResource("SvgDownArrow"));
+		public static Geometry SvgUpArrow => ((Geometry)App.Current.FindResource("SvgUpArrow"));
 		public static Geometry Svg => ((Geometry)App.Current.FindResource("Svg"));
 	}
 	public static class Colors
