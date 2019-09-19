@@ -130,8 +130,8 @@ namespace TCC
         public static void UpdateScreenCorrection()
         {
             if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
-            App.Settings.LastScreenSize = ScreenSize;
             ApplyScreenCorrection(GetScreenCorrection());
+            App.Settings.LastScreenSize = ScreenSize;
             if (!App.Loading) App.Settings.Save();
         }
 
