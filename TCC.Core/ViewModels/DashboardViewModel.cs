@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using FoglioUtils.Extensions;
 using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Controls.Dashboard;
@@ -333,20 +334,18 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
             }
         }
-        private void GcPls(object sender, EventArgs ev) { }
 
         public void SelectCharacter(Character character)
         {
             try
             {
-                if (SelectedCharacterInventory != null) ((ICollectionView)SelectedCharacterInventory).CollectionChanged -= GcPls;
+                ((ICollectionView) SelectedCharacterInventory)?.Free();
 
                 SelectedCharacter = character;
                 SelectedCharacterInventory = CollectionViewUtils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
                 {
                     new SortDescription("Item.Id", ListSortDirection.Ascending),
                 });
-                ((ICollectionView)SelectedCharacterInventory).CollectionChanged += GcPls;
                 WindowManager.DashboardWindow.ShowDetails();
                 Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
             }
@@ -358,32 +357,32 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
-            PacketAnalyzer.NewProcessor.Hook<S_NPCGUILD_LIST>(OnNpcGuildList);
-            PacketAnalyzer.NewProcessor.Hook<S_INVEN>(OnInven);
-            PacketAnalyzer.NewProcessor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
-            PacketAnalyzer.NewProcessor.Hook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
-            PacketAnalyzer.NewProcessor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
-            PacketAnalyzer.NewProcessor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
+            PacketAnalyzer.Processor.Hook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
+            PacketAnalyzer.Processor.Hook<S_NPCGUILD_LIST>(OnNpcGuildList);
+            PacketAnalyzer.Processor.Hook<S_INVEN>(OnInven);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
+            PacketAnalyzer.Processor.Hook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
+            PacketAnalyzer.Processor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
+            PacketAnalyzer.Processor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
         }
 
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
-            PacketAnalyzer.NewProcessor.Unhook<S_NPCGUILD_LIST>(OnNpcGuildList);
-            PacketAnalyzer.NewProcessor.Unhook<S_INVEN>(OnInven);
-            PacketAnalyzer.NewProcessor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Unhook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
-            PacketAnalyzer.NewProcessor.Unhook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
-            PacketAnalyzer.NewProcessor.Unhook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
-            PacketAnalyzer.NewProcessor.Unhook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
+            PacketAnalyzer.Processor.Unhook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
+            PacketAnalyzer.Processor.Unhook<S_NPCGUILD_LIST>(OnNpcGuildList);
+            PacketAnalyzer.Processor.Unhook<S_INVEN>(OnInven);
+            PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+            PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
+            PacketAnalyzer.Processor.Unhook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
+            PacketAnalyzer.Processor.Unhook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
+            PacketAnalyzer.Processor.Unhook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
         }
 
         private void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)

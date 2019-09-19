@@ -67,23 +67,17 @@ namespace TCC.ViewModels.Widgets
                 new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
             });
 
-            ((ICollectionView)Dps).CollectionChanged += GcPls;
-            ((ICollectionView)Tanks).CollectionChanged += GcPls;
-            ((ICollectionView)Healers).CollectionChanged += GcPls;
-            ((ICollectionView)All).CollectionChanged += GcPls;
-
             Game.Teleported += OnTeleported;
         }
 
         private void OnTeleported()
         {
             if (!Game.CivilUnrestZone)
-                PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
+                PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
             else
-                PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
+                PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
         }
 
-        private void GcPls(object sender, EventArgs ev) { }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -565,67 +559,67 @@ namespace TCC.ViewModels.Widgets
         }
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_USER_EFFECT>(OnUserEffect);
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
-            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY>(OnBanParty);
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Hook<S_LOAD_TOPO>(OnLoadTopo);
-            PacketAnalyzer.NewProcessor.Hook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
-            PacketAnalyzer.NewProcessor.Hook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
-            PacketAnalyzer.NewProcessor.Hook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
-            PacketAnalyzer.NewProcessor.Hook<S_SPAWN_USER>(OnSpawnUser);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(OnPartyMemberAbnormalClear);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(OnPartyMemberAbnormalRefresh);
-            PacketAnalyzer.NewProcessor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
-            PacketAnalyzer.NewProcessor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
-            PacketAnalyzer.NewProcessor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
-            PacketAnalyzer.NewProcessor.Hook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
-            PacketAnalyzer.NewProcessor.Hook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
-            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
-            PacketAnalyzer.NewProcessor.Hook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+            PacketAnalyzer.Processor.Hook<S_USER_EFFECT>(OnUserEffect);
+            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.Processor.Hook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.Processor.Hook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
+            PacketAnalyzer.Processor.Hook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
+            PacketAnalyzer.Processor.Hook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
+            PacketAnalyzer.Processor.Hook<S_SPAWN_USER>(OnSpawnUser);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(OnPartyMemberAbnormalClear);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(OnPartyMemberAbnormalRefresh);
+            PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
+            PacketAnalyzer.Processor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+            PacketAnalyzer.Processor.Hook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
+            PacketAnalyzer.Processor.Hook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
+            PacketAnalyzer.Processor.Hook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
         }
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_USER_EFFECT>(OnUserEffect);
-            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PARTY>(OnLeaveParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_BAN_PARTY>(OnBanParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
-            PacketAnalyzer.NewProcessor.Unhook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
-            PacketAnalyzer.NewProcessor.Unhook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
-            PacketAnalyzer.NewProcessor.Unhook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
-            PacketAnalyzer.NewProcessor.Unhook<S_SPAWN_USER>(OnSpawnUser);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(OnPartyMemberAbnormalClear);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(OnPartyMemberAbnormalRefresh);
-            PacketAnalyzer.NewProcessor.Unhook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
-            PacketAnalyzer.NewProcessor.Unhook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
-            PacketAnalyzer.NewProcessor.Unhook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
-            PacketAnalyzer.NewProcessor.Unhook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
-            PacketAnalyzer.NewProcessor.Unhook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
-            PacketAnalyzer.NewProcessor.Unhook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+            PacketAnalyzer.Processor.Unhook<S_USER_EFFECT>(OnUserEffect);
+            PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Unhook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.Processor.Unhook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
+            PacketAnalyzer.Processor.Unhook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
+            PacketAnalyzer.Processor.Unhook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
+            PacketAnalyzer.Processor.Unhook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
+            PacketAnalyzer.Processor.Unhook<S_SPAWN_USER>(OnSpawnUser);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_ABNORMAL_CLEAR>(OnPartyMemberAbnormalClear);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_ABNORMAL_REFRESH>(OnPartyMemberAbnormalRefresh);
+            PacketAnalyzer.Processor.Unhook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.Processor.Unhook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
+            PacketAnalyzer.Processor.Unhook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+            PacketAnalyzer.Processor.Unhook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
+            PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
+            PacketAnalyzer.Processor.Unhook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
+            PacketAnalyzer.Processor.Unhook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
 
         }
 

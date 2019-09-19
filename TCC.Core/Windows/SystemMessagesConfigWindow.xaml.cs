@@ -10,24 +10,29 @@ namespace TCC.Windows
 {
     public partial class SystemMessagesConfigWindow
     {
+        public SynchronizedObservableCollection<SystemMessageViewModel> HiddenMessages { get; }
+        public SynchronizedObservableCollection<SystemMessageViewModel> ShowedMessages { get; }
+        public ICollectionViewLiveShaping ShowedMessagesView { get; }
+        public ICollectionViewLiveShaping HiddenMessagesView { get; }
+
         public SystemMessagesConfigWindow()
         {
             InitializeComponent();
             DataContext = this;
-            _hiddenMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
-            _showedMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
+            HiddenMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
+            ShowedMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
 
             App.Settings.UserExcludedSysMsg.ForEach(opc =>
             {
-                _hiddenMessages.Add(new SystemMessageViewModel(opc, Game.DB.SystemMessagesDatabase.Messages[opc]));
+                HiddenMessages.Add(new SystemMessageViewModel(opc, Game.DB.SystemMessagesDatabase.Messages[opc]));
             });
             Game.DB.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
             {
                 if (App.Settings.UserExcludedSysMsg.Contains(keyVal.Key)) return;
-                _showedMessages.Add(new SystemMessageViewModel(keyVal.Key, keyVal.Value));
+                ShowedMessages.Add(new SystemMessageViewModel(keyVal.Key, keyVal.Value));
             });
 
-            _hiddenMessages.CollectionChanged += (_, args) =>
+            HiddenMessages.CollectionChanged += (_, args) =>
             {
                 switch (args.Action)
                 {
@@ -49,31 +54,7 @@ namespace TCC.Windows
 
             ShowedMessagesView = CollectionViewUtils.InitLiveView(null, ShowedMessages, new string[] { }, new SortDescription[] { });
             HiddenMessagesView = CollectionViewUtils.InitLiveView(null, HiddenMessages, new string[] { }, new SortDescription[] { });
-            ((ICollectionView)ShowedMessagesView).CollectionChanged += GcPls;
-            ((ICollectionView)HiddenMessagesView).CollectionChanged += GcPls;
         }
-
-        private void GcPls(object sender, EventArgs ev) { }
-
-        SynchronizedObservableCollection<SystemMessageViewModel> _hiddenMessages;
-        SynchronizedObservableCollection<SystemMessageViewModel> _showedMessages;
-        public SynchronizedObservableCollection<SystemMessageViewModel> HiddenMessages
-        {
-            get
-            {
-                return _hiddenMessages;
-            }
-        }
-        public SynchronizedObservableCollection<SystemMessageViewModel> ShowedMessages
-        {
-            get
-            {
-                return _showedMessages;
-            }
-        }
-
-        public ICollectionViewLiveShaping ShowedMessagesView { get; }
-        public ICollectionViewLiveShaping HiddenMessagesView { get; }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -84,7 +65,6 @@ namespace TCC.Windows
         {
             Close();
         }
-
         private void ExcludeMessage(object sender, RoutedEventArgs e)
         {
             var msgVm = (sender as FrameworkElement)?.DataContext as SystemMessageViewModel;
@@ -92,7 +72,6 @@ namespace TCC.Windows
             HiddenMessages.Add(msgVm);
             ShowedMessages.Remove(msgVm);
         }
-
         private void RestoreMessage(object sender, RoutedEventArgs e)
         {
             var msgVm = (sender as FrameworkElement)?.DataContext as SystemMessageViewModel;
@@ -100,7 +79,6 @@ namespace TCC.Windows
             ShowedMessages.Add(msgVm);
             HiddenMessages.Remove(msgVm);
         }
-
         private void FilterShowedMessages(object sender, TextChangedEventArgs e)
         {
             var view = (ICollectionView)ShowedMessagesView;

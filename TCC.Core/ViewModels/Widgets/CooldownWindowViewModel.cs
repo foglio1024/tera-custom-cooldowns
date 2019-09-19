@@ -472,7 +472,6 @@ namespace TCC.ViewModels.Widgets
             }
 
             Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(null, SkillsDatabase.SkillsForClass, new string[] { }, new SortDescription[] { }));
-            ((ICollectionView)SkillsView).CollectionChanged += GcStahp;
 
             N(nameof(SkillsView));
             N(nameof(MainSkills));
@@ -513,17 +512,11 @@ namespace TCC.ViewModels.Widgets
             }), DispatcherPriority.Background);
         }
 
-        public void InitViews()
+        private void InitViews()
         {
             if (ItemsView != null && AbnormalitiesView != null) return;
             ItemsView = CollectionViewUtils.InitLiveView(null, Items.ToList(), new string[] { }, new SortDescription[] { });
             AbnormalitiesView = CollectionViewUtils.InitLiveView(null, Passivities, new string[] { }, new SortDescription[] { });
-
-            ((ICollectionView) ItemsView).CollectionChanged += GcStahp;
-            ((ICollectionView) AbnormalitiesView).CollectionChanged += GcStahp;
-        }
-        private void GcStahp(object sender, NotifyCollectionChangedEventArgs e)
-        {
         }
         public void NotifyItemsDisplay()
         {
@@ -548,28 +541,28 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.NewProcessor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Hook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
-            PacketAnalyzer.NewProcessor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
-            PacketAnalyzer.NewProcessor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
-            PacketAnalyzer.NewProcessor.Hook<S_CREST_MESSAGE>(OnCrestMessage);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.NewProcessor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.Processor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
+            PacketAnalyzer.Processor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+            PacketAnalyzer.Processor.Hook<S_CREST_MESSAGE>(OnCrestMessage);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
 
         }
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.NewProcessor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.NewProcessor.Unhook<S_GET_USER_LIST>(OnGetUserList);
-            PacketAnalyzer.NewProcessor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
-            PacketAnalyzer.NewProcessor.Unhook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
-            PacketAnalyzer.NewProcessor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
-            PacketAnalyzer.NewProcessor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.NewProcessor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
+            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.Processor.Unhook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
+            PacketAnalyzer.Processor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+            PacketAnalyzer.Processor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
+            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
 
         }
 
