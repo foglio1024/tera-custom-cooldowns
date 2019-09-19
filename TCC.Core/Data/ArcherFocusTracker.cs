@@ -1,4 +1,4 @@
-﻿using TCC.ClassSpecific;
+﻿using TCC.Data.Abnormalities;
 
 namespace TCC.Data
 {
