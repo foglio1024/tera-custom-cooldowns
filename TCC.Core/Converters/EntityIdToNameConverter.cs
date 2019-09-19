@@ -8,10 +8,12 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // ReSharper disable once PossibleNullReferenceException
-            return Game.IsMe((ulong)value)
+            var id = (ulong) value;
+            return Game.IsMe(id)
                 ? Game.Me.Name
-                : EntityManager.IsEntitySpawned((ulong)value) ? EntityManager.GetEntityName((ulong)value) /*(WindowManager.ViewModels.Group.TryGetUser((ulong) value, out var p) ? p.Name*/ : "";
+                : EntityManager.IsEntitySpawned(id) 
+                    ? EntityManager.GetEntityName(id) 
+                    : "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

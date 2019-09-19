@@ -1,8 +1,8 @@
 ﻿using FoglioUtils;
 using System.Collections.Generic;
 using System.Windows;
-using TCC.ClassSpecific;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
 using TCC.ViewModels;
 using TeraDataLite;
@@ -31,20 +31,18 @@ namespace TCC
             if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 NearbyNPC[entityId] = m.Name;
-                //if (m.Name == "Tradon") ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "TCC", "Tradon spawned") { ContainsPlayerName = true });
-                //if (m.Name == "Garash Bloodtusk") ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "TCC", "Garash Bloodtusk spawned") { ContainsPlayerName = true });
                 FlyingGuardianDataProvider.InvokeProgressChanged();
                 if (villager) return;
                 if (m.IsBoss)
                 {
-                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v);
-                    WindowManager.ViewModels.NPC.SetBossEnrageTime(entityId, remainingEnrageTime);
+                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v, remainingEnrageTime);
+                    //WindowManager.ViewModels.NPC.SetEnrageTime(entityId, remainingEnrageTime);
                 }
                 else
                 {
                     if (App.Settings.NpcWindowSettings.ShowOnlyBosses) return;
-                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false);
-                    WindowManager.ViewModels.NPC.SetBossEnrageTime(entityId, remainingEnrageTime);
+                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false, remainingEnrageTime);
+                    //WindowManager.ViewModels.NPC.SetEnrageTime(entityId, remainingEnrageTime);
                 }
             }
         }
@@ -71,19 +69,19 @@ namespace TCC
         {
             NearbyNPC.Remove(target);
 
-            WindowManager.ViewModels.NPC.RemoveBoss(target, type);
+            WindowManager.ViewModels.NPC.RemoveNpc(target, type);
             if (WindowManager.ViewModels.NPC.VisibleBossesCount == 0)
             {
                 Game.Encounter = false;
                 WindowManager.ViewModels.Group.SetAggro(0);
             }
-            ClassAbnormalityTracker.CheckMarkingOnDespawn(target);
+            AbnormalityTracker.CheckMarkingOnDespawn(target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
         public static void SetNPCStatus(ulong entityId, bool enraged, int remainingEnrageTime)
         {
-            WindowManager.ViewModels.NPC.SetBossEnrageTime(entityId, remainingEnrageTime);
-            WindowManager.ViewModels.NPC.SetBossEnrage(entityId, enraged);
+            WindowManager.ViewModels.NPC.SetEnrageTime(entityId, remainingEnrageTime);
+            WindowManager.ViewModels.NPC.SetEnrageStatus(entityId, enraged);
         }
         public static void UpdateNPC(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
@@ -108,10 +106,10 @@ namespace TCC
         }
         public static void ClearNPC()
         {
-            if(App.Settings.NpcWindowSettings.Enabled) WindowManager.ViewModels.NPC.ClearBosses();
+            if(App.Settings.NpcWindowSettings.Enabled) WindowManager.ViewModels.NPC.Clear();
             NearbyNPC.Clear();
             NearbyPlayers.Clear();
-            ClassAbnormalityTracker.ClearMarkedTargets();
+            AbnormalityTracker.ClearMarkedTargets();
         }
         public static void CheckHarrowholdMode(ushort zoneId, uint templateId)
         {
@@ -151,11 +149,11 @@ namespace TCC
 
         public static string GetNpcName(ulong eid)
         {
-            return NearbyNPC.TryGetValue(eid, out var name) ? name : "unknown";
+            return NearbyNPC.TryGetValue(eid, out var name) ? name : "Unknown";
         }
         public static string GetUserName(ulong eid)
         {
-            return NearbyPlayers.TryGetValue(eid, out var name) ? name : "unknown";
+            return NearbyPlayers.TryGetValue(eid, out var name) ? name : "Unknown";
         }
 
         internal static void DepawnUser(ulong entityId)
