@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class ValkyrieAbnormalityTracker : ClassAbnormalityTracker
+    public class ValkyrieAbnormalityTracker : AbnormalityTracker
     {
         private const uint RagnarokId = 10155130;
         private const uint GrugnirsBiteId = 10155530;

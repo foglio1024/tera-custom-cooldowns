@@ -1,12 +1,10 @@
-﻿using TCC.Data;
-using TCC.Utilities;
+﻿using TCC.Utilities;
 using TCC.ViewModels;
-
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class BrawlerAbnormalityTracker : ClassAbnormalityTracker
+    public class BrawlerAbnormalityTracker : AbnormalityTracker
     {
         private const int GrowingFuryId = 10153040;
         private const int CounterGlyphId = 31020;

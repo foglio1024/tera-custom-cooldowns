@@ -1,13 +1,11 @@
 ﻿using System.Linq;
-
-using TCC.Data;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class SlayerAbnormalityTracker : ClassAbnormalityTracker
+    public class SlayerAbnormalityTracker : AbnormalityTracker
     {
         private static readonly uint[] IcbIds = { 300800, 300801, 300805 };
 

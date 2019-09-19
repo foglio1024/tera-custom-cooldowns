@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using TCC.Data;
 using TCC.Data.Skills;
-
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class ClassAbnormalityTracker
+    public class AbnormalityTracker
     {
         protected static readonly List<ulong> MarkedTargets = new List<ulong>();
         public static event Action<ulong> MarkingRefreshed;
@@ -42,7 +39,7 @@ namespace TCC.ClassSpecific
         {
             SkillManager.AddSkillDirectly(sk, duration, CooldownType.Skill, CooldownMode.Pre); //CooldownWindowViewModel.Instance.AddOrRefresh(new Cooldown(sk, duration, CooldownType.Skill, CooldownMode.Pre));
         }
-        protected ClassAbnormalityTracker()
+        protected AbnormalityTracker()
         {
             ClearMarkedTargets();
         }

@@ -1,14 +1,11 @@
-﻿
-using System.Linq;
-
-using TCC.Data;
+﻿using System.Linq;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class PriestAbnormalityTracker : ClassAbnormalityTracker
+    public class PriestAbnormalityTracker : AbnormalityTracker
     {
         private static readonly uint[] EnergyStarsIDs = { 801500, 801501, 801502, 801503, 98000107 };
         private static readonly int GraceId = 801700;

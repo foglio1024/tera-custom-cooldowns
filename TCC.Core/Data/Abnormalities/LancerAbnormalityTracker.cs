@@ -1,14 +1,11 @@
 ﻿using System.Linq;
-
-using TCC.Data;
 using TCC.Utilities;
 using TCC.ViewModels;
-
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class LancerAbnormalityTracker : ClassAbnormalityTracker
+    public class LancerAbnormalityTracker : AbnormalityTracker
     {
         public static readonly uint[] ARushIDs = { 200700, 200701, 200731 };
         public static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };

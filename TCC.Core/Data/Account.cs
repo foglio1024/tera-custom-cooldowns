@@ -1,11 +1,11 @@
 ﻿using TCC.Data.Pc;
 
-namespace TCC
+namespace TCC.Data
 {
     public class Account
     {
         public bool IsElite { get; set; }
-        public SynchronizedObservableCollection<Character> Characters { get; set; }
+        public SynchronizedObservableCollection<Character> Characters { get; }
 
         public Account()
         {

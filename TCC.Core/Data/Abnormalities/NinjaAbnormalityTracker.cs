@@ -1,12 +1,10 @@
-﻿
-using TCC.Data;
-using TCC.Utilities;
+﻿using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class NinjaAbnormalityTracker :ClassAbnormalityTracker
+    public class NinjaAbnormalityTracker :AbnormalityTracker
     {
         private const int FocusId = 10154030;
         private const int InnerHarmonyBuffId = 10154480;

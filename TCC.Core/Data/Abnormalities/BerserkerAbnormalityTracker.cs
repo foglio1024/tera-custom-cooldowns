@@ -1,12 +1,11 @@
-﻿using TCC.Data;
-using TCC.Utilities;
+﻿using TCC.Utilities;
 using TCC.ViewModels;
-using TeraPacketParser.Messages;
 using TeraDataLite;
+using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class BerserkerAbnormalityTracker : ClassAbnormalityTracker
+    public class BerserkerAbnormalityTracker : AbnormalityTracker
     {
         private const int BloodlustId = 400701;
         private const int FieryRageId = 400105;

@@ -1,14 +1,12 @@
-﻿
-using TCC.Data;
-using TCC.Data.Skills;
+﻿using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class SorcererAbnormalityTracker : ClassAbnormalityTracker
+    public class SorcererAbnormalityTracker : AbnormalityTracker
     {
         private const int ManaBoostId = 500150;
         private const int ManaBoost2Id = 501602;

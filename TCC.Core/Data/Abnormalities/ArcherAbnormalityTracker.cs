@@ -1,12 +1,11 @@
 ﻿using System.Linq;
-using TCC.Data;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class ArcherAbnormalityTracker : ClassAbnormalityTracker
+    public class ArcherAbnormalityTracker : AbnormalityTracker
     {
         private static readonly uint FocusId = 601400;
         private static readonly uint FocusXId = 601450;
@@ -42,19 +41,19 @@ namespace TCC.ClassSpecific
         private static void CheckWindsong(S_ABNORMALITY_BEGIN p)
         {
             //if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //temporary
+            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             TccUtils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Start(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
             //if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //temporary
+            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             TccUtils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
             //if (!WindsongIds.Contains(p.AbnormalityId)) return;☺
-            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //temporary
+            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             TccUtils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Refresh(0, CooldownMode.Normal);
         }
 

@@ -1,15 +1,12 @@
-﻿
-using System.Linq;
-
-using TCC.Data;
+﻿using System.Linq;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class MysticAbnormalityTracker : ClassAbnormalityTracker
+    public class MysticAbnormalityTracker : AbnormalityTracker
     {
         private const int HurricaneId = 60010;
         private const int HurricaneDuration = 120000;

@@ -1,13 +1,11 @@
-﻿using TCC.Data;
-using TCC.Data.Skills;
+﻿using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels;
-
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class ReaperAbnormalityTracker : ClassAbnormalityTracker
+    public class ReaperAbnormalityTracker : AbnormalityTracker
     {
         private const int ShadowReapingId = 10151010;
         private const int ShadowStepId = 10151000;

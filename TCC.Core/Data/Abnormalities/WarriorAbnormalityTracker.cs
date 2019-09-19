@@ -1,13 +1,12 @@
 ﻿using System.Linq;
-using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class WarriorAbnormalityTracker : ClassAbnormalityTracker
+    public class WarriorAbnormalityTracker : AbnormalityTracker
     {
         //private static readonly uint[] GambleIDs = { 100800, 100801, 100802, 100803 };
         private static readonly uint[] AstanceIDs = { 100100, 100101, 100102, 100103 };

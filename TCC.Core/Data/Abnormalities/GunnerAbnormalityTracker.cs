@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-
-using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels;
-
 using TeraPacketParser.Messages;
 
-namespace TCC.ClassSpecific
+namespace TCC.Data.Abnormalities
 {
-    public class GunnerAbnormalityTracker : ClassAbnormalityTracker
+    public class GunnerAbnormalityTracker : AbnormalityTracker
     {
         private static readonly uint DashingReloadId = 10152354;
         private static readonly List<uint> LaserTargetingIDs = new List<uint> { 10152340 };
