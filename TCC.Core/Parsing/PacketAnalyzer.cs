@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using FoglioUtils;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Interop.Proxy;
@@ -22,67 +22,39 @@ namespace TCC.Parsing
     {
         public static event Action ProcessorReady;
         public static ITeraSniffer Sniffer;
-        public static MessageFactory Factory;
-        public static MessageProcessor Processor { get; }
+        public static MessageFactory Factory { get; private set; }
+        public static MessageProcessor Processor { get; private set; }
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         public static Thread AnalysisThread;
         public static int AnalysisThreadId;
-        public static NewProcessor NewProcessor { get; set; }
 
         private static void Init()
         {
-            switch (App.Settings.CaptureMode)
-            {
-                case CaptureMode.Npcap when !App.ToolboxMode:
-                case CaptureMode.RawSockets when !App.ToolboxMode:
-                    Sniffer = new TeraSniffer();
-                    break;
-                default:
-                    Sniffer = new ToolboxSniffer();
-                    break;
-            }
+            Sniffer = SnifferFactory.Create();
+            Factory = new MessageFactory();
+
             Sniffer.NewConnection += OnNewConnection;
             Sniffer.EndConnection += OnEndConnection;
             Sniffer.MessageReceived += EnqueuePacket;
-
-            Game.Server = new Server("", "", "", 0);
-            ProcessorReady += InstallHooks;
-
-            Factory = new MessageFactory();
-            //Processor = new MessageProcessor();
-            if (AnalysisThread == null)
-            {
-                Log.All("Analysis thread not running, starting it...");
-                AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Analysis" };
-                AnalysisThread.Start();
-            }
-            else
-            {
-                Log.All("Analysis already running, skipping...");
-            }
             Sniffer.Enabled = true;
 
-        }
-        private static void InstallHooks()
-        {
-            NewProcessor.Hook<C_CHECK_VERSION>(PacketHandler.HandleCheckVersion);
-            NewProcessor.Hook<C_LOGIN_ARBITER>(PacketHandler.HandleLoginArbiter);
-            NewProcessor.Hook<S_GET_USER_LIST>(PacketHandler.HandleGetUserList);
-            NewProcessor.Hook<S_LOGIN>(PacketHandler.HandleLogin);
+            AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Analysis" };
+            AnalysisThread.Start();
         }
 
         public static async void InitAsync()
         {
             await Task.Factory.StartNew(Init);
-
             WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
         }
         private static void PacketAnalysisLoop()
         {
             AnalysisThreadId = MiscUtils.GetCurrentThreadId();
-            NewProcessor = new NewProcessor();
-            App.BaseDispatcher.BeginInvoke(new Action(() => { ProcessorReady?.Invoke(); }));
+            Processor = new MessageProcessor();
+            Processor.Hook<C_CHECK_VERSION>(OnCheckVersion);
+            Processor.Hook<C_LOGIN_ARBITER>(OnLoginArbiter);
 
+            if (ProcessorReady != null) App.BaseDispatcher.BeginInvoke(ProcessorReady);
             while (true)
             {
                 if (!Packets.TryDequeue(out var pkt))
@@ -90,10 +62,7 @@ namespace TCC.Parsing
                     Thread.Sleep(1);
                     continue;
                 }
-
-                var msg = Factory.Create(pkt);
-                NewProcessor.Handle(msg);
-                //Processor.Process(msg);
+                Processor.Handle(Factory.Create(pkt));
             }
             // ReSharper disable once FunctionNeverReturns
         }
@@ -135,43 +104,62 @@ namespace TCC.Parsing
             Packets.Enqueue(message);
         }
 
+        private static async void OnLoginArbiter(C_LOGIN_ARBITER p)
+        {
+            OpcodeDownloader.DownloadSysmsgIfNotExist(Factory.Version, Path.Combine(App.DataPath, "opcodes/"), Factory.ReleaseVersion);
+            var path = File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map"))
+                       ?
+                       Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map")
+                       :
+                       File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map"))
+                           ? Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map")
+                           : "";
+
+            if (path == "")
+            {
+                if (Sniffer.Connected && Sniffer is ToolboxSniffer tbs)
+                {
+                    var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map").Replace("\\", "/");
+                    if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))
+                    {
+                        Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                        return;
+                    }
+                }
+                TccMessageBox.Show($"sysmsg.{Factory.ReleaseVersion / 100}.map or sysmsg.{Factory.Version}.map not found.\nWait for update or use tcc-stub to automatically retreive sysmsg files from game client.\nTCC will now close.", MessageBoxType.Error);
+                App.Close();
+                return;
+            }
+            Factory.ReloadSysMsg(path);
+
+            WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
+        }
+
+        private static async void OnCheckVersion(C_CHECK_VERSION p)
+        {
+            var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
+            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
+            if (!File.Exists(opcPath))
+            {
+                if (Sniffer is ToolboxSniffer tbs)
+                {
+                    if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
+                    {
+                        TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                        App.Close();
+                        return;
+                    }
+                }
+                else
+                {
+                    TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                    App.Close();
+                    return;
+                }
+            }
+            var opcNamer = new OpCodeNamer(opcPath);
+            Factory = new MessageFactory(p.Versions[0], opcNamer);
+            Sniffer.Connected = true;
+        }
     }
-    public class NewProcessor
-    {
-        private ConcurrentDictionary<Type, List<Delegate>> _hooks { get; }
-
-        private readonly object _lock = new object();
-
-        public NewProcessor()
-        {
-            _hooks = new ConcurrentDictionary<Type, List<Delegate>>();
-        }
-
-        public void Hook<T>(Action<T> action)
-        {
-            lock (_lock)
-            {
-                if (!_hooks.TryGetValue(typeof(T), out _)) _hooks[typeof(T)] = new List<Delegate>();
-                if (!_hooks[typeof(T)].Contains(action)) _hooks[typeof(T)].Add(action);
-            }
-        }
-        public void Unhook<T>(Action<T> action)
-        {
-            lock (_lock)
-            {
-                if (!_hooks.TryGetValue(typeof(T), out var handlers)) return;
-                handlers.Remove(action);
-            }
-        }
-        public void Handle(ParsedMessage msg)
-        {
-            if (!_hooks.TryGetValue(msg.GetType(), out var handlers) || handlers == null) return;
-            lock (_lock)
-            {
-                //Log.All($"Handling {msg.GetType().Name}");
-                handlers.ForEach(del => del.DynamicInvoke(msg));
-            }
-        }
-    }
-
 }
