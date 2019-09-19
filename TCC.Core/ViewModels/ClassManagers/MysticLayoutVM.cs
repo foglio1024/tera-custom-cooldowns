@@ -1,5 +1,5 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using TeraDataLite;
 
@@ -85,8 +85,8 @@ namespace TCC.ViewModels
                 Cooldown = new Cooldown(voc, false) { CanFlash = true }
             };
 
-            ClassAbnormalityTracker.MarkingExpired += OnVocExpired;
-            ClassAbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
+            AbnormalityTracker.MarkingExpired += OnVocExpired;
+            AbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
 
             Game.CombatChanged += OnCombatChanged;
             Game.EncounterChanged += OnCombatChanged;

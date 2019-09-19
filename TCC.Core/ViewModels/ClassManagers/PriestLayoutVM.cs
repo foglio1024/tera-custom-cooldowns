@@ -1,5 +1,5 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using TeraDataLite;
 
@@ -72,8 +72,8 @@ namespace TCC.ViewModels
                 Buff = new Cooldown(tn, false)
             };
 
-            ClassAbnormalityTracker.MarkingExpired += OnTripleNemesisExpired;
-            ClassAbnormalityTracker.MarkingRefreshed += OnTripleNemesisRefreshed;
+            AbnormalityTracker.MarkingExpired += OnTripleNemesisExpired;
+            AbnormalityTracker.MarkingRefreshed += OnTripleNemesisRefreshed;
         }
 
         private void OnTripleNemesisRefreshed(ulong duration)

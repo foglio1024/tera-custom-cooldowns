@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -9,7 +8,7 @@ namespace TCC.Utilities
 {
     public static class AbnormalityUtils
     {
-        public static ClassAbnormalityTracker CurrentAbnormalityTracker { get; set; }
+        public static AbnormalityTracker CurrentAbnormalityTracker { get; set; }
 
         public static bool Pass(Abnormality ab)
         {
