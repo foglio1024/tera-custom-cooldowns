@@ -94,7 +94,7 @@ namespace TCC.ViewModels
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
             Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
-            ListingsView = CollectionViewUtils.InitLiveView(null, Listings, new string[] { }, new SortDescription[] { });
+            ListingsView = CollectionViewUtils.InitLiveView(Listings, null, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             WindowManager.ViewModels.Group.PropertyChanged += OnGroupWindowVmPropertyChanged;

@@ -57,11 +57,13 @@ namespace TCC.ViewModels.Widgets
         public bool CivilUnrest => Game.CivilUnrestZone;
         private readonly SynchronizedObservableCollection<CivilUnrestGuild> _guilds;
 
-        public ICollectionViewLiveShaping Guilds
+        public ICollectionViewLiveShaping Guilds //TODO: fix getter
         {
             get
-            {
-                var ret = CollectionViewUtils.InitLiveView(p => p != null, _guilds, new string[] { },
+            { 
+                var ret = CollectionViewUtils.InitLiveView(_guilds,
+                    guild => guild != null,
+                    new string[] { },
                     new[]
                     {
                         //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
@@ -159,7 +161,7 @@ namespace TCC.ViewModels.Widgets
             {
                 g.TowerHp = guildInfo.TowerHp;
                 if (g.Name != "") return;
-                if(guildInfo.Self) g.Name = WindowManager.ViewModels.Dashboard.CurrentCharacter?.GuildName;
+                if (guildInfo.Self) g.Name = WindowManager.ViewModels.Dashboard.CurrentCharacter?.GuildName;
                 //TODO: add kills and deaths?
             }
             else

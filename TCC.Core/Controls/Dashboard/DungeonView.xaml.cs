@@ -84,10 +84,10 @@ namespace TCC.Controls.Dashboard
         public DungeonColumnViewModel()
         {
             DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
-            DungeonsListView = CollectionViewUtils.InitLiveView(o => !((DungeonCooldownViewModel)o).Owner.Hidden, DungeonsList,
-                new[] { "Owner.Hidden" },
-                new[] { new SortDescription("Owner.Position", ListSortDirection.Ascending) }
-            );
+            DungeonsListView = CollectionViewUtils.InitLiveView(DungeonsList,
+                o => !o.Owner.Hidden,
+                new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" }, 
+                new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
         }
     }
 

@@ -52,8 +52,8 @@ namespace TCC.Windows
                 App.Settings.Save();
             };
 
-            ShowedMessagesView = CollectionViewUtils.InitLiveView(null, ShowedMessages, new string[] { }, new SortDescription[] { });
-            HiddenMessagesView = CollectionViewUtils.InitLiveView(null, HiddenMessages, new string[] { }, new SortDescription[] { });
+            ShowedMessagesView = CollectionViewUtils.InitLiveView(ShowedMessages, null, new string[] { }, new SortDescription[] { });
+            HiddenMessagesView = CollectionViewUtils.InitLiveView(HiddenMessages, null, new string[] { }, new SortDescription[] { });
         }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)

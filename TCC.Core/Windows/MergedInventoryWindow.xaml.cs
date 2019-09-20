@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.Data.Pc;
 
 namespace TCC.Windows
@@ -19,20 +20,21 @@ namespace TCC.Windows
         public MergedInventoryViewModel()
         {
             MergedInventory = new SynchronizedObservableCollection<MergedInventoryItem>();
-            MergedInventoryView = CollectionViewUtils.InitLiveView(o => o != null, MergedInventory, new string[] { }, new[]
-            {
-                new SortDescription("Item.Item.Id", ListSortDirection.Ascending),
-                new SortDescription("Item.Item.RareGrade", ListSortDirection.Ascending),
-            });
-            ((ICollectionView)MergedInventoryView).CollectionChanged += Reeeee;
+            MergedInventoryView = CollectionViewUtils.InitLiveView(MergedInventory, 
+                item => item != null, 
+                new string[] { }, 
+                new[]
+                {
+                    new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),
+                    new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),
+                });
         }
 
-        private void Reeeee(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { }
         private double _totalProgress;
 
         public double TotalProgress
         {
-            get { return _totalProgress*100; }
+            get => _totalProgress*100;
             set
             {
                 _totalProgress = value;

@@ -58,14 +58,26 @@ namespace TCC.ViewModels.Widgets
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Dps && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Tanks = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Tank && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Healers = CollectionViewUtils.InitLiveView(o => ((User)o).Role == Role.Healer && ((User)o).Visible, Members, new[] { nameof(User.Role), nameof(User.Visible) }, new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            All = CollectionViewUtils.InitLiveView(o => ((User)o).Visible, Members, new[] { nameof(User.Visible) }, new[]
-            {
-                new SortDescription(nameof(User.Role), ListSortDirection.Descending),
-                new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
-            });
+            Dps = CollectionViewUtils.InitLiveView(Members,
+                dps => dps.Role == Role.Dps && dps.Visible,
+                new[] { nameof(User.Role), nameof(User.Visible) },
+                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Tanks = CollectionViewUtils.InitLiveView(Members,
+                tank => tank.Role == Role.Tank && tank.Visible,
+                new[] { nameof(User.Role), nameof(User.Visible) },
+                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            Healers = CollectionViewUtils.InitLiveView(Members,
+                healer => healer.Role == Role.Healer && healer.Visible,
+                new[] { nameof(User.Role), nameof(User.Visible) },
+                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+            All = CollectionViewUtils.InitLiveView(Members,
+                user => user.Visible,
+                new[] { nameof(User.Visible) },
+                new[]
+                {
+                    new SortDescription(nameof(User.Role), ListSortDirection.Descending),
+                    new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
+                });
 
             Game.Teleported += OnTeleported;
         }

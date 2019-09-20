@@ -66,9 +66,10 @@ namespace TCC.ViewModels
         {
             get
             {
-                return _sortedColumns ?? (_sortedColumns = CollectionViewUtils.InitLiveView(o => ((DungeonColumnViewModel)o).Dungeon.Show, Columns,
-                                            new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Show)}", $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
-                                            new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
+                return _sortedColumns ?? (_sortedColumns = CollectionViewUtils.InitLiveView(Columns,
+                                          o => o.Dungeon.Show,
+                                          new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Show)}", $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
+                                          new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
             }
         }
         public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
@@ -213,15 +214,18 @@ namespace TCC.ViewModels
 
             Game.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
 
-            SortedCharacters = CollectionViewUtils.InitLiveView(o => !((Character)o).Hidden, Game.Account.Characters,
+            SortedCharacters = CollectionViewUtils.InitLiveView(Game.Account.Characters,
+                character => !character.Hidden,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = CollectionViewUtils.InitLiveView(o => ((Character)o).Hidden, Game.Account.Characters,
+            HiddenCharacters = CollectionViewUtils.InitLiveView(Game.Account.Characters,
+                character => character.Hidden,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            CharacterViewModelsView = CollectionViewUtils.InitLiveView(o => !((CharacterViewModel)o).Character.Hidden, CharacterViewModels,
+            CharacterViewModelsView = CollectionViewUtils.InitLiveView(CharacterViewModels,
+                characterVM => !characterVM.Character.Hidden,
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
@@ -339,13 +343,14 @@ namespace TCC.ViewModels
         {
             try
             {
-                ((ICollectionView) SelectedCharacterInventory)?.Free();
+                ((ICollectionView)SelectedCharacterInventory)?.Free();
 
                 SelectedCharacter = character;
-                SelectedCharacterInventory = CollectionViewUtils.InitLiveView(o => o != null, character.Inventory, new string[] { }, new[]
-                {
-                    new SortDescription("Item.Id", ListSortDirection.Ascending),
-                });
+                SelectedCharacterInventory = CollectionViewUtils.InitLiveView(character.Inventory,
+                    inventoryItem => inventoryItem != null,
+                    new string[] { },
+                    new[] { new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending) });
+
                 WindowManager.DashboardWindow.ShowDetails();
                 Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
             }
