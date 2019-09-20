@@ -69,7 +69,7 @@ namespace TCC
         {
             NearbyNPC.Remove(target);
 
-            WindowManager.ViewModels.NPC.RemoveNpc(target, type);
+            WindowManager.ViewModels.NPC.RemoveNPC(target, type);
             if (WindowManager.ViewModels.NPC.VisibleBossesCount == 0)
             {
                 Game.Encounter = false;

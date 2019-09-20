@@ -40,7 +40,7 @@ namespace TCC.Controls.NPCs
 
                 try
                 {
-                    WindowManager.ViewModels.NPC.RemoveNpc(_dc, 0);
+                    WindowManager.ViewModels.NPC.RemoveNPC(_dc, 0);
                 }
                 catch
                 {
