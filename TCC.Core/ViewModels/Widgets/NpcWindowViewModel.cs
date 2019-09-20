@@ -18,7 +18,6 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
 {
-
     [TccModule]
     public class NpcWindowViewModel : TccWindowViewModel
     {
@@ -40,10 +39,10 @@ namespace TCC.ViewModels.Widgets
         {
             get
             {
-                _bams = CollectionViewUtils.InitLiveView(
-                    p => ((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible,
-                    NpcList,
-                    new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
+                if (_bams != null) return _bams;
+                _bams = CollectionViewUtils.InitLiveView(NpcList,
+                    npc => npc.IsBoss && !npc.IsTower && npc.Visible,
+                    new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) }, 
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _bams;
             }
@@ -52,10 +51,10 @@ namespace TCC.ViewModels.Widgets
         {
             get
             {
-                _mobs = CollectionViewUtils.InitLiveView(
-                    p => !((NPC)p).IsBoss && !((NPC)p).IsTower && ((NPC)p).Visible,
-                    NpcList,
-                    new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
+                if (_mobs != null) return _mobs;
+                _mobs = CollectionViewUtils.InitLiveView(NpcList,
+                    npc => !npc.IsBoss && !npc.IsTower && npc.Visible,
+                    new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) }, 
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _mobs;
             }
@@ -64,13 +63,16 @@ namespace TCC.ViewModels.Widgets
         {
             get
             {
-                _guildTowers = CollectionViewUtils.InitLiveView(p => ((NPC)p).IsTower, NpcList, new string[] { },
-                    new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+                if (_guildTowers != null) return _guildTowers;
+                _guildTowers = CollectionViewUtils.InitLiveView(NpcList,
+                        npc => npc.IsTower,
+                        new string[] { }, 
+                        new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;
             }
         }
-        public SynchronizedObservableCollection<NPC> NpcList { get; set; }
-        public Dictionary<ulong, uint> GuildIds { get; private set; } = new Dictionary<ulong, uint>();
+        public SynchronizedObservableCollection<NPC> NpcList { get; }
+        public Dictionary<ulong, uint> GuildIds { get; } = new Dictionary<ulong, uint>();
 
         public NpcWindowViewModel(WindowSettings settings) : base(settings)
         {
@@ -78,13 +80,20 @@ namespace TCC.ViewModels.Widgets
             InitFlushTimer();
             NpcListChanged += FlushCache;
             ((NpcWindowSettings)settings).AccurateHpChanged += OnAccurateHpChanged;
+
+            void InitFlushTimer()
+            {
+                var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+                flushTimer.Tick += (_, __) => FlushCache();
+                flushTimer.Start();
+            }
         }
 
         public void AddOrUpdateNpc(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true, int remainingEnrageTime = 0)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!TryFindNpc(entityId, out var boss)) boss = AddNpc(entityId, zoneId, templateId, isBoss, visibility);
+                if (!TryFindNPC(entityId, out var boss)) boss = AddNPC(entityId, zoneId, templateId, isBoss, visibility);
                 if (boss == null) return;
                 SetHP(boss, maxHp, curHp, src);
                 SetEnrageTime(entityId, remainingEnrageTime);
@@ -93,11 +102,11 @@ namespace TCC.ViewModels.Widgets
                 NpcListChanged?.Invoke();
             }));
         }
-        public void RemoveNpc(ulong id, DespawnType type)
+        public void RemoveNPC(ulong id, DespawnType type)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (!TryFindNpc(id, out var boss)) return;
+                if (!TryFindNPC(id, out var boss)) return;
                 if (type == DespawnType.OutOfView)
                 {
                     _savedHp[id] = boss.CurrentHP;
@@ -120,7 +129,7 @@ namespace TCC.ViewModels.Widgets
                 if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
             }));
         }
-        public void RemoveNpc(NPC npc, uint delay)
+        public void RemoveNPC(NPC npc, uint delay)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -148,22 +157,22 @@ namespace TCC.ViewModels.Widgets
         }
         public void SetEnrageStatus(ulong entityId, bool enraged)
         {
-            if (!TryFindNpc(entityId, out var boss)) return;
+            if (!TryFindNPC(entityId, out var boss)) return;
             boss.Enraged = enraged;
         }
         public void SetEnrageTime(ulong entityId, int remainingEnrageTime)
         {
-            if (!TryFindNpc(entityId, out var boss)) return;
+            if (remainingEnrageTime == 0 || !TryFindNPC(entityId, out var boss)) return;
             boss.RemainingEnrageTime = remainingEnrageTime;
         }
         public void UpdateAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            if (!TryFindNpc(target, out var boss)) return;
+            if (!TryFindNPC(target, out var boss)) return;
             boss.AddorRefresh(ab, duration, stacks);
         }
         public void EndAbnormality(ulong target, Abnormality ab)
         {
-            if (!TryFindNpc(target, out var boss)) return;
+            if (!TryFindNPC(target, out var boss)) return;
             boss.EndBuff(ab);
         }
         public void Clear()
@@ -198,13 +207,6 @@ namespace TCC.ViewModels.Widgets
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
-
-        private void InitFlushTimer()
-        {
-            var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            flushTimer.Tick += (_, __) => FlushCache();
-            flushTimer.Start();
-        }
         private void OnAccurateHpChanged()
         {
             if (App.Settings.NpcWindowSettings.AccurateHp) PacketAnalyzer.Processor.Hook<S_SHOW_HP>(OnShowHp);
@@ -217,10 +219,7 @@ namespace TCC.ViewModels.Widgets
                 if (_cache.Count == 0) return;
                 try
                 {
-                    _cache.ToList().ForEach(hpc =>
-                    {
-                        SetFromCache(hpc.Key, hpc.Value);
-                    });
+                    _cache.ToList().ForEach(hpc => SetFromCache(hpc.Key, hpc.Value));
                 }
                 catch (Exception ex)
                 {
@@ -233,10 +232,10 @@ namespace TCC.ViewModels.Widgets
         }
         private void SetFromCache(ulong hpcEntityId, float hpcCurrentHp)
         {
-            if (!TryFindNpc(hpcEntityId, out var npc)) return;
+            if (!TryFindNPC(hpcEntityId, out var npc)) return;
             npc.CurrentHP = hpcCurrentHp;
         }
-        private NPC AddNpc(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
+        private NPC AddNPC(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
         {
             if (App.Settings.NpcWindowSettings.ShowOnlyBosses && !isBoss) return null;
             if (templateId == 0 || zoneId == 0) return null;
@@ -255,7 +254,7 @@ namespace TCC.ViewModels.Widgets
             }
             else
             {
-                AddNormalNpc(boss);
+                AddNormalNPC(boss);
             }
 
             boss.SetTimerPattern();
@@ -263,7 +262,7 @@ namespace TCC.ViewModels.Widgets
             NpcListChanged?.Invoke();
             return boss;
         }
-        private void AddNormalNpc(NPC boss)
+        private void AddNormalNPC(NPC boss)
         {
             SetVergos(boss);
             if (_savedHp.TryGetValue(boss.EntityId, out var cached)) boss.CurrentHP = cached;
@@ -301,14 +300,14 @@ namespace TCC.ViewModels.Widgets
         }
         private void SetAggroTarget(ulong entityId, ulong user)
         {
-            if (!TryFindNpc(entityId, out var boss)) return;
+            if (!TryFindNPC(entityId, out var boss)) return;
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
             if (boss.Visible) WindowManager.ViewModels.Group.SetAggro(entityId);
         }
         private void UnsetAggroTarget(ulong entityId)
         {
-            if (!TryFindNpc(entityId, out var boss)) return;
+            if (!TryFindNPC(entityId, out var boss)) return;
             boss.Target = 0;
         }
         private void ClearGuildTowers()
@@ -319,7 +318,7 @@ namespace TCC.ViewModels.Widgets
         {
             GuildIds[towerId] = guildId;
 
-            if (TryFindNpc(towerId, out var t))
+            if (TryFindNPC(towerId, out var t))
             {
                 t.Name = guildName;
                 t.ExN(nameof(NPC.GuildId));
@@ -328,7 +327,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void UpdateShield(ulong target, uint damage)
         {
-            if (!TryFindNpc(target, out var boss)) return;
+            if (!TryFindNPC(target, out var boss)) return;
             boss.CurrentShield -= damage;
         }
         private void RemoveAndDisposeNPC(NPC b)
@@ -336,7 +335,7 @@ namespace TCC.ViewModels.Widgets
             b.Dispose();
             NpcList.Remove(b);
         }
-        private bool TryFindNpc(ulong entityId, out NPC found)
+        private bool TryFindNPC(ulong entityId, out NPC found)
         {
             found = NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
             return found != null;
@@ -380,6 +379,10 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+        }
+        public void RefreshOverride(uint zoneId, uint templateId, bool b)
+        {
+            NpcList.ToSyncList().Where(n => n.ZoneId == zoneId && n.TemplateId == templateId).ToList().ForEach(n => n.IsBoss = b);
         }
 
         #region Hooks
@@ -604,9 +607,5 @@ namespace TCC.ViewModels.Widgets
 
         #endregion
 
-        public void RefreshOverride(uint zoneId, uint templateId, bool b)
-        {
-            NpcList.ToSyncList().Where(n => n.ZoneId == zoneId && n.TemplateId == templateId).ToList().ForEach(n => n.IsBoss = b);
-        }
     }
 }
