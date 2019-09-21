@@ -8,8 +8,8 @@
         //private byte enrage/*, unk3*/;
 
         public ulong EntityId { get; }
-        public int TemplateId { get; }
-        public int HuntingZoneId { get; }
+        public uint TemplateId { get; }
+        public uint HuntingZoneId { get; }
         public float CurrentHP { get; }
         public float MaxHP { get; }
         public ulong Target { get; }
@@ -18,8 +18,8 @@
         public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
         {
             EntityId = reader.ReadUInt64();
-            HuntingZoneId = reader.ReadInt32();
-            TemplateId = reader.ReadInt32();
+            HuntingZoneId = reader.ReadUInt32();
+            TemplateId = reader.ReadUInt32();
             Target = reader.ReadUInt64();
             reader.Skip(4); //unk1 = reader.ReadInt32();
                             //if (reader.Version < 321550 || reader.Version > 321600)
