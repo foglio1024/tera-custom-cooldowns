@@ -19,7 +19,6 @@ namespace TCC.Data.Abnormalities
         private static readonly uint[] SwiftAuraIDs = { 700700, 700701 };
         private static readonly uint[] ElementalizeIDs = { 702000 };
 
-
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
             if (msg.AbnormalityId != HurricaneId || !Game.IsMe(msg.CasterId)) return;
@@ -35,23 +34,23 @@ namespace TCC.Data.Abnormalities
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
             }
-            else if (ManaAuraIDs.Contains(p.AbnormalityId) )
+            else if (ManaAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = true;
             }
-            else if (CritResAuraIDs.Contains(p.AbnormalityId) )
+            else if (CritResAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = true;
             }
-            else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
+            else if (SwiftAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = true;
             }
-            else if (p.AbnormalityId == VowId )
+            else if (p.AbnormalityId == VowId)
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Start(p.Duration);
             }
-            else if (ElementalizeIDs.Contains(p.AbnormalityId) )
+            else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = true;
             }
@@ -63,23 +62,23 @@ namespace TCC.Data.Abnormalities
 
             if (!Game.IsMe(p.TargetId)) return;
 
-            if (CritAuraIDs.Contains(p.AbnormalityId) )
+            if (CritAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
             }
-            else if (ManaAuraIDs.Contains(p.AbnormalityId) )
+            else if (ManaAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = true;
             }
-            else if (CritResAuraIDs.Contains(p.AbnormalityId) )
+            else if (CritResAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = true;
             }
-            else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
+            else if (SwiftAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = true;
             }
-            else if (p.AbnormalityId == VowId )
+            else if (p.AbnormalityId == VowId)
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
@@ -94,23 +93,23 @@ namespace TCC.Data.Abnormalities
 
             if (!Game.IsMe(p.TargetId)) return;
 
-            if (CritAuraIDs.Contains(p.AbnormalityId) )
+            if (CritAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = false;
             }
-            else if (ManaAuraIDs.Contains(p.AbnormalityId) )
+            else if (ManaAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = false;
             }
-            else if (CritResAuraIDs.Contains(p.AbnormalityId) )
+            else if (CritResAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = false;
             }
-            else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
+            else if (SwiftAuraIDs.Contains(p.AbnormalityId))
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = false;
             }
-            else if (p.AbnormalityId == VowId )
+            else if (p.AbnormalityId == VowId)
             {
                 TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Refresh(0, CooldownMode.Normal);
             }
@@ -122,31 +121,23 @@ namespace TCC.Data.Abnormalities
 
         public static void CheckVoc(ulong target)
         {
-            if (MarkedTargets.Contains(target))
-            {
-                MarkedTargets.Remove(target);
-                if (MarkedTargets.Count == 0) InvokeMarkingExpired();
-            }
+            if (!MarkedTargets.Contains(target)) return;
+            MarkedTargets.Remove(target);
+            if (MarkedTargets.Count == 0) InvokeMarkingExpired();
         }
         private static void CheckVoc(S_ABNORMALITY_BEGIN p)
         {
             if (VocId != p.AbnormalityId) return;
-            var target = WindowManager.ViewModels.NPC.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
-            if (target != null)
-            {
-                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
-                InvokeMarkingRefreshed(p.Duration);
-            }
+            if (!WindowManager.ViewModels.NPC.TryFindNPC(p.TargetId, out _)) return;
+            if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
+            InvokeMarkingRefreshed(p.Duration);
         }
         private static void CheckVoc(S_ABNORMALITY_REFRESH p)
         {
             if (VocId != p.AbnormalityId) return;
-            var target = WindowManager.ViewModels.NPC.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
-            if (target != null)
-            {
-                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
-                InvokeMarkingRefreshed(p.Duration);
-            }
+            if (!WindowManager.ViewModels.NPC.TryFindNPC(p.TargetId, out _)) return;
+            if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
+            InvokeMarkingRefreshed(p.Duration);
         }
         private static void CheckVoc(S_ABNORMALITY_END p)
         {

@@ -8,29 +8,23 @@ namespace TCC.Data.Abnormalities
     public class PriestAbnormalityTracker : AbnormalityTracker
     {
         private static readonly uint[] EnergyStarsIDs = { 801500, 801501, 801502, 801503, 98000107 };
-        private static readonly int GraceId = 801700;
-        private static readonly int TripleNemesisId = 28090;
+        private const int GraceId = 801700;
+        private const int TripleNemesisId = 28090;
         private static readonly uint[] EdictIDs = { 805800 };
 
         private static void CheckTripleNemesis(S_ABNORMALITY_BEGIN p)
         {
             if (TripleNemesisId != p.AbnormalityId) return;
-            var target = WindowManager.ViewModels.NPC.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
-            if (target != null)
-            {
-                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
-                InvokeMarkingRefreshed(p.Duration);
-            }
+            if (!WindowManager.ViewModels.NPC.TryFindNPC(p.TargetId, out _)) return;
+            if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
+            InvokeMarkingRefreshed(p.Duration);
         }
         private static void CheckTripleNemesis(S_ABNORMALITY_REFRESH p)
         {
             if (TripleNemesisId != p.AbnormalityId) return;
-            var target = WindowManager.ViewModels.NPC.NpcList.ToSyncList().FirstOrDefault(x => x.EntityId == p.TargetId);
-            if (target != null)
-            {
-                if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
-                InvokeMarkingRefreshed(p.Duration);
-            }
+            if (!WindowManager.ViewModels.NPC.TryFindNPC(p.TargetId, out _)) return;
+            if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
+            InvokeMarkingRefreshed(p.Duration);
         }
         private static void CheckTripleNemesis(S_ABNORMALITY_END p)
         {
