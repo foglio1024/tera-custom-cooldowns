@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Xml.Linq;
 
 namespace TCC.Data.Databases
 {
     public class MonsterDatabase : DatabaseBase
     {
+        public static event Action<uint, uint, bool> OverrideChangedEvent;
+
         private readonly Dictionary<uint, Zone> _zones;
 
         protected override string FolderName => "monsters";
@@ -125,7 +128,9 @@ namespace TCC.Data.Databases
 
             overrideDoc.Save(OverrideFileFullPath);
 
+            OverrideChangedEvent?.Invoke(zoneId, templateId, b);
         }
+
     }
 
     internal class Zone
