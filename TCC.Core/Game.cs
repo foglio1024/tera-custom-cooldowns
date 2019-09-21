@@ -31,6 +31,8 @@ namespace TCC
         private static bool _inGameUiOn;
 
         public static readonly Dictionary<uint, string> GuildMembersNames = new Dictionary<uint, string>();
+        public static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
+        public static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
 
         public static Server Server { get; set; } = new Server("", "", "", 0);
         public static Account Account { get; set; } = new Account();
@@ -226,7 +228,7 @@ namespace TCC
         {
             if (!EntityManager.Pass(p.HuntingZoneId, p.TemplateId)) return;
             if (!DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
-            EntityManager.NearbyNPC[p.EntityId] = m.Name;
+            NearbyNPC[p.EntityId] = m.Name;
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
@@ -297,7 +299,7 @@ namespace TCC
         }
         private static void OnDespawnNpc(S_DESPAWN_NPC p)
         {
-            EntityManager.NearbyNPC.Remove(p.Target);
+            NearbyNPC.Remove(p.Target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
             AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
 
@@ -312,7 +314,7 @@ namespace TCC
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
             if (p.EntityId == EntityManager.FoglioEid) Me.EndAbnormality(10241024);
-            EntityManager.DepawnUser(p.EntityId);
+            NearbyPlayers.Remove(p.EntityId);
         }
         private static void OnSpawnUser(S_SPAWN_USER p)
         {
@@ -341,12 +343,12 @@ namespace TCC
                     break;
             }
 
-            EntityManager.SpawnUser(p.EntityId, p.Name);
+            NearbyPlayers[p.EntityId] = p.Name;
         }
         private static void OnSpawnMe(S_SPAWN_ME p)
         {
-            EntityManager.NearbyNPC.Clear();
-            EntityManager.NearbyPlayers.Clear();
+            NearbyNPC.Clear();
+            NearbyPlayers.Clear();
             AbnormalityTracker.ClearMarkedTargets();
             FlyingGuardianDataProvider.Stacks = 0;
             FlyingGuardianDataProvider.StackType = FlightStackType.None;

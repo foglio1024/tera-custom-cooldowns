@@ -96,7 +96,7 @@ namespace TCC.Utilities
             if (Game.IsMe(target)) EndPlayerAbnormality(ab);
             else WindowManager.ViewModels.NPC.EndAbnormality(target, ab);
         }
-        public static void CheckPassivity(Abnormality ab, uint duration)
+        private static void CheckPassivity(Abnormality ab, uint duration)
         {
             if (App.Settings.EthicalMode) return;
             if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var cdFromDb))
