@@ -247,17 +247,16 @@ namespace TCC.Data.NPCs
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
             Dispatcher = WindowManager.ViewModels.NPC.GetDispatcher();
-            EntityId = eId;
-            Name = Game.DB.MonsterDatabase.GetName(tId, zId);
-            MaxHP = Game.DB.MonsterDatabase.GetMaxHP(tId, zId);
-            ZoneId = zId;
-            IsBoss = boss;
-            TemplateId = tId;
-            CurrentHP = MaxHP;
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Game.DB.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
+            Name = monster.Name;
+            MaxHP = monster.MaxHP;
+            EntityId = eId;
+            ZoneId = zId;
+            TemplateId = tId;
+            IsBoss = boss;
             Visible = visible;
-            Shield = ShieldStatus.Off;
-            IsSelected = true;
+            CurrentHP = MaxHP;
             EnragePattern = ep ?? new EnragePattern(10, 36);
             TimerPattern = tp;
             TimerPattern?.SetTarget(this);
@@ -269,7 +268,6 @@ namespace TCC.Data.NPCs
             Override = new RelayCommand(ex =>
             {
                 Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
-                WindowManager.ViewModels.NPC.RefreshOverride(ZoneId, TemplateId, !IsBoss);
 
             }, ce => true);
         }
@@ -296,7 +294,7 @@ namespace TCC.Data.NPCs
         //TODO: make this a separate class
         private readonly Timer _shieldDuration;
 
-        private ShieldStatus _shield;
+        private ShieldStatus _shield = ShieldStatus.Off;
         public ShieldStatus Shield
         {
             get => _shield;
@@ -308,7 +306,7 @@ namespace TCC.Data.NPCs
             }
         }
 
-        private bool _isSelected;
+        private bool _isSelected = true;
         public bool IsSelected
         {
             get => _isSelected;
