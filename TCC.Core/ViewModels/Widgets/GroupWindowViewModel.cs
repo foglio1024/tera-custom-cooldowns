@@ -569,8 +569,11 @@ namespace TCC.ViewModels.Widgets
                 EndAbnormality(ab, playerId, serverId);
             }));
         }
+
         protected override void InstallHooks()
         {
+            PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
+
             PacketAnalyzer.Processor.Hook<S_USER_EFFECT>(OnUserEffect);
             PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
@@ -633,6 +636,10 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
 
+        }
+        private void OnDisconnected()
+        {
+            ClearAllAbnormalities();
         }
 
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -166,6 +166,8 @@ namespace TCC
 
         public static void InstallHooks()
         {
+            PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
+
             // db stuff
             PacketAnalyzer.Processor.Hook<C_LOGIN_ARBITER>(OnLoginArbiter);
 
@@ -206,10 +208,26 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_SYSTEM_MESSAGE>(OnSystemMessage);
             PacketAnalyzer.Processor.Hook<S_SPAWN_ME>(OnSpawnMe);
             PacketAnalyzer.Processor.Hook<S_SPAWN_USER>(OnSpawnUser);
+            PacketAnalyzer.Processor.Hook<S_SPAWN_NPC>(OnSpawnNpc);
             PacketAnalyzer.Processor.Hook<S_DESPAWN_NPC>(OnDespawnNpc);
             PacketAnalyzer.Processor.Hook<S_DESPAWN_USER>(OnDespawnUser);
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+        }
+
+        private static void OnDisconnected()
+        {
+            Me.ClearAbnormalities();
+            Logged = false;
+            LoadingScreen = true;
+        }
+
+        private static void OnSpawnNpc(S_SPAWN_NPC p)
+        {
+            if (!EntityManager.Pass(p.HuntingZoneId, p.TemplateId)) return;
+            if (!DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
+            EntityManager.NearbyNPC[p.EntityId] = m.Name;
+            FlyingGuardianDataProvider.InvokeProgressChanged();
         }
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
         {
@@ -279,7 +297,17 @@ namespace TCC
         }
         private static void OnDespawnNpc(S_DESPAWN_NPC p)
         {
-            EntityManager.DespawnNPC(p.Target, p.Type);
+            EntityManager.NearbyNPC.Remove(p.Target);
+            FlyingGuardianDataProvider.InvokeProgressChanged();
+            AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
+
+            // TODO: this shouldn't reference modules ------------------
+            if (WindowManager.ViewModels.NPC.VisibleBossesCount == 0)
+            {
+                Encounter = false;
+                WindowManager.ViewModels.Group.SetAggro(0);
+            }
+            // TODO ----------------------------------------------------
         }
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
@@ -317,23 +345,25 @@ namespace TCC
         }
         private static void OnSpawnMe(S_SPAWN_ME p)
         {
-            EntityManager.ClearNPC();
+            EntityManager.NearbyNPC.Clear();
+            EntityManager.NearbyPlayers.Clear();
+            AbnormalityTracker.ClearMarkedTargets();
             FlyingGuardianDataProvider.Stacks = 0;
             FlyingGuardianDataProvider.StackType = FlightStackType.None;
             FlyingGuardianDataProvider.InvokeProgressChanged();
-            Task.Delay(2000)
-                .ContinueWith(t => // was done with timer before, test it
-                {
-                    LoadingScreen = false;
-                    WindowManager.ForegroundManager.RefreshDim();
-                    if (!App.FI) return;
-                    var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
-                    Me.UpdateAbnormality(ab, Int32.MaxValue, 1);
-                    //AbnormalityUtils.BeginAbnormality(ab.Id, Me.EntityId, 0, int.MaxValue, 1);
-                    var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
-                    var msg = $"@0\vAbnormalName\v{ab.Name}";
-                    SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
-                });
+            // was done with timer before, test it
+            Task.Delay(2000).ContinueWith(t =>
+            {
+                LoadingScreen = false;
+                WindowManager.ForegroundManager.RefreshDim();
+
+                if (!App.FI) return;
+                var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
+                Me.UpdateAbnormality(ab, int.MaxValue, 1);
+                var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
+                var msg = $"@0\vAbnormalName\v{ab.Name}";
+                SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
+            });
         }
         private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
         {
@@ -446,28 +476,14 @@ namespace TCC
             DB.ServerDatabase.Language = m.Language;
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
         }
-        static Stopwatch _sw = new Stopwatch();
-        private static long _count = 0;
-        private static long _sum = 0;
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            _sw.Restart();
-            if (IsMe(p.TargetId))
-            {
-                if (AbnormalityUtils.Exists(p.AbnormalityId, out var ab) && AbnormalityUtils.Pass(ab))
-                {
-                    if (p.Duration == Int32.MaxValue) ab.Infinity = true;
-                    Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
-                    FlyingGuardianDataProvider.HandleAbnormal(p);
-                }
-            }
-            _sw.Stop();
-            _count++;
+            if (!IsMe(p.TargetId)) return;
+            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (p.Duration == int.MaxValue) ab.Infinity = true;
+            Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
+            FlyingGuardianDataProvider.HandleAbnormal(p);
 
-            _sum += _sw.ElapsedTicks;
-            Console.WriteLine($"[{nameof(OnAbnormalityBegin)} {_count}] avg:{_sum / (double)_count:F}\t last: {_sw.ElapsedTicks}");
-
-            //AbnormalityUtils.BeginAbnormality(p.AbnormalityId, p.TargetId, p.CasterId, p.Duration, p.Stacks);
         }
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {

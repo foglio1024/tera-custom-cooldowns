@@ -1,5 +1,6 @@
 ﻿using FoglioUtils;
-
+using FoglioUtils.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,8 +14,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using FoglioUtils.Extensions;
-using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
@@ -25,7 +24,6 @@ using TCC.Parsing;
 using TCC.Settings;
 using TCC.Utilities;
 using TCC.Windows;
-
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -94,8 +92,6 @@ namespace TCC.ViewModels
                 return ret;
             }
         }
-
-
 
         public int TotalElleonMarks
         {
@@ -362,6 +358,7 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
+            PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
             PacketAnalyzer.Processor.Hook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
             PacketAnalyzer.Processor.Hook<S_NPCGUILD_LIST>(OnNpcGuildList);
             PacketAnalyzer.Processor.Hook<S_INVEN>(OnInven);
@@ -374,7 +371,6 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
             PacketAnalyzer.Processor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
         }
-
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
@@ -388,6 +384,12 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Unhook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
             PacketAnalyzer.Processor.Unhook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
             PacketAnalyzer.Processor.Unhook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
+        }
+
+        private void OnDisconnected()
+        {
+            UpdateBuffs();
+            SaveCharacters();
         }
 
         private void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)

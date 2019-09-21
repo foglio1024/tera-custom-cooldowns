@@ -9,8 +9,6 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
-using TCC.Utilities;
-using TCC.ViewModels;
 using TCC.Windows;
 using TeraPacketParser;
 using TeraPacketParser.Messages;
@@ -20,13 +18,15 @@ namespace TCC.Parsing
 {
     public static class PacketAnalyzer
     {
+        private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
+
         public static event Action ProcessorReady;
-        public static ITeraSniffer Sniffer;
+
+        public static ITeraSniffer Sniffer { get; private set; }
         public static MessageFactory Factory { get; private set; }
         public static MessageProcessor Processor { get; private set; }
-        private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
-        public static Thread AnalysisThread;
-        public static int AnalysisThreadId;
+
+        public static Thread AnalysisThread { get; private set; }
 
         private static void Init()
         {
@@ -49,7 +49,6 @@ namespace TCC.Parsing
         }
         private static void PacketAnalysisLoop()
         {
-            AnalysisThreadId = MiscUtils.GetCurrentThreadId();
             Processor = new MessageProcessor();
             Processor.Hook<C_CHECK_VERSION>(OnCheckVersion);
             Processor.Hook<C_LOGIN_ARBITER>(OnLoginArbiter);
@@ -70,9 +69,10 @@ namespace TCC.Parsing
         {
             Game.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-            ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+
             if (!App.Settings.DontShowFUBH) App.FUBH();
+
             //if (Game.Server.Region == "EU")
             //    TccMessageBox.Show("WARNING",
             //        "Official statement from Gameforge:\n\n don't combine partners or pets! It will lock you out of your character permanently.\n\n This message will keep showing until next release.");
@@ -82,19 +82,10 @@ namespace TCC.Parsing
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
-            ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
             WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Normal);
-
-            WindowManager.ViewModels.Group.ClearAllAbnormalities();
-            WindowManager.ViewModels.Dashboard.UpdateBuffs();
-            WindowManager.ViewModels.Dashboard.SaveCharacters();
-            Game.Me.ClearAbnormalities();
-            EntityManager.ClearNPC();
-            WindowManager.ViewModels.Cooldowns.ClearSkills(); // TODO: hook connection to these too
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
+
             ProxyInterface.Instance.Disconnect();
-            Game.Logged = false;
-            Game.LoadingScreen = true;
 
             if (App.ToolboxMode && UpdateManager.UpdateAvailable) App.Close();
         }
@@ -104,6 +95,32 @@ namespace TCC.Parsing
             Packets.Enqueue(message);
         }
 
+        private static async void OnCheckVersion(C_CHECK_VERSION p)
+        {
+            var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
+            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
+            if (!File.Exists(opcPath))
+            {
+                if (Sniffer is ToolboxSniffer tbs)
+                {
+                    if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
+                    {
+                        TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                        App.Close();
+                        return;
+                    }
+                }
+                else
+                {
+                    TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                    App.Close();
+                    return;
+                }
+            }
+            var opcNamer = new OpCodeNamer(opcPath);
+            Factory = new MessageFactory(p.Versions[0], opcNamer);
+            Sniffer.Connected = true;
+        }
         private static async void OnLoginArbiter(C_LOGIN_ARBITER p)
         {
             OpcodeDownloader.DownloadSysmsgIfNotExist(Factory.Version, Path.Combine(App.DataPath, "opcodes/"), Factory.ReleaseVersion);
@@ -133,33 +150,6 @@ namespace TCC.Parsing
             Factory.ReloadSysMsg(path);
 
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
-        }
-
-        private static async void OnCheckVersion(C_CHECK_VERSION p)
-        {
-            var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
-            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
-            if (!File.Exists(opcPath))
-            {
-                if (Sniffer is ToolboxSniffer tbs)
-                {
-                    if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
-                    {
-                        TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
-                        App.Close();
-                        return;
-                    }
-                }
-                else
-                {
-                    TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
-                    App.Close();
-                    return;
-                }
-            }
-            var opcNamer = new OpCodeNamer(opcPath);
-            Factory = new MessageFactory(p.Versions[0], opcNamer);
-            Sniffer.Connected = true;
         }
     }
 }

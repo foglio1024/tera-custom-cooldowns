@@ -541,6 +541,8 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
+            PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
+
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
@@ -552,6 +554,12 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
 
         }
+
+        private void OnDisconnected()
+        {
+            ClearSkills();
+        }
+
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);

@@ -10,6 +10,7 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.TeraCommon.Game;
 using TCC.Utilities;
 using TCC.ViewModels.Widgets;
 using TCC.Windows.Widgets;
@@ -65,6 +66,9 @@ namespace TCC.ViewModels
 
         protected override void InstallHooks()
         {
+            PacketAnalyzer.Sniffer.NewConnection += OnConnected;
+            PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
+
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
             PacketAnalyzer.Processor.Hook<S_PRIVATE_CHAT>(OnPrivateChat);
@@ -79,9 +83,9 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
+            PacketAnalyzer.Processor.Hook<S_SPAWN_NPC>(OnSpawnNpc);
 
         }
-
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
@@ -98,9 +102,26 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
+            PacketAnalyzer.Processor.Unhook<S_SPAWN_NPC>(OnSpawnNpc);
 
         }
 
+        private void OnConnected(Server srv)
+        {
+            AddTccMessage($"Connected to {srv.Name}.");
+        }
+        private void OnDisconnected()
+        {
+            AddTccMessage("Disconnected from the server.");
+        }
+
+        private void OnSpawnNpc(S_SPAWN_NPC p)
+        {
+            if (!TccUtils.IsWorldBoss(p.HuntingZoneId, p.TemplateId)) return;
+            Game.DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var monst);
+            if (!monst.IsBoss) return;
+            AddChatMessage(new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>"));
+        }
         private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
         {
             UpdateLfgMembers(m.Id, m.Members.Count);
