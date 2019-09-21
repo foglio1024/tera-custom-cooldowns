@@ -94,14 +94,49 @@ namespace TCC.Utilities
             return result;
         }
 
+
         public static bool IsPhase1Dragon(uint zoneId, uint templateId)
         {
             return zoneId == 950 && templateId >= 1100 && templateId <= 1103;
         }
-
         public static bool IsGuildTower(uint zoneId, uint templateId)
         {
             return zoneId == 152 && templateId == 5001;
+        }
+        public static bool IsFieldBoss(ushort zone, uint template)
+        {
+            return (zone == 39 && template == 501) ||
+                   (zone == 26 && template == 5001) ||
+                   (zone == 51 && template == 4001);
+        }
+        public static bool IsWorldBoss(ushort zoneId, uint templateId)
+        {
+            return zoneId == 10 && templateId == 99 ||
+                   zoneId == 4 && templateId == 5011 ||
+                   zoneId == 51 && templateId == 7011 ||
+                   zoneId == 52 && templateId == 9050 ||
+                   zoneId == 57 && templateId == 33 ||
+                   zoneId == 38 && templateId == 35;
+        }
+
+        public static string GetEntityName(ulong pSource)
+        {
+            return Game.NearbyNPC.ContainsKey(pSource)
+                ? Game.NearbyNPC[pSource]
+                : Game.NearbyPlayers.ContainsKey(pSource)
+                    ? Game.NearbyPlayers[pSource]
+                    : "unknown";
+        }
+
+        public static bool IsEntitySpawned(ulong pSource)
+        {
+            return Game.NearbyNPC.ContainsKey(pSource) || Game.NearbyPlayers.ContainsKey(pSource);
+        }
+
+        public static bool IsEntitySpawned(uint zoneId, uint templateId)
+        {
+            var name = Game.DB.MonsterDatabase.GetName(templateId, zoneId);
+            return name != "Unknown" && Game.NearbyNPC.ContainsValue(name);
         }
 
         internal static RegionEnum RegionEnumFromLanguage(string language)
@@ -124,13 +159,6 @@ namespace TCC.Utilities
         public static Race RaceFromTemplateId(int templateId)
         {
             return (Race) ((templateId - 10000) / 100);
-        }
-
-        public static bool IsFieldBoss(ushort zone, uint template)
-        {
-            return (zone == 39 && template == 501) ||
-                   (zone == 26 && template == 5001) ||
-                   (zone == 51 && template == 4001);
         }
     }
 }

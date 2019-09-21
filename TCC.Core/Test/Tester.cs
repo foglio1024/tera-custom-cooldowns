@@ -108,17 +108,22 @@ namespace TCC.Test
         }
         public static void SpawnNpcAndUpdateHP(ushort zoneId, uint templateId, ulong eid)
         {
-            EntityManager.SpawnNPC(zoneId, templateId, eid, true, false, 36);
+            SpawnNPC(zoneId, templateId, eid, true, false, 36);
             var t = new System.Timers.Timer { Interval = 1000 };
             var hp = 1000;
             t.Elapsed += (_, __) =>
             {
                 hp -= 10;
                 if (hp <= 900) hp = 1000;
-                EntityManager.UpdateNPC(eid, hp, 1000, 0);
+                UpdateNPC(eid, hp, 1000, 0);
             };
             //t.Start();
 
+        }
+        public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
+        {
+            WindowManager.ViewModels.NPC.AddOrUpdateNpc(target, maxHP, currentHP, false, Game.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            EntityManager.SetEncounter(currentHP, maxHP);
         }
         public static void AddFakeCuGuilds()
         {
@@ -200,7 +205,7 @@ namespace TCC.Test
                     threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
                 });
             }
-            threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
+            //threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
 
             var stats = new Dictionary<int, ThreadInfo>();
             _t.Tick += (_, __) =>
@@ -353,7 +358,7 @@ namespace TCC.Test
 
         public static void AddNpcAndAbnormalities()
         {
-            EntityManager.SpawnNPC(950, 4000, 1, true, false, 36);
+            SpawnNPC(950, 4000, 1, true, false, 36);
             var t = new System.Timers.Timer(1);
             var id = 0U;
             var a = true;
@@ -368,9 +373,9 @@ namespace TCC.Test
         private static ulong _eid = 1;
         private static void T_Elapsed(object sender, ElapsedEventArgs e)
         {
-            EntityManager.SpawnNPC(9, 700, _eid++, true, false, 0);
+            SpawnNPC(9, 700, _eid++, true, false, 0);
             if (_eid != 10000) return;
-            EntityManager.ClearNPC();
+            WindowManager.ViewModels.NPC.Clear();
             _t.Stop();
         }
 
@@ -411,5 +416,36 @@ namespace TCC.Test
             };
             t.Start();
         }
+
+        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
+        {
+            if (TccUtils.IsWorldBoss(zoneId, templateId))
+            {
+                Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
+                if (monst.IsBoss)
+                {
+                    var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
+                    ChatWindowManager.Instance.AddChatMessage(msg);
+                }
+            }
+            if (!EntityManager.Pass(zoneId, templateId)) return;
+
+            if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+            {
+                Game.NearbyNPC[entityId] = m.Name;
+                FlyingGuardianDataProvider.InvokeProgressChanged();
+                if (villager) return;
+                if (m.IsBoss)
+                {
+                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v, remainingEnrageTime);
+                }
+                else
+                {
+                    if (App.Settings.NpcWindowSettings.ShowOnlyBosses) return;
+                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false, remainingEnrageTime);
+                }
+            }
+        }
+
     }
 }

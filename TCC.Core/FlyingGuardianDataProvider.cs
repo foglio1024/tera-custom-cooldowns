@@ -1,7 +1,7 @@
 ﻿using System;
 
 using TCC.Data;
-
+using TCC.Utilities;
 using TeraPacketParser.Messages;
 
 namespace TCC
@@ -40,16 +40,16 @@ namespace TCC
                 StackTypeChanged?.Invoke();
             }
         }
-        public static bool IsInProgress => EntityManager.IsEntitySpawned(630, 9998) ||
-                                           EntityManager.IsEntitySpawned(630, 2100) ||
-                                           EntityManager.IsEntitySpawned(630, 2101) ||
-                                           EntityManager.IsEntitySpawned(630, 2102) ||
-                                           EntityManager.IsEntitySpawned(630, 2103) ||
-                                           EntityManager.IsEntitySpawned(630, 2104) ||
-                                           EntityManager.IsEntitySpawned(631, 1001) ||
-                                           EntityManager.IsEntitySpawned(631, 1002) ||
-                                           EntityManager.IsEntitySpawned(631, 3001) ||
-                                           EntityManager.IsEntitySpawned(631, 9998);
+        public static bool IsInProgress => TccUtils.IsEntitySpawned(630, 9998) ||
+                                           TccUtils.IsEntitySpawned(630, 2100) ||
+                                           TccUtils.IsEntitySpawned(630, 2101) ||
+                                           TccUtils.IsEntitySpawned(630, 2102) ||
+                                           TccUtils.IsEntitySpawned(630, 2103) ||
+                                           TccUtils.IsEntitySpawned(630, 2104) ||
+                                           TccUtils.IsEntitySpawned(631, 1001) ||
+                                           TccUtils.IsEntitySpawned(631, 1002) ||
+                                           TccUtils.IsEntitySpawned(631, 3001) ||
+                                           TccUtils.IsEntitySpawned(631, 9998);
 
         public static void InvokeProgressChanged()
         {

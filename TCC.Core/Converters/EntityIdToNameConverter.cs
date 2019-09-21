@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.Utilities;
 
 namespace TCC.Converters
 {
@@ -11,8 +12,8 @@ namespace TCC.Converters
             var id = (ulong) value;
             return Game.IsMe(id)
                 ? Game.Me.Name
-                : EntityManager.IsEntitySpawned(id) 
-                    ? EntityManager.GetEntityName(id) 
+                : TccUtils.IsEntitySpawned(id) 
+                    ? TccUtils.GetEntityName(id) 
                     : "";
         }
 

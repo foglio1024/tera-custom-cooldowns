@@ -361,8 +361,8 @@ namespace TCC.ViewModels
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
-            if (!Game.IsMe(target) || diff > 0 || target == source || source == 0 || !EntityManager.IsEntitySpawned(source)) return;
-            var srcName = EntityManager.GetEntityName(source);
+            if (!Game.IsMe(target) || diff > 0 || target == source || source == 0 || !TccUtils.IsEntitySpawned(source)) return;
+            var srcName = TccUtils.GetEntityName(source);
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
                 : "<font color=\"#cccccc\">.</font>";
