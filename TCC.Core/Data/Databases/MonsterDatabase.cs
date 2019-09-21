@@ -95,7 +95,7 @@ namespace TCC.Data.Databases
         public override void Update(string custom = null)
         {
             base.Update(custom);
-            base.Update(OverrideFileRelativePath);
+            if(!File.Exists(OverrideFileFullPath)) base.Update(OverrideFileRelativePath);
         }
 
         public void ToggleOverride(uint zoneId, uint templateId, bool b)
