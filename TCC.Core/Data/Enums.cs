@@ -216,7 +216,7 @@ namespace TCC.Data
     }
     public enum ShieldStatus
     {
-        Off,
+        Off = 0,
         On,
         Broken,
         Failed
