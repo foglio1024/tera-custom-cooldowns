@@ -121,7 +121,6 @@ namespace TCC.Parsing
             while (Enabled)
             {
                 var client = _dataConnection.AcceptTcpClient();
-                await ProxyInterface.Instance.Init();
                 var resp = await ControlConnection.GetServer();
                 if (resp != 0)
                 {

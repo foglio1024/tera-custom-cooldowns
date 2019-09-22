@@ -38,6 +38,7 @@ namespace TCC.Parsing
             Sniffer.MessageReceived += EnqueuePacket;
             Sniffer.Enabled = true;
 
+
             AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Analysis" };
             AnalysisThread.Start();
         }
@@ -70,6 +71,8 @@ namespace TCC.Parsing
             Game.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+
+            ProxyInterface.Instance.Init();
 
             if (!App.Settings.DontShowFUBH) App.FUBH();
 
