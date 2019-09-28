@@ -41,16 +41,12 @@ namespace TCC.Settings
         [JsonIgnore]
         public double X
         {
-            get
-            {
-                var cc = CurrentClass();
-                return Positions.Position(cc).X;
-            }
+            get => Positions.Position(!PerClassPosition ? Class.Common : CurrentClass()).X;
             set
             {
                 if (value >= int.MaxValue) return;
                 var cc = CurrentClass();
-                if (cc == Class.None) return;
+                if (cc == Class.None || !PerClassPosition) cc = Class.Common;
                 var old = Positions.Position(cc);
                 if (old.X == value) return;
                 Positions.SetPosition(cc, new Point(value, old.Y));
@@ -60,16 +56,12 @@ namespace TCC.Settings
         [JsonIgnore]
         public double Y
         {
-            get
-            {
-                var cc = CurrentClass();
-                return Positions.Position(cc).Y;
-            }
+            get => Positions.Position(!PerClassPosition ? Class.Common : CurrentClass()).Y;
             set
             {
                 if (value >= int.MaxValue) return;
                 var cc = CurrentClass();
-                if (cc == Class.None) return;
+                if (cc == Class.None || !PerClassPosition) cc = Class.Common;
                 var old = Positions.Position(cc);
                 if (old.Y == value) return;
                 Positions.SetPosition(cc, new Point(old.X, value));
@@ -345,7 +337,7 @@ namespace TCC.Settings
 
         public int HideTimeout
         {
-            get { return _hideTimeout; }
+            get => _hideTimeout;
             set
             {
                 if (_hideTimeout == value) return;
@@ -462,6 +454,25 @@ namespace TCC.Settings
         }
     }
 
+    public class NotificationAreaSettings : WindowSettings
+    {
+        public int MaxNotifications { get; set; } 
+        public NotificationAreaSettings()
+        {
+            _visible = true;
+            _clickThruMode = ClickThruMode.Never;
+            _scale = 1;
+            _autoDim = false;
+            _dimOpacity = 1;
+            _showAlways = true;
+            _enabled = true;
+            _allowOffScreen = false;
+            PerClassPosition = false;
+            Positions = new ClassPositions(0,.5, ButtonsPosition.Above);
+
+            MaxNotifications = 5;
+        }
+    }
     public class CharacterWindowSettings : WindowSettings
     {
         public bool CompactMode { get; set; }
@@ -485,9 +496,22 @@ namespace TCC.Settings
     public class NpcWindowSettings : WindowSettings
     {
         private bool _accurateHp;
+        private bool _hideAdds;
 
         public event Action AccurateHpChanged;
-        public bool ShowOnlyBosses { get; set; }
+        public event Action HideAddsChanged;
+
+        public bool HideAdds
+        {
+            get => _hideAdds;
+            set
+            {
+                if(_hideAdds == value) return;
+                _hideAdds = value;
+                HideAddsChanged?.Invoke();
+            }
+        }
+
         public bool AccurateHp
         {
             get => _accurateHp;
@@ -515,7 +539,7 @@ namespace TCC.Settings
 
             EnrageLabelMode = EnrageLabelMode.Remaining;
             AccurateHp = true;
-            ShowOnlyBosses = false;
+            HideAdds = false;
         }
     }
 
