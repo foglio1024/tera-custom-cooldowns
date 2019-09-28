@@ -100,6 +100,7 @@ namespace TCC.Data.Databases
 
         public void ToggleOverride(uint zoneId, uint templateId, bool b)
         {
+            if (TryGetMonster(templateId, zoneId, out var m)) m.IsBoss = b;
             var overrideDoc = XDocument.Load(OverrideFileFullPath);
             var zone = overrideDoc.Descendants("Zone").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == zoneId);
             if (zone != null)
