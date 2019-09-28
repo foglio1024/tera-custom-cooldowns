@@ -135,6 +135,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
@@ -145,7 +146,7 @@
                                 Padding="0"
                                 BorderBrush="Transparent"
                                 CornerRadius="0"
-                                Background="Transparent">
+                                Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               x:Name="content"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -1309,7 +1310,7 @@
                             <Setter Property="Fill" TargetName="indeterminateMark" Value="Black" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="checkBoxBorder" Value="SlateGray" />
+                            <Setter Property="Background" TargetName="checkBoxBorder" Value="Transparent" />
                             <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="SlateGray" />
                             <Setter Property="Fill" TargetName="optionMark" Value="SlateGray" />
                             <Setter Property="Fill" TargetName="indeterminateMark" Value="SlateGray" />
