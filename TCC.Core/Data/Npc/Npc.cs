@@ -36,7 +36,7 @@ namespace TCC.Data.NPCs
             get => _isBoss;
             set
             {
-                if(_isBoss == value) return;
+                if (_isBoss == value) return;
                 _isBoss = value;
                 N();
             }
@@ -396,7 +396,7 @@ namespace TCC.Data.NPCs
             }
             if (IsPhase1Dragon) EnragePattern = new EnragePattern(14, 50);
             if (ZoneId == 950 && !IsPhase1Dragon) EnragePattern = new EnragePattern(0, 0);
-            if (ZoneId == 450 && TemplateId == 1003) EnragePattern = new EnragePattern((long) MaxHP, 600000000, 72);
+            if (ZoneId == 450 && TemplateId == 1003) EnragePattern = new EnragePattern((long)MaxHP, 600000000, 72);
 
             //ghilli
             if (TemplateId == 81301 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 65, Int32.MaxValue) { StaysEnraged = true };
@@ -412,6 +412,8 @@ namespace TCC.Data.NPCs
                 if (TemplateId == 1000) EnragePattern = new EnragePattern(0, 0);
                 if (TemplateId == 3000 || TemplateId == 3001) EnragePattern = new EnragePattern(10, 36);
             }
+
+            if (TccUtils.IsFieldBoss(ZoneId, TemplateId)) EnragePattern = new EnragePattern(0, 0);
         }
     }
 }
