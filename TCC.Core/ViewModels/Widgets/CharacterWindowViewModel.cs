@@ -9,6 +9,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
 {
+    //TODO: remove references to other modules?
     [TccModule]
     public class CharacterWindowViewModel : TccWindowViewModel
     {
