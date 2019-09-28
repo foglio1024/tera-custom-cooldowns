@@ -217,6 +217,16 @@ namespace TCC.R
 		public static Color ChatSystemWorldBossColor => ((Color)App.Current.FindResource("ChatSystemWorldBossColor"));
 		public static Color ChatDiamondLaurelColor => ((Color)App.Current.FindResource("ChatDiamondLaurelColor"));
 		public static Color ChatChampionLaurelColor => ((Color)App.Current.FindResource("ChatChampionLaurelColor"));
+		public static Color TccNormalLightGradient0Color => ((Color)App.Current.FindResource("TccNormalLightGradient0Color"));
+		public static Color TccNormalLightGradient1Color => ((Color)App.Current.FindResource("TccNormalLightGradient1Color"));
+		public static Color TccNormalGradient0Color => ((Color)App.Current.FindResource("TccNormalGradient0Color"));
+		public static Color TccNormalGradient1Color => ((Color)App.Current.FindResource("TccNormalGradient1Color"));
+		public static Color TccGreenGradient0Color => ((Color)App.Current.FindResource("TccGreenGradient0Color"));
+		public static Color TccGreenGradient1Color => ((Color)App.Current.FindResource("TccGreenGradient1Color"));
+		public static Color TccYellowGradient0Color => ((Color)App.Current.FindResource("TccYellowGradient0Color"));
+		public static Color TccYellowGradient1Color => ((Color)App.Current.FindResource("TccYellowGradient1Color"));
+		public static Color TccRedGradient0Color => ((Color)App.Current.FindResource("TccRedGradient0Color"));
+		public static Color TccRedGradient1Color => ((Color)App.Current.FindResource("TccRedGradient1Color"));
 	}
 	public static class Brushes
 	{
@@ -328,7 +338,19 @@ namespace TCC.R
 		public static SolidColorBrush ChatSystemQuestBrush => ((SolidColorBrush)App.Current.FindResource("ChatSystemQuestBrush"));
 		public static SolidColorBrush ChatSystemFriendBrush => ((SolidColorBrush)App.Current.FindResource("ChatSystemFriendBrush"));
 		public static SolidColorBrush ChatSystemWorldBossBrush => ((SolidColorBrush)App.Current.FindResource("ChatSystemWorldBossBrush"));
+		public static SolidColorBrush TccNormalGradient0Brush => ((SolidColorBrush)App.Current.FindResource("TccNormalGradient0Brush"));
+		public static SolidColorBrush TccNormalGradient1Brush => ((SolidColorBrush)App.Current.FindResource("TccNormalGradient1Brush"));
+		public static SolidColorBrush TccNormalLightGradient0Brush => ((SolidColorBrush)App.Current.FindResource("TccNormalLightGradient0Brush"));
+		public static SolidColorBrush TccNormalLightGradient1Brush => ((SolidColorBrush)App.Current.FindResource("TccNormalLightGradient1Brush"));
+		public static SolidColorBrush TccYellowGradient0Brush => ((SolidColorBrush)App.Current.FindResource("TccYellowGradient0Brush"));
+		public static SolidColorBrush TccYellowGradient1Brush => ((SolidColorBrush)App.Current.FindResource("TccYellowGradient1Brush"));
+		public static SolidColorBrush TccRedGradient0Brush => ((SolidColorBrush)App.Current.FindResource("TccRedGradient0Brush"));
+		public static SolidColorBrush TccRedGradient1Brush => ((SolidColorBrush)App.Current.FindResource("TccRedGradient1Brush"));
 		public static LinearGradientBrush RevampBackgroundGradientBrush => ((LinearGradientBrush)App.Current.FindResource("RevampBackgroundGradientBrush"));
+		public static LinearGradientBrush TccNormalGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccNormalGradientBrush"));
+		public static LinearGradientBrush TccGreenGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccGreenGradientBrush"));
+		public static LinearGradientBrush TccYellowGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccYellowGradientBrush"));
+		public static LinearGradientBrush TccRedGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccRedGradientBrush"));
 	}
 	public static class MiscResources
 	{

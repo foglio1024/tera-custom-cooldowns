@@ -84,7 +84,6 @@
     <Color x:Key="MoongourdAccentColor">         #26b99a   </Color>
     <Color x:Key="MoongourdFadedAccentColor">    #1b9190   </Color>
                                                            
-                                                           
     <Color x:Key="AbnormalityBuffColor">         #3F9FFF   </Color>
     <Color x:Key="AbnormalityStunColor">         #FF0000   </Color>
     <Color x:Key="AbnormalityDebuffColor">       #8FF442   </Color>
@@ -129,5 +128,16 @@
     <Color x:Key="ChatSystemWorldBossColor">     #FCB7FF   </Color>
     <Color x:Key="ChatDiamondLaurelColor">       #38BDE5   </Color>
     <Color x:Key="ChatChampionLaurelColor">      #FF264B   </Color>
+
+    <Color x:Key="TccNormalLightGradient0Color"> #55CCFF   </Color>
+    <Color x:Key="TccNormalLightGradient1Color"> #55ffCC   </Color>
+    <Color x:Key="TccNormalGradient0Color">      #0099FF   </Color>
+    <Color x:Key="TccNormalGradient1Color">      #00ffE1   </Color>
+    <Color x:Key="TccGreenGradient0Color">       #00A35A   </Color>
+    <Color x:Key="TccGreenGradient1Color">       #00DE85   </Color>
+    <Color x:Key="TccYellowGradient0Color">      #FFBB33   </Color>
+    <Color x:Key="TccYellowGradient1Color">      #FF5522   </Color>
+    <Color x:Key="TccRedGradient0Color">         #FF1122   </Color>
+    <Color x:Key="TccRedGradient1Color">         #FF2255   </Color>
 
 </ResourceDictionary>

@@ -124,12 +124,41 @@
     <SolidColorBrush x:Key="ChatSystemFriendBrush"          Color="{StaticResource ChatSystemFriendColor}"                     />
     <SolidColorBrush x:Key="ChatSystemWorldBossBrush"       Color="{StaticResource ChatSystemWorldBossColor}"                  />
                                                                                                                                
-                                                                                                                               
-    <LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
+    <SolidColorBrush x:Key="TccNormalGradient0Brush"        Color="{StaticResource TccNormalGradient0Color}"                   />
+    <SolidColorBrush x:Key="TccNormalGradient1Brush"        Color="{StaticResource TccNormalGradient1Color}"                   />
+    <SolidColorBrush x:Key="TccNormalLightGradient0Brush"   Color="{StaticResource TccNormalLightGradient0Color}"              />
+    <SolidColorBrush x:Key="TccNormalLightGradient1Brush"   Color="{StaticResource TccNormalLightGradient1Color}"              />
+    <SolidColorBrush x:Key="TccYellowGradient0Brush"        Color="{StaticResource TccYellowGradient0Color}"                   />
+    <SolidColorBrush x:Key="TccYellowGradient1Brush"        Color="{StaticResource TccYellowGradient1Color}"                   />
+    <SolidColorBrush x:Key="TccRedGradient0Brush"           Color="{StaticResource TccRedGradient0Color}"                      />
+    <SolidColorBrush x:Key="TccRedGradient1Brush"           Color="{StaticResource TccRedGradient1Color}"                      />
+
+
+
+
+<LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="0.1"/>                                      
         <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.4"/>                                      
         <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.5"/>                                      
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="1.0"/>                                      
-    </LinearGradientBrush>                                                                                                     
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TccNormalGradientBrush">
+        <GradientStop Color="{StaticResource TccNormalGradient0Color}" Offset="0"></GradientStop>
+        <GradientStop Color="{StaticResource TccNormalGradient1Color}" Offset="1"></GradientStop>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TccGreenGradientBrush">
+        <GradientStop Color="{StaticResource TccGreenGradient0Color}" Offset="0"></GradientStop>
+        <GradientStop Color="{StaticResource TccGreenGradient1Color}" Offset="1"></GradientStop>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TccYellowGradientBrush">
+        <GradientStop Color="{StaticResource TccYellowGradient0Color}" Offset="0"></GradientStop>
+        <GradientStop Color="{StaticResource TccYellowGradient1Color}" Offset="1"></GradientStop>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TccRedGradientBrush">
+        <GradientStop Color="{StaticResource TccRedGradient0Color}" Offset="0"></GradientStop>
+        <GradientStop Color="{StaticResource TccRedGradient1Color}" Offset="1"></GradientStop>
+    </LinearGradientBrush>
+
 
 </ResourceDictionary>
