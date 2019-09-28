@@ -6,11 +6,13 @@
                  xmlns:settings="clr-namespace:TCC.Controls.Settings"
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:local="clr-namespace:TCC.Windows"
+                 xmlns:viewModels="clr-namespace:TCC.ViewModels"
                  Topmost="True"
                  mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
                  Title="TCC Settings" Height="600" Width="900" ResizeMode="NoResize"
                  Background="Transparent" UseLayoutRounding="True"
-                 d:DataContext="{d:DesignData vm:SettingsWindowViewModel}">
+                 WindowStartupLocation="CenterScreen"
+                 d:DataContext="{d:DesignInstance viewModels:SettingsWindowViewModel}">
     <local:TccWindow.Resources>
         <Style TargetType="TabItem" x:Key="TabItemStyle">
             <Setter Property="Template">
@@ -275,6 +277,7 @@
             <Setter Property="Grid.ColumnSpan" Value="10" />
             <Setter Property="Opacity" Value=".5" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <EventSetter Event="MouseLeftButtonDown" Handler="OnTabBackgroundMouseLeftDown"></EventSetter>
         </Style>
 
         <Style x:Key="TabItemHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}">
@@ -286,12 +289,13 @@
             <Setter Property="Height" Value="200" />
             <Setter Property="Margin" Value="20" />
             <Setter Property="Fill" Value="#1ddf" />
+            <Setter Property="IsHitTestVisible" Value="False" />
             <Setter Property="VerticalAlignment" Value="Bottom" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Grid.RowSpan" Value="10" />
             <Setter Property="Grid.ColumnSpan" Value="10" />
             <Setter Property="Stretch" Value="Uniform" />
-            <EventSetter Event="Loaded" Handler="EventSetter_OnHandler" />
+            <EventSetter Event="Loaded" Handler="OnBigPathLoaded" />
         </Style>
 
     </local:TccWindow.Resources>
@@ -350,6 +354,7 @@
                     BorderThickness="1"
                     Opacity=".5"
                     Margin="3 0 3 3"
+
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch" />
             <TabControl Background="Transparent"
@@ -521,7 +526,7 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <!-- Boss window -->
+                <!-- NPC window -->
                 <TabItem>
                     <TabItem.Header>
                         <Grid Height="30">
@@ -574,7 +579,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:CheckboxSetting SettingName="Hide adds"
-                                                      IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}">
+                                                      IsOn="{Binding BossWindowSettings.HideAdds, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <ToolTip>
                                         <Grid Margin="5">
@@ -1241,6 +1246,77 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
+                <!-- Notification window -->
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Margin="6" Data="{StaticResource SvgInfo}" />
+                            <TextBlock Text="Notification area settings"
+                                       Style="{StaticResource TabItemHeaderTextStyle}"
+                                       Grid.Column="1" />
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource TabContentBackgroundBorder}" />
+                        <Path Data="{StaticResource SvgInfo}" Style="{StaticResource BigPathStyle}" />
+                        <!-- General -->
+                        <StackPanel VerticalAlignment="Stretch">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}"
+                                            Content="General settings" />
+                            <settings:CheckboxSetting IsOn="{Binding NotificationAreaSettings.Enabled, Mode=TwoWay}"
+                                                      Style="{StaticResource EnabledSettingStyle}" />
+                            <settings:CheckboxSetting IsOn="{Binding NotificationAreaSettings.ShowAlways, Mode=TwoWay}"
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}" />
+                            <settings:CheckboxSetting IsOn="{Binding NotificationAreaSettings.AllowOffScreen, Mode=TwoWay}"
+                                                      Style="{StaticResource AllowOffscreenSettingStyle}" />
+                            <settings:SelectionSetting 
+                                SelectedItem="{Binding NotificationAreaSettings.ClickThruMode, Mode=TwoWay}"
+                                Style="{StaticResource ClickThruSettingStyle}" />
+                            <settings:ValueSetting Value="{Binding NotificationAreaSettings.Scale, Mode=TwoWay}"
+                                                   Style="{StaticResource ScaleSettingStyle}" />
+                        </StackPanel>
+                        <!-- Specific -->
+                        <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}"
+                                            Content="Specific settings" />
+                            <settings:ValueSetting Value="{Binding NotificationAreaSettings.MaxNotifications, Mode=TwoWay}"
+                                                    SettingName="Max notifications" Min="1" Max="5">
+                                <settings:ValueSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                            <Run Text="Maximum amount of visible notifications (min:1, max:5)" />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+
+
+                        </StackPanel>
+                        <!-- Actions -->
+                        <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
+                            <Button Style="{StaticResource SettingsButton}"
+                                    Content="Move window to center screen"
+                                    Command="{Binding GroupWindowSettings.ResetPositionCommand}" />
+                            <Button Style="{StaticResource SettingsButton}"
+                                    Click="TestNotification" Content="Send test notification" />
+
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
                 <!-- System settings -->
                 <TabItem>
                     <TabItem.Header>
@@ -1388,6 +1464,16 @@
                                                        SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:CaptureMode}"
                                                        Choices="{Binding CaptureModes, Mode=OneWay}" >
+                                <settings:SelectionSetting.Style>
+                                    <Style TargetType="settings:SelectionSetting">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Experimental}" Value="True">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Setter Property="Opacity" Value=".3"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </settings:SelectionSetting.Style>
                                 <settings:SelectionSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -1423,7 +1509,19 @@
                             <!--<settings:CheckboxSetting SettingName="Use npcap"
                                                       IsOn="{Binding Npcap, Mode=TwoWay}" />-->
                             <settings:CheckboxSetting SettingName="Use Tera Toolbox"
-                                                      IsOn="{Binding EnableProxy, Mode=TwoWay}" />
+                                                      IsOn="{Binding EnableProxy, Mode=TwoWay}" >
+                                <settings:CheckboxSetting.Style>
+                                    <Style TargetType="settings:CheckboxSetting">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Experimental}" Value="True">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Setter Property="Opacity" Value=".3"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </settings:CheckboxSetting.Style>
+
+                            </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Auto fps mode"
                                                       IsOn="{Binding FpsAtGuardian, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
@@ -1450,6 +1548,43 @@
                                     Background="{StaticResource AssaultStanceBrush}"
                                     Foreground="White"
                                     Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}" />
+
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Hotkeys settings" />
+                                <Path Grid.Column="1" Data="{StaticResource SvgInfo}"
+                                  Height="16" Opacity=".2" Margin="0 0 7 0">
+                                    <Path.ToolTip>
+                                        <Grid Margin="5">
+                                            <Border Style="{StaticResource RevampBorderStyle}" />
+                                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="300">
+                                                <Run Text="Use mouse to select a hotkey and press the key combination you want to assign to each command." />
+                                                <LineBreak/>
+                                                <LineBreak/>
+                                                <Run Text="Click away or press Enter to deselect the hotkey." />
+                                                <LineBreak/>
+                                                <LineBreak/>
+                                                <Run Text="All hotkeys" />
+                                                <Run FontWeight="Bold" Foreground="White" Text="will"/>
+                                                <Run Text="automatically include the Ctrl modifier."/>
+                                            </TextBlock>
+                                        </Grid>
+
+                                    </Path.ToolTip>
+                                </Path>
+                            </Grid>
+
+                            <settings:HotkeySetting SettingName="Settings" Value="{Binding SettingsHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="Configure skills" Value="{Binding SkillSettingsHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="Dashboard" Value="{Binding DashboardHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="Toggle clickable chat" Value="{Binding ForceClickableChatHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="LFG window" Value="{Binding LfgHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="Return to lobby" Value="{Binding ReturnToLobbyHotkey, Mode=TwoWay}" />
 
                         </StackPanel>
                     </Grid>

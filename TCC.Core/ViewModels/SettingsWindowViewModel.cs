@@ -28,7 +28,6 @@ namespace TCC.ViewModels
             Log.CW($"ChatShowChannelChanged: {ChatShowChannelChanged?.GetInvocationList().Length}");
             Log.CW($"ChatShowTimestampChanged: {ChatShowTimestampChanged?.GetInvocationList().Length}");
             Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
-            
         }
 
         public WindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
@@ -40,7 +39,68 @@ namespace TCC.ViewModels
         public WindowSettings FlightWindowSettings => App.Settings.FlightGaugeWindowSettings;
         public WindowSettings FloatingButtonSettings => App.Settings.FloatingButtonSettings;
         public WindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
+        public WindowSettings NotificationAreaSettings => App.Settings.NotificationAreaSettings;
 
+        public HotKey SettingsHotkey
+        {
+            get => App.Settings.SettingsHotkey;
+            set
+            {
+                if (App.Settings.SettingsHotkey.Equals(value)) return;
+                App.Settings.SettingsHotkey = value;
+                N();
+            }
+        }
+        public HotKey SkillSettingsHotkey
+        {
+            get => App.Settings.SkillSettingsHotkey;
+            set
+            {
+                if (App.Settings.SkillSettingsHotkey.Equals(value)) return;
+                App.Settings.SkillSettingsHotkey = value;
+                N();
+            }
+        }
+        public HotKey ForceClickableChatHotkey
+        {
+            get => App.Settings.ForceClickableChatHotkey;
+            set
+            {
+                if (App.Settings.ForceClickableChatHotkey.Equals(value)) return;
+                App.Settings.ForceClickableChatHotkey = value;
+                N();
+            }
+        }
+        public HotKey DashboardHotkey
+        {
+            get => App.Settings.DashboardHotkey;
+            set
+            {
+                if (App.Settings.DashboardHotkey.Equals(value)) return;
+                App.Settings.DashboardHotkey = value;
+                N();
+            }
+        }
+        public HotKey LfgHotkey
+        {
+            get => App.Settings.LfgHotkey;
+            set
+            {
+                if (App.Settings.LfgHotkey.Equals(value)) return;
+                App.Settings.LfgHotkey = value;
+                N();
+            }
+        }
+        public HotKey ReturnToLobbyHotkey
+        {
+            get => App.Settings.ReturnToLobbyHotkey;
+            set
+            {
+                if (App.Settings.ReturnToLobbyHotkey.Equals(value)) return;
+                App.Settings.ReturnToLobbyHotkey = value;
+                N();
+            }
+        }
         private int _khCount;
         private bool _kh;
         public bool KylosHelper
@@ -52,13 +112,13 @@ namespace TCC.ViewModels
                 switch (_khCount)
                 {
                     case 0:
-                        WindowManager.FloatingButton.NotifyExtended("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
+                        WindowManager.ViewModels.NotificationArea.Enqueue("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
                         break;
                     case 1:
-                        WindowManager.FloatingButton.NotifyExtended(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
+                        WindowManager.ViewModels.NotificationArea.Enqueue(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
                         break;
                     case 2:
-                        WindowManager.FloatingButton.NotifyExtended("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
+                        WindowManager.ViewModels.NotificationArea.Enqueue("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
                         Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                         break;
                 }
@@ -355,11 +415,11 @@ namespace TCC.ViewModels
         }
         public bool ShowOnlyBosses
         {
-            get => App.Settings.NpcWindowSettings.ShowOnlyBosses;
+            get => App.Settings.NpcWindowSettings.HideAdds;
             set
             {
-                if (App.Settings.NpcWindowSettings.ShowOnlyBosses == value) return;
-                App.Settings.NpcWindowSettings.ShowOnlyBosses = value;
+                if (App.Settings.NpcWindowSettings.HideAdds == value) return;
+                App.Settings.NpcWindowSettings.HideAdds = value;
                 N(nameof(ShowOnlyBosses));
             }
         }
@@ -421,7 +481,7 @@ namespace TCC.ViewModels
             get => App.Settings.FlightGaugeWindowSettings.Enabled;
             set
             {
-                if (App.Settings.FlightGaugeWindowSettings.Enabled== value) return;
+                if (App.Settings.FlightGaugeWindowSettings.Enabled == value) return;
                 App.Settings.FlightGaugeWindowSettings.Enabled = value;
                 N();
             }
