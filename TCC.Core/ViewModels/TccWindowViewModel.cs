@@ -6,6 +6,7 @@ namespace TCC.ViewModels
 {
     public class TccWindowViewModel : TSPropertyChanged
     {
+        public WindowSettings Settings { get; }
         protected virtual void InstallHooks() { }
         protected virtual void RemoveHooks() { }
 
@@ -22,15 +23,16 @@ namespace TCC.ViewModels
 
         protected TccWindowViewModel(WindowSettings settings) : this()
         {
+            Settings = settings;
             //App.BaseDispatcher.Invoke(() =>
             //{
             //});
-                if (settings != null)
-                {
-                    settings.EnabledChanged += OnEnabledChanged;
-                    if (!settings.Enabled) return;
-                }
-                PacketAnalyzer.ProcessorReady += InstallHooks;
+            if (settings != null)
+            {
+                settings.EnabledChanged += OnEnabledChanged;
+                if (!settings.Enabled) return;
+            }
+            PacketAnalyzer.ProcessorReady += InstallHooks;
         }
     }
 }
