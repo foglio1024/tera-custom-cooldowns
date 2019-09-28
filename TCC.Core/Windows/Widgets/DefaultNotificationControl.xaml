@@ -54,7 +54,7 @@
             </TextBlock>
             <Rectangle Grid.Column="1" Fill="#1fff"/>
             <TextBlock  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Message, Mode=OneWay}"
-                        HorizontalAlignment="Left" FontSize="12" Margin="10 6 10 6" Foreground="#fff"/>
+                        HorizontalAlignment="Left" FontSize="12" Margin="12 10 12 10" Foreground="#fff"/>
             <Separator Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" Margin="10 0 10 -1" Opacity=".2"></Separator>
             <TextBlock  Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding TimeStamp, Mode=OneWay}"
                         HorizontalAlignment="Left" FontSize="10" Margin="10 2 10 4" Foreground="#3fff"/>
