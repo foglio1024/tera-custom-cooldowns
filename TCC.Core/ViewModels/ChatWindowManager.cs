@@ -175,26 +175,35 @@ namespace TCC.ViewModels
             // ignore these since they're handled differently
             //if (m.Message.Contains(":tcc-chatMode:") || m.Message.Contains(":tcc-uiMode:")) return;
             var i = PrivateChannels.FirstOrDefault(y => y.Id == m.Channel).Index;
-            var ch = (ChatChannel) (PrivateChannels[i].Index + 11);
+            var ch = (ChatChannel)(PrivateChannels[i].Index + 11);
             if (ch == ChatChannel.Private8) return; // already sent by stub
 
             AddChatMessage(new ChatMessage(ch, m.AuthorName, m.Message));
         }
         private void OnChat(S_CHAT m)
         {
-            AddChatMessage(new ChatMessage(m.Channel == 212 ? (ChatChannel) 26 : ((ChatChannel) m.Channel), m.AuthorName, m.Message));
+            AddChatMessage(new ChatMessage(m.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)m.Channel), m.AuthorName, m.Message));
+            if ((ChatChannel)m.Channel != ChatChannel.Greet) return;
+            switch (m.AuthorName)
+            {
+                case "Foglio":
+                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "(° -°)", NotificationType.Success, 3000);
+                    break;
+            }
+
         }
         private void OnPlayerChangeExp(S_PLAYER_CHANGE_EXP m)
         {
+            if (Game.Me.Level == 70) return;
             var msg = $"<font>You gained </font>";
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.GainedTotalExp - m.GainedRestedExp:N0}</font>";
             msg += $"<font>{(m.GainedRestedExp > 0 ? $" + </font><font color='{R.Colors.ChatMegaphoneColor.ToHex()}'>{m.GainedRestedExp:N0}" : "")} </font>";
             msg += $"<font>(</font>";
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>";
-            msg += $"{(m.GainedTotalExp) / (double) (m.NextLevelExp):P3}</font>";
+            msg += $"{(m.GainedTotalExp) / (double)(m.NextLevelExp):P3}</font>";
             msg += $"<font>) XP.</font>";
             msg += $"<font> Total: </font>";
-            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.LevelExp / (double) (m.NextLevelExp):P3}</font>";
+            msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.LevelExp / (double)(m.NextLevelExp):P3}</font>";
             msg += $"<font>.</font>";
 
             AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
@@ -527,7 +536,7 @@ namespace TCC.ViewModels
             App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
             if (App.Settings.ChatWindowsSettings.Count == 0) return;
             var msg = $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
-            WindowManager.FloatingButton.NotifyExtended("TCC", msg, NotificationType.Normal, 2000);
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", msg, NotificationType.Normal, 2000);
             AddTccMessage(msg);
         }
 
