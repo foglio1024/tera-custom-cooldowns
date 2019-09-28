@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -115,7 +116,7 @@ namespace TCC.Windows
             Process.Start("https://github.com/Foglio1024/Tera-custom-cooldowns/wiki");
         }
 
-        private void EventSetter_OnHandler(object sender, RoutedEventArgs e)
+        private void OnBigPathLoaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is FrameworkElement t)) return;
             t.Opacity = 0;
@@ -153,6 +154,17 @@ namespace TCC.Windows
         private void RegisterFieldBossWebhook(object sender, RoutedEventArgs e)
         {
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true);
+        }
+
+        private void TestNotification(object sender, RoutedEventArgs e)
+        {
+            WindowManager.ViewModels.NotificationArea.Enqueue("The Game", $"You just lost.", (NotificationType)App.Random.Next(0,4), 5000);
+        }
+
+        private void OnTabBackgroundMouseLeftDown(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
+            ((FrameworkElement) sender).Focus();
         }
     }
 }
