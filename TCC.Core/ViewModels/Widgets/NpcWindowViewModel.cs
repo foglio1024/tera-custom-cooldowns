@@ -83,6 +83,7 @@ namespace TCC.ViewModels.Widgets
             InitFlushTimer();
             NpcListChanged += FlushCache;
             ((NpcWindowSettings)settings).AccurateHpChanged += OnAccurateHpChanged;
+            ((NpcWindowSettings)settings).HideAddsChanged += OnHideAddsChanged;
             MonsterDatabase.OverrideChangedEvent += RefreshOverride;
             void InitFlushTimer()
             {
@@ -90,6 +91,12 @@ namespace TCC.ViewModels.Widgets
                 flushTimer.Tick += (_, __) => FlushCache();
                 flushTimer.Start();
             }
+        }
+
+        private void OnHideAddsChanged()
+        {
+            if (!((NpcWindowSettings)Settings).HideAdds) return;
+            _npcList.ToSyncList().Where(x => !x.IsBoss).ToList().ForEach(RemoveAndDisposeNPC);
         }
 
         public void AddOrUpdateNpc(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true, int remainingEnrageTime = 0)
@@ -170,7 +177,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                WindowManager.FloatingButton.NotifyExtended("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationArea.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
@@ -242,7 +249,7 @@ namespace TCC.ViewModels.Widgets
         }
         private NPC AddNPC(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
         {
-            if (App.Settings.NpcWindowSettings.ShowOnlyBosses && !isBoss) return null;
+            if (App.Settings.NpcWindowSettings.HideAdds && !isBoss) return null;
             if (templateId == 0 || zoneId == 0) return null;
             if (zoneId == 1023) return null;
 
@@ -405,7 +412,7 @@ namespace TCC.ViewModels.Widgets
             if (!EntityManager.Pass(p.HuntingZoneId, p.TemplateId)) return;
             CheckHarrowholdPhase(p.HuntingZoneId, p.TemplateId);
             if (!Game.DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
-            if (App.Settings.NpcWindowSettings.ShowOnlyBosses && !m.IsBoss) return;
+            if (App.Settings.NpcWindowSettings.HideAdds && !m.IsBoss) return;
             AddOrUpdateNpc(p, m);
             //AddOrUpdateNpc(p.EntityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, p.TemplateId, p.HuntingZoneId, m.IsBoss && TccUtils.IsFieldBoss(p.HuntingZoneId, p.TemplateId), p.RemainingEnrageTime);
         }

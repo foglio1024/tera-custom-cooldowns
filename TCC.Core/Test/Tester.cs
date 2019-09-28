@@ -441,7 +441,7 @@ namespace TCC.Test
                 }
                 else
                 {
-                    if (App.Settings.NpcWindowSettings.ShowOnlyBosses) return;
+                    if (App.Settings.NpcWindowSettings.HideAdds) return;
                     WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false, remainingEnrageTime);
                 }
             }

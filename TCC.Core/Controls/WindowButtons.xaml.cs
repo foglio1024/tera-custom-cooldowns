@@ -22,8 +22,6 @@ namespace TCC.Controls
         }
         public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName", typeof(string), typeof(WindowButtons));
 
-
-
         public Visibility AutoDimButtonVisiblity
         {
             get => (Visibility)GetValue(AutoDimButtonVisiblityProperty);
@@ -31,17 +29,12 @@ namespace TCC.Controls
         }
         public static readonly DependencyProperty AutoDimButtonVisiblityProperty = DependencyProperty.Register("AutoDimButtonVisiblity", typeof(Visibility), typeof(WindowButtons));
 
-
-
         public Visibility HideButtonVisibility
         {
             get => (Visibility)GetValue(HideButtonVisibilityProperty);
             set => SetValue(HideButtonVisibilityProperty, value);
         }
         public static readonly DependencyProperty HideButtonVisibilityProperty = DependencyProperty.Register("HideButtonVisibility", typeof(Visibility), typeof(WindowButtons));
-
-
-
 
         private void Hide(object sender, RoutedEventArgs e)
         {

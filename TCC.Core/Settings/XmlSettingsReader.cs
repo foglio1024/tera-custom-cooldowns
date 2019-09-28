@@ -325,7 +325,7 @@ namespace TCC.Settings
                 {
                     if (attr.Name == "IgnoreMeInGroupWindow") App.Settings.GroupWindowSettings.IgnoreMe = bool.Parse(attr.Value);
                     else if (attr.Name == "EnrageLabelMode") App.Settings.NpcWindowSettings.EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), attr.Value);
-                    else if (attr.Name == "ShowOnlyBosses") App.Settings.NpcWindowSettings.ShowOnlyBosses = bool.Parse(attr.Value);
+                    else if (attr.Name == "ShowOnlyBosses") App.Settings.NpcWindowSettings.HideAdds = bool.Parse(attr.Value);
                     else if (attr.Name == "AccurateHp") App.Settings.NpcWindowSettings.AccurateHp = bool.Parse(attr.Value);
                     else if (attr.Name == "BuffsDirection") App.Settings.BuffWindowSettings.Direction = (FlowDirection)Enum.Parse(typeof(FlowDirection), attr.Value);
                     else if (attr.Name == "ShowAllMyAbnormalities") App.Settings.BuffWindowSettings.ShowAll = bool.Parse(attr.Value); // MyAbnormals Setting by HQ 

@@ -97,7 +97,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(CooldownWindowSettings.ShowItems), App.Settings.CooldownWindowSettings.ShowItems),
                 new XAttribute(nameof(SettingsContainer.SkillShape), App.Settings.SkillShape),
                 // Boss
-                new XAttribute(nameof(NpcWindowSettings.ShowOnlyBosses), App.Settings.NpcWindowSettings.ShowOnlyBosses),
+                new XAttribute(nameof(NpcWindowSettings.HideAdds), App.Settings.NpcWindowSettings.HideAdds),
                 new XAttribute(nameof(NpcWindowSettings.EnrageLabelMode), App.Settings.NpcWindowSettings.EnrageLabelMode),
                 new XAttribute(nameof(NpcWindowSettings.AccurateHp), App.Settings.NpcWindowSettings.AccurateHp),
                 // Class
