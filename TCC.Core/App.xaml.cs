@@ -16,9 +16,9 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
-using SplashScreen = TCC.Windows.SplashScreen;
 
 namespace TCC
 {
@@ -27,8 +27,8 @@ namespace TCC
         public const bool Experimental = true;
 
         private static Mutex _mutex;
-        public static readonly Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year);
-        public static SplashScreen SplashScreen;
+        public static readonly Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond);
+        public static TccSplashScreen SplashScreen;
         public static Dispatcher BaseDispatcher { get; private set; }
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
         public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
@@ -77,55 +77,62 @@ namespace TCC
             {
                 UpdateManager.TryDeleteUpdater();
 
-                SplashScreen.SetText("Checking for application updates...");
+                SplashScreen.VM.BottomText = "Checking for application updates...";
                 await UpdateManager.CheckAppVersion();
             }
 
-            SplashScreen.SetText("Checking for icon database updates...");
+            SplashScreen.VM.Progress = 10;
+            SplashScreen.VM.BottomText = "Checking for icon database updates...";
             await UpdateManager.CheckIconsVersion();
 
-            SplashScreen.SetText("Loading settings...");
+            SplashScreen.VM.Progress = 20;
+            SplashScreen.VM.BottomText = "Loading settings...";
+
             WindowManager.ForegroundManager = new ForegroundManager();
 
             SettingsContainer.Load();
+
+            SplashScreen.VM.Progress = 30;
 
             Process.GetCurrentProcess().PriorityClass = Settings.HighPriority
                 ? ProcessPriorityClass.High
                 : ProcessPriorityClass.Normal;
             if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
-            SplashScreen.SetText("Pre-loading databases...");
+            SplashScreen.VM.BottomText = "Pre-loading databases...";
             UpdateManager.CheckDatabaseHash();
+
+            SplashScreen.VM.Progress = 50;
+
             await Game.InitAsync();
 
-            SplashScreen.SetText("Initializing packet processor...");
+            SplashScreen.VM.Progress = 70;
+            SplashScreen.VM.BottomText = "Initializing widgets...";
+
             WindowManager.Init();
-            PacketAnalyzer.ProcessorReady += () =>
-            {
-                BaseDispatcher.Invoke(() =>
-                {
-                    ModuleLoader.LoadModules(BasePath);
-                });
-                //SplashScreen.SetText("Initializing windows...");
-            };
-            PacketAnalyzer.InitAsync();
-            SplashScreen.SetText("Starting");
+
+            SplashScreen.VM.BottomText = "Initializing packet processor...";
+            SplashScreen.VM.Progress = 80;
+
+            PacketAnalyzer.ProcessorReady += () => BaseDispatcher.Invoke(() => ModuleLoader.LoadModules(BasePath));
+            await PacketAnalyzer.InitAsync();
+            SplashScreen.VM.Progress = 100;
+            SplashScreen.VM.BottomText = "Starting";
 
             TimeManager.Instance.SetServerTimeZone(Settings.LastLanguage);
             ChatWindowManager.Instance.AddTccMessage(AppVersion);
-            SplashScreen.CloseWindowSafe();
 
-
-            /*if (!ToolboxMode)*/
             UpdateManager.StartPeriodicCheck();
 
             if (!Experimental && Settings.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
-                WindowManager.FloatingButton.NotifyExtended("TCC experimental",
+                WindowManager.ViewModels.NotificationArea.Enqueue("TCC experimental",
                     "An experimental version of TCC is available. Open System settings to download it or disable this notification.",
                     NotificationType.Success,
                     10000);
 
+            SplashScreen.CloseWindowSafe();
             Loading = false;
+
         }
 
         private static void ParseStartupArgs(List<string> list)
@@ -136,6 +143,12 @@ namespace TCC
             ToolboxMode = list.IndexOf("--toolbox") != -1;
 #endif
             Restarted = list.IndexOf("--restart") != -1;
+            var settingsOverrideIdx = list.IndexOf("--settings_override");
+            if (settingsOverrideIdx != -1)
+            {
+                SettingsContainer.SettingsOverride = list[settingsOverrideIdx + 1];
+            }
+
         }
 
 
@@ -146,9 +159,8 @@ namespace TCC
                 {
                     SynchronizationContext.SetSynchronizationContext(
                         new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                    SplashScreen = new SplashScreen();
-                    SplashScreen.SetText("Initializing...");
-                    SplashScreen.SetVer(AppVersion);
+                    SplashScreen = new TccSplashScreen();
+                    SplashScreen.VM.BottomText = "Initializing...";
                     SplashScreen.Show();
                     waiting = false;
                     Dispatcher.Run();
@@ -172,7 +184,7 @@ namespace TCC
             PacketAnalyzer.Sniffer.Enabled = false;
             Settings.Save();
             WindowManager.Dispose();
-            ProxyInterface.Instance.Disconnect(); //ProxyOld.CloseConnection();
+            ProxyInterface.Instance.Disconnect(); 
             UpdateManager.StopTimer();
             Environment.Exit(0);
         }
