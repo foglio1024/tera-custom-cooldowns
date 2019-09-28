@@ -43,10 +43,10 @@ namespace TCC.Parsing
             AnalysisThread.Start();
         }
 
-        public static async void InitAsync()
+        public static async Task InitAsync()
         {
             await Task.Factory.StartNew(Init);
-            WindowManager.FloatingButton.NotifyExtended("TCC", "Ready to connect.", NotificationType.Normal);
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Ready to connect.", NotificationType.Normal);
         }
         private static void PacketAnalysisLoop()
         {
@@ -70,9 +70,9 @@ namespace TCC.Parsing
         {
             Game.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-            WindowManager.FloatingButton.NotifyExtended("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
-            ProxyInterface.Instance.Init();
+            _ = ProxyInterface.Instance.Init();
 
             if (!App.Settings.DontShowFUBH) App.FUBH();
 
@@ -85,7 +85,7 @@ namespace TCC.Parsing
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
-            WindowManager.FloatingButton.NotifyExtended("TCC", "Disconnected", NotificationType.Normal);
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Disconnected", NotificationType.Normal);
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
 
             ProxyInterface.Instance.Disconnect();
@@ -152,7 +152,7 @@ namespace TCC.Parsing
             }
             Factory.ReloadSysMsg(path);
 
-            WindowManager.FloatingButton.NotifyExtended("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
         }
     }
 }

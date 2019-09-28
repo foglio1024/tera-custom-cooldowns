@@ -21,7 +21,7 @@ namespace TCC.Parsing
             var localHash = HashUtils.GenerateFileHash(filename);
             if (localHash == "")
             {
-                WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to check opcode file hash.\n Skipping download...", Data.NotificationType.Warning);
+                WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Failed to check opcode file hash.\n Skipping download...", Data.NotificationType.Warning);
                 return true;
             }
             using (var c = MiscUtils.GetDefaultWebClient())

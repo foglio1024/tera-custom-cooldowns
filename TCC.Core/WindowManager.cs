@@ -41,6 +41,7 @@ namespace TCC
             private static DashboardViewModel _dashboard;
             private static LfgListViewModel _lfg;
             private static FlightGaugeViewModel _flightGauge;
+            private static NotificationAreaViewModel _notification;
             private static readonly object _groupVmLock = new object();
 
             public static CooldownWindowViewModel Cooldowns => _cooldowns ?? (_cooldowns = new CooldownWindowViewModel(App.Settings.CooldownWindowSettings));
@@ -63,6 +64,7 @@ namespace TCC
             public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel(null));
             public static LfgListViewModel LFG => _lfg ?? (_lfg = new LfgListViewModel(App.Settings.LfgWindowSettings));
             public static FlightGaugeViewModel FlightGauge => _flightGauge ?? (_flightGauge = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
+            public static NotificationAreaViewModel NotificationArea => _notification?? (_notification= new NotificationAreaViewModel(App.Settings.NotificationAreaSettings));
 
         }
 
@@ -99,6 +101,7 @@ namespace TCC
         }
 
         public static FloatingButtonWindow FloatingButton;
+        public static NotificationAreaWindow NotificationArea;
         public static FlightDurationWindow FlightDurationWindow;
         public static SkillConfigWindow SkillConfigWindow;
 
@@ -144,7 +147,8 @@ namespace TCC
                 CharacterWindow.WindowSettings,
                 GroupWindow.WindowSettings,
                 BuffWindow.WindowSettings,
-                BossWindow.WindowSettings
+                BossWindow.WindowSettings,
+                NotificationArea.WindowSettings
             };
 
             list.ForEach(s => { s.ApplyScreenCorrection(sc); });
@@ -252,6 +256,7 @@ namespace TCC
             try { BossWindow.CloseWindowSafe(); } catch { }
             try { BuffWindow.CloseWindowSafe(); } catch { }
             try { ClassWindow.CloseWindowSafe(); } catch { }
+            try { NotificationArea.CloseWindowSafe(); } catch { }
 
             if (RunningDispatchers == null) return;
             var times = 50;
@@ -274,6 +279,7 @@ namespace TCC
             LoadGroupWindow();
             LoadNpcWindow();
             LoadBuffBarWindow();
+            LoadNotificationArea();
 
             FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGauge);
             if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
@@ -303,6 +309,22 @@ namespace TCC
             RunningDispatchers.TryRemove(threadId, out var _);
         }
 
+        private static void LoadNotificationArea()
+        {
+            var notifAreaThread = new Thread(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                NotificationArea = new NotificationAreaWindow(ViewModels.NotificationArea);
+                if(NotificationArea.WindowSettings.Enabled) NotificationArea.Show();
+                NotificationArea.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
+                AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
+                Dispatcher.Run();
+                RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+            })
+            { Name = "Notif" };
+            notifAreaThread.SetApartmentState(ApartmentState.STA);
+            notifAreaThread.Start();
+        }
         private static void LoadCooldownWindow()
         {
             var cooldownWindowThread = new Thread(() =>

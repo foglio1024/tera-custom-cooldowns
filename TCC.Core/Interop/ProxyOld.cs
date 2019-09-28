@@ -150,7 +150,7 @@
 //    //    //        _client = new TcpClient();
 //    //    //        _client.Connect("127.0.0.50", 9550);
 //    //    //        ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
-//    //    //        WindowManager.FloatingButton.NotifyExtended("TCC", "Successfully connected to tcc-stub.", NotificationType.Success);
+//    //    //        WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Successfully connected to tcc-stub.", NotificationType.Success);
 //    //    //        //var t = new Thread(ReceiveData);
 //    //    //        //var analysisThread = new Thread(ProxyPacketAnalysisLoop);
 //    //    //        //t.Start();
@@ -166,7 +166,7 @@
 //    //    //            if (_retries <= 0)
 //    //    //            {
 //    //    //                ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-//    //    //                WindowManager.FloatingButton.NotifyExtended("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available. If you don't want to see this message again disable proxy in TCC System Settings.", NotificationType.Error);
+//    //    //                WindowManager.ViewModels.NotificationArea.Enqueue("Proxy", "Unable to connect to tera-proxy. Advanced functionalities won't be available. If you don't want to see this message again disable proxy in TCC System Settings.", NotificationType.Error);
 //    //    //                _retries = 2;
 //    //    //                return;
 //    //    //            }

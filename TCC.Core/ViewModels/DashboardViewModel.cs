@@ -169,7 +169,7 @@ namespace TCC.ViewModels
         bool _loaded;
         public DashboardViewModel(WindowSettings settings) : base(settings)
         {
-            KeyboardHook.Instance.RegisterCallback(App.Settings.InfoWindowHotkey, OnShowDashboardHotkeyPressed);
+            KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
 
             CharacterViewModels = new ObservableCollection<CharacterViewModel>();
             EventGroups = new SynchronizedObservableCollection<EventGroup>();
@@ -501,7 +501,7 @@ namespace TCC.ViewModels
             ClearEvents();
             if (region == null)
             {
-                WindowManager.FloatingButton.NotifyExtended("Info window", "No region specified; cannot load events.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationArea.Enqueue("Info window", "No region specified; cannot load events.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }

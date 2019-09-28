@@ -142,7 +142,7 @@ namespace TCC
             {
 
                 ChatWindowManager.Instance.AddTccMessage("Failed to retrieve guild BAM info.");
-                WindowManager.FloatingButton.NotifyExtended("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationArea.Enqueue("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
 
                 return 0;
             }
@@ -168,7 +168,7 @@ namespace TCC
             catch
             {
                 ChatWindowManager.Instance.AddTccMessage("Failed to upload guild BAM info.");
-                WindowManager.FloatingButton.NotifyExtended("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationArea.Enqueue("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
 
             }
 
@@ -241,7 +241,7 @@ namespace TCC
             //}
             //catch (Exception)
             //{
-            //    WindowManager.FloatingButton.NotifyExtended("TCC", "Failed to execute Discord webhook.", NotificationType.Error);
+            //    WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Failed to execute Discord webhook.", NotificationType.Error);
             //    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
             //}
         }
@@ -325,7 +325,7 @@ namespace TCC
         //            }
         //            catch (Exception)
         //            {
-        //                WindowManager.FloatingButton.NotifyExtended("FieldBoss", "Failed to execute Discord webhook.", NotificationType.Error);
+        //                WindowManager.ViewModels.NotificationArea.Enqueue("FieldBoss", "Failed to execute Discord webhook.", NotificationType.Error);
         //                ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
         //            }
         //        }

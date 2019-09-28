@@ -52,7 +52,7 @@ namespace TCC.Parsing
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.GuildNotice);
             ChatWindowManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
-            WindowManager.FloatingButton.NotifyExtended("Guild", msg.ToString(), NotificationType.Success);
+            WindowManager.ViewModels.NotificationArea.Enqueue("Guild", msg.ToString(), NotificationType.Success);
 
         }
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessage sysMsg)
@@ -62,7 +62,7 @@ namespace TCC.Parsing
             TimeManager.Instance.ExecuteGuildBamWebhook();
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.FloatingButton.NotifyExtended("Guild BAM", msg.ToString(), NotificationType.Normal);
+            WindowManager.ViewModels.NotificationArea.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
         }
         private static void HandleDungeonEngagedMessage(string srvMsg, SystemMessage sysMsg)
         {
@@ -190,6 +190,7 @@ namespace TCC.Parsing
         {
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
 
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
@@ -240,7 +241,7 @@ namespace TCC.Parsing
         {
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
-
+            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
             //@4158
