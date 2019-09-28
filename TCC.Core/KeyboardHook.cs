@@ -35,6 +35,7 @@ namespace TCC
         public void Enable()
         {
             if (_isInitialized) return;
+            Console.WriteLine("Enabling keyhook");
             App.BaseDispatcher.Invoke(() =>
             {
                 // register the event that is fired after the key press.
@@ -42,12 +43,15 @@ namespace TCC
                 Game.ChatModeChanged += BeginCheckEnable;
                 FocusManager.ForegroundChanged += BeginCheckEnable;
                 _isInitialized = true;
+                BeginCheckEnable();
+
             });
         }
 
         public void Disable()
         {
             if (!_isInitialized) return;
+            Console.WriteLine("Disabling keyhook");
             App.BaseDispatcher.Invoke(() =>
             {
                 if (_isRegistered) ClearHotkeys();
@@ -62,6 +66,15 @@ namespace TCC
         public void RegisterCallback(HotKey hk, Action callback)
         {
             _callbacks[hk] = callback;
+        }
+
+        public void ChangeHotkey(HotKey oldHk, HotKey newHk)
+        {
+            if (!_callbacks.TryGetValue(oldHk, out var cb)) return;
+            Console.WriteLine($"Changing {oldHk} to {newHk}");
+            _callbacks[newHk] = cb;
+            _callbacks.Remove(oldHk);
+            BeginCheckEnable();
         }
 
         private void CheckEnable(bool value)
@@ -85,6 +98,7 @@ namespace TCC
 
         private void RegisterHotkeys()
         {
+            Console.WriteLine("RegisterHotkeys()");
             _callbacks.Keys.ToList().ForEach(RegisterHotKey);
             _isRegistered = true;
         }
@@ -107,6 +121,7 @@ namespace TCC
         private void OnKeyPressed(HotKey hk)
         {
             if (!_callbacks.TryGetValue(hk, out var cb)) return;
+            Console.WriteLine($"Executing callback for {hk}");
             cb?.DynamicInvoke();
         }
 
@@ -182,6 +197,8 @@ namespace TCC
 
         private void ClearHotkeys()
         {
+            Console.WriteLine("ClearHotkeys()");
+
             for (var i = _currentId; i > 0; i--) UnregisterHotKey(_window.Handle, i);
             _currentId = 0;
             _isRegistered = false;

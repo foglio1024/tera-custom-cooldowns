@@ -57,6 +57,7 @@ namespace TCC.Controls.Settings
 
         private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
         {
+
             KeyboardHook.Instance.Disable();
 
             e.Handled = true;
@@ -68,8 +69,8 @@ namespace TCC.Controls.Settings
             {
                 _pressedKeys.Clear();
                 Keyboard.ClearFocus();
-            KeyboardHook.Instance.Enable();
-            return;
+
+                return;
             }
             _pressedKeys.Add(k);
             UpdateValue();
@@ -85,7 +86,6 @@ namespace TCC.Controls.Settings
             Enum.TryParse(key.ToString(), out Keys wfKey); // Microsoft pls
             if (wfKey == Keys.None) return;
             Value = new HotKey(wfKey, mod);
-            KeyboardHook.Instance.Enable();
             N(nameof(ValueString));
 
         }
@@ -99,17 +99,11 @@ namespace TCC.Controls.Settings
             {
                 _pressedKeys.Clear();
                 Keyboard.ClearFocus();
-                KeyboardHook.Instance.Enable();
-            return;
+                return;
 
             }
             _pressedKeys.Remove(k);
             UpdateValue();
-            Console.WriteLine("Pressed Keys: ");
-            for (int i = 0; i < _pressedKeys.Count; i++)
-            {
-                Console.WriteLine(_pressedKeys[i]);   
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -118,6 +112,16 @@ namespace TCC.Controls.Settings
         protected virtual void N([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void UIElement_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            KeyboardHook.Instance.Disable();
+        }
+
+        private void UIElement_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            KeyboardHook.Instance.Enable();
         }
     }
 }

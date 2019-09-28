@@ -37,6 +37,8 @@
                  HorizontalAlignment="Right"
                  Padding="20 0"
                  VerticalAlignment="Center" 
+                 GotKeyboardFocus="UIElement_OnGotKeyboardFocus"
+                 LostKeyboardFocus="UIElement_OnLostKeyboardFocus"
                  BorderBrush="Orange"
                  CaretBrush="Transparent"
                  PreviewKeyDown="UIElement_OnKeyDown"

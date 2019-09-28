@@ -47,6 +47,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.SettingsHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.SettingsHotkey, value);
                 App.Settings.SettingsHotkey = value;
                 N();
             }
@@ -57,6 +58,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.SkillSettingsHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.SkillSettingsHotkey, value);
                 App.Settings.SkillSettingsHotkey = value;
                 N();
             }
@@ -67,6 +69,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.ForceClickableChatHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.ForceClickableChatHotkey, value);
                 App.Settings.ForceClickableChatHotkey = value;
                 N();
             }
@@ -77,6 +80,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.DashboardHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.DashboardHotkey, value);
                 App.Settings.DashboardHotkey = value;
                 N();
             }
@@ -87,6 +91,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.LfgHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.LfgHotkey, value);
                 App.Settings.LfgHotkey = value;
                 N();
             }
@@ -97,6 +102,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.ReturnToLobbyHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.ReturnToLobbyHotkey, value);
                 App.Settings.ReturnToLobbyHotkey = value;
                 N();
             }
