@@ -12,7 +12,10 @@ namespace TCC.Settings
         public override void Save()
         {
             var json = JsonConvert.SerializeObject(App.Settings, Formatting.Indented);
-            File.WriteAllText(Path.Combine(App.BasePath, FileName), json);
+            var savePath = SettingsContainer.SettingsOverride == ""
+                ? Path.Combine(App.BasePath, FileName)
+                : SettingsContainer.SettingsOverride;
+            File.WriteAllText(savePath, json);
         }
     }
 }

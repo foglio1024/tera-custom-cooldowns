@@ -46,12 +46,12 @@ namespace TCC.Settings
         #endregion
 
         #region Hotkeys
-        public HotKey LfgHotkey { get; }
-        public HotKey InfoWindowHotkey { get; }
-        public HotKey SettingsHotkey { get; }
-        public HotKey SkillSettingsHotkey { get; }
-        public HotKey ForceClickableChatHotkey { get;  }
-        public HotKey ReturnToLobbyHotkey { get; }
+        public HotKey LfgHotkey { get; set; }
+        public HotKey DashboardHotkey { get; set; }
+        public HotKey SettingsHotkey { get; set; }
+        public HotKey SkillSettingsHotkey { get; set; }
+        public HotKey ForceClickableChatHotkey { get; set; }
+        public HotKey ReturnToLobbyHotkey { get; set; }
 
         #endregion
 
@@ -75,6 +75,7 @@ namespace TCC.Settings
         public FloatingButtonWindowSettings FloatingButtonSettings { get; set; }
         public CivilUnrestWindowSettings CivilUnrestWindowSettings { get; set; }
         public WindowSettings LfgWindowSettings { get; set; }
+        public NotificationAreaSettings NotificationAreaSettings { get; set; }
 
         #region Chat
         // Chat window
@@ -117,6 +118,7 @@ namespace TCC.Settings
         [JsonIgnore]
         public string TwitchChannelName { get; set; } //TODO: re-add this 
 
+        public static string SettingsOverride { get; set; } = "";
 
         #endregion
 
@@ -138,6 +140,7 @@ namespace TCC.Settings
             ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
             ChatSettings = new WindowSettings();
             LfgWindowSettings = new WindowSettings();
+            NotificationAreaSettings = new NotificationAreaSettings();
 
             MaxMessages = 500;
             SpamThreshold = 2;
@@ -153,7 +156,7 @@ namespace TCC.Settings
             UseHotkeys = true;
             EthicalMode = false;
             LfgHotkey = new HotKey(Key.Y, ModifierKeys.Control);
-            InfoWindowHotkey = new HotKey(Key.I, ModifierKeys.Control);
+            DashboardHotkey = new HotKey(Key.I, ModifierKeys.Control);
             SettingsHotkey = new HotKey(Key.O, ModifierKeys.Control);
             SkillSettingsHotkey = new HotKey(Key.K, ModifierKeys.Control);
             ReturnToLobbyHotkey = new HotKey(Key.R, ModifierKeys.Control | ModifierKeys.Alt);
@@ -179,17 +182,19 @@ namespace TCC.Settings
             WebhookEnabledGuildBam = false;
             WebhookUrlGuildBam = "";
             WebhookMessageGuildBam = "@here Guild BAM will spawn soon!";
-
         }
 
 
         public static void Load()
         {
-            if (File.Exists(Path.Combine(App.BasePath, SettingsGlobals.JsonFileName)))
-                new JsonSettingsReader().LoadSettings();
-            else if (File.Exists(Path.Combine(App.BasePath, SettingsGlobals.XmlFileName)))
-                new XmlSettingsReader().LoadSettings();
-            else App.Settings = new SettingsContainer();
+            var settingsPath = SettingsOverride == ""
+                ? Path.Combine(App.BasePath, SettingsGlobals.JsonFileName)
+                : SettingsOverride;
+            //if (File.Exists(settingsPath))
+            new JsonSettingsReader().LoadSettings(settingsPath);
+            //else if (File.Exists(Path.Combine(App.BasePath, SettingsGlobals.XmlFileName)))
+            //  new XmlSettingsReader().LoadSettings();
+            //else App.Settings = new SettingsContainer();
         }
         public void Save()
         {

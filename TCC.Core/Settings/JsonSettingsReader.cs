@@ -14,15 +14,20 @@ namespace TCC.Settings
         {
             FileName = SettingsGlobals.JsonFileName;
         }
-        public void LoadSettings()
+        public void LoadSettings(string path)
         {
             try
             {
-                var path = Path.Combine(App.BasePath, FileName);
-                if (!File.Exists(path))
+                if (File.Exists(path))
+                    App.Settings = JsonConvert.DeserializeObject<SettingsContainer>(File.ReadAllText(path));
+                else
                 {
                     var res = TccMessageBox.Show("Settings file not found. Do you want to import an existing one?", MessageBoxType.ConfirmationWithYesNo);
-                    if (res == MessageBoxResult.No) return;
+                    if (res == MessageBoxResult.No)
+                    {
+                        App.Settings = new SettingsContainer();
+                        return;
+                    }
                     var diag = new OpenFileDialog
                     {
                         Title = $"Import TCC settings file ({FileName})",
@@ -31,17 +36,16 @@ namespace TCC.Settings
                     if (diag.ShowDialog() == true)
                     {
                         path = diag.FileName;
+                        LoadSettings(path);
                     }
-                    else return;
+                    else App.Settings = new SettingsContainer();
                 }
-                App.Settings = JsonConvert.DeserializeObject<SettingsContainer>(File.ReadAllText(path));
             }
             catch
             {
-                var res = TccMessageBox.Show("TCC", "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Error);
-                if (res == MessageBoxResult.Yes) File.Delete(Path.Combine(App.BasePath, FileName));
-                LoadSettings();
+                var res = TccMessageBox.Show("TCC", "Cannot load settings file. Do you want TCC to delete it and recreate a default file?", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (res == MessageBoxResult.Yes) File.Delete(path);
+                LoadSettings(path);
             }
         }
     }
