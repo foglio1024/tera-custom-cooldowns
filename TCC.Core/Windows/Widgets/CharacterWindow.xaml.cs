@@ -17,21 +17,21 @@ namespace TCC.Windows.Widgets
         private DoubleAnimation _stAnim;
         private DoubleAnimation _shAnim;
 
-        private CharacterWindowViewModel VM { get; }
+        private CharacterWindowViewModel _vm { get; }
 
         public CharacterWindow(CharacterWindowViewModel vm)
         {
             DataContext = vm;
-            VM = DataContext as CharacterWindowViewModel;
+            _vm = DataContext as CharacterWindowViewModel;
 
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.CharacterWindowSettings);
+            Init(App.Settings.CharacterWindowSettings); //TODO: us vm.Settings
 
             InitAnimations();
 
-            VM.Player.PropertyChanged += OnPropertyChanged;
+            _vm.Player.PropertyChanged += OnPropertyChanged;
         }
 
         private void InitAnimations()
@@ -83,61 +83,61 @@ namespace TCC.Windows.Widgets
         private void ChangeHP()
         {
             _hpAnim.From = (HpGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
-            _hpAnim.To = VM.Player.HpFactor;
+            _hpAnim.To = _vm.Player.HpFactor;
 
             if (_hpAnim.From > _hpAnim.To)
             {
                 //taking damage
-                HpGovernor.LayoutTransform = new ScaleTransform(VM.Player.HpFactor, 1);
+                HpGovernor.LayoutTransform = new ScaleTransform(_vm.Player.HpFactor, 1);
                 HpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             }
             else
             {
                 //healing
-                HpGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.HpFactor, 1);
+                HpGovernorWhite.LayoutTransform = new ScaleTransform(_vm.Player.HpFactor, 1);
                 HpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             }
         }
         private void ChangeMP()
         {
             _mpAnim.From = ((ScaleTransform)MpGovernor.LayoutTransform).ScaleX;
-            _mpAnim.To = VM.Player.MpFactor;
+            _mpAnim.To = _vm.Player.MpFactor;
             if (_mpAnim.From > _mpAnim.To)
             {
                 //taking damage
-                MpGovernor.LayoutTransform = new ScaleTransform(VM.Player.MpFactor, 1);
+                MpGovernor.LayoutTransform = new ScaleTransform(_vm.Player.MpFactor, 1);
                 MpGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mpAnim);
             }
             else
             {
                 //healing
-                MpGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.MpFactor, 1);
+                MpGovernorWhite.LayoutTransform = new ScaleTransform(_vm.Player.MpFactor, 1);
                 MpGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _mpAnim);
             }
         }
         private void ChangeStamina()
         {
             _stAnim.From = ((ScaleTransform)StGovernor.LayoutTransform).ScaleX;
-            _stAnim.To = VM.Player.StFactor;
+            _stAnim.To = _vm.Player.StFactor;
             if (_stAnim.From > _stAnim.To)
             {
                 //taking damage
-                StGovernor.LayoutTransform = new ScaleTransform(VM.Player.StFactor, 1);
+                StGovernor.LayoutTransform = new ScaleTransform(_vm.Player.StFactor, 1);
                 StGovernorWhite.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _stAnim);
             }
             else
             {
                 //healing
-                StGovernorWhite.LayoutTransform = new ScaleTransform(VM.Player.StFactor, 1);
+                StGovernorWhite.LayoutTransform = new ScaleTransform(_vm.Player.StFactor, 1);
                 StGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _stAnim);
             }
-            ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(VM.Player.StFactor * (360 - 2 * ReArc.StartAngle) + ReArc.StartAngle, _stAnim.Duration));
+            ReArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(_vm.Player.StFactor * (360 - 2 * ReArc.StartAngle) + ReArc.StartAngle, _stAnim.Duration));
 
         }
         private void ChangeShield()
         {
             _shAnim.From = (ShGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
-            _shAnim.To = VM.Player.ShieldFactor;
+            _shAnim.To = _vm.Player.ShieldFactor;
             ShGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _shAnim);
         }
     }
