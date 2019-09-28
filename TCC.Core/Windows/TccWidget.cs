@@ -120,6 +120,7 @@ namespace TCC.Windows
 
         private void OnFocusTick()
         {
+            if (WindowSettings.ShowAlways) RefreshTopmost();
             if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
         }
 
@@ -182,13 +183,13 @@ namespace TCC.Windows
                 {
                     AnimateContentOpacity(1);
                 }
-                RefreshTopmost();
             }
             else
             {
                 if (WindowSettings.ShowAlways) return;
                 AnimateContentOpacity(0);
             }
+                RefreshTopmost();
         }
         private void OnClickThruModeChanged()
         {
