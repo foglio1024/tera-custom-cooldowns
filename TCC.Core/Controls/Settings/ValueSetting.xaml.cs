@@ -124,5 +124,11 @@ namespace TCC.Controls.Settings
         {
 
         }
+
+        private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            Keyboard.ClearFocus();
+        }
     }
 }

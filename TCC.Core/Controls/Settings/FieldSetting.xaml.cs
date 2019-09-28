@@ -31,34 +31,9 @@ namespace TCC.Controls.Settings
         }
         public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(FieldSetting));
 
-        private readonly ColorAnimation _glow;
-        private readonly ColorAnimation _unglow;
-        private readonly DoubleAnimation _fadeIn;
-        private readonly DoubleAnimation _fadeOut;
-
         public FieldSetting()
         {
             InitializeComponent();
-            _glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
-            _unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
-            _fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
-            _fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
-
-            MainGrid.Background = new SolidColorBrush(Colors.Transparent);
-
-        }
-        private void Grid_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Grid)?.Background.BeginAnimation(SolidColorBrush.ColorProperty, _glow);
-            Img.BeginAnimation(OpacityProperty, _fadeIn);
-
-        }
-
-        private void Grid_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Grid)?.Background.BeginAnimation(SolidColorBrush.ColorProperty, _unglow);
-            Img.BeginAnimation(OpacityProperty, _fadeOut);
-
         }
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {

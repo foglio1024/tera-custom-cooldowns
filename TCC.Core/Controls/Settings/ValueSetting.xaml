@@ -165,8 +165,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Width="Auto" TextAlignment="Right" Background="Transparent" 
-                     Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" 
+            <TextBox Width="Auto" TextAlignment="Right" Background="Transparent" LostKeyboardFocus="TextBox_LostFocus"
+                     Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" KeyDown="UIElement_OnKeyDown"
                      VerticalAlignment="Center" Margin="0 0 5 0" 
                      Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"
                      CaretBrush="{StaticResource DefensiveStanceBrushLight}"

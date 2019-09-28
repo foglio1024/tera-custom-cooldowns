@@ -4,9 +4,6 @@ using System.Windows.Media;
 
 namespace TCC.Controls.Settings
 {
-    /// <summary>
-    /// Logica di interazione per CheckboxSetting.xaml
-    /// </summary>
     public partial class CheckboxSetting
     {
         public CheckboxSetting()
