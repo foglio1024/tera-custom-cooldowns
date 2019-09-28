@@ -103,7 +103,7 @@ namespace TCC.Utilities
         {
             return zoneId == 152 && templateId == 5001;
         }
-        public static bool IsFieldBoss(ushort zone, uint template)
+        public static bool IsFieldBoss(uint zone, uint template)
         {
             return (zone == 39 && template == 501) ||
                    (zone == 26 && template == 5001) ||
