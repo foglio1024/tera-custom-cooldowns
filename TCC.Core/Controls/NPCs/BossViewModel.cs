@@ -3,9 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Annotations;
 using TCC.Data;
 using FoglioUtils.Extensions;
+using TCC.Utilities;
 
 namespace TCC.Controls.NPCs
 {
@@ -22,11 +24,12 @@ namespace TCC.Controls.NPCs
         public event Action ReEnraged;
 
         public ObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
-        public string MainPercInt => Convert.ToInt32(Math.Floor(NPC.HPFactor * 100)).ToString();
+        public string MainPercInt => ShowHP ? Convert.ToInt32(Math.Floor(NPC.HPFactor * 100)).ToString() : "?";
         public string MainPercDec
         {
             get
             {
+                if (!ShowHP) return "??";
                 double val = NPC.HPFactor * 100 % 1 * 100;
                 val = val > 99 ? 99 : val;
                 return $"{val:00}";
@@ -72,7 +75,7 @@ namespace TCC.Controls.NPCs
             {
                 if (NPC.Enraged)
                 {
-                    return NPC.EnragePattern.StaysEnraged ? "∞" : $"{CurrentEnrageTime}s";
+                    return NPC.EnragePattern.StaysEnraged ? "∞" : $"{TimeUtils.FormatTime(CurrentEnrageTime)}";
                 }
                 else
                 {
@@ -97,7 +100,7 @@ namespace TCC.Controls.NPCs
                         ? NPC.EnragePattern.StaysEnraged
                             ? "∞"
                             : NPC.EnragePattern.Duration != 0
-                                ? $"{CurrentEnrageTime}"
+                                ? $"{TimeUtils.FormatTime(CurrentEnrageTime)}"
                                 : "-"
                         : "";
             }

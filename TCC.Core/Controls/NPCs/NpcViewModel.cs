@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using TCC.Data.NPCs;
+using TCC.Utilities;
 
 namespace TCC.Controls.NPCs
 {
@@ -15,7 +16,8 @@ namespace TCC.Controls.NPCs
         public event Action HpFactorChanged;
 
 
-        public NPC NPC { get; protected set; }
+        public bool ShowHP => !TccUtils.IsFieldBoss(NPC.ZoneId, NPC.TemplateId);
+
         public bool ShowOverrideBtn
         {
             get => _showOverrideBtn;
@@ -39,6 +41,8 @@ namespace TCC.Controls.NPCs
                 }
             }
         }
+
+        public NPC NPC { get; protected set; }
 
         public NpcViewModel(NPC npc)
         {

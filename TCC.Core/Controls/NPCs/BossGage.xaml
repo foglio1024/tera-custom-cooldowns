@@ -114,7 +114,7 @@
                         <Border.Background>
                             <LinearGradientBrush StartPoint="-.5 .5" EndPoint="1 2">
                                 <GradientStop Color="{StaticResource HpColor}" Offset=".2" ></GradientStop>
-                                <GradientStop Color="Black" Offset="1"></GradientStop>
+                                <GradientStop Color="Black" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
                         <Border.Effect>
@@ -233,6 +233,23 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Style="{StaticResource DefaultTextStyle}"
+                               Visibility="{Binding VM.ShowHP, RelativeSource={RelativeSource AncestorType=npcCtrl:BossGage}, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               FontSize="13"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               FontWeight="DemiBold"
+                               Margin="4 3 0 0">
+                        <Run Text="?" />
+                        <Run Text="/" Foreground="#5fff" />
+                        <Run Text="?" Foreground="#5fff" />
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="15" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource DefaultTextStyle}"
+                               Visibility="{Binding VM.ShowHP, RelativeSource={RelativeSource AncestorType=npcCtrl:BossGage}, Converter={StaticResource BoolToVisibleCollapsed}}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Bottom"
                                FontSize="13"
@@ -299,7 +316,7 @@
                                         BorderThickness="2 1"
                                         BorderBrush="{StaticResource RevampBorderBrush}">
                                 </Border>
-                                <Rectangle Fill="DodgerBlue" 
+                                <Rectangle Fill="{StaticResource TccNormalGradientBrush}" 
                                            Width="90" 
                                            HorizontalAlignment="Left" 
                                            Margin="3 2">
@@ -309,7 +326,7 @@
                                 </Rectangle>
                                 <Grid HorizontalAlignment="Left" Margin="3 2">
                                     <Rectangle x:Name="EnrageBar"
-                                               Fill="{StaticResource AssaultStanceBrush}" 
+                                               Fill="{StaticResource TccRedGradientBrush}" 
 
                                                Width="90"
                                                Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleHidden}}">
@@ -354,10 +371,10 @@
                                Name="HpBar">
                         <Rectangle.Style>
                             <Style TargetType="Shape">
-                                <Setter Property="Fill" Value="{StaticResource MpBrush}"/>
+                                <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                        <Setter Property="Fill" Value="{StaticResource HpBrush}"/>
+                                        <Setter Property="Fill" Value="{StaticResource TccRedGradientBrush}"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -382,7 +399,7 @@
                     <StackPanel x:Name="NextEnrage"
                                 Width="28" 
                                 Height="Auto"
-                                Opacity=".8" 
+                                Opacity="1" 
                                 Margin="-14 0 0 0"
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Center"
@@ -454,7 +471,7 @@
                                 <Setter Property="Y1" Value="0"/>
                                 <Setter Property="X2" Value="0"/>
                                 <Setter Property="Y2" Value="6"/>
-                                <Setter Property="Stroke" Value="#7fff"/>
+                                <Setter Property="Stroke" Value="#afff"/>
                                 <Setter Property="StrokeThickness" Value="1"/>
                                 <Setter Property="VerticalAlignment" Value="Center"/>
                             </Style>
@@ -469,7 +486,7 @@
                         <Line Y2="4" />
                         <Line />
                         <Line Y2="4" />
-                        <Line Y2="8" Stroke="#9fff"/>
+                        <Line Y2="8" Stroke="#fff"/>
                         <Line Y2="4" />
                         <Line />
                         <Line Y2="4" />
