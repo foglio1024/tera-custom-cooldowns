@@ -79,13 +79,13 @@ namespace TCC
                     }
 
                     if (newVersion <= currentVersion) return;
-                    if (!App.SplashScreen.AskUpdate($"Icon database v{newVersion} available. Download now?")) return;
+                    if (!App.SplashScreen.VM.AskUpdate($"Icon database v{newVersion} available. Download now?")) return;
 
                     await DownloadIcons();
                 }
                 catch (Exception)
                 {
-                    if (!App.SplashScreen.AskUpdate("Error while checking icon database update. Try again?")) return;
+                    if (!App.SplashScreen.VM.AskUpdate("Error while checking icon database update. Try again?")) return;
                     await CheckIconsVersion();
                 }
             }
@@ -102,7 +102,7 @@ namespace TCC
             catch (Exception ex)
             {
                 Log.F($"Failed to download database hashes. nException: {ex.Message}\n{ex.StackTrace}");
-                if (App.SplashScreen.AskUpdate("Failed to download database hashes. Try again?")) CheckDatabaseHash();
+                if (App.SplashScreen.VM.AskUpdate("Failed to download database hashes. Try again?")) CheckDatabaseHash();
             }
         }
 
@@ -140,18 +140,18 @@ namespace TCC
                     }
                     else
                     {
-                        if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Done downloading icons.", NotificationType.Success, 2000);
+                        if (!App.Loading) WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Done downloading icons.", NotificationType.Success, 2000);
                         ExtractIcons();
                     }
                 };
                 try
                 {
-                    App.SplashScreen.SetText("Downloading icons...");
+                    App.SplashScreen.VM.BottomText = "Downloading icons...";
                     await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), Path.Combine(App.BasePath, "icons.zip")));
                 }
                 catch (Exception)
                 {
-                    if (!App.SplashScreen.AskUpdate("Error while downloading database. Try again?")) return;
+                    if (!App.SplashScreen.VM.AskUpdate("Error while downloading database. Try again?")) return;
                     await DownloadIcons();
                 }
             }
@@ -166,7 +166,7 @@ namespace TCC
                 if (!Directory.Exists(imagesPath)) Directory.CreateDirectory(imagesPath);
                 //App.SplashScreen.SetText("Extracting database...");
 
-                if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
+                if (!App.Loading) WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
                 ZipFile.ExtractToDirectory(Path.Combine(App.BasePath, "icons.zip"), App.BasePath);
                 //App.SplashScreen.SetText("Extracting database... Done.");
 
@@ -196,7 +196,7 @@ namespace TCC
                 //App.SplashScreen.SetText("Copying files... Done.");
 
                 CleanTempIcons();
-                if (!App.Loading) WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
+                if (!App.Loading) WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
 
                 //App.SplashScreen.SetText("Icons updated successfully.");
 
@@ -270,7 +270,7 @@ namespace TCC
                     if (App.ToolboxMode) return;
 
                     ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
-                    WindowManager.FloatingButton.NotifyExtended("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
+                    WindowManager.ViewModels.NotificationArea.Enqueue("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                 }
                 catch (Exception ex)
                 {
@@ -289,17 +289,17 @@ namespace TCC
                     var vp = new VersionParser(forceExperimental: true);
                     if (!vp.Valid) return;
 
-                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Download started", NotificationType.Success, 3000);
+                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Download started", NotificationType.Success, 3000);
                     c.DownloadFile(new Uri(vp.NewVersionUrl), "update.zip");
 
-                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
+                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
                     if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
                     ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
 
-                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Moving files", NotificationType.Success, 2000);
+                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Moving files", NotificationType.Success, 2000);
                     File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
-                    WindowManager.FloatingButton.NotifyExtended("TCC update manager", "Starting updater", NotificationType.Success, 1000);
+                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Starting updater", NotificationType.Success, 1000);
                     await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
                     Environment.Exit(0);
                 }
@@ -319,14 +319,14 @@ namespace TCC
                 var vp = new VersionParser();
                 if (!vp.Valid) return;
                 if (!vp.IsNewer) return;
-                if (!App.SplashScreen.AskUpdate($"TCC v{vp.NewVersionNumber} available. Download now?")) return;
+                if (!App.SplashScreen.VM.AskUpdate($"TCC v{vp.NewVersionNumber} available. Download now?")) return;
 
                 await Update(vp.NewVersionUrl);
             }
             catch (Exception e)
             {
                 Log.F($"Error while checking update. \nException:\n{e.Message}\n{e.StackTrace}");
-                if (!App.SplashScreen.AskUpdate("Error while checking updates. Try again?")) return;
+                if (!App.SplashScreen.VM.AskUpdate("Error while checking updates. Try again?")) return;
                 await CheckAppVersion();
             }
         }
@@ -337,9 +337,9 @@ namespace TCC
             {
                 try
                 {
-                    App.SplashScreen.SetText("Downloading update...");
+                    App.SplashScreen.VM.BottomText ="Downloading update...";
                     c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
-                    c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
+                    c.DownloadProgressChanged += (s, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
                     await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         c.DownloadFileAsync(new Uri(url), "update.zip");
@@ -347,14 +347,14 @@ namespace TCC
 
                     while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
 
-                    App.SplashScreen.SetText("Extracting zip...");
+                    App.SplashScreen.VM.BottomText = "Extracting zip...";
                     if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
                     ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
 
-                    App.SplashScreen.SetText("Moving files...");
+                    App.SplashScreen.VM.BottomText = "Moving files...";
                     File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
-                    App.SplashScreen.SetText("Starting updater...");
+                    App.SplashScreen.VM.BottomText = "Starting updater...";
                     Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update");
                     Environment.Exit(0);
                 }
