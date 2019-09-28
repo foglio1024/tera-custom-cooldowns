@@ -10,10 +10,12 @@ using TCC.Controls.Chat;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using FoglioUtils.Extensions;
+using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
 {
+    
     // TODO: refactor this when???
     public partial class FloatingButtonWindow
     {
@@ -135,7 +137,8 @@ namespace TCC.Windows.Widgets
             {
                 Dispatcher.Invoke(() =>
                 {
-                    if (msg != NotificationText.Text || title != NotificationTitle.Text)
+                    if (msg != NotificationText.Text 
+                   || title != NotificationTitle.Text)
                         _queue.Enqueue(new Tuple<string, string, NotificationType, uint>(title, msg, type, timeMs));
                 });
                 return;
@@ -149,16 +152,16 @@ namespace TCC.Windows.Widgets
                 switch (type)
                 {
                     case NotificationType.Normal:
-                        NotificationColorBorder.Background = R.Brushes.ChatPartyBrush;// System.Windows.Application.Current.FindResource("ChatPartyBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccNormalGradientBrush;// System.Windows.Application.Current.FindResource("ChatPartyBrush") as SolidColorBrush;
                         break;
                     case NotificationType.Success:
-                        NotificationColorBorder.Background = R.Brushes.GreenBrush; // System.Windows.Application.Current.FindResource("GreenBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccGreenGradientBrush; // System.Windows.Application.Current.FindResource("GreenBrush") as SolidColorBrush;
                         break;
                     case NotificationType.Warning:
-                        NotificationColorBorder.Background = R.Brushes.Tier4DungeonBrush; // System.Windows.Application.Current.FindResource("Tier4DungeonBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccYellowGradientBrush; // System.Windows.Application.Current.FindResource("Tier4DungeonBrush") as SolidColorBrush;
                         break;
                     case NotificationType.Error:
-                        NotificationColorBorder.Background = R.Brushes.HpBrush; //System.Windows.Application.Current.FindResource("HpBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccRedGradientBrush; //System.Windows.Application.Current.FindResource("HpBrush") as SolidColorBrush;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
