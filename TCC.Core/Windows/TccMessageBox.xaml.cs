@@ -9,9 +9,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Logica di interazione per TccMessageBox.xaml
-    /// </summary>
+    //TODO: refactor and make multiple messageboxes
     public partial class TccMessageBox
     {
         private TccMessageBox()
