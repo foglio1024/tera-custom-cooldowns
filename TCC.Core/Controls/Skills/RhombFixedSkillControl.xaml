@@ -51,7 +51,18 @@
             </Grid>
 
             <Rectangle Width="61" Height="61" x:Name="Icon" Stroke="#7fff" StrokeThickness="0" RenderTransformOrigin=".5 .5"
-                       OpacityMask="{StaticResource RhombOpacityMask}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.OpacityMask>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Rectangle Fill="White" Width="60" Height="60">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="45"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Rectangle.OpacityMask>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}"/>
                 </Rectangle.Fill>

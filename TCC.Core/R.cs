@@ -378,7 +378,6 @@ namespace TCC.R
 		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
 		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
-		public static VisualBrush RhombOpacityMask => ((VisualBrush)App.Current.FindResource("RhombOpacityMask"));
 		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
 		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
 	}
