@@ -35,7 +35,6 @@ namespace TCC
         public void Enable()
         {
             if (_isInitialized) return;
-            Console.WriteLine("Enabling keyhook");
             App.BaseDispatcher.Invoke(() =>
             {
                 // register the event that is fired after the key press.
@@ -51,7 +50,6 @@ namespace TCC
         public void Disable()
         {
             if (!_isInitialized) return;
-            Console.WriteLine("Disabling keyhook");
             App.BaseDispatcher.Invoke(() =>
             {
                 if (_isRegistered) ClearHotkeys();
