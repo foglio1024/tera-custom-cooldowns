@@ -23,23 +23,31 @@ namespace TCC.ViewModels
         public static event Action AbnormalityShapeChanged;
         public static event Action SkillShapeChanged;
         public static event Action FontSizeChanged;
-        public static void PrintEventsData()
-        {
-            Log.CW($"ChatShowChannelChanged: {ChatShowChannelChanged?.GetInvocationList().Length}");
-            Log.CW($"ChatShowTimestampChanged: {ChatShowTimestampChanged?.GetInvocationList().Length}");
-            Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
-        }
 
-        public WindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
-        public WindowSettings ClassWindowSettings => App.Settings.ClassWindowSettings;
-        public WindowSettings GroupWindowSettings => App.Settings.GroupWindowSettings;
-        public WindowSettings BuffWindowSettings => App.Settings.BuffWindowSettings;
-        public WindowSettings CharacterWindowSettings => App.Settings.CharacterWindowSettings;
-        public WindowSettings BossWindowSettings => App.Settings.NpcWindowSettings;
-        public WindowSettings FlightWindowSettings => App.Settings.FlightGaugeWindowSettings;
-        public WindowSettings FloatingButtonSettings => App.Settings.FloatingButtonSettings;
-        public WindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
-        public WindowSettings NotificationAreaSettings => App.Settings.NotificationAreaSettings;
+        public bool Experimental => App.Experimental;
+
+        public CooldownWindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
+        public ClassWindowSettings ClassWindowSettings => App.Settings.ClassWindowSettings;
+        public GroupWindowSettings GroupWindowSettings => App.Settings.GroupWindowSettings;
+        public BuffWindowSettings BuffWindowSettings => App.Settings.BuffWindowSettings;
+        public CharacterWindowSettings CharacterWindowSettings => App.Settings.CharacterWindowSettings;
+        public NpcWindowSettings NpcWindowSettings => App.Settings.NpcWindowSettings;
+        public FlightWindowSettings FlightWindowSettings => App.Settings.FlightGaugeWindowSettings;
+        public FloatingButtonWindowSettings FloatingButtonSettings => App.Settings.FloatingButtonSettings;
+        public CivilUnrestWindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
+        public LfgWindowSettings LfgWindowSettings=> App.Settings.LfgWindowSettings;
+        public NotificationAreaSettings NotificationAreaSettings => App.Settings.NotificationAreaSettings;
+
+        public bool EthicalMode
+        {
+            get => App.Settings.EthicalMode;
+            set
+            {
+                if (App.Settings.EthicalMode == value) return;
+                App.Settings.EthicalMode = value;
+                N();
+            }
+        }
 
         public HotKey SettingsHotkey
         {
@@ -107,6 +115,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
+
         private int _khCount;
         private bool _kh;
         public bool KylosHelper
@@ -136,17 +145,6 @@ namespace TCC.ViewModels
                 N();
             }
         }
-
-        public bool EthicalMode
-        {
-            get => App.Settings.EthicalMode;
-            set
-            {
-                if (App.Settings.EthicalMode == value) return;
-                App.Settings.EthicalMode = value;
-                N();
-            }
-        }
         public bool DisableLfgChatMessages
         {
             get => App.Settings.DisableLfgChatMessages;
@@ -154,17 +152,6 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.DisableLfgChatMessages == value) return;
                 App.Settings.DisableLfgChatMessages = value;
-                N();
-            }
-        }
-        public bool ShowMembersHpNumbers
-        {
-            get => App.Settings.GroupWindowSettings.ShowHpLabels;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.ShowHpLabels == value) return;
-                App.Settings.GroupWindowSettings.ShowHpLabels = value;
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
                 N();
             }
         }
@@ -198,96 +185,8 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool HideMe
-        {
-            get => App.Settings.GroupWindowSettings.IgnoreMe;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.IgnoreMe == value) return;
-                App.Settings.GroupWindowSettings.IgnoreMe = value;
-                WindowManager.ViewModels.Group.ToggleMe(!value);
-                N();
-            }
-        }
 
-        public uint HideBuffsThreshold
-        {
-            get => App.Settings.GroupWindowSettings.HideBuffsThreshold;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.HideBuffsThreshold == value) return;
-                App.Settings.GroupWindowSettings.HideBuffsThreshold = value;
-                N();
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-            }
-        }
-        public uint HideDebuffsThreshold
-        {
-            get => App.Settings.GroupWindowSettings.HideDebuffsThreshold;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.HideDebuffsThreshold == value) return;
-                App.Settings.GroupWindowSettings.HideDebuffsThreshold = value;
-                N();
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-            }
-        }
-        public uint HideHpThreshold
-        {
-            get => App.Settings.GroupWindowSettings.HideHpThreshold;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.HideHpThreshold == value) return;
-                App.Settings.GroupWindowSettings.HideHpThreshold = value;
-                N();
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-            }
-        }
-        public uint HideMpThreshold
-        {
-            get => App.Settings.GroupWindowSettings.HideMpThreshold;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.HideMpThreshold == value) return;
-                App.Settings.GroupWindowSettings.HideMpThreshold = value;
-                N();
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-            }
-        }
-        public uint DisableAbnormalitiesThreshold
-        {
-            get => App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold == value) return;
-                App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold = value;
-                N();
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-            }
-        }
 
-        public bool AccurateHp
-        {
-            get => App.Settings.NpcWindowSettings.AccurateHp;
-            set
-            {
-                if (App.Settings.NpcWindowSettings.AccurateHp == value) return;
-                App.Settings.NpcWindowSettings.AccurateHp = value;
-                N(nameof(AccurateHp));
-            }
-        }
-
-        public FlowDirection BuffsDirection
-        {
-            get => App.Settings.BuffWindowSettings.Direction;
-            set
-            {
-                if (App.Settings.BuffWindowSettings.Direction == value) return;
-                App.Settings.BuffWindowSettings.Direction = value;
-                WindowManager.ViewModels.Abnormal.ExN(nameof(BuffBarWindowViewModel.Direction));
-                N(nameof(BuffsDirection));
-            }
-        }
         public ControlShape AbnormalityShape
         {
             get => App.Settings.AbnormalityShape;
@@ -310,27 +209,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public CooldownBarMode CooldownBarMode
-        {
-            get => App.Settings.CooldownWindowSettings.Mode;
-            set
-            {
-                if (App.Settings.CooldownWindowSettings.Mode == value) return;
-                App.Settings.CooldownWindowSettings.Mode = value;
-                WindowManager.ViewModels.Cooldowns.NotifyModeChanged();
-                N(nameof(CooldownBarMode));
-            }
-        }
-        public EnrageLabelMode EnrageLabelMode
-        {
-            get => App.Settings.NpcWindowSettings.EnrageLabelMode;
-            set
-            {
-                if (App.Settings.NpcWindowSettings.EnrageLabelMode == value) return;
-                App.Settings.NpcWindowSettings.EnrageLabelMode = value;
-                N(nameof(EnrageLabelMode));
-            }
-        }
+
 
         //public bool ChatFadeOut
         //{
@@ -419,27 +298,8 @@ namespace TCC.ViewModels
             }
 
         }
-        public bool ShowOnlyBosses
-        {
-            get => App.Settings.NpcWindowSettings.HideAdds;
-            set
-            {
-                if (App.Settings.NpcWindowSettings.HideAdds == value) return;
-                App.Settings.NpcWindowSettings.HideAdds = value;
-                N(nameof(ShowOnlyBosses));
-            }
-        }
-        public bool ShowAwakenIcon
-        {
-            get => App.Settings.GroupWindowSettings.ShowAwakenIcon;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.ShowAwakenIcon == value) return;
-                App.Settings.GroupWindowSettings.ShowAwakenIcon = value;
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-                N();
-            }
-        }
+  
+
         public bool FpsAtGuardian
         {
             get => App.Settings.FpsAtGuardian;
@@ -451,27 +311,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool ShowItemsCooldown
-        {
-            get => App.Settings.CooldownWindowSettings.ShowItems;
-            set
-            {
-                if (App.Settings.CooldownWindowSettings.ShowItems == value) return;
-                App.Settings.CooldownWindowSettings.ShowItems = value;
-                WindowManager.ViewModels.Cooldowns.NotifyItemsDisplay();
-                N();
-            }
-        }
-        public bool UseLfg
-        {
-            get => App.Settings.LfgWindowSettings.Enabled;
-            set
-            {
-                if (App.Settings.LfgWindowSettings.Enabled == value) return;
-                App.Settings.LfgWindowSettings.Enabled = value;
-                N();
-            }
-        }
+
         public bool EnableProxy
         {
             get => App.Settings.EnableProxy;
@@ -482,16 +322,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool ShowFlightGauge
-        {
-            get => App.Settings.FlightGaugeWindowSettings.Enabled;
-            set
-            {
-                if (App.Settings.FlightGaugeWindowSettings.Enabled == value) return;
-                App.Settings.FlightGaugeWindowSettings.Enabled = value;
-                N();
-            }
-        }
+
         public bool UseHotkeys
         {
             get => App.Settings.UseHotkeys;
@@ -514,28 +345,8 @@ namespace TCC.ViewModels
                 N(nameof(HideHandles));
             }
         }
-        public bool ShowGroupWindowDetails
-        {
-            get => App.Settings.GroupWindowSettings.ShowDetails;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.ShowDetails == value) return;
-                App.Settings.GroupWindowSettings.ShowDetails = value;
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-                N(nameof(ShowGroupWindowDetails));
-            }
-        }
-        public bool ShowMembersLaurels
-        {
-            get => App.Settings.GroupWindowSettings.ShowLaurels;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.ShowLaurels == value) return;
-                App.Settings.GroupWindowSettings.ShowLaurels = value;
-                WindowManager.ViewModels.Group.NotifySettingUpdated();
-                N(nameof(ShowMembersLaurels));
-            }
-        }
+
+
         public bool AnimateChatMessages
         {
             get => App.Settings.AnimateChatMessages;
@@ -546,27 +357,7 @@ namespace TCC.ViewModels
                 N(nameof(AnimateChatMessages));
             }
         }
-        public bool HhOnlyAggro
-        {
-            get => App.Settings.GroupWindowSettings.ShowOnlyAggroStacks;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.ShowOnlyAggroStacks == value) return;
-                App.Settings.GroupWindowSettings.ShowOnlyAggroStacks = value;
-                N(nameof(HhOnlyAggro));
-            }
-        }
-        public double FlightGaugeRotation
-        {
-            get => App.Settings.FlightGaugeWindowSettings.Rotation;
-            set
-            {
-                if (App.Settings.FlightGaugeWindowSettings.Rotation == value) return;
-                App.Settings.FlightGaugeWindowSettings.Rotation = value;
-                N(nameof(FlightGaugeRotation));
-                WindowManager.ViewModels.FlightGauge.ExN(nameof(FlightGaugeRotation));
-            }
-        }
+
 
         public bool WebhookEnabledGuildBam
         {
@@ -638,16 +429,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool ShowNotificationBubble
-        {
-            get => App.Settings.FloatingButtonSettings.ShowNotificationBubble;
-            set
-            {
-                if (App.Settings.FloatingButtonSettings.ShowNotificationBubble == value) return;
-                App.Settings.FloatingButtonSettings.ShowNotificationBubble = value;
-                N();
-            }
-        }
+
         public string TwitchUsername
         {
             get => App.Settings.TwitchName;
@@ -676,31 +458,6 @@ namespace TCC.ViewModels
                 if (value == App.Settings.TwitchChannelName) return;
                 App.Settings.TwitchChannelName = value;
                 N(nameof(TwitchChannelName));
-            }
-        }
-        public uint GroupSizeThreshold
-        {
-            get => App.Settings.GroupWindowSettings.GroupSizeThreshold;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.GroupSizeThreshold == value) return;
-                App.Settings.GroupWindowSettings.GroupSizeThreshold = value;
-                WindowManager.ViewModels.Group.NotifyThresholdChanged();
-                N(nameof(GroupSizeThreshold));
-            }
-        }
-        public bool Npcap
-        {
-            get => App.Settings.Npcap;
-            set
-            {
-                if (App.Settings.Npcap == value) return;
-                var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
-                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
-                if (res == MessageBoxResult.Cancel) return;
-                App.Settings.Npcap = value;
-                N();
-                if (res == MessageBoxResult.OK) App.Restart();
             }
         }
         public CaptureMode CaptureMode
@@ -741,27 +498,6 @@ namespace TCC.ViewModels
                 N(nameof(FontSize));
             }
         }
-        public SettingsWindowViewModel()
-        {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
-        }
-        private void OnShowSettingsWindowHotkeyPressed()
-        {
-            if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
-            else WindowManager.SettingsWindow.ShowWindow();
-        }
-        public bool Experimental => App.Experimental;
-
-        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
-        //public IEnumerable<ClickThruMode> ChatClickThruModes => new List<ClickThruMode> { ClickThruMode.Never, ClickThruMode.GameDriven };
-        public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
-        public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
-        public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();
-        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => EnumUtils.ListFromEnum<WarriorEdgeMode>();
-        public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
-        public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
-        public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
 
         public bool ChatWindowEnabled
         {
@@ -775,105 +511,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool ShowTradeLfgs
-        {
-            get => App.Settings.ShowTradeLfg;
-            set
-            {
-                if (App.Settings.ShowTradeLfg == value) return;
-                App.Settings.ShowTradeLfg = value;
-                N();
-            }
-        }
 
-        public bool CharacterWindowCompactMode
-        {
-            get => App.Settings.CharacterWindowSettings.CompactMode;
-            set
-            {
-                if (App.Settings.CharacterWindowSettings.CompactMode == value) return;
-                App.Settings.CharacterWindowSettings.CompactMode = value;
-                N();
-                WindowManager.ViewModels.Character.InvokeCompactModeChanged();
-
-            }
-        }
-
-        public bool WarriorShowEdge
-        {
-            get => App.Settings.ClassWindowSettings.WarriorShowEdge;
-            set
-            {
-                if (App.Settings.ClassWindowSettings.WarriorShowEdge == value) return;
-                App.Settings.ClassWindowSettings.WarriorShowEdge = value;
-                N();
-                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
-            }
-        }
-        public bool SorcererReplacesElementsInCharWindow
-        {
-            get => App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow;
-            set
-            {
-                if (App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow == value) return;
-                App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow = value;
-                N();
-                WindowManager.ViewModels.Character.ExN(nameof(CharacterWindowViewModel.ShowElements));
-            }
-        }
-
-        public bool WarriorShowTraverseCut
-        {
-            get => App.Settings.ClassWindowSettings.WarriorShowTraverseCut;
-            set
-            {
-                if (App.Settings.ClassWindowSettings.WarriorShowTraverseCut == value) return;
-                App.Settings.ClassWindowSettings.WarriorShowTraverseCut = value;
-                N();
-                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
-            }
-        }
-
-        public WarriorEdgeMode WarriorEdgeMode
-        {
-            get => App.Settings.ClassWindowSettings.WarriorEdgeMode;
-            set
-            {
-                if (App.Settings.ClassWindowSettings.WarriorEdgeMode == value) return;
-                App.Settings.ClassWindowSettings.WarriorEdgeMode = value;
-                N();
-                TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
-            }
-
-        }
-        public GroupWindowLayout GroupWindowLayout
-        {
-            get => App.Settings.GroupWindowSettings.Layout;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.Layout == value) return;
-                App.Settings.GroupWindowSettings.Layout = value;
-                N();
-                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.GroupWindowLayout));
-                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.All));
-                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.Dps));
-                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.Healers));
-                WindowManager.ViewModels.Group.ExN(nameof(GroupWindowViewModel.Tanks));
-            }
-
-        }
-
-        public bool FlipFlightGauge
-        {
-            get => App.Settings.FlightGaugeWindowSettings.Flip;
-            set
-            {
-                if (App.Settings.FlightGaugeWindowSettings.Flip == value) return;
-                App.Settings.FlightGaugeWindowSettings.Flip = value;
-                N();
-                WindowManager.ViewModels.FlightGauge.ExN(nameof(FlipFlightGauge));
-            }
-        }
         public bool ForceSoftwareRendering
         {
             get => App.Settings.ForceSoftwareRendering;
@@ -896,6 +534,33 @@ namespace TCC.ViewModels
                 N();
                 Process.GetCurrentProcess().PriorityClass = value ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
             }
+        }
+
+        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
+        public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
+        public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
+        public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();
+        public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => EnumUtils.ListFromEnum<WarriorEdgeMode>();
+        public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
+        public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
+        public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
+
+        public SettingsWindowViewModel()
+        {
+            Dispatcher = Dispatcher.CurrentDispatcher;
+            KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
+        }
+
+        private void OnShowSettingsWindowHotkeyPressed()
+        {
+            if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
+            else WindowManager.SettingsWindow.ShowWindow();
+        }
+        public static void PrintEventsData()
+        {
+            Log.CW($"ChatShowChannelChanged: {ChatShowChannelChanged?.GetInvocationList().Length}");
+            Log.CW($"ChatShowTimestampChanged: {ChatShowTimestampChanged?.GetInvocationList().Length}");
+            Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
         }
 
     }

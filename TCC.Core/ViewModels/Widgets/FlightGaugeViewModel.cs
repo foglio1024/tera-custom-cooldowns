@@ -13,14 +13,16 @@ namespace TCC.ViewModels.Widgets
         public event Action<double> EnergyChanged;
 
         public FlightStackType Type => FlyingGuardianDataProvider.StackType;
-        public double FlightGaugeRotation => App.Settings.FlightGaugeWindowSettings.Rotation;
-        public bool FlipFlightGauge => App.Settings.FlightGaugeWindowSettings.Flip;
+        public double FlightGaugeRotation => ((FlightWindowSettings)Settings).Rotation;
+        public bool FlipFlightGauge => ((FlightWindowSettings)Settings).Flip;
         public bool FlyingMissionInProgress => FlyingGuardianDataProvider.IsInProgress;
 
-        public FlightGaugeViewModel(WindowSettings settings) : base(settings)
+        public FlightGaugeViewModel(FlightWindowSettings settings) : base(settings)
         {
             FlyingGuardianDataProvider.StackTypeChanged += () => N(nameof(Type));
             FlyingGuardianDataProvider.IsInProgressChanged += () => N(nameof(FlyingMissionInProgress));
+            settings.RotationChanged += () => N(nameof(FlightGaugeRotation));
+            settings.FlipChanged += () => N(nameof(FlipFlightGauge));
         }
 
         protected override void InstallHooks()

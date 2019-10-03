@@ -87,7 +87,32 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
-        public ClassWindowViewModel(WindowSettings settings) : base(settings) { }
+        public ClassWindowViewModel(WindowSettings settings) : base(settings)
+        {
+            ((ClassWindowSettings)settings).WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
+            ((ClassWindowSettings)settings).WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
+            ((ClassWindowSettings)settings).WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
+            ((ClassWindowSettings)settings).SorcererReplacesElementsInCharWindowChanged += OnSorcererReplacesElementsInCharWindowChanged;
+        }
+
+        private void OnWarriorEdgeModeChanged()
+        {
+            TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
+        }
+        private void OnWarriorShowTraverseCutChanged()
+        {
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
+        }
+        private void OnWarriorShowEdgeChanged()
+        {
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowEdge));
+        }
+
+        private void OnSorcererReplacesElementsInCharWindowChanged()
+        {
+            // TODO: delet this
+            WindowManager.ViewModels.Character.ExN(nameof(CharacterWindowViewModel.ShowElements));
+        }
 
         protected override void InstallHooks()
         {

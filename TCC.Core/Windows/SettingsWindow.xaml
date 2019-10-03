@@ -416,10 +416,10 @@
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
-                            <settings:CheckboxSetting IsOn="{Binding ShowItemsCooldown, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding CooldownWindowSettings.ShowItems, Mode=TwoWay}"
                                                       SettingName="Show items cooldown" />
                             <settings:SelectionSetting SettingName="Cooldown bar mode"
-                                                       SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}"
+                                                       SelectedItem="{Binding CooldownWindowSettings.Mode, Mode=TwoWay}"
                                                        Choices="{Binding CooldownBarModes}"
                                                        ChoicesType="{x:Type data:CooldownBarMode}">
                                 <settings:SelectionSetting.ToolTip>
@@ -514,7 +514,7 @@
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
-                            <settings:CheckboxSetting IsOn="{Binding CharacterWindowCompactMode, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.CompactMode, Mode=TwoWay}"
                                                       SettingName="Compact mode" />
                         </StackPanel>
                         <!-- Actions -->
@@ -556,22 +556,22 @@
                         <StackPanel VerticalAlignment="Stretch">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="General settings" />
-                            <settings:CheckboxSetting IsOn="{Binding BossWindowSettings.Enabled, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
-                            <settings:CheckboxSetting IsOn="{Binding BossWindowSettings.Visible, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.Visible, Mode=TwoWay}"
                                                       Style="{StaticResource VisibilitySettingStyle}" />
-                            <settings:CheckboxSetting IsOn="{Binding BossWindowSettings.ShowAlways, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.ShowAlways, Mode=TwoWay}"
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" />
-                            <settings:CheckboxSetting IsOn="{Binding BossWindowSettings.AllowOffScreen, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.AllowOffScreen, Mode=TwoWay}"
                                                       Style="{StaticResource AllowOffscreenSettingStyle}" />
-                            <settings:CheckboxSetting IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.AutoDim, Mode=TwoWay}"
                                                       Style="{StaticResource AutoDimSettingStyle}" />
                             <settings:SelectionSetting
-                                SelectedItem="{Binding BossWindowSettings.ClickThruMode, Mode=TwoWay}"
+                                SelectedItem="{Binding NpcWindowSettings.ClickThruMode, Mode=TwoWay}"
                                 Style="{StaticResource ClickThruSettingStyle}" />
-                            <settings:ValueSetting Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}"
+                            <settings:ValueSetting Value="{Binding NpcWindowSettings.Scale, Mode=TwoWay}"
                                                    Style="{StaticResource ScaleSettingStyle}" />
-                            <settings:ValueSetting Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}"
+                            <settings:ValueSetting Value="{Binding NpcWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    Style="{StaticResource DimOpacitySettingStyle}" />
                         </StackPanel>
                         <!-- Specific -->
@@ -579,7 +579,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:CheckboxSetting SettingName="Hide adds"
-                                                      IsOn="{Binding BossWindowSettings.HideAdds, Mode=TwoWay}">
+                                                      IsOn="{Binding NpcWindowSettings.HideAdds, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <ToolTip>
                                         <Grid Margin="5">
@@ -594,7 +594,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Accurate HP detection"
-                                                      IsOn="{Binding AccurateHp, Mode=TwoWay}">
+                                                      IsOn="{Binding NpcWindowSettings.AccurateHp, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -607,7 +607,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:SelectionSetting SettingName="Enrage label mode"
-                                                       SelectedItem="{Binding EnrageLabelMode, Mode=TwoWay}"
+                                                       SelectedItem="{Binding NpcWindowSettings.EnrageLabelMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:EnrageLabelMode}"
                                                        Choices="{Binding EnrageLabelModes, Mode=OneWay}" />
                         </StackPanel>
@@ -616,7 +616,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
-                                    Command="{Binding BossWindowSettings.ResetPositionCommand}" />
+                                    Command="{Binding NpcWindowSettings.ResetPositionCommand}" />
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -675,7 +675,7 @@
                             <settings:SelectionSetting SettingName="Direction"
                                                        ChoicesType="{x:Type FlowDirection}"
                                                        Choices="{Binding FlowDirections, Mode=OneWay}"
-                                                       SelectedItem="{Binding BuffsDirection, Mode=TwoWay}" />
+                                                       SelectedItem="{Binding BuffWindowSettings.Direction, Mode=TwoWay}" />
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
@@ -747,17 +747,17 @@
 
                             <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Warrior" />
                             <settings:CheckboxSetting SettingName="Show Edge"
-                                                      IsOn="{Binding WarriorShowEdge, Mode=TwoWay}"
+                                                      IsOn="{Binding ClassWindowSettings.WarriorShowEdge, Mode=TwoWay}"
                                                       Margin="0 0 15 0" />
                             <settings:SelectionSetting SettingName="Edge mode"
-                                                       SelectedItem="{Binding WarriorEdgeMode, Mode=TwoWay}"
+                                                       SelectedItem="{Binding ClassWindowSettings.WarriorEdgeMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:WarriorEdgeMode}"
                                                        Choices="{Binding WarriorEdgeModes, Mode=OneWay}"
                                                        Margin="0 0 15 0" />
                             <!--<settings:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />-->
                             <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Sorcerer" />
                             <settings:CheckboxSetting SettingName="Replaces char window elements"
-                                                      IsOn="{Binding SorcererReplacesElementsInCharWindow, Mode=TwoWay}"
+                                                      IsOn="{Binding ClassWindowSettings.SorcererReplacesElementsInCharWindow, Mode=TwoWay}"
                                                       Margin="0 0 15 0">
                                 <FrameworkElement.ToolTip>
                                     <Grid Margin="5">
@@ -832,7 +832,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:ValueSetting SettingName="Raid threshold" Min="1" Max="30"
-                                                   Value="{Binding GroupSizeThreshold, Mode=TwoWay}">
+                                                   Value="{Binding GroupWindowSettings.GroupSizeThreshold, Mode=TwoWay}">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -844,7 +844,7 @@
                             </settings:ValueSetting>
 
                             <settings:ValueSetting SettingName="Hide buffs threshold"
-                                                   Value="{Binding HideBuffsThreshold, Mode=TwoWay}"
+                                                   Value="{Binding GroupWindowSettings.HideBuffsThreshold, Mode=TwoWay}"
                                                    Max="30"
                                                    Min="1">
                                 <settings:ValueSetting.ToolTip>
@@ -859,7 +859,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Hide debuffs threshold"
-                                                   Value="{Binding HideDebuffsThreshold, Mode=TwoWay}" Max="30" Min="1">
+                                                   Value="{Binding GroupWindowSettings.HideDebuffsThreshold, Mode=TwoWay}" Max="30" Min="1">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -872,7 +872,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Disable (de)buffs threshold"
-                                                   Value="{Binding DisableAbnormalitiesThreshold, Mode=TwoWay}"
+                                                   Value="{Binding GroupWindowSettings.DisableAbnormalitiesThreshold, Mode=TwoWay}"
                                                    Min="1" Max="30">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -898,7 +898,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Disable HP threshold"
-                                                   Value="{Binding HideHpThreshold, Mode=TwoWay}"
+                                                   Value="{Binding GroupWindowSettings.HideHpThreshold, Mode=TwoWay}"
                                                    Max="30" Min="1">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -910,7 +910,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Disable MP threshold"
-                                                   Value="{Binding HideMpThreshold, Mode=TwoWay}" Max="30" Min="1">
+                                                   Value="{Binding GroupWindowSettings.HideMpThreshold, Mode=TwoWay}" Max="30" Min="1">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -921,7 +921,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:CheckboxSetting SettingName="Hide me"
-                                                      IsOn="{Binding HideMe, Mode=TwoWay}">
+                                                      IsOn="{Binding GroupWindowSettings.IgnoreMe, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -937,7 +937,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show only aggro debuff in HH"
-                                                      IsOn="{Binding HhOnlyAggro, Mode=TwoWay}">
+                                                      IsOn="{Binding GroupWindowSettings.ShowOnlyAggroStacks, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -954,9 +954,9 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show HP numbers"
-                                                      IsOn="{Binding ShowMembersHpNumbers, Mode=TwoWay}"/>
+                                                      IsOn="{Binding GroupWindowSettings.ShowHpLabels, Mode=TwoWay}"/>
                             <settings:CheckboxSetting SettingName="Show laurels"
-                                                      IsOn="{Binding ShowMembersLaurels, Mode=TwoWay}">
+                                                      IsOn="{Binding GroupWindowSettings.ShowLaurels, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -966,7 +966,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show awaken icon"
-                                                      IsOn="{Binding ShowAwakenIcon, Mode=TwoWay}">
+                                                      IsOn="{Binding GroupWindowSettings.ShowAwakenIcon, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -976,7 +976,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show group info"
-                                                      IsOn="{Binding ShowGroupWindowDetails, Mode=TwoWay}">
+                                                      IsOn="{Binding GroupWindowSettings.ShowDetails, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -986,7 +986,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:SelectionSetting SettingName="Group window layout"
-                                                       SelectedItem="{Binding GroupWindowLayout, Mode=TwoWay}"
+                                                       SelectedItem="{Binding GroupWindowSettings.Layout, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:GroupWindowLayout}"
                                                        Choices="{Binding GroupWindowLayouts, Mode=OneWay}" />
 
@@ -1679,7 +1679,7 @@
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="0">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Flight gauge" />
                             <settings:CheckboxSetting SettingName="Enabled"
-                                                      IsOn="{Binding ShowFlightGauge, Mode=TwoWay}">
+                                                      IsOn="{Binding FlightWindowSettings.Enabled, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -1693,9 +1693,9 @@
                             <settings:SelectionSetting Style="{StaticResource ClickThruSettingStyle}"
                                                        SelectedItem="{Binding FlightWindowSettings.ClickThruMode, Mode=TwoWay}" />
                             <settings:CheckboxSetting SettingName="Flip gauge"
-                                                      IsOn="{Binding FlipFlightGauge, Mode=TwoWay}" />
+                                                      IsOn="{Binding FlightWindowSettings.Flip, Mode=TwoWay}" />
                             <settings:ValueSetting SettingName="Gauge rotation"
-                                                   Min="0" Max="360" Value="{Binding FlightGaugeRotation, Mode=TwoWay}" />
+                                                   Min="0" Max="360" Value="{Binding FlightWindowSettings.Rotation, Mode=TwoWay}" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move gauge to center screen"
                                     Command="{Binding FlightWindowSettings.ResetPositionCommand}" />
@@ -1704,7 +1704,7 @@
                         <!-- Floating button -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Floating button" />
-                            <settings:CheckboxSetting IsOn="{Binding ShowNotificationBubble, Mode=TwoWay}"
+                            <settings:CheckboxSetting IsOn="{Binding FloatingButtonSettings.ShowNotificationBubble, Mode=TwoWay}"
                                                       SettingName="Show notification bubble" />
                             <settings:CheckboxSetting IsOn="{Binding FloatingButtonSettings.ShowAlways, Mode=TwoWay}"
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" />
@@ -1715,7 +1715,7 @@
                         <!-- LFG window -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="LFG window" />
-                            <settings:CheckboxSetting SettingName="Enabled" IsOn="{Binding UseLfg, Mode=TwoWay}">
+                            <settings:CheckboxSetting SettingName="Enabled" IsOn="{Binding LfgWindowSettings.Enabled, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -1726,8 +1726,8 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Show trade LFGs"
-                                                      IsOn="{Binding ShowTradeLfgs, Mode=TwoWay}">
+                            <settings:CheckboxSetting SettingName="Hide trade listings"
+                                                      IsOn="{Binding LfgWindowSettings.HideTradeListings, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />

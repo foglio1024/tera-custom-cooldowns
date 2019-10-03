@@ -74,7 +74,7 @@ namespace TCC.Settings
         public FlightWindowSettings FlightGaugeWindowSettings { get; set; }
         public FloatingButtonWindowSettings FloatingButtonSettings { get; set; }
         public CivilUnrestWindowSettings CivilUnrestWindowSettings { get; set; }
-        public WindowSettings LfgWindowSettings { get; set; }
+        public LfgWindowSettings LfgWindowSettings { get; set; }
         public NotificationAreaSettings NotificationAreaSettings { get; set; }
 
         #region Chat
@@ -139,7 +139,7 @@ namespace TCC.Settings
             CivilUnrestWindowSettings = new CivilUnrestWindowSettings(/*1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings)*/);
             ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
             ChatSettings = new WindowSettings();
-            LfgWindowSettings = new WindowSettings();
+            LfgWindowSettings = new LfgWindowSettings();
             NotificationAreaSettings = new NotificationAreaSettings();
 
             MaxMessages = 500;

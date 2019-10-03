@@ -486,6 +486,7 @@ namespace TCC.ViewModels.Widgets
         {
             N(nameof(Mode));
         }
+
         public CooldownWindowViewModel(WindowSettings settings) : base(settings)
         {
             ShortSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
@@ -500,6 +501,9 @@ namespace TCC.ViewModels.Widgets
             InitViews();
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.SkillSettingsHotkey, OnShowSkillConfigHotkeyPressed);
+
+            ((CooldownWindowSettings)settings).ShowItemsChanged += NotifyItemsDisplay;
+            ((CooldownWindowSettings)settings).ModeChanged += NotifyModeChanged;
         }
 
         private void OnShowSkillConfigHotkeyPressed()
@@ -554,12 +558,6 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
 
         }
-
-        private void OnDisconnected()
-        {
-            ClearSkills();
-        }
-
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
@@ -573,6 +571,12 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
 
         }
+
+        private void OnDisconnected()
+        {
+            ClearSkills();
+        }
+
 
         private void CheckPassivity(Abnormality ab, uint cd)
         {

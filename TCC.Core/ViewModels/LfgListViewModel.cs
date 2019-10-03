@@ -90,13 +90,14 @@ namespace TCC.ViewModels
 
         public bool StayClosed { get; set; }
 
-        public LfgListViewModel(WindowSettings settings) : base(settings)
+        public LfgListViewModel(LfgWindowSettings settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
             Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
             ListingsView = CollectionViewUtils.InitLiveView(Listings, null, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
+            settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
             WindowManager.ViewModels.Group.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
@@ -272,6 +273,7 @@ namespace TCC.ViewModels
                 }
                 else
                 {
+                    if (l.IsTrade && ((LfgWindowSettings) Settings).HideTradeListings) return;
                     Listings.Add(new Listing(l));
                     EnqueueRequest(l.LeaderId);
                 }
@@ -292,6 +294,16 @@ namespace TCC.ViewModels
             }
         }
 
+        private void OnHideTradeChanged()
+        {
+            if (!((LfgWindowSettings) Settings).HideTradeListings) return;
+            var toRemove = Listings.ToSyncList().Where(l => l.IsTrade).Select(s => s.LeaderId).ToList();
+            toRemove.ForEach(r =>
+            {
+                var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
+                if (target != null) Listings.Remove(target);
+            });
+        }
         protected override void InstallHooks()
         {
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);

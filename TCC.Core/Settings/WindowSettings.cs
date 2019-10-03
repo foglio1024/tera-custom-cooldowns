@@ -433,8 +433,35 @@ namespace TCC.Settings
 
     public class CooldownWindowSettings : WindowSettings
     {
-        public bool ShowItems { get; set; }
-        public CooldownBarMode Mode { get; set; }
+        public event Action ShowItemsChanged;
+        public event Action ModeChanged;
+
+        private bool _showItems;
+        private CooldownBarMode _mode;
+
+        public bool ShowItems
+        {
+            get => _showItems;
+            set
+            {
+                if (_showItems == value) return;
+                _showItems = value;
+                N();
+                ShowItemsChanged?.Invoke();
+            }
+        }
+
+        public CooldownBarMode Mode
+        {
+            get => _mode;
+            set
+            {
+                if (_mode == value) return;
+                _mode = value;
+                N();
+                ModeChanged?.Invoke();
+            }
+        }
 
         public CooldownWindowSettings()
         {
@@ -456,7 +483,7 @@ namespace TCC.Settings
 
     public class NotificationAreaSettings : WindowSettings
     {
-        public int MaxNotifications { get; set; } 
+        public int MaxNotifications { get; set; }
         public NotificationAreaSettings()
         {
             _visible = true;
@@ -468,14 +495,27 @@ namespace TCC.Settings
             _enabled = true;
             _allowOffScreen = false;
             PerClassPosition = false;
-            Positions = new ClassPositions(0,.5, ButtonsPosition.Above);
+            Positions = new ClassPositions(0, .5, ButtonsPosition.Above);
 
             MaxNotifications = 5;
         }
     }
     public class CharacterWindowSettings : WindowSettings
     {
-        public bool CompactMode { get; set; }
+        public event Action CompactModeChanged;
+
+        private bool _compactMode;
+        public bool CompactMode
+        {
+            get => _compactMode;
+            set
+            {
+                if (_compactMode == value) return;
+                _compactMode = value;
+                N();
+                CompactModeChanged?.Invoke();
+            }
+        }
 
         public CharacterWindowSettings()
         {
@@ -497,6 +537,7 @@ namespace TCC.Settings
     {
         private bool _accurateHp;
         private bool _hideAdds;
+        private EnrageLabelMode _enrageLabelMode;
 
         public event Action AccurateHpChanged;
         public event Action HideAddsChanged;
@@ -506,8 +547,9 @@ namespace TCC.Settings
             get => _hideAdds;
             set
             {
-                if(_hideAdds == value) return;
+                if (_hideAdds == value) return;
                 _hideAdds = value;
+                N();
                 HideAddsChanged?.Invoke();
             }
         }
@@ -517,13 +559,23 @@ namespace TCC.Settings
             get => _accurateHp;
             set
             {
-                if(_accurateHp == value) return;
+                if (_accurateHp == value) return;
                 _accurateHp = value;
+                N();
                 AccurateHpChanged?.Invoke();
             }
         }
 
-        public EnrageLabelMode EnrageLabelMode { get; set; }
+        public EnrageLabelMode EnrageLabelMode
+        {
+            get => _enrageLabelMode;
+            set
+            {
+                if (_enrageLabelMode == value) return;
+                _enrageLabelMode = value;
+                N();
+            }
+        }
 
         public NpcWindowSettings()
         {
@@ -545,8 +597,23 @@ namespace TCC.Settings
 
     public class BuffWindowSettings : WindowSettings
     {
+        public event Action DirectionChanged;
+
+        private FlowDirection _direction;
         public bool ShowAll { get; set; } // by HQ
-        public FlowDirection Direction { get; set; }
+
+        public FlowDirection Direction
+        {
+            get => _direction;
+            set
+            {
+                if (_direction == value) return;
+                _direction = value;
+                N();
+                DirectionChanged?.Invoke();
+            }
+        }
+
         public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
         public bool Pass(Abnormality ab) // by HQ
         {
@@ -603,10 +670,61 @@ namespace TCC.Settings
     }
     public class ClassWindowSettings : WindowSettings
     {
-        public bool WarriorShowTraverseCut { get; set; }
-        public bool WarriorShowEdge { get; set; }
-        public WarriorEdgeMode WarriorEdgeMode { get; set; }
-        public bool SorcererReplacesElementsInCharWindow { get; set; }
+        public event Action WarriorShowEdgeChanged;
+        public event Action WarriorEdgeModeChanged;
+        public event Action WarriorShowTraverseCutChanged;
+        public event Action SorcererReplacesElementsInCharWindowChanged;
+
+        private bool _warriorShowEdge;
+        private bool _sorcererReplacesElementsInCharWindow;
+        private bool _warriorShowTraverseCut;
+        private WarriorEdgeMode _warriorEdgeMode;
+
+        public bool WarriorShowEdge
+        {
+            get => _warriorShowEdge;
+            set
+            {
+                if (_warriorShowEdge == value) return;
+                _warriorShowEdge = value;
+                N();
+                WarriorShowEdgeChanged?.Invoke();
+            }
+        }
+        public bool SorcererReplacesElementsInCharWindow
+        {
+            get => _sorcererReplacesElementsInCharWindow;
+            set
+            {
+                if (_sorcererReplacesElementsInCharWindow == value) return;
+                _sorcererReplacesElementsInCharWindow = value;
+                N();
+                SorcererReplacesElementsInCharWindowChanged?.Invoke();
+            }
+        }
+        public bool WarriorShowTraverseCut
+        {
+            get => _warriorShowTraverseCut;
+            set
+            {
+                if (_warriorShowTraverseCut == value) return;
+                _warriorShowTraverseCut = value;
+                N();
+                WarriorShowTraverseCutChanged?.Invoke();
+
+            }
+        }
+        public WarriorEdgeMode WarriorEdgeMode
+        {
+            get => _warriorEdgeMode;
+            set
+            {
+                if(_warriorEdgeMode == value) return;
+                _warriorEdgeMode = value;
+                N();
+                WarriorEdgeModeChanged?.Invoke();
+            }
+        }
 
         public ClassWindowSettings()
         {
@@ -631,20 +749,172 @@ namespace TCC.Settings
     }
     public class GroupWindowSettings : WindowSettings
     {
-        public GroupWindowLayout Layout { get; set; }
-        public bool IgnoreMe { get; set; }
-        public bool ShowOnlyAggroStacks { get; set; }
-        public bool ShowHpLabels { get; set; }
-        public bool ShowLaurels { get; set; }
+        public event Action SettingsUpdated;
+        public event Action IgnoreMeChanged;
+        public event Action ThresholdChanged;
+        public event Action LayoutChanged;
+
+        private bool _showHpLabels;
+        private bool _ignoreMe;
+        private uint _hideBuffsThreshold;
+        private uint _hideDebuffsThreshold;
+        private uint _hideHpThreshold;
+        private uint _hideMpThreshold;
+        private uint _disableAbnormalitiesThreshold;
+        private uint _groupSizeThreshold;
+        private GroupWindowLayout _layout;
+        private bool _showAwakenIcon;
+        private bool _showDetails;
+        private bool _showLaurels;
+        private bool _showOnlyAggroStacks;
+
+        public bool ShowHpLabels
+        {
+            get => _showHpLabels;
+            set
+            {
+                if (_showHpLabels == value) return;
+                _showHpLabels = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public bool IgnoreMe
+        {
+            get => _ignoreMe;
+            set
+            {
+                if (_ignoreMe == value) return;
+                _ignoreMe = value;
+                N();
+                IgnoreMeChanged?.Invoke();
+            }
+        }
+        public uint HideBuffsThreshold
+        {
+            get => _hideBuffsThreshold;
+            set
+            {
+                if (_hideBuffsThreshold == value) return;
+                _hideBuffsThreshold = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public uint HideDebuffsThreshold
+        {
+            get => _hideDebuffsThreshold;
+            set
+            {
+                if (_hideDebuffsThreshold == value) return;
+                _hideDebuffsThreshold = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public uint HideHpThreshold
+        {
+            get => _hideHpThreshold;
+            set
+            {
+                if (_hideHpThreshold == value) return;
+                _hideHpThreshold = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public uint HideMpThreshold
+        {
+            get => _hideMpThreshold;
+            set
+            {
+                if (_hideMpThreshold == value) return;
+                _hideMpThreshold = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public uint DisableAbnormalitiesThreshold
+        {
+            get => _disableAbnormalitiesThreshold;
+            set
+            {
+                if (_disableAbnormalitiesThreshold == value) return;
+                _disableAbnormalitiesThreshold = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public uint GroupSizeThreshold
+        {
+            get => _groupSizeThreshold;
+            set
+            {
+                if (_groupSizeThreshold == value) return;
+                _groupSizeThreshold = value;
+                N();
+                ThresholdChanged?.Invoke();
+            }
+        }
+        public GroupWindowLayout Layout
+        {
+            get => _layout;
+            set
+            {
+                if(_layout == value) return;
+                _layout = value;
+                LayoutChanged?.Invoke();
+                N();
+            }
+        }
+        public bool ShowAwakenIcon
+        {
+            get => _showAwakenIcon;
+            set
+            {
+                if(_showAwakenIcon == value) return;
+                _showAwakenIcon = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public bool ShowDetails
+        {
+            get => _showDetails;
+            set
+            {
+                if(_showDetails == value) return;
+                _showDetails = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public bool ShowLaurels
+        {
+            get => _showLaurels;
+            set
+            {
+                if(_showLaurels == value) return;
+                _showLaurels = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public bool ShowOnlyAggroStacks
+        {
+            get => _showOnlyAggroStacks;
+            set
+            {
+                if(_showOnlyAggroStacks == value) return;
+                _showOnlyAggroStacks = value;
+                N();
+            }
+        }
+
+
+
         public bool ShowAllAbnormalities { get; set; }
-        public bool ShowDetails { get; set; }
-        public bool ShowAwakenIcon { get; set; }
-        public uint GroupSizeThreshold { get; set; }
-        public uint HideBuffsThreshold { get; set; }
-        public uint HideDebuffsThreshold { get; set; }
-        public uint DisableAbnormalitiesThreshold { get; set; }
-        public uint HideHpThreshold { get; set; }
-        public uint HideMpThreshold { get; set; }
+
         public Dictionary<Class, List<uint>> GroupAbnormals { get; }
 
         public GroupWindowSettings()
@@ -695,8 +965,35 @@ namespace TCC.Settings
     }
     public class FlightWindowSettings : WindowSettings
     {
-        public bool Flip { get; set; }
-        public double Rotation { get; set; }
+        public event Action RotationChanged;
+        public event Action FlipChanged;
+
+        private bool _flip;
+        private double _rotation;
+
+        public bool Flip
+        {
+            get => _flip;
+            set
+            {
+                if(_flip == value) return;
+                _flip = value;
+                N();
+                FlipChanged?.Invoke();
+            }
+        }
+
+        public double Rotation
+        {
+            get => _rotation;
+            set
+            {
+                if(_rotation == value) return;
+                _rotation = value;
+                N();
+                RotationChanged?.Invoke();
+            }
+        }
 
         public FlightWindowSettings()
         {
@@ -718,7 +1015,18 @@ namespace TCC.Settings
     }
     public class FloatingButtonWindowSettings : WindowSettings
     {
-        public bool ShowNotificationBubble { get; set; }
+        private bool _showNotificationBubble;
+
+        public bool ShowNotificationBubble
+        {
+            get => _showNotificationBubble;
+            set
+            {
+                if(_showNotificationBubble == value)return;
+                _showNotificationBubble = value;
+                N();
+            }
+        }
 
         public FloatingButtonWindowSettings()
         {
@@ -754,6 +1062,28 @@ namespace TCC.Settings
 
             UndimOnFlyingGuardian = false;
 
+        }
+    }
+    public class LfgWindowSettings : WindowSettings
+    {
+        private bool _hideTradeListings;
+        public event Action HideTradeListingsChangedEvent;
+
+        public bool HideTradeListings
+        {
+            get => _hideTradeListings;
+            set
+            {
+                if(_hideTradeListings == value) return;
+                _hideTradeListings = value;
+                N();
+                HideTradeListingsChangedEvent?.Invoke();
+            }
+        }
+
+        public LfgWindowSettings()
+        {
+            HideTradeListings = true;
         }
     }
 }

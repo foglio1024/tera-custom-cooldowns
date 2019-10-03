@@ -25,10 +25,11 @@ namespace TCC.ViewModels.Widgets
         private readonly object _lock = new object();
         private bool _leaderOverride;
         private ulong _aggroHolder;
+
         public event Action SettingsUpdated;
 
         public SynchronizedObservableCollection<User> Members { get; }
-        public GroupWindowLayout GroupWindowLayout => App.Settings.GroupWindowSettings.Layout;
+        public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings).Layout;
 
         public ICollectionViewLiveShaping All { get; }
         public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
@@ -48,12 +49,12 @@ namespace TCC.ViewModels.Widgets
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && App.Settings.GroupWindowSettings.ShowDetails;
-        public bool ShowLeaveButton => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable;
-        public bool ShowLeaderButtons => Formed && /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && AmILeader;
+        public bool ShowDetails => Formed && ((GroupWindowSettings)Settings).ShowDetails;
+        public bool ShowLeaveButton => Formed && ProxyInterface.Instance.IsStubAvailable;
+        public bool ShowLeaderButtons => Formed && ProxyInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
 
-        public GroupWindowViewModel(WindowSettings settings) : base(settings)
+        public GroupWindowViewModel(GroupWindowSettings settings) : base(settings)
         {
             Members = new SynchronizedObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
@@ -80,6 +81,20 @@ namespace TCC.ViewModels.Widgets
                 });
 
             Game.Teleported += OnTeleported;
+
+            settings.SettingsUpdated += NotifySettingUpdated;
+            settings.ThresholdChanged += NotifyThresholdChanged;
+            settings.IgnoreMeChanged += ToggleMe;
+            settings.LayoutChanged += OnLayoutChanged;
+        }
+
+        private void OnLayoutChanged()
+        {
+            N(nameof(GroupWindowLayout));
+            N(nameof(All));
+            N(nameof(Dps));
+            N(nameof(Healers));
+            N(nameof(Tanks));
         }
 
         private void OnTeleported()
@@ -199,7 +214,7 @@ namespace TCC.ViewModels.Widgets
                     // -- show only aggro stacks if we are in HH -- //
                     if (WindowManager.ViewModels.NPC.CurrentHHphase >= HarrowholdPhase.Phase2)
                     {
-                        if (ab.Id != 950023 && App.Settings.GroupWindowSettings.ShowOnlyAggroStacks) return;
+                        if (ab.Id != 950023 && ((GroupWindowSettings)Settings).ShowOnlyAggroStacks) return;
                     }
                     // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -237,7 +252,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void AddOrUpdateMember(User p)
         {
-            if (App.Settings.GroupWindowSettings.IgnoreMe && p.IsPlayer)
+            if (((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
                 p.Visible = false;
@@ -265,7 +280,7 @@ namespace TCC.ViewModels.Widgets
         public void AddOrUpdateMember(PartyMemberData p)
         {
             var visible = true;
-            if (App.Settings.GroupWindowSettings.IgnoreMe && p.Name == Game.Me.Name)
+            if (((GroupWindowSettings)Settings).IgnoreMe && p.Name == Game.Me.Name)
             {
                 _leaderOverride = p.IsLeader;
                 visible = false;
@@ -361,7 +376,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void ClearAll()
         {
-            if (!App.Settings.GroupWindowSettings.Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!((GroupWindowSettings)Settings).Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;
@@ -373,13 +388,11 @@ namespace TCC.ViewModels.Widgets
             if (u == null) return;
             u.Online = false;
         }
-        public void ToggleMe(bool visible)
+        public void ToggleMe()
         {
             var me = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
             if (me == null) return;
-            me.Visible = visible;
-            //me.ClearAbnormalities();
-            //Members.Remove(me);
+            me.Visible = !((GroupWindowSettings)Settings).IgnoreMe;
         }
         internal void ClearAllAbnormalities()
         {
@@ -645,7 +658,7 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (!Game.IsMe(p.TargetId)) return;
-            if (Size > App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold) return;
+            if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
@@ -654,7 +667,7 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (!Game.IsMe(p.TargetId)) return;
-            if (Size > App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold) return;
+            if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 

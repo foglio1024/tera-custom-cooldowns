@@ -29,6 +29,7 @@ namespace TCC.ViewModels.Widgets
             Game.Me.PropertyChanged += MePropertyChanged;
             App.Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
             App.Settings.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
+            ((CharacterWindowSettings)settings).CompactModeChanged += InvokeCompactModeChanged;
         }
 
         protected override void InstallHooks()
