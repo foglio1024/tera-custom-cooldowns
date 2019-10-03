@@ -53,7 +53,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>resources\tcc-logo.ico</ApplicationIcon>
+    <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -742,9 +742,11 @@
     <Compile Include="Controls\WindowButtons.xaml.cs">
       <DependentUpon>WindowButtons.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Widgets\NotificationAreaViewModel.cs" />
     <Compile Include="Windows\Widgets\NotificationAreaWindow.xaml.cs">
       <DependentUpon>NotificationAreaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Widgets\NotificationInfo.cs" />
     <Page Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1320,6 +1322,9 @@
     <Resource Include="resources\images\ic_videogame_asset_white_24dp_2x.png" />
     <Resource Include="resources\tcc-logo-on.ico" />
     <Resource Include="resources\tcc-logo.ico" />
+    <Resource Include="resources\tcc.ico" />
+    <Resource Include="resources\tcc_off.ico" />
+    <Resource Include="resources\tcc_on.ico" />
     <Resource Include="tcc-logo.ico" />
     <Resource Include="resources\images\ic_swap_horiz_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_aspect_ratio_white_24dp_2x.png" />
