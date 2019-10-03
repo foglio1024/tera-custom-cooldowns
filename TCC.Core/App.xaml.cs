@@ -1,5 +1,4 @@
-﻿//#define FORCE_TTB
-using FoglioUtils;
+﻿using FoglioUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,6 +18,7 @@ using TCC.Settings;
 using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
@@ -114,7 +114,27 @@ namespace TCC
             SplashScreen.VM.BottomText = "Initializing packet processor...";
             SplashScreen.VM.Progress = 80;
 
-            PacketAnalyzer.ProcessorReady += () => BaseDispatcher.Invoke(() => ModuleLoader.LoadModules(BasePath));
+            PacketAnalyzer.ProcessorReady += () => BaseDispatcher.Invoke(() =>
+            {
+                try
+                {
+                    ModuleLoader.LoadModules(BasePath);
+                }
+                catch (FileLoadException fle)
+                {
+                    TccMessageBox.Show("TCC module loader",
+                        $"An error occured while loading {fle.FileName}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
+                }
+                catch (FileNotFoundException fnfe)
+                {
+                    TccMessageBox.Show("TCC module loader",
+                        $"An error occured while loading {Path.GetFileName(fnfe.FileName)}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
+                }
+            });
             await PacketAnalyzer.InitAsync();
             SplashScreen.VM.Progress = 100;
             SplashScreen.VM.BottomText = "Starting";
@@ -137,11 +157,7 @@ namespace TCC
 
         private static void ParseStartupArgs(List<string> list)
         {
-#if FORCE_TTB
-            ToolboxMode = true;
-#else
             ToolboxMode = list.IndexOf("--toolbox") != -1;
-#endif
             Restarted = list.IndexOf("--restart") != -1;
             var settingsOverrideIdx = list.IndexOf("--settings_override");
             if (settingsOverrideIdx != -1)
@@ -184,7 +200,7 @@ namespace TCC
             PacketAnalyzer.Sniffer.Enabled = false;
             Settings.Save();
             WindowManager.Dispose();
-            ProxyInterface.Instance.Disconnect(); 
+            ProxyInterface.Instance.Disconnect();
             UpdateManager.StopTimer();
             Environment.Exit(0);
         }
