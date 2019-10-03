@@ -18,6 +18,9 @@ namespace TCC.Windows
 {
     public class TccWidget : Window
     {
+        private static bool _showBoundaries = false;
+        private static event Action ShowBoundariesToggled;
+
         private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, to: 0);
         private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, to: 0);
         private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, to: 1);
@@ -26,10 +29,9 @@ namespace TCC.Windows
         protected WindowButtons ButtonsRef;
         protected UIElement MainContent;
         protected UIElement BoundaryRef;
-        private static event Action ShowAllHandlesToggled;
 
         public WindowSettings WindowSettings { get; private set; }
-
+        private Point WindowCenter => new Point(Left + ActualWidth / 2, Top + ActualHeight / 2);
         public IntPtr Handle { get; private set; }
         public bool CanMove { get; set; } = true;
 
@@ -82,12 +84,12 @@ namespace TCC.Windows
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             if (CanMove) ButtonsRef.MouseLeftButtonDown += Drag;
-            ShowAllHandlesToggled += OnShowAllHandlesToggledImpl;
+            ShowBoundariesToggled += ShowHideBoundaries;
         }
 
-        private void OnShowAllHandlesToggledImpl()
+        private void ShowHideBoundaries()
         {
-            var anim = _forceVisibleHandles ? _showButtonsAnimation : _hideButtonsAnimation;
+            var anim = _showBoundaries ? _showButtonsAnimation : _hideButtonsAnimation;
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 BoundaryRef?.BeginAnimation(OpacityProperty, anim);
@@ -148,7 +150,7 @@ namespace TCC.Windows
         private void OnButtonsTimerTick(object sender, EventArgs e)
         {
             _buttonsTimer.Stop();
-            if (IsMouseOver || _forceVisibleHandles) return;
+            if (IsMouseOver || _showBoundaries) return;
             ButtonsRef.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
         }
 
@@ -209,7 +211,7 @@ namespace TCC.Windows
         }
         private void OnClickThruModeChanged()
         {
-            if (_forceVisibleHandles)
+            if (_showBoundaries)
             {
                 FocusManager.UndoClickThru(Handle);
                 return;
@@ -329,7 +331,6 @@ namespace TCC.Windows
             return Screen.AllScreens[index != -1 ? index : 0];
         }
 
-        private Point WindowCenter => new Point(Left + ActualWidth / 2, Top + ActualHeight / 2);
 
         private bool IsWindowFullyVisible()
         {
@@ -391,7 +392,9 @@ namespace TCC.Windows
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
+            if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _showButtonsAnimation);
             this.TryDragMove();
+            if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
             UpdateButtons();
             CheckBounds();
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
@@ -407,11 +410,10 @@ namespace TCC.Windows
             //Hide();
         }
 
-        private static bool _forceVisibleHandles = false;
         public static void OnShowAllHandlesToggled()
         {
-            _forceVisibleHandles = !_forceVisibleHandles;
-            ShowAllHandlesToggled?.Invoke();
+            _showBoundaries = !_showBoundaries;
+            ShowBoundariesToggled?.Invoke();
         }
 
     }
