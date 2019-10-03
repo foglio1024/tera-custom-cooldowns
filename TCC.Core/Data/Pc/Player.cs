@@ -44,7 +44,7 @@ namespace TCC.Data.Pc
         private bool _isAlive;
         private uint _coins;
         private uint _maxCoins;
-        private readonly List<uint> _debuffList;
+        private List<uint> _debuffList;
         private Dictionary<uint, uint> _shields;
 
         public string Name
@@ -372,7 +372,6 @@ namespace TCC.Data.Pc
         public Player()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            _debuffList = new List<uint>();
         }
         public Player(ulong id, string name) : this()
         {
@@ -452,6 +451,8 @@ namespace TCC.Data.Pc
             Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
             InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
             _shields = new Dictionary<uint, uint>();
+            _debuffList = new List<uint>();
+
         }
 
         public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)

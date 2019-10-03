@@ -114,7 +114,7 @@ namespace TCC
         public static event Action Teleported;
         public static event Action SkillStarted;
 
-        public static Player Me { get; set; }
+        public static Player Me { get; set; } = new Player();
         public static TccDatabase DB { get; private set; }
 
         public static bool CivilUnrestZone => CurrentZoneId == 152;
