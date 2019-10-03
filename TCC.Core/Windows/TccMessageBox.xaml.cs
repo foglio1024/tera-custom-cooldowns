@@ -108,15 +108,17 @@ namespace TCC.Windows
         }
         private static void SetImageOfMessageBox(MessageBoxImage image)
         {
-            return;
+            //return;
             switch (image)
             {
                 case MessageBoxImage.Warning:
                 case MessageBoxImage.Question:
-                    _messageBox.InnerBorder.BorderBrush = R.Brushes.GoldBrush;
+                    _messageBox.ColorRectFx.Fill = R.Brushes.TccYellowGradientBrush;
+                    _messageBox.ColorRect.Fill = R.Brushes.TccYellowGradientBrush;
                     break;
                 case MessageBoxImage.Error:
-                    _messageBox.InnerBorder.BorderBrush = R.Brushes.HpBrush;
+                    _messageBox.ColorRect.Fill = R.Brushes.TccRedGradientBrush;
+                    _messageBox.ColorRectFx.Fill = R.Brushes.TccRedGradientBrush;
                     break;
             }
         }
