@@ -161,9 +161,9 @@ namespace TCC
             FocusManager.Init();
             LoadWindows();
             _contextMenu = new ContextMenu();
-            var defaultIconStream = Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative))?.Stream;
+            var defaultIconStream = Application.GetResourceStream(new Uri("resources/tcc_off.ico", UriKind.Relative))?.Stream;
             if (defaultIconStream != null) DefaultIcon = new Icon(defaultIconStream);
-            var connectedIconStream = Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative))?.Stream;
+            var connectedIconStream = Application.GetResourceStream(new Uri("resources/tcc_on.ico", UriKind.Relative))?.Stream;
             if (connectedIconStream != null) ConnectedIcon = new Icon(connectedIconStream);
             TrayIcon = new NotifyIcon()
             {
@@ -315,7 +315,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 NotificationArea = new NotificationAreaWindow(ViewModels.NotificationArea);
-                if(NotificationArea.WindowSettings.Enabled) NotificationArea.Show();
+                if (NotificationArea.WindowSettings.Enabled) NotificationArea.Show();
                 NotificationArea.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
@@ -366,7 +366,7 @@ namespace TCC
             var charWindowThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                Game.Me = new Player();
+                //Game.Me = new Player();
                 CharacterWindow = new CharacterWindow(ViewModels.Character);
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 CharacterWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
