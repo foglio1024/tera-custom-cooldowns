@@ -8,6 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Windows.Controls;
+using FoglioUtils;
 using FoglioUtils.Extensions;
 using TCC.Controls;
 using TCC.Data;
@@ -17,13 +18,15 @@ namespace TCC.Windows
 {
     public class TccWidget : Window
     {
-        private readonly DoubleAnimation _opacityAnimation = new DoubleAnimation { Duration = TimeSpan.FromMilliseconds(100) };
-        private readonly DoubleAnimation _hideButtons = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000));
-        private readonly DoubleAnimation _showButtons = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150));
+        private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, to: 0);
+        private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, to: 0);
+        private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, to: 1);
         private DispatcherTimer _buttonsTimer;
 
         protected WindowButtons ButtonsRef;
         protected UIElement MainContent;
+        protected UIElement BoundaryRef;
+        private static event Action ShowAllHandlesToggled;
 
         public WindowSettings WindowSettings { get; private set; }
 
@@ -34,6 +37,7 @@ namespace TCC.Windows
         {
             WindowSettings = settings;
             MainContent.Opacity = 0;
+            if (BoundaryRef != null) BoundaryRef.Opacity = 0;
             Topmost = true;
             Left = WindowSettings.X * WindowManager.ScreenSize.Width;
             Top = WindowSettings.Y * WindowManager.ScreenSize.Height;
@@ -74,10 +78,22 @@ namespace TCC.Windows
 
             MouseEnter += (_, __) =>
             {
-                if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
+                if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtonsAnimation);
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
             if (CanMove) ButtonsRef.MouseLeftButtonDown += Drag;
+            ShowAllHandlesToggled += OnShowAllHandlesToggledImpl;
+        }
+
+        private void OnShowAllHandlesToggledImpl()
+        {
+            var anim = _forceVisibleHandles ? _showButtonsAnimation : _hideButtonsAnimation;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                BoundaryRef?.BeginAnimation(OpacityProperty, anim);
+                ButtonsRef?.BeginAnimation(OpacityProperty, anim);
+                OnClickThruModeChanged();
+            }));
         }
 
         public void ReloadPosition()
@@ -132,8 +148,8 @@ namespace TCC.Windows
         private void OnButtonsTimerTick(object sender, EventArgs e)
         {
             _buttonsTimer.Stop();
-            if (IsMouseOver) return;
-            ButtonsRef.BeginAnimation(OpacityProperty, _hideButtons);
+            if (IsMouseOver || _forceVisibleHandles) return;
+            ButtonsRef.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -189,10 +205,16 @@ namespace TCC.Windows
                 if (WindowSettings.ShowAlways) return;
                 AnimateContentOpacity(0);
             }
-                RefreshTopmost();
+            RefreshTopmost();
         }
         private void OnClickThruModeChanged()
         {
+            if (_forceVisibleHandles)
+            {
+                FocusManager.UndoClickThru(Handle);
+                return;
+            }
+
             switch (WindowSettings.ClickThruMode)
             {
                 case ClickThruMode.Never:
@@ -384,5 +406,13 @@ namespace TCC.Windows
             Dispatcher.InvokeShutdown();
             //Hide();
         }
+
+        private static bool _forceVisibleHandles = false;
+        public static void OnShowAllHandlesToggled()
+        {
+            _forceVisibleHandles = !_forceVisibleHandles;
+            ShowAllHandlesToggled?.Invoke();
+        }
+
     }
 }

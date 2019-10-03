@@ -10,6 +10,7 @@ namespace TCC.Windows.Widgets
 
             DataContext = vm;
             ButtonsRef = Buttons;
+            BoundaryRef = Boundary;
             MainContent = WindowContent;
             Init(App.Settings.CooldownWindowSettings);
         }

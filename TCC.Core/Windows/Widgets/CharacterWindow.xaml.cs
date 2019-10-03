@@ -26,6 +26,7 @@ namespace TCC.Windows.Widgets
 
             InitializeComponent();
             ButtonsRef = Buttons;
+            BoundaryRef = Boundary;
             MainContent = WindowContent;
             Init(App.Settings.CharacterWindowSettings); //TODO: us vm.Settings
 

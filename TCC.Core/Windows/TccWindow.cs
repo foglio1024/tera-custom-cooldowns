@@ -32,6 +32,8 @@ namespace TCC.Windows
                 Hidden?.Invoke();
             };
             BeginAnimation(OpacityProperty, a);
+            FocusManager.FocusTera();
+
         }
         public void ShowWindow()
         {

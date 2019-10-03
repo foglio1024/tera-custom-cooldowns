@@ -33,6 +33,8 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+
         <Grid Name="WindowContent" Grid.Row="1">
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 

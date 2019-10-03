@@ -52,6 +52,7 @@ namespace TCC.Settings
         public HotKey SkillSettingsHotkey { get; set; }
         public HotKey ForceClickableChatHotkey { get; set; }
         public HotKey ReturnToLobbyHotkey { get; set; }
+        public HotKey ToggleBoundariesHotkey { get; set; }
 
         #endregion
 
@@ -161,6 +162,7 @@ namespace TCC.Settings
             SkillSettingsHotkey = new HotKey(Key.K, ModifierKeys.Control);
             ReturnToLobbyHotkey = new HotKey(Key.R, ModifierKeys.Control | ModifierKeys.Alt);
             ForceClickableChatHotkey = new HotKey(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
+            ToggleBoundariesHotkey = new HotKey(Key.H, ModifierKeys.Control | ModifierKeys.Alt);
             LanguageOverride = "";
             HideHandles = false;
             HighPriority = false;

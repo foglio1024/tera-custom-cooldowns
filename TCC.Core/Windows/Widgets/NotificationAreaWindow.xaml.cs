@@ -22,6 +22,7 @@ namespace TCC.Windows.Widgets
             InitializeComponent();
             ButtonsRef = Buttons;
             MainContent = WindowContent;
+            BoundaryRef = Boundary;
             Init(vm.Settings);
             MainContent.Opacity = 1;
         }

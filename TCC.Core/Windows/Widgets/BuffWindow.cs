@@ -12,6 +12,8 @@ namespace TCC.Windows.Widgets
             DataContext = vm;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
+            BoundaryRef = Boundary;
+
             Init(App.Settings.BuffWindowSettings);
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }

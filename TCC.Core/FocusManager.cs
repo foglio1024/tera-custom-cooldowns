@@ -139,6 +139,11 @@ namespace TCC
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_TRANSPARENT);
         }
 
+        public static void FocusTera()
+        {
+            SetForegroundWindow(TeraWindow);
+        }
+
         private static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
             if (_disposed) return;
@@ -163,6 +168,9 @@ namespace TCC
         // winapi
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
         private static extern uint GetWindowLong(IntPtr hwnd, int index);

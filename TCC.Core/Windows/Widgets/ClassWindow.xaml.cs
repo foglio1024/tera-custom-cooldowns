@@ -15,6 +15,7 @@ namespace TCC.Windows.Widgets
             VM = DataContext as ClassWindowViewModel;
             InitializeComponent();
             ButtonsRef = Buttons;
+            BoundaryRef = Boundary;
             MainContent = WindowContent;
             Init(App.Settings.ClassWindowSettings);
             App.Settings.ClassWindowSettings.EnabledChanged += OnEnabledChanged;

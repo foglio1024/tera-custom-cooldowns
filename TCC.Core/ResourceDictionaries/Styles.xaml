@@ -83,6 +83,11 @@
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
         <Setter Property="Opacity" Value=".85" />
     </Style>
+    <Style TargetType="{x:Type Border}" x:Key="BoundaryBorderStyle">
+        <Setter Property="Background" Value="#1fff" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderBrush" Value="#4fff" />
+    </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="DefaultTextStyle">
         <Setter Property="UseLayoutRounding" Value="True" />

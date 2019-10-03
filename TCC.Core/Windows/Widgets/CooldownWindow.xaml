@@ -17,6 +17,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
 
         <ContentControl x:Name="WindowContent" 
                         Margin="5" 

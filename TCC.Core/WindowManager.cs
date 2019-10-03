@@ -190,7 +190,7 @@ namespace TCC
             SettingsWindow = new SettingsWindow();
 
             if (App.Settings.UseHotkeys) KeyboardHook.Instance.Enable();
-
+            KeyboardHook.Instance.RegisterCallback(App.Settings.ToggleBoundariesHotkey, TccWidget.OnShowAllHandlesToggled);
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 

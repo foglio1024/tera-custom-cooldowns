@@ -36,6 +36,13 @@ namespace TCC.Controls
         }
         public static readonly DependencyProperty HideButtonVisibilityProperty = DependencyProperty.Register("HideButtonVisibility", typeof(Visibility), typeof(WindowButtons));
 
+        public Visibility CloseButtonVisibility
+        {
+            get => (Visibility)GetValue(CloseButtonVisibilityProperty);
+            set => SetValue(CloseButtonVisibilityProperty, value);
+        }
+        public static readonly DependencyProperty CloseButtonVisibilityProperty = DependencyProperty.Register("CloseButtonVisibility", typeof(Visibility), typeof(WindowButtons));
+
         private void Hide(object sender, RoutedEventArgs e)
         {
             Dc.Visible = false;
@@ -46,17 +53,11 @@ namespace TCC.Controls
             Dc.ShowAlways = !Dc.ShowAlways;
         }
 
-
         private void Close(object sender, RoutedEventArgs e)
         {
             Dc.Enabled = false;
         }
-
-        private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
-        {
-            //_dc = DataContext as WindowSettings;
-        }
-
+        
         private void AutoDim(object sender, RoutedEventArgs e)
         {
             Dc.AutoDim = !Dc.AutoDim;

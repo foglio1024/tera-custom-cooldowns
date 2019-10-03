@@ -115,6 +115,17 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public HotKey ToggleBoundariesHotkey
+        {
+            get => App.Settings.ToggleBoundariesHotkey;
+            set
+            {
+                if (App.Settings.ToggleBoundariesHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.ToggleBoundariesHotkey, value);
+                App.Settings.ToggleBoundariesHotkey = value;
+                N();
+            }
+        }
 
         private int _khCount;
         private bool _kh;

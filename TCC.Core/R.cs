@@ -478,6 +478,7 @@ namespace TCC.R
 		public static Style BaseWindowStyle => ((Style)App.Current.FindResource("BaseWindowStyle"));
 		public static Style DefaultBorderStyle => ((Style)App.Current.FindResource("DefaultBorderStyle"));
 		public static Style RevampBorderStyle => ((Style)App.Current.FindResource("RevampBorderStyle"));
+		public static Style BoundaryBorderStyle => ((Style)App.Current.FindResource("BoundaryBorderStyle"));
 		public static Style DefaultTextStyle => ((Style)App.Current.FindResource("DefaultTextStyle"));
 		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
 		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));

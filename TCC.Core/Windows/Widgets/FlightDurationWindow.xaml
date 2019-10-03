@@ -36,6 +36,7 @@
                 </Style.Triggers>
             </Style>
         </Grid.Style>
+
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="6" EndAngle="90" Direction="Counterclockwise"
                StrokeStartLineCap="Flat" Stroke="#5fff" x:Name="Arc" Height="300" Width="300"
                OriginRotationDegrees="-45">

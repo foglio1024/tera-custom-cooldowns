@@ -17,6 +17,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+
         <Grid Grid.Row="1" Name="WindowContent">
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
@@ -24,6 +26,6 @@
             </Grid.LayoutTransform>
             <ContentControl Content="{Binding}" ContentTemplate="{Binding CurrentHHphase, Converter={StaticResource HarrowholdPhaseToLayout}}" />
         </Grid>
-        <c:WindowButtons WindowName="Boss bar" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
+        <c:WindowButtons WindowName="NPC window" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>
 </w:TccWidget>

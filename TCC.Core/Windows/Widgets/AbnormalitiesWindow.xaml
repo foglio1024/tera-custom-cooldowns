@@ -19,6 +19,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+
         <FrameworkElement FlowDirection="{Binding Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top"/>
         <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource DirectionToHorAlignConveter}}"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />

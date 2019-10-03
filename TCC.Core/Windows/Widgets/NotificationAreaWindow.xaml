@@ -6,22 +6,23 @@
         xmlns:local="clr-namespace:TCC.Windows.Widgets"
         xmlns:windows="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
-        Style="{StaticResource BaseWindowStyle}"
         d:DataContext="{d:DesignInstance local:NotificationAreaViewModel}"
-        MouseLeftButtonDown="Drag"
         mc:Ignorable="d"
-        Title="NotificationAreaWindow" Height="450" Width="200">
-    <Grid>
+        MouseLeftButtonDown="Drag"
+        Style="{StaticResource BaseWindowStyle}"
+        Title="NotificationAreaWindow" Height="450" Width="300">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Name="WindowContent" Grid.Row="1" Margin="10 0">
-            <ItemsControl ItemsSource="{Binding Notifications}">
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+        <Grid Name="WindowContent" Grid.Row="1" Margin="10 0" >
+            <ItemsControl ItemsSource="{Binding Notifications}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel/>
+                        <StackPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -35,6 +36,8 @@
                                 WindowName="Notification area"
                                 HorizontalAlignment="Left"
                                 Margin="7 0"
+                                AutoDimButtonVisiblity="Collapsed"
+                                HideButtonVisibility="Collapsed"
                                 DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=windows:TccWidget}}"/>
     </Grid>
 </windows:TccWidget>

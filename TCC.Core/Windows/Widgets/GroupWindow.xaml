@@ -23,6 +23,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
 
         <Grid Name="WindowContent" Margin="4,15,0,15" Width="Auto" ClipToBounds="False" Grid.Row="1">
             <Grid.ColumnDefinitions>

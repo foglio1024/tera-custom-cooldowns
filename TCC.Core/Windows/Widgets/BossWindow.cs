@@ -11,6 +11,7 @@ namespace TCC.Windows.Widgets
             VM = DataContext as NpcWindowViewModel;
             InitializeComponent();
             ButtonsRef = Buttons;
+            BoundaryRef = Boundary;
             MainContent = WindowContent;
             Init(App.Settings.NpcWindowSettings);
             MouseDoubleClick += (_, __) => VM.CopyToClipboard();

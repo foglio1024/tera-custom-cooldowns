@@ -171,15 +171,6 @@
                 </TextBlock>
             </Grid>
         </ToolTip>
-        <ToolTip x:Key="CenterScreenButtonTooltip" Background="Transparent">
-            <Grid Margin="5">
-                <Border Style="{StaticResource RevampBorderStyle}" />
-                <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                    <Run
-                        Text="Moves this window to the center of the primary screen. Use only in case this window is outside the screen." />
-                </TextBlock>
-            </Grid>
-        </ToolTip>
 
         <ControlTemplate x:Key="SectionHeaderTemplate">
             <Grid Height="35">
@@ -1585,6 +1576,7 @@
                             <settings:HotkeySetting SettingName="Toggle clickable chat" Value="{Binding ForceClickableChatHotkey, Mode=TwoWay}" />
                             <settings:HotkeySetting SettingName="LFG window" Value="{Binding LfgHotkey, Mode=TwoWay}" />
                             <settings:HotkeySetting SettingName="Return to lobby" Value="{Binding ReturnToLobbyHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="Toggle boundaries" Value="{Binding ToggleBoundariesHotkey, Mode=TwoWay}" />
 
                         </StackPanel>
                     </Grid>

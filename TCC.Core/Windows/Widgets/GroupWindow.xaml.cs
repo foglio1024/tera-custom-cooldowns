@@ -16,6 +16,7 @@ namespace TCC.Windows.Widgets
             DataContext = vm;
             VM = DataContext as GroupWindowViewModel;
             InitializeComponent();
+            BoundaryRef = Boundary;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
             Init(App.Settings.GroupWindowSettings);

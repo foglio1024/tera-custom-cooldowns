@@ -18,6 +18,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+
             <Border Background="{StaticResource RevampBackgroundBrush}" BorderBrush="{StaticResource RevampBorderBrush}"
                 BorderThickness="1" Grid.RowSpan="2" Opacity=".5" >
                 <Border.Effect>
