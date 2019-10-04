@@ -209,8 +209,43 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
 
-        <Style TargetType="settings:CheckboxSetting">
+        <Style TargetType="{x:Type settings:CheckboxSetting}">
             <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Opacity" Value=".3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="settings:ValueSetting">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Opacity" Value=".3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="settings:FieldSetting">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Opacity" Value=".3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="settings:SelectionSetting">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Opacity" Value=".3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="settings:HotkeySetting">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Opacity" Value=".3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="EnabledSettingStyle" TargetType="settings:CheckboxSetting"
@@ -240,18 +275,18 @@
             <Setter Property="SettingName" Value="Auto dim" />
             <Setter Property="ToolTip" Value="{StaticResource AutoDimSettingTooltip}" />
         </Style>
-        <Style x:Key="ScaleSettingStyle" TargetType="settings:ValueSetting">
+        <Style x:Key="ScaleSettingStyle" TargetType="settings:ValueSetting" BasedOn="{StaticResource {x:Type settings:ValueSetting}}">
             <Setter Property="SettingName" Value="Scale" />
             <Setter Property="Min" Value="0" />
             <Setter Property="Max" Value="3" />
         </Style>
-        <Style x:Key="DimOpacitySettingStyle" TargetType="settings:ValueSetting">
+        <Style x:Key="DimOpacitySettingStyle" TargetType="settings:ValueSetting" BasedOn="{StaticResource {x:Type settings:ValueSetting}}">
             <Setter Property="SettingName" Value="Dim opacity" />
             <Setter Property="Min" Value="0" />
             <Setter Property="Max" Value="1" />
             <Setter Property="ToolTip" Value="{StaticResource DimOpacitySettingTooltip}" />
         </Style>
-        <Style x:Key="ClickThruSettingStyle" TargetType="settings:SelectionSetting">
+        <Style x:Key="ClickThruSettingStyle" TargetType="settings:SelectionSetting" BasedOn="{StaticResource {x:Type settings:SelectionSetting}}">
             <Setter Property="SettingName" Value="Click through mode" />
             <Setter Property="Choices" Value="{Binding ClickThruModes, Mode=OneWay}" />
             <Setter Property="ChoicesType" Value="{x:Type data:ClickThruMode}" />
@@ -306,7 +341,7 @@
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 HorizontalAlignment="Stretch" />
         <!-- Title bar -->
-        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch">
+        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -387,32 +422,41 @@
                             <settings:CheckboxSetting IsOn="{Binding CooldownWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding CooldownWindowSettings.Visible, Mode=TwoWay}"
-                                                      Style="{StaticResource VisibilitySettingStyle}" />
+                                                      Style="{StaticResource VisibilitySettingStyle}" 
+                                                      IsEnabled="{Binding CooldownWindowSettings.Enabled}" />
                             <settings:CheckboxSetting IsOn="{Binding CooldownWindowSettings.ShowAlways, Mode=TwoWay}"
-                                                      Style="{StaticResource ShowAlwaysSettingStyle}" />
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}" 
+                                                      IsEnabled="{Binding CooldownWindowSettings.Enabled}"/>
                             <settings:CheckboxSetting
                                 IsOn="{Binding CooldownWindowSettings.AllowOffScreen, Mode=TwoWay}"
-                                Style="{StaticResource AllowOffscreenSettingStyle}" />
+                                Style="{StaticResource AllowOffscreenSettingStyle}"
+                                IsEnabled="{Binding CooldownWindowSettings.Enabled}" />
                             <settings:CheckboxSetting IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}"
-                                                      Style="{StaticResource AutoDimSettingStyle}" />
+                                                      Style="{StaticResource AutoDimSettingStyle}" 
+                                                      IsEnabled="{Binding CooldownWindowSettings.Enabled}"/>
                             <settings:SelectionSetting
                                 SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}"
-                                Style="{StaticResource ClickThruSettingStyle}" />
+                                Style="{StaticResource ClickThruSettingStyle}" 
+                                IsEnabled="{Binding CooldownWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}"
-                                                   Style="{StaticResource ScaleSettingStyle}" />
+                                                   Style="{StaticResource ScaleSettingStyle}" 
+                                                   IsEnabled="{Binding CooldownWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}"
-                                                   Style="{StaticResource DimOpacitySettingStyle}" />
+                                                   Style="{StaticResource DimOpacitySettingStyle}"
+                                                   IsEnabled="{Binding CooldownWindowSettings.Enabled}" />
                         </StackPanel>
                         <!-- Specific -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:CheckboxSetting IsOn="{Binding CooldownWindowSettings.ShowItems, Mode=TwoWay}"
-                                                      SettingName="Show items cooldown" />
+                                                      SettingName="Show items cooldown"
+                                                      IsEnabled="{Binding CooldownWindowSettings.Enabled}" />
                             <settings:SelectionSetting SettingName="Cooldown bar mode"
                                                        SelectedItem="{Binding CooldownWindowSettings.Mode, Mode=TwoWay}"
                                                        Choices="{Binding CooldownBarModes}"
-                                                       ChoicesType="{x:Type data:CooldownBarMode}">
+                                                       ChoicesType="{x:Type data:CooldownBarMode}"
+                                                       IsEnabled="{Binding CooldownWindowSettings.Enabled}">
                                 <settings:SelectionSetting.ToolTip>
                                     <ToolTip Background="Transparent">
                                         <Grid Margin="5">
@@ -441,13 +485,15 @@
                             <settings:SelectionSetting SettingName="Skills shape"
                                                        SelectedItem="{Binding SkillShape, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:ControlShape}"
-                                                       Choices="{Binding ControlShapes, Mode=OneWay}" />
+                                                       Choices="{Binding ControlShapes, Mode=OneWay}" 
+                                                       IsEnabled="{Binding CooldownWindowSettings.Enabled}"/>
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
+                                    IsEnabled="{Binding CooldownWindowSettings.Enabled}"
                                     Command="{Binding CooldownWindowSettings.ResetPositionCommand}" />
                         </StackPanel>
                     </Grid>
@@ -485,35 +531,44 @@
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.Visible, Mode=TwoWay}"
-                                                      Style="{StaticResource VisibilitySettingStyle}" />
+                                                      Style="{StaticResource VisibilitySettingStyle}" 
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.ShowAlways, Mode=TwoWay}"
-                                                      Style="{StaticResource ShowAlwaysSettingStyle}" />
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}" 
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                             <settings:CheckboxSetting
                                 IsOn="{Binding CharacterWindowSettings.AllowOffScreen, Mode=TwoWay}"
-                                Style="{StaticResource AllowOffscreenSettingStyle}" />
+                                Style="{StaticResource AllowOffscreenSettingStyle}" 
+                                IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}"
-                                                      Style="{StaticResource AutoDimSettingStyle}" />
+                                                      Style="{StaticResource AutoDimSettingStyle}"
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}" />
                             <settings:SelectionSetting
                                 SelectedItem="{Binding CharacterWindowSettings.ClickThruMode, Mode=TwoWay}"
-                                Style="{StaticResource ClickThruSettingStyle}" />
+                                Style="{StaticResource ClickThruSettingStyle}" 
+                                IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}"
-                                                   Style="{StaticResource ScaleSettingStyle}" />
+                                                   Style="{StaticResource ScaleSettingStyle}" 
+                                                   IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}"
-                                                   Style="{StaticResource DimOpacitySettingStyle}" />
+                                                   Style="{StaticResource DimOpacitySettingStyle}"
+                                                   IsEnabled="{Binding CharacterWindowSettings.Enabled}" />
                         </StackPanel>
                         <!-- Specific -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.CompactMode, Mode=TwoWay}"
-                                                      SettingName="Compact mode" />
+                                                      SettingName="Compact mode" 
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
-                                    Command="{Binding CharacterWindowSettings.ResetPositionCommand}" />
+                                    Command="{Binding CharacterWindowSettings.ResetPositionCommand}" 
+                                    IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -550,27 +605,35 @@
                             <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.Visible, Mode=TwoWay}"
-                                                      Style="{StaticResource VisibilitySettingStyle}" />
+                                                      Style="{StaticResource VisibilitySettingStyle}" 
+                                                      IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.ShowAlways, Mode=TwoWay}"
-                                                      Style="{StaticResource ShowAlwaysSettingStyle}" />
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}"
+                                                      IsEnabled="{Binding NpcWindowSettings.Enabled}" />
                             <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.AllowOffScreen, Mode=TwoWay}"
-                                                      Style="{StaticResource AllowOffscreenSettingStyle}" />
+                                                      Style="{StaticResource AllowOffscreenSettingStyle}" 
+                                                      IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:CheckboxSetting IsOn="{Binding NpcWindowSettings.AutoDim, Mode=TwoWay}"
-                                                      Style="{StaticResource AutoDimSettingStyle}" />
+                                                      Style="{StaticResource AutoDimSettingStyle}" 
+                                                      IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:SelectionSetting
                                 SelectedItem="{Binding NpcWindowSettings.ClickThruMode, Mode=TwoWay}"
-                                Style="{StaticResource ClickThruSettingStyle}" />
+                                Style="{StaticResource ClickThruSettingStyle}" 
+                                IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding NpcWindowSettings.Scale, Mode=TwoWay}"
-                                                   Style="{StaticResource ScaleSettingStyle}" />
+                                                   Style="{StaticResource ScaleSettingStyle}" 
+                                                   IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding NpcWindowSettings.DimOpacity, Mode=TwoWay}"
-                                                   Style="{StaticResource DimOpacitySettingStyle}" />
+                                                   Style="{StaticResource DimOpacitySettingStyle}" 
+                                                   IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                         </StackPanel>
                         <!-- Specific -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:CheckboxSetting SettingName="Hide adds"
-                                                      IsOn="{Binding NpcWindowSettings.HideAdds, Mode=TwoWay}">
+                                                      IsOn="{Binding NpcWindowSettings.HideAdds, Mode=TwoWay}"
+                                                      IsEnabled="{Binding NpcWindowSettings.Enabled}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <ToolTip>
                                         <Grid Margin="5">
@@ -585,7 +648,8 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Accurate HP detection"
-                                                      IsOn="{Binding NpcWindowSettings.AccurateHp, Mode=TwoWay}">
+                                                      IsOn="{Binding NpcWindowSettings.AccurateHp, Mode=TwoWay}"
+                                                      IsEnabled="{Binding NpcWindowSettings.Enabled}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -598,6 +662,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:SelectionSetting SettingName="Enrage label mode"
+                                                       IsEnabled="{Binding NpcWindowSettings.Enabled}"
                                                        SelectedItem="{Binding NpcWindowSettings.EnrageLabelMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:EnrageLabelMode}"
                                                        Choices="{Binding EnrageLabelModes, Mode=OneWay}" />
@@ -607,6 +672,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
+                                    IsEnabled="{Binding NpcWindowSettings.Enabled}"
                                     Command="{Binding NpcWindowSettings.ResetPositionCommand}" />
                         </StackPanel>
                     </Grid>
@@ -644,26 +710,34 @@
                             <settings:CheckboxSetting IsOn="{Binding BuffWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding BuffWindowSettings.Visible, Mode=TwoWay}"
-                                                      Style="{StaticResource VisibilitySettingStyle}" />
+                                                      Style="{StaticResource VisibilitySettingStyle}"
+                                                      IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <settings:CheckboxSetting IsOn="{Binding BuffWindowSettings.ShowAlways, Mode=TwoWay}"
-                                                      Style="{StaticResource ShowAlwaysSettingStyle}" />
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}" 
+                                                      IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <settings:CheckboxSetting IsOn="{Binding BuffWindowSettings.AllowOffScreen, Mode=TwoWay}"
-                                                      Style="{StaticResource AllowOffscreenSettingStyle}" />
+                                                      Style="{StaticResource AllowOffscreenSettingStyle}"
+                                                      IsEnabled="{Binding BuffWindowSettings.Enabled}"  />
                             <settings:CheckboxSetting IsOn="{Binding BuffWindowSettings.AutoDim, Mode=TwoWay}"
-                                                      Style="{StaticResource AutoDimSettingStyle}" />
+                                                      Style="{StaticResource AutoDimSettingStyle}" 
+                                                      IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <settings:SelectionSetting
                                 SelectedItem="{Binding BuffWindowSettings.ClickThruMode, Mode=TwoWay}"
-                                Style="{StaticResource ClickThruSettingStyle}" />
+                                Style="{StaticResource ClickThruSettingStyle}" 
+                                IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <settings:ValueSetting Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}"
-                                                   Style="{StaticResource ScaleSettingStyle}" />
+                                                   Style="{StaticResource ScaleSettingStyle}" 
+                                                   IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <settings:ValueSetting Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}"
-                                                   Style="{StaticResource DimOpacitySettingStyle}" />
+                                                   Style="{StaticResource DimOpacitySettingStyle}" 
+                                                   IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                         </StackPanel>
                         <!-- Specific -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:SelectionSetting SettingName="Direction"
+                                                       IsEnabled="{Binding BuffWindowSettings.Enabled}" 
                                                        ChoicesType="{x:Type FlowDirection}"
                                                        Choices="{Binding FlowDirections, Mode=OneWay}"
                                                        SelectedItem="{Binding BuffWindowSettings.Direction, Mode=TwoWay}" />
@@ -673,11 +747,14 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
-                                    Command="{Binding BuffWindowSettings.ResetPositionCommand}" />
+                                    Command="{Binding BuffWindowSettings.ResetPositionCommand}"
+                                    IsEnabled="{Binding BuffWindowSettings.Enabled}"  />
                             <!--Add My Abnormals Setting by HQ=======================================================-->
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Open buffs settings"
-                                    Click="OpenPlayerBuffSettings" />
+                                    Command="{Binding OpenWindowCommand}"
+                                    CommandParameter="{x:Type local:MyAbnormalConfigWindow}"
+                                    IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <!--=====================================================================================-->
 
                         </StackPanel>
@@ -716,19 +793,26 @@
                             <settings:CheckboxSetting IsOn="{Binding ClassWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding ClassWindowSettings.Visible, Mode=TwoWay}"
-                                                      Style="{StaticResource VisibilitySettingStyle}" />
+                                                      Style="{StaticResource VisibilitySettingStyle}" 
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}" />
                             <settings:CheckboxSetting IsOn="{Binding ClassWindowSettings.ShowAlways, Mode=TwoWay}"
-                                                      Style="{StaticResource ShowAlwaysSettingStyle}" />
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}"
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}"  />
                             <settings:CheckboxSetting IsOn="{Binding ClassWindowSettings.AllowOffScreen, Mode=TwoWay}"
-                                                      Style="{StaticResource AllowOffscreenSettingStyle}" />
+                                                      Style="{StaticResource AllowOffscreenSettingStyle}"
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}"  />
                             <settings:CheckboxSetting IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}"
-                                                      Style="{StaticResource AutoDimSettingStyle}" />
+                                                      Style="{StaticResource AutoDimSettingStyle}" 
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}" />
                             <settings:SelectionSetting
+                                IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                 SelectedItem="{Binding ClassWindowSettings.ClickThruMode, Mode=TwoWay}"
                                 Style="{StaticResource ClickThruSettingStyle}" />
                             <settings:ValueSetting Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}"
+                                                   IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
                             <settings:ValueSetting Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                    Style="{StaticResource DimOpacitySettingStyle}" />
                         </StackPanel>
                         <!-- Specific -->
@@ -739,9 +823,11 @@
                             <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Warrior" />
                             <settings:CheckboxSetting SettingName="Show Edge"
                                                       IsOn="{Binding ClassWindowSettings.WarriorShowEdge, Mode=TwoWay}"
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                       Margin="0 0 15 0" />
                             <settings:SelectionSetting SettingName="Edge mode"
                                                        SelectedItem="{Binding ClassWindowSettings.WarriorEdgeMode, Mode=TwoWay}"
+                                                       IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                        ChoicesType="{x:Type data:WarriorEdgeMode}"
                                                        Choices="{Binding WarriorEdgeModes, Mode=OneWay}"
                                                        Margin="0 0 15 0" />
@@ -749,6 +835,7 @@
                             <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Sorcerer" />
                             <settings:CheckboxSetting SettingName="Replaces char window elements"
                                                       IsOn="{Binding ClassWindowSettings.SorcererReplacesElementsInCharWindow, Mode=TwoWay}"
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                       Margin="0 0 15 0">
                                 <FrameworkElement.ToolTip>
                                     <Grid Margin="5">
@@ -767,6 +854,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
+                                    IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                     Command="{Binding ClassWindowSettings.ResetPositionCommand}" />
                         </StackPanel>
                     </Grid>
@@ -803,19 +891,26 @@
                             <settings:CheckboxSetting IsOn="{Binding GroupWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding GroupWindowSettings.Visible, Mode=TwoWay}"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       Style="{StaticResource VisibilitySettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding GroupWindowSettings.ShowAlways, Mode=TwoWay}"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding GroupWindowSettings.AllowOffScreen, Mode=TwoWay}"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       Style="{StaticResource AllowOffscreenSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       Style="{StaticResource AutoDimSettingStyle}" />
                             <settings:SelectionSetting 
                                 SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}"
+                                IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                 Style="{StaticResource ClickThruSettingStyle}" />
                             <settings:ValueSetting Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
                             <settings:ValueSetting Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Style="{StaticResource DimOpacitySettingStyle}" />
                         </StackPanel>
                         <!-- Specific -->
@@ -823,7 +918,8 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:ValueSetting SettingName="Raid threshold" Min="1" Max="30"
-                                                   Value="{Binding GroupWindowSettings.GroupSizeThreshold, Mode=TwoWay}">
+                                                   Value="{Binding GroupWindowSettings.GroupSizeThreshold, Mode=TwoWay}"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" >
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" />
@@ -835,6 +931,7 @@
                             </settings:ValueSetting>
 
                             <settings:ValueSetting SettingName="Hide buffs threshold"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Value="{Binding GroupWindowSettings.HideBuffsThreshold, Mode=TwoWay}"
                                                    Max="30"
                                                    Min="1">
@@ -850,7 +947,8 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Hide debuffs threshold"
-                                                   Value="{Binding GroupWindowSettings.HideDebuffsThreshold, Mode=TwoWay}" Max="30" Min="1">
+                                                   Value="{Binding GroupWindowSettings.HideDebuffsThreshold, Mode=TwoWay}" 
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" Max="30" Min="1">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -863,6 +961,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Disable (de)buffs threshold"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Value="{Binding GroupWindowSettings.DisableAbnormalitiesThreshold, Mode=TwoWay}"
                                                    Min="1" Max="30">
                                 <settings:ValueSetting.ToolTip>
@@ -890,6 +989,7 @@
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Disable HP threshold"
                                                    Value="{Binding GroupWindowSettings.HideHpThreshold, Mode=TwoWay}"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Max="30" Min="1">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -901,7 +1001,8 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Disable MP threshold"
-                                                   Value="{Binding GroupWindowSettings.HideMpThreshold, Mode=TwoWay}" Max="30" Min="1">
+                                                   Value="{Binding GroupWindowSettings.HideMpThreshold, Mode=TwoWay}" 
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" Max="30" Min="1">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -912,6 +1013,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:CheckboxSetting SettingName="Hide me"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       IsOn="{Binding GroupWindowSettings.IgnoreMe, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -928,6 +1030,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show only aggro debuff in HH"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       IsOn="{Binding GroupWindowSettings.ShowOnlyAggroStacks, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -945,8 +1048,10 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show HP numbers"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       IsOn="{Binding GroupWindowSettings.ShowHpLabels, Mode=TwoWay}"/>
                             <settings:CheckboxSetting SettingName="Show laurels"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       IsOn="{Binding GroupWindowSettings.ShowLaurels, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -957,6 +1062,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show awaken icon"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       IsOn="{Binding GroupWindowSettings.ShowAwakenIcon, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -967,6 +1073,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show group info"
+                                                      IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                       IsOn="{Binding GroupWindowSettings.ShowDetails, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -977,6 +1084,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:SelectionSetting SettingName="Group window layout"
+                                                       IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                        SelectedItem="{Binding GroupWindowSettings.Layout, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:GroupWindowLayout}"
                                                        Choices="{Binding GroupWindowLayouts, Mode=OneWay}" />
@@ -986,10 +1094,14 @@
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
+                                    IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                     Content="Move window to center screen"
                                     Command="{Binding GroupWindowSettings.ResetPositionCommand}" />
                             <Button Style="{StaticResource SettingsButton}"
-                                    Click="OpenGroupBuffSettings" Content="Open group buff settings" />
+                                    IsEnabled="{Binding GroupWindowSettings.Enabled}" 
+                                    Command="{Binding OpenWindowCommand}"
+                                    CommandParameter="{x:Type local:GroupAbnormalConfigWindow}"
+                                    Content="Open group buff settings" />
 
                         </StackPanel>
                     </Grid>
@@ -1035,6 +1147,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:ValueSetting SettingName="Max messages" Min="0" Max="10000"
+                                                   IsEnabled="{Binding ChatWindowEnabled}" 
                                                    Value="{Binding MaxMessages, Mode=TwoWay}">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1048,6 +1161,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Spam threshold" Min="0" Max="10"
+                                                   IsEnabled="{Binding ChatWindowEnabled}" 
                                                    Value="{Binding SpamThreshold, Mode=TwoWay}">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1061,6 +1175,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:ValueSetting SettingName="Scroll amount" Min="1" Max="10"
+                                                   IsEnabled="{Binding ChatWindowEnabled}" 
                                                    Value="{Binding ChatScrollAmount, Mode=TwoWay}">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1084,6 +1199,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>-->
                             <settings:ValueSetting SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}"
+                                                   IsEnabled="{Binding ChatWindowEnabled}" 
                                                    Min="10" Max="50">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1096,6 +1212,7 @@
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
                             <settings:CheckboxSetting SettingName="Show timestamps"
+                                                      IsEnabled="{Binding ChatWindowEnabled}" 
                                                       IsOn="{Binding ShowTimestamp, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1108,6 +1225,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show seconds in timestamp"
+                                                      IsEnabled="{Binding ChatWindowEnabled}" 
                                                       IsOn="{Binding ChatTimestampSeconds, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1120,6 +1238,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Show channel label"
+                                                      IsEnabled="{Binding ChatWindowEnabled}" 
                                                       IsOn="{Binding ShowChannel, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1142,6 +1261,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>-->
                             <settings:CheckboxSetting SettingName="Animate chat messages"
+                                                      IsEnabled="{Binding ChatWindowEnabled}" 
                                                       IsOn="{Binding AnimateChatMessages, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1155,6 +1275,7 @@
                             </settings:CheckboxSetting>
 
                             <settings:CheckboxSetting SettingName="Disable LFG messages sync"
+                                                      IsEnabled="{Binding ChatWindowEnabled}" 
                                                       IsOn="{Binding DisableLfgChatMessages, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1173,11 +1294,13 @@
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
+                                    IsEnabled="{Binding ChatWindowEnabled}" 
                                     Content="Move window to center screen"
-                                    Click="ResetChatWindowsPosition" />
+                                    Command="{Binding ResetChatPositionsCommand}"/>
                             <Button Style="{StaticResource SettingsButton}"
+                                    IsEnabled="{Binding ChatWindowEnabled}" 
                                     Content="Clear chat messages"
-                                    Click="ClearChatMessages" />
+                                    Command="{Binding ClearChatCommand}" />
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -1213,19 +1336,26 @@
                             <settings:CheckboxSetting IsOn="{Binding CuWindowSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding CuWindowSettings.Visible, Mode=TwoWay}"
+                                                      IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                       Style="{StaticResource VisibilitySettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding CuWindowSettings.ShowAlways, Mode=TwoWay}"
+                                                      IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding CuWindowSettings.AllowOffScreen, Mode=TwoWay}"
+                                                      IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                       Style="{StaticResource AllowOffscreenSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding CuWindowSettings.AutoDim, Mode=TwoWay}"
+                                                      IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                       Style="{StaticResource AutoDimSettingStyle}" />
                             <settings:SelectionSetting
                                 SelectedItem="{Binding CuWindowSettings.ClickThruMode, Mode=TwoWay}"
+                                IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                 Style="{StaticResource ClickThruSettingStyle}" />
                             <settings:ValueSetting Value="{Binding CuWindowSettings.Scale, Mode=TwoWay}"
+                                                   IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
                             <settings:ValueSetting Value="{Binding CuWindowSettings.DimOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                    Style="{StaticResource DimOpacitySettingStyle}" />
                         </StackPanel>
                         <!-- Actions -->
@@ -1233,6 +1363,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move window to center screen"
+                                    IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                     Command="{Binding CuWindowSettings.ResetPositionCommand}" />
                         </StackPanel>
                     </Grid>
@@ -1269,13 +1400,17 @@
                             <settings:CheckboxSetting IsOn="{Binding NotificationAreaSettings.Enabled, Mode=TwoWay}"
                                                       Style="{StaticResource EnabledSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding NotificationAreaSettings.ShowAlways, Mode=TwoWay}"
+                                                      IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" />
                             <settings:CheckboxSetting IsOn="{Binding NotificationAreaSettings.AllowOffScreen, Mode=TwoWay}"
+                                                      IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                                       Style="{StaticResource AllowOffscreenSettingStyle}" />
                             <settings:SelectionSetting 
                                 SelectedItem="{Binding NotificationAreaSettings.ClickThruMode, Mode=TwoWay}"
+                                IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                 Style="{StaticResource ClickThruSettingStyle}" />
                             <settings:ValueSetting Value="{Binding NotificationAreaSettings.Scale, Mode=TwoWay}"
+                                                   IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
                         </StackPanel>
                         <!-- Specific -->
@@ -1283,6 +1418,7 @@
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
                             <settings:ValueSetting Value="{Binding NotificationAreaSettings.MaxNotifications, Mode=TwoWay}"
+                                                   IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                                     SettingName="Max notifications" Min="1" Max="5">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1300,9 +1436,11 @@
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />
                             <Button Style="{StaticResource SettingsButton}"
+                                    IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                     Content="Move window to center screen"
                                     Command="{Binding GroupWindowSettings.ResetPositionCommand}" />
                             <Button Style="{StaticResource SettingsButton}"
+                                    IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                     Click="TestNotification" Content="Send test notification" />
 
                         </StackPanel>
@@ -1368,7 +1506,7 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Check opcodes file hash"
+                            <!--<settings:CheckboxSetting SettingName="Check opcodes file hash"
                                                       IsOn="{Binding CheckOpcodesHash, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1383,9 +1521,9 @@
                                         </TextBlock>
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
+                            </settings:CheckboxSetting>-->
                             <!-- ===================== by HQ 20190324 ===================== -->
-                            <settings:CheckboxSetting SettingName="Check Guild BAM without opcode"
+                            <!--<settings:CheckboxSetting SettingName="Check Guild BAM without opcode"
                                                       IsOn="{Binding CheckGuildBamWithoutOpcode, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1400,7 +1538,7 @@
                                         </TextBlock>
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
+                            </settings:CheckboxSetting>-->
                             <!-- ========================================================== -->
                             <settings:CheckboxSetting SettingName="'Ethical mode'"
                                                       IsOn="{Binding EthicalMode, Mode=TwoWay}">
@@ -1417,18 +1555,6 @@
                                             <Run Text="- Dragon passive cooldown" /><LineBreak />
                                             <Run Text="- Insigna of the punisher cooldown" /><LineBreak />
                                             <Run Text="- Concentration cooldown" />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Use hotkeys"
-                                                      IsOn="{Binding UseHotkeys, Mode=TwoWay}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                                   MaxWidth="200">
-                                            <Run Text="Enables/disables keyboard hook." />
                                         </TextBlock>
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
@@ -1514,6 +1640,7 @@
 
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Auto fps mode"
+                                                      IsEnabled="{Binding EnableProxy}" 
                                                       IsOn="{Binding FpsAtGuardian, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1530,13 +1657,13 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Experimental builds notification"
+                            <settings:CheckboxSetting SettingName="Beta builds notification"
                                                       IsOn="{Binding ExperimentalNotification, Mode=TwoWay}"
                                                       Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}" />
                             <Button Style="{StaticResource SettingsButton}"
-                                    Content="Download experimental build"
-                                    Click="ForceExperimentalBuildDownlaod"
-                                    Background="{StaticResource AssaultStanceBrush}"
+                                    Content="Download beta build"
+                                    Command="{Binding DownloadBetaCommand}"
+                                    Background="{StaticResource TccRedGradientBrush}"
                                     Foreground="White"
                                     Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}" />
 
@@ -1547,7 +1674,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Hotkeys settings" />
+                                <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Hotkeys settings" />
                                 <Path Grid.Column="1" Data="{StaticResource SvgInfo}"
                                   Height="16" Opacity=".2" Margin="0 0 7 0">
                                     <Path.ToolTip>
@@ -1569,14 +1696,26 @@
                                     </Path.ToolTip>
                                 </Path>
                             </Grid>
+                            <settings:CheckboxSetting SettingName="Enabled"
+                                                      IsOn="{Binding UseHotkeys, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run Text="Enables/disables keyboard hooks." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
 
-                            <settings:HotkeySetting SettingName="Settings" Value="{Binding SettingsHotkey, Mode=TwoWay}" />
-                            <settings:HotkeySetting SettingName="Configure skills" Value="{Binding SkillSettingsHotkey, Mode=TwoWay}" />
-                            <settings:HotkeySetting SettingName="Dashboard" Value="{Binding DashboardHotkey, Mode=TwoWay}" />
-                            <settings:HotkeySetting SettingName="Toggle clickable chat" Value="{Binding ForceClickableChatHotkey, Mode=TwoWay}" />
-                            <settings:HotkeySetting SettingName="LFG window" Value="{Binding LfgHotkey, Mode=TwoWay}" />
-                            <settings:HotkeySetting SettingName="Return to lobby" Value="{Binding ReturnToLobbyHotkey, Mode=TwoWay}" />
-                            <settings:HotkeySetting SettingName="Toggle boundaries" Value="{Binding ToggleBoundariesHotkey, Mode=TwoWay}" />
+                            <settings:HotkeySetting SettingName="Settings" Value="{Binding SettingsHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="Configure skills" Value="{Binding SkillSettingsHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="Dashboard" Value="{Binding DashboardHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="Toggle clickable chat" Value="{Binding ForceClickableChatHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="LFG window" Value="{Binding LfgHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="Return to lobby" Value="{Binding ReturnToLobbyHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="Toggle boundaries" Value="{Binding ToggleBoundariesHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
 
                         </StackPanel>
                     </Grid>
@@ -1618,7 +1757,9 @@
                             <settings:FieldSetting SettingName="Webhook"
                                                    Value="{Binding WebhookUrlGuildBam, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Message" Value="{Binding WebhookMessageGuildBam, Mode=TwoWay}" />
-                            <Button Style="{StaticResource SettingsButton}" Click="RegisterGuildBamWebhook"
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding RegisterWebhookCommand}"
+                                    CommandParameter="{Binding WebhookUrlGuildBam}"
                                     Content="Confirm" />
                         </StackPanel>
                         <!-- Discord -->
@@ -1631,7 +1772,9 @@
                                                    Value="{Binding WebhookUrlFieldBoss, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Spawn message" Value="{Binding WebhookMessageFieldBossSpawn, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Death message" Value="{Binding WebhookMessageFieldBossDie, Mode=TwoWay}" />
-                            <Button Style="{StaticResource SettingsButton}" Click="RegisterFieldBossWebhook"
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    CommandParameter="{Binding WebhookUrlFieldBoss}"
+                                    Command="{Binding RegisterWebhookCommand}"
                                     Content="Confirm" />
                         </StackPanel>
 
@@ -1683,13 +1826,17 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:SelectionSetting Style="{StaticResource ClickThruSettingStyle}"
+                                                       IsEnabled="{Binding FlightWindowSettings.Enabled}"
                                                        SelectedItem="{Binding FlightWindowSettings.ClickThruMode, Mode=TwoWay}" />
                             <settings:CheckboxSetting SettingName="Flip gauge"
+                                                      IsEnabled="{Binding FlightWindowSettings.Enabled}"
                                                       IsOn="{Binding FlightWindowSettings.Flip, Mode=TwoWay}" />
                             <settings:ValueSetting SettingName="Gauge rotation"
+                                                   IsEnabled="{Binding FlightWindowSettings.Enabled}"
                                                    Min="0" Max="360" Value="{Binding FlightWindowSettings.Rotation, Mode=TwoWay}" />
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Move gauge to center screen"
+                                    IsEnabled="{Binding FlightWindowSettings.Enabled}"
                                     Command="{Binding FlightWindowSettings.ResetPositionCommand}" />
 
                         </StackPanel>
@@ -1719,6 +1866,7 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Hide trade listings"
+                                                      IsEnabled="{Binding LfgWindowSettings.Enabled}"
                                                       IsOn="{Binding LfgWindowSettings.HideTradeListings, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>
                                     <Grid Margin="5">
@@ -1735,7 +1883,8 @@
 
                         <StackPanel Grid.Row="1" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Windows actions" />
-                            <Button Style="{StaticResource SettingsButton}" Click="MakePositionsGlobal"
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding MakePositionsGlobalCommand}"
                                     Content="Copy current window positions to all classes">
                                 <Button.ToolTip>
                                     <Grid Margin="5">
@@ -1747,7 +1896,8 @@
                                     </Grid>
                                 </Button.ToolTip>
                             </Button>
-                            <Button Style="{StaticResource SettingsButton}" Click="WindowPositionsReset"
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding ResetWindowPositionsCommand}"
                                     Content="Move all windows to center screen">
                                 <Button.ToolTip>
                                     <Grid Margin="5">
@@ -1759,14 +1909,13 @@
                                         </TextBlock>
                                     </Grid>
                                 </Button.ToolTip>
-
                             </Button>
-
                         </StackPanel>
 
                         <StackPanel Grid.Row="2" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Misc actions" />
-                            <Button Style="{StaticResource SettingsButton}" Click="OpenResourcesFolder"
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding OpenResourcesFolderCommand}"
                                     Content="Open config folder">
                                 <Button.ToolTip>
                                     <Grid Margin="5">
@@ -1778,9 +1927,7 @@
                                     </Grid>
                                 </Button.ToolTip>
                             </Button>
-
                         </StackPanel>
-
                     </Grid>
                 </TabItem>
                 <!-- P2W settings -->
@@ -1898,7 +2045,8 @@
                         <StackPanel>
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="TCC Github" />
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToWiki">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://github.com/Foglio1024/Tera-custom-cooldowns/wiki">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -1917,7 +2065,8 @@
 
                             </Button>
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToReleases">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://github.com/Foglio1024/Tera-custom-cooldowns/releases">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -1936,7 +2085,8 @@
 
                             </Button>
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToIssues">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://github.com/Foglio1024/Tera-custom-cooldowns/issues">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -1959,7 +2109,8 @@
                         <StackPanel Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Discord" />
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToTeraDpsDiscord">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://discord.gg/anUXQTp">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -1978,7 +2129,9 @@
 
                             </Button>
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToCaaliModsDiscord">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://discord.gg/dUNDDtw"
+                                    Background="{StaticResource ToolboxBrush}">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -1991,7 +2144,7 @@
                                         VerticalAlignment="Center"
                                         Margin="5 0"
                                         Data="{StaticResource SvgDiscord}" MaxWidth="16" />
-                                    <TextBlock Text="Caali's Mods"
+                                    <TextBlock Text="TERA Toolbox"
                                                Grid.Column="1" Margin="0" />
                                 </Grid>
 
@@ -2001,7 +2154,9 @@
                         <StackPanel Grid.Row="2">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Other projects" />
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToTccStub">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://github.com/Foglio1024/tcc-stub"
+                                    >
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -2017,8 +2172,11 @@
                                     <TextBlock Text="tcc-stub" Grid.Column="1" />
                                 </Grid>
                             </Button>
-                            <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToChat2">
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://github.com/Foglio1024/S1UI_chat2/blob/master/p75/S1UI_Chat2.gpk"
+                                    HorizontalContentAlignment="Left"
+                                    >
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -2035,7 +2193,8 @@
                                 </Grid>
                             </Button>
                             <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToRestyle">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://github.com/Foglio1024/tera-modern-ui/wiki">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -2048,11 +2207,13 @@
                                         VerticalAlignment="Center"
                                         Margin="5 0"
                                         Data="{StaticResource SvgGitHub}" MaxWidth="16" />
-                                    <TextBlock Text="TERA restyle" Grid.Column="1" />
+                                    <TextBlock Text="TERA Modern UI" Grid.Column="1" />
                                 </Grid>
                             </Button>
-                            <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
-                                    Click="GoToBamTimes">
+                            <Button Style="{StaticResource SettingsButton}"
+                                    HorizontalContentAlignment="Left"
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://tcc-web-99a64.firebaseapp.com/">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -2072,9 +2233,11 @@
                         <!-- Discord -->
                         <StackPanel Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Donate" />
-                            <Button Style="{StaticResource SettingsButton}" HorizontalContentAlignment="Left"
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    HorizontalContentAlignment="Left"
                                     Background="{StaticResource GoldBrush}"
-                                    Click="GoToPaypal">
+                                    Command="{Binding BrowseUrlCommand}"
+                                    CommandParameter="https://paypal.me/foglio1024">
                                 <Grid Width="Auto" Height="Auto" Margin="0 0" HorizontalAlignment="Stretch"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>

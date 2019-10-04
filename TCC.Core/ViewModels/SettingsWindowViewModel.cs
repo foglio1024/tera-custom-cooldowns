@@ -2,16 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using TCC.Controls;
 using TCC.Data;
-using TCC.Parsing;
+using TCC.Interop;
 using TCC.Settings;
 using TCC.Utilities;
-using TCC.ViewModels.Widgets;
 using TCC.Windows;
+using CaptureMode = TCC.Data.CaptureMode;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
@@ -35,8 +39,18 @@ namespace TCC.ViewModels
         public FlightWindowSettings FlightWindowSettings => App.Settings.FlightGaugeWindowSettings;
         public FloatingButtonWindowSettings FloatingButtonSettings => App.Settings.FloatingButtonSettings;
         public CivilUnrestWindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
-        public LfgWindowSettings LfgWindowSettings=> App.Settings.LfgWindowSettings;
+        public LfgWindowSettings LfgWindowSettings => App.Settings.LfgWindowSettings;
         public NotificationAreaSettings NotificationAreaSettings => App.Settings.NotificationAreaSettings;
+
+        public ICommand BrowseUrlCommand { get; }
+        public ICommand RegisterWebhookCommand { get; }
+        public ICommand OpenWindowCommand { get; }
+        public ICommand DownloadBetaCommand { get; }
+        public ICommand ResetChatPositionsCommand { get; }
+        public ICommand MakePositionsGlobalCommand { get; }
+        public ICommand ResetWindowPositionsCommand { get; }
+        public ICommand OpenResourcesFolderCommand { get; }
+        public ICommand ClearChatCommand { get; }
 
         public bool EthicalMode
         {
@@ -49,6 +63,18 @@ namespace TCC.ViewModels
             }
         }
 
+        public bool UseHotkeys
+        {
+            get => App.Settings.UseHotkeys;
+            set
+            {
+                if (App.Settings.UseHotkeys == value) return;
+                App.Settings.UseHotkeys = value;
+                if (value) KeyboardHook.Instance.Enable();
+                else KeyboardHook.Instance.Disable();
+                N(nameof(UseHotkeys));
+            }
+        }
         public HotKey SettingsHotkey
         {
             get => App.Settings.SettingsHotkey;
@@ -138,13 +164,13 @@ namespace TCC.ViewModels
                 switch (_khCount)
                 {
                     case 0:
-                        WindowManager.ViewModels.NotificationArea.Enqueue("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
+                        WindowManager.ViewModels.NotificationAreaVM.Enqueue("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
                         break;
                     case 1:
-                        WindowManager.ViewModels.NotificationArea.Enqueue(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
+                        WindowManager.ViewModels.NotificationAreaVM.Enqueue(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
                         break;
                     case 2:
-                        WindowManager.ViewModels.NotificationArea.Enqueue("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
+                        WindowManager.ViewModels.NotificationAreaVM.Enqueue("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
                         Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                         break;
                 }
@@ -309,7 +335,7 @@ namespace TCC.ViewModels
             }
 
         }
-  
+
 
         public bool FpsAtGuardian
         {
@@ -321,8 +347,6 @@ namespace TCC.ViewModels
                 N();
             }
         }
-
-
         public bool EnableProxy
         {
             get => App.Settings.EnableProxy;
@@ -331,19 +355,6 @@ namespace TCC.ViewModels
                 if (App.Settings.EnableProxy == value) return;
                 App.Settings.EnableProxy = value;
                 N();
-            }
-        }
-
-        public bool UseHotkeys
-        {
-            get => App.Settings.UseHotkeys;
-            set
-            {
-                if (App.Settings.UseHotkeys == value) return;
-                App.Settings.UseHotkeys = value;
-                if (value) KeyboardHook.Instance.Enable();
-                else KeyboardHook.Instance.Disable();
-                N(nameof(UseHotkeys));
             }
         }
         public bool HideHandles
@@ -356,8 +367,6 @@ namespace TCC.ViewModels
                 N(nameof(HideHandles));
             }
         }
-
-
         public bool AnimateChatMessages
         {
             get => App.Settings.AnimateChatMessages;
@@ -368,7 +377,6 @@ namespace TCC.ViewModels
                 N(nameof(AnimateChatMessages));
             }
         }
-
 
         public bool WebhookEnabledGuildBam
         {
@@ -471,6 +479,7 @@ namespace TCC.ViewModels
                 N(nameof(TwitchChannelName));
             }
         }
+
         public CaptureMode CaptureMode
         {
             get => App.Settings.CaptureMode;
@@ -485,17 +494,6 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.OK) App.Restart();
             }
         }
-        //public double ChatWindowOpacity
-        //{
-        //    get => Settings.Settings.ChatWindowOpacity;
-        //    set
-        //    {
-        //        if (Settings.Settings.ChatWindowOpacity == value) return;
-        //        Settings.Settings.ChatWindowOpacity = value;
-        //        ChatWindowManager.Instance.NotifyOpacityChange();
-        //        NPC(nameof(ChatWindowOpacity));
-        //    }
-        //}
         public int FontSize
         {
             get => App.Settings.FontSize;
@@ -509,7 +507,6 @@ namespace TCC.ViewModels
                 N(nameof(FontSize));
             }
         }
-
         public bool ChatWindowEnabled
         {
             get => App.Settings.ChatEnabled;
@@ -521,8 +518,6 @@ namespace TCC.ViewModels
                 N();
             }
         }
-
-
         public bool ForceSoftwareRendering
         {
             get => App.Settings.ForceSoftwareRendering;
@@ -534,7 +529,6 @@ namespace TCC.ViewModels
                 RenderOptions.ProcessRenderMode = value ? RenderMode.SoftwareOnly : RenderMode.Default;
             }
         }
-
         public bool HighPriority
         {
             get => App.Settings.HighPriority;
@@ -560,6 +554,34 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
+
+            BrowseUrlCommand = new RelayCommand(url => Process.Start(url.ToString()));
+            RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true));
+            OpenWindowCommand = new RelayCommand(winType =>
+            {
+                var t = (Type)winType;
+                var win = Activator.CreateInstance(t, null) as TccWindow;
+                win?.ShowWindow();
+            });
+            DownloadBetaCommand = new RelayCommand(async (_) =>
+            {
+                if (TccMessageBox.Show("Warning: beta build could be unstable. Proceed?",
+                        MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
+                {
+                    await Task.Factory.StartNew(UpdateManager.ForceUpdateExperimental);
+                }
+            });
+            ResetChatPositionsCommand = new RelayCommand(_ =>
+            {
+                foreach (var cw in ChatWindowManager.Instance.ChatWindows)
+                {
+                    cw.ResetToCenter();
+                }
+            });
+            MakePositionsGlobalCommand = new RelayCommand(_ => WindowManager.MakeGlobal());
+            ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
+            OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(Path.Combine(App.BasePath, "resources/config")));
+            ClearChatCommand = new RelayCommand(_ => ChatWindowManager.Instance.ClearMessages());
         }
 
         private void OnShowSettingsWindowHotkeyPressed()
