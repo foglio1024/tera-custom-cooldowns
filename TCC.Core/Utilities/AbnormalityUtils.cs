@@ -79,9 +79,9 @@ namespace TCC.Utilities
             if (Game.IsMe(target))
             {
                 BeginPlayerAbnormality(ab, stacks, duration);
-                if (WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold)
+                if (WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.DisableAbnormalitiesThreshold)
                 {
-                    WindowManager.ViewModels.Group.BeginOrRefreshAbnormality(ab, stacks, duration, Game.Me.PlayerId, Game.Me.ServerId);
+                    WindowManager.ViewModels.GroupVM.BeginOrRefreshAbnormality(ab, stacks, duration, Game.Me.PlayerId, Game.Me.ServerId);
                 }
             }
             else
@@ -94,7 +94,7 @@ namespace TCC.Utilities
         {
             if (!Exists(id, out var ab) || !Pass(ab)) return;
             if (Game.IsMe(target)) EndPlayerAbnormality(ab);
-            else WindowManager.ViewModels.NPC.EndAbnormality(target, ab);
+            else WindowManager.ViewModels.NpcVM.EndAbnormality(target, ab);
         }
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
@@ -103,8 +103,8 @@ namespace TCC.Utilities
             {
                 SkillManager.AddPassivitySkill(ab.Id, cdFromDb);
             }
-            else if (WindowManager.ViewModels.Cooldowns.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
-                  || WindowManager.ViewModels.Cooldowns.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+            else if (WindowManager.ViewModels.CooldownsVM.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
+                  || WindowManager.ViewModels.CooldownsVM.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
             {
                 //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
                 SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
@@ -131,7 +131,7 @@ namespace TCC.Utilities
         }
         private static void EndPlayerAbnormality(Abnormality ab)
         {
-            WindowManager.ViewModels.Group.EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
+            WindowManager.ViewModels.GroupVM.EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
 
             if (ab.Type == AbnormalityType.Buff || ab.Type == AbnormalityType.Special)
             {
@@ -153,7 +153,7 @@ namespace TCC.Utilities
         }
         private static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            WindowManager.ViewModels.NPC.UpdateAbnormality(ab, stacks, duration, target);
+            WindowManager.ViewModels.NpcVM.UpdateAbnormality(ab, stacks, duration, target);
         }
         #endregion
 

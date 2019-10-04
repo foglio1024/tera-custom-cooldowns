@@ -458,7 +458,7 @@ namespace TCC.ViewModels
         private void OnInven(S_INVEN m)
         {
             if (m.Failed) return;
-            WindowManager.ViewModels.Dashboard.UpdateInventory(m.Items, m.First);
+            WindowManager.ViewModels.DashboardVM.UpdateInventory(m.Items, m.First);
         }
         private void OnNpcGuildList(S_NPCGUILD_LIST m)
         {
@@ -501,7 +501,7 @@ namespace TCC.ViewModels
             ClearEvents();
             if (region == null)
             {
-                WindowManager.ViewModels.NotificationArea.Enqueue("Info window", "No region specified; cannot load events.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Info window", "No region specified; cannot load events.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }

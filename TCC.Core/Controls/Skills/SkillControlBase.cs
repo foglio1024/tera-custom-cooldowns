@@ -108,7 +108,7 @@ namespace TCC.Controls.Skills
 
         private void StartArcAnimation(Arc arc, double val = 1)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 if (arc == null) return;
                 _arcAnimation.Duration = TimeSpan.FromMilliseconds(Context.Duration);
@@ -121,7 +121,7 @@ namespace TCC.Controls.Skills
 
         protected void StopArcAnimation(Arc arc)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 if (arc == null) return;
                 arc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations

@@ -153,7 +153,7 @@ namespace TCC.Utilities
 
         public static C CurrentClassVM<C>() where C : BaseClassLayoutVM
         {
-            return WindowManager.ViewModels.Class.CurrentManager as C;
+            return WindowManager.ViewModels.ClassVM.CurrentManager as C;
         }
 
         public static Race RaceFromTemplateId(int templateId)

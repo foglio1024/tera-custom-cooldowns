@@ -8,7 +8,6 @@ using TCC.Annotations;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.Parsing;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;

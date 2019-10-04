@@ -177,7 +177,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                WindowManager.ViewModels.NotificationArea.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
@@ -285,7 +285,7 @@ namespace TCC.ViewModels.Widgets
             if (_towerNames.TryGetValue(entityId, out var towerName))
             {
                 tower.Name = towerName;
-                WindowManager.ViewModels.CivilUnrest.SetGuildName(tower.GuildId, towerName); //TODO: check for enabled?
+                WindowManager.ViewModels.CivilUnrestVM.SetGuildName(tower.GuildId, towerName); //TODO: check for enabled?
             }
             tower.IsBoss = true;
             _npcList.Add(tower);
@@ -315,7 +315,7 @@ namespace TCC.ViewModels.Widgets
             if (!TryFindNPC(entityId, out var boss)) return;
             boss.Target = user;
             boss.CurrentAggroType = AggroCircle.Main;
-            if (boss.Visible) WindowManager.ViewModels.Group.SetAggro(entityId);
+            if (boss.Visible) WindowManager.ViewModels.GroupVM.SetAggro(entityId);
         }
         private void UnsetAggroTarget(ulong entityId)
         {
@@ -660,20 +660,20 @@ namespace TCC.ViewModels.Widgets
                 CurrentHHphase = HarrowholdPhase.Phase1;
             }
             else switch (templateId)
-                {
-                    case 1000:
-                        CurrentHHphase = HarrowholdPhase.Phase2;
-                        break;
-                    case 2000:
-                        CurrentHHphase = HarrowholdPhase.Balistas;
-                        break;
-                    case 3000:
-                        CurrentHHphase = HarrowholdPhase.Phase3;
-                        break;
-                    case 4000:
-                        CurrentHHphase = HarrowholdPhase.Phase4;
-                        break;
-                }
+            {
+                case 1000:
+                    CurrentHHphase = HarrowholdPhase.Phase2;
+                    break;
+                case 2000:
+                    CurrentHHphase = HarrowholdPhase.Balistas;
+                    break;
+                case 3000:
+                    CurrentHHphase = HarrowholdPhase.Phase3;
+                    break;
+                case 4000:
+                    CurrentHHphase = HarrowholdPhase.Phase4;
+                    break;
+            }
         }
         private static Dragon CheckCurrentDragon(Point p)
         {

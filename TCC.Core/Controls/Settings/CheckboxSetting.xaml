@@ -21,14 +21,16 @@
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
               Opacity=".7"/>
-        <TextBlock Style="{StaticResource DefaultTextStyle}" 
+        <TextBlock Style="{StaticResource DefaultTextStyle}"
                    Grid.Column="1" 
                    Margin="5 0 5 0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}" 
                    VerticalAlignment="Center" 
                    Padding="0" 
-                   TextAlignment="Left" 
-                   Opacity=".9"/>
+                   TextAlignment="Left"
+                   Opacity=".9">
+
+</TextBlock>
         <CheckBox x:Name="CheckBox"
                   IsChecked="{Binding IsOn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}" 
                   BorderBrush="{Binding CheckBoxColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}"

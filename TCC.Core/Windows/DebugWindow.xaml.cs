@@ -70,9 +70,9 @@ namespace TCC.Windows
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
             Game.Me.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
-            WindowManager.ViewModels.Class.CurrentClass = Game.Me.Class;
-            WindowManager.ViewModels.Cooldowns.ClearSkills();
-            WindowManager.ViewModels.Cooldowns.LoadSkills(Game.Me.Class);
+            WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
+            WindowManager.ViewModels.CooldownsVM.ClearSkills();
+            WindowManager.ViewModels.CooldownsVM.LoadSkills(Game.Me.Class);
         }
 
         private void SetSorcElement(object sender, RoutedEventArgs e)

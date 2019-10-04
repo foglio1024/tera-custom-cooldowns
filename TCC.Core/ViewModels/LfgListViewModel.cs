@@ -71,7 +71,7 @@ namespace TCC.ViewModels
         public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == Game.Me.PlayerId
                                                                                               || listing.LeaderName == Game.Me.Name
                                                                                               || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
-                                                                                              || WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
+                                                                                              || WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
         public void NotifyMyLfg()
         {
             N(nameof(AmIinLfg));
@@ -82,10 +82,10 @@ namespace TCC.ViewModels
             }
             MyLfg?.UpdateIsMyLfg();
         }
-        public bool AmILeader => WindowManager.ViewModels.Group.AmILeader;
+        public bool AmILeader => WindowManager.ViewModels.GroupVM.AmILeader;
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
                                                                    || listing.LeaderId == Game.Me.PlayerId
-                                                                   || WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+                                                                   || WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
 
         public bool StayClosed { get; set; }
@@ -98,7 +98,7 @@ namespace TCC.ViewModels
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
-            WindowManager.ViewModels.Group.PropertyChanged += OnGroupWindowVmPropertyChanged;
+            WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
@@ -457,7 +457,7 @@ namespace TCC.ViewModels
             if (!_refreshing) _direction = _direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             ((CollectionView)_view).SortDescriptions.Clear();
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(f, _direction));
-            WindowManager.ViewModels.LFG.LastSortDescr = parameter.ToString();
+            WindowManager.ViewModels.LfgVM.LastSortDescr = parameter.ToString();
         }
         public SortCommand(ICollectionViewLiveShaping view)
         {

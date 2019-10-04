@@ -34,10 +34,10 @@ namespace TCC.Controls.Group
         private DataTemplateSelector _currentAbnormalityTemplateSelector;
         private DataTemplateSelector _initialAbnormalityDataTemplateSelector;
 
-        public bool ShowHp => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
-        public bool ShowMp => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
-        public bool ShowBuffs => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
-        public bool ShowDebuffs => WindowManager.ViewModels.Group.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
+        public bool ShowHp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
+        public bool ShowMp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
+        public bool ShowBuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
+        public bool ShowDebuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
         public bool ShowLaurel => App.Settings.GroupWindowSettings.ShowLaurels;
         public bool ShowAwaken => App.Settings.GroupWindowSettings.ShowAwakenIcon;
         public bool ShowHpNumbers => App.Settings.GroupWindowSettings.ShowHpLabels && ShowHp;
@@ -59,8 +59,8 @@ namespace TCC.Controls.Group
             Loaded += (_, __) =>
             {
                 UpdateSettings();
-                WindowManager.ViewModels.Group.SettingsUpdated += UpdateSettings;
-                WindowManager.ViewModels.Group.PropertyChanged += (___, args) => { if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings(); };
+                WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
+                WindowManager.ViewModels.GroupVM.PropertyChanged += (___, args) => { if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings(); };
                 SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
             };
             Unloaded += (_, __) => SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;

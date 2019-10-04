@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:w="clr-namespace:TCC.Windows"
-             xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              mc:Ignorable="d"
              Title="TCC Group"

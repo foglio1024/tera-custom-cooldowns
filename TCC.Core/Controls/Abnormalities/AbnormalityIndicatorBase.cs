@@ -43,7 +43,7 @@ namespace TCC.Controls.Abnormalities
             if (_context == null) return;
             if (_context.Duration == uint.MaxValue) return;
             if (!_context.Animated) return;
-            Dispatcher.Invoke(AnimateCooldown);
+            Dispatcher?.Invoke(AnimateCooldown);
         }
         private void AnimateCooldown()
         {

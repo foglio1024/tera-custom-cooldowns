@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Globalization;
+using System.Reflection;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
@@ -10,56 +12,41 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var retCol = R.Colors.IceColorLight;
-            if ((int)value >= (int)ItemLevelTier.Tier1)
-                retCol = R.Colors.Tier1DungeonColor;
-            if ((int)value >= (int)ItemLevelTier.Tier2)
-                retCol = R.Colors.Tier2DungeonColor;
-            if ((int)value >= (int)ItemLevelTier.Tier3)
-                retCol = R.Colors.Tier3DungeonColor;
-            if ((int)value >= (int)ItemLevelTier.Tier4)
-                retCol = R.Colors.Tier4DungeonColor;
-            if ((int)value >= (int)ItemLevelTier.Tier5)
-                retCol = R.Colors.Tier5DungeonColor;
-            if ((int)value >= (int)ItemLevelTier.Tier6)
-                retCol = R.Colors.HpColor;
-            if ((int)value >= (int)ItemLevelTier.Tier7)
-                retCol = R.Colors.AssaultStanceColor;
+            object ret;
+            if (targetType == typeof(Brush)) ret = R.Brushes.IceBrushLight;
+            else ret = R.Colors.IceColorLight;
 
-            //if (value is ItemLevelTier tier)
-            //{
-            //    switch (tier)
-            //    {
-            //        case ItemLevelTier.Tier0:
-            //            retCol = R.Colors.IceColorLight;
-            //            break;
-            //        case ItemLevelTier.Tier1:
-            //            retCol = R.Colors.Tier1DungeonColor;
-            //            break;
-            //        case ItemLevelTier.Tier2:
-            //            retCol = R.Colors.Tier2DungeonColor;
-            //            break;
-            //        case ItemLevelTier.Tier3:
-            //            retCol = R.Colors.Tier3DungeonColor;
-            //            break;
-            //        case ItemLevelTier.Tier4:
-            //            retCol = R.Colors.Tier4DungeonColor;
-            //            break;
-            //        case ItemLevelTier.Tier5:
-            //            retCol = R.Colors.Tier5DungeonColor;
-            //            break;
-            //        case ItemLevelTier.Tier6:
-            //            retCol = R.Colors.HpColor;
-            //            break;
-            //        case ItemLevelTier.Tier7:
-            //            retCol = R.Colors.AssaultStanceColor;
-            //            break;
-            //        default:
-            //            throw new ArgumentOutOfRangeException();
-            //    }
-            //}
-            if (targetType == typeof(Brush)) return new SolidColorBrush(retCol);
-            return retCol;
+            if (value == null) return ret;
+
+            var tierInt = (int)value;
+            var tier = (ItemLevelTier)tierInt;
+
+            if (targetType == typeof(Brushes))
+                switch (tier)
+                {
+                    case ItemLevelTier.Tier0: ret = R.Brushes.IceBrushLight; break;
+                    case ItemLevelTier.Tier1: ret = R.Brushes.Tier1DungeonBrush; break;
+                    case ItemLevelTier.Tier2: ret = R.Brushes.Tier2DungeonBrush; break;
+                    case ItemLevelTier.Tier3: ret = R.Brushes.Tier3DungeonBrush; break;
+                    case ItemLevelTier.Tier4: ret = R.Brushes.Tier4DungeonBrush; break;
+                    case ItemLevelTier.Tier5: ret = R.Brushes.Tier5DungeonBrush; break;
+                    case ItemLevelTier.Tier6: ret = R.Brushes.HpBrush; break;
+                    case ItemLevelTier.Tier7: ret = R.Brushes.AssaultStanceBrush; break;
+                }
+            else
+                switch (tier)
+                {
+                    case ItemLevelTier.Tier0: ret = R.Colors.IceColorLight; break;
+                    case ItemLevelTier.Tier1: ret = R.Colors.Tier1DungeonColor; break;
+                    case ItemLevelTier.Tier2: ret = R.Colors.Tier2DungeonColor; break;
+                    case ItemLevelTier.Tier3: ret = R.Colors.Tier3DungeonColor; break;
+                    case ItemLevelTier.Tier4: ret = R.Colors.Tier4DungeonColor; break;
+                    case ItemLevelTier.Tier5: ret = R.Colors.Tier5DungeonColor; break;
+                    case ItemLevelTier.Tier6: ret = R.Colors.HpColor; break;
+                    case ItemLevelTier.Tier7: ret = R.Colors.AssaultStanceColor; break;
+                }
+
+            return ret;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

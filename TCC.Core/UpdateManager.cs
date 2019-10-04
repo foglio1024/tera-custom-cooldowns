@@ -140,7 +140,7 @@ namespace TCC
                     }
                     else
                     {
-                        if (!App.Loading) WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Done downloading icons.", NotificationType.Success, 2000);
+                        if (!App.Loading) WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Done downloading icons.", NotificationType.Success, 2000);
                         ExtractIcons();
                     }
                 };
@@ -166,7 +166,7 @@ namespace TCC
                 if (!Directory.Exists(imagesPath)) Directory.CreateDirectory(imagesPath);
                 //App.SplashScreen.SetText("Extracting database...");
 
-                if (!App.Loading) WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
+                if (!App.Loading) WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
                 ZipFile.ExtractToDirectory(Path.Combine(App.BasePath, "icons.zip"), App.BasePath);
                 //App.SplashScreen.SetText("Extracting database... Done.");
 
@@ -196,7 +196,7 @@ namespace TCC
                 //App.SplashScreen.SetText("Copying files... Done.");
 
                 CleanTempIcons();
-                if (!App.Loading) WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
+                if (!App.Loading) WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
 
                 //App.SplashScreen.SetText("Icons updated successfully.");
 
@@ -270,7 +270,7 @@ namespace TCC
                     if (App.ToolboxMode) return;
 
                     ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
-                    WindowManager.ViewModels.NotificationArea.Enqueue("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
                 }
                 catch (Exception ex)
                 {
@@ -289,17 +289,17 @@ namespace TCC
                     var vp = new VersionParser(forceExperimental: true);
                     if (!vp.Valid) return;
 
-                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Download started", NotificationType.Success, 3000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Download started", NotificationType.Success, 3000);
                     c.DownloadFile(new Uri(vp.NewVersionUrl), "update.zip");
 
-                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
                     if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
                     ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
 
-                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Moving files", NotificationType.Success, 2000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Moving files", NotificationType.Success, 2000);
                     File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
-                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC update manager", "Starting updater", NotificationType.Success, 1000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Starting updater", NotificationType.Success, 1000);
                     await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
                     Environment.Exit(0);
                 }

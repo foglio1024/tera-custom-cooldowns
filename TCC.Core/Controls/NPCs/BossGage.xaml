@@ -504,7 +504,6 @@
                     VerticalAlignment="Top"
                     Margin="-5 0 0 0"
                     Height="14"
-                    Background="Transparent"
                     Grid.RowSpan="2"
                     ToolTip="Use small bar for this NPC type"
                     Command="{Binding Override}"

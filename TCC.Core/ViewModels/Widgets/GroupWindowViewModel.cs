@@ -185,7 +185,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void SetAggroCircle(AggroCircle circle, AggroAction action, ulong user)
         {
-            if (WindowManager.ViewModels.NPC.CurrentHHphase != HarrowholdPhase.None) return;
+            if (WindowManager.ViewModels.NpcVM.CurrentHHphase != HarrowholdPhase.None) return;
 
             if (circle != AggroCircle.Main) return;
             if (action == AggroAction.Add)
@@ -212,7 +212,7 @@ namespace TCC.ViewModels.Widgets
                 else
                 {
                     // -- show only aggro stacks if we are in HH -- //
-                    if (WindowManager.ViewModels.NPC.CurrentHHphase >= HarrowholdPhase.Phase2)
+                    if (WindowManager.ViewModels.NpcVM.CurrentHHphase >= HarrowholdPhase.Phase2)
                     {
                         if (ab.Id != 950023 && ((GroupWindowSettings)Settings).ShowOnlyAggroStacks) return;
                     }

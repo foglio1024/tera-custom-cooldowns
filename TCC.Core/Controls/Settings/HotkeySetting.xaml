@@ -28,7 +28,8 @@
                    VerticalAlignment="Center" 
                    Padding="0" 
                    TextAlignment="Left" 
-                   Opacity=".9"/>
+                   Opacity=".9">
+        </TextBlock>
 
                  <!--MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"-->
         <TextBox Grid.Column="2" 

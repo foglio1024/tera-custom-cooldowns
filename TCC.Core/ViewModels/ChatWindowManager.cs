@@ -187,7 +187,7 @@ namespace TCC.ViewModels
             switch (m.AuthorName)
             {
                 case "Foglio":
-                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "(° -°)", NotificationType.Success, 3000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "(° -°)", NotificationType.Success, 3000);
                     break;
             }
 
@@ -394,6 +394,11 @@ namespace TCC.ViewModels
             }
         }
 
+        public void ClearMessages()
+        {
+            ChatMessages.ToSyncList().ForEach(msg => msg.Dispose());
+            ChatMessages.Clear();
+        }
         private static bool Pass(ChatMessage current, ChatMessage old)
         {
             if (current.Author == "System") return true;
@@ -536,7 +541,7 @@ namespace TCC.ViewModels
             App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
             if (App.Settings.ChatWindowsSettings.Count == 0) return;
             var msg = $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", msg, NotificationType.Normal, 2000);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg, NotificationType.Normal, 2000);
             AddTccMessage(msg);
         }
 

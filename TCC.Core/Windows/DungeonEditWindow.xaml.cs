@@ -18,7 +18,7 @@ namespace TCC.Windows
         public DungeonEditWindow()
         {
             InitializeComponent();
-            DataContext = WindowManager.ViewModels.Dashboard;
+            DataContext = WindowManager.ViewModels.DashboardVM;
         }
         public IEnumerable<ItemLevelTier> ItemLevelTiers => EnumUtils.ListFromEnum<ItemLevelTier>();
         public IEnumerable<ResetMode> ResetModes => EnumUtils.ListFromEnum<ResetMode>();

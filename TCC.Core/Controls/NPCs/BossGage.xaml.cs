@@ -73,7 +73,7 @@ namespace TCC.Controls.NPCs
 
         private void AnimateTimer()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 _timerAnim.From = VM.NPC.TimerPattern is HpTriggeredTimerPattern hptp ? hptp.StartAt : 1;
                 _timerAnim.Duration = TimeSpan.FromSeconds(VM.NPC.TimerPattern.Duration);
@@ -175,7 +175,7 @@ namespace TCC.Controls.NPCs
 
         private void SlideEnrageIndicator(double val)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
                 _slideAnim.To = val < 0 ? 0 : HpBarGrid.ActualWidth * (val / 100);
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideAnim);

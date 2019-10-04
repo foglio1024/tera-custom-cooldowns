@@ -29,7 +29,7 @@ namespace TCC.Controls.Skills
 
         private void DeleteButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.ViewModels.Cooldowns.DeleteFixedSkill(Context); //CooldownWindowViewModel.Instance.DeleteFixedSkill(Context);
+            WindowManager.ViewModels.CooldownsVM.DeleteFixedSkill(Context); //CooldownWindowViewModel.Instance.DeleteFixedSkill(Context);
         }
     }
 }

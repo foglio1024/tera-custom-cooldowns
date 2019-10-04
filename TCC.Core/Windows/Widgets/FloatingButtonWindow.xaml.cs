@@ -10,7 +10,6 @@ using TCC.Controls.Chat;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using FoglioUtils.Extensions;
-using TCC.Settings;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
@@ -25,7 +24,7 @@ namespace TCC.Windows.Widgets
             TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = WindowContent;
             ButtonsRef = null;
-            CanMove = false;
+            _canMove = false;
             Init(App.Settings.FloatingButtonSettings);
         }
 
@@ -115,7 +114,7 @@ namespace TCC.Windows.Widgets
 
         public void StartNotifying(int closeEventsCount)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 EventAmountTb.Text = closeEventsCount.ToString();
                 NotificationBubble.Visibility = Visibility.Visible;
@@ -135,7 +134,7 @@ namespace TCC.Windows.Widgets
         {
             if (_busy)
             {
-                Dispatcher.Invoke(() =>
+                Dispatcher?.Invoke(() =>
                 {
                     if (msg != NotificationText.Text 
                    || title != NotificationTitle.Text)

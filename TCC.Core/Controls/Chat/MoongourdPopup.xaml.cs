@@ -37,15 +37,15 @@ namespace TCC.Controls.Chat
 
         public void SetInfo(string name, string region)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 PlayerName = name;
                 return List.ItemsSource = null;
             });
             if (region.StartsWith("EU")) region = "EU";
             var mg = new MoongourdManager();
-            mg.Started += () => Dispatcher.Invoke(() => { EmptyInfo.Text = "Loading..."; });
-            mg.Done += (list) => Dispatcher.Invoke(() =>
+            mg.Started += () => Dispatcher?.Invoke(() => { EmptyInfo.Text = "Loading..."; });
+            mg.Done += (list) => Dispatcher?.Invoke(() =>
             {
                 EmptyInfo.Text = "No entries";
                 List.ItemsSource = list;

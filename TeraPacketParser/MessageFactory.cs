@@ -166,7 +166,7 @@ namespace TeraPacketParser
         }
 
 
-        public async void ReloadSysMsg(string path)
+        public void ReloadSysMsg(string path)
         {
             if (SystemMessageNamer == null)
             {

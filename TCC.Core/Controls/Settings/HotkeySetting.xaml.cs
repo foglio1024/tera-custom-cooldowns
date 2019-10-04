@@ -4,15 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using TCC.Annotations;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ModifierKeys = TCC.Data.ModifierKeys;
-using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
 namespace TCC.Controls.Settings
 {

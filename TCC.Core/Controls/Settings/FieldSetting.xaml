@@ -4,8 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls.Settings"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d"  d:DesignWidth="300">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="TooltipTemplate" TargetType="ToolTip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource RevampBorderStyle}"/>
+                <TextBlock Text="{TemplateBinding Content}"
+                           Foreground="#9fff"
+                           Margin="10"
+                           TextWrapping="Wrap"
+                           MaxWidth="300"/>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="Template" Value="{StaticResource TooltipTemplate}"/>
+        </Style>
+    </UserControl.Resources>
     <Grid MinHeight="35" 
           Style="{StaticResource GlowHoverGrid}"
           >
@@ -30,20 +45,12 @@
                    Padding="0" 
                    TextAlignment="Left" 
                    Opacity=".9"/>
-
-        <TextBox Grid.Column="2" TextWrapping="Wrap" Width="Auto" CaretBrush="#9fff" TextAlignment="Left" Background="#1fff" Foreground="White" MaxLines="2"
+        <TextBox Grid.Column="2" TextWrapping="Wrap" Width="Auto" CaretBrush="#9fff" TextAlignment="Left" Background="#1fff" Foreground="White" MaxLines="1"
                  BorderThickness="0" LostFocus="TextBox_LostFocus" TextChanged="TextBox_TextChanged"  VerticalAlignment="Center"
-                 Margin="7 4" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}">
-            <TextBox.ToolTip>
-                <ToolTip>
-                    <Grid>
-
-                    <Border Style="{StaticResource RevampBorderStyle}"/>
-                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}"></TextBlock>
-                    </Grid>
-                </ToolTip>
-            </TextBox.ToolTip>
+                 Margin="7 4" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}" x:Name="TB"
+                 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}">
         </TextBox>
+
     </Grid>
 
 </UserControl>

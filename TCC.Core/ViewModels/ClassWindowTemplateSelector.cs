@@ -24,7 +24,7 @@ namespace TCC.ViewModels
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            switch (WindowManager.ViewModels.Class.CurrentClass)
+            switch (WindowManager.ViewModels.ClassVM.CurrentClass)
             {
                 case Class.Warrior: return Warrior;
                 case Class.Lancer: return Lancer;

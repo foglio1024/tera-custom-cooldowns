@@ -84,7 +84,7 @@ namespace TCC.Data.Chat
 
             try
             {
-                if (Channel == ChatChannel.Raid && WindowManager.ViewModels.Group.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
+                if (Channel == ChatChannel.Raid && WindowManager.ViewModels.GroupVM.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
                 switch (ch)
                 {
                     case ChatChannel.Greet:
@@ -617,13 +617,13 @@ namespace TCC.Data.Chat
                 return;
             }
             _timer.Stop();
-            WindowManager.ViewModels.LFG.EnqueueRequest(LinkedListing.LeaderId);
+            WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId);
 
         }
 
         private Listing FindListing()
         {
-            return WindowManager.ViewModels.LFG.Listings.FirstOrDefault(x =>
+            return WindowManager.ViewModels.LfgVM.Listings.FirstOrDefault(x =>
                 x.Players.Any(p => p.Name == Author) ||
                 x.LeaderName == Author ||
                 x.Message == RawMessage);
@@ -634,7 +634,7 @@ namespace TCC.Data.Chat
             LinkedListing = FindListing();
             if (LinkedListing != null) return;
             //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
-            WindowManager.ViewModels.LFG.EnqueueListRequest();
+            WindowManager.ViewModels.LfgVM.EnqueueListRequest();
             _timer = new DispatcherTimer(TimeSpan.FromSeconds(1.5), DispatcherPriority.Background, GetListing, Dispatcher);
             _timer.Start();
         }

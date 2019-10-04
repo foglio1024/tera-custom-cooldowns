@@ -18,22 +18,22 @@ namespace TCC.Windows
 {
     public class TccWidget : Window
     {
-        private static bool _showBoundaries = false;
+        private static bool _showBoundaries;
         private static event Action ShowBoundariesToggled;
 
         private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, to: 0);
         private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, to: 0);
         private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, to: 1);
         private DispatcherTimer _buttonsTimer;
+        private IntPtr _handle;
+        protected bool _canMove = true;
+        private Point WindowCenter => new Point(Left + ActualWidth / 2, Top + ActualHeight / 2);
 
         protected WindowButtons ButtonsRef;
         protected UIElement MainContent;
         protected UIElement BoundaryRef;
 
         public WindowSettings WindowSettings { get; private set; }
-        private Point WindowCenter => new Point(Left + ActualWidth / 2, Top + ActualHeight / 2);
-        public IntPtr Handle { get; private set; }
-        public bool CanMove { get; set; } = true;
 
         protected void Init(WindowSettings settings)
         {
@@ -67,11 +67,11 @@ namespace TCC.Windows
             OnVisibilityChanged();
             OnWindowVisibilityChanged(WindowSettings.Visible);
 
-            FocusManager.MakeUnfocusable(Handle);
+            FocusManager.MakeUnfocusable(_handle);
 
             if (ButtonsRef == null)
             {
-                if (CanMove) MouseLeftButtonDown += Drag;
+                if (_canMove) MouseLeftButtonDown += Drag;
                 return;
             }
 
@@ -83,14 +83,14 @@ namespace TCC.Windows
                 if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtonsAnimation);
             };
             MouseLeave += (_, __) => _buttonsTimer.Start();
-            if (CanMove) ButtonsRef.MouseLeftButtonDown += Drag;
+            if (_canMove) ButtonsRef.MouseLeftButtonDown += Drag;
             ShowBoundariesToggled += ShowHideBoundaries;
         }
 
         private void ShowHideBoundaries()
         {
             var anim = _showBoundaries ? _showButtonsAnimation : _hideButtonsAnimation;
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
                 BoundaryRef?.BeginAnimation(OpacityProperty, anim);
                 ButtonsRef?.BeginAnimation(OpacityProperty, anim);
@@ -100,7 +100,7 @@ namespace TCC.Windows
 
         public void ReloadPosition()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
                 var left = WindowSettings.X * WindowManager.ScreenSize.Width;
                 Left = left >= int.MaxValue ? 0 : left;
@@ -110,24 +110,22 @@ namespace TCC.Windows
 
                 CheckBounds();
 
-                if (ButtonsRef != null)
+                if (ButtonsRef == null) return;
+                switch (WindowSettings.ButtonsPosition)
                 {
-                    switch (WindowSettings.ButtonsPosition)
-                    {
-                        case ButtonsPosition.Above:
-                            Grid.SetRow(ButtonsRef, 0);
-                            break;
-                        case ButtonsPosition.Below:
-                            Grid.SetRow(ButtonsRef, 2);
-                            break;
-                    }
-                    UpdateButtons();
+                    case ButtonsPosition.Above:
+                        Grid.SetRow(ButtonsRef, 0);
+                        break;
+                    case ButtonsPosition.Below:
+                        Grid.SetRow(ButtonsRef, 2);
+                        break;
                 }
+                UpdateButtons();
             }));
         }
         public void ResetToCenter()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 Left = Screen.PrimaryScreen.Bounds.X + Screen.PrimaryScreen.Bounds.Width / 2 - ActualWidth / 2;
                 Top = Screen.PrimaryScreen.Bounds.Y + Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
@@ -169,9 +167,9 @@ namespace TCC.Windows
 
         protected void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Handle = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(Handle);
-            FocusManager.HideFromToolBar(Handle);
+            _handle = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(_handle);
+            FocusManager.HideFromToolBar(_handle);
             if (!WindowSettings.Enabled) Hide();
         }
         private void OnDimChanged()
@@ -213,29 +211,29 @@ namespace TCC.Windows
         {
             if (_showBoundaries)
             {
-                FocusManager.UndoClickThru(Handle);
+                FocusManager.UndoClickThru(_handle);
                 return;
             }
 
             switch (WindowSettings.ClickThruMode)
             {
                 case ClickThruMode.Never:
-                    FocusManager.UndoClickThru(Handle);
+                    FocusManager.UndoClickThru(_handle);
                     break;
                 case ClickThruMode.Always:
-                    FocusManager.MakeClickThru(Handle);
+                    FocusManager.MakeClickThru(_handle);
                     break;
                 case ClickThruMode.WhenDim:
-                    if (WindowManager.ForegroundManager.Dim) FocusManager.MakeClickThru(Handle);
-                    else FocusManager.UndoClickThru(Handle);
+                    if (WindowManager.ForegroundManager.Dim) FocusManager.MakeClickThru(_handle);
+                    else FocusManager.UndoClickThru(_handle);
                     break;
                 case ClickThruMode.WhenUndim:
-                    if (WindowManager.ForegroundManager.Dim) FocusManager.UndoClickThru(Handle);
-                    else FocusManager.MakeClickThru(Handle);
+                    if (WindowManager.ForegroundManager.Dim) FocusManager.UndoClickThru(_handle);
+                    else FocusManager.MakeClickThru(_handle);
                     break;
                 case ClickThruMode.GameDriven:
-                    if (Game.InGameUiOn) FocusManager.UndoClickThru(Handle);
-                    else FocusManager.MakeClickThru(Handle);
+                    if (Game.InGameUiOn) FocusManager.UndoClickThru(_handle);
+                    else FocusManager.MakeClickThru(_handle);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -245,7 +243,7 @@ namespace TCC.Windows
         {
             try
             {
-                Dispatcher.Invoke(() =>
+                Dispatcher?.Invoke(() =>
                 {
                     if (WindowSettings.Enabled) Show();
                     else Hide();
@@ -256,7 +254,7 @@ namespace TCC.Windows
         private void AnimateContentOpacity(double opacity)
         {
             if (MainContent == null) return;
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
                 _opacityAnimation.To = opacity;
                 MainContent.BeginAnimation(OpacityProperty, _opacityAnimation);
@@ -266,15 +264,15 @@ namespace TCC.Windows
         private void RefreshTopmost()
         {
             if (FocusManager.PauseTopmost) return;
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
                 Topmost = false; Topmost = true;
             }), DispatcherPriority.DataBind);
         }
         private void SetVisibility(bool v)
         {
-            if (!Dispatcher.Thread.IsAlive) return;
-            Dispatcher.Invoke(() =>
+            if (Dispatcher?.Thread.IsAlive == false) return;
+            Dispatcher?.Invoke(() =>
             {
                 Visibility = !v ? Visibility.Visible : Visibility.Collapsed; // meh ok
                 Visibility = v ? Visibility.Visible : Visibility.Collapsed;
@@ -405,8 +403,8 @@ namespace TCC.Windows
         }
         public void CloseWindowSafe()
         {
-            Dispatcher.Invoke(() => Close());
-            Dispatcher.InvokeShutdown();
+            Dispatcher?.Invoke(Close);
+            Dispatcher?.InvokeShutdown();
             //Hide();
         }
 

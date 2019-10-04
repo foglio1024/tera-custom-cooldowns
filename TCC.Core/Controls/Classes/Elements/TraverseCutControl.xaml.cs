@@ -67,7 +67,7 @@ namespace TCC.Controls.Classes.Elements
                 _delay.Start();
                 return;
             }
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 //var delay = _anim.Duration.TimeSpan.Milliseconds + 10;
                 //_toZeroAnimation.BeginTime = TimeSpan.FromMilliseconds(_isAnimating ? delay : 0);

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Xml.Linq;
 
 namespace TCC.Data.Databases
@@ -102,7 +101,7 @@ namespace TCC.Data.Databases
         {
             if (TryGetMonster(templateId, zoneId, out var m)) m.IsBoss = b;
             var overrideDoc = XDocument.Load(OverrideFileFullPath);
-            var zone = overrideDoc.Descendants("Zone").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == zoneId);
+            var zone = overrideDoc.Descendants("Zone").FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value) == zoneId);
             if (zone != null)
             {
                 var monster = zone.Descendants("Monster").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == templateId);

@@ -59,6 +59,9 @@
                                 </Trigger.ExitActions>
 
                             </Trigger>
+<Trigger Property="IsEnabled" Value="False">
+    <Setter TargetName="Ellipse" Property="Fill" Value="SlateGray"></Setter>
+</Trigger>
                         </ControlTemplate.Triggers>
 
                     </ControlTemplate>
@@ -77,7 +80,13 @@
                         <Border  BorderThickness="0" BorderBrush="Black" 
                                  Opacity=".7"
                                  Background="{StaticResource DefensiveStanceBrush}"
-                                 Height="4" CornerRadius="2 0 0 2"/>
+                                 Height="4" CornerRadius="2 0 0 2"
+                                 x:Name="bg"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bg" Property="Background" Value="SlateGray"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

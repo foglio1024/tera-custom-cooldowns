@@ -217,7 +217,7 @@ namespace TCC.Data.NPCs
         {
             get
             {
-                WindowManager.ViewModels.NPC.GuildIds.TryGetValue(EntityId, out var val);
+                WindowManager.ViewModels.NpcVM.GuildIds.TryGetValue(EntityId, out var val);
                 return val;
             }
         }
@@ -246,7 +246,7 @@ namespace TCC.Data.NPCs
         //}
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
-            Dispatcher = WindowManager.ViewModels.NPC.GetDispatcher();
+            Dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
             Game.DB.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
             Name = monster.Name;

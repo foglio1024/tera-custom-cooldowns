@@ -5,9 +5,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.Interop.Proxy;
-using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC
 {

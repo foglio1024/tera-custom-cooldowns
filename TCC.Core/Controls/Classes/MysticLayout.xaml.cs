@@ -25,7 +25,7 @@ namespace TCC.Controls.Classes
         private void OnAurasChanged()
         {
             if (_dc == null) return;
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 if (_dc.Auras.AllMissing)
                 {

@@ -131,6 +131,12 @@
                             <Setter TargetName="hl" Property="Background"
                                     Value="{StaticResource SelectionBackgroundBrush}" />
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity"
+                                    Value=".3" />
+                            <Setter Property="Background" TargetName="border"
+                                    Value="SlateGray" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -1482,6 +1488,7 @@
         <Setter Property="Background" Value="{StaticResource RevampBackgroundGradientBrush}" />
         <Setter Property="Effect" Value="{StaticResource ClassWindowSkillBorderShadow}" />
     </Style>
+
 
 
     <ControlTemplate x:Key="MenuItemControlTemplate1" TargetType="{x:Type MenuItem}">

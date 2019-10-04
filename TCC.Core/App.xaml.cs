@@ -15,7 +15,6 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -145,7 +144,7 @@ namespace TCC
             UpdateManager.StartPeriodicCheck();
 
             if (!Experimental && Settings.ExperimentalNotification && UpdateManager.IsExperimentalNewer())
-                WindowManager.ViewModels.NotificationArea.Enqueue("TCC experimental",
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC experimental",
                     "An experimental version of TCC is available. Open System settings to download it or disable this notification.",
                     NotificationType.Success,
                     10000);

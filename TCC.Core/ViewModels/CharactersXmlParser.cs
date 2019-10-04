@@ -13,48 +13,48 @@ namespace TCC.Data
 
     public class CharactersXmlParser
     {
-        private const string CharactersTag = "Characters";
-        private const string CharacterTag = "Character";
-        private const string NameTag = "name";
-        private const string IdTag = "id";
-        private const string PosTag = "pos";
-        private const string VanguardCreditsTag = "vanguardCredits";
-        private const string GuardianCreditsTag = "guardianCredits";
-        private const string VanguardWeeklyTag = "vanguardWeekly";
-        private const string VanguardDailyTag = "vanguardDaily";
-        private const string GuardianQuestsTag = "guardianQuests";
-        private const string ElleonMarksTag = "elleonMarks";
-        private const string DragonwingScalesTag = "dragonwing";
+        private const string CharactersTag           = "Characters";
+        private const string CharacterTag            = "Character";
+        private const string NameTag                 = "name";
+        private const string IdTag                   = "id";
+        private const string PosTag                  = "pos";
+        private const string VanguardCreditsTag      = "vanguardCredits";
+        private const string GuardianCreditsTag      = "guardianCredits";
+        private const string VanguardWeeklyTag       = "vanguardWeekly";
+        private const string VanguardDailyTag        = "vanguardDaily";
+        private const string GuardianQuestsTag       = "guardianQuests";
+        private const string ElleonMarksTag          = "elleonMarks";
+        private const string DragonwingScalesTag     = "dragonwing";
         private const string PiecesOfDragonScrollTag = "scrollPieces";
-        private const string ClassTag = "class";
-        private const string LevelTag = "level";
-        private const string ItemLevelTag = "ilvl";
-        private const string DungeonTag = "Dungeon";
-        private const string DungeonsTag = "Dungeons";
-        private const string EntriesTag = "entries";
-        private const string TotalTag = "total";
-        private const string GearTag = "Gear";
-        private const string GearPiecesTag = "GearPieces";
-        private const string PieceTag = "piece";
-        private const string TierTag = "tier";
-        private const string EnchantTag = "enchant";
-        private const string ExpTag = "exp";
-        private const string EliteTag = "elite";
-        private const string LastOnlineTag = "lastOnline";
-        private const string LastLocationTag = "lastLocation";
-        private const string GuildNameTag = "guildName";
-        private const string BuffTag = "Buff";
-        private const string BuffsTag = "Buffs";
-        private const string StacksTag = "stacks";
-        private const string DurationTag = "duration";
-        private const string InventoryTag = "Inventory";
-        private const string ItemTag = "Item";
-        private const string AmountTag = "amount";
-        private const string ServerTag = "server";
-        private const string SlotTag = "slot";
-        private const string HiddenTag = "hidden";
-        private const string CoinsTag = "coins";
-        private const string MaxCoinsTag = "maxCoins";
+        private const string ClassTag                = "class";
+        private const string LevelTag                = "level";
+        private const string ItemLevelTag            = "ilvl";
+        private const string DungeonTag              = "Dungeon";
+        private const string DungeonsTag             = "Dungeons";
+        private const string EntriesTag              = "entries";
+        private const string TotalTag                = "total";
+        private const string GearTag                 = "Gear";
+        private const string GearPiecesTag           = "GearPieces";
+        private const string PieceTag                = "piece";
+        private const string TierTag                 = "tier";
+        private const string EnchantTag              = "enchant";
+        private const string ExpTag                  = "exp";
+        private const string EliteTag                = "elite";
+        private const string LastOnlineTag           = "lastOnline";
+        private const string LastLocationTag         = "lastLocation";
+        private const string GuildNameTag            = "guildName";
+        private const string BuffTag                 = "Buff";
+        private const string BuffsTag                = "Buffs";
+        private const string StacksTag               = "stacks";
+        private const string DurationTag             = "duration";
+        private const string InventoryTag            = "Inventory";
+        private const string ItemTag                 = "Item";
+        private const string AmountTag               = "amount";
+        private const string ServerTag               = "server";
+        private const string SlotTag                 = "slot";
+        private const string HiddenTag               = "hidden";
+        private const string CoinsTag                = "coins";
+        private const string MaxCoinsTag             = "maxCoins";
 
 
         private readonly string _path = Path.Combine(App.ResourcesPath, "config/characters.xml");
@@ -111,7 +111,7 @@ namespace TCC.Data
                 new XAttribute(ClassTag, c.Class),
                 new XAttribute(PosTag, c.Position),
                 new XAttribute(LastOnlineTag, c.LastOnline),
-                new XAttribute(LastLocationTag, c.LastLocation == null ? "0_0_0": $"{c.LastLocation.World}_{c.LastLocation.Guard}_{c.LastLocation.Section}"),
+                new XAttribute(LastLocationTag, c.LastLocation == null ? "0_0_0" : $"{c.LastLocation.World}_{c.LastLocation.Guard}_{c.LastLocation.Section}"),
                 new XAttribute(VanguardCreditsTag, c.VanguardInfo.Credits),
                 new XAttribute(GuildNameTag, c.GuildName),
                 new XAttribute(ServerTag, c.ServerName),
@@ -259,7 +259,7 @@ namespace TCC.Data
                     if (a.Name == IdTag) id = uint.Parse(a.Value);
                     if (a.Name == AmountTag) amount = int.Parse(a.Value);
                 });
-                ch.Inventory.Add(new InventoryItem(slot,id,amount));
+                ch.Inventory.Add(new InventoryItem(slot, id, amount));
             });
         }
         public void Read(IList<Character> dest)
@@ -284,7 +284,7 @@ namespace TCC.Data
         private void ParseEliteStatus()
         {
             var val = _doc.Descendants().FirstOrDefault(x => x.Name == CharactersTag)?.Attribute(EliteTag)?.Value;
-            if(val != null) Game.Account.IsElite = bool.Parse(val);
+            if (val != null) Game.Account.IsElite = bool.Parse(val);
         }
     }
 }

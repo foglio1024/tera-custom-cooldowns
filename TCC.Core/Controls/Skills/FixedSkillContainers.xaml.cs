@@ -32,7 +32,7 @@ namespace TCC.Controls.Skills
         private static readonly Action EmptyDelegate = delegate { };
         //private string _lastSender = "";
 
-        private CooldownWindowViewModel VM => Dispatcher.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
+        private CooldownWindowViewModel VM => Dispatcher?.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
 
         public FixedSkillContainers()
         {
@@ -66,7 +66,7 @@ namespace TCC.Controls.Skills
         //really absurd way of fixing order issue
         private void OnSkillsLoaded()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 ReorderSkillContainer(MainSkills, VM.MainSkills);
                 ReorderSkillContainer(SecSkills, VM.SecondarySkills);
@@ -106,7 +106,7 @@ namespace TCC.Controls.Skills
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             MainSkills.InvalidateMeasure();
-            MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            MainSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
             VM.Save();
         }
 
@@ -115,7 +115,7 @@ namespace TCC.Controls.Skills
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 SecSkills.InvalidateMeasure();
-                SecSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+                SecSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
                 VM.Save();
             }
 
@@ -343,14 +343,14 @@ namespace TCC.Controls.Skills
                 //wait a bit and restart any running skill
                 Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(t =>
                 {
-                    WindowManager.ViewModels.Cooldowns.MainSkills.ToList().ForEach(x =>
+                    WindowManager.ViewModels.CooldownsVM.MainSkills.ToList().ForEach(x =>
                     {
                         if (x.Seconds > 0)
                         {
                             x.Start(x.Seconds * 1000 - delay);
                         }
                     });
-                    WindowManager.ViewModels.Cooldowns.SecondarySkills.ToList().ForEach(x =>
+                    WindowManager.ViewModels.CooldownsVM.SecondarySkills.ToList().ForEach(x =>
                     {
                         if (x.Seconds > 0)
                         {
@@ -359,7 +359,7 @@ namespace TCC.Controls.Skills
                     });
                 });
 
-                WindowManager.ViewModels.Cooldowns.Save();
+                WindowManager.ViewModels.CooldownsVM.Save();
             }
         }
 
@@ -382,7 +382,7 @@ namespace TCC.Controls.Skills
         {
             MainSkills.InvalidateArrange();
             MainSkills.InvalidateMeasure();
-            MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            MainSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
         }
 
 
@@ -400,7 +400,7 @@ namespace TCC.Controls.Skills
 
         private void RefreshBorder()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
 
                 MainBorder.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
@@ -409,7 +409,7 @@ namespace TCC.Controls.Skills
         }
         private void RefreshControlTemplate(ItemsControl ic)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher?.BeginInvoke(new Action(() =>
             {
                 ic.ItemContainerStyle =
                     FindResource(App.Settings.SkillShape == ControlShape.Round

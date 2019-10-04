@@ -8,7 +8,7 @@ namespace TCC.ResourceDictionaries
     {
         private void OnCharacterNameMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.ViewModels.Dashboard.SelectCharacter((sender as FrameworkElement)?.DataContext as Character);
+            WindowManager.ViewModels.DashboardVM.SelectCharacter((sender as FrameworkElement)?.DataContext as Character);
         }
     }
 }

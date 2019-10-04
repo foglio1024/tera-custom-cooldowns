@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using TCC.Controls;
-using TCC.Data.Pc;
 using TCC.Settings;
 using FoglioUtils.Extensions;
 using TCC.Utilities;
@@ -31,40 +30,40 @@ namespace TCC
     {
         public static class ViewModels
         {
-            private static CooldownWindowViewModel _cooldowns;
-            private static CharacterWindowViewModel _character;
-            private static NpcWindowViewModel _npc;
-            private static BuffBarWindowViewModel _abnormal;
-            private static GroupWindowViewModel _group;
-            private static ClassWindowViewModel _class;
-            private static CivilUnrestViewModel _civilUnrest;
-            private static DashboardViewModel _dashboard;
-            private static LfgListViewModel _lfg;
-            private static FlightGaugeViewModel _flightGauge;
-            private static NotificationAreaViewModel _notification;
+            private static CooldownWindowViewModel _cooldownsVm;
+            private static CharacterWindowViewModel _characterVm;
+            private static NpcWindowViewModel _npcVm;
+            private static BuffBarWindowViewModel _abnormalVm;
+            private static GroupWindowViewModel _groupVm;
+            private static ClassWindowViewModel _classVm;
+            private static CivilUnrestViewModel _civilUnrestVm;
+            private static DashboardViewModel _dashboardVm;
+            private static LfgListViewModel _lfgVm;
+            private static FlightGaugeViewModel _flightGaugeVm;
+            private static NotificationAreaViewModel _notificationVm;
             private static readonly object _groupVmLock = new object();
 
-            public static CooldownWindowViewModel Cooldowns => _cooldowns ?? (_cooldowns = new CooldownWindowViewModel(App.Settings.CooldownWindowSettings));
-            public static CharacterWindowViewModel Character => _character ?? (_character = new CharacterWindowViewModel(App.Settings.CharacterWindowSettings));
-            public static NpcWindowViewModel NPC => _npc ?? (_npc = new NpcWindowViewModel(App.Settings.NpcWindowSettings));
-            public static BuffBarWindowViewModel Abnormal => _abnormal ?? (_abnormal = new BuffBarWindowViewModel(App.Settings.BuffWindowSettings));
-            public static GroupWindowViewModel Group
+            public static CooldownWindowViewModel CooldownsVM => _cooldownsVm ?? (_cooldownsVm = new CooldownWindowViewModel(App.Settings.CooldownWindowSettings));
+            public static CharacterWindowViewModel CharacterVM => _characterVm ?? (_characterVm = new CharacterWindowViewModel(App.Settings.CharacterWindowSettings));
+            public static NpcWindowViewModel NpcVM => _npcVm ?? (_npcVm = new NpcWindowViewModel(App.Settings.NpcWindowSettings));
+            public static BuffBarWindowViewModel AbnormalVM => _abnormalVm ?? (_abnormalVm = new BuffBarWindowViewModel(App.Settings.BuffWindowSettings));
+            public static GroupWindowViewModel GroupVM
             {
                 get
                 {
                     // TODO: temporary workaround
                     lock (_groupVmLock)
                     {
-                        return _group ?? (_group = new GroupWindowViewModel(App.Settings.GroupWindowSettings));
+                        return _groupVm ?? (_groupVm = new GroupWindowViewModel(App.Settings.GroupWindowSettings));
                     }
                 }
             }
-            public static ClassWindowViewModel Class => _class ?? (_class = new ClassWindowViewModel(App.Settings.ClassWindowSettings));
-            public static CivilUnrestViewModel CivilUnrest => _civilUnrest ?? (_civilUnrest = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
-            public static DashboardViewModel Dashboard => _dashboard ?? (_dashboard = new DashboardViewModel(null));
-            public static LfgListViewModel LFG => _lfg ?? (_lfg = new LfgListViewModel(App.Settings.LfgWindowSettings));
-            public static FlightGaugeViewModel FlightGauge => _flightGauge ?? (_flightGauge = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
-            public static NotificationAreaViewModel NotificationArea => _notification?? (_notification= new NotificationAreaViewModel(App.Settings.NotificationAreaSettings));
+            public static ClassWindowViewModel ClassVM => _classVm ?? (_classVm = new ClassWindowViewModel(App.Settings.ClassWindowSettings));
+            public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ?? (_civilUnrestVm = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
+            public static DashboardViewModel DashboardVM => _dashboardVm ?? (_dashboardVm = new DashboardViewModel(null));
+            public static LfgListViewModel LfgVM => _lfgVm ?? (_lfgVm = new LfgListViewModel(App.Settings.LfgWindowSettings));
+            public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ?? (_flightGaugeVm = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
+            public static NotificationAreaViewModel NotificationAreaVM => _notificationVm?? (_notificationVm= new NotificationAreaViewModel(App.Settings.NotificationAreaSettings));
 
         }
 
@@ -86,7 +85,7 @@ namespace TCC
             get
             {
                 if (_dashboardWindow != null) return _dashboardWindow;
-                _dashboardWindow = new Dashboard(ViewModels.Dashboard);
+                _dashboardWindow = new Dashboard(ViewModels.DashboardVM);
                 return _dashboardWindow;
             }
         }
@@ -95,7 +94,7 @@ namespace TCC
             get
             {
                 if (_lfgWindow != null) return _lfgWindow;
-                _lfgWindow = new LfgListWindow(ViewModels.LFG);
+                _lfgWindow = new LfgListWindow(ViewModels.LfgVM);
                 return _lfgWindow;
             }
         }
@@ -281,17 +280,17 @@ namespace TCC
             LoadBuffBarWindow();
             LoadNotificationArea();
 
-            FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGauge);
+            FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGaugeVM);
             if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
 
-            CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrest);
+            CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrestVM);
             if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
 
             FloatingButton = new FloatingButtonWindow();
             if (FloatingButton.WindowSettings.Enabled) FloatingButton.Show();
 
-            _dashboardWindow = new Dashboard(ViewModels.Dashboard);
-            _lfgWindow = new LfgListWindow(ViewModels.LFG);
+            _dashboardWindow = new Dashboard(ViewModels.DashboardVM);
+            _lfgWindow = new LfgListWindow(ViewModels.LfgVM);
 
 
 
@@ -314,7 +313,7 @@ namespace TCC
             var notifAreaThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                NotificationArea = new NotificationAreaWindow(ViewModels.NotificationArea);
+                NotificationArea = new NotificationAreaWindow(ViewModels.NotificationAreaVM);
                 if (NotificationArea.WindowSettings.Enabled) NotificationArea.Show();
                 NotificationArea.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -331,7 +330,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
-                CooldownWindow = new CooldownWindow(ViewModels.Cooldowns);
+                CooldownWindow = new CooldownWindow(ViewModels.CooldownsVM);
                 if (CooldownWindow.WindowSettings.Enabled) CooldownWindow.Show();
                 CooldownWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -349,7 +348,7 @@ namespace TCC
                 SynchronizationContext.SetSynchronizationContext(
                     new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
-                ClassWindow = new ClassWindow(ViewModels.Class);
+                ClassWindow = new ClassWindow(ViewModels.ClassVM);
                 if (ClassWindow.WindowSettings.Enabled) ClassWindow.Show();
                 ClassWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
 
@@ -367,7 +366,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 //Game.Me = new Player();
-                CharacterWindow = new CharacterWindow(ViewModels.Character);
+                CharacterWindow = new CharacterWindow(ViewModels.CharacterVM);
                 if (CharacterWindow.WindowSettings.Enabled) CharacterWindow.Show();
                 CharacterWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -383,7 +382,7 @@ namespace TCC
             var bossGaugeThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                BossWindow = new BossWindow(ViewModels.NPC);
+                BossWindow = new BossWindow(ViewModels.NpcVM);
                 if (BossWindow.WindowSettings.Enabled) BossWindow.Show();
                 BossWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -399,7 +398,7 @@ namespace TCC
             var buffBarThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                BuffWindow = new BuffWindow(ViewModels.Abnormal);
+                BuffWindow = new BuffWindow(ViewModels.AbnormalVM);
                 if (BuffWindow.WindowSettings.Enabled) BuffWindow.Show();
                 BuffWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
@@ -416,7 +415,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-                GroupWindow = new GroupWindow(ViewModels.Group);
+                GroupWindow = new GroupWindow(ViewModels.GroupVM);
                 if (GroupWindow.WindowSettings.Enabled) GroupWindow.Show();
                 GroupWindow.WindowSettings.ApplyScreenCorrection(GetScreenCorrection());
                 AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);

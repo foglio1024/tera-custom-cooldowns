@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TCC
+﻿namespace TCC
 {
     public static class EntityManager
     {

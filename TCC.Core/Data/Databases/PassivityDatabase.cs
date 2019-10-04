@@ -33,13 +33,11 @@ namespace TCC.Data.Databases
         };
         public static bool TryGetPassivitySkill(uint id, out Skill sk)
         {
-            var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
-            if (!Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return result;
-            result = true;
+            if (!Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             sk = new Skill(id, Class.Common, ab.Name, "") { IconName = ab.IconName };
-            return result;
+            return true;
 
         }
     }

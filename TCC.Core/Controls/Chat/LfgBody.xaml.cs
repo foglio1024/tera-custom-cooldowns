@@ -19,7 +19,7 @@ namespace TCC.Controls.Chat
         {
             if (((LfgMessage)DataContext).LinkedListing != null)
             {
-                WindowManager.ViewModels.LFG.LastClicked = ((LfgMessage)DataContext).LinkedListing;
+                WindowManager.ViewModels.LfgVM.LastClicked = ((LfgMessage)DataContext).LinkedListing;
                 ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
             }
             ProxyInterface.Instance.Stub.RequestPartyInfo(((LfgMessage)DataContext).AuthorId); // ProxyOld.RequestPartyInfo(((LfgMessage)DataContext).AuthorId);

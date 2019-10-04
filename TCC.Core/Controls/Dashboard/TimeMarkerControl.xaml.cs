@@ -42,7 +42,7 @@ namespace TCC.Controls.Dashboard
         {
             if (e.PropertyName != nameof(_dc.TimeFactor)) return;
             var w = TextBorder.ActualWidth;
-            Dispatcher.Invoke(() => TextBorder.LayoutTransform = new TranslateTransform(-w * _dc.TimeFactor, 0));
+            Dispatcher?.Invoke(() => TextBorder.LayoutTransform = new TranslateTransform(-w * _dc.TimeFactor, 0));
         }
     }
 }

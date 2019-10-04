@@ -1,5 +1,4 @@
-﻿using FoglioUtils;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
@@ -46,7 +45,7 @@ namespace TCC.Parsing
         public static async Task InitAsync()
         {
             await Task.Factory.StartNew(Init);
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Ready to connect.", NotificationType.Normal);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Ready to connect.", NotificationType.Normal);
         }
         private static void PacketAnalysisLoop()
         {
@@ -70,7 +69,7 @@ namespace TCC.Parsing
         {
             Game.Server = srv;
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
             _ = ProxyInterface.Instance.Init();
 
@@ -85,7 +84,7 @@ namespace TCC.Parsing
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Disconnected", NotificationType.Normal);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Disconnected", NotificationType.Normal);
             WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
 
             ProxyInterface.Instance.Disconnect();
@@ -101,7 +100,6 @@ namespace TCC.Parsing
         private static async void OnCheckVersion(C_CHECK_VERSION p)
         {
             var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
-            OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"));
             if (!File.Exists(opcPath))
             {
                 if (Sniffer is ToolboxSniffer tbs)
@@ -115,6 +113,7 @@ namespace TCC.Parsing
                 }
                 else
                 {
+                    if (OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"))) return;
                     TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
                     App.Close();
                     return;
@@ -126,7 +125,6 @@ namespace TCC.Parsing
         }
         private static async void OnLoginArbiter(C_LOGIN_ARBITER p)
         {
-            OpcodeDownloader.DownloadSysmsgIfNotExist(Factory.Version, Path.Combine(App.DataPath, "opcodes/"), Factory.ReleaseVersion);
             var path = File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map"))
                        ?
                        Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map")
@@ -137,22 +135,31 @@ namespace TCC.Parsing
 
             if (path == "")
             {
+                var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map").Replace("\\", "/");
                 if (Sniffer.Connected && Sniffer is ToolboxSniffer tbs)
                 {
-                    var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map").Replace("\\", "/");
                     if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))
                     {
                         Factory.SystemMessageNamer = new OpCodeNamer(destPath);
                         return;
                     }
                 }
+                else
+                {
+                    if (OpcodeDownloader.DownloadSysmsgIfNotExist(Factory.Version, Path.Combine(App.DataPath, "opcodes/"), Factory.ReleaseVersion))
+                    {
+                        Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                        return;
+                    }
+                }
+
                 TccMessageBox.Show($"sysmsg.{Factory.ReleaseVersion / 100}.map or sysmsg.{Factory.Version}.map not found.\nWait for update or use tcc-stub to automatically retreive sysmsg files from game client.\nTCC will now close.", MessageBoxType.Error);
                 App.Close();
                 return;
             }
             Factory.ReloadSysMsg(path);
 
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
         }
     }
 }

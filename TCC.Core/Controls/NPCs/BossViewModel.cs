@@ -7,7 +7,6 @@ using FoglioUtils;
 using TCC.Annotations;
 using TCC.Data;
 using FoglioUtils.Extensions;
-using TCC.Utilities;
 
 namespace TCC.Controls.NPCs
 {
@@ -177,7 +176,7 @@ namespace TCC.Controls.NPCs
             NPC.PropertyChanged += OnPropertyChanged;
             NPC.DeleteEvent += () =>
             {
-                WindowManager.ViewModels.NPC.RemoveNPC(NPC, Delay + 250);
+                WindowManager.ViewModels.NpcVM.RemoveNPC(NPC, Delay + 250);
                 DeleteTimer.Start();
                 _numberTimer.Stop();
             };

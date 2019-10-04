@@ -35,12 +35,12 @@ namespace TCC.Controls.NPCs
             _dc.DeleteEvent -= Dc_DeleteEvent;
             _dc.PropertyChanged -= Dc_PropertyChanged;
 
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
 
                 try
                 {
-                    WindowManager.ViewModels.NPC.RemoveNPC(_dc, 0);
+                    WindowManager.ViewModels.NpcVM.RemoveNPC(_dc, 0);
                 }
                 catch
                 {

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace TCC.Controls.Settings
 {
-    /// <summary>
-    /// Interaction logic for FieldSetting.xaml
-    /// </summary>
     public partial class FieldSetting
     {
         public string Value

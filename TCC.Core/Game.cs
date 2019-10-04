@@ -139,7 +139,7 @@ namespace TCC
             {
                 if (!App.Loading)
                 {
-                    WindowManager.ViewModels.NotificationArea.Enqueue("TCC", $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.", NotificationType.Warning, 5000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.", NotificationType.Warning, 5000);
                     ChatWindowManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
                 }
                 //var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
@@ -304,10 +304,10 @@ namespace TCC
             AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
 
             // TODO: this shouldn't reference modules ------------------
-            if (WindowManager.ViewModels.NPC.VisibleBossesCount == 0)
+            if (WindowManager.ViewModels.NpcVM.VisibleBossesCount == 0)
             {
                 Encounter = false;
-                WindowManager.ViewModels.Group.SetAggro(0);
+                WindowManager.ViewModels.GroupVM.SetAggro(0);
             }
             // TODO ----------------------------------------------------
         }
@@ -520,7 +520,7 @@ namespace TCC
               || !ProxyInterface.Instance.IsStubAvailable)
                 return;
 
-            WindowManager.ViewModels.LFG.ForceStopPublicize();
+            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
             ProxyInterface.Instance.Stub.ReturnToLobby();
         }
         private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
@@ -578,7 +578,7 @@ namespace TCC
 
             if (App.Settings.ClassWindowSettings.Enabled
                 && Me.Class == Class.Sorcerer
-                && WindowManager.ViewModels.Class.CurrentManager is SorcererLayoutVM sm)
+                && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutVM sm)
             {
                 sm.NotifyElementChanged();
             }

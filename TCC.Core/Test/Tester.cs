@@ -77,8 +77,8 @@ namespace TCC.Test
             Game.Logged = true;
             Game.LoadingScreen = false;
             Game.Me.Class = c;
-            WindowManager.ViewModels.Class.CurrentClass = Game.Me.Class;
-            WindowManager.ViewModels.Cooldowns.LoadSkills(c);
+            WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
+            WindowManager.ViewModels.CooldownsVM.LoadSkills(c);
         }
         public static void ForceEncounter(bool val = true)
         {
@@ -91,7 +91,7 @@ namespace TCC.Test
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l)
         {
-            WindowManager.ViewModels.Group.AddOrUpdateMember(new User(WindowManager.ViewModels.Group.GetDispatcher())
+            WindowManager.ViewModels.GroupVM.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
             {
                 Alive = true,
                 Awakened = true,
@@ -122,7 +122,7 @@ namespace TCC.Test
         }
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
-            WindowManager.ViewModels.NPC.AddOrUpdateNpc(target, maxHP, currentHP, false, Game.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
+            WindowManager.ViewModels.NpcVM.AddOrUpdateNpc(target, maxHP, currentHP, false, Game.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
             EntityManager.SetEncounter(currentHP, maxHP);
         }
         public static void AddFakeCuGuilds()
@@ -130,9 +130,9 @@ namespace TCC.Test
             var r = new Random();
             for (var i = 0; i < 30; i++)
             {
-                WindowManager.ViewModels.CivilUnrest.AddGuild(new CityWarGuildData(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
-                WindowManager.ViewModels.CivilUnrest.SetGuildName((uint)i, "Guild " + i);
-                WindowManager.ViewModels.CivilUnrest.AddDestroyedGuildTower((uint)r.Next(0, 29));
+                WindowManager.ViewModels.CivilUnrestVM.AddGuild(new CityWarGuildData(1, (uint)i, 0, 0, (float)r.Next(0, 100) / 100));
+                WindowManager.ViewModels.CivilUnrestVM.SetGuildName((uint)i, "Guild " + i);
+                WindowManager.ViewModels.CivilUnrestVM.AddDestroyedGuildTower((uint)r.Next(0, 29));
             }
         }
 
@@ -155,7 +155,7 @@ namespace TCC.Test
             };
             l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 10, IsLeader = true, Online = true });
             l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest });
-            WindowManager.ViewModels.LFG.Listings.Add(l);
+            WindowManager.ViewModels.LfgVM.Listings.Add(l);
         }
         public static void AddFakeGroupMembers(int count)
         {
@@ -167,8 +167,8 @@ namespace TCC.Test
         }
         public static void UpdateFakeMember(ulong eid)
         {
-            WindowManager.ViewModels.Group.TryGetUser(eid, out User l);
-            var ut = new User(WindowManager.ViewModels.Group.GetDispatcher())
+            WindowManager.ViewModels.GroupVM.TryGetUser(eid, out User l);
+            var ut = new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
             {
                 Name = l.Name,
                 PlayerId = l.PlayerId,
@@ -181,11 +181,11 @@ namespace TCC.Test
                 UserClass = l.UserClass,
                 Awakened = l.Awakened,
             };
-            Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.Group.AddOrUpdateMember(ut));
+            Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.GroupVM.AddOrUpdateMember(ut));
         }
         public static void ProfileThreadsUsage()
         {
-            var _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+            var _t          = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             var dispatchers = new List<Dispatcher>
             {
                  App.BaseDispatcher                                ,
@@ -375,7 +375,7 @@ namespace TCC.Test
         {
             SpawnNPC(9, 700, _eid++, true, false, 0);
             if (_eid != 10000) return;
-            WindowManager.ViewModels.NPC.Clear();
+            WindowManager.ViewModels.NpcVM.Clear();
             _t.Stop();
         }
 
@@ -437,12 +437,12 @@ namespace TCC.Test
                 if (villager) return;
                 if (m.IsBoss)
                 {
-                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v, remainingEnrageTime);
+                    WindowManager.ViewModels.NpcVM.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, v, remainingEnrageTime);
                 }
                 else
                 {
                     if (App.Settings.NpcWindowSettings.HideAdds) return;
-                    WindowManager.ViewModels.NPC.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false, remainingEnrageTime);
+                    WindowManager.ViewModels.NpcVM.AddOrUpdateNpc(entityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, templateId, zoneId, false, remainingEnrageTime);
                 }
             }
         }

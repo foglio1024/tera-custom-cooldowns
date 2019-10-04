@@ -163,7 +163,7 @@ namespace TCC.Data
             {
                 IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) ||
                     LeaderId == Game.Me.PlayerId ||
-                    WindowManager.ViewModels.Group.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
+                    WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
             }), DispatcherPriority.DataBind);
         }
 

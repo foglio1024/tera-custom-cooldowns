@@ -32,7 +32,7 @@ namespace TCC.Interop
             }
             catch (Exception e)
             {
-                WindowManager.ViewModels.NotificationArea.Enqueue("TCC Discord notifier", "Failed to send Discord notification.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC Discord notifier", "Failed to send Discord notification.", NotificationType.Error);
                 Log.F($"Failed to execute webhook: {e}");
             }
 

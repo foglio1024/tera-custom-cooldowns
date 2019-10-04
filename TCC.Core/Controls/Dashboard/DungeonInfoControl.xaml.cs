@@ -26,7 +26,7 @@ namespace TCC.Controls.Dashboard
 
         public void AnimateIn()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 EntriesBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _bubbleScale);
                 EntriesBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleScale);

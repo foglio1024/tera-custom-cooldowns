@@ -46,14 +46,14 @@ namespace TCC
         {
             if (!Game.DB.SkillsDatabase.TryGetSkill(id, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
-            WindowManager.ViewModels.Cooldowns.Change(skill, cd);
+            WindowManager.ViewModels.CooldownsVM.Change(skill, cd);
 
         }
         public static void ResetSkill(uint id)
         {
             if (!Game.DB.SkillsDatabase.TryGetSkill(id, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
-            WindowManager.ViewModels.Cooldowns.ResetSkill(skill);
+            WindowManager.ViewModels.CooldownsVM.ResetSkill(skill);
         }
 
         private static void RouteSkill(Cooldown skillCooldown)
@@ -61,11 +61,11 @@ namespace TCC
             if (skillCooldown.Duration == 0)
             {
                 skillCooldown.Dispose();
-                WindowManager.ViewModels.Cooldowns.Remove(skillCooldown.Skill);
+                WindowManager.ViewModels.CooldownsVM.Remove(skillCooldown.Skill);
             }
             else
             {
-                WindowManager.ViewModels.Cooldowns.AddOrRefresh(skillCooldown);
+                WindowManager.ViewModels.CooldownsVM.AddOrRefresh(skillCooldown);
             }
         }
 

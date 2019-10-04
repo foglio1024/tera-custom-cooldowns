@@ -36,7 +36,7 @@ namespace TCC.Controls.Classes
 
         private void OnLineHeldEnded()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 _lineHeldStacksAn.To = 42;
                 _lineHeldStacksAn.Duration = TimeSpan.FromMilliseconds(150);
@@ -59,7 +59,7 @@ namespace TCC.Controls.Classes
         //}
         private void OnStacksChanged(int stacks)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 _lineHeldStacksAn.To = stacks / 10D * 280 + 42;
                 _lineHeldStacksAn.Duration = TimeSpan.FromMilliseconds(150);
@@ -68,7 +68,7 @@ namespace TCC.Controls.Classes
         }
         private void OnLineHeldRefreshed(long duration)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 _lineHeldDurationAn.From = 318;
                 _lineHeldDurationAn.To = 42;

@@ -37,7 +37,7 @@ namespace TCC.Parsing
         }
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var currChar = WindowManager.ViewModels.Dashboard.CurrentCharacter;
+            var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
             var cleared = currChar.GuardianInfo.Cleared;
             var standardCountString = $"<font color =\"#cccccc\">({cleared}/40)</font>";
             var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{cleared}</font><font color=\"#cccccc\">/40)</font>";
@@ -52,7 +52,7 @@ namespace TCC.Parsing
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.GuildNotice);
             ChatWindowManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
-            WindowManager.ViewModels.NotificationArea.Enqueue("Guild", msg.ToString(), NotificationType.Success);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild", msg.ToString(), NotificationType.Success);
 
         }
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessage sysMsg)
@@ -62,13 +62,13 @@ namespace TCC.Parsing
             TimeManager.Instance.ExecuteGuildBamWebhook();
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationArea.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
         }
         private static void HandleDungeonEngagedMessage(string srvMsg, SystemMessage sysMsg)
         {
             const string s = "dungeon:";
             var dgId = Convert.ToUInt32(srvMsg.Substring(srvMsg.IndexOf(s, StringComparison.Ordinal) + s.Length));
-            WindowManager.ViewModels.Dashboard.CurrentCharacter.DungeonInfo.Engage(dgId);
+            WindowManager.ViewModels.DashboardVM.CurrentCharacter.DungeonInfo.Engage(dgId);
 
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
@@ -100,7 +100,7 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
-            if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LFG.RemoveDeadLfg();
+            if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
         }
 
         #region Factory
@@ -177,7 +177,7 @@ namespace TCC.Parsing
         private static void HandleLfgNotListed(string srvMsg, SystemMessage sysMsg)
         {
             ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
-            WindowManager.ViewModels.LFG.ForceStopPublicize();
+            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
         }
 
         private static void Redirect(string srvMsg, SystemMessage sysMsg, ChatChannel ch)
@@ -190,7 +190,7 @@ namespace TCC.Parsing
         {
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
 
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
@@ -241,7 +241,7 @@ namespace TCC.Parsing
         {
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationArea.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
             //@4158

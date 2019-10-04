@@ -9,11 +9,12 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var id = (ulong) value;
+            if (value == null) return "";
+            var id = (ulong)value;
             return Game.IsMe(id)
                 ? Game.Me.Name
-                : TccUtils.IsEntitySpawned(id) 
-                    ? TccUtils.GetEntityName(id) 
+                : TccUtils.IsEntitySpawned(id)
+                    ? TccUtils.GetEntityName(id)
                     : "";
         }
 

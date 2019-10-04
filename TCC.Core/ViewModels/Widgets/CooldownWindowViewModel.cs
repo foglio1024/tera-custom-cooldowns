@@ -1,13 +1,12 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using FoglioUtils;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -45,7 +44,7 @@ namespace TCC.ViewModels.Widgets
         public IEnumerable<Item> Items => Game.DB.ItemsDatabase.ItemSkills;
         public IEnumerable<Abnormality> Passivities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
 
-        private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.Class.CurrentManager;
+        private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
 
         private static bool FindAndUpdate(SynchronizedObservableCollection<Cooldown> list, Cooldown sk)
         {

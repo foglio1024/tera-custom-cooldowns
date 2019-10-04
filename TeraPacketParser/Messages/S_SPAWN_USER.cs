@@ -1,5 +1,4 @@
-﻿using System.Runtime.Remoting.Activation;
-using TeraDataLite;
+﻿using TeraDataLite;
 
 namespace TeraPacketParser.Messages
 {
@@ -45,6 +44,7 @@ namespace TeraPacketParser.Messages
             Gloves = new GearItemData(glovesId, GearTier.Low, GearPiece.Hands);
             Boots = new GearItemData(bootsId, GearTier.Low, GearPiece.Feet);
 
+            // ReSharper disable UnusedVariable
             var underwear = reader.ReadUInt32();
             var head = reader.ReadUInt32();
             var face = reader.ReadUInt32();
@@ -72,6 +72,7 @@ namespace TeraPacketParser.Messages
             var weapEnch= reader.ReadUInt32();
             var woldEventTarget= reader.ReadBoolean();
             var pkEnabled= reader.ReadBoolean();
+            // ReSharper restore UnusedVariable
             Level = reader.ReadInt32();
 
 

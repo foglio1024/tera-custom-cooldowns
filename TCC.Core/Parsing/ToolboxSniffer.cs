@@ -11,7 +11,6 @@ using TCC.TeraCommon.Sniffing;
 using TeraPacketParser;
 using FoglioUtils.Extensions;
 using TCC.Utilities;
-using TCC.Windows.Widgets;
 using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing

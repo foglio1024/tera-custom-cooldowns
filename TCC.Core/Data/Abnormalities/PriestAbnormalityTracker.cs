@@ -15,14 +15,14 @@ namespace TCC.Data.Abnormalities
         private static void CheckTripleNemesis(S_ABNORMALITY_BEGIN p)
         {
             if (TripleNemesisId != p.AbnormalityId) return;
-            if (!WindowManager.ViewModels.NPC.TryFindNPC(p.TargetId, out _)) return;
+            if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
             if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
             InvokeMarkingRefreshed(p.Duration);
         }
         private static void CheckTripleNemesis(S_ABNORMALITY_REFRESH p)
         {
             if (TripleNemesisId != p.AbnormalityId) return;
-            if (!WindowManager.ViewModels.NPC.TryFindNPC(p.TargetId, out _)) return;
+            if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
             if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
             InvokeMarkingRefreshed(p.Duration);
         }

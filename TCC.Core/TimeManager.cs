@@ -53,7 +53,7 @@ namespace TCC
 
         private void CheckCloseEvents()
         {
-            var closeEventsCount = WindowManager.ViewModels.Dashboard.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
+            var closeEventsCount = WindowManager.ViewModels.DashboardVM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
             if (App.Settings.FloatingButtonSettings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
 
@@ -62,7 +62,7 @@ namespace TCC
         private void CheckNewDay(object sender, EventArgs e)
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
-                WindowManager.ViewModels.Dashboard.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
+                WindowManager.ViewModels.DashboardVM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
             if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0)
                 CheckCloseEvents();
         }
@@ -92,13 +92,13 @@ namespace TCC
                 ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
-            if (WindowManager.ViewModels.Dashboard.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
+            if (WindowManager.ViewModels.DashboardVM.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
             {
-                WindowManager.ViewModels.Dashboard.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
+                WindowManager.ViewModels.DashboardVM.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
             }
 
             CheckReset();
-            WindowManager.ViewModels.Dashboard.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion.ToString());
+            WindowManager.ViewModels.DashboardVM.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion.ToString());
 
         }
 
@@ -107,15 +107,15 @@ namespace TCC
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
             if (App.Settings.LastRun > todayReset || DateTime.Now < todayReset) return;
 
-            WindowManager.ViewModels.Dashboard.ResetDailyData();
+            WindowManager.ViewModels.DashboardVM.ResetDailyData();
 
             var weeklyDungeonsReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].DungeonsWeeklyResetDay;
             var weeklyVanguardReset = DateTime.Now.DayOfWeek == _serverTimezones[CurrentRegion].VanguardResetDay;
 
-            if (weeklyDungeonsReset) WindowManager.ViewModels.Dashboard.ResetWeeklyDungeons();
-            if (weeklyVanguardReset) WindowManager.ViewModels.Dashboard.ResetVanguardWeekly();
+            if (weeklyDungeonsReset) WindowManager.ViewModels.DashboardVM.ResetWeeklyDungeons();
+            if (weeklyVanguardReset) WindowManager.ViewModels.DashboardVM.ResetVanguardWeekly();
 
-            WindowManager.ViewModels.Dashboard.SaveCharacters();
+            WindowManager.ViewModels.DashboardVM.SaveCharacters();
             App.Settings.LastRun = DateTime.Now;
             App.Settings.Save();
         }
@@ -142,7 +142,7 @@ namespace TCC
             {
 
                 ChatWindowManager.Instance.AddTccMessage("Failed to retrieve guild BAM info.");
-                WindowManager.ViewModels.NotificationArea.Enqueue("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
 
                 return 0;
             }
@@ -168,7 +168,7 @@ namespace TCC
             catch
             {
                 ChatWindowManager.Instance.AddTccMessage("Failed to upload guild BAM info.");
-                WindowManager.ViewModels.NotificationArea.Enqueue("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
 
             }
 
@@ -183,7 +183,7 @@ namespace TCC
 
         public void SetGuildBamTime(bool force)
         {
-            foreach (var eg in WindowManager.ViewModels.Dashboard.EventGroups.ToSyncList().Where(x => x.RemoteCheck))
+            foreach (var eg in WindowManager.ViewModels.DashboardVM.EventGroups.ToSyncList().Where(x => x.RemoteCheck))
             {
                 foreach (var ev in eg.Events.ToSyncList())
                 {

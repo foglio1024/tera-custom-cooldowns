@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC.Windows
 {

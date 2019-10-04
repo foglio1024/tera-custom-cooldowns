@@ -94,7 +94,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                WindowManager.ViewModels.NotificationArea.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
@@ -135,7 +135,7 @@ namespace TCC.ViewModels.Widgets
         {
             try
             {
-                m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.AddGuild(x));
+                m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrestVM.AddGuild(x));
             }
             catch
             {
@@ -146,7 +146,7 @@ namespace TCC.ViewModels.Widgets
         {
             try
             {
-                m.GuildDetails.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrest.SetGuildName(x.Item1, x.Item2));
+                m.GuildDetails.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrestVM.SetGuildName(x.Item1, x.Item2));
             }
             catch
             {
@@ -161,13 +161,13 @@ namespace TCC.ViewModels.Widgets
             {
                 g.TowerHp = guildInfo.TowerHp;
                 if (g.Name != "") return;
-                if (guildInfo.Self) g.Name = WindowManager.ViewModels.Dashboard.CurrentCharacter?.GuildName;
+                if (guildInfo.Self) g.Name = WindowManager.ViewModels.DashboardVM.CurrentCharacter?.GuildName;
                 //TODO: add kills and deaths?
             }
             else
             {
                 var name = "";
-                if (guildInfo.Self) name = WindowManager.ViewModels.Dashboard.CurrentCharacter?.GuildName;
+                if (guildInfo.Self) name = WindowManager.ViewModels.DashboardVM.CurrentCharacter?.GuildName;
                 _guilds.Add(new CivilUnrestGuild() { Id = guildInfo.Id, Name = name, TowerHp = guildInfo.TowerHp, TowersDestroyed = 0 });
             }
         }

@@ -1,8 +1,4 @@
-﻿using System.Net;
-using System.Windows;
-using System.Windows.Media.Animation;
-using System.Windows.Threading;
-using FoglioUtils;
+﻿using FoglioUtils;
 
 namespace TCC.Windows
 {

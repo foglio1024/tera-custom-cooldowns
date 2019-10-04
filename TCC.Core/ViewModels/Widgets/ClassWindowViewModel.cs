@@ -111,7 +111,7 @@ namespace TCC.ViewModels.Widgets
         private void OnSorcererReplacesElementsInCharWindowChanged()
         {
             // TODO: delet this
-            WindowManager.ViewModels.Character.ExN(nameof(CharacterWindowViewModel.ShowElements));
+            WindowManager.ViewModels.CharacterVM.ExN(nameof(CharacterWindowViewModel.ShowElements));
         }
 
         protected override void InstallHooks()
