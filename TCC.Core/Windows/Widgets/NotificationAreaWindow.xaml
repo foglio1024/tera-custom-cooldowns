@@ -18,7 +18,18 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
-        <Grid Name="WindowContent" Grid.Row="1" Margin="10 0" >
+        <StackPanel Name="WindowContent" Grid.Row="1" Margin="10 0" >
+            <StackPanel.Resources>
+                <Style TargetType="ContentControl">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <local:DefaultNotificationControl/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </StackPanel.Resources>
             <ItemsControl ItemsSource="{Binding Notifications}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -31,7 +42,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
+        </StackPanel>
         <controls:WindowButtons x:Name="Buttons" 
                                 WindowName="Notification area"
                                 HorizontalAlignment="Left"
