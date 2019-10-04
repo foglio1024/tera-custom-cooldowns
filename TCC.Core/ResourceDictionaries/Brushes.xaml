@@ -92,6 +92,8 @@
     <SolidColorBrush x:Key="ItemRareBrush"                  Color="{StaticResource ItemRareColor}"                             />
     <SolidColorBrush x:Key="ItemSuperiorBrush"              Color="{StaticResource ItemSuperiorColor}"                         />
 
+    <SolidColorBrush x:Key="ToolboxBrush"                   Color="{StaticResource ToolboxColor}"                              />
+
     <SolidColorBrush x:Key="ChatSayBrush"                   Color="{StaticResource ChatSayColor}"                              />
     <SolidColorBrush x:Key="ChatPartyBrush"                 Color="{StaticResource ChatPartyColor}"                            />
     <SolidColorBrush x:Key="ChatGuildBrush"                 Color="{StaticResource ChatGuildColor}"                            />

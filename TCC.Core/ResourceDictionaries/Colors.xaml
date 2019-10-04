@@ -93,6 +93,8 @@
     <Color x:Key="ItemUncommonColor">            #4DCB30   </Color>
     <Color x:Key="ItemRareColor">                #009ED9   </Color>
     <Color x:Key="ItemSuperiorColor">            #EEBE00   </Color>
+
+    <Color x:Key="ToolboxColor">                 #6268DB   </Color>
                                                            
     <!--Chat colors-->                                     
     <Color x:Key="ChatSayColor">                 #FFFFFF   </Color>

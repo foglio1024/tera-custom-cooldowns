@@ -184,6 +184,7 @@ namespace TCC.R
 		public static Color ItemUncommonColor => ((Color)App.Current.FindResource("ItemUncommonColor"));
 		public static Color ItemRareColor => ((Color)App.Current.FindResource("ItemRareColor"));
 		public static Color ItemSuperiorColor => ((Color)App.Current.FindResource("ItemSuperiorColor"));
+		public static Color ToolboxColor => ((Color)App.Current.FindResource("ToolboxColor"));
 		public static Color ChatSayColor => ((Color)App.Current.FindResource("ChatSayColor"));
 		public static Color ChatPartyColor => ((Color)App.Current.FindResource("ChatPartyColor"));
 		public static Color ChatGuildColor => ((Color)App.Current.FindResource("ChatGuildColor"));
@@ -307,6 +308,7 @@ namespace TCC.R
 		public static SolidColorBrush ItemUncommonBrush => ((SolidColorBrush)App.Current.FindResource("ItemUncommonBrush"));
 		public static SolidColorBrush ItemRareBrush => ((SolidColorBrush)App.Current.FindResource("ItemRareBrush"));
 		public static SolidColorBrush ItemSuperiorBrush => ((SolidColorBrush)App.Current.FindResource("ItemSuperiorBrush"));
+		public static SolidColorBrush ToolboxBrush => ((SolidColorBrush)App.Current.FindResource("ToolboxBrush"));
 		public static SolidColorBrush ChatSayBrush => ((SolidColorBrush)App.Current.FindResource("ChatSayBrush"));
 		public static SolidColorBrush ChatPartyBrush => ((SolidColorBrush)App.Current.FindResource("ChatPartyBrush"));
 		public static SolidColorBrush ChatGuildBrush => ((SolidColorBrush)App.Current.FindResource("ChatGuildBrush"));
