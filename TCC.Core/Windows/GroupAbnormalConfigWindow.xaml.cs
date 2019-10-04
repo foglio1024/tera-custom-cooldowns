@@ -5,16 +5,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.ViewModels;
 using TeraDataLite;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Logica di interazione per GroupAbnormalConfigWindow.xaml
-    /// </summary>
     public partial class GroupAbnormalConfigWindow
     {
         private Class _currentFilter;
@@ -31,24 +28,12 @@ namespace TCC.Windows
 
         private void OnShowAllChanged()
         {
-            var an = new DoubleAnimation(DC.ShowAll ? .2 : 1, TimeSpan.FromMilliseconds(200));
+            var an = AnimationFactory.CreateDoubleAnimation(200, DC.ShowAll ? .2 : 1);
             MainGrid.BeginAnimation(OpacityProperty, an);
             MainGrid.IsHitTestVisible = !DC.ShowAll;
         }
 
-        public void ShowWindow()
-        {
-            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
-            Dispatcher.Invoke(() =>
-            {
-                var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
-                if (IsVisible) return;
-                Opacity = 0;
-                Show();
-                Activate();
-                BeginAnimation(OpacityProperty, animation);
-            });
-        }
+
 
         private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -58,22 +43,17 @@ namespace TCC.Windows
             view.Refresh();
         }
 
-        private void Drag(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             App.Settings.Save();
-            var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
-            an.Completed += (s, ev) =>
-            {
-                Close();
-                if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-
-            };
-            BeginAnimation(OpacityProperty, an);
+            var anim = AnimationFactory.CreateDoubleAnimation(200, 1, completed: (_, __) =>
+             {
+                 Close();
+                 if (App.Settings.ForceSoftwareRendering)
+                     RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+             });
+            BeginAnimation(OpacityProperty, anim);
         }
 
         private void FilterByClass(object sender, RoutedEventArgs e)
@@ -85,6 +65,7 @@ namespace TCC.Windows
                 SearchBox.Clear();
                 view.Filter = null;
             }
+
             if (view.Filter == null || c != _currentFilter)
             {
                 view.Filter = o => ((GroupAbnormalityVM)o).Classes.Any(x => x.Class == c && x.Selected);
@@ -95,7 +76,10 @@ namespace TCC.Windows
                 view.Filter = null;
                 _currentFilter = Class.None;
             }
+
             view.Refresh();
+
+            //TODO: this is bad and i should feel bad
             foreach (var x in ClassesButtons.Items)
             {
                 var cp = (ContentPresenter)ClassesButtons.ItemContainerGenerator.ContainerFromItem(x);

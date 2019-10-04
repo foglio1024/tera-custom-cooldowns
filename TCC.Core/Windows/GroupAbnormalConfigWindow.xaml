@@ -1,9 +1,10 @@
-﻿<Window x:Class="TCC.Windows.GroupAbnormalConfigWindow"
+﻿<windows:TccWindow x:Class="TCC.Windows.GroupAbnormalConfigWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:settings="clr-namespace:TCC.Controls.Settings"
+        xmlns:windows="clr-namespace:TCC.Windows"
         SizeToContent="Height"
         mc:Ignorable="d"
          Style="{StaticResource BaseWindowStyle}" DataContext="{Binding DC, RelativeSource={RelativeSource Self}}"
@@ -140,7 +141,7 @@
             </Grid.LayoutTransform>
         </Grid>
     </Grid>
-</Window>
+</windows:TccWindow>
 
 
 
