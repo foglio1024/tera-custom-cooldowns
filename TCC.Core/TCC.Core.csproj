@@ -114,6 +114,8 @@
     </Compile>
     <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="Sniffing\SnifferFactory.cs" />
+    <Compile Include="TccTrayIcon.cs" />
+    <Compile Include="TccWidgetBuilder.cs" />
     <Compile Include="Utilities\AbnormalityUtils.cs" />
     <Compile Include="Data\Account.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
