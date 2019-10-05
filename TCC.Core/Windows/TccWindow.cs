@@ -32,37 +32,50 @@ namespace TCC.Windows
                 Hidden?.Invoke();
             });
         }
+        public virtual void HideWindow()
+        {
+            BeginAnimation(OpacityProperty, _hideAnim);
+        }
+        public virtual void ShowWindow()
+        {
+            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            Dispatcher?.BeginInvoke(new Action(() =>
+            {
+                Opacity = 0;
+                Show();
+                Showed?.Invoke();
+                RefreshTopmost();
+                BeginAnimation(OpacityProperty, _showAnim);
+            }));
+        }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
             Handle = new WindowInteropHelper(this).Handle;
         }
-
-        public void HideWindow()
-        {
-            BeginAnimation(OpacityProperty, _hideAnim);
-
-        }
-        public void ShowWindow()
-        {
-            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
-            Dispatcher?.Invoke(() =>
-            {
-                Topmost = false; Topmost = true;
-                //Opacity = 0;
-                Show();
-                Showed?.Invoke();
-                BeginAnimation(OpacityProperty, _showAnim);
-            });
-        }
-        protected void Drag(object sender, MouseButtonEventArgs e)
-        {
-            this.TryDragMove();
-        }
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        protected virtual void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             HideWindow();
         }
+
+        protected void Drag(object sender, MouseButtonEventArgs e)
+        {
+            ((UIElement)Content).Opacity = .7;
+            this.TryDragMove();
+            ((UIElement)Content).Opacity = 1;
+        }
+
+        protected void RefreshTopmost()
+        {
+            if (FocusManager.PauseTopmost) return;
+
+            Dispatcher?.BeginInvoke(new Action(() =>
+            {
+                Topmost = false;
+                Topmost = true;
+            }));
+        }
+
     }
 }
