@@ -272,7 +272,7 @@ namespace TCC.Data.Pc
 
             }
         }
-        public bool IsDebuffed => _debuffList.Count != 0;
+        public bool IsDebuffed => _debuffList?.Count != 0;
         public bool IsInCombat
         {
             get => _isInCombat;
