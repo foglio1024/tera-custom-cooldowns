@@ -549,5 +549,19 @@ namespace TCC.ViewModels
         {
             OnEnabledChanged(value);
         }
+
+        public void RemoveEmptyChatWindows()
+        {
+            App.BaseDispatcher.BeginInvoke(new Action(() =>
+            {
+                foreach (ChatWindow w in App.Current.Windows.ToList().Where(x => x is ChatWindow c && c.VM.TabVMs.Count == 0))
+                {
+                    ChatWindows.Remove(w);
+                    w.Close();
+                }
+
+                if (FocusManager.ForceFocused) FocusManager.ForceFocused = false;
+            }), DispatcherPriority.Background);
+        }
     }
 }

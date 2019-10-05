@@ -113,7 +113,7 @@ namespace TCC.Windows.Widgets
         }
         private void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.RemoveEmptyChatWindows();
+            ChatWindowManager.Instance.RemoveEmptyChatWindows();
             UpdateSettings();
         }
         private new void OnLoaded(object sender, RoutedEventArgs e)
