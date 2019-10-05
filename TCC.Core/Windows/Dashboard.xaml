@@ -337,7 +337,7 @@
                 HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
         <!-- Title bar -->
         <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Top"
-              MouseLeftButtonDown="OnTitleBarMouseDown">
+              MouseLeftButtonDown="Drag">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />

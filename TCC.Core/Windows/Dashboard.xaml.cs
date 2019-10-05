@@ -3,28 +3,22 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using TCC.Data.Pc;
+using TCC.R;
 using TCC.ViewModels;
 
 namespace TCC.Windows
-
 {
-    /// <summary>
-    /// Logica di interazione per Dashboard.xaml
-    /// </summary>
     public partial class Dashboard
     {
         private DashboardViewModel VM { get; }
-        public IntPtr Handle { get; private set; }
 
         public Dashboard(DashboardViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
             VM = DataContext as DashboardViewModel;
-            Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
             Showed += () => VM.UpdateBuffs();
             Hidden += () => Game.DB.DungeonDatabase.SaveCustomDefs();
             //MouseLeftButtonDown += (_, __) => MenuPopup.IsOpen = false;
@@ -44,7 +38,7 @@ namespace TCC.Windows
 
         private void OnDetailsMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var an = new DoubleAnimation(0, TimeSpan.FromSeconds(.3)) { EasingFunction = R.MiscResources.QuadraticEase };
+            var an = new DoubleAnimation(0, TimeSpan.FromSeconds(.3)) {EasingFunction = MiscResources.QuadraticEase};
             an.Completed += (o, args) => DetailsBorder.IsHitTestVisible = false;
             DetailsBorder.BeginAnimation(OpacityProperty, an);
         }
@@ -52,23 +46,24 @@ namespace TCC.Windows
         public void ShowDetails()
         {
             InventoryFilter.Clear();
-            var an = new DoubleAnimation(1, TimeSpan.FromSeconds(.3)) { EasingFunction = R.MiscResources.QuadraticEase };
+            var an = new DoubleAnimation(1, TimeSpan.FromSeconds(.3)) {EasingFunction = MiscResources.QuadraticEase};
             an.Completed += (o, args) => DetailsBorder.IsHitTestVisible = true;
             DetailsBorder.BeginAnimation(OpacityProperty, an);
         }
 
         private void FilterInventory(object sender, TextChangedEventArgs e)
         {
-            var view = (ICollectionView)VM.SelectedCharacterInventory;
+            var view = (ICollectionView) VM.SelectedCharacterInventory;
             view.Filter = o =>
             {
-                var item = ((InventoryItem)o).Item;
+                var item = ((InventoryItem) o).Item;
                 var name = item.Name;
-                return name.IndexOf(((TextBox)sender).Text,
-                               StringComparison.InvariantCultureIgnoreCase) != -1;
+                return name.IndexOf(((TextBox) sender).Text,
+                           StringComparison.InvariantCultureIgnoreCase) != -1;
             };
             view.Refresh();
         }
+
         private void OnTabChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count != 0 && e.AddedItems[0] is TabItem) OnDetailsMouseButtonDown(null, null);
@@ -80,9 +75,11 @@ namespace TCC.Windows
             //VM.Characters.Remove(VM.SelectedCharacter);
             VM.SelectedCharacter.Hidden = true;
         }
+
         private void OpenMergedInventory(object sender, RoutedEventArgs e)
         {
-            new MergedInventoryWindow() { Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog();
+            new MergedInventoryWindow
+                {Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner}.ShowDialog();
         }
 
         private void OnMenuButtonClick(object sender, RoutedEventArgs e)
