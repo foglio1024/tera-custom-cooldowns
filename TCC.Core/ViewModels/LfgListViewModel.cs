@@ -115,7 +115,7 @@ namespace TCC.ViewModels
                 StayClosed = false;
                 ProxyInterface.Instance.Stub.RequestListings();
             }
-            else WindowManager.LfgListWindow.CloseWindow();
+            else WindowManager.LfgListWindow.HideWindow();
         }
 
         private void OnAutoPublicizeTimerTick(object sender, EventArgs e)

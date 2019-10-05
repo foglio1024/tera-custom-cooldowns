@@ -1,4 +1,4 @@
-﻿<Window x:Class="TCC.Windows.LfgListWindow"
+﻿<w:TccWindow x:Class="TCC.Windows.LfgListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -438,7 +438,7 @@
             </Path>
             <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".8" FontSize="24"
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0" />
-            <Rectangle MouseLeftButtonDown="Border_MouseLeftButtonDown" Fill="Transparent"></Rectangle>
+            <Rectangle MouseLeftButtonDown="Drag" Fill="Transparent"></Rectangle>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" 
                     VerticalAlignment="Stretch" Click="ReloadLfgList">
@@ -629,7 +629,7 @@
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</w:TccWindow>
 
 
 
