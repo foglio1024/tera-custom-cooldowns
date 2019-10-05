@@ -10,10 +10,9 @@ namespace TCC.Windows.Widgets
 {
     public class NotificationAreaViewModel : TccWindowViewModel
     {
-        public event Action NotificationAddedEvent;
         private readonly ConcurrentQueue<NotificationInfo> _queue;
-        public SynchronizedObservableCollection<NotificationInfo /*TODO: use VM if needed*/> Notifications { get; }
-        public NotificationInfo Current { get; set; }
+        public SynchronizedObservableCollection<NotificationInfo> Notifications { get; }
+
         public NotificationAreaViewModel(WindowSettings settings) : base(settings)
         {
             _queue = new ConcurrentQueue<NotificationInfo>();
@@ -22,21 +21,23 @@ namespace TCC.Windows.Widgets
 
         private void CheckShow()
         {
-            while (Notifications.Count < ((NotificationAreaSettings)Settings).MaxNotifications)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (_queue.IsEmpty) break;
-                if (!_queue.TryDequeue(out var next)) continue;
-                if (!Pass(next)) continue;
-                Notifications.Add(next);
-                Current = Notifications[0];
-                N(nameof(Current));
-                NotificationAddedEvent?.Invoke();
-            }
+                while (Notifications.Count < ((NotificationAreaSettings) Settings).MaxNotifications)
+                {
+                    if (_queue.IsEmpty) break;
+                    if (!_queue.TryDequeue(out var next)) continue;
+                    if (!Pass(next)) continue;
+                    Notifications.Add(next);
+                }
+            }));
         }
+
         private bool Pass(NotificationInfo info)
         {
             return Notifications.ToSyncList().All(n => n.Message != info.Message);
         }
+
         public void Enqueue(string title, string message, NotificationType type, uint duration = 4000U)
         {
             _queue.Enqueue(new NotificationInfo(title, message, type, duration));
