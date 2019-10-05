@@ -74,6 +74,7 @@ namespace TCC.ViewModels.Widgets
                 N();
             }
         }
+
         public BaseClassLayoutVM CurrentManager
         {
             get => _currentManager;
@@ -87,22 +88,24 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
-        public ClassWindowViewModel(WindowSettings settings) : base(settings)
+        public ClassWindowViewModel(ClassWindowSettings settings) : base(settings)
         {
-            ((ClassWindowSettings)settings).WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
-            ((ClassWindowSettings)settings).WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
-            ((ClassWindowSettings)settings).WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
-            ((ClassWindowSettings)settings).SorcererReplacesElementsInCharWindowChanged += OnSorcererReplacesElementsInCharWindowChanged;
+            settings.WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
+            settings.WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
+            settings.WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
+            settings.SorcererReplacesElementsInCharWindowChanged += OnSorcererReplacesElementsInCharWindowChanged;
         }
 
         private void OnWarriorEdgeModeChanged()
         {
             TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
         }
+
         private void OnWarriorShowTraverseCutChanged()
         {
             TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
         }
+
         private void OnWarriorShowEdgeChanged()
         {
             TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowEdge));
@@ -126,6 +129,7 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
             PacketAnalyzer.Processor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
         }
+
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
@@ -150,18 +154,16 @@ namespace TCC.ViewModels.Widgets
         {
             CurrentClass = m.CharacterClass; // todo: check for enabled?
             if (m.CharacterClass == Class.Valkyrie)
-            {
                 PacketAnalyzer.Processor.Hook<S_WEAK_POINT>(OnWeakPoint);
-            }
             else
-            {
                 PacketAnalyzer.Processor.Unhook<S_WEAK_POINT>(OnWeakPoint);
-            }
         }
+
         private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
             CurrentClass = Class.None;
         }
+
         private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
             // check enabled?
@@ -175,32 +177,39 @@ namespace TCC.ViewModels.Widgets
                     break;
             }
         }
+
         private void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA m)
         {
             CurrentManager.SetMaxST(Convert.ToInt32(m.MaxST));
             CurrentManager.SetST(Convert.ToInt32(m.CurrentST));
         }
+
         private void OnWeakPoint(S_WEAK_POINT p)
         {
             if (!(CurrentManager is ValkyrieLayoutVM vvm)) return;
             vvm.RunemarksCounter.Val = p.TotalRunemarks;
         }
+
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
+
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
+
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
+
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             UpdateSkillCooldown(m.SkillId, m.Cooldown);
         }
+
         private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
         {
             UpdateSkillCooldown(m.SkillId, m.Cooldown);
