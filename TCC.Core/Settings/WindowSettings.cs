@@ -8,6 +8,7 @@ using TCC.Annotations;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
@@ -301,6 +302,8 @@ namespace TCC.Settings
 
         public void MakePositionsGlobal()
         {
+            Log.CW($"[{GetType().Name}] {nameof(MakePositionsGlobal)}()");
+
             var currentPos = new Point(X, Y);
             Positions.SetAllPositions(currentPos);
             App.Settings.Save();
@@ -310,6 +313,8 @@ namespace TCC.Settings
 
         public void ApplyScreenCorrection(Size sc)
         {
+            Log.CW($"[{GetType().Name}] {nameof(ApplyScreenCorrection)}({sc})");
+
             Positions.ApplyCorrection(sc);
         }
         protected Class CurrentClass()
