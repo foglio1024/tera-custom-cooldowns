@@ -403,7 +403,7 @@ namespace TCC.Windows
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
             var currOp = Opacity;
             if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _showButtonsAnimation);
-            Opacity = .5;
+            Opacity = .7;
             this.TryDragMove();
             if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
             Opacity = currOp;
