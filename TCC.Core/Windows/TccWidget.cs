@@ -1,18 +1,19 @@
-﻿using System;
+﻿using FoglioUtils;
+using FoglioUtils.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using System.Windows.Controls;
-using FoglioUtils;
-using FoglioUtils.Extensions;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
+using TCC.Utilities;
 
 namespace TCC.Windows
 {
@@ -34,6 +35,7 @@ namespace TCC.Windows
         protected UIElement BoundaryRef;
 
         public WindowSettings WindowSettings { get; private set; }
+
 
         protected void Init(WindowSettings settings)
         {
@@ -61,6 +63,11 @@ namespace TCC.Windows
             WindowManager.ForegroundManager.VisibilityChanged += OnVisibilityChanged;
             WindowManager.ForegroundManager.DimChanged += OnDimChanged;
             WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
+            WindowManager.RepositionRequestedEvent += ReloadPosition;
+            WindowManager.ResetToCenterEvent += ResetToCenter;
+            WindowManager.DisposeEvent += CloseWindowSafe;
+            WindowManager.MakeGlobalEvent += WindowSettings.MakePositionsGlobal;
+            WindowManager.ApplyScreenCorrectionEvent += WindowSettings.ApplyScreenCorrection;
             FocusManager.FocusTick += OnFocusTick;
 
             OnClickThruModeChanged();
@@ -98,8 +105,10 @@ namespace TCC.Windows
             }));
         }
 
-        public void ReloadPosition()
+        private void ReloadPosition()
         {
+            Log.CW($"[{GetType().Name}] {nameof(ReloadPosition)}()");
+
             Dispatcher?.BeginInvoke(new Action(() =>
             {
                 var left = WindowSettings.X * WindowManager.ScreenSize.Width;
@@ -125,6 +134,8 @@ namespace TCC.Windows
         }
         public void ResetToCenter()
         {
+            Log.CW($"[{GetType().Name}] {nameof(ResetToCenter)}()");
+
             Dispatcher?.Invoke(() =>
             {
                 Left = Screen.PrimaryScreen.Bounds.X + Screen.PrimaryScreen.Bounds.Width / 2 - ActualWidth / 2;
@@ -390,9 +401,12 @@ namespace TCC.Windows
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
+            var currOp = Opacity;
             if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _showButtonsAnimation);
+            Opacity = .5;
             this.TryDragMove();
             if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
+            Opacity = currOp;
             UpdateButtons();
             CheckBounds();
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
@@ -403,9 +417,29 @@ namespace TCC.Windows
         }
         public void CloseWindowSafe()
         {
-            Dispatcher?.Invoke(Close);
-            Dispatcher?.InvokeShutdown();
-            //Hide();
+            Log.CW($"[{GetType().Name}] {nameof(CloseWindowSafe)}()");
+            WindowManager.ForegroundManager.VisibilityChanged -= OnVisibilityChanged;
+            WindowManager.ForegroundManager.DimChanged -= OnDimChanged;
+            WindowManager.ForegroundManager.ClickThruChanged -= OnClickThruModeChanged;
+            WindowManager.RepositionRequestedEvent -= ReloadPosition;
+            WindowManager.ResetToCenterEvent -= ResetToCenter;
+            WindowManager.DisposeEvent -= CloseWindowSafe;
+            WindowManager.MakeGlobalEvent -= WindowSettings.MakePositionsGlobal;
+            WindowManager.ApplyScreenCorrectionEvent -= WindowSettings.ApplyScreenCorrection;
+            FocusManager.FocusTick -= OnFocusTick;
+            WindowSettings.EnabledChanged -= OnEnabledChanged;
+            WindowSettings.ClickThruModeChanged -= OnClickThruModeChanged;
+            WindowSettings.VisibilityChanged -= OnWindowVisibilityChanged;
+            WindowSettings.ResetToCenter -= ResetToCenter;
+            Loaded -= OnLoaded;
+            SizeChanged -= OnSizeChanged;
+
+            try
+            {
+                Dispatcher?.Invoke(Close);
+                Dispatcher?.InvokeShutdown();
+            }
+            catch { }
         }
 
         public static void OnShowAllHandlesToggled()
