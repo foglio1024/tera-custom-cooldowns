@@ -33,7 +33,7 @@ namespace TCC.Controls.Skills
         private static readonly Action EmptyDelegate = delegate { };
         //private string _lastSender = "";
 
-        private CooldownWindowViewModel VM => Dispatcher?.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
+        private CooldownWindowViewModel VM { get; set; }//=> Dispatcher?.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
         public FixedSkillContainers()
         {
             DropHandler = new SkillDropHandler();
@@ -55,6 +55,7 @@ namespace TCC.Controls.Skills
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
 
+            VM = Window.GetWindow(this).DataContext as CooldownWindowViewModel;
             VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
             VM.SkillsLoaded += OnSkillsLoaded;
