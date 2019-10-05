@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using FoglioUtils.Extensions;
+using System.Diagnostics;
 using System.Windows.Input;
-using FoglioUtils.Extensions;
 
 namespace TCC.Windows
 {
-    public partial class FUBH : Window
+    public partial class FUBH
     {
         public FUBH()
         {
