@@ -12,9 +12,6 @@
              mc:Ignorable="d" 
              Title="TCC Class" 
              UseLayoutRounding="True"
-             x:Name="Win"
-             BorderBrush="Red"
-             BorderThickness="0"
              d:DataContext="{d:DesignInstance widgets:ClassWindowViewModel}">
     <w:TccWidget.Resources>
         <DataTemplate x:Key="Warrior">
