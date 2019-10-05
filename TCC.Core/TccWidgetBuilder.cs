@@ -15,12 +15,12 @@ namespace TCC
 
         public async Task<TWindow> GetWindow()
         {
-            while (_window == null) { }
+            while (_window == null) { Thread.Sleep(100); }
             return _window;
         }
         public async Task<TViewModel> GetViewModel()
         {
-            while (_vm == null) { }
+            while (_vm == null) { Thread.Sleep(100); }
             return _vm;
         }
 
