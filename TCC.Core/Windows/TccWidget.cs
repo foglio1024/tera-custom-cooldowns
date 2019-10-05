@@ -431,8 +431,11 @@ namespace TCC.Windows
             WindowSettings.ClickThruModeChanged -= OnClickThruModeChanged;
             WindowSettings.VisibilityChanged -= OnWindowVisibilityChanged;
             WindowSettings.ResetToCenter -= ResetToCenter;
-            Loaded -= OnLoaded;
-            SizeChanged -= OnSizeChanged;
+            Dispatcher?.Invoke(() =>
+            {
+                Loaded -= OnLoaded;
+                SizeChanged -= OnSizeChanged;
+            });
 
             try
             {
