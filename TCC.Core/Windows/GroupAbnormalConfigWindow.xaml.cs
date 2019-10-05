@@ -16,12 +16,13 @@ namespace TCC.Windows
     {
         private Class _currentFilter;
 
-        public GroupConfigVM DC => Dispatcher.Invoke(() => DataContext as GroupConfigVM);
+        public GroupConfigVM DC { get; private set; }
 
         public GroupAbnormalConfigWindow()
         {
             InitializeComponent();
-            Dispatcher.Invoke(() => DataContext = new GroupConfigVM());
+            Dispatcher?.Invoke(() => DataContext = new GroupConfigVM());
+            DC = (GroupConfigVM) DataContext;
             DC.ShowAllChanged += OnShowAllChanged;
             OnShowAllChanged();
         }
