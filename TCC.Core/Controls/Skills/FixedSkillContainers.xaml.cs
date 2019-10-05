@@ -33,13 +33,10 @@ namespace TCC.Controls.Skills
         private static readonly Action EmptyDelegate = delegate { };
         //private string _lastSender = "";
 
-        private CooldownWindowViewModel VM { get; }
-
+        private CooldownWindowViewModel VM => Dispatcher?.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
         public FixedSkillContainers()
         {
             DropHandler = new SkillDropHandler();
-            DataContext = Dispatcher?.Invoke(() => WindowManager.CooldownWindow.DataContext);
-            VM = (CooldownWindowViewModel) DataContext;
             InitializeComponent();
             AddHandler(DragablzItem.DragStarted, new DragablzDragStartedEventHandler(ItemDragStarted), true);
             AddHandler(DragablzItem.DragCompleted, new DragablzDragCompletedEventHandler(ItemDragCompleted), true);
