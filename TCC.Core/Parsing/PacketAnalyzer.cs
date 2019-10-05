@@ -29,14 +29,13 @@ namespace TCC.Parsing
 
         private static void Init()
         {
-            Sniffer = SnifferFactory.Create();
             Factory = new MessageFactory();
 
+            Sniffer = SnifferFactory.Create();
             Sniffer.NewConnection += OnNewConnection;
             Sniffer.EndConnection += OnEndConnection;
             Sniffer.MessageReceived += EnqueuePacket;
             Sniffer.Enabled = true;
-
 
             AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Analysis" };
             AnalysisThread.Start();
@@ -68,7 +67,8 @@ namespace TCC.Parsing
         private static void OnNewConnection(Server srv)
         {
             Game.Server = srv;
-            WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
+            WindowManager.TrayIcon.Connected = true;
+            WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
             _ = ProxyInterface.Instance.Init();
@@ -85,7 +85,8 @@ namespace TCC.Parsing
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Disconnected", NotificationType.Normal);
-            WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
+            WindowManager.TrayIcon.Connected = false;
+            WindowManager.TrayIcon.Text = $"{App.AppVersion} - not connected";
 
             ProxyInterface.Instance.Disconnect();
 
@@ -104,6 +105,8 @@ namespace TCC.Parsing
             {
                 if (Sniffer is ToolboxSniffer tbs)
                 {
+                    if (!Directory.Exists(Path.Combine(App.DataPath, "opcodes")))
+                        Directory.CreateDirectory(Path.Combine(App.DataPath, "opcodes"));
                     if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
                     {
                         TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
