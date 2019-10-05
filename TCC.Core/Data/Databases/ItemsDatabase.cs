@@ -85,7 +85,7 @@ namespace TCC.Data.Databases
                 //}
 
                 //return ret;
-                return Items.Values.Where(x => x.Cooldown > 0);
+                return Items.Values.Where(x => x.Cooldown > 0).ToList();
             }
         }
     }
