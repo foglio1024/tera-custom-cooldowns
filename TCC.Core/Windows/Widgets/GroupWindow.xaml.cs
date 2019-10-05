@@ -19,7 +19,7 @@ namespace TCC.Windows.Widgets
             BoundaryRef = Boundary;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(App.Settings.GroupWindowSettings);
+            Init(VM.Settings);
         }
 
         //TODO: to commands in VM
