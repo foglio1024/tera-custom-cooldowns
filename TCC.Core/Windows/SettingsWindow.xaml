@@ -341,7 +341,7 @@
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 HorizontalAlignment="Stretch" />
         <!-- Title bar -->
-        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Background="Transparent">
+        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Background="Transparent" MouseLeftButtonDown="Drag">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />

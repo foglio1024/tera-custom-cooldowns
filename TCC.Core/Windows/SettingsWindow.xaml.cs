@@ -20,7 +20,6 @@ namespace TCC.Windows
         {
             DataContext = new SettingsWindowViewModel();
             InitializeComponent();
-            TitleBarGrid.MouseLeftButtonDown += (_, __) => this.TryDragMove();
             _bigPathSlideAnim = AnimationFactory.CreateDoubleAnimation(750, 0, -20, true);
             _bigPathFadeAnim = AnimationFactory.CreateDoubleAnimation(750, 1, 0, true);
         }
