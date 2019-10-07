@@ -82,7 +82,7 @@
                 </Border>
                 <ItemsControl Name="itemsControl" VerticalAlignment="Top"
                           VerticalContentAlignment="Top"
-                              ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.CanContentScroll="True"
                           Margin="0 5 5 3"
                           ItemsSource="{Binding Path=Content.(viewModels:Tab.Messages)}"
                           ItemTemplate="{StaticResource ChatMessageTemplate}"
@@ -327,6 +327,9 @@
                     <ItemsControl ItemsSource="{Binding CurrentTab.Messages}"
                                   VerticalAlignment="Bottom"
                                   Height="64"
+                                  ScrollViewer.CanContentScroll="True"
+                                  VirtualizingStackPanel.IsVirtualizing="True"
+                                  VirtualizingStackPanel.VirtualizationMode="Recycling"
                                   Margin="21 0 0 6">
                         <ItemsControl.LayoutTransform>
                             <RotateTransform Angle="180"/>
@@ -341,6 +344,19 @@
                                 <VirtualizingStackPanel  VirtualizationMode="Recycling"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+                        <ItemsControl.Template>
+                            <ControlTemplate>
+                                <Border SnapsToDevicePixels="True"
+                                        BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                        Padding="{TemplateBinding Control.Padding}"
+                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                        Background="{TemplateBinding Panel.Background}">
+                                    <ScrollViewer VerticalAlignment="Top" Focusable="False" VerticalScrollBarVisibility="Hidden">
+                                        <ItemsPresenter  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
 
                     </ItemsControl>
                 </Grid>
