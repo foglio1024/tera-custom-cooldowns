@@ -529,7 +529,7 @@ namespace TCC.ViewModels.Widgets
                 u.MaxHp = p.MaxHP;
                 u.MaxMp = p.MaxMP;
                 u.Level = p.Level;
-                if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
+                //if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
                 u.Alive = p.Alive;
                 N(nameof(AliveCount));
                 if (!p.Alive) u.HasAggro = false;
