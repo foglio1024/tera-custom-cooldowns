@@ -2,9 +2,6 @@
 
 namespace TCC.Windows.Widgets
 {
-    /// <summary>
-    /// Logica di interazione per WarriorLayout.xaml
-    /// </summary>
     public partial class ClassWindow 
     {
         private ClassWindowViewModel VM { get; }
@@ -18,20 +15,17 @@ namespace TCC.Windows.Widgets
             BoundaryRef = Boundary;
             MainContent = WindowContent;
             Init(App.Settings.ClassWindowSettings);
-            App.Settings.ClassWindowSettings.EnabledChanged += OnEnabledChanged;
 
             if (!Game.Logged) return;
-            if (VM.CurrentManager == null)
-                VM.CurrentClass = Game.Me.Class;
+            if (VM.CurrentManager != null) return;
+            VM.CurrentClass = Game.Me.Class;
 
         }
 
-        private new void OnEnabledChanged() 
+        protected override void OnEnabledChanged(bool enabled)
         {
-            if (App.Settings.ClassWindowSettings.Enabled)
-            {
-                VM.CurrentClass = Game.Me.Class;
-            }
+            base.OnEnabledChanged(enabled);
+            if (enabled) VM.CurrentClass = Game.Me.Class;
         }
     }
 }
