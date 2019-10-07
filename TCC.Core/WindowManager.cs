@@ -59,9 +59,6 @@ namespace TCC
 
         public static Size ScreenSize;
 
-        private static Dashboard _dashboardWindow;
-        private static LfgListWindow _lfgWindow;
-
         public static CooldownWindow CooldownWindow { get; private set; }
         public static CharacterWindow CharacterWindow { get; private set; }
         public static BossWindow BossWindow { get; private set; }
@@ -75,28 +72,12 @@ namespace TCC
         public static FlightDurationWindow FlightDurationWindow { get; private set; }
         public static SkillConfigWindow SkillConfigWindow { get; set; }
 
-        public static Dashboard DashboardWindow
-        {
-            get
-            {
-                if (_dashboardWindow != null) return _dashboardWindow;
-                _dashboardWindow = new Dashboard(ViewModels.DashboardVM);
-                return _dashboardWindow;
-            }
-        }
+        public static Dashboard DashboardWindow { get; private set; }
 
-        public static LfgListWindow LfgListWindow
-        {
-            get
-            {
-                if (_lfgWindow != null) return _lfgWindow;
-                _lfgWindow = new LfgListWindow(ViewModels.LfgVM);
-                return _lfgWindow;
-            }
-        }
+        public static LfgListWindow LfgListWindow { get; private set; }
 
 
-        public static async void Init()
+        public static async Task Init()
         {
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             FocusManager.Init();
@@ -166,7 +147,7 @@ namespace TCC
                 });
             });
 
-            ShutdownDispatchers();
+            WaitDispatchersShutdown();
         }
 
         private static async Task LoadWindows()
@@ -174,8 +155,7 @@ namespace TCC
             RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
 
             // TODO: TccModules should define and create their own windows
-            var b1 = new TccWidgetBuilder<CharacterWindow, CharacterWindowViewModel>(App.Settings
-                .CharacterWindowSettings);
+            var b1 = new TccWidgetBuilder<CharacterWindow, CharacterWindowViewModel>(App.Settings.CharacterWindowSettings);
             CharacterWindow = await b1.GetWindow();
             ViewModels.CharacterVM = await b1.GetViewModel();
 
@@ -199,8 +179,7 @@ namespace TCC
             BuffWindow = await b6.GetWindow();
             ViewModels.AbnormalVM = await b6.GetViewModel();
 
-            var b7 = new TccWidgetBuilder<NotificationAreaWindow, NotificationAreaViewModel>(App.Settings
-                .NotificationAreaSettings);
+            var b7 = new TccWidgetBuilder<NotificationAreaWindow, NotificationAreaViewModel>(App.Settings.NotificationAreaSettings);
             NotificationArea = await b7.GetWindow();
             ViewModels.NotificationAreaVM = await b7.GetViewModel();
 
@@ -214,8 +193,8 @@ namespace TCC
             FloatingButton = new FloatingButtonWindow();
             if (FloatingButton.WindowSettings.Enabled) FloatingButton.Show();
 
-            _dashboardWindow = new Dashboard(ViewModels.DashboardVM);
-            _lfgWindow = new LfgListWindow(ViewModels.LfgVM);
+            DashboardWindow = new Dashboard(ViewModels.DashboardVM);
+            LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
 
             ChatWindowManager.Instance.InitWindows();
 
@@ -232,14 +211,14 @@ namespace TCC
             RunningDispatchers.TryRemove(threadId, out _);
         }
 
-        public static void ShutdownDispatchers()
+        private static void WaitDispatchersShutdown()
         {
             if (RunningDispatchers == null) return;
             var tries = 50;
             while (tries > 0)
             {
                 if (RunningDispatchers.Count == 0) break;
-                Log.CW("Waiting all dispatcher to shutdown...");
+                Log.CW($"Waiting all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
                 Thread.Sleep(100);
                 tries--;
             }

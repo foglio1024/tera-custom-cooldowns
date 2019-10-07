@@ -108,7 +108,7 @@ namespace TCC
             SplashScreen.VM.Progress = 70;
             SplashScreen.VM.BottomText = "Initializing widgets...";
 
-            WindowManager.Init();
+            await WindowManager.Init();
 
             SplashScreen.VM.BottomText = "Initializing packet processor...";
             SplashScreen.VM.Progress = 80;
