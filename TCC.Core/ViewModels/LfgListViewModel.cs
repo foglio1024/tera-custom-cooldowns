@@ -249,10 +249,13 @@ namespace TCC.ViewModels
             N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
         }
 
-        public void SyncListings(List<ListingData> listings)
+        private void SyncListings(List<ListingData> listings)
         {
-            listings.ForEach(AddOrRefreshListing);
-            RemoveMissingListings();
+            Task.Factory.StartNew(() =>
+            {
+                listings.ForEach(AddOrRefreshListing);
+                RemoveMissingListings();
+            });
 
 
 
@@ -273,7 +276,7 @@ namespace TCC.ViewModels
                 }
                 else
                 {
-                    if (l.IsTrade && ((LfgWindowSettings) Settings).HideTradeListings) return;
+                    if (l.IsTrade && ((LfgWindowSettings)Settings).HideTradeListings) return;
                     Listings.Add(new Listing(l));
                     EnqueueRequest(l.LeaderId);
                 }
@@ -296,7 +299,7 @@ namespace TCC.ViewModels
 
         private void OnHideTradeChanged()
         {
-            if (!((LfgWindowSettings) Settings).HideTradeListings) return;
+            if (!((LfgWindowSettings)Settings).HideTradeListings) return;
             var toRemove = Listings.ToSyncList().Where(l => l.IsTrade).Select(s => s.LeaderId).ToList();
             toRemove.ForEach(r =>
             {
@@ -358,6 +361,8 @@ namespace TCC.ViewModels
             //if (!App.Settings.LfgWindowSettings.Enabled) return;
             var lfg = Listings.FirstOrDefault(listing => listing.LeaderId == m.Id || m.Members.Any(member => member.PlayerId == listing.LeaderId));
             if (lfg == null) return;
+            Task.Factory.StartNew(() =>
+            {
 
             m.Members.ForEach(member =>
             {
@@ -387,6 +392,7 @@ namespace TCC.ViewModels
             if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
             lfg.PlayerCount = m.Members.Count;
             NotifyMyLfg();
+            });
         }
         private void OnLeaveParty(S_LEAVE_PARTY m)
         {
