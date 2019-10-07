@@ -253,7 +253,7 @@ namespace TCC.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                listings.ForEach(AddOrRefreshListing);
+                listings.ForEach(l => Dispatcher.BeginInvoke(new Action(() => { AddOrRefreshListing(l);} )));
                 RemoveMissingListings();
             });
 
@@ -291,8 +291,11 @@ namespace TCC.ViewModels
                 });
                 toRemove.ForEach(r =>
                 {
-                    var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
-                    if (target != null) Listings.Remove(target);
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
+                        if (target != null) Listings.Remove(target);
+                    }));
                 });
             }
         }
