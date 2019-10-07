@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿#pragma warning disable 659
+using System.Windows.Forms;
 using TCC.Data;
 
 namespace TCC
@@ -30,3 +31,4 @@ namespace TCC
         }
     }
 }
+#pragma warning restore 659
