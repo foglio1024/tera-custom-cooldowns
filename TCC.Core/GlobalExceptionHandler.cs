@@ -32,12 +32,23 @@ namespace TCC
         {
             var ex = (Exception)e.ExceptionObject;
             DumpCrashToFile(ex);
-            try { new Thread(() => UploadCrashDump(ex)).Start(); }
-            catch { /*ignored*/ }
 
-            TccMessageBox.Show("TCC",
-                "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            if (ex is COMException com && (com.HResult == 88980406 /*not sure if getting this value like this is correct*/
+                                        || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")))
+            {
+                TccMessageBox.Show("TCC",
+                    "An error in render thread occured. This is usually caused by outdated video card drivers. TCC will now close.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                TccMessageBox.Show("TCC",
+                    "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+
+                try { new Thread(() => UploadCrashDump(ex)).Start(); }
+                catch { /*ignored*/ }
+            }
 
             App.ReleaseMutex();
             ProxyInterface.Instance.Disconnect();
@@ -144,29 +155,30 @@ namespace TCC
             };
         }
 
+#pragma warning disable 618
         private static async Task<JObject> GetThreadTraces()
         {
-            var ret = new JObject();
-
-            ret["Main"] = new StackTrace(false).ToString();
-
-            WindowManager.RunningDispatchers.ToList().ForEach(d =>
+            return await Task.Factory.StartNew(() =>
             {
-                var t = d.Value.Thread;
-                t.Suspend();
-                ret[t.Name] = new StackTrace(t, false).ToString();
-                t.Resume();
-            });
+                var ret = new JObject();
 
-            if (PacketAnalyzer.AnalysisThread != null)
-            {
+                WindowManager.RunningDispatchers.ToList().ForEach(d =>
+                {
+                    var t = d.Value.Thread;
+                    t.Suspend();
+                    ret[t.Name] = new StackTrace(t, false).ToString();
+                    t.Resume();
+                });
+
+                if (PacketAnalyzer.AnalysisThread == null) return ret;
                 PacketAnalyzer.AnalysisThread.Suspend();
                 ret["Analysis"] = new StackTrace(PacketAnalyzer.AnalysisThread, false).ToString();
                 PacketAnalyzer.AnalysisThread.Resume();
-            }
 
-            return ret;
+                return ret;
+            });
         }
+#pragma warning restore 618
 
 
         private static async void DumpCrashToFile(Exception ex)
@@ -209,7 +221,7 @@ namespace TCC
         }
 
         [DllImport("user32.dll")]
-        static extern uint GetGuiResources(IntPtr hProcess, uint uiFlags);
+        private static extern uint GetGuiResources(IntPtr hProcess, uint uiFlags);
 
         private static uint GetUSERObjectsCount()
         {
