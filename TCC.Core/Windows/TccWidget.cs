@@ -39,6 +39,7 @@ namespace TCC.Windows
 
         protected void Init(WindowSettings settings)
         {
+            Log.CW($"Init {GetType().Name} on {Dispatcher.Thread.Name}");
             WindowSettings = settings;
             MainContent.Opacity = 0;
             if (BoundaryRef != null) BoundaryRef.Opacity = 0;
@@ -250,7 +251,7 @@ namespace TCC.Windows
                     throw new ArgumentOutOfRangeException();
             }
         }
-        protected void OnEnabledChanged(bool enabled)
+        protected virtual void OnEnabledChanged(bool enabled)
         {
             try
             {
@@ -417,32 +418,34 @@ namespace TCC.Windows
         }
         public void CloseWindowSafe()
         {
-            Log.CW($"[{GetType().Name}] {nameof(CloseWindowSafe)}()");
-            WindowManager.ForegroundManager.VisibilityChanged -= OnVisibilityChanged;
-            WindowManager.ForegroundManager.DimChanged -= OnDimChanged;
-            WindowManager.ForegroundManager.ClickThruChanged -= OnClickThruModeChanged;
-            WindowManager.RepositionRequestedEvent -= ReloadPosition;
-            WindowManager.ResetToCenterEvent -= ResetToCenter;
-            WindowManager.DisposeEvent -= CloseWindowSafe;
-            WindowManager.MakeGlobalEvent -= WindowSettings.MakePositionsGlobal;
-            WindowManager.ApplyScreenCorrectionEvent -= WindowSettings.ApplyScreenCorrection;
-            FocusManager.FocusTick -= OnFocusTick;
-            WindowSettings.EnabledChanged -= OnEnabledChanged;
-            WindowSettings.ClickThruModeChanged -= OnClickThruModeChanged;
-            WindowSettings.VisibilityChanged -= OnWindowVisibilityChanged;
-            WindowSettings.ResetToCenter -= ResetToCenter;
+            Log.CW($"[{GetType().Name}] Closing");
             Dispatcher?.Invoke(() =>
             {
+                Log.CW($"[{GetType().Name}] Unsubscribing events");
+                WindowManager.ForegroundManager.VisibilityChanged -= OnVisibilityChanged;
+                WindowManager.ForegroundManager.DimChanged -= OnDimChanged;
+                WindowManager.ForegroundManager.ClickThruChanged -= OnClickThruModeChanged;
+                WindowManager.RepositionRequestedEvent -= ReloadPosition;
+                WindowManager.ResetToCenterEvent -= ResetToCenter;
+                WindowManager.DisposeEvent -= CloseWindowSafe;
+                WindowManager.MakeGlobalEvent -= WindowSettings.MakePositionsGlobal;
+                WindowManager.ApplyScreenCorrectionEvent -= WindowSettings.ApplyScreenCorrection;
+                FocusManager.FocusTick -= OnFocusTick;
+                WindowSettings.EnabledChanged -= OnEnabledChanged;
+                WindowSettings.ClickThruModeChanged -= OnClickThruModeChanged;
+                WindowSettings.VisibilityChanged -= OnWindowVisibilityChanged;
+                WindowSettings.ResetToCenter -= ResetToCenter;
                 Loaded -= OnLoaded;
                 SizeChanged -= OnSizeChanged;
+                //Close();
             });
 
-            try
+            if (Dispatcher != App.BaseDispatcher)
             {
-                Dispatcher?.Invoke(Close);
+                Log.CW($"[{GetType().Name}] Invoking dispatcher shutdown");
                 Dispatcher?.InvokeShutdown();
+                Log.CW($"[{GetType().Name}] Shutdown invoked");
             }
-            catch { }
         }
 
         public static void OnShowAllHandlesToggled()
