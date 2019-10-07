@@ -336,6 +336,12 @@
                                 <chatcontrols:ChatMessageControl VerticalAlignment="Top"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel  VirtualizationMode="Recycling"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
                     </ItemsControl>
                 </Grid>
             </Grid>
