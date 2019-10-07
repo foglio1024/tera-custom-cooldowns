@@ -23,7 +23,7 @@ namespace TCC.Interop.Proxy
         {
             Log.F("Starting listening thread...", "http_server.log");
             if (_listening) return;
-             _listening = true;
+            _listening = true;
             _server.Start();
             new Thread(Listen).Start();
         }
@@ -31,11 +31,18 @@ namespace TCC.Interop.Proxy
         public void Stop()
         {
             _listening = false;
-            _server.Stop();
+            try
+            {
+                _server.Stop();
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Log.F($"[ObjectDisposedException] {ex.ObjectName} disposed, skipping Stop()..."); 
+            }
         }
         private void Listen()
         {
-            Log.F( "Listening thread started.", "http_server.log");
+            Log.F("Listening thread started.", "http_server.log");
 
             while (_listening)
             {
@@ -61,7 +68,7 @@ namespace TCC.Interop.Proxy
                 }
             }
             _listening = false;
-            Log.F( "Exiting listening thread.", "http_server.log");
+            Log.F("Exiting listening thread.", "http_server.log");
 
         }
     }
