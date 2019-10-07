@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Threading;
 using Dragablz;
 using FoglioUtils;
@@ -38,6 +39,8 @@ namespace TCC.ViewModels.Widgets
         private bool _visible = true;
         private DispatcherTimer _hideTimer;
         private ChatWindowSettings _windowSettings;
+        private bool _collapsed;
+        private Tab _currentTab;
 
         public bool Paused
         {
@@ -59,7 +62,29 @@ namespace TCC.ViewModels.Widgets
                 N();
             }
         }
-        public Tab CurrentTab { get; set; }
+
+        public bool Collapsed
+        {
+            get => WindowSettings.CanCollapse && _collapsed;
+            set
+            {
+                if (_collapsed == value) return;
+                _collapsed = value;
+                N();
+            }
+        }
+
+        public Tab CurrentTab
+        {
+            get => _currentTab;
+            set
+            {
+                if(_currentTab == value) return;
+                _currentTab = value;
+                N();
+            }
+        }
+
         public ChatWindowSettings WindowSettings
         {
             get => _windowSettings;
@@ -111,12 +136,21 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
-        public ChatViewModel()
+        public ChatViewModel(ChatWindowSettings s)
         {
+            WindowSettings = s;
             InterTabClient = new ChatTabClient();
             TabVMs = new SynchronizedObservableCollection<TabViewModel>();
 
             ChatWindowManager.Instance.NewMessage += CheckAttention;
+            Game.GameUiModeChanged += CheckCollapsed;
+            Game.ChatModeChanged += CheckCollapsed;
+            WindowSettings.CanCollapseChanged += () => N(nameof(Collapsed));
+        }
+
+        private void CheckCollapsed()
+        {
+            Collapsed = !(Game.InGameUiOn || Game.InGameChatOpen);
         }
 
         private void ChangeTimerInterval()
@@ -217,7 +251,7 @@ namespace TCC.ViewModels.Widgets
             guildTabData.Channels.Add(ChatChannel.Guild);
             guildTabData.Channels.Add(ChatChannel.GuildNotice);
             var guild = new Tab(guildTabData);
-            
+
             var groupTabData = new TabData("Group");
             groupTabData.Channels.Add(ChatChannel.Party);
             groupTabData.Channels.Add(ChatChannel.PartyNotice);

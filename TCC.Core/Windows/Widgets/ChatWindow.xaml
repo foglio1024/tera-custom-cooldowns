@@ -13,6 +13,7 @@
              xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:widgets1="clr-namespace:TCC.ViewModels.Widgets"
+             xmlns:chat="clr-namespace:TCC.Data.Chat"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="OnWindowMouseEnter"
@@ -58,37 +59,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!--<Style TargetType="ItemsControl" x:Key="ChatItemsControl">
-            <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
-            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
-            <Setter Property="Height" Value="Auto" />
-            <Setter Property="Padding" Value="0 0 0 0" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Border SnapsToDevicePixels="True"
-                                BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                Padding="{TemplateBinding Control.Padding}"
-                                BorderBrush="{TemplateBinding Border.BorderBrush}"
-                                Background="{TemplateBinding Panel.Background}">
-                            <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False"
-                                          PreviewMouseWheel="SwPreviewMouseWheel"
-                                          FlowDirection="RightToLeft" VerticalContentAlignment="Top"
-                                          VerticalAlignment="Top" Height="Auto" 
-                                          CanContentScroll="True" 
-                                          Margin="0 0 0 0">
-                                <ScrollViewer.Resources>
-                                    <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">4</system:Double>
-                                </ScrollViewer.Resources>
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
-                                                FlowDirection="LeftToRight" Margin="2 0 2 0" />
-                            </ScrollViewer>
-                        </Border>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
         <DataTemplate x:Key="TabContentTemplate" DataType="dragablz:HeaderedDragablzItem">
             <Grid >
                 <Grid.RowDefinitions>
@@ -151,61 +121,58 @@
         </DataTemplate>
     </w:TccWidget.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <dockablz:Layout Name="ChatContent" Grid.Row="1">
-            <Grid Margin="3" Width="Auto" Name="Root">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" 
+        <dockablz:Layout Name="ChatContent">
+            <Grid>
+                <Grid Margin="3" Width="Auto" Name="Root">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509" 
                         Opacity="{Binding WindowSettings.BackgroundOpacity}"
                         >
-                    <Border.Effect>
-                        <BlurEffect Radius="20"/>
-                    </Border.Effect>
-                </Border>
-                <Border Background="#3445" 
+                        <Border.Effect>
+                            <BlurEffect Radius="20"/>
+                        </Border.Effect>
+                    </Border>
+                    <Border Background="#3445" 
                         Opacity="{Binding WindowSettings.FrameOpacity}" x:Name="MainBorder"
                         CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1" 
                         BorderBrush="#8666" Grid.Row="0" VerticalAlignment="Stretch">
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Setter Property="Margin" Value="0 25 0 0"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding WindowSettings.LfgOn}" Value="True">
-                                    <Setter Property="Margin" Value="0 50 0 0"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".9" />
-                    </Border.Effect>
-                </Border>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Margin" Value="0 25 0 0"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WindowSettings.LfgOn}" Value="True">
+                                        <Setter Property="Margin" Value="0 50 0 0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".9" />
+                        </Border.Effect>
+                    </Border>
 
-                <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" 
+                    <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0" 
                         Margin="0 0 0 0" HorizontalAlignment="Left" 
                        VerticalAlignment="Top" Grid.Row="1"
                         Opacity="{Binding WindowSettings.FrameOpacity}"
                         x:Name="LeftLine">
-                    <Border.RenderTransform>
-                        <TranslateTransform Y="26"/>
-                    </Border.RenderTransform>
-                </Border>
-                <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" 
+                        <Border.RenderTransform>
+                            <TranslateTransform Y="26"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0" 
                         Margin="0 0 0 0" HorizontalAlignment="Stretch" 
                        VerticalAlignment="Top" Grid.Row="1"
                         Opacity="{Binding WindowSettings.FrameOpacity}"
                         x:Name="RightLine">
-                    <Border.RenderTransform>
-                        <TranslateTransform Y="26"/>
-                    </Border.RenderTransform>
-                </Border>
-                <dragablz:TabablzControl Grid.Row="1"
+                        <Border.RenderTransform>
+                            <TranslateTransform Y="26"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    <dragablz:TabablzControl Grid.Row="1"
                                          Background="Transparent"
                                          BorderBrush="#0000"
                                          BorderThickness="0,0,0,0"
@@ -222,27 +189,27 @@
                                          ShowDefaultCloseButton="True"
                                          Style="{DynamicResource ChatTabablzControlStyle}"
                                          >
-                    <dragablz:TabablzControl.ItemContainerStyle>
-                        <Style TargetType="{x:Type dragablz:DragablzItem}"
+                        <dragablz:TabablzControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type dragablz:DragablzItem}"
                                BasedOn="{StaticResource ChatDragableTabItemStyle}">
-                            <Setter Property="extensions:DragablzHeaderExtensions.FrameOpacity" 
+                                <Setter Property="extensions:DragablzHeaderExtensions.FrameOpacity" 
                                     Value="{Binding Path=DataContext.WindowSettings.FrameOpacity, RelativeSource={RelativeSource AncestorType=widgets:ChatWindow}}"></Setter>
 
-                            <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings" />
-                            <EventSetter Event="PreviewMouseLeftButtonUp" Handler="SetLines" />
-                            <EventSetter Event="Loaded" Handler="TabLoaded"></EventSetter>
-                        </Style>
-                    </dragablz:TabablzControl.ItemContainerStyle>
-                    <dragablz:TabablzControl.InterTabController>
-                        <dragablz:InterTabController Partition="2AE89D18-F236-4D20-9605-6C03319038E6"
+                                <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings" />
+                                <EventSetter Event="PreviewMouseLeftButtonUp" Handler="SetLines" />
+                                <EventSetter Event="Loaded" Handler="TabLoaded"></EventSetter>
+                            </Style>
+                        </dragablz:TabablzControl.ItemContainerStyle>
+                        <dragablz:TabablzControl.InterTabController>
+                            <dragablz:InterTabController Partition="2AE89D18-F236-4D20-9605-6C03319038E6"
                                                      InterTabClient="{Binding InterTabClient}" />
-                    </dragablz:TabablzControl.InterTabController>
-                </dragablz:TabablzControl>
-                <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
+                        </dragablz:TabablzControl.InterTabController>
+                    </dragablz:TabablzControl>
+                    <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
                        HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
                        Visibility="{Binding Paused, Converter={StaticResource BoolToVisibleCollapsed}}" />
 
-                <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
+                    <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
                               ItemTemplate="{StaticResource LfgTemplate}"
                               Margin="2"
                               HorizontalAlignment="Left"
@@ -251,44 +218,126 @@
                               Style="{StaticResource LfgItemsControl}"
                               Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}"
                               >
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"></WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-                <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right" Click="OnSettingsButtonClick" Opacity=".5"
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right" Click="OnSettingsButtonClick" Opacity=".5"
                         Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14" 
                         VerticalAlignment="Top">
-                    <Grid Background="#01000000">
-                        <Path Data="{StaticResource SvgSettings}"/>
-                    </Grid>
-                </Button>
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visible}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                        <Grid Background="#01000000">
+                            <Path Data="{StaticResource SvgSettings}"/>
+                        </Grid>
+                    </Button>
+                    <Grid.RenderTransform>
+                        <TranslateTransform/>
+                    </Grid.RenderTransform>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visible}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                                              To="1" Duration="0:0:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                                              To="0.01" Duration="0:0:1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Collapsed}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 From="0" To="1" Duration="0:0:0.010"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                                 From="20" To="0" Duration="0:0:0.10" EasingFunction="{StaticResource QuadraticEase}"/>
 
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+                <Grid>
+                    <Grid.RenderTransform>
+                        <TranslateTransform/>
+                    </Grid.RenderTransform>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visible}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="1" Duration="0:0:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="0" Duration="0:0:1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Collapsed}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 From="0" To="1" Duration="0:0:0.15"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                                 From="-20" To="0" Duration="0:0:0.15" EasingFunction="{StaticResource QuadraticEase}"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Border Margin="21 10 10 6" Background="#000509" Height="64" VerticalAlignment="Bottom"
+                            Opacity="{Binding WindowSettings.BackgroundOpacity}">
+                        <Border.Effect>
+                            <BlurEffect Radius="10"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <ItemsControl ItemsSource="{Binding CurrentTab.Messages}"
+                                  VerticalAlignment="Bottom"
+                                  Height="64"
+                                  Margin="21 0 0 6">
+                        <ItemsControl.LayoutTransform>
+                            <RotateTransform Angle="180"/>
+                        </ItemsControl.LayoutTransform>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="chat:ChatMessage">
+                                <chatcontrols:ChatMessageControl VerticalAlignment="Top"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </Grid>
         </dockablz:Layout>
         <Popup Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
@@ -311,6 +360,7 @@
                                            Value="{Binding WindowSettings.HideTimeout,  Mode=TwoWay}" 
                                            Min="3" Max="60" Visibility="Visible"/>
                     <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
+                    <settings:CheckboxSetting SettingName="Can collapse" Foreground="#9fff" IsOn="{Binding WindowSettings.CanCollapse, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <settings:SelectionSetting SettingName="Click thru" Foreground="#9fff" 
                                                SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}" 
                                                Choices="{Binding ClickThruModes}"
@@ -324,6 +374,5 @@
                 </StackPanel>
             </Grid>
         </Popup>
-
     </Grid>
 </w:TccWidget>

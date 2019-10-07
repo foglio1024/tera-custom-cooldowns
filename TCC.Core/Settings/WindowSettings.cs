@@ -332,12 +332,14 @@ namespace TCC.Settings
         private double _backgroundOpacity = .3;
         private double _frameOpacity = 1;
         private bool _lfgOn = true;
+        private int _hideTimeout;
+        private bool _canCollapse = true;
 
         public event Action FadeoutChanged;
         public event Action OpacityChanged;
         public event Action TimeoutChanged;
+        public event Action CanCollapseChanged;
 
-        private int _hideTimeout;
 
         public int HideTimeout
         {
@@ -350,7 +352,6 @@ namespace TCC.Settings
                 TimeoutChanged?.Invoke();
             }
         }
-
         public double BackgroundOpacity
         {
             get => _backgroundOpacity;
@@ -384,9 +385,6 @@ namespace TCC.Settings
                 FadeoutChanged?.Invoke();
             }
         }
-
-        public List<TabData> Tabs { get; set; }
-
         public bool LfgOn
         {
             get => _lfgOn;
@@ -397,6 +395,19 @@ namespace TCC.Settings
                 N();
             }
         }
+        public bool CanCollapse
+        {
+            get => _canCollapse;
+            set
+            {
+                if (_canCollapse == value) return;
+                _canCollapse = value;
+                CanCollapseChanged?.Invoke();
+            }
+        }
+
+        public List<TabData> Tabs { get; set; }
+
 
         public ChatWindowSettings()
         {
@@ -723,7 +734,7 @@ namespace TCC.Settings
             get => _warriorEdgeMode;
             set
             {
-                if(_warriorEdgeMode == value) return;
+                if (_warriorEdgeMode == value) return;
                 _warriorEdgeMode = value;
                 N();
                 WarriorEdgeModeChanged?.Invoke();
@@ -865,7 +876,7 @@ namespace TCC.Settings
             get => _layout;
             set
             {
-                if(_layout == value) return;
+                if (_layout == value) return;
                 _layout = value;
                 LayoutChanged?.Invoke();
                 N();
@@ -876,7 +887,7 @@ namespace TCC.Settings
             get => _showAwakenIcon;
             set
             {
-                if(_showAwakenIcon == value) return;
+                if (_showAwakenIcon == value) return;
                 _showAwakenIcon = value;
                 N();
                 SettingsUpdated?.Invoke();
@@ -887,7 +898,7 @@ namespace TCC.Settings
             get => _showDetails;
             set
             {
-                if(_showDetails == value) return;
+                if (_showDetails == value) return;
                 _showDetails = value;
                 N();
                 SettingsUpdated?.Invoke();
@@ -898,7 +909,7 @@ namespace TCC.Settings
             get => _showLaurels;
             set
             {
-                if(_showLaurels == value) return;
+                if (_showLaurels == value) return;
                 _showLaurels = value;
                 N();
                 SettingsUpdated?.Invoke();
@@ -909,7 +920,7 @@ namespace TCC.Settings
             get => _showOnlyAggroStacks;
             set
             {
-                if(_showOnlyAggroStacks == value) return;
+                if (_showOnlyAggroStacks == value) return;
                 _showOnlyAggroStacks = value;
                 N();
             }
@@ -980,7 +991,7 @@ namespace TCC.Settings
             get => _flip;
             set
             {
-                if(_flip == value) return;
+                if (_flip == value) return;
                 _flip = value;
                 N();
                 FlipChanged?.Invoke();
@@ -992,7 +1003,7 @@ namespace TCC.Settings
             get => _rotation;
             set
             {
-                if(_rotation == value) return;
+                if (_rotation == value) return;
                 _rotation = value;
                 N();
                 RotationChanged?.Invoke();
@@ -1026,7 +1037,7 @@ namespace TCC.Settings
             get => _showNotificationBubble;
             set
             {
-                if(_showNotificationBubble == value)return;
+                if (_showNotificationBubble == value) return;
                 _showNotificationBubble = value;
                 N();
             }
@@ -1078,7 +1089,7 @@ namespace TCC.Settings
             get => _hideTradeListings;
             set
             {
-                if(_hideTradeListings == value) return;
+                if (_hideTradeListings == value) return;
                 _hideTradeListings = value;
                 N();
                 HideTradeListingsChangedEvent?.Invoke();

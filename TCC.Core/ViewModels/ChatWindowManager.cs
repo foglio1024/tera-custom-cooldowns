@@ -223,7 +223,7 @@ namespace TCC.ViewModels
             App.Settings.ChatWindowsSettings.ToList().ForEach(s =>
             {
                 if (s.Tabs.Count == 0) return;
-                var m = new ChatViewModel();
+                var m = new ChatViewModel(s);
                 var w = new ChatWindow(s, m);
                 ChatWindows.Add(w);
                 m.LoadTabs(s.Tabs);
@@ -233,7 +233,7 @@ namespace TCC.ViewModels
             {
                 Log.CW("No chat windows found, initializing default one.");
                 var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
-                var m = new ChatViewModel();
+                var m = new ChatViewModel(ws);
                 var w = new ChatWindow(ws, m);
                 App.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 ChatWindows.Add(w);
