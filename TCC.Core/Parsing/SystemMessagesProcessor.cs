@@ -4,6 +4,7 @@ using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop.Proxy;
+using TCC.Utilities;
 using TCC.ViewModels;
 namespace TCC.Parsing
 {
@@ -57,12 +58,21 @@ namespace TCC.Parsing
         }
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessage sysMsg)
         {
-            TimeManager.Instance.UploadGuildBamTimestamp();
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+
+            try
+            {
+                TimeManager.Instance.UploadGuildBamTimestamp();
+            }
+            catch (Exception ex)
+            {
+                Log.F($"Failed to upload guild bam timestamp: {ex.Message}");
+                WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC Error", "Failed to upload guild bam timestamp. Error details written to logs/error.log.", NotificationType.Error);
+            }
             TimeManager.Instance.SetGuildBamTime(true);
             TimeManager.Instance.ExecuteGuildBamWebhook();
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
         }
         private static void HandleDungeonEngagedMessage(string srvMsg, SystemMessage sysMsg)
         {
@@ -87,7 +97,7 @@ namespace TCC.Parsing
             var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
             var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT"); //ProxyOld.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
+            //if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT"); //ProxyOld.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)
@@ -287,7 +297,7 @@ namespace TCC.Parsing
             if (!Processor.TryGetValue(opcodeName, out var type) || type == null) return false;
             //TODO: check this and remove when chat will be moved to own thread.
             // BaseDispatcher.BeginInvoke() was added because of a deadlock in AddPiece() called from ChatMessage.ctor().ParseSysHtmlPiece()
-            App.BaseDispatcher.BeginInvoke(new Action(() =>type.DynamicInvoke(serverMsg, sysMsg))); 
+            App.BaseDispatcher.BeginInvoke(new Action(() => type.DynamicInvoke(serverMsg, sysMsg)));
             return true;
         }
         #endregion
