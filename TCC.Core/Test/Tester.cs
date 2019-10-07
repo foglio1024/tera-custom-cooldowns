@@ -360,7 +360,6 @@ namespace TCC.Test
         {
             SpawnNPC(950, 4000, 1, true, false, 36);
             var t = new System.Timers.Timer(1);
-            var id = 0U;
             var a = true;
             t.Elapsed += (_, __) =>
             {

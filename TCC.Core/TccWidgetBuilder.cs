@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using TCC.Settings;
+using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -15,13 +16,19 @@ namespace TCC
 
         public async Task<TWindow> GetWindow()
         {
-            while (_window == null) { Thread.Sleep(100); }
-            return _window;
+            return await Task.Factory.StartNew(() =>
+            {
+                while (_window == null) Thread.Sleep(100);
+                return _window;
+            });
         }
         public async Task<TViewModel> GetViewModel()
         {
-            while (_vm == null) { Thread.Sleep(100); }
-            return _vm;
+            return await Task.Factory.StartNew(() =>
+            {
+                while (_vm == null) Thread.Sleep(100);
+                return _vm;
+            });
         }
 
         public TccWidgetBuilder(WindowSettings ws)
@@ -40,6 +47,7 @@ namespace TCC
             if (_vm.Settings.Enabled) _window.Show();
             WindowManager.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
             Dispatcher.Run();
+            Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
             WindowManager.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
         })
             {
