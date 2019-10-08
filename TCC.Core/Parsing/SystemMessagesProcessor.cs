@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Interop.Proxy;
-using TCC.Utilities;
 using TCC.ViewModels;
+
 namespace TCC.Parsing
 {
     public static class SystemMessagesProcessor
@@ -16,13 +15,13 @@ namespace TCC.Parsing
 
             if (!Process(srvMsg, sysMsg, opcodeName))
             {
-                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+                ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
             }
         }
 
         private static bool Pass(string opcodeName)
         {
-            return /*!ExclusionList.Contains(opcodeName) && */!App.Settings.UserExcludedSysMsg.Contains(opcodeName);
+            return !App.Settings.UserExcludedSysMsg.Contains(opcodeName);
         }
 
         private static void HandleMaxEnchantSucceed(string x)
@@ -32,9 +31,8 @@ namespace TCC.Parsing
         }
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
         {
-            var sysmsg = "@0\vUserName\v" + friendName;
-            var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend) { Author = friendName };
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            var template = "@0\vUserName\v" + friendName;
+            ChatWindowManager.Instance.AddSystemMessage(template, sysMsg, friendName);
         }
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
         {
@@ -48,9 +46,9 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
-        private static void HandleNewGuildMasterMessage(string srvMsg, SystemMessage sysMsg)
+        private static void HandleNewGuildMasterMessage(string template, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.GuildNotice);
+            var msg = new ChatMessage(template, sysMsg, ChatChannel.GuildNotice);
             ChatWindowManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild", msg.ToString(), NotificationType.Success);
@@ -62,15 +60,8 @@ namespace TCC.Parsing
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
-            try
-            {
-                TimeManager.Instance.UploadGuildBamTimestamp();
-            }
-            catch (Exception ex)
-            {
-                Log.F($"Failed to upload guild bam timestamp: {ex.Message}");
-                WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC Error", "Failed to upload guild bam timestamp. Error details written to logs/error.log.", NotificationType.Error);
-            }
+            TimeManager.Instance.UploadGuildBamTimestamp();
+
             TimeManager.Instance.SetGuildBamTime(true);
             TimeManager.Instance.ExecuteGuildBamWebhook();
         }
@@ -111,6 +102,122 @@ namespace TCC.Parsing
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
             if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
+        }
+        private static void HandleMerchantSpawn(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Normal, 10000);
+        }
+        private static void HandleMerchantDespawn(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Normal, 10000);
+        }
+        private static void HandleLfgNotListed(string srvMsg, SystemMessage sysMsg)
+        {
+            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
+            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
+        }
+        private static void Redirect(string srvMsg, SystemMessage sysMsg, ChatChannel ch)
+        {
+            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg, ch);
+        }
+
+        //by HQ 20181224
+        private static void HandleFieldBossAppear(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
+
+            if (!App.Settings.WebhookEnabledFieldBoss) return;
+
+            // @4157 \v
+            // regionName \v @rgn:213 \v
+            // npcName \v @creature:26#5001
+
+            var monsterName = GetFieldBossName(srvMsg);
+            var regName = srvMsg.Split('\v')[2].Replace("@rgn:", "");
+            var regId = uint.Parse(regName);
+
+            Game.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
+
+            TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, msg.RawMessage);
+
+        }
+        private static void HandleFieldBossDie(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowManager.Instance.AddChatMessage(msg);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
+            if (!App.Settings.WebhookEnabledFieldBoss) return;
+
+            //@4158
+            //guildNameWish
+            //userName쿤
+            //npcname@creature:26#5001
+
+            //@????
+            //userName쿤
+            //npcname@creature:26#5001
+
+            var monsterName = GetFieldBossName(srvMsg);
+            var userName = GetFieldBossKillerName(srvMsg);
+            var guildName = GetFieldBossKillerGuild(srvMsg);
+            if (string.IsNullOrEmpty(guildName)) guildName = "-no guild-";
+            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, msg.RawMessage, userName, guildName);
+
+
+
+            //if (srvMsg.Contains("@creature:39#501"))     // Hazar
+            //{
+            //    TimeManager.Instance.ExecuteFieldBossWebhook(501, 2);
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+            //else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
+            //{
+            //    TimeManager.Instance.ExecuteFieldBossWebhook(4001, 2);
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+            //else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
+            //{
+            //    TimeManager.Instance.ExecuteFieldBossWebhook(5001, 2);
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+            //else
+            //{
+            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
+            //}
+        }
+        private static string GetFieldBossName(string srvMsg)
+        {
+            // only for 'SMT_FIELDBOSS_*'
+            var srvMsgSplit = srvMsg.Split('\v');
+            var npcName = srvMsgSplit.Last().Replace("@creature:", "");
+            var zoneId = uint.Parse(npcName.Split('#')[0]);
+            var templateId = uint.Parse(npcName.Split('#')[1]);
+            Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
+            return m.Name;
+        }
+        private static string GetFieldBossKillerName(string srvMsg)
+        {
+            // only for 'SMT_FIELDBOSS_*'
+            var ret = "";
+            var srvMsgSplit = srvMsg.Split('\v').ToList();
+            var idx = srvMsgSplit.IndexOf("userName") + 1;
+            if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
+            return ret;
+        }
+        private static string GetFieldBossKillerGuild(string srvMsg)
+        {
+            // only for 'SMT_FIELDBOSS_*'
+            var ret = "";
+            var srvMsgSplit = srvMsg.Split('\v').ToList();
+            var idx = srvMsgSplit.IndexOf("guildName") + 1;
+            if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
+            return ret;
         }
 
         #region Factory
@@ -181,116 +288,12 @@ namespace TCC.Parsing
             { "SMT_FIELDBOSS_DIE_GUILD",                    new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
             { "SMT_FIELDBOSS_DIE_NOGUILD",                  new Action<string, SystemMessage>(HandleFieldBossDie) },        //by HQ 20181224
 
-            { "SMT_PARTY_MATCHING_CANT_PR_NO_INFORMATION",  new Action<string, SystemMessage>(HandleLfgNotListed)}
+            { "SMT_PARTY_MATCHING_CANT_PR_NO_INFORMATION",  new Action<string, SystemMessage>(HandleLfgNotListed)},
+
+            { "SMT_WORLDSPAWN_NOTIFY_SPAWN",                new Action<string, SystemMessage>(HandleMerchantSpawn)},
+            { "SMT_WORLDSPAWN_NOTIFY_DESPAWN",              new Action<string, SystemMessage>(HandleMerchantDespawn)},
         };
 
-        private static void HandleLfgNotListed(string srvMsg, SystemMessage sysMsg)
-        {
-            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
-            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
-        }
-
-        private static void Redirect(string srvMsg, SystemMessage sysMsg, ChatChannel ch)
-        {
-            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg, ch);
-        }
-
-        //by HQ 20181224
-        private static void HandleFieldBossAppear(string srvMsg, SystemMessage sysMsg)
-        {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
-
-            if (!App.Settings.WebhookEnabledFieldBoss) return;
-
-            // @4157 \v
-            // regionName \v @rgn:213 \v
-            // npcName \v @creature:26#5001
-
-            var monsterName = GetFieldBossName(srvMsg);
-            var regName = srvMsg.Split('\v')[2].Replace("@rgn:", "");
-            var regId = uint.Parse(regName);
-
-            Game.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
-
-            TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, msg.RawMessage);
-
-        }
-
-        private static string GetFieldBossName(string srvMsg)
-        {
-            // only for 'SMT_FIELDBOSS_*'
-            var srvMsgSplit = srvMsg.Split('\v');
-            var npcName = srvMsgSplit.Last().Replace("@creature:", "");
-            var zoneId = uint.Parse(npcName.Split('#')[0]);
-            var templateId = uint.Parse(npcName.Split('#')[1]);
-            Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
-            return m.Name;
-        }
-        private static string GetFieldBossKillerName(string srvMsg)
-        {
-            // only for 'SMT_FIELDBOSS_*'
-            var ret = "";
-            var srvMsgSplit = srvMsg.Split('\v').ToList();
-            var idx = srvMsgSplit.IndexOf("userName") + 1;
-            if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
-            return ret;
-        }
-        private static string GetFieldBossKillerGuild(string srvMsg)
-        {
-            // only for 'SMT_FIELDBOSS_*'
-            var ret = "";
-            var srvMsgSplit = srvMsg.Split('\v').ToList();
-            var idx = srvMsgSplit.IndexOf("guildName") + 1;
-            if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
-            return ret;
-        }
-        //by HQ 20181224
-        private static void HandleFieldBossDie(string srvMsg, SystemMessage sysMsg)
-        {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
-            if (!App.Settings.WebhookEnabledFieldBoss) return;
-
-            //@4158
-            //guildNameWish
-            //userName쿤
-            //npcname@creature:26#5001
-
-            //@????
-            //userName쿤
-            //npcname@creature:26#5001
-
-            var monsterName = GetFieldBossName(srvMsg);
-            var userName = GetFieldBossKillerName(srvMsg);
-            var guildName = GetFieldBossKillerGuild(srvMsg);
-            if (string.IsNullOrEmpty(guildName)) guildName = "-no guild-";
-            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, msg.RawMessage, userName, guildName);
-
-
-
-            //if (srvMsg.Contains("@creature:39#501"))     // Hazar
-            //{
-            //    TimeManager.Instance.ExecuteFieldBossWebhook(501, 2);
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-            //else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
-            //{
-            //    TimeManager.Instance.ExecuteFieldBossWebhook(4001, 2);
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-            //else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
-            //{
-            //    TimeManager.Instance.ExecuteFieldBossWebhook(5001, 2);
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-            //else
-            //{
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-        }
 
         private static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)
         {
