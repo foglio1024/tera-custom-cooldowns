@@ -99,7 +99,7 @@ namespace TCC.ViewModels
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
-            WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupWindowVmPropertyChanged;
+            if(WindowManager.ViewModels.GroupVM != null) WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };

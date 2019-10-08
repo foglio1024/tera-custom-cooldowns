@@ -46,16 +46,14 @@ namespace TCC
                     "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
-                try { new Thread(() => UploadCrashDump(ex)).Start(); }
-                catch { /*ignored*/ }
+                try { new Thread(() => UploadCrashDump(ex)).Start(); } catch { /*ignored*/ }
             }
 
             App.ReleaseMutex();
             ProxyInterface.Instance.Disconnect();
             if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
 
-            try { WindowManager.Dispose(); }
-            catch {/* ignored*/}
+            try { WindowManager.Dispose(); } catch {/* ignored*/}
 
             try
             {

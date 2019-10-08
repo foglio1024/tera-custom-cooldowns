@@ -89,8 +89,7 @@ namespace TCC
 
             if (App.Settings.UseHotkeys) KeyboardHook.Instance.Enable();
 
-            KeyboardHook.Instance.RegisterCallback(App.Settings.ToggleBoundariesHotkey,
-                TccWidget.OnShowAllHandlesToggled);
+            KeyboardHook.Instance.RegisterCallback(App.Settings.ToggleBoundariesHotkey, TccWidget.OnShowAllHandlesToggled);
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
 
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject),
@@ -103,7 +102,7 @@ namespace TCC
             return new Size(wFac, hFac);
         }
 
-        public static void UpdateScreenCorrection()
+        private static void UpdateScreenCorrection()
         {
             if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
             ApplyScreenCorrection(GetScreenCorrection());
@@ -129,25 +128,21 @@ namespace TCC
             DisposeEvent?.Invoke();
             SystemEvents.DisplaySettingsChanged -= SystemEventsOnDisplaySettingsChanged;
 
+            WaitDispatchersShutdown();
+
             App.BaseDispatcher.Invoke(() =>
             {
-                FocusManager.Dispose();
                 TrayIcon?.Dispose();
-
-                // close any window which are not TccWidgets
-                Application.Current.Windows.ToList().Where(x => !(x is TccWidget)).ToList().ForEach(w =>
-                {
-                    try
-                    {
-                        w.Close();
-                    }
-                    catch
-                    {
-                    }
-                });
+                CloseOtherWindows();
             });
 
-            WaitDispatchersShutdown();
+        }
+
+        private static void CloseOtherWindows()
+        {
+            Application.Current.Windows.ToList()
+            .Where(w => !(w is TccWidget)).ToList()
+            .ForEach(w => w.TryClose());
         }
 
         private static async Task LoadWindows()
@@ -222,6 +217,7 @@ namespace TCC
                 Thread.Sleep(100);
                 tries--;
             }
+            Log.CW("All dispatchers shut down.");
         }
 
         public static void ReloadPositions()

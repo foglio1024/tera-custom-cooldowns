@@ -142,8 +142,11 @@ namespace TCC
             FocusTimer = new Timer(1000);
             FocusTimer.Elapsed += CheckForegroundWindow;
             FocusTimer.Start();
+
+            WindowManager.DisposeEvent += Dispose;
         }
-        public static void Dispose()
+
+        private static void Dispose()
         {
             _disposed = true;
             FocusTimer?.Stop();

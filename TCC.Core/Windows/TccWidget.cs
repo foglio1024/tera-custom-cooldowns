@@ -3,6 +3,7 @@ using FoglioUtils.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -418,10 +419,8 @@ namespace TCC.Windows
         }
         public void CloseWindowSafe()
         {
-            Log.CW($"[{GetType().Name}] Closing");
             Dispatcher?.Invoke(() =>
             {
-                Log.CW($"[{GetType().Name}] Unsubscribing events");
                 WindowManager.ForegroundManager.VisibilityChanged -= OnVisibilityChanged;
                 WindowManager.ForegroundManager.DimChanged -= OnDimChanged;
                 WindowManager.ForegroundManager.ClickThruChanged -= OnClickThruModeChanged;
@@ -437,14 +436,14 @@ namespace TCC.Windows
                 WindowSettings.ResetToCenter -= ResetToCenter;
                 Loaded -= OnLoaded;
                 SizeChanged -= OnSizeChanged;
-                //Close();
+                Close();
             });
 
             if (Dispatcher != App.BaseDispatcher)
             {
                 Log.CW($"[{GetType().Name}] Invoking dispatcher shutdown");
-                Dispatcher?.InvokeShutdown();
-                Log.CW($"[{GetType().Name}] Shutdown invoked");
+                Dispatcher?.Invoke(() => Thread.Sleep(100)); //uhmmmmm ok
+                Dispatcher?.BeginInvokeShutdown(DispatcherPriority.ContextIdle);
             }
         }
 
