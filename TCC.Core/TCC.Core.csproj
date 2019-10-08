@@ -161,7 +161,6 @@
     <Compile Include="Settings\SettingsGlobals.cs" />
     <Compile Include="Settings\SettingsReaderBase.cs" />
     <Compile Include="Settings\SettingsWriterBase.cs" />
-    <Compile Include="TccModuleAttribute.cs" />
     <Compile Include="TemplateSelectors\GroupWindowTemplateSelector.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\BlockSplitter.cs" />
     <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
@@ -1447,6 +1446,10 @@
     <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
       <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
       <Name>FoglioUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj">
+      <Project>{0e5c7c6c-8d28-4731-82da-2d37a69c5ac8}</Project>
+      <Name>TCC.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj">
       <Project>{E8A1FC0B-C9BC-448E-9702-94CE50412D99}</Project>
