@@ -319,13 +319,13 @@ namespace TCC.ViewModels
             //}
             return false;
         }
-        public void AddSystemMessage(string srvMsg, SystemMessage sysMsg)
+        public void AddSystemMessage(string template, SystemMessage sysMsg, string authorOverride = "System")
         {
-            AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+            AddChatMessage(new ChatMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel) { Author = authorOverride });
         }
-        public void AddSystemMessage(string srvMsg, SystemMessage sysMsg, ChatChannel channelOverride)
+        public void AddSystemMessage(string template, SystemMessage sysMsg, ChatChannel channelOverride, string authorOverride = "System")
         {
-            AddChatMessage(new ChatMessage(srvMsg, sysMsg, channelOverride));
+            AddChatMessage(new ChatMessage(template, sysMsg, channelOverride) { Author = authorOverride });
         }
 
         public void AddLfgMessage(uint id, string name, string msg)
