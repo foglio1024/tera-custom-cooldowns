@@ -1,15 +1,16 @@
-﻿using TCC.Data.Pc;
+﻿using FoglioUtils;
+using TCC.Data.Pc;
 
 namespace TCC.Data
 {
     public class Account
     {
         public bool IsElite { get; set; }
-        public SynchronizedObservableCollection<Character> Characters { get; }
+        public TSObservableCollection<Character> Characters { get; }
 
         public Account()
         {
-            Characters = new SynchronizedObservableCollection<Character>();
+            Characters = new TSObservableCollection<Character>();
         }
     }
 }

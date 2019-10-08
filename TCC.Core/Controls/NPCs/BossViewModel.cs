@@ -167,7 +167,7 @@ namespace TCC.Controls.NPCs
             };
 
 
-            EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>();
+            EnrageHistory = new TSObservableCollection<EnragePeriodItem>();
 
             NextEnragePercentage = 100 - NPC.EnragePattern.Percentage;
             CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;

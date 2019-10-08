@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Data;
 using TCC.Settings;
 using TCC.ViewModels;
@@ -11,12 +12,12 @@ namespace TCC.Windows.Widgets
     public class NotificationAreaViewModel : TccWindowViewModel
     {
         private readonly ConcurrentQueue<NotificationInfo> _queue;
-        public SynchronizedObservableCollection<NotificationInfo> Notifications { get; }
+        public TSObservableCollection<NotificationInfo> Notifications { get; }
 
         public NotificationAreaViewModel(WindowSettings settings) : base(settings)
         {
             _queue = new ConcurrentQueue<NotificationInfo>();
-            Notifications = new SynchronizedObservableCollection<NotificationInfo>(Dispatcher);
+            Notifications = new TSObservableCollection<NotificationInfo>(Dispatcher);
         }
 
         private void CheckShow()

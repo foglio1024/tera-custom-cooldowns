@@ -42,8 +42,8 @@ namespace TCC.Data.NPCs
             }
         }
 
-        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
+        private TSObservableCollection<AbnormalityDuration> _buffs;
+        public TSObservableCollection<AbnormalityDuration> Buffs
         {
             get => _buffs;
             set
@@ -247,7 +247,7 @@ namespace TCC.Data.NPCs
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
             Dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            _buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
             Game.DB.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
             Name = monster.Name;
             MaxHP = monster.MaxHP;

@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
+using FoglioUtils;
 using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
@@ -40,9 +41,9 @@ namespace TCC.ViewModels
 
         public int MessageCount => ChatMessages.Count;
         public bool IsQueueEmpty => _pauseQueue.Count == 0;
-        public SynchronizedObservableCollection<ChatWindow> ChatWindows { get; private set; }
-        public SynchronizedObservableCollection<ChatMessage> ChatMessages { get; private set; }
-        public SynchronizedObservableCollection<LFG> LFGs { get; private set; }
+        public TSObservableCollection<ChatWindow> ChatWindows { get; private set; }
+        public TSObservableCollection<ChatMessage> ChatMessages { get; private set; }
+        public TSObservableCollection<LFG> LFGs { get; private set; }
 
         private ChatWindowManager(WindowSettings settings) : base(settings)
         {
@@ -51,9 +52,9 @@ namespace TCC.ViewModels
 
             BlockedUsers = new List<string>();
             Friends = new List<FriendData>();
-            ChatWindows = new SynchronizedObservableCollection<ChatWindow>(Dispatcher);
-            ChatMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
-            LFGs = new SynchronizedObservableCollection<LFG>(Dispatcher);
+            ChatWindows = new TSObservableCollection<ChatWindow>(Dispatcher);
+            ChatMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
+            LFGs = new TSObservableCollection<LFG>(Dispatcher);
 
             ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);

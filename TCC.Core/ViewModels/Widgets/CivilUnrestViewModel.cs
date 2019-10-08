@@ -56,7 +56,7 @@ namespace TCC.ViewModels.Widgets
     public class CivilUnrestViewModel : TccWindowViewModel
     {
         public bool CivilUnrest => Game.CivilUnrestZone;
-        private readonly SynchronizedObservableCollection<CivilUnrestGuild> _guilds;
+        private readonly TSObservableCollection<CivilUnrestGuild> _guilds;
 
         public ICollectionViewLiveShaping Guilds //TODO: fix getter
         {
@@ -102,7 +102,7 @@ namespace TCC.ViewModels.Widgets
 
         public CivilUnrestViewModel(WindowSettings settings) : base(settings)
         {
-            _guilds = new SynchronizedObservableCollection<CivilUnrestGuild>();
+            _guilds = new TSObservableCollection<CivilUnrestGuild>();
         }
 
         protected override void InstallHooks()

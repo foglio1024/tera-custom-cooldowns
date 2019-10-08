@@ -3,6 +3,7 @@ using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TeraDataLite;
@@ -17,8 +18,8 @@ namespace TCC.Data
         private string _leaderName;
         private bool _isExpanded;
         private int _playerCount;
-        private SynchronizedObservableCollection<User> _players;
-        private SynchronizedObservableCollection<User> _applicants;
+        private TSObservableCollection<User> _players;
+        private TSObservableCollection<User> _applicants;
         private bool _canApply = true;
         private bool _isMyLfg;
 
@@ -107,7 +108,7 @@ namespace TCC.Data
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
-        public SynchronizedObservableCollection<User> Players
+        public TSObservableCollection<User> Players
         {
             get => _players;
             set
@@ -117,7 +118,7 @@ namespace TCC.Data
                 N();
             }
         }
-        public SynchronizedObservableCollection<User> Applicants
+        public TSObservableCollection<User> Applicants
         {
             get => _applicants;
             set
@@ -172,8 +173,8 @@ namespace TCC.Data
         public Listing()
         {
             Dispatcher = App.BaseDispatcher; 
-            Players = new SynchronizedObservableCollection<User>(Dispatcher);
-            Applicants = new SynchronizedObservableCollection<User>(Dispatcher);
+            Players = new TSObservableCollection<User>(Dispatcher);
+            Applicants = new TSObservableCollection<User>(Dispatcher);
             Apply = new ApplyCommand(this);
             RefreshApplicants = new RefreshApplicantsCommand(this);
         }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using FoglioUtils;
 using TCC.ViewModels;
 
 namespace TCC.Data
 {
     public class EventGroup : TSPropertyChanged
     {
-        public SynchronizedObservableCollection<DailyEvent> Events { get; }
+        public TSObservableCollection<DailyEvent> Events { get; }
         public string Name { get; }
         public bool RemoteCheck { get; }
         private DateTime _start;
@@ -25,7 +26,7 @@ namespace TCC.Data
         public EventGroup(string name, DateTime start, DateTime end, bool rc)
         {
             Dispatcher = WindowManager.DashboardWindow.Dispatcher;
-            Events = new SynchronizedObservableCollection<DailyEvent>(Dispatcher);
+            Events = new TSObservableCollection<DailyEvent>(Dispatcher);
             Name = name;
             RemoteCheck = rc;
             _start = start;

@@ -68,7 +68,7 @@ namespace TCC.Controls.Dashboard
 
         public Dungeon Dungeon { get; set; }
 
-        public SynchronizedObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
+        public TSObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
         public ICollectionViewLiveShaping DungeonsListView { get; }
         public bool Hilight
         {
@@ -83,7 +83,7 @@ namespace TCC.Controls.Dashboard
 
         public DungeonColumnViewModel()
         {
-            DungeonsList = new SynchronizedObservableCollection<DungeonCooldownViewModel>();
+            DungeonsList = new TSObservableCollection<DungeonCooldownViewModel>();
             DungeonsListView = CollectionViewUtils.InitLiveView(DungeonsList,
                 o => !o.Owner.Hidden,
                 new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" }, 

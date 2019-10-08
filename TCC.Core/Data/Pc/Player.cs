@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
 using TCC.Utilities;
@@ -365,9 +366,9 @@ namespace TCC.Data.Pc
             }
         }
 
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; set; }
-        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; set; }
-        public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
+        public TSObservableCollection<AbnormalityDuration> Buffs { get; set; }
+        public TSObservableCollection<AbnormalityDuration> Debuffs { get; set; }
+        public TSObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
 
         public Player()
         {
@@ -447,9 +448,9 @@ namespace TCC.Data.Pc
         #region Abnormalities
         public void InitAbnormalityCollections(Dispatcher disp)
         {
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
-            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
+            Buffs = new TSObservableCollection<AbnormalityDuration>(disp);
+            Debuffs = new TSObservableCollection<AbnormalityDuration>(disp);
+            InfBuffs = new TSObservableCollection<AbnormalityDuration>(disp);
             _shields = new Dictionary<uint, uint>();
             _debuffList = new List<uint>();
 

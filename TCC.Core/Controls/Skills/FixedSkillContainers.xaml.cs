@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Dragablz;
+using FoglioUtils;
 using GongSolutions.Wpf.DragDrop;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -74,7 +75,7 @@ namespace TCC.Controls.Skills
         }
 
         //really absurd way of fixing order issue
-        private void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<Cooldown> collection)
+        private void ReorderSkillContainer(DragablzItemsControl container, TSObservableCollection<Cooldown> collection)
         {
             var positions = new Dictionary<int, double>(); //index, X
             for (var i = 0; i < container.Items.Count; i++)
@@ -119,7 +120,7 @@ namespace TCC.Controls.Skills
                 VM.Save();
             }
 
-            OtherSkills.Margin = ((SynchronizedObservableCollection<Cooldown>)sender).Count == 0
+            OtherSkills.Margin = ((TSObservableCollection<Cooldown>)sender).Count == 0
                 ? new Thickness(0, 0, 0, 0)
                 : new Thickness(0);
         }
@@ -300,7 +301,7 @@ namespace TCC.Controls.Skills
 
             public void Drop(IDropInfo dropInfo)
             {
-                var target = (SynchronizedObservableCollection<Cooldown>)dropInfo.TargetCollection;
+                var target = (TSObservableCollection<Cooldown>)dropInfo.TargetCollection;
                 switch (dropInfo.Data)
                 {
                     case Skill sk:

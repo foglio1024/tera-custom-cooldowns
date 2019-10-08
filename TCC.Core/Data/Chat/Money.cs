@@ -1,4 +1,5 @@
 ﻿using System;
+using FoglioUtils;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat

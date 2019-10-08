@@ -1,4 +1,6 @@
-﻿namespace TCC.Windows
+﻿using FoglioUtils;
+
+namespace TCC.Windows
 {
     public class FUBHVM : TSPropertyChanged
     {

@@ -173,9 +173,9 @@ namespace TCC.ViewModels
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
 
             CharacterViewModels = new ObservableCollection<CharacterViewModel>();
-            EventGroups = new SynchronizedObservableCollection<EventGroup>();
-            Markers = new SynchronizedObservableCollection<TimeMarker>();
-            SpecialEvents = new SynchronizedObservableCollection<DailyEvent>();
+            EventGroups = new TSObservableCollection<EventGroup>();
+            Markers = new TSObservableCollection<TimeMarker>();
+            SpecialEvents = new TSObservableCollection<DailyEvent>();
             LoadDungeonsCommand = new RelayCommand(o =>
             {
                 if (_loaded) return;
@@ -493,9 +493,9 @@ namespace TCC.ViewModels
 
         /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
-        public SynchronizedObservableCollection<EventGroup> EventGroups { get; }
-        public SynchronizedObservableCollection<TimeMarker> Markers { get; }
-        public SynchronizedObservableCollection<DailyEvent> SpecialEvents { get; }
+        public TSObservableCollection<EventGroup> EventGroups { get; }
+        public TSObservableCollection<TimeMarker> Markers { get; }
+        public TSObservableCollection<DailyEvent> SpecialEvents { get; }
 
         public void LoadEvents(DayOfWeek today, string region)
         {

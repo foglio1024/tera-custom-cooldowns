@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using FoglioUtils;
 using FoglioUtils.Extensions;
 
 namespace TCC.Publisher
@@ -10,10 +11,10 @@ namespace TCC.Publisher
     /// </summary>
     public partial class MainWindow
     {
-        public readonly SynchronizedObservableCollection<string> Log;
+        public readonly TSObservableCollection<string> Log;
         public MainWindow()
         {
-            Log = new SynchronizedObservableCollection<string>();
+            Log = new TSObservableCollection<string>();
             InitializeComponent();
             LogList.ItemsSource = Log;
         }

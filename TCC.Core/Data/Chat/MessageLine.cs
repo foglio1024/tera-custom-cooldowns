@@ -1,11 +1,13 @@
-﻿namespace TCC.Data.Chat
+﻿using FoglioUtils;
+
+namespace TCC.Data.Chat
 {
     public class MessageLine : TSPropertyChanged
     {
-        public SynchronizedObservableCollection<MessagePiece> LinePieces { get; protected set; }
+        public TSObservableCollection<MessagePiece> LinePieces { get; protected set; }
         public MessageLine()
         {
-            LinePieces = new SynchronizedObservableCollection<MessagePiece>();
+            LinePieces = new TSObservableCollection<MessagePiece>();
         }
     }
 }

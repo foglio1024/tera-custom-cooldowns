@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using FoglioUtils;
 using TCC.Data.Skills;
 
 using TeraDataLite;
@@ -97,7 +97,7 @@ namespace TCC.Data.Databases
         {
             get
             {
-                var list = new SynchronizedObservableCollection<Skill>();
+                var list = new TSObservableCollection<Skill>();
                 var c = Game.Me.Class;
                 var skillsForClass = Game.DB.SkillsDatabase.Skills[c];
                 foreach (var skill in skillsForClass.Values)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using FoglioUtils;
 using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Data;
@@ -16,10 +17,10 @@ namespace TCC.ViewModels
     public class TabData : TSPropertyChanged
     {
         private string _tabName;
-        private SynchronizedObservableCollection<string> _authors;
-        private SynchronizedObservableCollection<string> _excludedAuthors;
-        private SynchronizedObservableCollection<ChatChannel> _channels;
-        private SynchronizedObservableCollection<ChatChannel> _excludedChannels;
+        private TSObservableCollection<string> _authors;
+        private TSObservableCollection<string> _excludedAuthors;
+        private TSObservableCollection<ChatChannel> _channels;
+        private TSObservableCollection<ChatChannel> _excludedChannels;
         public string TabName
         {
             get => _tabName;
@@ -30,7 +31,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public SynchronizedObservableCollection<string> Authors
+        public TSObservableCollection<string> Authors
         {
             get => _authors;
             set
@@ -40,7 +41,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public SynchronizedObservableCollection<string> ExcludedAuthors
+        public TSObservableCollection<string> ExcludedAuthors
         {
             get => _excludedAuthors;
             set
@@ -50,7 +51,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public SynchronizedObservableCollection<ChatChannel> Channels
+        public TSObservableCollection<ChatChannel> Channels
         {
             get => _channels;
             set
@@ -60,7 +61,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels
+        public TSObservableCollection<ChatChannel> ExcludedChannels
         {
             get => _excludedChannels;
             set
@@ -72,10 +73,10 @@ namespace TCC.ViewModels
 
         public TabData()
         {
-            Authors = new SynchronizedObservableCollection<string>(Dispatcher);
-            ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
-            Channels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
-            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
+            Authors = new TSObservableCollection<string>(Dispatcher);
+            ExcludedAuthors = new TSObservableCollection<string>(Dispatcher);
+            Channels = new TSObservableCollection<ChatChannel>(Dispatcher);
+            ExcludedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
         }
 
         public TabData(string tabName) : this()
@@ -109,7 +110,7 @@ namespace TCC.ViewModels
 
 
         [JsonIgnore]
-        public SynchronizedObservableCollection<ChatMessage> ImportantMessages { get; set; }
+        public TSObservableCollection<ChatMessage> ImportantMessages { get; set; }
         [JsonIgnore]
         public ICollectionView Messages
         {
@@ -141,7 +142,7 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
-            ImportantMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
+            ImportantMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
                 RemoveImportantMessage((ChatMessage)msg);

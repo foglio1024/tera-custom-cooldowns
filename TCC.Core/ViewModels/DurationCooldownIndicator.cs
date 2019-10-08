@@ -1,4 +1,5 @@
 ﻿using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels

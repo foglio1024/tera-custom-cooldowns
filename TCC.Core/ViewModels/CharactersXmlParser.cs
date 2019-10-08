@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using FoglioUtils;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TCC.Data.Pc;
@@ -60,7 +61,7 @@ namespace TCC.Data
         private readonly string _path = Path.Combine(App.ResourcesPath, "config/characters.xml");
         private XDocument _doc;
 
-        public static XDocument BuildCharacterFile(SynchronizedObservableCollection<Character> list)
+        public static XDocument BuildCharacterFile(TSObservableCollection<Character> list)
         {
             var root = new XElement(CharactersTag, new XAttribute(EliteTag, Game.Account.IsElite));
             list.ToSyncList().ForEach(c =>

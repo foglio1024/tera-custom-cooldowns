@@ -15,11 +15,11 @@ namespace TCC.Windows
 
     public class MergedInventoryViewModel : TSPropertyChanged
     {
-        public SynchronizedObservableCollection<MergedInventoryItem> MergedInventory { get; }
+        public TSObservableCollection<MergedInventoryItem> MergedInventory { get; }
         public ICollectionViewLiveShaping MergedInventoryView { get; }
         public MergedInventoryViewModel()
         {
-            MergedInventory = new SynchronizedObservableCollection<MergedInventoryItem>();
+            MergedInventory = new TSObservableCollection<MergedInventoryItem>();
             MergedInventoryView = CollectionViewUtils.InitLiveView(MergedInventory, 
                 item => item != null, 
                 new string[] { }, 
@@ -101,7 +101,7 @@ namespace TCC.Windows
     public class MergedInventoryItem : TSPropertyChanged
     {
         public InventoryItem Item => Items.Count > 0 ? Items[0].Item : null;
-        public SynchronizedObservableCollection<InventoryItemWithOwner> Items { get; }
+        public TSObservableCollection<InventoryItemWithOwner> Items { get; }
         public int TotalAmount
         {
             get
@@ -114,7 +114,7 @@ namespace TCC.Windows
 
         public MergedInventoryItem()
         {
-            Items = new SynchronizedObservableCollection<InventoryItemWithOwner>();
+            Items = new TSObservableCollection<InventoryItemWithOwner>();
             Items.CollectionChanged += (_, __) => N(nameof(TotalAmount));
         }
     }

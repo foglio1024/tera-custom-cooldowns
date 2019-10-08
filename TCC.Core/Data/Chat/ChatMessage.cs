@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
+using FoglioUtils;
 using TCC.Annotations;
 using FoglioUtils.Extensions;
 using TCC.Utilities;
@@ -35,8 +36,8 @@ namespace TCC.Data.Chat
         }
         [UsedImplicitly] public bool ShowTimestamp => App.Settings.ShowTimestamp;
         [UsedImplicitly] public bool ShowChannel => App.Settings.ShowChannel;
-        public SynchronizedObservableCollection<MessageLine> Lines { get; protected set; }
-        public SynchronizedObservableCollection<MessagePiece> Pieces { get; }
+        public TSObservableCollection<MessageLine> Lines { get; protected set; }
+        public TSObservableCollection<MessagePiece> Pieces { get; }
 
         public bool IsVisible
         {
@@ -69,8 +70,8 @@ namespace TCC.Data.Chat
         public ChatMessage()
         {
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
-            Pieces = new SynchronizedObservableCollection<MessagePiece>(Dispatcher);
-            Lines = new SynchronizedObservableCollection<MessageLine>(Dispatcher);
+            Pieces = new TSObservableCollection<MessagePiece>(Dispatcher);
+            Lines = new TSObservableCollection<MessageLine>(Dispatcher);
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }

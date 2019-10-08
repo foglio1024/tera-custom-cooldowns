@@ -15,7 +15,7 @@ namespace TCC.ViewModels
 
         public event Action ShowAllChanged;
 
-        public SynchronizedObservableCollection<GroupAbnormalityVM> GroupAbnormals;
+        public TSObservableCollection<GroupAbnormalityVM> GroupAbnormals;
         public IEnumerable<Abnormality> Abnormalities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
@@ -43,7 +43,7 @@ namespace TCC.ViewModels
         public GroupConfigVM()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            GroupAbnormals = new SynchronizedObservableCollection<GroupAbnormalityVM>(Dispatcher);
+            GroupAbnormals = new TSObservableCollection<GroupAbnormalityVM>(Dispatcher);
             foreach (var abnormality in Abnormalities)
             {
                 var abVM = new GroupAbnormalityVM(abnormality);

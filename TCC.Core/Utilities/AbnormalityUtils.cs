@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -72,6 +73,7 @@ namespace TCC.Utilities
 
         // can still be used
         #region Deprecated 
+        [Obsolete]
         public static void BeginAbnormality(uint id, ulong target, ulong source, uint duration, int stacks)
         {
             if (!Exists(id, out var ab) || !Pass(ab)) return;
@@ -90,12 +92,14 @@ namespace TCC.Utilities
             }
             if (Game.IsMe(source) || Game.IsMe(target)) CheckPassivity(ab, duration);
         }
+        [Obsolete]
         public static void EndAbnormality(ulong target, uint id)
         {
             if (!Exists(id, out var ab) || !Pass(ab)) return;
             if (Game.IsMe(target)) EndPlayerAbnormality(ab);
             else WindowManager.ViewModels.NpcVM.EndAbnormality(target, ab);
         }
+        [Obsolete]
         private static void CheckPassivity(Abnormality ab, uint duration)
         {
             if (App.Settings.EthicalMode) return;
@@ -110,6 +114,7 @@ namespace TCC.Utilities
                 SkillManager.AddPassivitySkill(ab.Id, duration / 1000);
             }
         }
+        [Obsolete]
         private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
             if (ab.Type == AbnormalityType.Buff || ab.Type == AbnormalityType.Special)
@@ -129,6 +134,7 @@ namespace TCC.Utilities
                 Game.Me.AddToDebuffList(ab);
             }
         }
+        [Obsolete]
         private static void EndPlayerAbnormality(Abnormality ab)
         {
             WindowManager.ViewModels.GroupVM.EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
@@ -151,6 +157,7 @@ namespace TCC.Utilities
                 Game.Me.RemoveFromDebuffList(ab);
             }
         }
+        [Obsolete]
         private static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             WindowManager.ViewModels.NpcVM.UpdateAbnormality(ab, stacks, duration, target);

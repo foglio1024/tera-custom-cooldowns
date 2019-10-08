@@ -24,7 +24,7 @@ namespace TCC.ViewModels.Widgets
     [TccModule]
     public class NpcWindowViewModel : TccWindowViewModel
     {
-        private readonly SynchronizedObservableCollection<NPC> _npcList;
+        private readonly TSObservableCollection<NPC> _npcList;
 
         private ICollectionViewLiveShaping _bams;
         private ICollectionViewLiveShaping _mobs;
@@ -80,7 +80,7 @@ namespace TCC.ViewModels.Widgets
 
         public NpcWindowViewModel(WindowSettings settings) : base(settings)
         {
-            _npcList = new SynchronizedObservableCollection<NPC>(Dispatcher);
+            _npcList = new TSObservableCollection<NPC>(Dispatcher);
             InitFlushTimer();
             NpcListChanged += FlushCache;
             ((NpcWindowSettings)settings).AccurateHpChanged += OnAccurateHpChanged;

@@ -44,7 +44,7 @@ namespace TCC.ViewModels
         public bool IsPublicizeEnabled => !PublicizeTimer.IsEnabled;
         public bool IsAutoPublicizeOn => AutoPublicizeTimer.IsEnabled;
         private bool _stopAuto;
-        public SynchronizedObservableCollection<Listing> Listings { get; }
+        public TSObservableCollection<Listing> Listings { get; }
         public SortCommand SortCommand { get; }
         public RelayCommand PublicizeCommand { get; }
         public RelayCommand ToggleAutoPublicizeCommand { get; }
@@ -94,7 +94,7 @@ namespace TCC.ViewModels
         public LfgListViewModel(LfgWindowSettings settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
-            Listings = new SynchronizedObservableCollection<Listing>(Dispatcher);
+            Listings = new TSObservableCollection<Listing>(Dispatcher);
             ListingsView = CollectionViewUtils.InitLiveView(Listings, null, new string[] { }, new SortDescription[] { });
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;

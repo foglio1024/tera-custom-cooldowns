@@ -30,24 +30,24 @@ namespace TCC.ViewModels.Widgets
 
         public event Action SkillsLoaded;
 
-        public SynchronizedObservableCollection<Cooldown> ShortSkills { get; set; }
-        public SynchronizedObservableCollection<Cooldown> LongSkills { get; set; }
-        public SynchronizedObservableCollection<Cooldown> MainSkills { get; set; }
-        public SynchronizedObservableCollection<Cooldown> SecondarySkills { get; set; }
-        public SynchronizedObservableCollection<Cooldown> OtherSkills { get; set; }
-        public SynchronizedObservableCollection<Cooldown> ItemSkills { get; set; }
-        public SynchronizedObservableCollection<Cooldown> HiddenSkills { get; }
+        public TSObservableCollection<Cooldown> ShortSkills { get; set; }
+        public TSObservableCollection<Cooldown> LongSkills { get; set; }
+        public TSObservableCollection<Cooldown> MainSkills { get; set; }
+        public TSObservableCollection<Cooldown> SecondarySkills { get; set; }
+        public TSObservableCollection<Cooldown> OtherSkills { get; set; }
+        public TSObservableCollection<Cooldown> ItemSkills { get; set; }
+        public TSObservableCollection<Cooldown> HiddenSkills { get; }
 
         public ICollectionViewLiveShaping SkillsView { get; set; }
         public ICollectionViewLiveShaping ItemsView { get; set; }
         public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
-        public SynchronizedObservableCollection<Skill> SkillChoiceList { get; set; }
+        public TSObservableCollection<Skill> SkillChoiceList { get; set; }
         public IEnumerable<Item> Items => Game.DB.ItemsDatabase.ItemSkills;
         public IEnumerable<Abnormality> Passivities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
 
         private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
 
-        private static bool FindAndUpdate(SynchronizedObservableCollection<Cooldown> list, Cooldown sk)
+        private static bool FindAndUpdate(TSObservableCollection<Cooldown> list, Cooldown sk)
         {
             var existing = list.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (existing == null)
@@ -489,14 +489,14 @@ namespace TCC.ViewModels.Widgets
 
         public CooldownWindowViewModel(WindowSettings settings) : base(settings)
         {
-            ShortSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
-            LongSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
-            SecondarySkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
-            MainSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
-            OtherSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
-            ItemSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
+            ShortSkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            LongSkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            SecondarySkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            MainSkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            OtherSkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            ItemSkills = new TSObservableCollection<Cooldown>(Dispatcher);
 
-            HiddenSkills = new SynchronizedObservableCollection<Cooldown>(Dispatcher);
+            HiddenSkills = new TSObservableCollection<Cooldown>(Dispatcher);
 
             InitViews();
 

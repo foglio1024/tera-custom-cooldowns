@@ -22,7 +22,7 @@ namespace TCC.ViewModels
 
         public event Action ShowAllChanged;
 
-        public SynchronizedObservableCollection<MyAbnormalityVM> MyAbnormals;
+        public TSObservableCollection<MyAbnormalityVM> MyAbnormals;
         public IEnumerable<Abnormality> Abnormalities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
@@ -50,7 +50,7 @@ namespace TCC.ViewModels
         public MyAbnormalConfigVM()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            MyAbnormals = new SynchronizedObservableCollection<MyAbnormalityVM>(Dispatcher);
+            MyAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
             foreach (var abnormality in Abnormalities)
             {
                 var abVM = new MyAbnormalityVM(abnormality);

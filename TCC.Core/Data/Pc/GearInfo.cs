@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using FoglioUtils;
 using Newtonsoft.Json;
 using TeraDataLite;
 
@@ -15,11 +16,11 @@ namespace TCC.Data.Pc
         [JsonIgnore] public GearItem Belt => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Belt) ?? new GearItem(0, GearTier.Low, GearPiece.Belt, 0, 0);
         [JsonIgnore] public GearItem Circlet => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
         [JsonIgnore] public ICollectionView Jewels { get; set; }
-        public SynchronizedObservableCollection<GearItem> Gear { get; set; }
+        public TSObservableCollection<GearItem> Gear { get; set; }
 
         public GearInfo()
         {
-            Gear = new SynchronizedObservableCollection<GearItem>();
+            Gear = new TSObservableCollection<GearItem>();
             Jewels = new CollectionViewSource() { Source = Gear }.View;
             Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
             Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));

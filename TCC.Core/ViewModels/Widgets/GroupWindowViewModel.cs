@@ -29,7 +29,7 @@ namespace TCC.ViewModels.Widgets
 
         public event Action SettingsUpdated;
 
-        public SynchronizedObservableCollection<User> Members { get; }
+        public TSObservableCollection<User> Members { get; }
         public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings).Layout;
 
         public ICollectionViewLiveShaping All { get; }
@@ -57,7 +57,7 @@ namespace TCC.ViewModels.Widgets
 
         public GroupWindowViewModel(GroupWindowSettings settings) : base(settings)
         {
-            Members = new SynchronizedObservableCollection<User>(Dispatcher);
+            Members = new TSObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
             Dps = CollectionViewUtils.InitLiveView(Members,

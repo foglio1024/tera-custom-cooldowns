@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using FoglioUtils;
 using Newtonsoft.Json;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;
@@ -80,7 +81,7 @@ namespace TCC.Settings
 
         #region Chat
         // Chat window
-        public SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
+        public TSObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
         public WindowSettings ChatSettings { get; private set; } // added to have the EnabledChanged event
         public bool ChatEnabled
         {
@@ -138,7 +139,7 @@ namespace TCC.Settings
             FlightGaugeWindowSettings = new FlightWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false*/);
             FloatingButtonSettings = new FloatingButtonWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true*/);
             CivilUnrestWindowSettings = new CivilUnrestWindowSettings(/*1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings)*/);
-            ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
+            ChatWindowsSettings = new TSObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
             ChatSettings = new WindowSettings();
             LfgWindowSettings = new LfgWindowSettings();
             NotificationAreaSettings = new NotificationAreaSettings();

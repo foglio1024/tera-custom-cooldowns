@@ -361,8 +361,8 @@ namespace TCC.Data.Pc
                 N(nameof(Boots));
             }
         }
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
-        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; }
+        public TSObservableCollection<AbnormalityDuration> Buffs { get; }
+        public TSObservableCollection<AbnormalityDuration> Debuffs { get; }
         public bool Awakened { get; set; }
         public bool InCombat { get; set; } //make npc when needed
 
@@ -469,15 +469,15 @@ namespace TCC.Data.Pc
         public User()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            Debuffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+            Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
 
         }
         public User(Dispatcher d)
         {
             Dispatcher = d;
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
+            Debuffs = new TSObservableCollection<AbnormalityDuration>(d);
+            Buffs = new TSObservableCollection<AbnormalityDuration>(d);
         }
 
         public User(PartyMemberData applicant) : this()

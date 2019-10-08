@@ -1,4 +1,6 @@
-﻿namespace TCC.Data
+﻿using FoglioUtils;
+
+namespace TCC.Data
 {
     public class Dungeon : TSPropertyChanged
     {

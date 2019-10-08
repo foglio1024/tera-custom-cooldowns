@@ -1,4 +1,5 @@
 ﻿using System.Windows.Threading;
+using FoglioUtils;
 
 namespace TCC.Controls.NPCs
 {

@@ -113,8 +113,8 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
-        public SynchronizedObservableCollection<TabViewModel> TabVMs { get; set; }
-        public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
+        public TSObservableCollection<TabViewModel> TabVMs { get; set; }
+        public TSObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public IInterTabClient InterTabClient { get; }
         public List<Tab> Tabs
         {
@@ -147,7 +147,7 @@ namespace TCC.ViewModels.Widgets
         {
             WindowSettings = s;
             InterTabClient = new ChatTabClient();
-            TabVMs = new SynchronizedObservableCollection<TabViewModel>();
+            TabVMs = new TSObservableCollection<TabViewModel>();
 
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             Game.GameUiModeChanged += CheckCollapsed;

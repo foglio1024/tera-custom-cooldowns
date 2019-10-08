@@ -167,10 +167,7 @@
     <Compile Include="Test\ThreadInfo.cs" />
     <Compile Include="Test\Tester.cs" />
     <Compile Include="Utilities\ContextMenuLeftClickBehavior.cs" />
-    <Compile Include="Utilities\DependencyPropertyWatcher.cs" />
     <Compile Include="Utilities\EventUtils.cs" />
-    <Compile Include="Utilities\SynchronizedObservableCollection.cs" />
-    <Compile Include="Utilities\TSPropertyChanged.cs" />
     <Compile Include="ViewModels\CharactersXmlParser.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />
     <Compile Include="Controls\Classes\ArcherLayout.xaml.cs">

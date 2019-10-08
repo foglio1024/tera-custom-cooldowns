@@ -170,8 +170,8 @@ namespace TCC.Data.Pc
         public VanguardInfo VanguardInfo { get; }
         public DungeonInfo DungeonInfo { get; }
 
-        public SynchronizedObservableCollection<AbnormalityData> Buffs { get; }
-        public SynchronizedObservableCollection<InventoryItem> Inventory { get; }
+        public TSObservableCollection<AbnormalityData> Buffs { get; }
+        public TSObservableCollection<InventoryItem> Inventory { get; }
 
         [JsonIgnore]
         public RelayCommand UnhideCommand { get; }
@@ -230,8 +230,8 @@ namespace TCC.Data.Pc
         public Character()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            Buffs = new SynchronizedObservableCollection<AbnormalityData>(Dispatcher);
-            Inventory = new SynchronizedObservableCollection<InventoryItem>(Dispatcher);
+            Buffs = new TSObservableCollection<AbnormalityData>(Dispatcher);
+            Inventory = new TSObservableCollection<InventoryItem>(Dispatcher);
             GuardianInfo = new GuardianInfo();
             VanguardInfo = new VanguardInfo();
             DungeonInfo = new DungeonInfo();

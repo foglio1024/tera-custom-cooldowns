@@ -10,8 +10,8 @@ namespace TCC.Windows
 {
     public partial class SystemMessagesConfigWindow
     {
-        public SynchronizedObservableCollection<SystemMessageViewModel> HiddenMessages { get; }
-        public SynchronizedObservableCollection<SystemMessageViewModel> ShowedMessages { get; }
+        public TSObservableCollection<SystemMessageViewModel> HiddenMessages { get; }
+        public TSObservableCollection<SystemMessageViewModel> ShowedMessages { get; }
         public ICollectionViewLiveShaping ShowedMessagesView { get; }
         public ICollectionViewLiveShaping HiddenMessagesView { get; }
 
@@ -19,8 +19,8 @@ namespace TCC.Windows
         {
             InitializeComponent();
             DataContext = this;
-            HiddenMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
-            ShowedMessages = new SynchronizedObservableCollection<SystemMessageViewModel>();
+            HiddenMessages = new TSObservableCollection<SystemMessageViewModel>();
+            ShowedMessages = new TSObservableCollection<SystemMessageViewModel>();
 
             App.Settings.UserExcludedSysMsg.ForEach(opc =>
             {
