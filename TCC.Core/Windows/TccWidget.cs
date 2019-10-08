@@ -106,7 +106,7 @@ namespace TCC.Windows
             }));
         }
 
-        private void ReloadPosition()
+        protected void ReloadPosition()
         {
             Log.CW($"[{GetType().Name}] {nameof(ReloadPosition)}()");
 

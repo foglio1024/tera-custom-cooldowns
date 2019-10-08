@@ -20,7 +20,7 @@
              MouseLeave="OnWindowMouseLeave"
              PreviewMouseUp="OnWindowPreviewMouseUp"
              Title="TCC Chat"
-             MinWidth="350" MinHeight="110"
+             MinWidth="350" MinHeight="84"
              ResizeMode="CanResize"
              SizeToContent="Manual"
              Loaded="OnLoaded" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
@@ -116,6 +116,9 @@
                     </ItemsControl.Template>
 
                 </ItemsControl>
+                <TextBlock IsHitTestVisible="False" Text="{Binding ElementName=itemsControl, Path=Items.Count}"
+                           Foreground="#2fff" Margin="5" HorizontalAlignment="Right"
+                           VerticalAlignment="Top" Grid.RowSpan="3"/>
 
             </Grid>
         </DataTemplate>
@@ -225,10 +228,10 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                     <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right" Click="OnSettingsButtonClick" Opacity=".5"
-                        Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14" 
+                        Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="16" 
                         VerticalAlignment="Top">
-                        <Grid Background="#01000000">
-                            <Path Data="{StaticResource SvgSettings}"/>
+                        <Grid  Background="Transparent">
+                            <Path Data="{StaticResource SvgSettings}" />
                         </Grid>
                     </Button>
                     <Grid.RenderTransform>
@@ -307,9 +310,9 @@
                                         <BeginStoryboard>
                                             <Storyboard>
                                                 <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                                 From="0" To="1" Duration="0:0:0.15"/>
+                                                                 From="0" To="1" Duration="0:0:0.05"/>
                                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
-                                                                 From="-20" To="0" Duration="0:0:0.15" EasingFunction="{StaticResource QuadraticEase}"/>
+                                                                 From="-10" To="0" Duration="0:0:0.15" EasingFunction="{StaticResource QuadraticEase}"/>
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </DataTrigger.EnterActions>
@@ -357,15 +360,22 @@
                                 </Border>
                             </ControlTemplate>
                         </ItemsControl.Template>
-
                     </ItemsControl>
+                    <Button Margin="0 5 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick" 
+                            Opacity=".5"
+                            Style="{StaticResource ButtonContentOpacityStyle}"  Height="16" 
+                            VerticalAlignment="Bottom">
+                        <Grid  Background="#01000000">
+                            <Path Data="{StaticResource SvgSettings}"/>
+                        </Grid>
+                    </Button>
+
                 </Grid>
             </Grid>
         </dockablz:Layout>
-        <Popup Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
-               MouseLeave="OnSettingsPopupMouseLeave"
+        <widgets:TccPopup MouseLeaveTolerance="10" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True"
-               PopupAnimation="Slide" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
+               PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
             <Grid>
                 <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
                 <StackPanel Width="350" Margin="3">
@@ -382,7 +392,12 @@
                                            Value="{Binding WindowSettings.HideTimeout,  Mode=TwoWay}" 
                                            Min="3" Max="60" Visibility="Visible"/>
                     <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
+                    <settings:CheckboxSetting SettingName="Allow offscreen" Foreground="#9fff" IsOn="{Binding WindowSettings.AllowOffScreen, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <settings:CheckboxSetting SettingName="Can collapse" Foreground="#9fff" IsOn="{Binding WindowSettings.CanCollapse, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
+                    <settings:CheckboxSetting SettingName="Stays collapsed" Foreground="#9fff" 
+                                              IsOn="{Binding WindowSettings.StaysCollapsed, Mode=TwoWay}" 
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}"  
+                                              IsEnabled="{Binding WindowSettings.CanCollapse}"/>
                     <settings:SelectionSetting SettingName="Click thru" Foreground="#9fff" 
                                                SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}" 
                                                Choices="{Binding ClickThruModes}"
@@ -395,6 +410,6 @@
                     </Button>
                 </StackPanel>
             </Grid>
-        </Popup>
+        </widgets:TccPopup>
     </Grid>
 </w:TccWidget>

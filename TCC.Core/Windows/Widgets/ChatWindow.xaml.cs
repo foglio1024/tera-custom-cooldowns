@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Interop;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data.Chat;
@@ -12,6 +14,34 @@ using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows.Widgets
 {
+    public class TccPopup : Popup
+    {
+        public double MouseLeaveTolerance
+        {
+            get => (double)GetValue(MouseLeaveToleranceProperty);
+            set => SetValue(MouseLeaveToleranceProperty, value);
+        }
+
+        public static readonly DependencyProperty MouseLeaveToleranceProperty = DependencyProperty.Register("MouseLeaveTolerance", 
+                                                                                                            typeof(double), 
+                                                                                                            typeof(TccPopup), 
+                                                                                                            new PropertyMetadata(0D));
+
+
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            if (Child != null)
+            {
+                var content = (FrameworkElement) Child;
+                var pos = e.MouseDevice.GetPosition(content);
+                if ((pos.X > MouseLeaveTolerance && pos.X < content.ActualWidth - MouseLeaveTolerance)
+                 && (pos.Y > MouseLeaveTolerance && pos.Y < content.ActualHeight - MouseLeaveTolerance)) return;
+                this.IsOpen = false;
+            }
+            FocusManager.PauseTopmost = false;
+        }
+    }
 
     public partial class ChatWindow
     {
@@ -32,8 +62,19 @@ namespace TCC.Windows.Widgets
             VM = DataContext as ChatViewModel;
             if (VM == null) return;
             VM.WindowSettings = ws;
-            ((ChatWindowSettings) WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
+            ((ChatWindowSettings)WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
             VM.RefreshHideTimer();
+            VM.ForceSizePosUpdateEvent += OnForceSizePosUpdate;
+        }
+
+        private void OnForceSizePosUpdate()
+        {
+            Dispatcher?.InvokeAsync(() =>
+            {
+                ReloadPosition();
+                Height = WindowSettings.H;
+                Width = WindowSettings.W;
+            });
         }
 
         public void UpdateSettings()
@@ -106,11 +147,7 @@ namespace TCC.Windows.Widgets
             SettingsPopup.DataContext = DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
-        private void OnSettingsPopupMouseLeave(object sender, MouseEventArgs e)
-        {
-            SettingsPopup.IsOpen = false;
-            FocusManager.PauseTopmost = false;
-        }
+
         private void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             ChatWindowManager.Instance.RemoveEmptyChatWindows();

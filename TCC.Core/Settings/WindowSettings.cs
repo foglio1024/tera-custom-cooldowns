@@ -334,11 +334,13 @@ namespace TCC.Settings
         private bool _lfgOn = true;
         private int _hideTimeout;
         private bool _canCollapse = true;
+        private bool _staysCollapsed;
 
         public event Action FadeoutChanged;
         public event Action OpacityChanged;
         public event Action TimeoutChanged;
         public event Action CanCollapseChanged;
+        public event Action StaysCollapsedChanged;
 
 
         public int HideTimeout
@@ -402,7 +404,20 @@ namespace TCC.Settings
             {
                 if (_canCollapse == value) return;
                 _canCollapse = value;
+                N();
+                if (!_canCollapse) StaysCollapsed = false;
                 CanCollapseChanged?.Invoke();
+            }
+        }
+        public bool StaysCollapsed
+        {
+            get => _staysCollapsed;
+            set
+            {
+                if (_staysCollapsed== value) return;
+                _staysCollapsed= value;
+                N();
+                StaysCollapsedChanged?.Invoke();
             }
         }
 

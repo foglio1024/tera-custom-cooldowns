@@ -34,6 +34,7 @@ namespace TCC.ViewModels.Widgets
     }
     public class ChatViewModel : TSPropertyChanged
     {
+        public event Action ForceSizePosUpdateEvent;
 
         private bool _paused;
         private bool _visible = true;
@@ -70,6 +71,12 @@ namespace TCC.ViewModels.Widgets
             {
                 if (_collapsed == value) return;
                 _collapsed = value;
+                if (_collapsed && WindowSettings.StaysCollapsed)
+                {
+                    WindowSettings.H = 84;
+                    WindowSettings.Y += 84;
+                    ForceSizePosUpdateEvent?.Invoke();
+                }
                 N();
             }
         }
@@ -79,7 +86,7 @@ namespace TCC.ViewModels.Widgets
             get => _currentTab;
             set
             {
-                if(_currentTab == value) return;
+                if (_currentTab == value) return;
                 _currentTab = value;
                 N();
             }
@@ -146,11 +153,13 @@ namespace TCC.ViewModels.Widgets
             Game.GameUiModeChanged += CheckCollapsed;
             Game.ChatModeChanged += CheckCollapsed;
             WindowSettings.CanCollapseChanged += () => N(nameof(Collapsed));
+            WindowSettings.StaysCollapsedChanged += () => N(nameof(Collapsed));
+            if (WindowSettings.StaysCollapsed) _collapsed = true;
         }
 
         private void CheckCollapsed()
         {
-            Collapsed = !(Game.InGameUiOn || Game.InGameChatOpen);
+            Collapsed = !(Game.InGameUiOn || Game.InGameChatOpen) || WindowSettings.StaysCollapsed;
         }
 
         private void ChangeTimerInterval()
