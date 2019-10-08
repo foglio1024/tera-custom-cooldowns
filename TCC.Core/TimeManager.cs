@@ -76,7 +76,7 @@ namespace TCC
             if (!_serverTimezones.ContainsKey(CurrentRegion))
             {
                 CurrentRegion = RegionEnum.EU;
-                App.Settings.LastLanguage = "EU-EN"; 
+                App.Settings.LastLanguage = "EU-EN";
                 TccMessageBox.Show("TCC",
                     "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -150,19 +150,19 @@ namespace TCC
 
         public void UploadGuildBamTimestamp()
         {
-            var sb = new StringBuilder(BaseUrl);
-            sb.Append("?srv=");
-            sb.Append(Game.Server.ServerId);
-            sb.Append("&reg=");
-            sb.Append(CurrentRegion);
-            sb.Append("&post");
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            var c = new WebClient();
-            c.Headers.Set("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-
             try
             {
+                var sb = new StringBuilder(BaseUrl);
+                sb.Append("?srv=");
+                sb.Append(Game.Server.ServerId);
+                sb.Append("&reg=");
+                sb.Append(CurrentRegion);
+                sb.Append("&post");
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                var c = new WebClient();
+                c.Headers.Set("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 c.UploadDataAsync(new Uri(sb.ToString()), new byte[] { });
             }
             catch
@@ -209,7 +209,7 @@ namespace TCC
             if (content == "") content = defaultMessage;
             SendWebhook(content, App.Settings.WebhookUrlFieldBoss, testMessage);
         }
-        public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, string userName, string guildName ,bool testMessage = false)
+        public void ExecuteFieldBossDieWebhook(string monsterName, string defaultMessage, string userName, string guildName, bool testMessage = false)
         {
             var content = App.Settings.WebhookMessageFieldBossDie;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
