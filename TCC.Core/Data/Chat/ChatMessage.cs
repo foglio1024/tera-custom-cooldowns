@@ -268,7 +268,7 @@ namespace TCC.Data.Chat
         private void AddPiece(MessagePiece mp)
         {
             mp.Container = this;
-            Dispatcher.BeginInvokeIfRequired(() =>
+            Dispatcher.InvokeAsyncIfRequired(() =>
             {
                 Pieces.Add(mp);
             }, DispatcherPriority.DataBind);
@@ -276,7 +276,7 @@ namespace TCC.Data.Chat
         private void InsertPiece(MessagePiece mp, int index)
         {
             mp.Container = this;
-            Dispatcher.BeginInvokeIfRequired(() =>
+            Dispatcher.InvokeAsyncIfRequired(() =>
             {
                 Pieces.Insert(index, mp);
             }, DispatcherPriority.DataBind);

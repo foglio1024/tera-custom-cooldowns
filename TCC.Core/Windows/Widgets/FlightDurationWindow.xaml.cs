@@ -55,13 +55,13 @@ namespace TCC.Windows.Widgets
         public void SetEnergy(double val)
         {
             if (!App.Settings.FlightGaugeWindowSettings.Enabled) return;
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (Opacity == 0) ShowWindow();
                 _arcAn.From = Arc.EndAngle;
                 _arcAn.To = MathUtils.FactorToAngle(val / 1000, 4);
                 Arc.BeginAnimation(Arc.EndAngleProperty, _arcAn);
-            }));
+            });
         }
 
         private void OnCombatChanged()
@@ -71,13 +71,13 @@ namespace TCC.Windows.Widgets
 
         private void SetStacks()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 for (var i = 9; i >= 0; i--)
                 {
                     ((FrameworkElement)StacksContainer.Children[i]).Opacity = i + 1 <= FlyingGuardianDataProvider.Stacks ? 1 : 0.2;
                 }
-            }));
+            });
         }
         private void HideWindow()
         {

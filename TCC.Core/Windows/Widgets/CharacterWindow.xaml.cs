@@ -78,7 +78,7 @@ namespace TCC.Windows.Widgets
                 case nameof(Player.ShieldFactor): action = ChangeShield; break;
                 default: return;
             }
-            Dispatcher.BeginInvoke(action, DispatcherPriority.DataBind);
+            Dispatcher.InvokeAsync(action, DispatcherPriority.DataBind);
         }
 
         private void ChangeHP()

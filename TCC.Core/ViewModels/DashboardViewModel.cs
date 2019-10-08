@@ -84,10 +84,10 @@ namespace TCC.ViewModels
                     if (SelectedCharacter == null) return;
                     SelectedCharacter.Inventory.ToList().ForEach(item =>
                     {
-                        App.BaseDispatcher.BeginInvoke(new Action(() =>
+                        App.BaseDispatcher.InvokeAsync(() =>
                         {
                             ret.Add(item);
-                        }), DispatcherPriority.Background);
+                        }, DispatcherPriority.Background);
                     });
                 });
                 return ret;
@@ -184,22 +184,22 @@ namespace TCC.ViewModels
                 {
                     Game.DB.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
                     {
-                        App.BaseDispatcher.BeginInvoke(new Action(() =>
+                        App.BaseDispatcher.InvokeAsync(() =>
                         {
                             var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
                             CharacterViewModels?.ToList().ForEach(charVm =>
-                                {
-                                    //if (charVm.Character.Hidden) return;
-                                    dvc.DungeonsList.Add(
-                                          new DungeonCooldownViewModel
-                                          {
-                                              Owner = charVm.Character,
-                                              Cooldown = charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x =>
-                                                  x.Dungeon.Id == dungeon.Id)
-                                          });
-                                });
+                            {
+                                //if (charVm.Character.Hidden) return;
+                                dvc.DungeonsList.Add(
+                                    new DungeonCooldownViewModel
+                                    {
+                                        Owner = charVm.Character,
+                                        Cooldown = charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x =>
+                                            x.Dungeon.Id == dungeon.Id)
+                                    });
+                            });
                             _columns.Add(dvc);
-                        }), DispatcherPriority.Background);
+                        }, DispatcherPriority.Background);
                     });
                 });
                 _loaded = true;
@@ -771,7 +771,7 @@ namespace TCC.ViewModels
             {
                 Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
                 {
-                    App.BaseDispatcher.BeginInvoke(new Action(() =>
+                    App.BaseDispatcher.InvokeAsync(() =>
                     {
                         var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
                         CharacterViewModels?.ToList().ForEach(charVm =>
@@ -786,7 +786,7 @@ namespace TCC.ViewModels
                                 });
                         });
                         _columns.Add(dvc);
-                    }), DispatcherPriority.Background);
+                    }, DispatcherPriority.Background);
                 });
             });
         }

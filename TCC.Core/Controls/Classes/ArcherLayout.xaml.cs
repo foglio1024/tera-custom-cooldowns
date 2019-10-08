@@ -30,12 +30,12 @@ namespace TCC.Controls.Classes
 
         private void OnStacksChanged(int stacks)
         {
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 _an2.To = stacks / 10D * 280 + 42;
                 _an2.Duration = TimeSpan.FromMilliseconds(150);
                 SecReArc.BeginAnimation(Arc.EndAngleProperty, _an2);
-            }));
+            });
 
         }
 

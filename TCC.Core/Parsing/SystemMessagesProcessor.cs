@@ -296,8 +296,8 @@ namespace TCC.Parsing
         {
             if (!Processor.TryGetValue(opcodeName, out var type) || type == null) return false;
             //TODO: check this and remove when chat will be moved to own thread.
-            // BaseDispatcher.BeginInvoke() was added because of a deadlock in AddPiece() called from ChatMessage.ctor().ParseSysHtmlPiece()
-            App.BaseDispatcher.BeginInvoke(new Action(() => type.DynamicInvoke(serverMsg, sysMsg)));
+            // BaseDispatcher.InvokeAsync() was added because of a deadlock in AddPiece() called from ChatMessage.ctor().ParseSysHtmlPiece()
+            App.BaseDispatcher.InvokeAsync(new Action(() => type.DynamicInvoke(serverMsg, sysMsg)));
             return true;
         }
         #endregion

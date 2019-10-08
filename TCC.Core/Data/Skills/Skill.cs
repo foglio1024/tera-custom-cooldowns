@@ -70,7 +70,7 @@ namespace TCC.Data.Skills
         //    //if (!iconName.Contains("Icon_Skills.")) return;
         //    IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
 
-        //    //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+        //    //CooldownWindow.Instance.Dispatcher.InvokeAsync(new Action(() =>
         //    //{
         //    //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
         //    //}));

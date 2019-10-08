@@ -175,11 +175,11 @@ namespace TCC.Controls.NPCs
 
         private void SlideEnrageIndicator(double val)
         {
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 _slideAnim.To = val < 0 ? 0 : HpBarGrid.ActualWidth * (val / 100);
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideAnim);
-            }));
+            });
         }
 
         private void BossGage_OnMouseEnter(object sender, MouseEventArgs e)

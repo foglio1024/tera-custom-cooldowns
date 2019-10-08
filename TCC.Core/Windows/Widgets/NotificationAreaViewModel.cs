@@ -21,7 +21,7 @@ namespace TCC.Windows.Widgets
 
         private void CheckShow()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 while (Notifications.Count < ((NotificationAreaSettings) Settings).MaxNotifications)
                 {
@@ -30,7 +30,7 @@ namespace TCC.Windows.Widgets
                     if (!Pass(next)) continue;
                     Notifications.Add(next);
                 }
-            }));
+            });
         }
 
         private bool Pass(NotificationInfo info)
@@ -46,11 +46,11 @@ namespace TCC.Windows.Widgets
 
         public void DeleteNotification(NotificationInfo dc)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 Notifications.Remove(dc);
                 CheckShow();
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
     }
 }

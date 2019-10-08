@@ -196,7 +196,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (ab.Infinity) duration = uint.MaxValue;
                 var u = Members.ToSyncList().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
@@ -220,11 +220,11 @@ namespace TCC.ViewModels.Widgets
                     // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks);
                 }
-            }));
+            });
         }
         public void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
 
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
@@ -242,7 +242,7 @@ namespace TCC.ViewModels.Widgets
                 {
                     u.RemoveDebuff(ab);
                 }
-            }));
+            });
         }
         public void ClearAbnormality(uint playerId, uint serverId)
         {
@@ -497,31 +497,31 @@ namespace TCC.ViewModels.Widgets
         }
         public void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
                 if (u == null) return;
                 u.CurrentHp = curHp;
                 u.MaxHp = maxHp;
-            }));
+            });
         }
         public void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
                 if (u == null) return;
                 u.CurrentMp = curMp;
                 u.MaxMp = maxMp;
-            }));
+            });
         }
         public void SetRaid(bool raid)
         {
-            Dispatcher.BeginInvoke(new Action(() => Raid = raid));
+            Dispatcher.InvokeAsync(new Action(() => Raid = raid));
         }
         public void UpdateMember(PartyMemberData p)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
                 if (u == null) return;
@@ -534,7 +534,7 @@ namespace TCC.ViewModels.Widgets
                 u.Alive = p.Alive;
                 N(nameof(AliveCount));
                 if (!p.Alive) u.HasAggro = false;
-            }));
+            });
         }
         public void NotifyThresholdChanged()
         {
@@ -569,19 +569,19 @@ namespace TCC.ViewModels.Widgets
         }
         private void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (!AbnormalityUtils.Exists(id, out var ab) || !AbnormalityUtils.Pass(ab)) return;
                 BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
-            }));
+            });
         }
         private void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (!AbnormalityUtils.Exists(id, out var ab) || !AbnormalityUtils.Pass(ab)) return;
                 EndAbnormality(ab, playerId, serverId);
-            }));
+            });
         }
 
         protected override void InstallHooks()
@@ -687,7 +687,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnCheckToReadyParty(S_CHECK_TO_READY_PARTY p)
         {
-            Dispatcher.BeginInvoke(new Action(() => p.Party.ForEach(SetReadyStatus)));
+            Dispatcher.InvokeAsync(() => p.Party.ForEach(SetReadyStatus));
         }
         private void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)
         {
@@ -718,7 +718,7 @@ namespace TCC.ViewModels.Widgets
         {
             SetRaid(p.Raid);
             //p.Members.ForEach(m => Dispatcher.Invoke(() => AddOrUpdateMember(m)));
-            Dispatcher.BeginInvoke(new Action(() => p.Members.ForEach(AddOrUpdateMember)));
+            Dispatcher.InvokeAsync(() => p.Members.ForEach(AddOrUpdateMember));
         }
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
         {

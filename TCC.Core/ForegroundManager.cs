@@ -57,14 +57,14 @@ namespace TCC
 
         private void NotifyVisibilityChanged()
         {
-            App.BaseDispatcher?.BeginInvoke(new Action(() =>
-                VisibilityChanged?.Invoke()), DispatcherPriority.Background);
+            App.BaseDispatcher?.InvokeAsync(() =>
+                VisibilityChanged?.Invoke(), DispatcherPriority.Background);
         }
 
         private void NotifyDimChanged()
         {
-            App.BaseDispatcher?.BeginInvoke(new Action(() =>
-                DimChanged?.Invoke()), DispatcherPriority.Background);
+            App.BaseDispatcher?.InvokeAsync(() =>
+                DimChanged?.Invoke(), DispatcherPriority.Background);
         }
 
 

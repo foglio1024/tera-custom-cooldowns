@@ -52,7 +52,7 @@ namespace TCC.Parsing
             Processor.Hook<C_CHECK_VERSION>(OnCheckVersion);
             Processor.Hook<C_LOGIN_ARBITER>(OnLoginArbiter);
 
-            if (ProcessorReady != null) App.BaseDispatcher.BeginInvoke(ProcessorReady);
+            if (ProcessorReady != null) App.BaseDispatcher.InvokeAsync(ProcessorReady);
             while (true)
             {
                 if (!Packets.TryDequeue(out var pkt))

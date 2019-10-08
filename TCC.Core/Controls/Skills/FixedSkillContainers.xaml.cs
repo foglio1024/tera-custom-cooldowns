@@ -400,22 +400,22 @@ namespace TCC.Controls.Skills
 
         private void RefreshBorder()
         {
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
 
                 MainBorder.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
                 MainBorderSec.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
         private void RefreshControlTemplate(ItemsControl ic)
         {
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 ic.ItemContainerStyle =
                     FindResource(App.Settings.SkillShape == ControlShape.Round
                         ? "RoundDragableStyle"
                         : "SquareDragableStyle") as Style;
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
     }
 }

@@ -118,7 +118,7 @@ namespace TCC.Windows
                 VM.StayClosed = false;
                 return;
             }
-            Dispatcher?.BeginInvoke(new Action(() => VM.RefreshSorting()), DispatcherPriority.Background);
+            Dispatcher?.InvokeAsync(() => VM.RefreshSorting(), DispatcherPriority.Background);
 
             base.ShowWindow();
         }

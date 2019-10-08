@@ -387,14 +387,14 @@ namespace TCC.Test
                     if (i > 1000)
                     {
                         i = 0;
-                        ChatWindowManager.Instance.GetDispatcher().BeginInvoke(new Action(() =>
+                        ChatWindowManager.Instance.GetDispatcher().InvokeAsync(() =>
                         {
                             foreach (var chatMessage in ChatWindowManager.Instance.ChatMessages)
                             {
                                 chatMessage.Dispose();
                             }
                             ChatWindowManager.Instance.ChatMessages.Clear();
-                        }));
+                        });
                     }
                     ChatWindowManager.Instance.AddDamageReceivedMessage(1, 2, int.MaxValue - i, int.MaxValue);
 

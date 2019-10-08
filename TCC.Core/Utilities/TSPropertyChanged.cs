@@ -22,7 +22,7 @@ namespace TCC
         protected void N([CallerMemberName] string v = null)
         {
             if (Dispatcher == null) SetDispatcher(App.BaseDispatcher);
-            Dispatcher.BeginInvokeIfRequired(() =>
+            Dispatcher.InvokeAsyncIfRequired(() =>
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);
         }
 

@@ -141,7 +141,7 @@ namespace TCC.Windows
             for (int i = 0; i < 80; i++)
             {
                 var i1 = i;
-                Dispatcher.BeginInvoke(new Action(() => Tester.RegisterWebhook("user" + i1)));
+                Dispatcher.InvokeAsync(() => Tester.RegisterWebhook("user" + i1));
             }
         }
 
@@ -150,7 +150,7 @@ namespace TCC.Windows
             for (int i = 0; i < 80; i++)
             {
                 var i1 = i;
-                Dispatcher.BeginInvoke(new Action(() => Tester.FireWebhook("user" + i1)));
+                Dispatcher.InvokeAsync(() => Tester.FireWebhook("user" + i1));
             }
         }
         private void DungeonTest(object sender, RoutedEventArgs e)

@@ -159,12 +159,12 @@ namespace TCC.Data
 
         public void UpdateIsMyLfg()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) ||
-                    LeaderId == Game.Me.PlayerId ||
-                    WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
-            }), DispatcherPriority.DataBind);
+                          LeaderId == Game.Me.PlayerId ||
+                          WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
+            }, DispatcherPriority.DataBind);
         }
 
 

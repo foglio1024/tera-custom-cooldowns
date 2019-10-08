@@ -208,7 +208,7 @@ namespace TCC.ViewModels.Widgets
 
         internal void Save()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (MainSkills.Count == 0 && SecondarySkills.Count == 0 && HiddenSkills.Count == 0) return;
                 var root = new XElement("Skills");
@@ -229,7 +229,7 @@ namespace TCC.ViewModels.Widgets
                 });
                 if (Game.Me.Class > (Class)12) return;
                 root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(Game.Me.Class).ToLower()}-skills.xml"));
-            }));
+            });
         }
 
         private bool FixedMode_Update(Cooldown sk)
@@ -367,7 +367,7 @@ namespace TCC.ViewModels.Widgets
 
         public void AddOrRefresh(Cooldown sk)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 switch (App.Settings.CooldownWindowSettings.Mode)
                 {
@@ -378,11 +378,11 @@ namespace TCC.ViewModels.Widgets
                         if (!NormalMode_Update(sk)) sk.Dispose();
                         break;
                 }
-            }));
+            });
         }
         public void Change(Skill skill, uint cd)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 switch (App.Settings.CooldownWindowSettings.Mode)
                 {
@@ -393,11 +393,11 @@ namespace TCC.ViewModels.Widgets
                         NormalMode_Change(skill, cd);
                         break;
                 }
-            }));
+            });
         }
         public void Remove(Skill sk)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 switch (App.Settings.CooldownWindowSettings.Mode)
                 {
@@ -408,12 +408,12 @@ namespace TCC.ViewModels.Widgets
                         NormalMode_Remove(sk);
                         break;
                 }
-            }));
+            });
         }
 
         public void ClearSkills()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 ShortSkills.ToList().ForEach(sk => sk.Dispose());
                 LongSkills.ToList().ForEach(sk => sk.Dispose());
@@ -429,7 +429,7 @@ namespace TCC.ViewModels.Widgets
                 OtherSkills.Clear();
                 ItemSkills.Clear();
                 HiddenSkills.Clear();
-            }));
+            });
         }
 
         public void LoadSkills(Class c)
@@ -509,11 +509,11 @@ namespace TCC.ViewModels.Widgets
         private void OnShowSkillConfigHotkeyPressed()
         {
             if (!Game.Logged) return;
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
                 else new SkillConfigWindow().ShowWindow();
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
 
         private void InitViews()
@@ -530,12 +530,12 @@ namespace TCC.ViewModels.Widgets
         {
             if (!App.Settings.CooldownWindowSettings.Enabled) return;
             if (App.Settings.CooldownWindowSettings.Mode == CooldownBarMode.Normal) return;
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (ClassManager.ResetSpecialSkill(skill)) return;
                 var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);
                 sk?.ProcReset();
-            }));
+            });
         }
         public void RemoveHiddenSkill(Cooldown skill)
         {

@@ -54,11 +54,11 @@ namespace TCC.Windows
             {
                 Game.Account.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
                 {
-                    Dispatcher.BeginInvoke(new Action(() =>
+                    Dispatcher.InvokeAsync(() =>
                     {
                         ch.Inventory.ToList().ForEach(item =>
                         {
-                            Dispatcher.BeginInvoke(new Action(() =>
+                            Dispatcher.InvokeAsync(() =>
                             {
                                 var existing = MergedInventory.FirstOrDefault(x => x.Item.Item.Id == item.Item.Id);
                                 if (existing == null)
@@ -81,9 +81,9 @@ namespace TCC.Windows
                                 }
                                 itemsParsed++;
                                 TotalProgress = itemsParsed / (double)totalItemsAmount;
-                            }), DispatcherPriority.DataBind);
+                            }, DispatcherPriority.DataBind);
                         });
-                    }), DispatcherPriority.Background);
+                    }, DispatcherPriority.Background);
                 });
             });
         }
@@ -146,7 +146,7 @@ namespace TCC.Windows
 
         private void FilterInventory(object sender, TextChangedEventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 var view = (ICollectionView)((MergedInventoryViewModel) DataContext).MergedInventoryView;
                 view.Filter = o =>
@@ -154,10 +154,10 @@ namespace TCC.Windows
                     var item = ((MergedInventoryItem)o).Item.Item;
                     var name = item.Name;
                     return name.IndexOf(((TextBox)sender).Text,
-                                   StringComparison.InvariantCultureIgnoreCase) != -1;
+                               StringComparison.InvariantCultureIgnoreCase) != -1;
                 };
                 view.Refresh();
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
 
         }
     }

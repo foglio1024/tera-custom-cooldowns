@@ -147,12 +147,12 @@ namespace TCC.ViewModels.Widgets
         public void InvokeCompactModeChanged()
         {
             N(nameof(CompactMode));
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 WindowManager.CharacterWindow.Left = App.Settings.CharacterWindowSettings.CompactMode
                     ? WindowManager.CharacterWindow.Left + 175
                     : WindowManager.CharacterWindow.Left - 175;
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
     }
 }

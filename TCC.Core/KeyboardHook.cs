@@ -86,8 +86,8 @@ namespace TCC
 
         private void BeginCheckEnable()
         {
-            App.BaseDispatcher.BeginInvoke(
-                new Action(() => { CheckEnable(!Game.InGameChatOpen && FocusManager.IsForeground); }),
+            App.BaseDispatcher.InvokeAsync(
+                () => { CheckEnable(!Game.InGameChatOpen && FocusManager.IsForeground); },
                 DispatcherPriority.Background);
         }
 

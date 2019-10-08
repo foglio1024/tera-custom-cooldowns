@@ -506,11 +506,11 @@ namespace TCC
         }
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
-            App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
+            App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
         private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
-            App.BaseDispatcher.BeginInvoke(new Action(() => SkillStarted?.Invoke()));
+            App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
         private static void OnReturnToLobbyHotkeyPressed()
         {

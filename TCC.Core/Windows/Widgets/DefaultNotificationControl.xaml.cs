@@ -60,26 +60,26 @@ namespace TCC.Windows.Widgets
 
         private void OnFadeFinished(object sender, EventArgs e)
         {
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 var h = Root.ActualHeight;
                 Root.Height = h;
                 Root.Style = null;
                 Root.Child = null;
                 Root.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _shrinkAnimation);
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
 
         private void OnTimeExpired(object sender, EventArgs e)
         {
             _duration.Stop();
             _duration.Tick -= OnTimeExpired;
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 Root.Effect = null;
                 Root.BeginAnimation(OpacityProperty, _fadeOutAnimation);
                 Root.RenderTransform.BeginAnimation(TranslateTransform.YProperty, _slideOutAnimation);
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

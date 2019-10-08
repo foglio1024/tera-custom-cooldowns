@@ -144,7 +144,7 @@ namespace TCC.ViewModels
             if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-            AddOrRefreshLfg(m.ListingData); //Dispatcher.BeginInvoke(new Action(() => { AddOrRefreshLfg(m.ListingData); }), DispatcherPriority.DataBind);
+            AddOrRefreshLfg(m.ListingData); //Dispatcher.InvokeAsync(new Action(() => { AddOrRefreshLfg(m.ListingData); }), DispatcherPriority.DataBind);
             AddLfgMessage(m.Id, m.Name, m.Message);
         }
         private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
@@ -330,14 +330,14 @@ namespace TCC.ViewModels
 
         public void AddLfgMessage(uint id, string name, string msg)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 AddChatMessage(new LfgMessage(id, name, msg));
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (Filtered(chatMessage)) return;
 
@@ -362,7 +362,7 @@ namespace TCC.ViewModels
                     ChatMessages.RemoveAt(ChatMessages.Count - 1);
                 }
                 N(nameof(MessageCount));
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         public void AddTccMessage(string message)
         {
@@ -553,7 +553,7 @@ namespace TCC.ViewModels
 
         public void RemoveEmptyChatWindows()
         {
-            App.BaseDispatcher.BeginInvoke(new Action(() =>
+            App.BaseDispatcher.InvokeAsync(() =>
             {
                 foreach (ChatWindow w in App.Current.Windows.ToList().Where(x => x is ChatWindow c && c.VM.TabVMs.Count == 0))
                 {
@@ -562,7 +562,7 @@ namespace TCC.ViewModels
                 }
 
                 if (FocusManager.ForceFocused) FocusManager.ForceFocused = false;
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
     }
 }

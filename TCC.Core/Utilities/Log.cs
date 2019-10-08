@@ -16,7 +16,7 @@ namespace TCC.Utilities
         [Conditional("DEBUG")]
         public static void C(string line)
         {
-            App.BaseDispatcher.BeginInvoke(new Action(() => ChatWindowManager.Instance.AddTccMessage(line)));
+            App.BaseDispatcher.InvokeAsync(() => ChatWindowManager.Instance.AddTccMessage(line));
         }
 
         public static void F(string line, string fileName = "error.log")

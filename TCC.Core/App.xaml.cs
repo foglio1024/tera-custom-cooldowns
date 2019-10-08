@@ -44,11 +44,11 @@ namespace TCC
         private static FUBH fubh;
         public static void FUBH()
         {
-            BaseDispatcher.BeginInvoke(new Action(() =>
+            BaseDispatcher.InvokeAsync(() =>
             {
                 if (fubh == null) fubh = new FUBH();
                 fubh.Show();
-            }));
+            });
         }
         private async void OnStartup(object sender, StartupEventArgs e)
         {

@@ -98,19 +98,19 @@ namespace TCC.Windows
         private void ShowHideBoundaries()
         {
             var anim = _showBoundaries ? _showButtonsAnimation : _hideButtonsAnimation;
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 BoundaryRef?.BeginAnimation(OpacityProperty, anim);
                 ButtonsRef?.BeginAnimation(OpacityProperty, anim);
                 OnClickThruModeChanged();
-            }));
+            });
         }
 
         protected void ReloadPosition()
         {
             Log.CW($"[{GetType().Name}] {nameof(ReloadPosition)}()");
 
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 var left = WindowSettings.X * WindowManager.ScreenSize.Width;
                 Left = left >= int.MaxValue ? 0 : left;
@@ -131,7 +131,7 @@ namespace TCC.Windows
                         break;
                 }
                 UpdateButtons();
-            }));
+            });
         }
         public void ResetToCenter()
         {
@@ -266,20 +266,20 @@ namespace TCC.Windows
         private void AnimateContentOpacity(double opacity)
         {
             if (MainContent == null) return;
-            Dispatcher?.BeginInvoke(new Action(() =>
-            {
-                _opacityAnimation.To = opacity;
-                MainContent.BeginAnimation(OpacityProperty, _opacityAnimation);
-            })
+            Dispatcher?.InvokeAsync(() =>
+                {
+                    _opacityAnimation.To = opacity;
+                    MainContent.BeginAnimation(OpacityProperty, _opacityAnimation);
+                }
             , DispatcherPriority.DataBind);
         }
         private void RefreshTopmost()
         {
             if (FocusManager.PauseTopmost) return;
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 Topmost = false; Topmost = true;
-            }), DispatcherPriority.DataBind);
+            }, DispatcherPriority.DataBind);
         }
         private void SetVisibility(bool v)
         {

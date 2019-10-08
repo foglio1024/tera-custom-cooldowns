@@ -102,7 +102,7 @@ namespace TCC.ViewModels.Widgets
 
         public void AddOrUpdateNpc(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true, int remainingEnrageTime = 0)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (!TryFindNPC(entityId, out var boss)) boss = AddNPC(entityId, zoneId, templateId, isBoss, visibility);
                 if (boss == null) return;
@@ -111,11 +111,11 @@ namespace TCC.ViewModels.Widgets
                 if (boss.Visible == visibility) return;
                 boss.Visible = visibility;
                 NpcListChanged?.Invoke();
-            }));
+            });
         }
         public void RemoveNPC(NPC npc, uint delay)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (!TryFindNPC(npc.EntityId, out _)) return;
                 npc.Buffs.Clear();
@@ -138,7 +138,7 @@ namespace TCC.ViewModels.Widgets
                 {
                     RemoveAndDisposeNPC(npc);
                 }
-            }));
+            });
         }
         public void UpdateAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
@@ -152,14 +152,14 @@ namespace TCC.ViewModels.Widgets
         }
         public void Clear()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 foreach (var npc in _npcList.ToSyncList())
                 {
                     npc.Dispose();
                 }
                 _npcList.Clear();
-            }));
+            });
         }
         public void CopyToClipboard()
         {
@@ -197,7 +197,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void AddOrUpdateNpc(S_SPAWN_NPC spawn, Monster npcData)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 var visibility = npcData.IsBoss && TccUtils.IsFieldBoss(spawn.HuntingZoneId, spawn.TemplateId);
                 if (!TryFindNPC(spawn.EntityId, out var boss))
@@ -208,7 +208,7 @@ namespace TCC.ViewModels.Widgets
                 if (boss.Visible == visibility) return;
                 boss.Visible = visibility;
                 NpcListChanged?.Invoke();
-            }));
+            });
         }
         private void SetEnrageStatus(ulong entityId, bool enraged)
         {
@@ -227,7 +227,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void FlushCache()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (_cache.Count == 0) return;
                 try
@@ -241,7 +241,7 @@ namespace TCC.ViewModels.Widgets
 
                 _cache.Clear();
 
-            }), DispatcherPriority.Background);
+            }, DispatcherPriority.Background);
         }
         private void SetFromCache(ulong hpcEntityId, float hpcCurrentHp)
         {
@@ -453,7 +453,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnDespawnNpc(S_DESPAWN_NPC p)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (!TryFindNPC(p.Target, out var boss)) return;
                 if (p.Type == DespawnType.OutOfView)
@@ -476,7 +476,7 @@ namespace TCC.ViewModels.Widgets
                 NpcListChanged?.Invoke();
 
                 if (SelectedDragon != null && SelectedDragon.EntityId == p.Target) SelectedDragon = null;
-            }));
+            });
         }
         private void OnBossGageInfo(S_BOSS_GAGE_INFO m)
         {

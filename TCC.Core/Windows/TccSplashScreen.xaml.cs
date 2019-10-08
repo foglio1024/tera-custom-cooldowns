@@ -20,11 +20,11 @@ namespace TCC.Windows
 
         private void OnProgressChanged()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 _progressAnimation.To = VM.ProgressPerc;
                 (ProgressBar.RenderTransform as ScaleTransform)?.BeginAnimation(ScaleTransform.ScaleXProperty, _progressAnimation);
-            }));
+            });
         }
 
         public new void CloseWindowSafe()

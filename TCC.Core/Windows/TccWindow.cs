@@ -39,14 +39,14 @@ namespace TCC.Windows
         public virtual void ShowWindow()
         {
             if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 Opacity = 0;
                 Show();
                 Showed?.Invoke();
                 RefreshTopmost();
                 BeginAnimation(OpacityProperty, _showAnim);
-            }));
+            });
         }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
@@ -70,11 +70,11 @@ namespace TCC.Windows
         {
             if (FocusManager.PauseTopmost) return;
 
-            Dispatcher?.BeginInvoke(new Action(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 Topmost = false;
                 Topmost = true;
-            }));
+            });
         }
 
     }

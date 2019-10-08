@@ -340,10 +340,10 @@ namespace TCC
                     App.SplashScreen.VM.BottomText ="Downloading update...";
                     c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
                     c.DownloadProgressChanged += (s, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
-                    await App.SplashScreen.Dispatcher.BeginInvoke(new Action(() =>
+                    await App.SplashScreen.Dispatcher.InvokeAsync(() =>
                     {
                         c.DownloadFileAsync(new Uri(url), "update.zip");
-                    }));
+                    });
 
                     while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
 
