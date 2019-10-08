@@ -9,6 +9,7 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+                    xmlns:settings="clr-namespace:TCC.Controls.Settings"
                     mc:Ignorable="d">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
@@ -1690,4 +1691,15 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+
+    <Style TargetType="{x:Type settings:CheckboxSetting}">
+        <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value=".3"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

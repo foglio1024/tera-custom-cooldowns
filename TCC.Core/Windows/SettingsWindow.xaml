@@ -209,14 +209,14 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
 
-        <Style TargetType="{x:Type settings:CheckboxSetting}">
+        <!--<Style TargetType="{x:Type settings:CheckboxSetting}">
             <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}" />
-            <Style.Triggers>
+            --><!--<Style.Triggers>
                 <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
                     <Setter Property="Opacity" Value=".3"></Setter>
                 </DataTrigger>
-            </Style.Triggers>
-        </Style>
+            </Style.Triggers>--><!--
+        </Style>-->
 
         <Style TargetType="settings:ValueSetting">
             <Style.Triggers>
