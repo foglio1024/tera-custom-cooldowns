@@ -14,6 +14,7 @@ using TCC.Data.Skills;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;
@@ -22,7 +23,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC.ViewModels.Widgets
 {
 
-    [TccModule]
+    [TccModule(true)]
     public class CooldownWindowViewModel : TccWindowViewModel
     {
         public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;

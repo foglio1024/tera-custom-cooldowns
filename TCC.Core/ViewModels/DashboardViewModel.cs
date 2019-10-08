@@ -23,6 +23,7 @@ using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;
@@ -31,7 +32,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC.ViewModels
 {
 
-    [TccModule]
+    [TccModule()]
     public class DashboardViewModel : TccWindowViewModel
     {
         /* -- Fields ----------------------------------------------- */
