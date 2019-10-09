@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using Dragablz;
 using FoglioUtils;
 using FoglioUtils.Extensions;
+using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
+using TCC.Windows;
 
 namespace TCC.ViewModels.Widgets
 {
@@ -63,7 +66,6 @@ namespace TCC.ViewModels.Widgets
                 N();
             }
         }
-
         public bool Collapsed
         {
             get => WindowSettings.CanCollapse && _collapsed;
@@ -80,7 +82,6 @@ namespace TCC.ViewModels.Widgets
                 N();
             }
         }
-
         public Tab CurrentTab
         {
             get => _currentTab;
@@ -91,6 +92,10 @@ namespace TCC.ViewModels.Widgets
                 N();
             }
         }
+        public ICommand MakeGlobalCommand { get; }
+        public ICommand OpenSysMsgSettingsCommand { get; }
+        public ICommand UnpinMessageCommand { get; }
+
 
         public ChatWindowSettings WindowSettings
         {
@@ -148,6 +153,9 @@ namespace TCC.ViewModels.Widgets
             WindowSettings = s;
             InterTabClient = new ChatTabClient();
             TabVMs = new TSObservableCollection<TabViewModel>();
+
+            MakeGlobalCommand = new RelayCommand(_ => WindowSettings.MakePositionsGlobal());
+            OpenSysMsgSettingsCommand = new RelayCommand(_ => new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show());
 
             ChatWindowManager.Instance.NewMessage += CheckAttention;
             Game.GameUiModeChanged += CheckCollapsed;

@@ -73,11 +73,11 @@
                         <ContentControl.LayoutTransform>
                             <RotateTransform Angle="180"/>
                         </ContentControl.LayoutTransform>
-                        <ContentControl.ContextMenu>
+                        <!--<ContentControl.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Unpin" Click="UnpinMessage"/>
+                                <MenuItem Header="Unpin" Command="{Binding UnpinMessageCommand}" Click="UnpinMessage"/>
                             </ContextMenu>
-                        </ContentControl.ContextMenu>
+                        </ContentControl.ContextMenu>-->
                     </ContentControl>
                 </Border>
                 <ItemsControl Name="itemsControl" VerticalAlignment="Top"
@@ -125,7 +125,7 @@
     </w:TccWidget.Resources>
     <Grid>
         <dockablz:Layout Name="ChatContent">
-            <Grid>
+            <Grid >
                 <Grid Margin="3" Width="Auto" Name="Root">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -241,24 +241,6 @@
                         <Style TargetType="Grid">
                             <Setter Property="Visibility" Value="Collapsed"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Visible}" Value="True">
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                             To="1" Duration="0:0:0.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                    <DataTrigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                             To="0.01" Duration="0:0:1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.ExitActions>
-                                </DataTrigger>
                                 <DataTrigger Binding="{Binding Collapsed}" Value="False">
                                     <Setter Property="Visibility" Value="Visible"/>
                                     <DataTrigger.EnterActions>
@@ -278,7 +260,7 @@
                         </Style>
                     </Grid.Style>
                 </Grid>
-                <Grid>
+                <Grid >
                     <Grid.RenderTransform>
                         <TranslateTransform/>
                     </Grid.RenderTransform>
@@ -286,24 +268,6 @@
                         <Style TargetType="Grid">
                             <Setter Property="Visibility" Value="Collapsed"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Visible}" Value="True">
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                             To="1" Duration="0:0:0.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                    <DataTrigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                             To="0" Duration="0:0:1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.ExitActions>
-                                </DataTrigger>
                                 <DataTrigger Binding="{Binding Collapsed}" Value="True">
                                     <Setter Property="Visibility" Value="Visible"/>
                                     <DataTrigger.EnterActions>
@@ -371,10 +335,35 @@
                     </Button>
 
                 </Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visible}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="1" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="0.01" Duration="0:0:1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
             </Grid>
         </dockablz:Layout>
-        <widgets:TccPopup MouseLeaveTolerance="10" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
-               AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True"
+        <widgets:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
+               AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True" DataContext="{Binding}"
                PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
             <Grid>
                 <Border  Style="{StaticResource RevampBorderStyle}"  Margin="3" Opacity=".6"/>
@@ -402,10 +391,14 @@
                                                SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}" 
                                                Choices="{Binding ClickThruModes}"
                                                ChoicesType="{x:Type data:ClickThruMode}"/>
-                    <Button  Style="{StaticResource SettingsButton}" ToolTip="Use current position for all classes" Click="MakeGlobal" Margin="10 5 10 7">
+                    <Button  Style="{StaticResource SettingsButton}" 
+                             Command="{Binding MakeGlobalCommand}"
+                             ToolTip="Use current position for all classes" Margin="10 5 10 7">
                         <TextBlock Text="Make position global" Margin="0 0"/>
                     </Button>
-                    <Button  Style="{StaticResource SettingsButton}" ToolTip="Open a window to configure displayed System messages" Click="OpenSysMsgSettings" Margin="10 5 10 7">
+                    <Button  Style="{StaticResource SettingsButton}" 
+                             Command="{Binding OpenSysMsgSettingsCommand}"
+                             ToolTip="Open a window to configure displayed System messages" Margin="10 5 10 7">
                         <TextBlock Text="Configure System messages" Margin="0 0"/>
                     </Button>
                 </StackPanel>

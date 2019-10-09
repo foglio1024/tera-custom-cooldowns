@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using Dragablz;
@@ -14,35 +13,6 @@ using TCC.ViewModels.Widgets;
 
 namespace TCC.Windows.Widgets
 {
-    public class TccPopup : Popup
-    {
-        public double MouseLeaveTolerance
-        {
-            get => (double)GetValue(MouseLeaveToleranceProperty);
-            set => SetValue(MouseLeaveToleranceProperty, value);
-        }
-
-        public static readonly DependencyProperty MouseLeaveToleranceProperty = DependencyProperty.Register("MouseLeaveTolerance", 
-                                                                                                            typeof(double), 
-                                                                                                            typeof(TccPopup), 
-                                                                                                            new PropertyMetadata(0D));
-
-
-        protected override void OnMouseLeave(MouseEventArgs e)
-        {
-            base.OnMouseLeave(e);
-            if (Child != null)
-            {
-                var content = (FrameworkElement) Child;
-                var pos = e.MouseDevice.GetPosition(content);
-                if ((pos.X > MouseLeaveTolerance && pos.X < content.ActualWidth - MouseLeaveTolerance)
-                 && (pos.Y > MouseLeaveTolerance && pos.Y < content.ActualHeight - MouseLeaveTolerance)) return;
-                this.IsOpen = false;
-            }
-            FocusManager.PauseTopmost = false;
-        }
-    }
-
     public partial class ChatWindow
     {
         private bool _bottom = true;
@@ -82,28 +52,6 @@ namespace TCC.Windows.Widgets
             VM.UpdateSettings(Left, Top);
         }
 
-        //private void TabClicked(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel hivm)) return;
-        //    var clickedTab = (Tab)hivm.Content;
-        //    //clickedTab.ClearImportant();
-
-        //    if (VM.CurrentTab != clickedTab) VM.CurrentTab = clickedTab;
-        //    else
-        //    {
-        //        // scroll all tabs to bottom if the same has been clicked
-        //        TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
-        //        {
-        //            var sw = Utils.GetChild<ScrollViewer>(x);
-        //            sw?.ScrollToVerticalOffset(0);
-        //        });
-        //        _bottom = true;
-        //        ChatWindowManager.Instance.AddFromQueue(2);
-        //        if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
-        //        ChatWindowManager.Instance.SetPaused(!_bottom);
-        //    }
-        //    SetTopBorder(s);
-        //}
         private void TabLoaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is FrameworkElement s)) return;
@@ -111,13 +59,6 @@ namespace TCC.Windows.Widgets
             if (p.ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
 
             SetTopBorder(s);
-        }
-        private void SetTopBorder(FrameworkElement s)
-        {
-            var w = s.ActualWidth;
-            var left = s.TransformToAncestor(this).Transform(new Point()).X;
-            if (left - 2 >= 0) LeftLine.Width = left - 2;
-            if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
         }
         private void OpenTabSettings(object sender, MouseButtonEventArgs e)
         {
@@ -143,8 +84,7 @@ namespace TCC.Windows.Widgets
         }
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
-            FocusManager.PauseTopmost = true;
-            SettingsPopup.DataContext = DataContext;
+            //SettingsPopup.DataContext = DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
 
@@ -163,10 +103,7 @@ namespace TCC.Windows.Widgets
             var currTabVm = TabControl.SelectedItem as HeaderedItemViewModel;
             if (currTabVm?.Content != null) ((Tab)currTabVm.Content).PinnedMessage = null;
         }
-        private void MakeGlobal(object sender, RoutedEventArgs e)
-        {
-            WindowSettings.MakePositionsGlobal();
-        }
+
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var sw = ((ItemsControl)sender).GetChild<ScrollViewer>();
@@ -187,11 +124,6 @@ namespace TCC.Windows.Widgets
             }
             ChatWindowManager.Instance.SetPaused(!_bottom || !ChatWindowManager.Instance.IsQueueEmpty);
 
-        }
-
-        private void OpenSysMsgSettings(object sender, RoutedEventArgs e)
-        {
-            new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show();
         }
 
         public void ScrollToMessage(Tab tab, ChatMessage msg)
@@ -237,5 +169,13 @@ namespace TCC.Windows.Widgets
             if (VM.CurrentTab != ((sender as FrameworkElement)?.DataContext as TabViewModel)?.Content as Tab) return;
             SetTopBorder(sender as FrameworkElement);
         }
+        private void SetTopBorder(FrameworkElement s)
+        {
+            var w = s.ActualWidth;
+            var left = s.TransformToAncestor(this).Transform(new Point()).X;
+            if (left - 2 >= 0) LeftLine.Width = left - 2;
+            if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
+        }
+
     }
 }
