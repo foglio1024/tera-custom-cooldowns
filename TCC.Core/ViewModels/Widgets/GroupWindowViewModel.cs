@@ -256,8 +256,6 @@ namespace TCC.ViewModels.Widgets
             if (((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
-                p.Visible = false;
-                //return;
             }
             lock (_lock) //TODO: really needed?
             {
@@ -266,6 +264,8 @@ namespace TCC.ViewModels.Widgets
                 {
                     Members.Add(p);
                     SendAddMessage(p.Name);
+                    p.Visible = !(((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer);
+
                     return;
                 }
 
@@ -275,7 +275,7 @@ namespace TCC.ViewModels.Widgets
                 user.IsLeader = p.IsLeader;
                 user.Order = p.Order;
                 user.Awakened = p.Awakened;
-                user.Visible = p.Visible;
+                user.Visible = !(((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer);
             }
         }
         public void AddOrUpdateMember(PartyMemberData p)
@@ -291,7 +291,8 @@ namespace TCC.ViewModels.Widgets
             var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (user == null)
             {
-                Members.Add(new User(p));
+                
+                Members.Add(new User(p) {Visible =  visible});
                 SendAddMessage(p.Name);
                 return;
             }
