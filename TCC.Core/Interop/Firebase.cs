@@ -1,12 +1,10 @@
-﻿using System;
+﻿using FoglioUtils;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using FoglioUtils;
-using Newtonsoft.Json.Linq;
 using TCC.Interop.Proxy;
-using FoglioUtils.Extensions;
 using TCC.Utilities;
 
 namespace TCC.Interop
@@ -16,11 +14,11 @@ namespace TCC.Interop
         public static async void RegisterWebhook(string webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;
-            if (string.IsNullOrEmpty(Game.CurrentAccountName)) return;
+            if (string.IsNullOrEmpty(Game.CurrentAccountNameHash)) return;
             var req = new JObject
             {
                 {"webhook", HashUtils.GenerateHash(webhook)},
-                {"user", HashUtils.GenerateHash(Game.CurrentAccountName)},
+                {"user", HashUtils.GenerateHash(Game.CurrentAccountNameHash)},
                 {"online", online }
             };
             using (var c = MiscUtils.GetDefaultWebClient())
@@ -46,7 +44,7 @@ namespace TCC.Interop
             var req = new JObject
             {
                 { "webhook" , HashUtils.GenerateHash(webhook)},
-                { "user", HashUtils.GenerateHash(Game.CurrentAccountName) }
+                { "user", HashUtils.GenerateHash(Game.CurrentAccountNameHash) }
             };
             using (var c = MiscUtils.GetDefaultWebClient())
             {
@@ -90,13 +88,11 @@ namespace TCC.Interop
                     c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                     c.Encoding = Encoding.UTF8;
 
-                    var accountNameHash = SHA256.Create().ComputeHash(Game.CurrentAccountName.ToByteArray())
-                        .ToStringEx();
                     var js = new JObject
                     {
                         {"region", Game.Server.Region},
                         {"server", Game.Server.ServerId},
-                        {"account", accountNameHash},
+                        {"account", Game.CurrentAccountNameHash},
                         {"tcc_version", App.AppVersion},
                         {
                             "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
@@ -120,7 +116,8 @@ namespace TCC.Interop
                                 {
                                     "generic", new JObject
                                     {
-                                        {"proxy_enabled", ProxyInterface.Instance.IsStubAvailable}
+                                        {"proxy_enabled", ProxyInterface.Instance.IsStubAvailable},
+                                        {"mode", App.ToolboxMode ? "toolbox" : "standalone" }
                                     }
                                 }
                             }
