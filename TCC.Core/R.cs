@@ -9,6 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using Dragablz.Converters;
 using Dragablz.Themes;
+using FoglioUtils.Converters;
 using TCC.Converters;
 using TCC.TemplateSelectors;
 
@@ -443,6 +444,7 @@ namespace TCC.R
 		public static DungeonImageConverter DungeonImageConverter => ((DungeonImageConverter)App.Current.FindResource("DungeonImageConverter"));
 		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
 		public static MoneyAmountToVisibilityConverter AmountToVisibilityConv => ((MoneyAmountToVisibilityConverter)App.Current.FindResource("AmountToVisibilityConv"));
+		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
 	}
 	public static class DragablzMaterialDesign
 	{
