@@ -146,8 +146,9 @@ namespace TCC
             WindowManager.DisposeEvent += Dispose;
         }
 
-        private static void Dispose()
+        public static void Dispose()
         {
+            if (_disposed) return;
             _disposed = true;
             FocusTimer?.Stop();
         }
@@ -197,5 +198,7 @@ namespace TCC
         }
 
         #endregion
+
+
     }
 }
