@@ -25,14 +25,14 @@ namespace TCC
     {
         public static async void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
         {
+            FocusManager.Dispose();
             await HandleGlobalExceptionImpl(e);
         }
 
-        [Conditional("RELEASE")]
         private static async Task HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            var js = await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex)).Result;
+            var js = BuildJsonDump(ex);//await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex));
             DumpCrashToFile(js, ex);
             await UploadCrashDump(js);
 
@@ -49,8 +49,6 @@ namespace TCC
                 TccMessageBox.Show("TCC",
                     "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-
-                //try { new Thread(() => UploadCrashDump(ex)).Start(); } catch { /*ignored*/ }
             }
 
             App.ReleaseMutex();
@@ -95,7 +93,7 @@ namespace TCC
 
             return fullSb.ToString();
         }
-        private static async Task<JObject> BuildJsonDump(Exception ex)
+        private static /*async*/ /*Task<JObject>*/ JObject BuildJsonDump(Exception ex)
         {
             var ret = new JObject
             {
@@ -107,8 +105,7 @@ namespace TCC
                 { "exception_source", new JValue(ex.Source)},
                 { "stack_trace", new JValue(ex.StackTrace)},
                 { "full_exception", new JValue(FormatFullException(ex))},
-                { "thread_traces", await GetThreadTraces() },
-                { "inner_exception", ex.InnerException != null ? BuildInnerExceptionJObject(ex.InnerException) : null },
+                { "thread_traces", GetThreadTraces() },
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
                 { "region", new JValue(Game.Server != null ? Game.Server.Region : "")},
                 { "server_id", new JValue(Game.Server != null ? Game.Server.ServerId.ToString() : "")},
@@ -143,31 +140,43 @@ namespace TCC
                     }
                 }
             };
+            if (ex.InnerException != null)
+            {
+
+                var innEx =BuildInnerExceptionJObject(ex.InnerException);
+                ret["inner_exception"] = innEx;
+            }
+
             if (ex is PacketParseException ppe)
             {
                 ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
-                ret.Add("packet_data", new JValue(ppe.Data.ToStringEx()));
+                ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
             }
             return ret;
         }
 
         private static JObject BuildInnerExceptionJObject(Exception ex)
         {
-            return new JObject
+            var ret = new JObject();
+            ret["exception"] = new JValue(ex.Message);
+            ret["exception_type"] = new JValue(ex.GetType().FullName);
+            ret["exception_source"] = new JValue(ex.Source);
+            ret["stack_trace"] = new JValue(ex.StackTrace);
+            if (ex.InnerException != null)
             {
-                { "exception", new JValue(ex.Message)},
-                { "exception_type", new JValue(ex.GetType().FullName)},
-                { "exception_source", new JValue(ex.Source)},
-                { "stack_trace", new JValue(ex.StackTrace)},
-                //{ "stack_trace", new JValue(new StackTrace().ToString())}, //just for test
-                { "inner_exception", ex.InnerException != null ? new JValue(BuildInnerExceptionJObject(ex.InnerException)) : new JValue("undefined") },
-            };
+                var innEx = BuildInnerExceptionJObject(ex.InnerException);
+                ret["inner_exception"] = innEx;
+            }
+            return ret;
         }
 
 #pragma warning disable 618
-        private static async Task<JObject> GetThreadTraces()
+        private static JObject /*Task<JObject>*/ GetThreadTraces()
         {
-            return await Task.Factory.StartNew(() =>
+            //return await Task.Factory.StartNew(() =>
+            //{
+            //});
+            return App.BaseDispatcher.InvokeAsync(() =>
             {
                 var ret = new JObject();
 
@@ -185,38 +194,12 @@ namespace TCC
                 PacketAnalyzer.AnalysisThread.Resume();
 
                 return ret;
-            });
+            }).Result;
         }
 #pragma warning restore 618
 
 
-        private static async void DumpCrashToFile(Exception ex)
-        {
-            //if (ex is TaskCanceledException tce)
-            //{
-            //    // TODO
-            //}
-            var sb = new StringBuilder();
-            var js = await BuildJsonDump(ex);
-            sb.AppendLine($"id: {js["id"]}");
-            sb.AppendLine($"tcc_hash: {js["tcc_hash"]}");
-            sb.AppendLine($"game_version: {js["game_version"]}");
-            sb.AppendLine($"region: {js["region"]}");
-            sb.AppendLine($"server_id: {js["server_id"]}");
-            sb.AppendLine($"settings_summary: {js["settings_summary"]}");
-            sb.AppendLine($"stats: {js["stats"]}");
-            sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
-            sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
-            if (ex is PacketParseException)
-            {
-                sb.AppendLine($"opcode: {js["packet_opcode_name"]}");
-                sb.AppendLine($"data: {js["packet_data"]}");
-            }
-            sb.AppendLine($"threads");
-            sb.AppendLine($"{js["thread_traces"]}");
-            Log.F(sb.ToString(), "crash.log");
-        }
-        private static async void DumpCrashToFile(JObject js, Exception ex)
+        private static void DumpCrashToFile(JObject js, Exception ex)
         {
             var sb = new StringBuilder();
             sb.AppendLine($"id: {js["id"]}");
