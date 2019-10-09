@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Interop;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Interop.Proxy;
@@ -66,9 +67,10 @@ namespace TCC.Parsing
                 {
                     msg = Factory.Create(pkt);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    throw new PacketParseException(Factory.OpCodeNamer.GetName(pkt.OpCode), pkt.Data.Array);
+                    var opcName = Factory.OpCodeNamer.GetName(pkt.OpCode);
+                    throw new PacketParseException($"Failed to parse packet {opcName}", ex, opcName, pkt.Data.Array);
                 }
                 Processor.Handle(msg);
             }
@@ -179,11 +181,11 @@ namespace TCC.Parsing
     public class PacketParseException : Exception
     {
         public string OpcodeName { get; }
-        public byte[] Data { get; }
-        public PacketParseException(string opcodeName, byte[] data)
+        public byte[] RawData { get; }
+        public PacketParseException(string msg, Exception inner, string opcodeName, byte[] data) : base(msg, inner)
         {
             OpcodeName = opcodeName;
-            Data = data;
+            RawData = data;
         }
     }
 }
