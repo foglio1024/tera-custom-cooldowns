@@ -326,7 +326,6 @@ namespace TCC.Settings
         }
 
     }
-
     public class ChatWindowSettings : WindowSettings
     {
         private bool _fadeOut = true;
@@ -461,7 +460,6 @@ namespace TCC.Settings
             InvokeClickThruModeChanged();
         }
     }
-
     public class CooldownWindowSettings : WindowSettings
     {
         public event Action ShowItemsChanged;
@@ -511,7 +509,6 @@ namespace TCC.Settings
             UndimOnFlyingGuardian = false;
         }
     }
-
     public class NotificationAreaSettings : WindowSettings
     {
         public int MaxNotifications { get; set; }
@@ -625,7 +622,6 @@ namespace TCC.Settings
             HideAdds = false;
         }
     }
-
     public class BuffWindowSettings : WindowSettings
     {
         public event Action DirectionChanged;

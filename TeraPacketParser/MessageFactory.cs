@@ -141,8 +141,7 @@ namespace TeraPacketParser
 
         private ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {
-            if (!OpcodeNameToType.TryGetValue(opCode, out var type))
-                type = UnknownMessageDelegate;
+            if (!OpcodeNameToType.TryGetValue(opCode, out var type)) type = UnknownMessageDelegate;
             return (ParsedMessage)type.DynamicInvoke(reader);
         }
         public ParsedMessage Create(Message message)

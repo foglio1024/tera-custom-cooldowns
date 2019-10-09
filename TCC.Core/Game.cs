@@ -119,7 +119,7 @@ namespace TCC
 
         public static bool CivilUnrestZone => CurrentZoneId == 152;
         public static bool IsInDungeon => CurrentZoneId >= 8999; // TODO: this doesn't apply anymore
-        public static string CurrentAccountName { get; private set; }
+        public static string CurrentAccountNameHash { get; private set; }
 
         public static string GetGuildMemberName(uint id)
         {
@@ -474,9 +474,10 @@ namespace TCC
         }
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
         {
-            CurrentAccountName = m.AccountName;
+            CurrentAccountNameHash = FoglioUtils.HashUtils.GenerateHash(m.AccountName);
             DB.ServerDatabase.Language = m.Language;
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
+            App.Settings.LastAccountName = CurrentAccountNameHash;
         }
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
