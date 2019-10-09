@@ -67,7 +67,7 @@ namespace TCC.Controls.Settings
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var cb = (ComboBox)sender;
-            SelectedItem = cb.SelectedItem.ToString();
+            SelectedItem = cb.SelectedItem == null ? cb.Items[0].ToString() : cb.SelectedItem.ToString();
         }
 
         private void SelectionSetting_OnLoaded(object sender, RoutedEventArgs e)
