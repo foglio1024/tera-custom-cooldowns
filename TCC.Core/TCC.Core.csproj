@@ -745,6 +745,7 @@
       <DependentUpon>NotificationAreaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Widgets\NotificationInfo.cs" />
+    <Compile Include="Windows\Widgets\TccPopup.cs" />
     <Page Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
