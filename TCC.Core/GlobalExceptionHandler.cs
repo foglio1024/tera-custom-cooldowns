@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using FoglioUtils;
+using FoglioUtils.Extensions;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using TCC.Interop;
@@ -22,16 +23,19 @@ namespace TCC
 {
     public static class GlobalExceptionHandler
     {
-        public static void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
+        public static async void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
         {
-            HandleGlobalExceptionImpl(e);
+            await HandleGlobalExceptionImpl(e);
         }
 
         [Conditional("RELEASE")]
-        private static void HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
+        private static async Task HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            DumpCrashToFile(ex);
+            var js = await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex)).Result;
+            DumpCrashToFile(js, ex);
+            await UploadCrashDump(js);
+
 
             if (ex is COMException com && (com.HResult == 88980406 /*not sure if getting this value like this is correct*/
                                         || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")))
@@ -46,7 +50,7 @@ namespace TCC
                     "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
-                try { new Thread(() => UploadCrashDump(ex)).Start(); } catch { /*ignored*/ }
+                //try { new Thread(() => UploadCrashDump(ex)).Start(); } catch { /*ignored*/ }
             }
 
             App.ReleaseMutex();
@@ -93,10 +97,10 @@ namespace TCC
         }
         private static async Task<JObject> BuildJsonDump(Exception ex)
         {
-            return new JObject
+            var ret = new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
-                { "id" , new JValue(Game.CurrentAccountName != null ? HashUtils.GenerateHash(Game.CurrentAccountName) : "") },
+                { "id" , new JValue(Game.CurrentAccountNameHash != null ? Game.CurrentAccountNameHash : "") },
                 { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
@@ -124,6 +128,7 @@ namespace TCC
                             "generic", new JObject
                             {
                                 { "proxy_enabled", App.Settings.EnableProxy },
+                                { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                             }
                         }
                     }
@@ -138,6 +143,12 @@ namespace TCC
                     }
                 }
             };
+            if (ex is PacketParseException ppe)
+            {
+                ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
+                ret.Add("packet_data", new JValue(ppe.Data.ToStringEx()));
+            }
+            return ret;
         }
 
         private static JObject BuildInnerExceptionJObject(Exception ex)
@@ -196,25 +207,54 @@ namespace TCC
             sb.AppendLine($"stats: {js["stats"]}");
             sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
             sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
+            if (ex is PacketParseException)
+            {
+                sb.AppendLine($"opcode: {js["packet_opcode_name"]}");
+                sb.AppendLine($"data: {js["packet_data"]}");
+            }
             sb.AppendLine($"threads");
             sb.AppendLine($"{js["thread_traces"]}");
             Log.F(sb.ToString(), "crash.log");
         }
-        private static async void UploadCrashDump(Exception ex)
+        private static async void DumpCrashToFile(JObject js, Exception ex)
         {
-            using (var c = MiscUtils.GetDefaultWebClient())
+            var sb = new StringBuilder();
+            sb.AppendLine($"id: {js["id"]}");
+            sb.AppendLine($"tcc_hash: {js["tcc_hash"]}");
+            sb.AppendLine($"game_version: {js["game_version"]}");
+            sb.AppendLine($"region: {js["region"]}");
+            sb.AppendLine($"server_id: {js["server_id"]}");
+            sb.AppendLine($"settings_summary: {js["settings_summary"]}");
+            sb.AppendLine($"stats: {js["stats"]}");
+            sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
+            sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
+            if (ex is PacketParseException)
             {
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Encoding = Encoding.UTF8;
-
-                var js = await BuildJsonDump(ex);
-                try
+                sb.AppendLine($"opcode: {js["packet_opcode_name"]}");
+                sb.AppendLine($"data: {js["packet_data"]}");
+            }
+            sb.AppendLine($"threads");
+            sb.AppendLine($"{js["thread_traces"]}");
+            Log.F(sb.ToString(), "crash.log");
+        }
+        private static async Task UploadCrashDump(JObject js)
+        {
+            Log.CW("Uploading crash dump");
+            try
+            {
+                using (var c = MiscUtils.GetDefaultWebClient())
                 {
-                    c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"),
-                                   Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                    c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                    c.Encoding = Encoding.UTF8;
+
+                    c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                    Log.CW("Crash dump uploaded");
                 }
-                catch { }
+            }
+            catch (Exception e)
+            {
+                Log.CW($"Failed to upload crash dump: {e}");
             }
         }
 

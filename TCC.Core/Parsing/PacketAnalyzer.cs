@@ -60,7 +60,17 @@ namespace TCC.Parsing
                     Thread.Sleep(1);
                     continue;
                 }
-                Processor.Handle(Factory.Create(pkt));
+
+                ParsedMessage msg;
+                try
+                {
+                    msg = Factory.Create(pkt);
+                }
+                catch
+                {
+                    throw new PacketParseException(Factory.OpCodeNamer.GetName(pkt.OpCode), pkt.Data.Array);
+                }
+                Processor.Handle(msg);
             }
             // ReSharper disable once FunctionNeverReturns
         }
@@ -163,6 +173,17 @@ namespace TCC.Parsing
             Factory.ReloadSysMsg(path);
 
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
+        }
+    }
+
+    public class PacketParseException : Exception
+    {
+        public string OpcodeName { get; }
+        public byte[] Data { get; }
+        public PacketParseException(string opcodeName, byte[] data)
+        {
+            OpcodeName = opcodeName;
+            Data = data;
         }
     }
 }
