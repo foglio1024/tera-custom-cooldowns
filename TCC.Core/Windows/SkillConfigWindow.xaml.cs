@@ -1,16 +1,20 @@
-﻿using System;
+﻿using GongSolutions.Wpf.DragDrop;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using GongSolutions.Wpf.DragDrop;
+using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using TCC.ViewModels.Widgets;
+using TeraDataLite;
 
 namespace TCC.Windows
 {
@@ -21,7 +25,7 @@ namespace TCC.Windows
     {
 
         public IntPtr Handle { get; private set; }
-        private CooldownWindowViewModel VM { get;  }
+        private CooldownWindowViewModel VM { get; }
         public SkillConfigWindow()
         {
             InitializeComponent();
@@ -34,8 +38,8 @@ namespace TCC.Windows
 
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            if(Opacity != 0) e.Cancel = true;
-            ClosewWindow(null,null);
+            if (Opacity != 0) e.Cancel = true;
+            ClosewWindow(null, null);
         }
 
         public class GenericDragHandler : IDropTarget
@@ -49,7 +53,9 @@ namespace TCC.Windows
             }
         }
 
+
         public GenericDragHandler DragHandler => new GenericDragHandler();
+        public HiddenSKillsDragHandler HiddenSkillsDropHandler => new HiddenSKillsDragHandler();
 
         public static bool IsOpen { get; private set; }
 
@@ -97,7 +103,7 @@ namespace TCC.Windows
         private void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var view = (ICollectionView)VM.SkillsView;
-            view.Filter = o =>  ((Skill)o).ShortName.IndexOf(((TextBox) sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
+            view.Filter = o => ((Skill)o).ShortName.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }
 
@@ -116,7 +122,52 @@ namespace TCC.Windows
 
         private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
         {
-            VM.RemoveHiddenSkill(((Button) sender).DataContext as Cooldown);
+            VM.RemoveHiddenSkill(((Button)sender).DataContext as Cooldown);
+        }
+    }
+    public class HiddenSKillsDragHandler : IDropTarget
+    {
+        public void DragOver(IDropInfo dropInfo)
+        {
+            dropInfo.Effects = DragDropEffects.Move;
+        }
+
+        public void Drop(IDropInfo dropInfo)
+        {
+            var l = dropInfo.TargetCollection.TryGetList();
+            if (l.Cast<Cooldown>().Any(cd =>
+            {
+                var ret = false;
+                switch (dropInfo.Data)
+                {
+                    case Skill s:
+                        ret = cd.Skill.IconName == s.IconName;
+                        break;
+                    case Item i:
+                        ret = cd.Skill.IconName == i.IconName;
+                        break;
+                    case Abnormality a:
+                        ret = cd.Skill.IconName == a.IconName;
+                        break;
+                }
+
+                return ret;
+            })) return;
+
+            switch (dropInfo.Data)
+            {
+                case Skill s:
+                    l.Add(new Cooldown(s, false));
+                    break;
+                case Item i:
+                    Game.DB.ItemsDatabase.TryGetItemSkill(i.Id, out var itemSkill);
+                    l.Add(new Cooldown(itemSkill, false, CooldownType.Item));
+                    break;
+                case Abnormality a:
+                    l.Add(new Cooldown(new Skill(a.Id,Class.None, a.Name, a.ToolTip){IconName = a.IconName}, false, CooldownType.Passive));
+                    break;
+            }
+            //dropInfo.DragInfo.SourceCollection.TryGetList().Remove(dropInfo.Data);
         }
     }
 }

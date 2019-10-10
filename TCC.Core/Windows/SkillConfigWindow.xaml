@@ -137,9 +137,13 @@
                     </StackPanel>
                     <ListBox
                         VerticalAlignment="Stretch"
-                        ItemsSource="{Binding HiddenSkills, Mode=OneWay}"
+                        ItemsSource="{Binding HiddenSkills}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         ItemTemplate="{StaticResource HddenSkillDataTemplate}"
+                        dd:DragDrop.IsDropTarget="True"
+
+                        dd:DragDrop.DropHandler="{Binding HiddenSkillsDropHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
+
+                        ItemTemplate="{StaticResource HddenSkillDataTemplate}"
                         Grid.Row="2">
                     </ListBox>
                 </Grid>
