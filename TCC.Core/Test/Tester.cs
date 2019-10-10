@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -22,6 +23,7 @@ using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser;
 using TeraPacketParser.Data;
+using TeraPacketParser.Messages;
 
 namespace TCC.Test
 {
@@ -29,6 +31,12 @@ namespace TCC.Test
     {
         public static bool Enabled = false;
 
+        public static void ParsePacket()
+        {
+            var packet =
+                "";
+            ParsePacketFromHexString<S_LOGIN>(packet, 351828);
+        }
         public static void ShowDebugWindow()
         {
             new DebugWindow().Show();
@@ -63,13 +71,14 @@ namespace TCC.Test
                 ChatWindowManager.Instance.AddTccMessage($"Test {i++}");
             }
         }
-        public static void ParsePacketFromHexString<PacketType>(string hex)
+        public static void ParsePacketFromHexString<PacketType>(string hex, uint version)
         {
 
             var msg = new Message(DateTime.Now, MessageDirection.ServerToClient, new ArraySegment<byte>(hex.ToByteArrayHex()));
-            var fac = new MessageFactory();
+            var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, "opcodes", $"protocol.{version}.map"));
+            var fac = new MessageFactory(version, opcNamer) {ReleaseVersion = 9901};
             var del = MessageFactory.Contructor<Func<TeraMessageReader, PacketType>>();
-            var reader = new TeraMessageReader(msg, null, fac, null);
+            var reader = new TeraMessageReader(msg, opcNamer, fac, null);
             del.DynamicInvoke(reader);
         }
         public static void Login(Class c)
