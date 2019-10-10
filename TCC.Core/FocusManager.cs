@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
+using TCC.Utilities;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;
@@ -18,6 +19,7 @@ namespace TCC
         private static bool _isForeground;
         private static bool _forceFocused;
         private static bool _disposed;
+        private static bool _pauseTopmost;
 
         // events
         public static event Action ForegroundChanged;
@@ -53,7 +55,17 @@ namespace TCC
                 return false;
             }
         }
-        public static bool PauseTopmost { get; set; }
+
+        public static bool PauseTopmost
+        {
+            get => _pauseTopmost;
+            set
+            {
+                Log.CW($"Setting PauseTopmost to {value}");
+                _pauseTopmost = value;
+            }
+        }
+
         private static IntPtr TeraWindow => FindWindow("LaunchUnrealUWindowsClient", "TERA");
         private static IntPtr MeterWindow => FindWindow("Shinra Meter", null);
         private static IntPtr ForegroundWindow => GetForegroundWindow();
