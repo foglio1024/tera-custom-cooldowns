@@ -14,6 +14,7 @@ namespace TCC.Settings
     {
         private string _lastLanguage;
         private bool _chatEnabled;
+        private bool _enableProxy;
 
         #region Misc
         // Misc
@@ -38,7 +39,13 @@ namespace TCC.Settings
         public bool CheckGuildBamWithoutOpcode { get; set; } //by HQ 20190324
         public bool ExperimentalNotification { get; set; }
         public bool FpsAtGuardian { get; set; }
-        public bool EnableProxy { get; set; }
+
+        public bool EnableProxy
+        {
+            get => _enableProxy || App.ToolboxMode;
+            set => _enableProxy = value;
+        }
+
         public bool DontShowFUBH { get; set; }
         public ControlShape AbnormalityShape { get; set; }
         public ControlShape SkillShape { get; set; }
