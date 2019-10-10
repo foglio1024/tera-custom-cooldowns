@@ -23,18 +23,18 @@ namespace TCC
 {
     public static class GlobalExceptionHandler
     {
-        public static async void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
+        public static void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
         {
             FocusManager.Dispose();
-            await HandleGlobalExceptionImpl(e);
+            HandleGlobalExceptionImpl(e);
         }
 
-        private static async Task HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
+        private static void HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
             var js = BuildJsonDump(ex);//await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex));
             DumpCrashToFile(js, ex);
-            await UploadCrashDump(js);
+            UploadCrashDump(js);
 
 
             if (ex is COMException com && (com.HResult == 88980406 /*not sure if getting this value like this is correct*/
@@ -220,7 +220,7 @@ namespace TCC
             sb.AppendLine($"{js["thread_traces"]}");
             Log.F(sb.ToString(), "crash.log");
         }
-        private static async Task UploadCrashDump(JObject js)
+        private static  void UploadCrashDump(JObject js)
         {
             Log.CW("Uploading crash dump");
             try
