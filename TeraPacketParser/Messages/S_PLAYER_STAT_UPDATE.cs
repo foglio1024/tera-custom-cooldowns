@@ -109,11 +109,9 @@ namespace TeraPacketParser.Messages
             //unk10 = reader.ReadInt32();
             //unk11 = reader.ReadInt32();
             reader.Skip(2+2+4+4+4+4+4+4);
-            if (reader.Factory.ReleaseVersion/100 < 75) return;
             Fire = reader.ReadUInt32() == 4;
             Ice = reader.ReadUInt32() == 4;
             Arcane = reader.ReadUInt32() == 4;
-            if (reader.Factory.ReleaseVersion < 8000) return;
             Coins = reader.ReadUInt32();
             MaxCoins = reader.ReadUInt32();
             //Log.CW($"F/I/A {fire}/{ice}/{arcane}");

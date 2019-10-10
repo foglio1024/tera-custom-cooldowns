@@ -48,10 +48,10 @@ namespace TeraPacketParser.Messages
         public S_LOGIN(TeraMessageReader reader) : base(reader)
         {
             reader.BaseStream.Position = 0;
-            if (reader.Factory.ReleaseVersion >= 8100)    // by HQ 20190321  
-            {
-                reader.Skip(4);     // Unknown 4 byte added. by HQ 20190321
-            }
+            //if (reader.Factory.ReleaseVersion >= 8100)    // by HQ 20190321  
+            //{
+            reader.Skip(4);     // Unknown 4 byte added. by HQ 20190321
+            //}
             NameOffset = reader.ReadInt16();
             //detailsOffset = reader.ReadInt16();
             //detailsCount = reader.ReadInt16();

@@ -14,11 +14,9 @@ namespace TeraPacketParser.Messages
         {
             EntityId = reader.ReadUInt64();
             IsEnraged = reader.ReadBoolean();
-            if (reader.Factory.ReleaseVersion / 100 >= 79)
-            {
-                var et = reader.ReadInt32();
-                RemainingEnrageTime = et < 0 ? 0 : et;
-            }
+
+            var et = reader.ReadInt32();
+            RemainingEnrageTime = et < 0 ? 0 : et;
 
             reader.Skip(4); // hpLevel
             Target = reader.ReadUInt64();

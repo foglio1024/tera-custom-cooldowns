@@ -55,10 +55,7 @@ namespace TeraPacketParser.Messages
                       + 2  // walkSpeed
                       );
             reader.Skip(2); //var enrage = reader.ReadUInt16(); // 0/1
-            if (reader.Factory.ReleaseVersion / 100 >= 79)
-            {
-                RemainingEnrageTime = reader.ReadInt32();
-            }
+            RemainingEnrageTime = reader.ReadInt32();
             reader.Skip(2  // hpLevel  
                       + 2  // questInfo
                       + 1);  // visible
