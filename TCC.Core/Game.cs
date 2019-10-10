@@ -477,7 +477,7 @@ namespace TCC
             CurrentAccountNameHash = FoglioUtils.HashUtils.GenerateHash(m.AccountName);
             DB.ServerDatabase.Language = m.Language;
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
-            App.Settings.LastAccountName = CurrentAccountNameHash;
+            App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         }
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {

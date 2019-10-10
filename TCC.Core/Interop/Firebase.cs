@@ -14,11 +14,11 @@ namespace TCC.Interop
         public static async void RegisterWebhook(string webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;
-            if (string.IsNullOrEmpty(Game.CurrentAccountNameHash)) return;
+            if (string.IsNullOrEmpty(App.Settings.LastAccountNameHash)) return;
             var req = new JObject
             {
                 {"webhook", HashUtils.GenerateHash(webhook)},
-                {"user", HashUtils.GenerateHash(Game.CurrentAccountNameHash)},
+                {"user", App.Settings.LastAccountNameHash},
                 {"online", online }
             };
             using (var c = MiscUtils.GetDefaultWebClient())
@@ -44,7 +44,7 @@ namespace TCC.Interop
             var req = new JObject
             {
                 { "webhook" , HashUtils.GenerateHash(webhook)},
-                { "user", HashUtils.GenerateHash(Game.CurrentAccountNameHash) }
+                { "user", App.Settings.LastAccountNameHash }
             };
             using (var c = MiscUtils.GetDefaultWebClient())
             {
@@ -92,7 +92,7 @@ namespace TCC.Interop
                     {
                         {"region", Game.Server.Region},
                         {"server", Game.Server.ServerId},
-                        {"account", Game.CurrentAccountNameHash},
+                        {"account", App.Settings.LastAccountNameHash},
                         {"tcc_version", App.AppVersion},
                         {
                             "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
@@ -105,19 +105,19 @@ namespace TCC.Interop
                                 {
                                     "windows", new JObject
                                     {
-                                        {"cooldown", App.Settings.CooldownWindowSettings.Enabled},
-                                        {"buffs", App.Settings.BuffWindowSettings.Enabled},
-                                        {"character", App.Settings.CharacterWindowSettings.Enabled},
-                                        {"class", App.Settings.ClassWindowSettings.Enabled},
-                                        {"chat", App.Settings.ChatEnabled},
-                                        {"group", App.Settings.GroupWindowSettings.Enabled}
+                                        { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                                        { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                                        { "character", App.Settings.CharacterWindowSettings.Enabled },
+                                        { "class", App.Settings.ClassWindowSettings.Enabled },
+                                        { "chat", App.Settings.ChatEnabled },
+                                        { "group", App.Settings.GroupWindowSettings.Enabled }
                                     }
                                 },
                                 {
                                     "generic", new JObject
                                     {
-                                        {"proxy_enabled", ProxyInterface.Instance.IsStubAvailable},
-                                        {"mode", App.ToolboxMode ? "toolbox" : "standalone" }
+                                        { "proxy_enabled", ProxyInterface.Instance.IsStubAvailable},
+                                        { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                                     }
                                 }
                             }
