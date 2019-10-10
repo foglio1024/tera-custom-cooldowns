@@ -98,7 +98,7 @@ namespace TCC
             var ret = new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
-                { "id" , new JValue(Game.CurrentAccountNameHash != null ? Game.CurrentAccountNameHash : "") },
+                { "id" , new JValue(App.Settings.LastAccountNameHash != null ? App.Settings.LastAccountNameHash: "") },
                 { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
