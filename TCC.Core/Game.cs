@@ -380,6 +380,7 @@ namespace TCC
         }
         private static void OnGetUserList(S_GET_USER_LIST m)
         {
+            if (PacketAnalyzer.Factory.ReleaseVersion == 0) Log.F("Warning: C_LOGIN_ARBITER not received.");
             Logged = false;
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
