@@ -29,6 +29,7 @@ namespace TCC.ViewModels
         public static event Action FontSizeChanged;
 
         public bool Experimental => App.Experimental;
+        public bool ToolboxMode => App.ToolboxMode;
 
         public CooldownWindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
         public ClassWindowSettings ClassWindowSettings => App.Settings.ClassWindowSettings;
@@ -355,6 +356,7 @@ namespace TCC.ViewModels
                 if (App.Settings.EnableProxy == value) return;
                 App.Settings.EnableProxy = value;
                 N();
+                N(nameof(ClickThruModes));
             }
         }
         public bool HideHandles
@@ -541,7 +543,16 @@ namespace TCC.ViewModels
             }
         }
 
-        public IEnumerable<ClickThruMode> ClickThruModes => EnumUtils.ListFromEnum<ClickThruMode>();
+        public IEnumerable<ClickThruMode> ClickThruModes
+        {
+            get
+            {
+                var ret = EnumUtils.ListFromEnum<ClickThruMode>();
+                if (!App.Settings.EnableProxy) ret.Remove(ClickThruMode.GameDriven);
+                return ret;
+            }
+        }
+
         public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
         public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
         public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();

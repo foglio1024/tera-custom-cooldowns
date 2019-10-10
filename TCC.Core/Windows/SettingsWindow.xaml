@@ -1475,7 +1475,7 @@
                         <Path Style="{StaticResource BigPathStyle}" Data="{StaticResource SvgSettings}" />
 
                         <!-- System settings -->
-                        <StackPanel VerticalAlignment="Stretch" Grid.RowSpan="2">
+                        <StackPanel VerticalAlignment="Stretch" >
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="System settings" />
                             <settings:CheckboxSetting SettingName="High priority"
                                                       IsOn="{Binding HighPriority, Mode=TwoWay}">
@@ -1506,77 +1506,6 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <!--<settings:CheckboxSetting SettingName="Check opcodes file hash"
-                                                      IsOn="{Binding CheckOpcodesHash, Mode=TwoWay}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                                   MaxWidth="200">
-                                            <Run
-                                                Text="Compares local opcodes file hash to remote one. Useful to avoid manual file deletion when new opcodes are released without version changes." />
-                                            <LineBreak />
-                                            <Run Foreground="{StaticResource HpBrush}"
-                                                 Text="Disable this if you're using a custom opcodes file." />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>-->
-                            <!-- ===================== by HQ 20190324 ===================== -->
-                            <!--<settings:CheckboxSetting SettingName="Check Guild BAM without opcode"
-                                                      IsOn="{Binding CheckGuildBamWithoutOpcode, Mode=TwoWay}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                                   MaxWidth="200">
-                                            <Run
-                                                Text="Check Guild BAM without opcode. This is useful if the opcodes file is not completely updated." />
-                                            <LineBreak />
-                                            <Run Foreground="{StaticResource HpBrush}"
-                                                 Text="Disable this if you have a completely updated opcodes file. This option will consume more computing resources" />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>-->
-                            <!-- ========================================================== -->
-                            <settings:CheckboxSetting SettingName="'Ethical mode'"
-                                                      IsOn="{Binding EthicalMode, Mode=TwoWay}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                                   MaxWidth="200">
-                                            <Run
-                                                Text="Disables some info which are not natively displayed in game and considered 'unethical' by some:" />
-                                            <LineBreak />
-                                            <Run Text="- Enrage info in boss HP bars" /><LineBreak />
-                                            <Run Text="- Timers info in boss HP bars" /><LineBreak />
-                                            <Run Text="- Dragon passive cooldown" /><LineBreak />
-                                            <Run Text="- Insigna of the punisher cooldown" /><LineBreak />
-                                            <Run Text="- Concentration cooldown" />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Hide handles"
-                                                      IsOn="{Binding HideHandles, Mode=TwoWay}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
-                                                   MaxWidth="200">
-                                            <Run Text="Hides windows' handles." />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:FieldSetting SettingName="Region override"
-                                                   Value="{Binding RegionOverride, Mode=TwoWay}" />
-                            <settings:SelectionSetting SettingName="Abnormalities shape"
-                                                       SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
-                                                       ChoicesType="{x:Type data:ControlShape}"
-                                                       Choices="{Binding ControlShapes, Mode=OneWay}" />
                             <settings:SelectionSetting SettingName="Capture mode"
                                                        SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:CaptureMode}"
@@ -1584,7 +1513,7 @@
                                 <settings:SelectionSetting.Style>
                                     <Style TargetType="settings:SelectionSetting">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Experimental}" Value="True">
+                                            <DataTrigger Binding="{Binding ToolboxMode}" Value="True">
                                                 <Setter Property="IsEnabled" Value="False"/>
                                                 <Setter Property="Opacity" Value=".3"/>
                                             </DataTrigger>
@@ -1623,16 +1552,19 @@
                                 </settings:SelectionSetting.ToolTip>
 
                             </settings:SelectionSetting>
-                            <!--<settings:CheckboxSetting SettingName="Use npcap"
-                                                      IsOn="{Binding Npcap, Mode=TwoWay}" />-->
-                            <settings:CheckboxSetting SettingName="Use Tera Toolbox"
+                            <settings:FieldSetting SettingName="Region override"
+                                                   Value="{Binding RegionOverride, Mode=TwoWay}" />
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
+                                            Content="TERA Toolbox settings" />
+                            <settings:CheckboxSetting SettingName="Enabled"
                                                       IsOn="{Binding EnableProxy, Mode=TwoWay}" >
                                 <settings:CheckboxSetting.Style>
-                                    <Style TargetType="settings:CheckboxSetting">
+                                    <Style TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Experimental}" Value="True">
+                                            <DataTrigger Binding="{Binding ToolboxMode}" Value="True">
                                                 <Setter Property="IsEnabled" Value="False"/>
-                                                <Setter Property="Opacity" Value=".3"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -1657,16 +1589,6 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Beta builds notification"
-                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}"
-                                                      Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}" />
-                            <Button Style="{StaticResource SettingsButton}"
-                                    Content="Download beta build"
-                                    Command="{Binding DownloadBetaCommand}"
-                                    Background="{StaticResource TccRedGradientBrush}"
-                                    Foreground="White"
-                                    Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}" />
-
                         </StackPanel>
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
                             <Grid>
@@ -1755,9 +1677,11 @@
                             <settings:CheckboxSetting SettingName="Enabled"
                                                       IsOn="{Binding WebhookEnabledGuildBam, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Webhook"
+                                                   IsEnabled="{Binding WebhookEnabledGuildBam}"
                                                    Value="{Binding WebhookUrlGuildBam, Mode=TwoWay}" />
-                            <settings:FieldSetting SettingName="Message" Value="{Binding WebhookMessageGuildBam, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Message" Value="{Binding WebhookMessageGuildBam, Mode=TwoWay}" IsEnabled="{Binding WebhookEnabledGuildBam}"/>
                             <Button Style="{StaticResource SettingsButton}" 
+                                    IsEnabled="{Binding WebhookEnabledGuildBam}"
                                     Command="{Binding RegisterWebhookCommand}"
                                     CommandParameter="{Binding WebhookUrlGuildBam}"
                                     Content="Confirm" />
@@ -1769,10 +1693,12 @@
                             <settings:CheckboxSetting SettingName="Enabled"
                                                       IsOn="{Binding WebhookEnabledFieldBoss, Mode=TwoWay}" />
                             <settings:FieldSetting SettingName="Webhook"
+                                                   IsEnabled="{Binding WebhookEnabledFieldBoss}"
                                                    Value="{Binding WebhookUrlFieldBoss, Mode=TwoWay}" />
-                            <settings:FieldSetting SettingName="Spawn message" Value="{Binding WebhookMessageFieldBossSpawn, Mode=TwoWay}" />
-                            <settings:FieldSetting SettingName="Death message" Value="{Binding WebhookMessageFieldBossDie, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Spawn message" Value="{Binding WebhookMessageFieldBossSpawn, Mode=TwoWay}" IsEnabled="{Binding WebhookEnabledFieldBoss}"/>
+                            <settings:FieldSetting SettingName="Death message" Value="{Binding WebhookMessageFieldBossDie, Mode=TwoWay}" IsEnabled="{Binding WebhookEnabledFieldBoss}"/>
                             <Button Style="{StaticResource SettingsButton}" 
+                                    IsEnabled="{Binding WebhookEnabledFieldBoss}"
                                     CommandParameter="{Binding WebhookUrlFieldBoss}"
                                     Command="{Binding RegisterWebhookCommand}"
                                     Content="Confirm" />
@@ -1880,6 +1806,58 @@
                             </settings:CheckboxSetting>
                         </StackPanel>
 
+                        <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
+                                            Content="Other settings" />
+                            <settings:CheckboxSetting SettingName="Hide handles"
+                                                      IsOn="{Binding HideHandles, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run Text="Hides windows' handles." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
+                            <settings:SelectionSetting SettingName="Abnormalities shape"
+                                                       SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
+                                                       ChoicesType="{x:Type data:ControlShape}"
+                                                       Choices="{Binding ControlShapes, Mode=OneWay}" />
+                            <settings:CheckboxSetting SettingName="Ethical mode"
+                                                      IsOn="{Binding EthicalMode, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run
+                                                Text="Disables some info which are not natively displayed in game and considered 'unethical' by some:" />
+                                            <LineBreak />
+                                            <Run Text="- Enrage info in boss HP bars" /><LineBreak />
+                                            <Run Text="- Timers info in boss HP bars" /><LineBreak />
+                                            <Run Text="- Dragon passive cooldown" /><LineBreak />
+                                            <Run Text="- Insigna of the punisher cooldown" /><LineBreak />
+                                            <Run Text="- Concentration cooldown" />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
+                            <settings:CheckboxSetting SettingName="Beta builds notification"
+                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}"
+                                                      IsEnabled="{Binding Experimental, Converter={StaticResource BoolInverter}}"
+                                                      >
+
+                            </settings:CheckboxSetting>
+                            <Button Content="Download beta build"
+                                    Style="{StaticResource SettingsButton}"
+                                    Command="{Binding DownloadBetaCommand}"
+                                    Background="{StaticResource TccRedGradientBrush}"
+                                    Foreground="White"
+                                    IsEnabled="{Binding Experimental, Converter={StaticResource BoolInverter}}"
+                                    />
+                        </StackPanel>
 
                         <StackPanel Grid.Row="1" Grid.Column="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Windows actions" />
@@ -2011,8 +1989,6 @@
 
                     </Grid>
                 </TabItem>
-
-
                 <!-- Links -->
                 <TabItem>
                     <TabItem.Header>
