@@ -121,6 +121,7 @@ namespace TCC.Settings
         public string TwitchChannelName { get; set; } //TODO: re-add this 
 
         public static string SettingsOverride { get; set; } = "";
+        public string LastAccountNameHash { get; set; }
 
         #endregion
 
