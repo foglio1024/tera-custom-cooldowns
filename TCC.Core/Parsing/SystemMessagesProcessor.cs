@@ -32,7 +32,7 @@ namespace TCC.Parsing
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
         {
             var template = "@0\vUserName\v" + friendName;
-            ChatWindowManager.Instance.AddSystemMessage(template, sysMsg, friendName);
+            ChatWindowManager.Instance.AddSystemMessage(template, sysMsg,ChatChannel.Friend, friendName);
         }
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessage sysMsg)
         {
