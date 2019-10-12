@@ -353,7 +353,8 @@ namespace TCC.Test
         {
             for (var i = 0; i < amount; i++)
             {
-                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
+                ChatWindowManager.Instance.AddChatMessage(
+                    ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
             }
         }
 
@@ -432,7 +433,7 @@ namespace TCC.Test
                 Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
                 if (monst.IsBoss)
                 {
-                    var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
+                    var msg = ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
                     ChatWindowManager.Instance.AddChatMessage(msg);
                 }
             }

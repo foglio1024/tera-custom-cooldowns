@@ -41,14 +41,14 @@ namespace TCC.Parsing
             var standardCountString = $"<font color =\"#cccccc\">({cleared}/40)</font>";
             var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{cleared}</font><font color=\"#cccccc\">/40)</font>";
             var newMsg = new SystemMessage($"{sysMsg.Message} {(cleared == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
-            var msg = new ChatMessage(srvMsg, newMsg, ChatChannel.Guardian);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newMsg, ChatChannel.Guardian);
             if (currChar.GuardianInfo.Cleared == 40) msg.ContainsPlayerName = true;
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
         private static void HandleNewGuildMasterMessage(string template, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(template, sysMsg, ChatChannel.GuildNotice);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(template, sysMsg, ChatChannel.GuildNotice);
             ChatWindowManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild", msg.ToString(), NotificationType.Success);
@@ -56,7 +56,7 @@ namespace TCC.Parsing
         }
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
@@ -71,12 +71,12 @@ namespace TCC.Parsing
             var dgId = Convert.ToUInt32(srvMsg.Substring(srvMsg.IndexOf(s, StringComparison.Ordinal) + s.Length));
             WindowManager.ViewModels.DashboardVM.CurrentCharacter.DungeonInfo.Engage(dgId);
 
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleFriendInAreaMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Friend);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, ChatChannel.Friend);
             var start = srvMsg.IndexOf("UserName\v", StringComparison.InvariantCultureIgnoreCase) + "UserName\v".Length;
             var end = srvMsg.IndexOf("\v", start, StringComparison.InvariantCultureIgnoreCase);
             var friendName = srvMsg.Substring(start, end - start);
@@ -86,7 +86,7 @@ namespace TCC.Parsing
         private static void HandleRessMessage(string srvMsg, SystemMessage sysMsg)
         {
             var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
-            var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Ress);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
             //if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT"); //ProxyOld.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
@@ -94,24 +94,24 @@ namespace TCC.Parsing
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)
         {
             var newSysMsg = new SystemMessage(sysMsg.Message.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Death);
-            var msg = new ChatMessage(srvMsg, newSysMsg, ChatChannel.Death);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Death);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleInvalidLink(string srvMsg, SystemMessage sysMsg)
         {
-            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+            ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
             if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
         }
         private static void HandleMerchantSpawn(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Normal, 10000);
         }
         private static void HandleMerchantDespawn(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Normal, 10000);
         }
@@ -128,7 +128,7 @@ namespace TCC.Parsing
         //by HQ 20181224
         private static void HandleFieldBossAppear(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
 
@@ -149,7 +149,7 @@ namespace TCC.Parsing
         }
         private static void HandleFieldBossDie(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
             WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
             if (!App.Settings.WebhookEnabledFieldBoss) return;

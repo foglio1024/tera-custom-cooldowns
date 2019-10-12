@@ -230,7 +230,7 @@
                     <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right" Click="OnSettingsButtonClick" Opacity=".5"
                         Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="16" 
                         VerticalAlignment="Top">
-                        <Grid  Background="Transparent">
+                        <Grid  Background="#01000000">
                             <Path Data="{StaticResource SvgSettings}" />
                         </Grid>
                     </Button>

@@ -191,7 +191,7 @@ namespace TCC
             DashboardWindow = new Dashboard(ViewModels.DashboardVM);
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
 
-            ChatWindowManager.Instance.InitWindows();
+            ChatWindowManager.Start();
 
             SettingsWindow = new SettingsWindow();
         }

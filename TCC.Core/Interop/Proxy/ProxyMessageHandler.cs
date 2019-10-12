@@ -41,7 +41,7 @@ namespace TCC.Interop.Proxy
                 ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
             else
                 ChatWindowManager.Instance.AddChatMessage(
-                    new ChatMessage((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
+                    ChatWindowManager.Instance.Factory.CreateMessage((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
                                         x.Id == channel && x.Joined).Index + 11, author, message));
         }
         private static void SetUiMode(JObject parameters)

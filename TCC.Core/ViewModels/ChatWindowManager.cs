@@ -1,8 +1,11 @@
-﻿using System;
+﻿//#define BATCH // pepehands
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 using FoglioUtils;
@@ -18,7 +21,6 @@ using TCC.ViewModels.Widgets;
 using TCC.Windows.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Messages;
-
 namespace TCC.ViewModels
 {
     [TccModule]
@@ -26,6 +28,7 @@ namespace TCC.ViewModels
     {
         private static ChatWindowManager _instance;
         public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager(App.Settings.ChatSettings));
+        public ChatMessageFactory Factory { get; }
 
         private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
@@ -35,25 +38,33 @@ namespace TCC.ViewModels
         public event Action<ChatMessage> NewMessage;
         public event Action<int> PrivateChannelJoined;
 
-        public List<FriendData> Friends { get; set; }
-        public List<string> BlockedUsers { get; set; }
         public LFG LastClickedLfg { get; set; }
 
         public int MessageCount => ChatMessages.Count;
         public bool IsQueueEmpty => _pauseQueue.Count == 0;
         public TSObservableCollection<ChatWindow> ChatWindows { get; private set; }
+#if BATCH
+        private readonly ConcurrentQueue<ChatMessage> _mainQueue;
+        private readonly DispatcherTimer _flushTimer;
+        public TSObservableCollectionBatch<ChatMessage> ChatMessages { get; private set; }
+#else
         public TSObservableCollection<ChatMessage> ChatMessages { get; private set; }
+#endif
         public TSObservableCollection<LFG> LFGs { get; private set; }
 
         private ChatWindowManager(WindowSettings settings) : base(settings)
         {
             _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
-
-            BlockedUsers = new List<string>();
-            Friends = new List<FriendData>();
             ChatWindows = new TSObservableCollection<ChatWindow>(Dispatcher);
+#if BATCH
+            _mainQueue = new ConcurrentQueue<ChatMessage>();
+            _flushTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnFlushTick, Dispatcher);
+            ChatMessages = new TSObservableCollectionBatch<ChatMessage>(Dispatcher);
+            _flushTimer.Start();
+#else
             ChatMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
+#endif
             LFGs = new TSObservableCollection<LFG>(Dispatcher);
 
             ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
@@ -64,14 +75,41 @@ namespace TCC.ViewModels
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.ForceClickableChatHotkey, ToggleForcedClickThru);
 
+            Factory = new ChatMessageFactory(Dispatcher);
+
         }
+#if BATCH
+
+        private void OnFlushTick(object sender, EventArgs e)
+        {
+            var list = new List<ChatMessage>();
+            while (_mainQueue.TryDequeue(out var m))
+            {
+                list.Add(m);
+            }
+
+            ChatMessages.AddBatch(list);
+            if (ChatMessages.Count > App.Settings.MaxMessages)
+            {
+                var toRemove = new List<ChatMessage>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var target = ChatMessages[ChatMessages.Count - 1];
+                    target.Dispose();
+                    toRemove.Add(target);
+                }
+                ChatMessages.RemoveBatch(toRemove);
+            }
+            N(nameof(MessageCount));
+
+        }
+#endif
 
         protected override void InstallHooks()
         {
             PacketAnalyzer.Sniffer.NewConnection += OnConnected;
             PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
 
-            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
             PacketAnalyzer.Processor.Hook<S_PRIVATE_CHAT>(OnPrivateChat);
             PacketAnalyzer.Processor.Hook<S_WHISPER>(OnWhisper);
@@ -80,8 +118,6 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
             PacketAnalyzer.Processor.Hook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
             PacketAnalyzer.Processor.Hook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
-            PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
-            PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
@@ -90,7 +126,6 @@ namespace TCC.ViewModels
         }
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Unhook<S_CHAT>(OnChat);
             PacketAnalyzer.Processor.Unhook<S_PRIVATE_CHAT>(OnPrivateChat);
             PacketAnalyzer.Processor.Unhook<S_WHISPER>(OnWhisper);
@@ -99,8 +134,6 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Unhook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
             PacketAnalyzer.Processor.Unhook<S_OTHER_USER_APPLY_PARTY>(OnOtherUserApplyParty);
             PacketAnalyzer.Processor.Unhook<S_PARTY_MATCH_LINK>(OnPartyMatchLink);
-            PacketAnalyzer.Processor.Unhook<S_USER_BLOCK_LIST>(OnUserBlockList);
-            PacketAnalyzer.Processor.Unhook<S_FRIEND_LIST>(OnFriendList);
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
@@ -122,23 +155,11 @@ namespace TCC.ViewModels
             if (!TccUtils.IsWorldBoss(p.HuntingZoneId, p.TemplateId)) return;
             Game.DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var monst);
             if (!monst.IsBoss) return;
-            AddChatMessage(new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>"));
+            AddChatMessage(Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>"));
         }
         private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
         {
             UpdateLfgMembers(m.Id, m.Members.Count);
-        }
-        private void OnFriendList(S_FRIEND_LIST m)
-        {
-            Friends = m.Friends;
-        }
-        private void OnUserBlockList(S_USER_BLOCK_LIST m)
-        {
-            m.BlockedUsers.ForEach(u =>
-            {
-                if (BlockedUsers.Contains(u)) return;
-                BlockedUsers.Add(u);
-            });
         }
         private void OnPartyMatchLink(S_PARTY_MATCH_LINK m)
         {
@@ -161,7 +182,7 @@ namespace TCC.ViewModels
             var isMe = m.Author == Game.Me.Name;
             var author = isMe ? m.Recipient : m.Author;
             var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
-            AddChatMessage(new ChatMessage(channel, author, m.Message));
+            AddChatMessage(Factory.CreateMessage(channel, author, m.Message));
         }
         private void OnLeavePrivateChannel(S_LEAVE_PRIVATE_CHANNEL m)
         {
@@ -180,11 +201,11 @@ namespace TCC.ViewModels
             var ch = (ChatChannel)(PrivateChannels[i].Index + 11);
             if (ch == ChatChannel.Private8) return; // already sent by stub
 
-            AddChatMessage(new ChatMessage(ch, m.AuthorName, m.Message));
+            AddChatMessage(Factory.CreateMessage(ch, m.AuthorName, m.Message));
         }
         private void OnChat(S_CHAT m)
         {
-            AddChatMessage(new ChatMessage(m.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)m.Channel), m.AuthorName, m.Message));
+            AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)m.Channel), m.AuthorName, m.Message));
             if ((ChatChannel)m.Channel != ChatChannel.Greet) return;
             switch (m.AuthorName)
             {
@@ -208,12 +229,9 @@ namespace TCC.ViewModels
             msg += $"<font color='{R.Colors.GoldColor.ToHex()}'>{m.LevelExp / (double)(m.NextLevelExp):P3}</font>";
             msg += $"<font>.</font>";
 
-            AddChatMessage(new ChatMessage(ChatChannel.Exp, "System", msg));
+            AddChatMessage(Factory.CreateMessage(ChatChannel.Exp, "System", msg));
         }
-        private void OnLogin(S_LOGIN m)
-        {
-            BlockedUsers.Clear();
-        }
+
         private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
             AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP);
@@ -281,7 +299,7 @@ namespace TCC.ViewModels
                 message.Dispose();
                 return true;
             }
-            if (BlockedUsers.Contains(message.Author) && !(message is LfgMessage))
+            if (Game.BlockList.Contains(message.Author) && !(message is LfgMessage))
             {
                 message.Dispose();
                 return true;
@@ -322,18 +340,18 @@ namespace TCC.ViewModels
         }
         public void AddSystemMessage(string template, SystemMessage sysMsg, string authorOverride = "System")
         {
-            AddChatMessage(new ChatMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel) { Author = authorOverride });
+            AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel, authorOverride));
         }
         public void AddSystemMessage(string template, SystemMessage sysMsg, ChatChannel channelOverride, string authorOverride = "System")
         {
-            AddChatMessage(new ChatMessage(template, sysMsg, channelOverride) { Author = authorOverride });
+            AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride));
         }
 
-        public void AddLfgMessage(uint id, string name, string msg)
+        private void AddLfgMessage(uint id, string name, string msg)
         {
             Dispatcher.InvokeAsync(() =>
             {
-                AddChatMessage(new LfgMessage(id, name, msg));
+                AddChatMessage(Factory.CreateLfgMessage(id, name, msg));
             }, DispatcherPriority.DataBind);
         }
         public void AddChatMessage(ChatMessage chatMessage)
@@ -348,7 +366,11 @@ namespace TCC.ViewModels
 
                 if (ChatWindows.All(x => !x.IsPaused))
                 {
+#if BATCH
+                    _mainQueue.Enqueue(chatMessage);
+#else
                     ChatMessages.Insert(0, chatMessage);
+#endif
                 }
                 else
                 {
@@ -356,6 +378,8 @@ namespace TCC.ViewModels
                 }
 
                 NewMessage?.Invoke(chatMessage);
+#if BATCH
+#else
                 if (ChatMessages.Count > App.Settings.MaxMessages)
                 {
                     var toRemove = ChatMessages[ChatMessages.Count - 1];
@@ -363,11 +387,12 @@ namespace TCC.ViewModels
                     ChatMessages.RemoveAt(ChatMessages.Count - 1);
                 }
                 N(nameof(MessageCount));
+#endif
             }, DispatcherPriority.DataBind);
         }
         public void AddTccMessage(string message)
         {
-            var msg = new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{message}</FONT>");
+            var msg = Factory.CreateMessage(ChatChannel.TCC, "System", $"<FONT>{message}</FONT>");
             AddChatMessage(msg);
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
@@ -377,8 +402,9 @@ namespace TCC.ViewModels
             srcName = srcName != ""
                 ? $"<font color=\"#cccccc\"> from </font><font>{srcName}</font><font color=\"#cccccc\">.</font>"
                 : "<font color=\"#cccccc\">.</font>";
-            AddChatMessage(new ChatMessage(ChatChannel.Damage, "System",
-                $"<font color=\"#cccccc\">Received </font> <font>{-diff}</font> <font color=\"#cccccc\"> (</font><font>{-diff / (double)maxHP:P}</font><font color=\"#cccccc\">)</font> <font color=\"#cccccc\"> damage</font>{srcName}"));
+            var msg = Factory.CreateMessage(ChatChannel.Damage, "System",
+                $"<font color=\"#cccccc\">Received </font> <font>{-diff}</font> <font color=\"#cccccc\"> (</font><font>{-diff / (double) maxHP:P}</font><font color=\"#cccccc\">)</font> <font color=\"#cccccc\"> damage</font>{srcName}");
+            AddChatMessage(msg);
         }
         public void AddFromQueue(int itemsToAdd)
         {
@@ -387,7 +413,11 @@ namespace TCC.ViewModels
             {
                 if (_pauseQueue.TryDequeue(out var msg))
                 {
+#if BATCH
+                    _mainQueue.Enqueue(msg);
+#else
                     ChatMessages.Insert(0, msg);
+#endif
                     if (ChatMessages.Count > App.Settings.MaxMessages)
                     {
                         ChatMessages.RemoveAt(ChatMessages.Count - 1);
@@ -451,7 +481,7 @@ namespace TCC.ViewModels
             var messagesToAdd = _privateMessagesCache.Where(x => x.Channel == PrivateChannels[index].Id).ToList();
             messagesToAdd.ForEach(x =>
             {
-                AddChatMessage(new ChatMessage(
+                AddChatMessage(Factory.CreateMessage(
                     (ChatChannel)index + 11,
                     x.Author == "undefined" ? "System" : x.Author,
                     x.Message));
@@ -564,6 +594,25 @@ namespace TCC.ViewModels
 
                 if (FocusManager.ForceFocused) FocusManager.ForceFocused = false;
             }, DispatcherPriority.Background);
+        }
+
+        public static void Start()
+        {
+            var t = new Thread(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext( new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                Instance.InitWindows();
+                WindowManager.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
+                Dispatcher.Run();
+                Log.CW($"[ChatWindow] Dispatcher stopped.");
+                WindowManager.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+            })
+            {
+                Name = $"ChatThread"
+            };
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+
         }
     }
 }

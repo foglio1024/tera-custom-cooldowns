@@ -125,7 +125,7 @@ namespace TCC.Windows.Widgets
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
+            ProxyInterface.Instance.Stub.RequestListings();
         }
 
         private bool _busy;

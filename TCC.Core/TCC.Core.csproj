@@ -169,6 +169,7 @@
     <Compile Include="Utilities\ContextMenuLeftClickBehavior.cs" />
     <Compile Include="Utilities\EventUtils.cs" />
     <Compile Include="ViewModels\CharactersXmlParser.cs" />
+    <Compile Include="ViewModels\ChatMessageFactory.cs" />
     <Compile Include="ViewModels\ClassManagers\BaseClassLayoutVM.cs" />
     <Compile Include="Controls\Classes\ArcherLayout.xaml.cs">
       <DependentUpon>ArcherLayout.xaml</DependentUpon>
