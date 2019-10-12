@@ -86,8 +86,8 @@ namespace TCC.ViewModels
         public bool ShowDelegateLeader => WindowManager.ViewModels.GroupVM?.AmILeader == true
                                        && WindowManager.ViewModels.GroupVM?.Exists(Name) == true
                                        && Name != Game.Me.Name;
-        public bool IsBlocked => _name == "" ? false : ChatWindowManager.Instance.BlockedUsers?.Contains(_name) == true;
-        public bool IsFriend => !ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
+        public bool IsBlocked => _name == "" ? false : Game.BlockList?.Contains(_name) == true;
+        public bool IsFriend => !Game.FriendList.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
         public bool ShowFpsUtils => /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable;
         public TooltipInfo(string n, string i, int l)
         {

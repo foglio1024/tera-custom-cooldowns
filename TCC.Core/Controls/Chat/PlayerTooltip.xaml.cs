@@ -94,11 +94,11 @@ namespace TCC.Controls.Chat
                 if (_blocking)
                 {
                     ProxyInterface.Instance.Stub.BlockUser(WindowManager.FloatingButton.TooltipInfo.Name);//ProxyOld.BlockUser(WindowManager.FloatingButton.TooltipInfo.Name);
-                    ChatWindowManager.Instance.BlockedUsers.Add(WindowManager.FloatingButton.TooltipInfo.Name);
+                    Game.BlockList.Add(WindowManager.FloatingButton.TooltipInfo.Name);
                     try
                     {
-                        var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == WindowManager.FloatingButton.TooltipInfo.Name));
-                        ChatWindowManager.Instance.Friends.RemoveAt(i);
+                        var i = Game.FriendList.IndexOf(Game.FriendList.FirstOrDefault(x => x.Name == WindowManager.FloatingButton.TooltipInfo.Name));
+                        Game.FriendList.RemoveAt(i);
                     }
                     catch
                     {
@@ -119,7 +119,7 @@ namespace TCC.Controls.Chat
             else
             {
                 ProxyInterface.Instance.Stub.UnblockUser(WindowManager.FloatingButton.TooltipInfo.Name);//ProxyOld.UnblockUser(WindowManager.FloatingButton.TooltipInfo.Name);
-                ChatWindowManager.Instance.BlockedUsers.Remove(WindowManager.FloatingButton.TooltipInfo.Name);
+                Game.BlockList.Remove(WindowManager.FloatingButton.TooltipInfo.Name);
                 WindowManager.FloatingButton.ClosePlayerMenu();
 
             }

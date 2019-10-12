@@ -98,6 +98,8 @@ namespace TCC
             }
         }
         public static int CurrentZoneId { get; private set; }
+        public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
+        public static List<string> BlockList { get; private set; } = new List<string>();
 
         public static bool IsMe(ulong eid)
         {
@@ -215,6 +217,8 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_DESPAWN_USER>(OnDespawnUser);
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_ITEM>(OnStartCooltimeItem);
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
+            PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
+            PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
         }
 
         private static void OnDisconnected()
@@ -242,7 +246,8 @@ namespace TCC
         {
             //TODO: do it the same way as other client sysmsgs
             if (!DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
-            ChatWindowManager.Instance.AddChatMessage(new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel));
+            ChatWindowManager.Instance.AddChatMessage(
+                ChatWindowManager.Instance.Factory.CreateSystemMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel));
         }
         private static void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
@@ -273,7 +278,8 @@ namespace TCC
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
                 if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel));
+                ChatWindowManager.Instance.AddSystemMessage(x.SysMessage, m);
+                //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel));
             }
             catch (Exception)
             {
@@ -456,6 +462,8 @@ namespace TCC
             LoadingScreen = true;
             Encounter = false;
             GuildMembersNames.Clear();
+            BlockList.Clear();
+
             Server = DB.ServerDatabase.GetServer(m.ServerId);
 
             Me.Name = m.Name;
@@ -547,7 +555,7 @@ namespace TCC
         }
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
-            var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
+            var friend = FriendList.FirstOrDefault(f => f.PlayerId == x.PlayerId);
             if (friend.Equals(default(FriendData))) return;
             const string opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
             var areaName = x.SectionId.ToString();
@@ -564,7 +572,18 @@ namespace TCC
 
             SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
         }
-
+        private static void OnFriendList(S_FRIEND_LIST m)
+        {
+            FriendList = m.Friends;
+        }
+        private static void OnUserBlockList(S_USER_BLOCK_LIST m)
+        {
+            m.BlockedUsers.ForEach(u =>
+            {
+                if (BlockList.Contains(u)) return;
+                BlockList.Add(u);
+            });
+        }
 
         private static Laurel GetLaurel(uint pId)
         {
@@ -601,6 +620,7 @@ namespace TCC
         public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
+
             await InitDatabasesAsync(String.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
             KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
         }
