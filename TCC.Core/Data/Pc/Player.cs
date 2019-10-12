@@ -255,7 +255,7 @@ namespace TCC.Data.Pc
                 if (_coins == _maxCoins)
                 {
                     WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Adventure coins maxed!", NotificationType.Success);
-                    ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
+                    ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
                 }
 
                 N();
@@ -374,11 +374,7 @@ namespace TCC.Data.Pc
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
         }
-        public Player(ulong id, string name) : this()
-        {
-            _entityId = id;
-            _name = name;
-        }
+
 
         #region Shield
         public void DamageShield(uint damage)
@@ -475,7 +471,7 @@ namespace TCC.Data.Pc
         private void FindAndUpdate(Abnormality ab, uint duration, int stacks)
         {
             var list = GetList(ab);
-            var existing = list.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true);
@@ -492,7 +488,7 @@ namespace TCC.Data.Pc
         private void FindAndRemove(Abnormality ab)
         {
             var list = GetList(ab);
-            var target = list.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var target = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (target == null) return;
             list.Remove(target);
             target.Dispose();
@@ -517,30 +513,24 @@ namespace TCC.Data.Pc
 
         public void ClearAbnormalities()
         {
-            foreach (var item in Buffs)
-            {
-                item.Dispose();
-            }
-            foreach (var item in Debuffs)
-            {
-                item.Dispose();
-            }
-            foreach (var item in InfBuffs)
-            {
-                item.Dispose();
-            }
+            Buffs.ToSyncList().ForEach(item => item.Dispose());
+            Debuffs.ToSyncList().ForEach(item => item.Dispose());
+            InfBuffs.ToSyncList().ForEach(item => item.Dispose());
+
             Buffs.Clear();
             Debuffs.Clear();
             InfBuffs.Clear();
+
             _debuffList.Clear();
+
             CurrentShield = 0;
             N(nameof(IsDebuffed));
         }
 
         // utils
-        private ICollection<AbnormalityDuration> GetList(Abnormality ab)
+        private TSObservableCollection<AbnormalityDuration> GetList(Abnormality ab)
         {
-            ICollection<AbnormalityDuration> list = null;
+            TSObservableCollection<AbnormalityDuration> list = null;
             switch (ab.Type)
             {
                 case AbnormalityType.Debuff:
@@ -559,6 +549,7 @@ namespace TCC.Data.Pc
         #endregion
 
         #region Deprecated
+        [Obsolete]
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -580,6 +571,7 @@ namespace TCC.Data.Pc
             existing.Refresh();
 
         }
+        [Obsolete]
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -595,6 +587,7 @@ namespace TCC.Data.Pc
             existing.Stacks = stacks;
             existing.Refresh();
         }
+        [Obsolete]
         public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -611,7 +604,7 @@ namespace TCC.Data.Pc
             existing.Refresh();
 
         }
-
+        [Obsolete]
         public void RemoveBuff(Abnormality ab)
         {
             var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -626,6 +619,7 @@ namespace TCC.Data.Pc
             }
 
         }
+        [Obsolete]
         public void RemoveDebuff(Abnormality ab)
         {
 
@@ -634,6 +628,7 @@ namespace TCC.Data.Pc
             Debuffs.Remove(buff);
             buff.Dispose();
         }
+        [Obsolete]
         public void RemoveInfBuff(Abnormality ab)
         {
             var buff = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);

@@ -171,7 +171,7 @@ namespace TCC.Data.NPCs
 
         public void AddorRefresh(Abnormality ab, uint duration, int stacks)
         {
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, _target, Dispatcher, true);
