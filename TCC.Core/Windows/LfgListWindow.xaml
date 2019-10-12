@@ -7,9 +7,11 @@
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
-        xmlns:settings="clr-namespace:TCC.Controls.Settings"
+        xmlns:settingsCtrl="clr-namespace:TCC.Controls.Settings"
+        xmlns:settings="clr-namespace:TCC.Settings"
         xmlns:pc="clr-namespace:TCC.Data.Pc"
         xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="TCC LFG" Height="800"
@@ -36,7 +38,12 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="PlayerDt" DataType="pc:User" >
-            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown" Grid.IsSharedSizeScope="False">
+            <Grid Background="Transparent" Grid.IsSharedSizeScope="False">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseRightButtonDown">
+                        <i:InvokeCommandAction Command="{Binding RequestInteractiveCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" SharedSizeGroup="A"/>
@@ -93,7 +100,12 @@
             </DataTemplate.Triggers>
         </DataTemplate>
         <DataTemplate x:Key="ApplicantDt" DataType="pc:User">
-            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown" Grid.IsSharedSizeScope="False">
+            <Grid Background="Transparent" Grid.IsSharedSizeScope="False">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseRightButtonDown">
+                        <i:InvokeCommandAction Command="{Binding RequestInteractiveCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" SharedSizeGroup="A"/>
@@ -142,14 +154,19 @@
                             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                         </Style>
                     </UniformGrid.Resources>
-                    <Button Background="{StaticResource GreenBrush}" Click="AcceptApply" Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
+                    <Button Background="{StaticResource GreenBrush}" 
+                            Command="{Binding AcceptApplyCommand}"
+                            Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
                         <Path Data="{StaticResource SvgCheckCircle}"/>
                     </Button>
 
-                    <Button Background="{StaticResource ChatPartyBrush}" Click="InspectApplicant">
+                    <Button Background="{StaticResource ChatPartyBrush}" 
+                            Command="{Binding InspectCommand}">
                         <Path Data="{StaticResource SvgEye}" />
                     </Button>
-                    <Button Background="{StaticResource HpBrush}" Click="RefuseApplicant" Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
+                    <Button Background="{StaticResource HpBrush}" 
+                            Command="{Binding DeclineApplyCommand}"
+                            Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
                         <Path Data="{StaticResource SvgClose}"/>
                     </Button>
                 </UniformGrid>
@@ -180,8 +197,12 @@
             </DataTemplate.Triggers>
         </DataTemplate>
         <DataTemplate DataType="{x:Type data:Listing}" x:Key="ListingDt">
-            <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent"
-                  MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding ExpandCollapseCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="345" />
@@ -199,14 +220,19 @@
                          Width="11" Height="11" />
                 <TextBlock Text="{Binding Message}"
                            x:Name="MessageTb"
-                           PreviewMouseLeftButtonDown="OnLfgMessageMouseButtonDown"
                            FontSize="14"
-                           FontWeight="Thin"
+                           FontWeight="Normal"
                            Style="{StaticResource DefaultTextStyle}"
                            HorizontalAlignment="Left"
                            Margin="6 0 0 0"
                            VerticalAlignment="Center"
-                           Grid.Column="1" />
+                           Grid.Column="1" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding BrowseTwitchCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
                 <TextBlock Text="{Binding LeaderName}"
                            Style="{StaticResource DefaultTextStyle}"
                            Grid.Column="2"
@@ -415,7 +441,10 @@
             BorderThickness="1" BorderBrush="{StaticResource RevampBorderBrush}"
             Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".7">
         </Border>
-        <Grid HorizontalAlignment="Stretch" Margin="6">
+        <Grid HorizontalAlignment="Stretch" Margin="6"
+                    MouseLeftButtonDown="OnBgMouseLeftButtonDown"
+
+        >
             <Grid.RowDefinitions>
                 <RowDefinition Height="38" />
                 <RowDefinition Height="Auto" />
@@ -440,12 +469,31 @@
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0" />
             <Rectangle MouseLeftButtonDown="Drag" Fill="Transparent"></Rectangle>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox Text="{Binding MinLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Foreground="White" Background="#0fff" Width="20"
+                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
+                         LostKeyboardFocus="OnTbLostKeyboardFocus"
+                         TextAlignment="Center"
+                         VerticalAlignment="Center" BorderThickness="0 0 0 1"/>
+                <TextBlock Text="~" VerticalAlignment="Center" Foreground="#3fff"
+                           Margin="5 0"></TextBlock>
+                <TextBox Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Background="#0fff" Width="20"
+                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
+                         LostKeyboardFocus="OnTbLostKeyboardFocus"
+                         TextAlignment="Center" 
+                         VerticalAlignment="Center" BorderThickness="0 0 0 1"/>
+                <Rectangle Margin="10 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch"></Rectangle>
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" 
-                    VerticalAlignment="Stretch" Click="ReloadLfgList">
+                    VerticalAlignment="Stretch" ToolTip="Collapse all"
+                    Command="{Binding CollapseAllCommand}" CommandParameter="false">
+                    <Path Data="{StaticResource SvgCollapseAll}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
+                </Button>
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" 
+                    VerticalAlignment="Stretch" Command="{Binding ReloadCommand}">
                     <Path Data="{StaticResource SvgReload}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
                 </Button>
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
-                    VerticalAlignment="Stretch" Click="Button_Click">
+                    VerticalAlignment="Stretch" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=w:LfgListWindow}, Path=HideWindowCommand}">
                     <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
                 </Button>
             </StackPanel>
@@ -518,25 +566,29 @@
                              Text="{Binding NewMessage, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                     <Grid Grid.Column="1" ClipToBounds="True" Margin="0 5">
-                        <settings:BoolSetting Margin="-40 -4 -8 -4" SettingName="Raid" HorizontalAlignment="Right"
-                                              VerticalContentAlignment="Center" x:Name="RaidSwitch" />
+                        <settingsCtrl:BoolSetting Margin="-40 -4 -8 -4" SettingName="Raid" HorizontalAlignment="Right"
+                                              VerticalContentAlignment="Center" x:Name="RaidSwitch" 
+                                              IsOn="{Binding CreatingRaid, Mode=TwoWay}"/>
                     </Grid>
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleY="0" />
                     </Grid.LayoutTransform>
                 </Grid>
                 <Button extensions:ButtonExtensions.CornerRadius="3"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         HorizontalContentAlignment="Center"
-                        Width="200"
+                        Width="190"
                         Padding="0 4"
                         Effect="{StaticResource DropShadow}"
+                        Command="{Binding CreateMessageCommand}"
                         x:Name="CreateMessageBtn"
-                        Click="CreateMessageBtn_Click"
                         FontSize="15"
-                        FontWeight="Thin"
+                        FontWeight="Normal"
+                        VerticalAlignment="Center"
                         Style="{StaticResource ButtonMainStyle}"
-                        Background="{StaticResource DefensiveStanceBrush}">
+                        Background="{StaticResource ChatMegaphoneBrushDark}"
+                        IsHitTestVisible="{Binding AmIinLfg, Converter={StaticResource BoolInverter}}"
+                        >
                     <Button.Content>
                         <MultiBinding Converter="{StaticResource LfgVmToButtonLabel}">
                             <Binding Path="Creating" />
@@ -547,16 +599,18 @@
                         <ScaleTransform ScaleY="1" />
                     </Button.LayoutTransform>
                 </Button>
-                <UniformGrid Grid.Row="2" Rows="1" x:Name="LfgMgmtBtn">
+                <UniformGrid Grid.Row="2" Rows="1" x:Name="LfgMgmtBtn"                         
+                             IsHitTestVisible="{Binding AmIinLfg}"
+                >
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton"
-                            Click="RemoveMessageButton_Click"
+                            Command="{Binding RemoveMessageCommand}"
                             Margin="5" Background="{StaticResource HpBrush}"
-                            extensions:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
+                            extensions:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Normal"
                             Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="EditMessageButton"
-                            Click="CreateMessageBtn_Click"
+                            Command="{Binding CreateMessageCommand}"
                             Margin="5" Background="{StaticResource  IgnidraxBrush}"
-                            extensions:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
+                            extensions:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Normal"
                             Content="Edit message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Grid Margin="5" x:Name="PublicizeGrid">
                         <Grid.ColumnDefinitions>
@@ -565,7 +619,7 @@
                         </Grid.ColumnDefinitions>
                         <!--Click="PublicizeBtn_Click"-->
                         <Button Style="{StaticResource ButtonMainStyle}"
-                                Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
+                                Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Normal"
                                 extensions:ButtonExtensions.CornerRadius="3 0 0 3" Padding="0 4" 
                                 Content="Publicize" HorizontalContentAlignment="Center" 
                                 Command="{Binding PublicizeCommand}"
@@ -574,7 +628,7 @@
                                 x:Name="PublicizeBtn"/>
                         <!--Click="ToggleAutoPublicize"-->
                         <Button Style="{StaticResource ButtonMainStyle}" ToolTip="Auto publicize"
-                                Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Thin"
+                                Background="{StaticResource GreenBrush}" FontSize="15" FontWeight="Normal"
                                 extensions:ButtonExtensions.CornerRadius="0 3 3 0" Padding="0 4" 
                                 Command="{Binding ToggleAutoPublicizeCommand}"
                                 IsEnabled="true"

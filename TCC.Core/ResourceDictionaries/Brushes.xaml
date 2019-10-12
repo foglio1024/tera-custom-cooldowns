@@ -106,6 +106,7 @@
     <SolidColorBrush x:Key="ChatGlobalBrush"                Color="{StaticResource ChatGlobalColor}"                           />
     <SolidColorBrush x:Key="ChatRaidBrush"                  Color="{StaticResource ChatRaidColor}"                             />
     <SolidColorBrush x:Key="ChatMegaphoneBrush"             Color="{StaticResource ChatMegaphoneColor}"                        />
+    <SolidColorBrush x:Key="ChatMegaphoneBrushDark"         Color="{StaticResource ChatMegaphoneColorDark}"                    />
     <SolidColorBrush x:Key="ChatGuildAdBrush"               Color="{StaticResource ChatGuildAdColor}"                          />
     <SolidColorBrush x:Key="ChatPrivateBrush"               Color="{StaticResource ChatPrivateColor}"                          />
     <SolidColorBrush x:Key="ChatProxyBrush"                 Color="{StaticResource ChatProxyColor}"                            />

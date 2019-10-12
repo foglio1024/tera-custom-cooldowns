@@ -14,6 +14,7 @@ using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels.Widgets;
 using TeraDataLite;
@@ -26,14 +27,18 @@ namespace TCC.ViewModels
     public class LfgListViewModel : TccWindowViewModel
     {
         public event Action<int> Publicized;
+        public event Action CreatingStateChanged;
+        public event Action MyLfgStateChanged;
         public static DispatcherTimer RequestTimer;
         private DispatcherTimer PublicizeTimer;
         private DispatcherTimer AutoPublicizeTimer;
         public static Queue<uint> RequestQueue = new Queue<uint>();
         private bool _creating;
-        private int _lastGroupSize = 0;
+        private bool _creatingRaid;
+        private int _lastGroupSize;
         public Listing LastClicked;
         private string _newMessage;
+
         public string LastSortDescr { get; set; } = "Message";
         public int PublicizeCooldown => 5;
         public int AutoPublicizeCooldown => 30;
@@ -46,8 +51,11 @@ namespace TCC.ViewModels
         private bool _stopAuto;
         public TSObservableCollection<Listing> Listings { get; }
         public SortCommand SortCommand { get; }
-        public RelayCommand PublicizeCommand { get; }
-        public RelayCommand ToggleAutoPublicizeCommand { get; }
+        public ICommand PublicizeCommand { get; }
+        public ICommand ToggleAutoPublicizeCommand { get; }
+        public ICommand CreateMessageCommand { get; }
+        public ICommand RemoveMessageCommand { get; }
+        public ICommand ReloadCommand { get; }
         public ICollectionViewLiveShaping ListingsView { get; }
         public bool Creating
         {
@@ -56,6 +64,17 @@ namespace TCC.ViewModels
             {
                 if (_creating == value) return;
                 _creating = value;
+                N();
+                CreatingStateChanged?.Invoke();
+            }
+        }
+        public bool CreatingRaid
+        {
+            get => _creatingRaid;
+            set
+            {
+                if (_creatingRaid == value) return;
+                _creatingRaid = value;
                 N();
             }
         }
@@ -67,15 +86,18 @@ namespace TCC.ViewModels
                 if (_newMessage == value) return;
                 _newMessage = value;
                 N();
+                CreatingStateChanged?.Invoke();
             }
         }
         public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == Game.Me.PlayerId
                                                                                               || listing.LeaderName == Game.Me.Name
                                                                                               || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
                                                                                               || WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
-        public void NotifyMyLfg()
+
+        private void NotifyMyLfg()
         {
             N(nameof(AmIinLfg));
+            MyLfgStateChanged?.Invoke();
             N(nameof(MyLfg));
             foreach (var listing in Listings.ToSyncList())
             {
@@ -89,7 +111,35 @@ namespace TCC.ViewModels
                                                                    || WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
 
+
+        public int MinLevel
+        {
+            get => ((LfgWindowSettings)Settings).MinLevel;
+            set
+            {
+                if (((LfgWindowSettings)Settings).MinLevel == value) return;
+                ((LfgWindowSettings)Settings).MinLevel = value;
+                N();
+                N(nameof(MaxLevel));
+            }
+        }
+        public int MaxLevel
+        {
+            get => ((LfgWindowSettings)Settings).MaxLevel;
+            set
+            {
+                if (((LfgWindowSettings)Settings).MaxLevel == value) return;
+                ((LfgWindowSettings)Settings).MaxLevel = value;
+                N();
+                N(nameof(MinLevel));
+            }
+        }
+
+
         public bool StayClosed { get; set; }
+
+        public ICommand ExpandAllCommand { get; }
+        public ICommand CollapseAllCommand { get; }
 
         public LfgListViewModel(LfgWindowSettings settings) : base(settings)
         {
@@ -99,12 +149,50 @@ namespace TCC.ViewModels
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
-            if(WindowManager.ViewModels.GroupVM != null) WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupWindowVmPropertyChanged;
+            if (WindowManager.ViewModels.GroupVM != null) WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             PublicizeCommand = new RelayCommand(Publicize, CanPublicize);
             ToggleAutoPublicizeCommand = new RelayCommand(ToggleAutoPublicize, CanToggleAutoPublicize);
+            ReloadCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.RequestListings());
+            RemoveMessageCommand = new RelayCommand(_ =>
+            {
+                ForceStopPublicize();
+                ProxyInterface.Instance.Stub.RemoveListing();
+                ProxyInterface.Instance.Stub.RequestListings();
+
+            });
+            CreateMessageCommand = new RelayCommand(_ =>
+            {
+                if (!Creating)
+                {
+                    Creating = true;
+                    NewMessage = MyLfg != null ? MyLfg.Message : "";
+                }
+                else if (Creating && !string.IsNullOrEmpty(NewMessage))
+                {
+                    Creating = false;
+                    ProxyInterface.Instance.Stub.RegisterListing(NewMessage, CreatingRaid);
+                    NewMessage = MyLfg != null ? MyLfg.Message : "";
+                    Task.Delay(200).ContinueWith(t => ProxyInterface.Instance.Stub.RequestListings());
+
+                }
+                else
+                {
+                    Creating = false;
+                    NewMessage = MyLfg != null ? MyLfg.Message : "";
+                }
+            });
+            ExpandAllCommand = new RelayCommand(_ =>
+            {
+                Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(true));
+            });
+            CollapseAllCommand = new RelayCommand(_ =>
+            {
+                Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(false));
+
+            });
         }
 
         private void OnShowLfgHotkeyPressed()
@@ -132,8 +220,8 @@ namespace TCC.ViewModels
             }
             else
             {
-                if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
-                ProxyInterface.Instance.Stub.PublicizeListing(); //ProxyOld.PublicizeLfg();
+                if (!ProxyInterface.Instance.IsStubAvailable) return;
+                ProxyInterface.Instance.Stub.PublicizeListing();
                 Publicized?.Invoke(AutoPublicizeCooldown);
             }
         }
@@ -149,8 +237,8 @@ namespace TCC.ViewModels
             if (Game.IsInDungeon) return;
             PublicizeTimer.Start();
             N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-            if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
-            ProxyInterface.Instance.Stub.PublicizeListing(); //ProxyOld.PublicizeLfg();
+            if (!ProxyInterface.Instance.IsStubAvailable) return;
+            ProxyInterface.Instance.Stub.PublicizeListing(); ;
             Publicized?.Invoke(PublicizeCooldown);
 
         }
@@ -181,9 +269,9 @@ namespace TCC.ViewModels
         }
         private bool CanToggleAutoPublicize(object arg)
         {
-            return /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable &&
+            return ProxyInterface.Instance.IsStubAvailable &&
                    !Game.LoadingScreen &&
-                   Game.Logged &&
+                    Game.Logged &&
                    !Game.IsInDungeon;
         }
 
@@ -234,7 +322,7 @@ namespace TCC.ViewModels
 
         public void EnqueueListRequest()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.InvokeAsync(() =>
             {
                 if (RequestQueue.Count > 0 && RequestQueue.Last() == 0) return;
                 RequestQueue.Enqueue(0);
@@ -254,7 +342,7 @@ namespace TCC.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                listings.ForEach(l => Dispatcher.InvokeAsync(() => { AddOrRefreshListing(l);}));
+                listings.ForEach(l => Dispatcher.InvokeAsync(() => { AddOrRefreshListing(l); }));
                 RemoveMissingListings();
             });
 
@@ -363,40 +451,48 @@ namespace TCC.ViewModels
         private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
         {
             //if (!App.Settings.LfgWindowSettings.Enabled) return;
-            var lfg = Listings.FirstOrDefault(listing => listing.LeaderId == m.Id || m.Members.Any(member => member.PlayerId == listing.LeaderId));
-            if (lfg == null) return;
-            Task.Factory.StartNew(() =>
+            try
             {
-
-            m.Members.ForEach(member =>
-            {
-                if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
+                var lfg = Listings.FirstOrDefault(listing => listing.LeaderId == m.Id || m.Members.Any(member => member.PlayerId == listing.LeaderId));
+                if (lfg == null) return;
+                Task.Factory.StartNew(() =>
                 {
-                    var target = lfg.Players.FirstOrDefault(player => player.PlayerId == member.PlayerId);
-                    if (target == null) return;
-                    target.IsLeader = member.IsLeader;
-                    target.Online = member.Online;
-                    target.Location = Game.DB.GetSectionName(member.GuardId, member.SectionId);
-                }
-                else
-                    lfg.Players.Add(new User(member));
-            });
 
-            var toDelete = new List<uint>();
-            lfg.Players.ToList()
-                .ForEach(player =>
-                {
-                    if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
-                    toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
+                    m.Members.ForEach(member =>
+                    {
+                        if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
+                        {
+                            var target = lfg.Players.FirstOrDefault(player => player.PlayerId == member.PlayerId);
+                            if (target == null) return;
+                            target.IsLeader = member.IsLeader;
+                            target.Online = member.Online;
+                            target.Location = Game.DB.GetSectionName(member.GuardId, member.SectionId);
+                        }
+                        else Dispatcher.InvokeAsync(() => { lfg.Players.Add(new User(member)); });
+                    });
+
+                    var toDelete = new List<uint>();
+                    lfg.Players.ToList()
+                        .ForEach(player =>
+                        {
+                            if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
+                            toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
+                        });
+
+                    lfg.LeaderId = m.Id;
+                    var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
+                    if (leader != null) lfg.LeaderName = leader.Name;
+                    if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
+                    lfg.PlayerCount = m.Members.Count;
+                    NotifyMyLfg();
                 });
 
-            lfg.LeaderId = m.Id;
-            var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
-            if (leader != null) lfg.LeaderName = leader.Name;
-            if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
-            lfg.PlayerCount = m.Members.Count;
-            NotifyMyLfg();
-            });
+            }
+            catch (Exception e)
+            {
+
+                Log.All(e.ToString());
+            }
         }
         private void OnLeaveParty(S_LEAVE_PARTY m)
         {

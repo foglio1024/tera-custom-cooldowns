@@ -1095,6 +1095,34 @@ namespace TCC.Settings
     {
         private bool _hideTradeListings;
         public event Action HideTradeListingsChangedEvent;
+        private int _minLevel;
+
+        public int MinLevel
+        {
+            get => _minLevel;
+            set
+            {
+                if (_minLevel == value) return;
+                if (value < 1) value = 1;
+                if (value > 70) value = 70;
+                _minLevel = value;
+                if (value > _maxLevel) MaxLevel = value;
+            }
+        }
+        private int _maxLevel;
+
+        public int MaxLevel
+        {
+            get => _maxLevel;
+            set
+            {
+                if (_maxLevel == value) return;
+                if (value < 1) value = 1;
+                if (value > 70) value = 70;
+                _maxLevel = value;
+                if (value < _minLevel) MinLevel = value;
+            }
+        }
 
         public bool HideTradeListings
         {
@@ -1111,6 +1139,8 @@ namespace TCC.Settings
         public LfgWindowSettings()
         {
             HideTradeListings = true;
+            MinLevel = 60;
+            MaxLevel = 70;
         }
     }
 }

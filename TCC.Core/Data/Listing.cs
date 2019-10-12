@@ -1,9 +1,11 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
-using FoglioUtils;
+using TCC.Controls;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TeraDataLite;
@@ -22,6 +24,9 @@ namespace TCC.Data
         private TSObservableCollection<User> _applicants;
         private bool _canApply = true;
         private bool _isMyLfg;
+
+        public ICommand ExpandCollapseCommand { get; }
+        public ICommand BrowseTwitchCommand { get; }
 
         public uint LeaderId
         {
@@ -99,7 +104,7 @@ namespace TCC.Data
             get => _isMyLfg;
             set
             {
-                if(_isMyLfg == value) return;
+                if (_isMyLfg == value) return;
                 _isMyLfg = value;
                 N();
             }
@@ -124,10 +129,11 @@ namespace TCC.Data
             set
             {
                 if (_applicants == value) return;
-                _applicants= value;
+                _applicants = value;
                 N();
             }
         }
+
         public int MaxCount => IsRaid ? 30 : 5;
         public ApplyCommand Apply { get; }
         public RefreshApplicantsCommand RefreshApplicants { get; }
@@ -151,12 +157,12 @@ namespace TCC.Data
                 var twLink = split.FirstOrDefault(x =>
                     x.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1);
                 var splitLink = twLink?.Split('/');
-                if (splitLink != null && splitLink.Length >= 2) username = splitLink[1]; 
+                if (splitLink != null && splitLink.Length >= 2) username = splitLink[1];
                 return $"https://www.twitch.tv/{username}";
             }
         }
 
-        public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) !=-1;
+        public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1;
 
         public void UpdateIsMyLfg()
         {
@@ -172,11 +178,44 @@ namespace TCC.Data
 
         public Listing()
         {
-            Dispatcher = App.BaseDispatcher; 
+            Dispatcher = App.BaseDispatcher;
             Players = new TSObservableCollection<User>(Dispatcher);
             Applicants = new TSObservableCollection<User>(Dispatcher);
             Apply = new ApplyCommand(this);
             RefreshApplicants = new RefreshApplicantsCommand(this);
+            ExpandCollapseCommand = new RelayCommand(force =>
+            {
+                if (force != null)
+                {
+                    if ((bool)force)
+                    {
+                        if (IsExpanded) return;
+                        //todo: expand
+                    }
+                    else
+                    {
+                        if (IsExpanded) IsExpanded = false;
+                    }
+                }
+                else
+                {
+                    if (IsExpanded)
+                    {
+                        IsExpanded = false;
+                    }
+                    else
+                    {
+                        WindowManager.ViewModels.LfgVM.LastClicked = this;
+                        ProxyInterface.Instance.Stub.RequestPartyInfo(LeaderId);
+                    }
+                }
+            });
+            BrowseTwitchCommand = new RelayCommand(_ =>
+            {
+                if (!IsTwitch) return;
+                Process.Start(TwitchLink);
+            });
+
         }
 
         public Listing(ListingData l) : this()

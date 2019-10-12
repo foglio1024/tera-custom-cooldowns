@@ -151,10 +151,22 @@ namespace TCC.Interop.Proxy
         }
         public async void RequestListings()
         {
+            var minLevel = App.Settings.LfgWindowSettings.MinLevel;
+            var maxLevel = App.Settings.LfgWindowSettings.MaxLevel;
+
+            if (minLevel < 1) minLevel = 60;
+            if (maxLevel < 1) maxLevel = 70;
+
+            if (minLevel > 70) minLevel = 60;
+            if (maxLevel > 70) maxLevel = 70;
+
+            if (minLevel > maxLevel) minLevel = maxLevel;
+            if (maxLevel < minLevel) maxLevel = minLevel;
+
             await TccStub.CallAsync("requestListings", new JObject
             {
-                { "minLevel", 60 },
-                { "maxLevel", 70 }
+                { "minLevel", minLevel },
+                { "maxLevel", maxLevel }
             });
         }
         public async void AskInteractive(uint serverId, [NotNull] string userName)
@@ -248,6 +260,6 @@ namespace TCC.Interop.Proxy
             await TccStub.CallAsync("resetInstance");
         }
 
-        
+
     }
 }

@@ -2,9 +2,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Threading;
-
+using TCC.Controls;
 using TCC.Data.Abnormalities;
+using TCC.Interop.Proxy;
 using TeraDataLite;
 
 namespace TCC.Data.Pc
@@ -365,7 +367,6 @@ namespace TCC.Data.Pc
         public TSObservableCollection<AbnormalityDuration> Debuffs { get; }
         public bool Awakened { get; set; }
         public bool InCombat { get; set; } //make npc when needed
-
         public bool Visible
         {
             get => _visible;
@@ -376,6 +377,11 @@ namespace TCC.Data.Pc
                 N();
             }
         }
+
+        public ICommand RequestInteractiveCommand { get; }
+        public ICommand AcceptApplyCommand { get; set; }
+        public ICommand DeclineApplyCommand { get; set; }
+        public ICommand InspectCommand { get; set; }
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
@@ -466,21 +472,36 @@ namespace TCC.Data.Pc
             });
         }
 
-        public User()
+        private User()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            AcceptApplyCommand = new RelayCommand(_ =>
+            {
+                ProxyInterface.Instance.Stub.GroupInviteUser(Name);
+            });
+            DeclineApplyCommand = new RelayCommand(_ =>
+            {
+                ProxyInterface.Instance.Stub.DeclineUserGroupApply(PlayerId);
+                ProxyInterface.Instance.Stub.RequestListingCandidates();
+            });
+            RequestInteractiveCommand = new RelayCommand(_ =>
+            {
+                ProxyInterface.Instance.Stub.AskInteractive(ServerId, Name);
+            });
+            InspectCommand = new RelayCommand(_ =>
+            {
+                ProxyInterface.Instance.Stub.InspectUser(Name);
+            });
+        }
+
+
+        public User(Dispatcher d) : this()
+        {
+            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
             Debuffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
             Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
-
-        }
-        public User(Dispatcher d)
-        {
-            Dispatcher = d;
-            Debuffs = new TSObservableCollection<AbnormalityDuration>(d);
-            Buffs = new TSObservableCollection<AbnormalityDuration>(d);
         }
 
-        public User(PartyMemberData applicant) : this()
+        public User(PartyMemberData applicant, Dispatcher d = null) : this(d)
         {
             PlayerId = applicant.PlayerId;
             UserClass = applicant.UserClass;

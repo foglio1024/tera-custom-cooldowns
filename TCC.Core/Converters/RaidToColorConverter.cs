@@ -9,7 +9,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((bool?) value ?? false) return R.Brushes.Tier5DungeonBrush;
-            return R.Brushes.Tier2DungeonBrush;
+            return R.Brushes.ChatMegaphoneBrush;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

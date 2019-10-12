@@ -1,6 +1,9 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,6 +11,7 @@ using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Annotations;
 using FoglioUtils.Extensions;
+using TCC.Data.Pc;
 using TCC.Utilities;
 using TCC.ViewModels;
 
@@ -531,7 +535,7 @@ namespace TCC.Data.Chat
         // -- Builders ----------------------------------------------------------------
         public static ChatMessage BuildEnchantSystemMessage(string systemMessage)
         {
-            var msg = new ChatMessage();
+            var msg = ChatWindowManager.Instance.Factory.CreateMessage();
             var mw = "";
             var e = "";
 
@@ -580,15 +584,60 @@ namespace TCC.Data.Chat
     public class LfgMessage : ChatMessage
     {
         private int _tries = 10;
-        private Listing _linkedListing;
 
+        private readonly TSObservableCollection<User> _members;
+        private Listing _linkedListing;
         public Listing LinkedListing
         {
             get => _linkedListing;
             set
             {
                 if (_linkedListing == value) return;
+                if (value == null)
+                {
+                    _members.Clear();
+                     if(_linkedListing != null) _linkedListing.Players.CollectionChanged -= OnMembersChanged;
+                }
+                else
+                {
+                    foreach (var p in value.Players)
+                    {
+                        _members.Add(p);
+                    }
+
+                    value.Players.CollectionChanged += OnMembersChanged;
+                }
                 _linkedListing = value;
+                N();
+            }
+        }
+
+        private void OnMembersChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var item in e.NewItems.Cast<User>())
+                    {
+                        _members.Add(item);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var item in e.OldItems.Cast<User>())
+                    {
+                        _members.Remove(item);
+                    }
+                    break;
+            }
+        }
+
+        public ICollectionView MembersView
+        {
+            get => _membersView;
+            private set
+            {
+                if (_membersView == value) return;
+                _membersView = value;
                 N();
             }
         }
@@ -597,9 +646,13 @@ namespace TCC.Data.Chat
 
         public uint AuthorId { get; }
         private DispatcherTimer _timer;
+        private ICollectionView _membersView;
+
         public LfgMessage(uint authorId, string author, string msg) : base(ChatChannel.LFG, author, msg)
         {
             AuthorId = authorId;
+            _members = new TSObservableCollection<User>();
+            MembersView = CollectionViewUtils.InitView(null, _members, new List<SortDescription>());
         }
 
         private void GetListing(object sender, EventArgs e)

@@ -109,6 +109,7 @@
     <Color x:Key="ChatGlobalColor">              #F0FF89   </Color>
     <Color x:Key="ChatRaidColor">                #FFCC00   </Color>
     <Color x:Key="ChatMegaphoneColor">           #00D8FF   </Color>
+    <Color x:Key="ChatMegaphoneColorDark">       #00B5D6   </Color>
     <Color x:Key="ChatGuildAdColor">             #70C401   </Color>
     <Color x:Key="ChatPrivateColor">             #D5FFC6   </Color>
     <Color x:Key="ChatProxyColor">               #C5B8FF   </Color>

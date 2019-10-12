@@ -45,7 +45,9 @@
                    Padding="0" 
                    TextAlignment="Left" 
                    Opacity=".9"/>
-        <TextBox Grid.Column="2" TextWrapping="Wrap" Width="Auto" CaretBrush="#9fff" TextAlignment="Left" Background="#1fff" Foreground="White" MaxLines="1"
+        <TextBox Grid.Column="2" TextWrapping="Wrap" Width="Auto" 
+                 CaretBrush="#9fff" TextAlignment="Left" Background="#1fff" Foreground="White" 
+                 MaxLines="1"
                  BorderThickness="0" LostFocus="TextBox_LostFocus" TextChanged="TextBox_TextChanged"  VerticalAlignment="Center"
                  Margin="7 4" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}" x:Name="TB"
                  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}">

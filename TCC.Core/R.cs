@@ -105,6 +105,8 @@ namespace TCC.R
 		public static Geometry SvgMoney => ((Geometry)App.Current.FindResource("SvgMoney"));
 		public static Geometry SvgDownArrow => ((Geometry)App.Current.FindResource("SvgDownArrow"));
 		public static Geometry SvgUpArrow => ((Geometry)App.Current.FindResource("SvgUpArrow"));
+		public static Geometry SvgExpandAll => ((Geometry)App.Current.FindResource("SvgExpandAll"));
+		public static Geometry SvgCollapseAll => ((Geometry)App.Current.FindResource("SvgCollapseAll"));
 		public static Geometry Svg => ((Geometry)App.Current.FindResource("Svg"));
 	}
 	public static class Colors
@@ -198,6 +200,7 @@ namespace TCC.R
 		public static Color ChatGlobalColor => ((Color)App.Current.FindResource("ChatGlobalColor"));
 		public static Color ChatRaidColor => ((Color)App.Current.FindResource("ChatRaidColor"));
 		public static Color ChatMegaphoneColor => ((Color)App.Current.FindResource("ChatMegaphoneColor"));
+		public static Color ChatMegaphoneColorDark => ((Color)App.Current.FindResource("ChatMegaphoneColorDark"));
 		public static Color ChatGuildAdColor => ((Color)App.Current.FindResource("ChatGuildAdColor"));
 		public static Color ChatPrivateColor => ((Color)App.Current.FindResource("ChatPrivateColor"));
 		public static Color ChatProxyColor => ((Color)App.Current.FindResource("ChatProxyColor"));
@@ -322,6 +325,7 @@ namespace TCC.R
 		public static SolidColorBrush ChatGlobalBrush => ((SolidColorBrush)App.Current.FindResource("ChatGlobalBrush"));
 		public static SolidColorBrush ChatRaidBrush => ((SolidColorBrush)App.Current.FindResource("ChatRaidBrush"));
 		public static SolidColorBrush ChatMegaphoneBrush => ((SolidColorBrush)App.Current.FindResource("ChatMegaphoneBrush"));
+		public static SolidColorBrush ChatMegaphoneBrushDark => ((SolidColorBrush)App.Current.FindResource("ChatMegaphoneBrushDark"));
 		public static SolidColorBrush ChatGuildAdBrush => ((SolidColorBrush)App.Current.FindResource("ChatGuildAdBrush"));
 		public static SolidColorBrush ChatPrivateBrush => ((SolidColorBrush)App.Current.FindResource("ChatPrivateBrush"));
 		public static SolidColorBrush ChatProxyBrush => ((SolidColorBrush)App.Current.FindResource("ChatProxyBrush"));

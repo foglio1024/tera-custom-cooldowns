@@ -1,45 +1,50 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using FoglioUtils;
+using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Windows
 {
     public partial class LfgListWindow
     {
+        private readonly ColorAnimation _colAn = AnimationFactory.CreateColorAnimation(200);
+        private readonly DoubleAnimation _expandAn = AnimationFactory.CreateDoubleAnimation(150, 1, easing: true);
+        private readonly DoubleAnimation _shrinkAn = AnimationFactory.CreateDoubleAnimation(150, 0, easing: true);
+        private readonly DoubleAnimation _publicizeCdAn = AnimationFactory.CreateDoubleAnimation(4000, 0, 1);
+        private readonly ThicknessAnimation _margin1An = AnimationFactory.CreateThicknessAnimation(150, new Thickness(4, 0, 4, 0), easing: true);
+        private readonly ThicknessAnimation _margin2An = AnimationFactory.CreateThicknessAnimation(150, new Thickness(4), easing: true);
         private LfgListViewModel VM { get; }
 
-        private readonly ColorAnimation _colAn = new ColorAnimation { Duration = TimeSpan.FromMilliseconds(200) };
-
+        public ICommand HideWindowCommand { get; }
 
         public LfgListWindow(LfgListViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
             VM = vm;
-            VM.PropertyChanged += VM_PropertyChanged;
             VM.Publicized += OnPublicized;
+            VM.MyLfgStateChanged += OnMyLfgStateChanged;
+            VM.CreatingStateChanged += OnCreatingStateChanged;
             WindowManager.ForegroundManager.VisibilityChanged += () =>
             {
-                if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
+                if (!WindowManager.ForegroundManager.Visible) return;
+                RefreshTopmost();
             };
             FocusManager.FocusTick += RefreshTopmost;
 
-            //Loaded += OnLoaded;
+            HideWindowCommand = new RelayCommand(_ => HideWindow());
         }
-
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             base.OnLoaded(sender, e);
@@ -47,69 +52,72 @@ namespace TCC.Windows
             FocusManager.MakeUnfocusable(Handle);
         }
 
+        private void OnCreatingStateChanged()
+        {
+            Dispatcher?.InvokeAsync(() =>
+            {
+                _colAn.To = VM.Creating
+                    ? string.IsNullOrEmpty(VM.NewMessage)
+                        ? R.Colors.HpColor
+                        : R.Colors.GreenColor
+                    : R.Colors.ChatMegaphoneColorDark;
+                var newBg = new SolidColorBrush(((SolidColorBrush) CreateMessageBtn.Background).Color);
+                CreateMessageBtn.Background = newBg;
+                CreateMessageBtn.Background.BeginAnimation(SolidColorBrush.ColorProperty, _colAn);
+                if (VM.Creating)
+                {
+                    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 1, easing: true));
+                    FocusManager.UndoUnfocusable(Handle);
+                    Activate();
+                    NewMessageTextBox.Focus();
+                }
+                else
+                {
+                    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
+                    FocusManager.MakeUnfocusable(Handle);
+
+                }
+                //if (!VM.Creating || (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))) FocusManager.UndoUnfocusable(Handle);
+                //if (VM.Creating)
+                //{
+                //    Activate();
+                //    NewMessageTextBox.Focus();
+                //}
+                //if (!VM.Creating)
+                //{
+                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 1, easing: true));
+                //}
+                //else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
+                //{
+                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
+                //}
+                //else
+                //{
+                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
+                //}
+
+            });
+        }
+
+        private void OnMyLfgStateChanged()
+        {
+            Dispatcher?.InvokeAsync(() =>
+            {
+                LfgMgmtBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _expandAn : _shrinkAn);
+                //LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, VM.AmIinLfg ? _expandAn : _shrinkAn);
+                CreateMessageBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _shrinkAn : _expandAn);
+                //CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, VM.AmIinLfg ? _shrinkAn : _expandAn);
+                //CreateMessageBtn.BeginAnimation(FrameworkElement.MarginProperty, VM.AmIinLfg ? _margin1An : _margin2An);
+            });
+        }
+
+
         private void OnPublicized(int cd)
         {
-            var an = AnimationFactory.CreateDoubleAnimation(cd * 1000, 1, 0);
-            PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
+            _publicizeCdAn.Duration = TimeSpan.FromMilliseconds(cd * 1000);
+            PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _publicizeCdAn);
         }
 
-        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(VM.Creating):
-                case nameof(VM.NewMessage):
-                    if (VM.Creating)
-                    {
-                        _colAn.To = string.IsNullOrEmpty(VM.NewMessage) ? R.Colors.HpColor : R.Colors.GreenColor;
-                    }
-                    else
-                    {
-                        _colAn.To = R.Colors.DefensiveStanceColor;
-                    }
-                    var currBg = (SolidColorBrush)CreateMessageBtn.Background;
-                    var currCol = currBg.Color;
-                    var newBg = new SolidColorBrush(currCol);
-                    CreateMessageBtn.Background = newBg;
-                    CreateMessageBtn.Background.BeginAnimation(SolidColorBrush.ColorProperty, _colAn);
-                    break;
-                case nameof(VM.AmIinLfg) when VM.AmIinLfg:
-                    LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                        new DoubleAnimation(1,
-                            TimeSpan.FromMilliseconds(150))
-                        { EasingFunction = new QuadraticEase() });
-                    CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                        new DoubleAnimation(0,
-                            TimeSpan.FromMilliseconds(150))
-                        { EasingFunction = new QuadraticEase() });
-                    CreateMessageBtn.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(4, 0, 4, 0), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                    break;
-                case nameof(VM.AmIinLfg):
-                    LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                    CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                    CreateMessageBtn.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(4), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                    break;
-            }
-        }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //CloseWindow();
-            HideWindow();
-        }
-        //public void CloseWindow()
-        //{
-        //    Dispatcher.InvokeIfRequired(() =>
-        //    {
-        //        var a = AnimationFactory.CreateDoubleAnimation(150,0,1, completed: (s, ev) =>
-        //        {
-        //            Hide();
-        //            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-        //        });
-        //        BeginAnimation(OpacityProperty, a);
-        //    }, DispatcherPriority.DataBind);
-        //}
 
         public override void ShowWindow()
         {
@@ -123,95 +131,20 @@ namespace TCC.Windows
             base.ShowWindow();
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnTbMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!((sender as FrameworkElement)?.DataContext is Listing l)) return;
-            if (l.IsExpanded)
-            {
-                l.IsExpanded = false;
-            }
-            else
-            {
-                var id = l.LeaderId;
-                VM.LastClicked = l;
-                ProxyInterface.Instance.Stub.RequestPartyInfo(id);
-            }
+
+            FocusManager.UndoUnfocusable(Handle);
         }
 
-        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if ((sender as FrameworkElement)?.DataContext is User dc)
-                ProxyInterface.Instance.Stub.AskInteractive(Game.Me.ServerId, dc.Name);
+            FocusManager.MakeUnfocusable(Handle);
         }
 
-        private void CreateMessageBtn_Click(object sender, RoutedEventArgs e)
+        private void OnBgMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!VM.Creating)
-            {
-                FocusManager.UndoUnfocusable(Handle);
-                Activate();
-                NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                NewMessageTextBox.Focus();
-                VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
-                VM.Creating = true;
-            }
-            else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
-            {
-                FocusManager.UndoUnfocusable(Handle);
-                NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                ProxyInterface.Instance.Stub.RegisterListing(VM.NewMessage, RaidSwitch.IsOn);
-                VM.Creating = false;
-                //VM.NewMessage = "";
-                VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
-                Task.Delay(200).ContinueWith(t =>
-                        ProxyInterface.Instance.Stub.RequestListings()
-                    );
-
-            }
-            else
-            {
-                NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                //VM.NewMessage = "";
-                VM.NewMessage = VM.MyLfg != null ? VM.MyLfg.Message : "";
-                VM.Creating = false;
-            }
+            Keyboard.ClearFocus();
         }
-
-        private void RemoveMessageButton_Click(object sender, RoutedEventArgs e)
-        {
-            VM.ForceStopPublicize();
-            ProxyInterface.Instance.Stub.RemoveListing();
-            ProxyInterface.Instance.Stub.RequestListings();
-        }
-
-        private void AcceptApply(object sender, RoutedEventArgs e)
-        {
-            if (((FrameworkElement)sender).DataContext is User user) ProxyInterface.Instance.Stub.GroupInviteUser(user.Name);
-        }
-
-        private void InspectApplicant(object sender, RoutedEventArgs e)
-        {
-            if (((FrameworkElement)sender).DataContext is User user) ProxyInterface.Instance.Stub.InspectUser(user.Name);
-        }
-
-        private void RefuseApplicant(object sender, RoutedEventArgs e)
-        {
-            if (((FrameworkElement)sender).DataContext is User user) ProxyInterface.Instance.Stub.DeclineUserGroupApply(user.PlayerId);
-            ProxyInterface.Instance.Stub.RequestListingCandidates();
-        }
-
-        private void ReloadLfgList(object sender, RoutedEventArgs e)
-        {
-            ProxyInterface.Instance.Stub.RequestListings();
-        }
-
-        private void OnLfgMessageMouseButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(((FrameworkElement)sender).DataContext is Listing listing)) return;
-            if (!listing.IsTwitch) return;
-            Process.Start(listing.TwitchLink);
-        }
-
-
     }
 }

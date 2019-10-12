@@ -52,7 +52,7 @@
             </Border.Style>
             <ItemsControl HorizontalAlignment="Left" 
                           Width="Auto" Margin="0" x:Name="Players"
-                          ItemsSource="{Binding LinkedListing.Players}">
+                          ItemsSource="{Binding MembersView}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="pc:User">
                         <Button Style="{StaticResource ButtonMainStyle}" ToolTip="{Binding Name}" VerticalAlignment="Center" Click="ButtonBase_OnClick">
