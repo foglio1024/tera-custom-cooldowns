@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using System.Globalization;
-using System.Reflection;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;

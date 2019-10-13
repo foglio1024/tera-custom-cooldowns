@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Dragablz;
@@ -136,14 +135,18 @@ namespace TCC.ViewModels.Widgets
             {
                 return () =>
                 {
-                    var t = new TabViewModel();
-                    var content = new Tab(new TabData("New tab"));
-                    content.PropertyChanged += (_, ev) =>
-                    {
-                        if (ev.PropertyName == nameof(TabData.TabName)) t.Header = content.TabData.TabName;
-                    };
-                    t.Content = content;
-                    return t;
+                    // invoked on main thread because TabData is created there by JSON settings deserialization
+                    //return App.BaseDispatcher.Invoke(() =>
+                    //{
+                        var t = new TabViewModel();
+                        var content = new Tab(new TabInfo("New tab"));
+                        content.PropertyChanged += (_, ev) =>
+                        {
+                            if (ev.PropertyName == nameof(TabInfoVM.TabName)) t.Header = content.TabInfoVM.TabName;
+                        };
+                        t.Content = content;
+                        return t;
+                    //});
                 };
             }
         }
@@ -187,6 +190,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void CheckAttention(ChatMessage chatMessage)
         {
+            if (!WindowSettings.ShowImportant) return;
             if (!chatMessage.ContainsPlayerName && chatMessage.Channel != ChatChannel.ReceivedWhisper) return;
             TabVMs.Where(x => ((Tab)x.Content).GetDispatcher()
                                 .Invoke(() => ((Tab)x.Content).Messages.Contains(chatMessage)))
@@ -233,7 +237,7 @@ namespace TCC.ViewModels.Widgets
         {
             _windowSettings.Tabs.Clear();
             //_windowSettings.Tabs.AddRange(Tabs);
-            Tabs.ForEach(t => _windowSettings.Tabs.Add(t.TabData));
+            Tabs.ForEach(t => _windowSettings.Tabs.Add(t.TabInfo));
             _windowSettings.X = left / WindowManager.ScreenSize.Width;
             _windowSettings.Y = top / WindowManager.ScreenSize.Height;
             var v = App.Settings.ChatWindowsSettings;
@@ -249,54 +253,55 @@ namespace TCC.ViewModels.Widgets
             _hideTimer.Stop();
             Visible = true;
         }
-        public void LoadTabs(IEnumerable<TabData> tabs = null)
+        public void LoadTabs(IEnumerable<TabInfo> tabs = null)
         {
             if (tabs != null)
             {
-                foreach (var tabData in tabs)
+                foreach (var tabInfo in tabs)
                 {
                     //chatTabsSetting.ApplyFilter();
-                    TabVMs.Add(new TabViewModel(tabData.TabName, new Tab(tabData)));
+                    if (tabInfo.Name == null) continue;
+                    TabVMs.Add(new TabViewModel(tabInfo.Name, new Tab(tabInfo)));
                 }
             }
             if (TabVMs.Count != 0) return;
-            var allTabData = new TabData("All");
-            allTabData.ExcludedAuthors.Add("System");
+            var allTabData = new TabInfo("All");
+            allTabData.HiddenAuthors.Add("System");
             var all = new Tab(allTabData);
 
-            var guildTabData = new TabData("Guild");
-            guildTabData.Channels.Add(ChatChannel.Guild);
-            guildTabData.Channels.Add(ChatChannel.GuildNotice);
+            var guildTabData = new TabInfo("Guild");
+            guildTabData.ShowedChannels.Add(ChatChannel.Guild);
+            guildTabData.ShowedChannels.Add(ChatChannel.GuildNotice);
             var guild = new Tab(guildTabData);
 
-            var groupTabData = new TabData("Group");
-            groupTabData.Channels.Add(ChatChannel.Party);
-            groupTabData.Channels.Add(ChatChannel.PartyNotice);
-            groupTabData.Channels.Add(ChatChannel.Raid);
-            groupTabData.Channels.Add(ChatChannel.RaidLeader);
-            groupTabData.Channels.Add(ChatChannel.Ress);
-            groupTabData.Channels.Add(ChatChannel.Death);
-            groupTabData.Channels.Add(ChatChannel.Group);
-            groupTabData.Channels.Add(ChatChannel.GroupAlerts);
+            var groupTabData = new TabInfo("Group");
+            groupTabData.ShowedChannels.Add(ChatChannel.Party);
+            groupTabData.ShowedChannels.Add(ChatChannel.PartyNotice);
+            groupTabData.ShowedChannels.Add(ChatChannel.Raid);
+            groupTabData.ShowedChannels.Add(ChatChannel.RaidLeader);
+            groupTabData.ShowedChannels.Add(ChatChannel.Ress);
+            groupTabData.ShowedChannels.Add(ChatChannel.Death);
+            groupTabData.ShowedChannels.Add(ChatChannel.Group);
+            groupTabData.ShowedChannels.Add(ChatChannel.GroupAlerts);
             var group = new Tab(groupTabData);
 
-            var whisperData = new TabData("Whisper");
-            whisperData.Channels.Add(ChatChannel.ReceivedWhisper);
-            whisperData.Channels.Add(ChatChannel.SentWhisper);
+            var whisperData = new TabInfo("Whisper");
+            whisperData.ShowedChannels.Add(ChatChannel.ReceivedWhisper);
+            whisperData.ShowedChannels.Add(ChatChannel.SentWhisper);
             var w = new Tab(whisperData);
 
-            var sysData = new TabData("System");
-            sysData.Authors.Add("System");
+            var sysData = new TabInfo("System");
+            sysData.ShowedAuthors.Add("System");
 
             var sys = new Tab(sysData);
 
-            TabVMs.Add(new TabViewModel(all.TabData.TabName, all));
-            TabVMs.Add(new TabViewModel(guild.TabData.TabName, guild));
-            TabVMs.Add(new TabViewModel(group.TabData.TabName, group));
-            TabVMs.Add(new TabViewModel(w.TabData.TabName, w));
-            TabVMs.Add(new TabViewModel(sys.TabData.TabName, sys));
+            TabVMs.Add(new TabViewModel(all.TabInfoVM.TabName, all));
+            TabVMs.Add(new TabViewModel(guild.TabInfoVM.TabName, guild));
+            TabVMs.Add(new TabViewModel(group.TabInfoVM.TabName, group));
+            TabVMs.Add(new TabViewModel(w.TabInfoVM.TabName, w));
+            TabVMs.Add(new TabViewModel(sys.TabInfoVM.TabName, sys));
             CurrentTab = TabVMs[0].Content as Tab;
-            Tabs.ForEach(t => WindowSettings.Tabs.Add(t.TabData));
+            Tabs.ForEach(t => WindowSettings.Tabs.Add(t.TabInfo));
         }
         public void RemoveTab(Tab dc)
         {

@@ -84,7 +84,7 @@ namespace TCC.Windows
             var view = (ICollectionView)ShowedMessagesView;
             view.Filter = o =>
             {
-                var msg = ((SystemMessageViewModel)o).SysMsg.Message;
+                var msg = ((SystemMessageViewModel)o).SysMsg.Template;
                 return msg.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             };
             view.Refresh();
@@ -95,7 +95,7 @@ namespace TCC.Windows
             var view = (ICollectionView)HiddenMessagesView;
             view.Filter = o =>
             {
-                var msg = ((SystemMessageViewModel)o).SysMsg.Message;
+                var msg = ((SystemMessageViewModel)o).SysMsg.Template;
                 return msg.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             };
             view.Refresh();

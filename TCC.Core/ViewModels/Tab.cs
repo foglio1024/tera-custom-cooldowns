@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using FoglioUtils;
+using GongSolutions.Wpf.DragDrop.Utilities;
 using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Data;
@@ -14,13 +18,31 @@ using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels
 {
-    public class TabData : TSPropertyChanged
+    public class TabInfo
+    {
+        public string Name { get; set; }
+        public List<string> ShowedAuthors { get; set; }
+        public List<string> HiddenAuthors { get; set; }
+        public List<ChatChannel> ShowedChannels { get; set; }
+        public List<ChatChannel> HiddenChannels { get; set; }
+
+        public TabInfo()
+        {
+            ShowedAuthors = new List<string>();
+            HiddenAuthors = new List<string>();
+            ShowedChannels = new List<ChatChannel>();
+            HiddenChannels = new List<ChatChannel>();
+            
+        }
+        public TabInfo(string name) : this()
+        {
+            Name = name;
+        }
+    }
+    public class TabInfoVM : TSPropertyChanged
     {
         private string _tabName;
-        private TSObservableCollection<string> _authors;
-        private TSObservableCollection<string> _excludedAuthors;
-        private TSObservableCollection<ChatChannel> _channels;
-        private TSObservableCollection<ChatChannel> _excludedChannels;
+
         public string TabName
         {
             get => _tabName;
@@ -31,83 +53,107 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public TSObservableCollection<string> Authors
-        {
-            get => _authors;
-            set
-            {
-                _authors = value;
-                //ApplyFilter();
-            }
-        }
+        public TSObservableCollection<string> Authors { get; set; }
 
-        public TSObservableCollection<string> ExcludedAuthors
-        {
-            get => _excludedAuthors;
-            set
-            {
-                _excludedAuthors = value;
-                //ApplyFilter();
-            }
-        }
+        public TSObservableCollection<string> ExcludedAuthors { get; set; }
 
-        public TSObservableCollection<ChatChannel> Channels
-        {
-            get => _channels;
-            set
-            {
-                _channels = value;
-                //ApplyFilter();
-            }
-        }
+        public TSObservableCollection<ChatChannel> ShowedChannels { get; set; }
 
-        public TSObservableCollection<ChatChannel> ExcludedChannels
-        {
-            get => _excludedChannels;
-            set
-            {
-                _excludedChannels = value;
-                //ApplyFilter();
-            }
-        }
+        public TSObservableCollection<ChatChannel> ExcludedChannels { get; set; }
 
-        public TabData()
+
+        public TabInfoVM()
         {
             Authors = new TSObservableCollection<string>(Dispatcher);
             ExcludedAuthors = new TSObservableCollection<string>(Dispatcher);
-            Channels = new TSObservableCollection<ChatChannel>(Dispatcher);
+            ShowedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
             ExcludedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
         }
 
-        public TabData(string tabName) : this()
+        public TabInfoVM(string tabName) : this()
         {
             TabName = tabName;
+        }
+        public TabInfoVM(TabInfo info) : this()
+        {
+            TabName = info.Name;
+            info.ShowedAuthors.ForEach(Authors.Add);
+            info.HiddenAuthors.ForEach(ExcludedAuthors.Add);
+            info.ShowedChannels.ForEach(ShowedChannels.Add);
+            info.HiddenChannels.ForEach(ExcludedChannels.Add);
+
+            Authors.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.ShowedAuthors.AddRange(ev.NewItems.Cast<string>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.ShowedAuthors.Remove(i));
+                        break;
+                }
+            };
+            ExcludedAuthors.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.HiddenAuthors.AddRange(ev.NewItems.Cast<string>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.HiddenAuthors.Remove(i));
+                        break;
+                }
+            };
+            ShowedChannels.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.ShowedChannels.AddRange(ev.NewItems.Cast<ChatChannel>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<ChatChannel>().ToList().ForEach(i => info.ShowedChannels.Remove(i));
+                        break;
+                }
+            };
+            ExcludedChannels.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.HiddenChannels.AddRange(ev.NewItems.Cast<ChatChannel>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<ChatChannel>().ToList().ForEach(i => info.HiddenChannels.Remove(i));
+                        break;
+                }
+            };
         }
     }
     public class Tab : TSPropertyChanged
     {
-        public TabData TabData { get; set; }
-        // needed for combobox in settings
-        [JsonIgnore]
-        public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList();
+        public TabInfo TabInfo { get; }
+        public TabInfoVM TabInfoVM { get; set; }
 
         private ICollectionView _messages;
         private ChatMessage _pinnedMessage;
+
+
+        [JsonIgnore]
+        public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList(); // needed for combobox in settings
         [JsonIgnore]
         public ICommand ScrollToMessageCommand { get; }
         [JsonIgnore]
         public ICommand RemoveImportantMessageCommand { get; }
         [JsonIgnore]
         public ICommand ClearAllCommand { get; }
-
-
         [JsonIgnore]
         public string ImportantMessagesLabel => ImportantMessages.Count > 9 ? "!" : ImportantMessages.Count.ToString();
 
         [JsonIgnore]
         public bool Attention => ImportantMessages.Count > 0;
-
-
 
         [JsonIgnore]
         public TSObservableCollection<ChatMessage> ImportantMessages { get; set; }
@@ -158,9 +204,10 @@ namespace TCC.ViewModels
 
         }
 
-        public Tab(TabData tabData) : this()
+        public Tab(TabInfo tabInfo) : this()
         {
-            TabData = tabData;
+            TabInfo = tabInfo;
+            TabInfoVM = new TabInfoVM(TabInfo);
             ApplyFilter();
         }
         //public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa) : this()
@@ -203,12 +250,12 @@ namespace TCC.ViewModels
 
         public bool Filter(ChatMessage m)
         {
-            if (TabData.Authors == null || TabData.Channels == null || TabData.ExcludedAuthors == null || TabData.ExcludedChannels == null)
+            if (TabInfoVM.Authors == null || TabInfoVM.ShowedChannels == null || TabInfoVM.ExcludedAuthors == null || TabInfoVM.ExcludedChannels == null)
                 return true;
-            return (TabData.Authors.Count == 0 || TabData.Authors.Any(x => x == m.Author)) &&
-                   (TabData.Channels.Count == 0 || TabData.Channels.Any(x => x == m.Channel)) &&
-                   (TabData.ExcludedChannels.Count == 0 || TabData.ExcludedChannels.All(x => x != m.Channel)) &&
-                   (TabData.ExcludedAuthors.Count == 0 || TabData.ExcludedAuthors.All(x => x != m.Author));
+            return (TabInfoVM.Authors.Count == 0 || TabInfoVM.Authors.Any(x => x == m.Author)) &&
+                   (TabInfoVM.ShowedChannels.Count == 0 || TabInfoVM.ShowedChannels.Any(x => x == m.Channel)) &&
+                   (TabInfoVM.ExcludedChannels.Count == 0 || TabInfoVM.ExcludedChannels.All(x => x != m.Channel)) &&
+                   (TabInfoVM.ExcludedAuthors.Count == 0 || TabInfoVM.ExcludedAuthors.All(x => x != m.Author));
 
         }
         public void ApplyFilter()
@@ -223,11 +270,14 @@ namespace TCC.ViewModels
             //else
             //{
             //}
-            Messages.Filter = f =>
+            Dispatcher.Invoke(() =>
             {
-                var m = f as ChatMessage;
-                return Filter(m);
-            };
+                Messages.Filter = f =>
+                {
+                    var m = f as ChatMessage;
+                    return Filter(m);
+                };
+            });
         }
 
         public void AddImportantMessage(ChatMessage chatMessage)

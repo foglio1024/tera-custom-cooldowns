@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
-                    <TextBlock Text="{Binding SysMsg.Message}"
+                    <TextBlock Text="{Binding SysMsg.Template}"
                                TextWrapping="Wrap"
                                TextTrimming="CharacterEllipsis"
                                VerticalAlignment="Center"
@@ -60,7 +60,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding SysMsg.Message}"
+                    <TextBlock Text="{Binding SysMsg.Template}"
                                TextTrimming="CharacterEllipsis"
                                VerticalAlignment="Center"
                                TextWrapping="Wrap"

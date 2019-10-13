@@ -55,26 +55,26 @@ namespace TCC.Settings
                 if (res == MessageBoxResult.Yes) WriteSettings(doc);
             }
         }
-        public static XElement BuildChatTabsXElement(List<TabData> tabList)
+        public static XElement BuildChatTabsXElement(List<TabInfo> tabList)
         {
             var result = new XElement("Tabs");
             foreach (var tab in tabList)
             {
-                var tabName = new XAttribute("name", tab.TabName);
+                var tabName = new XAttribute("name", tab.Name);
                 var tabElement = new XElement("Tab", tabName);
-                foreach (var ch in tab.Channels)
+                foreach (var ch in tab.ShowedChannels)
                 {
                     tabElement.Add(new XElement("Channel", new XAttribute("value", ch)));
                 }
-                foreach (var ch in tab.Authors)
+                foreach (var ch in tab.ShowedAuthors)
                 {
                     tabElement.Add(new XElement("Author", new XAttribute("value", ch)));
                 }
-                foreach (var ch in tab.ExcludedChannels)
+                foreach (var ch in tab.HiddenChannels)
                 {
                     tabElement.Add(new XElement("ExcludedChannel", new XAttribute("value", ch)));
                 }
-                foreach (var ch in tab.ExcludedAuthors)
+                foreach (var ch in tab.HiddenAuthors)
                 {
                     tabElement.Add(new XElement("ExcludedAuthor", new XAttribute("value", ch)));
                 }

@@ -13,7 +13,6 @@ using System.Windows.Threading;
 using FoglioUtils;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
-using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using FoglioUtils.Extensions;

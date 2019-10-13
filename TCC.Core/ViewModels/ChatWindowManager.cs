@@ -3,7 +3,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Data;
@@ -338,11 +337,11 @@ namespace TCC.ViewModels
             //}
             return false;
         }
-        public void AddSystemMessage(string template, SystemMessage sysMsg, string authorOverride = "System")
+        public void AddSystemMessage(string template, SystemMessageData sysMsg, string authorOverride = "System")
         {
             AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel, authorOverride));
         }
-        public void AddSystemMessage(string template, SystemMessage sysMsg, ChatChannel channelOverride, string authorOverride = "System")
+        public void AddSystemMessage(string template, SystemMessageData sysMsg, ChatChannel channelOverride, string authorOverride = "System")
         {
             AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride));
         }
@@ -360,7 +359,7 @@ namespace TCC.ViewModels
             {
                 if (Filtered(chatMessage)) return;
 
-                if (chatMessage is LfgMessage lm && !App.Settings.DisableLfgChatMessages) lm.LinkLfg();
+                if (chatMessage is LfgMessage lm && !App.Settings.DisableLfgChatMessages) lm.LinkListing();
 
                 chatMessage.SplitSimplePieces();
 

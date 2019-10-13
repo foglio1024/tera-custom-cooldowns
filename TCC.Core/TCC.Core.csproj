@@ -16,6 +16,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -112,6 +112,7 @@
     <Compile Include="Controls\Settings\HotkeySetting.xaml.cs">
       <DependentUpon>HotkeySetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Chat\LfgMessage.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="TccTrayIcon.cs" />
@@ -429,7 +430,7 @@
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
     <Compile Include="Data\Chat\MessagePieceBuilder.cs" />
-    <Compile Include="Data\Chat\SystemMessage.cs" />
+    <Compile Include="Data\Chat\SystemMessageData.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\Npc\EnragePattern.cs" />
     <Compile Include="Data\Pc\SimpleUser.cs" />

@@ -9,9 +9,6 @@ using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
 {
-    /// <summary>
-    /// Interaction logic for TabSettingControl.xaml
-    /// </summary>
     public partial class TabSettingControl
     {
         private Tab _dc;
@@ -28,14 +25,14 @@ namespace TCC.Controls.Chat
 
         private void RemoveAuthor(object sender, RoutedEventArgs e)
         {
-            _dc.TabData.Authors.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.TabInfoVM.Authors.Remove(((FrameworkElement)sender).DataContext as string);
             _dc.ApplyFilter();
-            
+
         }
 
         private void RemoveChannel(object sender, RoutedEventArgs e)
         {
-            _dc.TabData.Channels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc.TabInfoVM.ShowedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
             _dc.ApplyFilter();
 
         }
@@ -50,14 +47,14 @@ namespace TCC.Controls.Chat
 
         private void RemoveExAuthor(object sender, RoutedEventArgs e)
         {
-            _dc.TabData.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.TabInfoVM.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
             _dc.ApplyFilter();
 
         }
 
         private void RemoveExChannel(object sender, RoutedEventArgs e)
         {
-            _dc.TabData.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc.TabInfoVM.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
             _dc.ApplyFilter();
 
         }
@@ -70,9 +67,9 @@ namespace TCC.Controls.Chat
                 if (e.AddedItems[0] is ChatChannelOnOff i)
                 {
                     var ch = i.Channel;
-                    if (!_dc.TabData.Channels.Contains(ch))
+                    if (!_dc.TabInfoVM.ShowedChannels.Contains(ch))
                     {
-                        _dc.TabData.Channels.Add(ch);
+                        _dc.TabInfoVM.ShowedChannels.Add(ch);
                         _dc.ApplyFilter();
                     }
                 }
@@ -90,15 +87,15 @@ namespace TCC.Controls.Chat
             if (e.Key != Key.Enter) return;
             var s = sender as TextBox;
             if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New author...")) return;
-            if (_dc.TabData.Authors.Contains(s.Text)) return;
-            _dc.TabData.Authors.Add(s.Text);
+            if (_dc.TabInfoVM.Authors.Contains(s.Text)) return;
+            _dc.TabInfoVM.Authors.Add(s.Text);
             _dc.ApplyFilter();
 
         }
 
         private void NewAuthorTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            ((TextBox) sender).Text = "New author...";
+            ((TextBox)sender).Text = "New author...";
         }
 
         private void NewExChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -109,9 +106,9 @@ namespace TCC.Controls.Chat
                 if (e.AddedItems[0] is ChatChannelOnOff i)
                 {
                     var ch = i.Channel;
-                    if (!_dc.TabData.ExcludedChannels.Contains(ch))
+                    if (!_dc.TabInfoVM.ExcludedChannels.Contains(ch))
                     {
-                        _dc.TabData.ExcludedChannels.Add(ch);
+                        _dc.TabInfoVM.ExcludedChannels.Add(ch);
                         _dc.ApplyFilter();
                     }
                 }
@@ -128,15 +125,15 @@ namespace TCC.Controls.Chat
         {
             if (e.Key != Key.Enter) return;
             if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author...")) return;
-            if (_dc.TabData.ExcludedAuthors.Contains(s.Text)) return;
-            _dc.TabData.ExcludedAuthors.Add(s.Text);
+            if (_dc.TabInfoVM.ExcludedAuthors.Contains(s.Text)) return;
+            _dc.TabInfoVM.ExcludedAuthors.Add(s.Text);
             _dc.ApplyFilter();
         }
 
         private void NewExAuthorTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((sender as TextBox)?.Text != "New author...") return;
-            ((TextBox) sender).Text = "";
+            ((TextBox)sender).Text = "";
         }
 
         private void DeleteTab(object sender, RoutedEventArgs e)

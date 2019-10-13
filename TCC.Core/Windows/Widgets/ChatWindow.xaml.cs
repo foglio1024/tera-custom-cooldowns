@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data.Chat;
@@ -49,7 +48,7 @@ namespace TCC.Windows.Widgets
 
         public void UpdateSettings()
         {
-            VM.UpdateSettings(Left, Top);
+            Dispatcher?.InvokeAsync(() => { VM.UpdateSettings(Left, Top); });
         }
 
         private void TabLoaded(object sender, RoutedEventArgs e)
@@ -64,9 +63,14 @@ namespace TCC.Windows.Widgets
         {
             if (!(sender is FrameworkElement s)) return;
             if (!(s.DataContext is HeaderedItemViewModel dc)) return;
-            var sw = new ChatSettingsWindow((Tab)dc.Content);
-            sw.Show();
-            sw.Activate();
+
+            // invoked on main thread because TabData is created there by JSON settings deserialization
+            //App.BaseDispatcher.Invoke(() =>
+            //{
+                var sw = new ChatSettingsWindow((Tab) dc.Content);
+                sw.Show();
+                sw.Activate();
+            //});
         }
         private void OnIsDraggingChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {

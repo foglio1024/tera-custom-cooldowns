@@ -19,7 +19,17 @@ namespace TCC.Settings
             try
             {
                 if (File.Exists(path))
-                    App.Settings = JsonConvert.DeserializeObject<SettingsContainer>(File.ReadAllText(path));
+                {
+                    var file = File.ReadAllText(path);
+                    #region Compatibility
+                    file = file.Replace("\"TabName\"", "\"Name\"")
+                               .Replace("\"ExcludedAuthors\"", "\"HiddenAuthors\"")
+                               .Replace("\"ExcludedChannels\"", "\"HiddenChannels\"")
+                               .Replace("\"Channels\"", "\"ShowedChannels\"")
+                               .Replace("\"Authors\"", "\"ShowedAuthors\"");
+                    #endregion
+                    App.Settings = JsonConvert.DeserializeObject<SettingsContainer>(file);
+                }
                 else
                 {
                     var res = TccMessageBox.Show("Settings file not found. Do you want to import an existing one?", MessageBoxType.ConfirmationWithYesNo);

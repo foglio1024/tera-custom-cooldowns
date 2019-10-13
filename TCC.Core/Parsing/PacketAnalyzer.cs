@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Interop;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Interop.Proxy;

@@ -362,7 +362,8 @@
                 </Grid.Style>
             </Grid>
         </dockablz:Layout>
-        <widgets:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
+        <widgets:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True"
+                          HorizontalOffset="20"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True" DataContext="{Binding}"
                PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
             <Grid>
@@ -382,6 +383,8 @@
                                            Min="3" Max="60" Visibility="Visible"/>
                     <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <settings:CheckboxSetting SettingName="Allow offscreen" Foreground="#9fff" IsOn="{Binding WindowSettings.AllowOffScreen, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
+                    <settings:CheckboxSetting SettingName="Show important" Foreground="#9fff" 
+                                              IsOn="{Binding WindowSettings.ShowImportant, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <settings:CheckboxSetting SettingName="Can collapse" Foreground="#9fff" IsOn="{Binding WindowSettings.CanCollapse, Mode=TwoWay}" CheckBoxColor="{StaticResource DefensiveStanceBrush}"  />
                     <settings:CheckboxSetting SettingName="Stays collapsed" Foreground="#9fff" 
                                               IsOn="{Binding WindowSettings.StaysCollapsed, Mode=TwoWay}" 

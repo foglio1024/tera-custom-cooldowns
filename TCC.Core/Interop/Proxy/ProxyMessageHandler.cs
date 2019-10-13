@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using TCC.Data;
-using TCC.Data.Chat;
 using TCC.Interop.JsonRPC;
 using TCC.Parsing;
 using FoglioUtils.Extensions;

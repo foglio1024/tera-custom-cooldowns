@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Threading;
 using TCC.Data.Pc;
 using TCC.Parsing;

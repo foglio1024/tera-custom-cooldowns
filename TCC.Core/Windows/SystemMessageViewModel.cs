@@ -4,10 +4,10 @@ namespace TCC.Windows
 {
     public class SystemMessageViewModel
     {
-        public SystemMessage SysMsg { get; }
+        public SystemMessageData SysMsg { get; }
         public string Opcode { get; }
 
-        public SystemMessageViewModel(string opc, SystemMessage msg)
+        public SystemMessageViewModel(string opc, SystemMessageData msg)
         {
             Opcode = opc;
             SysMsg = msg;

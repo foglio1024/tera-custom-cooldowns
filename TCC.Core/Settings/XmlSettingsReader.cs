@@ -27,9 +27,9 @@ namespace TCC.Settings
             App.Settings = new SettingsContainer();
         }
 
-        private List<TabData> ParseTabsSettings(XElement elem)
+        private List<TabInfo> ParseTabsSettings(XElement elem)
         {
-            var result = new List<TabData>();
+            var result = new List<TabInfo>();
             if (elem == null) return result;
             foreach (var t in elem.Descendants().Where(x => x.Name == "Tab"))
             {
@@ -67,11 +67,11 @@ namespace TCC.Settings
                     if (value != null) exAuthors.Add(value.Value);
                 }
 
-                var tabData = new TabData(tabName);
-                channels.ForEach(tabData.Channels.Add);
-                exChannels.ForEach(tabData.ExcludedChannels.Add);
-                authors.ForEach(tabData.Authors.Add);
-                exAuthors.ForEach(tabData.ExcludedAuthors.Add);
+                var tabData = new TabInfo(tabName);
+                channels.ForEach(tabData.ShowedChannels.Add);
+                exChannels.ForEach(tabData.HiddenChannels.Add);
+                authors.ForEach(tabData.ShowedAuthors.Add);
+                exAuthors.ForEach(tabData.HiddenAuthors.Add);
 
                 //result.Add(new Tab(tabName, channels.ToArray(), exChannels.ToArray(), authors.ToArray(), exAuthors.ToArray()));
                 result.Add(tabData);

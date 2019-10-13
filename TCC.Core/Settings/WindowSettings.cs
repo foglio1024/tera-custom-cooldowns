@@ -335,6 +335,7 @@ namespace TCC.Settings
         private int _hideTimeout;
         private bool _canCollapse = true;
         private bool _staysCollapsed;
+        private bool _showImportant = true;
 
         public event Action FadeoutChanged;
         public event Action OpacityChanged;
@@ -420,25 +421,34 @@ namespace TCC.Settings
                 StaysCollapsedChanged?.Invoke();
             }
         }
+        public bool ShowImportant
+        {
+            get => _showImportant;
+            set
+            {
+                if(_showImportant == value) return;
+                _showImportant = value;
+                N();
+            }
+        }
 
-        public List<TabData> Tabs { get; set; }
-
+        public List<TabInfo> Tabs { get; set; }
 
         public ChatWindowSettings()
         {
-            Tabs = new List<TabData>();
+            Tabs = new List<TabInfo>();
             PerClassPosition = false;
             IgnoreSize = false;
         }
         public ChatWindowSettings(WindowSettings other) : base(other)
         {
-            Tabs = new List<TabData>();
+            Tabs = new List<TabInfo>();
             PerClassPosition = false;
 
         }
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, enabled, allowOffscreen)
         {
-            Tabs = new List<TabData>();
+            Tabs = new List<TabInfo>();
             PerClassPosition = false;
 
         }

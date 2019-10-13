@@ -7,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using TCC.Interop.Proxy;
-using TCC.ViewModels;
 
 namespace TCC.Controls.Chat
 {

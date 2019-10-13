@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
 
@@ -25,9 +20,9 @@ namespace TCC.ViewModels
         {
             return _dispatcher.InvokeAsync(() => new ChatMessage(ch, author, msg)).Result;
         }
-        public ChatMessage CreateSystemMessage(string template, SystemMessage msg, ChatChannel ch, string authorOverride = "System")
+        public ChatMessage CreateSystemMessage(string template, SystemMessageData msg, ChatChannel ch, string authorOverride = "System")
         {
-            return _dispatcher.InvokeAsync(() => new ChatMessage(template, msg, ch){Author = authorOverride}).Result;
+            return _dispatcher.InvokeAsync(() => new SystemMessage(template, msg, ch) { Author = authorOverride }).Result;
         }
         public ChatMessage CreateLfgMessage(uint authorId, string author, string msg)
         {

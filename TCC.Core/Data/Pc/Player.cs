@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Data.Abnormalities;
-using TCC.Data.Chat;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraDataLite;
