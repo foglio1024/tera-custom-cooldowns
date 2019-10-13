@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
@@ -24,10 +25,11 @@ namespace TCC.Windows.Widgets
             FocusManager.ForegroundChanged += OnForegroundChanged;
         }
 
+
         protected override void OnOpened(EventArgs e)
         {
-            base.OnOpened(e);
             FocusManager.PauseTopmost = true;
+            base.OnOpened(e);
         }
 
         protected override void OnClosed(EventArgs e)

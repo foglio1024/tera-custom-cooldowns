@@ -511,7 +511,7 @@ namespace TCC.Data.Pc
             IsLeader = applicant.IsLeader;
             Online = applicant.Online;
             Name = applicant.Name;
-            ServerId = applicant.ServerId;
+            ServerId = applicant.ServerId == 0 ? Game.Me.ServerId : applicant.ServerId;
             EntityId = applicant.EntityId;
             CanInvite = applicant.CanInvite;
             Laurel = applicant.Laurel;

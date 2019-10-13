@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Interop.Proxy;
@@ -219,6 +218,18 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
             PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
             PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
+            PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
+        }
+
+        private static void OnChat(S_CHAT m)
+        {
+            if (m.AuthorName != Me.Name) return;
+            if ((ChatChannel) m.Channel != ChatChannel.Global) return;
+
+            if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                  m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                  m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
         }
 
         private static void OnDisconnected()

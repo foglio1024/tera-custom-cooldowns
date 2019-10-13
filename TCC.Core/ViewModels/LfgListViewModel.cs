@@ -457,7 +457,6 @@ namespace TCC.ViewModels
                 if (lfg == null) return;
                 Task.Factory.StartNew(() =>
                 {
-
                     m.Members.ForEach(member =>
                     {
                         if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
@@ -473,11 +472,11 @@ namespace TCC.ViewModels
 
                     var toDelete = new List<uint>();
                     lfg.Players.ToList()
-                        .ForEach(player =>
-                        {
-                            if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
-                            toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
-                        });
+                    .ForEach(player =>
+                    {
+                        if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
+                        toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
+                    });
 
                     lfg.LeaderId = m.Id;
                     var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
@@ -490,7 +489,6 @@ namespace TCC.ViewModels
             }
             catch (Exception e)
             {
-
                 Log.All(e.ToString());
             }
         }
@@ -523,7 +521,8 @@ namespace TCC.ViewModels
                 UserClass = m.Class,
                 Level = Convert.ToUInt32(m.Level),
                 Name = m.Name,
-                Online = true
+                Online = true,
+                ServerId = Game.Me.ServerId
             });
         }
         private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)

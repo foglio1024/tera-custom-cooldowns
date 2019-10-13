@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -213,8 +214,14 @@ namespace TCC.Windows.Widgets
                 RefreshTopmost();
                 if (PlayerInfo.IsOpen) ClosePlayerMenu();
                 TooltipInfo.Refresh();
-                PlayerInfo.IsOpen = true;
-                ((PlayerTooltip)PlayerInfo.Child).AnimateOpening();
+                Task.Delay(100).ContinueWith(t =>
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        PlayerInfo.IsOpen = true;
+                        ((PlayerTooltip) PlayerInfo.Child).AnimateOpening();
+                    });
+                });
 
             });
         }

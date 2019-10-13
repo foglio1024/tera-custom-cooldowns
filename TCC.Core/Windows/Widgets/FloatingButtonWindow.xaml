@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
         xmlns:windows="clr-namespace:TCC.Windows"
+        xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
         mc:Ignorable="d" 
         Loaded="FloatinButtonLoaded"
         Title="TCC Floating button"
@@ -97,12 +98,12 @@
                 <TranslateTransform />
             </Grid.RenderTransform>
         </Grid>
-        <Popup Grid.Row="0" Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
+        <widgets:TccPopup Grid.Row="0" x:Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
                AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
                VerticalAlignment="Center"
                VerticalOffset="0">
             <chatControls:PlayerTooltip />
-        </Popup>
+        </widgets:TccPopup>
         <Grid.RenderTransform>
             <TranslateTransform X="-32"></TranslateTransform>
         </Grid.RenderTransform>
