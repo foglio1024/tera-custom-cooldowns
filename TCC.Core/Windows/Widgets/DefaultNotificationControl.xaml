@@ -53,6 +53,7 @@
                 </Rectangle.Effect>
             </Rectangle>
             <Rectangle Grid.Column="1" />
+            <Rectangle Grid.Column="1" VerticalAlignment="Stretch" Opacity=".2" Margin="0" Height="Auto"></Rectangle>
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center" TextWrapping="Wrap"
                        HorizontalAlignment="Center" Margin="4 2">
