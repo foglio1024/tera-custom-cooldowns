@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using TeraDataLite;
@@ -13,7 +12,6 @@ namespace TeraPacketParser.Messages
         public S_GET_USER_LIST(TeraMessageReader reader) : base(reader)
         {
             CharacterList = new List<CharacterData>();
-            reader.BaseStream.Position = 0;
             var count = reader.ReadInt16();
             var next = reader.ReadInt16();
 
@@ -21,7 +19,7 @@ namespace TeraPacketParser.Messages
             for (var i = 0; i < count; i++)
             {
                 var c = new CharacterData();
-                reader.BaseStream.Position = next - 4;
+                reader.RepositionAt(next);
 
                 reader.Skip(2);
                 next = reader.ReadInt16();
@@ -52,11 +50,11 @@ namespace TeraPacketParser.Messages
                 c.Position = reader.ReadInt32();
                 c.GuildId = reader.ReadUInt32();
 
-                reader.BaseStream.Position = nameOffset - 4;
+                reader.RepositionAt(nameOffset);
                 c.Name = reader.ReadTeraString();
                 try
                 {
-                    reader.BaseStream.Position = guildOffset - 4;
+                    reader.RepositionAt(guildOffset);
                     c.GuildName = reader.ReadTeraString();
                 }
                 catch { }
