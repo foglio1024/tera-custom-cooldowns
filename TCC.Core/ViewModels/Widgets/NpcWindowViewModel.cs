@@ -37,7 +37,7 @@ namespace TCC.ViewModels.Widgets
         public event Action NpcListChanged;
 
         public int VisibleBossesCount => _npcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0);
-        public int VisibleMobsCount => _npcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0 && !x.IsBoss);
+        public int VisibleMobsCount => _npcList.ToSyncList().Count(x => x.Visible/* && x.CurrentHP > 0 */&& !x.IsBoss);
         public bool IsCompact => VisibleMobsCount > 6;
 
         public ICollectionViewLiveShaping Bams
@@ -78,13 +78,13 @@ namespace TCC.ViewModels.Widgets
         }
         public Dictionary<ulong, uint> GuildIds { get; } = new Dictionary<ulong, uint>();
 
-        public NpcWindowViewModel(WindowSettings settings) : base(settings)
+        public NpcWindowViewModel(NpcWindowSettings settings) : base(settings)
         {
             _npcList = new TSObservableCollection<NPC>(Dispatcher);
             InitFlushTimer();
             NpcListChanged += FlushCache;
-            ((NpcWindowSettings)settings).AccurateHpChanged += OnAccurateHpChanged;
-            ((NpcWindowSettings)settings).HideAddsChanged += OnHideAddsChanged;
+            settings.AccurateHpChanged += OnAccurateHpChanged;
+            settings.HideAddsChanged += OnHideAddsChanged;
             MonsterDatabase.OverrideChangedEvent += RefreshOverride;
             void InitFlushTimer()
             {
@@ -121,18 +121,8 @@ namespace TCC.ViewModels.Widgets
                 npc.Buffs.Clear();
                 if (delay != 0)
                 {
-#if false
-                    var dt = new DispatcherTimer(DispatcherPriority.Background, Dispatcher) { Interval = TimeSpan.FromMilliseconds(delay) };
-                    dt.Tick += (s, ev) =>
-                    {
-                        dt.Stop();
-                        RemoveAndDisposeNPC(npc);
-                    };
-                    dt.Start();
-#else
                     Task.Delay(TimeSpan.FromMilliseconds(delay))
                         .ContinueWith(t => Dispatcher.Invoke(() => RemoveAndDisposeNPC(npc)));
-#endif
                 }
                 else
                 {

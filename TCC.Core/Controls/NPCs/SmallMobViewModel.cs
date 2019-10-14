@@ -6,7 +6,7 @@ namespace TCC.Controls.NPCs
     public class SmallMobViewModel : NpcViewModel
     {
 
-        public bool Compact => WindowManager.ViewModels.NpcVM.IsCompact;
+        public bool Compact => WindowManager.ViewModels.NpcVM.IsCompact || NPC.CurrentHP == 0;
 
 
         public SmallMobViewModel(NPC npc) : base(npc)
