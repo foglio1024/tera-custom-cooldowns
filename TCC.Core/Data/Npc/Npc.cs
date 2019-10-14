@@ -383,6 +383,8 @@ namespace TCC.Data.NPCs
             if (TemplateId == 8000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
             if (TemplateId == 9000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
             if (TemplateId == 10000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            // nightmare gossamer regent
+            if (TemplateId == 2000 && ZoneId == 3201) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 0.75f);
 
             TimerPattern?.SetTarget(this);
         }
