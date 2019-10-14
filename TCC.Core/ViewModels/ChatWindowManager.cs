@@ -254,7 +254,10 @@ namespace TCC.ViewModels
                 var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false) { HideTimeout = 10, FadeOut = true, LfgOn = false };
                 var m = new ChatViewModel(ws);
                 var w = new ChatWindow(ws, m);
-                App.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                App.BaseDispatcher.InvokeAsync(() =>
+                {
+                    App.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                });
                 ChatWindows.Add(w);
                 m.LoadTabs();
                 if (App.Settings.ChatEnabled) w.Show();
