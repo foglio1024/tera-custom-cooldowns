@@ -143,7 +143,7 @@ namespace TCC
         private static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
             if (_disposed) return;
-            FocusTick?.Invoke();
+            if(!PauseTopmost) FocusTick?.Invoke();
             if (IsForeground == IsActive) return;
             IsForeground = IsActive;
             ForegroundChanged?.Invoke();

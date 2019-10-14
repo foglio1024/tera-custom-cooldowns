@@ -131,7 +131,7 @@ namespace TCC.Test
         public static void UpdateNPC(ulong target, long currentHP, long maxHP, ulong source)
         {
             WindowManager.ViewModels.NpcVM.AddOrUpdateNpc(target, maxHP, currentHP, false, Game.IsMe(source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
-            EntityManager.SetEncounter(currentHP, maxHP);
+            Game.SetEncounter(currentHP, maxHP);
         }
         public static void AddFakeCuGuilds()
         {
@@ -428,19 +428,17 @@ namespace TCC.Test
 
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
         {
-            if (TccUtils.IsWorldBoss(zoneId, templateId))
-            {
-                Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var monst);
-                if (monst.IsBoss)
-                {
-                    var msg = ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
-                    ChatWindowManager.Instance.AddChatMessage(msg);
-                }
-            }
-            if (!EntityManager.Pass(zoneId, templateId)) return;
-
             if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
+                if (TccUtils.IsWorldBoss(zoneId, templateId))
+                {
+                    if (m.IsBoss)
+                    {
+                        var msg = ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{m.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
+                        ChatWindowManager.Instance.AddChatMessage(msg);
+                    }
+                }
+
                 Game.NearbyNPC[entityId] = m.Name;
                 FlyingGuardianDataProvider.InvokeProgressChanged();
                 if (villager) return;
@@ -455,6 +453,5 @@ namespace TCC.Test
                 }
             }
         }
-
     }
 }

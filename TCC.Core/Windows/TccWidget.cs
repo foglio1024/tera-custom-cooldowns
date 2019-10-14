@@ -149,6 +149,7 @@ namespace TCC.Windows
 
         private void OnFocusTick()
         {
+            if (FocusManager.PauseTopmost) return;
             if (WindowSettings.ShowAlways) RefreshTopmost();
             if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
         }
@@ -276,9 +277,9 @@ namespace TCC.Windows
         }
         private void RefreshTopmost()
         {
-            if (FocusManager.PauseTopmost) return;
             Dispatcher?.InvokeAsync(() =>
             {
+            if (FocusManager.PauseTopmost) return;
                 Topmost = false; Topmost = true;
             }, DispatcherPriority.DataBind);
         }
