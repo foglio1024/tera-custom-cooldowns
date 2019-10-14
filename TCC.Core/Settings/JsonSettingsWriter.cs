@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Windows;
 using Newtonsoft.Json;
+using TCC.Windows;
 
 namespace TCC.Settings
 {
@@ -15,7 +18,15 @@ namespace TCC.Settings
             var savePath = SettingsContainer.SettingsOverride == ""
                 ? Path.Combine(App.BasePath, FileName)
                 : SettingsContainer.SettingsOverride;
-            File.WriteAllText(savePath, json);
+            try
+            {
+                File.WriteAllText(savePath, json);
+            }
+            catch (IOException ex)
+            {
+                var res = TccMessageBox.Show("TCC", $"Failed to save settings: {ex.Message}\nTry again?", MessageBoxButton.YesNo);
+                if(res == MessageBoxResult.Yes) Save();
+            }
         }
     }
 }
