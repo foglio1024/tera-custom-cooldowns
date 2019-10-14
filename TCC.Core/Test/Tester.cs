@@ -34,7 +34,7 @@ namespace TCC.Test
         {
             var packet =
                 "";
-            ParsePacketFromHexString<S_LOGIN>(packet, 351828);
+            ParsePacketFromHexString<S_GET_USER_LIST>(packet, 351828);
         }
         public static void ShowDebugWindow()
         {
@@ -144,12 +144,13 @@ namespace TCC.Test
             }
         }
 
-        internal static void AddFakeSystemMessage(string v, params string[] p)
+        internal static void AddFakeSystemMessage(string opcodeNname, params string[] p)
         {
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(v, out var sysmsg);
+            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeNname, out var sysmsg);
             var srvMsg = $"@0";
             p.ToList().ForEach(par => srvMsg += $"\v{par}");
-            ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
+            SystemMessagesProcessor.AnalyzeMessage(srvMsg,sysmsg,opcodeNname);
+            //ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
         }
 
         public static void AddFakeLfgAndShowWindow()

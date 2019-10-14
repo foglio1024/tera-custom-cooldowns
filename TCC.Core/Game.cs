@@ -631,8 +631,7 @@ namespace TCC
         public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
-
-            await InitDatabasesAsync(String.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
+            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
             KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
         }
 

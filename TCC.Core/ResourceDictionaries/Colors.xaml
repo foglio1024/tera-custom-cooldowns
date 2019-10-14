@@ -30,7 +30,7 @@
     <Color x:Key="HpColor">                      #FF3333   </Color>
     <Color x:Key="HpColorLight">                 #FAA089   </Color>
                                                            
-    <Color x:Key="MpColor">                      #3387FF   </Color>
+    <Color x:Key="MpColor">                      #054AAD   </Color>
     <Color x:Key="MpColorLight">                 #0AB8F6   </Color>
                                                            
     <Color x:Key="HpDebuffColor">                #9C04BD   </Color>
