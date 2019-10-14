@@ -441,10 +441,7 @@
             BorderThickness="1" BorderBrush="{StaticResource RevampBorderBrush}"
             Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".7">
         </Border>
-        <Grid HorizontalAlignment="Stretch" Margin="6"
-                    MouseLeftButtonDown="OnBgMouseLeftButtonDown"
-
-        >
+        <Grid HorizontalAlignment="Stretch" Margin="6" MouseLeftButtonDown="OnBgMouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="38" />
                 <RowDefinition Height="Auto" />
@@ -526,6 +523,7 @@
                      Padding="-1 -1 -1 -1"
                      ScrollViewer.CanContentScroll="False"
                      Height="600"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                      ItemContainerStyle="{StaticResource DefaultListItemStyle}"
                      BorderThickness="0"
                      Grid.Row="2"
