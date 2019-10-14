@@ -350,9 +350,9 @@ namespace TCC.ViewModels
 
             void AddOrRefreshListing(ListingData l)
             {
-                if (Listings.Any(toFind => toFind.LeaderId == l.LeaderId))
+                if (Listings.ToSyncList().Any(toFind => toFind.LeaderId == l.LeaderId))
                 {
-                    var target = Listings.FirstOrDefault(t => t.LeaderId == l.LeaderId);
+                    var target = Listings.ToSyncList().FirstOrDefault(t => t.LeaderId == l.LeaderId);
                     if (target == null) return;
                     target.LeaderId = l.LeaderId;
                     target.Message = l.Message;
@@ -453,29 +453,42 @@ namespace TCC.ViewModels
             //if (!App.Settings.LfgWindowSettings.Enabled) return;
             try
             {
-                var lfg = Listings.FirstOrDefault(listing => listing.LeaderId == m.Id || m.Members.Any(member => member.PlayerId == listing.LeaderId));
+                var lfg = Listings.ToSyncList().FirstOrDefault(listing => listing.LeaderId == m.Id
+                                                                          || m.Members.Any(member => member.PlayerId == listing.LeaderId));
                 if (lfg == null) return;
                 Task.Factory.StartNew(() =>
                 {
                     m.Members.ForEach(member =>
                     {
-                        if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
+                        if (lfg.Players.ToSyncList().Any(toFind => toFind.PlayerId == member.PlayerId))
                         {
-                            var target = lfg.Players.FirstOrDefault(player => player.PlayerId == member.PlayerId);
+                            var target = lfg.Players.ToSyncList().FirstOrDefault(player => player.PlayerId == member.PlayerId);
                             if (target == null) return;
                             target.IsLeader = member.IsLeader;
                             target.Online = member.Online;
                             target.Location = Game.DB.GetSectionName(member.GuardId, member.SectionId);
+                            if (!member.IsLeader) return;
+                            lfg.LeaderId = member.PlayerId;
+                            lfg.LeaderName = member.Name;
                         }
-                        else Dispatcher.InvokeAsync(() => { lfg.Players.Add(new User(member)); });
+                        else Dispatcher.InvokeAsync(() =>
+                        {
+                            lfg.Players.Add(new User(member));
+                            if (!member.IsLeader) return;
+                            lfg.LeaderId = member.PlayerId;
+                            lfg.LeaderName = member.Name;
+                        });
                     });
 
                     var toDelete = new List<uint>();
-                    lfg.Players.ToList()
-                    .ForEach(player =>
+                    lfg.Players.ToSyncList().ForEach(player =>
                     {
                         if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
-                        toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
+                    });
+                    toDelete.ForEach(targetId =>
+                    {
+                        var target = lfg.Players.ToSyncList().FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId);
+                        lfg.Players.Remove(target);
                     });
 
                     lfg.LeaderId = m.Id;

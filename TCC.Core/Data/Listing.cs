@@ -32,10 +32,10 @@ namespace TCC.Data
         {
             get
             {
-                return Players.ToSyncList().Count == 0
-                    ? _playerId
-                    // ReSharper disable once PossibleNullReferenceException
-                    : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
+                return _playerId;
+                //return Players.ToSyncList().Count == 0
+                //    ? _playerId
+                //    : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
             }
             set
             {
@@ -80,7 +80,7 @@ namespace TCC.Data
         }
         public string LeaderName
         {
-            get => Players.ToSyncList().Count == 0 ? _leaderName : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.Name;
+            get => _leaderName; //Players.ToSyncList().Count == 0 ? _leaderName : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.Name;
             set
             {
                 if (_leaderName == value) return;

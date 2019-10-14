@@ -106,7 +106,7 @@ namespace TCC.Data.Chat
         private Listing FindListing()
         {
             return WindowManager.ViewModels.LfgVM.Listings.ToSyncList().FirstOrDefault(x =>
-                x.Players.Any(p => p.Name == Author) ||
+                x.Players.ToSyncList().Any(p => p.Name == Author) ||
                 x.LeaderName == Author ||
                 x.Message == RawMessage);
         }
