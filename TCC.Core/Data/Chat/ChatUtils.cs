@@ -90,11 +90,9 @@ namespace TCC.Data.Chat
         public static string GetCustomColor(HtmlNode node)
         {
             var ret = "";
-            if (node.HasAttributes)
-            {
-                ret = node.GetAttributeValue("color", "").Substring(1);
-                while (ret.Length < 6) { ret = "0" + ret; }
-            }
+            if (!node.HasAttributes) return ret;
+            ret = node.GetAttributeValue("color", "").Substring(1);
+            while (ret.Length < 6) { ret = "0" + ret; }
             return ret;
         }
     }

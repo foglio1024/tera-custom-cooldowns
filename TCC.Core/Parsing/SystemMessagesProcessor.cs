@@ -26,8 +26,8 @@ namespace TCC.Parsing
 
         private static void HandleMaxEnchantSucceed(string x)
         {
-            var sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
-            ChatWindowManager.Instance.AddChatMessage(sysMsg);
+            var msg = ChatWindowManager.Instance.Factory.CreateEnchantSystemMessage(x);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleFriendLogin(string friendName, SystemMessageData sysMsg)
         {
@@ -295,12 +295,10 @@ namespace TCC.Parsing
         };
 
 
-        private static bool Process(string serverMsg, SystemMessageData sysMsg, string opcodeName)
+        private static bool Process(string parameters, SystemMessageData template, string opcodeName)
         {
             if (!Processor.TryGetValue(opcodeName, out var type) || type == null) return false;
-            //TODO: check this and remove when chat will be moved to own thread.
-            // BaseDispatcher.InvokeAsync() was added because of a deadlock in AddPiece() called from ChatMessage.ctor().ParseSysHtmlPiece()
-            App.BaseDispatcher.InvokeAsync(new Action(() => type.DynamicInvoke(serverMsg, sysMsg)));
+            App.BaseDispatcher.InvokeAsync(() => type.DynamicInvoke(parameters, template));
             return true;
         }
         #endregion

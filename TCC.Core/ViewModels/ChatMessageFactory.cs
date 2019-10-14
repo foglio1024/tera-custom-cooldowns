@@ -1,4 +1,6 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Text;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
 
@@ -12,9 +14,9 @@ namespace TCC.ViewModels
             _dispatcher = d;
         }
 
-        public ChatMessage CreateMessage()
+        public ChatMessage CreateMessage(ChatChannel ch = ChatChannel.Say)
         {
-            return _dispatcher.InvokeAsync(() => new ChatMessage()).Result;
+            return _dispatcher.InvokeAsync(() => new ChatMessage(ch)).Result;
         }
         public ChatMessage CreateMessage(ChatChannel ch, string author, string msg)
         {
@@ -27,6 +29,41 @@ namespace TCC.ViewModels
         public ChatMessage CreateLfgMessage(uint authorId, string author, string msg)
         {
             return _dispatcher.InvokeAsync(() => new LfgMessage(authorId, author, msg)).Result;
+        }
+        public ChatMessage CreateEnchantSystemMessage(string systemMessage)
+        {
+            return _dispatcher.InvokeAsync(() =>
+            {
+                var msg = CreateMessage(ChatChannel.Enchant);
+                var e = "";
+
+                if (systemMessage.Contains("enchantCount:"))
+                {
+                    var s = systemMessage.IndexOf("enchantCount:", StringComparison.InvariantCultureIgnoreCase);
+                    var ench = systemMessage.Substring(s + "enchantCount:".Length, 1);
+                    e = $"+{ench} ";
+                }
+
+                var prm = ChatUtils.SplitDirectives(systemMessage);
+
+                msg.Author = prm["UserName"];
+                var txt = "{ItemName}";
+                txt = ChatUtils.ReplaceParameters(txt, prm, true);
+                txt = txt.Replace("{", "");
+                txt = txt.Replace("}", "");
+                var mp = MessagePieceBuilder.BuildSysMsgItem(txt);
+                var sb = new StringBuilder();
+                sb.Append("<");
+                sb.Append(e);
+                sb.Append(mp.Text.Substring(1));
+                mp.Text = sb.ToString();
+                msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, App.Settings.FontSize,
+                    false, "cccccc"));
+                msg.AddPiece(mp);
+
+                return msg;
+
+            }).Result;
         }
     }
 }

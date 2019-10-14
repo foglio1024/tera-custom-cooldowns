@@ -236,6 +236,10 @@ namespace TCC.Data.Chat
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }
+        public ChatMessage(ChatChannel ch) :this()
+        {
+            Channel = ch;
+        }
         public ChatMessage(ChatChannel ch, string auth, string msg) : this()
         {
             Channel = ch;
@@ -270,25 +274,28 @@ namespace TCC.Data.Chat
 
         }
 
-        protected void AddPiece(MessagePiece mp)
+        internal void AddPiece(MessagePiece mp)
         {
             mp.Container = this;
-            Dispatcher.InvokeAsyncIfRequired(() =>
-            {
-                Pieces.Add(mp);
-            }, DispatcherPriority.DataBind);
+            //Dispatcher.InvokeAsyncIfRequired(() =>
+            //{
+            //}, DispatcherPriority.DataBind);
+            Pieces.Add(mp);
         }
         protected void InsertPiece(MessagePiece mp, int index)
         {
             mp.Container = this;
-            Dispatcher.InvokeAsyncIfRequired(() =>
-            {
-                Pieces.Insert(index, mp);
-            }, DispatcherPriority.DataBind);
+            //Dispatcher.InvokeAsyncIfRequired(() =>
+            //{
+            Pieces.Insert(index, mp);
+            //}, DispatcherPriority.DataBind);
         }
         protected void RemovePiece(MessagePiece mp)
         {
-            Dispatcher.InvokeAsyncIfRequired(() => Pieces.Remove(mp), DispatcherPriority.DataBind);
+            //Dispatcher.InvokeAsyncIfRequired(() =>
+            //{
+                Pieces.Remove(mp);
+            //}, DispatcherPriority.DataBind);
         }
         //TODO: refactor
         public void SplitSimplePieces()
@@ -528,41 +535,6 @@ namespace TCC.Data.Chat
         }
 
         // -- Builders ----------------------------------------------------------------
-        public static ChatMessage BuildEnchantSystemMessage(string systemMessage)
-        {
-            var msg = ChatWindowManager.Instance.Factory.CreateMessage();
-            var mw = "";
-            var e = "";
-
-            if (systemMessage.Contains("enchantCount:"))
-            {
-                var s = systemMessage.IndexOf("enchantCount:", StringComparison.InvariantCultureIgnoreCase);
-                var ench = systemMessage.Substring(s + "enchantCount:".Length, 1);
-                msg.Channel = ChatChannel.Enchant;
-                mw = "";
-                e = $"+{ench} ";
-            }
-
-            var prm = ChatUtils.SplitDirectives(systemMessage);
-
-            msg.Author = prm["UserName"];
-            var txt = "{ItemName}";
-            txt = ChatUtils.ReplaceParameters(txt, prm, true);
-            txt = txt.Replace("{", "");
-            txt = txt.Replace("}", "");
-            var mp = MessagePieceBuilder.BuildSysMsgItem(txt);
-            var sb = new StringBuilder();
-            sb.Append("<");
-            sb.Append(e);
-            sb.Append(mw);
-            sb.Append(mp.Text.Substring(1));
-            mp.Text = sb.ToString();
-            msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, App.Settings.FontSize, false, "cccccc"));
-            msg.AddPiece(mp);
-
-            return msg;
-        }
-
         public void Dispose()
         {
             SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
