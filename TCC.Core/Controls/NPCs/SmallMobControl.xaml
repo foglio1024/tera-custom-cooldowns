@@ -49,10 +49,10 @@
                        RenderTransformOrigin=".5 .5">
                 <local:Arc.Style>
                     <Style TargetType="Shape">
-                                <Setter Property="Stroke" Value="{StaticResource MpBrush}"/>
+                                <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                <Setter Property="Stroke" Value="{StaticResource HpBrush}"/>
+                                <Setter Property="Stroke" Value="{StaticResource TccRedGradientBrush}"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -126,10 +126,10 @@
                         HorizontalAlignment="Left" >
                     <Border.Style>
                         <Style TargetType="Border">
-                            <Setter Property="Background" Value="{StaticResource MpBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource TccNormalGradientBrush}"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                    <Setter Property="Background" Value="{StaticResource AssaultStanceBrush}"/>
+                                    <Setter Property="Background" Value="{StaticResource TccRedGradientBrush}"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -195,8 +195,11 @@
                 Margin="-2 -7 0 0"
                 ToolTip="Use boss bar for this NPC type"
                 Style="{StaticResource ButtonContentOpacityStyle}">
-            <Path Data="{StaticResource SvgUpArrow}"
-                  Height="12" Fill="White"></Path>
+            <Grid>
+                <Ellipse Fill="#3fff" Height="12" Width="12"></Ellipse>
+                <Path Data="{StaticResource SvgUpArrow}" Width="10" Margin="0 0 0 0" Height="Auto" Fill="White"
+                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
         </Button>
 
     </Grid>

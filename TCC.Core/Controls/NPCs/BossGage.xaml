@@ -23,7 +23,7 @@
                         <ScaleTransform ScaleX="{Binding StartFactor}" />
                     </Rectangle.LayoutTransform>
                 </Rectangle>
-                <Rectangle Width="{StaticResource GageWidth}" Fill="{StaticResource AssaultStanceBrush}"  Opacity=".4">
+                <Rectangle Width="{StaticResource GageWidth}" Fill="{StaticResource TccRedGradient1Brush}"  Opacity=".4">
                     <Rectangle.RenderTransform>
                         <ScaleTransform ScaleX="{Binding Factor}" />
                     </Rectangle.RenderTransform>
@@ -408,13 +408,15 @@
                                 Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
                                 >
                         <StackPanel.RenderTransform>
-                            <TranslateTransform/>
+                            <TranslateTransform X="0"/>
                         </StackPanel.RenderTransform>
                         <Border Background="White" 
-                                Width="2" 
+                                BorderThickness="2 0"
+                                Width="6" 
+                                BorderBrush="#5000"
                                 Height="8" />
                     </StackPanel>
-                    <StackPanel x:Name="NextEnrageDotPanel"
+                    <StackPanel x:Name="DotPanel"
                                 Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
                         <FrameworkElement Name="DotPusher" 
@@ -423,13 +425,16 @@
                                 <ScaleTransform/>
                             </FrameworkElement.LayoutTransform>
                         </FrameworkElement>
-                        <Rectangle x:Name="NextEnrageDot"
+                        <Border x:Name="NextEnrageDot"
                                    Height="8"
-                                   Width="2"
-                                   Fill="#dfff"
+                                   Width="4"
+                                   Background="#fff"
+                                   BorderBrush="#5000"
+                                   BorderThickness="2 0 0 0"
                                    HorizontalAlignment="Left"
-                                   Margin="-2 -1 -50 -1"
-                                   Opacity="{Binding CurrentHP}" />
+                                   Margin="-4 -1 -50 -1"
+                                   Opacity="{Binding CurrentHP}" 
+                                   />
                     </StackPanel>
                     <!-- Timer -->
                     <Border HorizontalAlignment="Stretch"
@@ -440,11 +445,15 @@
                             BorderThickness="0 1 0 0"
                             BorderBrush="#5000"
                             Name="TimerBar"
-                            Background="DarkOrange"
-                            Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}">
+                            Background="{StaticResource TccYellowGradientBrush}"
+                            Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}"
+                            >
                         <Border.RenderTransform>
                             <ScaleTransform/>
                         </Border.RenderTransform>
+                        <Border.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"/>
+                        </Border.LayoutTransform>
                     </Border>
                     <StackPanel x:Name="TimerDotPanel"
                                 Orientation="Horizontal" 
@@ -510,7 +519,11 @@
                     Style="{StaticResource ButtonContentOpacityStyle}"
                     Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource AncestorType={x:Type npcCtrl:BossGage}}}"
                     >
-                <Path Data="{StaticResource SvgDownArrow}" Fill="White"/>
+                <Grid>
+                    <Ellipse Fill="#3fff" Height="14" Width="14"></Ellipse>
+                    <Path Data="{StaticResource SvgDownArrow}" Width="10" Margin="0 0 0 0" Height="Auto" Fill="White"
+                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
             </Button>
         </Grid>
     </Grid>
