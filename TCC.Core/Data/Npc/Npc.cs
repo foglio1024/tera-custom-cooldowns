@@ -16,6 +16,7 @@ namespace TCC.Data.NPCs
     {
         public bool HasGage { get; set; }
         public ICommand Override { get; }
+        public ICommand Blacklist { get; }
         public ulong EntityId { get; }
         private string _name;
         public string Name
@@ -268,6 +269,11 @@ namespace TCC.Data.NPCs
             Override = new RelayCommand(ex =>
             {
                 Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
+
+            }, ce => true);
+            Blacklist = new RelayCommand(ex =>
+            {
+                Game.DB.MonsterDatabase.Blacklist(ZoneId, TemplateId, true);
 
             }, ce => true);
         }

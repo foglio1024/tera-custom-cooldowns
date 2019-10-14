@@ -365,7 +365,8 @@
                     VerticalContentAlignment="Center"
                     Grid.Column="2"
                     x:Name="MenuButton"
-                    tcc:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True">
+                    tcc:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                    >
                 <Path Data="{StaticResource SvgDotsVertical}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"/>
                 <Button.ContextMenu>
                     <ContextMenu>

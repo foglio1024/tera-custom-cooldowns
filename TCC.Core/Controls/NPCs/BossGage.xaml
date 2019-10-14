@@ -6,6 +6,8 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:npcCtrl="clr-namespace:TCC.Controls.NPCs"
              xmlns:npc="clr-namespace:TCC.Data.NPCs"
+             xmlns:tcc="clr-namespace:TCC"
+             xmlns:controls="clr-namespace:TCC.Controls"
              mc:Ignorable="d"
              Loaded="OnLoaded"
              UseLayoutRounding="True"
@@ -63,7 +65,6 @@
         <Grid Width="Auto" 
               Height="Auto" 
               Margin="6 0 6 2">
-
             <Grid Margin="6 0 0 10" 
                   ClipToBounds="False">
                 <Grid.RowDefinitions>
@@ -514,14 +515,22 @@
                     Margin="-5 0 0 0"
                     Height="14"
                     Grid.RowSpan="2"
-                    ToolTip="Use small bar for this NPC type"
-                    Command="{Binding Override}"
+                    tcc:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                    ToolTip="Blacklist or change type"
                     Style="{StaticResource ButtonContentOpacityStyle}"
                     Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource AncestorType={x:Type npcCtrl:BossGage}}}"
                     >
+                <Button.ContextMenu>
+                    <controls:TccContextMenu Style="{StaticResource {x:Type ContextMenu}}">
+                        <MenuItem Header="Use small bar"
+                                  Command="{Binding Override}"/>
+                        <MenuItem Header="Blacklist"
+                                  Command="{Binding Blacklist}"/>
+                    </controls:TccContextMenu>
+                </Button.ContextMenu>
                 <Grid>
                     <Ellipse Fill="#3fff" Height="14" Width="14"></Ellipse>
-                    <Path Data="{StaticResource SvgDownArrow}" Width="10" Margin="0 0 0 0" Height="Auto" Fill="White"
+                    <Path Data="{StaticResource SvgDotsVertical}" MaxHeight="10" Margin="0 0 0 0" Height="Auto" Fill="White"
                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>

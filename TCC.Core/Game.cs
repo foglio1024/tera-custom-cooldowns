@@ -219,12 +219,25 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
             PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
             PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
+            PacketAnalyzer.Processor.Hook<S_BOSS_GAGE_INFO>(OnBossGageInfo);
+            PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+        }
+
+        private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
+        {
+            if (IsMe(m.Target)) return;
+            SetEncounter(m.CurrentHP, m.MaxHP);
+        }
+
+        private static void OnBossGageInfo(S_BOSS_GAGE_INFO m)
+        {
+            SetEncounter(m.CurrentHP, m.MaxHP);
         }
 
         private static void OnChat(S_CHAT m)
         {
             if (m.AuthorName != Me.Name) return;
-            if ((ChatChannel) m.Channel != ChatChannel.Global) return;
+            if ((ChatChannel)m.Channel != ChatChannel.Global) return;
 
             if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                   m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
@@ -241,7 +254,6 @@ namespace TCC
 
         private static void OnSpawnNpc(S_SPAWN_NPC p)
         {
-            if (!EntityManager.Pass(p.HuntingZoneId, p.TemplateId)) return;
             if (!DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
             NearbyNPC[p.EntityId] = m.Name;
             FlyingGuardianDataProvider.InvokeProgressChanged();
@@ -473,6 +485,7 @@ namespace TCC
             LoadingScreen = true;
             Encounter = false;
             GuildMembersNames.Clear();
+            FriendList.Clear();
             BlockList.Clear();
 
             Server = DB.ServerDatabase.GetServer(m.ServerId);
@@ -600,6 +613,17 @@ namespace TCC
         {
             var ch = Account.Characters.FirstOrDefault(x => x.Id == pId);
             return ch?.Laurel ?? Laurel.None;
+        }
+        public static void SetEncounter(float curHP, float maxHP)
+        {
+            if (maxHP > curHP)
+            {
+                Encounter = true;
+            }
+            else if (maxHP == curHP || curHP == 0)
+            {
+                Encounter = false;
+            }
         }
 
         public static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)

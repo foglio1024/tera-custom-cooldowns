@@ -7,6 +7,7 @@
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:local="clr-namespace:TCC.Windows"
                  xmlns:viewModels="clr-namespace:TCC.ViewModels"
+                 xmlns:databases="clr-namespace:TCC.Data.Databases"
                  Topmost="True"
                  mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
                  Title="TCC Settings" Height="600" Width="900" ResizeMode="NoResize"
@@ -211,11 +212,13 @@
 
         <!--<Style TargetType="{x:Type settings:CheckboxSetting}">
             <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}" />
-            --><!--<Style.Triggers>
+            -->
+        <!--<Style.Triggers>
                 <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}" Value="False">
                     <Setter Property="Opacity" Value=".3"></Setter>
                 </DataTrigger>
-            </Style.Triggers>--><!--
+            </Style.Triggers>-->
+        <!--
         </Style>-->
 
         <Style TargetType="settings:ValueSetting">
@@ -628,45 +631,84 @@
                                                    IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                         </StackPanel>
                         <!-- Specific -->
-                        <StackPanel VerticalAlignment="Stretch" Grid.Column="1">
-                            <ContentControl Template="{StaticResource SectionHeaderTemplate}"
+                        <Grid  Grid.Column="1" 
+                               Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel VerticalAlignment="Stretch">
+                                <ContentControl Template="{StaticResource SectionHeaderTemplate}"
                                             Content="Specific settings" />
-                            <settings:CheckboxSetting SettingName="Hide adds"
+                                <settings:CheckboxSetting SettingName="Hide adds"
                                                       IsOn="{Binding NpcWindowSettings.HideAdds, Mode=TwoWay}"
                                                       IsEnabled="{Binding NpcWindowSettings.Enabled}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <ToolTip>
-                                        <Grid Margin="5">
-                                            <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
-                                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                    <settings:CheckboxSetting.ToolTip>
+                                        <ToolTip>
+                                            <Grid Margin="5">
+                                                <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
                                                        MaxWidth="200">
                                                 <Run
                                                     Text="Hides the adds column which shows all the mobs not marked as bosses and having small bar indicator." />
-                                            </TextBlock>
-                                        </Grid>
-                                    </ToolTip>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Accurate HP detection"
+                                                </TextBlock>
+                                            </Grid>
+                                        </ToolTip>
+                                    </settings:CheckboxSetting.ToolTip>
+                                </settings:CheckboxSetting>
+                                <settings:CheckboxSetting SettingName="Accurate HP detection"
                                                       IsOn="{Binding NpcWindowSettings.AccurateHp, Mode=TwoWay}"
                                                       IsEnabled="{Binding NpcWindowSettings.Enabled}">
-                                <settings:CheckboxSetting.ToolTip>
-                                    <Grid Margin="5">
-                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
-                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                    <settings:CheckboxSetting.ToolTip>
+                                        <Grid Margin="5">
+                                            <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
                                                    MaxWidth="200">
                                             <Run
                                                 Text="Use more accurate enemy HP detection, allowing to detect HP changes to mobs not hit by the user. It requires more CPU power and may slow down TCC in crowded areas in which many people hit many mobs." />
-                                        </TextBlock>
-                                    </Grid>
-                                </settings:CheckboxSetting.ToolTip>
-                            </settings:CheckboxSetting>
-                            <settings:SelectionSetting SettingName="Enrage label mode"
+                                            </TextBlock>
+                                        </Grid>
+                                    </settings:CheckboxSetting.ToolTip>
+                                </settings:CheckboxSetting>
+                                <settings:SelectionSetting SettingName="Enrage label mode"
                                                        IsEnabled="{Binding NpcWindowSettings.Enabled}"
                                                        SelectedItem="{Binding NpcWindowSettings.EnrageLabelMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:EnrageLabelMode}"
                                                        Choices="{Binding EnrageLabelModes, Mode=OneWay}" />
-                        </StackPanel>
+                            </StackPanel>
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}"
+                                            Content="Blacklisted monsters" 
+                                            Grid.Row="1"/>
+
+                            <ListBox Grid.Row="2"
+                                     SelectionMode="Single"
+                                     ItemContainerStyle="{StaticResource NoHilightListItemStyle}"
+                                     ItemsSource="{Binding BlacklistedMonsters}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="viewModels:BlacklistedMonsterVM">
+                                        <Grid Margin="8 0 0 0">
+                                            <Image MaxHeight="36" HorizontalAlignment="Left">
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Source" Value="../resources/images/kr_mob_icon.png"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsBoss}" Value="True">
+                                                                <Setter Property="Source" Value="../resources/images/kr_boss_icon_full.png"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <settings:CheckboxSetting SettingName="{Binding Name}"
+                                                                  IsOn="{Binding IsHidden, Mode=TwoWay}"
+                                                                  />
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" Content="Actions" />

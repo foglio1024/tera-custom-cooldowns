@@ -1,17 +1,36 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using FoglioUtils;
 using TCC.Data.NPCs;
 using TCC.ViewModels;
+namespace TCC.Controls{
+    public class TccContextMenu : ContextMenu
+    {
+        protected override void OnOpened(RoutedEventArgs e)
+        {
+            FocusManager.PauseTopmost = true;
+            base.OnOpened(e);
+        }
 
+        protected override void OnClosed(RoutedEventArgs e)
+        {
+            FocusManager.PauseTopmost = false;
+            base.OnClosed(e);
+        }
+    }
+
+}
 namespace TCC.Controls.NPCs
 {
     public partial class SmallMobControl
     {
-        bool _firstLoad = true;
+        private bool _firstLoad = true;
         private readonly DoubleAnimation _hpAnim;
+        private readonly DoubleAnimation _shrinkAnim;
 
         public SmallMobViewModel VM { get; set; }
 
@@ -23,13 +42,8 @@ namespace TCC.Controls.NPCs
             {
                 if (e.NewValue is NPC npc) VM = new SmallMobViewModel(npc);
             };
-            _hpAnim = new DoubleAnimation
-            {
-                Duration = TimeSpan.FromMilliseconds(250),
-                EasingFunction = R.MiscResources.QuadraticEase
-            };
-            Timeline.SetDesiredFrameRate(_hpAnim, 20);
-
+            _hpAnim = AnimationFactory.CreateDoubleAnimation(250, 0, easing: true, framerate: 20);
+            _shrinkAnim = AnimationFactory.CreateDoubleAnimation(200, 0, 1, easing: true, framerate: 20);
         }
 
 
@@ -48,8 +62,7 @@ namespace TCC.Controls.NPCs
         {
             VM.HpFactorChanged -= OnHpChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
-            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)));
+            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,_shrinkAnim);
         }
 
         private void OnHpChanged()

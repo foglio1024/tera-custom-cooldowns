@@ -1,8 +1,10 @@
 ﻿using FoglioUtils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -11,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Settings;
 using TCC.Utilities;
@@ -561,9 +564,33 @@ namespace TCC.ViewModels
         public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
         public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
 
+
+        private TSObservableCollection<BlacklistedMonsterVM> _blacklistedMonsters;
+        public TSObservableCollection<BlacklistedMonsterVM> BlacklistedMonsters
+        {
+            get
+            {
+                if (_blacklistedMonsters == null)  _blacklistedMonsters = new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
+                var bl =Game.DB.MonsterDatabase.GetBlacklistedMonsters();
+                bl.ForEach(m =>
+                {
+                    if (_blacklistedMonsters.Any(x => x.Monster == m)) return;
+                    _blacklistedMonsters.Add(new BlacklistedMonsterVM(m));
+                });
+                _blacklistedMonsters.ToSyncList().ForEach(vm =>
+                {
+                    if (bl.Contains(vm.Monster)) return;
+                    _blacklistedMonsters.Remove(vm);
+                });
+                return _blacklistedMonsters;
+            }
+        }
+
+
         public SettingsWindowViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
+
             KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
 
             BrowseUrlCommand = new RelayCommand(url => Process.Start(url.ToString()));
@@ -593,6 +620,13 @@ namespace TCC.ViewModels
             ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
             OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(Path.Combine(App.BasePath, "resources/config")));
             ClearChatCommand = new RelayCommand(_ => ChatWindowManager.Instance.ClearMessages());
+
+            MonsterDatabase.BlacklistChangedEvent += MonsterDatabase_BlacklistChangedEvent;
+        }
+
+        private void MonsterDatabase_BlacklistChangedEvent(uint arg1, uint arg2, bool arg3)
+        {
+            N(nameof(BlacklistedMonsters));
         }
 
         private void OnShowSettingsWindowHotkeyPressed()
@@ -607,5 +641,28 @@ namespace TCC.ViewModels
             Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
         }
 
+    }
+
+    public class BlacklistedMonsterVM : TSPropertyChanged
+    {
+        public readonly Monster Monster;
+        public string Name => Monster.Name;
+        public bool IsBoss => Monster.IsBoss;
+        public bool IsHidden
+        {
+            get => Monster.IsHidden;
+            set
+            {
+                if (Monster.IsHidden == value) return;
+                Monster.IsHidden = value;
+                if(!value) Game.DB.MonsterDatabase.Blacklist(Monster, false);
+                N();
+            }
+        }
+
+        public BlacklistedMonsterVM(Monster m)
+        {
+            Monster = m;
+        }
     }
 }

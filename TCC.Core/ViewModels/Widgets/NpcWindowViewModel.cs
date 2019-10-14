@@ -86,12 +86,22 @@ namespace TCC.ViewModels.Widgets
             settings.AccurateHpChanged += OnAccurateHpChanged;
             settings.HideAddsChanged += OnHideAddsChanged;
             MonsterDatabase.OverrideChangedEvent += RefreshOverride;
+            MonsterDatabase.BlacklistChangedEvent += RefreshBlacklist;
             void InitFlushTimer()
             {
                 var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
                 flushTimer.Tick += (_, __) => FlushCache();
                 flushTimer.Start();
             }
+        }
+
+        private void RefreshBlacklist(uint zoneId, uint templateId, bool b)
+        {
+            if (!b) return;
+            _npcList.ToSyncList()
+                .Where(n => n.ZoneId == zoneId && n.TemplateId == templateId)
+                .ToList()
+                .ForEach(RemoveAndDisposeNPC);
         }
 
         private void OnHideAddsChanged()
@@ -400,12 +410,10 @@ namespace TCC.ViewModels.Widgets
         private void OnSpawnNpc(S_SPAWN_NPC p)
         {
             if (p.Villager) return;
-            if (!EntityManager.Pass(p.HuntingZoneId, p.TemplateId)) return;
             CheckHarrowholdPhase(p.HuntingZoneId, p.TemplateId);
             if (!Game.DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
             if (App.Settings.NpcWindowSettings.HideAdds && !m.IsBoss) return;
             AddOrUpdateNpc(p, m);
-            //AddOrUpdateNpc(p.EntityId, m.MaxHP, m.MaxHP, m.IsBoss, HpChangeSource.CreatureChangeHp, p.TemplateId, p.HuntingZoneId, m.IsBoss && TccUtils.IsFieldBoss(p.HuntingZoneId, p.TemplateId), p.RemainingEnrageTime);
         }
         private void OnSpawnMe(S_SPAWN_ME m)
         {
@@ -471,13 +479,11 @@ namespace TCC.ViewModels.Widgets
         private void OnBossGageInfo(S_BOSS_GAGE_INFO m)
         {
             AddOrUpdateNpc(m.EntityId, m.MaxHP, m.CurrentHP, true, HpChangeSource.BossGage, m.TemplateId, m.HuntingZoneId);
-            EntityManager.SetEncounter(m.CurrentHP, m.MaxHP);
         }
         private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
             if (Game.IsMe(m.Target)) return;
             AddOrUpdateNpc(m.Target, m.MaxHP, m.CurrentHP, false, Game.IsMe(m.Source) ? HpChangeSource.Me : HpChangeSource.CreatureChangeHp);
-            EntityManager.SetEncounter(m.CurrentHP, m.MaxHP);
         }
         private void OnShowHp(S_SHOW_HP m)
         {
@@ -491,7 +497,7 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            if (p.Duration == Int32.MaxValue) ab.Infinity = true;
+            if (p.Duration == int.MaxValue) ab.Infinity = true;
 
 
             UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using FoglioUtils;
 using TCC.Data.NPCs;
 using TCC.ViewModels;
 
@@ -31,38 +32,13 @@ namespace TCC.Controls.NPCs
                 if (e.NewValue is NPC npc) VM = new BossViewModel(npc);
             };
 
-            _slideAnim = new DoubleAnimation
-            {
-                EasingFunction = R.MiscResources.QuadraticEase,
-                Duration = TimeSpan.FromMilliseconds(250)
-            };
-            Timeline.SetDesiredFrameRate(_slideAnim, 60);
-
-            _hpAnim = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150))
-            {
-                EasingFunction = R.MiscResources.QuadraticEase,
-            };
-            Timeline.SetDesiredFrameRate(_hpAnim, 60);
-
-            //_flash = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(1000))
-            //{
-            //    EasingFunction = R.MiscResources.QuadraticEase,
-            //};
-            //Timeline.SetDesiredFrameRate(_flash, 30);
-
-            _timerAnim = new DoubleAnimation { To = 0 };
-            Timeline.SetDesiredFrameRate(_timerAnim, 20);
-
-            _enrageArcAnimation = new DoubleAnimation { From = 1, To = 0 };
-            _enrageArcAnimation.Completed += _enrageArcAnimation_Completed;
-            Timeline.SetDesiredFrameRate(_enrageArcAnimation, 30);
-
-            _fadeAnim = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(250));
-            Timeline.SetDesiredFrameRate(_fadeAnim, 30);
+            _slideAnim= AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
+            _hpAnim = AnimationFactory.CreateDoubleAnimation(150, 1, easing: true);
+            _timerAnim = AnimationFactory.CreateDoubleAnimation(1, 0, framerate: 20);
+            _enrageArcAnimation = AnimationFactory.CreateDoubleAnimation(1, 0, 1, framerate: 30, completed: _enrageArcAnimation_Completed);
+            _fadeAnim = AnimationFactory.CreateDoubleAnimation(250, 0, 1, framerate: 30);
 
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
-
-
         }
 
         private void RefreshAbnormalityTemplate()
@@ -83,7 +59,6 @@ namespace TCC.Controls.NPCs
         }
         private void OnHpChanged()
         {
-            //_doubleAnim.To = DC.Boss.HPFactor;
             AnimateHp();
             if (VM.NPC.Enraged) SlideEnrageIndicator(VM.CurrentPercentage);
         }
