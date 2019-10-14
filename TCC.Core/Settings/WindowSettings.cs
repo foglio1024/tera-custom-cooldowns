@@ -9,6 +9,7 @@ using TCC.Annotations;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Interop.Proxy;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -37,6 +38,8 @@ namespace TCC.Settings
 
         [JsonIgnore]
         public string Name { [UsedImplicitly] get; }
+        [JsonIgnore]
+        protected List<string> GpkNames { get; }
         [JsonIgnore]
         public bool ForcedClickable { get; protected set; }
         [JsonIgnore]
@@ -228,6 +231,9 @@ namespace TCC.Settings
             Dispatcher = Dispatcher.CurrentDispatcher;
             Positions = new ClassPositions();
             ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
+            GpkNames = new List<string>();
+            //EnabledChanged += OnEnabledChanged;
+            //Game.LoadingScreenChanged += () => OnEnabledChanged(!Game.LoadingScreen && Enabled);
         }
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
         {
@@ -246,6 +252,16 @@ namespace TCC.Settings
             Positions = positions == null ?
                 new ClassPositions(x, y, buttonsPosition) :
                 new ClassPositions(positions);
+        }
+
+        protected virtual void OnEnabledChanged(bool enabled)
+        {
+            if (GpkNames.Count == 0) return;
+            if (!ProxyInterface.Instance.IsStubAvailable) return;
+            foreach (var gpkName in GpkNames)
+            {
+                ProxyInterface.Instance.Stub.InvokeCommand($"tcc-toggle-gpk {gpkName} {(enabled ? 0 : 1)}");
+            }
         }
 
         protected WindowSettings(WindowSettings other) : this()
@@ -415,8 +431,8 @@ namespace TCC.Settings
             get => _staysCollapsed;
             set
             {
-                if (_staysCollapsed== value) return;
-                _staysCollapsed= value;
+                if (_staysCollapsed == value) return;
+                _staysCollapsed = value;
                 N();
                 StaysCollapsedChanged?.Invoke();
             }
@@ -426,7 +442,7 @@ namespace TCC.Settings
             get => _showImportant;
             set
             {
-                if(_showImportant == value) return;
+                if (_showImportant == value) return;
                 _showImportant = value;
                 N();
             }
@@ -517,6 +533,7 @@ namespace TCC.Settings
             Mode = CooldownBarMode.Fixed;
             ShowItems = true;
             UndimOnFlyingGuardian = false;
+
         }
     }
     public class NotificationAreaSettings : WindowSettings
@@ -569,7 +586,11 @@ namespace TCC.Settings
 
             CompactMode = true;
             UndimOnFlyingGuardian = false;
+            GpkNames.Add("CharacterWindow");
+
         }
+
+
     }
     public class NpcWindowSettings : WindowSettings
     {
@@ -630,6 +651,9 @@ namespace TCC.Settings
             EnrageLabelMode = EnrageLabelMode.Remaining;
             AccurateHp = true;
             HideAdds = false;
+
+            GpkNames.Add("GageBoss");
+            GpkNames.Add("TargetInfo");
         }
     }
     public class BuffWindowSettings : WindowSettings
@@ -702,6 +726,9 @@ namespace TCC.Settings
                 {(Class)12, new List<uint>{ 10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542 }},
                 {(Class)255, new List<uint>{ 6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001 }},
             };
+
+            GpkNames.Add("Abnormality");
+
 
         }
     }
@@ -998,6 +1025,9 @@ namespace TCC.Settings
                 {(Class)255, new List<uint>()},
             };
 
+            GpkNames.Add("PartyWindow");
+            GpkNames.Add("PartyWindowRaidInfo");
+
         }
     }
     public class FlightWindowSettings : WindowSettings
@@ -1048,6 +1078,13 @@ namespace TCC.Settings
 
             Rotation = 0;
             Flip = false;
+
+            GpkNames.Add("ProgressBar");
+        }
+
+        protected override void OnEnabledChanged(bool enabled)
+        {
+            //TODO: add specific code
         }
     }
     public class FloatingButtonWindowSettings : WindowSettings
@@ -1151,6 +1188,14 @@ namespace TCC.Settings
             HideTradeListings = true;
             MinLevel = 60;
             MaxLevel = 70;
+
+            GpkNames.Add("PartyBoard");
+            GpkNames.Add("PartyBoardMemberInfo");
+        }
+
+        protected override void OnEnabledChanged(bool enabled)
+        {
+            // do nothing
         }
     }
 }
