@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using FoglioUtils.Extensions;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Pc;
@@ -296,11 +297,11 @@ namespace TCC.ViewModels
         public void EnqueueRequest(uint id)
         {
             if ((Game.IsInDungeon || Game.CivilUnrestZone) && Game.Combat) return;
-            Dispatcher.Invoke(() =>
+            Dispatcher.InvokeAsyncIfRequired(() =>
             {
                 if (RequestQueue.Count > 0 && RequestQueue.Last() == id) return;
                 RequestQueue.Enqueue(id);
-            });
+            }, DispatcherPriority.Background);
         }
 
         private void OnGroupWindowVmPropertyChanged(object sender, PropertyChangedEventArgs e)
