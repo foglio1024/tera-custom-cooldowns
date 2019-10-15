@@ -22,7 +22,7 @@ namespace TCC.Data.Pc
         private Class _playerclass = Class.None;
         private Laurel _laurel = Laurel.None;
         private int _level;
-        private int _itemLevel;
+        private float _itemLevel;
         private float _currentHP;
         private float _currentMP;
         private float _currentST;
@@ -107,7 +107,7 @@ namespace TCC.Data.Pc
                 }
             }
         }
-        public int ItemLevel
+        public float ItemLevel
         {
             get => _itemLevel;
             set

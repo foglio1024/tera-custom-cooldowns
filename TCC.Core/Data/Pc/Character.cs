@@ -22,7 +22,7 @@ namespace TCC.Data.Pc
         private int _elleonMarks;
         private int _dragonwingScales;
         private int _piecesOfDragonScroll;
-        private int _itemLevel;
+        private float _itemLevel;
         private int _level;
         private Location _lastLocation;
         private long _lastOnline;
@@ -71,7 +71,7 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-        public int ItemLevel
+        public float ItemLevel
         {
             get => _itemLevel;
             set

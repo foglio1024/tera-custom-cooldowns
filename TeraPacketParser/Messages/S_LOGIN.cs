@@ -5,15 +5,15 @@ namespace TeraPacketParser.Messages
     public class S_LOGIN : ParsedMessage
     {
         private short NameOffset { get; }
-        public ulong EntityId { get;  }
+        public ulong EntityId { get; }
         public uint ServerId { get; }
         public uint PlayerId { get; }
         public short Level { get; }
         private uint Model { get; }
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         private ulong Appearance { get; }
-        private int RestCurr { get; }
-        private int RestMax { get; }
+        private long RestCurr { get; }
+        private long RestMax { get; }
         private int Weap { get; }
         private int Chest { get; }
         private int Gloves { get; }
@@ -33,7 +33,7 @@ namespace TeraPacketParser.Messages
         private int WeapSkin { get; }
         private int Costume { get; }
         // ReSharper restore UnusedAutoPropertyAccessor.Local
-        public string Name { get;  }
+        public string Name { get; }
 
 
         public Class CharacterClass
@@ -47,50 +47,30 @@ namespace TeraPacketParser.Messages
 
         public S_LOGIN(TeraMessageReader reader) : base(reader)
         {
-            reader.BaseStream.Position = 0;
-            //if (reader.Factory.ReleaseVersion >= 8100)    // by HQ 20190321  
-            //{
-            reader.Skip(4);     // Unknown 4 byte added. by HQ 20190321
-            //}
+            reader.Skip(4);
             NameOffset = reader.ReadInt16();
-            //detailsOffset = reader.ReadInt16();
-            //detailsCount = reader.ReadInt16();
-            //details2Offset = reader.ReadInt16();
-            //details2Count = reader.ReadInt16();
             reader.Skip(8);
             Model = reader.ReadUInt32();
             EntityId = reader.ReadUInt64();
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
-            //unk1 = reader.ReadInt32();
-            //unk2=reader.ReadByte();
-            //unk3=reader.ReadInt32();
-            //unk4=reader.ReadInt32();
-            //unk5=reader.ReadInt32();
             reader.Skip(17);
             Appearance = reader.ReadUInt64();
-            //unk6=reader.ReadInt16();
             reader.Skip(2);
             Level = reader.ReadInt16();
-            //gatherEn=reader.ReadInt16();
-            //gatherUnk=reader.ReadInt16();
-            //gatherPl=reader.ReadInt16();
-            //gatherMin=reader.ReadInt16();
-            //unk7=reader.ReadInt32();
-            //unk8=reader.ReadInt32();
-            //unk9=reader.ReadInt16();
-            //expTot=reader.ReadInt64();
-            //expShown=reader.ReadInt64();
-            //expNeeded=reader.ReadInt64();
-            //unk10=reader.ReadInt32(); 
-            //unk10b=reader.ReadInt32();
-            //unk10c=reader.ReadInt32();
-            //unk10d=reader.ReadInt32();
             reader.Skip(58);
-            RestCurr = reader.ReadInt32();
-            RestMax = reader.ReadInt32();
-            //unk11=reader.ReadSingle();
-            //unk12=reader.ReadInt32();
+            if (reader.Factory.ReleaseVersion >= 8600 && reader.Factory.ReleaseVersion < 9901)
+            {
+
+                RestCurr = reader.ReadInt64();
+                RestMax = reader.ReadInt64();
+            }
+            else
+            {
+                RestCurr = reader.ReadInt32();
+                RestMax = reader.ReadInt32();
+            }
+
             reader.Skip(8);
             Weap = reader.ReadInt32();
             Chest = reader.ReadInt32();
@@ -99,11 +79,6 @@ namespace TeraPacketParser.Messages
             InnerWear = reader.ReadInt32();
             Head = reader.ReadInt32();
             Face = reader.ReadInt32();
-            //unk13=reader.ReadInt32();
-            //unk14=reader.ReadInt32();
-            //unk15=reader.ReadByte(); 
-            //unk16=reader.ReadInt32();
-            //unk17=reader.ReadInt32();
             reader.Skip(17);
             Title = reader.ReadInt32();
             WeapMod = reader.ReadInt32();
@@ -138,18 +113,18 @@ namespace TeraPacketParser.Messages
             //unk37 = reader.ReadInt16();
             reader.BaseStream.Position = NameOffset - 4;
             Name = reader.ReadTeraString();
-/*
-            details = new byte[detailsCount];
-            details2 = new byte[details2Count];
-            for (var i = 0; i < detailsCount; i++)
-            {
-                details[i] = reader.ReadByte();
-            }
-            for (var i = 0; i < details2Count; i++)
-            {
-                details2[i] = reader.ReadByte();
-            }
-*/
+            /*
+                        details = new byte[detailsCount];
+                        details2 = new byte[details2Count];
+                        for (var i = 0; i < detailsCount; i++)
+                        {
+                            details[i] = reader.ReadByte();
+                        }
+                        for (var i = 0; i < details2Count; i++)
+                        {
+                            details2[i] = reader.ReadByte();
+                        }
+            */
             //Console.WriteLine();
             //Console.Write("unk1: {0} - ", unk1);
             //Console.Write("unk2: {0} - ", unk2);
