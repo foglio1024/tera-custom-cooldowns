@@ -30,6 +30,16 @@ namespace TCC.Test
     {
         public static bool Enabled = false;
 
+        public static void Deadlock()
+        {
+            WindowManager.CharacterWindow.Dispatcher.Invoke(() =>
+            {
+                App.BaseDispatcher.Invoke(() =>
+                {
+                    WindowManager.CharacterWindow.Dispatcher.Invoke(() => { Console.WriteLine("Deadlock"); });
+                });
+            });
+        }
         public static void ParsePacket()
         {
             var packet =

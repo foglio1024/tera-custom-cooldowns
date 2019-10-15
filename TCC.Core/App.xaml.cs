@@ -15,6 +15,7 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Test;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -55,7 +56,7 @@ namespace TCC
             ParseStartupArgs(e.Args.ToList());
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
-            TccMessageBox.Create(); //Create it here in STA thread
+            InitMessageBox(); //TccMessageBox.Create(); //Create it here in STA thread
 
             if (IsRunning())
             {
@@ -152,7 +153,6 @@ namespace TCC
 
             SplashScreen.CloseWindowSafe();
             Loading = false;
-
         }
 
         private static void ParseStartupArgs(List<string> list)
@@ -186,6 +186,19 @@ namespace TCC
             ssThread.Start();
             while (waiting) Thread.Sleep(1);
         }
+        private static void InitMessageBox()
+        {
+            var ssThread = new Thread(() =>
+                {
+                    SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                    TccMessageBox.Create();
+                    Dispatcher.Run();
+                })
+                { Name = "MessageBoxThread" };
+            ssThread.SetApartmentState(ApartmentState.STA);
+            ssThread.Start();
+        }
+
 
         public static void Restart()
         {
@@ -220,4 +233,11 @@ namespace TCC
         }
     }
 
+    public class DeadlockException : Exception
+    {
+        public DeadlockException(string msg) : base(msg)
+        {
+            
+        }
+    }
 }

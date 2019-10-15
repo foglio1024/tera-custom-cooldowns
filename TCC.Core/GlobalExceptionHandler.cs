@@ -174,13 +174,13 @@ namespace TCC
             //return await Task.Factory.StartNew(() =>
             //{
             //});
-            return App.BaseDispatcher.InvokeAsync(() =>
-            {
+            //return App.BaseDispatcher.InvokeAsync(() =>
+            //{
                 var ret = new JObject();
 
-                WindowManager.RunningDispatchers.ToList().ForEach(d =>
+                WindowManager.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
                 {
-                    var t = d.Value.Thread;
+                    var t = d.Thread;
                     t.Suspend();
                     ret[t.Name] = new StackTrace(t, false).ToString();
                     t.Resume();
@@ -192,7 +192,7 @@ namespace TCC
                 PacketAnalyzer.AnalysisThread.Resume();
 
                 return ret;
-            }).Result;
+            //}).Result;
         }
 #pragma warning restore 618
 

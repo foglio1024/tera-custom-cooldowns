@@ -1,5 +1,8 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,6 +61,7 @@ namespace TCC
         }
 
         public static Size ScreenSize;
+        private static bool _running;
 
         public static CooldownWindow CooldownWindow { get; private set; }
         public static CharacterWindow CharacterWindow { get; private set; }
@@ -79,6 +83,7 @@ namespace TCC
 
         public static async Task Init()
         {
+            _running = true;
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             FocusManager.Init();
 
@@ -92,8 +97,7 @@ namespace TCC
             KeyboardHook.Instance.RegisterCallback(App.Settings.ToggleBoundariesHotkey, TccWidget.OnShowAllHandlesToggled);
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
 
-            ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject),
-                new FrameworkPropertyMetadata(int.MaxValue));
+            ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
         }
         private static Size GetScreenCorrection()
         {
@@ -125,6 +129,7 @@ namespace TCC
 
         public static void Dispose()
         {
+            _running = false;
             DisposeEvent?.Invoke();
             SystemEvents.DisplaySettingsChanged -= SystemEventsOnDisplaySettingsChanged;
 
@@ -194,6 +199,36 @@ namespace TCC
             ChatWindowManager.Start();
 
             SettingsWindow = new SettingsWindow();
+
+            StartDispatcherWatcher();
+        }
+
+        private static void StartDispatcherWatcher()
+        {
+            var t = new Thread(() =>
+            {
+                while (_running)
+                {
+                    var deadlockedDispatchers = new List<Dispatcher>();
+                    try
+                    {
+                        Parallel.ForEach(RunningDispatchers.Values.Append(App.BaseDispatcher), (v) =>
+                        {
+                            if (v.IsAlive(10000).Result) return;
+                            Log.CW($"{v.Thread.Name} didn't respond in time!");
+                            deadlockedDispatchers.Add(v);
+                        });
+                        Thread.Sleep(100);
+                    }
+                    catch { }
+                    if (deadlockedDispatchers.Count > 1)
+                    {
+                        throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                    }
+                }
+            })
+            {Name = "Watcher"};
+            t.Start();
         }
 
         public static void AddDispatcher(int threadId, Dispatcher d)
