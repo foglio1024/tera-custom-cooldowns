@@ -66,8 +66,11 @@
                        HorizontalAlignment="Center" FontSize="12" Margin="12 10 12 10" Foreground="#fff" />
             <Separator Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" Margin="10 0 10 -1" Opacity=".2" />
             <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"
+                       Text="{Binding Version, Mode=OneWay}"
+                       HorizontalAlignment="Left" FontSize="10" Margin="10 2 10 4" Foreground="#3fff" />
+            <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"
                        Text="{Binding TimeStamp, Mode=OneWay}"
-                       HorizontalAlignment="Center" FontSize="10" Margin="10 2 10 4" Foreground="#3fff" />
+                       HorizontalAlignment="Right" FontSize="10" Margin="10 2 10 4" Foreground="#3fff" />
 
             <controls:Arc Width="14" Height="14"
                           Margin="4 0"

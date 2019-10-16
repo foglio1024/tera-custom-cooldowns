@@ -10,6 +10,8 @@ namespace TCC.Windows.Widgets
         public NotificationType NotificationType { get; }
         public uint Duration { get; }
         public string TimeStamp { get; }
+        public string Version => App.AppVersion;
+
         public NotificationInfo(string title, string message, NotificationType type, uint duration)
         {
             Title = title;
