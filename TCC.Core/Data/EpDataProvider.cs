@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace TCC
+namespace TCC.Data
 {
     public static class EpDataProvider
     {
         // just keep this here, since it's the only perk we need
-        private static Dictionary<uint, float> ManaBarrierAmplification = new Dictionary<uint, float>
+        private static readonly Dictionary<uint, float> ManaBarrierAmplification = new Dictionary<uint, float>
         {
             { 0,  1.00f },
             { 1,  1.11f },

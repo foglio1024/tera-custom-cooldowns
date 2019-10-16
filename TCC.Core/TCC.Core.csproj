@@ -142,7 +142,7 @@
     <Compile Include="Data\Pc\GearInfo.cs" />
     <Compile Include="Data\Pc\GuardianInfo.cs" />
     <Compile Include="Data\Pc\VanguardInfo.cs" />
-    <Compile Include="EpDataProvider.cs" />
+    <Compile Include="Data\EpDataProvider.cs" />
     <Compile Include="GlobalExceptionHandler.cs" />
     <Compile Include="Interop\Discord.cs" />
     <Compile Include="Interop\Firebase.cs" />
@@ -440,7 +440,7 @@
     <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\Map\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
-    <Compile Include="FlyingGuardianDataProvider.cs" />
+    <Compile Include="Data\FlyingGuardianDataProvider.cs" />
     <Compile Include="ForegroundManager.cs" />
     <Compile Include="HotKey.cs" />
     <Compile Include="KeyboardHook.cs" />
@@ -448,7 +448,6 @@
     <Compile Include="Parsing\OpcodeDownloader.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Interop\ProxyPacketSplitter.cs" />
-    <Compile Include="Settings\XmlSettingsReader.cs" />
     <Compile Include="Settings\XmlSettingsWriter.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
@@ -507,7 +506,6 @@
     <Compile Include="Data\Databases\SocialDatabase.cs" />
     <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
     <Compile Include="Data\Pc\User.cs" />
-    <Compile Include="EntityManager.cs" />
     <Compile Include="Data\Pc\Player.cs" />
     <Compile Include="Interop\ProxyOld.cs" />
     <Compile Include="Settings\SettingsContainer.cs" />

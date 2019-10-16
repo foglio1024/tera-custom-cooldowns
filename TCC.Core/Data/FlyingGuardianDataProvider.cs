@@ -1,10 +1,8 @@
 ﻿using System;
-
-using TCC.Data;
 using TCC.Utilities;
 using TeraPacketParser.Messages;
 
-namespace TCC
+namespace TCC.Data
 {
     public static class FlyingGuardianDataProvider
     {
