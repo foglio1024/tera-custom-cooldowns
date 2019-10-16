@@ -7,22 +7,18 @@ using FoglioUtils.Extensions;
 
 namespace TCC.Data.Chat
 {
-    public static class MessagePieceBuilder
+    public static class SystemMessageParser
     {
-        public static MessagePiece BuildSysMsgZone(string msgText)
+        public static string ParseSysMsgZone(string msgText)
         {
             var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-            var zoneId = uint.Parse(dictionary["zoneName"]);
+            var zoneId = UInt32.Parse(dictionary["zoneName"]);
             var zoneName = Game.DB.MonsterDatabase.GetZoneName(zoneId);
             var txt = zoneId.ToString();
             if (zoneName != null) txt = zoneName;
-            var mp = new MessagePiece(txt)
-            {
-                Type = MessagePieceType.Simple
-            };
-            return mp;
+            return txt;
         }
-        public static MessagePiece BuildSysMsgCreature(string msgText)
+        public static string ParseSysMsgCreature(string msgText)
         {
             var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
@@ -38,7 +34,97 @@ namespace TCC.Data.Chat
                 txt = m.Name;
             }
 
-            var mp = new MessagePiece(txt)
+            return txt;
+        }
+        public static string ParseSysMsgItem(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+            var id = ChatUtils.GetId(dictionary, "item");
+            var name = $"Unknown item [{id}]";
+            if (Game.DB.ItemsDatabase.Items.TryGetValue(id, out var i)) name = i.Name;
+            return $"<{name}>";
+        }
+        public static string ParseSysMsgAchi(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+
+            var id = ChatUtils.GetId(dictionary, "achievement");
+            var achiName = id.ToString();
+            if (Game.DB.AchievementDatabase.Achievements.TryGetValue(id * 1000 + 1, out var g2))
+            {
+                achiName = $"[{g2}]";
+            }
+
+            return achiName;
+        }
+        public static string ParseSysMsgQuest(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+            var id = ChatUtils.GetId(dictionary, "quest");
+            var txt = id.ToString();
+            if (Game.DB.QuestDatabase.Quests.TryGetValue(id, out var q)) txt = q;
+            return txt;
+        }
+        public static string ParseSysMsgAchiGrade(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+            var id = ChatUtils.GetId(dictionary, "AchievementGradeInfo");
+            var txt = id.ToString();
+            if (Game.DB.AchievementGradeDatabase.Grades.TryGetValue(id, out var g)) txt = g;
+            return txt;
+        }
+        public static string ParseSysMsgDungeon(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+            var id = ChatUtils.GetId(dictionary, "dungeon");
+            var txt = id.ToString();
+            if (Game.DB.DungeonDatabase.Dungeons.TryGetValue(id, out var dung)) txt = dung.Name;
+            return txt;
+        }
+        public static string ParseSysMsgAccBenefit(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+            var id = ChatUtils.GetId(dictionary, "accountBenefit");
+            var txt = id.ToString();
+            if (Game.DB.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab)) txt = ab;
+            return txt;
+        }
+        public static string ParseSysMsgGuildQuest(string msgText)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+
+            var id = ChatUtils.GetId(dictionary, "GuildQuest");
+            var questName = id.ToString();
+            if (Game.DB.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
+            {
+                questName = q.Title;
+            }
+            return questName;
+        }
+        public static string ParseSysMsgRegion(string inPiece)
+        {
+            var dictionary = ChatUtils.BuildParametersDictionary(inPiece);
+            var regId = dictionary["rgn"];
+            var msgText = regId;
+            if (Game.DB.RegionsDatabase.Names.TryGetValue(Convert.ToUInt32(regId), out var regName)) msgText = regName;
+            return msgText;
+        }
+    }
+
+    public static class MessagePieceBuilder
+    {
+        public static MessagePiece BuildSysMsgZone(string msgText)
+        {
+            var mp = new MessagePiece(SystemMessageParser.ParseSysMsgZone(msgText))
+            {
+                Type = MessagePieceType.Simple
+            };
+            return mp;
+        }
+        public static MessagePiece BuildSysMsgCreature(string msgText)
+        {
+
+            var mp = new MessagePiece(SystemMessageParser.ParseSysMsgCreature(msgText))
             {
                 Type = MessagePieceType.Simple
             };
@@ -68,6 +154,7 @@ namespace TCC.Data.Chat
                 name = i.Name;
                 grade = i.RareGrade;
             }
+
             var mp = new MessagePiece($"<{name}>")
             {
                 Type = MessagePieceType.Item,
@@ -82,29 +169,11 @@ namespace TCC.Data.Chat
         }
         public static MessagePiece BuildSysMsgAchi(string msgText)
         {
-            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-
-            var id = ChatUtils.GetId(dictionary, "achievement");
-            var achiName = id.ToString();
-            if (Game.DB.AchievementDatabase.Achievements.TryGetValue(id * 1000 + 1, out var g2))
-            {
-                achiName = $"[{g2}]";
-
-            }
-
-            return new MessagePiece(achiName) { Type = MessagePieceType.Simple, };
+            return new MessagePiece(SystemMessageParser.ParseSysMsgAchi(msgText)) { Type = MessagePieceType.Simple, };
         }
         public static MessagePiece BuildSysMsgQuest(string msgText)
         {
-            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-
-            var id = ChatUtils.GetId(dictionary, "quest");
-            var txt = id.ToString();
-            if (Game.DB.QuestDatabase.Quests.TryGetValue(id, out var q))
-            {
-                txt = q;
-            }
-            return new MessagePiece(txt) { Type = MessagePieceType.Simple };
+            return new MessagePiece(SystemMessageParser.ParseSysMsgQuest(msgText)) { Type = MessagePieceType.Simple };
         }
         public static MessagePiece BuildSysMsgAchiGrade(string msgText)
         {
@@ -119,51 +188,35 @@ namespace TCC.Data.Chat
                 txt = g;
                 switch (id)
                 {
-                    case 104: col = R.Colors.ChatDiamondLaurelColor.ToHex(false, false); break;
-                    case 105: col = R.Colors.ChatChampionLaurelColor.ToHex(false, false); break;
+                    case 104:
+                        col = R.Colors.ChatDiamondLaurelColor.ToHex(false, false);
+                        break;
+                    case 105:
+                        col = R.Colors.ChatChampionLaurelColor.ToHex(false, false);
+                        break;
                 }
             }
-            var ret = new MessagePiece(txt) { Type = MessagePieceType.Simple };
+
+            var ret = new MessagePiece(txt) {Type = MessagePieceType.Simple};
             ret.SetColor(col);
             return ret;
         }
         public static MessagePiece BuildSysMsgDungeon(string msgText)
         {
-            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-
-            var id = ChatUtils.GetId(dictionary, "dungeon");
-            var txt = id.ToString();
-            if (Game.DB.DungeonDatabase.Dungeons.TryGetValue(id, out var dung))
-            {
-                txt = dung.Name;
-            }
-            return new MessagePiece(txt) { Type = MessagePieceType.Simple };
+            return new MessagePiece(SystemMessageParser.ParseSysMsgDungeon(msgText)) { Type = MessagePieceType.Simple };
         }
         public static MessagePiece BuildSysMsgAccBenefit(string msgText)
         {
-            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-
-            var id = ChatUtils.GetId(dictionary, "accountBenefit");
-            var txt = id.ToString();
-            if (Game.DB.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
-            {
-                txt = ab;
-            }
-            return new MessagePiece(txt) { Type = MessagePieceType.Simple };
+            return new MessagePiece(SystemMessageParser.ParseSysMsgAccBenefit(msgText)) { Type = MessagePieceType.Simple };
         }
         public static MessagePiece BuildSysMsgGuildQuest(string msgText)
         {
-            var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-
-            var id = ChatUtils.GetId(dictionary, "GuildQuest");
-            var questName = id.ToString();
-            if (Game.DB.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
-            {
-                questName = q.Title;
-            }
-            return new MessagePiece(questName) { Type = MessagePieceType.Simple };
+            return new MessagePiece(SystemMessageParser.ParseSysMsgGuildQuest(msgText)) { Type = MessagePieceType.Simple };
         }
-
+        public static MessagePiece BuildSysMsgRegion(string inPiece)
+        {
+            return new MessagePiece(SystemMessageParser.ParseSysMsgRegion(inPiece)) { Type = MessagePieceType.Simple };
+        }
         public static MessagePiece ParseChatLinkAction(HtmlNode chatLinkAction)
         {
             var param = chatLinkAction.GetAttributeValue("param", "");
@@ -186,6 +239,7 @@ namespace TCC.Data.Chat
                 default:
                     throw new Exception();
             }
+
             return mp;
         }
         private static MessagePiece ParseHtmlAchievement(HtmlNode node)
@@ -203,7 +257,10 @@ namespace TCC.Data.Chat
             var id = uint.Parse(pars[0]);
             var uid = long.Parse(pars[1]);
             var owner = "";
-            try { owner = pars[2]; }
+            try
+            {
+                owner = pars[2];
+            }
             catch
             {
                 // ignored
@@ -257,6 +314,7 @@ namespace TCC.Data.Chat
                 if (guardName != "") sb.Append(" - ");
                 sb.Append(sectionName);
             }
+
             sb.Append(">");
 
             return new MessagePiece(sb.ToString())
@@ -265,19 +323,6 @@ namespace TCC.Data.Chat
                 Location = new Location(worldId, guardId, sectionId, x, y),
                 RawLink = linkData
             };
-        }
-
-        public static MessagePiece BuildSysMsgRegion(string inPiece)
-        {
-            var dictionary = ChatUtils.BuildParametersDictionary(inPiece);
-            var regId = dictionary["rgn"];
-            var msgText = regId;
-            if (Game.DB.RegionsDatabase.Names.TryGetValue(Convert.ToUInt32(regId), out var regName))
-            {
-                msgText = regName;
-            }
-            return new MessagePiece(msgText) { Type = MessagePieceType.Simple };
-
         }
     }
 }

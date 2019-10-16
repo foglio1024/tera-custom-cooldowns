@@ -1,14 +1,151 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using FoglioUtils.Extensions;
+using HtmlAgilityPack;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.ViewModels;
-
+using VMs = TCC.WindowManager.ViewModels;
 namespace TCC.Parsing
 {
     public static class SystemMessagesProcessor
     {
+        public static string Build(SystemMessageData template, params string[] parameters)
+        {
+            var Pieces = new List<string>();
+            var sb = new StringBuilder();
+
+            var prm = ChatUtils.SplitDirectives(parameters);
+            var txt = template.Template.UnescapeHtml().Replace("<BR>", "\r\n");
+            var html = new HtmlDocument(); html.LoadHtml(txt);
+            var htmlPieces = html.DocumentNode.ChildNodes;
+            if (prm == null)
+            {
+                //only one parameter (opcode) so just add text
+
+                foreach (var htmlPiece in htmlPieces)
+                {
+                    var content = htmlPiece.InnerText;
+                    AddPiece(content);
+                }
+            }
+            else
+            {
+                //more parameters
+                foreach (var htmlPiece in htmlPieces)
+                {
+                    ParseSysHtmlPiece(htmlPiece);
+                }
+            }
+
+            Pieces.ForEach(p => sb.Append(p));
+
+            return sb.ToString();
+
+            ///////////////////////////////////////////////////////////////
+
+            void AddPiece(string p)
+            {
+                Pieces.Add(p);
+            }
+            void ParseSysHtmlPiece(HtmlNode piece)
+            {
+                if (piece.Name == "img")
+                {
+                }
+                else
+                {
+                    var content = ChatUtils.ReplaceParameters(piece.InnerText, prm, true);
+                    var innerPieces = content.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+                    var plural = false;
+                    var selectionStep = 0;
+
+                    foreach (var inPiece in innerPieces)
+                    {
+                        switch (selectionStep)
+                        {
+                            case 1:
+                                if (int.Parse(inPiece) != 1) plural = true;
+                                selectionStep++;
+                                continue;
+                            case 2:
+                                if (inPiece == "/s//s" && plural)
+                                {
+                                    Pieces[Pieces.Count - 1] = Pieces.Last() + "s";
+                                    plural = false;
+                                }
+                                selectionStep = 0;
+                                continue;
+                        }
+
+                        string mp;
+                        if (inPiece.StartsWith("@select"))
+                        {
+                            selectionStep++;
+                            continue;
+                        }
+                        if (inPiece.StartsWith("@item"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgItem(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@abnormal"))
+                        {
+                            var abName = "Unknown";
+                            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
+                            mp = abName;
+                        }
+                        else if (inPiece.StartsWith("@achievement"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgAchi(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@GuildQuest"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgGuildQuest(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@dungeon"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgDungeon(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@accountBenefit"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgAccBenefit(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@AchievementGradeInfo"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgAchiGrade(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@quest"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgQuest(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@creature"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgCreature(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@rgn"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgRegion(inPiece);
+                        }
+                        else if (inPiece.StartsWith("@zoneName"))
+                        {
+                            mp = SystemMessageParser.ParseSysMsgZone(inPiece);
+                        }
+                        else if (inPiece.Contains("@money"))
+                        {
+                            var t = inPiece.Replace("@money", "");
+                            mp = new Money(t).ToString();
+                        }
+                        else
+                        {
+                            mp = inPiece.UnescapeHtml();
+                        }
+                        AddPiece(mp);
+                    }
+                }
+            }
+        }
         public static void AnalyzeMessage(string srvMsg, SystemMessageData sysMsg, string opcodeName)
         {
             if (!Pass(opcodeName)) return;
@@ -32,32 +169,36 @@ namespace TCC.Parsing
         private static void HandleFriendLogin(string friendName, SystemMessageData sysMsg)
         {
             var template = "@0\vUserName\v" + friendName;
-            ChatWindowManager.Instance.AddSystemMessage(template, sysMsg,ChatChannel.Friend, friendName);
+            ChatWindowManager.Instance.AddSystemMessage(template, sysMsg, ChatChannel.Friend, friendName);
         }
         private static void HandleClearedGuardianQuestsMessage(string srvMsg, SystemMessageData sysMsg)
         {
-            var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
+            var currChar = VMs.DashboardVM.CurrentCharacter;
             var cleared = currChar.GuardianInfo.Cleared;
             var standardCountString = $"<font color =\"#cccccc\">({cleared}/40)</font>";
             var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{cleared}</font><font color=\"#cccccc\">/40)</font>";
             var newMsg = new SystemMessageData($"{sysMsg.Template} {(cleared == 40 ? maxedCountString : standardCountString)}", sysMsg.ChatChannel);
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newMsg, ChatChannel.Guardian);
-            if (currChar.GuardianInfo.Cleared == 40) msg.ContainsPlayerName = true;
+            if (currChar.GuardianInfo.Cleared == 40)
+            {
+                
+                msg.ContainsPlayerName = true;
+            }
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
         private static void HandleNewGuildMasterMessage(string template, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(template, sysMsg, ChatChannel.GuildNotice);
+            VMs.NotificationAreaVM.Enqueue("Guild", msg.ToString(), NotificationType.Success);
             ChatWindowManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild", msg.ToString(), NotificationType.Success);
 
         }
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
+            VMs.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
             TimeManager.Instance.UploadGuildBamTimestamp();
@@ -69,7 +210,7 @@ namespace TCC.Parsing
         {
             const string s = "dungeon:";
             var dgId = Convert.ToUInt32(srvMsg.Substring(srvMsg.IndexOf(s, StringComparison.Ordinal) + s.Length));
-            WindowManager.ViewModels.DashboardVM.CurrentCharacter.DungeonInfo.Engage(dgId);
+            VMs.DashboardVM.CurrentCharacter.DungeonInfo.Engage(dgId);
 
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowManager.Instance.AddChatMessage(msg);
@@ -88,7 +229,6 @@ namespace TCC.Parsing
             var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            //if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT"); //ProxyOld.ForceSystemMessage(srvMsg, "SMT_BATTLE_PARTY_RESURRECT");
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessageData sysMsg)
@@ -101,24 +241,24 @@ namespace TCC.Parsing
         {
             ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowManager.Instance.RemoveDeadLfg();
-            if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
+            if (App.Settings.LfgWindowSettings.Enabled) VMs.LfgVM.RemoveDeadLfg();
         }
         private static void HandleMerchantSpawn(string srvMsg, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            VMs.NotificationAreaVM.Enqueue("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Normal, 10000);
         }
         private static void HandleMerchantDespawn(string srvMsg, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            VMs.NotificationAreaVM.Enqueue("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
             ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Normal, 10000);
         }
         private static void HandleLfgNotListed(string srvMsg, SystemMessageData sysMsg)
         {
             ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysMsg);
-            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
+            VMs.LfgVM.ForceStopPublicize();
         }
         private static void Redirect(string srvMsg, SystemMessageData sysMsg, ChatChannel ch)
         {
@@ -128,9 +268,18 @@ namespace TCC.Parsing
         //by HQ 20181224
         private static void HandleFieldBossAppear(string srvMsg, SystemMessageData sysMsg)
         {
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Success, 10000);
+            string notificationText;
+            if (App.Settings.ChatEnabled)
+            {
+                var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+                notificationText = msg.ToString();
+                ChatWindowManager.Instance.AddChatMessage(msg);
+            }
+            else
+            {
+                notificationText = Build(sysMsg, srvMsg.Split('\v'));
+            }
+            VMs.NotificationAreaVM.Enqueue("Field Boss", notificationText, NotificationType.Success, 10000);
 
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
@@ -144,14 +293,24 @@ namespace TCC.Parsing
 
             Game.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
 
-            TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, msg.RawMessage);
+            TimeManager.Instance.ExecuteFieldBossSpawnWebhook(monsterName, regionName, notificationText);
 
         }
         private static void HandleFieldBossDie(string srvMsg, SystemMessageData sysMsg)
         {
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(msg);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", msg.ToString(), NotificationType.Error, 10000);
+            string notificationText;
+
+            if (App.Settings.ChatEnabled)
+            {
+                var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+                notificationText = msg.ToString();
+                ChatWindowManager.Instance.AddChatMessage(msg);
+            }
+            else
+            {
+                notificationText = Build(sysMsg, srvMsg.Split('\v'));
+            }
+            VMs.NotificationAreaVM.Enqueue("Field Boss", notificationText, NotificationType.Error, 10000);
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
             //@4158
@@ -167,29 +326,7 @@ namespace TCC.Parsing
             var userName = GetFieldBossKillerName(srvMsg);
             var guildName = GetFieldBossKillerGuild(srvMsg);
             if (string.IsNullOrEmpty(guildName)) guildName = "-no guild-";
-            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, msg.RawMessage, userName, guildName);
-
-
-
-            //if (srvMsg.Contains("@creature:39#501"))     // Hazar
-            //{
-            //    TimeManager.Instance.ExecuteFieldBossWebhook(501, 2);
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-            //else if (srvMsg.Contains("@creature:51#4001"))    // Kelos
-            //{
-            //    TimeManager.Instance.ExecuteFieldBossWebhook(4001, 2);
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-            //else if (srvMsg.Contains("@creature:26#5001"))    // Ortan
-            //{
-            //    TimeManager.Instance.ExecuteFieldBossWebhook(5001, 2);
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
-            //else
-            //{
-            //    //Log.F("FieldBoss.log", $"[{nameof(HandleFieldBossDie)}] {srvMsg}"); //by HQ 20181228
-            //}
+            TimeManager.Instance.ExecuteFieldBossDieWebhook(monsterName, notificationText, userName, guildName);
         }
         private static string GetFieldBossName(string srvMsg)
         {

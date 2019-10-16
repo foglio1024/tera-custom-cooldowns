@@ -55,7 +55,7 @@ namespace TCC.Data.Chat
         {
             var goldString = Gold != 0 ? Gold + "g " : "";
             var silverString = Silver != 0 ? Silver + "s " : "";
-            var copperString = Copper != 0 ? Copper + "c " : "";
+            var copperString = Copper != 0 ? Copper + "c" : "";
 
             return $"{goldString}{silverString}{copperString}";
         }

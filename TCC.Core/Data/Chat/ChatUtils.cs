@@ -31,6 +31,10 @@ namespace TCC.Data.Chat
         public static Dictionary<string, string> SplitDirectives(string m)
         {
             var parameters = m.Split('\v');
+            return SplitDirectives(parameters);
+        }
+        public static Dictionary<string, string> SplitDirectives(params string[] parameters)
+        {
             if (parameters.Length == 1) return null;
             var retDict = new Dictionary<string, string>();
             for (var i = 1; i < parameters.Length - 1; i += 2)
