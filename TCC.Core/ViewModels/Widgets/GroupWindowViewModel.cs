@@ -348,7 +348,7 @@ namespace TCC.ViewModels.Widgets
             }
             Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
-            if (/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(msg, opcode); //ProxyOld.ForceSystemMessage(msg, opcode);
+            //if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(msg, opcode);
         }
         private void SendLeaveMessage(string name)
         {
@@ -520,21 +520,21 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(new Action(() => Raid = raid));
         }
-        public void UpdateMember(PartyMemberData p)
+        public void UpdateMember(PartyMemberData update)
         {
             Dispatcher.InvokeAsync(() =>
             {
-                var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-                if (u == null) return;
-                u.CurrentHp = p.CurrentHP;
-                u.CurrentMp = p.CurrentMP;
-                u.MaxHp = p.MaxHP;
-                u.MaxMp = p.MaxMP;
-                u.Level = p.Level;
-                //if (u.Alive && !p.Alive) SendDeathMessage(u.Name);
-                u.Alive = p.Alive;
+                var current = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == update.PlayerId && x.ServerId == update.ServerId);
+                if (current == null) return;
+                current.CurrentHp = update.CurrentHP;
+                current.CurrentMp = update.CurrentMP;
+                current.MaxHp = update.MaxHP;
+                current.MaxMp = update.MaxMP;
+                current.Level = update.Level;
+                if (current.Alive && !update.Alive) SendDeathMessage(current.Name);
+                current.Alive = update.Alive;
                 N(nameof(AliveCount));
-                if (!p.Alive) u.HasAggro = false;
+                if (!update.Alive) current.HasAggro = false;
             });
         }
         public void NotifyThresholdChanged()
