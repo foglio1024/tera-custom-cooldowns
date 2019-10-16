@@ -342,15 +342,20 @@ namespace TCC.ViewModels
         }
         public void AddSystemMessage(string template, SystemMessageData sysMsg, string authorOverride = "System")
         {
+            if (!App.Settings.ChatEnabled) return;
             AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel, authorOverride));
         }
         public void AddSystemMessage(string template, SystemMessageData sysMsg, ChatChannel channelOverride, string authorOverride = "System")
         {
+            if (!App.Settings.ChatEnabled) return;
+
             AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride));
         }
 
         private void AddLfgMessage(uint id, string name, string msg)
         {
+            if (!App.Settings.ChatEnabled){ return;}
+
             Dispatcher.InvokeAsync(() =>
             {
                 AddChatMessage(Factory.CreateLfgMessage(id, name, msg));
@@ -358,6 +363,8 @@ namespace TCC.ViewModels
         }
         public void AddChatMessage(ChatMessage chatMessage)
         {
+            if (!App.Settings.ChatEnabled) return;
+
             Dispatcher.InvokeAsync(() =>
             {
                 if (Filtered(chatMessage)) return;
@@ -394,11 +401,15 @@ namespace TCC.ViewModels
         }
         public void AddTccMessage(string message)
         {
+            if (!App.Settings.ChatEnabled) return;
+
             var msg = Factory.CreateMessage(ChatChannel.TCC, "System", $"<FONT>{message}</FONT>");
             AddChatMessage(msg);
         }
         public void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP)
         {
+            if (!App.Settings.ChatEnabled) return;
+
             if (!Game.IsMe(target) || diff > 0 || target == source || source == 0 || !TccUtils.IsEntitySpawned(source)) return;
             var srcName = TccUtils.GetEntityName(source);
             srcName = srcName != ""
