@@ -17,6 +17,7 @@ using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Settings;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.Windows;
 using CaptureMode = TCC.Data.CaptureMode;
 using MessageBoxImage = TCC.Data.MessageBoxImage;

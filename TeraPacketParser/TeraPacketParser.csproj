@@ -163,6 +163,10 @@
       <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
       <Name>FoglioUtils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj">
+      <Project>{0E5C7C6C-8D28-4731-82DA-2D37A69C5AC8}</Project>
+      <Name>TCC.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj">
       <Project>{E8A1FC0B-C9BC-448E-9702-94CE50412D99}</Project>
       <Name>TeraDataLite</Name>

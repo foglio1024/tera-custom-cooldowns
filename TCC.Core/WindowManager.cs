@@ -27,7 +27,6 @@ namespace TCC
         public static event Action<Size> ApplyScreenCorrectionEvent;
         public static event Action DisposeEvent;
 
-        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; }
         public static TccTrayIcon TrayIcon { get; private set; }
         public static ForegroundManager ForegroundManager { get; set; }
 
@@ -61,7 +60,6 @@ namespace TCC
         }
 
         public static Size ScreenSize;
-        private static bool _running;
 
         public static CooldownWindow CooldownWindow { get; private set; }
         public static CharacterWindow CharacterWindow { get; private set; }
@@ -83,7 +81,6 @@ namespace TCC
 
         public static async Task Init()
         {
-            _running = true;
             ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             FocusManager.Init();
 
@@ -129,11 +126,10 @@ namespace TCC
 
         public static void Dispose()
         {
-            _running = false;
             DisposeEvent?.Invoke();
             SystemEvents.DisplaySettingsChanged -= SystemEventsOnDisplaySettingsChanged;
 
-            WaitDispatchersShutdown();
+            App.WaitDispatchersShutdown();
 
             App.BaseDispatcher.Invoke(() =>
             {
@@ -152,7 +148,6 @@ namespace TCC
 
         private static async Task LoadWindows()
         {
-            RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
 
             // TODO: TccModules should define and create their own windows
             var b1 = new TccWidgetBuilder<CharacterWindow, CharacterWindowViewModel>(App.Settings.CharacterWindowSettings);
@@ -199,60 +194,6 @@ namespace TCC
             ChatWindowManager.Start();
 
             SettingsWindow = new SettingsWindow();
-
-            StartDispatcherWatcher();
-        }
-
-        private static void StartDispatcherWatcher()
-        {
-            var t = new Thread(() =>
-            {
-                while (_running)
-                {
-                    var deadlockedDispatchers = new List<Dispatcher>();
-                    try
-                    {
-                        Parallel.ForEach(RunningDispatchers.Values.Append(App.BaseDispatcher), (v) =>
-                        {
-                            if (v.IsAlive(10000).Result) return;
-                            Log.CW($"{v.Thread.Name} didn't respond in time!");
-                            deadlockedDispatchers.Add(v);
-                        });
-                        Thread.Sleep(10000);
-                    }
-                    catch { }
-                    if (deadlockedDispatchers.Count > 1)
-                    {
-                        throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
-                    }
-                }
-            })
-            {Name = "Watcher"};
-            t.Start();
-        }
-
-        public static void AddDispatcher(int threadId, Dispatcher d)
-        {
-            RunningDispatchers[threadId] = d;
-        }
-
-        public static void RemoveDispatcher(int threadId)
-        {
-            RunningDispatchers.TryRemove(threadId, out _);
-        }
-
-        private static void WaitDispatchersShutdown()
-        {
-            if (RunningDispatchers == null) return;
-            var tries = 50;
-            while (tries > 0)
-            {
-                if (RunningDispatchers.Count == 0) break;
-                Log.CW($"Waiting all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
-                Thread.Sleep(100);
-                tries--;
-            }
-            Log.CW("All dispatchers shut down.");
         }
 
         public static void ReloadPositions()

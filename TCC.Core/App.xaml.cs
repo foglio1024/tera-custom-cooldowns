@@ -1,21 +1,26 @@
 ﻿using FoglioUtils;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Test;
+using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -26,6 +31,7 @@ namespace TCC
     {
         public const bool Experimental = true;
 
+        private static bool _running;
         private static Mutex _mutex;
         public static readonly Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond);
         public static TccSplashScreen SplashScreen;
@@ -53,10 +59,12 @@ namespace TCC
         }
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+            _running = true;
+            Log.Config(Path.Combine(BasePath, "logs"), AppVersion); // NLog when?
             ParseStartupArgs(e.Args.ToList());
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
-            InitMessageBox(); //TccMessageBox.Create(); //Create it here in STA thread
+            InitMessageBox(); 
 
             if (IsRunning())
             {
@@ -110,7 +118,10 @@ namespace TCC
             SplashScreen.VM.Progress = 70;
             SplashScreen.VM.BottomText = "Initializing widgets...";
 
+
+            RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
             await WindowManager.Init();
+            StartDispatcherWatcher();
 
             SplashScreen.VM.BottomText = "Initializing packet processor...";
             SplashScreen.VM.Progress = 80;
@@ -194,7 +205,7 @@ namespace TCC
                     TccMessageBox.Create();
                     Dispatcher.Run();
                 })
-                { Name = "MessageBoxThread" };
+            { Name = "MessageBoxThread" };
             ssThread.SetApartmentState(ApartmentState.STA);
             ssThread.Start();
         }
@@ -209,6 +220,7 @@ namespace TCC
 
         public static void Close(bool releaseMutex = true)
         {
+            _running = false;
             if (releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
             PacketAnalyzer.Sniffer.Enabled = false;
             Settings.Save();
@@ -229,7 +241,61 @@ namespace TCC
 
         public static void ReleaseMutex()
         {
+            _running = false;
             _mutex.ReleaseMutex();
+        }
+
+        private static void StartDispatcherWatcher()
+        {
+            var t = new Thread(() =>
+                {
+                    while (_running)
+                    {
+                        var deadlockedDispatchers = new List<Dispatcher>();
+                        try
+                        {
+                            Parallel.ForEach(Enumerable.Append(RunningDispatchers.Values, App.BaseDispatcher), (v) =>
+                            {
+                                if (v.IsAlive(10000).Result) return;
+                                Log.CW($"{v.Thread.Name} didn't respond in time!");
+                                deadlockedDispatchers.Add(v);
+                            });
+                            Thread.Sleep(10000);
+                        }
+                        catch { }
+                        if (deadlockedDispatchers.Count > 1)
+                        {
+                            throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                        }
+                    }
+                })
+            {Name = "Watcher"};
+            t.Start();
+        }
+
+        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; }
+
+        public static void AddDispatcher(int threadId, Dispatcher d)
+        {
+            App.RunningDispatchers[threadId] = d;
+        }
+        public static void RemoveDispatcher(int threadId)
+        {
+            App.RunningDispatchers.TryRemove(threadId, out _);
+        }
+
+        public static void WaitDispatchersShutdown()
+        {
+            if (RunningDispatchers == null) return;
+            var tries = 50;
+            while (tries > 0)
+            {
+                if (RunningDispatchers.Count == 0) break;
+                Log.CW($"Waiting all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
+                Thread.Sleep(100);
+                tries--;
+            }
+            Log.CW("All dispatchers shut down.");
         }
     }
 
@@ -237,7 +303,7 @@ namespace TCC
     {
         public DeadlockException(string msg) : base(msg)
         {
-            
+
         }
     }
 }

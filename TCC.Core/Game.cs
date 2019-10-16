@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -12,6 +13,7 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
@@ -575,6 +577,7 @@ namespace TCC
             var zone = DB.RegionsDatabase.GetZoneName(p.ZoneId);
             var name = DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
             var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
+            Log.F($"{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}\n{p.Payload.Array.ToStringEx()}");
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)

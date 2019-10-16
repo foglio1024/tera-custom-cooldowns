@@ -7,6 +7,7 @@ using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Data.Pc;
 using TCC.Utilities;
+using TCC.Utils;
 
 namespace TCC.Data.Chat
 {

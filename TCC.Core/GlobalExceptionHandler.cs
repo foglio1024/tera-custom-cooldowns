@@ -14,6 +14,7 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
@@ -178,7 +179,7 @@ namespace TCC
             //{
                 var ret = new JObject();
 
-                WindowManager.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
+                App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
                 {
                     var t = d.Thread;
                     t.Suspend();

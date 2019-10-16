@@ -9,6 +9,7 @@ using FoglioUtils;
 using TCC.Annotations;
 using FoglioUtils.Extensions;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat

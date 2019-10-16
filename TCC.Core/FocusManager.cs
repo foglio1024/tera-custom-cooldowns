@@ -7,6 +7,7 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 using TCC.Utilities;
+using TCC.Utils;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;

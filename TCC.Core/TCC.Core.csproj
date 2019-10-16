@@ -255,7 +255,6 @@
     <Compile Include="Data\Skills\Cooldown.cs" />
     <Compile Include="Data\Npc\HpTriggeredTimerPattern.cs" />
     <Compile Include="Data\Npc\TimerPattern.cs" />
-    <Compile Include="Utilities\Log.cs" />
     <Compile Include="Moongourd\MoongourdEncounter.cs" />
     <Compile Include="ResourceDictionaries\Styles.xaml.cs">
       <DependentUpon>Styles.xaml</DependentUpon>

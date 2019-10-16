@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using FoglioUtils;
 using TCC.Data;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -121,7 +122,7 @@ namespace TCC.Windows
             else if (_testNotifIdx > 33 && _testNotifIdx <= 41) type = NotificationType.Error;
             else if (_testNotifIdx > 48 ) type = NotificationType.Success;
 
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("GLaDOS", msg, type, 2000);
+            Log.N("GLaDOS", msg, type, 2000);
             _testNotifIdx++;
             if (_testNotifIdx >= _lyrics.Count) _testNotifIdx = 0;
         }

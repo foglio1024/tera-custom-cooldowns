@@ -615,10 +615,10 @@ namespace TCC.ViewModels
             {
                 SynchronizationContext.SetSynchronizationContext( new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 Instance.InitWindows();
-                WindowManager.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
+                App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 Log.CW($"[ChatWindow] Dispatcher stopped.");
-                WindowManager.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+                App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
             })
             {
                 Name = $"ChatThread"

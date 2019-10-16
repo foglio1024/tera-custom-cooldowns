@@ -6,6 +6,7 @@ using FoglioUtils.Extensions;
 using HtmlAgilityPack;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Utils;
 using TCC.ViewModels;
 using VMs = TCC.WindowManager.ViewModels;
 namespace TCC.Parsing
@@ -190,7 +191,7 @@ namespace TCC.Parsing
         private static void HandleNewGuildMasterMessage(string template, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(template, sysMsg, ChatChannel.GuildNotice);
-            VMs.NotificationAreaVM.Enqueue("Guild", msg.ToString(), NotificationType.Success);
+            Log.N("Guild", msg.ToString(), NotificationType.Success);
             ChatWindowManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
 
@@ -198,7 +199,7 @@ namespace TCC.Parsing
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            VMs.NotificationAreaVM.Enqueue("Guild BAM", msg.ToString(), NotificationType.Normal);
+            Log.N("Guild BAM", msg.ToString(), NotificationType.Normal);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
             TimeManager.Instance.UploadGuildBamTimestamp();
@@ -217,6 +218,7 @@ namespace TCC.Parsing
         }
         private static void HandleFriendInAreaMessage(string srvMsg, SystemMessageData sysMsg)
         {
+            if (!App.Settings.ChatEnabled) return;
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, ChatChannel.Friend);
             var start = srvMsg.IndexOf("UserName\v", StringComparison.InvariantCultureIgnoreCase) + "UserName\v".Length;
             var end = srvMsg.IndexOf("\v", start, StringComparison.InvariantCultureIgnoreCase);
@@ -226,33 +228,41 @@ namespace TCC.Parsing
         }
         private static void HandleRessMessage(string srvMsg, SystemMessageData sysMsg)
         {
-            var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
+            if (!App.Settings.ChatEnabled) return;
+
+            var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>")
+                .Replace("{PartyPlayerName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessageData sysMsg)
         {
-            var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Death);
+            if (!App.Settings.ChatEnabled) return;
+
+            var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>")
+                .Replace("{PartyPlayerName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Death);
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Death);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleInvalidLink(string srvMsg, SystemMessageData sysMsg)
         {
-            ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
-            ChatWindowManager.Instance.RemoveDeadLfg();
             if (App.Settings.LfgWindowSettings.Enabled) VMs.LfgVM.RemoveDeadLfg();
+
+            if (!App.Settings.ChatEnabled) return;
+            ChatWindowManager.Instance.RemoveDeadLfg();
+            ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
         }
         private static void HandleMerchantSpawn(string srvMsg, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            VMs.NotificationAreaVM.Enqueue("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
+            Log.N("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleMerchantDespawn(string srvMsg, SystemMessageData sysMsg)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            VMs.NotificationAreaVM.Enqueue("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
+            Log.N("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleLfgNotListed(string srvMsg, SystemMessageData sysMsg)
@@ -279,7 +289,7 @@ namespace TCC.Parsing
             {
                 notificationText = Build(sysMsg, srvMsg.Split('\v'));
             }
-            VMs.NotificationAreaVM.Enqueue("Field Boss", notificationText, NotificationType.Success, 10000);
+            Log.N("Field Boss", notificationText, NotificationType.Success, 10000);
 
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
@@ -310,7 +320,7 @@ namespace TCC.Parsing
             {
                 notificationText = Build(sysMsg, srvMsg.Split('\v'));
             }
-            VMs.NotificationAreaVM.Enqueue("Field Boss", notificationText, NotificationType.Error, 10000);
+            Log.N("Field Boss", notificationText, NotificationType.Error, 10000);
             if (!App.Settings.WebhookEnabledFieldBoss) return;
 
             //@4158

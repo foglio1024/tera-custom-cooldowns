@@ -560,6 +560,43 @@
                         </Image.Style>
                     </Image>
                     <Image Source="../../resources/images/char_window_fg.png" Stretch="Uniform"/>
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="FrameworkElement">
+                                <Setter Property="Opacity" Value="0"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Player.IsInCombat}" Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Rectangle Stroke="{StaticResource HpBrushLight}" StrokeThickness="1" 
+                               RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                               Margin="27">
+
+                        </Rectangle>
+                        <Rectangle Stroke="{StaticResource HpBrush}" StrokeThickness="5" 
+                               RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                               Margin="25">
+                            <Rectangle.Effect>
+                                <BlurEffect Radius="10"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                    </Grid>
                     <c:Arc StrokeThickness="4" StrokeEndLineCap="Flat"
                                Stroke="{Binding Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=light}"
                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ReArc"
@@ -617,68 +654,6 @@
                             </Style>
                         </FrameworkElement.Style>
                     </elements:SorcererElementsControl>
-                    <!--<Grid>
-                        <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Instance.ShowElements}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
-                        <Grid.Resources>
-                            <Style TargetType="c:Arc" >
-                                <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
-                                <Setter Property="StrokeThickness" Value="8"/>
-                                <Setter Property="Width" Value="86"/>
-                                <Setter Property="Height" Value="86"/>
-                                <Setter Property="Rhomb" Value="True"/>
-                            </Style>
-                        </Grid.Resources>
-                        <c:Arc StartAngle="219" EndAngle="302" Visibility="{Binding Instance.Player.Ice, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <FrameworkElement.RenderTransform>
-                                <ScaleTransform ScaleX="-1"></ScaleTransform>
-                            </FrameworkElement.RenderTransform>
-                            <Shape.Stroke>
-                                <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
-                                    <GradientStop Color="{StaticResource IceColor}"></GradientStop>
-                                    <GradientStop Color="{StaticResource IceColorLight}" Offset=".1"></GradientStop>
-                                </RadialGradientBrush>
-                            </Shape.Stroke>
-                            <Shape.Effect>
-                                <DropShadowEffect Color="{StaticResource IceColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
-                            </Shape.Effect>
-                        </c:Arc>
-                        <c:Arc StartAngle="219" EndAngle="302" Visibility="{Binding Instance.Player.Fire, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Shape.Stroke>
-                                <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
-                                    <GradientStop Color="{StaticResource FireColor}"></GradientStop>
-                                    <GradientStop Color="{StaticResource FireColorLight}" Offset=".1"></GradientStop>
-                                </RadialGradientBrush>
-                            </Shape.Stroke>
-                            <Shape.Effect>
-                                <DropShadowEffect Color="{StaticResource FireColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
-                            </Shape.Effect>
-                        </c:Arc>
-                        <c:Arc StartAngle="38" EndAngle="142" Visibility="{Binding Instance.Player.Arcane, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Shape.Stroke>
-                                <RadialGradientBrush GradientOrigin=".2 .7" RadiusX="10" RadiusY="10">
-                                    <GradientStop Color="{StaticResource ArcaneColor}"></GradientStop>
-                                    <GradientStop Color="{StaticResource ArcaneColorLight}" Offset=".1"></GradientStop>
-                                </RadialGradientBrush>
-                            </Shape.Stroke>
-                            <Shape.Effect>
-                                <DropShadowEffect Color="{StaticResource ArcaneColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
-                            </Shape.Effect>
-                            <Shape.RenderTransform>
-                                <RotateTransform Angle="-90"/>
-                            </Shape.RenderTransform>
-                        </c:Arc>
-
-
-                    </Grid>-->
 
                     <Image Opacity="1"
                         Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr.big}"
@@ -686,12 +661,28 @@
                     <Path Data="{Binding Player.Class, Converter={StaticResource ClassToSvg}}" 
                       HorizontalAlignment="Center" 
                       Fill="#eee" 
-                      Margin="34" 
+                      Margin="36" 
                       Width="Auto"
                       >
-                        <Path.Effect>
-                            <DropShadowEffect ShadowDepth="0" Color="{StaticResource MpColorLight}"></DropShadowEffect>
-                        </Path.Effect>
+                        <Path.Style>
+                            <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{StaticResource MpColorLight}"></DropShadowEffect>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Player.IsInCombat}" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="0" Color="{StaticResource HpColor}" BlurRadius="10"></DropShadowEffect>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+
                         <Path.RenderTransform>
                             <TranslateTransform Y="0"/>
                         </Path.RenderTransform>

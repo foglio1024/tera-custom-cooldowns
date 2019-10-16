@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-
+using FoglioUtils.Extensions;
+using TCC.Utils;
 
 
 namespace TeraPacketParser.Messages
@@ -37,8 +38,8 @@ namespace TeraPacketParser.Messages
                         }
                         catch
                         {
-                            //Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Failed to parse guild quest id. \nContent:\n{StringUtils.ByteArrayToString(Payload.Array)}\nQuest string:\n{Quest}");
-                            //WindowManager.ViewModels.NotificationArea.Enqueue("Warning", "A non-fatal error occured. More detailed info has been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
+                            //Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Failed to parse guild quest id. \nContent:\n{Payload.Array.ToStringEx()}\nQuest string:\n{Quest}");
+                            //Log.N("Warning", "A non-fatal error occured. More detailed info have been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
                         }
                         break;
                 }
@@ -119,7 +120,9 @@ namespace TeraPacketParser.Messages
             }
             catch
             {
-                //Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Error while reading packet: {e}");
+                //Log.F($"[{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}] Error while reading packet: {e}\nData: {Payload.Array.ToStringEx()}");
+                //Log.N("Warning", "A non-fatal error occured while parsing guild bam notification. More detailed info have been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
+
             }
         }
     }

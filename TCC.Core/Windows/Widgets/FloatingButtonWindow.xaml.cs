@@ -11,6 +11,7 @@ using TCC.Controls.Chat;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using FoglioUtils.Extensions;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets

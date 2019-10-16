@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TCC.Interop.Proxy;
 using TCC.Utilities;
+using TCC.Utils;
 
 namespace TCC.Interop
 {

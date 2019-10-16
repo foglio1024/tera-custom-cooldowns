@@ -4,6 +4,7 @@ using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Data;
 using TCC.Settings;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.Windows.Widgets
@@ -17,6 +18,7 @@ namespace TCC.Windows.Widgets
         {
             _queue = new ConcurrentQueue<NotificationInfo>();
             Notifications = new TSObservableCollection<NotificationInfo>(Dispatcher);
+            Log.NewNotification += Enqueue;
         }
 
         private void CheckShow()

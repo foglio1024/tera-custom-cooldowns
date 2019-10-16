@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using TCC.Settings;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -45,10 +46,10 @@ namespace TCC
             _vm = (TViewModel) Activator.CreateInstance(typeof(TViewModel), ws);
             _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
             if (_vm.Settings.Enabled) _window.Show();
-            WindowManager.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
+            App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
             Dispatcher.Run();
             Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
-            WindowManager.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+            App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
         })
             {
                 Name = $"{typeof(TWindow).Name}Thread"

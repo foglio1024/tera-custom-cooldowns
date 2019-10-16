@@ -8,6 +8,7 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
+using TCC.Utils;
 using TCC.Windows;
 using TeraPacketParser;
 using TeraPacketParser.Messages;
@@ -44,7 +45,7 @@ namespace TCC.Parsing
         public static async Task InitAsync()
         {
             await Task.Factory.StartNew(Init);
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Ready to connect.", NotificationType.Normal);
+            Log.N("TCC", "Ready to connect.", NotificationType.Normal);
         }
         private static void PacketAnalysisLoop()
         {

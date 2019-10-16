@@ -85,13 +85,6 @@ namespace TCC.Data
         Me
     }
 
-    public enum NotificationType
-    {
-        Normal = 0,
-        Success,
-        Warning,
-        Error
-    }
     public enum DungeonTier
     {
         Solo = 1,

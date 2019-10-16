@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Interop;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
@@ -142,7 +143,7 @@ namespace TCC
             {
 
                 ChatWindowManager.Instance.AddTccMessage("Failed to retrieve guild BAM info.");
-                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
+                Log.N("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
 
                 return 0;
             }
@@ -168,7 +169,7 @@ namespace TCC
             catch
             {
                 ChatWindowManager.Instance.AddTccMessage("Failed to upload guild BAM info.");
-                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
+                Log.N("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
 
             }
 
