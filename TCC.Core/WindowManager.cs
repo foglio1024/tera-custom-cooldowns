@@ -218,7 +218,7 @@ namespace TCC
                             Log.CW($"{v.Thread.Name} didn't respond in time!");
                             deadlockedDispatchers.Add(v);
                         });
-                        Thread.Sleep(100);
+                        Thread.Sleep(10000);
                     }
                     catch { }
                     if (deadlockedDispatchers.Count > 1)
