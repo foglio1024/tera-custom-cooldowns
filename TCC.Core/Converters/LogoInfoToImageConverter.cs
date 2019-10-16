@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Globalization;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using FoglioUtils.WinAPI;
 using TeraPacketParser.Messages;
 
 namespace TCC.Converters
 {
     public class LogoInfoToImageConverter : IValueConverter
     {
-        [DllImport("gdi32")]
-        private static extern int DeleteObject(IntPtr o);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var guildId = (uint?) value ?? 0;
@@ -28,7 +26,7 @@ namespace TCC.Converters
             }
             finally
             {
-                DeleteObject(ip);
+                Gdi32.DeleteObject(ip);
             }
 
             return bs;

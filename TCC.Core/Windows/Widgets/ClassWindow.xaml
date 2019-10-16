@@ -1,4 +1,4 @@
-﻿<w:TccWidget x:Class="TCC.Windows.Widgets.ClassWindow"
+﻿<widgets1:TccWidget x:Class="TCC.Windows.Widgets.ClassWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,12 +8,13 @@
              xmlns:wm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+             xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
              Style="{StaticResource BaseWindowStyle}"
              mc:Ignorable="d" 
              Title="TCC Class" 
              UseLayoutRounding="True"
              d:DataContext="{d:DesignInstance widgets:ClassWindowViewModel}">
-    <w:TccWidget.Resources>
+    <widgets1:TccWidget.Resources>
         <DataTemplate x:Key="Warrior">
             <classBars:WarriorLayout />
         </DataTemplate>
@@ -72,7 +73,7 @@
                                         None="{StaticResource EmptyTemplate}"
                                         />
 
-    </w:TccWidget.Resources>
+    </widgets1:TccWidget.Resources>
     <Grid ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -82,14 +83,14 @@
         <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
 
         <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" 
                          />
         <ContentControl x:Name="WindowContent" Content="{Binding CurrentManager}" HorizontalAlignment="Center" 
                         ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}"  Grid.Row="1" >
         <ContentControl.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" 
-                            ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=w:TccWidget}}"/>
+            <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" 
+                            ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}"/>
         </ContentControl.LayoutTransform>
     </ContentControl>
     </Grid>
-</w:TccWidget>
+</widgets1:TccWidget>

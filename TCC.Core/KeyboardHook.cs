@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using FoglioUtils.WinAPI;
 using TCC.Data;
 
 namespace TCC
@@ -105,7 +105,7 @@ namespace TCC
             _currentId++;
 
             // register the hot key.
-            RegisterHotKey(_window.Handle, _currentId, (uint) modifier, (uint) key);
+            User32.RegisterHotKey(_window.Handle, _currentId, (uint) modifier, (uint) key);
         }
 
         private void RegisterHotKey(HotKey hk)
@@ -120,17 +120,7 @@ namespace TCC
             cb?.DynamicInvoke();
         }
 
-        #region WinAPI
 
-        // Registers a hot key with Windows.
-        [DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
-
-        // Unregisters the hot key with Windows.
-        [DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-        #endregion
 
         #region Window
 
@@ -194,7 +184,7 @@ namespace TCC
         {
             Console.WriteLine("ClearHotkeys()");
 
-            for (var i = _currentId; i > 0; i--) UnregisterHotKey(_window.Handle, i);
+            for (var i = _currentId; i > 0; i--) User32.UnregisterHotKey(_window.Handle, i);
             _currentId = 0;
             _isRegistered = false;
         }

@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Interop;
 using TCC.Utilities;
 using TCC.Utils;
@@ -18,6 +17,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
+    //TODO: big refactor here
     public class TimeManager : TSPropertyChanged
     {
         // TODO: not sure about other regions reset days

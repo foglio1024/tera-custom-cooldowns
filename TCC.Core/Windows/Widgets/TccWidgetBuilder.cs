@@ -3,12 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using TCC.Settings;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
-using TCC.Windows;
 
-namespace TCC
+namespace TCC.Windows.Widgets
 {
     public class TccWidgetBuilder<TWindow, TViewModel> where TWindow : TccWidget where TViewModel : TccWindowViewModel
     {

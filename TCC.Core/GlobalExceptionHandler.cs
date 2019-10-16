@@ -8,12 +8,12 @@ using System.Text;
 using System.Windows;
 using FoglioUtils;
 using FoglioUtils.Extensions;
+using FoglioUtils.WinAPI;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -240,12 +240,10 @@ namespace TCC
             }
         }
 
-        [DllImport("user32.dll")]
-        private static extern uint GetGuiResources(IntPtr hProcess, uint uiFlags);
 
         private static uint GetUSERObjectsCount()
         {
-            return GetGuiResources(Process.GetCurrentProcess().Handle, 1);
+            return User32.GetGuiResources(Process.GetCurrentProcess().Handle, 1);
         }
     }
 }

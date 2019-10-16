@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -27,13 +28,14 @@ using TeraPacketParser.Messages;
 
 namespace TCC.Test
 {
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public static class Tester
     {
         public static bool Enabled = false;
 
         public static void Deadlock()
         {
-            WindowManager.CharacterWindow.Dispatcher.Invoke(() =>
+            WindowManager.CharacterWindow.Dispatcher?.Invoke(() =>
             {
                 App.BaseDispatcher.Invoke(() =>
                 {
@@ -205,7 +207,7 @@ namespace TCC.Test
         }
         public static void ProfileThreadsUsage()
         {
-            var _t          = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+            var t          = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             var dispatchers = new List<Dispatcher>
             {
                  App.BaseDispatcher                                ,
@@ -228,7 +230,7 @@ namespace TCC.Test
             //threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
 
             var stats = new Dictionary<int, ThreadInfo>();
-            _t.Tick += (_, __) =>
+            t.Tick += (_, __) =>
             {
                 var p = Process.GetCurrentProcess();
                 foreach (ProcessThread th in p.Threads)

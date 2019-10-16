@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +6,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using FoglioUtils;
-using GongSolutions.Wpf.DragDrop.Utilities;
 using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Data;

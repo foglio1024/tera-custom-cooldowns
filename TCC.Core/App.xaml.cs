@@ -18,8 +18,6 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.Test;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -97,7 +95,7 @@ namespace TCC
             SplashScreen.VM.Progress = 20;
             SplashScreen.VM.BottomText = "Loading settings...";
 
-            WindowManager.ForegroundManager = new ForegroundManager();
+            WindowManager.VisibilityManager = new VisibilityManager();
 
             SettingsContainer.Load();
 
@@ -248,27 +246,28 @@ namespace TCC
         private static void StartDispatcherWatcher()
         {
             var t = new Thread(() =>
+            {
+                while (_running)
                 {
-                    while (_running)
+                    var deadlockedDispatchers = new List<Dispatcher>();
+                    try
                     {
-                        var deadlockedDispatchers = new List<Dispatcher>();
-                        try
+                        Parallel.ForEach(Enumerable.Append(RunningDispatchers.Values, App.BaseDispatcher), (v) =>
                         {
-                            Parallel.ForEach(Enumerable.Append(RunningDispatchers.Values, App.BaseDispatcher), (v) =>
-                            {
-                                if (v.IsAlive(10000).Result) return;
-                                Log.CW($"{v.Thread.Name} didn't respond in time!");
-                                deadlockedDispatchers.Add(v);
-                            });
-                            Thread.Sleep(10000);
-                        }
-                        catch { }
-                        if (deadlockedDispatchers.Count > 1)
-                        {
-                            throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
-                        }
+                            if (v.IsAlive(60000).Result) return;
+                            Log.CW($"{v.Thread.Name} didn't respond in time!");
+                            deadlockedDispatchers.Add(v);
+                        });
+                        Thread.Sleep(1000);
                     }
-                })
+                    catch { }
+                    if (deadlockedDispatchers.Count > 1)
+                    {
+                        //throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                        Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                    }
+                }
+            })
             {Name = "Watcher"};
             t.Start();
         }

@@ -8,7 +8,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls.Chat;
-using TCC.Data;
 using TCC.Interop.Proxy;
 using FoglioUtils.Extensions;
 using TCC.Utils;
@@ -46,7 +45,7 @@ namespace TCC.Windows.Widgets
             Left = 0;
             Top = Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
 
-            WindowManager.ForegroundManager.VisibilityChanged += OnTccVisibilityChanged;
+            WindowManager.VisibilityManager.VisibilityChanged += OnTccVisibilityChanged;
             _t = new Timer { Interval = 2000 };
             _t.Tick += RepeatAnimation;
             _n = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(4000) };

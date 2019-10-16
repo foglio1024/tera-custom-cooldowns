@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media.Animation;
+using TCC.Data;
 using TCC.ViewModels.Widgets;
 using Arc = TCC.Controls.Arc;
 

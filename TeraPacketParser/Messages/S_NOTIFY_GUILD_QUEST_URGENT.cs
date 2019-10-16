@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using FoglioUtils.Extensions;
-using TCC.Utils;
 
 
 namespace TeraPacketParser.Messages

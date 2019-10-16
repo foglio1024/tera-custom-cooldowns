@@ -10,10 +10,9 @@ using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Interop.Proxy;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
-using TCC.Windows;
+using TCC.Windows.Widgets;
 using TeraDataLite;
 
 namespace TCC.Settings
@@ -138,7 +137,7 @@ namespace TCC.Settings
             {
                 _showAlways = value;
                 N(nameof(ShowAlways));
-                WindowManager.ForegroundManager.RefreshVisible();
+                WindowManager.VisibilityManager.RefreshVisible();
             }
         }
         public bool AllowOffScreen
@@ -158,7 +157,7 @@ namespace TCC.Settings
             {
                 _autoDim = value;
                 N(nameof(AutoDim));
-                WindowManager.ForegroundManager.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
             }
         }
         public double DimOpacity
@@ -169,7 +168,7 @@ namespace TCC.Settings
                 if (_dimOpacity == value) return;
                 _dimOpacity = value;
                 N(nameof(DimOpacity));
-                WindowManager.ForegroundManager.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
             }
         }
         public double Scale
@@ -342,6 +341,10 @@ namespace TCC.Settings
             return cc;
         }
 
+        public void ApplyScreenOffset()
+        {
+            Positions.ApplyOffset();
+        }
     }
     public class ChatWindowSettings : WindowSettings
     {

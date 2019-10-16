@@ -1,11 +1,10 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using FoglioUtils;
-using TCC.Controls;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using MenuItem = System.Windows.Controls.MenuItem;
 
-namespace TCC
+namespace TCC.Controls
 {
     public class TccTrayIcon
     {

@@ -4,7 +4,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using FoglioUtils;
-using TCC.Data;
 using TCC.Utils;
 using TCC.ViewModels;
 

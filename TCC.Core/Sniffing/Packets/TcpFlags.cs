@@ -15,6 +15,7 @@ namespace TCC.Sniffing.Packets
         Psh = 1 << 3,
         Rst = 1 << 2,
         Syn = 1 << 1,
+        // ReSharper disable once ShiftExpressionRealShiftCountIsZero
         Fin = 1 << 0
     }
 }

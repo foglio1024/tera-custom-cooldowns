@@ -1,4 +1,4 @@
-﻿<w:TccWidget x:Class="TCC.Windows.Widgets.ChatWindow"
+﻿<widgets:TccWidget x:Class="TCC.Windows.Widgets.ChatWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
@@ -14,6 +14,7 @@
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:widgets1="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:chat="clr-namespace:TCC.Data.Chat"
+             xmlns:controls="clr-namespace:TCC.Controls"
              mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
              MouseEnter="OnWindowMouseEnter"
@@ -27,7 +28,7 @@
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="7 12 7 7" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
-    <w:TccWidget.Resources>
+    <widgets:TccWidget.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
             <chatcontrols:ChatMessageControl VerticalAlignment="Top">
                 <chatcontrols:ChatMessageControl.LayoutTransform>
@@ -122,7 +123,7 @@
 
             </Grid>
         </DataTemplate>
-    </w:TccWidget.Resources>
+    </widgets:TccWidget.Resources>
     <Grid>
         <dockablz:Layout Name="ChatContent">
             <Grid >
@@ -362,7 +363,7 @@
                 </Grid.Style>
             </Grid>
         </dockablz:Layout>
-        <widgets:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True"
+        <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True"
                           HorizontalOffset="20"
                AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}" StaysOpen="True" DataContext="{Binding}"
                PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
@@ -406,6 +407,6 @@
                     </Button>
                 </StackPanel>
             </Grid>
-        </widgets:TccPopup>
+        </controls:TccPopup>
     </Grid>
-</w:TccWidget>
+</widgets:TccWidget>

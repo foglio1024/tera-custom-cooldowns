@@ -1,4 +1,4 @@
-﻿<local:TccWidget x:Class="TCC.Windows.Widgets.CivilUnrestWindow"
+﻿<widgets1:TccWidget x:Class="TCC.Windows.Widgets.CivilUnrestWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,6 +6,7 @@
                  xmlns:vm="clr-namespace:TCC.ViewModels"
                  xmlns:local="clr-namespace:TCC.Windows"
                  xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+                 xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
                  mc:Ignorable="d"
         Title="TCC Civil Unrest"
                  Style="{StaticResource BaseWindowStyle}"
@@ -54,4 +55,4 @@
             </ListBox>
         </Grid>
     </Grid>
-</local:TccWidget>
+</widgets1:TccWidget>

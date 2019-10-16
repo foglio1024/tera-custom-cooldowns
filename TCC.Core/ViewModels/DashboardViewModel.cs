@@ -22,7 +22,6 @@ using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.Windows;
 using TeraDataLite;

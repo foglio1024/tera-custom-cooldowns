@@ -138,14 +138,14 @@ namespace TCC.ViewModels.Widgets
                     // invoked on main thread because TabData is created there by JSON settings deserialization
                     //return App.BaseDispatcher.Invoke(() =>
                     //{
-                        var t = new TabViewModel();
-                        var content = new Tab(new TabInfo("New tab"));
-                        content.PropertyChanged += (_, ev) =>
-                        {
-                            if (ev.PropertyName == nameof(TabInfoVM.TabName)) t.Header = content.TabInfoVM.TabName;
-                        };
-                        t.Content = content;
-                        return t;
+                    var t = new TabViewModel();
+                    var content = new Tab(new TabInfo("New tab"));
+                    content.PropertyChanged += (_, ev) =>
+                    {
+                        if (ev.PropertyName == nameof(TabInfoVM.TabName)) t.Header = content.TabInfoVM.TabName;
+                    };
+                    t.Content = content;
+                    return t;
                     //});
                 };
             }
@@ -238,8 +238,8 @@ namespace TCC.ViewModels.Widgets
             _windowSettings.Tabs.Clear();
             //_windowSettings.Tabs.AddRange(Tabs);
             Tabs.ForEach(t => _windowSettings.Tabs.Add(t.TabInfo));
-            _windowSettings.X = left / WindowManager.ScreenSize.Width;
-            _windowSettings.Y = top / WindowManager.ScreenSize.Height;
+            _windowSettings.X = (left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
+            _windowSettings.Y = (top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
             var v = App.Settings.ChatWindowsSettings;
             var s = v.FirstOrDefault(x => x == _windowSettings);
             if (s == null) v.Add(_windowSettings);

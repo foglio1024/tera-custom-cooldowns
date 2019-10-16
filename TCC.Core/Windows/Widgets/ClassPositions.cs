@@ -4,7 +4,7 @@ using System.Windows;
 using TCC.Data;
 using TeraDataLite;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     public class ClassPositions
     {
@@ -70,6 +70,14 @@ namespace TCC.Windows
         public ButtonsPosition Buttons(Class cname)
         {
             return Classes[cname].Buttons;
+        }
+
+        public void ApplyOffset()
+        {
+            foreach (Class cl in Enum.GetValues(typeof(Class)))
+            {
+                Classes[cl].ApplyOffset();
+            }
         }
     }
 }

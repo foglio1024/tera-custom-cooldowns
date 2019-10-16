@@ -1,7 +1,6 @@
 ﻿using FoglioUtils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -16,7 +15,6 @@ using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Settings;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.Windows;
 using CaptureMode = TCC.Data.CaptureMode;

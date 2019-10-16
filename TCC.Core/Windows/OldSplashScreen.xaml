@@ -1,9 +1,11 @@
-﻿<local:TccWidget x:Class="TCC.Windows.OldSplashScreen"
+﻿<widgets:TccWidget x:Class="TCC.Windows.OldSplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows" ResizeMode="NoResize" AllowsTransparency="True" SizeToContent="Height" ShowInTaskbar="False"
+        xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+        ResizeMode="NoResize" AllowsTransparency="True" SizeToContent="Height" ShowInTaskbar="False"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True"
         Title="TCC" Height="Auto" Width="640" Background="Transparent" MouseLeftButtonDown="Drag"
         d:DataContext="{d:DesignInstance local:SplashScreenViewModel}">
@@ -22,7 +24,7 @@
         <Image x:Name="Img" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".5" Margin="1" Source="{Binding Image}"/>
         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" x:Name="TtbLogoContainer" Visibility="{Binding Toolbox, Converter={StaticResource BoolToVisibleCollapsed}}">
             <TextBlock Text="Powered by" FontWeight="DemiBold" Foreground="#9fff" VerticalAlignment="Bottom" Margin="0 0 3 0"></TextBlock>
-            <Image Source="/ttb64.png" Opacity="1" Width="48" Height="48" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Right" VerticalAlignment="Center"  x:Name="TtbLogo"/>
+            <Image Source="/resources/images/ttb64.png" Opacity="1" Width="48" Height="48" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Right" VerticalAlignment="Center"  x:Name="TtbLogo"/>
         </StackPanel>
         <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".7" x:Name="TccLogo"/>
         <!--<Path Data="m 203.6,197.2 c 0,-1.7 -1.4,-3.1 -3,-3.1 -1.6,0 -2.8,1.2 -2.8,2.8 0,1.7 1.4,3.1 3,3.1 1.5,0.1 2.8,-1.2 2.8,-2.8 z m 10.4,-22 c 0,1.7
@@ -111,4 +113,4 @@
             </UniformGrid.LayoutTransform>
         </UniformGrid>
     </Grid>
-</local:TccWidget>
+</widgets:TccWidget>

@@ -1,6 +1,4 @@
-﻿using FoglioUtils;
-using FoglioUtils.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,13 +9,14 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using FoglioUtils;
+using FoglioUtils.Extensions;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
-using TCC.Utilities;
 using TCC.Utils;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     public class TccWidget : Window
     {
@@ -46,8 +45,8 @@ namespace TCC.Windows
             MainContent.Opacity = 0;
             if (BoundaryRef != null) BoundaryRef.Opacity = 0;
             Topmost = true;
-            Left = WindowSettings.X * WindowManager.ScreenSize.Width;
-            Top = WindowSettings.Y * WindowManager.ScreenSize.Height;
+            Left = (WindowSettings.X * WindowManager.ScreenSize.Width);
+            Top = (WindowSettings.Y * WindowManager.ScreenSize.Height);
             if (!WindowSettings.IgnoreSize)
             {
                 if (WindowSettings.H != 0) Height = WindowSettings.H;
@@ -63,14 +62,16 @@ namespace TCC.Windows
             Loaded += OnLoaded;
             SizeChanged += OnSizeChanged;
 
-            WindowManager.ForegroundManager.VisibilityChanged += OnVisibilityChanged;
-            WindowManager.ForegroundManager.DimChanged += OnDimChanged;
-            WindowManager.ForegroundManager.ClickThruChanged += OnClickThruModeChanged;
+            WindowManager.VisibilityManager.VisibilityChanged += OnVisibilityChanged;
+            WindowManager.VisibilityManager.DimChanged += OnDimChanged;
+            WindowManager.VisibilityManager.ClickThruChanged += OnClickThruModeChanged;
             WindowManager.RepositionRequestedEvent += ReloadPosition;
             WindowManager.ResetToCenterEvent += ResetToCenter;
             WindowManager.DisposeEvent += CloseWindowSafe;
             WindowManager.MakeGlobalEvent += WindowSettings.MakePositionsGlobal;
-            WindowManager.ApplyScreenCorrectionEvent += WindowSettings.ApplyScreenCorrection;
+            WindowManager.ApplyScreenCorrectionEvent += _ => OnTeraScreenChanged(); //WindowSettings.ApplyScreenCorrection;
+
+            FocusManager.TeraScreenChanged += OnTeraScreenChanged;
             FocusManager.FocusTick += OnFocusTick;
 
             OnClickThruModeChanged();
@@ -95,6 +96,11 @@ namespace TCC.Windows
             MouseLeave += (_, __) => _buttonsTimer.Start();
             if (_canMove) ButtonsRef.MouseLeftButtonDown += Drag;
             ShowBoundariesToggled += ShowHideBoundaries;
+        }
+
+        private void OnTeraScreenChanged()
+        {
+            WindowSettings.ApplyScreenOffset();
         }
 
         private void ShowHideBoundaries()
@@ -141,10 +147,9 @@ namespace TCC.Windows
 
             Dispatcher?.Invoke(() =>
             {
-                Left = Screen.PrimaryScreen.Bounds.X + Screen.PrimaryScreen.Bounds.Width / 2 - ActualWidth / 2;
-                Top = Screen.PrimaryScreen.Bounds.Y + Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
-                WindowSettings.X = Left / WindowManager.ScreenSize.Width;
-                WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
+                Left = FocusManager.TeraScreen.Bounds.X + FocusManager.TeraScreen.Bounds.Width / 2 - ActualWidth / 2;
+                Top = FocusManager.TeraScreen.Bounds.Y + FocusManager.TeraScreen.Bounds.Height / 2 - ActualHeight / 2;
+                SetRelativeCoordinates();
             });
         }
 
@@ -152,7 +157,7 @@ namespace TCC.Windows
         {
             if (FocusManager.PauseTopmost) return;
             if (WindowSettings.ShowAlways) RefreshTopmost();
-            if (WindowManager.ForegroundManager.Visible) RefreshTopmost();
+            if (WindowManager.VisibilityManager.Visible) RefreshTopmost();
         }
 
         private void OnWindowVisibilityChanged(bool visible)
@@ -189,24 +194,24 @@ namespace TCC.Windows
         }
         private void OnDimChanged()
         {
-            if (!WindowManager.ForegroundManager.Visible) return;
+            if (!WindowManager.VisibilityManager.Visible) return;
 
             if (!WindowSettings.AutoDim)
                 AnimateContentOpacity(1);
             else
             {
-                if (WindowSettings.UndimOnFlyingGuardian) AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? WindowSettings.DimOpacity : 1);
+                if (WindowSettings.UndimOnFlyingGuardian) AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : 1);
                 else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(WindowSettings.DimOpacity);
-                else AnimateContentOpacity(WindowManager.ForegroundManager.Dim ? WindowSettings.DimOpacity : 1);
+                else AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : 1);
             }
 
             OnClickThruModeChanged();
         }
         private void OnVisibilityChanged()
         {
-            if (WindowManager.ForegroundManager.Visible)
+            if (WindowManager.VisibilityManager.Visible)
             {
-                if (WindowManager.ForegroundManager.Dim && WindowSettings.AutoDim)
+                if (WindowManager.VisibilityManager.Dim && WindowSettings.AutoDim)
                 {
                     AnimateContentOpacity(WindowSettings.DimOpacity);
                 }
@@ -239,11 +244,11 @@ namespace TCC.Windows
                     FocusManager.MakeClickThru(_handle);
                     break;
                 case ClickThruMode.WhenDim:
-                    if (WindowManager.ForegroundManager.Dim) FocusManager.MakeClickThru(_handle);
+                    if (WindowManager.VisibilityManager.Dim) FocusManager.MakeClickThru(_handle);
                     else FocusManager.UndoClickThru(_handle);
                     break;
                 case ClickThruMode.WhenUndim:
-                    if (WindowManager.ForegroundManager.Dim) FocusManager.UndoClickThru(_handle);
+                    if (WindowManager.VisibilityManager.Dim) FocusManager.UndoClickThru(_handle);
                     else FocusManager.MakeClickThru(_handle);
                     break;
                 case ClickThruMode.GameDriven:
@@ -280,7 +285,7 @@ namespace TCC.Windows
         {
             Dispatcher?.InvokeAsync(() =>
             {
-            if (FocusManager.PauseTopmost) return;
+                if (FocusManager.PauseTopmost) return;
                 Topmost = false; Topmost = true;
             }, DispatcherPriority.DataBind);
         }
@@ -297,18 +302,16 @@ namespace TCC.Windows
         {
             if (WindowSettings == null) return;
             if (WindowSettings.AllowOffScreen) return;
-            if (Left + ActualWidth > WindowManager.ScreenSize.Width)
+            if (Left + ActualWidth > SystemParameters.VirtualScreenWidth)
             {
-                Left = WindowManager.ScreenSize.Width - ActualWidth;
+                Left = SystemParameters.VirtualScreenWidth - ActualWidth;
             }
-            if (Top + ActualHeight > WindowManager.ScreenSize.Height)
+            if (Top + ActualHeight > SystemParameters.VirtualScreenHeight)
             {
-                Top = WindowManager.ScreenSize.Height - ActualHeight;
+                Top = SystemParameters.VirtualScreenHeight - ActualHeight;
             }
             CheckIndividualScreensBounds();
-
-            WindowSettings.X = Left / WindowManager.ScreenSize.Width;
-            WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
+            SetRelativeCoordinates();
         }
 
         private void CheckIndividualScreensBounds()
@@ -415,17 +418,24 @@ namespace TCC.Windows
             CheckBounds();
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
             if (WindowSettings == null) return;
-            WindowSettings.X = Left / WindowManager.ScreenSize.Width;
-            WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
+            SetRelativeCoordinates();
             App.Settings.Save();
         }
+
+        private void SetRelativeCoordinates()
+        {
+            WindowSettings.X = (Left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
+            WindowSettings.Y = (Top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
+        }
+
+
         public void CloseWindowSafe()
         {
             Dispatcher?.Invoke(() =>
             {
-                WindowManager.ForegroundManager.VisibilityChanged -= OnVisibilityChanged;
-                WindowManager.ForegroundManager.DimChanged -= OnDimChanged;
-                WindowManager.ForegroundManager.ClickThruChanged -= OnClickThruModeChanged;
+                WindowManager.VisibilityManager.VisibilityChanged -= OnVisibilityChanged;
+                WindowManager.VisibilityManager.DimChanged -= OnDimChanged;
+                WindowManager.VisibilityManager.ClickThruChanged -= OnClickThruModeChanged;
                 WindowManager.RepositionRequestedEvent -= ReloadPosition;
                 WindowManager.ResetToCenterEvent -= ResetToCenter;
                 WindowManager.DisposeEvent -= CloseWindowSafe;

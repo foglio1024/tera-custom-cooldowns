@@ -30,9 +30,9 @@ namespace TCC.Windows
             VM.Publicized += OnPublicized;
             VM.MyLfgStateChanged += OnMyLfgStateChanged;
             VM.CreatingStateChanged += OnCreatingStateChanged;
-            WindowManager.ForegroundManager.VisibilityChanged += () =>
+            WindowManager.VisibilityManager.VisibilityChanged += () =>
             {
-                if (!WindowManager.ForegroundManager.Visible) return;
+                if (!WindowManager.VisibilityManager.Visible) return;
                 RefreshTopmost();
             };
             FocusManager.FocusTick += RefreshTopmost;

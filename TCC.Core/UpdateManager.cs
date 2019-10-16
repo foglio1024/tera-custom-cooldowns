@@ -10,7 +10,6 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -30,7 +29,7 @@ namespace TCC
 
         private static string DownloadedIconsDir => Path.Combine(App.BasePath, "tera-used-icons-master");
 
-        private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{(App.Experimental ? "experimental" : "master")}/database-hashes.json";
+        private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{ (App.Experimental ? "experimental" : "master")}/database-hashes.json";
 
         public static Dictionary<string, string> DatabaseHashes { get; set; }
         public static bool UpdateAvailable { get; private set; }
@@ -165,23 +164,14 @@ namespace TCC
                 if (Directory.Exists(DownloadedIconsDir)) Directory.Delete(DownloadedIconsDir, true);
                 var imagesPath = Path.Combine(App.ResourcesPath, "images");
                 if (!Directory.Exists(imagesPath)) Directory.CreateDirectory(imagesPath);
-                //App.SplashScreen.SetText("Extracting database...");
 
                 if (!App.Loading) WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Extracting icons...", NotificationType.Success, 2000);
                 ZipFile.ExtractToDirectory(Path.Combine(App.BasePath, "icons.zip"), App.BasePath);
-                //App.SplashScreen.SetText("Extracting database... Done.");
-
-                //App.SplashScreen.SetText("Creating directories...");
                 Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(dirPath =>
                 {
-                    Directory.CreateDirectory(Path.Combine(imagesPath, Path.GetFileName(dirPath)));
-                    //Log.F(!info.Exists
-                    //    ? $"Failed to crate dir:{Path.Combine(imagesPath, Path.GetDirectoryName(dirPath))}"
-                    //    : $"Created dir: {info.FullName}");
+                    var dir = Path.GetFileName(dirPath);
+                    Directory.CreateDirectory(Path.Combine(imagesPath, dir ?? throw new InvalidOperationException()));
                 });
-                //App.SplashScreen.SetText("Creating directories... Done.");
-
-                //App.SplashScreen.SetText("Copying files...");
                 Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList().ForEach(newPath =>
                 {
                     try
@@ -191,20 +181,15 @@ namespace TCC
                     catch (Exception e)
                     {
                         Log.F("Failed to copy icon " + newPath + "\n" + e);
-                        throw e;
                     }
                 });
-                //App.SplashScreen.SetText("Copying files... Done.");
 
                 CleanTempIcons();
-                if (!App.Loading) WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
-
-                //App.SplashScreen.SetText("Icons updated successfully.");
-
+                if (!App.Loading) Log.N("TCC update manager", "Icons updated successfully", NotificationType.Success, 2000);
             }
             catch
             {
-                var res = TccMessageBox.Show("Error while extracting icons. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                var res = TccMessageBox.Show("Error while extracting some icons (details in error.log). Try again?", MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes) ExtractIcons();
             }
         }
@@ -341,6 +326,7 @@ namespace TCC
                     App.SplashScreen.VM.BottomText ="Downloading update...";
                     c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
                     c.DownloadProgressChanged += (s, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
+                    // ReSharper disable once PossibleNullReferenceException
                     await App.SplashScreen.Dispatcher.InvokeAsync(() =>
                     {
                         c.DownloadFileAsync(new Uri(url), "update.zip");

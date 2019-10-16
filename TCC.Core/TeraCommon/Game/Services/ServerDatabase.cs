@@ -32,7 +32,8 @@ namespace TCC.TeraCommon.Game.Services
             {
                 if (!Directory.Exists(Path.GetDirectoryName(serversOverridePath)))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(serversOverridePath));
+                    var dir = Path.GetDirectoryName(serversOverridePath);
+                    if (dir != null) Directory.CreateDirectory(dir);
                 }
                 File.WriteAllText(serversOverridePath, DefaultOverride);
             }

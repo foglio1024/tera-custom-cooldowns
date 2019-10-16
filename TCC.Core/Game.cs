@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using FoglioUtils;
 using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -25,6 +26,7 @@ namespace TCC
 {
     public static class Game
     {
+        private static ulong _foglioEid;
         private static bool _logged;
         private static bool _loadingScreen = true;
         private static bool _encounter;
@@ -100,7 +102,7 @@ namespace TCC
         }
         public static int CurrentZoneId { get; private set; }
         public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
-        public static List<string> BlockList { get; private set; } = new List<string>();
+        public static List<string> BlockList { get;  } = new List<string>();
 
         public static bool IsMe(ulong eid)
         {
@@ -117,7 +119,7 @@ namespace TCC
         public static event Action Teleported;
         public static event Action SkillStarted;
 
-        public static Player Me { get; set; } = new Player();
+        public static Player Me { get; } = new Player();
         public static TccDatabase DB { get; private set; }
 
         public static bool CivilUnrestZone => CurrentZoneId == 152;
@@ -299,7 +301,7 @@ namespace TCC
             try
             {
                 var msg = x.SysMessage.Split('\v');
-                var opcode = ushort.Parse(msg[0].Substring(1));
+                var opcode = UInt16.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
                 if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
@@ -316,7 +318,7 @@ namespace TCC
             try
             {
                 var msg = x.Message.Split('\v');
-                var opcode = ushort.Parse(msg[0].Substring(1));
+                var opcode = UInt16.Parse(msg[0].Substring(1));
                 var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
                 if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
@@ -344,7 +346,7 @@ namespace TCC
         }
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
-            if (p.EntityId == EntityManager.FoglioEid) Me.EndAbnormality(10241024);
+            if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
             NearbyPlayers.Remove(p.EntityId);
         }
         private static void OnSpawnUser(S_SPAWN_USER p)
@@ -365,7 +367,7 @@ namespace TCC
                 case "Fogliarya":
                     if (p.ServerId != 27) break;
                     if (CivilUnrestZone) break;
-                    EntityManager.FoglioEid = p.EntityId;
+                    _foglioEid = p.EntityId;
                     var ab = DB.AbnormalityDatabase.Abnormalities[10241024];
                     Me.UpdateAbnormality(ab, Int32.MaxValue, 1);
                     var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
@@ -388,11 +390,11 @@ namespace TCC
             Task.Delay(2000).ContinueWith(t =>
             {
                 LoadingScreen = false;
-                WindowManager.ForegroundManager.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
 
                 if (!App.FI) return;
                 var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
-                Me.UpdateAbnormality(ab, int.MaxValue, 1);
+                Me.UpdateAbnormality(ab, Int32.MaxValue, 1);
                 var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
                 var msg = $"@0\vAbnormalName\v{ab.Name}";
                 SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
@@ -504,12 +506,12 @@ namespace TCC
             TimeManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
             TimeManager.Instance.SetGuildBamTime(false);
             InitDatabases(App.Settings.LastLanguage);
-            AbnormalityUtils.SetAbnormalityTracker(m.CharacterClass);
+            SetAbnormalityTracker(m.CharacterClass);
             WindowManager.FloatingButton.SetMoongourdButtonVisibility(); //TODO: do this via vm, need to refactor it first
         }
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
         {
-            CurrentAccountNameHash = FoglioUtils.HashUtils.GenerateHash(m.AccountName);
+            CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
             DB.ServerDatabase.Language = m.Language;
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
             App.Settings.LastAccountNameHash = CurrentAccountNameHash;
@@ -518,7 +520,7 @@ namespace TCC
         {
             if (!IsMe(p.TargetId)) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            if (p.Duration == int.MaxValue) ab.Infinity = true;
+            if (p.Duration == Int32.MaxValue) ab.Infinity = true;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
 
@@ -629,20 +631,6 @@ namespace TCC
             }
         }
 
-        public static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
-        {
-            Me.Fire = pFire;
-            Me.Ice = pIce;
-            Me.Arcane = pArcane;
-
-            if (App.Settings.ClassWindowSettings.Enabled
-                && Me.Class == Class.Sorcerer
-                && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutVM sm)
-            {
-                sm.NotifyElementChanged();
-            }
-
-        }
         public static void SetSorcererElementsBoost(bool f, bool i, bool a)
         {
             Me.FireBoost = f;
@@ -651,7 +639,7 @@ namespace TCC
 
             if (App.Settings.ClassWindowSettings.Enabled && Me.Class == Class.Sorcerer)
             {
-                TccUtils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged();
+                TccUtils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged(); //todo: this reference is bad
             }
         }
 
@@ -662,5 +650,52 @@ namespace TCC
             KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
         }
 
+        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; }
+
+        private static void SetAbnormalityTracker(Class c)
+        {
+            switch (c)
+            {
+                case Class.Warrior:
+                    CurrentAbnormalityTracker = new WarriorAbnormalityTracker();
+                    break;
+                case Class.Lancer:
+                    CurrentAbnormalityTracker = new LancerAbnormalityTracker();
+                    break;
+                case Class.Slayer:
+                    CurrentAbnormalityTracker = new SlayerAbnormalityTracker();
+                    break;
+                case Class.Berserker:
+                    CurrentAbnormalityTracker = new BerserkerAbnormalityTracker();
+                    break;
+                case Class.Sorcerer:
+                    CurrentAbnormalityTracker = new SorcererAbnormalityTracker();
+                    break;
+                case Class.Archer:
+                    CurrentAbnormalityTracker = new ArcherAbnormalityTracker();
+                    break;
+                case Class.Priest:
+                    CurrentAbnormalityTracker = new PriestAbnormalityTracker();
+                    break;
+                case Class.Mystic:
+                    CurrentAbnormalityTracker = new MysticAbnormalityTracker();
+                    break;
+                case Class.Reaper:
+                    CurrentAbnormalityTracker = new ReaperAbnormalityTracker();
+                    break;
+                case Class.Gunner:
+                    CurrentAbnormalityTracker = new GunnerAbnormalityTracker();
+                    break;
+                case Class.Brawler:
+                    CurrentAbnormalityTracker = new BrawlerAbnormalityTracker();
+                    break;
+                case Class.Ninja:
+                    CurrentAbnormalityTracker = new NinjaAbnormalityTracker();
+                    break;
+                case Class.Valkyrie:
+                    CurrentAbnormalityTracker = new ValkyrieAbnormalityTracker();
+                    break;
+            }
+        }
     }
 }

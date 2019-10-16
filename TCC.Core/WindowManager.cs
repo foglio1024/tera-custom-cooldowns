@@ -1,21 +1,16 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using FoglioUtils.Extensions;
+using Microsoft.Win32;
+using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
-using FoglioUtils.Extensions;
-using Microsoft.Win32;
-using TCC.Utilities;
+using TCC.Controls;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 using TCC.Windows;
 using TCC.Windows.Widgets;
+using Application = System.Windows.Application;
 
 namespace TCC
 {
@@ -28,7 +23,7 @@ namespace TCC
         public static event Action DisposeEvent;
 
         public static TccTrayIcon TrayIcon { get; private set; }
-        public static ForegroundManager ForegroundManager { get; set; }
+        public static VisibilityManager VisibilityManager { get; set; }
 
         public static class ViewModels
         {
@@ -59,7 +54,7 @@ namespace TCC
             public static GroupWindowViewModel GroupVM { get; set; }
         }
 
-        public static Size ScreenSize;
+        public static System.Drawing.Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
 
         public static CooldownWindow CooldownWindow { get; private set; }
         public static CharacterWindow CharacterWindow { get; private set; }
@@ -81,7 +76,8 @@ namespace TCC
 
         public static async Task Init()
         {
-            ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            //ScreenSize = new Size(FocusManager.TeraScreen.Bounds.Width, FocusManager.TeraScreen.Bounds.Height); //new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            
             FocusManager.Init();
 
             await LoadWindows();
@@ -96,6 +92,9 @@ namespace TCC
 
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
         }
+
+
+
         private static Size GetScreenCorrection()
         {
             var wFac = App.Settings.LastScreenSize.Width / ScreenSize.Width;
@@ -105,10 +104,10 @@ namespace TCC
 
         private static void UpdateScreenCorrection()
         {
-            if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
-            ApplyScreenCorrection(GetScreenCorrection());
-            App.Settings.LastScreenSize = ScreenSize;
-            if (!App.Loading) App.Settings.Save();
+            //if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
+            //ApplyScreenCorrection(GetScreenCorrection());
+            //App.Settings.LastScreenSize = ScreenSize;
+            //if (!App.Loading) App.Settings.Save();
         }
 
         private static void ApplyScreenCorrection(Size sc)
@@ -119,7 +118,7 @@ namespace TCC
 
         private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
         {
-            ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            //ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
             UpdateScreenCorrection();
             ReloadPositions();
         }

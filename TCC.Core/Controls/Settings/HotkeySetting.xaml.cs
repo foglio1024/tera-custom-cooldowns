@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using TCC.Annotations;
+using TCC.Data;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ModifierKeys = TCC.Data.ModifierKeys;
 

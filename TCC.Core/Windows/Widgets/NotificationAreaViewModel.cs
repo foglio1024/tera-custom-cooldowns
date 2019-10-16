@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Threading;
 using FoglioUtils;
-using TCC.Data;
 using TCC.Settings;
 using TCC.Utils;
 using TCC.ViewModels;

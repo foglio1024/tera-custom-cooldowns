@@ -1,4 +1,4 @@
-﻿<windows:TccWidget x:Class="TCC.Windows.Widgets.FloatingButtonWindow"
+﻿<widgets:TccWidget x:Class="TCC.Windows.Widgets.FloatingButtonWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,7 @@
         xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
         xmlns:windows="clr-namespace:TCC.Windows"
         xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+        xmlns:controls="clr-namespace:TCC.Controls"
         mc:Ignorable="d" 
         Loaded="FloatinButtonLoaded"
         Title="TCC Floating button"
@@ -98,14 +99,14 @@
                 <TranslateTransform />
             </Grid.RenderTransform>
         </Grid>
-        <widgets:TccPopup Grid.Row="0" x:Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
+        <controls:TccPopup Grid.Row="0" x:Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
                AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
                VerticalAlignment="Center"
                VerticalOffset="0">
             <chatControls:PlayerTooltip />
-        </widgets:TccPopup>
+        </controls:TccPopup>
         <Grid.RenderTransform>
             <TranslateTransform X="-32"></TranslateTransform>
         </Grid.RenderTransform>
     </Grid>
-</windows:TccWidget>
+</widgets:TccWidget>

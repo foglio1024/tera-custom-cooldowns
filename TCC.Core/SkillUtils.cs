@@ -8,6 +8,7 @@ using TeraDataLite;
 
 namespace TCC
 {
+    //TODO: port these to json when?
     public class SkillConfigParser
     {
         public List<Cooldown> Main;

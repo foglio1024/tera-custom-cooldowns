@@ -51,6 +51,7 @@ namespace TCC.Sniffing
             bytes[0] = (byte) (ip >> 24);
             bytes[1] = (byte) (ip >> 16);
             bytes[2] = (byte) (ip >> 8);
+            // ReSharper disable once ShiftExpressionRealShiftCountIsZero
             bytes[3] = (byte) (ip >> 0);
             return new IPAddress(bytes);
         }

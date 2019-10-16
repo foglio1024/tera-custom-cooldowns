@@ -115,8 +115,8 @@
     <Compile Include="Data\Chat\LfgMessage.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
     <Compile Include="Sniffing\SnifferFactory.cs" />
-    <Compile Include="TccTrayIcon.cs" />
-    <Compile Include="TccWidgetBuilder.cs" />
+    <Compile Include="Controls\TccTrayIcon.cs" />
+    <Compile Include="Windows\Widgets\TccWidgetBuilder.cs" />
     <Compile Include="Utilities\AbnormalityUtils.cs" />
     <Compile Include="Data\Account.cs" />
     <Compile Include="Annotations\Annotations1.cs" />
@@ -239,7 +239,6 @@
     <Compile Include="Data\Databases\RegionsDatabase.cs" />
     <Compile Include="Data\GuildQuest.cs" />
     <Compile Include="Data\Databases\TccDatabase.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Parsing\PacketAnalyzer.cs" />
     <Compile Include="ResourceDictionaries\DataTemplates.xaml.cs">
       <DependentUpon>DataTemplates.xaml</DependentUpon>
@@ -251,7 +250,7 @@
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />
     <Compile Include="ViewModels\MyAbnormalityVM.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
-    <Compile Include="Windows\ClassPositions.cs" />
+    <Compile Include="Windows\Widgets\ClassPositions.cs" />
     <Compile Include="Data\Skills\Cooldown.cs" />
     <Compile Include="Data\Npc\HpTriggeredTimerPattern.cs" />
     <Compile Include="Data\Npc\TimerPattern.cs" />
@@ -441,8 +440,8 @@
     <Compile Include="Data\Map\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
     <Compile Include="Data\FlyingGuardianDataProvider.cs" />
-    <Compile Include="ForegroundManager.cs" />
-    <Compile Include="HotKey.cs" />
+    <Compile Include="VisibilityManager.cs" />
+    <Compile Include="Data\HotKey.cs" />
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="Moongourd\MoongourdManager.cs" />
     <Compile Include="Parsing\OpcodeDownloader.cs" />
@@ -601,7 +600,7 @@
     <Compile Include="ViewModels\ClassManagers\SlayerLayoutVM.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererLayoutVM.cs" />
     <Compile Include="Settings\WindowSettings.cs" />
-    <Compile Include="Windows\ClassPositionsData.cs" />
+    <Compile Include="Windows\Widgets\ClassPositionsData.cs" />
     <Compile Include="Windows\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -720,7 +719,6 @@
     <Compile Include="Controls\Skills\RoundSkillControl.xaml.cs">
       <DependentUpon>RoundSkillControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SkillManager.cs" />
     <Compile Include="Data\Databases\SkillsDatabase.cs" />
     <Compile Include="WindowManager.cs" />
     <Compile Include="Windows\SkillConfigWindow.xaml.cs">
@@ -732,7 +730,7 @@
     <Compile Include="Windows\TccMessageBox.xaml.cs">
       <DependentUpon>TccMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TccWidget.cs" />
+    <Compile Include="Windows\Widgets\TccWidget.cs" />
     <Compile Include="Controls\Chat\MoneyMessagePiece.xaml.cs">
       <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
     </Compile>
@@ -744,7 +742,7 @@
       <DependentUpon>NotificationAreaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Widgets\NotificationInfo.cs" />
-    <Compile Include="Windows\Widgets\TccPopup.cs" />
+    <Compile Include="Controls\TccPopup.cs" />
     <Page Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1324,7 +1322,6 @@
     <Resource Include="resources\tcc.ico" />
     <Resource Include="resources\tcc_off.ico" />
     <Resource Include="resources\tcc_on.ico" />
-    <Resource Include="tcc-logo.ico" />
     <Resource Include="resources\images\ic_swap_horiz_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_aspect_ratio_white_24dp_2x.png" />
     <Resource Include="resources\images\crown.png" />
@@ -1360,9 +1357,6 @@
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
     <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
     <Resource Include="resources\images\enraged.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ttb.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -1474,7 +1468,7 @@
     <Resource Include="resources\ttb.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ttb64.png" />
+    <Resource Include="resources\images\ttb64.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\images\third-eye.jpg" />

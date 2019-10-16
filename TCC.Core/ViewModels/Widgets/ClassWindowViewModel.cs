@@ -193,17 +193,17 @@ namespace TCC.ViewModels.Widgets
 
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            AbnormalityUtils.CurrentAbnormalityTracker?.CheckAbnormality(p);
+            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
 
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)

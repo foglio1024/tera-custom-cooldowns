@@ -22,13 +22,13 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels.Widgets
 {
-
-    [TccModule(true)]
+    [TccModule]
     public class CooldownWindowViewModel : TccWindowViewModel
     {
         public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;
 
         public event Action SkillsLoaded;
+        private const int LongSkillTreshold = 40000; //TODO: make configurable?
 
         public TSObservableCollection<Cooldown> ShortSkills { get; set; }
         public TSObservableCollection<Cooldown> LongSkills { get; set; }
@@ -45,6 +45,7 @@ namespace TCC.ViewModels.Widgets
         public IEnumerable<Item> Items => Game.DB.ItemsDatabase.ItemSkills;
         public IEnumerable<Abnormality> Passivities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
 
+        //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
 
         private static bool FindAndUpdate(TSObservableCollection<Cooldown> list, Cooldown sk)
@@ -81,7 +82,7 @@ namespace TCC.ViewModels.Widgets
 
             try
             {
-                if (other.Duration < SkillManager.LongSkillTreshold)
+                if (other.Duration < LongSkillTreshold)
                 {
                     return FindAndUpdate(ShortSkills, other);
                 }
@@ -119,7 +120,7 @@ namespace TCC.ViewModels.Widgets
 
             try
             {
-                if (cd < SkillManager.LongSkillTreshold)
+                if (cd < LongSkillTreshold)
                 {
                     var existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == skill.IconName);
                     if (existing == null)
@@ -504,7 +505,10 @@ namespace TCC.ViewModels.Widgets
 
             ((CooldownWindowSettings)settings).ShowItemsChanged += NotifyItemsDisplay;
             ((CooldownWindowSettings)settings).ModeChanged += NotifyModeChanged;
+
+            AbnormalityTracker.PrecooldownStarted += OnPrecooldownStarted;
         }
+
 
         private void OnShowSkillConfigHotkeyPressed()
         {
@@ -580,15 +584,18 @@ namespace TCC.ViewModels.Widgets
 
         private void CheckPassivity(Abnormality ab, uint cd)
         {
+            if (!PassivityDatabase.TryGetPassivitySkill(ab.Id, out var skill)) return;
             if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var cdFromDb))
             {
-                SkillManager.AddPassivitySkill(ab.Id, cdFromDb);
+                //SkillManager.AddPassivitySkill(ab.Id, cdFromDb);
+                RouteSkill(new Cooldown(skill, cdFromDb * 1000, CooldownType.Passive));
             }
             else if (MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
-                    || SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+                  || SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
             {
                 //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
-                SkillManager.AddPassivitySkill(ab.Id, cd / 1000);
+                //SkillManager.AddPassivitySkill(ab.Id, cd / 1000);
+                RouteSkill(new Cooldown(skill, cd, CooldownType.Passive));
             }
 
         }
@@ -606,8 +613,6 @@ namespace TCC.ViewModels.Widgets
 
             if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
-
-
         private void OnLogin(S_LOGIN m)
         {
             ClearSkills();
@@ -623,20 +628,53 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
         {
-            SkillManager.ChangeSkillCooldown(m.SkillId, m.Cooldown);
+            if (!Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+            if (!Pass(skill)) return;
+            Change(skill, m.Cooldown);
         }
         private void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
-            SkillManager.AddItemSkill(m.ItemId, m.Cooldown);
+            if (!Game.DB.ItemsDatabase.TryGetItemSkill(m.ItemId, out var itemSkill)) return;
+            RouteSkill(new Cooldown(itemSkill, m.Cooldown, CooldownType.Item));
         }
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
-            SkillManager.AddSkill(m.SkillId, m.Cooldown);
+            if (!Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+            if (!Pass(skill)) return;
+            RouteSkill(new Cooldown(skill, m.Cooldown));
         }
         private void OnCrestMessage(S_CREST_MESSAGE m)
         {
             if (m.Type != 6) return;
-            SkillManager.ResetSkill(m.SkillId);
+            if (!Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+            if (!Pass(skill)) return;
+            ResetSkill(skill);
+        }
+
+
+        private void RouteSkill(Cooldown skillCooldown)
+        {
+            if (skillCooldown.Duration == 0)
+            {
+                skillCooldown.Dispose();
+                Remove(skillCooldown.Skill);
+            }
+            else
+            {
+                AddOrRefresh(skillCooldown);
+            }
+        }
+
+        private void OnPrecooldownStarted(Skill sk, uint duration)
+        {
+            //SkillManager.AddSkillDirectly(sk, duration, CooldownType.Skill, CooldownMode.Pre);
+            RouteSkill(new Cooldown(sk, duration, CooldownType.Skill, CooldownMode.Pre));
+        }
+
+        private static bool Pass(Skill sk)
+        {
+            if (sk.Detail == "off") return false;
+            return sk.Class != Class.Common && sk.Class != Class.None;
         }
     }
 }

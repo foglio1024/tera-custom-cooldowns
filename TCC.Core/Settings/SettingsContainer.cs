@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using FoglioUtils;
 using Newtonsoft.Json;
 using TCC.Data;
@@ -24,7 +23,7 @@ namespace TCC.Settings
             get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
             set => _lastLanguage = value;
         }
-        public Size LastScreenSize { get; set; }
+        public System.Drawing.Size LastScreenSize { get; set; }
         public DateTime StatSentTime { get; set; }
         public string StatSentVersion { get; set; }
         public string LanguageOverride { get; set; }
@@ -137,7 +136,7 @@ namespace TCC.Settings
             StatSentVersion = App.AppVersion;
             _lastLanguage = "";
             StatSentTime = DateTime.MinValue;
-            LastScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            LastScreenSize = FocusManager.TeraScreen.Bounds.Size;
             CooldownWindowSettings = new CooldownWindowSettings(/*.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings)*/);
             CharacterWindowSettings = new CharacterWindowSettings(/*.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CharacterWindowSettings)*/);
             NpcWindowSettings = new NpcWindowSettings(/*.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(NpcWindowSettings)*/);

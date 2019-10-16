@@ -87,9 +87,25 @@ namespace TCC.Windows
             var currIce = Game.Me.Ice;
             var currArc = Game.Me.Arcane;
 
-            if (fire) Game.SetSorcererElements(!currFire, currIce, currArc);
-            if (ice) Game.SetSorcererElements(currFire, !currIce, currArc);
-            if (arc) Game.SetSorcererElements(currFire, currIce, !currArc);
+            if (fire) SetSorcererElements(!currFire, currIce, currArc);
+            if (ice) SetSorcererElements(currFire, !currIce, currArc);
+            if (arc) SetSorcererElements(currFire, currIce, !currArc);
+
+            void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
+            {
+                Game.Me.Fire = pFire;
+                Game.Me.Ice = pIce;
+                Game.Me.Arcane = pArcane;
+
+                if (App.Settings.ClassWindowSettings.Enabled
+                    && Game.Me.Class == Class.Sorcerer
+                    && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutVM sm)
+                {
+                    sm.NotifyElementChanged();
+                }
+
+            }
+
         }
 
         private void SetSorcElementBoost(object sender, RoutedEventArgs e)
@@ -115,11 +131,10 @@ namespace TCC.Windows
         {
             TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(10000);
 
-            SkillManager.AddSkill(100700, 20000);
-            SkillManager.AddSkill(400120, 20000);
-            SkillManager.AddItemSkill(6298, 10);
-            SkillManager.ResetSkill(400120);
-            //CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(100700, Class.Warrior, "dfa", ""),20000, CooldownType.Skill, Dispatcher.CurrentDispatcher, true, true));
+            //SkillManager.AddSkill(100700, 20000);
+            //SkillManager.AddSkill(400120, 20000);
+            //SkillManager.AddItemSkill(6298, 10);
+            //SkillManager.ResetSkill(400120);
         }
 
         private void SetStance(object sender, RoutedEventArgs e)
@@ -164,17 +179,17 @@ namespace TCC.Windows
 
         private void NotifyGuildBam(object sender, RoutedEventArgs e)
         {
-            Tester.AddFakeSystemMessage("SMT_GQUEST_URGENT_NOTIFY", "questName", "Frygaras", "npcName", "Frygaras", "zoneName", "Zone" );
+            Tester.AddFakeSystemMessage("SMT_GQUEST_URGENT_NOTIFY", "questName", "Frygaras", "npcName", "Frygaras", "zoneName", "Zone");
         }
 
         private void NotifyFieldBoss(object sender, RoutedEventArgs e)
         {
-            Tester.AddFakeSystemMessage("SMT_FIELDBOSS_APPEAR",  "npcName", "Ortan", "RegionName", "Zone" );
+            Tester.AddFakeSystemMessage("SMT_FIELDBOSS_APPEAR", "npcName", "Ortan", "RegionName", "Zone");
         }
 
         private void NotifyFieldBossDie(object sender, RoutedEventArgs e)
         {
-            Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD",  "userName", "Foglio", "npcName", "Ortan");
+            Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD", "userName", "Foglio", "npcName", "Ortan");
         }
     }
 }

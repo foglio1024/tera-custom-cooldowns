@@ -1,4 +1,4 @@
-﻿<windows:TccWidget x:Class="TCC.Windows.Widgets.NotificationAreaWindow"
+﻿<local:TccWidget x:Class="TCC.Windows.Widgets.NotificationAreaWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -49,6 +49,6 @@
                                 Margin="7 0"
                                 AutoDimButtonVisiblity="Collapsed"
                                 HideButtonVisibility="Collapsed"
-                                DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=windows:TccWidget}}"/>
+                                DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=local:TccWidget}}"/>
     </Grid>
-</windows:TccWidget>
+</local:TccWidget>

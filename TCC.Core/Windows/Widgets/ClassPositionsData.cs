@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using TCC.Data;
 
-namespace TCC.Windows
+namespace TCC.Windows.Widgets
 {
     public class ClassPositionsData
     {
@@ -10,7 +10,7 @@ namespace TCC.Windows
 
         public ClassPositionsData()
         {
-                
+
         }
         public ClassPositionsData(ClassPositionsData origin)
         {
@@ -27,6 +27,14 @@ namespace TCC.Windows
         public void ApplyCorrection(Size sc)
         {
             Position = new Point(sc.Width * Position.X, sc.Height * Position.Y);
+        }
+
+        public void ApplyOffset()
+        {
+            var offsetW = FocusManager.TeraScreen.Bounds.Left/ (double)FocusManager.TeraScreen.Bounds.Width;
+            var offsetH = FocusManager.TeraScreen.Bounds.Top/ (double)FocusManager.TeraScreen.Bounds.Height;
+
+            Position = Point.Add(Position, new Vector(offsetW, offsetH));
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Windows.Media.Animation;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Skills;
-using TCC.Utilities;
 using TCC.Utils;
 
 namespace TCC.Controls.Skills

@@ -1,8 +1,7 @@
 ﻿#pragma warning disable 659
 using System.Windows.Forms;
-using TCC.Data;
 
-namespace TCC
+namespace TCC.Data
 {
     public struct HotKey
     {

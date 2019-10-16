@@ -8,7 +8,6 @@ using System.Linq;
 using TCC.Data;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
-using TCC.Utilities;
 using TCC.Utils;
 using TeraPacketParser;
 using TeraPacketParser.Data;

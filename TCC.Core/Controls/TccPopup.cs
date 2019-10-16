@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace TCC.Windows.Widgets
+namespace TCC.Controls
 {
     public class TccPopup : Popup
     {
@@ -21,7 +20,7 @@ namespace TCC.Windows.Widgets
 
         public TccPopup()
         {
-            WindowManager.ForegroundManager.VisibilityChanged += OnVisiblityChanged;
+            WindowManager.VisibilityManager.VisibilityChanged += OnVisiblityChanged;
             FocusManager.ForegroundChanged += OnForegroundChanged;
         }
 
@@ -46,7 +45,7 @@ namespace TCC.Windows.Widgets
 
         private void OnVisiblityChanged()
         {
-            if (WindowManager.ForegroundManager.Visible) return;
+            if (WindowManager.VisibilityManager.Visible) return;
             Dispatcher?.Invoke(() => IsOpen = false);
         }
 

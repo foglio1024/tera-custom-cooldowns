@@ -3,8 +3,6 @@ using System.Net;
 using System.Text;
 using FoglioUtils;
 using Newtonsoft.Json.Linq;
-using TCC.Data;
-using TCC.Utilities;
 using TCC.Utils;
 
 namespace TCC.Interop

@@ -4,10 +4,23 @@ using TCC.Test;
 
 namespace TCC
 {
-    public class ForegroundManager
+    public class VisibilityManager
     {
         private readonly DispatcherTimer _dimTimer;
+        private bool _forceVisible = Tester.Enabled;
+        private bool _forceUndim = Tester.Enabled;
 
+        public event Action VisibilityChanged;
+        public event Action DimChanged;
+        public event Action ClickThruChanged;
+
+        public bool Dim => !_dimTimer.IsEnabled &&
+                                !Game.Encounter &&
+                                !ForceUndim;
+        public bool Visible => Game.Logged &&
+                               !Game.LoadingScreen &&
+                                FocusManager.IsForeground ||
+                                Tester.Enabled;
         public bool ForceUndim
         {
             get => _forceUndim;
@@ -19,13 +32,7 @@ namespace TCC
             }
         }
 
-        private bool _forceVisible = Tester.Enabled;
-        private bool _forceUndim = Tester.Enabled;
-        public event Action VisibilityChanged;
-        public event Action DimChanged;
-        public event Action ClickThruChanged;
-
-        public ForegroundManager()
+        public VisibilityManager()
         {
             Game.LoadingScreenChanged += NotifyVisibilityChanged;
             Game.LoggedChanged += NotifyVisibilityChanged;
@@ -47,36 +54,22 @@ namespace TCC
         {
             App.BaseDispatcher.Invoke(() => ClickThruChanged?.Invoke());
         }
-
         private void OnSkillStarted()
         {
             _dimTimer.Stop();
             _dimTimer.Start();
             NotifyDimChanged();
         }
-
         private void NotifyVisibilityChanged()
         {
             App.BaseDispatcher?.InvokeAsync(() =>
                 VisibilityChanged?.Invoke(), DispatcherPriority.Background);
         }
-
         private void NotifyDimChanged()
         {
             App.BaseDispatcher?.InvokeAsync(() =>
                 DimChanged?.Invoke(), DispatcherPriority.Background);
         }
-
-
-        public bool Dim => !_dimTimer.IsEnabled &&
-                                !Game.Encounter &&
-                                !ForceUndim;
-
-        public bool Visible => Game.Logged &&
-                               !Game.LoadingScreen &&
-                                FocusManager.IsForeground ||
-                                Tester.Enabled;
-
         public bool ForceVisible
         {
             get => _forceVisible;
@@ -87,7 +80,6 @@ namespace TCC
                 NotifyVisibilityChanged();
             }
         }
-
         public void RefreshDim()
         {
             if (App.Loading) return;
@@ -99,7 +91,6 @@ namespace TCC
             DimChanged?.Invoke();
         });
         }
-
         public void RefreshVisible()
         {
             App.BaseDispatcher?.Invoke(() =>

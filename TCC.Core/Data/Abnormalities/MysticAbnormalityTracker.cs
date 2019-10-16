@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using TCC.Utilities;
 using TCC.ViewModels;
-using TeraDataLite;
 using TeraPacketParser.Messages;
 
 namespace TCC.Data.Abnormalities
@@ -19,12 +18,12 @@ namespace TCC.Data.Abnormalities
         private static readonly uint[] SwiftAuraIDs = { 700700, 700701 };
         private static readonly uint[] ElementalizeIDs = { 702000 };
 
-        public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
-        {
-            if (msg.AbnormalityId != HurricaneId || !Game.IsMe(msg.CasterId)) return;
-            Game.DB.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
-            SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
-        }
+        //public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
+        //{
+        //    if (msg.AbnormalityId != HurricaneId || !Game.IsMe(msg.CasterId)) return;
+        //    Game.DB.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
+        //    SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
+        //}
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
