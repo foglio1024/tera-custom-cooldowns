@@ -42,5 +42,10 @@
             <Button Click="RegisterWebhook">Register</Button>
             <Button Click="FireWebhook">Fire</Button>
         </StackPanel>
+        <StackPanel Margin="5">
+            <Button Click="NotifyGuildBam">Guild BAM</Button>
+            <Button Click="NotifyFieldBoss">Field Boss Spawn</Button>
+            <Button Click="NotifyFieldBossDie">Field Boss Die</Button>
+        </StackPanel>
     </StackPanel>
 </Window>

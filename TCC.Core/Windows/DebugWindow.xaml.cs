@@ -161,5 +161,20 @@ namespace TCC.Windows
             Game.Account.Characters[0].VanguardInfo.DailiesDone = App.Random.Next(0, 16);
             Game.Account.Characters[0].VanguardInfo.WeekliesDone = App.Random.Next(0, 16);
         }
+
+        private void NotifyGuildBam(object sender, RoutedEventArgs e)
+        {
+            Tester.AddFakeSystemMessage("SMT_GQUEST_URGENT_NOTIFY", "questName", "Frygaras", "npcName", "Frygaras", "zoneName", "Zone" );
+        }
+
+        private void NotifyFieldBoss(object sender, RoutedEventArgs e)
+        {
+            Tester.AddFakeSystemMessage("SMT_FIELDBOSS_APPEAR",  "npcName", "Ortan", "RegionName", "Zone" );
+        }
+
+        private void NotifyFieldBossDie(object sender, RoutedEventArgs e)
+        {
+            Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD",  "userName", "Foglio", "npcName", "Ortan");
+        }
     }
 }
