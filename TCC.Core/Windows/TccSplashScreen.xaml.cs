@@ -1,5 +1,8 @@
-﻿using System.Windows.Media;
+﻿using System.Threading;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using FoglioUtils;
 
 namespace TCC.Windows
@@ -38,6 +41,25 @@ namespace TCC.Windows
 
                 BeginAnimation(OpacityProperty, an);
             });
+        }
+
+        public static void InitOnNewThread()
+        {
+            var waiting = true;
+            var ssThread = new Thread(() =>
+                {
+                    SynchronizationContext.SetSynchronizationContext(
+                        new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                    App.SplashScreen = new TccSplashScreen();
+                    App.SplashScreen.VM.BottomText = "Initializing...";
+                    App.SplashScreen.Show();
+                    waiting = false;
+                    Dispatcher.Run();
+                })
+            { Name = "SplashScreen window thread" };
+            ssThread.SetApartmentState(ApartmentState.STA);
+            ssThread.Start();
+            while (waiting) Thread.Sleep(1);
         }
 
 

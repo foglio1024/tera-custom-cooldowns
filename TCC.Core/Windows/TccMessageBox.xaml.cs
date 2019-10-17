@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using TCC.Data;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
@@ -179,5 +181,19 @@ namespace TCC.Windows
         {
             _messageBox = new TccMessageBox();
         }
+
+        public static void CreateAsync()
+        {
+            var ssThread = new Thread(() =>
+                {
+                    SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                    Create();
+                    Dispatcher.Run();
+                })
+                { Name = "MessageBoxThread" };
+            ssThread.SetApartmentState(ApartmentState.STA);
+            ssThread.Start();
+        }
+
     }
 }
