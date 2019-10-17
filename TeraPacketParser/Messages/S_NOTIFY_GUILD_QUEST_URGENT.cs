@@ -111,7 +111,7 @@ namespace TeraPacketParser.Messages
                 var questOffset = reader.ReadInt16();
                 var t = reader.ReadInt32();
                 Type = (GuildBamQuestType)t;
-                ZoneId = reader.ReadUInt16();
+                ZoneId = reader.ReadUInt32();
                 TemplateId = reader.ReadUInt32();
                 reader.BaseStream.Position = questOffset - 4;
                 Quest = reader.ReadTeraString();

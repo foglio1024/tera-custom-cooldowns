@@ -45,9 +45,8 @@ namespace TCC.Test
         }
         public static void ParsePacket()
         {
-            var packet =
-                "";
-            ParsePacketFromHexString<S_GET_USER_LIST>(packet, 351828);
+            var packet = "3b6112000000000022000000d207000040004700750069006c006400510075006500730074003a0036003000300032003000300031000000";
+            ParsePacketFromHexString<S_NOTIFY_GUILD_QUEST_URGENT>(packet, 356368);
         }
         public static void ShowDebugWindow()
         {

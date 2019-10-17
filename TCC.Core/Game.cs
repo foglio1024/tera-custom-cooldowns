@@ -18,6 +18,7 @@ using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
+using TeraPacketParser;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
 using Server = TCC.TeraCommon.Game.Server;
@@ -102,7 +103,7 @@ namespace TCC
         }
         public static int CurrentZoneId { get; private set; }
         public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
-        public static List<string> BlockList { get;  } = new List<string>();
+        public static List<string> BlockList { get; } = new List<string>();
 
         public static bool IsMe(ulong eid)
         {
@@ -225,7 +226,21 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
             PacketAnalyzer.Processor.Hook<S_BOSS_GAGE_INFO>(OnBossGageInfo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+
+            PacketAnalyzer.Processor.Hook<S_FIN_INTER_PARTY_MATCH>(OnFinInterPartyMatch);
+            PacketAnalyzer.Processor.Hook<S_BATTLE_FIELD_ENTRANCE_INFO>(OnBattleFieldEntranceInfo);
         }
+
+        private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
+        {
+            Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToStringEx()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
+        }
+
+        private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
+        {
+            Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToStringEx()}", "S_FIN_INTER_PARTY_MATCH.txt");
+        }
+
 
         private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
@@ -576,10 +591,9 @@ namespace TCC
             var questName = p.QuestId == 0
                 ? "Defeat Guild BAM"
                 : DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
-            var zone = DB.RegionsDatabase.GetZoneName(p.ZoneId);
+            var zone = DB.MonsterDatabase.GetZoneName(p.ZoneId);
             var name = DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
             var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
-            Log.F($"{nameof(S_NOTIFY_GUILD_QUEST_URGENT)}\n{p.Payload.Array.ToStringEx()}");
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
