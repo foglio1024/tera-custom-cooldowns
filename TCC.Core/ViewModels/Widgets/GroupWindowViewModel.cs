@@ -286,8 +286,6 @@ namespace TCC.ViewModels.Widgets
                 _leaderOverride = p.IsLeader;
                 visible = false;
             }
-            //lock (_lock) //TODO: really needed?
-            //{
             var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (user == null)
             {
@@ -298,6 +296,7 @@ namespace TCC.ViewModels.Widgets
             }
 
             if (user.Online != p.Online) SendOnlineMessage(user.Name, p.Online);
+
             user.Online = p.Online;
             user.EntityId = p.EntityId;
             user.IsLeader = p.IsLeader;
@@ -718,7 +717,6 @@ namespace TCC.ViewModels.Widgets
         private void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             SetRaid(p.Raid);
-            //p.Members.ForEach(m => Dispatcher.Invoke(() => AddOrUpdateMember(m)));
             Dispatcher.InvokeAsync(() => p.Members.ForEach(AddOrUpdateMember));
         }
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)

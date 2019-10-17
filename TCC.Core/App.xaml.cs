@@ -18,6 +18,7 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Test;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -27,34 +28,36 @@ namespace TCC
 {
     public partial class App
     {
-        public const bool Experimental = true;
-
+        private static bool _restarted;
         private static bool _running;
         private static Mutex _mutex;
-        public static readonly Random Random = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond);
-        public static TccSplashScreen SplashScreen;
+
+        public static bool Experimental { get; } = true;
+
         public static Dispatcher BaseDispatcher { get; private set; }
+        /// <summary>
+        /// Version in the "TCC vX.Y.Z" format.
+        /// </summary>
         public static string AppVersion { get; private set; } //"TCC vX.Y.Z"
+        /// <summary>
+        /// 'TCC.exe' folder
+        /// </summary>
         public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
+        /// <summary>
+        /// 'TCC/resources' folder
+        /// </summary>
         public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
+        /// <summary>
+        /// 'TCC/resources/data' folder
+        /// </summary>
         public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
         public static bool Loading { get; private set; }
         public static bool ToolboxMode { get; private set; }
-        public static bool Restarted { get; private set; }
+        public static Random Random { get; } = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond);
+        public static TccSplashScreen SplashScreen { get; set; }
+        public static SettingsContainer Settings { get; set; }
 
-        public static bool FI = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) && DateTime.Now < TimeUtils.FromUnixTime(1567209600);
 
-        public static SettingsContainer Settings;
-
-        private static FUBH fubh;
-        public static void FUBH()
-        {
-            BaseDispatcher.InvokeAsync(() =>
-            {
-                if (fubh == null) fubh = new FUBH();
-                fubh.Show();
-            });
-        }
         private async void OnStartup(object sender, StartupEventArgs e)
         {
             _running = true;
@@ -62,12 +65,11 @@ namespace TCC
             ParseStartupArgs(e.Args.ToList());
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
-            InitMessageBox(); 
+            TccMessageBox.CreateAsync(); 
 
-            if (IsRunning())
+            if (IsAlreadyRunning())
             {
-                if (!ToolboxMode) TccMessageBox.Show("Another instance of TCC is already running. Shutting down.",
-                     MessageBoxType.Information);
+                if (!ToolboxMode) TccMessageBox.Show("Another instance of TCC is already running. Shutting down.", MessageBoxType.Information);
                 Current.Shutdown();
                 return;
             }
@@ -75,7 +77,7 @@ namespace TCC
             Loading = true;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             AppVersion = $"TCC v{v.Major}.{v.Minor}.{v.Build}{(Experimental ? "-e" : "")}";
-            InitSplashScreen();
+            TccSplashScreen.InitOnNewThread();
 #if RELEASE
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
 #endif
@@ -164,50 +166,22 @@ namespace TCC
             Loading = false;
         }
 
-        private static void ParseStartupArgs(List<string> list)
+        private static void ParseStartupArgs(IList<string> args)
         {
-            ToolboxMode = list.IndexOf("--toolbox") != -1;
-            Restarted = list.IndexOf("--restart") != -1;
-            var settingsOverrideIdx = list.IndexOf("--settings_override");
+            // --toolbox
+            ToolboxMode = args.IndexOf("--toolbox") != -1;
+            
+            // --restart
+            _restarted = args.IndexOf("--restart") != -1;
+
+            // --settings_override 'path'
+            var settingsOverrideIdx = args.IndexOf("--settings_override");
             if (settingsOverrideIdx != -1)
             {
-                SettingsContainer.SettingsOverride = list[settingsOverrideIdx + 1];
+                SettingsContainer.SettingsOverride = args[settingsOverrideIdx + 1];
             }
 
         }
-
-
-        private static void InitSplashScreen()
-        {
-            var waiting = true;
-            var ssThread = new Thread(() =>
-                {
-                    SynchronizationContext.SetSynchronizationContext(
-                        new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                    SplashScreen = new TccSplashScreen();
-                    SplashScreen.VM.BottomText = "Initializing...";
-                    SplashScreen.Show();
-                    waiting = false;
-                    Dispatcher.Run();
-                })
-            { Name = "SplashScreen window thread" };
-            ssThread.SetApartmentState(ApartmentState.STA);
-            ssThread.Start();
-            while (waiting) Thread.Sleep(1);
-        }
-        private static void InitMessageBox()
-        {
-            var ssThread = new Thread(() =>
-                {
-                    SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                    TccMessageBox.Create();
-                    Dispatcher.Run();
-                })
-            { Name = "MessageBoxThread" };
-            ssThread.SetApartmentState(ApartmentState.STA);
-            ssThread.Start();
-        }
-
 
         public static void Restart()
         {
@@ -215,7 +189,6 @@ namespace TCC
             Process.Start("TCC.exe", $"--restart{(ToolboxMode ? " --toolbox" : "")}");
             Close();
         }
-
         public static void Close(bool releaseMutex = true)
         {
             _running = false;
@@ -228,21 +201,41 @@ namespace TCC
             Environment.Exit(0);
         }
 
-
-        private static bool IsRunning()
+        private static bool IsAlreadyRunning()
         {
             _mutex = new Mutex(true, "TCC", out var createdNew);
-            if (createdNew || !Restarted) return !createdNew;
+            if (createdNew || !_restarted) return !createdNew;
             _mutex.WaitOne();
             return false;
         }
-
         public static void ReleaseMutex()
         {
             _running = false;
             _mutex.ReleaseMutex();
         }
 
+        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; }
+        public static void AddDispatcher(int threadId, Dispatcher d)
+        {
+            App.RunningDispatchers[threadId] = d;
+        }
+        public static void RemoveDispatcher(int threadId)
+        {
+            App.RunningDispatchers.TryRemove(threadId, out _);
+        }
+        public static void WaitDispatchersShutdown()
+        {
+            if (RunningDispatchers == null) return;
+            var tries = 50;
+            while (tries > 0)
+            {
+                if (RunningDispatchers.Count == 0) break;
+                Log.CW($"Waiting all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
+                Thread.Sleep(100);
+                tries--;
+            }
+            Log.CW("All dispatchers shut down.");
+        }
         private static void StartDispatcherWatcher()
         {
             var t = new Thread(() =>
@@ -272,30 +265,19 @@ namespace TCC
             t.Start();
         }
 
-        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; }
-
-        public static void AddDispatcher(int threadId, Dispatcher d)
+        #region Misc
+        private static FUBH _fubh;
+        public static bool FI { get; } = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) && DateTime.Now < TimeUtils.FromUnixTime(1567209600);
+        public static void FUBH()
         {
-            App.RunningDispatchers[threadId] = d;
-        }
-        public static void RemoveDispatcher(int threadId)
-        {
-            App.RunningDispatchers.TryRemove(threadId, out _);
-        }
-
-        public static void WaitDispatchersShutdown()
-        {
-            if (RunningDispatchers == null) return;
-            var tries = 50;
-            while (tries > 0)
+            BaseDispatcher.InvokeAsync(() =>
             {
-                if (RunningDispatchers.Count == 0) break;
-                Log.CW($"Waiting all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
-                Thread.Sleep(100);
-                tries--;
-            }
-            Log.CW("All dispatchers shut down.");
+                if (_fubh == null) _fubh = new FUBH();
+                _fubh.Show();
+            });
         }
+
+        #endregion
     }
 
     public class DeadlockException : Exception
