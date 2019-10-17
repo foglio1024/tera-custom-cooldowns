@@ -18,13 +18,4 @@ namespace TCC.Interop.JsonRPC
             this["id"] = jObj["id"];
         }
     }
-    public class ErrorObject : JObject
-    {
-        public ErrorObject(int code, string message, JObject data = null)
-        {
-            this["code"] = code;
-            this["message"] = message;
-            if (data != null) this["data"] = data;
-        }
-    }
 }

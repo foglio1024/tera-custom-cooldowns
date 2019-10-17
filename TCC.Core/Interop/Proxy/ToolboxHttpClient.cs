@@ -29,21 +29,24 @@ namespace TCC.Interop.Proxy
             }
             catch (Exception e)
             {
-                Log.CW(e.ToString());
+                Log.F($"Error while sending data to Toolbox: {e}");
                 return null;
             }
         }
 
 
-        public async Task<Response> CallAsync(Request req)
-        {
-            //Log.All($"[RPC] {req.Method}()");
-            return await Send(req);
-        }
         public async Task<Response> CallAsync(string methodName, JObject parameters = null)
         {
-            var req = new Request(methodName, parameters);
-            return await CallAsync(req);
+            return await CallAsync(new Request(methodName, parameters));
+        }
+        private async Task<Response> CallAsync(Request req)
+        {
+            var resp = await Send(req);
+            if (resp?.Error != null)
+            {
+                Log.F($"Toolbox RPC call generated an error: {resp.Error["message"]}");
+            }
+            return resp;
         }
         //public void SendResponse(Response resp)
         //{

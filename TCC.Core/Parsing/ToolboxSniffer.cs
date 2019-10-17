@@ -27,7 +27,7 @@ namespace TCC.Parsing
         public async Task<uint> GetServer()
         {
             var resp = await _client.CallAsync("getServer");
-            return resp?.Result.Value<uint>() ?? 0;
+            return resp?.Result?.Value<uint>() ?? 0;
         }
         public async Task<bool> DumpMap([NotNull] string path, [NotNull] string mapType)
         {
@@ -73,7 +73,7 @@ namespace TCC.Parsing
             return resp?.Result?.Value<uint>() ?? 0;
         }
     }
-
+    
     internal class ToolboxSniffer : ITeraSniffer
     {
         private readonly TcpListener _dataConnection;
