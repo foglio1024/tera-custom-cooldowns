@@ -231,7 +231,7 @@ namespace TCC.Parsing
             if (!App.Settings.ChatEnabled) return;
 
             var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>")
-                .Replace("{PartyPlayerName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Ress);
+                .Replace("{PartyPlayerName}", "<font color='#cccccc'>{PartyPlayerName}</font>"), (int)ChatChannel.Ress);
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Ress);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
@@ -241,7 +241,7 @@ namespace TCC.Parsing
             if (!App.Settings.ChatEnabled) return;
 
             var newSysMsg = new SystemMessageData(sysMsg.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>")
-                .Replace("{PartyPlayerName}", "<font color='#cccccc'>{UserName}</font>"), (int)ChatChannel.Death);
+                .Replace("{PartyPlayerName}", "<font color='#cccccc'>{PartyPlayerName}</font>"), (int)ChatChannel.Death);
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(srvMsg, newSysMsg, ChatChannel.Death);
             ChatWindowManager.Instance.AddChatMessage(msg);
         }
