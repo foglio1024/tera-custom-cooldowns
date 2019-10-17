@@ -101,7 +101,7 @@ namespace TCC.Sniffing
                 var idx = line.IndexOf("Live-", StringComparison.InvariantCultureIgnoreCase);
                 var v = line.Substring(idx + 5);
                 var idx2 = v.IndexOf(' ');
-                v = v.Substring(0, v.Length - idx2);
+                v = v.Substring(0, idx2);
                 v = v.Replace(".", "");
                 PacketAnalyzer.Factory.ReleaseVersion = int.Parse(v);
             }
