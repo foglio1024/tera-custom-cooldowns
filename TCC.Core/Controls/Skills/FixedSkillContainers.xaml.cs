@@ -108,7 +108,7 @@ namespace TCC.Controls.Skills
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             MainSkills.InvalidateMeasure();
             MainSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
-            VM.Save();
+            VM.SaveConfig();
         }
 
         private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -117,7 +117,7 @@ namespace TCC.Controls.Skills
             {
                 SecSkills.InvalidateMeasure();
                 SecSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
-                VM.Save();
+                VM.SaveConfig();
             }
 
             OtherSkills.Margin = ((TSObservableCollection<Cooldown>)sender).Count == 0
@@ -206,7 +206,7 @@ namespace TCC.Controls.Skills
                     VM.SecondarySkills.Move(oldIndex, newIndex);
                 }
             }
-            VM.Save();
+            VM.SaveConfig();
             //FocusManager.ForceVisible = false; // FocusTimer.Enabled = true;
             //WindowManager.ForegroundManager.ForceVisible = false;
             //WindowManager.ForegroundManager.ForceUndim = false;
@@ -360,7 +360,7 @@ namespace TCC.Controls.Skills
                     });
                 });
 
-                WindowManager.ViewModels.CooldownsVM.Save();
+                WindowManager.ViewModels.CooldownsVM.SaveConfig();
             }
         }
 

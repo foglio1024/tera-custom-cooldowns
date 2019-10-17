@@ -73,7 +73,7 @@ namespace TCC.Windows
                 if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             };
             BeginAnimation(OpacityProperty, an);
-            VM.Save();
+            VM.SaveConfig();
         }
 
         internal void ShowWindow()

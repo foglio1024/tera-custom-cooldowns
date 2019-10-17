@@ -98,7 +98,7 @@ namespace TCC.Test
             Game.LoadingScreen = false;
             Game.Me.Class = c;
             WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
-            WindowManager.ViewModels.CooldownsVM.LoadSkills(c);
+            WindowManager.ViewModels.CooldownsVM.LoadConfig(c);
         }
         public static void ForceEncounter(bool val = true)
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using TCC.Data.Abnormalities;
+using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.Data.Databases
 {
@@ -69,6 +71,14 @@ namespace TCC.Data.Databases
             fearInoculum.Type = AbnormalityType.Special;
             Abnormalities[fearInoculum.Id] = fearInoculum;
 
+        }
+
+        public bool TryGetPassiveSkill(uint id , out Skill sk)
+        {
+            sk = null;
+            if (!Abnormalities.TryGetValue(id, out var ab)) return false;
+            sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName };
+            return true;
         }
     }
 

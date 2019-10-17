@@ -1,12 +1,12 @@
 ﻿using FoglioUtils;
+using FoglioUtils.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Threading;
-using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -18,7 +18,6 @@ using TCC.Utils;
 using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;
-using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels.Widgets
 {
@@ -163,7 +162,7 @@ namespace TCC.ViewModels.Widgets
         {
             context.Dispose();
             HiddenSkills.Add(context);
-            Save();
+            SaveConfig();
         }
 
         internal void DeleteFixedSkill(Cooldown context)
@@ -171,7 +170,7 @@ namespace TCC.ViewModels.Widgets
             if (MainSkills.Contains(context)) MainSkills.Remove(context);
             else if (SecondarySkills.Contains(context)) SecondarySkills.Remove(context);
 
-            Save();
+            SaveConfig();
         }
 
         private void NormalMode_Remove(Skill sk)
@@ -207,31 +206,6 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
-        internal void Save()
-        {
-            Dispatcher.InvokeAsync(() =>
-            {
-                if (MainSkills.Count == 0 && SecondarySkills.Count == 0 && HiddenSkills.Count == 0) return;
-                var root = new XElement("Skills");
-                MainSkills.ToList().ForEach(mainSkill =>
-                {
-                    var tag = mainSkill.CooldownType.ToString();
-                    root.Add(new XElement(tag, new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1), new XAttribute("name", mainSkill.Skill.ShortName)));
-                });
-                SecondarySkills.ToList().ForEach(secSkill =>
-                {
-                    var tag = secSkill.CooldownType.ToString();
-                    root.Add(new XElement(tag, new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2), new XAttribute("name", secSkill.Skill.ShortName)));
-                });
-                HiddenSkills.ToList().ForEach(sk =>
-                {
-                    var tag = sk.CooldownType.ToString();
-                    root.Add(new XElement(tag, new XAttribute("id", sk.Skill.Id), new XAttribute("row", 3), new XAttribute("name", sk.Skill.ShortName)));
-                });
-                if (Game.Me.Class > (Class)12) return;
-                root.Save(Path.Combine(App.ResourcesPath, "config/skills", $"{TccUtils.ClassEnumToString(Game.Me.Class).ToLower()}-skills.xml"));
-            });
-        }
 
         private bool FixedMode_Update(Cooldown sk)
         {
@@ -416,12 +390,12 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                ShortSkills.ToList().ForEach(sk => sk.Dispose());
-                LongSkills.ToList().ForEach(sk => sk.Dispose());
-                MainSkills.ToList().ForEach(sk => sk.Dispose());
-                SecondarySkills.ToList().ForEach(sk => sk.Dispose());
-                OtherSkills.ToList().ForEach(sk => sk.Dispose());
-                ItemSkills.ToList().ForEach(sk => sk.Dispose());
+                ShortSkills.ToSyncList().ForEach(sk => sk.Dispose());
+                LongSkills.ToSyncList().ForEach(sk => sk.Dispose());
+                MainSkills.ToSyncList().ForEach(sk => sk.Dispose());
+                SecondarySkills.ToSyncList().ForEach(sk => sk.Dispose());
+                OtherSkills.ToSyncList().ForEach(sk => sk.Dispose());
+                ItemSkills.ToSyncList().ForEach(sk => sk.Dispose());
 
                 ShortSkills.Clear();
                 LongSkills.Clear();
@@ -433,52 +407,50 @@ namespace TCC.ViewModels.Widgets
             });
         }
 
-        public void LoadSkills(Class c)
+        public void LoadConfig(Class c)
         {
-            if (c == Class.None) return;
-            var filename = TccUtils.ClassEnumToString(c).ToLower() + "-skills.xml";
-            SkillConfigParser sp;
-            //Dispatcher.Invoke(() =>
-            //{
-            if (!File.Exists(Path.Combine(App.ResourcesPath, "config/skills", filename)))
-            {
-                SkillUtils.BuildDefaultSkillConfig(filename, c);
-            }
+            if (c == Class.None || c == Class.Common) return;
 
+            Dispatcher.InvokeAsyncIfRequired(() =>
+            {
+                var data = new CooldownConfigParser(c).Data;
+
+                data.Main.ForEach(cdData => TryAddToList(cdData, MainSkills));
+                data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
+                data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
+
+                Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(SkillsDatabase.SkillsForClass, null, new string[] { }, new SortDescription[] { }));
+
+                N(nameof(SkillsView));
+                N(nameof(MainSkills));
+                N(nameof(SecondarySkills));
+
+                SkillsLoaded?.Invoke();
+
+                #region Local
+
+                void TryAddToList(CooldownData cdData, TSObservableCollection<Cooldown> list)
+                {
+                    if (!Game.DB.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
+                    list.Add(new Cooldown(sk, false, cdData.Type, Dispatcher));
+                }
+                #endregion
+            }, DispatcherPriority.Background);
+        }
+        internal void SaveConfig()
+        {
+            var data = new CooldownConfigData();
+
+            MainSkills.ToSyncList().ForEach(sk => data.Main.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
+            SecondarySkills.ToSyncList().ForEach(sk => data.Secondary.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
+            HiddenSkills.ToSyncList().ForEach(sk => data.Hidden.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
+            var path = Path.Combine(App.ResourcesPath, "config","skills", $"{Game.Me.Class.ToString().ToLower()}-skills.json");
+            File.WriteAllText(path, JsonConvert.SerializeObject(data));
             try
             {
-                sp = new SkillConfigParser(filename, c);
+                File.Delete(path.Replace(".json", ".xml"));
             }
-            catch (Exception)
-            {
-                var res = TccMessageBox.Show("TCC",
-                    $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.",
-                    MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-
-                if (res == MessageBoxResult.Cancel) File.Delete(Path.Combine(App.ResourcesPath, "config/skills/", filename));
-                LoadSkills(c);
-                return;
-            }
-            foreach (var sk in sp.Main)
-            {
-                MainSkills.Add(sk);
-            }
-            foreach (var sk in sp.Secondary)
-            {
-                SecondarySkills.Add(sk);
-            }
-            foreach (var sk in sp.Hidden)
-            {
-                HiddenSkills.Add(sk);
-            }
-
-            Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(SkillsDatabase.SkillsForClass, null, new string[] { }, new SortDescription[] { }));
-
-            N(nameof(SkillsView));
-            N(nameof(MainSkills));
-            N(nameof(SecondarySkills));
-            SkillsLoaded?.Invoke();
-            //});
+            catch { }
         }
 
         public CooldownBarMode Mode => App.Settings.CooldownWindowSettings.Mode;
@@ -578,6 +550,7 @@ namespace TCC.ViewModels.Widgets
 
         private void OnDisconnected()
         {
+            SaveConfig();
             ClearSkills();
         }
 
@@ -616,10 +589,11 @@ namespace TCC.ViewModels.Widgets
         private void OnLogin(S_LOGIN m)
         {
             ClearSkills();
-            LoadSkills(m.CharacterClass);
+            LoadConfig(m.CharacterClass);
         }
         private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
+            SaveConfig();
             ClearSkills();
         }
         private void OnGetUserList(S_GET_USER_LIST m)

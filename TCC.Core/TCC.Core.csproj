@@ -112,8 +112,10 @@
     <Compile Include="Controls\Settings\HotkeySetting.xaml.cs">
       <DependentUpon>HotkeySetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\CooldownData.cs" />
     <Compile Include="Data\Chat\LfgMessage.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
+    <Compile Include="Settings\CooldownConfigParser.cs" />
     <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="Controls\TccTrayIcon.cs" />
     <Compile Include="Windows\Widgets\TccWidgetBuilder.cs" />
@@ -508,7 +510,7 @@
     <Compile Include="Data\Pc\Player.cs" />
     <Compile Include="Interop\ProxyOld.cs" />
     <Compile Include="Settings\SettingsContainer.cs" />
-    <Compile Include="SkillUtils.cs" />
+    <Compile Include="Settings\CooldownConfigData.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
     <Compile Include="Sniffing\IpSniffer.cs" />

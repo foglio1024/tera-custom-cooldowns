@@ -72,7 +72,7 @@ namespace TCC.Windows
             Game.Me.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
             WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
             WindowManager.ViewModels.CooldownsVM.ClearSkills();
-            WindowManager.ViewModels.CooldownsVM.LoadSkills(Game.Me.Class);
+            WindowManager.ViewModels.CooldownsVM.LoadConfig(Game.Me.Class);
         }
 
         private void SetSorcElement(object sender, RoutedEventArgs e)

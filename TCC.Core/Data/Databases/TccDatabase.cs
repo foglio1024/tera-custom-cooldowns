@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TCC.Data.Skills;
 using TCC.TeraCommon.Game.Services;
 using TeraDataLite;
 
@@ -110,6 +111,25 @@ namespace TCC.Data.Databases
             return ret;
         }
 
+        public bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
+        {
+            sk = null;
+            switch (t)
+            {
+                case CooldownType.Skill:
+                    if (!Game.DB.SkillsDatabase.TryGetSkill(id, c, out sk)) return false;
+                    break;
+                case CooldownType.Item:
+                    if (!Game.DB.ItemsDatabase.TryGetItemSkill(id, out sk)) return false;
+                    break;
+                case CooldownType.Passive:
+                    if (Game.DB.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
+                    break;
+            }
+
+            return true;
+
+        }
         public void DownloadOutdatedDatabases()
         {
             foreach (var outdated in Databases.Where(db => !db.IsUpToDate))
