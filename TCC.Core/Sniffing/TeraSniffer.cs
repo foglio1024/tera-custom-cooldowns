@@ -4,8 +4,11 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using TCC.Data;
+using TCC.Parsing;
 using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
 using TCC.Utils;
@@ -89,6 +92,19 @@ namespace TCC.Sniffing
 
         protected virtual void OnNewConnection(Server server)
         {
+            var process = Process.GetProcessesByName("TERA.exe")[0];
+            var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
+            var txt = File.ReadAllLines(fullPath);
+            foreach (var line in txt)
+            {
+                if (!line.StartsWith("Version:")) continue;
+                var idx = line.IndexOf("Live-", StringComparison.InvariantCultureIgnoreCase);
+                var v = line.Substring(idx + 5);
+                var idx2 = v.IndexOf(' ');
+                v = v.Substring(0, v.Length - idx2);
+                v = v.Replace(".", "");
+                PacketAnalyzer.Factory.ReleaseVersion = int.Parse(v);
+            }
             var handler = NewConnection;
             handler?.Invoke(server);
         }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -28,6 +30,12 @@ namespace TCC.Parsing
         {
             var resp = await _client.CallAsync("getServer");
             return resp?.Result?.Value<uint>() ?? 0;
+        }
+
+        public async Task<int> GetReleaseVersion()
+        {
+            var resp = await _client.CallAsync("getReleaseVersion");
+            return resp?.Result?.Value<int>() ?? 9901;
         }
         public async Task<bool> DumpMap([NotNull] string path, [NotNull] string mapType)
         {
@@ -123,8 +131,9 @@ namespace TCC.Parsing
                 var resp = await ControlConnection.GetServer();
                 if (resp != 0)
                 {
-                    NewConnection?.Invoke(Game.DB.ServerDatabase.GetServer(resp));
                     await ControlConnection.AddHooks(PacketAnalyzer.Factory.OpcodesList);
+                    PacketAnalyzer.Factory.ReleaseVersion = await ControlConnection.GetReleaseVersion();
+                    NewConnection?.Invoke(Game.DB.ServerDatabase.GetServer(resp));
                 }
                 var stream = client.GetStream();
                 while (true)

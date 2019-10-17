@@ -135,7 +135,7 @@ namespace TCC.Parsing
                 }
             }
             var opcNamer = new OpCodeNamer(opcPath);
-            Factory = new MessageFactory(p.Versions[0], opcNamer);
+            Factory.Set(p.Versions[0], opcNamer);
             Sniffer.Connected = true;
         }
         private static async void OnLoginArbiter(C_LOGIN_ARBITER p)
@@ -174,7 +174,7 @@ namespace TCC.Parsing
             }
             Factory.ReloadSysMsg(path);
 
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
+            Log.N("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
         }
     }
 

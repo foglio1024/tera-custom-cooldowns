@@ -17,7 +17,7 @@ namespace TeraPacketParser.Messages
             Version = reader.ReadInt32();
             reader.RepositionAt(nameOffset);
             AccountName = reader.ReadTeraString();
-            reader.Factory.ReleaseVersion = Version;
+            //reader.Factory.ReleaseVersion = Version;
         }
 
     }

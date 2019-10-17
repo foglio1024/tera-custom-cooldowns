@@ -116,15 +116,27 @@ namespace TeraPacketParser
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
         };
 
-        public readonly uint Version;
-        public int ReleaseVersion { get; set; }
-        public OpCodeNamer OpCodeNamer { get; }
+        public uint Version { get; private set; }
+        public int ReleaseVersion { get;  set; }
+        public OpCodeNamer OpCodeNamer { get; private set; }
         public OpCodeNamer SystemMessageNamer { get; set; }
         public static bool NoGuildBamOpcode { get; private set; }    //by HQ 20190324
         public MessageFactory()
         {
             OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, nameof(C_CHECK_VERSION) } });
             Version = 0;
+        }
+
+        public void Set(uint version, OpCodeNamer opcNamer)
+        {
+            OpCodeNamer = opcNamer;
+            OpcodeNameToType.Clear();
+            Version = version;
+            TeraMessages.ToList().ForEach(x => OpcodeNameToType[OpCodeNamer.GetCode(x.Key)] = x.Value);
+
+            // by HQ 20190324 ===================================
+            NoGuildBamOpcode = OpCodeNamer.GetCode(nameof(S_NOTIFY_GUILD_QUEST_URGENT)) == 0;
+            // ==================================================
         }
         public MessageFactory(uint version, OpCodeNamer opcNamer)
         {
