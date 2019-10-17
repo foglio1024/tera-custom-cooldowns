@@ -233,11 +233,13 @@ namespace TCC
 
         private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
         {
+            Log.N("Instance Matching", "Battleground matching completed", NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToStringEx()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
         }
 
         private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
         {
+            Log.N("Instance Matching", "Dungeon matching completed", NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToStringEx()}", "S_FIN_INTER_PARTY_MATCH.txt");
         }
 
