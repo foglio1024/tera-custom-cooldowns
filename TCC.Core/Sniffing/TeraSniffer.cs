@@ -92,7 +92,7 @@ namespace TCC.Sniffing
 
         protected virtual void OnNewConnection(Server server)
         {
-            var process = Process.GetProcessesByName("TERA.exe")[0];
+            var process = Process.GetProcessesByName("TERA")[0];
             var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
             var txt = File.ReadAllLines(fullPath);
             foreach (var line in txt)
