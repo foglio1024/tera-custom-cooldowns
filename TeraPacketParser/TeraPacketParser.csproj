@@ -65,6 +65,7 @@
     <Compile Include="Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
     <Compile Include="Messages\S_BAN_PARTY.cs" />
     <Compile Include="Messages\S_BAN_PARTY_MEMBER.cs" />
+    <Compile Include="Messages\S_BATTLE_FIELD_ENTRANCE_INFO.cs" />
     <Compile Include="Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Messages\S_CHANGE_GUILD_CHIEF.cs" />
     <Compile Include="Messages\S_CHANGE_PARTY_MANAGER.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Messages\S_EACH_SKILL_RESULT.cs" />
     <Compile Include="Messages\S_FIELD_EVENT_ON_ENTER.cs" />
     <Compile Include="Messages\S_FIELD_POINT_INFO.cs" />
+    <Compile Include="Messages\S_FIN_INTER_PARTY_MATCH.cs" />
     <Compile Include="Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Messages\S_GET_USER_GUILD_LOGO.cs" />
     <Compile Include="Messages\S_GET_USER_LIST.cs" />
