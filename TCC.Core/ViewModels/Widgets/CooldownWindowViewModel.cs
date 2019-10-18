@@ -446,6 +446,7 @@ namespace TCC.ViewModels.Widgets
             SecondarySkills.ToSyncList().ForEach(sk => data.Secondary.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
             HiddenSkills.ToSyncList().ForEach(sk => data.Hidden.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
             var path = Path.Combine(App.ResourcesPath, "config","skills", $"{Game.Me.Class.ToString().ToLower()}-skills.json");
+            if (!Directory.Exists(Path.GetDirectoryName(path))) Directory.CreateDirectory(Path.GetDirectoryName(path));
             File.WriteAllText(path, JsonConvert.SerializeObject(data));
             try
             {

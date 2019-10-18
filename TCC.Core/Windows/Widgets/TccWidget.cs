@@ -37,7 +37,6 @@ namespace TCC.Windows.Widgets
 
         public WindowSettings WindowSettings { get; private set; }
 
-
         protected void Init(WindowSettings settings)
         {
             Log.CW($"Init {GetType().Name} on {Dispatcher.Thread.Name}");
