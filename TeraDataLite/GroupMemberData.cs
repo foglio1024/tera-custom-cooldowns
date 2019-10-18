@@ -1,9 +1,9 @@
 ﻿namespace TeraDataLite
 {
-    public struct PartyMemberData
+    public struct GroupMemberData
     {
         public uint PlayerId { get; set; }
-        public Class UserClass { get; set; }
+        public Class Class { get; set; }
         public uint Level { get; set; }
         public int Order { get; set; }
         public uint GuardId { get; set; }
@@ -24,5 +24,12 @@
         public int CurrentST { get; set; }
         public int MaxST { get; set; }
         public bool InCombat { get; set; }
+    }
+
+    public struct GuildMemberData
+    {
+        public uint PlayerId { get; set; }
+        public string Name { get; set; } 
+
     }
 }

@@ -121,21 +121,21 @@ namespace TCC.ViewModels.Widgets
             N(nameof(ReadyCount));
             N(nameof(ShowLeaderButtons));
         }
-        public void NotifySettingUpdated()
+        private void NotifySettingUpdated()
         {
             SettingsUpdated?.Invoke();
 
             N(nameof(ShowDetails));
         }
-        public bool Exists(ulong id)
+        private bool Exists(ulong id)
         {
             return Members.ToSyncList().Any(x => x.EntityId == id);
         }
-        public bool Exists(string name)
+        private bool Exists(string name)
         {
             return Members.ToSyncList().Any(x => x.Name == name);
         }
-        public bool Exists(uint pId, uint sId)
+        private bool Exists(uint pId, uint sId)
         {
             return Members.ToSyncList().Any(x => x.PlayerId == pId && x.ServerId == sId);
         }
@@ -160,10 +160,6 @@ namespace TCC.ViewModels.Widgets
         {
             return Members.FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
         }
-        public bool HasPowers(string name)
-        {
-            return Members.ToSyncList().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
-        }
         public bool AmILeader => IsLeader(Game.Me.Name) || _leaderOverride;
 
         public void SetAggro(ulong target)
@@ -184,7 +180,7 @@ namespace TCC.ViewModels.Widgets
                 item.HasAggro = item.EntityId == target;
             }
         }
-        public void SetAggroCircle(AggroCircle circle, AggroAction action, ulong user)
+        private void SetAggroCircle(AggroCircle circle, AggroAction action, ulong user)
         {
             if (WindowManager.ViewModels.NpcVM.CurrentHHphase != HarrowholdPhase.None) return;
 
@@ -194,7 +190,7 @@ namespace TCC.ViewModels.Widgets
                 SetAggro(user);
             }
         }
-        public void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
+        private void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
             Dispatcher.InvokeAsync(() =>
             {
@@ -222,7 +218,7 @@ namespace TCC.ViewModels.Widgets
                 }
             });
         }
-        public void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
+        private void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
             Dispatcher.InvokeAsync(() =>
             {
@@ -244,7 +240,8 @@ namespace TCC.ViewModels.Widgets
                 }
             });
         }
-        public void ClearAbnormality(uint playerId, uint serverId)
+
+        private void ClearAbnormality(uint playerId, uint serverId)
         {
             Dispatcher.Invoke(() =>
             {
@@ -278,7 +275,7 @@ namespace TCC.ViewModels.Widgets
                 user.Visible = !(((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer);
             }
         }
-        public void AddOrUpdateMember(PartyMemberData p)
+        private void AddOrUpdateMember(GroupMemberData p)
         {
             var visible = true;
             if (((GroupWindowSettings)Settings).IgnoreMe && p.Name == Game.Me.Name)
@@ -367,7 +364,7 @@ namespace TCC.ViewModels.Widgets
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }
-        public void RemoveMember(uint playerId, uint serverId, bool kick = false)
+        private void RemoveMember(uint playerId, uint serverId, bool kick = false)
         {
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
@@ -375,7 +372,7 @@ namespace TCC.ViewModels.Widgets
             Members.Remove(u);
             if (!kick) SendLeaveMessage(u.Name);
         }
-        public void ClearAll()
+        private void ClearAll()
         {
             if (!((GroupWindowSettings)Settings).Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
@@ -383,19 +380,19 @@ namespace TCC.ViewModels.Widgets
             Raid = false;
             _leaderOverride = false;
         }
-        public void LogoutMember(uint playerId, uint serverId)
+        private void LogoutMember(uint playerId, uint serverId)
         {
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             u.Online = false;
         }
-        public void ToggleMe()
+        private void ToggleMe()
         {
             var me = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
             if (me == null) return;
             me.Visible = !((GroupWindowSettings)Settings).IgnoreMe;
         }
-        internal void ClearAllAbnormalities()
+        private void ClearAllAbnormalities()
         {
             foreach (var x in Members.ToSyncList())
             {
@@ -411,7 +408,7 @@ namespace TCC.ViewModels.Widgets
                 x.Debuffs.Clear();
             }
         }
-        public void SetNewLeader(ulong entityId, string name)
+        private void SetNewLeader(string name)
         {
             foreach (var m in Members.ToSyncList())
             {
@@ -421,7 +418,7 @@ namespace TCC.ViewModels.Widgets
             N(nameof(AmILeader));
             N(nameof(ShowLeaderButtons));
         }
-        public void StartRoll()
+        private void StartRoll()
         {
             Rolling = true;
             //Members.ToList().ForEach(u => u.IsRolling = true);
@@ -430,7 +427,7 @@ namespace TCC.ViewModels.Widgets
                 m.IsRolling = true;
             }
         }
-        public void SetRoll(ulong entityId, int rollResult)
+        private void SetRoll(ulong entityId, int rollResult)
         {
             if (rollResult == int.MaxValue) rollResult = -1;
             Members.ToSyncList().ForEach(member =>
@@ -446,7 +443,7 @@ namespace TCC.ViewModels.Widgets
             //u.RollResult = rollResult;
             //u.IsWinning = u.EntityId == GetWinningUser();
         }
-        public void EndRoll()
+        private void EndRoll()
         {
             Rolling = false;
 
@@ -468,7 +465,7 @@ namespace TCC.ViewModels.Widgets
             return Members.ToSyncList().OrderByDescending(u => u.RollResult).First().EntityId;
             //Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
         }
-        public void SetReadyStatus(ReadyPartyMember p)
+        private void SetReadyStatus(ReadyPartyMember p)
         {
 
             if (_firstCheck)
@@ -483,7 +480,7 @@ namespace TCC.ViewModels.Widgets
             _firstCheck = false;
             N(nameof(ReadyCount));
         }
-        public void EndReadyCheck()
+        private void EndReadyCheck()
         {
             Task.Delay(4000).ContinueWith(t =>
             {
@@ -495,7 +492,7 @@ namespace TCC.ViewModels.Widgets
             });
             _firstCheck = true;
         }
-        public void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
+        private void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
             Dispatcher.InvokeAsync(() =>
             {
@@ -505,7 +502,7 @@ namespace TCC.ViewModels.Widgets
                 u.MaxHp = maxHp;
             });
         }
-        public void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
+        private void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
             Dispatcher.InvokeAsync(() =>
             {
@@ -515,11 +512,11 @@ namespace TCC.ViewModels.Widgets
                 u.MaxMp = maxMp;
             });
         }
-        public void SetRaid(bool raid)
+        private void SetRaid(bool raid)
         {
             Dispatcher.InvokeAsync(new Action(() => Raid = raid));
         }
-        public void UpdateMember(PartyMemberData update)
+        private void UpdateMember(GroupMemberData update)
         {
             Dispatcher.InvokeAsync(() =>
             {
@@ -536,11 +533,11 @@ namespace TCC.ViewModels.Widgets
                 if (!update.Alive) current.HasAggro = false;
             });
         }
-        public void NotifyThresholdChanged()
+        private void NotifyThresholdChanged()
         {
             N(nameof(Size));
         }
-        public void UpdateMemberGear(uint playerId, uint serverId, GearItemData weapon, GearItemData armor, GearItemData hands, GearItemData feet)
+        private void UpdateMemberGear(uint playerId, uint serverId, GearItemData weapon, GearItemData armor, GearItemData hands, GearItemData feet)
         {
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
@@ -549,7 +546,7 @@ namespace TCC.ViewModels.Widgets
             u.Gloves = new GearItem(hands);
             u.Boots = new GearItem(feet);
         }
-        public void UpdateMyGear()
+        private void UpdateMyGear()
         {
             //var u = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
             //if (u == null) return;
@@ -560,7 +557,7 @@ namespace TCC.ViewModels.Widgets
             //u.Boots = currCharGear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
-        public void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)
+        private void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)
         {
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
@@ -691,7 +688,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            UpdateMember(p.PartyMemberData);
+            UpdateMember(p.GroupMemberData);
         }
         private void OnPartyMemberChangeMp(S_PARTY_MEMBER_CHANGE_MP p)
         {
@@ -721,7 +718,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
         {
-            SetNewLeader(m.EntityId, m.Name);
+            SetNewLeader(m.Name);
         }
         private void OnPartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH m)
         {

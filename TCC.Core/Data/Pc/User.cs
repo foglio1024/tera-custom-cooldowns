@@ -501,10 +501,10 @@ namespace TCC.Data.Pc
             Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
         }
 
-        public User(PartyMemberData applicant, Dispatcher d = null) : this(d)
+        public User(GroupMemberData applicant, Dispatcher d = null) : this(d)
         {
             PlayerId = applicant.PlayerId;
-            UserClass = applicant.UserClass;
+            UserClass = applicant.Class;
             Level = applicant.Level;
             Order = applicant.Order;
             Location = Game.DB.GetSectionName(applicant.GuardId, applicant.SectionId);

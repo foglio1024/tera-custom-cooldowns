@@ -28,7 +28,7 @@ namespace TeraPacketParser.Messages
 
         public int MaxRE {  get; }
 
-        public PartyMemberData PartyMemberData { get; }
+        public GroupMemberData GroupMemberData { get; }
 
         public S_PARTY_MEMBER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
@@ -50,7 +50,7 @@ namespace TeraPacketParser.Messages
             CurrentRE = reader.ReadInt32();
             MaxRE = reader.ReadInt32();
 
-            PartyMemberData = new PartyMemberData()
+            GroupMemberData = new GroupMemberData()
             {
                 ServerId = ServerId,
                 PlayerId = PlayerId,

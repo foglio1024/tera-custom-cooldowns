@@ -9,6 +9,12 @@ namespace TCC.ViewModels
     public class TooltipInfo : TSPropertyChanged
     {
         private string _name;
+        private string _info;
+        private int _level;
+        private Class _class;
+        private bool _showPartyInvite;
+        private bool _showGuildInvite;
+
         public string Name
         {
             get => _name; set
@@ -21,7 +27,6 @@ namespace TCC.ViewModels
                 N(nameof(ShowWhisper));
             }
         }
-        private string _info;
         public string Info
         {
             get => _info; set
@@ -30,7 +35,6 @@ namespace TCC.ViewModels
                 N(nameof(Info));
             }
         }
-        private int _level;
         public int Level
         {
             get => _level; set
@@ -38,18 +42,16 @@ namespace TCC.ViewModels
                 if (_level == value) return; _level = value; N(nameof(Level));
             }
         }
-        private Class _charClass;
         public Class Class
         {
-            get => _charClass;
+            get => _class;
             set
             {
-                if (_charClass == value) return;
-                _charClass = value;
+                if (_class == value) return;
+                _class = value;
                 N(nameof(Class));
             }
         }
-        private bool _showPartyInvite;
         public bool ShowPartyInvite
         {
             get => _showPartyInvite;
@@ -57,10 +59,9 @@ namespace TCC.ViewModels
             {
                 if (_showPartyInvite == value) return;
                 _showPartyInvite = value;
-                N(nameof(ShowPartyInvite));
+                N();
             }
         }
-        private bool _showGuildInvite;
         public bool ShowGuildInvite
         {
             get => _showGuildInvite;
@@ -68,27 +69,37 @@ namespace TCC.ViewModels
             {
                 if (_showGuildInvite == value) return;
                 _showGuildInvite = value;
-                N(nameof(ShowGuildInvite));
+                N();
             }
         }
-
-        public bool ShowAddFriend => !IsBlocked;
+        public bool ShowAddFriend => !IsBlocked && Name != Game.Me.Name;
         public bool ShowWhisper => !IsBlocked;
         public string BlockLabelText => IsBlocked ? "Unblock" : "Block";
         public string FriendLabelText => IsFriend ? "Remove friend" : "Add friend";
-        public string PowersLabelText => WindowManager.ViewModels.GroupVM?.HasPowers(Name) == false ? "Grant invite power" : "Revoke invite power";
+        public string PowersLabelText => !Game.Group.HasPowers(Name)?
+                                         "Grant invite power" : "Revoke invite power";
 
-        public bool ShowGrantPowers => WindowManager.ViewModels.GroupVM?.AmILeader == true 
-                                    && WindowManager.ViewModels.GroupVM?.Raid == true
-                                    && WindowManager.ViewModels.GroupVM?.Exists(Name) == true 
-                                    && Name != Game.Me.Name;
-        public bool ShowKick => WindowManager.ViewModels.GroupVM?.Exists(Name) == true && Name != Game.Me.Name;
-        public bool ShowDelegateLeader => WindowManager.ViewModels.GroupVM?.AmILeader == true
-                                       && WindowManager.ViewModels.GroupVM?.Exists(Name) == true
-                                       && Name != Game.Me.Name;
-        public bool IsBlocked => _name == "" ? false : Game.BlockList?.Contains(_name) == true;
+        public bool ShowGrantPowers => Game.Group.IsRaid 
+                                    && Game.Group.AmILeader
+                                    && Game.Group.Has(Name)
+                                    && Game.Me.Name != Name;
+        public bool ShowKick => Game.Group.Has(Name) 
+                             && Game.Me.Name != Name;
+        public bool ShowDelegateLeader => Game.Group.AmILeader
+                                       && Game.Group.Has(Name)
+                                       && Game.Me.Name != Name;
+        public bool IsBlocked => _name != "" 
+                              && Game.BlockList?.Contains(_name) == true;
         public bool IsFriend => !Game.FriendList.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
-        public bool ShowFpsUtils => /*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable;
+        public bool ShowFpsUtils => ProxyInterface.Instance.IsStubAvailable 
+                                 && ProxyInterface.Instance.IsFpsUtilsAvailable;
+
+        public bool ShowMakeGuildMaster => Game.Guild.AmIMaster &&
+                                           Game.Guild.Has(Name);
+
+        public bool ShowGuildKick => Game.Guild.AmIMaster &&
+                                     Game.Guild.Has(Name);
+
         public TooltipInfo(string n, string i, int l)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
@@ -111,6 +122,8 @@ namespace TCC.ViewModels
             N(nameof(ShowDelegateLeader));
             N(nameof(ShowGrantPowers));
             N(nameof(ShowFpsUtils));
+            N(nameof(ShowMakeGuildMaster));
+            N(nameof(ShowGuildKick));
         }
         public void SetInfo(uint model)
         {

@@ -9,7 +9,7 @@ namespace TeraPacketParser.Messages
     {
 
         public uint Id { get; }
-        public List<PartyMemberData> Members { get; }
+        public List<GroupMemberData> Members { get; }
 
         public S_PARTY_MEMBER_INFO(TeraMessageReader reader) : base(reader)
         {
@@ -19,15 +19,15 @@ namespace TeraPacketParser.Messages
             Id = reader.ReadUInt32();
 
             reader.BaseStream.Position = offset - 4;
-            Members = new List<PartyMemberData>();
+            Members = new List<GroupMemberData>();
             for (var i = 0; i < count; i++)
             {
-                var u = new PartyMemberData();
+                var u = new GroupMemberData();
                 reader.Skip(2); // var current = reader.ReadUInt16();
                 var next = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.PlayerId = reader.ReadUInt32();
-                u.UserClass = (Class)reader.ReadUInt16();
+                u.Class = (Class)reader.ReadUInt16();
                 reader.Skip(2 + 2);
                 u.Level = Convert.ToUInt32(reader.ReadUInt16());
                 reader.ReadBoolean();

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using FoglioUtils;
 using FoglioUtils.Extensions;
+using TCC;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
+using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
@@ -25,6 +27,9 @@ using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC
 {
+
+
+
     public static class Game
     {
         private static ulong _foglioEid;
@@ -34,13 +39,14 @@ namespace TCC
         private static bool _inGameChatOpen;
         private static bool _inGameUiOn;
 
-        public static readonly Dictionary<uint, string> GuildMembersNames = new Dictionary<uint, string>();
         public static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         public static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
-
+        public static readonly GroupInfo Group = new GroupInfo();
+        public static readonly GuildInfo Guild = new GuildInfo();
         public static Server Server { get; set; } = new Server("", "", "", 0);
         public static Account Account { get; set; } = new Account();
         public static string Language => DB.ServerDatabase.StringLanguage;
+
         public static bool LoadingScreen
         {
             get => _loadingScreen;
@@ -51,6 +57,7 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => LoadingScreenChanged?.Invoke());
             }
         }
+
         public static bool Encounter
         {
             get => _encounter;
@@ -61,6 +68,7 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => EncounterChanged?.Invoke());
             }
         }
+
         public static bool Combat
         {
             get => Me?.IsInCombat ?? false;
@@ -71,6 +79,7 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke()); // check logs for other exceptions here
             }
         }
+
         public static bool Logged
         {
             get => _logged;
@@ -81,6 +90,7 @@ namespace TCC
                 App.BaseDispatcher.Invoke(() => LoggedChanged?.Invoke());
             }
         }
+
         public static bool InGameUiOn
         {
             get => _inGameUiOn;
@@ -91,6 +101,7 @@ namespace TCC
                 GameUiModeChanged?.Invoke();
             }
         }
+
         public static bool InGameChatOpen
         {
             get => _inGameChatOpen;
@@ -101,6 +112,7 @@ namespace TCC
                 ChatModeChanged?.Invoke();
             }
         }
+
         public static int CurrentZoneId { get; private set; }
         public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
         public static List<string> BlockList { get; } = new List<string>();
@@ -127,10 +139,8 @@ namespace TCC
         public static bool IsInDungeon => CurrentZoneId >= 8999; // TODO: this doesn't apply anymore
         public static string CurrentAccountNameHash { get; private set; }
 
-        public static string GetGuildMemberName(uint id)
-        {
-            return GuildMembersNames.TryGetValue(id, out var name) ? name : "Unknown player";
-        }
+
+
         public static async Task InitDatabasesAsync(string lang)
         {
             await Task.Factory.StartNew(() => InitDatabases(lang));
@@ -145,18 +155,24 @@ namespace TCC
             {
                 if (!App.Loading)
                 {
-                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.", NotificationType.Warning, 5000);
+                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC",
+                        $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.",
+                        NotificationType.Warning, 5000);
                     ChatWindowManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
                 }
+
                 //var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
                 //if (res == MessageBoxResult.Yes)
                 //{
                 DB.DownloadOutdatedDatabases();
                 //}
             }
+
             if (!DB.Exists)
             {
-                var res = TccMessageBox.Show($"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.", MessageBoxType.ConfirmationWithYesNoCancel);
+                var res = TccMessageBox.Show(
+                    $"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.",
+                    MessageBoxType.ConfirmationWithYesNoCancel);
                 if (res == MessageBoxResult.Yes)
                 {
                     App.BaseDispatcher.Invoke(() =>
@@ -229,6 +245,44 @@ namespace TCC
 
             PacketAnalyzer.Processor.Hook<S_FIN_INTER_PARTY_MATCH>(OnFinInterPartyMatch);
             PacketAnalyzer.Processor.Hook<S_BATTLE_FIELD_ENTRANCE_INFO>(OnBattleFieldEntranceInfo);
+
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
+            PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
+            PacketAnalyzer.Processor.Hook<S_BAN_PARTY>(OnBanParty);
+            PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
+            PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
+            PacketAnalyzer.Processor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+
+        }
+
+        private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
+        {
+            Group.Remove(obj.PlayerId, obj.ServerId);
+        }
+
+        private static void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER obj)
+        {
+            Group.Remove(obj.PlayerId, obj.ServerId);
+        }
+
+        private static void OnChangePartyManager(S_CHANGE_PARTY_MANAGER p)
+        {
+            Group.ChangeLeader(p.Name);
+        }
+
+        private static void OnBanParty(S_BAN_PARTY p)
+        {
+            Group.Disband();
+        }
+
+        private static void OnLeaveParty(S_LEAVE_PARTY p)
+        {
+            Group.Disband();
+        }
+
+        private static void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
+        {
+            Group.SetGroup(p.Members, p.Raid);
         }
 
         private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
@@ -263,7 +317,8 @@ namespace TCC
             if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                   m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                   m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
+            WindowManager.ViewModels.NotificationAreaVM.Enqueue("REEEEEEEEEEEEEEEEEEEEEE",
+                "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
         }
 
         private static void OnDisconnected()
@@ -279,6 +334,7 @@ namespace TCC
             NearbyNPC[p.EntityId] = m.Name;
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
+
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
         {
             if (!x.Online) return;
@@ -286,13 +342,17 @@ namespace TCC
             if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
             SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
         }
+
         private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
             //TODO: do it the same way as other client sysmsgs
-            if (!DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)) return;
+            if (!DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)
+            ) return;
             ChatWindowManager.Instance.AddChatMessage(
-                ChatWindowManager.Instance.Factory.CreateSystemMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel));
+                ChatWindowManager.Instance.Factory.CreateSystemMessage(
+                    "@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel));
         }
+
         private static void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
             DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
@@ -310,9 +370,11 @@ namespace TCC
                 WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
+
             if (!ProxyInterface.Instance.IsStubAvailable) return;
             WindowManager.FloatingButton.OpenPlayerMenu();
         }
+
         private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
         {
             try
@@ -330,6 +392,7 @@ namespace TCC
                 Log.F($"Failed to parse sysmsg: {x.SysMessage}");
             }
         }
+
         private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
         {
             try
@@ -347,6 +410,7 @@ namespace TCC
                 Log.F($"Failed to parse system message: {x.Message}");
             }
         }
+
         private static void OnDespawnNpc(S_DESPAWN_NPC p)
         {
             NearbyNPC.Remove(p.Target);
@@ -359,13 +423,16 @@ namespace TCC
                 Encounter = false;
                 WindowManager.ViewModels.GroupVM.SetAggro(0);
             }
+
             // TODO ----------------------------------------------------
         }
+
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
             if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
             NearbyPlayers.Remove(p.EntityId);
         }
+
         private static void OnSpawnUser(S_SPAWN_USER p)
         {
             switch (p.Name)
@@ -395,6 +462,7 @@ namespace TCC
 
             NearbyPlayers[p.EntityId] = p.Name;
         }
+
         private static void OnSpawnMe(S_SPAWN_ME p)
         {
             NearbyNPC.Clear();
@@ -417,10 +485,12 @@ namespace TCC
                 SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
             });
         }
+
         private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
         {
             Account.IsElite = m.IsElite;
         }
+
         private static void OnLoadTopo(S_LOAD_TOPO m)
         {
             LoadingScreen = true;
@@ -428,6 +498,7 @@ namespace TCC
             CurrentZoneId = m.Zone;
             Teleported?.Invoke();
         }
+
         private static void OnGetUserList(S_GET_USER_LIST m)
         {
             if (PacketAnalyzer.Factory.ReleaseVersion == 0) Log.F("Warning: C_LOGIN_ARBITER not received.");
@@ -435,28 +506,34 @@ namespace TCC
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
         }
+
         private static void OnUserStatus(S_USER_STATUS m)
         {
             if (IsMe(m.EntityId)) Combat = m.IsInCombat;
         }
+
         private static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)
         {
             const string opcode = "SMT_FIELD_EVENT_LEAVE";
             DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable || !App.Settings.FpsAtGuardian) return;
+            if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
+                !App.Settings.FpsAtGuardian) return;
             ProxyInterface.Instance.Stub.InvokeCommand("fps mode 1");
         }
+
         private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
         {
             const string opcode = "SMT_FIELD_EVENT_ENTER";
             DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
 
-            if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable || !App.Settings.FpsAtGuardian) return;
+            if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
+                !App.Settings.FpsAtGuardian) return;
             ProxyInterface.Instance.Stub.InvokeCommand("fps mode 3");
         }
+
         private static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
         {
             if (p.GuildLogo == null) return;
@@ -465,35 +542,44 @@ namespace TCC
             if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
             try
             {
-                p.GuildLogo.Save(Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{Server.ServerId}_{p.GuildId}_{0}.bmp"), ImageFormat.Bmp);
+                p.GuildLogo.Save(
+                    Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{Server.ServerId}_{p.GuildId}_{0}.bmp"),
+                    ImageFormat.Bmp);
             }
             catch (Exception e)
             {
                 Log.F($"Error while saving guild logo: {e}");
             }
         }
+
         private static void OnGuildMemberList(S_GUILD_MEMBER_LIST m)
         {
-            m.GuildMembersList.ToList().ForEach(g => { GuildMembersNames[g.Key] = g.Value; });
+            Guild.Set(m.Members, m.MasterId, m.MasterName);
+            //m.GuildMembersList.ToList().ForEach(g => { GuildMembersNames[g.Key] = g.Value; });
         }
+
         private static void OnLoadEpInfo(S_LOAD_EP_INFO m)
         {
             if (!m.Perks.TryGetValue(851010, out var level)) return;
             EpDataProvider.SetManaBarrierPerkLevel(level);
         }
+
         private static void OnLearnEpPerk(S_LEARN_EP_PERK m)
         {
             if (!m.Perks.TryGetValue(851010, out var level)) return;
             EpDataProvider.SetManaBarrierPerkLevel(level);
         }
+
         private static void OnResetEpPerk(S_RESET_EP_PERK m)
         {
             if (m.Success) EpDataProvider.SetManaBarrierPerkLevel(0);
         }
+
         private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
             Logged = false;
         }
+
         private static void OnLogin(S_LOGIN m)
         {
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true);
@@ -505,7 +591,7 @@ namespace TCC
             Logged = true;
             LoadingScreen = true;
             Encounter = false;
-            GuildMembersNames.Clear();
+            Guild.Clear();
             FriendList.Clear();
             BlockList.Clear();
 
@@ -524,8 +610,10 @@ namespace TCC
             TimeManager.Instance.SetGuildBamTime(false);
             InitDatabases(App.Settings.LastLanguage);
             SetAbnormalityTracker(m.CharacterClass);
-            WindowManager.FloatingButton.SetMoongourdButtonVisibility(); //TODO: do this via vm, need to refactor it first
+            WindowManager.FloatingButton
+                .SetMoongourdButtonVisibility(); //TODO: do this via vm, need to refactor it first
         }
+
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
         {
             CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
@@ -533,6 +621,7 @@ namespace TCC
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
             App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         }
+
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (!IsMe(p.TargetId)) return;
@@ -542,6 +631,7 @@ namespace TCC
             FlyingGuardianDataProvider.HandleAbnormal(p);
 
         }
+
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (!IsMe(p.TargetId)) return;
@@ -551,6 +641,7 @@ namespace TCC
             FlyingGuardianDataProvider.HandleAbnormal(p);
             //AbnormalityUtils.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
         }
+
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (!IsMe(p.TargetId)) return;
@@ -559,31 +650,37 @@ namespace TCC
             Me.EndAbnormality(ab);
             //AbnormalityUtils.EndAbnormality(p.TargetId, p.AbnormalityId);
         }
+
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
+
         private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
+
         private static void OnReturnToLobbyHotkeyPressed()
         {
             if (!Logged
-              || LoadingScreen
-              || Combat
-              || !ProxyInterface.Instance.IsStubAvailable)
+                || LoadingScreen
+                || Combat
+                || !ProxyInterface.Instance.IsStubAvailable)
                 return;
 
             WindowManager.ViewModels.LfgVM.ForceStopPublicize();
             ProxyInterface.Instance.Stub.ReturnToLobby();
         }
+
         private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
         {
             const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
             DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{GetGuildMemberName(obj.PlayerId)}", m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Guild.NameOf(obj.PlayerId)}", m, opcode);
+            Guild.SetMaster(obj.PlayerId, Guild.NameOf(obj.PlayerId));
         }
+
         private static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
@@ -598,6 +695,7 @@ namespace TCC
             var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
+
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = FriendList.FirstOrDefault(f => f.PlayerId == x.PlayerId);
@@ -606,21 +704,25 @@ namespace TCC
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = DB.RegionsDatabase.Names[DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+                areaName = DB.RegionsDatabase.Names[
+                    DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
             }
             catch (Exception)
             {
                 // ignored
             }
+
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
             DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
 
             SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
         }
+
         private static void OnFriendList(S_FRIEND_LIST m)
         {
             FriendList = m.Friends;
         }
+
         private static void OnUserBlockList(S_USER_BLOCK_LIST m)
         {
             m.BlockedUsers.ForEach(u =>
@@ -635,6 +737,7 @@ namespace TCC
             var ch = Account.Characters.FirstOrDefault(x => x.Id == pId);
             return ch?.Laurel ?? Laurel.None;
         }
+
         public static void SetEncounter(float curHP, float maxHP)
         {
             if (maxHP > curHP)
@@ -662,7 +765,9 @@ namespace TCC
         public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
-            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage) ? "EU-EN" : App.Settings.LastLanguage);
+            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage)
+                ? "EU-EN"
+                : App.Settings.LastLanguage);
             KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
         }
 

@@ -111,6 +111,9 @@ namespace TeraPacketParser
             { nameof(S_LEARN_EP_PERK),                         Contructor<Func<TeraMessageReader, S_LEARN_EP_PERK>>() },
             { nameof(S_RESET_EP_PERK),                         Contructor<Func<TeraMessageReader, S_RESET_EP_PERK>>() },
             { nameof(S_REQUEST_SPAWN_SERVANT),                 Contructor<Func<TeraMessageReader, S_REQUEST_SPAWN_SERVANT>>() },
+            { nameof(S_FIN_INTER_PARTY_MATCH),                 Contructor<Func<TeraMessageReader, S_FIN_INTER_PARTY_MATCH>>() },
+            { nameof(S_BATTLE_FIELD_ENTRANCE_INFO),            Contructor<Func<TeraMessageReader, S_BATTLE_FIELD_ENTRANCE_INFO>>() },
+            { nameof(S_LEAVE_GUILD),                           Contructor<Func<TeraMessageReader, S_LEAVE_GUILD>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },

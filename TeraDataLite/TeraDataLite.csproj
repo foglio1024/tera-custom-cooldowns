@@ -49,7 +49,7 @@
     <Compile Include="GearItemData.cs" />
     <Compile Include="ItemAmount.cs" />
     <Compile Include="ListingData.cs" />
-    <Compile Include="PartyMemberData.cs" />
+    <Compile Include="GroupMemberData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadyPartyMember.cs" />
     <Compile Include="SimpleUser.cs" />

@@ -6,14 +6,14 @@ namespace TeraPacketParser.Messages
     public class S_SHOW_CANDIDATE_LIST : ParsedMessage
     {
 
-        public List<PartyMemberData> Candidates { get; set; }
+        public List<GroupMemberData> Candidates { get; set; }
 
         public S_SHOW_CANDIDATE_LIST(TeraMessageReader reader) : base(reader)
         {
             var count = reader.ReadUInt16();
             var offset = reader.ReadUInt16();
 
-            Candidates = new List<PartyMemberData>();
+            Candidates = new List<GroupMemberData>();
             if (count == 0) return;
             reader.BaseStream.Position = offset - 4;
             for (var i = 0; i < count; i++)
@@ -35,10 +35,10 @@ namespace TeraPacketParser.Messages
 
                 var name = reader.ReadTeraString();
 
-                Candidates.Add(new PartyMemberData()//User(WindowManager.LfgListWindow.Dispatcher)
+                Candidates.Add(new GroupMemberData()//User(WindowManager.LfgListWindow.Dispatcher)
                 {
                     PlayerId = playerId,
-                    UserClass = cls,
+                    Class = cls,
                     Level = level,
                     GuardId = guardId,
                     SectionId = sectionId,

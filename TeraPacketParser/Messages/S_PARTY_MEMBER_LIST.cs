@@ -3,67 +3,57 @@ using TeraDataLite;
 
 namespace TeraPacketParser.Messages
 {
+    public class S_LEAVE_GUILD : ParsedMessage
+    {
+        public S_LEAVE_GUILD(TeraMessageReader reader) : base(reader)
+        {
+        }
+    }
     public class S_PARTY_MEMBER_LIST : ParsedMessage
     {
-        private bool _im, _raid;
-        private uint _leaderServerId;
-        private uint _leaderPlayerId;
+        public bool Im { get; }
+        public bool Raid { get; }
+        public uint LeaderServerId { get; }
+        public uint LeaderPlayerId { get; }
 
-        public bool Im => _im;
-        public bool Raid => _raid;
-        public uint LeaderServerId => _leaderServerId;
-        public uint LeaderPlayerId => _leaderPlayerId;
-
-        public List<PartyMemberData> Members { get; }
+        public List<GroupMemberData> Members { get; }
 
         public S_PARTY_MEMBER_LIST(TeraMessageReader reader) : base(reader)
         {
             var count = reader.ReadUInt16();
             var offset = reader.ReadUInt16();
 
-            _im = reader.ReadBoolean();
-            _raid = reader.ReadBoolean();
+            Im = reader.ReadBoolean();
+            Raid = reader.ReadBoolean();
 
             reader.Skip(12);
-            //unk1 = reader.ReadUInt32();
-            //unk2 = reader.ReadUInt32();
-            //unk3 = reader.ReadUInt16();
-            //unk4 = reader.ReadUInt16();
 
-            _leaderServerId = reader.ReadUInt32();
-            _leaderPlayerId = reader.ReadUInt32();
+            LeaderServerId = reader.ReadUInt32();
+            LeaderPlayerId = reader.ReadUInt32();
 
             reader.Skip(19);
-            //unk5 = reader.ReadUInt32();
-            //unk6 = reader.ReadUInt32();
-            //unk7 = reader.ReadByte();
-            //unk8 = reader.ReadUInt32();
-            //unk9 = reader.ReadByte();
-            //unk10 = reader.ReadUInt32();
-            //unk11 = reader.ReadByte();
 
-            Members = new List<PartyMemberData>();
+            Members = new List<GroupMemberData>();
 
             for (var i = 0; i < count; i++)
             {
-                var u = new PartyMemberData();//User(WindowManager.GroupWindow.Dispatcher);
-
-                reader.BaseStream.Position = offset - 4;
-                reader.Skip(2); // var pointer = reader.ReadUInt16();
+                var u = new GroupMemberData();
+                reader.RepositionAt(offset);
+                reader.Skip(2);
                 var nextOffset = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.ServerId = reader.ReadUInt32();
                 u.PlayerId = reader.ReadUInt32();
                 u.Level = reader.ReadUInt32();
-                u.UserClass = (Class)reader.ReadUInt32();
+                u.Class = (Class)reader.ReadUInt32();
                 u.Online = reader.ReadBoolean();
                 u.EntityId = reader.ReadUInt64();
                 u.Order = reader.ReadInt32();
                 u.CanInvite = reader.ReadBoolean();
                 u.Laurel = (Laurel)reader.ReadUInt32();
                 u.Awakened = reader.ReadInt32() > 0;
-                
-                reader.BaseStream.Position = nameOffset - 4;
+
+                reader.RepositionAt(nameOffset);
                 u.Name = reader.ReadTeraString();
                 u.Alive = true;
                 u.IsLeader = u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId;
