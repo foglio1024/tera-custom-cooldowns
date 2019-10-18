@@ -569,20 +569,20 @@
                         </Grid.RenderTransform>
                         <Grid.Style>
                             <Style TargetType="FrameworkElement">
-                                <Setter Property="Opacity" Value="1"></Setter>
+                                <Setter Property="Opacity" Value="0"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Player.IsInCombat}" Value="True">
                                         <DataTrigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                                                    <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"/>
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </DataTrigger.EnterActions>
                                         <DataTrigger.ExitActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                                                    <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"/>
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </DataTrigger.ExitActions>
