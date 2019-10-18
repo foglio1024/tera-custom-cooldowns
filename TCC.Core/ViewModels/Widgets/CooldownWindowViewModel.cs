@@ -439,6 +439,7 @@ namespace TCC.ViewModels.Widgets
         }
         internal void SaveConfig()
         {
+            if (MainSkills.Count == 0 && SecondarySkills.Count == 0 && HiddenSkills.Count == 0) return;
             var data = new CooldownConfigData();
 
             MainSkills.ToSyncList().ForEach(sk => data.Main.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
