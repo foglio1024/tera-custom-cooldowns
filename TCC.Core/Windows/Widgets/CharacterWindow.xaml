@@ -561,10 +561,15 @@
                         </Image.Style>
                     </Image>
                     <Image Source="../../resources/images/char_window_fg.png" Stretch="Uniform"/>
-                    <Grid>
+                    <Grid Grid.RenderTransformOrigin=".5 .5" Margin="27" ClipToBounds="True">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="45" />
+                            </TransformGroup>
+                        </Grid.RenderTransform>
                         <Grid.Style>
                             <Style TargetType="FrameworkElement">
-                                <Setter Property="Opacity" Value="0"></Setter>
+                                <Setter Property="Opacity" Value="1"></Setter>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Player.IsInCombat}" Value="True">
                                         <DataTrigger.EnterActions>
@@ -585,16 +590,16 @@
                                 </Style.Triggers>
                             </Style>
                         </Grid.Style>
-                        <Rectangle Stroke="{StaticResource HpBrushLight}" StrokeThickness="1" 
-                               RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
-                               Margin="27">
+                        <Rectangle Stroke="{StaticResource TccRedGradient1Brush}" StrokeThickness="1" 
+                               RenderTransform="{StaticResource DefaultRotateTransform}" RenderTransformOrigin=".5 .5"
+                               Margin="0">
 
                         </Rectangle>
-                        <Rectangle Stroke="{StaticResource HpBrush}" StrokeThickness="5" 
-                               RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
-                               Margin="25">
+                        <Rectangle Stroke="{StaticResource TccRedGradient1Brush}" StrokeThickness="5" 
+                               RenderTransform="{StaticResource DefaultRotateTransform}" RenderTransformOrigin=".5 .5"
+                               Margin="0">
                             <Rectangle.Effect>
-                                <BlurEffect Radius="10"/>
+                                <BlurEffect Radius="15"/>
                             </Rectangle.Effect>
                         </Rectangle>
                     </Grid>
@@ -676,7 +681,7 @@
                                     <DataTrigger Binding="{Binding Player.IsInCombat}" Value="True">
                                         <Setter Property="Effect">
                                             <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="0" Color="{StaticResource HpColor}" BlurRadius="10"></DropShadowEffect>
+                                                <DropShadowEffect ShadowDepth="0" Color="{StaticResource TccRedGradient1Color}" BlurRadius="10"></DropShadowEffect>
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
