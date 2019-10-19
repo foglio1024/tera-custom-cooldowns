@@ -27,7 +27,7 @@ namespace TCC.Data.Databases
             Abnormalities.Clear();
             //var hd = File.OpenText(FullPath);
             var lines = File.ReadAllLines(FullPath);
-            foreach(var l in lines)
+            foreach (var l in lines)
             {
                 if (l == null) break;
                 if (l == "") continue;
@@ -73,12 +73,17 @@ namespace TCC.Data.Databases
 
         }
 
-        public bool TryGetPassiveSkill(uint id , out Skill sk)
+        public bool TryGetPassiveSkill(uint id, out Skill sk)
         {
+            var ret = false;
             sk = null;
-            if (!Abnormalities.TryGetValue(id, out var ab)) return false;
-            sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName };
-            return true;
+            if (PassivityDatabase.TryGetPassivitySkill(id, out sk)) ret = true;
+            else if (Abnormalities.TryGetValue(id, out var ab))
+            {
+                ret = true;
+                sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName };
+            }
+            return ret;
         }
     }
 

@@ -123,13 +123,13 @@ namespace TCC.Data.Databases
                     if (!Game.DB.ItemsDatabase.TryGetItemSkill(id, out sk)) return false;
                     break;
                 case CooldownType.Passive:
-                    if (Game.DB.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
+                    if (!Game.DB.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
                     break;
             }
 
             return true;
-
         }
+
         public void DownloadOutdatedDatabases()
         {
             foreach (var outdated in Databases.Where(db => !db.IsUpToDate))
