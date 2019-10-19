@@ -8,12 +8,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using TCC.Data;
+using TCC.Interop.Proxy;
 using TCC.Parsing;
-using TCC.TeraCommon.Game;
 using TCC.TeraCommon.Sniffing;
 using TCC.Utils;
+using TCC.Windows;
 using TeraPacketParser;
 using TeraPacketParser.Data;
+using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Sniffing
 {
@@ -92,40 +94,52 @@ namespace TCC.Sniffing
 
         protected virtual void OnNewConnection(Server server)
         {
-            var process = Process.GetProcessesByName("TERA")[0];
-            var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
-            var txt = File.ReadAllLines(fullPath);
-            foreach (var line in txt)
+            try
             {
-                if (!line.StartsWith("Version:")) continue;
-                var idx = line.IndexOf("Live-", StringComparison.InvariantCultureIgnoreCase);
-                var v = line.Substring(idx + 5);
-                var idx2 = v.IndexOf(' ');
-                v = v.Substring(0, idx2);
-                v = v.Replace(".", "");
-                PacketAnalyzer.Factory.ReleaseVersion = int.Parse(v);
+
+                var process = Process.GetProcessesByName("TERA")[0];
+                var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
+                var txt = File.ReadAllLines(fullPath);
+                foreach (var line in txt)
+                {
+                    if (!line.StartsWith("Version:")) continue;
+                    var idx = line.IndexOf("Live-", StringComparison.InvariantCultureIgnoreCase);
+                    var v = line.Substring(idx + 5);
+                    var idx2 = v.IndexOf(' ');
+                    v = v.Substring(0, idx2);
+                    v = v.Replace(".", "");
+                    PacketAnalyzer.Factory.ReleaseVersion = int.Parse(v);
+                }
             }
-            var handler = NewConnection;
-            handler?.Invoke(server);
+            catch (Exception e)
+            {
+                Log.F($"Failed to detect client version from file: {e}");
+                var msg = "Failed to detect client version.";
+
+                msg += ProxyInterface.Instance.IsStubAvailable
+                    ? "\nSince you're already using TERA Toolbox, please consider installing TCC as a module (more info in the wiki)."
+                    : "\nPlease consider installing TCC as a TERA Toolbox module (more info in the wiki).";
+
+                msg += "\nTCC will now close.";
+                TccMessageBox.Show(msg, MessageBoxType.Error);
+                App.Close();
+            }
+            NewConnection?.Invoke(server);
         }
 
         protected virtual void OnEndConnection()
         {
-            var handler = EndConnection;
-            handler?.Invoke();
+            EndConnection?.Invoke();
         }
 
         protected virtual void OnMessageReceived(Message message)
         {
-            //Packets.Enqueue(message);
-            var handler = MessageReceived;
-            handler?.Invoke(message);
+            MessageReceived?.Invoke(message);
         }
 
         protected virtual void OnWarning(string obj)
         {
-            var handler = Warning;
-            handler?.Invoke(obj);
+            Warning?.Invoke(obj);
         }
 
 
