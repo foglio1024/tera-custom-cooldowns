@@ -141,6 +141,6 @@
     <Color x:Key="TccYellowGradient0Color">      #FFBB33   </Color>
     <Color x:Key="TccYellowGradient1Color">      #FF5522   </Color>
     <Color x:Key="TccRedGradient0Color">         #FF1122   </Color>
-    <Color x:Key="TccRedGradient1Color">         #FF2255   </Color>
+    <Color x:Key="TccRedGradient1Color">         #FF3366   </Color>
 
 </ResourceDictionary>

@@ -10,6 +10,7 @@ namespace TCC.Controls.NPCs
     {
         protected const uint Delay = 5000;
         protected readonly DispatcherTimer DeleteTimer;
+        protected readonly DispatcherTimer ShowMenuButtonTimer;
 
         private bool _showOverrideBtn;
 
@@ -28,13 +29,7 @@ namespace TCC.Controls.NPCs
                 _showOverrideBtn = value;
                 if (!_showOverrideBtn)
                 {
-                    var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
-                    t.Tick += (_, __) =>
-                    {
-                        N();
-                        t.Stop();
-                    };
-                    t.Start();
+                    ShowMenuButtonTimer.Start();
                 }
                 else
                 {
@@ -48,13 +43,33 @@ namespace TCC.Controls.NPCs
         public NpcViewModel(NPC npc)
         {
             NPC = npc;
+            ShowMenuButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+            ShowMenuButtonTimer.Tick += OnShowMenuButtonTimerTick;
 
             DeleteTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Delay) };
-            DeleteTimer.Tick += (s, ev) =>
-            {
-                DeleteTimer.Stop();
-                InvokeDisposed();
-            };
+            DeleteTimer.Tick += OnDeleteTimerTick;
+
+            NPC.DeleteEvent += OnNpcDelete;
+        }
+
+        protected virtual void OnNpcDelete()
+        {
+            NPC.DeleteEvent -= OnNpcDelete;
+            DeleteTimer.Start();
+        }
+
+        private void OnShowMenuButtonTimerTick(object _, EventArgs __)
+        {
+            N(nameof(ShowOverrideBtn));
+            ShowMenuButtonTimer.Stop();
+        }
+
+        protected virtual void OnDeleteTimerTick(object s, EventArgs ev)
+        {
+            DeleteTimer.Stop();
+            InvokeDisposed();
+            ShowMenuButtonTimer.Tick -= OnShowMenuButtonTimerTick;
+            DeleteTimer.Tick -= OnDeleteTimerTick;
         }
 
         protected void InvokeDisposed() => Disposed?.Invoke();

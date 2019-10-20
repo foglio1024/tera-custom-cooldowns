@@ -160,11 +160,7 @@ namespace TCC.Controls.NPCs
         {
 
             _numberTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _numberTimer.Tick += (_, __) =>
-            {
-                if (!NPC.EnragePattern.StaysEnraged)
-                    CurrentEnrageTime--;
-            };
+            _numberTimer.Tick += OnNumberTimerTick;
 
 
             EnrageHistory = new TSObservableCollection<EnragePeriodItem>();
@@ -174,12 +170,6 @@ namespace TCC.Controls.NPCs
 
 
             NPC.PropertyChanged += OnPropertyChanged;
-            NPC.DeleteEvent += () =>
-            {
-                WindowManager.ViewModels.NpcVM.RemoveNPC(NPC, Delay + 250);
-                DeleteTimer.Start();
-                _numberTimer.Stop();
-            };
 
             if (NPC.TimerPattern != null)
             {
@@ -188,6 +178,21 @@ namespace TCC.Controls.NPCs
             }
 
         }
+
+        private void OnNumberTimerTick(object _, EventArgs __)
+        {
+            if (!NPC.EnragePattern.StaysEnraged) CurrentEnrageTime--;
+        }
+
+        protected override void OnNpcDelete()
+        {
+            WindowManager.ViewModels.NpcVM.RemoveNPC(NPC, Delay + 250);
+            _numberTimer.Stop();
+            _numberTimer.Tick -= OnNumberTimerTick;
+
+            base.OnNpcDelete();
+        }
+
         private bool _addEnrageItem = true;
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

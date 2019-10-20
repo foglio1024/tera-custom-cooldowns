@@ -1,28 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using FoglioUtils;
 using TCC.Data.NPCs;
 using TCC.ViewModels;
-namespace TCC.Controls{
-    public class TccContextMenu : ContextMenu
-    {
-        protected override void OnOpened(RoutedEventArgs e)
-        {
-            FocusManager.PauseTopmost = true;
-            base.OnOpened(e);
-        }
 
-        protected override void OnClosed(RoutedEventArgs e)
-        {
-            FocusManager.PauseTopmost = false;
-            base.OnClosed(e);
-        }
-    }
-
-}
 namespace TCC.Controls.NPCs
 {
     public partial class SmallMobControl
@@ -37,12 +20,14 @@ namespace TCC.Controls.NPCs
         {
             InitializeComponent();
 
-            DataContextChanged += (_, e) =>
-            {
-                if (e.NewValue is NPC npc) VM = new SmallMobViewModel(npc);
-            };
+            DataContextChanged += OnDataContextChanged;
             _hpAnim = AnimationFactory.CreateDoubleAnimation(250, 0, easing: true, framerate: 20);
             _shrinkAnim = AnimationFactory.CreateDoubleAnimation(200, 0, 1, easing: true, framerate: 20);
+        }
+
+        private void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is NPC npc) VM = new SmallMobViewModel(npc);
         }
 
 
@@ -52,14 +37,16 @@ namespace TCC.Controls.NPCs
             _firstLoad = false;
             VM.HpFactorChanged += OnHpChanged;
             VM.Disposed += OnDispose;
-            //RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
 
         }
 
         private void OnDispose()
         {
+            VM.Disposed -= OnDispose;
             VM.HpFactorChanged -= OnHpChanged;
+            DataContextChanged -= OnDataContextChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
             RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,_shrinkAnim);
         }

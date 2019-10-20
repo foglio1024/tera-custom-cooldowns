@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using TCC.Data.NPCs;
 
 namespace TCC.Controls.NPCs
@@ -13,16 +14,26 @@ namespace TCC.Controls.NPCs
         {
             NPC = npc;
 
-            WindowManager.ViewModels.NpcVM.NpcListChanged += () => N(nameof(Compact));
-
+            WindowManager.ViewModels.NpcVM.NpcListChanged += OnNpcVMOnNpcListChanged;
             NPC.PropertyChanged += OnPropertyChanged;
-            NPC.DeleteEvent += () =>
-            {
-                WindowManager.ViewModels.NpcVM.RemoveNPC(NPC, Delay);
-                DeleteTimer.Start();
-            };
+        }
 
+        protected override void OnDeleteTimerTick(object s, EventArgs ev)
+        {
+            WindowManager.ViewModels.NpcVM.NpcListChanged -= OnNpcVMOnNpcListChanged;
+            NPC.PropertyChanged -= OnPropertyChanged;
+            base.OnDeleteTimerTick(s, ev);
+        }
 
+        protected override void OnNpcDelete()
+        {
+            WindowManager.ViewModels.NpcVM.RemoveNPC(NPC, Delay);
+            DeleteTimer.Start();
+        }
+
+        private void OnNpcVMOnNpcListChanged()
+        {
+            N(nameof(Compact));
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)

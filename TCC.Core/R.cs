@@ -449,6 +449,7 @@ namespace TCC.R
 		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
 		public static MoneyAmountToVisibilityConverter AmountToVisibilityConv => ((MoneyAmountToVisibilityConverter)App.Current.FindResource("AmountToVisibilityConv"));
 		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
+		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
 	}
 	public static class DragablzMaterialDesign
 	{

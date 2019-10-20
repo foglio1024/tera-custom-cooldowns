@@ -1,4 +1,6 @@
-﻿namespace TeraDataLite
+﻿using System.ComponentModel;
+
+namespace TeraDataLite
 {
     public enum Class
     {
@@ -40,6 +42,22 @@
         Gold = 3,
         Diamond = 4,
         Champion = 5
+    }
+    public enum Species
+    {
+        Unknown = 0,
+        Giant = 1,
+        Argon = 2,
+        Dragon = 3,
+        God = 4,
+        Faerie = 5,
+        Azart = 6,
+        [Description("Magical creature")]
+        MagicalCreature = 7,
+        Beast = 8,
+        [Description("Magical device")]
+        MagicalDevice = 9,
+        Demon = 10
     }
     public enum ReadyStatus
     {

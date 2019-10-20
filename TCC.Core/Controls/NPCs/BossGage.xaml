@@ -89,7 +89,7 @@
                         <ScaleTransform ScaleY="1" />
                     </Border.RenderTransform>
                 </Border>
-                <Grid Grid.RowSpan="2">
+                <Grid Grid.RowSpan="2" Margin="0 6 0 0">
                     <Grid Margin="0 18 0 -18">
                         <Border x:Name="IconBaseBorder"
                                 RenderTransformOrigin=".5 .5"
@@ -179,12 +179,38 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="10"
+                               Grid.ColumnSpan="2"
+                               Foreground="#aaa"
+                               Margin="0 -2 0 -4"
+                               Text="{Binding Species, Converter={StaticResource EnumDescriptionConverter}}"
+                               Grid.Row="0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="5" />
+                        </TextBlock.Effect>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Species}" Value="Unknown">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+
+                    </TextBlock>
                     <TextBlock Style="{StaticResource DefaultTextStyle}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                FontSize="18"
                                Text="{Binding Name}"
-                               Grid.Row="0">
+                               Grid.Row="1">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="0" BlurRadius="15" />
                         </TextBlock.Effect>
@@ -196,12 +222,14 @@
                              HorizontalAlignment="Center"
                              Height="Auto" 
                              Grid.Column="1" 
+                             Grid.Row="1" 
                              RenderTransformOrigin=".5,.5">
                         <Polygon.RenderTransform>
                             <RotateTransform Angle="90" />
                         </Polygon.RenderTransform>
                     </Polygon>
                     <TextBlock Style="{StaticResource DefaultTextStyle}"
+                             Grid.Row="1" 
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                FontWeight="Normal"

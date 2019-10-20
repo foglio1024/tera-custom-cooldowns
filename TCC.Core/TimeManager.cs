@@ -205,7 +205,7 @@ namespace TCC
             var content = App.Settings.WebhookMessageFieldBossSpawn;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
             if (content.Contains("{regionName}")) content = content.Replace("{regionName}", regionName);
-            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mmtt"));
 
             if (content == "") content = defaultMessage;
             SendWebhook(content, App.Settings.WebhookUrlFieldBoss, testMessage);
@@ -214,7 +214,7 @@ namespace TCC
         {
             var content = App.Settings.WebhookMessageFieldBossDie;
             if (content.Contains("{bossName}")) content = content.Replace("{bossName}", monsterName);
-            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mm tt"));
+            if (content.Contains("{time}")) content = content.Replace("{time}", DateTime.UtcNow.ToLocalTime().ToString("yyyy/MM/dd HH:mmtt"));
             if (content.Contains("{userName}")) content = content.Replace("{userName}", userName);
             if (content.Contains("{guildName}")) content = content.Replace("{guildName}", guildName);
             if (content == "") content = defaultMessage;

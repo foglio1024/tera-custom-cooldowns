@@ -166,6 +166,7 @@ namespace TCC.Data.NPCs
 
         public uint ZoneId { get; }
         public uint TemplateId { get; }
+        public Species Species { get; set; }
 
         public EnragePattern EnragePattern { get; set; }
         public TimerPattern TimerPattern { get; set; }
@@ -252,6 +253,7 @@ namespace TCC.Data.NPCs
             Game.DB.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
             Name = monster.Name;
             MaxHP = monster.MaxHP;
+            Species = monster.Species;
             EntityId = eId;
             ZoneId = zId;
             TemplateId = tId;
@@ -277,6 +279,7 @@ namespace TCC.Data.NPCs
 
             }, ce => true);
         }
+
 
         public override string ToString()
         {

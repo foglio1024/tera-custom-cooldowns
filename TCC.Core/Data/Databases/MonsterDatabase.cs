@@ -1,17 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 using System.Xml.Linq;
+using TCC.Utils;
+using TeraDataLite;
 
 namespace TCC.Data.Databases
 {
+    public class DatabaseQueryMeasure
+    {
+        private Stopwatch _sw;
+        private static int _totalCount;
+        private static int _hitCount;
+        private static int _missCount;
+        private static long _totTotalTime;
+        private static long _totHitTime;
+        private static long _totMissTime;
+        private static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double)_totalCount;
+        private static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double)_hitCount;
+        private static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double)_missCount;
+
+
+        public DatabaseQueryMeasure()
+        {
+            _sw = new Stopwatch();
+        }
+        public void StartQuery()
+        {
+            _totalCount++;
+            _sw.Restart();
+        }
+
+        public void RegisterHit()
+        {
+            _sw.Stop();
+            _hitCount++;
+            _totHitTime += _sw.ElapsedMilliseconds;
+            _totTotalTime += _sw.ElapsedMilliseconds;
+            Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [hit]");
+
+        }
+
+        public void RegisterMiss()
+        {
+            _sw.Stop();
+            _missCount++;
+            _totMissTime += _sw.ElapsedTicks;
+            _totTotalTime += _sw.ElapsedTicks;
+            Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [miss]");
+        }
+
+        public static void PrintInfo()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Total queries: {_totalCount} ({_hitCount} hit - {_missCount} miss)");
+            sb.AppendLine($"Avg time: {_avgTotalTime:N3}ticks ({_avgHitTime:N3}ticks hit - {_avgMissTime:N3}ticks miss)");
+
+            Log.CW(sb.ToString());
+        }
+    }
     public class MonsterDatabase : DatabaseBase
     {
         public static event Action<uint, uint, bool> OverrideChangedEvent;
         public static event Action<uint, uint, bool> BlacklistChangedEvent;
 
         private readonly Dictionary<uint, Zone> _zones;
+
 
         protected override string FolderName => "monsters";
         protected override string Extension => "xml";
@@ -26,8 +84,16 @@ namespace TCC.Data.Databases
 
         public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
-            if (_zones.TryGetValue(zoneId, out var z) && z.Monsters.TryGetValue(templateId, out m)) return !m.IsHidden;
-            m = new Monster(0, 0, "Unknown", 0, false, false);
+            //var measure = new DatabaseQueryMeasure();
+            //measure.StartQuery();
+            if (_zones.TryGetValue(zoneId, out var z) && z.Monsters.TryGetValue(templateId, out m))
+            {
+                //measure.RegisterHit();
+                return !m.IsHidden;
+            }
+            m = new Monster(0, 0, "Unknown", 0, false, false, Species.Unknown);
+            //measure.RegisterMiss();
+
             return false;
         }
         public string GetZoneName(uint zoneId)
@@ -61,8 +127,9 @@ namespace TCC.Data.Databases
                     var name = monster.Attribute("name")?.Value;
                     var isBoss = monster.Attribute("isBoss")?.Value == "True";
                     var maxHP = Convert.ToUInt64(monster.Attribute("hp")?.Value);
+                    var species = (Species)int.Parse(monster.Attribute("speciesId")?.Value ?? "0");
 
-                    var m = new Monster(id, zoneId, name, maxHP, isBoss, false);
+                    var m = new Monster(id, zoneId, name, maxHP, isBoss, false, species);
                     z.AddMonster(m);
                 }
                 _zones.Add(zoneId, z);
@@ -88,7 +155,8 @@ namespace TCC.Data.Databases
                         var isBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
                         var isHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
                         var maxHp = ulong.Parse(monst.Attribute("hp")?.Value ?? "0");
-                        z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden));
+                        var species = int.Parse(monst.Attribute("speciesId")?.Value ?? "0");
+                        z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden, (Species)species));
                     }
                 }
             }
@@ -210,8 +278,9 @@ namespace TCC.Data.Databases
         public ulong MaxHP { get; }
         public bool IsBoss { get; set; }
         public bool IsHidden { get; set; }
+        public Species Species { get; set; }
 
-        public Monster(uint npc, uint zoneId, string name, ulong maxHp, bool isBoss, bool isHidden)
+        public Monster(uint npc, uint zoneId, string name, ulong maxHp, bool isBoss, bool isHidden, Species sp)
         {
             TemplateId = npc;
             Name = name;
@@ -219,6 +288,7 @@ namespace TCC.Data.Databases
             IsBoss = isBoss;
             IsHidden = isHidden;
             ZoneId = zoneId;
+            Species = sp;
         }
     }
 }

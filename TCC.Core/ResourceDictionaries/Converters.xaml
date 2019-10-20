@@ -78,5 +78,6 @@
     <c:EpochConverter x:Key="EpochConverter" />
     <c:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
     <uc:BooleanInverter x:Key="BoolInverter"/>
+    <c:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
 
 </ResourceDictionary>

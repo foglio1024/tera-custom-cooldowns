@@ -6,20 +6,22 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:npc="clr-namespace:TCC.Controls.NPCs"
              xmlns:tcc="clr-namespace:TCC"
-             mc:Ignorable="d" Loaded="OnLoaded"  UseLayoutRounding="True"
-             d:DataContext="{d:DesignData Npc}"
+             xmlns:npCs="clr-namespace:TCC.Data.NPCs"
+             mc:Ignorable="d" Loaded="OnLoaded" UseLayoutRounding="True"
+             d:DataContext="{d:DesignInstance npCs:NPC}"
              MouseEnter="SmallMobControl_OnMouseEnter"
              MouseLeave="SmallMobControl_OnMouseLeave">
 
 
-    <Grid Margin="2 2 6 2" x:Name="RootGrid" >
+    <Grid Margin="2 0 10 0" x:Name="RootGrid" >
         <Grid.Style>
             <Style TargetType="FrameworkElement">
-                <Setter Property="Width" Value="250"></Setter>
+                <Setter Property="Width" Value="250" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
-                                 Value="True">
-                        <Setter Property="Width" Value="Auto"></Setter>
+                    <DataTrigger
+                        Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                        Value="True">
+                        <Setter Property="Width" Value="Auto" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -29,18 +31,18 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="1" ScaleY="1"/>
+            <ScaleTransform ScaleX="1" ScaleY="1" />
         </Grid.LayoutTransform>
 
         <Grid ClipToBounds="True" 
               RenderTransformOrigin=".5 .5" Width="26" Height="26" Margin="-20">
-            <local:Arc Width="80" 
-                       Height="80" 
-                       StrokeThickness="30" 
+            <local:Arc Width="80"
+                       Height="80"
+                       StrokeThickness="30"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        StartAngle="0"
@@ -50,64 +52,89 @@
                        RenderTransformOrigin=".5 .5">
                 <local:Arc.Style>
                     <Style TargetType="Shape">
-                                <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}"/>
+                        <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                <Setter Property="Stroke" Value="{StaticResource TccRedGradientBrush}"/>
+                                <Setter Property="Stroke" Value="{StaticResource TccRedGradientBrush}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </local:Arc.Style>
                 <local:Arc.RenderTransform>
                     <TransformGroup>
-                        <RotateTransform Angle="-45"/>
+                        <RotateTransform Angle="-45" />
                     </TransformGroup>
                 </local:Arc.RenderTransform>
             </local:Arc>
             <Grid.Style>
                 <Style TargetType="FrameworkElement">
-                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
-                                     Value="True">
-                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        <DataTrigger
+                            Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                            Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
             <Grid.RenderTransform>
                 <TransformGroup>
-                    <RotateTransform Angle="45"/>
-                    <TranslateTransform X="4" Y="-2"></TranslateTransform>
+                    <RotateTransform Angle="45" />
+                    <TranslateTransform X="4" Y="2" />
                 </TransformGroup>
             </Grid.RenderTransform>
         </Grid>
         <Image Source="../../resources/images/kr_mob_icon.png" Stretch="Uniform"
-               Margin="0 -4 -8 0"  
+               Margin="0 4 -8 0"
                Grid.RowSpan="2" VerticalAlignment="Top"
-               HorizontalAlignment="Center" Width="34" Height="34"></Image>
+               HorizontalAlignment="Center" Width="34" Height="34" />
 
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Grid Margin="8 0 0 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Name}"  Style="{StaticResource DefaultTextStyle}" 
-                           TextTrimming="CharacterEllipsis" Margin="0 0 8 0"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Name}" Style="{StaticResource DefaultTextStyle}"
+                           TextTrimming="CharacterEllipsis" Margin="0 0 8 0"
+                           Grid.Row="1" />
 
-                <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}" 
-                           Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Grid.Column="1"/>
-                <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}"  
-                               FontWeight="Bold" Text="{Binding HPFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2"/>
+                <TextBlock Grid.ColumnSpan="2"
+                    Text="{Binding Species, Converter={StaticResource EnumDescriptionConverter}}"
+                    Foreground="#aaa"
+                    TextTrimming="CharacterEllipsis" Margin="0 -2 8 -2"
+                    Grid.Row="0" FontSize="9">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Species}" Value="Unknown">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+
+                </TextBlock>
+
+                <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}" Grid.Row="1"
+                           Foreground="#5fff" Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}"
+                           Grid.Column="1" />
+                <TextBlock FontSize="11" Style="{StaticResource DefaultTextStyle}" Grid.Row="1"
+                           FontWeight="Bold" Text="{Binding HPFactor, StringFormat=##0 %, Mode=OneWay}" Grid.Column="2" />
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
-                                         Value="True">
-                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <DataTrigger
+                                Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                                Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -119,18 +146,18 @@
                         BorderBrush="{StaticResource RevampBorderBrush}"
                         RenderTransform="{StaticResource Skew45}"
                         BorderThickness="2 1" Height="8"
-                        RenderTransformOrigin="1 1"></Border>
-                <Border RenderTransform="{StaticResource Skew45}" 
-                        Height="4" 
+                        RenderTransformOrigin="1 1" />
+                <Border RenderTransform="{StaticResource Skew45}"
+                        Height="4"
                         RenderTransformOrigin="1 1"
                         Margin="5 0 0 0"
-                        HorizontalAlignment="Left" >
+                        HorizontalAlignment="Left">
                     <Border.Style>
                         <Style TargetType="Border">
-                            <Setter Property="Background" Value="{StaticResource TccNormalGradientBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource TccNormalGradientBrush}" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Enraged}" Value="True">
-                                    <Setter Property="Background" Value="{StaticResource TccRedGradientBrush}"/>
+                                    <Setter Property="Background" Value="{StaticResource TccRedGradientBrush}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -138,16 +165,17 @@
 
                     <FrameworkElement HorizontalAlignment="Stretch" Width="218" x:Name="HpBarGovernor">
                         <FrameworkElement.LayoutTransform>
-                            <ScaleTransform ScaleX="1"></ScaleTransform>
+                            <ScaleTransform ScaleX="1" />
                         </FrameworkElement.LayoutTransform>
                     </FrameworkElement>
                 </Border>
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
-                                         Value="True">
-                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <DataTrigger
+                                Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                                Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -164,25 +192,26 @@
                                 MaxVal="{Binding MaxHP}"
                                 x:Name="HPgauge"/>-->
         </StackPanel>
-        <ItemsControl x:Name="Abnormalities" ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}" 
+        <ItemsControl x:Name="Abnormalities" ItemTemplateSelector="{StaticResource RaidAbnormalityTemplateSelector}"
                       Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Buffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" 
-                                Margin="6 0 0 0" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                               Margin="6 0 0 0" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Value="-6,0,0,0" Property="ContentControl.Margin"></Setter>
+                    <Setter Value="-6,0,0,0" Property="ContentControl.Margin" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.Style>
                 <Style TargetType="FrameworkElement">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
-                                     Value="True">
-                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                        <DataTrigger
+                            Binding="{Binding VM.Compact, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                            Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -200,16 +229,17 @@
             <Button.ContextMenu>
                 <local:TccContextMenu Style="{StaticResource {x:Type ContextMenu}}">
                     <MenuItem Header="Use boss bar"
-                              Command="{Binding Override}"/>
+                              Command="{Binding Override}" />
                     <MenuItem Header="Blacklist"
-                              Command="{Binding Blacklist}"/>
+                              Command="{Binding Blacklist}" />
                 </local:TccContextMenu>
             </Button.ContextMenu>
 
             <Grid>
-                <Ellipse Fill="#3fff" Height="12" Width="12"></Ellipse>
-                <Path Data="{StaticResource SvgDotsVertical}" MaxHeight="10" Margin="0 0 0 0" Height="Auto" Fill="White"
-                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Ellipse Fill="#3fff" Height="12" Width="12" />
+                <Path Data="{StaticResource SvgDotsVertical}" MaxHeight="10" Margin="0 0 0 0" Height="Auto"
+                      Fill="White"
+                      VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Grid>
         </Button>
 

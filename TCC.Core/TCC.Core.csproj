@@ -109,6 +109,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\NPCs\TccContextMenu.cs" />
     <Compile Include="Controls\Settings\HotkeySetting.xaml.cs">
       <DependentUpon>HotkeySetting.xaml</DependentUpon>
     </Compile>
