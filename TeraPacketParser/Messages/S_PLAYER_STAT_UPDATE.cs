@@ -36,9 +36,11 @@ namespace TeraPacketParser.Messages
                 MaxHP = reader.ReadInt32();
                 reader.Skip(4);
                 MaxMP = reader.ReadInt32();
-                reader.Skip(120);
+                reader.Skip(8);
+                var baseCrit = reader.ReadSingle();
+                reader.Skip(108);
 
-                BonusCritFactor = reader.ReadSingle();
+                BonusCritFactor = reader.ReadSingle() + baseCrit;
                 reader.Skip(72);
                 Level = reader.ReadInt16();
                 reader.Skip(4);
