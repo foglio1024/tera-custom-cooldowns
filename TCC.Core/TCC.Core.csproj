@@ -113,6 +113,7 @@
     <Compile Include="Controls\Settings\HotkeySetting.xaml.cs">
       <DependentUpon>HotkeySetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Chat\SystemMessage.cs" />
     <Compile Include="Data\GroupInfo.cs" />
     <Compile Include="Data\GuildInfo.cs" />
     <Compile Include="Settings\CooldownData.cs" />
