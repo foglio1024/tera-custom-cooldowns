@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Timers;
 using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Data.Pc;
@@ -14,7 +15,7 @@ namespace TCC.Data.Chat
     {
         private int _tries = 10;
         private readonly TSObservableCollection<User> _members;
-        private DispatcherTimer _timer;
+        private Timer _timer;
         private ICollectionView _membersView;
 
         private Listing _linkedListing;
@@ -116,7 +117,8 @@ namespace TCC.Data.Chat
             if (LinkedListing != null) return;
             //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
             WindowManager.ViewModels.LfgVM.EnqueueListRequest();
-            _timer = new DispatcherTimer(TimeSpan.FromSeconds(1.5), DispatcherPriority.Background, OnTimerTick, Dispatcher);
+            _timer = new Timer(1500);
+            _timer.Elapsed += OnTimerTick;
             _timer.Start();
         }
     }

@@ -317,8 +317,7 @@ namespace TCC
             if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                   m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                   m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("REEEEEEEEEEEEEEEEEEEEEE",
-                "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
+            Log.N("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
         }
 
         private static void OnDisconnected()
@@ -377,38 +376,43 @@ namespace TCC
 
         private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
         {
-            try
+            App.BaseDispatcher.InvokeAsync(() =>
             {
-                var msg = x.SysMessage.Split('\v');
-                var opcode = UInt16.Parse(msg[0].Substring(1));
-                var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+                try
+                {
+                    var msg = x.SysMessage.Split('\v');
+                    var opcode = UInt16.Parse(msg[0].Substring(1));
+                    var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-                ChatWindowManager.Instance.AddSystemMessage(x.SysMessage, m);
-                //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel));
-            }
-            catch (Exception)
-            {
-                Log.F($"Failed to parse sysmsg: {x.SysMessage}");
-            }
+                    if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
+                    ChatWindowManager.Instance.AddSystemMessage(x.SysMessage, m);
+                }
+                catch (Exception)
+                {
+                    Log.F($"Failed to parse sysmsg: {x.SysMessage}");
+                }
+            });
         }
 
         private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
         {
-            try
+            App.BaseDispatcher.InvokeAsync(() =>
             {
-                var msg = x.Message.Split('\v');
-                var opcode = UInt16.Parse(msg[0].Substring(1));
-                var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+                try
+                {
+                    var msg = x.Message.Split('\v');
+                    var opcode = UInt16.Parse(msg[0].Substring(1));
+                    var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-                SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
+                    if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
+                    SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
 
-            }
-            catch (Exception)
-            {
-                Log.F($"Failed to parse system message: {x.Message}");
-            }
+                }
+                catch (Exception)
+                {
+                    Log.F($"Failed to parse system message: {x.Message}");
+                }
+            });
         }
 
         private static void OnDespawnNpc(S_DESPAWN_NPC p)

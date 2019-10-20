@@ -204,15 +204,11 @@ namespace TCC.ViewModels
         }
         private void OnChat(S_CHAT m)
         {
-            AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : ((ChatChannel)m.Channel), m.AuthorName, m.Message));
-            if ((ChatChannel)m.Channel != ChatChannel.Greet) return;
-            switch (m.AuthorName)
+            if ((ChatChannel)m.Channel != ChatChannel.Greet && m.AuthorName == "Foglio") Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
+            Dispatcher.InvokeAsync(() =>
             {
-                case "Foglio":
-                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "(° -°)", NotificationType.Success, 3000);
-                    break;
-            }
-
+                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel) 26 : ((ChatChannel) m.Channel), m.AuthorName, m.Message));
+            });
         }
         private void OnPlayerChangeExp(S_PLAYER_CHANGE_EXP m)
         {
