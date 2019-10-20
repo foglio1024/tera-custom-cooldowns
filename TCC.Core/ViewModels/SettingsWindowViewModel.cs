@@ -381,6 +381,16 @@ namespace TCC.ViewModels
                 N(nameof(AnimateChatMessages));
             }
         }
+        public bool BackgroundNotifications
+        {
+            get => App.Settings.BackgroundNotifications;
+            set
+            {
+                if (App.Settings.BackgroundNotifications == value) return;
+                App.Settings.BackgroundNotifications = value;
+                N();
+            }
+        }
 
         public bool WebhookEnabledGuildBam
         {
@@ -402,6 +412,16 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public bool WebhookEnabledMentions
+        {
+            get => App.Settings.WebhookEnabledMentions;
+            set
+            {
+                if (App.Settings.WebhookEnabledMentions == value) return;
+                App.Settings.WebhookEnabledMentions = value;
+                N();
+            }
+        }
         public string WebhookUrlGuildBam
         {
             get => App.Settings.WebhookUrlGuildBam;
@@ -419,6 +439,16 @@ namespace TCC.ViewModels
             {
                 if (value == App.Settings.WebhookUrlFieldBoss) return;
                 App.Settings.WebhookUrlFieldBoss = value;
+                N();
+            }
+        }
+        public string WebhookUrlMentions
+        {
+            get => App.Settings.WebhookUrlMentions;
+            set
+            {
+                if (value == App.Settings.WebhookUrlMentions) return;
+                App.Settings.WebhookUrlMentions = value;
                 N();
             }
         }

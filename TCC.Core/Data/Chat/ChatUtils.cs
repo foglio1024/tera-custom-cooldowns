@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using FoglioUtils.Extensions;
+using TCC.R;
 
 namespace TCC.Data.Chat
 {
@@ -11,21 +15,21 @@ namespace TCC.Data.Chat
         {
             switch (g)
             {
-                case RareGrade.Common:   return R.Colors.ItemCommonColor.ToHex();
-                case RareGrade.Uncommon: return R.Colors.ItemUncommonColor.ToHex();
-                case RareGrade.Rare:     return R.Colors.ItemRareColor.ToHex();
-                case RareGrade.Superior: return R.Colors.ItemSuperiorColor.ToHex();
+                case RareGrade.Common: return Colors.ItemCommonColor.ToHex();
+                case RareGrade.Uncommon: return Colors.ItemUncommonColor.ToHex();
+                case RareGrade.Rare: return Colors.ItemRareColor.ToHex();
+                case RareGrade.Superior: return Colors.ItemSuperiorColor.ToHex();
                 default: return "";
             }
         }
         public static uint GetId(Dictionary<string, string> d, string paramName)
         {
-            return uint.Parse(d[paramName]);
+            return UInt32.Parse(d[paramName]);
         }
 
         public static long GetItemUid(Dictionary<string, string> d)
         {
-            return d.TryGetValue("dbid", out var value) ? long.Parse(value) : 0;
+            return d.TryGetValue("dbid", out var value) ? Int64.Parse(value) : 0;
         }
 
         public static Dictionary<string, string> SplitDirectives(string m)
@@ -82,7 +86,7 @@ namespace TCC.Data.Chat
                 foreach (var keyVal in pars)
                 {
                     var regex = new Regex(Regex.Escape($"{{{keyVal.Key}}}"));
-                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", int.MaxValue);
+                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", Int32.MaxValue);
                     if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}}}", $"{{{keyVal.Value}}}");
                     if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}", $"{{{keyVal.Value}");
                     txt = result;
@@ -98,6 +102,42 @@ namespace TCC.Data.Chat
             ret = node.GetAttributeValue("color", "").Substring(1);
             while (ret.Length < 6) { ret = "0" + ret; }
             return ret;
+        }
+
+        public static string GetPlainText(string msg)
+        {
+            var sb = new StringBuilder();
+            var html = new HtmlDocument(); html.LoadHtml(msg);
+            var htmlPieces = html.DocumentNode.ChildNodes;
+
+            foreach (var htmlPiece in htmlPieces)
+            {
+                sb.Append(htmlPiece.InnerText);
+            }
+
+            return sb.ToString();
+        }
+
+        public static bool CheckMention(string text)
+        {
+            var ret = false;
+            //check if player is mentioned
+            try
+            {
+                foreach (var item in Game.Account.Characters.Where(c => !c.Hidden))
+                {
+                    if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
+                    ret = true;
+                    break;
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return ret;
+
         }
     }
 }

@@ -68,6 +68,8 @@ namespace TCC.Converters
                     return "Dmg";
                 case ChatChannel.Guardian:
                     return "G.L.";
+                case ChatChannel.ReceivedWhisper:
+                    return "Whisper";
                 default:
                     return ch.ToString();
             }

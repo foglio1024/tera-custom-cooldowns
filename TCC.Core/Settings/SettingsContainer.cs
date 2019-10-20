@@ -71,6 +71,8 @@ namespace TCC.Settings
         public bool WebhookEnabledGuildBam { get; set; }
         public string WebhookUrlGuildBam { get; set; }
         public string WebhookMessageGuildBam { get; set; }
+        public bool WebhookEnabledMentions { get; set; }
+        public string WebhookUrlMentions { get; set; }
         #endregion
 
         public CooldownWindowSettings CooldownWindowSettings { get; set; }
@@ -128,6 +130,7 @@ namespace TCC.Settings
 
         public static string SettingsOverride { get; set; } = "";
         public string LastAccountNameHash { get; set; }
+        public bool BackgroundNotifications { get; set; }
 
         #endregion
 
@@ -192,6 +195,8 @@ namespace TCC.Settings
             WebhookEnabledGuildBam = false;
             WebhookUrlGuildBam = "";
             WebhookMessageGuildBam = "@here Guild BAM will spawn soon!";
+            WebhookEnabledMentions = false;
+            WebhookUrlMentions = "";
         }
 
 

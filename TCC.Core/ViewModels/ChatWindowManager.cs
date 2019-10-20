@@ -204,7 +204,6 @@ namespace TCC.ViewModels
         }
         private void OnChat(S_CHAT m)
         {
-            if ((ChatChannel)m.Channel != ChatChannel.Greet && m.AuthorName == "Foglio") Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
             Dispatcher.InvokeAsync(() =>
             {
                 AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel) 26 : ((ChatChannel) m.Channel), m.AuthorName, m.Message));

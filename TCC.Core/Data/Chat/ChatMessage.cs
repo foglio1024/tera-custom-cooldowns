@@ -273,7 +273,7 @@ namespace TCC.Data.Chat
                 {
                     //parse normal formatted piece
                     var text = piece.InnerText;
-                    if (!App.Loading) CheckMention(text);
+                    if (!App.Loading) ContainsPlayerName = ChatUtils.CheckMention(text);
                     CheckRedirect(text);
                     var content = GetPieceContent(text);
                     if (content != "")
@@ -294,7 +294,7 @@ namespace TCC.Data.Chat
             {
                 //parse normal non formatted piece
                 var text = piece.InnerText;
-                if (!App.Loading) CheckMention(text);
+                if (!App.Loading) ContainsPlayerName = ChatUtils.CheckMention(text);
                 CheckRedirect(text);
                 var content = GetPieceContent(text);
                 if (content != "")
@@ -313,24 +313,6 @@ namespace TCC.Data.Chat
         }
 
 
-        private void CheckMention(string text)
-        {
-            //check if player is mentioned
-            try
-            {
-                foreach (var item in Game.Account.Characters.Where(c => !c.Hidden))
-                {
-                    if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
-                    ContainsPlayerName = true;
-                    break;
-                }
-            }
-            catch
-            {
-                // ignored
-            }
-
-        }
         private void CheckRedirect(string text)
         {
             //redirect trading message if it's in global

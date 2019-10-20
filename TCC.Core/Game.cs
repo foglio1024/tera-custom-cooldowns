@@ -8,8 +8,10 @@ using System.Windows;
 using FoglioUtils;
 using FoglioUtils.Extensions;
 using TCC;
+using TCC.Converters;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Data.Pc;
 using TCC.Interop;
@@ -240,6 +242,7 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
             PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
             PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
+            PacketAnalyzer.Processor.Hook<S_WHISPER>(OnWhisper);
             PacketAnalyzer.Processor.Hook<S_BOSS_GAGE_INFO>(OnBossGageInfo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
 
@@ -308,16 +311,41 @@ namespace TCC
         {
             SetEncounter(m.CurrentHP, m.MaxHP);
         }
+        private static void OnWhisper(S_WHISPER p)
+        {
+            if (p.Recipient != Me.Name) return;
+
+            CheckNotify(p.Message, ChatChannel.ReceivedWhisper, p.Author);
+        }
+
+        private static void CheckNotify(string message, ChatChannel ch, string author)
+        {
+            if (FocusManager.IsForeground) return;
+            var txt = ChatUtils.GetPlainText(message).UnescapeHtml();
+            var chStr = new ChatChannelToName().Convert(ch, null, null, null);
+            if (App.Settings.WebhookEnabledMentions) Discord.FireWebhook(App.Settings.WebhookUrlMentions, $"**{author}** `{chStr}`\n{txt}");
+            if (App.Settings.BackgroundNotifications) Log.N($"{chStr} - {author}", $"{txt}", NotificationType.Warning, 6000);
+
+        }
+
 
         private static void OnChat(S_CHAT m)
         {
-            if (m.AuthorName != Me.Name) return;
-            if ((ChatChannel)m.Channel != ChatChannel.Global) return;
+            if ((ChatChannel)m.Channel == ChatChannel.Greet && m.AuthorName == "Foglio") Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
 
-            if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-                  m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-                  m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
-            Log.N("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
+            if (m.AuthorName == Me.Name)
+            {
+                if ((ChatChannel)m.Channel != ChatChannel.Global) return;
+
+                if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                      m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                      m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
+                Log.N("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
+
+            }
+            if (!ChatUtils.CheckMention(m.Message)) return;
+            if (BlockList.Contains(m.AuthorName)) return;
+            CheckNotify(m.Message, (ChatChannel)m.Channel, m.AuthorName);
         }
 
         private static void OnDisconnected()

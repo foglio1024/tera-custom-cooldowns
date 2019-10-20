@@ -1471,7 +1471,17 @@
                                     </Grid>
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
-
+                            <settings:CheckboxSetting SettingName="Background notifications"
+                                                      IsOn="{Binding BackgroundNotifications, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                            <Run Text="Shows a notification when you are mentioned in chat or receive a whisper while TERA is background." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
 
                         </StackPanel>
                         <!-- Actions -->
@@ -1728,7 +1738,7 @@
                                     CommandParameter="{Binding WebhookUrlGuildBam}"
                                     Content="Confirm" />
                         </StackPanel>
-                        <!-- Discord -->
+                        <!-- Field boss -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
                                             Content="Field bosses" />
@@ -1744,6 +1754,17 @@
                                     CommandParameter="{Binding WebhookUrlFieldBoss}"
                                     Command="{Binding RegisterWebhookCommand}"
                                     Content="Confirm" />
+                        </StackPanel>
+                        <!-- Mentions -->
+                        <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
+                                            Content="Mentions" />
+                            <settings:CheckboxSetting SettingName="Enabled"
+                                                      IsEnabled="{Binding BackgroundNotifications}"
+                                                      IsOn="{Binding WebhookEnabledMentions, Mode=TwoWay}" />
+                            <settings:FieldSetting SettingName="Webhook"
+                                                   IsEnabled="{Binding WebhookEnabledMentions}"
+                                                   Value="{Binding WebhookUrlMentions, Mode=TwoWay}" />
                         </StackPanel>
 
 
