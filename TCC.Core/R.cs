@@ -261,6 +261,8 @@ namespace TCC.R
 		public static SolidColorBrush CardDarkBrush => ((SolidColorBrush)App.Current.FindResource("CardDarkBrush"));
 		public static SolidColorBrush TooltipBrush => ((SolidColorBrush)App.Current.FindResource("TooltipBrush"));
 		public static SolidColorBrush RevampBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("RevampBackgroundBrush"));
+		public static SolidColorBrush RevampBackground90Brush => ((SolidColorBrush)App.Current.FindResource("RevampBackground90Brush"));
+		public static SolidColorBrush RevampBackground80Brush => ((SolidColorBrush)App.Current.FindResource("RevampBackground80Brush"));
 		public static SolidColorBrush RevampBackground70Brush => ((SolidColorBrush)App.Current.FindResource("RevampBackground70Brush"));
 		public static SolidColorBrush RevampDarkBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("RevampDarkBackgroundBrush"));
 		public static SolidColorBrush RevampDarkBackground70Brush => ((SolidColorBrush)App.Current.FindResource("RevampDarkBackground70Brush"));

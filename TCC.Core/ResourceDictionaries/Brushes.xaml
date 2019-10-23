@@ -29,6 +29,8 @@
     <SolidColorBrush x:Key="CardDarkBrush"                  Color="{StaticResource CardDarkColor}"                             />
     <SolidColorBrush x:Key="TooltipBrush"                   Color="{StaticResource TooltipColor}"                Opacity=".9"  />
     <SolidColorBrush x:Key="RevampBackgroundBrush"          Color="{StaticResource RevampBackgroundColor}"                     />
+    <SolidColorBrush x:Key="RevampBackground90Brush"        Color="{StaticResource RevampBackgroundColor}"       Opacity=".9"  />
+    <SolidColorBrush x:Key="RevampBackground80Brush"        Color="{StaticResource RevampBackgroundColor}"       Opacity=".8"  />
     <SolidColorBrush x:Key="RevampBackground70Brush"        Color="{StaticResource RevampBackgroundColor}"       Opacity=".7"  />
     <SolidColorBrush x:Key="RevampDarkBackgroundBrush"      Color="{StaticResource RevampDarkBackgroundColor}"                 />
     <SolidColorBrush x:Key="RevampDarkBackground70Brush"    Color="{StaticResource RevampDarkBackgroundColor}"   Opacity=".7"  />
