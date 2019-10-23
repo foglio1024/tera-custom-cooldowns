@@ -27,12 +27,12 @@ namespace TCC.Data
                 Members.Add(m);
             });
 
-            var toRemove = new List<GuildMemberData>();
-            Members.ToSyncList().ForEach(m =>
-            {
-                if (mMembers.All(f => f.PlayerId != m.PlayerId)) toRemove.Add(m);
-            });
-            toRemove.ForEach(m => Members.Remove(m));
+            //var toRemove = new List<GuildMemberData>();
+            //Members.ToSyncList().ForEach(m =>
+            //{
+            //    if (mMembers.All(f => f.PlayerId != m.PlayerId)) toRemove.Add(m);
+            //});
+            //toRemove.ForEach(m => Members.Remove(m));
 
             InGuild = true;
             SetMaster(masterId, masterName);
