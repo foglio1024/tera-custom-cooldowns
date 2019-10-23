@@ -1,4 +1,5 @@
 ﻿using FoglioUtils;
+using FoglioUtils.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,13 +13,11 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using FoglioUtils.Extensions;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.Test;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -257,7 +256,7 @@ namespace TCC
                     if (deadlockedDispatchers.Count > 1)
                     {
                         throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
-                        Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                        //Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
                     }
                 }
             })

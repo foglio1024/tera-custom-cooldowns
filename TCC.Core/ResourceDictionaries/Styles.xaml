@@ -117,7 +117,12 @@
                         </Border>
                         <Border x:Name="hl" Background="Transparent"
                                 CornerRadius="{TemplateBinding extensions:ButtonExtensions.CornerRadius}" />
-                        <ctrl:Ripple HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ctrl:Ripple HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                     Color="{TemplateBinding extensions:ButtonExtensions.RippleBrush}"
+                                     StaysVisible="{TemplateBinding extensions:ButtonExtensions.RippleStaysVisible}"
+                                     Reversed="{TemplateBinding extensions:ButtonExtensions.RippleReversed}"
+                                     Duration="{TemplateBinding extensions:ButtonExtensions.RippleDuration}"
+                                     IsHitTestVisible="{TemplateBinding extensions:ButtonExtensions.RippleEnabled}">
                             <ctrl:Ripple.Clip>
                                 <MultiBinding Converter="{StaticResource RoundedClipConverter}">
                                     <Binding Path="ActualWidth" ElementName="border" />

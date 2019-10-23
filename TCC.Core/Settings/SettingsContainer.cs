@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using FoglioUtils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;
 
@@ -131,6 +132,7 @@ namespace TCC.Settings
         public static string SettingsOverride { get; set; } = "";
         public string LastAccountNameHash { get; set; }
         public bool BackgroundNotifications { get; set; }
+        public bool EnablePlayerMenu { get; set; }
 
         #endregion
 

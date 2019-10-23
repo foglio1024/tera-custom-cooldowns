@@ -55,7 +55,7 @@
                           ItemsSource="{Binding MembersView}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="pc:User">
-                        <Button Style="{StaticResource ButtonMainStyle}" ToolTip="{Binding Name}" VerticalAlignment="Center" Click="ButtonBase_OnClick">
+                        <Button Style="{StaticResource ButtonMainStyle}" ToolTip="{Binding Name}" VerticalAlignment="Center" MouseRightButtonDown="ButtonBase_OnClick">
                             <Path Width="18" Height="12" Fill="{Binding UserClass, Converter={StaticResource ClassToFill}}"
                                   Data="{Binding UserClass, Converter={StaticResource ClassToSvg}}" ></Path>
                         </Button>

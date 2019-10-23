@@ -23,7 +23,7 @@ namespace TCC
         private static Timer _focusTimer;
 
         // events
-        public static event Action TeraScreenChanged;
+        public static event Action<Point, Point, Size> TeraScreenChanged;
         public static event Action ForegroundChanged;
         public static event Action FocusTick;
 
@@ -79,8 +79,8 @@ namespace TCC
                               new Point(rect.Left, rect.Top),
                               new Size(rect.Right - rect.Left, rect.Bottom - rect.Top)))) ?? Screen.PrimaryScreen;
                 if (Equals(_teraScreen, ret)) return _teraScreen;
+                TeraScreenChanged?.Invoke(_teraScreen.Bounds.Location, ret.Bounds.Location, ret.Bounds.Size);
                 _teraScreen = ret;
-                TeraScreenChanged?.Invoke();
                 return _teraScreen;
             }
         }

@@ -29,7 +29,8 @@ namespace TCC.Controls.Chat
         {
             var name = ((sender as FrameworkElement)?.DataContext as User)?.Name;
             if (name == null) return;
-            ProxyInterface.Instance.Stub.AskInteractive(Game.Server.ServerId, name); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, name);
+            //ProxyInterface.Instance.Stub.AskInteractive(Game.Server.ServerId, name); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, name);
+            WindowManager.ViewModels.PlayerMenuVM.Open(name, Game.Server.ServerId);
         }
     }
 }

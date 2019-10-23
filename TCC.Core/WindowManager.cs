@@ -5,7 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Input;
 using TCC.Controls;
+using TCC.Controls.Chat;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 using TCC.Windows;
@@ -38,18 +41,15 @@ namespace TCC
             public static BuffBarWindowViewModel AbnormalVM { get; set; }
             public static ClassWindowViewModel ClassVM { get; set; }
             public static NotificationAreaViewModel NotificationAreaVM { get; set; }
+            public static PlayerMenuViewModel PlayerMenuVM { get; set; }
 
-            public static CivilUnrestViewModel CivilUnrestVM =>
-                _civilUnrestVm ?? (_civilUnrestVm = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
+            public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ?? (_civilUnrestVm = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
 
-            public static DashboardViewModel DashboardVM =>
-                _dashboardVm ?? (_dashboardVm = new DashboardViewModel(null));
+            public static DashboardViewModel DashboardVM => _dashboardVm ?? (_dashboardVm = new DashboardViewModel(null));
 
-            public static LfgListViewModel LfgVM =>
-                _lfgVm ?? (_lfgVm = new LfgListViewModel(App.Settings.LfgWindowSettings));
+            public static LfgListViewModel LfgVM => _lfgVm ?? (_lfgVm = new LfgListViewModel(App.Settings.LfgWindowSettings));
 
-            public static FlightGaugeViewModel FlightGaugeVM =>
-                _flightGaugeVm ?? (_flightGaugeVm = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
+            public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ?? (_flightGaugeVm = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
 
             public static GroupWindowViewModel GroupVM { get; set; }
         }
@@ -76,8 +76,6 @@ namespace TCC
 
         public static async Task Init()
         {
-            //ScreenSize = new Size(FocusManager.TeraScreen.Bounds.Width, FocusManager.TeraScreen.Bounds.Height); //new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
-            
             FocusManager.Init();
 
             await LoadWindows();
@@ -110,10 +108,7 @@ namespace TCC
             //if (!App.Loading) App.Settings.Save();
         }
 
-        private static void ApplyScreenCorrection(Size sc)
-        {
-            ApplyScreenCorrectionEvent?.Invoke(sc);
-        }
+
 
 
         private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
@@ -189,6 +184,8 @@ namespace TCC
 
             DashboardWindow = new Dashboard(ViewModels.DashboardVM);
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
+
+            ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
 
             ChatWindowManager.Start();
 

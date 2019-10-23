@@ -232,7 +232,7 @@ namespace TCC.Settings
             Positions = new ClassPositions();
             ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
             GpkNames = new List<string>();
-            //EnabledChanged += OnEnabledChanged;
+            EnabledChanged += OnEnabledChanged;
             //Game.LoadingScreenChanged += () => OnEnabledChanged(!Game.LoadingScreen && Enabled);
         }
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
@@ -256,6 +256,7 @@ namespace TCC.Settings
 
         protected virtual void OnEnabledChanged(bool enabled)
         {
+            return; // do nothing for now
             if (GpkNames.Count == 0) return;
             if (!ProxyInterface.Instance.IsStubAvailable) return;
             foreach (var gpkName in GpkNames)
@@ -341,9 +342,9 @@ namespace TCC.Settings
             return cc;
         }
 
-        public void ApplyScreenOffset()
+        public void ApplyScreenOffset(Point oldPos, Point newPos, Size size)
         {
-            Positions.ApplyOffset();
+            Positions.ApplyOffset(oldPos, newPos, size);
         }
     }
     public class ChatWindowSettings : WindowSettings
@@ -1201,6 +1202,7 @@ namespace TCC.Settings
 
         protected override void OnEnabledChanged(bool enabled)
         {
+            ProxyInterface.Instance.Stub.UpdateSetting("useLfg", enabled);
             // do nothing
         }
     }

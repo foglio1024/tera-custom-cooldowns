@@ -14,6 +14,7 @@ using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
+using TCC.Interop.Proxy;
 using TCC.Settings;
 using TCC.Utils;
 using TCC.Windows;
@@ -612,6 +613,18 @@ namespace TCC.ViewModels
                     _blacklistedMonsters.Remove(vm);
                 });
                 return _blacklistedMonsters;
+            }
+        }
+
+        public bool EnablePlayerMenu
+        {
+            get => App.Settings.EnablePlayerMenu;
+            set
+            {
+                if (App.Settings.EnablePlayerMenu == value) return;
+                App.Settings.EnablePlayerMenu = value;
+                N();
+                ProxyInterface.Instance.Stub.UpdateSetting("EnablePlayerMenu", App.Settings.EnablePlayerMenu);
             }
         }
 

@@ -1641,6 +1641,9 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
+                            <settings:CheckboxSetting SettingName="Enable player menu"
+                                                      IsEnabled="{Binding EnableProxy}"
+                                                      IsOn="{Binding EnablePlayerMenu, Mode=TwoWay}"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
                             <Grid>

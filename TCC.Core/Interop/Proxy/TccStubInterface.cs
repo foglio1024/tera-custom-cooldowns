@@ -248,16 +248,28 @@ namespace TCC.Interop.Proxy
                 { "linkData", $":tcc:{data.Replace("#####", ":tcc:")}:tcc:" }
             });
         }
+        public async void ResetInstance()
+        {
+            await TccStub.CallAsync("resetInstance");
+        }
+
+        // bool only, send type if needed for other settings
+        public async void UpdateSetting(string settingName, object value)
+        {
+            await TccStub.CallAsync("updateSetting", new JObject
+            {
+                { "name", settingName },
+                { "value", value.ToString() },
+            });
+        }
+
         public async void Initialize()
         {
             await TccStub.CallAsync("initialize", new JObject
             {
-                { "useLfg", App.Settings.LfgWindowSettings.Enabled }
+                { "useLfg", App.Settings.LfgWindowSettings.Enabled },
+                { "EnablePlayerMenu", App.Settings.EnablePlayerMenu }
             });
-        }
-        public async void ResetInstance()
-        {
-            await TccStub.CallAsync("resetInstance");
         }
 
 

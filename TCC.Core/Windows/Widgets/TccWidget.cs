@@ -68,7 +68,7 @@ namespace TCC.Windows.Widgets
             WindowManager.ResetToCenterEvent += ResetToCenter;
             WindowManager.DisposeEvent += CloseWindowSafe;
             WindowManager.MakeGlobalEvent += WindowSettings.MakePositionsGlobal;
-            WindowManager.ApplyScreenCorrectionEvent += _ => OnTeraScreenChanged(); //WindowSettings.ApplyScreenCorrection;
+            //WindowManager.ApplyScreenCorrectionEvent += _ => OnTeraScreenChanged(); //WindowSettings.ApplyScreenCorrection;
 
             FocusManager.TeraScreenChanged += OnTeraScreenChanged;
             FocusManager.FocusTick += OnFocusTick;
@@ -97,9 +97,13 @@ namespace TCC.Windows.Widgets
             ShowBoundariesToggled += ShowHideBoundaries;
         }
 
-        private void OnTeraScreenChanged()
+        private void OnTeraScreenChanged(System.Drawing.Point oldPos, System.Drawing.Point newPos, System.Drawing.Size size)
         {
-            WindowSettings.ApplyScreenOffset();
+            var op = new Point(oldPos.X, oldPos.Y); //sigh
+            var np = new Point(newPos.X, newPos.Y); //sigh
+            var s = new Size(size.Width, size.Height); //sigh
+            WindowSettings.ApplyScreenOffset(op, np, s);
+            ReloadPosition();
         }
 
         private void ShowHideBoundaries()

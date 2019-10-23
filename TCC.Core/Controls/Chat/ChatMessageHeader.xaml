@@ -51,7 +51,7 @@
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Width="Auto"  
-                        PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
+                        PreviewMouseRightButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
                         MouseEnter="UIElement_OnMouseEnter"
                         MouseLeave="UIElement_OnMouseLeave"
         >

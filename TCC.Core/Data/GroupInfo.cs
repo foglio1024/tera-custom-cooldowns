@@ -45,5 +45,15 @@ namespace TCC.Data
             return Has(name) && Members.FirstOrDefault(x => x.Name == name).CanInvite;
         }
 
+        public bool TryGetMember(uint playerId, uint serverId, out GroupMemberData member)
+        {
+            member = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
+            return !member.Equals(default(GroupMemberData));
+        }
+        public bool TryGetMember(string name, out GroupMemberData member)
+        {
+            member = Members.FirstOrDefault(m => m.Name == name);
+            return !member.Equals(default(GroupMemberData));
+        }
     }
 }

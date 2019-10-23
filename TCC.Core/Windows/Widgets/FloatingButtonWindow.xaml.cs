@@ -22,7 +22,6 @@ namespace TCC.Windows.Widgets
         public FloatingButtonWindow()
         {
             InitializeComponent();
-            TooltipInfo = new TooltipInfo("", "", 1);
             MainContent = WindowContent;
             ButtonsRef = null;
             _canMove = false;
@@ -54,7 +53,6 @@ namespace TCC.Windows.Widgets
             _queue = new Queue<Tuple<string, string, NotificationType, uint>>();
         }
 
-        public TooltipInfo TooltipInfo { get; set; }
 
         private void RepeatAnimation(object sender, EventArgs e)
         {
@@ -152,16 +150,16 @@ namespace TCC.Windows.Widgets
                 switch (type)
                 {
                     case NotificationType.Normal:
-                        NotificationColorBorder.Background = R.Brushes.TccNormalGradientBrush;// System.Windows.Application.Current.FindResource("ChatPartyBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccNormalGradientBrush;
                         break;
                     case NotificationType.Success:
-                        NotificationColorBorder.Background = R.Brushes.TccGreenGradientBrush; // System.Windows.Application.Current.FindResource("GreenBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccGreenGradientBrush; 
                         break;
                     case NotificationType.Warning:
-                        NotificationColorBorder.Background = R.Brushes.TccYellowGradientBrush; // System.Windows.Application.Current.FindResource("Tier4DungeonBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccYellowGradientBrush; 
                         break;
                     case NotificationType.Error:
-                        NotificationColorBorder.Background = R.Brushes.TccRedGradientBrush; //System.Windows.Application.Current.FindResource("HpBrush") as SolidColorBrush;
+                        NotificationColorBorder.Background = R.Brushes.TccRedGradientBrush; 
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -206,42 +204,43 @@ namespace TCC.Windows.Widgets
             NotifyExtended(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
         }
 
-        public void OpenPlayerMenu()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                FocusManager.PauseTopmost = true;//FocusTimer.Enabled = false;
-                RefreshTopmost();
-                if (PlayerInfo.IsOpen) ClosePlayerMenu();
-                TooltipInfo.Refresh();
-                Task.Delay(100).ContinueWith(t =>
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        PlayerInfo.IsOpen = true;
-                        ((PlayerTooltip) PlayerInfo.Child).AnimateOpening();
-                    });
-                });
+        //public void OpenPlayerMenu()
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        FocusManager.PauseTopmost = true;//FocusTimer.Enabled = false;
+        //        RefreshTopmost();
+        //        if (PlayerInfo.IsOpen) ClosePlayerMenu();
+        //        PlayerMenuVM.Refresh();
+        //        Task.Delay(100).ContinueWith(t =>
+        //        {
+        //            Dispatcher.Invoke(() =>
+        //            {
+        //                PlayerInfo.IsOpen = true;
+        //                ((PlayerMenuWindow) PlayerInfo.Child).AnimateOpening();
+        //            });
+        //        });
 
-            });
-        }
-        public void ClosePlayerMenu()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (((PlayerTooltip)PlayerInfo.Child).MgPopup.IsMouseOver) return;
-                if (((PlayerTooltip)PlayerInfo.Child).FpsUtilsPopup.IsMouseOver) return;
-                FocusManager.PauseTopmost = false; //.FocusTimer.Enabled = true;
-                PlayerInfo.IsOpen = false;
-            });
-        }
-        public void SetMoongourdButtonVisibility()
-        {
-
-            Dispatcher.Invoke(() =>
-            {
-                ((PlayerTooltip)PlayerInfo.Child).SetMoongourdVisibility();
-            });
-        }
+        //    });
+        //}
+        //public void ClosePlayerMenu()
+        //{
+        //    //TODO
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        //if (((PlayerMenuWindow)PlayerInfo.Child).MgPopup.IsMouseOver) return;
+        //        //if (((PlayerMenuWindow)PlayerInfo.Child).FpsUtilsPopup.IsMouseOver) return;
+        //        //FocusManager.PauseTopmost = false; //.FocusTimer.Enabled = true;
+        //        //PlayerInfo.IsOpen = false;
+        //    });
+        //}
+        //public void SetMoongourdButtonVisibility()
+        //{
+        //    //TODO
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        //((PlayerMenuWindow)PlayerInfo.Child).SetMoongourdVisibility();
+        //    });
+        //}
     }
 }

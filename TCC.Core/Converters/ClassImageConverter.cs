@@ -53,6 +53,7 @@ namespace TCC.Converters
                 case Class.Valkyrie:
                     className = "glaiver";
                     break;
+                case Class.None: return null;
                 default:
                     className = "common";
                     break;

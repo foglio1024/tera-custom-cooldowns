@@ -368,8 +368,8 @@
     <Compile Include="Controls\Chat\LFGcontrol.xaml.cs">
       <DependentUpon>LFGcontrol.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Chat\PlayerTooltip.xaml.cs">
-      <DependentUpon>PlayerTooltip.xaml</DependentUpon>
+    <Compile Include="Controls\Chat\PlayerMenuWindow.xaml.cs">
+      <DependentUpon>PlayerMenuWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NPCs\DefaultEnemyWindowLayout.xaml.cs">
       <DependentUpon>DefaultEnemyWindowLayout.xaml</DependentUpon>
@@ -588,7 +588,7 @@
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
-    <Compile Include="ViewModels\TooltipInfo.cs" />
+    <Compile Include="ViewModels\PlayerMenuViewModel.cs" />
     <Compile Include="ViewModels\Widgets\NpcWindowViewModel.cs" />
     <Compile Include="ViewModels\Widgets\BuffBarWindowViewModel.cs" />
     <Compile Include="ViewModels\Widgets\CooldownWindowViewModel.cs" />
@@ -849,7 +849,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Chat\PlayerTooltip.xaml">
+    <Page Include="Controls\Chat\PlayerMenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

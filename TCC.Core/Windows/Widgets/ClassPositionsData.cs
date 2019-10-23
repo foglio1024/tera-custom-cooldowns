@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using TCC.Data;
+using TCC.Utils;
 
 namespace TCC.Windows.Widgets
 {
@@ -29,10 +30,11 @@ namespace TCC.Windows.Widgets
             Position = new Point(sc.Width * Position.X, sc.Height * Position.Y);
         }
 
-        public void ApplyOffset()
+        public void ApplyOffset(Point oldPos, Point newPos, Size size)
         {
-            var offsetW = FocusManager.TeraScreen.Bounds.Left/ (double)FocusManager.TeraScreen.Bounds.Width;
-            var offsetH = FocusManager.TeraScreen.Bounds.Top/ (double)FocusManager.TeraScreen.Bounds.Height;
+            var offsetW =  (newPos.X - oldPos.X )/ (double)size.Width;
+            var offsetH =  (newPos.Y - oldPos.Y)/ (double) size.Height;
+            Log.CW($"Moving window by {offsetW},{offsetH}");
 
             Position = Point.Add(Position, new Vector(offsetW, offsetH));
         }

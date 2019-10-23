@@ -5,7 +5,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using FoglioUtils.Extensions;
+using TCC.Converters;
+using TCC.Interop;
 using TCC.R;
+using TCC.Utils;
 
 namespace TCC.Data.Chat
 {
@@ -137,6 +140,16 @@ namespace TCC.Data.Chat
             }
 
             return ret;
+
+        }
+
+        public static void CheckNotify(string message, ChatChannel ch, string author)
+        {
+            if (FocusManager.IsForeground) return;
+            var txt = GetPlainText(message).UnescapeHtml();
+            var chStr = new ChatChannelToName().Convert(ch, null, null, null);
+            if (App.Settings.WebhookEnabledMentions) Discord.FireWebhook(App.Settings.WebhookUrlMentions, $"**{author}** `{chStr}`\n{txt}");
+            if (App.Settings.BackgroundNotifications) Log.N($"{chStr} - {author}", $"{txt}", NotificationType.Warning, 6000);
 
         }
     }

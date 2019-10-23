@@ -3,6 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
         Title="DebugWindow" Background="{StaticResource RevampBackgroundBrush}">
     <StackPanel Orientation="Horizontal">
@@ -47,5 +49,9 @@
             <Button Click="NotifyFieldBoss">Field Boss Spawn</Button>
             <Button Click="NotifyFieldBossDie">Field Boss Die</Button>
         </StackPanel>
+        <Grid Width="50" Height="50">
+            <Button Style="{StaticResource ButtonMainStyle}"
+                     extensions:ButtonExtensions.RippleBrush="Red"></Button>
+        </Grid>
     </StackPanel>
 </Window>

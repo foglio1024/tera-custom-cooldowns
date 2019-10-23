@@ -99,12 +99,12 @@
                 <TranslateTransform />
             </Grid.RenderTransform>
         </Grid>
-        <controls:TccPopup Grid.Row="0" x:Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
+        <!--<controls:TccPopup Grid.Row="0" x:Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
                AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
                VerticalAlignment="Center"
                VerticalOffset="0">
-            <chatControls:PlayerTooltip />
-        </controls:TccPopup>
+            <chatControls:PlayerMenuWindow />
+        </controls:TccPopup>-->
         <Grid.RenderTransform>
             <TranslateTransform X="-32"></TranslateTransform>
         </Grid.RenderTransform>

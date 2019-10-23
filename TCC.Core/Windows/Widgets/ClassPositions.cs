@@ -72,11 +72,11 @@ namespace TCC.Windows.Widgets
             return Classes[cname].Buttons;
         }
 
-        public void ApplyOffset()
+        public void ApplyOffset(Point oldPos, Point newPos, Size size)
         {
             foreach (Class cl in Enum.GetValues(typeof(Class)))
             {
-                Classes[cl].ApplyOffset();
+                Classes[cl].ApplyOffset(oldPos, newPos,size);
             }
         }
     }
