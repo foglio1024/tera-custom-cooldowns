@@ -78,7 +78,7 @@ namespace TCC
             {
                 if (Combat == value) return;
                 Me.IsInCombat = value;
-                App.BaseDispatcher.Invoke(() => CombatChanged?.Invoke()); // check logs for other exceptions here
+                App.BaseDispatcher.InvokeAsync(() => CombatChanged?.Invoke()); // check logs for other exceptions here
             }
         }
 
@@ -118,6 +118,7 @@ namespace TCC
         public static int CurrentZoneId { get; private set; }
         public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
         public static List<string> BlockList { get; } = new List<string>();
+        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; }
 
         public static bool IsMe(ulong eid)
         {
@@ -142,14 +143,22 @@ namespace TCC
         public static string CurrentAccountNameHash { get; private set; }
 
 
+        public static async Task InitAsync()
+        {
+            PacketAnalyzer.ProcessorReady += InstallHooks;
+            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage)
+                ? "EU-EN"
+                : App.Settings.LastLanguage);
+            KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
+        }
 
-        public static async Task InitDatabasesAsync(string lang)
+        private static async Task InitDatabasesAsync(string lang)
         {
             await Task.Factory.StartNew(() => InitDatabases(lang));
             DatabaseLoaded?.Invoke();
         }
 
-        public static void InitDatabases(string lang)
+        private static void InitDatabases(string lang)
         {
             DB = new TccDatabase(lang);
             DB.CheckVersion();
@@ -190,7 +199,7 @@ namespace TCC
             else DB.Load();
         }
 
-        public static void InstallHooks()
+        private static void InstallHooks()
         {
             PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
 
@@ -229,7 +238,6 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(OnNotifyToFriendsWalkIntoSameArea);
             PacketAnalyzer.Processor.Hook<S_UPDATE_FRIEND_INFO>(OnUpdateFriendInfo);
             PacketAnalyzer.Processor.Hook<S_ACCOMPLISH_ACHIEVEMENT>(OnAccomplishAchievement);
-            PacketAnalyzer.Processor.Hook<S_ANSWER_INTERACTIVE>(OnAnswerInteractive);
             PacketAnalyzer.Processor.Hook<S_SYSTEM_MESSAGE_LOOT_ITEM>(OnSystemMessageLootItem);
             PacketAnalyzer.Processor.Hook<S_SYSTEM_MESSAGE>(OnSystemMessage);
             PacketAnalyzer.Processor.Hook<S_SPAWN_ME>(OnSpawnMe);
@@ -315,19 +323,8 @@ namespace TCC
         {
             if (p.Recipient != Me.Name) return;
 
-            CheckNotify(p.Message, ChatChannel.ReceivedWhisper, p.Author);
+            ChatUtils.CheckNotify(p.Message, ChatChannel.ReceivedWhisper, p.Author);
         }
-
-        private static void CheckNotify(string message, ChatChannel ch, string author)
-        {
-            if (FocusManager.IsForeground) return;
-            var txt = ChatUtils.GetPlainText(message).UnescapeHtml();
-            var chStr = new ChatChannelToName().Convert(ch, null, null, null);
-            if (App.Settings.WebhookEnabledMentions) Discord.FireWebhook(App.Settings.WebhookUrlMentions, $"**{author}** `{chStr}`\n{txt}");
-            if (App.Settings.BackgroundNotifications) Log.N($"{chStr} - {author}", $"{txt}", NotificationType.Warning, 6000);
-
-        }
-
 
         private static void OnChat(S_CHAT m)
         {
@@ -345,14 +342,7 @@ namespace TCC
             }
             if (!ChatUtils.CheckMention(m.Message)) return;
             if (BlockList.Contains(m.AuthorName)) return;
-            CheckNotify(m.Message, (ChatChannel)m.Channel, m.AuthorName);
-        }
-
-        private static void OnDisconnected()
-        {
-            Me.ClearAbnormalities();
-            Logged = false;
-            LoadingScreen = true;
+            ChatUtils.CheckNotify(m.Message, (ChatChannel)m.Channel, m.AuthorName);
         }
 
         private static void OnSpawnNpc(S_SPAWN_NPC p)
@@ -372,34 +362,10 @@ namespace TCC
 
         private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            //TODO: do it the same way as other client sysmsgs
-            if (!DB.SystemMessagesDatabase.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m)
-            ) return;
-            ChatWindowManager.Instance.AddChatMessage(
-                ChatWindowManager.Instance.Factory.CreateSystemMessage(
-                    "@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel));
-        }
-
-        private static void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
-        {
-            DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
-            WindowManager.FloatingButton.TooltipInfo.Name = x.Name;
-            WindowManager.FloatingButton.TooltipInfo.Info = m.Name;
-            WindowManager.FloatingButton.TooltipInfo.Level = (int)x.Level;
-            WindowManager.FloatingButton.TooltipInfo.SetInfo(x.Model);
-            if (x.Name == Me.Name)
-            {
-                WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = false;
-                WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = false;
-            }
-            else
-            {
-                WindowManager.FloatingButton.TooltipInfo.ShowGuildInvite = !x.HasGuild;
-                WindowManager.FloatingButton.TooltipInfo.ShowPartyInvite = !x.HasParty;
-            }
-
-            if (!ProxyInterface.Instance.IsStubAvailable) return;
-            WindowManager.FloatingButton.OpenPlayerMenu();
+            var parameters = $"@0\vAchievementName\v@achievement:{x.AchievementId}";
+            const string opcode = "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE";
+            if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m)) return;
+            SystemMessagesProcessor.AnalyzeMessage(parameters, m, opcode);
         }
 
         private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
@@ -642,8 +608,6 @@ namespace TCC
             TimeManager.Instance.SetGuildBamTime(false);
             InitDatabases(App.Settings.LastLanguage);
             SetAbnormalityTracker(m.CharacterClass);
-            WindowManager.FloatingButton
-                .SetMoongourdButtonVisibility(); //TODO: do this via vm, need to refactor it first
         }
 
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
@@ -671,7 +635,6 @@ namespace TCC
             if (p.Duration == Int32.MaxValue) ab.Infinity = true;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
-            //AbnormalityUtils.BeginAbnormality(p.AbnormalityId, p.TargetId, p.TargetId, p.Duration, p.Stacks);
         }
 
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
@@ -680,7 +643,6 @@ namespace TCC
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
-            //AbnormalityUtils.EndAbnormality(p.TargetId, p.AbnormalityId);
         }
 
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
@@ -691,18 +653,6 @@ namespace TCC
         private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
-        }
-
-        private static void OnReturnToLobbyHotkeyPressed()
-        {
-            if (!Logged
-                || LoadingScreen
-                || Combat
-                || !ProxyInterface.Instance.IsStubAvailable)
-                return;
-
-            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
-            ProxyInterface.Instance.Stub.ReturnToLobby();
         }
 
         private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
@@ -794,16 +744,24 @@ namespace TCC
             }
         }
 
-        public static async Task InitAsync()
+        private static void OnReturnToLobbyHotkeyPressed()
         {
-            PacketAnalyzer.ProcessorReady += InstallHooks;
-            await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage)
-                ? "EU-EN"
-                : App.Settings.LastLanguage);
-            KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
+            if (!Logged
+                || LoadingScreen
+                || Combat
+                || !ProxyInterface.Instance.IsStubAvailable)
+                return;
+
+            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
+            ProxyInterface.Instance.Stub.ReturnToLobby();
         }
 
-        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; }
+        private static void OnDisconnected()
+        {
+            Me.ClearAbnormalities();
+            Logged = false;
+            LoadingScreen = true;
+        }
 
         private static void SetAbnormalityTracker(Class c)
         {
