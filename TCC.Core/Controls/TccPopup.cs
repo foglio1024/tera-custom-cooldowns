@@ -40,13 +40,13 @@ namespace TCC.Controls
         private void OnForegroundChanged()
         {
             if (FocusManager.IsForeground) return;
-            Dispatcher?.Invoke(() => IsOpen = false);
+            Dispatcher?.InvokeAsync(() => IsOpen = false);
         }
 
         private void OnVisiblityChanged()
         {
             if (WindowManager.VisibilityManager.Visible) return;
-            Dispatcher?.Invoke(() => IsOpen = false);
+            Dispatcher?.InvokeAsync(() => IsOpen = false);
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
