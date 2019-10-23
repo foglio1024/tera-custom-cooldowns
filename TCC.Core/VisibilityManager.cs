@@ -93,7 +93,7 @@ namespace TCC
         }
         public void RefreshVisible()
         {
-            App.BaseDispatcher?.Invoke(() =>
+            App.BaseDispatcher?.InvokeAsync(() =>
             {
                 _forceVisible = true;
                 VisibilityChanged?.Invoke();
