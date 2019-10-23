@@ -160,5 +160,11 @@ namespace TCC.Utilities
         {
             return (Race) ((templateId - 10000) / 100);
         }
+
+        public static Class ClassFromModel(uint model)
+        {
+            var c = model % 100 - 1;
+            return (Class)c;
+        }
     }
 }
