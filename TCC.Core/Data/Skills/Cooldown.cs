@@ -72,19 +72,12 @@ namespace TCC.Data.Skills
                 if (value)
                 {
                     Game.CombatChanged += OnCombatStatusChanged;
-                    _ccSub++;
                     Game.EncounterChanged += OnCombatStatusChanged;
-                    _ecSub++;
-
                 }
                 else
                 {
                     Game.CombatChanged -= OnCombatStatusChanged;
-                    _ccSub--;
                     Game.EncounterChanged -= OnCombatStatusChanged;
-                    _ecSub--;
-                    Log.CW($"CC: {_ccSub}\t\t-\t\tEC: {_ecSub}");
-
                 }
 
             }
@@ -120,8 +113,6 @@ namespace TCC.Data.Skills
             Start(cooldown, mode);
         }
 
-        private static int _ccSub;
-        private static int _ecSub;
         private void OnCombatStatusChanged()
         {
             if ((Game.Encounter || Game.Combat) && FlashOnAvailable)
