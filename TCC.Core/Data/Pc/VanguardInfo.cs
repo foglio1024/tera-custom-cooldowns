@@ -5,7 +5,7 @@ namespace TCC.Data.Pc
 {
     public class VanguardInfo : TSPropertyChanged
     {
-        public const float MaxCredits = 9000;
+        public const float MaxCredits = 20000;
         public const int MaxDaily = 16;
         public const int MaxWeekly = 16;
 
