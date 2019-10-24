@@ -1,112 +1,80 @@
 ﻿<widgets:TccWidget x:Class="TCC.Windows.Widgets.FloatingButtonWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
-        xmlns:windows="clr-namespace:TCC.Windows"
-        xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
-        xmlns:controls="clr-namespace:TCC.Controls"
-        mc:Ignorable="d" 
-        Loaded="FloatinButtonLoaded"
-        Title="TCC Floating button"
-        Height="Auto" Width="Auto"
-        MinWidth="70"
-        ResizeMode="NoResize" 
-        WindowStyle="None"
-        SizeToContent="WidthAndHeight"
-        ShowInTaskbar="False"
-        AllowsTransparency="True"
-        Background="Transparent"
-        Topmost="True">
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
+                   xmlns:windows="clr-namespace:TCC.Windows"
+                   xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+                   xmlns:controls="clr-namespace:TCC.Controls"
+                   mc:Ignorable="d"
+                   Title="TCC Floating button"
+                   Height="Auto" Width="Auto"
+                   MinWidth="70"
+                   ResizeMode="NoResize"
+                   WindowStyle="None"
+                   SizeToContent="WidthAndHeight"
+                   ShowInTaskbar="False"
+                   AllowsTransparency="True"
+                   Background="Transparent"
+                   Topmost="True"
+                   d:DataContext="{d:DesignInstance widgets:FloatingButtonViewModel}">
     <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid x:Name="WindowContent"         
-              MouseEnter="Window_MouseEnter"
-              MouseLeave="Window_MouseLeave"
-        >
-            <Border Style="{StaticResource DefaultBorderStyle}" CornerRadius="0,2,2,0" x:Name="RootBorder" Margin="0,10"
-                HorizontalAlignment="Stretch">
+        <Grid.RenderTransform>
+            <TranslateTransform X="-32" />
+        </Grid.RenderTransform>
+
+        <Grid x:Name="WindowContent"
+              MouseEnter="OnMouseEnter"
+              MouseLeave="OnMouseLeave">
+            <Border Style="{StaticResource DefaultBorderStyle}" CornerRadius="0,2,2,0" x:Name="RootBorder"
+                    Margin="0,10"
+                    HorizontalAlignment="Stretch">
                 <StackPanel Width="35">
-                    <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="Button_Click_2" ToolTip="LFG" Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
-                        <Path Data="{StaticResource SvgUsers}" Fill="White" 
-                          Stretch="Uniform" Margin="5" 
-                          IsHitTestVisible="False" ></Path>
+                    <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}"
+                            Command="{Binding OpenLfgCommand}" ToolTip="LFG"
+                            Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
+                        <Path Data="{StaticResource SvgUsers}" Fill="White"
+                              Stretch="Uniform" Margin="5"
+                              IsHitTestVisible="False" />
                     </Button>
-                    <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click" x:Name="InfoBtn">
-                        <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="InfoPath" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
+                    <Button Style="{StaticResource ButtonMainStyle}"
+                            x:Name="InfoBtn"
+                            Command="{Binding OpenDashboardCommand}">
+                        <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="InfoPath" Stretch="UniformToFill"
+                              Margin="5" IsHitTestVisible="False" />
                     </Button>
-                    <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click_1">
-                        <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
+                    <Button Style="{StaticResource ButtonMainStyle}"
+                            Command="{Binding OpenSettingsCommand}">
+                        <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="UniformToFill" Margin="5"
+                              IsHitTestVisible="False" />
                     </Button>
                 </StackPanel>
             </Border>
             <Border x:Name="NotificationBubble"
-                    Width="20"
+                    Width="Auto"
                     Height="20"
-                    Background="{StaticResource HpBrush}"
-                    CornerRadius="10"
-                    VerticalAlignment="Center" HorizontalAlignment="Right"
-                    Margin="0,0,-12,0"
+                    Background="{StaticResource TccRedGradientBrush}"
+                    CornerRadius="3"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Margin="0 0 -42 0"
                     RenderTransformOrigin=".5,.5"
-                    Visibility="Hidden"
-                    ToolTip="There are events starting in 5 minutes.">
-                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="0,0,0,0" x:Name="EventAmountTb" >0</TextBlock>
+                    Visibility="{Binding PendingNotifications, Converter={StaticResource BoolToVisibleHidden}}"
+                    ToolTip="There are events starting in few minutes.">
                 <Border.Effect>
-                    <DropShadowEffect Opacity=".8" ShadowDepth="1" BlurRadius="3"></DropShadowEffect>
+                    <DropShadowEffect Opacity=".8" ShadowDepth="1" BlurRadius="3" />
                 </Border.Effect>
                 <Border.RenderTransform>
                     <ScaleTransform />
                 </Border.RenderTransform>
+                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="2 0"
+                           Text="{Binding PendingNotificationsAmount}" />
 
             </Border>
         </Grid>
-        <Grid Grid.Column="1" Width="250" Margin="5 10" Height="Auto" VerticalAlignment="Top" x:Name="NotificationContainer" IsHitTestVisible="False">
-            <Grid x:Name="NotificationContent" VerticalAlignment="Center" Opacity="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Border Background="{StaticResource RevampDarkBackgroundBrush}" Margin="0" BorderThickness="0 1 1 1" BorderBrush="{StaticResource RevampBorderBrush}" Grid.Column="1" Grid.RowSpan="2" Opacity=".5" 
-                        CornerRadius="0 0 0 0" Effect="{StaticResource DropShadow}" HorizontalAlignment="Stretch"></Border>
-                <Border Background="{StaticResource RevampBackgroundBrush}" Margin="0" Grid.Column="1" BorderThickness="0 1 1 0" BorderBrush="{StaticResource RevampBorderBrush}" 
-                        CornerRadius="0 0 0 0"  HorizontalAlignment="Stretch" Opacity=".5"></Border>
-                <Border CornerRadius="0 0 0 0"  x:Name="NotificationColorBorder"
-                         Grid.Column="0" Grid.RowSpan="2" Width="5" HorizontalAlignment="Left"></Border>
-                <Border x:Name="NotificationTime" Background="#1fff" Grid.RowSpan="2" Grid.Column="1" CornerRadius="0" Grid.Row="0" HorizontalAlignment="Left">
-                    <FrameworkElement x:Name="NotificationTimeGovernor" Width="{Binding ElementName=NotificationContainer, Path=ActualWidth}">
-                        <FrameworkElement.LayoutTransform>
-                            <ScaleTransform ScaleX="1"/>
-                        </FrameworkElement.LayoutTransform>
-                    </FrameworkElement>
-                </Border>
-
-                <TextBlock x:Name="NotificationTitle" Foreground="#6fff" Margin="10 3" Grid.Column="1" Text="Title" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="NotificationText" Foreground="#afff" Margin="10 10 10 10" Grid.Column="1" Text="Content" Grid.Row="1" 
-                           TextWrapping="Wrap" HorizontalAlignment="Center"/>
-            </Grid>
-            <Grid.LayoutTransform>
-                <ScaleTransform ScaleY="1" ScaleX="1"></ScaleTransform>
-            </Grid.LayoutTransform>
-            <Grid.RenderTransform>
-                <TranslateTransform />
-            </Grid.RenderTransform>
-        </Grid>
-        <!--<controls:TccPopup Grid.Row="0" x:Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
-               AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
-               VerticalAlignment="Center"
-               VerticalOffset="0">
-            <chatControls:PlayerMenuWindow />
-        </controls:TccPopup>-->
-        <Grid.RenderTransform>
-            <TranslateTransform X="-32"></TranslateTransform>
-        </Grid.RenderTransform>
     </Grid>
 </widgets:TccWidget>

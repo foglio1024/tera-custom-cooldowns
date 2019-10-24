@@ -122,6 +122,7 @@
     <Compile Include="Settings\CooldownConfigParser.cs" />
     <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="Controls\TccTrayIcon.cs" />
+    <Compile Include="Windows\Widgets\FloatingButtonViewModel.cs" />
     <Compile Include="Windows\Widgets\TccWidgetBuilder.cs" />
     <Compile Include="Utilities\AbnormalityUtils.cs" />
     <Compile Include="Data\Account.cs" />

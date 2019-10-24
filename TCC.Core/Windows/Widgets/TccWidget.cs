@@ -188,7 +188,7 @@ namespace TCC.Windows.Widgets
             }
         }
 
-        protected void OnLoaded(object sender, RoutedEventArgs e)
+        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
             _handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(_handle);
@@ -210,7 +210,7 @@ namespace TCC.Windows.Widgets
 
             OnClickThruModeChanged();
         }
-        private void OnVisibilityChanged()
+        protected virtual void OnVisibilityChanged()
         {
             if (WindowManager.VisibilityManager.Visible)
             {

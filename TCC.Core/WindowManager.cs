@@ -27,6 +27,7 @@ namespace TCC
 
         public static TccTrayIcon TrayIcon { get; private set; }
         public static VisibilityManager VisibilityManager { get; set; }
+        public static System.Drawing.Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
 
         public static class ViewModels
         {
@@ -34,6 +35,7 @@ namespace TCC
             private static DashboardViewModel _dashboardVm;
             private static LfgListViewModel _lfgVm;
             private static FlightGaugeViewModel _flightGaugeVm;
+            private static FloatingButtonViewModel _floatingButtonVm;
 
             public static CooldownWindowViewModel CooldownsVM { get; set; }
             public static CharacterWindowViewModel CharacterVM { get; set; }
@@ -50,11 +52,11 @@ namespace TCC
             public static LfgListViewModel LfgVM => _lfgVm ?? (_lfgVm = new LfgListViewModel(App.Settings.LfgWindowSettings));
 
             public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ?? (_flightGaugeVm = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
+            public static FloatingButtonViewModel FloatingButtonVM => _floatingButtonVm ?? (_floatingButtonVm = new FloatingButtonViewModel(App.Settings.FloatingButtonSettings));
 
             public static GroupWindowViewModel GroupVM { get; set; }
         }
 
-        public static System.Drawing.Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
 
         public static CooldownWindow CooldownWindow { get; private set; }
         public static CharacterWindow CharacterWindow { get; private set; }
@@ -179,7 +181,7 @@ namespace TCC
             CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrestVM);
             if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
 
-            FloatingButton = new FloatingButtonWindow();
+            FloatingButton = new FloatingButtonWindow(ViewModels.FloatingButtonVM);
             if (FloatingButton.WindowSettings.Enabled) FloatingButton.Show();
 
             DashboardWindow = new Dashboard(ViewModels.DashboardVM);

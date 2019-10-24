@@ -22,7 +22,7 @@ namespace TCC.Windows.Widgets
         public CharacterWindow(CharacterWindowViewModel vm)
         {
             DataContext = vm;
-            _vm = DataContext as CharacterWindowViewModel;
+            _vm = vm;
 
             InitializeComponent();
             ButtonsRef = Buttons;

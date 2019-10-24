@@ -56,7 +56,7 @@ namespace TCC
         {
             var closeEventsCount = WindowManager.ViewModels.DashboardVM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
             if (closeEventsCount == 0) return;
-            if (App.Settings.FloatingButtonSettings.ShowNotificationBubble) WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+            if (App.Settings.FloatingButtonSettings.ShowNotificationBubble) WindowManager.ViewModels.FloatingButtonVM.WarnCloseEvents(closeEventsCount);
 
         }
 
@@ -224,27 +224,6 @@ namespace TCC
         private static void SendWebhook(string content, string url, bool test = false)
         {
             Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}");
-            //var msg = new JObject
-            //{
-            //    {"content", $"{content}{(test ? " (test message)" : "")}"},
-            //    {"username", "TCC" },
-            //    {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
-            //};
-
-            //try
-            //{
-            //    using (var client = Utils.GetDefaultWebClient())
-            //    {
-            //        client.Encoding = Encoding.UTF8;
-            //        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-            //        client.UploadString(url, "POST", msg.ToString());
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    WindowManager.ViewModels.NotificationArea.Enqueue("TCC", "Failed to execute Discord webhook.", NotificationType.Error);
-            //    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
-            //}
         }
 
         private struct TeraServerTimeInfo
