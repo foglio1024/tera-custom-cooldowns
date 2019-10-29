@@ -37,7 +37,7 @@ namespace TCC.Publisher
             var an = AssemblyName.GetAssemblyName("D:/Repos/TCC/release/TCC.exe");
             var v = an.Version;
             _stringVersion = $"{v.Major}.{v.Minor}.{v.Build}";
-            _experimental = TCC.App.Experimental ? "-e" : "";
+            _experimental = TCC.App.Beta ? "-e" : "";
             Logger.WriteLine($"    TCC version is {_stringVersion}{_experimental}");
             Logger.WriteLine("-------------");
         }

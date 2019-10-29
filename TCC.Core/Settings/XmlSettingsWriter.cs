@@ -163,7 +163,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(SettingsContainer.CheckOpcodesHash), App.Settings.CheckOpcodesHash),
                 new XAttribute(nameof(FloatingButtonWindowSettings.ShowNotificationBubble), App.Settings.FloatingButtonSettings.ShowNotificationBubble),
                 new XAttribute(nameof(SettingsContainer.FpsAtGuardian), App.Settings.FpsAtGuardian),
-                new XAttribute(nameof(SettingsContainer.ExperimentalNotification), App.Settings.ExperimentalNotification),
+                new XAttribute(nameof(SettingsContainer.BetaNotification), App.Settings.BetaNotification),
                 new XAttribute(nameof(SettingsContainer.EnableProxy), App.Settings.EnableProxy),
                 new XAttribute(nameof(SettingsContainer.DisableLfgChatMessages), App.Settings.DisableLfgChatMessages),
                 new XAttribute(nameof(SettingsContainer.CheckGuildBamWithoutOpcode), App.Settings.CheckGuildBamWithoutOpcode),

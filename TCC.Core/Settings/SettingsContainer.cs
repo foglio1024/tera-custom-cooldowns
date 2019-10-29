@@ -37,7 +37,7 @@ namespace TCC.Settings
         public bool Npcap { get; set; } //TODO: remove
         public bool CheckOpcodesHash { get; set; }
         public bool CheckGuildBamWithoutOpcode { get; set; } //by HQ 20190324
-        public bool ExperimentalNotification { get; set; }
+        public bool BetaNotification { get; set; }
         public bool FpsAtGuardian { get; set; }
 
         public bool EnableProxy
@@ -61,6 +61,7 @@ namespace TCC.Settings
         public HotKey ForceClickableChatHotkey { get; set; }
         public HotKey ReturnToLobbyHotkey { get; set; }
         public HotKey ToggleBoundariesHotkey { get; set; }
+        public HotKey AbnormalSettingsHotkey { get; set; }
 
         #endregion
 
@@ -173,6 +174,7 @@ namespace TCC.Settings
             DashboardHotkey = new HotKey(Key.I, ModifierKeys.Control);
             SettingsHotkey = new HotKey(Key.O, ModifierKeys.Control);
             SkillSettingsHotkey = new HotKey(Key.K, ModifierKeys.Control);
+            AbnormalSettingsHotkey = new HotKey(Key.B, ModifierKeys.Control);
             ReturnToLobbyHotkey = new HotKey(Key.R, ModifierKeys.Control | ModifierKeys.Alt);
             ForceClickableChatHotkey = new HotKey(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
             ToggleBoundariesHotkey = new HotKey(Key.H, ModifierKeys.Control | ModifierKeys.Alt);
@@ -186,7 +188,7 @@ namespace TCC.Settings
             CheckOpcodesHash = true;
             CheckGuildBamWithoutOpcode = false;
             UserExcludedSysMsg = new List<string>();
-            ExperimentalNotification = true;
+            BetaNotification = true;
             FpsAtGuardian = true;
             EnableProxy = true;
             DisableLfgChatMessages = true;

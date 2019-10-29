@@ -31,7 +31,7 @@ namespace TCC.ViewModels
         public static event Action SkillShapeChanged;
         public static event Action FontSizeChanged;
 
-        public bool Experimental => App.Experimental;
+        public bool Experimental => App.Beta;
         public bool ToolboxMode => App.ToolboxMode;
 
         public CooldownWindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
@@ -98,6 +98,17 @@ namespace TCC.ViewModels
                 if (App.Settings.SkillSettingsHotkey.Equals(value)) return;
                 KeyboardHook.Instance.ChangeHotkey(App.Settings.SkillSettingsHotkey, value);
                 App.Settings.SkillSettingsHotkey = value;
+                N();
+            }
+        }
+        public HotKey AbnormalSettingsHotkey
+        {
+            get => App.Settings.AbnormalSettingsHotkey;
+            set
+            {
+                if (App.Settings.AbnormalSettingsHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.AbnormalSettingsHotkey, value);
+                App.Settings.AbnormalSettingsHotkey = value;
                 N();
             }
         }
@@ -168,13 +179,13 @@ namespace TCC.ViewModels
                 switch (_khCount)
                 {
                     case 0:
-                        WindowManager.ViewModels.NotificationAreaVM.Enqueue("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
+                        Log.N("Exploit alert", "Are you sure you want to enable this?", NotificationType.Warning);
                         break;
                     case 1:
-                        WindowManager.ViewModels.NotificationAreaVM.Enqueue(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
+                        Log.N(":thinking:", "You shouldn't use this °L° Are you really sure?", NotificationType.Warning, 3000);
                         break;
                     case 2:
-                        WindowManager.ViewModels.NotificationAreaVM.Enqueue("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
+                        Log.N("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
                         Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                         break;
                 }
@@ -198,11 +209,11 @@ namespace TCC.ViewModels
         }
         public bool ExperimentalNotification
         {
-            get => App.Settings.ExperimentalNotification;
+            get => App.Settings.BetaNotification;
             set
             {
-                if (App.Settings.ExperimentalNotification == value) return;
-                App.Settings.ExperimentalNotification = value;
+                if (App.Settings.BetaNotification == value) return;
+                App.Settings.BetaNotification = value;
                 N();
             }
         }
@@ -600,7 +611,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                if (_blacklistedMonsters == null)  _blacklistedMonsters = new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
+                if (_blacklistedMonsters == null) _blacklistedMonsters = new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
                 var bl =Game.DB.MonsterDatabase.GetBlacklistedMonsters();
                 bl.ForEach(m =>
                 {
@@ -639,7 +650,7 @@ namespace TCC.ViewModels
             RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true));
             OpenWindowCommand = new RelayCommand(winType =>
             {
-                var t = (Type)winType;
+                var t = (Type) winType;
                 var win = Activator.CreateInstance(t, null) as TccWindow;
                 win?.ShowWindow();
             });
@@ -648,7 +659,7 @@ namespace TCC.ViewModels
                 if (TccMessageBox.Show("Warning: beta build could be unstable. Proceed?",
                         MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
                 {
-                    await Task.Factory.StartNew(UpdateManager.ForceUpdateExperimental);
+                    await Task.Factory.StartNew(UpdateManager.ForceUpdateToBeta);
                 }
             });
             ResetChatPositionsCommand = new RelayCommand(_ =>
@@ -697,7 +708,7 @@ namespace TCC.ViewModels
             {
                 if (Monster.IsHidden == value) return;
                 Monster.IsHidden = value;
-                if(!value) Game.DB.MonsterDatabase.Blacklist(Monster, false);
+                if (!value) Game.DB.MonsterDatabase.Blacklist(Monster, false);
                 N();
             }
         }
