@@ -3,15 +3,19 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using TCC.Data;
+using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
+using TCC.Loader;
 using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
 using TCC.Utils;
 using TCC.Windows;
 using TeraPacketParser;
 using TeraPacketParser.Messages;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC.Parsing
@@ -44,6 +48,28 @@ namespace TCC.Parsing
 
         public static async Task InitAsync()
         {
+            ProcessorReady += () => App.BaseDispatcher.Invoke(() =>
+            {
+                try
+                {
+                    ModuleLoader.LoadModules(App.BasePath);
+                }
+                catch (FileLoadException fle)
+                {
+                    TccMessageBox.Show("TCC module loader",
+                        $"An error occured while loading {fle.FileName}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    App.Close();
+                }
+                catch (FileNotFoundException fnfe)
+                {
+                    TccMessageBox.Show("TCC module loader",
+                        $"An error occured while loading {Path.GetFileName(fnfe.FileName)}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    App.Close();
+                }
+            });
+
             await Task.Factory.StartNew(Init);
             Log.N("TCC", "Ready to connect.", NotificationType.Normal);
         }
@@ -81,7 +107,7 @@ namespace TCC.Parsing
             Game.Server = srv;
             WindowManager.TrayIcon.Connected = true;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", $"Connected to {srv.Name}", NotificationType.Success);
+            Log.N("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
             _ = ProxyInterface.Instance.Init();
 
@@ -96,7 +122,7 @@ namespace TCC.Parsing
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
-            WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Disconnected", NotificationType.Normal);
+            Log.N("TCC", "Disconnected", NotificationType.Normal);
             WindowManager.TrayIcon.Connected = false;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - not connected";
 
@@ -175,17 +201,6 @@ namespace TCC.Parsing
             Factory.ReloadSysMsg(path);
 
             Log.N("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
-        }
-    }
-
-    public class PacketParseException : Exception
-    {
-        public string OpcodeName { get; }
-        public byte[] RawData { get; }
-        public PacketParseException(string msg, Exception inner, string opcodeName, byte[] data) : base(msg, inner)
-        {
-            OpcodeName = opcodeName;
-            RawData = data;
         }
     }
 }
