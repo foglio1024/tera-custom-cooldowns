@@ -343,9 +343,7 @@ namespace TCC.ViewModels
 
                 SelectedCharacter = character;
                 SelectedCharacterInventory = CollectionViewUtils.InitLiveView(character.Inventory,
-                    inventoryItem => inventoryItem != null,
-                    new string[] { },
-                    new[] { new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending) });
+                    sortFilters: new[] { new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending) });
 
                 WindowManager.DashboardWindow.ShowDetails();
                 Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
@@ -501,7 +499,7 @@ namespace TCC.ViewModels
             ClearEvents();
             if (region == null)
             {
-                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Info window", "No region specified; cannot load events.", NotificationType.Error);
+                Log.N("Info window", "No region specified; cannot load events.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }

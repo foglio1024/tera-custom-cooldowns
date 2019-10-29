@@ -62,9 +62,7 @@ namespace TCC.ViewModels.Widgets
             get
             { 
                 var ret = CollectionViewUtils.InitLiveView(_guilds,
-                    guild => guild != null,
-                    new string[] { },
-                    new[]
+                    sortFilters: new[]
                     {
                         //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
                         new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending)
@@ -94,7 +92,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
+                Log.N("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }

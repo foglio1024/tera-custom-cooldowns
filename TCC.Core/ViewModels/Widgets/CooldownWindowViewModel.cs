@@ -419,7 +419,7 @@ namespace TCC.ViewModels.Widgets
                 data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
                 data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
 
-                Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(SkillsDatabase.SkillsForClass, null, new string[] { }, new SortDescription[] { }));
+                Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(SkillsDatabase.SkillsForClass));
 
                 N(nameof(SkillsView));
                 N(nameof(MainSkills));
@@ -497,8 +497,8 @@ namespace TCC.ViewModels.Widgets
         private void InitViews()
         {
             if (ItemsView != null && AbnormalitiesView != null) return;
-            ItemsView = CollectionViewUtils.InitLiveView(Items, null, new string[] { }, new SortDescription[] { });
-            AbnormalitiesView = CollectionViewUtils.InitLiveView(Passivities, null, new string[] { }, new SortDescription[] { });
+            ItemsView = CollectionViewUtils.InitLiveView(Items);
+            AbnormalitiesView = CollectionViewUtils.InitLiveView(Passivities);
         }
         public void NotifyItemsDisplay()
         {

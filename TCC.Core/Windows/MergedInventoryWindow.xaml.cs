@@ -21,9 +21,7 @@ namespace TCC.Windows
         {
             MergedInventory = new TSObservableCollection<MergedInventoryItem>();
             MergedInventoryView = CollectionViewUtils.InitLiveView(MergedInventory, 
-                item => item != null, 
-                new string[] { }, 
-                new[]
+                sortFilters: new[]
                 {
                     new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),

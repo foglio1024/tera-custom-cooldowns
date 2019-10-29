@@ -71,8 +71,7 @@ namespace TCC.ViewModels.Widgets
                 if (_guildTowers != null) return _guildTowers;
                 _guildTowers = CollectionViewUtils.InitLiveView(_npcList,
                         npc => npc.IsTower,
-                        new string[] { },
-                        new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+                        sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;
             }
         }
@@ -178,7 +177,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                WindowManager.ViewModels.NotificationAreaVM.Enqueue("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
+                Log.N("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
                 ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }

@@ -59,7 +59,7 @@ namespace TCC.Data.Chat
         {
             AuthorId = authorId;
             _members = new TSObservableCollection<User>();
-            MembersView = CollectionViewUtils.InitView(null, _members, new List<SortDescription>());
+            MembersView = CollectionViewUtils.InitView(_members, null, new List<SortDescription>());
         }
 
         private void OnMembersChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -113,13 +113,16 @@ namespace TCC.Data.Chat
         }
         public void LinkListing()
         {
-            LinkedListing = FindListing();
-            if (LinkedListing != null) return;
-            //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
-            WindowManager.ViewModels.LfgVM.EnqueueListRequest();
-            _timer = new Timer(1500);
-            _timer.Elapsed += OnTimerTick;
-            _timer.Start();
+            Dispatcher.InvokeAsync(() =>
+            {
+                LinkedListing = FindListing();
+                if (LinkedListing != null) return;
+                //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
+                WindowManager.ViewModels.LfgVM.EnqueueListRequest();
+                _timer = new Timer(1500);
+                _timer.Elapsed += OnTimerTick;
+                _timer.Start();
+            });
         }
     }
 }
