@@ -57,6 +57,9 @@
     <ts:GroupWindowTemplateSelector x:Key="GroupWindowTemplateSelector"
                                     SingleColumn="{StaticResource SingleColumnGroupLayout}"
                                     RoleColumns="{StaticResource RoleColumnsGroupLayout}"/>
+    <ts:NotificationTemplateSelector x:Key="NotificationTemplateSelector"
+                                    Default="{StaticResource DefaultNotificationTemplate}"
+                                    Progress="{StaticResource ProgressNotificationTemplate}"/>
 
 
 </ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Windows.Threading;
 using FoglioUtils;
@@ -10,21 +11,22 @@ namespace TCC.Windows.Widgets
 {
     public class NotificationAreaViewModel : TccWindowViewModel
     {
-        private readonly ConcurrentQueue<NotificationInfo> _queue;
-        public TSObservableCollection<NotificationInfo> Notifications { get; }
+        private static int _id;
+        private readonly ConcurrentQueue<NotificationInfoBase> _queue;
+        public TSObservableCollection<NotificationInfoBase> Notifications { get; }
 
         public NotificationAreaViewModel(WindowSettings settings) : base(settings)
         {
-            _queue = new ConcurrentQueue<NotificationInfo>();
-            Notifications = new TSObservableCollection<NotificationInfo>(Dispatcher);
+            _queue = new ConcurrentQueue<NotificationInfoBase>();
+            Notifications = new TSObservableCollection<NotificationInfoBase>(Dispatcher);
             Log.NewNotification += Enqueue;
         }
 
         private void CheckShow()
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher.Invoke(() =>
             {
-                while (Notifications.Count < ((NotificationAreaSettings) Settings).MaxNotifications)
+                while (Notifications.Count < ((NotificationAreaSettings)Settings).MaxNotifications)
                 {
                     if (_queue.IsEmpty) break;
                     if (!_queue.TryDequeue(out var next)) continue;
@@ -34,24 +36,41 @@ namespace TCC.Windows.Widgets
             });
         }
 
-        private bool Pass(NotificationInfo info)
+        private bool Pass(NotificationInfoBase infoBase)
         {
-            return Notifications.ToSyncList().All(n => n.Message != info.Message);
+            return Notifications.ToSyncList().All(n => n.Message != infoBase.Message);
         }
 
-        public void Enqueue(string title, string message, NotificationType type, uint duration = 4000U)
+        private int Enqueue(string title, string message, NotificationType type, uint duration = 4000U, NotificationTemplate template = NotificationTemplate.Default)
         {
-            _queue.Enqueue(new NotificationInfo(title, message, type, duration));
+            switch (template)
+            {
+                case NotificationTemplate.Progress:
+                    _queue.Enqueue(new ProgressNotificationInfo(_id, title, message, type, duration, template));
+                    break;
+                default:
+                    _queue.Enqueue(new NotificationInfoBase(_id, title, message, type, duration, template));
+                    break;
+            }
             CheckShow();
+            return _id++;
         }
 
-        public void DeleteNotification(NotificationInfo dc)
+        public void DeleteNotification(NotificationInfoBase dc)
         {
             Dispatcher.InvokeAsync(() =>
             {
                 Notifications.Remove(dc);
                 CheckShow();
             }, DispatcherPriority.Background);
+        }
+
+        public T GetNotification<T>(int notifId) where T : NotificationInfoBase
+        {
+            var ret = Notifications.ToSyncList().FirstOrDefault(x => x.Id == notifId);
+            if (ret != null) return (T)ret;
+            ret = _queue.ToArray().FirstOrDefault(x => x.Id == notifId);
+            return (T)ret;
         }
     }
 }

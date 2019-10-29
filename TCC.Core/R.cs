@@ -571,6 +571,8 @@ namespace TCC.R
 		public static DataTemplate NameClassCharDataTemplate => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
 		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
+		public static DataTemplate DefaultNotificationTemplate => ((DataTemplate)App.Current.FindResource("DefaultNotificationTemplate"));
+		public static DataTemplate ProgressNotificationTemplate => ((DataTemplate)App.Current.FindResource("ProgressNotificationTemplate"));
 	}
 	public static class TemplateSelectors
 	{
@@ -586,5 +588,6 @@ namespace TCC.R
 		public static SkillTemplateSelector NormalSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("NormalSkillTemplateSelector"));
 		public static SkillTemplateSelector FixedSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("FixedSkillTemplateSelector"));
 		public static GroupWindowTemplateSelector GroupWindowTemplateSelector => ((GroupWindowTemplateSelector)App.Current.FindResource("GroupWindowTemplateSelector"));
+		public static NotificationTemplateSelector NotificationTemplateSelector => ((NotificationTemplateSelector)App.Current.FindResource("NotificationTemplateSelector"));
 	}
 }

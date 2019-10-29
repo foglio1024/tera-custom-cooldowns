@@ -30,17 +30,13 @@
                     </Setter>
                 </Style>
             </StackPanel.Resources>
-            <ItemsControl ItemsSource="{Binding Notifications}" >
+            <ItemsControl ItemsSource="{Binding Notifications}" 
+                          ItemTemplateSelector="{StaticResource NotificationTemplateSelector}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="local:NotificationInfo">
-                        <local:DefaultNotificationControl/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
         <controls:WindowButtons x:Name="Buttons" 

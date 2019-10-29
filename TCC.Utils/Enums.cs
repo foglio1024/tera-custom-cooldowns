@@ -8,4 +8,11 @@
         Error
     }
 
+    public enum NotificationTemplate
+    {
+        Default,
+        Progress,
+        Confirm
+    }
+
 }
