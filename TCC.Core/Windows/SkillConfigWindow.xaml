@@ -7,14 +7,13 @@
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
-        SizeToContent="Height"
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True"
         Topmost="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="TCC Cooldown widget settings" Height="Auto" Width="1000" d:DataContext="{d:DesignData CooldownWindowViewModel}">
+        Title="TCC Cooldown widget settings" Height="600" Width="1000" d:DataContext="{d:DesignData CooldownWindowViewModel}">
     <Window.Resources>
         <DataTemplate x:Key="DragAdornerTemplate" DataType="skills:Skill">
             <Ellipse Width="55" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
@@ -59,9 +58,9 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource DefaultBackgroundBrush}" 
-                Grid.RowSpan="3" CornerRadius="1" BorderThickness="1"
-                BorderBrush="#8555"></Border>
+        <Border Style="{StaticResource RevampBorderStyle}"
+                Grid.RowSpan="3"
+                />
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Border Background="#3000" CornerRadius="1 1 0 0"></Border>
             <Button HorizontalAlignment="Right" Style="{StaticResource ButtonContentOpacityStyle}"
@@ -117,7 +116,7 @@
                     </Grid.RowDefinitions>
                     <ListBox
                         ItemsSource="{Binding SkillsView}"
-                        Grid.Row="0" Height="300"
+                        Grid.Row="0" 
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         dd:DragDrop.IsDragSource="True" ItemTemplate="{StaticResource SkillDataTemplate}"
                         dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
@@ -138,7 +137,8 @@
                     <ListBox
                         VerticalAlignment="Stretch"
                         ItemsSource="{Binding HiddenSkills}"
-                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
                         dd:DragDrop.IsDropTarget="True"
 
                         dd:DragDrop.DropHandler="{Binding HiddenSkillsDropHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
@@ -168,7 +168,7 @@
                              CaretBrush="#8fff" TextChanged="ItemSearch_OnTextChanged">
                     </TextBox>
                 </Grid>
-                <ListBox ItemsSource="{Binding ItemsView}" Height="500"
+                <ListBox ItemsSource="{Binding ItemsView}" 
                          ItemTemplate="{StaticResource ItemDataTemplate}" dd:DragDrop.IsDragSource="True"
                          dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -200,7 +200,7 @@
                 </Grid>
                 <ListBox Grid.Row="2" ItemsSource="{Binding AbnormalitiesView}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" dd:DragDrop.IsDragSource="True"
-                         Height="500" ItemTemplate="{StaticResource AbnormalityDataTemplate}"
+                         ItemTemplate="{StaticResource AbnormalityDataTemplate}"
                          dd:DragDrop.DragAdornerTemplate="{StaticResource DragAdornerTemplate}"
                          dd:DragDrop.DropHandler="{Binding DragHandler, RelativeSource={RelativeSource AncestorType=local:SkillConfigWindow}}"
                          dd:DragDrop.IsDropTarget="True">
