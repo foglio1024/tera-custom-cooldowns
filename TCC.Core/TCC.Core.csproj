@@ -116,6 +116,9 @@
     <Compile Include="Data\Chat\SystemMessage.cs" />
     <Compile Include="Data\GroupInfo.cs" />
     <Compile Include="Data\GuildInfo.cs" />
+    <Compile Include="Exceptions\DeadlockException.cs" />
+    <Compile Include="IconsUpdater.cs" />
+    <Compile Include="Exceptions\PacketParseException.cs" />
     <Compile Include="Settings\CooldownData.cs" />
     <Compile Include="Data\Chat\LfgMessage.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
@@ -123,6 +126,9 @@
     <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="Controls\TccTrayIcon.cs" />
     <Compile Include="Windows\Widgets\FloatingButtonViewModel.cs" />
+    <Compile Include="Windows\Widgets\ProgressNotificationControl.xaml.cs">
+      <DependentUpon>ProgressNotificationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Widgets\TccWidgetBuilder.cs" />
     <Compile Include="Utilities\AbnormalityUtils.cs" />
     <Compile Include="Data\Account.cs" />
@@ -591,7 +597,7 @@
     <Compile Include="ViewModels\TimeMarker.cs" />
     <Compile Include="ViewModels\PlayerMenuViewModel.cs" />
     <Compile Include="ViewModels\Widgets\NpcWindowViewModel.cs" />
-    <Compile Include="ViewModels\Widgets\BuffBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\AbnormalityWindowViewModel.cs" />
     <Compile Include="ViewModels\Widgets\CooldownWindowViewModel.cs" />
     <Compile Include="ViewModels\Widgets\GroupWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\MysticLayoutVM.cs" />
@@ -748,7 +754,7 @@
     <Compile Include="Windows\Widgets\NotificationAreaWindow.xaml.cs">
       <DependentUpon>NotificationAreaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Widgets\NotificationInfo.cs" />
+    <Compile Include="Windows\Widgets\NotificationInfoBase.cs" />
     <Compile Include="Controls\TccPopup.cs" />
     <Page Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
@@ -1239,6 +1245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Widgets\NotificationAreaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Widgets\ProgressNotificationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
