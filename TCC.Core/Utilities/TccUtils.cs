@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Media;
 using FoglioUtils;
 using TCC.Data;
@@ -16,82 +18,46 @@ namespace TCC.Utilities
         {
             switch (c)
             {
-                case Class.Warrior:
-                    return SVG.SvgClassWarrior;
-                case Class.Lancer:
-                    return SVG.SvgClassLancer;
-                case Class.Slayer:
-                    return SVG.SvgClassSlayer;
-                case Class.Berserker:
-                    return SVG.SvgClassBerserker;
-                case Class.Sorcerer:
-                    return SVG.SvgClassSorcerer;
-                case Class.Archer:
-                    return SVG.SvgClassArcher;
-                case Class.Priest:
-                    return SVG.SvgClassPriest;
-                case Class.Mystic:
-                    return SVG.SvgClassMystic;
-                case Class.Reaper:
-                    return SVG.SvgClassReaper;
-                case Class.Gunner:
-                    return SVG.SvgClassGunner;
-                case Class.Brawler:
-                    return SVG.SvgClassBrawler;
-                case Class.Ninja:
-                    return SVG.SvgClassNinja;
-                case Class.Valkyrie:
-                    return SVG.SvgClassValkyrie;
-                default:
-                    return SVG.SvgClassCommon;
+                case Class.Warrior: return SVG.SvgClassWarrior;
+                case Class.Lancer: return SVG.SvgClassLancer;
+                case Class.Slayer: return SVG.SvgClassSlayer;
+                case Class.Berserker: return SVG.SvgClassBerserker;
+                case Class.Sorcerer: return SVG.SvgClassSorcerer;
+                case Class.Archer: return SVG.SvgClassArcher;
+                case Class.Priest: return SVG.SvgClassPriest;
+                case Class.Mystic: return SVG.SvgClassMystic;
+                case Class.Reaper: return SVG.SvgClassReaper;
+                case Class.Gunner: return SVG.SvgClassGunner;
+                case Class.Brawler: return SVG.SvgClassBrawler;
+                case Class.Ninja: return SVG.SvgClassNinja;
+                case Class.Valkyrie: return SVG.SvgClassValkyrie;
+                default: return SVG.SvgClassCommon;
             }
         }
         public static string ClassEnumToString(Class c)
         {
             switch (c)
             {
-                case Class.Warrior:
-                    return "Warrior";
-                case Class.Lancer:
-                    return "Lancer";
-                case Class.Slayer:
-                    return "Slayer";
-                case Class.Berserker:
-                    return "Berserker";
-                case Class.Sorcerer:
-                    return "Sorcerer";
-                case Class.Archer:
-                    return "Archer";
-                case Class.Priest:
-                    return "Priest";
-                case Class.Mystic:
-                    return "Mystic";
-                case Class.Reaper:
-                    return "Reaper";
-                case Class.Gunner:
-                    return "Gunner";
-                case Class.Brawler:
-                    return "Brawler";
-                case Class.Ninja:
-                    return "Ninja";
-                case Class.Valkyrie:
-                    return "Valkyrie";
-                case Class.Common:
-                    return "All classes";
-                default:
-                    return "";
+                case Class.Warrior: return "Warrior";
+                case Class.Lancer: return "Lancer";
+                case Class.Slayer: return "Slayer";
+                case Class.Berserker: return "Berserker";
+                case Class.Sorcerer: return "Sorcerer";
+                case Class.Archer: return "Archer";
+                case Class.Priest: return "Priest";
+                case Class.Mystic: return "Mystic";
+                case Class.Reaper: return "Reaper";
+                case Class.Gunner: return "Gunner";
+                case Class.Brawler: return "Brawler";
+                case Class.Ninja: return "Ninja";
+                case Class.Valkyrie: return "Valkyrie";
+                case Class.Common: return "All classes";
+                default: return "";
             }
         }
         public static List<ChatChannelOnOff> GetEnabledChannelsList()
         {
-            var ch = EnumUtils.ListFromEnum<ChatChannel>();
-            var result = new List<ChatChannelOnOff>();
-            foreach (var c in ch)
-            {
-                result.Add(new ChatChannelOnOff(c));
-            }
-
-            return result;
+            return EnumUtils.ListFromEnum<ChatChannel>().Select(c => new ChatChannelOnOff(c)).ToList();
         }
 
 
@@ -122,8 +88,8 @@ namespace TCC.Utilities
         public static string GetEntityName(ulong pSource)
         {
             return Game.NearbyNPC.ContainsKey(pSource)
-                ? Game.NearbyNPC[pSource]
-                : Game.NearbyPlayers.ContainsKey(pSource)
+                 ? Game.NearbyNPC[pSource]
+                 : Game.NearbyPlayers.ContainsKey(pSource)
                     ? Game.NearbyPlayers[pSource]
                     : "unknown";
         }
@@ -141,30 +107,38 @@ namespace TCC.Utilities
 
         internal static RegionEnum RegionEnumFromLanguage(string language)
         {
-            if (Enum.TryParse<RegionEnum>(language, out var res))
-            {
-                return res;
-            }
-            else if (language.StartsWith("EU")) return RegionEnum.EU;
-            else if (language.StartsWith("KR")) return RegionEnum.KR;
-            else if (language == "THA" || language == "SE") return RegionEnum.THA;
-            else return RegionEnum.EU;
+            if (Enum.TryParse<RegionEnum>(language, out var res)) return res;
+            if (language.StartsWith("EU")) return RegionEnum.EU;
+            if (language.StartsWith("KR")) return RegionEnum.KR;
+            if (language == "THA" || language == "SE") return RegionEnum.THA;
+            return RegionEnum.EU;
         }
 
-        public static C CurrentClassVM<C>() where C : BaseClassLayoutVM
+        public static TClassLayoutVM CurrentClassVM<TClassLayoutVM>() where TClassLayoutVM : BaseClassLayoutVM
         {
-            return WindowManager.ViewModels.ClassVM.CurrentManager as C;
+            return WindowManager.ViewModels.ClassVM.CurrentManager as TClassLayoutVM;
         }
 
         public static Race RaceFromTemplateId(int templateId)
         {
-            return (Race) ((templateId - 10000) / 100);
+            return (Race)((templateId - 10000) / 100);
         }
 
         public static Class ClassFromModel(uint model)
         {
             var c = model % 100 - 1;
             return (Class)c;
+        }
+
+        /// <summary>
+        /// Retrieves TCC version from the executing assembly.
+        /// </summary>
+        /// <returns>TCC version as "TCC vX.Y.Z-e"</returns>
+        public static string GetTccVersion()
+        {
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-e" : "")}";
+
         }
     }
 }
