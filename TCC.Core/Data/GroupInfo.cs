@@ -10,8 +10,8 @@ namespace TCC.Data
         public bool IsRaid { get; private set; }
         public bool AmILeader => Game.Me.Name == Leader.Name;
 
-        public GroupMemberData Leader { get; private set; }
-        public List<GroupMemberData> Members { get; private set; } = new List<GroupMemberData>();
+        private GroupMemberData Leader { get; set; } = new GroupMemberData();
+        private List<GroupMemberData> Members { get; set; } = new List<GroupMemberData>();
 
         public void SetGroup(List<GroupMemberData> members, bool raid)
         {
@@ -22,7 +22,8 @@ namespace TCC.Data
         }
         public void ChangeLeader(string name)
         {
-            Members.ForEach(m => m.IsLeader = m.Name == name);
+            Members.ForEach(x => x.IsLeader = x.Name == name);
+            Leader = Members.FirstOrDefault(m => m.Name == name);
         }
         public void Remove(uint playerId, uint serverId)
         {
@@ -32,7 +33,7 @@ namespace TCC.Data
         public void Disband()
         {
             Members.Clear();
-            Leader = default;
+            Leader = new GroupMemberData();
             IsRaid = false;
             InGroup = false;
         }
@@ -40,20 +41,24 @@ namespace TCC.Data
         {
             return Members.Any(m => m.Name == name);
         }
+        public bool Has(uint pId)
+        {
+            return Members.Any(m => m.PlayerId == pId);
+        }
         public bool HasPowers(string name)
         {
-            return Has(name) && Members.FirstOrDefault(x => x.Name == name).CanInvite;
+            return Has(name) && Members.FirstOrDefault(x => x.Name == name)?.CanInvite == true;
         }
 
         public bool TryGetMember(uint playerId, uint serverId, out GroupMemberData member)
         {
             member = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
-            return !member.Equals(default(GroupMemberData));
+            return member != null;
         }
         public bool TryGetMember(string name, out GroupMemberData member)
         {
             member = Members.FirstOrDefault(m => m.Name == name);
-            return !member.Equals(default(GroupMemberData));
+            return member != null;
         }
     }
 }
