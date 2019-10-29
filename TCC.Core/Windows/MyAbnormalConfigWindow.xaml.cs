@@ -17,6 +17,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using FoglioUtils.Extensions;
+using TCC.Controls;
 using TCC.ViewModels;
 using TeraDataLite;
 
@@ -24,32 +26,39 @@ namespace TCC.Windows
 {
     public partial class MyAbnormalConfigWindow
     {
+        private static MyAbnormalConfigWindow _instance;
+        public static MyAbnormalConfigWindow Instance => (_instance ?? new MyAbnormalConfigWindow());
         private Class _currentFilter;
 
-        public MyAbnormalConfigVM DC => Dispatcher.Invoke(() => DataContext as MyAbnormalConfigVM);
+        public MyAbnormalConfigVM DC { get; private set; }
 
-        public MyAbnormalConfigWindow()
+        private DispatcherTimer _searchCooldown;
+        private string _searchText;
+
+        public MyAbnormalConfigWindow() : base(true)
         {
+            _instance = this;
             InitializeComponent();
-            Dispatcher.Invoke(() => DataContext = new MyAbnormalConfigVM());
-            DC.ShowAllChanged += OnShowAllChanged;
-            OnShowAllChanged();
+            DC = new MyAbnormalConfigVM();
+            DataContext = DC;
+            _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher);
         }
 
-        private void OnShowAllChanged()
+        private void OnSearchTriggered(object sender, EventArgs e)
         {
-            var an = AnimationFactory.CreateDoubleAnimation(200, DC.ShowAll ? .2 : 1);
-            MainGrid.BeginAnimation(OpacityProperty, an);
-            MainGrid.IsHitTestVisible = !DC.ShowAll;
+            _searchCooldown.Stop();
+            if (_searchText == null) return;
+            var view = DC.AbnormalitiesView;
+            view.Filter = o => ((MyAbnormalityVM)o).Abnormality.Name.IndexOf(_searchText, StringComparison.InvariantCultureIgnoreCase) != -1;
+            view.Refresh();
         }
 
 
         private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var txt = ((TextBox)sender).Text;
-            var view = DC.AbnormalitiesView;
-            view.Filter = o => ((MyAbnormalityVM)o).Abnormality.Name.IndexOf(txt, StringComparison.InvariantCultureIgnoreCase) != -1;
-            view.Refresh();
+            _searchText = ((TextBox)sender).Text;
+            if (_searchText == null) return;
+            _searchCooldown.Refresh();
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -57,6 +66,8 @@ namespace TCC.Windows
             App.Settings.Save();
             var an = AnimationFactory.CreateDoubleAnimation(200, 0, completed: (s, ev) =>
             {
+                DC.Dispose();
+                _instance = null;
                 Close();
                 if (App.Settings.ForceSoftwareRendering)
                     RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
@@ -103,7 +114,6 @@ namespace TCC.Windows
     public class MyClassToggle : TSPropertyChanged
     {
         private bool _selected;
-
         public bool Selected
         {
             get => _selected;
@@ -112,41 +122,22 @@ namespace TCC.Windows
                 if (_selected == value) return;
                 _selected = value;
                 N();
-
             }
         }
         public Class Class { get; }
-        public MyToggleCommand MyToggleCommand { get; set; }
+        public ICommand MyToggleCommand { get; }
         public uint AbnormalityId { get; }
         public MyClassToggle(Class c, uint abId)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Class = c;
             AbnormalityId = abId;
-            MyToggleCommand = new MyToggleCommand(this);
-        }
-    }
-
-    public class MyToggleCommand : ICommand
-    {
-        private readonly MyClassToggle _toggle;
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            _toggle.Selected = !_toggle.Selected;
-            if (_toggle.Selected) App.Settings.BuffWindowSettings.MyAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
-            else App.Settings.BuffWindowSettings.MyAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
-        }
-#pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 0067
-        public MyToggleCommand(MyClassToggle t)
-        {
-            _toggle = t;
+            MyToggleCommand = new RelayCommand(_ =>
+            {
+                Selected = !Selected;
+                if (Selected) App.Settings.BuffWindowSettings.MyAbnormals[Class].Add(AbnormalityId);
+                else App.Settings.BuffWindowSettings.MyAbnormals[Class].Remove(AbnormalityId);
+            });
         }
     }
 }

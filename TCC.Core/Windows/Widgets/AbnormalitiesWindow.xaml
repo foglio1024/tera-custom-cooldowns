@@ -1,72 +1,136 @@
 ﻿<widgets1:TccWidget x:Class="TCC.Windows.Widgets.BuffWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:w="clr-namespace:TCC.Windows"
-        xmlns:controls="clr-namespace:TCC.Controls"
-        xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
-        xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
-        mc:Ignorable="d"
-        Title="TCC buffs" 
-        MouseLeftButtonDown="Drag"
-        Style="{StaticResource BaseWindowStyle}"
-        d:DataContext="{d:DesignInstance widgets:BuffBarWindowViewModel}"
-        >
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:w="clr-namespace:TCC.Windows"
+                    xmlns:controls="clr-namespace:TCC.Controls"
+                    xmlns:vm="clr-namespace:TCC.ViewModels"
+                    xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+                    xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
+                    mc:Ignorable="d"
+                    Title="TCC buffs"
+                    MouseLeftButtonDown="Drag"
+                    Style="{StaticResource BaseWindowStyle}"
+                    d:DataContext="{d:DesignInstance widgets:AbnormalityWindowViewModel}">
+    <widgets1:TccWidget.Resources>
+        <Style x:Key="GridRowStyle" TargetType="Grid">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Direction}" Value="RightToLeft">
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </widgets1:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary" />
 
-        <FrameworkElement FlowDirection="{Binding Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top"/>
-        <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons" HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource DirectionToHorAlignConveter}}"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
+        <FrameworkElement FlowDirection="{Binding Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top" />
+        <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons"
+                                HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource DirectionToHorAlignConveter}}"
+                                DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
 
         <StackPanel Background="Transparent" Name="WindowContent" Grid.Row="1">
             <StackPanel.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}"/>
+                <ScaleTransform
+                    ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}"
+                    ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
             </StackPanel.LayoutTransform>
-            <ItemsControl Name="InfBuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Player.InfBuffs}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" 
-                                FlowDirection="{Binding Direction}" x:Name="InfBuffsPanel"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style>
-                        <Setter Value="2" Property="ContentControl.Margin"></Setter>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
+            <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ItemsControl Name="InfBuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}"
+                              ItemsSource="{Binding InfBuffsView}" Grid.Column="0">
 
-            </ItemsControl>
-            <ItemsControl Name="Buffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" ItemsSource="{Binding Player.Buffs}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style>
-                        <Setter Value="2" Property="ContentControl.Margin"></Setter>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Height="50" Width="Auto"
+                                        FlowDirection="{Binding Direction}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Value="2" Property="ContentControl.Margin" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
 
-            </ItemsControl>
-            <ItemsControl Name="Debuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}" Background="#00000000"
-                      ItemsSource="{Binding Player.Debuffs}">
+                </ItemsControl>
+                <ItemsControl Name="SpecInfBuffs" Grid.Column="1"
+                              ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}"
+                              ItemsSource="{Binding SpecInfBuffsView}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Height="50" Width="Auto"
+                                        FlowDirection="{Binding Direction}" x:Name="InfBuffsPanel" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Value="2" Property="ContentControl.Margin" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+            </Grid>
+            <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <ItemsControl Name="Buffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}"
+                              ItemsSource="{Binding BuffsView}" Grid.Column="0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="Auto"
+                                        FlowDirection="{Binding Direction}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Value="2" Property="ContentControl.Margin" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                </ItemsControl>
+                <ItemsControl Name="SpecBuffs" Grid.Column="1"
+                              ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}"
+                              ItemsSource="{Binding SpecBuffsView}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="Auto"
+                                        FlowDirection="{Binding Direction}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Value="2" Property="ContentControl.Margin" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                </ItemsControl>
+            </Grid>
+            <ItemsControl Name="Debuffs" ItemTemplateSelector="{StaticResource PlayerAbnormalityTemplateSelector}"
+                          Background="#00000000"
+                          ItemsSource="{Binding Player.Debuffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000"
+                                    FlowDirection="{Binding Direction}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
                     <Style>
-                        <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                        <Setter Value="2" Property="ContentControl.Margin" />
                     </Style>
                 </ItemsControl.ItemContainerStyle>
 

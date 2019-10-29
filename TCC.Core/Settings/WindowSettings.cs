@@ -137,7 +137,7 @@ namespace TCC.Settings
             {
                 _showAlways = value;
                 N(nameof(ShowAlways));
-                WindowManager.VisibilityManager.RefreshVisible();
+                WindowManager.VisibilityManager?.RefreshVisible();
             }
         }
         public bool AllowOffScreen
@@ -157,7 +157,7 @@ namespace TCC.Settings
             {
                 _autoDim = value;
                 N(nameof(AutoDim));
-                WindowManager.VisibilityManager.RefreshDim();
+                WindowManager.VisibilityManager?.RefreshDim();
             }
         }
         public double DimOpacity
@@ -168,7 +168,7 @@ namespace TCC.Settings
                 if (_dimOpacity == value) return;
                 _dimOpacity = value;
                 N(nameof(DimOpacity));
-                WindowManager.VisibilityManager.RefreshDim();
+                WindowManager.VisibilityManager?.RefreshDim();
             }
         }
         public double Scale
@@ -256,13 +256,13 @@ namespace TCC.Settings
 
         protected virtual void OnEnabledChanged(bool enabled)
         {
-            return; // do nothing for now
-            if (GpkNames.Count == 0) return;
-            if (!ProxyInterface.Instance.IsStubAvailable) return;
-            foreach (var gpkName in GpkNames)
-            {
-                ProxyInterface.Instance.Stub.InvokeCommand($"tcc-toggle-gpk {gpkName} {(enabled ? 0 : 1)}");
-            }
+            // do nothing for now
+            //if (GpkNames.Count == 0) return;
+            //if (!ProxyInterface.Instance.IsStubAvailable) return;
+            //foreach (var gpkName in GpkNames)
+            //{
+            //    ProxyInterface.Instance.Stub.InvokeCommand($"tcc-toggle-gpk {gpkName} {(enabled ? 0 : 1)}");
+            //}
         }
 
         protected WindowSettings(WindowSettings other) : this()
@@ -683,6 +683,7 @@ namespace TCC.Settings
         }
 
         public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
+        public List<uint> Specials { get; }
         public bool Pass(Abnormality ab) // by HQ
         {
             if (ShowAll) return true;
@@ -716,6 +717,7 @@ namespace TCC.Settings
 
             Direction = FlowDirection.RightToLeft;
             ShowAll = true;
+            Specials = new List<uint>();
             MyAbnormals = new Dictionary<Class, List<uint>>()
             {
                 {       0, new List<uint>{ 100800, 100801 }},

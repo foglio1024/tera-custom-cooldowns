@@ -10,7 +10,7 @@ namespace TCC.Data.Databases
 {
     public class AbnormalityDatabase : DatabaseBase
     {
-        public readonly Dictionary<uint, Abnormality> Abnormalities;
+        public Dictionary<uint, Abnormality> Abnormalities { get; }
         public static readonly List<uint> NoctIds = new List<uint> { 902, 910, 911, 912, 913, 916, 917, 999010000 };
         public static List<uint> BlueNoctIds = new List<uint> { 920, 921, 922 };
 
@@ -58,11 +58,13 @@ namespace TCC.Data.Databases
                     continue;
                 }
                 Abnormalities[id] = ab;
+                if(App.Settings.BuffWindowSettings.Specials.Contains(id) && ab.Type == AbnormalityType.Buff) ab.Type = AbnormalityType.Special;
             }
 
             var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Buff);
             foglioAura.SetInfo("Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
             foglioAura.SetIcon("icon_items.bloodchipa_tex");
+            foglioAura.Type = AbnormalityType.Special;
             Abnormalities[foglioAura.Id] = foglioAura;
 
             var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Buff);

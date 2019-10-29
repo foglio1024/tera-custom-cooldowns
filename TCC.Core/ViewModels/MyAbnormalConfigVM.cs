@@ -12,18 +12,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
+using FoglioUtils.Extensions;
 using TCC.Data.Abnormalities;
+using TCC.Utilities;
 using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class MyAbnormalConfigVM : TSPropertyChanged
+    public class MyAbnormalConfigVM : TSPropertyChanged, IDisposable
     {
 
         public event Action ShowAllChanged;
 
-        public TSObservableCollection<MyAbnormalityVM> MyAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
+        private TSObservableCollection<MyAbnormalityVM> _myAbnormals;
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll
@@ -50,20 +51,20 @@ namespace TCC.ViewModels
         public MyAbnormalConfigVM()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            MyAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
-            foreach (var abnormality in Abnormalities)
+            _myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
+            foreach (var abnormality in Game.DB.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && AbnormalityUtils.Pass(a)))
             {
                 var abVM = new MyAbnormalityVM(abnormality);
 
-                MyAbnormals.Add(abVM);
+                _myAbnormals.Add(abVM);
             }
-            AbnormalitiesView = new CollectionViewSource { Source = MyAbnormals }.View;
-            AbnormalitiesView.CurrentChanged += OnAbnormalitiesViewOnCurrentChanged;
-            AbnormalitiesView.Filter = null;
+
+            AbnormalitiesView = CollectionViewUtils.InitView(_myAbnormals);
         }
-        //to keep view referenced
-        private void OnAbnormalitiesViewOnCurrentChanged(object s, EventArgs ev)
+
+        public void Dispose()
         {
+            AbnormalitiesView.Free();
         }
     }
 }
