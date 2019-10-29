@@ -1,19 +1,16 @@
-﻿using System;
+﻿using FoglioUtils;
+using FoglioUtils.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using FoglioUtils;
-using FoglioUtils.Extensions;
-using TCC;
-using TCC.Converters;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
 using TCC.Data.Databases;
-using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
@@ -22,16 +19,12 @@ using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
 using TeraDataLite;
-using TeraPacketParser;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
 using Server = TCC.TeraCommon.Game.Server;
 
 namespace TCC
 {
-
-
-
     public static class Game
     {
         private static ulong _foglioEid;
@@ -166,7 +159,7 @@ namespace TCC
             {
                 if (!App.Loading)
                 {
-                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC",
+                    Log.N("TCC",
                         $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.",
                         NotificationType.Warning, 5000);
                     ChatWindowManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
@@ -308,7 +301,6 @@ namespace TCC
             Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToStringEx()}", "S_FIN_INTER_PARTY_MATCH.txt");
         }
 
-
         private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
             if (IsMe(m.Target)) return;
@@ -355,17 +347,12 @@ namespace TCC
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
         {
             if (!x.Online) return;
-            const string opcodeName = "SMT_FRIEND_IS_CONNECTED";
-            if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-            SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{x.Name}", "SMT_FRIEND_IS_CONNECTED");
         }
 
         private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            var parameters = $"@0\vAchievementName\v@achievement:{x.AchievementId}";
-            const string opcode = "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE";
-            if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m)) return;
-            SystemMessagesProcessor.AnalyzeMessage(parameters, m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vAchievementName\v@achievement:{x.AchievementId}", "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE");
         }
 
         private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
@@ -374,15 +361,17 @@ namespace TCC
             {
                 try
                 {
-                    var msg = x.SysMessage.Split('\v');
-                    var opcode = UInt16.Parse(msg[0].Substring(1));
-                    var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+                    //var msg = x.SysMessage.Split('\v');
+                    //var opcode = ushort.Parse(msg[0].Substring(1));
+                    //var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
 
-                    if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-                    ChatWindowManager.Instance.AddSystemMessage(x.SysMessage, m);
+                    //if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
+                    SystemMessagesProcessor.AnalyzeMessage(x.SysMessage);
+                    //ChatWindowManager.Instance.AddSystemMessage(x.SysMessage, m);
                 }
                 catch (Exception)
                 {
+                    Log.All($"Failed to parse sysmsg: {x.SysMessage}");
                     Log.F($"Failed to parse sysmsg: {x.SysMessage}");
                 }
             });
@@ -394,16 +383,19 @@ namespace TCC
             {
                 try
                 {
-                    var msg = x.Message.Split('\v');
-                    var opcode = UInt16.Parse(msg[0].Substring(1));
-                    var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+                    SystemMessagesProcessor.AnalyzeMessage(x.Message);
 
-                    if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-                    SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
+                    //var msg = x.Message.Split('\v');
+                    //var opcode = UInt16.Parse(msg[0].Substring(1));
+                    //var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+
+                    //if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
+                    //SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
 
                 }
                 catch (Exception)
                 {
+                    Log.All($"Failed to parse system message: {x.Message}");
                     Log.F($"Failed to parse system message: {x.Message}");
                 }
             });
@@ -451,10 +443,8 @@ namespace TCC
                     if (CivilUnrestZone) break;
                     _foglioEid = p.EntityId;
                     var ab = DB.AbnormalityDatabase.Abnormalities[10241024];
-                    Me.UpdateAbnormality(ab, Int32.MaxValue, 1);
-                    var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
-                    var msg = $"@0\vAbnormalName\v{ab.Name}";
-                    SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
+                    Me.UpdateAbnormality(ab, int.MaxValue, 1);
+                    SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
                     break;
             }
 
@@ -478,9 +468,7 @@ namespace TCC
                 if (!App.FI) return;
                 var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
                 Me.UpdateAbnormality(ab, Int32.MaxValue, 1);
-                var sysMsg = DB.SystemMessagesDatabase.Messages["SMT_BATTLE_BUFF_DEBUFF"];
-                var msg = $"@0\vAbnormalName\v{ab.Name}";
-                SystemMessagesProcessor.AnalyzeMessage(msg, sysMsg, "SMT_BATTLE_BUFF_DEBUFF");
+                SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
             });
         }
 
@@ -512,9 +500,7 @@ namespace TCC
 
         private static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)
         {
-            const string opcode = "SMT_FIELD_EVENT_LEAVE";
-            DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
 
             if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
                 !App.Settings.FpsAtGuardian) return;
@@ -523,9 +509,7 @@ namespace TCC
 
         private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
         {
-            const string opcode = "SMT_FIELD_EVENT_ENTER";
-            DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage("", m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_ENTER");
 
             if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
                 !App.Settings.FpsAtGuardian) return;
@@ -655,18 +639,14 @@ namespace TCC
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
 
-        private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF obj)
+        private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF m)
         {
-            const string opcode = "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED";
-            DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Guild.NameOf(obj.PlayerId)}", m, opcode);
-            Guild.SetMaster(obj.PlayerId, Guild.NameOf(obj.PlayerId));
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Guild.NameOf(m.PlayerId)}", "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED");
+            Guild.SetMaster(m.PlayerId, Guild.NameOf(m.PlayerId));
         }
 
         private static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
-            const string opcode = "SMT_GQUEST_URGENT_NOTIFY";
-            DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             if (p.Type != S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce) return;
 
             var questName = p.QuestId == 0
@@ -674,30 +654,24 @@ namespace TCC
                 : DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
             var zone = DB.MonsterDatabase.GetZoneName(p.ZoneId);
             var name = DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
-            var msg = $"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}";
-            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}", "SMT_GQUEST_URGENT_NOTIFY");
         }
 
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = FriendList.FirstOrDefault(f => f.PlayerId == x.PlayerId);
             if (friend.Equals(default(FriendData))) return;
-            const string opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = DB.RegionsDatabase.Names[
-                    DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+                areaName = DB.RegionsDatabase.Names[DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
             }
             catch (Exception)
             {
                 // ignored
             }
 
-            var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
-            DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-
-            SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}\vAreaName\v{areaName}", "SMT_FRIEND_WALK_INTO_SAME_AREA");
         }
 
         private static void OnFriendList(S_FRIEND_LIST m)

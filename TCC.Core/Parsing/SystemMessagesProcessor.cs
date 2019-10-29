@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms.VisualStyles;
 using FoglioUtils.Extensions;
 using HtmlAgilityPack;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Data.Databases;
 using TCC.Utils;
 using TCC.ViewModels;
 using VMs = TCC.WindowManager.ViewModels;
@@ -147,14 +149,27 @@ namespace TCC.Parsing
                 }
             }
         }
-        public static void AnalyzeMessage(string parameters, SystemMessageData template, string opcodeName)
+
+        public static void AnalyzeMessage(string fullParameters)
+        {
+            var opcodeStr = fullParameters.Split('\v')[0]; // "@opcode \v parameters"
+            var opcode = ushort.Parse(opcodeStr.Substring(1));
+            var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+            AnalyzeMessage(fullParameters, opcodeName);
+        }
+        public static void AnalyzeMessage(string parameters, string opcodeName)
+        {
+            if (!Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var template)) return;
+            AnalyzeMessage(parameters, template, opcodeName);
+        }
+
+        private static void AnalyzeMessage(string parameters, SystemMessageData template, string opcodeName)
         {
             if (!Pass(opcodeName)) return;
 
-            if (!Process(parameters, template, opcodeName))
-            {
-                ChatWindowManager.Instance.AddSystemMessage(parameters, template);
-            }
+            if (Process(parameters, template, opcodeName)) return;
+
+            ChatWindowManager.Instance.AddSystemMessage(parameters, template);
         }
 
         private static bool Pass(string opcodeName)
@@ -165,13 +180,11 @@ namespace TCC.Parsing
         private static void HandleMaxEnchantSucceed(string parameters, SystemMessageData template)
         {
             //"@464\vUserName\vHeve\vItemName\v@item:89607?dbid:327641239?enchantCount:11"
-            var author = ChatUtils.SplitDirectives(parameters)["UserName"];
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template, author);
+            ChatWindowManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Enchant, ChatUtils.SplitDirectives(parameters)["UserName"]);
         }
-        private static void HandleFriendLogin(string friendName, SystemMessageData template)
+        private static void HandleFriendLogin(string parameters, SystemMessageData template)
         {
-            var parameters = "@0\vUserName\v" + friendName;
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, friendName);
+            ChatWindowManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)["UserName"]);
         }
         private static void HandleClearedGuardianQuestsMessage(string parameters, SystemMessageData template)
         {
