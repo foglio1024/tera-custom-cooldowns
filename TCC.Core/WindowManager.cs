@@ -22,7 +22,6 @@ namespace TCC
         public static event Action RepositionRequestedEvent;
         public static event Action ResetToCenterEvent;
         public static event Action MakeGlobalEvent;
-        public static event Action<Size> ApplyScreenCorrectionEvent;
         public static event Action DisposeEvent;
 
         public static TccTrayIcon TrayIcon { get; private set; }
@@ -40,7 +39,7 @@ namespace TCC
             public static CooldownWindowViewModel CooldownsVM { get; set; }
             public static CharacterWindowViewModel CharacterVM { get; set; }
             public static NpcWindowViewModel NpcVM { get; set; }
-            public static BuffBarWindowViewModel AbnormalVM { get; set; }
+            public static AbnormalityWindowViewModel AbnormalVM { get; set; }
             public static ClassWindowViewModel ClassVM { get; set; }
             public static NotificationAreaViewModel NotificationAreaVM { get; set; }
             public static PlayerMenuViewModel PlayerMenuVM { get; set; }
@@ -78,6 +77,8 @@ namespace TCC
 
         public static async Task Init()
         {
+            VisibilityManager = new VisibilityManager();
+
             FocusManager.Init();
 
             await LoadWindows();
@@ -95,28 +96,9 @@ namespace TCC
 
 
 
-        private static Size GetScreenCorrection()
-        {
-            var wFac = App.Settings.LastScreenSize.Width / ScreenSize.Width;
-            var hFac = App.Settings.LastScreenSize.Height / ScreenSize.Height;
-            return new Size(wFac, hFac);
-        }
-
-        private static void UpdateScreenCorrection()
-        {
-            //if (ScreenSize.IsEqual(App.Settings.LastScreenSize)) return;
-            //ApplyScreenCorrection(GetScreenCorrection());
-            //App.Settings.LastScreenSize = ScreenSize;
-            //if (!App.Loading) App.Settings.Save();
-        }
-
-
-
 
         private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
         {
-            //ScreenSize = new Size(SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
-            UpdateScreenCorrection();
             ReloadPositions();
         }
 
@@ -166,7 +148,7 @@ namespace TCC
             BossWindow = await b5.GetWindow();
             ViewModels.NpcVM = await b5.GetViewModel();
 
-            var b6 = new TccWidgetBuilder<BuffWindow, BuffBarWindowViewModel>(App.Settings.BuffWindowSettings);
+            var b6 = new TccWidgetBuilder<BuffWindow, AbnormalityWindowViewModel>(App.Settings.BuffWindowSettings);
             BuffWindow = await b6.GetWindow();
             ViewModels.AbnormalVM = await b6.GetViewModel();
 

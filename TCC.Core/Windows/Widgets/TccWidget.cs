@@ -443,7 +443,6 @@ namespace TCC.Windows.Widgets
                 WindowManager.ResetToCenterEvent -= ResetToCenter;
                 WindowManager.DisposeEvent -= CloseWindowSafe;
                 WindowManager.MakeGlobalEvent -= WindowSettings.MakePositionsGlobal;
-                WindowManager.ApplyScreenCorrectionEvent -= WindowSettings.ApplyScreenCorrection;
                 FocusManager.FocusTick -= OnFocusTick;
                 WindowSettings.EnabledChanged -= OnEnabledChanged;
                 WindowSettings.ClickThruModeChanged -= OnClickThruModeChanged;
