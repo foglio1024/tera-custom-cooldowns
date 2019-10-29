@@ -64,13 +64,9 @@ namespace TCC.Windows.Widgets
             if (!(sender is FrameworkElement s)) return;
             if (!(s.DataContext is HeaderedItemViewModel dc)) return;
 
-            // invoked on main thread because TabData is created there by JSON settings deserialization
-            //App.BaseDispatcher.Invoke(() =>
-            //{
-                var sw = new ChatSettingsWindow((Tab) dc.Content);
-                sw.Show();
-                sw.Activate();
-            //});
+            var sw = new ChatSettingsWindow((Tab) dc.Content);
+            sw.Show();
+            sw.Activate();
         }
         private void OnIsDraggingChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
@@ -78,17 +74,18 @@ namespace TCC.Windows.Widgets
         }
         private void OnWindowMouseLeave(object sender, MouseEventArgs e)
         {
+            VM.MouseOver = false;
             VM.RefreshHideTimer();
             if (e.LeftButton == MouseButtonState.Pressed)
                 UpdateSettings();
         }
         private void OnWindowMouseEnter(object sender, MouseEventArgs e)
         {
+            VM.MouseOver = true;
             VM.StopHideTimer();
         }
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
-            //SettingsPopup.DataContext = DataContext;
             SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
         }
 
@@ -123,7 +120,6 @@ namespace TCC.Windows.Widgets
             }
             else
             {
-
                 _bottom = false;
             }
             ChatWindowManager.Instance.SetPaused(!_bottom || !ChatWindowManager.Instance.IsQueueEmpty);
