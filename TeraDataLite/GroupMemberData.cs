@@ -1,6 +1,6 @@
 ﻿namespace TeraDataLite
 {
-    public struct GroupMemberData
+    public class GroupMemberData
     {
         public uint PlayerId { get; set; }
         public Class Class { get; set; }
