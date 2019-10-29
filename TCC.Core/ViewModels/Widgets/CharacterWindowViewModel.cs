@@ -14,7 +14,6 @@ namespace TCC.ViewModels.Widgets
     public class CharacterWindowViewModel : TccWindowViewModel
     {
         public Player Player => Game.Me;
-        public bool CompactMode => App.Settings.CharacterWindowSettings.CompactMode;
         public bool ShowRe =>
             (!App.Settings.ClassWindowSettings.Visible || !App.Settings.ClassWindowSettings.Enabled) &&
             (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
@@ -29,7 +28,6 @@ namespace TCC.ViewModels.Widgets
             Game.Me.PropertyChanged += MePropertyChanged;
             App.Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
             App.Settings.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
-            ((CharacterWindowSettings)settings).CompactModeChanged += InvokeCompactModeChanged;
         }
 
         protected override void InstallHooks()
@@ -141,17 +139,6 @@ namespace TCC.ViewModels.Widgets
             if (e.PropertyName != nameof(Data.Pc.Player.Class)) return;
             N(nameof(ShowRe));
             N(nameof(ShowElements));
-        }
-
-        public void InvokeCompactModeChanged()
-        {
-            N(nameof(CompactMode));
-            Dispatcher.InvokeAsync(() =>
-            {
-                WindowManager.CharacterWindow.Left = App.Settings.CharacterWindowSettings.CompactMode
-                    ? WindowManager.CharacterWindow.Left + 175
-                    : WindowManager.CharacterWindow.Left - 175;
-            }, DispatcherPriority.Background);
         }
     }
 }
