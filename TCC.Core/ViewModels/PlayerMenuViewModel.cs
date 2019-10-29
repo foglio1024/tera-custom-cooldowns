@@ -377,6 +377,8 @@ namespace TCC.ViewModels
 
         private void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
+            if (!App.Settings.EnablePlayerMenu) return;
+
             Dispatcher.InvokeAsync(() =>
             {
                 Game.DB.MonsterDatabase.TryGetMonster(x.Model, 0, out var m);
