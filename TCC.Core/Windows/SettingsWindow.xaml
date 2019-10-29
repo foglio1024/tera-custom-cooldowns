@@ -340,7 +340,7 @@
                 Grid.RowSpan="2"
                 Background="{StaticResource RevampBackgroundBrush}"
                 BorderThickness="1"
-                Opacity=".7"
+                Opacity=".8"
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 HorizontalAlignment="Stretch" />
         <!-- Title bar -->
@@ -383,7 +383,6 @@
                     BorderThickness="1"
                     Opacity=".5"
                     Margin="3 0 3 3"
-
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch" />
             <TabControl Background="Transparent"
@@ -1688,6 +1687,7 @@
 
                             <settings:HotkeySetting SettingName="Settings" Value="{Binding SettingsHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
                             <settings:HotkeySetting SettingName="Configure skills" Value="{Binding SkillSettingsHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
+                            <settings:HotkeySetting SettingName="Configure my buffs" Value="{Binding AbnormalSettingsHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
                             <settings:HotkeySetting SettingName="Dashboard" Value="{Binding DashboardHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
                             <settings:HotkeySetting SettingName="Toggle clickable chat" Value="{Binding ForceClickableChatHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
                             <settings:HotkeySetting SettingName="LFG window" Value="{Binding LfgHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
