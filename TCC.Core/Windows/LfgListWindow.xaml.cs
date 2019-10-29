@@ -22,7 +22,7 @@ namespace TCC.Windows
 
         public ICommand HideWindowCommand { get; }
 
-        public LfgListWindow(LfgListViewModel vm)
+        public LfgListWindow(LfgListViewModel vm) : base(false)
         {
             InitializeComponent();
             DataContext = vm;

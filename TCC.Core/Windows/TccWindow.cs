@@ -14,14 +14,16 @@ namespace TCC.Windows
         public event Action Hidden;
         public event Action Showed;
 
+        private readonly bool _canClose;
         private readonly DoubleAnimation _showAnim;
         private readonly DoubleAnimation _hideAnim;
 
         public IntPtr Handle { get; private set; }
 
 
-        public TccWindow()
+        public TccWindow(bool canClose)
         {
+            _canClose = canClose;
             Closing += OnClosing;
             Loaded += OnLoaded;
             _showAnim = AnimationFactory.CreateDoubleAnimation(150, 1);
@@ -55,6 +57,11 @@ namespace TCC.Windows
         }
         protected virtual void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (_canClose)
+            {
+
+                return;
+            }
             e.Cancel = true;
             HideWindow();
         }

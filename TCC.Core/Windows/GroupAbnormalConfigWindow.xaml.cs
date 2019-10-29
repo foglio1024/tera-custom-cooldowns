@@ -18,7 +18,7 @@ namespace TCC.Windows
 
         public GroupConfigVM DC { get; private set; }
 
-        public GroupAbnormalConfigWindow()
+        public GroupAbnormalConfigWindow() : base(true)
         {
             InitializeComponent();
             Dispatcher?.Invoke(() => DataContext = new GroupConfigVM());

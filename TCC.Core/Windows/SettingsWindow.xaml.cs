@@ -15,7 +15,7 @@ namespace TCC.Windows
         private readonly DoubleAnimation _bigPathFadeAnim;
 
 
-        public SettingsWindow()
+        public SettingsWindow() : base(false)
         {
             DataContext = new SettingsWindowViewModel();
             InitializeComponent();

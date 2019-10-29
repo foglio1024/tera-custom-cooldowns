@@ -14,7 +14,7 @@ namespace TCC.Windows
     {
         private DashboardViewModel VM { get; }
 
-        public Dashboard(DashboardViewModel vm)
+        public Dashboard(DashboardViewModel vm) : base(false)
         {
             InitializeComponent();
             DataContext = vm;
