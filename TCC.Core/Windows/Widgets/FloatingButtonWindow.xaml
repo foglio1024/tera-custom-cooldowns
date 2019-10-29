@@ -60,18 +60,16 @@
                     Height="20"
                     Background="{StaticResource TccRedGradientBrush}"
                     CornerRadius="3"
+                    UseLayoutRounding="True"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     Margin="0 0 -42 0"
                     RenderTransformOrigin=".5,.5"
                     Visibility="{Binding PendingNotifications, Converter={StaticResource BoolToVisibleHidden}}"
                     ToolTip="There are events starting in few minutes.">
-                <Border.Effect>
-                    <DropShadowEffect Opacity=".8" ShadowDepth="1" BlurRadius="3" />
-                </Border.Effect>
                 <Border.RenderTransform>
                     <ScaleTransform />
                 </Border.RenderTransform>
-                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="2 0"
+                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="3 0"
                            Text="{Binding PendingNotificationsAmount}" />
 
             </Border>
