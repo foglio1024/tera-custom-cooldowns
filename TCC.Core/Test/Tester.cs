@@ -158,10 +158,9 @@ namespace TCC.Test
 
         internal static void AddFakeSystemMessage(string opcodeNname, params string[] p)
         {
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeNname, out var sysmsg);
             var srvMsg = $"@0";
             p.ToList().ForEach(par => srvMsg += $"\v{par}");
-            SystemMessagesProcessor.AnalyzeMessage(srvMsg,sysmsg,opcodeNname);
+            SystemMessagesProcessor.AnalyzeMessage(srvMsg, opcodeNname);
             //ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
         }
 
@@ -204,63 +203,63 @@ namespace TCC.Test
             };
             Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.GroupVM.AddOrUpdateMember(ut));
         }
-        public static void ProfileThreadsUsage()
-        {
-            var t          = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
-            var dispatchers = new List<Dispatcher>
-            {
-                 App.BaseDispatcher                                ,
-                 WindowManager.BossWindow.Dispatcher               ,
-                 WindowManager.BuffWindow.Dispatcher               ,
-                 WindowManager.CharacterWindow.Dispatcher          ,
-                 WindowManager.GroupWindow.Dispatcher              ,
-                 WindowManager.CooldownWindow.Dispatcher           ,
-                 WindowManager.ClassWindow.Dispatcher              ,
-            };
-            var threadIdToName = new ConcurrentDictionary<int, string>();
-            foreach (var disp in dispatchers)
-            {
-                disp.Invoke(() =>
-                {
-                    var myId = MiscUtils.GetCurrentThreadId();
-                    threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
-                });
-            }
-            //threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
+        //public static void ProfileThreadsUsage()
+        //{
+        //    var t          = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+        //    var dispatchers = new List<Dispatcher>
+        //    {
+        //         App.BaseDispatcher                                ,
+        //         WindowManager.BossWindow.Dispatcher               ,
+        //         WindowManager.BuffWindow.Dispatcher               ,
+        //         WindowManager.CharacterWindow.Dispatcher          ,
+        //         WindowManager.GroupWindow.Dispatcher              ,
+        //         WindowManager.CooldownWindow.Dispatcher           ,
+        //         WindowManager.ClassWindow.Dispatcher              ,
+        //    };
+        //    var threadIdToName = new ConcurrentDictionary<int, string>();
+        //    foreach (var disp in dispatchers)
+        //    {
+        //        disp.Invoke(() =>
+        //        {
+        //            var myId = MiscUtils.GetCurrentThreadId();
+        //            threadIdToName[myId] = disp.Thread.ManagedThreadId == 1 ? "Main" : disp.Thread.Name;
+        //        });
+        //    }
+        //    //threadIdToName[PacketAnalyzer.AnalysisThreadId] = PacketAnalyzer.AnalysisThread.Name;
 
-            var stats = new Dictionary<int, ThreadInfo>();
-            t.Tick += (_, __) =>
-            {
-                var p = Process.GetCurrentProcess();
-                foreach (ProcessThread th in p.Threads)
-                {
-                    if (threadIdToName.ContainsKey(th.Id))
-                    {
-                        if (!stats.ContainsKey(th.Id))
-                        {
-                            stats.Add(th.Id, new ThreadInfo
-                            {
-                                Name = threadIdToName[th.Id],
-                                Id = th.Id,
-                                TotalTime = th.TotalProcessorTime.TotalMilliseconds,
-                                Priority = threadIdToName[th.Id] == "Anls"
-                                    ? PacketAnalyzer.AnalysisThread.Priority
-                                    : dispatchers.FirstOrDefault(d => d.Thread.Name == threadIdToName[th.Id]).Thread
-                                        .Priority
-                            });
-                        }
-                        else stats[th.Id].TotalTime = th.TotalProcessorTime.TotalMilliseconds;
-                    }
-                }
-                foreach (var item in stats)
-                {
-                    Console.WriteLine($"{threadIdToName[item.Key]} ({(int)item.Value.Priority}):\t\t{item.Value.TotalTime:0}\t\t{item.Value.DiffTime / 1000:P}\t");
-                }
-                Console.WriteLine("----------------------------------");
-            };
-            _t.Start();
+        //    var stats = new Dictionary<int, ThreadInfo>();
+        //    t.Tick += (_, __) =>
+        //    {
+        //        var p = Process.GetCurrentProcess();
+        //        foreach (ProcessThread th in p.Threads)
+        //        {
+        //            if (threadIdToName.ContainsKey(th.Id))
+        //            {
+        //                if (!stats.ContainsKey(th.Id))
+        //                {
+        //                    stats.Add(th.Id, new ThreadInfo
+        //                    {
+        //                        Name = threadIdToName[th.Id],
+        //                        Id = th.Id,
+        //                        TotalTime = th.TotalProcessorTime.TotalMilliseconds,
+        //                        Priority = threadIdToName[th.Id] == "Anls"
+        //                            ? PacketAnalyzer.AnalysisThread.Priority
+        //                            : dispatchers.FirstOrDefault(d => d.Thread.Name == threadIdToName[th.Id]).Thread
+        //                                .Priority
+        //                    });
+        //                }
+        //                else stats[th.Id].TotalTime = th.TotalProcessorTime.TotalMilliseconds;
+        //            }
+        //        }
+        //        foreach (var item in stats)
+        //        {
+        //            Console.WriteLine($"{threadIdToName[item.Key]} ({(int)item.Value.Priority}):\t\t{item.Value.TotalTime:0}\t\t{item.Value.DiffTime / 1000:P}\t");
+        //        }
+        //        Console.WriteLine("----------------------------------");
+        //    };
+        //    _t.Start();
 
-        }
+        //}
         public static void TestWebhook()
         {
             var url = "";
@@ -400,31 +399,6 @@ namespace TCC.Test
             _t.Stop();
         }
 
-        public static void AddMessages(int count)
-        {
-            var t = new Thread(() =>
-            {
-                for (var i = 0; i < (count == 0 ? int.MaxValue : count); i++)
-                {
-                    if (i > 1000)
-                    {
-                        i = 0;
-                        ChatWindowManager.Instance.GetDispatcher().InvokeAsync(() =>
-                        {
-                            foreach (var chatMessage in ChatWindowManager.Instance.ChatMessages)
-                            {
-                                chatMessage.Dispose();
-                            }
-                            ChatWindowManager.Instance.ChatMessages.Clear();
-                        });
-                    }
-                    ChatWindowManager.Instance.AddDamageReceivedMessage(1, 2, int.MaxValue - i, int.MaxValue);
-
-                    Thread.Sleep(1);
-                }
-            });
-            t.Start();
-        }
 
         public static void CheckDelegateSubs()
         {
