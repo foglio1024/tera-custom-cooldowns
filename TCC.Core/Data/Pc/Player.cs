@@ -254,7 +254,7 @@ namespace TCC.Data.Pc
                 _coins = value;
                 if (_coins == _maxCoins)
                 {
-                    WindowManager.ViewModels.NotificationAreaVM.Enqueue("TCC", "Adventure coins maxed!", NotificationType.Success);
+                    Log.N("TCC", "Adventure coins maxed!", NotificationType.Success);
                     ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
                 }
 
