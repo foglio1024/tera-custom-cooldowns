@@ -286,7 +286,6 @@ namespace TCC.ViewModels.Widgets
             var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (user == null)
             {
-                
                 Members.Add(new User(p) {Visible =  visible});
                 SendAddMessage(p.Name);
                 return;
@@ -303,12 +302,9 @@ namespace TCC.ViewModels.Widgets
             //}
         }
 
-        private void SendOnlineMessage(string name, bool newVal)
+        private static void SendOnlineMessage(string name, bool newVal)
         {
-            var opcode = newVal ? "TCC_PARTY_MEMBER_LOGON" : "TCC_PARTY_MEMBER_LOGOUT";
-            var msg = "@0\vUserName\v" + name;
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{name}", newVal ? "TCC_PARTY_MEMBER_LOGON" : "TCC_PARTY_MEMBER_LOGOUT");
         }
 
         private void SendAddMessage(string name)
@@ -325,25 +321,12 @@ namespace TCC.ViewModels.Widgets
                 opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage(msg, opcode);
         }
         private void SendDeathMessage(string name)
         {
-            string msg;
-            string opcode;
-            if (Raid)
-            {
-                msg = "@0\vPartyPlayerName\v" + name;
-                opcode = "SMT_BATTLE_PARTY_DIE";
-            }
-            else
-            {
-                opcode = "SMT_BATTLE_PARTY_DIE";
-                msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
-            }
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+            var msg = Raid ? $"@0\vPartyPlayerName\v{name}" : $"@0\vPartyPlayerName\v{name}\vparty\vparty";
+            SystemMessagesProcessor.AnalyzeMessage(msg, "SMT_BATTLE_PARTY_DIE");
             //if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(msg, opcode);
         }
         private void SendLeaveMessage(string name)
@@ -352,16 +335,15 @@ namespace TCC.ViewModels.Widgets
             string opcode;
             if (Raid)
             {
-                msg = "@0\vPartyPlayerName\v" + name;
                 opcode = "SMT_LEAVE_UNIONPARTY_PARTYPLAYER";
+                msg = "@0\vPartyPlayerName\v" + name;
             }
             else
             {
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
-            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+            SystemMessagesProcessor.AnalyzeMessage(msg, opcode);
 
         }
         private void RemoveMember(uint playerId, uint serverId, bool kick = false)
