@@ -43,6 +43,7 @@ namespace TCC.ViewModels.Widgets
         private DispatcherTimer _hideTimer;
         private ChatWindowSettings _windowSettings;
         private bool _collapsed;
+        private bool _mouseOver;
         private Tab _currentTab;
 
         public bool Paused
@@ -78,6 +79,16 @@ namespace TCC.ViewModels.Widgets
                     WindowSettings.Y += 84;
                     ForceSizePosUpdateEvent?.Invoke();
                 }
+                N();
+            }
+        }
+        public bool MouseOver
+        {
+            get => _mouseOver;
+            set
+            {
+                if (_mouseOver == value) return;
+                _mouseOver = value;
                 N();
             }
         }
@@ -185,6 +196,8 @@ namespace TCC.ViewModels.Widgets
                 if (!Visible) Visible = true;
                 return;
             }
+
+            if (MouseOver) return;
             Visible = false;
             _hideTimer.Stop();
         }
