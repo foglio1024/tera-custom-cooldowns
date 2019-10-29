@@ -90,9 +90,10 @@ namespace TCC.ViewModels
             }
         }
         public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == Game.Me.PlayerId
-                                                                                              || listing.LeaderName == Game.Me.Name
-                                                                                              || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
-                                                                                              || WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
+                                                                                          || listing.LeaderName == Game.Me.Name
+                                                                                          || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
+                                                                                          || Game.Group.Has(listing.LeaderId)));
+                                                                                        //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
 
         private void NotifyMyLfg()
         {
@@ -105,10 +106,12 @@ namespace TCC.ViewModels
             }
             MyLfg?.UpdateIsMyLfg();
         }
-        public bool AmILeader => WindowManager.ViewModels.GroupVM.AmILeader;
+
+        public bool AmILeader => Game.Group.AmILeader;
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
                                                                    || listing.LeaderId == Game.Me.PlayerId
-                                                                   || WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+                                                                   || Game.Group.Has(listing.LeaderId)
+                                                                   //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
 
 
@@ -145,11 +148,10 @@ namespace TCC.ViewModels
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
             Listings = new TSObservableCollection<Listing>(Dispatcher);
-            ListingsView = CollectionViewUtils.InitLiveView(Listings, null, new string[] { }, new SortDescription[] { });
+            ListingsView = CollectionViewUtils.InitLiveView(Listings);
             SortCommand = new SortCommand(ListingsView);
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
-            if (WindowManager.ViewModels.GroupVM != null) WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupWindowVmPropertyChanged;
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
@@ -303,11 +305,6 @@ namespace TCC.ViewModels
             }, DispatcherPriority.Background);
         }
 
-        private void OnGroupWindowVmPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(GroupWindowViewModel.AmILeader)) N(nameof(AmILeader));
-        }
-
         private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             //NotifyMyLfg();
@@ -399,6 +396,7 @@ namespace TCC.ViewModels
                 if (target != null) Listings.Remove(target);
             });
         }
+
         protected override void InstallHooks()
         {
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
@@ -410,8 +408,9 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_BAN_PARTY>(OnBanParty);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Hook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
-        }
+            PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
 
+        }
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
@@ -423,7 +422,10 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Unhook<S_BAN_PARTY>(OnBanParty);
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Unhook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
+            PacketAnalyzer.Processor.Unhook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
+
         }
+
 
         private void OnLogin(S_LOGIN m)
         {
@@ -550,6 +552,11 @@ namespace TCC.ViewModels
             NotifyMyLfg();
             WindowManager.LfgListWindow.ShowWindow();
         }
+        private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER obj)
+        {
+            N(nameof(AmILeader));
+        }
+
         private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
             ForceStopPublicize();
