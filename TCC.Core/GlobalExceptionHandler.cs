@@ -11,6 +11,7 @@ using FoglioUtils.Extensions;
 using FoglioUtils.WinAPI;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
