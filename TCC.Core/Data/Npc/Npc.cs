@@ -410,10 +410,10 @@ namespace TCC.Data.NPCs
             if (ZoneId == 450 && TemplateId == 1003) EnragePattern = new EnragePattern((long)MaxHP, 600000000, 72);
 
             //ghilli
-            if (TemplateId == 81301 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 65, Int32.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81301 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 65, int.MaxValue) { StaysEnraged = true };
             if (TemplateId == 81312 && ZoneId == 713) EnragePattern = new EnragePattern(0, 0);
-            if (TemplateId == 81398 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, Int32.MaxValue) { StaysEnraged = true };
-            if (TemplateId == 81399 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, Int32.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81398 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81399 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
 
 
             if (ZoneId == 620 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 420000000, 36);
