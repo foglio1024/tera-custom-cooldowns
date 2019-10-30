@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms.VisualStyles;
 using FoglioUtils.Extensions;
 using HtmlAgilityPack;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Data.Databases;
 using TCC.Utils;
 using TCC.ViewModels;
 using VMs = TCC.WindowManager.ViewModels;

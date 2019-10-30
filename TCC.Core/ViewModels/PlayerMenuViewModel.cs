@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
 using FoglioUtils;
-using FoglioUtils.WinAPI;
 using TCC.Controls;
 using TCC.Controls.Chat;
 using TCC.Interop.Proxy;

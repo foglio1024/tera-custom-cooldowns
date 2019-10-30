@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data.Pc;
-using TCC.Interop.Proxy;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 

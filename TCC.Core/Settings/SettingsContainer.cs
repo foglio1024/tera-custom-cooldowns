@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using FoglioUtils;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;
 

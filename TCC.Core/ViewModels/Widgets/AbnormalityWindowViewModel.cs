@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Data;
-using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
 using TCC.Settings;
 using TCC.Utils;

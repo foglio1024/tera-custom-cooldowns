@@ -10,10 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
 using System.Windows.Threading;
 using FoglioUtils.Extensions;
-using TCC.Data.Abnormalities;
 using TCC.Utilities;
 using TeraDataLite;
 

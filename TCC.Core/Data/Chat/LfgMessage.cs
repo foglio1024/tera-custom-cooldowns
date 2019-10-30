@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Timers;
-using System.Windows.Threading;
 using FoglioUtils;
 using TCC.Data.Pc;
 using TCC.Utils;
