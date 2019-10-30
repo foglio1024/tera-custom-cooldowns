@@ -679,31 +679,18 @@ namespace TCC.ViewModels
 
         public void UpdateBuffs()
         {
-            if (!Game.Logged) return;
+            //if (!Game.Logged) return;
             CurrentCharacter.Buffs.Clear();
-            Game.Me.Buffs.ToList().ForEach(b =>
+            Task.Run(() =>
             {
-                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-                /*if (existing == null)*/
-                CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-                //else
-                //{
-                //    existing.Id = b.Abnormality.Id;
-                //    existing.Duration = b.DurationLeft;
-                //    existing.Stacks = b.Stacks;
-                //}
-            });
-            Game.Me.Debuffs.ToList().ForEach(b =>
-            {
-                //var existing = CurrentCharacter.Buffs.FirstOrDefault(x => x.Id == b.Abnormality.Id);
-                /*if (existing == null)*/
-                CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-                //else
-                //{
-                //    existing.Id = b.Abnormality.Id;
-                //    existing.Duration = b.DurationLeft;
-                //    existing.Stacks = b.Stacks;
-                //}
+                Game.Me.Buffs.ToList().ForEach(b =>
+                {
+                    CurrentCharacter.Buffs.Add(new AbnormalityData {Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks});
+                });
+                Game.Me.Debuffs.ToList().ForEach(b => 
+                {
+                    CurrentCharacter.Buffs.Add(new AbnormalityData {Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks});
+                });
             });
         }
 
