@@ -124,7 +124,7 @@ namespace TCC
             // ----------------------------
             SplashScreen.VM.Progress = 70;
             SplashScreen.VM.BottomText = "Checking for icon database updates...";
-            await new IconsUpdater().CheckForUpdates();
+            _ = Task.Run(() => new IconsUpdater().CheckForUpdates());
 
             // ----------------------------
             SplashScreen.VM.BottomText = "Initializing packet processor...";

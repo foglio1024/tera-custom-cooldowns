@@ -79,6 +79,10 @@ namespace TCC
                 _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
                 await Task.Run(() => DownloadMissingIcons(mismatched));
             }
+            else
+            {
+                Log.N("TCC icon updater", "All icons up to date.", NotificationType.Success);
+            }
         }
         private async Task DownloadArchive()
         {
