@@ -679,6 +679,7 @@ namespace TCC.ViewModels
 
         public void UpdateBuffs()
         {
+            if (CurrentCharacter == null) return;
             //if (!Game.Logged) return;
             CurrentCharacter.Buffs.Clear();
             Task.Run(() =>
