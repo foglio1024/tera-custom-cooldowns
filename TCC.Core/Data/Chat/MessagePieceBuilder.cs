@@ -155,7 +155,11 @@ namespace TCC.Data.Chat
                 grade = i.RareGrade;
             }
 
-            var mp = new MessagePiece($"<{name}>")
+            var enchant = dictionary.TryGetValue("enchantCount", out var enchCount) 
+                            ? $"+{enchCount} "
+                            : "";
+
+            var mp = new MessagePiece($"<{enchant}{name}>")
             {
                 Type = MessagePieceType.Item,
                 //BoundType = i.BoundType,

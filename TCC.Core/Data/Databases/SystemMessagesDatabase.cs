@@ -104,6 +104,11 @@ namespace TCC.Data.Databases
                              "<font color=\"#cccccc\">.</font>";
             var damageReceivedUnknownCrit = new SystemMessageData(msgUnkCrit, (int)ChatChannel.Damage);
             Messages["TCC_DAMAGE_RECEIVED_UNKNOWN_CRIT"] = damageReceivedUnknown;
+
+            // ---------------------
+            var ench = Messages["SMT_MAX_ENCHANT_SUCCEED"];
+            var newEnch = new SystemMessageData($"<font color=\"{R.Colors.ChatSystemGenericColor.ToHex()}\">{ench.Template}</font>", ench.ChatChannel);
+            Messages["SMT_MAX_ENCHANT_SUCCEED"] = newEnch;
         }
     }
 }

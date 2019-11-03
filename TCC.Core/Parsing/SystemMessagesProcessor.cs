@@ -175,11 +175,12 @@ namespace TCC.Parsing
             return !App.Settings.UserExcludedSysMsg.Contains(opcodeName);
         }
 
-        private static void HandleMaxEnchantSucceed(string parameters, SystemMessageData template)
-        {
-            //"@464\vUserName\vHeve\vItemName\v@item:89607?dbid:327641239?enchantCount:11"
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Enchant, ChatUtils.SplitDirectives(parameters)["UserName"]);
-        }
+        //private static void HandleMaxEnchantSucceed(string parameters, SystemMessageData template)
+        //{
+        //    //"@464\vUserName\vHeve\vItemName\v@item:89607?dbid:327641239?enchantCount:11"
+        //    var templ = new SystemMessageData($"<font color=\"{R.Colors.ChatSystemGenericColor.ToHex()}\">{template.Template}</font>", template.ChatChannel);
+        //    ChatWindowManager.Instance.AddSystemMessage(parameters, templ, ChatChannel.Enchant);
+        //}
         private static void HandleFriendLogin(string parameters, SystemMessageData template)
         {
             ChatWindowManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)["UserName"]);
@@ -383,7 +384,6 @@ namespace TCC.Parsing
 
         private static readonly Dictionary<string, Delegate> Processor = new Dictionary<string, Delegate>
         {
-            { "SMT_MAX_ENCHANT_SUCCEED",                    new Action<string, SystemMessageData>(HandleMaxEnchantSucceed) },
             { "SMT_FRIEND_IS_CONNECTED",                    new Action<string, SystemMessageData>(HandleFriendLogin) },
             { "SMT_FRIEND_WALK_INTO_SAME_AREA",             new Action<string, SystemMessageData>(HandleFriendInAreaMessage) },
             { "SMT_CHAT_LINKTEXT_DISCONNECT",               new Action<string, SystemMessageData>(HandleInvalidLink) },
@@ -392,6 +392,8 @@ namespace TCC.Parsing
             { "SMT_BATTLE_YOU_DIE",                         new Action<string, SystemMessageData>(HandleDeathMessage) },
             { "SMT_BATTLE_PARTY_RESURRECT",                 new Action<string, SystemMessageData>(HandleRessMessage) },
             { "SMT_BATTLE_RESURRECT",                       new Action<string, SystemMessageData>(HandleRessMessage) },
+
+            { "SMT_MAX_ENCHANT_SUCCEED",                    new Action<string, SystemMessageData>((parameters, template) => Redirect(parameters, template, ChatChannel.Enchant)) },
 
             { "SMT_ACCEPT_QUEST",                           new Action<string, SystemMessageData>((parameters, template) => Redirect(parameters, template, ChatChannel.Quest)) },
             { "SMT_CANT_START_QUEST",                       new Action<string, SystemMessageData>((parameters, template) => Redirect(parameters, template, ChatChannel.Quest)) },
