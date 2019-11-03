@@ -26,6 +26,7 @@ namespace TCC.Settings
         protected double _scale;
         protected bool _autoDim;
         protected double _dimOpacity;
+        protected double _maxOpacity = 1;
         protected bool _showAlways;
         protected bool _enabled;
         protected bool _allowOffScreen;
@@ -167,7 +168,18 @@ namespace TCC.Settings
             {
                 if (_dimOpacity == value) return;
                 _dimOpacity = value;
-                N(nameof(DimOpacity));
+                N();
+                WindowManager.VisibilityManager?.RefreshDim();
+            }
+        }
+        public double MaxOpacity
+        {
+            get => _maxOpacity;
+            set
+            {
+                if (_maxOpacity == value) return;
+                _maxOpacity = value;
+                N();
                 WindowManager.VisibilityManager?.RefreshDim();
             }
         }

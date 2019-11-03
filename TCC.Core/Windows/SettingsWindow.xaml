@@ -172,6 +172,14 @@
                 </TextBlock>
             </Grid>
         </ToolTip>
+        <ToolTip x:Key="MaxOpacitySettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Max window visibility value." />
+                </TextBlock>
+            </Grid>
+        </ToolTip>
 
         <ControlTemplate x:Key="SectionHeaderTemplate">
             <Grid Height="35">
@@ -288,6 +296,12 @@
             <Setter Property="Min" Value="0" />
             <Setter Property="Max" Value="1" />
             <Setter Property="ToolTip" Value="{StaticResource DimOpacitySettingTooltip}" />
+        </Style>
+        <Style x:Key="MaxOpacitySettingStyle" TargetType="settings:ValueSetting" BasedOn="{StaticResource {x:Type settings:ValueSetting}}">
+            <Setter Property="SettingName" Value="Max opacity" />
+            <Setter Property="Min" Value="0" />
+            <Setter Property="Max" Value="1" />
+            <Setter Property="ToolTip" Value="{StaticResource MaxOpacitySettingTooltip}" />
         </Style>
         <Style x:Key="ClickThruSettingStyle" TargetType="settings:SelectionSetting" BasedOn="{StaticResource {x:Type settings:SelectionSetting}}">
             <Setter Property="SettingName" Value="Click through mode" />
@@ -443,6 +457,9 @@
                             <settings:ValueSetting Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}"
                                                    Style="{StaticResource ScaleSettingStyle}" 
                                                    IsEnabled="{Binding CooldownWindowSettings.Enabled}"/>
+                            <settings:ValueSetting Value="{Binding CooldownWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   Style="{StaticResource MaxOpacitySettingStyle}"
+                                                   IsEnabled="{Binding CooldownWindowSettings.Enabled}" />
                             <settings:ValueSetting Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    Style="{StaticResource DimOpacitySettingStyle}"
                                                    IsEnabled="{Binding CooldownWindowSettings.Enabled}" />
@@ -552,6 +569,9 @@
                             <settings:ValueSetting Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}"
                                                    Style="{StaticResource ScaleSettingStyle}" 
                                                    IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
+                            <settings:ValueSetting Value="{Binding CharacterWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   Style="{StaticResource MaxOpacitySettingStyle}"
+                                                   IsEnabled="{Binding CharacterWindowSettings.Enabled}" />
                             <settings:ValueSetting Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    Style="{StaticResource DimOpacitySettingStyle}"
                                                    IsEnabled="{Binding CharacterWindowSettings.Enabled}" />
@@ -624,6 +644,9 @@
                                 IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding NpcWindowSettings.Scale, Mode=TwoWay}"
                                                    Style="{StaticResource ScaleSettingStyle}" 
+                                                   IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
+                            <settings:ValueSetting Value="{Binding NpcWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   Style="{StaticResource MaxOpacitySettingStyle}" 
                                                    IsEnabled="{Binding NpcWindowSettings.Enabled}"/>
                             <settings:ValueSetting Value="{Binding NpcWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    Style="{StaticResource DimOpacitySettingStyle}" 
@@ -769,6 +792,9 @@
                             <settings:ValueSetting Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}"
                                                    Style="{StaticResource ScaleSettingStyle}" 
                                                    IsEnabled="{Binding BuffWindowSettings.Enabled}" />
+                            <settings:ValueSetting Value="{Binding BuffWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   Style="{StaticResource MaxOpacitySettingStyle}" 
+                                                   IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <settings:ValueSetting Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    Style="{StaticResource DimOpacitySettingStyle}" 
                                                    IsEnabled="{Binding BuffWindowSettings.Enabled}" />
@@ -852,6 +878,9 @@
                             <settings:ValueSetting Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}"
                                                    IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
+                            <settings:ValueSetting Value="{Binding ClassWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding ClassWindowSettings.Enabled}" 
+                                                   Style="{StaticResource MaxOpacitySettingStyle}" />
                             <settings:ValueSetting Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                    Style="{StaticResource DimOpacitySettingStyle}" />
@@ -950,6 +979,9 @@
                             <settings:ValueSetting Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}"
                                                    IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
+                            <settings:ValueSetting Value="{Binding GroupWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" 
+                                                   Style="{StaticResource MaxOpacitySettingStyle}" />
                             <settings:ValueSetting Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                    Style="{StaticResource DimOpacitySettingStyle}" />
@@ -1395,6 +1427,9 @@
                             <settings:ValueSetting Value="{Binding CuWindowSettings.Scale, Mode=TwoWay}"
                                                    IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                    Style="{StaticResource ScaleSettingStyle}" />
+                            <settings:ValueSetting Value="{Binding CuWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding CuWindowSettings.Enabled}" 
+                                                   Style="{StaticResource MaxOpacitySettingStyle}" />
                             <settings:ValueSetting Value="{Binding CuWindowSettings.DimOpacity, Mode=TwoWay}"
                                                    IsEnabled="{Binding CuWindowSettings.Enabled}" 
                                                    Style="{StaticResource DimOpacitySettingStyle}" />

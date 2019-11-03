@@ -39,7 +39,6 @@ namespace TCC.Windows.Widgets
 
         protected void Init(WindowSettings settings)
         {
-            Log.CW($"Init {GetType().Name} on {Dispatcher.Thread.Name}");
             WindowSettings = settings;
             MainContent.Opacity = 0;
             if (BoundaryRef != null) BoundaryRef.Opacity = 0;
@@ -200,12 +199,12 @@ namespace TCC.Windows.Widgets
             if (!WindowManager.VisibilityManager.Visible) return;
 
             if (!WindowSettings.AutoDim)
-                AnimateContentOpacity(1);
+                AnimateContentOpacity(WindowSettings.MaxOpacity);
             else
             {
-                if (WindowSettings.UndimOnFlyingGuardian) AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : 1);
+                if (WindowSettings.UndimOnFlyingGuardian) AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : WindowSettings.MaxOpacity);
                 else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(WindowSettings.DimOpacity);
-                else AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : 1);
+                else AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : WindowSettings.MaxOpacity);
             }
 
             OnClickThruModeChanged();
@@ -220,7 +219,7 @@ namespace TCC.Windows.Widgets
                 }
                 else
                 {
-                    AnimateContentOpacity(1);
+                    AnimateContentOpacity(WindowSettings.MaxOpacity);
                 }
             }
             else
