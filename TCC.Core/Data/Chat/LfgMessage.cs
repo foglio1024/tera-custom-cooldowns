@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using FoglioUtils;
 using TCC.Data.Pc;
@@ -63,26 +64,21 @@ namespace TCC.Data.Chat
 
         private void OnMembersChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action)
+            Task.Run(() =>
             {
-                case NotifyCollectionChangedAction.Add:
-                    foreach (var item in e.NewItems.Cast<User>())
-                    {
-                        _members.Add(item);
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    foreach (var item in e.OldItems.Cast<User>())
-                    {
-                        _members.Remove(item);
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Reset:
+                switch (e.Action)
                 {
-                    _members.Clear();
+                    case NotifyCollectionChangedAction.Add:
+                        e.NewItems.Cast<User>().ToList().ForEach(item => _members.Add(item));
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        e.OldItems.Cast<User>().ToList().ForEach(item => _members.Remove(item));
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        _members.Clear();
+                        break;
                 }
-                    break;
-            }
+            });
         }
         private void OnTimerTick(object sender, EventArgs e)
         {
