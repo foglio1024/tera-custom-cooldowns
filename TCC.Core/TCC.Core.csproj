@@ -213,7 +213,6 @@
     <Compile Include="Controls\NPCs\EnragePeriodItem.cs" />
     <Compile Include="Controls\NPCs\NpcViewModel.cs" />
     <Compile Include="Controls\NPCs\SmallMobViewModel.cs" />
-    <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Controls\Settings\CheckboxSetting.xaml.cs">
       <DependentUpon>CheckboxSetting.xaml</DependentUpon>
     </Compile>

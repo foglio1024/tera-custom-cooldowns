@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Dragablz;
+using FoglioUtils;
 using TCC.Controls;
 using TCC.ViewModels.Widgets;
 
