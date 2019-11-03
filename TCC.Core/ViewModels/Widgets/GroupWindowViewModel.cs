@@ -366,6 +366,7 @@ namespace TCC.ViewModels.Widgets
         {
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
+            SendOnlineMessage(u.Name, false);
             u.Online = false;
         }
         private void ToggleMe()
@@ -509,7 +510,11 @@ namespace TCC.ViewModels.Widgets
                 current.MaxHp = update.MaxHP;
                 current.MaxMp = update.MaxMP;
                 current.Level = update.Level;
-                if (current.Alive && !update.Alive) SendDeathMessage(current.Name);
+                if (current.Alive && !update.Alive)
+                {
+                    SendDeathMessage(current.Name);
+                    current.CurrentHp = 0; // force hp to 0 when ded
+                }
                 current.Alive = update.Alive;
                 N(nameof(AliveCount));
                 if (!update.Alive) current.HasAggro = false;
