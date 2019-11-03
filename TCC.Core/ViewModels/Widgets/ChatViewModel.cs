@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Dragablz;
@@ -253,9 +254,12 @@ namespace TCC.ViewModels.Widgets
             Tabs.ForEach(t => _windowSettings.Tabs.Add(t.TabInfo));
             _windowSettings.X = (left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
             _windowSettings.Y = (top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
-            var v = App.Settings.ChatWindowsSettings;
-            var s = v.FirstOrDefault(x => x == _windowSettings);
-            if (s == null) v.Add(_windowSettings);
+            Task.Run(() =>
+            {
+                var v = App.Settings.ChatWindowsSettings;
+                var s = v.FirstOrDefault(x => x == _windowSettings);
+                if (s == null) v.Add(_windowSettings);
+            });
         }
         public void RefreshHideTimer()
         {

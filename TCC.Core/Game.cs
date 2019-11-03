@@ -49,7 +49,7 @@ namespace TCC
             {
                 if (_loadingScreen == value) return;
                 _loadingScreen = value;
-                App.BaseDispatcher.Invoke(() => LoadingScreenChanged?.Invoke());
+                App.BaseDispatcher.InvokeAsync(() => LoadingScreenChanged?.Invoke());
             }
         }
 
@@ -60,7 +60,7 @@ namespace TCC
             {
                 if (_encounter == value) return;
                 _encounter = value;
-                App.BaseDispatcher.Invoke(() => EncounterChanged?.Invoke());
+                App.BaseDispatcher.InvokeAsync(() => EncounterChanged?.Invoke());
             }
         }
 
@@ -82,7 +82,7 @@ namespace TCC
             {
                 if (_logged == value) return;
                 _logged = value;
-                App.BaseDispatcher.Invoke(() => LoggedChanged?.Invoke());
+                App.BaseDispatcher.InvokeAsync(() => LoggedChanged?.Invoke());
             }
         }
 
@@ -606,7 +606,7 @@ namespace TCC
         {
             if (!IsMe(p.TargetId)) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            if (p.Duration == Int32.MaxValue) ab.Infinity = true;
+            if (p.Duration >= int.MaxValue / 2) ab.Infinity = true;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
 
@@ -616,7 +616,7 @@ namespace TCC
         {
             if (!IsMe(p.TargetId)) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            if (p.Duration == Int32.MaxValue) ab.Infinity = true;
+            if (p.Duration >= int.MaxValue / 2) ab.Infinity = true;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
         }
@@ -721,10 +721,9 @@ namespace TCC
         private static void OnReturnToLobbyHotkeyPressed()
         {
             if (!Logged
-                || LoadingScreen
-                || Combat
-                || !ProxyInterface.Instance.IsStubAvailable)
-                return;
+              || LoadingScreen
+              || Combat
+              || !ProxyInterface.Instance.IsStubAvailable) return;
 
             WindowManager.ViewModels.LfgVM.ForceStopPublicize();
             ProxyInterface.Instance.Stub.ReturnToLobby();
