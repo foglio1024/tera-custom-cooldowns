@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using FoglioUtils;
 using TCC.Parsing;
@@ -120,25 +121,31 @@ namespace TCC.ViewModels.Widgets
 
         private void OnDestroyGuildTower(S_DESTROY_GUILD_TOWER m)
         {
-            try
+            Task.Run(() =>
             {
-                AddDestroyedGuildTower(m.SourceGuildId);
-            }
-            catch
-            {
-                // ignored
-            }
+                try
+                {
+                    AddDestroyedGuildTower(m.SourceGuildId);
+                }
+                catch
+                {
+                    // ignored
+                }
+            });
         }
         private void OnRequestCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO m)
         {
-            try
+            Task.Run(() =>
             {
-                m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrestVM.AddGuild(x));
-            }
-            catch
-            {
-                // ignored
-            }
+                try
+                {
+                    m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrestVM.AddGuild(x));
+                }
+                catch
+                {
+                    // ignored
+                }
+            });
         }
         private void OnRequestCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL m)
         {

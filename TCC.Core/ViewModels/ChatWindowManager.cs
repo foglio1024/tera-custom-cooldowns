@@ -172,12 +172,14 @@ namespace TCC.ViewModels
 
         private void OnPartyMatchLink(S_PARTY_MATCH_LINK m)
         {
-            if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-            if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-            if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-            AddOrRefreshLfg(m
-                .ListingData); //Dispatcher.InvokeAsync(new Action(() => { AddOrRefreshLfg(m.ListingData); }), DispatcherPriority.DataBind);
-            AddLfgMessage(m.Id, m.Name, m.Message);
+            Task.Run(() =>
+            {
+                if (m.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+                if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+                if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
+                AddOrRefreshLfg(m.ListingData);
+                AddLfgMessage(m.Id, m.Name, m.Message);
+            });
         }
 
         private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
