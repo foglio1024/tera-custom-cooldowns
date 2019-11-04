@@ -606,7 +606,7 @@ namespace TCC
         {
             if (!IsMe(p.TargetId)) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            if (p.Duration >= int.MaxValue / 2) ab.Infinity = true;
+            ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
 
@@ -616,7 +616,7 @@ namespace TCC
         {
             if (!IsMe(p.TargetId)) return;
             if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            if (p.Duration >= int.MaxValue / 2) ab.Infinity = true;
+            ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
         }
