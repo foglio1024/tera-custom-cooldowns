@@ -94,7 +94,7 @@
     <Color x:Key="ItemRareColor">                #009ED9   </Color>
     <Color x:Key="ItemSuperiorColor">            #EEBE00   </Color>
 
-    <Color x:Key="ToolboxColor">                 #6268DB   </Color>
+    <Color x:Key="ToolboxColor">                 #5980FF   </Color>
                                                            
     <!--Chat colors-->                                     
     <Color x:Key="ChatSayColor">                 #FFFFFF   </Color>
@@ -112,7 +112,7 @@
     <Color x:Key="ChatMegaphoneColorDark">       #00B5D6   </Color>
     <Color x:Key="ChatGuildAdColor">             #70C401   </Color>
     <Color x:Key="ChatPrivateColor">             #D5FFC6   </Color>
-    <Color x:Key="ChatProxyColor">               #C5B8FF   </Color>
+    <Color x:Key="ChatProxyColor">               #8ABBFF   </Color>
     <Color x:Key="ChatWhisperColor">             #E996FA   </Color>
     <Color x:Key="ChatSystemGenericColor">       #C8C8b6   </Color>
     <Color x:Key="ChatSystemNotifyColor">        #C8C8b6   </Color>
