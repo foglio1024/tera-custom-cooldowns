@@ -57,8 +57,7 @@ namespace TCC.ViewModels
                 sb.Append(e);
                 sb.Append(mp.Text.Substring(1));
                 mp.Text = sb.ToString();
-                msg.AddPiece(new MessagePiece("Successfully enchanted ", MessagePieceType.Simple, App.Settings.FontSize,
-                    false, "cccccc"));
+                msg.AddPiece(new SimpleMessagePiece("Successfully enchanted ", App.Settings.FontSize, false, "cccccc"));
                 msg.AddPiece(mp);
 
                 return msg;

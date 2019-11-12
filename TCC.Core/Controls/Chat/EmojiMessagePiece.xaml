@@ -5,11 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:chat="clr-namespace:TCC.Data.Chat"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:MessagePiece}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:IconMessagePiece}">
     <UserControl.Resources>
         <converters:EmojiNameToImageConverter x:Key="EmojiNameToImageConverter" />
     </UserControl.Resources>
     <Grid SnapsToDevicePixels="True" UseLayoutRounding="True" ClipToBounds="False">
-        <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="-2 0 4 -4" Width="22" Stretch="Uniform" HorizontalAlignment="Center" Height="22" Source="{Binding Text, Converter={StaticResource EmojiNameToImageConverter}}"/>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="-2 0 4 -4" Width="22" Stretch="Uniform" HorizontalAlignment="Center" 
+               Height="22" Source="{Binding Text, Converter={StaticResource EmojiNameToImageConverter}}"/>
     </Grid>
 </UserControl>

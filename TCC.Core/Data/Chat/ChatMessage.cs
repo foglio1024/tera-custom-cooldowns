@@ -33,7 +33,7 @@ namespace TCC.Data.Chat
         public bool ShowTimestamp => App.Settings.ShowTimestamp;
         public bool ShowChannel => App.Settings.ShowChannel;
         public TSObservableCollection<MessageLine> Lines { get; protected set; }
-        public TSObservableCollection<MessagePiece> Pieces { get; }
+        public TSObservableCollection<MessagePieceBase> Pieces { get; }
 
         public bool IsVisible
         {
@@ -65,12 +65,12 @@ namespace TCC.Data.Chat
         public ChatMessage()
         {
             Dispatcher = ChatWindowManager.Instance.GetDispatcher();
-            Pieces = new TSObservableCollection<MessagePiece>(Dispatcher);
+            Pieces = new TSObservableCollection<MessagePieceBase>(Dispatcher);
             Lines = new TSObservableCollection<MessageLine>(Dispatcher);
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
         }
-        public ChatMessage(ChatChannel ch) :this()
+        public ChatMessage(ChatChannel ch) : this()
         {
             Channel = ch;
         }
@@ -108,7 +108,7 @@ namespace TCC.Data.Chat
 
         }
 
-        internal void AddPiece(MessagePiece mp)
+        internal void AddPiece(MessagePieceBase mp)
         {
             mp.Container = this;
             //Dispatcher.InvokeAsyncIfRequired(() =>
@@ -116,7 +116,7 @@ namespace TCC.Data.Chat
             //}, DispatcherPriority.DataBind);
             Pieces.Add(mp);
         }
-        protected void InsertPiece(MessagePiece mp, int index)
+        protected void InsertPiece(MessagePieceBase mp, int index)
         {
             mp.Container = this;
             //Dispatcher.InvokeAsyncIfRequired(() =>
@@ -124,53 +124,50 @@ namespace TCC.Data.Chat
             Pieces.Insert(index, mp);
             //}, DispatcherPriority.DataBind);
         }
-        protected void RemovePiece(MessagePiece mp)
+        protected void RemovePiece(MessagePieceBase mp)
         {
             //Dispatcher.InvokeAsyncIfRequired(() =>
             //{
-                Pieces.Remove(mp);
+            Pieces.Remove(mp);
             //}, DispatcherPriority.DataBind);
         }
         //TODO: refactor
         public void SplitSimplePieces()
         {
-            var simplePieces = Pieces.ToSyncList().Where(item => item.Type == MessagePieceType.Simple
-                                                              || item.Type == MessagePieceType.Item).ToList();
+            var simplePieces = Pieces.ToSyncList().Where(item => item is SimpleMessagePiece);
 
             foreach (var simplePiece in simplePieces)
             {
                 simplePiece.Text = simplePiece.Text.Replace(" ", " [[");
-                var tokens = simplePiece.Text.Split(new[] { "[[" }, StringSplitOptions.RemoveEmptyEntries);
+                var words = simplePiece.Text.Split(new[] { "[[" }, StringSplitOptions.RemoveEmptyEntries);
                 var index = Pieces.IndexOf(simplePiece);
-                foreach (var token in tokens)
+                foreach (var word in words)
                 {
-                    var endsWithK = token.ToLower().EndsWith("k ", StringComparison.InvariantCultureIgnoreCase) ||
-                                    token.ToLower().EndsWith("k", StringComparison.InvariantCultureIgnoreCase);
-                    var endsWithG = token.ToLower().EndsWith("g ", StringComparison.InvariantCultureIgnoreCase) ||
-                                    token.ToLower().EndsWith("g", StringComparison.InvariantCultureIgnoreCase);
-                    var isNumber = int.TryParse(token.ToLower().Replace("k ", "").Replace("k", "").Replace("g ", "").Replace("g", ""), out var money);
-
-
-                    var mp = (endsWithK || endsWithG) && isNumber && (Channel == ChatChannel.Trade ||
-                                                                      Channel == ChatChannel.TradeRedirect ||
-                                                                      Channel == ChatChannel.Megaphone ||
-                                                                      Channel == ChatChannel.Global) ?
-                        new MessagePiece(new Money(endsWithK ? money * 1000 : money, 0, 0))
-                        //: 
-                        //isEmoji?
-                        //new MessagePiece(split[j]) { Type = MessagePieceType.Emoji} 
-                        :
-                        new MessagePiece(token)
+                    var endsWithK = word.ToLower().EndsWith("k ", StringComparison.InvariantCultureIgnoreCase) ||
+                                    word.ToLower().EndsWith("k", StringComparison.InvariantCultureIgnoreCase);
+                    var endsWithG = word.ToLower().EndsWith("g ", StringComparison.InvariantCultureIgnoreCase) ||
+                                    word.ToLower().EndsWith("g", StringComparison.InvariantCultureIgnoreCase);
+                    var isNumber = int.TryParse(word.ToLower().Replace("k ", "").Replace("k", "").Replace("g ", "").Replace("g", ""), out var money);
+                    var mp = new MessagePieceBase();
+                    if ((endsWithK || endsWithG) && isNumber && (Channel == ChatChannel.Trade ||
+                                                                Channel == ChatChannel.TradeRedirect))
+                    {
+                        mp = new MoneyMessagePiece(new Money(endsWithK ? money * 1000 : money, 0, 0));
+                    }
+                    else if (simplePiece is ActionMessagePiece amp)
+                    {
+                        mp = new ActionMessagePiece(word)
                         {
-                            Color = simplePiece.Color,
-                            Type = simplePiece.Type,
-                            ItemId = simplePiece.ItemId,
-                            ItemUid = simplePiece.ItemUid,
-                            BoundType = simplePiece.BoundType,
-                            OwnerName = simplePiece.OwnerName,
-                            RawLink = simplePiece.RawLink,
-                            Size = simplePiece.Size
+                            ChatLinkAction = amp.ChatLinkAction,
+                            Color = amp.Color,
+                            Size = amp.Size
                         };
+                    }
+                    else
+                    {
+                        mp = new SimpleMessagePiece(word){ Color = simplePiece.Color, Size = simplePiece.Size};
+                    }
+
                     InsertPiece(mp, index);
                     index = Pieces.IndexOf(mp) + 1;
                 }
@@ -217,7 +214,7 @@ namespace TCC.Data.Chat
 
         private void ParseDirectMessage(string msg)
         {
-            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, App.Settings.FontSize, false));
+            AddPiece(new SimpleMessagePiece(msg, App.Settings.FontSize, false));
         }
         private void ParseEmoteMessage(string msg)
         {
@@ -225,13 +222,13 @@ namespace TCC.Data.Chat
             var start = msg.IndexOf(header, StringComparison.Ordinal);
             if (start == -1)
             {
-                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, App.Settings.FontSize, false));
+                AddPiece(new SimpleMessagePiece(Author + " " + msg, App.Settings.FontSize, false));
                 return;
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
             var text = Game.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
-            AddPiece(new MessagePiece(text, MessagePieceType.Simple, App.Settings.FontSize, false));
+            AddPiece(new SimpleMessagePiece(text, App.Settings.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)
         {
@@ -249,10 +246,7 @@ namespace TCC.Data.Chat
             if (piece.HasAttributes)
             {
                 var customColor = ChatUtils.GetCustomColor(piece);
-                if (customColor == "")
-                {
 
-                }
                 if (piece.HasChildNodes && piece.ChildNodes.Count == 1 && piece.ChildNodes[0].Name != "#text")
                 {
                     //parse ChatLinkAction
@@ -261,7 +255,7 @@ namespace TCC.Data.Chat
                     if (chatLinkAction != null)
                     {
                         var mp = MessagePieceBuilder.ParseChatLinkAction(chatLinkAction);
-                        mp.SetColor(customColor);
+                        mp.Color = customColor;
                         AddPiece(mp);
                     }
                     else
@@ -279,12 +273,11 @@ namespace TCC.Data.Chat
                     if (content != "")
                     {
                         AddPiece(
-                            new MessagePiece(
+                            new SimpleMessagePiece(
                                 content
                                 .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                                 .Replace("</a>", "")
-                                .UnescapeHtml(),
-                            MessagePieceType.Simple, App.Settings.FontSize, false, customColor
+                                .UnescapeHtml(),App.Settings.FontSize, false, customColor
                             )
                         );
                     }
@@ -299,14 +292,13 @@ namespace TCC.Data.Chat
                 var content = GetPieceContent(text);
                 if (content != "")
                 {
-                    var p = new MessagePiece(
+                    var p = new SimpleMessagePiece(
                         content
                             .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                             .Replace("</a>", "")
-                            .UnescapeHtml(),
-                        MessagePieceType.Simple, App.Settings.FontSize, false
+                            .UnescapeHtml(), App.Settings.FontSize, false
                     );
-                    if (Channel == ChatChannel.ReceivedWhisper) p.Color = R.Brushes.GoldBrush;
+                    if (Channel == ChatChannel.ReceivedWhisper) p.Color = R.Brushes.GoldBrush.Color.ToHex();
                     AddPiece(p);
                 }
             }
@@ -336,10 +328,10 @@ namespace TCC.Data.Chat
                     //add it as url
                     if (content.ToString() != "")
                     {
-                        AddPiece(new MessagePiece(content.ToString().UnescapeHtml(), MessagePieceType.Simple, App.Settings.FontSize, false));
+                        AddPiece(new SimpleMessagePiece(content.ToString().UnescapeHtml(), App.Settings.FontSize, false));
                         content = new StringBuilder("");
                     }
-                    AddPiece(new MessagePiece(token.UnescapeHtml(), MessagePieceType.Url, App.Settings.FontSize, false, "7289da"));
+                    AddPiece(new UrlMessagePiece(token.UnescapeHtml(), App.Settings.FontSize, false, "7289da"));
                 }
                 else
                 {

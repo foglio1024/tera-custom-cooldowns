@@ -2,8 +2,8 @@
 {
     public class BrokerChatMessage : ChatMessage
     {
-        private MessagePiece _startingPrice;
-        public MessagePiece StartingPrice
+        private MessagePieceBase _startingPrice;
+        public MessagePieceBase StartingPrice
         {
             get => _startingPrice;
             set
@@ -13,8 +13,8 @@
             }
         }
 
-        private MessagePiece _offeredPrice;
-        public MessagePiece OfferedPrice
+        private MessagePieceBase _offeredPrice;
+        public MessagePieceBase OfferedPrice
         {
             get => _offeredPrice;
             set
@@ -24,8 +24,8 @@
             }
         }
 
-        private MessagePiece _listing;
-        public MessagePiece Listing
+        private MessagePieceBase _listing;
+        public MessagePieceBase Listing
         {
             get => _listing;
             set
@@ -35,8 +35,8 @@
             }
         }
 
-        private MessagePiece _amount;
-        public MessagePiece Amount
+        private MessagePieceBase _amount;
+        public MessagePieceBase Amount
         {
             get => _amount;
             set
@@ -58,19 +58,19 @@
             ListingId = listing;
             PlayerId = playerId;
 
-            Amount = new MessagePiece("Offer for " + amount, MessagePieceType.Simple, App.Settings.FontSize, false) { Container = this };
-            OfferedPrice = new MessagePiece(new Money(offeredPrice)) { Container = this };
-            StartingPrice = new MessagePiece(new Money(sellerPrice)) { Container = this };
-            Listing = new MessagePiece("") { Container = this };
+            Amount = new SimpleMessagePiece("Offer for " + amount, App.Settings.FontSize, false) { Container = this };
+            OfferedPrice = new MoneyMessagePiece(new Money(offeredPrice)) { Container = this };
+            StartingPrice = new MoneyMessagePiece(new Money(sellerPrice)) { Container = this };
+            Listing = new SimpleMessagePiece("") { Container = this };
 
             Game.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
             if (i != null)
             {
                 Listing.Text = "<" + i.Name + ">";
-                Listing.ItemId = i.Id;
-                Listing.SetColor(ChatUtils.GradeToColorString(i.RareGrade));
+                //TODO: //Listing.ItemId = i.Id;
+                Listing.Color = ChatUtils.GradeToColorString(i.RareGrade);
             }
-            Listing.Type = MessagePieceType.Item;
+            //Listing.Type = MessagePieceType.Item;
         }
     }
 }

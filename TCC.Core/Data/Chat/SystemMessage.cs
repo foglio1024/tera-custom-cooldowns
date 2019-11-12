@@ -31,7 +31,7 @@ namespace TCC.Data.Chat
                         var customColor = ChatUtils.GetCustomColor(htmlPiece);
                         var content = htmlPiece.InnerText;
                         RawMessage = content;
-                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, App.Settings.FontSize, false, customColor));
+                        AddPiece(new SimpleMessagePiece(content, App.Settings.FontSize, false, customColor));
                     }
                 }
                 else
@@ -58,7 +58,7 @@ namespace TCC.Data.Chat
                 var source = piece.GetAttributeValue("src", "")
                     .Replace("img://__", "")
                     .ToLower();
-                var mp = new MessagePiece(source, MessagePieceType.Icon, App.Settings.FontSize, false);
+                var mp = new IconMessagePiece(source, App.Settings.FontSize, false);
                 AddPiece(mp);
             }
             else
@@ -88,7 +88,7 @@ namespace TCC.Data.Chat
                             continue;
                     }
 
-                    MessagePiece mp;
+                    MessagePieceBase mp;
                     if (inPiece.StartsWith("@select"))
                     {
                         selectionStep++;
@@ -103,28 +103,28 @@ namespace TCC.Data.Chat
                         var abName = "Unknown";
                         if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
                             uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
-                        mp = new MessagePiece(abName, MessagePieceType.Simple, App.Settings.FontSize, false);
-                        mp.SetColor(col);
+                        mp = new SimpleMessagePiece(abName, App.Settings.FontSize, false);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@achievement"))
                     {
                         mp = MessagePieceBuilder.BuildSysMsgAchi(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@GuildQuest"))
                     {
                         mp = MessagePieceBuilder.BuildSysMsgGuildQuest(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@dungeon"))
                     {
                         mp = MessagePieceBuilder.BuildSysMsgDungeon(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@accountBenefit"))
                     {
                         mp = MessagePieceBuilder.BuildSysMsgAccBenefit(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@AchievementGradeInfo"))
                     {
@@ -133,35 +133,32 @@ namespace TCC.Data.Chat
                     else if (inPiece.StartsWith("@quest"))
                     {
                         mp = MessagePieceBuilder.BuildSysMsgQuest(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@creature"))
                     {
-
                         mp = MessagePieceBuilder.BuildSysMsgCreature(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@rgn"))
                     {
-
                         mp = MessagePieceBuilder.BuildSysMsgRegion(inPiece);
-
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.StartsWith("@zoneName"))
                     {
                         mp = MessagePieceBuilder.BuildSysMsgZone(inPiece);
-                        mp.SetColor(col);
+                        mp.Color = col;
                     }
                     else if (inPiece.Contains("@money"))
                     {
                         var t = inPiece.Replace("@money", "");
-                        mp = new MessagePiece(new Money(t));
+                        mp = new MoneyMessagePiece(new Money(t));
                         Channel = ChatChannel.Money;
                     }
                     else
                     {
-                        mp = new MessagePiece(inPiece.UnescapeHtml(), MessagePieceType.Simple, App.Settings.FontSize, false, col);
+                        mp = new SimpleMessagePiece(inPiece.UnescapeHtml(), App.Settings.FontSize, false, col);
                     }
                     AddPiece(mp);
                 }

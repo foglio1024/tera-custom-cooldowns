@@ -17,11 +17,7 @@
     <ts:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
                                     SimpleTemplate="{StaticResource SimpleTemplate}"
                                     MoneyTemplate="{StaticResource MoneyTemplate}"
-                                    QuestTemplate="{StaticResource SimpleTemplate}"
-                                    AchievementTemplate="{StaticResource SimpleTemplate}"
-                                    PointOfInterestTemplate="{StaticResource SimpleTemplate}"
-                                    ItemTemplate="{StaticResource SimpleTemplate}"
-                                    EmojiTemplate="{StaticResource EmojiTemplate}"
+                                    ActionTemplate="{StaticResource ActionTemplate}"
                                     IconTemplate="{StaticResource IconTemplate}"
                                     />
     <ts:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"

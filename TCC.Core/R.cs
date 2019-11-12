@@ -532,6 +532,7 @@ namespace TCC.R
 		public static DataTemplate MyAbnormalitySelectorDataTemplate => ((DataTemplate)App.Current.FindResource("MyAbnormalitySelectorDataTemplate"));
 		public static DataTemplate FixedSkillDataTemplateForConfig => ((DataTemplate)App.Current.FindResource("FixedSkillDataTemplateForConfig"));
 		public static DataTemplate SimpleTemplate => ((DataTemplate)App.Current.FindResource("SimpleTemplate"));
+		public static DataTemplate ActionTemplate => ((DataTemplate)App.Current.FindResource("ActionTemplate"));
 		public static DataTemplate MoneyTemplate => ((DataTemplate)App.Current.FindResource("MoneyTemplate"));
 		public static DataTemplate EmojiTemplate => ((DataTemplate)App.Current.FindResource("EmojiTemplate"));
 		public static DataTemplate IconTemplate => ((DataTemplate)App.Current.FindResource("IconTemplate"));

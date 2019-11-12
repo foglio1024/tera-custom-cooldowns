@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
+using TCC.Annotations;
 
 namespace TCC.Converters
 {
@@ -11,8 +12,10 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var c = (string)value;
-            return new SolidColorBrush(MiscUtils.ParseColor(c));
-
+            if (string.IsNullOrEmpty(c)) return R.Brushes.ChatSystemGenericBrush;
+            if(targetType ==typeof(Brush)) return new SolidColorBrush(MiscUtils.ParseColor(c));
+            if (targetType == typeof(Color)) return MiscUtils.ParseColor(c);
+            return R.Brushes.ChatSystemGenericBrush;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

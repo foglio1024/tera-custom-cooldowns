@@ -300,31 +300,30 @@
                        VerticalAlignment="Center" Margin="5 0" />
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="SimpleTemplate" DataType="chat:MessagePiece">
+    <DataTemplate x:Key="SimpleTemplate" DataType="chat:SimpleMessagePiece">
         <Grid UseLayoutRounding="True">
-            <Border BorderBrush="{Binding Color}"
+            <TextBlock Foreground="{Binding Color, Converter={StaticResource StringToFill}}"
+                       Text="{Binding Text}"
+                       FontSize="{Binding Size}"
+                       FontFamily="{StaticResource NotoSansMed}"
+                       TextWrapping="Wrap"
+                       FontWeight="Normal"
+                       Opacity="1"
+                       Width="Auto"
+                       HorizontalAlignment="Stretch"
+                       TextTrimming="None" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ActionTemplate" DataType="chat:ActionMessagePiece">
+        <Grid UseLayoutRounding="True">
+            <Border BorderBrush="{Binding Color, Converter={StaticResource StringToFill}}"
                     Visibility="{Binding IsHovered, Converter={StaticResource BooleanToVisibilityConverter}}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     BorderThickness="0 0 0 2" />
-            <!--<ctrl:OutlinedTextBlock Fill="{Binding Color}"
-                                    Text="{Binding Text}" 
-                                    Cursor="{Binding Type, Converter={StaticResource MessageTypeToCursor}}"
-                                    Stroke="#9000"
-                                    StrokeThickness="3"
-                                    FontSize="{Binding Size}"
-                                    FontFamily="{StaticResource NotoSansMed}"
-                                    TextWrapping="WrapWithOverflow"
-                                    FontWeight="DemiBold"
-                                    Opacity="1"
-                                    Width="Auto"
-                                    HorizontalAlignment="Stretch"
-                                    TextTrimming="None"
-                                    Margin="{Binding Spaces}"
-                                />-->
-            <TextBlock Foreground="{Binding Color}"
+            <TextBlock Foreground="{Binding Color, Converter={StaticResource StringToFill}}"
                        Text="{Binding Text}"
-                       Cursor="{Binding Type, Converter={StaticResource MessageTypeToCursor}}"
+                       Cursor="Hand"
                        FontSize="{Binding Size}"
                        FontFamily="{StaticResource NotoSansMed}"
                        TextWrapping="Wrap"
@@ -336,12 +335,12 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="MoneyTemplate">
-        <chatCtrl:MoneyMessagePiece />
+        <chatCtrl:MoneyMessagePieceControl />
     </DataTemplate>
     <DataTemplate x:Key="EmojiTemplate">
         <chatCtrl:EmojiMessagePiece />
     </DataTemplate>
-    <DataTemplate x:Key="IconTemplate" DataType="chat:MessagePiece">
+    <DataTemplate x:Key="IconTemplate" DataType="chat:IconMessagePiece">
         <Ellipse Width="24" Height="24" Margin="0 0 3 0" VerticalAlignment="Center">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Text, Converter={StaticResource MessageTextToIcon}}" />
@@ -362,7 +361,7 @@
         <chatCtrl:ChatMessageHeader />
     </DataTemplate>
     <DataTemplate x:Key="MessageBodyTemplate">
-        <chatCtrl:MessagePieceControl />
+        <chatCtrl:MessagePieceBodyControl />
     </DataTemplate>
     <DataTemplate x:Key="DefaultBody">
         <chatCtrl:DefaultMessageBody />

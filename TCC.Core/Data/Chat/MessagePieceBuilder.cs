@@ -113,24 +113,15 @@ namespace TCC.Data.Chat
 
     public static class MessagePieceBuilder
     {
-        public static MessagePiece BuildSysMsgZone(string msgText)
+        public static SimpleMessagePiece BuildSysMsgZone(string msgText)
         {
-            var mp = new MessagePiece(SystemMessageParser.ParseSysMsgZone(msgText))
-            {
-                Type = MessagePieceType.Simple
-            };
-            return mp;
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgZone(msgText));
         }
-        public static MessagePiece BuildSysMsgCreature(string msgText)
+        public static SimpleMessagePiece BuildSysMsgCreature(string msgText)
         {
-
-            var mp = new MessagePiece(SystemMessageParser.ParseSysMsgCreature(msgText))
-            {
-                Type = MessagePieceType.Simple
-            };
-            return mp;
+            return new SimpleMessagePiece (SystemMessageParser.ParseSysMsgCreature(msgText));
         }
-        public static MessagePiece BuildSysMsgItem(string msgText)
+        public static SimpleMessagePiece BuildSysMsgItem(string msgText)
         {
             var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
@@ -159,27 +150,21 @@ namespace TCC.Data.Chat
                             ? $"+{enchCount} "
                             : "";
 
-            var mp = new MessagePiece($"<{enchant}{name}>")
+            return new ActionMessagePiece($"<{enchant}{name}>")
             {
-                Type = MessagePieceType.Item,
-                //BoundType = i.BoundType,
-                ItemId = id,
-                ItemUid = uid,
-                OwnerName = username,
-                RawLink = rawLink.ToString()
+                ChatLinkAction = rawLink.ToString(),
+                Color = ChatUtils.GradeToColorString(grade)
             };
-            mp.SetColor(ChatUtils.GradeToColorString(grade));
-            return mp;
         }
-        public static MessagePiece BuildSysMsgAchi(string msgText)
+        public static SimpleMessagePiece BuildSysMsgAchi(string msgText)
         {
-            return new MessagePiece(SystemMessageParser.ParseSysMsgAchi(msgText)) { Type = MessagePieceType.Simple, };
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgAchi(msgText));
         }
-        public static MessagePiece BuildSysMsgQuest(string msgText)
+        public static SimpleMessagePiece BuildSysMsgQuest(string msgText)
         {
-            return new MessagePiece(SystemMessageParser.ParseSysMsgQuest(msgText)) { Type = MessagePieceType.Simple };
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgQuest(msgText));
         }
-        public static MessagePiece BuildSysMsgAchiGrade(string msgText)
+        public static SimpleMessagePiece BuildSysMsgAchiGrade(string msgText)
         {
             var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
@@ -201,31 +186,32 @@ namespace TCC.Data.Chat
                 }
             }
 
-            var ret = new MessagePiece(txt) {Type = MessagePieceType.Simple};
-            ret.SetColor(col);
-            return ret;
+            return new SimpleMessagePiece (txt)
+            {
+                Color = col
+            };
         }
-        public static MessagePiece BuildSysMsgDungeon(string msgText)
+        public static SimpleMessagePiece BuildSysMsgDungeon(string msgText)
         {
-            return new MessagePiece(SystemMessageParser.ParseSysMsgDungeon(msgText)) { Type = MessagePieceType.Simple };
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgDungeon(msgText));
         }
-        public static MessagePiece BuildSysMsgAccBenefit(string msgText)
+        public static SimpleMessagePiece BuildSysMsgAccBenefit(string msgText)
         {
-            return new MessagePiece(SystemMessageParser.ParseSysMsgAccBenefit(msgText)) { Type = MessagePieceType.Simple };
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgAccBenefit(msgText));
         }
-        public static MessagePiece BuildSysMsgGuildQuest(string msgText)
+        public static SimpleMessagePiece BuildSysMsgGuildQuest(string msgText)
         {
-            return new MessagePiece(SystemMessageParser.ParseSysMsgGuildQuest(msgText)) { Type = MessagePieceType.Simple };
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgGuildQuest(msgText));
         }
-        public static MessagePiece BuildSysMsgRegion(string inPiece)
+        public static SimpleMessagePiece BuildSysMsgRegion(string inPiece)
         {
-            return new MessagePiece(SystemMessageParser.ParseSysMsgRegion(inPiece)) { Type = MessagePieceType.Simple };
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgRegion(inPiece));
         }
-        public static MessagePiece ParseChatLinkAction(HtmlNode chatLinkAction)
+        public static SimpleMessagePiece ParseChatLinkAction(HtmlNode chatLinkAction)
         {
             var param = chatLinkAction.GetAttributeValue("param", "");
             var type = int.Parse(param.Substring(0, 1));
-            MessagePiece mp;
+            ActionMessagePiece mp;
             switch (type)
             {
                 case 1:
@@ -246,50 +232,28 @@ namespace TCC.Data.Chat
 
             return mp;
         }
-        private static MessagePiece ParseHtmlAchievement(HtmlNode node)
+        private static ActionMessagePiece ParseHtmlAchievement(HtmlNode node)
         {
-            return new MessagePiece(node.InnerText.UnescapeHtml())
+            return new ActionMessagePiece(node.InnerText.UnescapeHtml())
             {
-                Type = MessagePieceType.Achievement,
-                RawLink = node.GetAttributeValue("param", "")
+                ChatLinkAction = node.GetAttributeValue("param", "")
             };
         }
-        private static MessagePiece ParseHtmlItem(HtmlNode node)
+        private static ActionMessagePiece ParseHtmlItem(HtmlNode node)
         {
-            var linkData = node.GetAttributeValue("param", "");
-            var pars = linkData.Substring(6).Split('@');
-            var id = uint.Parse(pars[0]);
-            var uid = long.Parse(pars[1]);
-            var owner = "";
-            try
+            return new ActionMessagePiece(node.InnerText.UnescapeHtml())
             {
-                owner = pars[2];
-            }
-            catch
-            {
-                // ignored
-            }
-
-
-            var result = new MessagePiece(node.InnerText.UnescapeHtml())
-            {
-                ItemId = id,
-                ItemUid = uid,
-                OwnerName = owner,
-                Type = MessagePieceType.Item,
-                RawLink = linkData
-            };
-            return result;
-        }
-        private static MessagePiece ParseHtmlQuest(HtmlNode node)
-        {
-            return new MessagePiece(node.InnerText.UnescapeHtml())
-            {
-                Type = MessagePieceType.Quest,
-                RawLink = node.GetAttributeValue("param", "")
+                ChatLinkAction = node.GetAttributeValue("param", "")
             };
         }
-        private static MessagePiece ParseHtmlLocation(HtmlNode node)
+        private static ActionMessagePiece ParseHtmlQuest(HtmlNode node)
+        {
+            return new ActionMessagePiece(node.InnerText.UnescapeHtml())
+            {
+                ChatLinkAction = node.GetAttributeValue("param", "")
+            };
+        }
+        private static ActionMessagePiece ParseHtmlLocation(HtmlNode node)
         {
             var linkData = node.GetAttributeValue("param", "");
 
@@ -321,11 +285,9 @@ namespace TCC.Data.Chat
 
             sb.Append(">");
 
-            return new MessagePiece(sb.ToString())
+            return new ActionMessagePiece(sb.ToString())
             {
-                Type = MessagePieceType.PointOfInterest,
-                Location = new Location(worldId, guardId, sectionId, x, y),
-                RawLink = linkData
+                ChatLinkAction = linkData
             };
         }
     }
