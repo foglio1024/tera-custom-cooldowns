@@ -132,7 +132,6 @@
     <Compile Include="Windows\Widgets\TccWidgetBuilder.cs" />
     <Compile Include="Utilities\AbnormalityUtils.cs" />
     <Compile Include="Data\Account.cs" />
-    <Compile Include="Annotations\Annotations1.cs" />
     <Compile Include="Controls\Chat\LfgBody.xaml.cs">
       <DependentUpon>LfgBody.xaml</DependentUpon>
     </Compile>
@@ -533,7 +532,6 @@
     <Compile Include="Sniffing\TcpSniffer.cs" />
     <Compile Include="Sniffing\TeraSniffer.cs" />
     <Compile Include="TemplateSelectors\AuthorLabelTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\PiecePopupSelector.cs" />
     <Compile Include="Data\Abnormalities\AbnormalityDuration.cs" />
     <Compile Include="Controls\Abnormalities\RoundAbnormalityIndicator.xaml.cs">
       <DependentUpon>RoundAbnormalityIndicator.xaml</DependentUpon>
@@ -716,8 +714,8 @@
     <Compile Include="Controls\Skills\NormalSkillContainer.xaml.cs">
       <DependentUpon>NormalSkillContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Chat\MessagePieceControl.xaml.cs">
-      <DependentUpon>MessagePieceControl.xaml</DependentUpon>
+    <Compile Include="Controls\Chat\MessagePieceBodyControl.xaml.cs">
+      <DependentUpon>MessagePieceBodyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\MentionToColorConverter.cs" />
     <Compile Include="Converters\SentReceivedToAngleConverter.cs" />
@@ -743,8 +741,8 @@
       <DependentUpon>TccMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Widgets\TccWidget.cs" />
-    <Compile Include="Controls\Chat\MoneyMessagePiece.xaml.cs">
-      <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
+    <Compile Include="Controls\Chat\MoneyMessagePieceControl.xaml.cs">
+      <DependentUpon>MoneyMessagePieceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WindowButtons.xaml.cs">
       <DependentUpon>WindowButtons.xaml</DependentUpon>
@@ -1211,7 +1209,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Chat\MessagePieceControl.xaml">
+    <Page Include="Controls\Chat\MessagePieceBodyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1223,7 +1221,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Chat\MoneyMessagePiece.xaml">
+    <Page Include="Controls\Chat\MoneyMessagePieceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
