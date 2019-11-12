@@ -88,20 +88,22 @@ namespace TCC.Data.Abnormalities
 
         private static void CheckDeadlyGamble(S_ABNORMALITY_BEGIN p)
         {
-            //if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+            if (p.AbnormalityId != 100801) return;
+            //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Start(p.Duration);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
         {
+            if (p.AbnormalityId != 100801) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+            //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_END p)
         {
+            if (p.AbnormalityId != 100801) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+            //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
