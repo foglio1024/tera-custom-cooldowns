@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using FoglioUtils;
 using FoglioUtils.Extensions;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
@@ -178,6 +179,11 @@ namespace TCC.Data.Chat
             Lines.Add(new MessageLine());
             foreach (var item in Pieces)
             {
+                if (item.Text == null)
+                {
+                    Log.F("Piece has null text!");
+                    continue;
+                }
                 if (item.Text.Contains("\r\n") || item.Text.Contains("\n\t") || item.Text.Contains("\n"))
                 {
                     item.Text = item.Text.Replace("\r\n", "").Replace("\n\t", "").Replace("\n", "");
@@ -342,14 +348,13 @@ namespace TCC.Data.Chat
             return content.ToString();
         }
 
-        // -- Builders ----------------------------------------------------------------
         public void Dispose()
         {
             SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
             SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
             SettingsWindowViewModel.FontSizeChanged -= FontSizeNPC;
 
-            foreach (var messagePiece in Pieces)
+            foreach (var messagePiece in Pieces.ToSyncList())
             {
                 messagePiece?.Dispose();
             }
