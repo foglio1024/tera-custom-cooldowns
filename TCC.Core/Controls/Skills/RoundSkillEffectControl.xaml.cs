@@ -19,14 +19,16 @@ namespace TCC.Controls.Skills
         public RoundSkillEffectControl()
         {
             InitializeComponent();
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
 
         private DurationCooldownIndicator _context;
         private DoubleAnimation _anim;
-        public string DurationLabel => _context == null? "": TimeUtils.FormatTime(_context.Buff.Seconds);
+        public string DurationLabel => _context == null ? "" : TimeUtils.FormatTime(_context.Buff.Seconds);
         public bool ShowEffectSeconds => _context?.Buff != null && _context.Buff.Seconds > 0;
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
@@ -36,6 +38,15 @@ namespace TCC.Controls.Skills
             _context.Buff.SecondsUpdated += OnSecondsUpdated;
             _context.Buff.Ended += OnBuffEnded;
             _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Duration));
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _context.Buff.Started -= OnBuffStarted;
+            _context.Buff.SecondsUpdated -= OnSecondsUpdated;
+            _context.Buff.Ended -= OnBuffEnded;
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
         }
 
         private void OnBuffEnded(Data.CooldownMode obj)

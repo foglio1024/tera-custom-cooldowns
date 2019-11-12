@@ -235,12 +235,14 @@ namespace TCC.Data
         public ApplyCommand(Listing listing)
         {
             _listing = listing;
-            _t = new Timer() { Interval = 5000 };
-            _t.Elapsed += (s, ev) =>
-            {
-                _t.Stop();
-                listing.CanApply = true;
-            };
+            _t = new Timer { Interval = 5000 };
+            _t.Elapsed += OnTimerElapsed;
+        }
+
+        void OnTimerElapsed(object s, ElapsedEventArgs ev)
+        {
+            _t.Stop();
+            _listing.CanApply = true;
         }
 #pragma warning disable 0067
         public event EventHandler CanExecuteChanged;

@@ -348,7 +348,7 @@ namespace TCC.Data.Chat
             return content.ToString();
         }
 
-        public void Dispose()
+        protected virtual void DisposeImpl()
         {
             SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
             SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
@@ -359,6 +359,12 @@ namespace TCC.Data.Chat
                 messagePiece?.Dispose();
             }
             Pieces.Clear();
+
+        }
+
+        public void Dispose()
+        {
+            DisposeImpl();
         }
     }
 }

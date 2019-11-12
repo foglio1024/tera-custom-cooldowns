@@ -27,10 +27,7 @@ namespace TCC.Controls.NPCs
 
             InitializeComponent();
 
-            DataContextChanged += (_, e) =>
-            {
-                if (e.NewValue is NPC npc) VM = new BossViewModel(npc);
-            };
+            DataContextChanged += OnDataContextChanged;
 
             _slideAnim= AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
             _hpAnim = AnimationFactory.CreateDoubleAnimation(150, 1, easing: true);
@@ -39,6 +36,11 @@ namespace TCC.Controls.NPCs
             _fadeAnim = AnimationFactory.CreateDoubleAnimation(250, 0, 1, framerate: 30);
 
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
+        }
+
+        private void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is NPC npc) VM = new BossViewModel(npc);
         }
 
         private void RefreshAbnormalityTemplate()
@@ -116,10 +118,13 @@ namespace TCC.Controls.NPCs
 
         private void OnDispose()
         {
+            DataContextChanged -= OnDataContextChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
             VM.HpFactorChanged -= OnHpChanged;
             VM.EnragedChanged -= OnEnragedChanged;
-
+            VM.ReEnraged -= OnReEnraged;
+            VM.Disposed -= OnDispose;
+            if (VM.NPC.TimerPattern != null) VM.NPC.TimerPattern.Started -= AnimateTimer;
             AnimateFadeOut();
         }
 

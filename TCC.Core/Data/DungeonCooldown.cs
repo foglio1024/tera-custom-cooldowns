@@ -1,4 +1,5 @@
-﻿using System.Windows.Threading;
+﻿using System.ComponentModel;
+using System.Windows.Threading;
 using FoglioUtils;
 using Newtonsoft.Json;
 using TCC.Data.Pc;
@@ -83,11 +84,20 @@ namespace TCC.Data
             Id = id;
             Entries = Runs;
             Owner = owner;
-            owner.PropertyChanged += (sender, args) =>
+            owner.PropertyChanged += OnOwnerPropertyChanged;
+        }
+
+        private void OnOwnerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
             {
-                if (args.PropertyName == nameof(Character.Coins)) N(nameof(AvailableEntries));
-                else if (args.PropertyName == nameof(Character.MaxCoins)) N(nameof(MaxAvailableEntries));
-            };
+                case nameof(Character.Coins):
+                    N(nameof(AvailableEntries));
+                    break;
+                case nameof(Character.MaxCoins):
+                    N(nameof(MaxAvailableEntries));
+                    break;
+            }
         }
 
         public void Reset()

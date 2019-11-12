@@ -18,9 +18,18 @@ namespace TCC.Controls.Chat
         public LFGcontrol()
         {
             InitializeComponent();
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+            _dc.PropertyChanged -= _dc_PropertyChanged;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             _dc = (LFG)DataContext;
             _dc.PropertyChanged += _dc_PropertyChanged;

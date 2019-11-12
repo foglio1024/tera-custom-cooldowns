@@ -62,6 +62,17 @@ namespace TCC.Data.Chat
             MembersView = CollectionViewUtils.InitView(_members, null, new List<SortDescription>());
         }
 
+        protected override void DisposeImpl()
+        {
+            _timer.Elapsed -= OnTimerTick;
+            _timer.Dispose();
+            if (_linkedListing != null)
+            {
+                _linkedListing.Players.CollectionChanged -= OnMembersChanged;
+            }
+            base.DisposeImpl();
+        }
+
         private void OnMembersChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             Task.Run(() =>

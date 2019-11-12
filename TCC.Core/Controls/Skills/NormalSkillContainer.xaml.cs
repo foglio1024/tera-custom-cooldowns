@@ -1,18 +1,29 @@
-﻿using FoglioUtils.Extensions;
+﻿using System.Windows;
+using FoglioUtils.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Skills
 {
-    /// <summary>
-    /// Logica di interazione per NormalSkillContainer.xaml
-    /// </summary>
     public partial class NormalSkillContainer
     {
         public NormalSkillContainer()
         {
             InitializeComponent();
-            Loaded += (_, __) => { SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged; };
-            Unloaded += (_, __) => { SettingsWindowViewModel.SkillShapeChanged -= OnSkillShapeChanged; };
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+        }
+
+        private void OnUnloaded(object _, RoutedEventArgs __)
+        {
+            SettingsWindowViewModel.SkillShapeChanged -= OnSkillShapeChanged;
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+
+        }
+
+        private void OnLoaded(object _, RoutedEventArgs __)
+        {
+            SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
         }
 
         private void OnSkillShapeChanged()

@@ -58,6 +58,7 @@ namespace TCC.Controls.Skills
             base.OnUnloaded(sender, e);
             if (Context == null) return;
             Context.FlashingForced -= OnForceFlashing;
+            Context.FlashingStopForced -= OnForceStopFlashing;
             Context.Reset -= OnReset;
         }
         protected void OnForceFlashing()

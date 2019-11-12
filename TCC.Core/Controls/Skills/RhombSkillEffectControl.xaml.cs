@@ -14,13 +14,25 @@ namespace TCC.Controls.Skills
         public RhombSkillEffectControl()
         {
             InitializeComponent();
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _context.Buff.Started -= OnBuffStarted;
+            _context.Buff.SecondsUpdated -= OnSecondsUpdated;
+            _context.Buff.Ended -= OnBuffEnded;
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+
         }
 
         private DurationCooldownIndicator _context;
         private DoubleAnimation _anim;
         public string DurationLabel => _context == null ? "" : TimeUtils.FormatTime(_context.Buff.Seconds);
         public bool ShowEffectSeconds => _context?.Buff != null && _context.Buff.Seconds > 0;
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
             if (DesignerProperties.GetIsInDesignMode(this) || !( DataContext is DurationCooldownIndicator)) return;

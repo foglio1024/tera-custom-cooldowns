@@ -237,6 +237,10 @@ namespace TCC.Data.Skills
         public void Dispose()
         {
             CanFlash = false;
+            _mainTimer.Tick -= CooldownEnded;
+            _offsetTimer.Tick -= StartSecondsTimer;
+            _secondsTimer.Tick -= DecreaseSeconds;
+
             _mainTimer.Stop();
             _offsetTimer.Stop();
             _secondsTimer.Stop();

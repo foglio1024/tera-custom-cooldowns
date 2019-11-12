@@ -173,10 +173,20 @@ namespace TCC.Controls.NPCs
 
             if (NPC.TimerPattern != null)
             {
-                NPC.TimerPattern.Started += () => IsTimerRunning = true;
-                NPC.TimerPattern.Ended += () => IsTimerRunning = false;
+                NPC.TimerPattern.Started += OnTimerPatternStarted;
+                NPC.TimerPattern.Ended += OnTimerPatternEnded;
             }
 
+        }
+
+        private void OnTimerPatternEnded()
+        {
+            IsTimerRunning = false;
+        }
+
+        private void OnTimerPatternStarted()
+        {
+            IsTimerRunning = true;
         }
 
         private void OnNumberTimerTick(object _, EventArgs __)
@@ -189,6 +199,12 @@ namespace TCC.Controls.NPCs
             WindowManager.ViewModels.NpcVM.RemoveNPC(NPC, Delay + 250);
             _numberTimer.Stop();
             _numberTimer.Tick -= OnNumberTimerTick;
+            NPC.PropertyChanged -= OnPropertyChanged;
+            if (NPC.TimerPattern != null)
+            {
+                NPC.TimerPattern.Started -= OnTimerPatternStarted;
+                NPC.TimerPattern.Ended -= OnTimerPatternEnded;
+            }
 
             base.OnNpcDelete();
         }

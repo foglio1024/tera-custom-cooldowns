@@ -41,8 +41,10 @@ namespace TCC.Data.NPCs
 
         public void Dispose()
         {
+            _timer.Elapsed -= OnTimerElapsed;
             _timer.Stop();
             _timer.Dispose();
+
         }
     }
 }

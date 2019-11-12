@@ -37,6 +37,9 @@ namespace TCC.Controls.Abnormalities
             if (_context == null) return;
             _context.Refreshed -= OnRefreshed;
             _context = null;
+            Loaded -= UserControl_Loaded;
+            Unloaded -= UserControl_Unloaded;
+
         }
         private void OnRefreshed()
         {

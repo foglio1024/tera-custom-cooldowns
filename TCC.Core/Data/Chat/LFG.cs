@@ -122,6 +122,7 @@ namespace TCC.Data.Chat
         }
         public void Dispose()
         {
+            _removeTimer.Elapsed -= _removeTimer_Elapsed;
             _removeTimer.Stop();
             _removeTimer.Dispose();
         }

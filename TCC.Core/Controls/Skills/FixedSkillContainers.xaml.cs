@@ -49,7 +49,18 @@ namespace TCC.Controls.Skills
             _opacityDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase(), BeginTime = TimeSpan.FromMilliseconds(1000) };
 
             Loaded += OnLoaded;
-            Unloaded += (_, __) => { SettingsWindowViewModel.AbnormalityShapeChanged -= OnSkillShapeChanged; };
+            Unloaded += OnUnloaded;
+
+        }
+
+        private void OnUnloaded(object _, RoutedEventArgs __)
+        {
+            SettingsWindowViewModel.AbnormalityShapeChanged -= OnSkillShapeChanged;
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+            VM.SecondarySkills.CollectionChanged -= SecondarySkills_CollectionChanged;
+            VM.MainSkills.CollectionChanged -= MainSkills_CollectionChanged;
+            VM.SkillsLoaded -= OnSkillsLoaded;
 
         }
 

@@ -55,14 +55,29 @@ namespace TCC.Controls.Group
 
         public GroupMemberBase()
         {
-            Loaded += (_, __) =>
-            {
-                UpdateSettings();
-                WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
-                WindowManager.ViewModels.GroupVM.PropertyChanged += (___, args) => { if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings(); };
-                SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
-            };
-            Unloaded += (_, __) => SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+        }
+
+        private void OnLoaded(object _, RoutedEventArgs __)
+        {
+            UpdateSettings();
+            WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
+            WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupVmPropertyChanged;
+            SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
+        }
+
+        private void OnUnloaded(object _, RoutedEventArgs __)
+        {
+            SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
+            WindowManager.ViewModels.GroupVM.SettingsUpdated -= UpdateSettings;
+            WindowManager.ViewModels.GroupVM.PropertyChanged -= OnGroupVmPropertyChanged;
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+        }
+        private void OnGroupVmPropertyChanged(object ___, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings();
         }
 
         private void UpdateSettings()

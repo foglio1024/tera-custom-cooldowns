@@ -6,9 +6,6 @@ using TCC.Moongourd;
 
 namespace TCC.Controls.Chat
 {
-    /// <summary>
-    /// Logica di interazione per MoongourdPopup.xaml
-    /// </summary>
     public partial class MoongourdPopup : INotifyPropertyChanged
     {
         private string _playerName;
@@ -16,7 +13,6 @@ namespace TCC.Controls.Chat
         public MoongourdPopup()
         {
             InitializeComponent();
-            Loaded += MoongourdPopup_Loaded;
             MouseLeave += (s, ev) => WindowManager.ViewModels.PlayerMenuVM.Close();
         }
 
@@ -29,10 +25,6 @@ namespace TCC.Controls.Chat
                 _playerName = value;
                 NPC();
             }
-        }
-
-        private void MoongourdPopup_Loaded(object sender, RoutedEventArgs e)
-        {
         }
 
         public void SetInfo(string name, string region)

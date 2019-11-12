@@ -2,13 +2,11 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using FoglioUtils;
 using TCC.Data.Chat;
 
 namespace TCC.Controls.Chat
 {
-    /// <summary>
-    /// Logica di interazione per ChatMessageControl.xaml
-    /// </summary>
     public partial class ChatMessageControl
     {
         private readonly DoubleAnimation _anim;
@@ -16,8 +14,7 @@ namespace TCC.Controls.Chat
         public ChatMessageControl()
         {
             InitializeComponent();
-            _anim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(250)){EasingFunction = new QuadraticEase()};
-            _anim.Completed += AnimCompleted;
+            _anim = AnimationFactory.CreateDoubleAnimation(250, 1, 0, true, AnimCompleted, 30);
             Timeline.SetDesiredFrameRate(_anim, 30);
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -27,6 +24,8 @@ namespace TCC.Controls.Chat
         {
             if (_dc == null) return;
             _dc.IsVisible = true;
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
