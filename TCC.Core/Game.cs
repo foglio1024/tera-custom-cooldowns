@@ -332,7 +332,7 @@ namespace TCC
                 Log.N("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
 
             }
-            if (!ChatUtils.CheckMention(m.Message)) return;
+            if (!ChatUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
             if (BlockList.Contains(m.AuthorName)) return;
             ChatUtils.CheckNotify(m.Message, (ChatChannel)m.Channel, m.AuthorName);
         }
