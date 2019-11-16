@@ -174,6 +174,7 @@ namespace TCC.Data.Chat
         public MoneyMessagePiece(Money money)
         {
             Money = money;
+            Text = Money.ToString();
         }
     }
 
