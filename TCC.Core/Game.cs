@@ -222,6 +222,7 @@ namespace TCC
             // guardian
             PacketAnalyzer.Processor.Hook<S_FIELD_EVENT_ON_ENTER>(OnFieldEventOnEnter);
             PacketAnalyzer.Processor.Hook<S_FIELD_EVENT_ON_LEAVE>(OnFieldEventOnLeave);
+            PacketAnalyzer.Processor.Hook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
 
             //
             PacketAnalyzer.Processor.Hook<S_USER_STATUS>(OnUserStatus);
@@ -379,19 +380,12 @@ namespace TCC
 
         private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
         {
+            if (DB.SystemMessagesDatabase.IsHandledInternally(x.Message)) return;
             App.BaseDispatcher.InvokeAsync(() =>
             {
                 try
                 {
                     SystemMessagesProcessor.AnalyzeMessage(x.Message);
-
-                    //var msg = x.Message.Split('\v');
-                    //var opcode = UInt16.Parse(msg[0].Substring(1));
-                    //var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
-
-                    //if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
-                    //SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
-
                 }
                 catch (Exception)
                 {
@@ -506,7 +500,6 @@ namespace TCC
                 !App.Settings.FpsAtGuardian) return;
             ProxyInterface.Instance.Stub.InvokeCommand("fps mode 1");
         }
-
         private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_ENTER");
@@ -514,6 +507,15 @@ namespace TCC
             if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
                 !App.Settings.FpsAtGuardian) return;
             ProxyInterface.Instance.Stub.InvokeCommand("fps mode 3");
+        }
+        private static void OnFieldPointInfo(S_FIELD_POINT_INFO p)
+        {
+            if (Account.CurrentCharacter == null) return;
+            var old = Account.CurrentCharacter.GuardianInfo.Cleared;
+            Account.CurrentCharacter.GuardianInfo.Claimed = p.Claimed;
+            Account.CurrentCharacter.GuardianInfo.Cleared = p.Cleared;
+            if (old == p.Cleared) return;
+            SystemMessagesProcessor.AnalyzeMessage("@0","SMT_FIELD_EVENT_REWARD_AVAILABLE");
         }
 
         private static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
@@ -573,6 +575,7 @@ namespace TCC
             Logged = true;
             LoadingScreen = true;
             Encounter = false;
+            Account.LoginCharacter(m.PlayerId);
             Guild.Clear();
             FriendList.Clear();
             BlockList.Clear();

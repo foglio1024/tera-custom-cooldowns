@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using FoglioUtils.Extensions;
 using TCC.Data.Chat;
+using TCC.Parsing;
 
 namespace TCC.Data.Databases
 {
     public class SystemMessagesDatabase : DatabaseBase
     {
         public Dictionary<string, SystemMessageData> Messages { get; }
-
+        private List<string> _handledInternally = new List<string>{ "SMT_FIELD_EVENT_REWARD_AVAILABLE"};
         protected override string FolderName => "sys_msg";
         protected override string Extension => "tsv";
 
@@ -109,6 +111,19 @@ namespace TCC.Data.Databases
             var ench = Messages["SMT_MAX_ENCHANT_SUCCEED"];
             var newEnch = new SystemMessageData($"<font color=\"{R.Colors.ChatSystemGenericColor.ToHex()}\">{ench.Template}</font>", ench.ChatChannel);
             Messages["SMT_MAX_ENCHANT_SUCCEED"] = newEnch;
+        }
+
+        public bool IsHandledInternally(string msg)
+        {
+            try
+            {
+                var pars = msg.Split('\v');
+                var opc = ushort.Parse(pars[0].Substring(1));
+                var opcName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opc);
+                return _handledInternally.Contains(opcName);
+            }
+            catch { }
+            return false;
         }
     }
 }

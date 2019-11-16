@@ -45,9 +45,9 @@ namespace TCC.Data.Chat
                 }
 
             }
-            catch
+            catch (Exception e)
             {
-                Log.F($"Failed to parse system message: {parameters} -- {template.Template}");
+                Log.F($"Failed to parse system message: {parameters} -- {template.Template}\n {e}");
                 // ignored
             }
         }

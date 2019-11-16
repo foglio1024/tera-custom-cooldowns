@@ -64,8 +64,12 @@ namespace TCC.Data.Chat
 
         protected override void DisposeImpl()
         {
+            if (_timer != null)
+            {
+
             _timer.Elapsed -= OnTimerTick;
             _timer.Dispose();
+            }
             if (_linkedListing != null)
             {
                 _linkedListing.Players.CollectionChanged -= OnMembersChanged;

@@ -672,7 +672,6 @@
                        FontSize="9"
                        Width="15"
                        Foreground="{Binding ItemLevelTier, Converter={StaticResource IlvlTierToColor}}"
-
                        TextAlignment="Center">
                 <TextBlock.RenderTransform>
                     <TranslateTransform X="0" Y="4" />
