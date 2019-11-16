@@ -139,7 +139,7 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Background="Transparent" Foreground="White" FontSize="14" CaretBrush="White"
                      ToolTip="Tab name"
-                     Text="{Binding TabInfoVM.TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      BorderThickness="0 0 0 0" Margin="5 5 5 5" Padding="0 0 0 0" />
             <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="1" Margin="5 5" Height="15"
                   IsHitTestVisible="False" Opacity=".3" />

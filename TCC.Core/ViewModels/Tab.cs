@@ -39,7 +39,6 @@ namespace TCC.ViewModels
     public class TabInfoVM : TSPropertyChanged
     {
         private string _tabName;
-
         public string TabName
         {
             get => _tabName;
@@ -50,6 +49,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
+
         public TSObservableCollection<string> Authors { get; set; }
 
         public TSObservableCollection<string> ExcludedAuthors { get; set; }
@@ -137,6 +137,18 @@ namespace TCC.ViewModels
         private ICollectionView _messages;
         private ChatMessage _pinnedMessage;
 
+
+        public string TabName
+        {
+            get => TabInfo?.Name;
+            set
+            {
+                if (TabInfo?.Name == value) return;
+                if (TabInfo != null) TabInfo.Name = value;
+                if (TabInfoVM != null) TabInfoVM.TabName = value;
+                N();
+            }
+        }
 
         [JsonIgnore]
         public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList(); // needed for combobox in settings
