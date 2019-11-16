@@ -505,8 +505,7 @@
                 <!-- Header icon -->
                 <StackPanel Orientation="Horizontal">
                     <Path Data="{Binding SelectedCharacter.Class, Converter={StaticResource ClassToSvg}}"
-                          Opacity=".8"
-                          Effect="{StaticResource DropShadow}"
+                          Opacity="1"
                           Width="70"
                           Height="70"
                           VerticalAlignment="Center"
@@ -530,17 +529,17 @@
                                  FontWeight="DemiBold">
                                 <Run.Style>
                                     <Style TargetType="Run">
-                                        <Setter Property="Foreground" Value="{StaticResource MpBrushLight}"></Setter>
+                                        <Setter Property="Foreground" Value="{StaticResource HpBrushLight}"></Setter>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedCharacter.Level}" Value="65">
-                                                <Setter Property="Foreground" Value="#ccc"></Setter>
+                                            <DataTrigger Binding="{Binding SelectedCharacter.Level}" Value="70">
+                                                <Setter Property="Foreground" Value="{StaticResource MpBrushLight}"></Setter>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Run.Style>
                             </Run>
                             <Run Text=" -  ilv." />
-                            <Run Text="{Binding SelectedCharacter.ItemLevel, Mode=OneWay}"
+                            <Run Text="{Binding SelectedCharacter.ItemLevel, Mode=OneWay, StringFormat=N2}"
                                  Foreground="{Binding SelectedCharacter.ItemLevelTier, Converter={StaticResource IlvlTierToColor}}"
                                  FontWeight="DemiBold" />
                         </TextBlock>
@@ -608,7 +607,7 @@
                       Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="1.05*"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <!-- Col 1 -->
@@ -844,11 +843,10 @@
                                                     </ToolTip>
                                                 </Grid.ToolTip>
                                                 <Rectangle Width="40" Height="40"
-                                                           RadiusX="5"
-                                                           RadiusY="5"
+                                                           RadiusX="0"
+                                                           RadiusY="0"
                                                            Margin="0 0 0 10"
                                                            StrokeThickness="1"
-                                                           Effect="{StaticResource DropShadow}"
                                                            Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}">
                                                     <Shape.Fill>
                                                         <ImageBrush
@@ -858,7 +856,7 @@
                                                 </Rectangle>
                                                 <Border VerticalAlignment="Bottom"
                                                         Height="18"
-                                                        CornerRadius="2"
+                                                        CornerRadius="0"
                                                         Background="{StaticResource RevampBackgroundBrush}"
                                                         HorizontalAlignment="Center"
                                                         BorderThickness="1"
@@ -912,26 +910,26 @@
                             </Button>
 
                             <ScrollViewer Grid.Row="1" CanContentScroll="False"
-                                          VerticalAlignment="Stretch">
+                                          VerticalAlignment="Stretch" Margin="0 0 0 0">
                                 <ItemsControl ItemsSource="{Binding SelectedCharacterInventory}"
-                                              Margin="0 0 0 0"
                                               VerticalAlignment="Top"
                                               UseLayoutRounding="True">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                            <WrapPanel Orientation="Horizontal"/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="{x:Type pc:InventoryItem}">
-                                            <Grid Margin="4" ToolTip="{Binding Item.Name}">
+                                            <Grid Margin="2" ToolTip="{Binding Item.Name}">
                                                 <Rectangle Width="40" Height="40"
-                                                           RadiusX="5"
-                                                           RadiusY="5"
+                                                           RadiusX="0"
+                                                           RadiusY="0"
                                                            Margin="0 0 0 0"
                                                            StrokeThickness="1"
-                                                           Effect="{StaticResource DropShadow}">
-                                                    <!--TODO:Stroke="{Binding Item.RareGrade, Converter={StaticResource ...}}"-->
+                                                           >
+                                                           <!--Stroke="#3fff"-->
+                                                           <!--Effect="{StaticResource DropShadow}"-->
                                                     <Shape.Fill>
                                                         <ImageBrush
                                                             ImageSource="{Binding Item.IconName, Converter={StaticResource IconNameToPath}}">
@@ -947,26 +945,30 @@
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Item.RareGrade}"
                                                                              Value="Uncommon">
-                                                                    <Setter Property="Stroke" Value="Green"></Setter>
+                                                                    <Setter Property="Stroke" Value="{StaticResource ItemUncommonBrush}"></Setter>
+
                                                                 </DataTrigger>
+
                                                                 <DataTrigger Binding="{Binding Item.RareGrade}"
                                                                              Value="Rare">
-                                                                    <Setter Property="Stroke" Value="DodgerBlue"></Setter>
+                                                                    <Setter Property="Stroke" Value="{StaticResource ItemRareBrush}"></Setter>
+
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Item.RareGrade}"
                                                                              Value="Superior">
-                                                                    <Setter Property="Stroke" Value="Orange"></Setter>
+                                                                    <Setter Property="Stroke" Value="{StaticResource ItemSuperiorBrush}"></Setter>
+
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Shape.Style>
                                                 </Rectangle>
-                                                <Polygon Points="0 0 1 0 0 1" Width="12" Height="12"
+                                                <Polygon Points="0 0 1 0 0 1" Width="11" Height="12"
                                                          Stretch="Uniform" VerticalAlignment="Top"
-                                                         HorizontalAlignment="Left">
-                                                    <Shape.Effect>
+                                                         HorizontalAlignment="Left" Visibility="Visible">
+                                                    <!--<Shape.Effect>
                                                         <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
-                                                    </Shape.Effect>
+                                                    </Shape.Effect>-->
                                                     <Shape.Style>
                                                         <Style TargetType="Shape">
                                                             <Style.Triggers>
@@ -978,15 +980,16 @@
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Item.RareGrade}"
                                                                              Value="Uncommon">
-                                                                    <Setter Property="Fill" Value="Green"></Setter>
+                                                                    <Setter Property="Fill" Value="{StaticResource ItemUncommonBrush}"></Setter>
+
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Item.RareGrade}"
                                                                              Value="Rare">
-                                                                    <Setter Property="Fill" Value="DodgerBlue"></Setter>
+                                                                    <Setter Property="Fill" Value="{StaticResource ItemRareBrush}"></Setter>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Item.RareGrade}"
                                                                              Value="Superior">
-                                                                    <Setter Property="Fill" Value="Orange"></Setter>
+                                                                    <Setter Property="Fill" Value="{StaticResource ItemSuperiorBrush}"></Setter>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>

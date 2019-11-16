@@ -45,10 +45,14 @@ namespace TCC.Windows
 
         public void ShowDetails()
         {
-            InventoryFilter.Clear();
-            var an = new DoubleAnimation(1, TimeSpan.FromSeconds(.3)) {EasingFunction = MiscResources.QuadraticEase};
-            an.Completed += (o, args) => DetailsBorder.IsHitTestVisible = true;
-            DetailsBorder.BeginAnimation(OpacityProperty, an);
+            Dispatcher.InvokeAsync(() =>
+            {
+                InventoryFilter.Clear();
+                var an = new DoubleAnimation(1, TimeSpan.FromSeconds(.3))
+                    {EasingFunction = MiscResources.QuadraticEase};
+                an.Completed += (o, args) => DetailsBorder.IsHitTestVisible = true;
+                DetailsBorder.BeginAnimation(OpacityProperty, an);
+            });
         }
 
         private void FilterInventory(object sender, TextChangedEventArgs e)

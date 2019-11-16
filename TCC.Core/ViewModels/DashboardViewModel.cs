@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using TCC.Controls;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -22,6 +21,7 @@ using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.TemplateSelectors;
 using TCC.Utils;
 using TCC.Windows;
 using TeraDataLite;
@@ -31,7 +31,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC.ViewModels
 {
 
-    [TccModule()]
+    [TccModule]
     public class DashboardViewModel : TccWindowViewModel
     {
         /* -- Fields ----------------------------------------------- */
@@ -343,7 +343,11 @@ namespace TCC.ViewModels
 
                 SelectedCharacter = character;
                 SelectedCharacterInventory = CollectionViewUtils.InitLiveView(character.Inventory,
-                    sortFilters: new[] { new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending) });
+                    sortFilters: new[]
+                    {
+                        new SortDescription($"{nameof(Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),
+                        new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending)
+                    });
 
                 WindowManager.DashboardWindow.ShowDetails();
                 Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
@@ -359,13 +363,13 @@ namespace TCC.ViewModels
             PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
             PacketAnalyzer.Processor.Hook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
             PacketAnalyzer.Processor.Hook<S_NPCGUILD_LIST>(OnNpcGuildList);
-            PacketAnalyzer.Processor.Hook<S_INVEN>(OnInven);
+            PacketAnalyzer.Processor.Hook<S_ITEMLIST>(OnItemList);
             PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
             PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
             PacketAnalyzer.Processor.Hook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
-            PacketAnalyzer.Processor.Hook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
+            //PacketAnalyzer.Processor.Hook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
             PacketAnalyzer.Processor.Hook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
             PacketAnalyzer.Processor.Hook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
         }
@@ -373,13 +377,13 @@ namespace TCC.ViewModels
         {
             PacketAnalyzer.Processor.Unhook<S_UPDATE_NPCGUILD>(OnUpdateNpcGuild);
             PacketAnalyzer.Processor.Unhook<S_NPCGUILD_LIST>(OnNpcGuildList);
-            PacketAnalyzer.Processor.Unhook<S_INVEN>(OnInven);
+            PacketAnalyzer.Processor.Unhook<S_ITEMLIST>(OnItemList);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
             PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
             PacketAnalyzer.Processor.Unhook<S_DUNGEON_COOL_TIME_LIST>(OnDungeonCoolTimeList);
-            PacketAnalyzer.Processor.Unhook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
+            //PacketAnalyzer.Processor.Unhook<S_FIELD_POINT_INFO>(OnFieldPointInfo);
             PacketAnalyzer.Processor.Unhook<S_AVAILABLE_EVENT_MATCHING_LIST>(OnAvailableEventMatchingList);
             PacketAnalyzer.Processor.Unhook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
         }
@@ -453,10 +457,10 @@ namespace TCC.ViewModels
             CurrentCharacter.ItemLevel = m.Ilvl;
             CurrentCharacter.Level = m.Level;
         }
-        private void OnInven(S_INVEN m)
+        private void OnItemList(S_ITEMLIST m)
         {
             if (m.Failed) return;
-            WindowManager.ViewModels.DashboardVM.UpdateInventory(m.Items, m.First);
+            UpdateInventory(m.Items, m.Pocket > 0);
         }
         private void OnNpcGuildList(S_NPCGUILD_LIST m)
         {
@@ -695,7 +699,8 @@ namespace TCC.ViewModels
             });
         }
 
-        public void UpdateInventory(Dictionary<uint, ItemAmount> list, bool first)
+        private bool _firstInven = true;
+        public void UpdateInventory(Dictionary<uint, ItemAmount> list, bool pocket)
         {
             var em = list.Values.FirstOrDefault(x => x.Id == 151643);
             var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
@@ -710,7 +715,12 @@ namespace TCC.ViewModels
             if (ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
             try
             {
-                if (first) CurrentCharacter.Inventory.Clear();
+                if (_firstInven)
+                {
+                    CurrentCharacter.Inventory.Clear();
+                    _firstInven = false;
+                }
+                
 
                 foreach (var keyVal in list)
                 {
@@ -728,6 +738,7 @@ namespace TCC.ViewModels
                 Log.F($"Error while refreshing inventory: {e}");
             }
 
+            if (!pocket) _firstInven = true;
             N(nameof(SelectedCharacterInventory));
         }
 
