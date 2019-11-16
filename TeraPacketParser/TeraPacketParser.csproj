@@ -92,7 +92,7 @@
     <Compile Include="Messages\S_GUILD_MEMBER_LIST.cs" />
     <Compile Include="Messages\S_GUILD_TOWER_INFO.cs" />
     <Compile Include="Messages\S_IMAGE_DATA.cs" />
-    <Compile Include="Messages\S_INVEN.cs" />
+    <Compile Include="Messages\S_ITEMLIST.cs" />
     <Compile Include="Messages\S_JOIN_PRIVATE_CHANNEL.cs" />
     <Compile Include="Messages\S_LEARN_EP_PERK.cs" />
     <Compile Include="Messages\S_LEAVE_PARTY.cs" />

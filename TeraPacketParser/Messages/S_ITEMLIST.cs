@@ -3,82 +3,85 @@ using TeraDataLite;
 
 namespace TeraPacketParser.Messages
 {
-    public class S_INVEN : ParsedMessage
+    public class S_ITEMLIST : ParsedMessage
     {
         public bool Failed { get; }
         public bool IsOpen { get; }
         public bool First { get; }
         public bool More { get; }
+        public bool LastInBatch { get; }
+        public int Pocket { get; set; }
 
         public Dictionary<uint, ItemAmount> Items { get; private set; }
         public Dictionary<uint, ParsedGearItem> GearItems { get; private set; }
 
-        public S_INVEN(TeraMessageReader reader) : base(reader)
+        public S_ITEMLIST(TeraMessageReader r) : base(r)
         {
             Items = new Dictionary<uint, ItemAmount>();
             GearItems = new Dictionary<uint, ParsedGearItem>();
 
-            // ---------------------  TODO: move somewhere else -------------------------------------
-            // don't parse if standard noctenium is on 
-            //if (SessionManager.CurrentPlayer.InfBuffs.Any(x => AbnormalityDatabase.NoctIds.Contains(x.Abnormality.Id))) return;
-            // -----------------------------------------------------------------------------------------
-
             try
             {
-                var count = reader.ReadUInt16();
-                var offset = reader.ReadUInt16();
-                reader.Skip(16);
-                IsOpen = reader.ReadBoolean();
-                First = reader.ReadBoolean();
-                More = reader.ReadBoolean();
+                var count = r.ReadUInt16();
+                var offset = r.ReadUInt16();
+                var gameId = r.ReadUInt64();
+                var container = r.ReadInt32();
+                Pocket = r.ReadInt32();
+                var numPockets = r.ReadInt32();
+                var size = r.ReadInt32();
+                var money = r.ReadInt64();
+                var lootPriority = r.ReadInt32();
+                IsOpen = r.ReadBoolean();
+                var requested = r.ReadBoolean();
+                First = r.ReadBoolean();
+                More = r.ReadBoolean();
+                LastInBatch= r.ReadBoolean();
                 if (offset == 0) return;
-                reader.BaseStream.Position = offset - 4;
+                r.RepositionAt(offset);
                 for (var i = 0; i < count; i++)
                 {
-                    reader.Skip(2); // var curr = reader.ReadUInt16();
-                    var next = reader.ReadUInt16();
-                    reader.Skip(2); // passivity array count
-                    reader.Skip(2); // passivity array offset
-                    reader.Skip(2);     // Unknown array count added.    by HQ 20190122
-                    reader.Skip(2);     // Unknown array offset added.    by HQ 20190122
-                    reader.Skip(2); // custom string offset
-                    var itemId = reader.ReadUInt32();
-                    reader.Skip(8); //dbid
-                    reader.Skip(8); //ownerId (playerId)
-                    var slot = reader.ReadUInt32();
-                    reader.Skip(4); //storage type (0)
-                    var amount = reader.ReadInt32();
-                    var enchant = reader.ReadInt32();
-                    reader.Skip(4); //durability
-                    reader.Skip(1); //soulbound
-                    reader.Skip(4 * 5); //crystals
-                    reader.Skip(4); //passivity set
-                    reader.Skip(4); //extra passivity set
-                    reader.Skip(4); //remodel
-                    reader.Skip(4); //dye
-                    reader.Skip(4); //dye sec remaining
-                    reader.Skip(8); //dye date
-                    reader.Skip(8); //dye expire date
-                    reader.Skip(1); //masterwork
-                    reader.Skip(4); //enigma
-                    reader.Skip(4); //times brokered
-                    reader.Skip(4); //enchant advantage
-                    reader.Skip(4); //enchant bonus
-                    reader.Skip(4); //enchant bonus max plus
-                    reader.Skip(8); //bound to player (playerId)
-                    reader.Skip(1); //awakened
-                    reader.Skip(4); //liberation count
-                    reader.Skip(4); //feedstock
-                    reader.Skip(4); //bound to item
-                    reader.Skip(1); //has etching
-                    reader.Skip(1); //pc bang
-                    var exp = reader.ReadInt64();
+                    r.Skip(2); // var curr = reader.ReadUInt16();
+                    var next = r.ReadUInt16();
+                    r.Skip(4); // crystals ref
+                    r.Skip(4); // passivity ref
+                    r.Skip(4); // merged passivity ref
+                    r.Skip(2); // custom string offset
+                    var itemId = r.ReadUInt32();
+                    r.Skip(8); //dbid
+                    r.Skip(8); //ownerId (playerId)
+                    var slot = r.ReadUInt32();
+                    var amount = r.ReadInt32();
+                    var enchant = r.ReadInt32();
+                    r.Skip(4); //durability
+                    r.Skip(4); //soulbound
+                    r.Skip(4); //passivity sets
+                    r.Skip(4); //extra passivity sets
+                    r.Skip(4); //remodel
+                    r.Skip(4); //dye
+                    r.Skip(4); //dye sec remaining
+                    r.Skip(8); //dye date
+                    r.Skip(8); //dye expire date
+                    r.Skip(1); //masterwork
+                    r.Skip(4); //enigma
+                    r.Skip(4); //times brokered
+                    r.Skip(4); //enchant advantage
+                    r.Skip(4); //enchant bonus
+                    r.Skip(4); //enchant bonus max plus
+                    r.Skip(8); //bound to player (playerId)
+                    r.Skip(1); //awakened
+                    r.Skip(4); //liberation count
+                    r.Skip(4); //feedstock
+                    r.Skip(4); //bound to item
+                    r.Skip(1); //has etching
+                    r.Skip(1); //pc bang
+                    var exp = r.ReadInt64();
 
-                    if (slot > 39) Items[slot] = new ItemAmount(itemId, amount);
-                    else GearItems[itemId] = new ParsedGearItem(itemId, enchant, exp);
+                    Items[slot] = new ItemAmount(itemId, amount);
+                    //if (slot > 39) Items[slot] = new ItemAmount(itemId, amount);
+                    //else GearItems[itemId] = new ParsedGearItem(itemId, enchant, exp);
 
                     if (next == 0) break;
-                    reader.BaseStream.Position = next - 4;
+                    r.RepositionAt(next);
                 }
             }
             catch
@@ -86,6 +89,7 @@ namespace TeraPacketParser.Messages
                 Failed = true;
             }
         }
+
     }
     //public class S_INVEN : ParsedMessage
     //{

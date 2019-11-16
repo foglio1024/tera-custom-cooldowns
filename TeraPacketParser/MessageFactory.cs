@@ -84,7 +84,7 @@ namespace TeraPacketParser
             { nameof(S_DUNGEON_COOL_TIME_LIST),                Contructor<Func<TeraMessageReader, S_DUNGEON_COOL_TIME_LIST>>() },
             { nameof(S_ACCOUNT_PACKAGE_LIST),                  Contructor<Func<TeraMessageReader, S_ACCOUNT_PACKAGE_LIST>>() },
             { nameof(S_GUILD_TOWER_INFO),                      Contructor<Func<TeraMessageReader, S_GUILD_TOWER_INFO>>() },
-            { nameof(S_INVEN),                                 Contructor<Func<TeraMessageReader, S_INVEN>>() },
+            { nameof(S_ITEMLIST),                                 Contructor<Func<TeraMessageReader, S_ITEMLIST>>() },
             { nameof(S_SPAWN_USER),                            Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
             { nameof(S_PARTY_MEMBER_INTERVAL_POS_UPDATE),      Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INTERVAL_POS_UPDATE>>() },
             { nameof(S_ABNORMALITY_DAMAGE_ABSORB),             Contructor<Func<TeraMessageReader, S_ABNORMALITY_DAMAGE_ABSORB>>() },
