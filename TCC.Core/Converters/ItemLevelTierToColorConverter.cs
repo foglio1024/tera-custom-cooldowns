@@ -16,34 +16,40 @@ namespace TCC.Converters
 
             if (value == null) return ret;
 
-            var tierInt = (int)value;
-            var tier = (ItemLevelTier)tierInt;
+            try
+            {
+                var tierInt = (int)value;
+                var tier = (ItemLevelTier)tierInt;
 
-            if (targetType == typeof(Brushes))
-                switch (tier)
-                {
-                    case ItemLevelTier.Tier0: ret = R.Brushes.IceBrushLight; break;
-                    case ItemLevelTier.Tier1: ret = R.Brushes.Tier1DungeonBrush; break;
-                    case ItemLevelTier.Tier2: ret = R.Brushes.Tier2DungeonBrush; break;
-                    case ItemLevelTier.Tier3: ret = R.Brushes.Tier3DungeonBrush; break;
-                    case ItemLevelTier.Tier4: ret = R.Brushes.Tier4DungeonBrush; break;
-                    case ItemLevelTier.Tier5: ret = R.Brushes.Tier5DungeonBrush; break;
-                    case ItemLevelTier.Tier6: ret = R.Brushes.HpBrush; break;
-                    case ItemLevelTier.Tier7: ret = R.Brushes.AssaultStanceBrush; break;
-                }
-            else
-                switch (tier)
-                {
-                    case ItemLevelTier.Tier0: ret = R.Colors.IceColorLight; break;
-                    case ItemLevelTier.Tier1: ret = R.Colors.Tier1DungeonColor; break;
-                    case ItemLevelTier.Tier2: ret = R.Colors.Tier2DungeonColor; break;
-                    case ItemLevelTier.Tier3: ret = R.Colors.Tier3DungeonColor; break;
-                    case ItemLevelTier.Tier4: ret = R.Colors.Tier4DungeonColor; break;
-                    case ItemLevelTier.Tier5: ret = R.Colors.Tier5DungeonColor; break;
-                    case ItemLevelTier.Tier6: ret = R.Colors.HpColor; break;
-                    case ItemLevelTier.Tier7: ret = R.Colors.AssaultStanceColor; break;
-                }
+                if (targetType == typeof(Brush))
+                    switch (tier)
+                    {
+                        case ItemLevelTier.Tier0: ret = R.Brushes.IceBrushLight; break;
+                        case ItemLevelTier.Tier1: ret = R.Brushes.Tier1DungeonBrush; break;
+                        case ItemLevelTier.Tier2: ret = R.Brushes.Tier2DungeonBrush; break;
+                        case ItemLevelTier.Tier3: ret = R.Brushes.Tier3DungeonBrush; break;
+                        case ItemLevelTier.Tier4: ret = R.Brushes.Tier4DungeonBrush; break;
+                        case ItemLevelTier.Tier5: ret = R.Brushes.Tier5DungeonBrush; break;
+                        case ItemLevelTier.Tier6: ret = R.Brushes.HpBrush; break;
+                        case ItemLevelTier.Tier7: ret = R.Brushes.AssaultStanceBrush; break;
+                    }
+                else
+                    switch (tier)
+                    {
+                        case ItemLevelTier.Tier0: ret = R.Colors.IceColorLight; break;
+                        case ItemLevelTier.Tier1: ret = R.Colors.Tier1DungeonColor; break;
+                        case ItemLevelTier.Tier2: ret = R.Colors.Tier2DungeonColor; break;
+                        case ItemLevelTier.Tier3: ret = R.Colors.Tier3DungeonColor; break;
+                        case ItemLevelTier.Tier4: ret = R.Colors.Tier4DungeonColor; break;
+                        case ItemLevelTier.Tier5: ret = R.Colors.Tier5DungeonColor; break;
+                        case ItemLevelTier.Tier6: ret = R.Colors.HpColor; break;
+                        case ItemLevelTier.Tier7: ret = R.Colors.AssaultStanceColor; break;
+                    }
 
+            }
+            catch
+            {
+            }
             return ret;
         }
 
