@@ -191,5 +191,12 @@ namespace TCC.Windows
         {
             Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD", "userName", "Foglio", "npcName", "Ortan");
         }
+
+        private void SetAtkSpeed(object sender, RoutedEventArgs e)
+        {
+            if (((Button)sender).Content.ToString() == "Swift") TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(1000);
+            else if (((Button)sender).Content.ToString() == "Arush") TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(1000);
+
+        }
     }
 }
