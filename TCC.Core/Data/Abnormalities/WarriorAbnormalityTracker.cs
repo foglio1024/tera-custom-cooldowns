@@ -16,7 +16,7 @@ namespace TCC.Data.Abnormalities
         private static readonly uint[] SwiftGlyphs = { 21010, 21070 };
         public const string DeadlyGambleIconName = "icon_skills.deadlywill_tex";
 
-        private Skill _bladeWaltz;
+        private readonly Skill _bladeWaltz;
 
         public WarriorAbnormalityTracker()
         {
@@ -31,6 +31,7 @@ namespace TCC.Data.Abnormalities
             CheckDeadlyGamble(p);
             CheckTraverseCut(p);
             CheckSwiftGlyphs(p);
+            CheckArush(p);
             CheckBladeWaltz(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
@@ -41,6 +42,7 @@ namespace TCC.Data.Abnormalities
             CheckDeadlyGamble(p);
             CheckTraverseCut(p);
             CheckSwiftGlyphs(p);
+            CheckArush(p);
             //CheckTempestAura(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
@@ -48,6 +50,7 @@ namespace TCC.Data.Abnormalities
             if (!Game.IsMe(p.TargetId)) return;
             CheckTraverseCut(p);
             CheckSwiftGlyphs(p);
+            CheckArush(p);
             CheckDefensiveStance(p);
             CheckAssaultStance(p);
             CheckDeadlyGamble(p);
@@ -134,21 +137,34 @@ namespace TCC.Data.Abnormalities
         private static void CheckSwiftGlyphs(S_ABNORMALITY_BEGIN p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Swift.Start(p.Duration);
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SwiftProc = true;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(p.Duration);
         }
         private static void CheckSwiftGlyphs(S_ABNORMALITY_REFRESH p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Swift.Start(p.Duration);
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SwiftProc = true;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(p.Duration);
         }
         private static void CheckSwiftGlyphs(S_ABNORMALITY_END p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Swift.Refresh(0, CooldownMode.Normal);
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SwiftProc = false;
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(0);
         }
+        private static void CheckArush(S_ABNORMALITY_BEGIN p)
+        {
+            if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(p.Duration);
+        }
+        private static void CheckArush(S_ABNORMALITY_REFRESH p)
+        {
+            if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(p.Duration);
+        }
+        private static void CheckArush(S_ABNORMALITY_END p)
+        {
+            if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
+            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(0);
+        }
+
     }
 }
 /*

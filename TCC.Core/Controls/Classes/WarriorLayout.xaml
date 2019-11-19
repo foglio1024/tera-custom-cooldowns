@@ -219,7 +219,8 @@
                     <TranslateTransform X="0" Y="92" />
                 </FrameworkElement.RenderTransform>
             </skills:RhombSkillEffectControl>
-            <Grid Visibility="{Binding SwiftProc, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <!---->
+            <Grid Visibility="{Binding AtkSpeedProc, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="18"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
                         Effect="{StaticResource DropShadow}"
@@ -231,15 +232,27 @@
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
-                <skills:RhombFixedSkillControl DataContext="{Binding Swift}" HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" IsHitTestVisible="False">
+                <skills:RhombSkillEffectControl DataContext="{Binding Swift}" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" IsHitTestVisible="False" RenderTransformOrigin=".5 .5"
+                                               Visibility="{Binding Buff.IsAvailable, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
+                                               >
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform X="14.7" Y="14.7" />
                             <ScaleTransform ScaleX=".7" ScaleY=".7" />
+                            <TranslateTransform X="0" Y="0" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
-                </skills:RhombFixedSkillControl>
+                </skills:RhombSkillEffectControl>
+                <skills:RhombSkillEffectControl DataContext="{Binding AdrenalineRush}" RenderTransformOrigin=".5 .5"
+                                                Visibility="{Binding Buff.IsAvailable, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY=".7" ScaleX=".7"/>
+                            <TranslateTransform X="0" Y="0" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </skills:RhombSkillEffectControl>
+
                 <Grid.Style>
                     <Style TargetType="FrameworkElement">
                         <Setter Property="RenderTransform">

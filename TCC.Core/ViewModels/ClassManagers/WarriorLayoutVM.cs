@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TCC.Utilities;
 using TeraDataLite;
 
 namespace TCC.ViewModels
@@ -9,8 +10,9 @@ namespace TCC.ViewModels
     {
 
         public DurationCooldownIndicator DeadlyGamble { get; set; }
+        public DurationCooldownIndicator AdrenalineRush { get; set; }
+        public DurationCooldownIndicator Swift { get; set; }
         public Counter EdgeCounter { get; set; }
-        public Cooldown Swift { get; set; }
         public StanceTracker<WarriorStance> Stance { get; set; }
         public StatTracker TraverseCut { get; set; }
 
@@ -27,14 +29,14 @@ namespace TCC.ViewModels
         }
 
         //public StatTracker TempestAura { get; set; }
-        private bool _swiftProc;
+        private bool _atkSpeedProc;
 
-        public bool SwiftProc
+        public bool AtkSpeedProc
         {
-            get => _swiftProc;
+            get => _atkSpeedProc;
             set
             {
-                if (_swiftProc == value) return; _swiftProc = value;
+                if (_atkSpeedProc == value) return; _atkSpeedProc = value;
                 N();
             }
         }
@@ -69,8 +71,21 @@ namespace TCC.ViewModels
                 Buff = new Cooldown(dg, false),
                 Cooldown = new Cooldown(dg, true) { CanFlash = true }
             };
+
+            Game.DB.SkillsDatabase.TryGetSkill(170250, Class.Lancer, out var ar);
+            AdrenalineRush = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(ar, false),
+                Cooldown = new Cooldown(ar, false) { CanFlash = false }
+            };
             var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
-            Swift = new Cooldown(new Skill(ab), false);
+            //Swift = new Cooldown(new Skill(ab), false);
+            Swift = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(new Skill(ab), false),
+                Cooldown = new Cooldown(new Skill(ab), false) { CanFlash = false }
+            };
+
         }
 
         public override void Dispose()
@@ -92,5 +107,29 @@ namespace TCC.ViewModels
         {
             WarningStance = Stance.CurrentStance == WarriorStance.None && Game.Combat;
         }
+
+        public void SetSwift(uint duration)
+        {
+            if (duration == 0)
+            {
+                Swift.Buff.Refresh(0, CooldownMode.Normal);
+                AtkSpeedProc = false;
+            }
+            Swift.Buff.Start(duration);
+            AtkSpeedProc = true;
+        }
+
+        public void SetArush(uint duration)
+        {
+            if (duration == 0)
+            {
+                AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+                AtkSpeedProc = false;
+            }
+            AdrenalineRush.Buff.Start(duration);
+            AtkSpeedProc = true;
+
+        }
+
     }
 }
