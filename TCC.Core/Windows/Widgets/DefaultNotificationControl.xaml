@@ -8,7 +8,7 @@
              UseLayoutRounding="True"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance local:NotificationInfoBase}">
 
-    <Border x:Name="Root" Style="{StaticResource RevampBorderStyle}" MinWidth="200" MaxWidth="250"
+    <Border x:Name="Root" MinWidth="200" MaxWidth="250" BorderThickness="1"
             HorizontalAlignment="Left" MinHeight="20" Margin="5">
         <Border.RenderTransform>
             <TranslateTransform />
@@ -16,6 +16,24 @@
         <Border.LayoutTransform>
             <ScaleTransform ScaleY="1" />
         </Border.LayoutTransform>
+        <Border.Style>
+            <Style BasedOn="{StaticResource RevampBorderStyle}" TargetType="Border">
+                        <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding NotificationType}" Value="Success">
+                        <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding NotificationType}" Value="Warning">
+                        <Setter Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding NotificationType}" Value="Error">
+                        <Setter Property="BorderBrush" Value="{StaticResource TccRedGradientBrush}" />
+                    </DataTrigger>
+
+                </Style.Triggers>
+            </Style>
+
+        </Border.Style>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -47,17 +65,20 @@
                 </Style>
             </Grid.Resources>
 
-            <Rectangle Grid.Column="1">
+            <!--<Rectangle Grid.Column="1">
                 <Rectangle.Effect>
                     <BlurEffect Radius="10" />
                 </Rectangle.Effect>
             </Rectangle>
-            <Rectangle Grid.Column="1" />
-            <Rectangle Grid.Column="1" VerticalAlignment="Stretch" Opacity=".2" Margin="0" Height="Auto"></Rectangle>
+            <Rectangle Grid.Column="1" />-->
+            <Rectangle Grid.Column="1" VerticalAlignment="Stretch" Opacity=".2" 
+                       Margin="0" Height="Auto" Grid.RowSpan="3"></Rectangle>
+            <Separator Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" 
+                       Margin="10 0 10 -1" Opacity=".2" />
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center" TextWrapping="Wrap"
                        HorizontalAlignment="Center" Margin="4 2">
-                <Run FontWeight="DemiBold" FontSize="12" Foreground="#6fff" Text="{Binding Title, Mode=OneWay}" />
+                <Run FontWeight="DemiBold" FontSize="12" Foreground="#4fff" Text="{Binding Title, Mode=OneWay}" />
 
             </TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" TextWrapping="Wrap"
