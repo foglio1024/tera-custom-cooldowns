@@ -8,38 +8,25 @@ namespace TCC.Data.Pc
 {
     public class DungeonInfo
     {
-        //private List<DungeonCooldownData> _dungeonData;
-        //[JsonIgnore] public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; }
-        //[JsonIgnore] public List<DungeonCooldown> VisibleDungeons => Dungeons.Where(x => x.Dungeon.Show).ToList();
-        //public List<DungeonCooldownData> DungeonData
-        //{
-        //    get => _dungeonData;
-        //    set
-        //    {
-        //        if (value == null) return;
-        //        _dungeonData = value;
-        //        Dungeons.ToSyncList().ForEach(dung =>
-        //        {
-        //            var dg = value.FirstOrDefault(dd => dd.Id == dung.Dungeon.Id);
-        //            if (dg == null) return;
-        //            dung.Entries = dg.Entries;
-        //            dung.Clears = dg.Clears;
-        //        });
-        //    }
-        //}
-        [JsonIgnore] public ICollectionViewLiveShaping VisibleDungeonsView { get; }
-
+        [JsonIgnore]
+        public ICollectionViewLiveShaping VisibleDungeonsView { get; }
         public List<DungeonCooldownData> DungeonList { get; }
+
+        public DungeonInfo()
+        {
+            DungeonList = Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).Select(d => new DungeonCooldownData(d.Id)).ToList();
+            VisibleDungeonsView = CollectionViewUtils.InitLiveView(DungeonList,
+                sortFilters: new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
+
+        }
 
         public void Engage(uint dgId)
         {
             var dg = DungeonList.FirstOrDefault(x => x.Dungeon.Id == dgId);
-            if (dg != null)
-            {
-                dg.Entries = dg.Entries == 0
-                    ? dg.Dungeon.MaxEntries - 1
-                    : dg.Entries - 1;
-            }
+            if (dg == null) return;
+            dg.Entries = dg.Entries == 0
+                ? dg.Dungeon.MaxEntries - 1
+                : dg.Entries - 1;
         }
         public void ResetAll(ResetMode mode)
         {
@@ -47,38 +34,28 @@ namespace TCC.Data.Pc
         }
         public void UpdateEntries(Dictionary<uint, short> dungeonCooldowns)
         {
-            foreach (var keyValuePair in dungeonCooldowns)
-            {
-                var dg = DungeonList.FirstOrDefault(x => x.Id == keyValuePair.Key);
-                if (dg == null) DungeonList.Add(new DungeonCooldownData(keyValuePair.Key) { Entries = keyValuePair.Value });
-            }
+            (from keyValuePair in dungeonCooldowns
+             let dg = DungeonList.FirstOrDefault(x => x.Id == keyValuePair.Key)
+             where dg == null
+             select new { Id = keyValuePair.Key, Entries = keyValuePair.Value }).ToList()
+            .ForEach(x =>
+             {
+                 DungeonList.Add(new DungeonCooldownData(x.Id) { Entries = x.Entries });
+             });
 
-            DungeonList.Where(x => x.Dungeon.HasDef).ToList().ForEach(dung =>
+            DungeonList.ForEach(dung =>
             {
                 if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
                 else dung.Reset();
-                //var dgd = DungeonList.FirstOrDefault(d => d.Id == dung.Id);
-                //if (dgd != null) dgd.Entries = dung.Entries;
             });
         }
         public void UpdateClears(uint dgId, int runs)
         {
             var dg = DungeonList.FirstOrDefault(d => d.Dungeon.Id == dgId);
             if (dg != null) dg.Clears = runs;
-            var dgd = DungeonList.FirstOrDefault(d => d.Id == dgId);
+            var dgd = DungeonList.FirstOrDefault(d => d.Id == dgId); //todo: what is this?
             if (dgd != null) dgd.Clears = runs;
         }
-
-        public DungeonInfo()
-        {
-            DungeonList = Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef)
-                         .Select(d => new DungeonCooldownData(d.Id)).ToList();
-            //DungeonList = new List<DungeonCooldownData>();
-            VisibleDungeonsView = CollectionViewUtils.InitLiveView(DungeonList, 
-                sortFilters: new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
-
-        }
-
         public void UpdateAvailableEntries(uint coins, uint maxCoins)
         {
             DungeonList.ForEach(x => x.UpdateAvailableEntries(coins, maxCoins));

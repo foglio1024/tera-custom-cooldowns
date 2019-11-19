@@ -1,9 +1,9 @@
 ﻿using FoglioUtils;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Threading;
-using Newtonsoft.Json;
-using TCC.Controls;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TeraDataLite;
@@ -174,9 +174,9 @@ namespace TCC.Data.Pc
         public TSObservableCollection<InventoryItem> Inventory { get; }
 
         [JsonIgnore]
-        public RelayCommand UnhideCommand { get; }
+        public ICommand UnhideCommand { get; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public string ServerName
         {
             get => _serverName;
@@ -268,90 +268,6 @@ namespace TCC.Data.Pc
         {
             var ch = (Character)obj;
             return Position.CompareTo(ch.Position);
-        }
-    }
-    public class DungeonCooldownData
-    {
-        private uint _coins;
-        private uint _maxCoins;
-
-        public DungeonCooldownData(uint id)
-        {
-            Id = id;
-            Reset();
-        }
-
-        public uint Id { get; set; }
-        public int Entries { get; set; }
-        public int Clears { get; set; }
-
-        [JsonIgnore]
-        public Dungeon Dungeon => Game.DB.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
-                                ? dg
-                                : new Dungeon(Id, "");
-        [JsonIgnore]
-        public int AvailableEntries
-        {
-            get
-            {
-                if (Dungeon.Cost == 0) return Entries;
-                var res = (int)_coins / Dungeon.Cost;
-                return res < Entries ? res : Entries;
-            }
-        }
-
-        [JsonIgnore]
-        public int MaxAvailableEntries
-        {
-            get
-            {
-                if (Dungeon.Cost == 0) return Dungeon.MaxEntries;
-                var res = (int)_maxCoins / Dungeon.Cost;
-                if (Dungeon.ResetMode == ResetMode.Daily)
-                {
-                    return res > Dungeon.MaxEntries ? Dungeon.MaxEntries : res;
-                }
-                return res;
-            }
-        }
-
-        public void Reset()
-        {
-            Entries = Dungeon.MaxEntries;
-        }
-
-        public void UpdateAvailableEntries(uint coins, uint maxCoins)
-        {
-            _coins = coins;
-            _maxCoins = maxCoins;
-        }
-    }
-    public class InventoryItem : TSPropertyChanged
-    {
-        private int _amount;
-        public uint Id { get; }
-
-        [JsonIgnore]
-        public Item Item => Game.DB.ItemsDatabase.Items.TryGetValue(Id, out var item)
-                            ? item
-                            : new Item(0, "", RareGrade.Common, 0, 0, "");
-        public uint Slot { get; }
-        public int Amount
-        {
-            get => _amount;
-            set
-            {
-                if (_amount == value) return;
-                _amount = value;
-                N();
-            }
-        }
-
-        public InventoryItem(uint slot, uint id, int amount)
-        {
-            Id = id;
-            Amount = amount;
-            Slot = slot;
         }
     }
 }
