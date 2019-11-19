@@ -17,3 +17,4 @@ libgrpc_csharp_ext.x86.dylib
 libgrpc_csharp_ext.x86.so
 Newtonsoft.Json.pdb
 .git
+.gitignore

@@ -67,11 +67,9 @@ namespace TCC.Publisher
                 {
                     App.Exclusions.ForEach(e =>
                     {
-                        if (f.Contains(e))
-                        {
-                            Logger.WriteLine($"    Deleting {f}");
-                            File.Delete(f);
-                        }
+                        if (!f.Contains(e)) return;
+                        Logger.WriteLine($"    Deleting {f}");
+                        File.Delete(f);
                     });
                 }
             }
