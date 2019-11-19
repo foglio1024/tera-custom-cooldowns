@@ -104,7 +104,7 @@ namespace TCC.Settings
                 new XAttribute(nameof(ClassWindowSettings.WarriorShowTraverseCut), App.Settings.ClassWindowSettings.WarriorShowTraverseCut),
                 new XAttribute(nameof(ClassWindowSettings.WarriorShowEdge), App.Settings.ClassWindowSettings.WarriorShowEdge),
                 new XAttribute(nameof(ClassWindowSettings.WarriorEdgeMode), App.Settings.ClassWindowSettings.WarriorEdgeMode),
-                new XAttribute(nameof(ClassWindowSettings.SorcererReplacesElementsInCharWindow), App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow),
+                new XAttribute(nameof(ClassWindowSettings.SorcererShowElements), App.Settings.ClassWindowSettings.SorcererShowElements),
                 // Chat
                 new XAttribute(nameof(SettingsContainer.MaxMessages), App.Settings.MaxMessages),
                 new XAttribute(nameof(SettingsContainer.SpamThreshold), App.Settings.SpamThreshold),

@@ -576,9 +576,13 @@ namespace TCC.Settings
     }
     public class CharacterWindowSettings : WindowSettings
     {
-        public event Action CompactModeChanged;
+        public event Action SorcererShowElementsChanged;
+        public event Action ShowStaminaChanged;
 
+        private bool _sorcererShowElements;
         private bool _compactMode;
+        private bool _showStamina;
+
         public bool CompactMode
         {
             get => _compactMode;
@@ -587,7 +591,28 @@ namespace TCC.Settings
                 if (_compactMode == value) return;
                 _compactMode = value;
                 N();
-                CompactModeChanged?.Invoke();
+            }
+        }
+        public bool SorcererShowElements
+        {
+            get => _sorcererShowElements;
+            set
+            {
+                if (_sorcererShowElements == value) return;
+                _sorcererShowElements = value;
+                SorcererShowElementsChanged?.Invoke();
+                N();
+            }
+        }
+        public bool ShowStamina
+        {
+            get => _showStamina;
+            set
+            {
+                if (_showStamina == value) return;
+                _showStamina = value;
+                ShowStaminaChanged?.Invoke();
+                N();
             }
         }
 
@@ -608,8 +633,6 @@ namespace TCC.Settings
             GpkNames.Add("CharacterWindow");
 
         }
-
-
     }
     public class NpcWindowSettings : WindowSettings
     {
@@ -758,10 +781,10 @@ namespace TCC.Settings
         public event Action WarriorShowEdgeChanged;
         public event Action WarriorEdgeModeChanged;
         public event Action WarriorShowTraverseCutChanged;
-        public event Action SorcererReplacesElementsInCharWindowChanged;
+        public event Action SorcererShowElementsChanged;
 
         private bool _warriorShowEdge;
-        private bool _sorcererReplacesElementsInCharWindow;
+        private bool _sorcererShowElements;
         private bool _warriorShowTraverseCut;
         private WarriorEdgeMode _warriorEdgeMode;
 
@@ -776,15 +799,15 @@ namespace TCC.Settings
                 WarriorShowEdgeChanged?.Invoke();
             }
         }
-        public bool SorcererReplacesElementsInCharWindow
+        public bool SorcererShowElements
         {
-            get => _sorcererReplacesElementsInCharWindow;
+            get => _sorcererShowElements;
             set
             {
-                if (_sorcererReplacesElementsInCharWindow == value) return;
-                _sorcererReplacesElementsInCharWindow = value;
+                if (_sorcererShowElements == value) return;
+                _sorcererShowElements = value;
                 N();
-                SorcererReplacesElementsInCharWindowChanged?.Invoke();
+                SorcererShowElementsChanged?.Invoke();
             }
         }
         public bool WarriorShowTraverseCut
@@ -828,7 +851,7 @@ namespace TCC.Settings
             WarriorShowTraverseCut = true;
             WarriorShowEdge = true;
             WarriorEdgeMode = WarriorEdgeMode.Rhomb;
-            SorcererReplacesElementsInCharWindow = true;
+            SorcererShowElements = true;
 
         }
     }

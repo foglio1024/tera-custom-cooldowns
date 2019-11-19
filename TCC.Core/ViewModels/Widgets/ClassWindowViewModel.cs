@@ -94,7 +94,7 @@ namespace TCC.ViewModels.Widgets
             settings.WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
             settings.WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
             settings.WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
-            settings.SorcererReplacesElementsInCharWindowChanged += OnSorcererReplacesElementsInCharWindowChanged;
+            settings.SorcererShowElementsChanged += OnSorcererShowElementsChanged;
         }
 
         private void OnWarriorEdgeModeChanged()
@@ -112,7 +112,7 @@ namespace TCC.ViewModels.Widgets
             TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowEdge));
         }
 
-        private void OnSorcererReplacesElementsInCharWindowChanged()
+        private void OnSorcererShowElementsChanged()
         {
             // TODO: delet this
             WindowManager.ViewModels.CharacterVM.ExN(nameof(CharacterWindowViewModel.ShowElements));
@@ -153,7 +153,7 @@ namespace TCC.ViewModels.Widgets
 
         private void OnLogin(S_LOGIN m)
         {
-            CurrentClass = m.CharacterClass; // todo: check for enabled?
+            CurrentClass = m.CharacterClass;
             if (m.CharacterClass == Class.Valkyrie)
                 PacketAnalyzer.Processor.Hook<S_WEAK_POINT>(OnWeakPoint);
             else

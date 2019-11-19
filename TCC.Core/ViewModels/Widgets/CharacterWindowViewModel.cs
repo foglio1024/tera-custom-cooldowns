@@ -14,19 +14,17 @@ namespace TCC.ViewModels.Widgets
     {
         public Player Player => Game.Me;
         public bool ShowRe =>
-            (!App.Settings.ClassWindowSettings.Visible || !App.Settings.ClassWindowSettings.Enabled) &&
             (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
-             Player.Class == Class.Ninja || Player.Class == Class.Valkyrie);
+             Player.Class == Class.Ninja || Player.Class == Class.Valkyrie) &&
+            ((CharacterWindowSettings)Settings).ShowStamina;
         public bool ShowElements => Player.Class == Class.Sorcerer &&
-                                    (!App.Settings.ClassWindowSettings.Visible
-                                     || !App.Settings.ClassWindowSettings.Enabled
-                                     || !App.Settings.ClassWindowSettings.SorcererReplacesElementsInCharWindow);
+                                    ((CharacterWindowSettings)Settings).SorcererShowElements;
 
-        public CharacterWindowViewModel(WindowSettings settings) : base(settings)
+        public CharacterWindowViewModel(CharacterWindowSettings settings) : base(settings)
         {
             Game.Me.PropertyChanged += MePropertyChanged;
-            App.Settings.ClassWindowSettings.EnabledChanged += ClassWindowSettings_EnabledChanged;
-            App.Settings.ClassWindowSettings.VisibilityChanged += ClassWindowSettings_EnabledChanged;
+            settings.SorcererShowElementsChanged += () => N(nameof(ShowElements));
+            settings.ShowStaminaChanged += () => N(nameof(ShowRe));
         }
 
         protected override void InstallHooks()
@@ -124,12 +122,6 @@ namespace TCC.ViewModels.Widgets
             Player.Fire = m.Fire;
             Player.Ice = m.Ice;
             Player.Arcane = m.Arcane;
-        }
-
-        private void ClassWindowSettings_EnabledChanged(bool enabled)
-        {
-            N(nameof(ShowRe));
-            N(nameof(ShowElements));
         }
 
         private void MePropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -583,6 +583,25 @@
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.CompactMode, Mode=TwoWay}"
                                                       SettingName="Compact mode" 
                                                       IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
+                            <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.ShowStamina, Mode=TwoWay}"
+                                                      SettingName="Show stamina" 
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <ToolTip>
+                                        <Grid Margin="5">
+                                            <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                       MaxWidth="200">
+                                                <Run Text="Shows stamina amount around class logo." />
+                                            </TextBlock>
+                                        </Grid>
+                                    </ToolTip>
+                                </settings:CheckboxSetting.ToolTip>
+
+                            </settings:CheckboxSetting>
+                            <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.SorcererShowElements, Mode=TwoWay}"
+                                                      SettingName="Show Sorcerer elements" 
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
@@ -903,8 +922,8 @@
                                                        Margin="0 0 15 0" />
                             <!--<settings:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />-->
                             <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Sorcerer" />
-                            <settings:CheckboxSetting SettingName="Replaces char window elements"
-                                                      IsOn="{Binding ClassWindowSettings.SorcererReplacesElementsInCharWindow, Mode=TwoWay}"
+                            <settings:CheckboxSetting SettingName="Show elements"
+                                                      IsOn="{Binding ClassWindowSettings.SorcererShowElements, Mode=TwoWay}"
                                                       IsEnabled="{Binding ClassWindowSettings.Enabled}" 
                                                       Margin="0 0 15 0">
                                 <FrameworkElement.ToolTip>
