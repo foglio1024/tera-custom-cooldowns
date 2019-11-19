@@ -73,6 +73,23 @@ namespace TCC.Data.Databases
             fearInoculum.Type = AbnormalityType.Special;
             Abnormalities[fearInoculum.Id] = fearInoculum;
 
+            #region Extreme overrides
+            // Twisted Fate
+            Abnormalities[781066].ToolTip = Abnormalities[781066].ToolTip.Replace("60", "3");
+
+            // Broken Ball
+            Abnormalities[44300011].ToolTip = "Increases Physical and Magic Amplification by $H_W_GOOD250$COLOR_END per stack";
+
+            // Larva Venom
+            Abnormalities[44300080].ToolTip = Abnormalities[44300080].ToolTip.Replace("3s", "2s");
+
+            // God's Wrath
+            Abnormalities[91100400].ToolTip = "Reduces Endurance, Power and Movement Speed by $H_W_BAD4%$COLOR_END$BRReduces Attack Speed by $H_W_BAD3%$COLOR_END";
+
+            // Demokron's Curse
+            Abnormalities[777034].ToolTip = "Boss HP 100%~30%$BR - Increases Physical and Magic Amplification by $H_W_GOOD7k$COLOR_END$BR - Reduces HP by $H_W_BAD3%$COLOR_END per 1s$BR$BRBoss HP 30%~0%$BR - Increases Physical and Magic Amplification by $H_W_GOOD7k$COLOR_END$BR - Reduces HP by $H_W_BAD2%$COLOR_END per 1s$BR - $H_W_BADCannot be cleansed$COLOR_END";
+            #endregion
+
         }
 
         public bool TryGetPassiveSkill(uint id, out Skill sk)
