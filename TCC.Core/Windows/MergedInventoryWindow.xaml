@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:ctrl="clr-namespace:TCC.Controls"
         mc:Ignorable="d"        
-        Title="TCC Merged inventory" Height="600" Width="435"
+        Title="TCC Merged inventory" Height="600" Width="450"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -72,7 +72,7 @@
                 <ScrollViewer Grid.Row="0" CanContentScroll="True"
                                           VerticalAlignment="Stretch">
                     <ItemsControl ItemsSource="{Binding MergedInventoryView}"
-                                              Margin="0 0 0 0"
+                                              Margin="2"
                                               VerticalAlignment="Top"
                                               UseLayoutRounding="True"
                                   HorizontalAlignment="Stretch"
@@ -86,7 +86,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type local:MergedInventoryItem}">
-                                <Grid Margin="4">
+                                <Grid Margin="2">
                                     <Grid.ToolTip>
                                         <ToolTip Background="Transparent">
                                             <Grid>
@@ -138,8 +138,8 @@
                                     </Grid.ToolTip>
 
                                     <Rectangle Width="40" Height="40"
-                                                           RadiusX="5"
-                                                           RadiusY="5"
+                                                           RadiusX="0"
+                                                           RadiusY="0"
                                                            Margin="0 0 0 0"
                                                            StrokeThickness="1"
                                                            Effect="{StaticResource DropShadow}">
@@ -158,17 +158,18 @@
                                                                             Value="{StaticResource RevampBorderBrush}" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
-                                                                             Value="Uncommon">
-                                                        <Setter Property="Stroke" Value="Green"></Setter>
+                                                                 Value="Uncommon">
+                                                        <Setter Property="Stroke" Value="{StaticResource TccGreenGradientBrush}"></Setter>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
-                                                                             Value="Rare">
-                                                        <Setter Property="Stroke" Value="DodgerBlue"></Setter>
+                                                                 Value="Rare">
+                                                        <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}"></Setter>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
-                                                                             Value="Superior">
-                                                        <Setter Property="Stroke" Value="Orange"></Setter>
+                                                                 Value="Superior">
+                                                        <Setter Property="Stroke" Value="{StaticResource TccYellowGradientBrush}"></Setter>
                                                     </DataTrigger>
+
                                                 </Style.Triggers>
                                             </Style>
                                         </Shape.Style>
@@ -221,22 +222,6 @@
                                         </ctrl:OutlinedTextBlock>
                                     </Viewbox>
                                 </Grid>
-                                <!--<DataTemplate.Triggers>
-                                    <Trigger Property="IsVisible" Value="True">
-                                        <Trigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                                                 Duration="0:0:0.4"
-                                                                                 From="0"
-                                                                                 Timeline.DesiredFrameRate="15"
-                                                                                 To="1">
-                                                    </DoubleAnimation>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.EnterActions>
-                                    </Trigger>
-                                </DataTemplate.Triggers>-->
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

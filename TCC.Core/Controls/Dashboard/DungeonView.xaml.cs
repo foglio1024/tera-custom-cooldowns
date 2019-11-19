@@ -65,11 +65,29 @@ namespace TCC.Controls.Dashboard
     public class DungeonColumnViewModel : TSPropertyChanged
     {
         private bool _hilight;
+        private Dungeon _dungeon;
 
-        public Dungeon Dungeon { get; set; }
+        public Dungeon Dungeon
+        {
+            get => _dungeon;
+            set
+            {
+                if(_dungeon == value)return;
+                if(_dungeon != null) _dungeon.PropertyChanged -= OnDungeonPropertyChanged;
+                _dungeon = value;
+                _dungeon.PropertyChanged += OnDungeonPropertyChanged;
+            }
+        }
+
+        private void OnDungeonPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(Dungeon.Show)) N(nameof(IsVisible));
+        }
 
         public TSObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
         public ICollectionViewLiveShaping DungeonsListView { get; }
+        public ICommand RemoveDungeonCommand { get; }
+        public bool IsVisible => Dungeon.Show;
         public bool Hilight
         {
             get => _hilight;
@@ -88,6 +106,7 @@ namespace TCC.Controls.Dashboard
                 o => !o.Owner.Hidden,
                 new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" }, 
                 new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
+            RemoveDungeonCommand = new RelayCommand(_ => Dungeon.Show = false);
         }
     }
 

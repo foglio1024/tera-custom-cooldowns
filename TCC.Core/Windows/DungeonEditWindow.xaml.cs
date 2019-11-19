@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using Dragablz;
 using FoglioUtils;
 using TCC.Controls.Dashboard;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
-    /// <summary>
-    /// Logica di interazione per DungeonEditWindow.xaml
-    /// </summary>
     public partial class DungeonEditWindow
     {
 
@@ -45,6 +44,7 @@ namespace TCC.Windows
             {
                 dcvm.Dungeon.Index = e.NewOrder.ToList().IndexOf(dcvm);
             }
+
         }
 
         private void AddDungeon(object sender, RoutedEventArgs e)

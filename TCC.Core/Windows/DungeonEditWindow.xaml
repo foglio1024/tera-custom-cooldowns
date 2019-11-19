@@ -9,6 +9,7 @@
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:converters="clr-namespace:TCC.Converters"
                  xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+                 xmlns:dashboard="clr-namespace:TCC.Controls.Dashboard"
                  mc:Ignorable="d"
                  Title="TCC Dungeon edit" Height="550" Width="810"
                  WindowStyle="None"

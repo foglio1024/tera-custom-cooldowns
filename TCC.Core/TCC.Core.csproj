@@ -116,6 +116,8 @@
     <Compile Include="Data\Chat\SystemMessage.cs" />
     <Compile Include="Data\GroupInfo.cs" />
     <Compile Include="Data\GuildInfo.cs" />
+    <Compile Include="Data\Pc\DungeonCooldownData.cs" />
+    <Compile Include="Data\Pc\InventoryItem.cs" />
     <Compile Include="Exceptions\DeadlockException.cs" />
     <Compile Include="IconsUpdater.cs" />
     <Compile Include="Exceptions\PacketParseException.cs" />

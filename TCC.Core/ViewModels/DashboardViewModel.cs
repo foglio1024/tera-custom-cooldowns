@@ -60,14 +60,14 @@ namespace TCC.ViewModels
 
         public ICollectionViewLiveShaping SortedCharacters { get; }
         public ICollectionViewLiveShaping HiddenCharacters { get; }
-        public ICollectionViewLiveShaping SortedColumns
+        public ICollectionViewLiveShaping SortedColumns// { get; }
         {
             get
             {
                 return _sortedColumns ?? (_sortedColumns = CollectionViewUtils.InitLiveView(Columns,
-                                          o => o.Dungeon.Show,
-                                          new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Show)}", $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
-                                          new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
+                                          o => o.IsVisible,
+                                          new[] { $"{nameof(DungeonColumnViewModel.IsVisible)}", $"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}" },
+                                          new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
             }
         }
         public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
@@ -225,6 +225,10 @@ namespace TCC.ViewModels
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
+            //SortedColumns = CollectionViewUtils.InitLiveView(Columns,
+            //    o => o.Dungeon.Show,
+            //    new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
+            //    new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
         }
 
         private void OnShowDashboardHotkeyPressed()
