@@ -212,7 +212,7 @@ namespace TCC.Parsing
         private static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
         {
             var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-            Log.N("Guild BAM", msg.ToString(), NotificationType.Normal);
+            Log.N("Guild BAM", msg.ToString(), NotificationType.Normal, 2*60*1000);
             ChatWindowManager.Instance.AddChatMessage(msg);
 
             TimeManager.Instance.UploadGuildBamTimestamp();
