@@ -8,6 +8,7 @@ namespace TCC.Windows.Widgets
     public class ProgressNotificationInfo : NotificationInfoBase
     {
         public event Action Disposed;
+        public event Action<int> Disposing;
         private double _progress;
         public double Progress
         {
@@ -27,10 +28,10 @@ namespace TCC.Windows.Widgets
 
         public void Dispose(int msDelay)
         {
+            Disposing?.Invoke(msDelay);
             if (msDelay == 0)
             {
                 Disposed?.Invoke();
-                return;
             }
             else
             {

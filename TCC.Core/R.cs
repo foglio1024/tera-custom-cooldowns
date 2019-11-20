@@ -452,6 +452,7 @@ namespace TCC.R
 		public static MoneyAmountToVisibilityConverter AmountToVisibilityConv => ((MoneyAmountToVisibilityConverter)App.Current.FindResource("AmountToVisibilityConv"));
 		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
 		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
+		public static NotificationTypeToBrush NotificationTypeToBrush => ((NotificationTypeToBrush)App.Current.FindResource("NotificationTypeToBrush"));
 	}
 	public static class DragablzMaterialDesign
 	{
@@ -486,6 +487,11 @@ namespace TCC.R
 		public static Style FocusVisual2 => ((Style)App.Current.FindResource("FocusVisual2"));
 		public static Style FocusVisual3 => ((Style)App.Current.FindResource("FocusVisual3"));
 		public static Style OptionMarkFocusVisual => ((Style)App.Current.FindResource("OptionMarkFocusVisual"));
+		public static Style NotificationTitle => ((Style)App.Current.FindResource("NotificationTitle"));
+		public static Style NotificationBody => ((Style)App.Current.FindResource("NotificationBody"));
+		public static Style NotificationVersion => ((Style)App.Current.FindResource("NotificationVersion"));
+		public static Style NotificationTimestamp => ((Style)App.Current.FindResource("NotificationTimestamp"));
+		public static Style NotificationRectangle => ((Style)App.Current.FindResource("NotificationRectangle"));
 		public static Style BaseWindowStyle => ((Style)App.Current.FindResource("BaseWindowStyle"));
 		public static Style DefaultBorderStyle => ((Style)App.Current.FindResource("DefaultBorderStyle"));
 		public static Style RevampBorderStyle => ((Style)App.Current.FindResource("RevampBorderStyle"));

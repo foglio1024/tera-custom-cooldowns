@@ -113,6 +113,7 @@
     <Compile Include="Controls\Settings\HotkeySetting.xaml.cs">
       <DependentUpon>HotkeySetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NotificationTypeToBrush.cs" />
     <Compile Include="Data\Chat\SystemMessage.cs" />
     <Compile Include="Data\GroupInfo.cs" />
     <Compile Include="Data\GuildInfo.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="Controls\TccTrayIcon.cs" />
     <Compile Include="Windows\Widgets\FloatingButtonViewModel.cs" />
+    <Compile Include="Windows\Widgets\NotificationControlBase.cs" />
     <Compile Include="Windows\Widgets\ProgressNotificationControl.xaml.cs">
       <DependentUpon>ProgressNotificationControl.xaml</DependentUpon>
     </Compile>

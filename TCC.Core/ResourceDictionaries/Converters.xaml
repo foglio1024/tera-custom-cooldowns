@@ -79,5 +79,6 @@
     <c:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
     <uc:BooleanInverter x:Key="BoolInverter"/>
     <c:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+    <c:NotificationTypeToBrush x:Key="NotificationTypeToBrush"/>
 
 </ResourceDictionary>

@@ -10,6 +10,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
                     xmlns:settings="clr-namespace:TCC.Controls.Settings"
+                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
                     mc:Ignorable="d">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
@@ -51,6 +52,41 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationTitle">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="4 2"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="#4fff"/>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationBody">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="12 10"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="#fff"/>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationVersion">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="10 2 10 4"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="#3fff"/>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationTimestamp" BasedOn="{StaticResource NotificationVersion}">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    <Style TargetType="{x:Type Rectangle}" x:Key="NotificationRectangle">
+        <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+        <Setter Property="Opacity" Value=".1" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+
 
     <Style TargetType="{x:Type Window}" x:Key="BaseWindowStyle">
         <Setter Property="Height" Value="Auto" />

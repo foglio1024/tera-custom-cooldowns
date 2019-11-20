@@ -42,16 +42,20 @@ namespace TCC.Windows.Widgets
 
         private int Enqueue(string title, string message, NotificationType type, uint duration = 4000U, NotificationTemplate template = NotificationTemplate.Default)
         {
-            switch (template)
+            Dispatcher.Invoke(() =>
             {
-                case NotificationTemplate.Progress:
-                    _queue.Enqueue(new ProgressNotificationInfo(_id, title, message, type, duration, template));
-                    break;
-                default:
-                    _queue.Enqueue(new NotificationInfoBase(_id, title, message, type, duration, template));
-                    break;
-            }
-            CheckShow();
+
+                switch (template)
+                {
+                    case NotificationTemplate.Progress:
+                        _queue.Enqueue(new ProgressNotificationInfo(_id, title, message, type, duration, template));
+                        break;
+                    default:
+                        _queue.Enqueue(new NotificationInfoBase(_id, title, message, type, duration, template));
+                        break;
+                }
+                CheckShow();
+            });
             return _id++;
         }
 

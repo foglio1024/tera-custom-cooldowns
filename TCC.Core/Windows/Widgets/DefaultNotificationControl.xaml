@@ -1,14 +1,14 @@
 ﻿<local:NotificationControlBase x:Class="TCC.Windows.Widgets.DefaultNotificationControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TCC.Windows.Widgets"
-             xmlns:controls="clr-namespace:TCC.Controls"
-             UseLayoutRounding="True"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance local:NotificationInfoBase}">
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                               xmlns:local="clr-namespace:TCC.Windows.Widgets"
+                               xmlns:controls="clr-namespace:TCC.Controls"
+                               UseLayoutRounding="True"
+                               mc:Ignorable="d" d:DataContext="{d:DesignInstance local:NotificationInfoBase}">
 
-    <Border x:Name="Root" MinWidth="200" MaxWidth="250" BorderThickness="1"
+    <Border x:Name="Root" MinWidth="200" MaxWidth="250" BorderThickness="0"
             HorizontalAlignment="Left" MinHeight="20" Margin="5">
         <Border.RenderTransform>
             <TranslateTransform />
@@ -18,7 +18,7 @@
         </Border.LayoutTransform>
         <Border.Style>
             <Style BasedOn="{StaticResource RevampBorderStyle}" TargetType="Border">
-                        <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding NotificationType}" Value="Success">
                         <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
@@ -35,62 +35,36 @@
 
         </Border.Style>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="{x:Type Rectangle}">
-                    <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
-                    <Setter Property="Margin" Value="-1" />
-                    <Setter Property="Height" Value="1" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="VerticalAlignment" Value="Bottom" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding NotificationType}" Value="Success">
-                            <Setter Property="Fill" Value="{StaticResource TccGreenGradientBrush}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding NotificationType}" Value="Warning">
-                            <Setter Property="Fill" Value="{StaticResource TccYellowGradientBrush}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding NotificationType}" Value="Error">
-                            <Setter Property="Fill" Value="{StaticResource TccRedGradientBrush}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Resources>
+            <Border BorderThickness="1" Grid.RowSpan="2" Grid.Row="0"
+                    BorderBrush="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
 
-            <!--<Rectangle Grid.Column="1">
-                <Rectangle.Effect>
-                    <BlurEffect Radius="10" />
-                </Rectangle.Effect>
+            <Rectangle Style="{StaticResource NotificationRectangle}" Grid.RowSpan="2" 
+                       Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}"/>
+            <Rectangle Style="{StaticResource NotificationRectangle}"
+                       Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}"
+                       Grid.RowSpan="2" Grid.Row="0" x:Name="TimeRect">
+                <Rectangle.RenderTransform>
+                    <ScaleTransform ScaleX="1" />
+                </Rectangle.RenderTransform>
             </Rectangle>
-            <Rectangle Grid.Column="1" />-->
-            <Rectangle Grid.Column="1" VerticalAlignment="Stretch" Opacity=".2" 
-                       Margin="0" Height="Auto" Grid.RowSpan="3"></Rectangle>
-            <Separator Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" 
+            <Separator Grid.Row="0" VerticalAlignment="Bottom"
                        Margin="10 0 10 -1" Opacity=".2" />
-            <TextBlock Grid.Column="1"
-                       VerticalAlignment="Center" TextWrapping="Wrap"
-                       HorizontalAlignment="Center" Margin="4 2">
-                <Run FontWeight="DemiBold" FontSize="12" Foreground="#4fff" Text="{Binding Title, Mode=OneWay}" />
-
-            </TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" TextWrapping="Wrap"
-                       Text="{Binding Message, Mode=OneWay}"
-                       HorizontalAlignment="Center" FontSize="12" Margin="12 10 12 10" Foreground="#fff" />
-            <Separator Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" Margin="10 0 10 -1" Opacity=".2" />
-            <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"
-                       Text="{Binding Version, Mode=OneWay}"
-                       HorizontalAlignment="Left" FontSize="10" Margin="10 2 10 4" Foreground="#3fff" />
-            <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"
-                       Text="{Binding TimeStamp, Mode=OneWay}"
-                       HorizontalAlignment="Right" FontSize="10" Margin="10 2 10 4" Foreground="#3fff" />
+            <TextBlock Style="{StaticResource NotificationTitle}"
+                       Text="{Binding Title, Mode=OneWay}" />
+            <TextBlock Grid.Row="1"
+                       Style="{StaticResource NotificationBody}"
+                       Text="{Binding Message, Mode=OneWay}" />
+            <TextBlock Grid.Row="2"
+                       Style="{StaticResource NotificationVersion}"
+                       Text="{Binding Version, Mode=OneWay}" />
+            <TextBlock Grid.Row="2"
+                       Style="{StaticResource NotificationTimestamp}"
+                       Text="{Binding TimeStamp, Mode=OneWay}" />
         </Grid>
     </Border>
 </local:NotificationControlBase>
