@@ -29,17 +29,8 @@ namespace TCC.ViewModels
         }
 
         //public StatTracker TempestAura { get; set; }
-        private bool _atkSpeedProc;
 
-        public bool AtkSpeedProc
-        {
-            get => _atkSpeedProc;
-            set
-            {
-                if (_atkSpeedProc == value) return; _atkSpeedProc = value;
-                N();
-            }
-        }
+        public bool AtkSpeedProc => !(Swift.Buff.IsAvailable && AdrenalineRush.Buff.IsAvailable);
 
         public WarriorLayoutVM()
         {
@@ -95,12 +86,9 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
-            if (sk.Skill.IconName == DeadlyGamble.Cooldown.Skill.IconName)
-            {
-                DeadlyGamble.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+            if (sk.Skill.IconName != DeadlyGamble.Cooldown.Skill.IconName) return false;
+            DeadlyGamble.Cooldown.Start(sk.Duration);
+            return true;
         }
 
         private void CheckStanceWarning()
@@ -113,10 +101,11 @@ namespace TCC.ViewModels
             if (duration == 0)
             {
                 Swift.Buff.Refresh(0, CooldownMode.Normal);
-                AtkSpeedProc = false;
+                N(nameof(AtkSpeedProc));
+                return;
             }
             Swift.Buff.Start(duration);
-            AtkSpeedProc = true;
+            N(nameof(AtkSpeedProc));
         }
 
         public void SetArush(uint duration)
@@ -124,12 +113,11 @@ namespace TCC.ViewModels
             if (duration == 0)
             {
                 AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
-                AtkSpeedProc = false;
+                N(nameof(AtkSpeedProc));
+                return;
             }
             AdrenalineRush.Buff.Start(duration);
-            AtkSpeedProc = true;
-
+            N(nameof(AtkSpeedProc));
         }
-
     }
 }
