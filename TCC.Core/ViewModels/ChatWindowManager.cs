@@ -84,6 +84,13 @@ namespace TCC.ViewModels
             KeyboardHook.Instance.RegisterCallback(App.Settings.ForceClickableChatHotkey, ToggleForcedClickThru);
 
             Factory = new ChatMessageFactory(Dispatcher);
+
+            Log.NewChatMessage += OnLogChatMessage;
+        }
+
+        private void OnLogChatMessage(ChatChannel ch, string msg, string auth)
+        {
+            AddChatMessage(Factory.CreateMessage(ch, auth, msg));
         }
 #if BATCH
         private void OnFlushTick(object sender, EventArgs e)
@@ -127,7 +134,6 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
-            PacketAnalyzer.Processor.Hook<S_SPAWN_NPC>(OnSpawnNpc);
         }
 
         protected override void RemoveHooks()
@@ -143,7 +149,6 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
-            PacketAnalyzer.Processor.Unhook<S_SPAWN_NPC>(OnSpawnNpc);
         }
 
         private void OnConnected(Server srv)
@@ -154,15 +159,6 @@ namespace TCC.ViewModels
         private void OnDisconnected()
         {
             AddTccMessage("Disconnected from the server.");
-        }
-
-        private void OnSpawnNpc(S_SPAWN_NPC p)
-        {
-            if (!TccUtils.IsWorldBoss(p.HuntingZoneId, p.TemplateId)) return;
-            Game.DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var monst);
-            if (!monst.IsBoss) return;
-            AddChatMessage(Factory.CreateMessage(ChatChannel.WorldBoss, "System",
-                $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>"));
         }
 
         private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)

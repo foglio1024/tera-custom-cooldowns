@@ -235,7 +235,7 @@ namespace TCC.ViewModels.Widgets
                 }
                 catch (Exception ex)
                 {
-                    Log.All($"[{nameof(NpcWindowViewModel)}.{nameof(FlushCache)}] Error while setting HP from cache: {ex.Message}");
+                    Log.CW($"[{nameof(NpcWindowViewModel)}.{nameof(FlushCache)}] Error while setting HP from cache: {ex.Message}");
                 }
 
                 _cache.Clear();

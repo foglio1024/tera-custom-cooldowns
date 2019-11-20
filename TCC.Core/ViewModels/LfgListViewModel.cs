@@ -503,7 +503,7 @@ namespace TCC.ViewModels
             }
             catch (Exception e)
             {
-                Log.All(e.ToString());
+                Log.CW(e.ToString());
             }
         }
         private void OnLeaveParty(S_LEAVE_PARTY m)

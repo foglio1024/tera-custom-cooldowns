@@ -60,7 +60,7 @@ namespace TCC.Interop
 
                     var jRes = JObject.Parse(res);
                     canFire = jRes["canFire"].Value<bool>();
-                    Log.All($"Webhook fire requested, result: {canFire}");
+                    Log.CW($"Webhook fire requested, result: {canFire}");
 
                 }
                 catch (WebException e)

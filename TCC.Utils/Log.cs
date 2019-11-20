@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using TCC.Data;
 
 namespace TCC.Utils
 {
     public static class Log
     {
-        public static event Action<string> NewChatLogMessage;
+        public static event Action<ChatChannel, string, string> NewChatMessage;
         public static event Func<string, string, NotificationType, uint, NotificationTemplate, int > NewNotification;
 
         private static string _logPath = "logs";
@@ -16,13 +17,6 @@ namespace TCC.Utils
         public static void CW(string line)
         {
             Console.WriteLine(line);
-        }
-
-        [Conditional("DEBUG")]
-        public static void C(string line)
-        {
-            NewChatLogMessage?.Invoke(line);
-            //App.BaseDispatcher.InvokeAsync(() => ChatWindowManager.Instance.AddTccMessage(line));
         }
 
         public static void F(string line, string fileName = "error.log")
@@ -40,16 +34,16 @@ namespace TCC.Utils
         {
             return NewNotification?.Invoke(title, line, type, duration, template) ?? -1;
         }
-        public static void All(string s)
-        {
-            CW(s);
-            C(s);
-        }
 
         public static void Config(string path, string version)
         {
             _logPath = path;
             _version = version;
+        }
+
+        public static void Chat(ChatChannel channel, string author, string message)
+        {
+            NewChatMessage?.Invoke(channel, message, author);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace TCC.Controls.Skills
             Unloaded -= OnUnloaded;
             if (Context == null)
             {
-                Log.All($"[SkillControlBase.OnUnloaded] Context is null!");
+                Log.CW($"[SkillControlBase.OnUnloaded] Context is null!");
                 return;
             }
             Context.Ended -= OnCooldownEnded;

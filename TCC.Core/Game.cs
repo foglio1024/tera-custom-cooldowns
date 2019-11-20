@@ -372,7 +372,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    Log.All($"Failed to parse sysmsg: {x.SysMessage}");
+                    Log.CW($"Failed to parse sysmsg: {x.SysMessage}");
                     Log.F($"Failed to parse sysmsg: {x.SysMessage}");
                 }
             });
@@ -389,7 +389,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    Log.All($"Failed to parse system message: {x.Message}");
+                    Log.CW($"Failed to parse system message: {x.Message}");
                     Log.F($"Failed to parse system message: {x.Message}");
                 }
             });
