@@ -540,6 +540,16 @@ namespace TCC.ViewModels
                 if (res == MessageBoxResult.OK) App.Restart();
             }
         }
+        public MentionMode MentionMode
+        {
+            get => App.Settings.MentionMode;
+            set
+            {
+                if (App.Settings.MentionMode == value) return;
+                App.Settings.MentionMode = value;
+                N();
+            }
+        }
         public int FontSize
         {
             get => App.Settings.FontSize;
@@ -596,7 +606,6 @@ namespace TCC.ViewModels
                 return ret;
             }
         }
-
         public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
         public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
         public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();
@@ -604,6 +613,7 @@ namespace TCC.ViewModels
         public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
         public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
         public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
+        public IEnumerable<MentionMode> MentionModes => EnumUtils.ListFromEnum<MentionMode>();
 
 
         private TSObservableCollection<BlacklistedMonsterVM> _blacklistedMonsters;

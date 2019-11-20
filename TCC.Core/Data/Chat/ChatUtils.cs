@@ -123,24 +123,22 @@ namespace TCC.Data.Chat
 
         public static bool CheckMention(string text)
         {
-            var ret = false;
-            //check if player is mentioned
-            try
+            switch (App.Settings.MentionMode)
             {
-                foreach (var item in Game.Account.Characters.Where(c => !c.Hidden))
-                {
-                    if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) < 0) continue;
-                    ret = true;
-                    break;
-                }
+                case MentionMode.Current:
+                    try
+                    {
+                        return text.IndexOf(Game.Me.Name, StringComparison.InvariantCultureIgnoreCase) != -1;
+                    }
+                    catch { return false; }
+                case MentionMode.All:
+                    try
+                    {
+                        return Game.Account.Characters.Where(c => !c.Hidden).Any(ch => text.IndexOf(ch.Name, StringComparison.InvariantCultureIgnoreCase) != -1);
+                    }
+                    catch { return false; }
+                default: return false;
             }
-            catch
-            {
-                // ignored
-            }
-
-            return ret;
-
         }
 
         public static void CheckNotify(string message, ChatChannel ch, string author)

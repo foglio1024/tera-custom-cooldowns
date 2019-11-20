@@ -38,7 +38,6 @@ namespace TCC.Settings
         public bool CheckGuildBamWithoutOpcode { get; set; } //by HQ 20190324
         public bool BetaNotification { get; set; }
         public bool FpsAtGuardian { get; set; }
-
         public bool EnableProxy
         {
             get => _enableProxy || App.ToolboxMode;
@@ -49,6 +48,7 @@ namespace TCC.Settings
         public ControlShape AbnormalityShape { get; set; }
         public ControlShape SkillShape { get; set; }
         public CaptureMode CaptureMode { get; set; }
+        public MentionMode MentionMode { get; set; }
 
         #endregion
 
@@ -183,6 +183,7 @@ namespace TCC.Settings
             ForceSoftwareRendering = true;
             AbnormalityShape = ControlShape.Round;
             SkillShape = ControlShape.Round;
+            MentionMode = MentionMode.All;
             Npcap = true;
             CheckOpcodesHash = true;
             CheckGuildBamWithoutOpcode = false;
