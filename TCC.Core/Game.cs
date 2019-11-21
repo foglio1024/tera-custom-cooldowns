@@ -18,6 +18,7 @@ using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
+using TCC.Windows.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
@@ -250,6 +251,8 @@ namespace TCC
 
             PacketAnalyzer.Processor.Hook<S_FIN_INTER_PARTY_MATCH>(OnFinInterPartyMatch);
             PacketAnalyzer.Processor.Hook<S_BATTLE_FIELD_ENTRANCE_INFO>(OnBattleFieldEntranceInfo);
+            PacketAnalyzer.Processor.Hook<S_REQUEST_CONTRACT>(OnRequestContract);
+            PacketAnalyzer.Processor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
 
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
             PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY>(OnLeaveParty);
@@ -257,7 +260,20 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
             PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
             PacketAnalyzer.Processor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+        }
 
+        private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
+        {
+            DB.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
+            ChatUtils.CheckNotify($"New broker offer for <{i?.Name ?? m.Item.ToString()}>", ChatChannel.Bargain, m.Name, "Broker offer", $"New broker offer for {i?.Name}");
+        }
+
+        private static void OnRequestContract(S_REQUEST_CONTRACT p)
+        {
+            if (p.Type == S_REQUEST_CONTRACT.RequestType.PartyInvite)
+            {
+                ChatUtils.CheckNotify($"{p.Sender} invited you to join a party", ChatChannel.GroupAlerts, "System", "Party Invite", $"{p.Sender} invited you to join a party");
+            }
         }
 
         private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
@@ -321,7 +337,9 @@ namespace TCC
 
         private static void OnChat(S_CHAT m)
         {
-            if ((ChatChannel)m.Channel == ChatChannel.Greet && m.AuthorName == "Foglio") Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
+            if ((ChatChannel)m.Channel == ChatChannel.Greet 
+                && (m.AuthorName == "Foglio" || m.AuthorName == "Folyemi"))
+                Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
 
             if (m.AuthorName == Me.Name)
             {

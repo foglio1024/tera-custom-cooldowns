@@ -185,8 +185,7 @@ namespace TCC.ViewModels
 
         private void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
-            AddChatMessage(new BrokerChatMessage(m.PlayerId, m.Listing, m.Item, m.Amount, m.SellerPrice, m.OfferedPrice,
-                m.Name));
+            AddChatMessage(new BrokerChatMessage(m.PlayerId, m.Listing, m.Item, m.Amount, m.SellerPrice, m.OfferedPrice, m.Name));
         }
 
         private void OnWhisper(S_WHISPER m)

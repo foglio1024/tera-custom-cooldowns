@@ -31,6 +31,16 @@ namespace TCC
                 NotifyDimChanged();
             }
         }
+        public bool ForceVisible
+        {
+            get => _forceVisible;
+            set
+            {
+                if (_forceVisible == value) return;
+                _forceVisible = value;
+                NotifyVisibilityChanged();
+            }
+        }
 
         public VisibilityManager()
         {
@@ -69,16 +79,6 @@ namespace TCC
         {
             App.BaseDispatcher?.InvokeAsync(() =>
                 DimChanged?.Invoke(), DispatcherPriority.Background);
-        }
-        public bool ForceVisible
-        {
-            get => _forceVisible;
-            set
-            {
-                if (_forceVisible == value) return;
-                _forceVisible = value;
-                NotifyVisibilityChanged();
-            }
         }
         public void RefreshDim()
         {

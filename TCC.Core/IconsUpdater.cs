@@ -38,11 +38,8 @@ namespace TCC
             var hashFile = "";
             try
             {
-                using (var c = MiscUtils.GetDefaultWebClient())
-                {
-                    hashFile = c.DownloadData(new Uri("https://github.com/Foglio1024/tera-used-icons/raw/master/hashes.json")).ToUTF8String();
-                }
-
+                using var c = MiscUtils.GetDefaultWebClient();
+                hashFile = c.DownloadData(new Uri("https://github.com/Foglio1024/tera-used-icons/raw/master/hashes.json")).ToUTF8String();
             }
             catch (Exception e)
             {
@@ -81,7 +78,7 @@ namespace TCC
             }
             else
             {
-                Log.N("TCC icon updater", "All icons up to date.", NotificationType.Success);
+                Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
             }
         }
         private async Task DownloadArchive()

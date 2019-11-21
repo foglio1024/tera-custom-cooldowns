@@ -110,12 +110,19 @@ namespace TCC.Data.Chat
         public static string GetPlainText(string msg)
         {
             var sb = new StringBuilder();
-            var html = new HtmlDocument(); html.LoadHtml(msg);
-            var htmlPieces = html.DocumentNode.ChildNodes;
-
-            foreach (var htmlPiece in htmlPieces)
+            try
             {
-                sb.Append(htmlPiece.InnerText);
+                var html = new HtmlDocument(); html.LoadHtml(msg);
+                var htmlPieces = html.DocumentNode.ChildNodes;
+
+                foreach (var htmlPiece in htmlPieces)
+                {
+                    sb.Append(htmlPiece.InnerText);
+                }
+            }
+            catch
+            {
+                sb.Append(msg);
             }
 
             return sb.ToString();
@@ -141,13 +148,13 @@ namespace TCC.Data.Chat
             }
         }
 
-        public static void CheckNotify(string message, ChatChannel ch, string author)
+        public static void CheckNotify(string message, ChatChannel ch, string author, string titleOverride = "", string discordTextOverride = "")
         {
             if (FocusManager.IsForeground) return;
             var txt = GetPlainText(message).UnescapeHtml();
             var chStr = new ChatChannelToName().Convert(ch, null, null, null);
-            if (App.Settings.WebhookEnabledMentions) Discord.FireWebhook(App.Settings.WebhookUrlMentions, $"**{author}** `{chStr}`\n{txt}");
-            if (App.Settings.BackgroundNotifications) Log.N($"{chStr} - {author}", $"{txt}", NotificationType.Warning, 6000);
+            if (App.Settings.WebhookEnabledMentions) Discord.FireWebhook(App.Settings.WebhookUrlMentions, string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
+            if (App.Settings.BackgroundNotifications) Log.N(string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}", NotificationType.Normal, 6000);
 
         }
     }
