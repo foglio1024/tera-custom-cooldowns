@@ -216,31 +216,23 @@ namespace TCC
         {
             _checkTimer.Stop();
             CheckAppVersionPeriodic();
-            _checkTimer.Start();
+            if(!UpdateAvailable) _checkTimer.Start();
         }
         private static void CheckAppVersionPeriodic()
         {
-            using (var c = MiscUtils.GetDefaultWebClient())
+            try
             {
-                try
-                {
-                    var st = c.OpenRead(App.Beta ? AppVersionExperimentalUrl : AppVersionUrl);
-                    if (st == null) return;
-                    var newVersionInfo = new StreamReader(st).ReadLine();
-                    if (newVersionInfo == null) return;
-                    if (Version.Parse(newVersionInfo) <= Assembly.GetExecutingAssembly().GetName().Version) return;
+                var vp = new VersionParser();
+                if (!vp.Valid || !vp.IsNewer) return;
 
-                    UpdateAvailable = true;
+                UpdateAvailable = true;
 
-                    //if (App.ToolboxMode) return;
-
-                    ChatWindowManager.Instance.AddTccMessage($"TCC v{newVersionInfo} available!");
-                    Log.N("Update manager", $"TCC v{newVersionInfo} available!", NotificationType.Success);
-                }
-                catch (Exception ex)
-                {
-                    Log.F($"{ex.Message}\n{ex.StackTrace}\n{ex.Source}\n{ex}\n{ex.Data}\n{ex.InnerException}\n{ex.TargetSite}");
-                }
+                ChatWindowManager.Instance.AddTccMessage($"TCC v{vp.NewVersionNumber} is now available!");
+                Log.N("Update manager", $"TCC v{vp.NewVersionNumber} available!", NotificationType.Success, 10000);
+            }
+            catch (Exception ex)
+            {
+                Log.F($"{ex.Message}\n{ex.StackTrace}\n{ex.Source}\n{ex}\n{ex.Data}\n{ex.InnerException}\n{ex.TargetSite}");
             }
         }
         private static void DownloadDatabaseHashes()
@@ -275,18 +267,14 @@ namespace TCC
 
             public VersionParser(bool forceExperimental = false)
             {
-                using (var c = MiscUtils.GetDefaultWebClient())
-                {
-                    var st = c.OpenRead(App.Beta || forceExperimental ? AppVersionExperimentalUrl : AppVersionUrl);
-                    if (st == null) return;
+                using var c = MiscUtils.GetDefaultWebClient();
+                var st = c.OpenRead(App.Beta || forceExperimental ? AppVersionExperimentalUrl : AppVersionUrl);
+                if (st == null) return;
 
-                    using (var sr = new StreamReader(st))
-                    {
-                        NewVersionNumber = sr.ReadLine();
-                        NewVersionUrl = sr.ReadLine();
-                        Valid = true;
-                    }
-                }
+                using var sr = new StreamReader(st);
+                NewVersionNumber = sr.ReadLine();
+                NewVersionUrl = sr.ReadLine();
+                Valid = true;
             }
         }
     }
