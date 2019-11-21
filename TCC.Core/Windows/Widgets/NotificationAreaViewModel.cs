@@ -40,11 +40,11 @@ namespace TCC.Windows.Widgets
             return Notifications.ToSyncList().All(n => n.Message != infoBase.Message);
         }
 
-        private int Enqueue(string title, string message, NotificationType type, uint duration = 4000U, NotificationTemplate template = NotificationTemplate.Default)
+        private int Enqueue(string title, string message, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default)
         {
             Dispatcher.Invoke(() =>
             {
-
+                if (duration == -1) duration = ((NotificationAreaSettings) Settings).DefaultNotificationDuration * 1000;
                 switch (template)
                 {
                     case NotificationTemplate.Progress:

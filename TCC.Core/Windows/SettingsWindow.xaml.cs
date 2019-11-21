@@ -121,7 +121,7 @@ namespace TCC.Windows
             else if (_testNotifIdx > 33 && _testNotifIdx <= 41) type = NotificationType.Error;
             else if (_testNotifIdx > 48 ) type = NotificationType.Success;
 
-            Log.N("GLaDOS", msg, type, 2000);
+            Log.N("GLaDOS", msg, type);
             _testNotifIdx++;
             if (_testNotifIdx >= _lyrics.Count) _testNotifIdx = 0;
         }

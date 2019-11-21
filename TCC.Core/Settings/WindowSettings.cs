@@ -557,7 +557,19 @@ namespace TCC.Settings
     }
     public class NotificationAreaSettings : WindowSettings
     {
+        private int _defaultNotificationDuration;
         public int MaxNotifications { get; set; }
+        public int DefaultNotificationDuration
+        {
+            get => _defaultNotificationDuration;
+            set
+            {
+                if (_defaultNotificationDuration == value) return;
+                _defaultNotificationDuration = value;
+                N();
+            }
+        }
+
         public NotificationAreaSettings()
         {
             _visible = true;
@@ -572,6 +584,7 @@ namespace TCC.Settings
             Positions = new ClassPositions(0, .5, ButtonsPosition.Above);
 
             MaxNotifications = 5;
+            DefaultNotificationDuration = 5;
         }
     }
     public class CharacterWindowSettings : WindowSettings

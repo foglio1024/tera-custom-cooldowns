@@ -1524,6 +1524,18 @@
                                     </Grid>
                                 </settings:ValueSetting.ToolTip>
                             </settings:ValueSetting>
+                            <settings:ValueSetting Value="{Binding NotificationAreaSettings.DefaultNotificationDuration, Mode=TwoWay}"
+                                                   IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
+                                                    SettingName="Notification duration (sec)" Min="1" Max="3600">
+                                <settings:ValueSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                            <Run Text="Default duration for notifications in seconds. Some specific notifications ignore this setting." />
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
                             <settings:CheckboxSetting SettingName="Background notifications"
                                                       IsOn="{Binding BackgroundNotifications, Mode=TwoWay}">
                                 <settings:CheckboxSetting.ToolTip>

@@ -8,7 +8,7 @@ namespace TCC.Utils
     public static class Log
     {
         public static event Action<ChatChannel, string, string> NewChatMessage;
-        public static event Func<string, string, NotificationType, uint, NotificationTemplate, int > NewNotification;
+        public static event Func<string, string, NotificationType, int, NotificationTemplate, int > NewNotification;
 
         private static string _logPath = "logs";
         private static string _version = "";
@@ -30,7 +30,7 @@ namespace TCC.Utils
             catch { }
         }
 
-        public static int N(string title, string line, NotificationType type, uint duration = 4000U, NotificationTemplate template = NotificationTemplate.Default)
+        public static int N(string title, string line, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default)
         {
             return NewNotification?.Invoke(title, line, type, duration, template) ?? -1;
         }

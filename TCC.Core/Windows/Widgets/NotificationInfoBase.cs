@@ -21,7 +21,7 @@ namespace TCC.Windows.Widgets
             }
         }
 
-        public ProgressNotificationInfo(int id, string title, string message, NotificationType type, uint duration, NotificationTemplate template) : base(id, title, message, type, duration, template)
+        public ProgressNotificationInfo(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template) : base(id, title, message, type, duration, template)
         {
 
         }
@@ -69,11 +69,11 @@ namespace TCC.Windows.Widgets
         }
 
         public NotificationTemplate NotificationTemplate { get; }
-        public uint Duration { get; }
+        public int Duration { get; }
         public string TimeStamp { get; }
         public string Version => App.AppVersion;
 
-        public NotificationInfoBase(int id, string title, string message, NotificationType type, uint duration, NotificationTemplate template)
+        public NotificationInfoBase(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template)
         {
             Id = id;
             Title = title;
