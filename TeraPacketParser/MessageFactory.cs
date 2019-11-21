@@ -84,7 +84,7 @@ namespace TeraPacketParser
             { nameof(S_DUNGEON_COOL_TIME_LIST),                Contructor<Func<TeraMessageReader, S_DUNGEON_COOL_TIME_LIST>>() },
             { nameof(S_ACCOUNT_PACKAGE_LIST),                  Contructor<Func<TeraMessageReader, S_ACCOUNT_PACKAGE_LIST>>() },
             { nameof(S_GUILD_TOWER_INFO),                      Contructor<Func<TeraMessageReader, S_GUILD_TOWER_INFO>>() },
-            { nameof(S_ITEMLIST),                                 Contructor<Func<TeraMessageReader, S_ITEMLIST>>() },
+            { nameof(S_ITEMLIST),                              Contructor<Func<TeraMessageReader, S_ITEMLIST>>() },
             { nameof(S_SPAWN_USER),                            Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
             { nameof(S_PARTY_MEMBER_INTERVAL_POS_UPDATE),      Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INTERVAL_POS_UPDATE>>() },
             { nameof(S_ABNORMALITY_DAMAGE_ABSORB),             Contructor<Func<TeraMessageReader, S_ABNORMALITY_DAMAGE_ABSORB>>() },
@@ -114,6 +114,7 @@ namespace TeraPacketParser
             { nameof(S_FIN_INTER_PARTY_MATCH),                 Contructor<Func<TeraMessageReader, S_FIN_INTER_PARTY_MATCH>>() },
             { nameof(S_BATTLE_FIELD_ENTRANCE_INFO),            Contructor<Func<TeraMessageReader, S_BATTLE_FIELD_ENTRANCE_INFO>>() },
             { nameof(S_LEAVE_GUILD),                           Contructor<Func<TeraMessageReader, S_LEAVE_GUILD>>() },
+            { nameof(S_REQUEST_CONTRACT),                      Contructor<Func<TeraMessageReader, S_REQUEST_CONTRACT>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
